@@ -10836,11 +10836,6 @@
         "value"
       ]
     },
-    "Azure.Core.uuid": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Universally Unique Identifier"
-    },
     "AzureActiveDirectory": {
       "type": "object",
       "description": "The configuration settings of the Azure Active directory provider.",
@@ -17654,6 +17649,24 @@
         }
       ]
     },
+    "SandboxGroupIdentity": {
+      "type": "object",
+      "description": "The managed identity properties that can be updated on a SandboxGroup.",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
+            "x-nullable": true
+          }
+        }
+      }
+    },
     "SandboxGroupListResult": {
       "type": "object",
       "description": "The response of a SandboxGroup list operation.",
@@ -17691,32 +17704,8 @@
           "description": "SandboxGroup properties that can be updated."
         },
         "identity": {
-          "type": "object",
-          "description": "Managed identity updates. Omit to preserve the current identities.",
-          "properties": {
-            "principalId": {
-              "$ref": "#/definitions/Azure.Core.uuid",
-              "description": "The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.",
-              "readOnly": true
-            },
-            "tenantId": {
-              "$ref": "#/definitions/Azure.Core.uuid",
-              "description": "The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.",
-              "readOnly": true
-            },
-            "type": {
-              "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
-              "description": "The type of managed identity assigned to this resource."
-            },
-            "userAssignedIdentities": {
-              "type": "object",
-              "description": "The identities assigned to this resource by the user.",
-              "additionalProperties": {
-                "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
-                "x-nullable": true
-              }
-            }
-          }
+          "$ref": "#/definitions/SandboxGroupIdentity",
+          "description": "Managed identity updates. Omit to preserve the current identities."
         }
       }
     },

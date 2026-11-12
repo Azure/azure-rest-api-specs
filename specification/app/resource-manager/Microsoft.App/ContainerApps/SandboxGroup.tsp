@@ -104,8 +104,13 @@ model SandboxGroupPatch {
 
   /** Managed identity updates. Omit to preserve the current identities. */
   @added(Versions.v2026_07_01)
-  identity?: OptionalProperties<Azure.ResourceManager.CommonTypes.ManagedServiceIdentity>;
+  identity?: SandboxGroupIdentity;
 }
+
+/** The managed identity properties that can be updated on a SandboxGroup. */
+@added(Versions.v2026_07_01)
+model SandboxGroupIdentity
+  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.CommonTypes.ManagedServiceIdentity>>;
 
 /** SandboxGroup resource specific properties for patch requests. */
 @added(Versions.v2026_07_01)
