@@ -1514,6 +1514,33 @@ using Azure.ResourceManager;
 // Python SDK customizations: preserve client name and enum member names from the
 // pre-migration Swagger SDK to avoid breaking changes for existing consumers.
 @@clientName(Microsoft.Cdn, "CdnManagementClient", "python");
+
+// Preserve legacy Python enum member names.
+@@clientName(
+  AfdCustomizedCipherSuiteForTls13.TLS_AES_128_GCM_SHA256,
+  exact("TLS_AES128_GCM_SHA256"),
+  "python"
+);
+@@clientName(
+  AfdCustomizedCipherSuiteForTls13.TLS_AES_256_GCM_SHA384,
+  exact("TLS_AES256_GCM_SHA384"),
+  "python"
+);
+@@clientName(LogMetricsGranularity.P1D, exact("P1_D"), "python");
+@@clientName(MetricsGranularity.P1D, exact("P1_D"), "python");
+@@clientName(
+  SkuName.Standard_955BandWidth_ChinaCdn,
+  exact("STANDARD955_BAND_WIDTH_CHINA_CDN"),
+  "python"
+);
+@@clientName(
+  SkuName.StandardPlus_955BandWidth_ChinaCdn,
+  exact("STANDARD_PLUS955_BAND_WIDTH_CHINA_CDN"),
+  "python"
+);
+@@clientName(WafGranularity.P1D, exact("P1_D"), "python");
+@@clientName(WafMetricsGranularity.P1D, exact("P1_D"), "python");
+
 @@clientName(DeliveryRuleActionName, "DeliveryRuleActionEnum", "python");
 @@clientName(
   PolicySettingsDefaultCustomBlockResponseStatusCode.`200`,

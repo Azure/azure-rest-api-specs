@@ -5,6 +5,26 @@ using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.HybridCompute;
 
+// Preserve legacy Python enum member names.
+@@clientName(
+  LicenseTarget.`Windows Server 2012`,
+  exact("WINDOWS_SERVER2012"),
+  "python"
+);
+@@clientName(
+  LicenseTarget.`Windows Server 2012 R2`,
+  exact("WINDOWS_SERVER2012_R2"),
+  "python"
+);
+@@clientName(
+  LicenseTarget.`Windows Server 2016`,
+  exact("WINDOWS_SERVER2016"),
+  "python"
+);
+@@clientName(ProgramYear.`Year 1`, exact("YEAR1"), "python");
+@@clientName(ProgramYear.`Year 2`, exact("YEAR2"), "python");
+@@clientName(ProgramYear.`Year 3`, exact("YEAR3"), "python");
+
 @@clientName(IdentityKeyStore.TpmTransition, "TPMTransition", "go");
 
 @@clientName(
