@@ -606,6 +606,9 @@
           "Create Managed Private Cluster with fqdn subdomain specified": {
             "$ref": "./examples/ManagedClustersCreate_PrivateClusterFQDNSubdomain.json"
           },
+          "Create a dual-stack cluster with IPv4 and IPv6 node public IP prefixes": {
+            "$ref": "./examples/ManagedClustersCreate_NodePublicIPPrefixDualStack.json"
+          },
           "Create/Update AAD Managed Cluster with EnableAzureRBAC": {
             "$ref": "./examples/ManagedClustersCreate_UpdateWithEnableAzureRBAC.json"
           },
@@ -1127,6 +1130,9 @@
           }
         },
         "x-ms-examples": {
+          "Add or replace node public IP prefixes on an existing dual-stack pool with node public IPs": {
+            "$ref": "./examples/AgentPoolsUpdate_NodePublicIPPrefixIDs.json"
+          },
           "Create Agent Pool using an agent pool snapshot": {
             "$ref": "./examples/AgentPoolsCreate_Snapshot.json"
           },
@@ -4916,6 +4922,23 @@
             "$ref": "#/definitions/IPTag"
           },
           "x-ms-identifiers": []
+        },
+        "nodePublicIPPrefixIDs": {
+          "type": "array",
+          "description": "The resource IDs of public IP prefixes for node public IPs. At most one IPv4 and one IPv6 prefix may be specified.\nRequires enableNodePublicIP to be true. An IPv6 prefix requires an already dual-stack cluster; a single IPv6 prefix uses an automatically assigned IPv4 public IP.\nTo add or replace prefixes, supply the complete desired list. Omitting the list preserves the existing prefixes.\nAn empty list or removal of an existing prefix IP family is not supported. The enableNodePublicIP setting cannot be changed on an existing pool.\nA changed prefix set recreates nodes using the pool's upgrade settings and can change public IP addresses and interrupt connections.\nReordering an unchanged set does not recreate nodes. Prefix changes are not supported on Spot pools and require nonzero surge capacity on nonempty rolling-upgrade pools.\nThe top-level nodePublicIPPrefixID reflects this list's IPv4 entry, if any. An unchanged legacy value returned by GET is accepted; a changed value conflicting with the list is rejected.\nGET responses also include a legacy IPv4-only pool's prefix in this list. For more information, see https://aka.ms/aks/ipv6-ilpip",
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Network/publicIPPrefixes"
+                }
+              ]
+            }
+          }
         },
         "allowedHostPorts": {
           "type": "array",

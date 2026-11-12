@@ -1,0 +1,146 @@
+{
+  "parameters": {
+    "api-version": "2026-10-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "parameters": {
+      "location": "eastus",
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/aks-identity": {}
+        }
+      },
+      "properties": {
+        "dnsPrefix": "aks-dualstack",
+        "enableRBAC": true,
+        "agentPoolProfiles": [
+          {
+            "name": "nodepool1",
+            "type": "VirtualMachineScaleSets",
+            "mode": "System",
+            "count": 3,
+            "vmSize": "Standard_D4s_v3",
+            "osType": "Linux",
+            "enableNodePublicIP": true,
+            "networkProfile": {
+              "nodePublicIPPrefixIDs": [
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/ipv4-prefix",
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/ipv6-prefix"
+              ]
+            }
+          }
+        ],
+        "networkProfile": {
+          "networkPlugin": "azure",
+          "networkPluginMode": "overlay",
+          "loadBalancerSku": "standard",
+          "ipFamilies": [
+            "IPv4",
+            "IPv6"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1",
+        "name": "clustername1",
+        "type": "Microsoft.ContainerService/managedClusters",
+        "location": "eastus",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/aks-identity": {}
+          }
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "dnsPrefix": "aks-dualstack",
+          "enableRBAC": true,
+          "agentPoolProfiles": [
+            {
+              "name": "nodepool1",
+              "type": "VirtualMachineScaleSets",
+              "mode": "System",
+              "count": 3,
+              "vmSize": "Standard_D4s_v3",
+              "osType": "Linux",
+              "enableNodePublicIP": true,
+              "nodePublicIPPrefixID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/ipv4-prefix",
+              "networkProfile": {
+                "nodePublicIPPrefixIDs": [
+                  "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/ipv4-prefix",
+                  "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/ipv6-prefix"
+                ]
+              }
+            }
+          ],
+          "networkProfile": {
+            "networkPlugin": "azure",
+            "networkPluginMode": "overlay",
+            "loadBalancerSku": "standard",
+            "ipFamilies": [
+              "IPv4",
+              "IPv6"
+            ]
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ContainerService/locations/eastus/operations/11111111-1111-1111-1111-111111111111?api-version=2026-10-01"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1",
+        "name": "clustername1",
+        "type": "Microsoft.ContainerService/managedClusters",
+        "location": "eastus",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/aks-identity": {}
+          }
+        },
+        "properties": {
+          "provisioningState": "Creating",
+          "dnsPrefix": "aks-dualstack",
+          "enableRBAC": true,
+          "agentPoolProfiles": [
+            {
+              "name": "nodepool1",
+              "type": "VirtualMachineScaleSets",
+              "mode": "System",
+              "count": 3,
+              "vmSize": "Standard_D4s_v3",
+              "osType": "Linux",
+              "enableNodePublicIP": true,
+              "nodePublicIPPrefixID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/ipv4-prefix",
+              "networkProfile": {
+                "nodePublicIPPrefixIDs": [
+                  "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/ipv4-prefix",
+                  "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/ipv6-prefix"
+                ]
+              }
+            }
+          ],
+          "networkProfile": {
+            "networkPlugin": "azure",
+            "networkPluginMode": "overlay",
+            "loadBalancerSku": "standard",
+            "ipFamilies": [
+              "IPv4",
+              "IPv6"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "operationId": "ManagedClusters_CreateOrUpdate",
+  "title": "Create a dual-stack cluster with IPv4 and IPv6 node public IP prefixes"
+}

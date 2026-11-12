@@ -863,10 +863,17 @@ model AgentPoolNetworkProfile {
   nodePublicIPTags?: IPTag[];
 
   /**
-   * The resource IDs of public IP prefixes for node public IPs. At most one IPv4 and one IPv6 prefix may be specified. Order does not matter; the RP determines IP version from the referenced resource's publicIPAddressVersion. Requires enableNodePublicIP to be true on the agent pool. Mutually exclusive with the top-level nodePublicIPPrefixID property. Immutable after node pool creation. To change prefixes, delete and recreate the node pool. For more information, see https://aka.ms/aks/ipv6-ilpip
+   * The resource IDs of public IP prefixes for node public IPs. At most one IPv4 and one IPv6 prefix may be specified.
+   * Requires enableNodePublicIP to be true. An IPv6 prefix requires an already dual-stack cluster; a single IPv6 prefix uses an automatically assigned IPv4 public IP.
+   * To add or replace prefixes, supply the complete desired list. Omitting the list preserves the existing prefixes.
+   * An empty list or removal of an existing prefix IP family is not supported. The enableNodePublicIP setting cannot be changed on an existing pool.
+   * A changed prefix set recreates nodes using the pool's upgrade settings and can change public IP addresses and interrupt connections.
+   * Reordering an unchanged set does not recreate nodes. Prefix changes are not supported on Spot pools and require nonzero surge capacity on nonempty rolling-upgrade pools.
+   * The top-level nodePublicIPPrefixID reflects this list's IPv4 entry, if any. An unchanged legacy value returned by GET is accepted; a changed value conflicting with the list is rejected.
+   * GET responses also include a legacy IPv4-only pool's prefix in this list. For more information, see https://aka.ms/aks/ipv6-ilpip
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-  @added(Versions.v2026_10_02_preview)
+  @added(Versions.v2026_10_01)
   @maxItems(2)
   nodePublicIPPrefixIDs?: Azure.Core.armResourceIdentifier<[
     {
