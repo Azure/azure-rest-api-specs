@@ -88,15 +88,6 @@ union NodeMaintenanceFaultStatus {
   string,
 }
 
-/** Parameters for polling the result of deleting a node maintenance fault. */
-alias NodeMaintenanceFaultOperationResultParameters = {
-  ...ApiVersionParameter;
-  ...SubscriptionIdParameter;
-  ...ProviderNamespace<NodeMaintenanceFault>;
-  ...LocationResourceParameter;
-  ...Azure.ResourceManager.CommonTypes.OperationIdParameter;
-};
-
 /** Operations for node maintenance fault resources on an Azure Managed Redis cluster. */
 @added(Versions.v2026_11_01_preview)
 @armResourceOperations
@@ -125,22 +116,7 @@ interface NodeMaintenanceFaults {
 
   /** Lists all node maintenance fault resources on a cluster. */
   listByCluster is ArmResourceListByParent<NodeMaintenanceFault>;
-
-  /** Gets the result of deleting a node maintenance fault. Returns no content after successful deletion, or error details if deletion failed. */
-  @autoRoute
-  @get
-  getOperationResult is ArmReadOperation<
-    NodeMaintenanceFaultOperationResultParameters,
-    | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = void>>
-    | ArmDeletedNoContentResponse,
-    ErrorResponse
-  >;
 }
-
-@@segment(
-  NodeMaintenanceFaultOperationResultParameters.operationId,
-  "operationResults"
-);
 
 @@doc(
   NodeMaintenanceFault.name,
