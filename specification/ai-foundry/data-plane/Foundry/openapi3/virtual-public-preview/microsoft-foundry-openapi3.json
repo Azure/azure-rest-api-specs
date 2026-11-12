@@ -19151,7 +19151,7 @@
       "get": {
         "operationId": "CheckpointDownloads_getFile",
         "summary": "Read an authorized checkpoint file",
-        "description": "Stream one advertised file from a completed, owned checkpoint export.\nRechecks download admission and ownership. If-Match must contain the\nadvertised strong ETag; arbitrary storage URLs and unversioned reads are\nnot accepted. This read does not create or renew a checkpoint copy.",
+        "description": "Stream one advertised file from a completed, owned checkpoint export.\nRechecks download admission and ownership. If-Match must contain the\nadvertised strong ETag; arbitrary storage URLs and unversioned reads are\nnot accepted. This read does not create or renew a checkpoint copy.\nClients saving the export locally read every advertised file and verify its\nETag and exact byte count. Successful preparation alone is not file delivery.",
         "parameters": [
           {
             "name": "Foundry-Features",
