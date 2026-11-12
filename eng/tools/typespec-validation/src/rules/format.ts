@@ -1,24 +1,21 @@
 import type { ILogger } from "@azure-tools/specs-shared/logger";
-import { reportCommandOutput } from "../command-output.ts";
 import { blocks, filePath, indent, lines, verbatim } from "../diagnostic-content.ts";
 import { type RuleResult } from "../rule-result.ts";
-import { type Rule } from "../rule.ts";
-import { gitDiffTopSpecFolder, runNodeBin } from "../utils.ts";
+import { type Rule, type RuleExecutionOptions } from "../rule.ts";
+import { formatTypeSpec } from "../typespec-compiler.ts";
+import { gitDiffTopSpecFolder } from "../utils.ts";
 
 export class FormatRule implements Rule {
   readonly name = "Format";
   readonly description = "Format TypeSpec";
-
-  async execute(folder: string, logger: ILogger): Promise<RuleResult> {
-    const output = await runNodeBin(
-      "@typespec/compiler",
-      // Format parent folder to include shared files
-      ["tsp", "format", "../**/*.tsp", "tspconfig.yaml"],
-      logger,
-      folder,
-    );
-    const result = reportCommandOutput("format", "TypeSpec formatting", output, logger);
-    if (!result.success) return result;
+  async execute(
+    folder: string,
+    logger: ILogger,
+    { fix = false }: RuleExecutionOptions = {},
+  ): Promise<RuleResult> {
+    // Format parent folder to include shared files
+    const result = await formatTypeSpec(folder, fix);
+    if (!result.success || !fix) return result;
     const gitDiffResult = await gitDiffTopSpecFolder(folder, logger);
     if (gitDiffResult.success) return result;
     return {

@@ -1,0 +1,37 @@
+{
+  "operationId": "KnowledgeSources_List",
+  "title": "SearchServiceListKnowledgeSourcesCompatibleChat",
+  "parameters": {
+    "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
+    "api-version": "2026-11-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "Accept": "application/json;odata.metadata=minimal"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "image-documents",
+            "kind": "azureBlob",
+            "azureBlobParameters": {
+              "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
+              "containerName": "documents",
+              "ingestionParameters": {
+                "chatCompletionModel": {
+                  "kind": "openAICompatible",
+                  "openAICompatibleParameters": {
+                    "uri": "https://model-gateway.contoso.com/teams/catalog/chat/completions?route=primary&api-version=2026-01-01",
+                    "modelName": "gpt-4.1-mini"
+                  }
+                },
+                "disableImageVerbalization": false,
+                "contentExtractionMode": "minimal"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

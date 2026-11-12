@@ -85,6 +85,10 @@ describe("Protected Files", () => {
     ".vscode/settings.json",
     "eng/tools/example/package.json",
     "eng/scripts/ChangedFiles-Functions.ps1",
+    "test/cognitiveservices/custom-keys-contract.mjs",
+    "specification-other/main.tsp",
+    "Specification/widgets/script.mjs",
+    "README.md",
     ".github/CODEOWNERS.backup",
     ".github/CODEOWNERS\n",
     ".github/workflows/nested/.github/CODEOWNERS",
@@ -120,7 +124,7 @@ describe("Protected Files", () => {
       [".github/skills/custom/azsdk-common-example/SKILL.md"],
       [".github/skills/azsdk-custom/SKILL.md"],
       [".GITHUB/codeowners", ".GITHUB/SKILLS/CUSTOM/skill.md"],
-      ["documentation/ci-fix.md", "README.md", "specification/widgets/package.json"],
+      ["specification/widgets/README.md", "specification/widgets/package.json"],
     ].map((files) => ({ files })),
   )("passes for unprotected changes $files", async ({ files }) => {
     const { core, run } = setup();
