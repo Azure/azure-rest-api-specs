@@ -9048,7 +9048,7 @@
       "properties": {
         "ruleType": {
           "$ref": "#/definitions/AdvancedPlatformMetricsRuleType",
-          "description": "Indicates the type of the advanced platform metrics rule. Possible values include: ContainerLevelCapacityMetrics.",
+          "description": "Indicates the type of the advanced platform metrics rule specified in the request path.",
           "readOnly": true
         },
         "enabled": {
@@ -9063,7 +9063,7 @@
         },
         "metricsEmitted": {
           "type": "array",
-          "description": "The metrics emitted by the rule. Metrics are mapped according to the rule type from RuleTypeProperty. Rule type to metrics mapping: ContainerLevelCapacityMetrics => {ContainerUsedSize, ContainerBlobCount}.",
+          "description": "The effective metrics emitted by the rule, based on the rule type and the requested metric selection.",
           "items": {
             "$ref": "#/definitions/MetricsEmitted"
           },

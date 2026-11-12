@@ -1756,7 +1756,8 @@
             "required": true,
             "type": "string",
             "enum": [
-              "ContainerLevelCapacityMetrics"
+              "ContainerLevelCapacityMetrics",
+              "PriorityTransactionMetrics"
             ],
             "x-ms-enum": {
               "name": "AdvancedPlatformMetricsRuleType",
@@ -1766,6 +1767,11 @@
                   "name": "ContainerLevelCapacityMetrics",
                   "value": "ContainerLevelCapacityMetrics",
                   "description": "Container level capacity metrics rule type"
+                },
+                {
+                  "name": "PriorityTransactionMetrics",
+                  "value": "PriorityTransactionMetrics",
+                  "description": "Transaction metrics with implicit Priority and ResponseStatus dimensions. Container filters are not supported."
                 }
               ]
             }
@@ -1788,6 +1794,9 @@
         "x-ms-examples": {
           "AdvancedPlatformMetricsRules_Get - Get advanced platform metrics rule": {
             "$ref": "./examples/AdvancedPlatformMetricsCRUD/AdvancedPlatformMetricsRules_Get.json"
+          },
+          "Get a priority transaction metrics rule with its persisted metric selection and additional dimensions": {
+            "$ref": "./examples/AdvancedPlatformMetricsCRUD/AdvancedPlatformMetricsRules_Get_PriorityTransactionMetrics.json"
           }
         }
       },
@@ -1824,7 +1833,8 @@
             "required": true,
             "type": "string",
             "enum": [
-              "ContainerLevelCapacityMetrics"
+              "ContainerLevelCapacityMetrics",
+              "PriorityTransactionMetrics"
             ],
             "x-ms-enum": {
               "name": "AdvancedPlatformMetricsRuleType",
@@ -1834,6 +1844,11 @@
                   "name": "ContainerLevelCapacityMetrics",
                   "value": "ContainerLevelCapacityMetrics",
                   "description": "Container level capacity metrics rule type"
+                },
+                {
+                  "name": "PriorityTransactionMetrics",
+                  "value": "PriorityTransactionMetrics",
+                  "description": "Transaction metrics with implicit Priority and ResponseStatus dimensions. Container filters are not supported."
                 }
               ]
             }
@@ -1880,6 +1895,15 @@
           },
           "AdvancedPlatformMetricsRules_CreateOrUpdate_MetricLevelEnablement - Create advanced platform metrics rule with selected metrics": {
             "$ref": "./examples/AdvancedPlatformMetricsCRUD/AdvancedPlatformMetricsRules_CreateOrUpdate_MetricLevelEnablement.json"
+          },
+          "Create or update a priority transaction metrics rule with all supported metrics and implicit dimensions": {
+            "$ref": "./examples/AdvancedPlatformMetricsCRUD/AdvancedPlatformMetricsRules_CreateOrUpdate_PriorityTransactionMetrics.json"
+          },
+          "Create or update a priority transaction metrics rule with selected metrics and the ApiName dimension": {
+            "$ref": "./examples/AdvancedPlatformMetricsCRUD/AdvancedPlatformMetricsRules_CreateOrUpdate_PriorityTransactionMetrics_ApiName.json"
+          },
+          "Disable a priority transaction metrics rule while retaining its configuration": {
+            "$ref": "./examples/AdvancedPlatformMetricsCRUD/AdvancedPlatformMetricsRules_CreateOrUpdate_PriorityTransactionMetrics_Disabled.json"
           }
         }
       },
@@ -1916,7 +1940,8 @@
             "required": true,
             "type": "string",
             "enum": [
-              "ContainerLevelCapacityMetrics"
+              "ContainerLevelCapacityMetrics",
+              "PriorityTransactionMetrics"
             ],
             "x-ms-enum": {
               "name": "AdvancedPlatformMetricsRuleType",
@@ -1926,6 +1951,11 @@
                   "name": "ContainerLevelCapacityMetrics",
                   "value": "ContainerLevelCapacityMetrics",
                   "description": "Container level capacity metrics rule type"
+                },
+                {
+                  "name": "PriorityTransactionMetrics",
+                  "value": "PriorityTransactionMetrics",
+                  "description": "Transaction metrics with implicit Priority and ResponseStatus dimensions. Container filters are not supported."
                 }
               ]
             }
@@ -1948,6 +1978,9 @@
         "x-ms-examples": {
           "AdvancedPlatformMetricsRules_Delete - Delete advanced platform metrics rule": {
             "$ref": "./examples/AdvancedPlatformMetricsCRUD/AdvancedPlatformMetricsRules_Delete.json"
+          },
+          "Delete a priority transaction metrics rule": {
+            "$ref": "./examples/AdvancedPlatformMetricsCRUD/AdvancedPlatformMetricsRules_Delete_PriorityTransactionMetrics.json"
           }
         }
       }
@@ -9580,6 +9613,24 @@
         }
       }
     },
+    "AdvancedPlatformMetricsAdditionalDimension": {
+      "type": "string",
+      "description": "An optional dimension for the advanced platform metrics rule.",
+      "enum": [
+        "ApiName"
+      ],
+      "x-ms-enum": {
+        "name": "AdvancedPlatformMetricsAdditionalDimension",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ApiName",
+            "value": "ApiName",
+            "description": "The name of the storage API operation."
+          }
+        ]
+      }
+    },
     "AdvancedPlatformMetricsFilterType": {
       "type": "string",
       "description": "The type of filter applied to the advanced platform metrics rule.",
@@ -9639,6 +9690,13 @@
           "items": {
             "type": "string"
           }
+        },
+        "additionalDimensions": {
+          "type": "array",
+          "description": "Optional dimensions for PriorityTransactionMetrics. Priority and ResponseStatus are always included and must not be specified here. Only ApiName can be selected, without duplicates. Omit this property or use an empty list for no additional dimensions. Container filters (filterType and filterValues) must be omitted for PriorityTransactionMetrics. This property is not supported for ContainerLevelCapacityMetrics.",
+          "items": {
+            "$ref": "#/definitions/AdvancedPlatformMetricsAdditionalDimension"
+          }
         }
       }
     },
@@ -9669,7 +9727,7 @@
       "properties": {
         "ruleType": {
           "$ref": "#/definitions/AdvancedPlatformMetricsRuleType",
-          "description": "Indicates the type of the advanced platform metrics rule. Possible values include: ContainerLevelCapacityMetrics.",
+          "description": "Indicates the type of the advanced platform metrics rule specified in the request path.",
           "readOnly": true
         },
         "enabled": {
@@ -9684,14 +9742,14 @@
         },
         "metricsToEmit": {
           "type": "array",
-          "description": "The metrics requested by the caller. If omitted in a create or update request, the service enables all metrics supported by the selected rule type.",
+          "description": "The metrics requested by the caller. If omitted in a create or update request, the service enables all metrics supported by the selected rule type. When specified, the list must be nonempty, contain no duplicates, and contain only metrics supported by that rule type. ContainerLevelCapacityMetrics supports ContainerUsedSize and ContainerBlobCount. PriorityTransactionMetrics supports PriorityTransactions, PriorityIngress, PriorityEgress, PriorityServerLatency, PriorityClientLatency, and PriorityAvailability.",
           "items": {
             "$ref": "#/definitions/MetricsEmitted"
           }
         },
         "metricsEmitted": {
           "type": "array",
-          "description": "The metrics emitted by the rule. Metrics are mapped according to the rule type from RuleTypeProperty. Rule type to metrics mapping: ContainerLevelCapacityMetrics => {ContainerUsedSize, ContainerBlobCount}.",
+          "description": "The effective metrics emitted by the rule, based on the rule type and the requested metric selection.",
           "items": {
             "$ref": "#/definitions/MetricsEmitted"
           },
@@ -9711,7 +9769,8 @@
       "type": "string",
       "description": "The type of the advanced platform metrics rule.",
       "enum": [
-        "ContainerLevelCapacityMetrics"
+        "ContainerLevelCapacityMetrics",
+        "PriorityTransactionMetrics"
       ],
       "x-ms-enum": {
         "name": "AdvancedPlatformMetricsRuleType",
@@ -9721,6 +9780,11 @@
             "name": "ContainerLevelCapacityMetrics",
             "value": "ContainerLevelCapacityMetrics",
             "description": "Container level capacity metrics rule type"
+          },
+          {
+            "name": "PriorityTransactionMetrics",
+            "value": "PriorityTransactionMetrics",
+            "description": "Transaction metrics with implicit Priority and ResponseStatus dimensions. Container filters are not supported."
           }
         ]
       }
@@ -14883,7 +14947,13 @@
       "description": "The metrics emitted by the advanced platform metrics rule.",
       "enum": [
         "ContainerBlobCount",
-        "ContainerUsedSize"
+        "ContainerUsedSize",
+        "PriorityTransactions",
+        "PriorityIngress",
+        "PriorityEgress",
+        "PriorityServerLatency",
+        "PriorityClientLatency",
+        "PriorityAvailability"
       ],
       "x-ms-enum": {
         "name": "MetricsEmitted",
@@ -14898,6 +14968,36 @@
             "name": "ContainerUsedSize",
             "value": "ContainerUsedSize",
             "description": "Container used size metric"
+          },
+          {
+            "name": "PriorityTransactions",
+            "value": "PriorityTransactions",
+            "description": "Transaction count by priority."
+          },
+          {
+            "name": "PriorityIngress",
+            "value": "PriorityIngress",
+            "description": "Ingress by priority."
+          },
+          {
+            "name": "PriorityEgress",
+            "value": "PriorityEgress",
+            "description": "Egress by priority."
+          },
+          {
+            "name": "PriorityServerLatency",
+            "value": "PriorityServerLatency",
+            "description": "Server latency by priority."
+          },
+          {
+            "name": "PriorityClientLatency",
+            "value": "PriorityClientLatency",
+            "description": "Client latency by priority."
+          },
+          {
+            "name": "PriorityAvailability",
+            "value": "PriorityAvailability",
+            "description": "Availability by priority."
           }
         ]
       }
