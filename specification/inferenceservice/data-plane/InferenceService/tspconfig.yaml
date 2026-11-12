@@ -1,0 +1,38 @@
+parameters:
+  "service-dir":
+    default: "sdk/dataai"
+
+emit:
+  - "@azure-tools/typespec-autorest"
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
+
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}"
+    examples-dir: "{project-root}/examples"
+    output-file: "{version-status}/{version}/inferenceservice.json"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-data-ai"
+    flavor: azure
+    namespace: "com.azure.data.ai"
+    service-name: "InferenceService"
+  "@azure-tools/typespec-ts":
+    package-details:
+      name: "@azure/data-ai"
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/data-ai"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-data-ai"
+    flavor: azure
+    package-name: "azure-data-ai"
+    package-pprint-name: "Azure Data AI"
+    namespace: "azure.data.ai"
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.Data.AI
+    model-namespace: false

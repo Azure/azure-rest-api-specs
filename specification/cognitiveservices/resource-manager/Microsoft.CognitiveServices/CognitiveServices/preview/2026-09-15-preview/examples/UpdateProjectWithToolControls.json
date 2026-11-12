@@ -1,0 +1,54 @@
+{
+  "operationId": "Projects_Update",
+  "parameters": {
+    "accountName": "myAccount",
+    "api-version": "2026-09-15-preview",
+    "project": {
+      "properties": {
+        "toolControls": {
+          "defaultAction": "Deny"
+        }
+      }
+    },
+    "projectName": "myProject",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "title": "Update a Foundry project with no explicitly allowed tools",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myProject",
+        "type": "Microsoft.CognitiveServices/accounts/projects",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.CognitiveServices/accounts/myAccount/projects/myProject",
+        "location": "westus",
+        "properties": {
+          "displayName": "My project",
+          "provisioningState": "Succeeded",
+          "toolControls": {
+            "defaultAction": "Deny"
+          }
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myProject",
+        "type": "Microsoft.CognitiveServices/accounts/projects",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.CognitiveServices/accounts/myAccount/projects/myProject",
+        "location": "westus",
+        "properties": {
+          "displayName": "My project",
+          "provisioningState": "Accepted",
+          "toolControls": {
+            "defaultAction": "Deny"
+          }
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.CognitiveServices/locations/westus/operationResults/00000000-1111-2222-3333-555555555555?api-version=2026-09-15-preview",
+        "Retry-After": "10"
+      }
+    }
+  }
+}

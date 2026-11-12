@@ -84,6 +84,10 @@ import "./RequestHistory.tsp";
 import "./WorkflowTrigger.tsp";
 import "./WorkflowTriggerHistory.tsp";
 import "./WorkflowVersion.tsp";
+import "./SiteSilo.tsp";
+import "./ServerFarmSilo.tsp";
+import "./ManagedTrafficConfig.tsp";
+import "./LastKnownGood.tsp";
 import "./routes.tsp";
 import "./client.tsp";
 
@@ -128,6 +132,11 @@ enum Versions {
    * The 2026-07-15 API version.
    */
   v2026_07_15: "2026-07-15",
+
+  /**
+   * The 2026-08-01 API version.
+   */
+  v2026_08_01: "2026-08-01",
 }
 
 @tag("Provider")

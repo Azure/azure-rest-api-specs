@@ -112,7 +112,7 @@ namespace ApplicationInsightsManagementClient;
 );
 @@clientName(
   AnalyticsItems.AnalyticsItemsOperationGroup.list::parameters.type,
-  "$DO_NOT_NORMALIZE$type",
+  exact("type"),
   "javascript"
 );
 @@clientName(Workbooks.revisionsList, "listRevisionsList", "javascript");
@@ -297,6 +297,11 @@ namespace ApplicationInsightsManagementClient;
 @@clientName(AnalyticsItems.ItemScope, "ComponentItemScope", "csharp");
 @@clientName(AnalyticsItems.ItemType, "ComponentItemType", "csharp");
 @@clientName(Components.IngestionMode, "ComponentIngestionMode", "csharp");
+@@clientName(
+  Components.AzureMonitorWorkspaceIngestionMode,
+  "ComponentAzureMonitorWorkspaceIngestionMode",
+  "csharp"
+);
 @@clientName(Components.FlowType, "ComponentFlowType", "csharp");
 @@clientName(Components.RequestSource, "ComponentRequestSource", "csharp");
 @@clientName(
@@ -765,4 +770,20 @@ namespace ApplicationInsightsManagementClient;
   DeletedWorkbookApi.DeletedWorkbookProperties.storageUri,
   url,
   "csharp"
+);
+
+@@clientName(
+  ApplicationInsightsComponentProperties.otlpLogsEndpoint,
+  "OTLPLogsEndpoint",
+  "go"
+);
+@@clientName(
+  ApplicationInsightsComponentProperties.otlpTracesEndpoint,
+  "OTLPTracesEndpoint",
+  "go"
+);
+@@clientName(
+  ApplicationInsightsComponentProperties.otlpMetricsEndpoint,
+  "OTLPMetricsEndpoint",
+  "go"
 );

@@ -45,3 +45,12 @@ using Azure.ClientGenerator.Core;
   AzureLargeStorageInstances.listBySubscription,
   "AzureLargeStorageInstance"
 );
+
+@@clientName(AzureLargeInstances.restart::parameters.body, "forceParameter");
+
+#suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
+@@encodedName(
+  AzureLargeInstances.update::parameters.properties,
+  "application/json",
+  "tagsParameter"
+);

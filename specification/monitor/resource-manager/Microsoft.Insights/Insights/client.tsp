@@ -78,6 +78,64 @@ namespace Microsoft.InsightsCombinedClient;
 );
 
 // C# compatibility names from the shipped AutoRest-based Azure.ResourceManager.Monitor package.
+@@clientName(
+  VmInsightsOnboarding.VMInsightsOnboardingStatus,
+  "VmInsightsOnboardingStatus",
+  "csharp"
+);
+@@alternateType(
+  VmInsightsOnboarding.VMInsightsOnboardingStatusProperties.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@clientName(
+  VmInsightsOnboarding.WorkspaceInfo,
+  "DataContainerWorkspace",
+  "csharp"
+);
+@@clientName(
+  DiagnosticsSettings.DiagnosticSettingsCategoryResource,
+  "DiagnosticSettingsCategory",
+  "csharp"
+);
+@@clientName(
+  DiagnosticsSettings.DiagnosticSettingsCategory,
+  "DiagnosticSettingsCategoryProperties",
+  "csharp"
+);
+@@clientName(DiagnosticsSettings.CategoryType, "MonitorCategoryType", "csharp");
+// Base name for the shipped DiagnosticSettingResource, DiagnosticSettingData, and
+// DiagnosticSettingCollection types; the C# generator appends those suffixes.
+@@clientName(
+  DiagnosticsSettings.DiagnosticSettingsResource,
+  "DiagnosticSetting",
+  "csharp"
+);
+@@alternateType(
+  DiagnosticsSettings.DiagnosticSettings.storageAccountId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DiagnosticsSettings.DiagnosticSettings.serviceBusRuleId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DiagnosticsSettings.DiagnosticSettings.eventHubAuthorizationRuleId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DiagnosticsSettings.DiagnosticSettings.workspaceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DiagnosticsSettings.DiagnosticSettings.marketplacePartnerId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@clientName(ActionGroupsApi.ActionGroup, "ActionGroupProperties", "csharp");
 @@clientName(ActionGroupsApi.ActionGroup.enabled, "IsEnabled", "csharp");
 @@clientName(ActionGroupsApi.ActionGroupResource, "ActionGroup", "csharp");
@@ -924,6 +982,125 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 
+// Preserve the semantic types exposed by Azure.ResourceManager.Monitor.
+@@alternateType(
+  ActivityLogAlertsApi.ActivityLogAlertActionGroup.actionGroupId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DataCollectionApi.LocationSpec.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  DataCollectionApi.EventHubDestination.eventHubResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DataCollectionApi.EventHubDirectDestination.eventHubResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DataCollectionApi.PrivateLinkScopedResource.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DataCollectionApi.StorageBlobDestination.storageAccountResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DataCollectionApi.StorageTableDestination.storageAccountResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DataCollectionApi.LogAnalyticsDestination.workspaceResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DataCollectionApi.MonitoringAccountDestination.accountResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  MetricAlertApi.MetricAlertAction.actionGroupId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  MetricAlertApi.WebtestLocationAvailabilityCriteria.componentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  MetricAlertApi.WebtestLocationAvailabilityCriteria.webTestId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  AutoScaleApi.MetricTrigger.metricResourceLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(AutoScaleApi.ScaleCapacity.minimum, int32, "csharp");
+@@alternateType(AutoScaleApi.ScaleCapacity.maximum, int32, "csharp");
+@@alternateType(AutoScaleApi.ScaleCapacity.default, int32, "csharp");
+@@alternateType(AutoScaleApi.WebhookNotification.serviceUri, url, "csharp");
+@@alternateType(
+  ActionGroupsApi.AutomationRunbookReceiver.automationAccountId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ActionGroupsApi.AutomationRunbookReceiver.serviceUri,
+  url,
+  "csharp"
+);
+@@alternateType(
+  ActionGroupsApi.AutomationRunbookReceiver.webhookResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ActionGroupsApi.AzureFunctionReceiver.functionAppResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ActionGroupsApi.AzureFunctionReceiver.httpTriggerUrl,
+  url,
+  "csharp"
+);
+@@alternateType(
+  ActionGroupsApi.EventHubReceiver.tenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  ActionGroupsApi.ItsmReceiver.region,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(ActionGroupsApi.LogicAppReceiver.callbackUrl, url, "csharp");
+@@alternateType(
+  ActionGroupsApi.LogicAppReceiver.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(ActionGroupsApi.WebhookReceiver.identifierUri, url, "csharp");
+@@alternateType(ActionGroupsApi.WebhookReceiver.serviceUri, url, "csharp");
+@@alternateType(
+  ActionGroupsApi.WebhookReceiver.tenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
+
 // These models collide by name across TenantActionGroups and ActionGroupsApi,
 // but their shapes differ, so they must remain separate models. Rename the
 // TenantActionGroups versions for the JS emitter (@clientName, per the compiler
@@ -951,6 +1128,49 @@ namespace Microsoft.InsightsCombinedClient;
   TenantActionGroups.TestNotificationDetailsResponse,
   "TenantActionGroupTestNotificationDetailsResponse",
   "java,javascript,python,go"
+);
+
+// C# names for the tenant action group family, distinct from the shipped ActionGroup models.
+@@clientName(
+  TenantActionGroups.TenantActionGroupResource,
+  "TenantActionGroup",
+  "csharp"
+);
+@@clientName(
+  TenantActionGroups.TenantActionGroup,
+  "TenantActionGroupProperties",
+  "csharp"
+);
+@@clientName(
+  TenantActionGroups.TenantActionGroup.enabled,
+  "IsEnabled",
+  "csharp"
+);
+@@clientName(
+  TenantActionGroups.ActionGroupPatchBody,
+  "TenantActionGroupPatch",
+  "csharp"
+);
+@@clientName(
+  TenantActionGroups.TenantNotificationRequestBody,
+  "TenantNotificationContent",
+  "csharp"
+);
+@@clientName(
+  TenantActionGroups.ActionDetail,
+  "TenantNotificationActionDetail",
+  "csharp"
+);
+@@clientName(
+  TenantActionGroups.WebhookReceiver,
+  "TenantActionGroupWebhookReceiver",
+  "csharp"
+);
+@@alternateType(TenantActionGroups.WebhookReceiver.serviceUri, url, "csharp");
+@@alternateType(
+  TenantActionGroups.WebhookReceiver.identifierUri,
+  url,
+  "csharp"
 );
 
 @@clientName(
@@ -1445,6 +1665,12 @@ model MetricSettings {
   MetricSettings,
   "csharp"
 );
+// C#: the shipped DiagnosticSettingData.Metrics uses MetricSettings.
+@@alternateType(
+  DiagnosticsSettings.DiagnosticsMetricSettings,
+  MetricSettings,
+  "csharp"
+);
 // For JS, redirect straight to DiagnosticsSettings.DiagnosticsMetricSettings (identical to the
 // local MetricSettings) so the local Microsoft.InsightsCombinedClient.MetricSettings
 // is not emitted and no longer collides with DiagnosticsSettings.DiagnosticsMetricSettings.
@@ -1491,6 +1717,12 @@ model LogSettings {
 
 @@alternateType(
   ServiceDiagnosticsSettingsApi.LogSettings,
+  LogSettings,
+  "csharp"
+);
+// C#: the shipped DiagnosticSettingData.Logs uses LogSettings.
+@@alternateType(
+  DiagnosticsSettings.DiagnosticsLogSettings,
   LogSettings,
   "csharp"
 );
@@ -1720,11 +1952,7 @@ op PrivateLinkScopeOperationStatusGetCustomized(
   "python"
 );
 
-@@clientLocation(
-  VMInsightsOnboardingStatuses.getOnboardingStatus,
-  "$DO_NOT_NORMALIZE$vMInsights",
-  "javascript"
-);
+@@clientName(VMInsightsOnboardingStatuses, exact("vMInsights"), "javascript");
 
 @@clientName(
   xmsClientTenantIdParameter.`x-ms-client-tenant-id`,

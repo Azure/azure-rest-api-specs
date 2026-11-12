@@ -110,6 +110,7 @@ export function parseArguments(): SpecGenSdkCmdInput {
     prNumber: getArgumentValue(args, "--pr-number", ""),
     apiVersion: getArgumentValue(args, "--api-version", ""),
     sdkReleaseType: getArgumentValue(args, "--sdk-release-type", ""),
+    typespecEmitter: getArgumentValue(args, "--typespec-emitter", "") || undefined,
     specCommitSha: getArgumentValue(args, "--commit", "HEAD"),
     specRepoHttpsUrl: getArgumentValue(args, "--spec-repo-url", ""),
     headRepoHttpsUrl: getArgumentValue(args, "--head-repo-url", ""),
@@ -163,6 +164,9 @@ export function prepareSpecGenSdkCommand(commandInput: SpecGenSdkCmdInput): stri
   if (commandInput.sdkReleaseType) {
     specGenSdkCommand.push("--sdk-release-type", commandInput.sdkReleaseType);
   }
+  if (commandInput.typespecEmitter) {
+    specGenSdkCommand.push("--typespec-emitter", commandInput.typespecEmitter);
+  }
   return specGenSdkCommand;
 }
 
@@ -189,7 +193,9 @@ export function getSpecPaths(batchType: string, specRepoPath: string): SpecConfi
       break;
     }
     case "all-mgmtplane-typespecs": {
-      tspconfigs = getAllTypeSpecPaths(specRepoPath).filter((p) => p.includes(".Management"));
+      tspconfigs = getAllTypeSpecPaths(specRepoPath).filter(
+        (p) => p.includes(".Management") || p.includes("resource-manager"),
+      );
       readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) =>
         p.includes("resource-manager"),
       );
@@ -197,7 +203,9 @@ export function getSpecPaths(batchType: string, specRepoPath: string): SpecConfi
       break;
     }
     case "all-dataplane-typespecs": {
-      tspconfigs = getAllTypeSpecPaths(specRepoPath).filter((p) => !p.includes(".Management"));
+      tspconfigs = getAllTypeSpecPaths(specRepoPath).filter(
+        (p) => !p.includes(".Management") && !p.includes("resource-manager"),
+      );
       readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) =>
         p.includes("data-plane"),
       );
@@ -400,6 +408,7 @@ export function generateArtifact(
         hasManagementPlaneSpecs,
         hasTypeSpecProjects,
         commandInput.sdkLanguage,
+        commandInput.typespecEmitter,
       );
     }
 
@@ -435,13 +444,23 @@ export function generateArtifact(
  * @param hasManagementPlaneSpecs - A flag indicating whether there are management plane specs.
  * @param hasTypeSpecProjects - A flag indicating whether there are TypeSpec projects.
  * @param sdkName - The SDK name.
+ * @param typespecEmitter - The explicitly selected TypeSpec emitter.
  * @returns boolean indicating whether the SDK check is required.
  */
 export function getRequiredSettingValue(
   hasManagementPlaneSpecs: boolean,
   hasTypeSpecProjects: boolean,
   sdkName: SdkName,
+  typespecEmitter?: string,
 ): boolean {
+  // Provisioning validation runs and reports failures, but is not yet a merge gate.
+  if (
+    (sdkName === SdkName.Js && typespecEmitter === "@azure-tools/typespec-ts-provisioning") ||
+    (sdkName === SdkName.Net &&
+      typespecEmitter === "@azure-typespec/http-client-csharp-provisioning")
+  ) {
+    return false;
+  }
   // If the SDK is azure-sdk-for-net, return false if there are no TypeSpec projects.
   if (sdkName === "azure-sdk-for-net" && !hasTypeSpecProjects) {
     return false;
@@ -506,6 +525,16 @@ function isAzsdkCliAvailable(): boolean {
 }
 
 /**
+ * Whether azsdk-cli SDK breaking-change detection is enabled for this run.
+ *
+ * Code-level feature flag: flip to `true` and merge to enable the whole
+ * integration.
+ */
+export function isBreakingChangeDetectionEnabled(): boolean {
+  return false;
+}
+
+/**
  * Prepare the azsdk pkg generate command arguments.
  *
  * @param commandInput - The spec-gen-sdk command input.
@@ -551,6 +580,20 @@ export function prepareAzsdkPackCommand(packagePath: string, outputPath?: string
   if (outputPath) {
     args.push("--output-path", outputPath);
   }
+  return args;
+}
+
+/**
+ * Prepare the azsdk pkg detect-breaking-change command arguments.
+ *
+ * @param packagePath - Absolute path to the generated SDK package directory.
+ * @returns Array of arguments for the azsdk detect-breaking-change command.
+ */
+export function prepareAzsdkDetectBreakingChangeCommand(packagePath: string): string[] {
+  const args = ["pkg", "detect-breaking-change", "--package-path", packagePath];
+
+  args.push("--changes-only");
+  args.push("--output", "json");
   return args;
 }
 

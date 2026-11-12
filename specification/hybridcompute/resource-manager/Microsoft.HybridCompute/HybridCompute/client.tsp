@@ -5,6 +5,8 @@ using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.HybridCompute;
 
+@@clientName(IdentityKeyStore.TpmTransition, "TPMTransition", "go");
+
 @@clientName(
   Microsoft.HybridCompute,
   "HybridComputeManagementClient",

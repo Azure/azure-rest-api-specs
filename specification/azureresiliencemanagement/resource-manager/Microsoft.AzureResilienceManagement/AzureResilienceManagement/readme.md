@@ -28,7 +28,52 @@ These are the global settings for the AzureResilienceManagement.
 title: AzureResilienceManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2026-08-31-preview
+tag: package-2026-10-01
+```
+
+### Tag: package-2026-12-30-preview
+
+These settings apply only when `--tag=package-2026-12-30-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-12-30-preview'
+input-file:
+  - preview/2026-12-30-preview/openapi.json
+```
+
+### Tag: package-2026-11-30-preview
+
+These settings apply only when `--tag=package-2026-11-30-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-11-30-preview'
+input-file:
+  - preview/2026-11-30-preview/openapi.json
+```
+
+### Tag: package-2026-10-31-preview
+
+These settings apply only when `--tag=package-2026-10-31-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-10-31-preview'
+input-file:
+  - preview/2026-10-31-preview/openapi.json
+```
+
+### Tag: package-2026-10-01
+
+These settings apply only when `--tag=package-2026-10-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-10-01'
+input-file:
+  - stable/2026-10-01/openapi.json
+```
+
+### Tag: package-2026-09-30-preview
+
+These settings apply only when `--tag=package-2026-09-30-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-09-30-preview'
+input-file:
+  - preview/2026-09-30-preview/openapi.json
 ```
 
 ### Tag: package-2026-08-31-preview
@@ -79,23 +124,48 @@ input-file:
 ### Suppression
 
 ```yaml
-
 suppressions:
-    - code: AvoidAdditionalProperties
-      from: openapi.json
-      reason: Passed as script parameters to downstream RP - Runbook of Microsoft.Automation
-      where: $.definitions.RecoveryGroupCustomRunbookAction.properties.parameters
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    reason: Passed as script parameters to downstream RP - Runbook of Microsoft.Automation
+    where: $.definitions.RecoveryGroupCustomRunbookAction.properties.parameters
 
-    - code: AvoidAnonymousTypes
-      from: openapi.json
-      reason: This is being reported in pre-defined Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate
+  - code: AvoidAnonymousTypes
+    from: openapi.json
+    reason: This is being reported in pre-defined Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate
 
-    - code: TenantLevelAPIsNotAllowed
-      from: openapi.json
-      reason: Resiliency scenarios are modelled around a SG (Service Group), which is a Tenant level resource.
+  - code: TenantLevelAPIsNotAllowed
+    from: openapi.json
+    reason: Resiliency scenarios are modelled around a SG (Service Group), which is a Tenant level resource.
 
-    - code: XMSSecretInResponse
-      from: openapi.json
-      where: $.definitions.ServiceGroupTenantParameters.properties.skipToken
-      reason: skipToken is the standard Azure OData paging continuation token ($skipToken), not a secret. The linter flags it due to the Token substring in the name; the property carries opaque pagination state and is not sensitive.
+  - code: XMSSecretInResponse
+    from: openapi.json
+    where: $.definitions.ServiceGroupTenantParameters.properties.skipToken
+    reason: skipToken is the standard Azure OData paging continuation token ($skipToken), not a secret. The linter flags it due to the Token substring in the name; the property carries opaque pagination state and is not sensitive.
+```
+
+```yaml $(tag) == 'package-2026-11-30-preview'
+directive:
+  - suppress: GuidUsage
+    from: openapi.json
+    where: $.definitions["Azure.Core.uuid"].format
+    reason: >-
+      Used only for TargetScope.subscriptionId and TargetEnvironment.targetSubscriptionIds.
+      These are Azure subscription identifiers, which are GUIDs.
+      Requested by @umpatel in https://github.com/Azure/azure-rest-api-specs/pull/47089#discussion_r4209716799,
+      https://github.com/Azure/azure-rest-api-specs/pull/47089#discussion_r4209716959,
+      https://github.com/Azure/azure-rest-api-specs/pull/47089#discussion_r4209716968,
+      and https://github.com/Azure/azure-rest-api-specs/pull/47089#discussion_r4209716988.
+```
+
+```yaml $(tag) == 'package-2026-12-30-preview'
+directive:
+  - suppress: GuidUsage
+    from: openapi.json
+    where: $.definitions["Azure.Core.uuid"].format
+    reason: >-
+      Used only for TargetScope.subscriptionId and TargetEnvironment.targetSubscriptionIds.
+      These are Azure subscription identifiers, which are GUIDs.
+      Carried forward from package-2026-11-30-preview; see
+      https://github.com/Azure/azure-rest-api-specs/pull/47089#discussion_r4209716799.
 ```

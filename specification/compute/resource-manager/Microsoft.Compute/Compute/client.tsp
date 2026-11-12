@@ -952,10 +952,15 @@ model VMSizePropertiesWithAdditionalProperties {
 // `OperatingSystemTypes` (closed enum, Windows/Linux) was named `SupportedOperatingSystemType`
 // in the old SDK; the union `OperatingSystemType` kept its spec name (extensible struct).
 @@clientName(OperatingSystemTypes, "SupportedOperatingSystemType", "csharp");
-// Breaking change in v2026-04-01: the `ReservationType` union (on capacity reservation groups,
-// added in v2025-04-01) previously shipped in the .NET SDK as `CapacityReservationType`. The
-// alias is removed so the csharp name matches the spec, freeing `CapacityReservationType` for
-// the new VM instance-view union added in v2026-04-01.
+// Preserve the name of the capacity reservation group union from the previous .NET SDK.
+@@clientName(ReservationType, "CapacityReservationType", "csharp");
+// Distinguish the new VM instance-view union from the existing group reservation type.
+@@clientName(
+  CapacityReservationType,
+  "ComputeCapacityReservationType",
+  "csharp"
+);
+@@clientName(ListVersionsExpandOptions, "ListVersionsExpand", "csharp");
 @@clientName(ApiErrorBase, "ComputeApiErrorBase", "csharp");
 @@clientName(
   VMGalleryApplication,
@@ -1009,15 +1014,6 @@ model VMSizePropertiesWithAdditionalProperties {
   "ExtensionType",
   "csharp"
 );
-
-// Disable safe-flatten on AllInstancesDown / UserInitiatedRedeploy so they remain
-// public types in the C# SDK (preserves backward compatibility with previously shipped surface).
-#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve type for public API surface"
-#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Preserve type for public API surface"
-@@clientOption(UserInitiatedRedeploy, "disable-safe-flatten", true, "csharp");
-#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve type for public API surface"
-#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Preserve type for public API surface"
-@@clientOption(AllInstancesDown, "disable-safe-flatten", true, "csharp");
 
 // Resource type rename for backward compatibility.
 @@clientName(
@@ -1537,6 +1533,7 @@ model VMSizePropertiesWithAdditionalProperties {
   "TargetVmSize",
   "csharp"
 );
+@@clientName(FlexProfile.preferredVMSize, "PreferredVmSize", "csharp");
 @@clientName(
   VirtualMachineExtensionImageProperties.vmScaleSetEnabled,
   "VirtualMachineScaleSetEnabled",
@@ -2196,6 +2193,16 @@ union ComputeUsageUnit {
 );
 @@clientName(
   DiskUpdateProperties.optimizedForFrequentAttach,
+  "IsOptimizedForFrequentAttach",
+  "csharp"
+);
+@@clientName(
+  Compute.ManagedDiskProperties.performancePlus,
+  "IsPerformancePlusEnabled",
+  "csharp"
+);
+@@clientName(
+  Compute.ManagedDiskProperties.optimizedForFrequentAttach,
   "IsOptimizedForFrequentAttach",
   "csharp"
 );

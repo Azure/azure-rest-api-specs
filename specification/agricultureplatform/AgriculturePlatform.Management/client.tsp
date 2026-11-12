@@ -77,3 +77,6 @@ namespace Azure.ResourceManager.Models {
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
+
+@@alternateType(DataConnectorCredentials.keyVaultUri, url, "csharp");
+@@alternateType(AgriServiceConfig.instanceUri, url, "csharp");

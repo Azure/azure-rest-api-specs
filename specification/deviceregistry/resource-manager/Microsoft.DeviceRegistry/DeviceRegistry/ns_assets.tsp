@@ -15,7 +15,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.DeviceRegistry;
 
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @parentResource(Namespace)
 @doc("Asset definition.")
 model NamespaceAsset is TrackedResource<NamespaceAssetProperties> {
@@ -92,7 +92,7 @@ model NamespaceAssetExecuteActionResponse {
   error?: Error;
 }
 
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @armResourceOperations
 interface NamespaceAssets {
   get is ArmResourceRead<NamespaceAsset>;
@@ -108,7 +108,8 @@ interface NamespaceAssets {
     >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<NamespaceAsset>;
-  listByResourceGroup is ArmResourceListByParent<NamespaceAsset>;
+  @renamedFrom(Versions.v2026_11_01, "listByResourceGroup")
+  listByNamespace is ArmResourceListByParent<NamespaceAsset>;
   @doc("A long-running resource action.")
   @added(Versions.v2026_04_01)
   executeAction is ArmResourceActionAsync<

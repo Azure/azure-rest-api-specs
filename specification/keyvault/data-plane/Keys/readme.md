@@ -26,7 +26,16 @@ These are the global settings for the KeyVault API.
 
 ```yaml
 openapi-type: data-plane
-tag: package-preview-2026-05-01-preview
+tag: package-preview-2026-07-01-preview
+```
+
+### Tag: package-preview-2026-07-01-preview
+
+These settings apply only when `--tag=package-preview-2026-07-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-07-01-preview'
+input-file:
+  - preview/2026-07-01-preview/keys.json
 ```
 
 ### Tag: package-preview-2026-05-01-preview
@@ -36,6 +45,15 @@ These settings apply only when `--tag=package-preview-2026-05-01-preview` is spe
 ```yaml $(tag) == 'package-preview-2026-05-01-preview'
 input-file:
   - preview/2026-05-01-preview/keys.json
+```
+
+### Tag: package-2026-04-01
+
+These settings apply only when `--tag=package-2026-04-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-04-01'
+input-file:
+  - stable/2026-04-01/keys.json
 ```
 
 ### Tag: package-preview-2026-03-01-preview

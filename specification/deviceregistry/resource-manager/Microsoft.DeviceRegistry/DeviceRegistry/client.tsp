@@ -186,6 +186,38 @@ using Microsoft.DeviceRegistry;
 @@clientName(BillingContainer.etag, "ETag", "csharp");
 @@clientName(MqttDestinationQos, "MqttDestinationQo", "csharp");
 
+// Rename models with reserved C# suffixes (Request -> Content, Response -> Result)
+// to satisfy @azure-tools/typespec-client-generator-core/csharp-model-suffix.
+@@clientName(
+  ActivateCertificateAuthorityRequest,
+  "ActivateCertificateAuthorityContent",
+  "csharp"
+);
+@@clientName(
+  NamespaceUpdateComplianceReportRequest,
+  "NamespaceUpdateComplianceReportContent",
+  "csharp"
+);
+@@clientName(
+  GroupBestUpdatesComplianceReportRequest,
+  "GroupBestUpdatesComplianceReportContent",
+  "csharp"
+);
+@@clientName(
+  GroupInstallableUpdatesReportRequest,
+  "GroupInstallableUpdatesReportContent",
+  "csharp"
+);
+@@clientName(GroupMemberCountResponse, "GroupMemberCountResult", "csharp");
+@@clientName(GroupListMembersRequest, "GroupListMembersContent", "csharp");
+@@clientName(JobRunResultsRequest, "JobRunResultsContent", "csharp");
+@@clientName(JobRunResultListResponse, "JobRunResultListResult", "csharp");
+@@clientName(
+  GetDeviceAuthenticationProfileKeysResponse,
+  "GetDeviceAuthenticationProfileKeysResult",
+  "csharp"
+);
+
 // JavaScript Client configuration
 @@clientName(
   Microsoft.DeviceRegistry,
@@ -193,12 +225,12 @@ using Microsoft.DeviceRegistry;
   "javascript"
 );
 
-// JavaScript SDK: use update-specific models for PoliciesV1.update to exclude
+// JavaScript SDK: use update-specific models for Policies.update to exclude
 // server-side read-only and create-only fields (e.g. provisioningState, keyType, subject, etc.)
 
 // Standalone update models - no @removed so they do not reference deleted types
 
-@added(Versions.v2025_11_01_preview)
+@added(Versions.v2026_03_01_preview)
 @removed(Versions.v2026_04_01)
 @doc("The configuration to set up an ICA.")
 model CertificateAuthorityConfigurationUpdate {
@@ -213,7 +245,7 @@ model CertificateAuthorityConfigurationUpdate {
 @doc("Configuration for Bring Your Own Root. When enabled, customers provide their own CA-signed certificates instead of using the service-managed CA.")
 model BringYourOwnRootUpdate {}
 
-@added(Versions.v2025_11_01_preview)
+@added(Versions.v2026_03_01_preview)
 @removed(Versions.v2026_04_01)
 @doc("The updatable leaf certificate configuration for Policy.")
 model LeafCertificateConfigurationUpdate {
@@ -223,7 +255,7 @@ model LeafCertificateConfigurationUpdate {
   validityPeriodInDays: int32;
 }
 
-@added(Versions.v2025_11_01_preview)
+@added(Versions.v2026_03_01_preview)
 @removed(Versions.v2026_04_01)
 @doc("The updatable certificate configuration for Policy.")
 model CertificateConfigurationUpdate {
@@ -234,7 +266,7 @@ model CertificateConfigurationUpdate {
   leafCertificateConfiguration: LeafCertificateConfigurationUpdate;
 }
 
-@added(Versions.v2025_11_01_preview)
+@added(Versions.v2026_03_01_preview)
 @removed(Versions.v2026_04_01)
 @doc("Details of the Credential Policy.")
 model PolicyUpdateProperties {
@@ -242,11 +274,11 @@ model PolicyUpdateProperties {
   certificate?: CertificateConfigurationUpdate;
 }
 
-@added(Versions.v2025_11_01_preview)
+@added(Versions.v2026_03_01_preview)
 @removed(Versions.v2026_04_01)
 @doc("A Credential Policy")
 model PolicyUpdate {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Standard ARM resource tags bag with customer-supplied string keys/values, so a Record<string> map is the required shape. PolicyUpdate is @removed as of 2026-04-01 and is not present in the versions shipped by this PR."
   @doc("Resource tags.")
   tags?: Record<string>;
 

@@ -8,6 +8,7 @@ namespace Microsoft.Compute;
 @@clientName(Microsoft.Compute, "ComputeBulkActionsMgmtClient", "python");
 @@clientName(NetworkApiVersion.`2020-11-01`, "ENUM_2020_11_01", "python");
 @@clientName(NetworkApiVersion.`2022-11-01`, "ENUM_2022_11_01", "python");
+
 @@clientName(
   VirtualMachineBulkOperations.bulkDeallocate,
   "BulkDeallocateOperation",
@@ -55,7 +56,7 @@ namespace Microsoft.Compute;
 );
 
 // Disambiguate LaunchBulkInstancesOperation's custom InnerError from the standard
-// Azure.Core.Foundations.InnerError that the folded ScheduledActions error models pull in
+// Azure.Core.Foundations.InnerError that the recurring bulk action error models pull in
 // (via Azure.Core.Foundations.Error). Flattening-language SDKs (C#/Java/Python) require unique
 // client names; the standard type keeps "InnerError", BA's custom one is renamed.
 @@clientName(Microsoft.Compute.InnerError, "BulkInstancesInnerError", "csharp");
@@ -269,22 +270,6 @@ namespace Microsoft.Compute;
 // 2026-04-15-preview for field NetworkAPIVersion". Override the heuristic.
 // =====================================================================
 @@apiVersion(NetworkProfile.networkApiVersion, false, "go");
-
-#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve type for public API surface"
-#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Preserve type for public API surface"
-@@clientOption(Resources, "disable-safe-flatten", true, "csharp");
-
-#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve type for public API surface"
-#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Preserve type for public API surface"
-@@clientOption(ExecutionParameters, "disable-safe-flatten", true, "csharp");
-
-// ResourcesWithContext (added in 2026-07-06-preview) is a single-property model whose inner
-// property would safe-flatten into a "Resources" member, colliding with the existing
-// UserRequestResources "Resources" on the Execute*Content models. Disable safe-flatten to keep
-// it as a distinct type and avoid the duplicate-member (CS0102) build break in the C# SDK.
-#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve type for public API surface"
-#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Preserve type for public API surface"
-@@clientOption(ResourcesWithContext, "disable-safe-flatten", true, "csharp");
 
 @@clientName(CancelOperationsRequest, "CancelBulkOperationsContent", "csharp");
 @@clientName(
@@ -506,3 +491,16 @@ namespace Microsoft.Compute;
 @@clientName(DelayRequest.delay, "scheduleAt", "csharp");
 @@clientName(Mode, "ProxyAgentMode", "csharp");
 @@clientName(Modes, "ImdsAccessControlMode", "csharp");
+// "Placement" is ambiguous in .NET IntelliSense next to DiffDiskPlacement in this
+// package and VirtualMachinePlacement in Azure.ResourceManager.Compute.
+@@clientName(Placement, "BulkActionsVirtualMachinePlacement", "csharp");
+
+// .NET flattens unbound subscription-scoped operations into SubscriptionResource
+// extension methods named from the operationId suffix, so BulkCreate and
+// BulkCreateCustom both generated GetAsyncOperationStatus and failed with CS0111.
+// BulkCreateCustom keeps the original name because it already shipped in 1.2.0-beta.2.
+@@clientName(
+  BulkCreate.getAsyncOperationStatus,
+  "getBulkCreateAsyncOperationStatus",
+  "csharp"
+);

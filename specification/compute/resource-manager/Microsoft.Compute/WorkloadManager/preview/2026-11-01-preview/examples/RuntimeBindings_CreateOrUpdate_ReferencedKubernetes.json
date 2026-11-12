@@ -1,0 +1,56 @@
+{
+  "title": "Attach a referenced Kubernetes runtime binding",
+  "operationId": "RuntimeBindings_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-workload",
+    "spaceName": "managed-agents-prod",
+    "bindingName": "customer-aks",
+    "api-version": "2026-11-01-preview",
+    "resource": {
+      "kind": "Kubernetes",
+      "properties": {
+        "provisioningMode": "Referenced",
+        "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/aks-rg/providers/Microsoft.ContainerService/managedClusters/aks-prod"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/customer-aks",
+        "name": "customer-aks",
+        "type": "Microsoft.Compute/workloadSpaces/runtimeBindings",
+        "kind": "Kubernetes",
+        "properties": {
+          "provisioningMode": "Referenced",
+          "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/aks-rg/providers/Microsoft.ContainerService/managedClusters/aks-prod",
+          "provisioningState": "Succeeded",
+          "state": "Ready",
+          "ownership": "Referenced",
+          "providerResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/aks-rg/providers/Microsoft.ContainerService/managedClusters/aks-prod",
+          "message": "The provider resource reference is registered. Availability is checked by dependent operations."
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus2/workloadSpaceOperationStatuses/00000000-0000-0000-0000-000000000013?api-version=2026-11-01-preview",
+        "Retry-After": 10
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod/runtimeBindings/customer-aks",
+        "name": "customer-aks",
+        "type": "Microsoft.Compute/workloadSpaces/runtimeBindings",
+        "kind": "Kubernetes",
+        "properties": {
+          "provisioningMode": "Referenced",
+          "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/aks-rg/providers/Microsoft.ContainerService/managedClusters/aks-prod",
+          "provisioningState": "Accepted",
+          "state": "Pending",
+          "ownership": "Referenced"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "title": "Get a workload space",
+  "operationId": "WorkloadSpaces_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-workload",
+    "spaceName": "managed-agents-prod",
+    "api-version": "2026-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-workload/providers/Microsoft.Compute/workloadSpaces/managed-agents-prod",
+        "name": "managed-agents-prod",
+        "type": "Microsoft.Compute/workloadSpaces",
+        "location": "eastus2",
+        "tags": {
+          "environment": "Production"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "state": "Ready",
+          "operationStatus": {
+            "kubernetesBinding": {
+              "state": "Succeeded"
+            },
+            "serverlessBinding": {
+              "state": "Succeeded"
+            },
+            "runtimeLink": {
+              "state": "Succeeded"
+            },
+            "capabilities": [
+              {
+                "name": "agentSandbox",
+                "state": "Succeeded"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

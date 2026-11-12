@@ -47,6 +47,11 @@ using Http;
 @@alternateType(RoutingTwinProperties.desired, unknown, "java");
 @@alternateType(RoutingTwinProperties.reported, unknown, "java");
 
+// Preserve backward-compatible Java surface for the fallback route source.
+// Prior Java releases exposed `FallbackRouteProperties.source` as `RoutingSource`;
+// keep `RoutingSource` for Java only, while other languages keep `FallbackRouteSource`.
+@@alternateType(FallbackRouteProperties.source, RoutingSource, "java");
+
 @@scope(GroupIdInformations.get, "!csharp");
 @@scope(GroupIdInformations.list, "!csharp");
 @@usage(GroupIdInformation, Usage.output, "csharp");
@@ -344,6 +349,10 @@ using Http;
   "csharp"
 );
 @@clientName(TestResultStatus, "IotHubTestResultStatus", "csharp");
+@@clientName(ConnectionProfile, "IotHubConnectionProfile", "csharp");
+@@clientName(MessagePayloadFormat, "IotHubMessagePayloadFormat", "csharp");
+@@clientName(ErrorDetails, "DeviceRegistryLinkingErrorDetails", "csharp");
+@@clientName(TopicGroup, "MqttV5TopicGroup", "csharp");
 @@clientLocation(IotHubDescriptions.manualFailover, "IotHubResource", "csharp");
 
 /**

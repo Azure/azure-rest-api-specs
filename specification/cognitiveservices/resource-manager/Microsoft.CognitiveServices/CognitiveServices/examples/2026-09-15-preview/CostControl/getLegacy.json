@@ -1,0 +1,47 @@
+{
+  "operationId": "CostControls_Get",
+  "parameters": {
+    "accountName": "foundry-account",
+    "api-version": "2026-09-15-preview",
+    "costControlName": "legacy-budget",
+    "resourceGroupName": "foundry-resource-group",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "title": "Read a legacy cost control without authoring its legacy values",
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"00000000-0000-0000-0000-000000000001\""
+      },
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/foundry-resource-group/providers/Microsoft.CognitiveServices/accounts/foundry-account/costControls/legacy-budget",
+        "name": "legacy-budget",
+        "type": "Microsoft.CognitiveServices/accounts/costControls",
+        "etag": "\"00000000-0000-0000-0000-000000000001\"",
+        "properties": {
+          "displayName": "Legacy cost center budget",
+          "rules": [
+            {
+              "name": "legacy-custom-budget",
+              "counterKey": {
+                "type": "Custom",
+                "attribute": "legacy cost center value"
+              },
+              "unit": "Usd",
+              "amount": 1000,
+              "period": "Year",
+              "recurring": true,
+              "thresholds": [
+                {
+                  "type": "Percentage",
+                  "value": 80,
+                  "action": "Audit"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

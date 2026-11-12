@@ -6,6 +6,23 @@ using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
+@doc("Reference to a Foundry Dataset in the current project. Consuming operations define supported Dataset kinds and resolution behavior.")
+model DatasetReference {
+  @doc("Dataset name.")
+  name: string;
+
+  @doc("Optional Dataset version. Omit to select latest when the consuming operation resolves the reference.")
+  version?: string;
+}
+
+@doc("Reference to a Dataset whose concrete version has already been resolved.")
+model VersionedDatasetReference {
+  ...OmitProperties<DatasetReference, "version">;
+
+  @doc("Concrete Dataset version.")
+  version: string;
+}
+
 /** Error response for API failures. */
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
@@ -17,8 +34,13 @@ model ApiErrorResponse {
 @@copyProperties(
   OpenAI.Error,
   {
+    /** Additional errors that contributed to this failure. */
     details?: OpenAI.Error[],
+
+    /** Additional structured information about the failure. */
     additionalInfo?: Record<unknown>,
+
+    /** Diagnostic information supplied by the service for troubleshooting. */
     debugInfo?: Record<unknown>,
   }
 );
@@ -39,6 +61,24 @@ alias AcceptJsonHeader = {
 alias UserDelegationHeader = {
   /** Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission. */
   @header("x-ms-user-identity") user_identity?: string;
+};
+
+/**
+ * Optional request header carrying an application-owned conversation identifier for Model Router session affinity.
+ * Used when the request body does not supply a valid session ID.
+ */
+alias SessionAffinityRequestHeader = {
+  /** An opaque, application-owned conversation identifier. The value is not returned in the response and must not contain secrets or personally identifiable information. */
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      conditional_previews: #[
+        FoundryFeaturesOptInKeys.model_router_controls_v1_preview
+      ],
+    }
+  )
+  @header("x-ms-session-id")
+  session_id?: string;
 };
 
 // NOTE: Platform-internal headers (x-agent-foundry-call-id, x-foundry-foundation-token)

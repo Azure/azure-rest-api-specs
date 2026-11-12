@@ -420,6 +420,13 @@ model SecretArchiveReference {
    */
   @visibility(Lifecycle.Read)
   secretVersion?: string;
+
+  /**
+   * The public key used by the platform to encrypt the archived credential before it was written to the secret archive.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  encryptionPublicKey?: string;
 }
 
 /**

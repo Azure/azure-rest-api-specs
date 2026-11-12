@@ -1,0 +1,120 @@
+{
+  "parameters": {
+    "api-version": "2026-08-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "body": {
+      "upgradeType": "ControlPlaneAndAgentPools",
+      "targetKubernetesVersion": "1.33.5"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/upgradeInsights/controlPlaneAndAgentPools-1.33.5",
+        "name": "controlPlaneAndAgentPools-1.33.5",
+        "type": "Microsoft.ContainerService/managedClusters/upgradeInsights",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "upgradeType": "ControlPlaneAndAgentPools",
+          "lastEvaluatedAt": "2026-07-07T10:00:00Z",
+          "expiresAt": "2026-07-21T10:00:00Z",
+          "targetKubernetesVersion": "1.33.5",
+          "controlPlane": {
+            "currentKubernetesVersion": "1.32.7",
+            "kubernetesVersionSupportStatus": "InSupport",
+            "kubernetesVersionEndOfSupportDate": "2026-11-30",
+            "context": {
+              "currentUpgradeStrategy": "Manual"
+            },
+            "evaluation": {
+              "status": "Failed",
+              "evaluatedAt": "2026-07-07T10:00:00Z",
+              "detectedIssues": [
+                {
+                  "issueType": "APIBreakingChange",
+                  "severity": "Blocking",
+                  "message": "Deprecated APIs (policy/v1beta1 PodDisruptionBudget) are removed in 1.33.5.",
+                  "impactedResources": [
+                    {
+                      "kind": "Kubernetes",
+                      "resourceType": "PodDisruptionBudget",
+                      "namespace": "default",
+                      "name": "my-pdb"
+                    },
+                    {
+                      "kind": "Kubernetes",
+                      "resourceType": "PodDisruptionBudget",
+                      "namespace": "team-a",
+                      "name": "web-pdb"
+                    }
+                  ],
+                  "recommendedActions": [
+                    {
+                      "title": "Migrate to policy/v1 PodDisruptionBudget",
+                      "details": "Update the PodDisruptionBudget manifest to apiVersion policy/v1 and re-apply before upgrading.",
+                      "documentationLink": "https://learn.microsoft.com/azure/aks/upgradeinsights"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "agentPools": [
+            {
+              "agentPoolName": "nodepool1",
+              "currentKubernetesVersion": "1.32.7",
+              "kubernetesVersionSupportStatus": "InSupport",
+              "kubernetesVersionEndOfSupportDate": "2026-11-30",
+              "context": {
+                "currentUpgradeStrategy": "Manual"
+              },
+              "evaluation": {
+                "status": "Failed",
+                "evaluatedAt": "2026-07-07T10:00:00Z",
+                "detectedIssues": [
+                  {
+                    "issueType": "SubnetIPExhausted",
+                    "severity": "Blocking",
+                    "message": "The subnet does not have sufficient available IP addresses for surge nodes during upgrade.",
+                    "impactedResources": [
+                      {
+                        "kind": "Arm",
+                        "resourceType": "Microsoft.Network/virtualNetworks/subnets",
+                        "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/aks-subnet"
+                      }
+                    ],
+                    "recommendedActions": [
+                      {
+                        "title": "Free up or expand subnet address space",
+                        "details": "Increase the subnet size or reduce maxSurge so enough IPs are available for surge nodes.",
+                        "documentationLink": "https://learn.microsoft.com/azure/aks/upgradeinsights"
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "agentPoolName": "nodepool2",
+              "currentKubernetesVersion": "1.32.7",
+              "kubernetesVersionSupportStatus": "InSupport",
+              "kubernetesVersionEndOfSupportDate": "2026-11-30",
+              "context": {
+                "currentUpgradeStrategy": "Manual"
+              },
+              "evaluation": {
+                "status": "Passed",
+                "evaluatedAt": "2026-07-07T10:00:00Z",
+                "detectedIssues": []
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "UpgradeInsights_Generate",
+  "title": "Generate a combined control plane and agent pools upgrade insight"
+}

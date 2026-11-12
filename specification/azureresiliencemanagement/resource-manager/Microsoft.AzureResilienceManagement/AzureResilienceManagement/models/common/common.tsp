@@ -16,6 +16,50 @@ namespace Microsoft.AzureResilienceManagement;
 
 alias ServiceGroupRoute = "/providers/Microsoft.Management/serviceGroups";
 
+@added(Versions.v2026_11_30_preview)
+@doc("The workload protected by a recovery configuration profile.")
+union WorkloadType {
+  @added(Versions.v2026_11_30_preview)
+  @doc("An Azure virtual machine workload.")
+  AzureVm: "AzureVm",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("A SQL database workload hosted in an Azure virtual machine.")
+  SqlDatabaseInAzureVm: "SqlDatabaseInAzureVm",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("An SAP HANA workload hosted in an Azure virtual machine.")
+  SapHanaInAzureVm: "SapHanaInAzureVm",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("An SAP ASE workload hosted in an Azure virtual machine.")
+  SapAseInAzureVm: "SapAseInAzureVm",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("An Oracle workload hosted in an Azure virtual machine.")
+  OracleInAzureVm: "OracleInAzureVm",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("An Azure Files workload.")
+  AzureFileShare: "AzureFileShare",
+
+  string,
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("Specifies the resiliency type for recovery plan properties.")
+union ResiliencyType {
+  @added(Versions.v2026_11_30_preview)
+  @doc("Infrastructure resiliency properties.")
+  InfrastructureResiliency: "InfrastructureResiliency",
+
+  @added(Versions.v2026_11_30_preview)
+  @doc("Cyber resiliency properties.")
+  CyberResiliency: "CyberResiliency",
+
+  string,
+}
+
 @doc("Definition of associated identity linked with the various resources.")
 model AssociatedIdentity {
   @doc("Identity type linked with the resource")
@@ -311,10 +355,56 @@ union ResourceProtectionSolutionType {
   @doc("Resource is not protected with native solution and using custom runbook automation scripts for recovery verbs.")
   CustomRunbook: "CustomRunbook",
 
+  @added(Versions.v2026_10_31_preview)
+  @doc("Resource recovery is orchestrated by deploying an Azure Resource Manager template.")
+  AzureTemplate: "AzureTemplate",
+
+  @added(Versions.v2026_10_31_preview)
+  @doc("Resource is protected with Azure Storage account customer-managed failover.")
+  AzureStorageAccount: "AzureStorageAccount",
+
+  @added(Versions.v2026_10_31_preview)
+  @doc("Resource is protected with Azure Service Bus geo-replication, where a premium namespace replicates data to a secondary region and recovery promotes that secondary in place.")
+  AzureServiceBus: "AzureServiceBus",
+
+  @added(Versions.v2026_10_31_preview)
+  @doc("Resource is protected with Azure NetApp Files cross-region replication, where recovery fails over to the destination volume.")
+  AzureNetAppFiles: "AzureNetAppFiles",
+
+  @added(Versions.v2026_10_31_preview)
+  @doc("Resource is protected with Azure Cosmos DB multiregion replication using customer-managed failover, where recovery promotes a secondary region to the write region.")
+  AzureCosmosDB: "AzureCosmosDB",
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("Resource is protected with Azure Backup using a Recovery Services vault.")
+  AzureBackupRecoveryServices: "AzureBackupRecoveryServices",
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("Resource is protected with Azure Backup using a Data Protection backup vault.")
+  AzureBackupDataProtection: "AzureBackupDataProtection",
+
+  string,
+}
+
+@doc("ISO 8601 duration formats.")
+union IsoDuration {
+  @doc("15 minutes.")
+  PT15M: "PT15M",
+
+  @doc("1 hour.")
+  PT1H: "PT1H",
+
+  @doc("4 hours.")
+  PT4H: "PT4H",
+
+  @doc("24 hours.")
+  PT24H: "PT24H",
+
   string,
 }
 
 @doc("Model for service group membership.")
+@removed(Versions.v2026_09_30_preview)
 model ServiceGroupMembership {
   @doc("Arm Id of the service group.")
   serviceGroupId: armResourceIdentifier;
@@ -324,6 +414,7 @@ model ServiceGroupMembership {
 }
 
 @doc("Membership type of the service group to resource.")
+@removed(Versions.v2026_09_30_preview)
 union MembershipType {
   @doc("Resource is direct member of service group.")
   Direct: "Direct",

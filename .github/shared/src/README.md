@@ -1,4 +1,4 @@
-# .github/src
+# .github/shared/src
 
 ## Overview
 
@@ -7,17 +7,17 @@ that shells to nodejs) in this repo.
 
 ## Calling from TypeScript
 
-You may need to enable `allowJs` in `tsconfig.json`:
+Shared modules are TypeScript, executed directly by Node.js 24 using native type stripping.
+Import their package subpaths; use `import type` for interfaces and type aliases:
 
-```
-{
-  "compilerOptions": {
-    "allowJs": true
-  }
-}
+```typescript
+import { execFile } from "@azure-tools/specs-shared/exec";
+import type { ExecOptions } from "@azure-tools/specs-shared/exec";
 ```
 
-https://www.typescriptlang.org/tsconfig/#allowJs
+No JavaScript build output is generated. Relative source imports use `.ts` extensions.
+Consumers using relative `.ts` imports must enable `allowImportingTsExtensions` with `noEmit`
+in their TypeScript configuration.
 
-Another issue may be missing type definitions, but all shared code should be annotated with JSDoc
-comments, which TypeScript should use to infer types.
+Use only erasable TypeScript syntax: no enums, parameter properties, or namespaces.
+Keep comments for API documentation, not type declarations.

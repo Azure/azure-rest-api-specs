@@ -1,0 +1,248 @@
+{
+  "parameters": {
+    "api-version": "2026-06-01",
+    "localRulestackName": "lrs1",
+    "priority": "1",
+    "resource": {
+      "properties": {
+        "description": "description of local rule",
+        "actionType": "Allow",
+        "applications": [
+          "app1"
+        ],
+        "auditComment": "example comment",
+        "category": {
+          "feeds": [
+            "feed"
+          ],
+          "urlCustom": [
+            "https://microsoft.com"
+          ]
+        },
+        "decryptionRuleType": "SSLOutboundInspection",
+        "destination": {
+          "cidrs": [
+            "1.0.0.1/10"
+          ],
+          "countries": [
+            "India"
+          ],
+          "feeds": [
+            "feed"
+          ],
+          "fqdnLists": [
+            "FQDN1"
+          ],
+          "prefixLists": [
+            "PL1"
+          ]
+        },
+        "enableLogging": "DISABLED",
+        "etag": "c18e6eef-ba3e-49ee-8a85-2b36c863a9d0",
+        "inboundInspectionCertificate": "cert1",
+        "negateDestination": "TRUE",
+        "negateSource": "TRUE",
+        "protocolPortList": [
+          "80"
+        ],
+        "provisioningState": "Accepted",
+        "ruleName": "localRule1",
+        "ruleState": "DISABLED",
+        "source": {
+          "cidrs": [
+            "1.0.0.1/10"
+          ],
+          "countries": [
+            "India"
+          ],
+          "feeds": [
+            "feed"
+          ],
+          "prefixLists": [
+            "PL1"
+          ]
+        },
+        "tags": [
+          {
+            "key": "keyName",
+            "value": "value"
+          }
+        ],
+        "protocol": "HTTP"
+      }
+    },
+    "resourceGroupName": "firewall-rg",
+    "subscriptionId": "2bf4a339-294d-4c25-b0b2-ef649e9f5c27"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "1",
+        "type": "PaloAltoNetworks.Cloudngfw/localRulestacks/localRules",
+        "id": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/firewall-rg/providers/PaloAltoNetworks.Cloudngfw/localRulestacks/lrs1/localRules/1",
+        "properties": {
+          "description": "Sample rule for demonstration purposes.",
+          "actionType": "Allow",
+          "applications": [
+            "web-browsing"
+          ],
+          "auditComment": "Reviewed and approved by the network security team.",
+          "category": {
+            "feeds": [
+              "threat-intel-feed"
+            ],
+            "urlCustom": [
+              "aa"
+            ]
+          },
+          "decryptionRuleType": "SSLOutboundInspection",
+          "destination": {
+            "cidrs": [
+              "10.0.0.0/24"
+            ],
+            "countries": [
+              "US"
+            ],
+            "feeds": [
+              "threat-intel-feed"
+            ],
+            "fqdnLists": [
+              "allowed-fqdn-list"
+            ],
+            "prefixLists": [
+              "corp-prefix-list"
+            ]
+          },
+          "enableLogging": "DISABLED",
+          "etag": "a3f5c9e1b7d2",
+          "inboundInspectionCertificate": "inbound-inspection-cert",
+          "negateDestination": "TRUE",
+          "negateSource": "TRUE",
+          "priority": 13,
+          "protocolPortList": [
+            "tcp/443"
+          ],
+          "provisioningState": "Accepted",
+          "ruleName": "allow-outbound-web",
+          "ruleState": "DISABLED",
+          "source": {
+            "cidrs": [
+              "10.0.0.0/24"
+            ],
+            "countries": [
+              "US"
+            ],
+            "feeds": [
+              "threat-intel-feed"
+            ],
+            "prefixLists": [
+              "corp-prefix-list"
+            ]
+          },
+          "tags": [
+            {
+              "key": "keyName",
+              "value": "value"
+            }
+          ],
+          "protocol": "TCP"
+        },
+        "systemData": {
+          "createdAt": "2022-09-09T05:08:24.229Z",
+          "createdBy": "praval",
+          "createdByType": "User",
+          "lastModifiedAt": "2022-09-09T05:08:24.229Z",
+          "lastModifiedBy": "praval",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "1",
+        "type": "PaloAltoNetworks.Cloudngfw/localRulestacks/localRules",
+        "id": "/subscriptions/2bf4a339-294d-4c25-b0b2-ef649e9f5c27/resourceGroups/firewall-rg/providers/PaloAltoNetworks.Cloudngfw/localRulestacks/lrs1/localRules/1",
+        "properties": {
+          "description": "Sample rule for demonstration purposes.",
+          "actionType": "Allow",
+          "applications": [
+            "web-browsing"
+          ],
+          "auditComment": "Reviewed and approved by the network security team.",
+          "category": {
+            "feeds": [
+              "threat-intel-feed"
+            ],
+            "urlCustom": [
+              "aa"
+            ]
+          },
+          "decryptionRuleType": "SSLOutboundInspection",
+          "destination": {
+            "cidrs": [
+              "10.0.0.0/24"
+            ],
+            "countries": [
+              "US"
+            ],
+            "feeds": [
+              "threat-intel-feed"
+            ],
+            "fqdnLists": [
+              "allowed-fqdn-list"
+            ],
+            "prefixLists": [
+              "corp-prefix-list"
+            ]
+          },
+          "enableLogging": "DISABLED",
+          "etag": "a3f5c9e1b7d2",
+          "inboundInspectionCertificate": "inbound-inspection-cert",
+          "negateDestination": "TRUE",
+          "negateSource": "TRUE",
+          "priority": 13,
+          "protocolPortList": [
+            "tcp/443"
+          ],
+          "provisioningState": "Accepted",
+          "ruleName": "allow-outbound-web",
+          "ruleState": "DISABLED",
+          "source": {
+            "cidrs": [
+              "10.0.0.0/24"
+            ],
+            "countries": [
+              "US"
+            ],
+            "feeds": [
+              "threat-intel-feed"
+            ],
+            "prefixLists": [
+              "corp-prefix-list"
+            ]
+          },
+          "tags": [
+            {
+              "key": "keyName",
+              "value": "value"
+            }
+          ],
+          "protocol": "TCP"
+        },
+        "systemData": {
+          "createdAt": "2022-09-09T05:08:24.229Z",
+          "createdBy": "praval",
+          "createdByType": "User",
+          "lastModifiedAt": "2022-09-09T05:08:24.229Z",
+          "lastModifiedBy": "praval",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "LocalRules_CreateOrUpdate",
+  "title": "LocalRules_CreateOrUpdate_MaximumSet_Gen"
+}

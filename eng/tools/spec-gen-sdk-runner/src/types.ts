@@ -27,6 +27,7 @@ export interface ExecutionReportPackage {
   installationInstructions?: string;
   apiViewArtifact?: string;
   shouldLabelBreakingChange?: boolean;
+  packageRootPath?: string;
 }
 
 /**
@@ -60,6 +61,7 @@ export interface SpecGenSdkCmdInput {
   apiVersion?: string;
   prNumber?: string;
   sdkReleaseType?: string;
+  typespecEmitter?: string;
   specCommitSha: string;
   specRepoHttpsUrl: string;
   headRepoHttpsUrl?: string;

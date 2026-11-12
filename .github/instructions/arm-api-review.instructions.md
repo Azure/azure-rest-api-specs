@@ -3,7 +3,7 @@ applyTo: "specification/**/resource-manager/**/*.json"
 ---
 
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-08-15
+    Upstream alignment: 2026-08-15
      All rules derived from or aligned with:
        - Azure Resource Provider Contract (RPC) v1.0
          https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10
@@ -80,7 +80,7 @@ API review:
 Do not treat SDK-language approval labels, package-name approvals, namespace
 approvals, or an arbitrary label containing the word `Approved` as API-review
 approval. The canonical breaking-change and versioning label definitions live
-in [`.github/shared/src/breaking-change.js`](../shared/src/breaking-change.js).
+in [`.github/shared/src/breaking-change.ts`](../shared/src/breaking-change.ts).
 
 **Review preamble disclosure.** In the review-body preamble, immediately after
 the sentence that identifies the reviewed commit, include exactly one of:
@@ -360,9 +360,10 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 - PATCH **MUST NOT** update `id`, `name`, `type`, `location`, or `properties.provisioningState` (RPC-Patch-V1-02).
 - PATCH **MUST** follow JSON Merge Patch semantics ([RFC 7396](https://tools.ietf.org/html/rfc7396)) (RPC-Patch-V1-05).
 
-### 4.2 PATCH Response Codes (RPC-Patch-V1-06)
+### 4.2 PATCH Response Codes (RPC-Patch-V1-06, RPC-Patch-V1-07)
 
-- Synchronous PATCH **MUST** return `200`; async PATCH **MUST** return `202` (plus `200` in swagger for SDK discovery). PATCH **MUST** return `404` if resource does not exist (RPC-Patch-V1-07).
+- **OpenAPI design:** Synchronous PATCH **MUST** define `200` and `default`; async PATCH **MUST** define `202`, `200` (for SDK final-response schema discovery), and `default`. These operations **MUST NOT** define an explicit `404` response. ARM OpenAPI represents all error responses through `default`, as enforced by the [`PatchResponseCodes`](https://github.com/Azure/azure-openapi-validator/blob/main/docs/patch-response-codes.md) and [`NoErrorCodeResponses`](https://github.com/Azure/azure-openapi-validator/blob/main/docs/no-error-code-responses.md) linter rules.
+- **Runtime behavior:** PATCH **MUST** return `404` if the resource group or resource does not exist (RPC-Patch-V1-07). The OpenAPI `default` response schema represents this error. Because RPC-Patch-V1-07 is a runtime requirement, its implementation cannot be verified from the OpenAPI response-code declarations alone. **Do not flag a PATCH operation for omitting an explicit `404` response when it defines the required `default` response.**
 
 > **Async PATCH uniquely requires BOTH `202` AND `200` in the swagger definition.**
 > The `200` is not the initial response -- it represents the final synchronous
@@ -492,12 +493,12 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 
 ### 6.7 Polling Behavior and `final-state-via`
 
-> **Full rule definition:** See [`.github/skills/azure-api-review/references/lro-final-state-via.md`](../skills/azure-api-review/references/lro-final-state-via.md) for the complete `final-state-via` decision table and anti-patterns.
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/lro-final-state-via.md`](../skills/azure-api-review/references/lro-final-state-via.md) for the complete method-specific guidance and implementation evidence.
 
 - **`Location` header polling**: The polling URL returns `202` (with no body) while the operation is in progress and returns the **exact same response** as the synchronous completion when the operation finishes. For DELETE, the final response is `200` or `204`. For PATCH, the final response is `200` with the updated resource body. For POST, the final response is `200` or `204`.
 - **`Azure-AsyncOperation` header polling**: The polling URL always returns `200` with a status object in the response body containing `status`, `error` (if failed/canceled), and optional `id`, `name`, `startTime`, `endTime`, `percentComplete`, `properties`. A `4xx`/`5xx` on the polling URL indicates a failure reading the _status_, not a failure of the underlying operation.
 - The `Azure-AsyncOperation` status object **MUST** include `status`, whose terminal values include `Succeeded`, `Failed`, and `Canceled`; resource providers may define additional non-terminal values. `id` and `name` are optional. `properties` appears only on successful completion. If status is `Failed` or `Canceled`, `error` and `error.code` are required; `error.message` is required for `Failed` and optional for `Canceled`.
-- For PUT, PATCH, and DELETE following standard ARM patterns, do **NOT** specify `x-ms-long-running-operation-options` / `final-state-via` -- the default SDK behavior is correct. Only specify `"final-state-via": "location"` for POST LROs with a response schema.
+- For standard ARM PUT/PATCH/DELETE operations, do not flag `x-ms-long-running-operation-options` or `final-state-via` solely because it is present. Apply the shared LRO reference to verify the template, headers, logical result, and method-specific SDK behavior. For POST LROs, ensure final-result retrieval matches the service contract and applicable linter requirements.
 
 ### 6.8 Operation Results Placement
 
@@ -1093,6 +1094,7 @@ When reviewing resources that support availability zones, verify: `zones` is a t
 - Once an API version is published (merged to `main` in either the public or private spec repo), its schema is **immutable**. No changes -- not even adding an optional property -- are allowed to that version.
 - Any modification to a published API version requires creating a **new api-version** (with a later date). This applies to both GA and preview versions.
 - If a PR modifies a swagger file under a version folder that was already merged to `main`, verify that the PR also introduces a new api-version folder. If it only modifies the existing version, flag it.
+- **TypeSpec-generated metadata guard:** when TypeSpec owns the modified Swagger, do not apply this rule solely because regeneration removes or changes raw `x-ms-*` metadata. First apply [`typespec-openapi-extensions.md`](../skills/azure-api-review/references/typespec-openapi-extensions.md) and compare the semantic TypeSpec model and wire/ARM contract. Removing legacy `x-ms-parameter-grouping` or `x-ms-client-request-id: true` while preserving the same wire parameter is not, by itself, a Section 26.0 violation. For paging, LRO, secret, resource, and other semantics-bearing metadata, require the native TypeSpec construct and verify its generated output. Never recommend restoring `@OpenAPI.extension(...)` or suppressing `no-openapi-client-extensions`.
 
 ### 26.1 Allowed Schema Changes
 
@@ -1200,7 +1202,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ POST actions do NOT affect provisioningState; provisioningState transitions only non-terminal → non-terminal or non-terminal → terminal
 - ✅ `operationResults` are root-level resources (RPC021); `operationStatuses` may be under the original request or subscription-level operations (RPC028); subscription scope is preferred; no sensitive data in status properties
 - ✅ Operation IDs are unique (RPC022); fresh GUIDs are recommended and IDs should not reuse correlation/request IDs
-- ✅ `final-state-via` NOT specified on PUT/PATCH/DELETE following standard ARM patterns; only on POST LROs with response schema
+- ✅ `final-state-via` reviewed against the ARM template, response headers, logical `FinalResult`, and demonstrated SDK behavior; valid generated metadata is permitted on standard PUT/PATCH/DELETE operations
 
 ### Property Design (Properties Bag Review)
 
@@ -1306,7 +1308,7 @@ When reviewing ARM resource-manager swagger files, verify:
 
 ### Schema Evolution
 
-- ✅ Published API versions are immutable — no changes (even optional properties) without a new api-version
+- ✅ Published API versions are immutable — no REST or ARM contract changes (even optional properties) without a new api-version; TypeSpec-generated `x-ms-*` diffs are first classified under `typespec-openapi-extensions.md`
 - ✅ No type changes on existing properties between API versions (introduce new property name + deprecate old)
 - ✅ No required properties added to or removed from existing models between API versions
 - ✅ DELETE never fails due to API version mismatch with creation version

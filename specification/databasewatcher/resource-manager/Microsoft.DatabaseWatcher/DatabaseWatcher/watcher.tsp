@@ -146,36 +146,27 @@ interface Watchers {
   listByResourceGroup is ArmResourceListByParent<Watcher>;
   listBySubscription is ArmListBySubscription<Watcher>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation-options' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core long-running operation templates."
   @doc("The action to start monitoring all targets configured for a database watcher.")
-  @action
-  @post
-  @armResourceAction(Watcher)
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "azure-async-operation" }
-  )
-  start(...ResourceInstanceParameters<Watcher>):
-    | ArmAcceptedLroResponse
-    | ArmResponse<Watcher>
-    | ErrorResponse;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  start is ArmResourceActionAsync<
+    Watcher,
+    void,
+    Watcher,
+    LroHeaders = ArmLroLocationHeader<FinalResult = Watcher> &
+      ArmAsyncOperationHeader<FinalResult = Watcher> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - TODO migrate to LRO apis"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation', 'x-ms-long-running-operation-options' OpenAPI extension(s) predates the no-openapi-client-extensions rule; suppressed pending migration to first-class TypeSpec constructs."
   @doc("The action to stop monitoring all targets configured for a database watcher.")
-  @action
-  @post
-  @armResourceAction(Watcher)
-  @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "azure-async-operation" }
-  )
-  stop(...ResourceInstanceParameters<Watcher>):
-    | ArmAcceptedLroResponse
-    | ArmResponse<Watcher>
-    | ErrorResponse;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  stop is ArmResourceActionAsync<
+    Watcher,
+    void,
+    Watcher,
+    LroHeaders = ArmLroLocationHeader<FinalResult = Watcher> &
+      ArmAsyncOperationHeader<FinalResult = Watcher> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
 
 @doc("The monitoring collection status of a watcher.")

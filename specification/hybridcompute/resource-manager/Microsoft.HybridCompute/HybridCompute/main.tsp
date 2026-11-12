@@ -20,6 +20,7 @@ import "./MachineExtension.tsp";
 import "./ExtensionValue.tsp";
 import "./ExtensionValueV2.tsp";
 import "./MachineRunCommand.tsp";
+import "./VMApplication.tsp";
 import "./Gateway.tsp";
 import "./Settings.tsp";
 import "./HybridComputePrivateLinkScope.tsp";
@@ -81,6 +82,13 @@ enum Versions {
   @useDependency(Azure.ResourceManager.CommonTypes.Versions.v6)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2026_07_15: "2026-07-15",
+
+  /**
+   * The 2026-09-01 API version.
+   */
+  @useDependency(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2026_09_01: "2026-09-01",
 }
 
 interface Operations {

@@ -75,7 +75,7 @@ interface Volumes {
       /**
        * Optional. Specifies that the delete operation should be a permanent delete for the soft deleted volume. The value of deleteType can only be 'permanent'.
        */
-      @added(Versions.v2026_04_01_preview)
+      @added(Versions.v2026_05_01_preview)
       @query("deleteType")
       deleteType?: DeleteType;
     },
@@ -95,7 +95,7 @@ interface Volumes {
        * Optional, returns only soft deleted volumes if set to true. If set to false or if not specified, returns only active volumes.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @added(Versions.v2026_04_01_preview)
+      @added(Versions.v2026_05_01_preview)
       @header
       @clientName("accessSoftDeletedResources", "csharp") // this could be temporary because we cannot reference this parameter through ::parameter syntax.
       `x-ms-access-soft-deleted-resources`?: `x-ms-access-soft-deleted-resources`;
@@ -107,7 +107,7 @@ interface Volumes {
 /**
  * Restore Soft Deleted Volumes. The volume name is obtained by using the API to list soft deleted volumes by volume group
  */
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_05_01_preview)
 @action("restore")
 @tag("Restore Volumes")
 op restoreVolume is ArmResourceActionAsync<Volume, void, Volume>;

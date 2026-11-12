@@ -436,6 +436,9 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 @@access(StorageErrorCode, Access.public, "java");
 @@usage(StorageErrorCode, Usage.output, "java");
 @@clientName(ListQueuesResponse, "ListQueuesSegmentResponse", "java");
+@@access(ListQueuesResponse, Access.public, "java");
+@@usage(ListQueuesResponse, Usage.output, "java");
+
 /** The error returned by the Queue service, including the fields the Java SDK surfaces on QueueStorageException. */
 @error
 @mediaTypeHint("application/xml")
@@ -463,5 +466,25 @@ model QueueStorageError {
 }
 
 @@alternateType(Storage.Queues.Error, QueueStorageError, "java");
-@@access(ListQueuesResponse, Access.public, "java");
-@@usage(ListQueuesResponse, Usage.output, "java");
+
+// C++ customizations
+@@alternateType(MetadataHeaders.metadata, Record<string>, "cpp");
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "C++ prefix header collection support."
+@@clientOption(
+  MetadataHeaders.metadata,
+  "collectionHeaderPrefix",
+  "x-ms-meta-",
+  "cpp"
+);
+@@alternateType(KeyInfo.start, string, "cpp");
+@@alternateType(KeyInfo.expiry, string, "cpp");
+@@alternateType(GeoReplication.lastSyncTime, utcDateTime | null, "cpp");
+
+/** Statistics returned to the C++ queue protocol client. */
+@TypeSpec.Xml.name("StorageServiceStats")
+@clientName("QueueServiceStats", "cpp")
+model QueueServiceStatsCpp {
+  ...QueueServiceStats;
+}
+
+@@alternateType(QueueServiceStats, QueueServiceStatsCpp, "cpp");

@@ -17,7 +17,7 @@ namespace Microsoft.DeviceRegistry;
 
 @doc("Discovered asset definition.")
 @parentResource(Namespace)
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model NamespaceDiscoveredAsset
   is TrackedResource<NamespaceDiscoveredAssetProperties> {
   @doc("The name of the discovered asset.")
@@ -37,7 +37,7 @@ model NamespaceDiscoveredAsset
 }
 
 @armResourceOperations
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 interface NamespaceDiscoveredAssets {
   get is ArmResourceRead<NamespaceDiscoveredAsset>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<NamespaceDiscoveredAsset>;
@@ -54,5 +54,6 @@ interface NamespaceDiscoveredAssets {
     >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<NamespaceDiscoveredAsset>;
-  listByResourceGroup is ArmResourceListByParent<NamespaceDiscoveredAsset>;
+  @renamedFrom(Versions.v2026_11_01, "listByResourceGroup")
+  listByNamespace is ArmResourceListByParent<NamespaceDiscoveredAsset>;
 }

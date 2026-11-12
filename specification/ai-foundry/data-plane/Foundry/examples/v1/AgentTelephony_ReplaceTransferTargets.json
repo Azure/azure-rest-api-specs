@@ -1,0 +1,38 @@
+{
+  "title": "Replace telephony transfer targets",
+  "operationId": "AgentTelephony_replaceTelephonyTransferTargets",
+  "parameters": {
+    "api-version": "v1",
+    "agent_name": "support-agent",
+    "If-Match": "\"targets-etag-1\"",
+    "transfer_targets": [
+      {
+        "name": "billing",
+        "description": "Transfer when the caller needs help with an invoice or payment.",
+        "destination": {
+          "value": "+14255550150",
+          "type": "phone_number"
+        }
+      }
+    ]
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"targets-etag-2\""
+      },
+      "body": {
+        "transfer_targets": [
+          {
+            "name": "billing",
+            "description": "Transfer when the caller needs help with an invoice or payment.",
+            "destination": {
+              "value": "+14255550150",
+              "type": "phone_number"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

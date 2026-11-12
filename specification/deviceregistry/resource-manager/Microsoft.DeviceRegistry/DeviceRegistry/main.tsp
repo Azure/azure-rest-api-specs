@@ -16,6 +16,15 @@ import "./ns_devices.tsp";
 import "./ns_discoveredAssets.tsp";
 import "./ns_discoveredDevices.tsp";
 import "./schemaRegistries.tsp";
+import "./certificateAuthorities.tsp";
+import "./certificatePolicies.tsp";
+import "./groups.tsp";
+import "./jobs.tsp";
+import "./jobRuns.tsp";
+import "./registryDevices.tsp";
+import "./registryDeviceAttributes.tsp";
+import "./registryDeviceCapabilities.tsp";
+import "./registryDeviceAuthenticationProfiles.tsp";
 import "./client.tsp";
 
 using TypeSpec.Http;
@@ -33,10 +42,6 @@ namespace Microsoft.DeviceRegistry;
 /** API versions */
 @doc("Microsoft.DeviceRegistry Resource Provider supported API versions.")
 enum Versions {
-  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2023-11-01-preview.")
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-  v2023_11_01_preview: "2023-11-01-preview",
-
   @doc("Microsoft.DeviceRegistry Resource Provider management API version 2024-09-01-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_09_01_preview: "2024-09-01-preview",
@@ -45,17 +50,9 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_11_01: "2024-11-01",
 
-  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2025-07-01-preview.")
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2025_07_01_preview: "2025-07-01-preview",
-
   @doc("Microsoft.DeviceRegistry Resource Provider management API version 2025-10-01.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_10_01: "2025-10-01",
-
-  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2025-11-01-preview.")
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2025_11_01_preview: "2025-11-01-preview",
 
   @doc("Microsoft.DeviceRegistry Resource Provider management API version 2026-03-01-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -64,6 +61,15 @@ enum Versions {
   @doc("Microsoft.DeviceRegistry Resource Provider management API version 2026-04-01.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2026_04_01: "2026-04-01",
+
+  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2026-11-01.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2026_11_01: "2026-11-01",
+
+  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2026-11-02-preview.")
+  @Azure.Core.previewVersion
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2026_11_02_preview: "2026-11-02-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -87,3 +93,27 @@ interface OperationStatus {
 }
 
 @@segment(OperationStatus.get::parameters.operationId, "operationStatuses");
+
+@added(Versions.v2026_11_01)
+@armResourceOperations
+interface AsyncOperationStatus {
+  @doc("Returns the current status of an async operation.")
+  @autoRoute
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+
+    @path
+    @segment("providers")
+    @doc("The provider namespace (this parameter will not show up in operations).")
+    provider: "Microsoft.DeviceRegistry",
+
+    ...LocationParameter,
+    ...Foundations.OperationIdParameter,
+  ): ArmResponse<OperationStatusResult> | ErrorResponse;
+}
+
+@@segment(
+  AsyncOperationStatus.get::parameters.operationId,
+  "asyncOperationStatuses"
+);

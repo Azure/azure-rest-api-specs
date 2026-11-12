@@ -8,6 +8,7 @@ namespace WebPubSubService {
   /**
    * The service is healthy.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
   model GetServiceStatusOkResponse {
     /** The response status code */
     @statusCode code: 200;

@@ -104,3 +104,29 @@
     - WorkBookOperations/tspconfig.yaml
     - WorkbooksApi/tspconfig.yaml
     - WorkbookTemplatesApi/tspconfig.yaml
+
+- tool: OAPI034
+  paths:
+    - ./preview/2025-01-23-preview/components_API.json
+  reason: >
+    `AzureMonitorWorkspaceIngestionMode` intentionally exposes the service-set `Disabled`
+    value on the same property clients use to opt in. This mirrors the shape of the
+    existing `IngestionMode` property on the same resource, which the resource provider
+    also moves to a service-set `Disabled` state; matching that shape keeps the two
+    ingestion settings consistent and avoids customer confusion. The new property
+    additionally documents its service-set value explicitly, which `IngestionMode` does
+    not, so the contract here is more discoverable than the precedent it follows.
+
+    The state machine is closed and narrow, so the What-If drift risk the rule guards
+    against does not arise in practice. Clients may only set `NotOptedIn` or `Enabled`.
+    The service never transitions `NotOptedIn` to `Disabled`, because a component that
+    has not opted in has no Azure Monitor workspace link to break. `Disabled` is
+    reachable only from `Enabled`, and once a component reaches `Enabled` the property
+    is effectively read-only, because opting back out is rejected. A client therefore
+    can never submit a value that the service will contradict.
+
+    OTLP has been in preview with this shape and existing preview customers have
+    reported no drift or usability issues. Splitting desired configuration from
+    observed status would require a Mgmt-AppInsights-CDS change to emit a second wire
+    field and would break current readers of the already-deployed 2025-01-23-preview
+    contract. Revisit at GA, where a contract change is expected.

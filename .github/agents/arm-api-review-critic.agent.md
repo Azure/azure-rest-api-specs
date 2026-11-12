@@ -188,17 +188,19 @@ read-only inspection"):
   `git checkout` of branches you do not currently have checked out,
   `git tag -d`, anything that mutates the working tree or remote.
 - Any file write (`Set-Content`, `Out-File`, `>` / `>>` redirects,
-`Add-Content`, `New-Item -ItemType File` outside a temp directory used
-purely for ephemeral fetched content). The critic produces output as
-chat text only; it does not write to the workspace.
+  `Add-Content`, `New-Item -ItemType File` outside a temp directory used
+  purely for ephemeral fetched content). The critic produces output as
+  chat text only; it does not write to the workspace.
+
 <!-- cspell:ignore choco -->
+
 - Any installer / package manager (`npm`, `pip`, `winget`, `choco`, etc.),
   `Invoke-WebRequest` to write a downloaded file into the workspace, or
   any command that mounts, modifies, or executes downloaded content.
 - Any command that materializes a new local clone or worktree of any
   repo (`git clone`, `git worktree add`, `git fetch <new-remote>`). The
   Critic re-fetches individual files via `get_file_contents` or `gh api
-.../contents/...` only; full clones are out of scope and risk pulling
+  .../contents/...` only; full clones are out of scope and risk pulling
   in tooling, hooks, or scripts that could mutate state.
 
 If a finding's re-fetch fails via **both** MCP and the `gh` CLI fallback
@@ -244,10 +246,12 @@ and adds Critic-specific behavioral notes that are not in the protocol.
 3. The **full** findings report as produced in Step 6.
 4. The list of files reviewed.
 5. The previous-version path and full base commit SHA used for `[NEW]`/`[EXISTING]`
-classification. Local mode always includes `Repository HEAD:
-<full-40-char-sha>`, previous-version path/hash or `None - new service`, and
-any `head` manifest entries needed for in-place comparison.
+   classification. Local mode always includes `Repository HEAD:
+   <full-40-char-sha>`, previous-version path/hash or `None - new service`, and
+   any `head` manifest entries needed for in-place comparison.
+
 <!-- cspell:ignore REPOST -->
+
 6. **The Step 5.5 reconciliation plan** (verbatim) - all three discussion
    surface counts and pagination status; per-finding actions (POST-NEW /
    SKIP-COVERED / RESOLVE-AND-REPOST / REPLY-LINE-SHIFT /
@@ -498,6 +502,21 @@ finding's claim. If the rule ID does not exist, has been renumbered, or the
 normative text does not support the finding, mark `FAIL: rule-misapplied`
 or `FAIL: rule-not-found`.
 
+For a finding about an `x-ms-*` change in TypeSpec-generated OpenAPI, also read
+`azure-api-review/references/typespec-openapi-extensions.md`. For an ARM
+`x-ms-long-running-operation*` finding, also read
+`azure-api-review/references/lro-final-state-via.md` and verify the async
+template, `LroHeaders`, logical `FinalResult`, initial response headers, and
+generated behavior. Generic `@pollingOperation` or `@finalOperation` advice is
+not sufficient for an Azure.ResourceManager template whose header contract is
+controlled by `LroHeaders`. Mark
+`FAIL: rule-misapplied` when the finding treats legacy extension-only cleanup
+as a Section 26.0 violation without demonstrating a REST wire or ARM semantic
+change. Mark `FAIL: downstream-ci-conflict` when its suggested fix adds or
+restores `@OpenAPI.extension(...)`, `@extension(...)`, or a
+`no-openapi-client-extensions` suppression instead of a native TypeSpec
+construct.
+
 ### Step 4: Re-verify [NEW] vs [EXISTING] classification
 
 Read the corresponding file from the previous-version source the reviewer
@@ -737,14 +756,14 @@ guidance do not count as coverage. Then apply the verdict rules below:
   re-verified at session SHA); and (c) the original line in the existing
   comment is genuinely shifted (the violation is **not** at the original
   line in the current file). If any of these is wrong, mark `FAIL:
-shift-misclassified` and recommend the correction (e.g., "existing
+  shift-misclassified` and recommend the correction (e.g., "existing
   comment is human-origin - reclassify as REPLY-LINE-SHIFT" or "violation
   is still at original line - reclassify as SKIP-COVERED").
 - **REPLY-LINE-SHIFT (Scenario C)**: confirm (a) trusted workflow ownership is
   not proven; a marker under any author other than `github-actions[bot]`
   belongs here; (b) the violation is still present at the new
   line; and (c) the original line is genuinely shifted. Same `FAIL:
-shift-misclassified` reasons apply with symmetric corrections.
+  shift-misclassified` reasons apply with symmetric corrections.
 - **CLARIFY-CONFLICT**: confirm (a) the cited prior item has the same semantic
   identity; (b) its guidance materially conflicts with the current finding;
   (c) the clarification states the prior position, current evidence at the
@@ -756,7 +775,7 @@ shift-misclassified` reasons apply with symmetric corrections.
   For top-level comments/review
   bodies, require one consolidated top-level clarification with links to every
   contradicted item. Failures are `FAIL: clarification-unsupported` or `FAIL:
-conflict-unclarified` as applicable.
+  conflict-unclarified` as applicable.
 - **OVERFLOW-NOT-POSTED**: confirm the row has no posting action or existing-item
   anchor, is excluded from the agreed posting set, and is represented only in
   the review-body overflow count and themes. Do not re-verify it as a finding
@@ -967,7 +986,7 @@ auto-invalidates if the underlying rule moves.
   required on tracked resources, not on proxy or extension resources.
   Anchor: `arm-api-review.instructions.md`, provisioning-state section.
 - **Enum value additions inside `x-ms-enum.modelAsString: true`.** Not a
-  breaking change. Anchor: `documentation/Breaking changes guidelines.md`.
+  breaking change. Anchor: [Azure Breaking Changes Policy](https://aka.ms/AzBreakingChangesPolicy).
 - **Collection GET paging parameters `$top` and `$skipToken`.** These are
   RPC-defined paging parameters and are allowed alongside `api-version` and
   `$filter`. Drop a finding whose only claim is that either parameter is
@@ -988,6 +1007,16 @@ auto-invalidates if the underlying rule moves.
   references.** Confirm the referenced version matches the API version's
   era before flagging. Anchor: `openapi-review.instructions.md`,
   common-types section.
+- **Legacy raw-extension cleanup in TypeSpec-generated OpenAPI.** Do not accept
+  a published-version finding whose only evidence is removal of
+  `x-ms-parameter-grouping` or `x-ms-client-request-id: true` while the wire
+  parameter is unchanged. For semantics-bearing metadata such as paging or
+  LROs, verify the native TypeSpec construct and generated behavior. Reject any
+  suggested fix that restores a raw client-altering extension or suppresses
+  `no-openapi-client-extensions`. Anchor:
+  `typespec-openapi-extensions.md`, TSP-NO-RAW-CLIENT-EXTENSIONS and Reviewing
+  Generated OpenAPI Diffs. For ARM LRO metadata, also anchor to
+  `lro-final-state-via.md` and verify the template, headers, and logical result.
 
 ### Watch for (commonly-missed violations)
 

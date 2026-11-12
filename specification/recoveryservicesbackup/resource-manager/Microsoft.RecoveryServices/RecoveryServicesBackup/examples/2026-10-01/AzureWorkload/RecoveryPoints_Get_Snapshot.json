@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2026-10-01",
+    "containerName": "VMAppContainer;Compute;testRG;sqlVm",
+    "fabricName": "Azure",
+    "protectedItemName": "SQLDataBase;mssqlserver;inventory",
+    "recoveryPointId": "1700000000000",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "testVault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/VMAppContainer;Compute;testRG;sqlVm/protectedItems/SQLDataBase;mssqlserver;inventory/recoveryPoints/1700000000000",
+        "name": "1700000000000",
+        "properties": {
+          "extendedInfo": {
+            "snapshotRecoveryPointInfo": {
+              "snapshotResourceGroup": "AzureBackupSnapshots_testRG",
+              "sourceFilesystemInfo": [
+                {
+                  "accessPaths": [
+                    "F:\\"
+                  ],
+                  "diskInfoList": [
+                    {
+                      "diskGuid": "6f9619ff-8b86-d011-b42d-00c04fc964ff",
+                      "diskLocation": "PCIROOT(0)#PCI(1D00)#PCI(0000)",
+                      "diskNumber": 2,
+                      "diskUniqueId": "60022480-9abc-def0-1234-567890abcdef",
+                      "friendlyName": "SQL data disk",
+                      "lun": 1,
+                      "managedDiskId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Compute/disks/sqlDataDisk01",
+                      "sizeInBytes": 1099511627776
+                    }
+                  ],
+                  "fileSystemType": "NTFS",
+                  "isOnStorageSpace": false,
+                  "label": "SQLData",
+                  "volumeGuid": "\\\\?\\Volume{12345678-1234-1234-1234-123456789abc}\\"
+                }
+              ]
+            }
+          },
+          "objectType": "AzureWorkloadSQLRecoveryPoint",
+          "recoveryPointTimeInUTC": "2026-09-15T02:30:00Z",
+          "type": "Full"
+        },
+        "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints"
+      }
+    }
+  },
+  "operationId": "RecoveryPoints_Get",
+  "title": "Get Azure Workload SQL snapshot recovery point details"
+}

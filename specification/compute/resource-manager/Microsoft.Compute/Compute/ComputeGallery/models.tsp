@@ -146,6 +146,12 @@ union ConfidentialVMEncryptionType {
   EncryptedWithCmk: "EncryptedWithCmk",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   NonPersistedTPM: "NonPersistedTPM",
+
+  /**
+   * Confidential VM Encryption Type which should be used for encrypting the data disks with customer managed keys. This Encryption type should only be used for data disks, and should not be used for OS disk encryption. When this encryption type is used for data disk encryption.Subscriptions need to be enrolled for Confidential VM with data encryption through following AFEC - Microsoft.Compute/ConfidentialVMDataDiskEncryptionPreview
+   */
+  @added(Versions.v2026_03_03)
+  DataDiskEncryptedWithCmk: "DataDiskEncryptedWithCmk",
 }
 
 /**
@@ -532,6 +538,18 @@ model SoftDeletePolicy {
    * Enables soft-deletion for resources in this gallery, allowing them to be recovered within retention time.
    */
   isSoftDeleteEnabled?: boolean;
+
+  /**
+   * The retention period in days for a soft-deleted resource. After this period elapses, the soft-deleted gallery image version transitions to a simulated hard-deleted state.
+   */
+  @added(Versions.v2026_03_03)
+  retentionPeriodInDays?: int32;
+
+  /**
+   * The grace period in days for a simulated hard-deleted resource. During this period the gallery image version is unusable but can still be recovered if required. After this period elapses, the gallery image version is permanently (hard) deleted.
+   */
+  @added(Versions.v2026_03_03)
+  gracePeriodInDays?: int32;
 }
 
 /**
@@ -849,6 +867,122 @@ model GalleryImageUpdate extends UpdateResourceDefinition {
 }
 
 /**
+ * The type of metadata associated with the image.
+ */
+@added(Versions.v2026_03_03)
+union MetadataType {
+  string,
+
+  /**
+   * Metadata related to secrets provisioning for the image.
+   */
+  SecretsProvisioningImageMetadata: "SecretsProvisioningImageMetadata",
+
+  /**
+   * Metadata related to user-provided secrets provisioning for the image.
+   */
+  UserProvidedSecretsProvisioningMetadata: "UserProvidedSecretsProvisioningMetadata",
+}
+
+/**
+ * Describes a key-value pair for image metadata.
+ */
+@added(Versions.v2026_03_03)
+model MetadataKeyValue {
+  /**
+   * The metadata key. Known keys emitted by the service include 'Linux.AzureSecretsProvisioning.Enabled', 'OS.Name', and '{componentName}.Version' (e.g., 'AzureGuestAgent.Version'). All values are non-sensitive configuration; no secrets, credentials, or cryptographic material transit this field.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "metadataKey is a dictionary-style key name (e.g. 'OS.Name'), not a cryptographic key or secret. The suffix match on 'key' is a false positive."
+  metadataKey: string;
+
+  /**
+   * The metadata value. Contains non-sensitive configuration such as capability flags ('true'/'false'), OS names ('Linux', 'Windows'), and version strings (e.g., '1.0.0').
+   */
+  metadataValue?: string;
+}
+
+/**
+ * Describes the metadata profile of an image.
+ */
+@added(Versions.v2026_03_03)
+model ImageMetadataProfile {
+  /**
+   * The type of metadata.
+   */
+  type: MetadataType;
+
+  /**
+   * The list of public metadata key-value pairs. Contains non-sensitive image capability metadata such as supported OS, component names, and versions. No secret material is emitted in this list.
+   */
+  @identifiers(#["metadataKey"])
+  publicMetadataList?: MetadataKeyValue[];
+
+  /**
+   * The list of internal metadata key-value pairs. Contains non-sensitive service-internal metadata for diagnostics and tracking. No secret material is emitted in this list.
+   */
+  @identifiers(#["metadataKey"])
+  internalMetadataList?: MetadataKeyValue[];
+}
+
+/**
+ * The name of a component involved in secrets provisioning.
+ */
+@added(Versions.v2026_03_03)
+union SecretsProvisioningComponentName {
+  string,
+
+  /** The guest operating system. */
+  OS: "OS",
+
+  /** The cloud-init provisioning agent. */
+  CloudInit: "CloudInit",
+
+  /** The Azure guest agent. */
+  AzureGuestAgent: "AzureGuestAgent",
+
+  /** The secrets provisioning library. */
+  SecretsProvisioningLibrary: "SecretsProvisioningLibrary",
+}
+
+/**
+ * Describes a component involved in secrets provisioning.
+ */
+@added(Versions.v2026_03_03)
+model SecretsProvisioningComponent {
+  /**
+   * The name of the component.
+   */
+  name?: SecretsProvisioningComponentName;
+
+  /**
+   * The version of the component.
+   */
+  version?: string;
+}
+
+/**
+ * Describes the secrets provisioning settings for a gallery image version.
+ */
+@added(Versions.v2026_03_03)
+model SecretsProvisioningSettings {
+  /**
+   * Specifies whether the image version supports secrets provisioning.
+   */
+  isSupported?: boolean;
+
+  /**
+   * The name of the operating system (e.g., "mariner").
+   */
+  osName?: string;
+
+  /**
+   * The list of component versions involved in secrets provisioning.
+   */
+  @identifiers(#["name"])
+  components?: SecretsProvisioningComponent[];
+}
+
+/**
  * Describes the properties of a gallery image version.
  */
 model GalleryImageVersionProperties {
@@ -894,6 +1028,14 @@ model GalleryImageVersionProperties {
    */
   @visibility(Lifecycle.Read)
   validationsProfile?: ValidationsProfile;
+
+  /**
+   * The image metadata profiles associated with the gallery image version.
+   */
+  @added(Versions.v2026_03_03)
+  @visibility(Lifecycle.Read)
+  @identifiers(#["type"])
+  imageMetadataProfiles?: ImageMetadataProfile[];
 }
 
 /**
@@ -1038,6 +1180,22 @@ model OSDiskImageSecurityProfile {
 }
 
 /**
+ * Contains security profile for a DataDisk image.
+ */
+@added(Versions.v2026_03_03)
+model DataDiskImageSecurityProfile {
+  /**
+   * confidential VM encryption types
+   */
+  confidentialVMEncryptionType?: ConfidentialVMEncryptionType;
+
+  /**
+   * secure VM disk encryption set id
+   */
+  secureVMDiskEncryptionSetId?: string;
+}
+
+/**
  * This is the disk image encryption base class.
  */
 model DiskImageEncryption {
@@ -1052,6 +1210,12 @@ model DiskImageEncryption {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model DataDiskImageEncryption extends DiskImageEncryption {
+  /**
+   * This property specifies the security profile of a data disk image.
+   */
+  @added(Versions.v2026_03_03)
+  securityProfile?: DataDiskImageSecurityProfile;
+
   /**
    * This property specifies the logical unit number of the data disk. This value is used to identify data disks within the Virtual Machine and therefore must be unique for each data disk attached to the Virtual Machine.
    */
@@ -1321,6 +1485,12 @@ model ImageVersionSecurityProfile {
    * Contains UEFI settings for the image version.
    */
   uefiSettings?: GalleryImageVersionUefiSettings;
+
+  /**
+   * Specifies the secrets provisioning settings for the gallery image version. Used on create or update to configure secrets provisioning.
+   */
+  @added(Versions.v2026_03_03)
+  secretsProvisioningSettings?: SecretsProvisioningSettings;
 }
 
 /**
@@ -1783,6 +1953,20 @@ model GallerySoftDeletedResourceProperties {
    * The timestamp for when the resource is soft-deleted. In dateTime offset format.
    */
   softDeletedTime?: string;
+
+  /**
+   * The timestamp after which a soft-deleted gallery image version is no longer consumable for VM/VMSS creation or VMSS scale out. It is calculated from the soft-deleted time plus the retention period. In dateTime offset format.
+   */
+  @added(Versions.v2026_03_03)
+  @visibility(Lifecycle.Read)
+  consumptionEndTime?: utcDateTime;
+
+  /**
+   * The timestamp at which a soft-deleted gallery image version is permanently (hard) deleted and can no longer be recovered. In dateTime offset format.
+   */
+  @added(Versions.v2026_03_03)
+  @visibility(Lifecycle.Read)
+  hardDeletionTargetTime?: utcDateTime;
 }
 
 /**
@@ -2375,6 +2559,24 @@ model SharedGalleryImageVersionList
 @@identifiers(SharedGalleryImageVersionList.value, #[]);
 
 /**
+ * The state of a gallery image version, derived from its soft-delete status.
+ */
+@added(Versions.v2026_03_03)
+union GalleryImageVersionState {
+  string,
+
+  /**
+   * The gallery image version is active and available for use.
+   */
+  Active: "Active",
+
+  /**
+   * The gallery image version has been soft-deleted. It is available for use only when a specific version is requested, and it will not be resolved as the latest version.
+   */
+  SoftDeleted: "SoftDeleted",
+}
+
+/**
  * Describes the properties of a gallery image version.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -2406,6 +2608,20 @@ model SharedGalleryImageVersionProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   artifactTags?: Record<string>;
+
+  /**
+   * The timestamp after which a soft-deleted gallery image version is no longer consumable for VM/VMSS creation or VMSS scale out. It is calculated from the soft-deleted time plus the retention period, and is not present for active gallery image versions. In dateTime offset format.
+   */
+  @added(Versions.v2026_03_03)
+  @visibility(Lifecycle.Read)
+  consumptionEndTime?: utcDateTime;
+
+  /**
+   * The state of the gallery image version, derived from its soft-delete status.
+   */
+  @added(Versions.v2026_03_03)
+  @visibility(Lifecycle.Read)
+  imageState?: GalleryImageVersionState;
 }
 
 /**
@@ -2686,6 +2902,20 @@ model CommunityGalleryImageVersionProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   artifactTags?: Record<string>;
+
+  /**
+   * The timestamp after which a soft-deleted gallery image version is no longer consumable for VM/VMSS creation or VMSS scale out. It is calculated from the soft-deleted time plus the retention period, and is not present for active gallery image versions. In dateTime offset format.
+   */
+  @added(Versions.v2026_03_03)
+  @visibility(Lifecycle.Read)
+  consumptionEndTime?: utcDateTime;
+
+  /**
+   * The state of the gallery image version, derived from its soft-delete status.
+   */
+  @added(Versions.v2026_03_03)
+  @visibility(Lifecycle.Read)
+  imageState?: GalleryImageVersionState;
 }
 
 /**

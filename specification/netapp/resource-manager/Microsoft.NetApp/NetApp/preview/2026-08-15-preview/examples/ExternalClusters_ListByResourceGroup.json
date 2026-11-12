@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contosoNetAppRg",
+    "api-version": "2026-08-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalClusters/contoso-external-cluster",
+            "name": "contoso-external-cluster",
+            "type": "Microsoft.NetApp/externalClusters",
+            "location": "eastus",
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contosoIdentity1": {
+                  "principalId": "00000000-0000-0000-0000-000000000000",
+                  "clientId": "00000000-0000-0000-0000-000000000000"
+                }
+              }
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "interclusterLifsIpAddresses": [
+                "10.0.1.100",
+                "10.0.1.101"
+              ],
+              "clusterPeerPassphraseKeyVault": {
+                "keyVaultUri": "https://contoso-vault.vault.azure.net/",
+                "secretName": "cluster-passphrase",
+                "userAssignedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contosoIdentity1"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalClusters/external-cluster-2",
+            "name": "external-cluster-2",
+            "type": "Microsoft.NetApp/externalClusters",
+            "location": "westus",
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity2": {
+                  "principalId": "00000000-0000-0000-0000-000000000000",
+                  "clientId": "00000000-0000-0000-0000-000000000000"
+                }
+              }
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "interclusterLifsIpAddresses": [
+                "10.0.2.100"
+              ],
+              "clusterPeerPassphraseKeyVault": {
+                "keyVaultUri": "https://contoso-vault2.vault.azure.net/",
+                "secretName": "cluster-passphrase",
+                "userAssignedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity2"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ExternalClusters_ListByResourceGroup",
+  "title": "ExternalClusters_ListByResourceGroup"
+}

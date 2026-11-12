@@ -13,13 +13,16 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
 - [Table of Contents](#table-of-contents)
 - [Prerequisites](#prerequisites)
 - [Checks troubleshooting guides](#checks-troubleshooting-guides)
+  - [Transient fetch failures](#transient-fetch-failures)
+  - [`Format`](#format)
   - [`CredScan`](#credscan)
   - [`PoliCheck`](#policheck)
+  - [`Protected Files`](#protected-files)
   - [`SDK Validation *` checks, like `SDK Validation - Go`](#sdk-validation--checks-like-sdk-validation---go)
-  - [`SDK Breaking Change Review`](#sdk-breaking-change-review)
+  - [`SDK Breaking Change Mitigation and Review`](#sdk-breaking-change-mitigation-and-review)
   - [`Swagger APIView`](#swagger-apiview)
     - [If an expected APIView was not generated, follow the step below to troubleshoot.](#if-an-expected-apiview-was-not-generated-follow-the-step-below-to-troubleshoot)
-    - [Diagnosing APIView failure for SDK Language (not Swagger or TypeSpec)](#diagnosing-apiview-failure-for-sdk-language-not-swagger-or-typespec)
+    - [Diagnosing APIView failure for SDK Language (not Swagger)](#diagnosing-apiview-failure-for-sdk-language-not-swagger)
   - [`Swagger ApiDocPreview`](#swagger-apidocpreview)
   - [`Swagger Avocado`](#swagger-avocado)
   - [`Swagger BreakingChange` and `BreakingChange(Cross-Version)`](#swagger-breakingchange-and-breakingchangecross-version)
@@ -44,6 +47,39 @@ Most guides here require for you to have `npm` installed, which you can get by i
 
 # Checks troubleshooting guides
 
+## Transient fetch failures
+
+If a PR pipeline fails with a fetch-related error and the logs do not identify
+an actionable problem in the submitted changes, retry the failed run once
+before starting a deeper specification or pipeline investigation.
+For example, the CI run reported the following annotation:
+
+```
+Unhandled error: HttpError: fetch failed
+```
+
+This message indicates that a fetch operation failed, but does not by itself 
+identify the cause or establish that the submitted specification caused the failure.
+
+If the retry succeeds, ensure all required CI checks pass before requesting or
+re-requesting review. If the same fetch-related failure occurs again,
+investigate it as a persistent CI or repository issue. This guidance applies
+only to fetch-related errors without an actionable diagnostic and is not a
+general retry policy for all CI failures.
+
+## `Format`
+
+This check covers repository tooling in `.github` and `eng/tools`. To reproduce
+and fix a formatting failure, run from the repository root:
+
+``` powershell
+pnpm install
+pnpm format:check
+pnpm format
+```
+
+Tooling formatting uses Oxfmt and excludes Swagger JSON.
+
 ## `CredScan`
 
 This check is owned by One Engineering System. See [1ES CredScan] for help.
@@ -51,6 +87,30 @@ This check is owned by One Engineering System. See [1ES CredScan] for help.
 ## `PoliCheck`
 
 This check is owned by One Engineering System. See [1ES PoliCheck] for help.
+
+## `Protected Files`
+
+Only allowlisted repository maintainers and trusted automation accounts may change
+files outside `specification/`, except for the CODEOWNERS and skill exemptions below.
+This includes root files, documentation, tooling, and files in newly added directories.
+If you are not allowlisted, remove
+the changes listed in the check's errors from your PR, including any deletions or
+renames. If a tooling change is needed, open an issue for the repository maintainers.
+
+This restriction also applies to maintenance-only PRs that do not change
+`specification/`. Approvals, labels or reruns by maintainers do not authorize a
+non-allowlisted PR author. The allowlist is maintained in
+[`ALLOWED_AUTHORS`](../.github/workflows/src/protected-files.ts).
+Dependabot (`dependabot[bot]`) is a trusted automation author and may update protected files.
+Normal CODEOWNERS reviews and other merge requirements still apply, including
+to changes to the allowlist.
+
+Files under `eng/common/` and `.github/skills/azsdk-common-*` are synchronized from
+[Azure/azure-sdk-tools](https://github.com/Azure/azure-sdk-tools). Make changes in
+that repository rather than editing the synchronized copies here.
+
+`.github/CODEOWNERS` and non-synchronized `.github/skills/` files are exempt from
+this check. Their normal code-owner review requirements still apply.
 
 ## `SDK Validation *` checks, like `SDK Validation - Go`
 
@@ -69,7 +129,7 @@ If you have an issue or with any of checks listed in the first column of the tab
 |-----------------------------------|----------------| ------------------------------------------------------------- |
 | `SDK Validation - Go`            | Chenjie Shi     | [tadelesh](https://github.com/tadelesh)                       |
 | `SDK Validation - Java`          | Weidong Xu      | [weidongxu-microsoft](https://github.com/weidongxu-microsoft) |
-| `SDK Validation - JS`            | Qiaoqiao Zhang  | [qiaozha](https://github.com/qiaozha)                         |
+| `SDK Validation - JS`            | Jialin Huang    | [JialinHuang803](https://github.com/JialinHuang803)           |
 | `SDK Validation - .NET`          | Wei Hu          | [live1206](https://github.com/live1206)                       |
 | `SDK Validation - Python`        | Yuchao Yan      | [msyyc](https://github.com/msyyc)                             |
 
@@ -82,36 +142,44 @@ Do the following:
 2. If your investigation denotes this is likely a bug in the check itself and not your PR, reach out
   to the owner of the check per the aforementioned table.
 
-## `SDK Breaking Change Review`
+## `SDK Breaking Change Mitigation and Review`
 
 > [!IMPORTANT]
 >
-> - If your PR is flagged with any label that matches the pattern `BreakingChange-{Language}-Sdk`, the SDK breaking
-     changes will be reviewed by SDK reviewers around two business days after the completion of the first two review steps
-     in PR review workflow, i.e. REST API breaking change review and ARM review.
-> - If you need to suppress the SDK breaking changes, refer to [SDK Suppressions](https://aka.ms/azsdk/sdk-suppression).
+> If your PR has a label matching `BreakingChange-{Language}-Sdk`, complete these steps in
+> order:
+>
+> 1. **Mitigate the breaking changes.** The PR owner must follow the
+>    [SDK mitigation process](../.github/workflows/src/sdk-breaking-change/SDK-BREAKING-CHANGE-PROCESS.md#mitigation)
+>    and resolve each breaking change that can be mitigated.
+> 2. **Suppress accepted breaking changes.** If a breaking change is intentional and cannot be
+>    mitigated, follow the [SDK suppression process](https://aka.ms/azsdk/sdk-suppression).
+> 3. **Wait for SDK review.** After mitigation is complete, SDK reviewers review the remaining
+>    accepted breaking changes. This review typically occurs within two business days after the
+>    REST API breaking change review and ARM review are complete.
 
-If the SDK breaking changes haven't been reviewed after two additional business days, you may reach out to the reviewers:
+If the SDK breaking changes have not been reviewed within that period, contact the appropriate
+reviewer:
 
 | Language        | Reviewer        | GitHub login                                                  |
 |-----------------|-----------------| ------------------------------------------------------------- |
 | `Go`            | Chenjie Shi     | [tadelesh](https://github.com/tadelesh)                       |
-| `JS`            | Qiaoqiao Zhang  | [qiaozha](https://github.com/qiaozha)                         |
+| `JS`            | Jialin Huang    | [JialinHuang803](https://github.com/JialinHuang803)           |
 | `Python`        | Yuchao Yan      | [msyyc](https://github.com/msyyc)                             |
 
 ## `Swagger APIView`
 
-Various APIViews are generated as part of the Azure REST API specs PR build. Among these are TypeSpec and Swagger as well as any other language that is being generated in the run. When everything is successful you should see a comment box similar to the picture below showing the APIViews generated for TypeSpec or Swagger, plus all other languages being generated.
+Swagger and SDK language APIViews are generated as part of the Azure REST API specs PR build. When everything is successful you should see a comment box similar to the picture below showing the generated APIViews.
 
 ![alt text](image-3.png)
 
 ### If an expected APIView was not generated, follow the step below to troubleshoot.
 
 - On the CI check click on `details` > `View Azure DevOps build log for more details` to view the devOps logs.
-- Investigate the CI job for the language with error. TypeSpec and Swagger APIViews are generated as part of the `AzureRestApiSpecsPipeline` stage in the `TypeSpecAPIView` and `SwaggerAPIView` jobs respectively, while APIViews for other SDK languages are generated in their respective language jobs in the `SDK Automation` stage.
+- Investigate the CI job for the language with error. Swagger APIViews are generated in the `SwaggerAPIView` job, while APIViews for SDK languages are generated in their respective language jobs in the `SDK Automation` stage.
 - Ensure that all previous checks in the job are green before proceeding.
 
-### Diagnosing APIView failure for SDK Language (not Swagger or TypeSpec)
+### Diagnosing APIView failure for SDK Language (not Swagger)
 
 1. Check for an unexpected skip of the `Publish SDK APIView Artifact to Pipeline Artifacts` and `Generate SDK APIView` step.
 2. Look in `SDK Automation` step to verify that the API token generation completed successfully.
@@ -132,7 +200,7 @@ Refer to [troubleshooting REST API documentation](https://eng.ms/docs/products/a
 
 ## `Swagger Avocado`
 
-Moved to https://github.com/Azure/azure-rest-api-specs/wiki/Swagger-Avocado
+See the [Swagger Avocado guide](./validation/swagger-avocado.md).
 
 ## `Swagger BreakingChange` and `BreakingChange(Cross-Version)`
 
@@ -162,7 +230,7 @@ To reproduce LintDiff failures locally, see [CONTRIBUTING.md / How to locally re
 
 ## `Swagger LintDiff` for TypeSpec: troubleshooting guides
 
-https://github.com/Azure/azure-rest-api-specs/wiki/Swagger-LintDiff-for-TypeSpec
+See [Swagger LintDiff for TypeSpec](./validation/swagger-lintdiff.md#typespec).
 
 ## `Swagger ModelValidation`
 
@@ -191,13 +259,13 @@ cd <local_repo_clone_root>
 cd specification/contosowidgetmanager
 
 # Install the dependencies to the local 'node_modules' folder.
-npm install
+pnpm install
 
 # Run 'prettier --check' to verify the problems can be reproduced locally
-npx prettier --check **/*.json
+pnpm prettier --check **/*.json
 
 # Run 'prettier --write' to fix the problems.
-npx prettier --write **/*.json
+pnpm prettier --write **/*.json
 ```
 
 Then please commit and push changes made by prettier.
@@ -254,23 +322,27 @@ For more information see [cspell configuration](https://cspell.org/configuration
 
 ## `TypeSpec Validation`
 
-https://github.com/Azure/azure-rest-api-specs/wiki/TypeSpec-Validation
+For failed batch validation, run the `pnpm install` and per-project `pnpm tsv`
+commands from the final failure summary at the repository root. In GitHub Actions,
+each failed project's error annotation also includes these reproduction instructions.
+
+See the [TypeSpec validation guide](./validation/typespec-validation.md).
 
 ## `TypeSpec Suppressions`
 
-> [!NOTE]
->
-> This check is currently in **testing mode and is non-blocking** — it surfaces
-> information and inline warnings but does not currently prevent your PR from
-> merging. It is distinct from the AutoRest/`suppressions.yaml` flow described in
-> [Suppression Process](#suppression-process) below.
-
 This check detects **new or changed TypeSpec lint suppressions** introduced by
-your PR and surfaces them for review. It analyzes two kinds of suppressions in
-the TypeSpec projects impacted by your changes:
+your PR and requires them to be removed or approved before the PR can merge. It
+is distinct from the AutoRest/`suppressions.yaml` flow described in
+[Suppression Process](#suppression-process) below. It analyzes two kinds of
+suppressions in the TypeSpec projects impacted by your changes:
 
 - **Inline suppressions**: `#suppress` directives in `.tsp` files.
 - **Config suppressions**: `linter.disable` entries in `tspconfig.yaml`.
+
+Only suppressions for rules listed in
+[`check-rules.json`](https://github.com/Azure/azure-rest-api-specs/blob/main/eng/tools/typespec-suppressions/check-rules.json)
+count toward review/gating; suppressions for other rules are still detected and
+reported for visibility but do not block the check.
 
 The check runs as the following workflows (mirroring the three-run structure used
 by other validations in this repo):
@@ -278,14 +350,14 @@ by other validations in this repo):
 | Check name | Purpose |
 |------------|---------|
 | `TypeSpec Suppressions - Analyze Code` | Computes the impacted TypeSpec folders, runs the analyzer, writes the markdown summary + a JSON report artifact (`typespec-suppressions-report`), and emits inline `::warning` annotations anchored to each suppression on the PR diff. |
-| `TypeSpec Suppressions - Set Status` | Reports the check status; approval is granted by applying the `Approved-TypeSpecSuppression` label. |
+| `TypeSpec Suppressions - Set Status` | Reports the check status; approval is granted by applying the `typespec-suppressions-approved` label. |
 | `TypeSpec Suppressions - Test` | Runs the analyzer tool's own test suite. |
 
 ### Where to see the results
 
-- A **"TypeSpec suppressions requiring review"** comment is surfaced on the
-  PR , listing the new/changed suppressions with
-  their rule, source location, and justification.
+- A **"TypeSpec suppressions requiring review"** comment is surfaced on the PR,
+  listing the new/changed suppressions with their rule, source location, and
+  justification.
 - **Inline `::warning` annotations** appear on the PR diff at each suppression's
   source location.
 - The full structured report is uploaded as the `typespec-suppressions-report`
@@ -307,7 +379,10 @@ suppression, prefer fixing the underlying issue:
    string explaining why the rule cannot be satisfied; suppressions with no
    justification are flagged.
 3. **If the suppression is legitimate and requires approval**, ask the
-   appropriate reviewer to apply the `Approved-TypeSpecSuppression` label.
+   appropriate reviewer (ARM spec PRs: only the ARM reviewer can apply the
+   label) to apply the `typespec-suppressions-approved` label. The
+   `TypeSpec Suppressions` check remains blocking until the suppression is
+   resolved or the label is applied.
 
 ### Reproduce locally
 
@@ -316,7 +391,7 @@ The check is powered by the `@azure-tools/typespec-suppressions` CLI. See
 for usage. For example, to compare your branch against `main`:
 
 ``` powershell
-npx typespec-suppressions --base origin/main <path-to-typespec-project-folder>
+npx typespec-suppressions --base origin/main --check-rules-file eng/tools/typespec-suppressions/check-rules.json --fail-on-approval <path-to-typespec-project-folder>
 ```
 
 ## `license/cla`
@@ -332,7 +407,7 @@ Refer to the [suppression guide](https://aka.ms/pr-suppressions) for detailed gu
 This process (backed by `suppressions.yaml` files and the `Approved-Suppression` label) applies to
 most validation checks. It is separate from TypeSpec *lint* suppressions (`#suppress` directives and
 `tspconfig.yaml` `linter.disable` entries), which are surfaced by the
-[`TypeSpec Suppressions`](#typespec-suppressions) check and approved via the `Approved-TypeSpecSuppression`
+[`TypeSpec Suppressions`](#typespec-suppressions) check and approved via the `typespec-suppressions-approved`
 label.
 
 # Checks not covered by this guide

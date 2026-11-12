@@ -1,0 +1,76 @@
+{
+  "title": "Create or replace a Group of devices",
+  "operationId": "Groups_CreateOrReplace",
+  "description": "Create or replace a group.",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "my-namespace-3",
+    "groupName": "my-group-1",
+    "resource": {
+      "location": "West Europe",
+      "tags": {
+        "environment": "production"
+      },
+      "properties": {
+        "description": "This group contains all temperature sensors in building 1",
+        "displayName": "Building 1 Temperature Sensors",
+        "groupType": "RegistryDevice",
+        "queryFilter": "where properties.attributes.deviceType == 'sensor' and properties.attributes.sensorType == 'temperature'"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/my-namespace-3/groups/my-group-1",
+        "name": "my-group-1",
+        "type": "Microsoft.DeviceRegistry/namespaces/groups",
+        "location": "West Europe",
+        "tags": {
+          "environment": "production"
+        },
+        "systemData": {
+          "createdBy": "00003442-0000-0000-0000-494059220000",
+          "createdByType": "Application",
+          "createdAt": "2026-01-15T10:30:00Z",
+          "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-03-20T14:45:00Z"
+        },
+        "properties": {
+          "uuid": "cfbef47a-6971-4c90-a7a9-99be82dea167",
+          "description": "This group contains all temperature sensors in building 1",
+          "displayName": "Building 1 Temperature Sensors",
+          "groupType": "RegistryDevice",
+          "queryFilter": "where properties.attributes.deviceType == 'sensor' and properties.attributes.sensorType == 'temperature'",
+          "membershipState": "Ready",
+          "lastMembershipRefreshTime": "2024-10-01T00:36:43.2516899Z",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/my-namespace-3/groups/my-group-1",
+        "name": "my-group-1",
+        "type": "Microsoft.DeviceRegistry/namespaces/groups",
+        "location": "West Europe",
+        "systemData": {
+          "createdBy": "00003442-0000-0000-0000-494059220000",
+          "createdByType": "Application",
+          "createdAt": "2026-01-15T10:30:00Z",
+          "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-03-20T14:45:00Z"
+        },
+        "properties": {
+          "provisioningState": "Accepted",
+          "groupType": "RegistryDevice",
+          "queryFilter": "properties.manufacturer = 'Contoso'"
+        }
+      }
+    }
+  }
+}

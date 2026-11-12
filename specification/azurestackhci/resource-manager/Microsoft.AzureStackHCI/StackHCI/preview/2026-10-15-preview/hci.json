@@ -3273,6 +3273,9 @@
           "ClusterJobs_Get_AddServerJob": {
             "$ref": "./examples/ClusterJobs_Get_AddServerJob.json"
           },
+          "ClusterJobs_Get_ConfigureArcGatewayJob": {
+            "$ref": "./examples/ClusterJobs_Get_ConfigureArcGatewayJob.json"
+          },
           "ClusterJobs_Get_ConfigureLocalAvailabilityZone": {
             "$ref": "./examples/ClusterJobs_Get_ConfigureLocalAvailabilityZoneJob.json"
           },
@@ -3371,6 +3374,9 @@
         "x-ms-examples": {
           "ClusterJobs_CreateOrUpdate_AddServerJob": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_AddServer.json"
+          },
+          "ClusterJobs_CreateOrUpdate_ConfigureArcGatewayJob": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureArcGateway.json"
           },
           "ClusterJobs_CreateOrUpdate_ConfigureCVMJob": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureCVM.json"
@@ -9948,6 +9954,62 @@
       },
       "readOnly": true
     },
+    "ArcGatewayProperties": {
+      "type": "object",
+      "description": "Azure Arc Gateway properties of the cluster.",
+      "properties": {
+        "arcGatewayStatus": {
+          "type": "string",
+          "description": "Status of the Azure Arc Gateway on the cluster.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ArcGatewayStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Azure Arc Gateway is enabled on the cluster."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Azure Arc Gateway is disabled on the cluster."
+              }
+            ]
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ArcGatewayStatus": {
+      "type": "string",
+      "description": "Status of the Azure Arc Gateway on the cluster.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ArcGatewayStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Azure Arc Gateway is enabled on the cluster."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Azure Arc Gateway is disabled on the cluster."
+          }
+        ]
+      }
+    },
     "ArcIdentityResponse": {
       "type": "object",
       "description": "ArcIdentity details.",
@@ -10979,6 +11041,11 @@
         "sdnProperties": {
           "$ref": "#/definitions/ClusterSdnProperties",
           "description": "Software Defined Networking Properties of the cluster",
+          "readOnly": true
+        },
+        "arcGatewayProperties": {
+          "$ref": "#/definitions/ArcGatewayProperties",
+          "description": "Azure Arc Gateway properties of the cluster.",
           "readOnly": true
         },
         "localAvailabilityZones": {
@@ -17038,6 +17105,16 @@
       ],
       "x-ms-discriminator-value": "CollectLog"
     },
+    "HciConfigureArcGatewayJobProperties": {
+      "type": "object",
+      "description": "Properties for configuring Arc Gateway for a cluster.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ConfigureArcGateway"
+    },
     "HciConfigureCvmJobProperties": {
       "type": "object",
       "description": "Defines the customer's intent for updating confidential VM properties",
@@ -17508,6 +17585,7 @@
       "enum": [
         "AddServer",
         "RepairServer",
+        "ConfigureArcGateway",
         "GpuCreatePartition",
         "GpuSwitchMode",
         "ConfigureCVM",
@@ -17529,6 +17607,11 @@
             "name": "RepairServer",
             "value": "RepairServer",
             "description": "Job to repair a server in the cluster."
+          },
+          {
+            "name": "ConfigureArcGateway",
+            "value": "ConfigureArcGateway",
+            "description": "Job to configure Arc Gateway for the cluster."
           },
           {
             "name": "GpuCreatePartition",

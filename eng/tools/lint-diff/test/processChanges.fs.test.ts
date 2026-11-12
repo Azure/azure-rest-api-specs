@@ -23,7 +23,7 @@ describe("readFileList", () => {
     const files = {
       "./test1.txt": "line1\nline2",
     };
-    vol.fromJSON(files, ".");
+    vol.fromJSON(files);
 
     const fileList = await readFileList("./test1.txt");
     expect(fileList).toEqual(["line1", "line2"]);
@@ -33,7 +33,7 @@ describe("readFileList", () => {
     const files = {
       "./test.txt": "",
     };
-    vol.fromJSON(files, ".");
+    vol.fromJSON(files);
 
     const fileList = await readFileList("./test.txt");
     expect(fileList).toEqual([]);

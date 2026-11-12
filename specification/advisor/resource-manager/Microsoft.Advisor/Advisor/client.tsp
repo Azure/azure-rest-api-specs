@@ -22,6 +22,9 @@ using Microsoft.Advisor;
   ResourceRecommendationBases.patch::parameters.properties,
   "trackedProperties"
 );
+@@clientName(ServiceGroupRecommendations.get, "getByServiceGroup");
+@@clientName(ServiceGroupRecommendations.list, "listByServiceGroup");
+@@clientName(ServiceGroupRecommendations.update, "updateByServiceGroup");
 @@clientName(
   SuppressionContracts.create::parameters.resource,
   "suppressionContract"
@@ -59,6 +62,7 @@ using Microsoft.Advisor;
 @@clientName(Microsoft.Advisor.CpuThreshold.`20`, "TWENTY", "python");
 
 @@scope(ResourceRecommendationBases.list, "!csharp");
+@@scope(ResourceRecommendationBases.listWithMode, "!csharp");
 @@scope(Operations.list, "!csharp");
 @@clientName(PredictionResponse, "AdvisorPredictionResult", "csharp");
 @@clientName(
@@ -171,6 +175,11 @@ using Microsoft.Advisor;
 @@clientName(SuppressionContract, "AdvisorSuppressionContract", "csharp");
 @@clientName(SuppressionProperties, "AdvisorSuppressionProperties", "csharp");
 @@clientName(SuppressionProperties.expirationTimeStamp, "ExpireOn", "csharp");
+@@clientName(
+  SuppressionProperties.expirationTimeStamp,
+  "expirationTimestamp",
+  "java"
+);
 @@clientName(TriageRecommendation, "AdvisorTriageRecommendation", "csharp");
 @@clientName(
   TriageRecommendationProperties,
