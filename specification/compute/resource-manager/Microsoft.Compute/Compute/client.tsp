@@ -1778,6 +1778,27 @@ union PassName {
 @@alternateType(PassNames, PassName, "csharp");
 
 // ════════════════════════════════════════════════════════════════════════════
+@@clientName(VirtualMachineSizeTypes.Standard_A2m_v2, "STANDARD_A2_M_V2", "python");
+@@clientName(VirtualMachineSizeTypes.Standard_A4m_v2, "STANDARD_A4_M_V2", "python");
+@@clientName(VirtualMachineSizeTypes.Standard_A8m_v2, "STANDARD_A8_M_V2", "python");
+@@clientName(VirtualMachineSizeTypes.Standard_B1s, "STANDARD_B1_S", "python");
+@@clientName(VirtualMachineSizeTypes.Standard_B2s, "STANDARD_B2_S", "python");
+@@clientName(VirtualMachineSizeTypes.Standard_D2s_v3, "STANDARD_D2_S_V3", "python");
+@@clientName(VirtualMachineSizeTypes.Standard_D4s_v3, "STANDARD_D4_S_V3", "python");
+@@clientName(VirtualMachineSizeTypes.Standard_D8s_v3, "STANDARD_D8_S_V3", "python");
+@@clientName(VirtualMachineSizeTypes.Standard_E2s_v3, "STANDARD_E2_S_V3", "python");
+@@clientName(VirtualMachineSizeTypes.Standard_E4s_v3, "STANDARD_E4_S_V3", "python");
+@@clientName(VirtualMachineSizeTypes.Standard_E8s_v3, "STANDARD_E8_S_V3", "python");
+@@clientName(VirtualMachineSizeTypes.Standard_F1s, "STANDARD_F1_S", "python");
+@@clientName(VirtualMachineSizeTypes.Standard_F2s, "STANDARD_F2_S", "python");
+@@clientName(VirtualMachineSizeTypes.Standard_F2s_v2, "STANDARD_F2_S_V2", "python");
+@@clientName(VirtualMachineSizeTypes.Standard_F4s, "STANDARD_F4_S", "python");
+@@clientName(VirtualMachineSizeTypes.Standard_F4s_v2, "STANDARD_F4_S_V2", "python");
+@@clientName(VirtualMachineSizeTypes.Standard_F8s, "STANDARD_F8_S", "python");
+@@clientName(VirtualMachineSizeTypes.Standard_F8s_v2, "STANDARD_F8_S_V2", "python");
+@@clientName(VirtualMachineSizeTypes.Standard_H8m, "STANDARD_H8_M", "python");
+@@clientName(VirtualMachineSizeTypes.Standard_L4s, "STANDARD_L4_S", "python");
+@@clientName(VirtualMachineSizeTypes.Standard_L8s, "STANDARD_L8_S", "python");
 // region: Compute — VirtualMachineSizeType member casing (csharp)
 // The generator lowercases size suffixes (s, m, r) differently from old SDK.
 // ════════════════════════════════════════════════════════════════════════════
