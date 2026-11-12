@@ -185,7 +185,7 @@ using TypeSpec.Versioning;
 @@Legacy.flattenProperty(ExpressRouteLink.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(InboundNatPool.properties);
+@@Legacy.flattenProperty(InboundNatPool.properties, "!csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(
@@ -1094,7 +1094,7 @@ using TypeSpec.Versioning;
 @@clientLocation(LoadBalancingRules.list, "LoadBalancerLoadBalancingRules");
 @@clientLocation(LoadBalancingRules.health, "LoadBalancerLoadBalancingRules");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(LoadBalancingRule.properties);
+@@Legacy.flattenProperty(LoadBalancingRule.properties, "!csharp");
 
 @@clientLocation(Probes.get, "LoadBalancerProbes");
 @@clientLocation(Probes.list, "LoadBalancerProbes");

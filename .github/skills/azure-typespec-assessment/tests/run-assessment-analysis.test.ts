@@ -727,6 +727,58 @@ void test("model input retains downstream method and bridge path facts", () => {
   );
 });
 
+void test("model input retains downstream identity blocker facts", () => {
+  const facts = Object.fromEntries(
+    ["baseline", "target"].map((comparisonRole) => [
+      `sdk-${comparisonRole}`,
+      {
+        id: `sdk-${comparisonRole}`,
+        projectId: "p",
+        comparisonRole,
+        factKind: "model",
+        identity: "model:Encryption",
+        name: "Encryption",
+      },
+    ]),
+  );
+  const input = buildModelInputFromFixture({
+    manifest: {
+      comparison: {
+        mergeBaseCommit: "base",
+        headCommit: "head",
+        baseRef: "origin/main",
+        workingTree: {},
+      },
+      projects: [{ id: "p", path: "specification/widget" }],
+      blockers: [],
+    },
+    sourceIndex: { sourceChanges: [] },
+    semantic: { status: "ready", facts: {}, reviewUnits: [], blockers: [] },
+    rest: { status: "ready", facts: {}, candidates: [], blockers: [] },
+    downstream: {
+      status: "ready",
+      facts,
+      candidates: [],
+      rootCauses: [],
+      blockers: [
+        {
+          code: "downstream-identity-unresolved",
+          message: "Canonical identity is unavailable.",
+          evidenceFactIds: ["sdk-baseline", "sdk-target"],
+        },
+      ],
+    },
+  });
+
+  assert.deepEqual(Object.keys(input.facts), ["sdk-baseline", "sdk-target"]);
+  const blocker = input.blockers[0];
+  assertObjectFixture(blocker);
+  assert.deepEqual((blocker as { evidenceFactIds?: string[] }).evidenceFactIds, [
+    "sdk-baseline",
+    "sdk-target",
+  ]);
+});
+
 void test("model input keeps unsupported unmapped decorators unknown", () => {
   const input = buildModelInputFromFixture({
     manifest: {

@@ -2,9 +2,10 @@ name: azure-typespec-author-eval
 description: Evaluation suite for azure-typespec-author.
 version: "1.0"
 type: capability # capability | regression
-area: "versioning"
+tags:
+  area: "versioning"
 # Root-level environment
-environment: azsdk-mcp
+agent_environment: azsdk-mcp
 # Execution configuration
 defaults:
   runs: 1 # Trials per stimulus
@@ -20,7 +21,7 @@ stimuli:
       mode: "trigger"
     prompt: |
       change the property age of EmployeeProperties from required to optional only for api version 2025-05-04-preview
-    environment: &shared_environment
+    agent_environment: &shared_environment
       files:
         - src: ../fixtures/001-share-version-new-feature/employee.tsp
           dest: employee.tsp
@@ -28,8 +29,8 @@ stimuli:
           dest: main.tsp
         - src: ../fixtures/Microsoft.Widget/Widget/package.json
           dest: package.json
-        - src: ../scripts/check-node-dependencies.js
-          dest: check-node-dependencies.js
+        - src: ../scripts/check-node-dependencies.ts
+          dest: check-node-dependencies.ts
         - src: ../fixtures/001-share-version-new-feature/readme.md
           dest: readme.md
         - src: ../fixtures/001-share-version-new-feature/shared.tsp
@@ -52,15 +53,15 @@ stimuli:
       mode: "forced"
     prompt: |
       @azure-typespec-author change the property age of EmployeeProperties from required to optional only for api version 2025-05-04-preview
-    environment: *shared_environment
+    agent_environment: *shared_environment
     graders:
       - type: "run-command"
         config:
-          command: "node check-node-dependencies.js node_modules"
+          command: "node check-node-dependencies.ts node_modules"
           expected_exit_code: 0
       - type: "run-command"
         config:
-          command: "node check-node-dependencies.js packages"
+          command: "node check-node-dependencies.ts packages"
           expected_exit_code: 0
       - type: "run-command"
         config:
@@ -73,13 +74,11 @@ stimuli:
           path: "main.tsp"
       - &file_matches_optional_property
         type: "file-matches"
-        name: "file-matches-optional-property"
         config:
           pattern: "@madeOptional"
           path: "employee.tsp"
       - &file_matches_api_version
         type: "file-matches"
-        name: "file-matches-api-version"
         config:
           pattern: "2025-05-04-preview|v2025_05_04_preview"
           path: "employee.tsp"
@@ -91,7 +90,7 @@ stimuli:
       suite: "versioning"
       mode: "no-skill"
     prompt: "change the property age of EmployeeProperties from required to optional only for api version 2025-05-04-preview"
-    environment: *shared_environment
+    agent_environment: *shared_environment
     rubric:
       - EmployeeProperties.age becomes optional starting in API version 2025-05-04-preview using valid TypeSpec versioning.
       - The property remains required in earlier API versions.

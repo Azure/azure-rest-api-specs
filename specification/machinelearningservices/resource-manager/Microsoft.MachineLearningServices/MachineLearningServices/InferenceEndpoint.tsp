@@ -141,6 +141,7 @@ interface InferenceEndpoints {
    * Update InferenceEndpoint (asynchronous).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Existing API uses custom patch envelope"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing update retains its request-body shape; preserve wire compatibility."
   @patch(#{ implicitOptionality: false })
   @summary("Update InferenceEndpoint (asynchronous).")
   update is InferenceEndpointOps.CustomPatchAsync<

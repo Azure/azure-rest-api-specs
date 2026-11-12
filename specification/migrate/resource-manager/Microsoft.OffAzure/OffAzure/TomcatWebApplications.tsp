@@ -35,6 +35,7 @@ interface TomcatWebApplicationsController {
   /**
    * Updates the Tomcat web application tags.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing update retains its request-body shape; preserve wire compatibility."
   @tag("TomcatWebApplicationsController")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchSync<

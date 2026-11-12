@@ -51,7 +51,7 @@ op getTransparencyConfigCbor is Foundations.Operation<
   CborServerErrors
 >;
 
-#suppress "@azure-tools/typespec-azure-core/response-schema-problem" "cannot assign error to directive to cbor binary responses"
+#suppress "@azure-tools/typespec-azure-core/response-schema-problem" "The rule checks response bodies, not @error wrappers, so it treats the CBOR bytes error body as a second success schema alongside the JSON response."
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
 @added(Versions.`2025-01-31-preview`)
 @removed(Versions.`2026-03-26`)
@@ -65,7 +65,7 @@ op getPublicKeys is Foundations.Operation<
   AnyCborError
 >;
 
-#suppress "@azure-tools/typespec-azure-core/response-schema-problem" "cannot assign error to directive to cbor binary responses"
+#suppress "@azure-tools/typespec-azure-core/response-schema-problem" "The rule checks response bodies, not @error wrappers, so it treats the CBOR bytes error body as a second success schema alongside the JSON response."
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "IETF SCITT/SCRAPI operation exchanges raw COSE/CBOR binary payloads and does not map to Azure.Core standard resource operations."
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserving canonical GetPublicKeys operationId across versions"
 @added(Versions.`2026-03-26`)
@@ -674,6 +674,7 @@ alias ConciseProblemDetailsCbor = bytes;
 
 @added(Versions.`2025-01-31-preview`)
 @doc("Validation error response")
+@error
 model Response400Cbor {
   @doc("Status code")
   @statusCode
@@ -690,6 +691,7 @@ model Response400Cbor {
 
 @added(Versions.`2026-03-26`)
 @doc("Unauthorized error response, returned when JWT authentication is required and the request fails authentication.")
+@error
 model Response401Cbor {
   @doc("Status code")
   @statusCode
@@ -706,6 +708,7 @@ model Response401Cbor {
 
 @added(Versions.`2025-01-31-preview`)
 @doc("Not found error response")
+@error
 model Response404Cbor {
   @doc("Status code")
   @statusCode
@@ -722,6 +725,7 @@ model Response404Cbor {
 
 @added(Versions.`2025-01-31-preview`)
 @doc("Not found error response")
+@error
 model Response429Cbor {
   @doc("Status code")
   @statusCode
@@ -742,6 +746,7 @@ model Response429Cbor {
 
 @added(Versions.`2025-01-31-preview`)
 @doc("Server error response")
+@error
 model Response500Cbor {
   @doc("Status code")
   @statusCode
@@ -758,6 +763,7 @@ model Response500Cbor {
 
 @added(Versions.`2025-01-31-preview`)
 @doc("Service unavailable error response")
+@error
 model Response503Cbor {
   @doc("Retry the same request after a suggested number of seconds")
   @header("Retry-After")

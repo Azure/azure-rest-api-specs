@@ -19,7 +19,7 @@ When presenting a plan or interim update, explain:
 
 Absence of an opt-out keeps the recommended default. Do not pause source
 authoring to ask the user to confirm the default. When the user opts out, do not
-invoke `azsdk-common-typespec-naming` or create or edit `client.tsp`.
+invoke `azure-typespec-sdk-naming` or create or edit `client.tsp`.
 
 Keep the source and client configuration plans visibly separate so the user can
 approve the source changes while declining the client configuration portion.
@@ -35,7 +35,7 @@ approve the source changes while declining the client configuration portion.
    facts only, use that evidence and leave project-dependent checks unverified;
    do not block recommendations for confirmed new, unshipped names on the
    absence of project files.
-3. Invoke `azsdk-common-typespec-naming` in guidance mode, then read its naming
+3. Invoke `azure-typespec-sdk-naming` in guidance mode, then read its naming
    dispatcher and matching profile references. Invocation alone is not naming
    analysis. Apply those rules to the proposed SDK names even when client
    configuration was included by default rather than explicitly requested.
@@ -44,12 +44,12 @@ approve the source changes while declining the client configuration portion.
    uncovered targets, and blockers. Preserve shipped SDK names, wire contracts,
    and other-language overrides.
 
-Naming-only requests route directly to `azsdk-common-typespec-naming`; they do
+Naming-only requests route directly to `azure-typespec-sdk-naming`; they do
 not need the full authoring workflow.
 
 ## Apply
 
-After authorization, invoke `azsdk-common-typespec-naming` in apply mode. Follow
+After authorization, invoke `azure-typespec-sdk-naming` in apply mode. Follow
 its scoped direct-edit workflow for SDK-only naming overrides, including its
 evidence, preservation and validation requirements. Do not call
 `azsdk_customized_code_update` for naming-only changes, even when available.

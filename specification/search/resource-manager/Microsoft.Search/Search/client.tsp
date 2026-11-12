@@ -493,6 +493,7 @@ op privateEndpointConnectionsUpdateCustomization(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
 @autoRoute
 @delete
 op privateEndpointConnectionsDeleteCustomization(
