@@ -218,19 +218,19 @@ interface Share {
 
       /** The provisioned IOPS for the share. */
       @header("x-ms-share-provisioned-iops")
-      @alternateType(int32, "go,java")
+      @alternateType(int32, "go")
       provisionedIops?: int64;
 
       /** The provisioned ingress for the share. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
       @header("x-ms-share-provisioned-ingress-mbps")
-      @alternateType(int32, "go,java")
+      @alternateType(int32, "go")
       provisionedIngressMBps?: int64;
 
       /** The provisioned egress for the share. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API. The casing is correct."
       @header("x-ms-share-provisioned-egress-mbps")
-      @alternateType(int32, "go,java")
+      @alternateType(int32, "go")
       provisionedEgressMBps?: int64;
 
       /** The next allowed quota downgrade time. */
@@ -241,7 +241,7 @@ interface Share {
       /** The share provisioned bandwidth in mebibytes per second. */
       @header("x-ms-share-provisioned-bandwidth-mibps")
       @clientName("ProvisionedBandwidthMiBps", "go")
-      @alternateType(int32, "go,java")
+      @alternateType(int32, "go")
       provisionedBandwidthMibps?: int64;
 
       ...LeaseResponseHeaders;
@@ -263,7 +263,7 @@ interface Share {
 
       /** The root squash mode for the share. */
       @header("x-ms-root-squash")
-      @alternateType(ShareRootSquash, "go,java")
+      @alternateType(ShareRootSquash, "go")
       rootSquash?: string;
 
       /** Whether snapshot virtual directory access is enabled. */

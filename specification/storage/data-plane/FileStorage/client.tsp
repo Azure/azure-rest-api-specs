@@ -798,3 +798,34 @@ namespace JavaResponseHeaderModels {
     "java"
   );
 }
+
+// java: the storage error body as the service returns it. The shared Error model only declares Code/Message and the
+// copy-source fields; the service also returns HeaderName/HeaderValue/QueryParameterName/QueryParameterValue/Reason/
+// ExtendedErrorDetail, which the Java SDK surfaces in exception messages (e.g. x-ms-version mismatches).
+/** The error response. */
+@error
+@mediaTypeHint("application/xml")
+@TypeSpec.Xml.name("Error")
+model ShareStorageError {
+  ...Storage.File.Error;
+
+  /** The name of the header that caused the error. */
+  @TypeSpec.Xml.name("HeaderName") headerName?: string;
+
+  /** The value of the header that caused the error. */
+  @TypeSpec.Xml.name("HeaderValue") headerValue?: string;
+
+  /** The name of the query parameter that caused the error. */
+  @TypeSpec.Xml.name("QueryParameterName") queryParameterName?: string;
+
+  /** The value of the query parameter that caused the error. */
+  @TypeSpec.Xml.name("QueryParameterValue") queryParameterValue?: string;
+
+  /** The reason for the error. */
+  @TypeSpec.Xml.name("Reason") reason?: string;
+
+  /** Additional error detail. */
+  @TypeSpec.Xml.name("ExtendedErrorDetail") extendedErrorDetail?: string;
+}
+
+@@alternateType(Storage.File.Error, ShareStorageError, "java");
