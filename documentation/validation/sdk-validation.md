@@ -12,6 +12,7 @@
 - [Common Error Fix Guidance](#common-error-fix-guidance)
  - [Import Resolution Errors](#import-resolution-errors)
    - [Error Pattern: `import-not-found`](#error-pattern-import-not-found)
+ - [Python SDK Validation: Unregistered PyPI Package Name](#python-sdk-validation-unregistered-pypi-package-name)
 - [.NET SDK Generation Error Fix Guidance](#net-sdk-generation-error-fix-guidance)
   - [How to Fix Naming Violations for Management Plane SDK](#how-to-fix-naming-violations-for-management-plane-sdk)
 
@@ -91,6 +92,15 @@ For detailed instructions, please refer to [Using the SDK Generation Pipelines](
 3. Add the path to the folder containing the imported `.tsp` files
 4. Ensure the path is relative to the `tspconfig.yaml` file location
 **Reference**: [Sample tspconfig.yaml](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml#L52)
+
+### Python SDK Validation: Unregistered PyPI Package Name
+
+If Python SDK validation fails because the declared package name is not registered on PyPI, first check the Python package name configured in the project's `tspconfig.yaml` or, for Swagger projects, `readme.python.md`.
+
+There is no normal PR suppression for this failure. If the project will ship a Python SDK, reserve or publish the declared package name on PyPI. If the project will not ship a Python SDK:
+
+1. Get approval from the Azure SDK team.
+2. After approval, remove the Python emitter and package configuration from the project's `tspconfig.yaml`. This prevents Python SDK validation from running and resolves the unregistered package-name error.
 
 ## .NET SDK Generation Error Fix Guidance
 
