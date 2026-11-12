@@ -72,6 +72,7 @@ extends:
           - template: /eng/common/pipelines/templates/jobs/eval-shard.yml@self
             parameters:
               vallyRoot: .github/skills
+              preEvalTemplate: /eng/pipelines/templates/steps/eval-model-setup.yml
               shardTimeoutInMinutes: 45
       - stage: Summary
         displayName: Summarize results

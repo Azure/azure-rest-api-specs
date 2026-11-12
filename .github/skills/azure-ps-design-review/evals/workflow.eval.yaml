@@ -33,7 +33,6 @@ tags:
 defaults:
   runs: 1
   timeout: "10m"
-  model: gpt-5.4
   executor: copilot-sdk
 
 scoring:
@@ -60,7 +59,7 @@ stimuli:
       - type: skill-invocation
         turn: 0
         config:
-          required: ["azure-ps-design-review"]
+          required: [ "azure-ps-design-review" ]
       - type: output-contains
         turn: 0
         config:
@@ -90,7 +89,7 @@ stimuli:
       - type: skill-invocation
         turn: 0
         config:
-          required: ["azure-ps-design-review"]
+          required: [ "azure-ps-design-review" ]
       - type: output-contains
         turn: 0
         config:
@@ -122,7 +121,7 @@ stimuli:
       - type: skill-invocation
         turn: 0
         config:
-          required: ["azure-ps-design-review"]
+          required: [ "azure-ps-design-review" ]
       # Never claim a filed/complete issue without ingesting the PR.
       - type: output-not-contains
         config:
