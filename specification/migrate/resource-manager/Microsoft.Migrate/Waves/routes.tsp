@@ -28,7 +28,9 @@ using OpenAPI;
 namespace Microsoft.Migrate;
 
 @doc("Long-running operation headers with status polling available from the August 2026 API version.")
-model WaveLroHeaders<FinalResult extends TypeSpec.Reflection.Model | unknown | void = void> {
+model WaveLroHeaders<
+  FinalResult extends TypeSpec.Reflection.Model | unknown | void = void
+> {
   ...ArmLroLocationHeader<FinalResult = FinalResult>;
   ...ArmAsyncOperationHeader<UrlValue = ResourceLocation<ArmOperationStatus>>;
   ...Azure.Core.Foundations.RetryAfterHeader;
