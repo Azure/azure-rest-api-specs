@@ -38,6 +38,7 @@ model SkuUpdate {
 model WorkspaceUpdate {
   /** The SKU (Stock Keeping Unit) assigned to this resource. */
   sku?: SkuUpdate;
+
   ...OmitProperties<
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       Workspace,
