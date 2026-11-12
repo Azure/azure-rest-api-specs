@@ -13837,7 +13837,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmProtection": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmProtections": {
       "get": {
         "operationId": "VirtualMachineProtections_List",
         "tags": [
@@ -13886,7 +13886,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmProtection/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmProtections/default": {
       "get": {
         "operationId": "VirtualMachineProtections_Get",
         "tags": [
@@ -22861,7 +22861,7 @@
         },
         "provisioningState": {
           "type": "string",
-          "description": "The provisioning state, which only appears in the response.",
+          "description": "The provisioning state, which only appears in the response. Canceled is not expected to be returned for virtual machine protection.",
           "enum": [
             "Succeeded",
             "Failed",

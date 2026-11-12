@@ -26,7 +26,7 @@ model VirtualMachineProtection
   ...ResourceNameParameter<
     Resource = VirtualMachineProtection,
     KeyName = "vmProtectionName",
-    SegmentName = "vmProtection",
+    SegmentName = "vmProtections",
     NamePattern = ""
   >;
 }

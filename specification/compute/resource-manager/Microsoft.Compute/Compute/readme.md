@@ -695,7 +695,7 @@ suppressions:
   - code: PutResponseCodes
     reason: VirtualMachineProtection is a singleton that always exists on the virtual machine, so the service never returns 201. It returns 200 for both synchronous and asynchronous updates.
     from: ComputeRP.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmProtection/default"].put
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmProtections/default"].put
 
   - code: PostResponseCodes
     reason: Existing POST response codes maintained for backward compatibility.
@@ -871,7 +871,7 @@ suppressions:
   - code: ProvisioningStateSpecifiedForLROPut
     reason: The service never returns 201 for the VirtualMachineProtection singleton, so there is no 201 response schema. The 200 response schema includes provisioningState, the same as VirtualMachineScaleSetVMs_Update.
     from: ComputeRP.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmProtection/default"].put
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmProtections/default"].put
   - code: ProvisioningStateValidation
     reason: The service never returns Canceled for the VirtualMachineProtection singleton, so the enum lists only the provisioning states the service returns.
     from: ComputeRP.json

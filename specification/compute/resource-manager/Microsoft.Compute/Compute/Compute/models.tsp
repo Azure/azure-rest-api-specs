@@ -5764,7 +5764,7 @@ model VirtualMachineProtectionProperties {
   protectionType: VirtualMachineProtectionType;
 
   /**
-   * The provisioning state, which only appears in the response.
+   * The provisioning state, which only appears in the response. Canceled is not expected to be returned for virtual machine protection.
    */
   @visibility(Lifecycle.Read)
   provisioningState?: VirtualMachineProtectionProvisioningState<string>;
