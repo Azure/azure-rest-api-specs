@@ -2851,11 +2851,12 @@
           {
             "name": "attachedAksClusterName",
             "in": "path",
-            "description": "The name of the account-level AKS attachment.",
+            "description": "The name of the account-level AKS attachment. It must contain 1-63 letters, digits, periods, underscores, or hyphens, and start and end with a letter or digit.",
             "required": true,
             "type": "string",
             "minLength": 1,
-            "pattern": "^[^/\\\\]+$"
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9._-]*[a-zA-Z0-9])?$"
           }
         ],
         "responses": {
@@ -2907,11 +2908,12 @@
           {
             "name": "attachedAksClusterName",
             "in": "path",
-            "description": "The name of the account-level AKS attachment.",
+            "description": "The name of the account-level AKS attachment. It must contain 1-63 letters, digits, periods, underscores, or hyphens, and start and end with a letter or digit.",
             "required": true,
             "type": "string",
             "minLength": 1,
-            "pattern": "^[^/\\\\]+$"
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9._-]*[a-zA-Z0-9])?$"
           },
           {
             "name": "resource",
@@ -2978,11 +2980,12 @@
           {
             "name": "attachedAksClusterName",
             "in": "path",
-            "description": "The name of the account-level AKS attachment.",
+            "description": "The name of the account-level AKS attachment. It must contain 1-63 letters, digits, periods, underscores, or hyphens, and start and end with a letter or digit.",
             "required": true,
             "type": "string",
             "minLength": 1,
-            "pattern": "^[^/\\\\]+$"
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9._-]*[a-zA-Z0-9])?$"
           },
           {
             "name": "clusterDisposition",
@@ -16666,7 +16669,7 @@
         },
         "capabilities": {
           "type": "array",
-          "description": "Capabilities enabled on this attachment, without duplicates.\nWhen omitted on creation, defaults to foundryNative; when omitted on an\nupdate, retains the existing capabilities.",
+          "description": "The complete set of capabilities for this attachment, without duplicates.\nPUT replaces the set. foundryNative is added automatically unless aiManager\nis the only capability. After attach, the only supported change is adding\nkuberay; other changes return 409 Conflict and require detaching first.",
           "minItems": 1,
           "maxItems": 3,
           "items": {
@@ -16695,7 +16698,8 @@
         }
       },
       "required": [
-        "clusterResourceId"
+        "clusterResourceId",
+        "capabilities"
       ]
     },
     "AttachedAksClusterProvisioningStage": {
