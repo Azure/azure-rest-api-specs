@@ -22,6 +22,10 @@ union HciJobType {
   /** Job to repair a server in the cluster. */
   RepairServer: "RepairServer",
 
+  /** Job to synchronize the cluster volumes. */
+  @added(Versions.v2027_01_15_preview)
+  SyncVolume: "SyncVolume",
+
   /** Job to enable AKS Arc deployment during a subsequent solution update. */
   @added(Versions.v2027_01_15_preview)
   EnableAksArcDeployment: "EnableAksArcDeployment",
@@ -7082,6 +7086,13 @@ model HciRepairServerJobProperties extends ClusterJobProperties {
   secrets?: EceDeploymentSecrets[];
 }
 
+/** Properties for synchronizing the cluster volumes. */
+@added(Versions.v2027_01_15_preview)
+model HciSyncVolumeJobProperties extends ClusterJobProperties {
+  /** Cluster job type for synchronizing the cluster volumes. */
+  jobType: HciJobType.SyncVolume;
+}
+
 ////////////////////////////////////////////////////////////////
 ////////////////////// Device Pool Models //////////////////////
 ////////////////////////////////////////////////////////////////
@@ -11596,6 +11607,79 @@ model ClusterVolumeProperties {
 model ClusterVolumeConfiguration {
   /** Placement mode for the volume. */
   placementMode?: ClusterVolumePlacementMode;
+}
+
+/** Properties of the cluster volume job. */
+@added(Versions.v2027_01_15_preview)
+@discriminator("jobType")
+model ClusterVolumeJobProperties {
+  /** Type of operation. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  jobType: ClusterVolumeJobType;
+
+  /** Deployment mode to trigger the job. */
+  deploymentMode?: DeploymentMode;
+
+  /** Provisioning state of the job. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /** Unique, immutable job identifier. */
+  @visibility(Lifecycle.Read)
+  jobId?: string;
+
+  /** The UTC date and time at which the job started. */
+  @visibility(Lifecycle.Read)
+  startTimeUtc?: utcDateTime;
+
+  /** The UTC date and time at which the job completed. */
+  @visibility(Lifecycle.Read)
+  endTimeUtc?: utcDateTime;
+
+  /** Status of the cluster volume job. */
+  @visibility(Lifecycle.Read)
+  status?: JobStatus;
+
+  /** Error details if the job failed. */
+  @visibility(Lifecycle.Read)
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
+
+  /** Reported properties for the cluster volume job. */
+  @visibility(Lifecycle.Read)
+  reportedProperties?: ClusterVolumeJobReportedProperties;
+}
+
+/** Type of cluster volume job operation. */
+@added(Versions.v2027_01_15_preview)
+union ClusterVolumeJobType {
+  string,
+
+  /** Job to apply the desired configuration to the cluster volume. */
+  ApplyVolumeConfiguration: "ApplyVolumeConfiguration",
+}
+
+/** Properties for applying the desired configuration to the cluster volume. */
+@added(Versions.v2027_01_15_preview)
+model ApplyVolumeConfigurationClusterVolumeJobProperties
+  extends ClusterVolumeJobProperties {
+  /** Job type. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  jobType: ClusterVolumeJobType.ApplyVolumeConfiguration;
+
+  /** The desired cluster volume configuration to apply. */
+  targetConfiguration: ClusterVolumeConfiguration;
+}
+
+/** Reported properties for the cluster volume job. */
+@added(Versions.v2027_01_15_preview)
+model ClusterVolumeJobReportedProperties {
+  /** The percentage of the job that is complete. */
+  @visibility(Lifecycle.Read)
+  percentComplete?: int32;
+
+  /** Deployment status reported by the device for the cluster volume job. */
+  @visibility(Lifecycle.Read)
+  deploymentStatus?: EceActionStatus;
 }
 
 /** The actual state of the cluster volume as reported by the cluster. */

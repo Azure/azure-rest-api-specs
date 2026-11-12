@@ -112,6 +112,9 @@
       "name": "ClusterVolumes"
     },
     {
+      "name": "ClusterVolumeJobs"
+    },
+    {
       "name": "CapacitySettings"
     },
     {
@@ -3538,6 +3541,9 @@
         "x-ms-examples": {
           "ClusterJobs_List": {
             "$ref": "./examples/ClusterJobs_List.json"
+          },
+          "ClusterJobs_List_SyncVolume": {
+            "$ref": "./examples/ClusterJobs_List_SyncVolume.json"
           }
         },
         "x-ms-pageable": {
@@ -3619,6 +3625,9 @@
           },
           "ClusterJobs_Get_RepairServerJob": {
             "$ref": "./examples/ClusterJobs_Get_RepairServerJob.json"
+          },
+          "ClusterJobs_Get_SyncVolumeJob": {
+            "$ref": "./examples/ClusterJobs_Get_SyncVolumeJob.json"
           },
           "ClusterJobs_Get_VmConnectProvisionJob": {
             "$ref": "./examples/ClusterJobs_Get_VmConnectProvisionJob.json"
@@ -3731,6 +3740,9 @@
           "ClusterJobs_CreateOrUpdate_RepairServerJob": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_RepairServer.json"
           },
+          "ClusterJobs_CreateOrUpdate_SyncVolume": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_SyncVolume.json"
+          },
           "ClusterJobs_CreateOrUpdate_VmConnectProvisionJob": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_VmConnectProvision.json"
           },
@@ -3803,6 +3815,9 @@
         "x-ms-examples": {
           "ClusterJobs_Delete": {
             "$ref": "./examples/ClusterJobs_Delete.json"
+          },
+          "ClusterJobs_Delete_SyncVolume": {
+            "$ref": "./examples/ClusterJobs_Delete_SyncVolume.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -6070,6 +6085,290 @@
         "x-ms-examples": {
           "ClusterVolumes_Delete": {
             "$ref": "./examples/ClusterVolumes_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/volumes/{volumeName}/jobs": {
+      "get": {
+        "operationId": "ClusterVolumeJobs_List",
+        "tags": [
+          "ClusterVolumeJobs"
+        ],
+        "description": "List all jobs for a cluster volume.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "volumeName",
+            "in": "path",
+            "description": "The name of the ClusterVolume",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClusterVolumeJobListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClusterVolumeJobs_List": {
+            "$ref": "./examples/ClusterVolumeJobs_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/volumes/{volumeName}/jobs/{jobName}": {
+      "get": {
+        "operationId": "ClusterVolumeJobs_Get",
+        "tags": [
+          "ClusterVolumeJobs"
+        ],
+        "description": "Get a specific cluster volume job.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "volumeName",
+            "in": "path",
+            "description": "The name of the ClusterVolume",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the ClusterVolumeJob",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClusterVolumeJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClusterVolumeJobs_Get": {
+            "$ref": "./examples/ClusterVolumeJobs_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ClusterVolumeJobs_CreateOrUpdate",
+        "tags": [
+          "ClusterVolumeJobs"
+        ],
+        "description": "Create or update a cluster volume job.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "volumeName",
+            "in": "path",
+            "description": "The name of the ClusterVolume",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the ClusterVolumeJob",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterVolumeJob"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ClusterVolumeJob' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ClusterVolumeJob"
+            }
+          },
+          "201": {
+            "description": "Resource 'ClusterVolumeJob' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ClusterVolumeJob"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClusterVolumeJobs_CreateOrUpdate": {
+            "$ref": "./examples/ClusterVolumeJobs_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ClusterVolumeJobs_Delete",
+        "tags": [
+          "ClusterVolumeJobs"
+        ],
+        "description": "Delete a cluster volume job.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "volumeName",
+            "in": "path",
+            "description": "The name of the ClusterVolume",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the ClusterVolumeJob",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClusterVolumeJobs_Delete": {
+            "$ref": "./examples/ClusterVolumeJobs_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -10458,6 +10757,25 @@
       ],
       "x-ms-discriminator-value": "ApplyConfiguration"
     },
+    "ApplyVolumeConfigurationClusterVolumeJobProperties": {
+      "type": "object",
+      "description": "Properties for applying the desired configuration to the cluster volume.",
+      "properties": {
+        "targetConfiguration": {
+          "$ref": "#/definitions/ClusterVolumeConfiguration",
+          "description": "The desired cluster volume configuration to apply."
+        }
+      },
+      "required": [
+        "targetConfiguration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterVolumeJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ApplyVolumeConfiguration"
+    },
     "ArcConnectivityProperties": {
       "type": "object",
       "description": "Connectivity related configuration required by arc server.",
@@ -12533,6 +12851,136 @@
             "name": "Rack",
             "value": "Rack",
             "description": "Rack-level fault domain."
+          }
+        ]
+      }
+    },
+    "ClusterVolumeJob": {
+      "type": "object",
+      "description": "Job for a cluster volume.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterVolumeJobProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ClusterVolumeJobListResult": {
+      "type": "object",
+      "description": "The response of a ClusterVolumeJob list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ClusterVolumeJob items on this page",
+          "items": {
+            "$ref": "#/definitions/ClusterVolumeJob"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ClusterVolumeJobProperties": {
+      "type": "object",
+      "description": "Properties of the cluster volume job.",
+      "properties": {
+        "jobType": {
+          "$ref": "#/definitions/ClusterVolumeJobType",
+          "description": "Type of operation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "deploymentMode": {
+          "$ref": "#/definitions/DeploymentMode",
+          "description": "Deployment mode to trigger the job."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the job.",
+          "readOnly": true
+        },
+        "jobId": {
+          "type": "string",
+          "description": "Unique, immutable job identifier.",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time at which the job started.",
+          "readOnly": true
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time at which the job completed.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "Status of the cluster volume job.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Error details if the job failed.",
+          "readOnly": true
+        },
+        "reportedProperties": {
+          "$ref": "#/definitions/ClusterVolumeJobReportedProperties",
+          "description": "Reported properties for the cluster volume job.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "jobType",
+      "required": [
+        "jobType"
+      ]
+    },
+    "ClusterVolumeJobReportedProperties": {
+      "type": "object",
+      "description": "Reported properties for the cluster volume job.",
+      "properties": {
+        "percentComplete": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The percentage of the job that is complete.",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "Deployment status reported by the device for the cluster volume job.",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterVolumeJobType": {
+      "type": "string",
+      "description": "Type of cluster volume job operation.",
+      "enum": [
+        "ApplyVolumeConfiguration"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterVolumeJobType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ApplyVolumeConfiguration",
+            "value": "ApplyVolumeConfiguration",
+            "description": "Job to apply the desired configuration to the cluster volume."
           }
         ]
       }
@@ -19051,6 +19499,7 @@
       "enum": [
         "AddServer",
         "RepairServer",
+        "SyncVolume",
         "EnableAksArcDeployment",
         "ConfigureArcGateway",
         "GpuCreatePartition",
@@ -19075,6 +19524,11 @@
             "name": "RepairServer",
             "value": "RepairServer",
             "description": "Job to repair a server in the cluster."
+          },
+          {
+            "name": "SyncVolume",
+            "value": "SyncVolume",
+            "description": "Job to synchronize the cluster volumes."
           },
           {
             "name": "EnableAksArcDeployment",
@@ -19419,6 +19873,16 @@
           ]
         }
       }
+    },
+    "HciSyncVolumeJobProperties": {
+      "type": "object",
+      "description": "Properties for synchronizing the cluster volumes.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "SyncVolume"
     },
     "HciValidationFailureDetail": {
       "type": "object",
