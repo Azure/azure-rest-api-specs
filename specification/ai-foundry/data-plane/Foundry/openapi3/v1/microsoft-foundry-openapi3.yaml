@@ -98519,6 +98519,36 @@ components:
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTurnDetectionConfig'
       description: Azure semantic voice activity detection.
+    VoiceAgentBargeInRules:
+      type: object
+      properties:
+        num_words:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 50
+          description: Words needed before the speech takes the turn. Also the fallback when the classifier gives no verdict.
+          default: 0
+        turn_taking_classifier:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentTurnClassifier'
+            - type: 'null'
+          description: Decides instead of `num_words`. Phrases still apply first.
+        acknowledgement_phrases:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoiceAgentSpeechStartPhrase'
+          maxItems: 100
+          description: Transcripts that exactly match one of these phrases do not take the turn.
+          default: []
+        interruption_phrases:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoiceAgentSpeechStartPhrase'
+          maxItems: 100
+          description: Transcripts that contain one of these phrases take the turn regardless of the word count.
+          default: []
+      description: Rules for speech that starts while the agent is speaking.
     VoiceAgentBaseDefinition:
       type: object
       required:
@@ -101833,10 +101863,10 @@ components:
       type: object
       properties:
         while_assistant_speaking:
-          $ref: '#/components/schemas/VoiceAgentSpeechStartWhileAssistantSpeaking'
+          $ref: '#/components/schemas/VoiceAgentBargeInRules'
           description: Rules for speech that starts while the agent is speaking.
         while_assistant_not_speaking:
-          $ref: '#/components/schemas/VoiceAgentSpeechStartWhileAssistantNotSpeaking'
+          $ref: '#/components/schemas/VoiceAgentSpeechStartRules'
           description: Rules for speech that starts while the agent is not speaking.
       description: Keeps backchannels such as "mm-hm" from interrupting the agent. An omitted scenario has no rules.
     VoiceAgentSpeechStartPhrase:
@@ -101844,7 +101874,7 @@ components:
       minLength: 1
       maxLength: 100
       description: A phrase matched against the transcript, ignoring case and punctuation.
-    VoiceAgentSpeechStartWhileAssistantNotSpeaking:
+    VoiceAgentSpeechStartRules:
       type: object
       properties:
         num_words:
@@ -101856,40 +101886,10 @@ components:
           default: 0
         turn_taking_classifier:
           anyOf:
-            - $ref: '#/components/schemas/VoiceAgentTurnTakingClassifier'
+            - $ref: '#/components/schemas/VoiceAgentTurnClassifier'
             - type: 'null'
           description: Decides instead of `num_words`. Phrases still apply first.
       description: Rules for speech that starts while the agent is not speaking.
-    VoiceAgentSpeechStartWhileAssistantSpeaking:
-      type: object
-      properties:
-        num_words:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 50
-          description: Words needed before the speech takes the turn. Also the fallback when the classifier gives no verdict.
-          default: 0
-        turn_taking_classifier:
-          anyOf:
-            - $ref: '#/components/schemas/VoiceAgentTurnTakingClassifier'
-            - type: 'null'
-          description: Decides instead of `num_words`. Phrases still apply first.
-        acknowledgement_phrases:
-          type: array
-          items:
-            $ref: '#/components/schemas/VoiceAgentSpeechStartPhrase'
-          maxItems: 100
-          description: Transcripts that exactly match one of these phrases do not take the turn.
-          default: []
-        interruption_phrases:
-          type: array
-          items:
-            $ref: '#/components/schemas/VoiceAgentSpeechStartPhrase'
-          maxItems: 100
-          description: Transcripts that contain one of these phrases take the turn regardless of the word count.
-          default: []
-      description: Rules for speech that starts while the agent is speaking.
     VoiceAgentStaticInterimResponseConfig:
       type: object
       required:
@@ -102365,6 +102365,41 @@ components:
             - websocket
             - webrtc
       description: The transport used for a voice-agent connection.
+    VoiceAgentTurnClassifier:
+      type: object
+      properties:
+        threshold:
+          type: number
+          format: float
+          description: Probability at or above which the speech counts as a turn.
+          exclusiveMinimum: 0
+          exclusiveMaximum: 1
+          default: 0.5
+        instructions:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentTurnPromptText'
+            - type: 'null'
+          description: Replaces the built-in task description given to the classifier.
+        criteria:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentTurnCriteria'
+            - type: 'null'
+          description: Replaces the built-in criteria for what is and is not a turn.
+      description: A classifier that judges whether the user's speech takes the turn.
+    VoiceAgentTurnCriteria:
+      type: object
+      properties:
+        turn:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentTurnPromptText'
+            - type: 'null'
+          description: When the user's speech is a turn the agent must respond to.
+        not_turn:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentTurnPromptText'
+            - type: 'null'
+          description: When the user's speech is not a turn, such as a backchannel.
+      description: Criteria for what the turn-taking classifier counts as a turn.
     VoiceAgentTurnDetectionConfig:
       type: object
       required:
@@ -102397,42 +102432,7 @@ components:
             - azure_semantic_vad_en
             - azure_semantic_vad_multilingual
       description: The turn-detection strategy. Additional values may be added over time.
-    VoiceAgentTurnTakingClassifier:
-      type: object
-      properties:
-        threshold:
-          type: number
-          format: float
-          description: Probability at or above which the speech counts as a turn.
-          exclusiveMinimum: 0
-          exclusiveMaximum: 1
-          default: 0.5
-        instructions:
-          anyOf:
-            - $ref: '#/components/schemas/VoiceAgentTurnTakingPromptText'
-            - type: 'null'
-          description: Replaces the built-in task description given to the classifier.
-        criteria:
-          anyOf:
-            - $ref: '#/components/schemas/VoiceAgentTurnTakingCriteria'
-            - type: 'null'
-          description: Replaces the built-in criteria for what is and is not a turn.
-      description: A classifier that judges whether the user's speech takes the turn.
-    VoiceAgentTurnTakingCriteria:
-      type: object
-      properties:
-        turn:
-          anyOf:
-            - $ref: '#/components/schemas/VoiceAgentTurnTakingPromptText'
-            - type: 'null'
-          description: When the user's speech is a turn the agent must respond to.
-        not_turn:
-          anyOf:
-            - $ref: '#/components/schemas/VoiceAgentTurnTakingPromptText'
-            - type: 'null'
-          description: When the user's speech is not a turn, such as a backchannel.
-      description: Criteria for what the turn-taking classifier counts as a turn.
-    VoiceAgentTurnTakingPromptText:
+    VoiceAgentTurnPromptText:
       type: string
       minLength: 1
       maxLength: 4000

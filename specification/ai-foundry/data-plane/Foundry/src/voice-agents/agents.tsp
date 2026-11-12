@@ -1100,31 +1100,31 @@ scalar VoiceAgentSpeechStartPhrase extends string;
 @doc("Text that replaces one part of the turn-taking classifier's prompt.")
 @minLength(1)
 @maxLength(4000)
-scalar VoiceAgentTurnTakingPromptText extends string;
+scalar VoiceAgentTurnPromptText extends string;
 
 @doc("Keeps backchannels such as \"mm-hm\" from interrupting the agent. An omitted scenario has no rules.")
 model VoiceAgentSpeechStartDetection {
   @doc("Rules for speech that starts while the agent is speaking.")
-  while_assistant_speaking?: VoiceAgentSpeechStartWhileAssistantSpeaking;
+  while_assistant_speaking?: VoiceAgentBargeInRules;
 
   @doc("Rules for speech that starts while the agent is not speaking.")
-  while_assistant_not_speaking?: VoiceAgentSpeechStartWhileAssistantNotSpeaking;
+  while_assistant_not_speaking?: VoiceAgentSpeechStartRules;
 }
 
 @doc("Rules for speech that starts while the agent is not speaking.")
-model VoiceAgentSpeechStartWhileAssistantNotSpeaking {
+model VoiceAgentSpeechStartRules {
   @doc("Words needed before the speech takes the turn. Also the fallback when the classifier gives no verdict.")
   @minValue(0)
   @maxValue(50)
   num_words?: float32 = 0;
 
   @doc("Decides instead of `num_words`. Phrases still apply first.")
-  turn_taking_classifier?: VoiceAgentTurnTakingClassifier | null;
+  turn_taking_classifier?: VoiceAgentTurnClassifier | null;
 }
 
 @doc("Rules for speech that starts while the agent is speaking.")
-model VoiceAgentSpeechStartWhileAssistantSpeaking {
-  ...VoiceAgentSpeechStartWhileAssistantNotSpeaking;
+model VoiceAgentBargeInRules {
+  ...VoiceAgentSpeechStartRules;
 
   @doc("Transcripts that exactly match one of these phrases do not take the turn.")
   @maxItems(100)
@@ -1136,26 +1136,26 @@ model VoiceAgentSpeechStartWhileAssistantSpeaking {
 }
 
 @doc("A classifier that judges whether the user's speech takes the turn.")
-model VoiceAgentTurnTakingClassifier {
+model VoiceAgentTurnClassifier {
   @doc("Probability at or above which the speech counts as a turn.")
   @minValueExclusive(0)
   @maxValueExclusive(1)
   threshold?: float32 = 0.5;
 
   @doc("Replaces the built-in task description given to the classifier.")
-  instructions?: VoiceAgentTurnTakingPromptText | null;
+  instructions?: VoiceAgentTurnPromptText | null;
 
   @doc("Replaces the built-in criteria for what is and is not a turn.")
-  criteria?: VoiceAgentTurnTakingCriteria | null;
+  criteria?: VoiceAgentTurnCriteria | null;
 }
 
 @doc("Criteria for what the turn-taking classifier counts as a turn.")
-model VoiceAgentTurnTakingCriteria {
+model VoiceAgentTurnCriteria {
   @doc("When the user's speech is a turn the agent must respond to.")
-  turn?: VoiceAgentTurnTakingPromptText | null;
+  turn?: VoiceAgentTurnPromptText | null;
 
   @doc("When the user's speech is not a turn, such as a backchannel.")
-  not_turn?: VoiceAgentTurnTakingPromptText | null;
+  not_turn?: VoiceAgentTurnPromptText | null;
 }
 
 @doc("The semantic end-of-utterance detection model.")
