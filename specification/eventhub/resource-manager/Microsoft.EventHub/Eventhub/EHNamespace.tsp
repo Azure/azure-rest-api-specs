@@ -2,9 +2,11 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -75,14 +77,34 @@ interface EHNamespaces {
    * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing long-running operation does not use the standard location header pattern as defined in the original OpenAPI specification."
+  @removed(Versions.v2026_01_01)
+  @renamedFrom(Versions.v2026_01_01, "update")
+  @sharedRoute
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  updateLegacy is ArmCustomPatchSync<
     EHNamespace,
     PatchModel = EHNamespace,
     Response =
       | ArmResponse<EHNamespace>
       | (CreatedResponse & EHNamespace)
       | AcceptedResponse,
+    Error = ErrorResponse
+  >;
+
+  /**
+   * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
+   */
+  @added(Versions.v2026_01_01)
+  @sharedRoute
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchSync<
+    EHNamespace,
+    PatchModel = EHNamespace,
+    Response =
+      | ArmResponse<EHNamespace>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = EHNamespace> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = ErrorResponse
   >;
 
@@ -163,6 +185,10 @@ interface EHNamespaces {
 @@doc(
   EHNamespaces.createOrUpdate::parameters.resource,
   "Parameters for creating a namespace resource."
+);
+@@doc(
+  EHNamespaces.updateLegacy::parameters.properties,
+  "Parameters for updating a namespace resource."
 );
 @@doc(
   EHNamespaces.update::parameters.properties,
