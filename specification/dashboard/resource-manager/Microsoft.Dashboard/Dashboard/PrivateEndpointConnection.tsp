@@ -11,6 +11,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Dashboard;
+// Keep the custom resource instead of PrivateEndpointConnectionResource to preserve
+// writable groupIds, which is not included in the common-types v3 template.
 /**
  * The Private Endpoint Connection resource.
  */
@@ -25,35 +27,6 @@ model PrivateEndpointConnection
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
-interface PrivateEndpointConnectionsOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /**
-         * The workspace name of Azure Managed Grafana.
-         */
-        @path
-        @segment("grafana")
-        @pattern("^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$")
-        workspaceName: string,
-      },
-      {
-        /**
-         * The private endpoint connection name of Azure Managed Grafana.
-         */
-        @path
-        @segment("privateEndpointConnections")
-        privateEndpointConnectionName: string,
-      },
-      ErrorResponse
-    > {}
-
 @armResourceOperations
 interface PrivateEndpointConnections {
   /**
@@ -65,7 +38,7 @@ interface PrivateEndpointConnections {
    * Manual approve private endpoint connection
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  approve is PrivateEndpointConnectionsOps.CreateOrUpdateAsync<
+  approve is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     PrivateEndpointConnection,
     Response = ArmResourceCreatedResponse<
       Resource = PrivateEndpointConnection,
