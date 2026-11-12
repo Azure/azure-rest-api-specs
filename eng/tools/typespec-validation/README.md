@@ -113,7 +113,8 @@ or `examples/<Interface>.yaml` instead. Generated JSON examples under `stable/` 
 `preview/` remain supported and are not checked by this rule.
 
 Existing legacy projects are grandfathered by exact project paths in
-`specification/suppressions.yaml` with `rules: [UnifiedExamples]`. New projects and
+`specification/suppressions.yaml` with `rules: [UnifiedExamples]`, except AWS Connector,
+which uses the service-wide `awsconnector/**` exemption. Other new projects and
 already-migrated projects have no exemption. When migrating a legacy project, remove
 its suppression along with its authored JSON examples. TSV rejects stale suppressions
 once unified YAML is present, preventing migrated projects from reverting to JSON.
