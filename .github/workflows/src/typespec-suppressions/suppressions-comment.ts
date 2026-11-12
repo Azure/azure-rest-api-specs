@@ -238,10 +238,14 @@ export function getSuppressionApprovalFingerprint(report: TypeSpecSuppressionsRe
     .map((item) => JSON.stringify(item))
     .sort();
 
-  return JSON.stringify({
-    requiresApproval: Boolean(reported.requiresApproval),
-    approvalItems,
-  });
+  return createHash("sha256")
+    .update(
+      JSON.stringify({
+        requiresApproval: Boolean(reported.requiresApproval),
+        approvalItems,
+      }),
+    )
+    .digest("hex");
 }
 
 function renderRuleLabel(suppression: TypeSpecSuppressionRecord): string {
@@ -465,70 +469,4 @@ export async function buildSuppressionsComment(
   const requiresApproval = Boolean(getReportedSuppressions(report).requiresApproval);
 
   return { body, requiresApproval, report, run, runUrl };
-}
-
-export async function shouldInvalidateSuppressionApproval(
-  github: GitHub,
-  core: Core,
-  owner: string,
-  repo: string,
-  pullNumber: number,
-  currentRun: WorkflowRunInfo,
-  currentReport: TypeSpecSuppressionsReport,
-): Promise<boolean> {
-  const workflowRuns = await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {
-    owner,
-    repo,
-    event: "pull_request",
-    branch: currentRun.head_branch ?? undefined,
-    per_page: PER_PAGE_MAX,
-  });
-
-  const previousRuns = workflowRuns
-    .filter(
-      (run) =>
-        run.id !== currentRun.id &&
-        run.status === "completed" &&
-        run.head_branch === currentRun.head_branch &&
-        (!currentRun.head_repository?.id ||
-          !run.head_repository?.id ||
-          run.head_repository.id === currentRun.head_repository.id) &&
-        (run.name === TYPESPEC_SUPPRESSIONS_WORKFLOW_NAME ||
-          run.name === `[TEST-IGNORE] ${TYPESPEC_SUPPRESSIONS_WORKFLOW_NAME}`) &&
-        (!run.pull_requests?.length ||
-          run.pull_requests.some((pullRequest) => pullRequest.number === pullNumber)),
-    )
-    .sort(invert(byDate((run) => run.updated_at)));
-
-  for (const previousRun of previousRuns) {
-    try {
-      const reportContent = await downloadArtifactText(
-        github,
-        core,
-        owner,
-        repo,
-        previousRun.id,
-        TYPESPEC_SUPPRESSIONS_REPORT_ARTIFACT_NAME,
-      );
-      const previousReport = JSON.parse(reportContent) as TypeSpecSuppressionsReport;
-      const changed =
-        getSuppressionApprovalFingerprint(previousReport) !==
-        getSuppressionApprovalFingerprint(currentReport);
-      core.info(
-        `TypeSpec suppression approval content ${changed ? "changed" : "did not change"} between workflow runs ${previousRun.id} and ${currentRun.id}.`,
-      );
-      return changed;
-    } catch (error) {
-      core.warning(
-        `Unable to compare TypeSpec suppression report from workflow run ${previousRun.id}: ${
-          error instanceof Error ? error.message : String(error)
-        }`,
-      );
-    }
-  }
-
-  core.info(
-    `No previous TypeSpec suppression report was available for ${owner}/${repo}#${pullNumber}; invalidating approval.`,
-  );
-  return true;
 }
