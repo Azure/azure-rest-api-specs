@@ -36,7 +36,7 @@ model FetchSasUriResponse {
   @added(ApiVersions.v2026_08_01_preview)
   @secret
   @visibility(Lifecycle.Read)
-  sasUri: string;
+  sasUri: url;
 
   @doc("The UTC expiration timestamp of the returned SAS URI.")
   @visibility(Lifecycle.Read)

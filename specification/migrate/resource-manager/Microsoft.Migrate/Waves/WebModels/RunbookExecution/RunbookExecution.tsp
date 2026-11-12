@@ -31,7 +31,7 @@ model RunbookExecutionProperties is AzureResourceProperties {
   @visibility(Lifecycle.Read)
   runbookArtifactVersionId?: string;
 
-  @doc("Azure resource ID of the execution artifact for this runbook execution.")
+  @doc("Azure resource ID of the execution artifact for this runbook execution. The resource type is intentionally unconstrained to support additional artifact resource types.")
   @visibility(Lifecycle.Read)
   executionArtifactId?: armResourceIdentifier;
 

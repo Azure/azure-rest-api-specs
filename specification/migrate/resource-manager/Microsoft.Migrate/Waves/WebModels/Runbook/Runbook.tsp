@@ -30,7 +30,7 @@ model RunbookProperties is AzureResourceProperties {
   @doc("Runbook scope definition.")
   scope: RunbookScopeProperties;
 
-  @doc("Azure resource ID of the artifact associated with this runbook.")
+  @doc("Azure resource ID of the artifact associated with this runbook. The resource type is intentionally unconstrained to support additional artifact resource types.")
   @visibility(Lifecycle.Read)
   artifactId?: armResourceIdentifier;
 

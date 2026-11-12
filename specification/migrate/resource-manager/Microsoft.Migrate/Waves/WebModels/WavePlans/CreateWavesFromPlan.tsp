@@ -63,7 +63,7 @@ model CreateWavesFromPlanResponse {
   @added(ApiVersions.v2026_08_01_preview)
   @secret
   @visibility(Lifecycle.Read)
-  sasUri?: string;
+  sasUri?: url;
 
   @doc("The expiry timestamp (UTC) for the error CSV SAS URI.")
   @visibility(Lifecycle.Read)
