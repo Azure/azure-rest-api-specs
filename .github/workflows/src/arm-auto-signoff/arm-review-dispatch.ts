@@ -26,7 +26,7 @@ export default async function dispatchInitialArmReview({
   );
 }
 
-/** Runs in a serialized PR-scoped job. Explicit reviewer triggers bypass this initial-only gate. */
+/** Runs in a serialized PR-scoped job. Explicit reviewer triggers bypass this per-head gate. */
 export async function dispatchArmReview(
   github: GitHub,
   core: Core,
@@ -64,42 +64,39 @@ export async function dispatchArmReview(
     return;
   }
 
-  if (pull.labels.some((label) => label.name === ARM_INITIAL_REVIEW_REQUESTED_LABEL)) {
-    core.info(
-      "ARM review already requested for this PR; use a label addition or /arm-review to rerun",
-    );
-    return;
-  }
-
   const latest = getLatestSemanticReviewStatus(
     await getLatestCommitStatuses(github, owner, repo, headSha),
   );
   if (latest) {
+    if (!pull.labels.some((label) => label.name === ARM_INITIAL_REVIEW_REQUESTED_LABEL)) {
+      await github.rest.issues.addLabels({
+        owner,
+        repo,
+        issue_number: issueNumber,
+        labels: [ARM_INITIAL_REVIEW_REQUESTED_LABEL],
+      });
+    }
+    core.info("ARM review already reserved or evaluated for this head; no automatic retry");
+    return;
+  }
+  const { data: currentPull } = await getPull();
+  if (!isQueued(currentPull)) {
+    core.info("ARM review request changed before dispatch; nothing is queued");
+    return;
+  }
+
+  if (!currentPull.labels.some((label) => label.name === ARM_INITIAL_REVIEW_REQUESTED_LABEL)) {
     await github.rest.issues.addLabels({
       owner,
       repo,
       issue_number: issueNumber,
       labels: [ARM_INITIAL_REVIEW_REQUESTED_LABEL],
     });
-    core.info("ARM review already reserved or evaluated; recording the PR-level request marker");
+  }
+  if (getLatestSemanticReviewStatus(await getLatestCommitStatuses(github, owner, repo, headSha))) {
+    core.info("ARM review reserved or evaluated before dispatch; no automatic retry");
     return;
   }
-  const { data: currentPull } = await getPull();
-  if (
-    !isQueued(currentPull) ||
-    currentPull.labels.some((label) => label.name === ARM_INITIAL_REVIEW_REQUESTED_LABEL)
-  ) {
-    core.info("ARM review request changed before dispatch; nothing is queued");
-    return;
-  }
-
-  // Reserve before dispatch. Never clear on timeout: GitHub may already have accepted the request.
-  await github.rest.issues.addLabels({
-    owner,
-    repo,
-    issue_number: issueNumber,
-    labels: [ARM_INITIAL_REVIEW_REQUESTED_LABEL],
-  });
   const status = {
     owner,
     repo,
@@ -107,12 +104,14 @@ export async function dispatchArmReview(
     context: ARM_SEMANTIC_REVIEW_STATUS,
     target_url: sourceUrl,
   };
+  let dispatchAttempted = false;
   try {
     await github.rest.repos.createCommitStatus({
       ...status,
       state: "pending",
       description: "ARM API semantic review is queued",
     });
+    dispatchAttempted = true;
     await github.rest.actions.createWorkflowDispatch({
       owner,
       repo,
@@ -124,7 +123,11 @@ export async function dispatchArmReview(
     core.error(
       `ARM reviewer handoff failed for PR #${issueNumber}: ` +
         `${error instanceof Error ? error.message : String(error)}. ` +
-        `Keep ${ARM_INITIAL_REVIEW_REQUESTED_LABEL} to prevent duplicate automatic requests. ` +
+        (dispatchAttempted
+          ? "The dispatch may have been accepted despite the error. "
+          : "No workflow dispatch was attempted; without a saved status a later summary may retry the handoff. ") +
+        `A saved current-head ${ARM_SEMANTIC_REVIEW_STATUS} status prevents automatic retries. ` +
+        `Keep ${ARM_INITIAL_REVIEW_REQUESTED_LABEL} for reviewer activation. ` +
         `Check for a queued or running reviewer before retrying with /arm-review, ` +
         `removing and re-adding WaitForARMFeedback, or manually dispatching ${REVIEW_WORKFLOW} ` +
         `with the PR number and no head_sha.`,
@@ -150,5 +153,5 @@ export async function dispatchArmReview(
     }
     throw error;
   }
-  core.info(`Dispatched initial ARM review for PR #${issueNumber} at ${headSha}`);
+  core.info(`Dispatched automatic ARM review for PR #${issueNumber} at ${headSha}`);
 }
