@@ -69,6 +69,8 @@ using Azure.AI.Projects;
 );
 
 @@clientName(ModelSamplingParams, "ModelSamplingParameters", "java");
+@@clientName(MemoryStoreDefaultOptions.default_ttl_seconds, "defaultTtl", "java");
+@@clientName(OpenAI.RoutingTraceEntry.latency_ms, "latency", "java");
 @@clientName(AgentOptimizationFixedTraceWindow.start_time, "startAt", "java");
 @@clientName(AgentOptimizationFixedTraceWindow.end_time, "endAt", "java");
 @@clientName(
