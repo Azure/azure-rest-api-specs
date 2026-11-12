@@ -1,13 +1,13 @@
 import { describe, expect, it } from "vitest";
 import {
   buildSdkReviewSummary,
-  syncSdkReviewInlineComments,
   type PublishableRemediationFinding,
 } from "../src/sdk-validation-dotnet-review-comments.ts";
-import { createMockContext, createMockCore, createMockGithub } from "./mocks.ts";
 
 const HEAD_SHA = "1".repeat(40);
 const SPEC_FILE = "specification/widget/Widget.Management/models.tsp";
+const REPOSITORY_URL = "https://github.com/owner/repo";
+const WORKFLOW_URL = "https://github.com/owner/repo/actions/runs/1";
 
 function createFinding(
   overrides: Partial<PublishableRemediationFinding> = {},
@@ -35,88 +35,6 @@ function createFinding(
   };
 }
 
-describe("syncSdkReviewInlineComments", () => {
-  it("publishes only high-confidence exact TypeSpec mappings", async () => {
-    const github = createMockGithub();
-    const findings = [
-      createFinding(),
-      createFinding({
-        findingIndex: 1,
-        remediation: {
-          target: "typespec",
-          suggestion: "Investigate the model name.",
-          confidence: "medium",
-          sourceLocation: { file: SPEC_FILE, line: 1 },
-        },
-      }),
-    ];
-
-    const published = await syncSdkReviewInlineComments(
-      { github, context: createMockContext(), core: createMockCore() },
-      42,
-      HEAD_SHA,
-      findings,
-    );
-
-    expect(published).toEqual([findings[0]]);
-    expect(github.rest.pulls.createReviewComment).toHaveBeenCalledTimes(1);
-    expect(github.rest.pulls.createReviewComment).toHaveBeenCalledWith(
-      expect.objectContaining({
-        pull_number: 42,
-        commit_id: HEAD_SHA,
-        path: SPEC_FILE,
-        line: 1,
-        side: "RIGHT",
-      }),
-    );
-  });
-
-  it("updates matching bot comments and deletes obsolete managed comments", async () => {
-    const github = createMockGithub();
-    github.rest.pulls.listReviewComments.mockResolvedValue({
-      data: [
-        {
-          id: 10,
-          user: { login: "github-actions[bot]" },
-          path: SPEC_FILE,
-          line: 1,
-          body: "old\n<!-- generated-dotnet-sdk-review-inline:0:0 -->",
-        },
-        {
-          id: 20,
-          user: { login: "github-actions[bot]" },
-          path: SPEC_FILE,
-          line: 2,
-          body: "obsolete\n<!-- generated-dotnet-sdk-review-inline:0:1 -->",
-        },
-        {
-          id: 30,
-          user: { login: "contributor" },
-          path: SPEC_FILE,
-          line: 2,
-          body: "spoofed\n<!-- generated-dotnet-sdk-review-inline:0:2 -->",
-        },
-      ],
-    });
-
-    await syncSdkReviewInlineComments(
-      { github, context: createMockContext(), core: createMockCore() },
-      42,
-      HEAD_SHA,
-      [createFinding()],
-    );
-
-    expect(github.rest.pulls.updateReviewComment).toHaveBeenCalledWith(
-      expect.objectContaining({ comment_id: 10 }),
-    );
-    expect(github.rest.pulls.deleteReviewComment).toHaveBeenCalledTimes(1);
-    expect(github.rest.pulls.deleteReviewComment).toHaveBeenCalledWith(
-      expect.objectContaining({ comment_id: 20 }),
-    );
-    expect(github.rest.pulls.createReviewComment).not.toHaveBeenCalled();
-  });
-});
-
 describe("buildSdkReviewSummary", () => {
   it("sanitizes agent-provided Markdown and mentions", () => {
     const finding = createFinding({
@@ -125,11 +43,39 @@ describe("buildSdkReviewSummary", () => {
     const summary = buildSdkReviewSummary({
       findings: [finding],
       headSha: HEAD_SHA,
-      inlineFindings: [finding],
+      repositoryUrl: REPOSITORY_URL,
+      workflowRunUrl: WORKFLOW_URL,
     });
 
     expect(summary).not.toContain("<details>");
     expect(summary).not.toContain("@team");
-    expect(summary).toContain("@\u200Bteam");
+    expect(summary).toContain("&#64;team");
+  });
+
+  it("includes evidence, exact TypeSpec locations, and the complete workflow link", () => {
+    const summary = buildSdkReviewSummary({
+      findings: [createFinding()],
+      headSha: HEAD_SHA,
+      repositoryUrl: REPOSITORY_URL,
+      workflowRunUrl: WORKFLOW_URL,
+    });
+
+    expect(summary).toContain("Evidence: The generated model lacks service context.");
+    expect(summary).toContain(
+      `TypeSpec: [\`${SPEC_FILE}:1\`](${REPOSITORY_URL}/blob/${HEAD_SHA}/${SPEC_FILE}#L1)`,
+    );
+    expect(summary).toContain(`[View complete validated workflow results](${WORKFLOW_URL})`);
+  });
+
+  it("preserves copyable TypeSpec decorator syntax", () => {
+    const summary = buildSdkReviewSummary({
+      findings: [createFinding()],
+      headSha: HEAD_SHA,
+      repositoryUrl: REPOSITORY_URL,
+      workflowRunUrl: WORKFLOW_URL,
+    });
+
+    expect(summary).toContain("&#64;&#64;clientName");
+    expect(summary).not.toContain("\u200B");
   });
 });

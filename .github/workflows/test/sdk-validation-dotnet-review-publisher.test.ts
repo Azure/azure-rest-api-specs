@@ -226,13 +226,14 @@ describe("publishSdkReviewResult", () => {
       workflowRunUrl: "https://github.com/owner/repo/actions/runs/1",
     });
 
-    expect(github.rest.pulls.createReviewComment).toHaveBeenCalledTimes(1);
+    expect(github.rest.pulls.createReviewComment).not.toHaveBeenCalled();
     const summaryComment = github.rest.issues.createComment.mock.calls[0]?.[0] as unknown as {
       issue_number: number;
       body: string;
     };
     expect(summaryComment.issue_number).toBe(42);
-    expect(summaryComment.body).toContain("Posted 1 exact changed-line comment");
+    expect(summaryComment.body).toContain("The generated model lacks service context.");
+    expect(summaryComment.body).toContain("View complete validated workflow results");
   });
 
   it("rejects results for a different source than the trusted publication context", async () => {

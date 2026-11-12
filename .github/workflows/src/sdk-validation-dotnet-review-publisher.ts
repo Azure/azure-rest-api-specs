@@ -6,7 +6,6 @@ import {
   buildSdkReviewFailureSummary,
   buildSdkReviewSummary,
   publishSdkReviewSummary,
-  syncSdkReviewInlineComments,
   type PublishableRemediationFinding,
 } from "./sdk-validation-dotnet-review-comments.ts";
 import { validateSdkReviewResult } from "./sdk-validation-dotnet-review-result.ts";
@@ -48,6 +47,12 @@ function requirePublicationContext(value: unknown): PublicationContext {
   return context as PublicationContext;
 }
 
+export async function readSdkReviewPublicationContext(
+  publicationContextPath: string,
+): Promise<PublicationContext> {
+  return requirePublicationContext(await readJson(publicationContextPath));
+}
+
 function requireRemediationResult(value: unknown): RemediationResult {
   const result = value as Partial<RemediationResult>;
   if (!Array.isArray(result?.findings)) {
@@ -84,7 +89,7 @@ export async function publishSdkReviewResult(params: {
     workflowRunUrl,
   } = params;
   const { github, context, core } = githubScript;
-  const publicationContext = requirePublicationContext(await readJson(publicationContextPath));
+  const publicationContext = await readSdkReviewPublicationContext(publicationContextPath);
   const { specPrNumber, specHeadSha, specBaseSha } = publicationContext.source;
   let remediationResult: RemediationResult | undefined;
   if (workflowConclusion === "success") {
@@ -94,19 +99,18 @@ export async function publishSdkReviewResult(params: {
       "sdk-review-context.json",
     );
     const rawResultPath = path.join(resultRootPath, "sdk-review-result.json");
-    const rawReportPath = path.join(resultRootPath, "sdk-review-result.md");
     const remediationResultPath = path.join(resultRootPath, "typespec-remediation-result.json");
     const remediationReportPath = path.join(resultRootPath, "typespec-remediation-result.md");
-    const [reviewContext, rawResult, rawReport, remediationResultValue, remediationReport] =
-      await Promise.all([
+    const [reviewContext, rawResult, remediationResultValue, remediationReport] = await Promise.all(
+      [
         readJson(reviewContextPath),
         readJson(rawResultPath),
-        readFile(rawReportPath, "utf8"),
         readJson(remediationResultPath),
         readFile(remediationReportPath, "utf8"),
-      ]);
+      ],
+    );
     validateResultSource(reviewContext, publicationContext);
-    validateSdkReviewResult(reviewContext, rawResult, rawReport);
+    validateSdkReviewResult(reviewContext, rawResult);
     validateTypeSpecRemediationResult(
       reviewContext,
       rawResult,
@@ -141,19 +145,14 @@ export async function publishSdkReviewResult(params: {
     return;
   }
 
-  const inlineFindings = await syncSdkReviewInlineComments(
-    githubScript,
-    specPrNumber,
-    specHeadSha,
-    remediationResult.findings,
-  );
   await publishSdkReviewSummary(
     githubScript,
     specPrNumber,
     buildSdkReviewSummary({
       findings: remediationResult.findings,
       headSha: specHeadSha,
-      inlineFindings,
+      repositoryUrl: `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}`,
+      workflowRunUrl,
     }),
   );
 }
