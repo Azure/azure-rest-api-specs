@@ -2,7 +2,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { inspect } from "node:util";
-import { LogIssueType, vsoLogIssue } from "./log.ts";
+import { LogIssueType, setVsoVariable, vsoLogIssue } from "./log.ts";
 import { type ExecutionReport, type SpecGenSdkCmdInput } from "./types.ts";
 import { runCommandWithOutput } from "./utils.ts";
 
@@ -50,7 +50,7 @@ export async function getGeneratedSdkApiVersions(
   executionReport: ExecutionReport,
   commandInput: SpecGenSdkCmdInput,
 ): Promise<string> {
-  const versions = new Set<string>();
+  const versions = new Map<string, { version: string; namespace?: string }>();
   for (const pkg of executionReport.packages) {
     if (!pkg.packageRootPath) {
       vsoLogIssue(
@@ -79,11 +79,13 @@ export async function getGeneratedSdkApiVersions(
       }
       for (const file of files.sort()) {
         for (const entry of readApiVersions(path.join(outputDir, file))) {
-          versions.add(
-            entry.Namespace
-              ? `'${entry.Version}' (Namespace: '${entry.Namespace}')`
-              : `'${entry.Version}'`,
-          );
+          const value = entry.Namespace
+            ? `'${entry.Version}' (Namespace: '${entry.Namespace}')`
+            : `'${entry.Version}'`;
+          versions.set(value, {
+            version: entry.Version,
+            ...(entry.Namespace ? { namespace: entry.Namespace } : {}),
+          });
         }
       }
     } catch (error) {
@@ -97,5 +99,6 @@ export async function getGeneratedSdkApiVersions(
       }
     }
   }
-  return versions.size > 0 ? `API Versions: ${[...versions].join(", ")}` : "";
+  setVsoVariable("GeneratedSDKApiVersionsJson", JSON.stringify([...versions.values()]));
+  return versions.size > 0 ? `API Versions: ${[...versions.keys()].join(", ")}` : "";
 }

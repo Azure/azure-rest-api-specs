@@ -1,0 +1,77 @@
+{
+  "title": "Get restore validation job and task failures with nested backend errors",
+  "operationId": "RecoveryJobs_Get",
+  "parameters": {
+    "serviceGroupName": "sampleServiceGroupName",
+    "api-version": "2026-12-30-preview",
+    "recoveryPlanName": "samplePlanName",
+    "recoveryJobName": "c56888ef-9ced-4001-a6d4-7145a0309bdb"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/recoveryPlans/samplePlanName/recoveryJobs/c56888ef-9ced-4001-a6d4-7145a0309bdb",
+        "name": "c56888ef-9ced-4001-a6d4-7145a0309bdb",
+        "type": "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryJobs",
+        "properties": {
+          "jobType": "RecoveryPlan",
+          "provisioningState": "Succeeded",
+          "resourceId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/recoveryPlans/samplePlanName",
+          "operation": "ValidateForRestore",
+          "triggeredBy": "User",
+          "status": "Failed",
+          "startTime": "2026-12-30T10:00:00Z",
+          "endTime": "2026-12-30T10:01:00Z",
+          "duration": "PT1M",
+          "errorDetails": {
+            "errorCode": "RestoreReadinessValidationFailed",
+            "errorMessage": "Restore readiness validation failed for one or more resources.",
+            "recommendations": [
+              "Resolve the resource validation errors and run validation again."
+            ],
+            "additionalErrorDetails": [
+              {
+                "errorCode": "BMSUserErrorRecoveryPointNotFound",
+                "errorMessage": "No eligible recovery point was found.",
+                "recommendations": [
+                  "Select another recovery point or adjust the recovery point policy."
+                ]
+              }
+            ]
+          },
+          "jobExtendedInfo": {
+            "tasksList": [
+              {
+                "taskId": "validate-restore-readiness",
+                "taskName": "Validate restore readiness",
+                "status": "Failed",
+                "startTime": "2026-12-30T10:00:00Z",
+                "endTime": "2026-12-30T10:01:00Z",
+                "duration": "PT1M",
+                "errorDetails": {
+                  "errorCode": "RestoreReadinessValidationFailed",
+                  "errorMessage": "The selected resource failed restore validation.",
+                  "additionalErrorDetails": [
+                    {
+                      "errorCode": "TargetResourceNotFound",
+                      "errorMessage": "A required restore target is unavailable.",
+                      "additionalErrorDetails": [
+                        {
+                          "errorCode": "UserErrorBCMRestoreStorageAccountNotFound",
+                          "errorMessage": "The target storage account does not exist.",
+                          "recommendations": [
+                            "Create the target storage account or update the recovery configuration profile."
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

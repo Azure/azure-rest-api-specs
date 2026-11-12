@@ -8,6 +8,7 @@ import {
   resolveReadinessPullRequest,
   type ReadinessFinding,
 } from "../src/contributor-readiness.ts";
+import { getWorkflowRunArtifactInputs } from "../src/context.ts";
 import {
   createMockContext,
   createMockCore,
@@ -40,6 +41,8 @@ function setup() {
   const github = createMockGithub();
   const context = createMockContext();
   context.eventName = "workflow_run";
+  context.runId = 456;
+  context.runAttempt = 1;
   context.repo.owner = "Azure";
   context.repo.repo = "example";
   context.payload = { workflow_run: { id: 123 }, repository };
@@ -325,6 +328,47 @@ describe("contributor readiness", () => {
     expect(f.github.rest.issues.createComment).not.toHaveBeenCalled();
     expect(f.core.summary.write).toHaveBeenCalledOnce();
     expect(f.core.summary.addRaw).not.toHaveBeenCalledWith(expect.stringContaining("<details>"));
+    expect(f.core.setOutput).toHaveBeenCalledWith("issue_number", pr.number);
+    expect(f.core.setOutput).toHaveBeenCalledWith("head_sha", pr.head.sha);
+    expect(f.github.rest.actions.listWorkflowRunArtifacts).not.toHaveBeenCalled();
+  });
+
+  it("removes conflicting SHA handoffs when rerunning readiness on a new head", async () => {
+    const f = setup();
+    f.context.runAttempt = 2;
+    let artifacts = [
+      { id: 1, name: `head-sha=${"b".repeat(40)}` },
+      { id: 2, name: `head-sha=${pr.head.sha}` },
+      { id: 3, name: `issue-number=${pr.number}` },
+      { id: 4, name: "unrelated-report" },
+    ];
+    f.github.rest.actions.listWorkflowRunArtifacts.mockImplementation(
+      ({ run_id }: { run_id: number }) =>
+        Promise.resolve({
+          data: { artifacts: run_id === f.context.runId ? artifacts : [] },
+        }),
+    );
+    f.github.rest.actions.deleteArtifact.mockImplementation(
+      ({ artifact_id }: { artifact_id: number }) => {
+        artifacts = artifacts.filter((artifact) => artifact.id !== artifact_id);
+        return Promise.resolve({ status: 204 });
+      },
+    );
+
+    await f.run();
+
+    await expect(
+      getWorkflowRunArtifactInputs({
+        github: f.github,
+        core: f.core,
+        ...f.context.repo,
+        runId: f.context.runId,
+      }),
+    ).resolves.toEqual({ headSha: pr.head.sha, issueNumber: pr.number });
+    expect(f.github.rest.actions.deleteArtifact).toHaveBeenCalledExactlyOnceWith({
+      ...f.context.repo,
+      artifact_id: 1,
+    });
   });
 
   it("requires only Azure membership, not Microsoft membership", async () => {
@@ -343,7 +387,7 @@ describe("contributor readiness", () => {
     expect(f.github.rest.issues.createComment).not.toHaveBeenCalled();
   });
 
-  it("keeps the job summary available when PR comment publication fails", async () => {
+  it("keeps the job summary and PR handoff available when PR comment publication fails", async () => {
     const f = setup();
     f.permission.mockResolvedValue({ data: { permission: "read" } });
     f.github.rest.issues.createComment.mockRejectedValue(createMockRequestError(403));
@@ -355,6 +399,8 @@ describe("contributor readiness", () => {
       expect.stringContaining("No repository write access"),
     );
     expect(f.core.summary.write).toHaveBeenCalledOnce();
+    expect(f.core.setOutput).toHaveBeenCalledWith("issue_number", pr.number);
+    expect(f.core.setOutput).toHaveBeenCalledWith("head_sha", pr.head.sha);
   });
 
   it.each([null, {}])("reports an unavailable PR author as incomplete: %j", async (user) => {
@@ -703,6 +749,8 @@ describe("contributor readiness", () => {
       .mockResolvedValueOnce({ data: { ...pr, head: { sha: "b".repeat(40) } } });
     await expect(f.run()).rejects.toThrow("PR changed");
     expect(f.createCheck).not.toHaveBeenCalled();
+    expect(f.core.setOutput).not.toHaveBeenCalledWith("issue_number", expect.anything());
+    expect(f.core.setOutput).not.toHaveBeenCalledWith("head_sha", expect.anything());
   });
 
   it("skips closed PRs", async () => {
