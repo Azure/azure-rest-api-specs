@@ -1,0 +1,157 @@
+{
+  "title": "MultiModalEmbed_Link",
+  "operationId": "Embed",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "body": {
+      "model": "microsoft-embedding-1-large",
+      "inputs": [
+        {
+          "kind": "query",
+          "content": "invoice due date"
+        },
+        {
+          "id": "invoice",
+          "kind": "image",
+          "url": "https://contoso.blob.core.windows.net/pages/p1.jpg",
+          "sasToken": "sv=2025-07-05&st=2026-11-05T16%3A25%3A00Z&se=2026-11-05T16%3A40%3A00Z&skoid=00000000-0000-0000-0000-000000000000&sktid=00000000-0000-0000-0000-000000000000&skt=2026-11-05T16%3A25%3A00Z&ske=2026-11-05T17%3A25%3A00Z&sks=b&skv=2025-07-05&sr=b&sp=r&spr=https&sig=REDACTED"
+        },
+        {
+          "id": "earth",
+          "kind": "image",
+          "url": "https://contoso.blob.core.windows.net/pages/p2.jpg",
+          "sasToken": "sv=2025-07-05&st=2026-11-05T16%3A25%3A00Z&se=2026-11-05T16%3A40%3A00Z&skoid=00000000-0000-0000-0000-000000000000&sktid=00000000-0000-0000-0000-000000000000&skt=2026-11-05T16%3A25%3A00Z&ske=2026-11-05T17%3A25%3A00Z&sks=b&skv=2025-07-05&sr=b&sp=r&spr=https&sig=REDACTED"
+        },
+        {
+          "id": "dog",
+          "kind": "image",
+          "url": "https://contoso.blob.core.windows.net/pages/p3.jpg",
+          "sasToken": "sv=2025-07-05&st=2026-11-05T16%3A25%3A00Z&se=2026-11-05T16%3A40%3A00Z&skoid=00000000-0000-0000-0000-000000000000&sktid=00000000-0000-0000-0000-000000000000&skt=2026-11-05T16%3A25%3A00Z&ske=2026-11-05T17%3A25%3A00Z&sks=b&skv=2025-07-05&sr=b&sp=r&spr=https&sig=REDACTED"
+        }
+      ],
+      "delivery": "link"
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "X-Correlation-ID": "c0a1b2c3-4d5e-4f60-8a7b-9c0d1e2f3a4b"
+      },
+      "body": {
+        "object": "list",
+        "model": "microsoft-embedding-1-large",
+        "modelVersion": "3",
+        "outputDataKind": "float32",
+        "data": [],
+        "usage": {
+          "kind": "multimodal",
+          "promptTokens": 3728,
+          "totalTokens": 3728,
+          "textTokens": 53,
+          "imageCount": 3,
+          "visualTokens": 3675
+        },
+        "output": {
+          "id": "306ee79f632d0d288070105933aa2cfa",
+          "url": "https://contosoresults.blob.core.windows.net/embedding-outputs/00000000-0000-0000-0000-000000000000/myaccount/306ee79f632d0d288070105933aa2cfa.json",
+          "sasToken": "sv=2025-07-05&st=2026-11-05T16%3A25%3A00Z&se=2026-11-05T16%3A40%3A00Z&skoid=00000000-0000-0000-0000-000000000000&sktid=00000000-0000-0000-0000-000000000000&skt=2026-11-05T16%3A25%3A00Z&ske=2026-11-05T17%3A25%3A00Z&sks=b&skv=2025-07-05&sr=b&sp=r&spr=https&sig=REDACTED",
+          "expiresAt": "2026-11-05T16:40:00Z",
+          "recordCount": 4,
+          "sizeInBytes": 129960,
+          "sha256": "772f422e1ea48b4f5f51d3ec58af37f9f32acda77c3f9ca7aaa2a4c36d643025",
+          "contentType": "application/json"
+        }
+      }
+    },
+    "400": {
+      "headers": {
+        "X-Correlation-ID": "c1a1b2c3-4d5e-4f60-8a7b-9c0d1e2f3a4b",
+        "x-ms-error-code": "EMBEDDING_DELIVERY_NOT_SUPPORTED"
+      },
+      "body": {
+        "error": {
+          "code": "EMBEDDING_DELIVERY_NOT_SUPPORTED",
+          "message": "'delivery': 'link' is not enabled on this endpoint. Use 'inline'."
+        }
+      }
+    },
+    "403": {
+      "headers": {
+        "X-Correlation-ID": "c2a1b2c3-4d5e-4f60-8a7b-9c0d1e2f3a4b",
+        "x-ms-error-code": "Forbidden"
+      },
+      "body": {
+        "error": {
+          "code": "Forbidden",
+          "message": "The caller doesn't have permission to run embedding inference on this account."
+        }
+      }
+    },
+    "413": {
+      "headers": {
+        "X-Correlation-ID": "c3a1b2c3-4d5e-4f60-8a7b-9c0d1e2f3a4b",
+        "x-ms-error-code": "EMBEDDING_BLOB_READ_FAILED"
+      },
+      "body": {
+        "error": {
+          "code": "EMBEDDING_BLOB_READ_FAILED",
+          "message": "The model service couldn't read the blob: inputs[3].url: the request's blobs are larger than 20 MB together"
+        }
+      }
+    },
+    "429": {
+      "headers": {
+        "Retry-After": 30,
+        "X-Correlation-ID": "c4a1b2c3-4d5e-4f60-8a7b-9c0d1e2f3a4b",
+        "x-ms-error-code": "TooManyRequests"
+      },
+      "body": {
+        "error": {
+          "code": "TooManyRequests",
+          "message": "The request rate exceeded the service limit. Retry after 30 seconds.",
+          "type": "https://example.inference.azure.com/errors/too-many-requests",
+          "title": "Too many requests",
+          "status": 429,
+          "detail": "The request rate exceeded the service limit. Retry after 30 seconds.",
+          "instance": "/inference/embedding"
+        }
+      }
+    },
+    "502": {
+      "headers": {
+        "X-Correlation-ID": "c5a1b2c3-4d5e-4f60-8a7b-9c0d1e2f3a4b",
+        "x-ms-error-code": "EMBEDDING_BLOB_READ_FAILED"
+      },
+      "body": {
+        "error": {
+          "code": "EMBEDDING_BLOB_READ_FAILED",
+          "message": "The model service couldn't read the blob: inputs[2].url: storage returned 503"
+        }
+      }
+    },
+    "503": {
+      "headers": {
+        "X-Correlation-ID": "c6a1b2c3-4d5e-4f60-8a7b-9c0d1e2f3a4b",
+        "x-ms-error-code": "EMBEDDING_OUTPUT_WRITE_FAILED"
+      },
+      "body": {
+        "error": {
+          "code": "EMBEDDING_OUTPUT_WRITE_FAILED",
+          "message": "The results couldn't be stored. Try again, or use \"delivery\": \"inline\"."
+        }
+      }
+    },
+    "504": {
+      "headers": {
+        "X-Correlation-ID": "c7a1b2c3-4d5e-4f60-8a7b-9c0d1e2f3a4b",
+        "x-ms-error-code": "EMBEDDING_BLOB_READ_FAILED"
+      },
+      "body": {
+        "error": {
+          "code": "EMBEDDING_BLOB_READ_FAILED",
+          "message": "The model service couldn't read the blob: inputs[1].url: storage did not return the blob within 10 seconds"
+        }
+      }
+    }
+  }
+}
