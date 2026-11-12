@@ -407,30 +407,30 @@ function ownSchema(
 function mergeAllOf(parts: NormalizedSchema[], own: NormalizedSchema): NormalizedSchema {
   const references = new Set(own.references ?? []);
   for (const part of parts) for (const item of part.references ?? []) references.add(item);
-  const allOf = [...parts, own];
   if ([...parts, own].every((item) => item.kind === "object" || item.kind === "any")) {
-    const properties: Map<string, NonNullable<NormalizedSchema["properties"]>[number]> = new Map();
-
-    let additionalProperties: boolean | NormalizedSchema | undefined;
-    for (const item of [...parts, own]) {
-      for (const property of item.properties ?? []) properties.set(property.name, property);
-      if (item.additionalProperties !== undefined) additionalProperties = item.additionalProperties;
-    }
     const result = {
       ...own,
       kind: "object",
-      allOf,
-      properties: [...properties.values()].sort((left, right) =>
-        left.name.localeCompare(right.name),
-      ),
+      allOf: parts,
     };
-    if (additionalProperties !== undefined) result.additionalProperties = additionalProperties;
     if (references.size) result.references = [...references].sort();
     return result;
   }
-  const result = { ...own, kind: "intersection", allOf };
+  const result = { ...own, kind: "intersection", allOf: [...parts, own] };
   if (references.size) result.references = [...references].sort();
   return result;
+}
+
+export function effectiveSchemaProperties(
+  schema: NormalizedSchema,
+): NonNullable<NormalizedSchema["properties"]> {
+  const properties = new Map<string, NonNullable<NormalizedSchema["properties"]>[number]>();
+  const visit = (current: NormalizedSchema) => {
+    for (const part of current.allOf ?? []) visit(part);
+    for (const property of current.properties ?? []) properties.set(property.name, property);
+  };
+  visit(schema);
+  return [...properties.values()].sort((left, right) => left.name.localeCompare(right.name));
 }
 
 export function normalizeSchema(

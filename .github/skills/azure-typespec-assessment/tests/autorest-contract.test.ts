@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import {
   discoverAutorestDocuments,
+  effectiveSchemaProperties,
   normalizeAutorestDocuments,
   responseStatusKind,
   sameAutorestContract,
@@ -156,8 +157,7 @@ void test("normalizes Swagger 2 paths, x-ms-paths, refs, allOf, multipart, and r
   assert.ok(createRequest);
   const createSchema = createRequest.schema;
   assert.ok(createSchema);
-  const createProperties = createSchema.properties;
-  assert.ok(createProperties);
+  const createProperties = effectiveSchemaProperties(createSchema);
   assert.equal(createSchema.kind, "object");
   assert.deepEqual(
     createProperties.map((item) => item.name),
@@ -193,6 +193,97 @@ void test("normalizes Swagger 2 paths, x-ms-paths, refs, allOf, multipart, and r
   assert.ok(list);
   assert.equal(list.routeSource, "x-ms-paths");
   assert.equal(list.responses[0].status, "2XX");
+});
+
+void test("keeps nested shared allOf schemas finite while preserving effective properties", () => {
+  const root = path.resolve("virtual-nested-autorest");
+  const contract = normalizeAutorestDocuments([
+    {
+      path: "feature.json",
+      absolutePath: path.join(root, "feature.json"),
+      documentRole: "feature",
+      document: {
+        swagger: "2.0",
+        info: { title: "Feature", version: "2026-01-01" },
+        definitions: {
+          Base: {
+            type: "object",
+            properties: { id: { type: "string" } },
+          },
+          Shared: {
+            allOf: [{ $ref: "#/definitions/Base" }],
+            properties: { name: { type: "string" } },
+          },
+          Widget: {
+            allOf: [{ $ref: "#/definitions/Shared" }, { $ref: "#/definitions/Shared" }],
+            properties: { state: { type: "string" } },
+          },
+        },
+        paths: {
+          "/widgets": {
+            get: {
+              operationId: "Widgets_Get",
+              responses: { 200: { schema: { $ref: "#/definitions/Widget" } } },
+            },
+          },
+        },
+      },
+    },
+  ]);
+
+  const schema = contract.operations[0].responses[0].schema;
+  assert.ok(schema);
+  assert.deepEqual(
+    schema.properties?.map((property) => property.name),
+    ["state"],
+  );
+  assert.deepEqual(
+    effectiveSchemaProperties(schema).map((property) => property.name),
+    ["id", "name", "state"],
+  );
+  assert.ok(JSON.stringify(contract).length < 10_000);
+});
+
+void test("preserves the own schema as a mixed allOf composition branch", () => {
+  const root = path.resolve("virtual-mixed-autorest");
+  const contract = normalizeAutorestDocuments([
+    {
+      path: "feature.json",
+      absolutePath: path.join(root, "feature.json"),
+      documentRole: "feature",
+      document: {
+        swagger: "2.0",
+        info: { title: "Feature", version: "2026-01-01" },
+        definitions: {
+          Mixed: {
+            allOf: [{ type: "string" }],
+            properties: { id: { type: "string" } },
+          },
+        },
+        paths: {
+          "/mixed": {
+            get: {
+              operationId: "Mixed_Get",
+              responses: { 200: { schema: { $ref: "#/definitions/Mixed" } } },
+            },
+          },
+        },
+      },
+    },
+  ]);
+
+  const schema = contract.operations[0].responses[0].schema;
+  assert.ok(schema);
+  assert.equal(schema.kind, "intersection");
+  assert.equal(schema.allOf?.length, 2);
+  assert.deepEqual(
+    schema.allOf?.[1].properties?.map((property) => property.name),
+    ["id"],
+  );
+  assert.deepEqual(
+    effectiveSchemaProperties(schema).map((property) => property.name),
+    ["id"],
+  );
 });
 
 void test("discovers configurable multi-file output from service manifest and rejects OpenAPI 3", (context) => {
