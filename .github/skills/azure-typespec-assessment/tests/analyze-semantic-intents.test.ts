@@ -265,6 +265,68 @@ void test("new projects derive semantic intent from target artifacts only", (con
   );
 });
 
+void test("retains compiler-backed source units when AutoRest contract enrichment fails", (context) => {
+  const workRoot = fs.mkdtempSync(path.join(process.cwd(), ".semantic-autorest-failure-"));
+  context.onTestFinished(() => fs.rmSync(workRoot, { recursive: true, force: true }));
+  const invalidDocument = {
+    swagger: "2.0",
+    info: { title: "Widgets", version: "v1" },
+    definitions: { Widget: { allOf: "invalid" } },
+    paths: {
+      "/widgets": {
+        get: {
+          operationId: "Widgets_Get",
+          responses: { 200: { schema: { $ref: "#/definitions/Widget" } } },
+        },
+      },
+    },
+  };
+  writeJson(path.join(workRoot, "base.json"), invalidDocument);
+  writeJson(path.join(workRoot, "current.json"), invalidDocument);
+
+  const result = analyzeFixture({
+    workRoot,
+    manifest: {
+      projects: [
+        {
+          id: "project-kept",
+          sourceChangeIds: ["source-kept"],
+          artifacts: {
+            base: { autorest: artifact("base.json") },
+            current: { autorest: artifact("current.json") },
+          },
+        },
+      ],
+    },
+    sourceIndex: {
+      sourceChanges: [
+        {
+          id: "source-kept",
+          status: "modified",
+          hunks: [{ id: "hunk-kept", lines: ["+model Widget {}"] }],
+          declarations: [
+            {
+              id: "widget",
+              kind: "model",
+              qualifiedName: "Widget",
+              hunkIds: ["hunk-kept"],
+              source: { revision: "current" },
+            },
+          ],
+        },
+      ],
+    },
+  });
+
+  assert.equal(result.status, "ready");
+  assert.equal(result.reviewUnits.length, 1);
+  assert.deepEqual(result.reviewUnits[0].hunkIds, ["hunk-kept"]);
+  assert.deepEqual(result.reviewUnits[0].operations, []);
+  assert.deepEqual(result.reviewUnits[0].ownedOperationIds, []);
+  assertRecord(result.blockers[0]);
+  assert.equal(result.blockers[0].code, "autorest-contract-unsupported");
+});
+
 function assertInternalSemanticUnits(value: unknown): asserts value is InternalSemanticUnit[] {
   assert.ok(Array.isArray(value));
 }
