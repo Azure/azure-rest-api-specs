@@ -29,6 +29,24 @@ model Workspace is TrackedResource<WorkspaceProperties> {
   ...ResourceSkuProperty;
 }
 
+/** The resource model definition representing SKU. */
+model SkuUpdate {
+  ...OptionalProperties<Azure.ResourceManager.CommonTypes.Sku>;
+}
+
+/** The type used for update operations of the Workspace. */
+model WorkspaceUpdate {
+  /** The SKU (Stock Keeping Unit) assigned to this resource. */
+  sku?: SkuUpdate;
+  ...OmitProperties<
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Workspace,
+      WorkspaceProperties
+    >,
+    "sku"
+  >;
+}
+
 @armResourceOperations
 interface Workspaces {
   /**
@@ -45,13 +63,7 @@ interface Workspaces {
    * The operation to update a firmware analysis workspaces.
    */
   @patch(#{ implicitOptionality: true })
-  update is ArmCustomPatchSync<
-    Workspace,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      Workspace,
-      WorkspaceProperties
-    >
-  >;
+  update is ArmCustomPatchSync<Workspace, WorkspaceUpdate>;
 
   /**
    * The operation to delete a firmware analysis workspace.

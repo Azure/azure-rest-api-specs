@@ -68,6 +68,7 @@ using Microsoft.IoTFirmwareDefense;
   "IotFirmwareDefenseSku",
   "csharp"
 );
+@@clientName(SkuUpdate, "IotFirmwareDefenseSkuUpdate", "csharp");
 @@clientName(
   Azure.ResourceManager.CommonTypes.SkuTier,
   "IotFirmwareDefenseSkuTier",
