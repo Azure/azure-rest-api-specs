@@ -29,6 +29,8 @@ using Microsoft.EventHub;
 @@clientLocation(EHNamespaces.get, "Namespaces");
 @@clientLocation(EHNamespaces.createOrUpdate, "Namespaces");
 @@clientName(EHNamespaces.createOrUpdate::parameters.resource, "parameters");
+@@clientLocation(EHNamespaces.updateLegacy, "Namespaces");
+@@clientName(EHNamespaces.updateLegacy::parameters.properties, "parameters");
 @@clientLocation(EHNamespaces.update, "Namespaces");
 @@clientName(EHNamespaces.update::parameters.properties, "parameters");
 @@clientLocation(EHNamespaces.delete, "Namespaces");
