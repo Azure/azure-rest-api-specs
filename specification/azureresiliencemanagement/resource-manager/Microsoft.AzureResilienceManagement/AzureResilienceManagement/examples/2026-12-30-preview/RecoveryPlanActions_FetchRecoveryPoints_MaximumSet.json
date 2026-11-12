@@ -1,0 +1,75 @@
+{
+  "title": "Fetch recovery points with plan, recovery group, and recovery resource policy overrides",
+  "operationId": "RecoveryPlanActions_FetchRecoveryPoints",
+  "parameters": {
+    "serviceGroupName": "sampleServiceGroupName",
+    "api-version": "2026-12-30-preview",
+    "operation-id": "d02c569b-7362-4815-a215-f92a17865f33",
+    "recoveryPlanName": "samplePlanName",
+    "body": {
+      "recoveryPointPolicy": {
+        "type": "Latest",
+        "backupType": [
+          "Snapshot"
+        ],
+        "recoveryPointHealthStatus": "HealthyAndUnknown"
+      },
+      "recoveryGroups": [
+        {
+          "recoveryGroupId": "82647166-048a-4914-9b48-90514eb8de4e",
+          "recoveryPointPolicy": {
+            "type": "Random",
+            "lookbackDuration": "P7D",
+            "backupType": [
+              "Snapshot"
+            ],
+            "recoveryPointHealthStatus": "HealthyOnly"
+          }
+        }
+      ],
+      "recoveryResources": [
+        {
+          "recoveryResourceIds": [
+            "23456789-0123-4567-8901-234567890123"
+          ],
+          "recoveryPointPolicy": {
+            "type": "Latest",
+            "backupType": [
+              "Streaming"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "recoveryPoints": [
+          {
+            "recoveryResourceId": "12345678-9012-3456-7890-123456789012",
+            "recoveryGroupId": "82647166-048a-4914-9b48-90514eb8de4e",
+            "recoveryPointId": "123456789012345",
+            "recoveryPointTime": "2026-12-29T10:30:00Z",
+            "recoveryPointType": "AppConsistent",
+            "threatStatus": "Healthy"
+          },
+          {
+            "recoveryResourceId": "23456789-0123-4567-8901-234567890123",
+            "recoveryGroupId": "82647166-048a-4914-9b48-90514eb8de4e",
+            "recoveryPointId": "987654321098765",
+            "recoveryPointTime": "2026-12-29T08:00:00Z",
+            "backupType": "Streaming"
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.AzureResilienceManagement/locations/eastus/operationStatuses/d02c569b-7362-4815-a215-f92a17865f33?api-version=2026-12-30-preview",
+        "Location": "https://management.azure.com/providers/Microsoft.AzureResilienceManagement/locations/eastus/operationStatuses/d02c569b-7362-4815-a215-f92a17865f33?api-version=2026-12-30-preview",
+        "Retry-After": 10
+      }
+    }
+  }
+}

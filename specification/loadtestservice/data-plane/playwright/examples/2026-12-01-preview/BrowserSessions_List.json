@@ -1,0 +1,46 @@
+{
+  "title": "BrowserSessions_List",
+  "operationId": "BrowserSessions_List",
+  "parameters": {
+    "api-version": "2026-12-01-preview",
+    "workspaceId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "00000000-0000-0000-0000-000000000000",
+            "displayName": "<BrowserSession_Timestamp>",
+            "creatorId": "string",
+            "creatorName": "string",
+            "source": {
+              "id": "00000000-0000-0000-0000-000000000000",
+              "type": "PlaywrightWorkspacesTestRun"
+            },
+            "startTime": "2025-06-06T11:43:28.954Z",
+            "endTime": "2025-06-06T11:43:28.954Z",
+            "durationInMilliseconds": 0,
+            "status": "Completed",
+            "browserType": "Chromium",
+            "operatingSystem": "Linux",
+            "protocol": "CDP",
+            "secretStoreId": "b9f8451c-f7a6-42f3-8215-a989a6635310",
+            "sessionArtifacts": {
+              "enabled": "Enabled",
+              "status": "Completed",
+              "webUri": "https://example.com/browser-session-recording",
+              "artifacts": [
+                {
+                  "uri": "https://examplestorageaccount.blob.core.windows.net/browser-session-recordings/00000000-0000-0000-0000-000000000000/trace.zip",
+                  "type": "Trace"
+                }
+              ]
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}
