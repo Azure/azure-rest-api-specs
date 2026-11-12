@@ -70,6 +70,13 @@ using Azure.ClientGenerator.Core.Legacy;
   "python"
 );
 @@clientName(FileHashAlgorithm.SHA256AC, "SHA256_AC", "python");
+
+// Preserve the legacy Python enum member name.
+@@clientName(
+  MicrosoftSecurityProductName.`Office 365 Advanced Threat Protection`,
+  exact("OFFICE365_ADVANCED_THREAT_PROTECTION"),
+  "python"
+);
 @@clientName(
   MstiDataConnectorDataTypesMicrosoftEmergingThreatFeed,
   "MSTIDataConnectorDataTypesMicrosoftEmergingThreatFeed",

@@ -50,6 +50,11 @@ using Microsoft.AzureStackHCI;
 
 @@clientName(Microsoft.AzureStackHCI, "AzureStackHCIClient", "python");
 
+// Preserve legacy Python enum member names.
+@@clientName(DiskStorageType.S2D, exact("S2_D"), "python");
+@@clientName(NodeStorageType.S2D, exact("S2_D"), "python");
+@@clientName(StorageType.S2D, exact("S2_D"), "python");
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
 @@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
   EdgeDevice.name,
