@@ -26,6 +26,7 @@ import { LinterRulesetRule } from "./rules/linter-ruleset.ts";
 import { NpmPrefixRule } from "./rules/npm-prefix.ts";
 import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.ts";
 import { ServiceYamlRule } from "./rules/service-yaml.ts";
+import { UnifiedExamplesRule } from "./rules/unified-examples.ts";
 import { fileExists, getSuppressions } from "./utils.ts";
 
 // Context argument may add new properties or override checkingAllSpecs
@@ -350,6 +351,7 @@ export async function main({ fix: defaultFix }: RuleExecutionOptions = {}) {
     new NpmPrefixRule(),
     new EmitAutorestRule(),
     new ServiceYamlRule(),
+    new UnifiedExamplesRule(),
     new FlavorAzureRule(),
     new LinterRulesetRule(),
     new ClientTspImportRule(),

@@ -107,6 +107,18 @@ and `.tsx` (case-insensitive, including declaration files).
 File-specific `TypeSpecValidation` suppressions with `rules: [DisallowedFileTypes]`
 can grandfather existing scripts without allowing new scripts in the same service.
 
+The `UnifiedExamples` rule rejects authored JSON files under a project's `examples/`
+directory, including per-version subdirectories. Author examples in `examples.yaml`
+or `examples/<Interface>.yaml` instead. Generated JSON examples under `stable/` and
+`preview/` remain supported and are not checked by this rule.
+
+Existing legacy projects are grandfathered by exact project paths in
+`specification/suppressions.yaml` with `rules: [UnifiedExamples]`. New projects and
+already-migrated projects have no exemption. When migrating a legacy project, remove
+its suppression along with its authored JSON examples. TSV rejects stale suppressions
+once unified YAML is present, preventing migrated projects from reverting to JSON.
+The rule checks the current filesystem in every validation mode without Git history.
+
 `--changed` compares committed changes between `--base` (default `HEAD^`) and
 `--head` (default `HEAD`). It validates the current checkout, not a separate
 checkout of `--head`. Uncommitted changes do not affect project selection.
