@@ -34,15 +34,6 @@ These settings apply only when `--tag=package-preview-2026-08` is specified on t
 ```yaml $(tag) == 'package-preview-2026-08'
 input-file:
   - preview/2026-08-01-preview/waves.json
-suppressions:
-  - code: AvoidAdditionalProperties
-    from: hubmigrate.json
-    where: $.definitions.MigrateProjectProperties.properties.summary
-    reason: Preserves the existing GA summary dictionary keyed by tool.
-  - code: AvoidAdditionalProperties
-    from: hubmigrate.json
-    where: $.definitions.ProjectSummary.properties.extendedSummary
-    reason: Preserves the existing GA tool-specific summary dictionary.
 ```
 
 ### Tag: package-preview-2026-06

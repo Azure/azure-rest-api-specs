@@ -106,6 +106,12 @@ model MigrationEntityProperties is AzureResourceProperties {
   migrationPath?: string;
 
   @doc("Assessed Entity ARM Id")
+  @removed(ApiVersions.v2026_08_01_preview)
+  @renamedFrom(ApiVersions.v2026_08_01_preview, "assessedEntityArmId")
+  oldAssessedEntityArmId?: string;
+
+  @doc("Assessed Entity Azure resource Id")
+  @added(ApiVersions.v2026_08_01_preview)
   assessedEntityArmId?: string;
 
   @doc("Migration status reported by the migration tool.")
