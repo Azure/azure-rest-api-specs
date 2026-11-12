@@ -10,7 +10,23 @@ const requireEval = createRequire(path.join(SHARED_EVAL_SCRIPT_DIR, "package.jso
 
 type SkillEnvironment = {
   skills?: string[];
-  mcpServers?: Record<string, { cwd?: string }>;
+  mcpServers?: Record<string, McpServerEnvironment>;
+};
+
+type McpServerEnvironment = {
+  cwd?: string;
+  command?: string;
+  args?: string[];
+};
+
+type BenchmarkConfig = {
+  dir: string;
+  environments: Record<string, SkillEnvironment>;
+  [key: string]: unknown;
+};
+
+type VallyConfigModule = {
+  loadProjectConfig(startDir: string): Promise<BenchmarkConfig>;
 };
 
 export function configureSkillEnvironments(
@@ -68,10 +84,11 @@ export async function prepareBenchmark(
     throw new Error("AZSDK_EVAL_MCP_KIND must be live or mock.");
   }
   evalRoot = path.resolve(evalRoot);
-  const { loadProjectConfig } = await import(
+  // The isolated Vally install is resolved at runtime, so TypeScript cannot follow this module URL.
+  const vallyModule = (await import(
     pathToFileURL(requireEval.resolve("@microsoft/vally")).href
-  );
-  const config = await loadProjectConfig(evalRoot);
+  )) as VallyConfigModule;
+  const config = await vallyModule.loadProjectConfig(evalRoot);
   if (config.dir !== evalRoot) {
     throw new Error("Benchmark setup requires a .vally.yaml in the eval root.");
   }
