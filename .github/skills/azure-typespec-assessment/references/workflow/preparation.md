@@ -43,12 +43,26 @@ base and head with that same version. When head adds a version, select base's
 latest stable version. For preview-only services, select the latest preview
 declared in the comparison base strictly before the target, excluding versions
 first introduced by this PR. If it remains declared in head, project both
-versions from head; if removed, compile the previous preview from the actual PR
-comparison-base revision. Both AutoRest and TCGC use this exact selection.
+versions from head. If the selected previous version is missing from head,
+record baseline `availability: "unavailable-in-head"` and compile only
+head@target with AutoRest and TCGC. Do not compile a historical base baseline or
+choose an older surviving replacement. Preserve the existing-project
+classification, new-api-version mode, planned versions, head-source selections,
+and discovered version sets.
 Record each role's source revision, full commit SHA, version, and selection
 reason in the manifest and report. Never substitute a different revision after
-an arbitrary compiler failure. New projects have no prior contract; discovery
-and compilation failures remain blockers rather than becoming target-only.
+an arbitrary compiler failure. Only explicit discovered absence activates this
+existing-project target-only path; discovery and compilation failures remain
+blockers. A true new project has no prior contract, which is not the same as an
+unavailable head projection.
+
+Reuse target-only Semantic analysis with the real base-to-head TypeSpec source
+diff. Continue Azure Guidelines and compiler-driven Documentation Completeness
+when their own evidence is ready. Missing before artifacts must not imply
+historical operation absence or compatibility. REST/downstream skip candidates
+and inference for this project and report not-assessed/unknown/blocked; safety
+remains limited to these two dimensions. Mixed projects retain available
+comparisons and findings, while missing-baseline hunks cannot become no-impact.
 
 ## Commands
 

@@ -1,4 +1,5 @@
 import path from "node:path";
+import { isDeepStrictEqual } from "node:util";
 import {
   deriveLegacySafety,
   deriveSafety,
@@ -6,7 +7,11 @@ import {
   legacyDimensionStatus,
 } from "./assessment-display.ts";
 import { hasOnlyApiVersionDeclarations } from "./semantic-change-facts.ts";
-import { isMain, readJsonObject, runMain } from "./cli.ts";
+import {
+  hasUnavailableHeadBaseline,
+  unavailableHeadBaselineBlocker,
+} from "./comparison-execution.ts";
+import { isMain, isRecord, readJsonObject, runMain } from "./cli.ts";
 import { readComplianceCatalog } from "./compliance-assessment.ts";
 import {
   DOCUMENT_QUALITY_ARTIFACT,
@@ -489,18 +494,24 @@ export function validateAssessment(assessment: AssessmentOutput | LegacyAssessme
           `Artifact comparison ${comparison.projectId} is missing ${role} selection reason.`,
         );
       }
+      if (
+        selection?.availability !== undefined &&
+        (selection.availability !== "unavailable-in-head" ||
+          role !== "baseline" ||
+          comparison.mode !== "new-api-version")
+      ) {
+        errors.push(
+          `Artifact comparison ${comparison.projectId} has invalid ${role} availability.`,
+        );
+      }
     }
     if (
       comparison.mode === "new-api-version" &&
-      !(
-        (comparison.baseline?.sourceRevision === "current" &&
-          comparison.baseline?.commit === assessment.comparison.headCommit) ||
-        (comparison.baseline?.sourceRevision === "base" &&
-          comparison.baseline?.commit === assessment.comparison.baseCommit)
-      )
+      (comparison.baseline?.sourceRevision !== "current" ||
+        comparison.baseline?.commit !== assessment.comparison.headCommit)
     ) {
       errors.push(
-        `New-version artifact comparison ${comparison.projectId} must compile the baseline from its selected source revision.`,
+        `New-version artifact comparison ${comparison.projectId} must select the baseline from head; cross-revision fallback is forbidden.`,
       );
     }
     if (
@@ -523,13 +534,106 @@ export function validateAssessment(assessment: AssessmentOutput | LegacyAssessme
         `New-project artifact comparison ${comparison.projectId} must omit the baseline commit and compile only the target from the head source.`,
       );
     }
+    if (hasUnavailableHeadBaseline(comparison)) {
+      const project = assessment.projects?.find((item) => item.id === comparison.projectId);
+      const baseline = comparison.baseline?.apiVersion;
+      const target = comparison.target?.apiVersion;
+      if (
+        !baseline ||
+        !target ||
+        baseline === target ||
+        !comparison.available?.base?.includes(baseline) ||
+        comparison.available.current?.includes(baseline) ||
+        !comparison.available.current?.includes(target) ||
+        project?.classification !== "existing" ||
+        !hasUnavailableHeadBaseline(project.artifactComparison) ||
+        !isDeepStrictEqual(comparison.baseline, project.artifactComparison?.baseline) ||
+        !isDeepStrictEqual(comparison.target, project.artifactComparison?.target) ||
+        !isDeepStrictEqual(comparison.available, project.artifactComparison?.available)
+      ) {
+        errors.push(
+          `Unavailable head baseline ${comparison.projectId} requires explicit discovered version and existing-project provenance.`,
+        );
+      }
+      if (project?.artifacts?.baseline || project?.artifacts?.base) {
+        errors.push(
+          `Unavailable head baseline ${comparison.projectId} must not have baseline artifacts.`,
+        );
+      }
+      for (const emitter of ["autorest", "tcgc"] as const) {
+        const artifact = project?.artifacts?.target?.[emitter];
+        if (
+          artifact?.status === "succeeded" &&
+          (artifact.sourceCommit !== assessment.comparison.headCommit ||
+            artifact.sourceRevision !== "current" ||
+            artifact.comparisonRole !== "target" ||
+            artifact.selectedApiVersion !== target)
+        ) {
+          errors.push(
+            `Unavailable head baseline ${comparison.projectId} has invalid target ${emitter} provenance.`,
+          );
+        }
+      }
+    } else if (
+      comparison.mode === "new-api-version" &&
+      comparison.available &&
+      comparison.baseline?.apiVersion &&
+      !comparison.available.current.includes(comparison.baseline.apiVersion)
+    ) {
+      errors.push(
+        `Missing head baseline ${comparison.projectId} must explicitly record unavailable-in-head.`,
+      );
+    }
   }
+  const unavailableProjects = new Set(
+    (assessment.artifactComparisons ?? [])
+      .filter(hasUnavailableHeadBaseline)
+      .map((comparison) => comparison.projectId),
+  );
   if (!["high", "medium", "low"].includes(assessment.confidence)) {
     errors.push("confidence is invalid.");
   }
   const dimensions = assessment.dimensions ?? {};
   for (const name of ["semantic", "rest", "downstream", "compliance", "documentQuality"]) {
     if (!dimensions[name]) errors.push(`dimensions.${name} is required.`);
+  }
+  for (const name of ["rest", "downstream"] as const) {
+    const dimension = dimensions[name];
+    if (
+      dimension?.findings?.some(
+        (finding) => finding.projectId && unavailableProjects.has(finding.projectId),
+      )
+    ) {
+      errors.push(`${name} findings must not compare an unavailable head baseline.`);
+    }
+    for (const project of assessment.projects ?? []) {
+      const expected = unavailableHeadBaselineBlocker(project);
+      if (
+        expected &&
+        !dimension?.blockers?.some(
+          (blocker) =>
+            isRecord(blocker) &&
+            blocker.code === expected.code &&
+            blocker.projectId === project.id &&
+            blocker.message === expected.message,
+        )
+      ) {
+        errors.push(
+          `${name} must preserve the precise unavailable head baseline reason for ${project.id}.`,
+        );
+      }
+    }
+    if (
+      unavailableProjects.size &&
+      unavailableProjects.size === projectIds.size &&
+      (dimension?.status !== "not-assessed" ||
+        dimension.verdict !== "unknown" ||
+        dimension.coverage !== "blocked")
+    ) {
+      errors.push(
+        `${name} must be not-assessed/unknown/blocked when all head baselines are unavailable.`,
+      );
+    }
   }
   errors.push(
     ...validateDocumentQualityDimension(
@@ -557,6 +661,21 @@ export function validateAssessment(assessment: AssessmentOutput | LegacyAssessme
   if (dimensions.semantic?.status === "assessed") {
     const coveredHunks: string[] = [];
     for (const item of dimensions.semantic.items ?? []) {
+      for (const operation of item.operations ?? []) {
+        const unavailable = unavailableProjects.has(operation.projectId ?? item.projectId);
+        if (
+          unavailable !== Boolean(operation.comparisonUnavailable) ||
+          (unavailable &&
+            (operation.before ||
+              operation.beforeFactId ||
+              operation.restChanged ||
+              operation.changedAspects?.length))
+        ) {
+          errors.push(
+            `Semantic operation ${operation.operationId} must preserve unavailable comparison evidence without inferring historical absence or compatibility.`,
+          );
+        }
+      }
       if (!item.title?.trim() || !item.summary?.trim()) {
         errors.push(`Semantic item ${item.id} is incomplete.`);
       }

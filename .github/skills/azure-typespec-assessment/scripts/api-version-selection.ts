@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import type { ArtifactComparison } from "./runtime-types.ts";
 
 type ApiVersionSet = {
   versioned: boolean;
@@ -97,7 +98,13 @@ export function selectApiVersionPair({
   current: ApiVersionSet;
   baseCommit?: string;
   headCommit?: string;
-}) {
+}): ArtifactComparison & {
+  base?: string;
+  current?: string;
+  baseReason: string;
+  currentReason: string;
+  versioningChange?: string;
+} {
   if (!base.versioned && !current.versioned) {
     return {
       mode: "unversioned",
@@ -212,8 +219,7 @@ export function selectApiVersionPair({
       ? "previous-latest-stable"
       : "previous-latest-preview";
   const mode = addedCurrentVersions.length ? "new-api-version" : "existing-api-version";
-  const baselineSourceRevision =
-    mode === "new-api-version" && current.versions.includes(baselineVersion) ? "current" : "base";
+  const baselineSourceRevision = mode === "new-api-version" ? "current" : "base";
   return {
     mode,
     baseline: {
@@ -221,6 +227,9 @@ export function selectApiVersionPair({
       commit: baselineSourceRevision === "current" ? headCommit : baseCommit,
       apiVersion: baselineVersion,
       reason: baselineReason,
+      ...(mode === "new-api-version" && !current.versions.includes(baselineVersion)
+        ? { availability: "unavailable-in-head" as const }
+        : {}),
     },
     target: {
       sourceRevision: "current",
