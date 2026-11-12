@@ -28,6 +28,10 @@ These are the global settings for the MonitorClient API.
 title: MonitorClient
 ```
 
+```yaml !$(tag)
+allow-no-input: true
+```
+
 ```yaml
 description: Monitor Management Client
 openapi-type: arm
@@ -35,6 +39,9 @@ openapi-subtype: rpaas
 directive:
   - suppress: Example Validations
     reason: "There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off."
+  - suppress: PreviewVersionOverOneYear
+    from: autoScale.json
+    reason: "The 2025-09-01-preview api-version is already implemented and deployed by the Microsoft.Insights autoscale resource provider, so the version string cannot be renamed without breaking the deployed service. The version will be promoted to GA or retired per the standard preview lifecycle."
 ```
 
 ### Tag: package-2025-08
@@ -578,6 +585,15 @@ input-file:
   - preview/2021-09-01-preview/dataCollectionEndpoints_API.json
   - preview/2021-09-01-preview/dataCollectionRuleAssociations_API.json
   - preview/2021-09-01-preview/dataCollectionRules_API.json
+```
+
+### Tag: package-2025-09-01-preview-only
+
+These settings apply only when `--tag=package-2025-09-01-preview-only` is specified on the command line
+
+```yaml $(tag) == 'package-2025-09-01-preview-only'
+input-file:
+  - preview/2025-09-01-preview/autoScale.json
 ```
 
 ### Tag: package-2022-10-01-only

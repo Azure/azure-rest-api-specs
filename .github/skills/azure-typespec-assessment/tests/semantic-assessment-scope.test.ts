@@ -44,6 +44,23 @@ void test("classifies every version publication intent as informational", () => 
   assert.match(informationalIntentText(publication).summary, /20 existing operations/);
 });
 
+void test("keeps mixed publication and feature facts in normal Agent coverage", () => {
+  const mixed = {
+    ...publicationUnit(),
+    declarationNames: ["Versions", "Widget"],
+    changeTypes: ["type", "versioning"],
+    changeFacts: [{ qualifiedName: "Versions" }, { qualifiedName: "Widget" }],
+  };
+
+  assert.equal(semanticIntentType(mixed), "normal");
+  assert.equal(isInformationalPublicationIntent(mixed), false);
+  assert.equal(isInformationalIntent(mixed), false);
+  assert.deepEqual(partitionSemanticIntents([mixed]), {
+    assessed: [mixed],
+    informational: [],
+  });
+});
+
 void test("classifies version-wide changes without an operation threshold", () => {
   const versionWide = {
     id: "semantic-version-wide",

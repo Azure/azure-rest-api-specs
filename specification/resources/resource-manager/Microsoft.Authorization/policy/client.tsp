@@ -85,6 +85,7 @@ namespace Microsoft.Authorization {
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "For client"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   @summary("Deletes a policy assignment.")
   @scope("java,csharp,go,python")
   @clientLocation(PolicyAssignments)

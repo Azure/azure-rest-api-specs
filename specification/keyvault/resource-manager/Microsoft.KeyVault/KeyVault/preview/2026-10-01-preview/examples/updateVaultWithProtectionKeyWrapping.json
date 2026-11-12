@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "api-version": "2026-10-01-preview",
+    "parameters": {
+      "properties": {
+        "protectionKeysWrappingKey": {
+          "keyValue": {
+            "url": "https://sample-hsm.managedhsm.azure.net/keys/wrapping-key",
+            "kty": "oct"
+          },
+          "keyAuthenticationData": {
+            "authType": "ServiceIdentity"
+          }
+        }
+      }
+    },
+    "resourceGroupName": "sample-resource-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "sample-vault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sample-vault",
+        "type": "Microsoft.KeyVault/vaults",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault",
+        "location": "westus",
+        "properties": {
+          "protectionKeysWrappingKey": {
+            "keyValue": {
+              "url": "https://sample-hsm.managedhsm.azure.net/keys/wrapping-key/0123456789abcdef0123456789abcdef",
+              "kty": "oct"
+            },
+            "keyAuthenticationData": {
+              "authType": "ServiceIdentity"
+            }
+          },
+          "sku": {
+            "name": "standard",
+            "family": "A"
+          },
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "vaultUri": "https://sample-vault.vault.azure.net"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "sample-vault",
+        "type": "Microsoft.KeyVault/vaults",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault",
+        "location": "westus",
+        "properties": {
+          "protectionKeysWrappingKey": {
+            "keyValue": {
+              "url": "https://sample-hsm.managedhsm.azure.net/keys/wrapping-key/0123456789abcdef0123456789abcdef",
+              "kty": "oct"
+            },
+            "keyAuthenticationData": {
+              "authType": "ServiceIdentity"
+            }
+          },
+          "sku": {
+            "name": "standard",
+            "family": "A"
+          },
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "vaultUri": "https://sample-vault.vault.azure.net"
+        }
+      }
+    }
+  },
+  "operationId": "Vaults_Update",
+  "title": "Configure protection key wrapping on an existing vault",
+  "description": "Reapply an existing protection-key wrapping configuration using an equivalent versionless key URL. The response retains the persisted versioned key URL; resubmitting the configuration does not rotate the key."
+}

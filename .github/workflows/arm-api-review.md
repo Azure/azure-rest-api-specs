@@ -640,18 +640,27 @@ read-only `github` toolset. If any check fails, act as directed and stop.
    - Otherwise continue to step 4.
 
 4. **Size cap → scoped review**: count the changed files whose path starts with
-   `specification/`, and their added+deleted lines. If the PR is over the cap
+   `specification/`, excluding any path with an `examples` directory segment,
+   and their added+deleted lines. This excludes both TypeSpec source examples
+   (`specification/<service>/<project>/examples/**`) and compiled Swagger examples
+   (`specification/<service>/resource-manager/**/examples/**`) from both limits.
+   For a renamed or moved file, count it once with its added+deleted lines if
+   either its old or new path is a non-example `specification/` path.
+   If the PR is over the cap
    (more than **50** spec files, or more than **5,000** changed spec lines),
    **default to a scoped review** rather than skipping the PR or taking the
    full-scope `Size-cap override`: review the highest-risk subset that fits
    within the cap, and disclose the scope. This check never stops the run.
 
-   Select the subset in this priority order, stopping once the cap is reached:
+   Select the subset in this priority order, stopping once the non-example cap is reached:
    1. Files in API version directories added by this PR (new `stable/**` or
       `preview/**` folders).
    2. Changed `resource-manager/**/*.json` and `**/*.tsp` files.
    3. Changed `**/readme.md` and `**/tspconfig.yaml` configuration files.
-   4. Changed `**/examples/**/*.json` files (lowest risk; drop these first).
+
+   Examples remain in review scope without consuming either limit. Review them
+   alongside the selected specifications; do not mark a review scoped solely
+   because of example file or line counts.
 
    Review the selected files exactly as a normal run would, and disclose the
    scoping in the Step 8 summary so the assigned human API reviewer knows which

@@ -6,6 +6,20 @@ type ApiVersionSet = {
   versions: string[];
 };
 
+const identifier = String.raw`[A-Za-z_]\w*`;
+const qualifiedIdentifier = String.raw`${identifier}(?:\s*\.\s*${identifier})*`;
+
+function stripComments(contents: string): string {
+  return contents.replace(/\/\*[\s\S]*?\*\/|\/\/[^\r\n]*/g, (comment) =>
+    comment.replace(/[^\r\n]/g, " "),
+  );
+}
+
+function fileNamespace(contents: string): string | undefined {
+  const match = new RegExp(String.raw`\bnamespace\s+(${qualifiedIdentifier})\s*;`).exec(contents);
+  return match?.[1].replace(/\s+/g, "");
+}
+
 function tspFiles(root: string): string[] {
   const files: string[] = [];
 
@@ -23,16 +37,42 @@ function tspFiles(root: string): string[] {
 
 export function extractApiVersions(contents: string[]): ApiVersionSet {
   const versions: Set<string> = new Set();
-  let versioned = false;
+  const versionEnums = new Set<string>();
+
   for (const content of contents) {
-    if (/@versioned\s*\(/.test(content)) versioned = true;
-    for (const match of content.matchAll(/\benum\s+Versions\s*\{([\s\S]*?)\}/g)) {
-      for (const member of match[1].matchAll(/\b[A-Za-z_]\w*\s*:\s*"([^"]+)"/g)) {
-        versions.add(member[1]);
+    const source = stripComments(content);
+    for (const match of source.matchAll(
+      new RegExp(String.raw`@versioned\s*\(\s*(${qualifiedIdentifier})\s*\)`, "g"),
+    )) {
+      versionEnums.add(match[1].replace(/\s+/g, ""));
+    }
+  }
+
+  for (const content of contents) {
+    const source = stripComments(content);
+    const namespace = fileNamespace(source);
+    for (const match of source.matchAll(
+      new RegExp(String.raw`\benum\s+(${identifier})\s*\{([\s\S]*?)\}`, "g"),
+    )) {
+      const enumName = match[1];
+      const qualifiedName = namespace ? `${namespace}.${enumName}` : enumName;
+      const referenced = [...versionEnums].some((reference) =>
+        reference.includes(".") ? reference === qualifiedName : reference === enumName,
+      );
+      if (!referenced) continue;
+
+      const members = match[2];
+      for (const member of members.matchAll(
+        /\b[A-Za-z_]\w*\s*:\s*"([^"]+)"|`([^`]+)`(?:\s*:\s*"([^"]+)")?(?=\s*(?:,|$))/g,
+      )) {
+        versions.add(member[1] ?? member[3] ?? member[2]);
       }
     }
   }
-  return { versioned, versions: [...versions].sort(compareApiVersions) };
+  return {
+    versioned: versionEnums.size > 0,
+    versions: [...versions].sort(compareApiVersions),
+  };
 }
 
 export function compareApiVersions(left: string, right: string): number {
@@ -205,4 +245,40 @@ export function resolveProjectApiVersions({
     baseCommit,
     headCommit,
   });
+}
+
+export function resolveNewProjectApiVersions({
+  currentWorktree,
+  project,
+  headCommit,
+}: {
+  currentWorktree: string;
+  project: string;
+  headCommit: string;
+}) {
+  const root = path.join(currentWorktree, project);
+  const current = extractApiVersions(tspFiles(root).map((file) => fs.readFileSync(file, "utf8")));
+  if (current.versioned && !current.versions.length) {
+    throw new Error("Unable to resolve API versions from the versioned TypeSpec project.");
+  }
+  const currentVersion = latest(current.versions);
+  return {
+    mode: "new-project",
+    baseline: {
+      sourceRevision: "absent",
+      reason: "No pre-existing contract exists because the project is absent from the baseline.",
+    },
+    target: {
+      sourceRevision: "current",
+      commit: headCommit,
+      apiVersion: currentVersion,
+      reason: current.versioned ? "latest-version" : "unversioned",
+    },
+    base: undefined,
+    current: currentVersion,
+    baseReason: "project-absent-from-baseline",
+    currentReason: current.versioned ? "latest-version" : "unversioned",
+    addedCurrentVersions: current.versions,
+    available: { base: [], current: current.versions },
+  };
 }
