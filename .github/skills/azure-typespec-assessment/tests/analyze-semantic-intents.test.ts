@@ -1,4 +1,4 @@
-import { assert, test, vi, type TestContext } from "vitest";
+import { assert, onTestFinished, test, vi, type TestContext } from "vitest";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -191,79 +191,149 @@ void test("writes blocked semantic output when compiler indexing is unavailable"
   }
 });
 
-void test("new projects derive semantic intent from target artifacts only", (context) => {
-  const workRoot = fs.mkdtempSync(path.join(process.cwd(), ".semantic-new-project-"));
-  context.onTestFinished(() => fs.rmSync(workRoot, { recursive: true, force: true }));
-  writeJson(path.join(workRoot, "target.json"), {
-    swagger: "2.0",
-    info: { title: "Widgets", version: "v1" },
-    paths: {
-      "/widgets": {
-        get: {
-          operationId: "Widgets_List",
-          responses: { 200: { description: "ok" } },
+void test.each([
+  [false, false],
+  [true, false],
+  [true, true],
+])(
+  "target-only Semantic intents preserve source actions (unavailable: %s, shared project: %s)",
+  (unavailable, mixed) => {
+    const workRoot = fs.mkdtempSync(path.join(process.cwd(), ".semantic-new-project-"));
+    onTestFinished(() => fs.rmSync(workRoot, { recursive: true, force: true }));
+    writeJson(path.join(workRoot, "target.json"), {
+      swagger: "2.0",
+      info: { title: "Widgets", version: "v1" },
+      paths: {
+        "/widgets": {
+          get: {
+            operationId: "Widgets_List",
+            responses: { 200: { description: "ok" } },
+          },
         },
       },
-    },
-  });
+    });
+    fs.copyFileSync(path.join(workRoot, "target.json"), path.join(workRoot, "base.json"));
 
-  const result = analyzeFixture({
-    workRoot,
-    manifest: {
-      projects: [
-        {
-          id: "project-new",
-          classification: "new",
-          sourceChangeIds: ["source-new"],
-          artifactComparison: {
-            mode: "new-project",
-            baseline: {
-              sourceRevision: "absent",
-              reason: "No pre-existing contract exists.",
+    const result = analyzeFixture({
+      workRoot,
+      manifest: {
+        projects: [
+          {
+            id: "project-new",
+            classification: unavailable ? "existing" : "new",
+            sourceChangeIds: ["source-new"],
+            artifactComparison: {
+              mode: unavailable ? "new-api-version" : "new-project",
+              baseline: unavailable
+                ? {
+                    sourceRevision: "current",
+                    commit: "head",
+                    apiVersion: "previous",
+                    availability: "unavailable-in-head",
+                    reason: "previous-latest-preview",
+                  }
+                : {
+                    sourceRevision: "absent",
+                    reason: "No pre-existing contract exists.",
+                  },
+              target: {
+                sourceRevision: "current",
+                apiVersion: "v1",
+                reason: "latest-version",
+              },
             },
-            target: {
-              sourceRevision: "current",
-              apiVersion: "v1",
-              reason: "latest-version",
+            artifacts: {
+              target: {
+                autorest: artifact("target.json"),
+              },
             },
           },
-          artifacts: {
-            target: {
-              autorest: artifact("target.json"),
-            },
+          ...(mixed
+            ? [
+                {
+                  id: "project-ready",
+                  classification: "existing",
+                  sourceChangeIds: ["source-new"],
+                  artifacts: {
+                    base: { autorest: artifact("base.json") },
+                    current: { autorest: artifact("target.json") },
+                  },
+                },
+              ]
+            : []),
+        ],
+      },
+      sourceIndex: {
+        sourceChanges: [
+          {
+            id: "source-new",
+            path: "specification/widgets/main.tsp",
+            status: unavailable ? "modified" : "added",
+            hunks: [
+              {
+                id: "hunk-new",
+                lines: [
+                  ...(unavailable ? ["-op list(): OldWidget[];"] : []),
+                  "+op list(): Widget[];",
+                ],
+              },
+            ],
+            declarations: [
+              ...(unavailable
+                ? [
+                    {
+                      id: "declaration-before",
+                      kind: "operation",
+                      qualifiedName: "Widgets.list",
+                      hunkIds: ["hunk-new"],
+                      source: { revision: "base" },
+                    },
+                  ]
+                : []),
+              {
+                id: "declaration-new",
+                kind: "operation",
+                qualifiedName: "Widgets.list",
+                hunkIds: ["hunk-new"],
+                source: { revision: "current" },
+              },
+            ],
           },
-        },
-      ],
-    },
-    sourceIndex: {
-      sourceChanges: [
-        {
-          id: "source-new",
-          path: "specification/widgets/main.tsp",
-          status: "added",
-          hunks: [{ id: "hunk-new", lines: ["+op list(): Widget[];"] }],
-          declarations: [
-            {
-              id: "declaration-new",
-              kind: "operation",
-              qualifiedName: "Widgets.list",
-              hunkIds: ["hunk-new"],
-              source: { revision: "current" },
-            },
-          ],
-        },
-      ],
-    },
-  });
+        ],
+      },
+    });
 
-  assert.equal(result.status, "ready");
-  assert.deepEqual(result.blockers, []);
-  assert.equal(result.reviewUnits.length, 1);
-  assert.deepEqual(
-    result.reviewUnits[0].operations.map((item) => item.operationId),
-    ["Widgets_List"],
-  );
-});
+    assert.equal(result.status, "ready");
+    assert.deepEqual(result.blockers, []);
+    assert.equal(result.reviewUnits.length, mixed ? 2 : 1);
+    assert.deepEqual(
+      result.reviewUnits.flatMap((unit) => unit.operations.map((item) => item.operationId)),
+      mixed ? ["Widgets_List", "Widgets_List"] : ["Widgets_List"],
+    );
+    const unit = result.reviewUnits.find((item) => item.projectId === "project-new");
+    assert.ok(unit);
+    assert.equal(unit.action, unavailable ? "modify" : "add");
+    const operation = mixed
+      ? unit.operations.find((item) => item.comparisonUnavailable)
+      : unit.operations[0];
+    assert.ok(operation);
+    assert.equal(operation.comparisonUnavailable, unavailable ? true : undefined);
+    if (unavailable) {
+      assert.equal(operation.beforeFactId, undefined);
+      assert.equal(operation.restChanged, undefined);
+      assert.deepEqual(unit.changedAspects, []);
+    }
+    if (mixed) {
+      const ready = result.reviewUnits.find((item) => item.projectId === "project-ready");
+      assert.ok(ready);
+      assert.ok(
+        ready.operations.some(
+          (item) => !item.comparisonUnavailable && item.beforeFactId && item.afterFactId,
+        ),
+      );
+    }
+  },
+);
 
 void test("retains compiler-backed source units when AutoRest contract enrichment fails", (context) => {
   const workRoot = fs.mkdtempSync(path.join(process.cwd(), ".semantic-autorest-failure-"));

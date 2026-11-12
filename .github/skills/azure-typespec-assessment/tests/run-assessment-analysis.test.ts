@@ -2,6 +2,7 @@ import { assert, test } from "vitest";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { selectApiVersionPair } from "../scripts/api-version-selection.ts";
 import {
   assertFreshOutput,
   blockedAssessment,
@@ -84,6 +85,88 @@ function assessmentFact(input: TestModelInput, factId: string): AssessmentFact {
   assertObjectFixture(fact);
   return fact as AssessmentFact;
 }
+
+void test("unavailable head baselines block inference and no-impact without erasing other projects", () => {
+  const scopes = ["blocked", "ready", "shared"];
+  const input = buildModelInputFromFixture({
+    manifest: {
+      comparison: { mergeBaseCommit: "base", headCommit: "head", workingTree: {} },
+      projects: [
+        {
+          id: "blocked",
+          path: "specification/blocked",
+          artifactComparison: selectApiVersionPair({
+            base: { versioned: true, versions: ["2026-01-01-preview"] },
+            current: { versioned: true, versions: ["2026-08-01-preview"] },
+            baseCommit: "base",
+            headCommit: "head",
+          }),
+        },
+        { id: "ready", path: "specification/ready" },
+      ],
+      blockers: [],
+    },
+    sourceIndex: {
+      sourceChanges: scopes.map((scope) => ({
+        id: `source-${scope}`,
+        path: `specification/${scope}/main.tsp`,
+        status: "modified",
+        hunks: [{ id: `hunk-${scope}`, lines: ["-value?: string;", "+value: string;"] }],
+        declarations: [
+          {
+            id: `declaration-${scope}`,
+            kind: "model",
+            qualifiedName: `Contoso.${scope}`,
+            hunkIds: [`hunk-${scope}`],
+          },
+        ],
+      })),
+    },
+    semantic: {
+      status: "ready",
+      blockers: [],
+      facts: {},
+      reviewUnits: scopes.map((scope) => ({
+        id: scope,
+        projectId: scope === "ready" ? "ready" : "blocked",
+        projectIds: scope === "shared" ? ["blocked", "ready"] : [scope],
+        action: "modify",
+        sourceChangeIds: [`source-${scope}`],
+        hunkIds: [`hunk-${scope}`],
+        operations: [{ operationId: scope, hunkIds: [`hunk-${scope}`] }],
+      })),
+    },
+    rest: {
+      status: "ready",
+      blockers: [],
+      facts: {},
+      candidates: ["ready", "shared"].map((scope) => ({
+        id: `rest-${scope}`,
+        projectId: "ready",
+        operationIds: [scope],
+        sourceChangeIds: [`source-${scope}`],
+        evidenceFactIds: [],
+      })),
+    },
+    downstream: { status: "ready", blockers: [], facts: {}, candidates: [] },
+  });
+  for (const id of ["blocked", "shared"]) {
+    const unit = input.semanticReviewUnits.find((item) => item.reviewUnitId === id);
+    assert.ok(unit);
+    const coverage = deterministicCoverage(unit);
+    assert.equal(coverage.classifications?.[0].status, "blocked");
+    assert.equal(coverage.classifications?.[0].reason, "baseline-api-version-unavailable-in-head");
+  }
+  assert.deepEqual(input.restCandidates.map((candidate) => candidate.id).sort(), [
+    "rest-ready",
+    "rest-shared",
+  ]);
+  const ready = input.semanticReviewUnits.find((item) => item.reviewUnitId === "ready");
+  assert.ok(ready);
+  assert.equal(deterministicCoverage(ready).classifications?.[0].status, "candidate-generated");
+  assert.deepEqual(input.inferenceRequests, []);
+  assert.equal(input.complianceSearchRequests.length, 3);
+});
 
 void test("requires a fresh assessment output directory", () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "typespec-assessment-output-"));

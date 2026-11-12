@@ -183,7 +183,7 @@ void test("selects a newly added head version and the latest stable base version
   );
 });
 
-void test("uses the base revision when the previous version is absent from the head enum", () => {
+void test("records the selected head baseline as unavailable without a cross-revision fallback", () => {
   const base = extractApiVersions([
     source(`
   v2026_01_20_preview: "2026-01-20-preview",
@@ -204,8 +204,9 @@ void test("uses the base revision when the previous version is absent from the h
   });
 
   assert.equal(pair.mode, "new-api-version");
-  assert.equal(pair.baseline.sourceRevision, "base");
-  assert.equal(pair.baseline.commit, "base-sha");
+  assert.equal(pair.baseline.sourceRevision, "current");
+  assert.equal(pair.baseline.commit, "head-sha");
+  assert.equal(pair.baseline.availability, "unavailable-in-head");
   assert.equal(pair.baseline.apiVersion, "2026-05-01-preview");
   assert.equal(pair.target.sourceRevision, "current");
   assert.equal(pair.target.commit, "head-sha");
@@ -236,7 +237,7 @@ void test("uses the latest head version and latest preview base when no stable e
 });
 
 void test.each([true, false])(
-  "compares the latest previous preview with exact revision provenance (retained: %s)",
+  "selects the latest previous preview and explicit head availability (retained: %s)",
   (retained) => {
     const previous = "2026-05-01-preview";
     const target = "2026-08-01-preview";
@@ -251,10 +252,11 @@ void test.each([true, false])(
     });
     assert.equal(pair.mode, "new-api-version");
     assert.deepEqual(pair.baseline, {
-      sourceRevision: retained ? "current" : "base",
-      commit: retained ? "pr-head-sha" : "historical-base-sha",
+      sourceRevision: "current",
+      commit: "pr-head-sha",
       apiVersion: previous,
       reason: "previous-latest-preview",
+      ...(!retained ? { availability: "unavailable-in-head" } : {}),
     });
     assert.deepEqual(pair.target, {
       sourceRevision: "current",

@@ -10,9 +10,13 @@ type PreparationBlocker = import("../scripts/runtime-types.ts").PreparationBlock
 
 type SourceIndex = import("../scripts/runtime-types.ts").SourceIndex;
 
-void test.each([true, false])(
-  "both emitters receive the selected previous-preview revision, without retry on failure (retained: %s)",
-  (retained) => {
+void test.each([
+  [true, false],
+  [false, false],
+  [false, true],
+])(
+  "compiles only the available roles without fallback (retained: %s, target failure: %s)",
+  (retained, targetFailure) => {
     const calls: Parameters<typeof runProjectCompilers>[0][] = [];
     const blockers: PreparationBlocker[] = [];
     const records = prepareProjectRecords({
@@ -64,7 +68,7 @@ void test.each([true, false])(
           apiVersion,
           autorest: {
             ...metadata,
-            status: comparisonRole === "baseline" ? "failed" : "succeeded",
+            status: comparisonRole === "baseline" || targetFailure ? "failed" : "succeeded",
             format: "swagger-2.0",
             serviceManifestPath: "",
           },
@@ -86,13 +90,17 @@ void test.each([true, false])(
         apiVersion,
       })),
       [
-        {
-          worktree: retained ? "head-worktree" : "historical-base-worktree",
-          comparisonRole: "baseline",
-          sourceRevision: retained ? "current" : "base",
-          sourceCommit: retained ? "head-sha" : "historical-base-sha",
-          apiVersion: "2026-05-01-preview",
-        },
+        ...(retained
+          ? [
+              {
+                worktree: "head-worktree",
+                comparisonRole: "baseline",
+                sourceRevision: "current",
+                sourceCommit: "head-sha",
+                apiVersion: "2026-05-01-preview",
+              },
+            ]
+          : []),
         {
           worktree: "head-worktree",
           comparisonRole: "target",
@@ -102,10 +110,12 @@ void test.each([true, false])(
         },
       ],
     );
-    for (const role of ["baseline", "target"] as const) {
+    for (const role of retained ? (["baseline", "target"] as const) : (["target"] as const)) {
       for (const emitter of ["autorest", "tcgc"] as const) {
         const artifact = records[0].artifacts[role]?.[emitter];
         assert.equal(artifact?.sourceCommit, records[0].artifactComparison?.[role].commit);
+        assert.equal(artifact?.sourceRevision, "current");
+        assert.equal(artifact?.comparisonRole, role);
         assert.equal(
           artifact?.selectedApiVersion,
           records[0].artifactComparison?.[role].apiVersion,
@@ -113,9 +123,19 @@ void test.each([true, false])(
       }
     }
     assert.equal(records[0].classification, "existing");
+    assert.equal(records[0].artifactComparison?.mode, "new-api-version");
+    assert.equal(records[0].artifactComparison?.baseline.apiVersion, "2026-05-01-preview");
+    assert.equal(records[0].artifactComparison?.baseline.commit, "head-sha");
+    if (!retained) assert.equal(records[0].artifacts.baseline, undefined);
     assert.deepEqual(
       blockers.map(({ code, comparisonRole }) => [code, comparisonRole]),
-      [["autorest-compile-failed", "baseline"]],
+      [
+        [
+          retained ? "autorest-compile-failed" : "baseline-api-version-unavailable-in-head",
+          "baseline",
+        ],
+        ...(targetFailure ? [["autorest-compile-failed", "target"]] : []),
+      ],
     );
   },
 );

@@ -538,9 +538,11 @@ export interface NormalizedTcgcContract {
 
 export interface SemanticOperationReference {
   operationId: string;
+  projectId?: string;
   beforeFactId?: string;
   afterFactId?: string;
   restChanged?: boolean;
+  comparisonUnavailable?: boolean;
   matchBasis?: string;
   sourceChangeIds?: string[];
   hunkIds?: string[];
@@ -998,6 +1000,7 @@ export interface ArtifactSelection {
   commit?: string;
   apiVersion?: string;
   reason: string;
+  availability?: "unavailable-in-head";
 }
 
 export interface ArtifactComparison {
@@ -1747,6 +1750,7 @@ export interface AssessmentOutput {
     mode?: string;
     baseline?: ArtifactSelection;
     target?: ArtifactSelection;
+    available?: ArtifactComparison["available"];
   }[];
   confidence: "high" | "medium" | "low";
   safety: {
