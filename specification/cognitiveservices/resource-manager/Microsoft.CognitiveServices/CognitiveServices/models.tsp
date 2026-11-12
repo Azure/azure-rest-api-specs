@@ -371,6 +371,30 @@ union ServiceTier {
 }
 
 /**
+ * Text watermarking behavior for supported inference requests.
+ */
+@added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+union TextWatermarkingMode {
+  string,
+
+  /**
+   * Text watermarking is disabled.
+   */
+  Disabled: "Disabled",
+
+  /**
+   * Each supported request controls whether text watermarking is applied.
+   */
+  RequestControlled: "RequestControlled",
+
+  /**
+   * Text watermarking is applied to all supported requests.
+   */
+  AlwaysEnabled: "AlwaysEnabled",
+}
+
+/**
  * The state of the deployment. Controls whether the deployment is accepting inference requests. Use 'Running' for active deployments that process requests, or 'Paused' to temporarily stop inference while preserving the deployment configuration.
  */
 union DeploymentState {
@@ -3945,6 +3969,13 @@ model DeploymentProperties {
    * Routing configuration for the model-router deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, quality, cost) for routing across all supported models or the model subset.
    */
   routing?: DeploymentRouting;
+
+  /**
+   * The text watermarking behavior for this deployment. A platform-controlled subscription setting takes precedence when one is configured.
+   */
+  @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
+  textWatermarking?: TextWatermarkingMode;
 
   /**
    * The full resource IDs of cost controls directly attached to this deployment.
