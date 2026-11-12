@@ -436,5 +436,32 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 @@access(StorageErrorCode, Access.public, "java");
 @@usage(StorageErrorCode, Usage.output, "java");
 @@clientName(ListQueuesResponse, "ListQueuesSegmentResponse", "java");
+/** The error returned by the Queue service, including the fields the Java SDK surfaces on QueueStorageException. */
+@error
+@mediaTypeHint("application/xml")
+@TypeSpec.Xml.name("Error")
+model QueueStorageError {
+  ...Storage.Queues.Error;
+
+  /** The name of the header that caused the error. */
+  @TypeSpec.Xml.name("HeaderName") headerName?: string;
+
+  /** The value of the header that caused the error. */
+  @TypeSpec.Xml.name("HeaderValue") headerValue?: string;
+
+  /** The name of the query parameter that caused the error. */
+  @TypeSpec.Xml.name("QueryParameterName") queryParameterName?: string;
+
+  /** The value of the query parameter that caused the error. */
+  @TypeSpec.Xml.name("QueryParameterValue") queryParameterValue?: string;
+
+  /** The reason for the error. */
+  @TypeSpec.Xml.name("Reason") reason?: string;
+
+  /** Additional error detail. */
+  @TypeSpec.Xml.name("ExtendedErrorDetail") extendedErrorDetail?: string;
+}
+
+@@alternateType(Storage.Queues.Error, QueueStorageError, "java");
 @@access(ListQueuesResponse, Access.public, "java");
 @@usage(ListQueuesResponse, Usage.output, "java");
