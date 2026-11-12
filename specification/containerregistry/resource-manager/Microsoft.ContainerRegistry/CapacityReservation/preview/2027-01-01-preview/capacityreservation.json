@@ -1,0 +1,1208 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ContainerRegistryCapacityReservationManagementClient",
+    "version": "2027-01-01-preview",
+    "description": "Manages Azure Container Registry capacity reservations.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "CapacityReservations"
+    },
+    {
+      "name": "CapacityReservationStampOperations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ContainerRegistry/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationList": {
+            "$ref": "./examples/OperationList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry/capacityReservations": {
+      "get": {
+        "operationId": "CapacityReservations_ListBySubscription",
+        "tags": [
+          "CapacityReservations"
+        ],
+        "description": "Lists capacity reservations in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CapacityReservationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CapacityReservationListBySubscription": {
+            "$ref": "./examples/CapacityReservationListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerRegistry/locations/{location}/seedCapacityLedger": {
+      "post": {
+        "operationId": "CapacityReservationStampOperations_SeedCapacityLedger",
+        "tags": [
+          "CapacityReservationStampOperations"
+        ],
+        "description": "Onboards or re-seeds a Dogfood stamp capacity ledger.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The stamp capacity values to seed.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SeedCapacityLedgerRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StampCapacityLedger"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CapacityReservationSeedCapacityLedger": {
+            "$ref": "./examples/CapacityReservationSeedCapacityLedger.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/capacityReservations": {
+      "get": {
+        "operationId": "CapacityReservations_ListByResourceGroup",
+        "tags": [
+          "CapacityReservations"
+        ],
+        "description": "Lists capacity reservations in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CapacityReservationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CapacityReservationListByResourceGroup": {
+            "$ref": "./examples/CapacityReservationListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/capacityReservations/{capacityReservationName}": {
+      "get": {
+        "operationId": "CapacityReservations_Get",
+        "tags": [
+          "CapacityReservations"
+        ],
+        "description": "Gets a capacity reservation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "capacityReservationName",
+            "in": "path",
+            "description": "The name of the capacity reservation.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CapacityReservation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CapacityReservationGet": {
+            "$ref": "./examples/CapacityReservationGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CapacityReservations_Create",
+        "tags": [
+          "CapacityReservations"
+        ],
+        "description": "Creates or idempotently replaces a capacity reservation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "capacityReservationName",
+            "in": "path",
+            "description": "The name of the capacity reservation.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CapacityReservation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CapacityReservation"
+            }
+          },
+          "201": {
+            "description": "Azure create operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CapacityReservation"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "202": {
+            "description": "A reservation operation accepted for asynchronous completion.",
+            "schema": {
+              "$ref": "#/definitions/CapacityReservation"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CapacityReservationCreate": {
+            "$ref": "./examples/CapacityReservationCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/CapacityReservation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "CapacityReservations_Update",
+        "tags": [
+          "CapacityReservations"
+        ],
+        "description": "Resizes a capacity reservation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "capacityReservationName",
+            "in": "path",
+            "description": "The name of the capacity reservation.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CapacityReservationUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CapacityReservation"
+            }
+          },
+          "202": {
+            "description": "A reservation operation accepted for asynchronous completion.",
+            "schema": {
+              "$ref": "#/definitions/CapacityReservation"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CapacityReservationUpdate": {
+            "$ref": "./examples/CapacityReservationUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/CapacityReservation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "CapacityReservations_Delete",
+        "tags": [
+          "CapacityReservations"
+        ],
+        "description": "Deletes a capacity reservation after its minimum commitment has elapsed.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "capacityReservationName",
+            "in": "path",
+            "description": "The name of the capacity reservation.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CapacityReservationDelete": {
+            "$ref": "./examples/CapacityReservationDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/capacityReservations/{capacityReservationName}/associate": {
+      "post": {
+        "operationId": "CapacityReservations_Associate",
+        "tags": [
+          "CapacityReservations"
+        ],
+        "description": "Associates a registry with this capacity reservation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "capacityReservationName",
+            "in": "path",
+            "description": "The name of the capacity reservation.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegistryAssociationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CapacityReservationAssociate": {
+            "$ref": "./examples/CapacityReservationAssociate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/capacityReservations/{capacityReservationName}/disassociate": {
+      "post": {
+        "operationId": "CapacityReservations_Disassociate",
+        "tags": [
+          "CapacityReservations"
+        ],
+        "description": "Removes a registry association from this capacity reservation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "capacityReservationName",
+            "in": "path",
+            "description": "The name of the capacity reservation.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegistryAssociationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CapacityReservationDisassociate": {
+            "$ref": "./examples/CapacityReservationDisassociate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/capacityReservations/{capacityReservationName}/listRegistries": {
+      "post": {
+        "operationId": "CapacityReservations_ListRegistries",
+        "tags": [
+          "CapacityReservations"
+        ],
+        "description": "Lists registries associated with this capacity reservation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "capacityReservationName",
+            "in": "path",
+            "description": "The name of the capacity reservation.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ReservationRegistryAssociationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CapacityReservationListRegistries": {
+            "$ref": "./examples/CapacityReservationListRegistries.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
+    "CapacityReservation": {
+      "type": "object",
+      "description": "A reservation of request-rate, ingress, and egress capacity on a Dogfood stamp.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CapacityReservationProperties",
+          "description": "The properties of the capacity reservation."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CapacityReservationListResult": {
+      "type": "object",
+      "description": "The result of listing capacity reservations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The capacity reservations.",
+          "items": {
+            "$ref": "#/definitions/CapacityReservation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI for the next page of results."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CapacityReservationProperties": {
+      "type": "object",
+      "description": "Properties returned for a capacity reservation.",
+      "properties": {
+        "requestRateTier": {
+          "$ref": "#/definitions/RequestRateTier",
+          "description": "The request-rate tier label."
+        },
+        "egressTier": {
+          "$ref": "#/definitions/EgressTier",
+          "description": "The egress tier label."
+        },
+        "ingressTier": {
+          "$ref": "#/definitions/IngressTier",
+          "description": "The ingress tier label."
+        },
+        "minimumCommitmentMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of minutes before the reservation can be deleted.",
+          "default": 5,
+          "minimum": 1,
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "tierCatalogVersion": {
+          "type": "string",
+          "description": "The tier catalog version used to resolve the admitted floors.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the capacity reservation.",
+          "readOnly": true
+        },
+        "statusReason": {
+          "type": "string",
+          "description": "A human-readable reason when provisioning failed.",
+          "readOnly": true
+        },
+        "earliestDeletableAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The earliest time at which the reservation can be deleted.",
+          "readOnly": true
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the reservation was created.",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the reservation was last modified.",
+          "readOnly": true
+        }
+      }
+    },
+    "CapacityReservationResizeProperties": {
+      "type": "object",
+      "description": "Customer-configurable properties accepted when resizing a capacity reservation.",
+      "properties": {
+        "requestRateTier": {
+          "$ref": "#/definitions/RequestRateTier",
+          "description": "The updated request-rate tier label."
+        },
+        "egressTier": {
+          "$ref": "#/definitions/EgressTier",
+          "description": "The updated egress tier label."
+        },
+        "ingressTier": {
+          "$ref": "#/definitions/IngressTier",
+          "description": "The updated ingress tier label."
+        }
+      }
+    },
+    "CapacityReservationUpdate": {
+      "type": "object",
+      "description": "Parameters for resizing a capacity reservation.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/CapacityReservationResizeProperties",
+          "description": "The updated reservation properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "EgressTier": {
+      "type": "string",
+      "description": "Egress reservation tiers.",
+      "enum": [
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ],
+      "x-ms-enum": {
+        "name": "EgressTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "E1",
+            "value": "E1",
+            "description": "16 Gbps."
+          },
+          {
+            "name": "E2",
+            "value": "E2",
+            "description": "32 Gbps."
+          },
+          {
+            "name": "E3",
+            "value": "E3",
+            "description": "64 Gbps."
+          },
+          {
+            "name": "E4",
+            "value": "E4",
+            "description": "128 Gbps."
+          },
+          {
+            "name": "E5",
+            "value": "E5",
+            "description": "256 Gbps."
+          },
+          {
+            "name": "E6",
+            "value": "E6",
+            "description": "512 Gbps."
+          }
+        ]
+      }
+    },
+    "IngressTier": {
+      "type": "string",
+      "description": "Ingress reservation tiers.",
+      "enum": [
+        "I1",
+        "I2",
+        "I4",
+        "I8",
+        "I16"
+      ],
+      "x-ms-enum": {
+        "name": "IngressTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "I1",
+            "value": "I1",
+            "description": "0.5 Gbps."
+          },
+          {
+            "name": "I2",
+            "value": "I2",
+            "description": "1 Gbps."
+          },
+          {
+            "name": "I4",
+            "value": "I4",
+            "description": "2 Gbps."
+          },
+          {
+            "name": "I8",
+            "value": "I8",
+            "description": "4 Gbps."
+          },
+          {
+            "name": "I16",
+            "value": "I16",
+            "description": "8 Gbps."
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the capacity reservation at the time the operation was called.",
+      "enum": [
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
+          }
+        ]
+      }
+    },
+    "RegistryAssociationRequest": {
+      "type": "object",
+      "description": "A request to associate or disassociate a registry.",
+      "properties": {
+        "registryId": {
+          "type": "string",
+          "description": "The full ARM ID of a `Microsoft.ContainerRegistry/registries` resource, using the format\n`/subscriptions/.../resourceGroups/.../providers/Microsoft.ContainerRegistry/registries/...`.\nThe registry must be in the reservation's subscription; its resource group may differ."
+        }
+      },
+      "required": [
+        "registryId"
+      ]
+    },
+    "RequestRateTier": {
+      "type": "string",
+      "description": "Request-rate reservation tiers.",
+      "enum": [
+        "R1",
+        "R2",
+        "R4",
+        "R8",
+        "R16",
+        "R32",
+        "R64"
+      ],
+      "x-ms-enum": {
+        "name": "RequestRateTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "R1",
+            "value": "R1",
+            "description": "One request-rate unit."
+          },
+          {
+            "name": "R2",
+            "value": "R2",
+            "description": "Two request-rate units."
+          },
+          {
+            "name": "R4",
+            "value": "R4",
+            "description": "Four request-rate units."
+          },
+          {
+            "name": "R8",
+            "value": "R8",
+            "description": "Eight request-rate units."
+          },
+          {
+            "name": "R16",
+            "value": "R16",
+            "description": "Sixteen request-rate units."
+          },
+          {
+            "name": "R32",
+            "value": "R32",
+            "description": "Thirty-two request-rate units."
+          },
+          {
+            "name": "R64",
+            "value": "R64",
+            "description": "Sixty-four request-rate units."
+          }
+        ]
+      }
+    },
+    "ReservationRegistryAssociation": {
+      "type": "object",
+      "description": "A registry associated with a capacity reservation.",
+      "properties": {
+        "registryId": {
+          "type": "string",
+          "description": "The full ARM ID of the associated `Microsoft.ContainerRegistry/registries` resource, normalized to lowercase."
+        },
+        "associationState": {
+          "type": "string",
+          "description": "The state of the association."
+        },
+        "associatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the registry was associated."
+        }
+      },
+      "required": [
+        "registryId",
+        "associationState",
+        "associatedAt"
+      ]
+    },
+    "ReservationRegistryAssociationListResult": {
+      "type": "object",
+      "description": "The result of listing registries associated with a capacity reservation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The registry associations.",
+          "items": {
+            "$ref": "#/definitions/ReservationRegistryAssociation"
+          },
+          "x-ms-identifiers": [
+            "registryId"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI for the next page of results."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SeedCapacityLedgerRequest": {
+      "type": "object",
+      "description": "Parameters for seeding a stamp capacity ledger in Dogfood.",
+      "properties": {
+        "stampId": {
+          "type": "string",
+          "description": "The stamp identifier."
+        },
+        "deploymentId": {
+          "type": "string",
+          "description": "The stamp deployment identifier used to derive VM scale set resource identifiers."
+        },
+        "registryStandingNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The current registry pool node count.",
+          "minimum": 0
+        },
+        "registryMaxNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum registry pool node count.",
+          "minimum": 0
+        },
+        "registrySkuBucket": {
+          "type": "string",
+          "description": "The registry pool SKU bucket."
+        },
+        "registryVmssResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The registry VM scale set resource identifier."
+        },
+        "dataProxyStandingNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The current data proxy pool node count.",
+          "minimum": 0
+        },
+        "dataProxyMaxNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum data proxy pool node count.",
+          "minimum": 0
+        },
+        "dataProxySkuBucket": {
+          "type": "string",
+          "description": "The data proxy pool SKU bucket."
+        },
+        "dataProxyVmssResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The data proxy VM scale set resource identifier."
+        }
+      },
+      "required": [
+        "stampId",
+        "registryStandingNodeCount",
+        "registryMaxNodeCount",
+        "dataProxyStandingNodeCount",
+        "dataProxyMaxNodeCount"
+      ]
+    },
+    "StampCapacityLedger": {
+      "type": "object",
+      "description": "The stamp capacity ledger after seeding.",
+      "properties": {
+        "stampId": {
+          "type": "string",
+          "description": "The stamp identifier."
+        },
+        "region": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The Azure region containing the stamp."
+        },
+        "registryPool": {
+          "$ref": "#/definitions/StampPoolCapacity",
+          "description": "The registry pool capacity."
+        },
+        "dataProxyPool": {
+          "$ref": "#/definitions/StampPoolCapacity",
+          "description": "The data proxy pool capacity."
+        },
+        "totalReservedRequestRate": {
+          "type": "number",
+          "format": "double",
+          "description": "The total reserved request rate."
+        },
+        "totalReservedEgressGbps": {
+          "type": "number",
+          "format": "double",
+          "description": "The total reserved egress in gigabits per second."
+        },
+        "totalReservedIngressGbps": {
+          "type": "number",
+          "format": "double",
+          "description": "The total reserved ingress in gigabits per second."
+        },
+        "maxRequestRate": {
+          "type": "number",
+          "format": "double",
+          "description": "The maximum reservable request rate."
+        },
+        "maxEgressGbps": {
+          "type": "number",
+          "format": "double",
+          "description": "The maximum reservable egress in gigabits per second."
+        },
+        "maxIngressGbps": {
+          "type": "number",
+          "format": "double",
+          "description": "The maximum reservable ingress in gigabits per second."
+        },
+        "benchmarkVersion": {
+          "type": "string",
+          "description": "The benchmark version used to compute capacity."
+        },
+        "scaling": {
+          "type": "boolean",
+          "description": "Whether the stamp is currently scaling."
+        },
+        "pendingClaimCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of pending capacity claims."
+        }
+      },
+      "required": [
+        "stampId",
+        "region",
+        "registryPool",
+        "dataProxyPool",
+        "totalReservedRequestRate",
+        "totalReservedEgressGbps",
+        "totalReservedIngressGbps",
+        "maxRequestRate",
+        "maxEgressGbps",
+        "maxIngressGbps",
+        "scaling",
+        "pendingClaimCount"
+      ]
+    },
+    "StampPoolCapacity": {
+      "type": "object",
+      "description": "Capacity information for one stamp pool.",
+      "properties": {
+        "standingNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The current standing node count."
+        },
+        "pendingNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The pending target node count."
+        },
+        "maxNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum node count."
+        },
+        "skuBucket": {
+          "type": "string",
+          "description": "The pool SKU bucket."
+        },
+        "vmssResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The VM scale set resource identifier."
+        }
+      },
+      "required": [
+        "standingNodeCount",
+        "maxNodeCount"
+      ]
+    }
+  },
+  "parameters": {}
+}
