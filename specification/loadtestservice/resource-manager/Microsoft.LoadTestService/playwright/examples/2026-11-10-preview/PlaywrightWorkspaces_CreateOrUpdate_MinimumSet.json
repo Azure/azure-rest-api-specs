@@ -1,0 +1,41 @@
+{
+  "title": "PlaywrightWorkspaces_CreateOrUpdate_MinimumSet",
+  "operationId": "PlaywrightWorkspaces_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-11-10-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgplaywright",
+    "playwrightWorkspaceName": "myWorkspace",
+    "resource": {
+      "location": "westus3"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "westus3",
+        "properties": {
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgplaywright/providers/Microsoft.LoadTestService/PlaywrightWorkspaces/myWorkspace",
+        "name": "myWorkspace",
+        "type": "Microsoft.LoadTestService/PlaywrightWorkspaces"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgplaywright/providers/Microsoft.LoadTestService/locations/westus3/operationResults/00000000-0000-0000-0000-000000000000?api-version=2026-11-10-preview",
+        "Retry-After": 10
+      },
+      "body": {
+        "location": "westus3",
+        "properties": {
+          "provisioningState": "Creating"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgplaywright/providers/Microsoft.LoadTestService/PlaywrightWorkspaces/myWorkspace",
+        "name": "myWorkspace",
+        "type": "Microsoft.LoadTestService/PlaywrightWorkspaces"
+      }
+    }
+  }
+}
