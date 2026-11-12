@@ -1,17 +1,18 @@
 # Protected Labels Configuration
-# This file defines which labels can only be applied by authorized users.
+# This file defines which labels can only be added or removed by authorized users.
 # If an unauthorized user applies a protected label, the bot removes it.
+# If an unauthorized user removes a protected label, the bot restores it.
 #
 # The problem: service teams self-applying "Approved" labels to bypass architect review.
 # This workflow ensures only authorized reviewers can sign off via labels.
 #
 # Format:
-#   global-approvers: users who can apply ANY protected label
-#   LabelName: users who can apply THIS specific label (in addition to global)
+#   global-approvers: users who can add or remove ANY protected label
+#   LabelName: users who can add or remove THIS specific label (in addition to global)
 #
 # To update: submit a PR modifying this file.
 
-# Global approvers can apply any protected label.
+# Global approvers can add or remove any protected label.
 global-approvers:
   - lmazuel
   - samvaity
@@ -30,7 +31,14 @@ data-plane-review-signoff: &data-plane-reviewers
 # shares its ARM reviewer team with the ARM signoff and validation labels below.
 # See the stewardship board member guide (aka.ms/azsdk/architect-guidance).
 typespec-suppressions-approved:
-  data-plane: *data-plane-reviewers
+  data-plane:
+    team: azure-data-plane-api-reviewers
+    users:
+      - glecaros
+      - rhurey
+      - glharper
+      - baywet
+      - dargilco
   management-plane: &arm-api-reviewers
     team: arm-api-reviewers
 
@@ -118,16 +126,15 @@ package-name-approved-all:
 
 # SDK breaking-change board approval labels.
 # These labels clear the per-language SDK breaking-change merge gates (rulesPri2Sdk in
-# .github/workflows/src/summarize-checks/labelling.ts). Only authorized reviewers may apply
-# them; if anyone else does, the bot removes the label.
+# .github/workflows/src/summarize-checks/labelling.ts). Only authorized reviewers may add
+# or remove them; the bot reverses unauthorized changes.
 #
 # The Automation App resolves the live `azure-sdk-team` roster. Explicit users
 # preserve access for current approvers who are not members of that team.
 #
-# Only the labels that currently exist in the repo are listed. The Java and Python-Track2
-# approval labels (BreakingChange-Java-Sdk-Approved, BreakingChange-Java-Sdk-Suppression-Approved,
-# BreakingChange-Python-Track2-Sdk-Approved) are defined in labelling.ts but not yet created
-# as repo labels; add them here once they exist.
+# Only the labels that currently exist in the repo are listed. The Java approval labels
+# (BreakingChange-Java-Sdk-Approved and BreakingChange-Java-Sdk-Suppression-Approved)
+# are defined in labelling.ts but not yet created as repo labels; add them here once they exist.
 BreakingChange-Go-Sdk-Approved: &sdk-breaking-change-approvers
   team: azure-sdk-team
   users:

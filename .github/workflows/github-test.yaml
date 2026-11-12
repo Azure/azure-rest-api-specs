@@ -11,6 +11,7 @@ on:
       - pnpm-lock.yaml
       - pnpm-workspace.yaml
       - vitest.config.mts
+      - eng/tools/spec-gen-sdk-runner/**
       - eng/tools/vitest.base.config.ts
       - .npmrc
   pull_request:
@@ -21,6 +22,7 @@ on:
       - pnpm-lock.yaml
       - pnpm-workspace.yaml
       - vitest.config.mts
+      - eng/tools/spec-gen-sdk-runner/**
       - eng/tools/vitest.base.config.ts
       - .npmrc
   workflow_dispatch:
@@ -58,6 +60,7 @@ jobs:
           persist-credentials: false
           sparse-checkout: |
             .github
+            eng/tools/spec-gen-sdk-runner
 
       - if: ${{ github.event_name == 'pull_request' && matrix.os == 'ubuntu' }}
         name: Require compiled agentic workflow locks

@@ -2,8 +2,9 @@ name: azure-typespec-author-eval
 description: authoring handoff edits client tsp directly
 version: "1.0"
 type: capability
-area: naming
-environment: azsdk-mcp
+tags:
+  area: naming
+agent_environment: azsdk-mcp
 defaults:
   runs: 1
   timeout: 180s
@@ -28,15 +29,15 @@ stimuli:
       customization MCP tool is available. Stop after the handoff result; the next authoring
       step will run TypeSpec validation. Return JSON "applied" and "generatedNamesVerified".
       Do not compile or generate an SDK in this bounded handoff.
-    environment: &a1
+    agent_environment: &a1
       files:
-        - src: ../../../azsdk-common-typespec-naming/evals/fixtures/customization-mcp.mjs
+        - src: ../../../azure-typespec-sdk-naming/evals/fixtures/customization-mcp.mjs
           dest: customization-mcp.mjs
-        - src: ../../../azsdk-common-typespec-naming/evals/fixtures/standalone-apply/main.tsp
+        - src: ../../../azure-typespec-sdk-naming/evals/fixtures/standalone-apply/main.tsp
           dest: main.tsp
-        - src: ../../../azsdk-common-typespec-naming/evals/fixtures/standalone-apply/tspconfig.yaml
+        - src: ../../../azure-typespec-sdk-naming/evals/fixtures/standalone-apply/tspconfig.yaml
           dest: tspconfig.yaml
-        - src: ../../../azsdk-common-typespec-naming/evals/fixtures/standalone-apply/existing-client.tsp
+        - src: ../../../azure-typespec-sdk-naming/evals/fixtures/standalone-apply/existing-client.tsp
           dest: client.tsp
       mcpServers:
         azure-sdk-mcp:
@@ -51,7 +52,7 @@ stimuli:
       - type: skill-invocation
         config:
           required:
-            - azsdk-common-typespec-naming
+            - azure-typespec-sdk-naming
       - &a3
         type: tool-calls
         config:
@@ -98,14 +99,14 @@ stimuli:
       customization MCP tool is available. Stop after the handoff result; the next authoring
       step will run TypeSpec validation. Return JSON "applied" and "generatedNamesVerified".
       Do not compile or generate an SDK in this bounded handoff.
-    environment: *a1
+    agent_environment: *a1
     constraints: *a2
     graders:
       - type: skill-invocation
         config:
           required:
             - azure-typespec-author
-            - azsdk-common-typespec-naming
+            - azure-typespec-sdk-naming
       - *a3
       - *a4
       - *a5
@@ -128,7 +129,7 @@ stimuli:
       customization MCP tool is available. Stop after the handoff result; the next authoring
       step will run TypeSpec validation. Return JSON "applied" and "generatedNamesVerified".
       Do not compile or generate an SDK in this bounded handoff.
-    environment: *a1
+    agent_environment: *a1
     constraints: *a2
     graders:
       - type: tool-calls

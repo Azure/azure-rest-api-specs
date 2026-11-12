@@ -28,19 +28,27 @@ These are the global settings for the sovereign.
 title: Microsoft.Sovereign
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-02-27-preview
+tag: package-2026-10-31-preview
 ```
 
-### Tag: package-2025-02-27-preview
+### Tag: package-2026-10-31-preview
 
-These settings apply only when `--tag=package-2025-02-27-preview` is specified on the command line.
+These settings apply only when `--tag=package-2026-10-31-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-02-27-preview'
+```yaml $(tag) == 'package-2026-10-31-preview'
 input-file:
-  - preview/2025-02-27-preview/sovereign.json
+  - preview/2026-10-31-preview/sovereign.json
 suppressions:
-  - code: AvoidAnonymousTypes
-    reason: This error is caused by typespec inbuilt managed identity model.
+  - code: GuidUsage
+    from: sovereign.json
+    where: $.definitions["Azure.Core.uuid"].format
+    reason: >-
+      Used only for SovereignViewSubscriptionScope.id, which contains an Azure
+      subscription ID, a canonical UUID consistent with common-types v6.
+      The earlier TypeSpec discussion is linked at
+      https://github.com/Azure/azure-rest-api-specs/pull/46782#discussion_r4251063221.
+      Retaining uuid was confirmed in the review at
+      https://github.com/Azure/azure-rest-api-specs/pull/46782#discussion_r4319215608.
 ```
 
 ---

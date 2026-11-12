@@ -66,7 +66,10 @@ interface WebPubSubChatServiceClient {
 
   // --- Messages ---
 
-  /** Query messages in a conversation from latest to earliest. */
+  /**
+   * Message IDs are used as pagination cursors. Follow the response nextLink,
+   * which contains the message ID cursor, to retrieve the next page.
+   */
   @summary("Query messages in a conversation from latest to earliest.")
   listMessages is Operations.ResourceList<
     ChatMessage,

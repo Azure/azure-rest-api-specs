@@ -22,6 +22,7 @@ interface DataSources {
       ...preferHeader;
 
       /** Ignores cache reset requirements. */
+      @added(Versions.v2026_11_01_preview)
       @removed(Versions.v2026_10_01)
       @added(Versions.v2026_05_01_preview)
       @removed(Versions.v2026_04_01)
@@ -143,6 +144,7 @@ interface Indexers {
 
   /** Resets specific documents in the datasource to be selectively re-ingested by the indexer. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
@@ -194,6 +196,7 @@ interface Indexers {
       ...preferHeader;
 
       /** Ignores cache reset requirements. */
+      @added(Versions.v2026_11_01_preview)
       @removed(Versions.v2026_10_01)
       @added(Versions.v2026_05_01_preview)
       @removed(Versions.v2026_04_01)
@@ -201,6 +204,7 @@ interface Indexers {
       skipIndexerResetRequirementForCache?: boolean;
 
       /** Disables cache reprocessing change detection. */
+      @added(Versions.v2026_11_01_preview)
       @removed(Versions.v2026_10_01)
       @added(Versions.v2026_05_01_preview)
       @removed(Versions.v2026_04_01)
@@ -308,6 +312,7 @@ interface Skillsets {
       ...preferHeader;
 
       /** Ignores cache reset requirements. */
+      @added(Versions.v2026_11_01_preview)
       @removed(Versions.v2026_10_01)
       @added(Versions.v2026_05_01_preview)
       @removed(Versions.v2026_04_01)
@@ -315,6 +320,7 @@ interface Skillsets {
       skipIndexerResetRequirementForCache?: boolean;
 
       /** Disables cache reprocessing change detection. */
+      @added(Versions.v2026_11_01_preview)
       @removed(Versions.v2026_10_01)
       @added(Versions.v2026_05_01_preview)
       @removed(Versions.v2026_04_01)
@@ -398,6 +404,7 @@ interface Skillsets {
 
   /** Reset an existing skillset in a search service. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
@@ -974,9 +981,29 @@ interface KnowledgeSources {
     KnowledgeSourceStatus
   >;
 
+  /** Uploads a file to a File knowledge source using multipart/form-data: a JSON 'metadata' part (file name and custom metadata) and a 'content' part with the raw file bytes. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/byos" "Direct file upload is intentional for File knowledge source"
+  @added(Versions.v2026_08_01_preview)
+  @sharedRoute
+  @route("/knowledgesources('{sourceName}')/files")
+  @post
+  uploadFileMultipart is SearchSourceOperation<
+    {
+      /** The multipart/form-data body containing the metadata and content parts. */
+      @multipartBody
+      body: UploadKnowledgeSourceFileMultipartRequest;
+    },
+    KnowledgeSourceFile & {
+      @statusCode
+      code: "201";
+    }
+  >;
+
   /** Uploads a file to a File knowledge source for processing and indexing. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/byos" "Direct file upload is intentional for File knowledge source"
+  @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @sharedRoute
@@ -1004,23 +1031,19 @@ interface KnowledgeSources {
     }
   >;
 
-  /** Uploads a file to a File knowledge source using multipart/form-data: a JSON 'metadata' part (file name and custom metadata) and a 'content' part with the raw file bytes. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  /** Starts asynchronous ingestion of a new file into a File knowledge source, processed on a Content Processor. Poll the returned operation to retrieve the created file. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Feature-owned asynchronous ingestion action."
   #suppress "@azure-tools/typespec-azure-core/byos" "Direct file upload is intentional for File knowledge source"
-  @added(Versions.v2026_08_01_preview)
-  @sharedRoute
-  @route("/knowledgesources('{sourceName}')/files")
+  @added(Versions.v2026_11_01_preview)
+  @route("/knowledgesources('{sourceName}')/files:ingest")
   @post
-  uploadFileMultipart is SearchSourceOperation<
+  ingestFileMultipart is SearchSourceOperation<
     {
       /** The multipart/form-data body containing the metadata and content parts. */
       @multipartBody
       body: UploadKnowledgeSourceFileMultipartRequest;
     },
-    KnowledgeSourceFile & {
-      @statusCode
-      code: "201";
-    }
+    AcceptedKnowledgeSourceFileIngestion
   >;
 
   /** Lists all files in a File knowledge source. */
@@ -1080,6 +1103,66 @@ interface KnowledgeSources {
       body: UpdateKnowledgeSourceFileRequest;
     },
     KnowledgeSourceFile
+  >;
+
+  /** Starts asynchronous ingestion that replaces an existing file in a File knowledge source, processed on a Content Processor. Poll the returned operation to retrieve the updated file. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Feature-owned asynchronous ingestion action."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/byos" "Direct file upload is intentional for File knowledge source"
+  @added(Versions.v2026_11_01_preview)
+  @route("/knowledgesources('{sourceName}')/files('{fileId}'):ingest")
+  @post
+  ingestFileReplacement is SearchSourceOperation<
+    {
+      /** The unique identifier of the file to update. */
+      @path fileId: string;
+
+      /** The multipart/form-data body containing the metadata and content parts. */
+      @multipartBody
+      body: UpdateKnowledgeSourceFileRequest;
+    },
+    AcceptedKnowledgeSourceFileIngestion
+  >;
+
+  /** Gets the status and, when successful, the result of a file ingestion operation. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Feature-owned status monitor for optional asynchronous file ingestion."
+  @added(Versions.v2026_11_01_preview)
+  @route("/knowledgesources('{sourceName}')/files/operations/{operationId}")
+  @get
+  getFileIngestionOperation is SearchSourceOperation<
+    {
+      ...acceptHeaderMinimal;
+
+      /** The server-generated identifier returned when ingestion was accepted. */
+      @path operationId: string;
+    },
+    KnowledgeSourceFileIngestionOperation & {
+      /** The suggested delay in seconds before polling a nonterminal operation again. */
+      @header("Retry-After")
+      retryAfter?: int32;
+    }
+  >;
+
+  /** Lists retained file ingestion operations for this knowledge source. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Feature-owned status monitor collection."
+  @added(Versions.v2026_11_01_preview)
+  @route("/knowledgesources('{sourceName}')/files/operations")
+  @list
+  @get
+  listFileIngestionOperations is SearchSourceOperation<
+    {
+      ...acceptHeaderMinimal;
+
+      /** The maximum number of operations to return. */
+      @minValue(1)
+      @maxValue(100)
+      @query
+      pageSize?: int32;
+
+      /** An opaque continuation token returned by the service. */
+      @query continuationToken?: string;
+    },
+    ListKnowledgeSourceFileIngestionOperationsResult
   >;
 }
 

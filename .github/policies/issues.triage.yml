@@ -52,11 +52,21 @@ configuration:
               - not:
                   activitySenderHasPermission:
                     permission: Admin
+              - not:
+                  isActivitySender:
+                    user: dependabot[bot]
+              - not:
+                  isActivitySender:
+                    user: azure-sdk-automation[bot]
+              - not:
+                  isActivitySender:
+                    user: github-actions[bot]
+              - not:
+                  isActivitySender:
+                    user: Copilot
         then:
           - addLabel:
               label: customer-reported
-          - addLabel:
-              label: question
 
 onFailure:
 onSuccess:

@@ -31,6 +31,7 @@ op AppliancesUpdateCustomized(
   resourceName: string,
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "override"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing AppliancesUpdateCustomized.tags retains its request-body shape; preserve wire compatibility."
   @doc("Resource tags")
   @body
   tags?: Record<string>,
