@@ -3615,8 +3615,10 @@
         },
         "sasUri": {
           "type": "string",
+          "format": "password",
           "description": "The read-only SAS URI for the exported error CSV.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         },
         "expirationTime": {
           "type": "string",
@@ -3660,8 +3662,10 @@
       "properties": {
         "sasUri": {
           "type": "string",
+          "format": "password",
           "description": "The write-targeted SAS URI to which the caller should PUT the CSV payload.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         },
         "expirationTime": {
           "type": "string",

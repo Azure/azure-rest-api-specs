@@ -27,6 +27,14 @@ model FetchSasUriRequest {
 @added(ApiVersions.v2026_06_01_preview)
 model FetchSasUriResponse {
   @doc("The write-targeted SAS URI to which the caller should PUT the CSV payload.")
+  @removed(ApiVersions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  @renamedFrom(ApiVersions.v2026_08_01_preview, "sasUri")
+  oldSasUri: string;
+
+  @doc("The write-targeted SAS URI to which the caller should PUT the CSV payload.")
+  @added(ApiVersions.v2026_08_01_preview)
+  @secret
   @visibility(Lifecycle.Read)
   sasUri: string;
 
