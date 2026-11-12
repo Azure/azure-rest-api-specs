@@ -956,7 +956,6 @@ model AgentPoolNetworkInterface {
   @added(Versions.v2026_10_02_preview)
   @minItems(1)
   @maxItems(2)
-  @identifiers(#[])
   publicIPAddressConfigurations?: AgentPoolNICPublicIPAddressConfiguration[];
 }
 
@@ -966,6 +965,8 @@ model AgentPoolNetworkInterface {
 model AgentPoolNICPublicIPAddressConfiguration {
   /** Address family of this public IP configuration. IPv4 is required on the NIC; an additional IPv6 configuration requires a dual-stack cluster and secondary subnet. Each family may appear at most once. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for consistency with VMSS publicIPAddressVersion and existing AKS public IP naming."
+  @key
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   publicIPAddressVersion: AgentPoolNICPublicIPAddressVersion;
 
   /** IP tags supported for the address family of this public IP configuration. Each tag's `ipTagType` must be `FirstPartyUsage`, `NetworkDomain`, or `RoutingPreference`. RoutingPreference=Internet is supported only for IPv4. No configuration on the same NIC may use a public IP prefix when tags are specified. */

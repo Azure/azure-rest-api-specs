@@ -8357,7 +8357,11 @@
       "properties": {
         "publicIPAddressVersion": {
           "$ref": "#/definitions/AgentPoolNICPublicIPAddressVersion",
-          "description": "Address family of this public IP configuration. IPv4 is required on the NIC; an additional IPv6 configuration requires a dual-stack cluster and secondary subnet. Each family may appear at most once."
+          "description": "Address family of this public IP configuration. IPv4 is required on the NIC; an additional IPv6 configuration requires a dual-stack cluster and secondary subnet. Each family may appear at most once.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "ipTags": {
           "type": "array",
@@ -8440,7 +8444,9 @@
           "items": {
             "$ref": "#/definitions/AgentPoolNICPublicIPAddressConfiguration"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "publicIPAddressVersion"
+          ]
         }
       }
     },
