@@ -249,6 +249,7 @@ interface Caches {
   /**
    * Update cache space allocation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing spaceAllocation retains its request-body shape; preserve wire compatibility."
   @Azure.Core.useFinalStateVia("azure-async-operation")
   spaceAllocation is ArmResourceActionAsyncBase<
     Cache,

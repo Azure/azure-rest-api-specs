@@ -131,6 +131,7 @@ interface EndpointResources {
       /**
        * The is how long the endpoint access token is valid (in seconds).
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listCredentials POST contract uses expiresin in the query; preserve wire compatibility."
       @maxValue(10800)
       @minValue(600)
       @query("expiresin")
@@ -159,6 +160,7 @@ interface EndpointResources {
       /**
        * The is how long the endpoint access token is valid (in seconds).
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listIngressGatewayCredentials POST contract uses expiresin in the query; preserve wire compatibility."
       @maxValue(10800)
       @minValue(600)
       @query("expiresin")

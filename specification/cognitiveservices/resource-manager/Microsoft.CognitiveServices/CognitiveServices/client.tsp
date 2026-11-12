@@ -190,6 +190,13 @@ op regenerateKeyCustom(
 );
 
 @@clientName(Account, "CognitiveServicesAccount", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Keep the nullable provider properties setter public so PATCH can clear all blocking actions."
+@@clientOption(
+  CostControlProviderPropertiesPatch,
+  "disable-safe-flatten",
+  true,
+  "csharp"
+);
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
 #suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning"
 @@clientOption(
@@ -235,6 +242,12 @@ op regenerateKeyCustom(
 @@alternateType(CommitmentPlan.etag, eTag, "csharp");
 @@clientName(Deployment, "CognitiveServicesAccountDeployment", "csharp");
 @@alternateType(Deployment.etag, eTag, "csharp");
+@@alternateType(ArcDeploymentModel.assetId, url, "csharp");
+@@clientName(
+  RaiAcsAnnotatorDefinition,
+  "RaiAcsAnnotatorConfiguration",
+  "csharp"
+);
 @@clientName(AgentApplication, "CognitiveServicesAgentApplication", "csharp");
 @@clientName(
   AgenticApplicationProperties,
@@ -247,9 +260,9 @@ op regenerateKeyCustom(
   "csharp"
 );
 @@clientName(AssignedIdentity, "CognitiveServicesAssignedIdentity", "csharp");
-@@clientName(
+@@alternateType(
   UserAssignedIdentity,
-  "CognitiveServicesUserAssignedIdentity",
+  Azure.ResourceManager.CommonTypes.UserAssignedIdentity,
   "csharp"
 );
 @@clientName(AgentDeployment, "CognitiveServicesAgentDeployment", "csharp");
@@ -356,6 +369,13 @@ op regenerateKeyCustom(
   ConnectionPropertiesV2BasicResource,
   "CognitiveServicesConnection",
   "csharp"
+);
+// Keep public SDK types while credential visibility excludes ordinary reads.
+@@alternateType(AccountWrite, Account);
+@@alternateType(AccountPropertiesRead, AccountProperties);
+@@alternateType(
+  ConnectionPropertiesV2BasicResourceRead,
+  ConnectionPropertiesV2BasicResource
 );
 @@clientName(
   ProjectCapabilityHost,
@@ -673,6 +693,11 @@ op regenerateKeyCustom(
 @@clientName(
   Microsoft.CognitiveServices.Usage,
   "ServiceAccountUsage",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.CognitiveServices.Usage.type,
+  armResourceType,
   "csharp"
 );
 @@clientName(UserOwnedStorage, "ServiceAccountUserOwnedStorage", "csharp");
@@ -1146,9 +1171,11 @@ op regenerateKeyCustom(
 @@clientName(RaiAcsRegoPolicyDefinition, "RaiAcsRegoPolicy", "csharp");
 @@clientName(RaiAcsToolDefinition, "RaiAcsTool", "csharp");
 @@clientName(Identity, "CognitiveServicesComputeIdentity", "csharp");
-@@clientName(
+@@alternateType(Identity.tenantId, uuid, "csharp");
+@@alternateType(Identity.principalId, uuid, "csharp");
+@@alternateType(
   ResourceIdentityType,
-  "CognitiveServicesComputeIdentityType",
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType,
   "csharp"
 );
 @@clientName(Pool, "CognitiveServicesComputePool", "csharp");
@@ -1295,5 +1322,42 @@ op regenerateKeyCustom(
   "CognitiveServicesComputeProvisioningState",
   "csharp"
 );
-@@clientName(CostControl, "CognitiveServicesAccountCostControl", "csharp");
-@@alternateType(CostControl.etag, eTag, "csharp");
+@@clientName(
+  AccountCostControl,
+  "CognitiveServicesAccountCostControl",
+  "csharp"
+);
+@@clientName(
+  ProjectCostControl,
+  "CognitiveServicesProjectCostControl",
+  "csharp"
+);
+@@alternateType(AdapterDeployment.etag, eTag, "csharp");
+@@alternateType(RaiBinding.etag, eTag, "csharp");
+@@alternateType(RaiRego.etag, eTag, "csharp");
+@@alternateType(
+  ClusterComputeProperties.subnetArmId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ManagedComputeDeploymentInfo.deploymentId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ManagedComputeDeploymentInfo.projectId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(
+  CapabilitySettings,
+  "CognitiveServicesAgentCapabilitySettings",
+  "csharp"
+);
+@@clientName(ConnectionCategory.OpenAPI, "OpenApi", "csharp");
+@@clientName(
+  RaiPolicyCustomExternalSafetyProviderReference.blocking,
+  "IsBlocking",
+  "csharp"
+);

@@ -1,0 +1,39 @@
+{
+  "title": "FailoverInstances_ListByScheduler_MaximumSet",
+  "operationId": "FailoverInstances_ListByScheduler",
+  "parameters": {
+    "api-version": "2026-07-01-preview",
+    "subscriptionId": "194D3C1E-462F-4738-9025-092A628C06EB",
+    "resourceGroupName": "rgdurabletask",
+    "schedulerName": "testscheduler"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "replicationRole": "Primary",
+              "failoverState": "Succeeded",
+              "partnerSchedulerResourceId": "/subscriptions/194D3C1E-462F-4738-9025-092A628C06EB/resourceGroups/rgdurabletask-secondary/providers/Microsoft.DurableTask/schedulers/testscheduler-secondary",
+              "partnerSchedulerLocation": "westus2"
+            },
+            "id": "/subscriptions/194D3C1E-462F-4738-9025-092A628C06EB/resourceGroups/rgdurabletask/providers/Microsoft.DurableTask/schedulers/testscheduler/failoverInstances/default",
+            "name": "default",
+            "type": "Microsoft.DurableTask/schedulers/failoverInstances",
+            "systemData": {
+              "createdBy": "zshkmc",
+              "createdByType": "User",
+              "createdAt": "2025-03-31T23:34:09.612Z",
+              "lastModifiedBy": "ivqrae",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-03-31T23:34:09.612Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/ai"
+      }
+    }
+  }
+}

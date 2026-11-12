@@ -10,6 +10,27 @@ using Azure.Core;
 
 namespace Customizations;
 
+// Go
+@@clientName(AiGateways, "AIGateways", "go");
+@@clientName(AiGateway, "AIGateway", "go");
+@@clientName(AiGatewayProperties, "AIGatewayProperties", "go");
+@@clientName(AiGatewayProperties.aiGatewayId, "AIGatewayID", "go");
+@@clientName(
+  ServerFarmSiloVnetIntegrationsResult,
+  "ServerFarmSiloVNETIntegrationsResult",
+  "go"
+);
+@@clientName(
+  ServerFarmSiloVnetIntegration,
+  "ServerFarmSiloVNETIntegration",
+  "go"
+);
+@@clientName(
+  ServerFarmSiloResources.getServerFarmSiloVnetIntegrations,
+  "getServerFarmSiloVNETIntegrations",
+  "go"
+);
+
 // python
 @@clientName(Microsoft.Web, "WebSiteManagementClient", "python, javascript");
 @@clientName(WebApps.swapSlotSlot, "swapSlot", "python,go,javascript");
@@ -7321,4 +7342,10 @@ model WebAppProcessThreadProperties {
   ProcessInfoProperties.threads,
   WebAppProcessThreadProperties[],
   "csharp"
+);
+
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ErrorResponse,
+  "ArmErrorResponse",
+  "javascript"
 );

@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import {
   buildReleaseplanCommentBody,
+  postMultipleProjectsComment,
   postReleasePlanComment,
   postReleasePlanErrorComment,
 } from "../src/pr-comment.ts";
@@ -13,6 +14,48 @@ type CreateCommentParams = {
 };
 
 describe("PR comment creation", () => {
+  it("reports all ambiguous projects and explains manual release plan creation", async () => {
+    const createComment = vi
+      .fn<(params: CreateCommentParams) => Promise<unknown>>()
+      .mockResolvedValue(undefined);
+    const paths = ["specification/first/First", "specification/second/Second"];
+
+    await postMultipleProjectsComment({
+      octokit: { rest: { issues: { createComment } } },
+      owner: "Azure",
+      repo: "azure-rest-api-specs",
+      prNumber: 42,
+      tspProjectPaths: paths,
+    });
+
+    expect(createComment).toHaveBeenCalledOnce();
+    const [comment] = createComment.mock.calls[0];
+    expect(comment).toMatchObject({
+      owner: "Azure",
+      repo: "azure-rest-api-specs",
+      issue_number: 42,
+    });
+    const body = comment.body;
+    expect(body).toContain("Release Plan Creation Skipped");
+    for (const project of paths) {
+      expect(body).toContain(`\`${project}\``);
+    }
+    expect(body).toContain("No release plan was created");
+    expect(body).toContain("aka.ms/azsdk/releaseplan-dashboard");
+  });
+
+  it("fails explicitly when the ambiguity comment cannot be posted", async () => {
+    await expect(
+      postMultipleProjectsComment({
+        octokit: { rest: {} },
+        owner: "Azure",
+        repo: "azure-rest-api-specs",
+        prNumber: 42,
+        tspProjectPaths: ["specification/first/First", "specification/second/Second"],
+      }),
+    ).rejects.toThrow("Octokit issues.createComment is not available.");
+  });
+
   it("builds markdown comment body with all fields", () => {
     const body = buildReleaseplanCommentBody({
       planId: "123",

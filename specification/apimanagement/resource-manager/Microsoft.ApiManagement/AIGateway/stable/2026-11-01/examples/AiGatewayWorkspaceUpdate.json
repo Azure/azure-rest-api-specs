@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "api-version": "2026-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "aiGatewayName": "example-gateway",
+    "If-Match": "*",
+    "properties": {
+      "properties": {
+        "policies": [
+          {
+            "type": "tokenLimit",
+            "scope": "workspace",
+            "count": 100000,
+            "period": "day",
+            "counterKey": [
+              "identity"
+            ]
+          },
+          {
+            "type": "costLimit",
+            "scope": "workspace",
+            "id": "monthly-budget",
+            "amount": 100,
+            "period": "month",
+            "counterKey": [
+              "identity"
+            ],
+            "overrides": [
+              {
+                "claims": {
+                  "oid": "example-user"
+                },
+                "amount": 200
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "workspaceName": "default"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default",
+        "name": "default",
+        "type": "Microsoft.ApiManagement/aigateways/workspaces",
+        "eTag": "W/\"1\"",
+        "properties": {
+          "name": "Default",
+          "description": "Default AI Gateway workspace.",
+          "policies": [
+            {
+              "type": "tokenLimit",
+              "scope": "workspace",
+              "count": 100000,
+              "period": "day",
+              "counterKey": [
+                "identity"
+              ]
+            },
+            {
+              "type": "costLimit",
+              "scope": "workspace",
+              "id": "monthly-budget",
+              "amount": 100,
+              "period": "month",
+              "counterKey": [
+                "identity"
+              ],
+              "overrides": [
+                {
+                  "claims": {
+                    "oid": "example-user"
+                  },
+                  "amount": 200
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "AiGatewayWorkspaceResources_Update",
+  "title": "Update an AI Gateway workspace"
+}

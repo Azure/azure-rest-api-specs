@@ -62,3 +62,16 @@ using Microsoft.DurableTask;
   "DurableTaskPrivateEndpointConnectionProperties",
   "csharp"
 );
+@@clientName(Detector, "DurableTaskDetector", "csharp");
+@@clientName(FailoverState, "DurableTaskSchedulerFailoverState", "csharp");
+@@clientName(ReplicationRole, "DurableTaskSchedulerReplicationRole", "csharp");
+@@clientName(
+  TransparentDataEncryptionProperties.autoRotationEnabled,
+  "IsAutoRotationEnabled",
+  "csharp"
+);
+@@alternateType(
+  FailoverInstanceProperties.partnerSchedulerLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);

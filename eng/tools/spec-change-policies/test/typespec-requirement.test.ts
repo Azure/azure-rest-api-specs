@@ -1,16 +1,28 @@
 import { execa } from "execa";
-import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { glob, mkdir, mkdtemp, readFile, rm, stat, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { dirname, join, resolve } from "node:path";
-import { expect, test } from "vitest";
+import { dirname, join, relative, resolve } from "pathe";
+import { expect, test, vi } from "vitest";
+import { writeBrownfield } from "../src/cli.ts";
+import { validatePr } from "../src/index.ts";
+import { checkRequirements } from "../src/typespec-requirement.ts";
+import { createRepo } from "./repo.ts";
 
 async function checkAllUnder(
   path: string,
   responseCache: Record<string, number | undefined> = {},
   captureGithubOutput = false,
 ) {
-  const repoRoot = join(import.meta.dirname, "..", "..", "..", "..");
-  const script = join(repoRoot, "eng", "tools", "spec-change-policies", "src", "index.ts");
+  const directory = resolve(import.meta.dirname, path);
+  const paths: string[] = [];
+  for await (const file of glob("**/*", { cwd: directory })) {
+    if ((await stat(resolve(directory, file))).isFile()) paths.push(resolve(directory, file));
+  }
+  const firstSpec = paths.find((path) => path.split("/").includes("specification"));
+  const root = firstSpec
+    ? firstSpec.split("/").slice(0, firstSpec.split("/").lastIndexOf("specification")).join("/")
+    : directory;
+  const messages: string[] = [];
   const outputDirectory = captureGithubOutput
     ? await mkdtemp(join(tmpdir(), "typespec-requirement-"))
     : undefined;
@@ -20,24 +32,38 @@ async function checkAllUnder(
     if (outputFile) {
       await writeFile(outputFile, "");
     }
-    const result = await execa(
-      process.execPath,
-      [
-        script,
-        "--check-all-under",
-        resolve(import.meta.dirname, path),
-        "--response-cache",
-        JSON.stringify(responseCache),
-      ],
+    const result = await checkRequirements(
       {
-        cwd: repoRoot,
-        reject: false,
-        env: outputFile ? { ...process.env, GITHUB_OUTPUT: outputFile } : process.env,
+        root,
+        baseCommitish: "base",
+        headCommitish: "head",
+        changes: {
+          additions: paths.map((path) => relative(root, path)),
+          modifications: [],
+          deletions: [],
+          renames: [],
+          total: paths.length,
+        },
+        logger: {
+          debug: (message) => messages.push(message),
+          info: (message) => messages.push(message),
+          error: (message) => messages.push(message),
+          warning: (message) => messages.push(message),
+          isDebug: () => true,
+        },
+      },
+      (url) => {
+        const status = responseCache[url];
+        if (status === undefined) throw new Error(`Unexpected upstream request: ${url}`);
+        return Promise.resolve(status);
       },
     );
+    await writeBrownfield(result.brownfield, outputFile);
     return {
-      stdout: result.stdout + result.stderr,
-      exitCode: result.exitCode,
+      stdout: [...messages, ...result.diagnostics.map((diagnostic) => diagnostic.message)].join(
+        "\n",
+      ),
+      exitCode: result.diagnostics.some((diagnostic) => diagnostic.severity === "error") ? 1 : 0,
       githubOutput: outputFile ? await readFile(outputFile, "utf8") : "",
     };
   } finally {
@@ -72,16 +98,50 @@ test.concurrent("No files to check", async ({ expect }) => {
   expect(exitCode).toBe(0);
 });
 
-test("Rejects an invalid spec type", async ({ expect }) => {
+test("Caches rejected upstream lookups and continues other API versions", async () => {
+  const service = "specification/foo/data-plane/Foo/stable";
+  const { root } = await createRepo(
+    {},
+    {
+      [`${service}/2026-01-01/a.json`]: "{}",
+      [`${service}/2026-01-01/b.json`]: "{}",
+      [`${service}/2026-02-01/openapi.json`]: "{}",
+    },
+  );
+  const checkUpstream = vi.fn((url: string) => {
+    if (url.endsWith("/2026-01-01")) return Promise.reject(new Error("Network unavailable"));
+    return Promise.resolve(200);
+  });
+  const result = await validatePr({ cwd: root, base: "HEAD^", checkUpstream });
+
+  expect(checkUpstream.mock.calls.map(([url]) => url)).toEqual([
+    `https://github.com/Azure/azure-rest-api-specs/tree/main/${service}/2026-01-01`,
+    `https://github.com/Azure/azure-rest-api-specs/tree/main/${service}/2026-02-01`,
+  ]);
+  expect(result.success).toBe(false);
+  expect(result.diagnostics.some(({ message }) => message.includes("Network unavailable"))).toBe(
+    true,
+  );
+  expect(result.brownfield).toBe(true);
+});
+
+test("Rejects removed CLI options", async ({ expect }) => {
   const repoRoot = join(import.meta.dirname, "..", "..", "..", "..");
-  const script = join(repoRoot, "eng", "tools", "spec-change-policies", "src", "index.ts");
+  const script = join(
+    repoRoot,
+    "eng",
+    "tools",
+    "spec-change-policies",
+    "cmd",
+    "spec-change-policies.js",
+  );
   const { stderr, exitCode } = await execa(
     process.execPath,
     [script, "--spec-type", "data-plane)|.*"],
     { cwd: repoRoot, reject: false },
   );
 
-  expect(stderr).toContain("--spec-type must be either 'data-plane' or 'resource-manager'");
+  expect(stderr).toContain("Unknown option '--spec-type'");
   expect(exitCode).toBe(1);
 });
 
@@ -341,7 +401,7 @@ test.concurrent.each([false, true])(
     );
     expect(exitCode).toBe(0);
     expect(stdout).toContain(suppressed ? "Suppressed" : "not required to use TypeSpec");
-    expect(githubOutput).toBe(suppressed ? "" : "brownfield=true\n");
+    expect(githubOutput).toBe(suppressed ? "brownfield=false\n" : "brownfield=true\n");
   },
 );
 
@@ -376,7 +436,7 @@ test.concurrent.each([
     expect(exitCode).toBe(1);
     expect(stdout).toContain("suppressions cannot permit new handwritten API versions");
     expect(stdout).not.toContain("Suppressed:");
-    expect(githubOutput).toBe("");
+    expect(githubOutput).toBe("brownfield=false\n");
   },
 );
 

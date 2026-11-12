@@ -105,6 +105,11 @@ enum Versions {
    * The 2026-10-01 API version.
    */
   v2026_10_01: "2026-10-01",
+
+  /**
+   * The 2026-11-01 API version.
+   */
+  v2026_11_01: "2026-11-01",
 }
 
 interface Operations

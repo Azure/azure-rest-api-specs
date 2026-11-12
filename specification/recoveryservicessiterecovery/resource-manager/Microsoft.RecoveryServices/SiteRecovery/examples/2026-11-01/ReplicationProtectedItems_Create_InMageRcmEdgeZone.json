@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "api-version": "2026-11-01",
+    "fabricName": "vmware-fabric",
+    "input": {
+      "properties": {
+        "policyId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationPolicies/protectionProfile1",
+        "protectableItemId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/vmware-fabric/replicationProtectionContainers/vmware-container/replicationProtectableItems/machine1",
+        "providerSpecificDetails": {
+          "fabricDiscoveryMachineId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/sourceResourceGroup/providers/Microsoft.OffAzure/VMwareSites/site1/machines/machine1",
+          "instanceType": "InMageRcm",
+          "processServerId": "process-server-1",
+          "targetExtendedLocation": {
+            "name": "edge-zone-1",
+            "type": "EdgeZone"
+          },
+          "targetNetworkId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/targetResourceGroup/providers/Microsoft.Network/virtualNetworks/targetVNet",
+          "targetResourceGroupId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/targetResourceGroup",
+          "targetSubnetName": "default",
+          "targetVmName": "machine1",
+          "targetVmSize": "Standard_D2s_v3"
+        }
+      }
+    },
+    "protectionContainerName": "vmware-container",
+    "replicatedProtectedItemName": "machine1",
+    "resourceGroupName": "resourceGroupPS1",
+    "resourceName": "vault1",
+    "subscriptionId": "c183865e-6077-46f2-a3b1-deb0f4f4650a"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/vmware-fabric/replicationProtectionContainers/vmware-container/replicationProtectedItems/machine1",
+        "name": "machine1",
+        "properties": {
+          "friendlyName": "machine1",
+          "policyFriendlyName": "protectionProfile1",
+          "policyId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationPolicies/protectionProfile1",
+          "protectableItemId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/vmware-fabric/replicationProtectionContainers/vmware-container/replicationProtectableItems/machine1",
+          "protectedItemType": "VMwareVirtualMachine",
+          "protectionState": "Protected",
+          "providerSpecificDetails": {
+            "fabricDiscoveryMachineId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/sourceResourceGroup/providers/Microsoft.OffAzure/VMwareSites/site1/machines/machine1",
+            "instanceType": "InMageRcm",
+            "processServerId": "process-server-1",
+            "targetExtendedLocation": {
+              "name": "edge-zone-1",
+              "type": "EdgeZone"
+            },
+            "targetLocation": "westus",
+            "targetNetworkId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/targetResourceGroup/providers/Microsoft.Network/virtualNetworks/targetVNet",
+            "targetResourceGroupId": "/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/targetResourceGroup",
+            "targetVmName": "machine1",
+            "targetVmSize": "Standard_D2s_v3"
+          },
+          "replicationHealth": "Normal"
+        },
+        "type": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems"
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationOperationStatus/a93f3cd5-9035-4b1e-a2c9-b16df6d5d34b?api-version=2026-11-01"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationOperationStatus/a93f3cd5-9035-4b1e-a2c9-b16df6d5d34b?api-version=2026-11-01",
+        "Retry-After": 30
+      }
+    }
+  },
+  "operationId": "ReplicationProtectedItems_Create",
+  "title": "Enables protection for an InMage RCM VM in an extended location."
+}

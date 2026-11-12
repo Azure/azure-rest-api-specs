@@ -42,10 +42,6 @@ namespace Microsoft.DeviceRegistry;
 /** API versions */
 @doc("Microsoft.DeviceRegistry Resource Provider supported API versions.")
 enum Versions {
-  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2023-11-01-preview.")
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-  v2023_11_01_preview: "2023-11-01-preview",
-
   @doc("Microsoft.DeviceRegistry Resource Provider management API version 2024-09-01-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_09_01_preview: "2024-09-01-preview",
@@ -54,17 +50,9 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_11_01: "2024-11-01",
 
-  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2025-07-01-preview.")
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2025_07_01_preview: "2025-07-01-preview",
-
   @doc("Microsoft.DeviceRegistry Resource Provider management API version 2025-10-01.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_10_01: "2025-10-01",
-
-  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2025-11-01-preview.")
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2025_11_01_preview: "2025-11-01-preview",
 
   @doc("Microsoft.DeviceRegistry Resource Provider management API version 2026-03-01-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)

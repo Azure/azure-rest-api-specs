@@ -1,0 +1,140 @@
+{
+  "title": "RecoveryConfigProfiles_CreateOrUpdate_MaximumSet",
+  "operationId": "RecoveryConfigProfiles_CreateOrUpdate",
+  "parameters": {
+    "serviceGroupName": "contoso-service-group",
+    "recoveryPlanName": "cyber-plan",
+    "recoveryConfigProfileName": "azure-vm-default",
+    "api-version": "2026-11-30-preview",
+    "resource": {
+      "properties": {
+        "targetScope": {
+          "subscriptionId": "12345678-1234-1234-1234-123456789012",
+          "location": "eastus2"
+        },
+        "workloadConfig": {
+          "workloadType": "AzureVm",
+          "resourceGroup": {
+            "armResourceType": "Microsoft.Resources/resourceGroups",
+            "provisioningMode": "Existing",
+            "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg"
+          },
+          "virtualNetwork": {
+            "armResourceType": "Microsoft.Network/virtualNetworks",
+            "provisioningMode": "Existing",
+            "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Network/virtualNetworks/cyber-recovery-vnet"
+          },
+          "subnet": {
+            "armResourceType": "Microsoft.Network/virtualNetworks/subnets",
+            "provisioningMode": "Existing",
+            "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Network/virtualNetworks/cyber-recovery-vnet/subnets/default",
+            "dependsOn": [
+              "targetVirtualNetwork"
+            ]
+          },
+          "storageAccount": {
+            "armResourceType": "Microsoft.Storage/storageAccounts",
+            "provisioningMode": "Existing",
+            "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Storage/storageAccounts/cyberrecoverystorage"
+          },
+          "zones": [
+            "1",
+            "2"
+          ],
+          "targetNamePrefix": "cr-",
+          "recoveryType": "CreateNewVM"
+        },
+        "recoveryPointPolicy": {
+          "type": "Latest",
+          "startTime": "2026-09-27T04:00:00Z",
+          "endTime": "2026-09-28T04:00:00Z",
+          "backupType": [
+            "Snapshot"
+          ],
+          "recoveryPointHealthStatus": "HealthyAndUnknown"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "workloadType": "AzureVm",
+          "targetScope": {
+            "subscriptionId": "12345678-1234-1234-1234-123456789012",
+            "location": "eastus2"
+          },
+          "workloadConfig": {
+            "workloadType": "AzureVm",
+            "resourceGroup": {
+              "armResourceType": "Microsoft.Resources/resourceGroups",
+              "provisioningMode": "Existing",
+              "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg"
+            },
+            "virtualNetwork": {
+              "armResourceType": "Microsoft.Network/virtualNetworks",
+              "provisioningMode": "Existing",
+              "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Network/virtualNetworks/cyber-recovery-vnet"
+            },
+            "subnet": {
+              "armResourceType": "Microsoft.Network/virtualNetworks/subnets",
+              "provisioningMode": "Existing",
+              "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Network/virtualNetworks/cyber-recovery-vnet/subnets/default"
+            },
+            "storageAccount": {
+              "armResourceType": "Microsoft.Storage/storageAccounts",
+              "provisioningMode": "Existing",
+              "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Storage/storageAccounts/cyberrecoverystorage"
+            },
+            "recoveryType": "CreateNewVM"
+          },
+          "provisioningState": "Succeeded",
+          "needsAttention": false,
+          "attentionReasons": []
+        },
+        "id": "/providers/Microsoft.Management/serviceGroups/contoso-service-group/providers/Microsoft.AzureResilienceManagement/recoveryPlans/cyber-plan/recoveryConfigProfiles/azure-vm-default",
+        "name": "azure-vm-default",
+        "type": "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryConfigProfiles"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.Management/serviceGroups/contoso-service-group/providers/Microsoft.AzureResilienceManagement/operationStatuses/00000000-0000-0000-0000-000000000001?api-version=2026-11-30-preview",
+        "Retry-After": 30
+      },
+      "body": {
+        "properties": {
+          "workloadType": "AzureVm",
+          "targetScope": {
+            "subscriptionId": "12345678-1234-1234-1234-123456789012",
+            "location": "eastus2"
+          },
+          "workloadConfig": {
+            "workloadType": "AzureVm",
+            "resourceGroup": {
+              "armResourceType": "Microsoft.Resources/resourceGroups",
+              "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg"
+            },
+            "virtualNetwork": {
+              "armResourceType": "Microsoft.Network/virtualNetworks",
+              "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Network/virtualNetworks/cyber-recovery-vnet"
+            },
+            "subnet": {
+              "armResourceType": "Microsoft.Network/virtualNetworks/subnets",
+              "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Network/virtualNetworks/cyber-recovery-vnet/subnets/default"
+            },
+            "storageAccount": {
+              "armResourceType": "Microsoft.Storage/storageAccounts",
+              "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Storage/storageAccounts/cyberrecoverystorage"
+            }
+          },
+          "provisioningState": "Provisioning"
+        },
+        "id": "/providers/Microsoft.Management/serviceGroups/contoso-service-group/providers/Microsoft.AzureResilienceManagement/recoveryPlans/cyber-plan/recoveryConfigProfiles/azure-vm-default",
+        "name": "azure-vm-default",
+        "type": "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryConfigProfiles"
+      }
+    }
+  }
+}

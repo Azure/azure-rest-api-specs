@@ -1681,6 +1681,9 @@
         "x-ms-examples": {
           "Get Account": {
             "$ref": "./examples/GetAccount.json"
+          },
+          "Get an account with private CA trust": {
+            "$ref": "./examples/GetAccountWithTrustedCertificateSources.json"
           }
         }
       },
@@ -1716,7 +1719,7 @@
             "description": "The parameters to provide for the created account.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Account"
+              "$ref": "#/definitions/AccountWrite"
             }
           }
         ],
@@ -1773,6 +1776,9 @@
           },
           "Create a Foundry account with customer-owned AKS hosting": {
             "$ref": "./examples/CreateAccountWithAgentHostingConfiguration.json"
+          },
+          "Create an account with private CA trust": {
+            "$ref": "./examples/CreateAccountWithTrustedCertificateSources.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1813,7 +1819,7 @@
             "description": "The parameters to provide for the created account.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Account"
+              "$ref": "#/definitions/AccountWrite"
             }
           }
         ],
@@ -1849,8 +1855,17 @@
           }
         },
         "x-ms-examples": {
+          "Clear account private CA trust using an empty array": {
+            "$ref": "./examples/UpdateAccountClearTrustedCertificateSources.json"
+          },
+          "Rotate a pinned CA bundle while retaining other references": {
+            "$ref": "./examples/UpdateAccountRotateTrustedCertificateSources.json"
+          },
           "Update Account": {
             "$ref": "./examples/UpdateAccount.json"
+          },
+          "Update account tags while preserving private CA trust with null": {
+            "$ref": "./examples/UpdateAccountPreserveTrustedCertificateSources.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2559,7 +2574,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResourceRead"
             }
           },
           "default": {
@@ -2624,7 +2639,7 @@
           "200": {
             "description": "Resource 'ConnectionPropertiesV2BasicResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResourceRead"
             }
           },
           "default": {
@@ -2689,7 +2704,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResourceRead"
             }
           },
           "default": {
@@ -7115,7 +7130,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResourceRead"
             }
           },
           "default": {
@@ -7190,7 +7205,7 @@
           "200": {
             "description": "Resource 'ConnectionPropertiesV2BasicResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResourceRead"
             }
           },
           "default": {
@@ -7265,7 +7280,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResourceRead"
             }
           },
           "default": {
@@ -9589,6 +9604,16 @@
       ],
       "x-ms-discriminator-value": "AAD"
     },
+    "AadAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Microsoft Entra connection properties returned by ordinary resource operations.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
+        }
+      ],
+      "x-ms-discriminator-value": "AAD"
+    },
     "AbusePenalty": {
       "type": "object",
       "description": "The abuse penalty.",
@@ -9645,12 +9670,28 @@
       ],
       "x-ms-discriminator-value": "AccessKey"
     },
+    "AccessKeyAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Access key connection properties returned by ordinary resource operations.",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionAccessKeyRead",
+          "description": "Nonsensitive authentication metadata."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
+        }
+      ],
+      "x-ms-discriminator-value": "AccessKey"
+    },
     "Account": {
       "type": "object",
       "description": "Cognitive Services account is an Azure resource representing the provisioned account, it's type, location and SKU.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AccountProperties",
+          "$ref": "#/definitions/AccountPropertiesRead",
           "description": "Properties of Cognitive Services account."
         },
         "tags": {
@@ -9709,6 +9750,16 @@
       "allOf": [
         {
           "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "x-ms-discriminator-value": "AccountKey"
+    },
+    "AccountKeyAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Account key connection properties returned by ordinary resource operations.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
         }
       ],
       "x-ms-discriminator-value": "AccountKey"
@@ -9859,7 +9910,13 @@
         },
         "migrationToken": {
           "type": "string",
-          "description": "Resource migration token."
+          "format": "password",
+          "description": "Resource migration token.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
         },
         "skuChangeInfo": {
           "$ref": "#/definitions/SkuChangeInfo",
@@ -10015,6 +10072,232 @@
           "items": {
             "type": "string"
           }
+        },
+        "trustedCertificateSources": {
+          "type": "array",
+          "description": "Private CA trust sources for supported features in an AIServices account with allowProjectManagement enabled. Supports one Azure Key Vault source containing version-pinned references to secrets with PEM-encoded CA certificates or certificate bundles. On PUT or PATCH, a non-null array replaces the complete configuration, so include all references to retain. Omit this property or send null to preserve the existing configuration; send an empty array to clear it.",
+          "maxItems": 1,
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/TrustedCertificateSource"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "AccountPropertiesRead": {
+      "type": "object",
+      "description": "Account properties returned without stored credentials.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets the status of the cognitive services account at the time the operation was called.",
+          "readOnly": true
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "Endpoint of the created account.",
+          "readOnly": true
+        },
+        "internalId": {
+          "type": "string",
+          "description": "The internal identifier (deprecated, do not use this property).",
+          "readOnly": true
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "Gets the capabilities of the cognitive services account. Each item indicates the capability of a specific feature. The values are read-only and for reference only.",
+          "items": {
+            "$ref": "#/definitions/SkuCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "isMigrated": {
+          "type": "boolean",
+          "description": "If the resource is migrated from an existing key.",
+          "readOnly": true
+        },
+        "skuChangeInfo": {
+          "$ref": "#/definitions/SkuChangeInfo",
+          "description": "Sku change info of account.",
+          "readOnly": true
+        },
+        "customSubDomainName": {
+          "type": "string",
+          "description": "Optional subdomain name used for token-based authentication."
+        },
+        "networkAcls": {
+          "$ref": "#/definitions/NetworkRuleSet",
+          "description": "A collection of rules governing the accessibility from specific network locations."
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "The encryption properties for this resource."
+        },
+        "userOwnedStorage": {
+          "type": "array",
+          "description": "The storage accounts for this resource.",
+          "items": {
+            "$ref": "#/definitions/UserOwnedStorage"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        },
+        "amlWorkspace": {
+          "$ref": "#/definitions/UserOwnedAmlWorkspace",
+          "description": "The user owned AML account properties."
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "The private endpoint connection associated with the Cognitive Services account.",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Whether or not public endpoint access is allowed for this account."
+        },
+        "dateCreated": {
+          "type": "string",
+          "description": "Gets the date of cognitive services account creation.",
+          "readOnly": true
+        },
+        "callRateLimit": {
+          "$ref": "#/definitions/CallRateLimit",
+          "description": "The call rate limit Cognitive Services account.",
+          "readOnly": true
+        },
+        "dynamicThrottlingEnabled": {
+          "type": "boolean",
+          "description": "The flag to enable dynamic throttling."
+        },
+        "storedCompletionsDisabled": {
+          "type": "boolean",
+          "description": "The flag to disable stored completions."
+        },
+        "a365LoggingEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether A365 logging is enabled. Defaults to true. Set to false to opt out."
+        },
+        "quotaLimit": {
+          "$ref": "#/definitions/QuotaLimit",
+          "readOnly": true
+        },
+        "restrictOutboundNetworkAccess": {
+          "type": "boolean"
+        },
+        "allowedFqdnList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "disableLocalAuth": {
+          "type": "boolean"
+        },
+        "endpoints": {
+          "type": "object",
+          "description": "Dictionary of <string>",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "restore": {
+          "type": "boolean",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "deletionDate": {
+          "type": "string",
+          "description": "The deletion date, only available for deleted account.",
+          "readOnly": true
+        },
+        "scheduledPurgeDate": {
+          "type": "string",
+          "description": "The scheduled purge date, only available for deleted account.",
+          "readOnly": true
+        },
+        "locations": {
+          "$ref": "#/definitions/MultiRegionSettings",
+          "description": "The multiregion settings of Cognitive Services account."
+        },
+        "commitmentPlanAssociations": {
+          "type": "array",
+          "description": "The commitment plan associations of Cognitive Services account.",
+          "items": {
+            "$ref": "#/definitions/CommitmentPlanAssociation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "commitmentPlanId"
+          ]
+        },
+        "abusePenalty": {
+          "$ref": "#/definitions/AbusePenalty",
+          "description": "The abuse penalty.",
+          "readOnly": true
+        },
+        "raiMonitorConfig": {
+          "$ref": "#/definitions/RaiMonitorConfig",
+          "description": "Cognitive Services Rai Monitor Config."
+        },
+        "networkInjections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkInjection"
+          }
+        },
+        "allowProjectManagement": {
+          "type": "boolean",
+          "description": "Specifies whether this resource support project management as child resources, used as containers for access management, data isolation and cost in AI Foundry."
+        },
+        "defaultProject": {
+          "type": "string",
+          "description": "Specifies the project, by project name, that is targeted when data plane endpoints are called without a project parameter."
+        },
+        "associatedProjects": {
+          "type": "array",
+          "description": "Specifies the projects, by project name, that are associated with this resource.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "trustedCertificateSources": {
+          "type": "array",
+          "description": "Private CA trust sources for supported features in an AIServices account with allowProjectManagement enabled. Supports one Azure Key Vault source containing version-pinned references to secrets with PEM-encoded CA certificates or certificate bundles. On PUT or PATCH, a non-null array replaces the complete configuration, so include all references to retain. Omit this property or send null to preserve the existing configuration; send an empty array to clear it.",
+          "maxItems": 1,
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/TrustedCertificateSource"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "apiProperties": {
+          "$ref": "#/definitions/ApiPropertiesRead",
+          "description": "The api properties for special APIs."
         }
       }
     },
@@ -10048,6 +10331,58 @@
           ]
         }
       }
+    },
+    "AccountWrite": {
+      "type": "object",
+      "description": "Cognitive Services account parameters accepted by create and update operations.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AccountProperties",
+          "description": "Properties of Cognitive Services account."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource Etag.",
+          "readOnly": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind (type) of cognitive service account."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The resource model definition representing SKU"
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Identity for the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "ActionType": {
       "type": "string",
@@ -10614,6 +10949,16 @@
       ],
       "x-ms-discriminator-value": "ApiKey"
     },
+    "ApiKeyAuthConnectionPropertiesRead": {
+      "type": "object",
+      "description": "API key connection properties returned by ordinary resource operations.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
+        }
+      ],
+      "x-ms-discriminator-value": "ApiKey"
+    },
     "ApiKeys": {
       "type": "object",
       "description": "The access keys for the cognitive services account.",
@@ -10642,7 +10987,13 @@
         },
         "qnaAzureSearchEndpointKey": {
           "type": "string",
-          "description": "(QnAMaker Only) The Azure Search endpoint key of QnAMaker."
+          "format": "password",
+          "description": "(QnAMaker Only) The Azure Search endpoint key of QnAMaker.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
         },
         "qnaAzureSearchEndpointId": {
           "type": "string",
@@ -10654,15 +11005,66 @@
         },
         "eventHubConnectionString": {
           "type": "string",
+          "format": "password",
           "description": "(Personalization Only) The flag to enable statistics of Bing Search.",
           "maxLength": 1000,
-          "pattern": "^( *)Endpoint=sb://(.*);( *)SharedAccessKeyName=(.*);( *)SharedAccessKey=(.*)$"
+          "pattern": "^( *)Endpoint=sb://(.*);( *)SharedAccessKeyName=(.*);( *)SharedAccessKey=(.*)$",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
         },
         "storageAccountConnectionString": {
           "type": "string",
+          "format": "password",
           "description": "(Personalization Only) The storage account connection string.",
           "maxLength": 1000,
-          "pattern": "^(( *)DefaultEndpointsProtocol=(http|https)( *);( *))?AccountName=(.*)AccountKey=(.*)EndpointSuffix=(.*)$"
+          "pattern": "^(( *)DefaultEndpointsProtocol=(http|https)( *);( *))?AccountName=(.*)AccountKey=(.*)EndpointSuffix=(.*)$",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "aadClientId": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The Azure AD Client Id (Application Id).",
+          "maxLength": 500
+        },
+        "aadTenantId": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The Azure AD Tenant Id.",
+          "maxLength": 500
+        },
+        "superUser": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The super user of Metrics Advisor.",
+          "maxLength": 500
+        },
+        "websiteName": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The website name of Metrics Advisor.",
+          "maxLength": 500
+        }
+      },
+      "additionalProperties": {}
+    },
+    "ApiPropertiesRead": {
+      "type": "object",
+      "description": "API-specific properties returned without stored credentials.",
+      "properties": {
+        "qnaRuntimeEndpoint": {
+          "type": "string",
+          "description": "(QnAMaker Only) The runtime endpoint of QnAMaker."
+        },
+        "qnaAzureSearchEndpointId": {
+          "type": "string",
+          "description": "(QnAMaker Only) The Azure Search endpoint id of QnAMaker."
+        },
+        "statisticsEnabled": {
+          "type": "boolean",
+          "description": "(Bing Search Only) The flag to enable statistics of Bing Search."
         },
         "aadClientId": {
           "type": "string",
@@ -11106,6 +11508,30 @@
         }
       }
     },
+    "CertificateBundleReference": {
+      "type": "object",
+      "description": "A reference to a specific version of a Key Vault secret containing a PEM-encoded CA certificate or certificate bundle.",
+      "properties": {
+        "secretName": {
+          "type": "string",
+          "description": "Name of the Key Vault secret containing the CA certificate or certificate bundle.",
+          "minLength": 1,
+          "maxLength": 127,
+          "pattern": "^[0-9a-zA-Z-]{1,127}$"
+        },
+        "secretVersion": {
+          "type": "string",
+          "description": "Required, pinned version of the Key Vault secret. Newer secret versions are not followed automatically. To rotate a bundle, update this value and resubmit the complete account trust configuration.",
+          "minLength": 1,
+          "maxLength": 127,
+          "pattern": "^[0-9a-zA-Z-]{1,127}$"
+        }
+      },
+      "required": [
+        "secretName",
+        "secretVersion"
+      ]
+    },
     "ChannelsBuiltInAuthorizationPolicy": {
       "type": "object",
       "description": "Represents a built-in authorization policy specific to Azure Bot Service/Channels authentication.",
@@ -11537,6 +11963,15 @@
           "type": "string",
           "format": "password",
           "x-ms-secret": true
+        }
+      }
+    },
+    "ConnectionAccessKeyRead": {
+      "type": "object",
+      "description": "Access key identifier returned without the secret access key.",
+      "properties": {
+        "accessKeyId": {
+          "type": "string"
         }
       }
     },
@@ -12384,6 +12819,29 @@
         }
       }
     },
+    "ConnectionOauth2Read": {
+      "type": "object",
+      "description": "OAuth identifiers and endpoint metadata returned without credential values.",
+      "properties": {
+        "authUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Required by Concur connection category"
+        },
+        "clientId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Client id in the format of UUID"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Required by QuickBooks and Xero connection categories"
+        },
+        "username": {
+          "type": "string",
+          "description": "Concur, ServiceNow auth server AccessToken grant type is 'Password'\nwhich requires UsernamePassword"
+        }
+      }
+    },
     "ConnectionPersonalAccessToken": {
       "type": "object",
       "properties": {
@@ -12489,10 +12947,96 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+            "$ref": "#/definitions/ConnectionPropertiesV2BasicResourceRead"
           }
         }
       }
+    },
+    "ConnectionPropertiesV2BasicResourceRead": {
+      "type": "object",
+      "description": "A connection returned by ordinary resource operations.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ConnectionPropertiesV2Read": {
+      "type": "object",
+      "description": "Connection properties returned by ordinary resource operations.",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/ConnectionCategory",
+          "description": "Category of the connection"
+        },
+        "createdByWorkspaceArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+          "readOnly": true
+        },
+        "error": {
+          "type": "string",
+          "description": "Provides the error message if the connection fails"
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "group": {
+          "$ref": "#/definitions/ConnectionGroup",
+          "description": "Group based on connection category",
+          "readOnly": true
+        },
+        "isSharedToAll": {
+          "type": "boolean"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Store user metadata for this connection",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "peRequirement": {
+          "$ref": "#/definitions/ManagedPERequirement",
+          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'."
+        },
+        "peStatus": {
+          "$ref": "#/definitions/ManagedPEStatus",
+          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'."
+        },
+        "sharedUserList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "target": {
+          "type": "string",
+          "description": "The connection URL to be used."
+        },
+        "useWorkspaceManagedIdentity": {
+          "type": "boolean"
+        },
+        "authType": {
+          "$ref": "#/definitions/ConnectionAuthType",
+          "description": "Authentication type of the connection target"
+        }
+      },
+      "discriminator": "authType",
+      "required": [
+        "authType"
+      ]
     },
     "ConnectionServicePrincipal": {
       "type": "object",
@@ -12504,6 +13048,18 @@
           "type": "string",
           "format": "password",
           "x-ms-secret": true
+        },
+        "tenantId": {
+          "type": "string"
+        }
+      }
+    },
+    "ConnectionServicePrincipalRead": {
+      "type": "object",
+      "description": "Service principal identifiers returned without the client secret.",
+      "properties": {
+        "clientId": {
+          "type": "string"
         },
         "tenantId": {
           "type": "string"
@@ -12544,6 +13100,15 @@
           "description": "Optional, required by connections like SalesForce for extra security in addition to UsernamePassword",
           "x-ms-secret": true
         },
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "ConnectionUsernamePasswordRead": {
+      "type": "object",
+      "description": "Username metadata returned without the password or security token.",
+      "properties": {
         "username": {
           "type": "string"
         }
@@ -12629,10 +13194,12 @@
       "properties": {
         "keys": {
           "type": "object",
+          "format": "password",
           "description": "Dictionary of <string>",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-secret": true
         }
       }
     },
@@ -12642,12 +13209,28 @@
       "properties": {
         "credentials": {
           "$ref": "#/definitions/CustomKeys",
-          "description": "Custom Keys credential object"
+          "format": "password",
+          "description": "Custom Keys credential object",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomKeys"
+    },
+    "CustomKeysConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Custom-key connection properties returned without stored credentials.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
         }
       ],
       "x-ms-discriminator-value": "CustomKeys"
@@ -13843,6 +14426,21 @@
       ],
       "x-ms-discriminator-value": "ManagedIdentity"
     },
+    "ManagedIdentityAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Managed identity connection properties returned by ordinary resource operations.",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionManagedIdentity"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
+        }
+      ],
+      "x-ms-discriminator-value": "ManagedIdentity"
+    },
     "ManagedNetworkKind": {
       "type": "string",
       "description": "The Kind of the managed network. Users can switch from V1 to V2 for granular access controls, but cannot switch back to V1 once V2 is enabled.",
@@ -14688,6 +15286,16 @@
       ],
       "x-ms-discriminator-value": "None"
     },
+    "NoneAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Unauthenticated connection properties returned by ordinary resource operations.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
+        }
+      ],
+      "x-ms-discriminator-value": "None"
+    },
     "NspAccessRuleDirection": {
       "type": "string",
       "description": "Direction of Access Rule",
@@ -14721,6 +15329,22 @@
       "allOf": [
         {
           "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "x-ms-discriminator-value": "OAuth2"
+    },
+    "Oauth2AuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "OAuth connection properties returned by ordinary resource operations.",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionOauth2Read",
+          "description": "Nonsensitive authentication metadata."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
         }
       ],
       "x-ms-discriminator-value": "OAuth2"
@@ -14841,6 +15465,16 @@
       "allOf": [
         {
           "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "x-ms-discriminator-value": "PAT"
+    },
+    "PatAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Personal access token connection properties returned by ordinary resource operations.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
         }
       ],
       "x-ms-discriminator-value": "PAT"
@@ -17161,6 +17795,16 @@
         }
       ]
     },
+    "SasAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Shared access signature connection properties returned by ordinary resource operations.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
+        }
+      ],
+      "x-ms-discriminator-value": "SAS"
+    },
     "ScenarioType": {
       "type": "string",
       "description": "Specifies what features in AI Foundry network injection applies to. Currently only supports 'agent' for agent scenarios. 'none' means no network injection.",
@@ -17193,6 +17837,22 @@
       "allOf": [
         {
           "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "x-ms-discriminator-value": "ServicePrincipal"
+    },
+    "ServicePrincipalAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Service principal connection properties returned by ordinary resource operations.",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionServicePrincipalRead",
+          "description": "Nonsensitive authentication metadata."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
         }
       ],
       "x-ms-discriminator-value": "ServicePrincipal"
@@ -17585,6 +18245,64 @@
         }
       }
     },
+    "TrustedCertificateSource": {
+      "type": "object",
+      "description": "An Azure resource containing the CA certificate bundles trusted by supported features in the account.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/TrustedCertificateSourceType",
+          "description": "Type of resource containing the certificate bundles. Currently only AzureKeyVault is supported."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure resource ID of the Key Vault containing the referenced secrets. The account identity must have permission to read these secrets.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
+        },
+        "certificateBundleReferences": {
+          "type": "array",
+          "description": "References to secrets containing one or more PEM-encoded CA certificates. Each secret name and version pair must be unique within the source, using case-insensitive comparison. The same secret name can be referenced with different versions.",
+          "minItems": 1,
+          "maxItems": 25,
+          "items": {
+            "$ref": "#/definitions/CertificateBundleReference"
+          },
+          "x-ms-identifiers": [
+            "secretName",
+            "secretVersion"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "resourceId",
+        "certificateBundleReferences"
+      ]
+    },
+    "TrustedCertificateSourceType": {
+      "type": "string",
+      "description": "Type of Azure resource containing trusted CA certificate bundles.",
+      "enum": [
+        "AzureKeyVault"
+      ],
+      "x-ms-enum": {
+        "name": "TrustedCertificateSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureKeyVault",
+            "value": "AzureKeyVault",
+            "description": "Azure Key Vault secrets containing CA certificates or certificate bundles."
+          }
+        ]
+      }
+    },
     "UnitType": {
       "type": "string",
       "description": "The unit of the metric.",
@@ -17784,6 +18502,22 @@
       "allOf": [
         {
           "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "x-ms-discriminator-value": "UsernamePassword"
+    },
+    "UsernamePasswordAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Username and password connection properties returned by ordinary resource operations.",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionUsernamePasswordRead",
+          "description": "Nonsensitive authentication metadata."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
         }
       ],
       "x-ms-discriminator-value": "UsernamePassword"

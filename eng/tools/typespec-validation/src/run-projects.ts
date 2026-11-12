@@ -1,5 +1,6 @@
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
+import { findTypeSpecProjects } from "@azure-tools/specs-shared/typespec-projects";
 import { getSuppressions } from "@azure-tools/suppressions";
 import { spawn } from "node:child_process";
 import { appendFile, stat } from "node:fs/promises";
@@ -8,14 +9,14 @@ import { fileURLToPath } from "node:url";
 import pc from "picocolors";
 import { simpleGit } from "simple-git";
 import { formatRuleSummary, supportsColor, type RuleCounts } from "./diagnostics.ts";
-import { findChangedProjects, findProjects, type ChangedProjectsOptions } from "./find-projects.ts";
-import { cleanWorktree } from "./git-cleanup.ts";
+import { findChangedProjects, type ChangedProjectsOptions } from "./find-projects.ts";
 
 interface RunOptions {
   gitClean?: boolean;
   dryRun?: boolean;
   verbose?: boolean;
   summaryFile?: string;
+  fix?: boolean;
 }
 
 interface RunContext {
@@ -55,7 +56,7 @@ export async function runAll(
     throw new Error(`Please run TypeSpec Validation on a directory path: ${root}`);
   }
 
-  let projects = await findProjects(root);
+  let projects = await findTypeSpecProjects(root);
   if (projects.length === 0) {
     console.error(`No TypeSpec projects found in ${root}`);
     return false;
@@ -99,8 +100,10 @@ async function runProjects(
   context: RunContext,
   options: RunOptions,
 ): Promise<boolean> {
-  const git = simpleGit(root);
-  const logger = new ConsoleLogger(options.verbose);
+  const git = simpleGit({ baseDir: root, allowEnvironment: ["GIT_OPTIONAL_LOCKS"] }).env(
+    "GIT_OPTIONAL_LOCKS",
+    "0",
+  );
   const gitClean = options.gitClean && !options.dryRun;
   const displayRoot = resolve(
     gitClean || (await git.checkIsRepo()) ? await getRootFolder(root) : process.cwd(),
@@ -142,7 +145,7 @@ async function runProjects(
     }
 
     try {
-      const { success, segments } = await validateProject(project, context, options.verbose);
+      const { success, segments } = await validateProject(project, context, options);
       if (success) {
         counts.PASS++;
         printProjectGroup(githubActions, "pass", name, segments);
@@ -178,10 +181,6 @@ async function runProjects(
         ]);
       }
       throw error;
-    } finally {
-      if (gitClean) {
-        await cleanWorktree(displayRoot, logger);
-      }
     }
   }
 
@@ -299,10 +298,10 @@ function selectShard(projects: string[], shard: string): string[] {
 function validateProject(
   folder: string,
   context: RunContext,
-  verbose = false,
+  { verbose = false, fix = false }: Pick<RunOptions, "verbose" | "fix"> = {},
 ): Promise<{ success: boolean; segments: OutputSegment[] }> {
   return new Promise((resolvePromise, reject) => {
-    const env = { ...process.env };
+    const env: NodeJS.ProcessEnv = { ...process.env, GIT_OPTIONAL_LOCKS: "0" };
     if (supportsColor()) {
       delete env.NO_COLOR;
       env.FORCE_COLOR = "1";
@@ -333,10 +332,11 @@ function validateProject(
     const child = spawn(
       process.execPath,
       [
-        fileURLToPath(new URL("../cmd/tsv.js", import.meta.url)),
+        fileURLToPath(new URL("./project-worker.ts", import.meta.url)),
         folder,
         JSON.stringify(context),
         ...(verbose ? ["--verbose"] : []),
+        ...(fix ? ["--fix"] : []),
       ],
       { stdio: ["ignore", "pipe", "pipe"], env },
     );

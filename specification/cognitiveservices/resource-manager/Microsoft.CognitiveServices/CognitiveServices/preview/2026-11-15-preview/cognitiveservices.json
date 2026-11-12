@@ -154,7 +154,10 @@
       "name": "ManagedComputeCapacities"
     },
     {
-      "name": "CostControls"
+      "name": "AccountCostControls"
+    },
+    {
+      "name": "ProjectCostControls"
     },
     {
       "name": "Skus"
@@ -1041,6 +1044,15 @@
         "x-ms-examples": {
           "List Managed Compute Capacities": {
             "$ref": "./examples/ListManagedComputeCapacities.json"
+          },
+          "List Managed Compute Capacities For Deployment With Matching Account Location": {
+            "$ref": "./examples/ListManagedComputeCapacitiesWithDeployment.json"
+          },
+          "List Managed Compute Capacities With Location": {
+            "$ref": "./examples/ListManagedComputeCapacitiesWithLocation.json"
+          },
+          "List Managed Compute Capacities With Unsupported DataZone Location": {
+            "$ref": "./examples/ListManagedComputeCapacitiesWithUnsupportedLocation.json"
           }
         },
         "x-ms-pageable": {
@@ -1793,6 +1805,9 @@
         "x-ms-examples": {
           "Get Account": {
             "$ref": "./examples/GetAccount.json"
+          },
+          "Get an account with private CA trust": {
+            "$ref": "./examples/GetAccountWithTrustedCertificateSources.json"
           }
         }
       },
@@ -1828,7 +1843,7 @@
             "description": "The parameters to provide for the created account.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Account"
+              "$ref": "#/definitions/AccountWrite"
             }
           }
         ],
@@ -1885,6 +1900,9 @@
           },
           "Create a Foundry account with customer-owned AKS hosting": {
             "$ref": "./examples/CreateAccountWithAgentHostingConfiguration.json"
+          },
+          "Create an account with private CA trust": {
+            "$ref": "./examples/CreateAccountWithTrustedCertificateSources.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1925,7 +1943,7 @@
             "description": "The parameters to provide for the created account.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Account"
+              "$ref": "#/definitions/AccountWrite"
             }
           }
         ],
@@ -1961,8 +1979,17 @@
           }
         },
         "x-ms-examples": {
+          "Clear account private CA trust using an empty array": {
+            "$ref": "./examples/UpdateAccountClearTrustedCertificateSources.json"
+          },
+          "Rotate a pinned CA bundle while retaining other references": {
+            "$ref": "./examples/UpdateAccountRotateTrustedCertificateSources.json"
+          },
           "Update Account": {
             "$ref": "./examples/UpdateAccount.json"
+          },
+          "Update account tags while preserving private CA trust with null": {
+            "$ref": "./examples/UpdateAccountPreserveTrustedCertificateSources.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4121,7 +4148,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResourceRead"
             }
           },
           "default": {
@@ -4188,7 +4215,7 @@
           "200": {
             "description": "Resource 'ConnectionPropertiesV2BasicResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResourceRead"
             }
           },
           "default": {
@@ -4255,7 +4282,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResourceRead"
             }
           },
           "default": {
@@ -4332,11 +4359,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/costControls": {
       "get": {
-        "operationId": "CostControls_List",
+        "operationId": "AccountCostControls_List",
         "tags": [
-          "CostControls"
+          "AccountCostControls"
         ],
-        "description": "Lists the cost controls owned by an account.",
+        "description": "Lists account-owned cost controls.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -4360,7 +4387,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/CostControlListResult"
             }
@@ -4373,8 +4400,8 @@
           }
         },
         "x-ms-examples": {
-          "List cost controls with all settings": {
-            "$ref": "./examples/CostControl/list.json"
+          "List budgets owned by an account": {
+            "$ref": "./examples/AccountCostControl/list.json"
           }
         },
         "x-ms-pageable": {
@@ -4384,11 +4411,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/costControls/{costControlName}": {
       "get": {
-        "operationId": "CostControls_Get",
+        "operationId": "AccountCostControls_Get",
         "tags": [
-          "CostControls"
+          "AccountCostControls"
         ],
-        "description": "Gets a cost control.",
+        "description": "Gets an account-owned cost control and its representation entity tag.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -4412,22 +4439,24 @@
           {
             "name": "costControlName",
             "in": "path",
-            "description": "The name of the CostControl",
+            "description": "The cost-control name. Names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CostControl"
+              "$ref": "#/definitions/AccountCostControl"
             },
             "headers": {
               "ETag": {
                 "type": "string",
-                "description": "The current entity tag for the cost control."
+                "description": "The current opaque entity tag for this representation."
               }
             }
           },
@@ -4439,20 +4468,17 @@
           }
         },
         "x-ms-examples": {
-          "Get a cost control with all settings": {
-            "$ref": "./examples/CostControl/get.json"
-          },
-          "Read a legacy cost control without authoring its legacy values": {
-            "$ref": "./examples/CostControl/getLegacy.json"
+          "Get an account-owned budget": {
+            "$ref": "./examples/AccountCostControl/get.json"
           }
         }
       },
       "put": {
-        "operationId": "CostControls_CreateOrUpdate",
+        "operationId": "AccountCostControls_CreateOrUpdate",
         "tags": [
-          "CostControls"
+          "AccountCostControls"
         ],
-        "description": "Creates or replaces a cost control.",
+        "description": "Creates or replaces an account-owned cost control.\nThe definition may contain at most one notification, including disabled notifications, and one Block action.\nExceeding either limit returns HTTP 400 without persisting the request.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -4476,10 +4502,12 @@
           {
             "name": "costControlName",
             "in": "path",
-            "description": "The name of the CostControl",
+            "description": "The cost-control name. Names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
           },
           {
             "$ref": "#/parameters/CostControlCreateOrUpdateHeaders.ifMatch"
@@ -4493,7 +4521,7 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CostControl"
+              "$ref": "#/definitions/AccountCostControl"
             }
           }
         ],
@@ -4501,24 +4529,24 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CostControl"
+              "$ref": "#/definitions/AccountCostControl"
             },
             "headers": {
               "ETag": {
                 "type": "string",
-                "description": "The current entity tag for the cost control."
+                "description": "The current opaque entity tag for this representation."
               }
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/CostControl"
+              "$ref": "#/definitions/AccountCostControl"
             },
             "headers": {
               "ETag": {
                 "type": "string",
-                "description": "The current entity tag for the cost control."
+                "description": "The current opaque entity tag for this representation."
               }
             }
           },
@@ -4530,17 +4558,17 @@
           }
         },
         "x-ms-examples": {
-          "Create a cost control with all settings": {
-            "$ref": "./examples/CostControl/createOrUpdate.json"
+          "Create or replace an account cost budget": {
+            "$ref": "./examples/AccountCostControl/createOrUpdate.json"
           }
         }
       },
       "patch": {
-        "operationId": "CostControls_Update",
+        "operationId": "AccountCostControls_Update",
         "tags": [
-          "CostControls"
+          "AccountCostControls"
         ],
-        "description": "Updates selected properties of a cost control.",
+        "description": "Updates an account-owned cost control. Omitting properties preserves all existing cost control properties; setting properties to null or an empty object ({}) clears them all.\nA non-empty properties object updates selected fields, preserving omitted fields; a successful update that leaves the cost control unchanged retains its entity tag.\nThe complete merged result may contain at most one notification, including disabled notifications, and one Block action.\nExceeding either limit returns HTTP 400 without changing the stored definition.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -4564,10 +4592,12 @@
           {
             "name": "costControlName",
             "in": "path",
-            "description": "The name of the CostControl",
+            "description": "The cost-control name. Names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
           },
           {
             "$ref": "#/parameters/CostControlIfMatchHeader"
@@ -4586,12 +4616,12 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CostControl"
+              "$ref": "#/definitions/AccountCostControl"
             },
             "headers": {
               "ETag": {
                 "type": "string",
-                "description": "The current entity tag for the cost control."
+                "description": "The current opaque entity tag for this representation."
               }
             }
           },
@@ -4603,20 +4633,20 @@
           }
         },
         "x-ms-examples": {
-          "Update all configurable cost control settings": {
-            "$ref": "./examples/CostControl/update.json"
+          "Clear filters and remove named notifications and blocking actions": {
+            "$ref": "./examples/AccountCostControl/clearOptionalSettings.json"
           },
-          "Update metadata while preserving legacy rules": {
-            "$ref": "./examples/CostControl/updateMetadata.json"
+          "Merge named budget settings and restore owner-default grouping": {
+            "$ref": "./examples/AccountCostControl/update.json"
           }
         }
       },
       "delete": {
-        "operationId": "CostControls_Delete",
+        "operationId": "AccountCostControls_Delete",
         "tags": [
-          "CostControls"
+          "AccountCostControls"
         ],
-        "description": "Deletes a cost control.",
+        "description": "Deletes an account-owned cost control.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -4640,10 +4670,12 @@
           {
             "name": "costControlName",
             "in": "path",
-            "description": "The name of the CostControl",
+            "description": "The cost-control name. Names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
           },
           {
             "$ref": "#/parameters/CostControlIfMatchHeader"
@@ -4664,8 +4696,68 @@
           }
         },
         "x-ms-examples": {
-          "Delete a cost control conditionally": {
-            "$ref": "./examples/CostControl/delete.json"
+          "Delete a budget conditionally": {
+            "$ref": "./examples/AccountCostControl/delete.json"
+          }
+        }
+      },
+      "head": {
+        "operationId": "AccountCostControls_CheckExistence",
+        "tags": [
+          "AccountCostControls"
+        ],
+        "description": "Checks whether an account-owned cost control exists without returning its body.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "costControlName",
+            "in": "path",
+            "description": "The cost-control name. Names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The current opaque entity tag for this representation."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check for a budget without returning its body": {
+            "$ref": "./examples/AccountCostControl/checkExistence.json"
           }
         }
       }
@@ -7698,19 +7790,6 @@
               "$ref": "#/definitions/Project"
             }
           },
-          "201": {
-            "description": "Resource 'Project' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Project"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
@@ -7746,6 +7825,9 @@
           },
           "Create Project Min": {
             "$ref": "./examples/CreateProjectMin.json"
+          },
+          "Create a Foundry project with tool controls": {
+            "$ref": "./examples/CreateProjectWithToolControls.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -7827,8 +7909,14 @@
           }
         },
         "x-ms-examples": {
+          "Clear a Foundry project's tool controls with explicit null": {
+            "$ref": "./examples/UpdateProjectClearToolControls.json"
+          },
           "Update Project": {
             "$ref": "./examples/UpdateProjects.json"
+          },
+          "Update a Foundry project with no explicitly allowed tools": {
+            "$ref": "./examples/UpdateProjectWithToolControls.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -9455,7 +9543,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResourceRead"
             }
           },
           "default": {
@@ -9532,7 +9620,7 @@
           "200": {
             "description": "Resource 'ConnectionPropertiesV2BasicResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResourceRead"
             }
           },
           "default": {
@@ -9609,7 +9697,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+              "$ref": "#/definitions/ConnectionPropertiesV2BasicResourceRead"
             }
           },
           "default": {
@@ -9690,6 +9778,477 @@
         "x-ms-examples": {
           "DeleteProjectConnection": {
             "$ref": "./examples/ProjectConnection/delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/costControls": {
+      "get": {
+        "operationId": "ProjectCostControls_List",
+        "tags": [
+          "ProjectCostControls"
+        ],
+        "description": "Lists project-owned cost controls.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of Cognitive Services account's project.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProjectCostControlListResult"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The current opaque entity tag for this representation."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List budgets owned by a project": {
+            "$ref": "./examples/ProjectCostControl/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/costControls/{costControlName}": {
+      "get": {
+        "operationId": "ProjectCostControls_Get",
+        "tags": [
+          "ProjectCostControls"
+        ],
+        "description": "Gets a project-owned cost control and its representation entity tag.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of Cognitive Services account's project.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "costControlName",
+            "in": "path",
+            "description": "The cost-control name. Names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProjectCostControl"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The current opaque entity tag for this representation."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a project-owned budget": {
+            "$ref": "./examples/ProjectCostControl/get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ProjectCostControls_CreateOrUpdate",
+        "tags": [
+          "ProjectCostControls"
+        ],
+        "description": "Creates or replaces a project-owned cost control.\nThe definition may contain at most one notification, including disabled notifications, and one Block action.\nExceeding either limit returns HTTP 400 without persisting the request.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of Cognitive Services account's project.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "costControlName",
+            "in": "path",
+            "description": "The cost-control name. Names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
+          },
+          {
+            "$ref": "#/parameters/CostControlCreateOrUpdateHeaders.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/CostControlCreateOrUpdateHeaders.ifNoneMatch"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProjectCostControl"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProjectCostControl"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The current opaque entity tag for this representation."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/ProjectCostControl"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The current opaque entity tag for this representation."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or replace a project token budget": {
+            "$ref": "./examples/ProjectCostControl/createOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ProjectCostControls_Update",
+        "tags": [
+          "ProjectCostControls"
+        ],
+        "description": "Updates a Foundry project cost control. Omitting properties preserves all existing cost control properties; setting properties to null or an empty object ({}) clears them all.\nA non-empty properties object updates selected fields, preserving omitted fields; a successful update that leaves the cost control unchanged retains its entity tag.\nThe complete merged result may contain at most one notification, including disabled notifications, and one Block action.\nExceeding either limit returns HTTP 400 without changing the stored definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of Cognitive Services account's project.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "costControlName",
+            "in": "path",
+            "description": "The cost-control name. Names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
+          },
+          {
+            "$ref": "#/parameters/CostControlIfMatchHeader"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CostControlPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProjectCostControl"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The current opaque entity tag for this representation."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Clear filters and remove named notifications and blocking actions": {
+            "$ref": "./examples/ProjectCostControl/clearOptionalSettings.json"
+          },
+          "Merge named budget settings and restore owner-default grouping": {
+            "$ref": "./examples/ProjectCostControl/update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ProjectCostControls_Delete",
+        "tags": [
+          "ProjectCostControls"
+        ],
+        "description": "Deletes a project-owned cost control.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of Cognitive Services account's project.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "costControlName",
+            "in": "path",
+            "description": "The cost-control name. Names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
+          },
+          {
+            "$ref": "#/parameters/CostControlIfMatchHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a budget conditionally": {
+            "$ref": "./examples/ProjectCostControl/delete.json"
+          }
+        }
+      },
+      "head": {
+        "operationId": "ProjectCostControls_CheckExistence",
+        "tags": [
+          "ProjectCostControls"
+        ],
+        "description": "Checks whether a project-owned cost control exists without returning its body.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of Cognitive Services account's project.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "costControlName",
+            "in": "path",
+            "description": "The cost-control name. Names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The current opaque entity tag for this representation."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check for a budget without returning its body": {
+            "$ref": "./examples/ProjectCostControl/checkExistence.json"
           }
         }
       }
@@ -13184,6 +13743,16 @@
       ],
       "x-ms-discriminator-value": "AAD"
     },
+    "AadAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Microsoft Entra connection properties returned by ordinary resource operations.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
+        }
+      ],
+      "x-ms-discriminator-value": "AAD"
+    },
     "AbusePenalty": {
       "type": "object",
       "description": "The abuse penalty.",
@@ -13240,12 +13809,28 @@
       ],
       "x-ms-discriminator-value": "AccessKey"
     },
+    "AccessKeyAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Access key connection properties returned by ordinary resource operations.",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionAccessKeyRead",
+          "description": "Nonsensitive authentication metadata."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
+        }
+      ],
+      "x-ms-discriminator-value": "AccessKey"
+    },
     "Account": {
       "type": "object",
       "description": "Cognitive Services account is an Azure resource representing the provisioned account, it's type, location and SKU.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AccountProperties",
+          "$ref": "#/definitions/AccountPropertiesRead",
           "description": "Properties of Cognitive Services account."
         },
         "tags": {
@@ -13292,6 +13877,26 @@
         }
       ]
     },
+    "AccountCostControl": {
+      "type": "object",
+      "description": "A budget that measures consumption and optionally alerts or blocks requests within an account.\nReading, deleting, and enforcing stored identity selections requires Microsoft.CognitiveServices/CostControlsByIdentity registration.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CostControlProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "etag": {
+          "$ref": "#/definitions/Azure.Core.eTag",
+          "description": "The opaque entity tag used for optimistic concurrency.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "AccountKeyAuthTypeConnectionProperties": {
       "type": "object",
       "description": "This connection type covers the account key connection for Azure storage",
@@ -13304,6 +13909,16 @@
       "allOf": [
         {
           "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "x-ms-discriminator-value": "AccountKey"
+    },
+    "AccountKeyAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Account key connection properties returned by ordinary resource operations.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
         }
       ],
       "x-ms-discriminator-value": "AccountKey"
@@ -13454,7 +14069,13 @@
         },
         "migrationToken": {
           "type": "string",
-          "description": "Resource migration token."
+          "format": "password",
+          "description": "Resource migration token.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
         },
         "skuChangeInfo": {
           "$ref": "#/definitions/SkuChangeInfo",
@@ -13635,31 +14256,273 @@
             "create"
           ]
         },
-        "costControlIds": {
+        "trustedCertificateSources": {
           "type": "array",
-          "description": "The full resource IDs of cost controls directly attached to this account.\nAt the moment the service only supports a single cost control. This will be expanded in future API versions.",
+          "description": "Private CA trust sources for supported features in an AIServices account with allowProjectManagement enabled. Supports one Azure Key Vault source containing version-pinned references to secrets with PEM-encoded CA certificates or certificate bundles. On PUT or PATCH, a non-null array replaces the complete configuration, so include all references to retain. Omit this property or send null to preserve the existing configuration; send an empty array to clear it.",
           "maxItems": 1,
+          "x-nullable": true,
           "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-            "x-ms-arm-id-details": {
-              "allowedResources": [
-                {
-                  "type": "Microsoft.CognitiveServices/accounts/costControls"
-                }
-              ]
-            }
-          }
+            "$ref": "#/definitions/TrustedCertificateSource"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "costControlConnections": {
           "$ref": "#/definitions/CostControlConnections",
-          "description": "The account-level connections used to publish cost control telemetry and events. Application Insights is optional for attachment, accounting, and enforcement and can be configured later. Event Grid must be configured before attaching a cost control with an alert threshold.",
+          "description": "Account-level cost-control telemetry connections. Application Insights is optional.\nBudget notifications use their own Event Grid connection IDs; account-level Event Grid configuration is not exposed or accepted by this API version.\nSet this object to null in an account update to clear the Application Insights connection. Existing legacy Event Grid configuration is preserved.\nThis property is available independently of Microsoft.CognitiveServices/CostControls subscription registration.",
           "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "update"
           ]
+        }
+      }
+    },
+    "AccountPropertiesRead": {
+      "type": "object",
+      "description": "Account properties returned without stored credentials.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets the status of the cognitive services account at the time the operation was called.",
+          "readOnly": true
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "Endpoint of the created account.",
+          "readOnly": true
+        },
+        "internalId": {
+          "type": "string",
+          "description": "The internal identifier (deprecated, do not use this property).",
+          "readOnly": true
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "Gets the capabilities of the cognitive services account. Each item indicates the capability of a specific feature. The values are read-only and for reference only.",
+          "items": {
+            "$ref": "#/definitions/SkuCapability"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "isMigrated": {
+          "type": "boolean",
+          "description": "If the resource is migrated from an existing key.",
+          "readOnly": true
+        },
+        "skuChangeInfo": {
+          "$ref": "#/definitions/SkuChangeInfo",
+          "description": "Sku change info of account.",
+          "readOnly": true
+        },
+        "customSubDomainName": {
+          "type": "string",
+          "description": "Optional subdomain name used for token-based authentication."
+        },
+        "networkAcls": {
+          "$ref": "#/definitions/NetworkRuleSet",
+          "description": "A collection of rules governing the accessibility from specific network locations."
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "The encryption properties for this resource."
+        },
+        "userOwnedStorage": {
+          "type": "array",
+          "description": "The storage accounts for this resource.",
+          "items": {
+            "$ref": "#/definitions/UserOwnedStorage"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        },
+        "amlWorkspace": {
+          "$ref": "#/definitions/UserOwnedAmlWorkspace",
+          "description": "The user owned AML account properties."
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "The private endpoint connection associated with the Cognitive Services account.",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Whether or not public endpoint access is allowed for this account."
+        },
+        "dateCreated": {
+          "type": "string",
+          "description": "Gets the date of cognitive services account creation.",
+          "readOnly": true
+        },
+        "callRateLimit": {
+          "$ref": "#/definitions/CallRateLimit",
+          "description": "The call rate limit Cognitive Services account.",
+          "readOnly": true
+        },
+        "dynamicThrottlingEnabled": {
+          "type": "boolean",
+          "description": "The flag to enable dynamic throttling."
+        },
+        "storedCompletionsDisabled": {
+          "type": "boolean",
+          "description": "The flag to disable stored completions."
+        },
+        "a365LoggingEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether A365 logging is enabled. Defaults to true. Set to false to opt out."
+        },
+        "quotaLimit": {
+          "$ref": "#/definitions/QuotaLimit",
+          "readOnly": true
+        },
+        "restrictOutboundNetworkAccess": {
+          "type": "boolean"
+        },
+        "allowedFqdnList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "disableLocalAuth": {
+          "type": "boolean"
+        },
+        "endpoints": {
+          "type": "object",
+          "description": "Dictionary of <string>",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "restore": {
+          "type": "boolean",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "deletionDate": {
+          "type": "string",
+          "description": "The deletion date, only available for deleted account.",
+          "readOnly": true
+        },
+        "scheduledPurgeDate": {
+          "type": "string",
+          "description": "The scheduled purge date, only available for deleted account.",
+          "readOnly": true
+        },
+        "locations": {
+          "$ref": "#/definitions/MultiRegionSettings",
+          "description": "The multiregion settings of Cognitive Services account."
+        },
+        "commitmentPlanAssociations": {
+          "type": "array",
+          "description": "The commitment plan associations of Cognitive Services account.",
+          "items": {
+            "$ref": "#/definitions/CommitmentPlanAssociation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "commitmentPlanId"
+          ]
+        },
+        "abusePenalty": {
+          "$ref": "#/definitions/AbusePenalty",
+          "description": "The abuse penalty.",
+          "readOnly": true
+        },
+        "raiMonitorConfig": {
+          "$ref": "#/definitions/RaiMonitorConfig",
+          "description": "Cognitive Services Rai Monitor Config."
+        },
+        "networkInjections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkInjection"
+          }
+        },
+        "foundryAutoUpgrade": {
+          "$ref": "#/definitions/FoundryAutoUpgrade",
+          "description": "Represents the foundry auto-upgrade configuration for a Cognitive Services account."
+        },
+        "allowProjectManagement": {
+          "type": "boolean",
+          "description": "Specifies whether this resource support project management as child resources, used as containers for access management, data isolation and cost in AI Foundry."
+        },
+        "defaultProject": {
+          "type": "string",
+          "description": "Specifies the project, by project name, that is targeted when data plane endpoints are called without a project parameter."
+        },
+        "associatedProjects": {
+          "type": "array",
+          "description": "Specifies the projects, by project name, that are associated with this resource.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "capabilitySettings": {
+          "$ref": "#/definitions/CapabilitySettings",
+          "description": "Reusable default agent capability settings inherited by child projects."
+        },
+        "agentHostingConfigurations": {
+          "type": "array",
+          "description": "Customer-owned AKS hosting configurations for Foundry agents. This property can only be specified when the account is created; an existing account without a hosting configuration cannot add one later. This API version supports exactly one configuration, while the array shape is reserved for future API versions that may support multiple configurations. Once set, the configuration cannot be changed, removed, or reordered. Account update requests should omit this property or send the complete existing value unchanged. Responses only include hosting configuration types defined by the requested API version.",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/AgentHostingConfiguration"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "trustedCertificateSources": {
+          "type": "array",
+          "description": "Private CA trust sources for supported features in an AIServices account with allowProjectManagement enabled. Supports one Azure Key Vault source containing version-pinned references to secrets with PEM-encoded CA certificates or certificate bundles. On PUT or PATCH, a non-null array replaces the complete configuration, so include all references to retain. Omit this property or send null to preserve the existing configuration; send an empty array to clear it.",
+          "maxItems": 1,
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/TrustedCertificateSource"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "costControlConnections": {
+          "$ref": "#/definitions/CostControlConnections",
+          "description": "Account-level cost-control telemetry connections. Application Insights is optional.\nBudget notifications use their own Event Grid connection IDs; account-level Event Grid configuration is not exposed or accepted by this API version.\nSet this object to null in an account update to clear the Application Insights connection. Existing legacy Event Grid configuration is preserved.\nThis property is available independently of Microsoft.CognitiveServices/CostControls subscription registration.",
+          "x-nullable": true,
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "apiProperties": {
+          "$ref": "#/definitions/ApiPropertiesRead",
+          "description": "The api properties for special APIs."
         }
       }
     },
@@ -13693,6 +14556,58 @@
           ]
         }
       }
+    },
+    "AccountWrite": {
+      "type": "object",
+      "description": "Cognitive Services account parameters accepted by create and update operations.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AccountProperties",
+          "description": "Properties of Cognitive Services account."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource Etag.",
+          "readOnly": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind (type) of cognitive service account."
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "The resource model definition representing SKU"
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Identity for the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "ActionType": {
       "type": "string",
@@ -14478,6 +15393,16 @@
       ],
       "x-ms-discriminator-value": "ApiKey"
     },
+    "ApiKeyAuthConnectionPropertiesRead": {
+      "type": "object",
+      "description": "API key connection properties returned by ordinary resource operations.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
+        }
+      ],
+      "x-ms-discriminator-value": "ApiKey"
+    },
     "ApiKeys": {
       "type": "object",
       "description": "The access keys for the cognitive services account.",
@@ -14506,7 +15431,13 @@
         },
         "qnaAzureSearchEndpointKey": {
           "type": "string",
-          "description": "(QnAMaker Only) The Azure Search endpoint key of QnAMaker."
+          "format": "password",
+          "description": "(QnAMaker Only) The Azure Search endpoint key of QnAMaker.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
         },
         "qnaAzureSearchEndpointId": {
           "type": "string",
@@ -14518,15 +15449,66 @@
         },
         "eventHubConnectionString": {
           "type": "string",
+          "format": "password",
           "description": "(Personalization Only) The flag to enable statistics of Bing Search.",
           "maxLength": 1000,
-          "pattern": "^( *)Endpoint=sb://(.*);( *)SharedAccessKeyName=(.*);( *)SharedAccessKey=(.*)$"
+          "pattern": "^( *)Endpoint=sb://(.*);( *)SharedAccessKeyName=(.*);( *)SharedAccessKey=(.*)$",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
         },
         "storageAccountConnectionString": {
           "type": "string",
+          "format": "password",
           "description": "(Personalization Only) The storage account connection string.",
           "maxLength": 1000,
-          "pattern": "^(( *)DefaultEndpointsProtocol=(http|https)( *);( *))?AccountName=(.*)AccountKey=(.*)EndpointSuffix=(.*)$"
+          "pattern": "^(( *)DefaultEndpointsProtocol=(http|https)( *);( *))?AccountName=(.*)AccountKey=(.*)EndpointSuffix=(.*)$",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "aadClientId": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The Azure AD Client Id (Application Id).",
+          "maxLength": 500
+        },
+        "aadTenantId": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The Azure AD Tenant Id.",
+          "maxLength": 500
+        },
+        "superUser": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The super user of Metrics Advisor.",
+          "maxLength": 500
+        },
+        "websiteName": {
+          "type": "string",
+          "description": "(Metrics Advisor Only) The website name of Metrics Advisor.",
+          "maxLength": 500
+        }
+      },
+      "additionalProperties": {}
+    },
+    "ApiPropertiesRead": {
+      "type": "object",
+      "description": "API-specific properties returned without stored credentials.",
+      "properties": {
+        "qnaRuntimeEndpoint": {
+          "type": "string",
+          "description": "(QnAMaker Only) The runtime endpoint of QnAMaker."
+        },
+        "qnaAzureSearchEndpointId": {
+          "type": "string",
+          "description": "(QnAMaker Only) The Azure Search endpoint id of QnAMaker."
+        },
+        "statisticsEnabled": {
+          "type": "boolean",
+          "description": "(Bing Search Only) The flag to enable statistics of Bing Search."
         },
         "aadClientId": {
           "type": "string",
@@ -15900,6 +16882,10 @@
         }
       }
     },
+    "Azure.Core.eTag": {
+      "type": "string",
+      "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
+    },
     "Azure.Core.uuid": {
       "type": "string",
       "format": "uuid",
@@ -16285,6 +17271,30 @@
           }
         }
       }
+    },
+    "CertificateBundleReference": {
+      "type": "object",
+      "description": "A reference to a specific version of a Key Vault secret containing a PEM-encoded CA certificate or certificate bundle.",
+      "properties": {
+        "secretName": {
+          "type": "string",
+          "description": "Name of the Key Vault secret containing the CA certificate or certificate bundle.",
+          "minLength": 1,
+          "maxLength": 127,
+          "pattern": "^[0-9a-zA-Z-]{1,127}$"
+        },
+        "secretVersion": {
+          "type": "string",
+          "description": "Required, pinned version of the Key Vault secret. Newer secret versions are not followed automatically. To rotate a bundle, update this value and resubmit the complete account trust configuration.",
+          "minLength": 1,
+          "maxLength": 127,
+          "pattern": "^[0-9a-zA-Z-]{1,127}$"
+        }
+      },
+      "required": [
+        "secretName",
+        "secretVersion"
+      ]
     },
     "ChannelsBuiltInAuthorizationPolicy": {
       "type": "object",
@@ -17014,6 +18024,15 @@
           "type": "string",
           "format": "password",
           "x-ms-secret": true
+        }
+      }
+    },
+    "ConnectionAccessKeyRead": {
+      "type": "object",
+      "description": "Access key identifier returned without the secret access key.",
+      "properties": {
+        "accessKeyId": {
+          "type": "string"
         }
       }
     },
@@ -17867,6 +18886,29 @@
         }
       }
     },
+    "ConnectionOauth2Read": {
+      "type": "object",
+      "description": "OAuth identifiers and endpoint metadata returned without credential values.",
+      "properties": {
+        "authUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Required by Concur connection category"
+        },
+        "clientId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Client id in the format of UUID"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Required by QuickBooks and Xero connection categories"
+        },
+        "username": {
+          "type": "string",
+          "description": "Concur, ServiceNow auth server AccessToken grant type is 'Password'\nwhich requires UsernamePassword"
+        }
+      }
+    },
     "ConnectionPersonalAccessToken": {
       "type": "object",
       "properties": {
@@ -17972,10 +19014,96 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+            "$ref": "#/definitions/ConnectionPropertiesV2BasicResourceRead"
           }
         }
       }
+    },
+    "ConnectionPropertiesV2BasicResourceRead": {
+      "type": "object",
+      "description": "A connection returned by ordinary resource operations.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ConnectionPropertiesV2Read": {
+      "type": "object",
+      "description": "Connection properties returned by ordinary resource operations.",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/ConnectionCategory",
+          "description": "Category of the connection"
+        },
+        "createdByWorkspaceArmId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+          "readOnly": true
+        },
+        "error": {
+          "type": "string",
+          "description": "Provides the error message if the connection fails"
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "group": {
+          "$ref": "#/definitions/ConnectionGroup",
+          "description": "Group based on connection category",
+          "readOnly": true
+        },
+        "isSharedToAll": {
+          "type": "boolean"
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Store user metadata for this connection",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "peRequirement": {
+          "$ref": "#/definitions/ManagedPERequirement",
+          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'."
+        },
+        "peStatus": {
+          "$ref": "#/definitions/ManagedPEStatus",
+          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'."
+        },
+        "sharedUserList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "target": {
+          "type": "string",
+          "description": "The connection URL to be used."
+        },
+        "useWorkspaceManagedIdentity": {
+          "type": "boolean"
+        },
+        "authType": {
+          "$ref": "#/definitions/ConnectionAuthType",
+          "description": "Authentication type of the connection target"
+        }
+      },
+      "discriminator": "authType",
+      "required": [
+        "authType"
+      ]
     },
     "ConnectionServicePrincipal": {
       "type": "object",
@@ -17987,6 +19115,18 @@
           "type": "string",
           "format": "password",
           "x-ms-secret": true
+        },
+        "tenantId": {
+          "type": "string"
+        }
+      }
+    },
+    "ConnectionServicePrincipalRead": {
+      "type": "object",
+      "description": "Service principal identifiers returned without the client secret.",
+      "properties": {
+        "clientId": {
+          "type": "string"
         },
         "tenantId": {
           "type": "string"
@@ -18027,6 +19167,15 @@
           "description": "Optional, required by connections like SalesForce for extra security in addition to UsernamePassword",
           "x-ms-secret": true
         },
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "ConnectionUsernamePasswordRead": {
+      "type": "object",
+      "description": "Username metadata returned without the password or security token.",
+      "properties": {
         "username": {
           "type": "string"
         }
@@ -18113,47 +19262,147 @@
         ]
       }
     },
-    "CostControl": {
+    "CostControlAction": {
       "type": "object",
-      "description": "A cost control owned by a Cognitive Services account.",
+      "description": "Blocks requests when consumption reaches the explicitly configured threshold. No implicit blocking action is created.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/CostControlProperties",
-          "description": "The resource-specific properties for this resource."
-        },
-        "etag": {
+        "type": {
           "type": "string",
-          "description": "The entity tag used for optimistic concurrency.",
-          "readOnly": true
+          "description": "The enforcement action. Only `Block` is supported.",
+          "enum": [
+            "Block"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "thresholdType": {
+          "$ref": "#/definitions/CostControlThresholdType",
+          "description": "Whether threshold is a percentage of amount or an absolute value in the budget's unit."
+        },
+        "threshold": {
+          "type": "number",
+          "format": "double",
+          "description": "The positive threshold. Percentages cannot exceed 100; absolute thresholds cannot exceed amount and must be whole numbers for Tokens budgets."
+        },
+        "operator": {
+          "type": "string",
+          "description": "The threshold comparison. Only `GreaterThanOrEqualTo` is supported.",
+          "enum": [
+            "GreaterThanOrEqualTo"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
+      "required": [
+        "type",
+        "thresholdType",
+        "threshold",
+        "operator"
       ]
+    },
+    "CostControlActionPatch": {
+      "type": "object",
+      "description": "Edits to an existing named blocking action. New actions require all fields after merging; supplied fields cannot be null.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The enforcement action. Only `Block` is supported.",
+          "enum": [
+            "Block"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "thresholdType": {
+          "$ref": "#/definitions/CostControlThresholdType",
+          "description": "Whether threshold is a percentage of amount or an absolute value in the budget's unit."
+        },
+        "threshold": {
+          "type": "number",
+          "format": "double",
+          "description": "The positive threshold. Percentages cannot exceed 100; absolute thresholds cannot exceed amount and must be whole numbers for Tokens budgets."
+        },
+        "operator": {
+          "type": "string",
+          "description": "The threshold comparison. Only `GreaterThanOrEqualTo` is supported.",
+          "enum": [
+            "GreaterThanOrEqualTo"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "CostControlAdditionalInfoFilter": {
+      "type": "object",
+      "description": "Selects traffic whose named additional-info attribute equals at least one of the supplied values.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/CostControlFilterName",
+          "description": "The built-in attribute: agent, sessionId, project, deployment, or tokenType.\nResource selectors use owner-scoped short names, not Azure resource IDs. Agent selections require an explicit project filter selecting exactly one project; multiple agents in that project are supported.\nA project-owned control can select only its owning project. Project, agent, and deployment values must be plain names of 1-64 characters without leading or trailing whitespace, control characters, path/query/fragment separators, percent signs, or . and .. path segments.\ntokenType accepts input, output, or both for a Tokens budget; omission measures overall tokens."
+        },
+        "operator": {
+          "type": "string",
+          "description": "The comparison operator.`In` is supported.",
+          "enum": [
+            "In"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "values": {
+          "type": "array",
+          "description": "One or more nonempty, non-whitespace strings to match. There is no per-condition value-count limit; the serialized cost-control definition must not exceed 32 KiB.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/CostControlFilterValue"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "operator",
+        "values"
+      ]
+    },
+    "CostControlCategory": {
+      "type": "string",
+      "description": "The measurement used for the budget amount and absolute thresholds.",
+      "enum": [
+        "Cost",
+        "Tokens"
+      ],
+      "x-ms-enum": {
+        "name": "CostControlCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Cost",
+            "value": "Cost",
+            "description": "Estimated consumption cost in United States dollars."
+          },
+          {
+            "name": "Tokens",
+            "value": "Tokens",
+            "description": "The number of consumed tokens, optionally selected by a tokenType filter."
+          }
+        ]
+      }
     },
     "CostControlConnections": {
       "type": "object",
-      "description": "Defines account-level connections used to publish cost-control telemetry and events.\nApplication Insights is optional and may be removed while policies remain attached.\nEvent Grid is required for alerts; supplied connection references must still be valid.",
+      "description": "Account-level telemetry connections. Application Insights is optional and may be removed while controls exist.",
       "properties": {
         "appInsightsConnectionId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Gets or sets the full resource ID of the optional Application Insights connection.",
-          "x-nullable": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.CognitiveServices/accounts/connections"
-              }
-            ]
-          }
-        },
-        "eventGridConnectionId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The full resource ID of the Event Grid connection used for cost control alerts. This connection must be configured when an attached cost control contains an alert threshold action and cannot be removed while such an action remains attached.",
+          "description": "The full resource ID of the optional Application Insights connection. Set to null in an account update to remove it.",
           "x-nullable": true,
           "x-ms-arm-id-details": {
             "allowedResources": [
@@ -18165,91 +19414,145 @@
         }
       }
     },
-    "CostControlDimension": {
+    "CostControlFilter": {
       "type": "object",
-      "description": "A request dimension used to partition cost control consumption.",
+      "description": "Traffic selection using exactly one of `additionalInfo` or `and`. Additional-info names must be unique across the complete expression.\nFilters narrow the owner's scope and cannot extend a project-owned control to another project.\nValues within one condition are alternatives; conditions are combined with AND. An agent selection requires an explicit project filter selecting exactly one project, including for project-owned controls.",
       "properties": {
-        "type": {
-          "$ref": "#/definitions/CostControlDimensionType",
-          "description": "The kind of request dimension.",
+        "additionalInfo": {
+          "$ref": "#/definitions/CostControlAdditionalInfoFilter",
+          "description": "A single additional-info condition. Must not be combined with `and` on the same filter object."
+        },
+        "and": {
+          "type": "array",
+          "description": "A conjunction of at least two conditions. Must not be combined with `additionalInfo` on the same filter object.",
+          "minItems": 2,
+          "items": {
+            "$ref": "#/definitions/CostControlFilter"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CostControlFilterName": {
+      "type": "string",
+      "description": "Built-in request attributes supported for traffic filtering.",
+      "enum": [
+        "agent",
+        "sessionId",
+        "project",
+        "deployment",
+        "tokenType"
+      ],
+      "x-ms-enum": {
+        "name": "CostControlFilterName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Agent",
+            "value": "agent",
+            "description": "The Foundry agent name within the single explicitly selected Foundry project."
+          },
+          {
+            "name": "SessionId",
+            "value": "sessionId",
+            "description": "The Foundry session ID."
+          },
+          {
+            "name": "Project",
+            "value": "project",
+            "description": "The Foundry project name within the owning account."
+          },
+          {
+            "name": "Deployment",
+            "value": "deployment",
+            "description": "The deployment name within the owning account."
+          },
+          {
+            "name": "TokenType",
+            "value": "tokenType",
+            "description": "The input or output token category."
+          }
+        ]
+      }
+    },
+    "CostControlFilterValue": {
+      "type": "string",
+      "description": "A nonempty string identifying an allowed value of a request attribute.",
+      "minLength": 1
+    },
+    "CostControlGrouping": {
+      "type": "object",
+      "description": "An additional built-in request attribute used to partition a budget into independent counters.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/CostControlGroupingName",
+          "description": "The built-in attribute to group by. project is available only for account-owned controls.",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
         },
-        "attribute": {
+        "type": {
           "type": "string",
-          "description": "Gets or sets the attribute path retained for legacy Custom counters.\nAuthored rules cannot select Custom; built-in dimensions must omit this property.",
-          "readOnly": true
+          "description": "The grouping kind. Only `AdditionalInfoKey` is supported.",
+          "enum": [
+            "AdditionalInfoKey"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         }
       },
       "required": [
+        "name",
         "type"
       ]
     },
-    "CostControlDimensionType": {
+    "CostControlGroupingName": {
       "type": "string",
-      "description": "Cost control counter dimensions, including Custom retained for legacy read compatibility.",
+      "description": "Built-in attributes supported for additional budget partitioning.",
       "enum": [
-        "Agent",
-        "Identity",
-        "Session",
-        "Project",
-        "Account",
-        "Custom"
+        "project",
+        "agent",
+        "sessionId"
       ],
       "x-ms-enum": {
-        "name": "CostControlDimensionType",
+        "name": "CostControlGroupingName",
         "modelAsString": true,
         "values": [
           {
-            "name": "Agent",
-            "value": "Agent",
-            "description": "Consumption is partitioned by the stable Foundry agent ID."
-          },
-          {
-            "name": "Identity",
-            "value": "Identity",
-            "description": "Consumption is partitioned by the authenticated principal object ID."
-          },
-          {
-            "name": "Session",
-            "value": "Session",
-            "description": "Consumption is partitioned by the Foundry session ID."
-          },
-          {
             "name": "Project",
-            "value": "Project",
-            "description": "Consumption is partitioned by the Foundry project resource ID."
+            "value": "project",
+            "description": "Creates an independent counter for each Foundry project in the owning account."
           },
           {
-            "name": "Account",
-            "value": "Account",
-            "description": "Consumption is partitioned by the owning Cognitive Services account."
+            "name": "Agent",
+            "value": "agent",
+            "description": "Creates an independent counter for each Foundry agent, qualified by its Foundry project so identical agent names in different projects do not share counters."
           },
           {
-            "name": "Custom",
-            "value": "Custom",
-            "description": "Legacy read-only dimension using `CostControlDimension.Attribute`.\nNew Custom counter authoring is reserved for future support."
+            "name": "SessionId",
+            "value": "sessionId",
+            "description": "Creates an independent counter for each Foundry session ID."
           }
         ]
       }
     },
     "CostControlListResult": {
       "type": "object",
-      "description": "A page of cost controls.",
+      "description": "A page of cost controls owned by an account.",
       "properties": {
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link used to get the next page of cost controls."
+          "description": "The link used to retrieve the next page, when present."
         },
         "value": {
           "type": "array",
           "description": "The cost controls in this page.",
           "items": {
-            "$ref": "#/definitions/CostControl"
+            "$ref": "#/definitions/AccountCostControl"
           },
           "x-ms-identifiers": [
             "name"
@@ -18260,287 +19563,265 @@
         "value"
       ]
     },
-    "CostControlMatch": {
+    "CostControlNotification": {
       "type": "object",
-      "description": "Gets or sets optional match arrays keyed by `agentResourceIds`, `identityObjectIds`,\n`sessionIds`, or `projectIds`. Each array contains 1 to 20 non-empty values.\nAgent resource IDs use /subscriptions/{subscription_guid}/accounts/{account-name}/project/{project-name}/agent/{agent_name}.\nLegacy dotted identity, session, and project keys remain accepted, but cannot be combined with their canonical key.",
+      "description": "An alert notification with an explicit threshold, enabled state, and Event Grid destination.",
       "properties": {
-        "agentResourceIds": {
-          "type": "array",
-          "description": "Agent resource IDs use /subscriptions/{subscription_guid}/accounts/{account-name}/project/{project-name}/agent/{agent_name}.",
-          "minItems": 1,
-          "maxItems": 20,
-          "items": {
-            "$ref": "#/definitions/CostControlMatchValue"
+        "eventGridConnectionId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The full resource ID of the Cognitive Services Event Grid connection used to publish this notification.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.CognitiveServices/accounts/connections"
+              }
+            ]
           }
         },
-        "identityObjectIds": {
-          "type": "array",
-          "description": "The authenticated principal object IDs to match.",
-          "minItems": 1,
-          "maxItems": 20,
-          "items": {
-            "$ref": "#/definitions/CostControlMatchValue"
+        "thresholdType": {
+          "$ref": "#/definitions/CostControlThresholdType",
+          "description": "Whether threshold is a percentage of amount or an absolute value in the budget's unit."
+        },
+        "threshold": {
+          "type": "number",
+          "format": "double",
+          "description": "The positive threshold. Percentages cannot exceed 100; absolute thresholds cannot exceed amount and must be whole numbers for Tokens budgets."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether this notification is enabled. Disabled notifications remain configured but do not publish alerts."
+        },
+        "operator": {
+          "type": "string",
+          "description": "The threshold comparison. Only `GreaterThanOrEqualTo` is supported.",
+          "enum": [
+            "GreaterThanOrEqualTo"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "eventGridConnectionId",
+        "thresholdType",
+        "threshold",
+        "enabled",
+        "operator"
+      ]
+    },
+    "CostControlNotificationPatch": {
+      "type": "object",
+      "description": "Edits to an existing named notification. New notifications require all fields after merging; supplied fields cannot be null.",
+      "properties": {
+        "eventGridConnectionId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The full resource ID of the Cognitive Services Event Grid connection used to publish this notification.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.CognitiveServices/accounts/connections"
+              }
+            ]
           }
         },
-        "sessionIds": {
-          "type": "array",
-          "description": "The Foundry session IDs to match.",
-          "minItems": 1,
-          "maxItems": 20,
-          "items": {
-            "$ref": "#/definitions/CostControlMatchValue"
-          }
+        "thresholdType": {
+          "$ref": "#/definitions/CostControlThresholdType",
+          "description": "Whether threshold is a percentage of amount or an absolute value in the budget's unit."
         },
-        "projectIds": {
-          "type": "array",
-          "description": "The Foundry project resource IDs to match.",
-          "minItems": 1,
-          "maxItems": 20,
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-            "x-ms-arm-id-details": {
-              "allowedResources": [
-                {
-                  "type": "Microsoft.CognitiveServices/accounts/projects"
-                }
-              ]
-            }
+        "threshold": {
+          "type": "number",
+          "format": "double",
+          "description": "The positive threshold. Percentages cannot exceed 100; absolute thresholds cannot exceed amount and must be whole numbers for Tokens budgets."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether this notification is enabled. Disabled notifications remain configured but do not publish alerts."
+        },
+        "operator": {
+          "type": "string",
+          "description": "The threshold comparison. Only `GreaterThanOrEqualTo` is supported.",
+          "enum": [
+            "GreaterThanOrEqualTo"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
           }
         }
       }
     },
-    "CostControlMatchValue": {
-      "type": "string",
-      "description": "A non-empty value used to match a trusted request attribute.",
-      "minLength": 1
-    },
     "CostControlPatch": {
       "type": "object",
-      "description": "The request used to update a cost control.",
+      "description": "A partial budget update. Omitting properties preserves all existing budget properties.\nSetting properties to null or an empty object ({}) clears all existing budget properties.\nA non-empty properties object updates the supplied fields according to their merge semantics; omitted fields retain their existing values.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/CostControlPatchProperties",
-          "description": "The cost control properties to update."
+          "description": "The budget properties to update. Omission preserves existing properties.\nNull or an empty object ({}) clears all existing properties.",
+          "x-nullable": true
         }
       }
     },
     "CostControlPatchProperties": {
       "type": "object",
-      "description": "The properties that can be changed on a cost control.",
+      "description": "Edits applied when properties is a non-empty object. Omitted fields retain their existing values; no defaults are applied.\nThe complete merged result may contain at most one notification, including disabled notifications, and one Block action.\nExceeding either limit returns HTTP 400 without changing the stored definition.\nMissing registration returns 403 FeatureNotRegistered before merging or no-op detection.\nOmitting or removing identity selections does not require this registration; omitted stored selections are preserved, subject to existing validation rules.",
       "properties": {
-        "displayName": {
+        "provider": {
           "type": "string",
-          "description": "An optional human-readable name for the cost control. Set this property to null to clear it.",
-          "maxLength": 128,
-          "x-nullable": true
-        },
-        "rules": {
-          "type": "array",
-          "description": "The complete replacement set of cost control rules.",
-          "minItems": 1,
-          "maxItems": 50,
-          "items": {
-            "$ref": "#/definitions/CostControlRule"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
-    },
-    "CostControlPeriod": {
-      "type": "string",
-      "description": "Calendar-aligned UTC renewal periods, including legacy values retained for read compatibility.",
-      "enum": [
-        "Minute",
-        "Hour",
-        "Day",
-        "Week",
-        "Month",
-        "Year"
-      ],
-      "x-ms-enum": {
-        "name": "CostControlPeriod",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Minute",
-            "value": "Minute",
-            "description": "Legacy read-only period renewing at the start of the next UTC minute."
-          },
-          {
-            "name": "Hour",
-            "value": "Hour",
-            "description": "Legacy read-only period renewing at the start of the next UTC hour."
-          },
-          {
-            "name": "Day",
-            "value": "Day",
-            "description": "Renews daily at 00:00 UTC."
-          },
-          {
-            "name": "Week",
-            "value": "Week",
-            "description": "Renews Monday at 00:00 UTC."
-          },
-          {
-            "name": "Month",
-            "value": "Month",
-            "description": "Renews on the first day of each month at 00:00 UTC."
-          },
-          {
-            "name": "Year",
-            "value": "Year",
-            "description": "Legacy read-only period renewing January 1 at 00:00 UTC."
+          "description": "The resource provider. If supplied, it must be Microsoft.CognitiveServices and cannot be null.",
+          "enum": [
+            "Microsoft.CognitiveServices"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
           }
-        ]
-      }
-    },
-    "CostControlProperties": {
-      "type": "object",
-      "description": "The customer-authored settings of a cost control.",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "An optional human-readable name for the cost control.",
-          "maxLength": 128
         },
-        "rules": {
+        "grouping": {
           "type": "array",
-          "description": "The rules enforced by the cost control.",
-          "minItems": 1,
-          "maxItems": 50,
+          "description": "Replaces additional grouping. Omission preserves grouping; an empty array restores the owner's default counter. Null is not accepted.",
+          "maxItems": 1,
           "items": {
-            "$ref": "#/definitions/CostControlRule"
+            "$ref": "#/definitions/CostControlGrouping"
           },
           "x-ms-identifiers": [
             "name"
           ]
-        }
-      },
-      "required": [
-        "rules"
-      ]
-    },
-    "CostControlRule": {
-      "type": "object",
-      "description": "A cost limit and the population to which it applies.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The stable rule identifier, unique within the cost control without regard to case.",
-          "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
         },
-        "counterKey": {
-          "$ref": "#/definitions/CostControlDimension",
-          "description": "Gets or sets the single built-in dimension used to partition consumption.\nCustom dimensions are retained only for legacy reads and metadata-only updates.\nLegacy singleton arrays are accepted on read; serialization always emits an object.\nTo track another field, create another rule."
-        },
-        "unit": {
-          "$ref": "#/definitions/CostControlUnit",
-          "description": "The unit used for the cost control amount and absolute thresholds."
+        "category": {
+          "$ref": "#/definitions/CostControlCategory",
+          "description": "The existing measurement category. Changing it after creation is not supported."
         },
         "amount": {
           "type": "number",
           "format": "double",
-          "description": "The maximum consumption allowed by this rule, expressed in the selected unit."
+          "description": "Replaces the positive budget amount, measured in United States dollars for the Cost category or in whole tokens for the Tokens category."
         },
-        "period": {
-          "$ref": "#/definitions/CostControlPeriod",
-          "description": "Gets or sets the calendar-aligned UTC renewal period. Authored rules support Day, Week, or Month.\nThis field is required for recurring rules and must be omitted for non-recurring rules.\nLegacy stored minute, hour, and year periods are preserved when reading definitions."
+        "timeGrain": {
+          "$ref": "#/definitions/CostControlTimeGrain",
+          "description": "Replaces the calendar-aligned UTC renewal interval."
         },
-        "recurring": {
-          "type": "boolean",
-          "description": "Whether the cost control renews. The default is true.",
-          "default": true
+        "timePeriod": {
+          "$ref": "#/definitions/CostControlTimePeriodPatch",
+          "description": "Merges supplied dates into the existing validity window; omitted dates remain unchanged."
         },
-        "match": {
-          "$ref": "#/definitions/CostControlMatch",
-          "description": "Gets or sets optional match arrays keyed by `agentResourceIds`, `identityObjectIds`,\n`sessionIds`, or `projectIds`. Each array contains 1 to 20 non-empty values.\nAgent resource IDs use /subscriptions/{subscription_guid}/accounts/{account-name}/project/{project-name}/agent/{agent_name}.\nLegacy dotted identity, session, and project keys remain accepted, but cannot be combined with their canonical key."
+        "filter": {
+          "$ref": "#/definitions/CostControlFilter",
+          "description": "Replaces the complete traffic filter. Set to null to select all eligible traffic within the owner's scope.",
+          "x-nullable": true
         },
-        "thresholds": {
-          "type": "array",
-          "description": "Gets or sets optional thresholds. Omitted or empty thresholds track usage without explicit actions.\nAuthored thresholds must explicitly specify Alert or Block; Audit is retained for legacy reads.",
-          "maxItems": 10,
+        "notifications": {
+          "type": "object",
+          "description": "Merges notifications by case-insensitive name, preserving existing name casing. Null entries delete notifications; null clears the collection.\nOmission or an empty object preserves existing notifications. New entries must supply all required notification fields after merging.\nThe complete merged result may contain at most one notification, including disabled notifications; otherwise the request returns HTTP 400.",
           "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/CostControlThreshold"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "name",
-        "counterKey",
-        "unit",
-        "amount"
-      ]
-    },
-    "CostControlThreshold": {
-      "type": "object",
-      "description": "An action evaluated when cost control consumption reaches a threshold.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/CostControlThresholdType",
-          "description": "How the threshold value is interpreted."
+          "additionalProperties": {
+            "$ref": "#/definitions/CostControlNotificationPatch",
+            "x-nullable": true
+          }
         },
-        "value": {
+        "providerProperties": {
+          "$ref": "#/definitions/CostControlProviderPropertiesPatch",
+          "description": "Merges provider-specific settings. Set to null to remove all blocking actions; omission preserves them.",
+          "x-nullable": true
+        }
+      }
+    },
+    "CostControlProperties": {
+      "type": "object",
+      "description": "The consumption budget and its traffic selection, notifications, and enforcement actions.\nA cost control applies within its owner's scope.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The resource provider for this budget. Omission selects Microsoft.CognitiveServices; responses return that value.",
+          "enum": [
+            "Microsoft.CognitiveServices"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "grouping": {
+          "type": "array",
+          "description": "Optional additional partitioning of consumption. Omission or an empty array uses one counter for the owning account or Foundry project.\nResponses omit owner-default grouping. A project-owned control cannot explicitly group by project.",
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/CostControlGrouping"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "category": {
+          "$ref": "#/definitions/CostControlCategory",
+          "description": "Whether the budget measures estimated cost in United States dollars or token consumption. This category cannot be changed after creation."
+        },
+        "amount": {
           "type": "number",
           "format": "double",
-          "description": "Gets or sets the threshold value. Legacy Audit definitions retain their stored values;\nnew thresholds support only Alert or Block.",
-          "minimum": 0
+          "description": "The positive budget amount, measured in United States dollars for the Cost category or in tokens for the Tokens category.\nToken amounts must be whole numbers."
         },
-        "action": {
-          "$ref": "#/definitions/CostControlThresholdAction",
-          "description": "Gets or sets the threshold action. Authored thresholds must explicitly specify Alert or Block.\nLegacy stored definitions with omitted actions continue to read as Audit."
+        "timeGrain": {
+          "$ref": "#/definitions/CostControlTimeGrain",
+          "description": "The calendar-aligned UTC interval at which consumption counters renew within the validity window."
+        },
+        "timePeriod": {
+          "$ref": "#/definitions/CostControlTimePeriod",
+          "description": "The finite UTC validity window during which the control applies."
+        },
+        "filter": {
+          "$ref": "#/definitions/CostControlFilter",
+          "description": "Optional traffic selection. Omission selects all eligible traffic within the owner's scope."
+        },
+        "notifications": {
+          "type": "object",
+          "description": "Alert notifications keyed by nonempty, case-insensitively unique names. Each notification supplies its own Event Grid connection.\nPUT and the complete merged PATCH result may contain at most one notification, including disabled notifications.\nOmission on creation creates no notifications.",
+          "additionalProperties": {
+            "$ref": "#/definitions/CostControlNotification"
+          }
+        },
+        "providerProperties": {
+          "$ref": "#/definitions/CostControlProviderProperties",
+          "description": "Optional provider-specific enforcement settings. Omission creates no blocking actions."
         }
       },
       "required": [
-        "type",
-        "value",
-        "action"
+        "category",
+        "amount",
+        "timeGrain",
+        "timePeriod"
       ]
     },
-    "CostControlThresholdAction": {
-      "type": "string",
-      "description": "The supported actions when a threshold is reached.",
-      "enum": [
-        "Audit",
-        "Alert",
-        "Block"
-      ],
-      "x-ms-enum": {
-        "name": "CostControlThresholdAction",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Audit",
-            "value": "Audit",
-            "description": "Legacy read-only action retained to deserialize existing definitions without changing their semantics."
-          },
-          {
-            "name": "Alert",
-            "value": "Alert",
-            "description": "Emits a customer-facing alert without blocking requests."
-          },
-          {
-            "name": "Block",
-            "value": "Block",
-            "description": "Blocks the request without emitting a customer-facing alert."
+    "CostControlProviderProperties": {
+      "type": "object",
+      "description": "Provider-specific budget enforcement settings.",
+      "properties": {
+        "actions": {
+          "type": "object",
+          "description": "Blocking actions keyed by nonempty, case-insensitively unique names.\nPUT and the complete merged PATCH result may contain at most one Block action, independently of the notification limit.\nOmission on creation creates no blocking actions.",
+          "additionalProperties": {
+            "$ref": "#/definitions/CostControlAction"
           }
-        ]
+        }
+      }
+    },
+    "CostControlProviderPropertiesPatch": {
+      "type": "object",
+      "description": "Partial provider-specific edits. Named actions merge rather than replacing the complete collection.",
+      "properties": {
+        "actions": {
+          "type": "object",
+          "description": "Merges actions by case-insensitive name, preserving existing name casing. Null entries delete actions; null clears the collection.\nOmission or an empty object preserves existing actions. New entries must supply all required action fields after merging.\nThe complete merged result may contain at most one Block action; otherwise the request returns HTTP 400.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "$ref": "#/definitions/CostControlActionPatch",
+            "x-nullable": true
+          }
+        }
       }
     },
     "CostControlThresholdType": {
       "type": "string",
-      "description": "The supported threshold value interpretations.",
+      "description": "The interpretation of a notification or blocking-action threshold.",
       "enum": [
         "Percentage",
         "Absolute"
@@ -18552,32 +19833,80 @@
           {
             "name": "Percentage",
             "value": "Percentage",
-            "description": "The value is a percentage of the configured rule amount."
+            "description": "The threshold is a percentage of the configured budget amount."
           },
           {
             "name": "Absolute",
             "value": "Absolute",
-            "description": "The value is expressed in the rule's unit."
+            "description": "The threshold is expressed in United States dollars or tokens, according to the budget category."
           }
         ]
       }
     },
-    "CostControlUnit": {
+    "CostControlTimeGrain": {
       "type": "string",
-      "description": "The supported unit for cost control amounts and thresholds.",
+      "description": "Calendar-aligned UTC renewal intervals.",
       "enum": [
-        "Usd"
+        "Daily",
+        "Weekly",
+        "Monthly"
       ],
       "x-ms-enum": {
-        "name": "CostControlUnit",
+        "name": "CostControlTimeGrain",
         "modelAsString": true,
         "values": [
           {
-            "name": "Usd",
-            "value": "Usd",
-            "description": "Estimated cost in United States dollars."
+            "name": "Daily",
+            "value": "Daily",
+            "description": "Renews each day at 00:00 UTC."
+          },
+          {
+            "name": "Weekly",
+            "value": "Weekly",
+            "description": "Renews each Monday at 00:00 UTC."
+          },
+          {
+            "name": "Monthly",
+            "value": "Monthly",
+            "description": "Renews on the first day of each month at 00:00 UTC."
           }
         ]
+      }
+    },
+    "CostControlTimePeriod": {
+      "type": "object",
+      "description": "A finite validity interval, including its start and excluding its end.",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The inclusive UTC start, encoded as an ISO 8601 timestamp ending in Z with up to seven fractional digits."
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The exclusive UTC end, later than startDate, encoded as an ISO 8601 timestamp ending in Z with up to seven fractional digits."
+        }
+      },
+      "required": [
+        "startDate",
+        "endDate"
+      ]
+    },
+    "CostControlTimePeriodPatch": {
+      "type": "object",
+      "description": "Partial edits to a validity interval. Supplied dates cannot be null, and the merged start must precede the merged end.",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The inclusive UTC start, encoded as an ISO 8601 timestamp ending in Z with up to seven fractional digits."
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The exclusive UTC end, later than startDate, encoded as an ISO 8601 timestamp ending in Z with up to seven fractional digits."
+        }
       }
     },
     "CreatedByType": {
@@ -18633,10 +19962,12 @@
       "properties": {
         "keys": {
           "type": "object",
+          "format": "password",
           "description": "Dictionary of <string>",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-secret": true
         }
       }
     },
@@ -18646,12 +19977,28 @@
       "properties": {
         "credentials": {
           "$ref": "#/definitions/CustomKeys",
-          "description": "Custom Keys credential object"
+          "format": "password",
+          "description": "Custom Keys credential object",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomKeys"
+    },
+    "CustomKeysConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Custom-key connection properties returned without stored credentials.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
         }
       ],
       "x-ms-discriminator-value": "CustomKeys"
@@ -18996,23 +20343,6 @@
         "routing": {
           "$ref": "#/definitions/DeploymentRouting",
           "description": "Routing configuration for the model-router deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, quality, cost) for routing across all supported models or the model subset."
-        },
-        "costControlIds": {
-          "type": "array",
-          "description": "The full resource IDs of cost controls directly attached to this deployment.\nAt the moment the service only supports a single cost control. This will be expanded in future API versions.",
-          "maxItems": 1,
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-            "x-ms-arm-id-details": {
-              "allowedResources": [
-                {
-                  "type": "Microsoft.CognitiveServices/accounts/costControls"
-                }
-              ]
-            }
-          }
         }
       }
     },
@@ -20381,6 +21711,21 @@
       ],
       "x-ms-discriminator-value": "ManagedIdentity"
     },
+    "ManagedIdentityAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Managed identity connection properties returned by ordinary resource operations.",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionManagedIdentity"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
+        }
+      ],
+      "x-ms-discriminator-value": "ManagedIdentity"
+    },
     "ManagedNetworkKind": {
       "type": "string",
       "description": "The Kind of the managed network. Users can switch from V1 to V2 for granular access controls, but cannot switch back to V1 once V2 is enabled.",
@@ -21226,6 +22571,16 @@
       ],
       "x-ms-discriminator-value": "None"
     },
+    "NoneAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Unauthenticated connection properties returned by ordinary resource operations.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
+        }
+      ],
+      "x-ms-discriminator-value": "None"
+    },
     "NspAccessRuleDirection": {
       "type": "string",
       "description": "Direction of Access Rule",
@@ -21259,6 +22614,22 @@
       "allOf": [
         {
           "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "x-ms-discriminator-value": "OAuth2"
+    },
+    "Oauth2AuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "OAuth connection properties returned by ordinary resource operations.",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionOauth2Read",
+          "description": "Nonsensitive authentication metadata."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
         }
       ],
       "x-ms-discriminator-value": "OAuth2"
@@ -21379,6 +22750,16 @@
       "allOf": [
         {
           "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "x-ms-discriminator-value": "PAT"
+    },
+    "PatAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Personal access token connection properties returned by ordinary resource operations.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
         }
       ],
       "x-ms-discriminator-value": "PAT"
@@ -21836,6 +23217,50 @@
         }
       }
     },
+    "ProjectCostControl": {
+      "type": "object",
+      "description": "A budget that measures consumption and optionally alerts or blocks requests within its owning Foundry project.\nReading, deleting, and enforcing stored identity selections requires Microsoft.CognitiveServices/CostControlsByIdentity registration.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CostControlProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "etag": {
+          "$ref": "#/definitions/Azure.Core.eTag",
+          "description": "The opaque entity tag used for optimistic concurrency.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ProjectCostControlListResult": {
+      "type": "object",
+      "description": "A page of cost controls owned by a Foundry project.",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link used to retrieve the next page, when present."
+        },
+        "value": {
+          "type": "array",
+          "description": "The cost controls in this page.",
+          "items": {
+            "$ref": "#/definitions/ProjectCostControl"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ProjectListResult": {
       "type": "object",
       "description": "The list of cognitive services projects operation response.",
@@ -21891,6 +23316,11 @@
             "read",
             "create"
           ]
+        },
+        "toolControls": {
+          "$ref": "#/definitions/ToolControls",
+          "description": "The project-level tool access policy. Omitting this property in a PUT request clears the policy. In PATCH requests, omission preserves the policy and an explicit null clears it. Responses omit this property when no policy is configured.",
+          "x-nullable": true
         }
       }
     },
@@ -24924,6 +26354,16 @@
         }
       ]
     },
+    "SasAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Shared access signature connection properties returned by ordinary resource operations.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
+        }
+      ],
+      "x-ms-discriminator-value": "SAS"
+    },
     "ScenarioType": {
       "type": "string",
       "description": "Specifies what features in AI Foundry network injection applies to. Currently only supports 'agent' for agent scenarios. 'none' means no network injection.",
@@ -24956,6 +26396,22 @@
       "allOf": [
         {
           "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "x-ms-discriminator-value": "ServicePrincipal"
+    },
+    "ServicePrincipalAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Service principal connection properties returned by ordinary resource operations.",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionServicePrincipalRead",
+          "description": "Nonsensitive authentication metadata."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
         }
       ],
       "x-ms-discriminator-value": "ServicePrincipal"
@@ -25318,6 +26774,249 @@
         ]
       }
     },
+    "ToolControlEntry": {
+      "type": "object",
+      "description": "Identifies a tool by its canonical type and optional MCP server URL or connector.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ToolControlType",
+          "description": "The canonical tool type. For type mcp, exactly one of serverUrl or connectorId must be specified. Other tool types must omit both properties."
+        },
+        "serverUrl": {
+          "type": "string",
+          "description": "The absolute HTTPS URL or URL pattern of an MCP server, stored as a string to support wildcards. The entire URL may contain at most one literal '*' across its hostname, path, query, and fragment. Supported patterns include https://*.contoso.com/mcp, https://contoso.com/mcp/*, https://contoso.com/mcp?tenant=*, and https://contoso.com/mcp#*. A hostname wildcard must be the leftmost label. The URL must not contain user information. Applies only to type mcp and cannot be specified together with connectorId."
+        },
+        "connectorId": {
+          "type": "string",
+          "description": "The opaque MCP connector catalog identifier, not an Azure resource ID. Applies only to type mcp and cannot be specified together with serverUrl."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ToolControlType": {
+      "type": "string",
+      "description": "The canonical tool type supported by Foundry agents. Additional tool types may be specified as strings.",
+      "enum": [
+        "a2a",
+        "azure_ai_search",
+        "azure_function",
+        "bing_grounding",
+        "browser_automation",
+        "capture_structured_outputs",
+        "openapi",
+        "function",
+        "file_search",
+        "computer_use_preview",
+        "web_search",
+        "mcp",
+        "code_interpreter",
+        "image_generation",
+        "local_shell",
+        "shell",
+        "custom",
+        "web_search_preview",
+        "apply_patch",
+        "a2a_preview",
+        "bing_custom_search_preview",
+        "browser_automation_preview",
+        "fabric_dataagent_preview",
+        "sharepoint_grounding_preview",
+        "memory_search_preview",
+        "work_iq_preview",
+        "fabric_iq_preview",
+        "toolbox_search_preview",
+        "web_iq_preview"
+      ],
+      "x-ms-enum": {
+        "name": "ToolControlType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "a2a",
+            "value": "a2a",
+            "description": "Agent-to-agent tool."
+          },
+          {
+            "name": "azure_ai_search",
+            "value": "azure_ai_search",
+            "description": "Azure AI Search tool."
+          },
+          {
+            "name": "azure_function",
+            "value": "azure_function",
+            "description": "Azure Function tool."
+          },
+          {
+            "name": "bing_grounding",
+            "value": "bing_grounding",
+            "description": "Grounding with Bing Search tool."
+          },
+          {
+            "name": "browser_automation",
+            "value": "browser_automation",
+            "description": "Browser automation tool."
+          },
+          {
+            "name": "capture_structured_outputs",
+            "value": "capture_structured_outputs",
+            "description": "Capture structured outputs tool."
+          },
+          {
+            "name": "openapi",
+            "value": "openapi",
+            "description": "OpenAPI tool."
+          },
+          {
+            "name": "function",
+            "value": "function",
+            "description": "Function tool."
+          },
+          {
+            "name": "file_search",
+            "value": "file_search",
+            "description": "File search tool."
+          },
+          {
+            "name": "computer_use_preview",
+            "value": "computer_use_preview",
+            "description": "Computer use tool."
+          },
+          {
+            "name": "web_search",
+            "value": "web_search",
+            "description": "Web search tool."
+          },
+          {
+            "name": "mcp",
+            "value": "mcp",
+            "description": "Model Context Protocol (MCP) tool."
+          },
+          {
+            "name": "code_interpreter",
+            "value": "code_interpreter",
+            "description": "Code interpreter tool."
+          },
+          {
+            "name": "image_generation",
+            "value": "image_generation",
+            "description": "Image generation tool."
+          },
+          {
+            "name": "local_shell",
+            "value": "local_shell",
+            "description": "Local shell tool."
+          },
+          {
+            "name": "shell",
+            "value": "shell",
+            "description": "Shell tool."
+          },
+          {
+            "name": "custom",
+            "value": "custom",
+            "description": "Custom tool."
+          },
+          {
+            "name": "web_search_preview",
+            "value": "web_search_preview",
+            "description": "Web search preview tool."
+          },
+          {
+            "name": "apply_patch",
+            "value": "apply_patch",
+            "description": "Apply patch tool."
+          },
+          {
+            "name": "a2a_preview",
+            "value": "a2a_preview",
+            "description": "Agent-to-agent preview tool."
+          },
+          {
+            "name": "bing_custom_search_preview",
+            "value": "bing_custom_search_preview",
+            "description": "Grounding with Bing Custom Search preview tool."
+          },
+          {
+            "name": "browser_automation_preview",
+            "value": "browser_automation_preview",
+            "description": "Browser automation preview tool."
+          },
+          {
+            "name": "fabric_dataagent_preview",
+            "value": "fabric_dataagent_preview",
+            "description": "Fabric data agent preview tool."
+          },
+          {
+            "name": "sharepoint_grounding_preview",
+            "value": "sharepoint_grounding_preview",
+            "description": "SharePoint grounding preview tool."
+          },
+          {
+            "name": "memory_search_preview",
+            "value": "memory_search_preview",
+            "description": "Memory search preview tool."
+          },
+          {
+            "name": "work_iq_preview",
+            "value": "work_iq_preview",
+            "description": "Work IQ preview tool."
+          },
+          {
+            "name": "fabric_iq_preview",
+            "value": "fabric_iq_preview",
+            "description": "Fabric IQ preview tool."
+          },
+          {
+            "name": "toolbox_search_preview",
+            "value": "toolbox_search_preview",
+            "description": "Toolbox search preview tool."
+          },
+          {
+            "name": "web_iq_preview",
+            "value": "web_iq_preview",
+            "description": "Web IQ preview tool."
+          }
+        ]
+      }
+    },
+    "ToolControls": {
+      "type": "object",
+      "description": "Defines the default and per-tool access policy for a Foundry project.",
+      "properties": {
+        "defaultAction": {
+          "$ref": "#/definitions/ToolControlsDefaultAction",
+          "description": "The action applied when a tool is not listed explicitly. Only Deny is currently supported."
+        },
+        "allowedTools": {
+          "type": "array",
+          "description": "The tools explicitly allowed by the policy. Omission or an empty array specifies no explicitly allowed tools.",
+          "items": {
+            "$ref": "#/definitions/ToolControlEntry"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ToolControlsDefaultAction": {
+      "type": "string",
+      "description": "Specifies the default action for a tool that is not listed explicitly.",
+      "enum": [
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "ToolControlsDefaultAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "Tools that are not listed explicitly are denied."
+          }
+        ]
+      }
+    },
     "TrafficRoutingProtocol": {
       "type": "string",
       "description": "Traffic routing protocol, used to distribute an application's inbound traffic to its deployments.",
@@ -25360,6 +27059,64 @@
           "format": "int32",
           "description": "Gets or sets the percentage of traffic allocated to this instance."
         }
+      }
+    },
+    "TrustedCertificateSource": {
+      "type": "object",
+      "description": "An Azure resource containing the CA certificate bundles trusted by supported features in the account.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/TrustedCertificateSourceType",
+          "description": "Type of resource containing the certificate bundles. Currently only AzureKeyVault is supported."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure resource ID of the Key Vault containing the referenced secrets. The account identity must have permission to read these secrets.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
+        },
+        "certificateBundleReferences": {
+          "type": "array",
+          "description": "References to secrets containing one or more PEM-encoded CA certificates. Each secret name and version pair must be unique within the source, using case-insensitive comparison. The same secret name can be referenced with different versions.",
+          "minItems": 1,
+          "maxItems": 25,
+          "items": {
+            "$ref": "#/definitions/CertificateBundleReference"
+          },
+          "x-ms-identifiers": [
+            "secretName",
+            "secretVersion"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "resourceId",
+        "certificateBundleReferences"
+      ]
+    },
+    "TrustedCertificateSourceType": {
+      "type": "string",
+      "description": "Type of Azure resource containing trusted CA certificate bundles.",
+      "enum": [
+        "AzureKeyVault"
+      ],
+      "x-ms-enum": {
+        "name": "TrustedCertificateSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureKeyVault",
+            "value": "AzureKeyVault",
+            "description": "Azure Key Vault secrets containing CA certificates or certificate bundles."
+          }
+        ]
       }
     },
     "UnitType": {
@@ -25561,6 +27318,22 @@
       "allOf": [
         {
           "$ref": "#/definitions/ConnectionPropertiesV2"
+        }
+      ],
+      "x-ms-discriminator-value": "UsernamePassword"
+    },
+    "UsernamePasswordAuthTypeConnectionPropertiesRead": {
+      "type": "object",
+      "description": "Username and password connection properties returned by ordinary resource operations.",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/ConnectionUsernamePasswordRead",
+          "description": "Nonsensitive authentication metadata."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionPropertiesV2Read"
         }
       ],
       "x-ms-discriminator-value": "UsernamePassword"
@@ -25951,7 +27724,7 @@
     "CostControlCreateOrUpdateHeaders.ifMatch": {
       "name": "If-Match",
       "in": "header",
-      "description": "Proceeds only when the current entity tag matches this value.",
+      "description": "Proceeds only if the current entity tag matches this value.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
@@ -25960,7 +27733,7 @@
     "CostControlCreateOrUpdateHeaders.ifNoneMatch": {
       "name": "If-None-Match",
       "in": "header",
-      "description": "Proceeds only when the current entity tag does not match this value.",
+      "description": "Proceeds only if the current entity tag does not match this value. Use * to create only if absent.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
@@ -25969,7 +27742,7 @@
     "CostControlIfMatchHeader": {
       "name": "If-Match",
       "in": "header",
-      "description": "Proceeds only when the current entity tag matches this value.",
+      "description": "Proceeds only if the current entity tag matches this value.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",

@@ -628,12 +628,55 @@ describe("archive label names", () => {
     expect(f.mutations()).toEqual([]);
   });
 
-  it("rejects an overlong archive name before persisting a plan or making writes", async () => {
+  it("reports an overlong archive name without blocking unrelated synchronization or deletion", async () => {
     const f = fixture();
     f.state.catalog.unconfiguredLabels = "archive";
-    f.state.labels[1] = { ...extra, name: "x".repeat(41), archived_at: null };
-    await expect(f.prepare()).rejects.toThrow("exceeds 50 characters");
-    expect(f.mutations()).toEqual([]);
+    f.state.catalog.labels[0].description = "Updated description";
+    f.state.catalog.labels.push({ name: "new", color: "abcdef", description: "New label" });
+    f.state.labels[1].name = "archived: unconfigured";
+    const active = { ...extra, id: 3, node_id: "label-3", name: "retired", archived_at: null };
+    const blocked = {
+      ...extra,
+      id: 4,
+      node_id: "label-4",
+      name: "Network - Azure Service Connection Controller",
+      archived_at: null,
+    };
+    f.state.labels.push(active, structuredClone(blocked));
+    f.state.items = [
+      {
+        number: 1,
+        kind: "issue",
+        state: "CLOSED",
+        labels: new Set(["archived: unconfigured", blocked.name, "keep"]),
+      },
+    ];
+    const run = await f.prepare();
+    expect(run.audit.plan.skippedArchives.map(({ label }) => label)).toEqual([blocked]);
+    expect(run.audit.plan.skippedArchives[0].reason).toContain("exceeds 50 characters");
+    expect(f.args.core.warning).toHaveBeenCalledWith(
+      expect.stringContaining(`Skipping archive of "${blocked.name}":`),
+    );
+    expect(f.args.core.summary.addRaw).toHaveBeenCalledWith(
+      expect.stringContaining("skipped archives: 1"),
+    );
+    await run.apply();
+    expect(f.mutations().map(({ method, path }) => ({ method, path }))).toEqual([
+      { method: "POST", path: `${prefix}/labels` },
+      { method: "PATCH", path: `${prefix}/labels/canonical` },
+      { method: "PATCH", path: `${prefix}/labels/retired` },
+      { method: "DELETE", path: `${prefix}/labels/archived: unconfigured` },
+    ]);
+    expect(f.state.labels.find(({ id }) => id === blocked.id)).toEqual(blocked);
+    expect(f.state.items[0].labels).toEqual(new Set([blocked.name, "keep"]));
+    expect(await run.outcome()).toMatchObject({
+      operations: [
+        { action: "create", status: "completed" },
+        { action: "update", status: "completed" },
+        { action: "archive", status: "completed" },
+        { action: "delete", status: "completed" },
+      ],
+    });
   });
 
   it.each(["archive", "restore"])("verifies GitHub actually renames during %s", async (action) => {
@@ -655,6 +698,96 @@ describe("archive label names", () => {
       action === "archive" ? "GitHub did not archive" : "GitHub did not unarchive",
     );
     expect(f.mutations().some(({ method }) => method === "DELETE")).toBe(false);
+  });
+});
+
+describe("recreated retired labels", () => {
+  function recreatedFixture(expired = false) {
+    const f = fixture();
+    f.state.catalog.unconfiguredLabels = "archive";
+    const original = f.state.labels[1];
+    original.name = "archived: unconfigured";
+    if (!expired) original.archived_at = new Date().toISOString();
+    const copy = { ...canonical, id: 3, node_id: "label-3", name: extra.name };
+    f.state.labels.push(copy);
+    return { ...f, original, copy };
+  }
+
+  it("audits and deletes a recreated copy immediately while preserving the original and its history", async () => {
+    const f = recreatedFixture();
+    const original = structuredClone(f.original);
+    f.state.items = [
+      { number: 1, kind: "issue", state: "CLOSED", labels: new Set([original.name, "keep"]) },
+      { number: 2, kind: "pull_request", state: "OPEN", labels: new Set([f.copy.name, "keep"]) },
+    ];
+    const run = await f.prepare();
+    expect(
+      run.audit.deletions.map(({ label, items }) => [label.id, items.map(({ number }) => number)]),
+    ).toEqual([[f.copy.id, [2]]]);
+    await run.apply();
+    expect(f.state.labels).toEqual([canonical, original]);
+    expect(f.state.items.map(({ labels }) => [...labels])).toEqual([
+      [original.name, "keep"],
+      ["keep"],
+    ]);
+    expect(f.mutations()).toEqual([
+      { method: "DELETE", path: `${prefix}/labels/${f.copy.name}`, body: {} },
+    ]);
+    f.state.requests = [];
+    await (await f.prepare()).apply();
+    expect(f.mutations()).toEqual([]);
+  });
+
+  it("deletes copies before expired originals and does not block unrelated cleanup", async () => {
+    const f = recreatedFixture(true);
+    const unrelated = {
+      ...extra,
+      id: 4,
+      node_id: "label-4",
+      name: "archived: other",
+    };
+    f.state.labels.push(unrelated);
+    await (await f.prepare()).apply();
+    expect(f.state.labels).toEqual([canonical]);
+    expect(f.mutations().map(({ path }) => path)).toEqual([
+      `${prefix}/labels/${f.copy.name}`,
+      `${prefix}/labels/${unrelated.name}`,
+      `${prefix}/labels/${f.original.name}`,
+    ]);
+  });
+
+  it("preserves canonical classifications from both the original and a recreated alias", async () => {
+    const f = recreatedFixture();
+    f.state.catalog.labels[0].aliases = [f.copy.name];
+    f.state.items = [
+      { number: 1, kind: "issue", state: "OPEN", labels: new Set([f.copy.name]) },
+      { number: 2, kind: "pull_request", state: "MERGED", labels: new Set([f.original.name]) },
+    ];
+    await (await f.prepare()).apply();
+    expect(f.state.items.map(({ labels }) => [...labels])).toEqual([
+      [canonical.name],
+      [f.original.name, canonical.name],
+    ]);
+    expect(f.mutations().map(({ method }) => method)).toEqual(["POST", "POST", "DELETE"]);
+    expect(f.state.labels).toEqual([canonical, f.original]);
+  });
+
+  it("keeps the recreated copy if the original is no longer a managed archive", async () => {
+    const f = recreatedFixture();
+    const run = await f.prepare();
+    f.original.description = "Manually retained";
+    await expect(run.apply()).rejects.toThrow("Label changed");
+    expect(f.mutations()).toEqual([]);
+    expect(f.state.labels).toContain(f.copy);
+  });
+
+  it("audits recreated copies without deleting them in a dry run", async () => {
+    const f = recreatedFixture();
+    const run = await f.prepare(true);
+    expect(run.audit.deletions.map(({ label }) => label)).toEqual([f.copy]);
+    await run.apply();
+    expect(f.mutations()).toEqual([]);
+    expect(f.state.labels).toEqual([canonical, f.original, f.copy]);
   });
 });
 
