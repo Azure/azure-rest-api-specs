@@ -4,7 +4,7 @@ description: |
   Validates private preview, public preview, in-development branch, promotion,
   and unknown-branch behavior.
 
-environment:
+agent_environment:
   skills:
     - "../../../azure-api-review"
   files:
@@ -34,10 +34,11 @@ stimuli:
 
       Return the applicable finding with rule ID and severity. Do not review any
       other API design concern.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-contains
         config:
           substring: "APIVER-PRIVATE-IN-PUBLIC"
@@ -60,10 +61,11 @@ stimuli:
       - Release stage: private preview with active AFEC gating
 
       Return the applicable folder finding with rule ID and severity.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-contains
         config:
           substring: "APIVER-PRIVATE-FOLDER"
@@ -84,12 +86,13 @@ stimuli:
       - Release stage: in development, with no customers
 
       State whether APIVER-DEV-IN-MAIN applies. Do not invent another finding.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-not-matches
-        name: "does not flag development version on release branch"
+        name: "does-not-flag-development-version-on-release-branch"
         config:
           pattern: "(?im)^.*(?:🔴|🟠|🔵).{0,200}APIVER-DEV-IN-MAIN|^.*APIVER-DEV-IN-MAIN.{0,200}(?:🔴|🟠|🔵)"
       - type: output-matches
@@ -108,10 +111,11 @@ stimuli:
       - Release stage: public preview
 
       Return the applicable finding with rule ID and severity.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-contains
         config:
           substring: "APIVER-PREVIEW-FOLDER"
@@ -132,12 +136,13 @@ stimuli:
       - This PR deliberately promotes it to public preview and removes AFEC gating
 
       State whether APIVER-PRIVATE-IN-PUBLIC applies.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-not-matches
-        name: "promotion is not flagged as private preview leakage"
+        name: "promotion-is-not-flagged-as-private-preview-leakage"
         config:
           pattern: "(?im)^.*(?:🔴|🟠|🔵).{0,200}APIVER-PRIVATE-IN-PUBLIC|^.*APIVER-PRIVATE-IN-PUBLIC.{0,200}(?:🔴|🟠|🔵)"
       - type: output-matches
@@ -153,12 +158,13 @@ stimuli:
       Azure/azure-rest-api-specs and the version is in development, but the PR
       target branch could not be fetched. Determine whether
       APIVER-DEV-IN-MAIN can be raised.
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-not-matches
-        name: "unknown branch is not treated as main"
+        name: "unknown-branch-is-not-treated-as-main"
         config:
           pattern: "(?im)^.*(?:🔴|🟠|🔵).{0,200}APIVER-DEV-IN-MAIN|^.*APIVER-DEV-IN-MAIN.{0,200}(?:🔴|🟠|🔵)"
       - type: output-matches

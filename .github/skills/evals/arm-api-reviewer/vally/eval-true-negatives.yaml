@@ -8,7 +8,7 @@ description: |
 # root environment into each stimulus environment, and the path resolves relative to this
 # file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
 # effect when the run passes --skill-dir, which neither the local nor the CI runner does.
-environment:
+agent_environment:
   skills:
     - "../../../azure-api-review"
   files:
@@ -51,19 +51,16 @@ stimuli:
         - src: "../fixtures/examples/example-clean-operations-list.json"
           dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Operations_List.json"
     prompt: >
-      Review the following ARM resource-manager OpenAPI specification file for
-      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
-      service with no previous API version. Report all findings with rule IDs,
-      line numbers, and fix suggestions. If the spec is fully compliant, state
-      that no blocking issues were found.
+      Review the following ARM resource-manager OpenAPI specification file for compliance with Azure REST API Guidelines and ARM RPC rules. This is a new service with no previous API version. Report all findings with rule IDs, line numbers, and fix suggestions. If the spec is fully compliant, state that no blocking issues were found.
 
       File: specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleansvc.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-not-matches
-        name: "no false-positive blocking findings"
+        name: "no-false-positive-blocking-findings"
         config:
           pattern: "(?i)\\bmissing (DELETE|PATCH|PUT|GET|list)\\b|\\bmissing provisioningState\\b|\\bSEC-SECRET-DETECT\\b"
       - type: prompt
@@ -79,15 +76,14 @@ stimuli:
         - src: "../fixtures/examples/example-clean.json"
           dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_Get.json"
     prompt: >
-      Review the following example JSON file for compliance with Azure REST API
-      example file guidelines. This example is for a GET operation on an ARM
-      resource. Report all findings with rule IDs and fix suggestions.
+      Review the following example JSON file for compliance with Azure REST API example file guidelines. This example is for a GET operation on an ARM resource. Report all findings with rule IDs and fix suggestions.
 
       File: specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/examples/Widgets_Get.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: prompt
     rubric:
       - The example is well-formed — has a proper fully-qualified ARM resource ID, no realistic secrets, correct formatting, proper provisioningState, tags, and systemData
@@ -101,20 +97,16 @@ stimuli:
         - src: "../fixtures/arm-openapi/clean-proxy-resource.json"
           dest: "specification/proxysvc/resource-manager/Microsoft.ProxyTest/stable/2025-01-01/proxysvc.json"
     prompt: >
-      Review the following ARM resource-manager OpenAPI specification file for
-      compliance with Azure REST API Guidelines and ARM RPC rules. This is a
-      proxy (extension) resource nested under a parent resource — it does NOT
-      have a location property and is NOT a tracked resource. Report all findings
-      with rule IDs, line numbers, and fix suggestions. If the spec is fully
-      compliant, state that no blocking issues were found.
+      Review the following ARM resource-manager OpenAPI specification file for compliance with Azure REST API Guidelines and ARM RPC rules. This is a proxy (extension) resource nested under a parent resource — it does NOT have a location property and is NOT a tracked resource. Report all findings with rule IDs, line numbers, and fix suggestions. If the spec is fully compliant, state that no blocking issues were found.
 
       File: specification/proxysvc/resource-manager/Microsoft.ProxyTest/stable/2025-01-01/proxysvc.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-not-matches
-        name: "no false-positive tracked-resource findings"
+        name: "no-false-positive-tracked-resource-findings"
         config:
           pattern: "(?i)\\bmissing (location|tags)\\b|\\bmissing.*(ListBySubscription|ListByResourceGroup)\\b|\\bresource move\\b"
       - type: prompt
@@ -133,24 +125,20 @@ stimuli:
         - src: "../fixtures/arm-openapi/collection-paging-parameters.json"
           dest: "specification/pagingsvc/resource-manager/Microsoft.PagingTest/stable/2025-01-01/paging.json"
     prompt: >
-      Read `.github/instructions/arm-api-review.instructions.md` section 2.2 and
-      `.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`.
-      Do not edit any file. Review only the `Widgets_List` collection GET query
-      parameters in this ARM OpenAPI file. Report any ARM RPC violation
-      involving `$top` or `$skipToken`; otherwise state that these paging
-      parameters are allowed.
+      Read `.github/instructions/arm-api-review.instructions.md` section 2.2 and `.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`. Do not edit any file. Review only the `Widgets_List` collection GET query parameters in this ARM OpenAPI file. Report any ARM RPC violation involving `$top` or `$skipToken`; otherwise state that these paging parameters are allowed.
 
       File: specification/pagingsvc/resource-manager/Microsoft.PagingTest/stable/2025-01-01/paging.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-not-matches
-        name: "no finding against RPC paging parameters"
+        name: "no-finding-against-rpc-paging-parameters"
         config:
           pattern: '(?is)\*\*\[(?:NEW|EXISTING)\]\s*(?:🔴|🟠|🔵|🟡).{0,500}(?:\$top|\$skipToken)'
       - type: output-matches
-        name: "paging parameters recognized as allowed"
+        name: "paging-parameters-recognized-as-allowed"
         config:
           pattern: '(?is)(?:\$top|\$skipToken).{0,200}(?:allow|valid|permitted|RPC.*paging)'
       - type: prompt
@@ -166,23 +154,20 @@ stimuli:
         - src: "../fixtures/arm-openapi/clean-spec.json"
           dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleansvc.json"
     prompt: >
-      Read `.github/instructions/arm-api-review.instructions.md` section 4.2.
-      Do not edit any file. Review only the `Widgets_Update` PATCH response-code
-      declarations in this ARM OpenAPI file. Report any ARM RPC violation in
-      those declarations; otherwise state that the declarations are compliant
-      and explain how runtime 404 behavior is represented.
+      Read `.github/instructions/arm-api-review.instructions.md` section 4.2. Do not edit any file. Review only the `Widgets_Update` PATCH response-code declarations in this ARM OpenAPI file. Report any ARM RPC violation in those declarations; otherwise state that the declarations are compliant and explain how runtime 404 behavior is represented.
 
       File: specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleansvc.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-not-matches
-        name: "no explicit 404 finding"
+        name: "no-explicit-404-finding"
         config:
           pattern: '(?is)\*\*\[(?:NEW|EXISTING)\]\s*(?:🔴|🟠|🔵|🟡).{0,500}(?:404|RPC-Patch-V1-07)'
       - type: output-matches
-        name: "default response recognized as representing runtime errors"
+        name: "default-response-recognized-as-representing-runtime-errors"
         config:
           pattern: "(?is)(?:default).{0,200}(?:404|error|runtime)|(?:404|runtime).{0,200}(?:default)"
       - type: prompt

@@ -7,7 +7,7 @@ description: |
 # root environment into each stimulus environment, and the path resolves relative to this
 # file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
 # effect when the run passes --skill-dir, which neither the local nor the CI runner does.
-environment:
+agent_environment:
   skills:
     - "../../../azure-api-review"
   files:
@@ -40,16 +40,14 @@ stimuli:
         - src: "../fixtures/arm-openapi/missing-crud-ops.json"
           dest: "specification/widgetmanager/resource-manager/Microsoft.WidgetManager/stable/2025-01-01/widgetmanager.json"
     prompt: >
-      Review the following ARM resource-manager OpenAPI specification file for
-      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
-      service with no previous API version. Report all findings with rule IDs,
-      line numbers, and fix suggestions.
+      Review the following ARM resource-manager OpenAPI specification file for compliance with Azure REST API Guidelines and ARM RPC rules. This is a new service with no previous API version. Report all findings with rule IDs, line numbers, and fix suggestions.
 
       File: specification/widgetmanager/resource-manager/Microsoft.WidgetManager/stable/2025-01-01/widgetmanager.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-contains
         config:
           substring: "DELETE"
@@ -74,16 +72,14 @@ stimuli:
         - src: "../fixtures/arm-openapi/missing-provisioning-state.json"
           dest: "specification/jobservice/resource-manager/Microsoft.JobService/stable/2025-01-01/jobservice.json"
     prompt: >
-      Review the following ARM resource-manager OpenAPI specification file for
-      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
-      service with no previous API version. Report all findings with rule IDs,
-      line numbers, and fix suggestions.
+      Review the following ARM resource-manager OpenAPI specification file for compliance with Azure REST API Guidelines and ARM RPC rules. This is a new service with no previous API version. Report all findings with rule IDs, line numbers, and fix suggestions.
 
       File: specification/jobservice/resource-manager/Microsoft.JobService/stable/2025-01-01/jobservice.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-contains
         config:
           substring: "provisioningState"
@@ -102,16 +98,14 @@ stimuli:
         - src: "../fixtures/arm-openapi/inline-common-types.json"
           dest: "specification/inlinesvc/resource-manager/Microsoft.InlineTypes/stable/2025-01-01/inlinesvc.json"
     prompt: >
-      Review the following ARM resource-manager OpenAPI specification file for
-      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
-      service with no previous API version. Report all findings with rule IDs,
-      line numbers, and fix suggestions.
+      Review the following ARM resource-manager OpenAPI specification file for compliance with Azure REST API Guidelines and ARM RPC rules. This is a new service with no previous API version. Report all findings with rule IDs, line numbers, and fix suggestions.
 
       File: specification/inlinesvc/resource-manager/Microsoft.InlineTypes/stable/2025-01-01/inlinesvc.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
         config:
           pattern: "(?i)common.types|TrackedResource|inline"
@@ -130,28 +124,24 @@ stimuli:
         - src: "../fixtures/arm-openapi/collection-custom-query-parameter.json"
           dest: "specification/pagingsvc/resource-manager/Microsoft.PagingTest/stable/2025-01-01/paging.json"
     prompt: >
-      Read `.github/instructions/arm-api-review.instructions.md` section 2.2 and
-      `.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`.
-      Do not edit any file. Review only the `Widgets_List` collection GET query
-      parameters in this ARM OpenAPI file. Classify the custom `region` query
-      parameter under the applicable ARM RPC rule. Return the standard review
-      finding with its rule ID and severity.
+      Read `.github/instructions/arm-api-review.instructions.md` section 2.2 and `.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`. Do not edit any file. Review only the `Widgets_List` collection GET query parameters in this ARM OpenAPI file. Classify the custom `region` query parameter under the applicable ARM RPC rule. Return the standard review finding with its rule ID and severity.
 
       File: specification/pagingsvc/resource-manager/Microsoft.PagingTest/stable/2025-01-01/paging.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "custom collection parameter is Warning"
+        name: "custom-collection-parameter-is-warning"
         config:
           pattern: '(?is)(?:🟠\s*Warning|\bWarning\b).{0,500}(?:region|RPC-Uri-V1-09)|(?:region|RPC-Uri-V1-09).{0,500}(?:🟠\s*Warning|\bWarning\b)'
       - type: output-not-matches
-        name: "custom collection parameter is not a Blocking finding"
+        name: "custom-collection-parameter-is-not-a-blocking-finding"
         config:
           pattern: '(?is)\*\*\[(?:NEW|EXISTING)\]\s*🔴\s*Blocking.{0,500}(?:region|RPC-Uri-V1-09)'
       - type: output-contains
-        name: "suggests standard filter"
+        name: "suggests-standard-filter"
         config:
           substring: "$filter"
       - type: prompt
@@ -169,24 +159,20 @@ stimuli:
         - src: "../fixtures/arm-openapi/point-custom-query-parameter.json"
           dest: "specification/pagingsvc/resource-manager/Microsoft.PagingTest/stable/2025-01-01/paging.json"
     prompt: >
-      Read `.github/instructions/arm-api-review.instructions.md` section 2.2 and
-      `.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`.
-      Do not edit any file. Review only the `Widgets_Get` point GET query
-      parameters in this ARM OpenAPI file. Classify the custom `expandDetails`
-      query parameter under the applicable ARM RPC rule. Return the standard
-      review finding with its rule ID and severity.
+      Read `.github/instructions/arm-api-review.instructions.md` section 2.2 and `.github/skills/azure-api-review/references/tracked-resource-lifecycle.md`. Do not edit any file. Review only the `Widgets_Get` point GET query parameters in this ARM OpenAPI file. Classify the custom `expandDetails` query parameter under the applicable ARM RPC rule. Return the standard review finding with its rule ID and severity.
 
       File: specification/pagingsvc/resource-manager/Microsoft.PagingTest/stable/2025-01-01/paging.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "point GET parameter is Blocking"
+        name: "point-get-parameter-is-blocking"
         config:
           pattern: '(?is)(?:🔴\s*Blocking|\bBlocking\b).{0,500}(?:expandDetails|RPC-Get-V1-08)|(?:expandDetails|RPC-Get-V1-08).{0,500}(?:🔴\s*Blocking|\bBlocking\b)'
       - type: output-contains
-        name: "point GET rule cited"
+        name: "point-get-rule-cited"
         config:
           substring: "RPC-Get-V1-08"
       - type: prompt
@@ -204,23 +190,20 @@ stimuli:
         - src: "../fixtures/arm-openapi/inline-systemdata.json"
           dest: "specification/systemdatasvc/resource-manager/Microsoft.SystemDataTest/stable/2025-01-01/systemdata.json"
     prompt: >
-      Review only the `systemData` property and `InlineSystemData` definition in
-      this ARM resource OpenAPI file. Determine whether its shape matches the
-      canonical ARM systemData contract. Common-types reuse is recommended but
-      not mandatory when an inline shape is fully compatible. Do not edit the
-      file; return the standard finding with severity and fix.
+      Review only the `systemData` property and `InlineSystemData` definition in this ARM resource OpenAPI file. Determine whether its shape matches the canonical ARM systemData contract. Common-types reuse is recommended but not mandatory when an inline shape is fully compatible. Do not edit the file; return the standard finding with severity and fix.
 
       File: specification/systemdatasvc/resource-manager/Microsoft.SystemDataTest/stable/2025-01-01/systemdata.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "incomplete systemData shape is Blocking"
+        name: "incomplete-systemdata-shape-is-blocking"
         config:
           pattern: '(?is)(?:systemData|InlineSystemData).{0,500}(?:🔴\s*Blocking|\bBlocking\b)|(?:🔴\s*Blocking|\bBlocking\b).{0,500}(?:systemData|InlineSystemData)'
       - type: output-matches
-        name: "canonical systemData shape required"
+        name: "canonical-systemdata-shape-required"
         config:
           pattern: "(?is)(?:systemData).{0,400}(?:createdByType|lastModifiedBy|canonical|common.?types)|(?:createdByType|lastModifiedBy|canonical|common.?types).{0,400}(?:systemData)"
       - type: prompt

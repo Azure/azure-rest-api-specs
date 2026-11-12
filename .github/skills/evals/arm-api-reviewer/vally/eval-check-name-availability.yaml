@@ -8,7 +8,7 @@ description: |
 # root environment into each stimulus environment, and the path resolves relative to this
 # file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
 # effect when the run passes --skill-dir, which neither the local nor the CI runner does.
-environment:
+agent_environment:
   skills:
     - "../../../azure-api-review"
   files:
@@ -38,20 +38,14 @@ stimuli:
         - src: "../fixtures/arm-openapi/cna-violations.json"
           dest: "specification/cnatestsvc/resource-manager/Microsoft.CnaTest/stable/2025-01-01/cnatestsvc.json"
     prompt: >
-      Read `.github/instructions/arm-api-review.instructions.md` section 21 and
-      review only the `checkNameAvailability` operation and its request and
-      response models in the following ARM resource-manager OpenAPI
-      specification. Compare custom shapes with the supplied common-types v5
-      definitions. Assess contract compatibility, input validation on the
-      request `name` field, and the strength of the common-types guidance. Do
-      not report unrelated resource lifecycle, example, or naming findings.
-      Report findings with rule IDs, line numbers, and fix suggestions.
+      Read `.github/instructions/arm-api-review.instructions.md` section 21 and review only the `checkNameAvailability` operation and its request and response models in the following ARM resource-manager OpenAPI specification. Compare custom shapes with the supplied common-types v5 definitions. Assess contract compatibility, input validation on the request `name` field, and the strength of the common-types guidance. Do not report unrelated resource lifecycle, example, or naming findings. Report findings with rule IDs, line numbers, and fix suggestions.
 
       File: specification/cnatestsvc/resource-manager/Microsoft.CnaTest/stable/2025-01-01/cnatestsvc.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-contains
         config:
           substring: "checkNameAvailability"
