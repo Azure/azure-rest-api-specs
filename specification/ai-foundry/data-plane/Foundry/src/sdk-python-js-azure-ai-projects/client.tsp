@@ -69,7 +69,8 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.ImageGenTool, "ImageGenToolBase");
 @@clientName(OpenAI.LocalShellToolParam, "LocalShellToolParamBase");
 @@clientName(OpenAI.MCPTool, "MCPToolBase");
-@@clientName(OpenAI.ProgrammaticToolCallingParam,
+@@clientName(
+  OpenAI.ProgrammaticToolCallingParam,
   "ProgrammaticToolCallingParamBase"
 );
 @@clientName(OpenAI.ToolSearchToolParam, "ToolSearchToolParamBase");
@@ -90,7 +91,8 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.ToolImageGenTool, "ImageGenTool");
 @@clientName(OpenAI.ToolLocalShellToolParam, "LocalShellToolParam");
 @@clientName(OpenAI.ToolMcpTool, "MCPTool");
-@@clientName(OpenAI.ToolProgrammaticToolCallingParam,
+@@clientName(
+  OpenAI.ToolProgrammaticToolCallingParam,
   "ProgrammaticToolCallingParam"
 );
 @@clientName(OpenAI.ToolToolSearchToolParam, "ToolSearchToolParam");
@@ -125,39 +127,77 @@ using Azure.AI.Projects;
 @@clientName(Agents.listAgentVersions, "listVersions");
 @@clientName(Agents.enableAgent, "enable");
 @@clientName(Agents.disableAgent, "disable");
-@@clientName(Agents.createAgentVersionFromManifest,
+@@clientName(
+  Agents.createAgentVersionFromManifest,
   "create_version_from_manifest",
   "python"
 );
 
-@@clientName(Microsoft365Publishing.publishAgentToMicrosoft365,
+@@clientName(
+  Microsoft365Publishing.publishAgentToMicrosoft365,
   "publish_to_microsoft365"
 );
-@@clientName(Microsoft365Publishing.getMicrosoft365AppPackage,
+@@clientName(
+  Microsoft365Publishing.getMicrosoft365AppPackage,
   "get_microsoft365_package"
 );
-@@clientName(Microsoft365Publishing.getMicrosoft365PublishDefaults,
+@@clientName(
+  Microsoft365Publishing.getMicrosoft365PublishDefaults,
   "get_microsoft365_publish_defaults"
 );
-@@clientName(Microsoft365PublishResponse,
+@@clientName(
+  Microsoft365PublishResponse,
   "Microsoft365PublishResult",
   "python"
 );
-@@clientName(Microsoft365AppPackageResponse,
+@@clientName(
+  Microsoft365AppPackageResponse,
   "Microsoft365AppPackageResult",
   "python"
 );
 
 // Preserve the enum member names released in Python 2.10.0 to avoid a source-breaking rename.
 // These Python-only overrides do not change wire values or JavaScript names.
-@@clientName(ActivityProtocolAccessBoundary.read_1on1_manager, "READ1_ON1_MANAGER", "python");
-@@clientName(ActivityProtocolAccessBoundary.read_1on1_developers, "READ1_ON1_DEVELOPERS", "python");
-@@clientName(ActivityProtocolAccessBoundary.read_1on1_allowlisted, "READ1_ON1_ALLOWLISTED", "python");
-@@clientName(ActivityProtocolAccessBoundary.read_1on1_tenant, "READ1_ON1_TENANT", "python");
-@@clientName(ActivityProtocolAccessBoundary.write_1on1_manager, "WRITE1_ON1_MANAGER", "python");
-@@clientName(ActivityProtocolAccessBoundary.write_1on1_developers, "WRITE1_ON1_DEVELOPERS", "python");
-@@clientName(ActivityProtocolAccessBoundary.write_1on1_allowlisted, "WRITE1_ON1_ALLOWLISTED", "python");
-@@clientName(ActivityProtocolAccessBoundary.write_1on1_tenant, "WRITE1_ON1_TENANT", "python");
+@@clientName(
+  ActivityProtocolAccessBoundary.read_1on1_manager,
+  "READ1_ON1_MANAGER",
+  "python"
+);
+@@clientName(
+  ActivityProtocolAccessBoundary.read_1on1_developers,
+  "READ1_ON1_DEVELOPERS",
+  "python"
+);
+@@clientName(
+  ActivityProtocolAccessBoundary.read_1on1_allowlisted,
+  "READ1_ON1_ALLOWLISTED",
+  "python"
+);
+@@clientName(
+  ActivityProtocolAccessBoundary.read_1on1_tenant,
+  "READ1_ON1_TENANT",
+  "python"
+);
+@@clientName(
+  ActivityProtocolAccessBoundary.write_1on1_manager,
+  "WRITE1_ON1_MANAGER",
+  "python"
+);
+@@clientName(
+  ActivityProtocolAccessBoundary.write_1on1_developers,
+  "WRITE1_ON1_DEVELOPERS",
+  "python"
+);
+@@clientName(
+  ActivityProtocolAccessBoundary.write_1on1_allowlisted,
+  "WRITE1_ON1_ALLOWLISTED",
+  "python"
+);
+@@clientName(
+  ActivityProtocolAccessBoundary.write_1on1_tenant,
+  "WRITE1_ON1_TENANT",
+  "python"
+);
 
 // Exclude these operations entirely from the Python SDK.
 // Note that JavaScript SDK already shipped 2.0.0 with these, so they can't be removed.
@@ -175,41 +215,49 @@ using Azure.AI.Projects;
 @@clientName(AgentVersionObject, "AgentVersion", "javascript");
 
 // Disambiguate the unwrapped definitions, even when they are not emitted.
-@@clientName(OpenAI.ApplyPatchToolParam,
+@@clientName(
+  OpenAI.ApplyPatchToolParam,
   "ApplyPatchToolParamDefinition",
   "javascript"
 );
-@@clientName(OpenAI.CodeInterpreterTool,
+@@clientName(
+  OpenAI.CodeInterpreterTool,
   "CodeInterpreterToolDefinition",
   "javascript"
 );
 @@clientName(OpenAI.ComputerTool, "ComputerToolDefinition", "javascript");
-@@clientName(OpenAI.ComputerUsePreviewTool,
+@@clientName(
+  OpenAI.ComputerUsePreviewTool,
   "ComputerUsePreviewToolDefinition",
   "javascript"
 );
 @@clientName(OpenAI.CustomToolParam, "CustomToolParamDefinition", "javascript");
 @@clientName(OpenAI.FileSearchTool, "FileSearchToolDefinition", "javascript");
-@@clientName(OpenAI.FunctionShellToolParam,
+@@clientName(
+  OpenAI.FunctionShellToolParam,
   "FunctionShellToolParamDefinition",
   "javascript"
 );
 @@clientName(OpenAI.FunctionTool, "FunctionToolDefinition", "javascript");
 @@clientName(OpenAI.ImageGenTool, "ImageGenToolDefinition", "javascript");
-@@clientName(OpenAI.LocalShellToolParam,
+@@clientName(
+  OpenAI.LocalShellToolParam,
   "LocalShellToolParamDefinition",
   "javascript"
 );
 @@clientName(OpenAI.MCPTool, "MCPToolDefinition", "javascript");
-@@clientName(OpenAI.ProgrammaticToolCallingParam,
+@@clientName(
+  OpenAI.ProgrammaticToolCallingParam,
   "ProgrammaticToolCallingParamDefinition",
   "javascript"
 );
-@@clientName(OpenAI.ToolSearchToolParam,
+@@clientName(
+  OpenAI.ToolSearchToolParam,
   "ToolSearchToolParamDefinition",
   "javascript"
 );
-@@clientName(OpenAI.WebSearchPreviewTool,
+@@clientName(
+  OpenAI.WebSearchPreviewTool,
   "WebSearchPreviewToolDefinition",
   "javascript"
 );
@@ -258,30 +306,36 @@ namespace JavaScriptToolCompatibility {
   }
 }
 
-@@alternateType(OpenAI.ToolCodeInterpreterTool.container,
+@@alternateType(
+  OpenAI.ToolCodeInterpreterTool.container,
   JavaScriptToolCompatibility.CodeInterpreterToolContainer,
   "javascript"
 );
-@@alternateType(OpenAI.ToolMcpTool.allowed_tools,
+@@alternateType(
+  OpenAI.ToolMcpTool.allowed_tools,
   JavaScriptToolCompatibility.MCPToolAllowedTools | null,
   "javascript"
 );
-@@alternateType(OpenAI.ToolMcpTool.require_approval,
+@@alternateType(
+  OpenAI.ToolMcpTool.require_approval,
   JavaScriptToolCompatibility.MCPToolRequireApproval | null,
   "javascript"
 );
-@@alternateType(OpenAI.ComparisonFilter.value,
+@@alternateType(
+  OpenAI.ComparisonFilter.value,
   JavaScriptToolCompatibility.FileSearchToolFiltersValue,
   "javascript"
 );
-@@alternateType(OpenAI.CompoundFilter.filters,
+@@alternateType(
+  OpenAI.CompoundFilter.filters,
   JavaScriptToolCompatibility.FileSearchToolFiltersFilter[],
   "javascript"
 );
 
 // Preserve the released Python annotation list[Union[ComparisonFilter, Any]] instead of
 // list[Union[ComparisonFilter, CompoundFilter]], which would be a breaking change.
-@@alternateType(OpenAI.CompoundFilter.filters,
+@@alternateType(
+  OpenAI.CompoundFilter.filters,
   (OpenAI.ComparisonFilter | OpenAI.CompoundFilter | unknown)[]
 );
 
@@ -290,15 +344,18 @@ namespace JavaScriptToolCompatibility {
 
 // typespec-ts reads multi-word discriminators by their camel-cased name in polymorphic
 // serializers and ignores ignore-property-name-normalize, so keep the JS client name aligned.
-@@clientName(VoiceAgentSubagentConfig.subagent_type,
+@@clientName(
+  VoiceAgentSubagentConfig.subagent_type,
   "subagentType",
   "javascript"
 );
-@@clientName(VoiceAgentDelegateSubagentConfig.subagent_type,
+@@clientName(
+  VoiceAgentDelegateSubagentConfig.subagent_type,
   "subagentType",
   "javascript"
 );
-@@clientName(VoiceAgentInlineSubagentConfig.subagent_type,
+@@clientName(
+  VoiceAgentInlineSubagentConfig.subagent_type,
   "subagentType",
   "javascript"
 );
@@ -309,11 +366,13 @@ namespace JavaScriptToolCompatibility {
 @@clientName(OpenAI.ContainerMemoryLimit.`16g`, exact("MEMORY_16GB"), "python");
 @@clientName(OpenAI.ContainerMemoryLimit.`64g`, exact("MEMORY_64GB"), "python");
 
-@@clientName(OpenAI.ToolChoiceParamType.web_search_preview_2025_03_11,
+@@clientName(
+  OpenAI.ToolChoiceParamType.web_search_preview_2025_03_11,
   exact("WEB_SEARCH_PREVIEW_2025_03_11"),
   "python"
 );
-@@clientName(OpenAI.RankerVersionType.`default-2024-11-15`,
+@@clientName(
+  OpenAI.RankerVersionType.`default-2024-11-15`,
   exact("DEFAULT_2024_11_15"),
   "python"
 );
@@ -334,7 +393,8 @@ namespace JavaScriptToolCompatibility {
 
 // Session operations all use "session_id". Session file operations all use "agent_session_id". Consolidate to use "session_id" everywhere.
 @@clientName(UploadSessionFileParams.agent_session_id, "session_id", "python");
-@@clientName(DownloadSessionFileParams.agent_session_id,
+@@clientName(
+  DownloadSessionFileParams.agent_session_id,
   "session_id",
   "python"
 );
@@ -349,18 +409,21 @@ namespace JavaScriptToolCompatibility {
 @@clientName(Agents.createAgentVersionFromCode, "createVersionFromCode");
 
 @@access(Agents.createAgentVersionFromCode, Access.internal, "python");
-@@clientName(CreateAgentVersionFromCodeMetadata,
+@@clientName(
+  CreateAgentVersionFromCodeMetadata,
   "_CreateAgentVersionFromCodeMetadata",
   "python"
 );
-@@clientName(CreateAgentVersionFromCodeContent,
+@@clientName(
+  CreateAgentVersionFromCodeContent,
   "_CreateAgentVersionFromCodeContent",
   "python"
 );
 
 @@clientName(Agents.downloadAgentCode, "download_code", "python");
 @@clientName(DownloadAgentCodeResponse, "DownloadAgentCodeResult", "python");
-@@clientName(SessionDirectoryListResponse,
+@@clientName(
+  SessionDirectoryListResponse,
   "SessionDirectoryListResult",
   "python"
 );
@@ -374,10 +437,12 @@ namespace JavaScriptToolCompatibility {
 @@clientName(Azure.AI.Projects.Datasets.listLatest, "list");
 @@clientName(Azure.AI.Projects.Datasets.getVersion, "get");
 @@clientName(Azure.AI.Projects.Datasets.deleteVersion, "delete");
-@@clientName(Azure.AI.Projects.Datasets.createOrUpdateVersion,
+@@clientName(
+  Azure.AI.Projects.Datasets.createOrUpdateVersion,
   "createOrUpdate"
 );
-@@clientName(Azure.AI.Projects.Datasets.startPendingUploadVersion,
+@@clientName(
+  Azure.AI.Projects.Datasets.startPendingUploadVersion,
   "pendingUpload"
 );
 
@@ -393,11 +458,13 @@ namespace JavaScriptToolCompatibility {
 @@clientName(SasCredential, "BlobReferenceSasCredential"); // Not to be confused with class "SASCredentials"
 
 // Preserve the released evaluator model name and distinguish campaign inputs.
-@@clientName(DatasetReference,
+@@clientName(
+  DatasetReference,
   "TelephonyCampaignDatasetReference",
   "python, javascript"
 );
-@@clientName(VersionedDatasetReference,
+@@clientName(
+  VersionedDatasetReference,
   "DatasetReference",
   "python, javascript"
 );
@@ -467,7 +534,8 @@ namespace JavaScriptToolCompatibility {
 @@clientName(Azure.AI.Projects.Agents.generateAgent, "createFromPrompt");
 @@clientName(AgentOptimizationJobs.create, "createOptimizationJob");
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob");
-@@clientName(AgentOptimizationJobs.downloadFile,
+@@clientName(
+  AgentOptimizationJobs.downloadFile,
   "downloadOptimizationJobFile",
   "python, javascript"
 );
@@ -475,13 +543,16 @@ namespace JavaScriptToolCompatibility {
 @@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob");
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob");
 @@clientName(AgentOptimizationJobs.estimate, "estimateOptimizationJob");
-@@clientName(AgentOptimizationJobCandidates.listCandidates,
+@@clientName(
+  AgentOptimizationJobCandidates.listCandidates,
   "listOptimizationCandidates"
 );
-@@clientName(AgentOptimizationJobCandidates.getCandidate,
+@@clientName(
+  AgentOptimizationJobCandidates.getCandidate,
   "getOptimizationCandidate"
 );
-@@clientName(AgentOptimizationJobCandidates.promoteCandidate,
+@@clientName(
+  AgentOptimizationJobCandidates.promoteCandidate,
   "promoteOptimizationCandidate"
 );
 
@@ -499,24 +570,29 @@ namespace JavaScriptToolCompatibility {
 @@usage(VoiceAgentTransport, Usage.input | Usage.json);
 @@access(VoiceAgentTransport, Access.public);
 
-@@clientName(VoiceAgentCollectionStartArguments.timeout_seconds,
+@@clientName(
+  VoiceAgentCollectionStartArguments.timeout_seconds,
   "timeout",
   "python"
 );
-@@clientName(VoiceAgentCollectDtmfStartArguments.first_digit_timeout_seconds,
+@@clientName(
+  VoiceAgentCollectDtmfStartArguments.first_digit_timeout_seconds,
   "first_digit_timeout",
   "python"
 );
-@@clientName(VoiceAgentDtmfCompletionTiming.inter_digit_timeout_seconds,
+@@clientName(
+  VoiceAgentDtmfCompletionTiming.inter_digit_timeout_seconds,
   "inter_digit_timeout",
   "python"
 );
-@@clientName(VoiceAgentSubagent.invoke_timeout_seconds,
+@@clientName(
+  VoiceAgentSubagent.invoke_timeout_seconds,
   "invoke_timeout",
   "python"
 );
 @@clientName(VoiceAgentSystemTool.timeout_seconds, "timeout", "python");
-@@clientName(VoiceAgentTransferRouting.ring_timeout_seconds,
+@@clientName(
+  VoiceAgentTransferRouting.ring_timeout_seconds,
   "ring_timeout",
   "python"
 );
@@ -528,33 +604,42 @@ namespace JavaScriptToolCompatibility {
 @@clientName(AgentEndpointConversations.listAgentConversations, "list");
 @@clientName(AgentEndpointConversations.getAgentConversation, "get");
 @@clientName(AgentEndpointConversations.deleteAgentConversation, "delete");
-@@clientName(AgentEndpointConversations.listAgentConversationResponses,
+@@clientName(
+  AgentEndpointConversations.listAgentConversationResponses,
   "listResponses"
 );
-@@clientName(AgentEndpointConversations.getAgentConversationResponse,
+@@clientName(
+  AgentEndpointConversations.getAgentConversationResponse,
   "getResponse"
 );
-@@clientName(AgentEndpointConversations.listAgentConversationResponseItems,
+@@clientName(
+  AgentEndpointConversations.listAgentConversationResponseItems,
   "listResponseItems"
 );
-@@clientName(AgentEndpointConversations.listAgentConversationItems,
+@@clientName(
+  AgentEndpointConversations.listAgentConversationItems,
   "listItems"
 );
 @@clientName(AgentEndpointConversations.getAgentConversationItem, "getItem");
-@@clientName(AgentEndpointConversations.getAgentConversationAudioItem,
+@@clientName(
+  AgentEndpointConversations.getAgentConversationAudioItem,
   "getAudioItem"
 );
-@@clientName(AgentEndpointConversations.getAgentConversationAudioItemContent,
+@@clientName(
+  AgentEndpointConversations.getAgentConversationAudioItemContent,
   "downloadAudioItem"
 );
-@@clientName(AgentEndpointConversations.getAgentConversationGeneratedAudioItem,
+@@clientName(
+  AgentEndpointConversations.getAgentConversationGeneratedAudioItem,
   "getGeneratedAudioItem"
 );
-@@clientName(AgentEndpointConversations.getAgentConversationGeneratedAudioItemContent,
+@@clientName(
+  AgentEndpointConversations.getAgentConversationGeneratedAudioItemContent,
   "downloadGeneratedAudioItem"
 );
 @@clientName(AgentEndpointConversations.getAgentConversationAudio, "getAudio");
-@@clientName(AgentEndpointConversations.getAgentConversationAudioContent,
+@@clientName(
+  AgentEndpointConversations.getAgentConversationAudioContent,
   "downloadAudio"
 );
 
@@ -564,25 +649,32 @@ namespace JavaScriptToolCompatibility {
 
 @@clientName(AgentEndpointLiveConversations.listLiveAgentConversations, "list");
 @@clientName(AgentEndpointLiveConversations.getLiveAgentConversation, "get");
-@@clientName(AgentEndpointLiveConversations.deleteLiveAgentConversation,
+@@clientName(
+  AgentEndpointLiveConversations.deleteLiveAgentConversation,
   "delete"
 );
-@@clientName(AgentEndpointLiveConversations.listLiveAgentConversationItems,
+@@clientName(
+  AgentEndpointLiveConversations.listLiveAgentConversationItems,
   "listItems"
 );
-@@clientName(AgentEndpointLiveConversations.getLiveAgentConversationItem,
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationItem,
   "getItem"
 );
-@@clientName(AgentEndpointLiveConversations.getLiveAgentConversationAudioItem,
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudioItem,
   "getAudioItem"
 );
-@@clientName(AgentEndpointLiveConversations.getLiveAgentConversationAudioItemContent,
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudioItemContent,
   "downloadAudioItem"
 );
-@@clientName(AgentEndpointLiveConversations.getLiveAgentConversationAudio,
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudio,
   "getAudio"
 );
-@@clientName(AgentEndpointLiveConversations.getLiveAgentConversationAudioContent,
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudioContent,
   "downloadAudio"
 );
 
@@ -596,17 +688,20 @@ namespace JavaScriptToolCompatibility {
 @@clientName(AgentTelephony.updateTelephonyBinding, "updateBinding");
 @@clientName(AgentTelephony.deleteTelephonyBinding, "deleteBinding");
 @@clientName(AgentTelephony.listTelephonyCalls, "listCalls");
-@@clientName(TelephonyCallListTimeQueryParameters.started_before,
+@@clientName(
+  TelephonyCallListTimeQueryParameters.started_before,
   "started_before_time"
 );
-@@clientName(TelephonyCallListTimeQueryParameters.started_after,
+@@clientName(
+  TelephonyCallListTimeQueryParameters.started_after,
   "started_after_time"
 );
 @@clientName(AgentTelephony.getTelephonyCall, "getCall");
 @@clientName(AgentTelephony.transferTelephonyCall, "transferCall");
 @@clientName(AgentTelephony.endTelephonyCall, "endCall");
 @@clientName(AgentTelephony.getTelephonyTransferTargets, "getTransferTargets");
-@@clientName(AgentTelephony.replaceTelephonyTransferTargets,
+@@clientName(
+  AgentTelephony.replaceTelephonyTransferTargets,
   "replaceTransferTargets"
 );
 @@clientName(AgentTelephony.createTelephonyCallJob, "createCallJob");
@@ -627,10 +722,12 @@ namespace JavaScriptToolCompatibility {
 
 // Note there is also OpenAI.TextResponseFormatJsonSchema (which extends OpenAI.TextResponseFormatConfiguration). It already has a good name.
 @@clientName(OpenAI.TextResponseFormatConfiguration, "TextResponseFormat");
-@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatText,
+@@clientName(
+  OpenAI.TextResponseFormatConfigurationResponseFormatText,
   "TextResponseFormatText"
 );
-@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatJsonObject,
+@@clientName(
+  OpenAI.TextResponseFormatConfigurationResponseFormatJsonObject,
   "TextResponseFormatJsonObject"
 );
 
@@ -649,7 +746,8 @@ namespace JavaScriptToolCompatibility {
 @@clientName(DeleteMemoryStoreResponse, "DeleteMemoryStoreResult", "python");
 @@clientName(DeleteMemoryResponse, "DeleteMemoryResult", "python");
 @@clientName(MemoryStoreUpdateResponse, "MemoryStoreUpdateResult", "python");
-@@clientName(MemoryStoreDeleteScopeResponse,
+@@clientName(
+  MemoryStoreDeleteScopeResponse,
   "MemoryStoreDeleteScopeResult",
   "python"
 );
@@ -661,12 +759,14 @@ namespace JavaScriptToolCompatibility {
 
 // Note the doc string replacement below is for JavaScript only, because for Python we hand-write the
 // relevant methods with proper doc strings (see `begin_update_memories` and `search_memories` methods)
-@@clientDoc(MemoryStoreUpdateRequest.items,
+@@clientDoc(
+  MemoryStoreUpdateRequest.items,
   "A list of messages to store in memory, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.",
   DocumentationMode.replace,
   "javascript"
 );
-@@clientDoc(MemoryStoreSearchRequest.items,
+@@clientDoc(
+  MemoryStoreSearchRequest.items,
   "A list of messages used to extract relevant memories, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.",
   DocumentationMode.replace,
   "javascript"
@@ -780,11 +880,13 @@ namespace JavaScriptToolCompatibility {
 @@clientName(Models.getCredentials, "getCredentials");
 @@clientName(Models.createAsync, "pendingCreateVersion");
 
-@@clientName(CreateModelVersionAsyncResponse,
+@@clientName(
+  CreateModelVersionAsyncResponse,
   "ModelPendingCreateVersionResult",
   "python"
 );
-@@clientName(CreateModelVersionAsyncResponse,
+@@clientName(
+  CreateModelVersionAsyncResponse,
   "ModelPendingCreateVersionResponse",
   "javascript"
 );
@@ -870,7 +972,8 @@ model AIProjectClientOptions {
   allow_preview?: boolean;
 }
 
-@@clientInitialization(Azure.AI.Projects,
+@@clientInitialization(
+  Azure.AI.Projects,
   {
     parameters: AIProjectClientOptions,
   },
