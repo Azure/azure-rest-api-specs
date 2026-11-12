@@ -374,16 +374,17 @@ void test.each([
 
     assert.equal(result.status, "ready");
     assert.deepEqual(result.blockers, []);
-    assert.equal(result.reviewUnits.length, mixed ? 2 : 1);
+    assert.equal(result.reviewUnits.length, 1);
     assert.deepEqual(
       result.reviewUnits.flatMap((unit) => unit.operations.map((item) => item.operationId)),
       mixed ? ["Widgets_List", "Widgets_List"] : ["Widgets_List"],
     );
-    const unit = result.reviewUnits.find((item) => item.projectId === "project-new");
+    const unit = result.reviewUnits[0];
     assert.ok(unit);
+    assert.deepEqual(unit.projectIds, mixed ? ["project-new", "project-ready"] : undefined);
     assert.equal(unit.action, unavailable ? "modify" : "add");
     const operation = mixed
-      ? unit.operations.find((item) => item.comparisonUnavailable)
+      ? unit.operations.find((item) => item.projectId === "project-new")
       : unit.operations[0];
     assert.ok(operation);
     assert.equal(operation.comparisonUnavailable, unavailable ? true : undefined);
@@ -393,13 +394,11 @@ void test.each([
       assert.deepEqual(unit.changedAspects, []);
     }
     if (mixed) {
-      const ready = result.reviewUnits.find((item) => item.projectId === "project-ready");
+      const ready = unit.operations.find((item) => item.projectId === "project-ready");
       assert.ok(ready);
-      assert.ok(
-        ready.operations.some(
-          (item) => !item.comparisonUnavailable && item.beforeFactId && item.afterFactId,
-        ),
-      );
+      assert.equal(ready.comparisonUnavailable, undefined);
+      assert.ok(ready.beforeFactId);
+      assert.ok(ready.afterFactId);
     }
   },
 );

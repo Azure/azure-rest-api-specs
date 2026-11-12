@@ -1,4 +1,3 @@
-import { isDeepStrictEqual } from "node:util";
 import {
   hasUnavailableHeadBaseline,
   UNAVAILABLE_HEAD_BASELINE_MESSAGE,

@@ -1065,7 +1065,7 @@ function mergeUnitGroup(
     ...new Map(
       units
         .flatMap((unit) => unit.operations)
-        .map((operation) => [operation.operationId, operation]),
+        .map((operation) => [`${operation.projectId ?? ""}\0${operation.operationId}`, operation]),
     ).values(),
   ]
     .map(stableOperationIdentity)
@@ -1082,9 +1082,10 @@ function mergeUnitGroup(
 
   const byOperation: Map<string, InternalSemanticOperation[]> = new Map();
   for (const operation of units.flatMap((unit) => unit.operations)) {
-    const values = byOperation.get(operation.operationId) ?? [];
+    const key = `${operation.projectId ?? ""}\0${operation.operationId}`;
+    const values = byOperation.get(key) ?? [];
     values.push(operation);
-    byOperation.set(operation.operationId, values);
+    byOperation.set(key, values);
   }
   const allOperations = [...byOperation.values()]
     .map((values) => {
@@ -1456,6 +1457,7 @@ function buildProjectUnits(
         const afterFactId = pair.after ? addFact(facts, project, "target", pair.after) : undefined;
         operations.push({
           operationId: pair.operationId,
+          projectId: project.id,
           beforeFactId,
           afterFactId,
           ...(comparisonUnavailable
