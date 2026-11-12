@@ -15,6 +15,8 @@ options:
     customization-class: customizations/src/main/java/ProjectsCustomizations.java
     rename-model:
       FilesFileDetails: SkillFileDetails
+      UpdateAgentInsightPatchRequest: UpdateAgentInsightOptions
+      UpdateAgentInsightMonitorPatchRequest: UpdateAgentInsightMonitorOptions
     flavor: azure
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
@@ -54,6 +56,7 @@ options:
     output-file: beta-annotations.csv
     emitter-output-dir: "{cwd}/../customizations" # run npx tsp compile from within `TempTypeSpecFiles` folder
     namespace: com.azure.ai.projects
+    manual-entries: "DataGenerationJobType::CONVERSATIONS"
 imports:
   - "@azure-tools/typespec-azure-core"
   - "@azure-tools/typespec-azure-core/experimental"
