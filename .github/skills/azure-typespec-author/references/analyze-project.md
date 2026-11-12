@@ -1,6 +1,13 @@
 # Analyze Project
 
-Collect the inputs below from the TypeSpec project. Ask **up to 6 concise questions** for any that are missing.
+Collect the inputs below from the TypeSpec project and the user's request. Reuse every
+decision the user already supplied and infer facts that are directly available from
+the project. Ask **up to 6 concise questions** only for material decisions that remain
+missing.
+
+Do not call a knowledge-retrieval, planning, or validation MCP tool during project
+analysis. Grounding starts only after project analysis, intake, and a successful read
+of the reference catalog.
 
 | #   | Input                       | Example                                                                                                                                 |
 | --- | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |

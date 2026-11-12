@@ -1,0 +1,98 @@
+{
+  "parameters": {
+    "api-version": "2026-08-02-preview",
+    "parameters": {
+      "location": "location1",
+      "properties": {
+        "apiServerAccessProfile": {
+          "enablePrivateCluster": true
+        },
+        "networkProfile": {
+          "clusterAPIConnectivityProfile": {
+            "cloudShell": {
+              "mode": "Custom",
+              "network": {
+                "relayNamespaceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cloudshell-rg/providers/Microsoft.Relay/namespaces/cloudshell-relay",
+                "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cloudshell-rg/providers/Microsoft.Network/virtualNetworks/cloudshell-vnet/subnets/cloudshell-subnet"
+              },
+              "storage": {
+                "fileShareName": "cloudshell",
+                "mode": "Custom",
+                "storageAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cloudshell-rg/providers/Microsoft.Storage/storageAccounts/cloudshellstorage"
+              }
+            }
+          }
+        }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1",
+        "location": "location1",
+        "name": "clustername1",
+        "properties": {
+          "apiServerAccessProfile": {
+            "enablePrivateCluster": true,
+            "privateDNSZone": "system"
+          },
+          "networkProfile": {
+            "clusterAPIConnectivityProfile": {
+              "cloudShell": {
+                "mode": "Custom",
+                "network": {
+                  "relayNamespaceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cloudshell-rg/providers/Microsoft.Relay/namespaces/cloudshell-relay",
+                  "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cloudshell-rg/providers/Microsoft.Network/virtualNetworks/cloudshell-vnet/subnets/cloudshell-subnet"
+                },
+                "storage": {
+                  "fileShareName": "cloudshell",
+                  "mode": "Custom",
+                  "storageAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cloudshell-rg/providers/Microsoft.Storage/storageAccounts/cloudshellstorage"
+                }
+              }
+            }
+          },
+          "provisioningState": "Succeeded"
+        },
+        "type": "Microsoft.ContainerService/managedClusters"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1",
+        "location": "location1",
+        "name": "clustername1",
+        "properties": {
+          "apiServerAccessProfile": {
+            "enablePrivateCluster": true,
+            "privateDNSZone": "system"
+          },
+          "networkProfile": {
+            "clusterAPIConnectivityProfile": {
+              "cloudShell": {
+                "mode": "Custom",
+                "network": {
+                  "relayNamespaceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cloudshell-rg/providers/Microsoft.Relay/namespaces/cloudshell-relay",
+                  "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cloudshell-rg/providers/Microsoft.Network/virtualNetworks/cloudshell-vnet/subnets/cloudshell-subnet"
+                },
+                "storage": {
+                  "fileShareName": "cloudshell",
+                  "mode": "Custom",
+                  "storageAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cloudshell-rg/providers/Microsoft.Storage/storageAccounts/cloudshellstorage"
+                }
+              }
+            }
+          },
+          "provisioningState": "Creating"
+        },
+        "type": "Microsoft.ContainerService/managedClusters"
+      }
+    }
+  },
+  "operationId": "ManagedClusters_CreateOrUpdate",
+  "title": "Create Managed Private Cluster With Custom Cloud Shell Resources"
+}

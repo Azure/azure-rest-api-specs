@@ -1,0 +1,174 @@
+# Repo-local extension of eng/common/pipelines/templates/jobs/eval-shard.yml
+# for the azure-typespec-author with-skill benchmark. The common shard pattern
+# downloads and stages mcp-servers; this template adds per-track artifact names,
+# TypeSpec pre-eval setup, and live/mock MCP selection for the TypeSpec runner.
+
+parameters:
+  - name: vallyRoot
+    type: string
+  # F/T and no-skill runs use different matrix-producing stages; this also
+  # namespaces their published artifacts so Summary can consume both tracks.
+  - name: matrixStageName
+    type: string
+    default: Prepare
+  - name: azureSubscription
+    type: string
+    default: azuresdkqabot-dev
+  # Selects the prebuilt live or mock MCP DLL without changing eval specs,
+  # which always reference the single azsdk-mcp Vally environment.
+  - name: mcpEnvironment
+    type: string
+    default: none
+    values:
+      - none
+      - live
+      - mock
+  - name: runs
+    type: number
+    default: 1
+  - name: postEvalTemplate
+    type: string
+    default: ""
+  - name: shardTimeoutInMinutes
+    type: number
+    default: 20
+
+jobs:
+  - job: RunShard
+    displayName: "Eval"
+    pool:
+      name: $(LINUXPOOL)
+      image: $(LINUXVMIMAGE)
+      os: linux
+    continueOnError: true
+    timeoutInMinutes: ${{ parameters.shardTimeoutInMinutes }}
+    strategy:
+      matrix: $[ stageDependencies.${{ parameters.matrixStageName }}.generate_eval_matrix.outputs['detect.matrix'] ]
+      maxParallel: 10
+    templateContext:
+      outputs:
+        # TypeSpec Summary evaluates results.jsonl in addition to JUnit, so
+        # publish the results directory rather than the common junit-only path.
+        - output: pipelineArtifact
+          displayName: "Publish $(shardName) eval results"
+          artifactName: "eval-result-${{ parameters.matrixStageName }}-$(shardName)-$(System.JobAttempt)"
+          targetPath: $(Build.ArtifactStagingDirectory)/results
+          condition: always()
+        - output: pipelineArtifact
+          displayName: "Publish $(shardName) transcripts (on failure)"
+          artifactName: "eval-debug-${{ parameters.matrixStageName }}-$(shardName)-$(System.JobAttempt)"
+          targetPath: $(Build.ArtifactStagingDirectory)/debug
+          condition: failed()
+    steps:
+      - checkout: self
+        fetchDepth: 1
+
+      - task: UseNode@1
+        displayName: "Use Node.js 24.x"
+        inputs:
+          version: 24.x
+
+      - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
+        parameters:
+          npmrcPath: $(Build.SourcesDirectory)/.npmrc
+          registryUrl: https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-tools/npm/registry/
+
+      - script: npm ci --userconfig $(Build.SourcesDirectory)/.npmrc
+        displayName: "Install Vally CLI + copilot-sdk (pinned)"
+        workingDirectory: eng/common/scripts/eval
+
+      # Kept aligned with the common eval shard: the wrapper resolves MCP DLLs
+      # from artifacts/mcp under the checked-out repository.
+      - download: current
+        artifact: mcp-servers
+        displayName: "Download MCP server(s)"
+
+      - script: |
+          mkdir -p "$(Build.SourcesDirectory)/artifacts/mcp"
+          cp -r "$(Pipeline.Workspace)/mcp-servers/." "$(Build.SourcesDirectory)/artifacts/mcp/"
+        displayName: "Stage MCP binaries for Vally"
+
+      # Materializes the TypeSpec project dependencies required by these evals
+      # before Vally copies each fixture into its trial workspace.
+      - template: /.github/skills/azure-typespec-author/evaluate/pipeline/typespec-author-preeval.yml
+
+      - script: |
+          patterns=()
+          set -f
+          for tok in $EVAL_ARGS; do
+            [ "$tok" = "-e" ] && continue
+            patterns+=(--pattern "$tok")
+          done
+          set +f
+          node --experimental-strip-types "$(Build.SourcesDirectory)/eng/common/scripts/eval/init-eval-git-fixtures.ts" \
+            --eval-root "$(Build.SourcesDirectory)/${{ parameters.vallyRoot }}" \
+            "${patterns[@]}"
+        displayName: "Prime eval git fixtures"
+        env:
+          EVAL_ARGS: $(evalArgs)
+
+      # TypeSpec gates the completed results with pass@k semantics.
+      - ${{ if eq(parameters.mcpEnvironment, 'live') }}:
+          - task: AzureCLI@2
+            displayName: "vally eval $(shardName) (authenticated)"
+            inputs:
+              azureSubscription: ${{ parameters.azureSubscription }}
+              scriptType: bash
+              scriptLocation: inlineScript
+              workingDirectory: ${{ parameters.vallyRoot }}
+              inlineScript: |
+                node --experimental-strip-types "$(Build.SourcesDirectory)/.github/skills/azure-typespec-author/evaluate/pipeline/typespec-author-invoke-shard.ts" \
+                  --eval-args "$(evalArgs)" \
+                  --shard-name "$(shardName)" \
+                  --output-dir "$(Build.SourcesDirectory)/artifacts/vally-results/$(shardName)" \
+                  --extra-args "$(TypeSpecAuthorEvalExtraArgs)" \
+                  --runs ${{ parameters.runs }}
+            env:
+              GITHUB_TOKEN: $(azuresdk-copilot-github-pat)
+              AZSDK_EVAL_MCP_KIND: live
+
+      - ${{ else }}:
+          - script: |
+              node --experimental-strip-types "$(Build.SourcesDirectory)/.github/skills/azure-typespec-author/evaluate/pipeline/typespec-author-invoke-shard.ts" \
+                --eval-args "$(evalArgs)" \
+                --shard-name "$(shardName)" \
+                --output-dir "$(Build.SourcesDirectory)/artifacts/vally-results/$(shardName)" \
+                --extra-args "$(TypeSpecAuthorEvalExtraArgs)" \
+                --runs ${{ parameters.runs }}
+            displayName: "vally eval $(shardName)"
+            workingDirectory: ${{ parameters.vallyRoot }}
+            env:
+              GITHUB_TOKEN: $(azuresdk-copilot-github-pat)
+              ${{ if ne(parameters.mcpEnvironment, 'none') }}:
+                AZSDK_EVAL_MCP_KIND: ${{ parameters.mcpEnvironment }}
+
+      - ${{ if parameters.postEvalTemplate }}:
+          - template: ${{ parameters.postEvalTemplate }}
+
+      - script: |
+          src="$(Build.SourcesDirectory)/artifacts/vally-results/$(shardName)"
+          dest="$(Build.ArtifactStagingDirectory)/results"
+          mkdir -p "$dest" "$(Build.ArtifactStagingDirectory)/debug"
+          if [ -d "$src" ]; then
+            cd "$src"
+            find . -type f \( \
+              -name '*.junit.xml' -o \
+              -name 'results.jsonl' -o \
+              -name 'eval-results.md' \
+            \) -exec cp --parents {} "$dest" \;
+          fi
+        # Preserve relative paths: multiple evals in one shard can emit files
+        # with the same name, and Summary needs each results.jsonl separately.
+        displayName: "Collect $(shardName) eval results"
+        condition: always()
+
+      - script: |
+          src="$(Build.SourcesDirectory)/artifacts/vally-results/$(shardName)"
+          dest="$(Build.ArtifactStagingDirectory)/debug"
+          mkdir -p "$dest"
+          if [ -d "$src" ]; then
+            cd "$src"
+            find . -type f ! -name '*.junit.xml' ! -name '*.tmp' -exec cp --parents {} "$dest" \;
+          fi
+        displayName: "Collect $(shardName) transcripts (on failure)"
+        condition: failed()

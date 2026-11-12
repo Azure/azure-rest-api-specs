@@ -752,3 +752,5 @@ using Microsoft.AzureStackHCI;
 
 // Java
 @@clientName(Update, "HciUpdate", "java");
+
+@@clientName(NatGateways, "NATGateways", "go");

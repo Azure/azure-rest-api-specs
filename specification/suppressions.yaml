@@ -2,6 +2,13 @@
 # Remove suppressions as specs are fixed
 
 - tool: TypeSpecValidation
+  rules: [DisallowedFileTypes]
+  reason: Existing voice-event emitter and its regression test, pending relocation outside the service folder
+  paths:
+    - ai-foundry/data-plane/Foundry/emitters/voice-event-reference.mjs
+    - ai-foundry/data-plane/Foundry/emitters/voice-event-reference.test.mjs
+
+- tool: TypeSpecValidation
   rules: [FolderStructure]
   sub-rules: [MustUseV2]
   reason: Specs added as folder structure v1, not yet converted to v2
@@ -10,18 +17,12 @@
     - applink/AppLink.Management
     - awsconnector/**
     - computebulkactions/ComputeBulkActions.Management
-    - discovery/Discovery.Bookshelf.Management
-    - discovery/Discovery.Management.Shared
-    - discovery/Discovery.Supercomputer.Management
-    - discovery/Discovery.Workspace.Management
-    - machinelearningservices/AzureAI.Assets
     - managedoperations/ManagedOps.Management
     - manufacturingplatform/Manufacturingplatform.Management
     - orbital/Microsoft.PlanetaryComputer
     - orbitalplanetarycomputer/Orbital.Management
     - playwrighttesting/PlaywrightTesting.AuthManager
     - playwrighttesting/PlaywrightTesting.Management
-    - playwrighttesting/PlaywrightTesting.Shared
     - programmableconnectivity/Azure.ProgrammableConnectivity
     - programmableconnectivity/ProgrammableConnectivity.Management
     - purviewdatagovernace/Azure.Analaytics.Purview.DataQuality

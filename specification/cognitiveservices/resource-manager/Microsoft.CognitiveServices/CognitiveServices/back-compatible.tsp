@@ -80,7 +80,13 @@ using Microsoft.CognitiveServices;
   "encryptionScope"
 );
 
+@@clientName(
+  RaiPolicies.createOrUpdateLegacy::parameters.resource,
+  "raiPolicy"
+);
 @@clientName(RaiPolicies.createOrUpdate::parameters.resource, "raiPolicy");
+@@clientName(RaiRegos.createOrUpdate::parameters.resource, "raiRego");
+@@clientName(RaiBindings.createOrUpdate::parameters.resource, "raiBinding");
 @@clientName(
   SubscriptionRaiPolicy.createOrUpdate::parameters.resource,
   "raiPolicy"

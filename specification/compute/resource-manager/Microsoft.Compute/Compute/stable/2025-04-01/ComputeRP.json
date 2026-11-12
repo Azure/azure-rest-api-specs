@@ -13111,7 +13111,7 @@
         },
         "sharingProfile": {
           "$ref": "#/definitions/ResourceSharingProfile",
-          "description": "Specifies the settings to enable sharing across subscriptions for the capacity reservation group resource. The capacity reservation group resource can generally be shared across subscriptions belonging to a single Azure AAD tenant or across AAD tenants if there is a trust relationship established between the tenants.  Block capacity reservation does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details."
+          "description": "Specifies the settings to enable sharing across subscriptions for the capacity reservation group resource. The capacity reservation group resource can be shared only across subscriptions belonging to the same Microsoft Entra ID tenant. Sharing across tenants is not supported. Block capacity reservation does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details."
         },
         "reservationType": {
           "$ref": "#/definitions/ReservationType",
@@ -16103,7 +16103,7 @@
       "properties": {
         "zonePlacementPolicy": {
           "$ref": "#/definitions/ZonePlacementPolicyType",
-          "description": "Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation."
+          "description": "Specifies the policy for the resource's placement in an availability zone. Use **Auto** for Virtual Machines and Virtual Machine Scale Sets to let the system automatically select an availability zone during resource creation. **Any** remains supported for Virtual Machines for backward compatibility."
         },
         "includeZones": {
           "type": "array",
@@ -16873,7 +16873,7 @@
         },
         "statuses": {
           "type": "array",
-          "description": "The resource status information.",
+          "description": "The aggregate status information for the restore point. The list may include separate aggregate entries for replication and, in supported API versions, Instant Access, as applicable. For more information about Instant Access, see [Use virtual machine restore points](https://learn.microsoft.com/azure/virtual-machines/virtual-machines-create-restore-points#instant-access).",
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
@@ -18041,7 +18041,7 @@
         },
         "alignRegionalDisksToVMZone": {
           "type": "boolean",
-          "description": "Specifies whether the regional disks should be aligned/moved to the VM zone. This is applicable only for VMs with placement property set. Please note that this change is irreversible. Minimum api-version: 2024-11-01."
+          "description": "Specifies whether the regional disks should be aligned/moved to the VM zone. This is applicable **only** for VMs with placement.zonePlacementPolicy set to **Any**. Please note that this change is irreversible. Minimum api-version: 2024-11-01."
         }
       }
     },
@@ -23505,7 +23505,7 @@
     },
     "ZonePlacementPolicyType": {
       "type": "string",
-      "description": "Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.",
+      "description": "Specifies the policy for the resource's placement in an availability zone. Use **Auto** for Virtual Machines and Virtual Machine Scale Sets to let the system automatically select an availability zone during resource creation. **Any** remains supported for Virtual Machines for backward compatibility.",
       "enum": [
         "Any",
         "Auto"
@@ -23521,7 +23521,7 @@
           {
             "name": "Auto",
             "value": "Auto",
-            "description": "Automatic zone placement in a Virtual Machine Scale Set."
+            "description": "Automatic zone placement for Virtual Machines and Virtual Machine Scale Sets."
           }
         ]
       }

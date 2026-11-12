@@ -217,9 +217,9 @@ op regenerateKeyCustom(
   "csharp"
 );
 @@clientName(AssignedIdentity, "CognitiveServicesAssignedIdentity", "csharp");
-@@clientName(
+@@alternateType(
   UserAssignedIdentity,
-  "CognitiveServicesUserAssignedIdentity",
+  Azure.ResourceManager.CommonTypes.UserAssignedIdentity,
   "csharp"
 );
 @@clientName(AgentDeployment, "CognitiveServicesAgentDeployment", "csharp");
@@ -643,6 +643,11 @@ op regenerateKeyCustom(
 @@clientName(
   Microsoft.CognitiveServices.Usage,
   "ServiceAccountUsage",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.CognitiveServices.Usage.type,
+  armResourceType,
   "csharp"
 );
 @@clientName(UserOwnedStorage, "ServiceAccountUserOwnedStorage", "csharp");
@@ -1108,10 +1113,19 @@ op regenerateKeyCustom(
   "EvaluateDeploymentPoliciesResult",
   "csharp"
 );
-@@clientName(Identity, "CognitiveServicesComputeIdentity", "csharp");
 @@clientName(
+  AdapterDeploymentLastOperation,
+  "CognitiveServicesAdapterDeploymentLastOperationInfo",
+  "csharp"
+);
+@@clientName(RaiAcsRegoPolicyDefinition, "RaiAcsRegoPolicy", "csharp");
+@@clientName(RaiAcsToolDefinition, "RaiAcsTool", "csharp");
+@@clientName(Identity, "CognitiveServicesComputeIdentity", "csharp");
+@@alternateType(Identity.tenantId, uuid, "csharp");
+@@alternateType(Identity.principalId, uuid, "csharp");
+@@alternateType(
   ResourceIdentityType,
-  "CognitiveServicesComputeIdentityType",
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType,
   "csharp"
 );
 @@clientName(Pool, "CognitiveServicesComputePool", "csharp");
@@ -1256,5 +1270,36 @@ op regenerateKeyCustom(
 @@clientName(
   ComputeProvisioningState,
   "CognitiveServicesComputeProvisioningState",
+  "csharp"
+);
+@@clientName(CostControl, "CognitiveServicesAccountCostControl", "csharp");
+@@alternateType(CostControl.etag, eTag, "csharp");
+@@alternateType(AdapterDeployment.etag, eTag, "csharp");
+@@alternateType(RaiBinding.etag, eTag, "csharp");
+@@alternateType(RaiRego.etag, eTag, "csharp");
+@@alternateType(
+  ClusterComputeProperties.subnetArmId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ManagedComputeDeploymentInfo.deploymentId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ManagedComputeDeploymentInfo.projectId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(
+  CapabilitySettings,
+  "CognitiveServicesAgentCapabilitySettings",
+  "csharp"
+);
+@@clientName(ConnectionCategory.OpenAPI, "OpenApi", "csharp");
+@@clientName(
+  RaiPolicyCustomExternalSafetyProviderReference.blocking,
+  "IsBlocking",
   "csharp"
 );

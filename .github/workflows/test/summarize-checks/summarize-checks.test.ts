@@ -1,5 +1,6 @@
 import { Octokit } from "@octokit/rest";
 import { strToU8, zipSync } from "fflate";
+import { marked, type Tokens } from "marked";
 import { describe, expect, it } from "vitest";
 import { execFile } from "../../../shared/src/exec.ts";
 import type { GitHub } from "../../src/github.ts";
@@ -9,14 +10,221 @@ import {
   getCheckRunTuple,
   getExistingLabels,
   getImpactAssessment,
+  summarizeChecksImpl,
   updateLabels,
 } from "../../src/summarize-checks/summarize-checks.ts";
+import summarizeChecks from "../../src/summarize-checks/summarize-checks.ts";
 import { createMockCore, createMockGithub } from "../mocks.ts";
+import { fullGitSha } from "../../../shared/test/examples.ts";
+import { ImpactAssessmentSchema } from "../../src/summarize-checks/labelling.ts";
 
 export type CheckRunData = import("../../src/summarize-checks/summarize-checks.ts").CheckRunData;
 
 const mockCore = createMockCore();
 const WORKFLOW_URL = "http://github.com/a/fake/workflowrun/url";
+
+describe("ARM review label handoff", () => {
+  describe("Summarize Checks integration", () => {
+    function createSummary(existingLabels: string[] = ["ARMReview"]) {
+      const github = createMockGithub();
+      const core = createMockCore();
+      github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+        data: existingLabels.map((name) => ({ name })),
+      });
+      github.rest.pulls.get.mockResolvedValue({
+        data: {
+          head: { sha: fullGitSha },
+          base: { ref: "main" },
+          draft: false,
+          labels: existingLabels.map((name) => ({ name })),
+        },
+      });
+      github.rest.issues.createComment.mockResolvedValue({ data: { id: 1 } });
+      github.rest.checks.listForRef.mockResolvedValue({
+        data: {
+          check_runs: [
+            {
+              name: "Summarize PR Impact",
+              status: "completed",
+              conclusion: "success",
+              check_suite: { id: 1 },
+            },
+          ],
+        },
+      });
+      github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
+        data: { workflow_runs: [{ id: 1, updated_at: "2026-01-01" }] },
+      });
+      github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+        data: { artifacts: [{ id: 1, name: "summary.json", size_in_bytes: 1024 }] },
+      });
+      github.rest.actions.downloadArtifact.mockImplementation(() =>
+        Promise.resolve({
+          data: new Response(
+            JSON.stringify({
+              resourceManagerRequired: true,
+              dataPlaneRequired: false,
+              suppressionReviewRequired: false,
+              isNewApiVersion: false,
+              rpaasRpNotInPrivateRepo: false,
+              rpaasChange: false,
+              newRP: false,
+              rpaasRPMissing: false,
+              typeSpecChanged: true,
+              isDraft: false,
+              targetBranch: "main",
+            }),
+          ).body,
+        }),
+      );
+
+      return {
+        github,
+        core,
+        run: () =>
+          summarizeChecksImpl(
+            github,
+            core,
+            "Azure",
+            "azure-rest-api-specs",
+            123,
+            fullGitSha,
+            "workflow_run",
+            WORKFLOW_URL,
+          ),
+      };
+    }
+
+    it("adds the queue label and signals readiness only after completing evaluation", async () => {
+      const { github, core, run } = createSummary();
+
+      await run();
+
+      expect(github.rest.issues.addLabels.mock.calls[0][0]).toHaveProperty(
+        "labels",
+        expect.arrayContaining(["WaitForARMFeedback"]),
+      );
+      expect(core.setOutput).toHaveBeenCalledWith("arm_review_ready", true);
+      expect(github.rest.repos.createCommitStatus.mock.invocationCallOrder[0]).toBeLessThan(
+        core.setOutput.mock.invocationCallOrder.at(-1) ?? 0,
+      );
+    });
+
+    it("allows the dispatch job to recover an already-present queue label", async () => {
+      const { core, run } = createSummary(["ARMReview", "WaitForARMFeedback"]);
+
+      await run();
+
+      expect(core.setOutput).toHaveBeenCalledWith("arm_review_ready", true);
+    });
+
+    it("preserves the initial-request marker during label reconciliation", async () => {
+      const { github, run } = createSummary([
+        "ARMReview",
+        "WaitForARMFeedback",
+        "ARMInitialReviewRequested",
+      ]);
+
+      await run();
+
+      expect(github.rest.issues.removeLabel).not.toHaveBeenCalledWith(
+        expect.objectContaining({ name: "ARMInitialReviewRequested" }),
+      );
+    });
+
+    it("does not signal readiness when adding the queue label fails", async () => {
+      const { github, core, run } = createSummary();
+      github.rest.issues.addLabels.mockRejectedValue(new Error("Label write failed"));
+
+      await expect(run()).rejects.toThrow("Label write failed");
+      expect(core.setOutput).not.toHaveBeenCalledWith("arm_review_ready", true);
+    });
+
+    it("uses live PR state instead of the draft and branch snapshot in a legacy artifact", async () => {
+      const { github, core, run } = createSummary();
+      github.rest.pulls.get.mockResolvedValue({
+        data: {
+          head: { sha: fullGitSha },
+          base: { ref: "feature/example" },
+          draft: true,
+          labels: [{ name: "ARMReview" }],
+        },
+      });
+
+      await run();
+
+      expect(github.rest.issues.addLabels.mock.calls[0]?.[0]).not.toHaveProperty(
+        "labels",
+        expect.arrayContaining(["WaitForARMFeedback"]),
+      );
+      expect(core.setOutput).toHaveBeenCalledWith("arm_review_ready", false);
+      expect(github.rest.repos.getBranchRules).toHaveBeenCalledWith(
+        expect.objectContaining({ branch: "feature/example" }),
+      );
+      expect(github.rest.pulls.get).toHaveBeenCalledTimes(1);
+      expect(github.rest.issues.listLabelsOnIssue).not.toHaveBeenCalled();
+    });
+
+    it("does not apply an old head's impact to the current PR", async () => {
+      const { github, run } = createSummary();
+      github.rest.pulls.get.mockResolvedValue({ data: { head: { sha: "different-head" } } });
+
+      await run();
+
+      expect(github.rest.actions.downloadArtifact).not.toHaveBeenCalled();
+      expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+      expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("workflow_dispatch from Update Labels", () => {
+    function dispatchContext(inputs: Record<string, string>) {
+      return {
+        eventName: "workflow_dispatch",
+        runId: 1,
+        repo: { owner: "Azure", repo: "azure-rest-api-specs" },
+        payload: {
+          inputs,
+          repository: { owner: { login: "Azure" }, name: "azure-rest-api-specs" },
+        },
+      } as unknown as Parameters<typeof summarizeChecks>[0]["context"];
+    }
+
+    it("evaluates the PR and head identified by the inputs", async () => {
+      const github = createMockGithub();
+      const core = createMockCore();
+      github.rest.issues.listLabelsOnIssue.mockResolvedValue({ data: [] });
+      github.rest.pulls.get.mockResolvedValue({
+        data: { head: { sha: fullGitSha }, base: { ref: "main" }, draft: false, labels: [] },
+      });
+      github.rest.checks.listForRef.mockResolvedValue({ data: { check_runs: [] } });
+      github.rest.issues.createComment.mockResolvedValue({ data: { id: 1 } });
+
+      await summarizeChecks({
+        github,
+        core,
+        context: dispatchContext({ pr_number: "123", head_sha: fullGitSha }),
+      });
+
+      expect(core.setOutput).toHaveBeenCalledWith("issue_number", 123);
+      expect(core.setOutput).toHaveBeenCalledWith("head_sha", fullGitSha);
+    });
+
+    it("rejects malformed inputs", async () => {
+      const github = createMockGithub();
+      const core = createMockCore();
+
+      await expect(
+        summarizeChecks({
+          github,
+          core,
+          context: dispatchContext({ pr_number: "abc", head_sha: "short" }),
+        }),
+      ).rejects.toThrow("positive PR number and full head SHA");
+      expect(github.rest.pulls.get).not.toHaveBeenCalled();
+    });
+  });
+});
 
 /**
  * Find and extract the "Next Steps to Merge" existing comment on a PR.
@@ -32,7 +240,7 @@ async function getNextStepsComment(github: GitHub, owner: string, repo: string, 
 
     // Find comment containing "Next Steps to Merge"
     const nextStepsComment = comments.find((comment) =>
-      comment.body?.includes("<h2>Next Steps to Merge</h2>"),
+      comment.body?.includes(`## Next Steps to Merge`),
     );
 
     return nextStepsComment ? nextStepsComment.body : null;
@@ -87,12 +295,15 @@ describe("Summarize Checks Integration Tests", () => {
           owner,
           repo,
           head_sha,
-          issue_number,
+          pr.base.ref,
           [],
         );
 
         let adjustedStartLabels = expectedLabels.filter((x) => ignorableLabels.includes(x));
-        const labelContext = updateLabels(adjustedStartLabels, impactAssessment);
+        const labelContext = updateLabels(adjustedStartLabels, impactAssessment, {
+          isDraft: pr.draft ?? false,
+          targetBranch: pr.base.ref,
+        });
 
         adjustedStartLabels = adjustedStartLabels.filter(
           (name) => !labelContext.toRemove.has(name),
@@ -125,1139 +336,514 @@ describe("Summarize Checks Integration Tests", () => {
 });
 
 describe("Summarize Checks Unit Tests", () => {
+  it("preserves the latest provider URLs and keeps legacy pending statuses ambiguous", async () => {
+    const github = createMockGithub();
+    const core = createMockCore();
+    github.rest.checks.listForRef.mockResolvedValue({
+      data: {
+        check_runs: [
+          {
+            name: "Swagger LintDiff",
+            status: "completed",
+            conclusion: "failure",
+            completed_at: "2026-01-01T00:00:00Z",
+            details_url: "https://checks.example/old",
+          },
+          {
+            name: "Swagger LintDiff",
+            status: "in_progress",
+            conclusion: null,
+            started_at: "2026-01-02T00:00:00Z",
+            details_url: "https://checks.example/current",
+            html_url: "https://github.com/owner/repo/runs/2",
+          },
+          {
+            name: "Swagger BreakingChange",
+            status: "completed",
+            conclusion: "success",
+            details_url: "",
+            html_url: "https://github.com/owner/repo/runs/3",
+          },
+        ],
+      },
+    });
+    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
+      data: [
+        {
+          context: "SDK Validation Status",
+          state: "pending",
+          target_url: "https://dev.azure.com/owner/project/_build/results?buildId=9",
+          updated_at: "2026-01-02T00:00:00Z",
+        },
+      ],
+    });
+
+    const [, checks] = await getCheckRunTuple(
+      github,
+      core,
+      "owner",
+      "repo",
+      fullGitSha,
+      "main",
+      [],
+    );
+
+    expect(checks.map(({ name, status, url }) => ({ name, status, url }))).toEqual([
+      { name: "Swagger LintDiff", status: "in_progress", url: "https://checks.example/current" },
+      {
+        name: "Swagger BreakingChange",
+        status: "completed",
+        url: "https://github.com/owner/repo/runs/3",
+      },
+      {
+        name: "SDK Validation Status",
+        status: "pending",
+        url: "https://dev.azure.com/owner/project/_build/results?buildId=9",
+      },
+    ]);
+    const legacy = checks.filter((check) => check.name === "SDK Validation Status");
+    const [comment, result] = createNextStepsComment(
+      core,
+      "repo",
+      [],
+      "main",
+      legacy,
+      [],
+      true,
+      WORKFLOW_URL,
+    );
+    expect(comment).toContain("Wait for this required check's result.");
+    expect(comment).not.toContain("/running.svg");
+    expect(result.result).toBe("pending");
+  });
+
   describe("check result processing", () => {
-    it("should generate success summary for no matched check suites (completed impactAssessment)", () => {
-      const repo = "azure-rest-api-specs";
-      const targetBranch = "main";
+    function run(
+      name: string,
+      status = "completed",
+      conclusion: string | null = "success",
+      url?: string,
+    ): CheckRunData {
+      return { name, status, conclusion, checkInfo: getCheckInfo(name), ...(url ? { url } : {}) };
+    }
 
-      const labelNames: string[] = [];
-
-      const fyiCheckRuns: CheckRunData[] = [];
-
-      const requiredCheckRuns: CheckRunData[] = [];
-      const expectedOutput = [
-        '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br /><br />Comment generated by <a href="http://github.com/a/fake/workflowrun/url">summarize-checks</a> workflow run.',
-        {
-          name: "Automated merging requirements met",
-          result: "SUCCESS",
-          summary: `✅ All automated merging requirements have been met.<br/>To merge this PR, refer to <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).`,
-        },
-      ];
-
-      const output = createNextStepsComment(
+    function summarize({
+      labels = [],
+      required = [],
+      fyi = [],
+      assessmentCompleted = true,
+      repo = "azure-rest-api-specs",
+      targetBranch = "main",
+      sdkSummary = "",
+    }: {
+      labels?: string[];
+      required?: CheckRunData[];
+      fyi?: CheckRunData[];
+      assessmentCompleted?: boolean;
+      repo?: string;
+      targetBranch?: string;
+      sdkSummary?: string;
+    } = {}) {
+      return createNextStepsComment(
         mockCore,
         repo,
-        labelNames,
+        labels,
         targetBranch,
-        requiredCheckRuns,
-        fyiCheckRuns,
-        true, // assessmentCompleted
+        required,
+        fyi,
+        assessmentCompleted,
         WORKFLOW_URL,
+        sdkSummary,
       );
+    }
 
-      expect(output).toEqual(expectedOutput);
-    });
-
-    it("should generate success summary for all completed check suites", () => {
-      const repo = "azure-rest-api-specs";
-      const targetBranch = "main";
-
-      const labelNames: string[] = [];
-
-      const fyiCheckRuns: CheckRunData[] = [];
-      const expectedOutput = [
-        '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br /><br />Comment generated by <a href="http://github.com/a/fake/workflowrun/url">summarize-checks</a> workflow run.',
-        {
-          name: "Automated merging requirements met",
-          result: "SUCCESS",
-          summary: `✅ All automated merging requirements have been met.<br/>To merge this PR, refer to <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).`,
-        },
-      ];
-
-      const requiredCheckRuns = [
-        {
-          name: "SpellCheck",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("SpellCheck"),
-        },
-        {
-          name: "TypeSpec Requirement",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("TypeSpec Requirement"),
-        },
-        {
-          name: "Protected Files",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Protected Files"),
-        },
-        {
-          name: "TypeSpec Validation",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("TypeSpec Validation"),
-        },
-        {
-          name: "Swagger BreakingChange",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger BreakingChange"),
-        },
-        {
-          name: "Breaking Change(Cross-Version)",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Breaking Change(Cross-Version)"),
-        },
-        {
-          name: "Swagger Avocado",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger Avocado"),
-        },
-        {
-          name: "Swagger ModelValidation",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger ModelValidation"),
-        },
-        {
-          name: "Swagger SemanticValidation",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger SemanticValidation"),
-        },
-        {
-          name: "Swagger Lint(RPaaS)",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger Lint(RPaaS)"),
-        },
-        {
-          name: "Automated merging requirements met",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Automated merging requirements met"),
-        },
-        {
-          name: "license/cla",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("license/cla"),
-        },
-        {
-          name: "Swagger PrettierCheck",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger PrettierCheck"),
-        },
-      ];
-
-      const output = createNextStepsComment(
-        mockCore,
-        repo,
-        labelNames,
-        targetBranch,
-        requiredCheckRuns,
-        fyiCheckRuns,
-        true, // assessmentCompleted
-        WORKFLOW_URL,
+    function rows(comment: string) {
+      const token = marked
+        .lexer(comment)
+        .find((token): token is Tokens.Table => token.type === "table");
+      expect(token).toBeDefined();
+      return token?.rows.map((row) =>
+        row.map((cell, index) =>
+          index === 1 ? cell.text.replace(/<\/?picture>|<img\b[^>]*>/g, "").trim() : cell.text,
+        ),
       );
+    }
 
-      expect(output).toEqual(expectedOutput);
-    });
-
-    it("should generate success summary with completed required checks but in-progress FYI", () => {
-      const repo = "azure-rest-api-specs";
-      const targetBranch = "main";
-
-      const labelNames: string[] = [];
-      const expectedOutput = [
-        '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br /><br />Comment generated by <a href="http://github.com/a/fake/workflowrun/url">summarize-checks</a> workflow run.',
-        {
-          name: "Automated merging requirements met",
-          result: "SUCCESS",
-          summary: `✅ All automated merging requirements have been met.<br/>To merge this PR, refer to <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).`,
-        },
-      ];
-
-      const requiredCheckRuns = [
-        {
-          name: "SpellCheck",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("SpellCheck"),
-        },
-        {
-          name: "TypeSpec Requirement",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("TypeSpec Requirement"),
-        },
-      ];
-
-      const fyiCheckRuns = [
-        {
-          name: "Swagger Avocado",
-          status: "QUEUED",
-          conclusion: null,
-          checkInfo: {
-            precedence: 1,
-            name: "Swagger Avocado",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
-        },
-        {
-          name: "license/cla",
-          status: "IN_PROGRESS",
-          conclusion: null,
-          checkInfo: {
-            precedence: 0,
-            name: "license/cla",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
-        },
-      ];
-
-      const output = createNextStepsComment(
-        mockCore,
-        repo,
-        labelNames,
-        targetBranch,
-        requiredCheckRuns,
-        fyiCheckRuns,
-        true, // assessmentCompleted
-        WORKFLOW_URL,
-      );
-
-      expect(output).toEqual(expectedOutput);
-    });
-
-    // this case should NEVER occur in practice, due to Summarize PR Impact being made a "required" check, but in cases
-    // where the user is targeting a branch that is not the main branch, we may have no required checks
-    // but still have FYI checks in progress. This is a regression test to ensure we handle this case correctly.
-    it("should generate success summary with 0 required checks but in-progress FYI", () => {
-      const repo = "azure-rest-api-specs";
-      const targetBranch = "main";
-
-      const labelNames: string[] = [];
-      const expectedOutput = [
-        '<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br /><br />Comment generated by <a href="http://github.com/a/fake/workflowrun/url">summarize-checks</a> workflow run.',
-        {
-          name: "Automated merging requirements met",
-          result: "SUCCESS",
-          summary: `✅ All automated merging requirements have been met.<br/>To merge this PR, refer to <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).`,
-        },
-      ];
-
-      const requiredCheckRuns: CheckRunData[] = [];
-
-      const fyiCheckRuns = [
-        {
-          name: "Swagger Avocado",
-          status: "QUEUED",
-          conclusion: null,
-          checkInfo: {
-            precedence: 1,
-            name: "Swagger Avocado",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
-        },
-        {
-          name: "license/cla",
-          status: "IN_PROGRESS",
-          conclusion: null,
-          checkInfo: {
-            precedence: 0,
-            name: "license/cla",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
-        },
-      ];
-
-      const output = createNextStepsComment(
-        mockCore,
-        repo,
-        labelNames,
-        targetBranch,
-        requiredCheckRuns,
-        fyiCheckRuns,
-        true, // assessmentCompleted
-        WORKFLOW_URL,
-      );
-
-      expect(output).toEqual(expectedOutput);
-    });
-
-    it("should generate success with warning for error FYI", () => {
-      const repo = "azure-rest-api-specs";
-      const targetBranch = "main";
-
-      const labelNames: string[] = [];
-      const expectedOutput = [
-        `<h2>Next Steps to Merge</h2>Important checks have failed. As of today they are not blocking this PR, but in near future they may.<br/>Addressing the following failures is highly recommended:<br/><ul><li>⚠️ The check named <code>license/cla</code> has failed. Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href="https://aka.ms/ci-fix">aka.ms/ci-fix</a> guide</li></ul>If you still want to proceed merging this PR without addressing the above failures, refer to step 4 in the <a href="https://aka.ms/azsdk/pr-diagram">PR workflow diagram</a>.<br /><br />Comment generated by <a href="http://github.com/a/fake/workflowrun/url">summarize-checks</a> workflow run.`,
-        {
-          name: "Automated merging requirements met",
-          result: "SUCCESS",
-          summary: `⚠️ Some important automated merging requirements have failed. As of today you can still merge this PR, but soon these requirements will be blocking.<br/>See <code>Next Steps to merge</code> comment on this PR for details on how to address them.<br/>If you want to proceed with merging this PR without fixing them, refer to <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.`,
-        },
-      ];
-      const requiredCheckRuns = [
-        {
-          name: "SpellCheck",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("SpellCheck"),
-        },
-      ];
-
-      const fyiCheckRuns = [
-        {
-          name: "license/cla",
-          status: "COMPLETED",
-          conclusion: "FAILURE",
-          checkInfo: getCheckInfo("license/cla"),
-        },
-      ];
-
-      const output = createNextStepsComment(
-        mockCore,
-        repo,
-        labelNames,
-        targetBranch,
-        requiredCheckRuns,
-        fyiCheckRuns,
-        true, // assessmentCompleted
-        WORKFLOW_URL,
-      );
-
-      expect(output).toEqual(expectedOutput);
-    });
-
-    it("should generate success summary when CI-NewRPNamespaceWithoutRPaaS is present, and RPaaSException is as well.", () => {
-      const repo = "azure-rest-api-specs";
-      const targetBranch = "main";
-      const labelNames = ["CI-NewRPNamespaceWithoutRPaaS", "RPaaSException"];
-
-      const fyiCheckRuns: CheckRunData[] = [];
-      const expectedCommentBody = `<h2>Next Steps to Merge</h2>✅ All automated merging requirements have been met! To get your PR merged, see <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br /><br />Comment generated by <a href="target_url">summarize-checks</a> workflow run.`;
-      const expectedCheckOutput = {
-        name: "Automated merging requirements met",
+    it.each([
+      { description: "no required checks", result: "SUCCESS" },
+      {
+        description: "completed required checks",
+        required: [run("TypeSpec Validation")],
         result: "SUCCESS",
-        summary: `✅ All automated merging requirements have been met.<br/>To merge this PR, refer to <a href="https://aka.ms/azsdk/specreview/merge">aka.ms/azsdk/specreview/merge</a>.<br/>For help, consult comments on this PR and see [aka.ms/azsdk/pr-getting-help](https://aka.ms/azsdk/pr-getting-help).`,
-      };
-
-      const requiredCheckRuns = [
-        {
-          name: "SpellCheck",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("SpellCheck"),
-        },
-      ];
-
-      const [commentBody, automatedCheckOutput] = createNextStepsComment(
-        mockCore,
-        repo,
-        labelNames,
-        targetBranch,
-        requiredCheckRuns,
-        fyiCheckRuns,
-        true, // assessmentCompleted
-        "target_url",
-      );
-
-      expect(commentBody).toEqual(expectedCommentBody);
-      expect(automatedCheckOutput).toEqual(expectedCheckOutput);
-    });
-
-    it("should generate pending summary when checks are partially in progress", () => {
-      const repo = "azure-rest-api-specs";
-      const targetBranch = "main";
-
-      const labelNames: string[] = [];
-
-      const fyiCheckRuns: CheckRunData[] = [];
-      const expectedOutput = [
-        `<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛<br /><br />Comment generated by <a href="http://github.com/a/fake/workflowrun/url">summarize-checks</a> workflow run.`,
-        {
-          name: "Automated merging requirements met",
-          result: "pending",
-          summary: "The requirements for merging this PR are still being evaluated. Please wait.",
-        },
-      ];
-
-      const requiredCheckRuns = [
-        {
-          name: "TypeSpec Validation",
-          status: "IN_PROGRESS",
-          conclusion: null,
-          checkInfo: getCheckInfo("TypeSpec Validation"),
-        },
-        {
-          name: "Swagger Avocado",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger Avocado"),
-        },
-        {
-          name: "license/cla",
-          status: "IN_PROGRESS",
-          conclusion: null,
-          checkInfo: getCheckInfo("license/cla"),
-        },
-      ];
-
-      const output = createNextStepsComment(
-        mockCore,
-        repo,
-        labelNames,
-        targetBranch,
-        requiredCheckRuns,
-        fyiCheckRuns,
-        true, // assessmentCompleted
-        WORKFLOW_URL,
-      );
-
-      expect(output).toEqual(expectedOutput);
-    });
-
-    it("should generate pending summary when checks are in progress", () => {
-      const repo = "azure-rest-api-specs";
-      const targetBranch = "main";
-
-      const labelNames: string[] = [];
-
-      const fyiCheckRuns: CheckRunData[] = [];
-      const expectedOutput = [
-        `<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛<br /><br />Comment generated by <a href="http://github.com/a/fake/workflowrun/url">summarize-checks</a> workflow run.`,
-        {
-          name: "Automated merging requirements met",
-          result: "pending",
-          summary: "The requirements for merging this PR are still being evaluated. Please wait.",
-        },
-      ];
-
-      const requiredCheckRuns = [
-        {
-          name: "TypeSpec Validation",
-          status: "IN_PROGRESS",
-          conclusion: null,
-          checkInfo: getCheckInfo("TypeSpec Validation"),
-        },
-        {
-          name: "Swagger Avocado",
-          status: "QUEUED",
-          conclusion: null,
-          checkInfo: getCheckInfo("Swagger Avocado"),
-        },
-        {
-          name: "license/cla",
-          status: "IN_PROGRESS",
-          conclusion: null,
-          checkInfo: getCheckInfo("license/cla"),
-        },
-      ];
-
-      const output = createNextStepsComment(
-        mockCore,
-        repo,
-        labelNames,
-        targetBranch,
-        requiredCheckRuns,
-        fyiCheckRuns,
-        true, // assessmentCompleted
-        WORKFLOW_URL,
-      );
-
-      expect(output).toEqual(expectedOutput);
-    });
-
-    it("should generate pending summary when impact assessment is not completed", () => {
-      const repo = "azure-rest-api-specs";
-      const targetBranch = "main";
-
-      const labelNames: string[] = [];
-
-      const fyiCheckRuns: CheckRunData[] = [];
-      const expectedOutput = [
-        `<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛<br /><br />Comment generated by <a href="${WORKFLOW_URL}">summarize-checks</a> workflow run.`,
-        {
-          name: "Automated merging requirements met",
-          result: "pending",
-          summary: "The requirements for merging this PR are still being evaluated. Please wait.",
-        },
-      ];
-
-      const requiredCheckRuns = [
-        {
-          name: "SpellCheck",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("SpellCheck"),
-        },
-        {
-          name: "TypeSpec Requirement",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("TypeSpec Requirement"),
-        },
-        {
-          name: "Protected Files",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Protected Files"),
-        },
-        {
-          name: "TypeSpec Validation",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("TypeSpec Validation"),
-        },
-        {
-          name: "Swagger BreakingChange",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger BreakingChange"),
-        },
-        {
-          name: "Breaking Change(Cross-Version)",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Breaking Change(Cross-Version)"),
-        },
-        {
-          name: "Swagger Avocado",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger Avocado"),
-        },
-        {
-          name: "Swagger ModelValidation",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger ModelValidation"),
-        },
-        {
-          name: "Swagger SemanticValidation",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger SemanticValidation"),
-        },
-        {
-          name: "Swagger Lint(RPaaS)",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger Lint(RPaaS)"),
-        },
-        {
-          name: "Automated merging requirements met",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Automated merging requirements met"),
-        },
-        {
-          name: "license/cla",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("license/cla"),
-        },
-        {
-          name: "Swagger PrettierCheck",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger PrettierCheck"),
-        },
-      ];
-
-      const output = createNextStepsComment(
-        mockCore,
-        repo,
-        labelNames,
-        targetBranch,
-        requiredCheckRuns,
-        fyiCheckRuns,
-        false, // assessmentCompleted
-        WORKFLOW_URL,
-      );
-
-      expect(output).toEqual(expectedOutput);
-    });
-
-    it("should generate pending summary when checks are in progress", () => {
-      const repo = "azure-rest-api-specs";
-      const targetBranch = "main";
-
-      const labelNames: string[] = [];
-
-      const fyiCheckRuns: CheckRunData[] = [];
-      const expectedOutput = [
-        `<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛<br /><br />Comment generated by <a href="http://github.com/a/fake/workflowrun/url">summarize-checks</a> workflow run.`,
-        {
-          name: "Automated merging requirements met",
-          result: "pending",
-          summary: "The requirements for merging this PR are still being evaluated. Please wait.",
-        },
-      ];
-
-      const requiredCheckRuns = [
-        {
-          name: "TypeSpec Validation",
-          status: "IN_PROGRESS",
-          conclusion: null,
-          checkInfo: {
-            precedence: 0,
-            name: "TypeSpec Validation",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
-        },
-        {
-          name: "Swagger Avocado",
-          status: "QUEUED",
-          conclusion: null,
-          checkInfo: {
-            precedence: 1,
-            name: "Swagger Avocado",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
-        },
-        {
-          name: "license/cla",
-          status: "IN_PROGRESS",
-          conclusion: null,
-          checkInfo: {
-            precedence: 0,
-            name: "license/cla",
-            suppressionLabels: [],
-            troubleshootingGuide:
-              "Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href=\"https://aka.ms/ci-fix\">aka.ms/ci-fix</a> guide",
-          },
-        },
-      ];
-
-      const output = createNextStepsComment(
-        mockCore,
-        repo,
-        labelNames,
-        targetBranch,
-        requiredCheckRuns,
-        fyiCheckRuns,
-        true, // assessmentCompleted
-        WORKFLOW_URL,
-      );
-
-      expect(output).toEqual(expectedOutput);
-    });
-
-    it("should generate pending summary when checks there are no required checks blocking or completed, but successful FYI checks", () => {
-      const repo = "azure-rest-api-specs";
-      const targetBranch = "main";
-      const labelNames = [
-        "ARMReview",
-        "ARMAutoSignedOff",
-        "resource-manager",
-        "TypeSpec",
-        "RPaaS",
-        "ARMSignedOff",
-        "PublishToCustomers",
-      ];
-      const expectedOutput = [
-        `<h2>Next Steps to Merge</h2>Important checks have failed. As of today they are not blocking this PR, but in near future they may.<br/>Addressing the following failures is highly recommended:<br/><ul><li>⚠️ The check named <code>Swagger LintDiff</code> has failed. Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href="https://aka.ms/ci-fix">aka.ms/ci-fix</a> guide</li></ul><br /><br />Comment generated by <a href="http://github.com/a/fake/workflowrun/url">summarize-checks</a> workflow run.`,
-        {
-          name: "Automated merging requirements met",
-          result: "pending",
-          summary: "The requirements for merging this PR are still being evaluated. Please wait.",
-        },
-      ];
-
-      const fyiCheckRuns = [
-        {
-          name: "Swagger BreakingChange",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger BreakingChange"),
-        },
-        {
-          name: "Swagger LintDiff",
-          status: "COMPLETED",
-          conclusion: "FAILURE",
-          checkInfo: getCheckInfo("Swagger LintDiff"),
-        },
-      ];
-
-      const requiredCheckRuns = [
-        {
-          name: "Summarize PR Impact",
-          status: "IN_PROGRESS",
-          conclusion: null,
-          checkInfo: getCheckInfo("Summarize PR Impact"),
-        },
-      ];
-
-      const output = createNextStepsComment(
-        mockCore,
-        repo,
-        labelNames,
-        targetBranch,
-        requiredCheckRuns,
-        fyiCheckRuns,
-        false, // assessmentCompleted
-        WORKFLOW_URL,
-      );
-
-      expect(output).toEqual(expectedOutput);
-    });
-
-    it("Should generate error summary for a PR scenario where NotReadyForARMReview is present", () => {
-      const repo = "azure-rest-api-specs-pr";
-      const targetBranch = "RPSaaSMaster";
-      const labelNames = [
-        "ARMReview",
-        "NotReadyForARMReview",
-        "PipelineBotTrigger",
-        "PublishToCustomers",
-        "resource-manager",
-        "RPaaS",
-        "TypeSpec",
-        "VersioningReviewRequired",
-      ];
-
-      const fyiCheckRuns: CheckRunData[] = [];
-      const expectedComment =
-        `<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ ` +
-        `This PR is in purview of the ARM review (label: <code>ARMReview</code>). This PR must get <code>ARMSignedOff</code> label ` +
-        `from an ARM reviewer.<br/>This PR is not ready for ARM review (label: <code>NotReadyForARMReview</code>). This PR will not ` +
-        `be reviewed by ARM until relevant problems are fixed. Consult the rest of this <code>Next Steps to Merge</code> comment ` +
-        `for details.<br/>Once the blocking problems are addressed, add to the PR a comment with contents <code>/azp run</code>. ` +
-        `Automation will re-evaluate this PR and if everything looks good, it will add <code>WaitForARMFeedback</code> label which ` +
-        `will put this PR on the ARM review queue.<br/>For details of the ARM review, see <a href="https://aka.ms/azsdk/pr-arm-review">` +
-        `aka.ms/azsdk/pr-arm-review</a><br/></li><li>❌ This PR is <code>NotReadyForARMReview</code> because it has the <code>VersioningReviewRequired</code> ` +
-        `label.<br/></li><li>❌ This PR has at least one change violating Azure versioning policy ` +
-        `(label: <code>VersioningReviewRequired</code>).<br/>To unblock this PR, either a) introduce a new API version with these ` +
-        `changes instead of modifying an existing API version, or b) follow the process at <a href="https://aka.ms/brch">aka.ms/brch</a>.</li>` +
-        `<li>❌ The required check named <code>Swagger BreakingChange</code> has failed. To unblock this PR, follow the process at <a href="https://aka.ms/brch">` +
-        `aka.ms/brch</a>.</li></ul><br /><br />Comment generated by <a href="http://github.com/a/fake/workflowrun/url">summarize-checks</a> workflow run.`;
-
-      const expectedOutput = [
-        expectedComment,
-        {
-          name: "Automated merging requirements met",
-          result: "FAILURE",
-          summary:
-            "❌ This PR cannot be merged because some requirements are not met. See the details.",
-        },
-      ];
-
-      const requiredCheckRuns = [
-        {
-          name: "license/cla",
-          status: "QUEUED",
-          conclusion: null,
-          checkInfo: getCheckInfo("license/cla"),
-        },
-        {
-          name: "Swagger PrettierCheck",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger PrettierCheck"),
-        },
-        {
-          name: "TypeSpec Validation",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("TypeSpec Validation"),
-        },
-        {
-          name: "Swagger SemanticValidation",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger SemanticValidation"),
-        },
-        {
-          name: "TypeSpec Requirement",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("TypeSpec Requirement"),
-        },
-        {
-          name: "Protected Files",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Protected Files"),
-        },
-        {
-          name: "SpellCheck",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("SpellCheck"),
-        },
-        {
-          name: "Swagger ModelValidation",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger ModelValidation"),
-        },
-        {
-          name: "SDK Validation Status",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("SDK Validation Status"),
-        },
-        {
-          name: "Breaking Change(Cross-Version)",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Breaking Change(Cross-Version)"),
-        },
-        {
-          name: "Swagger BreakingChange",
-          status: "COMPLETED",
-          conclusion: "FAILURE",
-          checkInfo: getCheckInfo("Swagger BreakingChange"),
-        },
-        {
-          name: "Swagger Avocado",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger Avocado"),
-        },
-        {
-          name: "Swagger LintDiff",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger LintDiff"),
-        },
-      ];
-
-      const output = createNextStepsComment(
-        mockCore,
-        repo,
-        labelNames,
-        targetBranch,
-        requiredCheckRuns,
-        fyiCheckRuns,
-        true, // assessmentCompleted
-        WORKFLOW_URL,
-      );
-
-      expect(output).toEqual(expectedOutput);
-    });
-
-    it("Should generate error summary for a PR scenario with labeling issues", () => {
-      const repo = "azure-rest-api-specs";
-      const targetBranch = "main";
-      const labelNames = [
-        "Cognitive Services",
-        "data-plane",
-        "TypeSpec",
-        "VersioningReviewRequired",
-      ];
-
-      const fyiCheckRuns: CheckRunData[] = [];
-      const expectedComment =
-        "<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul>" +
-        "<li>❌ This PR targets either the <code>main</code> branch of the public specs repo or the <code>RPSaaSMaster</code> branch of the private specs repo. " +
-        "These branches are not intended for iterative development. Therefore, you must acknowledge you understand that after this PR is merged, the APIs are considered " +
-        "shipped to Azure customers. Any further attempts at in-place modifications to the APIs will be subject to Azure's versioning " +
-        "and breaking change policies. <b>Additionally, for control plane APIs, you must acknowledge that you are following all " +
-        'the best practices documented by ARM at <a href="https://aka.ms/armapibestpractices">aka.ms/armapibestpractices</a>.</b> ' +
-        "If you do intend to release the APIs to your customers by merging this PR, add the <code>PublishToCustomers</code> label " +
-        "to your PR in acknowledgement of the above. Otherwise, retarget this PR onto a feature branch, i.e. with prefix <code>release-</code> " +
-        '(see <a href="https://aka.ms/azsdk/api-versions#release--branches">aka.ms/azsdk/api-versions#release--branches</a>).</li>' +
-        "<li>❌ This PR has at least one change violating Azure versioning policy (label: <code>VersioningReviewRequired</code>).<br/>To unblock this PR, either a) " +
-        'introduce a new API version with these changes instead of modifying an existing API version, or b) follow the process at <a href="https://aka.ms/brch">aka.ms/brch</a>.' +
-        "</li><li>❌ The required check named <code>TypeSpec Validation</code> has failed. Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult " +
-        'the <a href="https://aka.ms/ci-fix">aka.ms/ci-fix</a> guide</li></ul><br /><br />Comment generated by <a href="http://github.com/a/fake/workflowrun/url">summarize-checks</a> workflow run.';
-      const expectedOutput = [
-        expectedComment,
-        {
-          name: "Automated merging requirements met",
-          result: "FAILURE",
-          summary:
-            "❌ This PR cannot be merged because some requirements are not met. See the details.",
-        },
-      ];
-
-      const requiredCheckRuns = [
-        {
-          name: "SpellCheck",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("SpellCheck"),
-        },
-        {
-          name: "TypeSpec Requirement",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("TypeSpec Requirement"),
-        },
-        {
-          name: "Protected Files",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Protected Files"),
-        },
-        {
-          name: "TypeSpec Validation",
-          status: "COMPLETED",
-          conclusion: "FAILURE",
-          checkInfo: getCheckInfo("TypeSpec Validation"),
-        },
-        {
-          name: "Swagger BreakingChange",
-          status: "COMPLETED",
-          conclusion: "FAILURE",
-          checkInfo: getCheckInfo("Swagger BreakingChange"),
-        },
-        {
-          name: "Breaking Change(Cross-Version)",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Breaking Change(Cross-Version)"),
-        },
-        {
-          name: "Swagger Avocado",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger Avocado"),
-        },
-        {
-          name: "Swagger ModelValidation",
-          status: "COMPLETED",
-          conclusion: "FAILURE",
-          checkInfo: getCheckInfo("Swagger ModelValidation"),
-        },
-        {
-          name: "Swagger SemanticValidation",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger SemanticValidation"),
-        },
-        {
-          name: "Swagger Lint(RPaaS)",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger Lint(RPaaS)"),
-        },
-        {
-          name: "Automated merging requirements met",
-          status: "COMPLETED",
-          conclusion: "FAILURE",
-          checkInfo: getCheckInfo("Automated merging requirements met"),
-        },
-        {
-          name: "license/cla",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("license/cla"),
-        },
-        {
-          name: "Swagger PrettierCheck",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("Swagger PrettierCheck"),
-        },
-      ];
-
-      const output = createNextStepsComment(
-        mockCore,
-        repo,
-        labelNames,
-        targetBranch,
-        requiredCheckRuns,
-        fyiCheckRuns,
-        true, // assessmentCompleted
-        WORKFLOW_URL,
-      );
-
-      expect(output).toEqual(expectedOutput);
-    });
-
-    it("should generate error summary with a failed required check, and failed FYI checks", () => {
-      const repo = "azure-rest-api-specs";
-      const targetBranch = "main";
-
-      const labelNames: string[] = [];
-      const expectedCheckOutput = {
-        name: "Automated merging requirements met",
+      },
+      {
+        description: "pending FYI checks",
+        required: [run("TypeSpec Validation")],
+        fyi: [run("Swagger LintDiff", "in_progress", null)],
+        result: "SUCCESS",
+      },
+      {
+        description: "only pending FYI checks",
+        fyi: [run("Swagger LintDiff", "in_progress", null)],
+        result: "SUCCESS",
+      },
+      {
+        description: "failed FYI checks",
+        fyi: [run("license/cla", "completed", "failure")],
+        result: "SUCCESS",
+      },
+      {
+        description: "an approved RPaaS exception",
+        labels: ["CI-NewRPNamespaceWithoutRPaaS", "RPaaSException"],
+        result: "SUCCESS",
+      },
+      {
+        description: "partially completed required checks",
+        required: [run("TypeSpec Validation"), run("license/cla", "QUEUED", null)],
+        result: "pending",
+      },
+      {
+        description: "pending required checks",
+        required: [run("TypeSpec Validation", "IN_PROGRESS", null)],
+        result: "pending",
+      },
+      {
+        description: "an incomplete impact assessment",
+        required: [run("TypeSpec Validation")],
+        assessmentCompleted: false,
+        result: "pending",
+      },
+      {
+        description: "FYI failures while assessment is incomplete",
+        fyi: [run("Swagger LintDiff", "completed", "failure")],
+        assessmentCompleted: false,
+        result: "pending",
+      },
+      {
+        description: "a required check failure",
+        required: [run("Swagger BreakingChange", "completed", "FAILURE")],
         result: "FAILURE",
-        summary:
-          "❌ This PR cannot be merged because some requirements are not met. See the details.",
-      };
-      const expectedCommentOutput = `<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ The required check named <code>Swagger BreakingChange</code> has failed. To unblock this PR, follow the process at <a href="https://aka.ms/brch">aka.ms/brch</a>.</li></ul><br/>Important checks have failed. As of today they are not blocking this PR, but in near future they may.<br/>Addressing the following failures is highly recommended:<br/><ul><li>⚠️ The check named <code>TypeSpec Validation</code> has failed. Refer to the check in the PR's 'Checks' tab for details on how to fix it and consult the <a href="https://aka.ms/ci-fix">aka.ms/ci-fix</a> guide</li></ul><br /><br />Comment generated by <a href="http://github.com/a/fake/workflowrun/url">summarize-checks</a> workflow run.`;
-
-      const fyiCheckRuns = [
-        {
-          name: "TypeSpec Validation",
-          status: "COMPLETED",
-          conclusion: "FAILURE",
-          checkInfo: getCheckInfo("TypeSpec Validation"),
-        },
-      ];
-
-      const requiredCheckRuns = [
-        {
-          name: "Swagger BreakingChange",
-          status: "COMPLETED",
-          conclusion: "FAILURE",
-          checkInfo: getCheckInfo("Swagger BreakingChange"),
-        },
-      ];
-
-      const [commentOutput, automatedCheckOutput] = createNextStepsComment(
-        mockCore,
-        repo,
-        labelNames,
-        targetBranch,
-        requiredCheckRuns,
-        fyiCheckRuns,
-        true, // assessmentCompleted
-        WORKFLOW_URL,
-      );
-
-      expect(automatedCheckOutput).toEqual(expectedCheckOutput);
-      expect(commentOutput).toEqual(expectedCommentOutput);
-    });
-
-    it("should generate error summary with a failed required check, and in-progress FYI checks", () => {
-      const repo = "azure-rest-api-specs";
-      const targetBranch = "main";
-
-      const labelNames: string[] = [];
-      const expectedCheckOutput = {
-        name: "Automated merging requirements met",
+      },
+      {
+        description: "required and FYI failures",
+        required: [run("Swagger BreakingChange", "completed", "failure")],
+        fyi: [run("TypeSpec Validation", "completed", "failure")],
         result: "FAILURE",
-        summary:
-          "❌ This PR cannot be merged because some requirements are not met. See the details.",
-      };
-
-      const fyiCheckRuns = [
-        {
-          name: "TypeSpec Validation",
-          status: "IN_PROGRESS",
-          conclusion: null,
-          checkInfo: getCheckInfo("TypeSpec Validation"),
-        },
-      ];
-
-      const requiredCheckRuns = [
-        {
-          name: "Swagger BreakingChange",
-          status: "COMPLETED",
-          conclusion: "FAILURE",
-          checkInfo: getCheckInfo("Swagger BreakingChange"),
-        },
-      ];
-
-      const [, automatedCheckOutput] = createNextStepsComment(
-        mockCore,
-        repo,
-        labelNames,
-        targetBranch,
-        requiredCheckRuns,
-        fyiCheckRuns,
-        true, // assessmentCompleted
-        "target_url",
-      );
-
-      expect(automatedCheckOutput).toEqual(expectedCheckOutput);
-    });
-
-    it("should generate error summary when CI-NewRPNamespaceWithoutRPaaS is present, but RPaaSException is not.", () => {
-      const repo = "azure-rest-api-specs";
-      const targetBranch = "main";
-      const labelNames = ["CI-NewRPNamespaceWithoutRPaaS"];
-
-      const fyiCheckRuns: CheckRunData[] = [];
-      const expectedCommentBody = `<h2>Next Steps to Merge</h2>Next steps that must be taken to merge this PR: <br/><ul><li>❌ This PR has <code>CI-NewRPNamespaceWithoutRPaaS</code> label. This means it is introducing a new RP (Resource Provider) namespace that has not been onboarded with <a href="https://armwiki.azurewebsites.net/rpaas/overview.html">RPaaS</a>. Merging this PR to the <code>main</code> branch is blocked as RPaaS is required for new RPs.<br/>To resolve, <a href="https://armwiki.azurewebsites.net/rpaas/gettingstarted.html">use RPaaS to onboard the new RP</a>. To apply for exception, see <a href="https://aka.ms/RPaaSException">aka.ms/RPaaSException</a>.</li></ul><br /><br />Comment generated by <a href="target_url">summarize-checks</a> workflow run.`;
-      const expectedCheckOutput = {
-        name: "Automated merging requirements met",
+      },
+      {
+        description: "a required failure and pending FYI checks",
+        required: [run("Swagger BreakingChange", "completed", "failure")],
+        fyi: [run("TypeSpec Validation", "in_progress", null)],
         result: "FAILURE",
-        summary:
-          "❌ This PR cannot be merged because some requirements are not met. See the details.",
-      };
-
-      const requiredCheckRuns = [
-        {
-          name: "SpellCheck",
-          status: "COMPLETED",
-          conclusion: "SUCCESS",
-          checkInfo: getCheckInfo("SpellCheck"),
-        },
-      ];
-
-      const [commentBody, automatedCheckOutput] = createNextStepsComment(
-        mockCore,
-        repo,
-        labelNames,
-        targetBranch,
-        requiredCheckRuns,
-        fyiCheckRuns,
-        true, // assessmentCompleted
-        "target_url",
-      );
-
-      expect(commentBody).toEqual(expectedCommentBody);
-      expect(automatedCheckOutput).toEqual(expectedCheckOutput);
-    });
-
-    it("should generate error summary when checks are in error state", () => {
-      const repo = "azure-rest-api-specs";
-      const targetBranch = "main";
-
-      const labelNames: string[] = [];
-
-      const fyiCheckRuns: CheckRunData[] = [];
-      const expectedCheckOutput = {
-        name: "Automated merging requirements met",
+      },
+      {
+        description: "an RPaaS requirement without an exception",
+        labels: ["CI-NewRPNamespaceWithoutRPaaS"],
         result: "FAILURE",
-        summary:
-          "❌ This PR cannot be merged because some requirements are not met. See the details.",
-      };
-
-      const requiredCheckRuns = [
-        {
-          name: "Swagger BreakingChange",
-          status: "COMPLETED",
-          conclusion: "FAILURE",
-          checkInfo: getCheckInfo("Swagger BreakingChange"),
-        },
-      ];
-
-      const [, automatedCheckOutput] = createNextStepsComment(
-        mockCore,
-        repo,
-        labelNames,
-        targetBranch,
-        requiredCheckRuns,
-        fyiCheckRuns,
-        true, // assessmentCompleted
-        "target_url",
-      );
-
-      expect(automatedCheckOutput).toEqual(expectedCheckOutput);
+      },
+      {
+        description: "versioning blockers in the private repo",
+        repo: "azure-rest-api-specs-pr",
+        targetBranch: "RPSaaSMaster",
+        labels: [
+          "ARMReview",
+          "NotReadyForARMReview",
+          "PublishToCustomers",
+          "VersioningReviewRequired",
+        ],
+        result: "FAILURE",
+      },
+      {
+        description: "publication and versioning requirements",
+        labels: ["data-plane", "VersioningReviewRequired"],
+        result: "FAILURE",
+      },
+    ])("preserves merge status for $description", ({ result, ...options }) => {
+      const [, status] = summarize(options);
+      expect(status.result).toBe(result);
     });
+
+    it("shows a clear success row without implying that review requirements can be skipped", () => {
+      const [comment] = summarize();
+
+      expect(comment).toContain("**All automated merging requirements have been met.**");
+      expect(comment).toMatch(
+        /passed\.svg"[^>]*><\/picture> \*\*All automated merging requirements/,
+      );
+      expect(rows(comment)).toEqual([
+        ["Automated requirements", "Met", "Follow the merge process linked below."],
+      ]);
+      expect(comment).toContain("[Merge guide](https://aka.ms/azsdk/specreview/merge)");
+      expect(comment).not.toContain("<details>");
+    });
+
+    it("shows concise actions and status icons while keeping full guidance collapsed", () => {
+      const [comment, status] = summarize({
+        labels: ["data-plane"],
+        required: [run("TypeSpec Validation", "completed", "failure")],
+      });
+      const visible = comment.split("<details>")[0];
+      const table = marked
+        .lexer(comment)
+        .find((token): token is Tokens.Table => token.type === "table");
+
+      expect(table?.header.map((cell) => cell.text)).toEqual([
+        "Requirement",
+        "Status",
+        "Next step",
+      ]);
+      expect(rows(comment)?.map((row) => row.slice(0, 2))).toEqual([
+        ["Publication intent", "Action required"],
+        ["`TypeSpec Validation`", "Failed"],
+      ]);
+      expect(visible).toMatch(/action-required\.svg"[^>]*><\/picture> Action required/);
+      expect(visible).toMatch(/failed\.svg"[^>]*><\/picture> Failed/);
+      expect(marked.parse(visible)).toContain(
+        '<picture><img src="https://img.shields.io/github/labels/Azure/azure-rest-api-specs/PublishToCustomers" alt="PublishToCustomers"></picture>',
+      );
+      expect(marked.parse(visible)).not.toContain(
+        'href="https://github.com/Azure/azure-rest-api-specs/labels/',
+      );
+      expect(visible).toContain("Open the failed check, address its diagnostics");
+      expect(visible).not.toContain("These branches are not intended for iterative development");
+      expect(comment).toContain("<summary>Details and troubleshooting</summary>");
+      expect(comment).toContain("These branches are not intended for iterative development");
+      expect(status.result).toBe("FAILURE");
+    });
+
+    it("links failed and running checks and keeps successful check links in collapsed details", () => {
+      const failedUrl = "https://checks.example/failed?filter=(all)";
+      const runningUrl = "https://checks.example/running";
+      const passedUrl = "https://checks.example/passed";
+      const [comment, result] = summarize({
+        required: [
+          run("Failed check", "completed", "failure", failedUrl),
+          run("Running check", "in_progress", null, runningUrl),
+          run("Passed check", "completed", "success", passedUrl),
+          run("Skipped check", "completed", "skipped"),
+          run("Neutral check", "completed", "neutral"),
+        ],
+      });
+      const visible = comment.split("<details>")[0];
+      const completed = comment
+        .split("<summary>Completed checks (1)</summary>")[1]
+        ?.split("</details>")[0];
+
+      expect(marked.parse(visible)).toContain(`href="${failedUrl}"`);
+      expect(marked.parse(visible)).toContain(`href="${runningUrl}"`);
+      expect(visible).not.toContain(passedUrl);
+      expect(completed).toContain(passedUrl);
+      expect(completed).toContain("Passed check");
+      expect(completed).not.toContain("Skipped check");
+      expect(completed).not.toContain("Neutral check");
+      expect(result.result).toBe("FAILURE");
+    });
+
+    it("shows all blocking approvals and failures in the main table regardless of priority", () => {
+      const [comment, status] = summarize({
+        labels: [
+          "data-plane",
+          "PublishToCustomers",
+          "data-plane-review-requested",
+          "package-name-review-required",
+          "typespec-suppressions-review-required",
+        ],
+        required: ["TypeSpec Validation", "Swagger Avocado", "Swagger BreakingChange"].map((name) =>
+          run(name, "completed", "failure"),
+        ),
+      });
+
+      expect(rows(comment)?.map((row) => row[0])).toEqual([
+        "Data-plane API review",
+        "SDK package names",
+        "TypeSpec suppressions",
+        "`TypeSpec Validation`",
+        "`Swagger Avocado`",
+        "`Swagger BreakingChange`",
+      ]);
+      expect(comment).not.toContain("Other outstanding requirements");
+      expect(comment.split("<details>")[0]).toContain("6 requirements need attention");
+      expect(comment).toContain("typespec-suppressions-approved");
+      expect(status.result).toBe("FAILURE");
+    });
+
+    it("removes resolved requirements and their guidance from the next summary", () => {
+      const [comment, status] = summarize({
+        labels: [
+          "data-plane",
+          "PublishToCustomers",
+          "data-plane-review-requested",
+          "data-plane-review-signoff",
+          "package-name-review-required",
+          "package-name-approved",
+          "typespec-suppressions-review-required",
+          "typespec-suppressions-approved",
+        ],
+        required: [
+          run("TypeSpec Validation"),
+          run("Swagger Avocado"),
+          run("Swagger BreakingChange"),
+        ],
+      });
+
+      expect(status.result).toBe("SUCCESS");
+      expect(comment).not.toContain("Other outstanding requirements");
+      expect(comment).not.toContain("Details and troubleshooting");
+      expect(comment).not.toContain("SDK package names");
+    });
+
+    it("keeps incomplete evaluation visible even when known failures block merging", () => {
+      const [comment, status] = summarize({
+        assessmentCompleted: false,
+        required: [
+          run("TypeSpec Validation", "in_progress", null),
+          run("Swagger Avocado", "queued", null),
+          run("Swagger BreakingChange", "completed", "failure"),
+        ],
+      });
+
+      expect(rows(comment)?.map((row) => row.slice(0, 2))).toEqual([
+        ["`Swagger BreakingChange`", "Failed"],
+        ["PR impact assessment", "Pending"],
+        ["`TypeSpec Validation`", "Running"],
+        ["`Swagger Avocado`", "Pending"],
+      ]);
+      expect(comment.split("<details>")[0]).toContain("additional requirements may be identified");
+      expect(status.result).toBe("FAILURE");
+    });
+
+    it("distinguishes ARM reviewer waits, author actions, running checks and queued checks", () => {
+      const [comment, status] = summarize({
+        labels: ["resource-manager", "ARMReview", "WaitForARMFeedback"],
+        required: [
+          run("TypeSpec Validation", "IN_PROGRESS", null),
+          run("Swagger Avocado", "QUEUED", null),
+        ],
+      });
+
+      expect(rows(comment)?.map((row) => row.slice(0, 2))).toEqual([
+        ["Publication intent", "Action required"],
+        ["ARM API review", "Awaiting review"],
+        ["`TypeSpec Validation`", "Running"],
+        ["`Swagger Avocado`", "Pending"],
+      ]);
+      expect(comment).toMatch(/awaiting-review\.svg"[^>]*><\/picture> Awaiting review/);
+      expect(comment).toMatch(/running\.svg"[^>]*><\/picture> Running/);
+      expect(comment).toMatch(/pending\.svg"[^>]*><\/picture> Pending/);
+      expect(comment).not.toContain("ARM review workflow label is missing");
+      expect(comment).toContain("Wait for this required check to start.");
+      expect(status.result).toBe("FAILURE");
+    });
+
+    it.each([
+      { label: "NotReadyForARMReview", result: "FAILURE" },
+      { label: "ARMChangesRequested", result: "FAILURE" },
+      { label: "ARMSignedOff", result: "SUCCESS" },
+    ])(
+      "does not claim the ARM workflow state is missing when $label is present",
+      ({ label, result }) => {
+        const [comment, status] = summarize({ labels: ["ARMReview", label] });
+
+        expect(comment).not.toContain("ARM review workflow label is missing");
+        expect(rows(comment)?.map((row) => row[0])).not.toContain("ARM review workflow");
+        expect(status.result).toBe(result);
+      },
+    );
+
+    it("retains ARM workflow repair guidance when the state label is genuinely missing", () => {
+      const [comment, status] = summarize({ labels: ["ARMReview"] });
+
+      expect(rows(comment)?.map((row) => row[0])).toContain("ARM review workflow");
+      expect(comment).toContain("ARM review workflow label is missing");
+      expect(comment).toContain("`/azp run`");
+      expect(status.result).toBe("FAILURE");
+    });
+
+    it.each([["Swagger Avocado"], ["Swagger Avocado", "Swagger BreakingChange"]])(
+      "keeps FYI warnings collapsed without blocking merging %#",
+      (...names) => {
+        const [comment, status] = summarize({
+          fyi: ["license/cla", ...names].map((name) => run(name, "completed", "failure")),
+        });
+
+        const summary = `<summary>Warnings (${names.length + 1})</summary>`;
+        expect(comment).toContain(summary);
+        expect(comment).toContain("| `license/cla` |");
+        const warningDetails = comment.split(summary)[1]?.split("</details>")[0] ?? "";
+        expect(marked.parse(warningDetails)).toContain(
+          '<span title="Needs attention, but does not block automated merge requirements.">Warning</span>',
+        );
+        expect(comment.split("<details>")[0]).not.toContain("license/cla");
+        expect(comment).not.toContain("Other outstanding requirements");
+        expect(status.result).toBe("SUCCESS");
+      },
+    );
+
+    it.each(["pending", "required", "fyi"])(
+      "renders external %s check names as literal table content",
+      (kind) => {
+        const name = "<check> & `unsafe` | [label](https://bad.example) @reviewers";
+        const check = run(
+          name,
+          kind === "pending" ? "queued" : "completed",
+          kind === "pending" ? null : "failure",
+          kind === "pending" ? "not a URL" : "javascript:alert(1)",
+        );
+        const [comment, status] = summarize(
+          kind === "fyi" ? { fyi: [check] } : { required: [check] },
+        );
+        const html = marked.parse(comment);
+
+        expect(html).toContain(
+          "<code>&lt;check&gt; &amp; `unsafe` | [label](https://bad.example) @reviewers</code>",
+        );
+        expect(html).not.toContain('<a href="https://bad.example">');
+        expect(html).not.toContain('href="javascript:');
+        expect(status.result).toBe(
+          kind === "pending" ? "pending" : kind === "required" ? "FAILURE" : "SUCCESS",
+        );
+      },
+    );
+
+    it("keeps ARM modeling steps short without losing office-hours and lease guidance", () => {
+      const [comment] = summarize({
+        repo: "azure-rest-api-specs-pr",
+        targetBranch: "RPSaaSMaster",
+        labels: ["ARMReview", "NotReadyForARMReview", "ARMModelingReviewRequired"],
+      });
+      const visible = comment.split("<details>")[0];
+
+      expect(visible).toContain("| ARM modeling review |");
+      expect(visible).toContain("[office hours](https://aka.ms/apimodelingreview)");
+      expect(visible).not.toContain("9:30");
+      expect(visible).not.toContain("lease file");
+      expect(comment).toContain("Every Tuesday and Thursday, 9:30");
+      expect(comment).toContain("`/model-rp-contract`");
+      expect(comment).toContain("lease file PR has been merged");
+    });
+
+    it.each([false, true])(
+      "keeps SDK reports collapsed and before a single workflow link (assessment complete: %s)",
+      (assessmentCompleted) => {
+        const sdkSummary =
+          "### SDK Breaking Change Detection and Mitigation\n\nCurrent-commit reports";
+        const [comment] = summarize({ assessmentCompleted, sdkSummary });
+
+        expect(comment).toContain(
+          "<summary>SDK breaking-change reports</summary>\n\n" + sdkSummary,
+        );
+        expect(comment.split("<details>")[0]).not.toContain("Current-commit reports");
+        expect(comment.match(/\[Workflow run\]/g)).toHaveLength(1);
+        expect(comment.endsWith("[Workflow run](" + WORKFLOW_URL + ")")).toBe(true);
+      },
+    );
   });
 
   describe("getImpactAssessment", async () => {
     const unzipExists = await execFile("unzip")
       .then(() => true)
       .catch(() => false);
-    const impactAssessment: import("../../src/summarize-checks/labelling.ts").ImpactAssessment = {
+    const legacyImpactAssessment = {
       resourceManagerRequired: false,
       dataPlaneRequired: true,
       suppressionReviewRequired: false,
@@ -1270,6 +856,7 @@ describe("Summarize Checks Unit Tests", () => {
       isDraft: false,
       targetBranch: "test-\u00e9-\u65e5\u672c",
     };
+    const impactAssessment = ImpactAssessmentSchema.parse(legacyImpactAssessment);
     const summaryJson = JSON.stringify(impactAssessment);
 
     function mockArtifactDownload(
@@ -1307,6 +894,7 @@ describe("Summarize Checks Unit Tests", () => {
         name: "summary.json",
         per_page: 100,
       });
+
       expect(github.rest.actions.downloadArtifact).toHaveBeenCalledExactlyOnceWith({
         owner: "test-owner",
         repo: "test-repo",
@@ -1314,6 +902,28 @@ describe("Summarize Checks Unit Tests", () => {
         archive_format: "zip",
         request: { parseSuccessResponseBody: false },
       });
+    });
+
+    it("normalizes artifacts produced before the service-scoped schema", async () => {
+      const github = mockArtifactDownload(JSON.stringify(legacyImpactAssessment));
+      await expect(
+        getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
+      ).resolves.toEqual(impactAssessment);
+    });
+
+    it("reads cached service-scoped artifacts without affected-README metadata", async () => {
+      const github = mockArtifactDownload(
+        JSON.stringify({
+          ...impactAssessment,
+          services: impactAssessment.services.map((service) => ({
+            ...service,
+            hasAffectedReadme: undefined,
+          })),
+        }),
+      );
+      await expect(
+        getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123),
+      ).resolves.toEqual(impactAssessment);
     });
 
     it.each(["application/json", "text/plain", "application/octet-stream"])(

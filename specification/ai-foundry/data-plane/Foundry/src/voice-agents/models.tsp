@@ -3,6 +3,7 @@ import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "../agents/models.tsp";
 import "./agents.tsp";
+import "./handoff.tsp";
 import "./openai-preview-models.tsp";
 
 using TypeSpec.Http;
@@ -28,7 +29,6 @@ namespace Azure.AI.Projects;
     close, or a client or network disconnect that the service can still finalize.
   - `failed`: a terminal service, bridge, storage, or unrecoverable transport failure prevented finalization.
   """)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceConversationStatus {
   string,
 
@@ -48,7 +48,6 @@ union VoiceConversationStatus {
   deleting it cascades to its responses, items, metrics, and audio. When finalization fails, any partial persisted
   responses, items, and item audio remain readable.
   """)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceConversation {
   @doc("The unique id of the conversation.")
   id: string;
@@ -79,11 +78,10 @@ model VoiceConversation {
 // Shared voice response audio
 // ---------------------------------------------------------------------------
 //
-// Live WebSocket events and persisted responses use the same flat output projection so provider and
-// locale extensions stay aligned with the OpenAI-compatible voice and format fields.
+// Live WebSocket responses include provider and locale extensions alongside the
+// OpenAI-compatible voice and format fields.
 
 @doc("The flat response audio-output projection, with optional `voice`, `voice_type`, `voice_locale`, and `format` fields.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceResponseAudioOutput {
   @doc("The voice name used for the response's audio output.")
   voice?: string;
@@ -99,22 +97,11 @@ model VoiceResponseAudioOutput {
 }
 
 @doc("Audio configuration for a response. Follows the OpenAI Realtime GA `audio` object shape.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceResponseAudio {
   @doc("The audio output configuration used for the response.")
   output?: VoiceResponseAudioOutput;
 }
 
-@doc("Properties shared by persisted voice responses.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceResponseBase {
-  ...OmitProperties<
-    OpenAI.RealtimeResponse,
-    "audio" | "output" | "metadata" | "conversation_id" | "id"
-  >;
-}
-
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the shared OpenAI response contract while the persisted projection replaces audio, output, and metadata."
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for backward compatibility."
 @doc("""
   A persisted voice response representing one model inference turn within a conversation. In list results the
@@ -123,22 +110,11 @@ model VoiceResponseBase {
   (`GET .../responses/{response_id}/items`) for its output items. `created_at`/`completed_at` are Foundry
   durable ordering extensions.
   """)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceResponse extends VoiceResponseBase {
-  @doc("The unique id of the response.")
-  id: string;
-
-  @doc("The output items produced by the response. May be omitted in list results; retrieve the full response (GET .../responses/{response_id}) or use the paged response-items route (GET .../responses/{response_id}/items) for its output items. Each item's `response_id` also links it back to this response in the conversation-level items list.")
-  output?: OpenAI.RealtimeConversationItem[];
-
-  @doc("The id of the conversation this response belongs to.")
-  conversation_id: string;
+model VoiceResponse {
+  ...OmitProperties<OpenAI.RealtimeResponse, "audio">;
 
   @doc("The audio configuration used for the response, including the voice and audio format used for output.")
   audio?: VoiceResponseAudio;
-
-  @doc("A set of key-value pairs attached to the response.")
-  metadata?: Record<string>;
 
   @doc("The sampling temperature used for the response.")
   temperature?: float32;
@@ -148,6 +124,161 @@ model VoiceResponse extends VoiceResponseBase {
 
   @doc("The Unix timestamp (in seconds) for when the response completed.")
   completed_at?: FoundryTimestamp;
+}
+
+// ---------------------------------------------------------------------------
+// Live delegation results and persisted conversation items
+// ---------------------------------------------------------------------------
+
+@doc("Persisted guidance accepted by Live. The service populates commentary, thinking, or both. Agent delegation section markers are removed before storage.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveDelegationResultItem {
+  @doc("Guidance for Live to communicate to the user.")
+  commentary?: string;
+
+  @doc("Background context, not private reasoning or a request to speak.")
+  thinking?: string;
+}
+
+@doc("Delegation owner. Foundry agent targets use native client delegation upstream.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentLiveDelegationTarget {
+  string,
+  responses: "responses",
+  client: "client",
+  foundry_managed_agent: "foundry_managed_agent",
+}
+
+@doc("Persisted delegation outcome, not speech or playback status.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentLiveDelegationStatus {
+  string,
+  in_progress: "in_progress",
+  completed: "completed",
+  failed: "failed",
+  incomplete: "incomplete",
+  cancelled: "cancelled",
+}
+
+@doc("A Live session persisted when effective store is true. Uses voice-conversation lifecycle and retention; items are retrieved separately.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveConversation {
+  ...OmitProperties<VoiceConversation, "usage">;
+
+  @doc("Cumulative Live audio usage, excluding delegated-model tokens. May be absent after abnormal close.")
+  usage?: OpenAI.LiveSessionUsage;
+}
+
+@doc("The kind of a persisted Live conversation item.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union VoiceAgentLiveConversationItemType {
+  string,
+  input: "input",
+  output: "output",
+  delegation: "delegation",
+}
+
+@doc("A stored speech segment or delegation. Speech segments are not native turns or proof of playback; delegation results are separate from spoken transcripts.")
+@discriminator("type")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveConversationItem {
+  @doc("The persisted item kind.")
+  type: VoiceAgentLiveConversationItemType;
+
+  @doc("Item ID used for retrieval. Foundry assigns speech IDs; delegation IDs retain their native value.")
+  id: string;
+}
+
+@doc("A stored user speech segment.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveInputConversationItem
+  extends VoiceAgentLiveConversationItem {
+  type: VoiceAgentLiveConversationItemType.input;
+
+  @doc("Captured user transcription, when available.")
+  transcription?: string;
+
+  @doc("Captured audio metadata; audio.item_id matches this item's id.")
+  audio?: VoiceAudioItem;
+}
+
+@doc("A stored assistant speech segment.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveOutputConversationItem
+  extends VoiceAgentLiveConversationItem {
+  type: VoiceAgentLiveConversationItemType.output;
+
+  @doc("Captured assistant transcription, not backend output or commentary guidance.")
+  transcription?: string;
+
+  @doc("Captured audio metadata; audio.item_id matches this item's id.")
+  audio?: VoiceAudioItem;
+}
+
+@doc("A stored delegation using native fields with Foundry-specific targets. Its id is the native delegation ID.")
+@discriminator("target")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveDelegationConversationItem
+  extends VoiceAgentLiveConversationItem {
+  ...OmitProperties<OpenAI.LiveDelegationItem, "id" | "type" | "target">;
+  type: VoiceAgentLiveConversationItemType.delegation;
+
+  @doc("The configured delegation owner.")
+  target: VoiceAgentLiveDelegationTarget;
+
+  @doc("Observed delegation creation time, in Unix seconds.")
+  created_at: FoundryTimestamp;
+}
+
+@doc("Results supplied by the application for client delegation.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveClientDelegationConversationItem
+  extends VoiceAgentLiveDelegationConversationItem {
+  target: VoiceAgentLiveDelegationTarget.client;
+
+  @doc("Guidance for Live to communicate to the user, when accepted.")
+  commentary?: string;
+
+  @doc("Accepted background context, not private reasoning or a request to speak.")
+  thinking?: string;
+}
+
+@doc("Stored Responses delegation output, separate from Live speech.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveResponsesDelegationConversationItem
+  extends VoiceAgentLiveDelegationConversationItem {
+  target: VoiceAgentLiveDelegationTarget.responses;
+
+  @doc("Final backend text, omitted when unavailable; excludes raw tool output.")
+  output?: string;
+}
+
+@doc("Stored prompt-agent delegation state and accepted results.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveFoundryManagedAgentDelegationItem
+  extends VoiceAgentLiveDelegationConversationItem {
+  target: VoiceAgentLiveDelegationTarget.foundry_managed_agent;
+
+  @doc("Target agent name in the same project.")
+  agent_name: string;
+
+  @doc("Target version pinned at connection start.")
+  agent_version: string;
+
+  @doc("Native delegation offset from session start, in milliseconds.")
+  offset_ms: FoundryDurationMilliseconds;
+
+  @doc("Backend conversation ID, distinct from the voice conversation and Live session IDs.")
+  backend_conversation_id?: string;
+
+  @doc("Accepted guidance in order; empty until a result is accepted. Entries have no individual IDs, are noncumulative, and are independent of backend output_index. Partial results survive failure or cancellation.")
+  output: VoiceAgentLiveDelegationResultItem[];
+
+  @doc("Task context sent to the target agent, not the full request body.")
+  delegation_context?: string;
+
+  @doc("The persisted delegation outcome.")
+  status: VoiceAgentLiveDelegationStatus;
 }
 
 // ---------------------------------------------------------------------------
@@ -164,17 +295,6 @@ alias VoiceConversationItemPersistence = {
   response_id?: string;
 };
 
-@@extension(
-  OpenAI.RealtimeConversationItem,
-  "x-ms-foundry-meta",
-  VoiceAgentRequiredPreview
-);
-
-@@extension(
-  OpenAI.RealtimeConversationItemMessageSystem,
-  "x-ms-foundry-meta",
-  VoiceAgentRequiredPreview
-);
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
 @@copyProperties(
   OpenAI.RealtimeConversationItemMessageSystem,
@@ -183,11 +303,6 @@ alias VoiceConversationItemPersistence = {
   }
 );
 
-@@extension(
-  OpenAI.RealtimeConversationItemMessageUser,
-  "x-ms-foundry-meta",
-  VoiceAgentRequiredPreview
-);
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
 @@copyProperties(
   OpenAI.RealtimeConversationItemMessageUser,
@@ -196,11 +311,6 @@ alias VoiceConversationItemPersistence = {
   }
 );
 
-@@extension(
-  OpenAI.RealtimeConversationItemMessageAssistant,
-  "x-ms-foundry-meta",
-  VoiceAgentRequiredPreview
-);
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
 @@copyProperties(
   OpenAI.RealtimeConversationItemMessageAssistant,
@@ -209,11 +319,6 @@ alias VoiceConversationItemPersistence = {
   }
 );
 
-@@extension(
-  OpenAI.RealtimeConversationItemFunctionCall,
-  "x-ms-foundry-meta",
-  VoiceAgentRequiredPreview
-);
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
 @@copyProperties(
   OpenAI.RealtimeConversationItemFunctionCall,
@@ -222,11 +327,6 @@ alias VoiceConversationItemPersistence = {
   }
 );
 
-@@extension(
-  OpenAI.RealtimeConversationItemFunctionCallOutput,
-  "x-ms-foundry-meta",
-  VoiceAgentRequiredPreview
-);
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
 @@copyProperties(
   OpenAI.RealtimeConversationItemFunctionCallOutput,
@@ -238,11 +338,6 @@ alias VoiceConversationItemPersistence = {
   }
 );
 
-@@extension(
-  OpenAI.RealtimeMCPListTools,
-  "x-ms-foundry-meta",
-  VoiceAgentRequiredPreview
-);
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
 @@copyProperties(
   OpenAI.RealtimeMCPListTools,
@@ -251,11 +346,6 @@ alias VoiceConversationItemPersistence = {
   }
 );
 
-@@extension(
-  OpenAI.RealtimeMCPToolCall,
-  "x-ms-foundry-meta",
-  VoiceAgentRequiredPreview
-);
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
 @@copyProperties(
   OpenAI.RealtimeMCPToolCall,
@@ -264,11 +354,6 @@ alias VoiceConversationItemPersistence = {
   }
 );
 
-@@extension(
-  OpenAI.RealtimeMCPApprovalRequest,
-  "x-ms-foundry-meta",
-  VoiceAgentRequiredPreview
-);
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
 @@copyProperties(
   OpenAI.RealtimeMCPApprovalRequest,
@@ -277,11 +362,6 @@ alias VoiceConversationItemPersistence = {
   }
 );
 
-@@extension(
-  OpenAI.RealtimeMCPApprovalResponse,
-  "x-ms-foundry-meta",
-  VoiceAgentRequiredPreview
-);
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Customizing OpenAI type."
 @@copyProperties(
   OpenAI.RealtimeMCPApprovalResponse,
@@ -295,7 +375,6 @@ alias VoiceConversationItemPersistence = {
 // ---------------------------------------------------------------------------
 
 @doc("A voice-audio participant role. Additional values may be added over time.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAudioRole {
   string,
 
@@ -307,7 +386,6 @@ union VoiceAudioRole {
 }
 
 @doc("An audio container format. Additional values may be added over time.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAudioContainerFormat {
   string,
 
@@ -316,7 +394,6 @@ union VoiceAudioContainerFormat {
 }
 
 @doc("An audio codec. Additional values may be added over time.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union VoiceAudioCodec {
   string,
 
@@ -337,7 +414,6 @@ union VoiceAudioCodec {
   credentials. For Foundry-managed storage, `blob_uri` is absent and the bytes are streamed through the item's
   `/audio/content` route.
   """)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAudioItem {
   @doc("The id of the conversation the item belongs to.")
   conversation_id: string;
@@ -372,7 +448,6 @@ model VoiceAudioItem {
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for backward compatibility."
 @doc("A streamed WAV (`audio/wav`) audio response. The bytes are streamed through the service; no SAS URL is returned.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAudioStream {
   @doc("The content type of the streamed audio.")
   @header("Content-Type")
@@ -384,13 +459,12 @@ model VoiceAudioStream {
 }
 
 @doc("The role assigned to each channel of a merged stereo voice recording.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceRecordingChannelLayout {
   @doc("The role carried on the left channel. Always `user`.")
-  left: "user";
+  left: VoiceAudioRole.user;
 
   @doc("The role carried on the right channel. Always `agent`.")
-  right: "agent";
+  right: VoiceAudioRole.agent;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Keeping for backward compatibility."
@@ -403,7 +477,6 @@ model VoiceRecordingChannelLayout {
   own storage credentials. For Foundry-managed storage `blob_uri` is absent and the bytes are streamed via the
   `/audio/content` route instead.
   """)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceRecording {
   @doc("The id of the conversation this recording belongs to.")
   conversation_id: string;
@@ -434,104 +507,41 @@ model VoiceRecording {
 @doc("A service-generated telephony binding identifier.")
 @minLength(1)
 @maxLength(128)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar TelephonyBindingId extends string;
+
+@doc("Trimmed E.164 caller number or restricted `^\\+...$` pattern. Start with a nonzero digit/[1-9], then ASCII digits, single-digit classes/ranges and repeats (1-15); matches have 2-15 digits. Other syntax and reversed ranges/bounds are rejected.")
+@maxLength(256)
+@pattern("^(?:\\+[1-9][0-9]{1,14}|\\^\\\\\\+(?:[1-9]|\\[1-9\\])(?:(?:[0-9]|\\[[0-9](?:-[0-9])?\\])(?:\\{(?:[1-9]|1[0-5])(?:,(?:[1-9]|1[0-5]))?\\})?)+\\$)$")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+scalar SipAllowedCallingNumber extends string;
 
 @doc("A service-generated telephony call identifier.")
 @minLength(1)
 @maxLength(128)
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar TelephonyCallId extends string;
 
 @doc("The unique name of a telephony transfer target.")
 @minLength(1)
 @maxLength(64)
-@pattern("^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@pattern("^[A-Za-z0-9][A-Za-z0-9_-]{0,63}(?![\\s\\S])")
 scalar TelephonyTransferTargetName extends string;
 
 @doc("A telephony provider supported by an agent binding. Known values are stable; additional values may be added over time.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@extension("x-ms-foundry-meta", VoiceAgentConditionalPreview)
 union TelephonyProvider {
   string,
 
-  @doc("Microsoft Teams Phone Extension.")
-  teams_phone_extension: "teams_phone_extension",
+  @doc("Microsoft Teams Phone extensibility.")
+  teams_phone_extensibility: "teams_phone_extensibility",
 
   @doc("Twilio Programmable Voice.")
   twilio: "twilio",
-}
 
-@doc("The lifecycle status of a telephony binding.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union TelephonyBindingStatus {
-  string,
-
-  @doc("The binding accepts new inbound calls.")
-  active: "active",
-
-  @doc("The binding remains configured but rejects new inbound calls.")
-  suspended: "suspended",
-}
-
-@doc("The kind of telephony transfer destination. Known values are stable; additional values may be added over time.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union TelephonyTransferDestinationKind {
-  string,
-
-  @doc("A public switched telephone network destination.")
-  pstn: "pstn",
-
-  @doc("A Microsoft Teams user or resource-account destination.")
-  teams: "teams",
-
-  @doc("A Session Initiation Protocol destination.")
+  @doc("Session Initiation Protocol. SIP is in preview and requires the `VoiceAgents=V1Preview` opt-in.")
   sip: "sip",
 }
 
-@doc("A destination for a telephony transfer target.")
-@discriminator("kind")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyTransferDestination {
-  @doc("The telephony transfer destination type.")
-  kind: TelephonyTransferDestinationKind;
-}
-
-@doc("A PSTN destination for a telephony transfer target.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model PSTNTelephonyTransferDestination extends TelephonyTransferDestination {
-  @doc("The PSTN destination type.")
-  kind: TelephonyTransferDestinationKind.pstn;
-
-  @doc("The E.164 phone number to call.")
-  @pattern("^\\+[1-9]\\d{6,14}$")
-  value: string;
-}
-
-@doc("A Microsoft Teams destination for a telephony transfer target.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TeamsTelephonyTransferDestination extends TelephonyTransferDestination {
-  @doc("The Microsoft Teams destination type.")
-  kind: TelephonyTransferDestinationKind.teams;
-
-  @doc("The Microsoft Teams user or resource-account identifier.")
-  @minLength(1)
-  @maxLength(256)
-  value: string;
-}
-
-@doc("A SIP destination for a telephony transfer target.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model SipTelephonyTransferDestination extends TelephonyTransferDestination {
-  @doc("The SIP destination type.")
-  kind: TelephonyTransferDestinationKind.sip;
-
-  @doc("The SIP or SIPS URI to call.")
-  value: url;
-}
-
 @doc("A named destination to which the voice agent may transfer a call.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyTransferTarget {
   @doc("The unique name exposed to the voice agent for this transfer target.")
   @key
@@ -543,83 +553,36 @@ model TelephonyTransferTarget {
   @maxLength(1024)
   description: string;
 
-  @doc("The provider-specific transfer destination.")
-  destination: TelephonyTransferDestination;
-}
-
-@doc("The request to create a telephony binding.")
-@discriminator("provider")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@clientName("CreateTelephonyBindingContent", "csharp")
-model CreateTelephonyBindingRequest {
-  @doc("The telephony provider.")
-  provider: TelephonyProvider;
-
-  @doc("The Foundry connection name for the telephony provider.")
-  @minLength(1)
-  @maxLength(256)
-  connection_name: string;
-
-  @doc("An optional display label for the binding.")
-  @maxLength(128)
-  label?: string;
-}
-
-@doc("The request to create a Microsoft Teams Phone Extension binding.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@clientName("CreateTeamsPhoneExtensionTelephonyBindingContent", "csharp")
-model CreateTeamsPhoneExtensionTelephonyBindingRequest
-  extends CreateTelephonyBindingRequest {
-  @doc("The Microsoft Teams Phone Extension provider.")
-  provider: TelephonyProvider.teams_phone_extension;
-
-  @doc("The optional display phone number for the Teams resource account.")
-  @maxLength(64)
-  phone_number?: string;
-
-  @doc("The Microsoft Teams resource-account object identifier as a GUID.")
-  resource_account_object_id: Azure.Core.uuid;
-}
-
-@doc("The request to create a Twilio binding.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@clientName("CreateTwilioTelephonyBindingContent", "csharp")
-model CreateTwilioTelephonyBindingRequest
-  extends CreateTelephonyBindingRequest {
-  @doc("The Twilio provider.")
-  provider: TelephonyProvider.twilio;
-
-  @doc("The Twilio E.164 phone number.")
-  @pattern("^\\+[1-9]\\d{6,14}$")
-  phone_number: string;
+  @doc("The shared typed address to transfer to. The selected provider validates supported destination types.")
+  destination: TelephonyAddress;
 }
 
 @doc("The request to update an existing telephony binding. Every property is optional and the binding's provider is immutable.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("UpdateTelephonyBindingContent", "csharp")
 model UpdateTelephonyBindingRequest {
-  @doc("The new lifecycle status.")
-  status?: TelephonyBindingStatus;
-
-  @doc("The replacement display label. Omit it to preserve the current value; use null to clear it.")
+  @doc("Replacement label: omit to preserve, null/blank to clear. Trimmed before length validation.")
   @maxLength(128)
   label?: string | null;
 
-  @doc("The replacement Foundry connection name. This property is valid only for a Teams Phone Extension binding; a Twilio binding's connection is immutable.")
+  @doc("Replacement same-project connection for Teams or SIP (SipInbound only); immutable for Twilio. Null/blank names are invalid.")
   @minLength(1)
   @maxLength(256)
   connection_name?: string;
 
-  @doc("The replacement Teams Phone Extension display phone number. Omit it to preserve the current value; use null to clear it. This property is valid only for a Teams Phone Extension binding.")
+  @doc("Teams/SIP display number, not SIP routing. Omit to preserve; null/empty/blank clears. Unsupported for Twilio.")
   @maxLength(64)
   phone_number?: string | null;
+
+  @doc("SIP caller restrictions: omit to preserve, [] to clear; null is invalid. Network restrictions belong to the connection.")
+  @maxItems(64)
+  allowed_calling_numbers?: SipAllowedCallingNumber[];
 }
 
 @doc("A telephony binding owned by a voice agent.")
 @discriminator("provider")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyBinding {
   @doc("The service-generated binding identifier.")
+  @visibility(Lifecycle.Read)
   id: TelephonyBindingId;
 
   @doc("The telephony provider.")
@@ -634,18 +597,15 @@ model TelephonyBinding {
   @maxLength(128)
   label?: string;
 
-  @doc("The lifecycle status.")
-  status: TelephonyBindingStatus;
-
-  @doc("The service-generated webhook URL to configure with the telephony provider.")
+  @doc("The service-generated incoming address: an HTTPS webhook for webhook-based providers or a SIP/SIPS ingress URI for SIP.")
+  @visibility(Lifecycle.Read)
   incoming_call_url: url;
 }
 
-@doc("A Microsoft Teams Phone Extension binding owned by a voice agent.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TeamsPhoneExtensionTelephonyBinding extends TelephonyBinding {
-  @doc("The Microsoft Teams Phone Extension provider.")
-  provider: TelephonyProvider.teams_phone_extension;
+@doc("A Microsoft Teams Phone extensibility binding owned by a voice agent.")
+model TeamsPhoneExtensibilityTelephonyBinding extends TelephonyBinding {
+  @doc("The Microsoft Teams Phone extensibility provider.")
+  provider: TelephonyProvider.teams_phone_extensibility;
 
   @doc("The optional display phone number for the Teams resource account.")
   @maxLength(64)
@@ -656,19 +616,32 @@ model TeamsPhoneExtensionTelephonyBinding extends TelephonyBinding {
 }
 
 @doc("A Twilio binding owned by a voice agent.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TwilioTelephonyBinding extends TelephonyBinding {
   @doc("The Twilio provider.")
   provider: TelephonyProvider.twilio;
 
   @doc("The Twilio E.164 phone number.")
-  @pattern("^\\+[1-9]\\d{6,14}$")
+  @pattern("^\\+[1-9][0-9]{6,14}(?![\\s\\S])")
   phone_number: string;
+}
+
+@doc("Inbound binding using a same-project SipInbound connection for authentication/network restrictions. Creation does not prove regional runtime readiness.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model SipTelephonyBinding extends TelephonyBinding {
+  @doc("The SIP provider.")
+  provider: TelephonyProvider.sip;
+
+  @doc("Optional display metadata, not a routing key or E.164-constrained destination.")
+  @maxLength(64)
+  phone_number?: string;
+
+  @doc("Exact E.164 caller numbers or restricted anchored patterns, validated by the service. Omit or use [] for no restriction.")
+  @maxItems(64)
+  allowed_calling_numbers?: SipAllowedCallingNumber[];
 }
 
 @doc("A telephony binding returned in a list, including its entity tag.")
 @discriminator("provider")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyBindingListItem {
   @doc("The service-generated binding identifier.")
   id: TelephonyBindingId;
@@ -685,10 +658,7 @@ model TelephonyBindingListItem {
   @maxLength(128)
   label?: string;
 
-  @doc("The lifecycle status.")
-  status: TelephonyBindingStatus;
-
-  @doc("The service-generated webhook URL to configure with the telephony provider.")
+  @doc("The service-generated HTTPS webhook or SIP/SIPS ingress URI to configure with the telephony provider.")
   incoming_call_url: url;
 
   @doc("The entity tag to send in the `If-Match` header when updating or deleting this binding.")
@@ -696,12 +666,11 @@ model TelephonyBindingListItem {
   etag: Azure.Core.eTag;
 }
 
-@doc("A Microsoft Teams Phone Extension binding returned in a list, including its entity tag.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TeamsPhoneExtensionTelephonyBindingListItem
+@doc("A Microsoft Teams Phone extensibility binding returned in a list, including its entity tag.")
+model TeamsPhoneExtensibilityTelephonyBindingListItem
   extends TelephonyBindingListItem {
-  @doc("The Microsoft Teams Phone Extension provider.")
-  provider: TelephonyProvider.teams_phone_extension;
+  @doc("The Microsoft Teams Phone extensibility provider.")
+  provider: TelephonyProvider.teams_phone_extensibility;
 
   @doc("The optional display phone number for the Teams resource account.")
   @maxLength(64)
@@ -712,14 +681,28 @@ model TeamsPhoneExtensionTelephonyBindingListItem
 }
 
 @doc("A Twilio binding returned in a list, including its entity tag.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TwilioTelephonyBindingListItem extends TelephonyBindingListItem {
   @doc("The Twilio provider.")
   provider: TelephonyProvider.twilio;
 
   @doc("The Twilio E.164 phone number.")
-  @pattern("^\\+[1-9]\\d{6,14}$")
+  @pattern("^\\+[1-9][0-9]{6,14}(?![\\s\\S])")
   phone_number: string;
+}
+
+@doc("An inbound SIP binding returned in a list, including its current entity tag.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model SipTelephonyBindingListItem extends TelephonyBindingListItem {
+  @doc("The SIP provider.")
+  provider: TelephonyProvider.sip;
+
+  @doc("Optional display phone metadata, not a routing key.")
+  @maxLength(64)
+  phone_number?: string;
+
+  @doc("Current exact E.164 caller numbers or restricted fully anchored patterns.")
+  @maxItems(64)
+  allowed_calling_numbers?: SipAllowedCallingNumber[];
 }
 
 /** A telephony binding response with its entity tag. */
@@ -745,7 +728,6 @@ alias TelephonyIfMatchHeader = {
 };
 
 @doc("The lifecycle status of an inbound telephony call.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCallStatus {
   string,
 
@@ -760,7 +742,6 @@ union TelephonyCallStatus {
 }
 
 @doc("The provider-neutral phase reached by an inbound telephony call.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCallPhase {
   string,
 
@@ -802,7 +783,6 @@ union TelephonyCallPhase {
 }
 
 @doc("The source of a telephony lifecycle timestamp.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCallTimestampSource {
   string,
 
@@ -817,7 +797,6 @@ union TelephonyCallTimestampSource {
 }
 
 @doc("The timestamp used as the basis for call duration.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCallDurationBasis {
   string,
 
@@ -829,7 +808,6 @@ union TelephonyCallDurationBasis {
 }
 
 @doc("Detailed provider-neutral timing for an inbound telephony call.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallTiming {
   @doc("The Unix timestamp (in seconds) for when the provider webhook was received.")
   received_at?: FoundryTimestamp;
@@ -869,7 +847,6 @@ model TelephonyCallTiming {
 }
 
 @doc("The mode used to expose a telephony call as a customer-facing Foundry trace.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCallTraceMode {
   string,
 
@@ -881,7 +858,6 @@ union TelephonyCallTraceMode {
 }
 
 @doc("The availability status of a customer-facing telephony call trace.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCallTraceStatus {
   string,
 
@@ -905,7 +881,6 @@ union TelephonyCallTraceStatus {
 }
 
 @doc("Correlation from a durable telephony call record to its customer-facing Foundry trace.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallTrace {
   @doc("The trace availability status.")
   status: TelephonyCallTraceStatus;
@@ -927,7 +902,6 @@ model TelephonyCallTrace {
 }
 
 @doc("The outcome of one telephony lifecycle observation.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCallLifecycleEventOutcome {
   string,
 
@@ -951,15 +925,14 @@ union TelephonyCallLifecycleEventOutcome {
 }
 
 @doc("The component that supplied a telephony lifecycle observation.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCallLifecycleEventSource {
   string,
 
   @doc("The Foundry telephony gateway supplied the observation.")
   gateway: "gateway",
 
-  @doc("Microsoft Teams Phone Extension supplied the observation.")
-  teams_phone_extension: "teams_phone_extension",
+  @doc("Microsoft Teams Phone extensibility supplied the observation.")
+  teams_phone_extensibility: "teams_phone_extensibility",
 
   @doc("Twilio supplied the observation.")
   twilio: "twilio",
@@ -969,7 +942,6 @@ union TelephonyCallLifecycleEventSource {
 }
 
 @doc("A provider-neutral lifecycle event name. Known values are stable; additional values may be added over time.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCallLifecycleEventName {
   string,
 
@@ -1008,7 +980,6 @@ union TelephonyCallLifecycleEventName {
 }
 
 @doc("Known service-generated reasons for a telephony lifecycle event. An event reason does not necessarily describe the final outcome of the call. Additional string codes may be returned.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCallLifecycleEventReason {
   string,
 
@@ -1104,7 +1075,6 @@ union TelephonyCallLifecycleEventReason {
 }
 
 @doc("A bounded durable observation in the lifecycle of one telephony call.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallLifecycleEvent {
   @doc("The service-assigned order of the event within the call record.")
   @key
@@ -1152,7 +1122,6 @@ model TelephonyCallLifecycleEvent {
 }
 
 @doc("Known service-generated reasons that one telephony call ended, rather than reasons for an overall outbound call job. Additional string codes may be returned.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCallEndReason {
   string,
 
@@ -1248,7 +1217,6 @@ union TelephonyCallEndReason {
 }
 
 @doc("A summary of a durable inbound call to a voice agent.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallSummary {
   @doc("The service-generated call identifier.")
   id: TelephonyCallId;
@@ -1264,7 +1232,7 @@ model TelephonyCallSummary {
   @maxLength(64)
   caller_number?: string;
 
-  @doc("The Teams Phone Extension or Twilio number that received the call.")
+  @doc("The Teams Phone extensibility or Twilio number that received the call.")
   @maxLength(64)
   provider_number?: string;
 
@@ -1310,7 +1278,6 @@ model TelephonyCallSummary {
 }
 
 @doc("Detailed diagnostics for a durable inbound call to a voice agent.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallRecord {
   ...TelephonyCallSummary;
 
@@ -1328,7 +1295,6 @@ model TelephonyCallRecord {
 }
 
 @doc("A request to transfer an active telephony call to a configured target.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("TelephonyCallTransferContent", "csharp")
 model TelephonyCallTransferRequest {
   @doc("The name of a transfer target configured for the voice agent.")
@@ -1336,7 +1302,6 @@ model TelephonyCallTransferRequest {
 }
 
 @doc("The telephony transfer targets configured for one voice agent.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyTransferTargets {
   @doc("The complete set of destinations to which the voice agent may transfer calls. An empty array clears all targets when replacing the configuration.")
   transfer_targets: TelephonyTransferTarget[];
@@ -1354,31 +1319,9 @@ alias TelephonyTransferTargetsResponse = TelephonyTransferTargets & {
 // ============================================================================
 
 @doc("A service-generated durable outbound call-job identifier.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar TelephonyCallJobId extends string;
 
-@doc("The type of destination for an outbound call.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union TelephonyOutboundDestinationType {
-  string,
-
-  @doc("An E.164 phone number.")
-  phone_number: "phone_number",
-}
-
-@doc("The destination of an outbound call.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyOutboundDestination {
-  @doc("The destination type. Only E.164 phone numbers are currently supported.")
-  type: TelephonyOutboundDestinationType;
-
-  @doc("The destination E.164 phone number.")
-  @pattern("^\\+[1-9]\\d{1,14}$")
-  value: string;
-}
-
 @doc("The retry strategy for an outbound call.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyOutboundRetryPolicyType {
   string,
 
@@ -1388,7 +1331,6 @@ union TelephonyOutboundRetryPolicyType {
 
 @doc("The retry policy for one durable outbound call intent. `max_attempts` includes the first attempt. Strategy-specific settings are defined by the derived policy.")
 @discriminator("type")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyOutboundRetryPolicy {
   @doc("The retry strategy. Only fixed-interval retries are currently supported.")
   type: TelephonyOutboundRetryPolicyType;
@@ -1399,20 +1341,16 @@ model TelephonyOutboundRetryPolicy {
   max_attempts?: int32 = 1;
 }
 
-@doc("The frozen fixed-interval retry policy returned for an outbound call or campaign.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@clientName("TelephonyOutboundFixedIntervalRetryPolicyResult", "csharp")
-model TelephonyOutboundFixedIntervalRetryPolicy
-  extends TelephonyOutboundRetryPolicy {
+@doc("Shared direct-call/Campaign retry policy. Omission means one attempt; CallJobs return max_attempts=1 and interval=0 seconds.")
+model FixedIntervalRetryPolicy extends TelephonyOutboundRetryPolicy {
   @doc("The fixed-interval retry strategy.")
   type: TelephonyOutboundRetryPolicyType.fixed_interval;
 
-  @doc("The fixed delay in seconds between attempts.")
+  @doc("The nonnegative delay between attempts, from 0 to 2147483647 seconds. Zero permits an immediate retry, subject to scheduling and capacity.")
   interval: FoundryDurationSeconds;
 }
 
 @doc("The optional execution window for a direct outbound call.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallJobSchedule {
   @doc("The earliest instant at which dispatch may begin.")
   not_before?: FoundryTimestamp;
@@ -1421,61 +1359,100 @@ model TelephonyCallJobSchedule {
   expires_at?: FoundryTimestamp;
 }
 
-@doc("An outbound caller identity: an E.164 phone number or a non-empty Teams Resource Account UUID. The connection category determines which form is accepted.")
+@doc("Extensible endpoint address kinds. Address type describes the endpoint independently of the provider.")
+@extension("x-ms-foundry-meta", VoiceAgentConditionalPreview)
+union TelephonyAddressType {
+  string,
+
+  @doc("An E.164 phone number.")
+  phone_number: "phone_number",
+
+  @doc("A Microsoft Teams identity. Source addresses require a nonempty resource-account object GUID; transfer destinations also support 28:orgid:{guid}.")
+  teams: "teams",
+
+  @doc("A SIP or SIPS destination for transfer. SIP is in preview and requires the `VoiceAgents=V1Preview` opt-in.")
+  sip: "sip",
+}
+
+@doc("Shared source, recipient and transfer address. Connections validate each role before dialing; unsupported types fail. New types may be added.")
+@discriminator("type")
+model TelephonyAddress {
+  @doc("Endpoint address type.")
+  type: TelephonyAddressType;
+
+  @doc("Concrete address value. Known variants apply their format constraints; unknown variants are rejected before dialing.")
+  @minLength(1)
+  value: string;
+}
+
+@doc("Phone-number address used by supported source and destination roles.")
+model PhoneNumber extends TelephonyAddress {
+  @doc("The phone-number address type.")
+  type: TelephonyAddressType.phone_number;
+
+  @doc("E.164 phone number.")
+  // ASCII digits and an absolute end assertion: $ alone also matches before a final newline.
+  @pattern("^\\+[1-9][0-9]{1,14}(?![\\s\\S])")
+  value: string;
+}
+
+@doc("Teams source/transfer identity, validated by role and provider. Not supported for outbound recipients.")
+model TeamsAddress extends TelephonyAddress {
+  @doc("The Microsoft Teams address type.")
+  type: TelephonyAddressType.teams;
+
+  @doc("Source: nonempty resource-account GUID. Transfer: user/resource-account GUID or 28:orgid:{guid}.")
+  @minLength(1)
+  @maxLength(256)
+  value: string;
+}
+
+@doc("SIP/SIPS transfer address, subject to provider validation. SIP outbound sources and recipients use phone_number, not SIP URIs.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@minLength(1)
-@maxLength(36)
-@pattern("^(?:\\+[1-9][0-9]{1,14}|(?!00000000-0000-0000-0000-000000000000$)[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})$")
-scalar TelephonyOutboundSource extends string;
+model SipAddress extends TelephonyAddress {
+  @doc("The SIP address type.")
+  type: TelephonyAddressType.sip;
+
+  @doc("The SIP or SIPS URI to call.")
+  @maxLength(2048)
+  value: url;
+}
 
 @doc("Customer-controlled configuration shared by direct and campaign-created call jobs.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@example(#{
+  connection_name: "telephony-twilio",
+  source: #{ type: "phone_number", value: "+14255550100" },
+  destination: #{ type: "phone_number", value: "+14255550123" },
+})
+@example(#{
+  connection_name: "telephony-acs",
+  source: #{ type: "teams", value: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa" },
+  destination: #{ type: "phone_number", value: "+14255550123" },
+})
 model TelephonyCallJobConfiguration {
   @doc("The phone destination to call.")
-  destination: TelephonyOutboundDestination;
+  destination: TelephonyAddress;
 
-  @doc("The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required.")
+  @doc("Same-project Twilio, ACS/Teams Phone extensibility or SipOutbound connection; no inbound binding needed. SIP requires CustomKeys and a DNS target, revalidated before dialing, not a connectivity guarantee.")
   @minLength(1)
   @maxLength(256)
   connection_name: string;
 
-  @doc("The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone Extension connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.")
-  @minLength(1)
-  source: TelephonyOutboundSource;
+  @doc("Caller identity: phone_number for Twilio/SIP, or a teams resource-account GUID for ACS/Teams Phone extensibility. No sip source URI.")
+  source: TelephonyAddress;
 
   @doc("An optional customer-declared purpose for placing the call.")
   @minLength(1)
   purpose?: string;
 
-  @doc("Structured input values available to the agent and greeting for this call. Agent-declared inputs are validated against their schemas; omitted optional inputs may use their Agent-defined default values, while omitted required inputs are rejected. Additional inputs remain available as dynamic template variables.")
+  @doc("Agent/greeting inputs, including nested JSON and null. Agent schemas, required fields and defaults apply.")
   structured_inputs?: Record<unknown>;
 
   @doc("The optional execution window.")
   schedule?: TelephonyCallJobSchedule;
 }
 
-@doc("A request to create one durable direct outbound call job.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@clientName("CreateTelephonyCallJobContent", "csharp")
-@example(#{
-  connection_name: "telephony-twilio",
-  source: "+14255550100",
-  destination: #{ type: "phone_number", value: "+14255550123" },
-})
-@example(#{
-  connection_name: "telephony-acs",
-  source: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-  destination: #{ type: "phone_number", value: "+14255550123" },
-})
-model CreateTelephonyCallJobRequest {
-  ...TelephonyCallJobConfiguration;
-
-  @doc("The provider-attempt retry policy. Omit it for one attempt with no retry delay.")
-  retry_policy?: TelephonyOutboundRetryPolicy;
-}
-
 @doc("The lifecycle status of a durable outbound call job.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCallJobStatus {
   string,
   accepted: "accepted",
@@ -1493,7 +1470,6 @@ union TelephonyCallJobStatus {
 }
 
 @doc("Known terminal reasons for an overall outbound call job, which can span multiple provider attempts. These are distinct from individual call lifecycle reasons. Additional string codes may be returned.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCallJobTerminalReason {
   string,
 
@@ -1562,7 +1538,6 @@ union TelephonyCallJobTerminalReason {
 }
 
 @doc("A cancellation request recorded for an outbound call job.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallJobCancellation {
   @doc("The authenticated principal that requested cancellation.")
   requested_by: string;
@@ -1578,57 +1553,93 @@ model TelephonyCallJobCancellation {
   revision: int64;
 }
 
+@doc("Immutable customer-chosen Campaign name within a project and Agent.")
+@minLength(1)
+@maxLength(64)
+@pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}(?![\\s\\S])")
+scalar TelephonyCampaignName extends string;
+
 @doc("A durable direct or campaign-created outbound call intent.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallJob {
-  ...TelephonyCallJobConfiguration;
+  ...OmitProperties<TelephonyCallJobConfiguration, "source">;
 
   @doc("The service-generated call-job identifier.")
+  @visibility(Lifecycle.Read)
   id: TelephonyCallJobId;
 
-  @doc("The object type. Always `telephony.call_job`.")
-  object: "telephony.call_job";
-
   @doc("The name of the voice agent used at execution time.")
+  @visibility(Lifecycle.Read)
   agent_name: string;
 
   @doc("The current call-job lifecycle status.")
+  @visibility(Lifecycle.Read)
   status: TelephonyCallJobStatus;
 
   @doc("The recorded cancellation request, when cancellation was requested.")
+  @visibility(Lifecycle.Read)
   cancellation?: TelephonyCallJobCancellation;
 
-  @doc("The frozen provider-attempt retry policy.")
+  @doc("Frozen retry policy. Omission at creation returns fixed_interval with max_attempts=1 and interval=0 seconds: one initial attempt, no retry.")
   retry_policy: TelephonyOutboundRetryPolicy;
 
   @doc("The number of provider attempts created so far.")
   @minValue(0)
+  @visibility(Lifecycle.Read)
   attempt_count: int32;
 
   @doc("The Unix timestamp in seconds at which the next retry becomes eligible.")
+  @visibility(Lifecycle.Read)
   next_attempt_at?: FoundryTimestamp;
 
   @doc("The stable service-generated reason for the overall outbound call job, which can span multiple provider attempts, when available. Interpret this with `status`: a queued job can retain a temporary dispatch-deferral reason. Additional string codes may be returned.")
+  @visibility(Lifecycle.Read)
   terminal_reason?: TelephonyCallJobTerminalReason;
 
   @doc("The monotonically increasing optimistic-concurrency revision.")
   @minValue(0)
+  @visibility(Lifecycle.Read)
   revision: int64;
 
   @doc("The Unix timestamp in seconds when the call job was created.")
+  @visibility(Lifecycle.Read)
   created_at: FoundryTimestamp;
 
   @doc("The Unix timestamp in seconds when the call job was last updated.")
+  @visibility(Lifecycle.Read)
   updated_at: FoundryTimestamp;
+
+  // Preserve the existing SDK response order when appending Campaign fields.
+  ...PickProperties<TelephonyCallJobConfiguration, "source">;
+
+  @doc("Owning Campaign, absent for direct calls. Instance-bound despite name reuse; Campaign deletion hides then removes its jobs.")
+  @visibility(Lifecycle.Read)
+  campaign_name?: TelephonyCampaignName;
+}
+
+@doc("The direct outbound call to create.")
+model TelephonyCallJobCreate {
+  ...OmitProperties<TelephonyCallJobConfiguration, "source">;
+  ...OptionalProperties<PickProperties<TelephonyCallJob, "retry_policy">>;
+  ...PickProperties<TelephonyCallJobConfiguration, "source">;
 }
 
 alias TelephonyCallJobResponse = {
-  @bodyRoot body: TelephonyCallJob;
-  @header("ETag") etag: Azure.Core.eTag;
+  @doc("The current durable call-job resource.")
+  @bodyRoot
+  body: TelephonyCallJob;
+
+  @doc("The current call-job entity tag. Send it in If-Match when requesting cancellation.")
+  @header("ETag")
+  etag: Azure.Core.eTag;
 };
 
 alias TelephonyCallJobAcceptedResponse = TypeSpec.Http.Response<202> &
   TelephonyCallJobResponse & {
-    @header("Location") location: string;
-    @header("Retry-After") retry_after: FoundryDurationSeconds;
+    @doc("The URI for reading the accepted call-job resource and its execution status.")
+    @header("Location")
+    location: string;
+
+    @doc("Suggested delay in seconds before reading the call-job resource again.")
+    @header("Retry-After")
+    retry_after: FoundryDurationSeconds;
   };

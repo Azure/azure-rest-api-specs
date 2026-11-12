@@ -26,18 +26,7 @@ These are the global settings for the portal.
 
 ```yaml
 openapi-type: arm
-tag: package-2026-04-01
-```
-
-### Tag: package-2026-04-01
-
-These settings apply only when `--tag=package-2026-04-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2026-04-01'
-input-file:
-  - stable/2026-04-01/common.json
-  - stable/2026-04-01/portal.json
-  - stable/2026-04-01/tenantConfiguration.json
+tag: package-2025-04-01-preview
 ```
 
 ### Tag: package-2025-04-01-preview
@@ -116,7 +105,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
-  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_portal']
@@ -136,10 +124,6 @@ See configuration in [readme.python.md](./readme.python.md)
 ## Ruby
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## CSharp
 

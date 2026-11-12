@@ -1,0 +1,60 @@
+{
+  "operationId": "CarbonService_QueryCarbonEmissionReportsByBillingAccount",
+  "title": "QueryCarbonEmission By BillingAccount Top N Subscriptions Monthly Report",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "scope": "providers/Microsoft.Billing/billingAccounts/12345678",
+    "queryParameters": {
+      "reportType": "TopItemsMonthlySummaryReport",
+      "carbonScopeList": [
+        "Scope1",
+        "Scope3"
+      ],
+      "dateRange": {
+        "start": "2024-03-01",
+        "end": "2024-05-01"
+      },
+      "categoryType": "Subscription",
+      "topItems": 2
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "Returns data for top N subscriptions monthly report scoped to a billing account.",
+      "body": {
+        "value": [
+          {
+            "dataType": "TopItemsMonthlySummaryData",
+            "latestMonthEmissions": 1.2,
+            "previousMonthEmissions": 1.0,
+            "monthOverMonthEmissionsChangeRatio": 0.2,
+            "monthlyEmissionsChangeValue": 0.2,
+            "itemName": "00000000-0000-0000-0000-000000000000",
+            "categoryType": "Subscription",
+            "date": "2024-05-01"
+          },
+          {
+            "dataType": "TopItemsMonthlySummaryData",
+            "latestMonthEmissions": 1.1,
+            "previousMonthEmissions": 0.95,
+            "monthOverMonthEmissionsChangeRatio": 0.1579,
+            "monthlyEmissionsChangeValue": 0.15,
+            "itemName": "00000000-0000-0000-0000-000000000000",
+            "categoryType": "Subscription",
+            "date": "2024-04-01"
+          },
+          {
+            "dataType": "TopItemsMonthlySummaryData",
+            "latestMonthEmissions": 0.95,
+            "previousMonthEmissions": 0.9,
+            "monthOverMonthEmissionsChangeRatio": 0.0556,
+            "monthlyEmissionsChangeValue": 0.05,
+            "itemName": "00000000-0000-0000-0000-000000000001",
+            "categoryType": "Subscription",
+            "date": "2024-03-01"
+          }
+        ]
+      }
+    }
+  }
+}

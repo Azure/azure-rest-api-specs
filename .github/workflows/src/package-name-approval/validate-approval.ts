@@ -2,12 +2,12 @@ import { extractInputs } from "../context.ts";
 import type { Context, Core, GitHub, GitHubScriptArgs, WebhookEvent } from "../github.ts";
 import {
   ALLOWED_BOT_LOGINS,
-  evaluateLabelAuthorization,
-  loadProtectedLabelsConfig,
-  type ProtectedLabelsConfig,
-} from "../protected-labels/authorization.ts";
+  evaluatePackageNameAuthorization,
+  loadPackageNamePolicy,
+  type PackageNamePolicy,
+} from "./policy.ts";
 import { createApproversConfig } from "./approvers.ts";
-import { buildUnauthorizedApplyComment } from "../protected-labels/label-comments.ts";
+import { buildUnauthorizedApplyComment } from "../label-policy-comments.ts";
 import { removeLabelIfPresent } from "./labels.ts";
 
 export type ValidateContext = {
@@ -95,14 +95,14 @@ async function handleLabeled({
   prNumber,
   isMgmt,
   labels,
-  protectedLabelsConfig,
-}: ValidateContext & { labels: string[]; protectedLabelsConfig: ProtectedLabelsConfig }) {
+  packageNamePolicy,
+}: ValidateContext & { labels: string[]; packageNamePolicy: PackageNamePolicy }) {
   let langsToApprove: string[];
 
   if (targetLabel === "package-name-approved-all") {
     // package-name-approved-all is a shortcut for management-plane only.
     // On mgmt PRs, a single label approves all pending languages at once.
-    // Authorization is enforced synchronously below (evaluateLabelAuthorization)
+    // Authorization is enforced synchronously below.
     // before any approval side effect runs.
     if (!isMgmt) {
       await github.rest.issues.removeLabel({
@@ -130,7 +130,7 @@ async function handleLabeled({
       return;
     }
 
-    // Authorization is enforced synchronously below (evaluateLabelAuthorization)
+    // Authorization is enforced synchronously below.
     // before any approval side effect, so an unauthorized label cannot green the
     // status even briefly. check-label.js (protected-labels) still removes the label
     // independently as defense in depth; correctness no longer depends on its timing.
@@ -138,11 +138,10 @@ async function handleLabeled({
     langsToApprove = [lang];
   }
 
-  const authorization = evaluateLabelAuthorization({
-    config: protectedLabelsConfig,
+  const authorization = evaluatePackageNameAuthorization({
+    policy: packageNamePolicy,
     labelName: targetLabel,
     actor,
-    prLabels: labels,
     plane: isMgmt ? "management-plane" : "data-plane",
   });
   if (
@@ -285,8 +284,8 @@ async function handleLabeled({
  * Handles both labeled (approval) and unlabeled (guard against unauthorized removal).
  */
 export default async function validateApproval({ github, context, core }: GitHubScriptArgs) {
-  const protectedLabelsConfig = await loadProtectedLabelsConfig();
-  const approversConfig = createApproversConfig(protectedLabelsConfig);
+  const packageNamePolicy = await loadPackageNamePolicy();
+  const approversConfig = createApproversConfig(packageNamePolicy);
 
   const { owner, repo, issue_number } = await extractInputs(github, context, core);
 
@@ -343,6 +342,6 @@ export default async function validateApproval({ github, context, core }: GitHub
     prNumber: issue_number,
     isMgmt,
     labels,
-    protectedLabelsConfig,
+    packageNamePolicy,
   });
 }

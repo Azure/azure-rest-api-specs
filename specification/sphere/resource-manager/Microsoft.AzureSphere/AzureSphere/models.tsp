@@ -211,7 +211,7 @@ union ImageType {
   RecoveryManifest: "RecoveryManifest",
 
   /**
-   * manifest set image type
+   * Manifest set image type
    */
   ManifestSet: "ManifestSet",
 
@@ -831,6 +831,7 @@ model CustomFilterQueryParameter {
   /**
    * Filter the result list using the given expression
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing POST contracts using CustomFilterQueryParameter.filter retain the $filter query parameter for wire compatibility."
   @query("$filter")
   filter?: string;
 }
@@ -842,6 +843,7 @@ model CustomTopQueryParameter {
   /**
    * The number of result items to return.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing POST contracts using CustomTopQueryParameter.top retain the $top query parameter for wire compatibility."
   @query("$top")
   top?: int32;
 }
@@ -853,6 +855,7 @@ model CustomSkipQueryParameter {
   /**
    * The number of result items to skip.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing POST contracts using CustomSkipQueryParameter.skip retain the $skip query parameter for wire compatibility."
   @query("$skip")
   skip?: int32;
 }
@@ -864,6 +867,7 @@ model CustomMaxPageSizeQueryParameter {
   /**
    * The maximum number of result items per page.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing POST contracts using CustomMaxPageSizeQueryParameter.maxpagesize retain the $maxpagesize query parameter for wire compatibility."
   @query("$maxpagesize")
   maxpagesize?: int32;
 }

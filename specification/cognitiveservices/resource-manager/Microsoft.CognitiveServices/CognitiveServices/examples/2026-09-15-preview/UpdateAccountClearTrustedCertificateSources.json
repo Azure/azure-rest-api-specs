@@ -1,0 +1,55 @@
+{
+  "operationId": "Accounts_Update",
+  "title": "Clear account private CA trust using an empty array",
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "myResourceGroup",
+    "accountName": "myAccount",
+    "api-version": "2026-09-15-preview",
+    "account": {
+      "properties": {
+        "trustedCertificateSources": []
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.CognitiveServices/accounts/myAccount",
+        "name": "myAccount",
+        "type": "Microsoft.CognitiveServices/accounts",
+        "kind": "AIServices",
+        "location": "eastus",
+        "sku": {
+          "name": "S0"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "allowProjectManagement": true,
+          "trustedCertificateSources": []
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/11111111-2222-3333-4444-555555555555?api-version=2026-09-15-preview",
+        "Retry-After": 30
+      },
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.CognitiveServices/accounts/myAccount",
+        "name": "myAccount",
+        "type": "Microsoft.CognitiveServices/accounts",
+        "kind": "AIServices",
+        "location": "eastus",
+        "sku": {
+          "name": "S0"
+        },
+        "properties": {
+          "provisioningState": "Accepted",
+          "allowProjectManagement": true,
+          "trustedCertificateSources": []
+        }
+      }
+    }
+  }
+}

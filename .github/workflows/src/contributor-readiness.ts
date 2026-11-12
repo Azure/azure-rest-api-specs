@@ -315,12 +315,12 @@ export async function evaluateReadinessParticipants(
     );
     if (write === false) {
       const impacts: string[] = [];
-      if (participant.roles.has("PR author"))
-        impacts.push("PR author cannot run Azure DevOps pipelines for this PR.");
+      if (participant.roles.has("PR author")) {
+        impacts.push("Cannot run Azure DevOps pipelines.");
+        impacts.push("Cannot add PR labels.");
+      }
       if (participant.roles.has("approved reviewer"))
-        impacts.push(
-          "Reviewer approval does not count toward required reviews (GitHub's green approval check). This reviewer must set up or renew their access.",
-        );
+        impacts.push("Approval does not count toward required reviews (GitHub's green check).");
       findings.push({
         subject: participant.login,
         message: "No repository write access.",
@@ -339,18 +339,18 @@ export function renderReadiness(
   verifiedParticipants: Participant[] = [],
 ): string {
   return renderMarkdownDoc(
-    section(
-      "Contributor readiness: required access",
+    section("Contributor readiness: required access", [
       findings.length
         ? [
-            "> [!WARNING]\n> **The access issues below can prevent PR approvals from counting or block Azure DevOps pipeline runs.**",
+            "> [!WARNING]\n> **Access issues can block approvals, Azure DevOps pipelines, or labeling.**",
             renderReadinessFindings(participants, findings),
-            `Internal contributors: ${link("setup / renew required access", ONBOARDING)}. Recheck: ${inlineCode(COMMAND)}.`,
+            `Internal contributors: ${link("set up / renew access", ONBOARDING)}. Recheck: ${inlineCode(COMMAND)}.`,
             renderVerifiedContributors(verifiedParticipants),
-            "Non-blocking report; external fork contributions are allowed. GitHub review rules still apply.",
+            "Non-blocking check; fix access issues to unblock affected actions.",
           ]
         : "✅ No contributor-readiness issues found.",
-    ),
+      `Last updated: ${new Date().toISOString()}`,
+    ]),
     2,
   );
 }
