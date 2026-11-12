@@ -120,6 +120,13 @@ namespace Azure.AI.Projects;
 @@clientName(Indexes.listLatest, "listIndexes", "csharp");
 @@clientName(Indexes.listVersions, "listIndexVersions", "csharp");
 
+// Foundry training jobs: SDK names only; REST paths, JSON and OpenAPI operation IDs keep the Jobs/Job names.
+// The PUT body parameter's SDK names are set on the parameter in ../jobs/routes.tsp.
+@@clientName(Jobs, "TrainingJobs", "csharp");
+@@clientName(Job, "TrainingJob", "csharp");
+@@clientName(Jobs.get, "getTrainingJob", "csharp");
+@@clientName(Jobs.list, "listTrainingJobs", "csharp");
+
 // Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
 // input parameter that calls either on these two.
 @@access(Connections.get, Access.internal);

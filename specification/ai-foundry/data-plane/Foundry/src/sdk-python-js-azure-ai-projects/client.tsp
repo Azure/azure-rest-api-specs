@@ -879,22 +879,26 @@ model AIProjectClientOptions {
 );
 
 // --------------------------------------------------------------------------------
-// Beta Jobs (Foundry training jobs) sub-client
+// Beta TrainingJobs (Foundry training jobs) sub-client
 // --------------------------------------------------------------------------------
 namespace Azure.AI.Projects.Beta {
-  interface Jobs {}
+  interface TrainingJobs {}
 }
 
-@@clientLocation(Jobs.list, Azure.AI.Projects.Beta.Jobs);
-@@clientLocation(Jobs.get, Azure.AI.Projects.Beta.Jobs);
-@@clientLocation(Jobs.createOrUpdate, Azure.AI.Projects.Beta.Jobs);
-@@clientLocation(Jobs.delete, Azure.AI.Projects.Beta.Jobs);
-@@clientLocation(Jobs.cancel, Azure.AI.Projects.Beta.Jobs);
-@@clientLocation(Jobs.listArtifacts, Azure.AI.Projects.Beta.Jobs);
+@@clientLocation(Jobs.list, Azure.AI.Projects.Beta.TrainingJobs);
+@@clientLocation(Jobs.get, Azure.AI.Projects.Beta.TrainingJobs);
+@@clientLocation(Jobs.createOrUpdate, Azure.AI.Projects.Beta.TrainingJobs);
+@@clientLocation(Jobs.delete, Azure.AI.Projects.Beta.TrainingJobs);
+@@clientLocation(Jobs.cancel, Azure.AI.Projects.Beta.TrainingJobs);
+@@clientLocation(Jobs.listArtifacts, Azure.AI.Projects.Beta.TrainingJobs);
 @@clientLocation(
   Jobs.getArtifactContentInformation,
-  Azure.AI.Projects.Beta.Jobs
+  Azure.AI.Projects.Beta.TrainingJobs
 );
+
+// SDK names only; REST paths, JSON and OpenAPI operation IDs keep the Jobs/Job names.
+// The PUT body parameter's SDK names are set on the parameter in ../jobs/routes.tsp.
+@@clientName(Job, "TrainingJob");
 
 @@clientName(Jobs.get, "get", "python");
 @@clientName(Jobs.list, "list", "python");
