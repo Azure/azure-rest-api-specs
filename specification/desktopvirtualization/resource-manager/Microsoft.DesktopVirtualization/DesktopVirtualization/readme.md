@@ -41,11 +41,9 @@ suppressions:
   - code: RequiredPropertiesMissingInResourceModel
     from: desktopvirtualization.json
     reason: |
-      Discussed in the ARM API office hour and get approved. Even Common type for operation result don't have
-      the related properties. The rule seems conflict with the contract.
-      https://github.com/Azure/azure-rest-api-specs/blob/main/specification/common-types/resource-management/v5/types.json#L270
-      and also https://github.com/Azure/azure-openapi-validator/pull/767#issuecomment-2732917683.
-      There is a fix for this and is waiting for the rollout.
+      This /operations list contains supported-operation metadata, not ARM resource instances.
+      The current validator still requires read-only id, name, and type on its items;
+      those resource-identity requirements do not match the ResourceProviderOperation contract.
     where:
       - $.definitions.ResourceProviderOperationListResult
   - code: PutResponseCodes
