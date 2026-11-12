@@ -2477,6 +2477,7 @@
         "x-ms-summary-override": "Create an agent",
         "x-ms-foundry-meta": {
           "conditional_previews": [
+            "A2AAgents=V1Preview",
             "WorkflowAgents=V1Preview",
             "VoiceAgents=V1Preview",
             "DraftAgents=V1Preview",
@@ -2781,6 +2782,11 @@
         },
         "x-ms-description-override": "Updates the agent by adding a new version if there are any changes to the agent definition. If no changes, returns the existing agent version.",
         "x-ms-summary-override": "Update an agent",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "A2AAgents=V1Preview"
+          ]
+        },
         "tags": [
           "Agents"
         ],
@@ -2884,6 +2890,18 @@
         "description": "Applies a merge-patch update to the specified agent endpoint configuration.",
         "parameters": [
           {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "A2AAgents=V1Preview"
+              ]
+            }
+          },
+          {
             "name": "agent_name",
             "in": "path",
             "required": true,
@@ -2948,6 +2966,11 @@
               }
             }
           }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "A2AAgents=V1Preview"
+          ]
         }
       }
     },
@@ -6857,6 +6880,18 @@
         "description": "Updates the agent from a manifest by adding a new version if there are any changes to the agent definition.\nIf no changes, returns the existing agent version.",
         "parameters": [
           {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "A2AAgents=V1Preview"
+              ]
+            }
+          },
+          {
             "name": "agent_name",
             "in": "path",
             "required": true,
@@ -6920,6 +6955,11 @@
               }
             }
           }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "A2AAgents=V1Preview"
+          ]
         }
       }
     },
@@ -10137,6 +10177,7 @@
         "x-ms-summary-override": "Create an agent version",
         "x-ms-foundry-meta": {
           "conditional_previews": [
+            "A2AAgents=V1Preview",
             "WorkflowAgents=V1Preview",
             "VoiceAgents=V1Preview",
             "DraftAgents=V1Preview",
@@ -10575,6 +10616,18 @@
         "description": "Imports the provided manifest to create a new version for the specified agent.",
         "parameters": [
           {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "A2AAgents=V1Preview"
+              ]
+            }
+          },
+          {
             "name": "agent_name",
             "in": "path",
             "required": true,
@@ -10639,6 +10692,11 @@
               }
             }
           }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "A2AAgents=V1Preview"
+          ]
         }
       }
     },
@@ -10826,6 +10884,18 @@
         "description": "Imports the provided manifest to create an agent and returns the created resource.",
         "parameters": [
           {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "A2AAgents=V1Preview"
+              ]
+            }
+          },
+          {
             "name": "api-version",
             "in": "query",
             "required": true,
@@ -10880,6 +10950,11 @@
               }
             }
           }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "A2AAgents=V1Preview"
+          ]
         }
       }
     },
@@ -35890,6 +35965,7 @@
       "AgentDefinitionOptInKeys": {
         "type": "string",
         "enum": [
+          "A2AAgents=V1Preview",
           "WorkflowAgents=V1Preview",
           "ExternalAgents=V1Preview",
           "DraftAgents=V1Preview",
@@ -42309,6 +42385,7 @@
             "description": "The agent definition. This can be a prompt, workflow, hosted, external, or voice agent definition.",
             "x-ms-foundry-meta": {
               "conditional_previews": [
+                "A2AAgents=V1Preview",
                 "WorkflowAgents=V1Preview",
                 "VoiceAgents=V1Preview",
                 "DraftAgents=V1Preview",
@@ -42353,6 +42430,7 @@
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
+            "A2AAgents=V1Preview",
             "WorkflowAgents=V1Preview",
             "VoiceAgents=V1Preview",
             "DraftAgents=V1Preview",
@@ -42481,6 +42559,7 @@
             "description": "The agent definition. This can be a prompt, workflow, hosted, external, or voice agent definition.",
             "x-ms-foundry-meta": {
               "conditional_previews": [
+                "A2AAgents=V1Preview",
                 "WorkflowAgents=V1Preview",
                 "VoiceAgents=V1Preview",
                 "DraftAgents=V1Preview",
@@ -47825,7 +47904,7 @@
             "items": {
               "$ref": "#/components/schemas/ProtocolVersionRecord"
             },
-            "description": "The protocols that the agent supports for ingress communication.",
+            "description": "The protocols that the agent supports for ingress communication. (Preview) Declaring the `a2a` protocol enables A2A passthrough to the hosted agent and requires `Foundry-Features: A2AAgents=V1Preview` when creating or modifying the hosted agent definition.",
             "examples": [
               [
                 {
@@ -47837,7 +47916,12 @@
                   "version": "v0.3.0"
                 }
               ]
-            ]
+            ],
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "A2AAgents=V1Preview"
+              ]
+            }
           },
           "code_configuration": {
             "$ref": "#/components/schemas/CodeConfiguration",
@@ -106958,6 +107042,7 @@
             "description": "The agent definition. This can be a prompt, workflow, hosted, external, or voice agent definition.",
             "x-ms-foundry-meta": {
               "conditional_previews": [
+                "A2AAgents=V1Preview",
                 "WorkflowAgents=V1Preview",
                 "VoiceAgents=V1Preview",
                 "DraftAgents=V1Preview",
@@ -106975,6 +107060,7 @@
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
+            "A2AAgents=V1Preview",
             "WorkflowAgents=V1Preview",
             "VoiceAgents=V1Preview",
             "DraftAgents=V1Preview",
