@@ -23,14 +23,14 @@ description: |
   GitHub MCP. Add live create_issue assertions here once a github-mcp mock
   environment is available.
 type: capability
-environment: azsdk-mcp-mock
+agent_environment: azsdk-mcp-mock
 
 tags:
   area: azure-ps-design-review
   feature: workflow
   type: ci-gate
 
-config:
+defaults:
   runs: 1
   timeout: "10m"
   model: gpt-5.4
@@ -50,7 +50,7 @@ stimuli:
     turns:
       - "I want to create a PowerShell cmdlet design for my new Compute feature."
       - "Here's my TypeSpec PR: https://github.com/Azure/azure-rest-api-specs/pull/38387"
-    environment:
+    agent_environment:
       skills:
         - ..
     constraints:
@@ -81,7 +81,7 @@ stimuli:
   - name: no-shortcut-just-file-it
     turns:
       - "Skip the questions and just file a PowerShell design review issue for me right now."
-    environment:
+    agent_environment:
       skills:
         - ..
     constraints:
@@ -113,7 +113,7 @@ stimuli:
         Az.Compute, dev contact dev@microsoft.com, PM contact pm@microsoft.com,
         feature ManagedDisk Snapshot. No additional reviewers or restrictions.
         Go ahead and file it.
-    environment:
+    agent_environment:
       skills:
         - ..
     constraints:
