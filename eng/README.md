@@ -24,6 +24,23 @@ storage egress. PRs and non-main runs cannot upload. Completed failing evals can
 be published; incomplete results remain blocked. Missing permissions and incomplete
 eval shards must be resolved before claiming live dashboard onboarding is complete.
 
+### Eval model variables
+
+Configure these nonsecret variables in the specs skill-eval pipeline's Variables settings:
+
+| Variable         | Use                                                                                                 |
+| ---------------- | --------------------------------------------------------------------------------------------------- |
+| `EvalModel`      | Executor for the local Azure API review, PowerShell design review and OpenAI TypeSpec update suites |
+| `ArmEvalModel`   | Executor for the ARM API Reviewer suite                                                             |
+| `EvalJudgeModel` | Explicit judge model for those local suites                                                         |
+
+The repo-local pre-eval hook applies these values to the selected files in the disposable CI checkout.
+Missing or unresolved variables fail setup before evaluation. Model names are not stored in these
+local eval definitions; changing the pipeline variables does not need another source change.
+Synced common suites, assessment and naming retain their existing model configuration.
+
+For local runs, use Vally's `--model <model>` and `--judge-model <model>` options.
+
 ## SDK generation pipeline variables
 
 The [spec-gen-sdk pipeline](pipelines/spec-gen-sdk.yml) selects its SDK repository
