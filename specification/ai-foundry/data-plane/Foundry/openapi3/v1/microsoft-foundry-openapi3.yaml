@@ -1606,6 +1606,7 @@ paths:
       x-ms-summary-override: Create an agent
       x-ms-foundry-meta:
         conditional_previews:
+          - A2AAgents=V1Preview
           - WorkflowAgents=V1Preview
           - VoiceAgents=V1Preview
           - DraftAgents=V1Preview
@@ -1823,6 +1824,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       x-ms-description-override: Updates the agent by adding a new version if there are any changes to the agent definition. If no changes, returns the existing agent version.
       x-ms-summary-override: Update an agent
+      x-ms-foundry-meta:
+        conditional_previews:
+          - A2AAgents=V1Preview
       tags:
         - Agents
       requestBody:
@@ -1893,6 +1897,14 @@ paths:
       summary: Update an agent endpoint
       description: Applies a merge-patch update to the specified agent endpoint configuration.
       parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - A2AAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -1934,6 +1946,9 @@ paths:
           application/merge-patch+json:
             schema:
               $ref: '#/components/schemas/PatchAgentRequest'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - A2AAgents=V1Preview
   /agents/{agent_name}/code:download:
     get:
       operationId: Agents_downloadAgentCode
@@ -4754,6 +4769,14 @@ paths:
         Updates the agent from a manifest by adding a new version if there are any changes to the agent definition.
         If no changes, returns the existing agent version.
       parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - A2AAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -4794,6 +4817,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateAgentFromManifestRequest'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - A2AAgents=V1Preview
   /agents/{agent_name}/microsoft365/publish:
     post:
       operationId: Microsoft365Publishing_publishAgentToMicrosoft365
@@ -6963,6 +6989,7 @@ paths:
       x-ms-summary-override: Create an agent version
       x-ms-foundry-meta:
         conditional_previews:
+          - A2AAgents=V1Preview
           - WorkflowAgents=V1Preview
           - VoiceAgents=V1Preview
           - DraftAgents=V1Preview
@@ -7291,6 +7318,14 @@ paths:
       summary: Create an agent version from manifest
       description: Imports the provided manifest to create a new version for the specified agent.
       parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - A2AAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -7336,6 +7371,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateAgentVersionFromManifestRequest'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - A2AAgents=V1Preview
   /agents/{agent_name}:disable:
     post:
       operationId: Agents_disableAgent
@@ -7462,6 +7500,14 @@ paths:
       summary: Create an agent from a manifest
       description: Imports the provided manifest to create an agent and returns the created resource.
       parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - A2AAgents=V1Preview
         - name: api-version
           in: query
           required: true
@@ -7496,6 +7542,9 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateAgentFromManifestRequest'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - A2AAgents=V1Preview
   /connections:
     get:
       operationId: Connections_list
@@ -27828,6 +27877,12 @@ paths:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateImageEditRequest'
             encoding:
+              frame_count:
+                contentType: application/json
+              frame_duration_ms:
+                contentType: application/json
+              complexity:
+                contentType: application/json
               image:
                 contentType: application/octet-stream, application/json
               background:
@@ -27841,6 +27896,8 @@ paths:
               response_format:
                 contentType: application/json
               output_format:
+                contentType: application/json
+              svg:
                 contentType: application/json
               output_compression:
                 contentType: application/json
@@ -30169,6 +30226,8 @@ paths:
                       - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
                   prompt:
                     $ref: '#/components/schemas/OpenAI.Prompt'
+                  image:
+                    $ref: '#/components/schemas/OpenAI.ResolvedImageOptions'
                   service_tier:
                     $ref: '#/components/schemas/OpenAI.ServiceTierResponses'
                   truncation:
@@ -30406,6 +30465,8 @@ paths:
                   $ref: '#/components/schemas/OpenAI.Prompt'
                 access_programs:
                   $ref: '#/components/schemas/OpenAI.AccessProgramsParam'
+                image:
+                  $ref: '#/components/schemas/OpenAI.ImageOptionsParam'
                 prompt_cache_options:
                   $ref: '#/components/schemas/OpenAI.ResponsePromptCacheOptionsParam'
                 service_tier:
@@ -41077,8 +41138,8 @@ paths:
     post:
       operationId: VideoGeneration_createVideoEditMultipart_VideoGeneration_createVideoEditJson
       parameters: []
-      description: Creates a video edit from the supplied request. Creates a video edit from the supplied request.
-      summary: Create a video edit Create a video edit
+      description: Creates a video edit from the supplied request.
+      summary: Create a video edit
       responses:
         '200':
           description: The request has succeeded.
@@ -41206,8 +41267,8 @@ paths:
     post:
       operationId: VideoGeneration_createVideoExtendMultipart_VideoGeneration_createVideoExtendJson
       parameters: []
-      description: Extends a video from the supplied request. Extends a video from the supplied request.
-      summary: Extend a video Extend a video
+      description: Extends a video from the supplied request.
+      summary: Extend a video
       responses:
         '200':
           description: The request has succeeded.
@@ -44575,6 +44636,7 @@ components:
     AgentDefinitionOptInKeys:
       type: string
       enum:
+        - A2AAgents=V1Preview
         - WorkflowAgents=V1Preview
         - ExternalAgents=V1Preview
         - DraftAgents=V1Preview
@@ -49141,6 +49203,7 @@ components:
           description: The agent definition. This can be a prompt, workflow, hosted, external, or voice agent definition.
           x-ms-foundry-meta:
             conditional_previews:
+              - A2AAgents=V1Preview
               - WorkflowAgents=V1Preview
               - VoiceAgents=V1Preview
               - DraftAgents=V1Preview
@@ -49172,6 +49235,7 @@ components:
           description: Optional agent card for the agent
       x-ms-foundry-meta:
         conditional_previews:
+          - A2AAgents=V1Preview
           - WorkflowAgents=V1Preview
           - VoiceAgents=V1Preview
           - DraftAgents=V1Preview
@@ -49287,6 +49351,7 @@ components:
           description: The agent definition. This can be a prompt, workflow, hosted, external, or voice agent definition.
           x-ms-foundry-meta:
             conditional_previews:
+              - A2AAgents=V1Preview
               - WorkflowAgents=V1Preview
               - VoiceAgents=V1Preview
               - DraftAgents=V1Preview
@@ -53291,12 +53356,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ProtocolVersionRecord'
-          description: The protocols that the agent supports for ingress communication.
+          description: 'The protocols that the agent supports for ingress communication. (Preview) Declaring the `a2a` protocol enables A2A passthrough to the hosted agent and requires `Foundry-Features: A2AAgents=V1Preview` when creating or modifying the hosted agent definition.'
           examples:
             - - protocol: responses
                 version: v0.1.1
               - protocol: a2a
                 version: v0.3.0
+          x-ms-foundry-meta:
+            conditional_previews:
+              - A2AAgents=V1Preview
         code_configuration:
           $ref: '#/components/schemas/CodeConfiguration'
           description: Code-based deployment configuration. Provide this for code-based deployments. Mutually exclusive with container_configuration — the service validates that exactly one is set.
@@ -56416,6 +56484,18 @@ components:
         - context_compacted
         - input_changed
         - service_tier_changed
+    OpenAI.CacheWriteTokensDetails:
+      type: object
+      required:
+        - ttl_30m_tokens
+        - ttl_12h_tokens
+      properties:
+        ttl_30m_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of input tokens written with 30-minute retention.
+        ttl_12h_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of input tokens written with 12-hour retention.
     OpenAI.CachedUsageDetails:
       type: object
       required:
@@ -56827,13 +56907,6 @@ components:
         arguments:
           type: string
     OpenAI.ChatCompletionMessageToolCalls:
-      type: array
-      items:
-        anyOf:
-          - $ref: '#/components/schemas/OpenAI.ChatCompletionMessageToolCall'
-          - $ref: '#/components/schemas/OpenAI.ChatCompletionMessageCustomToolCall'
-      description: The tool calls generated by the model, such as function calls.
-    OpenAI.ChatCompletionMessageToolCallsItem:
       type: array
       items:
         anyOf:
@@ -57423,7 +57496,7 @@ components:
             - type: 'null'
         tool_calls:
           anyOf:
-            - $ref: '#/components/schemas/OpenAI.ChatCompletionMessageToolCallsItem'
+            - $ref: '#/components/schemas/OpenAI.ChatCompletionMessageToolCalls'
             - type: 'null'
         annotations:
           type: array
@@ -57732,6 +57805,8 @@ components:
         - created_at
         - usage
       properties:
+        image:
+          $ref: '#/components/schemas/OpenAI.ResolvedImageOptions'
         id:
           type: string
           description: The unique identifier for the compacted response.
@@ -57778,6 +57853,9 @@ components:
           anyOf:
             - type: string
             - type: 'null'
+        image:
+          $ref: '#/components/schemas/OpenAI.ImageOptionsParam'
+          description: Request level image options.
         prompt_cache_key:
           anyOf:
             - type: string
@@ -59113,6 +59191,8 @@ components:
             - $ref: '#/components/schemas/OpenAI.ImageOutputFormat'
             - type: 'null'
           x-openai-go-optional-enum: true
+        svg_usage:
+          $ref: '#/components/schemas/OpenAI.SvgUsage'
         revised_prompt:
           anyOf:
             - type: string
@@ -61340,6 +61420,12 @@ components:
     OpenAI.CreateImageEditRequest:
       type: object
       properties:
+        frame_count:
+          $ref: '#/components/schemas/OpenAI.frame_count'
+        frame_duration_ms:
+          $ref: '#/components/schemas/OpenAI.frame_duration_ms'
+        complexity:
+          $ref: '#/components/schemas/OpenAI.complexity'
         image:
           anyOf:
             - {}
@@ -61394,6 +61480,8 @@ components:
                 - gpt-image-2.5-sunburst-2026-09-08
                 - gpt-image-2.5-flare
                 - gpt-image-2.5-flare-2026-09-08
+                - gpt-image-2.6-sunburst
+                - gpt-image-2.6-flare
                 - gpt-image-1
                 - gpt-image-1-mini
                 - chatgpt-image-latest
@@ -61403,7 +61491,8 @@ components:
               (`gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`,
               `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`,
               `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`,
-              `gpt-image-2.5-flare-2026-09-08`, or `chatgpt-image-latest`).
+              `gpt-image-2.5-flare-2026-09-08`, `gpt-image-2.6-sunburst`, `gpt-image-2.6-flare`,
+              or `chatgpt-image-latest`).
               `gpt-image-1` was shut down on October 23, 2026. Use
               `gpt-image-2.5-sunburst` or `gpt-image-2.5-flare` instead.
           x-oaiTypeLabel: string
@@ -61436,16 +61525,18 @@ components:
           description: Legacy response format parameter for retired image models. Unsupported for GPT image models, which always return base64-encoded images.
         output_format:
           anyOf:
-            - type: string
-              enum:
-                - png
-                - jpeg
-                - webp
+            - $ref: '#/components/schemas/OpenAI.ImagesApiOutputFormat'
             - type: 'null'
           description: |-
             The format in which the generated images are returned. This parameter is
-              only supported for the GPT image models. Must be one of `png`, `jpeg`, or `webp`.
+              only supported for the GPT image models.
               The default value is `png`.
+              SVG output requires a supported image model and project access.
+        svg:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.SvgParam'
+            - type: 'null'
+          description: Selects the author model and reasoning effort for `output_format=svg`. Supply `svg.model` when SVG model selection is enabled. Otherwise, omit this object. SVG output requires `n=1` and cannot use streaming, partial images, or output compression. Use multipart fields such as `svg[model]`.
         output_compression:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
@@ -61498,6 +61589,14 @@ components:
         - prompt
         - model
       properties:
+        frame_count:
+          $ref: '#/components/schemas/OpenAI.frame_count'
+        frame_duration_ms:
+          $ref: '#/components/schemas/OpenAI.frame_duration_ms'
+        complexity:
+          $ref: '#/components/schemas/OpenAI.complexity'
+        svg:
+          $ref: '#/components/schemas/OpenAI.svg'
         prompt:
           type: string
           description: A text description of the desired image(s). The maximum length is 32000 characters.
@@ -61513,6 +61612,8 @@ components:
                 - gpt-image-2.5-sunburst-2026-09-08
                 - gpt-image-2.5-flare
                 - gpt-image-2.5-flare-2026-09-08
+                - gpt-image-2.6-sunburst
+                - gpt-image-2.6-flare
                 - gpt-image-1
                 - gpt-image-1-mini
                 - chatgpt-image-latest
@@ -61523,7 +61624,8 @@ components:
               Supported models include `gpt-image-1-mini`, `gpt-image-1.5`, `gpt-image-2`,
               `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`,
               `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`,
-              `gpt-image-2.5-flare-2026-09-08`, and `chatgpt-image-latest`.
+              `gpt-image-2.5-flare-2026-09-08`, `gpt-image-2.6-sunburst`, `gpt-image-2.6-flare`,
+              and `chatgpt-image-latest`.
               `gpt-image-1` was shut down on October 23, 2026. Use
               `gpt-image-2.5-sunburst` or `gpt-image-2.5-flare` instead.
           x-oaiTypeLabel: string
@@ -61568,13 +61670,9 @@ components:
           deprecated: true
         output_format:
           anyOf:
-            - type: string
-              enum:
-                - png
-                - jpeg
-                - webp
+            - $ref: '#/components/schemas/OpenAI.ImagesApiOutputFormat'
             - type: 'null'
-          description: The format in which the generated images are returned. This parameter is only supported for the GPT image models. Must be one of `png`, `jpeg`, or `webp`.
+          description: The format in which the generated images are returned. This parameter is only supported for the GPT image models.
           default: png
         output_compression:
           anyOf:
@@ -63545,7 +63643,7 @@ components:
         content:
           oneOf:
             - type: string
-            - $ref: '#/components/schemas/OpenAI.InputMessageContentListItem'
+            - $ref: '#/components/schemas/OpenAI.InputMessageContentList'
           description: |-
             Text, image, or audio input to the model, used to generate a response.
               Can also contain previous assistant responses.
@@ -63583,6 +63681,12 @@ components:
         - images
         - prompt
       properties:
+        frame_count:
+          $ref: '#/components/schemas/OpenAI.frame_count'
+        frame_duration_ms:
+          $ref: '#/components/schemas/OpenAI.frame_duration_ms'
+        complexity:
+          $ref: '#/components/schemas/OpenAI.complexity'
         model:
           anyOf:
             - type: string
@@ -63595,6 +63699,8 @@ components:
                 - gpt-image-2.5-sunburst-2026-09-08
                 - gpt-image-2.5-flare
                 - gpt-image-2.5-flare-2026-09-08
+                - gpt-image-2.6-sunburst
+                - gpt-image-2.6-flare
                 - gpt-image-1
                 - gpt-image-1-mini
                 - chatgpt-image-latest
@@ -63602,8 +63708,9 @@ components:
           description: |-
             The GPT image model to use for image editing, including `gpt-image-2`, its dated
               snapshot `gpt-image-2-2026-04-21`, `gpt-image-2.5-sunburst`,
-              `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`, and
-              `gpt-image-2.5-flare-2026-09-08`. Defaults to `gpt-image-2.5-sunburst`.
+              `gpt-image-2.5-sunburst-2026-09-08`, `gpt-image-2.5-flare`,
+              `gpt-image-2.5-flare-2026-09-08`, `gpt-image-2.6-sunburst`, and `gpt-image-2.6-flare`.
+              Defaults to `gpt-image-2.5-sunburst`.
               `gpt-image-1` was shut down on October 23, 2026. Use
               `gpt-image-2.5-sunburst` or `gpt-image-2.5-flare` instead.
           x-oaiTypeLabel: string
@@ -63681,14 +63788,15 @@ components:
           deprecated: true
         output_format:
           anyOf:
-            - type: string
-              enum:
-                - png
-                - jpeg
-                - webp
+            - $ref: '#/components/schemas/OpenAI.ImagesApiOutputFormat'
             - type: 'null'
-          description: Output image format. Supported for GPT image models.
+          description: Output image format. Supported for GPT image models. SVG output requires a supported image model and project access.
           default: png
+        svg:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.SvgParam'
+            - type: 'null'
+          description: Selects the author model and reasoning effort for `output_format=svg`. Supply `svg.model` when SVG model selection is enabled. Otherwise, omit this object. SVG output requires `n=1` and cannot use streaming, partial images, or output compression.
         output_compression:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
@@ -66106,6 +66214,12 @@ components:
         - transparent
         - opaque
         - auto
+    OpenAI.ImageContextCompression:
+      type: string
+      enum:
+        - auto
+        - enabled
+        - disabled
     OpenAI.ImageDetail:
       type: string
       enum:
@@ -66246,14 +66360,23 @@ components:
           $ref: '#/components/schemas/OpenAI.ImageGenOutputTokensDetails'
         input_tokens_details:
           $ref: '#/components/schemas/OpenAI.ImageGenInputUsageDetails'
-      description: For `gpt-image-1` only, the token usage information for the image generation.
+      description: Token usage information for image generation with GPT Image models.
       title: Image generation usage
+    OpenAI.ImageOptionsParam:
+      type: object
+      properties:
+        context_compression:
+          $ref: '#/components/schemas/OpenAI.ImageContextCompression'
+          description: Controls image context optimization. Defaults to `auto`, which uses the model, transport, and input to select a policy. Use `enabled` to require compression support or `disabled` to turn it off.
+      description: Request level image options.
     OpenAI.ImageOutputFormat:
       type: string
       enum:
         - png
         - webp
         - jpeg
+        - gif
+        - svg
     OpenAI.ImageRefParam:
       anyOf:
         - type: object
@@ -66276,6 +66399,14 @@ components:
     OpenAI.ImageSafetyIdentifier:
       type: string
       maxLength: 128
+    OpenAI.ImagesApiOutputFormat:
+      type: string
+      enum:
+        - png
+        - webp
+        - jpeg
+        - gif
+        - svg
     OpenAI.ImagesResponse:
       type: object
       required:
@@ -66302,12 +66433,8 @@ components:
             - opaque
           description: The background parameter used for the image generation. Either `transparent` or `opaque`.
         output_format:
-          type: string
-          enum:
-            - png
-            - webp
-            - jpeg
-          description: The output format of the image generation. Either `png`, `webp`, or `jpeg`.
+          $ref: '#/components/schemas/OpenAI.ImagesApiOutputFormat'
+          description: The output format of the generated or edited image.
         size:
           anyOf:
             - type: string
@@ -66328,6 +66455,9 @@ components:
           description: The quality of the image generated. One of `low`, `medium`, `high`, `xhigh`, or `max`.
         usage:
           $ref: '#/components/schemas/OpenAI.ImageGenUsage'
+        svg_usage:
+          $ref: '#/components/schemas/OpenAI.SvgUsage'
+          description: Token usage for SVG authoring, separate from image rendering usage.
       description: The response from the image generation endpoint.
       title: Image generation response
       x-oaiMeta:
@@ -67394,6 +67524,8 @@ components:
             - $ref: '#/components/schemas/OpenAI.ImageOutputFormat'
             - type: 'null'
           x-openai-go-optional-enum: true
+        svg_usage:
+          $ref: '#/components/schemas/OpenAI.SvgUsage'
         revised_prompt:
           anyOf:
             - type: string
@@ -67862,14 +67994,6 @@ components:
         [web search guide](https://developers.openai.com/api/docs/guides/tools-web-search) for more information.
       title: Web search tool call
     OpenAI.InputMessageContentList:
-      type: array
-      items:
-        $ref: '#/components/schemas/OpenAI.InputContent'
-      description: |-
-        A list of one or many input items to the model, containing different content
-        types.
-      title: Input item content list
-    OpenAI.InputMessageContentListItem:
       type: array
       items:
         $ref: '#/components/schemas/OpenAI.InputContent'
@@ -69009,6 +69133,8 @@ components:
             - $ref: '#/components/schemas/OpenAI.ImageOutputFormat'
             - type: 'null'
           x-openai-go-optional-enum: true
+        svg_usage:
+          $ref: '#/components/schemas/OpenAI.SvgUsage'
         revised_prompt:
           anyOf:
             - type: string
@@ -69811,6 +69937,8 @@ components:
             - $ref: '#/components/schemas/OpenAI.ImageOutputFormat'
             - type: 'null'
           x-openai-go-optional-enum: true
+        svg_usage:
+          $ref: '#/components/schemas/OpenAI.SvgUsage'
         revised_prompt:
           anyOf:
             - type: string
@@ -70892,6 +71020,8 @@ components:
             - $ref: '#/components/schemas/OpenAI.ImageOutputFormat'
             - type: 'null'
           x-openai-go-optional-enum: true
+        svg_usage:
+          $ref: '#/components/schemas/OpenAI.SvgUsage'
         revised_prompt:
           anyOf:
             - type: string
@@ -75860,6 +75990,8 @@ components:
             - $ref: '#/components/schemas/OpenAI.ImageOutputFormat'
             - type: 'null'
           x-openai-go-optional-enum: true
+        svg_usage:
+          $ref: '#/components/schemas/OpenAI.SvgUsage'
         revised_prompt:
           anyOf:
             - type: string
@@ -76682,7 +76814,10 @@ components:
         - mode
       properties:
         ttl:
-          $ref: '#/components/schemas/OpenAI.PromptCacheTTLEnum'
+          type: string
+          enum:
+            - 30m
+            - 12h
           description: The minimum lifetime applied to each cache breakpoint.
         mode:
           $ref: '#/components/schemas/OpenAI.PromptCacheModeEnum'
@@ -76702,7 +76837,7 @@ components:
         mode:
           $ref: '#/components/schemas/OpenAI.PromptCacheModeEnum'
           description: Controls whether OpenAI automatically creates an implicit cache breakpoint. Defaults to `implicit`. With `implicit`, OpenAI creates one implicit breakpoint and writes up to the latest three explicit breakpoints in the request. With `explicit`, OpenAI does not create an implicit breakpoint and writes up to the latest four explicit breakpoints. If there are no explicit breakpoints, the request does not use prompt caching.
-      description: Options for prompt caching. Supported for `gpt-5.6` and later models. By default, OpenAI automatically chooses one implicit cache breakpoint. You can add explicit breakpoints to content blocks with `prompt_cache_breakpoint`. Each request can write up to four breakpoints. For cache matching, OpenAI considers up to the latest 80 breakpoints in the conversation, without a content-block lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The `ttl` defaults to `30m`, which is currently the only supported value. See the [prompt caching guide](https://developers.openai.com/api/docs/guides/prompt-caching) for current details.
+      description: Options for prompt caching. Supported for `gpt-5.6` and later models. By default, OpenAI automatically chooses one implicit cache breakpoint. You can add explicit breakpoints to content blocks with `prompt_cache_breakpoint`. Each request can write up to four breakpoints. For cache matching, OpenAI considers up to the latest 80 breakpoints in the conversation, without a content-block lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The `ttl` defaults to `30m`. Supported lifetimes depend on the API. See the [prompt caching guide](https://developers.openai.com/api/docs/guides/prompt-caching) for current details.
       title: Prompt cache options
     OpenAI.PromptCacheRetentionEnum:
       type: string
@@ -82295,6 +82430,16 @@ components:
         value. See the
         [reasoning guide](https://developers.openai.com/api/docs/guides/reasoning)
         for model-specific support.
+    OpenAI.ReasoningEffortEnum:
+      type: string
+      enum:
+        - none
+        - minimal
+        - low
+        - medium
+        - high
+        - xhigh
+        - max
     OpenAI.ReasoningModeEnum:
       anyOf:
         - type: string
@@ -82320,6 +82465,19 @@ components:
           description: The reasoning text from the model.
       description: Reasoning text from the model.
       title: Reasoning text
+    OpenAI.ResolvedImageContextCompressionEnum:
+      type: string
+      enum:
+        - enabled
+        - disabled
+    OpenAI.ResolvedImageOptions:
+      type: object
+      required:
+        - context_compression
+      properties:
+        context_compression:
+          $ref: '#/components/schemas/OpenAI.ResolvedImageContextCompressionEnum'
+          description: Effective image context optimization policy.
     OpenAI.Response:
       type: object
       required:
@@ -82402,6 +82560,8 @@ components:
             - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
         prompt:
           $ref: '#/components/schemas/OpenAI.Prompt'
+        image:
+          $ref: '#/components/schemas/OpenAI.ResolvedImageOptions'
         service_tier:
           $ref: '#/components/schemas/OpenAI.ServiceTierResponses'
         truncation:
@@ -84489,8 +84649,11 @@ components:
       type: object
       properties:
         ttl:
-          $ref: '#/components/schemas/OpenAI.PromptCacheTTLEnum'
-          description: The minimum lifetime applied to every implicit and explicit cache breakpoint written by the request. Defaults to `30m`, which is currently the only supported value. The backend may retain cache entries for longer.
+          type: string
+          enum:
+            - 30m
+            - 12h
+          description: The minimum lifetime applied to every implicit and explicit cache breakpoint written by the request. Supported values are `30m` (the default) and `12h`. The backend may retain cache entries for longer.
         mode:
           $ref: '#/components/schemas/OpenAI.PromptCacheModeEnum'
           description: Controls whether OpenAI automatically creates an implicit cache breakpoint. Defaults to `implicit`. With `implicit`, OpenAI creates one implicit breakpoint and writes up to the latest three explicit breakpoints in the request. With `explicit`, OpenAI does not create an implicit breakpoint and writes up to the latest four explicit breakpoints. If there are no explicit breakpoints, the request does not use prompt caching.
@@ -84501,7 +84664,7 @@ components:
           anyOf:
             - type: string
             - type: 'null'
-      description: Options for prompt caching. Supported for `gpt-5.6` and later models. By default, OpenAI automatically chooses one implicit cache breakpoint. You can add explicit breakpoints to content blocks with `prompt_cache_breakpoint`. Each request can write up to four breakpoints. For cache matching, OpenAI considers up to the latest 80 breakpoints in the conversation, without a content-block lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The `ttl` defaults to `30m`, which is currently the only supported value. See the [prompt caching guide](https://developers.openai.com/api/docs/guides/prompt-caching) for current details.
+      description: Options for prompt caching. Supported for `gpt-5.6` and later models. By default, OpenAI automatically chooses one implicit cache breakpoint. You can add explicit breakpoints to content blocks with `prompt_cache_breakpoint`. Each request can write up to four breakpoints. For cache matching, OpenAI considers up to the latest 80 breakpoints in the conversation, without a content-block lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The `ttl` defaults to `30m`. Supported lifetimes depend on the API. See the [prompt caching guide](https://developers.openai.com/api/docs/guides/prompt-caching) for current details.
       title: Prompt cache options
     OpenAI.ResponsePromptVariables:
       type: object
@@ -85465,6 +85628,8 @@ components:
           $ref: '#/components/schemas/OpenAI.integer'
         cache_write_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
+        cache_write_tokens_details:
+          $ref: '#/components/schemas/OpenAI.CacheWriteTokensDetails'
     OpenAI.ResponseUsageOutputTokensDetails:
       type: object
       required:
@@ -86730,6 +86895,42 @@ components:
         - $ref: '#/components/schemas/OpenAI.MessageContent'
       description: A summary text from the model.
       title: Summary text
+    OpenAI.SvgParam:
+      type: object
+      properties:
+        model:
+          type: string
+          minLength: 1
+        reasoning:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.SvgReasoningParam'
+            - type: 'null'
+    OpenAI.SvgReasoningParam:
+      type: object
+      properties:
+        effort:
+          $ref: '#/components/schemas/OpenAI.ReasoningEffortEnum'
+          description: Controls how much effort the model should spend on reasoning for this request.
+      description: Reasoning effort for SVG authoring. When omitted, uses the author model's default in both Images and Responses.
+    OpenAI.SvgUsage:
+      type: object
+      required:
+        - model
+        - input_tokens
+        - output_tokens
+        - total_tokens
+        - reasoning_tokens
+      properties:
+        model:
+          type: string
+        input_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
+        output_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
+        total_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
+        reasoning_tokens:
+          $ref: '#/components/schemas/OpenAI.integer'
     OpenAI.TextAnnotation:
       type: object
       required:
@@ -87606,14 +87807,30 @@ components:
               enum:
                 - gpt-image-1
                 - gpt-image-1-mini
-                - gpt-image-1.5
                 - gpt-image-2
                 - gpt-image-2-2026-04-21
                 - gpt-image-2.5-sunburst
                 - gpt-image-2.5-sunburst-2026-09-08
                 - gpt-image-2.5-flare
                 - gpt-image-2.5-flare-2026-09-08
+                - gpt-image-2.6-sunburst
+                - gpt-image-2.6-flare
+                - gpt-image-1.5
+                - chatgpt-image-latest
           default: gpt-image-2
+        complexity:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+          description: |-
+            Computation spent planning the image, independently of rendering quality.
+              Overrides the outer response's `reasoning.effort` for image generation.
+              When omitted, inherits a supported outer reasoning effort or uses the
+              image model's configured default.
+              For SVG output, controls the reference image, not the SVG author's
+              reasoning.
         quality:
           type: string
           enum:
@@ -87646,10 +87863,37 @@ components:
             - png
             - webp
             - jpeg
+            - gif
+            - svg
           description: |-
-            The output format of the generated image. One of `png`, `webp`, or
-              `jpeg`. Default: `png`.
+            The output format of the generated image. One of `png`, `webp`, `jpeg`,
+              `gif`, or `svg`. Default: `png`. GIF and SVG output require a model
+              that supports the selected format. GIF output does not support
+              partial image streaming (`partial_images` greater than `0`),
+              `input_image_mask`, or custom `output_compression`.
+              Responses lifecycle events can still be streamed for GIF output.
           default: png
+        frame_count:
+          $ref: '#/components/schemas/OpenAI.integer'
+          minimum: 2
+          maximum: 16
+          description: 'Number of GIF frames. Requires `output_format` to be `gif`. Default: 9.'
+          default: 9
+        frame_duration_ms:
+          $ref: '#/components/schemas/OpenAI.integer'
+          minimum: 20
+          maximum: 2000
+          description: |-
+            Duration of each GIF frame in milliseconds, rounded to 10 ms.
+              Requires `output_format` to be `gif`. Default: 200.
+          default: 200
+        svg:
+          $ref: '#/components/schemas/OpenAI.SvgParam'
+          description: |-
+            SVG author model settings. Requires `output_format` to be `svg`.
+              When SVG model selection is enabled, omitting this object uses the
+              outer response model. Otherwise, the default SVG author is used and
+              explicit model overrides are unavailable.
         output_compression:
           $ref: '#/components/schemas/OpenAI.integer'
           minimum: 0
@@ -88285,14 +88529,30 @@ components:
               enum:
                 - gpt-image-1
                 - gpt-image-1-mini
-                - gpt-image-1.5
                 - gpt-image-2
                 - gpt-image-2-2026-04-21
                 - gpt-image-2.5-sunburst
                 - gpt-image-2.5-sunburst-2026-09-08
                 - gpt-image-2.5-flare
                 - gpt-image-2.5-flare-2026-09-08
+                - gpt-image-2.6-sunburst
+                - gpt-image-2.6-flare
+                - gpt-image-1.5
+                - chatgpt-image-latest
           default: gpt-image-2
+        complexity:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+          description: |-
+            Computation spent planning the image, independently of rendering quality.
+              Overrides the outer response's `reasoning.effort` for image generation.
+              When omitted, inherits a supported outer reasoning effort or uses the
+              image model's configured default.
+              For SVG output, controls the reference image, not the SVG author's
+              reasoning.
         quality:
           type: string
           enum:
@@ -88325,10 +88585,37 @@ components:
             - png
             - webp
             - jpeg
+            - gif
+            - svg
           description: |-
-            The output format of the generated image. One of `png`, `webp`, or
-              `jpeg`. Default: `png`.
+            The output format of the generated image. One of `png`, `webp`, `jpeg`,
+              `gif`, or `svg`. Default: `png`. GIF and SVG output require a model
+              that supports the selected format. GIF output does not support
+              partial image streaming (`partial_images` greater than `0`),
+              `input_image_mask`, or custom `output_compression`.
+              Responses lifecycle events can still be streamed for GIF output.
           default: png
+        frame_count:
+          $ref: '#/components/schemas/OpenAI.integer'
+          minimum: 2
+          maximum: 16
+          description: 'Number of GIF frames. Requires `output_format` to be `gif`. Default: 9.'
+          default: 9
+        frame_duration_ms:
+          $ref: '#/components/schemas/OpenAI.integer'
+          minimum: 20
+          maximum: 2000
+          description: |-
+            Duration of each GIF frame in milliseconds, rounded to 10 ms.
+              Requires `output_format` to be `gif`. Default: 200.
+          default: 200
+        svg:
+          $ref: '#/components/schemas/OpenAI.SvgParam'
+          description: |-
+            SVG author model settings. Requires `output_format` to be `svg`.
+              When SVG model selection is enabled, omitting this object uses the
+              outer response model. Otherwise, the default SVG author is used and
+              explicit model overrides are unavailable.
         output_compression:
           $ref: '#/components/schemas/OpenAI.integer'
           minimum: 0
@@ -90199,6 +90486,28 @@ components:
         message:
           type: string
           description: The public continuation instruction.
+    OpenAI.complexity:
+      anyOf:
+        - type: string
+          enum:
+            - low
+            - medium
+            - high
+        - type: 'null'
+      description: Computation spent planning the image, independently of rendering quality. Uses the image model's configured default when omitted. For SVG output, controls the reference image, independently of the SVG author's reasoning.
+    OpenAI.frame_count:
+      anyOf:
+        - $ref: '#/components/schemas/OpenAI.integer'
+        - type: 'null'
+      minimum: 2
+      maximum: 16
+      description: Number of frames for GIF output. Accepts integers from 2 through 16. Defaults to 9 when omitted. Only supported with output_format=gif. The requested size must satisfy the selected model's GIF size limits. GIF output does not support streaming, partial images, masks, or custom output compression. Requires access to the GIF preview for the selected model.
+    OpenAI.frame_duration_ms:
+      anyOf:
+        - $ref: '#/components/schemas/OpenAI.integer'
+        - type: 'null'
+      minimum: 20
+      description: Requested delay per GIF frame, in milliseconds. Defaults to 200 when omitted. GIF output rounds to the nearest 10 ms and caps the encoded delay at 655,350 ms per frame. Only supported with output_format=gif.
     OpenAI.integer:
       type: integer
       format: int64
@@ -90209,6 +90518,21 @@ components:
     OpenAI.numeric:
       type: number
       format: double
+    OpenAI.svg:
+      anyOf:
+        - type: object
+          properties:
+            model:
+              type: string
+              minLength: 1
+            reasoning:
+              anyOf:
+                - $ref: '#/components/schemas/OpenAI.Reasoning'
+                - type: 'null'
+          required:
+            - model
+        - type: 'null'
+      description: Selects the model and reasoning effort used to author SVG output. Requires output_format=svg and access to SVG model selection. When model selection is enabled, supply svg.model. When model selection is disabled, omit this object. The top-level model selects the image model that creates the reference image. SVG generation requires n=1 and does not support streaming, partial images, prompt_rewriter, or output_compression.
     OpenApiAnonymousAuthDetails:
       type: object
       required:
@@ -96369,6 +96693,7 @@ components:
           description: The agent definition. This can be a prompt, workflow, hosted, external, or voice agent definition.
           x-ms-foundry-meta:
             conditional_previews:
+              - A2AAgents=V1Preview
               - WorkflowAgents=V1Preview
               - VoiceAgents=V1Preview
               - DraftAgents=V1Preview
@@ -96381,6 +96706,7 @@ components:
           description: The blueprint reference for the agent.
       x-ms-foundry-meta:
         conditional_previews:
+          - A2AAgents=V1Preview
           - WorkflowAgents=V1Preview
           - VoiceAgents=V1Preview
           - DraftAgents=V1Preview
