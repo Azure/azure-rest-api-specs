@@ -7107,3 +7107,215 @@ union ContextCacheCheckNameAvailabilityFailureReason {
 
   string,
 }
+
+//
+// Quota management resources (added in the 2026-12-01 API version).
+//
+
+/**
+ * The provisioning state of a quota management resource.
+ */
+@added(Versions.v2026_12_01)
+@Azure.Core.lroStatus
+union QuotaManagementProvisioningState {
+  ResourceProvisioningState,
+
+  /** Initial provisioning in progress */
+  Creating: "Creating",
+
+  /** Update in progress */
+  Updating: "Updating",
+
+  /** Deletion in progress */
+  Deleting: "Deleting",
+
+  /** Change accepted for processing */
+  Accepted: "Accepted",
+
+  string,
+}
+
+/** Details of a quota management group. Empty groups are valid. A request is rejected if both storageAccounts and storageContainers are non-empty. */
+@added(Versions.v2026_12_01)
+model QuotaManagementGroupProperties {
+  /** The user-defined description of the quota management group. */
+  @minLength(0)
+  @maxLength(256)
+  description?: string;
+
+  /** The membership type of the quota management group, calculated from its resource members. */
+  @visibility(Lifecycle.Read)
+  membershipType?: QuotaManagementGroupMembershipType;
+
+  /** The Azure resource IDs of storage accounts in the quota management group. PUT requests replace the entire collection. To switch a group from container membership, set storageContainers to an empty array and storageAccounts to the desired values in the same request. */
+  storageAccounts?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts";
+    }
+  ]>[];
+
+  /** The Azure resource IDs of storage containers in the quota management group. PUT requests replace the entire collection. All containers must belong to the same storage account. To switch a group from account membership, set storageAccounts to an empty array and storageContainers to the desired values in the same request. */
+  storageContainers?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts/blobServices/containers";
+    }
+  ]>[];
+
+  /** The Azure resource ID of the quota management policy associated with the quota management group. The policy may be in another subscription in the same tenant, but it must be in the same region as the group. Linking requires LinkedAccessCheck permission on the policy. */
+  quotaManagementPolicyId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/quotaManagementPolicies";
+    }
+  ]>;
+
+  /** The provisioning state of the quota management group. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: QuotaManagementProvisioningState;
+}
+
+/** Updatable properties of a quota management group. */
+@added(Versions.v2026_12_01)
+model QuotaManagementGroupPropertiesUpdate {
+  /** The user-defined description of the quota management group. */
+  @minLength(0)
+  @maxLength(256)
+  description?: string;
+
+  /** The Azure resource IDs of storage accounts in the quota management group. PATCH requests replace the entire collection. */
+  storageAccounts?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts";
+    }
+  ]>[];
+
+  /** The Azure resource IDs of storage containers in the quota management group. PATCH requests replace the entire collection. */
+  storageContainers?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts/blobServices/containers";
+    }
+  ]>[];
+
+  /** The Azure resource ID of the quota management policy associated with the quota management group. */
+  quotaManagementPolicyId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/quotaManagementPolicies";
+    }
+  ]>;
+}
+
+/** The type used for update operations of a quota management group. */
+@added(Versions.v2026_12_01)
+model QuotaManagementGroupUpdate {
+  /** Resource tags. */
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The updatable properties of the quota management group. */
+  properties?: QuotaManagementGroupPropertiesUpdate;
+}
+
+/** The membership type of a quota management group. */
+@added(Versions.v2026_12_01)
+union QuotaManagementGroupMembershipType {
+  /** The quota management group contains storage accounts. */
+  StorageAccounts: "StorageAccounts",
+
+  /** The quota management group contains storage containers. */
+  StorageContainers: "StorageContainers",
+
+  /** The quota management group has no resource members. */
+  None: "None",
+
+  string,
+}
+
+/** Details of a quota management policy. */
+@added(Versions.v2026_12_01)
+model QuotaManagementPolicyProperties {
+  /** The operational state of the quota management policy. */
+  state: QuotaManagementPolicyState;
+
+  /** The user-defined description of the quota management policy. */
+  @minLength(0)
+  @maxLength(256)
+  description?: string;
+
+  /** The ingress throughput quota in gigabits per second. */
+  @minValue(1)
+  ingressInGbps?: int64;
+
+  /** The egress throughput quota in gigabits per second. */
+  @minValue(1)
+  egressInGbps?: int64;
+
+  /** The transaction quota in thousands of transactions per second. */
+  @minValue(1)
+  tpsInKtps?: int64;
+
+  /** The capacity quota in gigabytes. */
+  @minValue(1)
+  capacityInGb?: int64;
+
+  /** The utilization threshold, expressed as a percentage of the quota policy limit, at which proactive notifications are sent to customers before the hard limit is reached. */
+  @minValue(1)
+  @maxValue(100)
+  softQuotaPercentage?: int64;
+
+  /** The provisioning state of the quota management policy. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: QuotaManagementProvisioningState;
+}
+
+/** Updatable properties of a quota management policy. */
+@added(Versions.v2026_12_01)
+model QuotaManagementPolicyPropertiesUpdate {
+  /** The operational state of the quota management policy. */
+  state?: QuotaManagementPolicyState;
+
+  /** The user-defined description of the quota management policy. */
+  @minLength(0)
+  @maxLength(256)
+  description?: string;
+
+  /** The ingress throughput quota in gigabits per second. */
+  @minValue(1)
+  ingressInGbps?: int64;
+
+  /** The egress throughput quota in gigabits per second. */
+  @minValue(1)
+  egressInGbps?: int64;
+
+  /** The transaction quota in thousands of transactions per second. */
+  @minValue(1)
+  tpsInKtps?: int64;
+
+  /** The capacity quota in gigabytes. */
+  @minValue(1)
+  capacityInGb?: int64;
+
+  /** The utilization threshold, expressed as a percentage of the quota policy limit, at which proactive notifications are sent to customers before the hard limit is reached. */
+  @minValue(1)
+  @maxValue(100)
+  softQuotaPercentage?: int64;
+}
+
+/** The type used for update operations of a quota management policy. */
+@added(Versions.v2026_12_01)
+model QuotaManagementPolicyUpdate {
+  /** Resource tags. */
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The updatable properties of the quota management policy. */
+  properties?: QuotaManagementPolicyPropertiesUpdate;
+}
+
+/** The operational state of a quota management policy. */
+@added(Versions.v2026_12_01)
+union QuotaManagementPolicyState {
+  /** The quota management policy is enabled. */
+  Enabled: "Enabled",
+
+  /** The quota management policy is disabled. */
+  Disabled: "Disabled",
+
+  string,
+}

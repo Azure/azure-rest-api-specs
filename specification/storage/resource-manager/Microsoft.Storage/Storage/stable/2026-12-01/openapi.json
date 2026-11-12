@@ -118,6 +118,12 @@
       "name": "ContextCacheContainers"
     },
     {
+      "name": "QuotaManagementGroups"
+    },
+    {
+      "name": "QuotaManagementPolicies"
+    },
+    {
       "name": "BlobAccessPointConfigurations"
     },
     {
@@ -412,6 +418,84 @@
         "x-ms-examples": {
           "UsageList": {
             "$ref": "./examples/StorageAccountListLocationUsage.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/quotaManagementGroups": {
+      "get": {
+        "operationId": "QuotaManagementGroups_ListBySubscription",
+        "tags": [
+          "QuotaManagementGroups"
+        ],
+        "description": "List quota management groups by subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaManagementGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List quota management groups by subscription": {
+            "$ref": "./examples/QuotaManagementGroupCRUD/QuotaManagementGroups_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage/quotaManagementPolicies": {
+      "get": {
+        "operationId": "QuotaManagementPolicies_ListBySubscription",
+        "tags": [
+          "QuotaManagementPolicies"
+        ],
+        "description": "List quota management policies by subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaManagementPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List quota management policies by subscription": {
+            "$ref": "./examples/QuotaManagementPolicyCRUD/QuotaManagementPolicies_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -1137,6 +1221,614 @@
         "x-ms-examples": {
           "Delete a Context Cache Container": {
             "$ref": "./examples/StorageContextCacheContainerCRUD/ContextCacheContainers_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/quotaManagementGroups": {
+      "get": {
+        "operationId": "QuotaManagementGroups_ListByResourceGroup",
+        "tags": [
+          "QuotaManagementGroups"
+        ],
+        "description": "List quota management groups by resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaManagementGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List quota management groups by resource group": {
+            "$ref": "./examples/QuotaManagementGroupCRUD/QuotaManagementGroups_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/quotaManagementGroups/{quotaManagementGroupName}": {
+      "get": {
+        "operationId": "QuotaManagementGroups_Get",
+        "tags": [
+          "QuotaManagementGroups"
+        ],
+        "description": "Get a quota management group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "quotaManagementGroupName",
+            "in": "path",
+            "description": "The name of the quota management group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaManagementGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a quota management group": {
+            "$ref": "./examples/QuotaManagementGroupCRUD/QuotaManagementGroups_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "QuotaManagementGroups_CreateOrUpdate",
+        "tags": [
+          "QuotaManagementGroups"
+        ],
+        "description": "Create or update a quota management group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "quotaManagementGroupName",
+            "in": "path",
+            "description": "The name of the quota management group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuotaManagementGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'QuotaManagementGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/QuotaManagementGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'QuotaManagementGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/QuotaManagementGroup"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a quota management group": {
+            "$ref": "./examples/QuotaManagementGroupCRUD/QuotaManagementGroups_CreateOrUpdate.json"
+          },
+          "Create an empty quota management group": {
+            "$ref": "./examples/QuotaManagementGroupCRUD/QuotaManagementGroups_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/QuotaManagementGroup"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "QuotaManagementGroups_Update",
+        "tags": [
+          "QuotaManagementGroups"
+        ],
+        "description": "Update a quota management group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "quotaManagementGroupName",
+            "in": "path",
+            "description": "The name of the quota management group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuotaManagementGroupUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaManagementGroup"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a quota management group": {
+            "$ref": "./examples/QuotaManagementGroupCRUD/QuotaManagementGroups_Update.json"
+          },
+          "Update quota management group tags": {
+            "$ref": "./examples/QuotaManagementGroupCRUD/QuotaManagementGroups_Update_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/QuotaManagementGroup"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "QuotaManagementGroups_Delete",
+        "tags": [
+          "QuotaManagementGroups"
+        ],
+        "description": "Delete a quota management group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "quotaManagementGroupName",
+            "in": "path",
+            "description": "The name of the quota management group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a quota management group": {
+            "$ref": "./examples/QuotaManagementGroupCRUD/QuotaManagementGroups_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/quotaManagementPolicies": {
+      "get": {
+        "operationId": "QuotaManagementPolicies_ListByResourceGroup",
+        "tags": [
+          "QuotaManagementPolicies"
+        ],
+        "description": "List quota management policies by resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaManagementPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List quota management policies by resource group": {
+            "$ref": "./examples/QuotaManagementPolicyCRUD/QuotaManagementPolicies_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/quotaManagementPolicies/{policyName}": {
+      "get": {
+        "operationId": "QuotaManagementPolicies_Get",
+        "tags": [
+          "QuotaManagementPolicies"
+        ],
+        "description": "Get a quota management policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the quota management policy.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaManagementPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a quota management policy": {
+            "$ref": "./examples/QuotaManagementPolicyCRUD/QuotaManagementPolicies_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "QuotaManagementPolicies_CreateOrUpdate",
+        "tags": [
+          "QuotaManagementPolicies"
+        ],
+        "description": "Create or update a quota management policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the quota management policy.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuotaManagementPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'QuotaManagementPolicy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/QuotaManagementPolicy"
+            }
+          },
+          "201": {
+            "description": "Resource 'QuotaManagementPolicy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/QuotaManagementPolicy"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a quota management policy": {
+            "$ref": "./examples/QuotaManagementPolicyCRUD/QuotaManagementPolicies_CreateOrUpdate.json"
+          },
+          "Create a quota management policy with minimum properties": {
+            "$ref": "./examples/QuotaManagementPolicyCRUD/QuotaManagementPolicies_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/QuotaManagementPolicy"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "QuotaManagementPolicies_Update",
+        "tags": [
+          "QuotaManagementPolicies"
+        ],
+        "description": "Update a quota management policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the quota management policy.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuotaManagementPolicyUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaManagementPolicy"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a quota management policy": {
+            "$ref": "./examples/QuotaManagementPolicyCRUD/QuotaManagementPolicies_Update.json"
+          },
+          "Update quota management policy state": {
+            "$ref": "./examples/QuotaManagementPolicyCRUD/QuotaManagementPolicies_Update_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/QuotaManagementPolicy"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "QuotaManagementPolicies_Delete",
+        "tags": [
+          "QuotaManagementPolicies"
+        ],
+        "description": "Delete a quota management policy. The request fails if the policy is referenced by a quota management group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the quota management policy.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a quota management policy": {
+            "$ref": "./examples/QuotaManagementPolicyCRUD/QuotaManagementPolicies_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -16207,6 +16899,451 @@
           "description": "Specifies CORS rules for the Queue service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the Queue service."
         }
       }
+    },
+    "QuotaManagementGroup": {
+      "type": "object",
+      "description": "A regional quota management group containing storage accounts or storage containers.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QuotaManagementGroupProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "QuotaManagementGroupListResult": {
+      "type": "object",
+      "description": "The response of a QuotaManagementGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The QuotaManagementGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/QuotaManagementGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "QuotaManagementGroupMembershipType": {
+      "type": "string",
+      "description": "The membership type of a quota management group.",
+      "enum": [
+        "StorageAccounts",
+        "StorageContainers",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "QuotaManagementGroupMembershipType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "StorageAccounts",
+            "value": "StorageAccounts",
+            "description": "The quota management group contains storage accounts."
+          },
+          {
+            "name": "StorageContainers",
+            "value": "StorageContainers",
+            "description": "The quota management group contains storage containers."
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "The quota management group has no resource members."
+          }
+        ]
+      }
+    },
+    "QuotaManagementGroupProperties": {
+      "type": "object",
+      "description": "Details of a quota management group. Empty groups are valid. A request is rejected if both storageAccounts and storageContainers are non-empty.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The user-defined description of the quota management group.",
+          "minLength": 0,
+          "maxLength": 256
+        },
+        "membershipType": {
+          "$ref": "#/definitions/QuotaManagementGroupMembershipType",
+          "description": "The membership type of the quota management group, calculated from its resource members.",
+          "readOnly": true
+        },
+        "storageAccounts": {
+          "type": "array",
+          "description": "The Azure resource IDs of storage accounts in the quota management group. PUT requests replace the entire collection. To switch a group from container membership, set storageContainers to an empty array and storageAccounts to the desired values in the same request.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Storage/storageAccounts"
+                }
+              ]
+            }
+          }
+        },
+        "storageContainers": {
+          "type": "array",
+          "description": "The Azure resource IDs of storage containers in the quota management group. PUT requests replace the entire collection. All containers must belong to the same storage account. To switch a group from account membership, set storageAccounts to an empty array and storageContainers to the desired values in the same request.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Storage/storageAccounts/blobServices/containers"
+                }
+              ]
+            }
+          }
+        },
+        "quotaManagementPolicyId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource ID of the quota management policy associated with the quota management group. The policy may be in another subscription in the same tenant, but it must be in the same region as the group. Linking requires LinkedAccessCheck permission on the policy.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/quotaManagementPolicies"
+              }
+            ]
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/QuotaManagementProvisioningState",
+          "description": "The provisioning state of the quota management group.",
+          "readOnly": true
+        }
+      }
+    },
+    "QuotaManagementGroupPropertiesUpdate": {
+      "type": "object",
+      "description": "Updatable properties of a quota management group.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The user-defined description of the quota management group.",
+          "minLength": 0,
+          "maxLength": 256
+        },
+        "storageAccounts": {
+          "type": "array",
+          "description": "The Azure resource IDs of storage accounts in the quota management group. PATCH requests replace the entire collection.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Storage/storageAccounts"
+                }
+              ]
+            }
+          }
+        },
+        "storageContainers": {
+          "type": "array",
+          "description": "The Azure resource IDs of storage containers in the quota management group. PATCH requests replace the entire collection.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Storage/storageAccounts/blobServices/containers"
+                }
+              ]
+            }
+          }
+        },
+        "quotaManagementPolicyId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource ID of the quota management policy associated with the quota management group.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/quotaManagementPolicies"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "QuotaManagementGroupUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of a quota management group.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/QuotaManagementGroupPropertiesUpdate",
+          "description": "The updatable properties of the quota management group."
+        }
+      }
+    },
+    "QuotaManagementPolicy": {
+      "type": "object",
+      "description": "A regional policy that defines quota limits for quota management groups.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QuotaManagementPolicyProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "QuotaManagementPolicyListResult": {
+      "type": "object",
+      "description": "The response of a QuotaManagementPolicy list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The QuotaManagementPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/QuotaManagementPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "QuotaManagementPolicyProperties": {
+      "type": "object",
+      "description": "Details of a quota management policy.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/QuotaManagementPolicyState",
+          "description": "The operational state of the quota management policy."
+        },
+        "description": {
+          "type": "string",
+          "description": "The user-defined description of the quota management policy.",
+          "minLength": 0,
+          "maxLength": 256
+        },
+        "ingressInGbps": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The ingress throughput quota in gigabits per second.",
+          "minimum": 1
+        },
+        "egressInGbps": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The egress throughput quota in gigabits per second.",
+          "minimum": 1
+        },
+        "tpsInKtps": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The transaction quota in thousands of transactions per second.",
+          "minimum": 1
+        },
+        "capacityInGb": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The capacity quota in gigabytes.",
+          "minimum": 1
+        },
+        "softQuotaPercentage": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The utilization threshold, expressed as a percentage of the quota policy limit, at which proactive notifications are sent to customers before the hard limit is reached.",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/QuotaManagementProvisioningState",
+          "description": "The provisioning state of the quota management policy.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "QuotaManagementPolicyPropertiesUpdate": {
+      "type": "object",
+      "description": "Updatable properties of a quota management policy.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/QuotaManagementPolicyState",
+          "description": "The operational state of the quota management policy."
+        },
+        "description": {
+          "type": "string",
+          "description": "The user-defined description of the quota management policy.",
+          "minLength": 0,
+          "maxLength": 256
+        },
+        "ingressInGbps": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The ingress throughput quota in gigabits per second.",
+          "minimum": 1
+        },
+        "egressInGbps": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The egress throughput quota in gigabits per second.",
+          "minimum": 1
+        },
+        "tpsInKtps": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The transaction quota in thousands of transactions per second.",
+          "minimum": 1
+        },
+        "capacityInGb": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The capacity quota in gigabytes.",
+          "minimum": 1
+        },
+        "softQuotaPercentage": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The utilization threshold, expressed as a percentage of the quota policy limit, at which proactive notifications are sent to customers before the hard limit is reached.",
+          "minimum": 1,
+          "maximum": 100
+        }
+      }
+    },
+    "QuotaManagementPolicyState": {
+      "type": "string",
+      "description": "The operational state of a quota management policy.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "QuotaManagementPolicyState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The quota management policy is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The quota management policy is disabled."
+          }
+        ]
+      }
+    },
+    "QuotaManagementPolicyUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of a quota management policy.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/QuotaManagementPolicyPropertiesUpdate",
+          "description": "The updatable properties of the quota management policy."
+        }
+      }
+    },
+    "QuotaManagementProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a quota management resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "QuotaManagementProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Initial provisioning in progress"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Update in progress"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deletion in progress"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Change accepted for processing"
+          }
+        ]
+      },
+      "readOnly": true
     },
     "Reason": {
       "type": "string",

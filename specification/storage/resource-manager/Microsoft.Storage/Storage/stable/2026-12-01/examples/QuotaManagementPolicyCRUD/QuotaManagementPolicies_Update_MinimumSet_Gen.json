@@ -1,0 +1,43 @@
+{
+  "operationId": "QuotaManagementPolicies_Update",
+  "title": "Update quota management policy state",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-12-01",
+    "policyName": "minimal-policy",
+    "properties": {
+      "properties": {
+        "state": "Disabled"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/quotaManagementPolicies/minimal-policy",
+        "name": "minimal-policy",
+        "type": "Microsoft.Storage/quotaManagementPolicies",
+        "location": "eastus",
+        "properties": {
+          "state": "Disabled",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/quotaManagementPolicies/minimal-policy?api-version=2026-12-01",
+        "Retry-After": "10"
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "InvalidOperation",
+          "message": "Invalid request body or parameters"
+        }
+      }
+    }
+  }
+}

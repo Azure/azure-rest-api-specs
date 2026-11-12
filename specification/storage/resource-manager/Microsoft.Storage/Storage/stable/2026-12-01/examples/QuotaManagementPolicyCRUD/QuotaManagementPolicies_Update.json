@@ -1,0 +1,57 @@
+{
+  "operationId": "QuotaManagementPolicies_Update",
+  "title": "Update a quota management policy",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-12-01",
+    "policyName": "policy1",
+    "properties": {
+      "tags": {
+        "environment": "test"
+      },
+      "properties": {
+        "state": "Disabled",
+        "description": "Temporarily disabled storage quota policy",
+        "softQuotaPercentage": 75
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/quotaManagementPolicies/policy1",
+        "name": "policy1",
+        "type": "Microsoft.Storage/quotaManagementPolicies",
+        "location": "eastus",
+        "tags": {
+          "environment": "test"
+        },
+        "properties": {
+          "state": "Disabled",
+          "description": "Temporarily disabled storage quota policy",
+          "ingressInGbps": 100,
+          "egressInGbps": 200,
+          "tpsInKtps": 50,
+          "capacityInGb": 10240,
+          "softQuotaPercentage": 75,
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/quotaManagementPolicies/policy1?api-version=2026-12-01",
+        "Retry-After": "10"
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "InvalidOperation",
+          "message": "Invalid request body or parameters"
+        }
+      }
+    }
+  }
+}

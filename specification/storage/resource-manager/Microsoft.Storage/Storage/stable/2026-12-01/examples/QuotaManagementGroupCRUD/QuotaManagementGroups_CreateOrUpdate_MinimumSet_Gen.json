@@ -1,0 +1,52 @@
+{
+  "operationId": "QuotaManagementGroups_CreateOrUpdate",
+  "title": "Create an empty quota management group",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-12-01",
+    "quotaManagementGroupName": "empty-qmg",
+    "resource": {
+      "location": "eastus",
+      "properties": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/quotaManagementGroups/empty-qmg",
+        "name": "empty-qmg",
+        "type": "Microsoft.Storage/quotaManagementGroups",
+        "location": "eastus",
+        "properties": {
+          "membershipType": "None",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Storage/locations/eastus/operationStatuses/11111111-1111-1111-1111-111111111111?api-version=2026-12-01",
+        "Retry-After": "10"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/quotaManagementGroups/empty-qmg",
+        "name": "empty-qmg",
+        "type": "Microsoft.Storage/quotaManagementGroups",
+        "location": "eastus",
+        "properties": {
+          "membershipType": "None",
+          "provisioningState": "Creating"
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "InvalidOperation",
+          "message": "Invalid request body or parameters"
+        }
+      }
+    }
+  }
+}
