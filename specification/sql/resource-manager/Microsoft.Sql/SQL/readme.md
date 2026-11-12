@@ -67,6 +67,7 @@ input-file:
   - preview/2026-11-01-preview/dataWarehouseUserActivities.json
   - preview/2026-11-01-preview/deletedServers.json
   - preview/2026-11-01-preview/distributedAvailabilityGroups.json
+  - preview/2026-11-01-preview/distributedAvailabilityGroupsDatabaseOperations.json
   - preview/2026-11-01-preview/elasticPoolOperations.json
   - preview/2026-11-01-preview/elasticPools.json
   - preview/2026-11-01-preview/encryptionProtectors.json
@@ -223,6 +224,12 @@ suppressions:
     from: managedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies/{policyName}"].get.parameters..description
     reason: The policy supports only default. Its enum metadata is inherited unchanged from ManagedShortTermRetentionPolicyName, which is shared with existing retention APIs.
+  - code: ResourceNameRestriction
+    from: distributedAvailabilityGroupsDatabaseOperations.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/distributedAvailabilityGroups/{distributedAvailabilityGroupName}/databaseOperations"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/distributedAvailabilityGroups/{distributedAvailabilityGroupName}/databaseOperations/{operationId}"]
+    reason: "managedInstanceName and distributedAvailabilityGroupName identify existing parent resources. The parent managed instance and distributed availability group APIs define no pattern for either name. managedInstanceName: the service requires 1-63 characters of a-z, 0-9 and '-', with no leading or trailing '-', and the name must be a valid DNS label. Uppercase is rejected only on create; the update and GET paths lowercase the name for backward compatibility, so a lowercase-only pattern would reject URLs that work today. distributedAvailabilityGroupName: the service only requires a non-empty name. Lowercase is enforced only on create when linkMode is MultiDatabase. Single-database links may use mixed case, and the engine allows availability group names up to 255 characters (64 when cluster_type is NONE or EXTERNAL). linkMode is not in the request path, so any pattern stricter than non-empty would reject valid GET/LIST paths for existing links. operationId is a UUID. ARM exception approval is required."
 ```
 
 ### Tag: package-preview-2026-08-01-preview

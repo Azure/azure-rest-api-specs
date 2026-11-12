@@ -1524,6 +1524,11 @@ union SqlNameAvailabilityResourceType {
   "csharp"
 );
 @@alternateType(ManagedInstanceOperation.name, uuid, "csharp");
+@@alternateType(
+  DistributedAvailabilityGroupDatabaseOperation.name,
+  uuid,
+  "csharp"
+);
 @@alternateType(InstancePoolOperation.name, uuid, "csharp");
 @@clientName(ElasticPools.cancel, "CancelElasticPoolOperation", "csharp");
 
