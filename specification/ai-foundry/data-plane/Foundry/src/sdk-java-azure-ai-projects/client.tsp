@@ -452,6 +452,94 @@ model ListAgentInsightRunsOptions {
 // Type replacements / encodings
 // --------------------------------------------------------------------------------
 
+@alternateType(
+  {
+    identity: "com.azure.ai.projects.models.DatasetEvaluationSource",
+  },
+  "java"
+)
+model JavaDatasetEvaluationSource {}
+
+@alternateType(
+  {
+    identity: "com.azure.ai.projects.models.TraceEvaluationSource",
+  },
+  "java"
+)
+model JavaTraceEvaluationSource {}
+
+@alternateType(
+  {
+    identity: "com.azure.ai.projects.models.UserConversationSimulationSource",
+  },
+  "java"
+)
+model JavaUserConversationSimulationSource {}
+
+@@alternateType(
+  DatasetEvaluationRuleAction.source,
+  JavaDatasetEvaluationSource,
+  "java"
+);
+@@alternateType(
+  TraceEvaluationRuleAction.source,
+  JavaTraceEvaluationSource,
+  "java"
+);
+@@alternateType(
+  UserConversationSimulationEvalRunDataSource.source,
+  JavaUserConversationSimulationSource,
+  "java"
+);
+@@alternateType(
+  UserConversationSimulationPreviewEvalRunDataSource.source,
+  JavaUserConversationSimulationSource,
+  "java"
+);
+// Keep the handwritten union variants reachable after replacing the source properties.
+@@usage(CsvEvalRunDataSource, Usage.input | Usage.output, "java");
+@@access(CsvEvalRunDataSource, Access.public, "java");
+@@usage(TargetCompletionEvalRunDataSource, Usage.input | Usage.output, "java");
+@@access(TargetCompletionEvalRunDataSource, Access.public, "java");
+@@usage(
+  UserConversationSimulationEvalRunDataSource,
+  Usage.input | Usage.output,
+  "java"
+);
+@@access(UserConversationSimulationEvalRunDataSource, Access.public, "java");
+@@usage(
+  UserConversationSimulationPreviewEvalRunDataSource,
+  Usage.input | Usage.output,
+  "java"
+);
+@@access(
+  UserConversationSimulationPreviewEvalRunDataSource,
+  Access.public,
+  "java"
+);
+@@usage(TracesEvalRunDataSource, Usage.input | Usage.output, "java");
+@@access(TracesEvalRunDataSource, Access.public, "java");
+@@usage(TracesPreviewEvalRunDataSource, Usage.input | Usage.output, "java");
+@@access(TracesPreviewEvalRunDataSource, Access.public, "java");
+@@usage(TraceSourceEvalRunDataSource, Usage.input | Usage.output, "java");
+@@access(TraceSourceEvalRunDataSource, Access.public, "java");
+@@usage(
+  TraceSourcePreviewEvalRunDataSource,
+  Usage.input | Usage.output,
+  "java"
+);
+@@access(TraceSourcePreviewEvalRunDataSource, Access.public, "java");
+@@usage(
+  UserConversationSimulationInlineTestCasesSource,
+  Usage.input | Usage.output,
+  "java"
+);
+@@access(
+  UserConversationSimulationInlineTestCasesSource,
+  Access.public,
+  "java"
+);
+
 @@alternateType(
   OpenAI.CreateEvalJsonlRunDataSource,
   {
