@@ -25,9 +25,11 @@ options:
     "package-version": "4.10.0"
     "namespace": "azure.keyvault.keys._generated"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-keyvault-keys"
+    api-version: "2026-04-01"
   "@azure-tools/typespec-java":
     flavor: azure
     emitter-output-dir: "{output-dir}/{service-dir}/azure-security-keyvault-keys"
+    api-version: "2026-04-01"
     namespace: "com.azure.security.keyvault.keys"
     models-subpackage: "implementation.models"
     custom-types: "KeyAttestation,KeyCurveName,KeyExportEncryptionAlgorithm,KeyOperation,KeyRotationPolicyAction,KeyType,ReleaseKeyResult,ExternalKey"
@@ -39,6 +41,7 @@ options:
     include-api-view-properties: false
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/keyvault-keys"
+    api-version: "2026-04-01"
     experimental-extensible-enums: true
     package-details:
       name: "@azure/keyvault-keys"
@@ -48,6 +51,7 @@ options:
     module: "github.com/Azure/azure-sdk-for-go/sdk/security/keyvault/azkeys"
     service-dir: "sdk/security/keyvault"
     emitter-output-dir: "{output-dir}/{service-dir}/azkeys"
+    api-version: "2026-04-01"
     go-generate: build.go
     single-client: true
     inject-spans: true
