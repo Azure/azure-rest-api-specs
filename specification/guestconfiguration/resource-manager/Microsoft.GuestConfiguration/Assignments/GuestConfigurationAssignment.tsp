@@ -408,6 +408,7 @@ interface GuestConfigurationAssignmentsVMSS {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserving original VMSS path parameter name"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   @operationId("GuestConfigurationAssignmentsVMSS_Delete")
   @Azure.ResourceManager.Legacy.renamePathParameter(
     "guestConfigurationAssignmentName",
