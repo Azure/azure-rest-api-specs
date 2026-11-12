@@ -5,15 +5,13 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Compute.WorkloadManager;
 
 @@clientName(ProvisioningState, "WorkloadManagerProvisioningState", "csharp");
-@@clientName(
-  AggregateOperationStatus,
+@@clientName(AggregateOperationStatus,
   "WorkloadSpaceAggregateOperationStatus",
   "csharp"
 );
 @@clientName(DependencyStatus, "WorkloadSpaceDependencyStatus", "csharp");
 @@clientName(DependencyState, "WorkloadSpaceDependencyState", "csharp");
-@@clientName(
-  CapabilityDependencyStatus,
+@@clientName(CapabilityDependencyStatus,
   "WorkloadSpaceCapabilityDependencyStatus",
   "csharp"
 );
@@ -21,8 +19,7 @@ using Microsoft.Compute.WorkloadManager;
 @@clientName(CapabilityKind, "WorkloadCapabilityKind", "csharp");
 @@clientName(EgressMode, "RuntimeEgressMode", "csharp");
 @@clientName(CapacityProfile, "RuntimeLinkCapacityProfile", "csharp");
-@@clientName(
-  CapacityProfileUpdate,
+@@clientName(CapacityProfileUpdate,
   "RuntimeLinkCapacityProfilePatch",
   "csharp"
 );
@@ -31,19 +28,16 @@ using Microsoft.Compute.WorkloadManager;
 @@clientName(CapabilityProperties, "WorkloadCapabilityProperties", "csharp");
 @@clientName(Capability, "WorkloadCapability", "csharp");
 @@clientName(CapabilityUpdate, "WorkloadCapabilityPatch", "csharp");
-@@clientName(
-  RuntimeLinkMutableProperties.capacityProfile,
+@@clientName(RuntimeLinkMutableProperties.capacityProfile,
   "CapacityProfile",
   "csharp"
 );
-@@clientName(
-  CapabilityMutableProperties.versionPolicy,
+@@clientName(CapabilityMutableProperties.versionPolicy,
   "VersionPolicy",
   "csharp"
 );
 
-@@clientName(
-  Microsoft.Compute.WorkloadManager,
+@@clientName(Microsoft.Compute.WorkloadManager,
   "ComputeWorkloadManagerMgmtClient",
   "python"
 );

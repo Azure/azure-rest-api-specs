@@ -102,8 +102,7 @@ model BulkCreateEnvelope {
 }
 
 @@added(BulkCreateEnvelope.extendedLocation, Versions.`2026-10-06-preview`);
-@@doc(
-  BulkCreateEnvelope.extendedLocation,
+@@doc(BulkCreateEnvelope.extendedLocation,
   "The extended location of the virtual machines created by the BulkCreate operation."
 );
 
@@ -237,9 +236,7 @@ interface BulkCreate {
     @minLength(1)
     @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
     asyncOperationId: string,
-  ):
-    | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
-    | ErrorResponse;
+  ): ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult> | ErrorResponse;
 
   @doc("Creates or updates BulkCreates.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<

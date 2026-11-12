@@ -9,48 +9,39 @@ namespace Microsoft.Compute;
 @@clientName(NetworkApiVersion.`2020-11-01`, "ENUM_2020_11_01", "python");
 @@clientName(NetworkApiVersion.`2022-11-01`, "ENUM_2022_11_01", "python");
 
-@@clientName(
-  VirtualMachineBulkOperations.bulkDeallocate,
+@@clientName(VirtualMachineBulkOperations.bulkDeallocate,
   "BulkDeallocateOperation",
   "!autorest"
 );
-@@clientName(
-  VirtualMachineBulkOperations.bulkHibernate,
+@@clientName(VirtualMachineBulkOperations.bulkHibernate,
   "BulkHibernateOperation",
   "!autorest"
 );
-@@clientName(
-  VirtualMachineBulkOperations.bulkStart,
+@@clientName(VirtualMachineBulkOperations.bulkStart,
   "BulkStartOperation",
   "!autorest"
 );
-@@clientName(
-  VirtualMachineBulkOperations.bulkGetOperationsStatus,
+@@clientName(VirtualMachineBulkOperations.bulkGetOperationsStatus,
   "BulkGetOperationsStatus",
   "!autorest"
 );
-@@clientName(
-  VirtualMachineBulkOperations.bulkCancel,
+@@clientName(VirtualMachineBulkOperations.bulkCancel,
   "BulkCancelOperations",
   "!autorest"
 );
-@@clientName(
-  VirtualMachineBulkOperations.bulkCreate,
+@@clientName(VirtualMachineBulkOperations.bulkCreate,
   "BulkCreateOperation",
   "!autorest"
 );
-@@clientName(
-  VirtualMachineBulkOperations.bulkDelete,
+@@clientName(VirtualMachineBulkOperations.bulkDelete,
   "BulkDeleteOperation",
   "!autorest"
 );
-@@clientName(
-  VirtualMachineBulkOperations.bulkReimage,
+@@clientName(VirtualMachineBulkOperations.bulkReimage,
   "BulkReimageOperation",
   "!autorest"
 );
-@@clientName(
-  VirtualMachineBulkOperations.bulkVdiFlexCreate,
+@@clientName(VirtualMachineBulkOperations.bulkVdiFlexCreate,
   "BulkVdiFlexCreateOperation",
   "!autorest"
 );
@@ -61,46 +52,38 @@ namespace Microsoft.Compute;
 // client names; the standard type keeps "InnerError", BA's custom one is renamed.
 @@clientName(Microsoft.Compute.InnerError, "BulkInstancesInnerError", "csharp");
 @@clientName(Microsoft.Compute.InnerError, "BulkInstancesInnerError", "java");
-@@clientName(
-  Microsoft.Compute.InnerError,
+@@clientName(Microsoft.Compute.InnerError,
   "BulkInstancesInnerError",
   "python,go,javascript"
 );
 
 @@clientName(CancelOperationsResponse, "CancelBulkOperationsResult", "csharp");
-@@clientName(
-  CapacityRecommendationParameters,
+@@clientName(CapacityRecommendationParameters,
   "BulkActionsCapacityRecommendationParametersContent",
   "csharp"
 );
 @@clientName(DeadlineType, "BulkActionDeadlineKind", "csharp");
-@@clientName(
-  DeallocateResourceOperationResponse,
+@@clientName(DeallocateResourceOperationResponse,
   "DeallocateResourceOperationResult",
   "csharp"
 );
-@@clientName(
-  DeallocateResourceOperationResponse.type,
+@@clientName(DeallocateResourceOperationResponse.type,
   "ResourceTypeName",
   "csharp"
 );
-@@clientName(
-  ExecutionParameters,
+@@clientName(ExecutionParameters,
   "BulkActionExecutionParameterDetail",
   "csharp"
 );
-@@clientName(
-  GetOperationStatusResponse,
+@@clientName(GetOperationStatusResponse,
   "GetBulkOperationStatusResult",
   "csharp"
 );
-@@clientName(
-  HibernateResourceOperationResponse,
+@@clientName(HibernateResourceOperationResponse,
   "HibernateResourceOperationResult",
   "csharp"
 );
-@@clientName(
-  HibernateResourceOperationResponse.type,
+@@clientName(HibernateResourceOperationResponse.type,
   "ResourceTypeName",
   "csharp"
 );
@@ -109,36 +92,30 @@ namespace Microsoft.Compute;
 @@clientName(ResourceOperation, "ComputeBulkOperationResult", "csharp");
 @@clientName(Resources, "UserRequestResources", "csharp");
 @@clientName(RetryPolicy, "BulkOperationRetryPolicy", "csharp");
-@@clientName(
-  StartResourceOperationResponse,
+@@clientName(StartResourceOperationResponse,
   "StartResourceOperationResult",
   "csharp"
 );
 @@clientName(StartResourceOperationResponse.type, "ResourceTypeName", "csharp");
 @@clientName(ExecuteDeleteRequest.forceDeletion, "IsForceDeletion", "csharp");
-@@clientName(
-  OperationErrorDetails.timeStamp,
+@@clientName(OperationErrorDetails.timeStamp,
   "errorDetailsTimestamp",
   "csharp,javascript,java,python"
 );
 
-@@clientName(
-  DeleteResourceOperationResponse,
+@@clientName(DeleteResourceOperationResponse,
   "DeleteResourceOperationResult",
   "csharp"
 );
-@@clientName(
-  DeleteResourceOperationResponse.type,
+@@clientName(DeleteResourceOperationResponse.type,
   "ResourceTypeName",
   "csharp"
 );
-@@clientName(
-  CreateResourceOperationResponse,
+@@clientName(CreateResourceOperationResponse,
   "CreateResourceOperationResult",
   "csharp"
 );
-@@clientName(
-  CreateResourceOperationResponse.type,
+@@clientName(CreateResourceOperationResponse.type,
   "ResourceTypeName",
   "csharp"
 );
@@ -147,65 +124,53 @@ namespace Microsoft.Compute;
 @@clientName(ExecuteDeallocateRequest, "ExecuteDeallocateContent", "!autorest");
 @@clientName(ExecuteDeleteRequest, "ExecuteDeleteContent", "!autorest");
 @@clientName(ExecuteStartRequest, "ExecuteStartContent", "!autorest");
-@@clientName(
-  GetOperationStatusRequest,
+@@clientName(GetOperationStatusRequest,
   "GetOperationStatusContent",
   "!autorest"
 );
 @@clientName(CancelOperationsRequest, "CancelOperationsContent", "!autorest");
-@@clientName(
-  ManagedDiskParameters,
+@@clientName(ManagedDiskParameters,
   "ManagedDiskParametersContent",
   "!autorest"
 );
-@@clientName(
-  DiskEncryptionSetParameters,
+@@clientName(DiskEncryptionSetParameters,
   "DiskEncryptionSetParametersContent",
   "!autorest"
 );
 
-@@clientName(
-  UserInitiatedRedeploy.automaticallyApprove,
+@@clientName(UserInitiatedRedeploy.automaticallyApprove,
   "UserInitiatedRedeployAutomaticallyApprove",
   "!autorest"
 );
-@@clientName(
-  UserInitiatedReboot.automaticallyApprove,
+@@clientName(UserInitiatedReboot.automaticallyApprove,
   "UserInitiatedRebootAutomaticallyApprove",
   "!autorest"
 );
-@@clientName(
-  AllInstancesDown.automaticallyApprove,
+@@clientName(AllInstancesDown.automaticallyApprove,
   "AllInstancesDownAutomaticallyApprove",
   "!autorest"
 );
-@@clientName(
-  ExecuteVdiCreateRequest,
+@@clientName(ExecuteVdiCreateRequest,
   "BulkActionsExecuteVdiCreateRequestContent",
   "csharp"
 );
-@@clientName(
-  ExecuteReimageRequest,
+@@clientName(ExecuteReimageRequest,
   "BulkActionsExecuteReimageRequestContent",
   "csharp"
 );
-@@clientName(
-  ReimageResourceOperationResponse,
+@@clientName(ReimageResourceOperationResponse,
   "BulkActionsReimageResourceOperationResponseResult",
   "csharp"
 );
-@@clientName(
-  ReimageResourceOperationResponse.type,
+@@clientName(ReimageResourceOperationResponse.type,
   "ResourceTypeName",
   "csharp"
 );
-@@clientName(
-  VirtualMachineReimageParameters,
+@@clientName(VirtualMachineReimageParameters,
   "BulkActionsVirtualMachineReimageParametersContent",
   "csharp"
 );
-@@clientName(
-  OSProfileProvisioningData,
+@@clientName(OSProfileProvisioningData,
   "BulkActionsOsProfileProvisioningContent",
   "csharp"
 );
@@ -213,23 +178,19 @@ namespace Microsoft.Compute;
 // =====================================================================
 // .NET naming convention fixes (C# only)
 // =====================================================================
-@@clientName(
-  BulkCreateCustomResource,
+@@clientName(BulkCreateCustomResource,
   "BulkCreateCustomResolvedItem",
   "csharp"
 );
-@@clientName(
-  CapacityRecommendationParameters.availabilityZones,
+@@clientName(CapacityRecommendationParameters.availabilityZones,
   "isAvailabilityZoneEnabled",
   "csharp"
 );
-@@clientName(
-  CapacityRecommendationDetails.availabilityZones,
+@@clientName(CapacityRecommendationDetails.availabilityZones,
   "isSplitByAvailabilityZone",
   "csharp"
 );
-@@clientName(
-  CapacityRecommendationDetails.recommendationRequestedAtUtc,
+@@clientName(CapacityRecommendationDetails.recommendationRequestedAtUtc,
   "recommendationRequestedAt",
   "csharp"
 );
@@ -237,8 +198,7 @@ namespace Microsoft.Compute;
 @@clientName(ResourceOperationDetails.opType, "operationKind", "csharp");
 @@clientName(FallbackOperationInfo.lastOpType, "lastOperationKind", "csharp");
 // Drop redundant type-name prefix; align with FallbackOperationInfo.error.
-@@clientName(
-  ResourceOperationDetails.resourceOperationError,
+@@clientName(ResourceOperationDetails.resourceOperationError,
   "error",
   "csharp"
 );
@@ -246,8 +206,7 @@ namespace Microsoft.Compute;
 @@clientName(ResourceOperationDetails.timezone, "timeZone", "csharp");
 
 // C# only: expose subscriptionId as Guid? (UUID) while keeping the spec/OpenAPI type as string to avoid ARM GuidUsage lint.
-@@alternateType(
-  ResourceOperationDetails.subscriptionId,
+@@alternateType(ResourceOperationDetails.subscriptionId,
   Azure.Core.uuid,
   "csharp"
 );
@@ -257,8 +216,7 @@ namespace Microsoft.Compute;
 @@clientName(ResourceOperationDetails.deadline, "deadlineOn", "csharp");
 @@clientName(ResourceOperationError, "ComputeBulkOperationError", "csharp");
 
-@@clientName(
-  FallbackOperationInfo,
+@@clientName(FallbackOperationInfo,
   "ComputeBulkFallbackOperationInfo",
   "csharp"
 );
@@ -272,8 +230,7 @@ namespace Microsoft.Compute;
 @@apiVersion(NetworkProfile.networkApiVersion, false, "go");
 
 @@clientName(CancelOperationsRequest, "CancelBulkOperationsContent", "csharp");
-@@clientName(
-  GetOperationStatusRequest,
+@@clientName(GetOperationStatusRequest,
   "GetBulkOperationStatusContent",
   "csharp"
 );
@@ -282,8 +239,7 @@ namespace Microsoft.Compute;
 // .NET Management SDK review (AZC0030) type-name fixes (C# only)
 // =====================================================================
 // SUFFIX010: "Update" is reserved for PATCH-body models; this is a merge-patch body.
-@@clientName(
-  ScheduledActionsScheduleUpdate,
+@@clientName(ScheduledActionsScheduleUpdate,
   "ScheduledActionsSchedulePatch",
   "csharp"
 );
@@ -293,8 +249,7 @@ namespace Microsoft.Compute;
 // ACRONYM002: fix "Bulkaction" casing to match the "BulkAction*" prefix used package-wide.
 @@clientName(BulkactionVMExtension, "BulkActionVMExtension", "csharp");
 // ACRONYM001: 2-letter acronym "Vm" must be uppercase "VM".
-@@clientName(
-  BulkActionVmExtensionProperties,
+@@clientName(BulkActionVmExtensionProperties,
   "BulkActionVMExtensionProperties",
   "csharp"
 );
@@ -306,8 +261,7 @@ namespace Microsoft.Compute;
 // Contextual naming: "Language" is too generic and collides across packages.
 @@clientName(Language, "ScheduledActionLanguage", "csharp");
 // Contextual naming: scope the generic "ProvisioningState" to its operation.
-@@clientName(
-  ProvisioningState,
+@@clientName(ProvisioningState,
   "BulkInstancesOperationProvisioningState",
   "csharp"
 );
@@ -323,120 +277,98 @@ namespace Microsoft.Compute;
 @@clientName(ResourceIdentityType, "ComputeBulkActionsIdentityType", "csharp");
 
 // ACRONYM001: acronym enum members must be PascalCase. exact() preserves the wire value.
-@@clientName(
-  AcceleratorType.GPU,
+@@clientName(AcceleratorType.GPU,
   Azure.ClientGenerator.Core.exact("Gpu"),
   "csharp"
 );
-@@clientName(
-  AcceleratorType.FPGA,
+@@clientName(AcceleratorType.FPGA,
   Azure.ClientGenerator.Core.exact("Fpga"),
   "csharp"
 );
-@@clientName(
-  LocalStorageDiskType.HDD,
+@@clientName(LocalStorageDiskType.HDD,
   Azure.ClientGenerator.Core.exact("Hdd"),
   "csharp"
 );
-@@clientName(
-  LocalStorageDiskType.SSD,
+@@clientName(LocalStorageDiskType.SSD,
   Azure.ClientGenerator.Core.exact("Ssd"),
   "csharp"
 );
 
 // BOOL001: boolean properties need a verb prefix (Is/Should/Does/etc.).
-@@clientName(
-  AdditionalCapabilities.ultraSSDEnabled,
+@@clientName(AdditionalCapabilities.ultraSSDEnabled,
   "IsUltraSsdEnabled",
   "csharp"
 );
-@@clientName(
-  AdditionalCapabilities.hibernationEnabled,
+@@clientName(AdditionalCapabilities.hibernationEnabled,
   "IsHibernationEnabled",
   "csharp"
 );
-@@clientName(
-  ExecutionParameters.verifyVmAgentHealth,
+@@clientName(ExecutionParameters.verifyVmAgentHealth,
   "ShouldVerifyVmAgentHealth",
   "csharp"
 );
 @@clientName(VirtualMachineReimageParameters.tempDisk, "IsTempDisk", "csharp");
-@@clientName(
-  BulkActionVmExtensionProperties.autoUpgradeMinorVersion,
+@@clientName(BulkActionVmExtensionProperties.autoUpgradeMinorVersion,
   "IsAutoUpgradeMinorVersion",
   "csharp"
 );
-@@clientName(
-  BulkActionVmExtensionProperties.suppressFailures,
+@@clientName(BulkActionVmExtensionProperties.suppressFailures,
   "IsSuppressFailures",
   "csharp"
 );
 @@clientName(DataDisk.toBeDetached, "IsToBeDetached", "csharp");
-@@clientName(
-  DataDisk.writeAcceleratorEnabled,
+@@clientName(DataDisk.writeAcceleratorEnabled,
   "IsWriteAcceleratorEnabled",
   "csharp"
 );
-@@clientName(
-  LinuxConfiguration.provisionVMAgent,
+@@clientName(LinuxConfiguration.provisionVMAgent,
   "IsProvisionVMAgent",
   "csharp"
 );
-@@clientName(
-  LinuxVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule,
+@@clientName(LinuxVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule,
   "ShouldBypassPlatformSafetyChecksOnUserSchedule",
   "csharp"
 );
-@@clientName(
-  NetworkInterfaceReferenceProperties.primary,
+@@clientName(NetworkInterfaceReferenceProperties.primary,
   "IsPrimary",
   "csharp"
 );
-@@clientName(
-  OSDisk.writeAcceleratorEnabled,
+@@clientName(OSDisk.writeAcceleratorEnabled,
   "IsWriteAcceleratorEnabled",
   "csharp"
 );
-@@clientName(
-  OSProfile.requireGuestProvisionSignal,
+@@clientName(OSProfile.requireGuestProvisionSignal,
   "DoesRequireGuestProvisionSignal",
   "csharp"
 );
-@@clientName(
-  ProxyAgentSettings.addProxyAgentExtension,
+@@clientName(ProxyAgentSettings.addProxyAgentExtension,
   "ShouldAddProxyAgentExtension",
   "csharp"
 );
-@@clientName(
-  AllInstancesDown.automaticallyApprove,
+@@clientName(AllInstancesDown.automaticallyApprove,
   "IsAllInstancesDownAutomaticallyApproved",
   "csharp"
 );
 @@clientName(SecurityProfile.encryptionAtHost, "IsEncryptionAtHost", "csharp");
 @@clientName(UefiSettings.secureBootEnabled, "IsSecureBootEnabled", "csharp");
 @@clientName(UefiSettings.vTpmEnabled, "IsVTpmEnabled", "csharp");
-@@clientName(
-  VirtualMachineNetworkInterfaceConfigurationProperties.primary,
+@@clientName(VirtualMachineNetworkInterfaceConfigurationProperties.primary,
   "IsPrimary",
   "csharp"
 );
-@@clientName(
-  VirtualMachineNetworkInterfaceIPConfigurationProperties.primary,
+@@clientName(VirtualMachineNetworkInterfaceIPConfigurationProperties.primary,
   "IsPrimary",
   "csharp"
 );
-@@clientName(
-  VMGalleryApplication.treatFailureAsDeploymentFailure,
+@@clientName(VMGalleryApplication.treatFailureAsDeploymentFailure,
   "IsTreatFailureAsDeploymentFailure",
   "csharp"
 );
-@@clientName(
-  WindowsConfiguration.provisionVMAgent,
+@@clientName(WindowsConfiguration.provisionVMAgent,
   "IsProvisionVMAgent",
   "csharp"
 );
-@@clientName(
-  WindowsVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule,
+@@clientName(WindowsVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule,
   "ShouldBypassPlatformSafetyChecksOnUserSchedule",
   "csharp"
 );
@@ -445,31 +377,26 @@ namespace Microsoft.Compute;
 // .NET Management SDK review (AZC0030) suffix fixes (C# only)
 // SUFFIX rules: "Request" -> "Content", "Response" -> "Result", "Parameters" -> "Content".
 // =====================================================================
-@@clientName(
-  AcknowledgeBulkOperationErrorsRequest,
+@@clientName(AcknowledgeBulkOperationErrorsRequest,
   "AcknowledgeBulkOperationErrorsRequestContent",
   "csharp"
 );
-@@clientName(
-  AcknowledgeBulkOperationErrorsResponse,
+@@clientName(AcknowledgeBulkOperationErrorsResponse,
   "AcknowledgeBulkOperationErrorsResponseResult",
   "csharp"
 );
-@@clientName(
-  CancelOccurrenceRequest,
+@@clientName(CancelOccurrenceRequest,
   "CancelOccurrenceRequestContent",
   "csharp"
 );
 @@clientName(DelayRequest, "DelayRequestContent", "csharp");
-@@clientName(
-  ScheduledActionsExecutionParameters,
+@@clientName(ScheduledActionsExecutionParameters,
   "ScheduledActionsExecutionParametersContent",
   "csharp"
 );
 @@clientName(ResourceAttachRequest, "ResourceAttachRequestContent", "csharp");
 @@clientName(ResourceDetachRequest, "ResourceDetachRequestContent", "csharp");
-@@clientName(
-  ResourceOperationResponse,
+@@clientName(ResourceOperationResponse,
   "ResourceOperationResponseResult",
   "csharp"
 );
@@ -477,8 +404,7 @@ namespace Microsoft.Compute;
 
 // Model types must not end in "Resource" (reserved for ArmResource-derived classes);
 // these plain models collide with the ScheduledAction/Occurrence ARM resource classes.
-@@clientName(
-  ScheduledActionResource,
+@@clientName(ScheduledActionResource,
   "ScheduledActionResourceMetadata",
   "csharp"
 );
@@ -499,8 +425,7 @@ namespace Microsoft.Compute;
 // extension methods named from the operationId suffix, so BulkCreate and
 // BulkCreateCustom both generated GetAsyncOperationStatus and failed with CS0111.
 // BulkCreateCustom keeps the original name because it already shipped in 1.2.0-beta.2.
-@@clientName(
-  BulkCreate.getAsyncOperationStatus,
+@@clientName(BulkCreate.getAsyncOperationStatus,
   "getBulkCreateAsyncOperationStatus",
   "csharp"
 );

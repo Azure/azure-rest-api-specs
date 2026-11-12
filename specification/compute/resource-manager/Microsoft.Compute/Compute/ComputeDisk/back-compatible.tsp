@@ -8,13 +8,11 @@ using ComputeDisk;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiskUpdate.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  PrivateLinkResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  DiskEncryptionSetUpdate.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiskEncryptionSetUpdate.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
@@ -27,18 +25,15 @@ using ComputeDisk;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiskAccess.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  PrivateEndpointConnection.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  DiskEncryptionSet.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiskEncryptionSet.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  DiskRestorePoint.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiskRestorePoint.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
@@ -46,16 +41,13 @@ using ComputeDisk;
 
 @@clientName(DiskAccesses.createOrUpdate::parameters.resource, "diskAccess");
 @@clientName(DiskAccesses.update::parameters.properties, "diskAccess");
-@@clientName(
-  PrivateEndpointConnections.updateAPrivateEndpointConnection::parameters.resource,
+@@clientName(PrivateEndpointConnections.updateAPrivateEndpointConnection::parameters.resource,
   "privateEndpointConnection"
 );
-@@clientName(
-  DiskEncryptionSets.createOrUpdate::parameters.resource,
+@@clientName(DiskEncryptionSets.createOrUpdate::parameters.resource,
   "diskEncryptionSet"
 );
-@@clientName(
-  DiskEncryptionSets.update::parameters.properties,
+@@clientName(DiskEncryptionSets.update::parameters.properties,
   "diskEncryptionSet"
 );
 @@clientName(Disks.createOrUpdate::parameters.resource, "disk");
@@ -65,40 +57,33 @@ using ComputeDisk;
 @@clientName(Snapshots.createOrUpdate::parameters.resource, "snapshot");
 @@clientName(Snapshots.update::parameters.properties, "snapshot");
 @@clientName(Snapshots.grantAccess::parameters.body, "grantAccessData");
-@@clientName(
-  Snapshots.updateImmutabilityPolicy::parameters.body,
+@@clientName(Snapshots.updateImmutabilityPolicy::parameters.body,
   "immutabilityPolicyData"
 );
-@@clientName(
-  Snapshots.updateImmutabilityPolicyLock::parameters.body,
+@@clientName(Snapshots.updateImmutabilityPolicyLock::parameters.body,
   "immutabilityPolicyData"
 );
 @@clientLocation(DiskRestorePoints.get, "DiskRestorePoint", "!csharp");
-@@clientLocation(
-  DiskRestorePoints.listByRestorePoint,
+@@clientLocation(DiskRestorePoints.listByRestorePoint,
   "DiskRestorePoint",
   "!csharp"
 );
 @@clientLocation(DiskRestorePoints.grantAccess, "DiskRestorePoint", "!csharp");
 @@clientLocation(DiskRestorePoints.revokeAccess, "DiskRestorePoint", "!csharp");
 
-@@clientLocation(
-  PrivateEndpointConnections.getAPrivateEndpointConnection,
+@@clientLocation(PrivateEndpointConnections.getAPrivateEndpointConnection,
   DiskAccesses,
   "!csharp"
 );
-@@clientLocation(
-  PrivateEndpointConnections.updateAPrivateEndpointConnection,
+@@clientLocation(PrivateEndpointConnections.updateAPrivateEndpointConnection,
   DiskAccesses,
   "!csharp"
 );
-@@clientLocation(
-  PrivateEndpointConnections.deleteAPrivateEndpointConnection,
+@@clientLocation(PrivateEndpointConnections.deleteAPrivateEndpointConnection,
   DiskAccesses,
   "!csharp"
 );
-@@clientLocation(
-  PrivateEndpointConnections.listPrivateEndpointConnections,
+@@clientLocation(PrivateEndpointConnections.listPrivateEndpointConnections,
   DiskAccesses,
   "!csharp"
 );

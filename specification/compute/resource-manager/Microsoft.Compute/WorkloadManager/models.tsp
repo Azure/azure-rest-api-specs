@@ -524,16 +524,18 @@ model Capability is ProxyResource<CapabilityProperties, false> {
 }
 
 /** Mutable properties of a workload space. */
-model WorkloadSpaceUpdate is Azure.ResourceManager.Foundations.ResourceUpdateModel<
-  WorkloadSpace,
-  WorkloadSpaceProperties
->;
+model WorkloadSpaceUpdate
+  is Azure.ResourceManager.Foundations.ResourceUpdateModel<
+    WorkloadSpace,
+    WorkloadSpaceProperties
+  >;
 
 /** Mutable properties of a runtime binding. */
-model RuntimeBindingUpdate is Azure.ResourceManager.Foundations.ResourceUpdateModel<
-  RuntimeBinding,
-  RuntimeBindingMutableProperties
->;
+model RuntimeBindingUpdate
+  is Azure.ResourceManager.Foundations.ResourceUpdateModel<
+    RuntimeBinding,
+    RuntimeBindingMutableProperties
+  >;
 
 /** Binding-level configuration that may be updated without changing ownership. */
 model RuntimeBindingMutableProperties {
@@ -557,10 +559,11 @@ model ExecutionIdentityUpdate {
 }
 
 /** Mutable properties of a runtime link. */
-model RuntimeLinkUpdate is Azure.ResourceManager.Foundations.ResourceUpdateModel<
-  RuntimeLink,
-  RuntimeLinkMutableProperties
->;
+model RuntimeLinkUpdate
+  is Azure.ResourceManager.Foundations.ResourceUpdateModel<
+    RuntimeLink,
+    RuntimeLinkMutableProperties
+  >;
 
 /** Runtime link configuration that may be updated in place. */
 model RuntimeLinkMutableProperties {
@@ -580,10 +583,11 @@ model CapacityProfileUpdate {
 }
 
 /** Mutable properties of a capability. */
-model CapabilityUpdate is Azure.ResourceManager.Foundations.ResourceUpdateModel<
-  Capability,
-  CapabilityMutableProperties
->;
+model CapabilityUpdate
+  is Azure.ResourceManager.Foundations.ResourceUpdateModel<
+    Capability,
+    CapabilityMutableProperties
+  >;
 
 /** Capability configuration that may be updated in place. */
 model CapabilityMutableProperties {

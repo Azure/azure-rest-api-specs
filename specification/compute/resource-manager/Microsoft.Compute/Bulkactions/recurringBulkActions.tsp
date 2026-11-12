@@ -789,9 +789,9 @@ interface ScheduledActions {
   @get
   @doc("Lists resources associated with the specified recurring bulk action.")
   @errorsDoc("The request failed. The response contains error details.")
-  listResources(...ResourceInstanceParameters<ScheduledActionResource>):
-    | ArmResponse<ResourceListResponse>
-    | ErrorResponse;
+  listResources(
+    ...ResourceInstanceParameters<ScheduledActionResource>,
+  ): ArmResponse<ResourceListResponse> | ErrorResponse;
 
   /** Attach resources to the recurring bulk action so they are included in future occurrences. */
   @doc("Adds resources to the specified recurring bulk action.")
@@ -898,9 +898,7 @@ interface ScheduledActionOperationStatus {
     @minLength(1)
     @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
     operationId: string,
-  ):
-    | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
-    | ErrorResponse;
+  ): ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult> | ErrorResponse;
 }
 
 // ------------------ Occurrence operations ------------------
@@ -922,9 +920,9 @@ interface Occurrences {
   @get
   @doc("Lists resources for the specified occurrence.")
   @errorsDoc("The request failed. The response contains error details.")
-  listResources(...ResourceInstanceParameters<OccurrenceResource>):
-    | ArmResponse<OccurrenceResourceListResponse>
-    | ErrorResponse;
+  listResources(
+    ...ResourceInstanceParameters<OccurrenceResource>,
+  ): ArmResponse<OccurrenceResourceListResponse> | ErrorResponse;
 
   /** Cancel the occurrence so its pending operations do not run. */
   @doc("Cancels the specified occurrence for the specified resource IDs.")
@@ -959,59 +957,48 @@ interface OccurrenceExtension {
   listOccurrenceByVms is ArmResourceListByParent<OccurrenceExtensionResource>;
 }
 
-@@doc(
-  ResourceListResponse.value,
+@@doc(ResourceListResponse.value,
   "The compute resources associated with the recurring bulk action."
 );
 
-@@doc(
-  ScheduledAction.name,
+@@doc(ScheduledAction.name,
   "The name of the recurring bulk action. It must be 3 to 24 characters and can contain only letters, numbers, and hyphens."
 );
 
 @@doc(Occurrence.name, "The occurrence ID in UUID format.");
 
-@@doc(
-  ScheduledActions.createOrUpdate::parameters.resource,
+@@doc(ScheduledActions.createOrUpdate::parameters.resource,
   "The recurring bulk action to create or update."
 );
 
-@@doc(
-  ScheduledActions.update::parameters.properties,
+@@doc(ScheduledActions.update::parameters.properties,
   "The recurring bulk action properties to update. Omitted properties keep their current values."
 );
 
-@@doc(
-  ScheduledActions.attachResources::parameters.body,
+@@doc(ScheduledActions.attachResources::parameters.body,
   "The resources to add to the recurring bulk action."
 );
 
-@@doc(
-  ScheduledActions.detachResources::parameters.body,
+@@doc(ScheduledActions.detachResources::parameters.body,
   "The resources to remove from the recurring bulk action."
 );
 
-@@doc(
-  ScheduledActions.patchResources::parameters.body,
+@@doc(ScheduledActions.patchResources::parameters.body,
   "The resource-specific settings to update."
 );
 
-@@doc(
-  ScheduledActions.cancelNextOccurrence::parameters.body,
+@@doc(ScheduledActions.cancelNextOccurrence::parameters.body,
   "The resources to cancel in the next occurrence. If no resource IDs are provided, the occurrence is canceled for all resources."
 );
 
-@@doc(
-  Azure.ResourceManager.ResourceUriParameter.resourceUri,
+@@doc(Azure.ResourceManager.ResourceUriParameter.resourceUri,
   "The fully qualified Azure resource ID of the compute resource."
 );
 
-@@doc(
-  Occurrences.cancel::parameters.body,
+@@doc(Occurrences.cancel::parameters.body,
   "The resources to cancel in the occurrence. If no resource IDs are provided, the occurrence is canceled for all resources."
 );
 
-@@doc(
-  Occurrences.delay::parameters.body,
+@@doc(Occurrences.delay::parameters.body,
   "The new scheduled time and resources to delay in the occurrence. If no resource IDs are provided, all resources are delayed."
 );
