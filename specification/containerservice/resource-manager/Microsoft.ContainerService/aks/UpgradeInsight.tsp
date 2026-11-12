@@ -23,7 +23,7 @@ namespace Microsoft.ContainerService;
  * issue-level `UpgradeIssueSeverity` (Blocking/Warning): a `Blocking` issue maps to
  * a `Failed` status, while `Warning` maps through unchanged.
  */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 union UpgradeInsightStatus {
   string,
 
@@ -38,7 +38,7 @@ union UpgradeInsightStatus {
 }
 
 /** The type of a detected upgrade issue. */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 union UpgradeIssueType {
   string,
 
@@ -65,7 +65,7 @@ union UpgradeIssueType {
 }
 
 /** The severity of a detected upgrade issue. */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 union UpgradeIssueSeverity {
   string,
 
@@ -83,7 +83,7 @@ union UpgradeIssueSeverity {
  * against the current time), so no server-computed "approaching EOS" flag or message is
  * returned that could go stale in a cached record.
  */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 union KubernetesVersionSupportStatus {
   string,
 
@@ -95,7 +95,7 @@ union KubernetesVersionSupportStatus {
 }
 
 /** The strategy currently used to perform an upgrade (manual or automatic). */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 union UpgradeInsightStrategy {
   string,
 
@@ -110,7 +110,7 @@ union UpgradeInsightStrategy {
  * The type of upgrade an upgrade insight evaluates. Each upgrade insight resource
  * represents exactly one of these scopes; the scope is encoded in the resource name.
  */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 union UpgradeType {
   string,
 
@@ -128,7 +128,7 @@ union UpgradeType {
 }
 
 /** The auto-upgrade schedule that a maintenance window is derived from. */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 union MaintenanceWindowSource {
   string,
 
@@ -140,7 +140,7 @@ union MaintenanceWindowSource {
 }
 
 /** The category of a resource impacted by a detected upgrade issue. */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 union ImpactedResourceKind {
   string,
 
@@ -156,7 +156,7 @@ union ImpactedResourceKind {
 // =============================================================================
 
 /** A recommended action to resolve a detected upgrade issue. */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 model UpgradeInsightRecommendedAction {
   /** A short title describing the recommended action. */
   @visibility(Lifecycle.Read)
@@ -176,7 +176,7 @@ model UpgradeInsightRecommendedAction {
  * by `kind`: an ARM resource is identified by its ARM resource ID, while a Kubernetes
  * resource is identified by its namespace and name.
  */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 @discriminator("kind")
 model UpgradeInsightImpactedResource {
   /** The category of the impacted resource. */
@@ -189,7 +189,7 @@ model UpgradeInsightImpactedResource {
 }
 
 /** An Azure Resource Manager (ARM) resource impacted by a detected upgrade issue, identified by its ARM resource ID. */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 model ArmImpactedResource extends UpgradeInsightImpactedResource {
   /** The category of the impacted resource. */
   @visibility(Lifecycle.Read)
@@ -201,7 +201,7 @@ model ArmImpactedResource extends UpgradeInsightImpactedResource {
 }
 
 /** A Kubernetes resource impacted by a detected upgrade issue, identified by its namespace and name. */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 model KubernetesImpactedResource extends UpgradeInsightImpactedResource {
   /** The category of the impacted resource. */
   @visibility(Lifecycle.Read)
@@ -217,7 +217,7 @@ model KubernetesImpactedResource extends UpgradeInsightImpactedResource {
 }
 
 /** A detected upgrade issue for a managed cluster. */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 model DetectedUpgradeIssue {
   /** The type of the detected upgrade issue. */
   @visibility(Lifecycle.Read)
@@ -254,7 +254,7 @@ model DetectedUpgradeIssue {
  * the "not yet evaluated" state is signaled by the absence of this `evaluation` object
  * (and by `provisioningState`), never by a present evaluation with an absent status.
  */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 model UpgradeInsightEvaluation {
   /** The overall upgrade insight status indicating whether issues were detected. Always present when the evaluation has run; absence of the enclosing `evaluation` object—not an absent status—represents "not yet evaluated". */
   @visibility(Lifecycle.Read)
@@ -277,7 +277,7 @@ model UpgradeInsightEvaluation {
  * version upgrades or the node OS upgrade schedule for node image upgrades — so the
  * same model describes both without duplicating types.
  */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 model UpgradeInsightMaintenanceWindow {
   /** The name of the maintenance configuration that governs this window (for example, aksManagedAutoUpgradeSchedule or aksManagedNodeOSUpgradeSchedule). */
   @visibility(Lifecycle.Read)
@@ -303,7 +303,7 @@ model UpgradeInsightMaintenanceWindow {
  * Kubernetes version — this context is reported per upgrade type rather than once
  * for the whole cluster.
  */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 model UpgradeContext {
   /** The strategy currently used to perform this type of upgrade (manual or auto-upgrade). */
   @visibility(Lifecycle.Read)
@@ -329,7 +329,7 @@ model UpgradeContext {
  * node OS image insights reuse the exact same shape and cannot drift. All fields are
  * server-computed and read-only.
  */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 model EvaluationResultBase {
   /** Contextual information about how this upgrade is managed, such as the upgrade strategy, next maintenance window, and last successful upgrade time. */
   @visibility(Lifecycle.Read)
@@ -345,7 +345,7 @@ model EvaluationResultBase {
  * version the scope is currently running, the upgrade context, and the evaluation
  * result. All fields are server-computed and read-only.
  */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 model ScopeEvaluationResult {
   /** The Kubernetes version the scope was evaluated from (the upgrade source version the scope is currently running). Lets consumers read the result as "from X to targetKubernetesVersion" and detect a stale cached record by comparing against the live cluster version. Populated for Kubernetes version upgrades. */
   @visibility(Lifecycle.Read)
@@ -369,7 +369,7 @@ model ScopeEvaluationResult {
 }
 
 /** The readiness evaluation for a single agent pool within a combined evaluation. */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 model AgentPoolScopeEvaluation {
   /** The name of the agent pool this evaluation applies to. */
   @visibility(Lifecycle.Read)
@@ -385,7 +385,7 @@ model AgentPoolScopeEvaluation {
  * combined evaluation (`ControlPlaneAndAgentPools`) carries a nested control plane
  * result plus a per-agent-pool array.
  */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 @discriminator("upgradeType")
 model UpgradeInsightProperties {
   /** The provisioning state of the upgrade insight evaluation. */
@@ -419,7 +419,7 @@ model UpgradeInsightProperties {
 }
 
 /** Properties for a control plane (managed cluster) Kubernetes version upgrade insight. */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 model ControlPlaneUpgradeInsightProperties extends UpgradeInsightProperties {
   /** The type of upgrade this insight evaluates. */
   upgradeType: "ControlPlane";
@@ -432,7 +432,7 @@ model ControlPlaneUpgradeInsightProperties extends UpgradeInsightProperties {
 }
 
 /** Properties for a single agent pool Kubernetes version upgrade insight. */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 model AgentPoolUpgradeInsightProperties extends UpgradeInsightProperties {
   /** The type of upgrade this insight evaluates. */
   upgradeType: "AgentPool";
@@ -449,7 +449,7 @@ model AgentPoolUpgradeInsightProperties extends UpgradeInsightProperties {
 }
 
 /** Properties for a single agent pool node OS image upgrade insight. */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 model NodeImageUpgradeInsightProperties extends UpgradeInsightProperties {
   /** The type of upgrade this insight evaluates. */
   upgradeType: "NodeImage";
@@ -476,7 +476,7 @@ model NodeImageUpgradeInsightProperties extends UpgradeInsightProperties {
  * upgrades are never part of a combined evaluation and must be requested separately
  * with a `nodeImage-<agentPoolName>-<nodeImageVersion>` insight.
  */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 model ControlPlaneAndAgentPoolsUpgradeInsightProperties
   extends UpgradeInsightProperties {
   /** The type of upgrade this insight evaluates. */
@@ -514,7 +514,7 @@ model ControlPlaneAndAgentPoolsUpgradeInsightProperties
  * generateUpgradeInsights action, whose response body is the same UpgradeInsight
  * representation returned by GET.
  */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 @parentResource(ManagedCluster)
 model UpgradeInsight is ProxyResource<UpgradeInsightProperties> {
   ...ResourceNameParameter<
@@ -537,7 +537,7 @@ model UpgradeInsight is ProxyResource<UpgradeInsightProperties> {
  * relying on documented conventions plus server-side validation. The server generates
  * (or refreshes) the corresponding UpgradeInsight and returns it.
  */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 @discriminator("upgradeType")
 model GenerateUpgradeInsightsContent {
   /** The type of upgrade to evaluate. */
@@ -545,7 +545,7 @@ model GenerateUpgradeInsightsContent {
 }
 
 /** Request body to evaluate a control plane (managed cluster) Kubernetes version upgrade. */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 model ControlPlaneGenerateUpgradeInsightsContent
   extends GenerateUpgradeInsightsContent {
   upgradeType: "ControlPlane";
@@ -555,7 +555,7 @@ model ControlPlaneGenerateUpgradeInsightsContent
 }
 
 /** Request body to evaluate a single agent pool Kubernetes version upgrade. */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 model AgentPoolGenerateUpgradeInsightsContent
   extends GenerateUpgradeInsightsContent {
   upgradeType: "AgentPool";
@@ -568,7 +568,7 @@ model AgentPoolGenerateUpgradeInsightsContent
 }
 
 /** Request body to evaluate a single agent pool node OS image upgrade. */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 model NodeImageGenerateUpgradeInsightsContent
   extends GenerateUpgradeInsightsContent {
   upgradeType: "NodeImage";
@@ -581,7 +581,7 @@ model NodeImageGenerateUpgradeInsightsContent
 }
 
 /** Request body to evaluate the combined control plane and agent pools Kubernetes version upgrade. */
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 model ControlPlaneAndAgentPoolsGenerateUpgradeInsightsContent
   extends GenerateUpgradeInsightsContent {
   upgradeType: "ControlPlaneAndAgentPools";
@@ -592,7 +592,7 @@ model ControlPlaneAndAgentPoolsGenerateUpgradeInsightsContent
 
 /** Operations for the stored upgrade insights of a managed cluster. */
 @armResourceOperations
-@added(Versions.v2026_08_02_preview)
+@added(Versions.v2026_09_02_preview)
 interface UpgradeInsights {
   /**
    * Gets a stored upgrade insight for the managed cluster by its server-generated name.

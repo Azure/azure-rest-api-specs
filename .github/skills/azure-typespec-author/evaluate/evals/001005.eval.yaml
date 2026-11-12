@@ -5,7 +5,7 @@ type: capability # capability | regression
 tags:
   area: "versioning"
 # Root-level environment
-environment: azsdk-mcp
+agent_environment: azsdk-mcp
 # Execution configuration
 defaults:
   runs: 1 # Trials per stimulus
@@ -21,7 +21,7 @@ stimuli:
       mode: "trigger"
     prompt: |
       Add a new preview version `2025-05-04-preview` to my service widget resource manager. Exclude Feature: the default value from the 'age' property. Carry other features.
-    environment: &shared_environment
+    agent_environment: &shared_environment
       files:
         - src: ../fixtures/001005-version-add-preview-after-preview/employee.tsp
           dest: employee.tsp
@@ -74,12 +74,12 @@ stimuli:
       commands:
         - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
     graders:
-      - type: "tool-calls"
+      - &tool_calls
+        type: "tool-calls"
         config:
           required:
             - "^(edit|apply_patch|bash|powershell)$"
             - "web_fetch"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
           disallowed:
             - "azure-sdk-mcp-azsdk_typespec_generate_authoring_plan"
             - "azure-sdk-mcp-azsdk_typespec_retrieve_knowledge"
@@ -96,17 +96,9 @@ stimuli:
       mode: "forced"
     prompt: |
       @azure-typespec-author Add a new preview version `2025-05-04-preview` to my service widget resource manager. Exclude Feature: the default value from the 'age' property. Carry other features.
-    environment: *shared_environment
+    agent_environment: *shared_environment
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "web_fetch"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
-          disallowed:
-            - "azure-sdk-mcp-azsdk_typespec_generate_authoring_plan"
-            - "azure-sdk-mcp-azsdk_typespec_retrieve_knowledge"
+      - *tool_calls
       - type: "run-command"
         config:
           command: "node check-node-dependencies.ts node_modules"
@@ -170,7 +162,7 @@ stimuli:
       suite: "versioning"
       mode: "no-skill"
     prompt: "Add a new preview version `2025-05-04-preview` to my service widget resource manager. Exclude Feature: the default value from the 'age' property. Carry other features."
-    environment: *shared_environment
+    agent_environment: *shared_environment
     graders:
       - type: "tool-calls"
         config:

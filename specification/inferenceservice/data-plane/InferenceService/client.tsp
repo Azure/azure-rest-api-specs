@@ -10,6 +10,7 @@ using Azure.Data.AI;
 @@clientName(DocumentType, "SemanticRerankingDocumentType");
 
 @@clientLocation(InferenceOperationGroup.semanticRerank, Azure.Data.AI);
+@@clientLocation(InferenceOperationGroup.embed, Azure.Data.AI);
 
 // These are Milliseconds-encoded elapsed times, so a "Time" suffix reads as a point
 // in time rather than a duration (most visible in .NET, where they map to TimeSpan).
@@ -39,8 +40,17 @@ using Azure.Data.AI;
 );
 @@clientName(
   SemanticRerankingInferenceContent,
-  "SemanticRerankingOptions",
+  "SemanticRerankingContent",
   "csharp"
 );
 @@clientName(MetaResult, "SemanticRerankingMetadata", "csharp");
 @@clientName(SemanticRerankingInferenceResult.meta, "metadata", "csharp");
+@@clientName(EmbeddingContentItem, "EmbeddingsInputContent", "csharp");
+@@clientName(EmbeddingContentItem.url, "uri", "csharp");
+@@clientName(EmbeddingData, "EmbeddingItem", "csharp");
+@@clientName(MultimodalEmbeddingOutput.url, "uri", "csharp");
+@@clientName(InferenceOperationGroup.embed, "getEmbeddings", "csharp, python");
+// Python accepts plain dictionaries for input items without changing the REST
+// schema or the typed .NET input model.
+@@alternateType(EmbeddingContent.inputs, Record<unknown>[], "python");
+@@scope(EmbeddingResult.object, "!csharp");

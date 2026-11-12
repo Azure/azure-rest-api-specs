@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "./identity.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -63,6 +64,41 @@ model Workspace {
   @added(Versions.v2026_11_01_preview)
   @visibility(Lifecycle.Read)
   browserProxy?: EnablementStatus = EnablementStatus.Enabled;
+
+  @doc("The review status of the Microsoft signing key for the workspace.")
+  @added(Versions.v2026_12_01_preview)
+  @visibility(Lifecycle.Read)
+  microsoftSigningKeyStatus?: MicrosoftSigningKeyStatus;
+
+  @doc("Specifies whether session artifact recording is enabled for the workspace.")
+  @added(Versions.v2026_12_01_preview)
+  @visibility(Lifecycle.Read)
+  sessionArtifacts?: EnablementStatus = EnablementStatus.Disabled;
+
+  @doc("The managed identity used to manage session artifacts in the storage account.")
+  @added(Versions.v2026_12_01_preview)
+  @visibility(Lifecycle.Read)
+  storageIdentity?: ManagedIdentity;
+
+  @doc("Specifies whether the browser profile is enabled for the workspace.")
+  @added(Versions.v2026_12_01_preview)
+  @visibility(Lifecycle.Read)
+  browserProfile?: EnablementStatus = EnablementStatus.Enabled;
+}
+
+@doc("The review status of a Microsoft signing key.")
+@added(Versions.v2026_12_01_preview)
+union MicrosoftSigningKeyStatus {
+  string,
+
+  @doc("The Microsoft signing key has been accepted.")
+  Accepted: "Accepted",
+
+  @doc("The Microsoft signing key has been rejected.")
+  Rejected: "Rejected",
+
+  @doc("The Microsoft signing key is under review.")
+  InReview: "InReview",
 }
 
 @doc("The Playwright workspace state.")
