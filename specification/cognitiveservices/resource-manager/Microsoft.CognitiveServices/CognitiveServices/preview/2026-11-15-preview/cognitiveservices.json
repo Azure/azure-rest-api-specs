@@ -52,6 +52,9 @@
       "name": "TestRaiExternalSafetyProvider"
     },
     {
+      "name": "AttachedAksClusters"
+    },
+    {
       "name": "PrivateEndpointConnections"
     },
     {
@@ -2752,6 +2755,271 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/attachedAksClusters": {
+      "get": {
+        "operationId": "AttachedAksClusters_List",
+        "tags": [
+          "AttachedAksClusters"
+        ],
+        "description": "Lists lightweight AKS attachment summaries for the account.\nUse GET on an individual attachment to retrieve its full status and bindings.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "$ref": "#/parameters/AttachedAksClusterListQueryParameters.filter"
+          },
+          {
+            "$ref": "#/parameters/AttachedAksClusterListQueryParameters.orderby"
+          },
+          {
+            "$ref": "#/parameters/AttachedAksClusterListQueryParameters.top"
+          },
+          {
+            "$ref": "#/parameters/AttachedAksClusterListQueryParameters.skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AttachedAksClusterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListAttachedAksClusters": {
+            "$ref": "./examples/ListAttachedAksClusters.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/attachedAksClusters/{attachedAksClusterName}": {
+      "get": {
+        "operationId": "AttachedAksClusters_Get",
+        "tags": [
+          "AttachedAksClusters"
+        ],
+        "description": "Gets an AKS attachment and its current provisioning and health status.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "attachedAksClusterName",
+            "in": "path",
+            "description": "The name of the account-level AKS attachment.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^/\\\\]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AttachedAksCluster"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetAttachedAksCluster": {
+            "$ref": "./examples/GetAttachedAksCluster.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AttachedAksClusters_CreateOrUpdate",
+        "tags": [
+          "AttachedAksClusters"
+        ],
+        "description": "Attaches an existing AKS cluster to the account, or updates its attachment.\nA 202 response contains the current attachment; poll GET and inspect\nproperties.status.stage for progress. A 200 response also contains the\ncurrent attachment state and does not by itself guarantee workload readiness.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "attachedAksClusterName",
+            "in": "path",
+            "description": "The name of the account-level AKS attachment.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^/\\\\]+$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AttachedAksCluster"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AttachedAksCluster"
+            }
+          },
+          "202": {
+            "description": "An attachment whose requested operation is still in progress.",
+            "schema": {
+              "$ref": "#/definitions/AttachedAksCluster"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateAttachedAksCluster": {
+            "$ref": "./examples/CreateOrUpdateAttachedAksCluster.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AttachedAksClusters_Delete",
+        "tags": [
+          "AttachedAksClusters"
+        ],
+        "description": "Detaches an AKS cluster while retaining the physical AKS and AI Manager\nresources. A 202 response contains the current attachment; poll GET until\nthe attachment is no longer found. A 204 response indicates that the\nattachment has been removed or did not exist.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "attachedAksClusterName",
+            "in": "path",
+            "description": "The name of the account-level AKS attachment.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^/\\\\]+$"
+          },
+          {
+            "name": "clusterDisposition",
+            "in": "query",
+            "description": "Retains the physical AKS and AI Manager resources. Only Keep is supported.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Keep"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "An attachment whose requested operation is still in progress.",
+            "schema": {
+              "$ref": "#/definitions/AttachedAksCluster"
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteAttachedAksCluster": {
+            "$ref": "./examples/DeleteAttachedAksCluster.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/capabilityHosts": {
@@ -15763,6 +16031,857 @@
         "tenantId"
       ]
     },
+    "AttachedAksCluster": {
+      "type": "object",
+      "description": "An existing Azure Kubernetes Service cluster attached to a Cognitive Services account.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AttachedAksClusterProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AttachedAksClusterAcceptedResult": {
+      "type": "object",
+      "description": "An attachment whose requested operation is still in progress.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/AttachedAksCluster",
+          "description": "Current attachment state."
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "AttachedAksClusterAccountIdentityStatus": {
+      "type": "object",
+      "description": "Account identity associated with the AI Manager integration.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the account identity."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "Identity principal ID."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Identity tenant ID."
+        },
+        "revision": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Identity revision."
+        }
+      }
+    },
+    "AttachedAksClusterAiManagerStatus": {
+      "type": "object",
+      "description": "Status of the AI Manager integration on the attached cluster.",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the AI Manager integration."
+        },
+        "message": {
+          "type": "string",
+          "description": "Details of the integration state."
+        },
+        "attachmentIncarnation": {
+          "type": "string",
+          "description": "Attachment incarnation associated with this integration."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the AI Manager resource."
+        },
+        "clusterResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the AKS cluster."
+        },
+        "ownerAccountId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the owning Cognitive Services account."
+        },
+        "deletePolicy": {
+          "type": "string",
+          "description": "Deletion policy for the underlying integration resource."
+        },
+        "effectiveAccountIdentity": {
+          "$ref": "#/definitions/AttachedAksClusterAccountIdentityStatus",
+          "description": "Account identity used by the integration."
+        },
+        "roleAssignments": {
+          "$ref": "#/definitions/AttachedAksClusterRoleAssignmentStatus",
+          "description": "Role assignment status for the integration."
+        },
+        "dependencyEpoch": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Dependency tracking epoch."
+        },
+        "consumerState": {
+          "type": "string",
+          "description": "Current integration consumer state, such as Invalid, Degraded, or Ready."
+        },
+        "referenceAdmission": {
+          "type": "string",
+          "description": "Whether new dependency references are admitted, such as Open or Closed."
+        },
+        "dependentDeploymentCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of deployments that depend on the integration."
+        }
+      }
+    },
+    "AttachedAksClusterCapability": {
+      "type": "string",
+      "description": "A capability supported by an AKS attachment.",
+      "enum": [
+        "foundryNative",
+        "kuberay",
+        "aiManager"
+      ],
+      "x-ms-enum": {
+        "name": "AttachedAksClusterCapability",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "foundryNative",
+            "value": "foundryNative",
+            "description": "Foundry-native training workloads."
+          },
+          {
+            "name": "kuberay",
+            "value": "kuberay",
+            "description": "KubeRay workloads."
+          },
+          {
+            "name": "aiManager",
+            "value": "aiManager",
+            "description": "AI Manager inference workloads."
+          }
+        ]
+      }
+    },
+    "AttachedAksClusterCapabilityStatus": {
+      "type": "object",
+      "description": "Readiness of an individual attachment capability.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Capability name."
+        },
+        "ready": {
+          "type": "boolean",
+          "description": "Whether the capability is ready."
+        },
+        "message": {
+          "type": "string",
+          "description": "Details of the capability's readiness."
+        }
+      }
+    },
+    "AttachedAksClusterConnectorRegistration": {
+      "type": "object",
+      "description": "Registration details of the attachment connector.",
+      "properties": {
+        "registrationId": {
+          "type": "string",
+          "description": "Connector registration identifier."
+        },
+        "projectId": {
+          "type": "string",
+          "description": "Project identifier associated with the registration."
+        },
+        "attachmentName": {
+          "type": "string",
+          "description": "Name of the attachment."
+        },
+        "projectLocation": {
+          "type": "string",
+          "description": "Region associated with the connector registration."
+        },
+        "endpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "Connector service endpoint."
+        },
+        "tokenAudience": {
+          "type": "string",
+          "description": "Authentication audience for the connector service."
+        },
+        "connectorIdentityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the connector identity."
+        },
+        "connectorClientId": {
+          "type": "string",
+          "description": "Connector identity client ID."
+        },
+        "connectorTenantId": {
+          "type": "string",
+          "description": "Connector identity tenant ID."
+        }
+      }
+    },
+    "AttachedAksClusterExtensionConfiguration": {
+      "type": "object",
+      "description": "User-configurable training extension settings.",
+      "properties": {
+        "rayVersion": {
+          "type": "string",
+          "description": "Ray version used by the training extension.",
+          "minLength": 1
+        }
+      }
+    },
+    "AttachedAksClusterExtensionInstallationMode": {
+      "type": "string",
+      "description": "How the training extension is installed.",
+      "enum": [
+        "Managed",
+        "Manual"
+      ],
+      "x-ms-enum": {
+        "name": "AttachedAksClusterExtensionInstallationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Managed",
+            "value": "Managed",
+            "description": "The service manages installation of the extension."
+          },
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "The extension is installed manually, when enabled by the service."
+          }
+        ]
+      }
+    },
+    "AttachedAksClusterExtensionProfile": {
+      "type": "object",
+      "description": "Configuration of the training extension.",
+      "properties": {
+        "installationMode": {
+          "$ref": "#/definitions/AttachedAksClusterExtensionInstallationMode",
+          "description": "Extension installation mode. Defaults to Managed.\nManual installation requires service enablement and an exact chart version."
+        },
+        "version": {
+          "type": "string",
+          "description": "Extension package version, or the exact chart version for Manual installation."
+        },
+        "releaseTrain": {
+          "type": "string",
+          "description": "Extension package release train."
+        },
+        "useExistingKubeRayOperator": {
+          "type": "boolean",
+          "description": "Whether to use an existing KubeRay operator instead of installing one."
+        },
+        "configuration": {
+          "$ref": "#/definitions/AttachedAksClusterExtensionConfiguration",
+          "description": "Supported extension configuration. Other Helm settings are service-managed."
+        }
+      }
+    },
+    "AttachedAksClusterHealthComponent": {
+      "type": "object",
+      "description": "Health of an individual attachment component.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Component name."
+        },
+        "state": {
+          "$ref": "#/definitions/AttachedAksClusterHealthState",
+          "description": "Evaluated component health."
+        },
+        "message": {
+          "type": "string",
+          "description": "Details of the component's health."
+        },
+        "lastObservedAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time at which component health was last observed."
+        }
+      }
+    },
+    "AttachedAksClusterHealthReason": {
+      "type": "object",
+      "description": "A reason contributing to attachment health.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Machine-readable health reason code."
+        },
+        "component": {
+          "type": "string",
+          "description": "Component associated with the reason."
+        },
+        "message": {
+          "type": "string",
+          "description": "Description of the health condition."
+        },
+        "recommendedAction": {
+          "type": "string",
+          "description": "Recommended action for the health condition."
+        }
+      }
+    },
+    "AttachedAksClusterHealthState": {
+      "type": "string",
+      "description": "Health state of an attachment or one of its components.",
+      "enum": [
+        "Unknown",
+        "Healthy",
+        "Degraded",
+        "Unhealthy"
+      ],
+      "x-ms-enum": {
+        "name": "AttachedAksClusterHealthState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Health has not yet been established."
+          },
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "The attachment or component is healthy."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "The attachment or component is degraded."
+          },
+          {
+            "name": "Unhealthy",
+            "value": "Unhealthy",
+            "description": "The attachment or component is unhealthy."
+          }
+        ]
+      }
+    },
+    "AttachedAksClusterHealthStatus": {
+      "type": "object",
+      "description": "Evaluated health of an attachment.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/AttachedAksClusterHealthState",
+          "description": "Overall attachment health."
+        },
+        "summary": {
+          "type": "string",
+          "description": "Summary of the evaluated health."
+        },
+        "lastObservedAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time at which health was last observed."
+        },
+        "newWorkAdmissionAllowed": {
+          "type": "boolean",
+          "description": "Whether the attachment can admit new workloads."
+        },
+        "components": {
+          "type": "array",
+          "description": "Health of individual attachment components.",
+          "items": {
+            "$ref": "#/definitions/AttachedAksClusterHealthComponent"
+          }
+        },
+        "reasons": {
+          "type": "array",
+          "description": "Reasons contributing to the evaluated health.",
+          "items": {
+            "$ref": "#/definitions/AttachedAksClusterHealthReason"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AttachedAksClusterIdentityStatus": {
+      "type": "object",
+      "description": "Identity status for training on the attached cluster.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the identity."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Identity client ID."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "Identity principal ID."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Identity tenant ID."
+        },
+        "federatedIdentityCredentialResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the federated identity credential."
+        },
+        "kubernetesServiceAccountName": {
+          "type": "string",
+          "description": "Kubernetes service account associated with the identity."
+        }
+      }
+    },
+    "AttachedAksClusterIntegrationResourceStatus": {
+      "type": "object",
+      "description": "Status of an integration resource associated with the attachment.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the integration resource."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the integration resource."
+        },
+        "message": {
+          "type": "string",
+          "description": "Details of the integration state."
+        }
+      }
+    },
+    "AttachedAksClusterListItem": {
+      "type": "object",
+      "description": "A lightweight attachment resource returned by LIST.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the attachment.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Attachment name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type of the attachment.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/AttachedAksClusterListProperties",
+          "description": "Lightweight attachment properties.",
+          "readOnly": true
+        }
+      }
+    },
+    "AttachedAksClusterListProperties": {
+      "type": "object",
+      "description": "Lightweight attachment properties returned by LIST.",
+      "properties": {
+        "clusterResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the attached AKS cluster."
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "Capabilities enabled on the attachment.",
+          "items": {
+            "$ref": "#/definitions/AttachedAksClusterCapability"
+          }
+        },
+        "stage": {
+          "$ref": "#/definitions/AttachedAksClusterProvisioningStage",
+          "description": "Current attachment provisioning stage."
+        },
+        "health": {
+          "$ref": "#/definitions/AttachedAksClusterHealthStatus",
+          "description": "Evaluated attachment health."
+        },
+        "projectLocation": {
+          "type": "string",
+          "description": "Region associated with the attachment."
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Attachment creation time."
+        },
+        "modifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Attachment modification time."
+        }
+      }
+    },
+    "AttachedAksClusterListResult": {
+      "type": "object",
+      "description": "A page of lightweight attachment summaries.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The items on this page",
+          "items": {
+            "$ref": "#/definitions/AttachedAksClusterListItem"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AttachedAksClusterProjectBinding": {
+      "type": "object",
+      "description": "A server-managed project binding on the attached cluster.",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "Identifier of the bound Foundry project."
+        },
+        "projectName": {
+          "type": "string",
+          "description": "Name of the bound Foundry project."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Kubernetes namespace assigned to the project."
+        },
+        "serviceAccountName": {
+          "type": "string",
+          "description": "Kubernetes service account used by the project."
+        },
+        "workloadIdentityClientId": {
+          "type": "string",
+          "description": "Client ID of the project's workload identity."
+        },
+        "allowedCapabilities": {
+          "type": "array",
+          "description": "Capabilities available to the project binding.",
+          "items": {
+            "$ref": "#/definitions/AttachedAksClusterCapability"
+          }
+        },
+        "stage": {
+          "$ref": "#/definitions/AttachedAksClusterProjectBindingStage",
+          "description": "Current project binding stage."
+        },
+        "message": {
+          "type": "string",
+          "description": "Details of the current binding state."
+        },
+        "kubeRayReady": {
+          "type": "boolean",
+          "description": "Whether the binding is ready for KubeRay workloads."
+        },
+        "foundryNativeReady": {
+          "type": "boolean",
+          "description": "Whether the binding is ready for Foundry-native workloads."
+        }
+      }
+    },
+    "AttachedAksClusterProjectBindingStage": {
+      "type": "string",
+      "description": "Provisioning stage of a project binding.",
+      "enum": [
+        "Reconciling",
+        "Ready",
+        "Degraded",
+        "Blocked"
+      ],
+      "x-ms-enum": {
+        "name": "AttachedAksClusterProjectBindingStage",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Reconciling",
+            "value": "Reconciling",
+            "description": "The binding is being reconciled."
+          },
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "The binding is ready."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "The binding is degraded."
+          },
+          {
+            "name": "Blocked",
+            "value": "Blocked",
+            "description": "The binding is blocked."
+          }
+        ]
+      }
+    },
+    "AttachedAksClusterProperties": {
+      "type": "object",
+      "description": "Properties of an account-level AKS attachment.",
+      "properties": {
+        "clusterResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the existing AKS cluster. This value is immutable.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ContainerService/managedClusters"
+              }
+            ]
+          }
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "Capabilities enabled on this attachment, without duplicates.\nWhen omitted on creation, defaults to foundryNative; when omitted on an\nupdate, retains the existing capabilities.",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/definitions/AttachedAksClusterCapability"
+          }
+        },
+        "extensionProfile": {
+          "$ref": "#/definitions/AttachedAksClusterExtensionProfile",
+          "description": "Configuration of the training extension on the attached cluster."
+        },
+        "projectBindings": {
+          "type": "array",
+          "description": "Server-managed project bindings on the attached cluster.",
+          "items": {
+            "$ref": "#/definitions/AttachedAksClusterProjectBinding"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "projectId"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/AttachedAksClusterStatus",
+          "description": "Server-reported attachment provisioning, integration, and health status.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "clusterResourceId"
+      ]
+    },
+    "AttachedAksClusterProvisioningStage": {
+      "type": "string",
+      "description": "Provisioning stage reported by an attachment.",
+      "enum": [
+        "Accepted",
+        "Validating",
+        "ProvisioningCluster",
+        "ProvisioningIdentity",
+        "PendingBootstrap",
+        "ClusterReady",
+        "Ready",
+        "Degraded",
+        "Failed",
+        "Deleting",
+        "Blocked"
+      ],
+      "x-ms-enum": {
+        "name": "AttachedAksClusterProvisioningStage",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The attachment request was accepted."
+          },
+          {
+            "name": "Validating",
+            "value": "Validating",
+            "description": "The attachment is being validated."
+          },
+          {
+            "name": "ProvisioningCluster",
+            "value": "ProvisioningCluster",
+            "description": "Cluster provisioning is in progress."
+          },
+          {
+            "name": "ProvisioningIdentity",
+            "value": "ProvisioningIdentity",
+            "description": "Identity provisioning is in progress."
+          },
+          {
+            "name": "PendingBootstrap",
+            "value": "PendingBootstrap",
+            "description": "Cluster bootstrap is pending."
+          },
+          {
+            "name": "ClusterReady",
+            "value": "ClusterReady",
+            "description": "The cluster is ready."
+          },
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "The attachment is ready."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "The attachment is degraded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Attachment provisioning failed."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The attachment is being deleted."
+          },
+          {
+            "name": "Blocked",
+            "value": "Blocked",
+            "description": "The attachment is blocked."
+          }
+        ]
+      }
+    },
+    "AttachedAksClusterReadinessStatus": {
+      "type": "object",
+      "description": "Readiness of the attachment connector and capabilities.",
+      "properties": {
+        "connectorReady": {
+          "type": "boolean",
+          "description": "Whether the connector is ready."
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "Readiness of individual capabilities.",
+          "items": {
+            "$ref": "#/definitions/AttachedAksClusterCapabilityStatus"
+          }
+        },
+        "blockers": {
+          "type": "array",
+          "description": "Conditions preventing readiness.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AttachedAksClusterRoleAssignmentStatus": {
+      "type": "object",
+      "description": "Role assignments associated with the AI Manager integration.",
+      "properties": {
+        "contributorId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the contributor role assignment."
+        },
+        "inferenceOperatorId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the inference operator role assignment."
+        },
+        "status": {
+          "type": "string",
+          "description": "Current role assignment status."
+        }
+      }
+    },
+    "AttachedAksClusterStatus": {
+      "type": "object",
+      "description": "Current provisioning and health status of an attachment.",
+      "properties": {
+        "stage": {
+          "$ref": "#/definitions/AttachedAksClusterProvisioningStage",
+          "description": "Current attachment provisioning stage."
+        },
+        "clusterResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the attached AKS cluster."
+        },
+        "providerOperationId": {
+          "type": "string",
+          "description": "Identifier of an underlying provider operation, when present."
+        },
+        "message": {
+          "type": "string",
+          "description": "Details of the current attachment state."
+        },
+        "identity": {
+          "$ref": "#/definitions/AttachedAksClusterIdentityStatus",
+          "description": "Identity provisioned for training on the attached cluster."
+        },
+        "connectorRegistration": {
+          "$ref": "#/definitions/AttachedAksClusterConnectorRegistration",
+          "description": "Connector registration associated with the attachment."
+        },
+        "observedGeneration": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Attachment generation observed by the connector."
+        },
+        "connectorObservedAtUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time at which the connector was last observed."
+        },
+        "readiness": {
+          "$ref": "#/definitions/AttachedAksClusterReadinessStatus",
+          "description": "Connector and capability readiness."
+        },
+        "aiManager": {
+          "$ref": "#/definitions/AttachedAksClusterAiManagerStatus",
+          "description": "Status of the AI Manager integration."
+        },
+        "extension": {
+          "$ref": "#/definitions/AttachedAksClusterIntegrationResourceStatus",
+          "description": "Status of the training extension resource."
+        },
+        "health": {
+          "$ref": "#/definitions/AttachedAksClusterHealthStatus",
+          "description": "Evaluated attachment health and workload admission status."
+        },
+        "lastUpdatedTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update time of the attachment status."
+        }
+      }
+    },
     "Azure.Core.eTag": {
       "type": "string",
       "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
@@ -26561,6 +27680,47 @@
     }
   },
   "parameters": {
+    "AttachedAksClusterListQueryParameters.filter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "OData filter expression for attachment summaries.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "filter"
+    },
+    "AttachedAksClusterListQueryParameters.orderby": {
+      "name": "$orderby",
+      "in": "query",
+      "description": "OData ordering expression for attachment summaries.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "orderby"
+    },
+    "AttachedAksClusterListQueryParameters.skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "Number of attachments to skip. Defaults to zero.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "skip"
+    },
+    "AttachedAksClusterListQueryParameters.top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Maximum number of attachments per page, from 1 to 100. Defaults to 50.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 100,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "top"
+    },
     "CostControlCreateOrUpdateHeaders.ifMatch": {
       "name": "If-Match",
       "in": "header",

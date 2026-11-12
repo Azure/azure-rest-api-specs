@@ -14,6 +14,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./back-compatible.tsp";
 import "./Account.tsp";
+import "./AttachedAksCluster.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./Deployment.tsp";
 import "./CommitmentPlan.tsp";

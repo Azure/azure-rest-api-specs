@@ -37,10 +37,41 @@ tag: package-2026-11-01
 
 These settings apply only when `--tag=package-2026-11-15-preview` is specified on the command line.
 
+The attached AKS cluster suppressions document the service's lightweight LIST and
+resource-GET polling contracts. These preview exceptions require ARM review; their
+presence does not indicate approval.
+
 ```yaml $(tag) == 'package-2026-11-15-preview'
 input-file:
   - preview/2026-11-15-preview/cognitiveservices.json
 suppressions:
+  - code: GetCollectionResponseSchema
+    reason: Attached AKS cluster LIST returns lightweight attachment summaries, while individual GET returns full status and project bindings. The distinct response schemas preserve the service contract rather than promising full-detail fields in LIST.
+    from: cognitiveservices.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/attachedAksClusters"]
+  - code: PutResponseCodes
+    reason: Attached AKS cluster PUT returns 200 or 202 with the current attachment resource, not 201. Progress is reported by resource GET through properties.status.stage; a 200 response does not itself guarantee workload readiness.
+    from: cognitiveservices.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/attachedAksClusters/{attachedAksClusterName}"].put
+  - code: DeleteResponseCodes
+    reason: Attached AKS cluster DELETE returns 202 with the pending attachment or 204 without a body. The service uses resource GET polling until the attachment is absent and does not implement the standard ARM LRO contract.
+    from: cognitiveservices.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/attachedAksClusters/{attachedAksClusterName}"].delete
+  - code: LroExtension
+    reason: Attached AKS cluster PUT and DELETE return the current attachment on 202 and report progress through resource GET rather than the standard ARM LRO protocol. Adding the LRO extension would promise a polling contract the service does not implement.
+    from: cognitiveservices.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/attachedAksClusters/{attachedAksClusterName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/attachedAksClusters/{attachedAksClusterName}"].delete
+  - code: LroLocationHeader
+    reason: Attached AKS cluster PUT and DELETE do not return a Location polling header. Poll the attachment GET and inspect properties.status.stage for PUT, or wait for the attachment to be absent after DELETE.
+    from: cognitiveservices.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/attachedAksClusters/{attachedAksClusterName}"].put.responses.202
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/attachedAksClusters/{attachedAksClusterName}"].delete.responses.202
   - code: DefinitionsPropertiesNamesCamelCase
     reason: The acs property embeds a separately versioned Agent Control Specification document. These fields retain the canonical ACS snake_case wire names so customers can import, export, validate, and round-trip ACS manifests without translation; generated SDKs expose idiomatic camelCase names through x-ms-client-name.
     from: cognitiveservices.json
