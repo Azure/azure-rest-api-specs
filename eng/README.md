@@ -20,7 +20,12 @@ disabled. Optional refresh notifications use `EvalDashboardRefreshUrl` and
 for the approved storage/dashboard configuration and permissions.
 
 Set `publishDashboardResults` to `false` for artifact-only runs without added
-storage egress. PRs and non-main runs cannot upload. Completed failing evals can
+storage egress. PRs cannot upload. Feature branches remain artifact-only unless a
+manual run explicitly enables `allowFeatureBranchPublishing` as well as
+`publishDashboardResults`. The test keeps its actual branch and commit in the
+saved results and uses the existing publisher permissions and completeness checks.
+Shared test-publication support must arrive through the normal source sync before
+the new switch can be used outside an integration test. Completed failing evals can
 be published; incomplete results remain blocked. Missing permissions and incomplete
 eval shards must be resolved before claiming live dashboard onboarding is complete.
 

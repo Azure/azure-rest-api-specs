@@ -27,6 +27,10 @@ parameters:
     displayName: Publish trusted main results to the eval dashboard
     type: boolean
     default: true
+  - name: allowFeatureBranchPublishing
+    displayName: Allow manual feature-branch test publication
+    type: boolean
+    default: false
 
 variables:
   # Managed-pool image selection (LINUXPOOL/LINUXVMIMAGE). Repo-local.
@@ -43,7 +47,7 @@ extends:
   parameters:
     settings:
       skipBuildTagsForGitHubPullRequests: true
-      ${{ if and(parameters.publishDashboardResults, eq(variables['System.CollectionUri'], 'https://dev.azure.com/azure-sdk/'), eq(variables['System.TeamProject'], 'internal'), eq(variables['Build.Repository.Name'], 'Azure/azure-rest-api-specs'), eq(variables['Build.SourceBranch'], 'refs/heads/main'), in(variables['Build.Reason'], 'IndividualCI', 'BatchedCI', 'Schedule', 'Manual')) }}:
+      ${{ if and(parameters.publishDashboardResults, eq(variables['System.CollectionUri'], 'https://dev.azure.com/azure-sdk/'), eq(variables['System.TeamProject'], 'internal'), eq(variables['Build.Repository.Name'], 'Azure/azure-rest-api-specs'), in(variables['Build.Reason'], 'IndividualCI', 'BatchedCI', 'Schedule', 'Manual'), or(eq(variables['Build.SourceBranch'], 'refs/heads/main'), and(parameters.allowFeatureBranchPublishing, eq(variables['Build.Reason'], 'Manual'), startsWith(variables['Build.SourceBranch'], 'refs/heads/'), ne(variables['Build.SourceBranch'], 'refs/heads/')))) }}:
         networkIsolationPolicy: DefaultDeny, CFSClean, CFSClean2, CFSClean3, AzureStorage
     sdl:
       sourceAnalysisPool:
@@ -83,3 +87,4 @@ extends:
             parameters:
               createDashboardBundle: true
               publishDashboardResults: ${{ parameters.publishDashboardResults }}
+              allowFeatureBranchPublishing: ${{ parameters.allowFeatureBranchPublishing }}
