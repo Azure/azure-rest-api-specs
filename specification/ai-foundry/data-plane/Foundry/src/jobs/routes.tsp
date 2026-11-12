@@ -5,6 +5,7 @@ import "../common/servicepatterns.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core.Traits;
+using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects;
 
@@ -110,6 +111,9 @@ interface Jobs {
 
       @doc("The job definition for creation, same-name replay, or metadata update. Include the required command, environment and compute fields even when updating metadata. Submitted configuration values must match the existing job; optional omitted configuration stays unchanged on a tracked update. To change execution configuration, create a job with a different name.")
       @bodyRoot
+      @clientName("training_job", "python")
+      @clientName("trainingJob", "javascript")
+      @clientName("trainingJob", "csharp")
       job: Job;
     },
     Azure.Core.Foundations.ResourceCreatedOrOkResponse<Job>
