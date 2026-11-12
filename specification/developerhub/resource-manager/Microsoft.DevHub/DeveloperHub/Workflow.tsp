@@ -50,6 +50,7 @@ interface Workflows {
   /**
    * Deletes a workflow
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   @summary("Deletes a workflow")
   @tag("Workflow")
   delete is ArmResourceDeleteSync<

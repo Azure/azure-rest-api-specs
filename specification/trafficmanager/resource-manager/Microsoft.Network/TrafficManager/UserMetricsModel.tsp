@@ -61,6 +61,7 @@ interface UserMetricsModels {
    * Delete a subscription-level key used for Real User Metrics collection.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   delete is UserMetricsModelOps.DeleteSync<
     UserMetricsModel,
     Response = ArmResponse<DeleteOperationResult>

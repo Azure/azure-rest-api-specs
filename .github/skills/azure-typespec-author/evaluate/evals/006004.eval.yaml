@@ -4,7 +4,7 @@ version: "1.0"
 type: capability
 tags:
   area: "dataplane"
-environment: azsdk-mcp
+agent_environment: azsdk-mcp
 defaults:
   runs: 1
   timeout: 660s
@@ -18,7 +18,7 @@ stimuli:
     prompt:
       Add a Widgets interface with full CRUD and list operations for the WidgetSuite resource. The interface should include operations to create or update, get, list, and delete widgets. Create or update and delete complete synchronously. Use the appropriate
       Azure.Core resource operation templates. All material design decisions are provided, so proceed without confirmation.
-    environment: &id001
+    agent_environment: &id001
       files:
         - src: ../fixtures/006004-dp-create-resource-with-crud/main.tsp
           dest: main.tsp
@@ -45,7 +45,7 @@ stimuli:
     prompt:
       "@azure-typespec-author Add a Widgets interface with full CRUD and list operations for the WidgetSuite resource. The interface should include operations to create or update, get, list, and delete
       widgets. Create or update and delete complete synchronously. Use the appropriate Azure.Core resource operation templates. All material design decisions are provided, so proceed without confirmation."
-    environment: *id001
+    agent_environment: *id001
     rubric: &shared_rubric
       - A Widgets interface is defined with get/read, create-or-update, list, and delete operations for WidgetSuite.
       - Each operation uses the appropriate Azure.Core resource operation template for its behavior.
@@ -103,7 +103,7 @@ stimuli:
     prompt:
       Add a Widgets interface with full CRUD and list operations for the WidgetSuite resource. The interface should include operations to create or update, get, list, and delete widgets. Create or update and delete complete synchronously. Use the appropriate
       Azure.Core resource operation templates. All material design decisions are provided, so proceed without confirmation.
-    environment: *id001
+    agent_environment: *id001
     rubric: *shared_rubric
     graders:
       - type: tool-calls

@@ -14,6 +14,23 @@ options:
     custom-types-subpackage: "implementation.models"
     custom-types: "ItemReferenceParam,EasyInputMessage,EasyInputMessageRole,EasyInputMessageStatus"
     rename-model:
+      VoiceAgentSystemToolItemObject: VoiceAgentSystemToolItemObjectType
+      ToolApplyPatchToolParam: ApplyPatchToolParameter
+      ToolCodeInterpreterTool: CodeInterpreterTool
+      ToolComputerTool: ComputerTool
+      ToolComputerUsePreviewTool: ComputerUsePreviewTool
+      ToolCustomToolParam: CustomToolParameter
+      ToolFileSearchTool: FileSearchTool
+      ToolFunctionShellToolParam: FunctionShellToolParameter
+      ToolFunctionTool: FunctionTool
+      ToolImageGenTool: ImageGenTool
+      ToolImageGenToolModel: ImageGenToolModel
+      ToolLocalShellToolParam: LocalShellToolParameter
+      ToolMcpTool: McpTool
+      ToolProgrammaticToolCallingParam: ProgrammaticToolCallingParameter
+      ToolToolSearchToolParam: ToolSearchTool
+      ToolWebSearchPreviewTool: WebSearchPreviewTool
+      ToolWebSearchTool: WebSearchTool
       GrammarSyntax1: GrammarSyntax
       ReasoningEffort1: ReasoningEffort
       AgentObjectVersions: AgentDetailsVersions
@@ -25,6 +42,7 @@ options:
       VoiceResponseObject: VoiceResponseObjectType
       VoiceResponseObject1: VoiceResponseObjectType
       PickPropertiesVoiceAgentAudioConfig: VoiceAgentResponseAudioConfig
+      RealtimeResponseInputMessageSystemStatus: RealtimeResponseInputItemStatus
     customization-class: customizations/src/main/java/AgentsCustomizations.java
     flavor: azure
   "@azure-tools/typespec-client-generator-cli":
@@ -66,14 +84,6 @@ options:
     output-file: beta-annotations.csv
     emitter-output-dir: "{cwd}/../customizations" # run npx tsp compile from within `TempTypeSpecFiles` folder
     namespace: com.azure.ai.agents
-    manual-entries: >-
-      AgentEndpointProtocol::VOICE,
-      AgentEndpointProtocol::VOICE_CONVERSATION_ENGINE,
-      AgentKind::VOICE,
-      AudioTranscriptionModel,
-      RealtimeSessionCreateRequestGAAudioOutputVoice,
-      VoiceAgentResponseAudioConfig,
-      VoiceResponseObjectType
 imports:
   - "@azure-tools/typespec-azure-core"
   - "@azure-tools/typespec-azure-core/experimental"

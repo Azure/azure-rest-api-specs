@@ -170,19 +170,10 @@ model EndpointBasedEvaluatorDefinition extends EvaluatorDefinition {
 // Generation artifacts (provenance for evaluators created via generation jobs)
 // ============================================================================
 
-@doc("Reference to a versioned Foundry Dataset.")
-model DatasetReference {
-  @doc("Dataset name.")
-  name: string;
-
-  @doc("Dataset version.")
-  version: string;
-}
-
 @doc("Service-managed provenance artifacts produced by an evaluator generation job. Present only on EvaluatorVersion resources created via the generation pipeline. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace.")
 model EvaluatorGenerationArtifacts {
   @doc("Reference to the single Foundry Dataset (one combined JSONL file, version-aligned to `EvaluatorVersion.version`) holding all artifacts produced by the generation pipeline. Each row in the JSONL carries a `kind` field discriminating its content (e.g. `spec`, `tools`, `context`).")
-  dataset: DatasetReference;
+  dataset: VersionedDatasetReference;
 
   @doc("The kinds of rows present in `dataset`. Always contains `\"spec\"` (the generated evaluation specification, a Markdown document describing what the evaluator measures). May additionally contain `\"tools\"` (when the generation pipeline produced or inferred OpenAI tool schemas) and/or `\"context\"` (when supplementary materials such as file uploads or trace samples were used during generation).")
   kinds: string[];
