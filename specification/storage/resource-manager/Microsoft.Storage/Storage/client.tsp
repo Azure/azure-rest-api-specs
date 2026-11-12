@@ -964,6 +964,16 @@ namespace Azure.ResourceManager.Models {
   "csharp"
 );
 @@clientName(
+  DualStackEndpointPreference.defaultDualStackEndpoints,
+  "IsDefaultEndpointDualStack",
+  "csharp"
+);
+@@clientName(
+  DualStackEndpointPreference.publishIpv4Endpoint,
+  "IsIPv4EndpointToBePublished",
+  "csharp"
+);
+@@clientName(
   DualStackEndpointPreference.publishIpv6Endpoint,
   "IsIPv6EndpointToBePublished",
   "csharp"

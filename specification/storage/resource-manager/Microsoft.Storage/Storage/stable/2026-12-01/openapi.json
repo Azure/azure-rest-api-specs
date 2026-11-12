@@ -1262,6 +1262,9 @@
           },
           "StorageAccountGetPropertiesGeoReplicationStatscanFailoverTrue": {
             "$ref": "./examples/StorageAccountGetPropertiesGeoReplicationStatscanFailoverTrue.json"
+          },
+          "StorageAccountGetWithDualStackEndpoints": {
+            "$ref": "./examples/StorageAccountGetWithDualStackEndpoints.json"
           }
         }
       },
@@ -1365,6 +1368,9 @@
           },
           "StorageAccountCreateWithDataCollaborationPolicy": {
             "$ref": "./examples/StorageAccountCreateWithDataCollaborationPolicy.json"
+          },
+          "StorageAccountCreateWithDualStackEndpoints": {
+            "$ref": "./examples/StorageAccountCreateWithDualStackEndpoints.json"
           },
           "StorageAccountCreateWithImmutabilityPolicy": {
             "$ref": "./examples/StorageAccountCreateWithImmutabilityPolicy.json"
@@ -12488,6 +12494,14 @@
       "type": "object",
       "description": "Dual-stack endpoint preference defines whether IPv6 endpoints are going to be published.",
       "properties": {
+        "defaultDualStackEndpoints": {
+          "type": "boolean",
+          "description": "Whether the standard storage endpoints resolve to both IPv4 and IPv6 addresses. The standard endpoint names remain unchanged."
+        },
+        "publishIpv4Endpoint": {
+          "type": "boolean",
+          "description": "Whether to publish separate IPv4-specific storage endpoints using the <account>-ipv4 name."
+        },
         "publishIpv6Endpoint": {
           "type": "boolean",
           "description": "A boolean flag which indicates whether IPv6 storage endpoints are to be published."
@@ -12818,6 +12832,11 @@
         "ipv6Endpoints": {
           "$ref": "#/definitions/StorageAccountIpv6Endpoints",
           "description": "Gets the IPv6 storage endpoints."
+        },
+        "ipv4Endpoints": {
+          "$ref": "#/definitions/StorageAccountIpv4Endpoints",
+          "description": "Gets the IPv4-specific storage endpoints published when publishIpv4Endpoint is true.",
+          "readOnly": true
         }
       }
     },
@@ -17294,6 +17313,42 @@
         "blob": {
           "type": "string",
           "description": "Gets the blob endpoint.",
+          "readOnly": true
+        },
+        "file": {
+          "type": "string",
+          "description": "Gets the file endpoint.",
+          "readOnly": true
+        },
+        "web": {
+          "type": "string",
+          "description": "Gets the web endpoint.",
+          "readOnly": true
+        },
+        "dfs": {
+          "type": "string",
+          "description": "Gets the dfs endpoint.",
+          "readOnly": true
+        }
+      }
+    },
+    "StorageAccountIpv4Endpoints": {
+      "type": "object",
+      "description": "The URIs for retrieving public blob, queue, table, file, web or dfs objects through IPv4-specific endpoints.",
+      "properties": {
+        "blob": {
+          "type": "string",
+          "description": "Gets the blob endpoint.",
+          "readOnly": true
+        },
+        "queue": {
+          "type": "string",
+          "description": "Gets the queue endpoint.",
+          "readOnly": true
+        },
+        "table": {
+          "type": "string",
+          "description": "Gets the table endpoint.",
           "readOnly": true
         },
         "file": {
