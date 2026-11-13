@@ -53,7 +53,7 @@ using Microsoft.Elastic;
 );
 @@clientLocation(
   ElasticMonitorResources.vMHostList,
-  "$DO_NOT_NORMALIZE$vMHost",
+  exact("vMHost"),
   "javascript"
 );
 @@clientName(ElasticMonitorResources.vMHostList, "List");
@@ -64,7 +64,7 @@ using Microsoft.Elastic;
 );
 @@clientLocation(
   ElasticMonitorResources.details,
-  "$DO_NOT_NORMALIZE$vMIngestion",
+  exact("vMIngestion"),
   "javascript"
 );
 @@clientLocation(
@@ -74,7 +74,7 @@ using Microsoft.Elastic;
 );
 @@clientLocation(
   ElasticMonitorResources.vMCollectionUpdate,
-  "$DO_NOT_NORMALIZE$vMCollection",
+  exact("vMCollection"),
   "javascript"
 );
 @@clientName(ElasticMonitorResources.vMCollectionUpdate, "Update");
