@@ -568,11 +568,10 @@ namespace Azure.AI.Projects {
 }
 
 // ApiErrorResponse is part of the AgentServer.Responses wire contract but is unreachable from
-// this package's operations, so it needs an explicit usage to be emitted. It is also part of this
-// package's public error API, so it must not be emitted as internal; the access propagates to the
-// models it references.
+// this package's operations, so it needs an explicit usage to be emitted. No public API takes or
+// returns it (the server writes error bodies itself), so it is emitted as internal.
 @@usage(Azure.AI.Projects.ApiErrorResponse, Usage.input | Usage.output);
-@@access(Azure.AI.Projects.ApiErrorResponse, Access.public);
+@@access(Azure.AI.Projects.ApiErrorResponse, Access.internal, "csharp");
 
 // The C# generator renames public models that end in "Response" to "Result" unless the name is
 // exact. Keep ApiErrorResponse as is: it is already the public name of this error envelope.
@@ -586,10 +585,6 @@ namespace Azure.AI.Projects {
 // Emit it under that name: this package maps the simple name Error to
 // OpenAI.Responses.ResponseError, so a generated type named Error would be shadowed.
 @@clientName(OpenAI.Error, "ApiError");
-
-// These are surfaced on this package's public hosting API (ResponseStreamEvent.EventType and
-// the tool-choice extension helpers), so they must not be emitted as internal.
-@@access(OpenAI.ToolChoiceParam, Access.public);
 
 // ============================================================================
 // Stream event subtypes -> OpenAI.Responses.Streaming*Update.
@@ -1236,3 +1231,179 @@ namespace Azure.AI.Projects {
   OpenAI.MessageContentOutputTextContent,
   #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
 );
+
+// ============================================================================
+// Internal models.
+// The @@usage roots above (and the operations) pull in models that no public member of this
+// package takes or returns: handlers, providers, builders, options and extension accessors only
+// expose OpenAI types or the models that remain public. Emit those as internal so they are not
+// published as unreachable public API; several also duplicate OpenAI.Responses types.
+// A model is made public again only once a public member exposes it.
+// ============================================================================
+@@access(Azure.AI.Projects.AzureUserSecurityContext, Access.internal, "csharp");
+@@access(Azure.AI.Projects.DeleteResponseResult, Access.internal, "csharp");
+@@access(Azure.AI.Projects.PageOrder, Access.internal, "csharp");
+@@access(Azure.AI.Projects.RoutingConfiguration, Access.internal, "csharp");
+@@access(
+  Azure.AI.Projects.SessionAffinityConfiguration,
+  Access.internal,
+  "csharp"
+);
+@@access(
+  Azure.AI.Projects.SessionAffinityRequestStrategy,
+  Access.internal,
+  "csharp"
+);
+@@access(OpenAI.ApplyPatchCreateFileOperation, Access.internal, "csharp");
+@@access(OpenAI.ApplyPatchDeleteFileOperation, Access.internal, "csharp");
+@@access(OpenAI.ApplyPatchFileOperation, Access.internal, "csharp");
+@@access(OpenAI.ApplyPatchUpdateFileOperation, Access.internal, "csharp");
+@@access(OpenAI.CodeInterpreterOutputImage, Access.internal, "csharp");
+@@access(OpenAI.CodeInterpreterOutputLogs, Access.internal, "csharp");
+@@access(OpenAI.CompactResource, Access.internal, "csharp");
+@@access(OpenAI.ComputerCallSafetyCheckParam, Access.internal, "csharp");
+@@access(OpenAI.ComputerScreenshotContent, Access.internal, "csharp");
+@@access(OpenAI.ComputerScreenshotImage, Access.internal, "csharp");
+@@access(OpenAI.ContainerReferenceResource, Access.internal, "csharp");
+@@access(OpenAI.ContextManagementParam, Access.internal, "csharp");
+@@access(OpenAI.Error, Access.internal, "csharp");
+@@access(OpenAI.FileInputDetail, Access.internal, "csharp");
+@@access(OpenAI.FileSearchToolCallResults, Access.internal, "csharp");
+@@access(OpenAI.FunctionShellAction, Access.internal, "csharp");
+@@access(OpenAI.FunctionShellCallEnvironment, Access.internal, "csharp");
+@@access(OpenAI.FunctionShellCallOutputContent, Access.internal, "csharp");
+@@access(OpenAI.FunctionShellCallOutputExitOutcome, Access.internal, "csharp");
+@@access(OpenAI.FunctionShellCallOutputOutcome, Access.internal, "csharp");
+@@access(OpenAI.FunctionShellCallOutputStatusEnum, Access.internal, "csharp");
+@@access(
+  OpenAI.FunctionShellCallOutputTimeoutOutcome,
+  Access.internal,
+  "csharp"
+);
+@@access(OpenAI.FunctionShellCallStatus, Access.internal, "csharp");
+@@access(OpenAI.ImageBackground, Access.internal, "csharp");
+@@access(OpenAI.ImageDetail, Access.internal, "csharp");
+@@access(OpenAI.ImageGenActionEnum, Access.internal, "csharp");
+@@access(OpenAI.ImageOutputFormat, Access.internal, "csharp");
+@@access(OpenAI.IncludeEnum, Access.internal, "csharp");
+@@access(OpenAI.InputFileContent, Access.internal, "csharp");
+@@access(OpenAI.InputImageContent, Access.internal, "csharp");
+@@access(OpenAI.InputTextContent, Access.internal, "csharp");
+@@access(OpenAI.ItemField, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldAdditionalTools, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldApplyPatchToolCall, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldApplyPatchToolCallOutput, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldCodeInterpreterToolCall, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldCompactionBody, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldComputerToolCall, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldComputerToolCallOutput, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldCustomToolCall, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldCustomToolCallOutput, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldFileSearchToolCall, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldFunctionShellCall, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldFunctionShellCallOutput, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldFunctionToolCall, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldFunctionToolCallOutput, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldImageGenToolCall, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldLocalShellToolCall, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldLocalShellToolCallOutput, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldMcpApprovalRequest, Access.internal, "csharp");
+@@access(
+  OpenAI.ItemFieldMcpApprovalResponseResource,
+  Access.internal,
+  "csharp"
+);
+@@access(OpenAI.ItemFieldMcpListTools, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldMcpToolCall, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldMessage, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldProgram, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldProgramOutput, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldReasoningItem, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldToolSearchCall, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldToolSearchOutput, Access.internal, "csharp");
+@@access(OpenAI.ItemFieldWebSearchToolCall, Access.internal, "csharp");
+@@access(OpenAI.LocalEnvironmentResource, Access.internal, "csharp");
+@@access(OpenAI.LocalShellExecAction, Access.internal, "csharp");
+@@access(OpenAI.LogProb, Access.internal, "csharp");
+@@access(OpenAI.MCPListToolsTool, Access.internal, "csharp");
+@@access(OpenAI.MCPListToolsToolAnnotations, Access.internal, "csharp");
+@@access(OpenAI.MCPListToolsToolInputSchema, Access.internal, "csharp");
+@@access(OpenAI.MessageContent, Access.internal, "csharp");
+@@access(OpenAI.MessageContentInputFileContent, Access.internal, "csharp");
+@@access(OpenAI.MessageContentInputImageContent, Access.internal, "csharp");
+@@access(OpenAI.MessageContentInputTextContent, Access.internal, "csharp");
+@@access(OpenAI.MessageContentOutputTextContent, Access.internal, "csharp");
+@@access(OpenAI.MessageContentReasoningTextContent, Access.internal, "csharp");
+@@access(OpenAI.MessageContentRefusalContent, Access.internal, "csharp");
+@@access(OpenAI.MessagePhase, Access.internal, "csharp");
+@@access(OpenAI.MessageRole, Access.internal, "csharp");
+@@access(OpenAI.MessageStatus, Access.internal, "csharp");
+@@access(OpenAI.MisalignmentErrorDetailsResource, Access.internal, "csharp");
+@@access(OpenAI.ModerationConfigParam, Access.internal, "csharp");
+@@access(OpenAI.ModerationMode, Access.internal, "csharp");
+@@access(OpenAI.ModerationParam, Access.internal, "csharp");
+@@access(OpenAI.ModerationPolicyParam, Access.internal, "csharp");
+@@access(OpenAI.ProgramOutputStatus, Access.internal, "csharp");
+@@access(OpenAI.PromptCacheBreakpointConfig, Access.internal, "csharp");
+@@access(OpenAI.PromptCacheOptionsParam, Access.internal, "csharp");
+@@access(OpenAI.PromptCacheRetentionEnum, Access.internal, "csharp");
+@@access(OpenAI.RealtimeMCPError, Access.internal, "csharp");
+@@access(OpenAI.RealtimeMCPHTTPError, Access.internal, "csharp");
+@@access(OpenAI.RealtimeMCPProtocolError, Access.internal, "csharp");
+@@access(OpenAI.RealtimeMCPToolExecutionError, Access.internal, "csharp");
+@@access(OpenAI.ReasoningTextContent, Access.internal, "csharp");
+@@access(OpenAI.ResponsePromptCacheOptionsParam, Access.internal, "csharp");
+@@access(OpenAI.ResponseStreamOptions, Access.internal, "csharp");
+@@access(OpenAI.ServiceTierEnum, Access.internal, "csharp");
+@@access(OpenAI.SpecificApplyPatchParam, Access.internal, "csharp");
+@@access(OpenAI.SpecificFunctionShellParam, Access.internal, "csharp");
+@@access(
+  OpenAI.SpecificProgrammaticToolCallingParam,
+  Access.internal,
+  "csharp"
+);
+@@access(OpenAI.SummaryTextContent, Access.internal, "csharp");
+@@access(OpenAI.TextContent, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceAllowed, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceCodeInterpreter, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceComputer, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceComputerUse, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceComputerUsePreview, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceCustom, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceFileSearch, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceFunction, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceImageGeneration, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceMCP, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceOptions, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceParam, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceWebSearchPreview, Access.internal, "csharp");
+@@access(OpenAI.ToolChoiceWebSearchPreview20250311, Access.internal, "csharp");
+@@access(OpenAI.ToolSearchExecutionType, Access.internal, "csharp");
+@@access(OpenAI.TopLogProb, Access.internal, "csharp");
+@@access(OpenAI.VectorStoreFileAttributes, Access.internal, "csharp");
+@@access(OpenAI.WebSearchActionFind, Access.internal, "csharp");
+@@access(OpenAI.WebSearchActionOpenPage, Access.internal, "csharp");
+@@access(OpenAI.WebSearchActionSearch, Access.internal, "csharp");
+@@access(OpenAI.WebSearchActionSearchSources, Access.internal, "csharp");
+@@access(OpenAI.WebSearchCallStatus, Access.internal, "csharp");
+@@access(OpenAI._MisalignmentErrorType, Access.internal, "csharp");
+@@access(OpenAI._MisalignmentSteer, Access.internal, "csharp");
+
+// The generated `Responses` client is not shipped (only the models are committed), but its
+// public protocol methods would otherwise force their parameter/return models (IncludeEnum,
+// DeleteResponseResult, ...) to be public. Keep the operations internal.
+@@access(Azure.AI.Projects.Responses.createResponse, Access.internal, "csharp");
+@@access(Azure.AI.Projects.Responses.getResponse, Access.internal, "csharp");
+@@access(Azure.AI.Projects.Responses.deleteResponse, Access.internal, "csharp");
+@@access(Azure.AI.Projects.Responses.cancelResponse, Access.internal, "csharp");
+@@access(Azure.AI.Projects.Responses.listInputItems, Access.internal, "csharp");
+@@access(Azure.AI.Projects.Responses.listResponses, Access.internal, "csharp");
+@@access(
+  Azure.AI.Projects.Responses.Compactconversation,
+  Access.internal,
+  "csharp"
+);
+
+// `McpToolCallItem.Status` (ResponseItemAttributionExtensions) exposes this enum because
+// OpenAI does not model status on MCP tool calls.
+@@access(OpenAI.MCPToolCallStatus, Access.public, "csharp");
