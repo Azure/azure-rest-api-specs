@@ -310,8 +310,8 @@ model ScenarioErrors {
   /**
    * Any permission errors associated with the scenario run.
    */
-  @removed(Versions.v2026_11_01)
-  @renamedFrom(Versions.v2026_11_01, "permission")
+  @removed(Versions.v2026_12_01)
+  @renamedFrom(Versions.v2026_12_01, "permission")
   @visibility(Lifecycle.Read)
   @identifiers(#["resourceId"])
   permissionBeforeActionAssociation: PermissionError[];
@@ -319,7 +319,7 @@ model ScenarioErrors {
   /**
    * Recorded permission error causes for this result. Multiple items can refer to the same resource.
    */
-  @added(Versions.v2026_11_01)
+  @added(Versions.v2026_12_01)
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   permission: PermissionError[];
@@ -327,8 +327,8 @@ model ScenarioErrors {
   /**
    * Any resource state errors associated with the scenario run.
    */
-  @removed(Versions.v2026_11_01)
-  @renamedFrom(Versions.v2026_11_01, "resource")
+  @removed(Versions.v2026_12_01)
+  @renamedFrom(Versions.v2026_12_01, "resource")
   @visibility(Lifecycle.Read)
   @identifiers(#["resourceId"])
   resourceBeforeActionAssociation: ResourceStateError[];
@@ -336,7 +336,7 @@ model ScenarioErrors {
   /**
    * Recorded resource error causes for this result. Multiple items can refer to the same resource.
    */
-  @added(Versions.v2026_11_01)
+  @added(Versions.v2026_12_01)
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   resource: ResourceStateError[];
@@ -388,7 +388,7 @@ model PermissionError {
   /**
    * Authored Actions associated with this specific error cause. Omitted when no association information is available.
    */
-  @added(Versions.v2026_11_01)
+  @added(Versions.v2026_12_01)
   @visibility(Lifecycle.Read)
   actionAssociation?: ScenarioErrorActionAssociation;
 }
@@ -423,9 +423,18 @@ model ResourceStateError {
   /**
    * The error code.
    */
+  @removed(Versions.v2026_12_01)
+  @renamedFrom(Versions.v2026_12_01, "errorCode")
   @typeChangedFrom(Versions.v2026_11_01, int32)
   @visibility(Lifecycle.Read)
-  errorCode: string;
+  errorCodeBeforeSemanticCodes: string;
+
+  /**
+   * A Chaos-authored code describing this resource error cause, not a provider-native code. Unknown, incomplete, legacy or unmapped cause facts use UnclassifiedResourceError rather than the legacy -1 sentinel. Clients must tolerate unknown future string values.
+   */
+  @added(Versions.v2026_12_01)
+  @visibility(Lifecycle.Read)
+  errorCode: ScenarioResourceErrorCode;
 
   /**
    * The error message.
@@ -442,15 +451,43 @@ model ResourceStateError {
   /**
    * Authored Actions associated with this specific error cause. Omitted when no association information is available.
    */
-  @added(Versions.v2026_11_01)
+  @added(Versions.v2026_12_01)
   @visibility(Lifecycle.Read)
   actionAssociation?: ScenarioErrorActionAssociation;
 }
 
 /**
+ * Chaos-authored semantic codes for resource error causes. These codes do not classify permission failures or establish authorization, successful execution, cleanup or retry safety.
+ */
+@added(Versions.v2026_12_01)
+union ScenarioResourceErrorCode {
+  string,
+
+  /**
+   * The directly targeted resource was positively determined not to exist. Absence of an expanded member does not establish absence of its parent target.
+   */
+  TargetResourceNotFound: "TargetResourceNotFound",
+
+  /**
+   * The action's selection was positively determined to contain no matching target instances. Missing or incomplete selection evidence does not establish this condition.
+   */
+  NoMatchingTargetInstances: "NoMatchingTargetInstances",
+
+  /**
+   * The selected target's recorded state does not permit the requested fault. The error message explains the state; this code alone does not establish whether retry or recovery is safe.
+   */
+  TargetStateNotEligible: "TargetStateNotEligible",
+
+  /**
+   * The resource error cause cannot be assigned a more specific code from the recorded facts, including unknown, incomplete, legacy or unmapped facts. This is an error fallback, not success or a permission classification.
+   */
+  UnclassifiedResourceError: "UnclassifiedResourceError",
+}
+
+/**
  * Recorded attribution of one error cause to authored scenario Actions. Association does not authorize role assignments or establish successful fault execution or cleanup.
  */
-@added(Versions.v2026_11_01)
+@added(Versions.v2026_12_01)
 model ScenarioErrorActionAssociation {
   /**
    * Whether the complete contributor set is recorded. An unknown status does not establish complete association.
@@ -469,7 +506,7 @@ model ScenarioErrorActionAssociation {
 /**
  * An authored Action that contributed to a specific error cause in this result.
  */
-@added(Versions.v2026_11_01)
+@added(Versions.v2026_12_01)
 model ScenarioErrorActionReference {
   /**
    * The exact ScenarioAction.name from the scenario definition snapshot used to produce this result, not the provider fault/version actionId or a name resolved from the current mutable scenario.
@@ -487,7 +524,7 @@ model ScenarioErrorActionReference {
 /**
  * Availability of the complete authored-Action contributor set for an error cause.
  */
-@added(Versions.v2026_11_01)
+@added(Versions.v2026_12_01)
 union ScenarioErrorActionAssociationStatus {
   string,
 
@@ -510,7 +547,7 @@ union ScenarioErrorActionAssociationStatus {
 /**
  * The stage in which an authored Action contributed to an error cause.
  */
-@added(Versions.v2026_11_01)
+@added(Versions.v2026_12_01)
 union ScenarioErrorActionRelation {
   string,
 

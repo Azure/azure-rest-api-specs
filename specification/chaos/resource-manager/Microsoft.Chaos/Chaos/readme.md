@@ -4,6 +4,39 @@
 
 This is the AutoRest configuration file for chaos.
 
+## Scenario error causes in 2026-12-01
+
+The `2026-12-01` contract adds semantic resource-error codes and optional, read-only authored-Action association to the errors used by validation results and scenario runs. The `2026-11-01` and earlier contracts retain their existing fields, descriptions, collection identifiers and error-code representations.
+
+### Resource-error codes
+
+`ResourceStateError.errorCode` remains a string on the wire and uses an extensible Chaos-authored vocabulary. It is not a provider-native code, a permission classification or authorization to change the target.
+
+| Code | Meaning |
+|---|---|
+| `TargetResourceNotFound` | The directly targeted resource was positively determined not to exist. A missing expanded member does not prove that its parent target is absent. |
+| `NoMatchingTargetInstances` | The action's selection was positively determined to contain no matching target instances. Missing selection evidence is not an empty selection. |
+| `TargetStateNotEligible` | The target's recorded state does not permit the requested fault. The message explains the state; the code alone promises no safe retry or recovery outcome. |
+| `UnclassifiedResourceError` | Recorded facts are unknown, incomplete, legacy or unmapped. This resource-only fallback replaces the legacy `"-1"` sentinel in this version. |
+
+Clients must tolerate unknown future string values. Native provider codes must not be copied into this catalogue or classified by matching message text. Code selection is separate from Action-association completeness: a retained error can have known Actions but an unclassified cause, or a known cause without complete Action evidence.
+
+### Authored-Action association
+
+`PermissionError.actionAssociation` and `ResourceStateError.actionAssociation` are optional and read-only. `Complete` carries the exact recorded contributor set for that error cause. An empty complete set requires positive evidence that no authored Action contributed; it must not stand for missing evidence. `Indeterminate` and `NotRecorded` omit `actions`. An omitted association or an unknown future status does not establish completeness.
+
+Each reference uses the exact authored `ScenarioAction.name` from the definition snapshot used for the result, not a provider fault/version `actionId`, a current mutable definition, or an assumed `actionUrn` equivalence. `Validated` identifies validation contribution, `Executed` an actual execution attempt rather than proof of fault effect, and `Requirement` an Action prerequisite without asserting dispatch. Unknown relation values do not prove execution. Association does not establish grant eligibility, successful execution or cleanup.
+
+The permission/resource arrays have no item identifier in this version. Distinct recorded causes can share `resourceId`; do not combine unrelated Action names with one retained explanation or treat these rows as independently addressable resources. No public error-row ID is introduced.
+
+### Examples and scope
+
+The December Scenario CreateOrUpdate, run GET and Action-association LIST examples use the readable scenario name `vm-safety-check`. Scenario names are not required to be GUIDs; the run ID's existing GUID constraint is separate. The GET and LIST examples carry the same terminal result and show both complete and unavailable association.
+
+The same error models apply to `ValidationProperties.validationErrors` and `ScenarioRunProperties.executionErrors`. The initial validation POST remains bodyless `202`; these additions do not introduce a validation GET, new route, response status or polling pattern. Per-Action errors, warnings, failure suppression and all other existing features remain available.
+
+This section defines the versioned contract, not deployed implementation or release acceptance. Backend fact capture/classification, Gateway projection, SDK/Portal consumption and rollout need their own implementation and validation. Generating models does not by itself replace runtime `"-1"` values or prove complete association.
+
 ## Conditional PUT in 2026-11-01
 
 Only `Workspaces_CreateOrUpdate`, `Scenarios_CreateOrUpdate`, and
@@ -636,7 +669,16 @@ These are the global settings for the chaos.
 title: ChaosManagementClient
 description: Chaos Management Client
 openapi-type: arm
-tag: package-2026-11
+tag: package-2026-12
+```
+
+### Tag: package-2026-12
+
+These settings apply only when `--tag=package-2026-12` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-12'
+input-file:
+  - stable/2026-12-01/openapi.json
 ```
 
 ### Tag: package-2026-11
@@ -1339,11 +1381,13 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 ```yaml
 directive:
-  # Locked OAV matches literal path suffixes; both forms keep Windows and POSIX scoped to November.
+  # Locked OAV matches literal path suffixes; list both forms for each applicable version.
   - suppress: RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE
     from:
       - stable/2026-11-01/openapi.json
       - stable\2026-11-01\openapi.json
+      - stable/2026-12-01/openapi.json
+      - stable\2026-12-01\openapi.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}"].put.responses["200"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}"].put.responses["201"]
@@ -1352,6 +1396,8 @@ directive:
     from:
       - stable/2026-11-01/openapi.json
       - stable\2026-11-01\openapi.json
+      - stable/2026-12-01/openapi.json
+      - stable\2026-12-01\openapi.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios/{scenarioName}"].put.responses["200"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios/{scenarioName}"].put.responses["201"]
@@ -1360,6 +1406,8 @@ directive:
     from:
       - stable/2026-11-01/openapi.json
       - stable\2026-11-01\openapi.json
+      - stable/2026-12-01/openapi.json
+      - stable\2026-12-01\openapi.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios/{scenarioName}/configurations/{scenarioConfigurationName}"].put.responses["200"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/scenarios/{scenarioName}/configurations/{scenarioConfigurationName}"].put.responses["201"]

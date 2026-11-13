@@ -1,8 +1,8 @@
 {
   "parameters": {
-    "api-version": "2026-11-01",
+    "api-version": "2026-12-01",
     "workspaceName": "exampleWorkspace",
-    "scenarioName": "12345678-1234-1234-1234-123456789012",
+    "scenarioName": "vm-safety-check",
     "resourceGroupName": "exampleRG",
     "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291"
   },
@@ -11,12 +11,12 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/12345678-1234-1234-1234-123456789012/runs/abcd1234-5678-9012-3456-789012345678",
+            "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/vm-safety-check/runs/abcd1234-5678-9012-3456-789012345678",
             "name": "abcd1234-5678-9012-3456-789012345678",
             "type": "Microsoft.Chaos/workspaces/scenarios/runs",
             "properties": {
               "scenarioConfigurationName": "config-5678-9012-3456-789012345678",
-              "scenarioName": "12345678-1234-1234-1234-123456789012",
+              "scenarioName": "vm-safety-check",
               "workspaceName": "exampleWorkspace",
               "managedIdentityPrincipalId": "d04ab567-2c07-43ef-a7f4-4527626b7f56",
               "status": "Failed",
@@ -29,6 +29,12 @@
                 },
                 {
                   "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM3"
+                },
+                {
+                  "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleMissingVm"
+                },
+                {
+                  "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachineScaleSets/exampleEmptyVmss"
                 }
               ],
               "executionErrors": {
@@ -76,7 +82,7 @@
                 "resource": [
                   {
                     "resourceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM1",
-                    "errorCode": "-1",
+                    "errorCode": "TargetStateNotEligible",
                     "errorMessage": "The shutdown action rejected the target's current power state.",
                     "remediationUri": "https://aka.ms/azure-chaos-studio",
                     "actionAssociation": {
@@ -91,7 +97,7 @@
                   },
                   {
                     "resourceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM1",
-                    "errorCode": "-1",
+                    "errorCode": "UnclassifiedResourceError",
                     "errorMessage": "The restart action could not proceed while the target was updating.",
                     "remediationUri": "https://aka.ms/azure-chaos-studio",
                     "actionAssociation": {
@@ -106,7 +112,7 @@
                   },
                   {
                     "resourceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM3",
-                    "errorCode": "-1",
+                    "errorCode": "UnclassifiedResourceError",
                     "errorMessage": "The target resource failed validation.",
                     "remediationUri": "https://aka.ms/azure-chaos-studio",
                     "actionAssociation": {
@@ -115,14 +121,44 @@
                   },
                   {
                     "resourceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM2",
-                    "errorCode": "-1",
+                    "errorCode": "UnclassifiedResourceError",
                     "errorMessage": "The target resource could not be validated.",
                     "remediationUri": "https://aka.ms/azure-chaos-studio"
+                  },
+                  {
+                    "resourceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleMissingVm",
+                    "errorCode": "TargetResourceNotFound",
+                    "errorMessage": "The virtual machine targeted by the action no longer exists.",
+                    "remediationUri": "https://aka.ms/azure-chaos-studio",
+                    "actionAssociation": {
+                      "status": "Complete",
+                      "actions": [
+                        {
+                          "actionName": "shutdownMissingVm",
+                          "relation": "Executed"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "resourceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachineScaleSets/exampleEmptyVmss",
+                    "errorCode": "NoMatchingTargetInstances",
+                    "errorMessage": "No instances in the scale set match the action's target selection.",
+                    "remediationUri": "https://aka.ms/azure-chaos-studio",
+                    "actionAssociation": {
+                      "status": "Complete",
+                      "actions": [
+                        {
+                          "actionName": "shutdownEmptyScaleSet",
+                          "relation": "Executed"
+                        }
+                      ]
+                    }
                   }
                 ]
               },
-              "startTime": "2026-11-01T10:00:00.000Z",
-              "endTime": "2026-11-01T10:02:00.000Z"
+              "startTime": "2026-12-01T10:00:00.000Z",
+              "endTime": "2026-12-01T10:02:00.000Z"
             }
           }
         ]
