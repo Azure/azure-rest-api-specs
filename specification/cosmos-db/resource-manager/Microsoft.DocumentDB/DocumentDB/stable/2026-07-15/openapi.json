@@ -17817,6 +17817,68 @@
         }
       }
     },
+    "DataMaskingPolicy": {
+      "type": "object",
+      "description": "Data masking policy for the container.",
+      "properties": {
+        "includedPaths": {
+          "type": "array",
+          "description": "List of JSON paths to include in the masking policy.",
+          "items": {
+            "$ref": "#/definitions/DataMaskingPolicyIncludedPathsItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "excludedPaths": {
+          "type": "array",
+          "description": "List of JSON paths to exclude from masking.",
+          "items": {
+            "$ref": "#/definitions/DataMaskingPolicyExcludedPathsItem"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DataMaskingPolicyExcludedPathsItem": {
+      "type": "object",
+      "description": "JSON path to exclude from masking.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The JSON path to exclude from masking (e.g. \"/id\")."
+        }
+      },
+      "required": [
+        "path"
+      ]
+    },
+    "DataMaskingPolicyIncludedPathsItem": {
+      "type": "object",
+      "description": "JSON path to include in the masking policy.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The JSON path to apply masking (e.g. \"/contact/phones\")."
+        },
+        "strategy": {
+          "type": "string",
+          "description": "Masking strategy to apply (e.g. \"MaskSubstring\")."
+        },
+        "startPosition": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start position for substring masking (when applicable)."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length of substring to mask (when applicable)."
+        }
+      },
+      "required": [
+        "path"
+      ]
+    },
     "DataTransferRegionalServiceResource": {
       "type": "object",
       "description": "Resource for a regional service location.",
@@ -23835,6 +23897,10 @@
         "fullTextPolicy": {
           "$ref": "#/definitions/FullTextPolicy",
           "description": "The FullText policy for the container."
+        },
+        "dataMaskingPolicy": {
+          "$ref": "#/definitions/DataMaskingPolicy",
+          "description": "The Data Masking policy for the container."
         }
       },
       "required": [

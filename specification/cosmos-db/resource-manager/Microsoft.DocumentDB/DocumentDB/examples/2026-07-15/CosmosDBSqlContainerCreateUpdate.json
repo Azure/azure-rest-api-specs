@@ -129,6 +129,24 @@
             ],
             "policyFormatVersion": 2
           },
+          "dataMaskingPolicy": {
+            "includedPaths": [
+              {
+                "path": "/"
+              },
+              {
+                "path": "/contact/phones",
+                "strategy": "MaskSubstring",
+                "startPosition": 3,
+                "length": 10
+              }
+            ],
+            "excludedPaths": [
+              {
+                "path": "/id"
+              }
+            ]
+          },
           "computedProperties": [
             {
               "name": "cp_lowerName",
@@ -277,6 +295,25 @@
                 }
               ],
               "policyFormatVersion": 1
+            },
+            "dataMaskingPolicy": {
+              "includedPaths": [
+                {
+                  "path": "/",
+                  "strategy": "Default"
+                },
+                {
+                  "path": "/contact/phones",
+                  "strategy": "MaskSubstring",
+                  "startPosition": 3,
+                  "length": 10
+                }
+              ],
+              "excludedPaths": [
+                {
+                  "path": "/id"
+                }
+              ]
             },
             "computedProperties": [
               {
