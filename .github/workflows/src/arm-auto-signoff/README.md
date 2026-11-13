@@ -138,6 +138,33 @@ if it evaluates while required statuses are pending or missing, it requests revo
 
 The model proposes; trusted code validates and publishes. Any doubt ends as "not Passed".
 
+## Failure recovery
+
+Before retrying, inspect the current head's `ARM Semantic Review` status and its linked run.
+Check for an active or queued review, then use an explicit `/arm-review` only when another
+review is needed. Keep `ARMInitialReviewRequested` and existing status evidence intact;
+rerunning Summarize Checks is not a review retry.
+
+- **Integrity-filtered or inaccessible evidence:** have a maintainer resolve the access or
+  admission policy before retrying. Do not remove integrity filtering or treat successful
+  pagination as proof that all discussion was available. Use human ARM review when complete
+  evidence remains inaccessible.
+- **Unavailable reviewer or detector model:** correct the workflow's pinned model before
+  retrying. Repeating the same request does not restore model availability.
+- **Runner dependency or download failure:** after the dependency service recovers, request
+  one explicit retry. Do not repeatedly queue reviews during an outage.
+- **Stale review:** request a review of the current head after the PR stabilizes. A result for
+  an older SHA cannot authorize the new head.
+- **Review publication failure:** inspect the semantic result separately. A failed formal
+  review submission does not invalidate an otherwise passing semantic result; do not rerun AI
+  just to obtain a redundant approval. If GitHub rejects inline findings on a large diff,
+  have a maintainer recover the complete verified findings at the reviewed SHA before posting
+  them through a supported comment surface. A summary's counts alone are not the findings,
+  and a posting failure does not clear Blocking evidence.
+
+For a failed Universal or Update Labels handoff, retry that downstream workflow with the
+trusted correlation described above instead of repeating the AI review.
+
 ## Signoff policy
 
 ```text
