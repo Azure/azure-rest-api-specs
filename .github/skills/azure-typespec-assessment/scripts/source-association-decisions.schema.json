@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TypeSpec source-only association decisions",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "judgmentHash", "sourceIndexHash", "selections"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "judgmentHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "sourceIndexHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "selections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["itemId", "outcome", "selectedDeclarationIds", "rationale"],
+        "properties": {
+          "itemId": { "type": "string", "minLength": 1 },
+          "outcome": { "enum": ["keep", "refine", "associate", "unresolved"] },
+          "selectedDeclarationIds": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "rationale": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

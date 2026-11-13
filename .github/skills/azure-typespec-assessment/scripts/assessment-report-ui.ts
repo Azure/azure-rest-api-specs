@@ -1,10 +1,10 @@
-import { isDeepStrictEqual } from "node:util";
 import {
   hasUnavailableHeadBaseline,
   UNAVAILABLE_HEAD_BASELINE_MESSAGE,
 } from "./comparison-execution.ts";
 import { DOCUMENT_QUALITY_CRITERION } from "./document-quality-input.ts";
 import { semanticGroupingPresentation } from "./semantic-assessment-scope.ts";
+import { canonicalJson } from "./stable-id.ts";
 
 type AssessmentFact = import("./runtime-types.ts").AssessmentFact;
 
@@ -13,8 +13,6 @@ type AssessmentFinding = import("./runtime-types.ts").AssessmentFinding;
 type AssessmentMethodGroup = import("./runtime-types.ts").AssessmentMethodGroup;
 
 type AssessmentOutput = import("./runtime-types.ts").AssessmentOutput;
-
-type AssessmentTypeImpact = import("./runtime-types.ts").AssessmentTypeImpact;
 
 type DocumentQualityDimension = import("./runtime-types.ts").DocumentQualityDimension;
 
@@ -52,6 +50,12 @@ type ReportRenderHelpers = {
   }[];
   complianceCode: (snippets: unknown[]) => string;
   renderSourceHunks: (sources: SourceChange[]) => string;
+  renderCompleteModelDeclarations: (sources: SourceChange[], declarationNames?: string[]) => string;
+  renderCompleteSourceDeclarations?: (sources: SourceChange[]) => string;
+  focusedSourceChanges: (
+    findings: AssessmentFinding[],
+    declarationNames?: string[],
+  ) => SourceChange[];
   sourceLinks: (sources: SourceChange[]) => string;
   legacyEvidence: (evidence: string[]) => string;
   contractAreaParts: (row: ReportRow) => {
@@ -127,13 +131,6 @@ type TypePresentation = {
   anchorId: string;
   semanticIds: string[];
 };
-type DownstreamRootCauseReference = {
-  fromFactId?: string;
-  toFactId?: string;
-  kind: string;
-  memberName?: string;
-  location?: string;
-};
 type ReferencePath = {
   location?: string;
   role: string;
@@ -166,15 +163,6 @@ const symbolOf = (fact: AssessmentFact | undefined) =>
 
 const impactsOf = (dimension: Partial<DownstreamDimension>) =>
   dimension.typeImpacts ?? dimension.sharedTypeImpacts ?? [];
-
-const rootsOf = (
-  item:
-    | {
-        rootCauseIds?: string[];
-        rootCauseId?: string;
-      }
-    | undefined,
-) => unique(item?.rootCauseIds ?? [item?.rootCauseId]);
 
 const shortName = (symbol: string | undefined) =>
   String(symbol ?? "Unknown method")
@@ -349,229 +337,14 @@ function sdkTypeValue(value: unknown) {
     : undefined;
 }
 
-/**
- * Raw graph enrichment is opt-in. IDs alone are insufficient: verify the recorded
- * facts and candidates before using edges from another artifact.
- */
-
-export function validateDownstreamInput(
-  dimension: Partial<DownstreamDimension>,
-  raw: DownstreamAnalysis | undefined,
-) {
-  if (!raw) return;
-  if (!raw.facts || !Array.isArray(raw.rootCauses)) {
-    throw new Error("Downstream input must contain facts and rootCauses.");
-  }
-  const roots = new Map(raw.rootCauses.map((root) => [root.id, root]));
-  const findings = dimension.findings ?? [];
-  const candidateMap = new Map(
-    (raw.candidates ?? []).map((candidate) => [candidate.id, candidate]),
-  );
-  for (const item of [...impactsOf(dimension), ...findings]) {
-    for (const id of rootsOf(item)) {
-      if (!roots.has(id))
-        throw new Error(`Downstream input snapshot mismatch: missing root ${id}.`);
-    }
-  }
-  for (const finding of findings) {
-    const evidence = finding.evidence ?? [];
-    const ids = finding.evidenceFactIds ?? unique(evidence.map((fact) => fact.id));
-    if (rootsOf(finding).length && !ids.length) {
-      throw new Error(`Downstream input cannot verify evidence for ${finding.id}.`);
-    }
-    for (const id of rootsOf(finding)) {
-      const root = roots.get(id);
-      if (!root) throw new Error(`Downstream input snapshot mismatch: missing root ${id}.`);
-      if (
-        ![...(root.directCandidateIds ?? []), ...(root.propagatedCandidateIds ?? [])].includes(
-          finding.id,
-        )
-      ) {
-        throw new Error(
-          `Downstream input snapshot mismatch: root ${id} has no matching confirmed finding ${finding.id}.`,
-        );
-      }
-    }
-    for (const id of ids) {
-      const recorded = evidence.find((fact) => fact.id === id);
-      if (!recorded || !raw.facts[id] || !isDeepStrictEqual(recorded, raw.facts[id])) {
-        throw new Error(`Downstream input snapshot mismatch: evidence fact ${id}.`);
-      }
-    }
-    const candidate = candidateMap.get(finding.id);
-    if (
-      candidate &&
-      (candidate.rule !== finding.rule ||
-        candidate.crossLanguageDefinitionId !== finding.crossLanguageDefinitionId ||
-        !isDeepStrictEqual([...(candidate.evidenceFactIds ?? [])].sort(), [...ids].sort()))
-    ) {
-      throw new Error(`Downstream input snapshot mismatch: candidate ${finding.id}.`);
-    }
-  }
-  for (const impact of impactsOf(dimension)) {
-    for (const id of rootsOf(impact)) {
-      const root = roots.get(id);
-      if (!root) throw new Error(`Downstream input snapshot mismatch: missing root ${id}.`);
-      const rootCandidates = new Set([
-        ...(root.directCandidateIds ?? []),
-        ...(root.propagatedCandidateIds ?? []),
-      ]);
-      if (!(impact.findingIds ?? []).some((findingId) => rootCandidates.has(findingId))) {
-        throw new Error(
-          `Downstream input snapshot mismatch: root ${id} has no matching confirmed finding.`,
-        );
-      }
-    }
-  }
-}
-
 export function downstreamPresentationDimension(
   assessment: AssessmentOutput,
-  options: {
+  _options: {
     downstreamAssessment?: AssessmentOutput;
     downstreamInput?: DownstreamAnalysis;
   } = {},
 ): DownstreamDimension {
-  const dimension = assessment.dimensions.downstream;
-  const replay = options.downstreamAssessment;
-  if (!replay) return dimension;
-  if (!options.downstreamInput) {
-    throw new Error("A downstream assessment sidecar requires downstreamInput.");
-  }
-  if (
-    !assessment.repository ||
-    !assessment.comparison ||
-    !isDeepStrictEqual(assessment.repository, replay.repository) ||
-    !isDeepStrictEqual(assessment.comparison, replay.comparison)
-  ) {
-    throw new Error("Downstream assessment provenance mismatch: repository or comparison.");
-  }
-  const findings = dimension.findings ?? [];
-  const replayFindings = replay.dimensions?.downstream?.findings ?? [];
-  const replayById = new Map(replayFindings.map((finding) => [finding.id, finding]));
-  if (findings.length !== replayFindings.length || replayById.size !== findings.length) {
-    throw new Error("Downstream assessment provenance mismatch: finding coverage.");
-  }
-
-  const withoutRoots = (finding: AssessmentFinding) => {
-    const result = { ...finding };
-    delete result.rootCauseIds;
-    return result;
-  };
-  for (const finding of findings) {
-    const matched = replayById.get(finding.id);
-    if (!matched || !isDeepStrictEqual(withoutRoots(finding), withoutRoots(matched))) {
-      throw new Error(`Downstream assessment provenance mismatch: finding ${finding.id}.`);
-    }
-  }
-  // Replace only presentation root associations. All judgments, facts, grouping,
-  // method contracts and semantic relationships still come from the input.
-
-  const presentation: DownstreamDimension = {
-    ...dimension,
-    findings: findings.map((finding) => ({
-      ...finding,
-      rootCauseIds: rootsOf(replayById.get(finding.id)),
-    })),
-  };
-  const impacts = impactsOf(dimension).map((impact) => ({
-    ...impact,
-    rootCauseIds: unique(
-      (impact.findingIds ?? []).flatMap((id) => rootsOf(replayById.get(id) ?? {})),
-    ),
-  }));
-  if (dimension.typeImpacts) presentation.typeImpacts = impacts;
-  else presentation.sharedTypeImpacts = impacts;
-  validateDownstreamInput(presentation, options.downstreamInput);
-  return presentation;
-}
-
-function mappedPaths(
-  impact: AssessmentTypeImpact,
-  type: string,
-  raw: DownstreamAnalysis | undefined,
-) {
-  if (!raw) return [];
-
-  const result: Map<
-    string,
-    {
-      symbol: string;
-      projectId?: string;
-      paths: ReferencePath[];
-    }
-  > = new Map();
-  const rootIds = new Set(rootsOf(impact));
-  for (const cause of raw.rootCauses.filter((root) => rootIds.has(root.id))) {
-    const edges = cause.referenceEvidence ?? [];
-    for (const methodId of cause.methodFactIds ?? []) {
-      const method = raw.facts[methodId];
-      const methodSymbol = symbolOf(method);
-      if (method?.factKind !== "method" || !methodSymbol) continue;
-      for (const start of edges.filter((edge) => edge.fromFactId === methodId)) {
-        if (!start.toFactId) continue;
-
-        const queue: {
-          id: string;
-          path: DownstreamRootCauseReference[];
-        }[] = [{ id: start.toFactId, path: [start] }];
-
-        const visited: Set<string> = new Set();
-        while (queue.length) {
-          const current = queue.shift();
-          if (!current) break;
-          if (visited.has(current.id)) continue;
-          visited.add(current.id);
-          const fact = raw.facts[current.id];
-          if (
-            !fact ||
-            fact.projectId !== method.projectId ||
-            fact.comparisonRole !== method.comparisonRole ||
-            fact.sourceCommit !== method.sourceCommit ||
-            fact.apiVersion !== method.apiVersion
-          )
-            continue;
-          if (symbolOf(fact) === type) {
-            const key = `${method.projectId ?? ""}:${methodSymbol}`;
-
-            const mapping: {
-              symbol: string;
-              projectId?: string;
-              paths: ReferencePath[];
-            } = result.get(key) ?? {
-              symbol: methodSymbol,
-              projectId: method.projectId,
-              paths: [],
-            };
-            mapping.paths.push({
-              location: start.location,
-              role: method.comparisonRole ?? "unavailable",
-              path:
-                current.path
-                  .map((edge) => edge.memberName)
-                  .filter(Boolean)
-                  .join(".") || "(returned type)",
-            });
-            result.set(key, mapping);
-            break;
-          }
-          for (const edge of edges) {
-            if (
-              edge.fromFactId === current.id &&
-              edge.toFactId &&
-              edge.location === start.location
-            ) {
-              queue.push({ id: edge.toFactId, path: [...current.path, edge] });
-            }
-          }
-        }
-      }
-    }
-  }
-  return [...result.values()].map((mapping) => ({
-    ...mapping,
-    paths: [...new Map(mapping.paths.map((item) => [JSON.stringify(item), item])).values()],
-  }));
+  return assessment.dimensions.downstream;
 }
 
 function factPair(finding: AssessmentFinding, kind?: string) {
@@ -586,19 +359,60 @@ function typeRows(type: string, findings: AssessmentFinding[]): ReportRow[] {
   const rows: ReportRow[] = [];
   for (const finding of findings) {
     const { before, after } = factPair(finding);
+    const propertyNames = unique(
+      [...(before?.properties ?? []), ...(after?.properties ?? [])].map(
+        (property) => property.name,
+      ),
+    );
+    const changedNames = propertyNames.filter(
+      (name) =>
+        finding.actual ===
+        `${finding.crossLanguageDefinitionId ?? type}.${name} changed type, optionality, flattening, or access.`,
+    );
     const name =
+      (changedNames.length === 1 ? changedNames[0] : undefined) ??
       finding.actual?.match(/\bproperty\s+([A-Za-z_$][\w$]*)\b/)?.[1] ??
       finding.expected?.match(/\bproperty\s+([A-Za-z_$][\w$]*)\b/)?.[1];
-    if (finding.rule === "model-property-removed" && name && before) {
-      const previous = before.properties?.find((property) => property.name === name);
+    if (
+      [
+        "model-property-removed",
+        "model-property-changed",
+        "model-property-added-required",
+      ].includes(finding.rule ?? "") &&
+      name &&
+      propertyNames.includes(name)
+    ) {
+      const previous = before?.properties?.find((property) => property.name === name);
       const current = after?.properties?.find((property) => property.name === name);
+      type Property = NonNullable<AssessmentFact["properties"]>[number];
+      const changedType =
+        canonicalJson(previous?.type ?? null) !== canonicalJson(current?.type ?? null);
+      const sameTypeLabel =
+        previous && current && sdkTypeName(previous.type) === sdkTypeName(current.type);
+      const display = (property: Property | undefined, missing: string) => {
+        if (!property) return missing;
+        const parts = [
+          changedType && sameTypeLabel ? JSON.stringify(property.type) : sdkTypeName(property.type),
+          property.optional === true
+            ? "optional"
+            : property.optional === false
+              ? "required"
+              : "optionality not recorded",
+        ];
+        for (const field of ["access", "flatten", "serializedName"] as const) {
+          if (previous && current && previous[field] !== current[field]) {
+            parts.push(
+              `${field}: ${property[field] === undefined ? "not recorded" : String(property[field])}`,
+            );
+          }
+        }
+        return parts.join(" · ");
+      };
       rows.push({
         area: "SDK type member",
         label: name,
-        before: previous
-          ? `${sdkTypeName(previous.type)}${previous.optional ? "?" : ""}`
-          : finding.expected,
-        after: current ? sdkTypeName(current.type) : "removed",
+        before: before ? display(previous, "not present") : "Baseline member evidence unavailable",
+        after: after ? display(current, "removed") : "Target member evidence unavailable",
       });
     } else if (finding.rule === "public-surface-changed") {
       const surface = (fact: AssessmentFact | undefined) =>
@@ -660,19 +474,14 @@ function typeRows(type: string, findings: AssessmentFinding[]): ReportRow[] {
 
 export function downstreamMethodData(
   dimension: Partial<DownstreamDimension> = {},
-  raw?: DownstreamAnalysis,
+  _raw?: DownstreamAnalysis,
 ) {
-  validateDownstreamInput(dimension, raw);
-
   const methods: MethodPresentation[] = [];
-
-  const aliases: Map<string, MethodPresentation> = new Map();
 
   const key = (projectId: string | undefined, symbol: string) => `${projectId ?? ""}:${symbol}`;
 
   const addMethod = (method: MethodPresentation) => {
     methods.push(method);
-    for (const alias of method.aliases) aliases.set(key(method.projectId, alias), method);
     return method;
   };
 
@@ -713,20 +522,6 @@ export function downstreamMethodData(
       );
       if (!findings.length) continue;
       findings.forEach((finding) => represented.add(finding.id));
-      let mapped = mappedPaths(impact, type, raw);
-      // Legacy locations are a root-wide union, not evidence of a method's path.
-      // Preserve method associations, but never display that union as precise.
-      const mappedSymbols = new Set(mapped.map((item) => item.symbol));
-      mapped = [
-        ...mapped,
-        ...(impact.affectedMethods ?? [])
-          .filter((item) => !mappedSymbols.has(item.symbol))
-          .map((item) => ({
-            symbol: item.symbol,
-            projectId: impact.projectId,
-            paths: [],
-          })),
-      ];
       const findingIntentIds = unique(
         findings.flatMap((finding) => finding.relatedSemanticIntents ?? []),
       );
@@ -736,45 +531,13 @@ export function downstreamMethodData(
         type,
         findings,
         rows: typeRows(type, findings),
-        mapped,
+        mapped: [],
         anchorId: `downstream-type-${anchor(`${impact.projectId ?? ""}:${type}`)}`,
         semanticIds: findingIntentIds.length
           ? findingIntentIds
           : unique(impact.relatedSemanticIntents ?? []),
       };
       types.push(item);
-      for (const mapping of mapped) {
-        const projectId = mapping.projectId ?? impact.projectId;
-        const candidates = projectId
-          ? []
-          : methods.filter((candidate) => candidate.aliases.includes(mapping.symbol));
-        const method =
-          aliases.get(key(projectId, mapping.symbol)) ??
-          (candidates.length === 1 ? candidates[0] : undefined) ??
-          addMethod({
-            symbol: mapping.symbol,
-            projectId,
-            name: shortName(mapping.symbol),
-            aliases: [mapping.symbol],
-            rows: [],
-            types: [],
-            semanticIds: [],
-            findingIds: [],
-          });
-        const existing = method.types.find(
-          (reference) => reference.type.id === item.id && reference.type.type === item.type,
-        );
-        if (existing) {
-          existing.paths = [
-            ...new Map(
-              [...existing.paths, ...mapping.paths].map((path) => [JSON.stringify(path), path]),
-            ).values(),
-          ];
-        } else {
-          method.types.push({ type: item, paths: mapping.paths });
-        }
-        method.semanticIds = unique([...method.semanticIds, ...item.semanticIds]);
-      }
     }
   }
   for (const finding of (dimension.findings ?? []).filter(
@@ -793,7 +556,7 @@ export function downstreamMethodData(
     });
   }
   for (const method of methods) {
-    method.cause = method.group ? (method.types.length ? "mixed" : "direct") : "indirect";
+    method.cause = "direct";
     method.id = `downstream-method-${anchor(key(method.projectId, method.symbol))}`;
   }
   return {
@@ -1237,6 +1000,9 @@ export function renderReportSections(
     complianceFindingGroups,
     complianceCode,
     renderSourceHunks,
+    renderCompleteModelDeclarations,
+    renderCompleteSourceDeclarations,
+    focusedSourceChanges,
     sourceLinks,
     legacyEvidence,
     contractAreaParts,
@@ -1317,6 +1083,38 @@ export function renderReportSections(
     return `<div class="breaking-rationale"><strong>Why this is breaking:</strong> ${body}</div>`;
   };
 
+  const relevantSource = (
+    findings: AssessmentFinding[],
+    declarationNames: string[] = [],
+    completeModel = false,
+  ) => {
+    const sources = focusedSourceChanges(findings, declarationNames);
+    const unresolved = findings
+      .map((finding) => finding.sourceReview)
+      .filter((review) => review?.outcome === "unresolved");
+    const completeDeclarations = completeModel
+      ? renderCompleteModelDeclarations(sources, declarationNames) ||
+        renderCompleteSourceDeclarations?.(sources) ||
+        ""
+      : findings.some((finding) => finding.sourceReview?.selectedDeclarations.length)
+        ? (renderCompleteSourceDeclarations?.(sources) ?? "")
+        : "";
+    return sources.length
+      ? `<details class="report-source"><summary>${completeModel && completeDeclarations ? "Relevant TypeSpec model" : "Relevant TypeSpec source"}</summary>${completeDeclarations || renderSourceHunks(sources)}<p class="sources">${sourceLinks(sources)}</p></details>`
+      : unresolved.length
+        ? `<p class="sources">Relevant TypeSpec source could not be established. ${escape(unique(unresolved.map((review) => review?.rationale)).join(" "))}</p>`
+        : '<p class="sources">Finding-specific TypeSpec source unavailable.</p>';
+  };
+  const restSourceDeclarationNames = (findings: AssessmentFinding[], fallbackIdentity: string) => {
+    const names = findings.flatMap((finding) => {
+      const delta = restContractDelta(finding);
+      if (delta.identity === finding.operationIds?.[0]) return [];
+      const member = delta.area?.split(".").at(-1)?.replace(/\[\]$/, "");
+      return member && member !== delta.area ? [`${delta.identity}.${member}`] : [delta.identity];
+    });
+    return unique(names).length ? unique(names) : [fallbackIdentity];
+  };
+
   const legacyCard = (finding: LegacyAssessmentFinding, downstream: boolean = false) =>
     `<details class="report-card legacy-finding" id="${downstream ? "downstream" : "finding"}-${anchor(finding.id)}">${summary(
       escape(finding.title),
@@ -1326,6 +1124,10 @@ export function renderReportSections(
     )}<div class="report-card-body"><p class="mapping-unavailable">${downstream ? "Normalized SDK method mapping" : "Normalized operation mapping"} unavailable in this historical finding; recorded evidence follows.</p>${legacyEvidence(finding.evidence ?? [])}</div></details>`;
 
   const restFindings = dimensions.rest.findings ?? [];
+  const operationFinding = (finding: AssessmentFinding) => {
+    const identity = restContractDelta(finding).identity ?? "Unmapped REST contract change";
+    return (finding.operationIds ?? []).includes(identity);
+  };
 
   const operations: Map<string, RestCard> = new Map();
 
@@ -1333,8 +1135,9 @@ export function renderReportSections(
     `${operation.projectId ?? ""}:${operation.operationId}:${operation.apiVersion ?? ""}`;
   for (const item of items) {
     for (const operation of item.operations ?? []) {
-      const findings = restFindings.filter((finding) =>
-        findingMatchesOperation(finding, operation, item.id),
+      const findings = restFindings.filter(
+        (finding) =>
+          operationFinding(finding) && findingMatchesOperation(finding, operation, item.id),
       );
       if (!findings.length) continue;
       const key = operationKey(operation);
@@ -1356,7 +1159,9 @@ export function renderReportSections(
   const mappedRest = new Set(
     [...operations.values()].flatMap((entry) => entry.findings.map((finding) => finding.id)),
   );
-  for (const finding of restFindings.filter((finding) => !mappedRest.has(finding.id))) {
+  for (const finding of restFindings.filter(
+    (finding) => operationFinding(finding) && !mappedRest.has(finding.id),
+  )) {
     const facts = (finding.evidence ?? []).filter((fact) => fact.operationId);
     for (const operationId of finding.operationIds ?? []) {
       const fact =
@@ -1403,79 +1208,115 @@ export function renderReportSections(
         model: row.identity !== entry.operation.operationId ? row.identity : undefined,
       };
     });
+
+  const modelGroups = new Map<
+    string,
+    {
+      identity: string;
+      findings: AssessmentFinding[];
+      semanticIds: string[];
+    }
+  >();
+  for (const finding of restFindings.filter((item) => !operationFinding(item))) {
+    const identity = restContractDelta(finding).identity ?? "Unmapped REST contract change";
+    const group: {
+      identity: string;
+      findings: AssessmentFinding[];
+      semanticIds: string[];
+    } = modelGroups.get(identity) ?? {
+      identity,
+      findings: [],
+      semanticIds: [],
+    };
+    group.findings.push(finding);
+    group.semanticIds.push(...(finding.relatedSemanticIntents ?? []));
+    modelGroups.set(identity, group);
+  }
+  const restModelCards = [...modelGroups.values()].map((group) => ({
+    ...group,
+    findings: [...new Map(group.findings.map((finding) => [finding.id, finding])).values()],
+    semanticIds: unique(group.semanticIds),
+  }));
+  const operationCards = restCards
+    .map(
+      (entry) =>
+        `<details class="report-card rest-contract-card" id="${entry.id}">${summary(
+          escape(entry.operation.operationId),
+          `<span class="report-http">${escape((entry.operation.method ?? "").toUpperCase())}</span> <code>${escape(entry.operation.path ?? "Operation path unavailable")}</code> · ${escape(entry.operation.apiVersion ?? "Version unavailable")}`,
+          count(`${entry.findings.length} changes`),
+          affectedIntents(entry.semanticIds),
+        )}<div class="report-card-body">${findingAnchors(entry.findings)}${table(restRows(entry))}${rationale(entry.findings)}${relevantSource(entry.findings, restSourceDeclarationNames(entry.findings, entry.operation.operationId))}</div></details>`,
+    )
+    .join("");
+  const modelCards = restModelCards
+    .map((group) => {
+      const rows = group.findings.map((finding) => {
+        const row = restContractDelta(finding);
+        const parts = contractAreaParts(row);
+        return { ...row, area: parts.areaKind, label: parts.member };
+      });
+      return `<details class="report-card rest-contract-card" id="rest-contract-${anchor(group.identity)}">${summary(escape(group.identity), "The normalized REST model/type contract changes.", `<span class="report-badge">${group.findings.length} contract changes</span>`, affectedIntents(group.semanticIds))}<div class="report-card-body">${findingAnchors(group.findings)}${table(rows)}${rationale(group.findings)}${relevantSource(group.findings, restSourceDeclarationNames(group.findings, group.identity), true)}</div></details>`;
+    })
+    .join("");
   const restBody =
-    restCards
-      .map(
-        (entry) =>
-          `<details class="report-card rest-contract-card" id="${entry.id}">${summary(
-            escape(entry.operation.operationId),
-            `<span class="report-http">${escape((entry.operation.method ?? "").toUpperCase())}</span> <code>${escape(entry.operation.path ?? "Operation path unavailable")}</code> · ${escape(entry.operation.apiVersion ?? "Version unavailable")}`,
-            count(`${entry.findings.length} changes`),
-            affectedIntents(entry.semanticIds),
-          )}<div class="report-card-body">${findingAnchors(entry.findings)}${table(restRows(entry))}${rationale(entry.findings)}</div></details>`,
-      )
-      .join("") +
-    restFindings
-      .filter((finding) => !mappedRest.has(finding.id))
-      .map(
-        (finding) =>
-          `<details class="report-card">${summary(escape(finding.rule), "Confirmed REST finding; operation mapping unavailable.", status("failed"), affectedIntents(finding.relatedSemanticIntents ?? []))}<div class="report-card-body">${findingAnchors([finding])}${table([{ area: "REST contract", label: finding.rule, before: finding.expected, after: finding.actual }])}${rationale([finding])}</div></details>`,
-      )
-      .join("") +
+    `${operationCards ? `<h3>Operation changes</h3>${operationCards}` : ""}${modelCards ? `<h3>Model and type changes</h3>${modelCards}` : ""}` +
     (dimensions.rest.legacyFindings ?? []).map((finding) => legacyCard(finding)).join("");
 
-  const locations: Record<string, string> = {
-    "request-query": "Input / query",
-    "request-header": "Input / header",
-    "request-body": "Input / body",
-    "request-path": "Input / path",
-    "response-header": "Output / header",
-    "response-body": "Output / body",
+  const typeLabel = (type: TypePresentation) => {
+    const names = unique(
+      type.findings.flatMap((finding) =>
+        (finding.evidence ?? [])
+          .filter(
+            (fact) => fact.factKind === "model" && fact.crossLanguageDefinitionId === type.type,
+          )
+          .map((fact) => fact.name),
+      ),
+    );
+    return names.length === 1 ? names[0] : type.type.split(".").at(-1);
   };
+  const typeContent = (type: TypePresentation) =>
+    `<div class="report-type-impact">${emitAnchor(type.anchorId)}${emitAnchor(`downstream-${anchor(type.id)}`)}${findingAnchors(type.findings, "downstream")}${findingAnchors(type.findings)}<h4>${escape(typeLabel(type))}</h4><p class="report-small"><code>${escape(type.type)}</code></p>${table(type.rows)}${rationale(type.findings)}${relevantSource(type.findings, [type.type], true)}</div>`;
 
-  const typeContent = (type: TypePresentation, paths?: ReferencePath[]) =>
-    `<div class="report-type-impact">${emitAnchor(type.anchorId)}${emitAnchor(`downstream-${anchor(type.id)}`)}${findingAnchors(type.findings, "downstream")}${findingAnchors(type.findings)}<h4>${escape(type.type.split(".").at(-1))}</h4><p class="report-small"><code>${escape(type.type)}</code></p>${
-      paths?.length
-        ? `<p class="report-small">Representative method paths from recorded graph edges:</p><div class="report-reference-paths">${paths.map((item) => `<div class="report-reference-path"><span>${escape(locations[item.location ?? ""] ?? "Location unavailable")}</span><code>${escape(item.path)}</code><span>${escape(item.role)} evidence</span></div>`).join("")}</div>`
-        : '<p class="mapping-unavailable">Precise method path, location and baseline/target role unavailable. Aggregate root locations are not method-specific evidence.</p>'
-    }${table(type.rows)}${rationale(type.findings)}</div>`;
-  const downstreamBody =
-    downstream.methods
-      .map((method) => {
-        const groupAnchors = method.group
-          ? emitAnchor(`downstream-${anchor(method.group.id)}`) +
-            method.findingIds
-              .map(
-                (id) =>
-                  emitAnchor(`downstream-${anchor(id)}`) + emitAnchor(`finding-${anchor(id)}`),
-              )
-              .join("")
-          : "";
-        const constants = (["before", "after"] as const).flatMap((side) =>
-          (method.group?.[side]?.operation?.parameters ?? [])
-            .filter(
-              (parameter) =>
-                parameter.kind === "header" &&
-                typeof parameter.type !== "string" &&
-                parameter.type?.kind === "constant",
-            )
+  const directMethodCards = downstream.methods
+    .filter((method) => method.group)
+    .map((method) => {
+      const groupAnchors = method.group
+        ? emitAnchor(`downstream-${anchor(method.group.id)}`) +
+          method.findingIds
             .map(
-              (parameter) =>
-                `${side === "before" ? "Baseline" : "Target"}: ${parameter.serializedName ?? parameter.name} (header): ${JSON.stringify(typeof parameter.type === "string" ? undefined : parameter.type?.value)}`,
-            ),
-        );
-        const description = method.group
-          ? "The normalized SDK method contract changes directly."
-          : "The method uses changed SDK types; its top-level signature need not change.";
-        return `<details class="report-card sdk-method-card" id="${method.id}">${summary(escape(method.name), escape(description), `<span class="report-badge ${method.cause}">${method.cause === "mixed" ? "Mixed: direct + type change" : method.cause === "direct" ? "Direct method change" : "Indirect type change"}</span>`, affectedIntents(method.semanticIds))}<div class="report-card-body">${groupAnchors}<p class="report-small"><strong>${method.group?.after ? "Target normalized SDK method" : "Recorded normalized SDK method"}:</strong> <code>${escape(method.symbol)}</code></p>${method.rows.length ? table(method.rows) : ""}${constants.length ? `<p class="report-small"><strong>Constant headers (not numbered caller inputs):</strong> ${constants.map(escape).join("; ")}</p>` : ""}${method.group ? rationale(method.group.deltas ?? []) : ""}${method.types.map(({ type, paths }) => typeContent(type, paths)).join("")}<p class="report-small">Language-neutral TCGC evidence is shown; generated language signatures are not fabricated.</p></div></details>`;
-      })
-      .join("") +
-    downstream.unmapped
-      .map(
-        (type) =>
-          `<details class="report-card sdk-contract-card">${summary(escape(type.type.split(".").at(-1)), "Confirmed SDK type finding retained without a deterministic SDK method mapping.", '<span class="report-badge unknown">Method mapping unavailable</span>', affectedIntents(type.semanticIds))}<div class="report-card-body">${typeContent(type)}</div></details>`,
-      )
-      .join("") +
+              (id) => emitAnchor(`downstream-${anchor(id)}`) + emitAnchor(`finding-${anchor(id)}`),
+            )
+            .join("")
+        : "";
+      const constants = (["before", "after"] as const).flatMap((side) =>
+        (method.group?.[side]?.operation?.parameters ?? [])
+          .filter(
+            (parameter) =>
+              parameter.kind === "header" &&
+              typeof parameter.type !== "string" &&
+              parameter.type?.kind === "constant",
+          )
+          .map(
+            (parameter) =>
+              `${side === "before" ? "Baseline" : "Target"}: ${parameter.serializedName ?? parameter.name} (header): ${JSON.stringify(typeof parameter.type === "string" ? undefined : parameter.type?.value)}`,
+          ),
+      );
+      const description = "The normalized SDK method contract changes directly.";
+      const directFindings = (dimensions.downstream.findings ?? []).filter((finding) =>
+        method.findingIds.includes(finding.id),
+      );
+      return `<details class="report-card sdk-method-card" id="${method.id}">${summary(escape(method.name), escape(description), '<span class="report-badge direct">Direct method change</span>', affectedIntents(method.semanticIds))}<div class="report-card-body">${groupAnchors}<p class="report-small"><strong>${method.group?.after ? "Target normalized SDK method" : "Recorded normalized SDK method"}:</strong> <code>${escape(method.symbol)}</code></p>${method.rows.length ? table(method.rows) : ""}${constants.length ? `<p class="report-small"><strong>Constant headers (not numbered caller inputs):</strong> ${constants.map(escape).join("; ")}</p>` : ""}${rationale(method.group?.deltas ?? [])}${relevantSource(directFindings)}<p class="report-small">Language-neutral TCGC evidence is shown; generated language signatures are not fabricated.</p></div></details>`;
+    })
+    .join("");
+
+  const typeCards = downstream.types
+    .map((type) => {
+      return `<details class="report-card sdk-contract-card" id="downstream-type-card-${anchor(type.id)}">${summary(escape(typeLabel(type)), "The normalized SDK model/type contract changes.", `<span class="report-badge">${type.findings.length} type changes</span>`, affectedIntents(type.semanticIds))}<div class="report-card-body">${typeContent(type)}</div></details>`;
+    })
+    .join("");
+
+  const downstreamBody =
+    `${directMethodCards ? `<h3>Method changes</h3>${directMethodCards}` : ""}${typeCards ? `<h3>Model and type changes</h3>${typeCards}` : ""}` +
     legacyDownstream.map((finding) => legacyCard(finding, true)).join("");
 
   const compliance = dimensions.compliance;
@@ -1621,13 +1462,13 @@ export function renderReportSections(
           (entry) =>
             `<a class="report-link impact" href="#${entry.id}">REST: ${escape(entry.operation.operationId)}</a>`,
         );
-      for (const finding of restFindings.filter(
-        (finding) =>
-          !mappedRest.has(finding.id) &&
-          (finding.relatedSemanticIntents?.includes(item.id) || related.rest?.includes(finding.id)),
+      for (const group of restModelCards.filter(
+        (group) =>
+          group.semanticIds.includes(item.id) ||
+          group.findings.some((finding) => related.rest?.includes(finding.id)),
       )) {
         restLinks.push(
-          `<a class="report-link impact" href="#finding-${anchor(finding.id)}">REST: ${escape(finding.rule)}</a>`,
+          `<a class="report-link impact" href="#rest-contract-${anchor(group.identity)}">REST: ${escape(group.identity)} (model/type)</a>`,
         );
       }
       for (const finding of dimensions.rest.legacyFindings ?? []) {
@@ -1639,16 +1480,16 @@ export function renderReportSections(
       const downstreamLinks = downstream.methods
         .filter(
           (method) =>
-            method.semanticIds.includes(item.id) ||
-            (method.group !== undefined && related.downstream?.includes(method.group.id)),
+            method.group !== undefined &&
+            (method.semanticIds.includes(item.id) || related.downstream?.includes(method.group.id)),
         )
         .map(
           (method) =>
             `<a class="report-link impact" href="#${method.id}">Downstream: ${escape(method.name)}</a>`,
         );
-      for (const type of downstream.unmapped.filter((type) => type.semanticIds.includes(item.id)))
+      for (const type of downstream.types.filter((type) => type.semanticIds.includes(item.id)))
         downstreamLinks.push(
-          `<a class="report-link impact" href="#${type.anchorId}">Downstream: ${escape(type.type.split(".").at(-1))} (SDK type)</a>`,
+          `<a class="report-link impact" href="#${type.anchorId}">Downstream: ${escape(typeLabel(type))} (SDK type)</a>`,
         );
       for (const finding of legacyDownstream) {
         if (
@@ -1725,9 +1566,7 @@ export function renderReportSections(
       ? "failed"
       : "not-assessed");
   const restCount =
-    restCards.length +
-    restFindings.filter((finding) => !mappedRest.has(finding.id)).length +
-    (dimensions.rest.legacyFindings?.length ?? 0);
+    restCards.length + restModelCards.length + (dimensions.rest.legacyFindings?.length ?? 0);
   const downstreamCount =
     downstream.methods.length + downstream.unmapped.length + legacyDownstream.length;
   const unavailableComparisons = (assessment.artifactComparisons ?? []).filter(
@@ -1758,13 +1597,13 @@ export function renderReportSections(
       findingCount: restCount,
       html: allBaselinesUnavailable
         ? unavailableSection("rest-breaking", "REST breaking changes")
-        : `<section id="rest-breaking">${sectionHead("REST breaking changes", "Compatibility verdict and confirmed findings.", status(dimensions.rest.verdict ?? restStatus) + count(`${restCards.length} operations · ${restFindings.length + (dimensions.rest.legacyFindings?.length ?? 0)} findings`))}${unavailableProjectNotes}${restBody || `<div class="report-empty">${restStatus === "not-assessed" ? "No REST compatibility verdict is available for the covered scope." : "No confirmed REST breaking changes."}</div>`}</section>`,
+        : `<section id="rest-breaking">${sectionHead("REST breaking changes", "Compatibility verdict and confirmed findings.", status(dimensions.rest.verdict ?? restStatus) + count(`${restCards.length} operations · ${restModelCards.length} models/types · ${restFindings.length + (dimensions.rest.legacyFindings?.length ?? 0)} findings`))}${unavailableProjectNotes}${restBody || `<div class="report-empty">${restStatus === "not-assessed" ? "No REST compatibility verdict is available for the covered scope." : "No confirmed REST breaking changes."}</div>`}</section>`,
     },
     {
       findingCount: downstreamCount,
       html: allBaselinesUnavailable
         ? unavailableSection("downstream-breaking", "Downstream breaking changes")
-        : `<section id="downstream-breaking">${sectionHead("Downstream breaking changes", "Compatibility verdict and confirmed findings.", status(dimensions.downstream.verdict ?? downstreamStatus) + count(`${downstream.methods.length} mapped methods · ${downstream.types.length} changed types`))}${unavailableProjectNotes}${downstreamBody || `<div class="report-empty">${downstreamStatus === "not-assessed" ? "No downstream compatibility verdict is available for the covered scope." : "No downstream breaking changes detected."}</div>`}</section>`,
+        : `<section id="downstream-breaking">${sectionHead("Downstream breaking changes", "Compatibility verdict and confirmed findings.", status(dimensions.downstream.verdict ?? downstreamStatus) + count(`${downstream.methods.filter((method) => method.group).length} direct method changes · ${downstream.types.length} changed types`))}${unavailableProjectNotes}${downstreamBody || `<div class="report-empty">${downstreamStatus === "not-assessed" ? "No downstream compatibility verdict is available for the covered scope." : "No downstream breaking changes detected."}</div>`}</section>`,
     },
     { findingCount: documentQuality.findings?.length ?? 0, html: documentBody.html },
   ];

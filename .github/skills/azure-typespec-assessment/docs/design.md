@@ -189,6 +189,14 @@ run when a hunk has no compatibility impact. Inference runs only for hunks
 whose deterministic coverage status is `unknown`; the Agent records the compact
 decision and the materializer writes `inference.json`.
 
+A source hunk mapped to a declaration or operation is not automatically
+`no-impact` merely because no known REST or downstream candidate rule matched.
+Unless it is deterministically documentation-only, contract-neutral supporting
+source, or an explicitly represented artifact-only change, it remains
+`unknown` and is sent to inference with its complete referenced evidence. This
+prevents the candidate rule catalog from acting as an accidental compatibility
+whitelist.
+
 ## 1. Preparation manifest
 
 File: `preparation-manifest.json`
@@ -1040,25 +1048,6 @@ Dimension output:
       "kind": "basic|paging|lro|lropaging"
     }
   },
-  "rootCauses": [
-    {
-      "id": "downstream-root-cause-<hash>",
-      "kind": "method-return-propagation|type-contract-propagation|enum-union-propagation|unresolved",
-      "directCandidateIds": ["downstream-<hash>"],
-      "propagatedCandidateIds": ["downstream-<hash>"],
-      "methodFactIds": ["sdk-fact-<hash>"],
-      "typeFactIds": ["sdk-fact-<hash>"],
-      "referenceEvidence": [
-        {
-          "fromFactId": "sdk-fact-<hash>",
-          "toFactId": "sdk-fact-<hash>",
-          "kind": "parameter|response|property|lro-result|paging-item",
-          "memberName": "segment",
-          "location": "request-path|request-query|request-header|request-body|response-header|response-body"
-        }
-      ]
-    }
-  ],
   "candidates": [
     {
       "id": "downstream-<hash>",
@@ -1227,6 +1216,41 @@ changed-type, and mapped-method counts remain distinct.
 The bounded judgment procedure and candidate-specific compatibility rules are
 defined in [Downstream SDK Breaking Cases](../references/downstream-breaking-cases.md)
 and [Downstream Candidate Rules](../references/downstream-candidate-rules.md).
+
+### Finding-specific TypeSpec source review
+
+New runs use `pipelineVersion: 2`: compatibility judgment and display-source
+completion are separate bounded AI stages. Judgment decisions use schemaVersion
+2 and omit source reviews. After materialization freezes judgment, the source
+builder creates a shared, scoped source input for accepted findings only.
+Rejected candidates do not receive source tasks. The second AI context returns
+one selection per confirmed contract item; the materializer covers its accepted
+finding IDs without rewriting judgment. See the
+[two-stage design](post-judgment-source-association-design.md) and
+[source workflow](../references/workflow/source-association.md).
+
+The source stage can:
+
+- keep the deterministic proposal unchanged;
+- refine an existing proposal to a clearer complete minimal declaration set;
+- associate declarations when deterministic mapping did not find one;
+- leave an approved finding explicitly unresolved.
+
+Historical single-phase inputs retain their original per-candidate
+`sourceReviews` contract, including `not-applicable` for rejected candidates.
+
+The complete minimal set contains the declarations needed to understand the
+breaking change and its immediate TypeSpec context. It must not be a lone
+contextless changed line, but it must also exclude unrelated declarations from
+the same file or shared diff hunk.
+
+The Agent selects only declaration IDs; it never authors source text. The
+materializer validates candidate coverage and allowed declaration ownership,
+then resolves IDs against the canonical source index. Assembly preserves the
+full canonical finding `sources` for audit and stores the reviewed projection
+separately as `displaySources`. Rendering prefers `displaySources` and clips
+shared hunks to the selected declaration ranges. An unresolved outcome remains
+visible in the report instead of silently falling back to broad source.
 
 ### Semantic and finding relationships
 
@@ -1705,7 +1729,6 @@ File: `model-input.json`
     }
   ],
   "restCandidates": [],
-  "downstreamRootCauses": [],
   "downstreamCandidates": [],
   "complianceSearchRequests": [
     {
@@ -1739,7 +1762,6 @@ File: `model-input.json`
       "facts": 0,
       "semanticReviewUnits": 0,
       "restCandidates": 0,
-      "downstreamRootCauses": 0,
       "downstreamCandidates": 0,
       "complianceSearchRequests": 0
     },
@@ -2072,22 +2094,8 @@ File: `assessment.json`
         {
           "id": "sdk-type-impact-<hash>",
           "type": "Microsoft.Chaos.ScenarioRun",
-          "locations": ["response-body"],
-          "rootCauseIds": ["downstream-root-cause-<hash>"],
           "findingIds": ["downstream-<hash>"],
-          "affectedMethodCount": 2,
-          "affectedMethods": [
-            {
-              "symbol": "Microsoft.Chaos.ScenarioConfigurations.execute",
-              "referenceFactIds": ["sdk-fact-<hash>"]
-            },
-            {
-              "symbol": "Microsoft.Chaos.ScenarioRuns.cancel",
-              "referenceFactIds": ["sdk-fact-<hash>"]
-            }
-          ],
-          "relatedSemanticIntents": ["semantic-<hash>"],
-          "unresolvedRelationshipReason": null
+          "relatedSemanticIntents": ["semantic-<hash>"]
         }
       ],
       "rejectedCandidateCount": 0,
@@ -2266,7 +2274,8 @@ HTML renders changed parameters and method deltas from this structured data;
 the presentation contract is defined in [HTML requirements](#11-html-requirements).
 Method cards are collapsed by default and contain SDK method identity, a
 `Contract area | Before | After` table, a highlighted breaking rationale, and
-related Semantic intent links. They do not show HTTP method, route, REST
+finding-specific relevant TypeSpec source followed by related Semantic intent
+links. They do not show HTTP method, route, REST
 operation identity, or REST findings. Render only changed parameter and method
 rows: additions/removals use `not present` on the missing side, modifications
 show projected before/after signatures, reordering uses one-based positions,
@@ -2355,11 +2364,12 @@ The separate REST/downstream safety contract never changes.
 
 ### REST contract cards
 
-REST breaking findings use the same visual hierarchy as downstream SDK type
-cards. The renderer groups confirmed REST findings by stable wire-contract
-identity, such as a model, enum, request parameter type, or response header
-type. One contract produces one default-collapsed card and retains every
-deterministically affected REST operation.
+REST breaking findings use the same visual hierarchy as downstream SDK cards.
+The renderer separates direct operation changes from model/type changes.
+Operation cards are grouped by normalized REST operation. Model/type cards are
+grouped by stable wire-contract identity, such as a model, enum, request
+parameter type, or response header type, so one shared model change is not
+repeated for every unchanged consumer.
 
 Presentation rules:
 
@@ -2388,9 +2398,10 @@ Presentation rules:
    details element that is collapsed by default. Its summary shows the
    distinct operation count; expanded rows show operation ID, selected API
    version, HTTP method, and path.
-10. The footer contains only human-readable links to related Semantic intents.
-    Do not repeat Changed TypeSpec source links in the REST card; complete
-    source evidence remains in the Semantic intent and appendix.
+10. After the rationale, show one collapsed **Relevant TypeSpec source**
+    disclosure derived only from finding-specific source hunks. Trim unrelated
+    context while preserving changed lines and directly associated decorators.
+    Complete canonical source evidence remains in JSON.
 11. A REST finding without a proven contract identity remains visible as a
     default-collapsed `Unmapped REST contract change` card. Do not infer a
     contract from source-file coincidence.
@@ -2434,6 +2445,23 @@ method/path, concise mapping reason, REST before/after delta or explicit
 unchanged statement, and downstream outcome. It is deterministic supporting
 evidence, not a separate Semantic or Azure Guidelines assessment, and it does not
 repeat TypeSpec code.
+
+### Downstream method and type rendering
+
+Downstream presentation has two independent groups:
+
+- **Method changes** contains only direct normalized SDK method contract
+  changes.
+- **Model and type changes** contains each changed SDK model, enum, union,
+  client, or other public type once, with affected methods listed beneath the
+  type rather than repeated as full method cards.
+
+Every card follows the same order: changed-only Before/After rows, concise
+breaking rationale, collapsed finding-specific **Relevant TypeSpec source**,
+then relationship details. Raw numeric TCGC `usage` remains available, and the
+deterministic normalized facts also expose decoded flag names plus explicit
+input/output booleans. Unknown usage bits remain visible and are never silently
+discarded.
 
 ### Shared contract rows
 

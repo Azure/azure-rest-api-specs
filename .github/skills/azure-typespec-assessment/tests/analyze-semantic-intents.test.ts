@@ -5,6 +5,7 @@ import path from "node:path";
 import {
   analyzeSemanticIntents,
   dedupePublicationHunks,
+  dedupeSemanticHunks,
 } from "../scripts/analyze-semantic-intents.ts";
 
 type InternalSemanticUnit = import("../scripts/runtime-types.ts").InternalSemanticUnit;
@@ -12,6 +13,74 @@ type InternalSemanticUnit = import("../scripts/runtime-types.ts").InternalSemant
 type OpenApiSchema = import("../scripts/runtime-types.ts").OpenApiSchema;
 
 type SourceChange = import("../scripts/runtime-types.ts").SourceChange;
+
+void test("shared physical hunks have one global owner and retain every project's operation mapping", () => {
+  const source: SourceChange = {
+    id: "source-shared",
+    path: "models.tsp",
+    status: "modified",
+    origins: [],
+    hunks: [
+      {
+        id: "hunk-shared",
+        base: { startLine: 1, endLine: 2 },
+        current: { startLine: 1, endLine: 2 },
+        lines: ["+model Widget {}"],
+      },
+    ],
+    declarations: [
+      {
+        id: "decl-shared",
+        kind: "model",
+        qualifiedName: "Widget",
+        decorators: [],
+        versionedMembers: [],
+        hunkIds: ["hunk-shared"],
+        source: { revision: "current", startLine: 1, endLine: 2 },
+      },
+    ],
+  };
+  const unit = (projectId: string, id: string, operationId: string): InternalSemanticUnit => ({
+    id,
+    projectId,
+    sourceChangeIds: [source.id],
+    hunkIds: ["hunk-shared"],
+    declarationIds: ["decl-shared"],
+    declarationNames: ["Widget"],
+    ownedOperationIds: [operationId],
+    operationIds: [operationId],
+    beforeFactIds: [],
+    afterFactIds: [],
+    changedAspects: [],
+    changeTypes: ["type"],
+    operations: [
+      {
+        operationId,
+        sourceChangeIds: [source.id],
+        hunkIds: ["hunk-shared"],
+        declarationIds: ["decl-shared"],
+        matchBasis: "compiler-reference",
+        beforeFactId: `${projectId}-before`,
+        afterFactId: `${projectId}-after`,
+      },
+    ],
+  });
+  const result = dedupeSemanticHunks(
+    [unit("network", "semantic-a", "Networks_Get"), unit("vmss", "semantic-b", "Vmss_Get")],
+    [source],
+  );
+  assert.equal(result.length, 1);
+  assert.deepEqual(result[0].hunkIds, ["hunk-shared"]);
+  assert.deepEqual(result[0].projectIds, ["network", "vmss"]);
+  assert.deepEqual(result[0].operations.map((operation) => operation.operationId).sort(), [
+    "Networks_Get",
+    "Vmss_Get",
+  ]);
+  assert.deepEqual(result[0].operations.map((operation) => operation.beforeFactId).sort(), [
+    "network-before",
+    "vmss-before",
+  ]);
+});
 
 type SemanticAnalysisOptions = Parameters<typeof analyzeSemanticIntents>[0];
 
@@ -305,16 +374,17 @@ void test.each([
 
     assert.equal(result.status, "ready");
     assert.deepEqual(result.blockers, []);
-    assert.equal(result.reviewUnits.length, mixed ? 2 : 1);
+    assert.equal(result.reviewUnits.length, 1);
     assert.deepEqual(
       result.reviewUnits.flatMap((unit) => unit.operations.map((item) => item.operationId)),
       mixed ? ["Widgets_List", "Widgets_List"] : ["Widgets_List"],
     );
-    const unit = result.reviewUnits.find((item) => item.projectId === "project-new");
+    const unit = result.reviewUnits[0];
     assert.ok(unit);
+    assert.deepEqual(unit.projectIds, mixed ? ["project-new", "project-ready"] : undefined);
     assert.equal(unit.action, unavailable ? "modify" : "add");
     const operation = mixed
-      ? unit.operations.find((item) => item.comparisonUnavailable)
+      ? unit.operations.find((item) => item.projectId === "project-new")
       : unit.operations[0];
     assert.ok(operation);
     assert.equal(operation.comparisonUnavailable, unavailable ? true : undefined);
@@ -324,13 +394,11 @@ void test.each([
       assert.deepEqual(unit.changedAspects, []);
     }
     if (mixed) {
-      const ready = result.reviewUnits.find((item) => item.projectId === "project-ready");
+      const ready = unit.operations.find((item) => item.projectId === "project-ready");
       assert.ok(ready);
-      assert.ok(
-        ready.operations.some(
-          (item) => !item.comparisonUnavailable && item.beforeFactId && item.afterFactId,
-        ),
-      );
+      assert.equal(ready.comparisonUnavailable, undefined);
+      assert.ok(ready.beforeFactId);
+      assert.ok(ready.afterFactId);
     }
   },
 );
@@ -802,14 +870,25 @@ void test("keeps API-version and project-specific method indexes separate", (con
   inputs.manifest.projects.push(otherProject);
   const result = analyzeFixture(inputs);
   assert.deepEqual(result.blockers, []);
-  const units = new Map(result.reviewUnits.map((unit) => [unit.projectId, unit]));
-  const projectUnit = units.get(project.id);
-  const otherUnit = units.get(otherProject.id);
-  assert.ok(projectUnit);
-  assert.ok(otherUnit);
-  assert.deepEqual(projectUnit.ownedOperationIds, ["OutboundRules_Post"]);
-  assert.deepEqual(otherUnit.ownedOperationIds, ["Other_Post"]);
-  assert.equal(result.facts[otherUnit.afterFactIds[0]].apiVersion, "v2");
+  assert.equal(result.reviewUnits.length, 1);
+  const shared = result.reviewUnits[0];
+  assert.deepEqual(shared.projectIds?.slice().sort(), [otherProject.id, project.id].sort());
+  assert.deepEqual(
+    shared.ownedOperationIds.slice().sort(),
+    ["Other_Post", "OutboundRules_Post"].sort(),
+  );
+  const otherOperation = shared.operations.find(
+    (operation) => operation.operationId === "Other_Post",
+  );
+  const projectOperation = shared.operations.find(
+    (operation) => operation.operationId === "OutboundRules_Post",
+  );
+  assert.ok(otherOperation?.afterFactId);
+  assert.ok(projectOperation?.afterFactId);
+  assert.equal(result.facts[otherOperation.afterFactId].apiVersion, "v2");
+  assert.equal(result.facts[otherOperation.afterFactId].projectId, otherProject.id);
+  assert.equal(result.facts[projectOperation.afterFactId].apiVersion, "v1");
+  assert.equal(result.facts[projectOperation.afterFactId].projectId, project.id);
 });
 
 void test("selects only the requested REST version from a multi-version artifact", (context) => {

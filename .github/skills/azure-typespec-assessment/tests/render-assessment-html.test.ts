@@ -13,7 +13,9 @@ import {
   complianceFindingGroups,
   downstreamTypeCards,
   escapeHtml,
+  focusedSourceChanges,
   operationContractRows,
+  renderCompleteModelDeclarations,
   renderAssessmentHtml as renderCurrentAssessmentHtml,
   representativeSource,
   restContractCards,
@@ -26,6 +28,72 @@ type AssessmentFact = import("../scripts/runtime-types.ts").AssessmentFact;
 type AssessmentFinding = import("../scripts/runtime-types.ts").AssessmentFinding;
 
 type AssessmentOutput = import("../scripts/runtime-types.ts").AssessmentOutput;
+
+type SourceChange = import("../scripts/runtime-types.ts").SourceChange;
+
+void test("complete selected operation source retains unchanged multiline template arguments", () => {
+  const source: SourceChange = {
+    id: "source-operation",
+    path: "ServiceGateway.tsp",
+    status: "modified",
+    origins: [],
+    hunks: [
+      {
+        id: "hunk-operation",
+        base: { startLine: 1, endLine: 1 },
+        current: { startLine: 1, endLine: 1 },
+        lines: ["+op update is ActionSync<"],
+      },
+    ],
+    declarations: [
+      {
+        id: "decl-operation",
+        kind: "operation",
+        qualifiedName: "ServiceGateways.update",
+        decorators: [],
+        versionedMembers: [],
+        hunkIds: ["hunk-operation"],
+        source: { revision: "current", startLine: 1, endLine: 5 },
+        sourceSnippet: {
+          startLine: 1,
+          endLine: 5,
+          truncated: false,
+          lines: [
+            "op update is ActionSync<",
+            "  ServiceGateway,",
+            "  UpdateRequest,",
+            "  UpdateResponse",
+            ">;",
+          ],
+        },
+      },
+    ],
+  };
+  const html = renderCompleteModelDeclarations([source], [], ["operation"]);
+  assert.include(html, "UpdateRequest,");
+  assert.include(html, "UpdateResponse");
+  assert.include(html, "ActionSync&lt;");
+  const operation = source.declarations[0];
+  operation.source = { revision: "current", startLine: 2, endLine: 6 };
+  operation.sourceSnippet = { ...operation.sourceSnippet!, startLine: 2, endLine: 6 };
+  source.declarations.push({
+    id: "decl-interface",
+    kind: "interface",
+    qualifiedName: "ServiceGateways",
+    decorators: [],
+    versionedMembers: [],
+    hunkIds: ["hunk-operation"],
+    source: { revision: "current", startLine: 1, endLine: 7 },
+    sourceSnippet: {
+      startLine: 1,
+      endLine: 7,
+      truncated: false,
+      lines: ["interface ServiceGateways {", ...operation.sourceSnippet.lines, "}"],
+    },
+  });
+  const nested = renderCompleteModelDeclarations([source], [], ["operation", "interface"]);
+  assert.equal((nested.match(/ActionSync&lt;/g) ?? []).length, 1);
+});
 
 type AssessmentTypeImpact = import("../scripts/runtime-types.ts").AssessmentTypeImpact;
 
@@ -131,6 +199,307 @@ function fixtureDownstreamTypeCards(dimension: {
 function fixtureRestContractCards(findings: RestFindingFixture[]) {
   return restContractCards(findings as unknown as AssessmentFinding[]);
 }
+
+void test("focuses finding source on changed lines and relevant decorators", () => {
+  const sources = focusedSourceChanges([
+    {
+      id: "finding-1",
+      sources: [
+        {
+          id: "source-1",
+          path: "main.tsp",
+          status: "modified",
+          origins: [],
+          declarations: [],
+          hunks: [
+            {
+              id: "hunk-1",
+              base: { startLine: 10, endLine: 20 },
+              current: { startLine: 10, endLine: 20 },
+              lines: [
+                ' @doc("unrelated documentation")',
+                " model Unrelated {}",
+                " ",
+                " @visibility(Lifecycle.Read)",
+                "-model Widget {",
+                "-  name: string;",
+                "+model Widget {",
+                "+  name?: string;",
+                " }",
+                " ",
+                " model Other {}",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ] as unknown as AssessmentFinding[]);
+
+  assert.equal(sources.length, 1);
+  assert.equal(sources[0].hunks.length, 1);
+  assert.deepEqual(sources[0].hunks[0].lines, [
+    " @visibility(Lifecycle.Read)",
+    "-model Widget {",
+    "-  name: string;",
+    "+model Widget {",
+    "+  name?: string;",
+    " }",
+  ]);
+  assert.equal(sources[0].hunks[0].base.startLine, 13);
+  assert.equal(sources[0].hunks[0].current.startLine, 13);
+});
+
+void test("focuses finding source on hunks owned by the displayed declaration", () => {
+  const sources = focusedSourceChanges(
+    [
+      {
+        id: "finding-1",
+        sources: [
+          {
+            id: "source-1",
+            path: "main.tsp",
+            status: "modified",
+            origins: [],
+            declarations: [
+              {
+                id: "declaration-widget",
+                kind: "model",
+                qualifiedName: "Widget",
+                hunkIds: ["hunk-widget"],
+              },
+              {
+                id: "declaration-gadget",
+                kind: "model",
+                qualifiedName: "Gadget",
+                hunkIds: ["hunk-gadget"],
+              },
+            ],
+            hunks: [
+              {
+                id: "hunk-widget",
+                base: { startLine: 10, endLine: 10 },
+                current: { startLine: 10, endLine: 10 },
+                lines: ["-model Widget {}", "+model Widget { value: string; }"],
+              },
+              {
+                id: "hunk-gadget",
+                base: { startLine: 20, endLine: 20 },
+                current: { startLine: 20, endLine: 20 },
+                lines: ["-model Gadget {}", "+model Gadget { value: string; }"],
+              },
+            ],
+          },
+        ],
+      },
+    ] as unknown as AssessmentFinding[],
+    ["Contoso.Service.Widget"],
+  );
+
+  assert.deepEqual(
+    sources.flatMap((source) => source.hunks.map((hunk) => hunk.id)),
+    ["hunk-widget-focused-1"],
+  );
+  assert.deepEqual(
+    sources.flatMap((source) =>
+      (source.declarations ?? []).map((declaration) => declaration.qualifiedName),
+    ),
+    ["Widget"],
+  );
+});
+
+void test("clips a shared source hunk to the displayed declaration line range", () => {
+  const sources = focusedSourceChanges(
+    [
+      {
+        id: "finding-1",
+        sources: [
+          {
+            id: "source-1",
+            path: "main.tsp",
+            status: "modified",
+            origins: [],
+            declarations: [
+              {
+                id: "declaration-widget",
+                kind: "model",
+                qualifiedName: "Widget",
+                hunkIds: ["hunk-shared"],
+                source: { revision: "current", startLine: 10, endLine: 12 },
+              },
+              {
+                id: "declaration-gadget",
+                kind: "model",
+                qualifiedName: "Gadget",
+                hunkIds: ["hunk-shared"],
+                source: { revision: "current", startLine: 14, endLine: 16 },
+              },
+            ],
+            hunks: [
+              {
+                id: "hunk-shared",
+                base: { startLine: 10, endLine: 10 },
+                current: { startLine: 10, endLine: 16 },
+                lines: [
+                  "+model Widget {",
+                  "+  value: string;",
+                  "+}",
+                  "+",
+                  "+model Gadget {",
+                  "+  value: string;",
+                  "+}",
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ] as unknown as AssessmentFinding[],
+    ["Widget"],
+  );
+
+  assert.deepEqual(sources[0].hunks[0].lines, ["+model Widget {", "+  value: string;", "+}", "+"]);
+  assert.notMatch(sources[0].hunks[0].lines.join("\n"), /Gadget/);
+});
+
+void test("prefers AI-reviewed display sources over broader canonical evidence", () => {
+  const broadSource = {
+    id: "source-1",
+    path: "main.tsp",
+    status: "modified",
+    origins: [],
+    declarations: [
+      {
+        id: "declaration-request",
+        kind: "model",
+        qualifiedName: "Request",
+        hunkIds: ["hunk-request"],
+        source: { revision: "current", startLine: 10, endLine: 12 },
+      },
+      {
+        id: "declaration-unrelated",
+        kind: "model",
+        qualifiedName: "Unrelated",
+        hunkIds: ["hunk-unrelated"],
+        source: { revision: "current", startLine: 20, endLine: 22 },
+      },
+    ],
+    hunks: [
+      {
+        id: "hunk-request",
+        base: { startLine: 10, endLine: 10 },
+        current: { startLine: 10, endLine: 12 },
+        lines: ["+model Request {", "+  value: string;", "+}"],
+      },
+      {
+        id: "hunk-unrelated",
+        base: { startLine: 20, endLine: 20 },
+        current: { startLine: 20, endLine: 22 },
+        lines: ["+model Unrelated {", "+  value: string;", "+}"],
+      },
+    ],
+  };
+  const reviewedSource = {
+    ...broadSource,
+    declarations: [broadSource.declarations[0]],
+    hunks: [broadSource.hunks[0]],
+  };
+  const sources = focusedSourceChanges([
+    {
+      id: "finding-1",
+      sources: [broadSource],
+      displaySources: [reviewedSource],
+    } as unknown as AssessmentFinding,
+  ]);
+  assert.deepEqual(
+    sources.map((source) => source.hunks[0].id),
+    ["hunk-request-focused-1"],
+  );
+  assert.deepEqual(
+    sources.flatMap((source) => source.declarations.map((item) => item.qualifiedName)),
+    ["Request"],
+  );
+});
+
+void test("renders one complete unified model diff for model changes", () => {
+  const html = renderCompleteModelDeclarations(
+    [
+      {
+        id: "source-1",
+        path: "main.tsp",
+        status: "modified",
+        origins: [],
+        hunks: [],
+        declarations: [
+          {
+            id: "declaration-base",
+            kind: "model",
+            qualifiedName: "Service.Widget",
+            decorators: [],
+            versionedMembers: [],
+            hunkIds: ["hunk-1"],
+            source: { revision: "base", startLine: 10, endLine: 14 },
+            sourceSnippet: {
+              startLine: 10,
+              endLine: 14,
+              lines: ['@doc("Widget")', "model Widget {", "  name?: string;", "}"],
+              truncated: false,
+            },
+          },
+          {
+            id: "declaration-current",
+            kind: "model",
+            qualifiedName: "Service.Widget",
+            decorators: [],
+            versionedMembers: [],
+            hunkIds: ["hunk-1"],
+            source: { revision: "current", startLine: 20, endLine: 25 },
+            sourceSnippet: {
+              startLine: 20,
+              endLine: 25,
+              lines: [
+                '@doc("Widget")',
+                "model Widget {",
+                "  @madeRequired(Versions.v2)",
+                "  name: string;",
+                "}",
+              ],
+              truncated: false,
+            },
+          },
+          {
+            id: "declaration-other",
+            kind: "model",
+            qualifiedName: "Service.Unrelated",
+            decorators: [],
+            versionedMembers: [],
+            hunkIds: ["hunk-1"],
+            source: { revision: "current", startLine: 30, endLine: 32 },
+            sourceSnippet: {
+              startLine: 30,
+              endLine: 32,
+              lines: ["model Unrelated {}", ""],
+              truncated: false,
+            },
+          },
+        ],
+      },
+    ] as SourceChange[],
+    ["Widget"],
+  );
+  assert.equal((html.match(/model-declaration-diff/g) ?? []).length, 1);
+  assert.include(html, "main.tsp · Service.Widget");
+  assert.include(html, "model-diff-baseline");
+  assert.include(html, "model-diff-target");
+  assert.include(html, '<div class="model-diff-line add">');
+  assert.include(html, '<div class="model-diff-line remove">');
+  assert.include(html, "10");
+  assert.include(html, "20");
+  assert.include(html, "@madeRequired(Versions.v2)");
+  assert.include(html, "name?: string;");
+  assert.include(html, "name: string;");
+  assert.notInclude(html, "Service.Unrelated");
+});
 
 function readAssessment(url: URL): AssessmentOutput {
   const value = JSON.parse(readFileSync(url, "utf8")) as unknown;
@@ -403,7 +772,7 @@ void test("renders SDK contract changes without REST operation association", () 
     provenance: {},
   });
 
-  assert.match(html, /<strong>CloudHsmClusters\.get<\/strong>/);
+  assert.notMatch(html, /<strong>CloudHsmClusters\.get<\/strong>/);
   assert.match(html, /\.contract-tag\{background:#dbeafe;color:#1e40af\}/);
   assert.notMatch(html, /SDK contract changes — 3 affected REST operations/);
   assert.notMatch(html, /Mapped SDK methods/);
@@ -419,16 +788,19 @@ void test("renders SDK contract changes without REST operation association", () 
     1,
   );
   assert.notMatch(downstream, /Affected REST operations/);
-  assert.match(downstream, /1 mapped methods/);
-  assert.match(downstream, /Microsoft\.HardwareSecurityModules\.CloudHsmClusters\.get/);
+  assert.notMatch(downstream, /mapped methods/);
+  assert.notMatch(downstream, /Microsoft\.HardwareSecurityModules\.CloudHsmClusters\.get/);
   assert.match(html, /Impacts \(1\)/);
-  assert.match(html, /class="report-link impact"[^>]*>Downstream: CloudHsmClusters\.get<\/a>/);
+  assert.match(
+    html,
+    /class="report-link impact"[^>]*>Downstream: CloudHsmClusterSkuName \(SDK type\)<\/a>/,
+  );
   assert.notMatch(downstream, /CloudHsmClusters_CreateOrUpdate/);
   assert.notMatch(downstream, /Changed TypeSpec:/);
   assert.match(downstream, /Affected intents \(1\)/);
 });
 
-void test("groups REST contract deltas by schema identity and retains affected operations", () => {
+void test("groups REST property removals by declaring schema, retaining referenced value display", () => {
   const operation = (comparisonRole: string, operationId: string): AssessmentFact =>
     ({
       comparisonRole,
@@ -442,6 +814,7 @@ void test("groups REST contract deltas by schema identity and retains affected o
           headers: [],
           schema: {
             kind: "object",
+            reference: "stable/v1.json#/definitions/Widget",
             properties:
               comparisonRole === "baseline"
                 ? [
@@ -480,10 +853,83 @@ void test("groups REST contract deltas by schema identity and retains affected o
   const cards = fixtureRestContractCards(findings);
 
   assert.equal(cards.length, 1);
-  assert.equal(cards[0].identity, "WidgetState");
+  assert.equal(cards[0].identity, "Widget");
   assert.equal(cards[0].operations.length, 2);
   assert.equal(cards[0].findings[0].contractDelta.before, "WidgetState { Ready | Deleted }");
   assert.equal(cards[0].findings[0].contractDelta.after, "removed");
+});
+
+void test("groups request-body property changes by their owning schema", () => {
+  const operation = (comparisonRole: string): AssessmentFact =>
+    ({
+      comparisonRole,
+      operationId: "Widgets_Create",
+      apiVersion: "v1",
+      method: "post",
+      path: "/widgets",
+      request: {
+        kind: "body",
+        name: "body",
+        required: true,
+        schema: {
+          kind: "object",
+          reference: `stable/v1.json#/definitions/WidgetRequest`,
+          properties:
+            comparisonRole === "baseline"
+              ? [{ name: "oldName", required: true, schema: { kind: "scalar", type: "string" } }]
+              : [{ name: "newName", required: true, schema: { kind: "scalar", type: "string" } }],
+        },
+      },
+    }) as unknown as AssessmentFact;
+
+  const findings: RestFindingFixture[] = [
+    {
+      id: "rest-request-removed",
+      rule: "serialized-property-removed",
+      severity: "high",
+      contractChange: {
+        rule: "serialized-property-removed",
+        location: "request body.oldName",
+      },
+      operationIds: ["Widgets_Create"],
+      relatedSemanticIntents: ["semantic-1"],
+      sources: [],
+      evidence: [operation("baseline"), operation("target")],
+    },
+    {
+      id: "rest-request-added",
+      rule: "required-property-added",
+      severity: "high",
+      contractChange: {
+        rule: "required-property-added",
+        location: "request body.newName",
+      },
+      operationIds: ["Widgets_Create"],
+      relatedSemanticIntents: ["semantic-1"],
+      sources: [],
+      evidence: [operation("baseline"), operation("target")],
+    },
+  ];
+
+  const cards = fixtureRestContractCards(findings);
+
+  assert.equal(cards.length, 1);
+  assert.equal(cards[0].identity, "WidgetRequest");
+  assert.deepEqual(
+    cards[0].findings.map((finding) => [
+      finding.contractDelta.area,
+      finding.contractDelta.before,
+      finding.contractDelta.after,
+    ]),
+    [
+      ["request body.oldName", "string", "removed"],
+      ["request body.newName", "removed", "string"],
+    ],
+  );
+  assert.deepEqual(
+    cards[0].operations.map((operation) => operation.operationId),
+    ["Widgets_Create"],
+  );
 });
 
 void test("renderer shows fetched Azure Guidelines guidance and expands failures", () => {

@@ -91,6 +91,8 @@ const reportRenderHelpers: Parameters<typeof renderReportSections>[1] = {
   complianceFindingGroups: () => [],
   complianceCode: () => "",
   renderSourceHunks: () => "",
+  renderCompleteModelDeclarations: () => "",
+  focusedSourceChanges: () => [],
   sourceLinks: () => "",
   legacyEvidence: () => "",
   contractAreaParts: () => ({ areaKind: "", member: "" }),
@@ -381,6 +383,79 @@ void test("missing-head-baseline sections contain only their heading and approve
   assert.match(reportSection(generic.html, "rest-breaking"), /No REST compatibility verdict/);
 });
 
+test("SDK property-change rows show each member's concrete optionality without generic repeated prose", () => {
+  const { dimension } = fixture();
+  const properties = [
+    { name: "lastBackUpTime", type: { kind: "int64" }, optional: true },
+    { name: "protectionStatus", type: { kind: "enum", name: "ProtectionStatus" }, optional: true },
+    { name: "numberOfProtectedItems", type: { kind: "int32" }, optional: true },
+  ];
+  const original = dimension.findings[0];
+  dimension.methodGroups = [];
+  dimension.findings = properties.map((property, index) => ({
+    ...original,
+    id: `required-${index}`,
+    rule: "model-property-changed",
+    actual: `Contoso.Widget.${property.name} changed type, optionality, flattening, or access.`,
+    expected: "Contoso.Widget preserves its existing language-neutral generated SDK contract.",
+    evidence: [
+      { comparisonRole: "baseline", factKind: "model", properties },
+      {
+        comparisonRole: "target",
+        factKind: "model",
+        properties: properties.map((p) => ({ ...p, optional: false })),
+      },
+    ],
+  }));
+  dimension.typeImpacts![0].findingIds = dimension.findings.map((f) => f.id);
+  const rows = downstreamMethodData(dimension).types[0].rows;
+  assert.equal(rows.length, 3);
+  assert.deepEqual(
+    rows.map((row) => row.label),
+    properties.map((p) => p.name),
+  );
+  assert.deepEqual(
+    rows.map((row) => row.before),
+    ["int64 · optional", "ProtectionStatus · optional", "int32 · optional"],
+  );
+  assert.deepEqual(
+    rows.map((row) => row.after),
+    ["int64 · required", "ProtectionStatus · required", "int32 · required"],
+  );
+  assert.notInclude(JSON.stringify(rows), "preserves its existing");
+  dimension.findings = [dimension.findings[0]];
+  assert.equal(downstreamMethodData(dimension).types[0].rows.length, 1);
+});
+
+test("SDK member rows preserve concrete type, access and flattening changes", () => {
+  const { dimension } = fixture();
+  const finding = dimension.findings[0];
+  finding.rule = "model-property-changed";
+  finding.actual = "Contoso.Widget.old changed type, optionality, flattening, or access.";
+  finding.evidence = [
+    {
+      comparisonRole: "baseline",
+      properties: [
+        { name: "old", type: { kind: "string" }, optional: true, access: "public", flatten: false },
+      ],
+    },
+    {
+      comparisonRole: "target",
+      properties: [
+        { name: "old", type: { kind: "int32" }, optional: true, access: "internal", flatten: true },
+      ],
+    },
+  ];
+  const row = downstreamMethodData(dimension).types[0].rows[0];
+  assert.equal(row.label, "old");
+  assert.include(row.before!, "string · optional");
+  assert.include(row.after!, "int32 · optional");
+  assert.include(row.before!, "access: public");
+  assert.include(row.after!, "access: internal");
+  assert.include(row.before!, "flatten: false");
+  assert.include(row.after!, "flatten: true");
+});
+
 void test("renders stable semantic grouping identity, diagnostics, and evidence provenance", () => {
   const input = assessment();
   const item = required(input.dimensions.semantic.items[0]);
@@ -439,30 +514,18 @@ void test("renders stable semantic grouping identity, diagnostics, and evidence 
   assert.include(html, "not a standalone API-version publication");
 });
 
-void test("merges direct methods and indirect types using target names and exact graph paths", () => {
+void test("keeps direct methods and changed types as independent report units", () => {
   const { dimension, raw } = fixture();
   const input = structuredClone({ dimension, raw });
   const data = downstreamMethodData(dimension, raw);
-  assert.equal(data.methods.length, 2);
+  assert.equal(data.methods.length, 1);
   const method = required(
     data.methods.find((item) => item.name === "ServiceGateways.updateAddressLocations"),
   );
-  assert.equal(method.cause, "mixed");
-  assert.equal(method.types.length, 1);
-  assert.deepEqual(
-    method.types
-      .flatMap((reference) => reference.paths)
-      .map((item) => [item.path, item.role, item.location]),
-    [
-      ["body", "baseline", "request-body"],
-      ["body", "target", "request-body"],
-    ],
-  );
-  const list = required(data.methods.find((item) => item.name === "ServiceGateways.list"));
-  assert.equal(list.cause, "indirect");
-  assert.deepEqual(list.types[0].paths, [
-    { path: "(returned type)", role: "target", location: "response-body" },
-  ]);
+  assert.equal(method.cause, "direct");
+  assert.equal(method.types.length, 0);
+  assert.equal(data.types.length, 1);
+  assert.equal(data.types[0].mapped.length, 0);
   assert.deepEqual({ dimension, raw }, input);
 });
 
@@ -473,7 +536,7 @@ void test("does not promote root-wide locations to per-method evidence without r
     data.methods.every((method) => method.types.every((reference) => reference.paths.length === 0)),
   );
   const html = renderAssessmentHtml(assessment(dimension));
-  assert.match(html, /Aggregate root locations are not method-specific evidence/);
+  assert.notMatch(html, /Aggregate root locations are not method-specific evidence/);
   assert.notMatch(html, /class="report-reference-path"/);
 });
 
@@ -511,32 +574,12 @@ void test("does not promote grouped type intent associations to each individual 
   );
 });
 
-void test("rejects a raw graph from a mismatched evidence or root snapshot", () => {
+void test("ignores legacy consumer graph sidecars", () => {
   const { dimension, raw } = fixture();
-  const wrongFact = structuredClone(raw);
-  required(required(wrongFact.facts["type-target"]).properties).push({ name: "invented" });
-  assert.throws(
-    () => downstreamMethodData(dimension, wrongFact),
-    /snapshot mismatch: evidence fact/,
-  );
-  const wrongRoot = structuredClone(raw);
-  required(wrongRoot.rootCauses[0]).id = "other-snapshot";
-  assert.throws(
-    () => downstreamMethodData(dimension, wrongRoot),
-    /snapshot mismatch: missing root/,
-  );
-  const wrongAssociation = structuredClone(raw);
-  required(wrongAssociation.rootCauses[0]).directCandidateIds = ["other-finding"];
-  assert.throws(
-    () => downstreamMethodData(dimension, wrongAssociation),
-    /no matching confirmed finding/,
-  );
-  const wrongCandidate = structuredClone(raw);
-  required(wrongCandidate.candidates[0]).rule = "different-rule";
-  assert.throws(
-    () => downstreamMethodData(dimension, wrongCandidate),
-    /snapshot mismatch: candidate/,
-  );
+  const baseline = downstreamMethodData(dimension);
+  required(required(raw.rootCauses)[0]).id = "other-snapshot";
+  required(raw.candidates[0]).rule = "different-rule";
+  assert.deepEqual(downstreamMethodData(dimension, raw), baseline);
 });
 
 void test("legacy operationGroups and sharedTypeImpacts retain unmapped confirmed types", () => {
@@ -555,7 +598,7 @@ void test("legacy operationGroups and sharedTypeImpacts retain unmapped confirme
   assert.equal(data.unmapped[0].type, "Contoso.Widget");
   assert.equal(data.unmapped[0].findings[0].id, "type-change");
   const html = renderAssessmentHtml(assessment(dimension));
-  assert.match(html, /Method mapping unavailable/);
+  assert.notMatch(html, /Method mapping unavailable/);
   assert.match(html, /Downstream: Widget \(SDK type\)/);
 });
 
@@ -860,12 +903,12 @@ void test("legacy type findings remain visible when method mappings are unavaila
   );
   assert.ok(data.unmapped.every((type) => type.mapped.length === 0));
   const html = renderAssessmentHtml(assessment(dimension));
-  assert.match(html, /Method mapping unavailable/);
+  assert.notMatch(html, /Method mapping unavailable/);
   assert.match(html, /id="finding-type-change"/);
   assert.deepEqual(dimension, snapshot);
 });
 
-void test("explicit provenance sidecar bridges only root IDs and never changes authoritative data", () => {
+void test("presentation ignores historical consumer-association sidecars", () => {
   const { dimension, raw } = fixture();
   const input = assessment(dimension);
   input.repository = { remoteUrl: "https://github.com/Azure/azure-rest-api-specs" };
@@ -873,54 +916,21 @@ void test("explicit provenance sidecar bridges only root IDs and never changes a
   input.dimensions.downstream.findings[0].rootCauseIds = ["unresolved-root"];
   required(input.dimensions.downstream.typeImpacts?.[0]).rootCauseIds = ["unresolved-root"];
   const snapshots = structuredClone({ input, replay, raw });
-  assert.throws(
-    () => downstreamMethodData(input.dimensions.downstream, raw),
-    /missing root unresolved-root/,
-  );
   const presentation = downstreamPresentationDimension(input, {
     downstreamInput: raw,
     downstreamAssessment: replay,
   });
   const data = downstreamMethodData(presentation, raw);
-  assert.equal(data.methods.length, 2);
-  assert.equal(data.unmapped.length, 0);
-  assert.deepEqual(presentation.findings[0].rootCauseIds, ["root"]);
+  assert.equal(data.methods.length, 1);
+  assert.equal(data.unmapped.length, 1);
+  assert.deepEqual(presentation.findings[0].rootCauseIds, ["unresolved-root"]);
   const html = renderAssessmentHtml(input, { downstreamInput: raw, downstreamAssessment: replay });
-  assert.match(html, /Representative method paths from recorded graph edges/);
+  assert.notMatch(html, /Representative method paths from recorded graph edges/);
+  assert.notMatch(html, /Affected SDK methods/);
   assert.deepEqual({ input, replay, raw }, snapshots);
-  const wrongJudgment = structuredClone(replay);
-  wrongJudgment.dimensions.downstream.findings[0].rationale = "Different judgment";
-  assert.throws(
-    () =>
-      downstreamPresentationDimension(input, {
-        downstreamInput: raw,
-        downstreamAssessment: wrongJudgment,
-      }),
-    /provenance mismatch: finding/,
-  );
-  const wrongCommit = structuredClone(replay);
-  wrongCommit.comparison.headCommit = "different";
-  assert.throws(
-    () =>
-      downstreamPresentationDimension(input, {
-        downstreamInput: raw,
-        downstreamAssessment: wrongCommit,
-      }),
-    /repository or comparison/,
-  );
-  const missingFinding = structuredClone(replay);
-  missingFinding.dimensions.downstream.findings.pop();
-  assert.throws(
-    () =>
-      downstreamPresentationDimension(input, {
-        downstreamInput: raw,
-        downstreamAssessment: missingFinding,
-      }),
-    /finding coverage/,
-  );
-  assert.throws(
-    () => downstreamPresentationDimension(input, { downstreamAssessment: replay }),
-    /requires downstreamInput/,
+  assert.deepEqual(
+    downstreamPresentationDimension(input, { downstreamAssessment: replay }),
+    input.dimensions.downstream,
   );
 });
 

@@ -96,7 +96,8 @@ type InputAccounting = {
     semanticReviewUnits: number;
     restCandidates: number;
     downstreamCandidates: number;
-    downstreamRootCauses: number;
+    sourceReviewDeclarations: number;
+    sourceReviewRequests: number;
     complianceSearchRequests: number;
     inferenceRequests: number;
   };
@@ -104,6 +105,7 @@ type InputAccounting = {
 };
 type AnalysisModelInput = {
   schemaVersion: number;
+  pipelineVersion: 2;
   context: Record<string, unknown>;
   artifactReferences: AssessmentModelInput["artifactReferences"];
   evidenceSets: Record<string, import("./runtime-types.ts").EvidenceSet & Record<string, unknown>>;
@@ -112,7 +114,6 @@ type AnalysisModelInput = {
   informationalSemanticIntentIds: string[];
   restCandidates: AssessmentModelInput["restCandidates"];
   downstreamCandidates: AssessmentModelInput["downstreamCandidates"];
-  downstreamRootCauses: import("./runtime-types.ts").DownstreamRootCause[];
   complianceSearchRequests: AssessmentModelInput["complianceSearchRequests"];
   inferenceRequests: AssessmentModelInput["inferenceRequests"];
   blockers: unknown[];
@@ -332,6 +333,7 @@ function compactSdkFact(fact: AssessmentFact) {
     name: fact.name,
     access: fact.access,
     usage: fact.usage,
+    usageDetails: fact.usageDetails,
     reachable: fact.reachable,
     parameters: fact.parameters?.map((parameter) => ({
       position: parameter.position,
@@ -444,20 +446,6 @@ function candidateReferencedFactIds(analysis: { candidates?: AssessmentCandidate
   );
 }
 
-function downstreamReferencedFactIds(downstream: DownstreamAnalysis) {
-  const ids = candidateReferencedFactIds(downstream);
-  for (const rootCause of downstream.rootCauses ?? []) {
-    for (const id of [
-      ...(rootCause.methodFactIds ?? []),
-      ...(rootCause.typeFactIds ?? []),
-      ...(rootCause.referenceEvidence ?? []).flatMap((edge) => [edge.fromFactId, edge.toFactId]),
-    ]) {
-      if (id) ids.add(id);
-    }
-  }
-  return ids;
-}
-
 function semanticSourceExcerpts(
   unit: InternalSemanticUnit,
   sourceChanges: Record<string, SourceChange>,
@@ -524,6 +512,7 @@ function evidenceSet(
   registry[id] ??= {
     sourceChangeIds: normalized.sourceChangeIds,
     hunkIds: normalized.hunkIds,
+    declarationIds: normalized.declarationIds,
     declarationCount: normalized.declarationIds.length,
     evidenceFactIds: normalized.evidenceFactIds,
     evidenceRef: { artifact, id: entityId },
@@ -1116,17 +1105,6 @@ function deterministicCoverage({
         downstreamCandidateIds,
       };
     }
-    if (declarationsByHunk.has(hunkId) || operationsByHunk.has(hunkId)) {
-      return {
-        hunkId,
-        status: "no-impact",
-        reason: declarationsByHunk.has(hunkId)
-          ? "declaration-mapped-and-contracts-compared"
-          : "operation-mapped-and-contracts-compared",
-        restCandidateIds: [],
-        downstreamCandidateIds: [],
-      };
-    }
     if (documentationOnly(source, hunkId)) {
       return {
         hunkId,
@@ -1160,6 +1138,17 @@ function deterministicCoverage({
         hunkId,
         status: "no-impact",
         reason: representedReason,
+        restCandidateIds: [],
+        downstreamCandidateIds: [],
+      };
+    }
+    if (declarationsByHunk.has(hunkId) || operationsByHunk.has(hunkId)) {
+      return {
+        hunkId,
+        status: "unknown",
+        reason: declarationsByHunk.has(hunkId)
+          ? "mapped-declaration-without-deterministic-candidate"
+          : "mapped-operation-without-deterministic-candidate",
         restCandidateIds: [],
         downstreamCandidateIds: [],
       };
@@ -1290,7 +1279,8 @@ function accountInput(
         semanticReviewUnits: input.semanticReviewUnits.length,
         restCandidates: input.restCandidates.length,
         downstreamCandidates: input.downstreamCandidates.length,
-        downstreamRootCauses: input.downstreamRootCauses.length,
+        sourceReviewDeclarations: 0,
+        sourceReviewRequests: 0,
         complianceSearchRequests: input.complianceSearchRequests.length,
         inferenceRequests: input.inferenceRequests.length,
       },
@@ -1407,16 +1397,9 @@ export function buildModelInput({
             retainedDownstreamCandidateIds.has(candidate.id),
         )
       : [];
-  const retainedRootCauseIds = new Set(
-    retainedDownstreamCandidates.flatMap((candidate) => candidate.rootCauseIds ?? []),
-  );
-  const retainedDownstreamRootCauses = (downstream.rootCauses ?? []).filter((rootCause) =>
-    retainedRootCauseIds.has(rootCause.id),
-  );
   const retainedDownstream = {
     ...downstream,
     candidates: retainedDownstreamCandidates,
-    rootCauses: retainedDownstreamRootCauses,
   };
 
   const evidenceSets: Record<
@@ -1443,7 +1426,7 @@ export function buildModelInput({
   const retainedFactIds = new Set([
     ...retainedInferenceFactIds,
     ...retainedRestCandidates.flatMap((candidate) => candidate.evidenceFactIds ?? []),
-    ...downstreamReferencedFactIds(retainedDownstream),
+    ...candidateReferencedFactIds(retainedDownstream),
     ...downstream.blockers.flatMap((blocker) => blocker.evidenceFactIds ?? []),
   ]);
 
@@ -1490,8 +1473,22 @@ export function buildModelInput({
     querySummary: compactQuerySummary(request.queryProfile),
   }));
 
+  const compactRestCandidates =
+    rest.status === "ready"
+      ? retainedRestCandidates.map((candidate) =>
+          compactCandidate(candidate, ARTIFACT_REFERENCES.restCandidates),
+        )
+      : [];
+  const compactDownstreamCandidates =
+    downstream.status === "ready"
+      ? retainedDownstreamCandidates.map((candidate) =>
+          compactCandidate(candidate, ARTIFACT_REFERENCES.downstreamCandidates),
+        )
+      : [];
+
   const input: AnalysisModelInput = {
     schemaVersion: 1,
+    pipelineVersion: 2,
     context: {
       sourceComparison: {
         baseCommit: manifest.comparison.mergeBaseCommit,
@@ -1526,19 +1523,8 @@ export function buildModelInput({
     facts: referencedFacts(semantic, rest, downstream, retainedFactIds),
     semanticReviewUnits,
     informationalSemanticIntentIds: informationalSemanticUnits.map((unit) => unit.id),
-    restCandidates:
-      rest.status === "ready"
-        ? retainedRestCandidates.map((candidate) =>
-            compactCandidate(candidate, ARTIFACT_REFERENCES.restCandidates),
-          )
-        : [],
-    downstreamCandidates:
-      downstream.status === "ready"
-        ? retainedDownstreamCandidates.map((candidate) =>
-            compactCandidate(candidate, ARTIFACT_REFERENCES.downstreamCandidates),
-          )
-        : [],
-    downstreamRootCauses: downstream.status === "ready" ? retainedDownstreamRootCauses : [],
+    restCandidates: compactRestCandidates,
+    downstreamCandidates: compactDownstreamCandidates,
     complianceSearchRequests,
     inferenceRequests,
     blockers: [

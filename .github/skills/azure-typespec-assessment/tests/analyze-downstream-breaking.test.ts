@@ -324,6 +324,111 @@ function genericListPackage(removeFirstProperty: boolean) {
   };
 }
 
+for (const missing of [
+  "none",
+  "provenance",
+  "compiler-reference",
+  "changed-template",
+  "method-input",
+] as const) {
+  test(`removed generated models have scoped operation provenance: ${missing}`, (context) => {
+    const rootType = {
+      kind: "model",
+      name: "ScenarioUpdate",
+      crossLanguageDefinitionId: "Contoso.UpdateModel",
+      access: "public",
+      usage: 258,
+      properties: [
+        {
+          kind: "property",
+          name: "properties",
+          serializedName: "properties",
+          optional: true,
+          discriminator: false,
+          type: {
+            kind: "model",
+            name: "ScenarioUpdateProperties",
+            crossLanguageDefinitionId: "Contoso.UpdateProperties",
+          },
+        },
+      ],
+    };
+    const nestedType = {
+      kind: "model",
+      name: "ScenarioUpdateProperties",
+      crossLanguageDefinitionId: "Contoso.UpdateProperties",
+      access: "public",
+      usage: 258,
+      properties: [],
+    };
+    const baseline = packageShape(false);
+    const target = packageShape(false);
+    const baselineRecord = baseline as unknown as { models: unknown[] };
+    baselineRecord.models.push(rootType, nestedType);
+    if (missing !== "method-input") {
+      baseline.clients[0].methods[0].parameters[0].type = rootType;
+    }
+    const refs = ["UpdateModel", "UpdateProperties", "ScenarioRun"];
+    const operation = (revision: string) => ({
+      id: `operation-${revision}`,
+      kind: "operation",
+      qualifiedName: "ScenarioRuns.cancel",
+      decorators: [],
+      hunkIds: ["template-hunk"],
+      source: { revision, startLine: 1, endLine: 5 },
+      compilerEvidence: {
+        kind: "semantic-type",
+        referencedNames:
+          revision === "base" || missing === "changed-template" ? refs : ["ScenarioRun"],
+      },
+    });
+    const declarations = [operation("base"), operation("current")];
+    if (missing === "compiler-reference")
+      declarations[0].compilerEvidence.referencedNames = ["ScenarioRun"];
+    const provenance = {
+      base: {
+        schemaVersion: 1,
+        models: [
+          {
+            crossLanguageDefinitionId: rootType.crossLanguageDefinitionId,
+            name: rootType.name,
+            templateArguments: [
+              { kind: "Model", namespace: "Microsoft.Chaos", name: "ScenarioRun" },
+            ],
+          },
+          {
+            crossLanguageDefinitionId: nestedType.crossLanguageDefinitionId,
+            name: nestedType.name,
+            templateArguments: [
+              { kind: "Model", namespace: "Microsoft.Chaos", name: "ScenarioRun" },
+            ],
+          },
+        ],
+      },
+      current: { schemaVersion: 1, models: [] },
+    };
+    const result = analyzeShapes(
+      context,
+      baseline,
+      target,
+      declarations,
+      undefined,
+      missing === "provenance" ? undefined : provenance,
+    );
+    const removed = result.candidates.filter((candidate) =>
+      /Contoso.Update/.test(candidate.crossLanguageDefinitionId),
+    );
+    assert.equal(removed.length, 2);
+    for (const candidate of removed) {
+      assert.deepEqual(
+        candidate.declarationIds,
+        missing === "none" ? ["operation-base", "operation-current"] : [],
+      );
+      if (missing === "none") assert.deepEqual(candidate.hunkIds, ["template-hunk"]);
+    }
+  });
+}
+
 function genericListProvenance() {
   return {
     schemaVersion: 1,
@@ -803,7 +908,7 @@ void test("detects augment and qualified SDK customization decorators", (context
   ]);
 });
 
-void test("links nested response type changes to unchanged public methods", (context) => {
+void test("does not propagate nested response type changes to unchanged public methods", (context) => {
   const result = analyzeShapes(context, nestedResponseShape(false), nestedResponseShape(true));
   const propertyCandidate = result.candidates.find(
     (item) => item.rule === "model-property-removed",
@@ -811,75 +916,17 @@ void test("links nested response type changes to unchanged public methods", (con
 
   assert.ok(propertyCandidate);
   assert.ok(!result.candidates.some((item) => item.rule === "method-response-changed"));
-  const root = result.rootCauses.find((item) =>
-    item.directCandidateIds.includes(propertyCandidate.id),
-  );
-  assert.ok(root);
-  assert.equal(root.kind, "type-contract-propagation");
-  assert.equal(root.methodFactIds.length, 2);
-  assert.deepEqual(root.methodFactIds.map((id) => result.facts[id].comparisonRole).sort(), [
-    "baseline",
-    "target",
-  ]);
-  assert.deepEqual(
-    [
-      ...new Set(
-        root.referenceEvidence.map((edge) => {
-          assert.ok(edge.fromFactId);
-          return result.facts[edge.fromFactId].comparisonRole;
-        }),
-      ),
-    ].sort(),
-    ["baseline", "target"],
-  );
-  assert.ok(
-    root.referenceEvidence.some(
-      (edge) => edge.kind === "response" && edge.location === "response-body",
-    ),
-  );
-  assert.ok(
-    root.referenceEvidence.some(
-      (edge) =>
-        edge.kind === "property" &&
-        edge.memberName === "segment" &&
-        edge.location === "response-body",
-    ),
-  );
-  assert.ok(
-    Object.values(result.facts).some(
-      (fact) =>
-        fact.factKind === "method" &&
-        fact.crossLanguageDefinitionId === "Storage.File.Directory.listFilesAndDirectoriesSegment",
-    ),
-  );
+  assert.equal(result.rootCauses, undefined);
+  assert.ok(!Object.values(result.facts).some((fact) => fact.factKind === "method"));
 });
 
-void test("retains the unchanged baseline method and parent types for a target-only reference path", (context) => {
+void test("does not retain consumer path facts for a target-only type reference", (context) => {
   const baseline = nestedResponseShape(false);
   baseline.models[0].properties = [];
   const result = analyzeShapes(context, baseline, nestedResponseShape(true));
   const candidate = result.candidates.find((item) => item.rule === "model-property-removed");
   assert.ok(candidate);
-  const root = result.rootCauses.find((item) => item.directCandidateIds.includes(candidate.id));
-  assert.ok(root);
-  assert.deepEqual(root.methodFactIds.map((id) => result.facts[id].comparisonRole).sort(), [
-    "baseline",
-    "target",
-  ]);
-  assert.ok(
-    root.referenceEvidence.every(
-      (edge) => edge.fromFactId && result.facts[edge.fromFactId].comparisonRole === "target",
-    ),
-  );
-  assert.ok(
-    root.typeFactIds.some((id) => {
-      const fact = result.facts[id];
-      return (
-        fact.comparisonRole === "baseline" &&
-        fact.identity === "Storage.File.ListFilesAndDirectoriesSegmentResponse" &&
-        fact.properties?.length === 0
-      );
-    }),
-  );
+  assert.equal(result.rootCauses, undefined);
+  assert.ok(!Object.values(result.facts).some((fact) => fact.factKind === "method"));
   assert.ok(!result.candidates.some((item) => item.rule.startsWith("method-")));
 });

@@ -1,9 +1,13 @@
 import fs from "node:fs";
 import path from "node:path";
-import { deriveSafety, dimensionCompatibility } from "./assessment-display.ts";
-import { UNAVAILABLE_HEAD_BASELINE_MESSAGE } from "./comparison-execution.ts";
+import {
+  deriveSafety,
+  dimensionCompatibility,
+  restContractIdentity,
+} from "./assessment-display.ts";
 import { sameAutorestContract } from "./autorest-contract.ts";
 import { isMain, parseArgs, readJsonObject, runMain, writeJson } from "./cli.ts";
+import { UNAVAILABLE_HEAD_BASELINE_MESSAGE } from "./comparison-execution.ts";
 import { assembleCompliance } from "./compliance-assessment.ts";
 import {
   assembleDocumentQuality,
@@ -21,6 +25,7 @@ import {
   semanticIntentType,
 } from "./semantic-assessment-scope.ts";
 import { canonicalJson, stableId } from "./stable-id.ts";
+import { loadSourceAssociation } from "./source-association.ts";
 
 type AssessmentFact = import("./runtime-types.ts").AssessmentFact;
 
@@ -41,8 +46,6 @@ type ComplianceSearchRequest = import("./runtime-types.ts").ComplianceSearchRequ
 type DownstreamAnalysis = import("./runtime-types.ts").DownstreamAnalysis;
 
 type DownstreamCandidate = import("./runtime-types.ts").DownstreamCandidate;
-
-type DownstreamRootCause = import("./runtime-types.ts").DownstreamRootCause;
 
 type InferenceCandidate = import("./runtime-types.ts").InferenceCandidate;
 
@@ -106,10 +109,39 @@ type JoinedFindingFields = {
   rationale: string;
   evidence: AssessmentFact[];
   sources: SourceChange[];
+  displaySources?: SourceChange[];
+  sourceReview: import("./runtime-types.ts").SourceReviewDecision;
   relatedSemanticIntents?: string[];
   semanticMatchBasis?: string;
   symbol?: string;
 };
+
+function displaySourcesForReview(
+  review: import("./runtime-types.ts").SourceReviewDecision,
+  sources: Record<string, SourceChange>,
+): SourceChange[] {
+  const selectedIds = new Set(
+    review.selectedDeclarations.map((declaration) => declaration.declarationId),
+  );
+  const bySource = new Map<string, Set<string>>();
+  for (const declaration of review.selectedDeclarations) {
+    const hunkIds = bySource.get(declaration.sourceChangeId) ?? new Set<string>();
+    declaration.hunkIds.forEach((hunkId) => hunkIds.add(hunkId));
+    bySource.set(declaration.sourceChangeId, hunkIds);
+  }
+  return [...bySource.entries()].flatMap(([sourceChangeId, hunkIds]) => {
+    const source = sources[sourceChangeId];
+    if (!source) return [];
+    return [
+      {
+        ...sourceForUnit(source, [...hunkIds]),
+        declarations: (source.declarations ?? []).filter((declaration) =>
+          selectedIds.has(declaration.id),
+        ),
+      },
+    ];
+  });
+}
 
 function duplicates<T>(values: T[]): T[] {
   const seen: Set<T> = new Set();
@@ -166,6 +198,7 @@ function validateJudgment(answer: AssessmentJudgment) {
     answer,
     [
       "schemaVersion",
+      "pipelineVersion",
       "semanticIntents",
       "restDecisions",
       "downstreamDecisions",
@@ -176,6 +209,9 @@ function validateJudgment(answer: AssessmentJudgment) {
     "Judgment",
   );
   if (answer.schemaVersion !== 1) throw new Error("Unsupported judgment schemaVersion.");
+  if (answer.pipelineVersion !== undefined && answer.pipelineVersion !== 2) {
+    throw new Error("Unsupported judgment pipelineVersion.");
+  }
 
   const arrayFields: [string, unknown][] = [
     ["semanticIntents", answer.semanticIntents],
@@ -206,9 +242,15 @@ function validateJudgment(answer: AssessmentJudgment) {
   for (const decision of [...answer.restDecisions, ...answer.downstreamDecisions]) {
     assertKeys(
       decision,
-      ["candidateId", "decision", "severity", "rationale"],
+      ["candidateId", "decision", "severity", "rationale", "sourceReview"],
       `Decision ${decision.candidateId ?? "<unknown>"}`,
     );
+    if (
+      !decision.sourceReview &&
+      (answer.pipelineVersion !== 2 || decision.decision === "approve")
+    ) {
+      throw new Error(`Decision ${decision.candidateId ?? "<unknown>"} requires sourceReview.`);
+    }
   }
   for (const decision of answer.complianceDecisions) {
     assertKeys(
@@ -396,6 +438,9 @@ function joinFindings<T extends BreakingCandidate | DownstreamCandidate | Infere
     if (decision.severity === undefined) {
       throw new Error(`Missing severity for ${candidate.id}.`);
     }
+    if (!decision.sourceReview) {
+      throw new Error(`Missing source review for ${candidate.id}.`);
+    }
     return [
       {
         ...candidate,
@@ -410,6 +455,12 @@ function joinFindings<T extends BreakingCandidate | DownstreamCandidate | Infere
               : source;
           })
           .filter(Boolean),
+        sourceReview: decision.sourceReview,
+        ...(decision.sourceReview.selectedDeclarations.length
+          ? {
+              displaySources: displaySourcesForReview(decision.sourceReview, sources),
+            }
+          : {}),
       },
     ];
   });
@@ -613,19 +664,6 @@ function meaningfulDownstreamFinding(finding: DownstreamFinding) {
   return canonicalJson(beforeValue ?? null) !== canonicalJson(afterValue ?? null);
 }
 
-function semanticOperationIndex(semanticItems: SemanticItem[]) {
-  const operations: {
-    intent: SemanticItem;
-    operation: PresentedOperation;
-  }[] = [];
-  for (const intent of semanticItems) {
-    for (const operation of intent.operations) {
-      operations.push({ intent, operation });
-    }
-  }
-  return operations;
-}
-
 export function matchTypeFindingIntents(finding: DownstreamFinding, semanticItems: SemanticItem[]) {
   const typeNames = new Set(
     [
@@ -654,14 +692,13 @@ function findingRelations(
   downstreamFindings: DownstreamFinding[],
   semanticItems: SemanticItem[],
 ) {
-  const semanticOperations = semanticOperationIndex(semanticItems);
   for (const finding of restFindings) {
-    const matches = semanticOperations.filter(({ operation }) =>
-      finding.operationIds.includes(operation.operationId),
-    );
-    finding.relatedSemanticIntents = [...new Set(matches.map(({ intent }) => intent.id))];
+    const matches = matchRestFindingIntents(finding, semanticItems);
+    finding.relatedSemanticIntents = [...new Set(matches.map((intent) => intent.id))];
     finding.semanticMatchBasis = finding.relatedSemanticIntents.length
-      ? "operation-identity"
+      ? finding.operationIds.includes(restContractIdentity(finding))
+        ? "operation-identity"
+        : "declaration-identity"
       : undefined;
   }
   for (const finding of downstreamFindings) {
@@ -680,11 +717,64 @@ function findingRelations(
   }
 }
 
-function downstreamGroups(
-  downstreamFindings: DownstreamFinding[],
-  rootCauses: DownstreamRootCause[] = [],
-  facts: Record<string, AssessmentFact> = {},
+type RestIntentOwner = Pick<
+  InternalSemanticUnit,
+  "id" | "projectId" | "projectIds" | "hunkIds" | "declarationIds" | "operations"
+> & { sources: SourceChange[]; informational?: boolean };
+
+export function matchRestFindingIntents(
+  finding: Parameters<typeof restContractIdentity>[0] & { sourceChangeIds?: string[] },
+  semanticItems: RestIntentOwner[],
 ) {
+  const projectIds = new Set(
+    (finding.evidence ?? []).map((fact) => fact.projectId).filter(Boolean),
+  );
+  const scoped = semanticItems.filter(
+    (intent) =>
+      !intent.informational &&
+      (!projectIds.size ||
+        [intent.projectId, ...(intent.projectIds ?? [])].some((id) => projectIds.has(id))),
+  );
+  const owner = restContractIdentity(finding);
+  if ((finding.operationIds ?? []).includes(owner)) {
+    return scoped.filter((intent) =>
+      intent.operations.some((operation) => finding.operationIds?.includes(operation.operationId)),
+    );
+  }
+  const sourceIds = new Set(finding.sourceChangeIds ?? []);
+  const declarations = scoped.flatMap((intent) =>
+    intent.sources
+      .filter((source) => !sourceIds.size || sourceIds.has(source.id))
+      .flatMap((source) => source.declarations.map((declaration) => ({ intent, declaration }))),
+  );
+  const owners = declarations.filter(
+    ({ declaration }) =>
+      ["model", "enum", "union"].includes(declaration.kind) &&
+      (declaration.qualifiedName === owner || declaration.qualifiedName.endsWith(`.${owner}`)),
+  );
+  const names = new Set(owners.map(({ declaration }) => declaration.qualifiedName));
+  if (names.size !== 1) return [];
+  const qualifiedOwner = [...names][0];
+  const member = finding.contractChange?.location?.split(".").at(-1)?.replace(/\[\]$/, "");
+  const properties = declarations.filter(
+    ({ declaration }) =>
+      declaration.kind === "property" &&
+      declaration.qualifiedName === `${qualifiedOwner}.${member}`,
+  );
+  const candidates = properties.length ? properties : owners;
+  const matches = new Map<string, RestIntentOwner>();
+  for (const { intent, declaration } of candidates) {
+    if (
+      intent.declarationIds.includes(declaration.id) &&
+      declaration.hunkIds.some((hunkId) => intent.hunkIds.includes(hunkId))
+    ) {
+      matches.set(intent.id, intent);
+    }
+  }
+  return matches.size === 1 ? [...matches.values()] : [];
+}
+
+function downstreamGroups(downstreamFindings: DownstreamFinding[]) {
   const byMethod: Map<
     string,
     {
@@ -763,14 +853,10 @@ function downstreamGroups(
           }
           return delta;
         }),
-        rootCauseIds: [
-          ...new Set(group.findings.flatMap((finding) => finding.rootCauseIds ?? [])),
-        ].sort(),
         relatedSemanticIntents: representative.relatedSemanticIntents ?? [],
       };
     })
     .sort((left, right) => left.symbol.localeCompare(right.symbol));
-  const rootCauseById = new Map(rootCauses.map((item) => [item.id, item]));
 
   const typeGroups: Map<
     string,
@@ -778,7 +864,6 @@ function downstreamGroups(
       projectId?: string;
       type: string;
       findings: DownstreamFinding[];
-      rootCauseIds: Set<string>;
     }
   > = new Map();
   for (const finding of typeFindings) {
@@ -792,65 +877,13 @@ function downstreamGroups(
       projectId,
       type,
       findings: [],
-      rootCauseIds: new Set(),
     };
     group.findings.push(finding);
-    for (const id of finding.rootCauseIds ?? []) group.rootCauseIds.add(id);
     typeGroups.set(key, group);
   }
   const typeImpacts = [...typeGroups.values()]
     .map((group) => {
       const findingIds = group.findings.map((finding) => finding.id).sort();
-      const roots = [...group.rootCauseIds]
-        .map((id) => rootCauseById.get(id))
-        .filter((root) => root !== undefined);
-
-      const affectedMethods: Map<
-        string,
-        {
-          symbol: string;
-          locations: Set<string>;
-          referenceFactIds: Set<string>;
-        }
-      > = new Map();
-      for (const root of roots) {
-        const locations = [
-          ...new Set(
-            (root.referenceEvidence ?? [])
-              .map((edge) => edge.location)
-              .filter((location) => location !== undefined),
-          ),
-        ].sort();
-        const referenceFactIds = [
-          ...new Set(
-            (root.referenceEvidence ?? [])
-              .flatMap((edge) => [edge.fromFactId, edge.toFactId])
-              .filter((id) => id !== undefined),
-          ),
-        ].sort();
-        for (const methodFactId of root.methodFactIds ?? []) {
-          const method = facts[methodFactId];
-          if (!method || method.factKind !== "method") continue;
-          const symbol = method.crossLanguageDefinitionId ?? method.identity ?? method.name;
-          if (!symbol) continue;
-          const current = affectedMethods.get(symbol) ?? {
-            symbol,
-            locations: new Set(),
-            referenceFactIds: new Set(),
-          };
-          locations.forEach((location) => current.locations.add(location));
-          referenceFactIds.forEach((id) => current.referenceFactIds.add(id));
-          affectedMethods.set(symbol, current);
-        }
-      }
-      const methods = [...affectedMethods.values()]
-        .map((method) => ({
-          symbol: method.symbol,
-          locations: [...method.locations].sort(),
-          referenceFactIds: [...method.referenceFactIds].sort(),
-        }))
-        .sort((left, right) => left.symbol.localeCompare(right.symbol));
-      const locations = [...new Set(methods.flatMap((method) => method.locations))].sort();
       const relatedSemanticIntents = [
         ...new Set(group.findings.flatMap((finding) => finding.relatedSemanticIntents ?? [])),
       ].sort();
@@ -862,16 +895,9 @@ function downstreamGroups(
         }),
         projectId: group.projectId,
         type: group.type,
-        locations,
-        rootCauseIds: [...group.rootCauseIds].sort(),
         summary: "This generated SDK type has a confirmed public contract change.",
         findingIds,
-        affectedMethodCount: methods.length,
-        affectedMethods: methods,
         relatedSemanticIntents,
-        unresolvedRelationshipReason: methods.length
-          ? null
-          : "No public SDK method reference path was deterministically established.",
       };
     })
     .sort((left, right) => left.id.localeCompare(right.id));
@@ -932,7 +958,7 @@ export function assembleAssessment({
   const downstream = readJsonObject(
     path.join(work, "dimensions", "downstream-breaking-input.json"),
   ) as unknown as DownstreamAnalysis;
-  const answer =
+  let answer =
     typeof judgment === "string"
       ? (readJsonObject(judgment) as unknown as AssessmentJudgment)
       : judgment;
@@ -941,6 +967,29 @@ export function assembleAssessment({
   const modelInput: Partial<AssessmentModelInput> = fs.existsSync(modelInputPath)
     ? readJsonObject(modelInputPath)
     : {};
+  if (modelInput.pipelineVersion === 2) {
+    if (answer.pipelineVersion !== 2)
+      throw new Error("Judgment pipeline does not match model input.");
+    if (
+      canonicalJson(answer) !==
+      canonicalJson(readJsonObject(path.join(work, "assessment-judgment.json")))
+    ) {
+      throw new Error("Supplied judgment differs from the frozen source snapshot.");
+    }
+    const source = loadSourceAssociation(work);
+    const attach = (decisions: CandidateDecision[]) =>
+      decisions.map((decision) => ({
+        ...decision,
+        ...(decision.decision === "approve"
+          ? { sourceReview: source.reviews[decision.candidateId] }
+          : {}),
+      }));
+    answer = {
+      ...answer,
+      restDecisions: attach(answer.restDecisions),
+      downstreamDecisions: attach(answer.downstreamDecisions),
+    };
+  }
 
   const scopedCandidates = <
     T extends {
@@ -1227,10 +1276,7 @@ export function assembleAssessment({
     downstreamFindings,
     semanticItems.filter((intent) => !intent.informational),
   );
-  const downstreamAggregation = downstreamGroups(downstreamFindings, downstream.rootCauses, {
-    ...modelInput.facts,
-    ...downstream.facts,
-  });
+  const downstreamAggregation = downstreamGroups(downstreamFindings);
   addReciprocalRelations(semanticItems, restFindings, downstreamAggregation);
   const rejectedRestCandidateCount = answer.restDecisions.filter(
     (item) => item.decision === "reject",
@@ -1264,7 +1310,6 @@ export function assembleAssessment({
     findings: downstreamFindings,
     methodGroups: downstreamAggregation.methodGroups,
     typeImpacts: downstreamAggregation.typeImpacts,
-    rootCauses: downstream.rootCauses ?? [],
     rejectedCandidateCount: rejectedDownstreamCandidateCount,
     blockers: [
       ...downstream.blockers,
@@ -1379,6 +1424,12 @@ export function assembleAssessment({
     blockers: [...manifest.blockers, ...answer.blockers, ...inferenceBlockers],
     provenance: {
       modelInput: "model-input.json",
+      ...(modelInput.pipelineVersion === 2
+        ? {
+            sourceAssociationInput: "source-association-input.json",
+            sourceAssociation: "source-association.json",
+          }
+        : {}),
       ...(fs.existsSync(documentQualityPath) ? { documentQuality: DOCUMENT_QUALITY_ARTIFACT } : {}),
       ...(inference ? { inference: "inference.json" } : {}),
       ...(hasComplianceInput

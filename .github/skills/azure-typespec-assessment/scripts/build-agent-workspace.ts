@@ -124,7 +124,7 @@ function decisionsDraft(modelInput: AssessmentModelInput, declarationNames: Map<
     rationale: "",
   });
   return {
-    schemaVersion: 1,
+    schemaVersion: modelInput.pipelineVersion === 2 ? 2 : 1,
     semanticSummaries: modelInput.semanticReviewUnits.map((unit) => ({
       reviewUnitId: unit.reviewUnitId,
       title: "",
@@ -132,6 +132,16 @@ function decisionsDraft(modelInput: AssessmentModelInput, declarationNames: Map<
     })),
     restDecisions: modelInput.restCandidates.map(decision),
     downstreamDecisions: modelInput.downstreamCandidates.map(decision),
+    ...(modelInput.pipelineVersion === 2
+      ? {}
+      : {
+          sourceReviews: (modelInput.sourceReviewRequests ?? []).map((request) => ({
+            candidateId: request.candidateId,
+            outcome: "__UNRESOLVED__",
+            selectedDeclarationIds: request.deterministicDeclarationIds,
+            rationale: "",
+          })),
+        }),
     ...(modelInput.inferenceRequests.length
       ? {
           inferenceResults: modelInput.inferenceRequests.map((request) => ({
@@ -207,6 +217,7 @@ export function buildAgentWorkspace({ work }: { work: string }) {
     schemaVersion: 1,
     preparationId: randomUUID(),
     runtime,
+    ...(modelInput.pipelineVersion === 2 ? { pipelineVersion: 2 } : {}),
     comparisonIdentity: comparisonIdentity(modelInput),
     input: {
       path: "model-input.json",
@@ -218,6 +229,7 @@ export function buildAgentWorkspace({ work }: { work: string }) {
       informationalSemanticIntents: modelInput.informationalSemanticIntentIds?.length ?? 0,
       restCandidates: modelInput.restCandidates.length,
       downstreamCandidates: modelInput.downstreamCandidates.length,
+      sourceReviewRequests: modelInput.sourceReviewRequests?.length ?? 0,
       inferenceRequests: modelInput.inferenceRequests.length,
       guidelineRequests: modelInput.complianceSearchRequests.length,
     },
@@ -278,14 +290,26 @@ export function buildAgentWorkspace({ work }: { work: string }) {
       informationalSemanticIntentIds: modelInput.informationalSemanticIntentIds ?? [],
       restCandidateIds: modelInput.restCandidates.map((candidate) => candidate.id),
       downstreamCandidateIds: modelInput.downstreamCandidates.map((candidate) => candidate.id),
+      sourceReviewCandidateIds: (modelInput.sourceReviewRequests ?? []).map(
+        (request) => request.candidateId,
+      ),
       inferenceRequestIds: modelInput.inferenceRequests.map((request) => request.requestId),
       guidelineRequestIds: modelInput.complianceSearchRequests.map((request) => request.requestId),
     },
     completionChecklist: [
       "Read model-input.json exactly once.",
       ...(modelInput.inferenceRequests.length
-        ? ["Resolve every inference request in the compact Agent decisions."]
+        ? [
+            "Resolve every inference request in the compact Agent decisions and judge any inferred candidates.",
+          ]
         : []),
+      ...(modelInput.pipelineVersion === 2
+        ? [
+            "Do not complete display source in this judgment phase. After materialization freezes judgment, run source-association.ts --work <work-directory> and process its source-only index in a separate AI context.",
+          ]
+        : [
+            "Review deterministic TypeSpec source proposals for every candidate, including inferred candidates; select only canonical declaration IDs.",
+          ]),
       ...(modelInput.complianceSearchRequests.length
         ? [
             "Score the full catalog, fetch the first four retrievable documents with fallback, and complete the compact Agent decisions; use only prefilled intent-scoped declarationNames in complianceJudgments.",

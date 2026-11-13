@@ -494,6 +494,7 @@ export interface NormalizedTcgcNamedType {
   access?: string;
   reachable?: boolean;
   usage?: unknown;
+  usageDetails?: TcgcUsageDetails;
   properties?: {
     name?: string;
     type: NormalizedTcgcType;
@@ -513,6 +514,14 @@ export interface NormalizedTcgcNamedType {
   type?: NormalizedTcgcType;
   discriminatedOptions?: unknown;
   [key: string]: unknown;
+}
+
+export interface TcgcUsageDetails {
+  value: number;
+  flags: string[];
+  input: boolean;
+  output: boolean;
+  unknownBits: number;
 }
 
 export interface NormalizedTcgcContract {
@@ -691,7 +700,8 @@ export interface AssessmentFact {
   owner?: string;
   parent?: string;
   access?: string;
-  usage?: string[];
+  usage?: unknown;
+  usageDetails?: TcgcUsageDetails;
   reachable?: boolean;
   parameters?: {
     position?: number;
@@ -818,6 +828,28 @@ export interface ModelInputItem {
   [key: string]: unknown;
 }
 
+export interface SourceReviewDeclaration {
+  declarationId: string;
+  sourceChangeId: string;
+  qualifiedName: string;
+  kind: string;
+  revision: SourceRevision;
+  startLine: number;
+  endLine: number;
+  hunkIds: string[];
+}
+
+export interface SourceReviewRequest extends ModelInputItem {
+  candidateId: string;
+  dimension: "rest" | "downstream";
+  evidenceSetId: string;
+  deterministicStatus: "associated" | "unresolved";
+  deterministicDeclarationIds: string[];
+  availableDeclarationIds: string[];
+  sourceChangeIds: string[];
+  hunkIds: string[];
+}
+
 export interface ModelSemanticReviewUnit extends ModelInputItem {
   reviewUnitId: string;
   deterministicCoverage?: {
@@ -884,10 +916,18 @@ export interface CandidateDecision {
   decision: "approve" | "reject";
   severity?: "high" | "medium" | "low";
   rationale: string;
+  sourceReview?: SourceReviewDecision;
+}
+
+export interface SourceReviewDecision {
+  outcome: "keep" | "refine" | "associate" | "unresolved" | "not-applicable";
+  selectedDeclarations: SourceReviewDeclaration[];
+  rationale: string;
 }
 
 export interface AssessmentJudgment {
   schemaVersion: 1;
+  pipelineVersion?: 2;
   semanticIntents: {
     reviewUnitId: string;
     title: string;
@@ -939,6 +979,7 @@ export interface ComplianceModelInputRequest extends ModelInputItem {
 }
 
 export interface AssessmentModelInput {
+  pipelineVersion?: 2;
   context?: {
     sourceComparison?: unknown;
     projects?: {
@@ -951,6 +992,8 @@ export interface AssessmentModelInput {
   informationalSemanticIntentIds?: string[];
   restCandidates: (ModelInputItem & { id: string })[];
   downstreamCandidates: (ModelInputItem & { id: string })[];
+  sourceReviewDeclarations?: SourceReviewDeclaration[];
+  sourceReviewRequests?: SourceReviewRequest[];
   inferenceRequests: InferenceRequest[];
   complianceSearchRequests: ComplianceModelInputRequest[];
   evidenceSets?: Record<string, EvidenceSet>;
@@ -1188,7 +1231,7 @@ export interface DownstreamAnalysis {
   schemaVersion: number;
   status: "ready" | "blocked";
   facts: Record<string, AssessmentFact>;
-  rootCauses: DownstreamRootCause[];
+  rootCauses?: DownstreamRootCause[];
   candidates: DownstreamCandidate[];
   blockers: PreparationBlocker[];
 }
@@ -1356,6 +1399,8 @@ export interface AssessmentFinding {
   severity: "high" | "medium" | "low";
   rationale: string;
   sources: SourceChange[];
+  displaySources?: SourceChange[];
+  sourceReview?: SourceReviewDecision;
   evidence: AssessmentFact[];
   operationIds?: string[];
   crossLanguageDefinitionId?: string;

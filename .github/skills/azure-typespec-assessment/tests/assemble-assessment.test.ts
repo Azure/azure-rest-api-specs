@@ -24,7 +24,26 @@ type ComplianceDecision = import("../scripts/runtime-types.ts").ComplianceDecisi
 function assembleTestAssessment(
   options: Parameters<typeof assembleAssessment>[0],
 ): AssessmentOutput {
-  return assembleAssessment(options) as unknown as AssessmentOutput;
+  const withReviews = (decision: AssessmentJudgment["restDecisions"][number]) => ({
+    ...decision,
+    sourceReview: decision.sourceReview ?? {
+      outcome:
+        decision.decision === "reject" ? ("not-applicable" as const) : ("unresolved" as const),
+      selectedDeclarations: [],
+      rationale: "No focused source is needed for this assembly fixture.",
+    },
+  });
+  if (typeof options.judgment === "string") {
+    return assembleAssessment(options) as unknown as AssessmentOutput;
+  }
+  return assembleAssessment({
+    ...options,
+    judgment: {
+      ...options.judgment,
+      restDecisions: options.judgment.restDecisions.map(withReviews),
+      downstreamDecisions: options.judgment.downstreamDecisions.map(withReviews),
+    },
+  }) as unknown as AssessmentOutput;
 }
 
 void test("validator rejects passed dimensions with blockers", () => {
@@ -516,6 +535,57 @@ void test.each([false, true])(
     }
   },
 );
+
+void test("verified unresolved source does not discard an evidence-backed finding", () => {
+  const work = fixture();
+  try {
+    const result = assembleTestAssessment({
+      work,
+      judgment: {
+        schemaVersion: 1,
+        overallConfidence: "high",
+        blockers: [],
+        semanticIntents: [
+          {
+            reviewUnitId: "semantic-1",
+            title: "Change Widget",
+            summary: "Change Widget contract.",
+          },
+        ],
+        restDecisions: [
+          {
+            candidateId: "rest-1",
+            decision: "approve",
+            severity: "high",
+            rationale: "Required member breaks callers.",
+          },
+        ],
+        downstreamDecisions: [],
+        complianceDecisions: [],
+      },
+    });
+    const finding = result.dimensions.rest.findings[0];
+    finding.sources = [];
+    finding.sourceReview = {
+      outcome: "unresolved",
+      selectedDeclarations: [],
+      rationale: "Canonical source attribution reviewed but unavailable.",
+    };
+    const sourceError = () =>
+      validateAssessment(result).filter((error) => /no changed TypeSpec source/.test(error));
+    assert.deepEqual(sourceError(), []);
+    finding.sourceReview.rationale = "";
+    assert.equal(sourceError().length, 1);
+    finding.sourceReview.rationale = "Source unavailable.";
+    finding.evidence = [];
+    assert.equal(sourceError().length, 1);
+    finding.evidence = [{ id: "rest-fact-1" }];
+    finding.sourceReview = undefined;
+    assert.equal(sourceError().length, 1);
+  } finally {
+    fs.rmSync(work, { recursive: true, force: true });
+  }
+});
 
 void test("assembly retains mapped operations without treating paging metadata as a wire change", () => {
   for (const wireField of [undefined, "responses", "produces"]) {
@@ -1730,7 +1800,7 @@ void test("assembles changed-only parameters and suppresses URI-template-only LR
   assert.deepEqual(validateAssessment(assessment), []);
 });
 
-void test("assembles SDK type impacts from deterministic method paths", () => {
+void test("assembles SDK type impacts without consumer method paths", () => {
   const work = fixture();
   const before = {
     id: "sdk-type-before",
@@ -1838,12 +1908,10 @@ void test("assembles SDK type impacts from deterministic method paths", () => {
   const impact = typeImpacts[0];
   assert.ok(impact);
   assert.equal(impact.type, "Contoso.Widget");
-  assert.deepEqual(impact.locations, ["response-body"]);
-  assert.ok(impact.affectedMethods);
-  assert.deepEqual(
-    impact.affectedMethods.map((item) => item.symbol),
-    ["Contoso.Widgets.get"],
-  );
+  assert.equal(impact.locations, undefined);
+  assert.equal(impact.affectedMethods, undefined);
+  assert.equal(impact.affectedMethodCount, undefined);
+  assert.equal(impact.rootCauseIds, undefined);
   const relatedFindings = assessment.dimensions.semantic.items[0].relatedFindings;
   assert.ok(relatedFindings);
   assert.deepEqual(relatedFindings.typeImpact, [impact.id]);
