@@ -24,8 +24,8 @@ namespace Azure.AI.FineTuning.Sessions;
 // raw operation-group methods would be a separate additive API change.
 @@scope(FineTuningSessions.delete, "!python");
 @@scope(Training.forward, "!python");
-// Preparation remains in maintained checkpoint hooks; file delivery is not
-// implemented by the current Python convenience SDK.
+// Maintained download_weights hooks combine preparation and streamed file reads
+// with local destination validation; do not add separate raw Python methods.
 @@scope(CheckpointDownloads.prepare, "!python");
 @@scope(CheckpointDownloads.getFile, "!python");
 

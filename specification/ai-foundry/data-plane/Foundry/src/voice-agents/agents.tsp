@@ -2,10 +2,7 @@ import "@typespec/http";
 import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-client-generator-core";
-import "@azure-tools/openai-typespec/models/realtime";
-import "@azure-tools/openai-typespec/models/live";
 // OpenAI 1.29.0 Live models need the webhook-defined target_uri.
-import "@azure-tools/openai-typespec/models/webhooks";
 import "../common/servicepatterns.tsp";
 import "../agents/models.tsp";
 import "../openai/responses/models.tsp";

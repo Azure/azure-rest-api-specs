@@ -20,20 +20,9 @@ using ComputeDisk;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SnapshotUpdate.properties);
 
-@@clientName(Disks.update, "Disks.update::parameters.properties", "disk");
-@@clientName(
-  Disks.grantAccess,
-  "Disks.grantAccess::parameters.body",
-  "grantAccessData"
-);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Disk.properties);
 
-@@clientName(
-  DiskAccesses.update,
-  "DiskAccesses.update::parameters.properties",
-  "diskAccess"
-);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiskAccess.properties);
 
@@ -42,36 +31,16 @@ using ComputeDisk;
   PrivateEndpointConnection.properties
 );
 
-@@clientName(
-  DiskEncryptionSets.update,
-  "DiskEncryptionSets.update::parameters.properties",
-  "diskEncryptionSet"
-);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   DiskEncryptionSet.properties
 );
 
-@@clientName(
-  DiskRestorePoints.grantAccess,
-  "DiskRestorePoints.grantAccess::parameters.body",
-  "grantAccessData"
-);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   DiskRestorePoint.properties
 );
 
-@@clientName(
-  Snapshots.update,
-  "Snapshots.update::parameters.properties",
-  "snapshot"
-);
-@@clientName(
-  Snapshots.grantAccess,
-  "Snapshots.grantAccess::parameters.body",
-  "grantAccessData"
-);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Snapshot.properties);
 

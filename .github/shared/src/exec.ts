@@ -21,6 +21,11 @@ export interface ExecFileOptions extends ExecOptions {
   env?: NodeJS.ProcessEnv;
   /** Maximum execution time in milliseconds. Defaults to no timeout. */
   timeout?: number;
+  /**
+   * Whether to forward the command's stdout and stderr to the corresponding process streams.
+   * Defaults to false.
+   */
+  forwardOutput?: boolean;
 }
 
 export interface NpmPrefixOptions {
@@ -64,19 +69,26 @@ export async function execFile(
     // Node default is 1024 * 1024, which is too small for some git commands returning many entities or large file content.
     // To support "git show", should be larger than the largest swagger file in the repo (2.5 MB as of 2/28/2025).
     maxBuffer = 16 * 1024 * 1024,
+    forwardOutput = false,
   } = options;
 
   logger?.debug(`execFile("${file}", ${JSON.stringify(args)})`);
 
   try {
     // execFile(file, args) is more secure than exec(cmd), since the latter is vulnerable to shell injection
-    const result = await execFileImpl(file, args, {
+    const execution = execFileImpl(file, args, {
       cwd,
       maxBuffer,
       timeout,
       ...(env === undefined ? {} : { env }),
     });
 
+    if (forwardOutput) {
+      execution.child.stdout?.pipe(process.stdout, { end: false });
+      execution.child.stderr?.pipe(process.stderr, { end: false });
+    }
+
+    const result = await execution;
     logger?.debug(`stdout: '${result.stdout}'`);
     logger?.debug(`stderr: '${result.stderr}'`);
 
