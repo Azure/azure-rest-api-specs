@@ -873,7 +873,7 @@ model AgentPoolNetworkProfile {
    * GET responses also include a legacy IPv4-only pool's prefix in this list. For more information, see https://aka.ms/aks/ipv6-ilpip
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_10_02_preview)
   @maxItems(2)
   nodePublicIPPrefixIDs?: Azure.Core.armResourceIdentifier<[
     {
