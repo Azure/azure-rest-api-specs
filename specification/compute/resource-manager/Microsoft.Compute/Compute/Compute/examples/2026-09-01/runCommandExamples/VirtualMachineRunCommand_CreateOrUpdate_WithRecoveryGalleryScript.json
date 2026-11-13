@@ -1,0 +1,52 @@
+{
+  "title": "Create or update a managed Run Command in Windows Recovery Environment on a VM using a gallery script",
+  "operationId": "VirtualMachineRunCommands_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVM",
+    "runCommandName": "myRecoveryRunCommand",
+    "api-version": "2026-09-01",
+    "runCommand": {
+      "location": "westus",
+      "properties": {
+        "source": {
+          "galleryScriptReferenceId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myRecoveryGallery/scripts/repairBoot/versions/1.0.0"
+        },
+        "isRecoveryRunCommand": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/runCommands/myRecoveryRunCommand",
+        "name": "myRecoveryRunCommand",
+        "type": "Microsoft.Compute/virtualMachines/runCommands",
+        "location": "westus",
+        "properties": {
+          "source": {
+            "scriptUri": "https://umsaabcde.z31.blob.storage.azure.net/pir/pirreplica-1234abcde-0000"
+          },
+          "isRecoveryRunCommand": true,
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/runCommands/myRecoveryRunCommand",
+        "name": "myRecoveryRunCommand",
+        "type": "Microsoft.Compute/virtualMachines/runCommands",
+        "location": "westus",
+        "properties": {
+          "source": {
+            "scriptUri": "https://umsaabcde.z31.blob.storage.azure.net/pir/pirreplica-1234abcde-0000"
+          },
+          "isRecoveryRunCommand": true,
+          "provisioningState": "Creating"
+        }
+      }
+    }
+  }
+}
