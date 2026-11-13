@@ -449,8 +449,8 @@ namespace Customizations {
     }
   );
 
-  // Python callers resume pagination through ItemPaged.by_page(continuation_token=...).
-  @@scope(ContinuationTokenQueryParameter.continuationToken, "!python");
+  // Python and JavaScript callers resume pagination through by_page/byPage options.
+  @@scope(ContinuationTokenQueryParameter.continuationToken, "!python,!javascript");
 
   @@alternateType(
     TopicCreateOrReplaceBodyParameter.resource,
