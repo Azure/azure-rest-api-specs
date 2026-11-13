@@ -28,8 +28,17 @@ These are the global settings for the Maps API.
 title: AzureMapsManagementClient
 description: Azure Maps
 openapi-type: arm
-tag: package-preview-2025-10
+tag: package-2026-12
 
+```
+
+### Tag: package-2026-12
+
+These settings apply only when `--tag=package-2026-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-12'
+input-file:
+  - stable/2026-12-01/maps-management.json
 ```
 
 

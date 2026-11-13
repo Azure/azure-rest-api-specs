@@ -2,18 +2,19 @@
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Maps;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_12_01)
 interface OperationResultOperationGroup {
   /**
    * Get the result of a long running azure asynchronous operation.
