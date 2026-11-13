@@ -109,6 +109,13 @@ policy on data-plane PRs; the other ARM policies explicitly opt data-plane PRs o
 
 The same approval policies protect both label additions and removals.
 
+## Client customization review
+
+Management-plane PRs targeting `main` that change only `client.tsp` and/or
+`tspconfig.yaml` get `client-customization-review-required` instead of `ARMReview`.
+Members of `azure-arm-sdk-reviewers` and global approvers may apply
+`client-customization-approved` after reviewing the changes.
+
 ## Removal protection
 
 Every configured label is protected against unauthorized removal using its existing

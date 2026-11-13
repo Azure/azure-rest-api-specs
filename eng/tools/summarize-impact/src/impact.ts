@@ -119,11 +119,19 @@ export async function evaluateImpact(
       diffSuppression(resolve(context.targetDirectory, file), after).length > 0;
   }
 
+  const changedFiles = context.getChangedFiles();
   return {
     schemaVersion: 2,
     services: [...services.values()].sort((a, b) =>
       `${a.path}:${a.plane}`.localeCompare(`${b.path}:${b.plane}`),
     ),
+    clientCustomizationOnly:
+      changedFiles.length > 0 &&
+      changedFiles.every(
+        (file) =>
+          (file.toLowerCase().endsWith("/client.tsp") || tspconfig(file)) &&
+          getPlane(file, context) === "resource-manager",
+      ),
   };
 }
 

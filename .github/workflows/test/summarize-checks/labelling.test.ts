@@ -436,6 +436,24 @@ describe("service-scoped impact labels", () => {
     );
   });
 
+  it("routes client customization-only changes on main to client customization review", () => {
+    const customization = {
+      schemaVersion: 2 as const,
+      services: [service],
+      clientCustomizationOnly: true,
+    };
+    const labels = updateLabels(["ARMReview"], customization, context);
+    expect(labels.toAdd.has("client-customization-review-required")).toBe(true);
+    expect([...labels.toRemove]).toEqual(["ARMReview"]);
+
+    const otherBranch = updateLabels([], customization, {
+      isDraft: false,
+      targetBranch: "RPSaaSMaster",
+    });
+    expect(otherBranch.toAdd.has("ARMReview")).toBe(true);
+    expect(otherBranch.toAdd.has("client-customization-review-required")).toBe(false);
+  });
+
   it("evaluates the same artifact against current draft and branch state", () => {
     const impact = { schemaVersion: 2 as const, services: [service] };
     for (const current of [

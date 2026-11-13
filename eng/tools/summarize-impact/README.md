@@ -37,7 +37,8 @@ resource-manager, without describing the change as an API change:
         "registered": false
       }
     }
-  ]
+  ],
+  "clientCustomizationOnly": false
 }
 ```
 
@@ -51,6 +52,8 @@ plane/linter ruleset. Unresolved files use `unknown`; deleted projects can use t
 New API versions are compared against their own resource provider in the baseline checkout.
 Resource-provider facts describe namespace additions, RPaaS configuration, added Swagger definitions,
 and registration in the baseline checkout's `.github/arm-leases` directory.
+`clientCustomizationOnly` is true when every changed spec file is a management-plane `client.tsp`
+or `tspconfig.yaml`; such PRs targeting `main` get client customization review instead of ARM review.
 
 `summarize-checks` evaluates review requirements using these facts and the PR's **current** draft
 status and target branch, then reconciles labels separately. ARM review exemptions do not remove the

@@ -9,6 +9,7 @@ export type ReviewRequirements = {
   arm: boolean;
   dataPlane: boolean;
   suppressions: boolean;
+  clientCustomization: boolean;
 };
 
 function isReleaseBranch(branchName: string): boolean {
@@ -25,9 +26,12 @@ export function evaluateReviewRequirements(
   context: ReviewContext,
 ): ReviewRequirements {
   const active = specReviewApplies(context);
+  const clientCustomization =
+    active && context.targetBranch === "main" && impact.clientCustomizationOnly === true;
   return {
     arm:
       active &&
+      !clientCustomization &&
       impact.services.some(
         (service) =>
           service.plane === "resource-manager" &&
@@ -44,5 +48,6 @@ export function evaluateReviewRequirements(
     suppressions: impact.services.some(
       (service) => service.plane === "resource-manager" && service.suppressionsChanged,
     ),
+    clientCustomization,
   };
 }

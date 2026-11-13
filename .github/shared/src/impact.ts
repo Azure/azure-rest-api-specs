@@ -19,6 +19,8 @@ export const ServiceImpactSchema = z.object({
 export const ImpactAssessmentSchema = z.object({
   schemaVersion: z.literal(2),
   services: z.array(ServiceImpactSchema),
+  /** Every changed file is a management-plane `client.tsp` or `tspconfig.yaml`. */
+  clientCustomizationOnly: z.boolean().optional(),
 });
 
 export type ServiceImpact = z.infer<typeof ServiceImpactSchema>;

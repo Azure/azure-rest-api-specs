@@ -24,7 +24,11 @@ function context(files: Partial<FileListInfo>, source = AFTER, target = BEFORE) 
 
 describe("change impact", () => {
   it("reports no services when nothing changed", async () => {
-    expect(await evaluateImpact(context({}), [])).toEqual({ schemaVersion: 2, services: [] });
+    expect(await evaluateImpact(context({}), [])).toEqual({
+      schemaVersion: 2,
+      services: [],
+      clientCustomizationOnly: false,
+    });
   });
 
   it("keeps facts scoped to their service and plane", async () => {
@@ -92,6 +96,24 @@ describe("change impact", () => {
         typeSpec: true,
       }),
     ]);
+  });
+
+  it.each([
+    [
+      [
+        "resource-manager/Contoso.WidgetManager/client.tsp",
+        "resource-manager/Contoso.WidgetManager/tspconfig.yaml",
+      ],
+      true,
+    ],
+    [["Contoso.WidgetManager/tspconfig.yaml"], false],
+    [["resource-manager/Contoso.WidgetManager/client.tsp", "resource-manager/readme.md"], false],
+  ])("flags management client customization-only changes: %j", async (files, expected) => {
+    const impact = await evaluateImpact(
+      context({ modifications: files.map((file) => `specification/contosowidgetmanager/${file}`) }),
+      [],
+    );
+    expect(impact.clientCustomizationOnly).toBe(expected);
   });
 
   it("records policy changes through an unchanged owning README", async () => {
