@@ -562,6 +562,16 @@ namespace Azure.AI.Projects;
   "csharp"
 );
 
+@@alternateType(
+  Azure.AI.Projects.ModelSamplingParams,
+  {
+    identity: "Azure.AI.Projects.Agents.ModelSamplingParams",
+    package: "Azure.AI.Projects.Agents",
+    minVersion: "3.0.0-beta.6",
+  },
+  "csharp"
+);
+
 @@usage(OpenAI.OutputItemType, Usage.output | Usage.json | Usage.input);
 @@alternateType(
   OpenAI.OutputItemType,
