@@ -61,6 +61,14 @@ options:
     namespace: "Azure.Provisioning.EventHubs"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     api-version: "2026-01-01"
+  "@azure-tools/typespec-ts-provisioning":
+    emitter-output-dir: "{output-dir}/{service-dir}/provisioning-eventhub"
+    azure-sdk-for-js: true
+    generate-test: true
+    package-details:
+      name: "@azure/provisioning-eventhub"
+      description: "Azure Provisioning constructs for eventhub"
+    api-version: "2026-01-01"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

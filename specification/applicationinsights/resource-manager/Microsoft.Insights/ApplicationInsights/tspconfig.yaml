@@ -40,6 +40,36 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-tools/typespec-ts-provisioning":
+    emitter-output-dir: "{output-dir}/{service-dir}/provisioning-appinsights"
+    generate-test: true
+    package-details:
+      name: "@azure/provisioning-appinsights"
+    api-version:
+      - namespace: "Components"
+        version: "2020-02-02"
+      - namespace: "ComponentLinkedStorageAccountApi"
+        version: "2020-03-01-preview"
+      - namespace: "WebTestsApi"
+        version: "2022-06-15"
+      - namespace: "WorkbooksApi"
+        version: "2023-06-01"
+      - namespace: "WorkbookTemplatesApi"
+        version: "2020-11-20"
+      - namespace: "ComponentAPIs"
+        version: "2015-05-01"
+      - namespace: "Favorites"
+        version: "2015-05-01"
+      - namespace: "AnalyticsItems"
+        version: "2015-05-01"
+      - namespace: "DeletedWorkbookApi"
+        version: "2024-02-01-preview"
+      - namespace: "LiveTokenApi"
+        version: "2021-10-14"
+      - namespace: "WebTestLocation"
+        version: "2015-05-01"
+      - namespace: "WorkBookOperations"
+        version: "2021-03-08"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
