@@ -42,6 +42,11 @@ import { intersect } from "../../../shared/src/set.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
 import { parseSignoffDispatchInputs } from "../arm-auto-signoff/arm-signoff-dispatch.ts";
 import { commentOrUpdate } from "../comment.ts";
+import {
+  CONTRIBUTOR_ONBOARDING_URL,
+  CONTRIBUTOR_READINESS_CHECK_NAME,
+  CONTRIBUTOR_READINESS_COMMAND,
+} from "../contributor-readiness.ts";
 import { statusBadge, type CommentStatus } from "./comment-status.ts";
 import { buildSdkBreakingChangesSummary, hasSdkBreakingChanges } from "./sdk-breaking-changes.ts";
 import { extractInputs } from "../context.ts";
@@ -119,6 +124,7 @@ export type CheckRun = CheckRuns[0];
 
 // Placing these configuration items here until we decide another way to pull them in.
 const FYI_CHECK_NAMES = [
+  CONTRIBUTOR_READINESS_CHECK_NAME,
   "Swagger LintDiff",
   "SDK Validation Status",
   "Swagger BreakingChange",
@@ -389,6 +395,7 @@ export async function summarizeChecksImpl(
     head_sha,
     targetBranch,
     EXCLUDED_CHECK_NAMES,
+    issue_number,
   );
 
   outputRunDetails(core, requiredCheckRuns, fyiCheckRuns);
@@ -648,6 +655,7 @@ export function getRequiredChecksFromBranchRuleOutput(
  * @param repo - The repository name.
  * @param head_sha - The commit SHA to check.
  * @param targetBranch - The current target branch of the pull request.
+ * @param issue_number - The PR whose contributor-readiness result should be summarized.
  */
 export async function getCheckRunTuple(
   github: GitHub,
@@ -657,6 +665,7 @@ export async function getCheckRunTuple(
   head_sha: string,
   targetBranch: string,
   excludedCheckNames: string[],
+  issue_number: number,
 ): Promise<
   [CheckRunData[], CheckRunData[], import("./labelling.ts").ImpactAssessment | undefined]
 > {
@@ -669,12 +678,33 @@ export async function getCheckRunTuple(
 
   let impactAssessment: import("./labelling.ts").ImpactAssessment | undefined = undefined;
 
-  const allCheckRuns = await github.paginate(github.rest.checks.listForRef, {
+  let allCheckRuns: CheckRun[] = await github.paginate(github.rest.checks.listForRef, {
     owner: owner,
     repo: repo,
     ref: head_sha,
     per_page: PER_PAGE_MAX,
   });
+  const readinessExternalId = `contributor-readiness:${issue_number}`;
+  if (
+    allCheckRuns.some(
+      (check) =>
+        check.name === CONTRIBUTOR_READINESS_CHECK_NAME &&
+        check.external_id !== readinessExternalId,
+    )
+  ) {
+    const readinessHistory = await github.paginate(github.rest.checks.listForRef, {
+      owner,
+      repo,
+      ref: head_sha,
+      check_name: CONTRIBUTOR_READINESS_CHECK_NAME,
+      filter: "all",
+      per_page: PER_PAGE_MAX,
+    });
+    allCheckRuns = [
+      ...allCheckRuns.filter((check) => check.name !== CONTRIBUTOR_READINESS_CHECK_NAME),
+      ...readinessHistory,
+    ];
+  }
 
   const allCommitStatuses = await github.paginate(github.rest.repos.listCommitStatusesForRef, {
     owner: owner,
@@ -693,6 +723,11 @@ export async function getCheckRunTuple(
   > = [];
 
   allCheckRuns.forEach((checkRun) => {
+    if (
+      checkRun.name === CONTRIBUTOR_READINESS_CHECK_NAME &&
+      checkRun.external_id !== readinessExternalId
+    )
+      return;
     const url = checkRun.details_url || checkRun.html_url;
     allChecks.push({
       name: checkRun.name,
@@ -707,6 +742,7 @@ export async function getCheckRunTuple(
   });
 
   allCommitStatuses.forEach((status) => {
+    if (status.context === CONTRIBUTOR_READINESS_CHECK_NAME) return;
     // Map commit status state to check run conclusion
     let conclusion = null;
     let checkStatus = "completed";
@@ -917,7 +953,13 @@ export function createNextStepsComment(
     (run) => run.status.toLowerCase() !== "completed",
   );
 
-  const failingFyiChecks = fyiRuns.filter((run) => checkRunIsSuccessful(run) === false);
+  const failingFyiChecks = fyiRuns.filter(
+    (run) =>
+      checkRunIsSuccessful(run) === false ||
+      (run.name === CONTRIBUTOR_READINESS_CHECK_NAME &&
+        run.status.toLowerCase() === "completed" &&
+        run.conclusion?.toLowerCase() === "neutral"),
+  );
   const completedChecks = [...requiredRuns, ...fyiRuns].filter(
     (run) =>
       run.status.toLowerCase() === "completed" && run.conclusion?.toLowerCase() === "success",
@@ -1092,24 +1134,35 @@ function getCommentBody(
     ...buildFailingCheckSummaries(failingRequiredChecks, "required"),
     ...pendingRequirements,
   ];
-  const nonBlockingChecks = buildFailingCheckSummaries(failingFyiChecks, "FYI");
+  const readinessWarnings: RequirementSummary[] = failingFyiChecks
+    .filter((check) => check.name === CONTRIBUTOR_READINESS_CHECK_NAME)
+    .map((check) => ({
+      name: formatCheckName(check),
+      status: "warning",
+      nextStep: `Open the access report, ${link("set up / renew access", CONTRIBUTOR_ONBOARDING_URL)}, then comment ${inlineCode(CONTRIBUTOR_READINESS_COMMAND)}.`,
+    }));
+  const nonBlockingChecks = buildFailingCheckSummaries(
+    failingFyiChecks.filter((check) => check.name !== CONTRIBUTOR_READINESS_CHECK_NAME),
+    "FYI",
+  );
   const guidance = [...blockingRequirements, ...nonBlockingChecks]
     .filter((requirement) => requirement.guidance)
     .map((requirement) => section(requirement.name, requirement.guidance));
 
   const body: MarkdownDoc = [
     headline,
-    buildRequirementsTable(
-      blockingRequirements.length > 0
+    buildRequirementsTable([
+      ...(blockingRequirements.length > 0
         ? blockingRequirements
         : [
             {
               name: "Automated requirements",
-              status: "passed",
+              status: "passed" as const,
               nextStep: "Follow the merge process linked below.",
             },
-          ],
-    ),
+          ]),
+      ...readinessWarnings,
+    ]),
     nonBlockingChecks.length > 0
       ? details(`Warnings (${nonBlockingChecks.length})`, buildRequirementsTable(nonBlockingChecks))
       : undefined,

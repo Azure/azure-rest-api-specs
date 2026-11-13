@@ -233,6 +233,7 @@ jobs:
               workflowUrl: process.env.WORKFLOW_URL,
               resultFilePath: `${process.env.RUNNER_TEMP}/sdk-breaking-change-analysis-results/sdk-breaking-change-analysis.json`,
               azureSdkCliPath: process.env.AZSDK_CLI_PATH,
+              forwardOutput: true,
             });
 
       - name: Create SDK analysis Failure artifact

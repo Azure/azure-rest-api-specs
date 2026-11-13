@@ -1,0 +1,46 @@
+{
+  "operationId": "AttachedAksClusters_List",
+  "title": "ListAttachedAksClusters",
+  "parameters": {
+    "api-version": "2026-11-15-preview",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "rgcognitiveservices",
+    "accountName": "myAccount",
+    "$filter": "stage eq 'Ready'",
+    "$orderby": "createdTime desc",
+    "$top": 1,
+    "$skip": 0
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rgcognitiveservices/providers/Microsoft.CognitiveServices/accounts/myAccount/attachedAksClusters/myAttachment",
+            "name": "myAttachment",
+            "type": "Microsoft.CognitiveServices/accounts/attachedAksClusters",
+            "properties": {
+              "clusterResourceId": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/rgaks/providers/Microsoft.ContainerService/managedClusters/myAks",
+              "capabilities": [
+                "foundryNative",
+                "kuberay"
+              ],
+              "stage": "Ready",
+              "health": {
+                "state": "Healthy",
+                "summary": "The attachment is ready for workloads.",
+                "newWorkAdmissionAllowed": true,
+                "components": [],
+                "reasons": []
+              },
+              "projectLocation": "eastus2",
+              "createdTime": "2026-11-15T00:00:00Z",
+              "modifiedTime": "2026-11-15T00:00:00Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rgcognitiveservices/providers/Microsoft.CognitiveServices/accounts/myAccount/attachedAksClusters?api-version=2026-11-15-preview&$filter=stage%20eq%20%27Ready%27&$orderby=createdTime%20desc&$top=1&$skip=1"
+      }
+    }
+  }
+}
