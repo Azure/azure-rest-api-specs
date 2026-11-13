@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "name": "test-keyvault-cert",
+    "api-version": "2026-07-15",
+    "certificateEnvelope": {
+      "location": "East US",
+      "properties": {
+        "keyVaultId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/microsoft.keyvault/vaults/testvault",
+        "keyVaultSecretName": "test-certificate",
+        "serverFarmId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/serverfarms/testPlan"
+      }
+    },
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-keyvault-cert",
+        "type": "Microsoft.Web/certificates",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/certificates/test-keyvault-cert",
+        "location": "East US",
+        "properties": {
+          "hostNames": [
+            "www.contoso.com"
+          ],
+          "keyVaultId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/microsoft.keyvault/vaults/testvault",
+          "keyVaultSecretName": "test-certificate",
+          "thumbprint": "FE703D7411A44163B6D32B3AD9B03E175886EBFE"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Certificates_CreateOrUpdate",
+  "title": "Import or sync a Key Vault certificate or App Service Certificate"
+}

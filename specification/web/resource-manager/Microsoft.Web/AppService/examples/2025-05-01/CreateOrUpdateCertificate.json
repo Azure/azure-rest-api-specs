@@ -5,10 +5,9 @@
     "certificateEnvelope": {
       "location": "East US",
       "properties": {
-        "hostNames": [
-          "ServerCert"
-        ],
-        "password": "<password>"
+        "pfxBlob": "PGJhc2U2NC1lbmNvZGVkLXBmeD4=",
+        "password": "<password>",
+        "serverFarmId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/serverfarms/testPlan"
       }
     },
     "resourceGroupName": "testrg123",
@@ -25,11 +24,11 @@
           "expirationDate": "2039-12-31T23:59:59+00:00",
           "friendlyName": "",
           "hostNames": [
-            "ServerCert"
+            "www.contoso.com"
           ],
           "issueDate": "2015-11-12T23:40:25+00:00",
           "issuer": "CACert",
-          "subjectName": "ServerCert",
+          "subjectName": "www.contoso.com",
           "thumbprint": "FE703D7411A44163B6D32B3AD9B03E175886EBFE"
         }
       },
@@ -37,5 +36,5 @@
     }
   },
   "operationId": "Certificates_CreateOrUpdate",
-  "title": "Create Or Update Certificate"
+  "title": "Create Or Update PFX Certificate"
 }
