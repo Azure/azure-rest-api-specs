@@ -710,6 +710,27 @@ namespace JavaScriptToolCompatibility {
 @@clientName(AgentTelephony.deleteTelephonyCallJob, "deleteCallJob");
 @@clientName(AgentTelephony.cancelTelephonyCallJob, "cancelCallJob");
 
+@@clientName(
+  ImmediateSchedule,
+  "TelephonyCampaignImmediateSchedule",
+  "javascript"
+);
+@@clientName(AtTimeSchedule, "TelephonyCampaignAtTimeSchedule", "javascript");
+@@clientName(
+  PerRecipientSchedule,
+  "TelephonyCampaignPerRecipientSchedule",
+  "javascript"
+);
+// Preserve the name shipped in @azure/ai-projects.
+@@clientName(
+  FixedIntervalRetryPolicy,
+  "TelephonyOutboundFixedIntervalRetryPolicy",
+  "javascript"
+);
+@@clientName(PhoneNumber, "TelephonyPhoneNumber", "javascript");
+@@clientName(TeamsAddress, "TelephonyTeamsAddress", "javascript");
+@@clientName(SipAddress, "TelephonySipAddress", "javascript");
+
 // --------------------------------------------------------------------------------
 // Class renames related to Responses
 // --------------------------------------------------------------------------------
