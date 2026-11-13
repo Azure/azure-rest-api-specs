@@ -1,0 +1,145 @@
+{
+  "title": "Get the result of a price estimation operation",
+  "operationId": "PriceEstimation_GetEstimatePricesOperationResult",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2026-10-01-preview",
+    "operationId": "2f0d4b7a9c1e4d6f8a3b5c7d9e1f2a4b"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "currency": "USD",
+        "pricingAsOf": "2026-10-01T00:00:00Z",
+        "coverage": "SubmittedPricingInputs",
+        "results": [
+          {
+            "inputIndex": 0,
+            "configuration": {
+              "resourceType": "Microsoft.Compute/virtualMachines",
+              "resourceApiVersion": "2024-07-01",
+              "defaultedFields": [
+                "/resource/properties/licenseType",
+                "/usage/software/family",
+                "/usage/software/purchaseOption"
+              ],
+              "assumedUsageFields": [],
+              "appliedValues": [
+                {
+                  "field": "/resource/properties/licenseType",
+                  "value": {
+                    "kind": "string",
+                    "value": "None"
+                  }
+                },
+                {
+                  "field": "/usage/software/family",
+                  "value": {
+                    "kind": "string",
+                    "value": "OSOnly"
+                  }
+                },
+                {
+                  "field": "/usage/software/purchaseOption",
+                  "value": {
+                    "kind": "string",
+                    "value": "LicenseIncluded"
+                  }
+                }
+              ]
+            },
+            "monthly": {
+              "status": "Complete",
+              "amount": 70.08
+            },
+            "upfront": {
+              "status": "Complete",
+              "amount": 0
+            },
+            "components": [
+              {
+                "component": "compute",
+                "meterIds": [
+                  "a1b2c3d4-0000-4000-8000-000000000001"
+                ],
+                "monthly": {
+                  "status": "Complete",
+                  "amount": 70.08
+                },
+                "upfront": {
+                  "status": "Complete",
+                  "amount": 0
+                }
+              }
+            ],
+            "issues": [],
+            "assumptions": []
+          },
+          {
+            "inputIndex": 1,
+            "configuration": {
+              "resourceType": "Microsoft.Compute/disks",
+              "resourceApiVersion": "2024-03-02",
+              "defaultedFields": [],
+              "assumedUsageFields": [
+                "/usage/hoursPerMonth"
+              ],
+              "appliedValues": [
+                {
+                  "field": "/usage/hoursPerMonth",
+                  "value": {
+                    "kind": "number",
+                    "value": 730
+                  }
+                }
+              ]
+            },
+            "monthly": {
+              "status": "Complete",
+              "amount": 19.71
+            },
+            "upfront": {
+              "status": "Complete",
+              "amount": 0
+            },
+            "components": [
+              {
+                "component": "capacity",
+                "meterIds": [
+                  "a1b2c3d4-0000-4000-8000-000000000002"
+                ],
+                "monthly": {
+                  "status": "Complete",
+                  "amount": 19.71
+                },
+                "upfront": {
+                  "status": "Complete",
+                  "amount": 0
+                }
+              }
+            ],
+            "issues": [],
+            "assumptions": []
+          }
+        ],
+        "totals": {
+          "monthly": {
+            "status": "Complete",
+            "amount": 89.79
+          },
+          "upfront": {
+            "status": "Complete",
+            "amount": 0
+          }
+        },
+        "assumptions": []
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/estimatePricesOperationResults/2f0d4b7a9c1e4d6f8a3b5c7d9e1f2a4b?api-version=2026-10-01-preview",
+        "Retry-After": "30"
+      }
+    }
+  }
+}
