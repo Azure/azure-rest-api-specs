@@ -138,6 +138,7 @@ interface Remediations {
   /**
    * Deletes an existing remediation at management group scope.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   deleteAtManagementGroup is RemediationManagementGroupOps.DeleteSync<
     Remediation,
     Response = ArmResponse<Remediation> | ArmDeletedNoContentResponse,
@@ -188,6 +189,7 @@ interface Remediations {
   /**
    * Deletes an existing remediation at subscription scope.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   deleteAtSubscription is RemediationSubscriptionOps.DeleteSync<
     Remediation,
     Response = ArmResponse<Remediation> | ArmDeletedNoContentResponse,
@@ -271,6 +273,7 @@ interface Remediations {
   /**
    * Deletes an existing remediation at resource group scope.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   deleteAtResourceGroup is RemediationResourceGroupOps.DeleteSync<
     Remediation,
     Response = ArmResponse<Remediation> | ArmDeletedNoContentResponse,
@@ -354,6 +357,7 @@ interface Remediations {
   /**
    * Deletes an existing remediation at individual resource scope.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   deleteAtResource is RemediationAtResourceOps.DeleteSync<
     Remediation,
     Response = ArmResponse<Remediation> | ArmDeletedNoContentResponse

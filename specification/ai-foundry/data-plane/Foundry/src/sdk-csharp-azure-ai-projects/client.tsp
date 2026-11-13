@@ -26,6 +26,7 @@ namespace Azure.AI.Projects;
 // Fix the xref.
 // --------------------------------------------------------------------------------
 @@clientNamespace(OpenAI, "Azure.AI.Projects", "csharp");
+@@clientNamespace(Azure.AI.ProjectsInternal, "Azure.AI.Projects", "csharp");
 @@clientNamespace(Azure.Core.Foundations, "Azure.AI.Projects", "csharp");
 
 // --------------------------------------------------------------------------------
@@ -152,6 +153,7 @@ namespace Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // Evaluators sub‐client
 // --------------------------------------------------------------------------------
+@@access(Evaluators.listDiagnostics, Access.public);
 @@clientName(Evaluators.getCredentials, "GetCredential");
 @@access(Evaluators.getCredentials, Access.internal);
 @@access(Evaluators.startPendingUpload, Access.internal);

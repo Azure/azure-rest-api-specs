@@ -167,6 +167,11 @@ using Microsoft.NetworkCloud;
   armResourceIdentifier,
   "csharp"
 );
+@@clientName(
+  ClusterProperties.edgeManagementServiceCaCertificate,
+  "EdgeManagementServiceCACertificate",
+  "csharp"
+);
 @@clientName(ClusterProperties.supportExpiryDate, "SupportExpireOn", "csharp");
 @@alternateType(ClusterProperties.supportExpiryDate, utcDateTime, "csharp");
 @@clientName(

@@ -151,9 +151,33 @@ describe("analyzeSdkProjects", () => {
       3,
       azureSdkCli,
       expect.arrayContaining(["detect-breaking-change"]),
+      undefined,
     );
     expect(generateTypeSpecMetadataMock).toHaveBeenCalledWith(
       join(specificationRepositoryPath, "specification", "service", "Widget.Service"),
+    );
+  });
+
+  it("forwards enabled output to the breaking-change detection command", async () => {
+    await analyzeSdkProjects({
+      core,
+      localSdkRepositoryPath: sdkRepositoryPath,
+      specificationRepositoryPath,
+      typeSpecConfigPaths: ["specification/service/Widget.Service/tspconfig.yaml"],
+      pullNumber: 42,
+      sdkLanguage: "Go",
+      sdkRepoName: "azure-sdk-for-go",
+      analyzedSha: "a".repeat(40),
+      workflowUrl: "https://github.com/owner/repo/actions/runs/123",
+      resultFilePath,
+      azureSdkCliPath,
+      forwardOutput: true,
+    });
+
+    expect(execFileMock).toHaveBeenCalledWith(
+      join(azureSdkCliPath, process.platform === "win32" ? "azsdk.exe" : "azsdk"),
+      expect.arrayContaining(["detect-breaking-change"]),
+      { forwardOutput: true },
     );
   });
 

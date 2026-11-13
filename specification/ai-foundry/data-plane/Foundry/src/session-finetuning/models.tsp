@@ -1,761 +1,767 @@
 import "../common/service.tsp";
 import "../common/custom-types.tsp";
 
-namespace Azure.AI.Projects.SessionFineTuning;
+namespace Azure.AI.ProjectsInternal {
+  using Azure.AI.Projects;
 
-// clientName decorators are C#-only; Python and the wire/service contract are unchanged.
+  /** A single sampled sequence within a sampling result payload. */
+  model FineTuningSampledSequence {
+    /** Generated token identifiers, in sequence order. */
+    tokens: int32[];
 
-// ─── Enums ────────────────────────────────────────────────────────────────────
+    /** Decoded text of the generated sequence, when available. */
+    text?: string | null;
 
-/**
- * Lifecycle status of a fine-tuning session.
- *
- * Uses the canonical fine-tuning job vocabulary for steady states and
- * includes the initial created state returned during session creation.
- */
-union FineTuningSessionStatus {
-  string,
+    /** Log-probabilities of the generated tokens, when available. */
+    logprobs?: float64[] | null;
+  }
+}
 
-  /** Session creation was accepted and the session is awaiting allocation. */
-  created: "created",
+namespace Azure.AI.Projects.SessionFineTuning {
+  // clientName decorators are C#-only; Python and the wire/service contract are unchanged.
 
-  /** Session has been created and is waiting for the GPU engine. */
-  queued: "queued",
-
-  /** Session is loaded and actively processing requests. */
-  running: "running",
-
-  /** Session completed successfully. */
-  succeeded: "succeeded",
+  // ─── Enums ────────────────────────────────────────────────────────────────────
 
   /**
-   * Session ended in a non-success terminal state (engine death, expiry,
-   * or unrecoverable failure). Any in-memory weights are lost.
+   * Lifecycle status of a fine-tuning session.
+   *
+   * Uses the canonical fine-tuning job vocabulary for steady states and
+   * includes the initial created state returned during session creation.
    */
-  failed: "failed",
-}
+  union FineTuningSessionStatus {
+    string,
 
-/** Supported loss functions for forward-backward passes. */
-union FineTuningLossFn {
-  string,
+    /** Session creation was accepted and the session is awaiting allocation. */
+    created: "created",
 
-  /** Standard language-model cross-entropy loss. */
-  cross_entropy: "cross_entropy",
+    /** Session has been created and is waiting for the GPU engine. */
+    queued: "queued",
 
-  /** REINFORCE-style importance-sampled policy gradient loss. */
-  importance_sampling: "importance_sampling",
+    /** Session is loaded and actively processing requests. */
+    running: "running",
 
-  /** PPO (Proximal Policy Optimization) clipped surrogate loss. */
-  ppo: "ppo",
+    /** Session completed successfully. */
+    succeeded: "succeeded",
 
-  /** Clipped Importance-Sampled Policy Optimization (CISPO) loss. */
-  cispo: "cispo",
+    /**
+     * Session ended in a non-success terminal state (engine death, expiry,
+     * or unrecoverable failure). Any in-memory weights are lost.
+     */
+    failed: "failed",
+  }
 
-  /** Soft Adaptive Policy Optimization (SAPO) loss. */
-  sapo: "sapo",
-}
+  /** Supported loss functions for forward-backward passes. */
+  union FineTuningLossFn {
+    string,
 
-/** Fine-tuning checkpoint type. */
-union FineTuningCheckpointType {
-  string,
+    /** Standard language-model cross-entropy loss. */
+    cross_entropy: "cross_entropy",
 
-  /** Full training checkpoint (optimizer state + LoRA weights). */
-  training: "training",
+    /** REINFORCE-style importance-sampled policy gradient loss. */
+    importance_sampling: "importance_sampling",
 
-  /** Sampler-compatible weights snapshot (no optimizer state). */
-  sampler: "sampler",
-}
+    /** PPO (Proximal Policy Optimization) clipped surrogate loss. */
+    ppo: "ppo",
 
-/** Fine-tuning session type. */
-union FineTuningSessionType {
-  string,
+    /** Clipped Importance-Sampled Policy Optimization (CISPO) loss. */
+    cispo: "cispo",
 
-  /** A training session for fine-tuning a model. */
-  training: "training",
-}
+    /** Soft Adaptive Policy Optimization (SAPO) loss. */
+    sapo: "sapo",
+  }
 
-/** Training tiers available for fine-tuning sessions. */
-union FineTuningTrainingType {
-  string,
+  /** Fine-tuning checkpoint type. */
+  union FineTuningCheckpointType {
+    string,
 
-  /** Training using globally available capacity. */
-  global_standard: "GlobalStandard",
+    /** Full training checkpoint (optimizer state + LoRA weights). */
+    training: "training",
 
-  /** Training constrained to Foundry account's datazone. Current datazones: US, EU, AsiaPacific. */
-  datazone_standard: "DatazoneStandard",
+    /** Sampler-compatible weights snapshot (no optimizer state). */
+    sampler: "sampler",
+  }
 
-  /** Developer-tier training, subject to service eligibility. */
-  developer_tier: "DeveloperTier",
-}
+  /** Fine-tuning session type. */
+  union FineTuningSessionType {
+    string,
 
-/** Supported encodings for an image supplied as model input. */
-union FineTuningImageFormat {
-  string,
+    /** A training session for fine-tuning a model. */
+    training: "training",
+  }
 
-  /** JPEG image encoding. */
-  jpeg: "jpeg",
+  /** Training tiers available for fine-tuning sessions. */
+  union FineTuningTrainingType {
+    string,
 
-  /** PNG image encoding. */
-  png: "png",
+    /** Training using globally available capacity. */
+    global_standard: "GlobalStandard",
 
-  /** WebP image encoding. */
-  webp: "webp",
-}
+    /** Training constrained to Foundry account's datazone. Current datazones: US, EU, AsiaPacific. */
+    datazone_standard: "DatazoneStandard",
 
-/** Identifies the content carried by a model input chunk. */
-union FineTuningInputChunkType {
-  string,
+    /** Developer-tier training, subject to service eligibility. */
+    developer_tier: "DeveloperTier",
+  }
 
-  /** A contiguous sequence of text tokens. */
-  text: "text",
+  /** Supported encodings for an image supplied as model input. */
+  union FineTuningImageFormat {
+    string,
 
-  /** An encoded image. */
-  image: "image",
-}
+    /** JPEG image encoding. */
+    jpeg: "jpeg",
 
-// ─── Common primitives ────────────────────────────────────────────────────────
+    /** PNG image encoding. */
+    png: "png",
 
-/** A 1-D array of floating-point values serialised for the wire. */
-model TensorData {
-  /** The floating-point values of the tensor. */
-  data: float64[];
-}
+    /** WebP image encoding. */
+    webp: "webp",
+  }
 
-/** A text-token or image chunk within a model input, identified by its type. */
-@discriminator("type")
-model FineTuningInputChunk {
-  /** Identifies which model input chunk variant is supplied. */
-  type: FineTuningInputChunkType;
-}
+  /** Identifies the content carried by a model input chunk. */
+  union FineTuningInputChunkType {
+    string,
 
-/** A contiguous block of token IDs forming part of a model input. */
-model FineTuningInputChunkText extends FineTuningInputChunk {
-  /** Identifies this chunk as text tokens. */
-  type: FineTuningInputChunkType.text;
+    /** A contiguous sequence of text tokens. */
+    text: "text",
 
-  /** Sequence of token IDs in this chunk. */
-  tokens: int32[];
-}
+    /** An encoded image. */
+    image: "image",
+  }
 
-/**
- * An image supplied as part of a multimodal input.
- * Each decoded image must not exceed 10 MB. The service validates the image
- * content and token count at runtime.
- */
-model FineTuningInputChunkImage extends FineTuningInputChunk {
-  /** Identifies this chunk as an encoded image. */
-  type: FineTuningInputChunkType.image;
+  // ─── Common primitives ────────────────────────────────────────────────────────
 
-  /** Image bytes, serialized as a base64-encoded string. */
-  @encode("base64")
-  data: bytes;
+  /** A 1-D array of floating-point values serialised for the wire. */
+  model TensorData {
+    /** The floating-point values of the tensor. */
+    data: float64[];
+  }
 
-  /** Encoding of the supplied image bytes. */
-  format: FineTuningImageFormat;
+  /** A text-token or image chunk within a model input, identified by its type. */
+  @discriminator("type")
+  model FineTuningInputChunk {
+    /** Identifies which model input chunk variant is supplied. */
+    type: FineTuningInputChunkType;
+  }
 
-  /** Number of model tokens expected to represent this image. */
-  @minValue(1)
-  expected_tokens: int32;
-}
+  /** A contiguous block of token IDs forming part of a model input. */
+  model FineTuningInputChunkText extends FineTuningInputChunk {
+    /** Identifies this chunk as text tokens. */
+    type: FineTuningInputChunkType.text;
 
-/** Full model input as an ordered sequence of token-ID and image chunks. */
-model FineTuningModelInput {
-  /**
-   * Chunks forming the complete model input. At most 64 image chunks are
-   * allowed per example; the service enforces this limit at runtime.
-   */
-  chunks: FineTuningInputChunk[];
-}
-
-// ─── LoRA configuration ───────────────────────────────────────────────────────
-
-/**
- * LoRA adapter configuration.
- * If optional settings are omitted, the service applies the defaults described below.
- */
-model LoRAConfig {
-  /** Number of LoRA rank dimensions required by the service. */
-  rank: int32;
-
-  /** LoRA scaling factor (effective scale = alpha / rank). If omitted, the service defaults to 32.0. */
-  alpha?: float64 = 32.0;
+    /** Sequence of token IDs in this chunk. */
+    tokens: int32[];
+  }
 
   /**
-   * Seed for LoRA weight initialisation.
-   * If omitted, the service picks a random seed and echoes it back.
+   * An image supplied as part of a multimodal input.
+   * Each decoded image must not exceed 10 MB. The service validates the image
+   * content and token count at runtime.
    */
-  seed?: int64;
+  model FineTuningInputChunkImage extends FineTuningInputChunk {
+    /** Identifies this chunk as an encoded image. */
+    type: FineTuningInputChunkType.image;
 
-  /** Whether to freeze the vision tower during training. If omitted, the service defaults to true. */
-  freeze_vision_tower?: boolean = true;
+    /** Image bytes, serialized as a base64-encoded string. */
+    @encode("base64")
+    data: bytes;
 
-  /** Whether to freeze the multimodal projector during training. If omitted, the service defaults to true. */
-  freeze_multi_modal_projector?: boolean = true;
-}
+    /** Encoding of the supplied image bytes. */
+    format: FineTuningImageFormat;
 
-// ─── Adam optimizer parameters ────────────────────────────────────────────────
+    /** Number of model tokens expected to represent this image. */
+    @minValue(1)
+    expected_tokens: int32;
+  }
 
-/** Adam optimizer hyper-parameters. */
-model AdamParams {
-  /** Nonnegative learning rate. If omitted, the service defaults to 0.0001. */
-  @minValue(0)
-  learning_rate?: float64 = 1e-4;
+  /** Full model input as an ordered sequence of token-ID and image chunks. */
+  model FineTuningModelInput {
+    /**
+     * Chunks forming the complete model input. At most 64 image chunks are
+     * allowed per example; the service enforces this limit at runtime.
+     */
+    chunks: FineTuningInputChunk[];
+  }
 
-  /** Adam first-moment coefficient, from zero inclusive to one exclusive. If omitted, the service defaults to 0.9. */
-  @minValue(0)
-  @maxValueExclusive(1)
-  beta1?: float64 = 0.9;
-
-  /** Adam second-moment coefficient, from zero inclusive to one exclusive. If omitted, the service defaults to 0.95. */
-  @minValue(0)
-  @maxValueExclusive(1)
-  beta2?: float64 = 0.95;
-
-  /** Positive numerical stability floor. If omitted, the service defaults to 0.000000000001. */
-  @minValueExclusive(0)
-  eps?: float64 = 1e-12;
-
-  /** Nonnegative L2 weight-decay coefficient. If omitted, the service defaults to 0.0. */
-  @minValue(0)
-  weight_decay?: float64 = 0.0;
-}
-
-// ─── Sampling parameters ──────────────────────────────────────────────────────
-
-/**
- * Stop criteria for generation — either a list of token IDs or a list of
- * strings, but never both.
- */
-model FineTuningStopCriteria {
-  /** Stop when any of these token IDs is produced. */
-  stop_token_ids?: int32[];
-
-  /** Stop when any of these strings appears in the output. */
-  stop_strings?: string[];
-}
-
-/** Token-generation sampling parameters. */
-model FineTuningSamplingParams {
-  /** Maximum number of tokens to generate. Must be positive. */
-  @minValue(1)
-  max_tokens: int32;
-
-  /** Softmax temperature. If omitted, the service defaults to 1.0. */
-  temperature?: float64 = 1.0;
-
-  /** Nucleus (top-p) probability mass. If omitted, the service defaults to 1.0. */
-  top_p?: float64 = 1.0;
-
-  /** Top-k candidates. If omitted, the service defaults to -1. A value of -1 disables top-k filtering. */
-  top_k?: int32 = -1;
-
-  /** RNG seed for reproducible samples. If omitted, the service chooses a random seed. */
-  seed?: int64;
-
-  /** Stop criteria: either stop_token_ids or stop_strings, not both. */
-  stop_criteria?: FineTuningStopCriteria;
-
-  /** Optional structured-output format passed to the sampling provider. */
-  response_format?: Record<unknown> | null;
-}
-
-// ─── Training data ────────────────────────────────────────────────────────────
-
-/** Per-datum loss function inputs used in forward-backward. */
-model LossFnInputs {
-  /** Target token ids (shifted by 1 relative to model input). */
-  target_tokens: TensorData;
-
-  /** Per-token weights (0.0 = masked, 1.0 = counted). If omitted, the service uses a weight of 1.0 for each target. */
-  weights?: TensorData;
+  // ─── LoRA configuration ───────────────────────────────────────────────────────
 
   /**
-   * Per-token advantage estimates (required for REINFORCE/PPO (Proximal Policy Optimization)/CISPO (Clipped Importance-Sampled Policy Optimization)/SAPO (Soft Adaptive Policy Optimization)).
-   * Omit or pass empty array for cross-entropy.
+   * LoRA adapter configuration.
+   * If optional settings are omitted, the service applies the defaults described below.
    */
-  advantages?: TensorData;
+  model LoRAConfig {
+    /** Number of LoRA rank dimensions required by the service. */
+    rank: int32;
+
+    /** LoRA scaling factor (effective scale = alpha / rank). If omitted, the service defaults to 32.0. */
+    alpha?: float64 = 32.0;
+
+    /**
+     * Seed for LoRA weight initialisation.
+     * If omitted, the service picks a random seed and echoes it back.
+     */
+    seed?: int64;
+
+    /** Whether to freeze the vision tower during training. If omitted, the service defaults to true. */
+    freeze_vision_tower?: boolean = true;
+
+    /** Whether to freeze the multimodal projector during training. If omitted, the service defaults to true. */
+    freeze_multi_modal_projector?: boolean = true;
+  }
+
+  // ─── Adam optimizer parameters ────────────────────────────────────────────────
+
+  /** Adam optimizer hyper-parameters. */
+  model AdamParams {
+    /** Nonnegative learning rate. If omitted, the service defaults to 0.0001. */
+    @minValue(0)
+    learning_rate?: float64 = 1e-4;
+
+    /** Adam first-moment coefficient, from zero inclusive to one exclusive. If omitted, the service defaults to 0.9. */
+    @minValue(0)
+    @maxValueExclusive(1)
+    beta1?: float64 = 0.9;
+
+    /** Adam second-moment coefficient, from zero inclusive to one exclusive. If omitted, the service defaults to 0.95. */
+    @minValue(0)
+    @maxValueExclusive(1)
+    beta2?: float64 = 0.95;
+
+    /** Positive numerical stability floor. If omitted, the service defaults to 0.000000000001. */
+    @minValueExclusive(0)
+    eps?: float64 = 1e-12;
+
+    /** Nonnegative L2 weight-decay coefficient. If omitted, the service defaults to 0.0. */
+    @minValue(0)
+    weight_decay?: float64 = 0.0;
+  }
+
+  // ─── Sampling parameters ──────────────────────────────────────────────────────
 
   /**
-   * Per-token reference log-probabilities for KL-divergence regularisation.
-   * Omit or pass empty array to skip KL.
+   * Stop criteria for generation — either a list of token IDs or a list of
+   * strings, but never both.
    */
-  logprobs?: TensorData;
-}
+  model FineTuningStopCriteria {
+    /** Stop when any of these token IDs is produced. */
+    stop_token_ids?: int32[];
 
-/** A single training example. */
-model FineTuningDatum {
-  /** Token-ID and optional image input to the model. */
-  model_input: FineTuningModelInput;
+    /** Stop when any of these strings appears in the output. */
+    stop_strings?: string[];
+  }
 
-  /** Loss-function targets, aligned with model_input tokens. */
-  loss_fn_inputs: LossFnInputs;
-}
+  /** Token-generation sampling parameters. */
+  model FineTuningSamplingParams {
+    /** Maximum number of tokens to generate. Must be positive. */
+    @minValue(1)
+    max_tokens: int32;
 
-/** Optional per-loss-function hyper-parameters. */
-model LossFnConfig {
-  /** PPO (Proximal Policy Optimization) / CISPO (Clipped Importance-Sampled Policy Optimization): lower clip threshold. */
-  clip_low_threshold?: float64;
+    /** Softmax temperature. If omitted, the service defaults to 1.0. */
+    temperature?: float64 = 1.0;
 
-  /** PPO (Proximal Policy Optimization) / CISPO (Clipped Importance-Sampled Policy Optimization): upper clip threshold. */
-  clip_high_threshold?: float64;
+    /** Nucleus (top-p) probability mass. If omitted, the service defaults to 1.0. */
+    top_p?: float64 = 1.0;
 
-  /** SAPO (Soft Adaptive Policy Optimization): positive advantage temperature. */
-  tau_pos?: float64;
+    /** Top-k candidates. If omitted, the service defaults to -1. A value of -1 disables top-k filtering. */
+    top_k?: int32 = -1;
 
-  /** SAPO (Soft Adaptive Policy Optimization): negative advantage temperature. */
-  tau_neg?: float64;
-}
+    /** RNG seed for reproducible samples. If omitted, the service chooses a random seed. */
+    seed?: int64;
 
-// ─── Pending request handles ──────────────────────────────────────────────────
+    /** Stop criteria: either stop_token_ids or stop_strings, not both. */
+    stop_criteria?: FineTuningStopCriteria;
 
-/** Identifies an accepted request whose result can be retrieved by polling. */
-model FineTuningPendingOperation {
-  /** Request identifier to pass to the session's request-status endpoint. */
-  @visibility(Lifecycle.Read)
-  @minLength(1)
-  request_id: string;
+    /** Optional structured-output format passed to the sampling provider. */
+    response_format?: Record<unknown> | null;
+  }
 
-  /** Indicates that the request has not yet completed. */
-  @visibility(Lifecycle.Read)
-  status: "pending";
-}
+  // ─── Training data ────────────────────────────────────────────────────────────
 
-/** Identifies an accepted training request and its fine-tuning session. */
-model FineTuningActionOperation {
-  ...FineTuningPendingOperation;
+  /** Per-datum loss function inputs used in forward-backward. */
+  model LossFnInputs {
+    /** Target token ids (shifted by 1 relative to model input). */
+    target_tokens: TensorData;
 
-  /** Identifier of the session processing this request. */
-  @visibility(Lifecycle.Read)
-  @minLength(1)
-  session_id: string;
-}
+    /** Per-token weights (0.0 = masked, 1.0 = counted). If omitted, the service uses a weight of 1.0 for each target. */
+    weights?: TensorData;
 
-// ─── Request-status responses ─────────────────────────────────────────────────
+    /**
+     * Per-token advantage estimates (required for REINFORCE/PPO (Proximal Policy Optimization)/CISPO (Clipped Importance-Sampled Policy Optimization)/SAPO (Soft Adaptive Policy Optimization)).
+     * Omit or pass empty array for cross-entropy.
+     */
+    advantages?: TensorData;
 
-/** Status envelope returned when polling a fine-tuning request. */
-@discriminator("status")
-model FineTuningRequestStatus {
-  /** Request state, which determines the shape of the status response. */
-  status: string;
-}
+    /**
+     * Per-token reference log-probabilities for KL-divergence regularisation.
+     * Omit or pass empty array to skip KL.
+     */
+    logprobs?: TensorData;
+  }
 
-/** A request that is still being processed. */
-@Azure.ClientGenerator.Core.clientName("PendingFineTuningContent", "csharp")
-model PendingFineTuningRequest extends FineTuningRequestStatus {
-  /** Indicates that the request has not yet completed. */
-  status: "pending";
+  /** A single training example. */
+  model FineTuningDatum {
+    /** Token-ID and optional image input to the model. */
+    model_input: FineTuningModelInput;
 
-  /** Current processing phase, when reported by the service. */
-  phase?: string | null;
-}
+    /** Loss-function targets, aligned with model_input tokens. */
+    loss_fn_inputs: LossFnInputs;
+  }
 
-/** A request that completed successfully. */
-@Azure.ClientGenerator.Core.clientName("CompletedFineTuningContent", "csharp")
-model CompletedFineTuningRequest extends FineTuningRequestStatus {
-  /** Indicates that the request completed successfully. */
-  status: "completed";
+  /** Optional per-loss-function hyper-parameters. */
+  model LossFnConfig {
+    /** PPO (Proximal Policy Optimization) / CISPO (Clipped Importance-Sampled Policy Optimization): lower clip threshold. */
+    clip_low_threshold?: float64;
 
-  /** Raw result payload, whose properties depend on the submitted request. */
-  result: Record<unknown>;
-}
+    /** PPO (Proximal Policy Optimization) / CISPO (Clipped Importance-Sampled Policy Optimization): upper clip threshold. */
+    clip_high_threshold?: float64;
 
-/** A request that failed during processing. */
-@Azure.ClientGenerator.Core.clientName("FailedFineTuningContent", "csharp")
-model FailedFineTuningRequest extends FineTuningRequestStatus {
-  /** Indicates that the request failed. */
-  status: "failed";
+    /** SAPO (Soft Adaptive Policy Optimization): positive advantage temperature. */
+    tau_pos?: float64;
 
-  /** Description of the failure. */
-  error: string;
+    /** SAPO (Soft Adaptive Policy Optimization): negative advantage temperature. */
+    tau_neg?: float64;
+  }
 
-  /** Machine-readable error code, when available. */
-  error_code?: string | null;
+  // ─── Pending request handles ──────────────────────────────────────────────────
 
-  /** Diagnostic reference that can be provided when requesting support. */
-  debug_ref?: string | null;
+  /** Identifies an accepted request whose result can be retrieved by polling. */
+  model FineTuningPendingOperation {
+    /** Request identifier to pass to the session's request-status endpoint. */
+    @visibility(Lifecycle.Read)
+    @minLength(1)
+    request_id: string;
 
-  /** Whether the service recommends retrying the failed request. */
-  should_retry?: boolean | null;
+    /** Indicates that the request has not yet completed. */
+    @visibility(Lifecycle.Read)
+    status: "pending";
+  }
 
-  /** Recommended delay in seconds before retrying the failed request. */
-  retry_after_sec?: float64 | null;
-}
+  /** Identifies an accepted training request and its fine-tuning session. */
+  model FineTuningActionOperation {
+    ...FineTuningPendingOperation;
 
-// ─── Session resource ─────────────────────────────────────────────────────────
+    /** Identifier of the session processing this request. */
+    @visibility(Lifecycle.Read)
+    @minLength(1)
+    session_id: string;
+  }
 
-/** Nested model sub-object within a session response. */
-model FineTuningSessionModelData {
-  /** Base model used by the session. */
-  base_model: string;
+  // ─── Request-status responses ─────────────────────────────────────────────────
 
-  /** LoRA adapter configuration, when the model uses an adapter. */
-  lora_config?: LoRAConfig | null;
+  /** Status envelope returned when polling a fine-tuning request. */
+  @discriminator("status")
+  model FineTuningRequestStatus {
+    /** Request state, which determines the shape of the status response. */
+    status: string;
+  }
 
-  /** Name of the model associated with the session, when available. */
-  model_name?: string | null;
-}
+  /** A request that is still being processed. */
+  @Azure.ClientGenerator.Core.clientName("PendingFineTuningContent", "csharp")
+  model PendingFineTuningRequest extends FineTuningRequestStatus {
+    /** Indicates that the request has not yet completed. */
+    status: "pending";
 
-/** Response from GET /fine_tuning/sessions/{sessionId}. */
-model FineTuningSession {
-  /** Unique identifier for this fine-tuning session. */
-  @visibility(Lifecycle.Read)
-  @minLength(1)
-  session_id: string;
+    /** Current processing phase, when reported by the service. */
+    phase?: string | null;
+  }
 
-  /** Session category, using the same wire values as the create-session request. */
-  type: FineTuningSessionType;
+  /** A request that completed successfully. */
+  @Azure.ClientGenerator.Core.clientName("CompletedFineTuningContent", "csharp")
+  model CompletedFineTuningRequest extends FineTuningRequestStatus {
+    /** Indicates that the request completed successfully. */
+    status: "completed";
 
-  /** Current lifecycle status of the session. */
-  @visibility(Lifecycle.Read)
-  status: FineTuningSessionStatus;
+    /** Raw result payload, whose properties depend on the submitted request. */
+    result: Record<unknown>;
+  }
 
-  /** Model and adapter configuration associated with this session. */
-  model_data: FineTuningSessionModelData;
-}
+  /** A request that failed during processing. */
+  @Azure.ClientGenerator.Core.clientName("FailedFineTuningContent", "csharp")
+  model FailedFineTuningRequest extends FineTuningRequestStatus {
+    /** Indicates that the request failed. */
+    status: "failed";
 
-/** Summary item returned in the paginated GET /fine_tuning/sessions list. */
-model FineTuningSessionSummary {
-  /** Unique identifier for this fine-tuning session. */
-  @visibility(Lifecycle.Read)
-  @minLength(1)
-  session_id: string;
+    /** Description of the failure. */
+    error: string;
 
-  /** Base model used for this fine-tuning session. */
-  base_model: string;
+    /** Machine-readable error code, when available. */
+    error_code?: string | null;
 
-  /** Current lifecycle status of the session. */
-  @visibility(Lifecycle.Read)
-  status: FineTuningSessionStatus;
+    /** Diagnostic reference that can be provided when requesting support. */
+    debug_ref?: string | null;
 
-  /** Whether the session uses a LoRA adapter. */
-  is_lora: boolean;
+    /** Whether the service recommends retrying the failed request. */
+    should_retry?: boolean | null;
 
-  /** LoRA rank, if applicable. */
-  lora_rank?: int32 | null;
+    /** Recommended delay in seconds before retrying the failed request. */
+    retry_after_sec?: float64 | null;
+  }
 
-  /** Indicates whether the session state is corrupted and cannot be resumed. */
-  corrupted: boolean;
+  // ─── Session resource ─────────────────────────────────────────────────────────
+
+  /** Nested model sub-object within a session response. */
+  model FineTuningSessionModelData {
+    /** Base model used by the session. */
+    base_model: string;
+
+    /** LoRA adapter configuration, when the model uses an adapter. */
+    lora_config?: LoRAConfig | null;
+
+    /** Name of the model associated with the session, when available. */
+    model_name?: string | null;
+  }
+
+  /** Response from GET /fine_tuning/sessions/{sessionId}. */
+  model FineTuningSession {
+    /** Unique identifier for this fine-tuning session. */
+    @visibility(Lifecycle.Read)
+    @minLength(1)
+    session_id: string;
+
+    /** Session category, using the same wire values as the create-session request. */
+    type: FineTuningSessionType;
+
+    /** Current lifecycle status of the session. */
+    @visibility(Lifecycle.Read)
+    status: FineTuningSessionStatus;
+
+    /** Model and adapter configuration associated with this session. */
+    model_data: FineTuningSessionModelData;
+  }
+
+  /** Summary item returned in the paginated GET /fine_tuning/sessions list. */
+  model FineTuningSessionSummary {
+    /** Unique identifier for this fine-tuning session. */
+    @visibility(Lifecycle.Read)
+    @minLength(1)
+    session_id: string;
+
+    /** Base model used for this fine-tuning session. */
+    base_model: string;
+
+    /** Current lifecycle status of the session. */
+    @visibility(Lifecycle.Read)
+    status: FineTuningSessionStatus;
+
+    /** Whether the session uses a LoRA adapter. */
+    is_lora: boolean;
+
+    /** LoRA rank, if applicable. */
+    lora_rank?: int32 | null;
+
+    /** Indicates whether the session state is corrupted and cannot be resumed. */
+    corrupted: boolean;
+
+    /**
+     * Timestamp of the most recent request made against this session.
+     * The fine-tuning service returns an RFC 3339 UTC date-time string, not Unix epoch seconds.
+     */
+    @visibility(Lifecycle.Read)
+    last_request_time: utcDateTime;
+  }
+
+  /** Pagination cursor returned in list responses. */
+  model FineTuningCursor {
+    /** Zero-based index of the first item in the current page. */
+    offset: int32;
+
+    /** Maximum number of items per page. */
+    limit: int32;
+
+    /** Total number of items across all pages. */
+    total_count: int32;
+  }
+
+  // ─── Checkpoint resource ──────────────────────────────────────────────────────
+
+  /** A checkpoint item returned in GET /fine_tuning/sessions/{sessionId}/checkpoints. */
+  model FineTuningCheckpoint {
+    /** Identifier of the saved checkpoint within the session. */
+    @visibility(Lifecycle.Read)
+    @minLength(1)
+    checkpoint_id: string;
+
+    /** Whether the checkpoint contains training state or sampler weights. */
+    @visibility(Lifecycle.Read)
+    checkpoint_type: FineTuningCheckpointType;
+
+    /**
+     * Timestamp when the checkpoint was saved.
+     * The fine-tuning service returns an RFC 3339 UTC date-time string, not Unix epoch seconds.
+     */
+    @visibility(Lifecycle.Read)
+    time: utcDateTime;
+
+    /** Training step associated with the checkpoint, when recorded. */
+    @visibility(Lifecycle.Read)
+    @minValue(0)
+    step_number?: int32 | null;
+
+    /** Metrics stored with the checkpoint, retaining their JSON value types. */
+    @visibility(Lifecycle.Read)
+    metrics?: Record<unknown> | null;
+  }
+
+  /** Detailed metadata for a single checkpoint. */
+  model FineTuningCheckpointInfo {
+    /** Base model from which the checkpoint was created. */
+    base_model: string;
+
+    /** Whether the checkpoint contains a LoRA adapter. */
+    is_lora: boolean;
+
+    /** LoRA rank of the checkpoint, if applicable. */
+    lora_rank?: int32 | null;
+  }
+
+  // ─── Request bodies ───────────────────────────────────────────────────────────
+
+  /** A training checkpoint used to initialize a new fine-tuning session. */
+  model FineTuningFromCheckpoint {
+    /** Identifier of the session containing the source training checkpoint. */
+    @pattern("^[a-zA-Z0-9_-]+$")
+    @minLength(1)
+    @maxLength(255)
+    source_session_id: string;
+
+    /** Identifier of the training checkpoint within the source session. */
+    @pattern("^[a-zA-Z0-9_-]+$")
+    @minLength(1)
+    @maxLength(255)
+    checkpoint_id: string;
+  }
+
+  /** Request body for POST /fine_tuning/sessions. */
+  @Azure.ClientGenerator.Core.clientName(
+    "CreateFineTuningSessionContent",
+    "csharp"
+  )
+  model CreateFineTuningSessionRequest {
+    /** Category of session to create. This existing request property is named type on the wire. */
+    type: FineTuningSessionType;
+
+    /** Base model to use for the new training session. */
+    base_model: string;
+
+    /** Required LoRA adapter configuration, including the adapter rank. */
+    lora_config: LoRAConfig;
+
+    /** Caller-provided metadata whose values can be any JSON value. */
+    user_metadata?: Record<unknown> | null;
+
+    /** Training checkpoint to load while initializing the session, when provided. */
+    from_checkpoint?: FineTuningFromCheckpoint | null;
+
+    /**
+     * Training tier. Set this property explicitly to select the tier.
+     * If omitted, tier selection is left to the service.
+     */
+    training_type?: FineTuningTrainingType;
+  }
 
   /**
-   * Timestamp of the most recent request made against this session.
-   * The fine-tuning service returns an RFC 3339 UTC date-time string, not Unix epoch seconds.
+   * Response from POST /fine_tuning/sessions.
+   * Poll the returned request identifier to track session initialization.
    */
-  @visibility(Lifecycle.Read)
-  last_request_time: utcDateTime;
-}
+  @Azure.ClientGenerator.Core.clientName(
+    "CreateFineTuningSessionResult",
+    "csharp"
+  )
+  model CreateFineTuningSessionResponse {
+    /** Identifier of the newly created fine-tuning session. */
+    @minLength(1)
+    session_id: string;
 
-/** Pagination cursor returned in list responses. */
-model FineTuningCursor {
-  /** Zero-based index of the first item in the current page. */
-  offset: int32;
+    /** Session category returned for the request, not a response-model identity marker. */
+    type: FineTuningSessionType;
 
-  /** Maximum number of items per page. */
-  limit: int32;
+    /** Base model used by the session. */
+    base_model: string;
 
-  /** Total number of items across all pages. */
-  total_count: int32;
-}
+    /** LoRA adapter configuration selected for the session. */
+    lora_config: LoRAConfig;
 
-// ─── Checkpoint resource ──────────────────────────────────────────────────────
+    /** Current lifecycle status, which can initially be created or queued. */
+    status: FineTuningSessionStatus;
 
-/** A checkpoint item returned in GET /fine_tuning/sessions/{sessionId}/checkpoints. */
-model FineTuningCheckpoint {
-  /** Identifier of the saved checkpoint within the session. */
-  @visibility(Lifecycle.Read)
-  @minLength(1)
-  checkpoint_id: string;
+    /** Request identifier used to poll for session initialization. */
+    @minLength(1)
+    request_id: string;
 
-  /** Whether the checkpoint contains training state or sampler weights. */
-  @visibility(Lifecycle.Read)
-  checkpoint_type: FineTuningCheckpointType;
+    /** Informational message associated with session creation, when available. */
+    info_message?: string | null;
+
+    /** Warning associated with session creation, when available. */
+    warning_message?: string | null;
+
+    /** Caller-provided metadata associated with the session. */
+    user_metadata?: Record<unknown> | null;
+  }
+
+  /** Inner payload for a forward-backward request. */
+  model ForwardBackwardInput {
+    /** Training examples to process in this batch. */
+    data: FineTuningDatum[];
+
+    /** Loss function to evaluate for the batch. */
+    loss_fn: FineTuningLossFn;
+
+    /** Optional hyper-parameters for the selected loss function. */
+    loss_fn_config?: LossFnConfig;
+  }
+
+  /** Request body for POST /fine_tuning/sessions/{sessionId}/forward_backward. */
+  @Azure.ClientGenerator.Core.clientName("ForwardBackwardContent", "csharp")
+  model ForwardBackwardRequest {
+    /** Batch inputs for the combined forward and backward pass. */
+    forward_backward_input: ForwardBackwardInput;
+  }
 
   /**
-   * Timestamp when the checkpoint was saved.
-   * The fine-tuning service returns an RFC 3339 UTC date-time string, not Unix epoch seconds.
+   * Inputs for a forward-only pass without gradient accumulation.
+   * Uses the same batch and loss configuration as a forward-backward pass.
    */
-  @visibility(Lifecycle.Read)
-  time: utcDateTime;
+  model ForwardInput {
+    ...ForwardBackwardInput;
+  }
 
-  /** Training step associated with the checkpoint, when recorded. */
-  @visibility(Lifecycle.Read)
-  @minValue(0)
-  step_number?: int32 | null;
+  /** Request body for POST /fine_tuning/sessions/{sessionId}/forward. */
+  @Azure.ClientGenerator.Core.clientName("ForwardContent", "csharp")
+  model ForwardRequest {
+    /** Batch inputs for the forward-only pass. */
+    forward_input: ForwardInput;
+  }
 
-  /** Metrics stored with the checkpoint, retaining their JSON value types. */
-  @visibility(Lifecycle.Read)
-  metrics?: Record<unknown> | null;
-}
+  /** Request body for POST /fine_tuning/sessions/{sessionId}/optim_step. */
+  @Azure.ClientGenerator.Core.clientName("OptimStepContent", "csharp")
+  model OptimStepRequest {
+    /** Adam optimizer parameters used to apply accumulated gradients. */
+    adam_params: AdamParams;
+  }
 
-/** Detailed metadata for a single checkpoint. */
-model FineTuningCheckpointInfo {
-  /** Base model from which the checkpoint was created. */
-  base_model: string;
+  /** Request body for POST /fine_tuning/sessions/{sessionId}/checkpoint. */
+  @Azure.ClientGenerator.Core.clientName("SaveCheckpointContent", "csharp")
+  model SaveCheckpointRequest {
+    /**
+     * User-supplied checkpoint identifier.
+     * Alphanumeric plus underscores and hyphens; max 255 characters.
+     */
+    @pattern("^[a-zA-Z0-9_-]+$")
+    @minLength(1)
+    @maxLength(255)
+    path: string;
 
-  /** Whether the checkpoint contains a LoRA adapter. */
-  is_lora: boolean;
+    /** Training iteration this checkpoint corresponds to. Optional. */
+    @minValue(0)
+    step_number?: int32;
 
-  /** LoRA rank of the checkpoint, if applicable. */
-  lora_rank?: int32 | null;
-}
-
-// ─── Request bodies ───────────────────────────────────────────────────────────
-
-/** A training checkpoint used to initialize a new fine-tuning session. */
-model FineTuningFromCheckpoint {
-  /** Identifier of the session containing the source training checkpoint. */
-  @pattern("^[a-zA-Z0-9_-]+$")
-  @minLength(1)
-  @maxLength(255)
-  source_session_id: string;
-
-  /** Identifier of the training checkpoint within the source session. */
-  @pattern("^[a-zA-Z0-9_-]+$")
-  @minLength(1)
-  @maxLength(255)
-  checkpoint_id: string;
-}
-
-/** Request body for POST /fine_tuning/sessions. */
-@Azure.ClientGenerator.Core.clientName(
-  "CreateFineTuningSessionContent",
-  "csharp"
-)
-model CreateFineTuningSessionRequest {
-  /** Category of session to create. This existing request property is named type on the wire. */
-  type: FineTuningSessionType;
-
-  /** Base model to use for the new training session. */
-  base_model: string;
-
-  /** Required LoRA adapter configuration, including the adapter rank. */
-  lora_config: LoRAConfig;
-
-  /** Caller-provided metadata whose values can be any JSON value. */
-  user_metadata?: Record<unknown> | null;
-
-  /** Training checkpoint to load while initializing the session, when provided. */
-  from_checkpoint?: FineTuningFromCheckpoint | null;
+    /** Per-step evaluation metrics at checkpoint time. Optional. */
+    metrics?: Record<unknown>;
+  }
 
   /**
-   * Training tier. Set this property explicitly to select the tier.
-   * If omitted, tier selection is left to the service.
+   * Request body for POST /fine_tuning/sessions/{sessionId}/checkpoint_sample.
+   * Supply either path or both sampling_session_seq_id and seq_id. The service
+   * validates this requirement at runtime.
    */
-  training_type?: FineTuningTrainingType;
-}
+  @Azure.ClientGenerator.Core.clientName("SaveSamplerWeightsContent", "csharp")
+  model SaveSamplerWeightsRequest {
+    /** Explicit sampler checkpoint identifier. Required unless both sequence identifiers are supplied. */
+    @pattern("^[a-zA-Z0-9_-]+$")
+    @minLength(1)
+    @maxLength(255)
+    path?: string;
 
-/**
- * Response from POST /fine_tuning/sessions.
- * Poll the returned request identifier to track session initialization.
- */
-@Azure.ClientGenerator.Core.clientName(
-  "CreateFineTuningSessionResult",
-  "csharp"
-)
-model CreateFineTuningSessionResponse {
-  /** Identifier of the newly created fine-tuning session. */
-  @minLength(1)
-  session_id: string;
+    /** Ordinal of this sampling session within the training run. Required with seq_id when path is omitted. */
+    sampling_session_seq_id?: int32;
 
-  /** Session category returned for the request, not a response-model identity marker. */
-  type: FineTuningSessionType;
+    /** Training step sequence number. Required with sampling_session_seq_id when path is omitted. */
+    seq_id?: int32;
 
-  /** Base model used by the session. */
-  base_model: string;
+    /** Existing request command tag for saving sampler-compatible weights. If omitted, the service defaults to "save_weights_for_sampler". */
+    type?: "save_weights_for_sampler" = "save_weights_for_sampler";
+  }
 
-  /** LoRA adapter configuration selected for the session. */
-  lora_config: LoRAConfig;
+  /** Request body for POST /fine_tuning/sessions/{sessionId}/sample. */
+  @Azure.ClientGenerator.Core.clientName("FineTuningSampleContent", "csharp")
+  model FineTuningSampleRequest {
+    /** Number of independent completions to generate. If omitted, the service defaults to 1. */
+    num_samples?: int32 = 1;
 
-  /** Current lifecycle status, which can initially be created or queued. */
-  status: FineTuningSessionStatus;
+    /** Tokenised input prompt. */
+    prompt: FineTuningModelInput;
 
-  /** Request identifier used to poll for session initialization. */
-  @minLength(1)
-  request_id: string;
+    /** Parameters controlling token generation. */
+    sampling_params: FineTuningSamplingParams;
 
-  /** Informational message associated with session creation, when available. */
-  info_message?: string | null;
+    /** Sampling session identifier from a prior sampler-weights save request. */
+    sampling_session_id?: string;
 
-  /** Warning associated with session creation, when available. */
-  warning_message?: string | null;
+    /** Training step index; must match the seq_id used when saving sampler weights. */
+    seq_id?: int32;
 
-  /** Caller-provided metadata associated with the session. */
-  user_metadata?: Record<unknown> | null;
-}
+    /** Whether to return prompt-token log-probabilities in the overall sample result. If omitted, the service defaults to false. */
+    prompt_logprobs?: boolean = false;
 
-/** Inner payload for a forward-backward request. */
-model ForwardBackwardInput {
-  /** Training examples to process in this batch. */
-  data: FineTuningDatum[];
+    /** Number of top-k log-probabilities per prompt token. If omitted, the service defaults to 0. Zero disables this output; maximum 20. */
+    @minValue(0)
+    @maxValue(20)
+    topk_prompt_logprobs?: int32 = 0;
+  }
 
-  /** Loss function to evaluate for the batch. */
-  loss_fn: FineTuningLossFn;
+  // ─── Response bodies ──────────────────────────────────────────────────────────
 
-  /** Optional hyper-parameters for the selected loss function. */
-  loss_fn_config?: LossFnConfig;
-}
+  /** Paginated list of fine-tuning sessions. */
+  model FineTuningSessionList {
+    /** Sessions returned in the current page. */
+    @pageItems
+    data: FineTuningSessionSummary[];
 
-/** Request body for POST /fine_tuning/sessions/{sessionId}/forward_backward. */
-@Azure.ClientGenerator.Core.clientName("ForwardBackwardContent", "csharp")
-model ForwardBackwardRequest {
-  /** Batch inputs for the combined forward and backward pass. */
-  forward_backward_input: ForwardBackwardInput;
-}
+    /** Offset, limit, and total count for the requested page. */
+    cursor: FineTuningCursor;
+  }
 
-/**
- * Inputs for a forward-only pass without gradient accumulation.
- * Uses the same batch and loss configuration as a forward-backward pass.
- */
-model ForwardInput {
-  ...ForwardBackwardInput;
-}
+  /** List of all checkpoints for a session (no pagination). */
+  model FineTuningCheckpointList {
+    /** All training and sampler checkpoints for the session, returned in one page. */
+    @pageItems
+    checkpoints: FineTuningCheckpoint[];
+  }
 
-/** Request body for POST /fine_tuning/sessions/{sessionId}/forward. */
-@Azure.ClientGenerator.Core.clientName("ForwardContent", "csharp")
-model ForwardRequest {
-  /** Batch inputs for the forward-only pass. */
-  forward_input: ForwardInput;
-}
+  /** Response from POST /fine_tuning/sessions/{sessionId}/complete. */
+  @Azure.ClientGenerator.Core.clientName("FineTuningCompleteResult", "csharp")
+  model FineTuningCompleteResponse {
+    /** Identifier of the session being unloaded. */
+    @minLength(1)
+    session_id: string;
 
-/** Request body for POST /fine_tuning/sessions/{sessionId}/optim_step. */
-@Azure.ClientGenerator.Core.clientName("OptimStepContent", "csharp")
-model OptimStepRequest {
-  /** Adam optimizer parameters used to apply accumulated gradients. */
-  adam_params: AdamParams;
-}
+    /** Request identifier used to poll for completion of the unload request. */
+    @minLength(1)
+    request_id: string;
+  }
 
-/** Request body for POST /fine_tuning/sessions/{sessionId}/checkpoint. */
-@Azure.ClientGenerator.Core.clientName("SaveCheckpointContent", "csharp")
-model SaveCheckpointRequest {
-  /**
-   * User-supplied checkpoint identifier.
-   * Alphanumeric plus underscores and hyphens; max 255 characters.
-   */
-  @pattern("^[a-zA-Z0-9_-]+$")
-  @minLength(1)
-  @maxLength(255)
-  path: string;
+  /** Response from DELETE /fine_tuning/sessions/{sessionId}. */
+  @Azure.ClientGenerator.Core.clientName(
+    "FineTuningDeleteSessionResult",
+    "csharp"
+  )
+  model FineTuningDeleteSessionResponse {
+    /** Identifier of the session targeted for deletion. */
+    @minLength(1)
+    session_id: string;
 
-  /** Training iteration this checkpoint corresponds to. Optional. */
-  @minValue(0)
-  step_number?: int32;
+    /** Whether the session is marked as deleted. */
+    deleted: boolean;
+  }
 
-  /** Per-step evaluation metrics at checkpoint time. Optional. */
-  metrics?: Record<unknown>;
-}
+  /** Response from POST /fine_tuning/sessions/{sessionId}/heartbeat. */
+  @Azure.ClientGenerator.Core.clientName("FineTuningHeartbeatResult", "csharp")
+  model FineTuningHeartbeatResponse {
+    /** Identifier of the session whose heartbeat was refreshed, when included by the service. */
+    @minLength(1)
+    session_id?: string;
+  }
 
-/**
- * Request body for POST /fine_tuning/sessions/{sessionId}/checkpoint_sample.
- * Supply either path or both sampling_session_seq_id and seq_id. The service
- * validates this requirement at runtime.
- */
-@Azure.ClientGenerator.Core.clientName("SaveSamplerWeightsContent", "csharp")
-model SaveSamplerWeightsRequest {
-  /** Explicit sampler checkpoint identifier. Required unless both sequence identifiers are supplied. */
-  @pattern("^[a-zA-Z0-9_-]+$")
-  @minLength(1)
-  @maxLength(255)
-  path?: string;
+  // ─── Sampling output primitives ───────────────────────────────────────────────
 
-  /** Ordinal of this sampling session within the training run. Required with seq_id when path is omitted. */
-  sampling_session_seq_id?: int32;
-
-  /** Training step sequence number. Required with sampling_session_seq_id when path is omitted. */
-  seq_id?: int32;
-
-  /** Existing request command tag for saving sampler-compatible weights. If omitted, the service defaults to "save_weights_for_sampler". */
-  type?: "save_weights_for_sampler" = "save_weights_for_sampler";
-}
-
-/** Request body for POST /fine_tuning/sessions/{sessionId}/sample. */
-@Azure.ClientGenerator.Core.clientName("FineTuningSampleContent", "csharp")
-model FineTuningSampleRequest {
-  /** Number of independent completions to generate. If omitted, the service defaults to 1. */
-  num_samples?: int32 = 1;
-
-  /** Tokenised input prompt. */
-  prompt: FineTuningModelInput;
-
-  /** Parameters controlling token generation. */
-  sampling_params: FineTuningSamplingParams;
-
-  /** Sampling session identifier from a prior sampler-weights save request. */
-  sampling_session_id?: string;
-
-  /** Training step index; must match the seq_id used when saving sampler weights. */
-  seq_id?: int32;
-
-  /** Whether to return prompt-token log-probabilities in the overall sample result. If omitted, the service defaults to false. */
-  prompt_logprobs?: boolean = false;
-
-  /** Number of top-k log-probabilities per prompt token. If omitted, the service defaults to 0. Zero disables this output; maximum 20. */
-  @minValue(0)
-  @maxValue(20)
-  topk_prompt_logprobs?: int32 = 0;
-}
-
-// ─── Response bodies ──────────────────────────────────────────────────────────
-
-/** Paginated list of fine-tuning sessions. */
-model FineTuningSessionList {
-  /** Sessions returned in the current page. */
-  @pageItems
-  data: FineTuningSessionSummary[];
-
-  /** Offset, limit, and total count for the requested page. */
-  cursor: FineTuningCursor;
-}
-
-/** List of all checkpoints for a session (no pagination). */
-model FineTuningCheckpointList {
-  /** All training and sampler checkpoints for the session, returned in one page. */
-  @pageItems
-  checkpoints: FineTuningCheckpoint[];
-}
-
-/** Response from POST /fine_tuning/sessions/{sessionId}/complete. */
-@Azure.ClientGenerator.Core.clientName("FineTuningCompleteResult", "csharp")
-model FineTuningCompleteResponse {
-  /** Identifier of the session being unloaded. */
-  @minLength(1)
-  session_id: string;
-
-  /** Request identifier used to poll for completion of the unload request. */
-  @minLength(1)
-  request_id: string;
-}
-
-/** Response from DELETE /fine_tuning/sessions/{sessionId}. */
-@Azure.ClientGenerator.Core.clientName(
-  "FineTuningDeleteSessionResult",
-  "csharp"
-)
-model FineTuningDeleteSessionResponse {
-  /** Identifier of the session targeted for deletion. */
-  @minLength(1)
-  session_id: string;
-
-  /** Whether the session is marked as deleted. */
-  deleted: boolean;
-}
-
-/** Response from POST /fine_tuning/sessions/{sessionId}/heartbeat. */
-@Azure.ClientGenerator.Core.clientName("FineTuningHeartbeatResult", "csharp")
-model FineTuningHeartbeatResponse {
-  /** Identifier of the session whose heartbeat was refreshed, when included by the service. */
-  @minLength(1)
-  session_id?: string;
-}
-
-// ─── Sampling output primitives ───────────────────────────────────────────────
-
-/** A single sampled sequence within a sampling result payload. */
-model FineTuningSampledSequence {
-  /** Generated token identifiers, in sequence order. */
-  tokens: int32[];
-
-  /** Decoded text of the generated sequence, when available. */
-  text?: string | null;
-
-  /** Log-probabilities of the generated tokens, when available. */
-  logprobs?: float64[] | null;
+  alias FineTuningSampledSequence = Azure.AI.ProjectsInternal.FineTuningSampledSequence;
 }

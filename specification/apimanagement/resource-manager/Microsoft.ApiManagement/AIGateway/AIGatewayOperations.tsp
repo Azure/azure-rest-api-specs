@@ -22,39 +22,6 @@ interface AiGatewayNameAvailabilityOperations {
   >;
 }
 
-/** OAuth actions on a tool-server endpoint, which is not an independent resource. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "The nested OAuth endpoint action uses the implemented explicit route and is not a separate ARM resource."
-@added(Versions.v2026_11_01)
-interface AiGatewayToolServerEndpointOperations {
-  /** Gets links to complete OAuth consent for a tool-server endpoint. */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/toolServers/{toolServerName}/endpoints/{endpointId}/oauth2/getLoginLinks")
-  @post
-  getLoginLinks(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /** AI Gateway resource name. */
-    @pattern("^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$")
-    @path
-    aiGatewayName: string,
-
-    /** Default workspace resource name. */
-    @pattern("^default$")
-    @path
-    workspaceName: string,
-
-    /** Tool server resource name. */
-    @pattern("^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$")
-    @path
-    toolServerName: string,
-
-    /** Stable identifier of the tool-server endpoint. */
-    @path
-    endpointId: string,
-  ): ArmResponse<AiGatewayToolServerOauth2LoginLinks> | ErrorResponse;
-}
-
 @added(Versions.v2026_11_01)
 @armResourceOperations
 interface AiGatewayTelemetryExporterResources {
@@ -124,6 +91,37 @@ interface AiGatewayResources {
   listBySubscription is ArmListBySubscription<AiGatewayResource>;
 }
 
+alias AiGatewayPrivateEndpointOps = Azure.ResourceManager.PrivateEndpoints<AiGatewayPrivateEndpointConnection>;
+alias AiGatewayPrivateLinkOps = Azure.ResourceManager.PrivateLinks<
+  AiGatewayPrivateLinkResource,
+  "",
+  Azure.ResourceManager.CommonTypes.PrivateLinkResourceNameParameter<
+    "privateLinkResources",
+    "^[a-zA-Z][a-zA-Z0-9]*$"
+  >
+>;
+
+@added(Versions.v2026_11_01)
+@armResourceOperations
+interface AiGatewayPrivateEndpointConnections {
+  get is AiGatewayPrivateEndpointOps.Read<AiGatewayResource>;
+
+  /** Approves or rejects a private endpoint connection. While the decision is applied, `properties.provisioningState` is `Updating`, a service-defined value of the extensible provisioning state. */
+  createOrUpdate is AiGatewayPrivateEndpointOps.CreateOrUpdateAsync<AiGatewayResource>;
+
+  /** Deletes a private endpoint connection. Until the connection is removed, `properties.provisioningState` is `Deleting`. */
+  delete is AiGatewayPrivateEndpointOps.DeleteAsync<AiGatewayResource>;
+
+  listByAiGateway is AiGatewayPrivateEndpointOps.ListByParent<AiGatewayResource>;
+}
+
+@added(Versions.v2026_11_01)
+@armResourceOperations
+interface AiGatewayPrivateLinkResources {
+  get is AiGatewayPrivateLinkOps.Read<AiGatewayResource>;
+  listByAiGateway is AiGatewayPrivateLinkOps.ListByParent<AiGatewayResource>;
+}
+
 @added(Versions.v2026_11_01)
 @armResourceOperations
 interface AiGatewayWorkspaceResources {
@@ -138,6 +136,7 @@ interface AiGatewayWorkspaceResources {
     PatchModel = AiGatewayWorkspaceUpdateParameters,
     Parameters = Azure.ResourceManager.CommonTypes.IfMatchHeader
   >;
+  listByAiGateway is ArmResourceListByParent<AiGatewayWorkspaceResource>;
 }
 
 @added(Versions.v2026_11_01)
@@ -164,13 +163,13 @@ interface AiGatewayModelProviderResources {
   >;
   listByWorkspace is ArmResourceListByParent<AiGatewayModelProviderResource>;
 
-  /** Returns the stored model-provider credential value, including the secret. */
+  /** Returns the stored model-provider authentication configuration, including secret values. */
   @post
-  @action("listCredentials")
-  listCredentials is ArmResourceActionSync<
+  @action("listSecrets")
+  listSecrets is ArmResourceActionSync<
     AiGatewayModelProviderResource,
     void,
-    ArmResponse<AiGatewayCredentialValue>
+    ArmResponse<AiGatewayModelProviderSecrets>
   >;
 }
 
@@ -230,6 +229,15 @@ interface AiGatewayToolServerResources {
     AiGatewayToolServerResource,
     void,
     ArmResponse<AiGatewayToolServerSecrets>
+  >;
+
+  /** Gets links to complete OAuth consent for a tool server endpoint. */
+  @post
+  @action("getOauth2LoginLinks")
+  getOauth2LoginLinks is ArmResourceActionSync<
+    AiGatewayToolServerResource,
+    AiGatewayToolServerLoginLinksRequest,
+    ArmResponse<AiGatewayToolServerOauth2LoginLinks>
   >;
 }
 
