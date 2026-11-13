@@ -1700,13 +1700,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/removeCrossTenantVaultMapping": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/remove": {
       "post": {
         "operationId": "CrossTenantVaultMappings_Remove",
         "tags": [
           "CrossTenantVaultMappings"
         ],
-        "description": "Removes the cross-tenant vault mapping for cross-tenant restore operations.\nThis API removes the target vault properties associated with source vault ID and deletes catalog mapping.",
+        "description": "Removes the cross-tenant vault mapping for cross-tenant restore operations.\nThis API removes the target vault properties associated with source vault ID and deletes catalog mapping.\nThe removal completes synchronously.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1743,20 +1743,6 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
           "204": {
             "description": "Action completed successfully."
           },
@@ -1771,11 +1757,7 @@
           "Remove Cross Tenant Vault Mapping": {
             "$ref": "./examples/CrossTenantVaultMappingOperations/RemoveCrossTenantVaultMapping.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupCrossTenantVaultMappings/{crossTenantVaultMappingName}/vaultCredentials/{certificateName}/generate": {
