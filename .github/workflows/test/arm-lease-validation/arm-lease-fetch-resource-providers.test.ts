@@ -1,7 +1,8 @@
 import fs from "node:fs";
+import { tmpdir } from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import {
   findRepoRoot,
@@ -12,16 +13,6 @@ import {
 // Get the directory of the current test file to find repo root reliably
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-// Check if specification directory exists (may not exist in sparse checkouts)
-const hasSpecificationDir = () => {
-  try {
-    const repoRoot = findRepoRoot(__dirname);
-    return fs.existsSync(path.join(repoRoot, "specification"));
-  } catch {
-    return false;
-  }
-};
 
 describe("fetch-resource-providers", () => {
   describe("findRepoRoot", () => {
@@ -36,48 +27,63 @@ describe("fetch-resource-providers", () => {
     });
   });
 
-  describe("findResourceProviders (without service names)", () => {
-    it("finds resource providers without service names", () => {
-      const repoRoot = findRepoRoot(__dirname);
-      const rps = findResourceProviders(repoRoot, false);
+  describe("findResourceProviders", () => {
+    let repoRoot: string;
 
-      // In sparse checkouts, specification/ may not exist, so rps could be empty
-      if (!hasSpecificationDir()) {
-        expect(rps).toEqual([]);
-        return;
+    beforeEach(() => {
+      repoRoot = fs.mkdtempSync(path.join(tmpdir(), "lease-provider-discovery-"));
+      for (const directory of [
+        "flat/resource-manager/Microsoft.Flat/stable",
+        "flat/resource-manager/Microsoft.Flat/preview",
+        "flat/resource-manager/Microsoft.Flat/common-types",
+        "flat/resource-manager/Microsoft.Flat/examples",
+        "grouped/resource-manager/Microsoft.Grouped/Zulu/stable",
+        "grouped/resource-manager/Microsoft.Grouped/Alpha/preview",
+        "grouped/resource-manager/Microsoft.Grouped/common-types",
+        "grouped/resource-manager/Microsoft.Grouped/examples",
+        "grouped/resource-manager/Microsoft.Grouped/stable",
+        "grouped/resource-manager/Microsoft.Grouped/preview",
+        "ignored/resource-manager/Fabrikam.Ignored/stable",
+        "ignored/data-plane/Microsoft.Ignored/stable",
+        "ignored/resource-manager/Microsoft.Empty",
+      ]) {
+        fs.mkdirSync(path.join(repoRoot, "specification", directory), { recursive: true });
       }
-
-      expect(rps.length).toBeGreaterThan(0);
-      expect(rps.every((rp) => rp.rpNamespace && rp.orgName && rp.path)).toBe(true);
-      expect(rps.every((rp) => !rp.serviceNames)).toBe(true);
-      expect(rps.some((rp) => rp.rpNamespace === "Microsoft.Storage")).toBe(true);
-      expect(rps.some((rp) => rp.rpNamespace === "Microsoft.Compute")).toBe(false);
     });
-  });
 
-  describe("findResourceProviders (with service names)", () => {
-    it("finds resource providers with service names", () => {
-      const repoRoot = findRepoRoot(__dirname);
-      const rps = findResourceProviders(repoRoot, true);
-
-      // In sparse checkouts, specification/ may not exist, so rps could be empty
-      if (!hasSpecificationDir()) {
-        expect(rps).toEqual([]);
-        return;
-      }
-
-      expect(rps.length).toBeGreaterThan(0);
-      expect(rps.every((rp) => rp.rpNamespace && rp.orgName && rp.path && rp.serviceNames)).toBe(
-        true,
-      );
-      expect(rps.every((rp) => Array.isArray(rp.serviceNames))).toBe(true);
-
-      const compute = rps.find((rp) => rp.rpNamespace === "Microsoft.Compute");
-      expect(compute).toBeDefined();
-      expect(compute?.orgName).toBe("compute");
-      expect(compute?.serviceNames?.includes("Compute")).toBe(true);
-      expect(rps.some((rp) => rp.rpNamespace === "Microsoft.Storage")).toBe(false);
+    afterEach(() => {
+      fs.rmSync(repoRoot, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
     });
+
+    it("finds resource providers with versions directly under the namespace", () => {
+      expect(findResourceProviders(repoRoot, false)).toEqual([
+        {
+          rpNamespace: "Microsoft.Flat",
+          orgName: "flat",
+          path: path.join("specification", "flat", "resource-manager", "Microsoft.Flat"),
+        },
+      ]);
+    });
+
+    it("finds sorted service groups without treating version and support folders as groups", () => {
+      expect(findResourceProviders(repoRoot, true)).toEqual([
+        {
+          rpNamespace: "Microsoft.Grouped",
+          orgName: "grouped",
+          path: path.join("specification", "grouped", "resource-manager", "Microsoft.Grouped"),
+          serviceNames: ["Alpha", "Zulu"],
+        },
+      ]);
+    });
+
+    it.each([false, true])(
+      "returns no providers without specification/ (service names: %s)",
+      (withServiceNames) => {
+        fs.rmSync(path.join(repoRoot, "specification"), { recursive: true });
+
+        expect(findResourceProviders(repoRoot, withServiceNames)).toEqual([]);
+      },
+    );
   });
 
   describe("formatOutput", () => {
