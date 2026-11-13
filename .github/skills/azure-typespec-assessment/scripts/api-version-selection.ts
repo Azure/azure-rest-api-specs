@@ -192,17 +192,20 @@ export function selectApiVersionPair({
   const baselineVersion = useSameVersion
     ? currentVersion
     : latest(stableBaseVersions.length ? stableBaseVersions : base.versions);
+  if (!baselineVersion) throw new Error("Unable to select the baseline API version.");
   const baselineReason = useSameVersion
     ? "affected-existing-version"
     : stableBaseVersions.length
       ? "previous-latest-stable"
       : "previous-latest-preview";
   const mode = addedCurrentVersions.length ? "new-api-version" : "existing-api-version";
+  const baselineSourceRevision =
+    mode === "new-api-version" && current.versions.includes(baselineVersion) ? "current" : "base";
   return {
     mode,
     baseline: {
-      sourceRevision: mode === "new-api-version" ? "current" : "base",
-      commit: mode === "new-api-version" ? headCommit : baseCommit,
+      sourceRevision: baselineSourceRevision,
+      commit: baselineSourceRevision === "current" ? headCommit : baseCommit,
       apiVersion: baselineVersion,
       reason: baselineReason,
     },

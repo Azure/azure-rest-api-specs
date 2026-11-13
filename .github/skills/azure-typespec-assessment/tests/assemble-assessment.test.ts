@@ -146,6 +146,33 @@ void test("validator accepts target-only artifact comparisons for new projects",
     validateAssessment(assessment).filter((error) => error.startsWith("Artifact comparison")),
     [],
   );
+
+  assessment.projects = [{ id: "project-version" }] as AssessmentOutput["projects"];
+  assessment.artifactComparisons = [
+    {
+      projectId: "project-version",
+      mode: "new-api-version",
+      baseline: {
+        sourceRevision: "base",
+        commit: "base",
+        apiVersion: "2026-05-01-preview",
+        reason: "previous-latest-preview",
+      },
+      target: {
+        sourceRevision: "current",
+        commit: "head",
+        apiVersion: "2026-10-01-preview",
+        reason: "newest-added-version",
+      },
+    },
+  ];
+
+  assert.deepEqual(
+    validateAssessment(assessment).filter((error) =>
+      error.startsWith("New-version artifact comparison"),
+    ),
+    [],
+  );
 });
 
 function fixture() {
