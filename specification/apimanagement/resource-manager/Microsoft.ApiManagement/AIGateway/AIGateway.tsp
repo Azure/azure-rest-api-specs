@@ -113,14 +113,25 @@ model AiGatewayPrivateLinkResource is Azure.ResourceManager.PrivateLink;
 model AiGatewaySkuUpdate
   is OptionalProperties<Azure.ResourceManager.CommonTypes.Sku>;
 
+/** Subnet fields to update on an AI Gateway. */
+@added(Versions.v2026_11_01)
+model AiGatewaySubnetUpdate is OptionalProperties<AiGatewaySubnet>;
+
+/** Backend networking configuration to update on an AI Gateway. */
+@added(Versions.v2026_11_01)
+model AiGatewayBackendUpdate {
+  /** Subnet through which the AI Gateway reaches backends. Omit it to keep the current subnet, or set it to null to remove it. */
+  subnet?: AiGatewaySubnetUpdate;
+}
+
 /** Properties for updating an AI Gateway. */
 @added(Versions.v2026_11_01)
 model AiGatewayUpdateProperties {
   /** Whether public network access is allowed for the AI Gateway. */
   publicNetworkAccess?: AiGatewayPublicNetworkAccess;
 
-  /** Backend networking configuration. Omit subnet to keep the current subnet, or set it to null to remove it. */
-  backend?: AiGatewayBackend;
+  /** Backend networking configuration. */
+  backend?: AiGatewayBackendUpdate;
 }
 
 /** Parameters for updating an AI Gateway. */
