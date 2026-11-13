@@ -41,7 +41,7 @@ op DataLakeOperation<
       ...ApiVersionHeader;
       ...RequestIdResponseHeader;
       ...ClientRequestIdResponseHeader;
-      ...RequestPriorityResponseHeader;
+      ...RequestPriorityResponseHeaderPrivate;
     })
   | TError;
 
@@ -62,7 +62,7 @@ op DataLakeOperationNoBody<
       ...ApiVersionHeader;
       ...RequestIdResponseHeader;
       ...ClientRequestIdResponseHeader;
-      ...RequestPriorityResponseHeader;
+      ...RequestPriorityResponseHeaderPrivate;
     })
   | TError;
 

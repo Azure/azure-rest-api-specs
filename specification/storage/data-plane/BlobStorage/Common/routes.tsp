@@ -47,7 +47,7 @@ op StorageOperation<
       ...ApiVersionHeader;
       ...RequestIdResponseHeader;
       ...ClientRequestIdHeader;
-      ...RequestPriorityResponseHeader;
+      ...RequestPriorityResponseHeaderPrivate;
     })
   | TError;
 
@@ -68,7 +68,7 @@ op StorageOperationNoBody<
       ...ApiVersionHeader;
       ...RequestIdResponseHeader;
       ...ClientRequestIdHeader;
-      ...RequestPriorityResponseHeader;
+      ...RequestPriorityResponseHeaderPrivate;
     })
   | TError;
 
@@ -238,7 +238,7 @@ interface Service {
         ...ApiVersionHeader;
         ...RequestIdResponseHeader;
         ...ClientRequestIdHeader;
-        ...RequestPriorityResponseHeader;
+        ...RequestPriorityResponseHeaderPrivate;
       })
     | Error;
 
@@ -513,7 +513,7 @@ interface Container {
 
         ...RequestIdResponseHeader;
         ...ApiVersionHeader;
-        ...RequestPriorityResponseHeader;
+        ...RequestPriorityResponseHeaderPrivate;
       } & MultipartBodyParameter)
     | Error;
 
@@ -890,7 +890,7 @@ interface Blob {
 
         ...RequestIdResponseHeader;
         ...ClientRequestIdHeader;
-        ...RequestPriorityResponseHeader;
+        ...RequestPriorityResponseHeaderPrivate;
         ...MetadataHeaders;
         ...ObjectReplicationHeaders;
         ...LastModifiedResponseHeader;
@@ -969,7 +969,7 @@ interface Blob {
 
         ...RequestIdResponseHeader;
         ...ClientRequestIdHeader;
-        ...RequestPriorityResponseHeader;
+        ...RequestPriorityResponseHeaderPrivate;
         ...MetadataHeaders;
         ...ObjectReplicationHeaders;
         ...LastModifiedResponseHeader;
@@ -1721,7 +1721,7 @@ interface Blob {
         contentType: "application/xml";
 
         ...BlobLayoutResponseHeaders;
-        ...RequestPriorityResponseHeader;
+        ...RequestPriorityResponseHeaderPrivate;
         ...ClientRequestIdHeader;
         ...RequestIdResponseHeader;
         ...ApiVersionHeader;
@@ -1741,7 +1741,7 @@ interface Blob {
         contentType?: string;
 
         ...BlobLayoutResponseHeaders;
-        ...RequestPriorityResponseHeader;
+        ...RequestPriorityResponseHeaderPrivate;
         ...ClientRequestIdHeader;
         ...RequestIdResponseHeader;
         ...ApiVersionHeader;

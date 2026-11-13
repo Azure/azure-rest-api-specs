@@ -3062,6 +3062,15 @@ alias RequestPriorityParameter = {
 /** The priority applied by the Blob service to a request. */
 alias RequestPriorityResponseHeader = {
   /** Reports the effective request priority from 0 through 7. */
+  @header("x-ms-request-priority")
+  @minValue(0)
+  @maxValue(7)
+  effectiveRequestPriority: int32;
+};
+
+/** The priority applied by the Blob service to a request. (Internal) */
+alias RequestPriorityResponseHeaderPrivate = {
+  /** Reports the effective request priority from 0 through 7. */
   @access(Access.internal)
   @header("x-ms-request-priority")
   @minValue(0)
