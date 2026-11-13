@@ -65,8 +65,8 @@ model AiGatewayProperties {
   @visibility(Lifecycle.Read)
   frontend?: AiGatewayFrontend;
 
-  /** Backend networking configuration. Can only be set when the AI Gateway is created. */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  /** Backend networking configuration. */
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   backend?: AiGatewayBackend;
 
   /** Whether public network access is allowed for the AI Gateway. */
@@ -118,6 +118,9 @@ model AiGatewaySkuUpdate
 model AiGatewayUpdateProperties {
   /** Whether public network access is allowed for the AI Gateway. */
   publicNetworkAccess?: AiGatewayPublicNetworkAccess;
+
+  /** Backend networking configuration. Omit subnet to keep the current subnet, or set it to null to remove it. */
+  backend?: AiGatewayBackend;
 }
 
 /** Parameters for updating an AI Gateway. */

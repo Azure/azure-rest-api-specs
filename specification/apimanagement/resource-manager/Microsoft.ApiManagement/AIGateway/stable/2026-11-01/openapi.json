@@ -6448,9 +6448,10 @@
         },
         "backend": {
           "$ref": "#/definitions/AiGatewayBackend",
-          "description": "Backend networking configuration. Can only be set when the AI Gateway is created.",
+          "description": "Backend networking configuration.",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
@@ -8006,6 +8007,10 @@
         "publicNetworkAccess": {
           "$ref": "#/definitions/AiGatewayPublicNetworkAccess",
           "description": "Whether public network access is allowed for the AI Gateway."
+        },
+        "backend": {
+          "$ref": "#/definitions/AiGatewayBackend",
+          "description": "Backend networking configuration. Omit subnet to keep the current subnet, or set it to null to remove it."
         }
       }
     },
