@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2026-04-15` is specified on the co
 
 ```yaml $(tag) == 'package-2026-04-15'
 input-file:
-  - Microsoft.PlanetaryComputer/stable/2026-04-15/openapi.json
+  - stable/2026-04-15/openapi.json
 ```
 
 ### Tag: package-2025-04-30-preview
@@ -45,5 +45,5 @@ These settings apply only when `--tag=package-2025-04-30-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-04-30-preview'
 input-file:
-  - Microsoft.PlanetaryComputer/preview/2025-04-30-preview/openapi.json
+  - preview/2025-04-30-preview/openapi.json
 ```
