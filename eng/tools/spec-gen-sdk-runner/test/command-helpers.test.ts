@@ -15,6 +15,7 @@ import {
   parseArguments,
   prepareAzsdkDetectBreakingChangeCommand,
   prepareSpecGenSdkCommand,
+  resolvePackagePath,
   selectGenerationTool,
   setBuildFailedLabelVariable,
   setPipelineVariables,
@@ -32,6 +33,16 @@ const repoRoot = path.resolve(path.dirname(currentFilePath), "../fixtures/");
 describe("commands.ts", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+  });
+
+  describe("resolvePackagePath", () => {
+    test("resolves the typespec metadata output directory against the SDK repository", () => {
+      const sdkRepoPath = path.resolve("tmp", "azure-sdk-for-net");
+
+      expect(
+        resolvePackagePath("{output-dir}/sdk/keyvault/Azure.Security.KeyVault.Keys", sdkRepoPath),
+      ).toBe(path.join(sdkRepoPath, "sdk", "keyvault", "Azure.Security.KeyVault.Keys"));
+    });
   });
 
   describe("setPipelineVariables", () => {
