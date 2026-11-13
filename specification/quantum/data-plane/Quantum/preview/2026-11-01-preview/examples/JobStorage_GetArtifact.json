@@ -1,0 +1,24 @@
+{
+  "operationId": "JobStorage_GetArtifact",
+  "title": "Streams a hierarchical customer-readable artifact.",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "jobId": "00000000-0000-0000-0000-000000000002",
+    "resourceGroupName": "my-resource-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "workspaceName": "my-workspace",
+    "path": "files/results/result.json"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Content-Type": "application/json",
+        "Content-Length": "21",
+        "ETag": "\"artifact-revision-1\"",
+        "Last-Modified": "Thu, 05 Nov 2026 12:01:00 GMT",
+        "Cache-Control": "no-store"
+      },
+      "body": "{\"status\":\"complete\"}"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "operationId": "JobStorage_ListArtifacts",
+  "title": "Lists artifact references with an opaque next page link.",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "jobId": "00000000-0000-0000-0000-000000000002",
+    "resourceGroupName": "my-resource-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "workspaceName": "my-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "inputData"
+          },
+          {
+            "id": "outputData"
+          }
+        ],
+        "nextLink": "https://eastus.quantum.azure.com/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/my-resource-group/providers/Microsoft.Quantum/workspaces/my-workspace/jobs/00000000-0000-0000-0000-000000000002/artifacts?api-version=2026-11-01-preview&continuation=opaque-page-2"
+      }
+    }
+  }
+}
