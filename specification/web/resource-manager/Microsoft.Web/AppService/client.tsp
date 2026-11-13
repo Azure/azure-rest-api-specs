@@ -10,6 +10,19 @@ using Azure.Core;
 
 namespace Customizations;
 
+@@clientLocation(EgressConfigs.createOrUpdateEgressConfig, WebApps, "!csharp");
+@@clientLocation(EgressConfigs.getEgressConfig, WebApps, "!csharp");
+@@clientLocation(
+  EgressConfigSlotConfigs.createOrUpdateEgressConfigSlot,
+  WebApps,
+  "!csharp"
+);
+@@clientLocation(
+  EgressConfigSlotConfigs.getEgressConfigSlot,
+  WebApps,
+  "!csharp"
+);
+
 // Go
 @@clientName(AiGateways, "AIGateways", "go");
 @@clientName(AiGateway, "AIGateway", "go");
