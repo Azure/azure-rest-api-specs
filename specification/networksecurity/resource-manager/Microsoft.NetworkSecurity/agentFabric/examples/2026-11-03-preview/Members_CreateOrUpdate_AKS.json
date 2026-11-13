@@ -1,0 +1,98 @@
+{
+  "title": "Members_CreateOrUpdate_AKS",
+  "operationId": "Members_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-11-03-preview",
+    "subscriptionId": "11809CA1-E126-4017-945E-AA795CD5C5A9",
+    "resourceGroupName": "rgnetworksecurity",
+    "agentFabricName": "testAIFabric",
+    "memberName": "checkoutApi",
+    "resource": {
+      "location": "eastus",
+      "properties": {
+        "workload": {
+          "type": "AKS",
+          "clusterAssociationId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.NetworkSecurity/agentFabrics/testAIFabric/clusterAssociations/testClusterAssociation",
+          "clusterResourceId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.ContainerService/managedClusters/testAksCluster",
+          "workload": {
+            "apiVersion": "apps/v1",
+            "kind": "Deployment",
+            "namespace": "payments",
+            "name": "checkout-api"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "eastus",
+        "properties": {
+          "workload": {
+            "type": "AKS",
+            "workloadId": "abc12345-def6-7890-abcd-ef1234567890",
+            "memberGuid": "11111111-2222-3333-4444-555555555555",
+            "clusterAssociationId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.NetworkSecurity/agentFabrics/testAIFabric/clusterAssociations/testClusterAssociation",
+            "clusterResourceId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.ContainerService/managedClusters/testAksCluster",
+            "workload": {
+              "apiVersion": "apps/v1",
+              "kind": "Deployment",
+              "namespace": "payments",
+              "name": "checkout-api"
+            }
+          },
+          "spiffeId": "spiffe://microsoft.agentfabric/testaifabric/checkoutapi",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.NetworkSecurity/agentFabrics/testAIFabric/members/checkoutApi",
+        "name": "checkoutApi",
+        "type": "Microsoft.NetworkSecurity/agentFabrics/members",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2025-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-01-01T00:00:00.000Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/providers/Microsoft.NetworkSecurity/locations/westus3/operationStatuses/00000000-0000-0000-0000-000000000001?api-version=2026-11-03-preview"
+      },
+      "body": {
+        "location": "eastus",
+        "properties": {
+          "workload": {
+            "type": "AKS",
+            "workloadId": "abc12345-def6-7890-abcd-ef1234567890",
+            "memberGuid": "11111111-2222-3333-4444-555555555555",
+            "clusterAssociationId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.NetworkSecurity/agentFabrics/testAIFabric/clusterAssociations/testClusterAssociation",
+            "clusterResourceId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.ContainerService/managedClusters/testAksCluster",
+            "workload": {
+              "apiVersion": "apps/v1",
+              "kind": "Deployment",
+              "namespace": "payments",
+              "name": "checkout-api"
+            }
+          },
+          "spiffeId": "spiffe://microsoft.agentfabric/testaifabric/checkoutapi",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.NetworkSecurity/agentFabrics/testAIFabric/members/checkoutApi",
+        "name": "checkoutApi",
+        "type": "Microsoft.NetworkSecurity/agentFabrics/members",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2025-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-01-01T00:00:00.000Z"
+        }
+      }
+    }
+  }
+}

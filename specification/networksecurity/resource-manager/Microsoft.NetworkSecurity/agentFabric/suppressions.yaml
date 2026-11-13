@@ -1,0 +1,10 @@
+- tool: SpecChangePolicies
+  reason: >
+    This PR publishes six existing preview API versions that already shipped
+    from the private repo. The first public SDKs should be generated from the
+    latest version, 2026-11-03-preview, which is the version released for Ignite.
+    Generating from the oldest version, 2026-04-16-preview, would omit cluster
+    associations, egress trust bundles, member GUIDs and content safety.
+  rules: [MultipleNewApiVersions]
+  paths:
+    - .
