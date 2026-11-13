@@ -1,8 +1,9 @@
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./models.tsp";
+import "./shared.tsp";
 import "./Server.tsp";
 
 using TypeSpec.Rest;
@@ -11,7 +12,58 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.Core;
 
+using TypeSpec.Versioning;
+
 namespace Microsoft.DBforPostgreSQL;
+
+/**
+ * Type of endpoint for the virtual endpoints.
+ */
+union VirtualEndpointType {
+  string,
+
+  /** Read-write endpoint. */
+  ReadWrite: "ReadWrite",
+}
+
+/**
+ * Pair of virtual endpoints for a server.
+ */
+model VirtualEndpointResourceForPatch {
+  /**
+   * Properties of the pair of virtual endpoints.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  properties?: VirtualEndpointResourceProperties;
+}
+
+/**
+ * Properties of a pair of virtual endpoints.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model VirtualEndpointResourceProperties {
+  /**
+   * Type of endpoint for the virtual endpoints.
+   */
+  endpointType?: VirtualEndpointType;
+
+  /**
+   * List of servers that one of the virtual endpoints can refer to.
+   */
+  members?: string[];
+
+  /**
+   * List of virtual endpoints for a server.
+   */
+  @visibility(Lifecycle.Read)
+  virtualEndpoints?: string[];
+}
+
+/**
+ * List of virtual endpoints.
+ */
+model VirtualEndpointsList is Azure.Core.Page<VirtualEndpoint>;
+
 // FIXME: VirtualEndpoint has no properties property
 /**
  * Pair of virtual endpoints for a server.
