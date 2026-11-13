@@ -73,11 +73,22 @@ interface Projects {
         })
       | ErrorResponse
   )
+  @returnTypeChangedFrom(
+    Versions.v2026_11_15_preview,
+
+      | ArmResourceUpdatedResponse<Project>
+      | ArmResourceCreatedResponse<Project>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Project> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: Project,
+        })
+      | ErrorResponse
+  )
   create is ArmResourceCreateOrReplaceAsync<
     Project,
     Response =
       | ArmResourceUpdatedResponse<Project>
-      | ArmResourceCreatedResponse<Project>
       | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Project> &
           Azure.Core.Foundations.RetryAfterHeader> & {
           @bodyRoot

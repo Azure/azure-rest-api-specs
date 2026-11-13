@@ -1,0 +1,53 @@
+{
+  "operationId": "ArcDeployments_Get",
+  "title": "GetArcDeployment",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "deploymentName": "phi-3-gpu-arc",
+    "api-version": "2026-11-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/arcDeployments/phi-3-gpu-arc",
+        "name": "phi-3-gpu-arc",
+        "type": "Microsoft.CognitiveServices/accounts/arcDeployments",
+        "etag": "\"0x8D...\"",
+        "properties": {
+          "model": {
+            "format": "OpenAI",
+            "name": "Phi-3-mini-128k-instruct-cuda-gpu",
+            "version": "2",
+            "assetId": "azureml://registries/azureml/models/Phi-3-mini-128k-instruct-cuda-gpu/versions/2"
+          },
+          "extensionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Kubernetes/connectedClusters/edge-cluster/providers/Microsoft.KubernetesConfiguration/extensions/inference-operator",
+          "runtime": "onnx-genai",
+          "compute": "gpu",
+          "replicas": 2,
+          "resources": {
+            "limits": {
+              "gpu": 5
+            }
+          },
+          "nodeSelector": {
+            "agentpool": "a100"
+          },
+          "provisioningState": "Succeeded",
+          "provisioningDetails": {
+            "message": "Deployment is healthy and serving traffic.",
+            "lastOperationTimestamp": "2026-07-15T14:45:00Z"
+          },
+          "inferenceEndpoint": "https://edge-cluster.eastus.inference.ml.azure.com",
+          "capabilities": {
+            "chatCompletion": "true"
+          }
+        },
+        "sku": {
+          "name": "Arc"
+        }
+      }
+    }
+  }
+}
