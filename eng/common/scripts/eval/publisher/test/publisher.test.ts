@@ -360,6 +360,7 @@ test("one checkbox gates trusted-run egress; owner configuration additionally ga
     const evaluate = (expression, variables, enabled = true, succeeds = true) => runInNewContext(expression.replace(/\bin\(/g, "oneOf("), {
         variables, parameters: { publishDashboardResults: enabled }, succeeded: () => succeeds,
         and: (...values) => values.every(Boolean), eq: (a, b) => String(a ?? "").toLowerCase() === String(b ?? "").toLowerCase(),
+        or: (...values) => values.some(Boolean),
         not: value => !value,
         startsWith: (value, prefix) => String(value ?? "").toLowerCase().startsWith(String(prefix).toLowerCase()),
         endsWith: (value, suffix) => String(value ?? "").toLowerCase().endsWith(String(suffix).toLowerCase()),
@@ -375,6 +376,11 @@ test("one checkbox gates trusted-run egress; owner configuration additionally ga
             assert.equal(evaluate(networkGate, variables), true, `${repository}: ${reason} egress`);
             assert.equal(evaluate(runtime, variables), true, `${repository}: ${reason} upload`);
         }
+        for (const branch of ["refs/heads/feature", "refs/heads/feature/main", "refs/tags/main"]) {
+            const variables = { ...trusted, "Build.SourceBranch": branch };
+            assert.equal(evaluate(networkGate, variables), true, `${repository}: manual ${branch} egress without a branch opt-in`);
+            assert.equal(evaluate(runtime, variables), true, `${repository}: manual ${branch} upload without a branch opt-in`);
+        }
         assert.equal(evaluate(networkGate, trusted, false), false);
         assert.equal(evaluate(runtime, trusted, true, false), false);
         for (const account of [undefined, ""]) assert.equal(evaluate(runtime, { ...trusted, EvalStorageAccountName: account }), false);
@@ -383,10 +389,29 @@ test("one checkbox gates trusted-run egress; owner configuration additionally ga
             ["Build.Repository.Name", "example-org/azure-rest-api-specs"], ["Build.Repository.Name", "Azure/azure-rest-api-specs-pr"],
             ["Build.Repository.Name", "Azure/azure-sdk-for-python-pr"], ["Build.Repository.Name", "example-org/new-sdk-repository"],
             ["Build.Reason", "PullRequest"], ["Build.Reason", "ResourceTrigger"],
-            ...["refs/pull/1/merge", "refs/heads/feature", "refs/heads/feature/main", "refs/tags/main", ""].map(branch => ["Build.SourceBranch", branch])]) {
+            ["Build.SourceBranch", "refs/pull/1/merge"]]) {
             const variables = { ...trusted, [key]: value };
             assert.equal(evaluate(networkGate, variables), false); assert.equal(evaluate(runtime, variables), false);
         }
+    }
+    const feature = { ...base, "Build.Repository.Name": "Azure/azure-rest-api-specs", "Build.SourceBranch": "refs/heads/feature-test" };
+    assert.equal(evaluate(networkGate, feature), true);
+    assert.equal(evaluate(runtime, feature), true);
+    assert.equal(evaluate(networkGate, feature, false), false);
+    assert.equal(evaluate(runtime, feature, true, false), false);
+    for (const [key, value] of [
+        ["Build.Reason", "Schedule"], ["Build.Reason", "IndividualCI"], ["Build.Reason", "BatchedCI"],
+        ["Build.Reason", "PullRequest"], ["Build.Reason", "ResourceTrigger"],
+        ["Build.Repository.Name", "example-org/azure-rest-api-specs"], ["Build.Repository.Name", "Azure/azure-rest-api-specs-pr"],
+        ["System.TeamProject", "public"], ["System.CollectionUri", "https://dev.azure.com/other/"],
+        ["Build.SourceBranch", "refs/pull/1/merge"],
+    ]) {
+        const variables = { ...feature, [key]: value };
+        assert.equal(evaluate(networkGate, variables), false, `${key}: ${value}`);
+        assert.equal(evaluate(runtime, variables), false, `${key}: ${value}`);
+    }
+    for (const [key, value] of [["EvalSummaryComplete", "false"], ["EvalSummaryComplete", ""], ["EvalStorageAccountName", ""]]) {
+        assert.equal(evaluate(runtime, { ...feature, [key]: value }), false);
     }
     for (const id of ["8255", "9999"]) assert.equal(evaluate(networkGate, { ...base, "System.DefinitionId": id }), true, "Definition IDs are archive identity, not shared policy");
 });
@@ -394,7 +419,9 @@ test("one checkbox gates trusted-run egress; owner configuration additionally ga
 test("shared publication defaults stay off", async () => {
     const root = resolve(import.meta.dirname, "../../../..");
     for (const path of ["templates/steps/eval-publish-results.yml", "templates/jobs/eval-summarize.yml", "templates/stages/archetype-eval.yml"]) {
-        assert.match(await readFile(join(root, "pipelines", path), "utf8"), /name: publishDashboardResults\s+type: boolean\s+default: false/);
+        const content = await readFile(join(root, "pipelines", path), "utf8");
+        assert.match(content, /name: publishDashboardResults\s+type: boolean\s+default: false/);
+        assert.doesNotMatch(content, /allowFeatureBranchPublishing/);
     }
 });
 
