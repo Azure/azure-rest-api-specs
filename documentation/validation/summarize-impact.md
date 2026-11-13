@@ -14,12 +14,6 @@ And other `about` questions.
 
 ## Troubleshooting details
 
-### `pnpm: command not found`
-
-An outdated PR branch can cause this failure even when the spec changes are unrelated. The workflow loads the setup action from the PR head at `after/.github/actions/setup-node-install-deps`. An older copy of that action may run `npm ci` without installing `pnpm`, while the current workflow runs `pnpm exec summarize-impact`.
-
-Update the PR branch with the latest changes from its target branch (`main` or `RPSaaSMaster`), then rerun the check from the updated PR head. Rerunning the check on the old branch state can repeat the failure. This does not require changing spec files.
-
 ### Suppression change without triggering `Suppression Review Required`
 
 In certain circumstances, devs can can modify the suppressions for a readme, _without_ requiring a suppression review. [This PR](https://github.com/Azure/azure-rest-api-specs/pull/36645/files) is one such example. It is adding two new suppressions to a new API version, but the suppressions themselves _already exist_ for a previous API version. In this case, `summarize impact` _intentionally_ evaluates this PR to not need suppression review. If the RP was approved previously, it should be approved for this new api version as well.
