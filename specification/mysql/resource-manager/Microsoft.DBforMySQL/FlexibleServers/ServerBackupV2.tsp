@@ -28,36 +28,6 @@ model ServerBackupV2
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-interface ServerBackupV2sOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-      },
-      {
-        /**
-         * The name of the server.
-         */
-        @path
-        @segment("flexibleServers")
-        @pattern("^[a-z0-9][-a-z0-9]*(?<!-)$")
-        @minLength(1)
-        @maxLength(63)
-        serverName: string,
-
-        /**
-         * The name of the backup.
-         */
-        @path
-        @segment("backupsV2")
-        @pattern("^[-\\w\\._]+$")
-        backupName: string,
-      }
-    > {}
-
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface LongRunningBackups {
@@ -87,7 +57,7 @@ interface LongRunningBackup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  create is ServerBackupV2sOps.CreateOrUpdateAsync<
+  create is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     ServerBackupV2,
     Response =
       | ArmResourceUpdatedResponse<ServerBackupV2>
