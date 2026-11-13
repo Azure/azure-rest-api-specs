@@ -11079,6 +11079,9 @@
           },
           "Get a virtual machine with a FlexProfile": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_WithFlexProfile.json"
+          },
+          "Get a virtual machine with an Instance Profile": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_WithInstanceProfile.json"
           }
         }
       },
@@ -11210,6 +11213,9 @@
           },
           "Create a VM with a FlexProfile": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithFlexProfile.json"
+          },
+          "Create a VM with an Instance Profile": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithInstanceProfile.json"
           },
           "Create a VM with automatic zone placement": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithPlacement.json"
@@ -16542,6 +16548,19 @@
         {
           "$ref": "#/definitions/UpdateResource"
         }
+      ]
+    },
+    "InstanceProfile": {
+      "type": "object",
+      "description": "Specifies the Instance Profile reference for a virtual machine.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Specifies the resource ID of the gallery Instance Profile version. The ID must use the format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/instanceProfiles/{instanceProfileName}/versions/{versionNumber}."
+        }
+      },
+      "required": [
+        "id"
       ]
     },
     "InstanceViewStatus": {
@@ -22453,6 +22472,14 @@
         "hardwareProfile": {
           "$ref": "#/definitions/HardwareProfile",
           "description": "Specifies the hardware settings for the virtual machine."
+        },
+        "instanceProfile": {
+          "$ref": "#/definitions/InstanceProfile",
+          "description": "Specifies the instance profile related details of a virtual machine.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "flexProfile": {
           "$ref": "#/definitions/FlexProfile",
