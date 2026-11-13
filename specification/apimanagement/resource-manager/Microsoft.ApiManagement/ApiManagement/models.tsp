@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -4921,6 +4923,44 @@ model BackendProxyContract {
   /**
    * Password to connect to the WebProxy Server
    */
+  password?: string;
+}
+
+/**
+ * Secret values associated with a backend.
+ */
+@added(Versions.v2025_09_01_preview)
+model BackendSecretsResult {
+  /**
+   * Credential secrets used to connect to the backend.
+   */
+  credentials?: BackendCredentialsSecrets;
+
+  /**
+   * Proxy secrets used to connect to the backend.
+   */
+  proxy?: BackendProxySecrets;
+}
+
+/**
+ * Backend credentials returned by the listSecrets action.
+ */
+@added(Versions.v2025_09_01_preview)
+@secret
+model BackendCredentialsSecrets is PickProperties<
+  BackendCredentialsContract,
+  "query" | "header" | "authorization"
+>;
+
+/**
+ * Backend proxy secrets returned by the listSecrets action.
+ */
+@added(Versions.v2025_09_01_preview)
+model BackendProxySecrets {
+  /**
+   * Password used to connect to the backend proxy.
+   */
+  @secret
   password?: string;
 }
 
