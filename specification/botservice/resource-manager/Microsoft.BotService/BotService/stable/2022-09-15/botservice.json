@@ -32,7 +32,7 @@
         "tags": [
           "Bot"
         ],
-        "description": "Creates a Bot Service. Bot Service is a resource group wide resource type.",
+        "description": "Creates or replaces a Bot Service. Bot Service is a resource group wide resource type. This PUT operation replaces the bot configuration, so the request must include the intended identity binding, with msaAppTenantId set according to msaAppType.",
         "operationId": "Bots_Create",
         "x-ms-examples": {
           "Create Bot": {
@@ -87,7 +87,7 @@
         "tags": [
           "Bot"
         ],
-        "description": "Updates a Bot Service",
+        "description": "Updates a Bot Service. Identity fields omitted from this PATCH request retain their stored values.",
         "operationId": "Bots_Update",
         "x-ms-examples": {
           "Update Bot": {
@@ -1700,7 +1700,7 @@
         },
         "msaAppTenantId": {
           "type": "string",
-          "description": "Microsoft App Tenant Id for the bot",
+          "description": "Microsoft Entra tenant ID for the bot's identity. For SingleTenant and UserAssignedMSI, this value must be nonempty and match the home tenant of the bot's Azure Resource Manager resource. For MultiTenant, this value must be empty. Requests with an invalid tenant binding are rejected with HTTP 400 Bad Request.",
           "x-ms-mutability": [
             "create",
             "read"

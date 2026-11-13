@@ -331,7 +331,7 @@ model BotProperties {
   msaAppId: string;
 
   /**
-   * Microsoft App Tenant Id for the bot
+   * Microsoft Entra tenant ID for the bot's identity. For SingleTenant and UserAssignedMSI, this value must be nonempty and match the home tenant of the bot's Azure Resource Manager resource. For MultiTenant, this value must be empty. Requests with an invalid tenant binding are rejected with HTTP 400 Bad Request.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   msaAppTenantId?: string;
