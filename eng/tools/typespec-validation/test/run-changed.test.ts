@@ -1,7 +1,6 @@
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import { d } from "@azure-tools/specs-shared/testing";
 import { ChildProcess, spawn } from "node:child_process";
-import { writeFileSync } from "node:fs";
 import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "pathe";
@@ -61,7 +60,7 @@ it("uses the repository root and passes the default revisions to each project", 
     logger: expect.any(ConsoleLogger) as unknown,
   });
   expect(vi.mocked(spawn).mock.calls[0][1]).toEqual([
-    expect.stringMatching(/[/\\]cmd[/\\]tsv\.js$/),
+    expect.stringMatching(/[/\\]src[/\\]project-worker\.ts$/),
     project,
     '{"checkingAllSpecs":false,"baseCommitish":"HEAD^","headCommitish":"HEAD"}',
   ]);
@@ -97,7 +96,7 @@ it("forwards verbose logging without adding presentation options to suppression 
   );
   expect(vi.mocked(findChangedProjects).mock.calls[0][1].logger.isDebug()).toBe(true);
   expect(vi.mocked(spawn).mock.calls[0][1]).toEqual([
-    expect.stringMatching(/[/\\]cmd[/\\]tsv\.js$/),
+    expect.stringMatching(/[/\\]src[/\\]project-worker\.ts$/),
     project,
     '{"checkingAllSpecs":false,"baseCommitish":"HEAD^","headCommitish":"HEAD"}',
     "--verbose",
@@ -188,7 +187,6 @@ it.each(["false", "true"])(
       .add(".")
       .commit("Fixture");
     vi.mocked(spawn).mockImplementationOnce(() => {
-      writeFileSync(join(root, "generated.txt"), "generated");
       const child = new ChildProcess();
       queueMicrotask(() => child.emit("close", 1, null));
       return child;

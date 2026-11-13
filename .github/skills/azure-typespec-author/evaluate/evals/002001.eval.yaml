@@ -2,9 +2,10 @@ name: azure-typespec-author-eval
 description: Evaluation suite for azure-typespec-author.
 version: "1.0"
 type: capability # capability | regression
-area: "armtemplate"
+tags:
+  area: "armtemplate"
 # Root-level environment
-environment: azsdk-mcp
+agent_environment: azsdk-mcp
 # Execution configuration
 defaults:
   runs: 1 # Trials per stimulus
@@ -20,7 +21,7 @@ stimuli:
       mode: "trigger"
     prompt: |
       Change Employee to an extension resource that can be created under any ARM resource. This intentional breaking change is approved. Follow TypeSpec Azure guidelines and proceed without additional confirmation.
-    environment: &shared_environment
+    agent_environment: &shared_environment
       files:
         - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
           dest: employee.tsp
@@ -28,8 +29,8 @@ stimuli:
           dest: main.tsp
         - src: ../fixtures/Microsoft.Widget/Widget/package.json
           dest: package.json
-        - src: ../scripts/check-node-dependencies.js
-          dest: check-node-dependencies.js
+        - src: ../scripts/check-node-dependencies.ts
+          dest: check-node-dependencies.ts
         - src: ../fixtures/Microsoft.Widget/Widget/readme.md
           dest: readme.md
         - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
@@ -56,15 +57,15 @@ stimuli:
       mode: "forced"
     prompt: |
       @azure-typespec-author Change Employee to an extension resource that can be created under any ARM resource. This intentional breaking change is approved. Follow TypeSpec Azure guidelines and proceed without additional confirmation.
-    environment: *shared_environment
+    agent_environment: *shared_environment
     graders:
       - type: "run-command"
         config:
-          command: "node check-node-dependencies.js node_modules"
+          command: "node check-node-dependencies.ts node_modules"
           expected_exit_code: 0
       - type: "run-command"
         config:
-          command: "node check-node-dependencies.js packages"
+          command: "node check-node-dependencies.ts packages"
           expected_exit_code: 0
       - type: "run-command"
         config:
@@ -82,7 +83,6 @@ stimuli:
           path: "*.tsp"
       - &file_matches_operations
         type: "file-matches"
-        name: "file-matches-operations"
         config:
           pattern: 'Extension\.Read<|Extension\.CreateOrReplaceAsync<|Extension\.CustomPatch(Sync|Async)<|Extension\.DeleteWithoutOkAsync<|Extension\.ListByTarget<'
           path: "*.tsp"
@@ -94,7 +94,7 @@ stimuli:
       suite: "armtemplate"
       mode: "no-skill"
     prompt: "Change Employee to an extension resource that can be created under any ARM resource. This intentional breaking change is approved. Follow TypeSpec Azure guidelines and proceed without additional confirmation."
-    environment: *shared_environment
+    agent_environment: *shared_environment
     rubric:
       - Employee is converted from a tracked resource to an extension resource that can be scoped to any ARM resource.
       - Its operations use the ARM extension templates, including a single list-by-target operation instead of separate resource-group and subscription lists.

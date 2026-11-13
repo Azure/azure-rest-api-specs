@@ -2,9 +2,10 @@ name: azure-typespec-author-eval
 description: Evaluation suite for azure-typespec-author.
 version: "1.0"
 type: capability # capability | regression
-area: "decorators"
+tags:
+  area: "decorators"
 # Root-level environment
-environment: azsdk-mcp
+agent_environment: azsdk-mcp
 # Execution configuration
 defaults:
   runs: 1 # Trials per stimulus
@@ -20,7 +21,7 @@ stimuli:
       mode: "trigger"
     prompt: |
       I have a property `assets: string[]` in EmployeeProperties. Add @minLength(3) @maxLength(10) constraints for any item of the assets array. Ensure the definition meets TypeSpec Azure guidelines.
-    environment: &shared_environment
+    agent_environment: &shared_environment
       files:
         - src: ../fixtures/004002-decorate-length-constrains-on-array-item/employee.tsp
           dest: employee.tsp
@@ -28,8 +29,8 @@ stimuli:
           dest: main.tsp
         - src: ../fixtures/Microsoft.Widget/Widget/package.json
           dest: package.json
-        - src: ../scripts/check-node-dependencies.js
-          dest: check-node-dependencies.js
+        - src: ../scripts/check-node-dependencies.ts
+          dest: check-node-dependencies.ts
         - src: ../fixtures/004002-decorate-length-constrains-on-array-item/readme.md
           dest: readme.md
         - src: ../fixtures/004002-decorate-length-constrains-on-array-item/shared.tsp
@@ -52,15 +53,15 @@ stimuli:
       mode: "forced"
     prompt: |
       @azure-typespec-author I have a property `assets: string[]` in EmployeeProperties. Add @minLength(3) @maxLength(10) constraints for any item of the assets array. Ensure the definition meets TypeSpec Azure guidelines.
-    environment: *shared_environment
+    agent_environment: *shared_environment
     graders:
       - type: "run-command"
         config:
-          command: "node check-node-dependencies.js node_modules"
+          command: "node check-node-dependencies.ts node_modules"
           expected_exit_code: 0
       - type: "run-command"
         config:
-          command: "node check-node-dependencies.js packages"
+          command: "node check-node-dependencies.ts packages"
           expected_exit_code: 0
       - type: "run-command"
         config:
@@ -73,13 +74,11 @@ stimuli:
           path: "employee.tsp"
       - &file_matches_min_length
         type: "file-matches"
-        name: "file-matches-min-length"
         config:
           pattern: '@minLength\(3\)'
           path: "employee.tsp"
       - &file_matches_max_length
         type: "file-matches"
-        name: "file-matches-max-length"
         config:
           pattern: '@maxLength\(10\)'
           path: "employee.tsp"
@@ -96,7 +95,7 @@ stimuli:
       suite: "decorators"
       mode: "no-skill"
     prompt: "I have a property `assets: string[]` in EmployeeProperties. Add @minLength(3) @maxLength(10) constraints for any item of the assets array. Ensure the definition meets TypeSpec Azure guidelines."
-    environment: *shared_environment
+    agent_environment: *shared_environment
     rubric:
       - Each item of EmployeeProperties.assets uses a custom string scalar constrained with minLength 3 and maxLength 10.
       - The constraints apply to individual array items rather than to the assets array itself.

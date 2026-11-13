@@ -24,9 +24,22 @@ options:
       - specification/ai-foundry/data-plane/Foundry/src/agents
       - specification/ai-foundry/data-plane/Foundry/src/agent-insights
       - specification/ai-foundry/data-plane/Foundry/src/common
+      - specification/ai-foundry/data-plane/Foundry/src/connections
+      - specification/ai-foundry/data-plane/Foundry/src/data_generation_jobs
+      - specification/ai-foundry/data-plane/Foundry/src/datasets
+      - specification/ai-foundry/data-plane/Foundry/src/deployments
+      - specification/ai-foundry/data-plane/Foundry/src/evaluation-rules
+      - specification/ai-foundry/data-plane/Foundry/src/evaluation-taxonomies
+      - specification/ai-foundry/data-plane/Foundry/src/evaluators
+      - specification/ai-foundry/data-plane/Foundry/src/indexes
+      - specification/ai-foundry/data-plane/Foundry/src/insights
       - specification/ai-foundry/data-plane/Foundry/src/memory-stores
+      - specification/ai-foundry/data-plane/Foundry/src/models
       - specification/ai-foundry/data-plane/Foundry/src/openai
       - specification/ai-foundry/data-plane/Foundry/src/red-teams
+      - specification/ai-foundry/data-plane/Foundry/src/routines
+      - specification/ai-foundry/data-plane/Foundry/src/schedules
+      - specification/ai-foundry/data-plane/Foundry/src/sdk-common
       - specification/ai-foundry/data-plane/Foundry/src/tools
       - specification/ai-foundry/data-plane/Foundry/src/toolboxes
       - specification/ai-foundry/data-plane/Foundry/src/skills
@@ -38,9 +51,32 @@ imports:
   - "@azure-tools/typespec-azure-core/experimental"
   - "@azure-tools/typespec-client-generator-core"
   # Note: Imports for OpenAI types may use alternate views per tspconfig.yaml
+  - "@azure-tools/openai-typespec/models/assistants"
+  - "@azure-tools/openai-typespec/models/audio"
+  - "@azure-tools/openai-typespec/models/batch"
+  - "@azure-tools/openai-typespec/models/chat"
+  - "@azure-tools/openai-typespec/models/common"
+  - "@azure-tools/openai-typespec/models/completions"
+  - "@azure-tools/openai-typespec/models/containers"
+  - "@azure-tools/openai-typespec/models/conversations"
+  - "@azure-tools/openai-typespec/models/embeddings"
   - "@azure-tools/openai-typespec/models/evals"
+  - "@azure-tools/openai-typespec/models/files"
   - "@azure-tools/openai-typespec/models/fine-tuning"
+  - "@azure-tools/openai-typespec/models/graders"
+  - "@azure-tools/openai-typespec/models/images"
+  - "@azure-tools/openai-typespec/models/live"
+  - "@azure-tools/openai-typespec/models/messages"
+  - "@azure-tools/openai-typespec/models/models"
+  - "@azure-tools/openai-typespec/models/moderations"
+  - "@azure-tools/openai-typespec/models/realtime"
   - "@azure-tools/openai-typespec/models/responses"
+  - "@azure-tools/openai-typespec/models/runs"
+  - "@azure-tools/openai-typespec/models/threads"
+  - "@azure-tools/openai-typespec/models/uploads"
+  - "@azure-tools/openai-typespec/models/vector-stores"
+  - "@azure-tools/openai-typespec/models/video"
+  - "@azure-tools/openai-typespec/models/webhooks"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"

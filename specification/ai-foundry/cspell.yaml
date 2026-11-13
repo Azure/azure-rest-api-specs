@@ -19,6 +19,20 @@ words:
   - logprobs
   - dedup
 overrides:
+  # Fine-tuning algorithms, SDK tooling, and preserved preview documentation.
+  - filename:
+    - '**/specification/ai-foundry/data-plane/Foundry/src/session-finetuning/**'
+    - '**/specification/ai-foundry/data-plane/Foundry/src/sdk-python-azure-ai-finetuningsessions/**'
+    - '**/specification/ai-foundry/data-plane/Foundry/openapi3/**/microsoft-foundry-openapi3.*'
+    words:
+      - CISPO # Clipped Importance-Sampled Policy Optimization
+      - initialisation
+      - regularisation
+      - SAPO # Soft Adaptive Policy Optimization
+      - serialised
+      - TCGC # TypeSpec Client Generator Core
+      - Tokenised
+      - topk
   # OpenAI related terms
   - filename:
     - '**/specification/ai-foundry/data-plane/Foundry/src/openai/**'
@@ -68,6 +82,7 @@ overrides:
       - UPIA # Injected prompt attack
   # Evaluation related terms
   - filename:
+    - '**/specification/ai-foundry/data-plane/Foundry/src/evaluators'
     - '**/specification/ai-foundry/data-plane/Foundry/src/openai/evaluations'
     - '**/specification/ai-foundry/data-plane/Foundry/openapi3'
     - '**/specification/ai-foundry/data-plane/Foundry/stable'
@@ -82,6 +97,7 @@ overrides:
     - ifeval # Instruction-Following Evaluation benchmark
     - inspectai # inspect_ai evaluation framework
     - telecom # Telecommunications domain benchmark
+    - tfidf # Term-frequency/inverse-document-frequency provider token
   # Audio/realtime related terms
   - filename:
     - '**/specification/ai-foundry/data-plane/Foundry/src/agents'
@@ -99,20 +115,29 @@ overrides:
     - pstn # Public switched telephone network
     - viseme # Visual representation of a speech sound
     - webrtc # Web Real-Time Communication
+    - orgid
   # Voice agent terms
   - filename:
     - '**/specification/ai-foundry/data-plane/Foundry/src/voice-agents/agents.tsp'
     - '**/specification/ai-foundry/data-plane/Foundry/openapi3'
     words:
     - aarti
+    - brise
     - dalia
     - diya
+    - flitz
+    - harema
     - hyunsu
+    - juni
     - keita
     - meera
+    - nira
     - niwat
+    - noeul
+    - nuri
     - premwadee
     - remy
+    - shida
     - ssml
     - sunhi
     - thierry
@@ -141,6 +166,7 @@ overrides:
     - '**/specification/ai-foundry/data-plane/Foundry/src'
     words:
       - byot # Bring your own thread
+      - Likert # Likert scale - common evaluation methodology
       - mcphttp # MCP over HTTP transport
       - xhigh # Image generation quality level
       - inpainting # Image generation concept
