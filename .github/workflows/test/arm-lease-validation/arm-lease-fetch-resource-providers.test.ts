@@ -43,7 +43,7 @@ describe("fetch-resource-providers", () => {
         "grouped/resource-manager/Microsoft.Grouped/examples",
         "grouped/resource-manager/Microsoft.Grouped/stable",
         "grouped/resource-manager/Microsoft.Grouped/preview",
-        "ignored/resource-manager/Fabrikam.Ignored/stable",
+        "ignored/resource-manager/Other.Ignored/stable",
         "ignored/data-plane/Microsoft.Ignored/stable",
         "ignored/resource-manager/Microsoft.Empty",
       ]) {
