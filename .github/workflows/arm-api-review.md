@@ -901,9 +901,14 @@ other actionable coverage, then no coverage.
   50-inline comment budget in Step 6.
 
 Pass the complete inventory counts, pagination status, semantic match anchors,
-and every `CLARIFY-CONFLICT` entry to the Critic. If any discussion surface
-cannot be fetched completely, call `report_incomplete` and stop; do not default
-all candidates to new findings.
+every `CLARIFY-CONFLICT` entry, and the active-finding evidence required by the
+shared [addressed-exception rules](../skills/azure-api-review/references/reviewer-posted-parity.md#active-findings-and-addressed-approval-exceptions)
+to the Critic. For covered Blocking findings, include author replies and their
+URLs, current approval labels, resolution state, and the reason the finding is
+still active or addressed at this head. `SKIP-COVERED` controls duplicate
+posting, not the active Blocking count. If any discussion surface cannot be
+fetched completely, call `report_incomplete` and stop; do not default all
+candidates to new findings.
 
 ### Step 5.6: Mandatory Critic Review
 
@@ -1133,7 +1138,11 @@ suppression flows and `Approved-TypeSpecSuppression` for TypeSpec suppression
 flows. The `Approval context` paragraph must name an observed matching label or
 state that no matching label was observed. A label does not remove or downgrade
 the finding; it changes the remaining author action when the approval covers
-that specific finding.
+that specific finding. On re-review, an exception meeting the shared
+addressed-exception criteria remains historical coverage at its original
+severity, not an active blocker. Do not repeat a confirmation request that the
+author already answered for this change. Resolution or a broad label alone
+does not establish an addressed exception.
 
 **Severity guidance:**
 
@@ -1252,6 +1261,10 @@ changes based on the verified findings that still apply to the current head:
   is full and complete** → remove
   `ARMChangesRequested` if present; leave `WaitForARMFeedback` and
   `ARMSignedOff` unchanged.
+- Apply the shared addressed-exception criteria before computing this total.
+  Keep historical findings unchanged, but exclude verified addressed exceptions
+  from active blockers. Keep resolved-but-unfixed or unapproved violations
+  active; do not use resolution alone to clear a blocking label.
 - **Critic unavailable** (every dispatch attempt failed) → leave all three
   labels unchanged, **even when Blocking findings were queued**. Those findings
   still publish at their original severity, but nothing independently verified
@@ -1382,7 +1395,7 @@ Call `record_arm_semantic_review` exactly once after queuing the summary:
   `stale-sha`, or `discussion-data-unavailable`;
 - `blocking_count`: the number of verified Blocking findings that remain
   applicable after reconciliation. Include an unresolved finding classified as
-  `SKIP-COVERED`; do not count fixed, resolved, Critic-dropped, or
+  `SKIP-COVERED`; do not count fixed, verified addressed exceptions, Critic-dropped, or
   overflow-only candidates.
 
 Use `blocking_count: "0"` after a clean re-review. Do not claim `full` or

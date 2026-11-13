@@ -121,6 +121,12 @@ finding. Every posted breaking-change or suppression finding MUST include an
 Never claim that a specific finding is approved solely because a broad PR-level
 label is present. The author must confirm that the approval covers that finding.
 
+On re-review, apply the shared [active-finding and addressed-exception
+rules](../skills/azure-api-review/references/reviewer-posted-parity.md#active-findings-and-addressed-approval-exceptions).
+Read the author replies and resolution state before asking for confirmation
+again. Preserving an original Blocking finding does not require counting an
+addressed exception as a currently applicable blocker.
+
 **False-positive avoidance.** If a spec is fully compliant with all ARM RPC rules -- has all required CRUD operations, correct response codes, provisioningState, systemData, x-ms-mutability on location, x-ms-pageable on list operations, x-ms-enum with modelAsString, descriptions on all elements, and proper security definitions -- state that no blocking issues were found. Do not fabricate violations or elevate process-level recommendations to blocking findings. Specifically:
 
 - **Inline definitions vs. common-types `$ref`:** A spec that correctly defines ARM-standard shapes inline (ErrorResponse, Operation, OperationListResult, TrackedResource, `systemData`, etc.) with all required fields is **functionally compliant**. Preferring `$ref` to common-types is a process recommendation, NOT a blocking error. Flag it as a **suggestion** only. For `systemData`, validate the complete canonical shape and top-level read-only semantics; do not flag a compatible inline definition solely because it is inline.
