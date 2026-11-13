@@ -1,0 +1,34 @@
+{
+  "title": "MonitorTagRules_ListByMonitor_MaximumSet",
+  "operationId": "MonitorTagRules_ListByMonitor",
+  "parameters": {
+    "api-version": "2026-10-21-preview",
+    "subscriptionId": "DC34558A-05D3-4370-AED8-75E60B381F94",
+    "resourceGroupName": "rgconfluent",
+    "organizationName": "myOrganization",
+    "monitorName": "productionLogs"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/DC34558A-05D3-4370-AED8-75E60B381F94/resourceGroups/rgconfluent/providers/Microsoft.Confluent/organizations/myOrganization/monitors/productionLogs/tagRules/logRules",
+            "name": "logRules",
+            "type": "Microsoft.Confluent/organizations/monitors/tagRules",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "logRules": {
+                "sendAadLogs": false,
+                "sendSubscriptionLogs": false,
+                "sendActivityLogs": false,
+                "filteringTags": []
+              }
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

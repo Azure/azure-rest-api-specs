@@ -14,8 +14,11 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-liftr-base";
 import "@typespec/openapi";
 import "./models.tsp";
+import "./ObservabilityModels.tsp";
 import "./back-compatible.tsp";
 import "./OrganizationResource.tsp";
+import "./MonitorResource.tsp";
+import "./MonitorTagRule.tsp";
 import "./SCEnvironmentRecord.tsp";
 import "./SCClusterRecord.tsp";
 import "./ConnectorResource.tsp";
@@ -69,6 +72,14 @@ enum Versions {
    */
   @useDependency(LiftrBase.Versions.v3_preview)
   v2026_06_02_preview: "2026-06-02-preview",
+
+  /**
+   * The 2026-10-21-preview API version adds monitors and rule sets for sending
+   * Azure logs to Confluent.
+   */
+  @Azure.Core.previewVersion
+  @useDependency(LiftrBase.Versions.v3_preview)
+  v2026_10_21_preview: "2026-10-21-preview",
 }
 
 interface Operations {

@@ -1,0 +1,89 @@
+{
+  "title": "MonitorTagRules_CreateOrUpdate_MaximumSet",
+  "operationId": "MonitorTagRules_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-10-21-preview",
+    "subscriptionId": "DC34558A-05D3-4370-AED8-75E60B381F94",
+    "resourceGroupName": "rgconfluent",
+    "organizationName": "myOrganization",
+    "monitorName": "productionLogs",
+    "ruleSetName": "logRules",
+    "resource": {
+      "properties": {
+        "logRules": {
+          "sendAadLogs": true,
+          "sendSubscriptionLogs": true,
+          "sendActivityLogs": true,
+          "filteringTags": [
+            {
+              "name": "environment",
+              "value": "production",
+              "action": "Include"
+            },
+            {
+              "name": "dataClassification",
+              "value": "restricted",
+              "action": "Exclude"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/DC34558A-05D3-4370-AED8-75E60B381F94/resourceGroups/rgconfluent/providers/Microsoft.Confluent/organizations/myOrganization/monitors/productionLogs/tagRules/logRules",
+        "name": "logRules",
+        "type": "Microsoft.Confluent/organizations/monitors/tagRules",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "logRules": {
+            "sendAadLogs": true,
+            "sendSubscriptionLogs": true,
+            "sendActivityLogs": true,
+            "filteringTags": [
+              {
+                "name": "environment",
+                "value": "production",
+                "action": "Include"
+              },
+              {
+                "name": "dataClassification",
+                "value": "restricted",
+                "action": "Exclude"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/DC34558A-05D3-4370-AED8-75E60B381F94/resourceGroups/rgconfluent/providers/Microsoft.Confluent/organizations/myOrganization/monitors/productionLogs/tagRules/logRules",
+        "name": "logRules",
+        "type": "Microsoft.Confluent/organizations/monitors/tagRules",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "logRules": {
+            "sendAadLogs": true,
+            "sendSubscriptionLogs": true,
+            "sendActivityLogs": true,
+            "filteringTags": [
+              {
+                "name": "environment",
+                "value": "production",
+                "action": "Include"
+              },
+              {
+                "name": "dataClassification",
+                "value": "restricted",
+                "action": "Exclude"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
