@@ -84,6 +84,42 @@ union EdgeActionIsDefaultVersion {
   False: "False",
 }
 
+/** When the edge action version executes. */
+@added(Versions.`2027-01-01-preview`)
+union EdgeActionVersionExecutionState {
+  string,
+
+  /** Executes when no execution filter is exercised, and may also execute through an associated filter. Selected by swapDefault. */
+  Default: "Default",
+
+  /** Executes only when an associated execution filter is exercised. */
+  Active: "Active",
+
+  /** Never executes because no trigger is configured. */
+  Inactive: "Inactive",
+}
+
+/** The status of the latest accepted code deployment. */
+@added(Versions.`2027-01-01-preview`)
+union EdgeActionDeploymentStatus {
+  string,
+
+  /** No code deployment has been durably accepted. */
+  NotStarted: "NotStarted",
+
+  /** An accepted code deployment is not terminal. */
+  InProgress: "InProgress",
+
+  /** Code deployment succeeded. */
+  Succeeded: "Succeeded",
+
+  /** Code deployment failed. */
+  Failed: "Failed",
+
+  /** Code deployment was canceled. */
+  Canceled: "Canceled",
+}
+
 /** The status of an operation */
 union OperationStatus {
   string,
@@ -131,6 +167,10 @@ union ProvisioningState {
 
   @doc("Upgrade in progress")
   Upgrading: "Upgrading",
+
+  /** Deletion is in progress. */
+  @added(Versions.`2027-01-01-preview`)
+  Deleting: "Deleting",
 }
 
 /** Edge action attachment information */
@@ -183,9 +223,11 @@ model EdgeActionUpdateV1 {
 @added(Versions.`2026-10-01`)
 model EdgeActionUpdate {
   @doc("The resource-specific properties for this resource.")
+  @removed(Versions.`2027-01-01-preview`)
   properties?: EdgeActionPropertiesUpdate;
 
   @doc("The SKU of the Edge Action. Do not include sku in PATCH requests; any supplied sku, including null or the existing value, is rejected.")
+  @removed(Versions.`2027-01-01-preview`)
   sku?: SkuTypeUpdate;
 
   ...ArmTagsProperty;
@@ -194,6 +236,17 @@ model EdgeActionUpdate {
 @@doc(
   EdgeActionUpdate.tags,
   "Resource tags. For PATCH requests, omitted tags are preserved, an empty tags object clears all tags, and supplied tags replace the entire tag collection. Null tags are rejected."
+);
+
+/** The type used to update an Edge Action version's tags. */
+@added(Versions.`2027-01-01-preview`)
+model EdgeActionVersionUpdate {
+  ...ArmTagsProperty;
+}
+
+@@doc(
+  EdgeActionVersionUpdate.tags,
+  "Resource tags. Omitted tags are preserved, an empty object clears all tags, and supplied tags replace the entire collection. Null tags are rejected."
 );
 
 /** Represents an edge action properties */
@@ -229,9 +282,20 @@ model EdgeActionVersionProperties {
   isDefaultVersionV1: EdgeActionIsDefaultVersion;
 
   @added(Versions.`2026-10-01`)
+  @removed(Versions.`2027-01-01-preview`)
   @doc("Indicates whether this is the default version. When creating a version, if the Edge Action has no default version, the service makes the new version the default even when false is supplied. If another default version exists, supplying true is rejected. When updating an existing version, any supplied value must match the existing value. Use swapDefault to change the default version.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   isDefaultVersion: EdgeActionIsDefaultVersion;
+
+  /** How this version receives traffic. Use swapDefault to select the default version. */
+  @added(Versions.`2027-01-01-preview`)
+  @visibility(Lifecycle.Read)
+  versionExecutionState: EdgeActionVersionExecutionState;
+
+  /** The status of the latest accepted code deployment. */
+  @added(Versions.`2027-01-01-preview`)
+  @visibility(Lifecycle.Read)
+  deploymentStatus: EdgeActionDeploymentStatus;
 
   @doc("The last update time in UTC for package update")
   @visibility(Lifecycle.Read)
@@ -270,6 +334,7 @@ model VersionCode {
   content: string;
 
   @doc("The version code name")
+  @removed(Versions.`2027-01-01-preview`)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   name: string;
 }
@@ -296,6 +361,99 @@ model EdgeActionOperationProperties {
 
   @doc("Error details, if applicable.")
   error?: ErrorDetails;
+}
+
+/** The flat operation-status response returned by the Azure-AsyncOperation polling endpoint. */
+@added(Versions.`2026-10-01`)
+@example(
+  #{
+    resourceId: "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActionOperations/00000000-0000-0000-0000-000000000000",
+    operationId: "00000000-0000-0000-0000-000000000000",
+    status: "Succeeded",
+    operationType: "update",
+    startTime: utcDateTime.fromISO("2026-10-01T12:00:00Z"),
+    endTime: utcDateTime.fromISO("2026-10-01T12:00:10Z"),
+  },
+  #{ title: "Successful version code deployment status" }
+)
+model EdgeActionOperation is EdgeActionOperationProperties;
+
+@@Azure.Core.lroStatus(EdgeActionOperation.status);
+@@Azure.Core.lroErrorResult(EdgeActionOperation.error);
+
+/** The synchronous result's JSON object, whose fields depend on the originating operation. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Operation results and success snapshots have heterogeneous response fields, not user-editable resource configuration."
+@added(Versions.`2027-01-01-preview`)
+model EdgeActionOperationResultPayload is Record<unknown>;
+
+/** The preview operation-status record served by Azure-AsyncOperation, not the operation's final result. */
+@added(Versions.`2027-01-01-preview`)
+model EdgeActionOperationStatus {
+  /** The status-resource URL, previously returned as resourceId. */
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  /** The operation identifier, previously returned as operationId. */
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  /** The current status of the operation. Failed operations still return HTTP 200 from the status endpoint. */
+  @visibility(Lifecycle.Read)
+  status: OperationStatus;
+
+  /** The operation type. */
+  @visibility(Lifecycle.Read)
+  operationType: string;
+
+  /** The start time of the operation. */
+  @visibility(Lifecycle.Read)
+  startTime?: utcDateTime;
+
+  /** The end time of the completed operation. */
+  @visibility(Lifecycle.Read)
+  endTime?: utcDateTime;
+
+  /** The error detail for a failed or canceled operation. */
+  @visibility(Lifecycle.Read)
+  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
+
+  /** The originating operation's synchronous response snapshot, present only after success. */
+  @visibility(Lifecycle.Read)
+  properties?: EdgeActionOperationResultPayload;
+}
+
+@@Azure.Core.lroStatus(EdgeActionOperationStatus.status);
+@@Azure.Core.lroErrorResult(EdgeActionOperationStatus.error);
+
+/** Polling delay in seconds for preview operations. */
+@added(Versions.`2027-01-01-preview`)
+model EdgeActionRetryAfterHeader {
+  /** The delay in seconds before the next poll. */
+  @header("Retry-After")
+  @minValue(10)
+  @maxValue(600)
+  retryAfter?: int32;
+}
+
+/** Headers repeated while the operation result is pending. */
+@added(Versions.`2027-01-01-preview`)
+model EdgeActionOperationResultPollingHeaders {
+  /** The absolute URL to poll for the operation result. */
+  @Azure.Core.pollingLocation
+  @header("Location")
+  location: url;
+
+  ...EdgeActionRetryAfterHeader;
+}
+
+/** Completion with the originating operation's synchronous response body, whose schema varies by operation. */
+@added(Versions.`2027-01-01-preview`)
+model EdgeActionOperationCompletedResult {
+  /** The originating operation completed successfully. */
+  @statusCode statusCode: 200;
+
+  /** The originating operation's synchronous result, whose JSON shape varies by operation. */
+  @body body: EdgeActionOperationResultPayload;
 }
 
 /** Error details for operations */

@@ -19,6 +19,7 @@ on:
       - .gitignore
       - .oxlintrc.json
       - .oxfmtrc.json
+      - specification/cdn/resource-manager/Microsoft.Cdn/EdgeActions/**
   pull_request:
     paths:
       - "**/package.json"
@@ -34,6 +35,7 @@ on:
       - .gitignore
       - .oxlintrc.json
       - .oxfmtrc.json
+      - specification/cdn/resource-manager/Microsoft.Cdn/EdgeActions/**
   workflow_dispatch:
 
 permissions:
@@ -151,6 +153,8 @@ jobs:
             .github
             eng
             libs
+            specification/cdn/resource-manager/Microsoft.Cdn/EdgeActions
+            specification/common-types/resource-management/v6
 
       - uses: ./.github/actions/setup-node-install-deps
 
