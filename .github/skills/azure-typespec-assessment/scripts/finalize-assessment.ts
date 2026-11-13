@@ -1,5 +1,12 @@
 import fs from "node:fs";
 import path from "node:path";
+import {
+  AGENT_INDEX_FILE,
+  AssessmentRuntimeError,
+  createRuntimePhaseProvenance,
+  verifyAssessmentRuntime,
+  verifyRuntimePhaseProvenance,
+} from "./assessment-runtime.ts";
 import { assembleAssessment } from "./assemble-assessment.ts";
 import { isMain, parseArgs, readJsonObject, runMain } from "./cli.ts";
 import { renderAssessmentHtml } from "./render-assessment-html.ts";
@@ -45,6 +52,9 @@ export function finalizeAssessment({
   const root = path.resolve(work);
   const started = performance.now();
   try {
+    const runtime = verifyAssessmentRuntime(root, import.meta.url);
+    const preparation = verifyRuntimePhaseProvenance(root, "preparation", runtime);
+    const materialization = verifyRuntimePhaseProvenance(root, "materialization", runtime);
     const inferenceArtifactAt = fileTimestamp(path.join(root, "inference.json"));
     const guidelineEvidenceAt = fileTimestamp(path.join(root, "compliance-search-evidence.json"));
     const judgmentArtifactAt = fileTimestamp(path.join(root, "assessment-judgment.json"));
@@ -84,7 +94,11 @@ export function finalizeAssessment({
         `Canonical assessment inputs changed; rerun deterministic analysis.\n${hashErrors.join("\n")}`,
       );
     }
-    transitionWorkflowState(root, "finalizing", { failure: undefined });
+    transitionWorkflowState(root, "finalizing", {
+      failure: undefined,
+      runtimePhases: { preparation, materialization },
+      resultHashes: undefined,
+    });
     const judgmentPath = path.join(root, "assessment-judgment.json");
     if (!fs.existsSync(judgmentPath)) {
       throw new Error("Missing assessment-judgment.json.");
@@ -105,6 +119,8 @@ export function finalizeAssessment({
     });
     const assessmentPath = path.join(root, "assessment.json");
     const reportPath = path.join(root, "assessment.html");
+    verifyAssessmentRuntime(root, import.meta.url);
+    verifyRuntimePhaseProvenance(root, "materialization", runtime);
     atomicWriteJson(assessmentPath, assessment);
     atomicWriteFile(reportPath, html);
     const finalizationMs = Math.round(performance.now() - started);
@@ -116,6 +132,16 @@ export function finalizeAssessment({
         report: "assessment.html",
       },
       resultHashes: hashArtifacts(root, ["assessment.json", "assessment.html"]),
+      runtimePhases: {
+        preparation,
+        materialization,
+        finalization: createRuntimePhaseProvenance(
+          root,
+          runtime,
+          [AGENT_INDEX_FILE, ...Object.keys(materialization.outputHashes)],
+          ["assessment.json", "assessment.html"],
+        ),
+      },
       failure: undefined,
       telemetry: { finalizationMs },
     });
@@ -124,7 +150,8 @@ export function finalizeAssessment({
     const message = compactError(error);
     transitionWorkflowState(root, "awaiting-agent-judgment", {
       failure: {
-        code: "finalization-failed",
+        code:
+          error instanceof AssessmentRuntimeError ? "runtime-tooling-error" : "finalization-failed",
         message,
         recordedAt: new Date().toISOString(),
       },

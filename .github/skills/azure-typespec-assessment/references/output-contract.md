@@ -16,6 +16,11 @@ invalid unresolved placeholders; it is never a valid output. Read its schema
 from `agent-index.json.requiredOutputs.schemas.agentDecisions` exactly once.
 Resolve that path relative to the skill directory and do not search for it.
 
+Phase provenance records the originating runtime and input/output content
+hashes. Timestamp-only changes and byte-identical replacements are accepted;
+changed content, missing successful phase records, and runtime mismatches are
+rejected.
+
 ## Compact Agent decisions
 
 Write `agent-workspace\agent-decisions.json` conforming to

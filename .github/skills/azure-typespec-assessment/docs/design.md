@@ -64,6 +64,13 @@ mode excludes them.
 Production behavior lives under `scripts/`. Code under `evals/` and `tests/`
 is not imported or used by the runtime.
 
+Preparation, materialization, and finalization must use the same originating
+assessment runtime. Phase records bind its root and code fingerprint to
+input/output content hashes. Integrity checks do not compare filesystem
+timestamps or inode identity: metadata changes and byte-identical replacements
+are harmless. Changed content, runtime mismatches, and missing successful phase
+records remain errors.
+
 The coordinator bootstraps the skill's workspace-locked dependencies before
 loading the assessment implementation. When the installed `yaml` version is
 missing or does not match the skill importer in the root `pnpm-lock.yaml`, it

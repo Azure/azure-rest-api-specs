@@ -1,12 +1,18 @@
 import { assert, test } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
+import { spawnSync } from "node:child_process";
+import {
+  verifyAssessmentRuntime,
+  verifyRuntimePhaseProvenance,
+} from "../scripts/assessment-runtime.ts";
 import { buildAgentWorkspace } from "../scripts/build-agent-workspace.ts";
 import { readJson, writeJson } from "../scripts/cli.ts";
 import {
   materializeAssessmentResults,
   validateCompactDecisions,
 } from "../scripts/materialize-assessment-results.ts";
+import { readWorkflowState } from "../scripts/workflow-state.ts";
 
 type CatalogScore = import("../scripts/agent-decisions.schema.js").CatalogScore;
 
@@ -28,7 +34,7 @@ type TestAgentDecisions = {
 };
 
 function fixture({ inference = false } = {}) {
-  const work = fs.mkdtempSync(path.join(process.cwd(), ".materializer-test-"));
+  const work = fs.mkdtempSync(path.join(process.cwd(), ".materializer & ' test-"));
   writeJson(path.join(work, "preparation-manifest.json"), {
     comparison: {
       mergeBaseCommit: "base",
@@ -146,6 +152,63 @@ void test("materializes guideline evidence and judgment without inference", () =
       JSON.stringify(readJson(path.join(work, "workflow-state.json"))).includes("guideline"),
       true,
     );
+    const runtime = verifyAssessmentRuntime(
+      work,
+      new URL("../scripts/materialize-assessment-results.ts", import.meta.url).href,
+    );
+    const provenance = verifyRuntimePhaseProvenance(work, "materialization", runtime);
+    assert.deepEqual(provenance.runtime, runtime);
+    assert.deepEqual(Object.keys(provenance.outputHashes), [
+      "assessment-judgment.json",
+      "compliance-search-evidence.json",
+    ]);
+    assert.deepEqual(readWorkflowState(work)?.runtimePhases?.materialization, provenance);
+  } finally {
+    fs.rmSync(work, { recursive: true, force: true });
+  }
+});
+
+void test("the indexed materialization command runs the pinned script with Windows-safe arguments", () => {
+  const work = fixture();
+  try {
+    const { index } = buildAgentWorkspace({ work });
+    writeJson(path.join(work, "agent-workspace", "agent-decisions.json"), completedDecisions(work));
+    const { executable, args } = index.materialization.command;
+    const result = spawnSync(executable, args, { encoding: "utf8", shell: false });
+    assert.equal(result.status, 0, result.stderr);
+    assert.ok(fs.existsSync(path.join(work, "assessment-judgment.json")));
+    assert.ok(readWorkflowState(work)?.runtimePhases?.materialization);
+  } finally {
+    fs.rmSync(work, { recursive: true, force: true });
+  }
+});
+
+void test("materialization rejects a mismatched runtime before changing existing output or decisions", () => {
+  const work = fixture();
+  try {
+    const { index, indexPath } = buildAgentWorkspace({ work });
+    const decisionsPath = path.join(work, "agent-workspace", "agent-decisions.json");
+    writeJson(decisionsPath, completedDecisions(work));
+    const judgmentPath = path.join(work, "assessment-judgment.json");
+    fs.writeFileSync(judgmentPath, "existing output");
+    const decisions = fs.readFileSync(decisionsPath, "utf8");
+    for (const runtime of [
+      { ...index.runtime, root: path.join(work, "other-runtime") },
+      { ...index.runtime, fingerprint: `sha256:${"0".repeat(64)}` },
+    ]) {
+      writeJson(indexPath, { ...index, runtime });
+      assert.throws(
+        () => materializeAssessmentResults({ work }),
+        /Assessment runtime tooling error/,
+      );
+      assert.equal(fs.readFileSync(judgmentPath, "utf8"), "existing output");
+      assert.equal(fs.readFileSync(decisionsPath, "utf8"), decisions);
+      assert.equal(
+        (readWorkflowState(work)?.failure as { code: string } | undefined)?.code,
+        "runtime-tooling-error",
+      );
+      assert.isUndefined(readWorkflowState(work)?.runtimePhases?.materialization);
+    }
   } finally {
     fs.rmSync(work, { recursive: true, force: true });
   }
