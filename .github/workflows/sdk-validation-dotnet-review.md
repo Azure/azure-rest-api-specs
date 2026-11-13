@@ -21,10 +21,16 @@ on:
             run_id: context.payload.workflow_run.id,
             per_page: 100,
           });
+          const runAttempt = context.payload.workflow_run.run_attempt;
+          if (!Number.isSafeInteger(runAttempt) || runAttempt < 1) {
+            throw new Error(`Invalid workflow run attempt: ${JSON.stringify(runAttempt)}`);
+          }
+          const attemptSuffix = `-attempt-${runAttempt}`;
           const artifacts = response.data.artifacts.filter(
             (artifact) =>
               !artifact.expired &&
-              artifact.name.startsWith("sdk-naming-review-input-build-"),
+              artifact.name.startsWith("sdk-naming-review-input-build-") &&
+              artifact.name.endsWith(attemptSuffix),
           );
           if (artifacts.length > 1) {
             throw new Error(`Expected at most one validated SDK review input, found ${artifacts.length}`);
@@ -76,7 +82,7 @@ steps:
   - name: Upload trusted SDK review context
     uses: actions/upload-artifact@v7
     with:
-      name: sdk-review-trusted-context-${{ github.event.workflow_run.id }}
+      name: sdk-review-trusted-context-${{ github.event.workflow_run.id }}-attempt-${{ github.run_attempt }}
       path: /tmp/gh-aw/sdk-review-workspaces/sdk-review-context.json
       if-no-files-found: error
       retention-days: 7
@@ -131,7 +137,7 @@ safe-outputs:
         - name: Download trusted SDK review context
           uses: actions/download-artifact@v8
           with:
-            name: sdk-review-trusted-context-${{ github.event.workflow_run.id }}
+            name: sdk-review-trusted-context-${{ github.event.workflow_run.id }}-attempt-${{ github.run_attempt }}
             path: ${{ runner.temp }}/sdk-review-final/sdk-review-workspaces
         - name: Validate SDK review result
           uses: actions/github-script@v9
@@ -167,7 +173,7 @@ safe-outputs:
         - name: Upload validated SDK review result
           uses: actions/upload-artifact@v7
           with:
-            name: sdk-review-result-workflow-${{ github.event.workflow_run.id }}
+            name: sdk-review-result-workflow-${{ github.event.workflow_run.id }}-attempt-${{ github.run_attempt }}
             path: ${{ runner.temp }}/sdk-review-final
             if-no-files-found: error
             retention-days: 7
