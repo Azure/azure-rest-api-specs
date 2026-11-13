@@ -9881,6 +9881,15 @@ model AzureFirewallPropertiesFormat {
    */
   @added(Versions.v2026_01_01)
   aiSecurityAddOn?: boolean;
+
+  /**
+   * The TCP idle timeout for the Azure Firewall, in minutes. Valid values range from 4 to 64, inclusive.
+   */
+  @added(Versions.v2026_05_01)
+  @minValue(4)
+  @maxValue(64)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tcpIdleTimeoutInMinutes?: int32;
 }
 
 /**

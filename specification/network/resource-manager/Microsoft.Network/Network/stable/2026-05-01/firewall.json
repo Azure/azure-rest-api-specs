@@ -314,6 +314,9 @@
           "Create Azure Firewall With IpGroups": {
             "$ref": "./examples/AzureFirewallPutWithIpGroups.json"
           },
+          "Create Azure Firewall With TCP Idle Timeout": {
+            "$ref": "./examples/AzureFirewallPutWithTcpIdleTimeout.json"
+          },
           "Create Azure Firewall With Zones": {
             "$ref": "./examples/AzureFirewallPutWithZones.json"
           },
@@ -1383,6 +1386,18 @@
         "aiSecurityAddOn": {
           "type": "boolean",
           "description": "Indicates whether the AI security add-on is enabled for the Azure Firewall."
+        },
+        "tcpIdleTimeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The TCP idle timeout for the Azure Firewall, in minutes. Valid values range from 4 to 64, inclusive.",
+          "minimum": 4,
+          "maximum": 64,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       }
     },
