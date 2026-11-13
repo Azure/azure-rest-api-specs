@@ -13,23 +13,28 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/toolServers/weather-tools",
         "name": "weather-tools",
         "type": "Microsoft.ApiManagement/aigateways/workspaces/toolServers",
-        "eTag": "W/\"1\"",
         "properties": {
+          "provisioningState": "Succeeded",
           "endpoints": [
             {
               "id": "endpoint-1",
               "namespace": "weather",
               "kind": "mcp",
               "mcp": {
-                "url": "https://example.invalid/mcp",
+                "endpoint": {
+                  "url": "https://example.invalid/mcp"
+                },
                 "transport": "streamableHttp"
               },
-              "credentials": {
-                "type": "oauth2",
+              "authentication": {
                 "oauth2": {
                   "issuer": "https://identity.example.com/",
-                  "authorizationUrl": "https://identity.example.com/authorize",
-                  "tokenUrl": "https://identity.example.com/token",
+                  "authorizationEndpoint": {
+                    "url": "https://identity.example.com/authorize"
+                  },
+                  "tokenEndpoint": {
+                    "url": "https://identity.example.com/token"
+                  },
                   "clientId": "example-client",
                   "scopes": [
                     "tools.read"
@@ -39,12 +44,11 @@
                   "statusUpdatedUtc": "2026-10-12T00:00:00Z"
                 }
               },
-              "required": true
+              "mode": "failClosed"
             }
           ],
-          "provisioningState": "Succeeded",
-          "name": "Weather tools",
-          "type": "mcp",
+          "displayName": "Weather tools",
+          "toolServerType": "mcp",
           "versions": [
             "v1"
           ],
@@ -68,22 +72,25 @@
               "scope": "resource",
               "hooks": {
                 "preToolCall": {
-                  "endpoint": "https://hooks.example.com/pre-tool",
-                  "authorization": {
-                    "type": "anonymous"
+                  "endpoint": {
+                    "url": "https://hooks.example.com/pre-tool"
                   },
-                  "headers": {
-                    "X-Audit-Source": "gateway"
-                  }
+                  "authentication": {},
+                  "headers": [
+                    {
+                      "name": "X-Audit-Source",
+                      "value": "gateway"
+                    }
+                  ]
                 },
                 "postToolCall": {
-                  "endpoint": "https://hooks.example.com/post-tool",
-                  "authorization": {
-                    "type": "managedIdentity",
-                    "identity": {
-                      "type": "systemAssigned"
-                    },
-                    "audience": "https://hooks.example.com/"
+                  "endpoint": {
+                    "url": "https://hooks.example.com/post-tool"
+                  },
+                  "authentication": {
+                    "managedIdentity": {
+                      "resource": "https://hooks.example.com/"
+                    }
                   }
                 }
               }

@@ -21,17 +21,12 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
+  Microsoft.ApiManagement.AiGatewayToolServerLoginLinksRequest,
+  "AiGatewayToolServerLoginLinksContent",
+  "csharp"
+);
+@@clientName(
   Microsoft.ApiManagement.AiGatewayEndpoint.baseUrl,
   "baseUri",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.AiGatewayToolServerOauth2Authentication.authorizationUrl,
-  "authorizationUri",
-  "csharp"
-);
-@@clientName(
-  Microsoft.ApiManagement.AiGatewayToolServerOauth2Authentication.tokenUrl,
-  "tokenUri",
   "csharp"
 );
