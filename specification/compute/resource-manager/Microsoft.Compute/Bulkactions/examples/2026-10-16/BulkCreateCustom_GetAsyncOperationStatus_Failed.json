@@ -1,0 +1,25 @@
+{
+  "title": "Get the status of a failed bulk create custom operation",
+  "operationId": "BulkCreateCustom_GetAsyncOperationStatus",
+  "parameters": {
+    "api-version": "2026-10-16",
+    "subscriptionId": "57018409-63ae-4ec4-91ef-57bafe128d74",
+    "location": "eastus",
+    "asyncOperationId": "cbdbac52-dad1-4c54-81e1-972427ecd140"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/57018409-63ae-4ec4-91ef-57bafe128d74/providers/Microsoft.Compute/locations/eastus/bulkCreateCustom/cbdbac52-dad1-4c54-81e1-972427ecd140",
+        "name": "cbdbac52-dad1-4c54-81e1-972427ecd140",
+        "status": "Failed",
+        "startTime": "2026-10-16T10:00:00Z",
+        "endTime": "2026-10-16T10:05:00Z",
+        "error": {
+          "code": "AllocationFailed",
+          "message": "The requested virtual machine capacity could not be allocated in the selected availability zone."
+        }
+      }
+    }
+  }
+}

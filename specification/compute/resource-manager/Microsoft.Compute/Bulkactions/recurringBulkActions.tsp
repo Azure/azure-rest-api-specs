@@ -28,6 +28,7 @@ namespace Microsoft.Compute;
 // ------------------ Shared enums ------------------
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("The type of compute resource targeted by the recurring bulk action.")
 union ResourceType {
   @doc("Azure virtual machines.")
@@ -40,6 +41,7 @@ union ResourceType {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("The operation performed by the recurring bulk action.")
 union ScheduledActionType {
   @doc("Starts the targeted resources.")
@@ -55,6 +57,7 @@ union ScheduledActionType {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("A day of the week on which the recurring bulk action can run.")
 union WeekDay {
   @doc("The recurring bulk action can run on Monday.")
@@ -85,6 +88,7 @@ union WeekDay {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("A month in which the recurring bulk action can run.")
 union Month {
   @doc("The recurring bulk action can run in January.")
@@ -130,12 +134,14 @@ union Month {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @minValue(1)
 @maxValue(31)
 @doc("A calendar day of the month, from 1 through 31.")
 scalar DayOfTheMonth extends int32;
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("The current state of a recurring bulk action occurrence.")
 union OccurrenceState {
   @doc("The occurrence has been created.")
@@ -164,6 +170,7 @@ union OccurrenceState {
 
 // The provisioning state of a resource within an occurrence.
 @added(Versions.`2026-08-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("The provisioning state of a recurring bulk action resource within an occurrence.")
 union OccurrenceResourceProvisioningState {
   ResourceProvisioningState,
@@ -187,6 +194,7 @@ union OccurrenceResourceProvisioningState {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("The delivery method for recurring bulk action notifications.")
 union NotificationType {
   @doc("Sends notifications by email.")
@@ -196,6 +204,7 @@ union NotificationType {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("The language used for recurring bulk action notifications.")
 union Language {
   @doc("English (United States).")
@@ -205,6 +214,7 @@ union Language {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("Current status of an operation for the specific occurrence and resource")
 union ResourceOperationStatus {
   @doc("The operation completed successfully for the resource.")
@@ -220,6 +230,7 @@ union ResourceOperationStatus {
 // BulkActions LaunchBulkInstancesOperation `ProvisioningState`; takes the
 // `ScheduledActions*` identity (see file header).
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @renamedFrom(
   Versions.`2026-08-06-preview`,
   "RecurringScheduledActionsProvisioningState"
@@ -258,6 +269,7 @@ union OptimizationPreference {
 // ------------------ Shared models ------------------
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("Settings for notifications about upcoming recurring bulk action operations.")
 model NotificationProperties {
   @doc("The notification destination. For email notifications, specify a valid email address.")
@@ -284,6 +296,7 @@ model NotificationProperties {
 // the `Microsoft.Compute` namespace with the BulkActions originals.
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @renamedFrom(
   Versions.`2026-08-06-preview`,
   "RecurringScheduledActionsDeadlineType"
@@ -304,6 +317,7 @@ union ScheduledActionsDeadlineType {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @renamedFrom(
   Versions.`2026-08-06-preview`,
   "RecurringScheduledActionsResourceOperationType"
@@ -333,6 +347,7 @@ union ScheduledActionsResourceOperationType {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @renamedFrom(
   Versions.`2026-08-06-preview`,
   "RecurringScheduledActionsRetryPolicy"
@@ -350,6 +365,7 @@ model ScheduledActionsRetryPolicy {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @renamedFrom(
   Versions.`2026-08-06-preview`,
   "RecurringScheduledActionsExecutionParameters"
@@ -367,6 +383,7 @@ model ScheduledActionsExecutionParameters {
 // ------------------ Recurring bulk action resource + models ------------------
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("The recurring schedule for a recurring bulk action.")
 model ScheduledActionsSchedule {
   @doc("The local time of day when the recurring bulk action runs.")
@@ -392,11 +409,13 @@ model ScheduledActionsSchedule {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("Schedule changes for a recurring bulk action. Omitted properties keep their current values.")
 model ScheduledActionsScheduleUpdate
   is OptionalProperties<ScheduledActionsSchedule>;
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("The Azure resource ID of a virtual machine attached to a recurring bulk action.")
 scalar ValidScheduledActionResourceId
   extends armResourceIdentifier<[
@@ -409,6 +428,7 @@ scalar ValidScheduledActionResourceId
   ]>;
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @parentResource(ScheduledAction)
 @segment("resources")
 @doc("A compute resource associated with a recurring bulk action.")
@@ -437,10 +457,12 @@ model ScheduledActionResource {
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("A paged list of compute resources associated with a recurring bulk action.")
 model ResourceListResponse is Azure.Core.Page<ScheduledActionResource>;
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("A compute resource to add to or update in a recurring bulk action.")
 model ScheduledActionResourceInput {
   @doc("The Azure resource ID of the targeted virtual machine.")
@@ -452,6 +474,7 @@ model ScheduledActionResourceInput {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("Resources to attach to a recurring bulk action.")
 model ResourceAttachRequest {
   @doc("The list of resources to attach to the recurring bulk action.")
@@ -460,6 +483,7 @@ model ResourceAttachRequest {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("Resources to remove from a recurring bulk action.")
 model ResourceDetachRequest {
   @doc("The Azure resource IDs of the resources to remove.")
@@ -467,6 +491,7 @@ model ResourceDetachRequest {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("Resource-specific settings to update in a recurring bulk action.")
 model ResourcePatchRequest {
   @doc("The resources and notification settings to update.")
@@ -475,6 +500,7 @@ model ResourcePatchRequest {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("Request body for canceling a recurring bulk action occurrence.")
 model CancelOccurrenceRequest {
   @doc("The resources for which operations should be canceled. An empty array cancels all operations for all resources for the occurrence.")
@@ -482,6 +508,7 @@ model CancelOccurrenceRequest {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("Current status for a targeted resource in a recurring bulk action occurrence.")
 model ResourceStatus {
   @doc("The Azure resource ID of the targeted resource.")
@@ -495,6 +522,7 @@ model ResourceStatus {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("Results of a recurring bulk action operation for targeted resources.")
 model ResourceOperationResponse {
   @doc("The number of resources included in the operation.")
@@ -506,6 +534,7 @@ model ResourceOperationResponse {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("Configuration and status of a recurring bulk action.")
 model ScheduledActionProperties {
   @doc("The type of compute resource targeted by the action.")
@@ -538,6 +567,7 @@ model ScheduledActionProperties {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("Changes to a recurring bulk action. Omitted schedule properties keep their current values.")
 model ScheduledActionPropertiesUpdate {
   @doc("The type of compute resource targeted by the action.")
@@ -570,6 +600,7 @@ model ScheduledActionPropertiesUpdate {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("A recurring bulk action associated with a specific compute resource.")
 model ScheduledActionsExtensionProperties {
   ...ScheduledActionProperties;
@@ -582,6 +613,7 @@ model ScheduledActionsExtensionProperties {
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("Results of a recurring bulk action resource operation.")
 model ScheduledActionResourceOperationResponse {
   @doc("The number of resources included in the operation.")
@@ -593,12 +625,14 @@ model ScheduledActionResourceOperationResponse {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("A recurring bulk action that operates on specified compute resources.")
 model ScheduledAction is TrackedResource<ScheduledActionProperties> {
   ...ResourceNameParameter<ScheduledAction>;
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("A recurring bulk action associated with a specific compute resource.")
 model ScheduledActionResources
   is ExtensionResource<ScheduledActionsExtensionProperties> {
@@ -611,6 +645,7 @@ model ScheduledActionResources
 // ------------------ Occurrence resource + models ------------------
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("Summary of operation results across targeted resources.")
 model ResourceResultSummary {
   @doc("The result code shared by the resources in this group. A successful result uses `Success`.")
@@ -624,6 +659,7 @@ model ResourceResultSummary {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("Summary of results for a recurring bulk action occurrence.")
 model OccurrenceResultSummary {
   @doc("The number of resources targeted by the occurrence.")
@@ -635,6 +671,7 @@ model OccurrenceResultSummary {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("Properties of a recurring bulk action occurrence.")
 model OccurrenceProperties {
   @doc("Read-only. The UTC date and time when the occurrence is scheduled to run.")
@@ -651,6 +688,7 @@ model OccurrenceProperties {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @parentResource(ScheduledAction)
 @doc("One scheduled execution of a recurring bulk action.")
 model Occurrence is ProxyResource<OccurrenceProperties> {
@@ -662,6 +700,7 @@ model Occurrence is ProxyResource<OccurrenceProperties> {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @parentResource(Occurrence)
 @doc("Scheduling and status details for a resource included in a recurring bulk action occurrence.")
 model OccurrenceResource is ScheduledActionResource {
@@ -683,10 +722,12 @@ model OccurrenceResource is ScheduledActionResource {
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("Paged list of resources included in a recurring bulk action occurrence.")
 model OccurrenceResourceListResponse is Azure.Core.Page<OccurrenceResource>;
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("Request body for delaying a recurring bulk action occurrence.")
 model DelayRequest {
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Recurring bulk actions execute at a customer-provided local (wall-clock) time; the UTC offset carries the caller's timezone and must be preserved, so offsetDateTime is required."
@@ -698,6 +739,7 @@ model DelayRequest {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("The Azure resource ID of a recurring bulk action.")
 scalar ScheduledActionsId
   extends armResourceIdentifier<[
@@ -707,6 +749,7 @@ scalar ScheduledActionsId
   ]>;
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("An occurrence associated with a specific compute resource.")
 model OccurrenceExtensionProperties {
   @doc("The Azure resource ID of the targeted virtual machine.")
@@ -734,6 +777,7 @@ model OccurrenceExtensionProperties {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @doc("A recurring bulk action occurrence associated with a specific compute resource.")
 model OccurrenceExtensionResource
   is ExtensionResource<OccurrenceExtensionProperties> {
@@ -746,6 +790,7 @@ model OccurrenceExtensionResource
 // ------------------ Recurring bulk action operations ------------------
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @armResourceOperations
 interface ScheduledActions {
   @doc("Gets the specified recurring bulk action.")
@@ -870,6 +915,7 @@ interface ScheduledActions {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @armResourceOperations
 interface ScheduledActionExtension {
   @doc("Lists recurring bulk actions associated with the specified VM.")
@@ -878,6 +924,7 @@ interface ScheduledActionExtension {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @armResourceOperations(#{ allowStaticRoutes: true })
 interface ScheduledActionOperationStatus {
   @doc("Gets the status of the specified recurring bulk action operation.")
@@ -906,6 +953,7 @@ interface ScheduledActionOperationStatus {
 // ------------------ Occurrence operations ------------------
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @armResourceOperations
 interface Occurrences {
   @doc("Gets the specified occurrence.")
@@ -952,6 +1000,7 @@ interface Occurrences {
 }
 
 @added(Versions.`2026-07-06-preview`)
+@removed(Versions.`2026-10-16`)
 @armResourceOperations
 interface OccurrenceExtension {
   @doc("Lists recurring bulk action occurrences associated with the specified VM.")
