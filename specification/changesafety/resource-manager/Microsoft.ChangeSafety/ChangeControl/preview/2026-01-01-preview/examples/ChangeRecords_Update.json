@@ -1,0 +1,61 @@
+{
+  "title": "ChangeRecords_Update",
+  "operationId": "ChangeRecords_Update",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl",
+    "changeRecordName": "webApplicationChangeRecord",
+    "properties": {
+      "properties": {
+        "description": "Updated description for web application deployment with enhanced monitoring",
+        "comments": "Added additional monitoring and alerts for production deployment"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "changeType": "AppDeployment",
+          "rolloutType": "Normal",
+          "description": "Updated description for web application deployment with enhanced monitoring",
+          "stageMap": {
+            "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/webApplicationStageMap"
+          },
+          "status": "InProgress",
+          "comments": "Added additional monitoring and alerts for production deployment",
+          "changeDefinition": {
+            "name": "webApplicationDeployment",
+            "kind": "ApiOperations",
+            "details": {
+              "operations": [
+                {
+                  "httpMethod": "DELETE",
+                  "uri": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.Network/trafficmanagerprofiles/myTrafficManagerProfile"
+                }
+              ]
+            }
+          },
+          "releaseLabel": "Release-2.4.0-Production",
+          "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+          "anticipatedEndTime": "2025-07-09T09:30:17.815Z",
+          "orchestrationTool": "Azure DevOps",
+          "stageMapSnapshot": []
+        },
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeRecords/webApplicationChangeRecord",
+        "name": "webApplicationChangeRecord",
+        "type": "Microsoft.ChangeSafety/changeRecords",
+        "systemData": {
+          "createdBy": "devops@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "devops@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T08:30:16.534Z"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "title": "StageProgressions_Update",
+  "operationId": "StageProgressions_Update",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl",
+    "changeStateName": "apiServiceChangeState",
+    "stageProgressionName": "integrationTestingProgression",
+    "properties": {
+      "properties": {
+        "status": "Completed",
+        "comments": "Integration testing stage successfully completed with all API endpoints validated and contract tests passing.",
+        "stageVariables": {
+          "testSuite": "comprehensive",
+          "endpointCoverage": 100,
+          "contractTestsPassed": true
+        },
+        "links": [
+          {
+            "name": "workTrackingItem",
+            "uri": "https://dev.azure.com/contoso/DatabaseProject/_workitems/edit/12373",
+            "description": "Work item for database update deployment with schema migration"
+          },
+          {
+            "name": "approvalRequest",
+            "uri": "https://approval.contoso.com/requests/67916",
+            "description": "Database update deployment approval with DBA review"
+          },
+          {
+            "name": "supportIncident",
+            "uri": "https://support.contoso.com/incidents/INC001260",
+            "description": "Support incident for database update coordination"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "stageReference": "api-integration-testing",
+          "status": "Completed",
+          "sequence": 2,
+          "stageVariables": {
+            "testSuite": "comprehensive",
+            "endpointCoverage": 100,
+            "contractTestsPassed": true,
+            "environment": "staging"
+          },
+          "comments": "Integration testing stage successfully completed with all API endpoints validated and contract tests passing.",
+          "links": [
+            {
+              "name": "workTrackingItem",
+              "uri": "https://dev.azure.com/contoso/DatabaseProject/_workitems/edit/12373",
+              "description": "Work item for database update deployment with schema migration"
+            },
+            {
+              "name": "approvalRequest",
+              "uri": "https://approval.contoso.com/requests/67916",
+              "description": "Database update deployment approval with DBA review"
+            },
+            {
+              "name": "supportIncident",
+              "uri": "https://support.contoso.com/incidents/INC001260",
+              "description": "Support incident for database update coordination"
+            }
+          ]
+        },
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/apiServiceChangeState/stageProgressions/integrationTestingProgression",
+        "name": "integrationTestingProgression",
+        "type": "Microsoft.ChangeSafety/changeStates/stageProgressions",
+        "systemData": {
+          "createdBy": "rachel.qa@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "rachel.qa@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T09:15:30.442Z"
+        }
+      }
+    }
+  }
+}
