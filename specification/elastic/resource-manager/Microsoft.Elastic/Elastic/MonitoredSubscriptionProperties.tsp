@@ -25,30 +25,6 @@ model MonitoredSubscriptionProperties
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-interface MonitoredCreateOrUpdateResourceOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-      },
-      {
-        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-        @path
-        @segment("monitors")
-        @pattern("^.*$")
-        monitorName: string,
-
-        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-        @path
-        @segment("monitoredSubscriptions")
-        @pattern("^.*$")
-        configurationName: string,
-      }
-    > {}
-
 @armResourceOperations
 interface MonitoredSubscriptions {
   /**
@@ -59,7 +35,7 @@ interface MonitoredSubscriptions {
   /**
    * Add subscriptions to be monitored by the Elastic monitor resource, enabling observability and monitoring.
    */
-  createorUpdate is MonitoredCreateOrUpdateResourceOps.CreateOrUpdateAsync<
+  createorUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     MonitoredSubscriptionProperties,
     LroHeaders = ArmLroLocationHeader<FinalResult = MonitoredSubscriptionProperties> &
       Azure.Core.Foundations.RetryAfterHeader,
@@ -70,7 +46,7 @@ interface MonitoredSubscriptions {
    * Update subscriptions to be monitored by the Elastic monitor resource, ensuring optimal observability and performance.
    */
   @patch(#{ implicitOptionality: false })
-  update is MonitoredCreateOrUpdateResourceOps.CustomPatchAsync<
+  update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     MonitoredSubscriptionProperties,
     PatchModel = MonitoredSubscriptionProperties,
     OptionalRequestBody = true
