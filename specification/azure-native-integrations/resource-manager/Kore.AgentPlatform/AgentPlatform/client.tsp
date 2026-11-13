@@ -90,7 +90,7 @@ using Kore.AgentPlatform;
   "csharp"
 );
 @@clientName(
-  Kore.AgentPlatform.WorkspaceDetailPartnerProperties.`default`,
+  Kore.AgentPlatform.WorkspaceDetailPartnerProperties.default,
   "isDefault",
   "csharp"
 );
@@ -101,6 +101,16 @@ using Kore.AgentPlatform;
 );
 @@alternateType(
   Kore.AgentPlatform.WorkspaceMarketplaceDetails.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Kore.AgentPlatform.SingleSignOnProperties.url,
+  TypeSpec.url,
+  "csharp"
+);
+@@alternateType(
+  LiftrBase.MarketplaceDetails.saasResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
