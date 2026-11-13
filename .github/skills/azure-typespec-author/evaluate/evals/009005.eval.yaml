@@ -1,0 +1,121 @@
+name: azure-typespec-author-eval
+description: reuse accepted assessment mode and baseline
+version: "1.0"
+type: capability
+tags:
+  area: assessment
+environment: azsdk-mcp
+defaults:
+  runs: 1
+  timeout: 180s
+  model: gpt-5.6-sol
+  executor: copilot-sdk
+scoring:
+  threshold: 1
+stimuli:
+  - name: 009005-reuse-assessment-and-baseline-decisions-trigger
+    tags:
+      suite: assessment
+      mode: trigger
+    prompt: |
+      Continue the TypeSpec authoring workflow by deciding only the next action. Authoring, validation, and reference
+      output are complete for specification/widget/Widget.Management. The user
+      already said "After authoring, run fast assessment against origin/main."
+      Other uncommitted changes exist in that same project.
+      Return only JSON with "nextAction", "assessmentMode", "baseline",
+      "specification", and "agentEditsOnly".
+      Choose nextAction from offer-fast-assessment, confirm-assessment-baseline,
+      invoke-assessment-skill, report-validation-blocker, or complete.
+      Consult the local authoring skill reference, but do not execute the action,
+      ask a user question, edit, compile, use network or MCP, or run assessment.
+    constraints: &constraints
+      max_turns: 14
+      max_tokens: 20000
+    graders:
+      - &author-skill
+        type: skill-invocation
+        config:
+          required: [azure-typespec-author]
+          disallowed: [azure-typespec-assessment]
+      - &tools
+        type: tool-calls
+        config:
+          required:
+            - name: ^(view|rg)$
+              pattern: post-authoring-assessment\.md
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch|web_fetch|web_search|ask_user)$
+      - &action
+        type: output-matches
+        config:
+          pattern: '"nextAction"\s*:\s*"invoke-assessment-skill"'
+      - &mode
+        type: output-matches
+        config:
+          pattern: '"assessmentMode"\s*:\s*"fast"'
+      - &baseline
+        type: output-matches
+        config:
+          pattern: '"baseline"\s*:\s*"origin/main"'
+      - &specification
+        type: output-matches
+        config:
+          pattern: '"specification"\s*:\s*"specification/widget/Widget.Management"'
+      - &scope
+        type: output-matches
+        config:
+          pattern: '"agentEditsOnly"\s*:\s*false'
+  - name: 009005-reuse-assessment-and-baseline-decisions-forced
+    tags:
+      suite: assessment
+      mode: forced
+    prompt: |
+      @azure-typespec-author Continue the TypeSpec authoring workflow by deciding only the next action. Authoring,
+      validation, and reference output are complete for
+      specification/widget/Widget.Management. The user already said "After
+      authoring, run fast assessment against origin/main." Other uncommitted
+      changes exist in that same project.
+      Return only JSON with "nextAction", "assessmentMode", "baseline",
+      "specification", and "agentEditsOnly".
+      Choose nextAction from offer-fast-assessment, confirm-assessment-baseline,
+      invoke-assessment-skill, report-validation-blocker, or complete.
+      Consult the local authoring skill reference, but do not execute the action,
+      ask a user question, edit, compile, use network or MCP, or run assessment.
+    constraints: *constraints
+    graders:
+      - *author-skill
+      - *tools
+      - *action
+      - *mode
+      - *baseline
+      - *specification
+      - *scope
+  - name: 009005-reuse-assessment-and-baseline-decisions-no-skill
+    tags:
+      suite: assessment
+      mode: no-skill
+    prompt: |
+      Continue the TypeSpec authoring workflow by deciding only the next action. Authoring,
+      validation, and reference output are complete for
+      specification/widget/Widget.Management. The user already said "After
+      authoring, run fast assessment against origin/main." Other uncommitted
+      changes exist in that same project.
+      Return only JSON with "nextAction", "assessmentMode", "baseline",
+      "specification", and "agentEditsOnly".
+      Choose nextAction from offer-fast-assessment, confirm-assessment-baseline,
+      invoke-assessment-skill, report-validation-blocker, or complete.
+      Do not execute the action, ask a user question, inspect files, edit, compile,
+      use network or MCP, or run assessment.
+    constraints: *constraints
+    graders:
+      - type: tool-calls
+        config:
+          disallowed:
+            - name: azsdk_
+            - name: ^(edit|create|apply_patch|web_fetch|web_search|ask_user|powershell|bash)$
+      - *action
+      - *mode
+      - *baseline
+      - *specification
+      - *scope

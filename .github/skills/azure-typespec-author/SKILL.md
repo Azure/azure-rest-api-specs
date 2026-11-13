@@ -47,6 +47,11 @@ unavailable. Report that failure instead of silently taking its fallback.
 
 Install `azure-typespec-sdk-naming` alongside this skill. Invoke it by name for naming guidance; do not copy its rules into this skill. If unavailable, report the naming coverage gap rather than inventing a replacement.
 
+Install `azure-typespec-assessment` alongside this skill for the post-authoring
+fast assessment. Invoke it only after the user accepts the completion offer or
+has already requested assessment of these changes. If unavailable, report that
+assessment could not run; do not replace it with an ad hoc review.
+
 ## Rules
 
 - **Do NOT skip this skill for "simple" declaration tasks** — there are no simple TypeSpec source edits. A single property addition can require `@added` decorators, version gating, and validation. The only `.tsp` exception is a naming-only `client.tsp` SDK override routed directly to `azure-typespec-sdk-naming`.
@@ -72,7 +77,7 @@ Install `azure-typespec-sdk-naming` alongside this skill. Invoke it by name for 
 
 ## Steps
 
-> Analyze → Intake → Plan TypeSpec source → Client configuration unless opted out → Apply → Validate → Output reference links
+> Analyze → Intake → Plan TypeSpec source → Client configuration unless opted out → Apply → Validate → Output reference links → Offer fast assessment unless opted out
 
 - [ ] Step 1 — Analyze project
 - [ ] Step 2 — Intake
@@ -81,6 +86,7 @@ Install `azure-typespec-sdk-naming` alongside this skill. Invoke it by name for 
 - [ ] Step 5 — Apply changes
 - [ ] Step 6 — Validate
 - [ ] Step 7 — Output reference links
+- [ ] Step 8 — Offer fast assessment unless opted out
 
 ### Step 1: Analyze Project
 
@@ -122,17 +128,27 @@ See [validation.md](references/validation.md). Run 6.1.1 TypeSpec validation whe
 
 Output all referenced document URLs from the source plan in Step 3 and any client configuration plan in Step 4. This gives the user direct links to the documentation that informed the changes.
 
+### Step 8: Offer Fast Assessment Unless Opted Out
+
+After completing authoring and required validation, follow
+[post-authoring-assessment.md](references/post-authoring-assessment.md).
+Ask **"Would you like to quickly assess your changes?"** with a recommended
+fast assessment choice and an explicit Skip choice. Respect an existing decision
+for these changes without asking again. Do not start assessment before acceptance,
+and do not offer it for planning-only, unchanged, or blocked authoring work.
+
 ## Reference Files
 
-| File                                                                  | Purpose                                       |
-| --------------------------------------------------------------------- | --------------------------------------------- |
-| [analyze-project.md](references/analyze-project.md)                   | Step 1: project analysis                      |
-| [intake.md](references/intake.md)                                     | Step 2: general + case-specific intake        |
-| [authoring-plan.md](references/authoring-plan.md)                     | Step 3: build TypeSpec source plan locally    |
-| [client-configuration.md](references/client-configuration.md)         | Step 4: client configuration unless opted out |
-| [agentic-search.md](references/agentic-search.md)                     | Procedure: fetch URLs → extract guidance      |
-| [reference-document-links.md](references/reference-document-links.md) | Catalog of external guide URLs                |
-| [validation.md](references/validation.md)                             | Step 6: validate → compile → verify           |
+| File                                                                    | Purpose                                       |
+| ----------------------------------------------------------------------- | --------------------------------------------- |
+| [analyze-project.md](references/analyze-project.md)                     | Step 1: project analysis                      |
+| [intake.md](references/intake.md)                                       | Step 2: general + case-specific intake        |
+| [authoring-plan.md](references/authoring-plan.md)                       | Step 3: build TypeSpec source plan locally    |
+| [client-configuration.md](references/client-configuration.md)           | Step 4: client configuration unless opted out |
+| [agentic-search.md](references/agentic-search.md)                       | Procedure: fetch URLs → extract guidance      |
+| [reference-document-links.md](references/reference-document-links.md)   | Catalog of external guide URLs                |
+| [validation.md](references/validation.md)                               | Step 6: validate → compile → verify           |
+| [post-authoring-assessment.md](references/post-authoring-assessment.md) | Step 8: offer and hand off to fast assessment |
 
 ## Examples
 
