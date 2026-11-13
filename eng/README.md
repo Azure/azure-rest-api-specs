@@ -7,7 +7,7 @@ For context on this directory, see [Design guidelines for spec repos validation 
 ## Skill Eval Dashboard
 
 [Skill eval](pipelines/skill-eval.yml) reuses the common build, shard and summary
-jobs to send complete main-branch results to the existing eval dashboard. Its
+jobs to send complete results from trusted runs to the existing eval dashboard. Its
 Azure Storage network policy is declared only in that entrypoint; the shared
 1ES redirect does not configure storage access for other pipelines. TypeSpec
 authoring benchmarks are not included. Shared publishing changes reach this repo
@@ -20,9 +20,17 @@ disabled. Optional refresh notifications use `EvalDashboardRefreshUrl` and
 for the approved storage/dashboard configuration and permissions.
 
 Set `publishDashboardResults` to `false` for artifact-only runs without added
-storage egress. PRs and non-main runs cannot upload. Completed failing evals can
-be published; incomplete results remain blocked. Missing permissions and incomplete
-eval shards must be resolved before claiming live dashboard onboarding is complete.
+storage egress. Feature branches are artifact-only by default. For a manual test,
+set both `publishDashboardResults` and `allowFeatureBranchPublishing` to `true`.
+The feature-branch switch defaults to `false`; PRs and forks still cannot upload.
+Test results keep their actual branch, commit and build identity. Existing
+service-connection approvals, branch checks and storage permissions still apply.
+This switch requires the matching shared publishing parameter to arrive through
+the normal `eng/common` sync from Azure SDK Tools.
+
+Completed failing evals can be published; incomplete results remain blocked.
+Missing permissions and incomplete eval shards must be resolved before claiming
+live dashboard onboarding is complete.
 
 ### Eval model variables
 
