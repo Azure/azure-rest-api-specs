@@ -1,0 +1,41 @@
+parameters:
+  service-dir:
+    default: "sdk/contosowidgetopenprverification"
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
+options:
+  "@azure-tools/typespec-autorest":
+    emit-lro-options: "none"
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/widgets.json"
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.Contoso.WidgetOpenPrVerification"
+    model-namespace: false
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-contoso-widget-openprverification"
+    namespace: "azure.contoso.widgetopenprverification"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-contoso-widget-openprverification"
+    namespace: "com.azure.contoso.widgetopenprverification"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/contoso-widget-openprverification"
+    package-details:
+      name: "@azure/contoso-widget-openprverification"
+    flavor: azure
+  "@azure-tools/typespec-go":
+    emitter-output-dir: "{output-dir}/{service-dir}/azwidgetopenprverification"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azwidgetopenprverification"
+    generate-fakes: true
+    inject-spans: true
+    single-client: true
+    slice-elements-byval: true
+    flavor: azure
