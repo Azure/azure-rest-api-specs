@@ -1,3 +1,4 @@
+import { strToU8, zipSync } from "fflate";
 import { beforeEach, describe, expect, it } from "vitest";
 import { CheckConclusion, CheckStatus, CommitStatusState } from "../../shared/src/github.ts";
 import { fullGitSha } from "../../shared/test/examples.ts";
@@ -95,14 +96,21 @@ describe("setStatusImpl", () => {
           id: 456,
           name: "TypeSpec Suppressions - Analyze Code",
           status: CheckStatus.COMPLETED,
-          conclusion: CheckConclusion.FAILURE,
+          conclusion: CheckConclusion.SUCCESS,
           updated_at: "2026-09-29",
           html_url: "https://test.com/typespec-suppressions-report",
         },
       ],
     });
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
-      data: [{ name: "job-summary" }],
+      data: [{ id: 1, name: "typespec-suppressions-report" }],
+    });
+    github.rest.actions.downloadArtifact.mockResolvedValue({
+      data: zipSync({
+        "typespec-suppressions-report.json": strToU8(
+          JSON.stringify({ checkedSuppressions: { requiresApproval: true } }),
+        ),
+      }),
     });
 
     await setStatusImpl({
@@ -126,6 +134,183 @@ describe("setStatusImpl", () => {
       context: "TypeSpec Suppressions",
       description: "Found label 'typespec-suppressions-approved'",
       target_url: "https://test.com/typespec-suppressions-report",
+    });
+  });
+
+  describe("suppression approval gate", () => {
+    const reportUrl = "https://test.com/typespec-suppressions-report";
+
+    function configureRun({
+      status = CheckStatus.COMPLETED,
+      conclusion = CheckConclusion.SUCCESS,
+      name = "TypeSpec Suppressions - Analyze Code",
+    }: { status?: string; conclusion?: string | null; name?: string } = {}) {
+      github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
+        data: [
+          {
+            id: 456,
+            name,
+            status,
+            conclusion,
+            updated_at: "2026-09-29",
+            html_url: reportUrl,
+          },
+        ],
+      });
+    }
+
+    function configureReport(content: string) {
+      github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+        data: [{ id: 1, name: "typespec-suppressions-report" }],
+      });
+      github.rest.actions.downloadArtifact.mockResolvedValue({
+        data: zipSync({ "typespec-suppressions-report.json": strToU8(content) }),
+      });
+    }
+
+    function updateStatus() {
+      return setStatusImpl({
+        owner: "test-owner",
+        repo: "test-repo",
+        head_sha: fullGitSha,
+        issue_number: 123,
+        target_url: "https://test.com/set_status_url",
+        github,
+        core,
+        monitoredWorkflowName: "TypeSpec Suppressions - Analyze Code",
+        requiredStatusName: "TypeSpec Suppressions",
+        overridingLabel: "typespec-suppressions-approved",
+      });
+    }
+
+    it.each([
+      { report: { requiresApproval: true }, state: CommitStatusState.FAILURE },
+      { report: { requiresApproval: false }, state: CommitStatusState.SUCCESS },
+      {
+        report: { requiresApproval: false, checkedSuppressions: { requiresApproval: true } },
+        state: CommitStatusState.FAILURE,
+      },
+      {
+        report: { requiresApproval: true, checkedSuppressions: { requiresApproval: false } },
+        state: CommitStatusState.SUCCESS,
+      },
+    ])(
+      "uses report approval requirements rather than analyzer success: $report",
+      async ({ report, state }) => {
+        configureRun();
+        configureReport(JSON.stringify(report));
+
+        await updateStatus();
+
+        expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+          expect.objectContaining({
+            state,
+            context: "TypeSpec Suppressions",
+            target_url: reportUrl,
+          }),
+        );
+      },
+    );
+
+    it("turns green on approval and red on revocation without changing the report", async () => {
+      configureRun({ name: "[TEST-IGNORE] TypeSpec Suppressions - Analyze Code" });
+      configureReport(JSON.stringify({ checkedSuppressions: { requiresApproval: true } }));
+
+      await updateStatus();
+      github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+        data: [{ name: "typespec-suppressions-approved" }],
+      });
+      await updateStatus();
+      github.rest.issues.listLabelsOnIssue.mockResolvedValue({ data: [] });
+      await updateStatus();
+
+      expect(github.rest.repos.createCommitStatus).toHaveBeenCalledTimes(3);
+      for (const [index, state] of [
+        CommitStatusState.FAILURE,
+        CommitStatusState.SUCCESS,
+        CommitStatusState.FAILURE,
+      ].entries()) {
+        expect(github.rest.repos.createCommitStatus).toHaveBeenNthCalledWith(
+          index + 1,
+          expect.objectContaining({ state, target_url: reportUrl }),
+        );
+      }
+      expect(github.rest.actions.deleteArtifact).not.toHaveBeenCalled();
+      expect(github.rest.actions.createWorkflowDispatch).not.toHaveBeenCalled();
+    });
+
+    it.each([
+      CheckConclusion.FAILURE,
+      CheckConclusion.CANCELLED,
+      CheckConclusion.TIMED_OUT,
+      CheckConclusion.NEUTRAL,
+    ])("does not approve an unsuccessful analyzer: %s", async (conclusion) => {
+      configureRun({ conclusion });
+      github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+        data: [{ name: "typespec-suppressions-approved" }],
+      });
+
+      await updateStatus();
+
+      expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+        expect.objectContaining({
+          state: CommitStatusState.FAILURE,
+          description: "Suppression analysis did not complete successfully",
+        }),
+      );
+      expect(github.rest.actions.downloadArtifact).not.toHaveBeenCalled();
+    });
+
+    it.each([true, false])(
+      "waits for analysis despite approval (run exists: %s)",
+      async (hasRun) => {
+        if (hasRun) configureRun({ status: CheckStatus.IN_PROGRESS, conclusion: null });
+        github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+          data: [{ name: "typespec-suppressions-approved" }],
+        });
+
+        await updateStatus();
+
+        expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+          expect.objectContaining({ state: CommitStatusState.PENDING }),
+        );
+      },
+    );
+
+    it.each([
+      "not json",
+      "null",
+      "{}",
+      '{"requiresApproval":"false"}',
+      '{"requiresApproval":false,"checkedSuppressions":null}',
+      '{"requiresApproval":false,"checkedSuppressions":{}}',
+    ])("blocks and surfaces invalid reports even with approval: %s", async (content) => {
+      configureRun();
+      configureReport(content);
+      github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+        data: [{ name: "typespec-suppressions-approved" }],
+      });
+
+      await expect(updateStatus()).rejects.toThrow();
+
+      expect(core.error).toHaveBeenCalled();
+      expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+        expect.objectContaining({
+          state: CommitStatusState.FAILURE,
+          target_url: reportUrl,
+          description: "Unable to read suppression approval report",
+        }),
+      );
+    });
+
+    it("blocks when a successful analyzer has no report artifact", async () => {
+      configureRun();
+
+      await expect(updateStatus()).rejects.toThrow("Unable to find typespec-suppressions-report");
+
+      expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+        expect.objectContaining({ state: CommitStatusState.FAILURE }),
+      );
     });
   });
 

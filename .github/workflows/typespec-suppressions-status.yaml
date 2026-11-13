@@ -30,6 +30,8 @@ permissions: {}
 jobs:
   typespec-suppressions-status:
     name: Set TypeSpec Suppressions Status
+    needs: post-comment
+    if: ${{ !cancelled() }}
     permissions:
       actions: read
       contents: read

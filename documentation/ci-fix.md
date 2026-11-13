@@ -353,6 +353,13 @@ by other validations in this repo):
 | `TypeSpec Suppressions - Set Status` | Reports the check status; approval is granted by applying the `typespec-suppressions-approved` label. |
 | `TypeSpec Suppressions - Test` | Runs the analyzer tool's own test suite. |
 
+`TypeSpec Suppressions - Analyze Code` passes when analysis and report generation
+succeed, even if suppressions need approval. Its logs, summary, annotations, and
+report artifacts remain available. The separate required `TypeSpec Suppressions`
+status reads that report and stays red until approval is granted; removing the
+approval label makes it red again. Analysis failures or missing/invalid reports
+cannot be approved away.
+
 ### Where to see the results
 
 - A **"TypeSpec suppressions requiring review"** comment is surfaced on the PR,
