@@ -4,28 +4,21 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
-using Common;
 
 namespace Microsoft.Network;
 /**
  * ExpressRouteCircuit resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ExpressRouteCircuit extends Common.Resource {
-  properties?: ExpressRouteCircuitPropertiesFormat;
-
+@featureFile(Features.expressRoute)
+model ExpressRouteCircuit
+  is ResourceInstance<ExpressRouteCircuitPropertiesFormat> {
   @visibility(Lifecycle.Read)
   @path
   @key("circuitName")
@@ -45,8 +38,7 @@ model ExpressRouteCircuit extends Common.Resource {
   sku?: ExpressRouteCircuitSku;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@featureFile(Features.expressRoute)
 @armResourceOperations(#{ omitTags: true })
 interface ExpressRouteCircuits {
   /**

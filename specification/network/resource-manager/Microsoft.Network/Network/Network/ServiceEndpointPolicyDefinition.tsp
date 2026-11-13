@@ -4,18 +4,16 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ServiceEndpointPolicy.tsp";
-import "../Common/ServiceEndpointPolicyDefinition.tsp";
+import "./ServiceEndpointPolicyDefinition.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Network;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@featureFile(Features.expressRoute)
 @armResourceOperations(#{ omitTags: true })
 interface ServiceEndpointPolicyDefinitions {
   @tag("serviceEndpointPolicyDefinitions")

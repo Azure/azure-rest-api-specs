@@ -4,14 +4,13 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
-using Common;
 using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Network;
@@ -19,17 +18,10 @@ namespace Microsoft.Network;
 /**
  * Authentication policy resource for identity integration.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required for includeInapplicableMetadataInPayload, which the Network RP legacy Resource envelope relies on; systemData is declared explicitly on this model so it is still emitted, consistent with other Network RP resources such as AdminRuleCollection"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending the local Network RP Resource is the established pattern for tracked resources in this RP"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other Network RP resource definitions"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "AuthenticationPolicy uses the local Network RP Resource base type consistent with other Network RP tracked resources (e.g. IpGroup)"
 @added(Versions.v2026_01_01)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Legacy.feature(Features.authenticationPolicy)
-model AuthenticationPolicy extends Common.Resource {
-  /** Properties of the authentication policy. */
-  properties?: AuthenticationPolicyPropertiesFormat;
-
+@featureFile(Features.authenticationPolicy)
+model AuthenticationPolicy
+  is ResourceInstance<AuthenticationPolicyPropertiesFormat> {
   /** The name of the authentication policy. */
   @visibility(Lifecycle.Read)
   @path
@@ -46,7 +38,7 @@ model AuthenticationPolicy extends Common.Resource {
 
   /** The user-assigned identity used by a user sign-in policy to access its Key Vault client secret. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "AuthenticationPolicy requires this user-assigned identity in the resource envelope so a user sign-in policy can read its client secret from Key Vault; the property uses the standard ManagedServiceIdentity shape and is an envelope-level credential of the resource rather than a routing/authentication setting, so it cannot move under properties."
-  identity?: Common.ManagedServiceIdentity;
+  identity?: ManagedServiceIdentity;
 
   /** The system metadata related to this resource. */
   @visibility(Lifecycle.Read)
@@ -56,24 +48,22 @@ model AuthenticationPolicy extends Common.Resource {
 /**
  * Parameters supplied to update an authentication policy.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other Network RP property models"
 @added(Versions.v2026_01_01)
-@Azure.ResourceManager.Legacy.feature(Features.authenticationPolicy)
+@featureFile(Features.authenticationPolicy)
 model AuthenticationPolicyUpdateParameters {
   /** Resource tags. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Resource tags are an open string map, consistent with the tags property on the Network RP Resource base type"
   tags?: Record<string>;
 
   /** The user-assigned identity used by a user sign-in policy to access its Key Vault client secret. */
-  identity?: Common.ManagedServiceIdentity;
+  identity?: ManagedServiceIdentity;
 }
 
 /**
  * Properties of the authentication policy.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other Network RP property models"
 @added(Versions.v2026_01_01)
-@Azure.ResourceManager.Legacy.feature(Features.authenticationPolicy)
+@featureFile(Features.authenticationPolicy)
 model AuthenticationPolicyPropertiesFormat {
   /** The type of the user trust provider. Only Microsoft Entra is supported, using the serialized value `entra`. */
   userTrustProviderType: UserTrustProviderType;
@@ -100,9 +90,8 @@ model AuthenticationPolicyPropertiesFormat {
 /**
  * Properties for authentication provider configuration. A policy must configure either JWT validation fields or user sign-in fields; the two configurations are mutually exclusive and cannot be combined.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other Network RP property models"
 @added(Versions.v2026_01_01)
-@Azure.ResourceManager.Legacy.feature(Features.authenticationPolicy)
+@featureFile(Features.authenticationPolicy)
 model AuthenticationProviderProperties {
   /** The absolute HTTPS URL of the Secure Token Service. Include a trailing slash at the end of the value. Example: https://login.microsoftonline.com/{Microsoft Entra Tenant ID}/ */
   @maxLength(2048)
@@ -147,10 +136,9 @@ model AuthenticationProviderProperties {
 @pattern("^[A-Za-z0-9_.:/-]+$")
 scalar AuthenticationScope extends string;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other Network RP enums"
 @doc("Type of the user trust provider.")
 @added(Versions.v2026_01_01)
-@Azure.ResourceManager.Legacy.feature(Features.authenticationPolicy)
+@featureFile(Features.authenticationPolicy)
 union UserTrustProviderType {
   string,
 
@@ -161,9 +149,8 @@ union UserTrustProviderType {
 /**
  * Action to take when a request is unauthenticated.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other Network RP enums"
 @added(Versions.v2026_01_01)
-@Azure.ResourceManager.Legacy.feature(Features.authenticationPolicy)
+@featureFile(Features.authenticationPolicy)
 union OnUnauthenticatedRequest {
   string,
 
@@ -177,9 +164,8 @@ union OnUnauthenticatedRequest {
   Deny: "deny",
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other Network RP operation interfaces"
 @added(Versions.v2026_01_01)
-@Azure.ResourceManager.Legacy.feature(Features.authenticationPolicy)
+@featureFile(Features.authenticationPolicy)
 @armResourceOperations(#{ omitTags: true })
 interface AuthenticationPolicies {
   /**

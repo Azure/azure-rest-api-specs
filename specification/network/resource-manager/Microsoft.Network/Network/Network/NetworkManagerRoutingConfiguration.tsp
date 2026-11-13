@@ -4,28 +4,21 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./NetworkManager.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Network;
 /**
  * Defines the routing configuration
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(NetworkManager)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Legacy.feature(Features.networkManager)
-model NetworkManagerRoutingConfiguration extends ChildResource {
-  properties?: NetworkManagerRoutingConfigurationPropertiesFormat;
-
+@featureFile(Features.networkManager)
+model NetworkManagerRoutingConfiguration
+  is ChildResourceInstance<NetworkManagerRoutingConfigurationPropertiesFormat> {
   @visibility(Lifecycle.Read)
   @path
   @key("configurationName")
@@ -40,8 +33,7 @@ model NetworkManagerRoutingConfiguration extends ChildResource {
   systemData?: Azure.ResourceManager.Foundations.SystemData;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.networkManager)
+@featureFile(Features.networkManager)
 @armResourceOperations
 interface NetworkManagerRoutingConfigurations {
   /**

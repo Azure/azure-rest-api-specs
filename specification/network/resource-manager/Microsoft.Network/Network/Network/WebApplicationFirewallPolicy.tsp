@@ -3,27 +3,20 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Network;
 /**
  * Defines web application firewall policy.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model WebApplicationFirewallPolicy extends Common.Resource {
-  properties?: WebApplicationFirewallPolicyPropertiesFormat;
-
+@featureFile(Features.applicationGateway)
+model WebApplicationFirewallPolicy
+  is ResourceInstance<WebApplicationFirewallPolicyPropertiesFormat> {
   @visibility(Lifecycle.Read)
   @path
   @key("policyName")
@@ -38,8 +31,7 @@ model WebApplicationFirewallPolicy extends Common.Resource {
   etag?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@featureFile(Features.applicationGateway)
 @armResourceOperations
 interface WebApplicationFirewallPolicies {
   /**
