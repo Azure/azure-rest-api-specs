@@ -1,5 +1,10 @@
 import path from "node:path";
 
+export function isConcreteApiVersion(value: string): boolean {
+  const version = value.trim().toLowerCase();
+  return version.length > 0 && version !== "all" && version !== "multiple-versions";
+}
+
 export function toStringValue(value: unknown): string {
   if (value === null || value === undefined) {
     return "";

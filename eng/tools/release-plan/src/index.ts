@@ -21,11 +21,7 @@ import type {
   OctokitLike,
   TypeSpecProjectInfo,
 } from "./types.ts";
-import {
-  createOctokit,
-  getTypeSpecProjectInfoFromCommit,
-  NEW_API_VERSION_LABEL,
-} from "./typespec-project.ts";
+import { createOctokit, getTypeSpecProjectInfoFromCommit } from "./typespec-project.ts";
 
 /**
  * Main CLI entry point.
@@ -33,8 +29,6 @@ import {
 export async function main(): Promise<void> {
   let projectInfo: TypeSpecProjectInfo | null = null;
   let resolvedPrNumber: number | undefined;
-  let hasNewApiVersionLabel = false;
-  let isTspConfigChanged = false;
   let releasePlanEnsured = false;
   let args: CliArguments;
   let octokit: OctokitLike;
@@ -68,10 +62,8 @@ export async function main(): Promise<void> {
       console.log(
         `Commit ${commitSha} is associated with a PR that skips release plan automation.`,
       );
-      process.exit(0);
+      return;
     }
-
-    hasNewApiVersionLabel = commitResult.hasNewApiVersionLabel;
 
     resolvedPrNumber = commitResult.prNumber;
     if (commitResult.multipleProjectPaths && commitResult.multipleProjectPaths.length > 1) {
@@ -105,16 +97,15 @@ export async function main(): Promise<void> {
     const commitFiles = commitResult.changedFiles;
     const specFiles = commitFiles.filter((f) => f.filename.startsWith("specification/"));
     const hasTspFiles = specFiles.some((f) => f.filename.endsWith(".tsp"));
-    isTspConfigChanged = specFiles.some(
+    const isTspConfigChanged = specFiles.some(
       (f) => path.posix.basename(f.filename) === "tspconfig.yaml",
     );
 
-    // Skip only if both conditions are true: no label AND no TypeSpec files
-    if (!hasNewApiVersionLabel && !hasTspFiles && !isTspConfigChanged) {
+    if (!hasTspFiles && !isTspConfigChanged) {
       console.log(
-        `Commit ${commitSha} is not associated with a PR that has the '${NEW_API_VERSION_LABEL}' label and does not contain TypeSpec files. Skipping release plan processing.`,
+        `Commit ${commitSha} does not change TypeSpec files or tspconfig.yaml. Skipping release plan processing.`,
       );
-      process.exit(0);
+      return;
     }
 
     projectInfo = commitResult.projectInfo;
@@ -125,7 +116,7 @@ export async function main(): Promise<void> {
 
     if (projectInfo === null) {
       console.log("There are no TypeSpec changes in the PR or commit.");
-      process.exit(0);
+      return;
     }
 
     console.log(
@@ -147,17 +138,25 @@ export async function main(): Promise<void> {
         testReleasePlan: args.testReleasePlan,
       },
       runner,
-      hasNewApiVersionLabel || isTspConfigChanged,
     );
     releasePlanEnsured = true;
 
     writeReleasePlanResult(result, args.outputFile);
 
-    // Post comment on PR if release plan was created
-    if (result.outcome === "created" && resolvedPrNumber) {
+    const manualCreationRequired = result.outcome === "manual_required";
+    if (manualCreationRequired) {
+      console.warn(
+        "##vso[task.logissue type=warning]Manual release plan required: a single concrete API version " +
+          "could not be determined. Select the intended version and create or link a plan at " +
+          "https://aka.ms/azsdk/releaseplan-dashboard, then rerun with the ReleasePlanId parameter.",
+      );
+    }
+    if ((result.outcome === "created" || manualCreationRequired) && resolvedPrNumber) {
       try {
         const planLinkValue = result.releasePlan?.release_plan_link;
-        const planIdValue = result.releasePlan?.ReleasePlanId;
+        const planIdValue =
+          result.releasePlan?.release_plan_details?.ReleasePlanId ??
+          result.releasePlan?.ReleasePlanId;
         const planLink = typeof planLinkValue === "string" ? planLinkValue : "";
         const planId =
           typeof planIdValue === "string" || typeof planIdValue === "number" ? planIdValue : "";
@@ -171,29 +170,30 @@ export async function main(): Promise<void> {
           planLink,
           apiVersion: projectInfo.apiVersion,
           tspProjectPath: projectInfo.tspProjectPath,
+          manualCreationRequired,
         });
 
-        console.log("Posted release plan comment on PR.");
+        console.log(
+          manualCreationRequired
+            ? "Posted manual release plan instructions on PR."
+            : "Posted release plan comment on PR.",
+        );
       } catch (commentError) {
         const message = commentError instanceof Error ? commentError.message : String(commentError);
         console.warn(`Warning: Failed to post comment on PR: ${message}`);
       }
     } else if (result.outcome === "created") {
       console.log("Release plan created, but no associated PR was found. Skipping PR comment.");
-    } else if (result.outcome === "not_found") {
-      console.log("new-api-version label not present and no existing release plan was found.");
     }
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     console.error(`release-plan tool failed: ${message}`);
+    console.warn(
+      "##vso[task.logissue type=warning]Release plan processing failed. Check existing plans and fix " +
+        "the error before rerunning, or create or link a plan at https://aka.ms/azsdk/releaseplan-dashboard.",
+    );
 
-    // Try to post error comment on PR if available and PR has new-api-version label
-    if (
-      !releasePlanEnsured &&
-      resolvedPrNumber &&
-      projectInfo &&
-      (hasNewApiVersionLabel || isTspConfigChanged)
-    ) {
+    if (!releasePlanEnsured && resolvedPrNumber && projectInfo) {
       try {
         await postReleasePlanErrorComment({
           octokit: octokit!,
@@ -202,6 +202,7 @@ export async function main(): Promise<void> {
           prNumber: resolvedPrNumber,
           error: message,
           tspProjectPath: projectInfo.tspProjectPath,
+          apiVersion: projectInfo.apiVersion,
         });
         console.log("Posted error comment on PR.");
       } catch (commentError) {
@@ -266,7 +267,6 @@ export {
   getPullRequestLabels,
   getTypeSpecProjectInfoFromCommit,
   getTypeSpecProjectVersionFromMetadata,
-  NEW_API_VERSION_LABEL,
   resolveTypeSpecMetadata,
   SKIP_RELEASE_PLAN_AUTOMATION_LABEL,
 } from "./typespec-project.ts";

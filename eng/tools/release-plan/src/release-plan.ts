@@ -1,6 +1,7 @@
 import { spawnSync } from "node:child_process";
 import path, { join } from "node:path";
 import process from "node:process";
+import { isConcreteApiVersion } from "./sdk-workflow-common.ts";
 import type {
   ApiReleaseType,
   AzsdkRunner,
@@ -19,7 +20,7 @@ export function createAzdskRunner(): AzsdkRunner {
 }
 
 /**
- * Ensures release plan exists: by PR first, then by path+release type, else create one.
+ * Reuses an in-progress or finished plan for the same project and API version, or creates one.
  * @param context The release plan command context containing PR, project, and release info
  * @param runner Function to execute azsdk release-plan commands
  * @returns Result indicating whether plan was found by PR, by path, or newly created
@@ -27,17 +28,13 @@ export function createAzdskRunner(): AzsdkRunner {
 export function ensureReleasePlan(
   context: ReleasePlanCommandContext,
   runner: AzsdkRunner,
-  allowCreate = true,
 ): EnsureReleasePlanResult {
-  if (context.prUrl) {
-    const existingByPr = runGetReleasePlanByPr(context.prUrl, context.apiReleaseType, runner);
-    if (existingByPr) {
-      return {
-        outcome: "existing_by_pr",
-        releasePlan: existingByPr,
-        details: buildDetails(context),
-      };
-    }
+  if (!isConcreteApiVersion(context.apiVersion)) {
+    return {
+      outcome: "manual_required",
+      releasePlan: null,
+      details: buildDetails(context),
+    };
   }
 
   const existingByPath = runGetReleasePlanByPath(
@@ -47,6 +44,8 @@ export function ensureReleasePlan(
     runner,
   );
   if (existingByPath) {
+    validateReturnedPlan(existingByPath, context);
+    console.log(`Reusing release plan for API version '${context.apiVersion}'.`);
     return {
       outcome: "existing_by_path",
       releasePlan: existingByPath,
@@ -54,20 +53,41 @@ export function ensureReleasePlan(
     };
   }
 
-  if (!allowCreate) {
-    return {
-      outcome: "not_found",
-      releasePlan: null,
-      details: buildDetails(context),
-    };
-  }
-
-  const created = runCreateReleasePlan(context, runner);
+  const plan = runCreateReleasePlan(context, runner);
+  validateReturnedPlan(plan, context);
   return {
-    outcome: "created",
-    releasePlan: created,
+    outcome: plan.outcome === "created" ? "created" : "existing_by_path",
+    releasePlan: plan,
     details: buildDetails(context),
   };
+}
+
+function validateReturnedPlan(plan: ReleasePlanData, context: ReleasePlanCommandContext): void {
+  const details = plan.release_plan_details;
+  if (
+    typeof details?.SpecAPIVersion !== "string" ||
+    typeof details.Status !== "string" ||
+    typeof details.APISpecProjectPath !== "string"
+  ) {
+    throw new Error("Release plan response is missing its API version, status, or project path.");
+  }
+  if (details.SpecAPIVersion.trim().toLowerCase() !== context.apiVersion.trim().toLowerCase()) {
+    throw new Error(
+      `Release plan API version '${details.SpecAPIVersion}' does not match '${context.apiVersion}'.`,
+    );
+  }
+  if (
+    details.APISpecProjectPath.replaceAll("\\", "/") !==
+    context.tspProjectPath.replaceAll("\\", "/")
+  ) {
+    throw new Error(
+      `Release plan project '${details.APISpecProjectPath}' does not match '${context.tspProjectPath}'.`,
+    );
+  }
+  const status = details.Status.trim().toLowerCase();
+  if (status !== "in progress" && status !== "finished") {
+    throw new Error(`Release plan status '${details.Status}' is not In Progress or Finished.`);
+  }
 }
 
 /**
@@ -88,37 +108,13 @@ function buildDetails(context: ReleasePlanCommandContext): EnsureReleasePlanResu
 }
 
 /**
- * Retrieves release plan by pull request URL and API release type.
- * @param prUrl GitHub PR URL (e.g., https://github.com/owner/repo/pull/123)
- * @param apiReleaseType API release type to match
- * @param runner Function to execute azsdk commands
- * @returns Release plan object if found, null if not found or error occurred
- */
-function runGetReleasePlanByPr(
-  prUrl: string,
-  apiReleaseType: ApiReleaseType,
-  runner: AzsdkRunner,
-): ReleasePlanData | null {
-  const args = [
-    "release-plan",
-    "get",
-    "--pull-request",
-    prUrl,
-    "--api-release-type",
-    apiReleaseType,
-    "--output",
-    "json",
-  ];
-  return parseReleasePlanResult(runner(args));
-}
-
-/**
  * Retrieves release plan by TypeSpec project path, API version, and API release type.
  * @param tspProjectPath Path to TypeSpec project (relative to workspace)
  * @param apiVersion API version to match
  * @param apiReleaseType API release type (Private Preview, Public Preview, or GA)
  * @param runner Function to execute azsdk commands
- * @returns Release plan object if found, null if not found or error occurred
+ * @returns Release plan object if found, null if not found
+ * @throws Error if the lookup fails or returns invalid JSON
  */
 function runGetReleasePlanByPath(
   tspProjectPath: string,
@@ -144,25 +140,52 @@ function runGetReleasePlanByPath(
 /**
  * Parses release plan command result.
  * @param result Command execution result with exit code and output
- * @returns Parsed release plan object if successful, null if failed or empty
+ * @returns Parsed release plan object if successful, null if not found
+ * @throws Error if the lookup fails or returns invalid JSON
  */
 function parseReleasePlanResult(result: CommandResult): ReleasePlanData | null {
-  if (result.exitCode !== 0) {
-    return null;
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(result.stdout);
+  } catch (error) {
+    if (result.exitCode !== 0) {
+      throw new Error(`Release plan get failed. ${result.stderr || result.stdout}`, {
+        cause: error,
+      });
+    }
+    throw new Error(`Failed to parse JSON from azsdk output: ${result.stdout}`, { cause: error });
   }
 
-  try {
-    const parsed: unknown = JSON.parse(result.stdout);
-    if (parsed === null) {
-      return null;
+  if (parsed === null || typeof parsed !== "object" || Array.isArray(parsed)) {
+    throw new Error(
+      `Expected JSON object with an explicit outcome from azsdk output: ${result.stdout}`,
+    );
+  }
+  if ("outcome" in parsed && parsed.outcome === "not_found") {
+    if (
+      ("release_plan_details" in parsed && parsed.release_plan_details != null) ||
+      (result.exitCode !== 0 && result.exitCode !== 1) ||
+      ("response_errors" in parsed &&
+        Array.isArray(parsed.response_errors) &&
+        parsed.response_errors.length > 0) ||
+      ("response_error" in parsed &&
+        parsed.response_error != null &&
+        parsed.response_error !== "" &&
+        parsed.response_error !== "Failed to get release plan details.")
+    ) {
+      throw new Error(`Invalid no-match response from azsdk: ${result.stdout}`);
     }
-    if (typeof parsed !== "object" || Array.isArray(parsed)) {
-      return null;
-    }
-    return parsed as ReleasePlanData;
-  } catch {
     return null;
   }
+  if (result.exitCode !== 0) {
+    throw new Error(`Release plan get failed. ${result.stderr || result.stdout}`);
+  }
+  if (!("outcome" in parsed) || parsed.outcome !== "existing") {
+    throw new Error(
+      "Release plan lookup must report outcome 'existing' or 'not_found'. Update the azsdk CLI before retrying.",
+    );
+  }
+  return parsed as ReleasePlanData;
 }
 
 /**
@@ -195,6 +218,8 @@ function runCreateReleasePlan(
     context.prUrl,
     "--test-release",
     String(context.testReleasePlan),
+    "--expected-api-version",
+    context.apiVersion,
     ...(context.apiReleaseType === "Private Preview"
       ? []
       : ["--spec-commit-sha", context.specCommitSha]),
@@ -207,15 +232,21 @@ function runCreateReleasePlan(
     throw new Error(`Release plan create failed. ${result.stderr || result.stdout}`);
   }
 
+  let parsed: unknown;
   try {
-    const parsed: unknown = JSON.parse(result.stdout);
-    if (parsed === null || typeof parsed !== "object" || Array.isArray(parsed)) {
-      throw new Error(`Expected JSON object from azsdk output: ${result.stdout}`);
-    }
-    return parsed as ReleasePlanData;
-  } catch {
+    parsed = JSON.parse(result.stdout);
+  } catch (error) {
+    throw new Error(`Failed to parse JSON from azsdk output: ${result.stdout}`, { cause: error });
+  }
+  if (parsed === null || typeof parsed !== "object" || Array.isArray(parsed)) {
     throw new Error(`Failed to parse JSON from azsdk output: ${result.stdout}`);
   }
+  if (!("outcome" in parsed) || (parsed.outcome !== "created" && parsed.outcome !== "existing")) {
+    throw new Error(
+      "Release plan creation must report outcome 'created' or 'existing'. Update the azsdk CLI before retrying.",
+    );
+  }
+  return parsed as ReleasePlanData;
 }
 
 /**
