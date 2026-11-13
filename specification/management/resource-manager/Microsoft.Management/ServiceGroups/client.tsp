@@ -18,6 +18,12 @@ namespace Microsoft.Management;
 // to keep the historical SDK name; hide the page envelope from the public API.
 @@clientName(ServiceGroups, "ServiceGroupsOperationGroup", "csharp");
 @@clientName(ProvisioningState, "ServiceGroupProvisioningState", "csharp");
+@@clientName(ListAncestorsRequest, "ListAncestorsContent", "csharp");
+@@clientName(ListAncestorsResponse, "ListAncestorsResult", "csharp");
+@@clientName(ListDescendantsRequest, "ListDescendantsContent", "csharp");
+@@clientName(ListDescendantsResponse, "ListDescendantsResult", "csharp");
+@@clientName(ListMembersRequest, "ListMembersContent", "csharp");
+@@clientName(ListMembersResponse, "ListMembersResult", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mark listAncestors as pageable to match the previous SDK Pageable<ServiceGroupResource> return type"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
