@@ -1,7 +1,10 @@
 import { SdkName } from "@azure-tools/specs-shared/sdk-types";
+import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { beforeEach, describe, expect, test, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
+import { stringify } from "yaml";
 import {
   detectChangedSpecConfigFiles,
   groupSpecConfigPaths,
@@ -370,6 +373,132 @@ describe("detectChangedSpecConfigFiles", () => {
         "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/readme.md",
       typespecProject:
         "specification/service1/resource-manager/Microsoft.Service1/WidgetManagement/tspconfig.yaml",
+    });
+  });
+
+  describe("additionalDirectories", () => {
+    const project = "specification/ai-foundry/data-plane/Foundry";
+    const sdkProject = `${project}/src/sdk-python-js-azure-ai-projects`;
+    const sharedDirectory = `${project}/src/tools`;
+    let temporaryRepo: string;
+
+    function writeConfig(projectPath: string, additionalDirectories?: unknown): void {
+      const directory = path.join(temporaryRepo, projectPath);
+      fs.mkdirSync(directory, { recursive: true });
+      fs.writeFileSync(
+        path.join(directory, "tspconfig.yaml"),
+        stringify({
+          options: {
+            "@azure-tools/typespec-client-generator-cli": { additionalDirectories },
+          },
+        }),
+      );
+    }
+
+    async function detectChanges(files: string[]): Promise<ChangedSpecs[]> {
+      vi.mocked(getChangedFiles).mockResolvedValue(files);
+      const result = await detectChangedSpecConfigFiles({
+        ...mockCommandInput,
+        localSpecRepoPath: temporaryRepo,
+      });
+      return result.map(normalizeResultItem);
+    }
+
+    beforeEach(() => {
+      temporaryRepo = fs.mkdtempSync(path.join(os.tmpdir(), "spec-gen-sdk-dependencies-"));
+      writeConfig(project);
+      fs.mkdirSync(path.join(temporaryRepo, sharedDirectory), { recursive: true });
+    });
+
+    afterEach(() => {
+      fs.rmSync(temporaryRepo, { recursive: true, force: true });
+    });
+
+    test.each([
+      sharedDirectory,
+      `${sharedDirectory}/`,
+      sharedDirectory.replaceAll("/", "\\") + "\\",
+    ])(
+      "includes consuming SDK projects for shared-only edits with directory %s",
+      async (directory) => {
+        writeConfig(sdkProject, [directory]);
+        writeConfig(`${project}/src/sdk-csharp`, [directory]);
+        writeConfig(`${project}/src/unrelated-sdk`, [`${project}/src/connections`]);
+        const sharedFile = `${sharedDirectory}/models.tsp`;
+
+        const result = await detectChanges([sharedFile.replaceAll("/", "\\")]);
+
+        expect(result.map((item) => item.typespecProject)).toEqual([
+          `${project}/tspconfig.yaml`,
+          `${project}/src/sdk-csharp/tspconfig.yaml`,
+          `${sdkProject}/tspconfig.yaml`,
+        ]);
+        expect(
+          result.every((item) => item.specs.length === 1 && item.specs[0] === sharedFile),
+        ).toBe(true);
+      },
+    );
+
+    test("merges direct edits and overlapping dependencies without duplicates", async () => {
+      writeConfig(sdkProject, [sharedDirectory, `${sharedDirectory}/nested`, `${project}/src`]);
+      fs.mkdirSync(path.join(temporaryRepo, sharedDirectory, "nested"), { recursive: true });
+      const sharedFile = `${sharedDirectory}/nested/models.tsp`;
+      const sdkFile = `${sdkProject}/client.tsp`;
+
+      const result = await detectChanges([sdkFile, sharedFile]);
+
+      expect(result).toHaveLength(2);
+      expect(
+        result.find((item) => item.typespecProject === `${sdkProject}/tspconfig.yaml`),
+      ).toEqual({
+        typespecProject: `${sdkProject}/tspconfig.yaml`,
+        specs: [sdkFile, sharedFile],
+      });
+    });
+
+    test("does not select consumers for similarly prefixed directories", async () => {
+      writeConfig(sdkProject, [sharedDirectory]);
+      const otherDirectory = `${sharedDirectory}-preview`;
+      fs.mkdirSync(path.join(temporaryRepo, otherDirectory), { recursive: true });
+      const changedFile = `${otherDirectory}/models.tsp`;
+
+      const result = await detectChanges([changedFile]);
+
+      expect(result).toEqual([
+        { typespecProject: `${project}/tspconfig.yaml`, specs: [changedFile] },
+      ]);
+    });
+
+    test("finds cross-service consumers when a shared directory has been deleted", async () => {
+      const deletedDirectory = "specification/shared-contracts/deleted";
+      writeConfig(sdkProject, [deletedDirectory]);
+      const deletedFile = `${deletedDirectory}/models.tsp`;
+
+      const result = await detectChanges([deletedFile]);
+
+      expect(result).toEqual([
+        { typespecProject: `${sdkProject}/tspconfig.yaml`, specs: [deletedFile] },
+      ]);
+    });
+
+    test.each([{ directories: "not-an-array" }, { directories: [42] }])(
+      "reports invalid additionalDirectories instead of silently skipping consumers: %j",
+      async ({ directories }) => {
+        writeConfig(sdkProject, directories);
+
+        await expect(detectChanges([`${sharedDirectory}/models.tsp`])).rejects.toThrow(
+          /additionalDirectories.*array of non-empty strings/,
+        );
+      },
+    );
+
+    test("reports the config path when dependency YAML cannot be parsed", async () => {
+      writeConfig(sdkProject);
+      fs.writeFileSync(path.join(temporaryRepo, sdkProject, "tspconfig.yaml"), "options: [");
+
+      await expect(detectChanges([`${sharedDirectory}/models.tsp`])).rejects.toThrow(
+        /tspconfig\.yaml/,
+      );
     });
   });
 });
