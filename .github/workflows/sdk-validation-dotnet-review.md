@@ -15,17 +15,17 @@ on:
       uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
       with:
         script: |
+          const runAttempt = context.payload.workflow_run.run_attempt;
+          if (!Number.isSafeInteger(runAttempt) || runAttempt < 1) {
+            throw new Error(`Invalid workflow run attempt: ${JSON.stringify(runAttempt)}`);
+          }
+          const attemptSuffix = `-attempt-${runAttempt}`;
           const response = await github.rest.actions.listWorkflowRunArtifacts({
             owner: context.repo.owner,
             repo: context.repo.repo,
             run_id: context.payload.workflow_run.id,
             per_page: 100,
           });
-          const runAttempt = context.payload.workflow_run.run_attempt;
-          if (!Number.isSafeInteger(runAttempt) || runAttempt < 1) {
-            throw new Error(`Invalid workflow run attempt: ${JSON.stringify(runAttempt)}`);
-          }
-          const attemptSuffix = `-attempt-${runAttempt}`;
           const artifacts = response.data.artifacts.filter(
             (artifact) =>
               !artifact.expired &&
@@ -304,9 +304,9 @@ include an empty `findings` array.
 }
 ```
 
-Only include `sourceLocation` when the exact line is present in a changed
-TypeSpec file from the context. Otherwise omit it so a later publisher cannot
-create a misleading inline comment. Use `typespec` for language-independent
+Only include `sourceLocation` when the exact line was added or modified by this
+PR in a changed TypeSpec file from the context. Otherwise omit it so a later
+publisher cannot create a misleading inline comment. Use `typespec` for language-independent
 contract fixes, `client.tsp` for C#-scoped API surface adjustments,
 `sdk-repository` when a spec author cannot resolve the finding, `duplicate`
 only when the provided evidence proves another signal already reported it, and
