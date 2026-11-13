@@ -4,6 +4,7 @@ import "../voice-agents/routes.tsp";
 import "../toolboxes/routes.tsp";
 import "../skills/routes.tsp";
 import "../agents-session-files/routes.tsp";
+import "../agents-session-compute/routes.tsp";
 import "../managed-blueprints/routes.tsp";
 import "../agents-optimization/routes.tsp";
 
@@ -37,6 +38,11 @@ namespace Azure.AI.Projects {
   // Fix the xref.
   // --------------------------------------------------------------------------------
   @@clientNamespace(OpenAI, "Azure.AI.Projects.Agents", "csharp");
+  @@clientNamespace(
+    Azure.AI.ProjectsInternal,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
 
   // --------------------------------------------------------------------------------
   // Root client
@@ -194,6 +200,30 @@ namespace Azure.AI.Projects {
   @@access(Agents.getSession, Access.internal);
   @@access(Agents.deleteSession, Access.internal);
   @@access(Agents.stopSession, Access.internal);
+
+  // --------------------------------------------------------------------------------
+  // Session compute models: C# names that avoid the reserved Options/Request/Response suffixes
+  // --------------------------------------------------------------------------------
+  @@clientName(
+    SessionComputeProviderOptions,
+    "SessionComputeProviderConfig",
+    "csharp"
+  );
+  @@clientName(
+    SessionComputeExecRequest,
+    "SessionComputeExecContent",
+    "csharp"
+  );
+  @@clientName(
+    SessionComputePortRequest,
+    "SessionComputePortContent",
+    "csharp"
+  );
+  @@clientName(
+    SessionComputeExecStreamUpgradeResponse,
+    "SessionComputeExecStreamUpgradeResult",
+    "csharp"
+  );
 
   // --------------------------------------------------------------------------------
   // Toolboxes sub‐client

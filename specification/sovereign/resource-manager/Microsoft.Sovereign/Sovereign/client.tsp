@@ -84,6 +84,11 @@ using Azure.ClientGenerator.Core;
   string,
   "csharp"
 );
+@@alternateType(
+  Microsoft.Sovereign.SovereignViewComplianceDetailResource.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 
 // C#: add Sovereign View context to generic type names; use singular enum names
 @@clientName(
@@ -100,6 +105,16 @@ using Azure.ClientGenerator.Core;
 @@clientName(
   Microsoft.Sovereign.ReportStatus,
   "SovereignViewReportStatus",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Sovereign.ReportState,
+  "SovereignViewReportState",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Sovereign.PolicyComplianceState,
+  "SovereignViewPolicyComplianceState",
   "csharp"
 );
 @@clientName(

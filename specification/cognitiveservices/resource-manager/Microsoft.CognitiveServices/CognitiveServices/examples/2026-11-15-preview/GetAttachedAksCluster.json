@@ -1,0 +1,68 @@
+{
+  "operationId": "AttachedAksClusters_Get",
+  "title": "GetAttachedAksCluster",
+  "parameters": {
+    "api-version": "2026-11-15-preview",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "rgcognitiveservices",
+    "accountName": "myAccount",
+    "attachedAksClusterName": "myAttachment"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rgcognitiveservices/providers/Microsoft.CognitiveServices/accounts/myAccount/attachedAksClusters/myAttachment",
+        "name": "myAttachment",
+        "type": "Microsoft.CognitiveServices/accounts/attachedAksClusters",
+        "properties": {
+          "clusterResourceId": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/rgaks/providers/Microsoft.ContainerService/managedClusters/myAks",
+          "capabilities": [
+            "foundryNative",
+            "kuberay"
+          ],
+          "projectBindings": [
+            {
+              "projectId": "22222222-3333-4444-5555-666666666666",
+              "projectName": "myProject",
+              "namespace": "foundry-myproject",
+              "serviceAccountName": "foundry-workload",
+              "allowedCapabilities": [
+                "foundryNative",
+                "kuberay"
+              ],
+              "stage": "Ready",
+              "kubeRayReady": true,
+              "foundryNativeReady": true
+            }
+          ],
+          "status": {
+            "stage": "Ready",
+            "readiness": {
+              "connectorReady": true,
+              "capabilities": [
+                {
+                  "name": "foundryNative",
+                  "ready": true
+                },
+                {
+                  "name": "kuberay",
+                  "ready": true
+                }
+              ],
+              "blockers": []
+            },
+            "health": {
+              "state": "Healthy",
+              "summary": "The attachment is ready for workloads.",
+              "lastObservedAtUtc": "2026-11-15T00:00:00Z",
+              "newWorkAdmissionAllowed": true,
+              "components": [],
+              "reasons": []
+            },
+            "lastUpdatedTimeUtc": "2026-11-15T00:00:00Z"
+          }
+        }
+      }
+    }
+  }
+}
