@@ -9,6 +9,101 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ApiManagement;
 
+/** Routing stage in an AI Gateway alias selection order. */
+@added(Versions.v2026_11_01)
+union AiGatewayAliasSelectionStage {
+  string,
+
+  /** Deterministic priority and weight routing stage. */
+  Priority: "priority",
+
+  /** Automatic model selection stage. */
+  AutoModelSelection: "autoModelSelection",
+
+  /** Stateless session backend preference stage. */
+  SessionBackendPreference: "sessionBackendPreference",
+}
+
+/** Quality and cost objective for automatic model selection. */
+@added(Versions.v2026_11_01)
+union AiGatewayModelSelectionObjective {
+  string,
+
+  /** Balance quality and cost. */
+  Balanced: "Balanced",
+
+  /** Prefer lower cost. */
+  Cost: "Cost",
+
+  /** Prefer higher quality. */
+  Quality: "Quality",
+}
+
+/** Per-request behavior allowed for automatic model selection. */
+@added(Versions.v2026_11_01)
+union AiGatewayAllowedRequestOverride {
+  string,
+
+  /** Allow narrowing the configured selector model pool. */
+  Model: "model",
+
+  /** Allow overriding the selection objective. */
+  Objective: "objective",
+
+  /** Enable chat function-tool compatibility filtering without granting either override. */
+  FilterModelsForToolCompatibility: "filterModelsForToolCompatibility",
+}
+
+/** Stateless backend preference using an existing caller session key. */
+@added(Versions.v2026_11_01)
+model AiGatewaySessionBackendPreference {
+  /** CEL expression returning the caller session key. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "False positive: key is a CEL expression that extracts a non-secret caller session identifier for routing affinity, not a credential."
+  key: string;
+}
+
+/** Stateless backend preference settings to update. */
+@added(Versions.v2026_11_01)
+model AiGatewaySessionBackendPreferenceUpdate {
+  /** CEL expression returning the caller session key. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "False positive: key is a CEL expression that extracts a non-secret caller session identifier for routing affinity, not a credential."
+  key?: string;
+}
+
+/** Automatic model selection configuration for an AI Gateway alias. */
+@added(Versions.v2026_11_01)
+model AiGatewayModelSelection {
+  /** Configured quality/cost objective. */
+  objective: AiGatewayModelSelectionObjective;
+
+  /** Allowed per-request behaviors. Omitting the property or sending an empty array denies overrides and disables function-tool compatibility filtering. */
+  allowedRequestOverrides?: AiGatewayAllowedRequestOverride[];
+}
+
+/** Automatic model selection configuration to update. */
+@added(Versions.v2026_11_01)
+model AiGatewayModelSelectionUpdate
+  is OptionalProperties<AiGatewayModelSelection>;
+
+/** An ordered failure rule for an AI Gateway alias. */
+@added(Versions.v2026_11_01)
+model AiGatewayAliasFailureRule {
+  @doc("Boolean @cel(...) expression evaluated against the current routing failure.")
+  when: string;
+
+  /** Maximum additional attempts on the same backend; defaults to zero. */
+  @minValue(0)
+  retryAttempts?: int32;
+
+  @doc("Optional ISO 8601 duration or duration-valued @cel(...) expression for excluding the failed backend.")
+  excludeFor?: string;
+}
+
+/** An ordered failure rule to update on an AI Gateway alias. */
+@added(Versions.v2026_11_01)
+model AiGatewayAliasFailureRuleUpdate
+  is OptionalProperties<AiGatewayAliasFailureRule>;
+
 /** A model targeted by an AI Gateway alias. */
 @added(Versions.v2026_11_01)
 model AiGatewayAliasTarget {
@@ -21,6 +116,13 @@ model AiGatewayAliasTarget {
       type: "Microsoft.ApiManagement/service/workspaces/modelProviders/models";
     }
   ]>;
+
+  /** Unversioned canonical model name grouping equivalent serving deployments. */
+  @minLength(1)
+  selectorModelName?: string;
+
+  @doc("Optional Boolean CEL expression wrapped in @cel(...) controlling eligibility for new backend selections.")
+  when?: string;
 
   /** Routing priority. Lower values are preferred; the effective default is zero. */
   @minValue(0)
@@ -53,8 +155,22 @@ model AiGatewayAliasProperties {
   @identifiers(#["resourceId"])
   backendModels: AiGatewayAliasTarget[];
 
-  /** Ordered routing stages. Only the routing stage is currently supported. */
-  selectionOrder?: "routing"[];
+  /** Ordered routing stages. */
+  selectionOrder?: AiGatewayAliasSelectionStage[];
+
+  /** Stateless backend preference using an existing caller session key. */
+  sessionBackendPreference?: AiGatewaySessionBackendPreference;
+
+  /** Automatic model selection settings used with the autoModelSelection stage. */
+  autoModelSelection?: AiGatewayModelSelection;
+
+  /** Ordered failure rules; only the first matching rule is applied. */
+  @identifiers(#[])
+  failures?: AiGatewayAliasFailureRule[];
+
+  /** Maximum additional backend attempts after the first request. */
+  @minValue(0)
+  maxRetryAttempts?: int32;
 
   /** Native endpoints common to every target model; translated endpoints are excluded. */
   @visibility(Lifecycle.Read)
@@ -90,8 +206,22 @@ model AiGatewayAliasUpdateProperties {
   @identifiers(#[])
   backendModels?: AiGatewayAliasTargetUpdate[];
 
-  /** Ordered routing stages. Only the routing stage is currently supported. */
-  selectionOrder?: "routing"[];
+  /** Ordered routing stages. */
+  selectionOrder?: AiGatewayAliasSelectionStage[];
+
+  /** Stateless backend preference using an existing caller session key. */
+  sessionBackendPreference?: AiGatewaySessionBackendPreferenceUpdate;
+
+  /** Automatic model selection settings used with the autoModelSelection stage. */
+  autoModelSelection?: AiGatewayModelSelectionUpdate;
+
+  /** Ordered failure rules; only the first matching rule is applied. */
+  @identifiers(#[])
+  failures?: AiGatewayAliasFailureRuleUpdate[];
+
+  /** Maximum additional backend attempts after the first request. */
+  @minValue(0)
+  maxRetryAttempts?: int32;
 
   /** Inline policies applied to requests routed through the alias. */
   @identifiers(#[])
@@ -115,5 +245,4 @@ model AiGatewayAliasResource is ProxyResource<AiGatewayAliasProperties> {
     SegmentName = "aliases",
     NamePattern = "^[a-zA-Z0-9_.-]+$"
   >;
-  ...EntityTagProperty;
 }

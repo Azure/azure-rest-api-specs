@@ -3,11 +3,11 @@
   "operationId": "Agents_createAgent_Agents_createAgentFromCode",
   "parameters": {
     "api-version": "v1",
-    "Foundry-Features": "VoiceAgents=V1Preview",
     "name": "support-soundscape-agent",
     "description": "A telephone support agent with background ambience and call cues.",
     "definition": {
       "kind": "voice",
+      "sub_protocol": "realtime",
       "model_type": "managed",
       "model": "gpt-realtime",
       "instructions": "Help callers with their support requests.",
@@ -68,6 +68,7 @@
             "created_at": 1791792000,
             "definition": {
               "kind": "voice",
+              "sub_protocol": "realtime",
               "model_type": "managed",
               "model": "gpt-realtime",
               "instructions": "Help callers with their support requests.",

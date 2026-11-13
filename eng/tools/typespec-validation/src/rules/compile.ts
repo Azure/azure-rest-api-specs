@@ -7,7 +7,7 @@ import { readFile } from "node:fs/promises";
 import path, { basename, dirname, normalize } from "pathe";
 import { blocks, filePath, indent, lines, verbatim } from "../diagnostic-content.ts";
 import { type Diagnostic, type RuleResult } from "../rule-result.ts";
-import { type Rule } from "../rule.ts";
+import { type Rule, type RuleExecutionOptions } from "../rule.ts";
 import { compileTypeSpec } from "../typespec-compiler.ts";
 import {
   fileExists,
@@ -19,14 +19,17 @@ import {
 export class CompileRule implements Rule {
   readonly name = "Compile";
   readonly description = "Compile TypeSpec";
-
-  async execute(folder: string, logger: ILogger): Promise<RuleResult> {
+  async execute(
+    folder: string,
+    logger: ILogger,
+    { fix = false }: RuleExecutionOptions = {},
+  ): Promise<RuleResult> {
     let success = true;
     const diagnostics: Diagnostic[] = [];
 
     const mainTspExists = await fileExists(path.join(folder, "main.tsp"));
     if (mainTspExists) {
-      const compiled = await compileTypeSpec(folder);
+      const compiled = await compileTypeSpec(folder, { fix });
       const { emittedFiles } = compiled;
       diagnostics.push(...(compiled.diagnostics ?? []));
 
@@ -210,18 +213,32 @@ export class CompileRule implements Rule {
           success = false;
         }
       }
+      if (compiled.changedFiles?.length) {
+        success = false;
+        diagnostics.push({
+          severity: "error",
+          code: "generated-files-changed",
+          path: folder,
+          message: "Files would change after TypeSpec compilation:",
+          details: indent(lines(compiled.changedFiles.map(filePath))),
+          help: "Run `pnpm exec tsp compile .` from the project folder and include the generated files in your change.",
+        });
+      }
     }
 
     const clientTsp = path.join(folder, "client.tsp");
     if (!mainTspExists && (await fileExists(clientTsp))) {
-      const compiled = await compileTypeSpec(clientTsp, { noEmit: true });
+      const compiled = await compileTypeSpec(clientTsp, {
+        noEmit: true,
+        fix,
+      });
       diagnostics.push(...(compiled.diagnostics ?? []));
       if (!compiled.success) {
         success = false;
       }
     }
 
-    if (success) {
+    if (success && fix) {
       const gitDiffResult = await gitDiffTopSpecFolder(folder, logger);
       if (!gitDiffResult.success) {
         success = false;

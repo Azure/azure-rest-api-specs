@@ -3,14 +3,13 @@ parameters:
     default: "sdk/ai"
 emit:
   - "@typespec/openapi3"
-  - "./emitters/voice-event-reference.mjs"
 options:
   "@typespec/openapi3":
     emitter-output-dir: "{project-root}/"
     output-file: "openapi3/{version}/microsoft-foundry-openapi3.{file-type}"
     # output-file: "openapi3/{version}/microsoft-foundry-openapi3.yaml"
     file-type: [yaml, json]
-    omit-unreachable-types: true
+    omit-unreachable-types: false
     openapi-versions:
       - "3.2.0"
   "@typespec/json-schema":
@@ -19,16 +18,37 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/json-schema"
     file-type: json
     bundleId: azure-ai-agents-v2.json
-  "foundry-voice-events":
-    emitter-output-dir: "{project-root}/event-schemas"
 imports:
   - "@azure-tools/typespec-azure-core"
   - "@azure-tools/typespec-azure-core/experimental"
   - "@azure-tools/typespec-client-generator-core"
   # Note: Imports for OpenAI types may use alternate views per tspconfig.yaml
+  - "@azure-tools/openai-typespec/models/assistants"
+  - "@azure-tools/openai-typespec/models/audio"
+  - "@azure-tools/openai-typespec/models/batch"
+  - "@azure-tools/openai-typespec/models/chat"
+  - "@azure-tools/openai-typespec/models/common"
+  - "@azure-tools/openai-typespec/models/completions"
+  - "@azure-tools/openai-typespec/models/containers"
+  - "@azure-tools/openai-typespec/models/conversations"
+  - "@azure-tools/openai-typespec/models/embeddings"
   - "@azure-tools/openai-typespec/models/evals"
+  - "@azure-tools/openai-typespec/models/files"
   - "@azure-tools/openai-typespec/models/fine-tuning"
+  - "@azure-tools/openai-typespec/models/graders"
+  - "@azure-tools/openai-typespec/models/images"
+  - "@azure-tools/openai-typespec/models/live"
+  - "@azure-tools/openai-typespec/models/messages"
+  - "@azure-tools/openai-typespec/models/models"
+  - "@azure-tools/openai-typespec/models/moderations"
+  - "@azure-tools/openai-typespec/models/realtime"
   - "@azure-tools/openai-typespec/models/responses"
+  - "@azure-tools/openai-typespec/models/runs"
+  - "@azure-tools/openai-typespec/models/threads"
+  - "@azure-tools/openai-typespec/models/uploads"
+  - "@azure-tools/openai-typespec/models/vector-stores"
+  - "@azure-tools/openai-typespec/models/video"
+  - "@azure-tools/openai-typespec/models/webhooks"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"

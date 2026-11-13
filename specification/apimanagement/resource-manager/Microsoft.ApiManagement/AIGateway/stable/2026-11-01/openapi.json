@@ -57,6 +57,12 @@
       "name": "AiGatewayResources"
     },
     {
+      "name": "AiGatewayPrivateEndpointConnections"
+    },
+    {
+      "name": "AiGatewayPrivateLinkResources"
+    },
+    {
       "name": "AiGatewayWorkspaceResources"
     },
     {
@@ -646,6 +652,14 @@
             "x-ms-client-name": "ifMatch"
           },
           {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Set to '*' to allow creating a new resource, but prevent updating an existing resource.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
             "name": "resource",
             "in": "body",
             "description": "Resource create parameters.",
@@ -1018,6 +1032,405 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "AiGatewayPrivateEndpointConnections_ListByAiGateway",
+        "tags": [
+          "AiGatewayPrivateEndpointConnections"
+        ],
+        "description": "List AiGatewayResource PrivateEndpointConnections",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayPrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List private endpoint connections for an AI Gateway": {
+            "$ref": "./examples/AiGatewayPrivateEndpointConnectionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "operationId": "AiGatewayPrivateEndpointConnections_Get",
+        "tags": [
+          "AiGatewayPrivateEndpointConnections"
+        ],
+        "description": "Get a AiGatewayResource PrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a private endpoint connection for an AI Gateway": {
+            "$ref": "./examples/AiGatewayPrivateEndpointConnectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AiGatewayPrivateEndpointConnections_CreateOrUpdate",
+        "tags": [
+          "AiGatewayPrivateEndpointConnections"
+        ],
+        "description": "Approves or rejects a private endpoint connection. While the decision is applied, `properties.provisioningState` is `Updating`, a service-defined value of the extensible provisioning state.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AiGatewayPrivateEndpointConnection' update operation succeeded",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "Resource 'AiGatewayPrivateEndpointConnection' create operation succeeded",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Approve or reject a private endpoint connection for an AI Gateway": {
+            "$ref": "./examples/AiGatewayPrivateEndpointConnectionCreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AiGatewayPrivateEndpointConnections_Delete",
+        "tags": [
+          "AiGatewayPrivateEndpointConnections"
+        ],
+        "description": "Deletes a private endpoint connection. Until the connection is removed, `properties.provisioningState` is `Deleting`.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a private endpoint connection for an AI Gateway": {
+            "$ref": "./examples/AiGatewayPrivateEndpointConnectionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/privateLinkResources": {
+      "get": {
+        "operationId": "AiGatewayPrivateLinkResources_ListByAiGateway",
+        "tags": [
+          "AiGatewayPrivateLinkResources"
+        ],
+        "description": "List AiGatewayResource PrivateLinks",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayPrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List private link resources for an AI Gateway": {
+            "$ref": "./examples/AiGatewayPrivateLinkResourceList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "operationId": "AiGatewayPrivateLinkResources_Get",
+        "tags": [
+          "AiGatewayPrivateLinkResources"
+        ],
+        "description": "Get a AiGatewayResource PrivateLink",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+          },
+          {
+            "name": "privateLinkResourceName",
+            "in": "path",
+            "description": "The name of the private link associated with the Azure resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z][a-zA-Z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a private link resource for an AI Gateway": {
+            "$ref": "./examples/AiGatewayPrivateLinkResourceGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces": {
+      "get": {
+        "operationId": "AiGatewayWorkspaceResources_ListByAiGateway",
+        "tags": [
+          "AiGatewayWorkspaceResources"
+        ],
+        "description": "List AiGatewayWorkspaceResource resources by AiGatewayResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayWorkspaceResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List AI Gateway workspaces": {
+            "$ref": "./examples/AiGatewayWorkspaceList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}": {
       "get": {
         "operationId": "AiGatewayWorkspaceResources_Get",
@@ -1363,6 +1776,14 @@
             "x-ms-client-name": "ifMatch"
           },
           {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Set to '*' to allow creating a new resource, but prevent updating an existing resource.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
             "name": "resource",
             "in": "body",
             "description": "Resource create parameters.",
@@ -1393,6 +1814,9 @@
           }
         },
         "x-ms-examples": {
+          "Create an AI Gateway alias with automatic model selection and failover": {
+            "$ref": "./examples/AiGatewayAliasCreateAutoModelSelection.json"
+          },
           "Create or update an AI Gateway Alias": {
             "$ref": "./examples/AiGatewayAliasCreate.json"
           }
@@ -1769,6 +2193,14 @@
             "x-ms-client-name": "ifMatch"
           },
           {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Set to '*' to allow creating a new resource, but prevent updating an existing resource.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
             "name": "resource",
             "in": "body",
             "description": "Resource create parameters.",
@@ -2009,13 +2441,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/modelProviders/{modelProviderName}/listCredentials": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/modelProviders/{modelProviderName}/listSecrets": {
       "post": {
-        "operationId": "AiGatewayModelProviderResources_ListCredentials",
+        "operationId": "AiGatewayModelProviderResources_ListSecrets",
         "tags": [
           "AiGatewayModelProviderResources"
         ],
-        "description": "Returns the stored model-provider credential value, including the secret.",
+        "description": "Returns the stored model-provider authentication configuration, including secret values.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2055,7 +2487,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AiGatewayCredentialValue"
+              "$ref": "#/definitions/AiGatewayModelProviderSecrets"
             }
           },
           "default": {
@@ -2066,8 +2498,8 @@
           }
         },
         "x-ms-examples": {
-          "List model provider credentials": {
-            "$ref": "./examples/AiGatewayModelProviderListCredentials.json"
+          "List model provider secrets": {
+            "$ref": "./examples/AiGatewayModelProviderListSecrets.json"
           }
         }
       }
@@ -2185,7 +2617,7 @@
             "description": "The name of the AiGatewayModelResource",
             "required": true,
             "type": "string",
-            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+            "pattern": "^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$"
           }
         ],
         "responses": {
@@ -2254,7 +2686,7 @@
             "description": "The name of the AiGatewayModelResource",
             "required": true,
             "type": "string",
-            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+            "pattern": "^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$"
           },
           {
             "name": "If-Match",
@@ -2263,6 +2695,14 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Set to '*' to allow creating a new resource, but prevent updating an existing resource.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
             "name": "resource",
@@ -2346,7 +2786,7 @@
             "description": "The name of the AiGatewayModelResource",
             "required": true,
             "type": "string",
-            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+            "pattern": "^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$"
           },
           {
             "$ref": "#/parameters/If-Match"
@@ -2427,7 +2867,7 @@
             "description": "The name of the AiGatewayModelResource",
             "required": true,
             "type": "string",
-            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+            "pattern": "^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$"
           },
           {
             "$ref": "#/parameters/If-Match"
@@ -2499,7 +2939,7 @@
             "description": "The name of the AiGatewayModelResource",
             "required": true,
             "type": "string",
-            "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+            "pattern": "^[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]$"
           }
         ],
         "responses": {
@@ -2748,6 +3188,14 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Set to '*' to allow creating a new resource, but prevent updating an existing resource.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
             "name": "resource",
@@ -3165,6 +3613,14 @@
             "x-ms-client-name": "ifMatch"
           },
           {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Set to '*' to allow creating a new resource, but prevent updating an existing resource.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
             "name": "resource",
             "in": "body",
             "description": "Resource create parameters.",
@@ -3408,10 +3864,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/toolServers/{toolServerName}/endpoints/{endpointId}/oauth2/getLoginLinks": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/workspaces/{workspaceName}/toolServers/{toolServerName}/getOauth2LoginLinks": {
       "post": {
-        "operationId": "AiGatewayToolServerEndpointOperations_GetLoginLinks",
-        "description": "Gets links to complete OAuth consent for a tool-server endpoint.",
+        "operationId": "AiGatewayToolServerResources_GetOauth2LoginLinks",
+        "tags": [
+          "AiGatewayToolServerResources"
+        ],
+        "description": "Gets links to complete OAuth consent for a tool server endpoint.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -3425,7 +3884,7 @@
           {
             "name": "aiGatewayName",
             "in": "path",
-            "description": "AI Gateway resource name.",
+            "description": "The name of the AiGatewayResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
@@ -3433,7 +3892,7 @@
           {
             "name": "workspaceName",
             "in": "path",
-            "description": "Default workspace resource name.",
+            "description": "The name of the AiGatewayWorkspaceResource",
             "required": true,
             "type": "string",
             "pattern": "^default$"
@@ -3441,17 +3900,19 @@
           {
             "name": "toolServerName",
             "in": "path",
-            "description": "Tool server resource name.",
+            "description": "The name of the AiGatewayToolServerResource",
             "required": true,
             "type": "string",
             "pattern": "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
           },
           {
-            "name": "endpointId",
-            "in": "path",
-            "description": "Stable identifier of the tool-server endpoint.",
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
             "required": true,
-            "type": "string"
+            "schema": {
+              "$ref": "#/definitions/AiGatewayToolServerLoginLinksRequest"
+            }
           }
         ],
         "responses": {
@@ -3469,8 +3930,8 @@
           }
         },
         "x-ms-examples": {
-          "Get OAuth consent links for a tool-server endpoint": {
-            "$ref": "./examples/AiGatewayToolServerGetLoginLinks.json"
+          "Get OAuth consent links for a tool server endpoint": {
+            "$ref": "./examples/AiGatewayToolServerGetOauth2LoginLinks.json"
           }
         }
       }
@@ -3544,141 +4005,63 @@
       "type": "object",
       "description": "External hook settings; omitted fields inherit policy-level settings.",
       "properties": {
-        "endpoint": {
-          "type": "string",
-          "format": "uri",
-          "description": "Hook destination HTTPS URL."
+        "mode": {
+          "$ref": "#/definitions/AiGatewayFailureMode",
+          "description": "Failure mode when the hook call fails."
         },
-        "authorization": {
-          "$ref": "#/definitions/AiGatewayAgentHookAuthorization",
-          "description": "Hook authorization settings."
+        "endpoint": {
+          "$ref": "#/definitions/AiGatewayDestinationEndpoint",
+          "description": "Hook destination URL."
+        },
+        "authentication": {
+          "$ref": "#/definitions/AiGatewayAgentHookAuthentication",
+          "description": "Hook authentication settings."
         },
         "headers": {
-          "type": "object",
+          "type": "array",
           "description": "Literal, non-secret HTTP headers, returned by read operations.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "AiGatewayAgentHookAuthorization": {
-      "type": "object",
-      "description": "Authorization settings for an external agent hook.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/AiGatewayAgentHookAuthorizationType",
-          "description": "Authorization kind."
-        },
-        "identity": {
-          "$ref": "#/definitions/AiGatewayAgentHookIdentity",
-          "description": "Managed identity selection, required for managedIdentity authorization."
-        },
-        "audience": {
-          "type": "string",
-          "format": "uri",
-          "description": "Absolute token audience URI, required for managedIdentity authorization."
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "AiGatewayAgentHookAuthorizationType": {
-      "type": "string",
-      "description": "Authorization kind for an agent hook.",
-      "enum": [
-        "anonymous",
-        "managedIdentity"
-      ],
-      "x-ms-enum": {
-        "name": "AiGatewayAgentHookAuthorizationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Anonymous",
-            "value": "anonymous",
-            "description": "Call without authentication."
+          "items": {
+            "$ref": "#/definitions/AiGatewayNameValuePair"
           },
-          {
-            "name": "ManagedIdentity",
-            "value": "managedIdentity",
-            "description": "Authenticate using a managed identity."
-          }
-        ]
-      }
-    },
-    "AiGatewayAgentHookAuthorizationUpdate": {
-      "type": "object",
-      "description": "Agent-hook authorization settings to update.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/AiGatewayAgentHookAuthorizationType",
-          "description": "Authorization kind."
-        },
-        "identity": {
-          "$ref": "#/definitions/AiGatewayAgentHookIdentityUpdate",
-          "description": "Managed identity selection."
-        },
-        "audience": {
-          "type": "string",
-          "format": "uri",
-          "description": "Token audience URI."
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
-    "AiGatewayAgentHookIdentity": {
+    "AiGatewayAgentHookAuthentication": {
       "type": "object",
-      "description": "Managed identity selected to authorize an agent hook.",
+      "description": "Outbound authentication settings for an external agent hook.",
       "properties": {
-        "type": {
-          "$ref": "#/definitions/AiGatewayAgentHookIdentityType",
-          "description": "Managed identity kind."
+        "managedIdentity": {
+          "$ref": "#/definitions/AiGatewayManagedIdentityAuthentication",
+          "description": "Managed identity configuration for the hook endpoint."
         },
-        "clientId": {
-          "type": "string",
-          "description": "User-assigned identity client ID; omit for a system-assigned identity."
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "AiGatewayAgentHookIdentityType": {
-      "type": "string",
-      "description": "Managed identity kind selected for an agent hook.",
-      "enum": [
-        "systemAssigned",
-        "userAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "AiGatewayAgentHookIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SystemAssigned",
-            "value": "systemAssigned",
-            "description": "Use the gateway's system-assigned identity."
+        "headers": {
+          "type": "array",
+          "description": "Secret HTTP headers injected when calling the hook endpoint.",
+          "items": {
+            "$ref": "#/definitions/AiGatewaySecretHeader"
           },
-          {
-            "name": "UserAssigned",
-            "value": "userAssigned",
-            "description": "Use a user-assigned identity."
-          }
-        ]
+          "x-ms-identifiers": []
+        }
       }
     },
-    "AiGatewayAgentHookIdentityUpdate": {
+    "AiGatewayAgentHookAuthenticationUpdate": {
       "type": "object",
-      "description": "Agent-hook managed identity settings to update.",
+      "description": "Outbound authentication settings to update on an external agent hook.",
       "properties": {
-        "type": {
-          "$ref": "#/definitions/AiGatewayAgentHookIdentityType",
-          "description": "Managed identity kind."
+        "managedIdentity": {
+          "$ref": "#/definitions/AiGatewayManagedIdentityAuthentication",
+          "description": "Managed identity configuration for the hook endpoint."
         },
-        "clientId": {
-          "type": "string",
-          "description": "User-assigned identity client ID; omit for a system-assigned identity."
+        "headers": {
+          "type": "array",
+          "description": "Secret HTTP headers injected when calling the hook endpoint.",
+          "items": {
+            "$ref": "#/definitions/AiGatewaySecretHeaderUpdate"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3686,27 +4069,31 @@
       "type": "object",
       "description": "External hook settings to update.",
       "properties": {
-        "endpoint": {
-          "type": "string",
-          "format": "uri",
-          "description": "Hook destination HTTPS URL."
+        "mode": {
+          "$ref": "#/definitions/AiGatewayFailureMode",
+          "description": "Failure mode when the hook call fails."
         },
-        "authorization": {
-          "$ref": "#/definitions/AiGatewayAgentHookAuthorizationUpdate",
-          "description": "Hook authorization settings."
+        "endpoint": {
+          "$ref": "#/definitions/AiGatewayDestinationEndpointUpdate",
+          "description": "Hook destination URL."
+        },
+        "authentication": {
+          "$ref": "#/definitions/AiGatewayAgentHookAuthenticationUpdate",
+          "description": "Hook authentication settings."
         },
         "headers": {
-          "type": "object",
+          "type": "array",
           "description": "Literal, non-secret HTTP headers.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "items": {
+            "$ref": "#/definitions/AiGatewayNameValuePairUpdate"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
     "AiGatewayAgentHooks": {
       "type": "object",
-      "description": "Lifecycle hooks supported on tool servers.",
+      "description": "Lifecycle hooks supported on models and tool servers.",
       "properties": {
         "preToolCall": {
           "$ref": "#/definitions/AiGatewayAgentHook",
@@ -3715,6 +4102,14 @@
         "postToolCall": {
           "$ref": "#/definitions/AiGatewayAgentHook",
           "description": "Hook invoked after calling a tool."
+        },
+        "preModelCall": {
+          "$ref": "#/definitions/AiGatewayAgentHook",
+          "description": "Hook invoked before calling a model."
+        },
+        "postModelCall": {
+          "$ref": "#/definitions/AiGatewayAgentHook",
+          "description": "Hook invoked after calling a model."
         }
       }
     },
@@ -3729,6 +4124,57 @@
         "postToolCall": {
           "$ref": "#/definitions/AiGatewayAgentHookUpdate",
           "description": "Hook invoked after calling a tool."
+        },
+        "preModelCall": {
+          "$ref": "#/definitions/AiGatewayAgentHookUpdate",
+          "description": "Hook invoked before calling a model."
+        },
+        "postModelCall": {
+          "$ref": "#/definitions/AiGatewayAgentHookUpdate",
+          "description": "Hook invoked after calling a model."
+        }
+      }
+    },
+    "AiGatewayAliasFailureRule": {
+      "type": "object",
+      "description": "An ordered failure rule for an AI Gateway alias.",
+      "properties": {
+        "when": {
+          "type": "string",
+          "description": "Boolean @cel(...) expression evaluated against the current routing failure."
+        },
+        "retryAttempts": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum additional attempts on the same backend; defaults to zero.",
+          "minimum": 0
+        },
+        "excludeFor": {
+          "type": "string",
+          "description": "Optional ISO 8601 duration or duration-valued @cel(...) expression for excluding the failed backend."
+        }
+      },
+      "required": [
+        "when"
+      ]
+    },
+    "AiGatewayAliasFailureRuleUpdate": {
+      "type": "object",
+      "description": "An ordered failure rule to update on an AI Gateway alias.",
+      "properties": {
+        "when": {
+          "type": "string",
+          "description": "Boolean @cel(...) expression evaluated against the current routing failure."
+        },
+        "retryAttempts": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum additional attempts on the same backend; defaults to zero.",
+          "minimum": 0
+        },
+        "excludeFor": {
+          "type": "string",
+          "description": "Optional ISO 8601 duration or duration-valued @cel(...) expression for excluding the failed backend."
         }
       }
     },
@@ -3759,16 +4205,32 @@
         },
         "selectionOrder": {
           "type": "array",
-          "description": "Ordered routing stages. Only the routing stage is currently supported.",
+          "description": "Ordered routing stages.",
           "items": {
-            "type": "string",
-            "enum": [
-              "routing"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            }
+            "$ref": "#/definitions/AiGatewayAliasSelectionStage"
           }
+        },
+        "sessionBackendPreference": {
+          "$ref": "#/definitions/AiGatewaySessionBackendPreference",
+          "description": "Stateless backend preference using an existing caller session key."
+        },
+        "autoModelSelection": {
+          "$ref": "#/definitions/AiGatewayModelSelection",
+          "description": "Automatic model selection settings used with the autoModelSelection stage."
+        },
+        "failures": {
+          "type": "array",
+          "description": "Ordered failure rules; only the first matching rule is applied.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayAliasFailureRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "maxRetryAttempts": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum additional backend attempts after the first request.",
+          "minimum": 0
         },
         "supportedEndpoints": {
           "type": "array",
@@ -3814,11 +4276,6 @@
         "properties": {
           "$ref": "#/definitions/AiGatewayAliasProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
         }
       },
       "allOf": [
@@ -3848,6 +4305,36 @@
         "value"
       ]
     },
+    "AiGatewayAliasSelectionStage": {
+      "type": "string",
+      "description": "Routing stage in an AI Gateway alias selection order.",
+      "enum": [
+        "priority",
+        "autoModelSelection",
+        "sessionBackendPreference"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayAliasSelectionStage",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Priority",
+            "value": "priority",
+            "description": "Deterministic priority and weight routing stage."
+          },
+          {
+            "name": "AutoModelSelection",
+            "value": "autoModelSelection",
+            "description": "Automatic model selection stage."
+          },
+          {
+            "name": "SessionBackendPreference",
+            "value": "sessionBackendPreference",
+            "description": "Stateless session backend preference stage."
+          }
+        ]
+      }
+    },
     "AiGatewayAliasTarget": {
       "type": "object",
       "description": "A model targeted by an AI Gateway alias.",
@@ -3866,6 +4353,15 @@
               }
             ]
           }
+        },
+        "selectorModelName": {
+          "type": "string",
+          "description": "Unversioned canonical model name grouping equivalent serving deployments.",
+          "minLength": 1
+        },
+        "when": {
+          "type": "string",
+          "description": "Optional Boolean CEL expression wrapped in @cel(...) controlling eligibility for new backend selections."
         },
         "priority": {
           "type": "integer",
@@ -3904,6 +4400,15 @@
               }
             ]
           }
+        },
+        "selectorModelName": {
+          "type": "string",
+          "description": "Unversioned canonical model name grouping equivalent serving deployments.",
+          "minLength": 1
+        },
+        "when": {
+          "type": "string",
+          "description": "Optional Boolean CEL expression wrapped in @cel(...) controlling eligibility for new backend selections."
         },
         "priority": {
           "type": "integer",
@@ -3956,16 +4461,32 @@
         },
         "selectionOrder": {
           "type": "array",
-          "description": "Ordered routing stages. Only the routing stage is currently supported.",
+          "description": "Ordered routing stages.",
           "items": {
-            "type": "string",
-            "enum": [
-              "routing"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            }
+            "$ref": "#/definitions/AiGatewayAliasSelectionStage"
           }
+        },
+        "sessionBackendPreference": {
+          "$ref": "#/definitions/AiGatewaySessionBackendPreferenceUpdate",
+          "description": "Stateless backend preference using an existing caller session key."
+        },
+        "autoModelSelection": {
+          "$ref": "#/definitions/AiGatewayModelSelectionUpdate",
+          "description": "Automatic model selection settings used with the autoModelSelection stage."
+        },
+        "failures": {
+          "type": "array",
+          "description": "Ordered failure rules; only the first matching rule is applied.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayAliasFailureRuleUpdate"
+          },
+          "x-ms-identifiers": []
+        },
+        "maxRetryAttempts": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum additional backend attempts after the first request.",
+          "minimum": 0
         },
         "policies": {
           "type": "array",
@@ -3977,47 +4498,34 @@
         }
       }
     },
-    "AiGatewayApiKeyCredential": {
-      "type": "object",
-      "description": "API key credentials for an upstream service.",
-      "properties": {
-        "headerName": {
-          "type": "string",
-          "description": "Name of the HTTP header that carries the API key."
-        },
-        "value": {
-          "type": "string",
-          "format": "password",
-          "description": "Secret API key value. This value is not returned by read operations.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ],
-          "x-ms-secret": true
-        }
-      },
-      "required": [
-        "headerName"
-      ]
-    },
-    "AiGatewayApiKeyCredentialUpdate": {
-      "type": "object",
-      "description": "API key credentials for updating an upstream service.",
-      "properties": {
-        "headerName": {
-          "type": "string",
-          "description": "Name of the HTTP header that carries the API key."
-        },
-        "value": {
-          "type": "string",
-          "format": "password",
-          "description": "Secret API key value.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ],
-          "x-ms-secret": true
-        }
+    "AiGatewayAllowedRequestOverride": {
+      "type": "string",
+      "description": "Per-request behavior allowed for automatic model selection.",
+      "enum": [
+        "model",
+        "objective",
+        "filterModelsForToolCompatibility"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayAllowedRequestOverride",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Model",
+            "value": "model",
+            "description": "Allow narrowing the configured selector model pool."
+          },
+          {
+            "name": "Objective",
+            "value": "objective",
+            "description": "Allow overriding the selection objective."
+          },
+          {
+            "name": "FilterModelsForToolCompatibility",
+            "value": "filterModelsForToolCompatibility",
+            "description": "Enable chat function-tool compatibility filtering without granting either override."
+          }
+        ]
       }
     },
     "AiGatewayApiKeyProperties": {
@@ -4077,11 +4585,6 @@
         "properties": {
           "$ref": "#/definitions/AiGatewayApiKeyProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
         }
       },
       "allOf": [
@@ -4110,30 +4613,6 @@
       "required": [
         "value"
       ]
-    },
-    "AiGatewayApiKeyTarget": {
-      "type": "string",
-      "description": "API key slot to regenerate.",
-      "enum": [
-        "Primary",
-        "Secondary"
-      ],
-      "x-ms-enum": {
-        "name": "AiGatewayApiKeyTarget",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Primary",
-            "value": "Primary",
-            "description": "The primary key."
-          },
-          {
-            "name": "Secondary",
-            "value": "Secondary",
-            "description": "The secondary key."
-          }
-        ]
-      }
     },
     "AiGatewayApiKeyUpdateParameters": {
       "type": "object",
@@ -4244,6 +4723,16 @@
         }
       }
     },
+    "AiGatewayBackendUpdate": {
+      "type": "object",
+      "description": "Backend networking configuration to update on an AI Gateway.",
+      "properties": {
+        "subnet": {
+          "$ref": "#/definitions/AiGatewaySubnetUpdate",
+          "description": "Subnet through which the AI Gateway reaches backends. Omit it to keep the current subnet, or set it to null to remove it."
+        }
+      }
+    },
     "AiGatewayCheckNameAvailabilityRequest": {
       "type": "object",
       "description": "Parameters for checking an AI Gateway name in a location.",
@@ -4333,11 +4822,14 @@
       "description": "An ordered cost-budget override; exactly one selector must be specified.",
       "properties": {
         "claims": {
-          "type": "object",
-          "description": "Authenticated token claims that must all match; dictionary keys are case-sensitive claim names.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "array",
+          "description": "Authenticated token claims that must all match; claim names are case-sensitive.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayNameValuePair"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "apiKeyResourceId": {
           "type": "string",
@@ -4369,11 +4861,12 @@
       "description": "An ordered cost-budget override to update.",
       "properties": {
         "claims": {
-          "type": "object",
-          "description": "Authenticated token claims that must all match; dictionary keys are case-sensitive claim names.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "array",
+          "description": "Authenticated token claims that must all match; claim names are case-sensitive.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayNameValuePairUpdate"
+          },
+          "x-ms-identifiers": []
         },
         "apiKeyResourceId": {
           "type": "string",
@@ -4421,79 +4914,17 @@
         ]
       }
     },
-    "AiGatewayCredentialValue": {
-      "type": "object",
-      "description": "Credential returned for a model provider.",
-      "properties": {
-        "value": {
-          "type": "string",
-          "format": "password",
-          "description": "Stored credential value.",
-          "x-ms-secret": true
-        }
-      }
-    },
-    "AiGatewayCustomAuthentication": {
-      "type": "object",
-      "description": "Authentication configuration for a custom model provider.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Authentication type.",
-          "enum": [
-            "ApiKey"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "apiKey": {
-          "$ref": "#/definitions/AiGatewayApiKeyCredential",
-          "description": "API key configuration."
-        }
-      },
-      "required": [
-        "kind",
-        "apiKey"
-      ]
-    },
-    "AiGatewayCustomAuthenticationUpdate": {
-      "type": "object",
-      "description": "Custom model provider authentication settings to update.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Authentication type.",
-          "enum": [
-            "ApiKey"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        },
-        "apiKey": {
-          "$ref": "#/definitions/AiGatewayApiKeyCredentialUpdate",
-          "description": "API key configuration."
-        }
-      }
-    },
     "AiGatewayCustomProviderConfiguration": {
       "type": "object",
       "description": "Custom model provider configuration.",
       "properties": {
         "endpoint": {
-          "type": "string",
-          "format": "uri",
+          "$ref": "#/definitions/AiGatewayDestinationEndpoint",
           "description": "Provider base endpoint."
-        },
-        "authentication": {
-          "$ref": "#/definitions/AiGatewayCustomAuthentication",
-          "description": "Authentication configuration."
         }
       },
       "required": [
-        "endpoint",
-        "authentication"
+        "endpoint"
       ]
     },
     "AiGatewayCustomProviderConfigurationUpdate": {
@@ -4501,13 +4932,33 @@
       "description": "Custom model provider settings to update.",
       "properties": {
         "endpoint": {
+          "$ref": "#/definitions/AiGatewayDestinationEndpointUpdate",
+          "description": "Provider base endpoint."
+        }
+      }
+    },
+    "AiGatewayDestinationEndpoint": {
+      "type": "object",
+      "description": "An outbound service destination URL.",
+      "properties": {
+        "url": {
           "type": "string",
           "format": "uri",
-          "description": "Provider base endpoint."
-        },
-        "authentication": {
-          "$ref": "#/definitions/AiGatewayCustomAuthenticationUpdate",
-          "description": "Authentication configuration."
+          "description": "Destination HTTPS or HTTP URL."
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "AiGatewayDestinationEndpointUpdate": {
+      "type": "object",
+      "description": "An outbound service destination URL to update.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Destination HTTPS or HTTP URL."
         }
       }
     },
@@ -4536,6 +4987,30 @@
       "required": [
         "url"
       ]
+    },
+    "AiGatewayFailureMode": {
+      "type": "string",
+      "description": "Resilience failure mode for an outbound endpoint or hook.",
+      "enum": [
+        "failOpen",
+        "failClosed"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayFailureMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FailOpen",
+            "value": "failOpen",
+            "description": "Continue processing when the endpoint or hook fails."
+          },
+          {
+            "name": "FailClosed",
+            "value": "failClosed",
+            "description": "Fail the request when the endpoint or hook fails."
+          }
+        ]
+      }
     },
     "AiGatewayFallbackTarget": {
       "type": "object",
@@ -4582,52 +5057,12 @@
         }
       }
     },
-    "AiGatewayFoundryAuthentication": {
-      "type": "object",
-      "description": "Authentication configuration for a Foundry model provider.",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/AiGatewayModelProviderAuthenticationKind",
-          "description": "Authentication type."
-        },
-        "managedIdentity": {
-          "$ref": "#/definitions/AiGatewayManagedIdentityAuthentication",
-          "description": "Managed identity settings. Applicable when kind is ManagedIdentity."
-        },
-        "apiKey": {
-          "$ref": "#/definitions/AiGatewayApiKeyCredential",
-          "description": "API key configuration. Required when kind is ApiKey."
-        }
-      },
-      "required": [
-        "kind"
-      ]
-    },
-    "AiGatewayFoundryAuthenticationUpdate": {
-      "type": "object",
-      "description": "Foundry authentication settings to update.",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/AiGatewayModelProviderAuthenticationKind",
-          "description": "Authentication type."
-        },
-        "managedIdentity": {
-          "$ref": "#/definitions/AiGatewayManagedIdentityAuthentication",
-          "description": "Managed identity settings."
-        },
-        "apiKey": {
-          "$ref": "#/definitions/AiGatewayApiKeyCredentialUpdate",
-          "description": "API key configuration."
-        }
-      }
-    },
     "AiGatewayFoundryProviderConfiguration": {
       "type": "object",
       "description": "Foundry model provider configuration.",
       "properties": {
         "endpoint": {
-          "type": "string",
-          "format": "uri",
+          "$ref": "#/definitions/AiGatewayDestinationEndpoint",
           "description": "Foundry endpoint."
         },
         "resourceIds": {
@@ -4645,15 +5080,10 @@
               ]
             }
           }
-        },
-        "authentication": {
-          "$ref": "#/definitions/AiGatewayFoundryAuthentication",
-          "description": "Authentication configuration."
         }
       },
       "required": [
-        "resourceIds",
-        "authentication"
+        "resourceIds"
       ]
     },
     "AiGatewayFoundryProviderConfigurationUpdate": {
@@ -4661,8 +5091,7 @@
       "description": "Foundry model provider settings to update.",
       "properties": {
         "endpoint": {
-          "type": "string",
-          "format": "uri",
+          "$ref": "#/definitions/AiGatewayDestinationEndpointUpdate",
           "description": "Foundry endpoint."
         },
         "resourceIds": {
@@ -4680,10 +5109,6 @@
               ]
             }
           }
-        },
-        "authentication": {
-          "$ref": "#/definitions/AiGatewayFoundryAuthenticationUpdate",
-          "description": "Authentication configuration."
         }
       }
     },
@@ -4695,6 +5120,30 @@
           "type": "string",
           "description": "Default hostname used to invoke the AI Gateway.",
           "readOnly": true
+        }
+      }
+    },
+    "AiGatewayGitHubAppAuthentication": {
+      "type": "object",
+      "description": "GitHub App credentials for a GitHub model provider.",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "description": "GitHub App identifier."
+        },
+        "installationId": {
+          "type": "string",
+          "description": "GitHub App installation identifier."
+        },
+        "privateKey": {
+          "type": "string",
+          "format": "password",
+          "description": "GitHub App private key. Omitted from ordinary read responses.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
         }
       }
     },
@@ -4724,43 +5173,24 @@
     },
     "AiGatewayManagedIdentityAuthentication": {
       "type": "object",
-      "description": "Managed identity settings for a model provider.",
+      "description": "Managed identity settings for an outbound connection.",
       "properties": {
         "resource": {
           "type": "string",
-          "description": "Token audience requested for managed identity authentication."
+          "description": "Target Entra resource or audience URI requested for managed identity authentication."
         },
         "clientId": {
           "type": "string",
-          "description": "Client ID of a user-assigned managed identity."
+          "description": "Client ID of a user-assigned managed identity; omit for system-assigned identity."
         }
-      }
-    },
-    "AiGatewayMcpTransport": {
-      "type": "string",
-      "description": "Transport used to connect to an MCP server.",
-      "enum": [
-        "StreamableHttp"
-      ],
-      "x-ms-enum": {
-        "name": "AiGatewayMcpTransport",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "StreamableHttp",
-            "value": "StreamableHttp",
-            "description": "Streamable HTTP transport."
-          }
-        ]
       }
     },
     "AiGatewayMcpUrlConfiguration": {
       "type": "object",
-      "description": "MCP URL endpoint configuration.",
+      "description": "MCP endpoint configuration.",
       "properties": {
-        "url": {
-          "type": "string",
-          "format": "uri",
+        "endpoint": {
+          "$ref": "#/definitions/AiGatewayDestinationEndpoint",
           "description": "Backend MCP server endpoint."
         },
         "transport": {
@@ -4769,16 +5199,15 @@
         }
       },
       "required": [
-        "url"
+        "endpoint"
       ]
     },
     "AiGatewayMcpUrlConfigurationUpdate": {
       "type": "object",
-      "description": "MCP URL endpoint settings to update.",
+      "description": "MCP endpoint settings to update.",
       "properties": {
-        "url": {
-          "type": "string",
-          "format": "uri",
+        "endpoint": {
+          "$ref": "#/definitions/AiGatewayDestinationEndpointUpdate",
           "description": "Backend MCP server endpoint."
         },
         "transport": {
@@ -4842,14 +5271,45 @@
         }
       }
     },
+    "AiGatewayModelEndpoint": {
+      "type": "object",
+      "description": "Maps a canonical AI Gateway API identifier to a relative backend path served by the model provider.",
+      "properties": {
+        "api": {
+          "type": "string",
+          "description": "Canonical AI Gateway API identifier (for example, v1/chat/completions, v1/responses, v1/messages, or v1/embeddings)."
+        },
+        "path": {
+          "type": "string",
+          "description": "Backend path relative to the model provider's base endpoint, starting with '/'."
+        }
+      },
+      "required": [
+        "api",
+        "path"
+      ]
+    },
+    "AiGatewayModelEndpointUpdate": {
+      "type": "object",
+      "description": "A model endpoint mapping to update.",
+      "properties": {
+        "api": {
+          "type": "string",
+          "description": "Canonical AI Gateway API identifier (for example, v1/chat/completions, v1/responses, v1/messages, or v1/embeddings)."
+        },
+        "path": {
+          "type": "string",
+          "description": "Backend path relative to the model provider's base endpoint, starting with '/'."
+        }
+      }
+    },
     "AiGatewayModelProperties": {
       "type": "object",
       "description": "Properties of an AI Gateway model.",
       "properties": {
-        "name": {
+        "displayName": {
           "type": "string",
-          "description": "Display name of the model.",
-          "x-ms-client-name": "displayName"
+          "description": "Display name of the model."
         },
         "description": {
           "type": "string",
@@ -4863,6 +5323,16 @@
         "deployment": {
           "$ref": "#/definitions/AiGatewayModelDeployment",
           "description": "Provider deployment details."
+        },
+        "endpoints": {
+          "type": "array",
+          "description": "API-to-backend-path mappings served by this model.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayModelEndpoint"
+          },
+          "x-ms-identifiers": [
+            "api"
+          ]
         },
         "supportedEndpoints": {
           "type": "array",
@@ -4886,33 +5356,52 @@
         }
       },
       "required": [
-        "name",
-        "deployment",
-        "supportedEndpoints"
+        "displayName",
+        "deployment"
       ]
     },
-    "AiGatewayModelProviderAuthenticationKind": {
-      "type": "string",
-      "description": "Authentication type used by an AI model provider.",
-      "enum": [
-        "ManagedIdentity",
-        "ApiKey"
-      ],
-      "x-ms-enum": {
-        "name": "AiGatewayModelProviderAuthenticationKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ManagedIdentity",
-            "value": "ManagedIdentity",
-            "description": "Authenticate using a managed identity."
+    "AiGatewayModelProviderAuthentication": {
+      "type": "object",
+      "description": "Outbound authentication configuration for a model provider.",
+      "properties": {
+        "githubApp": {
+          "$ref": "#/definitions/AiGatewayGitHubAppAuthentication",
+          "description": "GitHub App credentials when modelProviderType is GitHub."
+        },
+        "managedIdentity": {
+          "$ref": "#/definitions/AiGatewayManagedIdentityAuthentication",
+          "description": "Managed identity configuration when modelProviderType is Foundry."
+        },
+        "headers": {
+          "type": "array",
+          "description": "Secret HTTP headers injected when calling the model provider.",
+          "items": {
+            "$ref": "#/definitions/AiGatewaySecretHeader"
           },
-          {
-            "name": "ApiKey",
-            "value": "ApiKey",
-            "description": "Authenticate using an API key."
-          }
-        ]
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AiGatewayModelProviderAuthenticationUpdate": {
+      "type": "object",
+      "description": "Outbound authentication configuration to update on a model provider.",
+      "properties": {
+        "githubApp": {
+          "$ref": "#/definitions/AiGatewayGitHubAppAuthentication",
+          "description": "GitHub App credentials when modelProviderType is GitHub."
+        },
+        "managedIdentity": {
+          "$ref": "#/definitions/AiGatewayManagedIdentityAuthentication",
+          "description": "Managed identity configuration when modelProviderType is Foundry."
+        },
+        "headers": {
+          "type": "array",
+          "description": "Secret HTTP headers injected when calling the model provider.",
+          "items": {
+            "$ref": "#/definitions/AiGatewaySecretHeaderUpdate"
+          },
+          "x-ms-identifiers": []
+        }
       }
     },
     "AiGatewayModelProviderKind": {
@@ -4920,7 +5409,8 @@
       "description": "The type of an AI model provider.",
       "enum": [
         "Foundry",
-        "Custom"
+        "Custom",
+        "GitHub"
       ],
       "x-ms-enum": {
         "name": "AiGatewayModelProviderKind",
@@ -4935,6 +5425,11 @@
             "name": "Custom",
             "value": "Custom",
             "description": "Custom model provider."
+          },
+          {
+            "name": "GitHub",
+            "value": "GitHub",
+            "description": "GitHub model provider."
           }
         ]
       }
@@ -4943,7 +5438,7 @@
       "type": "object",
       "description": "Properties of an AI Gateway model provider.",
       "properties": {
-        "kind": {
+        "modelProviderType": {
           "$ref": "#/definitions/AiGatewayModelProviderKind",
           "description": "Model provider type. This value cannot be changed after creation.",
           "x-ms-mutability": [
@@ -4951,10 +5446,9 @@
             "create"
           ]
         },
-        "name": {
+        "displayName": {
           "type": "string",
-          "description": "Display name of the model provider.",
-          "x-ms-client-name": "displayName"
+          "description": "Display name of the model provider."
         },
         "description": {
           "type": "string",
@@ -4962,11 +5456,15 @@
         },
         "foundry": {
           "$ref": "#/definitions/AiGatewayFoundryProviderConfiguration",
-          "description": "Foundry configuration. Required when kind is Foundry."
+          "description": "Foundry configuration. Required when modelProviderType is Foundry."
         },
         "custom": {
           "$ref": "#/definitions/AiGatewayCustomProviderConfiguration",
-          "description": "Custom provider configuration. Required when kind is Custom."
+          "description": "Custom provider configuration. Required when modelProviderType is Custom."
+        },
+        "authentication": {
+          "$ref": "#/definitions/AiGatewayModelProviderAuthentication",
+          "description": "Outbound authentication configuration."
         },
         "provisioningState": {
           "$ref": "#/definitions/AiGatewayProvisioningState",
@@ -4975,8 +5473,8 @@
         }
       },
       "required": [
-        "kind",
-        "name"
+        "modelProviderType",
+        "displayName"
       ]
     },
     "AiGatewayModelProviderResource": {
@@ -4986,11 +5484,6 @@
         "properties": {
           "$ref": "#/definitions/AiGatewayModelProviderProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
         }
       },
       "allOf": [
@@ -5020,6 +5513,58 @@
         "value"
       ]
     },
+    "AiGatewayModelProviderSecretAuthentication": {
+      "type": "object",
+      "description": "Authentication settings returned by the model-provider secret retrieval action.",
+      "properties": {
+        "githubApp": {
+          "$ref": "#/definitions/AiGatewayModelProviderSecretGitHubAppAuthentication",
+          "description": "GitHub App credentials when modelProviderType is GitHub."
+        },
+        "managedIdentity": {
+          "$ref": "#/definitions/AiGatewayManagedIdentityAuthentication",
+          "description": "Managed identity configuration when modelProviderType is Foundry."
+        },
+        "headers": {
+          "type": "array",
+          "description": "Secret HTTP headers injected when calling the model provider.",
+          "items": {
+            "$ref": "#/definitions/AiGatewaySecretHeaderValue"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AiGatewayModelProviderSecretGitHubAppAuthentication": {
+      "type": "object",
+      "description": "GitHub App credentials returned by the model-provider secret retrieval action.",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "description": "GitHub App identifier."
+        },
+        "installationId": {
+          "type": "string",
+          "description": "GitHub App installation identifier."
+        },
+        "privateKey": {
+          "type": "string",
+          "format": "password",
+          "description": "GitHub App private key.",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "AiGatewayModelProviderSecrets": {
+      "type": "object",
+      "description": "Secret values configured on a model provider.",
+      "properties": {
+        "authentication": {
+          "$ref": "#/definitions/AiGatewayModelProviderSecretAuthentication",
+          "description": "Outbound authentication configuration including secret values."
+        }
+      }
+    },
     "AiGatewayModelProviderUpdateParameters": {
       "type": "object",
       "description": "Parameters for updating an AI Gateway model provider.",
@@ -5034,10 +5579,9 @@
       "type": "object",
       "description": "Properties for updating an AI Gateway model provider.",
       "properties": {
-        "name": {
+        "displayName": {
           "type": "string",
-          "description": "Display name of the model provider.",
-          "x-ms-client-name": "displayName"
+          "description": "Display name of the model provider."
         },
         "description": {
           "type": "string",
@@ -5050,6 +5594,10 @@
         "custom": {
           "$ref": "#/definitions/AiGatewayCustomProviderConfigurationUpdate",
           "description": "Custom provider configuration."
+        },
+        "authentication": {
+          "$ref": "#/definitions/AiGatewayModelProviderAuthenticationUpdate",
+          "description": "Outbound authentication configuration."
         }
       }
     },
@@ -5060,11 +5608,6 @@
         "properties": {
           "$ref": "#/definitions/AiGatewayModelProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
         }
       },
       "allOf": [
@@ -5094,6 +5637,73 @@
         "value"
       ]
     },
+    "AiGatewayModelSelection": {
+      "type": "object",
+      "description": "Automatic model selection configuration for an AI Gateway alias.",
+      "properties": {
+        "objective": {
+          "$ref": "#/definitions/AiGatewayModelSelectionObjective",
+          "description": "Configured quality/cost objective."
+        },
+        "allowedRequestOverrides": {
+          "type": "array",
+          "description": "Allowed per-request behaviors. Omitting the property or sending an empty array denies overrides and disables function-tool compatibility filtering.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayAllowedRequestOverride"
+          }
+        }
+      },
+      "required": [
+        "objective"
+      ]
+    },
+    "AiGatewayModelSelectionObjective": {
+      "type": "string",
+      "description": "Quality and cost objective for automatic model selection.",
+      "enum": [
+        "Balanced",
+        "Cost",
+        "Quality"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayModelSelectionObjective",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Balanced",
+            "value": "Balanced",
+            "description": "Balance quality and cost."
+          },
+          {
+            "name": "Cost",
+            "value": "Cost",
+            "description": "Prefer lower cost."
+          },
+          {
+            "name": "Quality",
+            "value": "Quality",
+            "description": "Prefer higher quality."
+          }
+        ]
+      }
+    },
+    "AiGatewayModelSelectionUpdate": {
+      "type": "object",
+      "description": "Automatic model selection configuration to update.",
+      "properties": {
+        "objective": {
+          "$ref": "#/definitions/AiGatewayModelSelectionObjective",
+          "description": "Configured quality/cost objective."
+        },
+        "allowedRequestOverrides": {
+          "type": "array",
+          "description": "Allowed per-request behaviors. Omitting the property or sending an empty array denies overrides and disables function-tool compatibility filtering.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayAllowedRequestOverride"
+          }
+        }
+      }
+    },
     "AiGatewayModelUpdateParameters": {
       "type": "object",
       "description": "Parameters for updating an AI Gateway model.",
@@ -5108,10 +5718,9 @@
       "type": "object",
       "description": "Properties for updating an AI Gateway model.",
       "properties": {
-        "name": {
+        "displayName": {
           "type": "string",
-          "description": "Display name of the model.",
-          "x-ms-client-name": "displayName"
+          "description": "Display name of the model."
         },
         "description": {
           "type": "string",
@@ -5120,6 +5729,14 @@
         "deployment": {
           "$ref": "#/definitions/AiGatewayModelDeploymentUpdate",
           "description": "Provider deployment details."
+        },
+        "endpoints": {
+          "type": "array",
+          "description": "API-to-backend-path mappings served by this model.",
+          "items": {
+            "$ref": "#/definitions/AiGatewayModelEndpointUpdate"
+          },
+          "x-ms-identifiers": []
         },
         "policies": {
           "type": "array",
@@ -5162,6 +5779,38 @@
         ]
       }
     },
+    "AiGatewayNameValuePair": {
+      "type": "object",
+      "description": "A name/value pair entry.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Entry name."
+        },
+        "value": {
+          "type": "string",
+          "description": "Entry value."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "AiGatewayNameValuePairUpdate": {
+      "type": "object",
+      "description": "A name/value pair entry to update.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Entry name."
+        },
+        "value": {
+          "type": "string",
+          "description": "Entry value."
+        }
+      }
+    },
     "AiGatewayOpenApiConfiguration": {
       "type": "object",
       "description": "OpenAPI-backed MCP endpoint configuration.",
@@ -5196,7 +5845,7 @@
         "contentBase64": {
           "type": "string",
           "format": "password",
-          "description": "Base64-encoded OpenAPI document. Required when kind is Inline.",
+          "description": "Base64-encoded OpenAPI document. Required when type is inline.",
           "x-ms-mutability": [
             "update",
             "create"
@@ -5206,36 +5855,12 @@
         "url": {
           "type": "string",
           "format": "uri",
-          "description": "URL of the OpenAPI document. Required when kind is Url."
+          "description": "URL of the OpenAPI document. Required when type is url."
         }
       },
       "required": [
         "type"
       ]
-    },
-    "AiGatewayOpenApiSpecSourceKind": {
-      "type": "string",
-      "description": "Source type for an OpenAPI document.",
-      "enum": [
-        "Inline",
-        "Url"
-      ],
-      "x-ms-enum": {
-        "name": "AiGatewayOpenApiSpecSourceKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Inline",
-            "value": "Inline",
-            "description": "The OpenAPI document is supplied inline."
-          },
-          {
-            "name": "Url",
-            "value": "Url",
-            "description": "The OpenAPI document is loaded from a URL."
-          }
-        ]
-      }
     },
     "AiGatewayOpenApiSpecSourceUpdate": {
       "type": "object",
@@ -5264,43 +5889,37 @@
     },
     "AiGatewayOpenTelemetryConfiguration": {
       "type": "object",
-      "description": "OpenTelemetry export destinations and authentication.",
+      "description": "OpenTelemetry export signal destinations.",
       "properties": {
         "metricsEndpoint": {
-          "type": "string",
-          "format": "uri",
+          "$ref": "#/definitions/AiGatewayDestinationEndpoint",
           "description": "Full OTLP metrics endpoint URL, used without appending a signal path."
         },
         "logsEndpoint": {
-          "type": "string",
-          "format": "uri",
+          "$ref": "#/definitions/AiGatewayDestinationEndpoint",
           "description": "Full OTLP logs endpoint URL, used without appending a signal path."
         },
         "tracesEndpoint": {
-          "type": "string",
-          "format": "uri",
+          "$ref": "#/definitions/AiGatewayDestinationEndpoint",
           "description": "Full OTLP traces endpoint URL, used without appending a signal path."
+        }
+      }
+    },
+    "AiGatewayOpenTelemetryConfigurationUpdate": {
+      "type": "object",
+      "description": "OpenTelemetry export signal destinations to update.",
+      "properties": {
+        "metricsEndpoint": {
+          "$ref": "#/definitions/AiGatewayDestinationEndpointUpdate",
+          "description": "Full OTLP metrics endpoint URL, used without appending a signal path."
         },
-        "headers": {
-          "type": "object",
-          "format": "password",
-          "description": "Legacy secret HTTP headers, mutually exclusive with credentials.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ],
-          "x-ms-secret": true
+        "logsEndpoint": {
+          "$ref": "#/definitions/AiGatewayDestinationEndpointUpdate",
+          "description": "Full OTLP logs endpoint URL, used without appending a signal path."
         },
-        "managedIdentity": {
-          "$ref": "#/definitions/AiGatewayTelemetryManagedIdentity",
-          "description": "Legacy managed identity settings, mutually exclusive with credentials."
-        },
-        "credentials": {
-          "$ref": "#/definitions/AiGatewayTelemetryCredentials",
-          "description": "Authentication settings, mutually exclusive with top-level headers and managedIdentity."
+        "tracesEndpoint": {
+          "$ref": "#/definitions/AiGatewayDestinationEndpointUpdate",
+          "description": "Full OTLP traces endpoint URL, used without appending a signal path."
         }
       }
     },
@@ -5323,12 +5942,12 @@
         "count": {
           "type": "integer",
           "format": "int32",
-          "description": "Token count allowed during a token limit period.",
+          "description": "Token or request count allowed during a tokenLimit or requestRateLimit period.",
           "minimum": 1
         },
         "period": {
           "$ref": "#/definitions/AiGatewayPolicyPeriod",
-          "description": "Counter period. Token limits support minute/hour/day; cost limits support hour/day/week/month/year."
+          "description": "Counter period. Token limits support minute/hour/day; request rate limits support minute/hour/day or whole-second ISO 8601 durations (e.g., PT37S); cost limits support hour/day/week/month/year."
         },
         "counterKey": {
           "type": "array",
@@ -5358,21 +5977,27 @@
           "type": "boolean",
           "description": "Whether to check tool responses for threats."
         },
-        "endpoint": {
-          "type": "string",
-          "format": "uri",
-          "description": "Default HTTPS destination for agent hooks."
+        "mode": {
+          "$ref": "#/definitions/AiGatewayFailureMode",
+          "description": "Default failure mode for agent hooks."
         },
-        "authorization": {
-          "$ref": "#/definitions/AiGatewayAgentHookAuthorization",
-          "description": "Default authorization for agent hooks."
+        "endpoint": {
+          "$ref": "#/definitions/AiGatewayDestinationEndpoint",
+          "description": "Default destination URL for agent hooks."
+        },
+        "authentication": {
+          "$ref": "#/definitions/AiGatewayAgentHookAuthentication",
+          "description": "Default outbound authentication for agent hooks."
         },
         "headers": {
-          "type": "object",
+          "type": "array",
           "description": "Literal non-secret default HTTP headers for agent hooks.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "items": {
+            "$ref": "#/definitions/AiGatewayNameValuePair"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "hooks": {
           "$ref": "#/definitions/AiGatewayAgentHooks",
@@ -5425,17 +6050,6 @@
             "type": "string"
           }
         },
-        "callsPerPeriod": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Request count allowed during the configured period.",
-          "minimum": 1
-        },
-        "periodSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Request rate limit period in seconds."
-        },
         "allowedOrigins": {
           "type": "array",
           "description": "Origins allowed by a CORS policy.",
@@ -5484,7 +6098,7 @@
     },
     "AiGatewayPolicyPeriod": {
       "type": "string",
-      "description": "Counter period. Token limits support minute/hour/day; cost limits support hour/day/week/month/year.",
+      "description": "Counter period. Token limits support minute/hour/day; request rate limits support minute/hour/day or whole-second ISO 8601 durations (e.g., PT37S); cost limits support hour/day/week/month/year.",
       "enum": [
         "minute",
         "hour",
@@ -5639,12 +6253,12 @@
         "count": {
           "type": "integer",
           "format": "int32",
-          "description": "Token count allowed during a token limit period.",
+          "description": "Token or request count allowed during a tokenLimit or requestRateLimit period.",
           "minimum": 1
         },
         "period": {
           "$ref": "#/definitions/AiGatewayPolicyPeriod",
-          "description": "Counter period. Token limits support minute/hour/day; cost limits support hour/day/week/month/year."
+          "description": "Counter period. Token limits support minute/hour/day; request rate limits support minute/hour/day or whole-second ISO 8601 durations (e.g., PT37S); cost limits support hour/day/week/month/year."
         },
         "counterKey": {
           "type": "array",
@@ -5674,21 +6288,25 @@
           "type": "boolean",
           "description": "Whether to check tool responses for threats."
         },
-        "endpoint": {
-          "type": "string",
-          "format": "uri",
-          "description": "Default HTTPS destination for agent hooks."
+        "mode": {
+          "$ref": "#/definitions/AiGatewayFailureMode",
+          "description": "Default failure mode for agent hooks."
         },
-        "authorization": {
-          "$ref": "#/definitions/AiGatewayAgentHookAuthorizationUpdate",
-          "description": "Default authorization for agent hooks."
+        "endpoint": {
+          "$ref": "#/definitions/AiGatewayDestinationEndpointUpdate",
+          "description": "Default destination URL for agent hooks."
+        },
+        "authentication": {
+          "$ref": "#/definitions/AiGatewayAgentHookAuthenticationUpdate",
+          "description": "Default outbound authentication for agent hooks."
         },
         "headers": {
-          "type": "object",
+          "type": "array",
           "description": "Literal non-secret default HTTP headers for agent hooks.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "items": {
+            "$ref": "#/definitions/AiGatewayNameValuePairUpdate"
+          },
+          "x-ms-identifiers": []
         },
         "hooks": {
           "$ref": "#/definitions/AiGatewayAgentHooksUpdate",
@@ -5739,17 +6357,6 @@
             "type": "string"
           }
         },
-        "callsPerPeriod": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Request count allowed during the configured period.",
-          "minimum": 1
-        },
-        "periodSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Request rate limit period in seconds."
-        },
         "allowedOrigins": {
           "type": "array",
           "description": "Origins allowed by a CORS policy.",
@@ -5793,6 +6400,48 @@
         }
       }
     },
+    "AiGatewayPrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "The response of a AiGatewayPrivateEndpointConnection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AiGatewayPrivateEndpointConnection items on this page",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AiGatewayPrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "The response of a AiGatewayPrivateLinkResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AiGatewayPrivateLinkResource items on this page",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "AiGatewayProperties": {
       "type": "object",
       "description": "Properties of an AI Gateway.",
@@ -5809,10 +6458,26 @@
         },
         "backend": {
           "$ref": "#/definitions/AiGatewayBackend",
-          "description": "Backend networking configuration. Can only be set when the AI Gateway is created.",
+          "description": "Backend networking configuration.",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
+          ]
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/AiGatewayPublicNetworkAccess",
+          "description": "Whether public network access is allowed for the AI Gateway."
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "Private endpoint connections associated with the AI Gateway.",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
           ]
         }
       }
@@ -5847,6 +6512,30 @@
         ]
       },
       "readOnly": true
+    },
+    "AiGatewayPublicNetworkAccess": {
+      "type": "string",
+      "description": "Public network access state for an AI Gateway.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayPublicNetworkAccess",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Public network access is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Public network access is disabled."
+          }
+        ]
+      }
     },
     "AiGatewayResource": {
       "type": "object",
@@ -5904,6 +6593,91 @@
         "value"
       ]
     },
+    "AiGatewaySecretHeader": {
+      "type": "object",
+      "description": "A secret HTTP header injected into an outbound request.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "HTTP header name."
+        },
+        "value": {
+          "type": "string",
+          "format": "password",
+          "description": "Secret HTTP header value. Omitted from ordinary read responses.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "AiGatewaySecretHeaderUpdate": {
+      "type": "object",
+      "description": "A secret HTTP header to update.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "HTTP header name."
+        },
+        "value": {
+          "type": "string",
+          "format": "password",
+          "description": "Secret HTTP header value.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        }
+      }
+    },
+    "AiGatewaySecretHeaderValue": {
+      "type": "object",
+      "description": "A secret HTTP header returned by a secret-retrieval action.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "HTTP header name."
+        },
+        "value": {
+          "type": "string",
+          "format": "password",
+          "description": "Secret HTTP header value.",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "AiGatewaySessionBackendPreference": {
+      "type": "object",
+      "description": "Stateless backend preference using an existing caller session key.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "CEL expression returning the caller session key."
+        }
+      },
+      "required": [
+        "key"
+      ]
+    },
+    "AiGatewaySessionBackendPreferenceUpdate": {
+      "type": "object",
+      "description": "Stateless backend preference settings to update.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "CEL expression returning the caller session key."
+        }
+      }
+    },
     "AiGatewaySkuUpdate": {
       "type": "object",
       "description": "SKU fields to update on an AI Gateway.",
@@ -5954,6 +6728,16 @@
             "type": "Microsoft.Network/virtualNetworks/subnets"
           }
         ]
+      }
+    },
+    "AiGatewaySubnetUpdate": {
+      "type": "object",
+      "description": "Subnet fields to update on an AI Gateway.",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/AiGatewaySubnetResourceId",
+          "description": "Resource identifier of the subnet. The subnet must be delegated to Microsoft.App/environments and be in the same region as the AI Gateway."
+        }
       }
     },
     "AiGatewayTelemetryAttributeMapping": {
@@ -6041,6 +6825,42 @@
         }
       }
     },
+    "AiGatewayTelemetryAuthentication": {
+      "type": "object",
+      "description": "Outbound authentication settings for an OpenTelemetry exporter.",
+      "properties": {
+        "managedIdentity": {
+          "$ref": "#/definitions/AiGatewayTelemetryManagedIdentity",
+          "description": "Managed identity authentication for export requests."
+        },
+        "headers": {
+          "type": "array",
+          "description": "Secret HTTP headers sent with export requests.",
+          "items": {
+            "$ref": "#/definitions/AiGatewaySecretHeader"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AiGatewayTelemetryAuthenticationUpdate": {
+      "type": "object",
+      "description": "Outbound authentication settings to update on an OpenTelemetry exporter.",
+      "properties": {
+        "managedIdentity": {
+          "$ref": "#/definitions/AiGatewayTelemetryManagedIdentity",
+          "description": "Managed identity authentication for export requests."
+        },
+        "headers": {
+          "type": "array",
+          "description": "Secret HTTP headers sent with export requests.",
+          "items": {
+            "$ref": "#/definitions/AiGatewaySecretHeaderUpdate"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "AiGatewayTelemetryConfiguration": {
       "type": "object",
       "description": "Optional telemetry enrichment on a native AI Gateway OpenTelemetry exporter.",
@@ -6068,29 +6888,6 @@
             "$ref": "#/definitions/AiGatewayTelemetryAttributeMappingUpdate"
           },
           "x-ms-identifiers": []
-        }
-      }
-    },
-    "AiGatewayTelemetryCredentials": {
-      "type": "object",
-      "description": "Authentication settings for an OpenTelemetry exporter.",
-      "properties": {
-        "headers": {
-          "type": "object",
-          "format": "password",
-          "description": "Secret HTTP headers sent with export requests.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ],
-          "x-ms-secret": true
-        },
-        "managedIdentity": {
-          "$ref": "#/definitions/AiGatewayTelemetryManagedIdentity",
-          "description": "Managed identity authentication for export requests."
         }
       }
     },
@@ -6122,9 +6919,9 @@
       "type": "object",
       "description": "Properties of an AI Gateway telemetry exporter.",
       "properties": {
-        "kind": {
+        "telemetryExporterType": {
           "$ref": "#/definitions/AiGatewayTelemetryExporterKind",
-          "description": "Exporter kind, which cannot change after creation.",
+          "description": "Exporter type, which cannot change after creation.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -6137,11 +6934,15 @@
         },
         "applicationInsights": {
           "$ref": "#/definitions/AiGatewayApplicationInsightsConfiguration",
-          "description": "Configuration required for the ApplicationInsights exporter kind."
+          "description": "Configuration required for the ApplicationInsights exporter type."
         },
         "openTelemetry": {
           "$ref": "#/definitions/AiGatewayOpenTelemetryConfiguration",
-          "description": "Configuration required for the OpenTelemetry exporter kind. At least one signal endpoint is required."
+          "description": "Configuration required for the OpenTelemetry exporter type. At least one signal endpoint is required."
+        },
+        "authentication": {
+          "$ref": "#/definitions/AiGatewayTelemetryAuthentication",
+          "description": "Outbound authentication for OpenTelemetry export requests."
         },
         "telemetry": {
           "$ref": "#/definitions/AiGatewayTelemetryConfiguration",
@@ -6154,7 +6955,7 @@
         }
       },
       "required": [
-        "kind"
+        "telemetryExporterType"
       ]
     },
     "AiGatewayTelemetryExporterResource": {
@@ -6164,11 +6965,6 @@
         "properties": {
           "$ref": "#/definitions/AiGatewayTelemetryExporterProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
         }
       },
       "allOf": [
@@ -6221,8 +7017,12 @@
           "description": "Application Insights configuration."
         },
         "openTelemetry": {
-          "$ref": "#/definitions/AiGatewayOpenTelemetryConfiguration",
+          "$ref": "#/definitions/AiGatewayOpenTelemetryConfigurationUpdate",
           "description": "OpenTelemetry configuration."
+        },
+        "authentication": {
+          "$ref": "#/definitions/AiGatewayTelemetryAuthenticationUpdate",
+          "description": "Outbound authentication for OpenTelemetry export requests."
         },
         "telemetry": {
           "$ref": "#/definitions/AiGatewayTelemetryConfigurationUpdate",
@@ -6298,83 +7098,17 @@
         ]
       }
     },
-    "AiGatewayToolServerAuthenticationType": {
-      "type": "string",
-      "description": "Endpoint authentication type.",
-      "enum": [
-        "none",
-        "header",
-        "oauth2",
-        "managedIdentity"
-      ],
-      "x-ms-enum": {
-        "name": "AiGatewayToolServerAuthenticationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "none",
-            "description": "No authentication."
-          },
-          {
-            "name": "Header",
-            "value": "header",
-            "description": "Static HTTP header authentication."
-          },
-          {
-            "name": "OAuth2",
-            "value": "oauth2",
-            "description": "OAuth 2.0 authentication."
-          },
-          {
-            "name": "ManagedIdentity",
-            "value": "managedIdentity",
-            "description": "Managed identity authentication."
-          }
-        ]
-      }
-    },
-    "AiGatewayToolServerCredentialKind": {
-      "type": "string",
-      "description": "Authentication type used by a tool server endpoint.",
-      "enum": [
-        "None",
-        "ApiKey"
-      ],
-      "x-ms-enum": {
-        "name": "AiGatewayToolServerCredentialKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "No credentials."
-          },
-          {
-            "name": "ApiKey",
-            "value": "ApiKey",
-            "description": "Authenticate using an API key."
-          }
-        ]
-      }
-    },
-    "AiGatewayToolServerCredentials": {
+    "AiGatewayToolServerAuthentication": {
       "type": "object",
-      "description": "Credentials for a tool server endpoint.",
+      "description": "Outbound authentication for a tool server endpoint.",
       "properties": {
-        "type": {
-          "$ref": "#/definitions/AiGatewayToolServerAuthenticationType",
-          "description": "Authentication type."
-        },
         "headers": {
           "type": "array",
           "description": "Static headers injected when calling the endpoint.",
           "items": {
-            "$ref": "#/definitions/AiGatewayToolServerHeader"
+            "$ref": "#/definitions/AiGatewaySecretHeader"
           },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "x-ms-identifiers": []
         },
         "oauth2": {
           "$ref": "#/definitions/AiGatewayToolServerOauth2Authentication",
@@ -6384,28 +7118,19 @@
           "$ref": "#/definitions/AiGatewayToolServerManagedIdentityAuthentication",
           "description": "Managed identity configuration."
         }
-      },
-      "required": [
-        "type"
-      ]
+      }
     },
-    "AiGatewayToolServerCredentialsUpdate": {
+    "AiGatewayToolServerAuthenticationUpdate": {
       "type": "object",
-      "description": "Tool server credentials to update.",
+      "description": "Tool server authentication settings to update.",
       "properties": {
-        "type": {
-          "$ref": "#/definitions/AiGatewayToolServerAuthenticationType",
-          "description": "Authentication type."
-        },
         "headers": {
           "type": "array",
           "description": "Static headers injected when calling the endpoint.",
           "items": {
-            "$ref": "#/definitions/AiGatewayToolServerHeader"
+            "$ref": "#/definitions/AiGatewaySecretHeaderUpdate"
           },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "x-ms-identifiers": []
         },
         "oauth2": {
           "$ref": "#/definitions/AiGatewayToolServerOauth2Authentication",
@@ -6423,7 +7148,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Stable endpoint identifier. Generated when omitted."
+          "description": "Stable endpoint identifier. Up to 64 alphanumeric characters or hyphens, starting and ending with an alphanumeric character. Generated when omitted."
         },
         "namespace": {
           "type": "string",
@@ -6439,11 +7164,11 @@
         },
         "openApi": {
           "$ref": "#/definitions/AiGatewayOpenApiConfiguration",
-          "description": "OpenAPI configuration. Required when kind is McpFromOpenApi."
+          "description": "OpenAPI configuration. Required when kind is openApi."
         },
-        "credentials": {
-          "$ref": "#/definitions/AiGatewayToolServerCredentials",
-          "description": "Backend credentials."
+        "authentication": {
+          "$ref": "#/definitions/AiGatewayToolServerAuthentication",
+          "description": "Backend authentication configuration."
         },
         "tools": {
           "type": "array",
@@ -6452,39 +7177,35 @@
             "type": "string"
           }
         },
-        "required": {
-          "type": "boolean",
-          "description": "Whether endpoint failure fails the whole federation. Defaults to false.",
-          "default": false
+        "mode": {
+          "type": "string",
+          "description": "Failure mode when the endpoint fails. Defaults to failOpen.",
+          "default": "failOpen",
+          "enum": [
+            "failOpen",
+            "failClosed"
+          ],
+          "x-ms-enum": {
+            "name": "AiGatewayFailureMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "FailOpen",
+                "value": "failOpen",
+                "description": "Continue processing when the endpoint or hook fails."
+              },
+              {
+                "name": "FailClosed",
+                "value": "failClosed",
+                "description": "Fail the request when the endpoint or hook fails."
+              }
+            ]
+          }
         }
       },
       "required": [
         "kind"
       ]
-    },
-    "AiGatewayToolServerEndpointKind": {
-      "type": "string",
-      "description": "The type of a tool server endpoint.",
-      "enum": [
-        "McpUrl",
-        "McpFromOpenApi"
-      ],
-      "x-ms-enum": {
-        "name": "AiGatewayToolServerEndpointKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "McpUrl",
-            "value": "McpUrl",
-            "description": "Connect to an MCP server URL."
-          },
-          {
-            "name": "McpFromOpenApi",
-            "value": "McpFromOpenApi",
-            "description": "Create an MCP endpoint from an OpenAPI document."
-          }
-        ]
-      }
     },
     "AiGatewayToolServerEndpointSourceKind": {
       "type": "string",
@@ -6534,9 +7255,9 @@
           "$ref": "#/definitions/AiGatewayOpenApiConfigurationUpdate",
           "description": "OpenAPI configuration."
         },
-        "credentials": {
-          "$ref": "#/definitions/AiGatewayToolServerCredentialsUpdate",
-          "description": "Backend credentials."
+        "authentication": {
+          "$ref": "#/definitions/AiGatewayToolServerAuthenticationUpdate",
+          "description": "Backend authentication configuration."
         },
         "tools": {
           "type": "array",
@@ -6545,37 +7266,72 @@
             "type": "string"
           }
         },
-        "required": {
-          "type": "boolean",
-          "description": "Whether endpoint failure fails the whole federation."
+        "mode": {
+          "$ref": "#/definitions/AiGatewayFailureMode",
+          "description": "Failure mode when the endpoint fails."
         }
       }
     },
-    "AiGatewayToolServerHeader": {
+    "AiGatewayToolServerFederation": {
       "type": "object",
-      "description": "An HTTP header injected when calling a tool server endpoint.",
+      "description": "Customer-owned federation application identity for a tool server endpoint.",
       "properties": {
-        "name": {
+        "applicationId": {
           "type": "string",
-          "description": "HTTP header name."
+          "description": "Application (client) ID of the customer-owned federation application."
         },
-        "values": {
-          "type": "array",
-          "format": "password",
-          "description": "Secret values for the HTTP header.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ],
-          "x-ms-secret": true
+        "appCredential": {
+          "$ref": "#/definitions/AiGatewayToolServerFederationAppCredential",
+          "description": "Credential used to authenticate the federation application."
+        }
+      }
+    },
+    "AiGatewayToolServerFederationAppCredential": {
+      "type": "object",
+      "description": "Credential used to authenticate a tool server endpoint federation application.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AiGatewayToolServerFederationAppCredentialType",
+          "description": "Federation application credential type."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client ID of a user-assigned managed identity available to this AI Gateway."
         }
       },
       "required": [
-        "name",
-        "values"
+        "type"
+      ]
+    },
+    "AiGatewayToolServerFederationAppCredentialType": {
+      "type": "string",
+      "description": "Supported federation application credential types for a tool server endpoint.",
+      "enum": [
+        "userAssignedManagedIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayToolServerFederationAppCredentialType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UserAssignedManagedIdentity",
+            "value": "userAssignedManagedIdentity",
+            "description": "A user-assigned managed identity assigned to the AI Gateway."
+          }
+        ]
+      }
+    },
+    "AiGatewayToolServerLoginLinksRequest": {
+      "type": "object",
+      "description": "Parameters for getting OAuth consent links for a tool server endpoint.",
+      "properties": {
+        "endpointId": {
+          "type": "string",
+          "description": "Identifier of the endpoint configured on the tool server."
+        }
+      },
+      "required": [
+        "endpointId"
       ]
     },
     "AiGatewayToolServerManagedIdentityAuthentication": {
@@ -6590,10 +7346,7 @@
           "type": "string",
           "description": "Client ID of a user-assigned managed identity."
         }
-      },
-      "required": [
-        "resource"
-      ]
+      }
     },
     "AiGatewayToolServerMcpTransport": {
       "type": "string",
@@ -6622,14 +7375,12 @@
           "format": "uri",
           "description": "Expected OAuth authorization-server issuer for remote MCP discovery."
         },
-        "authorizationUrl": {
-          "type": "string",
-          "format": "uri",
+        "authorizationEndpoint": {
+          "$ref": "#/definitions/AiGatewayDestinationEndpoint",
           "description": "OAuth authorization endpoint."
         },
-        "tokenUrl": {
-          "type": "string",
-          "format": "uri",
+        "tokenEndpoint": {
+          "$ref": "#/definitions/AiGatewayDestinationEndpoint",
           "description": "OAuth token endpoint."
         },
         "clientId": {
@@ -6656,6 +7407,10 @@
         "grantType": {
           "$ref": "#/definitions/AiGatewayToolServerOauth2GrantType",
           "description": "OAuth grant type."
+        },
+        "tokenExchange": {
+          "$ref": "#/definitions/AiGatewayToolServerTokenExchange",
+          "description": "Chained token-exchange configuration."
         },
         "authorizationParameters": {
           "type": "array",
@@ -6791,10 +7546,9 @@
       "type": "object",
       "description": "Properties of an AI Gateway tool server.",
       "properties": {
-        "name": {
+        "displayName": {
           "type": "string",
-          "description": "Display name of the tool server.",
-          "x-ms-client-name": "displayName"
+          "description": "Display name of the tool server."
         },
         "description": {
           "type": "string",
@@ -6804,10 +7558,9 @@
           "$ref": "#/definitions/AiGatewayToolServerAccessState",
           "description": "Whether the tool server is available to callers."
         },
-        "type": {
+        "toolServerType": {
           "$ref": "#/definitions/AiGatewayToolServerType",
-          "description": "Tool server type.",
-          "x-ms-client-name": "toolServerType"
+          "description": "Tool server type."
         },
         "versions": {
           "type": "array",
@@ -6823,7 +7576,7 @@
             "type": "string"
           }
         },
-        "blocked": {
+        "blockList": {
           "type": "array",
           "description": "Tool names or patterns explicitly blocked.",
           "items": {
@@ -6874,7 +7627,7 @@
         }
       },
       "required": [
-        "type"
+        "toolServerType"
       ]
     },
     "AiGatewayToolServerResource": {
@@ -6884,11 +7637,6 @@
         "properties": {
           "$ref": "#/definitions/AiGatewayToolServerProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
         }
       },
       "allOf": [
@@ -6926,8 +7674,8 @@
           "type": "string",
           "description": "Stable endpoint identifier."
         },
-        "credentials": {
-          "$ref": "#/definitions/AiGatewayToolServerSecretCredentials",
+        "authentication": {
+          "$ref": "#/definitions/AiGatewayToolServerSecretAuthentication",
           "description": "Endpoint authentication including secret values."
         },
         "openApi": {
@@ -6939,14 +7687,10 @@
         "id"
       ]
     },
-    "AiGatewayToolServerSecretCredentials": {
+    "AiGatewayToolServerSecretAuthentication": {
       "type": "object",
-      "description": "Endpoint credentials returned by the secret retrieval action.",
+      "description": "Endpoint authentication returned by the secret retrieval action.",
       "properties": {
-        "type": {
-          "$ref": "#/definitions/AiGatewayToolServerAuthenticationType",
-          "description": "Authentication type."
-        },
         "managedIdentity": {
           "$ref": "#/definitions/AiGatewayToolServerManagedIdentityAuthentication",
           "description": "Managed identity configuration."
@@ -6955,43 +7699,15 @@
           "type": "array",
           "description": "Static headers injected when calling the endpoint.",
           "items": {
-            "$ref": "#/definitions/AiGatewayToolServerSecretHeader"
+            "$ref": "#/definitions/AiGatewaySecretHeaderValue"
           },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "x-ms-identifiers": []
         },
         "oauth2": {
           "$ref": "#/definitions/AiGatewayToolServerSecretOauth2Authentication",
           "description": "OAuth 2.0 configuration."
         }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "AiGatewayToolServerSecretHeader": {
-      "type": "object",
-      "description": "An endpoint header returned by the secret retrieval action.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "HTTP header name."
-        },
-        "values": {
-          "type": "array",
-          "format": "password",
-          "description": "Secret values for the HTTP header.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-secret": true
-        }
-      },
-      "required": [
-        "name",
-        "values"
-      ]
+      }
     },
     "AiGatewayToolServerSecretOauth2Authentication": {
       "type": "object",
@@ -7002,14 +7718,12 @@
           "format": "uri",
           "description": "Expected OAuth authorization-server issuer for remote MCP discovery."
         },
-        "authorizationUrl": {
-          "type": "string",
-          "format": "uri",
+        "authorizationEndpoint": {
+          "$ref": "#/definitions/AiGatewayDestinationEndpoint",
           "description": "OAuth authorization endpoint."
         },
-        "tokenUrl": {
-          "type": "string",
-          "format": "uri",
+        "tokenEndpoint": {
+          "$ref": "#/definitions/AiGatewayDestinationEndpoint",
           "description": "OAuth token endpoint."
         },
         "clientId": {
@@ -7026,6 +7740,10 @@
         "grantType": {
           "$ref": "#/definitions/AiGatewayToolServerOauth2GrantType",
           "description": "OAuth grant type."
+        },
+        "tokenExchange": {
+          "$ref": "#/definitions/AiGatewayToolServerTokenExchange",
+          "description": "Chained token-exchange configuration."
         },
         "authorizationParameters": {
           "type": "array",
@@ -7096,12 +7814,12 @@
         "url": {
           "type": "string",
           "format": "uri",
-          "description": "URL of the OpenAPI document. Required when kind is Url."
+          "description": "URL of the OpenAPI document. Required when type is url."
         },
         "contentBase64": {
           "type": "string",
           "format": "password",
-          "description": "Base64-encoded OpenAPI document. Required when kind is Inline.",
+          "description": "Base64-encoded OpenAPI document. Required when type is inline.",
           "x-ms-secret": true
         }
       },
@@ -7127,6 +7845,48 @@
       "required": [
         "endpoints"
       ]
+    },
+    "AiGatewayToolServerTokenExchange": {
+      "type": "object",
+      "description": "Chained token-exchange configuration for a tool server endpoint.",
+      "properties": {
+        "profile": {
+          "$ref": "#/definitions/AiGatewayToolServerTokenExchangeProfile",
+          "description": "Token-exchange profile."
+        },
+        "federatedClientApplication": {
+          "$ref": "#/definitions/AiGatewayToolServerFederation",
+          "description": "Customer-owned federated client application identity."
+        },
+        "scopes": {
+          "type": "array",
+          "description": "Delegated scopes requested from the target tool server resource.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "profile"
+      ]
+    },
+    "AiGatewayToolServerTokenExchangeProfile": {
+      "type": "string",
+      "description": "Supported token-exchange profiles for a tool server endpoint.",
+      "enum": [
+        "entraOnBehalfOf"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayToolServerTokenExchangeProfile",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EntraOnBehalfOf",
+            "value": "entraOnBehalfOf",
+            "description": "Microsoft Entra chained on-behalf-of token exchange."
+          }
+        ]
+      }
     },
     "AiGatewayToolServerType": {
       "type": "string",
@@ -7172,10 +7932,9 @@
       "type": "object",
       "description": "Properties for updating an AI Gateway tool server.",
       "properties": {
-        "name": {
+        "displayName": {
           "type": "string",
-          "description": "Display name of the tool server.",
-          "x-ms-client-name": "displayName"
+          "description": "Display name of the tool server."
         },
         "description": {
           "type": "string",
@@ -7185,10 +7944,9 @@
           "$ref": "#/definitions/AiGatewayToolServerAccessState",
           "description": "Whether the tool server is available to callers."
         },
-        "type": {
+        "toolServerType": {
           "$ref": "#/definitions/AiGatewayToolServerType",
-          "description": "Tool server type.",
-          "x-ms-client-name": "toolServerType"
+          "description": "Tool server type."
         },
         "versions": {
           "type": "array",
@@ -7204,7 +7962,7 @@
             "type": "string"
           }
         },
-        "blocked": {
+        "blockList": {
           "type": "array",
           "description": "Tool names or patterns explicitly blocked.",
           "items": {
@@ -7255,6 +8013,24 @@
         "sku": {
           "$ref": "#/definitions/AiGatewaySkuUpdate",
           "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/AiGatewayUpdateProperties",
+          "description": "AI Gateway properties to update."
+        }
+      }
+    },
+    "AiGatewayUpdateProperties": {
+      "type": "object",
+      "description": "Properties for updating an AI Gateway.",
+      "properties": {
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/AiGatewayPublicNetworkAccess",
+          "description": "Whether public network access is allowed for the AI Gateway."
+        },
+        "backend": {
+          "$ref": "#/definitions/AiGatewayBackendUpdate",
+          "description": "Backend networking configuration."
         }
       }
     },
@@ -7262,11 +8038,10 @@
       "type": "object",
       "description": "Properties of an AI Gateway workspace.",
       "properties": {
-        "name": {
+        "displayName": {
           "type": "string",
           "description": "Display name of the workspace.",
-          "readOnly": true,
-          "x-ms-client-name": "displayName"
+          "readOnly": true
         },
         "description": {
           "type": "string",
@@ -7288,7 +8063,7 @@
         }
       },
       "required": [
-        "name",
+        "displayName",
         "description"
       ]
     },
@@ -7299,17 +8074,33 @@
         "properties": {
           "$ref": "#/definitions/AiGatewayWorkspaceProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
-          "readOnly": true
         }
       },
       "allOf": [
         {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "AiGatewayWorkspaceResourceListResult": {
+      "type": "object",
+      "description": "The response of a AiGatewayWorkspaceResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AiGatewayWorkspaceResource items on this page",
+          "items": {
+            "$ref": "#/definitions/AiGatewayWorkspaceResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "AiGatewayWorkspaceUpdateParameters": {

@@ -1,0 +1,23 @@
+name: Target Branch
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+
+permissions: {}
+
+jobs:
+  target-branch:
+    name: Target branch
+    if: github.repository == 'Azure/azure-rest-api-specs-pr'
+    runs-on: ubuntu-slim
+    timeout-minutes: 1
+    steps:
+      - name: Check target branch
+        env:
+          TARGET_BRANCH: ${{ github.base_ref }}
+        run: |
+          if [ "$TARGET_BRANCH" = "main" ]; then
+            echo "::error::Private main is read-only. Retarget private ARM changes to RPSaaSMaster or your team's private branch. For public changes, see https://aka.ms/azsdk/move-pr. Never publish private API specifications."
+            exit 1
+          fi

@@ -407,6 +407,7 @@ function ownSchema(
 function mergeAllOf(parts: NormalizedSchema[], own: NormalizedSchema): NormalizedSchema {
   const references = new Set(own.references ?? []);
   for (const part of parts) for (const item of part.references ?? []) references.add(item);
+  const allOf = [...parts, own];
   if ([...parts, own].every((item) => item.kind === "object" || item.kind === "any")) {
     const properties: Map<string, NonNullable<NormalizedSchema["properties"]>[number]> = new Map();
 
@@ -418,6 +419,7 @@ function mergeAllOf(parts: NormalizedSchema[], own: NormalizedSchema): Normalize
     const result = {
       ...own,
       kind: "object",
+      allOf,
       properties: [...properties.values()].sort((left, right) =>
         left.name.localeCompare(right.name),
       ),
@@ -426,7 +428,7 @@ function mergeAllOf(parts: NormalizedSchema[], own: NormalizedSchema): Normalize
     if (references.size) result.references = [...references].sort();
     return result;
   }
-  const result = { ...own, kind: "intersection", allOf: parts };
+  const result = { ...own, kind: "intersection", allOf };
   if (references.size) result.references = [...references].sort();
   return result;
 }

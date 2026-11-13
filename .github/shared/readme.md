@@ -170,6 +170,7 @@ function main() {
 - `escapeMarkdown(text)` — escape untrusted single-line text, including HTML, table pipes and mentions.
 - `inlineCode(text)` — render nonempty code text, preserving embedded backticks and edge spaces.
 - `link(label, url)` — create a link from trusted inline Markdown and a trusted destination.
+- `paragraph(...parts)` — join trusted inline Markdown with spaces into a single paragraph.
 - `table([header, ...rows])` — render equal-width GFM rows, escaping pipes and preserving line breaks.
 - `unorderedList(items)` — render Markdown list items, indenting continuation lines.
 - `details(summary, body, open = false)` — create a collapsible block with a plain-text summary

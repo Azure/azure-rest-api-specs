@@ -87,6 +87,11 @@ export function link(label: string, url: string): string {
   return `[${label}](${url})`;
 }
 
+/** Joins trusted inline Markdown with spaces into a single paragraph. */
+export function paragraph(...parts: string[]): string {
+  return parts.join(" ");
+}
+
 /** Escapes table delimiters in one pass, preserving existing pipe escapes and trusted Markdown. */
 function escapeTableCell(value: string): string {
   const escaped: string[] = [];
