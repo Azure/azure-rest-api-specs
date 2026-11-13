@@ -76,8 +76,13 @@ enum Versions {
   /**
    * The latest preview API version.
    */
+  #suppress "@azure-tools/typespec-azure-core/preview-version-last-member" "The following compatibility versions are previews, not stable releases."
   @previewVersion
   vLatestPreview: "2026-10-15-preview",
+
+  /** Registry reservation property contract. */
+  @previewVersion
+  v2027_01_01_Preview: "2027-01-01-preview",
 }
 
 interface Operations
