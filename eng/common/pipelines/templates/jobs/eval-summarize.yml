@@ -12,9 +12,6 @@ parameters:
   - name: publishDashboardResults
     type: boolean
     default: false
-  - name: allowFeatureBranchPublishing
-    type: boolean
-    default: false
 
 jobs:
   - job: Summarize
@@ -76,10 +73,9 @@ jobs:
           EVAL_EXPECTED_MATRIX: $(EvalExpectedMatrix)
 
       - ${{ if or(parameters.createDashboardBundle, parameters.publishDashboardResults) }}:
-          - template: ../steps/eval-publish-results.yml
-            parameters:
-              publishDashboardResults: ${{ parameters.publishDashboardResults }}
-              allowFeatureBranchPublishing: ${{ parameters.allowFeatureBranchPublishing }}
+        - template: ../steps/eval-publish-results.yml
+          parameters:
+            publishDashboardResults: ${{ parameters.publishDashboardResults }}
 
       # Completed failing evals are useful data: publish BEFORE the evaluation gate.
       - task: PublishTestResults@2
