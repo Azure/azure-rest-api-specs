@@ -1,0 +1,50 @@
+id: created-url-with-unavailable-verification
+name: created URL with unavailable verification
+tags:
+  - workflow
+  - offline
+inputs:
+  prompt: |
+    Consider an offline recovery scenario for the ARM API Reviewer issue skill.
+    Load the workflow but make no external calls, run no commands, and perform
+    no writes. All operation results in this conversation are fixture context.
+  follow_up_prompts:
+    - |
+      Fixture: the approved creation operation returned
+      https://github.com/Azure/azure-rest-api-specs/issues/47396,
+      but the read-back API is temporarily unavailable. The creation result is
+      known; verification is not complete. What is the status?
+checkpoints:
+  - after_turn: 1
+    graders:
+      - type: skill_invocation
+        name: loads_issue_skill
+        config:
+          required_skills:
+            - arm-api-reviewer-issue
+          mode: any_order
+          allow_extra: true
+graders:
+  - type: text
+    name: preserves_known_creation_and_pending_verification
+    config:
+      contains:
+        - https://github.com/Azure/azure-rest-api-specs/issues/47396
+      regex_match:
+        - "(?i)verification.{0,40}(pending|unavailable|incomplete|not complete)|not.{0,20}(yet )?verified|unverified|read.back.{0,40}unavailable"
+        - "(?i)(retry|repeat|resume|recheck|read.back|verify|verification)"
+      not_contains:
+        - Awaiting your approval
+        - No issue has been created
+  - type: text
+    name: no_unverified_success_claim
+    config:
+      regex_not_match:
+        - '(?i)\b(I|we)\s+(have\s+|just\s+|now\s+)?(created|filed|opened|published|submitted|posted)\s+(the|this|an|a|your|that)\s+(new\s+)?(GitHub\s+)?issue'
+        - '(?im)^[\s*_>#-]*published\s+and\s+verified'
+  - type: tool_constraint
+    name: reads_workflow_reference
+    config:
+      expect_tools:
+        - tool: view
+          path_pattern: 'references[\\/]workflow\.md$'

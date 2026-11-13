@@ -1,0 +1,37 @@
+id: novice-workflow-concern
+name: novice workflow concern
+tags:
+  - routing
+  - offline
+inputs:
+  prompt: |
+    I think the ARM API Reviewer did not start for my PR. I do not know the
+    workflow names or review contracts. Help me report the concern.
+    This is an offline exercise. Load the relevant skill, but do not call
+    GitHub, run shell commands, or publish anything. Explain any blocked
+    checks and ask only questions that I can reasonably answer.
+graders:
+  - type: text
+    name: asks_for_user_observations_without_a_diagnosis
+    config:
+      regex_match:
+        - "(?i)(what (did|do|were|would|happened|you)|can you|could you|please (share|describe)|expected|observed|example)"
+  - type: skill_invocation
+    name: skill_invocation_1
+    config:
+      required_skills:
+        - arm-api-reviewer-issue
+      mode: any_order
+      allow_extra: true
+  - type: text
+    name: output_not_contains_2
+    config:
+      not_contains:
+        - Please provide the RPC rule ID
+  - type: text
+    name: no_unverified_success_claim
+    config:
+      regex_not_match:
+        - '(?i)\b(I|we)\s+(have\s+|just\s+|now\s+)?(created|filed|opened|published|submitted|posted)\s+(the|this|an|a|your|that)\s+(new\s+)?(GitHub\s+)?issue'
+        - '(?i)\bthe\s+issue\s+(has\s+been|was|is\s+now)\s+(successfully\s+)?(created|filed|opened|published|submitted|posted)'
+        - '(?im)^[\s*_>#-]*published\s+and\s+verified'

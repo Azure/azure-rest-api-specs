@@ -1,0 +1,56 @@
+id: no-push-access-discloses-dropped-metadata
+name: no push access discloses dropped metadata
+tags:
+  - workflow
+  - offline
+inputs:
+  prompt: |
+    Prepare an ARM API Reviewer improvement issue about clearer retry
+    instructions. User report: failure messages do not explain whether a rerun
+    is safe. No specific PR or reproduction is available.
+    Offline exercise only: no GitHub calls, commands, or publication.
+  follow_up_prompts:
+    - |
+      Fixture: the push-access check returned false. Live duplicate discovery
+      found no matching open issue. Continue.
+checkpoints:
+  - after_turn: 1
+    graders:
+      - type: skill_invocation
+        name: loads_issue_skill
+        config:
+          required_skills:
+            - arm-api-reviewer-issue
+          mode: any_order
+          allow_extra: true
+graders:
+  - type: text
+    name: preview_discloses_label_and_assignee_limits
+    config:
+      contains:
+        - ARM API Reviewer agent
+        - Awaiting your approval
+        - No issue has been created
+      regex_match:
+        - "(?i)maintainer.{0,120}label|label.{0,120}maintainer"
+        - "(?i)(not|won.t|will not|cannot|can.t).{0,60}(be )?appl|drop|ignore"
+        - "(?i)assignee.{0,60}(none|no one|nobody|not set|unassigned)|no assignee|(not|won.t|will not).{0,40}assign"
+  - type: text
+    name: does_not_propose_copilot_assignment
+    config:
+      regex_not_match:
+        - '(?i)assignee\W{0,10}@?copilot'
+        - "(?i)--assignee"
+  - type: text
+    name: no_unverified_success_claim
+    config:
+      regex_not_match:
+        - '(?i)\b(I|we)\s+(have\s+|just\s+|now\s+)?(created|filed|opened|published|submitted|posted)\s+(the|this|an|a|your|that)\s+(new\s+)?(GitHub\s+)?issue'
+        - '(?i)\bthe\s+issue\s+(has\s+been|was|is\s+now)\s+(successfully\s+)?(created|filed|opened|published|submitted|posted)'
+        - '(?im)^[\s*_>#-]*published\s+and\s+verified'
+  - type: tool_constraint
+    name: reads_workflow_reference
+    config:
+      expect_tools:
+        - tool: view
+          path_pattern: 'references[\\/]workflow\.md$'

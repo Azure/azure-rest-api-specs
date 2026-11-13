@@ -1,0 +1,17 @@
+id: unrelated-service-api-bug
+name: unrelated service api bug
+tags:
+  - routing
+  - offline
+inputs:
+  prompt: |
+    I need help reporting a Microsoft.Compute service API returning HTTP 500.
+    This is not about the ARM API Reviewer agent or its infrastructure.
+    Do not publish anything.
+graders:
+  - type: skill_invocation
+    name: skill_invocation_1
+    config:
+      forbidden_skills:
+        - arm-api-reviewer-issue
+      allow_extra: true
