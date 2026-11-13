@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -222,7 +223,7 @@ model OperationDisplay {
 /**
  * An error response for a resource management request.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the published CloudError envelope and common-types error details across existing subscription API versions."
 @error
 @Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
@@ -299,6 +300,79 @@ model Location {
    */
   @identifiers(#[])
   availabilityZoneMappings?: AvailabilityZoneMappings[];
+
+  /**
+   * System-policy restrictions for this standard location, returned only when policyAware is true.
+   * Not returned for extended locations, including edge zones. Absence does not indicate that the location is allowed.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_10_01)
+  policyRestrictions?: LocationPolicyRestrictions;
+}
+
+/**
+ * The result of evaluating enforced, subscription-wide system-policy deny rules that depend only on location.
+ * This result does not evaluate non-system policies or rules requiring additional resource context, and does not guarantee deployment success.
+ */
+@added(Versions.v2026_10_01)
+model LocationPolicyRestrictions {
+  /**
+   * Allowed when evaluation completed and found no applicable system-policy restriction for this location.
+   * Restricted when an applicable system policy denies this location, with reason RestrictedByPolicy.
+   * Unknown when a result cannot be determined, including failed, timed-out, missing, or ambiguous evaluation, with reason EvaluationUnavailable.
+   * Additional status values may be introduced. Clients must treat missing or unrecognized status values as unknown, not as Allowed.
+   */
+  @visibility(Lifecycle.Read)
+  status: LocationPolicyRestrictionStatus;
+
+  /**
+   * The reason for a restricted or unknown result. RestrictedByPolicy accompanies status=Restricted;
+   * EvaluationUnavailable accompanies status=Unknown. Omitted when status=Allowed.
+   */
+  @visibility(Lifecycle.Read)
+  reason?: LocationPolicyRestrictionReason;
+}
+
+/**
+ * The outcome of evaluating system-policy restrictions for a location. Additional values may be introduced;
+ * clients must treat unrecognized values as unknown, not as Allowed.
+ */
+@added(Versions.v2026_10_01)
+union LocationPolicyRestrictionStatus {
+  string,
+
+  /**
+   * Evaluation completed and found no applicable system-policy restriction for the location.
+   */
+  Allowed: "Allowed",
+
+  /**
+   * An applicable system policy denies the location.
+   */
+  Restricted: "Restricted",
+
+  /**
+   * Policy evaluation could not determine a result for the location.
+   */
+  Unknown: "Unknown",
+}
+
+/**
+ * The reason a location is restricted or its policy evaluation result is unknown.
+ */
+@added(Versions.v2026_10_01)
+union LocationPolicyRestrictionReason {
+  string,
+
+  /**
+   * An applicable system policy denies the location.
+   */
+  RestrictedByPolicy: "RestrictedByPolicy",
+
+  /**
+   * Policy evaluation could not determine a result for the location.
+   */
+  EvaluationUnavailable: "EvaluationUnavailable",
 }
 
 /**
