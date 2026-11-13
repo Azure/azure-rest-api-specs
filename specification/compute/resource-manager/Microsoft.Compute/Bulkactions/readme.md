@@ -31,7 +31,7 @@ title: ComputeBulkActionsResourceProviderClient
 ```yaml
 description: The Compute Bulk Actions Resource Provider Client
 openapi-type: arm
-tag: package-2026-10-06-preview
+tag: package-2026-11-06-preview
 
 suppressions:
   - code: DefinitionsPropertiesNamesCamelCase
@@ -58,6 +58,15 @@ suppressions:
     where: $.definitions.ExecutionParameters.properties.additionalCreateParameters
 ```
 
+### Tag: package-2026-11-06-preview
+
+These settings apply only when `--tag=package-2026-11-06-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-11-06-preview'
+input-file:
+  - preview/2026-11-06-preview/Bulkactions.json
+```
+
 ### Tag: package-2026-10-06-preview
 
 These settings apply only when `--tag=package-2026-10-06-preview` is specified on the command line.
@@ -65,6 +74,9 @@ These settings apply only when `--tag=package-2026-10-06-preview` is specified o
 ```yaml $(tag) == 'package-2026-10-06-preview'
 input-file:
   - preview/2026-10-06-preview/Bulkactions.json
+```
+
+```yaml $(tag) == 'package-2026-10-06-preview' || $(tag) == 'package-2026-11-06-preview'
 suppressions:
   - code: PostResponseCodes
     reason: >
@@ -181,7 +193,7 @@ input-file:
   - preview/2026-07-06-preview/Bulkactions.json
 ```
 
-```yaml $(tag) == 'package-2026-07-06-preview' || $(tag) == 'package-2026-08-06-preview' || $(tag) == 'package-2026-09-06-preview' || $(tag) == 'package-2026-10-06-preview'
+```yaml $(tag) == 'package-2026-07-06-preview' || $(tag) == 'package-2026-08-06-preview' || $(tag) == 'package-2026-09-06-preview' || $(tag) == 'package-2026-10-06-preview' || $(tag) == 'package-2026-11-06-preview'
 suppressions:
   - code: PostResponseCodes
     reason: >
@@ -306,19 +318,19 @@ suppressions:
   - code: PostResponseCodes
     reason: ScheduledActions disable is an async void action (ArmResourceActionNoResponseContentAsync, final-state-via Location). The POST returns 202 with the Azure-AsyncOperation and Location polling headers; the terminal no-content (204) result is delivered by polling the Location status URL per the ARM async contract (RPC-Async-V1-07). No library template emits an explicit 202+204 for async-void actions; mirrors the Microsoft.Compute BulkActions / ComputeBulkActions precedent for the same pattern.
     from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/scheduledActions/{scheduledActionName}/disable"].post
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/scheduledActions/{recurringBulkActionName}/disable"].post
   - code: PostResponseCodes
     reason: ScheduledActions enable is an async void action (ArmResourceActionNoResponseContentAsync, final-state-via Location). The POST returns 202 with the Azure-AsyncOperation and Location polling headers; the terminal no-content (204) result is delivered by polling the Location status URL per the ARM async contract (RPC-Async-V1-07). No library template emits an explicit 202+204 for async-void actions; mirrors the Microsoft.Compute BulkActions / ComputeBulkActions precedent for the same pattern.
     from: Bulkactions.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/scheduledActions/{scheduledActionName}/enable"].post
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/scheduledActions/{recurringBulkActionName}/enable"].post
   - code: EnumInsteadOfBoolean
     reason: The disabled property is a binary on/off flag (whether the scheduled action / notification is disabled) with no foreseeable additional states, so a boolean is the clearest representation and an enum would add no expressive value; mirrors the Microsoft.Compute BulkActions precedent for binary flags.
     from: Bulkactions.json
     where:
       - $.definitions.NotificationProperties.properties.disabled
-      - $.definitions.ScheduledActionProperties.properties.disabled
-      - $.definitions.ScheduledActionUpdateProperties.properties.disabled
-      - $.definitions.ScheduledActionsExtensionProperties.properties.disabled
+      - $.definitions.RecurringBulkActionProperties.properties.disabled
+      - $.definitions.RecurringBulkActionUpdateProperties.properties.disabled
+      - $.definitions.RecurringBulkActionExtensionProperties.properties.disabled
   - code: ParameterNotUsingCommonTypes
     reason: The scheduledActionsOperationStatuses status-monitor is a manually-routed GET (mirroring the BulkActions getOperationStatus pattern); its location and operationId path parameters are declared inline and bound to the explicit route; mirrors the Microsoft.Compute BulkActions precedent.
     from: Bulkactions.json

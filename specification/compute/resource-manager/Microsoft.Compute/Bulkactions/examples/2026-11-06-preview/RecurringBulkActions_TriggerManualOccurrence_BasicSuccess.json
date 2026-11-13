@@ -1,0 +1,34 @@
+{
+  "title": "Run a recurring bulk action immediately",
+  "description": "Creates a manual occurrence for immediate execution. The initial response is 202 Accepted with no body; the 200 response shows the occurrence returned by the Location polling URL. The LRO completes when the occurrence is created, so its provisioningState is Created and scheduling and execution continue afterward. Read the occurrence and its resources to track execution. A conflicting nearby occurrence causes the request to be rejected.",
+  "operationId": "RecurringBulkActions_TriggerManualOccurrence",
+  "parameters": {
+    "api-version": "2026-11-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "recurringBulkActionName": "weekday-start"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/scheduledActionsOperationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-11-06-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/scheduledActionsOperationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-11-06-preview&monitor=true"
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "scheduledTime": "2026-09-01T02:00:00Z",
+          "resultSummary": {
+            "total": 2,
+            "statuses": []
+          },
+          "provisioningState": "Created"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/scheduledActions/weekday-start/occurrences/67b5bada-4772-43fc-8dbb-402476d98a45",
+        "name": "67b5bada-4772-43fc-8dbb-402476d98a45",
+        "type": "microsoft.compute/scheduledActions/occurrences"
+      }
+    }
+  }
+}
