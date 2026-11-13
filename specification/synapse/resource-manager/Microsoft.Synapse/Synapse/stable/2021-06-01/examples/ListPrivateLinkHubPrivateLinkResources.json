@@ -1,18 +1,18 @@
 {
   "parameters": {
-    "subscriptionId": "01234567-89ab-4def-0123-456789abcdef",
-    "resourceGroupName": "ExampleResourceGroup",
+    "api-version": "2021-06-01",
     "privateLinkHubName": "ExamplePrivateLinkHub",
-    "api-version": "2021-06-01"
+    "resourceGroupName": "ExampleResourceGroup",
+    "subscriptionId": "01234567-89ab-4def-0123-456789abcdef"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/privateLinkHubs/ExamplePrivateLinkHub/privateLinkResources/sql",
             "name": "sql",
             "type": "Microsoft.Synapse/privateLinkHubs/privateLinkResources",
+            "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/privateLinkHubs/ExamplePrivateLinkHub/privateLinkResources/sql",
             "properties": {
               "groupId": "sql",
               "requiredMembers": [
@@ -26,5 +26,7 @@
         ]
       }
     }
-  }
+  },
+  "operationId": "PrivateLinkHubPrivateLinkResources_List",
+  "title": "Get private link resources for private link hub"
 }

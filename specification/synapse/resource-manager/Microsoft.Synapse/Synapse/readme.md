@@ -40,21 +40,10 @@ These settings apply only when `--tag=package-composite-v2` is specified on the 
 
 ```yaml $(tag) == 'package-composite-v2'
 input-file:
-  - stable/2021-06-01/azureADOnlyAuthentication.json
-  - stable/2021-06-01/checkNameAvailability.json
-  - stable/2021-06-01/firewallRule.json
-  - stable/2021-06-01/keys.json
-  - stable/2021-06-01/operations.json
-  - stable/2021-06-01/privateEndpointConnections.json
-  - stable/2021-06-01/privateLinkResources.json
-  - stable/2021-06-01/privatelinkhub.json
   - stable/2021-06-01/sqlPool.json
-  - stable/2021-06-01/sqlServer.json
   - stable/2021-06-01/workspace.json
   - preview/2021-06-01-preview/bigDataPool.json
-  - preview/2021-06-01-preview/library.json
   - preview/2021-06-01-preview/integrationRuntime.json
-  - preview/2021-06-01-preview/sparkConfiguration.json
   - preview/2021-06-01-preview/kustoPool.json
 ```
 
@@ -64,21 +53,10 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 
 ```yaml $(tag) == 'package-composite-v1'
 input-file:
-  - stable/2021-06-01/azureADOnlyAuthentication.json
-  - stable/2021-06-01/checkNameAvailability.json
-  - stable/2021-06-01/firewallRule.json
-  - stable/2021-06-01/keys.json
-  - stable/2021-06-01/operations.json
-  - stable/2021-06-01/privateEndpointConnections.json
-  - stable/2021-06-01/privateLinkResources.json
-  - stable/2021-06-01/privatelinkhub.json
   - stable/2021-06-01/sqlPool.json
-  - stable/2021-06-01/sqlServer.json
   - stable/2021-06-01/workspace.json
   - preview/2021-06-01-preview/bigDataPool.json
-  - preview/2021-06-01-preview/library.json
   - preview/2021-06-01-preview/integrationRuntime.json
-  - preview/2021-06-01-preview/sparkConfiguration.json
 ```
 
 ### Tag: package-2021-06
@@ -88,19 +66,10 @@ These settings apply only when `--tag=package-2021-06` is specified on the comma
 ```yaml $(tag) == 'package-2021-06'
 input-file:
   - stable/2021-06-01/bigDataPool.json
-  - stable/2021-06-01/checkNameAvailability.json
-  - stable/2021-06-01/firewallRule.json
   - stable/2021-06-01/integrationRuntime.json
-  - stable/2021-06-01/keys.json
   - stable/2021-06-01/library.json
-  - stable/2021-06-01/operations.json
-  - stable/2021-06-01/privateEndpointConnections.json
-  - stable/2021-06-01/privateLinkResources.json
-  - stable/2021-06-01/privatelinkhub.json
   - stable/2021-06-01/sqlPool.json
-  - stable/2021-06-01/sqlServer.json
   - stable/2021-06-01/workspace.json
-  - stable/2021-06-01/azureADOnlyAuthentication.json
 ```
 
 ### Tag: package-preview-2021-06
@@ -114,7 +83,6 @@ input-file:
   - preview/2021-06-01-preview/firewallRule.json
   - preview/2021-06-01-preview/integrationRuntime.json
   - preview/2021-06-01-preview/keys.json
-  - preview/2021-06-01-preview/library.json
   - preview/2021-06-01-preview/operations.json
   - preview/2021-06-01-preview/privateEndpointConnections.json
   - preview/2021-06-01-preview/privateLinkResources.json
@@ -122,7 +90,6 @@ input-file:
   - preview/2021-06-01-preview/sqlPool.json
   - preview/2021-06-01-preview/sqlServer.json
   - preview/2021-06-01-preview/workspace.json
-  - preview/2021-06-01-preview/sparkConfiguration.json
   - preview/2021-06-01-preview/azureADOnlyAuthentication.json
 ```
 

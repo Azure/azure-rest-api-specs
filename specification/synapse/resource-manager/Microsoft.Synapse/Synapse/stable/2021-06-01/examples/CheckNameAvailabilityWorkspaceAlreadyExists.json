@@ -1,7 +1,7 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "api-version": "2021-06-01",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "request": {
       "name": "workspace1",
       "type": "Microsoft.Synapse/workspaces"
@@ -12,8 +12,8 @@
       "body": {
         "name": "workspace1",
         "available": false,
-        "reason": "AlreadyExists",
-        "message": "Specified workspace name is already used"
+        "message": "Specified workspace name is already used",
+        "reason": "AlreadyExists"
       }
     },
     "default": {
@@ -24,5 +24,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "Operations_CheckNameAvailability",
+  "title": "Check for a workspace name that already exists"
 }

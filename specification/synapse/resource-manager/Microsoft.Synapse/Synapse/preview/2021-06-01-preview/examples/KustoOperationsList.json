@@ -4,22 +4,22 @@
   },
   "responses": {
     "200": {
-      "headers": {
-        "azure-asyncoperation": "https://ms.web.azuresynapse.net"
-      },
       "body": {
         "value": [
           {
             "name": "operationName",
             "display": {
-              "provider": "providerName",
-              "resource": "resourceName",
+              "description": "operation description",
               "operation": "operationName",
-              "description": "operation description"
+              "provider": "providerName",
+              "resource": "resourceName"
             },
             "origin": "user,system"
           }
         ]
+      },
+      "headers": {
+        "azure-asyncoperation": "https://ms.web.azuresynapse.net"
       }
     },
     "default": {
@@ -30,5 +30,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "KustoOperations_List",
+  "title": "KustoOperationsList"
 }

@@ -1,40 +1,40 @@
 {
   "parameters": {
-    "subscriptionId": "01234567-89ab-4def-0123-456789abcdef",
+    "api-version": "2021-06-01",
     "resourceGroupName": "ExampleResourceGroup",
-    "workspaceName": "ExampleWorkspace",
     "sqlPoolName": "ExampleSqlPool",
-    "api-version": "2021-06-01"
+    "subscriptionId": "01234567-89ab-4def-0123-456789abcdef",
+    "workspaceName": "ExampleWorkspace"
   },
   "responses": {
     "200": {
-      "headers": {
-        "azure-asyncoperation": "https://ms.web.azuresynapse.net"
-      },
       "body": {
-        "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/sqlPools/ExampleSqlPool",
         "name": "ExampleSqlPool",
         "type": "Microsoft.Synapse/workspaces/sqlPools",
+        "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/sqlPools/ExampleSqlPool",
         "location": "West US 2",
         "properties": {
           "provisioningState": "Deleting",
           "status": "Paused"
         }
+      },
+      "headers": {
+        "azure-asyncoperation": "https://ms.web.azuresynapse.net"
       }
     },
     "202": {
-      "headers": {
-        "azure-asyncoperation": "https://ms.web.azuresynapse.net"
-      },
       "body": {
-        "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/sqlPools/ExampleSqlPool",
         "name": "ExampleSqlPool",
         "type": "Microsoft.Synapse/workspaces/sqlPools",
+        "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/sqlPools/ExampleSqlPool",
         "location": "West US 2",
         "properties": {
           "provisioningState": "Deleting",
           "status": "Paused"
         }
+      },
+      "headers": {
+        "azure-asyncoperation": "https://ms.web.azuresynapse.net"
       }
     },
     "204": {},
@@ -46,5 +46,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "SqlPools_Delete",
+  "title": "Delete a SQL Analytics pool"
 }
