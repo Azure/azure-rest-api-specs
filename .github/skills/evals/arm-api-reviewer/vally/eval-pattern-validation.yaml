@@ -10,7 +10,7 @@ description: |
 # root environment into each stimulus environment, and the path resolves relative to this
 # file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
 # effect when the run passes --skill-dir, which neither the local nor the CI runner does.
-environment:
+agent_environment:
   skills:
     - "../../../azure-api-review"
 
@@ -20,8 +20,6 @@ tags:
 defaults:
   runs: 1
   timeout: "300s"
-  model: gpt-5.6-sol?effort=high
-  judge_model: claude-sonnet-4.6
 
 scoring:
   threshold: 0.7
@@ -35,26 +33,24 @@ stimuli:
         - src: "../fixtures/arm-openapi/denylist-pattern-new.json"
           dest: "specification/patternsvc/resource-manager/Microsoft.PatternTest/stable/2025-01-01/patternsvc.json"
     prompt: >
-      Review the following ARM resource-manager OpenAPI specification file for
-      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
-      service with no previous API version. Report all findings with rule IDs,
-      line numbers, and fix suggestions.
+      Review the following ARM resource-manager OpenAPI specification file for compliance with Azure REST API Guidelines and ARM RPC rules. This is a new service with no previous API version. Report all findings with rule IDs, line numbers, and fix suggestions.
 
       File: specification/patternsvc/resource-manager/Microsoft.PatternTest/stable/2025-01-01/patternsvc.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "OAPI-PATTERN-ALLOWLIST rule cited"
+        name: "oapi-pattern-allowlist-rule-cited"
         config:
           pattern: "OAPI-PATTERN-ALLOWLIST"
       - type: output-matches
-        name: "denylist identified"
+        name: "denylist-identified"
         config:
           pattern: "(?i)denylist|negated.character.class|\\[\\^"
       - type: output-matches
-        name: "blocking severity for new property"
+        name: "blocking-severity-for-new-property"
         config:
           pattern: "(?i)blocking|error|must.not|must not"
       - type: prompt
@@ -76,24 +72,20 @@ stimuli:
         - src: "../fixtures/version-pairs/denylist-pattern/stable-2025-01-01.json"
           dest: "specification/policysvc/resource-manager/Microsoft.PolicySvc/stable/2025-01-01/policysvc.json"
     prompt: >
-      Review the following ARM resource-manager OpenAPI specification files. The
-      new version is stable/2025-01-01 and the previous version is
-      stable/2024-01-01. Report all findings with rule IDs, line numbers, and
-      fix suggestions. Pay special attention to pattern constraint style
-      (allowlist vs denylist) and whether violations are new or pre-existing.
+      Review the following ARM resource-manager OpenAPI specification files. The new version is stable/2025-01-01 and the previous version is stable/2024-01-01. Report all findings with rule IDs, line numbers, and fix suggestions. Pay special attention to pattern constraint style (allowlist vs denylist) and whether violations are new or pre-existing.
 
-      Previous version: specification/policysvc/resource-manager/Microsoft.PolicySvc/stable/2024-01-01/policysvc.json
-      New version: specification/policysvc/resource-manager/Microsoft.PolicySvc/stable/2025-01-01/policysvc.json
-    constraints:
-      expect_skills:
-        - azure-api-review
+      Previous version: specification/policysvc/resource-manager/Microsoft.PolicySvc/stable/2024-01-01/policysvc.json New version: specification/policysvc/resource-manager/Microsoft.PolicySvc/stable/2025-01-01/policysvc.json
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "OAPI-PATTERN-ALLOWLIST rule cited"
+        name: "oapi-pattern-allowlist-rule-cited-2"
         config:
           pattern: "OAPI-PATTERN-ALLOWLIST"
       - type: output-matches
-        name: "severity differentiation present"
+        name: "severity-differentiation-present"
         config:
           pattern: "(?i)(warning|warn|existing|pre.existing|prior).*(blocking|new|added)|(blocking|new|added).*(warning|warn|existing|pre.existing|prior)"
       - type: prompt
@@ -112,26 +104,24 @@ stimuli:
         - src: "../fixtures/typespec/denylist-pattern-violations.tsp"
           dest: "specification/policysvc/resource-manager/Microsoft.PolicyService/stable/2025-01-01/main.tsp"
     prompt: >
-      Review the following ARM TypeSpec file for compliance with Azure REST API
-      Guidelines and ARM RPC rules. This is a new service with no previous API
-      version. Report all findings with rule IDs, line numbers, and fix
-      suggestions. Pay special attention to @pattern decorator values.
+      Review the following ARM TypeSpec file for compliance with Azure REST API Guidelines and ARM RPC rules. This is a new service with no previous API version. Report all findings with rule IDs, line numbers, and fix suggestions. Pay special attention to @pattern decorator values.
 
       File: specification/policysvc/resource-manager/Microsoft.PolicyService/stable/2025-01-01/main.tsp
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "OAPI-PATTERN-ALLOWLIST rule cited"
+        name: "oapi-pattern-allowlist-rule-cited-3"
         config:
           pattern: "OAPI-PATTERN-ALLOWLIST"
       - type: output-matches
-        name: "denylist identified"
+        name: "denylist-identified-2"
         config:
           pattern: "(?i)denylist|negated.character.class|\\[\\^"
       - type: output-matches
-        name: "blocking severity"
+        name: "blocking-severity"
         config:
           pattern: "(?i)blocking|error|must.not|must not"
       - type: prompt

@@ -1329,23 +1329,6 @@ describe("ARM API review consistency and hardening", () => {
     expect(compiled).not.toContain("COPILOT_MODEL: ${{ vars.GH_AW_MODEL_AGENT_COPILOT");
   });
 
-  it("keeps the eval suite on the same model as production", async () => {
-    const source = await readFile(join(ROOT, SOURCE_FILE), "utf8");
-    const canonicalModel = parseArmApiReviewerModels(source).primary;
-    const dir = join(ROOT, ".github/skills/evals/arm-api-reviewer/vally");
-    const files = (await readdir(dir)).filter((f) => f.endsWith(".yaml"));
-    expect(files.length).toBeGreaterThan(0);
-
-    for (const file of files) {
-      const text = await readFile(join(dir, file), "utf8");
-      // The agent under test must match the production model, or eval results
-      // describe a model that never reviews a real PR. Anchored to the line
-      // start because plain `model:` also matches `judge_model:`.
-      expect(text, `${file} agent model`).toContain(`model: ${canonicalModel}`);
-      // The judge is a separate role and deliberately stays cheaper.
-      expect(text, `${file} judge model`).toContain("judge_model: claude-sonnet-4.6");
-    }
-  });
   it("routes findings to a drop group by recorded category, not by rule ID", async () => {
     const workflow = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
     const agent = collapseWhitespace(await readFile(join(ROOT, AGENT_FILE), "utf8"));

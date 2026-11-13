@@ -12,7 +12,7 @@ description: |
 # root environment into each stimulus environment, and the path resolves relative to this
 # file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
 # effect when the run passes --skill-dir, which neither the local nor the CI runner does.
-environment:
+agent_environment:
   skills:
     - "../../../azure-api-review"
 
@@ -22,8 +22,6 @@ tags:
 defaults:
   runs: 1
   timeout: "180s"
-  model: gpt-5.6-sol?effort=high
-  judge_model: claude-sonnet-4.6
 
 scoring:
   threshold: 0.7
@@ -37,8 +35,7 @@ stimuli:
         - src: "../fixtures/suppressions-yaml/suppressions-no-reason.yaml"
           dest: "specification/suppressions.yaml"
     prompt: >
-      Review the following `specification/suppressions.yaml` file. The PR adds
-      two new entries to a previously-existing file:
+      Review the following `specification/suppressions.yaml` file. The PR adds two new entries to a previously-existing file:
 
         1. A new entry for `tool: TypeSpecValidation`, `rules: [NoUnreferencedTypes]`,
            paths `noreasonsvc/NoReason.Management` — with NO `reason:` field at all.
@@ -46,30 +43,26 @@ stimuli:
            paths `vaguesvc/Vague.Management` — with `reason: existing pattern`
            (a vague, non-actionable placeholder).
 
-      The pre-existing entry (`FolderStructure / MustUseV2` on
-      `existingsvc/Existing.Management`) was already present on the base branch
-      and should NOT be flagged.
+      The pre-existing entry (`FolderStructure / MustUseV2` on `existingsvc/Existing.Management`) was already present on the base branch and should NOT be flagged.
 
-      Apply the suppressions.yaml continuity analysis described in
-      `.github/agents/arm-api-reviewer.agent.md` (Step 4, "For
-      `suppressions.yaml` files"). Report findings with rule IDs, severity,
-      and the specific tuple (`tool` + `rules` + `paths`) being flagged.
+      Apply the suppressions.yaml continuity analysis described in `.github/agents/arm-api-reviewer.agent.md` (Step 4, "For `suppressions.yaml` files"). Report findings with rule IDs, severity, and the specific tuple (`tool` + `rules` + `paths`) being flagged.
 
       File: specification/suppressions.yaml
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "missing-reason entry flagged"
+        name: "missing-reason-entry-flagged"
         config:
           pattern: "(?is)NoUnreferencedTypes.{0,300}(reason|justification)|(reason|justification).{0,300}NoUnreferencedTypes"
       - type: output-matches
-        name: "vague-reason entry flagged"
+        name: "vague-reason-entry-flagged"
         config:
           pattern: "(?is)RequireDocumentation.{0,300}(vague|existing pattern|insufficient|non-actionable)|(vague|existing pattern|insufficient|non-actionable).{0,300}RequireDocumentation"
       - type: output-not-matches
-        name: "pre-existing entry NOT flagged"
+        name: "pre-existing-entry-not-flagged"
         config:
           pattern: "(?is)\\bNew\\b.{0,80}(FolderStructure|MustUseV2)|(FolderStructure|MustUseV2).{0,80}\\bNew\\b"
       - type: prompt
@@ -87,39 +80,33 @@ stimuli:
         - src: "../fixtures/suppressions-yaml/suppressions-security-rule.yaml"
           dest: "specification/suppressions.yaml"
     prompt: >
-      Review the following `specification/suppressions.yaml` file. The PR adds
-      two new entries to a previously-existing file:
+      Review the following `specification/suppressions.yaml` file. The PR adds two new entries to a previously-existing file:
 
         1. `tool: Spectral`, `rules: [XmsSecretNotReadBack]`, paths
            `secsupprsvc/SecSuppr.Management`, `reason: will fix later`.
         2. `tool: Spectral`, `rules: [SecretPropertyMustBeWriteOnly]`, paths
            `secsupprsvc/SecSuppr.Management`, NO `reason:` field.
 
-      Both `XmsSecretNotReadBack` and `SecretPropertyMustBeWriteOnly` are
-      SECURITY-related rules — they prevent secrets from being read back through
-      the API surface.
+      Both `XmsSecretNotReadBack` and `SecretPropertyMustBeWriteOnly` are SECURITY-related rules — they prevent secrets from being read back through the API surface.
 
-      Apply the suppressions.yaml continuity analysis described in
-      `.github/agents/arm-api-reviewer.agent.md`. Report findings with rule IDs,
-      severity, and the specific tuple being flagged. Per agent guidance,
-      suppressions of security-related rules with insufficient justification
-      must be treated as Blocking.
+      Apply the suppressions.yaml continuity analysis described in `.github/agents/arm-api-reviewer.agent.md`. Report findings with rule IDs, severity, and the specific tuple being flagged. Per agent guidance, suppressions of security-related rules with insufficient justification must be treated as Blocking.
 
       File: specification/suppressions.yaml
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "XmsSecretNotReadBack flagged as Blocking"
+        name: "xmssecretnotreadback-flagged-as-blocking"
         config:
           pattern: "(?is)XmsSecretNotReadBack.{0,400}\\bBlocking\\b|\\bBlocking\\b.{0,400}XmsSecretNotReadBack"
       - type: output-matches
-        name: "SecretPropertyMustBeWriteOnly flagged as Blocking"
+        name: "secretpropertymustbewriteonly-flagged-as-blocking"
         config:
           pattern: "(?is)SecretPropertyMustBeWriteOnly.{0,400}\\bBlocking\\b|\\bBlocking\\b.{0,400}SecretPropertyMustBeWriteOnly"
       - type: output-matches
-        name: "security framing present"
+        name: "security-framing-present"
         config:
           pattern: "(?i)security|secret"
       - type: prompt

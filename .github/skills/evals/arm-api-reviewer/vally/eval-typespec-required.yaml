@@ -11,7 +11,7 @@ description: |
 # root environment into each stimulus environment, and the path resolves relative to this
 # file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
 # effect when the run passes --skill-dir, which neither the local nor the CI runner does.
-environment:
+agent_environment:
   skills:
     - "../../../azure-api-review"
   files:
@@ -42,8 +42,6 @@ tags:
 defaults:
   runs: 1
   timeout: "300s"
-  model: gpt-5.6-sol?effort=high
-  judge_model: claude-sonnet-4.6
 
 scoring:
   threshold: 0.7
@@ -66,22 +64,20 @@ stimuli:
           and is configured to emit this OpenAPI directory.
         - The swagger file does NOT contain the `x-typespec-generated` extension.
 
-      Apply all applicable review rules from the loaded instruction files,
-      including the TypeSpec-required rule defined in `openapi-review.instructions.md` §2A
-      (rule ID `TSP-REQUIRED-V1`). Report all findings with rule IDs, severity,
-      line numbers, and fix suggestions.
+      Apply all applicable review rules from the loaded instruction files, including the TypeSpec-required rule defined in `openapi-review.instructions.md` §2A (rule ID `TSP-REQUIRED-V1`). Report all findings with rule IDs, severity, line numbers, and fix suggestions.
 
       File: specification/cleanservice/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleanservice.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-contains
-        name: "rule TSP-REQUIRED-V1 cited"
+        name: "rule-tsp-required-v1-cited"
         config:
           substring: "TSP-REQUIRED-V1"
       - type: output-matches
-        name: "TSP-REQUIRED-V1 reported as Blocking"
+        name: "tsp-required-v1-reported-as-blocking"
         config:
           pattern: "(?is)TSP-REQUIRED-V1.{0,400}\\bBlocking\\b|\\bBlocking\\b.{0,400}TSP-REQUIRED-V1"
       - type: prompt
@@ -107,19 +103,18 @@ stimuli:
         - The TypeSpec source (`main.tsp`, `tspconfig.yaml`) lives in the sibling project directory
           `specification/tspgenservice/TspGenService.Management/` and is not modified in this PR.
 
-      Apply all applicable review rules from the loaded instruction files.
-      Report all findings with rule IDs, severity, line numbers, and fix suggestions.
-      If the spec is fully compliant, state that no blocking issues were found.
+      Apply all applicable review rules from the loaded instruction files. Report all findings with rule IDs, severity, line numbers, and fix suggestions. If the spec is fully compliant, state that no blocking issues were found.
 
       File: specification/tspgenservice/TspGenService.Management/stable/2026-05-01/tspgenservice.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
       # Fail only on canonical finding glyphs or telemetry, not explanatory
       # mentions such as "No Blocking issues; TSP-REQUIRED-V1 does not apply."
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-not-matches
-        name: "TSP-REQUIRED-V1 must NOT be flagged"
+        name: "tsp-required-v1-must-not-be-flagged"
         config:
           pattern: "(?im)^.*(?:🔴|🟠|🔵).{0,200}TSP-REQUIRED-V1|^.*TSP-REQUIRED-V1.{0,200}(?:🔴|🟠|🔵)|posted-by:[^\\n]*rule:\\s*TSP-REQUIRED-V1"
       - type: prompt
@@ -147,19 +142,18 @@ stimuli:
         - The PR does NOT add or modify any `.tsp` files.
         - There is no sibling TypeSpec project for this service.
 
-      Apply all applicable review rules from the loaded instruction files.
-      Report all findings with rule IDs, severity, line numbers, and fix suggestions.
-      If the spec is fully compliant, state that no blocking issues were found.
+      Apply all applicable review rules from the loaded instruction files. Report all findings with rule IDs, severity, line numbers, and fix suggestions. If the spec is fully compliant, state that no blocking issues were found.
 
       File: specification/cleanservice/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleanservice.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
       # Fail only on canonical finding glyphs or telemetry, not explanatory
       # mentions such as "No Blocking issues; TSP-REQUIRED-V1 does not apply."
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-not-matches
-        name: "TSP-REQUIRED-V1 must NOT be flagged on maintenance edits"
+        name: "tsp-required-v1-must-not-be-flagged-on-maintenance-edits"
         config:
           pattern: "(?im)^.*(?:🔴|🟠|🔵).{0,200}TSP-REQUIRED-V1|^.*TSP-REQUIRED-V1.{0,200}(?:🔴|🟠|🔵)|posted-by:[^\\n]*rule:\\s*TSP-REQUIRED-V1"
       - type: prompt
@@ -183,30 +177,24 @@ stimuli:
         - src: "../fixtures/typespec/unrelated-version-tspconfig.yaml"
           dest: "specification/cleanservice/Microsoft.CleanService/tspconfig.yaml"
     prompt: >
-      Review the new handwritten OpenAPI version for TSP-REQUIRED-V1. Read the
-      supplied instruction files and TypeSpec project before deciding. The
-      OpenAPI directory `stable/2025-01-01` is new and has no
-      `x-typespec-generated` marker. The sibling TypeSpec project declares only
-      `2024-01-01` and its emitter outputs only the `stable/2024-01-01`
-      directory. Do not edit files; return the review finding.
+      Review the new handwritten OpenAPI version for TSP-REQUIRED-V1. Read the supplied instruction files and TypeSpec project before deciding. The OpenAPI directory `stable/2025-01-01` is new and has no `x-typespec-generated` marker. The sibling TypeSpec project declares only `2024-01-01` and its emitter outputs only the `stable/2024-01-01` directory. Do not edit files; return the review finding.
 
-      OpenAPI: specification/cleanservice/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleanservice.json
-      TypeSpec: specification/cleanservice/Microsoft.CleanService/main.tsp
-      Config: specification/cleanservice/Microsoft.CleanService/tspconfig.yaml
-    constraints:
-      expect_skills:
-        - azure-api-review
+      OpenAPI: specification/cleanservice/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleanservice.json TypeSpec: specification/cleanservice/Microsoft.CleanService/main.tsp Config: specification/cleanservice/Microsoft.CleanService/tspconfig.yaml
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-contains
-        name: "rule TSP-REQUIRED-V1 cited"
+        name: "rule-tsp-required-v1-cited-2"
         config:
           substring: "TSP-REQUIRED-V1"
       - type: output-matches
-        name: "unlinked handwritten version is Blocking"
+        name: "unlinked-handwritten-version-is-blocking"
         config:
           pattern: "(?is)TSP-REQUIRED-V1.{0,400}\\bBlocking\\b|\\bBlocking\\b.{0,400}TSP-REQUIRED-V1"
       - type: output-matches
-        name: "emission linkage mismatch explained"
+        name: "emission-linkage-mismatch-explained"
         config:
           pattern: "(?is)(?:2024-01-01|2025-01-01).{0,300}(?:emit|output|link|version)"
       - type: prompt
