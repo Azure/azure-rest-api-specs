@@ -28,6 +28,7 @@ op DataLakeOperation<
 
   ...ApiVersionHeader,
   ...ClientRequestIdParameter,
+  ...RequestPriorityParameter,
   ...TParams,
 ):
   | (TResponse & {
@@ -40,6 +41,7 @@ op DataLakeOperation<
       ...ApiVersionHeader;
       ...RequestIdResponseHeader;
       ...ClientRequestIdResponseHeader;
+      ...RequestPriorityResponseHeaderPrivate;
     })
   | TError;
 
@@ -49,12 +51,18 @@ op DataLakeOperationNoBody<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
   TError = StorageError
->(...ApiVersionHeader, ...ClientRequestIdParameter, ...TParams):
+>(
+  ...ApiVersionHeader,
+  ...ClientRequestIdParameter,
+  ...RequestPriorityParameter,
+  ...TParams,
+):
   | (TResponse & {
       ...DateResponseHeader;
       ...ApiVersionHeader;
       ...RequestIdResponseHeader;
       ...ClientRequestIdResponseHeader;
+      ...RequestPriorityResponseHeaderPrivate;
     })
   | TError;
 

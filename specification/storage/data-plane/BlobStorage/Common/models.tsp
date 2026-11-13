@@ -3049,6 +3049,35 @@ alias FileRequestIntentParameter = {
   fileRequestIntent?: FileShareTokenIntent;
 };
 
+/** Optional priority for a request to the Blob service. */
+alias RequestPriorityParameter = {
+  /**
+   * Specifies the requested priority from 0 through 7. Integers outside this range
+   * do not cause the request to fail; the service uses priority 3 instead.
+   */
+  @header("x-ms-request-priority")
+  requestPriority?: int32;
+};
+
+/** The priority applied by the Blob service to a request. */
+alias RequestPriorityResponseHeader = {
+  /** Reports the effective request priority from 0 through 7. */
+  @header("x-ms-request-priority")
+  @minValue(0)
+  @maxValue(7)
+  effectiveRequestPriority: int32;
+};
+
+/** The priority applied by the Blob service to a request. (Internal) */
+alias RequestPriorityResponseHeaderPrivate = {
+  /** Reports the effective request priority from 0 through 7. */
+  @access(Access.internal)
+  @header("x-ms-request-priority")
+  @minValue(0)
+  @maxValue(7)
+  effectiveRequestPriority: int32;
+};
+
 alias ClientRequestIdHeader = {
   /** An opaque, globally-unique, client-generated string identifier for the request. */
   @access(Access.internal)

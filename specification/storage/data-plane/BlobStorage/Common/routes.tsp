@@ -34,6 +34,7 @@ op StorageOperation<
 
   ...ApiVersionHeader,
   ...ClientRequestIdHeader,
+  ...RequestPriorityParameter,
   ...TParams,
 ):
   | (TResponse & {
@@ -46,6 +47,7 @@ op StorageOperation<
       ...ApiVersionHeader;
       ...RequestIdResponseHeader;
       ...ClientRequestIdHeader;
+      ...RequestPriorityResponseHeaderPrivate;
     })
   | TError;
 
@@ -55,12 +57,18 @@ op StorageOperationNoBody<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
   TError = Error
->(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams):
+>(
+  ...ApiVersionHeader,
+  ...ClientRequestIdHeader,
+  ...RequestPriorityParameter,
+  ...TParams,
+):
   | (TResponse & {
       ...DateResponseHeaderPrivate;
       ...ApiVersionHeader;
       ...RequestIdResponseHeader;
       ...ClientRequestIdHeader;
+      ...RequestPriorityResponseHeaderPrivate;
     })
   | TError;
 
@@ -212,6 +220,7 @@ interface Service {
     ...ApiVersionHeader,
     ...TimeoutParameter,
     ...ClientRequestIdHeader,
+    ...RequestPriorityParameter,
     ...ContentLengthParameter,
 
     /** The batch request content. */
@@ -229,6 +238,7 @@ interface Service {
         ...ApiVersionHeader;
         ...RequestIdResponseHeader;
         ...ClientRequestIdHeader;
+        ...RequestPriorityResponseHeaderPrivate;
       })
     | Error;
 
@@ -487,6 +497,7 @@ interface Container {
     ...ApiVersionHeader,
     ...TimeoutParameter,
     ...ClientRequestIdHeader,
+    ...RequestPriorityParameter,
     ...ContentLengthParameter,
 
     /** The batch request content. */
@@ -502,6 +513,7 @@ interface Container {
 
         ...RequestIdResponseHeader;
         ...ApiVersionHeader;
+        ...RequestPriorityResponseHeaderPrivate;
       } & MultipartBodyParameter)
     | Error;
 
@@ -841,6 +853,7 @@ interface Blob {
   download(
     ...ApiVersionHeader,
     ...ClientRequestIdHeader,
+    ...RequestPriorityParameter,
     ...SnapshotParameter,
     ...VersionIdParameter,
     ...TimeoutParameter,
@@ -877,6 +890,7 @@ interface Blob {
 
         ...RequestIdResponseHeader;
         ...ClientRequestIdHeader;
+        ...RequestPriorityResponseHeaderPrivate;
         ...MetadataHeaders;
         ...ObjectReplicationHeaders;
         ...LastModifiedResponseHeader;
@@ -955,6 +969,7 @@ interface Blob {
 
         ...RequestIdResponseHeader;
         ...ClientRequestIdHeader;
+        ...RequestPriorityResponseHeaderPrivate;
         ...MetadataHeaders;
         ...ObjectReplicationHeaders;
         ...LastModifiedResponseHeader;
@@ -1683,6 +1698,7 @@ interface Blob {
   getLayout(
     ...ApiVersionHeader,
     ...ClientRequestIdHeader,
+    ...RequestPriorityParameter,
     ...SnapshotParameter,
     ...VersionIdParameter,
     ...MarkerParameter,
@@ -1705,6 +1721,7 @@ interface Blob {
         contentType: "application/xml";
 
         ...BlobLayoutResponseHeaders;
+        ...RequestPriorityResponseHeaderPrivate;
         ...ClientRequestIdHeader;
         ...RequestIdResponseHeader;
         ...ApiVersionHeader;
@@ -1724,6 +1741,7 @@ interface Blob {
         contentType?: string;
 
         ...BlobLayoutResponseHeaders;
+        ...RequestPriorityResponseHeaderPrivate;
         ...ClientRequestIdHeader;
         ...RequestIdResponseHeader;
         ...ApiVersionHeader;

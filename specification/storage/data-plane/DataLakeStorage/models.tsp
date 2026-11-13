@@ -551,6 +551,35 @@ alias ApiVersionHeader = {
   version: string;
 };
 
+/** Optional priority for a request to the Data Lake service. */
+alias RequestPriorityParameter = {
+  /**
+   * Specifies the requested priority from 0 through 7. Integers outside this range
+   * do not cause the request to fail; the service uses priority 3 instead.
+   */
+  @header("x-ms-request-priority")
+  requestPriority?: int32;
+};
+
+/** The priority applied by the Data Lake service to a request. */
+alias RequestPriorityResponseHeader = {
+  /** Reports the effective request priority from 0 through 7. */
+  @header("x-ms-request-priority")
+  @minValue(0)
+  @maxValue(7)
+  effectiveRequestPriority: int32;
+};
+
+/** The priority applied by the Data Lake service to a request. (Internal) */
+alias RequestPriorityResponseHeaderPrivate = {
+  /** Reports the effective request priority from 0 through 7. */
+  @access(Access.internal)
+  @header("x-ms-request-priority")
+  @minValue(0)
+  @maxValue(7)
+  effectiveRequestPriority: int32;
+};
+
 /** The client request ID header parameter. */
 alias ClientRequestIdParameter = {
   /** Provides a client-generated, opaque value with a 1 KB character limit that is recorded in the analytics logs when storage analytics logging is enabled. */
