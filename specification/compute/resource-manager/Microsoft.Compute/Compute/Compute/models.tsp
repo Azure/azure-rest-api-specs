@@ -9998,7 +9998,17 @@ model VirtualMachineRunCommandProperties {
   /**
    * The parameters used by the script.
    */
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "protectedParameters")
   @identifiers(#["name"])
+  protectedParametersLegacy?: RunCommandInputParameter[];
+
+  /**
+   * The parameters used by the script.
+   */
+  @added(Versions.v2026_09_01)
+  @identifiers(#["name"])
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   protectedParameters?: RunCommandInputParameter[];
 
   /**
@@ -10015,6 +10025,16 @@ model VirtualMachineRunCommandProperties {
    * Specifies the user account password on the VM when executing the run command.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Backward compatibility: keeping wire format unchanged for existing API versions"
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "runAsPassword")
+  runAsPasswordLegacy?: string;
+
+  /**
+   * Specifies the user account password on the VM when executing the run command.
+   */
+  @added(Versions.v2026_09_01)
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   runAsPassword?: string;
 
   /**
@@ -10138,6 +10158,15 @@ model RunCommandInputParameter {
   /**
    * The run command parameter value.
    */
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "value")
+  valueLegacy: string;
+
+  /**
+   * The run command parameter value.
+   */
+  @added(Versions.v2026_09_01)
+  @secret
   value: string;
 }
 

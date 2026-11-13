@@ -47,7 +47,7 @@ model VirtualMachineVMGalleryApplicationUpdate {
 }
 
 /**
- * The list of gallery applications installed on a virtual machine scale set VM.
+ * The list of gallery applications installed on a virtual machine.
  */
 @added(Versions.v2026_09_01)
 model VirtualMachineVMGalleryApplicationListResult
@@ -55,7 +55,7 @@ model VirtualMachineVMGalleryApplicationListResult
 
 @@doc(
   VirtualMachineVMGalleryApplicationListResult.value,
-  "The list of gallery applications installed on the virtual machine scale set VM."
+  "The list of gallery applications installed on the virtual machine."
 );
 @@doc(
   VirtualMachineVMGalleryApplicationListResult.nextLink,

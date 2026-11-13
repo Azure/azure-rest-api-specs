@@ -20279,7 +20279,9 @@
         },
         "value": {
           "type": "string",
-          "description": "The run command parameter value."
+          "format": "password",
+          "description": "The run command parameter value.",
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -23574,6 +23576,10 @@
           },
           "x-ms-identifiers": [
             "name"
+          ],
+          "x-ms-mutability": [
+            "update",
+            "create"
           ]
         },
         "asyncExecution": {
@@ -23586,7 +23592,13 @@
         },
         "runAsPassword": {
           "type": "string",
-          "description": "Specifies the user account password on the VM when executing the run command."
+          "format": "password",
+          "description": "Specifies the user account password on the VM when executing the run command.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
         },
         "runImmediately": {
           "type": "boolean",
@@ -26955,11 +26967,11 @@
     },
     "VirtualMachineVMGalleryApplicationListResult": {
       "type": "object",
-      "description": "The list of gallery applications installed on a virtual machine scale set VM.",
+      "description": "The list of gallery applications installed on a virtual machine.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The list of gallery applications installed on the virtual machine scale set VM.",
+          "description": "The list of gallery applications installed on the virtual machine.",
           "items": {
             "$ref": "#/definitions/VirtualMachineVMGalleryApplication"
           }
