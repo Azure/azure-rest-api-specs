@@ -12425,6 +12425,7 @@ paths:
             type: string
             enum:
               - FineTuningSessions=V1Preview
+        - $ref: '#/components/parameters/SessionFineTuning.FineTuningClientCapabilitiesHeader'
         - name: api-version
           in: query
           required: true
@@ -12435,6 +12436,15 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            X-Loom-Use-Completion-Feed:
+              required: false
+              description: |-
+                Use the feed only for the exact value true; false, absence, or any other
+                value requires legacy polling. The service persists the session decision;
+                this is not a request flag.
+              schema:
+                type: string
           content:
             application/json:
               schema:
@@ -13573,6 +13583,123 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Operations
+      x-ms-foundry-meta:
+        required_previews:
+          - FineTuningSessions=V1Preview
+  /fine_tuning_sessions/{sessionId}/retrieve_futures:
+    post:
+      operationId: CompletionFeeds_retrieve
+      summary: Observe sampling completions and acknowledge progress
+      description: |-
+        Apply processed_cursor ACK, then read a bounded text/event-stream window
+        after read_cursor. Zero wait returns HTTP 204 without reading. Progress is
+        supplied in JSON, not Last-Event-ID. ACK/setup failure returns HTTP 503 with
+        Retry-After: 5; retry the same progress. Failure after headers interrupts the
+        stream. Reads never provision a feed or opt a legacy session into one.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - FineTuningSessions=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+        - name: sessionId
+          in: path
+          required: true
+          description: Identifier of the owning fine-tuning session.
+          schema:
+            type: string
+            minLength: 1
+      responses:
+        '200':
+          description: Successful bounded observation response.
+          headers:
+            Cache-Control:
+              required: true
+              description: Completion events are not cached.
+              schema:
+                type: string
+                enum:
+                  - no-cache
+            X-Accel-Buffering:
+              required: true
+              description: Disable reverse-proxy buffering of incremental events.
+              schema:
+                type: string
+                enum:
+                  - 'no'
+          content:
+            text/event-stream:
+              itemSchema:
+                type: object
+                properties:
+                  event:
+                    type: string
+                  data:
+                    type: string
+                required:
+                  - event
+                oneOf:
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/SessionFineTuning.FineTuningRequestCompletion'
+                      event:
+                        const: completion
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          type: object
+                      event:
+                        const: end
+        '204':
+          description: Successful ACK-only response without an event stream or body.
+        '503':
+          description: ACK or feed setup failed before response headers; retry unchanged progress.
+          headers:
+            Retry-After:
+              required: true
+              description: Delay in seconds before retrying the same progress.
+              schema:
+                type: string
+                enum:
+                  - '5'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SessionFineTuning.FineTuningCompletionFeedError'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Operations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SessionFineTuning.FineTuningRetrieveFuturesRequest'
+        description: Receipt cursor, contiguous handled prefix, and bounded observation wait.
       x-ms-foundry-meta:
         required_previews:
           - FineTuningSessions=V1Preview
@@ -47533,6 +47660,16 @@ components:
         type: integer
         format: int32
       explode: false
+    SessionFineTuning.FineTuningClientCapabilitiesHeader:
+      name: X-Loom-Client-Capabilities
+      in: header
+      required: false
+      description: |-
+        Optional comma-separated, case-sensitive capability tokens. Advertising
+        use_completion_feed permits negotiation but does not enable it alone.
+        Omission preserves legacy polling and does not request feed publication.
+      schema:
+        type: string
     UpdateToolboxRequest.name:
       name: name
       in: path
@@ -98190,11 +98327,33 @@ components:
           description: Whether the checkpoint contains training state or sampler weights.
           readOnly: true
         time:
-          type: string
-          format: date-time
+          anyOf:
+            - type: string
+              format: date-time
+            - type: 'null'
           description: |-
-            Timestamp when the checkpoint was saved.
+            Timestamp when the checkpoint was saved, or null if saving has not completed.
             The fine-tuning service returns an RFC 3339 UTC date-time string, not Unix epoch seconds.
+          readOnly: true
+        status:
+          type: string
+          description: 'Save status: pending, completed, or failed. This is not safety approval.'
+          readOnly: true
+        publication:
+          anyOf:
+            - $ref: '#/components/schemas/SessionFineTuning.FineTuningCheckpointPublicationState'
+            - type: 'null'
+          description: Publication progress for a protected checkpoint, when available.
+          readOnly: true
+        publication_required:
+          type: boolean
+          description: Whether publication is required before this checkpoint can be deployed.
+          readOnly: true
+        deployment_eligible:
+          anyOf:
+            - type: boolean
+            - type: 'null'
+          description: Canonical deployment eligibility; null for an unprotected legacy checkpoint.
           readOnly: true
         step_number:
           anyOf:
@@ -98296,6 +98455,56 @@ components:
             $ref: '#/components/schemas/SessionFineTuning.FineTuningCheckpoint'
           description: All training and sampler checkpoints for the session, returned in one page.
       description: List of all checkpoints for a session (no pagination).
+    SessionFineTuning.FineTuningCheckpointPublicationState:
+      type: object
+      required:
+        - operation_id
+        - status
+        - phase
+      properties:
+        operation_id:
+          type: string
+          description: Opaque identifier of the publication operation.
+          readOnly: true
+        status:
+          type: string
+          description: 'Publication status: pending, completed, or failed.'
+          readOnly: true
+        phase:
+          type: string
+          description: Current publication phase.
+          readOnly: true
+        reason:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Sanitized reason for the current publication state.
+          readOnly: true
+        error_code:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Sanitized failure code, when available.
+          readOnly: true
+        message:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Sanitized progress or failure message, when available.
+          readOnly: true
+        debug_ref:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Opaque diagnostic reference, when available.
+          readOnly: true
+        should_retry:
+          anyOf:
+            - type: boolean
+            - type: 'null'
+          description: Whether retrying the publication operation is recommended.
+          readOnly: true
+      description: Public publication progress, distinct from checkpoint save completion.
     SessionFineTuning.FineTuningCheckpointType:
       anyOf:
         - type: string
@@ -98319,6 +98528,49 @@ components:
           minLength: 1
           description: Request identifier used to poll for completion of the unload request.
       description: Response from POST /fine_tuning_sessions/{sessionId}/complete.
+    SessionFineTuning.FineTuningCompletionCursor:
+      type: string
+      pattern: ^[0-9]{1,20}-[0-9]{1,20}$
+      description: |-
+        An opaque completion-feed position consisting of two unsigned 64-bit decimal
+        integers separated by a hyphen. Compare components numerically, not lexically.
+    SessionFineTuning.FineTuningCompletionEvents:
+      anyOf:
+        - type: object
+          properties:
+            id:
+              $ref: '#/components/schemas/SessionFineTuning.FineTuningCompletionCursor'
+              description: Delivery position carried in the SSE id field, outside JSON data.
+            data:
+              $ref: '#/components/schemas/SessionFineTuning.FineTuningRequestCompletion'
+              description: JSON payload carried in the SSE data field.
+          required:
+            - id
+            - data
+        - type: object
+      description: |-
+        Events in a bounded observation response. Delivery may repeat; the event ID
+        is a receipt cursor, not an ACK. A cursorless end event with data {} indicates
+        planned expiry, not completion of all sampling work. Interrupted streams may
+        omit end. Comments such as ': connected' do not advance either cursor.
+    SessionFineTuning.FineTuningCompletionFeedError:
+      type: object
+      required:
+        - detail
+      properties:
+        detail:
+          type: string
+          description: Safe description of feed unavailability.
+      description: Safe body of a completion-feed setup failure.
+    SessionFineTuning.FineTuningCompletionFeedHeader:
+      type: object
+      description: Optional server decision returned on session creation.
+    SessionFineTuning.FineTuningCompletionStatus:
+      type: string
+      enum:
+        - completed
+        - failed
+      description: Exact terminal statuses accepted by the completion notification protocol.
     SessionFineTuning.FineTuningCursor:
       type: object
       required:
@@ -98517,6 +98769,21 @@ components:
           description: Indicates that the request has not yet completed.
           readOnly: true
       description: Identifies an accepted request whose result can be retrieved by polling.
+    SessionFineTuning.FineTuningRequestCompletion:
+      type: object
+      required:
+        - request_id
+        - status
+      properties:
+        request_id:
+          type: string
+          minLength: 1
+          pattern: ^\S+$
+          description: Request identifier to retrieve using the existing request-status GET.
+        status:
+          $ref: '#/components/schemas/SessionFineTuning.FineTuningCompletionStatus'
+          description: Terminal status of the persisted sampling request.
+      description: Notification of a persisted terminal sampling result, not the result itself.
     SessionFineTuning.FineTuningRequestStatus:
       type: object
       required:
@@ -98532,6 +98799,31 @@ components:
           completed: '#/components/schemas/SessionFineTuning.CompletedFineTuningRequest'
           failed: '#/components/schemas/SessionFineTuning.FailedFineTuningRequest'
       description: Status envelope returned when polling a fine-tuning request.
+    SessionFineTuning.FineTuningRetrieveFuturesRequest:
+      type: object
+      properties:
+        read_cursor:
+          $ref: '#/components/schemas/SessionFineTuning.FineTuningCompletionCursor'
+          description: Last received event ID; reads return events strictly after this position.
+          default: 0-0
+        processed_cursor:
+          $ref: '#/components/schemas/SessionFineTuning.FineTuningCompletionCursor'
+          description: |-
+            Contiguous handled prefix, no greater than read_cursor. ACK trims entries
+            strictly below this position, not the entry at this position.
+          default: 0-0
+        wait_seconds:
+          $ref: '#/components/schemas/integer'
+          minimum: 0
+          description: |-
+            Observation wait in seconds. Zero applies ACK only and returns HTTP 204.
+            Positive waits are capped by the server at 30 seconds, including setup
+            and streaming; the request accepts larger nonnegative integer values.
+          default: 30
+      description: |-
+        Receipt and contiguous handled-prefix progress for one observation round.
+        The service rejects unknown fields, cursor components above uint64, and
+        processed_cursor greater than read_cursor. ACK is applied before SSE headers.
     SessionFineTuning.FineTuningSampleRequest:
       type: object
       required:
