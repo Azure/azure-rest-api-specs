@@ -19,6 +19,7 @@ namespace Microsoft.CognitiveServices;
  */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @parentResource(Account)
 model RaiRego is Azure.ResourceManager.ProxyResource<RaiRegoProperties> {
   ...ResourceNameParameter<
@@ -46,6 +47,7 @@ model RaiRego is Azure.ResourceManager.ProxyResource<RaiRegoProperties> {
 /** Optional parameters for listing reusable Rego artifacts. */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model RaiRegoListParameters {
   /**
    * The maximum number of reusable Rego artifacts to return. Defaults to 10.
@@ -57,6 +59,7 @@ model RaiRegoListParameters {
 
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @armResourceOperations
 interface RaiRegos {
   /** Gets one reusable Rego artifact. */
