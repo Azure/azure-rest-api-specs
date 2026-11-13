@@ -271,6 +271,11 @@ namespace Microsoft.AzureArcData {
   "PartnerMirroringUri",
   "csharp"
 );
+@@alternateType(
+  FailoverGroupSpec.partnerMirroringURL,
+  url,
+  "csharp"
+);
 @@clientName(DataControllerResource, "DataController", "csharp");
 @@clientName(
   ActiveDirectoryConnectorResource,
@@ -357,9 +362,22 @@ namespace Microsoft.AzureArcData {
   "SessionTimeoutInSeconds",
   "csharp"
 );
+@@alternateType(AvailabilityGroupConfigure.endpointUrl, url, "csharp");
+@@alternateType(AvailabilityGroupConfigure.readOnlyRoutingUrl, url, "csharp");
+@@alternateType(AvailabilityGroupConfigure.readWriteRoutingUrl, url, "csharp");
 @@clientName(
   AvailabilityGroupCreateUpdateReplicaConfiguration.sessionTimeout,
   "SessionTimeoutInSeconds",
+  "csharp"
+);
+@@alternateType(
+  AvailabilityGroupCreateUpdateReplicaConfiguration.endpointUrl,
+  url,
+  "csharp"
+);
+@@alternateType(
+  AvailabilityGroupCreateUpdateReplicaConfiguration.secondaryRoleReadOnlyRoutingUrl,
+  url,
   "csharp"
 );
 @@clientName(
