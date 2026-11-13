@@ -128,7 +128,7 @@ interface VirtualNetworkGatewayConnections {
   >;
 
   /**
-   * The Get VirtualNetworkGatewayConnectionSharedKey operation retrieves information about the specified virtual network gateway connection shared key through Network resource provider.
+   * The Get VirtualNetworkGatewayConnectionSharedKey operation retrieves information about the specified virtual network gateway connection shared key through Network resource provider. This API needs RBAC access:Microsoft.Network/connections/sharedKey/action which is similar to writing SharedKey in response so API might fail if user has 'ReadOnly' lock on VirtualNetworkGatewayConnection resource. Please remove lock before calling this API.
    */
   @tag("VirtualNetworkGatewayConnections")
   @get

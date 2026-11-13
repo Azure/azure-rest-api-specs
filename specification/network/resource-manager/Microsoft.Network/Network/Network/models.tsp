@@ -24629,6 +24629,41 @@ model AadAuthenticationParameters {
 }
 
 /**
+ * "P2sVpngateway detach status.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+@added(Versions.v2026_05_01)
+union P2SVpnGatewayDetachState {
+  string,
+
+  /**
+   * Status represents gateway is successfully detached.
+   */
+  Detached: "Detached",
+
+  /**
+   * Status represents gateway detach operation failed and it is partially detached.
+   */
+  PartiallyDetached: "PartiallyDetached",
+
+  /**
+   * Status represents gateway is successfully attached.
+   */
+  Attached: "Attached",
+
+  /**
+   * Status represents gateway attached operation failed and it is partially attached.
+   */
+  PartiallyAttached: "PartiallyAttached",
+
+  /**
+   * Status represents gateway detach status is unknown.
+   */
+  Unknown: "Unknown",
+}
+
+/**
  * Parameters for P2SVpnGateway.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -24656,6 +24691,13 @@ model P2SVpnGatewayProperties {
    * The scale unit for this p2s vpn gateway.
    */
   vpnGatewayScaleUnit?: int32;
+
+  /**
+   * P2sVpngateway detach status.
+   */
+  @added(Versions.v2026_05_01)
+  @visibility(Lifecycle.Read)
+  vpnGatewayDetachStatus?: P2SVpnGatewayDetachState;
 
   /**
    * The VpnServerConfiguration to which the p2sVpnGateway is attached to.

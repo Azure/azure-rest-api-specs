@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Common;
 
 namespace Microsoft.Network;
@@ -123,6 +124,30 @@ interface P2SVpnGateways {
    */
   @tag("P2SVpnGateways")
   reset is ArmResourceActionAsync<
+    P2SVpnGateway,
+    void,
+    P2SVpnGateway,
+    Error = CloudError
+  >;
+
+  /**
+   * Attaches the Virtual Hub, p2s vpn gateway in the specified resource group.
+   */
+  @added(Versions.v2026_05_01)
+  @tag("P2SVpnGateways")
+  attach is ArmResourceActionAsync<
+    P2SVpnGateway,
+    void,
+    P2SVpnGateway,
+    Error = CloudError
+  >;
+
+  /**
+   * Detaches the Virtual Hub, p2s vpn gateway in the specified resource group.
+   */
+  @added(Versions.v2026_05_01)
+  @tag("P2SVpnGateways")
+  detach is ArmResourceActionAsync<
     P2SVpnGateway,
     void,
     P2SVpnGateway,
