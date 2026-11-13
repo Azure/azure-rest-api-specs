@@ -57,6 +57,7 @@ interface LoadTests {
   delete is ArmResourceDeleteWithoutOkAsync<LoadTestResource>;
 
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "OperationID already published."
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "Legacy GET action; changing the HTTP method would break the published API."
   @operationId("LoadTests_ListOutboundNetworkDependenciesEndpoints")
   @doc("Lists the endpoints that agents may call as part of load testing.")
   @list
