@@ -329,7 +329,9 @@ model BrowserAutomationPreviewToolboxTool extends ToolboxTool {
  * A browser automation tool stored in a toolbox.
  */
 model BrowserAutomationToolboxTool extends ToolboxTool {
+  @doc("Identifies a browser automation tool in the toolbox.")
   type: ToolboxBrowserAutomationToolType;
+
   ...ToolFields<BrowserAutomationTool>;
 }
 

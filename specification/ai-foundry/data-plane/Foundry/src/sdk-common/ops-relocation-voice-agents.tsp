@@ -12,7 +12,9 @@ namespace Azure.AI.Projects.Beta.VoiceAgents {
   @@clientLocation(TelephonyCampaigns.listValidationErrors, Telephony);
 }
 
+/** Operations for managing voice-agent telephony calls and stored Realtime conversations. */
 namespace Azure.AI.Projects.VoiceAgents {
+  /** Operations for reading and deleting stored Realtime conversations and their audio. */
   interface Conversations {}
   @@clientLocation(
     AgentEndpointConversations.listAgentConversations,
@@ -113,6 +115,7 @@ namespace Azure.AI.Projects.Beta.VoiceAgents {
 }
 
 namespace Azure.AI.Projects.VoiceAgents {
+  /** Operations for managing voice-agent telephony bindings, calls, and call jobs. */
   interface Telephony {}
   @@clientLocation(AgentTelephony.createTelephonyBinding, Telephony);
   @@clientLocation(AgentTelephony.listTelephonyBindings, Telephony);

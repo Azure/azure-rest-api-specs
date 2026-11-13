@@ -1,4 +1,5 @@
 import "./main.tsp";
+import "@typespec/http-client";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
@@ -567,8 +568,24 @@ namespace Azure.AI.Projects {
 }
 
 // ApiErrorResponse is part of the AgentServer.Responses wire contract but is unreachable from
-// this package's operations, so it needs an explicit usage to be emitted.
+// this package's operations, so it needs an explicit usage to be emitted. It is also part of this
+// package's public error API, so it must not be emitted as internal; the access propagates to the
+// models it references.
 @@usage(Azure.AI.Projects.ApiErrorResponse, Usage.input | Usage.output);
+@@access(Azure.AI.Projects.ApiErrorResponse, Access.public);
+
+// The C# generator renames public models that end in "Response" to "Result" unless the name is
+// exact. Keep ApiErrorResponse as is: it is already the public name of this error envelope.
+@@clientName(
+  Azure.AI.Projects.ApiErrorResponse,
+  Azure.ClientGenerator.Core.exact("ApiErrorResponse"),
+  "csharp"
+);
+
+// ApiErrorResponse.error is OpenAI.Error, which the Azure.AI.Projects spec aliases as ApiError.
+// Emit it under that name: this package maps the simple name Error to
+// OpenAI.Responses.ResponseError, so a generated type named Error would be shadowed.
+@@clientName(OpenAI.Error, "ApiError");
 
 // These are surfaced on this package's public hosting API (ResponseStreamEvent.EventType and
 // the tool-choice extension helpers), so they must not be emitted as internal.
@@ -1116,23 +1133,106 @@ namespace Azure.AI.Projects {
 // inline unions in the spec, so they have no addressable TypeSpec name to map. They stay
 // Azure-generated and are converted at the call sites that hand them to OpenAI types.
 
-// The custom-tool-call items have no counterpart in the OpenAI library, but they cannot be
-// emitted either: their base `OpenAI.Responses.ResponseItem` only exposes a
-// `protected internal ResponseItem(ResponseItemKind)` constructor, so an emitted subclass
-// cannot pass this package's Azure attribution fields to it. They are hand-written in
-// src/Custom/Models instead, deriving from ResponseItem and carrying the Azure attribution
-// over JsonPatch like the other attribution members in this package.
-@@alternateType(
+// The custom-tool-call items have no counterpart in the OpenAI library, so they are emitted
+// here as `ResponseItem` subtypes. The `OutputItem` base is alternate-typed to
+// `OpenAI.Responses.ResponseItem`, so its derived models are not emitted on their own and
+// must be marked as used explicitly. Rename them to match the other OutputItem* models.
+@@clientName(
   OpenAI.CustomToolCallResource,
-  {
-    identity: "Azure.AI.AgentServer.Responses.OutputItemCustomToolCall",
-  },
+  "OutputItemCustomToolCall",
   "csharp"
 );
-@@alternateType(
+@@clientName(
   OpenAI.CustomToolCallOutputResource,
-  {
-    identity: "Azure.AI.AgentServer.Responses.OutputItemCustomToolCallOutput",
-  },
+  "OutputItemCustomToolCallOutput",
   "csharp"
+);
+@@access(OpenAI.CustomToolCallResource, Access.public, "csharp");
+@@access(OpenAI.CustomToolCallOutputResource, Access.public, "csharp");
+@@usage(OpenAI.CustomToolCallResource, Usage.input | Usage.output, "csharp");
+@@usage(
+  OpenAI.CustomToolCallOutputResource,
+  Usage.input | Usage.output,
+  "csharp"
+);
+
+// ============================================================================
+// OPENAI001 forwarding.
+// The OpenAI.Responses types mapped above are [Experimental("OPENAI001")] in the OpenAI library.
+// Annotating their sources tells the C# emitter, so generated code that references them is
+// compiled with targeted OPENAI001 suppressions instead of a package-wide one. No attribute is
+// emitted for these: their declarations live in the OpenAI library.
+// ============================================================================
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.OutputItem,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.InputItem,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.ItemMessage,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.Tool,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.Response,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.ResponseError,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.Annotation,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.ComputerAction,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.ConversationParam,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.ResponseUsage,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+
+// Public models that expose or derive from those OpenAI types forward the same diagnostic ID,
+// so consumers opt in to the OpenAI experiment rather than to a separate AgentServer one.
+// Template instances (AgentsPagedResult<OpenAI.OutputItem>) and anonymous operation responses
+// cannot be targeted by augment decorators; their members still get targeted suppressions.
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.CustomToolCallResource,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.CustomToolCallOutputResource,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.CompactResource,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.ItemFieldAdditionalTools,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.ItemFieldComputerToolCall,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.ItemFieldToolSearchOutput,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+);
+@@TypeSpec.HttpClient.experimental(
+  OpenAI.MessageContentOutputTextContent,
+  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
 );
