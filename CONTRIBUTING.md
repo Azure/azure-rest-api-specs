@@ -4,6 +4,8 @@
 
 This file provides general guidance for developers that are creating or updating REST API definitions for Azure.
 
+For local prerequisites and installation, see [toolchain setup](./documentation/contributing/toolchain-setup.md).
+
 ## Table of Contents
 
 <!--

@@ -111,6 +111,7 @@ namespace Azure.AI.Projects {
   /** Feature opt-in keys for agent definition operations supporting conditional preview features. */
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "API review requires this input-only opt-in contract to accept only the declared feature keys; arbitrary string opt-ins are not supported."
   union AgentDefinitionOptInKeys {
+    a2a_agents_v1_preview: "A2AAgents=V1Preview",
     workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
     external_agents_v1_preview: "ExternalAgents=V1Preview",
     draft_agents_v1_preview: "DraftAgents=V1Preview",

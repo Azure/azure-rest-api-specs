@@ -14,10 +14,12 @@
             {
               "name": "stage1",
               "maxConcurrency": "20%",
+              "maxAllowedFailures": "2",
               "groups": [
                 {
                   "name": "group-a",
                   "maxConcurrency": "5",
+                  "maxAllowedFailures": "1",
                   "memberSelector": {
                     "byLabel": "tier=frontend"
                   },
@@ -52,6 +54,7 @@
             {
               "name": "stage2",
               "maxConcurrency": "50%",
+              "maxAllowedFailures": "25%",
               "memberSelector": {
                 "byLabel": "env=production"
               },
@@ -83,10 +86,12 @@
               {
                 "name": "stage1",
                 "maxConcurrency": "20%",
+                "maxAllowedFailures": "2",
                 "groups": [
                   {
                     "name": "group-a",
                     "maxConcurrency": "5",
+                    "maxAllowedFailures": "1",
                     "memberSelector": {
                       "byLabel": "tier=frontend"
                     },
@@ -121,6 +126,7 @@
               {
                 "name": "stage2",
                 "maxConcurrency": "50%",
+                "maxAllowedFailures": "25%",
                 "memberSelector": {
                   "byLabel": "env=production"
                 },
@@ -152,10 +158,12 @@
               {
                 "name": "stage1",
                 "maxConcurrency": "20%",
+                "maxAllowedFailures": "2",
                 "groups": [
                   {
                     "name": "group-a",
                     "maxConcurrency": "5",
+                    "maxAllowedFailures": "1",
                     "memberSelector": {
                       "byLabel": "tier=frontend"
                     },
@@ -190,6 +198,7 @@
               {
                 "name": "stage2",
                 "maxConcurrency": "50%",
+                "maxAllowedFailures": "25%",
                 "memberSelector": {
                   "byLabel": "env=production"
                 },

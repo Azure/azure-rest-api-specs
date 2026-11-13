@@ -34,7 +34,25 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2026-08
+tag: package-2026-09
+```
+
+### Tag: package-preview-2026-09
+
+These settings apply only when `--tag=package-preview-2026-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2026-09'
+input-file:
+  - preview/2026-09-02-preview/managedClusters.json
+```
+
+### Tag: package-2026-09
+
+These settings apply only when `--tag=package-2026-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-09'
+input-file:
+  - stable/2026-09-01/managedClusters.json
 ```
 
 ### Tag: package-preview-2026-08
@@ -1550,7 +1568,35 @@ See configuration in [readme.java.md](./readme.java.md)
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: managedClusters.json
+    where: $.definitions.ManagedClusterProperties.properties.enableRBAC
     reason: Name change of "enableRBAC" property would break compatibility
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: managedClusters.json
+    where:
+      - $.definitions.AgentPoolGPUProfile.properties.installGPUDriver
+      - $.definitions.AgentPoolSecurityProfile.properties.enableVTPM
+      - $.definitions.BootstrapKubeletConfig.properties.clusterFQDN
+      - $.definitions.ContainerServiceNetworkProfile.properties.clusterAPIConnectivityProfile
+      - $.definitions.LocalDNSProfile.properties.kubeDNSOverrides
+      - $.definitions.LocalDNSProfile.properties.vnetDNSOverrides
+      - $.definitions.MachineOSProfile.properties.enableFIPS
+      - $.definitions.MachineProperties.properties.localDNSProfile
+      - $.definitions.MachineSecurityProfile.properties.enableVTPM
+      - $.definitions.ManagedClusterAADProfile.properties.enableAzureRBAC
+      - $.definitions.ManagedClusterAPIServerAccessProfile.properties.enablePrivateClusterPublicFQDN
+      - $.definitions.ManagedClusterAPIServerAccessProfile.properties.privateDNSZone
+      - $.definitions.ManagedClusterAgentPoolProfileProperties.properties.enableFIPS
+      - $.definitions.ManagedClusterAgentPoolProfileProperties.properties.localDNSProfile
+      - $.definitions.ManagedClusterIngressProfileWebAppRouting.properties.gatewayAPIImplementations
+      - $.definitions.ManagedClusterProperties.properties.azurePortalFQDN
+      - $.definitions.ManagedClusterProperties.properties.enableFIPS
+      - $.definitions.ManagedClusterProperties.properties.privateFQDN
+      - $.definitions.ManagedClusterStorageProfile.properties.blobCSIDriver
+      - $.definitions.ManagedClusterStorageProfile.properties.diskCSIDriver
+      - $.definitions.ManagedClusterStorageProfile.properties.fileCSIDriver
+      - $.definitions.ManagedClusterWindowsProfile.properties.enableCSIProxy
+      - $.definitions.SnapshotProperties.properties.enableFIPS
+    reason: These published GPU, security, DNS/FQDN, storage CSI, and gateway API acronym spellings must remain wire-compatible. This exception applies only to the enumerated existing properties, not new properties.
   - suppress: TrackedResourcePatchOperation
     from: containerService.json
     reason: ACS service is deprecated so a PATCH endpoint won't be implemented
