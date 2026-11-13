@@ -148,6 +148,13 @@ model ServiceGroupAttributes {
   @added(Versions.v2026_09_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   memberLocationConstraint?: string;
+
+  /**
+   * The server-managed depth of the service group within its chain of StorageGroup ancestors. The top-most StorageGroup has a value of 1, and each StorageGroup child increases the value by 1. Only present on service groups of kind 'StorageGroup'.
+   */
+  @added(Versions.v2026_09_01_preview)
+  @visibility(Lifecycle.Read)
+  storageGroupDepthIndex?: int32;
 }
 
 /**
