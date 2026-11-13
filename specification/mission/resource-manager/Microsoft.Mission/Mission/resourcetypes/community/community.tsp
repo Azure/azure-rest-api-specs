@@ -27,6 +27,18 @@ union FirewallSKU {
   Premium: "Premium",
 }
 
+@added(Microsoft.Mission.Versions.v2026_10_01_preview)
+@doc("Desired enforcement mode for the subnet join deny policy.")
+union SubnetJoinPolicyMode {
+  string,
+
+  @doc("Deny all subnet joins from resource groups not in the approved workload set. Secure-by-default on new API versions.")
+  Deny: "Deny",
+
+  @doc("Log non-compliant joins without blocking. Use during rollout review or when deny cannot yet be enabled.")
+  Audit: "Audit",
+}
+
 @added(Microsoft.Mission.Versions.v2024_12_01_preview)
 @doc("Approval Policy.")
 union ApprovalPolicy {
@@ -222,6 +234,10 @@ model CommunityBaseModel {
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("SKU of the community's Azure Firewall (Basic, Standard, Premium). Standard is the default")
   firewallSku?: FirewallSKU = FirewallSKU.Standard;
+
+  @added(Microsoft.Mission.Versions.v2026_10_01_preview)
+  @doc("Desired enforcement mode for the subscription-scoped subnet join deny policy. Defaults to 'Deny' on api-version 2026-10-01-preview and later.")
+  subnetJoinPolicyMode?: SubnetJoinPolicyMode = SubnetJoinPolicyMode.Deny;
 }
 
 @doc("Community Resource Properties")
