@@ -16540,6 +16540,19 @@
         }
       ]
     },
+    "InstanceProfile": {
+      "type": "object",
+      "description": "Specifies the Instance Profile reference for a virtual machine.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Specifies the resource ID of the gallery Instance Profile version. The ID must use the format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/instanceProfiles/{instanceProfileName}/versions/{versionNumber}."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
     "InstanceViewStatus": {
       "type": "object",
       "description": "Instance view status.",
@@ -22447,7 +22460,7 @@
           "description": "Specifies the hardware settings for the virtual machine."
         },
         "instanceProfile": {
-          "$ref": "../../common-types/v1/common.json#/definitions/SubResource",
+          "$ref": "#/definitions/InstanceProfile",
           "description": "Specifies the instance profile related details of a virtual machine.",
           "x-ms-mutability": [
             "read",
