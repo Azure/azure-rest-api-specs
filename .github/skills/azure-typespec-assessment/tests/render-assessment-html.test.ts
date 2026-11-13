@@ -1,6 +1,8 @@
 import { assert, test } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
 import { documentQualitySummary } from "../scripts/assessment-report-ui.ts";
+import { selectApiVersionPair } from "../scripts/api-version-selection.ts";
+import { unavailableHeadBaselineBlocker } from "../scripts/comparison-execution.ts";
 import { readComplianceCatalog } from "../scripts/compliance-assessment.ts";
 import {
   assembleDocumentQuality,
@@ -769,6 +771,88 @@ void test("renderer shows fetched Azure Guidelines guidance and expands failures
 void test("escapeHtml escapes Agent and source text", () => {
   assert.equal(escapeHtml('<script x="1">&'), "&lt;script x=&quot;1&quot;&gt;&amp;");
 });
+
+void test.each([true, false])(
+  "report metadata preserves head projection provenance and explicit unavailable baselines (retained: %s)",
+  (retained) => {
+    const baseCommit = "a".repeat(40);
+    const headCommit = "b".repeat(40);
+    const pair = selectApiVersionPair({
+      base: { versioned: true, versions: ["2026-05-01-preview"] },
+      current: {
+        versioned: true,
+        versions: [...(retained ? ["2026-05-01-preview"] : []), "2026-08-01-preview"],
+      },
+      baseCommit,
+      headCommit,
+    });
+    const blocker = unavailableHeadBaselineBlocker({ id: "preview", artifactComparison: pair });
+    const blockers = blocker ? [blocker] : [];
+    const html = renderAssessmentHtml({
+      schemaVersion: 1,
+      confidence: "high",
+      safety: {
+        scope: "rest-and-downstream-only",
+        status: retained ? "passed" : "not-assessed",
+        verdict: retained ? "passed" : "unknown",
+        coverage: retained ? "complete" : "blocked",
+      },
+      comparison: { baseCommit, headCommit, workingTree: {} },
+      artifactComparisons: [{ projectId: "preview", ...pair }],
+      projects: [
+        {
+          id: "preview",
+          classification: "existing",
+          path: "specification/preview/Service",
+          artifactComparison: pair,
+          artifacts: {},
+        },
+      ],
+      dimensions: {
+        semantic: { status: "assessed", items: [], blockers: [] },
+        rest: {
+          status: retained ? "passed" : "not-assessed",
+          verdict: retained ? "passed" : "unknown",
+          coverage: retained ? "complete" : "blocked",
+          findings: [],
+          blockers,
+        },
+        downstream: {
+          status: retained ? "passed" : "not-assessed",
+          verdict: retained ? "passed" : "unknown",
+          coverage: retained ? "complete" : "blocked",
+          findings: [],
+          blockers,
+        },
+        compliance: notAssessedCompliance(),
+        documentQuality: {
+          status: "not-assessed",
+          summary: "No compiler evidence in this fixture.",
+        },
+      },
+      blockers,
+    });
+    assert.ok(html.includes(`<code>${headCommit}@2026-05-01-preview</code>`));
+    assert.ok(html.includes(`<code>${headCommit}@2026-08-01-preview</code>`));
+    assert.match(html, /new-api-version/);
+    assert.match(html, /previous-latest-preview/);
+    if (retained) {
+      assert.equal(summaryCardValue(html, "REST breaking changes"), 0);
+      assert.equal(summaryCardValue(html, "Downstream breaking changes"), 0);
+    } else {
+      assert.match(html, /unavailable in head \(not compiled\)/);
+      const message = "Not assessed: the baseline API version is not available in head.";
+      assert.equal(html.split(message).length - 1, 4);
+      for (const id of ["rest-breaking", "downstream-breaking"]) {
+        const start = html.indexOf(`<a class="summary-card" href="#${id}">`);
+        const card = html.slice(start, html.indexOf("</a>", start));
+        assert.ok(card.includes(message));
+        assert.notMatch(card, /0 findings|Verdict unknown|summary-icon pass/);
+        assert.ok(reportSection(html, id).includes(message));
+      }
+    }
+  },
+);
 
 void test("renderer labels active Azure Guidelines and scoped safety", () => {
   const html = renderAssessmentHtml({

@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { stringify } from "yaml";
 import { analyzeDownstreamBreaking } from "../scripts/analyze-downstream-breaking.ts";
+import { selectApiVersionPair } from "../scripts/api-version-selection.ts";
 
 function packageShape(current: boolean) {
   const stringType = { kind: "string" };
@@ -341,39 +342,59 @@ function genericListProvenance() {
   };
 }
 
-void test("new projects are complete and non-breaking without baseline artifacts", () => {
-  const result = analyzeDownstreamBreaking({
-    manifest: {
-      projects: [
-        {
-          id: "project-new",
-          classification: "new",
-          sourceChangeIds: ["source-new"],
-          artifacts: {},
-          artifactComparison: {
-            mode: "new-project",
-            baseline: {
-              sourceRevision: "absent",
-              reason: "No pre-existing SDK contract exists.",
-            },
-            target: {
-              sourceRevision: "current",
-              commit: "head",
-              reason: "unversioned",
-            },
-            addedCurrentVersions: [],
-            available: { base: [], current: [] },
+void test.each([false, true])(
+  "target-only projects distinguish no contract from an unavailable head baseline (%s)",
+  (unavailable) => {
+    const result = analyzeDownstreamBreaking({
+      manifest: {
+        projects: [
+          {
+            id: "project-new",
+            classification: unavailable ? "existing" : "new",
+            sourceChangeIds: ["source-new"],
+            artifacts: unavailable
+              ? {
+                  baseline: {
+                    tcgc: { status: "succeeded", files: [{ path: "must-not-read.yaml" }] },
+                  },
+                }
+              : {},
+            artifactComparison: unavailable
+              ? selectApiVersionPair({
+                  base: { versioned: true, versions: ["2026-01-01-preview"] },
+                  current: { versioned: true, versions: ["2026-08-01-preview"] },
+                  baseCommit: "base",
+                  headCommit: "head",
+                })
+              : {
+                  mode: "new-project",
+                  baseline: {
+                    sourceRevision: "absent",
+                    reason: "No pre-existing SDK contract exists.",
+                  },
+                  target: {
+                    sourceRevision: "current",
+                    commit: "head",
+                    reason: "unversioned",
+                  },
+                  addedCurrentVersions: [],
+                  available: { base: [], current: [] },
+                },
           },
-        },
-      ],
-    },
-    sourceIndex: { sourceChanges: [] },
-  } as unknown as Parameters<typeof analyzeDownstreamBreaking>[0]);
+        ],
+      },
+      sourceIndex: { sourceChanges: [] },
+    } as unknown as Parameters<typeof analyzeDownstreamBreaking>[0]);
 
-  assert.equal(result.status, "ready");
-  assert.deepEqual(result.candidates, []);
-  assert.deepEqual(result.blockers, []);
-});
+    assert.equal(result.status, unavailable ? "blocked" : "ready");
+    assert.deepEqual(result.candidates, []);
+    if (unavailable) {
+      assert.equal(result.blockers.length, 1);
+      assert.equal(result.blockers[0].code, "baseline-api-version-unavailable-in-head");
+      assert.match(result.blockers[0].message, /no cross-revision comparison was performed/);
+    } else assert.deepEqual(result.blockers, []);
+  },
+);
 
 void test("detects PR 43308-style kind/response/LRO changes without inventing parameter changes", (context) => {
   const result = analyzeShapes(context, packageShape(false), packageShape(true));

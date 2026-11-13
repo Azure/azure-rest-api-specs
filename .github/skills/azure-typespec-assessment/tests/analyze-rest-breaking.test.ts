@@ -2,6 +2,7 @@ import { assert, test } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
 import { analyzeRestBreaking } from "../scripts/analyze-rest-breaking.ts";
+import { selectApiVersionPair } from "../scripts/api-version-selection.ts";
 
 function writeJson(file: string, value: unknown) {
   fs.mkdirSync(path.dirname(file), { recursive: true });
@@ -59,7 +60,7 @@ void test("emits explicit REST candidates for parameters, required properties, e
     format: "swagger-2.0",
     files: [{ path: file, documentRole: "primary" }],
   });
-  const result = analyzeRestBreaking({
+  const options = {
     workRoot: work,
     manifest: {
       projects: [
@@ -81,7 +82,10 @@ void test("emits explicit REST candidates for parameters, required properties, e
         },
       ],
     },
-  } as unknown as Parameters<typeof analyzeRestBreaking>[0]);
+  } as unknown as Parameters<typeof analyzeRestBreaking>[0];
+  const result = analyzeRestBreaking(options);
+  assert.notTypeOf(options.manifest, "string");
+  if (typeof options.manifest === "string") throw new Error("Expected an inline manifest.");
   const rules = new Set(result.candidates.map((item) => item.rule));
   for (const rule of [
     "parameter-wire-type-changed",
@@ -101,6 +105,29 @@ void test("emits explicit REST candidates for parameters, required properties, e
     result.candidates.map((item) => item.id),
     result.candidates.map((item) => item.id).sort(),
   );
+  const availableProject = options.manifest.projects[0];
+  const unavailableProject = {
+    ...availableProject,
+    id: "unavailable",
+    classification: "existing" as const,
+    artifactComparison: selectApiVersionPair({
+      base: { versioned: true, versions: ["2026-01-01-preview"] },
+      current: { versioned: true, versions: ["2026-08-01-preview"] },
+      baseCommit: "base",
+      headCommit: "head",
+    }),
+  };
+  options.manifest.projects = [unavailableProject];
+  const blocked = analyzeRestBreaking(options);
+  assert.equal(blocked.status, "blocked");
+  assert.deepEqual(blocked.candidates, []);
+  assert.deepEqual(blocked.facts, {});
+  assert.equal(blocked.blockers[0].code, "baseline-api-version-unavailable-in-head");
+  options.manifest.projects.push(availableProject);
+  const mixed = analyzeRestBreaking(options);
+  assert.equal(mixed.status, "ready");
+  assert.deepEqual(mixed.candidates, result.candidates);
+  assert.equal(mixed.blockers[0].projectId, "unavailable");
 });
 
 void test("new projects are complete and non-breaking without baseline artifacts", () => {

@@ -1,4 +1,6 @@
 import { assert, test } from "vitest";
+import { selectApiVersionPair } from "../scripts/api-version-selection.ts";
+import type { runProjectCompilers } from "../scripts/compiler-runner.ts";
 import {
   prepareProjectRecords,
   typeSpecChangesForAnalysis,
@@ -7,6 +9,162 @@ import {
 type PreparationBlocker = import("../scripts/runtime-types.ts").PreparationBlocker;
 
 type SourceIndex = import("../scripts/runtime-types.ts").SourceIndex;
+
+void test.each([
+  [true, false],
+  [false, false],
+  [false, true],
+])(
+  "compiles only the available roles without fallback (retained: %s, target failure: %s)",
+  (retained, targetFailure) => {
+    const calls: Parameters<typeof runProjectCompilers>[0][] = [];
+    const blockers: PreparationBlocker[] = [];
+    const records = prepareProjectRecords({
+      projects: ["specification/preview/Service"],
+      sourceIndex: { sourceChanges: [] } as unknown as SourceIndex,
+      blockers,
+      baseWorktree: "historical-base-worktree",
+      currentWorktree: "head-worktree",
+      baseCommit: "historical-base-sha",
+      headCommit: "head-sha",
+      workRoot: "work",
+      resolveApiVersions: ({ baseCommit, headCommit }) =>
+        selectApiVersionPair({
+          base: {
+            versioned: true,
+            versions: ["2026-01-01-preview", "2026-05-01-preview"],
+          },
+          current: {
+            versioned: true,
+            versions: [
+              "2026-01-01-preview",
+              ...(retained ? ["2026-05-01-preview"] : []),
+              "2026-08-01-preview",
+            ],
+          },
+          baseCommit,
+          headCommit,
+        }),
+      runCompilers: (options) => {
+        calls.push(options);
+        const { comparisonRole, sourceRevision, sourceCommit, apiVersion } = options;
+        const metadata = {
+          comparisonRole,
+          sourceRevision,
+          sourceCommit,
+          selectedApiVersion: apiVersion,
+          command: { executable: "fixture", args: [] },
+          exitCode: 0,
+          durationMs: 0,
+          configPath: "fixture-config",
+          configHash: "fixture-hash",
+          logPath: "fixture-log",
+          files: [],
+        };
+        return {
+          comparisonRole,
+          sourceRevision,
+          sourceCommit,
+          apiVersion,
+          autorest: {
+            ...metadata,
+            status: comparisonRole === "baseline" || targetFailure ? "failed" : "succeeded",
+            format: "swagger-2.0",
+            serviceManifestPath: "",
+          },
+          tcgc: {
+            ...metadata,
+            status: "succeeded",
+            format: "tcgc-yaml",
+            provenanceFile: { path: "fixture-provenance.json", contentHash: "fixture-hash" },
+          },
+        };
+      },
+    });
+    assert.deepEqual(
+      calls.map(({ worktree, comparisonRole, sourceRevision, sourceCommit, apiVersion }) => ({
+        worktree,
+        comparisonRole,
+        sourceRevision,
+        sourceCommit,
+        apiVersion,
+      })),
+      [
+        ...(retained
+          ? [
+              {
+                worktree: "head-worktree",
+                comparisonRole: "baseline",
+                sourceRevision: "current",
+                sourceCommit: "head-sha",
+                apiVersion: "2026-05-01-preview",
+              },
+            ]
+          : []),
+        {
+          worktree: "head-worktree",
+          comparisonRole: "target",
+          sourceRevision: "current",
+          sourceCommit: "head-sha",
+          apiVersion: "2026-08-01-preview",
+        },
+      ],
+    );
+    for (const role of retained ? (["baseline", "target"] as const) : (["target"] as const)) {
+      for (const emitter of ["autorest", "tcgc"] as const) {
+        const artifact = records[0].artifacts[role]?.[emitter];
+        assert.equal(artifact?.sourceCommit, records[0].artifactComparison?.[role].commit);
+        assert.equal(artifact?.sourceRevision, "current");
+        assert.equal(artifact?.comparisonRole, role);
+        assert.equal(
+          artifact?.selectedApiVersion,
+          records[0].artifactComparison?.[role].apiVersion,
+        );
+      }
+    }
+    assert.equal(records[0].classification, "existing");
+    assert.equal(records[0].artifactComparison?.mode, "new-api-version");
+    assert.equal(records[0].artifactComparison?.baseline.apiVersion, "2026-05-01-preview");
+    assert.equal(records[0].artifactComparison?.baseline.commit, "head-sha");
+    if (!retained) assert.equal(records[0].artifacts.baseline, undefined);
+    assert.deepEqual(
+      blockers.map(({ code, comparisonRole }) => [code, comparisonRole]),
+      [
+        [
+          retained ? "autorest-compile-failed" : "baseline-api-version-unavailable-in-head",
+          "baseline",
+        ],
+        ...(targetFailure ? [["autorest-compile-failed", "target"]] : []),
+      ],
+    );
+  },
+);
+
+void test("discovery failure blocks compilation instead of using target-only artifacts", () => {
+  const blockers: PreparationBlocker[] = [];
+  const records = prepareProjectRecords({
+    projects: ["specification/preview/Service"],
+    sourceIndex: { sourceChanges: [] } as unknown as SourceIndex,
+    blockers,
+    baseWorktree: "base",
+    currentWorktree: "head",
+    baseCommit: "base-sha",
+    headCommit: "head-sha",
+    workRoot: "work",
+    resolveApiVersions: () => {
+      throw new Error("Unresolved service version enum.");
+    },
+    runCompilers: () => {
+      throw new Error("Compilation must not run.");
+    },
+  });
+  assert.equal(records[0].artifactComparison, undefined);
+  assert.deepEqual(records[0].artifacts, {});
+  assert.deepEqual(
+    blockers.map(({ code }) => code),
+    ["api-version-resolution-failed"],
+  );
+});
 
 void test("expands renamed TypeSpec evidence into analyzable paths", () => {
   assert.deepEqual(

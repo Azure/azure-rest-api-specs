@@ -13,6 +13,7 @@ import {
   renderAssessmentHtml as renderCurrentAssessmentHtml,
 } from "../scripts/render-assessment-html.ts";
 import { normalizeRecordedAssessment, reportSection } from "./report-test-utils.ts";
+import { selectApiVersionPair } from "../scripts/api-version-selection.ts";
 
 type AssessmentFact = import("../scripts/runtime-types.ts").AssessmentFact;
 
@@ -349,6 +350,36 @@ function assessment(
     provenance: {},
   } as unknown as AssessmentOutput;
 }
+
+void test("missing-head-baseline sections contain only their heading and approved message", () => {
+  const input = assessment({ status: "not-assessed", findings: [] });
+  input.dimensions.rest.status = "not-assessed";
+  input.artifactComparisons = [
+    {
+      projectId: "preview",
+      ...selectApiVersionPair({
+        base: { versioned: true, versions: ["2026-05-01-preview"] },
+        current: { versioned: true, versions: ["2026-10-01-preview"] },
+        baseCommit: "baseline",
+        headCommit: "target",
+      }),
+    },
+  ];
+  const result = renderReportSections(input, reportRenderHelpers);
+  for (const [id, title] of [
+    ["rest-breaking", "REST breaking changes"],
+    ["downstream-breaking", "Downstream breaking changes"],
+  ]) {
+    assert.equal(
+      reportSection(result.html, id),
+      `<section id="${id}"><div class="report-section-head"><div><h2>${title}</h2><p>Not assessed: the baseline API version is not available in head.</p></div><div class="report-section-meta"></div></div></section>`,
+    );
+  }
+  input.artifactComparisons = [];
+  const generic = renderReportSections(input, reportRenderHelpers);
+  assert.notMatch(generic.html, /the baseline API version is not available in head/);
+  assert.match(reportSection(generic.html, "rest-breaking"), /No REST compatibility verdict/);
+});
 
 void test("renders stable semantic grouping identity, diagnostics, and evidence provenance", () => {
   const input = assessment();

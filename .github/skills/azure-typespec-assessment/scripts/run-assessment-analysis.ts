@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { ensureSkillDependencies } from "./skill-dependencies.ts";
+import { hasUnavailableHeadBaseline } from "./comparison-execution.ts";
 
 await ensureSkillDependencies();
 
@@ -1019,6 +1020,7 @@ function deterministicCoverage({
   rest,
   downstream,
   complianceRequest,
+  manifest,
 }: {
   unit: InternalSemanticUnit;
   sourceChanges: Record<string, SourceChange>;
@@ -1026,7 +1028,13 @@ function deterministicCoverage({
   rest: BreakingAnalysis;
   downstream: DownstreamAnalysis;
   complianceRequest?: ComplianceSearchRequest;
+  manifest: PreparationManifest;
 }): DeterministicCoverage {
+  const projectIds = new Set(unit.projectIds ?? [unit.projectId]);
+  const unavailableBaseline = manifest.projects.some(
+    (project) =>
+      projectIds.has(project.id) && hasUnavailableHeadBaseline(project.artifactComparison),
+  );
   const declarationsByHunk = declarationHunkIds(unit, sourceChanges);
   const operationsByHunk = operationHunkIds(unit);
 
@@ -1071,6 +1079,15 @@ function deterministicCoverage({
     const restCandidateIds = [...new Set(restByHunk.get(hunkId) ?? [])].sort();
     const downstreamCandidateIds = [...new Set(downstreamByHunk.get(hunkId) ?? [])].sort();
     const source = sourceForHunk(unit, sourceChanges, hunkId);
+    if (unavailableBaseline) {
+      return {
+        hunkId,
+        status: "blocked",
+        reason: "baseline-api-version-unavailable-in-head",
+        restCandidateIds,
+        downstreamCandidateIds,
+      };
+    }
     if (rest.status === "blocked" || downstream.status === "blocked") {
       return {
         hunkId,
@@ -1339,6 +1356,7 @@ export function buildModelInput({
     assessedSemanticUnits.map((unit) => [
       unit.id,
       deterministicCoverage({
+        manifest,
         unit,
         sourceChanges,
         semantic,
@@ -1352,6 +1370,7 @@ export function buildModelInput({
     informationalSemanticUnits.map((unit) => [
       unit.id,
       deterministicCoverage({
+        manifest,
         unit,
         sourceChanges,
         semantic,
@@ -1570,16 +1589,29 @@ export function blockedAssessment(
       }),
     })),
     confidence: "low",
-    safety: { scope: "rest-and-downstream-only", status: "not-assessed" },
+    safety: {
+      scope: "rest-and-downstream-only",
+      status: "not-assessed",
+      verdict: "unknown",
+      coverage: "blocked",
+    },
     dimensions: {
       semantic: {
         status: "not-assessed",
         items: [],
         blockers: semantic.blockers,
       },
-      rest: { status: "not-assessed", findings: [], blockers: rest.blockers },
+      rest: {
+        status: "not-assessed",
+        verdict: "unknown",
+        coverage: "blocked",
+        findings: [],
+        blockers: rest.blockers,
+      },
       downstream: {
         status: "not-assessed",
+        verdict: "unknown",
+        coverage: "blocked",
         findings: [],
         blockers: downstream.blockers,
       },

@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { deriveSafety, dimensionCompatibility } from "./assessment-display.ts";
+import { UNAVAILABLE_HEAD_BASELINE_MESSAGE } from "./comparison-execution.ts";
 import { sameAutorestContract } from "./autorest-contract.ts";
 import { isMain, parseArgs, readJsonObject, runMain, writeJson } from "./cli.ts";
 import { assembleCompliance } from "./compliance-assessment.ts";
@@ -429,20 +430,23 @@ function operationPresentation(
   const before = operation.beforeFactId ? facts[operation.beforeFactId] : undefined;
   const after = operation.afterFactId ? facts[operation.afterFactId] : undefined;
   const current = after ?? before;
-  const changed = changedFields(before, after, [
-    "method",
-    "path",
-    "parameters",
-    "request",
-    "responses",
-    "paging",
-    "lro",
-    "consumes",
-    "produces",
-  ]);
+  const changed = operation.comparisonUnavailable
+    ? []
+    : changedFields(before, after, [
+        "method",
+        "path",
+        "parameters",
+        "request",
+        "responses",
+        "paging",
+        "lro",
+        "consumes",
+        "produces",
+      ]);
   const wireChanges = changed.filter((field) => field !== "paging");
   return {
     ...operation,
+    projectId: current?.projectId ?? operation.projectId,
     apiVersion: current?.apiVersion,
     method: current?.method,
     path: current?.path,
@@ -450,15 +454,20 @@ function operationPresentation(
     changedAspects: changed,
     before,
     after,
-    outcome: wireChanges.length
-      ? `REST contract changed: ${wireChanges.join(", ")}.`
-      : changed.includes("paging")
-        ? "HTTP signature and represented payload contract unchanged; SDK paging metadata changed."
-        : "HTTP signature and represented payload contract unchanged.",
+    outcome: operation.comparisonUnavailable
+      ? UNAVAILABLE_HEAD_BASELINE_MESSAGE
+      : wireChanges.length
+        ? `REST contract changed: ${wireChanges.join(", ")}.`
+        : changed.includes("paging")
+          ? "HTTP signature and represented payload contract unchanged; SDK paging metadata changed."
+          : "HTTP signature and represented payload contract unchanged.",
   };
 }
 
 function semanticAction(unit: InternalSemanticUnit, operations: PresentedOperation[]) {
+  if (operations.some((operation) => operation.comparisonUnavailable)) {
+    return unit.action ?? unit.changeKind;
+  }
   if (
     operations.length &&
     operations.every((operation) => !operation.beforeFactId && operation.afterFactId)

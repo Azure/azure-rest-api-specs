@@ -3,11 +3,13 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { assembleAssessment, matchTypeFindingIntents } from "../scripts/assemble-assessment.ts";
-import { readJson, writeJson } from "../scripts/cli.ts";
+import { readJson, readJsonObject, writeJson } from "../scripts/cli.ts";
 import { readComplianceCatalog } from "../scripts/compliance-assessment.ts";
 import { renderAssessmentHtml } from "../scripts/render-assessment-html.ts";
 import { reportSection } from "./report-test-utils.ts";
 import { validateAssessment } from "../scripts/validate-assessment.ts";
+import { selectApiVersionPair } from "../scripts/api-version-selection.ts";
+import { unavailableHeadBaselineBlocker } from "../scripts/comparison-execution.ts";
 
 type AssessmentModelInput = import("../scripts/runtime-types.ts").AssessmentModelInput;
 
@@ -167,6 +169,15 @@ void test("validator accepts target-only artifact comparisons for new projects",
     },
   ];
 
+  assert.ok(
+    validateAssessment(assessment).some(
+      (error) =>
+        error.startsWith("New-version artifact comparison") &&
+        error.includes("cross-revision fallback is forbidden"),
+    ),
+  );
+  assessment.artifactComparisons[0].baseline!.sourceRevision = "current";
+  assessment.artifactComparisons[0].baseline!.commit = "head";
   assert.deepEqual(
     validateAssessment(assessment).filter((error) =>
       error.startsWith("New-version artifact comparison"),
@@ -268,6 +279,243 @@ function fixture() {
   });
   return work;
 }
+
+void test.each([false, true])(
+  "missing head baseline isolates dimensions and preserves available-project findings (mixed: %s)",
+  (mixed) => {
+    const work = fixture();
+    try {
+      const comparison = selectApiVersionPair({
+        base: { versioned: true, versions: ["2026-05-01-preview"] },
+        current: { versioned: true, versions: ["2026-10-01-preview"] },
+        baseCommit: "base",
+        headCommit: "head",
+      });
+      const blocker = unavailableHeadBaselineBlocker({
+        id: "project-1",
+        artifactComparison: comparison,
+      });
+      assert.ok(blocker);
+      const manifestPath = path.join(work, "preparation-manifest.json");
+      const manifest = readJsonObject(manifestPath);
+      writeJson(manifestPath, {
+        ...manifest,
+        projects: [
+          {
+            id: "project-1",
+            path: "specification/a",
+            classification: "existing",
+            sourceChangeIds: ["source-1"],
+            artifactComparison: comparison,
+            artifacts: {},
+            blockers: [blocker],
+          },
+          ...(mixed
+            ? [
+                {
+                  id: "project-ready",
+                  path: "specification/b",
+                  classification: "existing",
+                  artifacts: {},
+                  blockers: [],
+                  sourceChangeIds: ["source-1"],
+                  artifactComparison: selectApiVersionPair({
+                    base: { versioned: true, versions: ["v1"] },
+                    current: { versioned: true, versions: ["v1"] },
+                    baseCommit: "base",
+                    headCommit: "head",
+                  }),
+                },
+              ]
+            : []),
+        ],
+        blockers: [blocker],
+      });
+      writeJson(path.join(work, "dimensions", "semantic-intents-input.json"), {
+        status: "ready",
+        blockers: [],
+        facts: {
+          target: {
+            id: "target",
+            projectId: "project-1",
+            revision: "current",
+            comparisonRole: "target",
+            sourceCommit: "head",
+            operationId: "Widgets_Get",
+            apiVersion: "2026-10-01-preview",
+            method: "get",
+            path: "/widgets",
+          },
+        },
+        reviewUnits: [
+          {
+            id: "semantic-1",
+            projectId: "project-1",
+            action: "modify",
+            sourceChangeIds: ["source-1"],
+            hunkIds: ["hunk-1"],
+            declarationIds: ["declaration-1"],
+            operationIds: ["target"],
+            ownedOperationIds: ["Widgets_Get"],
+            operations: [
+              {
+                operationId: "Widgets_Get",
+                projectId: "project-1",
+                afterFactId: "target",
+                comparisonUnavailable: true,
+              },
+            ],
+          },
+        ],
+      });
+      for (const dimension of ["rest", "downstream"]) {
+        writeJson(path.join(work, "dimensions", `${dimension}-breaking-input.json`), {
+          status: "blocked",
+          facts: {},
+          candidates: [],
+          blockers: [blocker],
+        });
+      }
+      if (mixed) {
+        writeJson(path.join(work, "dimensions", "rest-breaking-input.json"), {
+          status: "ready",
+          facts: { "rest-fact-1": { id: "rest-fact-1", projectId: "project-ready" } },
+          candidates: [
+            {
+              id: "rest-1",
+              projectId: "project-ready",
+              rule: "required-property-added",
+              actual: "mode is required",
+              expected: "mode remains optional",
+              operationIds: ["Ready_Get"],
+              sourceChangeIds: ["source-1"],
+              evidenceFactIds: ["rest-fact-1"],
+            },
+          ],
+          blockers: [blocker],
+        });
+      }
+      const complianceDecisions = addComplianceInput(work);
+      addDocumentInput(work, false);
+      const result = assembleTestAssessment({
+        work,
+        judgment: {
+          ...documentJudgment(),
+          restDecisions: mixed
+            ? [
+                {
+                  candidateId: "rest-1",
+                  decision: "approve",
+                  severity: "high",
+                  rationale: "Existing requests fail in the available project.",
+                },
+              ]
+            : [],
+          complianceDecisions,
+        },
+      });
+      assert.deepEqual(validateAssessment(result), []);
+      assert.equal(result.dimensions.semantic.status, "assessed");
+      const item = result.dimensions.semantic.items[0];
+      assert.equal(item.action, "modify");
+      assert.equal(item.operations[0].comparisonUnavailable, true);
+      assert.equal(item.operations[0].before, undefined);
+      assert.deepEqual(item.operations[0].changedAspects, []);
+      assert.equal(result.dimensions.compliance.status, "failed");
+      assert.equal(result.dimensions.compliance.findings.length, 1);
+      assert.equal(result.dimensions.documentQuality.status, "failed");
+      assert.equal(result.dimensions.documentQuality.findings?.length, 1);
+      for (const dimension of mixed
+        ? [result.dimensions.downstream]
+        : [result.dimensions.rest, result.dimensions.downstream, result.safety]) {
+        assert.equal(dimension.status, "not-assessed");
+        assert.equal(dimension.verdict, "unknown");
+        assert.equal(dimension.coverage, "blocked");
+      }
+      assert.deepEqual(result.artifactComparisons?.[0], { projectId: "project-1", ...comparison });
+      assert.equal(result.dimensions.rest.findings.length, mixed ? 1 : 0);
+      if (mixed) {
+        assert.equal(result.dimensions.rest.status, "failed");
+        assert.equal(result.dimensions.rest.coverage, "partial");
+        assert.equal(result.safety.status, "failed");
+        assert.equal(result.safety.coverage, "partial");
+        assert.equal(result.dimensions.rest.findings[0].projectId, "project-ready");
+      }
+      assert.deepEqual(result.dimensions.downstream.findings, []);
+      const html = renderAssessmentHtml(result);
+      const semanticHtml = reportSection(html, "semantic-intents");
+      assert.match(semanticHtml, /Not assessed: the baseline API version is not available in head/);
+      assert.notMatch(semanticHtml, /not present|contract unchanged|REST contract changed/);
+      if (mixed) {
+        const restHtml = reportSection(html, "rest-breaking");
+        assert.match(restHtml, /Ready_Get/);
+        assert.match(restHtml, /Not assessed: the baseline API version is not available in head/);
+        assert.match(restHtml, /specification\/a/);
+        const start = html.indexOf('<a class="summary-card" href="#rest-breaking">');
+        const card = html.slice(start, html.indexOf("</a>", start));
+        assert.match(card, /1 finding/);
+        assert.match(card, /1 project not assessed: baseline unavailable in head/);
+      }
+
+      const baseline = result.artifactComparisons?.[0].baseline;
+      assert.ok(baseline);
+      baseline.sourceRevision = "base";
+      baseline.commit = "base";
+      assert.ok(
+        validateAssessment(result).some((error) =>
+          error.includes("cross-revision fallback is forbidden"),
+        ),
+      );
+      baseline.sourceRevision = "current";
+      baseline.commit = "head";
+      const project = result.projects?.[0];
+      assert.ok(project);
+      Object.assign(project.artifacts, { baseline: {} });
+      assert.ok(
+        validateAssessment(result).some((error) =>
+          error.includes("must not have baseline artifacts"),
+        ),
+      );
+      delete project.artifacts.baseline;
+      for (const emitter of ["autorest", "tcgc"]) {
+        Object.assign(project.artifacts, {
+          target: {
+            [emitter]: {
+              status: "succeeded",
+              sourceRevision: "base",
+              sourceCommit: "base",
+              comparisonRole: "target",
+              selectedApiVersion: comparison.target.apiVersion,
+            },
+          },
+        });
+        assert.ok(
+          validateAssessment(result).some((error) =>
+            error.includes(`invalid target ${emitter} provenance`),
+          ),
+        );
+        delete project.artifacts.target;
+      }
+      const restBlockers = result.dimensions.rest.blockers;
+      result.dimensions.rest.blockers = [];
+      assert.ok(
+        validateAssessment(result).some((error) =>
+          error.includes("precise unavailable head baseline reason"),
+        ),
+      );
+      result.dimensions.rest.blockers = restBlockers;
+      comparison.available.current.push("2026-05-01-preview");
+      result.artifactComparisons![0].available = comparison.available;
+      assert.ok(
+        validateAssessment(result).some((error) =>
+          error.includes("requires explicit discovered version"),
+        ),
+      );
+    } finally {
+      fs.rmSync(work, { recursive: true, force: true });
+    }
+  },
+);
 
 void test("assembly retains mapped operations without treating paging metadata as a wire change", () => {
   for (const wireField of [undefined, "responses", "produces"]) {

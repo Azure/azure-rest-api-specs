@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import type { ArtifactComparison } from "./runtime-types.ts";
 
 type ApiVersionSet = {
   versioned: boolean;
@@ -97,7 +98,13 @@ export function selectApiVersionPair({
   current: ApiVersionSet;
   baseCommit?: string;
   headCommit?: string;
-}) {
+}): ArtifactComparison & {
+  base?: string;
+  current?: string;
+  baseReason: string;
+  currentReason: string;
+  versioningChange?: string;
+} {
   if (!base.versioned && !current.versioned) {
     return {
       mode: "unversioned",
@@ -189,18 +196,30 @@ export function selectApiVersionPair({
   if (!currentVersion) throw new Error("Unable to select the current API version.");
   const stableBaseVersions = base.versions.filter((version) => !isPreview(version));
   const useSameVersion = !addedCurrentVersions.length && baseSet.has(currentVersion);
+  const previewOnlyAddition =
+    addedCurrentVersions.length > 0 &&
+    isPreview(currentVersion) &&
+    ![...base.versions, ...current.versions].some((version) => !isPreview(version));
+  const previousVersions = previewOnlyAddition
+    ? base.versions.filter((version) => compareApiVersions(version, currentVersion) < 0)
+    : base.versions;
   const baselineVersion = useSameVersion
     ? currentVersion
-    : latest(stableBaseVersions.length ? stableBaseVersions : base.versions);
-  if (!baselineVersion) throw new Error("Unable to select the baseline API version.");
+    : latest(stableBaseVersions.length ? stableBaseVersions : previousVersions);
+  if (!baselineVersion) {
+    throw new Error(
+      previewOnlyAddition
+        ? `Unable to select a previous preview API version before ${currentVersion} from the comparison base.`
+        : "Unable to select the baseline API version.",
+    );
+  }
   const baselineReason = useSameVersion
     ? "affected-existing-version"
     : stableBaseVersions.length
       ? "previous-latest-stable"
       : "previous-latest-preview";
   const mode = addedCurrentVersions.length ? "new-api-version" : "existing-api-version";
-  const baselineSourceRevision =
-    mode === "new-api-version" && current.versions.includes(baselineVersion) ? "current" : "base";
+  const baselineSourceRevision = mode === "new-api-version" ? "current" : "base";
   return {
     mode,
     baseline: {
@@ -208,6 +227,9 @@ export function selectApiVersionPair({
       commit: baselineSourceRevision === "current" ? headCommit : baseCommit,
       apiVersion: baselineVersion,
       reason: baselineReason,
+      ...(mode === "new-api-version" && !current.versions.includes(baselineVersion)
+        ? { availability: "unavailable-in-head" as const }
+        : {}),
     },
     target: {
       sourceRevision: "current",

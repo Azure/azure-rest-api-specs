@@ -3,6 +3,10 @@ import path from "node:path";
 import { extractApiVersions, selectApiVersionPair } from "./api-version-selection.ts";
 import { documentQualitySummary, renderReportSections } from "./assessment-report-ui.ts";
 import { isMain, parseArgs, readJsonObject, runMain } from "./cli.ts";
+import {
+  hasUnavailableHeadBaseline,
+  UNAVAILABLE_HEAD_BASELINE_MESSAGE,
+} from "./comparison-execution.ts";
 import { validateAssessment } from "./validate-assessment.ts";
 
 type ArtifactSelection = import("./runtime-types.ts").ArtifactSelection;
@@ -1017,6 +1021,7 @@ export function operationContractRows(
   restFindings: AssessmentFinding[] = [],
   semanticIntentId?: string,
 ): ContractChangeRow[] {
+  if (operation.comparisonUnavailable) return [];
   const detailedRows = restFindings
     .filter((finding) => findingMatchesOperation(finding, operation, semanticIntentId))
     .map(restContractDelta);
@@ -1457,6 +1462,9 @@ function operationCard(
   semanticIntentId: string,
 ) {
   const unchangedOutcome = "HTTP signature and represented payload contract unchanged.";
+  if (operation.comparisonUnavailable) {
+    return `<details class="operation"><summary><strong>${escapeHtml(operation.operationId)}</strong> <code>${escapeHtml((operation.method ?? "").toUpperCase())} ${escapeHtml(operation.path)}</code> <span>${escapeHtml(operation.apiVersion)}</span></summary><div class="operation-body"><p>${UNAVAILABLE_HEAD_BASELINE_MESSAGE}</p></div></details>`;
+  }
   const rows = operationContractRows(operation, restFindings, semanticIntentId);
   const changes = rows.length
     ? `<table class="contract-change-table"><thead><tr><th>Contract area</th><th>Before</th><th>After</th></tr></thead><tbody>${renderContractChangeRows(rows)}</tbody></table>`
@@ -2035,13 +2043,23 @@ function renderCurrent(assessment: AssessmentOutput, options: RenderOptions = {}
     (assessment.artifactComparisons ?? []).map((item) => [item.projectId, item]),
   );
   const comparisonHeader = headerComparison(assessment);
+  const unavailableComparisons = (assessment.artifactComparisons ?? []).filter(
+    hasUnavailableHeadBaseline,
+  );
+  const allBaselinesUnavailable =
+    unavailableComparisons.length > 0 &&
+    unavailableComparisons.length === assessment.artifactComparisons?.length;
+  const unavailableSummary = `<span>${escapeHtml(UNAVAILABLE_HEAD_BASELINE_MESSAGE)}</span>`;
+  const mixedUnavailableSummary = unavailableComparisons.length
+    ? `<br>${unavailableComparisons.length} project${unavailableComparisons.length === 1 ? "" : "s"} not assessed: baseline unavailable in head.`
+    : "";
   const projects = (assessment.projects ?? [])
     .map((project) => {
       const comparison: Partial<ArtifactComparison> =
         comparisons.get(project.id) ?? project.artifactComparison ?? {};
       const baselineArtifact = project.artifacts?.baseline ?? project.artifacts?.base;
       const targetArtifact = project.artifacts?.target ?? project.artifacts?.current;
-      return `<tr><td><code>${escapeHtml(project.path)}</code></td><td>${escapeHtml(comparison.mode ?? "legacy")}</td><td><code>${escapeHtml(artifactLabel(comparison.baseline))}</code><br><small>${escapeHtml(comparison.baseline?.sourceRevision ?? "base")} · ${escapeHtml(comparison.baseline?.reason ?? "")}</small></td><td><code>${escapeHtml(artifactLabel(comparison.target))}</code><br><small>${escapeHtml(comparison.target?.sourceRevision ?? "current")} · ${escapeHtml(comparison.target?.reason ?? "")}</small></td><td>${escapeHtml(baselineArtifact?.autorest?.status ?? "n/a")} / ${escapeHtml(baselineArtifact?.tcgc?.status ?? "n/a")}</td><td>${escapeHtml(targetArtifact?.autorest?.status ?? "n/a")} / ${escapeHtml(targetArtifact?.tcgc?.status ?? "n/a")}</td></tr>`;
+      return `<tr><td><code>${escapeHtml(project.path)}</code></td><td>${escapeHtml(comparison.mode ?? "legacy")}</td><td><code>${escapeHtml(artifactLabel(comparison.baseline))}</code><br><small>${escapeHtml(comparison.baseline?.sourceRevision ?? "base")} · ${escapeHtml(comparison.baseline?.reason ?? "")}${hasUnavailableHeadBaseline(comparison) ? " · unavailable in head (not compiled)" : ""}</small></td><td><code>${escapeHtml(artifactLabel(comparison.target))}</code><br><small>${escapeHtml(comparison.target?.sourceRevision ?? "current")} · ${escapeHtml(comparison.target?.reason ?? "")}</small></td><td>${escapeHtml(baselineArtifact?.autorest?.status ?? "n/a")} / ${escapeHtml(baselineArtifact?.tcgc?.status ?? "n/a")}</td><td>${escapeHtml(targetArtifact?.autorest?.status ?? "n/a")} / ${escapeHtml(targetArtifact?.tcgc?.status ?? "n/a")}</td></tr>`;
     })
     .join("");
   return `<!doctype html>
@@ -2063,8 +2081,8 @@ ${reportStyles}
 <div class="summary-grid">
 <a class="summary-card" href="#semantic-intents">${summaryHeading("Semantic intents", { icon: "ⓘ", className: "info", label: "Information only" })}<div class="summary-detail">${summary.semanticItems.length} ${summary.semanticItems.length === 1 ? "intent" : "intents"}<br>${summary.operationCount} operations<br>${summary.actionCounts.add} Added, ${summary.actionCounts.modify} Modified, ${summary.actionCounts.remove} Removed</div></a>
 <a class="summary-card" href="#azure-compliance">${summaryHeading("Azure Guidelines", complianceStatus(summary.complianceStatus))}<div class="summary-detail">${complianceStatus(summary.complianceStatus).label === "N/A" ? "Not assessed<br>" : ""}${summary.complianceFindingCount} ${summary.complianceFindingCount === 1 ? "finding" : "findings"}<br>${escapeHtml(summary.complianceCoverageDetail)}</div></a>
-<a class="summary-card" href="#rest-breaking">${summaryHeading("REST breaking changes", restStatus)}<div class="summary-detail">${restStatus.label === "N/A" ? "Verdict unknown<br>" : ""}${summary.restFindingCount} ${summary.restFindingCount === 1 ? "finding" : "findings"}</div></a>
-<a class="summary-card" href="#downstream-breaking">${summaryHeading("Downstream breaking changes", downstreamStatus)}<div class="summary-detail">${downstreamStatus.label === "N/A" ? "Verdict unknown<br>" : ""}${summary.downstreamFindingCount} ${summary.downstreamFindingCount === 1 ? "finding" : "findings"}</div></a>
+<a class="summary-card" href="#rest-breaking">${summaryHeading("REST breaking changes", restStatus)}<div class="summary-detail">${allBaselinesUnavailable ? unavailableSummary : `${restStatus.label === "N/A" ? "Verdict unknown<br>" : ""}${summary.restFindingCount} ${summary.restFindingCount === 1 ? "finding" : "findings"}${mixedUnavailableSummary}`}</div></a>
+<a class="summary-card" href="#downstream-breaking">${summaryHeading("Downstream breaking changes", downstreamStatus)}<div class="summary-detail">${allBaselinesUnavailable ? unavailableSummary : `${downstreamStatus.label === "N/A" ? "Verdict unknown<br>" : ""}${summary.downstreamFindingCount} ${summary.downstreamFindingCount === 1 ? "finding" : "findings"}${mixedUnavailableSummary}`}</div></a>
 <a class="summary-card" href="#document-quality">${summaryHeading("Documentation Completeness", documentStatus)}<div class="summary-detail">${documentQuality.compactDetail.map(escapeHtml).join("<br>")}</div></a>
 </div></div></header>
 <details class="notice"><summary class="container"><span class="notice-title">Preview Notice</span><span class="notice-summary">The TypeSpec Assessment Assistant is in preview; official validation and review remain the source of truth.</span></summary>

@@ -1,5 +1,6 @@
 import path from "node:path";
 import { isMain, isRecord, parseArgs, readJsonObject, runMain, writeJson } from "./cli.ts";
+import { unavailableHeadBaselineBlocker } from "./comparison-execution.ts";
 import { typeIdentity } from "./sdk-method-delta.ts";
 import { canonicalJson, stableId } from "./stable-id.ts";
 import { normalizeTcgcContract } from "./tcgc-contract.ts";
@@ -1551,6 +1552,11 @@ export function analyzeDownstreamBreaking(options: {
   for (const project of [...(manifest.projects ?? [])].sort((left, right) =>
     left.id.localeCompare(right.id),
   )) {
+    const baselineBlocker = unavailableHeadBaselineBlocker(project);
+    if (baselineBlocker) {
+      blockers.push(baselineBlocker);
+      continue;
+    }
     if (project.classification === "new" || project.artifactComparison?.mode === "new-project") {
       analyzedProjects += 1;
       continue;
