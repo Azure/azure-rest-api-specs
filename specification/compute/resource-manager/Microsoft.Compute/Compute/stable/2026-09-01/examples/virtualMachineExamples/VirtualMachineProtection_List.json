@@ -1,0 +1,28 @@
+{
+  "title": "List VM Protection",
+  "operationId": "VirtualMachineProtections_List",
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVM",
+    "api-version": "2026-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/vmProtections/default",
+            "name": "default",
+            "type": "Microsoft.Compute/virtualMachines/vmProtections",
+            "properties": {
+              "protectionType": "Basic",
+              "provisioningState": "Succeeded",
+              "restorePointCollectionId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/restorePointCollections/AzureManagedRPC-myVM-0f47b100-583c-48e3-a4c0-aefc2c9bbcc1"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

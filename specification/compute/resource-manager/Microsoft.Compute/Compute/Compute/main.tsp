@@ -18,6 +18,7 @@ import "./VirtualMachineScaleSetLifecycleHookEvent.tsp";
 import "./VirtualMachineScaleSetVM.tsp";
 import "./VirtualMachineScaleSetVMExtension.tsp";
 import "./VirtualMachine.tsp";
+import "./VirtualMachineProtection.tsp";
 import "./VirtualMachineExtension.tsp";
 import "./VirtualMachineExtensionImage.tsp";
 import "./AvailabilitySet.tsp";
