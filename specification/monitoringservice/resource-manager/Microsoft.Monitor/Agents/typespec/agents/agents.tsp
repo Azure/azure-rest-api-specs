@@ -13,17 +13,17 @@ namespace Microsoft.Monitor {
   @armResourceOperations
   interface ObservabilityAgents {
     /**
-     * Returns the specified observability agent.
+     * Returns the specified observability agent. For a May resource, projects enabled as autonomousOperationsEnabled and enabled child monitored resources as embedded entries without changing stored data. Legacy operations are not converted into investigation policies.
      */
     get is ArmResourceRead<ObservabilityAgentResource>;
 
     /**
-     * Creates or updates an observability agent.
+     * Creates or replaces an observability agent. A PUT can migrate a May resource to the August model using the supplied complete configuration; omitted legacy operations are not carried forward. The migration is one-way, and later May PUT or PATCH requests return 409 ObservabilityAgentResourceModelConflict.
      */
     createOrUpdate is ArmResourceCreateOrReplaceSync<ObservabilityAgentResource>;
 
     /**
-     * Updates part of an observability agent.
+     * Updates part of an August observability agent. PATCH does not migrate a May resource and returns 409 ObservabilityAgentResourceModelConflict for that resource; use an August PUT to migrate it.
      */
     update is ArmCustomPatchSync<
       ObservabilityAgentResource,

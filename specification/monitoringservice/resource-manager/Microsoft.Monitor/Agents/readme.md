@@ -32,7 +32,16 @@ title: AzureMonitorAgentsClient
 description: Azure Monitor Agents Management Client
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2026-05-01-preview
+tag: package-2026-08-01-preview
+```
+
+### Tag: package-2026-08-01-preview
+
+These settings apply only when `--tag=package-2026-08-01-preview` is specified on the command line
+
+``` yaml $(tag) == 'package-2026-08-01-preview'
+input-file:
+- preview/2026-08-01-preview/agents.json
 ```
 
 ### Tag: package-2026-05-01-preview
@@ -43,6 +52,47 @@ These settings apply only when `--tag=package-2026-05-01-preview` is specified o
 input-file:
 - preview/2026-05-01-preview/agents.json
 ```
+
+---
+
+## API behavior and compatibility
+
+Reads do not migrate or rewrite stored resources. The API version controls the
+response shape, not the resource's stored configuration model.
+
+| Stored resource | May read (`2026-05-01-preview`) | August read (`2026-08-01-preview`) |
+| --- | --- | --- |
+| May model | Returns `enabled` and `operations`. | Returns `autonomousOperationsEnabled` from `enabled` (defaults to `true` if not stored). Projects enabled child monitored resources into `monitoredResources`; does not invent investigation policies or translate `operations`. A single-resource GET includes `x-ms-auto-mapped: true`. |
+| August model | Returns `enabled` from `autonomousOperationsEnabled` (defaults to `true` if not stored), omits `operations` and August-only configuration. | Returns the August configuration and `autonomousOperationsEnabled` (defaults to `true` if not stored). |
+
+An August PUT can migrate a May resource. It replaces the configuration with the
+supplied August settings, including a valid monitoring account and policies when
+autonomy is enabled. Legacy `operations` are not carried forward. Legacy child
+monitored resources are retired after the parent update succeeds. August PATCH
+against a May resource returns `409 ObservabilityAgentResourceModelConflict`.
+After migration, May PUT and PATCH also return that conflict; there is no reverse
+migration. May writes to May resources keep their existing behavior.
+
+### PATCH and response null handling
+
+Omitted PATCH properties preserve existing values. Explicit null clears optional
+configuration; nested investigation and usage-cap members are merged, while
+supplied arrays replace their previous values. The monitoring account cannot be
+cleared. Responses omit cleared members rather than returning null; clearing only
+the members of an existing configuration object can leave an empty object, for
+example `"usageCap": {}`. Dedicated update models retain PATCH nullability without
+exposing it in the resource response models.
+
+The existing service treats `"autonomousOperationsEnabled": null` as unchanged,
+not as deletion or disabling. Send an explicit boolean to change the value.
+This behavior is retained for compatibility; it is an exception to JSON Merge
+Patch deletion semantics, not a claim of RPC-Patch-V1-05 conformance. ARM review
+approval of this disposition is required before merge. Rejecting null instead
+would require a coordinated, compatibility-reviewed service and schema change.
+
+The existing array wire name `ruleResourceId` is also retained for compatibility.
+It is not renamed to `ruleResourceIds` by this API publication; ARM review
+approval of the naming disposition is required before merge.
 
 ---
 

@@ -19,11 +19,12 @@ namespace Microsoft.Monitor;
  */
 enum Versions {
   /**
-   * The 2026-05-01-preview API version.
+   * The 2026-08-01-preview API version.
    */
+  @Azure.Core.previewVersion
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-  @doc("API Version 2026-05-01-preview")
-  v2026_05_01: "2026-05-01-preview",
+  @doc("API Version 2026-08-01-preview")
+  v2026_08_01: "2026-08-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

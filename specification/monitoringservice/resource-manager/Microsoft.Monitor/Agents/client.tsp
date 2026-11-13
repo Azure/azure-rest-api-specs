@@ -15,14 +15,19 @@ using Microsoft.Monitor;
   "MonitorAgentProvisioningState",
   "csharp"
 );
-@@clientName(OperationEntry, "ObservabilityAgentOperationInfo", "csharp");
-@@clientName(OperationMode, "ObservabilityAgentOperationMode", "csharp");
-@@clientName(OperationType, "ObservabilityAgentOperationType", "csharp");
 @@clientName(ObservabilityAgentResource, "ObservabilityAgent", "csharp");
-@@clientName(ObservabilityAgentProperties.enabled, "IsEnabled", "csharp");
+@@clientName(
+  ObservabilityAgentProperties.autonomousOperationsEnabled,
+  "IsAutonomousOperationsEnabled",
+  "csharp"
+);
 @@clientName(
   ObservabilityAgentPropertiesUpdate,
   "ObservabilityAgentPatchProperties",
   "csharp"
 );
-@@clientName(ObservabilityAgentPropertiesUpdate.enabled, "IsEnabled", "csharp");
+@@clientName(
+  ObservabilityAgentPropertiesUpdate.autonomousOperationsEnabled,
+  "IsAutonomousOperationsEnabled",
+  "csharp"
+);

@@ -1,15 +1,13 @@
 {
-  "title": "ObservabilityAgents_Update",
-  "operationId": "ObservabilityAgents_Update",
+  "title": "ObservabilityAgents_CreateOrUpdate_MinimumSet",
+  "operationId": "ObservabilityAgents_CreateOrUpdate",
   "parameters": {
-    "api-version": "2026-05-01-preview",
+    "api-version": "2026-08-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
     "observabilityAgentName": "myObservabilityAgent",
-    "properties": {
-      "tags": {
-        "env": "prod"
-      },
+    "resource": {
+      "location": "eastus",
       "identity": {
         "type": "UserAssigned",
         "userAssignedIdentities": {
@@ -18,19 +16,7 @@
       },
       "properties": {
         "monitoringAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/accounts/myAzureMonitorWorkspace",
-        "enabled": false,
-        "operations": [
-          {
-            "type": "IssueCreation",
-            "mode": "Manual",
-            "instructions": "Focus on storage and networking issues only."
-          },
-          {
-            "type": "Investigation",
-            "mode": "Auto",
-            "instructions": "Focus on recent network issues."
-          }
-        ]
+        "autonomousOperationsEnabled": false
       }
     }
   },
@@ -41,9 +27,6 @@
         "name": "myObservabilityAgent",
         "type": "Microsoft.Monitor/observabilityAgents",
         "location": "eastus",
-        "tags": {
-          "env": "prod"
-        },
         "identity": {
           "type": "UserAssigned",
           "userAssignedIdentities": {
@@ -55,27 +38,28 @@
         },
         "properties": {
           "monitoringAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/accounts/myAzureMonitorWorkspace",
-          "enabled": false,
-          "operations": [
-            {
-              "type": "IssueCreation",
-              "mode": "Manual",
-              "instructions": "Focus on storage and networking issues only."
-            },
-            {
-              "type": "Investigation",
-              "mode": "Manual",
-              "instructions": "Focus on recent network issues."
+          "autonomousOperationsEnabled": false
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/observabilityAgents/myObservabilityAgent",
+        "name": "myObservabilityAgent",
+        "type": "Microsoft.Monitor/observabilityAgents",
+        "location": "eastus",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity": {
+              "principalId": "11111111-1111-1111-1111-111111111111",
+              "clientId": "33333333-3333-3333-3333-333333333333"
             }
-          ]
+          }
         },
-        "systemData": {
-          "createdBy": "user1",
-          "createdByType": "User",
-          "createdAt": "2021-04-01T12:34:56.1234567Z",
-          "lastModifiedBy": "user2",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2021-04-02T12:34:56.1234567Z"
+        "properties": {
+          "monitoringAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/accounts/myAzureMonitorWorkspace",
+          "autonomousOperationsEnabled": false
         }
       }
     }
