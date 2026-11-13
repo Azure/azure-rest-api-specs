@@ -1,25 +1,51 @@
 emit:
 options:
-  "@typespec/http-client-csharp":
-    emitter-output-dir: "{output-dir}"
-    package-name: Azure.AI.Agents.Contracts.V2
-    api-version: "virtual-public-preview"
-    unreferenced-types-handling: keepAll
+  # "@typespec/http-client-csharp":
+  #   emitter-output-dir: "{output-dir}"
+  #   # package-name: Azure.AI.Agents.Contracts.V2
+  #   api-version: "virtual-public-preview"
+  #   unreferenced-types-handling: keepAll
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
       - specification/ai-foundry/data-plane/Foundry/src/agents
       - specification/ai-foundry/data-plane/Foundry/src/agents-containers
+      - specification/ai-foundry/data-plane/Foundry/src/agents-invocations_ws
       - specification/ai-foundry/data-plane/Foundry/src/common
       - specification/ai-foundry/data-plane/Foundry/src/memory-stores
+      - specification/ai-foundry/data-plane/Foundry/src/openai
+      - specification/ai-foundry/data-plane/Foundry/src/sdk-common
       - specification/ai-foundry/data-plane/Foundry/src/skills
-      - specification/ai-foundry/data-plane/Foundry/src/openai/conversations
-      - specification/ai-foundry/data-plane/Foundry/src/openai/responses
       - specification/ai-foundry/data-plane/Foundry/src/toolboxes
+      - specification/ai-foundry/data-plane/Foundry/src/tools
+      - specification/ai-foundry/data-plane/Foundry/src/voice-agents
 imports:
   - "@azure-tools/typespec-azure-core"
   - "@azure-tools/typespec-azure-core/experimental"
   - "@azure-tools/typespec-client-generator-core"
   # Note: Imports for OpenAI types may use alternate views per tspconfig.yaml
+  - "@azure-tools/openai-typespec/views/client-emitters/models/assistants"
+  - "@azure-tools/openai-typespec/views/client-emitters/models/audio"
+  - "@azure-tools/openai-typespec/views/client-emitters/models/batch"
+  - "@azure-tools/openai-typespec/views/client-emitters/models/chat"
+  - "@azure-tools/openai-typespec/views/client-emitters/models/common"
+  - "@azure-tools/openai-typespec/views/client-emitters/models/completions"
+  - "@azure-tools/openai-typespec/views/client-emitters/models/containers"
+  - "@azure-tools/openai-typespec/views/client-emitters/models/conversations"
+  - "@azure-tools/openai-typespec/views/client-emitters/models/embeddings"
   - "@azure-tools/openai-typespec/views/client-emitters/models/evals"
+  - "@azure-tools/openai-typespec/views/client-emitters/models/files"
   - "@azure-tools/openai-typespec/views/client-emitters/models/fine-tuning"
+  - "@azure-tools/openai-typespec/views/client-emitters/models/graders"
+  - "@azure-tools/openai-typespec/views/client-emitters/models/images"
+  - "@azure-tools/openai-typespec/views/client-emitters/models/live"
+  - "@azure-tools/openai-typespec/views/client-emitters/models/messages"
+  - "@azure-tools/openai-typespec/views/client-emitters/models/models"
+  - "@azure-tools/openai-typespec/views/client-emitters/models/moderations"
+  - "@azure-tools/openai-typespec/views/client-emitters/models/realtime"
   - "@azure-tools/openai-typespec/views/client-emitters/models/responses"
+  - "@azure-tools/openai-typespec/views/client-emitters/models/runs"
+  - "@azure-tools/openai-typespec/views/client-emitters/models/threads"
+  - "@azure-tools/openai-typespec/views/client-emitters/models/uploads"
+  - "@azure-tools/openai-typespec/views/client-emitters/models/vector-stores"
+  - "@azure-tools/openai-typespec/views/client-emitters/models/video"
+  - "@azure-tools/openai-typespec/views/client-emitters/models/webhooks"

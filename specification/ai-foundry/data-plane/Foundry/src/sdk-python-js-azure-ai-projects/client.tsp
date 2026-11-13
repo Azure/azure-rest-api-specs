@@ -10,6 +10,7 @@ import "../data_generation_jobs/routes.tsp";
 import "../sdk-common/ops-relocation-datasets.tsp";
 
 // Stable operation (GA routes) without preview features
+import "../agent-insights/routes.tsp";
 import "../agents-optimization/routes.tsp";
 import "../agents-microsoft365/routes.tsp";
 import "../connections/routes.tsp";
@@ -19,7 +20,6 @@ import "../indexes/routes.tsp";
 
 // Beta operations (preview routes, requiring opt-in request header)
 import "../voice-agents/routes.tsp";
-import "../agent-insights/routes.tsp";
 import "../evaluation-taxonomies/routes.tsp";
 import "../evaluators/routes.tsp";
 import "../insights/routes.tsp";
@@ -35,7 +35,6 @@ import "../agents-session-files/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "../sdk-common/ops-relocation-agents.tsp";
-import "../sdk-common/ops-relocation-agent-insights.tsp";
 import "../sdk-common/ops-relocation-projects.tsp";
 import "../sdk-common/error.default.tsp";
 
@@ -53,6 +52,7 @@ using Azure.AI.Projects;
 
 // To fix circular dependency in Python, remaining OpenAI types are emitted as Azure.AI.Projects
 @@clientNamespace(OpenAI, "azure.ai.projects", "python");
+@@clientNamespace(Azure.AI.ProjectsInternal, "Azure.AI.Projects", "javascript");
 
 // The original schemas below are not emitted as Python classes, but their client
 // names are still checked for collisions, including the default language scope.
@@ -153,6 +153,49 @@ using Azure.AI.Projects;
 @@clientName(
   Microsoft365AppPackageResponse,
   "Microsoft365AppPackageResult",
+  "python"
+);
+
+// Preserve the enum member names released in Python 2.10.0 to avoid a source-breaking rename.
+// These Python-only overrides do not change wire values or JavaScript names.
+@@clientName(
+  ActivityProtocolAccessBoundary.read_1on1_manager,
+  "READ1_ON1_MANAGER",
+  "python"
+);
+@@clientName(
+  ActivityProtocolAccessBoundary.read_1on1_developers,
+  "READ1_ON1_DEVELOPERS",
+  "python"
+);
+@@clientName(
+  ActivityProtocolAccessBoundary.read_1on1_allowlisted,
+  "READ1_ON1_ALLOWLISTED",
+  "python"
+);
+@@clientName(
+  ActivityProtocolAccessBoundary.read_1on1_tenant,
+  "READ1_ON1_TENANT",
+  "python"
+);
+@@clientName(
+  ActivityProtocolAccessBoundary.write_1on1_manager,
+  "WRITE1_ON1_MANAGER",
+  "python"
+);
+@@clientName(
+  ActivityProtocolAccessBoundary.write_1on1_developers,
+  "WRITE1_ON1_DEVELOPERS",
+  "python"
+);
+@@clientName(
+  ActivityProtocolAccessBoundary.write_1on1_allowlisted,
+  "WRITE1_ON1_ALLOWLISTED",
+  "python"
+);
+@@clientName(
+  ActivityProtocolAccessBoundary.write_1on1_tenant,
+  "WRITE1_ON1_TENANT",
   "python"
 );
 
@@ -287,6 +330,13 @@ namespace JavaScriptToolCompatibility {
   OpenAI.CompoundFilter.filters,
   JavaScriptToolCompatibility.FileSearchToolFiltersFilter[],
   "javascript"
+);
+
+// Preserve the released Python annotation list[Union[ComparisonFilter, Any]] instead of
+// list[Union[ComparisonFilter, CompoundFilter]], which would be a breaking change.
+@@alternateType(
+  OpenAI.CompoundFilter.filters,
+  (OpenAI.ComparisonFilter | OpenAI.CompoundFilter | unknown)[]
 );
 
 // Preserve the existing JavaScript operation name.
@@ -484,6 +534,11 @@ namespace JavaScriptToolCompatibility {
 @@clientName(Azure.AI.Projects.Agents.generateAgent, "createFromPrompt");
 @@clientName(AgentOptimizationJobs.create, "createOptimizationJob");
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob");
+@@clientName(
+  AgentOptimizationJobs.downloadFile,
+  "downloadOptimizationJobFile",
+  "python, javascript"
+);
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs");
 @@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob");
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob");
@@ -757,6 +812,8 @@ namespace JavaScriptToolCompatibility {
 
 // Need to explicitly mention both languages to avoid compile error
 @@clientName(Evaluators.listLatestVersions, "list", "python, javascript");
+
+@@access(Evaluators.listDiagnostics, Access.public);
 
 // Evaluator pending upload
 @@clientName(Evaluators.startPendingUpload, "pendingUpload");

@@ -14,6 +14,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./back-compatible.tsp";
 import "./Account.tsp";
+import "./AttachedAksCluster.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./Deployment.tsp";
 import "./CommitmentPlan.tsp";
@@ -51,10 +52,6 @@ import "./CostControl.tsp";
 import "./routes.tsp";
 import "./client.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
@@ -129,6 +126,12 @@ enum Versions {
    * The 2026-11-01 API version.
    */
   v2026_11_01: "2026-11-01",
+
+  /**
+   * The 2026-11-15-preview API version.
+   */
+  @Azure.Core.previewVersion
+  v2026_11_15_preview: "2026-11-15-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
