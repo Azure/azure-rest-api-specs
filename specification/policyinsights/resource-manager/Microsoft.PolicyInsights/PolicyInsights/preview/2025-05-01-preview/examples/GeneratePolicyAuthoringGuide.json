@@ -1,0 +1,43 @@
+{
+  "title": "Retrieve authoring guidance for storage account secure transfer",
+  "operationId": "PolicyMcp_GeneratePolicyAuthoringGuide",
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "body": {
+      "userQuestion": "How do I require secure transfer for storage accounts?",
+      "resourceType": "Microsoft.Storage/storageAccounts"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "syntaxGuides": "Use an if condition to identify noncompliant resources and a then block to specify the policy effect.",
+        "relevantAliases": [
+          {
+            "aliasName": "Microsoft.Storage/storageAccounts/supportsHttpsTrafficOnly",
+            "aliasDescription": "Whether the storage account requires secure transfer.",
+            "resourceType": "Microsoft.Storage/storageAccounts",
+            "propertyPath": "properties.supportsHttpsTrafficOnly",
+            "valueType": "boolean",
+            "allowedValues": [
+              "true",
+              "false"
+            ]
+          }
+        ],
+        "relevantRuleExamples": [
+          {
+            "description": "Identify storage accounts that do not require secure transfer.",
+            "ifCondition": "{\"allOf\":[{\"field\":\"type\",\"equals\":\"Microsoft.Storage/storageAccounts\"},{\"field\":\"Microsoft.Storage/storageAccounts/supportsHttpsTrafficOnly\",\"equals\":false}]}"
+          }
+        ],
+        "relevantEffectExamples": [
+          {
+            "description": "Deny a noncompliant resource request.",
+            "thenBlock": "{\"effect\":\"deny\"}"
+          }
+        ]
+      }
+    }
+  }
+}

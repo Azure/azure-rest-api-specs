@@ -48,6 +48,17 @@
 
 - tool: TypeSpecValidation
   reason: >
+    These separately versioned services are aggregated by the existing parent
+    client, like PolicyInsightsApi and PolicyTrackedResourcesApi. Their models
+    and examples intentionally share PolicyInsightsApi to retain the established
+    service layout; SDK generation copies the complete parent project.
+  rules: [FolderStructure]
+  paths:
+    - PolicyAuthoringApi
+    - PolicySimulationApi
+
+- tool: TypeSpecValidation
+  reason: >
     Not ready to split as independent services.
   rules: [SdkTspConfigValidation]
   sub-rules:
@@ -57,6 +68,8 @@
     - options.@azure-tools/typespec-ts.*
     - parameters.service-dir.default
     - options.@azure-typespec/http-client-csharp-mgmt.*
-  paths: 
+  paths:
     - PolicyTrackedResourcesApi/tspconfig.yaml
     - PolicyInsightsApi/tspconfig.yaml
+    - PolicyAuthoringApi/tspconfig.yaml
+    - PolicySimulationApi/tspconfig.yaml

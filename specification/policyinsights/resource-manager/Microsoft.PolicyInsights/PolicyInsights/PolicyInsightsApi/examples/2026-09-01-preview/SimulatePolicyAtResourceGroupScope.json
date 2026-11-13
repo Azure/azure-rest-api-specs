@@ -1,0 +1,60 @@
+{
+  "title": "Simulate a hypothetical policy at resource group scope",
+  "operationId": "PolicyMcp_SimulatePolicyAtResourceGroupScope",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "11111111-1111-1111-1111-111111111111",
+    "resourceGroupName": "policy-preview-rg",
+    "body": {
+      "simulatedAssignment": {
+        "policyDefinition": {
+          "id": "/subscriptions/11111111-1111-1111-1111-111111111111/providers/Microsoft.Authorization/policyDefinitions/hypothetical-location-audit",
+          "properties": {
+            "displayName": "Audit resources outside the preferred location",
+            "mode": "All",
+            "parameters": {
+              "preferredLocation": {
+                "type": "String",
+                "defaultValue": "westus"
+              }
+            },
+            "policyRule": {
+              "if": {
+                "field": "location",
+                "notEquals": "[parameters('preferredLocation')]"
+              },
+              "then": {
+                "effect": "audit"
+              }
+            }
+          }
+        }
+      },
+      "resource": {
+        "resourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/policy-preview-rg/providers/Microsoft.Storage/storageAccounts/policypreviewstore",
+        "apiVersion": "2023-05-01"
+      },
+      "policyTargets": []
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "policyEvaluationResult": {
+          "policyEvaluations": [
+            {
+              "policyInfo": {
+                "policyDefinitionId": "/subscriptions/11111111-1111-1111-1111-111111111111/providers/Microsoft.Authorization/policyDefinitions/hypothetical-location-audit",
+                "policyAssignmentId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/policy-preview-rg/providers/Microsoft.Authorization/policyAssignments/simulatePolicy"
+              },
+              "evaluationResult": "Compliant",
+              "effectDetails": {
+                "policyEffect": "Audit"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
