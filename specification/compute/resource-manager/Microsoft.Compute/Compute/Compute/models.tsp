@@ -487,6 +487,20 @@ union AllocationStrategy {
   Prioritized: "Prioritized",
 }
 
+/**
+ * Specifies how VM SKUs are distributed across instances in the virtual machine scale set.
+ */
+@added(Versions.v2026_09_01)
+union SkuDistributionMode {
+  string,
+
+  /** VMs may use different SKUs from the SkuProfile list (multi-SKU). This is the default behavior. */
+  Heterogeneous: "Heterogeneous",
+
+  /** All VMs use a single SKU selected from the SkuProfile list. */
+  Homogeneous: "Homogeneous",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ExpandTypesForGetVMScaleSets {
   string,
@@ -1020,7 +1034,9 @@ union PatchOperationStatus {
 /**
  * Specifies the policy for the resource's placement in an availability zone. Use **Auto** for Virtual Machines and Virtual Machine Scale Sets to let the system automatically select an availability zone during resource creation. **Any** remains supported for Virtual Machines for backward compatibility.
  */
-union ZonePlacementPolicyType {
+@removed(Versions.v2026_09_01)
+@renamedFrom(Versions.v2026_09_01, "ZonePlacementPolicyType")
+union ZonePlacementPolicyTypeLegacy {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Any: "Any",
@@ -1029,6 +1045,19 @@ union ZonePlacementPolicyType {
    * Automatic zone placement for Virtual Machines and Virtual Machine Scale Sets.
    */
   @added(Versions.v2025_04_01)
+  Auto: "Auto",
+}
+
+/**
+ * Specifies the policy for resource's placement in availability zone. Possible value is: **Auto** - An availability zone will be automatically picked by the system as part of resource creation.
+ */
+@added(Versions.v2026_09_01)
+union ZonePlacementPolicyType {
+  string,
+
+  /**
+   * Automatic zone placement in a Virtual Machine Scale Set.
+   */
   Auto: "Auto",
 }
 
@@ -1242,6 +1271,10 @@ union LifecycleHookActionState {
 
   /** The lifecycle hook for the target resource is rejected. */
   Rejected: "Rejected",
+
+  /** A terminal state that indicates the lifecycle hook for the target resource is no longer relevant & was abandoned by the platform. No further action on the target is expected from the customer. */
+  @added(Versions.v2026_09_01)
+  Abandoned: "Abandoned",
 }
 
 /**
@@ -1256,6 +1289,10 @@ union VMScaleSetLifecycleHookEventState {
 
   /** The lifecycle hook event is completed. i.e., all the target resources in the event have moved to a terminal state. */
   Completed: "Completed",
+
+  /** A terminal state that indicates the lifecycle hook event is no longer relevant & was abandoned by the platform. No further action on the event is expected from the customer. */
+  @added(Versions.v2026_09_01)
+  Abandoned: "Abandoned",
 }
 
 /**
@@ -2107,6 +2144,23 @@ model ScheduledEventsPolicy {
    */
   @added(Versions.v2025_04_01)
   allInstancesDown?: AllInstancesDown;
+
+  /**
+   * The configuration parameters used to opt in to Extended Scheduled Events.
+   */
+  @added(Versions.v2026_09_01)
+  extendedScheduledEvents?: ExtendedScheduledEvents;
+}
+
+/**
+ * Specifies Extended Scheduled Events related configurations. Extended Scheduled Events give longer notice before maintenance and repair events.
+ */
+@added(Versions.v2026_09_01)
+model ExtendedScheduledEvents {
+  /**
+   * Specifies whether to opt in to Extended Scheduled Events. The setting takes effect only on supported hardware.
+   */
+  enable?: boolean;
 }
 
 /**
@@ -3270,12 +3324,12 @@ model SecurityProfile {
  */
 model UefiSettings {
   /**
-   * Specifies whether secure boot should be enabled on the virtual machine. Minimum api-version: 2020-12-01.
+   * Specifies whether secure boot should be enabled on the virtual machine. Minimum api-version: 2020-12-01. Starting with api-version 2026-09-01, if not specified, this defaults to true when a Trusted Launch virtual machine is created or an existing virtual machine is upgraded to Trusted Launch, unless vTpmEnabled is explicitly set to false.
    */
   secureBootEnabled?: boolean;
 
   /**
-   * Specifies whether vTPM should be enabled on the virtual machine. Minimum api-version: 2020-12-01.
+   * Specifies whether vTPM should be enabled on the virtual machine. Minimum api-version: 2020-12-01. Starting with api-version 2026-09-01, if not specified, this defaults to true when a Trusted Launch virtual machine is created or an existing virtual machine is upgraded to Trusted Launch, unless secureBootEnabled is explicitly set to false.
    */
   vTpmEnabled?: boolean;
 }
@@ -3891,6 +3945,12 @@ model SkuProfile {
    * Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated.
    */
   allocationStrategy?: AllocationStrategy;
+
+  /**
+   * Specifies how VM SKUs are distributed across instances. Heterogeneous (default) allows multiple SKUs; Homogeneous pins all VMs to a single selected SKU from the SkuProfile list.
+   */
+  @added(Versions.v2026_09_01)
+  skuDistributionMode?: SkuDistributionMode;
 
   /**
    * Specifies the policy that controls whether the platform may automatically migrate scale set instances to a different VM size from the SKU profile depending on platform demands. When omitted, automatic SKU migration is disabled.
@@ -5582,6 +5642,17 @@ model BootDiagnosticsInstanceView {
 }
 
 /**
+ * Specifies the Instance Profile reference for a virtual machine.
+ */
+@added(Versions.v2026_09_01)
+model InstanceProfile {
+  /**
+   * Specifies the resource ID of the gallery Instance Profile version. The ID must use the format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/instanceProfiles/{instanceProfileName}/versions/{versionNumber}.
+   */
+  id: string;
+}
+
+/**
  * Specifies the FlexProfile for a virtual machine. When set, Azure may deploy a compatible alternative VM size based on capacity and placement considerations, and the deployed size is returned in hardwareProfile.vmSize. See the properties.flexProfile description for the full usage rules, including how it interacts with hardwareProfile.vmSize.
  */
 @added(Versions.v2026_04_01)
@@ -5641,6 +5712,7 @@ model StorageProfile {
   /**
    * Specifies whether the regional disks should be aligned/moved to the VM zone. This is applicable **only** for VMs with placement.zonePlacementPolicy set to **Any**. Please note that this change is irreversible. Minimum api-version: 2024-11-01.
    */
+  @removed(Versions.v2026_09_01)
   alignRegionalDisksToVMZone?: boolean;
 
   /**
@@ -6715,6 +6787,13 @@ model VirtualMachineProperties {
   hardwareProfile?: HardwareProfile;
 
   /**
+   * Specifies the instance profile related details of a virtual machine.
+   */
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  instanceProfile?: InstanceProfile;
+
+  /**
    * [Preview Feature] Specifies a FlexProfile for VM size. Azure may deploy a compatible alternative VM size based on capacity and placement considerations, and returns the deployed size in hardwareProfile.vmSize. A request that adds flexProfile must omit hardwareProfile.vmSize. For a virtual machine that uses FlexProfile, a hardwareProfile.vmSize equal to the deployed size is ignored, so a GET response can be sent back unchanged. A PATCH request that omits flexProfile keeps it. A PUT request that omits flexProfile and sets hardwareProfile.vmSize clears it. This property cannot exist along with a non-null properties.availabilitySet, properties.capacityReservation, properties.host, properties.hostGroup, properties.proximityPlacementGroup or properties.virtualMachineScaleSet.
    */
   @added(Versions.v2026_04_01)
@@ -7131,6 +7210,14 @@ model Placement {
   /**
    * Specifies the policy for the resource's placement in an availability zone. Use **Auto** for Virtual Machines and Virtual Machine Scale Sets to let the system automatically select an availability zone during resource creation. **Any** remains supported for Virtual Machines for backward compatibility.
    */
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "zonePlacementPolicy")
+  zonePlacementPolicyLegacy?: ZonePlacementPolicyTypeLegacy;
+
+  /**
+   * Specifies the policy for resource's placement in availability zone. Possible value is: **Auto** - An availability zone will be automatically picked by the system as part of resource creation.
+   */
+  @added(Versions.v2026_09_01)
   zonePlacementPolicy?: ZonePlacementPolicyType;
 
   /**
