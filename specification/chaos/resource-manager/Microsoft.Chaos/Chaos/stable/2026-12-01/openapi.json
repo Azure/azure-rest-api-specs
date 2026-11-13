@@ -6286,8 +6286,8 @@
           "readOnly": true
         },
         "errorCode": {
-          "$ref": "#/definitions/ScenarioResourceErrorCode",
-          "description": "A Chaos-authored code describing this resource error cause, not a provider-native code. Unknown, incomplete, legacy or unmapped cause facts use UnclassifiedResourceError rather than the legacy -1 sentinel. Clients must tolerate unknown future string values.",
+          "type": "string",
+          "description": "A Chaos-authored code describing this resource error cause, not a provider-native code or permission classification. The initial vocabulary is:\n- TargetResourceNotFound: the directly targeted resource was positively determined not to exist. Absence of an expanded member does not establish absence of its parent target.\n- NoMatchingTargetInstances: the action's selection was positively determined to contain no matching target instances. Missing or incomplete selection evidence does not establish this condition.\n- TargetStateNotEligible: the selected target's recorded state does not permit the requested fault. The error message explains the state; this code alone does not establish whether retry or recovery is safe.\n- UnclassifiedResourceError: recorded cause facts are unknown, incomplete, legacy or unmapped. This resource-only error fallback replaces the legacy -1 sentinel; it is not success or a permission classification.\nClients must tolerate unknown future string values. A code does not establish authorization, successful execution or cleanup.",
           "readOnly": true
         },
         "errorMessage": {
@@ -7015,42 +7015,6 @@
           "description": "The recommendation information for this scenario.",
           "readOnly": true
         }
-      }
-    },
-    "ScenarioResourceErrorCode": {
-      "type": "string",
-      "description": "Chaos-authored semantic codes for resource error causes. These codes do not classify permission failures or establish authorization, successful execution, cleanup or retry safety.",
-      "enum": [
-        "TargetResourceNotFound",
-        "NoMatchingTargetInstances",
-        "TargetStateNotEligible",
-        "UnclassifiedResourceError"
-      ],
-      "x-ms-enum": {
-        "name": "ScenarioResourceErrorCode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "TargetResourceNotFound",
-            "value": "TargetResourceNotFound",
-            "description": "The directly targeted resource was positively determined not to exist. Absence of an expanded member does not establish absence of its parent target."
-          },
-          {
-            "name": "NoMatchingTargetInstances",
-            "value": "NoMatchingTargetInstances",
-            "description": "The action's selection was positively determined to contain no matching target instances. Missing or incomplete selection evidence does not establish this condition."
-          },
-          {
-            "name": "TargetStateNotEligible",
-            "value": "TargetStateNotEligible",
-            "description": "The selected target's recorded state does not permit the requested fault. The error message explains the state; this code alone does not establish whether retry or recovery is safe."
-          },
-          {
-            "name": "UnclassifiedResourceError",
-            "value": "UnclassifiedResourceError",
-            "description": "The resource error cause cannot be assigned a more specific code from the recorded facts, including unknown, incomplete, legacy or unmapped facts. This is an error fallback, not success or a permission classification."
-          }
-        ]
       }
     },
     "ScenarioRun": {

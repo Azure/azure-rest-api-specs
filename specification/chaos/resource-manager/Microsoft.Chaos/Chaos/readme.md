@@ -688,6 +688,13 @@ These settings apply only when `--tag=package-2026-11` is specified on the comma
 ```yaml $(tag) == 'package-2026-11'
 input-file:
   - stable/2026-11-01/openapi.json
+```
+
+### Retained contract validation exceptions
+
+The November and December tags share the existing, exactly scoped validation exceptions for carried contracts. No exception covers the new semantic-code or Action-association contract. Carrying an exception to the new version does not grant API or suppression-review approval.
+
+```yaml $(tag) == 'package-2026-11' || $(tag) == 'package-2026-12'
 suppressions:
   - code: PathForNestedResource
     from: openapi.json

@@ -430,11 +430,16 @@ model ResourceStateError {
   errorCodeBeforeSemanticCodes: string;
 
   /**
-   * A Chaos-authored code describing this resource error cause, not a provider-native code. Unknown, incomplete, legacy or unmapped cause facts use UnclassifiedResourceError rather than the legacy -1 sentinel. Clients must tolerate unknown future string values.
+   * A Chaos-authored code describing this resource error cause, not a provider-native code or permission classification. The initial vocabulary is:
+   * - TargetResourceNotFound: the directly targeted resource was positively determined not to exist. Absence of an expanded member does not establish absence of its parent target.
+   * - NoMatchingTargetInstances: the action's selection was positively determined to contain no matching target instances. Missing or incomplete selection evidence does not establish this condition.
+   * - TargetStateNotEligible: the selected target's recorded state does not permit the requested fault. The error message explains the state; this code alone does not establish whether retry or recovery is safe.
+   * - UnclassifiedResourceError: recorded cause facts are unknown, incomplete, legacy or unmapped. This resource-only error fallback replaces the legacy -1 sentinel; it is not success or a permission classification.
+   * Clients must tolerate unknown future string values. A code does not establish authorization, successful execution or cleanup.
    */
   @added(Versions.v2026_12_01)
   @visibility(Lifecycle.Read)
-  errorCode: ScenarioResourceErrorCode;
+  errorCode: string;
 
   /**
    * The error message.
@@ -454,34 +459,6 @@ model ResourceStateError {
   @added(Versions.v2026_12_01)
   @visibility(Lifecycle.Read)
   actionAssociation?: ScenarioErrorActionAssociation;
-}
-
-/**
- * Chaos-authored semantic codes for resource error causes. These codes do not classify permission failures or establish authorization, successful execution, cleanup or retry safety.
- */
-@added(Versions.v2026_12_01)
-union ScenarioResourceErrorCode {
-  string,
-
-  /**
-   * The directly targeted resource was positively determined not to exist. Absence of an expanded member does not establish absence of its parent target.
-   */
-  TargetResourceNotFound: "TargetResourceNotFound",
-
-  /**
-   * The action's selection was positively determined to contain no matching target instances. Missing or incomplete selection evidence does not establish this condition.
-   */
-  NoMatchingTargetInstances: "NoMatchingTargetInstances",
-
-  /**
-   * The selected target's recorded state does not permit the requested fault. The error message explains the state; this code alone does not establish whether retry or recovery is safe.
-   */
-  TargetStateNotEligible: "TargetStateNotEligible",
-
-  /**
-   * The resource error cause cannot be assigned a more specific code from the recorded facts, including unknown, incomplete, legacy or unmapped facts. This is an error fallback, not success or a permission classification.
-   */
-  UnclassifiedResourceError: "UnclassifiedResourceError",
 }
 
 /**
