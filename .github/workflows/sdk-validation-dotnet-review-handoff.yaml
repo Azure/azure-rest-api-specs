@@ -46,7 +46,7 @@ jobs:
         if: ${{ steps.review-handoff.outputs.handoff_status == 'validated' && steps.review-handoff.outputs.input_dir }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: sdk-naming-review-input-build-${{ steps.review-handoff.outputs.build_id }}
+          name: sdk-naming-review-input-build-${{ steps.review-handoff.outputs.build_id }}-attempt-${{ github.run_attempt }}
           path: ${{ steps.review-handoff.outputs.input_dir }}
           if-no-files-found: error
           include-hidden-files: true
