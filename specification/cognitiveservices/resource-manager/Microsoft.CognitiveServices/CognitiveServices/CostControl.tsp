@@ -1,10 +1,10 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
 import "./Account.tsp";
+import "./Project.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -14,96 +14,378 @@ using TypeSpec.Versioning;
 namespace Microsoft.CognitiveServices;
 
 /**
- * A cost control owned by a Cognitive Services account.
+ * A budget that measures consumption and optionally alerts or blocks requests within an account.
+ * Reading, deleting, and enforcing stored identity selections requires Microsoft.CognitiveServices/CostControlsByIdentity registration.
  */
-@added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @parentResource(Account)
-model CostControl
-  is Azure.ResourceManager.ProxyResource<CostControlProperties> {
+model AccountCostControl is ProxyResource<CostControlProperties> {
   ...ResourceNameParameter<
-    Resource = CostControl,
+    Resource = AccountCostControl,
     KeyName = "costControlName",
     SegmentName = "costControls",
-    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
+    NamePattern = "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
   >;
 
-  /**
-   * The entity tag used for optimistic concurrency.
-   */
+  /** The opaque entity tag used for optimistic concurrency. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The service returns the lowercase 'etag' envelope property rather than 'eTag'."
+  @visibility(Lifecycle.Read)
+  etag?: Azure.Core.eTag;
+}
+
+/**
+ * A budget that measures consumption and optionally alerts or blocks requests within its owning Foundry project.
+ * Reading, deleting, and enforcing stored identity selections requires Microsoft.CognitiveServices/CostControlsByIdentity registration.
+ */
+@added(Versions.v2026_11_15_preview)
+@parentResource(Project)
+model ProjectCostControl is ProxyResource<CostControlProperties> {
+  ...ResourceNameParameter<
+    Resource = ProjectCostControl,
+    KeyName = "costControlName",
+    SegmentName = "costControls",
+    NamePattern = "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
+  >;
+
+  /** The opaque entity tag used for optimistic concurrency. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "CogSvc uses lowercase 'etag' field name — EntityTagProperty uses 'eTag'"
   @visibility(Lifecycle.Read)
-  etag?: string;
+  etag?: Azure.Core.eTag;
 }
 
 /**
- * The customer-authored settings of a cost control.
+ * The consumption budget and its traffic selection, notifications, and enforcement actions.
+ * A cost control applies within its owner's scope.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Cost controls are synchronously persisted proxy resources and the service contract does not expose provisioningState."
-@added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Cost controls are synchronously persisted proxy resources; the service does not expose provisioningState."
+@added(Versions.v2026_11_15_preview)
 model CostControlProperties {
-  /**
-   * An optional human-readable name for the cost control.
-   */
-  @maxLength(128)
-  displayName?: string;
+  /** The resource provider for this budget. Omission selects Microsoft.CognitiveServices; responses return that value. */
+  provider?: "Microsoft.CognitiveServices";
 
   /**
-   * The rules enforced by the cost control.
+   * Optional additional partitioning of consumption. Omission or an empty array uses one counter for the owning account or Foundry project.
+   * Responses omit owner-default grouping. A project-owned control cannot explicitly group by project.
    */
-  @minItems(1)
-  @maxItems(50)
+  @maxItems(1)
   @identifiers(#["name"])
-  rules: CostControlRule[];
+  grouping?: CostControlGrouping[];
+
+  /** Whether the budget measures estimated cost in United States dollars or token consumption. This category cannot be changed after creation. */
+  category: CostControlCategory;
+
+  /**
+   * The positive budget amount, measured in United States dollars for the Cost category or in tokens for the Tokens category.
+   * Token amounts must be whole numbers.
+   */
+  @minValueExclusive(0)
+  amount: float64;
+
+  /** The calendar-aligned UTC interval at which consumption counters renew within the validity window. */
+  timeGrain: CostControlTimeGrain;
+
+  /** The finite UTC validity window during which the control applies. */
+  timePeriod: CostControlTimePeriod;
+
+  /** Optional traffic selection. Omission selects all eligible traffic within the owner's scope. */
+  filter?: CostControlFilter;
+
+  /**
+   * Alert notifications keyed by nonempty, case-insensitively unique names. Each notification supplies its own Event Grid connection.
+   * PUT and the complete merged PATCH result may contain at most one notification, including disabled notifications.
+   * Omission on creation creates no notifications.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Notification names are customer-defined dictionary keys; each value has an explicit notification schema."
+  notifications?: Record<CostControlNotification>;
+
+  /** Optional provider-specific enforcement settings. Omission creates no blocking actions. */
+  providerProperties?: CostControlProviderProperties;
 }
 
 /**
- * The properties that can be changed on a cost control.
+ * Edits applied when properties is a non-empty object. Omitted fields retain their existing values; no defaults are applied.
+ * The complete merged result may contain at most one notification, including disabled notifications, and one Block action.
+ * Exceeding either limit returns HTTP 400 without changing the stored definition.
+ * Missing registration returns 403 FeatureNotRegistered before merging or no-op detection.
+ * Omitting or removing identity selections does not require this registration; omitted stored selections are preserved, subject to existing validation rules.
  */
-@added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model CostControlPatchProperties {
-  /**
-   * An optional human-readable name for the cost control. Set this property to null to clear it.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service distinguishes an omitted displayName from an explicit null in PATCH so callers can clear the value."
-  @maxLength(128)
-  displayName?: string | null;
+  /** The resource provider. If supplied, it must be Microsoft.CognitiveServices and cannot be null. */
+  provider?: "Microsoft.CognitiveServices";
+
+  /** Replaces additional grouping. Omission preserves grouping; an empty array restores the owner's default counter. Null is not accepted. */
+  @maxItems(1)
+  @identifiers(#["name"])
+  grouping?: CostControlGrouping[];
+
+  /** The existing measurement category. Changing it after creation is not supported. */
+  category?: CostControlCategory;
+
+  /** Replaces the positive budget amount, measured in United States dollars for the Cost category or in whole tokens for the Tokens category. */
+  @minValueExclusive(0)
+  amount?: float64;
+
+  /** Replaces the calendar-aligned UTC renewal interval. */
+  timeGrain?: CostControlTimeGrain;
+
+  /** Merges supplied dates into the existing validity window; omitted dates remain unchanged. */
+  timePeriod?: CostControlTimePeriodPatch;
+
+  /** Replaces the complete traffic filter. Set to null to select all eligible traffic within the owner's scope. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "PATCH uses explicit null to remove the traffic filter; omission preserves it."
+  filter?: CostControlFilter | null;
 
   /**
-   * The complete replacement set of cost control rules.
+   * Merges notifications by case-insensitive name, preserving existing name casing. Null entries delete notifications; null clears the collection.
+   * Omission or an empty object preserves existing notifications. New entries must supply all required notification fields after merging.
+   * The complete merged result may contain at most one notification, including disabled notifications; otherwise the request returns HTTP 400.
    */
-  @minItems(1)
-  @maxItems(50)
-  @identifiers(#["name"])
-  rules?: CostControlRule[];
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "PATCH uses null dictionary entries to delete named notifications and null on the collection to clear it."
+  notifications?: Record<CostControlNotificationPatch | null> | null;
+
+  /** Merges provider-specific settings. Set to null to remove all blocking actions; omission preserves them. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "PATCH uses explicit null to remove provider-specific actions; omission preserves them."
+  providerProperties?: CostControlProviderPropertiesPatch | null;
 }
 
 /**
- * The request used to update a cost control.
+ * A partial budget update. Omitting properties preserves all existing budget properties.
+ * Setting properties to null or an empty object ({}) clears all existing budget properties.
+ * A non-empty properties object updates the supplied fields according to their merge semantics; omitted fields retain their existing values.
  */
-@added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model CostControlPatch {
   /**
-   * The cost control properties to update.
+   * The budget properties to update. Omission preserves existing properties.
+   * Null or an empty object ({}) clears all existing properties.
    */
-  properties?: CostControlPatchProperties;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "PATCH uses explicit null to clear all budget properties; omission preserves them."
+  properties?: CostControlPatchProperties | null;
 }
 
+/** An additional built-in request attribute used to partition a budget into independent counters. */
+@added(Versions.v2026_11_15_preview)
+model CostControlGrouping {
+  /** The built-in attribute to group by. project is available only for account-owned controls. */
+  @key
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  name: CostControlGroupingName;
+
+  /** The grouping kind. Only `AdditionalInfoKey` is supported. */
+  type: "AdditionalInfoKey";
+}
+
+/** Built-in attributes supported for additional budget partitioning. */
+@added(Versions.v2026_11_15_preview)
+union CostControlGroupingName {
+  string,
+
+  /** Creates an independent counter for each Foundry project in the owning account. */
+  Project: "project",
+
+  /** Creates an independent counter for each Foundry agent, qualified by its Foundry project so identical agent names in different projects do not share counters. */
+  Agent: "agent",
+
+  /** Creates an independent counter for each Foundry session ID. */
+  SessionId: "sessionId",
+}
+
+/** The measurement used for the budget amount and absolute thresholds. */
+@added(Versions.v2026_11_15_preview)
+union CostControlCategory {
+  string,
+
+  /** Estimated consumption cost in United States dollars. */
+  Cost: "Cost",
+
+  /** The number of consumed tokens, optionally selected by a tokenType filter. */
+  Tokens: "Tokens",
+}
+
+/** Calendar-aligned UTC renewal intervals. */
+@added(Versions.v2026_11_15_preview)
+union CostControlTimeGrain {
+  string,
+
+  /** Renews each day at 00:00 UTC. */
+  Daily: "Daily",
+
+  /** Renews each Monday at 00:00 UTC. */
+  Weekly: "Weekly",
+
+  /** Renews on the first day of each month at 00:00 UTC. */
+  Monthly: "Monthly",
+}
+
+/** A finite validity interval, including its start and excluding its end. */
+@added(Versions.v2026_11_15_preview)
+model CostControlTimePeriod {
+  /** The inclusive UTC start, encoded as an ISO 8601 timestamp ending in Z with up to seven fractional digits. */
+  startDate: utcDateTime;
+
+  /** The exclusive UTC end, later than startDate, encoded as an ISO 8601 timestamp ending in Z with up to seven fractional digits. */
+  endDate: utcDateTime;
+}
+
+/** Partial edits to a validity interval. Supplied dates cannot be null, and the merged start must precede the merged end. */
+@added(Versions.v2026_11_15_preview)
+model CostControlTimePeriodPatch is OptionalProperties<CostControlTimePeriod>;
+
 /**
- * Defines account-level connections used to publish cost-control telemetry and events.
- * Application Insights is optional and may be removed while policies remain attached.
- * Event Grid is required for alerts; supplied connection references must still be valid.
+ * Traffic selection using exactly one of `additionalInfo` or `and`. Additional-info names must be unique across the complete expression.
+ * Filters narrow the owner's scope and cannot extend a project-owned control to another project.
+ * Values within one condition are alternatives; conditions are combined with AND. An agent selection requires an explicit project filter selecting exactly one project, including for project-owned controls.
  */
-@added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
-model CostControlConnections {
+@added(Versions.v2026_11_15_preview)
+model CostControlFilter {
+  /** A single additional-info condition. Must not be combined with `and` on the same filter object. */
+  additionalInfo?: CostControlAdditionalInfoFilter;
+
+  /** A conjunction of at least two conditions. Must not be combined with `additionalInfo` on the same filter object. */
+  @minItems(2)
+  @identifiers(#[])
+  and?: CostControlFilter[];
+}
+
+/** Selects traffic whose named additional-info attribute equals at least one of the supplied values. */
+@added(Versions.v2026_11_15_preview)
+model CostControlAdditionalInfoFilter {
   /**
-   * Gets or sets the full resource ID of the optional Application Insights connection.
+   * The built-in attribute: agent, sessionId, project, deployment, or tokenType.
+   * Resource selectors use owner-scoped short names, not Azure resource IDs. Agent selections require an explicit project filter selecting exactly one project; multiple agents in that project are supported.
+   * A project-owned control can select only its owning project. Project, agent, and deployment values must be plain names of 1-64 characters without leading or trailing whitespace, control characters, path/query/fragment separators, percent signs, or . and .. path segments.
+   * tokenType accepts input, output, or both for a Tokens budget; omission measures overall tokens.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service distinguishes an omitted appInsightsConnectionId from an explicit null in PATCH so callers can clear the value."
+  name: CostControlFilterName;
+
+  /** The comparison operator.`In` is supported. */
+  operator: "In";
+
+  /** One or more nonempty, non-whitespace strings to match. There is no per-condition value-count limit; the serialized cost-control definition must not exceed 32 KiB. */
+  @minItems(1)
+  values: CostControlFilterValue[];
+}
+
+/** Built-in request attributes supported for traffic filtering. */
+@added(Versions.v2026_11_15_preview)
+union CostControlFilterName {
+  string,
+
+  /** The Foundry agent name within the single explicitly selected Foundry project. */
+  Agent: "agent",
+
+  /** The Foundry session ID. */
+  SessionId: "sessionId",
+
+  /** The Foundry project name within the owning account. */
+  Project: "project",
+
+  /** The deployment name within the owning account. */
+  Deployment: "deployment",
+
+  /** The input or output token category. */
+  TokenType: "tokenType",
+}
+
+/** A nonempty string identifying an allowed value of a request attribute. */
+@added(Versions.v2026_11_15_preview)
+@minLength(1)
+scalar CostControlFilterValue extends string;
+
+/** An alert notification with an explicit threshold, enabled state, and Event Grid destination. */
+@added(Versions.v2026_11_15_preview)
+model CostControlNotification {
+  /** The full resource ID of the Cognitive Services Event Grid connection used to publish this notification. */
+  eventGridConnectionId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.CognitiveServices/accounts/connections";
+    }
+  ]>;
+
+  /** Whether threshold is a percentage of amount or an absolute value in the budget's unit. */
+  thresholdType: CostControlThresholdType;
+
+  /** The positive threshold. Percentages cannot exceed 100; absolute thresholds cannot exceed amount and must be whole numbers for Tokens budgets. */
+  @minValueExclusive(0)
+  threshold: float64;
+
+  /** Whether this notification is enabled. Disabled notifications remain configured but do not publish alerts. */
+  enabled: boolean;
+
+  /** The threshold comparison. Only `GreaterThanOrEqualTo` is supported. */
+  operator: "GreaterThanOrEqualTo";
+}
+
+/** Edits to an existing named notification. New notifications require all fields after merging; supplied fields cannot be null. */
+@added(Versions.v2026_11_15_preview)
+model CostControlNotificationPatch
+  is OptionalProperties<CostControlNotification>;
+
+/** The interpretation of a notification or blocking-action threshold. */
+@added(Versions.v2026_11_15_preview)
+union CostControlThresholdType {
+  string,
+
+  /** The threshold is a percentage of the configured budget amount. */
+  Percentage: "Percentage",
+
+  /** The threshold is expressed in United States dollars or tokens, according to the budget category. */
+  Absolute: "Absolute",
+}
+
+/** Provider-specific budget enforcement settings. */
+@added(Versions.v2026_11_15_preview)
+model CostControlProviderProperties {
+  /**
+   * Blocking actions keyed by nonempty, case-insensitively unique names.
+   * PUT and the complete merged PATCH result may contain at most one Block action, independently of the notification limit.
+   * Omission on creation creates no blocking actions.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Action names are customer-defined dictionary keys; each value has an explicit blocking-action schema."
+  actions?: Record<CostControlAction>;
+}
+
+/** Partial provider-specific edits. Named actions merge rather than replacing the complete collection. */
+@added(Versions.v2026_11_15_preview)
+model CostControlProviderPropertiesPatch {
+  /**
+   * Merges actions by case-insensitive name, preserving existing name casing. Null entries delete actions; null clears the collection.
+   * Omission or an empty object preserves existing actions. New entries must supply all required action fields after merging.
+   * The complete merged result may contain at most one Block action; otherwise the request returns HTTP 400.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "PATCH uses null dictionary entries to delete named actions and null on the collection to clear it."
+  actions?: Record<CostControlActionPatch | null> | null;
+}
+
+/** Blocks requests when consumption reaches the explicitly configured threshold. No implicit blocking action is created. */
+@added(Versions.v2026_11_15_preview)
+model CostControlAction {
+  /** The enforcement action. Only `Block` is supported. */
+  type: "Block";
+
+  /** Whether threshold is a percentage of amount or an absolute value in the budget's unit. */
+  thresholdType: CostControlThresholdType;
+
+  /** The positive threshold. Percentages cannot exceed 100; absolute thresholds cannot exceed amount and must be whole numbers for Tokens budgets. */
+  @minValueExclusive(0)
+  threshold: float64;
+
+  /** The threshold comparison. Only `GreaterThanOrEqualTo` is supported. */
+  operator: "GreaterThanOrEqualTo";
+}
+
+/** Edits to an existing named blocking action. New actions require all fields after merging; supplied fields cannot be null. */
+@added(Versions.v2026_11_15_preview)
+model CostControlActionPatch is OptionalProperties<CostControlAction>;
+
+/**
+ * Account-level telemetry connections. Application Insights is optional and may be removed while controls exist.
+ */
+@added(Versions.v2026_11_15_preview)
+model CostControlConnections {
+  /** The full resource ID of the optional Application Insights connection. Set to null in an account update to remove it. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Account PATCH uses explicit null to remove the Application Insights connection; omission preserves it."
   appInsightsConnectionId?:
     | Azure.Core.armResourceIdentifier<[
         {
@@ -111,423 +393,195 @@ model CostControlConnections {
         }
       ]>
     | null;
-
-  /**
-   * The full resource ID of the Event Grid connection used for cost control alerts. This connection must be configured when an attached cost control contains an alert threshold action and cannot be removed while such an action remains attached.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service distinguishes an omitted eventGridConnectionId from an explicit null in PATCH so callers can clear the value."
-  eventGridConnectionId?:
-    | Azure.Core.armResourceIdentifier<[
-        {
-          type: "Microsoft.CognitiveServices/accounts/connections";
-        }
-      ]>
-    | null;
 }
 
-/**
- * A cost limit and the population to which it applies.
- */
-@added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
-model CostControlRule {
-  /**
-   * The stable rule identifier, unique within the cost control without regard to case.
-   */
-  @key
-  @maxLength(64)
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  name: string;
-
-  /**
-   * Gets or sets the single built-in dimension used to partition consumption.
-   * Custom dimensions are retained only for legacy reads and metadata-only updates.
-   * Legacy singleton arrays are accepted on read; serialization always emits an object.
-   * To track another field, create another rule.
-   */
-  counterKey: CostControlDimension;
-
-  /**
-   * The unit used for the cost control amount and absolute thresholds.
-   */
-  unit: CostControlUnit;
-
-  /**
-   * The maximum consumption allowed by this rule, expressed in the selected unit.
-   */
-  @minValueExclusive(0)
-  amount: float64;
-
-  /**
-   * Gets or sets the calendar-aligned UTC renewal period. Authored rules support Day, Week, or Month.
-   * This field is required for recurring rules and must be omitted for non-recurring rules.
-   * Legacy stored minute, hour, and year periods are preserved when reading definitions.
-   */
-  period?: CostControlPeriod;
-
-  /**
-   * Whether the cost control renews. The default is true.
-   */
-  recurring?: boolean = true;
-
-  /**
-   * Gets or sets optional match arrays keyed by `agentResourceIds`, `identityObjectIds`,
-   * `sessionIds`, or `projectIds`. Each array contains 1 to 20 non-empty values.
-   * Agent resource IDs use /subscriptions/{subscription_guid}/accounts/{account-name}/project/{project-name}/agent/{agent_name}.
-   * Legacy dotted identity, session, and project keys remain accepted, but cannot be combined with their canonical key.
-   */
-  match?: CostControlMatch;
-
-  /**
-   * Gets or sets optional thresholds. Omitted or empty thresholds track usage without explicit actions.
-   * Authored thresholds must explicitly specify Alert or Block; Audit is retained for legacy reads.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service accepts omitted, null, or empty thresholds to track usage without synthesizing actions."
-  @maxItems(10)
-  // @identifiers does not accept nullable array unions.
-  @TypeSpec.OpenAPI.extension("x-ms-identifiers", #[])
-  thresholds?: CostControlThreshold[] | null;
-}
-
-/**
- * Gets or sets optional match arrays keyed by `agentResourceIds`, `identityObjectIds`,
- * `sessionIds`, or `projectIds`. Each array contains 1 to 20 non-empty values.
- * Agent resource IDs use /subscriptions/{subscription_guid}/accounts/{account-name}/project/{project-name}/agent/{agent_name}.
- * Legacy dotted identity, session, and project keys remain accepted, but cannot be combined with their canonical key.
- */
-@added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
-model CostControlMatch {
-  /**
-   * Agent resource IDs use /subscriptions/{subscription_guid}/accounts/{account-name}/project/{project-name}/agent/{agent_name}.
-   */
-  @minItems(1)
-  @maxItems(20)
-  agentResourceIds?: CostControlMatchValue[];
-
-  /**
-   * The authenticated principal object IDs to match.
-   */
-  @minItems(1)
-  @maxItems(20)
-  identityObjectIds?: CostControlMatchValue[];
-
-  /**
-   * The Foundry session IDs to match.
-   */
-  @minItems(1)
-  @maxItems(20)
-  sessionIds?: CostControlMatchValue[];
-
-  /**
-   * The Foundry project resource IDs to match.
-   */
-  @minItems(1)
-  @maxItems(20)
-  projectIds?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.CognitiveServices/accounts/projects";
-    }
-  ]>[];
-}
-
-/**
- * A non-empty value used to match a trusted request attribute.
- */
-@added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
-@minLength(1)
-scalar CostControlMatchValue extends string;
-
-/**
- * A request dimension used to partition cost control consumption.
- */
-@added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
-model CostControlDimension {
-  /**
-   * The kind of request dimension.
-   */
-  @key
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  type: CostControlDimensionType;
-
-  /**
-   * Gets or sets the attribute path retained for legacy Custom counters.
-   * Authored rules cannot select Custom; built-in dimensions must omit this property.
-   */
-  @visibility(Lifecycle.Read)
-  attribute?: string;
-}
-
-/**
- * Cost control counter dimensions, including Custom retained for legacy read compatibility.
- */
-@added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
-union CostControlDimensionType {
-  string,
-
-  /**
-   * Consumption is partitioned by the stable Foundry agent ID.
-   */
-  Agent: "Agent",
-
-  /**
-   * Consumption is partitioned by the authenticated principal object ID.
-   */
-  Identity: "Identity",
-
-  /**
-   * Consumption is partitioned by the Foundry session ID.
-   */
-  Session: "Session",
-
-  /**
-   * Consumption is partitioned by the Foundry project resource ID.
-   */
-  Project: "Project",
-
-  /**
-   * Consumption is partitioned by the owning Cognitive Services account.
-   */
-  Account: "Account",
-
-  /**
-   * Legacy read-only dimension using `CostControlDimension.Attribute`.
-   * New Custom counter authoring is reserved for future support.
-   */
-  Custom: "Custom",
-}
-
-/**
- * The supported unit for cost control amounts and thresholds.
- */
-@added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
-union CostControlUnit {
-  string,
-
-  /**
-   * Estimated cost in United States dollars.
-   */
-  Usd: "Usd",
-}
-
-/**
- * Calendar-aligned UTC renewal periods, including legacy values retained for read compatibility.
- */
-@added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
-union CostControlPeriod {
-  string,
-
-  /** Legacy read-only period renewing at the start of the next UTC minute. */
-  Minute: "Minute",
-
-  /** Legacy read-only period renewing at the start of the next UTC hour. */
-  Hour: "Hour",
-
-  /**
-   * Renews daily at 00:00 UTC.
-   */
-  Day: "Day",
-
-  /**
-   * Renews Monday at 00:00 UTC.
-   */
-  Week: "Week",
-
-  /**
-   * Renews on the first day of each month at 00:00 UTC.
-   */
-  Month: "Month",
-
-  /** Legacy read-only period renewing January 1 at 00:00 UTC. */
-  Year: "Year",
-}
-
-/**
- * An action evaluated when cost control consumption reaches a threshold.
- */
-@added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
-model CostControlThreshold {
-  /**
-   * How the threshold value is interpreted.
-   */
-  type: CostControlThresholdType;
-
-  /**
-   * Gets or sets the threshold value. Legacy Audit definitions retain their stored values;
-   * new thresholds support only Alert or Block.
-   */
-  @minValue(0)
-  value: float64;
-
-  /**
-   * Gets or sets the threshold action. Authored thresholds must explicitly specify Alert or Block.
-   * Legacy stored definitions with omitted actions continue to read as Audit.
-   */
-  action: CostControlThresholdAction;
-}
-
-/**
- * The supported threshold value interpretations.
- */
-@added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
-union CostControlThresholdType {
-  string,
-
-  /**
-   * The value is a percentage of the configured rule amount.
-   */
-  Percentage: "Percentage",
-
-  /**
-   * The value is expressed in the rule's unit.
-   */
-  Absolute: "Absolute",
-}
-
-/**
- * The supported actions when a threshold is reached.
- */
-@added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
-union CostControlThresholdAction {
-  string,
-
-  /**
-   * Legacy read-only action retained to deserialize existing definitions without changing their semantics.
-   */
-  Audit: "Audit",
-
-  /**
-   * Emits a customer-facing alert without blocking requests.
-   */
-  Alert: "Alert",
-
-  /**
-   * Blocks the request without emitting a customer-facing alert.
-   */
-  Block: "Block",
-}
-
-/**
- * A page of cost controls.
- */
-@added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
+/** A page of cost controls owned by an account. */
+@added(Versions.v2026_11_15_preview)
 model CostControlListResult {
-  /**
-   * The link used to get the next page of cost controls.
-   */
+  /** The link used to retrieve the next page, when present. */
   @nextLink
   nextLink?: url;
 
-  /**
-   * The cost controls in this page.
-   */
+  /** The cost controls in this page. */
   @pageItems
   @identifiers(#["name"])
-  value: CostControl[];
+  value: AccountCostControl[];
 }
 
-/**
- * Conditional request headers accepted when creating or replacing a cost control.
- */
-@added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
+/** A page of cost controls owned by a Foundry project. */
+@added(Versions.v2026_11_15_preview)
+model ProjectCostControlListResult {
+  /** The link used to retrieve the next page, when present. */
+  @nextLink
+  nextLink?: url;
+
+  /** The cost controls in this page. */
+  @pageItems
+  @identifiers(#["name"])
+  value: ProjectCostControl[];
+}
+
+/** Conditional headers accepted when creating or replacing a cost control. */
+@added(Versions.v2026_11_15_preview)
 model CostControlCreateOrUpdateHeaders {
-  /**
-   * Proceeds only when the current entity tag matches this value.
-   */
+  /** Proceeds only if the current entity tag matches this value. */
   @header("If-Match")
   ifMatch?: string;
 
-  /**
-   * Proceeds only when the current entity tag does not match this value.
-   */
+  /** Proceeds only if the current entity tag does not match this value. Use * to create only if absent. */
   @header("If-None-Match")
   ifNoneMatch?: string;
 }
 
-/**
- * The conditional request header accepted when updating or deleting a cost control.
- */
-@added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
+/** A conditional header accepted when updating or deleting a cost control. */
+@added(Versions.v2026_11_15_preview)
 model CostControlIfMatchHeader {
-  /**
-   * Proceeds only when the current entity tag matches this value.
-   */
+  /** Proceeds only if the current entity tag matches this value. */
   @header("If-Match")
   ifMatch?: string;
 }
 
-/**
- * The entity tag returned with a cost control.
- */
+/** The entity tag returned with a cost control. */
 alias CostControlEtagHeader = {
-  /**
-   * The current entity tag for the cost control.
-   */
+  /** The current opaque entity tag for this representation. */
   @header("ETag")
-  etag: string;
+  etag: Azure.Core.eTag;
+};
+
+/** A successful existence check without a response body. */
+alias CostControlHeadResponse = {
+  /** The HTTP status code indicating that the control exists. */
+  @statusCode
+  statusCode: 200;
+
+  ...CostControlEtagHeader;
 };
 
 /**
- * Operations for managing cost controls owned by an account.
+ * Operations for Foundry account-owned cost controls.
  */
-@added(Versions.v2026_09_15_preview)
-@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @armResourceOperations
-interface CostControls {
-  /**
-   * Gets a cost control.
-   */
+interface AccountCostControls {
+  /** Gets an account-owned cost control and its representation entity tag. */
   get is ArmResourceRead<
-    CostControl,
-    Response = ArmResponse<CostControl> & CostControlEtagHeader
+    AccountCostControl,
+    Response = ArmResponse<AccountCostControl> & CostControlEtagHeader
+  >;
+
+  /** Checks whether an account-owned cost control exists without returning its body. */
+  checkExistence is ArmResourceCheckExistence<
+    AccountCostControl,
+    Response = CostControlHeadResponse
   >;
 
   /**
-   * Creates or replaces a cost control.
+   * Creates or replaces an account-owned cost control.
+   * The definition may contain at most one notification, including disabled notifications, and one Block action.
+   * Exceeding either limit returns HTTP 400 without persisting the request.
    */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
-    CostControl,
+    AccountCostControl,
     Parameters = CostControlCreateOrUpdateHeaders,
     Response =
-      | (ArmResourceUpdatedResponse<CostControl> & CostControlEtagHeader)
-      | (ArmResourceCreatedSyncResponse<CostControl> & CostControlEtagHeader)
+      | (ArmResourceUpdatedResponse<AccountCostControl> & CostControlEtagHeader)
+      | (ArmResourceCreatedSyncResponse<AccountCostControl> &
+          CostControlEtagHeader)
   >;
 
   /**
-   * Updates selected properties of a cost control.
+   * Updates an account-owned cost control. Omitting properties preserves all existing cost control properties; setting properties to null or an empty object ({}) clears them all.
+   * A non-empty properties object updates selected fields, preserving omitted fields; a successful update that leaves the cost control unchanged retains its entity tag.
+   * The complete merged result may contain at most one notification, including disabled notifications, and one Block action.
+   * Exceeding either limit returns HTTP 400 without changing the stored definition.
    */
   update is ArmCustomPatchSync<
-    CostControl,
+    AccountCostControl,
     CostControlPatch,
     Parameters = CostControlIfMatchHeader,
-    Response = ArmResponse<CostControl> & CostControlEtagHeader
+    Response = ArmResponse<AccountCostControl> & CostControlEtagHeader
   >;
 
-  /**
-   * Deletes a cost control.
-   */
+  /** Deletes an account-owned cost control. */
   delete is ArmResourceDeleteSync<
-    CostControl,
+    AccountCostControl,
     Parameters = CostControlIfMatchHeader
   >;
 
-  /**
-   * Lists the cost controls owned by an account.
-   */
+  /** Lists account-owned cost controls. */
   list is ArmResourceListByParent<
-    CostControl,
-    Response = CostControlListResult
+    AccountCostControl,
+    Response = ArmResponse<CostControlListResult>
   >;
 }
+
+/**
+ * Operations for Foundry project-owned cost controls. Budgets remain confined to their owning Foundry project.
+ */
+@added(Versions.v2026_11_15_preview)
+@armResourceOperations
+interface ProjectCostControls {
+  /** Gets a project-owned cost control and its representation entity tag. */
+  get is ArmResourceRead<
+    ProjectCostControl,
+    Response = ArmResponse<ProjectCostControl> & CostControlEtagHeader
+  >;
+
+  /** Checks whether a project-owned cost control exists without returning its body. */
+  checkExistence is ArmResourceCheckExistence<
+    ProjectCostControl,
+    Response = CostControlHeadResponse
+  >;
+
+  /**
+   * Creates or replaces a project-owned cost control.
+   * The definition may contain at most one notification, including disabled notifications, and one Block action.
+   * Exceeding either limit returns HTTP 400 without persisting the request.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    ProjectCostControl,
+    Parameters = CostControlCreateOrUpdateHeaders,
+    Response =
+      | (ArmResourceUpdatedResponse<ProjectCostControl> & CostControlEtagHeader)
+      | (ArmResourceCreatedSyncResponse<ProjectCostControl> &
+          CostControlEtagHeader)
+  >;
+
+  /**
+   * Updates a Foundry project cost control. Omitting properties preserves all existing cost control properties; setting properties to null or an empty object ({}) clears them all.
+   * A non-empty properties object updates selected fields, preserving omitted fields; a successful update that leaves the cost control unchanged retains its entity tag.
+   * The complete merged result may contain at most one notification, including disabled notifications, and one Block action.
+   * Exceeding either limit returns HTTP 400 without changing the stored definition.
+   */
+  update is ArmCustomPatchSync<
+    ProjectCostControl,
+    CostControlPatch,
+    Parameters = CostControlIfMatchHeader,
+    Response = ArmResponse<ProjectCostControl> & CostControlEtagHeader
+  >;
+
+  /** Deletes a project-owned cost control. */
+  delete is ArmResourceDeleteSync<
+    ProjectCostControl,
+    Parameters = CostControlIfMatchHeader
+  >;
+
+  /** Lists project-owned cost controls. */
+  list is ArmResourceListByParent<
+    ProjectCostControl,
+    Response = ArmResponse<ProjectCostControlListResult> & CostControlEtagHeader
+  >;
+}
+
+@@minLength(AccountCostControl.name, 1);
+@@maxLength(AccountCostControl.name, 64);
+@@doc(
+  AccountCostControl.name,
+  "The cost-control name. Names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen."
+);
+@@minLength(ProjectCostControl.name, 1);
+@@maxLength(ProjectCostControl.name, 64);
+@@doc(
+  ProjectCostControl.name,
+  "The cost-control name. Names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen."
+);

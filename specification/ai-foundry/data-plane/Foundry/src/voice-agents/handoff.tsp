@@ -1,10 +1,10 @@
 import "@typespec/http";
 import "@typespec/openapi";
-import "@azure-tools/openai-typespec/models/realtime";
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
 import "../common/servicepatterns.tsp";
 import "../agents/models.tsp";
+import "./protocol.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
