@@ -20,12 +20,12 @@ disabled. Optional refresh notifications use `EvalDashboardRefreshUrl` and
 for the approved storage/dashboard configuration and permissions.
 
 Set `publishDashboardResults` to `false` for artifact-only runs without added
-storage egress. Feature branches are artifact-only by default. For a manual test,
-set both `publishDashboardResults` and `allowFeatureBranchPublishing` to `true`.
-The feature-branch switch defaults to `false`; PRs and forks still cannot upload.
-Test results keep their actual branch, commit and build identity. Existing
-service-connection approvals, branch checks and storage permissions still apply.
-This switch requires the matching shared publishing parameter to arrive through
+storage egress. Trusted manual DevOps runs can publish from feature branches
+using this existing setting; no main branch or separate feature-branch flag is
+required. Automatic non-main runs remain artifact-only. PRs and forks still
+cannot upload. Test results keep their actual branch, commit and build identity.
+Existing service-connection approvals, branch checks and storage permissions
+still apply. The matching shared publishing policy reaches this repo through
 the normal `eng/common` sync from Azure SDK Tools.
 
 Completed failing evals can be published; incomplete results remain blocked.
