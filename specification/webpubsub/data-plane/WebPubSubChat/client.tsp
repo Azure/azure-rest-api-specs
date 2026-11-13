@@ -450,7 +450,10 @@ namespace Customizations {
   );
 
   // Python and JavaScript callers resume pagination through by_page/byPage options.
-  @@scope(ContinuationTokenQueryParameter.continuationToken, "!python,!javascript");
+  @@scope(
+    ContinuationTokenQueryParameter.continuationToken,
+    "!python,!javascript"
+  );
 
   @@alternateType(
     TopicCreateOrReplaceBodyParameter.resource,
