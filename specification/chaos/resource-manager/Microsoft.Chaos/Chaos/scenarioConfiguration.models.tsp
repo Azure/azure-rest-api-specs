@@ -310,15 +310,35 @@ model ScenarioErrors {
   /**
    * Any permission errors associated with the scenario run.
    */
+  @removed(Versions.v2026_11_01)
+  @renamedFrom(Versions.v2026_11_01, "permission")
   @visibility(Lifecycle.Read)
   @identifiers(#["resourceId"])
+  permissionBeforeActionAssociation: PermissionError[];
+
+  /**
+   * Recorded permission error causes for this result. Multiple items can refer to the same resource.
+   */
+  @added(Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
   permission: PermissionError[];
 
   /**
    * Any resource state errors associated with the scenario run.
    */
+  @removed(Versions.v2026_11_01)
+  @renamedFrom(Versions.v2026_11_01, "resource")
   @visibility(Lifecycle.Read)
   @identifiers(#["resourceId"])
+  resourceBeforeActionAssociation: ResourceStateError[];
+
+  /**
+   * Recorded resource error causes for this result. Multiple items can refer to the same resource.
+   */
+  @added(Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
   resource: ResourceStateError[];
 }
 
@@ -364,6 +384,13 @@ model PermissionError {
   @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   errorMessage?: string;
+
+  /**
+   * Authored Actions associated with this specific error cause. Omitted when no association information is available.
+   */
+  @added(Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  actionAssociation?: ScenarioErrorActionAssociation;
 }
 
 /**
@@ -411,6 +438,96 @@ model ResourceStateError {
    */
   @visibility(Lifecycle.Read)
   remediationUri: string;
+
+  /**
+   * Authored Actions associated with this specific error cause. Omitted when no association information is available.
+   */
+  @added(Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  actionAssociation?: ScenarioErrorActionAssociation;
+}
+
+/**
+ * Recorded attribution of one error cause to authored scenario Actions. Association does not authorize role assignments or establish successful fault execution or cleanup.
+ */
+@added(Versions.v2026_11_01)
+model ScenarioErrorActionAssociation {
+  /**
+   * Whether the complete contributor set is recorded. An unknown status does not establish complete association.
+   */
+  @visibility(Lifecycle.Read)
+  status: ScenarioErrorActionAssociationStatus;
+
+  /**
+   * The exact contributor set for this error cause. Present only when status is Complete. An empty set is valid only when it is positively known that no authored Action contributed; it must not represent missing or uncertain evidence.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["actionName", "relation"])
+  actions?: ScenarioErrorActionReference[];
+}
+
+/**
+ * An authored Action that contributed to a specific error cause in this result.
+ */
+@added(Versions.v2026_11_01)
+model ScenarioErrorActionReference {
+  /**
+   * The exact ScenarioAction.name from the scenario definition snapshot used to produce this result, not the provider fault/version actionId or a name resolved from the current mutable scenario.
+   */
+  @visibility(Lifecycle.Read)
+  actionName: string;
+
+  /**
+   * How the Action contributed to this error cause. An unknown relation must not be interpreted as evidence that the Action executed.
+   */
+  @visibility(Lifecycle.Read)
+  relation: ScenarioErrorActionRelation;
+}
+
+/**
+ * Availability of the complete authored-Action contributor set for an error cause.
+ */
+@added(Versions.v2026_11_01)
+union ScenarioErrorActionAssociationStatus {
+  string,
+
+  /**
+   * The complete contributor set is recorded and actions is present.
+   */
+  Complete: "Complete",
+
+  /**
+   * The complete contributor set cannot be determined. The actions property is omitted.
+   */
+  Indeterminate: "Indeterminate",
+
+  /**
+   * Contributor evidence was not recorded for this result. The actions property is omitted.
+   */
+  NotRecorded: "NotRecorded",
+}
+
+/**
+ * The stage in which an authored Action contributed to an error cause.
+ */
+@added(Versions.v2026_11_01)
+union ScenarioErrorActionRelation {
+  string,
+
+  /**
+   * Validation of the Action contributed to the error. This does not imply that the Action executed.
+   */
+  Validated: "Validated",
+
+  /**
+   * An actual execution attempt of the Action contributed to the error. This does not imply that the fault took effect.
+   */
+  Executed: "Executed",
+
+  /**
+   * A prerequisite of the Action contributed to the error. This does not imply that the Action was dispatched.
+   */
+  Requirement: "Requirement",
 }
 
 /**

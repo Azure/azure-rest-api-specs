@@ -4070,6 +4070,9 @@
         "x-ms-examples": {
           "Get a list of scenario runs.": {
             "$ref": "./examples/ScenarioRuns_ListAll.json"
+          },
+          "List scenario runs with Action-specific error causes.": {
+            "$ref": "./examples/ScenarioRuns_ListAll_ActionAssociation.json"
           }
         },
         "x-ms-pageable": {
@@ -5966,6 +5969,11 @@
           "type": "string",
           "description": "The error message describing the permission validation failure, when the\nfailure carries a distinct message (for example, when the target could not\nbe read to evaluate access).",
           "readOnly": true
+        },
+        "actionAssociation": {
+          "$ref": "#/definitions/ScenarioErrorActionAssociation",
+          "description": "Authored Actions associated with this specific error cause. Omitted when no association information is available.",
+          "readOnly": true
         }
       },
       "required": [
@@ -6290,6 +6298,11 @@
         "remediationUri": {
           "type": "string",
           "description": "The remediation uri.",
+          "readOnly": true
+        },
+        "actionAssociation": {
+          "$ref": "#/definitions/ScenarioErrorActionAssociation",
+          "description": "Authored Actions associated with this specific error cause. Omitted when no association information is available.",
           "readOnly": true
         }
       },
@@ -6732,6 +6745,112 @@
         "scenarioId"
       ]
     },
+    "ScenarioErrorActionAssociation": {
+      "type": "object",
+      "description": "Recorded attribution of one error cause to authored scenario Actions. Association does not authorize role assignments or establish successful fault execution or cleanup.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/ScenarioErrorActionAssociationStatus",
+          "description": "Whether the complete contributor set is recorded. An unknown status does not establish complete association.",
+          "readOnly": true
+        },
+        "actions": {
+          "type": "array",
+          "description": "The exact contributor set for this error cause. Present only when status is Complete. An empty set is valid only when it is positively known that no authored Action contributed; it must not represent missing or uncertain evidence.",
+          "items": {
+            "$ref": "#/definitions/ScenarioErrorActionReference"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "actionName",
+            "relation"
+          ]
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "ScenarioErrorActionAssociationStatus": {
+      "type": "string",
+      "description": "Availability of the complete authored-Action contributor set for an error cause.",
+      "enum": [
+        "Complete",
+        "Indeterminate",
+        "NotRecorded"
+      ],
+      "x-ms-enum": {
+        "name": "ScenarioErrorActionAssociationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Complete",
+            "value": "Complete",
+            "description": "The complete contributor set is recorded and actions is present."
+          },
+          {
+            "name": "Indeterminate",
+            "value": "Indeterminate",
+            "description": "The complete contributor set cannot be determined. The actions property is omitted."
+          },
+          {
+            "name": "NotRecorded",
+            "value": "NotRecorded",
+            "description": "Contributor evidence was not recorded for this result. The actions property is omitted."
+          }
+        ]
+      }
+    },
+    "ScenarioErrorActionReference": {
+      "type": "object",
+      "description": "An authored Action that contributed to a specific error cause in this result.",
+      "properties": {
+        "actionName": {
+          "type": "string",
+          "description": "The exact ScenarioAction.name from the scenario definition snapshot used to produce this result, not the provider fault/version actionId or a name resolved from the current mutable scenario.",
+          "readOnly": true
+        },
+        "relation": {
+          "$ref": "#/definitions/ScenarioErrorActionRelation",
+          "description": "How the Action contributed to this error cause. An unknown relation must not be interpreted as evidence that the Action executed.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "actionName",
+        "relation"
+      ]
+    },
+    "ScenarioErrorActionRelation": {
+      "type": "string",
+      "description": "The stage in which an authored Action contributed to an error cause.",
+      "enum": [
+        "Validated",
+        "Executed",
+        "Requirement"
+      ],
+      "x-ms-enum": {
+        "name": "ScenarioErrorActionRelation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Validated",
+            "value": "Validated",
+            "description": "Validation of the Action contributed to the error. This does not imply that the Action executed."
+          },
+          {
+            "name": "Executed",
+            "value": "Executed",
+            "description": "An actual execution attempt of the Action contributed to the error. This does not imply that the fault took effect."
+          },
+          {
+            "name": "Requirement",
+            "value": "Requirement",
+            "description": "A prerequisite of the Action contributed to the error. This does not imply that the Action was dispatched."
+          }
+        ]
+      }
+    },
     "ScenarioErrors": {
       "type": "object",
       "description": "Model that represents the scenario run errors.",
@@ -6746,25 +6865,21 @@
         },
         "permission": {
           "type": "array",
-          "description": "Any permission errors associated with the scenario run.",
+          "description": "Recorded permission error causes for this result. Multiple items can refer to the same resource.",
           "items": {
             "$ref": "#/definitions/PermissionError"
           },
           "readOnly": true,
-          "x-ms-identifiers": [
-            "resourceId"
-          ]
+          "x-ms-identifiers": []
         },
         "resource": {
           "type": "array",
-          "description": "Any resource state errors associated with the scenario run.",
+          "description": "Recorded resource error causes for this result. Multiple items can refer to the same resource.",
           "items": {
             "$ref": "#/definitions/ResourceStateError"
           },
           "readOnly": true,
-          "x-ms-identifiers": [
-            "resourceId"
-          ]
+          "x-ms-identifiers": []
         }
       },
       "required": [
