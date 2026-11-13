@@ -1,0 +1,39 @@
+{
+  "title": "ClusterVolumeJobs_Get",
+  "operationId": "ClusterVolumeJobs_Get",
+  "parameters": {
+    "api-version": "2027-01-15-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "clusterName": "myCluster",
+    "volumeName": "myVolume",
+    "jobName": "applyconfigjob01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/volumes/myVolume/jobs/applyconfigjob01",
+        "name": "applyconfigjob01",
+        "type": "Microsoft.AzureStackHCI/clusters/volumes/jobs",
+        "properties": {
+          "jobType": "ApplyVolumeConfiguration",
+          "deploymentMode": "Deploy",
+          "targetConfiguration": {
+            "placementMode": "auto"
+          },
+          "provisioningState": "Succeeded",
+          "jobId": "00000000-0000-0000-0000-000000000001",
+          "startTimeUtc": "2027-01-15T10:00:00Z",
+          "endTimeUtc": "2027-01-15T10:05:00Z",
+          "status": "Succeeded",
+          "reportedProperties": {
+            "percentComplete": 100,
+            "deploymentStatus": {
+              "status": "Success"
+            }
+          }
+        }
+      }
+    }
+  }
+}

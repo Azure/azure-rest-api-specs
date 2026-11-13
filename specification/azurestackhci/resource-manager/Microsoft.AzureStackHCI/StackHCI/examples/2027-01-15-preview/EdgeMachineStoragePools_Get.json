@@ -1,0 +1,29 @@
+{
+  "title": "EdgeMachineStoragePools_Get",
+  "operationId": "EdgeMachineStoragePools_Get",
+  "parameters": {
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "edgeMachineName": "EdgeMachine01",
+    "storagePoolName": "system-pool",
+    "api-version": "2027-01-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/EdgeMachine01/storagePools/system-pool",
+        "name": "system-pool",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/storagePools",
+        "properties": {
+          "poolType": "LVM",
+          "reportedProperties": {
+            "name": "example-vg",
+            "sizeInBytes": 2800000000000,
+            "availableSizeInBytes": 1950000000000
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}
