@@ -20,6 +20,12 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ## Configuration
 
+### Migrating from 2025-05-01-preview
+
+Update the request API version and payload together. Use numeric thresholds, `tags` instead of `labels`, `signalGroups` instead of `signals`, and discovery-rule `specification` objects. Use `Unhealthy` instead of `Error` and the updated signal operator values. Child-resource PUT and DELETE operations are long-running; clients must follow the response polling headers.
+
+See the [2026-11-01 examples](./examples/2026-11-01/) for replacement payloads. Confirm the chosen API version is supported in your environment before migrating.
+
 ### Basic Information
 
 These are the global settings for the cloudhealth.
@@ -97,22 +103,6 @@ These settings apply only when `--tag=package-2026-01-01-preview` is specified o
 ```yaml $(tag) == 'package-2026-01-01-preview'
 input-file:
   - preview/2026-01-01-preview/cloudhealth.json
-```
-
-### Tag: package-2025-05-01-preview
-
-These settings apply only when `--tag=package-2025-05-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-05-01-preview'
-input-file:
-  - preview/2025-05-01-preview/cloudhealth.json
-suppressions:
-  - code: AvoidAdditionalProperties
-    reason: Approved scenario for use as Tags alternative in proxy resource
-    where:
-      - $.definitions.EntityProperties.properties.labels
-      - $.definitions.RelationshipProperties.properties.labels
-      - $.definitions.SignalDefinitionProperties.properties.labels
 ```
 
 ---
