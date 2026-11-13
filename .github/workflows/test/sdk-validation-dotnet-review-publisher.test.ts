@@ -150,6 +150,7 @@ describe("publishSdkReviewResult", () => {
     await publishSdkReviewResult({
       githubScript: { github, context: createMockContext(), core: createMockCore() },
       ...fixture,
+      validatedResultAvailable: true,
       workflowConclusion: "success",
       workflowRunUrl: "https://github.com/owner/repo/actions/runs/1",
     });
@@ -172,6 +173,7 @@ describe("publishSdkReviewResult", () => {
     await publishSdkReviewResult({
       githubScript: { github, context: createMockContext(), core: createMockCore() },
       ...fixture,
+      validatedResultAvailable: true,
       workflowConclusion: "success",
       workflowRunUrl: "https://github.com/owner/repo/actions/runs/1",
     });
@@ -195,6 +197,7 @@ describe("publishSdkReviewResult", () => {
       githubScript: { github, context: createMockContext(), core: createMockCore() },
       ...fixture,
       resultRootPath: path.join(fixture.resultRootPath, "missing"),
+      validatedResultAvailable: false,
       workflowConclusion: "failure",
       workflowRunUrl: "https://github.com/owner/repo/actions/runs/1",
     });
@@ -206,6 +209,32 @@ describe("publishSdkReviewResult", () => {
     expect(failureComment.issue_number).toBe(42);
     expect(failureComment.body).toContain("did not finish");
     expect(github.rest.pulls.createReviewComment).not.toHaveBeenCalled();
+  });
+
+  it("publishes incomplete guidance when a successful agent run has no validated result", async () => {
+    const fixture = await createFixture();
+    const github = createMockGithub();
+    github.rest.pulls.get.mockResolvedValue({
+      data: {
+        state: "open",
+        head: { sha: HEAD_SHA },
+        base: { sha: SPEC_BASE_SHA },
+      },
+    });
+
+    await publishSdkReviewResult({
+      githubScript: { github, context: createMockContext(), core: createMockCore() },
+      ...fixture,
+      resultRootPath: path.join(fixture.resultRootPath, "missing"),
+      validatedResultAvailable: false,
+      workflowConclusion: "success",
+      workflowRunUrl: "https://github.com/owner/repo/actions/runs/1",
+    });
+
+    const failureComment = github.rest.issues.createComment.mock.calls[0]?.[0] as unknown as {
+      body: string;
+    };
+    expect(failureComment.body).toContain("did not finish");
   });
 
   it("revalidates and publishes successful results", async () => {
@@ -222,6 +251,7 @@ describe("publishSdkReviewResult", () => {
     await publishSdkReviewResult({
       githubScript: { github, context: createMockContext(), core: createMockCore() },
       ...fixture,
+      validatedResultAvailable: true,
       workflowConclusion: "success",
       workflowRunUrl: "https://github.com/owner/repo/actions/runs/1",
     });
@@ -261,6 +291,7 @@ describe("publishSdkReviewResult", () => {
       publishSdkReviewResult({
         githubScript: { github, context: createMockContext(), core: createMockCore() },
         ...fixture,
+        validatedResultAvailable: true,
         workflowConclusion: "success",
         workflowRunUrl: "https://github.com/owner/repo/actions/runs/1",
       }),
@@ -303,6 +334,7 @@ describe("publishSdkReviewResult", () => {
       publishSdkReviewResult({
         githubScript: { github, context: createMockContext(), core: createMockCore() },
         ...fixture,
+        validatedResultAvailable: true,
         workflowConclusion: "success",
         workflowRunUrl: "https://github.com/owner/repo/actions/runs/1",
       }),

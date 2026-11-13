@@ -23,9 +23,11 @@ jobs:
     outputs:
       artifact-name: ${{ steps.find-context.outputs.artifact-name }}
       pr-number: ${{ steps.resolve-context.outputs.pr-number }}
+      result-artifact-name: ${{ steps.find-context.outputs.result-artifact-name }}
       should-publish: ${{ steps.resolve-context.outputs.should-publish || 'false' }}
+      validated-result-available: ${{ steps.find-context.outputs.validated-result-available || 'false' }}
     steps:
-      - name: Find trusted publication context
+      - name: Find current-attempt review artifacts
         id: find-context
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
@@ -36,15 +38,36 @@ jobs:
               run_id: context.payload.workflow_run.id,
               per_page: 100,
             });
-            const artifacts = response.data.artifacts.filter(
+            const runAttempt = context.payload.workflow_run.run_attempt;
+            if (!Number.isSafeInteger(runAttempt) || runAttempt < 1) {
+              throw new Error(`Invalid workflow run attempt: ${JSON.stringify(runAttempt)}`);
+            }
+            const attemptSuffix = `-attempt-${runAttempt}`;
+            const currentAttemptArtifacts = response.data.artifacts.filter(
+              (artifact) => !artifact.expired && artifact.name.endsWith(attemptSuffix),
+            );
+            const contextArtifacts = currentAttemptArtifacts.filter(
               (artifact) =>
-                !artifact.expired &&
                 artifact.name.startsWith("sdk-review-publication-context-"),
             );
-            if (artifacts.length > 1) {
-              throw new Error(`Expected at most one publication context, found ${artifacts.length}`);
+            const resultArtifacts = currentAttemptArtifacts.filter(
+              (artifact) => artifact.name.startsWith("sdk-review-result-workflow-"),
+            );
+            if (contextArtifacts.length > 1) {
+              throw new Error(`Expected at most one publication context, found ${contextArtifacts.length}`);
             }
-            core.setOutput("artifact-name", artifacts[0]?.name ?? "");
+            if (resultArtifacts.length > 1) {
+              throw new Error(`Expected at most one validated result, found ${resultArtifacts.length}`);
+            }
+            core.setOutput("artifact-name", contextArtifacts[0]?.name ?? "");
+            core.setOutput("result-artifact-name", resultArtifacts[0]?.name ?? "");
+            const validatedResultAvailable =
+              context.payload.workflow_run.conclusion === "success" &&
+              resultArtifacts.length === 1;
+            core.setOutput(
+              "validated-result-available",
+              validatedResultAvailable ? "true" : "false",
+            );
 
       - name: Checkout trusted publisher
         if: steps.find-context.outputs.artifact-name != ''
@@ -117,12 +140,11 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
 
       - name: Download validated SDK review results
-        if: github.event.workflow_run.conclusion == 'success'
+        if: needs.resolve.outputs.validated-result-available == 'true'
         uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
-          pattern: sdk-review-result-workflow-*
+          name: ${{ needs.resolve.outputs.result-artifact-name }}
           path: ${{ runner.temp }}/sdk-review-results
-          merge-multiple: true
           github-token: ${{ github.token }}
           run-id: ${{ github.event.workflow_run.id }}
 
@@ -132,6 +154,7 @@ jobs:
           PUBLICATION_CONTEXT_PATH: ${{ runner.temp }}/sdk-review-publication-context/typespec-review-context.json
           RESULT_ROOT_PATH: ${{ runner.temp }}/sdk-review-results
           REVIEW_WORKFLOW_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          VALIDATED_RESULT_AVAILABLE: ${{ needs.resolve.outputs.validated-result-available }}
           REVIEW_WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}
         with:
           github-token: ${{ github.token }}
@@ -144,5 +167,6 @@ jobs:
               publicationContextPath: process.env.PUBLICATION_CONTEXT_PATH,
               resultRootPath: process.env.RESULT_ROOT_PATH,
               workflowConclusion: process.env.REVIEW_WORKFLOW_CONCLUSION,
+              validatedResultAvailable: process.env.VALIDATED_RESULT_AVAILABLE === 'true',
               workflowRunUrl: process.env.REVIEW_WORKFLOW_URL,
             });

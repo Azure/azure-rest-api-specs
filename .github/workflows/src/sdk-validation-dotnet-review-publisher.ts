@@ -78,6 +78,7 @@ export async function publishSdkReviewResult(params: {
   githubScript: GitHubScriptArgs;
   publicationContextPath: string;
   resultRootPath: string;
+  validatedResultAvailable: boolean;
   workflowConclusion: string;
   workflowRunUrl: string;
 }): Promise<void> {
@@ -85,6 +86,7 @@ export async function publishSdkReviewResult(params: {
     githubScript,
     publicationContextPath,
     resultRootPath,
+    validatedResultAvailable,
     workflowConclusion,
     workflowRunUrl,
   } = params;
@@ -92,7 +94,7 @@ export async function publishSdkReviewResult(params: {
   const publicationContext = await readSdkReviewPublicationContext(publicationContextPath);
   const { specPrNumber, specHeadSha, specBaseSha } = publicationContext.source;
   let remediationResult: RemediationResult | undefined;
-  if (workflowConclusion === "success") {
+  if (workflowConclusion === "success" && validatedResultAvailable) {
     const reviewContextPath = path.join(
       resultRootPath,
       "sdk-review-workspaces",
