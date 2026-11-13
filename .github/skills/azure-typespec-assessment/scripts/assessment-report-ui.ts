@@ -1434,7 +1434,7 @@ export function renderReportSections(
   const unassessed = compliance.coverage?.unassessedIntentIds ?? [];
   const guidelineBody =
     guidelineCards ||
-    `<div class="report-empty">${compliance.status === "not-assessed" ? "Azure Guidelines could not be fully assessed." : "No Azure Guidelines findings."}</div>`;
+    `<div class="report-empty">${compliance.status === "skipped" ? "Azure Guidelines were skipped in fast assessment mode." : compliance.status === "not-assessed" ? "Azure Guidelines could not be fully assessed." : "No Azure Guidelines findings."}</div>`;
   const coverage = compliance.coverage;
   const documentQuality = dimensions.documentQuality ?? {};
   const documentBody = renderDocumentQuality(documentQuality, {

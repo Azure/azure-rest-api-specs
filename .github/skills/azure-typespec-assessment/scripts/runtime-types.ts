@@ -980,7 +980,9 @@ export interface ComplianceModelInputRequest extends ModelInputItem {
 
 export interface AssessmentModelInput {
   pipelineVersion?: 2;
+  assessmentMode?: "full" | "fast";
   context?: {
+    assessmentMode?: "full" | "fast";
     sourceComparison?: unknown;
     projects?: {
       id: string;
@@ -1542,7 +1544,7 @@ export interface ComplianceIntentAssessment {
 }
 
 export interface FinalComplianceAssessment {
-  status: "passed" | "failed" | "not-assessed";
+  status: "passed" | "failed" | "not-assessed" | "skipped";
   summary: string;
   coverage: {
     semanticIntentCount?: number;
@@ -1777,6 +1779,7 @@ export interface LegacyAssessmentInput {
 
 export interface AssessmentOutput {
   schemaVersion: 1;
+  assessmentMode?: "full" | "fast";
   displayTitle?: string;
   title?: string;
   pr?: string | number;

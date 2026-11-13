@@ -42,6 +42,7 @@ type AgentWorkspaceIndex = {
     schemas: Record<string, string>;
     resolvedSchemas: Record<string, string>;
   };
+  assessmentMode: "full" | "fast";
   coverage: {
     semanticIntentIds: string[];
     downstreamCandidateIds: string[];
@@ -267,6 +268,7 @@ void test("builds a compact complete Agent workspace", () => {
   try {
     const result = buildAgentWorkspace({ work });
     const index = readJson(result.indexPath) as AgentWorkspaceIndex;
+    assert.equal(index.assessmentMode, "full");
     assert.ok(fs.statSync(result.indexPath).size < 20 * 1024);
     assert.deepEqual(index.coverage.semanticIntentIds, ["semantic-1"]);
     assert.deepEqual(index.coverage.downstreamCandidateIds, ["downstream-1"]);
@@ -376,6 +378,51 @@ void test("repreparation clears earlier phase provenance even with identical can
     const state = readWorkflowState(work);
     assert.deepEqual(Object.keys(state?.runtimePhases ?? {}), ["preparation"]);
     assert.isUndefined(state?.resultHashes);
+  } finally {
+    fs.rmSync(work, { recursive: true, force: true });
+  }
+});
+
+void test("fast workspaces retain breaking and inference coverage without guideline work", () => {
+  const { work } = fixture();
+  try {
+    const inputPath = path.join(work, "model-input.json");
+    const input = readJson(inputPath) as AssessmentModelInput;
+    input.assessmentMode = "fast";
+    assert.ok(input.context);
+    input.context.assessmentMode = "fast";
+    writeJson(inputPath, input);
+    assert.throws(
+      () => buildAgentWorkspace({ work }),
+      /Fast assessment must not contain Azure Guidelines search requests/,
+    );
+    input.complianceSearchRequests = [];
+    writeJson(inputPath, input);
+    writeJson(path.join(work, "dimensions", "compliance-search-requests.json"), {
+      schemaVersion: 1,
+      requests: [],
+    });
+
+    const { index } = buildAgentWorkspace({ work });
+    const draft = readJson(
+      path.join(work, "agent-workspace", "agent-decisions.draft.json"),
+    ) as AgentDecisionsDraft;
+    assert.equal(index.assessmentMode, "fast");
+    assert.equal(index.counts.guidelineRequests, 0);
+    assert.deepEqual(index.coverage.semanticIntentIds, ["semantic-1"]);
+    assert.deepEqual(index.coverage.downstreamCandidateIds, ["downstream-1"]);
+    assert.deepEqual(index.coverage.inferenceRequestIds, ["inference-request-1"]);
+    assert.lengthOf(draft.semanticSummaries, 1);
+    assert.lengthOf(draft.downstreamDecisions, 1);
+    assert.lengthOf(draft.inferenceResults, 1);
+    assert.deepEqual(draft.catalogScores, []);
+    assert.deepEqual(draft.complianceJudgments, []);
+    assert.isTrue(
+      index.completionChecklist.some((item) => item.startsWith("Do not score or fetch")),
+    );
+    assert.isFalse(
+      index.completionChecklist.some((item) => item.startsWith("Score the full catalog")),
+    );
   } finally {
     fs.rmSync(work, { recursive: true, force: true });
   }

@@ -313,9 +313,12 @@ function headerSummary(assessment: AssessmentOutput) {
     complianceIssueCount,
     complianceCoveredCount,
     complianceMaterialCount,
-    complianceCoverageDetail: compliance.legacyDocuments
-      ? `${compliance.legacyDocuments.length} documents assessed`
-      : `${complianceCoveredCount}/${complianceMaterialCount} intents assessed`,
+    complianceCoverageDetail:
+      compliance.status === "skipped"
+        ? "Skipped in fast mode"
+        : compliance.legacyDocuments
+          ? `${compliance.legacyDocuments.length} documents assessed`
+          : `${complianceCoveredCount}/${complianceMaterialCount} intents assessed`,
   };
 }
 
@@ -323,6 +326,7 @@ function complianceStatus(status: string | undefined) {
   if (status === "passed" || status === "assessed")
     return { icon: "✓", className: "pass", label: "Pass" };
   if (status === "failed") return { icon: "×", className: "fail", label: "Fail" };
+  if (status === "skipped") return { icon: "–", className: "", label: "Skipped" };
   return { icon: "i", className: "", label: "N/A" };
 }
 
@@ -2309,6 +2313,7 @@ ${affectedMethods(card.affectedMethods)}
 
 function renderCurrent(assessment: AssessmentOutput, options: RenderOptions = {}) {
   const { dimensions } = assessment;
+  const fastMode = assessment.assessmentMode === "fast";
   const summary = headerSummary(assessment);
   const reportHelpers = {
     escapeHtml,
@@ -2385,7 +2390,7 @@ function renderCurrent(assessment: AssessmentOutput, options: RenderOptions = {}
 ${reportStyles}
 </style></head><body>
 <header class="hero"><div class="container"><div class="eyebrow">TypeSpec Assessment</div><h1>${escapeHtml(headerTitle(assessment))}</h1>
-<p class="hero-meta">TypeSpec source diff: ${comparisonHeader}</p>
+<p class="hero-meta">Assessment mode: <strong>${escapeHtml(assessment.assessmentMode ?? "full")}</strong>${fastMode ? "<br>Skipped: Azure Guidelines search and judgment." : ""}<br>TypeSpec source diff: ${comparisonHeader}</p>
 <div class="summary-grid">
 <a class="summary-card" href="#semantic-intents">${summaryHeading("Semantic intents", { icon: "ⓘ", className: "info", label: "Information only" })}<div class="summary-detail">${summary.semanticItems.length} ${summary.semanticItems.length === 1 ? "intent" : "intents"}<br>${summary.operationCount} operations<br>${summary.actionCounts.add} Added, ${summary.actionCounts.modify} Modified, ${summary.actionCounts.remove} Removed</div></a>
 <a class="summary-card" href="#azure-compliance">${summaryHeading("Azure Guidelines", complianceStatus(summary.complianceStatus))}<div class="summary-detail">${complianceStatus(summary.complianceStatus).label === "N/A" ? "Not assessed<br>" : ""}${summary.complianceFindingCount} ${summary.complianceFindingCount === 1 ? "finding" : "findings"}<br>${escapeHtml(summary.complianceCoverageDetail)}</div></a>

@@ -165,7 +165,8 @@ The materializer writes one `assessment-judgment.json` conforming to `scripts\as
 
 Coverage must be exact: one concise semantic result per supplied review unit,
 one decision per supplied deterministic or inferred REST/downstream candidate,
-and one Azure Guidelines decision per Semantic intent. Applicable Azure Guidelines
+and one Azure Guidelines decision per supplied compliance search request. In
+fast mode, all guideline search and judgment arrays remain empty. Applicable Azure Guidelines
 decisions cite fetched guidance sections and synthesize their expected pattern.
 Use `no-applicable-guidance` when search completed but no fetched section
 governs the intent; use `not-assessed` only for incomplete or blocked
@@ -193,8 +194,10 @@ Every confirmed REST finding must contain actual and expected behavior, rational
 
 Downstream SDK method and SDK type cards must not repeat `Changed TypeSpec`
 source links. Keep that evidence in `assessment.json`, Semantic intents, and
-the appendix; retain only related Semantic intent links in the cards.
-Method cards represent direct method changes only. Red impact links
+the appendix; retain only related Semantic intent links in the cards in both
+full and fast modes. Semantic intents and their link targets remain visible
+in both modes.
+Method cards use direct, mixed, or indirect cause labels. Red impact links
 are reserved for confirmed REST/downstream impacts and failed documentation
 findings; guideline links are separate.
 Downstream data and cards must not contain affected REST operations, HTTP
@@ -212,11 +215,21 @@ Dimension statuses are derived, not authored:
 - semantic: `assessed` or `not-assessed`;
 - REST/downstream: `passed`, `failed`, or `not-assessed`;
 - Azure Guidelines: `passed`, `failed`, or `not-assessed`, derived from
-  Semantic intent coverage and applicable fetched guidance;
+  Semantic intent coverage and applicable fetched guidance; `skipped` only
+  in fast mode, with no results, retained search evidence, or blockers;
 - Documentation Completeness (`documentQuality`): `passed`, `failed`,
   `not-assessed`, or `not-applicable`, with `assessmentVersion: 5` and
   declaration/documented/missing coverage;
 - safety scope: `rest-and-downstream-only`, never Azure Guidelines or document quality.
+
+Fast-mode HTML reports preserve the full layout: Semantic intents, Azure
+Guidelines, REST breaking changes, downstream SDK breaking changes, and
+Documentation Completeness cards and sections remain present with the same
+styles and navigation. Semantic intents are assessed and displayed normally.
+Only Azure Guidelines search and judgment are skipped; its existing card and
+section show `0 findings` with an explicit skipped status, never a pass.
+Structured output retains Semantic correlation data and an explicit skipped
+Azure Guidelines dimension for provenance and validation.
 
 A blocked implemented dimension cannot pass. Documentation Completeness is
 `failed` when one or more eligible newly added declarations lack a nonempty effective

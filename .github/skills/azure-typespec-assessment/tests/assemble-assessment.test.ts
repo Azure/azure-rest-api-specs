@@ -753,6 +753,119 @@ void test("assembler restores API-version-wide intents without candidate decisio
   }
 });
 
+void test("fast assessment preserves the complete report layout with skipped guidelines", () => {
+  const work = fixture();
+  try {
+    addDocumentInput(work, false);
+    const judgment = documentJudgment();
+    judgment.restDecisions[0] = {
+      candidateId: "rest-1",
+      decision: "approve",
+      severity: "high",
+      rationale: "Existing callers omit the newly required property.",
+    };
+    const fullAssessment = assembleTestAssessment({ work, judgment });
+    assert.equal(fullAssessment.assessmentMode, "full");
+    writeJson(path.join(work, "model-input.json"), {
+      assessmentMode: "fast",
+      semanticReviewUnits: [{ reviewUnitId: "semantic-1" }],
+      informationalSemanticIntentIds: [],
+      restCandidates: [{ id: "rest-1" }],
+      downstreamCandidates: [],
+      inferenceRequests: [],
+      complianceSearchRequests: [],
+      inputAccounting: {},
+    });
+
+    const assessment = assembleTestAssessment({ work, judgment });
+
+    assert.equal(assessment.assessmentMode, "fast");
+    assert.equal(assessment.dimensions.compliance.status, "skipped");
+    for (const dimension of ["semantic", "rest", "downstream", "documentQuality"] as const) {
+      assert.deepEqual(assessment.dimensions[dimension], fullAssessment.dimensions[dimension]);
+    }
+    assert.equal(assessment.dimensions.rest.findings[0].severity, "high");
+    assert.equal(assessment.dimensions.documentQuality.status, "failed");
+    assert.deepEqual(assessment.safety, fullAssessment.safety);
+    assert.deepEqual(validateAssessment(assessment), []);
+    const html = renderAssessmentHtml(assessment);
+    assert.match(html, /Assessment mode: <strong>fast<\/strong>/);
+    assert.match(html, /Skipped: Azure Guidelines search and judgment/);
+    assert.notMatch(html, /Skipped: Semantic intents/);
+    assert.match(html, /id="semantic-intents"/);
+    assert.match(html, /id="azure-compliance"/);
+    assert.match(html, /id="rest-breaking"/);
+    assert.match(html, /id="downstream-breaking"/);
+    assert.match(html, /id="document-quality"/);
+    assert.match(html, /href="#intent-semantic-1"/);
+    assert.match(reportSection(html, "rest-breaking"), /Affected intents \(/);
+    const guidelines = reportSection(html, "azure-compliance");
+    assert.match(guidelines, />skipped<\/span>/);
+    assert.match(guidelines, /0 findings/);
+    assert.match(guidelines, /Azure Guidelines were skipped in fast assessment mode/);
+    assert.notMatch(guidelines, />passed<\/span>/);
+    assert.match(html, /id="compliance-search-evidence"/);
+
+    const invalidMode = structuredClone(assessment);
+    Reflect.set(invalidMode, "assessmentMode", "quick");
+    assert.include(validateAssessment(invalidMode), "assessmentMode is invalid.");
+
+    const fullWithSkippedGuidelines = structuredClone(assessment);
+    fullWithSkippedGuidelines.assessmentMode = "full";
+    assert.include(
+      validateAssessment(fullWithSkippedGuidelines),
+      "Only fast assessment may skip Azure Guidelines.",
+    );
+    const fastWithPassedGuidelines = structuredClone(assessment);
+    fastWithPassedGuidelines.dimensions.compliance.status = "passed";
+    assert.include(
+      validateAssessment(fastWithPassedGuidelines),
+      "Fast assessment must mark Azure Guidelines as skipped.",
+    );
+    for (const [field, value, expected] of [
+      [
+        "findings",
+        [{}],
+        "Skipped Azure Guidelines assessment must not contain results or blockers.",
+      ],
+      [
+        "blockers",
+        ["blocked"],
+        "Skipped Azure Guidelines assessment must not contain results or blockers.",
+      ],
+      [
+        "sharedSearch",
+        { documents: [] },
+        "Skipped Azure Guidelines assessment must not contain results or blockers.",
+      ],
+      ["findings", null, "Azure Guidelines findings must be an array."],
+    ] as const) {
+      const invalid = structuredClone(assessment);
+      Reflect.set(invalid.dimensions.compliance, field, value);
+      assert.include(validateAssessment(invalid), expected);
+    }
+    for (const [field, value, expected] of [
+      ["assessedIntentCount", 1, "Skipped Azure Guidelines coverage is inconsistent."],
+      ["selectedDocumentCount", 1, "Skipped Azure Guidelines coverage is inconsistent."],
+      ["unassessedIntentIds", ["semantic-1"], "Skipped Azure Guidelines coverage is inconsistent."],
+      ["semanticIntentCount", 0, "Skipped Azure Guidelines semantic intent count is inconsistent."],
+    ] as const) {
+      const invalid = structuredClone(assessment);
+      Reflect.set(invalid.dimensions.compliance.coverage, field, value);
+      assert.include(validateAssessment(invalid), expected);
+    }
+    const fastInput = readJson(path.join(work, "model-input.json"));
+    const complianceDecisions = addComplianceInput(work);
+    writeJson(path.join(work, "model-input.json"), fastInput);
+    assert.throws(
+      () => assembleTestAssessment({ work, judgment: { ...judgment, complianceDecisions } }),
+      /Fast assessment must not contain Azure Guidelines requests or decisions/,
+    );
+  } finally {
+    fs.rmSync(work, { recursive: true, force: true });
+  }
+});
+
 function addComplianceInput(work: string): ComplianceDecision[] {
   const request = {
     reviewUnitId: "semantic-1",

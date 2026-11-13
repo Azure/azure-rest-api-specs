@@ -1011,6 +1011,70 @@ function presentationWithDocuments(
   return `${report.html}<section id="appendix"><details><summary>Appendix</summary>${report.appendixHtml}</details></section>`;
 }
 
+void test("fast reports preserve full layout, intent links, and SDK and documentation evidence", () => {
+  const { dimension, raw } = fixture();
+  const input = assessment(dimension);
+  const fullHtml = renderAssessmentHtml(input, { downstreamInput: raw });
+  assert.match(fullHtml, /href="#intent-semantic-1"/);
+  input.assessmentMode = "fast";
+  input.dimensions.compliance = {
+    status: "skipped",
+    summary: "Azure Guidelines were skipped in fast assessment mode.",
+    coverage: {
+      semanticIntentCount: 1,
+      assessedIntentCount: 0,
+      selectedDocumentCount: 0,
+      unassessedIntentIds: [],
+    },
+    intentAssessments: [],
+    findings: [],
+    retrievalFailures: [],
+    blockers: [],
+  };
+  const original = structuredClone(input);
+  const html = renderAssessmentHtml(input, { downstreamInput: raw });
+  assert.match(html, /href="#intent-semantic-1"/);
+  assert.match(html, /Affected intents \(/);
+  assert.equal(
+    html.match(/<style>[\s\S]*?<\/style>/)?.[0],
+    fullHtml.match(/<style>[\s\S]*?<\/style>/)?.[0],
+  );
+  assert.deepEqual(
+    [...html.matchAll(/class="summary-card" href="#([^"]+)"/g)].map((match) => match[1]),
+    [...fullHtml.matchAll(/class="summary-card" href="#([^"]+)"/g)].map((match) => match[1]),
+  );
+  assert.sameMembers(
+    [...html.matchAll(/<section id="([^"]+)">/g)].map((match) => match[1]),
+    [
+      "semantic-intents",
+      "azure-compliance",
+      "rest-breaking",
+      "downstream-breaking",
+      "document-quality",
+      "appendix",
+    ],
+  );
+  const guidelines = reportSection(html, "azure-compliance");
+  assert.match(guidelines, /0 findings/);
+  assert.match(guidelines, />skipped<\/span>/);
+  assert.notMatch(guidelines, /class="report-badge add"|Azure Guidelines not assessed for/);
+  const downstream = reportSection(html, "downstream-breaking");
+  assert.match(downstream, /ServiceGateways\.updateAddressLocations/);
+  assert.match(downstream, /body/);
+  assert.match(downstream, /href="#intent-semantic-1"/);
+  const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]);
+  for (const [, id] of html.matchAll(/href="#([^"]+)"/g)) {
+    assert.include(ids, id, `Missing fast report anchor ${id}`);
+  }
+  assert.deepEqual(input, original);
+  input.dimensions.documentQuality = documentDimension();
+  const documentHtml = renderReportSections(input, reportRenderHelpers).html;
+  const documentation = reportSection(documentHtml, "document-quality");
+  assert.match(documentation, /Widget\.count/);
+  assert.match(documentation, /Describe the count as a positive integer/);
+  assert.match(documentation, /href="#intent-semantic-1"/);
+});
+
 function documentationSections(html: string) {
   return {
     main: reportSection(html, "document-quality"),

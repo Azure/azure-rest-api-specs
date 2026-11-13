@@ -83,6 +83,7 @@ type AssessmentAnalysisOptions = {
   specification?: string;
   invocation?: Record<string, unknown>;
   model_input_budget_bytes?: string | number;
+  assessment_mode?: "full" | "fast";
   [key: string]: unknown;
 };
 type InputAccounting = {
@@ -106,6 +107,7 @@ type InputAccounting = {
 type AnalysisModelInput = {
   schemaVersion: number;
   pipelineVersion: 2;
+  assessmentMode: "full" | "fast";
   context: Record<string, unknown>;
   artifactReferences: AssessmentModelInput["artifactReferences"];
   evidenceSets: Record<string, import("./runtime-types.ts").EvidenceSet & Record<string, unknown>>;
@@ -1319,6 +1321,7 @@ export function buildModelInput({
   rest,
   downstream,
   maximumBytes,
+  assessmentMode = "full",
 }: {
   manifest: PreparationManifest;
   sourceIndex: SourceIndex;
@@ -1326,6 +1329,7 @@ export function buildModelInput({
   rest: BreakingAnalysis;
   downstream: DownstreamAnalysis;
   maximumBytes?: number;
+  assessmentMode?: "full" | "fast";
 }): AnalysisModelInput {
   const semanticUnits = semantic.status === "ready" ? semantic.reviewUnits : [];
   const { assessed: assessedSemanticUnits, informational: informationalSemanticUnits } =
@@ -1335,10 +1339,13 @@ export function buildModelInput({
     reviewUnits: assessedSemanticUnits,
   };
   const sourceChanges = compactSources(sourceIndex, assessedSemantic, rest, downstream);
-  const fullComplianceSearchRequests = buildComplianceSearchRequests({
-    semanticReviewUnits: assessedSemanticUnits,
-    sourceChanges,
-  });
+  const fullComplianceSearchRequests =
+    assessmentMode === "fast"
+      ? []
+      : buildComplianceSearchRequests({
+          semanticReviewUnits: assessedSemanticUnits,
+          sourceChanges,
+        });
   const complianceRequestsByUnit = new Map(
     fullComplianceSearchRequests.map((request) => [request.reviewUnitId, request]),
   );
@@ -1489,7 +1496,9 @@ export function buildModelInput({
   const input: AnalysisModelInput = {
     schemaVersion: 1,
     pipelineVersion: 2,
+    assessmentMode,
     context: {
+      assessmentMode,
       sourceComparison: {
         baseCommit: manifest.comparison.mergeBaseCommit,
         headCommit: manifest.comparison.headCommit,
@@ -1543,9 +1552,11 @@ export function blockedAssessment(
   semantic: SemanticAnalysis,
   rest: BreakingAnalysis,
   downstream: DownstreamAnalysis,
+  assessmentMode: "full" | "fast" = "full",
 ): AssessmentOutput {
   return requireAssessmentOutput({
     schemaVersion: 1,
+    assessmentMode,
     generatedAt: new Date().toISOString(),
     title: `TypeSpec assessment: ${manifest.projects.map((project) => project.path).join(", ")}`,
     repository: manifest.repository,
@@ -1602,8 +1613,11 @@ export function blockedAssessment(
         blockers: downstream.blockers,
       },
       compliance: {
-        status: "not-assessed",
-        summary: "Azure Guidelines could not run because deterministic analysis was blocked.",
+        status: assessmentMode === "fast" ? "skipped" : "not-assessed",
+        summary:
+          assessmentMode === "fast"
+            ? "Azure Guidelines were skipped in fast assessment mode."
+            : "Azure Guidelines could not run because deterministic analysis was blocked.",
         coverage: {
           semanticIntentCount: 0,
           assessedIntentCount: 0,
@@ -1613,7 +1627,7 @@ export function blockedAssessment(
         intentAssessments: [],
         findings: [],
         retrievalFailures: [],
-        blockers: [...manifest.blockers, ...semantic.blockers],
+        blockers: assessmentMode === "fast" ? [] : [...manifest.blockers, ...semantic.blockers],
       },
       documentQuality: {
         status: "not-assessed",
@@ -1678,6 +1692,10 @@ function readSourceIndex(file: string): SourceIndex {
 
 export async function runAssessmentAnalysis(options: AssessmentAnalysisOptions) {
   const output = path.resolve(options.output);
+  const assessmentMode = options.assessment_mode ?? "full";
+  if (assessmentMode !== "full" && assessmentMode !== "fast") {
+    throw new Error("--assessment-mode must be full or fast.");
+  }
   assertFreshOutput(output);
   const resolvedOptions = options.invocation ? options : resolveAssessmentInput(options);
   fs.mkdirSync(output, { recursive: true });
@@ -1690,6 +1708,7 @@ export async function runAssessmentAnalysis(options: AssessmentAnalysisOptions) 
     const result = {
       schemaVersion: 1,
       status: "no-changes",
+      assessmentMode,
       message: "No changed TypeSpec was found in the selected specification.",
       comparison: manifest.comparison,
     };
@@ -1749,7 +1768,7 @@ export async function runAssessmentAnalysis(options: AssessmentAnalysisOptions) 
   writeJson(path.join(output, "preparation-manifest.json"), manifest);
   const allBlocked = [semantic, rest, downstream].every((item) => item.status === "blocked");
   if (allBlocked) {
-    const assessment = blockedAssessment(manifest, semantic, rest, downstream);
+    const assessment = blockedAssessment(manifest, semantic, rest, downstream, assessmentMode);
     const errors = validateAssessment(assessment);
     if (errors.length) throw new Error(errors.join("\n"));
     writeJson(path.join(output, "assessment.json"), assessment);
@@ -1780,25 +1799,31 @@ export async function runAssessmentAnalysis(options: AssessmentAnalysisOptions) 
     rest,
     downstream,
     maximumBytes: configuredMaximum,
+    assessmentMode,
   });
   writeJson(path.join(output, "dimensions", "compliance-search-requests.json"), {
     schemaVersion: 1,
-    requests: buildComplianceSearchRequests({
-      semanticReviewUnits:
-        semantic.status === "ready" ? partitionSemanticIntents(semantic.reviewUnits).assessed : [],
-      sourceChanges: compactSources(
-        sourceIndex,
-        {
-          ...semantic,
-          reviewUnits:
-            semantic.status === "ready"
-              ? partitionSemanticIntents(semantic.reviewUnits).assessed
-              : [],
-        },
-        rest,
-        downstream,
-      ),
-    }),
+    requests:
+      assessmentMode === "fast"
+        ? []
+        : buildComplianceSearchRequests({
+            semanticReviewUnits:
+              semantic.status === "ready"
+                ? partitionSemanticIntents(semantic.reviewUnits).assessed
+                : [],
+            sourceChanges: compactSources(
+              sourceIndex,
+              {
+                ...semantic,
+                reviewUnits:
+                  semantic.status === "ready"
+                    ? partitionSemanticIntents(semantic.reviewUnits).assessed
+                    : [],
+              },
+              rest,
+              downstream,
+            ),
+          }),
   });
   writeJson(path.join(output, "model-input.json"), modelInput);
   const workspace = buildAgentWorkspace({ work: output });
@@ -1817,6 +1842,7 @@ function assessmentOptionsFromArgs(args: CliArguments): AssessmentAnalysisOption
     "head",
     "specification",
     "model_input_budget_bytes",
+    "assessment_mode",
   ]) {
     if (args[name] !== undefined && typeof args[name] !== "string") {
       throw new TypeError(`--${name.replaceAll("_", "-")} requires a value.`);
