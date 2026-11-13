@@ -554,6 +554,16 @@ namespace Azure.AI.Projects {
      * The cloud computer provider. Only windows365_cloud_pc is supported.
      */
     kind: CloudComputerUsePreviewKind;
+
+    /**
+     * The identifier of the cloud computer pool.
+     */
+    pool_id?: string;
+
+    /**
+     * The region of the cloud computer pool.
+     */
+    pool_region?: string;
   }
 
   /**
