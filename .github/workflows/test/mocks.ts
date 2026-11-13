@@ -62,6 +62,7 @@ function createMockGithubImpl() {
         listFiles: vi.fn().mockResolvedValue({ data: [] }),
       },
       repos: {
+        compareCommitsWithBasehead: vi.fn().mockResolvedValue({ data: { files: [] } }),
         createCommitStatus: vi.fn(),
         getContent: vi.fn(),
         getBranchRules: vi.fn().mockResolvedValue({ data: [] }),

@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { Unzip, unzipSync } from "fflate";
+import { parse as parseYaml } from "yaml";
 import * as z from "zod";
 import {
   isSafeRelativePosixPath,
@@ -21,6 +22,10 @@ import {
 } from "./artifacts.ts";
 import type { Context, Core, GitHub, GitHubScriptArgs } from "./github.ts";
 import type { RetryOptions } from "./retries.ts";
+import {
+  collectTypeSpecReviewContext,
+  TYPESPEC_REVIEW_CONTEXT_FILE_NAME,
+} from "./sdk-validation-typespec-context.ts";
 
 export const EXPECTED_DOTNET_CHECK_NAME = "SDK Validation - .NET" as const;
 export const EXPECTED_AZURE_PIPELINES_APP_NAME = "Azure Pipelines" as const;
@@ -95,6 +100,7 @@ export type SdkReviewHandoffResult = {
   headSha?: string;
   inputDirectory?: string;
   artifactPath?: string;
+  typeSpecContextPath?: string;
   summaryPath?: string;
   entryCount: number;
 };
@@ -714,7 +720,13 @@ export async function verifyPullRequestFreshness(params: {
   context: Context;
   prNumber: number;
   expectedHeadSha: string;
-}): Promise<{ currentHeadSha: string; isFresh: boolean; state: string }> {
+}): Promise<{
+  baseSha: string;
+  changedFileCount: number;
+  currentHeadSha: string;
+  isFresh: boolean;
+  state: string;
+}> {
   const { github, context, prNumber, expectedHeadSha } = params;
   const { data: pullRequest } = await github.rest.pulls.get({
     owner: context.repo.owner,
@@ -724,13 +736,55 @@ export async function verifyPullRequestFreshness(params: {
 
   validatePullRequestRepository(context, prNumber, pullRequest);
   const currentHeadSha = pullRequest.head.sha;
+  const baseSha = pullRequest.base.sha;
+  const changedFileCount = pullRequest.changed_files;
+  if (!/^[0-9a-f]{40}$/i.test(baseSha)) {
+    throw new Error(`PR #${prNumber} has an invalid base SHA '${baseSha}'`);
+  }
+  if (!Number.isSafeInteger(changedFileCount) || changedFileCount < 0) {
+    throw new Error(`PR #${prNumber} has an invalid changed file count '${changedFileCount}'`);
+  }
   return {
+    baseSha,
+    changedFileCount,
     currentHeadSha,
     isFresh:
       pullRequest.state === "open" &&
       currentHeadSha.toLowerCase() === expectedHeadSha.toLowerCase(),
     state: pullRequest.state,
   };
+}
+
+function getTypeSpecProjectRoots(
+  artifact: SpecGenSdkArtifactInfo,
+  inputDirectory: string,
+): string[] {
+  // The generated package records the TypeSpec project that produced it.
+  const projectRoots = new Set<string>();
+  const locationSchema = z.object({ directory: z.string() });
+  for (const request of artifact.apiViewRequestData) {
+    const locationPath = path.resolve(
+      inputDirectory,
+      ...request.reviewInputPath!.split("/"),
+      "tsp-location.yaml",
+    );
+    if (!fs.existsSync(locationPath)) {
+      throw new Error(
+        `SDK review snapshot '${request.reviewInputPath}' is missing tsp-location.yaml`,
+      );
+    }
+    const location = locationSchema.parse(parseYaml(fs.readFileSync(locationPath, "utf8")));
+    if (
+      !isSafeRelativePosixPath(location.directory) ||
+      !location.directory.startsWith("specification/")
+    ) {
+      throw new Error(
+        `SDK review snapshot '${request.reviewInputPath}' has an invalid TypeSpec directory '${location.directory}'`,
+      );
+    }
+    projectRoots.add(location.directory);
+  }
+  return [...projectRoots].sort();
 }
 
 export function formatReviewHandoffSummary(params: {
@@ -910,6 +964,18 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
   );
   const artifactPath = path.join(inputDirectory, SPEC_GEN_SDK_ARTIFACT_FILE_NAME);
   fs.writeFileSync(artifactPath, JSON.stringify(artifact, undefined, 2), "utf8");
+  const projectRoots = getTypeSpecProjectRoots(artifact, inputDirectory);
+  const typeSpecContext = await collectTypeSpecReviewContext({
+    github,
+    context,
+    prNumber,
+    headSha: event.headSha,
+    baseSha: prStatus.baseSha,
+    changedFileCount: prStatus.changedFileCount,
+    projectRoots,
+  });
+  const typeSpecContextPath = path.join(inputDirectory, TYPESPEC_REVIEW_CONTEXT_FILE_NAME);
+  fs.writeFileSync(typeSpecContextPath, JSON.stringify(typeSpecContext, undefined, 2), "utf8");
 
   const summaryMarkdown = formatReviewHandoffSummary({ event, artifact, prNumber });
   const summaryPath = path.resolve(
@@ -933,6 +999,7 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
     headSha: event.headSha,
     inputDirectory,
     artifactPath,
+    typeSpecContextPath,
     summaryPath,
     entryCount: artifact.apiViewRequestData.length,
   };

@@ -8,6 +8,7 @@ import { afterEach, describe, expect, it } from "vitest";
 const temporaryDirectories: string[] = [];
 type ReviewContext = {
   canonicalSkill: { skillRevision: string; skillPath: string };
+  remediationSkill: { skillRevision: string; skillPath: string };
   workspaces: Array<{ baselineCommitSha: string; workspace: string }>;
 };
 
@@ -47,8 +48,19 @@ describe("prepare-sdk-review-workspaces", () => {
     const baselineCommitSha = runGit(repository, ["rev-parse", "HEAD"]);
 
     const skillRoot = path.join(repository, ".github", "skills", "code-review");
+    const remediationSkillRoot = path.join(
+      repository,
+      ".github",
+      "skills",
+      "mgmt-review-comment-resolution",
+    );
     fs.mkdirSync(skillRoot, { recursive: true });
+    fs.mkdirSync(remediationSkillRoot, { recursive: true });
     fs.writeFileSync(path.join(skillRoot, "SKILL.md"), "# Canonical code review\n");
+    fs.writeFileSync(
+      path.join(remediationSkillRoot, "SKILL.md"),
+      "# Management review remediation\n",
+    );
     runGit(repository, ["add", ".github"]);
     runGit(repository, ["commit", "-m", "Add canonical skill"]);
     const skillRevision = runGit(repository, ["rev-parse", "HEAD"]);
@@ -112,6 +124,10 @@ describe("prepare-sdk-review-workspaces", () => {
     expect(fs.readFileSync(context.canonicalSkill.skillPath, "utf8").replaceAll("\r\n", "\n")).toBe(
       "# Canonical code review\n",
     );
+    expect(context.remediationSkill.skillRevision).toBe(skillRevision);
+    expect(
+      fs.readFileSync(context.remediationSkill.skillPath, "utf8").replaceAll("\r\n", "\n"),
+    ).toBe("# Management review remediation\n");
     expect(context.workspaces).toHaveLength(1);
     expect(context.workspaces[0].baselineCommitSha).toBe(baselineCommitSha);
     const workspace = context.workspaces[0].workspace;

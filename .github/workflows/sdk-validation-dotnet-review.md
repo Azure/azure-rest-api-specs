@@ -1,6 +1,6 @@
 ---
-name: "Generated .NET SDK Review (Report-Only)"
-description: Run the canonical azure-sdk-for-net code-review skill against generated SDK changes captured by SDK Validation.
+name: "Generated .NET SDK Review and TypeSpec Remediation (Report-Only)"
+description: Review generated .NET SDK changes and translate findings into TypeSpec remediation guidance.
 on:
   workflow_run:
     workflows: ["SDK Validation - .NET Naming Review Input"]
@@ -53,6 +53,7 @@ checkout:
   sparse-checkout: |
     .github/workflows/scripts/prepare-sdk-review-workspaces.ts
     .github/workflows/src/sdk-validation-dotnet-review-result.ts
+    .github/workflows/src/sdk-validation-typespec-remediation-result.ts
 engine:
   id: copilot
   args: ["--excluded-tools=task"]
@@ -77,7 +78,9 @@ steps:
     uses: actions/upload-artifact@v7
     with:
       name: sdk-review-trusted-context-${{ github.event.workflow_run.id }}
-      path: /tmp/gh-aw/sdk-review-workspaces/sdk-review-context.json
+      path: |
+        /tmp/gh-aw/sdk-review-workspaces/sdk-review-context.json
+        /tmp/gh-aw/sdk-review-input/typespec-review-context.json
       if-no-files-found: error
       retention-days: 7
 network:
@@ -121,19 +124,24 @@ safe-outputs:
           description: "The complete generated SDK review result as a JSON object string"
           required: true
           type: string
+        remediation_result:
+          description: "The complete TypeSpec remediation result as a JSON object string"
+          required: true
+          type: string
       steps:
         - name: Checkout trusted validator
           uses: actions/checkout@v7
           with:
             sparse-checkout: |
               .github/workflows/src/sdk-validation-dotnet-review-result.ts
+              .github/workflows/src/sdk-validation-typespec-remediation-result.ts
             persist-credentials: false
         - name: Download trusted SDK review context
           uses: actions/download-artifact@v8
           with:
             name: sdk-review-trusted-context-${{ github.event.workflow_run.id }}
-            path: ${{ runner.temp }}/sdk-review-final/sdk-review-workspaces
-        - name: Validate SDK review result
+            path: ${{ runner.temp }}/sdk-review-final
+        - name: Validate SDK review and TypeSpec remediation results
           uses: actions/github-script@v9
           env:
             SDK_REVIEW_RESULT_ROOT: ${{ runner.temp }}/sdk-review-final
@@ -146,15 +154,30 @@ safe-outputs:
               } = await import(
                 "${{ github.workspace }}/.github/workflows/src/sdk-validation-dotnet-review-result.ts"
               );
+              const {
+                parseTypeSpecRemediationSafeOutput,
+                validateTypeSpecRemediationResult,
+              } = await import(
+                "${{ github.workspace }}/.github/workflows/src/sdk-validation-typespec-remediation-result.ts"
+              );
               const root = process.env.SDK_REVIEW_RESULT_ROOT;
-              const [contextText, outputText] = await Promise.all([
+              const [contextText, typeSpecContextText, outputText] = await Promise.all([
                 readFile(`${root}/sdk-review-workspaces/sdk-review-context.json`, "utf8"),
+                readFile(`${root}/sdk-review-input/typespec-review-context.json`, "utf8"),
                 readFile(process.env.GH_AW_AGENT_OUTPUT, "utf8"),
               ]);
-              const result = parseSdkReviewSafeOutput(JSON.parse(outputText));
+              const output = JSON.parse(outputText);
+              const result = parseSdkReviewSafeOutput(output);
+              const remediationResult = parseTypeSpecRemediationSafeOutput(output);
               const validatedReport = validateSdkReviewResult(
                 JSON.parse(contextText),
                 result,
+              );
+              const normalizedRemediation = validateTypeSpecRemediationResult(
+                JSON.parse(contextText),
+                result,
+                JSON.parse(typeSpecContextText),
+                remediationResult,
               );
               await Promise.all([
                 writeFile(
@@ -163,6 +186,16 @@ safe-outputs:
                   "utf8",
                 ),
                 writeFile(`${root}/sdk-review-result.md`, validatedReport, "utf8"),
+                writeFile(
+                  `${root}/typespec-remediation-result.json`,
+                  `${JSON.stringify(normalizedRemediation.result, null, 2)}\n`,
+                  "utf8",
+                ),
+                writeFile(
+                  `${root}/typespec-remediation-result.md`,
+                  normalizedRemediation.report,
+                  "utf8",
+                ),
               ]);
         - name: Upload validated SDK review result
           uses: actions/upload-artifact@v7
@@ -191,8 +224,7 @@ update, label, approve, or otherwise mutate any GitHub pull request.
    the canonical skill requires context.
 5. Report only reproducible, high-confidence defects. Do not invent an SDK PR or
    assume prior SDK review discussion exists.
-6. Call `publish_sdk_review` exactly once with `result` set to a JSON string
-   using this shape:
+6. Prepare the SDK review result using this shape:
 
 ```json
 {
@@ -222,5 +254,55 @@ update, label, approve, or otherwise mutate any GitHub pull request.
 ```
 
 If no findings remain after applying the canonical skill's confidence gate,
-include an empty `findings` array. The trusted safe-output job validates the
-structured result and generates the human-readable Markdown deterministically.
+include an empty `findings` array.
+
+7. Read `/tmp/gh-aw/sdk-review-input/typespec-review-context.json`.
+8. Read the management review remediation skill identified by
+   `remediationSkill.skillPath`. Use it as guidance for mapping generated .NET
+   findings to the service TypeSpec and C#-scoped `client.tsp`.
+9. Translate every SDK review finding exactly once. Do not create new findings.
+   Prepare the TypeSpec remediation result with this shape:
+
+```json
+{
+  "schemaVersion": 1,
+  "status": "completed",
+  "skillRevision": "<remediation skill commit SHA>",
+  "source": {
+    "specPrNumber": 123,
+    "specHeadSha": "<spec commit SHA>"
+  },
+  "findings": [
+    {
+      "reviewIndex": 0,
+      "findingIndex": 0,
+      "remediation": {
+        "target": "typespec|client.tsp|sdk-repository|duplicate|manual-investigation",
+        "specSymbol": "Optional TypeSpec symbol",
+        "suggestion": "Concrete remediation or investigation guidance",
+        "confidence": "high|medium|low",
+        "sourceLocation": {
+          "file": "specification/.../changed-file.tsp",
+          "line": 123
+        }
+      }
+    }
+  ]
+}
+```
+
+Only include `sourceLocation` when the exact line is present in a changed
+TypeSpec file from the context. Otherwise omit it so a later publisher cannot
+create a misleading inline comment. Use `typespec` for language-independent
+contract fixes, `client.tsp` for C#-scoped API surface adjustments,
+`sdk-repository` when a spec author cannot resolve the finding, `duplicate`
+only when the provided evidence proves another signal already reported it, and
+`manual-investigation` when mapping or remediation is uncertain.
+
+10. Call `publish_sdk_review` exactly once. Set `result` to the complete SDK
+    review result as a JSON string and `remediation_result` to the complete
+    TypeSpec remediation result as a JSON string.
+
+The trusted safe-output job validates both structured results after threat
+detection, restores canonical finding data, and generates both Markdown reports
+deterministically.
