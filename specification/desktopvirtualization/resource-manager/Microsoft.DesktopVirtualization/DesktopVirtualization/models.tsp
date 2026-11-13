@@ -1245,7 +1245,7 @@ union DiffDiskOption {
 }
 
 /**
- * Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise TempDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'TempDisk'.
+ * Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise TempDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'TempDisk', 'NvmeDisk'.
  */
 union DiffDiskPlacement {
   string,
@@ -1259,6 +1259,13 @@ union DiffDiskPlacement {
    * Temp disk placement
    */
   TempDisk: "TempDisk",
+
+  /**
+   * NVMe disk placement.
+   * @Introduced in 2026-09-01-preview
+   */
+  @added(Versions.vLatestPreview)
+  NvmeDisk: "NvmeDisk",
 }
 
 /**
@@ -1750,7 +1757,7 @@ model DiffDiskProperties {
   option?: DiffDiskOption;
 
   /**
-   * Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise TempDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'TempDisk'.
+   * Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise TempDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'TempDisk', 'NvmeDisk'.
    */
   placement?: DiffDiskPlacement;
 }
