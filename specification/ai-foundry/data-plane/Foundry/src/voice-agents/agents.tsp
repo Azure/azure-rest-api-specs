@@ -217,21 +217,50 @@ model VoiceAgentLiveDefinition extends VoiceAgentBaseDefinition {
   @doc("Selects the Live protocol.")
   sub_protocol: VoiceAgentSubProtocol.live;
 
-  @doc("Uses a Foundry model deployment.")
-  model_type: VoiceModelType.self_deployed;
+  @doc("""
+    How the GPT Live model is served. `managed` uses a GPT Live model that the voice service hosts, which adds noise
+    reduction, echo cancellation, and avatar. `self_deployed` connects directly to the project's own GPT Live deployment.
+    """)
+  model_type: VoiceModelType;
 
-  @doc("The GPT Live deployment name.")
+  @doc("The managed GPT Live model name for `managed`, or the GPT Live deployment name for `self_deployed`.")
   @minLength(1)
   `model`: string;
 
   @doc("Template-only startup greeting, rendered with session structured inputs. Foundry-only; not sent in native Live settings.")
   greeting?: VoiceAgentTemplateGreetingConfig;
 
-  @doc("Startup audio formats and output voice.")
-  audio?: OpenAI.LiveInitialSessionAudioParam;
+  @doc("Startup audio formats and output voice, plus input processing for `managed` models.")
+  audio?: VoiceAgentLiveAudioConfig;
 
-  @doc("Delegation settings. Omit for client mode. responses.model is a backend deployment name in the Live resource, not a model catalog ID.")
+  @doc("""
+    Delegation settings. Omit for client mode. For `self_deployed`, responses.model is a backend deployment name in the
+    Live resource, not a model catalog ID. For `managed`, responses.model is one of the managed model's Responses
+    delegation models, only function tools are supported, and service_tier must be omitted, `auto`, or `default`.
+    """)
   delegation?: VoiceAgentLiveDelegation;
+
+  @doc("Optional avatar. Requires `model_type: managed`; the avatar connects over WebRTC before the session starts.")
+  avatar?: VoiceAgentAvatarConfig;
+}
+
+@doc("Live audio settings: the native startup audio format and voice, plus input processing for managed models.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveAudioConfig {
+  ...OpenAI.LiveInitialSessionAudioParam;
+
+  @doc("Input noise reduction and echo cancellation. Requires `model_type: managed`.")
+  input?: VoiceAgentLiveAudioInputConfig;
+}
+
+@doc("Input processing for a managed Live voice agent, with the realtime voice-agent field types.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentLiveAudioInputConfig {
+  @doc("Input noise reduction. Live supports `azure_deep_noise_suppression`. Set to null to disable.")
+  noise_reduction?: VoiceAgentNoiseReduction | null;
+
+  @doc("Optional server-side echo cancellation settings.")
+  echo_cancellation?: VoiceAgentEchoCancellation | null;
 }
 
 // Generate the concrete models for SDK-specific subtype dispatch.
