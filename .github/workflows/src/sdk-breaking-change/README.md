@@ -106,8 +106,8 @@ schema-version and consumer updates; changing an artifact's display name alone d
 1. Keep `prNumber`, `headSha`, and `sdkLanguage` associated throughout analysis, mitigation,
    artifacts, outputs, and comments. Use the analyzed specification SHA, not the workflow
    checkout's default-branch SHA.
-2. Both analysis trigger paths reject fork PRs. Automatic label-triggered runs additionally
-   compare the label artifact's SHA with the live PR head before analysis.
+2. Both analysis trigger paths accept fork PRs and retain the PR head repository for checkout.
+   Automatic label-triggered runs compare the label artifact's SHA with the live PR head before analysis.
 3. The mitigation resolver requires that analysis was requested, that the overall analysis succeeded,
    and that the current PR head matches the analyzed SHA before setting mitigation eligibility to `true`. Mitigation
    preserves the input analysis SHA in its output and processes only projects with
@@ -135,7 +135,7 @@ changes and produces an artifact and a GitHub Actions job summary.
 - `workflow_run`: runs after `SDK Breaking Change Labels` completes successfully. The resolver
   reads its PR number, head SHA, and language-specific breaking-change label artifacts. Analysis
   runs only when the supported label artifact has the value `true`.
-- Both paths reject fork PRs. For an automatic run, the current PR head must also match the SHA
+- Both paths accept fork PRs. For an automatic run, the current PR head must also match the SHA
   recorded by the label workflow.
 
 The resolver exposes the PR number, head repository and SHA, SDK language and repository, and

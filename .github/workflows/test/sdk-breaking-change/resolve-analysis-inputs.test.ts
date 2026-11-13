@@ -138,6 +138,29 @@ describe("resolveAnalysisTrigger", () => {
     expect(github.rest.actions.listWorkflowRunArtifacts).not.toHaveBeenCalled();
   });
 
+  it("accepts a workflow-dispatch request for a fork", async () => {
+    const github = createMockGithub();
+    const context = createMockContext();
+    const core = createMockCore();
+    Object.assign(context, {
+      eventName: "workflow_dispatch",
+      payload: { inputs: { pr_number: "42", sdk_language: "Go" } },
+    });
+    github.rest.pulls.get.mockResolvedValue({
+      data: {
+        head: { repo: { full_name: "contributor/repo" }, sha: "a".repeat(40) },
+      },
+    });
+
+    const statusArtifactPath = createStatusArtifactPath();
+    await resolveAnalysisTrigger({ github, context, core, statusArtifactPath });
+
+    expect(core.setOutput).toHaveBeenCalledWith("head-repository", "contributor/repo");
+    expect(core.setOutput).toHaveBeenCalledWith("head-sha", "a".repeat(40));
+    expect(core.setOutput).toHaveBeenCalledWith("should-run", "true");
+    expect(readFileSync(statusArtifactPath, "utf8")).toBe("true\n");
+  });
+
   it.each(["", "Unknown"])("rejects invalid workflow-dispatch language %j", async (language) => {
     const github = createMockGithub();
     const context = createMockContext();
@@ -256,7 +279,7 @@ describe("resolveAnalysisTrigger", () => {
     ).rejects.toThrow();
   });
 
-  it("rejects a workflow-run handoff for a fork", async () => {
+  it("accepts a workflow-run handoff for a fork", async () => {
     const github = createMockGithub();
     const context = createMockContext();
     const core = createMockCore();
@@ -279,14 +302,17 @@ describe("resolveAnalysisTrigger", () => {
       },
     });
 
-    await expect(
-      resolveAnalysisTrigger({
-        github,
-        context,
-        core,
-        statusArtifactPath: createStatusArtifactPath(),
-      }),
-    ).rejects.toThrow("does not run for fork");
+    const statusArtifactPath = createStatusArtifactPath();
+    await resolveAnalysisTrigger({
+      github,
+      context,
+      core,
+      statusArtifactPath,
+    });
+    expect(core.setOutput).toHaveBeenCalledWith("head-repository", "contributor/repo");
+    expect(core.setOutput).toHaveBeenCalledWith("head-sha", "a".repeat(40));
+    expect(core.setOutput).toHaveBeenCalledWith("should-run", "true");
+    expect(readFileSync(statusArtifactPath, "utf8")).toBe("true\n");
   });
 
   it("rejects a stale workflow-run handoff SHA", async () => {
@@ -324,32 +350,26 @@ describe("resolveAnalysisTrigger", () => {
 });
 
 describe("validateAnalysisSource", () => {
-  it("accepts the expected repository and handoff SHA", () => {
+  it("accepts the expected handoff SHA", () => {
     expect(() =>
       validateAnalysisSource({
-        expectedRepository: "Azure/azure-rest-api-specs",
-        actualRepository: "Azure/azure-rest-api-specs",
         expectedSha: "a".repeat(40),
         actualSha: "a".repeat(40),
       }),
     ).not.toThrow();
   });
 
-  it("rejects a fork", () => {
+  it("accepts a head without a handoff SHA", () => {
     expect(() =>
       validateAnalysisSource({
-        expectedRepository: "Azure/azure-rest-api-specs",
-        actualRepository: "contributor/azure-rest-api-specs",
         actualSha: "a".repeat(40),
       }),
-    ).toThrow("does not run for fork");
+    ).not.toThrow();
   });
 
   it("rejects a stale handoff SHA", () => {
     expect(() =>
       validateAnalysisSource({
-        expectedRepository: "Azure/azure-rest-api-specs",
-        actualRepository: "Azure/azure-rest-api-specs",
         expectedSha: "a".repeat(40),
         actualSha: "b".repeat(40),
       }),
