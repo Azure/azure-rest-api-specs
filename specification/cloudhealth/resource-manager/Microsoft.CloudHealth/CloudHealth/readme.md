@@ -20,12 +20,6 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ## Configuration
 
-### Migrating from 2025-05-01-preview
-
-Update the request API version and payload together. Use numeric thresholds, `tags` instead of `labels`, `signalGroups` instead of `signals`, and discovery-rule `specification` objects. Use `Unhealthy` instead of `Error` and the updated signal operator values. Child-resource PUT and DELETE operations are long-running; clients must follow the response polling headers.
-
-See the [2026-11-01 examples](./examples/2026-11-01/) for replacement payloads. Confirm the chosen API version is supported in your environment before migrating.
-
 ### Basic Information
 
 These are the global settings for the cloudhealth.
