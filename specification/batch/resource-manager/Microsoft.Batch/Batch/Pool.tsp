@@ -52,13 +52,7 @@ interface Pools {
    */
   get is ArmResourceRead<
     Pool,
-    Response = ArmResourceUpdatedResponse<Pool> & {
-      /**
-       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
-       */
-      @header("ETag")
-      etag?: string;
-    },
+    Response = ArmResourceUpdatedResponse<Pool> & EtagResponseHeaders,
     Error = CloudError
   >;
 
@@ -83,13 +77,7 @@ interface Pools {
       @header("If-None-Match")
       `If-None-Match`?: string;
     },
-    Response = ArmResourceUpdatedResponse<Pool> & {
-      /**
-       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
-       */
-      @header("ETag")
-      etag?: string;
-    },
+    Response = ArmResourceUpdatedResponse<Pool> & EtagResponseHeaders,
     Error = CloudError
   >;
 
@@ -99,7 +87,7 @@ interface Pools {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     Pool,
-    PatchModel = Pool,
+    PatchModel = PoolPatch,
     Parameters = {
       /**
        * The entity state (ETag) version of the pool to update. This value can be omitted or set to "*" to apply the operation unconditionally.
@@ -108,13 +96,7 @@ interface Pools {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = ArmResourceUpdatedResponse<Pool> & {
-      /**
-       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
-       */
-      @header("ETag")
-      etag?: string;
-    },
+    Response = ArmResourceUpdatedResponse<Pool> & EtagResponseHeaders,
     Error = CloudError
   >;
 
@@ -177,13 +159,7 @@ interface Pools {
   disableAutoScale is ArmResourceActionSync<
     Pool,
     void,
-    Response = ArmResponse<Pool> & {
-      /**
-       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
-       */
-      @header("ETag")
-      etag?: string;
-    },
+    Response = ArmResponse<Pool> & EtagResponseHeaders,
     Error = CloudError
   >;
 
@@ -193,13 +169,7 @@ interface Pools {
   stopResize is ArmResourceActionSync<
     Pool,
     void,
-    Response = ArmResponse<Pool> & {
-      /**
-       * The ETag HTTP response header. This is an opaque string. You can use it to detect whether the resource has changed between requests. In particular, you can pass the ETag to one of the If-Match or If-None-Match headers.
-       */
-      @header("ETag")
-      etag?: string;
-    },
+    Response = ArmResponse<Pool> & EtagResponseHeaders,
     Error = CloudError
   >;
 }

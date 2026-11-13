@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "accountName": "sampleacct",
+    "api-version": "2026-10-01",
+    "parameters": {
+      "location": "japaneast",
+      "properties": {
+        "autoStorage": {
+          "storageAccountId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Storage/storageAccounts/samplestorage"
+        },
+        "keyVaultReference": {
+          "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.KeyVault/vaults/sample",
+          "url": "http://sample.vault.azure.net/"
+        },
+        "publicNetworkAccess": "Disabled"
+      }
+    },
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sampleacct",
+        "type": "Microsoft.Batch/batchAccounts",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct",
+        "identity": {
+          "type": "None"
+        },
+        "location": "japaneast",
+        "properties": {
+          "accountEndpoint": "sampleacct.japaneast.batch.azure.com",
+          "activeJobAndJobScheduleQuota": 20,
+          "autoStorage": {
+            "lastKeySync": "2016-03-10T23:48:38.9878479Z",
+            "storageAccountId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Storage/storageAccounts/samplestorage"
+          },
+          "dedicatedCoreQuota": 20,
+          "keyVaultReference": {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.KeyVault/vaults/sample",
+            "url": "http://sample.vault.azure.net/"
+          },
+          "lowPriorityCoreQuota": 20,
+          "poolAllocationMode": "UserSubscription",
+          "poolQuota": 20,
+          "provisioningState": "Succeeded",
+          "publicNetworkAccess": "Disabled"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.Batch/locations/japaneast/accountOperationResults/sampleacct-30a022cb-a64f-4fd5-9289-8b38b342e9de?api-version=2026-10-01"
+      }
+    }
+  },
+  "operationId": "BatchAccount_Create",
+  "title": "PrivateBatchAccountCreate"
+}
