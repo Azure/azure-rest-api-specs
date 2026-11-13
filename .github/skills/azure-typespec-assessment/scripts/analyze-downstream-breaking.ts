@@ -405,6 +405,30 @@ function resolveIdentity<T extends NormalizedTcgcMethod | NormalizedTcgcNamedTyp
   const exact = targets.filter((target) => target.crossLanguageDefinitionId === baselineIdentity);
   if (exact.length === 1) return { status: "matched", target: exact[0] };
   if (exact.length > 1) {
+    const baselineGenericIdentity =
+      factKind === "model" && "genericInstanceIdentity" in before
+        ? before.genericInstanceIdentity
+        : undefined;
+    if (typeof baselineGenericIdentity === "string") {
+      const concrete = exact.filter(
+        (target) =>
+          "genericInstanceIdentity" in target &&
+          target.genericInstanceIdentity === baselineGenericIdentity,
+      );
+      if (concrete.length === 1) return { status: "matched", target: concrete[0] };
+      if (concrete.length === 0) return { status: "removed" };
+      addIdentityBlocker(
+        blockers,
+        facts,
+        source,
+        projectId,
+        factKind,
+        before,
+        concrete,
+        "multiple target symbols have the same generic template arguments.",
+      );
+      return { status: "blocked" };
+    }
     addIdentityBlocker(
       blockers,
       facts,
