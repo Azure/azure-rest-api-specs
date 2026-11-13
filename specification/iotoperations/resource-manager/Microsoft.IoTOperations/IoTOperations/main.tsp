@@ -24,6 +24,7 @@ import "./models/akri/aioConnectorConfiguration.tsp";
 import "./models/akri/aioApplicationConfiguration.tsp";
 import "./models/ai/mcpServerConnection.tsp";
 import "./models/ai/mcpAuthorizationPolicy.tsp";
+import "./models/ai/mcpFrontend.tsp";
 import "./client.tsp";
 
 using TypeSpec.Http;
@@ -221,6 +222,20 @@ interface McpAuthorizationPolicy {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<McpAuthorizationPolicyResource>;
   delete is ArmResourceDeleteWithoutOkAsync<McpAuthorizationPolicyResource>;
   listByInstanceResource is ArmResourceListByParent<McpAuthorizationPolicyResource>;
+}
+
+/** Operations for the instance's MCP frontend configuration. */
+@armResourceOperations
+@added(Versions.`2026-11-01-preview`)
+interface McpFrontend {
+  /** Gets the frontend configuration and its runtime health. */
+  get is ArmResourceRead<McpFrontendResource>;
+  /** Creates or replaces the frontend configuration. */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<McpFrontendResource>;
+  /** Deletes the frontend configuration after the capability is disabled. */
+  delete is ArmResourceDeleteWithoutOkAsync<McpFrontendResource>;
+  /** Lists the frontend configuration belonging to the instance. */
+  listByInstanceResource is ArmResourceListByParent<McpFrontendResource>;
 }
 
 // /instance/akriApplicationProfiles resource operations
