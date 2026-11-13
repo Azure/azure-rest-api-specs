@@ -19,30 +19,43 @@ parameters:
 
 variables:
   - template: /eng/pipelines/templates/variables/image.yml
-  - group: AzSDK_Eval_Variable_group
-  - name: TypeSpecAuthorEvalExtraArgs
-    value: "--tag mode=no-skill --skill-dir /tmp/no-skills"
+  - name: TypeSpecAuthorEvalMode
+    value: no-skill
   - name: AZSDK_EVAL_MCP_KIND
     value: ${{ parameters.McpKind }}
-  - name: TypeSpecAuthorEvalRuns
-    value: ${{ parameters.Runs }}
 
 extends:
   template: /eng/common/pipelines/templates/stages/archetype-eval.yml
   parameters:
     vallyRoot: .github/skills/azure-typespec-author/evaluate
     evalGlobs:
-      - "evals/*.eval.yaml"
+      - "evals/001*.eval.yaml"
+      - "evals/002*.eval.yaml"
+      - "evals/003*.eval.yaml"
+      - "evals/004*.eval.yaml"
+      - "evals/005*.eval.yaml"
+      - "evals/006*.eval.yaml"
+      - "evals/007001.eval.yaml"
+      - "evals/007002.eval.yaml"
+      - "evals/007003.eval.yaml"
+      - "evals/007004.eval.yaml"
+      - "evals/007005.eval.yaml"
+      - "evals/007006.eval.yaml"
+      - "evals/007007.eval.yaml"
+      - "evals/007008.eval.yaml"
     mcpSetupTemplate: /eng/pipelines/templates/steps/eval-mcp-setup.yml
     TestType: ${{ parameters.McpKind }}
-    evalInvokeTemplate: /.github/skills/azure-typespec-author/evaluate/pipeline/typespec-author-noskill-eval-invoke.yml
+    vallyArguments:
+      - --tag
+      - mode=no-skill
+      - --runs
+      - ${{ format('{0}', parameters.Runs) }}
     UseAzSdkAuthentication: ${{ eq(parameters.McpKind, 'live') }}
+    azureSubscription: azuresdkqabot-dev
     preEvalTemplate: /.github/skills/azure-typespec-author/evaluate/pipeline/typespec-author-preeval.yml
     failOnFailedTests: false
-    # Keep timeout scaling aligned with the with-skill benchmark.
+    # Keep each shard below the installation token's one-hour lifetime.
     ${{ if eq(parameters.Runs, 1) }}:
       shardTimeoutInMinutes: 50
-    ${{ elseif eq(parameters.Runs, 2) }}:
-      shardTimeoutInMinutes: 80
     ${{ else }}:
-      shardTimeoutInMinutes: 120
+      shardTimeoutInMinutes: 55
