@@ -4,6 +4,7 @@ import { isDeepStrictEqual } from "node:util";
 import * as commonmark from "commonmark";
 import { parse } from "yaml";
 import {
+  clientCustomization,
   dataPlane,
   example,
   readme,
@@ -128,9 +129,7 @@ export async function evaluateImpact(
     clientCustomizationOnly:
       changedFiles.length > 0 &&
       changedFiles.every(
-        (file) =>
-          (file.toLowerCase().endsWith("/client.tsp") || tspconfig(file)) &&
-          getPlane(file, context) === "resource-manager",
+        (file) => clientCustomization(file) && getPlane(file, context) === "resource-manager",
       ),
   };
 }

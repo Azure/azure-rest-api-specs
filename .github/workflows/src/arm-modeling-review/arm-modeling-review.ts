@@ -1,5 +1,10 @@
 import { simpleGit } from "simple-git";
-import { getChangedFiles, resourceManager, swagger } from "../../../shared/src/changed-files.ts";
+import {
+  clientCustomization,
+  getChangedFiles,
+  resourceManager,
+  swagger,
+} from "../../../shared/src/changed-files.ts";
 import { CoreLogger } from "../core-logger.ts";
 import type { Core } from "../github.ts";
 import { LabelAction } from "../label.ts";
@@ -140,7 +145,10 @@ export default async function armModelingReview({
   core.info("Detecting New Resource Providers");
 
   const changedFiles = await getChangedFiles(options);
-  const rmFiles = changedFiles.filter(resourceManager);
+  // SDK client customizations cannot introduce resource providers or types.
+  const rmFiles = changedFiles.filter(
+    (file) => resourceManager(file) && !clientCustomization(file),
+  );
 
   const changedResourceProviders = extractResourceProviders(rmFiles);
 

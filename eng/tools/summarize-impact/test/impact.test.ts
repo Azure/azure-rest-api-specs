@@ -99,18 +99,14 @@ describe("change impact", () => {
   });
 
   it.each([
-    [
-      [
-        "resource-manager/Contoso.WidgetManager/client.tsp",
-        "resource-manager/Contoso.WidgetManager/tspconfig.yaml",
-      ],
-      true,
-    ],
-    [["Contoso.WidgetManager/tspconfig.yaml"], false],
-    [["resource-manager/Contoso.WidgetManager/client.tsp", "resource-manager/readme.md"], false],
+    [["rm/client.tsp", "rm/tspconfig.yaml"], true],
+    [["specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml"], false],
+    [["rm/client.tsp", "specification/contosowidgetmanager/resource-manager/readme.md"], false],
+    [["rm/client.tsp", "eng/scripts/example.ts"], false],
   ])("flags management client customization-only changes: %j", async (files, expected) => {
+    const rm = "specification/contosowidgetmanager/resource-manager/Contoso.WidgetManager";
     const impact = await evaluateImpact(
-      context({ modifications: files.map((file) => `specification/contosowidgetmanager/${file}`) }),
+      context({ modifications: files.map((file) => file.replace(/^rm\//, `${rm}/`)) }),
       [],
     );
     expect(impact.clientCustomizationOnly).toBe(expected);

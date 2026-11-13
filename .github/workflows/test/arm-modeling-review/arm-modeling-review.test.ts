@@ -47,6 +47,18 @@ describe("armModelingReview", () => {
     expect(core.setFailed).not.toHaveBeenCalled();
   });
 
+  it("ignores client customization files in a new RP folder", async () => {
+    process.env.GITHUB_WORKSPACE = "/fake/repo";
+    vi.spyOn(changedFiles, "getChangedFiles").mockResolvedValue([
+      "specification/newservice/resource-manager/Microsoft.NewService/tspconfig.yaml",
+    ]);
+
+    const result = await armModelingReview({ core });
+
+    expect(result.status).toBe("no-new-rp");
+    expect(checkLease).not.toHaveBeenCalled();
+  });
+
   it("returns new-rp-all-leases-valid when new RP has valid lease", async () => {
     process.env.GITHUB_WORKSPACE = "/fake/repo";
     const rmFile =

@@ -83,7 +83,6 @@ export async function main() {
     // Analyze moves as deletion/addition so both the old and new service are represented.
     gitOptions: ["--no-renames"],
     logger: defaultLogger,
-    paths: ["specification"],
   });
 
   // Get the list of RPaaS folders from the target branch's arm-leases directory (read from disk)
