@@ -1,0 +1,42 @@
+{
+  "title": "An unverifiable subscription takes precedence over a missing role",
+  "operationId": "Locations_ValidateObservabilityAgentIdentityAccessAtResourceGroup",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "example-rg",
+    "location": "eastus",
+    "body": {
+      "userAssignedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000009/resourceGroups/identity-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/example-identity",
+      "monitoringAccountId": "/subscriptions/00000000-0000-0000-0000-000000000002/resourceGroups/monitor-rg/providers/Microsoft.Monitor/accounts/example-account",
+      "monitoredResourceIds": []
+    }
+  },
+  "responses": {
+    "default": {
+      "body": {
+        "code": "InvalidIdentityPreflightRequest",
+        "message": "The request body must be a valid identity preflight object."
+      }
+    },
+    "200": {
+      "body": {
+        "status": "UnableToVerify",
+        "userAssignedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000009/resourceGroups/identity-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/example-identity",
+        "recommendedRole": "Monitoring Contributor",
+        "recommendedRoleDefinitionId": "749f88d5-cbae-40b8-bcfc-e573ddc772fa",
+        "subscriptions": [
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000001",
+            "status": "RecommendedRoleMissing"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000002",
+            "status": "UnableToVerify",
+            "reasonCode": "RoleAssignmentsReadDenied"
+          }
+        ]
+      }
+    }
+  }
+}

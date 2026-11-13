@@ -1,0 +1,36 @@
+{
+  "title": "Check the identity before creating a resource group",
+  "operationId": "Locations_ValidateObservabilityAgentIdentityAccessAtSubscription",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "location": "eastus",
+    "body": {
+      "userAssignedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000009/resourceGroups/identity-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/example-identity"
+    }
+  },
+  "responses": {
+    "default": {
+      "body": {
+        "error": {
+          "code": "AuthorizationFailed",
+          "message": "The caller is not authorized to invoke this action at the subscription scope."
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "status": "RecommendedRolePresent",
+        "userAssignedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000009/resourceGroups/identity-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/example-identity",
+        "recommendedRole": "Monitoring Contributor",
+        "recommendedRoleDefinitionId": "749f88d5-cbae-40b8-bcfc-e573ddc772fa",
+        "subscriptions": [
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000001",
+            "status": "RecommendedRolePresent"
+          }
+        ]
+      }
+    }
+  }
+}
