@@ -127,6 +127,69 @@ union PrivateLinkDelegation {
 }
 
 /**
+ * The status of customer-managed key encryption for a configuration store.
+ */
+@added(Versions.v2026_09_01_preview)
+union EncryptionStatus {
+  string,
+
+  /**
+   * The customer-managed key is accessible and encryption is functioning as expected.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * The managed identity configured to access the customer-managed key could not be found.
+   */
+  IdentityNotFound: "IdentityNotFound",
+
+  /**
+   * The customer-managed key is in a state that does not permit encryption operations.
+   */
+  InvalidKeyState: "InvalidKeyState",
+
+  /**
+   * The length of the customer-managed key is not supported for encryption.
+   */
+  InvalidKeyLength: "InvalidKeyLength",
+
+  /**
+   * The customer-managed key is disabled in the key vault.
+   */
+  KeyDisabled: "KeyDisabled",
+
+  /**
+   * The customer-managed key has passed its expiration date.
+   */
+  KeyExpired: "KeyExpired",
+
+  /**
+   * The customer-managed key could not be found at the configured key identifier.
+   */
+  KeyNotFound: "KeyNotFound",
+
+  /**
+   * The algorithm of the customer-managed key is not supported for encryption.
+   */
+  UnsupportedKeyAlgorithm: "UnsupportedKeyAlgorithm",
+
+  /**
+   * The configured identity is not authorized to perform encryption operations with the customer-managed key.
+   */
+  Unauthorized: "Unauthorized",
+
+  /**
+   * The customer-managed key is not yet valid because its activation date is in the future.
+   */
+  KeyNotValidYet: "KeyNotValidYet",
+
+  /**
+   * Access to the customer-managed key is blocked by a network security perimeter configuration.
+   */
+  ForbiddenByNetworkSecurityPerimeter: "ForbiddenByNetworkSecurityPerimeter",
+}
+
+/**
  * The type of identity that created the resource.
  */
 union CreatedByType {
@@ -297,9 +360,15 @@ model ConfigurationStoreProperties {
   softDeleteRetentionInDays?: int32 = 7;
 
   /**
-   * The duration in seconds to retain new key value revisions. Defaults to 604800 (7 days) for Free SKU stores and 2592000 (30 days) for Standard SKU stores and Premium SKU stores.
+   * The duration in seconds to retain new key value revisions. Defaults to 604800 (7 days) for Free and Dev SKU stores and 2592000 (30 days) for Standard and Premium SKU stores.
    */
   defaultKeyValueRevisionRetentionPeriodInSeconds?: int64;
+
+  /**
+   * The duration in seconds to retain new feature flag revisions. Defaults to 604800 (7 days) for Free and Dev SKU stores and 2592000 (30 days) for Standard and Premium SKU stores.
+   */
+  @added(Versions.v2026_09_01_preview)
+  defaultFeatureFlagRevisionRetentionPeriodInSeconds?: int64;
 
   /**
    * Property specifying whether protection against purge is enabled for this configuration store.
@@ -326,6 +395,7 @@ model ConfigurationStoreProperties {
    * Managed On Behalf Of Configuration.
    */
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2026_09_01_preview)
   managedOnBehalfOfConfiguration?: CommonTypes.ManagedOnBehalfOfConfiguration;
 
   /**
@@ -343,6 +413,13 @@ model EncryptionProperties {
    * Key vault properties.
    */
   keyVaultProperties?: KeyVaultProperties;
+
+  /**
+   * The status of customer-managed key encryption for the configuration store.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_09_01_preview)
+  status?: EncryptionStatus;
 }
 
 /**
@@ -545,9 +622,15 @@ model ConfigurationStorePropertiesUpdateParameters {
   dataPlaneProxy?: DataPlaneProxyProperties;
 
   /**
-   * The duration in seconds to retain new key value revisions. Defaults to 604800 (7 days) for Free SKU stores and 2592000 (30 days) for Standard SKU stores and Premium SKU stores.
+   * The duration in seconds to retain new key value revisions. Defaults to 604800 (7 days) for Free and Dev SKU stores and 2592000 (30 days) for Standard and Premium SKU stores.
    */
   defaultKeyValueRevisionRetentionPeriodInSeconds?: int64;
+
+  /**
+   * The duration in seconds to retain new feature flag revisions. Defaults to 604800 (7 days) for Free and Dev SKU stores and 2592000 (30 days) for Standard and Premium SKU stores.
+   */
+  @added(Versions.v2026_09_01_preview)
+  defaultFeatureFlagRevisionRetentionPeriodInSeconds?: int64;
 
   /**
    * Property specifying the configuration of telemetry to update for this configuration store
@@ -900,6 +983,12 @@ model KeyValueProperties {
   contentType?: string;
 
   /**
+   * The description of the key-value.
+   */
+  @added(Versions.v2026_09_01_preview)
+  description?: string;
+
+  /**
    * An ETag indicating the state of a key-value within a configuration store.
    */
   @visibility(Lifecycle.Read)
@@ -1056,6 +1145,12 @@ model SnapshotProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
+
+  /**
+   * The description of the snapshot.
+   */
+  @added(Versions.v2026_09_01_preview)
+  description?: string;
 
   /**
    * A value representing the current state of the snapshot.
