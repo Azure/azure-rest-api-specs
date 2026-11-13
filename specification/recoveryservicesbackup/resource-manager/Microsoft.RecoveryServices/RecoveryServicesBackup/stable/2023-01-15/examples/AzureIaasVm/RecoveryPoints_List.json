@@ -1,29 +1,29 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "rshhtestmdvmrg",
-    "vaultName": "rshvault",
-    "fabricName": "Azure",
+    "api-version": "2023-01-15",
     "containerName": "IaasVMContainer;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall",
+    "fabricName": "Azure",
     "protectedItemName": "VM;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall",
-    "api-version": "2023-01-15"
+    "resourceGroupName": "rshhtestmdvmrg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "rshvault"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": null,
         "value": [
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rshhtestmdvmrg/providers/Microsoft.RecoveryServices/vaults/rshvault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/protectedItems/VM;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/recoveryPoints/22244821112382",
             "name": "22244821112382",
             "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rshhtestmdvmrg/providers/Microsoft.RecoveryServices/vaults/rshvault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/protectedItems/VM;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/recoveryPoints/22244821112382",
             "properties": {
-              "objectType": "IaasVMRecoveryPoint",
-              "recoveryPointType": "CrashConsistent",
-              "recoveryPointTime": "2017-12-21T22:48:25.4353958Z",
-              "recoveryPointAdditionalInfo": "",
-              "sourceVMStorageType": "NormalStorage",
-              "isSourceVMEncrypted": false,
               "isInstantIlrSessionActive": false,
+              "isManagedVirtualMachine": true,
+              "isSourceVMEncrypted": false,
+              "objectType": "IaasVMRecoveryPoint",
+              "originalStorageAccountOption": false,
+              "recoveryPointAdditionalInfo": "",
               "recoveryPointTierDetails": [
                 {
                   "type": "InstantRP",
@@ -34,23 +34,23 @@
                   "status": "Valid"
                 }
               ],
-              "isManagedVirtualMachine": true,
-              "virtualMachineSize": "Standard_D1",
-              "originalStorageAccountOption": false
+              "recoveryPointTime": "2017-12-21T22:48:25.4353958Z",
+              "recoveryPointType": "CrashConsistent",
+              "sourceVMStorageType": "NormalStorage",
+              "virtualMachineSize": "Standard_D1"
             }
           },
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rshhtestmdvmrg/providers/Microsoft.RecoveryServices/vaults/rshvault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/protectedItems/VM;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/recoveryPoints/24977149827250",
             "name": "24977149827250",
             "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rshhtestmdvmrg/providers/Microsoft.RecoveryServices/vaults/rshvault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/protectedItems/VM;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/recoveryPoints/24977149827250",
             "properties": {
-              "objectType": "IaasVMRecoveryPoint",
-              "recoveryPointType": "CrashConsistent",
-              "recoveryPointTime": "2017-12-20T22:49:44.3317945Z",
-              "recoveryPointAdditionalInfo": "",
-              "sourceVMStorageType": "NormalStorage",
-              "isSourceVMEncrypted": false,
               "isInstantIlrSessionActive": false,
+              "isManagedVirtualMachine": true,
+              "isSourceVMEncrypted": false,
+              "objectType": "IaasVMRecoveryPoint",
+              "originalStorageAccountOption": false,
+              "recoveryPointAdditionalInfo": "",
               "recoveryPointTierDetails": [
                 {
                   "type": "InstantRP",
@@ -61,17 +61,19 @@
                   "status": "Valid"
                 }
               ],
-              "isManagedVirtualMachine": true,
+              "recoveryPointTime": "2017-12-20T22:49:44.3317945Z",
+              "recoveryPointType": "CrashConsistent",
+              "sourceVMStorageType": "NormalStorage",
               "virtualMachineSize": "Standard_D1",
-              "originalStorageAccountOption": false,
               "zones": [
                 "1"
               ]
             }
           }
-        ],
-        "nextLink": null
+        ]
       }
     }
-  }
+  },
+  "operationId": "RecoveryPointsCrr_List",
+  "title": "Get Protected Azure Vm Recovery Points"
 }
