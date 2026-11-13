@@ -1,0 +1,34 @@
+{
+  "title": "ChangeActivityEvents_Get_PolicyEvaluation",
+  "operationId": "ChangeActivityEvents_Get",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "resourceUri": "subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeRecords/webApplicationChangeRecord",
+    "changeActivityEventName": "3f7a9c2e-1b4d-4e8f-9a2c-5d6e7f8a9b0c"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeRecords/webApplicationChangeRecord/providers/Microsoft.ChangeSafety/changeActivityEvents/3f7a9c2e-1b4d-4e8f-9a2c-5d6e7f8a9b0c",
+        "name": "3f7a9c2e-1b4d-4e8f-9a2c-5d6e7f8a9b0c",
+        "type": "Microsoft.ChangeSafety/changeActivityEvents",
+        "properties": {
+          "activityId": "3f7a9c2e-1b4d-4e8f-9a2c-5d6e7f8a9b0c",
+          "kind": "PolicyEvaluation",
+          "category": "Information",
+          "activityType": "PolicyGovernance",
+          "targetResourceId": "/subscriptions/15d4b41e-8f09-4719-bc3c-7bff2f1ee744/resourceGroups/rg-changesafety/providers/Microsoft.Network/trafficManagerProfiles/tm-prod-frontend",
+          "timestamp": "2026-01-12T21:45:32Z",
+          "initiatedByType": "Application",
+          "initiatedBy": "ada13db0-78d5-4d4d-8796-642151882fd0",
+          "eventVersion": "2026-01-01",
+          "eventData": {
+            "policyName": "RequireChangeRecord",
+            "evaluationResult": "Compliant",
+            "evaluationDurationMs": 145
+          }
+        }
+      }
+    }
+  }
+}
