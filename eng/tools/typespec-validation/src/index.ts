@@ -3,6 +3,7 @@ import { ConsoleLogger, type ILogger } from "@azure-tools/specs-shared/logger";
 import { type Suppression } from "@azure-tools/suppressions";
 import debug from "debug";
 import { stat } from "node:fs/promises";
+import { availableParallelism } from "node:os";
 import { resolve } from "pathe";
 import {
   exceptionDiagnostic,
@@ -217,6 +218,15 @@ export async function main({ fix: defaultFix }: RuleExecutionOptions = {}) {
         "Require a clean checkout, including untracked files, once before validation. " +
         "Does not restore or delete files; ignored files are retained.",
     },
+    concurrency: {
+      type: "string",
+      valueLabel: "<count>",
+      group: "Options for --all or --changed",
+      description:
+        "Maximum concurrent project processes (positive integer). " +
+        "Check mode defaults to twice the available CPUs in GitHub Actions, or 1 locally. " +
+        "Fix mode requires 1.",
+    },
   } satisfies Record<string, CliOption>;
   const parsedArgs = parseArgsWithHelp({ args, options, allowPositionals: true, help });
   if (!parsedArgs) return;
@@ -240,6 +250,25 @@ export async function main({ fix: defaultFix }: RuleExecutionOptions = {}) {
   }
   if ((values["git-clean"] || values["dry-run"]) && !values.all && !values.changed) {
     console.error("--git-clean and --dry-run require --all or --changed");
+    process.exitCode = 1;
+    return;
+  }
+  if (values.concurrency !== undefined && !values.all && !values.changed) {
+    console.error("--concurrency requires --all or --changed");
+    process.exitCode = 1;
+    return;
+  }
+  const concurrencyOption =
+    values.concurrency ??
+    String(!fix && process.env.GITHUB_ACTIONS === "true" ? availableParallelism() * 2 : 1);
+  const concurrency = Number(concurrencyOption);
+  if (!/^[1-9]\d*$/.test(concurrencyOption) || !Number.isSafeInteger(concurrency)) {
+    console.error("--concurrency must be a positive safe integer");
+    process.exitCode = 1;
+    return;
+  }
+  if (fix && concurrency > 1) {
+    console.error("--fix requires --concurrency=1 because formatter scopes may overlap");
     process.exitCode = 1;
     return;
   }
@@ -272,7 +301,7 @@ export async function main({ fix: defaultFix }: RuleExecutionOptions = {}) {
   if (values.changed) {
     if (parsedArgs.positionals.length > 0) {
       console.error(
-        "Usage: tsv --changed [--base=<commit>] [--head=<commit>] [--ignore-core-files] [--git-clean] [--dry-run]",
+        "Usage: tsv --changed [--base=<commit>] [--head=<commit>] [--ignore-core-files] [--concurrency=<count>] [--git-clean] [--dry-run]",
       );
       process.exitCode = 1;
       return;
@@ -285,6 +314,7 @@ export async function main({ fix: defaultFix }: RuleExecutionOptions = {}) {
       dryRun: values["dry-run"],
       verbose: values.verbose,
       fix,
+      concurrency,
     });
     if (!success) process.exitCode = 1;
     return;
@@ -293,7 +323,7 @@ export async function main({ fix: defaultFix }: RuleExecutionOptions = {}) {
   if (values.all) {
     if (parsedArgs.positionals.length > 1) {
       console.error(
-        "Usage: tsv --all [folder] [--shard=<index>/<count>] [--github-summary] [--git-clean] [--dry-run]",
+        "Usage: tsv --all [folder] [--shard=<index>/<count>] [--github-summary] [--concurrency=<count>] [--git-clean] [--dry-run]",
       );
       process.exitCode = 1;
       return;
@@ -305,6 +335,7 @@ export async function main({ fix: defaultFix }: RuleExecutionOptions = {}) {
       verbose: values.verbose,
       summaryFile,
       fix,
+      concurrency,
     });
     if (!success) process.exitCode = 1;
     return;

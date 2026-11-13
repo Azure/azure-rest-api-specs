@@ -73,6 +73,7 @@ it("shows the same help for --help and -h without a project or Git repository", 
     "Options for --all:",
     "Options for --all or --changed:",
     "one-based indices",
+    "--concurrency <count>",
     "without modifying the checkout",
     "once before validation",
     "Does not restore or delete files",
@@ -306,7 +307,7 @@ it("emits a failure annotation inside its project group and a final reproduction
       "::error::TypeSpec Validation failed for project custom/a run the following command locally to validate.%0A" +
         " > pnpm install%0A > pnpm tsv custom/a%0A" +
         "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation\n" +
-        "::endgroup::\n::group::pass custom/b",
+        "::endgroup::",
     ) as unknown,
     stderr: expect.stringContaining(d`
       TypeSpec Validation failed for some folder to fix run and address any errors:
@@ -337,7 +338,10 @@ it("wraps child output in repository-relative GitHub Actions groups", async () =
     specification/b
   `);
   const groups = [...stdout.matchAll(/::group::([^\n]+)\n([\s\S]*?)::endgroup::/g)];
-  expect(groups.map((group) => group[1])).toEqual(["pass specification/a", "pass specification/b"]);
+  expect(groups.map((group) => group[1]).sort()).toEqual([
+    "pass specification/a",
+    "pass specification/b",
+  ]);
   for (const group of groups) {
     expect(group[2]).not.toContain("Running TypeSpecValidation on folder:");
     expect(group[2]).toContain("Suppressed: fixture");
@@ -373,6 +377,26 @@ it("requires a batch mode for --git-clean", async () => {
     stderr: expect.stringContaining(
       "--git-clean and --dry-run require --all or --changed",
     ) as unknown,
+  });
+});
+
+it("requires a batch mode and a positive safe integer for --concurrency", async () => {
+  await expect(run("--concurrency=2", "project")).rejects.toMatchObject({
+    code: 1,
+    stderr: expect.stringContaining("--concurrency requires --all or --changed") as unknown,
+  });
+  for (const value of ["0", "1.5", "9007199254740992"]) {
+    await expect(run("--all", `--concurrency=${value}`)).rejects.toMatchObject({
+      code: 1,
+      stderr: expect.stringContaining("--concurrency must be a positive safe integer") as unknown,
+    });
+  }
+});
+
+it("rejects parallel fixing before validating projects", async () => {
+  await expect(run("--all", "--fix", "--concurrency=2")).rejects.toMatchObject({
+    code: 1,
+    stderr: expect.stringContaining("--fix requires --concurrency=1") as unknown,
   });
 });
 
@@ -447,7 +471,7 @@ it("rejects extra positional arguments to --all", async () => {
   await expect(run("--all", "specification", "extra")).rejects.toMatchObject({
     code: 1,
     stderr: expect.stringContaining(
-      "Usage: tsv --all [folder] [--shard=<index>/<count>] [--github-summary] [--git-clean] [--dry-run]",
+      "Usage: tsv --all [folder] [--shard=<index>/<count>] [--github-summary] [--concurrency=<count>] [--git-clean] [--dry-run]",
     ) as unknown,
   });
 });
