@@ -6358,14 +6358,39 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 
-@@access(Search.KnowledgeBaseRetrievalStreamEvent, Access.public);
-@@access(Search.KnowledgeBaseRetrievalStartedStreamEvent, Access.public);
-@@access(Search.KnowledgeBaseActivityStartedStreamEvent, Access.public);
-@@access(Search.KnowledgeBaseActivityCompletedStreamEvent, Access.public);
-@@access(Search.KnowledgeBaseAnswerCompletedStreamEvent, Access.public);
-@@access(Search.KnowledgeBaseReferencesCompletedStreamEvent, Access.public);
-@@access(Search.KnowledgeBaseErrorStreamEvent, Access.public);
-@@access(Search.KnowledgeBaseResponseCompletedStreamEvent, Access.public);
+// Java will construct its own wrapper schemas.
+@@access(Search.KnowledgeBaseRetrievalStreamEvent, Access.public, "!java");
+@@access(
+  Search.KnowledgeBaseRetrievalStartedStreamEvent,
+  Access.public,
+  "!java"
+);
+@@access(
+  Search.KnowledgeBaseActivityStartedStreamEvent,
+  Access.public,
+  "!java"
+);
+@@access(
+  Search.KnowledgeBaseActivityCompletedStreamEvent,
+  Access.public,
+  "!java"
+);
+@@access(
+  Search.KnowledgeBaseAnswerCompletedStreamEvent,
+  Access.public,
+  "!java"
+);
+@@access(
+  Search.KnowledgeBaseReferencesCompletedStreamEvent,
+  Access.public,
+  "!java"
+);
+@@access(Search.KnowledgeBaseErrorStreamEvent, Access.public, "!java");
+@@access(
+  Search.KnowledgeBaseResponseCompletedStreamEvent,
+  Access.public,
+  "!java"
+);
 
 // Preserve the body-first protocol signatures released in the JavaScript 13.0.0 SDK.
 namespace JavaScriptCompatibility {
