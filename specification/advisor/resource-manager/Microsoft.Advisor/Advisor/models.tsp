@@ -500,9 +500,37 @@ model DigestConfig {
   frequency?: int32;
 
   /**
+   * Frequency that digest will be triggered, in minutes, between 1 and 1440 inclusive.
+   * When provided, takes precedence over frequency. Otherwise frequency is required
+   * and must be between 7 and 30 days inclusive. Absent cadence fields are not
+   * synthesized in responses. Older API versions omit cadence that cannot be
+   * represented in days rather than converting it to a different schedule.
+   */
+  @added(Versions.v2026_11_01_preview)
+  @minValue(1)
+  @maxValue(1440)
+  frequencyInMinutes?: int32;
+
+  /**
    * Categories to send digest for. If categories are not provided, then digest will be sent for all categories.
    */
   categories?: Category[];
+
+  /**
+   * Category and subcategory selections. A nonnull value takes precedence over
+   * categories. An empty array selects no categories. When omitted or null, the
+   * legacy categories apply; omitted or empty legacy categories select all categories.
+   * Each category may appear once. Null entries, invalid categories or subcategories,
+   * and invalid category/subcategory pairs are rejected. Unchanged stored selections
+   * may be preserved even if their recommendation metadata has since retired.
+   * The digests collection retains full-list replacement semantics. Older API
+   * versions omit selections they cannot represent faithfully and reject writes
+   * that would erase or broaden advanced settings; use this API to change or remove
+   * such settings. Alpha and rc service aliases, where approved, share this contract.
+   */
+  @added(Versions.v2026_11_01_preview)
+  @identifiers(#["category"])
+  categoriesFilter?: DigestCategoryFilter[];
 
   /**
    * Language for digest content body. Value must be ISO 639-1 code for one of Azure portal supported languages. Otherwise, it will be converted into one. Default value is English (en).
@@ -513,6 +541,25 @@ model DigestConfig {
    * State of digest configuration.
    */
   state?: DigestConfigState;
+}
+
+/**
+ * Selects a recommendation category and, optionally, a subset of its subcategories.
+ */
+@added(Versions.v2026_11_01_preview)
+model DigestCategoryFilter {
+  /**
+   * Recommendation category. Duplicate categories within categoriesFilter are rejected.
+   */
+  category: Category;
+
+  /**
+   * Recommendation subcategories belonging to the selected category, as published
+   * in recommendation metadata. Omitted, null, or empty selects every subcategory
+   * within that category. Invalid or null entries are rejected; repeated
+   * subcategory values are treated as a set.
+   */
+  subcategories?: string[];
 }
 
 /**
@@ -579,6 +626,7 @@ model RecommendationProperties {
    */
   @added(Versions.v2026_08_01_preview)
   @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_11_01_preview)
   @visibility(Lifecycle.Read)
   criticalityScore?: string;
 
@@ -587,6 +635,7 @@ model RecommendationProperties {
    */
   @added(Versions.v2026_08_01_preview)
   @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_11_01_preview)
   @visibility(Lifecycle.Read)
   criticality?: string;
 
@@ -595,6 +644,7 @@ model RecommendationProperties {
    */
   @added(Versions.v2026_08_01_preview)
   @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_11_01_preview)
   @visibility(Lifecycle.Read)
   scoreChangedAt?: string;
 
@@ -603,6 +653,7 @@ model RecommendationProperties {
    */
   @added(Versions.v2026_08_01_preview)
   @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_11_01_preview)
   @visibility(Lifecycle.Read)
   serviceGroupId?: string;
 
@@ -611,6 +662,7 @@ model RecommendationProperties {
    */
   @added(Versions.v2026_08_01_preview)
   @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_11_01_preview)
   @visibility(Lifecycle.Read)
   savings?: ResourceRecommendationSavings;
 
