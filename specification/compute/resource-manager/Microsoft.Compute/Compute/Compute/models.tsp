@@ -3607,6 +3607,7 @@ model ApplicationProfile {
 /**
  * Specifies the required information to reference a compute gallery application version
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The existing VM application response does not include provisioningState."
 model VMGalleryApplication {
   /**
    * Optional, Specifies a passthrough value for more generic context.
@@ -3619,9 +3620,30 @@ model VMGalleryApplication {
   order?: int32;
 
   /**
+   * Specifies whether the gallery application is managed outside the VM application extension.
+   */
+  @added(Versions.v2026_09_01)
+  manuallyManaged?: boolean;
+
+  /**
    * Specifies the GalleryApplicationVersion resource id on the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{application}/versions/{version}
    */
   packageReferenceId: string;
+
+  /**
+   *  This is the id of "Directly" SharedGalleries. Such references represent the "fake" proxy-only resources
+   *  created in "sharedTo" subscriptions. These are shared directly to a subscription/Microsoft Entra ID tenant, instead of using RBAC-based sharing.
+   *  The resource id looks like:
+   *  /sharedGalleries/{SharedGalleryUniqueName}/applications/{applicationName}/versions/1.0.0
+   */
+  @added(Versions.v2026_09_01)
+  sharedGalleryApplicationId?: string;
+
+  /**
+   * Specifies the community gallery application version resource id on the form of /communityGalleries/{PublicGalleryName}/applications/{applicationName}/versions/{version}
+   */
+  @added(Versions.v2026_09_01)
+  communityGalleryApplicationId?: string;
 
   /**
    * Optional, Specifies the uri to an azure blob that will replace the default configuration for the package if provided
@@ -3634,9 +3656,129 @@ model VMGalleryApplication {
   treatFailureAsDeploymentFailure?: boolean;
 
   /**
+   * Contains the deployment status of this application
+   * Populated only if requested using GET {VMApplicationName}?$expand=instanceView
+   * It is ignored if set in the request body of the PUT api.
+   */
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Read)
+  instanceView?: VMGalleryApplicationInstanceView;
+
+  /**
    * If set to true, when a new Gallery Application version is available in PIR/SIG, it will be automatically updated for the VM/VMSS
    */
   enableAutomaticUpgrade?: boolean;
+
+  /**
+   * Zero or more custom actions. These are always processed with PATCH semantics.
+   */
+  @added(Versions.v2026_09_01)
+  @identifiers(#[])
+  customActions?: VMGalleryApplicationCustomAction[];
+}
+
+/**
+ * Specifies the properties of a gallery application resource.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The existing VM application response does not include provisioningState."
+@added(Versions.v2026_09_01)
+model VMGalleryApplicationProperties is OmitProperties<
+  VMGalleryApplication,
+  "tags"
+>;
+
+/**
+ * Specifies a custom action for a gallery application.
+ */
+@added(Versions.v2026_09_01)
+model VMGalleryApplicationCustomAction {
+  /**
+   * Required. The name of the action to run.
+   */
+  name: string;
+
+  /**
+   * Optional. A unique identifier that distinguishes this run of the action from any other.
+   * Note that in practice this should be a guid, but we have no constraints. We really only
+   * care whether it's different than the previous value. The unique identifier of the custom action.
+   */
+  uniqueIdentifier?: string;
+
+  /**
+   * Optional. The order in which the custom action should be executed.
+   */
+  order?: int32;
+
+  /**
+   * Optional. The list of parameters for the custom action.
+   */
+  @identifiers(#[])
+  parameters?: VMGalleryApplicationCustomActionParameter[];
+}
+
+/**
+ * Specifies a custom action parameter for a gallery application.
+ */
+@added(Versions.v2026_09_01)
+model VMGalleryApplicationCustomActionParameter {
+  /**
+   * The name of the custom action parameter.
+   */
+  name: string;
+
+  /**
+   * The value of the custom action parameter.
+   */
+  value: string;
+}
+
+/**
+ * Specifies the instance view of a gallery application.
+ */
+@added(Versions.v2026_09_01)
+model VMGalleryApplicationInstanceView {
+  /**
+   * The application status status information.
+   */
+  @identifiers(#[])
+  statuses?: InstanceViewStatus[];
+
+  /**
+   * The name of the application.
+   */
+  name?: string;
+
+  /**
+   * The version of the application.
+   */
+  version?: string;
+
+  /**
+   * The current status of the application
+   */
+  result?: string;
+
+  /**
+   * The list of actions performed on the application instance.
+   */
+  @identifiers(#[])
+  actionsPerformed: VMGalleryApplicationInstanceViewAction[];
+}
+
+/**
+ * Specifies the action being performed on the application instance and its result.
+ */
+@added(Versions.v2026_09_01)
+model VMGalleryApplicationInstanceViewAction {
+  /**
+   * The action being performed.
+   */
+  operation?: string;
+
+  /**
+   * The result of the action performed.
+   */
+  result?: string;
 }
 
 /**
@@ -6945,6 +7087,12 @@ model VirtualMachineProperties {
    */
   @added(Versions.v2025_11_01)
   resiliencyProfile?: ResiliencyProfile;
+
+  /**
+   * Sets up run command service for supporting immediate run command execution in the future.
+   */
+  @added(Versions.v2026_09_01)
+  installRunCommandAsService?: boolean;
 }
 
 /**
@@ -9885,7 +10033,17 @@ model VirtualMachineRunCommandProperties {
   /**
    * The parameters used by the script.
    */
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "protectedParameters")
   @identifiers(#["name"])
+  protectedParametersLegacy?: RunCommandInputParameter[];
+
+  /**
+   * The parameters used by the script.
+   */
+  @added(Versions.v2026_09_01)
+  @identifiers(#["name"])
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   protectedParameters?: RunCommandInputParameter[];
 
   /**
@@ -9902,7 +10060,23 @@ model VirtualMachineRunCommandProperties {
    * Specifies the user account password on the VM when executing the run command.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Backward compatibility: keeping wire format unchanged for existing API versions"
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "runAsPassword")
+  runAsPasswordLegacy?: string;
+
+  /**
+   * Specifies the user account password on the VM when executing the run command.
+   */
+  @added(Versions.v2026_09_01)
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   runAsPassword?: string;
+
+  /**
+   * Optional. If set to true, the command will be run immediately bypassing typical pipelines to reach the VM directly..
+   */
+  @added(Versions.v2026_09_01)
+  runImmediately?: boolean;
 
   /**
    * The timeout in seconds to execute the run command.
@@ -9946,6 +10120,13 @@ model VirtualMachineRunCommandProperties {
    * Optional. If set to true, any failure in the script will fail the deployment and ProvisioningState will be marked as Failed. If set to false, ProvisioningState would only reflect whether the run command was run or not by the extensions platform, it would not indicate whether script failed in case of script failures. See instance view of run command in case of script failures to see executionMessage, output, error: https://aka.ms/runcommandmanaged#get-execution-status-and-results
    */
   treatFailureAsDeploymentFailure?: boolean;
+
+  /**
+   * Optional. If true, sequence number of the extension will be incremented even if the script and settings have been executed in previous execution part of previous sequence number.
+   * Increasing the sequence number should result in re-running the Run Command again when Linux or Windows Run Command is execution on VM.
+   */
+  @added(Versions.v2026_09_01)
+  forceRerun?: boolean;
 }
 
 /**
@@ -10012,6 +10193,15 @@ model RunCommandInputParameter {
   /**
    * The run command parameter value.
    */
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "value")
+  valueLegacy: string;
+
+  /**
+   * The run command parameter value.
+   */
+  @added(Versions.v2026_09_01)
+  @secret
   value: string;
 }
 
