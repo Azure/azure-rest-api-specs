@@ -1,0 +1,188 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2026-11-01-preview",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ManagedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies": {
+      "get": {
+        "operationId": "ManagedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies_ListByRestorableDroppedManagedDatabase",
+        "tags": [
+          "ManagedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies"
+        ],
+        "description": "Lists short-term retention policies for a database under a dropped managed instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the location containing the dropped managed instances.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "restorableDroppedManagedInstanceId",
+            "in": "path",
+            "description": "The dropped managed instance identifier, in the format 'instanceName,deletionTime',\nwhere deletionTime is a Windows FILETIME value.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "restorableDroppedDatabaseId",
+            "in": "path",
+            "description": "The restorable dropped database identifier, in the format 'databaseName,lastRestorablePoint',\nwhere lastRestorablePoint is a Windows FILETIME value.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ManagedBackupShortTermRetentionPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists short-term retention policies for a database under a dropped managed instance.": {
+            "$ref": "./examples/GetListManagedShortTermRetentionPolicyRestorableDroppedFromDroppedManagedInstance.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies/{policyName}": {
+      "get": {
+        "operationId": "ManagedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies_Get",
+        "tags": [
+          "ManagedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies"
+        ],
+        "description": "Gets the short-term retention policy for a database under a dropped managed instance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the location containing the dropped managed instances.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "restorableDroppedManagedInstanceId",
+            "in": "path",
+            "description": "The dropped managed instance identifier, in the format 'instanceName,deletionTime',\nwhere deletionTime is a Windows FILETIME value.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "restorableDroppedDatabaseId",
+            "in": "path",
+            "description": "The restorable dropped database identifier, in the format 'databaseName,lastRestorablePoint',\nwhere lastRestorablePoint is a Windows FILETIME value.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The policy name. Only default is supported.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "ManagedShortTermRetentionPolicyName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "default"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ManagedBackupShortTermRetentionPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the short-term retention policy for a database under a dropped managed instance.": {
+            "$ref": "./examples/GetManagedShortTermRetentionPolicyRestorableDroppedFromDroppedManagedInstance.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {}
+}

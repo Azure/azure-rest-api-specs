@@ -1,4 +1,4 @@
-﻿# Sql
+# Sql
 
 > see https://aka.ms/autorest
 
@@ -30,6 +30,207 @@ tag: package-2025-01-01
 ### Composite packages
 
 The following packages may be composed from multiple api-versions.
+
+### Tag: package-preview-2026-11-01-preview
+
+These settings apply only when `--tag=package-preview-2026-11-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-11-01-preview'
+input-file:
+  - preview/2026-11-01-preview/backupShortTermRetentionPolicies.json
+  - preview/2026-11-01-preview/blobAuditing.json
+  - preview/2026-11-01-preview/databaseAdvancedThreatProtectionSettings.json
+  - preview/2026-11-01-preview/databaseAdvisors.json
+  - preview/2026-11-01-preview/databaseAutomaticTuning.json
+  - preview/2026-11-01-preview/databaseColumns.json
+  - preview/2026-11-01-preview/databaseEncryptionProtectorRevalidate.json
+  - preview/2026-11-01-preview/databaseEncryptionProtectorRevert.json
+  - preview/2026-11-01-preview/databaseExtensions.json
+  - preview/2026-11-01-preview/databaseOperations.json
+  - preview/2026-11-01-preview/databaseRecommendedActions.json
+  - preview/2026-11-01-preview/databases.json
+  - preview/2026-11-01-preview/databaseSchemas.json
+  - preview/2026-11-01-preview/databaseSecurityAlertPolicies.json
+  - preview/2026-11-01-preview/databaseSqlVulnerabilityAssessmentBaselines.json
+  - preview/2026-11-01-preview/databaseSqlVulnerabilityAssessmentExecuteScan.json
+  - preview/2026-11-01-preview/databaseSqlVulnerabilityAssessmentRuleBaselines.json
+  - preview/2026-11-01-preview/databaseSqlVulnerabilityAssessmentScanResult.json
+  - preview/2026-11-01-preview/databaseSqlVulnerabilityAssessmentScans.json
+  - preview/2026-11-01-preview/databaseSqlVulnerabilityAssessmentsSettings.json
+  - preview/2026-11-01-preview/databaseTables.json
+  - preview/2026-11-01-preview/databaseUsages.json
+  - preview/2026-11-01-preview/databaseVulnerabilityAssessmentRuleBaselines.json
+  - preview/2026-11-01-preview/databaseVulnerabilityAssessments.json
+  - preview/2026-11-01-preview/databaseVulnerabilityAssessmentScans.json
+  - preview/2026-11-01-preview/dataMaskingPolicies.json
+  - preview/2026-11-01-preview/dataMaskingRules.json
+  - preview/2026-11-01-preview/dataWarehouseUserActivities.json
+  - preview/2026-11-01-preview/deletedServers.json
+  - preview/2026-11-01-preview/distributedAvailabilityGroups.json
+  - preview/2026-11-01-preview/distributedAvailabilityGroupsDatabaseOperations.json
+  - preview/2026-11-01-preview/elasticPoolOperations.json
+  - preview/2026-11-01-preview/elasticPools.json
+  - preview/2026-11-01-preview/encryptionProtectors.json
+  - preview/2026-11-01-preview/endpointCertificates.json
+  - preview/2026-11-01-preview/failoverGroups.json
+  - preview/2026-11-01-preview/firewallRules.json
+  - preview/2026-11-01-preview/geoBackupPolicies.json
+  - preview/2026-11-01-preview/instanceFailoverGroups.json
+  - preview/2026-11-01-preview/instancePoolOperations.json
+  - preview/2026-11-01-preview/instancePools.json
+  - preview/2026-11-01-preview/iPv6FirewallRules.json
+  - preview/2026-11-01-preview/jobAgents.json
+  - preview/2026-11-01-preview/jobCredentials.json
+  - preview/2026-11-01-preview/jobExecutions.json
+  - preview/2026-11-01-preview/jobPrivateEndpoints.json
+  - preview/2026-11-01-preview/jobs.json
+  - preview/2026-11-01-preview/jobStepExecutions.json
+  - preview/2026-11-01-preview/jobSteps.json
+  - preview/2026-11-01-preview/jobTargetExecutions.json
+  - preview/2026-11-01-preview/jobTargetGroups.json
+  - preview/2026-11-01-preview/jobVersions.json
+  - preview/2026-11-01-preview/ledgerDigestUploads.json
+  - preview/2026-11-01-preview/locationCapabilities.json
+  - preview/2026-11-01-preview/longTermRetentionBackups.json
+  - preview/2026-11-01-preview/longTermRetentionManagedInstanceBackups.json
+  - preview/2026-11-01-preview/longTermRetentionPolicies.json
+  - preview/2026-11-01-preview/maintenanceWindowOptions.json
+  - preview/2026-11-01-preview/maintenanceWindows.json
+  - preview/2026-11-01-preview/managedBackupShortTermRetentionPolicies.json
+  - preview/2026-11-01-preview/managedDatabaseAdvancedThreatProtectionSettings.json
+  - preview/2026-11-01-preview/managedDatabaseColumns.json
+  - preview/2026-11-01-preview/managedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies.json
+  - preview/2026-11-01-preview/managedDatabaseMoveOperations.json
+  - preview/2026-11-01-preview/managedDatabaseQueries.json
+  - preview/2026-11-01-preview/managedDatabaseRestoreDetails.json
+  - preview/2026-11-01-preview/managedDatabases.json
+  - preview/2026-11-01-preview/managedDatabaseSchemas.json
+  - preview/2026-11-01-preview/managedDatabaseSecurityAlertPolicies.json
+  - preview/2026-11-01-preview/managedDatabaseSecurityEvents.json
+  - preview/2026-11-01-preview/managedDatabaseSensitivityLabels.json
+  - preview/2026-11-01-preview/managedDatabaseTables.json
+  - preview/2026-11-01-preview/managedDatabaseTransparentDataEncryption.json
+  - preview/2026-11-01-preview/managedDatabaseVulnerabilityAssessmentRuleBaselines.json
+  - preview/2026-11-01-preview/managedDatabaseVulnerabilityAssessments.json
+  - preview/2026-11-01-preview/managedDatabaseVulnerabilityAssessmentScans.json
+  - preview/2026-11-01-preview/managedInstanceAdministrators.json
+  - preview/2026-11-01-preview/managedInstanceAdvancedThreatProtectionSettings.json
+  - preview/2026-11-01-preview/managedInstanceAzureAdOnlyAuthentications.json
+  - preview/2026-11-01-preview/managedInstanceDtcs.json
+  - preview/2026-11-01-preview/managedInstanceEncryptionProtectors.json
+  - preview/2026-11-01-preview/managedInstanceKeys.json
+  - preview/2026-11-01-preview/managedInstanceLongTermRetentionPolicies.json
+  - preview/2026-11-01-preview/managedInstanceOperations.json
+  - preview/2026-11-01-preview/managedInstancePrivateEndpointConnections.json
+  - preview/2026-11-01-preview/managedInstancePrivateLinkResources.json
+  - preview/2026-11-01-preview/managedInstances.json
+  - preview/2026-11-01-preview/ManagedInstanceServerProtectionSettings.json
+  - preview/2026-11-01-preview/managedInstanceTdeCertificates.json
+  - preview/2026-11-01-preview/managedInstanceVulnerabilityAssessments.json
+  - preview/2026-11-01-preview/managedLedgerDigestUploads.json
+  - preview/2026-11-01-preview/managedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.json
+  - preview/2026-11-01-preview/managedServerDnsAliases.json
+  - preview/2026-11-01-preview/managedServerSecurityAlertPolicies.json
+  - preview/2026-11-01-preview/networkSecurityPerimeterConfigurations.json
+  - preview/2026-11-01-preview/operations.json
+  - preview/2026-11-01-preview/outboundFirewallRules.json
+  - preview/2026-11-01-preview/privateEndpointConnections.json
+  - preview/2026-11-01-preview/privateLinkResources.json
+  - preview/2026-11-01-preview/recoverableDatabases.json
+  - preview/2026-11-01-preview/ReaderEndpoints.json
+  - preview/2026-11-01-preview/ReaderEndpointsList.json
+  - preview/2026-11-01-preview/recoverableManagedDatabases.json
+  - preview/2026-11-01-preview/replicationLinks.json
+  - preview/2026-11-01-preview/restorableDroppedDatabases.json
+  - preview/2026-11-01-preview/restorableDroppedManagedDatabases.json
+  - preview/2026-11-01-preview/restorableDroppedManagedDatabasesFromDroppedManagedInstance.json
+  - preview/2026-11-01-preview/restorableDroppedManagedInstancesByLocation.json
+  - preview/2026-11-01-preview/restorePoints.json
+  - preview/2026-11-01-preview/sensitivityLabels.json
+  - preview/2026-11-01-preview/serverAdvancedThreatProtectionSettings.json
+  - preview/2026-11-01-preview/serverAdvisors.json
+  - preview/2026-11-01-preview/serverAutomaticTuning.json
+  - preview/2026-11-01-preview/serverAzureAdAdministrators.json
+  - preview/2026-11-01-preview/serverAzureAdOnlyAuthentications.json
+  - preview/2026-11-01-preview/serverConfigurationOptions.json
+  - preview/2026-11-01-preview/serverConnectionPolicies.json
+  - preview/2026-11-01-preview/serverDevOpsAudit.json
+  - preview/2026-11-01-preview/serverDnsAliases.json
+  - preview/2026-11-01-preview/serverKeys.json
+  - preview/2026-11-01-preview/serverOperations.json
+  - preview/2026-11-01-preview/servers.json
+  - preview/2026-11-01-preview/ServerProtectionSettings.json
+  - preview/2026-11-01-preview/serverSecurityAlertPolicies.json
+  - preview/2026-11-01-preview/serverTrustCertificates.json
+  - preview/2026-11-01-preview/serverTrustGroups.json
+  - preview/2026-11-01-preview/serverUsages.json
+  - preview/2026-11-01-preview/serverVulnerabilityAssessments.json
+  - preview/2026-11-01-preview/sqlAgent.json
+  - preview/2026-11-01-preview/sqlVulnerabilityAssessmentBaseline.json
+  - preview/2026-11-01-preview/sqlVulnerabilityAssessmentExecuteScan.json
+  - preview/2026-11-01-preview/sqlVulnerabilityAssessmentRuleBaseline.json
+  - preview/2026-11-01-preview/sqlVulnerabilityAssessmentScanResult.json
+  - preview/2026-11-01-preview/sqlVulnerabilityAssessmentScans.json
+  - preview/2026-11-01-preview/sqlVulnerabilityAssessmentsSettings.json
+  - preview/2026-11-01-preview/startStopManagedInstanceSchedules.json
+  - preview/2026-11-01-preview/subscriptionUsages.json
+  - preview/2026-11-01-preview/synapseLinkWorkspaces.json
+  - preview/2026-11-01-preview/syncAgents.json
+  - preview/2026-11-01-preview/syncGroups.json
+  - preview/2026-11-01-preview/syncMembers.json
+  - preview/2026-11-01-preview/tdeCertificates.json
+  - preview/2026-11-01-preview/timeZones.json
+  - preview/2026-11-01-preview/transparentDataEncryptions.json
+  - preview/2026-11-01-preview/usages.json
+  - preview/2026-11-01-preview/virtualClusters.json
+  - preview/2026-11-01-preview/virtualNetworkRules.json
+  - preview/2026-11-01-preview/workloadClassifiers.json
+  - preview/2026-11-01-preview/workloadGroups.json
+
+suppressions:
+  - code: DeleteResponseCodes
+    from: ReaderEndpoints.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/readerEndpoints/{readerEndpointName}"].delete
+    reason: "Preserves the SQL RP contract: completed deletion returns 200, pending deletion returns 202, and an absent resource returns 204. ARM exception approval is required."
+  - code: ResourceNameRestriction
+    from: ReaderEndpoints.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/readerEndpoints"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/readerEndpoints/{readerEndpointName}"]
+    reason: "Preserves the generated source contract for the existing server identifier without adding a client-side naming restriction during conversion. readerEndpointName retains its source pattern and length limits. ARM exception approval is required."
+  - code: ResourceNameRestriction
+    from: ReaderEndpointsList.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/readerEndpoints"]
+    reason: "Preserves the generated source contract for existing primary-server and database identifiers without adding new client-side naming restrictions during conversion. ARM exception approval is required."
+  - code: ResourceNameRestriction
+    from: restorableDroppedManagedInstancesByLocation.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances"]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}"]
+    reason: locationName uses the shared Azure.Core.azureLocation region selector, not a customer-defined resource name. The service normalizes location names; a resource-name regex could exclude accepted location aliases.
+  - code: ResourceNameRestriction
+    from: restorableDroppedManagedDatabasesFromDroppedManagedInstance.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases"]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}"]
+    reason: locationName uses the shared Azure.Core.azureLocation region selector, not a customer-defined resource name. The service normalizes location names; a resource-name regex could exclude accepted location aliases.
+  - code: ResourceNameRestriction
+    from: managedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies"]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies/{policyName}"]
+    reason: locationName uses the shared Azure.Core.azureLocation region selector, not a customer-defined resource name. The service normalizes location names; a resource-name regex could exclude accepted location aliases.
+  - code: DescriptionMustNotBeNodeName
+    from: managedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/restorableDroppedManagedInstances/{restorableDroppedManagedInstanceId}/restorableDroppedManagedDatabases/{restorableDroppedDatabaseId}/backupShortTermRetentionPolicies/{policyName}"].get.parameters..description
+    reason: The policy supports only default. Its enum metadata is inherited unchanged from ManagedShortTermRetentionPolicyName, which is shared with existing retention APIs.
+  - code: ResourceNameRestriction
+    from: distributedAvailabilityGroupsDatabaseOperations.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/distributedAvailabilityGroups/{distributedAvailabilityGroupName}/databaseOperations"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/distributedAvailabilityGroups/{distributedAvailabilityGroupName}/databaseOperations/{operationId}"]
+    reason: "managedInstanceName and distributedAvailabilityGroupName identify existing parent resources. The parent managed instance and distributed availability group APIs define no pattern for either name. managedInstanceName: the service requires 1-63 characters of a-z, 0-9 and '-', with no leading or trailing '-', and the name must be a valid DNS label. Uppercase is rejected only on create; the update and GET paths lowercase the name for backward compatibility, so a lowercase-only pattern would reject URLs that work today. distributedAvailabilityGroupName: the service only requires a non-empty name. Lowercase is enforced only on create when linkMode is MultiDatabase. Single-database links may use mixed case, and the engine allows availability group names up to 255 characters (64 when cluster_type is NONE or EXTERNAL). linkMode is not in the request path, so any pattern stricter than non-empty would reject valid GET/LIST paths for existing links. operationId is a UUID. ARM exception approval is required."
+```
 
 ### Tag: package-preview-2026-08-01-preview
 
@@ -3870,10 +4071,31 @@ directive:
   - suppress: EnumInsteadOfBoolean
     reason: This warning gives many positives for existing APIs that cannot be changed.
 ```
+
+```yaml $(tag) == 'package-preview-2026-11-01-preview'
+suppressions:
+  - code: DescriptionMustNotBeNodeName
+    from: serverAzureAdAdministrators.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators/{administratorName}/enable"].post.parameters[4]["x-ms-enum"].values[0].description
+    reason: The enable action reuses the existing AdministratorName union. Its enum-member description is inherited; changing the shared union would rewrite earlier published API versions. This exception applies only to the November preview action.
+  - code: DescriptionMustNotBeNodeName
+    from: serverAzureAdAdministrators.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators/{administratorName}/disable"].post.parameters[4]["x-ms-enum"].values[0].description
+    reason: The disable action reuses the existing AdministratorName union. Its enum-member description is inherited; changing the shared union would rewrite earlier published API versions. This exception applies only to the November preview action.
+```
+
 ## Suppressions
 
 ``` yaml
 suppressions:
+  - code: PutResponseCodes
+    from: preview/2026-11-01-preview/ServerProtectionSettings.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serverProtectionSettings/{serverProtectionSettingsName}"].put
+    reason: This always-existing singleton follows the MI contract, returning HTTP 200 with the resource on completion or HTTP 202 with operation metadata and polling headers while pending. PUT never creates a new resource.
+  - code: ProvisioningStateSpecifiedForLROPut
+    from: preview/2026-11-01-preview/ServerProtectionSettings.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serverProtectionSettings/{serverProtectionSettingsName}"].put
+    reason: Assumes an ARM exception to omit durable provisioningState from this always-existing proxy resource. GET returns the persisted flag; operation status is available through polling endpoints.
   - code: MissingSegmentsInNestedResourceListOperation
     from: BackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies"]
@@ -3886,6 +4108,14 @@ suppressions:
   - code: LatestVersionOfCommonTypesMustBeUsed
     from: BackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies"].get.responses.default.schema["$ref"]
+  - code: ResourceNameRestriction
+    from: databases.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/topQueries"]
+    reason: serverName and databaseName are ancestor resource name parameters.
+  - code: ResourceNameRestriction
+    from: databases.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/topQueries/{topQueryName}/statistics"]
+    reason: serverName and databaseName are ancestor resource name parameters.
   - code: ResourceNameRestriction
     from: BackupShortTermRetentionPolicies.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/backupShortTermRetentionPolicies/{policyName}"]
@@ -5089,6 +5319,14 @@ suppressions:
   - code: RequiredPropertiesMissingInResourceModel
     from: ManagedInstances.json
     where: $.definitions.TopQueriesListResult
+  - code: RequiredPropertiesMissingInResourceModel
+    from: databases.json
+    where: $.definitions.QueryStatisticsDatabaseListResult
+    reason: Returns query metric records rather than ARM resources; resource identity fields are not part of this response contract.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: databases.json
+    where: $.definitions.TopQueriesDatabaseListResult
+    reason: Returns top-query metric summaries rather than ARM resources; resource identity fields are not part of this response contract.
   - code: RequiredReadOnlySystemData
     from: LongTermRetentionBackups.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionServers/{longTermRetentionServerName}/longTermRetentionDatabases/{longTermRetentionDatabaseName}/longTermRetentionBackups/{backupName}"].get
@@ -9061,6 +9299,14 @@ suppressions:
   - code: ResourceNameRestriction
     from: ManagedInstances.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/topqueries"]
+  - code: ResourceNameRestriction
+    from: databases.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/topQueries/{topQueryName}/queryText"]
+    reason: serverName and databaseName are ancestor resource name parameters.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: databases.json
+    where: $.definitions.QueryTextResult
+    reason: Returns top-query text rather than ARM resources; resource identity fields are not part of this response contract.
   - code: OperationIdNounVerb
     from: ManagedInstances.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/topqueries"].get.operationId

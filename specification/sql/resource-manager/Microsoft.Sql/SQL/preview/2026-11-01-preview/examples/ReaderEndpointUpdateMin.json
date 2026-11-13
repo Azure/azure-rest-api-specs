@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "Default",
+    "serverName": "reader-endpoint-server",
+    "readerEndpointName": "reader-endpoint-test-1",
+    "api-version": "2026-11-01-preview",
+    "parameters": {
+      "properties": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/reader-endpoint-server/readerEndpoints/reader-endpoint-test-1",
+        "name": "reader-endpoint-test-1",
+        "type": "Microsoft.Sql/servers/readerEndpoints",
+        "location": "East US",
+        "tags": {
+          "tagKey1": "TagValue1Updated",
+          "tagKey2": "TagValue2"
+        },
+        "properties": {
+          "readerEndpointPrimaryInfo": {
+            "primaryDatabaseId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/primary-server/databases/primary-database",
+            "primaryServerId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/primary-server"
+          },
+          "databases": [
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/reader-endpoint-server/databases/testdb",
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/reader-endpoint-server/databases/testdb2",
+            "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default/providers/Microsoft.Sql/servers/reader-endpoint-server/databases/testdb3"
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/locations/eastus/readerEndpointOperationResults/11111111-1111-1111-1111-111111111111?api-version=2026-11-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/locations/eastus/readerEndpointAzureAsyncOperation/11111111-1111-1111-1111-111111111111?api-version=2026-11-01-preview",
+        "Retry-After": 15
+      }
+    }
+  },
+  "operationId": "ReaderEndpoints_Update",
+  "title": "Update a reader endpoint with no property changes"
+}
