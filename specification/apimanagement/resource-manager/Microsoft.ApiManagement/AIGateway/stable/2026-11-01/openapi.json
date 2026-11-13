@@ -4723,6 +4723,16 @@
         }
       }
     },
+    "AiGatewayBackendUpdate": {
+      "type": "object",
+      "description": "Backend networking configuration to update on an AI Gateway.",
+      "properties": {
+        "subnet": {
+          "$ref": "#/definitions/AiGatewaySubnetUpdate",
+          "description": "Subnet through which the AI Gateway reaches backends. Omit it to keep the current subnet, or set it to null to remove it."
+        }
+      }
+    },
     "AiGatewayCheckNameAvailabilityRequest": {
       "type": "object",
       "description": "Parameters for checking an AI Gateway name in a location.",
@@ -6448,9 +6458,10 @@
         },
         "backend": {
           "$ref": "#/definitions/AiGatewayBackend",
-          "description": "Backend networking configuration. Can only be set when the AI Gateway is created.",
+          "description": "Backend networking configuration.",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
@@ -6717,6 +6728,16 @@
             "type": "Microsoft.Network/virtualNetworks/subnets"
           }
         ]
+      }
+    },
+    "AiGatewaySubnetUpdate": {
+      "type": "object",
+      "description": "Subnet fields to update on an AI Gateway.",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/AiGatewaySubnetResourceId",
+          "description": "Resource identifier of the subnet. The subnet must be delegated to Microsoft.App/environments and be in the same region as the AI Gateway."
+        }
       }
     },
     "AiGatewayTelemetryAttributeMapping": {
@@ -8006,6 +8027,10 @@
         "publicNetworkAccess": {
           "$ref": "#/definitions/AiGatewayPublicNetworkAccess",
           "description": "Whether public network access is allowed for the AI Gateway."
+        },
+        "backend": {
+          "$ref": "#/definitions/AiGatewayBackendUpdate",
+          "description": "Backend networking configuration."
         }
       }
     },
