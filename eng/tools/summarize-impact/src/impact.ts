@@ -11,7 +11,6 @@ import {
   resourceManager,
   swagger,
   tsp,
-  tspconfig,
   typespec,
 } from "@azure-tools/specs-shared/changed-files";
 import { Readme } from "@azure-tools/specs-shared/readme";
@@ -120,22 +119,16 @@ export async function evaluateImpact(
       diffSuppression(resolve(context.targetDirectory, file), after).length > 0;
   }
 
-  const changedFiles = context.getChangedFiles();
   return {
     schemaVersion: 2,
     services: [...services.values()].sort((a, b) =>
       `${a.path}:${a.plane}`.localeCompare(`${b.path}:${b.plane}`),
     ),
-    clientCustomizationOnly:
-      changedFiles.length > 0 &&
-      changedFiles.every(
-        (file) => clientCustomization(file) && getPlane(file, context) === "resource-manager",
-      ),
   };
 }
 
 function getChangeKind(file: string): ServiceImpact["changes"][number] {
-  if (tspconfig(file)) return "sdk-configuration";
+  if (clientCustomization(file)) return "sdk-configuration";
   if (example(file)) return "examples";
   if (swagger(file) || tsp(file)) return "api";
   if (readme(file)) return "readme";

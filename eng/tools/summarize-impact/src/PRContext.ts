@@ -123,7 +123,7 @@ export class PRContext {
 
   async getPossibleParentConfigurations(): Promise<string[]> {
     console.log("ENTER definition getPossibleParentConfigurations");
-    const changedFiles = this.getChangedFiles().filter((file) => file.startsWith("specification/"));
+    const changedFiles = this.getChangedFiles();
     console.log(`Detect changes in the PR:\n${JSON.stringify(changedFiles, null, 2)}`);
     const readmes = changedFiles.filter((f) => readme(f));
 

@@ -24,11 +24,7 @@ function context(files: Partial<FileListInfo>, source = AFTER, target = BEFORE) 
 
 describe("change impact", () => {
   it("reports no services when nothing changed", async () => {
-    expect(await evaluateImpact(context({}), [])).toEqual({
-      schemaVersion: 2,
-      services: [],
-      clientCustomizationOnly: false,
-    });
+    expect(await evaluateImpact(context({}), [])).toEqual({ schemaVersion: 2, services: [] });
   });
 
   it("keeps facts scoped to their service and plane", async () => {
@@ -79,10 +75,11 @@ describe("change impact", () => {
     ]);
   });
 
-  it("retains management classification for configuration-only changes", async () => {
+  it("classifies client customizations as management SDK configuration", async () => {
     const impact = await evaluateImpact(
       context({
         modifications: [
+          "specification/contosowidgetmanager/resource-manager/Contoso.WidgetManager/client.tsp",
           "specification/contosowidgetmanager/resource-manager/Contoso.WidgetManager/tspconfig.yaml",
         ],
       }),
@@ -96,20 +93,6 @@ describe("change impact", () => {
         typeSpec: true,
       }),
     ]);
-  });
-
-  it.each([
-    [["rm/client.tsp", "rm/tspconfig.yaml"], true],
-    [["specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml"], false],
-    [["rm/client.tsp", "specification/contosowidgetmanager/resource-manager/readme.md"], false],
-    [["rm/client.tsp", "eng/scripts/example.ts"], false],
-  ])("flags management client customization-only changes: %j", async (files, expected) => {
-    const rm = "specification/contosowidgetmanager/resource-manager/Contoso.WidgetManager";
-    const impact = await evaluateImpact(
-      context({ modifications: files.map((file) => file.replace(/^rm\//, `${rm}/`)) }),
-      [],
-    );
-    expect(impact.clientCustomizationOnly).toBe(expected);
   });
 
   it("records policy changes through an unchanged owning README", async () => {

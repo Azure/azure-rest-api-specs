@@ -37,12 +37,12 @@ resource-manager, without describing the change as an API change:
         "registered": false
       }
     }
-  ],
-  "clientCustomizationOnly": false
+  ]
 }
 ```
 
-`changes` distinguishes API definitions, examples, SDK configuration, readmes, and other files.
+`changes` distinguishes API definitions, examples, SDK configuration (`client.tsp` and
+`tspconfig.yaml`), readmes, and other files.
 `hasAffectedReadme` identifies changes associated with an owning README, even when that README is
 unchanged. This preserves ARM review for policy and manifest changes without making every `other`
 file review-relevant or removing the SDK-configuration-only exemption.
@@ -52,8 +52,6 @@ plane/linter ruleset. Unresolved files use `unknown`; deleted projects can use t
 New API versions are compared against their own resource provider in the baseline checkout.
 Resource-provider facts describe namespace additions, RPaaS configuration, added Swagger definitions,
 and registration in the baseline checkout's `.github/arm-leases` directory.
-`clientCustomizationOnly` is true when every changed file is a management-plane `client.tsp`
-or `tspconfig.yaml`; such PRs targeting `main` get client customization review instead of ARM review.
 
 `summarize-checks` evaluates review requirements using these facts and the PR's **current** draft
 status and target branch, then reconciles labels separately. ARM review exemptions do not remove the

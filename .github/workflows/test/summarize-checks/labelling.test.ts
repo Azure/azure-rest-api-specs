@@ -380,14 +380,24 @@ describe("service-scoped impact labels", () => {
   const service = managementService;
   const context = { isDraft: false, targetBranch: "main" };
 
-  it("keeps the resource-manager label but removes ARMReview for a configuration-only change", () => {
-    const labels = updateLabels(
-      ["ARMReview"],
-      { schemaVersion: 2, services: [{ ...service, changes: ["sdk-configuration"] }] },
-      context,
-    );
-    expect([...labels.toAdd].sort()).toEqual(["TypeSpec", "resource-manager"]);
+  it("routes configuration-only changes on main to client customization review", () => {
+    const customization = {
+      schemaVersion: 2 as const,
+      services: [{ ...service, changes: ["sdk-configuration" as const] }],
+    };
+    const labels = updateLabels(["ARMReview"], customization, context);
+    expect([...labels.toAdd].sort()).toEqual([
+      "TypeSpec",
+      "client-customization-review-required",
+      "resource-manager",
+    ]);
     expect([...labels.toRemove]).toEqual(["ARMReview"]);
+
+    const otherBranch = updateLabels([], customization, {
+      isDraft: false,
+      targetBranch: "RPSaaSMaster",
+    });
+    expect([...otherBranch.toAdd].sort()).toEqual(["TypeSpec", "resource-manager"]);
   });
 
   it.each([true, false])(
@@ -434,24 +444,6 @@ describe("service-scoped impact labels", () => {
         "new-api-version",
       ].sort(),
     );
-  });
-
-  it("routes client customization-only changes on main to client customization review", () => {
-    const customization = {
-      schemaVersion: 2 as const,
-      services: [service],
-      clientCustomizationOnly: true,
-    };
-    const labels = updateLabels(["ARMReview"], customization, context);
-    expect(labels.toAdd.has("client-customization-review-required")).toBe(true);
-    expect([...labels.toRemove]).toEqual(["ARMReview"]);
-
-    const otherBranch = updateLabels([], customization, {
-      isDraft: false,
-      targetBranch: "RPSaaSMaster",
-    });
-    expect(otherBranch.toAdd.has("ARMReview")).toBe(true);
-    expect(otherBranch.toAdd.has("client-customization-review-required")).toBe(false);
   });
 
   it("evaluates the same artifact against current draft and branch state", () => {
