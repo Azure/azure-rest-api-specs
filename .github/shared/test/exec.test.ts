@@ -29,6 +29,142 @@ describe("execFile", () => {
   const args = ["-e", `console.log("test")`];
   const expected = "test\n";
 
+  it.each([undefined, false])(
+    "captures output without forwarding (forwardOutput: %s)",
+    async (forwardOutput) => {
+      const write = vi.spyOn(process.stdout, "write").mockReturnValue(true);
+      const writeError = vi.spyOn(process.stderr, "write").mockReturnValue(true);
+      try {
+        const result = await execFile(
+          process.execPath,
+          ["-e", "process.stdout.write('child-output'); process.stderr.write('child-diagnostic')"],
+          { forwardOutput },
+        );
+
+        expect(result).toEqual({ stdout: "child-output", stderr: "child-diagnostic" });
+        expect(write).not.toHaveBeenCalled();
+        expect(writeError).not.toHaveBeenCalled();
+        expect(process.stdout.writableEnded).toBe(false);
+        expect(process.stderr.writableEnded).toBe(false);
+      } finally {
+        write.mockRestore();
+        writeError.mockRestore();
+      }
+    },
+  );
+
+  it("forwards both streams before and after the parent's exit signal", async () => {
+    const directory = await mkdtemp(join(tmpdir(), "exec-live-output-"));
+    const exitSignal = join(directory, "exit");
+    const initialStdout = '{"result":';
+    const finalStdout = '"succeeded"}';
+    const initialStderr = "child-start\n";
+    const finalStderr = "child-finish\n";
+    const stdout = initialStdout + finalStdout;
+    const stderr = initialStderr + finalStderr;
+    const stdoutChunks: string[] = [];
+    const stderrChunks: string[] = [];
+    const write = vi.spyOn(process.stdout, "write").mockImplementation((chunk) => {
+      stdoutChunks.push(String(chunk));
+      return true;
+    });
+    const writeError = vi.spyOn(process.stderr, "write").mockImplementation((chunk) => {
+      stderrChunks.push(String(chunk));
+      return true;
+    });
+    const execution = execFile(
+      process.execPath,
+      [
+        "-e",
+        `
+          const { existsSync } = require("node:fs");
+          const interval = setInterval(() => {
+            if (existsSync(process.argv[1])) {
+              clearInterval(interval);
+              process.stdout.write(${JSON.stringify(finalStdout)});
+              process.stderr.write(${JSON.stringify(finalStderr)});
+            }
+          }, 10);
+          process.stdout.write(${JSON.stringify(initialStdout)});
+          process.stderr.write(${JSON.stringify(initialStderr)});
+        `,
+        exitSignal,
+      ],
+      { forwardOutput: true, timeout: 5000 },
+    ).then(
+      (result) => ({ result }),
+      (error: unknown) => ({ error }),
+    );
+    try {
+      await vi.waitFor(
+        () => {
+          expect(stdoutChunks.join("")).toBe(initialStdout);
+          expect(stderrChunks.join("")).toBe(initialStderr);
+        },
+        { timeout: 2000 },
+      );
+
+      await writeFile(exitSignal, "");
+      expect(await execution).toEqual({ result: { stdout, stderr } });
+      expect(stdoutChunks.join("")).toBe(stdout);
+      expect(stderrChunks.join("")).toBe(stderr);
+      expect(process.stdout.writableEnded).toBe(false);
+      expect(process.stderr.writableEnded).toBe(false);
+    } finally {
+      try {
+        await writeFile(exitSignal, "");
+        await execution;
+      } finally {
+        write.mockRestore();
+        writeError.mockRestore();
+        await rm(directory, { recursive: true, force: true });
+      }
+    }
+  });
+
+  it.each([undefined, false, true])(
+    "preserves failure details and forwards output only when enabled (forwardOutput: %s)",
+    async (forwardOutput) => {
+      const stdout = "child-output";
+      const stderr = "child-diagnostic";
+      const stdoutChunks: string[] = [];
+      const stderrChunks: string[] = [];
+      const write = vi.spyOn(process.stdout, "write").mockImplementation((chunk) => {
+        stdoutChunks.push(String(chunk));
+        return true;
+      });
+      const writeError = vi.spyOn(process.stderr, "write").mockImplementation((chunk) => {
+        stderrChunks.push(String(chunk));
+        return true;
+      });
+      try {
+        await expect(
+          execFile(
+            process.execPath,
+            [
+              "-e",
+              `process.stdout.write(${JSON.stringify(stdout)}); process.stderr.write(${JSON.stringify(stderr)}); process.exitCode = 7;`,
+            ],
+            forwardOutput === undefined ? undefined : { forwardOutput },
+          ),
+        ).rejects.toMatchObject({ code: 7, stdout, stderr });
+
+        if (forwardOutput) {
+          expect(stdoutChunks.join("")).toBe(stdout);
+          expect(stderrChunks.join("")).toBe(stderr);
+        } else {
+          expect(write).not.toHaveBeenCalled();
+          expect(writeError).not.toHaveBeenCalled();
+        }
+        expect(process.stdout.writableEnded).toBe(false);
+        expect(process.stderr.writableEnded).toBe(false);
+      } finally {
+        write.mockRestore();
+        writeError.mockRestore();
+      }
+    },
+  );
+
   it("forwards command-specific environment without mutating the parent", async () => {
     const original = process.env.TSV_EXEC_TEST;
     const result = await execFile(

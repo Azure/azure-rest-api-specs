@@ -97,31 +97,6 @@ alias LabelHistoryOps = Azure.ResourceManager.Legacy.LegacyOperations<
   ResourceName = "ContainerAppLabelHistory"
 >;
 
-alias LabelHistoryOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
-
-    /** Name of the Container App. */
-    @path
-    @segment("containerApps")
-    @key
-    @pattern("^[-\\w\\._\\(\\)]+$")
-    containerAppName: string;
-  },
-  {
-    /** Name of the label. */
-    @path
-    @segment("labelHistories")
-    @key
-    @pattern("^[-\\w\\._\\(\\)]+$")
-    labelName: string;
-  },
-  ErrorType = DefaultErrorResponse
->;
-
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_03_02_preview)
 @removed(Versions.v2026_07_01)

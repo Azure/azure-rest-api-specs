@@ -1,0 +1,49 @@
+{
+  "operationId": "Accounts_Get",
+  "title": "Get an account with private CA trust",
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "myResourceGroup",
+    "accountName": "myAccount",
+    "api-version": "2026-09-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.CognitiveServices/accounts/myAccount",
+        "name": "myAccount",
+        "type": "Microsoft.CognitiveServices/accounts",
+        "kind": "AIServices",
+        "location": "eastus",
+        "sku": {
+          "name": "S0"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "11111111-2222-3333-4444-555555555555",
+          "tenantId": "22222222-3333-4444-5555-666666666666"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "allowProjectManagement": true,
+          "trustedCertificateSources": [
+            {
+              "type": "AzureKeyVault",
+              "resourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myKeyVault",
+              "certificateBundleReferences": [
+                {
+                  "secretName": "corporate-ca-bundle",
+                  "secretVersion": "11111111111111111111111111111111"
+                },
+                {
+                  "secretName": "partner-ca-bundle",
+                  "secretVersion": "22222222222222222222222222222222"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

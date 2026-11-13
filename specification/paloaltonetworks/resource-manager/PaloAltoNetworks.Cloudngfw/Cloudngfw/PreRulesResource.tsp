@@ -69,6 +69,7 @@ interface PreRulesResources {
     ArmResponse<RuleCounter>,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing getCounters POST contract uses firewallName in the query; preserve wire compatibility."
       @query("firewallName")
       firewallName?: string;
     }
@@ -85,6 +86,7 @@ interface PreRulesResources {
     NoContentResponse,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing refreshCounters POST contract uses firewallName in the query; preserve wire compatibility."
       @query("firewallName")
       firewallName?: string;
     }
@@ -101,6 +103,7 @@ interface PreRulesResources {
     ArmResponse<RuleCounterReset>,
     Parameters = {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing resetCounters POST contract uses firewallName in the query; preserve wire compatibility."
       @query("firewallName")
       firewallName?: string;
     }

@@ -229,3 +229,8 @@ using Microsoft.Maintenance;
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
+
+// Force changed scheduled events acknowledge error details classes to public access
+@@access(ScheduledEventsAcknowledgeErrorDetails, Access.public, "csharp");
+@@access(ScheduledEventsListAcknowledgeError, Access.public, "csharp");
+@@access(ScheduledEventsListAcknowledgeErrorDetails, Access.public, "csharp");

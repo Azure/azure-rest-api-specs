@@ -1437,7 +1437,7 @@ op componentPolicyStatesListQueryResultsForResource(
 );
 @@clientName(
   ComponentPolicyStatesOperationGroup.listQueryResultsForResource::parameters.From,
-  "$DO_NOT_NORMALIZE$from",
+  exact("from"),
   "javascript"
 );
 
@@ -1470,7 +1470,7 @@ op componentPolicyStatesListQueryResultsForPolicyDefinition(
 );
 @@clientName(
   ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition::parameters.From,
-  "$DO_NOT_NORMALIZE$from",
+  exact("from"),
   "javascript"
 );
 
@@ -1503,7 +1503,7 @@ op componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment(
 );
 @@clientName(
   ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment::parameters.From,
-  "$DO_NOT_NORMALIZE$from",
+  exact("from"),
   "javascript"
 );
 
@@ -1539,7 +1539,7 @@ op componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment(
 );
 @@clientName(
   ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment::parameters.From,
-  "$DO_NOT_NORMALIZE$from",
+  exact("from"),
   "javascript"
 );
 // Remediations overrides
@@ -1957,11 +1957,7 @@ op attestationsListForResource(
 @@clientName(QueryOptionsG.Top, "top", "javascript");
 @@clientName(QueryOptionsH.Top, "top", "javascript");
 @@clientName(QueryOptionsH.Filter, "filter", "javascript");
-@@clientName(
-  listQueryResultsParameters.From,
-  "$DO_NOT_NORMALIZE$from",
-  "javascript"
-);
+@@clientName(listQueryResultsParameters.From, exact("from"), "javascript");
 @@alternateType(ManagementGroupsNamespaceType, "Microsoft.Management");
 
 // ============================================================================

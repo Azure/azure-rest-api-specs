@@ -24,7 +24,7 @@ Use a supplied baseline without asking again. Existing-report replay does not
 need this question; for PR assessment, use the PR's actual target baseline.
 
 For every fresh assessment, the coordinator is the first operational command.
-For a PR, run `run-assessment-analysis.mjs --pr <url-or-number> --repo <repo>
+For a PR, run `run-assessment-analysis.ts --pr <url-or-number> --repo <repo>
 --output <work>` immediately. For local code, run it immediately with
 `--base`, `--specification`, `--repo`, and `--output` once the baseline is
 known. Do not run separate Git status/diff/fetch/worktree, PR metadata,
@@ -38,7 +38,7 @@ Follow the [complete workflow](references/workflow.md). Apply the [classificatio
 After guarded finalization succeeds, the assessment is not complete until the
 rendered report is served and linked:
 
-1. Start `scripts/serve-assessment.mjs --file <work-directory>/assessment.html`
+1. Start `scripts/serve-assessment.ts --file <work-directory>/assessment.html`
    through the host's attached background or long-lived process mechanism.
 2. Immediately read startup output from the running process through the host's
    process-output reader. Do not wait for process completion or a completion
@@ -63,5 +63,5 @@ Do not substitute a `file:` URL or only return filesystem paths.
 - Check documentation deterministically from compiler results only for newly added operation, model, enum, and interface declarations. A declaration is complete when the compiler returns a nonempty effective document, including inherited documentation. Missing or empty documentation creates a finding with the exact TypeSpec declaration. Never compare documentation text with code or send documentation to the Agent.
 - Report Azure Guidelines and Documentation Completeness independently with explicit coverage. Documentation with no eligible newly added declarations is `not-applicable`; unavailable compiler evidence remains `not-assessed`.
 - Overall safety covers REST and downstream SDK impact only.
-- After successful materialization, run one guarded invocation of `finalize-assessment.mjs --work <work-directory>`. Do not separately assemble, validate, and render. Finalization requires validated `assessment.json` and `assessment.html`; user-facing completion additionally requires the served report link described above. `model-input.json`, the Agent index, filesystem paths without the link, or a partial blocker is not completion.
+- After successful materialization, run one guarded invocation of `finalize-assessment.ts --work <work-directory>`. Do not separately assemble, validate, and render. Finalization requires validated `assessment.json` and `assessment.html`; user-facing completion additionally requires the served report link described above. `model-input.json`, the Agent index, filesystem paths without the link, or a partial blocker is not completion.
 - Retain blockers as **Potential limits** in the report appendix and stop after assessment. Do not author fixes or remediate TypeSpec.

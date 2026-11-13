@@ -1,0 +1,25 @@
+{
+  "operationId": "KnowledgeSources_GetStatus",
+  "title": "SearchServiceGetKnowledgeSourceStatusFile",
+  "parameters": {
+    "endpoint": "https://typespecstableexampleservice.search.windows.net",
+    "sourceName": "ks-stable-test",
+    "api-version": "2026-10-01",
+    "Accept": "application/json;odata.metadata=minimal",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "kind": "file",
+        "synchronizationStatus": "active",
+        "synchronizationInterval": "1d",
+        "fileCapacity": {
+          "maxFileCount": 1000,
+          "remainingFileCount": 997,
+          "maxFileSizeBytes": 134217728
+        }
+      }
+    }
+  }
+}

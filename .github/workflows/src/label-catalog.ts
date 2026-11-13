@@ -81,6 +81,9 @@ export const labelPlanSchema = z.strictObject({
   archive: z.array(
     z.strictObject({ before: existingLabelSchema, name: labelDefinitionSchema.shape.name }),
   ),
+  skippedArchives: z.array(
+    z.strictObject({ label: existingLabelSchema, reason: z.string().min(1) }),
+  ),
   delete: z.array(existingLabelSchema),
   migrate: z.array(z.strictObject({ before: existingLabelSchema, target: z.string() })),
   unconfigured: z.array(existingLabelSchema),
@@ -131,22 +134,21 @@ export function originalLabelName(label: ExistingLabel): string {
   return label.name;
 }
 
-function archivedLabelName(label: ExistingLabel): string {
-  if (label.name.toLowerCase().startsWith(ARCHIVE_PREFIX)) {
-    if (label.description !== ARCHIVE_DESCRIPTION) {
-      throw new Error(
-        `Cannot archive ${JSON.stringify(label.name)}: the ${ARCHIVE_PREFIX} prefix is reserved`,
-      );
-    }
-    return label.name;
+export function findRecreatedLabelArchive(
+  label: ExistingLabel,
+  existing: ExistingLabel[],
+): ExistingLabel | undefined {
+  if (label.archived_at !== null || label.name.toLowerCase().startsWith(ARCHIVE_PREFIX)) {
+    return undefined;
   }
-  const name = ARCHIVE_PREFIX + label.name;
-  if (name.length > 50) {
-    throw new Error(
-      `Cannot archive ${JSON.stringify(label.name)}: its prefixed name exceeds 50 characters. Rename it explicitly first.`,
-    );
-  }
-  return name;
+  const archivedName = (ARCHIVE_PREFIX + label.name).toLowerCase();
+  return existing.find(
+    (archive) =>
+      archive.id !== label.id &&
+      archive.archived_at !== null &&
+      archive.description === ARCHIVE_DESCRIPTION &&
+      archive.name.toLowerCase() === archivedName,
+  );
 }
 
 export function planLabels(
@@ -158,11 +160,20 @@ export function planLabels(
   if (byName.size !== existing.length) {
     throw new Error("GitHub returned duplicate label names");
   }
+  const configured = new Set(catalog.labels.map((label) => label.name.toLowerCase()));
+  const recreated: ExistingLabel[] = [];
   const remaining = new Map<string, ExistingLabel>();
   for (const label of existing) {
     const key = originalLabelName(label).toLowerCase();
     const other = remaining.get(key);
     if (other) {
+      const archive =
+        findRecreatedLabelArchive(label, [other]) ?? findRecreatedLabelArchive(other, [label]);
+      if (archive && !configured.has(key)) {
+        recreated.push(archive.id === label.id ? other : label);
+        remaining.set(key, archive);
+        continue;
+      }
       throw new Error(
         `Label name collision: ${JSON.stringify(label.name)} and ${JSON.stringify(other.name)}. Resolve it before syncing.`,
       );
@@ -173,6 +184,7 @@ export function planLabels(
     create: [],
     update: [],
     archive: [],
+    skippedArchives: [],
     delete: [],
     migrate: [],
     unconfigured: [],
@@ -189,7 +201,9 @@ export function planLabels(
     }
     remaining.delete(label.name.toLowerCase());
   }
-  plan.unconfigured = [...remaining.values()].sort((a, b) => a.name.localeCompare(b.name, "en"));
+  plan.unconfigured = [...remaining.values(), ...recreated].sort((a, b) =>
+    a.name.localeCompare(b.name, "en"),
+  );
   if (catalog.unconfiguredLabels === "archive") {
     const targets = new Map(
       catalog.labels.flatMap((label) =>
@@ -202,21 +216,35 @@ export function planLabels(
         plan.migrate.push({ before, target });
       }
     }
-    plan.delete = plan.unconfigured.filter((label) => isArchivedLabelExpired(label, now));
+    // Copies must be deleted first so their archived originals can still be verified.
+    plan.delete = [
+      ...recreated.toSorted((a, b) => a.name.localeCompare(b.name, "en")),
+      ...plan.unconfigured.filter((label) => isArchivedLabelExpired(label, now)),
+    ];
+    const recreatedIds = new Set(recreated.map((label) => label.id));
     for (const before of plan.unconfigured) {
       if (
-        before.archived_at !== null &&
-        (before.description !== ARCHIVE_DESCRIPTION ||
-          before.name.toLowerCase().startsWith(ARCHIVE_PREFIX) ||
-          isArchivedLabelExpired(before, now))
+        recreatedIds.has(before.id) ||
+        (before.archived_at !== null &&
+          (before.description !== ARCHIVE_DESCRIPTION ||
+            before.name.toLowerCase().startsWith(ARCHIVE_PREFIX) ||
+            isArchivedLabelExpired(before, now)))
       )
         continue;
-      const name = archivedLabelName(before);
+      const prefixed = before.name.toLowerCase().startsWith(ARCHIVE_PREFIX);
+      const name = prefixed ? before.name : ARCHIVE_PREFIX + before.name;
       const occupant = byName.get(name.toLowerCase());
-      if (occupant && occupant.id !== before.id) {
-        throw new Error(
-          `Label name collision: ${JSON.stringify(name)} already exists. Resolve it before syncing.`,
-        );
+      let reason: string | undefined;
+      if (prefixed && before.description !== ARCHIVE_DESCRIPTION) {
+        reason = `The ${ARCHIVE_PREFIX} prefix is reserved. Rename the label explicitly first.`;
+      } else if (name.length > 50) {
+        reason = "Its prefixed name exceeds 50 characters. Rename it explicitly first.";
+      } else if (occupant && occupant.id !== before.id) {
+        reason = `Label name collision: ${JSON.stringify(name)} already exists. Resolve it before archiving.`;
+      }
+      if (reason) {
+        plan.skippedArchives.push({ label: before, reason });
+        continue;
       }
       plan.archive.push({ before, name });
     }

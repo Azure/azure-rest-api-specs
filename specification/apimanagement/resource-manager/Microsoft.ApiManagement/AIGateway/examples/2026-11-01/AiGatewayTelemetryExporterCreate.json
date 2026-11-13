@@ -1,0 +1,122 @@
+{
+  "parameters": {
+    "api-version": "2026-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "aiGatewayName": "example-gateway",
+    "workspaceName": "default",
+    "telemetryExporterName": "otlp-exporter",
+    "resource": {
+      "properties": {
+        "kind": "OpenTelemetry",
+        "payloadCapture": false,
+        "openTelemetry": {
+          "metricsEndpoint": "https://collector.example.com/v1/metrics",
+          "logsEndpoint": "https://collector.example.com/v1/logs",
+          "tracesEndpoint": "https://collector.example.com/v1/traces",
+          "credentials": {
+            "managedIdentity": {
+              "resource": "https://monitor.azure.com/",
+              "clientId": "11111111-1111-1111-1111-111111111111"
+            }
+          }
+        },
+        "telemetry": {
+          "attributes": [
+            {
+              "source": {
+                "kind": "claims",
+                "value": "oid"
+              },
+              "signals": [
+                "logs",
+                "traces",
+                "metrics"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/telemetryExporters/otlp-exporter",
+        "name": "otlp-exporter",
+        "type": "Microsoft.ApiManagement/aigateways/workspaces/telemetryExporters",
+        "eTag": "W/\"1\"",
+        "properties": {
+          "kind": "OpenTelemetry",
+          "payloadCapture": false,
+          "openTelemetry": {
+            "metricsEndpoint": "https://collector.example.com/v1/metrics",
+            "logsEndpoint": "https://collector.example.com/v1/logs",
+            "tracesEndpoint": "https://collector.example.com/v1/traces",
+            "credentials": {
+              "managedIdentity": {
+                "resource": "https://monitor.azure.com/",
+                "clientId": "11111111-1111-1111-1111-111111111111"
+              }
+            }
+          },
+          "telemetry": {
+            "attributes": [
+              {
+                "source": {
+                  "kind": "claims",
+                  "value": "oid"
+                },
+                "signals": [
+                  "logs",
+                  "traces",
+                  "metrics"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/telemetryExporters/otlp-exporter",
+        "name": "otlp-exporter",
+        "type": "Microsoft.ApiManagement/aigateways/workspaces/telemetryExporters",
+        "eTag": "W/\"1\"",
+        "properties": {
+          "kind": "OpenTelemetry",
+          "payloadCapture": false,
+          "openTelemetry": {
+            "metricsEndpoint": "https://collector.example.com/v1/metrics",
+            "logsEndpoint": "https://collector.example.com/v1/logs",
+            "tracesEndpoint": "https://collector.example.com/v1/traces",
+            "credentials": {
+              "managedIdentity": {
+                "resource": "https://monitor.azure.com/",
+                "clientId": "11111111-1111-1111-1111-111111111111"
+              }
+            }
+          },
+          "telemetry": {
+            "attributes": [
+              {
+                "source": {
+                  "kind": "claims",
+                  "value": "oid"
+                },
+                "signals": [
+                  "logs",
+                  "traces",
+                  "metrics"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "operationId": "AiGatewayTelemetryExporterResources_CreateOrUpdate",
+  "title": "Create or update an AI Gateway TelemetryExporter"
+}

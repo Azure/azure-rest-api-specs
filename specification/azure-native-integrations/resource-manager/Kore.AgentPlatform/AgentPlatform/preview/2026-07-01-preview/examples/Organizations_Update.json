@@ -1,0 +1,69 @@
+{
+  "title": "Organizations_Update",
+  "operationId": "Organizations_Update",
+  "parameters": {
+    "api-version": "2026-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso-rg",
+    "organizationName": "contoso-org",
+    "properties": {
+      "properties": {
+        "partnerProperties": {
+          "organizationName": "Contoso AI Platform (Updated)",
+          "billingEmail": "new-billing@contoso.com",
+          "ownerEmail": "admin@contoso.com"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Kore.AgentPlatform/organizations/contoso-org",
+        "name": "contoso-org",
+        "type": "Kore.AgentPlatform/organizations",
+        "location": "eastus2euap",
+        "tags": {
+          "environment": "production",
+          "team": "platform"
+        },
+        "properties": {
+          "partnerProperties": {
+            "organizationName": "Contoso AI Platform (Updated)",
+            "billingEmail": "new-billing@contoso.com",
+            "ownerEmail": "admin@contoso.com",
+            "defaultWorkspace": {
+              "name": "my first workspace",
+              "marketplaceDetails": [
+                {
+                  "offerDetails": {
+                    "offerId": "kore-ai-platform",
+                    "planId": "business-monthly",
+                    "publisherId": "kore-ai",
+                    "planName": "Business Monthly",
+                    "termId": "1m",
+                    "termUnit": "P1M"
+                  },
+                  "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Microsoft.SaaS/resources/kore-ai-saas",
+                  "subscriptionStatus": "Subscribed"
+                }
+              ]
+            }
+          },
+          "user": {
+            "firstName": "Jane",
+            "lastName": "Doe",
+            "emailAddress": "jane.doe@contoso.com"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Kore.AgentPlatform/locations/eastus2euap/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-07-01-preview",
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Kore.AgentPlatform/locations/eastus2euap/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-07-01-preview"
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
+import "./Cpp/client.tsp";
 
 using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
@@ -225,6 +226,11 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@access(Storage.Blob.ListBlobsHierarchicalResponse, Access.public, "rust");
 @@access(Storage.Blob.ListBlobsIncludeItem, Access.public, "rust");
 
+@@access(Storage.Blob.Container.createSession, Access.internal, "rust");
+@@access(CreateSessionConfiguration, Access.internal, "rust");
+@@access(CreateSessionResponse, Access.internal, "rust");
+@@access(SessionCredentials, Access.internal, "rust");
+@@access(AuthenticationType, Access.internal, "rust");
 @@clientName(Storage.Blob.Blob.abortCopyFromUrl, "abortCopy", "rust");
 @@clientName(Storage.Blob.Service.findBlobsByTags, "findBlobsByTags", "rust");
 @@clientName(Storage.Blob.Container.findBlobsByTags, "findBlobsByTags", "rust");
@@ -241,6 +247,21 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   Storage.Blob.PageBlob.getPageRanges,
+  "python,csharp,javascript,go"
+);
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option" ""
+@@clientOption(Storage.Blob.Blob.getLayout, "forcePageIterator", true, "rust");
+@@clientName(Storage.Blob.Blob.getLayout, "getLayout", "rust");
+@@access(Storage.Blob.Blob.getLayout, Access.internal, "rust");
+@@access(Storage.Blob.BlobLayout, Access.internal, "rust");
+@@access(Storage.Blob.BlobLayoutEndpoint, Access.internal, "rust");
+@@access(Storage.Blob.BlobLayoutEndpoints, Access.internal, "rust");
+@@access(Storage.Blob.BlobLayoutRange, Access.internal, "rust");
+@@access(Storage.Blob.BlobLayoutRanges, Access.internal, "rust");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(
+  Storage.Blob.Blob.getLayout,
   "python,csharp,javascript,go"
 );
 
@@ -419,8 +440,8 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@alternateType(SourceRangeParameter.sourceRange, HttpRange, "rust");
 @@alternateType(SourceRangeParameterRequired.sourceRange, HttpRange, "rust");
 
-@@scope(Storage.Blob.Container.submitBatch, "!rust");
-@@scope(Storage.Blob.Service.submitBatch, "!rust");
+@@scope(Storage.Blob.Container.submitBatch, "!rust,!cpp");
+@@scope(Storage.Blob.Service.submitBatch, "!rust,!cpp");
 
 // GO SPECIFICATION
 
@@ -458,13 +479,11 @@ model BlobPrefixGo {
 @clientName("BlobProperties", "go")
 model BlobPropertiesGo {
   /** The date-time the blob was created in RFC1123 format. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("Creation-Time")
   creationTime?: utcDateTime;
 
   /** The date-time the blob was last modified in RFC1123 format. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("Last-Modified")
   lastModified: utcDateTime;
@@ -521,7 +540,6 @@ model BlobPropertiesGo {
   @Xml.name("CopyProgress") copyProgress?: string;
 
   /** The copy completion time of the blob. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("CopyCompletionTime")
   copyCompletionTime?: utcDateTime;
@@ -539,7 +557,6 @@ model BlobPropertiesGo {
   @Xml.name("DestinationSnapshot") destinationSnapshot?: string;
 
   /** The time the blob was deleted. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("DeletedTime")
   deletedTime?: utcDateTime;
@@ -568,7 +585,6 @@ model BlobPropertiesGo {
   @Xml.name("EncryptionScope") encryptionScope?: string;
 
   /** The access tier change time of the blob. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("AccessTierChangeTime")
   accessTierChangeTime?: utcDateTime;
@@ -577,7 +593,6 @@ model BlobPropertiesGo {
   @Xml.name("TagCount") tagCount?: int32;
 
   /** The expire time of the blob. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("Expiry-Time")
   expiresOn?: utcDateTime;
@@ -590,13 +605,11 @@ model BlobPropertiesGo {
   @Xml.name("RehydratePriority") rehydratePriority?: RehydratePriority;
 
   /** The last access time of the blob. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("LastAccessTime")
   lastAccessedOn?: utcDateTime;
 
   /** The immutability policy until time of the blob. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @Xml.name("ImmutabilityPolicyUntilDate")
   immutabilityPolicyExpiresOn?: utcDateTime;
@@ -880,7 +893,6 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 /** The immutability policy expiration parameter. */
 alias ImmutabilityPolicyExpiryOptionalParameter = {
   /** Specifies the date time when the blobs immutability policy is set to expire. */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
   @header("x-ms-immutability-policy-until-date")
   @clientName("immutabilityPolicyExpiry")
@@ -1301,3 +1313,66 @@ op uploadPagesNoStructuredMessage is StorageOperationRequestBody<
   "rust"
 )
 scalar HttpRange extends string;
+
+/** Preserves the empty Parquet XML configuration used by the C++ client. */
+model StorageCppParquetConfiguration {}
+
+// Rust-Scoped Smart Tier Removal
+
+@@alternateType(AccessTier, AccessTierRust, "rust");
+@@clientName(AccessTierRust, "AccessTier", "rust");
+@@clientNamespace(AccessTierRust, "Azure.Storage.Blobs", "rust");
+
+/** The access tiers. */
+union AccessTierRust {
+  /** The P4 access tier. */
+  P4: "P4",
+
+  /** The P6 access tier. */
+  P6: "P6",
+
+  /** The P10 access tier. */
+  P10: "P10",
+
+  /** The P15 access tier. */
+  P15: "P15",
+
+  /** The P20 access tier. */
+  P20: "P20",
+
+  /** The P30 access tier. */
+  P30: "P30",
+
+  /** The P40 access tier. */
+  P40: "P40",
+
+  /** The P50 access tier. */
+  P50: "P50",
+
+  /** The P60 access tier. */
+  P60: "P60",
+
+  /** The P70 access tier. */
+  P70: "P70",
+
+  /** The P80 access tier. */
+  P80: "P80",
+
+  /** The Hot access tier. */
+  Hot: "Hot",
+
+  /** The Cool access tier. */
+  Cool: "Cool",
+
+  /** The Archive access tier. */
+  Archive: "Archive",
+
+  /** The Premium access tier. */
+  Premium: "Premium",
+
+  /** The Cold access tier. */
+  Cold: "Cold",
+
+  /** Extensible. */
+  string,
+}

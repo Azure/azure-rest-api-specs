@@ -1,0 +1,70 @@
+{
+  "title": "McpServerConnection_CreateOrUpdate_Minimal",
+  "operationId": "McpServerConnection_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "subscriptionId": "F8C729F9-DF9C-4743-848F-96EE433D8E53",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "resource-123",
+    "mcpServerConnectionName": "resource-123",
+    "resource": {
+      "properties": {
+        "service": {
+          "name": "aio-mcp"
+        },
+        "authorization": {
+          "mode": "Disabled"
+        }
+      },
+      "extendedLocation": {
+        "name": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.ExtendedLocation/customLocations/resource-123",
+        "type": "CustomLocation"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "service": {
+            "name": "aio-mcp"
+          },
+          "authorization": {
+            "mode": "Disabled"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "name": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.ExtendedLocation/customLocations/resource-123",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.IoTOperations/instances/resource-123/mcpServerConnections/resource-123",
+        "name": "resource-123",
+        "type": "Microsoft.IoTOperations/instances/mcpServerConnections"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "service": {
+            "name": "aio-mcp"
+          },
+          "authorization": {
+            "mode": "Disabled"
+          },
+          "provisioningState": "Accepted"
+        },
+        "extendedLocation": {
+          "name": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.ExtendedLocation/customLocations/resource-123",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/F8C729F9-DF9C-4743-848F-96EE433D8E53/resourceGroups/rgiotoperations/providers/Microsoft.IoTOperations/instances/resource-123/mcpServerConnections/resource-123",
+        "name": "resource-123",
+        "type": "Microsoft.IoTOperations/instances/mcpServerConnections"
+      }
+    }
+  }
+}

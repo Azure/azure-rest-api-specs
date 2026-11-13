@@ -2,15 +2,31 @@
 
 import "../common/models.tsp";
 import "../common/servicepatterns.tsp";
+import "../skills/models.tsp";
 // Only shared evaluation types are needed; the full models import also pulls in Data Generation Jobs.
 import "../openai/evaluations/common.tsp";
 import "../openai/evaluations/user_conversation_simulation.tsp";
-import "@azure-tools/openai-typespec/models/chat";
 
 using TypeSpec.Rest;
-using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
+
+@@doc(
+  OpenAI.ChatCompletionTool.function,
+  "The function definition exposed to the model as a tool."
+);
+@@doc(
+  OpenAI.FunctionObject,
+  "Defines a function that a model can call, including its name and argument schema."
+);
+@@doc(
+  OpenAI.FunctionObject.parameters,
+  "The function's parameters, described as a JSON Schema object."
+);
+@@doc(
+  OpenAI.FunctionObject.strict,
+  "Whether generated arguments must strictly follow the parameter schema."
+);
 
 // ---------------------------------------------------------------------------
 // Input enums / unions
@@ -286,7 +302,7 @@ model AgentOptimizationCandidateSearchConfiguration {
   max_candidates?: int32 = 1;
 }
 
-/** Reusable quality-measurement configuration. */
+/** Reusable quality-measurement configuration for agent optimization. */
 model AgentOptimizationEvaluationConfiguration {
   @doc("Evaluation set used to guide the optimization search. Inline data supports up to 2,000 test cases when a separate validation set is supplied; otherwise it is also used for validation and is limited to 500.")
   training_set: AgentOptimizationEvaluationSet;
@@ -312,11 +328,14 @@ model AgentOptimizationEvaluationConfiguration {
 union AgentOptimizationConfigurationType {
   string,
 
-  @doc("Comparative agent optimization.")
+  @doc("Comparative agent optimization that can generate multiple candidates within configured search limits.")
   agent_optimization: "agent_optimization",
 
-  @doc("One-shot prompt optimization.")
+  @doc("One-shot prompt optimization that generates a single candidate.")
   prompt_optimization: "prompt_optimization",
+
+  @doc("Generates a single candidate containing zero or more skill outcomes from trace evidence, with optional reporting-only evaluation recorded on baseline and learned candidates.")
+  skill_optimization: "skill_optimization",
 }
 
 /** Base model for type-specific optimization configuration. */
@@ -354,6 +373,12 @@ union OptimizationContextType {
 
   @doc("Natural-language guidance that steers the desired optimization.")
   steering_prompt: "steering_prompt",
+
+  @doc("Agent trace evidence selected from project-authorized telemetry.")
+  agent_traces: "agent_traces",
+
+  @doc("Exact baseline skill references for skill optimization.")
+  skill_references: "skill_references",
 }
 
 /** Base model for typed optimization context. */
@@ -379,9 +404,210 @@ model PromptOptimizationConfiguration
   @doc("Optimization type discriminator.")
   type: AgentOptimizationConfigurationType.prompt_optimization;
 
-  @doc("Context used to steer prompt optimization. Omitted when no context is supplied.")
+  @doc("Steering context for prompt optimization. Agent trace and skill reference context are supported only by skill optimization. Omitted when no context is supplied.")
   @minItems(1)
   context?: OptimizationContext[];
+}
+
+/** Types of skill references used by optimization. */
+union AgentOptimizationSkillReferenceType {
+  string,
+
+  /** A registered Foundry skill. */
+  foundry_skill: "foundry_skill",
+}
+
+/** Base reference to a skill used by optimization. */
+@discriminator("type")
+model AgentOptimizationSkillReference {
+  @doc("Skill reference type. Additional types may be added in future API versions.")
+  type: AgentOptimizationSkillReferenceType;
+}
+
+/** Exact reference to an existing skill version in the job's project. */
+model AgentOptimizationFoundrySkillReference
+  extends AgentOptimizationSkillReference {
+  @doc("Registered Foundry skill reference discriminator.")
+  type: AgentOptimizationSkillReferenceType.foundry_skill;
+
+  @doc("Registered skill name, from 1 to 64 characters, following the shared skill naming rules.")
+  @minLength(1)
+  name: SkillName;
+
+  @doc("Non-empty opaque pinned version. The aliases latest and default are not accepted.")
+  @minLength(1)
+  version: string;
+}
+
+/** Explicit exact-version baselines for skill optimization. */
+model SkillReferencesOptimizationContext extends OptimizationContext {
+  @doc("Skill reference context discriminator.")
+  type: OptimizationContextType.skill_references;
+
+  @doc("Exact skill versions combined with skills discovered from Prompt or Managed targets, including toolboxes. References across context items and discovered skills are deduplicated. Without a target these are the only baselines; an empty effective inventory permits creation from selected traces. An empty list supplies no explicit baselines.")
+  skill_references: AgentOptimizationSkillReference[];
+}
+
+/** Project-authorized trace providers for skill optimization. */
+union AgentOptimizationTraceConnectionType {
+  string,
+
+  /** A project-linked Application Insights component. */
+  application_insights: "application_insights",
+}
+
+/** Explicit project-authorized telemetry selection, not an arbitrary endpoint. */
+@discriminator("type")
+model AgentOptimizationTraceConnectionConfiguration {
+  @doc("Trace provider discriminator.")
+  type: AgentOptimizationTraceConnectionType;
+}
+
+/** Selects a project-linked Application Insights component. */
+model AgentOptimizationAppInsightsTraceConnectionConfiguration
+  extends AgentOptimizationTraceConnectionConfiguration {
+  @doc("Application Insights provider discriminator.")
+  type: AgentOptimizationTraceConnectionType.application_insights;
+
+  @doc("Non-empty ARM component resource ID of an Application Insights connection linked to this project. Invalid or unavailable explicit configuration must fail rather than fall back.")
+  @minLength(1)
+  resource_id: string;
+
+  @doc("Required without target_configuration and omitted with a target agent. From 1 to 256 characters. Exact, case-sensitive AppRoleName or cloud_RoleName, including any emitted OpenTelemetry namespace prefix. This is a telemetry service identity, not a Foundry agent reference. No surrounding whitespace, wildcards, or KQL.")
+  @minLength(1)
+  @maxLength(256)
+  agent_name?: string;
+}
+
+/** Trace selection strategies for skill optimization. */
+union AgentOptimizationTraceWindowType {
+  string,
+
+  /** A half-open time interval whose effective end is no later than job submission. */
+  fixed: "fixed",
+
+  /** Explicit trace-ID selection within a lookback interval ending at job creation. */
+  trace_ids: "trace_ids",
+}
+
+/** Trace selection window for a one-time skill optimization job. */
+@discriminator("type")
+model AgentOptimizationTraceWindow {
+  @doc("Trace window discriminator.")
+  type: AgentOptimizationTraceWindowType;
+}
+
+/** Selects the latest readable trace conversations in a half-open interval, independently of feedback availability. */
+model AgentOptimizationFixedTraceWindow extends AgentOptimizationTraceWindow {
+  @doc("Fixed-window discriminator.")
+  type: AgentOptimizationTraceWindowType.fixed;
+
+  @doc("Inclusive UTC Unix timestamp in seconds, at or after the Unix epoch. Must precede the effective end_time after truncation to job submission time. The service rejects empty or inverted effective intervals.")
+  start_time: FoundryTimestamp;
+
+  @doc("Exclusive UTC Unix timestamp in seconds. A future value is truncated to job submission time, and the effective end is returned in the job configuration. The service does not wait for future traces.")
+  end_time: FoundryTimestamp;
+
+  @doc("Maximum number of trace conversations to select, from 1 to 100 inclusive. If omitted, the service defaults to 100. Selects the latest matching readable traces before collecting their annotations or evaluation results; feedback availability does not affect selection priority.")
+  @minValue(1)
+  @maxValue(100)
+  max_traces?: int32 = 100;
+}
+
+/** Selects explicit trace IDs within the configured telemetry source and a lookback interval ending at job creation. */
+model AgentOptimizationTraceIdsTraceWindow
+  extends AgentOptimizationTraceWindow {
+  @doc("Explicit trace-ID selection discriminator.")
+  type: AgentOptimizationTraceWindowType.trace_ids;
+
+  @doc("At least one explicit trace identifier to look up within the configured telemetry source. Service support, maximum list size, duplicate handling, and missing-ID behavior are TBD.")
+  @minItems(1)
+  trace_ids: string[];
+
+  @doc("Telemetry lookup horizon in hours, at least 1. The half-open lookup interval starts this many hours before job creation and ends at job creation; retries do not move the anchor.")
+  @minValue(1)
+  lookback_hours: int32;
+}
+
+/** Trace evidence for skill optimization, selected independently of feedback availability. */
+model AgentTracesOptimizationContext extends OptimizationContext {
+  @doc("Agent trace context discriminator.")
+  type: OptimizationContextType.agent_traces;
+
+  @doc("Explicit telemetry selection. Required without a target agent. When omitted with a target, use its project-linked telemetry. Not accepted on steering_prompt context.")
+  trace_connection_configuration?: AgentOptimizationTraceConnectionConfiguration;
+
+  @doc("Trace selection using a fixed half-open window or explicit trace_ids within a lookback interval ending at job creation.")
+  trace_window: AgentOptimizationTraceWindow;
+}
+
+/** Evidence sources for generating skill-optimization evaluators. */
+union AgentOptimizationEvaluatorGenerationSourceType {
+  string,
+
+  /** The job's selected agent trace evidence. */
+  agent_traces: "agent_traces",
+}
+
+/** Base configuration for service-generated optimization evaluators. Currently supported for skill optimization only. Uses evaluation_configuration.evaluation_model; no separate generation model is accepted. */
+@discriminator("type")
+model AgentOptimizationEvaluatorGenerationConfiguration {
+  @doc("Evaluator generation source discriminator.")
+  type: AgentOptimizationEvaluatorGenerationSourceType;
+
+  @doc("Additional instructions or context to guide evaluator generation from the selected source.")
+  prompt?: string;
+}
+
+/** Generates an evaluator from the job's trace evidence or a separate evaluator-only trace selection. */
+model AgentOptimizationTraceEvaluatorGenerationConfiguration
+  extends AgentOptimizationEvaluatorGenerationConfiguration {
+  @doc("Generate evaluators from the agent_traces context.")
+  type: AgentOptimizationEvaluatorGenerationSourceType.agent_traces;
+
+  @doc("Optional trace selection used only to generate the evaluator. When omitted, reuses the agent_traces context window. An override does not change dataset generation, learning evidence, or validation partitioning. Uses the same fixed-window truncation and trace-ID lookup rules as the context window.")
+  trace_window?: AgentOptimizationTraceWindow;
+}
+
+/** Skill-only evaluation inputs. Training-trace grading can inform single-shot learning; supported before/after comparison reports impact without gating publication. */
+model SkillOptimizationEvaluationConfiguration {
+  @doc("Optional target-completion validation data, limited to 500 inline test cases. When omitted, the service generates data from the selected traces and partitions it using training_split_ratio for supported before/after comparison. Both comparison runs reuse the same frozen validation dataset. Caller-provided validation data is reused without splitting. Caller-supplied training_set is not accepted.")
+  validation_set?: AgentOptimizationTargetCompletionEvaluationSet;
+
+  @doc("Existing evaluator reference. At submission, supply exactly one reference or evaluator_generation_configuration, not both; the service validates this combination. After preparation, contains the resolved exact evaluator version used for training grading and supported baseline and learned-candidate evaluation.")
+  @minItems(1)
+  @maxItems(1)
+  evaluators?: AgentOptimizationEvaluator[];
+
+  @doc("Required model configuration used for evaluation. Its model also supplies evaluator-generation requests when generation is selected.")
+  evaluation_model: EvaluationModelConfiguration;
+
+  @doc("Maximum number of target-agent runs executed concurrently during each target-completion evaluation, from 1 to 10. If omitted, the service defaults to 1.")
+  @minValue(1)
+  @maxValue(10)
+  max_concurrent_agent_runs?: int32 = 1;
+
+  @doc("Alternative to an existing evaluator reference at submission. Generates an evaluator using evaluation_model.model. Resolved exact versions are returned in evaluators after preparation.")
+  evaluator_generation_configuration?: AgentOptimizationEvaluatorGenerationConfiguration;
+}
+
+/** Configuration for generating a single skill candidate from trace evidence. The candidate can contain zero or more skill outcomes; no new learnings can produce an empty skill_results array without publishing versions. Optional evaluation reuses a non-generated baseline candidate. */
+model SkillOptimizationConfiguration
+  extends AgentOptimizationConfigurationBase {
+  @doc("Skill optimization discriminator.")
+  type: AgentOptimizationConfigurationType.skill_optimization;
+
+  @doc("At least one context item containing trace evidence, optional steering guidance, and optional exact baseline references. Supply agent_traces context; use separate steering_prompt and skill_references items for guidance and baselines. For skill optimization only, a steering prompt must be non-empty and at most 100 KiB (102,400 UTF-8 bytes), enforced by the service; oversized prompts are rejected rather than truncated.")
+  @minItems(1)
+  context: OptimizationContext[];
+
+  @doc("Fraction of generated question groups assigned to learning, strictly greater than 0 and less than 1. Defaults to 0.7 when omitted. Normalized questions and shared source traces stay in the same group, and every generated row belongs to learning or validation. The service rejects splits that leave either side empty. Caller-provided validation data is not split.")
+  @minValueExclusive(0)
+  @maxValueExclusive(1)
+  training_split_ratio?: float64 = 0.7;
+
+  @doc("Optional historical training-trace grading and before/after comparison for supported registered targets. Requires target_configuration, evaluation_model, and one existing evaluator or evaluator_generation_configuration. Training verdicts can inform learning; separate before/after scores report impact and do not drive candidate search, selection, or publication. Omitted to skip new training grading and comparison.")
+  evaluation_configuration?: SkillOptimizationEvaluationConfiguration;
 }
 
 @doc("Inputs for estimating an agent-optimization job.")

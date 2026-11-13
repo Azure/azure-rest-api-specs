@@ -10,6 +10,7 @@ import "../data_generation_jobs/routes.tsp";
 import "../sdk-common/ops-relocation-datasets.tsp";
 
 // Stable operation (GA routes) without preview features
+import "../agent-insights/routes.tsp";
 import "../agents-optimization/routes.tsp";
 import "../agents-microsoft365/routes.tsp";
 import "../connections/routes.tsp";
@@ -19,7 +20,6 @@ import "../indexes/routes.tsp";
 
 // Beta operations (preview routes, requiring opt-in request header)
 import "../voice-agents/routes.tsp";
-import "../agent-insights/routes.tsp";
 import "../evaluation-taxonomies/routes.tsp";
 import "../evaluators/routes.tsp";
 import "../insights/routes.tsp";
@@ -35,7 +35,6 @@ import "../agents-session-files/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
 import "../sdk-common/ops-relocation-agents.tsp";
-import "../sdk-common/ops-relocation-agent-insights.tsp";
 import "../sdk-common/ops-relocation-projects.tsp";
 import "../sdk-common/error.default.tsp";
 
@@ -54,6 +53,56 @@ using Azure.AI.Projects;
 
 // To fix circular dependency in Python, remaining OpenAI types are emitted as Azure.AI.Projects
 @@clientNamespace(OpenAI, "azure.ai.projects", "python");
+@@clientNamespace(Azure.AI.ProjectsInternal, "Azure.AI.Projects", "javascript");
+
+// The original schemas below are not emitted as Python classes, but their client
+// names are still checked for collisions, including the default language scope.
+// The ...Base suffix only frees the existing public names for the Tool wrappers;
+// it does not imply inheritance.
+@@clientName(OpenAI.ApplyPatchToolParam, "ApplyPatchToolParamBase");
+@@clientName(OpenAI.CodeInterpreterTool, "CodeInterpreterToolBase");
+@@clientName(OpenAI.ComputerTool, "ComputerToolBase");
+@@clientName(OpenAI.ComputerUsePreviewTool, "ComputerUsePreviewToolBase");
+@@clientName(OpenAI.CustomToolParam, "CustomToolParamBase");
+@@clientName(OpenAI.FileSearchTool, "FileSearchToolBase");
+@@clientName(OpenAI.FunctionShellToolParam, "FunctionShellToolParamBase");
+@@clientName(OpenAI.FunctionTool, "FunctionToolBase");
+@@clientName(OpenAI.ImageGenTool, "ImageGenToolBase");
+@@clientName(OpenAI.LocalShellToolParam, "LocalShellToolParamBase");
+@@clientName(OpenAI.MCPTool, "MCPToolBase");
+@@clientName(
+  OpenAI.ProgrammaticToolCallingParam,
+  "ProgrammaticToolCallingParamBase"
+);
+@@clientName(OpenAI.ToolSearchToolParam, "ToolSearchToolParamBase");
+@@clientName(OpenAI.WebSearchPreviewTool, "WebSearchPreviewToolBase");
+@@clientName(OpenAI.WebSearchTool, "WebSearchToolBase");
+
+// Preserve the Python names used before OpenAI 1.34.1 and the names shipped in @azure/ai-projects 2.10.0.
+// For example, OpenAI.ToolToolSearchToolParam emits ToolSearchToolParam, while
+// OpenAI.ToolSearchToolParam (renamed ToolSearchToolParamBase) is not emitted.
+@@clientName(OpenAI.ToolApplyPatchToolParam, "ApplyPatchToolParam");
+@@clientName(OpenAI.ToolCodeInterpreterTool, "CodeInterpreterTool");
+@@clientName(OpenAI.ToolComputerTool, "ComputerTool");
+@@clientName(OpenAI.ToolComputerUsePreviewTool, "ComputerUsePreviewTool");
+@@clientName(OpenAI.ToolCustomToolParam, "CustomToolParam");
+@@clientName(OpenAI.ToolFileSearchTool, "FileSearchTool");
+@@clientName(OpenAI.ToolFunctionShellToolParam, "FunctionShellToolParam");
+@@clientName(OpenAI.ToolFunctionTool, "FunctionTool");
+@@clientName(OpenAI.ToolImageGenTool, "ImageGenTool");
+@@clientName(OpenAI.ToolLocalShellToolParam, "LocalShellToolParam");
+@@clientName(OpenAI.ToolMcpTool, "MCPTool");
+@@clientName(
+  OpenAI.ToolProgrammaticToolCallingParam,
+  "ProgrammaticToolCallingParam"
+);
+@@clientName(OpenAI.ToolToolSearchToolParam, "ToolSearchToolParam");
+@@clientName(OpenAI.ToolWebSearchPreviewTool, "WebSearchPreviewTool");
+@@clientName(OpenAI.ToolWebSearchTool, "WebSearchTool");
+
+// Reuse the Tool subclasses in live APIs instead of emitting colliding standalone models.
+@@alternateType(OpenAI.CustomToolParam, OpenAI.ToolCustomToolParam);
+@@alternateType(OpenAI.MCPTool, OpenAI.ToolMcpTool);
 
 // ********************************************************************************
 // ********************************************************************************
@@ -108,6 +157,49 @@ using Azure.AI.Projects;
   "python"
 );
 
+// Preserve the enum member names released in Python 2.10.0 to avoid a source-breaking rename.
+// These Python-only overrides do not change wire values or JavaScript names.
+@@clientName(
+  ActivityProtocolAccessBoundary.read_1on1_manager,
+  "READ1_ON1_MANAGER",
+  "python"
+);
+@@clientName(
+  ActivityProtocolAccessBoundary.read_1on1_developers,
+  "READ1_ON1_DEVELOPERS",
+  "python"
+);
+@@clientName(
+  ActivityProtocolAccessBoundary.read_1on1_allowlisted,
+  "READ1_ON1_ALLOWLISTED",
+  "python"
+);
+@@clientName(
+  ActivityProtocolAccessBoundary.read_1on1_tenant,
+  "READ1_ON1_TENANT",
+  "python"
+);
+@@clientName(
+  ActivityProtocolAccessBoundary.write_1on1_manager,
+  "WRITE1_ON1_MANAGER",
+  "python"
+);
+@@clientName(
+  ActivityProtocolAccessBoundary.write_1on1_developers,
+  "WRITE1_ON1_DEVELOPERS",
+  "python"
+);
+@@clientName(
+  ActivityProtocolAccessBoundary.write_1on1_allowlisted,
+  "WRITE1_ON1_ALLOWLISTED",
+  "python"
+);
+@@clientName(
+  ActivityProtocolAccessBoundary.write_1on1_tenant,
+  "WRITE1_ON1_TENANT",
+  "python"
+);
+
 // Exclude these operations entirely from the Python SDK.
 // Note that JavaScript SDK already shipped 2.0.0 with these, so they can't be removed.
 @@scope(Agents.createAgent, "!(python)");
@@ -123,8 +215,151 @@ using Azure.AI.Projects;
 @@clientName(AgentObject, "Agent", "javascript");
 @@clientName(AgentVersionObject, "AgentVersion", "javascript");
 
+// Disambiguate the unwrapped definitions, even when they are not emitted.
+@@clientName(
+  OpenAI.ApplyPatchToolParam,
+  "ApplyPatchToolParamDefinition",
+  "javascript"
+);
+@@clientName(
+  OpenAI.CodeInterpreterTool,
+  "CodeInterpreterToolDefinition",
+  "javascript"
+);
+@@clientName(OpenAI.ComputerTool, "ComputerToolDefinition", "javascript");
+@@clientName(
+  OpenAI.ComputerUsePreviewTool,
+  "ComputerUsePreviewToolDefinition",
+  "javascript"
+);
+@@clientName(OpenAI.CustomToolParam, "CustomToolParamDefinition", "javascript");
+@@clientName(OpenAI.FileSearchTool, "FileSearchToolDefinition", "javascript");
+@@clientName(
+  OpenAI.FunctionShellToolParam,
+  "FunctionShellToolParamDefinition",
+  "javascript"
+);
+@@clientName(OpenAI.FunctionTool, "FunctionToolDefinition", "javascript");
+@@clientName(OpenAI.ImageGenTool, "ImageGenToolDefinition", "javascript");
+@@clientName(
+  OpenAI.LocalShellToolParam,
+  "LocalShellToolParamDefinition",
+  "javascript"
+);
+@@clientName(OpenAI.MCPTool, "MCPToolDefinition", "javascript");
+@@clientName(
+  OpenAI.ProgrammaticToolCallingParam,
+  "ProgrammaticToolCallingParamDefinition",
+  "javascript"
+);
+@@clientName(
+  OpenAI.ToolSearchToolParam,
+  "ToolSearchToolParamDefinition",
+  "javascript"
+);
+@@clientName(
+  OpenAI.WebSearchPreviewTool,
+  "WebSearchPreviewToolDefinition",
+  "javascript"
+);
+@@clientName(OpenAI.WebSearchTool, "WebSearchToolDefinition", "javascript");
+
+// Anonymous helper names are derived from TypeSpec names, not their clientName overrides.
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Preserve the released JavaScript helper aliases for heterogeneous unions without changing their variants."
+namespace JavaScriptToolCompatibility {
+  // The JS emitter's literal-name escape preserves the public aliases' leading underscores.
+  @clientName("$DO_NOT_NORMALIZE$_CodeInterpreterToolContainer", "javascript")
+  union CodeInterpreterToolContainer {
+    string,
+    OpenAI.AutoCodeInterpreterToolParam,
+  }
+
+  @clientName("$DO_NOT_NORMALIZE$_MCPToolAllowedTools", "javascript")
+  union MCPToolAllowedTools {
+    string[],
+    OpenAI.MCPToolFilter,
+  }
+
+  @clientName("$DO_NOT_NORMALIZE$_MCPToolRequireApproval", "javascript")
+  union MCPToolRequireApproval {
+    OpenAI.MCPToolRequireApproval,
+    "always",
+    "never",
+  }
+
+  @clientName("$DO_NOT_NORMALIZE$_FileSearchToolFiltersValue", "javascript")
+  union FileSearchToolFiltersValueItems {
+    string,
+    numeric,
+  }
+
+  union FileSearchToolFiltersValue {
+    string,
+    numeric,
+    boolean,
+    FileSearchToolFiltersValueItems[],
+  }
+
+  @clientName("$DO_NOT_NORMALIZE$_FileSearchToolFiltersFilter", "javascript")
+  union FileSearchToolFiltersFilter {
+    OpenAI.ComparisonFilter,
+    OpenAI.CompoundFilter,
+  }
+}
+
+@@alternateType(
+  OpenAI.ToolCodeInterpreterTool.container,
+  JavaScriptToolCompatibility.CodeInterpreterToolContainer,
+  "javascript"
+);
+@@alternateType(
+  OpenAI.ToolMcpTool.allowed_tools,
+  JavaScriptToolCompatibility.MCPToolAllowedTools | null,
+  "javascript"
+);
+@@alternateType(
+  OpenAI.ToolMcpTool.require_approval,
+  JavaScriptToolCompatibility.MCPToolRequireApproval | null,
+  "javascript"
+);
+@@alternateType(
+  OpenAI.ComparisonFilter.value,
+  JavaScriptToolCompatibility.FileSearchToolFiltersValue,
+  "javascript"
+);
+@@alternateType(
+  OpenAI.CompoundFilter.filters,
+  JavaScriptToolCompatibility.FileSearchToolFiltersFilter[],
+  "javascript"
+);
+
+// Preserve the released Python annotation list[Union[ComparisonFilter, Any]] instead of
+// list[Union[ComparisonFilter, CompoundFilter]], which would be a breaking change.
+@@alternateType(
+  OpenAI.CompoundFilter.filters,
+  (OpenAI.ComparisonFilter | OpenAI.CompoundFilter | unknown)[]
+);
+
 // Preserve the existing JavaScript operation name.
 @@clientName(EvaluationRules.delete, "delete", "javascript");
+
+// typespec-ts reads multi-word discriminators by their camel-cased name in polymorphic
+// serializers and ignores ignore-property-name-normalize, so keep the JS client name aligned.
+@@clientName(
+  VoiceAgentSubagentConfig.subagent_type,
+  "subagentType",
+  "javascript"
+);
+@@clientName(
+  VoiceAgentDelegateSubagentConfig.subagent_type,
+  "subagentType",
+  "javascript"
+);
+@@clientName(
+  VoiceAgentInlineSubagentConfig.subagent_type,
+  "subagentType",
+  "javascript"
+);
 
 // Python emitter creates enum values ENUM_1_G = "1g", ENUM_4_G = "4g" etc. Override it here as below.
 @@clientName(OpenAI.ContainerMemoryLimit.`1g`, exact("MEMORY_1GB"), "python");
@@ -223,6 +458,18 @@ using Azure.AI.Projects;
 @@clientName(AssetCredentialResponse, "DatasetCredential");
 @@clientName(SasCredential, "BlobReferenceSasCredential"); // Not to be confused with class "SASCredentials"
 
+// Preserve the released evaluator model name and distinguish campaign inputs.
+@@clientName(
+  DatasetReference,
+  "TelephonyCampaignDatasetReference",
+  "python, javascript"
+);
+@@clientName(
+  VersionedDatasetReference,
+  "DatasetReference",
+  "python, javascript"
+);
+
 // --------------------------------------------------------------------------------
 // Indexes sub‐client
 // --------------------------------------------------------------------------------
@@ -288,6 +535,11 @@ using Azure.AI.Projects;
 @@clientName(Azure.AI.Projects.Agents.generateAgent, "createFromPrompt");
 @@clientName(AgentOptimizationJobs.create, "createOptimizationJob");
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob");
+@@clientName(
+  AgentOptimizationJobs.downloadFile,
+  "downloadOptimizationJobFile",
+  "python, javascript"
+);
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs");
 @@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob");
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob");
@@ -306,17 +558,45 @@ using Azure.AI.Projects;
 );
 
 // --------------------------------------------------------------------------------
-// Beta Voice Agent Realtime sub-client
+// Voice Agent WebSocket transports
 // --------------------------------------------------------------------------------
 
 // A generated HTTP client cannot keep the socket alive past the 101 response, and each language
 // needs its own WebSocket transport to speak the realtime protocol afterward. Exclude this
 // operation entirely from the emitted SDK; it remains in the spec for raw REST documentation only.
 @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!(python, javascript)");
+@@scope(VoiceAgentLiveWebSocket.connectLiveVoiceAgent, "!(python, javascript)");
 
 // Keep VoiceAgentTransport reachable even though the WebSocket operation that references it is excluded.
 @@usage(VoiceAgentTransport, Usage.input | Usage.json);
 @@access(VoiceAgentTransport, Access.public);
+
+@@clientName(
+  VoiceAgentCollectionStartArguments.timeout_seconds,
+  "timeout",
+  "python"
+);
+@@clientName(
+  VoiceAgentCollectDtmfStartArguments.first_digit_timeout_seconds,
+  "first_digit_timeout",
+  "python"
+);
+@@clientName(
+  VoiceAgentDtmfCompletionTiming.inter_digit_timeout_seconds,
+  "inter_digit_timeout",
+  "python"
+);
+@@clientName(
+  VoiceAgentSubagent.invoke_timeout_seconds,
+  "invoke_timeout",
+  "python"
+);
+@@clientName(VoiceAgentSystemTool.timeout_seconds, "timeout", "python");
+@@clientName(
+  VoiceAgentTransferRouting.ring_timeout_seconds,
+  "ring_timeout",
+  "python"
+);
 
 // --------------------------------------------------------------------------------
 // Beta Voice Agent Conversations sub-client
@@ -365,6 +645,41 @@ using Azure.AI.Projects;
 );
 
 // --------------------------------------------------------------------------------
+// Beta Voice Agent Live Conversations sub-client
+// --------------------------------------------------------------------------------
+
+@@clientName(AgentEndpointLiveConversations.listLiveAgentConversations, "list");
+@@clientName(AgentEndpointLiveConversations.getLiveAgentConversation, "get");
+@@clientName(
+  AgentEndpointLiveConversations.deleteLiveAgentConversation,
+  "delete"
+);
+@@clientName(
+  AgentEndpointLiveConversations.listLiveAgentConversationItems,
+  "listItems"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationItem,
+  "getItem"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudioItem,
+  "getAudioItem"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudioItemContent,
+  "downloadAudioItem"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudio,
+  "getAudio"
+);
+@@clientName(
+  AgentEndpointLiveConversations.getLiveAgentConversationAudioContent,
+  "downloadAudio"
+);
+
+// --------------------------------------------------------------------------------
 // Beta Voice Agent Telephony sub-client
 // --------------------------------------------------------------------------------
 
@@ -392,6 +707,8 @@ using Azure.AI.Projects;
 );
 @@clientName(AgentTelephony.createTelephonyCallJob, "createCallJob");
 @@clientName(AgentTelephony.getTelephonyCallJob, "getCallJob");
+@@clientName(AgentTelephony.listTelephonyCallJobs, "listCallJobs");
+@@clientName(AgentTelephony.deleteTelephonyCallJob, "deleteCallJob");
 @@clientName(AgentTelephony.cancelTelephonyCallJob, "cancelCallJob");
 
 // --------------------------------------------------------------------------------
@@ -496,6 +813,8 @@ using Azure.AI.Projects;
 
 // Need to explicitly mention both languages to avoid compile error
 @@clientName(Evaluators.listLatestVersions, "list", "python, javascript");
+
+@@access(Evaluators.listDiagnostics, Access.public);
 
 // Evaluator pending upload
 @@clientName(Evaluators.startPendingUpload, "pendingUpload");

@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "virtualNetworkApplianceName": "test-vna"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "pl-fastpath",
+            "type": "Microsoft.Network/virtualNetworkAppliances/capabilities",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkAppliances/test-vna/capabilities/pl-fastpath",
+            "kind": "PLGatewayFastpath",
+            "properties": {
+              "ipVersion": "DualStack",
+              "linkedResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/rg1-vnet",
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "name": "pl-ipforwarders",
+            "type": "Microsoft.Network/virtualNetworkAppliances/capabilities",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkAppliances/test-vna/capabilities/pl-ipforwarders",
+            "kind": "PLIPForwarders",
+            "properties": {
+              "ipVersion": "IPv6",
+              "linkedResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/rg1-vnet",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualNetworkApplianceCapabilities_List",
+  "title": "List virtual network appliance capabilities"
+}

@@ -36,6 +36,12 @@ interface CapabilityHosts {
   get is ArmResourceRead<CapabilityHost>;
 
   /**
+   * Lists the capability hosts associated with the specified workspace.
+   */
+  @summary("List capability hosts in the workspace.")
+  list is ArmResourceListByParent<CapabilityHost>;
+
+  /**
    * Create or update capabilityHost.
    */
   @summary("Create or update capabilityHost.")

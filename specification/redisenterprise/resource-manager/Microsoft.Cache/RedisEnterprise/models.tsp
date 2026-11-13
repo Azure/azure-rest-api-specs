@@ -793,7 +793,7 @@ union SourceType {
 /**
  * Current provisioning status
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Migration is an operation-tracking proxy resource whose provisioningState intentionally exposes the RP's migration lifecycle, including intermediate cancellation and endpoint-unlinking states. Changing this existing property or its values would break the RP payload and previously released clients."
 union MigrationProvisioningState {
   string,
 
@@ -836,12 +836,30 @@ union MigrationProvisioningState {
    * The migration operation cancellation has failed.
    */
   CancellationFailed: "CancellationFailed",
+
+  /**
+   * The migrated endpoint is being unlinked from the cluster.
+   */
+  @added(Versions.v2026_09_01)
+  Unlinking: "Unlinking",
+
+  /**
+   * The migrated endpoint has been unlinked from the cluster.
+   */
+  @added(Versions.v2026_09_01)
+  Unlinked: "Unlinked",
+
+  /**
+   * Unlinking the migrated endpoint from the cluster has failed.
+   */
+  @added(Versions.v2026_09_01)
+  UnlinkFailed: "UnlinkFailed",
 }
 
 /**
  * Which access key to regenerate.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
 enum AccessKeyType {
   /**
    * Primary
@@ -936,13 +954,13 @@ model Sku {
 /**
  * Properties of Redis Enterprise clusters for create operations
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
 model ClusterCreateProperties extends ClusterProperties {
   /**
    * Whether or not public network traffic can access the Redis cluster. Only 'Enabled' or 'Disabled' can be set. null is returned only for clusters created using an old API version which do not have this property and cannot be set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   publicNetworkAccess: PublicNetworkAccess | null;
 }
 
@@ -970,6 +988,21 @@ model ClusterProperties {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   maintenanceConfiguration?: MaintenanceConfiguration;
+
+  /**
+   * The complete set of firewall rules for an Azure Managed Redis (AMR) cluster. At most 250 rules are supported, and non-empty rules require publicNetworkAccess to be Enabled.
+   *
+   * On PUT, the supplied array replaces all existing rules. Omitting this property or supplying an empty array clears all rules.
+   *
+   * On PATCH, omitting this property preserves existing rules. A supplied array replaces all existing rules; rules absent from it are deleted. Supplying an empty array clears all rules.
+   *
+   * Disabling publicNetworkAccess also clears existing rules. With publicNetworkAccess Enabled, an empty rule set allows all public traffic; it does not deny all traffic.
+   *
+   * Firewall rule changes cannot be combined with scaling or encryption changes in the same update request.
+   */
+  @added(Versions.v2026_10_01_preview)
+  @identifiers(#["name"])
+  firewallRules?: FirewallRule[];
 
   /**
    * DNS name of the cluster endpoint
@@ -1015,6 +1048,16 @@ model ClusterProperties {
   migratedEndpoint?: string;
 }
 
+/** A firewall rule associated with the cluster. */
+@added(Versions.v2026_10_01_preview)
+model FirewallRule {
+  /** The name of the firewall rule, unique within the cluster ignoring case. Must be 1-80 characters and contain only letters, numbers, hyphens, or underscores. */
+  name: string;
+
+  /** An IPv4 address (for example, "203.0.113.1"), IPv4 CIDR prefix (for example, "203.0.113.0/24"), or Azure service tag (for example, "AzureCloud"). IPv6 addresses are not supported. */
+  sourceAddressPrefix: string;
+}
+
 /** Cluster-level maintenance configuration. */
 model MaintenanceConfiguration {
   /** Custom maintenance windows that apply to the cluster. */
@@ -1056,19 +1099,19 @@ model MaintenanceWindowSchedule {
 /** Day of week. Required when the maintenance window type is 'Weekly'. */
 union MaintenanceDayOfWeek {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   Sunday: "Sunday",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   Monday: "Monday",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   Tuesday: "Tuesday",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   Wednesday: "Wednesday",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   Thursday: "Thursday",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   Friday: "Friday",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   Saturday: "Saturday",
 }
 
@@ -1136,7 +1179,7 @@ model ClusterUpdate {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
@@ -1144,12 +1187,12 @@ model ClusterUpdate {
 /**
  * Properties of Redis Enterprise clusters for update operations
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
 model ClusterUpdateProperties extends ClusterProperties {
   /**
    * Whether or not public network traffic can access the Redis cluster. Only 'Enabled' or 'Disabled' can be set. null is returned only for clusters created using an old API version which do not have this property and cannot be set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   publicNetworkAccess?: PublicNetworkAccess | null;
 }
 
@@ -1166,8 +1209,8 @@ model DatabaseList is Azure.Core.Page<Database>;
 /**
  * Properties for creating Redis Enterprise databases
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
 model DatabaseCreateProperties extends DatabaseProperties {
   /**
    * This property can be Enabled/Disabled to allow or deny access with the current access keys. Can be updated even after database is created. Default is Disabled.
@@ -1381,7 +1424,7 @@ model DatabaseUpdate {
 /**
  * Properties for updating Redis Enterprise databases
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
 model DatabaseUpdateProperties extends DatabaseProperties {
   /**
    * This property can be Enabled/Disabled to allow or deny access with the current access keys. Can be updated even after database is created. Default is Disabled.
@@ -1455,15 +1498,50 @@ model AccessPolicyAssignmentProperties {
   /**
    * **Deprecated.** This property always returns "default". Use `accessString` to configure custom Redis ACL permissions instead.
    */
-  #deprecated "`accessPolicyName` is being deprecated. Use `accessString` to configure custom Redis ACL permissions instead."
+  @removed(Versions.v2026_05_01_preview)
+  @renamedFrom(Versions.v2026_05_01_preview, "accessPolicyName")
   @pattern("^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$")
-  @madeOptional(Versions.v2026_05_01_preview)
+  accessPolicyNameBeforeCustomAccessString: string;
+
+  /**
+   * **Deprecated.** This property always returns "default". Use `accessString` to configure custom Redis ACL permissions instead.
+   */
+  #deprecated "`accessPolicyName` is being deprecated. Use `accessString` to configure custom Redis ACL permissions instead."
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "accessPolicyName")
+  @pattern("^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$")
+  accessPolicyNameWithCustomAccessString?: string;
+
+  /**
+   * Name of access policy under specific access policy assignment. Only "default" policy is supported for now.
+   */
+  @added(Versions.v2026_09_01)
+  @removed(Versions.v2026_10_01_preview)
+  @renamedFrom(Versions.v2026_10_01_preview, "accessPolicyName")
+  @pattern("^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$")
+  accessPolicyNameBeforeCustomAccessStringReintroduction: string;
+
+  /**
+   * **Deprecated.** This property always returns "default". Use `accessString` to configure custom Redis ACL permissions instead.
+   */
+  #deprecated "`accessPolicyName` is being deprecated. Use `accessString` to configure custom Redis ACL permissions instead."
+  @added(Versions.v2026_10_01_preview)
+  @pattern("^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$")
   accessPolicyName?: string;
 
   /**
    * The Redis ACL permissions string applied to this assignment, for example `+@read ~cache:*`. Defaults to `+@all ~*` if not specified.
    */
   @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "accessString")
+  accessStringPreviousPreview?: string;
+
+  /**
+   * The Redis ACL permissions string applied to this assignment, for example `+@read ~cache:*`. Defaults to `+@all ~*` if not specified.
+   */
+  @added(Versions.v2026_10_01_preview)
   accessString?: string;
 
   /**
@@ -1471,6 +1549,15 @@ model AccessPolicyAssignmentProperties {
    */
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "provisioningError")
+  provisioningErrorPreviousPreview?: AccessPolicyAssignmentProvisioningErrorPreviousPreview;
+
+  /**
+   * Provisioning error details when the access string failed to apply (e.g., invalid ACL syntax). Null when provisioning succeeded.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_10_01_preview)
   provisioningError?: AccessPolicyAssignmentProvisioningError;
 
   /**
@@ -1493,6 +1580,29 @@ model AccessPolicyAssignmentPropertiesUser {
  * Error details for access policy assignment provisioning failures.
  */
 @added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_09_01)
+@renamedFrom(Versions.v2026_09_01, "AccessPolicyAssignmentProvisioningError")
+model AccessPolicyAssignmentProvisioningErrorPreviousPreview {
+  /**
+   * Machine-readable error code (e.g., "InvalidAccessString").
+   */
+  code: string;
+
+  /**
+   * Human-readable error message describing the failure.
+   */
+  message: string;
+
+  /**
+   * The property that caused the error (e.g., "properties.accessString").
+   */
+  target?: string;
+}
+
+/**
+ * Error details for access policy assignment provisioning failures.
+ */
+@added(Versions.v2026_10_01_preview)
 model AccessPolicyAssignmentProvisioningError {
   /**
    * Machine-readable error code (e.g., "InvalidAccessString").
@@ -1538,7 +1648,7 @@ model SkuDetails {
   /**
    * The cache size in GB.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Suppressed warnings during typespec conversion that are required to avoid breaking changes."
   @visibility(Lifecycle.Read)
   sizeInGB?: float32;
 }
@@ -1680,8 +1790,10 @@ model MigrationProperties {
   /**
    * Additional details about the migration operation's status in free text format.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service serializes this read-only property as explicit null when no status details are present, so nullability is distinct from optionality."
+  @typeChangedFrom(Versions.v2026_09_01, string)
   @visibility(Lifecycle.Read)
-  statusDetails?: string;
+  statusDetails?: string | null;
 
   /**
    * The timestamp when the migration operation was created.
@@ -1696,6 +1808,69 @@ model MigrationProperties {
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedTime?: utcDateTime;
+
+  /**
+   * The timestamp until which a successful migration remains eligible to be undone (rolled back) to the source cache. This property is only returned while the migration is in the Succeeded state, and is calculated from the time the migration succeeded plus the rollback window. After this time the source cache is released and the migration can no longer be undone.
+   */
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Read)
+  rollbackEligibleUntil?: utcDateTime;
+}
+
+/**
+ * Parameters supplied to the undo migration operation.
+ */
+model MigrationUndoRequest {
+  /**
+   * The reason for undoing (rolling back) the migration. Choose the value that best describes why the rollback is needed. This information helps us improve the migration experience and does not change how the rollback is performed.
+   */
+  rollbackReason?: MigrationRollbackReason;
+}
+
+/**
+ * The reason a migration operation is being undone (rolled back).
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Closed set: `Other` is the catch-all, and the property is request-only, so clients are never handed a value they cannot parse."
+enum MigrationRollbackReason {
+  /**
+   * The target cache did not meet the expected performance characteristics.
+   */
+  Performance: "performance",
+
+  /**
+   * The target cache was not compatible with the client application or workload.
+   */
+  Compatibility: "compatibility",
+
+  /**
+   * The client application was unable to connect to the target cache.
+   */
+  ClientConnection: "clientConnection",
+
+  /**
+   * The target cache did not meet the expected cost characteristics.
+   */
+  Cost: "cost",
+
+  /**
+   * The migration was performed as a test and is being reverted.
+   */
+  Testing: "testing",
+
+  /**
+   * The target cache did not meet the expected stability characteristics.
+   */
+  Stability: "stability",
+
+  /**
+   * Data was lost during or after the migration.
+   */
+  DataLoss: "dataLoss",
+
+  /**
+   * The migration is being undone for a reason not covered by the other values.
+   */
+  Other: "other",
 }
 
 /**
@@ -1719,6 +1894,14 @@ model AzureCacheForRedisMigrationProperties extends MigrationProperties {
   /**
    * Sets whether the data is migrated from source to target or not. This property must be true during the preview.
    */
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "skipDataMigration")
+  skipDataMigrationPreview: boolean;
+
+  /**
+   * Sets whether the data is migrated from source to target or not. Set this property to true to skip data migration.
+   */
+  @added(Versions.v2026_09_01)
   skipDataMigration: boolean;
 
   /**
@@ -1753,6 +1936,7 @@ model MigrationValidationRequest {
   /**
    * Sets whether to ignore warnings when validating if the source cache can be migrated to the target cache. If this property is true, the isValid property in the response will ignore warning-level disparities between the source and target resource. The default value is false.
    */
+  @removed(Versions.v2026_09_01)
   forceMigrate?: boolean;
 }
 

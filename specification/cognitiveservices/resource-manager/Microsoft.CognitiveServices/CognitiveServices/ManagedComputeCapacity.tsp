@@ -23,6 +23,7 @@ namespace Microsoft.CognitiveServices;
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @subscriptionResource
 model ManagedComputeCapacity
   is Azure.ResourceManager.ProxyResource<ManagedComputeCapacityProperties> {
@@ -41,6 +42,7 @@ model ManagedComputeCapacity
 @removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @armResourceOperations(#{ omitTags: true })
 interface ManagedComputeCapacities {
   /**
@@ -70,6 +72,19 @@ interface ManagedComputeCapacities {
        */
       @query("deploymentId")
       deploymentId?: string;
+
+      /**
+       * Optional Azure location used to select a DataZone scope. Without a deployment ID,
+       * omitted or blank location returns Global and both US and EU DataZone capacities.
+       * A supported location returns Global and the matching DataZone capacities; an
+       * unsupported location returns Global capacity only. With a deployment ID, a
+       * nonblank location must match the parent account location, ignoring case and
+       * surrounding whitespace, or the request returns HTTP 400. Capacity is still
+       * returned for the deployment's backend region.
+       */
+      @added(Versions.v2026_11_01)
+      @query("location")
+      location?: string;
     },
     Response = ManagedComputeCapacityListResult
   >;

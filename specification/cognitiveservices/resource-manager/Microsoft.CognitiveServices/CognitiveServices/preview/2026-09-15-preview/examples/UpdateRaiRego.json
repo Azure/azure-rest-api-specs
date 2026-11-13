@@ -1,0 +1,50 @@
+{
+  "operationId": "RaiRegos_CreateOrUpdate",
+  "parameters": {
+    "accountName": "safety-account",
+    "api-version": "2026-09-15-preview",
+    "If-Match": "\"00000000-0000-0000-0000-000000000001\"",
+    "raiRegoName": "input-guard",
+    "raiRego": {
+      "properties": {
+        "encoding": "None",
+        "rego": "package input_guard\n\nimport rego.v1\n\ndefault verdict := {\"decision\": \"allow\"}\n\nblocking_signal if {\n  input.snapshot.moderation.harm.PromptInjection.detected\n}\n\nblocking_signal if {\n  input.snapshot.moderation.harm.Hate.severity >= 4\n}\n\nverdict := {\"decision\": \"deny\", \"reason\": \"unsafe_input\"} if {\n  blocking_signal\n}"
+      }
+    },
+    "resourceGroupName": "resource-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Replace a reusable Rego artifact conditionally",
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"00000000-0000-0000-0000-000000000004\""
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group/providers/Microsoft.CognitiveServices/accounts/safety-account/raiRegos/input-guard",
+        "name": "input-guard",
+        "type": "Microsoft.CognitiveServices/accounts/raiRegos",
+        "etag": "\"00000000-0000-0000-0000-000000000004\"",
+        "properties": {
+          "encoding": "None",
+          "rego": "package input_guard\n\nimport rego.v1\n\ndefault verdict := {\"decision\": \"allow\"}\n\nblocking_signal if {\n  input.snapshot.moderation.harm.PromptInjection.detected\n}\n\nblocking_signal if {\n  input.snapshot.moderation.harm.Hate.severity >= 4\n}\n\nverdict := {\"decision\": \"deny\", \"reason\": \"unsafe_input\"} if {\n  blocking_signal\n}"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "ETag": "\"00000000-0000-0000-0000-000000000004\""
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group/providers/Microsoft.CognitiveServices/accounts/safety-account/raiRegos/input-guard",
+        "name": "input-guard",
+        "type": "Microsoft.CognitiveServices/accounts/raiRegos",
+        "etag": "\"00000000-0000-0000-0000-000000000004\"",
+        "properties": {
+          "encoding": "None",
+          "rego": "package input_guard\n\nimport rego.v1\n\ndefault verdict := {\"decision\": \"allow\"}\n\nblocking_signal if {\n  input.snapshot.moderation.harm.PromptInjection.detected\n}\n\nblocking_signal if {\n  input.snapshot.moderation.harm.Hate.severity >= 4\n}\n\nverdict := {\"decision\": \"deny\", \"reason\": \"unsafe_input\"} if {\n  blocking_signal\n}"
+        }
+      }
+    }
+  }
+}

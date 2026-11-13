@@ -1,0 +1,35 @@
+{
+  "title": "TaskQueues_Get",
+  "operationId": "TaskQueues_Get",
+  "parameters": {
+    "api-version": "2026-07-01-preview",
+    "subscriptionId": "EE9BD735-67CE-4A90-89C4-439D3F6A4C93",
+    "resourceGroupName": "rgopenapi",
+    "schedulerName": "testscheduler",
+    "taskHubName": "testtaskhub",
+    "taskQueueName": "QueueA"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/EE9BD735-67CE-4A90-89C4-439D3F6A4C93/resourceGroups/rgopenapi/providers/Microsoft.DurableTask/schedulers/testscheduler/taskHubs/testtaskhub/taskQueues/QueueA",
+        "name": "QueueA",
+        "type": "Microsoft.DurableTask/schedulers/taskHubs/taskQueues",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "throughput": {
+            "actionsPerSecond": 40
+          }
+        },
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-07-01T12:00:00Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-07-01T12:00:00Z"
+        }
+      }
+    }
+  }
+}

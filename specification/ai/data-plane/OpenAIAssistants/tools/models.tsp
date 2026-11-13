@@ -300,6 +300,7 @@ model ToolOutput {
  * forces the model to call that tool.
  */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @added(ServiceApiVersions.v2024_05_01_preview)
 union AssistantsApiToolChoiceOption {
   string,

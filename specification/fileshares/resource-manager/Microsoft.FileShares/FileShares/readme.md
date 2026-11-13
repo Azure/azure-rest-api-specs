@@ -28,7 +28,25 @@ These are the global settings for the Azure API Center.
 
 openapi-type: arm
 
-tag: package-2026-06-01
+tag: package-2026-09-01
+
+```
+
+### Tag: package-2026-09-01
+
+These settings apply only when `--tag=package-2026-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-09-01'
+
+input-file:
+
+  - stable/2026-09-01/fileshares.json
+
+directive:
+  - where:
+    - $.definitions["Azure.Core.uuid"].format
+    suppress: GuidUsage
+    reason: The uuid definition is emitted into the OpenAPI by the TypeSpec autorest emitter as an inlined form of the standard ARM common-types Encryption type (Encryption -> CustomerManagedKeyEncryption -> KeyEncryptionKeyIdentity with federatedClientId and delegatedIdentityClientId fields). It is a platform-standard common-types field, not a service-authored GUID, and the FileShares API surface introduces no GUID parameter of its own.
 
 ```
 
@@ -209,5 +227,6 @@ directive:
     reason: publicNetworkAccess is not a secret - it's a configuration property that controls whether public network access is enabled or disabled. This is a false positive from the validation rule.
 
 ```
+
 
 ---

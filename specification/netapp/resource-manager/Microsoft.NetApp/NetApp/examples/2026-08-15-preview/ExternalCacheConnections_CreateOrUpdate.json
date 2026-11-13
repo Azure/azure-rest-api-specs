@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contosoNetAppRg",
+    "externalCacheConnectionName": "contosoCacheConnection",
+    "api-version": "2026-08-15-preview",
+    "resource": {
+      "location": "eastus",
+      "properties": {
+        "originVolumeResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/netAppAccounts/contosoAccount/capacityPools/contosoPool/volumes/contosoVolume",
+        "externalCacheName": "contosoCache",
+        "externalSvmResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalClusters/contosoExternalCluster/externalSvms/contosoExternalSvm",
+        "clusterPeerSubnetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.Network/virtualNetworks/contosoVnet/subnets/contosoSubnet"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalCacheConnections/contosoCacheConnection",
+        "name": "contosoCacheConnection",
+        "type": "Microsoft.NetApp/externalCacheConnections",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "originVolumeResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/netAppAccounts/contosoAccount/capacityPools/contosoPool/volumes/contosoVolume",
+          "externalCacheName": "contosoCache",
+          "externalSvmResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalClusters/contosoExternalCluster/externalSvms/contosoExternalSvm",
+          "clusterPeerSubnetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.Network/virtualNetworks/contosoVnet/subnets/contosoSubnet",
+          "clusterPeerResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalClusters/contosoExternalCluster/clusterPeers/peerA",
+          "svmPeerResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalClusters/contosoExternalCluster/clusterPeers/peerA/svmPeers/contosoSvmPeerA",
+          "setupInformation": {
+            "setupStatus": "VServerPeerRequired",
+            "statusInformation": "Accept the SVM peer relationship on your cluster to complete setup.",
+            "command": "vserver peer accept -vserver contosoExternalSvm -peer-vserver anfSvm"
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/a0216c17-f9d6-4b99-9faf-9ebd4883d0e4?api-version=2026-08-15-preview",
+        "Retry-After": 60
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalCacheConnections/contosoCacheConnection",
+        "name": "contosoCacheConnection",
+        "type": "Microsoft.NetApp/externalCacheConnections",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Creating",
+          "originVolumeResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/netAppAccounts/contosoAccount/capacityPools/contosoPool/volumes/contosoVolume",
+          "externalCacheName": "contosoCache",
+          "externalSvmResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalClusters/contosoExternalCluster/externalSvms/contosoExternalSvm",
+          "clusterPeerSubnetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.Network/virtualNetworks/contosoVnet/subnets/contosoSubnet"
+        }
+      }
+    }
+  },
+  "operationId": "ExternalCacheConnections_CreateOrUpdate",
+  "title": "ExternalCacheConnections_CreateOrUpdate"
+}

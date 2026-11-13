@@ -7,6 +7,7 @@ namespace Azure.AI.Agents;
 using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "Union of string | array is intentional (OpenAPI 3 can handle oneOf)."
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("Represents the message content for creating a new message. It can be either a simple text string or a list of typed content blocks (text, image_file, image_url).")
 union MessageInputContent {
   @doc("A plain text message if rich content is not needed.")
@@ -219,6 +220,7 @@ model MessageAttachment {
 
 /** The possible tools to which files will be added by this message */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the OpenAI API"
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 union MessageAttachmentToolDefinition {
   CodeInterpreterToolDefinition,
   FileSearchToolDefinition,

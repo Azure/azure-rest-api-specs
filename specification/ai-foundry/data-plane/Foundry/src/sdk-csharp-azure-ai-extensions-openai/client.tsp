@@ -54,6 +54,11 @@ namespace Azure.AI.Projects {
   // OpenAI's OpenAI.Conversations.* types directly.
 
   @@clientNamespace(Azure.AI.Projects, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@clientNamespace(
+    Azure.AI.ProjectsInternal,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
 
   @@clientName(CreatedBy, "AgentResponseItemSource");
 
