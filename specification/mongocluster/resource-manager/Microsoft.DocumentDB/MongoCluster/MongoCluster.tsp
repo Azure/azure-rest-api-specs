@@ -279,6 +279,12 @@ model StorageProperties {
 
   /** The type of storage to provision the cluster servers with. */
   @added(Versions.v2025_04_01_preview)
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "type")
+  oldType?: StorageType;
+
+  /** The type of storage to provision the cluster servers with. Defaults to 'PremiumSSDv2' when omitted during cluster creation. Omitting this property during an update leaves the storage type unchanged. */
+  @added(Versions.v2026_09_01)
   type?: StorageType;
 
   /** The IOPs of the storage assigned to each server. Only applicable if the type is 'PremiumSSDv2'. */

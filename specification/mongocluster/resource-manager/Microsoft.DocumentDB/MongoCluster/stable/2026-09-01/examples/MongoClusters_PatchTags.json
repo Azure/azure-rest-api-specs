@@ -1,0 +1,43 @@
+{
+  "operationId": "MongoClusters_Update",
+  "title": "Updates string-valued resource tags without changing the existing PremiumSSD storage type.",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "TestResourceGroup",
+    "mongoClusterName": "myMongoCluster",
+    "api-version": "2026-09-01",
+    "properties": {
+      "tags": {
+        "environment": "production",
+        "costCenter": "1234"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myMongoCluster",
+        "name": "myMongoCluster",
+        "type": "Microsoft.DocumentDB/mongoClusters",
+        "location": "westus2",
+        "tags": {
+          "environment": "production",
+          "costCenter": "1234"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "storage": {
+            "sizeGb": 128,
+            "type": "PremiumSSD"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DocumentDB/locations/westus2/mongoClusterOperationResults/f6a27306-3ee3-4e6b-997d-3ba2024b85e6?api-version=2026-09-01",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DocumentDB/locations/westus2/mongoClusterAzureAsyncOperation/f6a27306-3ee3-4e6b-997d-3ba2024b85e6?api-version=2026-09-01"
+      }
+    }
+  }
+}
