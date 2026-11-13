@@ -1967,3 +1967,286 @@ model NetworkRuleSetListResult is Azure.Core.Page<NetworkRuleSet>;
 
 model OperationListResult is Azure.Core.Page<Operation>;
 @@visibility(OperationListResult.value, Lifecycle.Read);
+
+/**
+ * Configuration used to trigger a migration of a namespace to a new SKU across one or more target locations.
+ */
+@added(Versions.v2026_09_01_preview)
+model NamespaceMigrationConfiguration {
+  /**
+   * The migration configuration properties.
+   */
+  properties?: NamespaceMigrationConfigurationProperties;
+}
+
+/**
+ * The properties of a namespace migration configuration.
+ */
+@added(Versions.v2026_09_01_preview)
+model NamespaceMigrationConfigurationProperties {
+  /**
+   * The migration settings.
+   */
+  migration?: NamespaceMigrationConfigurationDetails;
+}
+
+/**
+ * The migration settings describing the target SKU, capacity and locations.
+ */
+@added(Versions.v2026_09_01_preview)
+model NamespaceMigrationConfigurationDetails {
+  /**
+   * The target SKU of the migration.
+   */
+  targetSku: MigrationTargetSku;
+
+  /**
+   * The target capacity of the migration. When omitted, Standard to Premium defaults to 1 processing unit, Premium to Dedicated defaults to 1 throughput unit, and Standard to Dedicated preserves the existing throughput units. For Premium targets the value must be one of 1, 2, 4, 6, 8, 10, 12, or 16 processing units.
+   */
+  targetCapacity?: int32;
+
+  /**
+   * The list of target locations for the migration. Dedicated locations must also specify clusterArmId.
+   */
+  @identifiers(#["locationName"])
+  locations?: NamespaceMigrationLocationInput[];
+}
+
+/**
+ * A target location for a namespace migration.
+ */
+@added(Versions.v2026_09_01_preview)
+model NamespaceMigrationLocationInput {
+  /**
+   * The name of the target location.
+   */
+  locationName?: string;
+
+  /**
+   * The ARM ID of the dedicated cluster in the target location. Required when migrating to a Dedicated SKU.
+   */
+  clusterArmId?: string;
+}
+
+/**
+ * The migration status details of a namespace.
+ */
+@added(Versions.v2026_09_01_preview)
+model NamespaceMigrationDetails {
+  /**
+   * The list of target locations for the migration.
+   */
+  @identifiers(#["locationName"])
+  locations?: NamespaceMigrationLocation[];
+
+  /**
+   * The overall status of the migration.
+   */
+  @visibility(Lifecycle.Read)
+  status?: MigrationStatus;
+}
+
+/**
+ * The target SKU of a namespace migration.
+ */
+@added(Versions.v2026_09_01_preview)
+union MigrationTargetSku {
+  string,
+
+  /**
+   * The Standard SKU.
+   */
+  Standard: "Standard",
+
+  /**
+   * The Premium SKU.
+   */
+  Premium: "Premium",
+
+  /**
+   * The Dedicated SKU.
+   */
+  Dedicated: "Dedicated",
+}
+
+/**
+ * Information about a target location participating in a namespace migration.
+ */
+@added(Versions.v2026_09_01_preview)
+model NamespaceMigrationLocation {
+  /**
+   * The name of the target location.
+   */
+  locationName?: string;
+
+  /**
+   * The ARM ID of the dedicated cluster in the target location.
+   */
+  clusterArmId?: string;
+
+  /**
+   * The state of the replica in the target location.
+   */
+  @visibility(Lifecycle.Read)
+  replicaState?: ReplicaState;
+}
+
+/**
+ * The overall status of a namespace migration.
+ */
+@added(Versions.v2026_09_01_preview)
+union MigrationStatus {
+  string,
+
+  /**
+   * The migration has not started.
+   */
+  None: "None",
+
+  /**
+   * The migration is in progress.
+   */
+  InProgress: "InProgress",
+
+  /**
+   * The migration has completed.
+   */
+  Complete: "Complete",
+}
+
+/**
+ * The state of a namespace migration replica in a target location.
+ */
+@added(Versions.v2026_09_01_preview)
+union ReplicaState {
+  string,
+
+  /**
+   * The replica is being built.
+   */
+  InBuild: "InBuild",
+
+  /**
+   * The replica is ready.
+   */
+  Ready: "Ready",
+
+  /**
+   * The replica is being deleted.
+   */
+  Deleting: "Deleting",
+}
+
+/**
+ * The replication lag details for a namespace migration.
+ */
+@added(Versions.v2026_09_01_preview)
+model NamespaceMigrationReplicationLags {
+  /**
+   * The replication lag properties.
+   */
+  properties?: ReplicationLagProperties;
+}
+
+/**
+ * The properties describing replication lag during a namespace migration.
+ */
+@added(Versions.v2026_09_01_preview)
+model ReplicationLagProperties {
+  /**
+   * The descriptions of the counters reported in the replication lags.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  counterDescriptions?: ReplicationLagCounter[];
+
+  /**
+   * The replication lag information, broken down by target.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  replicationLags?: ReplicaLagInfo[];
+}
+
+/**
+ * A description of a replication lag counter.
+ */
+@added(Versions.v2026_09_01_preview)
+model ReplicationLagCounter {
+  /**
+   * The counter name, for example Count or Duration.
+   */
+  name?: string;
+
+  /**
+   * The aggregation type used for the counter.
+   */
+  aggregationType?: AggregationType;
+
+  /**
+   * A description of the counter.
+   */
+  description?: string;
+}
+
+/**
+ * The aggregation type used for a replication lag counter.
+ */
+@added(Versions.v2026_09_01_preview)
+union AggregationType {
+  string,
+
+  /**
+   * No aggregation is applied.
+   */
+  None: "None",
+
+  /**
+   * Values are summed.
+   */
+  Sum: "Sum",
+
+  /**
+   * The maximum value is reported.
+   */
+  Max: "Max",
+}
+
+/**
+ * Replication lag information aggregated at a particular level, such as region, entity group, entity, or partition.
+ */
+@added(Versions.v2026_09_01_preview)
+model ReplicaLagInfo {
+  /**
+   * The name of the target this lag information is aggregated for, for example the secondary region, entity group, entity, or partition.
+   */
+  name?: string;
+
+  /**
+   * The counter values aggregated at the current level.
+   */
+  @identifiers(#["counterName"])
+  values?: ReplicaLagValue[];
+
+  /**
+   * Further breakdowns of the values.
+   */
+  @identifiers(#["name"])
+  breakdowns?: ReplicaLagInfo[];
+}
+
+/**
+ * A single replication lag counter value.
+ */
+@added(Versions.v2026_09_01_preview)
+model ReplicaLagValue {
+  /**
+   * The name of the counter this value is for.
+   */
+  counterName?: string;
+
+  /**
+   * The value of the counter.
+   */
+  value?: int64;
+}
