@@ -14,6 +14,7 @@ export type MockGithub = ReturnType<typeof createMockGithub>;
 
 // Partial mock of `github` parameter passed into github-script actions
 function createMockGithubImpl() {
+  const request = Object.assign(vi.fn(), { endpoint: vi.fn() });
   return {
     hook: {
       after: vi.fn(),
@@ -77,9 +78,7 @@ function createMockGithubImpl() {
         issuesAndPullRequests: vi.fn(),
       },
     },
-    request: {
-      endpoint: vi.fn(),
-    },
+    request,
   };
 }
 

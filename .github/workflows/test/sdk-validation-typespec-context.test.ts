@@ -141,6 +141,117 @@ describe("collectTypeSpecReviewContext", () => {
     ).toBe(false);
   });
 
+  it("uses the complete immutable diff when more than 300 files changed", async () => {
+    const github = createMockGithub();
+    const context = createMockContext();
+    const addedPath = `${PROJECT_ROOT}/added model.tsp`;
+    const deletedPath = `${PROJECT_ROOT}/deleted.tsp`;
+    const previousPath = `${PROJECT_ROOT}/old name.tsp`;
+    const renamedPath = `${PROJECT_ROOT}/new name.tsp`;
+    const unrelatedSections = Array.from({ length: 298 }, (_, index) => {
+      const filePath = `docs/file-${index}.md`;
+      return [
+        `diff --git a/${filePath} b/${filePath}`,
+        "index 1111111..2222222 100644",
+        `--- a/${filePath}`,
+        `+++ b/${filePath}`,
+        "@@ -1 +1 @@",
+        "-old",
+        "+new",
+        "",
+      ].join("\n");
+    });
+    const typeSpecSections = [
+      [
+        `diff --git a/${addedPath} b/${addedPath}`,
+        "new file mode 100644",
+        "--- /dev/null",
+        `+++ b/${addedPath}\t`,
+        "@@ -0,0 +1 @@",
+        "+model Added {}",
+        "",
+      ].join("\n"),
+      [
+        `diff --git a/${deletedPath} b/${deletedPath}`,
+        "deleted file mode 100644",
+        `--- a/${deletedPath}`,
+        "+++ /dev/null",
+        "@@ -1 +0,0 @@",
+        "-model Deleted {}",
+        "",
+      ].join("\n"),
+      [
+        `diff --git a/${previousPath} b/${renamedPath}`,
+        "similarity index 100%",
+        `rename from "${previousPath}"`,
+        `rename to "${renamedPath}"`,
+        "",
+      ].join("\n"),
+    ];
+    github.request.mockResolvedValue({
+      data: [...unrelatedSections, ...typeSpecSections].join(""),
+    });
+    github.rest.repos.getContent.mockImplementation((request) => {
+      const contents = new Map([
+        [addedPath, "model Added {}"],
+        [renamedPath, "model Renamed {}"],
+        [`${PROJECT_ROOT}/tspconfig.yaml`, "emit: []"],
+        [`${PROJECT_ROOT}/main.tsp`, 'import "./added.tsp";'],
+        [`${PROJECT_ROOT}/client.tsp`, '@@clientName(Added, "WidgetModel", "csharp");'],
+      ]);
+      const content = contents.get(String((request as { path: string }).path));
+      if (content === undefined) {
+        return Promise.reject(notFoundError());
+      }
+      return Promise.resolve(repositoryFile(content));
+    });
+
+    const result = await collectTypeSpecReviewContext({
+      github,
+      context,
+      prNumber: 42,
+      headSha: HEAD_SHA,
+      baseSha: BASE_SHA,
+      changedFileCount: 301,
+      projectRoots: [PROJECT_ROOT],
+    });
+
+    expect(github.request).toHaveBeenCalledWith("GET /repos/{owner}/{repo}/compare/{basehead}", {
+      owner: context.repo.owner,
+      repo: context.repo.repo,
+      basehead: `${BASE_SHA}...${HEAD_SHA}`,
+      headers: { accept: "application/vnd.github.diff" },
+    });
+    expect(github.rest.repos.compareCommitsWithBasehead).not.toHaveBeenCalled();
+    expect(result.files).toContainEqual({
+      path: addedPath,
+      roles: ["changed"],
+      status: "added",
+      previousPath: undefined,
+      renamedTo: undefined,
+      patch: "@@ -0,0 +1 @@\n+model Added {}",
+      content: "model Added {}",
+    });
+    expect(result.files).toContainEqual({
+      path: deletedPath,
+      roles: ["changed"],
+      status: "removed",
+      previousPath: undefined,
+      renamedTo: undefined,
+      patch: "@@ -1 +0,0 @@\n-model Deleted {}",
+      content: undefined,
+    });
+    expect(result.files).toContainEqual({
+      path: renamedPath,
+      roles: ["changed"],
+      status: "renamed",
+      previousPath,
+      renamedTo: undefined,
+      patch: undefined,
+      content: "model Renamed {}",
+    });
+  });
+
   it("rejects oversized changed-file sets before loading repository content", async () => {
     const github = createMockGithub();
     const context = createMockContext();
@@ -148,8 +259,21 @@ describe("collectTypeSpecReviewContext", () => {
       filename: `${PROJECT_ROOT}/model-${index}.tsp`,
       status: "modified",
     }));
-    github.rest.repos.compareCommitsWithBasehead.mockResolvedValue({
-      data: { files: changedFiles },
+    github.request.mockResolvedValue({
+      data: changedFiles
+        .map(({ filename }) =>
+          [
+            `diff --git a/${filename} b/${filename}`,
+            "index 1111111..2222222 100644",
+            `--- a/${filename}`,
+            `+++ b/${filename}`,
+            "@@ -1 +1 @@",
+            "-model Old {}",
+            "+model New {}",
+            "",
+          ].join("\n"),
+        )
+        .join(""),
     });
 
     await expect(

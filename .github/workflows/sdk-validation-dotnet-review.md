@@ -297,9 +297,9 @@ include an empty `findings` array.
 }
 ```
 
-Only include `sourceLocation` when the exact line is present in a changed
-TypeSpec file from the context. Otherwise omit it so a later publisher cannot
-create a misleading inline comment. Use `typespec` for language-independent
+Only include `sourceLocation` when the exact line was added or modified by this
+PR in a changed TypeSpec file from the context. Otherwise omit it so a later
+publisher cannot create a misleading inline comment. Use `typespec` for language-independent
 contract fixes, `client.tsp` for C#-scoped API surface adjustments,
 `sdk-repository` when a spec author cannot resolve the finding, `duplicate`
 only when the provided evidence proves another signal already reported it, and

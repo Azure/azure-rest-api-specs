@@ -9,6 +9,8 @@ export const MAX_TYPESPEC_CONTEXT_TOTAL_BYTES = 8 * 1024 * 1024;
 export const MAX_TYPESPEC_CONTEXT_PATCH_BYTES = 512 * 1024;
 export const MAX_TYPESPEC_CONTEXT_API_REQUESTS = 500;
 
+const GITHUB_COMPARE_FILES_LIMIT = 300;
+const MAX_TYPESPEC_CONTEXT_DIFF_BYTES = 32 * 1024 * 1024;
 const TYPESPEC_FILE_PATTERN = /\.tsp$/i;
 const TYPESPEC_CONFIG_FILE_NAME = "tspconfig.yaml";
 const PROJECT_CONTEXT_FILE_NAMES = [TYPESPEC_CONFIG_FILE_NAME, "main.tsp", "client.tsp"];
@@ -41,6 +43,13 @@ export type TypeSpecReviewContext = {
 
 type MutableTypeSpecContextFile = Omit<TypeSpecContextFile, "roles"> & {
   roles: Set<TypeSpecContextFileRole>;
+};
+
+type ChangedFile = {
+  filename: string;
+  previous_filename?: string;
+  status: string;
+  patch?: string;
 };
 
 function isNotFoundError(error: unknown): boolean {
@@ -99,12 +108,185 @@ function getChangedTypeSpecPath(file: {
   return undefined;
 }
 
+function decodeGitPath(value: string): string {
+  if (!value.startsWith('"')) {
+    return value;
+  }
+  if (!value.endsWith('"')) {
+    throw new Error(`Invalid quoted path in immutable comparison: ${value}`);
+  }
+
+  const bytes: number[] = [];
+  const content = value.slice(1, -1);
+  const escapes: Record<string, number> = {
+    a: 0x07,
+    b: 0x08,
+    t: 0x09,
+    n: 0x0a,
+    v: 0x0b,
+    f: 0x0c,
+    r: 0x0d,
+    '"': 0x22,
+    "\\": 0x5c,
+  };
+  for (let index = 0; index < content.length; index += 1) {
+    const character = content[index];
+    if (character !== "\\") {
+      const codePoint = content.codePointAt(index)!;
+      bytes.push(...Buffer.from(String.fromCodePoint(codePoint)));
+      if (codePoint > 0xffff) {
+        index += 1;
+      }
+      continue;
+    }
+
+    const escaped = content[++index];
+    if (escaped === undefined) {
+      throw new Error(`Invalid escape in immutable comparison path: ${value}`);
+    }
+    if (/[0-7]/.test(escaped)) {
+      let octal = escaped;
+      while (octal.length < 3 && /[0-7]/.test(content[index + 1] ?? "")) {
+        octal += content[++index];
+      }
+      const byte = Number.parseInt(octal, 8);
+      if (byte > 0xff) {
+        throw new Error(`Invalid octal escape in immutable comparison path: ${value}`);
+      }
+      bytes.push(byte);
+      continue;
+    }
+    const decoded = escapes[escaped];
+    if (decoded === undefined) {
+      throw new Error(`Unsupported escape in immutable comparison path: ${value}`);
+    }
+    bytes.push(decoded);
+  }
+  return Buffer.from(bytes).toString("utf8");
+}
+
+function parseDiffPath(value: string, prefix?: "a/" | "b/"): string | undefined {
+  if (value === "/dev/null") {
+    return undefined;
+  }
+  const decoded = decodeGitPath(value);
+  if (prefix && !decoded.startsWith(prefix)) {
+    throw new Error(`Expected immutable comparison path '${decoded}' to start with '${prefix}'`);
+  }
+  return prefix ? decoded.slice(prefix.length) : decoded;
+}
+
+function getDiffPathValue(value: string): string {
+  if (!value.startsWith('"')) {
+    return value.split("\t", 1)[0];
+  }
+  let escaped = false;
+  for (let index = 1; index < value.length; index += 1) {
+    const character = value[index];
+    if (character === '"' && !escaped) {
+      return value.slice(0, index + 1);
+    }
+    escaped = character === "\\" && !escaped;
+    if (character !== "\\") {
+      escaped = false;
+    }
+  }
+  throw new Error(`Invalid quoted path in immutable comparison: ${value}`);
+}
+
+function getDiffMetadataPath(
+  section: string,
+  marker: string,
+  prefix?: "a/" | "b/",
+): string | undefined {
+  const line = section.split(/\r?\n/).find((candidate) => candidate.startsWith(marker));
+  return line === undefined
+    ? undefined
+    : parseDiffPath(getDiffPathValue(line.slice(marker.length)), prefix);
+}
+
+function parseChangedFilesFromDiff(diff: string, expectedFileCount: number): ChangedFile[] {
+  if (Buffer.byteLength(diff) > MAX_TYPESPEC_CONTEXT_DIFF_BYTES) {
+    throw new Error(`Immutable comparison exceeds ${MAX_TYPESPEC_CONTEXT_DIFF_BYTES} bytes`);
+  }
+  const sections = diff.split(/(?=^diff --git )/m).filter((section) => section.length > 0);
+  if (sections.length !== expectedFileCount) {
+    throw new Error(
+      `The immutable comparison returned ${sections.length} of ${expectedFileCount} changed files`,
+    );
+  }
+
+  const changedFiles: ChangedFile[] = [];
+  for (const section of sections) {
+    const renamedFrom = getDiffMetadataPath(section, "rename from ");
+    const renamedTo = getDiffMetadataPath(section, "rename to ");
+    const previousPath = renamedFrom ?? getDiffMetadataPath(section, "--- ", "a/");
+    const currentPath = renamedTo ?? getDiffMetadataPath(section, "+++ ", "b/");
+    const filename = currentPath ?? previousPath;
+    if (!isTypeSpecContextPath(previousPath) && !isTypeSpecContextPath(currentPath)) {
+      continue;
+    }
+    if (filename === undefined) {
+      throw new Error("TypeSpec comparison entry is missing both file paths");
+    }
+
+    const status =
+      previousPath === undefined
+        ? "added"
+        : currentPath === undefined
+          ? "removed"
+          : previousPath !== currentPath
+            ? "renamed"
+            : "modified";
+    const patchStart = section.search(/^@@ /m);
+    changedFiles.push({
+      filename,
+      previous_filename: status === "renamed" ? previousPath : undefined,
+      status,
+      patch: patchStart < 0 ? undefined : section.slice(patchStart).trimEnd(),
+    });
+  }
+  return changedFiles;
+}
+
+async function getChangedFiles(params: {
+  github: GitHub;
+  context: Context;
+  baseSha: string;
+  headSha: string;
+  changedFileCount: number;
+}): Promise<ChangedFile[]> {
+  const { github, context, baseSha, headSha, changedFileCount } = params;
+  const basehead = `${baseSha}...${headSha}`;
+  if (changedFileCount > GITHUB_COMPARE_FILES_LIMIT) {
+    const { data } = await github.request("GET /repos/{owner}/{repo}/compare/{basehead}", {
+      owner: context.repo.owner,
+      repo: context.repo.repo,
+      basehead,
+      headers: { accept: "application/vnd.github.diff" },
+    });
+    if (typeof data !== "string") {
+      throw new Error("Expected immutable comparison to return a unified diff");
+    }
+    return parseChangedFilesFromDiff(data, changedFileCount);
+  }
+
+  const { data: comparison } = await github.rest.repos.compareCommitsWithBasehead({
+    owner: context.repo.owner,
+    repo: context.repo.repo,
+    basehead,
+  });
+  const changedFiles = comparison.files ?? [];
+  if (changedFiles.length !== changedFileCount) {
+    throw new Error(
+      `The exact ${basehead} comparison returned ${changedFiles.length} of ${changedFileCount} changed files`,
+    );
+  }
+  return changedFiles;
+}
+
 function calculateContentRequests(
-  changedFiles: Array<{
-    filename: string;
-    previous_filename?: string;
-    status: string;
-  }>,
+  changedFiles: ChangedFile[],
   projectRoots: readonly string[],
 ): number {
   const contentPaths = new Set<string>();
@@ -181,20 +363,9 @@ export async function collectTypeSpecReviewContext(params: {
 }): Promise<TypeSpecReviewContext> {
   const { github, context, prNumber, headSha, baseSha, changedFileCount, projectRoots } = params;
   // Compare immutable commits so patches and file contents describe the same revision.
-  const { data: comparison } = await github.rest.repos.compareCommitsWithBasehead({
-    owner: context.repo.owner,
-    repo: context.repo.repo,
-    basehead: `${baseSha}...${headSha}`,
-  });
-  const pullRequestFiles = comparison.files ?? [];
-  if (pullRequestFiles.length !== changedFileCount) {
-    throw new Error(
-      `The exact ${baseSha}...${headSha} comparison returned ${pullRequestFiles.length} of ${changedFileCount} changed files`,
-    );
-  }
-  const changedFiles = pullRequestFiles.filter(
-    (file) => getChangedTypeSpecPath(file) !== undefined,
-  );
+  const changedFiles = (
+    await getChangedFiles({ github, context, baseSha, headSha, changedFileCount })
+  ).filter((file) => getChangedTypeSpecPath(file) !== undefined);
   if (changedFiles.length > MAX_TYPESPEC_CONTEXT_FILES) {
     throw new Error(
       `TypeSpec context has ${changedFiles.length} changed files; maximum is ${MAX_TYPESPEC_CONTEXT_FILES}`,
