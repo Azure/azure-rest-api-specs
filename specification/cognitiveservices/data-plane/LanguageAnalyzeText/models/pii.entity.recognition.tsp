@@ -910,4 +910,8 @@ union PiiCategoriesExclude {
   /** Geopolitical Entity */
   @added(Versions.v2026_05_01)
   GPE: "GPE",
+
+  /** Debit Card Number (generic, not region specific) */
+  @added(Versions.v2026_11_15_preview)
+  DebitCard: "DebitCard",
 }
