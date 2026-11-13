@@ -45,6 +45,10 @@ specification/
 ```
 In this structure, Azure services are presented as an RPNamespace that is used to manage services (both with customer-facing names). Each service has versions (some preview and some GA) and each version has its own API contract, documentation, and (beta/stable) SDK package(s).\
 
+For an RP namespace that contains a single service, the service name may repeat the namespace suffix, for example `Microsoft.Foo/Foo`. This naming pattern is not inherently invalid. The service folder should instead be evaluated based on whether it represents a customer-facing service boundary that versions uniformly and has its own API contract, documentation, and SDK package or packages.
+
+The distinction between the RP namespace and service name is especially important when an RP namespace contains multiple services, because each service folder represents a separate service that versions independently.
+
 To enforce these rules, here are some notes about the repo structure:
 
 1.	In the resource-manager folder, if it's a RPaaS service, there must be just 1 readme.md file, and 1+ service name folders under resource-manager/RPnamespace folder, but the resource types within each service folder must not duplicate except for operations, locations, checkNameAvailability etc. Which is required by RPaaS for HTTP request schema validation.

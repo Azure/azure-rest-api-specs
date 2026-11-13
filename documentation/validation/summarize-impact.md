@@ -14,6 +14,12 @@ And other `about` questions.
 
 ## Troubleshooting details
 
+### `js-yaml` reports multiple documents while processing a README
+
+If `Summarize Impact` reports a `js-yaml` error such as `expected a single document in the stream, but found more`, inspect the Markdown code fences in the affected `readme.md` before assuming that the YAML content is invalid.
+
+In particular, verify that every fenced YAML block has a closing triple backtick. A missing closing fence can cause later README content to be parsed as part of the YAML block. Close the fence and rerun the check before performing deeper YAML troubleshooting.
+
 ### Suppression change without triggering `Suppression Review Required`
 
 In certain circumstances, devs can can modify the suppressions for a readme, _without_ requiring a suppression review. [This PR](https://github.com/Azure/azure-rest-api-specs/pull/36645/files) is one such example. It is adding two new suppressions to a new API version, but the suppressions themselves _already exist_ for a previous API version. In this case, `summarize impact` _intentionally_ evaluates this PR to not need suppression review. If the RP was approved previously, it should be approved for this new api version as well.
