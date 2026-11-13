@@ -5,7 +5,7 @@ type: capability # capability | regression
 tags:
   area: "versioning"
 # Root-level environment
-environment: azsdk-mcp
+agent_environment: azsdk-mcp
 # Execution configuration
 defaults:
   runs: 1 # Trials per stimulus
@@ -21,7 +21,7 @@ stimuli:
       mode: "trigger"
     prompt: |
       change the property age of EmployeeProperties from required to optional only for api version 2025-05-04-preview
-    environment: &shared_environment
+    agent_environment: &shared_environment
       files:
         - src: ../fixtures/001-share-version-new-feature/employee.tsp
           dest: employee.tsp
@@ -53,7 +53,7 @@ stimuli:
       mode: "forced"
     prompt: |
       @azure-typespec-author change the property age of EmployeeProperties from required to optional only for api version 2025-05-04-preview
-    environment: *shared_environment
+    agent_environment: *shared_environment
     graders:
       - type: "run-command"
         config:
@@ -90,7 +90,7 @@ stimuli:
       suite: "versioning"
       mode: "no-skill"
     prompt: "change the property age of EmployeeProperties from required to optional only for api version 2025-05-04-preview"
-    environment: *shared_environment
+    agent_environment: *shared_environment
     rubric:
       - EmployeeProperties.age becomes optional starting in API version 2025-05-04-preview using valid TypeSpec versioning.
       - The property remains required in earlier API versions.

@@ -48,6 +48,7 @@ namespace Azure.AI.ProjectsInternal {
 namespace Azure.AI.Projects {
   const AllConditionalAgentDefinitionPreviews = #{
     conditional_previews: #[
+      AgentDefinitionOptInKeys.a2a_agents_v1_preview,
       AgentDefinitionOptInKeys.workflow_agents_v1_preview,
       AgentDefinitionOptInKeys.voice_agents_v1_preview,
       AgentDefinitionOptInKeys.draft_agents_v1_preview,
@@ -699,11 +700,17 @@ namespace Azure.AI.Projects {
     @doc("Container-based deployment configuration. Provide this for image-based deployments. Mutually exclusive with code_configuration — the service validates that exactly one is set.")
     container_configuration?: ContainerConfiguration;
 
-    @doc("The protocols that the agent supports for ingress communication.")
+    @doc("The protocols that the agent supports for ingress communication. (Preview) Declaring the `a2a` protocol enables A2A passthrough to the hosted agent and requires `Foundry-Features: A2AAgents=V1Preview` when creating or modifying the hosted agent definition.")
     @example(#[
       #{ protocol: "responses", version: "v0.1.1" },
       #{ protocol: "a2a", version: "v0.3.0" }
     ])
+    @extension(
+      "x-ms-foundry-meta",
+      #{
+        conditional_previews: #[AgentDefinitionOptInKeys.a2a_agents_v1_preview],
+      }
+    )
     protocol_versions?: ProtocolVersionRecord[];
 
     @doc("Code-based deployment configuration. Provide this for code-based deployments. Mutually exclusive with container_configuration — the service validates that exactly one is set.")

@@ -48,6 +48,7 @@ interface Migrations {
   /**
    * Cancels an active migration.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   cancel is ArmResourceDeleteSync<
     Migration,
     Response = ArmResponse<Migration> | ArmDeletedNoContentResponse
