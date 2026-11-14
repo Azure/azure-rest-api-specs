@@ -15,7 +15,7 @@ namespace Microsoft.IoTOperations;
  * AioConnectorApplicationConfiguration resource.
  */
 @parentResource(AioApplicationProfileResource)
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model AioConnectorApplicationConfigurationResource
   is ProxyResource<AioConnectorApplicationConfigurationProperties> {
   /** Name of the AioConnectorApplicationConfiguration resource. */
@@ -38,7 +38,7 @@ model AioConnectorApplicationConfigurationResource
  * have applicationType set to connector.
  */
 @parentResource(AioApplicationDefinitionResource)
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model AioConnectorConfigurationResource
   is ProxyResource<AioConnectorConfigurationProperties> {
   /** Name of the AioConnectorConfiguration resource. */
@@ -59,7 +59,7 @@ model AioConnectorConfigurationResource
 /**
  * Defines the customer-owned operational configuration for an application.
  */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model AioConnectorApplicationConfigurationProperties {
   ...AioApplicationConfigurationProperties;
 
@@ -70,7 +70,7 @@ model AioConnectorApplicationConfigurationProperties {
 /**
  * Defines the customer-owned operational configuration for a connector application.
  */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model AioConnectorConfigurationProperties {
   ...AioApplicationConfigurationProperties;
 
@@ -79,7 +79,7 @@ model AioConnectorConfigurationProperties {
 }
 
 /** Device inbound endpoints and allocation settings for the application. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model AioConnectorApplicationDeviceConfiguration {
   /** How device inbound endpoints are distributed across application instances. */
   allocation: AioConnectorApplicationAllocation;
@@ -91,7 +91,7 @@ model AioConnectorApplicationDeviceConfiguration {
 }
 
 /** A device inbound endpoint type served by the application. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model AioConnectorApplicationDeviceInboundEndpointType {
   /** The display name of the device inbound endpoint. */
   displayName?: string;
@@ -104,7 +104,7 @@ model AioConnectorApplicationDeviceInboundEndpointType {
 }
 
 /** Allocation settings for application device inbound endpoints. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 @discriminator("policy")
 model AioConnectorApplicationAllocation {
   /** The allocation policy type. */
@@ -112,7 +112,7 @@ model AioConnectorApplicationAllocation {
 }
 
 /** Bucketized allocation settings. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model AioConnectorApplicationBucketizedAllocation
   extends AioConnectorApplicationAllocation {
   /** The allocation policy type. */
@@ -125,7 +125,7 @@ model AioConnectorApplicationBucketizedAllocation
 }
 
 /** Allocation policy types. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 union AioConnectorApplicationAllocationPolicy {
   string,
 

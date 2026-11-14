@@ -12,7 +12,7 @@ using Azure.ResourceManager;
 namespace Microsoft.IoTOperations;
 
 /** An MCP authorization policy resource. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 @parentResource(InstanceResource)
 model McpAuthorizationPolicyResource
   is ProxyResource<McpAuthorizationPolicyProperties> {
@@ -32,7 +32,7 @@ model McpAuthorizationPolicyResource
 }
 
 /** The rules and runtime state of an MCP authorization policy. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model McpAuthorizationPolicyProperties {
   ...DefaultProvisioningStateProperty;
 
@@ -43,7 +43,7 @@ model McpAuthorizationPolicyProperties {
 }
 
 /** An allow rule for MCP tool calls. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model McpAuthorizationPolicyRule {
   /** The action authorized by the rule. */
   action: McpAuthorizationAction;
@@ -61,7 +61,7 @@ model McpAuthorizationPolicyRule {
 }
 
 /** The supported MCP authorization actions. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 union McpAuthorizationAction {
   string,
 
@@ -70,7 +70,7 @@ union McpAuthorizationAction {
 }
 
 /** The principal selector for an MCP authorization rule. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 @discriminator("principalType")
 model McpAuthorizationPrincipal {
   /** The type of principal selector. */
@@ -78,7 +78,7 @@ model McpAuthorizationPrincipal {
 }
 
 /** The supported principal selector types. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 union McpAuthorizationPrincipalType {
   string,
 
@@ -90,7 +90,7 @@ union McpAuthorizationPrincipalType {
 }
 
 /** A principal selector that matches one of the named identities. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model McpAuthorizationIdentitiesPrincipal extends McpAuthorizationPrincipal {
   /** The type of principal selector. */
   principalType: "Identities";
@@ -101,7 +101,7 @@ model McpAuthorizationIdentitiesPrincipal extends McpAuthorizationPrincipal {
 }
 
 /** A principal selector that matches an assigned authorization role. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model McpAuthorizationRolePrincipal extends McpAuthorizationPrincipal {
   /** The type of principal selector. */
   principalType: "Role";

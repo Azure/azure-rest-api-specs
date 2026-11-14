@@ -76,12 +76,6 @@ union BrokerAuthenticationMethod {
   X509: "X509",
 }
 
-@doc("Service Account Token for BrokerAuthentication")
-model BrokerAuthenticatorMethodSat {
-  @doc("List of allowed audience.")
-  audiences: string[];
-}
-
 @doc("Custom method for BrokerAuthentication")
 model BrokerAuthenticatorMethodCustom {
   @doc("Optional authentication needed for authenticating with the custom authentication server.")
@@ -103,12 +97,6 @@ model BrokerAuthenticatorMethodCustom {
 model BrokerAuthenticatorCustomAuth {
   @doc("X509 Custom Auth type details.")
   x509: X509ManualCertificate;
-}
-
-@doc("X509 Certificate Authentication properties.")
-model X509ManualCertificate {
-  @doc("Kubernetes secret containing an X.509 client certificate. This is a reference to the secret through an identifying name, not the secret itself.")
-  secretRef: string;
 }
 
 @doc("X509 for BrokerAuthentication.")
