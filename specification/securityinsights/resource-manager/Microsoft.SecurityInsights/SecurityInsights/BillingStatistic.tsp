@@ -1,4 +1,4 @@
-﻿import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -65,5 +65,5 @@ interface BillingStatistics {
 @@minLength(Extension.ExternalResource.name, 1);
 @@maxLength(Extension.ExternalResource.name, 90);
 
-@@added(BillingStatistic, Versions.v2025_10_01_preview);
-@@added(BillingStatistics, Versions.v2025_10_01_preview);
+@@added(BillingStatistic, Versions.v2026_08_01_preview);
+@@added(BillingStatistics, Versions.v2026_08_01_preview);

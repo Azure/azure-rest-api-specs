@@ -101,5 +101,5 @@ interface HuntComments {
 @@doc(HuntComment.properties, "Hunt Comment properties");
 @@doc(HuntComments.createOrUpdate::parameters.resource, "The hunt  comment");
 
-@@added(HuntComment, Versions.v2025_10_01_preview);
-@@added(HuntComments, Versions.v2025_10_01_preview);
+@@added(HuntComment, Versions.v2026_08_01_preview);
+@@added(HuntComments, Versions.v2026_08_01_preview);
