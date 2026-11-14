@@ -1905,9 +1905,13 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - A2AAgents=V1Preview
+            anyOf:
+              - type: string
+                enum:
+                  - A2AAgents=V1Preview
+              - type: string
+                enum:
+                  - DigitalWorker=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -1952,6 +1956,7 @@ paths:
       x-ms-foundry-meta:
         conditional_previews:
           - A2AAgents=V1Preview
+          - DigitalWorker=V1Preview
   /agents/{agent_name}/code:download:
     get:
       operationId: Agents_downloadAgentCode
@@ -47783,6 +47788,31 @@ components:
           type: string
           description: Index asset id for search resource.
       description: A AI Search Index resource.
+    AccessBoundaryAuthorizationScheme:
+      type: object
+      required:
+        - type
+        - read
+      properties:
+        type:
+          type: string
+          enum:
+            - AccessBoundary
+          description: The authorization scheme type. Always `AccessBoundary`.
+        read:
+          $ref: '#/components/schemas/ReadAccessPolicy'
+          description: The policy for delivering inbound messages to the Autopilot. No write policy is supported.
+      allOf:
+        - $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
+      description: |-
+        Authorizes inbound Activity Protocol messages using the Autopilot's instance read policy.
+        Supported only for M365 digital workers or agents published as Autopilots, with a native Activity Protocol endpoint.
+        Configure this scheme at creation with digital_worker_type set to m365, or after Autopilot publication.
+        It must be the sole authorization scheme, without legacy activity access_boundaries.
+        Channel authentication and the project tenant check still apply. This policy does not restrict outbound messages or chat recipients.
+      x-ms-foundry-meta:
+        required_previews:
+          - DigitalWorker=V1Preview
     ActivityProtocolAccessBoundary:
       anyOf:
         - type: string
@@ -48164,6 +48194,7 @@ components:
           BotService: '#/components/schemas/BotServiceAuthorizationScheme'
           BotServiceRbac: '#/components/schemas/BotServiceRbacAuthorizationScheme'
           BotServiceTenant: '#/components/schemas/BotServiceTenantAuthorizationScheme'
+          AccessBoundary: '#/components/schemas/AccessBoundaryAuthorizationScheme'
     AgentEndpointAuthorizationSchemeType:
       anyOf:
         - type: string
@@ -48173,6 +48204,7 @@ components:
             - BotService
             - BotServiceRbac
             - BotServiceTenant
+            - AccessBoundary
     AgentEndpointConfig:
       type: object
       properties:
@@ -48192,6 +48224,9 @@ components:
           items:
             $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
           description: The authorization schemes supported by the agent endpoint
+          x-ms-foundry-meta:
+            conditional_previews:
+              - DigitalWorker=V1Preview
         publish_approval_status:
           $ref: '#/components/schemas/PublishApprovalStatus'
           description: 'The Microsoft Agent Certification review status of the Microsoft 365 store title published for this agent. Server-populated and best-effort: it is absent when the status could not be determined, and an absent value must not be interpreted as the agent not being published. No value is terminal, because publishing a new version of an agent reuses the same store title and sends it back through review.'
@@ -48215,6 +48250,9 @@ components:
           items:
             $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
           description: The authorization schemes supported by the agent endpoint
+          x-ms-foundry-meta:
+            conditional_previews:
+              - DigitalWorker=V1Preview
     AgentEndpointProtocol:
       anyOf:
         - type: string
@@ -96346,6 +96384,30 @@ components:
           description: The field on a matched event holding the text delta. When omitted, the service defaults to `delta`.
           default: delta
       description: An SSE event-type to text-field selector for streaming invocation output.
+    ReadAccessPolicy:
+      type: object
+      required:
+        - responds_to
+      properties:
+        responds_to:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReadAccessResponder'
+          description: |-
+            The senders allowed to prompt the Autopilot. Currently, only `allowlisted` is supported in requests: it uses the instance's existing interaction allowlist,
+            which implicitly includes the instance manager. An empty array denies user messages.
+            Trusted lifecycle events are not governed by this policy. Clients must handle unrecognized values in responses.
+      description: A conversation-independent policy for delivering inbound messages to an Autopilot.
+      x-ms-foundry-meta:
+        required_previews:
+          - DigitalWorker=V1Preview
+    ReadAccessResponder:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - allowlisted
+      description: A category of senders allowed to prompt an Autopilot. Additional values may be returned in future responses.
     RecurrenceSchedule:
       type: object
       required:

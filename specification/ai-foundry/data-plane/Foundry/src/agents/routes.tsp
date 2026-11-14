@@ -392,11 +392,18 @@ interface Agents {
   @tag("Agents")
   @extension(
     "x-ms-foundry-meta",
-    #{ conditional_previews: #[AgentDefinitionOptInKeys.a2a_agents_v1_preview] }
+    #{
+      conditional_previews: #[
+        AgentDefinitionOptInKeys.a2a_agents_v1_preview,
+        AgentDefinitionOptInKeys.digital_worker_v1_preview
+      ],
+    }
   )
   patchAgentObject is FoundryDataPlaneOperation<
     {
-      ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.a2a_agents_v1_preview>;
+      ...WithConditionalFoundryPreviewHeader<
+        | AgentDefinitionOptInKeys.a2a_agents_v1_preview
+        | AgentDefinitionOptInKeys.digital_worker_v1_preview>;
 
       /** The name of the agent to retrieve. */
       @summary("The name of the agent to retrieve")
