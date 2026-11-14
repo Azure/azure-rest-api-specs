@@ -35,3 +35,7 @@ using ComputeDisk;
   "getSecureVMGuestStateSas",
   "java"
 );
+
+// Property name changes - ClaimRequest and UnclaimRequest for C# compatibility
+@@clientName(ClaimRequest, "ClaimRequestContent", "csharp");
+@@clientName(UnclaimRequest, "UnclaimRequestContent", "csharp");
