@@ -185,9 +185,27 @@ model Checkpoint {
   @visibility(Lifecycle.Read)
   checkpoint_type: CheckpointType;
 
-  /** Timestamp when the checkpoint was saved. */
+  /** Timestamp when the checkpoint was saved, or null if saving has not completed. */
   @visibility(Lifecycle.Read)
-  time: utcDateTime;
+  time?: utcDateTime | null;
+
+  /** Save status: pending, completed, or failed. This is not safety approval. */
+  @visibility(Lifecycle.Read)
+  status?: string;
+
+  /** Publication progress for a protected checkpoint, when available. */
+  @visibility(Lifecycle.Read)
+  publication?:
+    | Azure.AI.Projects.SessionFineTuning.FineTuningCheckpointPublicationState
+    | null;
+
+  /** Whether publication is required before this checkpoint can be deployed. */
+  @visibility(Lifecycle.Read)
+  publication_required?: boolean;
+
+  /** Canonical deployment eligibility; null for an unprotected legacy checkpoint. */
+  @visibility(Lifecycle.Read)
+  deployment_eligible?: boolean | null;
 }
 
 /** Detailed metadata for a single checkpoint. */
