@@ -7,14 +7,24 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 const repoRoot = fileURLToPath(new URL("../../../", import.meta.url));
 const oxlint = fileURLToPath(new URL("./bin/oxlint", import.meta.resolve("oxlint/package.json")));
-const skillPath = ".github/skills/azure-typespec-assessment";
-const scriptPath = `${skillPath}/scripts/example.ts`;
 
-describe("assessment script lint configuration", { timeout: 60_000 }, () => {
+describe.each([
+  {
+    name: "assessment script",
+    skillPath: ".github/skills/azure-typespec-assessment",
+    script: "scripts/example.ts",
+  },
+  {
+    name: "SDK naming eval",
+    skillPath: ".github/skills/azure-typespec-sdk-naming/evals",
+    script: "fixtures/example.mjs",
+  },
+])("$name lint configuration", { timeout: 60_000 }, ({ skillPath, script }) => {
+  const scriptPath = `${skillPath}/${script}`;
   let fixture: string;
 
   beforeEach(async () => {
-    fixture = await mkdtemp(join(tmpdir(), "assessment-lint-"));
+    fixture = await mkdtemp(join(tmpdir(), "skill-lint-"));
     for (const path of [
       ".oxlintrc.json",
       "tsconfig.base.json",
@@ -31,8 +41,8 @@ describe("assessment script lint configuration", { timeout: 60_000 }, () => {
       join(fixture, "node_modules"),
       "junction",
     );
-    await mkdir(join(fixture, skillPath, "scripts"));
-    await writeFile(join(fixture, skillPath, "scripts/runtime-types.d.ts"), "export {};\n");
+    await mkdir(dirname(join(fixture, scriptPath)), { recursive: true });
+    await writeFile(join(fixture, dirname(scriptPath), "runtime-types.d.ts"), "export {};\n");
   });
 
   afterEach(async () => {
