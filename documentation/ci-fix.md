@@ -34,6 +34,7 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
     - [Prettier reference](#prettier-reference)
   - [`Swagger SemanticValidation`](#swagger-semanticvalidation)
   - [Spell Check](#spell-check)
+  - [`Summarize PR Impact`](#summarize-pr-impact)
   - [`TypeSpec Validation`](#typespec-validation)
   - [`TypeSpec Suppressions`](#typespec-suppressions)
   - [`license/cla`](#licensecla)
@@ -319,6 +320,12 @@ overrides:
 Spell checking is *case-insensitive* so you only need to add a word once in lower-case. Try to kept the word list sorted for easier discovery.
 
 For more information see [cspell configuration](https://cspell.org/configuration/).
+
+## `Summarize PR Impact`
+
+If the check fails with `pnpm: command not found`, an outdated PR branch may be the cause even when the spec changes are unrelated. The workflow loads the setup action from the PR head at `after/.github/actions/setup-node-install-deps`. An older copy of that action may run `npm ci` without installing `pnpm`, while the current workflow runs `pnpm exec summarize-impact`.
+
+Update the PR branch with the latest changes from its target branch (`main` or `RPSaaSMaster`), then rerun the check from the updated PR head. Rerunning the check on the old branch state can repeat the failure. This does not require changing spec files.
 
 ## `TypeSpec Validation`
 
