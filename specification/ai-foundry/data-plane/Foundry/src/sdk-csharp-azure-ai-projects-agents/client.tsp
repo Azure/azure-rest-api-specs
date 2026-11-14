@@ -190,6 +190,9 @@ namespace Azure.AI.Projects {
   @@clientName(VoiceAgentHandoffCondition.delay_ms, "Delay", "csharp");
   @@clientName(VoiceAgentHandoffEdgeState.delay_ms, "Delay", "csharp");
 
+  // Avoid generation of anonymous AzureFunctionDefinitionFunction
+  @@alternateType(AzureFunctionDefinition.function, unknown);
+
   // --------------------------------------------------------------------------------
   // Hide session operations, containing the foundry features
   // --------------------------------------------------------------------------------
@@ -632,6 +635,7 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
+
   // Move all the OpenAI TYpes out:
   // Now take the OpenAI models, and ensure that they are emitted as consumption points from the OpenAI SDK instead of re-emitting them here.
   // This is to ensure that the OpenAI SDK is the source of truth for these models, and we don't have duplicate definitions.
