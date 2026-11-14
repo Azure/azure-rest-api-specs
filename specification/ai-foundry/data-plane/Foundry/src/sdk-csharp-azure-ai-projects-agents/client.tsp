@@ -175,6 +175,7 @@ namespace Azure.AI.Projects {
   // Change types to avoid serialization as BinaryData
   @@alternateType(OpenAI.RealtimeResponse.metadata, Record<unknown>);
   @@alternateType(OpenAI.MCPTool.allowed_tools, OpenAI.MCPToolFilter | null);
+  //@@alternateType(OpenAI.FileSearchTool.ranking_options, OpenAI.RankingOptions);
 
   // Rename Time properties for compliance
   @@clientName(
@@ -627,6 +628,15 @@ namespace Azure.AI.Projects {
     Azure.AI.Projects.WebIQPreviewTool,
     {
       identity: "Azure.AI.Extensions.OpenAI.WebIQPreviewTool",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-alpha.20260908.3",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    Azure.AI.Projects.AgentReference,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.AgentReference",
       package: "Azure.AI.Extensions.OpenAI",
       minVersion: "3.0.0-alpha.20260908.3",
     },
@@ -1170,6 +1180,15 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
+  @@alternateType(
+    OpenAI.RankingOptions,
+    {
+      identity: "OpenAI.Responses.FileSearchToolRankingOptions",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
   // And now drop classes that aren't referenced, and aren't pruned.
   @@alternateType(
     OpenAI.ToolChoiceParamType,
@@ -1208,13 +1227,6 @@ namespace Azure.AI.Projects {
   );
   @@alternateType(
     OpenAI.CompoundFilter,
-    {
-      identity: "System.Object",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.RankingOptions,
     {
       identity: "System.Object",
     },
