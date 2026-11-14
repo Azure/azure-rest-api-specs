@@ -19,18 +19,15 @@
                 "contentBase64": "eyJvcGVuYXBpIjoiMy4wLjMiLCJpbmZvIjp7InRpdGxlIjoiRXhhbXBsZSB3ZWF0aGVyIHRvb2xzIiwidmVyc2lvbiI6IjEuMC4wIn0sInNlcnZlcnMiOlt7InVybCI6Imh0dHBzOi8vYXBpLmNvbnRvc28uY29tIn1dLCJwYXRocyI6eyIvd2VhdGhlciI6eyJnZXQiOnsib3BlcmF0aW9uSWQiOiJnZXRXZWF0aGVyIiwicmVzcG9uc2VzIjp7IjIwMCI6eyJkZXNjcmlwdGlvbiI6IlN1Y2Nlc3MifX19fX19"
               }
             },
-            "credentials": {
-              "type": "header",
+            "authentication": {
               "headers": [
                 {
                   "name": "x-api-key",
-                  "values": [
-                    "{api-key}"
-                  ]
+                  "value": "{api-key}"
                 }
               ]
             },
-            "required": true
+            "mode": "failClosed"
           },
           {
             "id": "url-endpoint",
@@ -42,11 +39,11 @@
                 "url": "https://api.contoso.com/openapi.json"
               }
             },
-            "required": false
+            "mode": "failOpen"
           }
         ],
-        "name": "OpenAPI tools",
-        "type": "openApi"
+        "displayName": "OpenAPI tools",
+        "toolServerType": "openApi"
       }
     }
   },
@@ -56,8 +53,8 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/toolServers/openapi-tools",
         "name": "openapi-tools",
         "type": "Microsoft.ApiManagement/aigateways/workspaces/toolServers",
-        "eTag": "W/\"1\"",
         "properties": {
+          "provisioningState": "Succeeded",
           "endpoints": [
             {
               "id": "inline-endpoint",
@@ -68,15 +65,14 @@
                   "type": "inline"
                 }
               },
-              "credentials": {
-                "type": "header",
+              "authentication": {
                 "headers": [
                   {
                     "name": "x-api-key"
                   }
                 ]
               },
-              "required": true
+              "mode": "failClosed"
             },
             {
               "id": "url-endpoint",
@@ -88,12 +84,11 @@
                   "url": "https://api.contoso.com/openapi.json"
                 }
               },
-              "required": false
+              "mode": "failOpen"
             }
           ],
-          "provisioningState": "Succeeded",
-          "name": "OpenAPI tools",
-          "type": "openApi"
+          "displayName": "OpenAPI tools",
+          "toolServerType": "openApi"
         }
       }
     },
@@ -102,8 +97,8 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/toolServers/openapi-tools",
         "name": "openapi-tools",
         "type": "Microsoft.ApiManagement/aigateways/workspaces/toolServers",
-        "eTag": "W/\"1\"",
         "properties": {
+          "provisioningState": "Succeeded",
           "endpoints": [
             {
               "id": "inline-endpoint",
@@ -114,15 +109,14 @@
                   "type": "inline"
                 }
               },
-              "credentials": {
-                "type": "header",
+              "authentication": {
                 "headers": [
                   {
                     "name": "x-api-key"
                   }
                 ]
               },
-              "required": true
+              "mode": "failClosed"
             },
             {
               "id": "url-endpoint",
@@ -134,12 +128,11 @@
                   "url": "https://api.contoso.com/openapi.json"
                 }
               },
-              "required": false
+              "mode": "failOpen"
             }
           ],
-          "provisioningState": "Succeeded",
-          "name": "OpenAPI tools",
-          "type": "openApi"
+          "displayName": "OpenAPI tools",
+          "toolServerType": "openApi"
         }
       }
     }

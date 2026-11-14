@@ -364,11 +364,8 @@ model EmbeddingContent {
   @maxItems(32)
   inputs: EmbeddingContentItem[];
 
-  /** The model to use. Defaults to `microsoft-embedding-1-large` (Microsoft Embedding 1-large). */
-  `model`?: string;
-
-  /** The model version. Defaults to the latest; the response always names the version used. */
-  modelVersion?: string;
+  /** The model to use, for example `microsoft-embedding-1-large` (Microsoft Embedding 1-large). */
+  `model`: string;
 
   /** The kind of vectors to return. Defaults to `dense`. */
   vectorKind?: EmbeddingVectorKind;
@@ -621,9 +618,6 @@ model EmbeddingResult {
   /** The name of the model that produced the vectors. */
   `model`: string;
 
-  /** The model version that produced the vectors. Pin it to keep an index stable. */
-  modelVersion: string;
-
   /** The numeric type of the returned values. */
   outputDataKind: EmbeddingOutputDataKind;
 
@@ -735,7 +729,7 @@ model EmbeddingOperationResult {
  * - `InvalidRequest`: the request isn't supported on this endpoint, for example `inputs` isn't enabled.
  * - `InvalidRequestBody`: malformed JSON, a wrong type, an unknown or snake_case field, or a value outside its allowed
  *   set. `error.details` describes each problem.
- * - `EMBEDDING_INPUT_INVALID`: an item's kind, source, size, format or count, or a model or version isn't valid.
+ * - `EMBEDDING_INPUT_INVALID`: an item's kind, source, size, format or count, or the model isn't valid.
  *   Text over the model's token limit isn't an error; see `EMBEDDING_INPUT_TRUNCATED`.
  * - `EMBEDDING_URL_NOT_ALLOWED`: `input_images`, a link in an image's `content`, a `url` where blob inputs are off or
  *   from an API-key caller, or a `sasToken` that isn't a read-only, https-only user delegation SAS for one blob signed
