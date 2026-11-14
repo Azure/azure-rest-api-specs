@@ -1,0 +1,40 @@
+# Removes client-customization-approved when a push changes the reviewed PR diff.
+name: Client Customization Review
+
+on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
+  pull_request_target:
+    types: [synchronize]
+    branches: [main]
+
+permissions:
+  # repos.compareCommitsWithBasehead
+  contents: read
+
+jobs:
+  reset-approval:
+    name: Reset client customization approval
+    if: contains(github.event.pull_request.labels.*.name, 'client-customization-approved')
+    runs-on: ubuntu-slim
+    steps:
+      # Only base-branch automation is checked out; no PR code is run.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            .github
+
+      - id: reset
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          result-encoding: string
+          script: |
+            const { default: reset } =
+              await import('${{ github.workspace }}/.github/workflows/src/client-customization-review.ts');
+            return await reset({ github, context, core });
+
+      # Update Labels applies this.
+      - if: steps.reset.outputs.result == 'remove'
+        uses: ./.github/actions/add-label-artifact
+        with:
+          name: "client-customization-approved"
+          value: "false"

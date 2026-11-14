@@ -75,10 +75,11 @@ describe("change impact", () => {
     ]);
   });
 
-  it("retains management classification for configuration-only changes", async () => {
+  it("classifies client customizations as management SDK configuration", async () => {
     const impact = await evaluateImpact(
       context({
         modifications: [
+          "specification/contosowidgetmanager/resource-manager/Contoso.WidgetManager/client.tsp",
           "specification/contosowidgetmanager/resource-manager/Contoso.WidgetManager/tspconfig.yaml",
         ],
       }),

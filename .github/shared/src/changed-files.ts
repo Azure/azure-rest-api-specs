@@ -213,6 +213,10 @@ export function tspconfig(file: string): boolean {
   return hasFilename(file, "tspconfig.yaml");
 }
 
+export function clientCustomization(file: string): boolean {
+  return hasFilename(file, "client.tsp") || tspconfig(file);
+}
+
 function hasFilename(file: string | undefined, filename: string): boolean {
   if (typeof file !== "string" || !file.toLowerCase().endsWith(filename)) {
     return false;

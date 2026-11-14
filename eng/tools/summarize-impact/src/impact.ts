@@ -4,13 +4,13 @@ import { isDeepStrictEqual } from "node:util";
 import * as commonmark from "commonmark";
 import { parse } from "yaml";
 import {
+  clientCustomization,
   dataPlane,
   example,
   readme,
   resourceManager,
   swagger,
   tsp,
-  tspconfig,
   typespec,
 } from "@azure-tools/specs-shared/changed-files";
 import { Readme } from "@azure-tools/specs-shared/readme";
@@ -128,7 +128,7 @@ export async function evaluateImpact(
 }
 
 function getChangeKind(file: string): ServiceImpact["changes"][number] {
-  if (tspconfig(file)) return "sdk-configuration";
+  if (clientCustomization(file)) return "sdk-configuration";
   if (example(file)) return "examples";
   if (swagger(file) || tsp(file)) return "api";
   if (readme(file)) return "readme";
