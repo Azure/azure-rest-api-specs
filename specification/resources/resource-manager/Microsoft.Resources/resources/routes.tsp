@@ -65,6 +65,7 @@ interface ProvidersOperationGroup {
   /**
    * Get the provider permissions.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing providerPermissions SDK method name; renaming it would break client compatibility."
   @tag("Providers")
   @route("/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}/providerPermissions")
   @get

@@ -82,6 +82,7 @@ interface Assets {
   /** Get an asset by identifier. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing queryById SDK method name; renaming it would break client compatibility."
   @route("/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/assets/{id}")
   @get
   queryById is Azure.Core.Foundations.Operation<
@@ -135,6 +136,7 @@ interface ExtensiveModels {
   /** Get an extensive model by identifier. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing queryById SDK method name; renaming it would break client compatibility."
   @route("/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/extensiveModels/{id}")
   @get
   queryById is Azure.Core.Foundations.Operation<
@@ -295,6 +297,7 @@ interface Models {
   /** Get a model by identifier. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API operation name"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing queryById SDK method name; renaming it would break client compatibility."
   @route("/modelregistry/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{id}")
   @get
   queryById is Azure.Core.Foundations.Operation<

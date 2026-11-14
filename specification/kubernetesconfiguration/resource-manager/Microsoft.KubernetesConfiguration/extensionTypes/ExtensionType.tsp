@@ -53,6 +53,7 @@ interface ExtensionTypes {
   /**
    * Get an extension type for the location.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing locationGet SDK method name; renaming it would break client compatibility."
   @tag("ExtensionTypes")
   @tag("ClusterExtensionTypes")
   locationGet is ExtensionTypeOps.Read<ExtensionType>;
@@ -60,6 +61,7 @@ interface ExtensionTypes {
   /**
    * List all Extension Types for the location.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing locationList SDK method name; renaming it would break client compatibility."
   @tag("ExtensionTypes")
   @tag("ClusterExtensionTypes")
   locationList is ExtensionTypeOps.List<

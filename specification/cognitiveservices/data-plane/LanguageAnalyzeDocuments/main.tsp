@@ -63,6 +63,7 @@ alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
 /** Get the status of a document analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing analyzeDocumentsJobStatus SDK method name; renaming it would break client compatibility."
 @summary("Get analysis status and results")
 op analyzeDocumentsJobStatus is languageOperations.ResourceRead<
   AnalyzeDocumentsJobState,

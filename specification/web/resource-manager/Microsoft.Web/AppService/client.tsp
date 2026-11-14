@@ -306,6 +306,7 @@ op diagnosticsExecuteSiteDetectorSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing diagnosticsGetSiteAnalysisSlotCustomized SDK method name; renaming it would break client compatibility."
 op diagnosticsGetSiteAnalysisSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -338,6 +339,7 @@ op diagnosticsGetSiteAnalysisSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing diagnosticsGetSiteDetectorResponseSlotCustomized SDK method name; renaming it would break client compatibility."
 op diagnosticsGetSiteDetectorResponseSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -385,6 +387,7 @@ op diagnosticsGetSiteDetectorResponseSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing diagnosticsGetSiteDetectorSlotCustomized SDK method name; renaming it would break client compatibility."
 op diagnosticsGetSiteDetectorSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -417,6 +420,7 @@ op diagnosticsGetSiteDetectorSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing diagnosticsGetSiteDiagnosticCategorySlotCustomized SDK method name; renaming it would break client compatibility."
 op diagnosticsGetSiteDiagnosticCategorySlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -445,6 +449,7 @@ op diagnosticsGetSiteDiagnosticCategorySlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing diagnosticsListSiteAnalysesSlotCustomized SDK method name; renaming it would break client compatibility."
 op diagnosticsListSiteAnalysesSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -473,6 +478,7 @@ op diagnosticsListSiteAnalysesSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing diagnosticsListSiteDetectorsSlotCustomized SDK method name; renaming it would break client compatibility."
 op diagnosticsListSiteDetectorsSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -638,6 +644,7 @@ op webAppsCreateInstanceFunctionSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsDeletePrivateEndpointConnectionSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsDeletePrivateEndpointConnectionSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1101,6 +1108,7 @@ op webAppsCreateOrUpdateVnetConnectionSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsDeleteBackupSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsDeleteBackupSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1129,6 +1137,7 @@ op webAppsDeleteBackupSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsDeleteContinuousWebJobSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsDeleteContinuousWebJobSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1157,6 +1166,7 @@ op webAppsDeleteContinuousWebJobSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsDeleteDeploymentSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsDeleteDeploymentSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1185,6 +1195,7 @@ op webAppsDeleteDeploymentSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsDeleteDomainOwnershipIdentifierSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsDeleteDomainOwnershipIdentifierSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1213,6 +1224,7 @@ op webAppsDeleteDomainOwnershipIdentifierSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsDeleteFunctionSecretSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsDeleteFunctionSecretSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1276,6 +1288,7 @@ op webAppsDeleteHostSecretSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsDeleteHybridConnectionSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsDeleteHybridConnectionSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1308,6 +1321,7 @@ op webAppsDeleteHybridConnectionSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsDeleteInstanceFunctionSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsDeleteInstanceFunctionSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1336,6 +1350,7 @@ op webAppsDeleteInstanceFunctionSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsDeleteInstanceProcessCustomized SDK method name; renaming it would break client compatibility."
 op webAppsDeleteInstanceProcessCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1364,6 +1379,7 @@ op webAppsDeleteInstanceProcessCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsDeleteInstanceProcessSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsDeleteInstanceProcessSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1396,6 +1412,7 @@ op webAppsDeleteInstanceProcessSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsDeletePremierAddOnSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsDeletePremierAddOnSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1424,6 +1441,7 @@ op webAppsDeletePremierAddOnSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsDeleteProcessSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsDeleteProcessSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1452,6 +1470,7 @@ op webAppsDeleteProcessSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsDeleteRelayServiceConnectionSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsDeleteRelayServiceConnectionSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1480,6 +1499,7 @@ op webAppsDeleteRelayServiceConnectionSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppDeleteSiteExtensionSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppDeleteSiteExtensionSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1508,6 +1528,7 @@ op webAppDeleteSiteExtensionSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsDeleteTriggeredWebJobSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsDeleteTriggeredWebJobSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1536,6 +1557,7 @@ op webAppsDeleteTriggeredWebJobSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsDeleteVnetConnectionSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsDeleteVnetConnectionSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1564,6 +1586,7 @@ op webAppsDeleteVnetConnectionSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsGetAppSettingKeyVaultReferenceSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsGetAppSettingKeyVaultReferenceSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1596,6 +1619,7 @@ op webAppsGetAppSettingKeyVaultReferenceSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsGetBackupStatusSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsGetBackupStatusSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1624,6 +1648,7 @@ op webAppsGetBackupStatusSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsGetConfigurationSnapshotSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsGetConfigurationSnapshotSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1656,6 +1681,7 @@ op webAppsGetConfigurationSnapshotSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsGetContinuousWebJobSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsGetContinuousWebJobSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1684,6 +1710,7 @@ op webAppsGetContinuousWebJobSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsGetDeploymentSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsGetDeploymentSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1712,6 +1739,7 @@ op webAppsGetDeploymentSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsGetDomainOwnershipIdentifierSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsGetDomainOwnershipIdentifierSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1740,6 +1768,7 @@ op webAppsGetDomainOwnershipIdentifierSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsGetHybridConnectionSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsGetHybridConnectionSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1772,6 +1801,7 @@ op webAppsGetHybridConnectionSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsGetInstanceFunctionSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsGetInstanceFunctionSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1800,6 +1830,7 @@ op webAppsGetInstanceFunctionSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsGetInstanceInfoSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsGetInstanceInfoSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1828,6 +1859,7 @@ op webAppsGetInstanceInfoSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsGetInstanceProcessCustomized SDK method name; renaming it would break client compatibility."
 op webAppsGetInstanceProcessCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1940,6 +1972,7 @@ op webAppsGetInstanceProcessDumpSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsGetInstanceProcessModuleCustomized SDK method name; renaming it would break client compatibility."
 op webAppsGetInstanceProcessModuleCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -1972,6 +2005,7 @@ op webAppsGetInstanceProcessModuleCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsGetInstanceProcessModuleSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsGetInstanceProcessModuleSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -2008,6 +2042,7 @@ op webAppsGetInstanceProcessModuleSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsGetInstanceProcessSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsGetInstanceProcessSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -2171,6 +2206,7 @@ op webAppsGetNetworkTracesSlotV2Customized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsGetPremierAddOnSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsGetPremierAddOnSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -2199,6 +2235,7 @@ op webAppsGetPremierAddOnSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsGetPrivateEndpointConnectionSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsGetPrivateEndpointConnectionSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -2267,6 +2304,7 @@ op webAppsGetProcessDumpSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsGetProcessModuleSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsGetProcessModuleSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -2299,6 +2337,7 @@ op webAppsGetProcessModuleSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsGetProcessSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsGetProcessSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -2327,6 +2366,7 @@ op webAppsGetProcessSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsGetRelayServiceConnectionSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsGetRelayServiceConnectionSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -2355,6 +2395,7 @@ op webAppsGetRelayServiceConnectionSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsGetSiteConnectionStringKeyVaultReferenceSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsGetSiteConnectionStringKeyVaultReferenceSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -2387,6 +2428,7 @@ op webAppsGetSiteConnectionStringKeyVaultReferenceSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsGetSiteExtensionSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsGetSiteExtensionSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -2415,6 +2457,7 @@ op webAppsGetSiteExtensionSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsGetTriggeredWebJobHistorySlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsGetTriggeredWebJobHistorySlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -2447,6 +2490,7 @@ op webAppsGetTriggeredWebJobHistorySlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsGetTriggeredWebJobSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsGetTriggeredWebJobSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -2475,6 +2519,7 @@ op webAppsGetTriggeredWebJobSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsGetVnetConnectionGatewaySlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsGetVnetConnectionGatewaySlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -2507,6 +2552,7 @@ op webAppsGetVnetConnectionGatewaySlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsGetVnetConnectionSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsGetVnetConnectionSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -2535,6 +2581,7 @@ op webAppsGetVnetConnectionSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsGetWebJobSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsGetWebJobSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -2684,6 +2731,7 @@ op webAppsListFunctionSecretsSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsListNetworkFeaturesSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsListNetworkFeaturesSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -2712,6 +2760,7 @@ op webAppsListNetworkFeaturesSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsListInstanceProcessModulesCustomized SDK method name; renaming it would break client compatibility."
 op webAppsListInstanceProcessModulesCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -2740,6 +2789,7 @@ op webAppsListInstanceProcessModulesCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsListInstanceProcessModulesSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsListInstanceProcessModulesSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -2838,6 +2888,7 @@ op webAppsListInstanceProcessThreadsSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsListProcessModulesSlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsListProcessModulesSlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -2897,6 +2948,7 @@ op webAppsListProcessThreadsSlotCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsListTriggeredWebJobHistorySlotCustomized SDK method name; renaming it would break client compatibility."
 op webAppsListTriggeredWebJobHistorySlotCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -3514,6 +3566,7 @@ op regionalCheckNameAvailabilityCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsDeletePrivateEndpointConnectionSlotCustomizedForJs SDK method name; renaming it would break client compatibility."
 op webAppsDeletePrivateEndpointConnectionSlotCustomizedForJs(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -3555,6 +3608,7 @@ op webAppsDeletePrivateEndpointConnectionSlotCustomizedForJs(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing appServiceEnvironmentsDeletePrivateEndpointConnectionForJs SDK method name; renaming it would break client compatibility."
 op appServiceEnvironmentsDeletePrivateEndpointConnectionForJs(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -3592,6 +3646,7 @@ op appServiceEnvironmentsDeletePrivateEndpointConnectionForJs(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing staticSitesDeletePrivateEndpointConnectionForJs SDK method name; renaming it would break client compatibility."
 op staticSitesDeletePrivateEndpointConnectionForJs(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -3629,6 +3684,7 @@ op staticSitesDeletePrivateEndpointConnectionForJs(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing webAppsDeletePrivateEndpointConnectionForJs SDK method name; renaming it would break client compatibility."
 op webAppsDeletePrivateEndpointConnectionForJs(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,

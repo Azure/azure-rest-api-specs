@@ -273,6 +273,7 @@ using Microsoft.Devices;
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing IotDpsResourceDeleteCustomized SDK method name; renaming it would break client compatibility."
 op IotDpsResourceDeleteCustomized(
   ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -325,6 +326,7 @@ op IotDpsResourceListKeysCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing IotDpsResourceGetOperationResultCustomized SDK method name; renaming it would break client compatibility."
 op IotDpsResourceGetOperationResultCustomized(
   ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -406,6 +408,7 @@ op IotDpsResourceListValidSkusCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing IotDpsResourceGetCustomized SDK method name; renaming it would break client compatibility."
 op IotDpsResourceGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -616,6 +619,7 @@ op CertificateResponseVerifyCertificateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing CertificateResponseGetCustomized SDK method name; renaming it would break client compatibility."
 op CertificateResponseGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,

@@ -69,6 +69,7 @@ interface SubscriptionOperationGroup {
   /**
    * Accept subscription ownership status.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing acceptOwnershipStatus SDK method name; renaming it would break client compatibility."
   @autoRoute
   @get
   acceptOwnershipStatus is ArmProviderActionSync<

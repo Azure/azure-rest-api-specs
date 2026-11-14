@@ -119,6 +119,7 @@ model PrivateLinkNameParameter {
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing privateLinksGetCustomization SDK method name; renaming it would break client compatibility."
 op privateLinksGetCustomization(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -194,6 +195,7 @@ op privateLinksUpdateCustomization(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing privateLinksDeleteCustomization SDK method name; renaming it would break client compatibility."
 op privateLinksDeleteCustomization(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -218,6 +220,7 @@ op privateLinksDeleteCustomization(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing privateLinksHeadCustomization SDK method name; renaming it would break client compatibility."
 op privateLinksHeadCustomization(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -259,6 +262,7 @@ op privateLinksHeadCustomization(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing privateEndpointConnectionsListCustomization SDK method name; renaming it would break client compatibility."
 op privateEndpointConnectionsListCustomization(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -280,6 +284,7 @@ op privateEndpointConnectionsListCustomization(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing privateEndpointConnectionsGetCustomization SDK method name; renaming it would break client compatibility."
 op privateEndpointConnectionsGetCustomization(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -340,6 +345,7 @@ op privateEndpointConnectionsCreateOrUpdateCustomization(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing privateEndpointConnectionsDeleteCustomization SDK method name; renaming it would break client compatibility."
 op privateEndpointConnectionsDeleteCustomization(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -367,6 +373,7 @@ op privateEndpointConnectionsDeleteCustomization(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing privateLinkResourcesListCustomization SDK method name; renaming it would break client compatibility."
 op privateLinkResourcesListCustomization(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -386,6 +393,7 @@ op privateLinkResourcesListCustomization(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing privateLinkResourcesGetCustomization SDK method name; renaming it would break client compatibility."
 op privateLinkResourcesGetCustomization(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
@@ -2223,6 +2231,7 @@ union CSharpServerVulnerabilityAssessmentName {
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing sqlVulnerabilityAssessmentScansGet SDK method name; renaming it would break client compatibility."
 op sqlVulnerabilityAssessmentScansGet(
   ...ApiVersionParameter,
 
@@ -2250,6 +2259,7 @@ op sqlVulnerabilityAssessmentScansGet(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing sqlVulnerabilityAssessmentScanResultsList SDK method name; renaming it would break client compatibility."
 op sqlVulnerabilityAssessmentScanResultsList(
   ...ApiVersionParameter,
 
@@ -2280,6 +2290,7 @@ op sqlVulnerabilityAssessmentScanResultsList(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing sqlVulnerabilityAssessmentScanResultsGet SDK method name; renaming it would break client compatibility."
 op sqlVulnerabilityAssessmentScanResultsGet(
   ...ApiVersionParameter,
 
@@ -2315,6 +2326,7 @@ op sqlVulnerabilityAssessmentScanResultsGet(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing alertsListResourceGroupLevelByRegionCustomized SDK method name; renaming it would break client compatibility."
 op alertsListResourceGroupLevelByRegionCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,

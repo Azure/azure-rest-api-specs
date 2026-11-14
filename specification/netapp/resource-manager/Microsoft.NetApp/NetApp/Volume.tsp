@@ -2731,6 +2731,7 @@ interface Volumes {
   /**
    * Get the status of the replication
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing replicationStatus SDK method name; renaming it would break client compatibility."
   @get
   replicationStatus is ArmResourceActionSync<
     Volume,

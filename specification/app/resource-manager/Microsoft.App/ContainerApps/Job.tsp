@@ -213,6 +213,7 @@ interface Jobs {
    * Get details of a single job execution
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing jobExecution SDK method name; renaming it would break client compatibility."
   @tag("Jobs")
   @operationId("JobExecution")
   @summary("Get details of a single job execution")
@@ -255,6 +256,7 @@ interface Jobs {
   /**
    * Get the properties for a given Container App Job.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing proxyGet SDK method name; renaming it would break client compatibility."
   @tag("Jobs")
   @tag("Diagnostics")
   @summary("Get the properties of a Container App Job.")

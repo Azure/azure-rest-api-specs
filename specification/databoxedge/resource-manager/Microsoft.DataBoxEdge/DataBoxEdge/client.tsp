@@ -52,6 +52,7 @@ using Http;
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing UsersDeleteCustomized SDK method name; renaming it would break client compatibility."
 op UsersDeleteCustomized(
   ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -75,6 +76,7 @@ op UsersDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing UsersListByDataBoxEdgeDeviceCustomized SDK method name; renaming it would break client compatibility."
 op UsersListByDataBoxEdgeDeviceCustomized(
   ...Azure.ResourceManager.ProviderNamespace<User>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -102,6 +104,7 @@ op UsersListByDataBoxEdgeDeviceCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing UsersGetCustomized SDK method name; renaming it would break client compatibility."
 op UsersGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<User>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -155,6 +158,7 @@ op UsersCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing StorageAccountsDeleteCustomized SDK method name; renaming it would break client compatibility."
 op StorageAccountsDeleteCustomized(
   ...Azure.ResourceManager.ProviderNamespace<StorageAccount>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -182,6 +186,7 @@ op StorageAccountsDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing StorageAccountsListByDataBoxEdgeDeviceCustomized SDK method name; renaming it would break client compatibility."
 op StorageAccountsListByDataBoxEdgeDeviceCustomized(
   ...Azure.ResourceManager.ProviderNamespace<StorageAccount>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -205,6 +210,7 @@ op StorageAccountsListByDataBoxEdgeDeviceCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing StorageAccountsGetCustomized SDK method name; renaming it would break client compatibility."
 op StorageAccountsGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -262,6 +268,7 @@ op StorageAccountsCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing MonitoringMetricConfigurationsDeleteCustomized SDK method name; renaming it would break client compatibility."
 op MonitoringMetricConfigurationsDeleteCustomized(
   ...Azure.ResourceManager.ProviderNamespace<MonitoringMetricConfiguration>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -289,6 +296,7 @@ op MonitoringMetricConfigurationsDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing MonitoringMetricConfigurationsListCustomized SDK method name; renaming it would break client compatibility."
 op MonitoringMetricConfigurationsListCustomized(
   ...Azure.ResourceManager.ProviderNamespace<MonitoringMetricConfiguration>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -316,6 +324,7 @@ op MonitoringMetricConfigurationsListCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing MonitoringMetricConfigurationsGetCustomized SDK method name; renaming it would break client compatibility."
 op MonitoringMetricConfigurationsGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -373,6 +382,7 @@ op MonitoringMetricConfigurationsCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing OperationsStatusGetCustomized SDK method name; renaming it would break client compatibility."
 op OperationsStatusGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<Job>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -403,6 +413,7 @@ op OperationsStatusGetCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing JobsGetCustomized SDK method name; renaming it would break client compatibility."
 op JobsGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<Job>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -426,6 +437,7 @@ op JobsGetCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing RolesDeleteCustomized SDK method name; renaming it would break client compatibility."
 op RolesDeleteCustomized(
   ...Azure.ResourceManager.ProviderNamespace<Role>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -449,6 +461,7 @@ op RolesDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing RolesListByDataBoxEdgeDeviceCustomized SDK method name; renaming it would break client compatibility."
 op RolesListByDataBoxEdgeDeviceCustomized(
   ...Azure.ResourceManager.ProviderNamespace<Role>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -472,6 +485,7 @@ op RolesListByDataBoxEdgeDeviceCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing RolesGetCustomized SDK method name; renaming it would break client compatibility."
 op RolesGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<Role>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -525,6 +539,7 @@ op RolesCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing SharesDeleteCustomized SDK method name; renaming it would break client compatibility."
 op SharesDeleteCustomized(
   ...Azure.ResourceManager.ProviderNamespace<Share>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -548,6 +563,7 @@ op SharesDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing SharesListByDataBoxEdgeDeviceCustomized SDK method name; renaming it would break client compatibility."
 op SharesListByDataBoxEdgeDeviceCustomized(
   ...Azure.ResourceManager.ProviderNamespace<Share>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -597,6 +613,7 @@ op SharesRefreshCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing SharesGetCustomized SDK method name; renaming it would break client compatibility."
 op SharesGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<Share>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -650,6 +667,7 @@ op SharesCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing ContainersDeleteCustomized SDK method name; renaming it would break client compatibility."
 op ContainersDeleteCustomized(
   ...Azure.ResourceManager.ProviderNamespace<Container>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -715,6 +733,7 @@ op ContainersRefreshCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing ContainersListByStorageAccountCustomized SDK method name; renaming it would break client compatibility."
 op ContainersListByStorageAccountCustomized(
   ...Azure.ResourceManager.ProviderNamespace<Container>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -742,6 +761,7 @@ op ContainersListByStorageAccountCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing ContainersGetCustomized SDK method name; renaming it would break client compatibility."
 op ContainersGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -803,6 +823,7 @@ op ContainersCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing OrdersDeleteCustomized SDK method name; renaming it would break client compatibility."
 op OrdersDeleteCustomized(
   ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -856,6 +877,7 @@ op OrderslistDCAccessCodeCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing OrdersListByDataBoxEdgeDeviceCustomized SDK method name; renaming it would break client compatibility."
 op OrdersListByDataBoxEdgeDeviceCustomized(
   ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -879,6 +901,7 @@ op OrdersListByDataBoxEdgeDeviceCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing OrdersGetCustomized SDK method name; renaming it would break client compatibility."
 op OrdersGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<Order>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -932,6 +955,7 @@ op OrdersCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing TriggersDeleteCustomized SDK method name; renaming it would break client compatibility."
 op TriggersDeleteCustomized(
   ...Azure.ResourceManager.ProviderNamespace<Trigger>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -955,6 +979,7 @@ op TriggersDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing TriggersListByDataBoxEdgeDeviceCustomized SDK method name; renaming it would break client compatibility."
 op TriggersListByDataBoxEdgeDeviceCustomized(
   ...Azure.ResourceManager.ProviderNamespace<Trigger>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -982,6 +1007,7 @@ op TriggersListByDataBoxEdgeDeviceCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing TriggersGetCustomized SDK method name; renaming it would break client compatibility."
 op TriggersGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<Trigger>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -1035,6 +1061,7 @@ op TriggersCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing AddonsDeleteCustomized SDK method name; renaming it would break client compatibility."
 op AddonsDeleteCustomized(
   ...Azure.ResourceManager.ProviderNamespace<Addon>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -1062,6 +1089,7 @@ op AddonsDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing AddonsListByRoleCustomized SDK method name; renaming it would break client compatibility."
 op AddonsListByRoleCustomized(
   ...Azure.ResourceManager.ProviderNamespace<Addon>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -1089,6 +1117,7 @@ op AddonsListByRoleCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing AddonsGetCustomized SDK method name; renaming it would break client compatibility."
 op AddonsGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -1150,6 +1179,7 @@ op AddonsCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing AlertsListByDataBoxEdgeDeviceCustomized SDK method name; renaming it would break client compatibility."
 op AlertsListByDataBoxEdgeDeviceCustomized(
   ...Azure.ResourceManager.ProviderNamespace<Alert>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -1173,6 +1203,7 @@ op AlertsListByDataBoxEdgeDeviceCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing AlertsGetCustomized SDK method name; renaming it would break client compatibility."
 op AlertsGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<Alert>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -1196,6 +1227,7 @@ op AlertsGetCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing BandwidthSchedulesDeleteCustomized SDK method name; renaming it would break client compatibility."
 op BandwidthSchedulesDeleteCustomized(
   ...Azure.ResourceManager.ProviderNamespace<BandwidthSchedule>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -1223,6 +1255,7 @@ op BandwidthSchedulesDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing BandwidthSchedulesListByDataBoxEdgeDeviceCustomized SDK method name; renaming it would break client compatibility."
 op BandwidthSchedulesListByDataBoxEdgeDeviceCustomized(
   ...Azure.ResourceManager.ProviderNamespace<BandwidthSchedule>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -1246,6 +1279,7 @@ op BandwidthSchedulesListByDataBoxEdgeDeviceCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing BandwidthSchedulesGetCustomized SDK method name; renaming it would break client compatibility."
 op BandwidthSchedulesGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<BandwidthSchedule>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -1303,6 +1337,7 @@ op BandwidthSchedulesCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing StorageAccountCredentialsDeleteCustomized SDK method name; renaming it would break client compatibility."
 op StorageAccountCredentialsDeleteCustomized(
   ...Azure.ResourceManager.ProviderNamespace<StorageAccountCredential>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -1330,6 +1365,7 @@ op StorageAccountCredentialsDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing StorageAccountCredentialsListByDataBoxEdgeDeviceCustomized SDK method name; renaming it would break client compatibility."
 op StorageAccountCredentialsListByDataBoxEdgeDeviceCustomized(
   ...Azure.ResourceManager.ProviderNamespace<StorageAccountCredential>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -1353,6 +1389,7 @@ op StorageAccountCredentialsListByDataBoxEdgeDeviceCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing StorageAccountCredentialsGetCustomized SDK method name; renaming it would break client compatibility."
 op StorageAccountCredentialsGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<StorageAccount>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -1436,6 +1473,7 @@ op DataBoxEdgeDevicesListByDataBoxEdgeDeviceCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing DataBoxEdgeDevicesDeleteCustomized SDK method name; renaming it would break client compatibility."
 op DataBoxEdgeDevicesDeleteCustomized(
   ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -1537,6 +1575,7 @@ op DataBoxEdgeDevicesInstallUpdatesCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing DataBoxEdgeDevicesGetNetworkSettingsCustomized SDK method name; renaming it would break client compatibility."
 op DataBoxEdgeDevicesGetNetworkSettingsCustomized(
   ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -1617,6 +1656,7 @@ op DataBoxEdgeDevicesScanForUpdatesCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing DataBoxEdgeDevicesGetCustomized SDK method name; renaming it would break client compatibility."
 op DataBoxEdgeDevicesGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -1666,6 +1706,7 @@ op DataBoxEdgeDevicesUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing DataBoxEdgeDevicesGetUpdateSummaryCustomized SDK method name; renaming it would break client compatibility."
 op DataBoxEdgeDevicesGetUpdateSummaryCustomized(
   ...Azure.ResourceManager.ProviderNamespace<UpdateSummary>,
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
@@ -2447,6 +2488,7 @@ op DataBoxEdgeDevicesCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing DiagnosticSettingsGetDiagnosticProactiveLogCollectionSettingsCustomized SDK method name; renaming it would break client compatibility."
 op DiagnosticSettingsGetDiagnosticProactiveLogCollectionSettingsCustomized(
   ...Azure.ResourceManager.ProviderNamespace<DiagnosticProactiveLogCollectionSettings>,
 
@@ -2504,6 +2546,7 @@ op DiagnosticSettingsUpdateDiagnosticProactiveLogCollectionSettingsCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing DiagnosticSettingsGetDiagnosticRemoteSupportSettingsCustomized SDK method name; renaming it would break client compatibility."
 op DiagnosticSettingsGetDiagnosticRemoteSupportSettingsCustomized(
   ...Azure.ResourceManager.ProviderNamespace<DiagnosticRemoteSupportSettings>,
 

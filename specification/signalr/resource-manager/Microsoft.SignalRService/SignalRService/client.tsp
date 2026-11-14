@@ -31,6 +31,7 @@ namespace Customization;
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing SignalRPrivateEndpointConnectionsGetCustomized SDK method name; renaming it would break client compatibility."
 op SignalRPrivateEndpointConnectionsGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<PrivateEndpointConnection>,
 
@@ -93,6 +94,7 @@ op SignalRPrivateEndpointConnectionsUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing SignalRPrivateEndpointConnectionsDeleteCustomized SDK method name; renaming it would break client compatibility."
 op SignalRPrivateEndpointConnectionsDeleteCustomized(
   ...Azure.ResourceManager.ProviderNamespace<PrivateEndpointConnection>,
 
@@ -171,6 +173,7 @@ op SignalRSharedPrivateLinkResourcesCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing SignalRSharedPrivateLinkResourcesGetCustomized SDK method name; renaming it would break client compatibility."
 op SignalRSharedPrivateLinkResourcesGetCustomized(
   ...Azure.ResourceManager.ProviderNamespace<SharedPrivateLinkResource>,
 
@@ -200,6 +203,7 @@ op SignalRSharedPrivateLinkResourcesGetCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing SignalRSharedPrivateLinkResourcesDeleteCustomized SDK method name; renaming it would break client compatibility."
 op SignalRSharedPrivateLinkResourcesDeleteCustomized(
   ...Azure.ResourceManager.ProviderNamespace<SharedPrivateLinkResource>,
 

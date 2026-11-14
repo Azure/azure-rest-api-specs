@@ -134,6 +134,7 @@ interface GuestConfigurationAssignments {
    * List all guest configuration assignments for a subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing SubscriptionList SDK method name; renaming it would break client compatibility."
   SubscriptionList is Extension.ListByTarget<
     Extension.Subscription,
     GuestConfigurationAssignment,

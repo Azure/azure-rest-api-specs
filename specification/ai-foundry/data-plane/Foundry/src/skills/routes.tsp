@@ -144,6 +144,7 @@ interface Skills {
    * Downloads the zip content for the default version of a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing download SDK method name; renaming it would break client compatibility."
   @summary("Download the zip content for the default version of a skill")
   @operationId("getSkillContent")
   @get
@@ -158,6 +159,7 @@ interface Skills {
    * Downloads the zip content for a specific version of a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing download_version SDK method name; renaming it would break client compatibility."
   @summary("Download the zip content for a specific version of a skill")
   @operationId("getSkillVersionContent")
   @get

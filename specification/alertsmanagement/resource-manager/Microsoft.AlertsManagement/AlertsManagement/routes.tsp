@@ -18,6 +18,7 @@ interface AlertsOperationGroup {
   /**
    * List alerts meta data information based on value of identifier parameter.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/get-operation-name" "Back compat: Preserve the existing metaData SDK method name; renaming it would break client compatibility."
   @autoRoute
   @get
   @action("alertsMetaData")
