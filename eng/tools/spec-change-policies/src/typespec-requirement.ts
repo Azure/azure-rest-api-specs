@@ -1,7 +1,7 @@
 import type { Diagnostic } from "@azure-tools/specs-shared/rule-result";
 import { readdir, readFile } from "node:fs/promises";
 import { posix, resolve } from "pathe";
-import type { PrContext } from "./context.ts";
+import { pathExistsAtCommit, type PrContext } from "./context.ts";
 import { hasTypeSpecGeneratedSwagger, isTypeSpecGenerated } from "./migration.ts";
 import { ruleSuppressions } from "./suppressions.ts";
 
@@ -163,10 +163,18 @@ export async function checkRequirements(
       const apiVersion = getApiVersion(file);
       if (!apiVersion) throw new Error(`Unable to extract API-version directory: ${file}`);
       const url = `https://github.com/Azure/azure-rest-api-specs/tree/main/specification/${apiVersion}`;
-      logInfo(`  Checking ${url.replace(/^https:\/\//, "")}`);
       let response = responseCache.get(url);
       if (response === undefined) {
-        response = Promise.resolve().then(() => checkUpstream(url));
+        response = Promise.resolve().then(async () => {
+          if (
+            await pathExistsAtCommit(context, context.baseCommitish, `specification/${apiVersion}`)
+          ) {
+            logInfo(`  Comparison base contains API-version directory '${apiVersion}'`);
+            return 200;
+          }
+          logInfo(`  Checking ${url.replace(/^https:\/\//, "")}`);
+          return checkUpstream(url);
+        });
         responseCache.set(url, response);
       }
       const status = await response;
@@ -176,9 +184,7 @@ export async function checkRequirements(
           logInfo(`  Suppressed: ${suppression.reason}`);
           continue;
         }
-        logInfo(
-          `  Branch 'main' contains path '${apiVersion}', so API version already exists and is not required to use TypeSpec`,
-        );
+        logInfo(`  API version '${apiVersion}' already exists and is not required to use TypeSpec`);
         logWarning(
           "WARNING: This PR uses OpenAPI / Swagger. All Azure services are required to convert to TypeSpec by March 30, 2026. PRs not using TypeSpec will be blocked after that date. Starting July 1, 2026, all SDKs will be generated from TypeSpec as the autorest toolchain is being retired. Please reach out to tspconversion@service.microsoft.com with any questions and see http://aka.ms/azsdk/typespec for more details on TypeSpec.",
         );
