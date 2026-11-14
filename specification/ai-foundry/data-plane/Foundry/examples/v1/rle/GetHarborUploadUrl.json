@@ -1,0 +1,23 @@
+{
+  "title": "Reuse a task bundle already uploaded to this project",
+  "operationId": "RLE_getHarborUploadUrl",
+  "parameters": {
+    "endpoint": "https://contoso.services.ai.azure.com/api/projects/learning",
+    "api-version": "v1",
+    "body": {
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "path": "task-data/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.tar.gz",
+        "exists": true,
+        "stagingPath": null,
+        "uploadUrl": null,
+        "expiresOn": null,
+        "maxBytes": 67108864
+      }
+    }
+  }
+}

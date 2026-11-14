@@ -1,0 +1,21 @@
+{
+  "title": "Finalize a staged task archive",
+  "operationId": "RLE_finalizeHarborBundle",
+  "parameters": {
+    "endpoint": "https://contoso.services.ai.azure.com/api/projects/learning",
+    "api-version": "v1",
+    "body": {
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "stagingPath": "task-data/staging/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-00000000000000000000000000000001.tar.gz"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "path": "task-data/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.tar.gz",
+        "exists": true,
+        "maxBytes": 67108864
+      }
+    }
+  }
+}
