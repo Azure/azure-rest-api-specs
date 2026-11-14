@@ -333,6 +333,7 @@ safe-outputs:
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
   submit-pull-request-review:
     max: 1
+    allowed-events: [COMMENT]
     footer: "if-body"
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
   # Autonomous mode: reply to and resolve trusted workflow-owned threads
@@ -958,6 +959,10 @@ verify that `head.sha` still equals the pinned session SHA. If it changed, do
 not post or mutate threads; follow the Step 5.6 restart path. Then post each
 finding as a `create-pull-request-review-comment` (inline) or `add-comment`
 (PR-level for summary), and call `submit-pull-request-review`.
+
+Always submit with `event: COMMENT`, including clean reviews. Never submit
+`APPROVE` or `REQUEST_CHANGES`; the semantic status and Step 7 labels carry
+the ARM review decision.
 
 The `submit-pull-request-review` body is **REQUIRED and MUST be non-empty**. The
 safe-output schema does not enforce this, so an empty body is accepted and
