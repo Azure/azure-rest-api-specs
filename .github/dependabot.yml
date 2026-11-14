@@ -58,6 +58,11 @@ updates:
         patterns:
           - "oxlint*"
     versioning-strategy: increase-if-necessary
+    # Dependency updates under eng/common should only come from sync PRs
+    # from Azure/azure-sdk-tools.
+    # https://github.com/Azure/azure-sdk-tools/blob/main/doc/common/common_engsys.md
+    exclude-paths:
+      - "eng/common/**"
   - package-ecosystem: "npm"
     directories:
       - "/.github"
