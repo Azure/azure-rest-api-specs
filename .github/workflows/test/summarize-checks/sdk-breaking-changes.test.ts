@@ -192,6 +192,7 @@ describe("SDK breaking-change summary", () => {
       const core = createMockCore();
       github.rest.pulls.get.mockResolvedValue({
         data: {
+          state: "open",
           head: { sha: headSha },
           base: { ref: "main" },
           draft: false,
@@ -220,7 +221,7 @@ describe("SDK breaking-change summary", () => {
       );
 
       expect(github.rest.issues.listComments).toHaveBeenCalled();
-      expect(github.rest.pulls.get).toHaveBeenCalledTimes(detected ? 2 : 1);
+      expect(github.rest.pulls.get).toHaveBeenCalledTimes(detected ? 3 : 2);
       expect(github.rest.issues.listLabelsOnIssue).not.toHaveBeenCalled();
       expect(github.rest.issues.createComment).not.toHaveBeenCalled();
       const { body, comment_id } = github.rest.issues.updateComment.mock.calls[0][0] as {
@@ -240,15 +241,16 @@ describe("SDK breaking-change summary", () => {
   it("skips the stale SDK summary but continues publishing other checks", async () => {
     const github = createMockGithub();
     const core = createMockCore();
+    const pull = {
+      state: "open",
+      head: { sha: headSha },
+      base: { ref: "main" },
+      draft: false,
+      labels: [{ name: "BreakingChange-Go-Sdk" }],
+    };
     github.rest.pulls.get
-      .mockResolvedValueOnce({
-        data: {
-          head: { sha: headSha },
-          base: { ref: "main" },
-          draft: false,
-          labels: [{ name: "BreakingChange-Go-Sdk" }],
-        },
-      })
+      .mockResolvedValueOnce({ data: pull })
+      .mockResolvedValueOnce({ data: pull })
       .mockResolvedValueOnce({ data: { head: { sha: "b".repeat(40) } } });
     github.rest.issues.listComments.mockResolvedValue({
       data: [
@@ -272,7 +274,7 @@ describe("SDK breaking-change summary", () => {
     );
 
     expect(core.warning).toHaveBeenCalledWith(expect.stringContaining("stale commit"));
-    expect(github.rest.pulls.get).toHaveBeenCalledTimes(2);
+    expect(github.rest.pulls.get).toHaveBeenCalledTimes(3);
     expect(github.rest.issues.listComments).toHaveBeenCalledTimes(1);
     expect(github.rest.issues.createComment).not.toHaveBeenCalled();
     expect(github.rest.issues.updateComment).toHaveBeenCalledTimes(1);

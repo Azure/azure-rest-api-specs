@@ -1,6 +1,8 @@
 import { isFullGitSha } from "../../../shared/src/git.ts";
 import { getLatestCommitStatuses } from "../commit-statuses.ts";
 import type { Core, GitHub, GitHubScriptArgs } from "../github.ts";
+import { ARM_INITIAL_REVIEW_REQUESTED_LABEL } from "./arm-auto-signoff-labels.ts";
+export { ARM_INITIAL_REVIEW_REQUESTED_LABEL } from "./arm-auto-signoff-labels.ts";
 import {
   ARM_SEMANTIC_REVIEW_STATUS,
   getLatestSemanticReviewStatus,
@@ -8,7 +10,6 @@ import {
 
 const REVIEW_WORKFLOW = "arm-api-review.lock.yml";
 const DISPATCH_FAILED = "Review incomplete: reviewer dispatch failed; retry with /arm-review";
-export const ARM_INITIAL_REVIEW_REQUESTED_LABEL = "ARMInitialReviewRequested";
 
 export default async function dispatchInitialArmReview({
   github,
