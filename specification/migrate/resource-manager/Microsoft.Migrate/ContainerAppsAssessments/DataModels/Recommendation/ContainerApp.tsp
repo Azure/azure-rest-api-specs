@@ -2,7 +2,7 @@ import "../../Enums/Enums.tsp";
 
 namespace Microsoft.Migrate;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "The id and name properties are the ARM resource ID and ARM resource name of the referenced Azure Container App, not the identity of the enclosing assessment cost detail resource."
 @doc("Data model of Container App within an Azure Container Apps environment.")
 model ContainerApp {
   @doc("Gets id.")
