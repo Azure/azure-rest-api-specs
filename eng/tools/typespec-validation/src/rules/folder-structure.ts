@@ -55,7 +55,7 @@ export class FolderStructureRule implements Rule {
       }
     });
 
-    // Verify tspconfig, main.tsp, examples/
+    // Verify tspconfig, main.tsp, and example authoring locations.
     const mainExists = await fileExists(path.join(folder, "main.tsp"));
     const clientExists = await fileExists(path.join(folder, "client.tsp"));
     const tspConfigExists = await fileExists(path.join(folder, "tspconfig.yaml"));
@@ -70,12 +70,17 @@ export class FolderStructureRule implements Rule {
       success = false;
     }
 
-    if (mainExists && !(await fileExists(path.join(folder, "examples")))) {
+    if (
+      mainExists &&
+      !(await fileExists(path.join(folder, "examples"))) &&
+      !(await fileExists(path.join(folder, "examples.yaml")))
+    ) {
       diagnostics.push({
         severity: "error",
         code: "folder-structure",
         path: folder,
-        message: `Invalid folder structure: Spec folder with main.tsp must contain examples folder.`,
+        message:
+          "Invalid folder structure: Spec folder with main.tsp must contain examples.yaml or an examples folder.",
       });
       success = false;
     }
