@@ -19,6 +19,7 @@ import "./ImportJob.tsp";
 import "./AutoImportJob.tsp";
 import "./ExpansionJob.tsp";
 import "./RebalanceJob.tsp";
+import "./AutoReleaseJob.tsp";
 import "./Cache.tsp";
 import "./StorageTarget.tsp";
 import "./routes.tsp";
@@ -52,6 +53,11 @@ enum Versions {
    * The 2026-08-01 API version.
    */
   v2026_08_01: "2026-08-01",
+
+  /**
+   * The 2027-01-01 API version.
+   */
+  v2027_01_01: "2027-01-01",
 }
 
 interface Operations
