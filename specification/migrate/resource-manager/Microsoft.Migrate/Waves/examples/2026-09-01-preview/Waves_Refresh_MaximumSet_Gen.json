@@ -1,0 +1,71 @@
+{
+  "title": "Waves_Refresh_MaximumSet",
+  "operationId": "Waves_Refresh",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD",
+    "resourceGroupName": "rgwaves",
+    "projectName": "project1",
+    "waveName": "wave1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD/resourceGroups/rgwaves/providers/Microsoft.Migrate/migrateProjects/project1/waves/wave1",
+        "name": "wave1",
+        "type": "Microsoft.Migrate/migrateProjects/waves",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "description": "Migrate the production application tier.",
+          "displayName": "Production application wave",
+          "plannedStartDate": "2026-09-15T08:00:00Z",
+          "plannedCompletionDate": "2026-09-16T18:00:00Z",
+          "stage": "Configuration",
+          "executionMode": "RunbookBased",
+          "migrationStatus": "NeedsConfiguration",
+          "dependsOn": [
+            {
+              "waveArmId": "/subscriptions/F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD/resourceGroups/rgwaves/providers/Microsoft.Migrate/migrateProjects/project1/waves/database-wave",
+              "reasons": "Migrate the database tier first."
+            }
+          ],
+          "createdTimestamp": "2026-09-01T10:00:00Z",
+          "updatedTimestamp": "2026-09-02T10:00:00Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD/providers/Microsoft.Migrate/locations/eastus/operationStatuses/refresh-wave1",
+        "Retry-After": 30
+      },
+      "body": {
+        "id": "/subscriptions/F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD/resourceGroups/rgwaves/providers/Microsoft.Migrate/migrateProjects/project1/waves/wave1",
+        "name": "wave1",
+        "type": "Microsoft.Migrate/migrateProjects/waves",
+        "properties": {
+          "provisioningState": "Accepted",
+          "description": "Migrate the production application tier.",
+          "displayName": "Production application wave",
+          "arg": {
+            "query": "migrateresources | where type =~ 'microsoft.offazure/vmwaresites/machines'"
+          },
+          "status": "OnSchedule",
+          "plannedStartDate": "2026-09-15T08:00:00Z",
+          "plannedCompletionDate": "2026-09-16T18:00:00Z",
+          "stage": "Configuration",
+          "executionMode": "RunbookBased",
+          "migrationStatus": "NeedsConfiguration",
+          "dependsOn": [
+            {
+              "waveArmId": "/subscriptions/F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD/resourceGroups/rgwaves/providers/Microsoft.Migrate/migrateProjects/project1/waves/database-wave",
+              "reasons": "Migrate the database tier first."
+            }
+          ],
+          "createdTimestamp": "2026-09-01T10:00:00Z",
+          "updatedTimestamp": "2026-09-02T10:00:00Z"
+        }
+      }
+    }
+  }
+}
