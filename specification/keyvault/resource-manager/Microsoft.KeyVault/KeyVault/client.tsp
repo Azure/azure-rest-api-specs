@@ -501,3 +501,19 @@ enum NameAvailabilityReason {
   #{ minLength: 1, maxLength: 127, pattern: "^[a-zA-Z0-9-]+$" },
   "csharp"
 );
+
+enum PascalKeyRotationPolicyActionType {
+  notify: "Notify",
+  rotate: "Rotate",
+}
+
+@@alternateType(
+  KeyRotationPolicyActionType,
+  PascalKeyRotationPolicyActionType,
+  "rust"
+);
+@@clientName(
+  PascalKeyRotationPolicyActionType,
+  "KeyRotationPolicyActionType",
+  "rust"
+);
