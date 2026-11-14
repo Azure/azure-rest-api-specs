@@ -31,6 +31,7 @@ import "../schedules/routes.tsp";
 import "../toolboxes/routes.tsp";
 import "../skills/routes.tsp";
 import "../agents-session-files/routes.tsp";
+import "../jobs/routes.tsp";
 //import "../evaluation-suites/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
@@ -977,5 +978,40 @@ model AIProjectClientOptions {
   {
     parameters: AIProjectClientOptions,
   },
+  "python"
+);
+
+// --------------------------------------------------------------------------------
+// Beta TrainingJobs (Foundry training jobs) sub-client
+// --------------------------------------------------------------------------------
+namespace Azure.AI.Projects.Beta {
+  interface TrainingJobs {}
+}
+
+@@clientLocation(Jobs.list, Azure.AI.Projects.Beta.TrainingJobs);
+@@clientLocation(Jobs.get, Azure.AI.Projects.Beta.TrainingJobs);
+@@clientLocation(Jobs.createOrUpdate, Azure.AI.Projects.Beta.TrainingJobs);
+@@clientLocation(Jobs.delete, Azure.AI.Projects.Beta.TrainingJobs);
+@@clientLocation(Jobs.cancel, Azure.AI.Projects.Beta.TrainingJobs);
+@@clientLocation(Jobs.listArtifacts, Azure.AI.Projects.Beta.TrainingJobs);
+@@clientLocation(
+  Jobs.getArtifactContentInformation,
+  Azure.AI.Projects.Beta.TrainingJobs
+);
+
+// SDK names only; REST paths, JSON and OpenAPI operation IDs keep the Jobs/Job names.
+// The PUT body parameter's SDK names are set on the parameter in ../jobs/routes.tsp.
+@@clientName(Job, "TrainingJob");
+
+@@clientName(Jobs.get, "get", "python");
+@@clientName(Jobs.list, "list", "python");
+@@clientName(Jobs.createOrUpdate, "create_or_update", "python");
+@@clientName(Jobs.delete, "delete", "python");
+@@clientName(Jobs.cancel, "cancel", "python");
+
+@@clientName(Jobs.listArtifacts, "list_artifacts", "python");
+@@clientName(
+  Jobs.getArtifactContentInformation,
+  "get_artifact_content_information",
   "python"
 );
