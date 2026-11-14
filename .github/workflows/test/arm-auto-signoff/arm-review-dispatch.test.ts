@@ -31,7 +31,7 @@ function fixture() {
   };
 }
 
-describe("marker-based initial ARM review dispatch", () => {
+describe("per-head automatic ARM review dispatch", () => {
   it.each([0, 1.5])("rejects invalid PR number %s", async (number) => {
     const { github, core } = fixture();
     await expect(
@@ -64,13 +64,19 @@ describe("marker-based initial ARM review dispatch", () => {
     });
   });
 
-  it("skips a marked PR on a new SHA using just one PR read", async () => {
+  it("dispatches a marked PR on a new SHA without rewriting the legacy marker", async () => {
     const { github, pull, run } = fixture();
     pull.labels.push({ name: ARM_INITIAL_REVIEW_REQUESTED_LABEL });
     await run();
-    expect(github.rest.pulls.get).toHaveBeenCalledOnce();
-    expect(github.rest.repos.getCombinedStatusForRef).not.toHaveBeenCalled();
-    expect(github.rest.actions.createWorkflowDispatch).not.toHaveBeenCalled();
+    expect(github.rest.repos.getCombinedStatusForRef).toHaveBeenCalledWith({
+      owner: "Azure",
+      repo: "azure-rest-api-specs",
+      ref: headSha,
+      per_page: 100,
+      page: 1,
+    });
+    expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+    expect(github.rest.actions.createWorkflowDispatch).toHaveBeenCalledOnce();
   });
 
   it("dispatches fork PRs only in the base repository on its trusted default branch", async () => {
@@ -98,8 +104,28 @@ describe("marker-based initial ARM review dispatch", () => {
     });
   });
 
-  it("fails closed when current-head statuses cannot be read", async () => {
-    const { github, run } = fixture();
+  it("keeps the expected head when the PR advances after reservation", async () => {
+    const { github, pull, run } = fixture();
+    github.rest.repos.createCommitStatus.mockImplementationOnce(() => {
+      pull.head.sha = "b".repeat(40);
+      return Promise.resolve();
+    });
+
+    await run();
+
+    expect(github.rest.repos.createCommitStatus).toHaveBeenCalledExactlyOnceWith(
+      expect.objectContaining({ sha: headSha, target_url: sourceUrl }),
+    );
+    expect(github.rest.actions.createWorkflowDispatch).toHaveBeenCalledExactlyOnceWith(
+      expect.objectContaining({
+        inputs: { pr_number: "123", head_sha: headSha, reservation_url: sourceUrl },
+      }),
+    );
+  });
+
+  it.each([false, true])("fails closed on status API errors with marker: %s", async (marked) => {
+    const { github, pull, run } = fixture();
+    if (marked) pull.labels.push({ name: ARM_INITIAL_REVIEW_REQUESTED_LABEL });
     github.rest.repos.getCombinedStatusForRef.mockRejectedValue(new Error("Statuses unavailable"));
 
     await expect(run()).rejects.toThrow("Statuses unavailable");
@@ -108,18 +134,93 @@ describe("marker-based initial ARM review dispatch", () => {
     expect(github.rest.actions.createWorkflowDispatch).not.toHaveBeenCalled();
   });
 
-  it("backfills a missing marker from existing current-head evidence", async () => {
-    const { github, run } = fixture();
+  describe.each([false, true])("existing marker: %s", (marked) => {
+    it.each([
+      { state: "pending", description: "ARM API semantic review is queued" },
+      { state: "success", description: "Passed: full review completed" },
+      { state: "failure", description: "Changes requested: 1 Blocking finding(s)" },
+      { state: "error", description: "Review incomplete: tool-failure" },
+      { state: "error", description: "Review incomplete: cancelled" },
+      { state: "error", description: "Manual review required: scoped review" },
+    ])("does not automatically retry current-head evidence: %j", async (status) => {
+      const { github, pull, run } = fixture();
+      if (marked) pull.labels.push({ name: ARM_INITIAL_REVIEW_REQUESTED_LABEL });
+      github.rest.repos.getCombinedStatusForRef.mockResolvedValue({
+        data: {
+          statuses: [{ context: "ARM Semantic Review", updated_at: "2026-01-01", ...status }],
+          total_count: 1,
+        },
+      });
+
+      await run();
+
+      expect(github.rest.pulls.get).toHaveBeenCalledOnce();
+      expect(github.rest.repos.getCombinedStatusForRef).toHaveBeenCalledOnce();
+      expect(github.rest.issues.addLabels).toHaveBeenCalledTimes(marked ? 0 : 1);
+      expect(github.rest.actions.createWorkflowDispatch).not.toHaveBeenCalled();
+      expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+    });
+  });
+
+  it("does not repeat a successful handoff when Summarize Checks runs again", async () => {
+    const { github, pull, run } = fixture();
+    await run();
+    pull.labels.push({ name: ARM_INITIAL_REVIEW_REQUESTED_LABEL });
     github.rest.repos.getCombinedStatusForRef.mockResolvedValue({
       data: {
-        statuses: [{ context: "ARM Semantic Review", state: "success", updated_at: "2026-01-01" }],
+        statuses: [
+          {
+            context: "ARM Semantic Review",
+            state: "pending",
+            target_url: sourceUrl,
+            updated_at: "2026-01-01",
+          },
+        ],
         total_count: 1,
       },
     });
+
     await run();
+
+    expect(github.rest.actions.createWorkflowDispatch).toHaveBeenCalledOnce();
     expect(github.rest.issues.addLabels).toHaveBeenCalledOnce();
-    expect(github.rest.actions.createWorkflowDispatch).not.toHaveBeenCalled();
+    expect(github.rest.repos.createCommitStatus).toHaveBeenCalledOnce();
+  });
+
+  it("preserves a concurrent explicit review that starts before reservation", async () => {
+    const { github, run } = fixture();
+    github.rest.repos.getCombinedStatusForRef
+      .mockResolvedValueOnce({ data: { statuses: [], total_count: 0 } })
+      .mockResolvedValueOnce({
+        data: {
+          statuses: [
+            {
+              context: "ARM Semantic Review",
+              state: "pending",
+              target_url: `${sourceUrl}/attempts/1`,
+              updated_at: "2026-01-01",
+            },
+          ],
+          total_count: 1,
+        },
+      });
+
+    await run();
+
     expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+    expect(github.rest.actions.createWorkflowDispatch).not.toHaveBeenCalled();
+  });
+
+  it("fails closed if the final status recheck is unavailable", async () => {
+    const { github, run } = fixture();
+    github.rest.repos.getCombinedStatusForRef
+      .mockResolvedValueOnce({ data: { statuses: [], total_count: 0 } })
+      .mockRejectedValueOnce(new Error("Status recheck unavailable"));
+
+    await expect(run()).rejects.toThrow("Status recheck unavailable");
+
+    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+    expect(github.rest.actions.createWorkflowDispatch).not.toHaveBeenCalled();
   });
 
   const queued = ["ARMReview", "WaitForARMFeedback"];
@@ -149,7 +250,7 @@ describe("marker-based initial ARM review dispatch", () => {
 
   it.each([
     { head: { sha: "b".repeat(40) } },
-    { labels: [...queued, ARM_INITIAL_REVIEW_REQUESTED_LABEL].map((name) => ({ name })) },
+    { labels: [...queued, "ARMManualSignoffRequired"].map((name) => ({ name })) },
   ])("rechecks mutable PR state before reservation: %j", async (change) => {
     const { github, pull, run } = fixture();
     github.rest.pulls.get
@@ -168,8 +269,8 @@ describe("marker-based initial ARM review dispatch", () => {
     expect(github.rest.actions.createWorkflowDispatch).not.toHaveBeenCalled();
   });
 
-  it("explains recovery when pending-status publication fails after marker reservation", async () => {
-    const { github, core, run } = fixture();
+  it("can retry a failed status write without having dispatched AI", async () => {
+    const { github, core, pull, run } = fixture();
     github.rest.repos.createCommitStatus.mockRejectedValueOnce(new Error("Pending write failed"));
 
     await expect(run()).rejects.toThrow("Pending write failed");
@@ -179,13 +280,65 @@ describe("marker-based initial ARM review dispatch", () => {
     expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
     expect(core.error).toHaveBeenCalledWith(expect.stringContaining("retrying with /arm-review"));
     expect(core.error).toHaveBeenCalledWith(
-      expect.stringContaining(`Keep ${ARM_INITIAL_REVIEW_REQUESTED_LABEL}`),
+      expect.stringContaining("No workflow dispatch was attempted; without a saved status"),
     );
+
+    pull.labels.push({ name: ARM_INITIAL_REVIEW_REQUESTED_LABEL });
+    await run();
+
+    expect(github.rest.issues.addLabels).toHaveBeenCalledOnce();
+    expect(github.rest.actions.createWorkflowDispatch).toHaveBeenCalledOnce();
   });
 
-  it("keeps the marker on ambiguous dispatch failure and prevents automatic retries", async () => {
+  it("retains same-head evidence if a failed pending-status response actually saved the status", async () => {
+    const { github, pull, run } = fixture();
+    github.rest.repos.createCommitStatus.mockImplementationOnce(() => {
+      github.rest.repos.getCombinedStatusForRef.mockResolvedValue({
+        data: {
+          statuses: [
+            {
+              context: "ARM Semantic Review",
+              state: "pending",
+              target_url: sourceUrl,
+              updated_at: "2026-01-01",
+            },
+          ],
+          total_count: 1,
+        },
+      });
+      return Promise.reject(new Error("Pending response lost"));
+    });
+
+    await expect(run()).rejects.toThrow("Pending response lost");
+
+    expect(github.rest.repos.createCommitStatus).toHaveBeenLastCalledWith(
+      expect.objectContaining({ state: "error", target_url: sourceUrl }),
+    );
+    github.rest.repos.getCombinedStatusForRef.mockResolvedValue({
+      data: {
+        statuses: [
+          {
+            context: "ARM Semantic Review",
+            state: "error",
+            target_url: sourceUrl,
+            updated_at: "2026-01-01",
+          },
+        ],
+        total_count: 1,
+      },
+    });
+    pull.labels.push({ name: ARM_INITIAL_REVIEW_REQUESTED_LABEL });
+
+    await run();
+
+    expect(github.rest.repos.createCommitStatus).toHaveBeenCalledTimes(2);
+    expect(github.rest.actions.createWorkflowDispatch).not.toHaveBeenCalled();
+  });
+
+  it("keeps current-head evidence on ambiguous dispatch failure and prevents automatic retries", async () => {
     const { github, core, pull, run } = fixture();
     github.rest.repos.getCombinedStatusForRef
+      .mockResolvedValueOnce({ data: { statuses: [], total_count: 0 } })
       .mockResolvedValueOnce({ data: { statuses: [], total_count: 0 } })
       .mockResolvedValueOnce({
         data: {
@@ -211,8 +364,24 @@ describe("marker-based initial ARM review dispatch", () => {
     expect(core.error).toHaveBeenCalledWith(
       expect.stringContaining("Check for a queued or running reviewer before retrying"),
     );
+    expect(core.error).toHaveBeenCalledWith(
+      expect.stringContaining("The dispatch may have been accepted despite the error"),
+    );
     expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
     pull.labels.push({ name: ARM_INITIAL_REVIEW_REQUESTED_LABEL });
+    github.rest.repos.getCombinedStatusForRef.mockResolvedValue({
+      data: {
+        statuses: [
+          {
+            context: "ARM Semantic Review",
+            state: "error",
+            target_url: sourceUrl,
+            updated_at: "2026-01-01",
+          },
+        ],
+        total_count: 1,
+      },
+    });
     await run();
     expect(github.rest.actions.createWorkflowDispatch).toHaveBeenCalledOnce();
   });
@@ -223,6 +392,7 @@ describe("marker-based initial ARM review dispatch", () => {
   ])("does not overwrite a started review's status when dispatch fails: %j", async (status) => {
     const { github, run } = fixture();
     github.rest.repos.getCombinedStatusForRef
+      .mockResolvedValueOnce({ data: { statuses: [], total_count: 0 } })
       .mockResolvedValueOnce({ data: { statuses: [], total_count: 0 } })
       .mockResolvedValueOnce({
         data: {
@@ -239,6 +409,7 @@ describe("marker-based initial ARM review dispatch", () => {
     const { github, run } = fixture();
     github.rest.actions.createWorkflowDispatch.mockRejectedValue(new Error("Dispatch failed"));
     github.rest.repos.getCombinedStatusForRef
+      .mockResolvedValueOnce({ data: { statuses: [], total_count: 0 } })
       .mockResolvedValueOnce({ data: { statuses: [], total_count: 0 } })
       .mockRejectedValueOnce(new Error("Status API failed"));
     await expect(run()).rejects.toThrow("dispatch and queued-status cleanup both failed");
