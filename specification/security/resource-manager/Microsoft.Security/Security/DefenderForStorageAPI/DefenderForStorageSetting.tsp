@@ -117,34 +117,57 @@ interface DefenderForStorageSettings {
   /**
    * Gets the Defender for Storage settings for the specified storage account.
    */
+  @returnTypeChangedFrom(
+    Versions.v2026_06_01_preview,
+    ArmResponse<DefenderForStorageSetting> | CloudError
+  )
   @tag("DefenderForStorage")
-  get is DefenderForStorageSettingsOps.Read<
-    DefenderForStorageSetting,
-    ErrorType = CloudError
-  >;
+  get is DefenderForStorageSettingsOps.Read<DefenderForStorageSetting>;
+
   /**
    * Creates or updates the Defender for Storage settings on a specified storage account.
    */
+  @removed(Versions.v2026_06_01_preview)
+  @renamedFrom(Versions.v2026_06_01_preview, "create")
+  @sharedRoute
   @tag("DefenderForStorage")
-  create is DefenderForStorageSettingsOps.CreateOrUpdateSync<
+  createSync is DefenderForStorageSettingsOps.CreateOrUpdateSync<
     DefenderForStorageSetting,
     ErrorType = CloudError
   >;
 
   /**
+   * Creates or updates the Defender for Storage settings on a specified storage account.
+   * This is an asynchronous operation. The response includes the `Azure-AsyncOperation`
+   * header pointing to the operation status endpoint, which can be polled until the
+   * operation completes.
+   */
+  @added(Versions.v2026_06_01_preview)
+  @sharedRoute
+  @tag("DefenderForStorage")
+  create is DefenderForStorageSettingsOps.CreateOrUpdateAsync<DefenderForStorageSetting>;
+
+  /**
    * Lists the Defender for Storage settings for the specified storage account.
    */
+  @returnTypeChangedFrom(
+    Versions.v2026_06_01_preview,
+    ArmResponse<DefenderForStorageSettingList> | CloudError
+  )
   @tag("DefenderForStorage")
   list is DefenderForStorageSettingsOps.List<
     DefenderForStorageSetting,
-    Response = ArmResponse<DefenderForStorageSettingList>,
-    ErrorType = CloudError
+    Response = ArmResponse<DefenderForStorageSettingList>
   >;
 
   /**
    * Cancels a Defender for Storage malware scan for the specified storage account.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "The legacy ExtensionOperations.ActionSync template registers actions in the list-operation collection, so the CRUD/list response rule also checks this POST action. Cancellation intentionally returns MalwareScan rather than the parent DefenderForStorageSetting."
+  @returnTypeChangedFrom(
+    Versions.v2026_06_01_preview,
+    ArmResponse<MalwareScan> | CloudError
+  )
   @tag("DefenderForStorage")
   @tag("Antimalware")
   @tag("Scan")
@@ -152,8 +175,7 @@ interface DefenderForStorageSettings {
   cancelMalwareScan is DefenderForStorageMalwareScansOps.ActionSync<
     DefenderForStorageSetting,
     void,
-    ArmResponse<MalwareScan>,
-    ErrorType = CloudError
+    ArmResponse<MalwareScan>
   >;
 
   /**
@@ -165,6 +187,10 @@ interface DefenderForStorageSettings {
   @tag("Antimalware")
   @tag("Scan")
   @armResourceAction(DefenderForStorageSetting)
+  @returnTypeChangedFrom(
+    Versions.v2026_06_01_preview,
+    ArmResponse<MalwareScan> | CloudError
+  )
   @post
   startMalwareScan(
     ...ApiVersionParameter,
@@ -187,21 +213,37 @@ interface DefenderForStorageSettings {
     @pattern("^current$")
     settingName: string,
 
-    /** Optional request body to filter which blobs and files to scan. */
+    /**
+     * Optional request body to filter which blobs and files to scan.
+     * Supported since API version 2026-01-01-preview.
+     */
     @added(Versions.v2026_01_01_preview)
     @bodyRoot
     body?: StartMalwareScanRequest,
-  ): ArmResponse<MalwareScan> | CloudError;
+  ): ArmResponse<MalwareScan> | ErrorResponse;
 
   /**
    * Gets the Defender for Storage malware scan for the specified storage resource.
    */
+  @returnTypeChangedFrom(
+    Versions.v2026_06_01_preview,
+    ArmResponse<MalwareScan> | CloudError
+  )
   @tag("DefenderForStorage")
   @tag("Antimalware")
   @tag("Scan")
-  getMalwareScan is DefenderForStorageMalwareScansOps.Read<
+  getMalwareScan is DefenderForStorageMalwareScansOps.Read<MalwareScan>;
+
+  /**
+   * Lists the Defender for Storage malware scans for the specified storage resource.
+   */
+  @added(Versions.v2026_06_01_preview)
+  @tag("DefenderForStorage")
+  @tag("Antimalware")
+  @tag("Scan")
+  listMalwareScans is DefenderForStorageMalwareScansOps.List<
     MalwareScan,
-    ErrorType = CloudError
+    Response = ArmResponse<MalwareScanList>
   >;
 }
 
@@ -221,3 +263,36 @@ interface DefenderForStorageSettings {
   DefenderForStorageSettings.create::parameters.resource,
   "Defender for Storage Settings"
 );
+@@doc(
+  DefenderForStorageSettings.createSync::parameters.resource,
+  "Defender for Storage Settings"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This is the polling endpoint for asynchronous Defender for Storage operations and is not itself an Azure resource interface."
+@added(Versions.v2026_06_01_preview)
+interface DefenderForStorageOperationStatus {
+  /**
+   * Gets the status of an asynchronous Defender for Storage settings operation. This is
+   * the polling endpoint referenced by the `Azure-AsyncOperation` header returned from
+   * the create-or-update operation.
+   */
+  @tag("DefenderForStorage")
+  @route("/{+resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}/operationStatus/{operationId}")
+  @get
+  get(
+    ...ApiVersionParameter,
+
+    /** The fully qualified Azure Resource manager identifier of the resource. */
+    @path
+    resourceId: string,
+
+    /** The defender for storage setting name. */
+    @path
+    @pattern("^[a-z][a-z0-9]*$")
+    settingName: SettingName,
+
+    ...Azure.ResourceManager.CommonTypes.OperationIdParameter,
+  ):
+    | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
+    | ErrorResponse;
+}

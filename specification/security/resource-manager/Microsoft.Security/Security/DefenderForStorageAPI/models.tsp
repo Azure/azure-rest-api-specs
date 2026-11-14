@@ -90,10 +90,50 @@ model DefenderForStorageSettingList {
 }
 
 /**
+ * List of Defender for Storage malware scans.
+ */
+@added(Versions.v2026_06_01_preview)
+model MalwareScanList {
+  /**
+   * List of Defender for Storage malware scans.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: MalwareScan[];
+
+  /**
+   * The URI to fetch the next page.
+   */
+  @nextLink
+  nextLink?: url;
+}
+
+/**
+ * The provisioning state of the Defender for Storage settings resource.
+ */
+@added(Versions.v2026_06_01_preview)
+@Azure.Core.lroStatus
+union DefenderForStorageProvisioningState {
+  string,
+  Azure.ResourceManager.ResourceProvisioningState,
+
+  /**
+   * The resource is being provisioned.
+   */
+  InProgress: "InProgress",
+}
+
+/**
  * Defender for Storage resource properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "These API versions use a synchronous settings PUT and do not expose provisioningState. Feature enablement results are reported by malwareScanning.operationStatus and sensitiveDataDiscovery.operationStatus."
 model DefenderForStorageSettingProperties {
+  /**
+   * The provisioning state of the resource.
+   */
+  @added(Versions.v2026_06_01_preview)
+  @visibility(Lifecycle.Read)
+  provisioningState?: DefenderForStorageProvisioningState;
+
   /**
    * Indicates whether Defender for Storage is enabled on this storage account.
    */
@@ -187,6 +227,14 @@ model OnUploadProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The existing wire property is named capGBPerMonth; changing the capitalization of GB would break clients."
   capGBPerMonth?: int32;
+
+  /**
+   * The number of gigabytes scanned by On Upload malware scanning during the current month. Reflects the current month's usage.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "'GB' matches the casing of the existing capGBPerMonth, scannedBlobsInGB and scannedFilesInGB properties in this spec."
+  @added(Versions.v2026_06_01_preview)
+  @visibility(Lifecycle.Read)
+  scannedGBThisMonth?: float64;
 
   /**
    * Optional. Determine which blobs get scanned by On Upload malware scanning. An Or operation is performed between each filter type.
@@ -333,8 +381,10 @@ model ScanSummary {
 
   /**
    * The estimated cost of the scan. Only available for a scan which has terminated.
+   * This property is deprecated and retained for backward compatibility.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The existing wire property is named estimatedScanCostUSD; changing the capitalization of USD would break clients."
+  #deprecated "This property is deprecated and retained for backward compatibility."
   estimatedScanCostUSD?: float64;
 }
 
