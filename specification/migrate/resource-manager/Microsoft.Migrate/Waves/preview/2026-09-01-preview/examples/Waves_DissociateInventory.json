@@ -1,0 +1,43 @@
+{
+  "title": "Dissociate inventory from a wave",
+  "operationId": "Waves_DissociateInventory",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555",
+    "resourceGroupName": "rgwaves",
+    "projectName": "project1",
+    "waveName": "wave1",
+    "body": {
+      "applicationIds": [
+        "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/rgwaves/providers/Microsoft.ApplicationMigration/discoveryHubs/hub1/applications/app1"
+      ],
+      "workloadIds": [
+        "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/rgwaves/providers/Microsoft.OffAzure/VMwareSites/site1/machines/machine1"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/rgwaves/providers/Microsoft.Migrate/migrateProjects/project1/waves/wave1",
+        "name": "wave1",
+        "type": "Microsoft.Migrate/migrateProjects/waves",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "displayName": "Wave 1",
+          "arg": {
+            "query": "resources | where type =~ 'Microsoft.OffAzure/VMwareSites/machines'"
+          },
+          "plannedStartDate": "2026-09-15T00:00:00.000Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/11111111-2222-3333-4444-555555555555/providers/Microsoft.Migrate/locations/eastus/operationStatuses/ffffffff-1111-2222-3333-444444444444?api-version=2026-09-01-preview",
+        "Location": "https://management.azure.com/subscriptions/11111111-2222-3333-4444-555555555555/providers/Microsoft.Migrate/locations/eastus/operationResults/ffffffff-1111-2222-3333-444444444444?api-version=2026-09-01-preview",
+        "Retry-After": 60
+      }
+    }
+  }
+}

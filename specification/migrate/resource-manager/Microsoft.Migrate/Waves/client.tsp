@@ -65,3 +65,36 @@ namespace Microsoft.Migrate {
 }
 
 @@alternateType(Tasks.create::parameters.resource, TaskCreate, "javascript");
+
+@@clientName(
+  ImportWavePlanConfigRequest,
+  "ImportWavePlanConfigContent",
+  "csharp"
+);
+@@clientName(
+  ImportWavePlanConfigResponse,
+  "ImportWavePlanConfigResult",
+  "csharp"
+);
+@@clientName(
+  RefreshWavePlanStatusRequest,
+  "RefreshWavePlanStatusContent",
+  "csharp"
+);
+@@clientName(
+  RefreshWavePlanStatusResponse,
+  "RefreshWavePlanStatusResult",
+  "csharp"
+);
+@@clientName(ValidateWavePlanRequest, "ValidateWavePlanContent", "csharp");
+@@clientName(ValidateWavePlanResponse, "ValidateWavePlanResult", "csharp");
+@@clientName(
+  ExportWorkloadConfigurationResponse,
+  "ExportWorkloadConfigurationResult",
+  "csharp"
+);
+@@clientName(
+  ValidateWorkloadConfigurationResponse,
+  "ValidateWorkloadConfigurationResult",
+  "csharp"
+);
