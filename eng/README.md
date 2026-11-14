@@ -7,7 +7,7 @@ For context on this directory, see [Design guidelines for spec repos validation 
 ## Skill Eval Dashboard
 
 [Skill eval](pipelines/skill-eval.yml) reuses the common build, shard and summary
-jobs to send complete main-branch results to the existing eval dashboard. Its
+jobs to send complete results from trusted runs to the existing eval dashboard. Its
 Azure Storage network policy is declared only in that entrypoint; the shared
 1ES redirect does not configure storage access for other pipelines. TypeSpec
 authoring benchmarks are not included. Shared publishing changes reach this repo
@@ -20,9 +20,34 @@ disabled. Optional refresh notifications use `EvalDashboardRefreshUrl` and
 for the approved storage/dashboard configuration and permissions.
 
 Set `publishDashboardResults` to `false` for artifact-only runs without added
-storage egress. PRs and non-main runs cannot upload. Completed failing evals can
-be published; incomplete results remain blocked. Missing permissions and incomplete
-eval shards must be resolved before claiming live dashboard onboarding is complete.
+storage egress. Trusted manual DevOps runs can publish from feature branches
+using this existing setting; no main branch or separate feature-branch flag is
+required. Automatic non-main runs remain artifact-only. PRs and forks still
+cannot upload. Test results keep their actual branch, commit and build identity.
+Existing service-connection approvals, branch checks and storage permissions
+still apply. The matching shared publishing policy reaches this repo through
+the normal `eng/common` sync from Azure SDK Tools.
+
+Completed failing evals can be published; incomplete results remain blocked.
+Missing permissions and incomplete eval shards must be resolved before claiming
+live dashboard onboarding is complete.
+
+### Eval model variables
+
+Configure these nonsecret variables in the specs skill-eval pipeline's Variables settings:
+
+| Variable         | Use                                                                                                 |
+| ---------------- | --------------------------------------------------------------------------------------------------- |
+| `EvalModel`      | Executor for the local Azure API review, PowerShell design review and OpenAI TypeSpec update suites |
+| `ArmEvalModel`   | Executor for the ARM API Reviewer suite                                                             |
+| `EvalJudgeModel` | Explicit judge model for those local suites                                                         |
+
+The repo-local pre-eval hook applies these values to the selected files in the disposable CI checkout.
+Missing or unresolved variables fail setup before evaluation. Model names are not stored in these
+local eval definitions; changing the pipeline variables does not need another source change.
+Synced common suites, assessment and naming retain their existing model configuration.
+
+For local runs, use Vally's `--model <model>` and `--judge-model <model>` options.
 
 ## SDK generation pipeline variables
 

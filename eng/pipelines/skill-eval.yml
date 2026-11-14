@@ -24,7 +24,7 @@ resources:
 
 parameters:
   - name: publishDashboardResults
-    displayName: Publish trusted main results to the eval dashboard
+    displayName: Publish trusted results to the eval dashboard
     type: boolean
     default: true
 
@@ -43,7 +43,7 @@ extends:
   parameters:
     settings:
       skipBuildTagsForGitHubPullRequests: true
-      ${{ if and(parameters.publishDashboardResults, eq(variables['System.CollectionUri'], 'https://dev.azure.com/azure-sdk/'), eq(variables['System.TeamProject'], 'internal'), eq(variables['Build.Repository.Name'], 'Azure/azure-rest-api-specs'), eq(variables['Build.SourceBranch'], 'refs/heads/main'), in(variables['Build.Reason'], 'IndividualCI', 'BatchedCI', 'Schedule', 'Manual')) }}:
+      ${{ if and(parameters.publishDashboardResults, eq(variables['System.CollectionUri'], 'https://dev.azure.com/azure-sdk/'), eq(variables['System.TeamProject'], 'internal'), eq(variables['Build.Repository.Name'], 'Azure/azure-rest-api-specs'), not(startsWith(variables['Build.SourceBranch'], 'refs/pull/')), in(variables['Build.Reason'], 'IndividualCI', 'BatchedCI', 'Schedule', 'Manual'), or(eq(variables['Build.Reason'], 'Manual'), eq(variables['Build.SourceBranch'], 'refs/heads/main'))) }}:
         networkIsolationPolicy: DefaultDeny, CFSClean, CFSClean2, CFSClean3, AzureStorage
     sdl:
       sourceAnalysisPool:
@@ -72,6 +72,7 @@ extends:
           - template: /eng/common/pipelines/templates/jobs/eval-shard.yml@self
             parameters:
               vallyRoot: .github/skills
+              preEvalTemplate: /eng/pipelines/templates/steps/eval-model-setup.yml
               shardTimeoutInMinutes: 45
       - stage: Summary
         displayName: Summarize results
