@@ -14,6 +14,13 @@ using TypeSpec.Versioning;
 using Common;
 
 namespace Microsoft.Network;
+
+/** A firewall policy or child resource name, using the firewall policy naming rules. */
+@minLength(1)
+@maxLength(80)
+@pattern("^[a-zA-Z0-9]([a-zA-Z0-9-._]{0,78}[a-zA-Z0-9_])?$")
+scalar FirewallPolicyName extends string;
+
 /**
  * FirewallPolicy Resource.
  */
@@ -30,7 +37,8 @@ model FirewallPolicy extends Common.Resource {
   @path
   @key("firewallPolicyName")
   @segment("firewallPolicies")
-  name: string;
+  @typeChangedFrom(Versions.v2026_05_01, string)
+  name: FirewallPolicyName;
 
   /** A unique read-only string that changes whenever the resource is updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
