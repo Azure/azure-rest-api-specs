@@ -17637,6 +17637,10 @@
         "properties": {
           "$ref": "#/definitions/SandboxGroupProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -17644,6 +17648,24 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
+    },
+    "SandboxGroupIdentity": {
+      "type": "object",
+      "description": "The managed identity properties that can be updated on a SandboxGroup.",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
+            "x-nullable": true
+          }
+        }
+      }
     },
     "SandboxGroupListResult": {
       "type": "object",
@@ -17680,6 +17702,10 @@
         "properties": {
           "$ref": "#/definitions/SandboxGroupPatchProperties",
           "description": "SandboxGroup properties that can be updated."
+        },
+        "identity": {
+          "$ref": "#/definitions/SandboxGroupIdentity",
+          "description": "Managed identity updates. Omit to preserve the current identities."
         }
       }
     },
