@@ -42095,6 +42095,93 @@
           ]
         }
       },
+      "CloudComputerUsePreviewKind": {
+        "type": "string",
+        "enum": [
+          "windows365_cloud_pc"
+        ],
+        "description": "The cloud computer provider."
+      },
+      "CloudComputerUsePreviewTool": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "cloud_computer_use_preview"
+            ],
+            "description": "The object type, which is always `cloud_computer_use_preview`."
+          },
+          "cloud_computer_use_preview": {
+            "$ref": "#/components/schemas/CloudComputerUsePreviewToolParameters",
+            "description": "Optional provider configuration. Omission retains the existing Windows 365 behavior."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Tool"
+          }
+        ],
+        "description": "The input definition information for a cloud computer use tool, as used to configure an agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "preview_tool"
+          ]
+        }
+      },
+      "CloudComputerUsePreviewToolParameters": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/CloudComputerUsePreviewKind",
+            "description": "The cloud computer provider. Only windows365_cloud_pc is supported."
+          },
+          "pool_id": {
+            "type": "string",
+            "description": "The identifier of the cloud computer pool."
+          },
+          "pool_region": {
+            "type": "string",
+            "description": "The region of the cloud computer pool."
+          }
+        },
+        "description": "Configuration for the cloud computer use preview tool."
+      },
+      "CloudComputerUsePreviewToolboxTool": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "cloud_computer_use_preview"
+            ]
+          },
+          "cloud_computer_use_preview": {
+            "$ref": "#/components/schemas/CloudComputerUsePreviewToolParameters",
+            "description": "Optional provider configuration. Omission retains the existing Windows 365 behavior."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ToolboxTool"
+          }
+        ],
+        "description": "A cloud computer use tool stored in a toolbox.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "preview_tool"
+          ]
+        }
+      },
       "ClusterInsightResult": {
         "type": "object",
         "required": [
@@ -94429,6 +94516,7 @@
             "openapi": "#/components/schemas/OpenApiTool",
             "bing_custom_search_preview": "#/components/schemas/BingCustomSearchPreviewTool",
             "browser_automation_preview": "#/components/schemas/BrowserAutomationPreviewTool",
+            "cloud_computer_use_preview": "#/components/schemas/CloudComputerUsePreviewTool",
             "browser_automation": "#/components/schemas/BrowserAutomationTool",
             "azure_function": "#/components/schemas/AzureFunctionTool",
             "capture_structured_outputs": "#/components/schemas/CaptureStructuredOutputsTool",
@@ -97032,7 +97120,8 @@
               "browser_automation",
               "capture_structured_outputs",
               "openapi",
-              "microsoft_copilot_toolset_preview"
+              "microsoft_copilot_toolset_preview",
+              "cloud_computer_use_preview"
             ]
           }
         ]
@@ -107525,6 +107614,7 @@
             "a2a": "#/components/schemas/A2AToolboxTool",
             "a2a_preview": "#/components/schemas/A2APreviewToolboxTool",
             "browser_automation_preview": "#/components/schemas/BrowserAutomationPreviewToolboxTool",
+            "cloud_computer_use_preview": "#/components/schemas/CloudComputerUsePreviewToolboxTool",
             "browser_automation": "#/components/schemas/BrowserAutomationToolboxTool",
             "reminder_preview": "#/components/schemas/ReminderPreviewToolboxTool",
             "work_iq_preview": "#/components/schemas/WorkIQPreviewToolboxTool",
@@ -107555,7 +107645,8 @@
           "a2a",
           "shell",
           "web_iq_preview",
-          "browser_automation"
+          "browser_automation",
+          "cloud_computer_use_preview"
         ],
         "description": "Supported tool types for tools stored in a toolbox."
       },
