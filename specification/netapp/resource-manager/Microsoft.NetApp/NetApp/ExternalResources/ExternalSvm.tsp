@@ -16,6 +16,8 @@ namespace Microsoft.NetApp;
  * External SVM (Storage Virtual Machine, Vserver) resource, representing an SVM on an external NetApp ONTAP system
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @parentResource(ExternalCluster)
 model ExternalSvm
   is Azure.ResourceManager.TrackedResource<ExternalSvmProperties> {
@@ -31,6 +33,8 @@ model ExternalSvm
  * External SVM properties
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ExternalSvmProperties {
   /**
    * Azure lifecycle management
@@ -59,9 +63,13 @@ model ExternalSvmProperties {
  * List of External SVM resources
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ExternalSvmList is Azure.Core.Page<ExternalSvm>;
 
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @armResourceOperations
 interface ExternalSvms {
   /**

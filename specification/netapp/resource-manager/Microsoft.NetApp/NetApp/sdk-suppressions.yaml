@@ -1,6 +1,6 @@
 suppressions:
   azure-sdk-for-js:
-    - package: '@azure/arm-netapp'
+    - package: "@azure/arm-netapp"
       breaking-changes:
         - Operation AccountsOperations.update has a new signature
         - Interface NetAppAccountPatch no longer has parameter id
@@ -8,12 +8,56 @@ suppressions:
         - Interface NetAppAccountPatch no longer has parameter name
         - Interface NetAppAccountPatch no longer has parameter type
         - Type of parameter properties of interface NetAppAccountPatch is changed from AccountProperties to AccountPropertiesPatch
+        - Removed Interface SubvolumeInfo
+        - Removed Interface SubvolumeModel
+        - Removed Interface SubvolumeModelProperties
+        - Removed Interface SubvolumePatchParams
+        - Removed Interface SubvolumePatchRequest
+        - Removed Interface SubvolumeProperties
+        - Removed Interface SubvolumesCreateOptionalParams
+        - Removed Interface SubvolumesDeleteOptionalParams
+        - Removed Interface SubvolumesGetMetadataOptionalParams
+        - Removed Interface SubvolumesGetOptionalParams
+        - Removed Interface SubvolumesListByVolumeOptionalParams
+        - Removed Interface SubvolumesUpdateOptionalParams
+        - Removed operation group SubvolumesOperations
+        - Interface VolumeProperties no longer has parameter enableSubvolumes
+        - Class NetAppManagementClient no longer has parameter subvolumes
+        - Removed Type Alias EnableSubvolumes
+        - Removed Enum KnownEnableSubvolumes
   azure-sdk-for-python:
     - package: azure-mgmt-netapp
       breaking-changes:
         - Removed operation BackupsOperations.get_volume_restore_status
+        - Deleted or renamed client operation group `NetAppManagementClient.subvolumes`
+        - Deleted or renamed model `EnableSubvolumes`
+        - Deleted or renamed model `SubvolumeInfo`
+        - Deleted or renamed model `SubvolumeModelProperties`
+        - Deleted or renamed model `SubvolumeModel`
+        - Deleted or renamed model `SubvolumePatchParams`
+        - Deleted or renamed model `SubvolumePatchRequest`
+        - Deleted or renamed model `SubvolumeProperties`
+        - Deleted or renamed model `SubvolumesOperations`
+        - Model `VolumeProperties` deleted or renamed its instance variable `enable_subvolumes`
   azure-sdk-for-go:
     - package: sdk/resourcemanager/netapp/armnetapp
       breaking-changes:
         - Type of `AccountPatch.Properties` has been changed from `*AccountProperties` to `*AccountPropertiesPatch`
         - Field `ID`, `Location`, `Name`, `Type` of struct `AccountPatch` has been removed
+        - Enum `EnableSubvolumes` has been removed
+        - Function `*ClientFactory.NewSubvolumesClient` has been removed
+        - Function `NewSubvolumesClient` has been removed
+        - Function `*SubvolumesClient.BeginCreate` has been removed
+        - Function `*SubvolumesClient.BeginDelete` has been removed
+        - Function `*SubvolumesClient.Get` has been removed
+        - Function `*SubvolumesClient.BeginGetMetadata` has been removed
+        - Function `*SubvolumesClient.NewListByVolumePager` has been removed
+        - Function `*SubvolumesClient.BeginUpdate` has been removed
+        - Struct `SubvolumeInfo` has been removed
+        - Struct `SubvolumeModel` has been removed
+        - Struct `SubvolumeModelProperties` has been removed
+        - Struct `SubvolumePatchParams` has been removed
+        - Struct `SubvolumePatchRequest` has been removed
+        - Struct `SubvolumeProperties` has been removed
+        - Struct `SubvolumesList` has been removed
+        - Field `EnableSubvolumes` of struct `VolumeProperties` has been removed
