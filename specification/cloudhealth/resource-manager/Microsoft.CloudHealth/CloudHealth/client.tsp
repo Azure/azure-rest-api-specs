@@ -69,7 +69,6 @@ using Microsoft.CloudHealth;
 @@clientName(HealthState, "EntityHealthState", "csharp");
 @@clientName(AggregationType, "HealthStateAggregationType", "csharp");
 @@clientName(AggregationUnit, "HealthStateAggregationUnit", "csharp");
-@@clientName(ThresholdRule, "EntitySignalThresholdRuleV1", "csharp");
 @@clientName(IconDefinition, "HealthModelEntityIcon", "csharp");
 @@clientName(RefreshInterval, "EntitySignalRefreshInterval", "csharp");
 @@clientName(RefreshInterval.PT1M, "OneMinute", "csharp");
@@ -79,12 +78,8 @@ using Microsoft.CloudHealth;
 @@clientName(RefreshInterval.PT30M, "ThirtyMinutes", "csharp");
 @@clientName(RefreshInterval.PT1H, "OneHour", "csharp");
 @@clientName(RefreshInterval.PT2H, "TwoHours", "csharp");
-@@clientName(SignalAssignment, "EntitySignalAssignment", "csharp");
-@@clientName(SignalGroup, "EntitySignalGroup", "csharp");
 @@clientName(SignalKind, "EntitySignalKind", "csharp");
 @@clientName(SignalOperator, "EntitySignalOperator", "csharp");
-
-@@clientName(SignalOperator.Equals, "EqualsValue", "csharp");
 
 @@clientName(
   DynamicThresholdSensitivity,
@@ -168,7 +163,6 @@ using Microsoft.CloudHealth;
   "shouldIgnoreUnknown",
   "csharp"
 );
-@@clientName(DependenciesSignalGroup, "DependenciesSignalGroupV1", "csharp");
 @@clientName(
   DependenciesSignalGroupV2,
   "HealthModelDependenciesSignalGroup",
@@ -196,12 +190,6 @@ namespace Microsoft.CloudHealth {
     @maxLength(260)
     displayName?: string;
 
-    @removed(Versions.v2026_01_01_preview)
-    @doc("Azure Resource Graph query text in KQL syntax. The query must return at least a column named 'id' which contains the resource ID of the discovered resources.")
-    @minLength(1)
-    @maxLength(5000)
-    resourceGraphQuery: string;
-
     @doc("Reference to the name of the authentication setting which is used for querying Azure Resource Graph. The same authentication setting will also be assigned to any discovered entities.")
     authenticationSetting: authenticationSettingName;
 
@@ -211,7 +199,6 @@ namespace Microsoft.CloudHealth {
     @doc("Whether to add all recommended signals to the discovered entities.")
     addRecommendedSignals: DiscoveryRuleRecommendedSignalsBehavior;
 
-    @added(Versions.v2026_01_01_preview)
     @doc("Specification of the discovery rule defining how entities are discovered.")
     specification: DiscoveryRuleSpecification;
 
@@ -232,11 +219,6 @@ namespace Microsoft.CloudHealth {
   }
 }
 
-@@alternateType(
-  DiscoveryRules.createOrUpdateV1::parameters.resource,
-  DiscoveryRuleResourceCreate,
-  "javascript"
-);
 @@alternateType(
   DiscoveryRules.createOrUpdate::parameters.resource,
   DiscoveryRuleResourceCreate,
