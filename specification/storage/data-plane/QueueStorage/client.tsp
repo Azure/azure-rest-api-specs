@@ -383,7 +383,6 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 @@clientName(Metrics, "QueueMetrics", "java");
 @@clientName(CorsRule, "QueueCorsRule", "java");
 @@clientName(RetentionPolicy, "QueueRetentionPolicy", "java");
-@@clientName(QueueServiceStats, "QueueServiceStatistics", "java");
 @@clientName(SignedIdentifier, "QueueSignedIdentifier", "java");
 @@clientName(AccessPolicy, "QueueAccessPolicy", "java");
 
@@ -469,6 +468,16 @@ model QueueStorageError {
 }
 
 @@alternateType(Storage.Queues.Error, QueueStorageError, "java");
+
+// Get Queue Service Stats returns the StorageServiceStats envelope shared with Blob and File.
+/** Statistics for the storage queue service. */
+@TypeSpec.Xml.name("StorageServiceStats")
+@clientName("QueueServiceStatistics", "java")
+model QueueServiceStatsJava {
+  ...QueueServiceStats;
+}
+
+@@alternateType(QueueServiceStats, QueueServiceStatsJava, "java");
 
 // C++ customizations
 @@alternateType(MetadataHeaders.metadata, Record<string>, "cpp");
