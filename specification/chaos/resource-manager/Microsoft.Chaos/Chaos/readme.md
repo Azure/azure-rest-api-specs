@@ -25,6 +25,8 @@ Clients must tolerate unknown future string values. Native provider codes must n
 
 `PermissionError.actionAssociation` and `ResourceStateError.actionAssociation` are optional and read-only. `Complete` carries the exact recorded contributor set for that error cause. An empty complete set requires positive evidence that no authored Action contributed; it must not stand for missing evidence. `Indeterminate` and `NotRecorded` omit `actions`. An omitted association or an unknown future status does not establish completeness.
 
+Workspace discovery permission warnings omit `actionAssociation`. Discovery has no scenario-authored Action set; do not infer `Complete` or an empty `actions` list for those warnings.
+
 Each reference uses the exact authored `ScenarioAction.name` from the definition snapshot used for the result, not a provider fault/version `actionId`, a current mutable definition, or an assumed `actionUrn` equivalence. `Validated` identifies validation contribution, `Executed` an actual execution attempt rather than proof of fault effect, and `Requirement` an Action prerequisite without asserting dispatch. Unknown relation values do not prove execution. Association does not establish grant eligibility, successful execution or cleanup.
 
 The permission/resource arrays have no item identifier in this version. Distinct recorded causes can share `resourceId`; do not combine unrelated Action names with one retained explanation or treat these rows as independently addressable resources. No public error-row ID is introduced.
@@ -32,6 +34,8 @@ The permission/resource arrays have no item identifier in this version. Distinct
 ### Examples and scope
 
 The December Scenario CreateOrUpdate, run GET and Action-association LIST examples use the readable scenario name `vm-safety-check`. Scenario names are not required to be GUIDs; the run ID's existing GUID constraint is separate. The GET and LIST examples carry the same terminal result and show both complete and unavailable association.
+
+The illustrative GET/LIST results use a frozen definition whose authored Action names include `restartSecondaryVm`, `shutdownPrimaryVm`, `restartPrimaryVm`, `shutdownMissingVm` and `shutdownEmptyScaleSet`. The CreateOrUpdate sample illustrates an independent definition with zone-shutdown, Redis-failover and runbook Actions. Do not validate a result's captured names by joining them to a different or current mutable definition.
 
 The same error models apply to `ValidationProperties.validationErrors` and `ScenarioRunProperties.executionErrors`. The initial validation POST remains bodyless `202`; these additions do not introduce a validation GET, new route, response status or polling pattern. Per-Action errors, warnings, failure suppression and all other existing features remain available.
 

@@ -387,6 +387,7 @@ model PermissionError {
 
   /**
    * Authored Actions associated with this specific error cause. Omitted when no association information is available.
+   * This property is omitted from workspace discovery permission warnings.
    */
   @added(Versions.v2026_12_01)
   @visibility(Lifecycle.Read)
