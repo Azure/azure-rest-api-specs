@@ -722,4 +722,12 @@ suppressions:
   - from: bms.json
     code: GuidUsage
     reason: GUIDs are used for sourceTenantId, aadTenantId, servicePrincipalClientId, and servicePrincipalObjectId under Cross Tenant Restore properties. Suppression added upon feedback from ARM reviewer.
+  - from: bms.json
+    code: XMSSecretInResponse
+    where:
+      - $.definitions.AzureFileShareBrowseRecoveryPointRequest.properties.continuationToken
+      - $.definitions.AzureFileShareBrowseRecoveryPointRequestResource.properties.properties.properties.continuationToken
+      - $.definitions.AzureFileShareBrowseRecoveryPointResponse.properties.continuationToken
+      - $.definitions.AzureFileShareBrowseRecoveryPointResponseResource.properties.properties.properties.continuationToken
+    reason: The continuation token contains opaque pagination state returned by Browse and supplied unchanged in the next Browse request. It is not authentication material or a credential.
 ```
