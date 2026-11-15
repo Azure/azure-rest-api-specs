@@ -33,7 +33,7 @@ using Microsoft.Advisor;
   "!csharp"
 );
 @@clientLocation(
-  ResourceRecommendationBases.listV1,
+  ResourceRecommendationBases.listWithMode,
   "Recommendations",
   "!csharp"
 );

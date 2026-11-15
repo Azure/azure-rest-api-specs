@@ -42,7 +42,7 @@ model EmployeeProperties {
   /** The status of the last operation. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
-  
+
   /** The assets belong to the employee. */
   @typeChangedFrom(Versions.v2024_10_01_preview, string[])
   assets: AssetItem[];

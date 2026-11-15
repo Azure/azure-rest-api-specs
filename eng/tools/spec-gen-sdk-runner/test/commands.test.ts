@@ -8,8 +8,10 @@ import {
   generateSdkForSingleSpec,
   generateSdkForSpecPr,
 } from "../src/commands.ts";
+import * as emitterCheck from "../src/emitter-check.ts";
 import * as log from "../src/log.ts";
 import { LogLevel } from "../src/log.ts";
+import * as packageInfo from "../src/package-info.ts";
 import * as pythonPypiValidation from "../src/python-pypi-validation.ts";
 import * as sdkValidationConfig from "../src/sdk-validation-config.ts";
 import * as changeFiles from "../src/spec-helpers.ts";
@@ -26,6 +28,7 @@ function getNormalizedFsCalls(mockFn: Mock): unknown[][] {
 describe("generateSdkForSingleSpec", () => {
   beforeEach(() => {
     vi.resetAllMocks();
+    vi.spyOn(packageInfo, "getGeneratedSdkApiVersions").mockResolvedValue("");
   });
 
   test("should execute the SDK generation command successfully", async () => {
@@ -59,6 +62,9 @@ describe("generateSdkForSingleSpec", () => {
     vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(
       mockExecutionReport as ExecutionReport,
     );
+    vi.mocked(packageInfo.getGeneratedSdkApiVersions).mockResolvedValue(
+      "API Versions: '2025-01-01' (Namespace: 'Example'), '2026-01-01' (Namespace: 'Other')",
+    );
     vi.spyOn(commandHelpers, "setPipelineVariables").mockImplementation(() => {
       // mock implementation intentionally left blank
     });
@@ -83,6 +89,14 @@ describe("generateSdkForSingleSpec", () => {
 
     const result = await generateSdkForSingleSpec();
     expect(result.statusCode).toBe(0);
+    expect(packageInfo.getGeneratedSdkApiVersions).toHaveBeenCalledWith(
+      mockExecutionReport,
+      mockCommandInput,
+    );
+    expect(log.setVsoVariable).toHaveBeenCalledWith(
+      "GeneratedSDKApiVersions",
+      "API Versions: '2025-01-01' (Namespace: 'Example'), '2026-01-01' (Namespace: 'Other')",
+    );
     expect(log.logMessage).toHaveBeenCalledWith(
       `Generating SDK from ${mockCommandInput.tspConfigPath} ${mockCommandInput.readmePath}`,
       LogLevel.Group,
@@ -177,6 +191,8 @@ describe("generateSdkForSingleSpec", () => {
       ),
       LogLevel.Error,
     );
+    expect(packageInfo.getGeneratedSdkApiVersions).not.toHaveBeenCalled();
+    expect(log.setVsoVariable).toHaveBeenCalledWith("GeneratedSDKApiVersions", "");
   });
 
   test("should skip SDK generation for Rust when only readme path is provided", async () => {
@@ -213,6 +229,71 @@ describe("generateSdkForSingleSpec", () => {
     expect(pypiValidationSpy).not.toHaveBeenCalled();
     expect(utils.runSpecGenSdkCommand).not.toHaveBeenCalled();
   });
+
+  test.each(["succeeded", "failed"])(
+    "collects API versions from the azsdk package path when the build %s",
+    async (buildResult) => {
+      const commandInput = {
+        tspConfigPath: "specification/example/tspconfig.yaml",
+        localSpecRepoPath: path.resolve("spec repo"),
+        localSdkRepoPath: path.resolve("sdk repo"),
+        workingFolder: path.resolve("working"),
+        runMode: "release",
+        sdkRepoName: "azure-sdk-for-rust",
+        sdkLanguage: SdkName.Rust,
+        specCommitSha: "",
+        specRepoHttpsUrl: "",
+      };
+      vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(commandInput);
+      vi.spyOn(commandHelpers, "selectGenerationTool").mockReturnValueOnce("azsdk-cli");
+      vi.spyOn(commandHelpers, "installLanguageToolchain").mockResolvedValue(undefined);
+      vi.spyOn(emitterCheck, "checkEmitterEnabled").mockResolvedValue({
+        enabled: true,
+        languageKey: "rust",
+        packageName: "example",
+        metadata: {
+          emitterVersion: "1",
+          generatedAt: "",
+          typespec: { namespace: "Example", type: "data" },
+          sourceConfigPath: commandInput.tspConfigPath,
+          languages: {
+            rust: [
+              {
+                emitterName: "rust",
+                packageName: "example",
+                outputDir: "{output-dir}/sdk/example/package",
+              },
+            ],
+          },
+        },
+      });
+      vi.spyOn(utils, "runCommandWithOutput")
+        .mockResolvedValueOnce(JSON.stringify({ result: "succeeded", package_name: "example" }))
+        .mockResolvedValueOnce(JSON.stringify({ result: buildResult }))
+        .mockResolvedValueOnce(JSON.stringify({ result: "succeeded" }));
+      vi.mocked(packageInfo.getGeneratedSdkApiVersions).mockResolvedValue(
+        "API Versions: '2024-01-01'",
+      );
+      vi.spyOn(log, "setVsoVariable").mockImplementation(() => {});
+
+      const result = await generateSdkForSingleSpec();
+      expect(result.statusCode).toBe(buildResult === "succeeded" ? 0 : 1);
+      expect(packageInfo.getGeneratedSdkApiVersions).toHaveBeenCalledWith(
+        expect.objectContaining({
+          packages: [
+            expect.objectContaining({
+              packageRootPath: path.resolve(commandInput.localSdkRepoPath, "sdk/example/package"),
+            }),
+          ],
+        }),
+        commandInput,
+      );
+      expect(log.setVsoVariable).toHaveBeenCalledWith(
+        "GeneratedSDKApiVersions",
+        "API Versions: '2024-01-01'",
+      );
+    },
+  );
 });
 
 describe("generateSdkForSpecPr", () => {

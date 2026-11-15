@@ -4,17 +4,14 @@ import type { PrContext } from "./context.ts";
 export async function ruleSuppressions(
   context: PrContext,
   path: string,
-  rule: "TypeSpecRequirement",
+  rule: string,
 ): Promise<Suppression[]> {
-  const suppressions = await getSuppressionsForTools(
-    ["SpecChangePolicies", "TypeSpecRequirement"],
-    path,
-    {
-      baseCommitish: context.baseCommitish,
-      headCommitish: context.headCommitish,
-      checkingAllSpecs: false,
-    },
-  );
+  const legacyTool = rule === "TypeSpecRequirement" ? "TypeSpecRequirement" : "TypeSpecValidation";
+  const suppressions = await getSuppressionsForTools(["SpecChangePolicies", legacyTool], path, {
+    baseCommitish: context.baseCommitish,
+    headCommitish: context.headCommitish,
+    checkingAllSpecs: false,
+  });
   return suppressions.filter(
     (suppression) =>
       suppression.tool === "TypeSpecRequirement" ||

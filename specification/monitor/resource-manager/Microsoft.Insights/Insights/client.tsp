@@ -78,6 +78,64 @@ namespace Microsoft.InsightsCombinedClient;
 );
 
 // C# compatibility names from the shipped AutoRest-based Azure.ResourceManager.Monitor package.
+@@clientName(
+  VmInsightsOnboarding.VMInsightsOnboardingStatus,
+  "VmInsightsOnboardingStatus",
+  "csharp"
+);
+@@alternateType(
+  VmInsightsOnboarding.VMInsightsOnboardingStatusProperties.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@clientName(
+  VmInsightsOnboarding.WorkspaceInfo,
+  "DataContainerWorkspace",
+  "csharp"
+);
+@@clientName(
+  DiagnosticsSettings.DiagnosticSettingsCategoryResource,
+  "DiagnosticSettingsCategory",
+  "csharp"
+);
+@@clientName(
+  DiagnosticsSettings.DiagnosticSettingsCategory,
+  "DiagnosticSettingsCategoryProperties",
+  "csharp"
+);
+@@clientName(DiagnosticsSettings.CategoryType, "MonitorCategoryType", "csharp");
+// Base name for the shipped DiagnosticSettingResource, DiagnosticSettingData, and
+// DiagnosticSettingCollection types; the C# generator appends those suffixes.
+@@clientName(
+  DiagnosticsSettings.DiagnosticSettingsResource,
+  "DiagnosticSetting",
+  "csharp"
+);
+@@alternateType(
+  DiagnosticsSettings.DiagnosticSettings.storageAccountId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DiagnosticsSettings.DiagnosticSettings.serviceBusRuleId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DiagnosticsSettings.DiagnosticSettings.eventHubAuthorizationRuleId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DiagnosticsSettings.DiagnosticSettings.workspaceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DiagnosticsSettings.DiagnosticSettings.marketplacePartnerId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@clientName(ActionGroupsApi.ActionGroup, "ActionGroupProperties", "csharp");
 @@clientName(ActionGroupsApi.ActionGroup.enabled, "IsEnabled", "csharp");
 @@clientName(ActionGroupsApi.ActionGroupResource, "ActionGroup", "csharp");
@@ -1072,6 +1130,49 @@ namespace Microsoft.InsightsCombinedClient;
   "java,javascript,python,go"
 );
 
+// C# names for the tenant action group family, distinct from the shipped ActionGroup models.
+@@clientName(
+  TenantActionGroups.TenantActionGroupResource,
+  "TenantActionGroup",
+  "csharp"
+);
+@@clientName(
+  TenantActionGroups.TenantActionGroup,
+  "TenantActionGroupProperties",
+  "csharp"
+);
+@@clientName(
+  TenantActionGroups.TenantActionGroup.enabled,
+  "IsEnabled",
+  "csharp"
+);
+@@clientName(
+  TenantActionGroups.ActionGroupPatchBody,
+  "TenantActionGroupPatch",
+  "csharp"
+);
+@@clientName(
+  TenantActionGroups.TenantNotificationRequestBody,
+  "TenantNotificationContent",
+  "csharp"
+);
+@@clientName(
+  TenantActionGroups.ActionDetail,
+  "TenantNotificationActionDetail",
+  "csharp"
+);
+@@clientName(
+  TenantActionGroups.WebhookReceiver,
+  "TenantActionGroupWebhookReceiver",
+  "csharp"
+);
+@@alternateType(TenantActionGroups.WebhookReceiver.serviceUri, url, "csharp");
+@@alternateType(
+  TenantActionGroups.WebhookReceiver.identifierUri,
+  url,
+  "csharp"
+);
+
 @@clientName(
   DataCollectionApi.KnownDataCollectionEndpointResourceKind,
   "DataCollectionEndpointResourceKind",
@@ -1564,6 +1665,12 @@ model MetricSettings {
   MetricSettings,
   "csharp"
 );
+// C#: the shipped DiagnosticSettingData.Metrics uses MetricSettings.
+@@alternateType(
+  DiagnosticsSettings.DiagnosticsMetricSettings,
+  MetricSettings,
+  "csharp"
+);
 // For JS, redirect straight to DiagnosticsSettings.DiagnosticsMetricSettings (identical to the
 // local MetricSettings) so the local Microsoft.InsightsCombinedClient.MetricSettings
 // is not emitted and no longer collides with DiagnosticsSettings.DiagnosticsMetricSettings.
@@ -1610,6 +1717,12 @@ model LogSettings {
 
 @@alternateType(
   ServiceDiagnosticsSettingsApi.LogSettings,
+  LogSettings,
+  "csharp"
+);
+// C#: the shipped DiagnosticSettingData.Logs uses LogSettings.
+@@alternateType(
+  DiagnosticsSettings.DiagnosticsLogSettings,
   LogSettings,
   "csharp"
 );
@@ -1839,11 +1952,7 @@ op PrivateLinkScopeOperationStatusGetCustomized(
   "python"
 );
 
-@@clientLocation(
-  VMInsightsOnboardingStatuses.getOnboardingStatus,
-  "$DO_NOT_NORMALIZE$vMInsights",
-  "javascript"
-);
+@@clientName(VMInsightsOnboardingStatuses, exact("vMInsights"), "javascript");
 
 @@clientName(
   xmsClientTenantIdParameter.`x-ms-client-tenant-id`,

@@ -12,10 +12,11 @@ import {
 import { parseExistingComments } from "./comment.ts";
 import type { Core, GitHub, GitHubScriptArgs, WebhookEvent } from "./github.ts";
 
-const COMMAND = "/azsdk check-access";
+export const CONTRIBUTOR_READINESS_COMMAND = "/azsdk check-access";
+export const CONTRIBUTOR_READINESS_CHECK_NAME = "Contributor readiness";
+export const CONTRIBUTOR_ONBOARDING_URL = "https://aka.ms/azsdk/access";
+
 const MARKER = "<!-- contributor-readiness -->";
-const CHECK_NAME = "Contributor readiness";
-const ONBOARDING = "https://aka.ms/azsdk/access";
 const ORGANIZATIONS = ["Azure"] as const;
 
 type PullRequest = Awaited<ReturnType<GitHub["rest"]["pulls"]["get"]>>["data"];
@@ -64,7 +65,9 @@ export async function resolveReadinessPullRequest(
   const { context } = inputs;
   if (context.eventName === "issue_comment") {
     const { issue, comment, sender } = context.payload as WebhookEvent<"issue-comment", "created">;
-    return issue.pull_request && comment.body.trim() === COMMAND && !isAutomation(sender)
+    return issue.pull_request &&
+      comment.body.trim() === CONTRIBUTOR_READINESS_COMMAND &&
+      !isAutomation(sender)
       ? issue.number
       : null;
   }
@@ -344,7 +347,7 @@ export function renderReadiness(
         ? [
             "> [!WARNING]\n> **Access issues can block approvals, Azure DevOps pipelines, or labeling.**",
             renderReadinessFindings(participants, findings),
-            `Internal contributors: ${link("set up / renew access", ONBOARDING)}. Recheck: ${inlineCode(COMMAND)}.`,
+            `Internal contributors: ${link("set up / renew access", CONTRIBUTOR_ONBOARDING_URL)}. Recheck: ${inlineCode(CONTRIBUTOR_READINESS_COMMAND)}.`,
             renderVerifiedContributors(verifiedParticipants),
             "Non-blocking check; fix access issues to unblock affected actions.",
           ]
@@ -527,7 +530,7 @@ async function collectAuthorizedRefreshParticipants(
   const payload = context.payload as WebhookEvent<"issue-comment", "created">;
   if (
     payload.issue.number !== pr.number ||
-    payload.comment.body.trim() !== COMMAND ||
+    payload.comment.body.trim() !== CONTRIBUTOR_READINESS_COMMAND ||
     isAutomation(payload.sender)
   ) {
     throw new Error("Unexpected contributor readiness command");
@@ -563,7 +566,7 @@ async function publishReadinessReport(
   await github.rest.checks.create({
     owner,
     repo,
-    name: CHECK_NAME,
+    name: CONTRIBUTOR_READINESS_CHECK_NAME,
     head_sha: pr.head.sha,
     external_id: `contributor-readiness:${pr.number}`,
     status: "completed",
@@ -577,6 +580,21 @@ async function publishReadinessReport(
       summary: body,
     },
   });
+  if (context.runAttempt > 1) {
+    const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+      owner,
+      repo,
+      run_id: context.runId,
+      per_page: PER_PAGE_MAX,
+    });
+    for (const artifact of artifacts) {
+      if (artifact.name.startsWith("head-sha=") && artifact.name !== `head-sha=${pr.head.sha}`) {
+        await github.rest.actions.deleteArtifact({ owner, repo, artifact_id: artifact.id });
+      }
+    }
+  }
+  core.setOutput("issue_number", pr.number);
+  core.setOutput("head_sha", pr.head.sha);
   await updateReadinessComment(github, owner, repo, pr.number, body, findings.length > 0);
 }
 

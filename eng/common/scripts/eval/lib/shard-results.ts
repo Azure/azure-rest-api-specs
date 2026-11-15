@@ -182,12 +182,15 @@ export function selectSummaryResults({ resultsRoot, selectedRoot, expectedShards
         new Set(expectedShards).size !== expectedShards.length) {
         throw new Error("Expected shards must be unique, valid shard names from Prepare.");
     }
+    const resultPrefix = "eval-result-";
     emptyDirectory(selectedRoot);
     const expected = new Set(expectedShards);
+    const timeline = jobAttempts?.schemaVersion === 1 && jobAttempts.valid === true ? jobAttempts.attempts : null;
     const selected = new Map();
     const seen = new Set();
     for (const entry of fs.readdirSync(resultsRoot, { withFileTypes: true })) {
-        const match = /^eval-result-(.+)-(\d+)$/.exec(entry.name);
+        if (!entry.name.startsWith(resultPrefix)) continue;
+        const match = /^(.+)-(\d+)$/.exec(entry.name.slice(resultPrefix.length));
         if (!match || !expected.has(match[1])) continue;
         if (!entry.isDirectory()) throw new Error("Shard artifact paths must be directories, not files or symbolic links.");
         const attempt = Number(match[2]);
@@ -195,8 +198,8 @@ export function selectSummaryResults({ resultsRoot, selectedRoot, expectedShards
         const identity = `${match[1]}:${attempt}`;
         if (seen.has(identity)) throw new Error(`Duplicate artifact attempt for ${match[1]}.`);
         seen.add(identity);
-        const previous = selected.get(match[1]);
-        if (!previous || previous.attempt < attempt) {
+        // Artifact availability cannot override the authoritative timeline attempt.
+        if (timeline?.[match[1]]?.attempt === attempt) {
             selected.set(match[1], { shard: match[1], attempt, directory: entry.name });
         }
     }
@@ -204,7 +207,10 @@ export function selectSummaryResults({ resultsRoot, selectedRoot, expectedShards
     for (const shard of expectedShards) {
         const selectedAttempt = selected.get(shard);
         if (!selectedAttempt) {
-            status.push({ shard, attempt: null, complete: false, reason: "No artifact was published." });
+            const attempt = timeline?.[shard]?.attempt;
+            const verified = Number.isSafeInteger(attempt) && attempt > 0;
+            status.push({ shard, attempt: verified ? attempt : null, complete: false,
+                reason: verified ? "The latest timeline attempt has no matching artifact." : "The latest timeline attempt could not be verified." });
             continue;
         }
         const directory = path.join(resultsRoot, selectedAttempt.directory);
@@ -221,15 +227,14 @@ export function selectSummaryResults({ resultsRoot, selectedRoot, expectedShards
             }
             if (!complete && metadata.complete === false) reason = "The latest shard attempt did not produce a complete invocation.";
         } catch { /* Retain available JUnit below, but do not adopt an incomplete artifact for upload. */ }
-        if (jobAttempts?.valid !== true || jobAttempts.schemaVersion !== 1 ||
-            jobAttempts.attempts?.[shard]?.attempt !== selectedAttempt.attempt || jobAttempts.attempts[shard].complete !== true) {
+        if (timeline[shard].complete !== true) {
             complete = false;
-            reason = "The latest timeline job attempt has no matching complete artifact, or its status could not be verified.";
+            reason = "The latest timeline job attempt is not complete.";
         }
         // The Tests tab and Markdown use the SAME selected attempts as the bundle.
         // Old-layout JUnit remains diagnostic; old artifacts are never upload-ready.
         const files = junit.length ? junit : globFiles(directory, "**/*.junit.xml");
-        const output = path.join(selectedRoot, selectedAttempt.directory, "junit");
+        const output = path.join(selectedRoot, `eval-result-${shard}-${selectedAttempt.attempt}`, "junit");
         fs.mkdirSync(output, { recursive: true });
         for (const [index, file] of files.entries()) {
             try {

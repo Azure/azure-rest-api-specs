@@ -180,6 +180,7 @@ interface Labs {
       /**
        * set this flag to true if you want to update student count without generating a new invite code
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing generateInviteCode POST contract uses onlyUpdateStudentCountParameter in the query; preserve wire compatibility."
       @query("onlyUpdateStudentCountParameter")
       onlyUpdateStudentCountParameter?: boolean;
     },

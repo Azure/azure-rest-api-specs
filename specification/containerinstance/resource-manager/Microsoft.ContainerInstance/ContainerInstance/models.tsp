@@ -1400,7 +1400,7 @@ model AzureFileVolume {
    * The client id of the user-assigned managed identity that has access to the Azure File share.
    */
   @added(Versions.v2026_07_01)
-  userAssignedIdentityClientId?: string;
+  userManagedIdentityClientId?: string;
 }
 
 /**

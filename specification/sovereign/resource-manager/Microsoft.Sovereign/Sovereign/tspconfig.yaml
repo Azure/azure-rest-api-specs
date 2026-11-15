@@ -1,8 +1,12 @@
+parameters:
+  "service-dir":
+    default: "sdk/sovereign"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
 options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
@@ -11,3 +15,33 @@ options:
     examples-dir: "{project-root}/examples"
     output-file: "{version-status}/{version}/sovereign.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Sovereign"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-sovereign"
+    namespace: "azure.mgmt.sovereign"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-sovereign"
+    namespace: "com.azure.resourcemanager.sovereign"
+    service-name: "Sovereign"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-sovereign"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-sovereign"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/sovereign"
+    emitter-output-dir: "{output-dir}/{service-dir}/armsovereign"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsovereign"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true

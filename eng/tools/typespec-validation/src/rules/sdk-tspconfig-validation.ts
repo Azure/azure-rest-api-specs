@@ -133,14 +133,17 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
   protected resolveVariables(
     value: string,
     config: Record<string, any>,
+    preservedVariables: readonly string[] = [],
   ): { resolved: string; error?: string } {
     let resolvedValue = value;
     const variablePattern = /\{([^}]+)\}/g;
+    const variablesToResolve = (text: string) =>
+      [...text.matchAll(/\{([^}]+)\}/g)].filter((match) => !preservedVariables.includes(match[1]));
     const maxIterations = 10; // Prevent infinite loops
     let iterations = 0;
 
     // Keep resolving until no more variables are found or max iterations reached
-    while (resolvedValue.includes("{") && iterations < maxIterations) {
+    while (variablesToResolve(resolvedValue).length > 0 && iterations < maxIterations) {
       iterations++;
       let hasUnresolvedVariables = false;
       const currentValue = resolvedValue;
@@ -151,6 +154,7 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
 
       while ((match = variablePattern.exec(currentValue)) !== null) {
         const variableName = match[1];
+        if (preservedVariables.includes(variableName)) continue;
 
         // Try to resolve variable from multiple sources:
         // 1. From the emitter's options (e.g., namespace, package-name)
@@ -180,7 +184,7 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
 
       // If no progress was made in this iteration and there are still unresolved variables, return error
       if (hasUnresolvedVariables && resolvedValue === currentValue) {
-        const unresolvedMatch = resolvedValue.match(/\{([^}]+)\}/);
+        const unresolvedMatch = variablesToResolve(resolvedValue)[0];
         const unresolvedVar = unresolvedMatch ? unresolvedMatch[1] : "unknown";
         return {
           resolved: resolvedValue,
@@ -189,12 +193,12 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
       }
 
       // If no more variables to resolve, break
-      if (!resolvedValue.includes("{")) {
+      if (variablesToResolve(resolvedValue).length === 0) {
         break;
       }
     }
 
-    if (iterations >= maxIterations && resolvedValue.includes("{")) {
+    if (iterations >= maxIterations && variablesToResolve(resolvedValue).length > 0) {
       return {
         resolved: resolvedValue,
         error: `Maximum resolution depth reached. Possible circular reference in variable resolution.`,
@@ -413,6 +417,93 @@ export class TspConfigJavaMgmtNamespaceFormatSubRule extends TspconfigEmitterOpt
 
   protected skip(_: any, folder: string) {
     return skipForDataPlane(folder); // Ensures this rule only applies to management plane SDKs
+  }
+}
+
+export class TspConfigJavaMgmtEmitterOutputDirMatchesNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-java", "emitter-output-dir", "derived from namespace");
+  }
+
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+
+  protected validate(config: any): RuleResult {
+    const namespace = this.tryFindOption(config, "namespace");
+    if (typeof namespace !== "string")
+      return this.createFailedResult(
+        `Failed to find a string value for "options.${this.emitterName}.namespace"`,
+        `Please define "options.${this.emitterName}.namespace".`,
+      );
+
+    const resolvedNamespace = this.resolveVariables(namespace, config);
+    const packageDir = this.getPackageDirFromEmitterOutputDir(config);
+    const error = resolvedNamespace.error ?? packageDir.error;
+    if (error) return this.createFailedResult(error, "Please fix the Java emitter configuration.");
+
+    const expected = resolvedNamespace.resolved.replace(/^com\./, "").replace(/\./g, "-");
+    if (packageDir.resolved !== expected)
+      return this.createFailedResult(
+        `The package directory "${packageDir.resolved}" in options.${this.emitterName}.emitter-output-dir does not match the namespace-derived value "${expected}"`,
+        `Please update "options.${this.emitterName}.emitter-output-dir" to use package directory "${expected}".`,
+      );
+
+    return { success: true };
+  }
+}
+
+export class TspConfigJavaMgmtServiceDirMatchesNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-java", "service-dir", "derived from namespace");
+  }
+
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+
+  protected validate(config: any): RuleResult {
+    const namespace = this.tryFindOption(config, "namespace");
+    if (typeof namespace !== "string")
+      return this.createFailedResult(
+        `Failed to find a string value for "options.${this.emitterName}.namespace"`,
+        `Please define "options.${this.emitterName}.namespace".`,
+      );
+
+    const resolvedNamespace = this.resolveVariables(namespace, config);
+    if (resolvedNamespace.error)
+      return this.createFailedResult(
+        resolvedNamespace.error,
+        "Please fix the Java emitter namespace.",
+      );
+
+    const serviceName = resolvedNamespace.resolved.split(".")[3];
+    if (!serviceName)
+      return this.createFailedResult(
+        `Cannot derive the Java service-dir from namespace "${resolvedNamespace.resolved}": the fourth namespace segment is missing or empty`,
+        `Please update "options.${this.emitterName}.namespace" to "com.azure.resourcemanager.<service-name>".`,
+      );
+
+    const override = this.tryFindOption(config);
+    const serviceDir =
+      override !== undefined ? override : config?.parameters?.["service-dir"]?.default;
+    if (typeof serviceDir !== "string")
+      return this.createFailedResult(
+        `Failed to find a string value for the effective Java service-dir`,
+        `Please define "options.${this.emitterName}.service-dir" or "parameters.service-dir.default".`,
+      );
+
+    const resolvedServiceDir = this.resolveVariables(serviceDir, config, ["output-dir"]);
+    const actual = resolvedServiceDir.resolved.replace(/^\{output-dir\}\//, "");
+    const expected = `sdk/${serviceName}`;
+    if (resolvedServiceDir.error || actual !== expected)
+      return this.createFailedResult(
+        resolvedServiceDir.error ??
+          `The effective Java service-dir "${serviceDir}" does not match the namespace-derived value "${expected}"`,
+        `Please update "options.${this.emitterName}.service-dir" or "parameters.service-dir.default" to "${expected}".`,
+      );
+
+    return { success: true };
   }
 }
 
@@ -814,6 +905,8 @@ export const requiredRules = [
   new TspConfigJavaAzEmitterOutputDirMatchPatternSubRule(),
   new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule(),
   new TspConfigJavaMgmtNamespaceFormatSubRule(),
+  new TspConfigJavaMgmtEmitterOutputDirMatchesNamespaceSubRule(),
+  new TspConfigJavaMgmtServiceDirMatchesNamespaceSubRule(),
   new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule(),
   new TspConfigTsMgmtModularEmitterOutputDirSubRule(),
   new TspConfigTsMgmtModularPackageNameMatchPatternSubRule(),

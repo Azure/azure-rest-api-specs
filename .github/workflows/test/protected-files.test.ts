@@ -24,21 +24,25 @@ describe("Protected Files", () => {
     vi.mocked(getChangedFiles).mockResolvedValue([]);
   });
 
-  it.each(["azure-sdk", "azure-sdk-automation[bot]", "Azure-SDK", "timotheeguerin", "marygao"])(
-    "passes for trusted PR author %s without reading changed files",
-    async (author) => {
-      const { core, context, run } = setup(author);
-      context.actor = "spec-author";
-      expect((await run()).conclusion).toBe("success");
-      expect(core.info).toHaveBeenCalledWith(
-        `Account '${author}' is allowed to update protected files`,
-      );
-      expect(getChangedFiles).not.toHaveBeenCalled();
-      expect(core.setFailed).not.toHaveBeenCalled();
-    },
-  );
+  it.each([
+    "azure-sdk",
+    "azure-sdk-automation[bot]",
+    "dependabot[bot]",
+    "Azure-SDK",
+    "timotheeguerin",
+    "marygao",
+  ])("passes for trusted PR author %s without reading changed files", async (author) => {
+    const { core, context, run } = setup(author);
+    context.actor = "spec-author";
+    expect((await run()).conclusion).toBe("success");
+    expect(core.info).toHaveBeenCalledWith(
+      `Account '${author}' is allowed to update protected files`,
+    );
+    expect(getChangedFiles).not.toHaveBeenCalled();
+    expect(core.setFailed).not.toHaveBeenCalled();
+  });
 
-  it.each(["spec-author", "dependabot[bot]", "azure-sdk-other"])(
+  it.each(["spec-author", "dependabot-other[bot]", "azure-sdk-other"])(
     "does not exempt author %s when a trusted account triggers the run",
     async (author) => {
       const { core, context, run } = setup(author);
@@ -81,6 +85,10 @@ describe("Protected Files", () => {
     ".vscode/settings.json",
     "eng/tools/example/package.json",
     "eng/scripts/ChangedFiles-Functions.ps1",
+    "test/cognitiveservices/custom-keys-contract.mjs",
+    "specification-other/main.tsp",
+    "Specification/widgets/script.mjs",
+    "README.md",
     ".github/CODEOWNERS.backup",
     ".github/CODEOWNERS\n",
     ".github/workflows/nested/.github/CODEOWNERS",
@@ -116,7 +124,7 @@ describe("Protected Files", () => {
       [".github/skills/custom/azsdk-common-example/SKILL.md"],
       [".github/skills/azsdk-custom/SKILL.md"],
       [".GITHUB/codeowners", ".GITHUB/SKILLS/CUSTOM/skill.md"],
-      ["documentation/ci-fix.md", "README.md", "specification/widgets/package.json"],
+      ["specification/widgets/README.md", "specification/widgets/package.json"],
     ].map((files) => ({ files })),
   )("passes for unprotected changes $files", async ({ files }) => {
     const { core, run } = setup();

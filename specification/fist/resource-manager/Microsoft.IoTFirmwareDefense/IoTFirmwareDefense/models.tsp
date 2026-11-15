@@ -89,6 +89,10 @@ union SummaryType {
   @added(Versions.v2026_06_01_preview)
   UnsafeFunctionCalls: "UnsafeFunctionCalls",
 
+  @doc("The summary contains information about the latest CVE rescan analysis results")
+  @added(Versions.v2026_10_01_preview)
+  LatestCve: "LatestCve",
+
   string,
 }
 
@@ -487,6 +491,10 @@ model CveResult {
   @doc("The component versions in which this weakness was fixed, if any.")
   fixedInVersions?: string[];
 
+  @added(Versions.v2026_10_01_preview)
+  @doc("The date the CVE was published.")
+  publishedDate?: utcDateTime;
+
   @doc("The status of the last operation.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
@@ -499,6 +507,49 @@ model CveLink {
 
   @doc("The label of the reference link.")
   label?: string;
+}
+
+@doc("Describes how a CVE result changed between this rescan and the prior CVE analysis.")
+@added(Versions.v2026_10_01_preview)
+union ChangeStatus {
+  @doc("The CVE was not present in the prior analysis and is newly detected in this rescan.")
+  New: "New",
+
+  @doc("The CVE was present in the prior analysis and remains present in this rescan, unchanged.")
+  Original: "Original",
+
+  @doc("The CVE was present in the prior analysis and remains present in this rescan, but one or more of its properties changed.")
+  Modified: "Modified",
+
+  @doc("The CVE was present in the prior analysis but is no longer detected in this rescan.")
+  Removed: "Removed",
+
+  string,
+}
+
+@doc("Describes the risk trend of a field that changed value between this rescan and the prior CVE analysis.")
+@added(Versions.v2026_10_01_preview)
+union RiskTrend {
+  @doc("The change increased the risk associated with the CVE.")
+  Increased: "Increased",
+
+  @doc("The change decreased the risk associated with the CVE.")
+  Decreased: "Decreased",
+
+  @doc("The risk impact of the change could not be determined.")
+  Unknown: "Unknown",
+
+  string,
+}
+
+@doc("Describes a single field that changed value between this rescan and the prior CVE analysis.")
+@added(Versions.v2026_10_01_preview)
+model CveModification {
+  @doc("The name of the field that changed. Always the swagger field name.")
+  fieldName: string;
+
+  @doc("The risk trend resulting from the change to this field.")
+  riskTrend: RiskTrend;
 }
 
 @doc("EPSS (Exploit Prediction Scoring System) data related to a CVE.")
@@ -879,6 +930,86 @@ model CveSummaryResource extends SummaryResourceProperties {
   @added(Versions.v2025_12_01_preview)
   @doc("Schema version of the CVE data for this firmware.")
   schemaVersion?: string;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("Total number of CVEs found in the CISA KEV (Known Exploited Vulnerabilities) catalog.")
+  cisaKevCount?: int64;
+}
+
+@doc("Describes the status of a CVE rescan.")
+@added(Versions.v2026_10_01_preview)
+union RescanStatus {
+  @doc("A rescan has not yet been performed for this firmware.")
+  NotAvailable: "NotAvailable",
+
+  @doc("The CVE database has been updated since the last rescan; a new rescan is recommended.")
+  Stale: "Stale",
+
+  @doc("A rescan is currently running.")
+  InProgress: "InProgress",
+
+  @doc("The rescan completed successfully and results are available.")
+  Complete: "Complete",
+
+  @doc("The rescan failed.")
+  Error: "Error",
+
+  string,
+}
+
+@doc("Properties for a CVE rescan analysis summary, describing the difference between this rescan and the prior CVE analysis.")
+@added(Versions.v2026_10_01_preview)
+model LatestCveSummaryResource extends SummaryResourceProperties {
+  @doc("Total number of CVEs found.")
+  totalCveCount?: int64;
+
+  @doc("The total number of critical severity CVEs detected")
+  criticalCveCount?: int64;
+
+  @doc("The total number of high severity CVEs detected")
+  highCveCount?: int64;
+
+  @doc("The total number of medium severity CVEs detected")
+  mediumCveCount?: int64;
+
+  @doc("The total number of low severity CVEs detected")
+  lowCveCount?: int64;
+
+  @doc("The total number of unknown severity CVEs detected")
+  unknownCveCount?: int64;
+
+  @doc("Total number of CVEs found in the CISA KEV (Known Exploited Vulnerabilities) catalog.")
+  cisaKevCount?: int64;
+
+  @doc("Schema version of the CVE data for this firmware.")
+  schemaVersion?: string;
+
+  @doc("The status of the CVE rescan.")
+  rescanStatus?: RescanStatus;
+
+  @doc("The change in the number of critical severity CVEs detected since the prior CVE analysis.")
+  diffCriticalCveCount?: int64;
+
+  @doc("The change in the number of high severity CVEs detected since the prior CVE analysis.")
+  diffHighCveCount?: int64;
+
+  @doc("The change in the number of medium severity CVEs detected since the prior CVE analysis.")
+  diffMediumCveCount?: int64;
+
+  @doc("The change in the number of low severity CVEs detected since the prior CVE analysis.")
+  diffLowCveCount?: int64;
+
+  @doc("The change in the number of unknown severity CVEs detected since the prior CVE analysis.")
+  diffUnknownCveCount?: int64;
+
+  @doc("The change in the number of CVEs found in the CISA KEV (Known Exploited Vulnerabilities) catalog since the prior CVE analysis.")
+  diffCisaKevCount?: int64;
+
+  @doc("The timestamp of the last update to the CVE database used for this rescan.")
+  lastCveDatabaseUpdate?: utcDateTime;
+
+  @doc("Describes the type of summary object.")
+  summaryType: SummaryType.LatestCve;
 }
 
 @doc("Properties for SBOM analysis summary.")

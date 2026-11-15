@@ -65,9 +65,9 @@ interface ResourceRecommendationBases {
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @removed(Versions.v2026_08_01_preview)
-  @renamedFrom(Versions.v2026_08_01_preview, "list")
+  @added(Versions.v2026_10_01)
   @sharedRoute
-  listV1 is ArmResourceListByParent<
+  list is ArmResourceListByParent<
     ResourceRecommendationBase,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {
@@ -79,7 +79,7 @@ interface ResourceRecommendationBases {
        * <br>**Note:** Each `trackingIds/any(...)` predicate matches a single tracking ID; supplying multiple values inside one predicate is not supported. To match several tracking IDs, combine predicates with `or`. `trackingIds` can also be combined with the other supported filter properties using `and`.<br>
        * <br>**Note:** A tracking ID is an Azure Service Health tracking ID, for example 'VN1S-1V8'. It is not a GUID and is not the same value as `RecommendationTypeGuid`. A single tracking ID can map to more than one recommendation type, so a result set filtered by `trackingIds` is not guaranteed to contain a single `RecommendationTypeGuid`. `trackingIds` is a filter-only property and is not returned on the recommendation resource; use the recommendation metadata API to resolve a tracking ID to the recommendation types that carry it.<br>
        * <br>Valid options for SubCategory:<br>['BusinessContinuity', 'DisasterRecovery', 'HighAvailability', 'MonitoringAndAlerting', 'Other', 'Personalized', 'PrioritizedRecommendations', 'Scalability', 'ServiceUpgradeAndRetirement', 'Validation']<br>
-       * <br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=SubCategory eq 'ServiceUpgradeAndRetirement' and RetirementDate le '2024-01-01' and RetirementDate ge '2028-01-01'. Filter can be applied on trackingIds as well.<br>- $filter=trackingIds/any(t: t eq 'VN1S-1V8')<br>- $filter=ResourceId eq '/subscriptions/{subscriptionId}/resourceGroups/MyResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorage' and trackingIds/any(t: t eq 'VN1S-1V8')<br>- $filter=trackingIds/any(t: t eq 'VN1S-1V8') or trackingIds/any(t: t eq '6TH2-BV8')
+       * <br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=SubCategory eq 'ServiceUpgradeAndRetirement' and RetirementDate ge '2024-01-01' and RetirementDate le '2028-01-01'. Filter can be applied on trackingIds as well.<br>- $filter=trackingIds/any(t: t eq 'VN1S-1V8')<br>- $filter=ResourceId eq '/subscriptions/{subscriptionId}/resourceGroups/MyResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorage' and trackingIds/any(t: t eq 'VN1S-1V8')<br>- $filter=trackingIds/any(t: t eq 'VN1S-1V8') or trackingIds/any(t: t eq '6TH2-BV8')
        */
       @query("$filter")
       $filter?: string;
@@ -104,8 +104,10 @@ interface ResourceRecommendationBases {
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2026_08_01_preview)
+  @removed(Versions.v2026_10_01)
+  @renamedFrom(Versions.v2026_10_01, "list")
   @sharedRoute
-  list is ArmResourceListByParent<
+  listWithMode is ArmResourceListByParent<
     ResourceRecommendationBase,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {
@@ -145,6 +147,7 @@ interface ResourceRecommendationBases {
    * Obtains cached recommendations for a subscription. The recommendations are generated or computed by invoking generateRecommendations.
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2026_10_01)
   listByTenant is ArmResourceListByParent<
     ResourceRecommendationBase,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
@@ -184,7 +187,7 @@ union RecommendationListMode {
   All: "all",
 
   /**
-   * Returns prioritized subset of recommendations ordered descending by their criticality score.
+   * Returns recommendations in descending order of criticality score, if present.
    */
   Contextual: "contextual",
 }
@@ -206,6 +209,7 @@ alias AdvisorServiceGroup = Extension.ExternalResource<
  */
 @armResourceOperations
 @added(Versions.v2026_08_01_preview)
+@removed(Versions.v2026_10_01)
 interface ServiceGroupRecommendations {
   /**
    * Obtains recommendations for a service group.

@@ -151,9 +151,6 @@
       "name": "ManagedComputeCapacities"
     },
     {
-      "name": "CostControls"
-    },
-    {
       "name": "Skus"
     },
     {
@@ -1783,6 +1780,9 @@
         "x-ms-examples": {
           "Get Account": {
             "$ref": "./examples/GetAccount.json"
+          },
+          "Get an account with private CA trust": {
+            "$ref": "./examples/GetAccountWithTrustedCertificateSources.json"
           }
         }
       },
@@ -1875,6 +1875,9 @@
           },
           "Create a Foundry account with customer-owned AKS hosting": {
             "$ref": "./examples/CreateAccountWithAgentHostingConfiguration.json"
+          },
+          "Create an account with private CA trust": {
+            "$ref": "./examples/CreateAccountWithTrustedCertificateSources.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1951,8 +1954,17 @@
           }
         },
         "x-ms-examples": {
+          "Clear account private CA trust using an empty array": {
+            "$ref": "./examples/UpdateAccountClearTrustedCertificateSources.json"
+          },
+          "Rotate a pinned CA bundle while retaining other references": {
+            "$ref": "./examples/UpdateAccountRotateTrustedCertificateSources.json"
+          },
           "Update Account": {
             "$ref": "./examples/UpdateAccount.json"
+          },
+          "Update account tags while preserving private CA trust with null": {
+            "$ref": "./examples/UpdateAccountPreserveTrustedCertificateSources.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4037,346 +4049,6 @@
         "x-ms-examples": {
           "DeleteAccountConnection": {
             "$ref": "./examples/AccountConnection/delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/costControls": {
-      "get": {
-        "operationId": "CostControls_List",
-        "tags": [
-          "CostControls"
-        ],
-        "description": "Lists the cost controls owned by an account.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of Cognitive Services account.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CostControlListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List cost controls with all settings": {
-            "$ref": "./examples/CostControl/list.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/costControls/{costControlName}": {
-      "get": {
-        "operationId": "CostControls_Get",
-        "tags": [
-          "CostControls"
-        ],
-        "description": "Gets a cost control.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of Cognitive Services account.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "costControlName",
-            "in": "path",
-            "description": "The name of the CostControl",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CostControl"
-            },
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The current entity tag for the cost control."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a cost control with all settings": {
-            "$ref": "./examples/CostControl/get.json"
-          },
-          "Read a legacy cost control without authoring its legacy values": {
-            "$ref": "./examples/CostControl/getLegacy.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "CostControls_CreateOrUpdate",
-        "tags": [
-          "CostControls"
-        ],
-        "description": "Creates or replaces a cost control.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of Cognitive Services account.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "costControlName",
-            "in": "path",
-            "description": "The name of the CostControl",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
-          },
-          {
-            "$ref": "#/parameters/CostControlCreateOrUpdateHeaders.ifMatch"
-          },
-          {
-            "$ref": "#/parameters/CostControlCreateOrUpdateHeaders.ifNoneMatch"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CostControl"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CostControl"
-            },
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The current entity tag for the cost control."
-              }
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/CostControl"
-            },
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The current entity tag for the cost control."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create a cost control with all settings": {
-            "$ref": "./examples/CostControl/createOrUpdate.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "CostControls_Update",
-        "tags": [
-          "CostControls"
-        ],
-        "description": "Updates selected properties of a cost control.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of Cognitive Services account.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "costControlName",
-            "in": "path",
-            "description": "The name of the CostControl",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
-          },
-          {
-            "$ref": "#/parameters/CostControlIfMatchHeader"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CostControlPatch"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CostControl"
-            },
-            "headers": {
-              "ETag": {
-                "type": "string",
-                "description": "The current entity tag for the cost control."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update all configurable cost control settings": {
-            "$ref": "./examples/CostControl/update.json"
-          },
-          "Update metadata while preserving legacy rules": {
-            "$ref": "./examples/CostControl/updateMetadata.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "CostControls_Delete",
-        "tags": [
-          "CostControls"
-        ],
-        "description": "Deletes a cost control.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "The name of Cognitive Services account.",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 64,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "costControlName",
-            "in": "path",
-            "description": "The name of the CostControl",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$"
-          },
-          {
-            "$ref": "#/parameters/CostControlIfMatchHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a cost control conditionally": {
-            "$ref": "./examples/CostControl/delete.json"
           }
         }
       }
@@ -7457,6 +7129,9 @@
           },
           "Create Project Min": {
             "$ref": "./examples/CreateProjectMin.json"
+          },
+          "Create a Foundry project with tool controls": {
+            "$ref": "./examples/CreateProjectWithToolControls.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -7538,8 +7213,14 @@
           }
         },
         "x-ms-examples": {
+          "Clear a Foundry project's tool controls with explicit null": {
+            "$ref": "./examples/UpdateProjectClearToolControls.json"
+          },
           "Update Project": {
             "$ref": "./examples/UpdateProjects.json"
+          },
+          "Update a Foundry project with no explicitly allowed tools": {
+            "$ref": "./examples/UpdateProjectWithToolControls.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -13337,30 +13018,21 @@
             "create"
           ]
         },
-        "costControlIds": {
+        "trustedCertificateSources": {
           "type": "array",
-          "description": "The full resource IDs of cost controls directly attached to this account.\nAt the moment the service only supports a single cost control. This will be expanded in future API versions.",
+          "description": "Private CA trust sources for supported features in an AIServices account with allowProjectManagement enabled. Supports one Azure Key Vault source containing version-pinned references to secrets with PEM-encoded CA certificates or certificate bundles. On PUT or PATCH, a non-null array replaces the complete configuration, so include all references to retain. Omit this property or send null to preserve the existing configuration; send an empty array to clear it.",
           "maxItems": 1,
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-            "x-ms-arm-id-details": {
-              "allowedResources": [
-                {
-                  "type": "Microsoft.CognitiveServices/accounts/costControls"
-                }
-              ]
-            }
-          }
-        },
-        "costControlConnections": {
-          "$ref": "#/definitions/CostControlConnections",
-          "description": "The account-level connections used to publish cost control telemetry and events. Application Insights is optional for attachment, accounting, and enforcement and can be configured later. Event Grid must be configured before attaching a cost control with an alert threshold.",
           "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/TrustedCertificateSource"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ],
           "x-ms-mutability": [
             "read",
-            "update"
+            "update",
+            "create"
           ]
         }
       }
@@ -15125,6 +14797,30 @@
           }
         }
       }
+    },
+    "CertificateBundleReference": {
+      "type": "object",
+      "description": "A reference to a specific version of a Key Vault secret containing a PEM-encoded CA certificate or certificate bundle.",
+      "properties": {
+        "secretName": {
+          "type": "string",
+          "description": "Name of the Key Vault secret containing the CA certificate or certificate bundle.",
+          "minLength": 1,
+          "maxLength": 127,
+          "pattern": "^[0-9a-zA-Z-]{1,127}$"
+        },
+        "secretVersion": {
+          "type": "string",
+          "description": "Required, pinned version of the Key Vault secret. Newer secret versions are not followed automatically. To rotate a bundle, update this value and resubmit the complete account trust configuration.",
+          "minLength": 1,
+          "maxLength": 127,
+          "pattern": "^[0-9a-zA-Z-]{1,127}$"
+        }
+      },
+      "required": [
+        "secretName",
+        "secretVersion"
+      ]
     },
     "ChannelsBuiltInAuthorizationPolicy": {
       "type": "object",
@@ -16953,473 +16649,6 @@
         ]
       }
     },
-    "CostControl": {
-      "type": "object",
-      "description": "A cost control owned by a Cognitive Services account.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/CostControlProperties",
-          "description": "The resource-specific properties for this resource."
-        },
-        "etag": {
-          "type": "string",
-          "description": "The entity tag used for optimistic concurrency.",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "CostControlConnections": {
-      "type": "object",
-      "description": "Defines account-level connections used to publish cost-control telemetry and events.\nApplication Insights is optional and may be removed while policies remain attached.\nEvent Grid is required for alerts; supplied connection references must still be valid.",
-      "properties": {
-        "appInsightsConnectionId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Gets or sets the full resource ID of the optional Application Insights connection.",
-          "x-nullable": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.CognitiveServices/accounts/connections"
-              }
-            ]
-          }
-        },
-        "eventGridConnectionId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The full resource ID of the Event Grid connection used for cost control alerts. This connection must be configured when an attached cost control contains an alert threshold action and cannot be removed while such an action remains attached.",
-          "x-nullable": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.CognitiveServices/accounts/connections"
-              }
-            ]
-          }
-        }
-      }
-    },
-    "CostControlDimension": {
-      "type": "object",
-      "description": "A request dimension used to partition cost control consumption.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/CostControlDimensionType",
-          "description": "The kind of request dimension.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "attribute": {
-          "type": "string",
-          "description": "Gets or sets the attribute path retained for legacy Custom counters.\nAuthored rules cannot select Custom; built-in dimensions must omit this property.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "CostControlDimensionType": {
-      "type": "string",
-      "description": "Cost control counter dimensions, including Custom retained for legacy read compatibility.",
-      "enum": [
-        "Agent",
-        "Identity",
-        "Session",
-        "Project",
-        "Account",
-        "Custom"
-      ],
-      "x-ms-enum": {
-        "name": "CostControlDimensionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Agent",
-            "value": "Agent",
-            "description": "Consumption is partitioned by the stable Foundry agent ID."
-          },
-          {
-            "name": "Identity",
-            "value": "Identity",
-            "description": "Consumption is partitioned by the authenticated principal object ID."
-          },
-          {
-            "name": "Session",
-            "value": "Session",
-            "description": "Consumption is partitioned by the Foundry session ID."
-          },
-          {
-            "name": "Project",
-            "value": "Project",
-            "description": "Consumption is partitioned by the Foundry project resource ID."
-          },
-          {
-            "name": "Account",
-            "value": "Account",
-            "description": "Consumption is partitioned by the owning Cognitive Services account."
-          },
-          {
-            "name": "Custom",
-            "value": "Custom",
-            "description": "Legacy read-only dimension using `CostControlDimension.Attribute`.\nNew Custom counter authoring is reserved for future support."
-          }
-        ]
-      }
-    },
-    "CostControlListResult": {
-      "type": "object",
-      "description": "A page of cost controls.",
-      "properties": {
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link used to get the next page of cost controls."
-        },
-        "value": {
-          "type": "array",
-          "description": "The cost controls in this page.",
-          "items": {
-            "$ref": "#/definitions/CostControl"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "CostControlMatch": {
-      "type": "object",
-      "description": "Gets or sets optional match arrays keyed by `agentResourceIds`, `identityObjectIds`,\n`sessionIds`, or `projectIds`. Each array contains 1 to 20 non-empty values.\nAgent resource IDs use /subscriptions/{subscription_guid}/accounts/{account-name}/project/{project-name}/agent/{agent_name}.\nLegacy dotted identity, session, and project keys remain accepted, but cannot be combined with their canonical key.",
-      "properties": {
-        "agentResourceIds": {
-          "type": "array",
-          "description": "Agent resource IDs use /subscriptions/{subscription_guid}/accounts/{account-name}/project/{project-name}/agent/{agent_name}.",
-          "minItems": 1,
-          "maxItems": 20,
-          "items": {
-            "$ref": "#/definitions/CostControlMatchValue"
-          }
-        },
-        "identityObjectIds": {
-          "type": "array",
-          "description": "The authenticated principal object IDs to match.",
-          "minItems": 1,
-          "maxItems": 20,
-          "items": {
-            "$ref": "#/definitions/CostControlMatchValue"
-          }
-        },
-        "sessionIds": {
-          "type": "array",
-          "description": "The Foundry session IDs to match.",
-          "minItems": 1,
-          "maxItems": 20,
-          "items": {
-            "$ref": "#/definitions/CostControlMatchValue"
-          }
-        },
-        "projectIds": {
-          "type": "array",
-          "description": "The Foundry project resource IDs to match.",
-          "minItems": 1,
-          "maxItems": 20,
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-            "x-ms-arm-id-details": {
-              "allowedResources": [
-                {
-                  "type": "Microsoft.CognitiveServices/accounts/projects"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    "CostControlMatchValue": {
-      "type": "string",
-      "description": "A non-empty value used to match a trusted request attribute.",
-      "minLength": 1
-    },
-    "CostControlPatch": {
-      "type": "object",
-      "description": "The request used to update a cost control.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/CostControlPatchProperties",
-          "description": "The cost control properties to update."
-        }
-      }
-    },
-    "CostControlPatchProperties": {
-      "type": "object",
-      "description": "The properties that can be changed on a cost control.",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "An optional human-readable name for the cost control. Set this property to null to clear it.",
-          "maxLength": 128,
-          "x-nullable": true
-        },
-        "rules": {
-          "type": "array",
-          "description": "The complete replacement set of cost control rules.",
-          "minItems": 1,
-          "maxItems": 50,
-          "items": {
-            "$ref": "#/definitions/CostControlRule"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
-    },
-    "CostControlPeriod": {
-      "type": "string",
-      "description": "Calendar-aligned UTC renewal periods, including legacy values retained for read compatibility.",
-      "enum": [
-        "Minute",
-        "Hour",
-        "Day",
-        "Week",
-        "Month",
-        "Year"
-      ],
-      "x-ms-enum": {
-        "name": "CostControlPeriod",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Minute",
-            "value": "Minute",
-            "description": "Legacy read-only period renewing at the start of the next UTC minute."
-          },
-          {
-            "name": "Hour",
-            "value": "Hour",
-            "description": "Legacy read-only period renewing at the start of the next UTC hour."
-          },
-          {
-            "name": "Day",
-            "value": "Day",
-            "description": "Renews daily at 00:00 UTC."
-          },
-          {
-            "name": "Week",
-            "value": "Week",
-            "description": "Renews Monday at 00:00 UTC."
-          },
-          {
-            "name": "Month",
-            "value": "Month",
-            "description": "Renews on the first day of each month at 00:00 UTC."
-          },
-          {
-            "name": "Year",
-            "value": "Year",
-            "description": "Legacy read-only period renewing January 1 at 00:00 UTC."
-          }
-        ]
-      }
-    },
-    "CostControlProperties": {
-      "type": "object",
-      "description": "The customer-authored settings of a cost control.",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "An optional human-readable name for the cost control.",
-          "maxLength": 128
-        },
-        "rules": {
-          "type": "array",
-          "description": "The rules enforced by the cost control.",
-          "minItems": 1,
-          "maxItems": 50,
-          "items": {
-            "$ref": "#/definitions/CostControlRule"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      },
-      "required": [
-        "rules"
-      ]
-    },
-    "CostControlRule": {
-      "type": "object",
-      "description": "A cost limit and the population to which it applies.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The stable rule identifier, unique within the cost control without regard to case.",
-          "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}$",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "counterKey": {
-          "$ref": "#/definitions/CostControlDimension",
-          "description": "Gets or sets the single built-in dimension used to partition consumption.\nCustom dimensions are retained only for legacy reads and metadata-only updates.\nLegacy singleton arrays are accepted on read; serialization always emits an object.\nTo track another field, create another rule."
-        },
-        "unit": {
-          "$ref": "#/definitions/CostControlUnit",
-          "description": "The unit used for the cost control amount and absolute thresholds."
-        },
-        "amount": {
-          "type": "number",
-          "format": "double",
-          "description": "The maximum consumption allowed by this rule, expressed in the selected unit."
-        },
-        "period": {
-          "$ref": "#/definitions/CostControlPeriod",
-          "description": "Gets or sets the calendar-aligned UTC renewal period. Authored rules support Day, Week, or Month.\nThis field is required for recurring rules and must be omitted for non-recurring rules.\nLegacy stored minute, hour, and year periods are preserved when reading definitions."
-        },
-        "recurring": {
-          "type": "boolean",
-          "description": "Whether the cost control renews. The default is true.",
-          "default": true
-        },
-        "match": {
-          "$ref": "#/definitions/CostControlMatch",
-          "description": "Gets or sets optional match arrays keyed by `agentResourceIds`, `identityObjectIds`,\n`sessionIds`, or `projectIds`. Each array contains 1 to 20 non-empty values.\nAgent resource IDs use /subscriptions/{subscription_guid}/accounts/{account-name}/project/{project-name}/agent/{agent_name}.\nLegacy dotted identity, session, and project keys remain accepted, but cannot be combined with their canonical key."
-        },
-        "thresholds": {
-          "type": "array",
-          "description": "Gets or sets optional thresholds. Omitted or empty thresholds track usage without explicit actions.\nAuthored thresholds must explicitly specify Alert or Block; Audit is retained for legacy reads.",
-          "maxItems": 10,
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/CostControlThreshold"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "name",
-        "counterKey",
-        "unit",
-        "amount"
-      ]
-    },
-    "CostControlThreshold": {
-      "type": "object",
-      "description": "An action evaluated when cost control consumption reaches a threshold.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/CostControlThresholdType",
-          "description": "How the threshold value is interpreted."
-        },
-        "value": {
-          "type": "number",
-          "format": "double",
-          "description": "Gets or sets the threshold value. Legacy Audit definitions retain their stored values;\nnew thresholds support only Alert or Block.",
-          "minimum": 0
-        },
-        "action": {
-          "$ref": "#/definitions/CostControlThresholdAction",
-          "description": "Gets or sets the threshold action. Authored thresholds must explicitly specify Alert or Block.\nLegacy stored definitions with omitted actions continue to read as Audit."
-        }
-      },
-      "required": [
-        "type",
-        "value",
-        "action"
-      ]
-    },
-    "CostControlThresholdAction": {
-      "type": "string",
-      "description": "The supported actions when a threshold is reached.",
-      "enum": [
-        "Audit",
-        "Alert",
-        "Block"
-      ],
-      "x-ms-enum": {
-        "name": "CostControlThresholdAction",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Audit",
-            "value": "Audit",
-            "description": "Legacy read-only action retained to deserialize existing definitions without changing their semantics."
-          },
-          {
-            "name": "Alert",
-            "value": "Alert",
-            "description": "Emits a customer-facing alert without blocking requests."
-          },
-          {
-            "name": "Block",
-            "value": "Block",
-            "description": "Blocks the request without emitting a customer-facing alert."
-          }
-        ]
-      }
-    },
-    "CostControlThresholdType": {
-      "type": "string",
-      "description": "The supported threshold value interpretations.",
-      "enum": [
-        "Percentage",
-        "Absolute"
-      ],
-      "x-ms-enum": {
-        "name": "CostControlThresholdType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Percentage",
-            "value": "Percentage",
-            "description": "The value is a percentage of the configured rule amount."
-          },
-          {
-            "name": "Absolute",
-            "value": "Absolute",
-            "description": "The value is expressed in the rule's unit."
-          }
-        ]
-      }
-    },
-    "CostControlUnit": {
-      "type": "string",
-      "description": "The supported unit for cost control amounts and thresholds.",
-      "enum": [
-        "Usd"
-      ],
-      "x-ms-enum": {
-        "name": "CostControlUnit",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Usd",
-            "value": "Usd",
-            "description": "Estimated cost in United States dollars."
-          }
-        ]
-      }
-    },
     "CreatedByType": {
       "type": "string",
       "description": "The type of identity that created the resource.",
@@ -17836,23 +17065,6 @@
         "routing": {
           "$ref": "#/definitions/DeploymentRouting",
           "description": "Routing configuration for the model-router deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, quality, cost) for routing across all supported models or the model subset."
-        },
-        "costControlIds": {
-          "type": "array",
-          "description": "The full resource IDs of cost controls directly attached to this deployment.\nAt the moment the service only supports a single cost control. This will be expanded in future API versions.",
-          "maxItems": 1,
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-            "x-ms-arm-id-details": {
-              "allowedResources": [
-                {
-                  "type": "Microsoft.CognitiveServices/accounts/costControls"
-                }
-              ]
-            }
-          }
         }
       }
     },
@@ -20715,6 +19927,11 @@
             "read",
             "create"
           ]
+        },
+        "toolControls": {
+          "$ref": "#/definitions/ToolControls",
+          "description": "The project-level tool access policy. Omitting this property in a PUT request clears the policy. In PATCH requests, omission preserves the policy and an explicit null clears it. Responses omit this property when no policy is configured.",
+          "x-nullable": true
         }
       }
     },
@@ -23807,6 +23024,249 @@
         ]
       }
     },
+    "ToolControlEntry": {
+      "type": "object",
+      "description": "Identifies a tool by its canonical type and optional MCP server URL or connector.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ToolControlType",
+          "description": "The canonical tool type. For type mcp, exactly one of serverUrl or connectorId must be specified. Other tool types must omit both properties."
+        },
+        "serverUrl": {
+          "type": "string",
+          "description": "The absolute HTTPS URL or URL pattern of an MCP server, stored as a string to support wildcards. The entire URL may contain at most one literal '*' across its hostname, path, query, and fragment. Supported patterns include https://*.contoso.com/mcp, https://contoso.com/mcp/*, https://contoso.com/mcp?tenant=*, and https://contoso.com/mcp#*. A hostname wildcard must be the leftmost label. The URL must not contain user information. Applies only to type mcp and cannot be specified together with connectorId."
+        },
+        "connectorId": {
+          "type": "string",
+          "description": "The opaque MCP connector catalog identifier, not an Azure resource ID. Applies only to type mcp and cannot be specified together with serverUrl."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ToolControlType": {
+      "type": "string",
+      "description": "The canonical tool type supported by Foundry agents. Additional tool types may be specified as strings.",
+      "enum": [
+        "a2a",
+        "azure_ai_search",
+        "azure_function",
+        "bing_grounding",
+        "browser_automation",
+        "capture_structured_outputs",
+        "openapi",
+        "function",
+        "file_search",
+        "computer_use_preview",
+        "web_search",
+        "mcp",
+        "code_interpreter",
+        "image_generation",
+        "local_shell",
+        "shell",
+        "custom",
+        "web_search_preview",
+        "apply_patch",
+        "a2a_preview",
+        "bing_custom_search_preview",
+        "browser_automation_preview",
+        "fabric_dataagent_preview",
+        "sharepoint_grounding_preview",
+        "memory_search_preview",
+        "work_iq_preview",
+        "fabric_iq_preview",
+        "toolbox_search_preview",
+        "web_iq_preview"
+      ],
+      "x-ms-enum": {
+        "name": "ToolControlType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "a2a",
+            "value": "a2a",
+            "description": "Agent-to-agent tool."
+          },
+          {
+            "name": "azure_ai_search",
+            "value": "azure_ai_search",
+            "description": "Azure AI Search tool."
+          },
+          {
+            "name": "azure_function",
+            "value": "azure_function",
+            "description": "Azure Function tool."
+          },
+          {
+            "name": "bing_grounding",
+            "value": "bing_grounding",
+            "description": "Grounding with Bing Search tool."
+          },
+          {
+            "name": "browser_automation",
+            "value": "browser_automation",
+            "description": "Browser automation tool."
+          },
+          {
+            "name": "capture_structured_outputs",
+            "value": "capture_structured_outputs",
+            "description": "Capture structured outputs tool."
+          },
+          {
+            "name": "openapi",
+            "value": "openapi",
+            "description": "OpenAPI tool."
+          },
+          {
+            "name": "function",
+            "value": "function",
+            "description": "Function tool."
+          },
+          {
+            "name": "file_search",
+            "value": "file_search",
+            "description": "File search tool."
+          },
+          {
+            "name": "computer_use_preview",
+            "value": "computer_use_preview",
+            "description": "Computer use tool."
+          },
+          {
+            "name": "web_search",
+            "value": "web_search",
+            "description": "Web search tool."
+          },
+          {
+            "name": "mcp",
+            "value": "mcp",
+            "description": "Model Context Protocol (MCP) tool."
+          },
+          {
+            "name": "code_interpreter",
+            "value": "code_interpreter",
+            "description": "Code interpreter tool."
+          },
+          {
+            "name": "image_generation",
+            "value": "image_generation",
+            "description": "Image generation tool."
+          },
+          {
+            "name": "local_shell",
+            "value": "local_shell",
+            "description": "Local shell tool."
+          },
+          {
+            "name": "shell",
+            "value": "shell",
+            "description": "Shell tool."
+          },
+          {
+            "name": "custom",
+            "value": "custom",
+            "description": "Custom tool."
+          },
+          {
+            "name": "web_search_preview",
+            "value": "web_search_preview",
+            "description": "Web search preview tool."
+          },
+          {
+            "name": "apply_patch",
+            "value": "apply_patch",
+            "description": "Apply patch tool."
+          },
+          {
+            "name": "a2a_preview",
+            "value": "a2a_preview",
+            "description": "Agent-to-agent preview tool."
+          },
+          {
+            "name": "bing_custom_search_preview",
+            "value": "bing_custom_search_preview",
+            "description": "Grounding with Bing Custom Search preview tool."
+          },
+          {
+            "name": "browser_automation_preview",
+            "value": "browser_automation_preview",
+            "description": "Browser automation preview tool."
+          },
+          {
+            "name": "fabric_dataagent_preview",
+            "value": "fabric_dataagent_preview",
+            "description": "Fabric data agent preview tool."
+          },
+          {
+            "name": "sharepoint_grounding_preview",
+            "value": "sharepoint_grounding_preview",
+            "description": "SharePoint grounding preview tool."
+          },
+          {
+            "name": "memory_search_preview",
+            "value": "memory_search_preview",
+            "description": "Memory search preview tool."
+          },
+          {
+            "name": "work_iq_preview",
+            "value": "work_iq_preview",
+            "description": "Work IQ preview tool."
+          },
+          {
+            "name": "fabric_iq_preview",
+            "value": "fabric_iq_preview",
+            "description": "Fabric IQ preview tool."
+          },
+          {
+            "name": "toolbox_search_preview",
+            "value": "toolbox_search_preview",
+            "description": "Toolbox search preview tool."
+          },
+          {
+            "name": "web_iq_preview",
+            "value": "web_iq_preview",
+            "description": "Web IQ preview tool."
+          }
+        ]
+      }
+    },
+    "ToolControls": {
+      "type": "object",
+      "description": "Defines the default and per-tool access policy for a Foundry project.",
+      "properties": {
+        "defaultAction": {
+          "$ref": "#/definitions/ToolControlsDefaultAction",
+          "description": "The action applied when a tool is not listed explicitly. Only Deny is currently supported."
+        },
+        "allowedTools": {
+          "type": "array",
+          "description": "The tools explicitly allowed by the policy. Omission or an empty array specifies no explicitly allowed tools.",
+          "items": {
+            "$ref": "#/definitions/ToolControlEntry"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ToolControlsDefaultAction": {
+      "type": "string",
+      "description": "Specifies the default action for a tool that is not listed explicitly.",
+      "enum": [
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "ToolControlsDefaultAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "Tools that are not listed explicitly are denied."
+          }
+        ]
+      }
+    },
     "TrafficRoutingProtocol": {
       "type": "string",
       "description": "Traffic routing protocol, used to distribute an application's inbound traffic to its deployments.",
@@ -23849,6 +23309,64 @@
           "format": "int32",
           "description": "Gets or sets the percentage of traffic allocated to this instance."
         }
+      }
+    },
+    "TrustedCertificateSource": {
+      "type": "object",
+      "description": "An Azure resource containing the CA certificate bundles trusted by supported features in the account.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/TrustedCertificateSourceType",
+          "description": "Type of resource containing the certificate bundles. Currently only AzureKeyVault is supported."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure resource ID of the Key Vault containing the referenced secrets. The account identity must have permission to read these secrets.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
+        },
+        "certificateBundleReferences": {
+          "type": "array",
+          "description": "References to secrets containing one or more PEM-encoded CA certificates. Each secret name and version pair must be unique within the source, using case-insensitive comparison. The same secret name can be referenced with different versions.",
+          "minItems": 1,
+          "maxItems": 25,
+          "items": {
+            "$ref": "#/definitions/CertificateBundleReference"
+          },
+          "x-ms-identifiers": [
+            "secretName",
+            "secretVersion"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "resourceId",
+        "certificateBundleReferences"
+      ]
+    },
+    "TrustedCertificateSourceType": {
+      "type": "string",
+      "description": "Type of Azure resource containing trusted CA certificate bundles.",
+      "enum": [
+        "AzureKeyVault"
+      ],
+      "x-ms-enum": {
+        "name": "TrustedCertificateSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureKeyVault",
+            "value": "AzureKeyVault",
+            "description": "Azure Key Vault secrets containing CA certificates or certificate bundles."
+          }
+        ]
       }
     },
     "UnitType": {
@@ -24396,33 +23914,6 @@
     }
   },
   "parameters": {
-    "CostControlCreateOrUpdateHeaders.ifMatch": {
-      "name": "If-Match",
-      "in": "header",
-      "description": "Proceeds only when the current entity tag matches this value.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "ifMatch"
-    },
-    "CostControlCreateOrUpdateHeaders.ifNoneMatch": {
-      "name": "If-None-Match",
-      "in": "header",
-      "description": "Proceeds only when the current entity tag does not match this value.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "ifNoneMatch"
-    },
-    "CostControlIfMatchHeader": {
-      "name": "If-Match",
-      "in": "header",
-      "description": "Proceeds only when the current entity tag matches this value.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "ifMatch"
-    },
     "RaiBindingListParameters": {
       "name": "$top",
       "in": "query",

@@ -9,6 +9,7 @@ const ALLOWED_AUTHORS = new Set(
   [
     "azure-sdk",
     "azure-sdk-automation[bot]",
+    "dependabot[bot]",
 
     "AkhilaIlla",
     "Bubbles4096",
@@ -33,17 +34,6 @@ const ALLOWED_AUTHORS = new Set(
     "xirzec",
   ].map((author) => author.toLowerCase()),
 );
-const PROTECTED_PATHS = [
-  ".gitignore",
-  "cspell.json",
-  "cspell.yaml",
-  "package.json",
-  "pnpm-lock.yaml",
-  "pnpm-workspace.yaml",
-  ".github/**",
-  ".vscode/**",
-  "eng/**",
-];
 const EXCLUDED_PATHS = [".github/CODEOWNERS", ".github/skills/*", ".github/skills/*/**"];
 const SYNCED_PATHS = [
   ".github/skills/azsdk-common-*",
@@ -95,7 +85,7 @@ export async function checkProtectedFiles({
   const protectedFiles = changedFiles.filter(
     (file) =>
       matchesAny(file, SYNCED_PATHS) ||
-      (matchesAny(file, PROTECTED_PATHS) && !matchesAny(file, EXCLUDED_PATHS)),
+      (!file.startsWith("specification/") && !matchesAny(file, EXCLUDED_PATHS)),
   );
 
   if (protectedFiles.length === 0) {
