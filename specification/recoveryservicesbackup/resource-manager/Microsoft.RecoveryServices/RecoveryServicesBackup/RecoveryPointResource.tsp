@@ -86,6 +86,7 @@ interface RecoveryPoints {
   @added(Versions.v2026_08_31_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_10_31_preview)
+  @removed(Versions.v2026_11_01)
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     RecoveryPointResource,
@@ -136,6 +137,7 @@ interface ItemLevelRecoveryConnections {
    * Item Recovery must complete successfully before this operation is called.
    */
   @added(Versions.v2026_10_31_preview)
+  @removed(Versions.v2026_11_01)
   @action("browse")
   browse is ArmResourceActionSync<
     RecoveryPointResource,

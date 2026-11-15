@@ -1418,6 +1418,7 @@ union ContainerType {
   @added(Versions.v2026_08_31_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_10_31_preview)
+  @removed(Versions.v2026_11_01)
   HanaScaleoutContainer: "HanaScaleoutContainer",
 }
 
@@ -3409,6 +3410,7 @@ model UnlockDeleteResponse {
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 model UpdateRecoveryPointRequest {
   /**
    * Resource properties.
@@ -3428,6 +3430,7 @@ model UpdateRecoveryPointRequest {
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 model PatchRecoveryPointInput {
   /**
    * Properties of Recovery Point
@@ -3447,6 +3450,7 @@ model PatchRecoveryPointInput {
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 model PatchRecoveryPointPropertiesInput {
   /**
    * Expiry time of Recovery Point in UTC.
@@ -6940,6 +6944,7 @@ model IaasVMRestoreRequest extends RestoreRequest {
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 model BulkRestoreRequestBase extends RestoreRequest {
   /**
    * Type of this recovery.
@@ -6961,6 +6966,7 @@ model BulkRestoreRequestBase extends RestoreRequest {
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 model IaaSVMBulkRestoreRequest extends BulkRestoreRequestBase {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -7069,6 +7075,7 @@ model IaaSVMBulkRestoreRequest extends BulkRestoreRequestBase {
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 model ProtectedItemRestoreDetailsBase {
   /**
    * ID of the backup copy to be recovered.
@@ -7116,6 +7123,7 @@ model ProtectedItemRestoreDetailsBase {
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 model FetchRPForBulkRestoreRequest {
   /**
    * Protected item IDs for which recovery points should be fetched.
@@ -7133,6 +7141,7 @@ model FetchRPForBulkRestoreRequest {
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 model BulkRestoreRecoveryPointsResponse {
   /**
    * Map of the source protected item's ARM ID to its discovered recovery point.
@@ -7997,6 +8006,7 @@ model AzureFileShareProvisionILRRequest extends ILRRequest {
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "ILR is an established acronym in the existing public contract."
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 model AzureFileShareProvisionVaultILRRequest extends ILRRequest {
   /**
    * Identifies a vaulted Azure Files Instant Item Recovery request.
@@ -8008,6 +8018,7 @@ model AzureFileShareProvisionVaultILRRequest extends ILRRequest {
  * Request body for browsing a vaulted Azure Files recovery point.
  */
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 model AzureFileShareBrowseRecoveryPointRequestResource {
   /**
    * Azure Files recovery point browse parameters.
@@ -8019,6 +8030,7 @@ model AzureFileShareBrowseRecoveryPointRequestResource {
  * Parameters for browsing a vaulted Azure Files recovery point.
  */
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 model AzureFileShareBrowseRecoveryPointRequest {
   /**
    * Identifies an Azure Files recovery point browse request. If omitted, the service uses
@@ -8053,6 +8065,7 @@ model AzureFileShareBrowseRecoveryPointRequest {
  * Response body for browsing a vaulted Azure Files recovery point.
  */
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 model AzureFileShareBrowseRecoveryPointResponseResource {
   /**
    * One page of Azure Files recovery point browse results.
@@ -8064,6 +8077,7 @@ model AzureFileShareBrowseRecoveryPointResponseResource {
  * One page of items returned while browsing a vaulted Azure Files recovery point.
  */
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 model AzureFileShareBrowseRecoveryPointResponse {
   /**
    * Identifies an Azure Files recovery point browse response.
@@ -8087,6 +8101,7 @@ model AzureFileShareBrowseRecoveryPointResponse {
  * A file or directory returned while browsing a vaulted Azure Files recovery point.
  */
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 model AzureFileShareBrowseItem {
   /**
    * Base name of the file or directory.
@@ -8108,6 +8123,7 @@ model AzureFileShareBrowseItem {
  * Type of an item returned while browsing a vaulted Azure Files recovery point.
  */
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 union AzureFileShareBrowseItemType {
   string,
 
@@ -8756,6 +8772,7 @@ model AzureVmWorkloadSAPHanaHSRProtectableItem extends WorkloadProtectableItem {
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 model AzureVmWorkloadSAPHanaScaleoutProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -9504,6 +9521,7 @@ model OperationStatusProvisionILRExtendedInfo
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "ILR is an established acronym in the existing public contract."
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 model OperationStatusProvisionVaultILRExtendedInfo
   extends OperationStatusExtendedInfo {
   /**
@@ -9813,6 +9831,7 @@ model ClientDiscoveryResponse {
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 union CrossTenantProvisioningState {
   string,
   ResourceProvisioningState,
@@ -9841,6 +9860,7 @@ union CrossTenantProvisioningState {
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 model CrossTenantVaultMappingProperties {
   /**
    * ARM resource ID of the source vault.
@@ -9892,6 +9912,7 @@ model CrossTenantVaultMappingProperties {
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 model RemoveCrossTenantVaultMappingRequest {
   /**
    * ResourceGuardOperationRequests on which LAC check will be performed.
@@ -9909,6 +9930,7 @@ model RemoveCrossTenantVaultMappingRequest {
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 union VaultMappingState {
   string,
 
@@ -9931,6 +9953,7 @@ union VaultMappingState {
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 model CrossTenantVaultMappingStatusResponse {
   /**
    * Mapping name (if mapped).
@@ -9954,6 +9977,7 @@ model CrossTenantVaultMappingStatusResponse {
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 model VaultCredentialCertificateRequest {
   /**
    * Options for certificate generation.
@@ -9972,6 +9996,7 @@ model VaultCredentialCertificateRequest {
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 model VaultCredentialCertificateCreateOptions {
   /**
    * Validity period of the generated certificate in hours.
@@ -9991,6 +10016,7 @@ model VaultCredentialCertificateCreateOptions {
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 model VaultCredentialCertificateResponse
   is Azure.ResourceManager.ProxyResource<VaultCredentialCertificateProperties> {
   /**
@@ -10014,6 +10040,7 @@ model VaultCredentialCertificateResponse
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 union AuthType {
   string,
 
@@ -10032,6 +10059,7 @@ union AuthType {
 @added(Versions.v2026_08_31_preview)
 @removed(Versions.v2026_10_01)
 @added(Versions.v2026_10_31_preview)
+@removed(Versions.v2026_11_01)
 model VaultCredentialCertificateProperties {
   /**
    * Authentication type.
