@@ -10171,7 +10171,7 @@ model ExportJobDetails extends JobDetails {
   /**
    * The sas token to access blob.
    */
-  @typeChangedFrom(Versions.v2026_10_31_preview, string)
+  @typeChangedFrom(Versions.v2026_11_01, string)
   sasToken?: SecretString;
 
   /**

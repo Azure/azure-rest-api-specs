@@ -15721,7 +15721,7 @@
           "description": "BlobUri of the exported jobs."
         },
         "sasToken": {
-          "$ref": "#/definitions/SecretString",
+          "type": "string",
           "description": "The sas token to access blob."
         }
       },
@@ -27464,12 +27464,6 @@
         }
       ],
       "x-ms-discriminator-value": "ScriptActionTaskDetails"
-    },
-    "SecretString": {
-      "type": "string",
-      "format": "password",
-      "description": "A string value that contains secret material.",
-      "x-ms-secret": true
     },
     "SecurityConfiguration": {
       "type": "string",
