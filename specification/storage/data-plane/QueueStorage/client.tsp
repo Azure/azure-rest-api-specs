@@ -401,6 +401,9 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
   "java"
 );
 @@clientName(KeyInfo.delegatedUserTid, "delegatedUserTenantId", "java");
+// The service expects whole-second UTC timestamps, and an empty Start element when no start time is given.
+@@alternateType(KeyInfo.start, string, "java");
+@@alternateType(KeyInfo.expiry, string, "java");
 
 @@clientName(Storage.Queues, "AzureQueueStorage", "java");
 
