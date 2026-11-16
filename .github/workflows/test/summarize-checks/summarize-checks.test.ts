@@ -281,7 +281,7 @@ describe("ARM review label handoff", () => {
       { state: "closed" },
       { head: { sha: "a".repeat(40) } },
       { draft: true },
-      { base: { ref: "feature/retargeted" } },
+      { base: { ref: "feature/new-target" } },
       { labels: [{ name: "ARMReview" }, { name: "ARMManualSignoffRequired" }] },
     ])("does not apply labels when the PR changes during evaluation: %j", async (change) => {
       const { github, core, run } = createSummary();
