@@ -257,7 +257,7 @@ model JavaScriptCloudAccountIdentityUpdate {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Managed identity PATCH uses a dictionary keyed by user-assigned identity resource IDs."
   @doc("The identities assigned to this resource by the user.")
-  userAssignedIdentities?: Record<CloudAccountUserAssignedIdentity>;
+  userAssignedIdentities?: Record<CloudAccountUserAssignedIdentity | null>;
 }
 
 @@clientName(
