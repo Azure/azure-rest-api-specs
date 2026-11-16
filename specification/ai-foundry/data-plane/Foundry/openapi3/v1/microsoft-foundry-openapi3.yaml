@@ -12451,9 +12451,7 @@ paths:
           content:
             application/json:
               schema:
-                anyOf:
-                  - $ref: '#/components/schemas/KnowledgeSourceStatus'
-                  - type: 'null'
+                $ref: '#/components/schemas/KnowledgeSourceStatusResult'
         4XX:
           description: Client error
           content:
@@ -55674,6 +55672,14 @@ components:
           description: Source-specific synchronization statistics.
       additionalProperties: {}
       description: Existing Search synchronization diagnostics, not a per-upload readiness guarantee.
+      x-ms-foundry-meta:
+        required_previews:
+          - Knowledge=V1Preview
+    KnowledgeSourceStatusResult:
+      anyOf:
+        - $ref: '#/components/schemas/KnowledgeSourceStatus'
+        - type: 'null'
+      description: Existing synchronization diagnostics, including a null body when no status is available.
       x-ms-foundry-meta:
         required_previews:
           - Knowledge=V1Preview

@@ -732,6 +732,9 @@ model TimeZoneType {}
 
 @@alternateType(AgentInsightHighlightedTrace.total_tokens, int64, "java");
 
+// Java model references already support null; its emitter cannot generate a nullable response wrapper.
+@@alternateType(KnowledgeSourceStatusResult, KnowledgeSourceStatus, "java");
+
 // --------------------------------------------------------------------------------
 // Relocate EvaluatorGenerationJobs, EvaluationSuites, and
 // EvaluationSuiteGenerationJobs onto the Evaluators sub-client

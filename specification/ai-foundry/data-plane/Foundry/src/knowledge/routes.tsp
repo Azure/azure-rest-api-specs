@@ -7,6 +7,17 @@ using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
+/** Existing synchronization diagnostics, including a null body when no status is available. */
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "The existing nullable status response is not a polymorphic model hierarchy. Preserve null without enabling experimental union-extends project-wide."
+@extension("x-ms-foundry-meta", KnowledgeRequiredPreviews)
+union KnowledgeSourceStatusResult {
+  /** Existing source synchronization diagnostics. */
+  status: KnowledgeSourceStatus,
+
+  /** No synchronization diagnostics are available. */
+  unavailable: null,
+}
+
 /** Author reusable knowledge-base definitions in the current Foundry project. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Preserve the existing managed Knowledge routes and Search-compatible paging contract."
 @tag("Knowledge Bases")
@@ -192,7 +203,7 @@ interface KnowledgeSources {
     },
     {
       @statusCode statusCode: 200;
-      @body status: KnowledgeSourceStatus | null;
+      @body status: KnowledgeSourceStatusResult;
     }
   >;
 
