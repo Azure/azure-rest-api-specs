@@ -1,24 +1,33 @@
 # Hosted conversation-engine session allocation
 
-`VoiceHostedAgentConversationEngine` supports two optional, non-null boolean
-properties under `conversation_engine.type: hosted_agent`:
+`VoiceHostedAgentConversationEngine` supports two optional, nullable policy
+objects under `conversation_engine.type: hosted_agent`:
 
-- `hosted_session_warmup` permits eligible calls to use service-managed prewarmed
-  Hosted Sessions. It does not enable session sharing, Agent startup model warmup,
-  or language-model inference warmup.
-- `hosted_session_multiplexing` permits independent calls to share a compatible
-  Hosted Session. The application must support concurrent connections and isolate
-  mutable state per call.
+- `session_warmup` permits eligible calls to use service-managed prewarmed Hosted
+  Sessions. It does not enable multiplexing, Agent startup model warmup, or
+  language-model inference warmup.
+- `session_multiplexing` permits independent calls to share a compatible Hosted
+  Session. The application must support concurrent connections and isolate mutable
+  state per call.
 
-Both default to `false`. Omission and explicit `false` have the same effective
-behavior but remain distinct through definition/version round-trips. The options
-are independent and can each be enabled or disabled.
+For each property, omission or `null` disables the optimization;
+`{"type": "auto"}` permits the service-managed optimization using existing
+service and authorized target settings. The policies default to `null` and are
+independent. Omission, explicit `null`, and policy objects remain distinct through
+definition/version round-trips.
+
+The named policy models have a required `type` property whose only supported value
+is `auto`. Empty objects, booleans, bare strings (including `"auto"`), unsupported
+types, and additional object properties are rejected. Pool size and maximum
+concurrent calls are not configurable through these objects in this revision.
+The object shape leaves room for future reviewed settings and policy types; it
+does not make unspecified properties valid now.
 
 Neither property belongs on the Voice Agent root, the generic conversation-engine
 base, a model-backed/native Live definition, a Hosted Agent manifest/protocol
 record, or a Bridge message. The service rejects misplaced root properties even
-when `false`, and rejects explicit `null` or non-boolean values without coercion.
-The private runtime feature `hosted_session_shared` is not a public alias.
+when `null`. The earlier draft's boolean property names are not public aliases;
+private runtime features are not public configuration properties.
 
 These are versioned definition settings selected before session acquisition.
 Neither connection-time session overrides nor `session.update` may change them.
@@ -36,8 +45,12 @@ Request and response examples preserve explicit values and omission respectively
 ## Runtime and rollout dependencies
 
 This specification does not deploy Vienna, Voice Live, SDKs, or infrastructure.
-The selected options require matching deployed Vienna and Voice Live support;
-schema recognition alone does not establish runtime support. Matching nested-field
+The revised names and nullable-object shape require matching TypeSpec-derived
+SDKs, Vienna serialization/materialization and policy-to-feature mapping, and
+Voice Live definition recognition and independent allocation support. Earlier
+boolean implementations do not establish support for this contract. Deploy and
+verify compatible receivers before sending revised definitions; schema
+recognition alone does not establish runtime support. Matching nested-field
 recognition also avoids advisory definition-validation errors.
 
 Before enabling either optimization, verify existing target eligibility,
