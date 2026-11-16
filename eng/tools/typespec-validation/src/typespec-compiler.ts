@@ -13,7 +13,6 @@ import { promisify } from "node:util";
 import { relative, resolve } from "pathe";
 import { simpleGit } from "simple-git";
 import { filePath, indent, lines, verbatim } from "./diagnostic-content.ts";
-import { getFormatScope } from "./format-scope.ts";
 import { failure, warning, type RuleResult } from "./rule-result.ts";
 
 export interface CompileResult extends RuleResult {
@@ -128,8 +127,8 @@ export async function formatTypeSpec(folder: string, fix = false): Promise<RuleR
       options: { exclude?: string[] },
     ) => Promise<{ errored: [string, Diagnostic][]; needsFormat: string[] }>;
   };
-  const { patterns, exclude } = getFormatScope(folder);
-  const options = { exclude };
+  const patterns = [resolve(folder, "../**/*.tsp"), resolve(folder, "tspconfig.yaml")];
+  const options = { exclude: [resolve(folder, "../**/node_modules")] };
   const { errored, needsFormat = [] } = fix
     ? { ...(await formatFiles(patterns, options)), needsFormat: [] }
     : await checkFilesFormat(patterns, options);
