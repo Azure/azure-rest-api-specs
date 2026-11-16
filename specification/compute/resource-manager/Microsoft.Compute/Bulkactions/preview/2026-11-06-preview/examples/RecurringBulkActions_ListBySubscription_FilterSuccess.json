@@ -1,0 +1,43 @@
+{
+  "title": "List recurring bulk actions in a subscription filtered by location",
+  "description": "Uses $filter to return only the recurring bulk actions located in eastus.",
+  "operationId": "RecurringBulkActions_ListBySubscription",
+  "parameters": {
+    "api-version": "2026-11-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "$filter": "location eq 'eastus'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "resourceType": "VirtualMachine",
+              "actionType": "Start",
+              "startTime": "2026-09-15T07:00:00-07:00",
+              "schedule": {
+                "scheduledTime": "07:00:00",
+                "timeZone": "America/Los_Angeles",
+                "requestedWeekDays": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday"
+                ]
+              },
+              "notificationSettings": [],
+              "disabled": false,
+              "provisioningState": "Succeeded"
+            },
+            "location": "eastus",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/web-rg/providers/Microsoft.Compute/scheduledActions/weekday-start",
+            "name": "weekday-start",
+            "type": "microsoft.compute/scheduledActions"
+          }
+        ]
+      }
+    }
+  }
+}
