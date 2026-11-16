@@ -46,6 +46,29 @@ function segmentedChild(segments: { stream: "stdout" | "stderr"; text: string }[
   return child;
 }
 
+/** A `--serve` worker that fails projects whose folder ends with "bad" and exits on disconnect. */
+function servingChild() {
+  const child = new ChildProcess();
+  const send = vi.fn(({ folder }: { folder: string }) => {
+    queueMicrotask(() =>
+      child.emit("message", {
+        success: !folder.endsWith("bad"),
+        segments: [{ stream: "stdout", text: `checked ${folder}` }],
+      }),
+    );
+    return true;
+  });
+  const disconnect = vi.fn(() => queueMicrotask(() => child.emit("exit", 0, null)));
+  Object.assign(child, {
+    stdout: new PassThrough(),
+    stderr: new PassThrough(),
+    connected: true,
+    send,
+    disconnect,
+  });
+  return { child, send, disconnect };
+}
+
 let root: string;
 
 async function addProject(name: string, config = "tspconfig.yaml") {
@@ -704,4 +727,35 @@ it("rejects cleanup outside a Git repository before running validation", async (
   await addProject("a");
   await expect(runAll(root, { gitClean: true })).rejects.toThrow();
   expect(spawn).not.toHaveBeenCalled();
+});
+
+it("reuses each worker process for up to TSV_PROJECTS_PER_WORKER projects", async () => {
+  vi.stubEnv("TSV_PROJECTS_PER_WORKER", "2");
+  const children: ReturnType<typeof servingChild>[] = [];
+  vi.mocked(spawn).mockImplementation(() => {
+    const worker = servingChild();
+    children.push(worker);
+    return worker.child;
+  });
+  const a = await addProject("a");
+  const b = await addProject("b-bad");
+  const c = await addProject("c");
+
+  await expect(runAll(root, { concurrency: 1 })).resolves.toBe(false);
+
+  expect(spawn).toHaveBeenCalledTimes(2);
+  expect(vi.mocked(spawn).mock.calls[0][1]).toEqual([
+    expect.stringMatching(/[/\\]src[/\\]project-worker\.ts$/),
+    "--serve",
+  ]);
+  expect(children.map(({ send }) => send.mock.calls.map(([request]) => request))).toEqual([
+    [
+      { folder: a, context: { checkingAllSpecs: true } },
+      { folder: b, context: { checkingAllSpecs: true } },
+    ],
+    [{ folder: c, context: { checkingAllSpecs: true } }],
+  ]);
+  expect(children.every(({ disconnect }) => disconnect.mock.calls.length === 1)).toBe(true);
+  expect(console.log).toHaveBeenCalledWith(expect.stringContaining(`checked ${c}`));
+  expect(console.error).toHaveBeenCalledWith(expect.stringContaining("b-bad"));
 });
