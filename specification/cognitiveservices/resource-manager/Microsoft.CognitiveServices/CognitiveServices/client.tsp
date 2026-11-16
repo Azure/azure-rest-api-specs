@@ -1230,6 +1230,31 @@ op regenerateKeyCustom(
 // Prefix generic type names with service context (2026-05-15-preview)
 @@clientName(VmPriority, "CognitiveServicesVmPriority", "csharp");
 @@clientName(
+  DeploymentSizeCapacity,
+  "CognitiveServicesManagedComputeDeploymentSizeCapacity",
+  "csharp"
+);
+@@clientName(
+  CertificateBundleReference,
+  "CognitiveServicesCertificateBundleReference",
+  "csharp"
+);
+@@clientName(
+  TrustedCertificateSource,
+  "CognitiveServicesTrustedCertificateSource",
+  "csharp"
+);
+@@clientName(
+  TrustedCertificateSourceType,
+  "CognitiveServicesTrustedCertificateSourceType",
+  "csharp"
+);
+@@clientName(
+  ManagedComputeCapacities.list,
+  "GetCognitiveServicesManagedComputeCapacities",
+  "csharp"
+);
+@@clientName(
   ManagedComputeCapacity,
   "CognitiveServicesManagedComputeCapacity",
   "csharp"
