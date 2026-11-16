@@ -10,6 +10,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { inspect } from "node:util";
+import { firstArgumentValue, parseCliArguments } from "./cli.ts";
 import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.ts";
 import { groupSpecConfigPaths } from "./spec-helpers.ts";
 import {
@@ -22,7 +23,6 @@ import {
   execAsync,
   findReadmeFiles,
   getAllTypeSpecPaths,
-  getArgumentValue,
   objectToMap,
   type SpecConfigs,
 } from "./utils.ts";
@@ -75,23 +75,22 @@ export function parseArguments(): SpecGenSdkCmdInput {
   const __filename: string = fileURLToPath(import.meta.url);
   const __dirname: string = path.dirname(__filename);
 
-  // Get the arguments passed to the script
-  const args: string[] = process.argv.slice(2);
+  const args = parseCliArguments();
   const localSpecRepoPath: string = path.resolve(
-    getArgumentValue(args, "--scp", path.join(__dirname, "..")),
+    firstArgumentValue(args.scp) || path.join(__dirname, ".."),
   );
-  const sdkRepoName: string = getArgumentValue(args, "--lang", "azure-sdk-for-net");
+  const sdkRepoName: string = firstArgumentValue(args.lang) || "azure-sdk-for-net";
   const localSdkRepoPath: string = path.resolve(
-    getArgumentValue(args, "--sdp", path.join(localSpecRepoPath, "..", sdkRepoName)),
+    firstArgumentValue(args.sdp) || path.join(localSpecRepoPath, "..", sdkRepoName),
   );
   const workingFolder: string = path.resolve(
-    getArgumentValue(args, "--wf", path.join(localSpecRepoPath, "..")),
+    firstArgumentValue(args.wf) || path.join(localSpecRepoPath, ".."),
   );
 
   // Set runMode to "release" by default
   let runMode = "release";
-  const batchType: string = getArgumentValue(args, "--batch-type", "");
-  const pullRequestNumber: string = getArgumentValue(args, "--pr-number", "");
+  const batchType = firstArgumentValue(args["batch-type"]);
+  const pullRequestNumber = firstArgumentValue(args["pr-number"]);
   if (batchType) {
     runMode = "batch";
   } else if (pullRequestNumber) {
@@ -105,16 +104,16 @@ export function parseArguments(): SpecGenSdkCmdInput {
     sdkRepoName,
     sdkLanguage: SdkNameSchema.parse(sdkRepoName.replace("-pr", "")),
     runMode,
-    tspConfigPath: getArgumentValue(args, "--tsp-config-relative-path", ""),
-    readmePath: getArgumentValue(args, "--readme-relative-path", ""),
-    prNumber: getArgumentValue(args, "--pr-number", ""),
-    apiVersion: getArgumentValue(args, "--api-version", ""),
-    sdkReleaseType: getArgumentValue(args, "--sdk-release-type", ""),
-    typespecEmitter: getArgumentValue(args, "--typespec-emitter", "") || undefined,
-    specCommitSha: getArgumentValue(args, "--commit", "HEAD"),
-    specRepoHttpsUrl: getArgumentValue(args, "--spec-repo-url", ""),
-    headRepoHttpsUrl: getArgumentValue(args, "--head-repo-url", ""),
-    headBranch: getArgumentValue(args, "--head-branch", ""),
+    tspConfigPath: firstArgumentValue(args["tsp-config-relative-path"]),
+    readmePath: firstArgumentValue(args["readme-relative-path"]),
+    prNumber: pullRequestNumber,
+    apiVersion: firstArgumentValue(args["api-version"]),
+    sdkReleaseType: firstArgumentValue(args["sdk-release-type"]),
+    typespecEmitter: firstArgumentValue(args["typespec-emitter"]) || undefined,
+    specCommitSha: firstArgumentValue(args.commit) || "HEAD",
+    specRepoHttpsUrl: firstArgumentValue(args["spec-repo-url"]),
+    headRepoHttpsUrl: firstArgumentValue(args["head-repo-url"]),
+    headBranch: firstArgumentValue(args["head-branch"]),
   };
 }
 

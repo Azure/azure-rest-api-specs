@@ -7,7 +7,6 @@ import {
   checkPrTargetsProductionBranch,
   convertRawErrorToUnifiedMsg,
   cutoffMsg,
-  getArgumentValue,
   getGithubStyleFilePath,
   getRelativeSwaggerPathToRepo,
   getVersionFromInputFile,
@@ -347,26 +346,6 @@ describe("common-utils", () => {
       await expect(getVersionFromInputFile(filePath)).rejects.toThrow(
         "Failed to read version from file:some/custom/path/spec.json",
       );
-    });
-  });
-
-  describe("getArgumentValue", () => {
-    it("should return argument value when flag exists", () => {
-      const args = ["--input", "test.json", "--output", "result.json"];
-      const result = getArgumentValue(args, "--input", "default.json");
-      expect(result).toBe("test.json");
-    });
-
-    it("should return default value when flag not found", () => {
-      const args = ["--output", "result.json"];
-      const result = getArgumentValue(args, "--input", "default.json");
-      expect(result).toBe("default.json");
-    });
-
-    it("should return default value when flag is last argument", () => {
-      const args = ["--output", "result.json", "--input"];
-      const result = getArgumentValue(args, "--input", "default.json");
-      expect(result).toBe("default.json");
     });
   });
 

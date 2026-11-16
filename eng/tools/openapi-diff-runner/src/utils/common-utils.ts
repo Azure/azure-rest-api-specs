@@ -130,13 +130,6 @@ export async function getVersionFromInputFile(
   return version;
 }
 
-export function getArgumentValue(args: string[], flag: string, defaultValue: string): string {
-  const index = args.indexOf(flag);
-  return index !== -1 && index + 1 < args.length && args[index + 1]
-    ? args[index + 1]
-    : defaultValue;
-}
-
 /**
  * Truncates the input message to a specified maximum size.
  * @param msg The message to be truncated.

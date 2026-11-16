@@ -1,9 +1,9 @@
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
+import { parseArgsWithHelp, type CliArgsConfig } from "@azure-tools/specs-shared/cli";
 import { existsSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import { exit } from "node:process";
 import { fileURLToPath } from "node:url";
-import { parseArgs, type ParseArgsConfig } from "node:util";
 import {
   buildPrInfo,
   createContextFromParsedArgs,
@@ -16,73 +16,81 @@ import { type BreakingChangesCheckType } from "./types/breaking-change.ts";
 const __filename: string = fileURLToPath(import.meta.url);
 const __dirname: string = path.dirname(__filename);
 
-/**
- * Parse command line arguments using Node.js parseArgs
- */
-function parseCliArguments(): ParsedCliArguments {
-  const options: ParseArgsConfig = {
-    options: {
-      "spec-repo-path": {
-        type: "string",
-        short: "p",
-        default: path.join(__dirname, ".."),
-      },
-      "target-repo": {
-        type: "string",
-        short: "r",
-        default: "azure/azure-rest-api-specs",
-      },
-      "source-repo": {
-        type: "string",
-        short: "s",
-        default: "azure/azure-rest-api-specs",
-      },
-      "pr-number": {
-        type: "string",
-        short: "n",
-        default: "",
-      },
-      "run-type": {
-        type: "string",
-        short: "t",
-        default: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
-      },
-      "base-branch": {
-        type: "string",
-        short: "b",
-        default: "main",
-      },
-      "head-commit": {
-        type: "string",
-        short: "c",
-        default: "HEAD",
-      },
-      "pr-source-branch": {
-        type: "string",
-        default: "",
-      },
-      "pr-target-branch": {
-        type: "string",
-        default: "",
-      },
-      help: {
-        type: "boolean",
-        short: "h",
-        default: false,
-      },
+const cliConfig = {
+  options: {
+    "spec-repo-path": {
+      type: "string",
+      short: "p",
+      default: path.join(__dirname, ".."),
+      description: "Local spec repository path (default: runner directory).",
     },
-    allowPositionals: false,
-    strict: true,
-  };
+    "target-repo": {
+      type: "string",
+      short: "r",
+      default: "azure/azure-rest-api-specs",
+      description: "Target repository (default: azure/azure-rest-api-specs).",
+    },
+    "source-repo": {
+      type: "string",
+      short: "s",
+      default: "azure/azure-rest-api-specs",
+      description: "Source repository (default: azure/azure-rest-api-specs).",
+    },
+    "pr-number": {
+      type: "string",
+      short: "n",
+      default: "",
+      description: "Pull request number (required).",
+    },
+    "run-type": {
+      type: "string",
+      short: "t",
+      default: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
+      description: "Run type: SameVersion or CrossVersion (default: SameVersion).",
+    },
+    "base-branch": {
+      type: "string",
+      short: "b",
+      default: "main",
+      description: "Base branch for comparison (default: main).",
+    },
+    "head-commit": {
+      type: "string",
+      short: "c",
+      default: "HEAD",
+      description: "Head commit SHA (default: HEAD).",
+    },
+    "pr-source-branch": {
+      type: "string",
+      default: "",
+      description: "PR source branch.",
+    },
+    "pr-target-branch": {
+      type: "string",
+      default: "",
+      description: "PR target branch.",
+    },
+  },
+  allowPositionals: false,
+  strict: true,
+  help: {
+    command: "openapi-diff-runner",
+    title: "OpenAPI Diff Runner - Breaking Change Detection Tool",
+    examples: [
+      "--pr-number 12345 --run-type SameVersion",
+      "-n 12345 -t CrossVersion -b main",
+      "--pr-number 12345 --target-repo myorg/my-specs",
+    ],
+  },
+} as const satisfies CliArgsConfig;
 
+export function parseCliArguments(args = process.argv.slice(2)): ParsedCliArguments {
   try {
-    const { values } = parseArgs(options);
-
-    // Show help if requested
-    if (values.help) {
-      showHelp();
+    const parsed = parseArgsWithHelp({ ...cliConfig, args });
+    if (!parsed) {
       exit(0);
     }
+    const { values } = parsed;
 
     // Validate required arguments
     if (!values["pr-number"]) {
@@ -96,21 +104,22 @@ function parseCliArguments(): ParsedCliArguments {
       BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
       BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION,
     ];
-    if (!validRunTypes.includes(values["run-type"] as BreakingChangesCheckType)) {
+    const runType = values["run-type"];
+    if (!validRunTypes.some((validRunType) => validRunType === runType)) {
       logError(`Error: --run-type must be one of: ${validRunTypes.join(", ")}`);
       exit(1);
     }
 
     return {
-      localSpecRepoPath: path.resolve(values["spec-repo-path"] as string),
-      targetRepo: values["target-repo"] as string,
-      sourceRepo: values["source-repo"] as string,
-      prNumber: values["pr-number"] as string,
-      runType: values["run-type"] as BreakingChangesCheckType,
-      baseBranch: values["base-branch"] as string,
-      headCommit: values["head-commit"] as string,
-      prSourceBranch: values["pr-source-branch"] as string,
-      prTargetBranch: values["pr-target-branch"] as string,
+      localSpecRepoPath: path.resolve(values["spec-repo-path"]),
+      targetRepo: values["target-repo"],
+      sourceRepo: values["source-repo"],
+      prNumber: values["pr-number"],
+      runType: runType as BreakingChangesCheckType,
+      baseBranch: values["base-branch"],
+      headCommit: values["head-commit"],
+      prSourceBranch: values["pr-source-branch"],
+      prTargetBranch: values["pr-target-branch"],
     };
   } catch (error) {
     logError(`Error parsing arguments: ${error}`);
@@ -123,32 +132,7 @@ function parseCliArguments(): ParsedCliArguments {
  * Show help message
  */
 function showHelp() {
-  logMessage("OpenAPI Diff Runner - Breaking Change Detection Tool");
-  logMessage("");
-  logMessage("Usage: node index.js [options]");
-  logMessage("");
-  logMessage("Options:");
-  logMessage("  -h, --help                Show help message");
-  logMessage("  -p, --spec-repo-path      Local spec repository path (default: ..)");
-  logMessage(
-    "  -r, --target-repo         Target repository (owner/repo format) (default: azure/azure-rest-api-specs)",
-  );
-  logMessage(
-    "  -s, --source-repo         Source repository (owner/repo format) (default: azure/azure-rest-api-specs)",
-  );
-  logMessage("  -n, --pr-number           Pull request number (required)");
-  logMessage(
-    "  -t, --run-type            Run type (SameVersion or CrossVersion) (default: SameVersion)",
-  );
-  logMessage("  -b, --base-branch         Base branch for comparison (default: main)");
-  logMessage("  -c, --head-commit         Head commit SHA (default: HEAD)");
-  logMessage("      --pr-source-branch    PR source branch (default: '')");
-  logMessage("      --pr-target-branch    PR target branch (default: '')");
-  logMessage("");
-  logMessage("Examples:");
-  logMessage("  node index.js --pr-number 12345 --run-type SameVersion");
-  logMessage("  node index.js -n 12345 -t CrossVersion -b main");
-  logMessage("  node index.js --pr-number 12345 --target-repo myorg/my-specs");
+  parseArgsWithHelp({ ...cliConfig, args: ["--help"] });
 }
 
 export async function main() {
