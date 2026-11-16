@@ -1405,7 +1405,11 @@
       "properties": {
         "location": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
-          "description": "The geo-location where the resource lives. Must be `global` for SaaS resources."
+          "description": "The geo-location where the resource lives. Must be `global` for SaaS resources.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "tags": {
           "type": "object",

@@ -160,6 +160,7 @@ model SaasPurchaseValidationProperties {
 /** Request payload for validating a proposed SaaS purchase without creating the resource. */
 model SaasPurchaseValidationRequest {
   /** The geo-location where the resource lives. Must be `global` for SaaS resources. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   location: azureLocation;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
