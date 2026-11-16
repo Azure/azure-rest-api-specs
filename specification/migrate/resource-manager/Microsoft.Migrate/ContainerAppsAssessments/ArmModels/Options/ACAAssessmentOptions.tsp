@@ -27,7 +27,7 @@ model ContainerAppsAssessmentOptions
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Doesn't have a PUT and hence no need for provisioning state. It is always hydrated by the service."
 @doc("Azure Container Apps Assessment Options Properties.")
 model ContainerAppsAssessmentOptionsProperties {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Singleton resource"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The edges dictionary maps service-defined assessment-options graph node identifiers to their outbound option groups. Keys are not user-defined or fixed schema properties; All is the node shown in the example. Retaining the dictionary preserves the common Azure Migrate assessment-options graph contract used for target partners, including Azure Kubernetes Service and Azure App Service."
   @doc("Gets the mapping of Assessment Options in graph representation.")
   @visibility(Lifecycle.Read)
   edges: Record<ContainerAppsAssessmentOptionsOutboundEdgeGroup>;
