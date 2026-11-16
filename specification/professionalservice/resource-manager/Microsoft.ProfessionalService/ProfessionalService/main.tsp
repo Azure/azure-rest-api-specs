@@ -8,6 +8,7 @@ import "./enums.tsp";
 import "./common.tsp";
 import "./professionalServiceResource.tsp";
 import "./subscriptionLevel.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

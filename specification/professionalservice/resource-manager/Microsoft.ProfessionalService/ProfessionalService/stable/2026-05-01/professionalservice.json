@@ -86,7 +86,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProfessionalService/checkNameAvailability": {
       "post": {
         "operationId": "ProfessionalServiceSubscriptionLevelGlobal_CheckNameAvailability",
-        "description": "Implements global CheckNameAvailability operations",
+        "description": "Checks whether a proposed Professional Service resource name is available.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -164,7 +164,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProfessionalService/resources": {
       "get": {
         "operationId": "ProfessionalServiceSubscriptionLevelGlobal_ListByAzureSubscription",
-        "description": "List ProfessionalServiceResource resources by subscription ID",
+        "description": "Lists all Professional Service resources within an Azure subscription.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -197,13 +197,55 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProfessionalService/resources/validate": {
+      "post": {
+        "operationId": "ProfessionalServiceSubscriptionLevelGlobal_ValidatePurchaseBySubscription",
+        "description": "Validates a proposed Professional Service purchase at subscription scope before a resource group is selected.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The proposed purchase request to validate.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProfessionalServicePurchaseValidationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceValidationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate a Professional Service purchase at subscription scope": {
+            "$ref": "./examples/ProfessionalServiceValidatePurchaseBySubscription.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProfessionalService/resources": {
       "get": {
         "operationId": "ProfessionalServiceSubscriptionLevel_ListByResourceGroup",
         "tags": [
           "ProfessionalServiceSubscriptionLevel"
         ],
-        "description": "List ProfessionalServiceResource resources by resource group",
+        "description": "Lists all Professional Service resources within a resource group.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -245,7 +287,7 @@
         "tags": [
           "ProfessionalServiceSubscriptionLevel"
         ],
-        "description": "Get a ProfessionalServiceResource",
+        "description": "Gets a Professional Service resource by its name.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -293,7 +335,7 @@
         "tags": [
           "ProfessionalServiceSubscriptionLevel"
         ],
-        "description": "Create a ProfessionalServiceResource",
+        "description": "Creates or updates a Professional Service resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -368,7 +410,7 @@
         "tags": [
           "ProfessionalServiceSubscriptionLevel"
         ],
-        "description": "Update a ProfessionalServiceResource",
+        "description": "Updates mutable properties or tags on an existing Professional Service resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -440,7 +482,7 @@
         "tags": [
           "ProfessionalServiceSubscriptionLevel"
         ],
-        "description": "Delete a ProfessionalServiceResource",
+        "description": "Deletes a Professional Service resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -569,9 +611,152 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProfessionalService/resources/{resourceName}/validate": {
+      "post": {
+        "operationId": "ProfessionalServiceSubscriptionLevel_ValidateUpdate",
+        "tags": [
+          "ProfessionalServiceSubscriptionLevel"
+        ],
+        "description": "Validates a proposed update to an existing Professional Service resource without modifying the resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the ProfessionalServiceResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProfessionalServiceResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceValidationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate an update to an existing Professional Service resource": {
+            "$ref": "./examples/ProfessionalServiceValidateUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProfessionalService/resources/validate": {
+      "post": {
+        "operationId": "ProfessionalServiceSubscriptionLevelGlobal_ValidatePurchase",
+        "description": "Validates a proposed Professional Service purchase within a resource group without creating the resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The proposed purchase request to validate.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProfessionalServicePurchaseValidationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceValidationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate a Professional Service purchase within a resource group": {
+            "$ref": "./examples/ProfessionalServiceValidatePurchaseByResourceGroup.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
+    "CampaignMetadata": {
+      "type": "object",
+      "description": "Campaign attribution metadata supplied when creating a new subscription-level resource.\nAccepted only on create and purchase validation; never returned in responses or accepted on update.",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "The referral source that brought the customer (for example, azure-marketplace or contoso-newsletter)."
+        },
+        "medium": {
+          "type": "string",
+          "description": "The marketing medium (for example, cpc, banner, or email)."
+        },
+        "campaign": {
+          "type": "string",
+          "description": "The marketing campaign name or identifier."
+        },
+        "term": {
+          "type": "string",
+          "description": "The paid search term associated with the campaign."
+        },
+        "content": {
+          "type": "string",
+          "description": "The campaign content identifier used to differentiate links or placements."
+        },
+        "ocid": {
+          "type": "string",
+          "description": "The Microsoft campaign tracking identifier."
+        },
+        "mktcmpid": {
+          "type": "string",
+          "description": "The legacy Microsoft 365 marketing campaign identifier."
+        },
+        "src": {
+          "type": "string",
+          "description": "The legacy Microsoft 365 referral source identifier."
+        }
+      }
+    },
     "DeletionSource": {
       "type": "string",
       "description": "The deletion source.",
@@ -602,7 +787,10 @@
       "enum": [
         "Succeeded",
         "Failed",
-        "Canceled"
+        "Canceled",
+        "Accepted",
+        "NotStarted",
+        "InProgress"
       ],
       "x-ms-enum": {
         "name": "ProfessionalServiceProvisioningState",
@@ -622,14 +810,192 @@
             "name": "Canceled",
             "value": "Canceled",
             "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "A resource write was accepted and is still being processed."
+          },
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The provisioning operation has not started."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The provisioning operation is currently running."
           }
         ]
       },
       "readOnly": true
     },
+    "ProfessionalServicePurchaseValidationProperties": {
+      "type": "object",
+      "description": "Professional Service purchase validation properties including the proposed resource name.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProfessionalServiceProvisioningState",
+          "description": "The status of the last provisioning operation performed on the resource.",
+          "readOnly": true
+        },
+        "assetId": {
+          "type": "string",
+          "description": "The Professional Service asset identifier. Server-assigned unique identifier for the marketplace subscription.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional description. Used as subscription display name by Teams, Admin Center, and other consumers."
+        },
+        "status": {
+          "$ref": "#/definitions/ProfessionalServiceResourceStatus",
+          "description": "The Professional Service subscription status. Server-assigned.",
+          "readOnly": true
+        },
+        "statusReason": {
+          "$ref": "#/definitions/SubscriptionStatusReason",
+          "description": "The reason for the current status. Server-assigned.",
+          "readOnly": true
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The seat count."
+        },
+        "publisherName": {
+          "type": "string",
+          "description": "The publisher name. Server-resolved from ProductCode.",
+          "readOnly": true
+        },
+        "planName": {
+          "type": "string",
+          "description": "The plan name. Server-resolved from ProductCode.",
+          "readOnly": true
+        },
+        "offerName": {
+          "type": "string",
+          "description": "The offer name. Server-resolved from ProductCode.",
+          "readOnly": true
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "The term unit (ISO 8601 duration, for example P1M or P1Y). Server-resolved from ProductCode.",
+          "readOnly": true
+        },
+        "billingPeriod": {
+          "type": "string",
+          "description": "The billing period (ISO 8601 duration). Server-resolved from ProductCode.",
+          "readOnly": true
+        },
+        "riskPropertyBagHeader": {
+          "type": "string",
+          "format": "password",
+          "description": "The risk property bag header (JSON format). Write-only — not returned in GET responses.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "termStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start date of the current term. Server-calculated.",
+          "readOnly": true
+        },
+        "termEndDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end date of the current term. Server-calculated.",
+          "readOnly": true
+        },
+        "futureStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The future start date of the subscription commitment, when available. Server-calculated.",
+          "readOnly": true
+        },
+        "autoRenew": {
+          "type": "boolean",
+          "description": "Whether the Professional Service subscription will auto-renew upon term end."
+        },
+        "isFreeTrial": {
+          "type": "boolean",
+          "description": "Whether the current term is a free trial term. Server-determined.",
+          "readOnly": true
+        },
+        "storefront": {
+          "type": "string",
+          "description": "The storefront."
+        },
+        "purchaserEmail": {
+          "type": "string",
+          "format": "password",
+          "description": "The purchaser email. Server-derived from authenticated identity. Read-only.\n\nCustomer data (PII): NOT included in default GET responses. Returned only when\nthe request specifies `$expandCustomerData=true`. Callers requesting customer\ndata must have appropriate authorization and handle the value per GDPR requirements.\n\n`@secret` is applied so SDK generators emit `format: password`, ensuring the value\nis redacted in logs, CLI output, and diagnostic traces.",
+          "readOnly": true,
+          "x-ms-secret": true
+        },
+        "quoteId": {
+          "type": "string",
+          "description": "The quote identifier associated with the purchase."
+        },
+        "privateOfferId": {
+          "type": "string",
+          "description": "The private offer identifier."
+        },
+        "productCode": {
+          "type": "string",
+          "description": "The product code. Primary purchase identifier for GA — used to resolve term details server-side."
+        },
+        "campaign": {
+          "$ref": "#/definitions/CampaignMetadata",
+          "description": "Optional campaign attribution metadata for a new subscription-level purchase.\nAccepted only on create and purchase validation; never returned in responses or accepted on update.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "The proposed Professional Service resource name to validate.",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[a-zA-Z0-9-]{3,24}$"
+        }
+      },
+      "required": [
+        "productCode",
+        "name"
+      ]
+    },
+    "ProfessionalServicePurchaseValidationRequest": {
+      "type": "object",
+      "description": "Request payload for validating a proposed Professional Service purchase without creating the resource.",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The geo-location where the resource lives. Must be `global` for Professional Service resources."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ProfessionalServicePurchaseValidationProperties",
+          "description": "The proposed Professional Service purchase properties, including the proposed resource name."
+        }
+      },
+      "required": [
+        "location",
+        "properties"
+      ]
+    },
     "ProfessionalServiceResource": {
       "type": "object",
-      "description": "Professional Service ARM tracked resource for GA API version 2026-05-01. Inherits standard ARM envelope (id, name, type, location, tags, systemData).",
+      "description": "Professional Service tracked resource for GA API version 2026-05-01. Inherits standard Azure Resource Manager envelope (id, name, type, location, tags, systemData).",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ProfessionalServiceResourceProperties",
@@ -674,16 +1040,16 @@
         },
         "assetId": {
           "type": "string",
-          "description": "The Professional Service asset id. Server-assigned unique identifier for the marketplace subscription.",
+          "description": "The Professional Service asset identifier. Server-assigned unique identifier for the marketplace subscription.",
           "readOnly": true
         },
         "description": {
           "type": "string",
-          "description": "Optional description. Used as subscription display name by Teams, Admin Center and other consumers."
+          "description": "Optional description. Used as subscription display name by Teams, Admin Center, and other consumers."
         },
         "status": {
           "$ref": "#/definitions/ProfessionalServiceResourceStatus",
-          "description": "The Professional Service Subscription Status. Server-assigned.",
+          "description": "The Professional Service subscription status. Server-assigned.",
           "readOnly": true
         },
         "statusReason": {
@@ -713,7 +1079,7 @@
         },
         "termUnit": {
           "type": "string",
-          "description": "The term unit (ISO 8601 duration, e.g. P1M, P1Y). Server-resolved from ProductCode.",
+          "description": "The term unit (ISO 8601 duration, for example P1M or P1Y). Server-resolved from ProductCode.",
           "readOnly": true
         },
         "billingPeriod": {
@@ -743,13 +1109,19 @@
           "description": "The end date of the current term. Server-calculated.",
           "readOnly": true
         },
+        "futureStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The future start date of the subscription commitment, when available. Server-calculated.",
+          "readOnly": true
+        },
         "autoRenew": {
           "type": "boolean",
-          "description": "Whether the Professional Service subscription will auto renew upon term end."
+          "description": "Whether the Professional Service subscription will auto-renew upon term end."
         },
         "isFreeTrial": {
           "type": "boolean",
-          "description": "Whether the current term is a Free Trial term. Server-determined.",
+          "description": "Whether the current term is a free trial term. Server-determined.",
           "readOnly": true
         },
         "storefront": {
@@ -763,13 +1135,24 @@
           "readOnly": true,
           "x-ms-secret": true
         },
+        "quoteId": {
+          "type": "string",
+          "description": "The quote identifier associated with the purchase."
+        },
         "privateOfferId": {
           "type": "string",
-          "description": "The private offer id."
+          "description": "The private offer identifier."
         },
         "productCode": {
           "type": "string",
           "description": "The product code. Primary purchase identifier for GA — used to resolve term details server-side."
+        },
+        "campaign": {
+          "$ref": "#/definitions/CampaignMetadata",
+          "description": "Optional campaign attribution metadata for a new subscription-level purchase.\nAccepted only on create and purchase validation; never returned in responses or accepted on update.",
+          "x-ms-mutability": [
+            "create"
+          ]
         }
       },
       "required": [
@@ -841,7 +1224,7 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "Optional description. Used as subscription display name by Teams, Admin Center and other consumers."
+          "description": "Optional description. Used as subscription display name by Teams, Admin Center, and other consumers."
         },
         "quantity": {
           "type": "integer",
@@ -860,21 +1243,65 @@
         },
         "autoRenew": {
           "type": "boolean",
-          "description": "Whether the Professional Service subscription will auto renew upon term end."
+          "description": "Whether the Professional Service subscription will auto-renew upon term end."
         },
         "storefront": {
           "type": "string",
           "description": "The storefront."
         },
+        "quoteId": {
+          "type": "string",
+          "description": "The quote identifier associated with the purchase."
+        },
         "privateOfferId": {
           "type": "string",
-          "description": "The private offer id."
+          "description": "The private offer identifier."
         },
         "productCode": {
           "type": "string",
           "description": "The product code. Primary purchase identifier for GA — used to resolve term details server-side."
         }
       }
+    },
+    "ResourceValidationError": {
+      "type": "object",
+      "description": "A machine-readable error code and human-readable message describing a validation failure.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Machine-readable validation error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable description of the validation failure."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ResourceValidationResult": {
+      "type": "object",
+      "description": "The result of validating a proposed purchase or resource update without modifying state.",
+      "properties": {
+        "isValid": {
+          "type": "boolean",
+          "description": "Indicates whether the proposed purchase or update passed validation."
+        },
+        "details": {
+          "type": "array",
+          "description": "The list of validation failures. Empty when `isValid` is `true`.",
+          "items": {
+            "$ref": "#/definitions/ResourceValidationError"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "isValid",
+        "details"
+      ]
     },
     "SubscriptionStatusReason": {
       "type": "string",

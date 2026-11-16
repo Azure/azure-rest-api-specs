@@ -4,6 +4,15 @@ namespace Microsoft.ProfessionalService;
 union ProfessionalServiceProvisioningState {
   string,
   Azure.ResourceManager.ResourceProvisioningState,
+
+  /** A resource write was accepted and is still being processed. */
+  Accepted: "Accepted",
+
+  /** The provisioning operation has not started. */
+  NotStarted: "NotStarted",
+
+  /** The provisioning operation is currently running. */
+  InProgress: "InProgress",
 }
 
 /** The Professional Service Subscription Status. */
