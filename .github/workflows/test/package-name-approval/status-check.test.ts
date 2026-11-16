@@ -9,6 +9,8 @@ vi.mock("../../src/context.ts", () => ({
 import { extractInputs } from "../../src/context.ts";
 import statusCheck from "../../src/package-name-approval/status-check.ts";
 
+const reportUrl = "https://github.com/owner/repo/pull/42#issuecomment-99";
+
 describe("status-check", () => {
   let github: ReturnType<typeof createMockGithub>;
 
@@ -43,13 +45,18 @@ describe("status-check", () => {
       data: { labels: [{ name: "other-label" }], head: { sha: "abc123" } },
     });
 
-    await statusCheck(args());
+    await statusCheck(args(), reportUrl);
 
     expect(core.info).toHaveBeenCalledWith("No package name review required, passing");
     expect(core.setFailed).not.toHaveBeenCalled();
     expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
-      expect.objectContaining({ state: "success", context: "Package Name Approval" }),
+      expect.objectContaining({
+        state: "success",
+        context: "Package Name Approval",
+        target_url: reportUrl,
+      }),
     );
+    expect(github.rest.issues.listComments).not.toHaveBeenCalled();
   });
 
   it("should fail when pending labels remain", async () => {
@@ -64,7 +71,7 @@ describe("status-check", () => {
       },
     });
 
-    await statusCheck(args());
+    await statusCheck(args(), reportUrl);
 
     const infoMsg = String(
       core.info.mock.calls.find((c: unknown[]) => String(c[0]).includes("pending"))?.[0],
@@ -73,7 +80,11 @@ describe("status-check", () => {
     expect(infoMsg).toContain("dotnet");
     expect(core.setFailed).not.toHaveBeenCalled();
     expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
-      expect.objectContaining({ state: "pending", context: "Package Name Approval" }),
+      expect.objectContaining({
+        state: "pending",
+        context: "Package Name Approval",
+        target_url: reportUrl,
+      }),
     );
   });
 
@@ -89,12 +100,16 @@ describe("status-check", () => {
       },
     });
 
-    await statusCheck(args());
+    await statusCheck(args(), reportUrl);
 
     expect(core.info).toHaveBeenCalledWith("All package names approved - merge allowed");
     expect(core.setFailed).not.toHaveBeenCalled();
     expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
-      expect.objectContaining({ state: "success", context: "Package Name Approval" }),
+      expect.objectContaining({
+        state: "success",
+        context: "Package Name Approval",
+        target_url: reportUrl,
+      }),
     );
   });
 

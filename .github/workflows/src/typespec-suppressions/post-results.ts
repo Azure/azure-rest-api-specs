@@ -145,7 +145,7 @@ export default async function postSuppressionsResults({ github, context, core }:
 
   if (body) {
     core.info(`Posting TypeSpec suppressions review comment on ${owner}/${repo}#${issue_number}.`);
-    await commentOrUpdate(
+    const commentId = await commentOrUpdate(
       github,
       core,
       owner,
@@ -153,6 +153,11 @@ export default async function postSuppressionsResults({ github, context, core }:
       issue_number,
       body,
       TYPESPEC_SUPPRESSIONS_COMMENT_IDENTIFIER,
+      "github-actions[bot]",
+    );
+    core.setOutput(
+      "report_url",
+      `https://github.com/${owner}/${repo}/pull/${issue_number}#issuecomment-${commentId}`,
     );
     return;
   }
@@ -167,7 +172,7 @@ export default async function postSuppressionsResults({ github, context, core }:
     per_page: PER_PAGE_MAX,
   });
   const [existingCommentId] = parseExistingComments(
-    comments,
+    comments.filter((comment) => comment.user?.login === "github-actions[bot]"),
     TYPESPEC_SUPPRESSIONS_COMMENT_IDENTIFIER,
   );
   if (existingCommentId !== undefined) {
@@ -182,6 +187,12 @@ export default async function postSuppressionsResults({ github, context, core }:
       issue_number,
       RESOLVED_COMMENT_BODY,
       TYPESPEC_SUPPRESSIONS_COMMENT_IDENTIFIER,
+      "github-actions[bot]",
+      comments,
+    );
+    core.setOutput(
+      "report_url",
+      `https://github.com/${owner}/${repo}/pull/${issue_number}#issuecomment-${existingCommentId}`,
     );
     return;
   }

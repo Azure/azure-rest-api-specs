@@ -563,39 +563,56 @@ async function publishReadinessReport(
   }
   const body = renderReadiness(participants, findings, verifiedParticipants);
   await core.summary.addRaw(body).write();
-  await github.rest.checks.create({
-    owner,
-    repo,
-    name: CONTRIBUTOR_READINESS_CHECK_NAME,
-    head_sha: pr.head.sha,
-    external_id: `contributor-readiness:${pr.number}`,
-    status: "completed",
-    conclusion: findings.length ? "neutral" : "success",
-    output: {
-      title: findings.some((finding) => finding.unknown)
-        ? "Could not fully verify contributor readiness"
-        : findings.length
-          ? "Contributor readiness needs attention"
-          : "No contributor-readiness issues found",
-      summary: body,
-    },
-  });
-  if (context.runAttempt > 1) {
-    const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+  let commentId: number | undefined;
+  try {
+    commentId = await updateReadinessComment(
+      github,
       owner,
       repo,
-      run_id: context.runId,
-      per_page: PER_PAGE_MAX,
+      pr.number,
+      body,
+      findings.length > 0,
+    );
+  } finally {
+    // Keep the check and handoff available even when PR comment publication fails.
+    await github.rest.checks.create({
+      owner,
+      repo,
+      name: CONTRIBUTOR_READINESS_CHECK_NAME,
+      head_sha: pr.head.sha,
+      external_id: `contributor-readiness:${pr.number}`,
+      status: "completed",
+      conclusion: findings.length ? "neutral" : "success",
+      ...(commentId
+        ? {
+            details_url: `https://github.com/${owner}/${repo}/pull/${pr.number}#issuecomment-${commentId}`,
+          }
+        : {}),
+      output: {
+        title: findings.some((finding) => finding.unknown)
+          ? "Could not fully verify contributor readiness"
+          : findings.length
+            ? "Contributor readiness needs attention"
+            : "No contributor-readiness issues found",
+        summary: body,
+      },
     });
-    for (const artifact of artifacts) {
-      if (artifact.name.startsWith("head-sha=") && artifact.name !== `head-sha=${pr.head.sha}`) {
-        await github.rest.actions.deleteArtifact({ owner, repo, artifact_id: artifact.id });
+    if (context.runAttempt > 1) {
+      const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+        owner,
+        repo,
+        run_id: context.runId,
+        per_page: PER_PAGE_MAX,
+      });
+      for (const artifact of artifacts) {
+        if (artifact.name.startsWith("head-sha=") && artifact.name !== `head-sha=${pr.head.sha}`) {
+          await github.rest.actions.deleteArtifact({ owner, repo, artifact_id: artifact.id });
+        }
       }
     }
+    core.setOutput("issue_number", pr.number);
+    core.setOutput("head_sha", pr.head.sha);
   }
-  core.setOutput("issue_number", pr.number);
-  core.setOutput("head_sha", pr.head.sha);
-  await updateReadinessComment(github, owner, repo, pr.number, body, findings.length > 0);
 }
 
 /**
@@ -609,7 +626,7 @@ async function updateReadinessComment(
   number: number,
   body: string,
   hasFindings: boolean,
-): Promise<void> {
+): Promise<number | undefined> {
   const comments = await github.paginate(github.rest.issues.listComments, {
     owner,
     repo,
@@ -631,11 +648,13 @@ async function updateReadinessComment(
       body: commentBody,
     });
   } else if (!commentId && hasFindings) {
-    await github.rest.issues.createComment({
+    const { data: comment } = await github.rest.issues.createComment({
       owner,
       repo,
       issue_number: number,
       body: commentBody,
     });
+    return comment.id;
   }
+  return commentId;
 }

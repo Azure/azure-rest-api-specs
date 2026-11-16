@@ -206,12 +206,16 @@ async function handleLabeled({
     issue_number: prNumber,
   });
   const botComment = comments.find(
-    (comment: { user?: { type?: string } | null; body?: string }) =>
-      comment.user?.type === "Bot" &&
+    (comment) =>
+      comment.user?.login === "github-actions[bot]" &&
       (comment.body?.includes("<!-- package-name-review-bot -->") ?? false),
   );
 
   if (botComment?.body) {
+    core.setOutput(
+      "report_url",
+      `https://github.com/${owner}/${repo}/pull/${prNumber}#issuecomment-${botComment.id}`,
+    );
     // Update comment table using structural parsing (split by | to find Status column)
     // rather than fragile regex that breaks when status text changes.
     const lines = botComment.body.split("\n");

@@ -16,6 +16,11 @@ on:
         description: Comma-separated list of labels that, when any is set, causes the check to always pass
         required: true
         type: string
+      report_url:
+        description: URL of a published report to use instead of analyzer logs
+        required: false
+        default: ""
+        type: string
 
 permissions:
   actions: read
@@ -63,6 +68,7 @@ jobs:
           MONITORED_WORKFLOW_NAME: ${{ inputs.monitored_workflow_name }}
           REQUIRED_CHECK_NAME: ${{ inputs.required_check_name }}
           OVERRIDING_LABEL: ${{ inputs.overriding_label }}
+          REPORT_URL: ${{ inputs.report_url }}
         with:
           script: |
             const { default: setStatus } =
@@ -71,7 +77,8 @@ jobs:
               { github, context, core },
               process.env.MONITORED_WORKFLOW_NAME,
               process.env.REQUIRED_CHECK_NAME,
-              process.env.OVERRIDING_LABEL
+              process.env.OVERRIDING_LABEL,
+              process.env.REPORT_URL
             );
 
       - if: ${{ always() && steps.set-status.outputs.head_sha }}

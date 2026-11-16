@@ -4,7 +4,7 @@ import { join } from "node:path";
 import { z } from "zod";
 import { execFile } from "../../../shared/src/exec.ts";
 import { PER_PAGE_MAX } from "../../../shared/src/github.ts";
-import { commentOrUpdate, parseExistingComments } from "../comment.ts";
+import { commentOrUpdate, parseExistingComments, type IssueComment } from "../comment.ts";
 import { extractInputs } from "../context.ts";
 import type { Core, GitHub, GitHubScriptArgs } from "../github.ts";
 import { loadApproversConfig } from "./approvers.ts";
@@ -391,16 +391,17 @@ export default async function postResults({ github, context, core }: GitHubScrip
   const resetLanguages: string[] = [];
 
   const preservedApprovals: Map<string, { namespace: string; status: string }> = new Map();
+  let existingComments: IssueComment[] | undefined;
 
   if (results.action === "synchronize") {
     // Fetch existing bot comment to compare package names per language
-    const comments = await github.paginate(github.rest.issues.listComments, {
+    existingComments = await github.paginate(github.rest.issues.listComments, {
       owner,
       repo,
       issue_number,
       per_page: PER_PAGE_MAX,
     });
-    const [, existingBody] = parseExistingComments(comments, "package-name-review-bot");
+    const [, existingBody] = parseExistingComments(existingComments, "package-name-review-bot");
 
     const previousTable = existingBody
       ? parseCommentTable(existingBody)
@@ -530,7 +531,21 @@ export default async function postResults({ github, context, core }: GitHubScrip
     allLanguages,
   });
 
-  await commentOrUpdate(github, core, owner, repo, issue_number, body, "package-name-review-bot");
+  const commentId = await commentOrUpdate(
+    github,
+    core,
+    owner,
+    repo,
+    issue_number,
+    body,
+    "package-name-review-bot",
+    "github-actions[bot]",
+    existingComments,
+  );
+  core.setOutput(
+    "report_url",
+    `https://github.com/${owner}/${repo}/pull/${issue_number}#issuecomment-${commentId}`,
+  );
 
   // Notify approvers whose sign-off was invalidated by the package name change (#46786).
   // The review table already shows the reset row, but updating that comment does not send

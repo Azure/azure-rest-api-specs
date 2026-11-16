@@ -32,6 +32,7 @@ jobs:
         uses: ./.github/actions/install-deps-github-script
 
       - name: Validate package name approval label
+        id: validate-approval
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
@@ -42,8 +43,10 @@ jobs:
       - name: Update package name approval status
         if: github.event.pull_request.state == 'open'
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          REPORT_URL: ${{ steps.validate-approval.outputs.report_url }}
         with:
           script: |
             const { default: statusCheck } =
               await import('${{ github.workspace }}/.github/workflows/src/package-name-approval/status-check.ts');
-            await statusCheck({ github, context, core });
+            await statusCheck({ github, context, core }, process.env.REPORT_URL);

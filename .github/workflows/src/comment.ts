@@ -54,7 +54,7 @@ export function parseExistingComments(
  * @param commentUser - Optional GitHub author login used to filter existing
  * comments. When omitted, comments from all authors are considered.
  * @param existingComments - Optional comments already fetched for this issue.
- * @returns Resolves when the comment is created or updated.
+ * @returns The ID of the created or existing comment.
  */
 export async function commentOrUpdate(
   github: GitHub,
@@ -66,7 +66,7 @@ export async function commentOrUpdate(
   commentIdentifier: string,
   commentUser?: string,
   existingComments?: IssueComment[],
-): Promise<void> {
+): Promise<number> {
   const computedBody = body + `\n<!-- ${commentIdentifier} -->`;
 
   let comments: IssueComment[] =
@@ -86,7 +86,7 @@ export async function commentOrUpdate(
   if (commentId) {
     if (commentBody === computedBody) {
       core.info(`No update needed for comment ${commentId}.`);
-      return; // No-op if the body is the same
+      return commentId;
     }
     await github.rest.issues.updateComment({
       owner,
@@ -95,6 +95,7 @@ export async function commentOrUpdate(
       body: computedBody,
     });
     core.info(`Updated existing comment ${commentId}.`);
+    return commentId;
   } else {
     // Create a new comment
     const { data: newComment } = await github.rest.issues.createComment({
@@ -104,5 +105,6 @@ export async function commentOrUpdate(
       body: computedBody,
     });
     core.info(`Created new comment #${newComment.id}`);
+    return newComment.id;
   }
 }

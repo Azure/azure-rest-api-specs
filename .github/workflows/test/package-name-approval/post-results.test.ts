@@ -53,6 +53,7 @@ describe("post-results", () => {
 
     it.each([
       {},
+      { action: "synchronize" },
       {
         typespecPath: "specification/compute/Compute.Management",
         typespecPaths: ["specification/compute/Compute.Management"],
@@ -96,6 +97,7 @@ describe("post-results", () => {
       github.rest.pulls.get.mockResolvedValue({
         data: { labels: [], base: { ref: "main" } },
       });
+      vi.mocked(commentOrUpdate).mockResolvedValue(99);
 
       await postResults({ github, context, core });
 
@@ -112,8 +114,17 @@ describe("post-results", () => {
         42,
         expect.stringContaining("| python | `azure-compute` |"),
         "package-name-review-bot",
+        "github-actions[bot]",
+        "action" in paths && paths.action === "synchronize" ? [] : undefined,
+      );
+      expect(core.setOutput).toHaveBeenCalledWith(
+        "report_url",
+        "https://github.com/owner/repo/pull/42#issuecomment-99",
       );
       expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+      expect(github.rest.issues.listComments).toHaveBeenCalledTimes(
+        "action" in paths && paths.action === "synchronize" ? 1 : 0,
+      );
     });
   });
 

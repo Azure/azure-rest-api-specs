@@ -89,6 +89,7 @@ describe("setStatusImpl", () => {
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
       data: [{ name: "typespec-suppressions-approved" }],
     });
+
     github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
       data: [
         {
@@ -128,6 +129,52 @@ describe("setStatusImpl", () => {
       target_url: "https://test.com/typespec-suppressions-report",
     });
   });
+
+  it.each([false, true])(
+    "links to the published comment without fetching analyzer diagnostics (approved: %s)",
+    async (approved) => {
+      const reportUrl = "https://github.com/test-owner/test-repo/pull/123#issuecomment-99";
+      github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+        data: approved ? [{ name: "typespec-suppressions-approved" }] : [],
+      });
+      github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
+        data: [
+          {
+            id: 456,
+            name: "TypeSpec Suppressions - Analyze Code",
+            status: CheckStatus.COMPLETED,
+            conclusion: CheckConclusion.FAILURE,
+            updated_at: "2026-11-16",
+            html_url: "https://test.com/analyzer",
+          },
+        ],
+      });
+
+      await setStatusImpl({
+        owner: "test-owner",
+        repo: "test-repo",
+        head_sha: fullGitSha,
+        issue_number: 123,
+        target_url: "https://test.com/status",
+        github,
+        core,
+        monitoredWorkflowName: "TypeSpec Suppressions - Analyze Code",
+        requiredStatusName: "TypeSpec Suppressions",
+        overridingLabel: "typespec-suppressions-approved",
+        reportUrl,
+      });
+
+      expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+        expect.objectContaining({
+          state: approved ? "success" : "failure",
+          target_url: reportUrl,
+        }),
+      );
+      expect(github.rest.actions.listWorkflowRunArtifacts).not.toHaveBeenCalled();
+      expect(github.rest.actions.listJobsForWorkflowRun).not.toHaveBeenCalled();
+      expect(github.rest.issues.listComments).not.toHaveBeenCalled();
+    },
+  );
 
   it("sets success with multiple comma-separated labels - first label matches", async () => {
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({

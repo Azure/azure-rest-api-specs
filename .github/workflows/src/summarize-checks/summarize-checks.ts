@@ -134,10 +134,10 @@ const AUTOMATED_CHECK_NAME = "Automated merging requirements met";
 const IMPACT_CHECK_NAME = "Summarize PR Impact";
 const NEXT_STEPS_COMMENT_ID = "NextStepsToMerge";
 const MAX_IMPACT_ASSESSMENT_BYTES = 16 * 1024 * 1024;
-const REQUIREMENT_COMMENT_MARKERS: Readonly<Record<string, string>> = {
-  "TypeSpec suppressions": "<!-- TypeSpecSuppressionsReview -->",
-  "SDK package names": "<!-- package-name-review-bot -->",
-  [CONTRIBUTOR_READINESS_CHECK_NAME]: "<!-- contributor-readiness -->",
+const REPORT_REQUIREMENTS: Readonly<Record<string, string | undefined>> = {
+  "TypeSpec Suppressions": "TypeSpec suppressions",
+  "Package Name Approval": "SDK package names",
+  [CONTRIBUTOR_READINESS_CHECK_NAME]: CONTRIBUTOR_READINESS_CHECK_NAME,
 };
 type RequirementCommentLinks = Readonly<Record<string, string | undefined>>;
 
@@ -393,16 +393,17 @@ export async function summarizeChecksImpl(
   const targetBranch = reviewContext.targetBranch;
   let labelNames = pr.labels.map((label) => (typeof label === "string" ? label : label.name));
 
-  const [requiredCheckRuns, fyiCheckRuns, impactAssessment] = await getCheckRunTuple(
-    github,
-    core,
-    owner,
-    repo,
-    head_sha,
-    targetBranch,
-    EXCLUDED_CHECK_NAMES,
-    issue_number,
-  );
+  const [requiredCheckRuns, fyiCheckRuns, impactAssessment, requirementCommentLinks] =
+    await getCheckRunTuple(
+      github,
+      core,
+      owner,
+      repo,
+      head_sha,
+      targetBranch,
+      EXCLUDED_CHECK_NAMES,
+      issue_number,
+    );
 
   outputRunDetails(core, requiredCheckRuns, fyiCheckRuns);
 
@@ -460,16 +461,6 @@ export async function summarizeChecksImpl(
     issue_number,
     per_page: PER_PAGE_MAX,
   });
-  const requirementCommentLinks: Record<string, string> = {};
-  for (const [name, marker] of Object.entries(REQUIREMENT_COMMENT_MARKERS)) {
-    const report = comments.findLast(
-      (comment) => comment.user?.login === "github-actions[bot]" && comment.body?.includes(marker),
-    );
-    if (report) {
-      requirementCommentLinks[name] = `${prUrl}#issuecomment-${report.id}`;
-    }
-  }
-
   let sdkBreakingChangesSummary: string | undefined = undefined;
   const hasSdkBreakingChange = hasSdkBreakingChanges(labelNames);
   if (hasSdkBreakingChange) {
@@ -686,7 +677,12 @@ export async function getCheckRunTuple(
   excludedCheckNames: string[],
   issue_number: number,
 ): Promise<
-  [CheckRunData[], CheckRunData[], import("./labelling.ts").ImpactAssessment | undefined]
+  [
+    CheckRunData[],
+    CheckRunData[],
+    import("./labelling.ts").ImpactAssessment | undefined,
+    RequirementCommentLinks,
+  ]
 > {
   // This function was originally a version of getRequiredAndFyiAndAutomatedMergingRequirementsMetCheckRuns
   // but has been simplified for clarity and purpose.
@@ -813,6 +809,8 @@ export async function getCheckRunTuple(
 
   // For each group, sort by date (newest first) and take the first one
   const unifiedCheckRuns = [];
+  const requirementCommentLinks: Record<string, string> = {};
+  const reportUrlPrefix = `https://github.com/${owner}/${repo}/pull/${issue_number}#issuecomment-`;
   for (const [, checks] of checksByName) {
     // Sort by date - newest first using invert(byDate(...))
     const sortedChecks = checks.sort(
@@ -831,6 +829,18 @@ export async function getCheckRunTuple(
     );
 
     const latestCheck = sortedChecks[0];
+    const requirementName = REPORT_REQUIREMENTS[latestCheck.name];
+    if (requirementName) {
+      // Label-only refreshes may omit the URL; keep the latest report for this PR and SHA.
+      const reportUrl = sortedChecks.find(
+        (check) =>
+          check.url?.startsWith(reportUrlPrefix) &&
+          /^\d+$/.test(check.url.slice(reportUrlPrefix.length)),
+      )?.url;
+      if (reportUrl) {
+        requirementCommentLinks[requirementName] = reportUrl;
+      }
+    }
 
     if (
       latestCheck.name === IMPACT_CHECK_NAME &&
@@ -918,7 +928,7 @@ export async function getCheckRunTuple(
       FYI_CHECK_NAMES.includes(checkRun.name),
   );
 
-  return [filteredReqCheckRuns, filteredFyiCheckRuns, impactAssessment];
+  return [filteredReqCheckRuns, filteredFyiCheckRuns, impactAssessment, requirementCommentLinks];
 }
 
 export function checkRunIsSuccessful(checkRun: CheckRunData): boolean | undefined {
