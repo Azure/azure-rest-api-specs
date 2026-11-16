@@ -94,10 +94,10 @@ repository's standard generation, build, and validation workflow using this
 configuration; the TypeSpec compile command above regenerates OpenAPI, not SDKs.
 
 For SDK emitters that support `examples-dir`, the parent configuration uses
-`../neuroShield/examples`. Because the client combines two services, the client
-generator resolves that path under each service's namespace folder, so it reaches
-these NeuroShield examples. Agent Fabric examples are not loaded for generated SDK
-samples or tests.
+`{project-root}/../neuroShield/examples`. Because the client combines two
+services, the client generator resolves that path relative to the project root
+and then under each service's namespace folder, so it reaches these NeuroShield
+examples. Agent Fabric examples are not loaded for generated SDK samples or tests.
 
 ### NeuroShield SDK surface
 
