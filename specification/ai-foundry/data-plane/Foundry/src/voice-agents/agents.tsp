@@ -616,6 +616,12 @@ model VoiceHostedAgentConversationEngine extends VoiceConversationEngine {
   @pattern("^(?:[1-9][0-9]{0,18}|draft-[1-9][0-9]{0,18})$")
   @maxLength(25)
   version?: string;
+
+  @doc("Whether to allow eligible calls to use service-managed prewarmed Hosted Sessions. Defaults to false. This does not enable session sharing, Agent startup model warmup, or language-model inference warmup. This versioned definition setting cannot be changed through connection-time session overrides or session.update; saving the definition does not create sessions.")
+  hosted_session_warmup?: boolean = false;
+
+  @doc("Whether to allow independent calls to share a compatible Hosted Session. Defaults to false. This setting is independent of hosted_session_warmup. The application must support concurrent connections and isolate state per call. This versioned definition setting cannot be changed through connection-time session overrides or session.update.")
+  hosted_session_multiplexing?: boolean = false;
 }
 
 @doc("The tool kinds supported by a voice agent.")
