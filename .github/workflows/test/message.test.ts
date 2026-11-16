@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { marked } from "marked";
 import { ZodError } from "zod";
 import {
   BaseMessageRecordSchema,
@@ -118,12 +119,44 @@ describe("MessageRecordSchema", () => {
 });
 
 describe("generateMarkdownTable", () => {
+  it("keeps pipes inside cells while preserving diagnostic Markdown, HTML and locations", () => {
+    const markdown = generateMarkdownTable([
+      {
+        type: MessageType.Result,
+        level: MessageLevel.Warning,
+        code: "Rule",
+        docUrl: "https://example.com/rule",
+        time: "2025-07-11T00:01:00.418Z",
+        message: "**bold** `a|b` and escaped \\| <em>HTML</em>\nnext",
+        paths: [{ tag: "json", path: "https://example.com/spec/api.json" }],
+      },
+      {
+        type: MessageType.Raw,
+        level: MessageLevel.Info,
+        time: "2025-07-11T00:01:00.418Z",
+        message: "Raw | message\nignored",
+        extra: { detail: "left|right", link: "[docs](https://example.com)" },
+      },
+    ]);
+
+    const html = marked.parse(markdown, { async: false });
+    expect(html.match(/<td>/g)).toHaveLength(4);
+    expect(html).toContain('<td>⚠️ <a href="https://example.com/rule">Rule</a></td>');
+    expect(html).toContain(
+      '<td><strong>bold</strong> <code>a|b</code> and escaped | <em>HTML</em> next<br>json: <a href="https://example.com/spec/api.json">/example.com/spec/api.json</a></td>',
+    );
+    expect(html).toContain("<td>ℹ️ Raw | message</td>");
+    expect(html).toContain(
+      '<td>&quot;detail&quot;:&quot;left|right&quot;,<br>&quot;link&quot;:&quot;<a href="https://example.com">docs</a>&quot;</td>',
+    );
+  });
+
   it("no messages", () => {
     const messages: import("../src/message.ts").MessageRecord[] = [];
 
     expect(generateMarkdownTable(messages)).toMatchInlineSnapshot(`
       "| Rule | Message |
-      | ---- | ------- |"
+      | --- | --- |"
     `);
   });
 
@@ -198,16 +231,16 @@ describe("generateMarkdownTable", () => {
     messages.push({ ...rawMessageRecord, extra: undefined });
 
     expect(generateMarkdownTable(messages)).toMatchInlineSnapshot(`
-      "| Rule                                                                                               | Message                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-      | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-      | ❌ [NO_JSON_FILE_FOUND](https://github.com/Azure/avocado/blob/master/README.md#NO_JSON_FILE_FOUND)  | The JSON file is not found but it is referenced from the readme file.<br>readme: [specification/contosowidgetmanager/resource-manager/readme.md](https://github.com/mikeharder/azure-rest-api-specs/blob/4e6083f35e27d8e1e3b78222cf4bd27b87cd1409/specification/contosowidgetmanager/resource-manager/readme.md)<br>json: [Microsoft.Contoso/stable/2021-11-01/contoso2.json](https://github.com/mikeharder/azure-rest-api-specs/blob/4e6083f35e27d8e1e3b78222cf4bd27b87cd1409/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso2.json) |
+      "| Rule | Message |
+      | --- | --- |
+      | ❌ [NO_JSON_FILE_FOUND](https://github.com/Azure/avocado/blob/master/README.md#NO_JSON_FILE_FOUND) | The JSON file is not found but it is referenced from the readme file.<br>readme: [specification/contosowidgetmanager/resource-manager/readme.md](https://github.com/mikeharder/azure-rest-api-specs/blob/4e6083f35e27d8e1e3b78222cf4bd27b87cd1409/specification/contosowidgetmanager/resource-manager/readme.md)<br>json: [Microsoft.Contoso/stable/2021-11-01/contoso2.json](https://github.com/mikeharder/azure-rest-api-specs/blob/4e6083f35e27d8e1e3b78222cf4bd27b87cd1409/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso2.json) |
       | ℹ️ [NO_JSON_FILE_FOUND](https://github.com/Azure/avocado/blob/master/README.md#NO_JSON_FILE_FOUND) | The JSON file is not found but it is referenced from the readme file.<br>readme: [specification/contosowidgetmanager/resource-manager/readme.md](https://github.com/mikeharder/azure-rest-api-specs/blob/4e6083f35e27d8e1e3b78222cf4bd27b87cd1409/specification/contosowidgetmanager/resource-manager/readme.md)<br>json: [Microsoft.Contoso/stable/2021-11-01/contoso2.json](https://github.com/mikeharder/azure-rest-api-specs/blob/4e6083f35e27d8e1e3b78222cf4bd27b87cd1409/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso2.json) |
       | ⚠️ [NO_JSON_FILE_FOUND](https://github.com/Azure/avocado/blob/master/README.md#NO_JSON_FILE_FOUND) | The JSON file is not found but it is referenced from the readme file.<br>readme: [specification/contosowidgetmanager/resource-manager/readme.md](https://github.com/mikeharder/azure-rest-api-specs/blob/4e6083f35e27d8e1e3b78222cf4bd27b87cd1409/specification/contosowidgetmanager/resource-manager/readme.md)<br>json: [Microsoft.Contoso/stable/2021-11-01/contoso2.json](https://github.com/mikeharder/azure-rest-api-specs/blob/4e6083f35e27d8e1e3b78222cf4bd27b87cd1409/specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/contoso2.json) |
-      | ❌ [NO_JSON_FILE_FOUND](https://github.com/Azure/avocado/blob/master/README.md#NO_JSON_FILE_FOUND)  | The JSON file is not found but it is referenced from the readme file.<br>readme: [specification/contosowidgetmanager/resource-manager/readme.md](https://www.example.org?path=https%3A%2F%2Fgithub.com%2Fmikeharder%2Fazure-rest-api-specs%2Fblob%2F4e6083f35e27d8e1e3b78222cf4bd27b87cd1409%2Fspecification%2Fcontosowidgetmanager%2Fresource-manager%2Freadme.md)                                                                                                                                                                                                                   |
-      | ❌ [NO_JSON_FILE_FOUND](https://github.com/Azure/avocado/blob/master/README.md#NO_JSON_FILE_FOUND)  | The JSON file is not found but it is referenced from the readme file.<br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-      | ❌ [NO_JSON_FILE_FOUND](https://github.com/Azure/avocado/blob/master/README.md#NO_JSON_FILE_FOUND)  | The JSON file is not found but it is referenced from the readme file.<br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-      | ❌ Test raw message                                                                                 | "key1":"value1",<br>"key2":"value2"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-      | ❌ Test raw message                                                                                 |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |"
+      | ❌ [NO_JSON_FILE_FOUND](https://github.com/Azure/avocado/blob/master/README.md#NO_JSON_FILE_FOUND) | The JSON file is not found but it is referenced from the readme file.<br>readme: [specification/contosowidgetmanager/resource-manager/readme.md](https://www.example.org?path=https%3A%2F%2Fgithub.com%2Fmikeharder%2Fazure-rest-api-specs%2Fblob%2F4e6083f35e27d8e1e3b78222cf4bd27b87cd1409%2Fspecification%2Fcontosowidgetmanager%2Fresource-manager%2Freadme.md) |
+      | ❌ [NO_JSON_FILE_FOUND](https://github.com/Azure/avocado/blob/master/README.md#NO_JSON_FILE_FOUND) | The JSON file is not found but it is referenced from the readme file.<br> |
+      | ❌ [NO_JSON_FILE_FOUND](https://github.com/Azure/avocado/blob/master/README.md#NO_JSON_FILE_FOUND) | The JSON file is not found but it is referenced from the readme file.<br> |
+      | ❌ Test raw message | "key1":"value1",<br>"key2":"value2" |
+      | ❌ Test raw message |  |"
     `);
   });
 });
