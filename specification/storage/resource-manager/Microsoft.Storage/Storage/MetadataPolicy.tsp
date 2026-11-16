@@ -81,8 +81,10 @@ model MetadataPolicyProperties {
 @added(Versions.v2026_12_01)
 @parentResource(StorageAccount)
 @singleton("default")
-model MetadataPolicy
-  is Azure.ResourceManager.ProxyResource<MetadataPolicyProperties, false> {
+model MetadataPolicy is Azure.ResourceManager.ProxyResource<
+  MetadataPolicyProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = MetadataPolicy,
     KeyName = "metadataPolicyName",
