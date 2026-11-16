@@ -1002,7 +1002,7 @@ describe("generateSdkForBatchSpecs", () => {
     };
 
     vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockInput);
-    vi.spyOn(commandHelpers, "getSpecPaths").mockResolvedValue([]);
+    vi.spyOn(commandHelpers, "getSpecPaths").mockReturnValue([]);
     vi.spyOn(utils, "runSpecGenSdkCommand").mockImplementation(() => Promise.resolve());
     vi.spyOn(utils, "resetGitRepo").mockImplementation(() => Promise.resolve());
     vi.spyOn(fs, "existsSync").mockReturnValue(false);
@@ -1072,7 +1072,7 @@ describe("generateSdkForBatchSpecs", () => {
     };
 
     vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockInput);
-    vi.spyOn(commandHelpers, "getSpecPaths").mockResolvedValue(mockSpecPaths);
+    vi.spyOn(commandHelpers, "getSpecPaths").mockReturnValue(mockSpecPaths);
     vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
     vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
     vi.spyOn(fs, "readFileSync").mockReturnValue(JSON.stringify(mockExecutionReport));
@@ -1123,7 +1123,7 @@ describe("generateSdkForBatchSpecs", () => {
     };
 
     vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockInput);
-    vi.spyOn(commandHelpers, "getSpecPaths").mockResolvedValue([{ tspconfigPath: mockSpecPath }]);
+    vi.spyOn(commandHelpers, "getSpecPaths").mockReturnValue([{ tspconfigPath: mockSpecPath }]);
     vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
     vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
     vi.spyOn(fs, "readFileSync").mockReturnValue(JSON.stringify(mockExecutionReport));
@@ -1190,7 +1190,7 @@ describe("generateSdkForBatchSpecs", () => {
     };
 
     vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockInput);
-    vi.spyOn(commandHelpers, "getSpecPaths").mockResolvedValue([{ tspconfigPath: mockSpecPath }]);
+    vi.spyOn(commandHelpers, "getSpecPaths").mockReturnValue([{ tspconfigPath: mockSpecPath }]);
     vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
     vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
     vi.spyOn(fs, "readFileSync").mockReturnValue(
@@ -1241,7 +1241,7 @@ describe("generateSdkForBatchSpecs", () => {
     };
 
     vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockInput);
-    vi.spyOn(commandHelpers, "getSpecPaths").mockResolvedValue([
+    vi.spyOn(commandHelpers, "getSpecPaths").mockReturnValue([
       { tspconfigPath: "specification/compute/Compute.Management/tspconfig.yaml" },
     ]);
     vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
@@ -1300,7 +1300,7 @@ describe("generateSdkForBatchSpecs", () => {
     };
     vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockInput);
 
-    vi.spyOn(commandHelpers, "getSpecPaths").mockResolvedValue(mockSpecPaths);
+    vi.spyOn(commandHelpers, "getSpecPaths").mockReturnValue(mockSpecPaths);
     vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
     vi.spyOn(utils, "runSpecGenSdkCommand")
       .mockRejectedValueOnce(new Error("Command failed"))
@@ -1368,7 +1368,7 @@ describe("generateSdkForBatchSpecs", () => {
 
     vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockInput);
     vi.spyOn(commandHelpers, "installLanguageToolchain").mockResolvedValue(undefined);
-    vi.spyOn(commandHelpers, "getSpecPaths").mockResolvedValue(mockSpecPaths);
+    vi.spyOn(commandHelpers, "getSpecPaths").mockReturnValue(mockSpecPaths);
     vi.spyOn(fs, "existsSync").mockReturnValue(false);
     vi.spyOn(fs, "writeFileSync").mockImplementation(() => {
       // mock implementation intentionally left blank

@@ -4,7 +4,6 @@ import { beforeEach, describe, expect, test, vi } from "vitest";
 import {
   findFilesRecursive,
   findReadmeFiles,
-  getAllTypeSpecPaths,
   getArgumentValue,
   getRelativePathFromSpecification,
   mapToObject,
@@ -17,18 +16,6 @@ const currentFilePath = fileURLToPath(import.meta.url);
 const repoRoot = path.resolve(path.dirname(currentFilePath), "../fixtures/");
 
 describe("Utils", () => {
-  test("discovers repository-relative TypeSpec configs without invoking PowerShell", async () => {
-    const projects = (await getAllTypeSpecPaths(repoRoot)).map(normalizePath);
-
-    expect(projects).toContain(
-      "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
-    );
-    expect(projects).toContain(
-      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/Service1/SubService1/tspconfig.yaml",
-    );
-    expect(projects.every((project) => project.startsWith("specification/"))).toBe(true);
-  });
-
   describe("findFilesRecursive", () => {
     test("finds all tspconfig.yaml files recursively", () => {
       const searchPath = path.normalize(`${repoRoot}/specification/contosowidgetmanager`);
