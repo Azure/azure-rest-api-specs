@@ -142,7 +142,7 @@ jobs:
     permissions:
       actions: write
       contents: read
-      pull-requests: write # reserve the PR-level initial-review marker
+      pull-requests: write # maintain the legacy reviewer activation marker
       statuses: write
     concurrency:
       group: arm-initial-review-dispatch-${{ needs.run-summarize-checks.outputs.issue_number }}
@@ -153,7 +153,7 @@ jobs:
           persist-credentials: false
           sparse-checkout: |
             .github
-      - name: Dispatch initial ARM review
+      - name: Dispatch ARM review for a ready head
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           ARM_REVIEW_PR_NUMBER: ${{ needs.run-summarize-checks.outputs.issue_number }}
