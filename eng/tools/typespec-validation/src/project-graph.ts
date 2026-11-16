@@ -16,11 +16,19 @@ export interface TypeSpecProject {
   readonly configs: readonly string[];
   /** `client.tsp` and `main.tsp` when present, in compile-preference order. */
   readonly entrypoints: readonly string[];
-  /** Local files the compilation reads: configs, transitively imported sources, and examples. */
+  /**
+   * Local files the compilation reads: configs, transitively imported sources, examples, and
+   * files or directories referenced by emitter options (for example `examples-dir`).
+   */
   readonly inputs: readonly string[];
+  /**
+   * Directories whose whole contents are inputs, so files added or removed under them affect the
+   * project. Includes the default `examples` folder and referenced paths that don't exist yet.
+   */
+  readonly inputDirectories: readonly string[];
   /** Package imports, which are resolved from `node_modules` and not traversed. */
   readonly libraries: readonly string[];
-  /** Other projects that own at least one of this project's inputs. */
+  /** Other projects that own at least one of this project's inputs or input directories. */
   readonly dependencies: readonly string[];
   readonly unresolved: readonly UnresolvedImport[];
 }
@@ -29,7 +37,21 @@ export interface TypeSpecProjectGraph {
   readonly projects: ReadonlyMap<string, TypeSpecProject>;
   /** Input files and the projects that read them. */
   readonly dependents: ReadonlyMap<string, readonly string[]>;
+  /** Input directories and the projects that read everything under them. */
+  readonly directoryDependents: ReadonlyMap<string, readonly string[]>;
 }
+
+/**
+ * Emitter options whose paths are written to or only used to compute output references, so they
+ * are not inputs. `arm-types-dir`, for instance, only shapes `$ref` paths to common types.
+ */
+const outputOptions = new Set([
+  "arm-types-dir",
+  "azure-resource-provider-folder",
+  "emitter-output-dir",
+  "output-dir",
+  "output-file",
+]);
 
 interface SourceImports {
   readonly local: string[];
@@ -69,15 +91,11 @@ export async function buildProjectGraph(folders: readonly string[]): Promise<Typ
     projects.set(project.path, project);
   }
 
-  const dependents = new Map<string, string[]>();
-  for (const project of projects.values()) {
-    for (const file of project.inputs) {
-      const users = dependents.get(file) ?? [];
-      users.push(project.path);
-      dependents.set(file, users);
-    }
-  }
-  return { projects, dependents: new Map([...dependents].sort(([a], [b]) => a.localeCompare(b))) };
+  return {
+    projects,
+    dependents: indexByPath(projects, (project) => project.inputs),
+    directoryDependents: indexByPath(projects, (project) => project.inputDirectories),
+  };
 }
 
 /** Projects whose inputs include any of the given absolute file paths. */
@@ -87,9 +105,29 @@ export function findAffectedProjects(
 ): string[] {
   const affected = new Set<string>();
   for (const file of files) {
-    for (const project of graph.dependents.get(resolve(file)) ?? []) affected.add(project);
+    const path = resolve(file);
+    for (const project of graph.dependents.get(path) ?? []) affected.add(project);
+    for (let dir = path; ; dir = dirname(dir)) {
+      for (const project of graph.directoryDependents.get(dir) ?? []) affected.add(project);
+      if (dirname(dir) === dir) break;
+    }
   }
   return [...affected].sort();
+}
+
+function indexByPath(
+  projects: ReadonlyMap<string, TypeSpecProject>,
+  paths: (project: TypeSpecProject) => readonly string[],
+): Map<string, string[]> {
+  const index = new Map<string, string[]>();
+  for (const project of projects.values()) {
+    for (const path of paths(project)) {
+      const users = index.get(path) ?? [];
+      users.push(project.path);
+      index.set(path, users);
+    }
+  }
+  return new Map([...index].sort(([a], [b]) => a.localeCompare(b)));
 }
 
 async function buildProject(
@@ -133,12 +171,27 @@ async function buildProject(
     unresolved.push(...imports.unresolved);
   }
 
-  for await (const entry of glob("examples/**/*", { cwd: path, withFileTypes: true })) {
-    if (entry.isFile()) inputs.add(resolve(entry.parentPath, entry.name));
+  const inputDirectories = new Set([join(path, "examples")]);
+  for (const referenced of resolveOptionPaths(path, configs.values)) {
+    const stats = await stat(referenced).catch((error: unknown) => {
+      if (isMissing(error)) return undefined;
+      throw error;
+    });
+    if (stats?.isFile()) inputs.add(referenced);
+    else inputDirectories.add(referenced);
+  }
+  for (const directory of inputDirectories) {
+    for await (const entry of glob("**/*", {
+      cwd: directory,
+      withFileTypes: true,
+      exclude: (entry) => entry.name === "node_modules",
+    })) {
+      if (entry.isFile()) inputs.add(resolve(entry.parentPath, entry.name));
+    }
   }
 
   const dependencies = new Set<string>();
-  for (const file of inputs) {
+  for (const file of [...inputs, ...inputDirectories]) {
     const owner = findOwningProject(file, projectPaths);
     if (owner && owner !== path) dependencies.add(owner);
   }
@@ -148,6 +201,7 @@ async function buildProject(
     configs: configs.files,
     entrypoints,
     inputs: [...inputs].sort(),
+    inputDirectories: [...inputDirectories].sort(),
     libraries: [...libraries].sort(),
     dependencies: [...dependencies].sort(),
     unresolved,
@@ -200,8 +254,13 @@ async function resolveLocalImport(specifier: string, from: string): Promise<stri
 async function readConfigChain(
   config: string,
   unresolved: UnresolvedImport[],
-): Promise<{ files: string[]; imports: { specifier: string; from: string }[] }> {
+): Promise<{
+  files: string[];
+  imports: { specifier: string; from: string }[];
+  values: { file: string; value: Record<string, unknown> }[];
+}> {
   const files: string[] = [];
+  const values: { file: string; value: Record<string, unknown> }[] = [];
   const imports: { specifier: string; from: string }[] = [];
   let current: string | undefined = config;
   while (current && !files.includes(current)) {
@@ -221,10 +280,9 @@ async function readConfigChain(
       // Invalid configs are reported by validation rules; the file itself is still an input.
       break;
     }
-    const { extends: base, imports: configImports } = (value ?? {}) as {
-      extends?: unknown;
-      imports?: unknown;
-    };
+    if (!isRecord(value)) break;
+    values.push({ file: current, value });
+    const { extends: base, imports: configImports } = value;
     if (Array.isArray(configImports)) {
       for (const specifier of configImports) {
         if (typeof specifier === "string") imports.push({ specifier, from: current });
@@ -232,7 +290,57 @@ async function readConfigChain(
     }
     current = typeof base === "string" ? resolve(dirname(current), base) : undefined;
   }
-  return { files, imports };
+  return { files, imports, values };
+}
+
+/**
+ * Local paths referenced by emitter options across the config chain, resolved like the compiler
+ * does: `{project-root}` and declared parameter defaults are interpolated, and relative paths are
+ * resolved from the config that declares them. Values using other variables such as `{output-dir}`
+ * are outputs and skipped.
+ */
+function resolveOptionPaths(
+  projectPath: string,
+  configs: readonly { file: string; value: Record<string, unknown> }[],
+): string[] {
+  const variables = new Map([["project-root", projectPath]]);
+  for (const { value } of configs) {
+    if (!isRecord(value.parameters)) continue;
+    for (const [name, parameter] of Object.entries(value.parameters)) {
+      if (!variables.has(name) && isRecord(parameter) && typeof parameter.default === "string") {
+        variables.set(name, parameter.default);
+      }
+    }
+  }
+
+  const paths = new Set<string>();
+  const visit = (value: unknown, configDir: string) => {
+    if (Array.isArray(value)) {
+      for (const item of value) visit(item, configDir);
+    } else if (isRecord(value)) {
+      for (const [key, item] of Object.entries(value)) {
+        if (!outputOptions.has(key)) visit(item, configDir);
+      }
+    } else if (typeof value === "string") {
+      const interpolated = value.replace(
+        /\{([^{}]+)\}/g,
+        (match, name: string) => variables.get(name) ?? match,
+      );
+      if (interpolated.includes("{")) return;
+      if (value.startsWith("{project-root}") || isLocalSpecifier(interpolated)) {
+        paths.add(resolve(configDir, interpolated));
+      }
+    }
+  };
+  for (const { file, value } of configs) {
+    if (!isRecord(value.options)) continue;
+    for (const options of Object.values(value.options)) visit(options, dirname(file));
+  }
+  return [...paths];
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
 function findOwningProject(file: string, projects: ReadonlySet<string>): string | undefined {

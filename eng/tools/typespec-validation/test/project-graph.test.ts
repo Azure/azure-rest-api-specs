@@ -48,6 +48,7 @@ it("follows imports across folders and projects without including unimported sib
     configs: [aConfig],
     entrypoints: [aClient, aMain],
     inputs: [aClient, aExample, aConfig, aMain, commonMain, shared, more].sort(),
+    inputDirectories: [join(root, "svc/A/examples")],
     libraries: ["@azure-tools/typespec-azure-core", "@typespec/http"],
     dependencies: [join(root, "svc/Common")],
     unresolved: [],
@@ -76,4 +77,54 @@ it("includes extended configs, config imports, and reports unresolved imports", 
   expect(project?.configs).toEqual([config, base]);
   expect(project?.inputs).toEqual([main, config, decorators, base].sort());
   expect(project?.unresolved).toEqual([{ specifier: "./missing.tsp", from: main }]);
+});
+
+it("includes paths referenced by emitter options but not output paths", async () => {
+  const config = await addFile(
+    "svc/A/tspconfig.yaml",
+    [
+      "parameters:",
+      '  "plugin-dir":',
+      '    default: "../plugins"',
+      "options:",
+      '  "@azure-tools/typespec-autorest":',
+      '    examples-dir: "{project-root}/../B/examples"',
+      '    emitter-output-dir: "{project-root}/.."',
+      '    arm-types-dir: "{project-root}/../common-types"',
+      '    output-file: "{version-status}/{version}/openapi.json"',
+      '  "@azure-typespec/http-client-csharp":',
+      "    plugins:",
+      '      - "{plugin-dir}/codegen"',
+      '      - "./custom.json"',
+      "",
+    ].join("\n"),
+  );
+  const main = await addFile("svc/A/main.tsp");
+  const plugin = await addFile("svc/plugins/codegen/index.js");
+  const sharedExample = await addFile("svc/B/examples/Get.json", "{}");
+  await addFile("svc/B/tspconfig.yaml");
+  await addFile("svc/common-types/types.json", "{}");
+
+  const graph = await buildProjectGraph([join(root, "svc/A"), join(root, "svc/B")]);
+  const project = graph.projects.get(join(root, "svc/A"));
+
+  expect(project?.inputs).toEqual([config, main, plugin, sharedExample].sort());
+  expect(project?.inputDirectories).toEqual(
+    [
+      join(root, "svc/A/custom.json"),
+      join(root, "svc/A/examples"),
+      join(root, "svc/B/examples"),
+      join(root, "svc/plugins/codegen"),
+    ].sort(),
+  );
+  expect(project?.dependencies).toEqual([join(root, "svc/B")]);
+  // Files added under referenced paths after the graph was built still map to the project.
+  expect(findAffectedProjects(graph, [join(root, "svc/B/examples/New.json")])).toEqual([
+    join(root, "svc/A"),
+    join(root, "svc/B"),
+  ]);
+  expect(findAffectedProjects(graph, [join(root, "svc/A/custom.json")])).toEqual([
+    join(root, "svc/A"),
+  ]);
+  expect(findAffectedProjects(graph, [join(root, "svc/common-types/types.json")])).toEqual([]);
 });
