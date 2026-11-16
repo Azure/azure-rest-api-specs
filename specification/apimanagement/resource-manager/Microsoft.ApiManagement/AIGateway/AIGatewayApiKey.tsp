@@ -83,5 +83,4 @@ model AiGatewayApiKeyResource
     SegmentName = "apiKeys",
     NamePattern = "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
 }

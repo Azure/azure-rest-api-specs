@@ -297,6 +297,7 @@ describe("Summarize Checks Integration Tests", () => {
           head_sha,
           pr.base.ref,
           [],
+          issue_number,
         );
 
         let adjustedStartLabels = expectedLabels.filter((x) => ignorableLabels.includes(x));
@@ -336,6 +337,131 @@ describe("Summarize Checks Integration Tests", () => {
 });
 
 describe("Summarize Checks Unit Tests", () => {
+  it("removes the readiness warning after a successful access recheck", async () => {
+    const github = createMockGithub();
+    const core = createMockCore();
+    github.rest.checks.listForRef.mockResolvedValue({
+      data: {
+        check_runs: [
+          {
+            name: "Contributor readiness",
+            external_id: "contributor-readiness:1",
+            status: "completed",
+            conclusion: "neutral",
+            completed_at: "2026-11-09T00:00:00Z",
+            html_url: "https://github.com/owner/repo/runs/old",
+          },
+          {
+            name: "Contributor readiness",
+            external_id: "contributor-readiness:1",
+            status: "completed",
+            conclusion: "success",
+            completed_at: "2026-11-10T00:00:00Z",
+            html_url: "https://github.com/owner/repo/runs/current",
+          },
+        ],
+      },
+    });
+
+    const [required, fyi] = await getCheckRunTuple(
+      github,
+      core,
+      "owner",
+      "repo",
+      fullGitSha,
+      "main",
+      [],
+      1,
+    );
+    const [comment, result] = createNextStepsComment(
+      core,
+      "repo",
+      [],
+      "main",
+      required,
+      fyi,
+      true,
+      WORKFLOW_URL,
+    );
+    const completed = comment.split("<summary>Completed checks (1)</summary>")[1];
+
+    expect(comment.split("<details>")[0]).not.toContain("Contributor readiness");
+    expect(completed).toContain("https://github.com/owner/repo/runs/current");
+    expect(comment).not.toContain("https://github.com/owner/repo/runs/old");
+    expect(result.result).toBe("SUCCESS");
+    expect(github.rest.checks.listForRef).toHaveBeenCalledOnce();
+  });
+
+  it.each([
+    { description: "has findings", hasReport: true },
+    { description: "has no report", hasReport: false },
+  ])("isolates readiness for a shared-head PR that $description", async ({ hasReport }) => {
+    const github = createMockGithub();
+    const core = createMockCore();
+    const ownReport = {
+      name: "Contributor readiness",
+      external_id: "contributor-readiness:1",
+      status: "completed",
+      conclusion: "neutral",
+      completed_at: "2026-11-09T00:00:00Z",
+      html_url: "https://github.com/owner/repo/runs/own-report",
+    };
+    const otherReport = {
+      ...ownReport,
+      external_id: "contributor-readiness:2",
+      conclusion: "success",
+      completed_at: "2026-11-10T00:00:00Z",
+      html_url: "https://github.com/owner/repo/runs/other-report",
+    };
+    github.rest.checks.listForRef
+      .mockResolvedValueOnce({ data: { check_runs: [otherReport] } })
+      .mockResolvedValueOnce({
+        data: { check_runs: hasReport ? [ownReport, otherReport] : [otherReport] },
+      });
+    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
+      data: [
+        {
+          context: "Contributor readiness",
+          state: "success",
+          updated_at: "2026-11-11T00:00:00Z",
+          target_url: "https://github.com/owner/repo/runs/unscoped-report",
+        },
+      ],
+    });
+
+    const [required, fyi] = await getCheckRunTuple(
+      github,
+      core,
+      "owner",
+      "repo",
+      fullGitSha,
+      "main",
+      [],
+      1,
+    );
+    const [comment] = createNextStepsComment(
+      core,
+      "repo",
+      [],
+      "main",
+      required,
+      fyi,
+      true,
+      WORKFLOW_URL,
+    );
+
+    if (hasReport) {
+      expect(comment.split("<details>")[0]).toContain(ownReport.html_url);
+    } else {
+      expect(comment).not.toContain("Contributor readiness");
+    }
+    expect(comment).not.toContain(otherReport.html_url);
+    expect(comment).not.toContain("https://github.com/owner/repo/runs/unscoped-report");
+    expect(github.rest.checks.listForRef).toHaveBeenLastCalledWith(
+      expect.objectContaining({ check_name: "Contributor readiness", filter: "all" }),
+    );
+  });
+
   it("preserves the latest provider URLs and keeps legacy pending statuses ambiguous", async () => {
     const github = createMockGithub();
     const core = createMockCore();
@@ -386,6 +512,7 @@ describe("Summarize Checks Unit Tests", () => {
       fullGitSha,
       "main",
       [],
+      1,
     );
 
     expect(checks.map(({ name, status, url }) => ({ name, status, url }))).toEqual([
@@ -464,7 +591,13 @@ describe("Summarize Checks Unit Tests", () => {
       expect(token).toBeDefined();
       return token?.rows.map((row) =>
         row.map((cell, index) =>
-          index === 1 ? cell.text.replace(/<\/?picture>|<img\b[^>]*>/g, "").trim() : cell.text,
+          index === 1
+            ? cell.tokens
+                .filter((token): token is Tokens.Text => token.type === "text")
+                .map((token) => token.text)
+                .join("")
+                .trim()
+            : cell.text,
         ),
       );
     }
@@ -776,6 +909,46 @@ describe("Summarize Checks Unit Tests", () => {
         expect(comment.split("<details>")[0]).not.toContain("license/cla");
         expect(comment).not.toContain("Other outstanding requirements");
         expect(status.result).toBe("SUCCESS");
+      },
+    );
+
+    it.each([
+      { description: "otherwise met", required: [], result: "SUCCESS" },
+      {
+        description: "pending",
+        required: [run("TypeSpec Validation", "in_progress", null)],
+        result: "pending",
+      },
+      {
+        description: "blocked",
+        required: [run("TypeSpec Validation", "completed", "failure")],
+        result: "FAILURE",
+      },
+    ])(
+      "shows readiness findings as a visible warning when merge requirements are $description",
+      ({ required, result }) => {
+        const [comment, status] = summarize({
+          required,
+          fyi: [
+            run(
+              "Contributor readiness",
+              "completed",
+              "neutral",
+              "https://github.com/owner/repo/runs/readiness",
+            ),
+          ],
+        });
+        const visible = comment.split("<details>")[0];
+
+        expect(rows(visible)).toContainEqual([
+          expect.stringContaining("Contributor readiness"),
+          "Warning",
+          expect.stringContaining("`/azsdk check-access`"),
+        ]);
+        const html = marked.parse(visible);
+        expect(html).toContain('href="https://github.com/owner/repo/runs/readiness"');
+        expect(html).toContain('href="https://aka.ms/azsdk/access"');
+        expect(status.result).toBe(result);
       },
     );
 
