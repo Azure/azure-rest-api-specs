@@ -1,4 +1,4 @@
-﻿import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
@@ -124,6 +124,6 @@ interface EntityQueries {
   "The entity query we want to create or update"
 );
 
-@@added(EntityQuery, Versions.v2025_10_01_preview);
-@@added(EntityQueriesOps, Versions.v2025_10_01_preview);
-@@added(EntityQueries, Versions.v2025_10_01_preview);
+@@added(EntityQuery, Versions.v2026_08_01_preview);
+@@added(EntityQueriesOps, Versions.v2026_08_01_preview);
+@@added(EntityQueries, Versions.v2026_08_01_preview);

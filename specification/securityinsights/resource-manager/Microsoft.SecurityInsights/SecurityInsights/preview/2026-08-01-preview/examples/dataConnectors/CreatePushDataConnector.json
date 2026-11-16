@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "operationalInsightsResourceProvider": "Microsoft.OperationalInsights",
+    "dataConnectorId": "Push_afef3743-0c88-469c-84ff-ca2e87dc1e48",
+    "dataConnector": {
+      "kind": "Push",
+      "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+      "properties": {
+        "connectorDefinitionName": "PushConnectorDefinition",
+        "auth": {
+          "type": "Push",
+          "appId": "9b93b3d8-1b3f-4b7c-8b6e-1f2a3c4d5e6f",
+          "servicePrincipalId": "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d"
+        },
+        "dcrConfig": {
+          "streamName": "Custom-PushConnector",
+          "dataCollectionEndpoint": "https://example-dce.eastus-1.ingest.monitor.azure.com",
+          "dataCollectionRuleImmutableId": "dcr-1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/Push_afef3743-0c88-469c-84ff-ca2e87dc1e48",
+        "name": "Push_afef3743-0c88-469c-84ff-ca2e87dc1e48",
+        "type": "Microsoft.SecurityInsights/dataConnectors",
+        "kind": "Push",
+        "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+        "properties": {
+          "connectorDefinitionName": "PushConnectorDefinition",
+          "auth": {
+            "type": "Push",
+            "appId": "9b93b3d8-1b3f-4b7c-8b6e-1f2a3c4d5e6f",
+            "servicePrincipalId": "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d"
+          },
+          "dcrConfig": {
+            "streamName": "Custom-PushConnector",
+            "dataCollectionEndpoint": "https://example-dce.eastus-1.ingest.monitor.azure.com",
+            "dataCollectionRuleImmutableId": "dcr-1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/Push_afef3743-0c88-469c-84ff-ca2e87dc1e48",
+        "name": "Push_afef3743-0c88-469c-84ff-ca2e87dc1e48",
+        "type": "Microsoft.SecurityInsights/dataConnectors",
+        "kind": "Push",
+        "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+        "properties": {
+          "connectorDefinitionName": "PushConnectorDefinition",
+          "auth": {
+            "type": "Push",
+            "appId": "9b93b3d8-1b3f-4b7c-8b6e-1f2a3c4d5e6f",
+            "servicePrincipalId": "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d"
+          },
+          "dcrConfig": {
+            "streamName": "Custom-PushConnector",
+            "dataCollectionEndpoint": "https://example-dce.eastus-1.ingest.monitor.azure.com",
+            "dataCollectionRuleImmutableId": "dcr-1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "DataConnectors_CreateOrUpdate",
+  "title": "Creates or updates a Push data connector."
+}

@@ -95,5 +95,5 @@ interface HuntRelations {
 @@doc(HuntRelation.properties, "Hunt Relation properties");
 @@doc(HuntRelations.createOrUpdate::parameters.resource, "The hunt relation");
 
-@@added(HuntRelation, Versions.v2025_10_01_preview);
-@@added(HuntRelations, Versions.v2025_10_01_preview);
+@@added(HuntRelation, Versions.v2026_08_01_preview);
+@@added(HuntRelations, Versions.v2026_08_01_preview);
