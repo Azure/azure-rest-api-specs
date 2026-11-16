@@ -62,6 +62,7 @@ model UpdateStage {
   @pattern("^(?:0|[1-9]\\d*|(?:0|[1-9]\\d?|100)%)$")
   @added(Versions.v2026_06_02_preview)
   @removed(Versions.v2026_11_01)
+  @added(Versions.v2026_11_02_preview)
   maxAllowedFailures?: string;
 
   @doc("""
@@ -137,6 +138,7 @@ model UpdateGroup {
   @pattern("^(?:0|[1-9]\\d*|(?:0|[1-9]\\d?|100)%)$")
   @added(Versions.v2026_06_02_preview)
   @removed(Versions.v2026_11_01)
+  @added(Versions.v2026_11_02_preview)
   maxAllowedFailures?: string;
 
   @doc("""
