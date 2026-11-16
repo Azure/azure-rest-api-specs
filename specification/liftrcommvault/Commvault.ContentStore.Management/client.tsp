@@ -244,7 +244,7 @@ using Commvault.ContentStore;
   "csharp"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "User-assigned identity PATCH values are intentionally empty objects; dictionary keys identify the identities."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "UserAssignedIdentity exposes only read-only principalId and clientId response metadata, so UpdateableProperties removes both fields and intentionally produces an empty PATCH value model; in the userAssignedIdentities map, resource ID keys identify identities, empty-object values assign them, and null values remove them."
 @doc("User-assigned identity details supplied in a cloud account PATCH.")
 model CloudAccountUserAssignedIdentity {
   ...UpdateableProperties<Azure.ResourceManager.CommonTypes.UserAssignedIdentity>;
