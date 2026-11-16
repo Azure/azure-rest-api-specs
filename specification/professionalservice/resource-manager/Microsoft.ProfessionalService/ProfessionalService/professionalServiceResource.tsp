@@ -139,6 +139,7 @@ model ProfessionalServicePurchaseValidationProperties {
 /** Request payload for validating a proposed Professional Service purchase without creating the resource. */
 model ProfessionalServicePurchaseValidationRequest {
   /** The geo-location where the resource lives. Must be `global` for Professional Service resources. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   location: azureLocation;
 
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
