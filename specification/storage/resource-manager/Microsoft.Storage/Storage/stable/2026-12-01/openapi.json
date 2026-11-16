@@ -6717,7 +6717,7 @@
         "tags": [
           "MetadataPolicies"
         ],
-        "description": "Lists the metadata policies associated with the specified storage account. It returns a collection of one object named default.",
+        "description": "Lists the metadata policies associated with the specified storage account. The collection contains at most one policy, named default.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -15116,6 +15116,16 @@
         "status": {
           "$ref": "#/definitions/MetadataSnapshotPolicyStatus",
           "description": "The status of the metadata snapshot policy."
+        },
+        "containerName": {
+          "type": "string",
+          "description": "The name of the blob container that stores the metadata snapshots. If not specified, a default container is used. Can only be set when the policy is created.",
+          "minLength": 3,
+          "maxLength": 63,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "definition": {
           "$ref": "#/definitions/MetadataSnapshotPolicyDefinition",

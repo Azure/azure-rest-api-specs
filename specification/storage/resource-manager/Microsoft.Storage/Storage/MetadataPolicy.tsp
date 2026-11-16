@@ -60,6 +60,14 @@ model MetadataSnapshotPolicy {
   /** The status of the metadata snapshot policy. */
   status: MetadataSnapshotPolicyStatus;
 
+  /**
+   * The name of the blob container that stores the metadata snapshots. If not specified, a default container is used. Can only be set when the policy is created.
+   */
+  @minLength(3)
+  @maxLength(63)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  containerName?: string;
+
   /** The server-managed metadata snapshot policy definition. */
   @visibility(Lifecycle.Read)
   definition?: MetadataSnapshotPolicyDefinition;
@@ -106,6 +114,6 @@ interface MetadataPolicies {
   /** Deletes the metadata policy associated with the specified storage account. */
   delete is ArmResourceDeleteSync<MetadataPolicy>;
 
-  /** Lists the metadata policies associated with the specified storage account. It returns a collection of one object named default. */
+  /** Lists the metadata policies associated with the specified storage account. The collection contains at most one policy, named default. */
   list is ArmResourceListByParent<MetadataPolicy>;
 }
