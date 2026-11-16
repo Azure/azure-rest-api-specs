@@ -26,10 +26,21 @@ jobs:
           # Must include all branches, for git branch logic in Avocado to work correctly
           fetch-depth: 0
 
+      - name: Check Avocado applicability
+        id: applicability
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const { checkServiceCheckApplicability } =
+              await import('${{ github.workspace }}/.github/workflows/src/service-check-applicability.ts');
+            await checkServiceCheckApplicability({ context, core, checkName: 'Swagger Avocado' });
+
       - name: Setup Node and install deps
+        if: ${{ steps.applicability.outputs.run-analysis == 'true' }}
         uses: ./.github/actions/setup-node-install-deps
 
       - name: Run Avocado
+        if: ${{ steps.applicability.outputs.run-analysis == 'true' }}
         id: run-avocado
         run: |
           set -x

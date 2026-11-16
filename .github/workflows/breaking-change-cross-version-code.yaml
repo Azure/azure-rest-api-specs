@@ -25,15 +25,29 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
 
+      - name: Check cross-version applicability
+        id: applicability
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const { checkServiceCheckApplicability, setNoReviewRequiredOutputs } =
+              await import('${{ github.workspace }}/.github/workflows/src/service-check-applicability.ts');
+            if (!(await checkServiceCheckApplicability({ context, core, checkName: 'Breaking Change(Cross-Version)' }))) {
+              setNoReviewRequiredOutputs(core);
+            }
+
       - name: Setup Node and install deps
+        if: ${{ steps.applicability.outputs.run-analysis == 'true' }}
         uses: ./.github/actions/setup-node-install-deps
 
       - name: Setup .NET 6 SDK
+        if: ${{ steps.applicability.outputs.run-analysis == 'true' }}
         uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
         with:
           dotnet-version: "6.0.x"
 
       - name: Breaking Change(Cross-Version) - Analyze Code
+        if: ${{ steps.applicability.outputs.run-analysis == 'true' }}
         id: breaking-change-cross-version-analyze-code
         env:
           SOURCE_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name }}
@@ -52,22 +66,24 @@ jobs:
       # Upload artifact for 'BreakingChangeReviewRequired' label
       - if: |
           always() && 
-          (steps.breaking-change-cross-version-analyze-code.outputs.breakingChangeReviewLabelName != '')
+          (steps.breaking-change-cross-version-analyze-code.outputs.breakingChangeReviewLabelName != '' ||
+           steps.applicability.outputs.breakingChangeReviewLabelName != '')
         name: Upload artifact with BreakingChangeReviewRequired status
         uses: ./.github/actions/add-empty-artifact
         with:
-          name: "${{ steps.breaking-change-cross-version-analyze-code.outputs.breakingChangeReviewLabelName }}"
-          value: "${{ steps.breaking-change-cross-version-analyze-code.outputs.breakingChangeReviewLabelValue == 'true' }}"
+          name: "${{ steps.breaking-change-cross-version-analyze-code.outputs.breakingChangeReviewLabelName || steps.applicability.outputs.breakingChangeReviewLabelName }}"
+          value: "${{ (steps.breaking-change-cross-version-analyze-code.outputs.breakingChangeReviewLabelValue || steps.applicability.outputs.breakingChangeReviewLabelValue) == 'true' }}"
 
       # Upload artifact for 'VersioningReviewRequired' label
       - if: |
           always() && 
-          (steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelName != '')
+          (steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelName != '' ||
+           steps.applicability.outputs.versioningReviewLabelName != '')
         name: Upload artifact with VersioningReviewRequired status
         uses: ./.github/actions/add-empty-artifact
         with:
-          name: "${{ steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelName }}"
-          value: "${{ steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelValue == 'true' }}"
+          name: "${{ steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelName || steps.applicability.outputs.versioningReviewLabelName }}"
+          value: "${{ (steps.breaking-change-cross-version-analyze-code.outputs.versioningReviewLabelValue || steps.applicability.outputs.versioningReviewLabelValue) == 'true' }}"
 
       # Used by other workflows like set-status
       - name: Set job-summary artifact

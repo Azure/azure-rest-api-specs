@@ -23,12 +23,23 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-          fetch-depth: 2
+          fetch-depth: 0
+
+      - name: Check SemanticValidation applicability
+        id: applicability
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const { checkServiceCheckApplicability } =
+              await import('${{ github.workspace }}/.github/workflows/src/service-check-applicability.ts');
+            await checkServiceCheckApplicability({ context, core, checkName: 'Swagger SemanticValidation' });
 
       - name: Setup Node and install deps
+        if: ${{ steps.applicability.outputs.run-analysis == 'true' }}
         uses: ./.github/actions/setup-node-install-deps
 
       - name: Swagger Semantic Validation
+        if: ${{ steps.applicability.outputs.run-analysis == 'true' }}
         id: swagger-semantic-validation
         run: |
           echo "summary=$GITHUB_STEP_SUMMARY" >> "$GITHUB_OUTPUT"

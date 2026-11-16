@@ -218,6 +218,20 @@ describe("breaking-change-add-label-artifacts", () => {
 
       expectStandardOutputs(false, false); // no labels should be true
     });
+
+    it("clears review labels when both analyses emit not-applicable artifacts", async () => {
+      await setupMockInputs();
+      const artifacts = [
+        createMockArtifact(`${REVIEW_REQUIRED_LABELS.BREAKING_CHANGE}=false`),
+        createMockArtifact(`${REVIEW_REQUIRED_LABELS.VERSIONING}=false`),
+      ];
+      setupWorkflowRunsMock(createStandardWorkflowRuns());
+      setupArtifactsMock(artifacts, artifacts);
+
+      await getLabelActions({ github: mockGithub, context: mockContext, core: mockCore });
+
+      expectStandardOutputs(false, false);
+    });
   });
 
   describe("workflow run status handling", () => {
