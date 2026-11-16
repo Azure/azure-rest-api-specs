@@ -42,6 +42,7 @@ model SqlTriggerGetResults
 }
 
 @armResourceOperations(#{ omitTags: true })
+@tag("CosmosDB")
 interface SqlTriggerGetResultsOperationGroup {
   /**
    * Gets the SQL trigger under an existing Azure Cosmos DB database account.

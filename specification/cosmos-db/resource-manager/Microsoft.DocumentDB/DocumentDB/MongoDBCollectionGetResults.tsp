@@ -49,12 +49,14 @@ interface MongoDBCollectionGetResultsOperationGroup {
   /**
    * Gets the MongoDB collection under an existing Azure Cosmos DB database account.
    */
+  @tag("CosmosDB")
   getMongoDBCollection is ArmResourceRead<MongoDBCollectionGetResults>;
 
   /**
    * Create or update an Azure Cosmos DB MongoDB Collection
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("CosmosDB")
   createUpdateMongoDBCollection is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     MongoDBCollectionGetResults,
     Request = MongoDBCollectionCreateUpdateParameters,
@@ -68,6 +70,7 @@ interface MongoDBCollectionGetResultsOperationGroup {
    * Deletes an existing Azure Cosmos DB MongoDB Collection.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("CosmosDB")
   deleteMongoDBCollection is ArmResourceDeleteWithoutOkAsync<
     MongoDBCollectionGetResults,
     Response =
@@ -79,6 +82,7 @@ interface MongoDBCollectionGetResultsOperationGroup {
    * Lists the MongoDB collection under an existing Azure Cosmos DB database account.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("CosmosDB")
   listMongoDBCollections is ArmResourceListByParent<
     MongoDBCollectionGetResults,
     Response = ArmResponse<MongoDBCollectionListResult>
@@ -91,6 +95,7 @@ interface MongoDBCollectionGetResultsOperationGroup {
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
   @action("partitionMerge")
+  @tag("CosmosDB")
   listMongoDBCollectionPartitionMerge is ArmResourceActionAsyncBase<
     MongoDBCollectionGetResults,
     MergeParameters,
@@ -105,6 +110,7 @@ interface MongoDBCollectionGetResultsOperationGroup {
   /**
    * Retrieves continuous backup information for a Mongodb collection.
    */
+  @tag("Restorables")
   retrieveContinuousBackupInformation is ArmResourceActionAsync<
     MongoDBCollectionGetResults,
     ContinuousBackupRestoreLocation,

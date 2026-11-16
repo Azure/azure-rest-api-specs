@@ -42,6 +42,7 @@ model SqlUserDefinedFunctionGetResults
 }
 
 @armResourceOperations(#{ omitTags: true })
+@tag("CosmosDB")
 interface SqlUserDefinedFunctionGetResultsOperationGroup {
   /**
    * Gets the SQL userDefinedFunction under an existing Azure Cosmos DB database account.

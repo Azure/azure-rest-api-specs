@@ -45,12 +45,14 @@ interface TableGetResultsOperationGroup {
   /**
    * Gets the Tables under an existing Azure Cosmos DB database account with the provided name.
    */
+  @tag("CosmosDB")
   getTable is ArmResourceRead<TableGetResults>;
 
   /**
    * Create or update an Azure Cosmos DB Table
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("CosmosDB")
   createUpdateTable is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     TableGetResults,
     Request = TableCreateUpdateParameters,
@@ -63,6 +65,7 @@ interface TableGetResultsOperationGroup {
   /**
    * Deletes an existing Azure Cosmos DB Table.
    */
+  @tag("CosmosDB")
   deleteTable is ArmResourceDeleteWithoutOkAsync<
     TableGetResults,
     Response =
@@ -73,6 +76,7 @@ interface TableGetResultsOperationGroup {
   /**
    * Lists the Tables under an existing Azure Cosmos DB database account.
    */
+  @tag("CosmosDB")
   listTables is ArmResourceListByParent<
     TableGetResults,
     Response = ArmResponse<TableListResult>
@@ -81,6 +85,7 @@ interface TableGetResultsOperationGroup {
   /**
    * Retrieves continuous backup information for a table.
    */
+  @tag("Restorables")
   retrieveContinuousBackupInformation is ArmResourceActionAsync<
     TableGetResults,
     ContinuousBackupRestoreLocation,

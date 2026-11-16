@@ -14,6 +14,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.DocumentDB;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@tag("CosmosDB")
 interface DatabaseAccountsOperationGroup {
   /**
    * Checks that the Azure Cosmos DB account name already exists. A valid account name may contain only lowercase letters, numbers, and the '-' character, and must be between 3 and 50 characters.
@@ -38,6 +39,7 @@ interface DatabaseAccountsOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@tag("Restorables")
 interface RestorableDatabaseAccountsOperationGroup {
   /**
    * Lists all the restorable Azure Cosmos DB database accounts available under the subscription. This call requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/read' permission.

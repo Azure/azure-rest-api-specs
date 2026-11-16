@@ -25,6 +25,7 @@ model LocationGetResult
 }
 
 @armResourceOperations(#{ omitTags: true })
+@tag("CosmosDB")
 interface LocationGetResults {
   /**
    * Get the properties of an existing Cosmos DB location
