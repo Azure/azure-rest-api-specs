@@ -189,6 +189,29 @@ describe("detectChangedSpecConfigFiles", () => {
     });
   });
 
+  test("merges Windows project paths with shared-library dependents", async () => {
+    const projectFolder = "specification/contosowidgetmanager/Contoso.WidgetManager";
+    const projectFile = `${projectFolder}/main.tsp`;
+    const sharedFile = "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/main.tsp";
+    vi.mocked(getChangedFiles).mockResolvedValue([projectFile, sharedFile]);
+    const relativePath = vi
+      .spyOn(path, "relative")
+      .mockReturnValue(projectFolder.replaceAll("/", "\\"));
+
+    try {
+      const result = await detectChangedSpecConfigFiles(mockCommandInput);
+
+      expect(result.map(normalizeResultItem)).toEqual([
+        {
+          typespecProject: `${projectFolder}/tspconfig.yaml`,
+          specs: [projectFile, sharedFile],
+        },
+      ]);
+    } finally {
+      relativePath.mockRestore();
+    }
+  });
+
   test("case with readme, tsp, shared files", async () => {
     vi.mocked(getChangedFiles).mockResolvedValue([
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json",

@@ -178,7 +178,10 @@ export async function detectChangedSpecConfigFromChangedFiles(
 
   const projects = await findTypeSpecProjectsForChangedFiles(localSpecRepoPath, fileList);
   const typespecProjectResult = Object.fromEntries(
-    [...projects].map(([folder, files]) => [path.relative(localSpecRepoPath, folder), files]),
+    [...projects].map(([folder, files]) => [
+      path.relative(localSpecRepoPath, folder).replaceAll("\\", "/"),
+      files,
+    ]),
   );
 
   const typespecProjectSharedLibraries = searchSharedLibrary(fileList, {
