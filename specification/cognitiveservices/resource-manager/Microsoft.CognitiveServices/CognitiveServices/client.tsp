@@ -32,6 +32,18 @@ namespace CognitiveServicesClientCustomizations {
      */
     sku: ArcDeploymentSku;
   }
+
+  /** The scope used to aggregate available managed compute capacity. */
+  @TypeSpec.Versioning.added(Versions.v2026_11_01)
+  union CognitiveServicesManagedComputeCapacityOfferScope {
+    string,
+
+    /** Capacity aggregated globally. */
+    Global: "Global",
+
+    /** Capacity aggregated within a data zone. */
+    DataZone: "DataZone",
+  }
 }
 
 @@clientName(
@@ -1384,5 +1396,44 @@ op regenerateKeyCustom(
 @@clientName(
   RaiPolicyCustomExternalSafetyProviderReference.blocking,
   "IsBlocking",
+  "csharp"
+);
+
+@@alternateType(
+  ManagedComputeCapacityListParameters.deploymentId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ManagedComputeCapacityListParameters.location,
+  azureLocation,
+  "csharp"
+);
+@@alternateType(
+  DeploymentProperties.contextCacheContainerId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ManagedComputeCapacityProperties.offerScope,
+  CognitiveServicesClientCustomizations.CognitiveServicesManagedComputeCapacityOfferScope,
+  "csharp"
+);
+@@clientName(
+  RaiEgressHeaderValueRef,
+  "RaiEgressHeaderValueReference",
+  "csharp"
+);
+@@clientName(
+  RaiEgressManagedIdentityRef,
+  "RaiEgressManagedIdentityReference",
+  "csharp"
+);
+@@clientName(RaiEgressSecretRef, "RaiEgressSecretReference", "csharp");
+@@clientName(RaiEgressHeaderTransform.valueRef, "ValueReference", "csharp");
+@@clientName(RaiEgressHeaderValueRef.secretRef, "SecretReference", "csharp");
+@@clientName(
+  RaiEgressHeaderValueRef.managedIdentityRef,
+  "ManagedIdentityReference",
   "csharp"
 );
