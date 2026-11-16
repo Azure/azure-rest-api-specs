@@ -134,6 +134,12 @@ const AUTOMATED_CHECK_NAME = "Automated merging requirements met";
 const IMPACT_CHECK_NAME = "Summarize PR Impact";
 const NEXT_STEPS_COMMENT_ID = "NextStepsToMerge";
 const MAX_IMPACT_ASSESSMENT_BYTES = 16 * 1024 * 1024;
+const REQUIREMENT_COMMENT_MARKERS: Readonly<Record<string, string>> = {
+  "TypeSpec suppressions": "<!-- TypeSpecSuppressionsReview -->",
+  "SDK package names": "<!-- package-name-review-bot -->",
+  [CONTRIBUTOR_READINESS_CHECK_NAME]: "<!-- contributor-readiness -->",
+};
+type RequirementCommentLinks = Readonly<Record<string, string | undefined>>;
 
 const CHECK_METADATA: CheckMetadata[] = [
   {
@@ -448,6 +454,22 @@ export async function summarizeChecksImpl(
     }
   }
 
+  const comments = await github.paginate(github.rest.issues.listComments, {
+    owner,
+    repo,
+    issue_number,
+    per_page: PER_PAGE_MAX,
+  });
+  const requirementCommentLinks: Record<string, string> = {};
+  for (const [name, marker] of Object.entries(REQUIREMENT_COMMENT_MARKERS)) {
+    const report = comments.findLast(
+      (comment) => comment.user?.login === "github-actions[bot]" && comment.body?.includes(marker),
+    );
+    if (report) {
+      requirementCommentLinks[name] = `${prUrl}#issuecomment-${report.id}`;
+    }
+  }
+
   let sdkBreakingChangesSummary: string | undefined = undefined;
   const hasSdkBreakingChange = hasSdkBreakingChanges(labelNames);
   if (hasSdkBreakingChange) {
@@ -462,12 +484,6 @@ export async function summarizeChecksImpl(
         `Skipping SDK breaking-change summary for stale commit ${head_sha}; current PR head is ${pull.head.sha}.`,
       );
     } else {
-      const comments = await github.paginate(github.rest.issues.listComments, {
-        owner,
-        repo,
-        issue_number,
-        per_page: PER_PAGE_MAX,
-      });
       sdkBreakingChangesSummary = buildSdkBreakingChangesSummary(
         labelNames,
         comments ?? [],
@@ -487,6 +503,7 @@ export async function summarizeChecksImpl(
     impactAssessment !== undefined,
     target_url,
     sdkBreakingChangesSummary,
+    requirementCommentLinks,
   );
 
   automatedChecksMet.target_url = target_url;
@@ -506,6 +523,8 @@ export async function summarizeChecksImpl(
     issue_number,
     commentBody,
     NEXT_STEPS_COMMENT_ID,
+    undefined,
+    comments,
   );
 
   // finally, update the "Automated merging requirements met" commit status
@@ -946,6 +965,7 @@ export function createNextStepsComment(
   assessmentCompleted: boolean,
   target_url: string,
   sdkBreakingChangesSummary: string = "",
+  requirementCommentLinks: RequirementCommentLinks = {},
 ): [string, CheckRunResult] {
   const failingRequiredChecks = requiredRuns.filter((run) => checkRunIsSuccessful(run) === false);
 
@@ -976,6 +996,7 @@ export function createNextStepsComment(
     assessmentCompleted,
     target_url,
     sdkBreakingChangesSummary,
+    requirementCommentLinks,
   );
 
   return [commentBody, automatedChecksMet];
@@ -995,6 +1016,7 @@ function buildNextStepsToMergeCommentBody(
   assessmentCompleted: boolean,
   target_url: string,
   sdkBreakingChangesSummary: string,
+  requirementCommentLinks: RequirementCommentLinks,
 ): [string, CheckRunResult] {
   const violatedReqLabelsRules = getViolatedRequiredLabelsRules(core, labels, targetBranch);
 
@@ -1022,6 +1044,7 @@ function buildNextStepsToMergeCommentBody(
     completedChecks,
     target_url,
     sdkBreakingChangesSummary,
+    requirementCommentLinks,
   );
 
   return [renderMarkdownDoc(section("Next Steps to Merge", commentBody), 2), automatedChecksMet];
@@ -1086,6 +1109,7 @@ function getCommentBody(
   completedChecks: CheckRunData[],
   target_url: string,
   sdkBreakingChangesSummary: string,
+  requirementCommentLinks: RequirementCommentLinks,
 ): [MarkdownDoc, CheckRunResult] {
   let status: "pending" | keyof typeof CheckConclusion = "pending";
   let summaryData = "The requirements for merging this PR are still being evaluated. Please wait.";
@@ -1130,14 +1154,17 @@ function getCommentBody(
   }
 
   const blockingRequirements = [
-    ...buildLabelRequirementSummaries(violatedRequiredLabelsRules),
+    ...buildLabelRequirementSummaries(violatedRequiredLabelsRules, requirementCommentLinks),
     ...buildFailingCheckSummaries(failingRequiredChecks, "required"),
     ...pendingRequirements,
   ];
   const readinessWarnings: RequirementSummary[] = failingFyiChecks
     .filter((check) => check.name === CONTRIBUTOR_READINESS_CHECK_NAME)
     .map((check) => ({
-      name: formatCheckName(check),
+      name: formatCheckName({
+        ...check,
+        url: requirementCommentLinks[check.name] ?? check.url,
+      }),
       status: "warning",
       nextStep: `Open the access report, ${link("set up / renew access", CONTRIBUTOR_ONBOARDING_URL)}, then comment ${inlineCode(CONTRIBUTOR_READINESS_COMMAND)}.`,
     }));
@@ -1248,15 +1275,19 @@ function buildFailingCheckSummaries(
  */
 function buildLabelRequirementSummaries(
   violatedRequiredLabelsRules: RequiredLabelRule[],
+  requirementCommentLinks: RequirementCommentLinks,
 ): RequirementSummary[] {
   return violatedRequiredLabelsRules
     .toSorted((a, b) => a.precedence - b.precedence)
-    .map((rule) => ({
-      name: escapeMarkdown(rule.name),
-      status: rule.awaitingReview ? "awaiting-review" : "action-required",
-      nextStep: rule.nextStep,
-      guidance: rule.troubleshootingGuide.trim(),
-    }));
+    .map((rule) => {
+      const reportUrl = requirementCommentLinks[rule.name];
+      return {
+        name: reportUrl ? link(escapeMarkdown(rule.name), reportUrl) : escapeMarkdown(rule.name),
+        status: rule.awaitingReview ? "awaiting-review" : "action-required",
+        nextStep: rule.nextStep,
+        guidance: rule.troubleshootingGuide.trim(),
+      };
+    });
 }
 // #endregion
 

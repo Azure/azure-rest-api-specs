@@ -175,6 +175,123 @@ describe("ARM review label handoff", () => {
       expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
       expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
     });
+
+    function createSummaryWithReports() {
+      const summary = createSummary([
+        "typespec-suppressions-review-required",
+        "package-name-review-required",
+      ]);
+      summary.github.rest.checks.listForRef.mockResolvedValue({
+        data: {
+          check_runs: [
+            {
+              name: "Summarize PR Impact",
+              status: "completed",
+              conclusion: "success",
+              check_suite: { id: 1 },
+            },
+            {
+              name: "Contributor readiness",
+              external_id: "contributor-readiness:123",
+              status: "completed",
+              conclusion: "neutral",
+              details_url: "https://checks.example/access",
+            },
+          ],
+        },
+      });
+      return summary;
+    }
+
+    it("links requirements to the latest corresponding bot reports and reuses the comment listing", async () => {
+      const { github, run } = createSummaryWithReports();
+      github.rest.issues.listComments.mockResolvedValue({
+        data: [
+          { id: 99, body: "Old summary\n<!-- NextStepsToMerge -->" },
+          {
+            id: 10,
+            user: { login: "github-actions[bot]" },
+            body: "Old suppressions report\n<!-- TypeSpecSuppressionsReview -->",
+          },
+          {
+            id: 11,
+            user: { login: "github-actions[bot]" },
+            body: "Suppressions report\n<!-- TypeSpecSuppressionsReview -->",
+          },
+          {
+            id: 12,
+            user: { login: "github-actions[bot]" },
+            body: "Package names report\n<!-- package-name-review-bot -->",
+          },
+          {
+            id: 13,
+            user: { login: "github-actions[bot]" },
+            body: "Access report\n<!-- contributor-readiness -->",
+          },
+          {
+            id: 14,
+            user: { login: "contributor" },
+            body: "<!-- TypeSpecSuppressionsReview -->\n<!-- package-name-review-bot -->\n<!-- contributor-readiness -->",
+          },
+        ],
+      });
+
+      await run();
+
+      expect(github.rest.issues.listComments).toHaveBeenCalledTimes(1);
+      expect(github.rest.issues.createComment).not.toHaveBeenCalled();
+      expect(github.rest.issues.updateComment).toHaveBeenCalledWith(
+        expect.objectContaining({ comment_id: 99 }),
+      );
+      const { body } = github.rest.issues.updateComment.mock.calls[0][0] as { body: string };
+      const visible = marked.parse(body.split("<details>")[0]);
+      const prUrl = "https://github.com/Azure/azure-rest-api-specs/pull/123";
+      expect(visible).toContain(`<a href="${prUrl}#issuecomment-11">TypeSpec suppressions</a>`);
+      expect(visible).toContain(`<a href="${prUrl}#issuecomment-12">SDK package names</a>`);
+      expect(visible).toContain(`<a href="${prUrl}#issuecomment-13">Contributor readiness</a>`);
+      expect(body).not.toContain("#issuecomment-10");
+      expect(body).not.toContain("#issuecomment-14");
+      expect(body).not.toContain("https://checks.example/access");
+      expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+        expect.objectContaining({ state: "failure" }),
+      );
+    });
+
+    it.each([false, true])(
+      "preserves guidance when no trusted report exists (user-authored reports: %s)",
+      async (userAuthored) => {
+        const { github, run } = createSummaryWithReports();
+        github.rest.issues.listComments.mockResolvedValue({
+          data: userAuthored
+            ? [
+                {
+                  id: 14,
+                  user: { login: "contributor" },
+                  body: "<!-- TypeSpecSuppressionsReview -->\n<!-- package-name-review-bot -->\n<!-- contributor-readiness -->",
+                },
+              ]
+            : [],
+        });
+
+        await run();
+
+        const { body } = github.rest.issues.createComment.mock.calls[0][0] as { body: string };
+        const visible = marked.parse(body.split("<details>")[0]);
+        expect(visible).toContain("TypeSpec suppressions");
+        expect(visible).toContain("SDK package names");
+        expect(visible).toContain(
+          "Request approval for the suppressions listed in the TypeSpec review comment.",
+        );
+        expect(visible).toContain(
+          '<a href="https://checks.example/access">Contributor readiness</a>',
+        );
+        expect(body).not.toContain("#issuecomment-");
+        expect(github.rest.issues.listComments).toHaveBeenCalledTimes(1);
+        expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+          expect.objectContaining({ state: "failure" }),
+        );
+      },
+    );
   });
 
   describe("workflow_dispatch from Update Labels", () => {

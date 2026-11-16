@@ -53,6 +53,7 @@ export function parseExistingComments(
  * @param commentIdentifier - The value that will be stored in an html comment so we can retrieve this comment later
  * @param commentUser - Optional GitHub author login used to filter existing
  * comments. When omitted, comments from all authors are considered.
+ * @param existingComments - Optional comments already fetched for this issue.
  * @returns Resolves when the comment is created or updated.
  */
 export async function commentOrUpdate(
@@ -64,15 +65,18 @@ export async function commentOrUpdate(
   body: string,
   commentIdentifier: string,
   commentUser?: string,
+  existingComments?: IssueComment[],
 ): Promise<void> {
   const computedBody = body + `\n<!-- ${commentIdentifier} -->`;
 
-  let comments: IssueComment[] = await github.paginate(github.rest.issues.listComments, {
-    owner,
-    repo,
-    issue_number,
-    per_page: PER_PAGE_MAX,
-  });
+  let comments: IssueComment[] =
+    existingComments ??
+    (await github.paginate(github.rest.issues.listComments, {
+      owner,
+      repo,
+      issue_number,
+      per_page: PER_PAGE_MAX,
+    }));
 
   if (commentUser) {
     comments = comments.filter((comment) => comment.user?.login === commentUser);
