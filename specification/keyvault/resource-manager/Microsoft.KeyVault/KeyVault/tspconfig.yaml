@@ -17,6 +17,7 @@ options:
     namespace: "Azure.ResourceManager.KeyVault"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     enable-wire-path-attribute: true
+    api-version: "2026-12-01"
   "@azure-typespec/http-client-csharp-provisioning":
     namespace: "Azure.Provisioning.KeyVault"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
@@ -27,6 +28,7 @@ options:
     generate-test: true
     generate-sample: true
     flavor: "azure"
+    api-version: "2026-12-01"
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-keyvault"
     namespace: "com.azure.resourcemanager.keyvault"
@@ -40,11 +42,13 @@ options:
       TrackedResource: Resource
     client-side-validations: true
     generate-tests: false
+    api-version: "2026-12-01"
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-keyvault"
     flavor: azure
     compatibility-lro: true
     experimental-extensible-enums: true
+    api-version: "2026-12-01"
     package-details:
       name: "@azure/arm-keyvault"
   "@azure-tools/typespec-go":
@@ -57,6 +61,7 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+    api-version: "2026-12-01"
   "@azure-tools/typespec-ts-provisioning":
     emitter-output-dir: "{output-dir}/{service-dir}/provisioning-keyvault"
     azure-sdk-for-js: true

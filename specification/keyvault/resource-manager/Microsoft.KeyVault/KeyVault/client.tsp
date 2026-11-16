@@ -110,19 +110,6 @@ using Azure.Core;
   "csharp"
 );
 
-@@clientName(TokenBindingParameters, "TokenBindingConfiguration", "csharp");
-@@clientName(
-  VaultProperties.tokenBindingParameters,
-  "TokenBindingConfiguration",
-  "csharp"
-);
-@@clientName(
-  VaultPatchProperties.tokenBindingParameters,
-  "TokenBindingConfiguration",
-  "csharp"
-);
-@@clientName(WrappingKeyValue.kty, "KeyType", "csharp");
-
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "https://github.com/Azure/typespec-azure/issues/4090"
 #suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "https://github.com/Azure/typespec-azure/issues/4090"
 @@clientOption(

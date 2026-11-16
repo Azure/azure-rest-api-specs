@@ -492,40 +492,6 @@ union ManagedHsmSkuFamily {
 }
 
 /**
- * This specifies whether token binding is disabled, enabled or enforced.
- */
-@Versioning.added(KeyVault.Versions.v2026_10_01_preview)
-union TokenBindingMode {
-  string,
-
-  /** Token binding is enforced for the vault. Only bounded tokens will be accepted. Bearer tokens will be rejected. */
-  Enforced: "Enforced",
-
-  /** Token binding is not enforced for the vault. Bounded tokens will be rejected. */
-  NotEnforced: "NotEnforced",
-}
-
-/**
- * Must be one of the following values "NoValidation", "Unattested", "AttestedTrustedLaunch", "AttestedConfidential". Strength of the token binding increases with each value in that order.
- */
-@Versioning.added(KeyVault.Versions.v2026_10_01_preview)
-union TokenBindingStrength {
-  string,
-
-  /** This is default when token binding is not enabled. */
-  NoValidation: "NoValidation",
-
-  /** No attestation proof is required for the bounded token. */
-  Unattested: "Unattested",
-
-  /** Bounded Entra token must originate from a trusted launch VM with attestation proof from the attestation authority like Microsoft Azure Attestation. */
-  AttestedTrustedLaunch: "AttestedTrustedLaunch",
-
-  /** Bounded Entra token must originate from a confidential VM with attestation proof from the attestation authority like Microsoft Azure Attestation. */
-  AttestedConfidential: "AttestedConfidential",
-}
-
-/**
  * The type of action.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1036,10 +1002,6 @@ model ManagedHsmKeyReleasePolicy {
  * Parameters for creating or updating a vault
  */
 model VaultCreateOrUpdateParameters {
-  /** Managed service identity assigned to the vault. */
-  @Versioning.added(Versions.v2026_10_01_preview)
-  identity?: CommonTypes.ManagedServiceIdentity;
-
   /**
    * The supported Azure location where the key vault should be created.
    */
@@ -1164,75 +1126,10 @@ model VaultProperties {
   publicNetworkAccess?: string = "enabled";
 
   /**
-   * Configuration for Token Binding for Entra tokens
-   */
-  @Versioning.added(KeyVault.Versions.v2026_10_01_preview)
-  tokenBindingParameters?: TokenBindingParameters;
-
-  /**
    * Whether cross-tenant access protection is enabled for this vault. When enabled, the vault tenant ID can only be set or changed to the subscription's home tenant ID. Once enabled, this protection cannot be disabled. If omitted when creating a vault, protection is disabled. If omitted when updating a vault, the existing value is preserved.
    */
-  @Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+  @Versioning.added(KeyVault.Versions.v2026_12_01)
   enableCrossTenantAccessProtection?: boolean;
-
-  /**
-   * Configures an external Managed HSM key used to wrap the vault's protection keys.
-   * When configured, this property is returned in create, update, get, and list responses.
-   * Responses contain the persisted key reference and authentication mechanism, not key material or credentials.
-   * It can be supplied when creating a vault or enabling wrapping on an existing vault.
-   * This property is available starting with API version 2026-10-01-preview, when the protection-key wrapping capability is available for the target vault.
-   * Reapplying an equivalent configuration is supported; replacing or removing it is not.
-   * A versionless reference can match the persisted versioned reference; resubmitting it does not rotate the key.
-   * After configuration, vault availability depends on the persisted Managed HSM key version remaining usable and accessible to the service.
-   * Disabling or deleting that key version, or revoking the service's access, can make the vault unavailable.
-   * Omitting this property preserves the existing configuration.
-   */
-  @Versioning.added(KeyVault.Versions.v2026_10_01_preview)
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  protectionKeysWrappingKey?: WrappingKeyConfiguration;
-}
-
-/**
- * Configuration of the external key used to wrap a vault's protection keys.
- * Unsupported properties in this configuration and its nested objects are rejected.
- * Unsupported API versions or a feature that is not enabled result in HTTP 400 with NotSupported.
- * Invalid configurations or attempted replacement result in HTTP 400 with BadRequest or InvalidParameter.
- * Protection key wrapping throttling results in HTTP 429 with InternalError.
- * Other protection key wrapping failures result in HTTP 503 with InternalError.
- * Errors use the existing CloudError response.
- */
-@Versioning.added(KeyVault.Versions.v2026_10_01_preview)
-model WrappingKeyConfiguration {
-  /** Identifies the external wrapping key. */
-  keyValue: WrappingKeyValue;
-
-  /** Specifies how the service authenticates to the external wrapping key. */
-  keyAuthenticationData: WrappingKeyAuthenticationData;
-}
-
-/** Reference to an external Managed HSM wrapping key. */
-@Versioning.added(KeyVault.Versions.v2026_10_01_preview)
-model WrappingKeyValue {
-  /**
-   * Absolute HTTPS URL of a key on a supported Managed HSM endpoint.
-   * The path must be /keys/{key-name} or /keys/{key-name}/{key-version}.
-   * User information, query strings, fragments, and non-default ports are not supported.
-   */
-  @minLength(1)
-  url: url;
-
-  /** Wrapping key type. Only oct is supported. */
-  kty: "oct";
-}
-
-/** Authentication mechanism for accessing the external wrapping key. */
-@Versioning.added(KeyVault.Versions.v2026_10_01_preview)
-model WrappingKeyAuthenticationData {
-  /**
-   * Authentication mechanism. Only ServiceIdentity is supported.
-   * A caller-supplied vault managed identity is not required.
-   */
-  authType: "ServiceIdentity";
 }
 
 /**
@@ -1298,22 +1195,6 @@ model Permissions {
    * Permissions to storage accounts
    */
   storage?: StoragePermissions[];
-}
-
-/**
- * Configuration for Token Binding for Entra tokens
- */
-@Versioning.added(KeyVault.Versions.v2026_10_01_preview)
-model TokenBindingParameters {
-  /**
-   * This specifies whether token binding is disabled, enabled or enforced.
-   */
-  mode?: TokenBindingMode;
-
-  /**
-   * Must be one of the following values "NoValidation", "Unattested", "AttestedTrustedLaunch", "AttestedConfidential". Strength of the token binding increases with each value in that order.
-   */
-  minimumTokenBindingStrength?: TokenBindingStrength;
 }
 
 /**
@@ -1474,10 +1355,6 @@ model CloudErrorBody {
  * Parameters for creating or updating a vault
  */
 model VaultPatchParameters {
-  /** Managed service identity assigned to the vault. */
-  @Versioning.added(Versions.v2026_10_01_preview)
-  identity?: CommonTypes.ManagedServiceIdentity;
-
   /**
    * The tags that will be assigned to the key vault.
    */
@@ -1561,32 +1438,10 @@ model VaultPatchProperties {
   publicNetworkAccess?: string;
 
   /**
-   * Configuration for Token Binding for Entra tokens
-   */
-  @Versioning.added(KeyVault.Versions.v2026_10_01_preview)
-  tokenBindingParameters?: TokenBindingParameters;
-
-  /**
    * Whether cross-tenant access protection is enabled for this vault. When enabled, changes to the vault tenant ID must use the subscription's home tenant ID. Once enabled, this protection cannot be disabled. If omitted, the existing value is preserved.
    */
-  @Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+  @Versioning.added(KeyVault.Versions.v2026_12_01)
   enableCrossTenantAccessProtection?: boolean;
-
-  /**
-   * Configures an external Managed HSM key used to wrap the vault's protection keys.
-   * When configured, this property is returned in create, update, get, and list responses.
-   * Responses contain the persisted key reference and authentication mechanism, not key material or credentials.
-   * It can be supplied when enabling wrapping on an existing vault.
-   * This property is available starting with API version 2026-10-01-preview, when the protection-key wrapping capability is available for the target vault.
-   * Reapplying an equivalent configuration is supported; replacing or removing it is not.
-   * A versionless reference can match the persisted versioned reference; resubmitting it does not rotate the key.
-   * After configuration, vault availability depends on the persisted Managed HSM key version remaining usable and accessible to the service.
-   * Disabling or deleting that key version, or revoking the service's access, can make the vault unavailable.
-   * Omitting this property preserves the existing configuration.
-   */
-  @Versioning.added(KeyVault.Versions.v2026_10_01_preview)
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  protectionKeysWrappingKey?: WrappingKeyConfiguration;
 }
 
 /**
@@ -1878,6 +1733,12 @@ model MhsmNetworkRuleSet {
   defaultAction?: NetworkRuleAction;
 
   /**
+   * The public network IP address type for the managed HSM pool. If omitted when creating a pool, the default is IPv4. If omitted when updating a pool, the existing value is preserved. IPv4 accepts only IPv4 rules; requests containing IPv6 rules are rejected. DualStack accepts both IPv4 and IPv6 rules in ipRules.
+   */
+  @Versioning.added(KeyVault.Versions.v2026_12_01)
+  publicNetworkIpAddressType?: MhsmPublicNetworkIpAddressType;
+
+  /**
    * The list of IP address rules.
    */
   @identifiers(#["value"])
@@ -1896,11 +1757,29 @@ model MhsmNetworkRuleSet {
 }
 
 /**
+ * The public network IP address type for a managed HSM pool.
+ */
+@Versioning.added(KeyVault.Versions.v2026_12_01)
+union MhsmPublicNetworkIpAddressType {
+  string,
+
+  /**
+   * Only IPv4 addresses are supported.
+   */
+  IPv4: "IPv4",
+
+  /**
+   * Both IPv4 and IPv6 addresses are supported.
+   */
+  DualStack: "DualStack",
+}
+
+/**
  * A rule governing the accessibility of a managed HSM pool from a specific IP address or IP range.
  */
 model MhsmipRule {
   /**
-   * An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78).
+   * An IP address or address range in CIDR notation. IPv4 examples include '192.0.2.10' and '192.0.2.0/24'. Starting with API version 2026-12-01, IPv6 addresses and ranges, such as '2001:db8::1' and '2001:db8:1234::/64', are also accepted when networkAcls.publicNetworkIpAddressType is DualStack. Earlier API versions and the IPv4 public network IP address type accept only IPv4 rules.
    */
   value: string;
 }
