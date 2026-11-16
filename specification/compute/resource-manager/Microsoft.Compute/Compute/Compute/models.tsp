@@ -1038,7 +1038,10 @@ union PatchOperationStatus {
 @renamedFrom(Versions.v2026_09_01, "ZonePlacementPolicyType")
 union ZonePlacementPolicyTypeLegacy {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Automatic zone placement for Virtual Machines in API versions before 2026-09-01, retained for backward compatibility.
+   */
   Any: "Any",
 
   /**
@@ -1056,7 +1059,7 @@ union ZonePlacementPolicyType {
   string,
 
   /**
-   * Automatic zone placement in a Virtual Machine Scale Set.
+   * Automatic zone placement for Virtual Machines and Virtual Machine Scale Sets.
    */
   Auto: "Auto",
 }
