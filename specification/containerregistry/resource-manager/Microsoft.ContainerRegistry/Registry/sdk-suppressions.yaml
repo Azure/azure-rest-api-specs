@@ -1,0 +1,12 @@
+suppressions:
+  azure-sdk-for-python:
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/containerregistry/armcontainerregistry
+      breaking-changes:
+        - Function `*CacheRulesClient.BeginCreate` parameter(s) have been changed from `(ctx context.Context, resourceGroupName string, registryName string, cacheRuleName string, cacheRuleCreateParameters CacheRule, options *CacheRulesClientBeginCreateOptions)` to `(ctx context.Context, resourceGroupName string, registryName string, cacheRuleName string, cacheRuleCreateParameters CacheRuleNew, options *CacheRulesClientBeginCreateOptions)`
+        - Type of `CacheRulesListResult.Value` has been changed from `[]*CacheRule` to `[]*CacheRuleNew`
+        - Struct `CacheRule` has been removed
+        - Field `CacheRule` of struct `CacheRulesClientCreateResponse` has been removed
+        - Field `CacheRule` of struct `CacheRulesClientGetResponse` has been removed
+        - Field `CacheRule` of struct `CacheRulesClientUpdateResponse` has been removed
+  azure-sdk-for-js:

@@ -299,7 +299,7 @@ model CacheRulesListResult {
    * The list of cache rules. Since this list may be incomplete, the nextLink field should be used to request the next list of cache rules.
    */
   @pageItems
-  value?: CacheRule[];
+  value?: CacheRuleNew[];
 
   /**
    * The URI that can be used to request the next list of cache rules.

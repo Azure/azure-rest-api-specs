@@ -16,7 +16,7 @@ using Microsoft.ContainerRegistry;
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  CacheRule.properties,
+  CacheRuleNew.properties,
   "autorest,javascript,java,python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
