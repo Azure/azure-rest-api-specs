@@ -24,6 +24,7 @@ import "../evaluation-taxonomies/routes.tsp";
 import "../evaluators/routes.tsp";
 import "../insights/routes.tsp";
 import "../memory-stores/routes.tsp";
+import "../knowledge/routes.tsp";
 import "../models/routes.tsp";
 import "../red-teams/routes.tsp";
 import "../routines/routes.tsp";

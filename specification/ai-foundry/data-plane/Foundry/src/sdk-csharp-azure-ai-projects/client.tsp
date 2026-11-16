@@ -13,6 +13,7 @@ import "../evaluators/routes.tsp";
 import "../insights/routes.tsp";
 import "../schedules/routes.tsp";
 import "../memory-stores/routes.tsp";
+import "../knowledge/routes.tsp";
 import "../routines/routes.tsp";
 import "../data_generation_jobs/routes.tsp";
 import "../toolboxes/models.tsp";

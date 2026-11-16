@@ -9,6 +9,39 @@ using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects.Beta;
 
+interface KnowledgeBases {}
+@@clientLocation(Azure.AI.Projects.KnowledgeBases.create, KnowledgeBases);
+@@clientLocation(
+  Azure.AI.Projects.KnowledgeBases.createOrUpdate,
+  KnowledgeBases
+);
+@@clientLocation(Azure.AI.Projects.KnowledgeBases.get, KnowledgeBases);
+@@clientLocation(Azure.AI.Projects.KnowledgeBases.list, KnowledgeBases);
+@@clientLocation(Azure.AI.Projects.KnowledgeBases.delete, KnowledgeBases);
+
+interface KnowledgeSources {}
+@@clientLocation(Azure.AI.Projects.KnowledgeSources.create, KnowledgeSources);
+@@clientLocation(Azure.AI.Projects.KnowledgeSources.update, KnowledgeSources);
+@@clientLocation(Azure.AI.Projects.KnowledgeSources.get, KnowledgeSources);
+@@clientLocation(Azure.AI.Projects.KnowledgeSources.list, KnowledgeSources);
+@@clientLocation(
+  Azure.AI.Projects.KnowledgeSources.getStatus,
+  KnowledgeSources
+);
+@@clientLocation(Azure.AI.Projects.KnowledgeSources.delete, KnowledgeSources);
+@@clientLocation(
+  Azure.AI.Projects.KnowledgeSources.uploadFile,
+  KnowledgeSources
+);
+@@clientLocation(
+  Azure.AI.Projects.KnowledgeSources.listFiles,
+  KnowledgeSources
+);
+@@clientLocation(
+  Azure.AI.Projects.KnowledgeSources.deleteFile,
+  KnowledgeSources
+);
+
 interface Models {}
 @@clientLocation(Azure.AI.Projects.Models.listVersions, Models);
 @@clientLocation(Azure.AI.Projects.Models.listLatest, Models);

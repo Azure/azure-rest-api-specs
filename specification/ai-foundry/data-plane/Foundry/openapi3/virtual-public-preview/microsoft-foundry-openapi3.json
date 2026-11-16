@@ -140,6 +140,14 @@
       "parent": "Platform APIs"
     },
     {
+      "name": "Knowledge Bases",
+      "parent": "Platform APIs"
+    },
+    {
+      "name": "Knowledge Sources",
+      "parent": "Platform APIs"
+    },
+    {
       "name": "Chat",
       "parent": "Platform APIs"
     },
@@ -20826,6 +20834,1376 @@
         "tags": [
           "Insights"
         ]
+      }
+    },
+    "/knowledge_bases": {
+      "post": {
+        "operationId": "KnowledgeBases_create",
+        "summary": "Create a knowledge base",
+        "description": "Create a knowledge base. A duplicate name does not overwrite the saved definition.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Knowledge=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "ETag": {
+                "required": false,
+                "description": "The saved definition's ETag.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KnowledgeBase"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Knowledge Bases"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KnowledgeBase"
+              }
+            }
+          },
+          "description": "The definition to create."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "KnowledgeBases_list",
+        "summary": "List knowledge bases",
+        "description": "List saved definitions with lazy, server-driven continuation.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Knowledge=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "description": "The requested page size. The service can return fewer items.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 3000
+            },
+            "explode": false
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "description": "Filter resources by name.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "searchType",
+            "in": "query",
+            "required": false,
+            "description": "Name matching mode supported by the selected service version.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "value"
+                  ],
+                  "properties": {
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/KnowledgeBase"
+                      },
+                      "description": "The resources in the current page."
+                    },
+                    "@odata.nextLink": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "An opaque, project-scoped URL for the next page."
+                    }
+                  },
+                  "description": "One server-driven page of managed Knowledge resources.",
+                  "x-ms-foundry-meta": {
+                    "required_previews": [
+                      "Knowledge=V1Preview"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Knowledge Bases"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      }
+    },
+    "/knowledge_bases/{name}": {
+      "put": {
+        "operationId": "KnowledgeBases_createOrUpdate",
+        "summary": "Create or replace a knowledge base",
+        "description": "Create or fully replace a definition, honoring caller-supplied preconditions.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Knowledge=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The knowledge-base name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "description": "The ETag required for replacement, or '*' to require an existing definition.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "description": "Set to '*' to require that no definition already exists.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "ETag": {
+                "required": false,
+                "description": "The saved definition's ETag.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KnowledgeBase"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Knowledge Bases"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KnowledgeBase"
+              }
+            }
+          },
+          "description": "The complete replacement definition. Its name must match the route."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "KnowledgeBases_get",
+        "summary": "Get a knowledge base",
+        "description": "Read the saved configuration, not the knowledge-base content.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Knowledge=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The knowledge-base name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "ETag": {
+                "required": false,
+                "description": "The saved definition's ETag.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KnowledgeBase"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Knowledge Bases"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "KnowledgeBases_delete",
+        "summary": "Delete a knowledge base",
+        "description": "Delete a knowledge-base definition without deleting shared sources or customer content.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Knowledge=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The knowledge-base name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "description": "The ETag required for deletion.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "required": false,
+            "description": "An ETag that must not match the saved definition.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Knowledge Bases"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      }
+    },
+    "/knowledge_sources": {
+      "post": {
+        "operationId": "KnowledgeSources_create",
+        "summary": "Create a knowledge source",
+        "description": "Create a source. Provision source connections and permissions explicitly before this call.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Knowledge=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KnowledgeSource"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Knowledge Sources"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KnowledgeSource"
+              }
+            }
+          },
+          "description": "The kind-specific source definition."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "KnowledgeSources_list",
+        "summary": "List knowledge sources",
+        "description": "List source summaries without eagerly fetching source details or files.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Knowledge=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "description": "The requested page size. The service can return fewer items.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 3000
+            },
+            "explode": false
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "description": "Filter resources by name.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "searchType",
+            "in": "query",
+            "required": false,
+            "description": "Name matching mode supported by the selected service version.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "value"
+                  ],
+                  "properties": {
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/KnowledgeSourceListItem"
+                      },
+                      "description": "The resources in the current page."
+                    },
+                    "@odata.nextLink": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "An opaque, project-scoped URL for the next page."
+                    }
+                  },
+                  "description": "One server-driven page of managed Knowledge resources.",
+                  "x-ms-foundry-meta": {
+                    "required_previews": [
+                      "Knowledge=V1Preview"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Knowledge Sources"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      }
+    },
+    "/knowledge_sources/{name}": {
+      "post": {
+        "operationId": "KnowledgeSources_update",
+        "summary": "Update a knowledge source",
+        "description": "Update mutable fields with the existing named POST contract. Caller If-Match is not supported.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Knowledge=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The saved source name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KnowledgeSource"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Knowledge Sources"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KnowledgeSourceUpdate"
+              }
+            }
+          },
+          "description": "Source fields to update. Kind and File embedding deployment cannot be changed."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "KnowledgeSources_get",
+        "summary": "Get a knowledge source",
+        "description": "Read a source without exposing its backing Search endpoint, credentials or identity configuration.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Knowledge=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The source name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KnowledgeSource"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Knowledge Sources"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "KnowledgeSources_delete",
+        "summary": "Delete a knowledge source",
+        "description": "Delete an unused source. This does not cascade into shared knowledge bases or customer-owned content.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Knowledge=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The source name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Knowledge Sources"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      }
+    },
+    "/knowledge_sources/{name}/files": {
+      "post": {
+        "operationId": "KnowledgeSources_uploadFile",
+        "summary": "Upload a knowledge source file",
+        "description": "Upload one file to a File source. Upload acceptance does not mean ingestion has completed.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Knowledge=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The File source name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Content-Disposition",
+            "in": "header",
+            "required": true,
+            "description": "Attachment disposition containing a filename.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KnowledgeSourceFile"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Knowledge Sources"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "contentMediaType": "application/octet-stream"
+              }
+            }
+          },
+          "description": "The file content. A consumed stream must not be replayed automatically."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "KnowledgeSources_listFiles",
+        "summary": "List knowledge source files",
+        "description": "List files with server-driven continuation. File operations require a File source.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Knowledge=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The File source name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "description": "The requested page size. The service can return fewer items.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 3000
+            },
+            "explode": false
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "description": "Filter resources by name.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "searchType",
+            "in": "query",
+            "required": false,
+            "description": "Name matching mode supported by the selected service version.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "prefix",
+            "in": "query",
+            "required": false,
+            "description": "A directory-like prefix of file paths to list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "value"
+                  ],
+                  "properties": {
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/KnowledgeSourceFile"
+                      },
+                      "description": "The resources in the current page."
+                    },
+                    "@odata.nextLink": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "An opaque, project-scoped URL for the next page."
+                    }
+                  },
+                  "description": "One server-driven page of managed Knowledge resources.",
+                  "x-ms-foundry-meta": {
+                    "required_previews": [
+                      "Knowledge=V1Preview"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Knowledge Sources"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      }
+    },
+    "/knowledge_sources/{name}/files/{file_id}": {
+      "delete": {
+        "operationId": "KnowledgeSources_deleteFile",
+        "summary": "Delete a knowledge source file",
+        "description": "Delete a file by the identifier returned in its metadata.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Knowledge=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The File source name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "file_id",
+            "in": "path",
+            "required": true,
+            "description": "The returned file identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Knowledge Sources"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      }
+    },
+    "/knowledge_sources/{name}/status": {
+      "get": {
+        "operationId": "KnowledgeSources_getStatus",
+        "summary": "Get knowledge source synchronization status",
+        "description": "Read existing Search synchronization diagnostics. A null result does not establish retrieval readiness.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Knowledge=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The source name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/KnowledgeSourceStatus"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Knowledge Sources"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
       }
     },
     "/managedAgentIdentityBlueprints": {
@@ -46181,6 +47559,151 @@
         ],
         "description": "An Azure AI Search tool stored in a toolbox."
       },
+      "AzureBlobKnowledgeSource": {
+        "type": "object",
+        "required": [
+          "kind",
+          "azureBlobParameters"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "azureBlob"
+            ],
+            "description": "The source kind."
+          },
+          "azureBlobParameters": {
+            "$ref": "#/components/schemas/AzureBlobKnowledgeSourceParameters",
+            "description": "Storage location and ingestion settings."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/KnowledgeSource"
+          }
+        ],
+        "description": "An Azure Blob source using an explicitly provisioned project connection.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "AzureBlobKnowledgeSourceIngestionParameters": {
+        "type": "object",
+        "properties": {
+          "contentExtractionMode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The content extraction mode."
+          },
+          "embeddingModel": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The project embedding deployment name."
+          },
+          "embeddingModelName": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The actual backing model name for the embedding deployment."
+          },
+          "chatCompletionModel": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The project chat completion deployment name."
+          },
+          "chatCompletionModelName": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The actual backing model name for the chat completion deployment."
+          }
+        },
+        "description": "Deployment/model pairs and content extraction settings for managed Blob ingestion.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "AzureBlobKnowledgeSourceParameters": {
+        "type": "object",
+        "required": [
+          "containerName"
+        ],
+        "properties": {
+          "projectConnectionId": {
+            "type": "string",
+            "description": "Project connection name or ID. Required on creation; omit on update to retain the saved connection. Never returned on reads."
+          },
+          "containerName": {
+            "type": "string",
+            "description": "The Blob container to ingest."
+          },
+          "folderPath": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "An optional path prefix within the container."
+          },
+          "isADLSGen2": {
+            "type": "boolean",
+            "description": "Whether the source uses ADLS Gen2 semantics."
+          },
+          "ingestionParameters": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AzureBlobKnowledgeSourceIngestionParameters"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Source-specific ingestion settings."
+          }
+        },
+        "description": "Managed Blob location settings. Credentials, identities and backing Search endpoints are not exposed.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
       "AzureContentFilterBlocklistIdResult": {
         "type": "object",
         "required": [
@@ -54046,6 +55569,62 @@
         ],
         "description": "FileDatasetVersion Definition"
       },
+      "FileKnowledgeSource": {
+        "type": "object",
+        "required": [
+          "kind",
+          "embeddingModelName"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "file"
+            ],
+            "description": "The source kind."
+          },
+          "embeddingModelName": {
+            "type": "string",
+            "description": "The project embedding deployment name, not the backing model name."
+          },
+          "contentExtractionMode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The content extraction mode used during file ingestion."
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KnowledgeSourceFile"
+            },
+            "description": "Metadata for the currently embedded page of files.",
+            "readOnly": true
+          },
+          "filesNextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "Continuation for an embedded file page. Use the source's file-list operation for full iteration.",
+            "readOnly": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/KnowledgeSource"
+          }
+        ],
+        "description": "Files uploaded to managed storage for ingestion. Upload acceptance is not retrieval readiness.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
       "FileSearchToolboxTool": {
         "type": "object",
         "required": [
@@ -55842,6 +57421,777 @@
           }
         ],
         "description": "Extensible status values shared by Foundry jobs."
+      },
+      "KnowledgeBase": {
+        "type": "object",
+        "required": [
+          "name",
+          "knowledgeSources"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the knowledge base in the current project."
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "A description of the knowledge base."
+          },
+          "knowledgeSources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KnowledgeSourceReference"
+            },
+            "description": "Sources to use when the knowledge base is queried."
+          },
+          "models": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KnowledgeBaseModelReference"
+            },
+            "description": "Model/deployment pairs used for retrieval planning and synthesis."
+          },
+          "outputMode": {
+            "$ref": "#/components/schemas/KnowledgeRetrievalOutputMode",
+            "description": "The retrieval output mode."
+          },
+          "retrievalInstructions": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Instructions used for retrieval."
+          },
+          "answerInstructions": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Instructions used for answer synthesis."
+          },
+          "retrievalReasoningEffort": {
+            "$ref": "#/components/schemas/KnowledgeRetrievalReasoningEffort",
+            "description": "Retrieval reasoning settings."
+          },
+          "corsOptions": {
+            "$ref": "#/components/schemas/KnowledgeBaseCorsConfig",
+            "description": "Cross-origin access settings."
+          },
+          "@odata.etag": {
+            "type": "string",
+            "description": "The saved definition's concurrency token. Pass it through If-Match, not the request body.",
+            "readOnly": true
+          }
+        },
+        "description": "A project-scoped knowledge-base definition.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "KnowledgeBaseCorsConfig": {
+        "type": "object",
+        "required": [
+          "allowedOrigins"
+        ],
+        "properties": {
+          "allowedOrigins": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Origins allowed to access the knowledge base."
+          },
+          "maxAgeInSeconds": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The duration, in seconds, for which a preflight response can be cached."
+          }
+        },
+        "description": "Cross-origin access settings for the knowledge base.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "KnowledgeBaseModelReference": {
+        "type": "object",
+        "required": [
+          "deploymentName",
+          "modelName"
+        ],
+        "properties": {
+          "deploymentName": {
+            "type": "string",
+            "description": "The deployment name in the current Foundry project."
+          },
+          "modelName": {
+            "type": "string",
+            "description": "The actual model name, which can differ from the deployment name."
+          }
+        },
+        "description": "A project model deployment and its actual backing model name.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "KnowledgeBaseTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "knowledge_base"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "knowledge_base_preview"
+            ],
+            "description": "The native Knowledge tool discriminator."
+          },
+          "knowledge_base": {
+            "$ref": "#/components/schemas/KnowledgeBaseToolParameters",
+            "description": "The knowledge base to use in the current Foundry project."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Tool"
+          }
+        ],
+        "description": "A project-scoped knowledge base attached to an agent.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "preview_tool"
+          ]
+        }
+      },
+      "KnowledgeBaseToolParameters": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The knowledge-base name."
+          }
+        },
+        "description": "The native Knowledge tool's saved project-scoped reference.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "preview_tool"
+          ]
+        }
+      },
+      "KnowledgeRetrievalLowReasoningEffort": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "low"
+            ],
+            "description": "The reasoning effort kind."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/KnowledgeRetrievalReasoningEffort"
+          }
+        ],
+        "description": "Retrieve with low reasoning effort.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "KnowledgeRetrievalMediumReasoningEffort": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "medium"
+            ],
+            "description": "The reasoning effort kind."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/KnowledgeRetrievalReasoningEffort"
+          }
+        ],
+        "description": "Retrieve with medium reasoning effort.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "KnowledgeRetrievalMinimalReasoningEffort": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "minimal"
+            ],
+            "description": "The reasoning effort kind."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/KnowledgeRetrievalReasoningEffort"
+          }
+        ],
+        "description": "Retrieve without query planning or source selection.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "KnowledgeRetrievalOutputMode": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "extractiveData",
+              "answerSynthesis"
+            ]
+          }
+        ],
+        "description": "The output produced when the knowledge base is used for retrieval.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "KnowledgeRetrievalReasoningEffort": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "The reasoning effort kind."
+          }
+        },
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "minimal": "#/components/schemas/KnowledgeRetrievalMinimalReasoningEffort",
+            "low": "#/components/schemas/KnowledgeRetrievalLowReasoningEffort",
+            "medium": "#/components/schemas/KnowledgeRetrievalMediumReasoningEffort"
+          }
+        },
+        "description": "Retrieval reasoning settings.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "KnowledgeSource": {
+        "type": "object",
+        "required": [
+          "name",
+          "kind"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The source name in the current project."
+          },
+          "kind": {
+            "$ref": "#/components/schemas/KnowledgeSourceKind",
+            "description": "The source kind. Unknown kinds can be returned without enabling their creation."
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "A description of the knowledge source."
+          }
+        },
+        "additionalProperties": {},
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "file": "#/components/schemas/FileKnowledgeSource",
+            "azureBlob": "#/components/schemas/AzureBlobKnowledgeSource",
+            "web": "#/components/schemas/WebKnowledgeSource"
+          }
+        },
+        "description": "A reusable, project-scoped knowledge source.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "KnowledgeSourceCompletedSynchronizationState": {
+        "type": "object",
+        "required": [
+          "startTime",
+          "endTime",
+          "itemsUpdatesProcessed",
+          "itemsUpdatesFailed",
+          "itemsSkipped"
+        ],
+        "properties": {
+          "startTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The synchronization start time."
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The synchronization end time."
+          },
+          "itemsUpdatesProcessed": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of successfully processed updates."
+          },
+          "itemsUpdatesFailed": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of failed updates."
+          },
+          "itemsSkipped": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of skipped items."
+          }
+        },
+        "description": "Diagnostics for a completed synchronization run.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "KnowledgeSourceFile": {
+        "type": "object",
+        "required": [
+          "fileName"
+        ],
+        "properties": {
+          "fileId": {
+            "type": "string",
+            "description": "The returned file identifier used for deletion."
+          },
+          "fileName": {
+            "type": "string",
+            "description": "The original file name."
+          },
+          "fileSizeBytes": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The file size, in bytes."
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the file was created."
+          },
+          "lastUpdatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the file was last updated."
+          },
+          "errorMessage": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Processing failure information. A successful upload can still include this field."
+          },
+          "prefix": {
+            "type": "string",
+            "description": "The directory-like prefix derived from the file name."
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Custom file metadata."
+          },
+          "parsingMode": {
+            "type": "string",
+            "description": "The parsing mode applied to the file."
+          },
+          "extractionMode": {
+            "type": "string",
+            "description": "The extraction mode applied to the file."
+          }
+        },
+        "description": "Public metadata for an uploaded file.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "KnowledgeSourceKind": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "file",
+              "azureBlob",
+              "web"
+            ]
+          }
+        ],
+        "description": "Source kinds exposed by the baseline managed Knowledge experience.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "KnowledgeSourceListItem": {
+        "type": "object",
+        "required": [
+          "name",
+          "kind"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The source name in the current project."
+          },
+          "kind": {
+            "$ref": "#/components/schemas/KnowledgeSourceKind",
+            "description": "The source kind."
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "A description of the source."
+          }
+        },
+        "additionalProperties": {},
+        "description": "A source summary returned by the managed list operation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "KnowledgeSourceReference": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The source name in the current project."
+          },
+          "enableImageServing": {
+            "type": "boolean",
+            "description": "Whether extracted images can be served during retrieval."
+          },
+          "enableFreshness": {
+            "type": "boolean",
+            "description": "Whether freshness-aware retrieval is enabled for this source."
+          }
+        },
+        "description": "A reusable knowledge source referenced by a knowledge base.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "KnowledgeSourceStatistics": {
+        "type": "object",
+        "required": [
+          "totalSynchronization",
+          "averageSynchronizationDuration",
+          "averageItemsProcessedPerSynchronization"
+        ],
+        "properties": {
+          "totalSynchronization": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of synchronizations."
+          },
+          "averageSynchronizationDuration": {
+            "type": "string",
+            "description": "Average synchronization duration, in HH:MM:SS format."
+          },
+          "averageItemsProcessedPerSynchronization": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Average processed items per synchronization."
+          }
+        },
+        "description": "Historical source synchronization statistics.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "KnowledgeSourceStatus": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "$ref": "#/components/schemas/KnowledgeSourceKind",
+            "description": "The source kind, when supplied by the selected Search version."
+          },
+          "synchronizationStatus": {
+            "type": "string",
+            "description": "Source provisioning/synchronization status. Active does not mean a specific upload is searchable."
+          },
+          "synchronizationInterval": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The synchronization interval, when configured."
+          },
+          "currentSynchronizationState": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/KnowledgeSourceSynchronizationState"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Diagnostics for the current synchronization run."
+          },
+          "lastSynchronizationState": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/KnowledgeSourceCompletedSynchronizationState"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Diagnostics for the last completed synchronization run."
+          },
+          "statistics": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/KnowledgeSourceStatistics"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Source-specific synchronization statistics."
+          }
+        },
+        "additionalProperties": {},
+        "description": "Existing Search synchronization diagnostics, not a per-upload readiness guarantee.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "KnowledgeSourceSynchronizationError": {
+        "type": "object",
+        "required": [
+          "errorMessage"
+        ],
+        "properties": {
+          "docId": {
+            "type": "string",
+            "description": "The failed document identifier."
+          },
+          "statusCode": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The failure category expressed as an HTTP-like status code."
+          },
+          "name": {
+            "type": "string",
+            "description": "The component reporting the error."
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "Customer-visible failure information."
+          },
+          "details": {
+            "type": "string",
+            "description": "Additional failure details."
+          },
+          "documentationLink": {
+            "type": "string",
+            "description": "Troubleshooting documentation supplied by the service."
+          }
+        },
+        "description": "A document-level synchronization error.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "KnowledgeSourceSynchronizationState": {
+        "type": "object",
+        "required": [
+          "startTime",
+          "itemsUpdatesProcessed",
+          "itemsUpdatesFailed",
+          "itemsSkipped"
+        ],
+        "properties": {
+          "startTime": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The synchronization start time."
+          },
+          "itemsUpdatesProcessed": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of successfully processed updates."
+          },
+          "itemsUpdatesFailed": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of failed updates."
+          },
+          "itemsSkipped": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of skipped items."
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KnowledgeSourceSynchronizationError"
+            },
+            "description": "Document-level errors returned for this run."
+          }
+        },
+        "description": "Diagnostics for an ongoing synchronization run.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "KnowledgeSourceUpdate": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The source name, when supplied. Must match the route name."
+          },
+          "kind": {
+            "$ref": "#/components/schemas/KnowledgeSourceKind",
+            "description": "The source kind, when supplied. Must match the saved kind."
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The source description."
+          },
+          "embeddingModelName": {
+            "type": "string",
+            "description": "File embedding deployment, when supplied. Must match the saved value."
+          },
+          "contentExtractionMode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The content extraction mode used during file ingestion."
+          },
+          "azureBlobParameters": {
+            "$ref": "#/components/schemas/AzureBlobKnowledgeSourceParameters",
+            "description": "Blob location and ingestion settings."
+          },
+          "webParameters": {
+            "$ref": "#/components/schemas/WebKnowledgeSourceParameters",
+            "description": "Web domain settings."
+          }
+        },
+        "description": "Mutable source fields accepted by the existing named POST update operation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
       },
       "LatencySummary": {
         "type": "object",
@@ -101111,6 +103461,7 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
+            "knowledge_base_preview": "#/components/schemas/KnowledgeBaseTool",
             "microsoft_copilot_toolset_preview": "#/components/schemas/MicrosoftCopilotToolsetPreview",
             "github_copilot_toolset_preview": "#/components/schemas/GitHubCopilotToolsetPreview",
             "bing_grounding": "#/components/schemas/BingGroundingTool",
@@ -103717,6 +106068,7 @@
               "toolbox_search_preview",
               "web_iq_preview",
               "github_copilot_toolset_preview",
+              "knowledge_base_preview",
               "a2a",
               "azure_ai_search",
               "azure_function",
@@ -123156,6 +125508,98 @@
         "x-ms-foundry-meta": {
           "required_previews": [
             "preview_tool"
+          ]
+        }
+      },
+      "WebKnowledgeSource": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "web"
+            ],
+            "description": "The source kind."
+          },
+          "webParameters": {
+            "$ref": "#/components/schemas/WebKnowledgeSourceParameters",
+            "description": "Web domain configuration."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/KnowledgeSource"
+          }
+        ],
+        "description": "A managed web knowledge source.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "WebKnowledgeSourceDomain": {
+        "type": "object",
+        "required": [
+          "address"
+        ],
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "The domain address."
+          },
+          "includeSubpages": {
+            "type": "boolean",
+            "description": "Whether subpages of the domain can be returned."
+          }
+        },
+        "description": "A domain used by a web knowledge source.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "WebKnowledgeSourceDomains": {
+        "type": "object",
+        "properties": {
+          "allowedDomains": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebKnowledgeSourceDomain"
+            },
+            "description": "Domains allowed in web results."
+          },
+          "blockedDomains": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WebKnowledgeSourceDomain"
+            },
+            "description": "Domains blocked from web results."
+          }
+        },
+        "description": "Domain allow and block configuration.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "WebKnowledgeSourceParameters": {
+        "type": "object",
+        "properties": {
+          "domains": {
+            "$ref": "#/components/schemas/WebKnowledgeSourceDomains",
+            "description": "Domain allow and block configuration."
+          }
+        },
+        "description": "Parameters that control the domains used for web retrieval.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
           ]
         }
       },
