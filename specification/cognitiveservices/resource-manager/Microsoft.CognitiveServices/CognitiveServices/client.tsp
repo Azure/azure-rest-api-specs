@@ -11,6 +11,29 @@ using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.CognitiveServices;
 using Azure.ResourceManager;
 
+@TypeSpec.Versioning.versioned(Microsoft.CognitiveServices.Versions)
+namespace CognitiveServicesClientCustomizations {
+  /**
+   * Writable Arc deployment content for the JavaScript SDK.
+   */
+  @TypeSpec.Versioning.added(Versions.v2026_07_15_preview)
+  @TypeSpec.Versioning.removed(Versions.v2026_09_01)
+  @TypeSpec.Versioning.added(Versions.v2026_09_15_preview)
+  @TypeSpec.Versioning.removed(Versions.v2026_11_01)
+  @TypeSpec.Versioning.added(Versions.v2026_11_15_preview)
+  model ArcDeploymentCreateOrUpdateContent {
+    /**
+     * Properties used to create or replace an Arc deployment.
+     */
+    properties: TypeSpec.CreateOrUpdate<ArcDeploymentProperties>;
+
+    /**
+     * The Arc deployment SKU.
+     */
+    sku: ArcDeploymentSku;
+  }
+}
+
 @@clientName(
   Microsoft.CognitiveServices,
   "CognitiveServicesManagementClient",
@@ -99,6 +122,13 @@ op calculateModelCapacityCustom(
 
 @@override(calculateModelCapacity, calculateModelCapacityCustom, "javascript");
 
+// Exclude read-only response fields recursively from the JavaScript PUT input.
+@@alternateType(
+  ArcDeployments.createOrUpdate::parameters.resource,
+  CognitiveServicesClientCustomizations.ArcDeploymentCreateOrUpdateContent,
+  "javascript"
+);
+
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
@@ -160,6 +190,13 @@ op regenerateKeyCustom(
 );
 
 @@clientName(Account, "CognitiveServicesAccount", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Keep the nullable provider properties setter public so PATCH can clear all blocking actions."
+@@clientOption(
+  CostControlProviderPropertiesPatch,
+  "disable-safe-flatten",
+  true,
+  "csharp"
+);
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
 #suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning"
 @@clientOption(
@@ -205,6 +242,12 @@ op regenerateKeyCustom(
 @@alternateType(CommitmentPlan.etag, eTag, "csharp");
 @@clientName(Deployment, "CognitiveServicesAccountDeployment", "csharp");
 @@alternateType(Deployment.etag, eTag, "csharp");
+@@alternateType(ArcDeploymentModel.assetId, url, "csharp");
+@@clientName(
+  RaiAcsAnnotatorDefinition,
+  "RaiAcsAnnotatorConfiguration",
+  "csharp"
+);
 @@clientName(AgentApplication, "CognitiveServicesAgentApplication", "csharp");
 @@clientName(
   AgenticApplicationProperties,
@@ -1279,8 +1322,16 @@ op regenerateKeyCustom(
   "CognitiveServicesComputeProvisioningState",
   "csharp"
 );
-@@clientName(CostControl, "CognitiveServicesAccountCostControl", "csharp");
-@@alternateType(CostControl.etag, eTag, "csharp");
+@@clientName(
+  AccountCostControl,
+  "CognitiveServicesAccountCostControl",
+  "csharp"
+);
+@@clientName(
+  ProjectCostControl,
+  "CognitiveServicesProjectCostControl",
+  "csharp"
+);
 @@alternateType(AdapterDeployment.etag, eTag, "csharp");
 @@alternateType(RaiBinding.etag, eTag, "csharp");
 @@alternateType(RaiRego.etag, eTag, "csharp");
