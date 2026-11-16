@@ -35,7 +35,24 @@ using Microsoft.ContainerRegistry;
   "java,javascript,go,python"
 );
 
-@@clientName(IPRule.value, "$DO_NOT_NORMALIZE$iPAddressOrRange", "javascript");
+@@clientName(IPRule.value, exact("iPAddressOrRange"), "javascript");
+
+@@clientName(
+  AdditionalAuthenticationType.AwsElasticContainerRegistry,
+  "AWSElasticContainerRegistry",
+  "go"
+);
+@@clientName(EcrAuthenticationProperties, "ECRAuthenticationProperties", "go");
+@@clientName(
+  EcrAuthenticationUpdateProperties,
+  "ECRAuthenticationUpdateProperties",
+  "go"
+);
+@@clientName(
+  GarAuthenticationUpdateProperties,
+  "GARAuthenticationUpdateProperties",
+  "go"
+);
 
 // C# configurations for backward compatibility and naming conventions.
 // These settings restore the public API surface of the previous autorest-based SDK to avoid breaking changes.
@@ -61,6 +78,7 @@ using Microsoft.ContainerRegistry;
 // which matches the behavior of the previous SDK where the type was represented as a plain string.
 namespace Microsoft.ContainerRegistry {
   /** Extensible union for ContainerRegistryResourceType to accept both known enum values and arbitrary strings. */
+  #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing SDK contract; preserve the existing extensible union representation."
   union ContainerRegistryResourceTypeExtensible {
     ContainerRegistryResourceType,
     string,
@@ -195,6 +213,7 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(ArchiveVersion, "ContainerRegistryArchiveVersion", "csharp");
 @@clientName(AuditLogStatus, "ConnectedRegistryAuditLogStatus", "csharp");
 @@clientName(AuthCredential, "ContainerRegistryAuthCredential", "csharp");
+@@clientName(AuthType, "ContainerRegistryAuthType", "csharp");
 @@clientName(
   AzureADAuthenticationAsArmPolicyStatus,
   "AadAuthenticationAsArmPolicyStatus",
@@ -284,6 +303,16 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(
   GarAuthenticationProperties,
   "GoogleArtifactRegistryCacheAuthentication",
+  "csharp"
+);
+@@clientName(
+  EcrAuthenticationProperties,
+  "AwsElasticContainerRegistryCacheAuthentication",
+  "csharp"
+);
+@@clientName(
+  EntraFederatedIdentityCredentialAuthenticationProperties,
+  "EntraFederatedIdentityCredentialCacheAuthentication",
   "csharp"
 );
 @@clientName(

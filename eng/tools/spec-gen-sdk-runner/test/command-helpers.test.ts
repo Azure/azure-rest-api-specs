@@ -74,6 +74,23 @@ describe("commands.ts", () => {
   });
 
   describe("parseArguments", () => {
+    test.each([undefined, "", "@azure-tools/typespec-ts-provisioning"])(
+      "forwards optional TypeSpec emitter %s to spec-gen-sdk",
+      (emitter) => {
+        const args = emitter === undefined ? [] : ["--typespec-emitter", emitter];
+        vi.spyOn(process, "argv", "get").mockReturnValue(["node", "script", ...args]);
+
+        const input = parseArguments();
+        expect(input.typespecEmitter).toBe(emitter || undefined);
+        const command = prepareSpecGenSdkCommand(input);
+        if (emitter) {
+          expect(command.slice(-2)).toEqual(["--typespec-emitter", emitter]);
+        } else {
+          expect(command).not.toContain("--typespec-emitter");
+        }
+      },
+    );
+
     test("runMode is release when it has no batch-type and no pr-number", () => {
       const mockArgs = [
         "--scp",
@@ -262,7 +279,11 @@ describe("commands.ts", () => {
     });
 
     test("should return management plane TypeSpec and resource-manager readme paths for 'all-mgmtplane-typespecs'", () => {
-      const managementTypespecs = ["typespec1.Management", "typespec2.Management"];
+      const managementTypespecs = [
+        "typespec1.Management",
+        "typespec2.Management",
+        "resource-manager/typespec3",
+      ];
       const resourceManagerReadmes = ["resource-manager/readme-rm1", "resource-manager/readme-rm2"];
 
       vi.spyOn(utils, "getAllTypeSpecPaths").mockReturnValue([
@@ -278,6 +299,7 @@ describe("commands.ts", () => {
       vi.spyOn(specHelpers, "groupSpecConfigPaths").mockReturnValue([
         { tspconfigPath: "typespec1.Management", readmePath: "resource-manager/readme-rm1" },
         { tspconfigPath: "typespec2.Management", readmePath: "resource-manager/readme-rm2" },
+        { tspconfigPath: "resource-manager/typespec3", readmePath: undefined },
       ]);
 
       const result = getSpecPaths("all-mgmtplane-typespecs", "/spec/path");
@@ -289,7 +311,7 @@ describe("commands.ts", () => {
         resourceManagerReadmes,
         true,
       );
-      expect(result).toHaveLength(2);
+      expect(result).toHaveLength(3);
     });
 
     test("should return data plane TypeSpec and data-plane readme paths for 'all-dataplane-typespecs'", () => {
@@ -300,6 +322,7 @@ describe("commands.ts", () => {
         ...dataPlaneTypespecs,
         "typespec1.Management",
         "typespec2.Management",
+        "resource-manager/typespec5",
       ]);
       vi.spyOn(utils, "findReadmeFiles").mockReturnValue([
         ...dataPlaneReadmes,

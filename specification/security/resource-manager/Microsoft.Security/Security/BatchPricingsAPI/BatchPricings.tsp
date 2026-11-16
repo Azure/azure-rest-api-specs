@@ -60,6 +60,18 @@ alias BatchPricingsOps = Azure.ResourceManager.Legacy.ExtensionOperations<
 @armResourceOperations
 interface BatchPricings {
   /**
+   * Lists the pricing batch resources for the specified scope.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Uses a plural operation group to avoid conflicting with the PricingBatch model name."
+  @tag("PricingBatch")
+  @operationId("BatchPricings_List")
+  list is BatchPricingsOps.List<
+    PricingBatch,
+    Response = ArmResponse<PricingBatchList>,
+    ErrorType = CloudError
+  >;
+
+  /**
    * Gets the current pricing batch configuration for the specified scope.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Uses a plural operation group to avoid conflicting with the PricingBatch model name."

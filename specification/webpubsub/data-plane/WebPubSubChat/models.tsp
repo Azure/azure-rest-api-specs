@@ -1,9 +1,11 @@
 import "@typespec/http";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 using Azure.Core;
 
@@ -68,6 +70,29 @@ model ChatMessage {
   ...EtagProperty;
 }
 
+/** A permission that can be assigned to a chat role. */
+union ChatPermission {
+  string,
+
+  /** Allows a user to create chat rooms. */
+  UserCreateRoom: "user.create_room",
+
+  /** Allows a user to list the rooms they belong to. */
+  UserFetchAllRooms: "user.fetch_all_rooms",
+
+  /** Allows a room member to publish messages. */
+  RoomPublishMessage: "room.publish_message",
+
+  /** Allows a room member to read message history. */
+  RoomHistory: "room.history",
+
+  /** Allows a room member to add users to a room. */
+  RoomInvite: "room.invite",
+
+  /** Allows a room operator to remove users from a room. */
+  RoomRemoveUser: "room.remove_user",
+}
+
 /**
  * Represents a chat role.
  * A role name must start with 'user.' or 'room.' prefix.
@@ -85,7 +110,7 @@ model ChatRole {
   name: string;
 
   /** Permissions associated with the role. Do not mix user permissions and room permissions in one role. */
-  permissions: string[];
+  permissions: ChatPermission[];
 
   ...EtagProperty;
 }
@@ -108,6 +133,64 @@ model ChatRoom {
   /** Default conversation ID for this room. */
   @visibility(Lifecycle.Read)
   defaultConversation: string;
+
+  ...EtagProperty;
+}
+
+/** The lifecycle state of a chat topic. */
+@added(Versions.v2026_08_01_preview)
+union ChatTopicState {
+  string,
+
+  /** The topic is active. */
+  Normal: "Normal",
+
+  /** The topic is archived. */
+  Archived: "Archived",
+
+  /** The topic has been soft deleted. */
+  SoftDeleted: "SoftDeleted",
+}
+
+/** Represents a chat topic in a room. */
+@added(Versions.v2026_08_01_preview)
+@resource("topics")
+@parentResource(ChatRoom)
+model ChatTopic {
+  /** Topic identifier unique within the room. */
+  @key("topicId")
+  @visibility(Lifecycle.Read)
+  @pattern("^[A-Za-z0-9_-]{1,64}$")
+  @minLength(1)
+  @maxLength(64)
+  id: string;
+
+  /** Topic title. */
+  @minLength(1)
+  @maxLength(256)
+  title: string;
+
+  /** Timestamp when the topic was created. */
+  @visibility(Lifecycle.Read)
+  createdAt: utcDateTime;
+
+  /** User who created the topic. */
+  @visibility(Lifecycle.Read)
+  @pattern("^[^\\p{Cc}\\/\\\\#\\?:;]{1,64}$")
+  @minLength(1)
+  @maxLength(64)
+  createdBy: string;
+
+  /** Current lifecycle state of the topic. */
+  @visibility(Lifecycle.Read, Lifecycle.Update)
+  state: ChatTopicState;
+
+  /** Conversation associated with this topic. */
+  @visibility(Lifecycle.Read)
+  @pattern("^c\\.[A-Za-z0-9_-]{1,64}\\.[A-Za-z0-9_-]{1,64}$")
+  @minLength(1)
+  @maxLength(131)
+  conversationId: string;
 
   ...EtagProperty;
 }
@@ -168,6 +251,18 @@ model ChatUser {
 
   ...EtagProperty;
 }
+
+/**
+ * Represents a read-only room projection used to list rooms associated with a user.
+ * This model enables the standard resource operation to derive the
+ * `/api/hubs/{hub}/chat/users/{userId}/rooms` collection path because
+ * `ChatRoom` is a child of `Hub`, not `ChatUser`.
+ * This model does not define an independent room lifecycle.
+ */
+@added(Versions.v2026_08_01_preview)
+@resource("rooms")
+@parentResource(ChatUser)
+model ChatUserRoom is ChatRoom;
 
 /** A human end-user, identified by a user role. */
 model HumanChatUser extends ChatUser {

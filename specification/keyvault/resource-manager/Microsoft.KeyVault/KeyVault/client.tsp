@@ -7,6 +7,17 @@ using Microsoft.KeyVault;
 using Azure.Core;
 
 @@clientName(ManagedHsmSkuNameV2, "ManagedHsmSKUName", "go");
+// SDK type name stays ManagedHsmSkuName for 2026-05-15+; the legacy closed enum is only used by older API versions.
+@@clientName(
+  ManagedHsmSkuNameV2,
+  "ManagedHsmSkuName",
+  "csharp,java,python,javascript"
+);
+@@clientName(
+  ManagedHsmSkuName,
+  "ManagedHsmLegacySkuName",
+  "csharp,java,python,javascript"
+);
 
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "https://github.com/Azure/typespec-azure/issues/4090"
 #suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "https://github.com/Azure/typespec-azure/issues/4090"

@@ -1,11 +1,13 @@
-/* eslint-disable */
-// TODO: Enable eslint, fix errors
+/* oxlint-disable */
+// TODO: Enable oxlint, fix errors
 
-import { join } from "path";
-import { type Suppression } from "suppressions";
-import { parse as yamlParse } from "yaml";
-import { type RuleResult } from "../rule-result.ts";
+import { type Suppression } from "@azure-tools/suppressions";
+import type { ILogger } from "@azure-tools/specs-shared/logger";
+import { join } from "pathe";
+import { failure, type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
+import { exceptionDiagnostic } from "../diagnostics.ts";
+import { parseYaml } from "../tsp-config.ts";
 import { fileExists, getSuppressions, readTspConfig } from "../utils.ts";
 
 type ExpectedValueType = string | boolean | RegExp;
@@ -33,7 +35,7 @@ export abstract class TspconfigSubRuleBase {
     if (shouldSkip)
       return {
         success: true,
-        stdOutput: `Validation skipped. ${reason}`,
+        skipped: reason ?? "Not applicable",
       };
     return this.validate(config);
   }
@@ -44,14 +46,8 @@ export abstract class TspconfigSubRuleBase {
       return undefined;
     }
 
-    try {
-      const configText = await readTspConfig(folder);
-      const config = yamlParse(configText);
-      return config;
-    } catch (error) {
-      console.warn(`Failed to parse tspconfig.yaml in ${folder}: ${error}`);
-      return undefined;
-    }
+    const configText = await readTspConfig(folder);
+    return parseYaml(configText, join(folder, "tspconfig.yaml"));
   }
 
   protected skip(_config: any, _folder: string): SkipResult {
@@ -69,16 +65,15 @@ export abstract class TspconfigSubRuleBase {
       case "object":
         return typeof actual === "string" && expected.test(actual);
       default:
-        console.warn("Unsupported expected-value-type for tspconfig.yaml");
-        return false;
+        throw new Error("Unsupported expected-value-type for tspconfig.yaml");
     }
   }
 
   protected createFailedResult(error: string, action: string): RuleResult {
-    return {
-      success: false,
-      errorOutput: `- ${error}. ${action}.`,
-    };
+    return failure("sdk-tspconfig-validation", error, {
+      help: action,
+      url: "https://aka.ms/azsdk/spec-gen-sdk-config",
+    });
   }
 
   public abstract getPathOfKeyToValidate(): string;
@@ -138,14 +133,17 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
   protected resolveVariables(
     value: string,
     config: Record<string, any>,
+    preservedVariables: readonly string[] = [],
   ): { resolved: string; error?: string } {
     let resolvedValue = value;
     const variablePattern = /\{([^}]+)\}/g;
+    const variablesToResolve = (text: string) =>
+      [...text.matchAll(/\{([^}]+)\}/g)].filter((match) => !preservedVariables.includes(match[1]));
     const maxIterations = 10; // Prevent infinite loops
     let iterations = 0;
 
     // Keep resolving until no more variables are found or max iterations reached
-    while (resolvedValue.includes("{") && iterations < maxIterations) {
+    while (variablesToResolve(resolvedValue).length > 0 && iterations < maxIterations) {
       iterations++;
       let hasUnresolvedVariables = false;
       const currentValue = resolvedValue;
@@ -156,6 +154,7 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
 
       while ((match = variablePattern.exec(currentValue)) !== null) {
         const variableName = match[1];
+        if (preservedVariables.includes(variableName)) continue;
 
         // Try to resolve variable from multiple sources:
         // 1. From the emitter's options (e.g., namespace, package-name)
@@ -185,7 +184,7 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
 
       // If no progress was made in this iteration and there are still unresolved variables, return error
       if (hasUnresolvedVariables && resolvedValue === currentValue) {
-        const unresolvedMatch = resolvedValue.match(/\{([^}]+)\}/);
+        const unresolvedMatch = variablesToResolve(resolvedValue)[0];
         const unresolvedVar = unresolvedMatch ? unresolvedMatch[1] : "unknown";
         return {
           resolved: resolvedValue,
@@ -194,12 +193,12 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
       }
 
       // If no more variables to resolve, break
-      if (!resolvedValue.includes("{")) {
+      if (variablesToResolve(resolvedValue).length === 0) {
         break;
       }
     }
 
-    if (iterations >= maxIterations && resolvedValue.includes("{")) {
+    if (iterations >= maxIterations && variablesToResolve(resolvedValue).length > 0) {
       return {
         resolved: resolvedValue,
         error: `Maximum resolution depth reached. Possible circular reference in variable resolution.`,
@@ -418,6 +417,93 @@ export class TspConfigJavaMgmtNamespaceFormatSubRule extends TspconfigEmitterOpt
 
   protected skip(_: any, folder: string) {
     return skipForDataPlane(folder); // Ensures this rule only applies to management plane SDKs
+  }
+}
+
+export class TspConfigJavaMgmtEmitterOutputDirMatchesNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-java", "emitter-output-dir", "derived from namespace");
+  }
+
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+
+  protected validate(config: any): RuleResult {
+    const namespace = this.tryFindOption(config, "namespace");
+    if (typeof namespace !== "string")
+      return this.createFailedResult(
+        `Failed to find a string value for "options.${this.emitterName}.namespace"`,
+        `Please define "options.${this.emitterName}.namespace".`,
+      );
+
+    const resolvedNamespace = this.resolveVariables(namespace, config);
+    const packageDir = this.getPackageDirFromEmitterOutputDir(config);
+    const error = resolvedNamespace.error ?? packageDir.error;
+    if (error) return this.createFailedResult(error, "Please fix the Java emitter configuration.");
+
+    const expected = resolvedNamespace.resolved.replace(/^com\./, "").replace(/\./g, "-");
+    if (packageDir.resolved !== expected)
+      return this.createFailedResult(
+        `The package directory "${packageDir.resolved}" in options.${this.emitterName}.emitter-output-dir does not match the namespace-derived value "${expected}"`,
+        `Please update "options.${this.emitterName}.emitter-output-dir" to use package directory "${expected}".`,
+      );
+
+    return { success: true };
+  }
+}
+
+export class TspConfigJavaMgmtServiceDirMatchesNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-java", "service-dir", "derived from namespace");
+  }
+
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
+  }
+
+  protected validate(config: any): RuleResult {
+    const namespace = this.tryFindOption(config, "namespace");
+    if (typeof namespace !== "string")
+      return this.createFailedResult(
+        `Failed to find a string value for "options.${this.emitterName}.namespace"`,
+        `Please define "options.${this.emitterName}.namespace".`,
+      );
+
+    const resolvedNamespace = this.resolveVariables(namespace, config);
+    if (resolvedNamespace.error)
+      return this.createFailedResult(
+        resolvedNamespace.error,
+        "Please fix the Java emitter namespace.",
+      );
+
+    const serviceName = resolvedNamespace.resolved.split(".")[3];
+    if (!serviceName)
+      return this.createFailedResult(
+        `Cannot derive the Java service-dir from namespace "${resolvedNamespace.resolved}": the fourth namespace segment is missing or empty`,
+        `Please update "options.${this.emitterName}.namespace" to "com.azure.resourcemanager.<service-name>".`,
+      );
+
+    const override = this.tryFindOption(config);
+    const serviceDir =
+      override !== undefined ? override : config?.parameters?.["service-dir"]?.default;
+    if (typeof serviceDir !== "string")
+      return this.createFailedResult(
+        `Failed to find a string value for the effective Java service-dir`,
+        `Please define "options.${this.emitterName}.service-dir" or "parameters.service-dir.default".`,
+      );
+
+    const resolvedServiceDir = this.resolveVariables(serviceDir, config, ["output-dir"]);
+    const actual = resolvedServiceDir.resolved.replace(/^\{output-dir\}\//, "");
+    const expected = `sdk/${serviceName}`;
+    if (resolvedServiceDir.error || actual !== expected)
+      return this.createFailedResult(
+        resolvedServiceDir.error ??
+          `The effective Java service-dir "${serviceDir}" does not match the namespace-derived value "${expected}"`,
+        `Please update "options.${this.emitterName}.service-dir" or "parameters.service-dir.default" to "${expected}".`,
+      );
+
+    return { success: true };
   }
 }
 
@@ -819,6 +905,8 @@ export const requiredRules = [
   new TspConfigJavaAzEmitterOutputDirMatchPatternSubRule(),
   new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule(),
   new TspConfigJavaMgmtNamespaceFormatSubRule(),
+  new TspConfigJavaMgmtEmitterOutputDirMatchesNamespaceSubRule(),
+  new TspConfigJavaMgmtServiceDirMatchesNamespaceSubRule(),
   new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule(),
   new TspConfigTsMgmtModularEmitterOutputDirSubRule(),
   new TspConfigTsMgmtModularPackageNameMatchPatternSubRule(),
@@ -874,7 +962,19 @@ export class SdkTspConfigValidationRule implements Rule {
     this.optionalRules = optionalSubRules;
   }
 
-  async execute(folder: string): Promise<RuleResult> {
+  async execute(folder: string, logger: ILogger): Promise<RuleResult> {
+    try {
+      return await this.executeRules(folder, logger);
+    } catch (error) {
+      logger.debug(error instanceof Error ? (error.stack ?? error.message) : String(error));
+      return {
+        success: false,
+        diagnostics: [exceptionDiagnostic(error, join(folder, "tspconfig.yaml"))],
+      };
+    }
+  }
+
+  private async executeRules(folder: string, logger: ILogger): Promise<RuleResult> {
     const tspConfigPath = join(folder, "tspconfig.yaml");
     const suppressions = await getSuppressions(tspConfigPath);
 
@@ -882,9 +982,14 @@ export class SdkTspConfigValidationRule implements Rule {
       (s) => s.rules?.includes(this.name) === true && (!s.subRules || s.subRules.length === 0),
     );
     if (shouldSuppressEntireRule)
-      return { success: true, stdOutput: `[${this.name}]: validation skipped.` };
+      return {
+        success: true,
+        suppressed:
+          suppressions.find((s) => s.rules?.includes(this.name) && !s.subRules?.length)?.reason ??
+          "Suppressed",
+      };
 
-    this.setSuppressedKeyPaths(suppressions);
+    this.setSuppressedKeyPaths(suppressions, logger);
 
     const failedResults = [];
     let success = true;
@@ -895,6 +1000,7 @@ export class SdkTspConfigValidationRule implements Rule {
       if (this.isKeyPathSuppressed(subRule.getPathOfKeyToValidate())) continue;
 
       const result = await subRule.execute(folder!);
+      if (result.skipped) logger.debug(`${subRule.getPathOfKeyToValidate()}: ${result.skipped}`);
       if (!result.success) failedResults.push(result);
 
       success &&= result.success;
@@ -908,26 +1014,24 @@ export class SdkTspConfigValidationRule implements Rule {
       const config = await subRule.loadConfig(folder);
       const emitterName = subRule.getEmitterName();
       if (config && this.skipIfEmitterNotConfigured(config, emitterName)) {
-        console.warn(
+        logger.debug(
           `Optional rule ${subRule.constructor.name} skipped because emitter ${emitterName} is not configured.`,
         );
         continue;
       }
 
       const result = await subRule.execute(folder!);
+      if (result.skipped) logger.debug(`${subRule.getPathOfKeyToValidate()}: ${result.skipped}`);
       if (!result.success) failedResults.push(result);
       // Optional rules affect overall success when emitter is configured
       success &&= result.success;
     }
 
-    const stdOutputFailedResults =
-      failedResults.length > 0
-        ? `${failedResults.map((r) => r.errorOutput).join("\n")}\nPlease see https://aka.ms/azsdk/spec-gen-sdk-config for more info.\nFor additional information on TypeSpec validation, please refer to https://aka.ms/azsdk/specs/typespec-validation\nFor exception requests, please refer to https://eng.ms/docs/products/azure-developer-experience/onboard/request-exception`
-        : "";
-
     return {
       success,
-      stdOutput: `[${this.name}]: validation ${success ? "passed" : "failed"}.\n${stdOutputFailedResults}`,
+      diagnostics: failedResults.flatMap((result) =>
+        (result.diagnostics ?? []).map((diagnostic) => ({ ...diagnostic, path: tspConfigPath })),
+      ),
     };
   }
 
@@ -936,13 +1040,13 @@ export class SdkTspConfigValidationRule implements Rule {
     return !isConfigured;
   }
 
-  private setSuppressedKeyPaths(suppressions: Suppression[]) {
+  private setSuppressedKeyPaths(suppressions: Suppression[], logger: ILogger) {
     this.suppressedKeyPaths = new Set<string>();
     for (const suppression of suppressions) {
       if (!suppression.rules?.includes(this.name)) continue;
       for (const ignoredKey of suppression.subRules ?? []) {
         this.suppressedKeyPaths.add(ignoredKey);
-        console.warn(`Skip validation on ${ignoredKey}.`);
+        logger.debug(`Skip validation on ${ignoredKey}.`);
       }
     }
   }

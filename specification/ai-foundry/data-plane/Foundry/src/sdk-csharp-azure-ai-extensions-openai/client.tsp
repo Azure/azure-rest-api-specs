@@ -54,6 +54,11 @@ namespace Azure.AI.Projects {
   // OpenAI's OpenAI.Conversations.* types directly.
 
   @@clientNamespace(Azure.AI.Projects, "Azure.AI.Extensions.OpenAI", "csharp");
+  @@clientNamespace(
+    Azure.AI.ProjectsInternal,
+    "Azure.AI.Extensions.OpenAI",
+    "csharp"
+  );
 
   @@clientName(CreatedBy, "AgentResponseItemSource");
 
@@ -851,6 +856,7 @@ namespace Azure.AI.Projects {
 
   @@usage(BingGroundingTool, Usage.input | Usage.output);
   @@usage(BrowserAutomationPreviewTool, Usage.input | Usage.output);
+  @@usage(BrowserAutomationTool, Usage.input | Usage.output);
   @@usage(
     BrowserAutomationToolConnectionParameters,
     Usage.input | Usage.output
@@ -929,7 +935,7 @@ namespace Azure.AI.Projects {
 
   @@usage(FabricIQPreviewTool, Usage.input | Usage.output);
   @@clientName(FabricIQPreviewTool.server_url, "ServerUri");
-  //@@clientName(WebIQPreviewTool.server_url, "ServerUri");
+  @@usage(WebIQPreviewTool, Usage.input | Usage.output);
   @@clientName(
     CaptureStructuredOutputsTool.outputs,
     "OutputDefinition",

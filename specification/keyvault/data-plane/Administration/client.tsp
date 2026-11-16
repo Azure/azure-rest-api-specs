@@ -5,7 +5,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@TypeSpec.Versioning.useDependency(KeyVault.Versions.v2026_01_01_preview)
+@TypeSpec.Versioning.useDependency(KeyVault.Versions.v2026_07_01_preview)
 namespace ClientCustomizations;
 
 //Java customizations
@@ -15,6 +15,42 @@ namespace ClientCustomizations;
 @@clientName(KeyVault.RoleType, "KeyVaultRoleType", "java");
 @@clientName(KeyVault.RoleScope, "KeyVaultRoleScope", "java");
 @@clientName(KeyVault.SettingTypeEnum, "KeyVaultSettingType", "java");
+@@clientName(
+  KeyVault.EkmConnectivityMode,
+  "KeyVaultEkmConnectivityMode",
+  "java"
+);
+@@clientName(KeyVault.EkmPrivateEndpoint, "KeyVaultEkmPrivateEndpoint", "java");
+@@clientName(
+  KeyVault.EkmPrivateEndpointProperties,
+  "KeyVaultEkmPrivateEndpointProperties",
+  "java"
+);
+@@clientName(
+  KeyVault.EkmPrivateEndpointProperties.privateLinkServiceId,
+  "privateLinkServiceAlias",
+  "java"
+);
+@@clientName(
+  KeyVault.EkmPrivateEndpointConnectionState,
+  "KeyVaultEkmPrivateEndpointConnectionState",
+  "java"
+);
+@@clientName(
+  KeyVault.EkmPrivateEndpointConnectionStatus,
+  "KeyVaultEkmPrivateEndpointConnectionStatus",
+  "java"
+);
+@@clientName(
+  KeyVault.EkmPrivateEndpointProvisioningState,
+  "KeyVaultEkmPrivateEndpointProvisioningState",
+  "java"
+);
+@@clientName(
+  KeyVault.EkmPrivateEndpointOperationType,
+  "KeyVaultEkmPrivateEndpointOperationType",
+  "java"
+);
 
 //C# customizations
 @client(

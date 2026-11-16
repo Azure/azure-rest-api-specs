@@ -10,6 +10,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 import "../common/models-ref.tsp";
 
 using TypeSpec.Rest;

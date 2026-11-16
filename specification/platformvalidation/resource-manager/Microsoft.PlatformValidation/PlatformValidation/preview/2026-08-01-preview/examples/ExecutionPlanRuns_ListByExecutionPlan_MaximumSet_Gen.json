@@ -1,0 +1,61 @@
+{
+  "title": "ExecutionPlanRuns_ListByExecutionPlan_MaximumSet",
+  "operationId": "ExecutionPlanRuns_ListByExecutionPlan",
+  "parameters": {
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgvalidate",
+    "cloudValidationName": "cvtest01",
+    "validationExecutionPlanName": "contoso-linux-cert"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "description": "Run the Contoso Linux image certification plan.",
+              "status": "Succeeded",
+              "startedAt": "2026-09-09T11:58:05Z",
+              "completedAt": "2026-09-09T12:00:00Z",
+              "reportedAt": "2026-09-09T12:00:05Z",
+              "testRunSummary": {
+                "totalTests": 9,
+                "passedTests": 8,
+                "failedTests": 0,
+                "skippedTests": 1,
+                "overallResult": "Passed",
+                "message": "Eight tests passed. The data-disk-size test was skipped because no data disks were supplied."
+              },
+              "planConfigurationSnapshot": "{\"apiVersion\":\"microsoft.PlatformValidation/validationExecutionPlan.v0\",\"kind\":\"ValidationExecutionPlan\",\"metadata\":{\"name\":\"contoso-linux-cert\"},\"parameters\":{\"certificationPackageReference\":{\"osType\":\"Linux\",\"vmGenerationType\":\"V1\",\"architectureType\":\"X64\",\"recommendedVMSizes\":[\"Standard_D4s_v3\"],\"storageProfile\":{\"osDiskImage\":{\"sourceVhdUri\":\"https://contoso.blob.core.windows.net/vhds/img.vhd?<sas>\"},\"dataDiskImages\":[]},\"additionalProperties\":{}}},\"authoring\":{\"steps\":[{\"name\":\"os-disk-size\",\"type\":\"test\",\"testRef\":\"/providers/Microsoft.PlatformValidation/validationTests/os-disk-size/versions/1.0.0\"},{\"name\":\"data-disk-size\",\"type\":\"test\",\"testRef\":\"/providers/Microsoft.PlatformValidation/validationTests/data-disk-size/versions/1.0.0\"},{\"name\":\"malware-defender\",\"type\":\"test\",\"testRef\":\"/providers/Microsoft.PlatformValidation/validationTests/malware-defender/versions/1.0.0\"},{\"name\":\"malware-esrp\",\"type\":\"test\",\"testRef\":\"/providers/Microsoft.PlatformValidation/validationTests/malware-esrp/versions/1.0.0\"},{\"name\":\"linux-quality-validation\",\"type\":\"test\",\"testRef\":\"/providers/Microsoft.PlatformValidation/validationTests/linux-quality-validation/versions/1.0.0\",\"inputs\":{\"concurrency\":1,\"testSuite\":[{\"testNames\":[\"smoke_test\",\"validate_netvsc_reload\"]}]}}]}}",
+              "testRunIds": [
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgvalidate/providers/Microsoft.PlatformValidation/cloudValidations/cvtest01/validationExecutionPlans/contoso-linux-cert/executionPlanRuns/run-001/validationTestRuns/vm-boot-test-run",
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgvalidate/providers/Microsoft.PlatformValidation/cloudValidations/cvtest01/validationExecutionPlans/contoso-linux-cert/executionPlanRuns/run-001/validationTestRuns/os-disk-size-run",
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgvalidate/providers/Microsoft.PlatformValidation/cloudValidations/cvtest01/validationExecutionPlans/contoso-linux-cert/executionPlanRuns/run-001/validationTestRuns/data-disk-size-run",
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgvalidate/providers/Microsoft.PlatformValidation/cloudValidations/cvtest01/validationExecutionPlans/contoso-linux-cert/executionPlanRuns/run-001/validationTestRuns/disk-multiple-mb-run",
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgvalidate/providers/Microsoft.PlatformValidation/cloudValidations/cvtest01/validationExecutionPlans/contoso-linux-cert/executionPlanRuns/run-001/validationTestRuns/vhd-first-one-mb-run",
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgvalidate/providers/Microsoft.PlatformValidation/cloudValidations/cvtest01/validationExecutionPlans/contoso-linux-cert/executionPlanRuns/run-001/validationTestRuns/vhd-footer-run",
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgvalidate/providers/Microsoft.PlatformValidation/cloudValidations/cvtest01/validationExecutionPlans/contoso-linux-cert/executionPlanRuns/run-001/validationTestRuns/malware-defender-run",
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgvalidate/providers/Microsoft.PlatformValidation/cloudValidations/cvtest01/validationExecutionPlans/contoso-linux-cert/executionPlanRuns/run-001/validationTestRuns/vulnerability-run",
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgvalidate/providers/Microsoft.PlatformValidation/cloudValidations/cvtest01/validationExecutionPlans/contoso-linux-cert/executionPlanRuns/run-001/validationTestRuns/linux-quality-run"
+              ],
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgvalidate/providers/Microsoft.PlatformValidation/cloudValidations/cvtest01/validationExecutionPlans/contoso-linux-cert/executionPlanRuns/run-001",
+            "name": "run-001",
+            "type": "Microsoft.PlatformValidation/cloudValidations/validationExecutionPlans/executionPlanRuns",
+            "systemData": {
+              "createdBy": "11111111-1111-4111-8111-111111111111",
+              "createdByType": "Application",
+              "createdAt": "2026-09-09T11:58:00Z",
+              "lastModifiedBy": "11111111-1111-4111-8111-111111111111",
+              "lastModifiedByType": "Application",
+              "lastModifiedAt": "2026-09-09T12:00:05Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgvalidate/providers/Microsoft.PlatformValidation/cloudValidations/cvtest01/validationExecutionPlans/contoso-linux-cert/executionPlanRuns?api-version=2026-08-01-preview&$skiptoken=cGFnZT0y"
+      }
+    }
+  }
+}

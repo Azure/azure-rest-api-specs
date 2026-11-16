@@ -75,7 +75,7 @@ export async function outputErrorSummary(errors: ReportableOavError[], reportNam
 
   builtLines.push("\n");
   builtLines.push(
-    `> [!IMPORTANT]\n> Repro any individual file's worth of errors by invoking \`npx oav ${checkName} <spec-file-path>\` from the root of the rest-api-specs repo.`,
+    `> [!IMPORTANT]\n> Repro any individual file's worth of errors by invoking \`pnpm exec oav ${checkName} <spec-file-path>\` from the root of the rest-api-specs repo.`,
   );
 
   const summaryResult = builtLines.join("\n");

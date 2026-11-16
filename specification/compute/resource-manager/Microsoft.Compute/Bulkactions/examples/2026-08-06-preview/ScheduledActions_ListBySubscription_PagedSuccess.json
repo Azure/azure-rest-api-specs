@@ -1,0 +1,68 @@
+{
+  "title": "List a page of recurring scheduled actions in a subscription",
+  "description": "Lists two recurring scheduled actions from different resource groups and returns a link to the next page.",
+  "operationId": "ScheduledActions_ListBySubscription",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "resourceType": "VirtualMachine",
+              "actionType": "Start",
+              "startTime": "2026-09-15T07:00:00-07:00",
+              "schedule": {
+                "scheduledTime": "07:00:00",
+                "timeZone": "America/Los_Angeles",
+                "requestedWeekDays": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday"
+                ]
+              },
+              "notificationSettings": [],
+              "disabled": false,
+              "provisioningState": "Succeeded"
+            },
+            "location": "eastus",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/web-rg/providers/Microsoft.Compute/scheduledActions/weekday-start",
+            "name": "weekday-start",
+            "type": "Microsoft.Compute/scheduledActions"
+          },
+          {
+            "properties": {
+              "resourceType": "VirtualMachine",
+              "actionType": "Deallocate",
+              "startTime": "2026-09-15T19:00:00-05:00",
+              "schedule": {
+                "scheduledTime": "19:00:00",
+                "timeZone": "America/Chicago",
+                "requestedWeekDays": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday"
+                ]
+              },
+              "notificationSettings": [],
+              "disabled": false,
+              "provisioningState": "Succeeded"
+            },
+            "location": "centralus",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/batch-rg/providers/Microsoft.Compute/scheduledActions/weekday-deallocate",
+            "name": "weekday-deallocate",
+            "type": "Microsoft.Compute/scheduledActions"
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/scheduledActions?api-version=2026-08-06-preview&$skiptoken=page2"
+      }
+    }
+  }
+}

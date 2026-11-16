@@ -33,9 +33,5 @@ namespace Microsoft.HealthDataAIServices {
   );
   @@clientName(PrivateLinks.listByDeidService, "GetPrivateLinks", "csharp");
 
-  @@clientName(
-    Versions.v2024_09_20,
-    "$DO_NOT_NORMALIZE$V2024_09_20",
-    "javascript"
-  );
+  @@clientName(Versions.v2024_09_20, exact("V2024_09_20"), "javascript");
 }

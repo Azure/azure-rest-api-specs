@@ -69,9 +69,9 @@ interface Search {
        *
        * Example: lon1,lat1,lon2,lat2.
        *
-       * Minimum size: approximately 0.00001 degrees (~0.01 meters).
+       * Minimum size approximately 0.00001 degrees (~1.1 meters)
        *
-       *   Maximum size: up to the full global extent (-180,-90 to 180,90)
+       * Maximum size: up to the full global extent (-180,-90 to 180,90)
        */
       @minItems(4)
       @maxItems(4)
@@ -463,9 +463,9 @@ interface Search {
        *
        * Example: lon1,lat1,lon2,lat2.
        *
-       * Minimum size: approximately 0.00001 degrees (~0.01 meters).
+       * Minimum size approximately 0.00001 degrees (~1.1 meters)
        *
-       *   Maximum size: up to the full global extent (-180,-90 to 180,90)
+       * Maximum size: up to the full global extent (-180,-90 to 180,90)
        */
       @minItems(4)
       @maxItems(4)

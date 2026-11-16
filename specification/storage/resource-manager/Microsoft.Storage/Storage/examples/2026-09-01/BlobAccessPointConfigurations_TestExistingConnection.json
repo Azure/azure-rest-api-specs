@@ -1,0 +1,31 @@
+{
+  "operationId": "BlobAccessPointConfigurations_TestExistingConnection",
+  "title": "BlobAccessPointConfigurationTestExistingConnection",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "accountName": "teststorageaccount",
+    "api-version": "2026-09-01",
+    "blobAccessPointConfigurationName": "testaccesspointconfig",
+    "body": {
+      "uniqueId": "11111111-2222-3333-4444-555555555555"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "methodName": "List",
+        "requestId": "request-id-123"
+      }
+    },
+    "202": {
+      "status": "Accepted",
+      "message": "The resource operation has been received and is being processed.",
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Storage/locations/eastus/DataManagementRPOperationStatuses/operation-98765?api-version=2026-09-01",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Storage/locations/eastus/DataManagementRPOperationResults/operation-98765?api-version=2026-09-01",
+        "Retry-After": 30
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { join } from "path";
+import { join } from "node:path";
 import { expect, test } from "vitest";
 import { type Suppression, getSuppressions, getSuppressionsForTools } from "../src/suppressions.ts";
 
