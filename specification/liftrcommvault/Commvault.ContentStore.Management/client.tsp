@@ -255,7 +255,7 @@ model JavaScriptCloudAccountIdentityUpdate {
   @doc("The type of managed identity assigned to this resource.")
   type?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Managed identity PATCH uses a dictionary keyed by user-assigned identity resource IDs."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Preserves the userAssignedIdentities dictionary defined by Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, including nullable values keyed by identity resource IDs; this JavaScript-only customization changes the SDK model naming, not the REST contract."
   @doc("The identities assigned to this resource by the user.")
   userAssignedIdentities?: Record<CloudAccountUserAssignedIdentity | null>;
 }
