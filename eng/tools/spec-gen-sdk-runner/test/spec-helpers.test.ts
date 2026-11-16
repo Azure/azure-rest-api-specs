@@ -136,6 +136,36 @@ describe("detectChangedSpecConfigFiles", () => {
     });
   });
 
+  test("includes all nested project ancestors while retaining shared-library dependents", async () => {
+    const nestedFile =
+      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/Service1/SubService1/foo.tsp";
+    const sharedFile = "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/main.tsp";
+    vi.mocked(getChangedFiles).mockResolvedValue([nestedFile, sharedFile]);
+
+    const result = (await detectChangedSpecConfigFiles(mockCommandInput)).map(normalizeResultItem);
+
+    expect(result).toHaveLength(3);
+    expect(result).toEqual(
+      expect.arrayContaining([
+        {
+          typespecProject:
+            "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/Service1/tspconfig.yaml",
+          specs: [nestedFile],
+        },
+        {
+          typespecProject:
+            "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/Service1/SubService1/tspconfig.yaml",
+          specs: [nestedFile],
+        },
+        {
+          typespecProject:
+            "specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml",
+          specs: [sharedFile],
+        },
+      ]),
+    );
+  });
+
   test("case with shared files", async () => {
     vi.mocked(getChangedFiles).mockResolvedValue([
       "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/main.tsp",
