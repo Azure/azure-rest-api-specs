@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "subscriptionId": "58c3f667-7a62-4bfd-a658-846493e9a493",
+    "api-version": "2026-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/58c3f667-7a62-4bfd-a658-846493e9a493/providers/Microsoft.Advisor/configurations/default",
+            "type": "Microsoft.Advisor/configurations",
+            "name": "default",
+            "properties": {
+              "exclude": false,
+              "digests": [
+                {
+                  "name": "legacyWeekly",
+                  "actionGroupResourceId": "/subscriptions/58c3f667-7a62-4bfd-a658-846493e9a493/resourceGroups/resourceGroup/providers/Microsoft.Insights/actionGroups/actionGroupName",
+                  "frequency": 7,
+                  "categories": [],
+                  "language": "en",
+                  "state": "Active"
+                },
+                {
+                  "name": "minuteNested",
+                  "actionGroupResourceId": "/subscriptions/58c3f667-7a62-4bfd-a658-846493e9a493/resourceGroups/resourceGroup/providers/Microsoft.Insights/actionGroups/actionGroupName",
+                  "frequencyInMinutes": 60,
+                  "categoriesFilter": [
+                    {
+                      "category": "HighAvailability",
+                      "subcategories": [
+                        "HighAvailability"
+                      ]
+                    }
+                  ],
+                  "language": "en",
+                  "state": "Active"
+                },
+                {
+                  "name": "categoryWide",
+                  "actionGroupResourceId": "/subscriptions/58c3f667-7a62-4bfd-a658-846493e9a493/resourceGroups/resourceGroup/providers/Microsoft.Insights/actionGroups/actionGroupName",
+                  "frequency": 7,
+                  "categoriesFilter": [
+                    {
+                      "category": "Security"
+                    }
+                  ],
+                  "language": "en",
+                  "state": "Active"
+                },
+                {
+                  "name": "explicitNone",
+                  "actionGroupResourceId": "/subscriptions/58c3f667-7a62-4bfd-a658-846493e9a493/resourceGroups/resourceGroup/providers/Microsoft.Insights/actionGroups/actionGroupName",
+                  "frequencyInMinutes": 1440,
+                  "categoriesFilter": [],
+                  "language": "en",
+                  "state": "Disabled"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Configurations_ListBySubscription",
+  "title": "ListConfigurations_Digests"
+}

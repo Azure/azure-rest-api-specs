@@ -105,6 +105,7 @@ interface ResourceRecommendationBases {
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2026_08_01_preview)
   @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_11_01_preview)
   @renamedFrom(Versions.v2026_10_01, "list")
   @sharedRoute
   listWithMode is ArmResourceListByParent<
@@ -148,6 +149,7 @@ interface ResourceRecommendationBases {
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_11_01_preview)
   listByTenant is ArmResourceListByParent<
     ResourceRecommendationBase,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
@@ -210,6 +212,7 @@ alias AdvisorServiceGroup = Extension.ExternalResource<
 @armResourceOperations
 @added(Versions.v2026_08_01_preview)
 @removed(Versions.v2026_10_01)
+@added(Versions.v2026_11_01_preview)
 interface ServiceGroupRecommendations {
   /**
    * Obtains recommendations for a service group.
