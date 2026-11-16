@@ -1356,7 +1356,7 @@
         "purchaserEmail": {
           "type": "string",
           "format": "password",
-          "description": "The purchaser email. Server-derived from authenticated identity. Read-only.\n\nCustomer data (PII): NOT included in default GET responses. Returned only when\nthe request specifies `$expandCustomerData=true`. Callers requesting customer\ndata must have appropriate authorization and handle the value per GDPR requirements.\n\n`@secret` is applied so SDK generators emit `format: password`, ensuring the value\nis redacted in logs, CLI output, and diagnostic traces.",
+          "description": "The purchaser email. Server-derived from authenticated identity. Read-only.\n\nCustomer data (PII): NEVER returned in `List` (`listByResourceGroup`,\n`listByAzureSubscription`, tenant `list`), `PUT`, `PATCH`, or default point `GET`\nresponses, so Azure Resource Graph and control-plane caches never receive or store\nPII. Returned exclusively on single-resource point `GET` when the caller explicitly\npasses `$expandCustomerData=true` (per `ARG002`). Present as an optional property on\nthe shared resource model because `RPC-Get-V1-10` requires collection `GET` `value[]`\nto use the same resource schema as point `GET`. Callers requesting customer data must\nhave appropriate authorization and handle the value per GDPR requirements.\n\n`@secret` is applied so SDK generators emit `format: password`, ensuring the value\nis redacted in logs, CLI output, and diagnostic traces.",
           "readOnly": true,
           "x-ms-secret": true
         },
@@ -1566,7 +1566,7 @@
         "purchaserEmail": {
           "type": "string",
           "format": "password",
-          "description": "The purchaser email. Server-derived from authenticated identity. Read-only.\n\nCustomer data (PII): NOT included in default GET responses. Returned only when\nthe request specifies `$expandCustomerData=true`. Callers requesting customer\ndata must have appropriate authorization and handle the value per GDPR requirements.\n\n`@secret` is applied so SDK generators emit `format: password`, ensuring the value\nis redacted in logs, CLI output, and diagnostic traces.",
+          "description": "The purchaser email. Server-derived from authenticated identity. Read-only.\n\nCustomer data (PII): NEVER returned in `List` (`listByResourceGroup`,\n`listByAzureSubscription`, tenant `list`), `PUT`, `PATCH`, or default point `GET`\nresponses, so Azure Resource Graph and control-plane caches never receive or store\nPII. Returned exclusively on single-resource point `GET` when the caller explicitly\npasses `$expandCustomerData=true` (per `ARG002`). Present as an optional property on\nthe shared resource model because `RPC-Get-V1-10` requires collection `GET` `value[]`\nto use the same resource schema as point `GET`. Callers requesting customer data must\nhave appropriate authorization and handle the value per GDPR requirements.\n\n`@secret` is applied so SDK generators emit `format: password`, ensuring the value\nis redacted in logs, CLI output, and diagnostic traces.",
           "readOnly": true,
           "x-ms-secret": true
         },
@@ -1856,7 +1856,7 @@
         "purchaserEmail": {
           "type": "string",
           "format": "password",
-          "description": "The purchaser email. Server-derived from authenticated identity. Read-only.\n\nCustomer data (PII): NOT included in default GET responses. Returned only when\nthe request specifies `$expandCustomerData=true`. Callers requesting customer\ndata must have appropriate authorization and handle the value per GDPR requirements.\n\n`@secret` is applied so SDK generators emit `format: password`, ensuring the value\nis redacted in logs, CLI output, and diagnostic traces.",
+          "description": "The purchaser email. Server-derived from authenticated identity. Read-only.\n\nCustomer data (PII): NEVER returned in `List` (`listByResourceGroup`,\n`listByAzureSubscription`, tenant `list`), `PUT`, `PATCH`, or default point `GET`\nresponses, so Azure Resource Graph and control-plane caches never receive or store\nPII. Returned exclusively on single-resource point `GET` when the caller explicitly\npasses `$expandCustomerData=true` (per `ARG002`). Present as an optional property on\nthe shared resource model because `RPC-Get-V1-10` requires collection `GET` `value[]`\nto use the same resource schema as point `GET`. Callers requesting customer data must\nhave appropriate authorization and handle the value per GDPR requirements.\n\n`@secret` is applied so SDK generators emit `format: password`, ensuring the value\nis redacted in logs, CLI output, and diagnostic traces.",
           "readOnly": true,
           "x-ms-secret": true
         },

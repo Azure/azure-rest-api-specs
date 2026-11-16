@@ -92,9 +92,14 @@ model SaasTenantResourceProperties {
   /**
    * The purchaser email. Server-derived from authenticated identity. Read-only.
    *
-   * Customer data (PII): NOT included in default GET responses. Returned only when
-   * the request specifies `$expandCustomerData=true`. Callers requesting customer
-   * data must have appropriate authorization and handle the value per GDPR requirements.
+   * Customer data (PII): NEVER returned in `List` (`listByResourceGroup`,
+   * `listByAzureSubscription`, tenant `list`), `PUT`, `PATCH`, or default point `GET`
+   * responses, so Azure Resource Graph and control-plane caches never receive or store
+   * PII. Returned exclusively on single-resource point `GET` when the caller explicitly
+   * passes `$expandCustomerData=true` (per `ARG002`). Present as an optional property on
+   * the shared resource model because `RPC-Get-V1-10` requires collection `GET` `value[]`
+   * to use the same resource schema as point `GET`. Callers requesting customer data must
+   * have appropriate authorization and handle the value per GDPR requirements.
    *
    * `@secret` is applied so SDK generators emit `format: password`, ensuring the value
    * is redacted in logs, CLI output, and diagnostic traces.
