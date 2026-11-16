@@ -70,8 +70,8 @@ target these shared package identities:
 
 For SDK generation, select
 `specification/networksecurity/resource-manager/Microsoft.NetworkSecurity/tspconfig.yaml`.
-The [parent SDK entry point](../client.tsp) imports only `./neuroShield/main.tsp`
-as its public service input and explicitly composes the shared
+The [parent SDK entry point](../client.tsp) imports `./neuroShield/main.tsp` and
+`./agentFabric/main.tsp`, and composes both services into the shared
 `NetworkSecurityManagementClient`. It retains all seven NeuroShield operation
 groups and the C# operation-name disambiguation.
 
@@ -84,7 +84,7 @@ writers. The SDK composition does not change routes, API versions, wire models,
 operation IDs, paging parameters, or provisioning-state semantics.
 
 The parent [validation exceptions](../suppressions.yaml) cover only the SDK-only
-provider folder's layout and this REST-only child's absent SDK options, following
+provider folder's layout and the REST-only children's absent SDK options, following
 the Network convention. They do not suppress API-model lint rules.
 
 Outputs are rooted at `sdk/networksecurity`, with a package-specific subdirectory
@@ -93,10 +93,11 @@ for each language. Go instead uses
 repository's standard generation, build, and validation workflow using this
 configuration; the TypeSpec compile command above regenerates OpenAPI, not SDKs.
 
-For SDK emitters that support `examples-dir`, the parent configuration points to
-`{project-root}/neuroShield/examples`. The source examples remain in this child
-project. Recheck each emitter's version-aware example discovery when another
-public service joins; do not reuse this single-service path without validation.
+For SDK emitters that support `examples-dir`, the parent configuration uses
+`../neuroShield/examples`. Because the client combines two services, the client
+generator resolves that path under each service's namespace folder, so it reaches
+these NeuroShield examples. Agent Fabric examples are not loaded for generated SDK
+samples or tests.
 
 ### NeuroShield SDK surface
 
@@ -121,53 +122,27 @@ The Network Security SDK owners coordinate package versions and releases across
 services. Shared package identity does not imply that different service inputs
 can be generated independently into the same output directory.
 
-### Adding another public NetworkSecurity service
+### Agent Fabric in the shared SDK
 
-Two-service generation is not implemented here. Agent Fabric must not be added
-until its definitions are authorized for the public generation input. The
-[Network SDK client entry point](../../../../network/resource-manager/Microsoft.Network/Network/client.tsp)
-imports multiple public services and explicitly combines them with a TypeSpec
-client generator core `@client` declaration using a service array and
-`autoMergeService`. IPAM is an operation group within the Network package, not a
-separate installable package.
-That is composition prior art, not evidence that NeuroShield and Agent Fabric
-have already been generated together.
+The parent `client.tsp` lists `NeuroShield.Management` and
+`Microsoft.NetworkSecurity` (Agent Fabric) in one `@client` declaration with
+`autoMergeService`. Agent Fabric adds the `AgentFabrics`, `Members`,
+`PolicyGroups`, `OperationStatus`, `ClusterAssociations`, and
+`EgressTrustBundles` operation groups.
 
-Onboard Agent Fabric as a coordinated change with the shared SDK owners:
+Both services declare the provider-wide `Operations.list` operation. The shared
+client keeps the NeuroShield method and scopes out the Agent Fabric duplicate in
+every language.
 
-1. Publish only the authorized Agent Fabric REST input through its own API review.
-   Keep NeuroShield's REST entry point and contract unchanged. Do not copy private
-   definitions or introduce placeholder service definitions here.
-2. Extend the provider-level `../client.tsp` to import the approved public Agent
-   Fabric entry point and include its service in the explicit client composition.
-   Retain `../tspconfig.yaml` as the single shared-package SDK configuration. Keep
-   each child service's REST generation configuration and version manifest separate.
-3. Define and validate the client composition explicitly with the supported SDK
-   tools. Preserve the existing NeuroShield exports within the shared package.
-   Python and TypeScript retain `NetworkSecurityManagementClient` with distinct
-   service operation groups; Java exposes the groups through the shared manager.
-   Preserve .NET's resource/collection pattern and Go's shared factory with distinct
-   operation clients. Verify each emitter's behavior with both services; imports
-   alone are insufficient, and service versions and dependencies must be compatible.
-4. Resolve collisions before emitting into a shared directory: client names,
-   operation groups, model/enum names, generated file names, and exported symbols.
-   Review duplicate provider `Operations` APIs explicitly; share one SDK group only
-   when the REST operation and version semantics match. Use scoped SDK naming or
-   composition customizations, not REST renames, to distinguish service-owned types.
-5. Point each SDK repository's `tsp-location.yaml` at the provider-level
-   `specification/networksecurity/resource-manager/Microsoft.NetworkSecurity`
-   project and an approved spec commit containing both services. Generate once per
-   language/package into the output paths above. Never run independent NeuroShield
-   and Agent Fabric generation sequentially into the same output directory: the
-   second run can overwrite the first service's clients, models, and exports.
-6. Validate both services' operation inventories, model exports/imports, API-version
-   selection, and dependency compatibility; then build and test all five packages.
-   Compare the regenerated REST artifacts and the existing NeuroShield SDK surface
-   for unintended changes. Coordinate package versions, releases, and ownership.
+Generate each package once from the parent configuration. Never generate
+NeuroShield and Agent Fabric separately into the same output directory: the second
+run overwrites the first service's clients, models, and exports.
 
-Obtain SDK architect approval for package and client names before release.
-Package-name reservation is not approval. Combined generation remains unverified
-until the authorized Agent Fabric input is included and all language checks pass.
+To add another public NetworkSecurity service, follow the same pattern. Keep its
+`tspconfig.yaml` REST-only, add it to the parent `client.tsp` and
+`suppressions.yaml`, and resolve SDK name collisions with scoped client
+customizations, not REST renames. Obtain SDK architect approval for package and
+client names before release.
 
 ### PowerShell and Azure CLI
 
