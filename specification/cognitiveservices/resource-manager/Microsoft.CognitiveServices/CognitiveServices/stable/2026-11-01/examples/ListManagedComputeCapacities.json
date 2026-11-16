@@ -1,0 +1,75 @@
+{
+  "operationId": "ManagedComputeCapacities_List",
+  "title": "List Managed Compute Capacities",
+  "parameters": {
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "api-version": "2026-11-01",
+    "offer": "MaaP",
+    "acceleratorType": "H100_80GB"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/providers/Microsoft.CognitiveServices/managedComputeCapacities/H100_80GB.Global",
+            "name": "H100_80GB.Global",
+            "type": "Microsoft.CognitiveServices/managedComputeCapacities",
+            "properties": {
+              "acceleratorType": "H100_80GB",
+              "offerScope": "Global",
+              "scopeId": "",
+              "availableAccelerators": 16,
+              "totalAvailableAccelerators": 32,
+              "deploymentSizeCapacities": [
+                {
+                  "modelInstanceAcceleratorCount": 1,
+                  "totalAvailableCapacity": 16,
+                  "largestDeploymentCapacity": 8
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/providers/Microsoft.CognitiveServices/managedComputeCapacities/H100_80GB.DataZone.US",
+            "name": "H100_80GB.DataZone.US",
+            "type": "Microsoft.CognitiveServices/managedComputeCapacities",
+            "properties": {
+              "acceleratorType": "H100_80GB",
+              "offerScope": "DataZone",
+              "scopeId": "US",
+              "availableAccelerators": 16,
+              "totalAvailableAccelerators": 24,
+              "deploymentSizeCapacities": [
+                {
+                  "modelInstanceAcceleratorCount": 1,
+                  "totalAvailableCapacity": 16,
+                  "largestDeploymentCapacity": 8
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/providers/Microsoft.CognitiveServices/managedComputeCapacities/H100_80GB.DataZone.EU",
+            "name": "H100_80GB.DataZone.EU",
+            "type": "Microsoft.CognitiveServices/managedComputeCapacities",
+            "properties": {
+              "acceleratorType": "H100_80GB",
+              "offerScope": "DataZone",
+              "scopeId": "EU",
+              "availableAccelerators": 8,
+              "totalAvailableAccelerators": 8,
+              "deploymentSizeCapacities": [
+                {
+                  "modelInstanceAcceleratorCount": 1,
+                  "totalAvailableCapacity": 8,
+                  "largestDeploymentCapacity": 4
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

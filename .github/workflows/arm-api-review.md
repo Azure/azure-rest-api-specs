@@ -2,7 +2,7 @@
 description: >
   Automatically review Azure REST API specification pull requests for
   conformance to ARM RPC rules and Azure REST API Guidelines. Triggers
-  initially after Summarize Checks establishes WaitForARMFeedback, or when that label is
+  for each newly ready head after Summarize Checks establishes WaitForARMFeedback, or when that label is
   explicitly added; re-reviews when ARMChangesRequested is removed;
   on demand via the /arm-review comment command.
 run-name: "ARM API Review #${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }} (${{ github.event_name }})"
@@ -41,7 +41,7 @@ on:
         required: false
         type: string
       reservation_url:
-        description: "Queued semantic-status URL from the automatic initial-review dispatcher"
+        description: "Queued semantic-status URL from the automatic per-head review dispatcher"
         required: false
         type: string
   permissions:
@@ -174,7 +174,7 @@ on:
   # the workflow; a maintainer must apply the `WaitForARMFeedback` label or run
   # `/arm-review`. This replaces the former hand-rolled collaborator check.
   roles: [admin, maintainer, write]
-  # Summarize Checks dispatches the initial review with GITHUB_TOKEN after readiness reconciliation.
+  # Summarize Checks dispatches each newly ready head with GITHUB_TOKEN after readiness reconciliation.
   # Bots do not have repository roles, so this explicit grant permits that
   # trusted handoff. The exact command gate below keeps
   # unrelated github-actions comments from activating the agent.

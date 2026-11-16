@@ -68,11 +68,7 @@ model PlaywrightWorkspaceProperties {
 
   @added(Versions.v2026_11_01_preview)
   @doc("Specifies whether the browser proxy is enabled for the workspace.")
-  browserProxy?: EnablementStatus = EnablementStatus.Disabled;
-
-  @added(Versions.v2026_11_01_preview)
-  @doc("The Azure Key Vault linked to the workspace and the managed identity used to access it.")
-  linkedKeyVault?: LinkedKeyVaultProperties;
+  browserProxy?: EnablementStatus = EnablementStatus.Enabled;
 }
 
 @doc("The status of the last resource operation.")
@@ -99,15 +95,6 @@ union EnablementStatus {
 
   @doc("The feature is disabled.")
   Disabled: "Disabled",
-}
-
-@doc("Linked Key Vault properties for the Playwright workspace.")
-model LinkedKeyVaultProperties {
-  @doc("The URI of the linked Azure Key Vault.")
-  vaultUri?: url;
-
-  @doc("The managed identity used to access the linked Azure Key Vault.")
-  vaultIdentity?: ManagedIdentity;
 }
 
 @doc("Managed identity properties for accessing Azure resources.")

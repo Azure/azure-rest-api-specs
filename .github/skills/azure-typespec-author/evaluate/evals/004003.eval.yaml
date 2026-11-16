@@ -5,7 +5,7 @@ type: capability # capability | regression
 tags:
   area: "decorators"
 # Root-level environment
-environment: azsdk-mcp
+agent_environment: azsdk-mcp
 # Execution configuration
 defaults:
   runs: 1 # Trials per stimulus
@@ -21,7 +21,7 @@ stimuli:
       mode: "trigger"
     prompt: |
       Remove @operationId and its associated #suppress for no-openapi from all operations. Then restore both @operationId and its associated #suppress for no-openapi for operationIds that do not contain underscores and do not begin with a lowercase letter.
-    environment: &shared_environment
+    agent_environment: &shared_environment
       files:
         - src: ../fixtures/004003-delete-and-restore-operationId-decorator/BastionHost.tsp
           dest: BastionHost.tsp
@@ -77,7 +77,7 @@ stimuli:
       mode: "forced"
     prompt: |
       @azure-typespec-author Remove @operationId and its associated #suppress for no-openapi from all operations. Then restore both @operationId and its associated #suppress for no-openapi for operationIds that do not contain underscores and do not begin with a lowercase letter.
-    environment: *shared_environment
+    agent_environment: *shared_environment
     graders:
       - type: "run-command"
         config:
@@ -98,43 +98,36 @@ stimuli:
           path: "BgpConnection.tsp"
       - &file_not_matches_network_interface_operation_id
         type: "file-not-matches"
-        name: "file-not-matches-network-interface-operation-id"
         config:
           pattern: '@operationId\('
           path: "NetworkInterface.tsp"
       - &file_not_matches_express_route_gateway_operation_id
         type: "file-not-matches"
-        name: "file-not-matches-express-route-gateway-operation-id"
         config:
           pattern: '@operationId\('
           path: "ExpressRouteGateway.tsp"
       - &file_not_matches_express_route_port_operation_id
         type: "file-not-matches"
-        name: "file-not-matches-express-route-port-operation-id"
         config:
           pattern: '@operationId\('
           path: "ExpressRoutePort.tsp"
       - &file_not_matches_network_interface_operation_id_check
         type: "file-not-matches"
-        name: "file-not-matches-network-interface-operation-id-check"
         config:
           pattern: '@operationId\('
           path: "NetworkInterface.tsp"
       - &file_not_matches_p2s_vpn_gateway_operation_id
         type: "file-not-matches"
-        name: "file-not-matches-p2s-vpn-gateway-operation-id"
         config:
           pattern: '@operationId\('
           path: "P2SVpnGateway.tsp"
       - &file_not_matches_policy_group_operation_id
         type: "file-not-matches"
-        name: "file-not-matches-policy-group-operation-id"
         config:
           pattern: '@operationId\('
           path: "VpnServerConfigurationPolicyGroup.tsp"
       - &file_not_matches_site_link_operation_id
         type: "file-not-matches"
-        name: "file-not-matches-site-link-operation-id"
         config:
           pattern: '@operationId\('
           path: "VpnSiteLinkConnection.tsp"
@@ -145,25 +138,21 @@ stimuli:
           path: "BastionHost.tsp"
       - &file_matches_active_sessions_operation_id
         type: "file-matches"
-        name: "file-matches-active-sessions-operation-id"
         config:
           pattern: '@operationId\("GetActiveSessions"\)'
           path: "BastionHost.tsp"
       - &file_matches_provider_port_operation_id
         type: "file-matches"
-        name: "file-matches-provider-port-operation-id"
         config:
           pattern: '@operationId\("ExpressRouteProviderPort"\)'
           path: "ExpressRouteProviderPort.tsp"
       - &file_matches_suppress
         type: "file-matches"
-        name: "file-matches-suppress"
         config:
           pattern: "#suppress.*no-openapi|#suppress.*operationId"
           path: "BastionHost.tsp"
       - &file_not_matches_location_list_operation_id
         type: "file-not-matches"
-        name: "file-not-matches-location-list-operation-id"
         config:
           pattern: '@operationId\("ExpressRouteProviderPortsLocation_List"\)'
           path: "ExpressRouteProviderPort.tsp"
@@ -175,7 +164,7 @@ stimuli:
       suite: "decorators"
       mode: "no-skill"
     prompt: "Remove @operationId and its associated #suppress for no-openapi from all operations. Then restore both @operationId and its associated #suppress for no-openapi for operationIds that do not contain underscores and do not begin with a lowercase letter."
-    environment: *shared_environment
+    agent_environment: *shared_environment
     graders:
       - *file_not_matches
       - *file_not_matches_network_interface_operation_id

@@ -4,6 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "./models.flowcommon.tsp";
 
 using TypeSpec.Rest;
 using Azure.ClientGenerator.Core;
@@ -83,6 +84,16 @@ interface Pipelines {
   >;
 
   /**
+   * Approves pending flow request(s) associated with the specified Pipeline.
+   */
+  @added(Versions.v2026_06_29_preview)
+  approveTransferFlow is ArmResourceActionAsync<
+    Pipeline,
+    TransferFlowRequestBody,
+    TransferFlowResponseBody
+  >;
+
+  /**
    * Executes a privileged or administrative action on the specified Pipeline.
    */
   executeAction is ArmResourceActionAsync<Pipeline, Action, Pipeline>;
@@ -106,6 +117,25 @@ interface Pipelines {
   >;
 
   /**
+   * Lists the storage and messaging transfer flows that use the specified Pipeline, across all subscriptions and tenants that use it. This is the pipeline approver view; it differs from the subscription and resource group list operations, which only return the caller's own transfer flows. Results do not cross clouds; the remote side of each flow is referenced only through remoteTransferFlowResourceId.
+   */
+  @added(Versions.v2026_06_29_preview)
+  @action("listTransferFlows")
+  @list
+  listTransferFlows is ArmResourceActionSync<
+    Pipeline,
+    {
+      /**
+       * Filters used to select the flow resources to be retrieved.
+       */
+      @added(Versions.v2026_06_29_preview)
+      @bodyRoot
+      body?: ListTransferFlowsByPipelineRequestBody;
+    },
+    ArmResponse<ListTransferFlowsByPipelineResult>
+  >;
+
+  /**
    * Lists the schemas associated with a specific connection in the Pipeline. This operation has reached end of life support starting version 2025-05-30-preview. For schema support please create and use a FlowProfile resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
@@ -124,6 +154,16 @@ interface Pipelines {
     Pipeline,
     ResourceBody,
     Connection
+  >;
+
+  /**
+   * Rejects pending flow request(s) associated with the specified Pipeline.
+   */
+  @added(Versions.v2026_06_29_preview)
+  rejectTransferFlow is ArmResourceActionAsync<
+    Pipeline,
+    TransferFlowRequestBody,
+    TransferFlowResponseBody
   >;
 }
 

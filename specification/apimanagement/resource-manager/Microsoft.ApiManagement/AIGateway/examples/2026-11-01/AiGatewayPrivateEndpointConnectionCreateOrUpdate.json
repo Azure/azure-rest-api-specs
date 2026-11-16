@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2026-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "aiGatewayName": "example-gateway",
+    "privateEndpointConnectionName": "33333333-3333-3333-3333-333333333333",
+    "resource": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "status": "Approved",
+          "description": "Approved by administrator."
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/privateEndpointConnections/33333333-3333-3333-3333-333333333333",
+        "name": "33333333-3333-3333-3333-333333333333",
+        "type": "Microsoft.ApiManagement/aigateways/privateEndpointConnections",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Network/privateEndpoints/example-pe"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "Approved by administrator.",
+            "actionsRequired": "None"
+          },
+          "groupIds": [
+            "Gateway"
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ApiManagement/locations/westus2/aiGatewayOperationStatuses/example-operation?api-version=2026-11-01",
+        "Retry-After": 10
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/privateEndpointConnections/33333333-3333-3333-3333-333333333333",
+        "name": "33333333-3333-3333-3333-333333333333",
+        "type": "Microsoft.ApiManagement/aigateways/privateEndpointConnections",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Network/privateEndpoints/example-pe"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "Approved by administrator.",
+            "actionsRequired": "None"
+          },
+          "groupIds": [
+            "Gateway"
+          ],
+          "provisioningState": "Updating"
+        }
+      }
+    }
+  },
+  "operationId": "AiGatewayPrivateEndpointConnections_CreateOrUpdate",
+  "title": "Approve or reject a private endpoint connection for an AI Gateway"
+}

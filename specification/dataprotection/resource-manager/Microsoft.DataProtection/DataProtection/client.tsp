@@ -5,6 +5,65 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.DataProtection;
 
+// Go
+@@clientName(DppCrossTenantVaultMappings, "DPPCrossTenantVaultMappings", "go");
+@@clientName(
+  DppCrossTenantVaultMappingStatus,
+  "DPPCrossTenantVaultMappingStatus",
+  "go"
+);
+@@clientName(
+  BackupInstancesFromDppCrossTenantVault,
+  "BackupInstancesFromDPPCrossTenantVault",
+  "go"
+);
+@@clientName(
+  BackupInstanceFromDppCrossTenantVault,
+  "BackupInstanceFromDPPCrossTenantVault",
+  "go"
+);
+@@clientName(
+  RestoresFromDppCrossTenantVault,
+  "RestoresFromDPPCrossTenantVault",
+  "go"
+);
+@@clientName(
+  ValidateRestoreFromDppCrossTenantVault,
+  "ValidateRestoreFromDPPCrossTenantVault",
+  "go"
+);
+@@clientName(
+  RestorableTimeRangesFromDppCrossTenantVault,
+  "RestorableTimeRangesFromDPPCrossTenantVault",
+  "go"
+);
+@@clientName(
+  RecoveryPointsFromDppCrossTenantVault,
+  "RecoveryPointsFromDPPCrossTenantVault",
+  "go"
+);
+@@clientName(
+  RecoveryPointFromDppCrossTenantVault,
+  "RecoveryPointFromDPPCrossTenantVault",
+  "go"
+);
+@@clientName(
+  BackupJobsFromDppCrossTenantVault,
+  "BackupJobsFromDPPCrossTenantVault",
+  "go"
+);
+@@clientName(JobFromDppCrossTenantVault, "JobFromDPPCrossTenantVault", "go");
+@@clientName(
+  BackupInstanceOperationStatusFromDppCrossTenantVault,
+  "BackupInstanceOperationStatusFromDPPCrossTenantVault",
+  "go"
+);
+@@clientName(
+  BackupInstanceOperationResultFromDppCrossTenantVault,
+  "BackupInstanceOperationResultFromDPPCrossTenantVault",
+  "go"
+);
+
 // Fix property name changes (ID -> Id)
 @@clientName(DatasourceSet.resourceID, "resourceId", "java");
 @@clientName(Datasource.resourceID, "resourceId", "java");
