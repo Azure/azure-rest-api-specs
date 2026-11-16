@@ -10,7 +10,10 @@
         "environment": "production"
       },
       "sku": {
-        "name": "AIGateway"
+        "name": "Standard"
+      },
+      "properties": {
+        "publicNetworkAccess": "Disabled"
       }
     }
   },
@@ -25,7 +28,7 @@
           "environment": "production"
         },
         "sku": {
-          "name": "AIGateway"
+          "name": "Standard"
         },
         "identity": {
           "type": "SystemAssigned",
@@ -35,6 +38,7 @@
         "eTag": "\"AAAAAAAAAAI=\"",
         "properties": {
           "provisioningState": "Succeeded",
+          "publicNetworkAccess": "Disabled",
           "frontend": {
             "defaultHostname": "example-gateway.westus2.aigateway.azure-api.net"
           }
