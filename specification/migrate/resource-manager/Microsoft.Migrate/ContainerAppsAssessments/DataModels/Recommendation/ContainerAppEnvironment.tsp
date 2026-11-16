@@ -1,8 +1,9 @@
 import "./ContainerApp.tsp";
 
+using Azure.ResourceManager;
+
 namespace Microsoft.Migrate;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "The id and name properties of the nested containerApps entries are the ARM resource ID and ARM resource name of the referenced Azure Container Apps, not the identity of the enclosing managed environment assessment resource."
 @doc("Data model of Container App Environment.")
 model ContainerAppEnvironment {
   @doc("Gets region.")
@@ -42,6 +43,7 @@ model ContainerAppEnvironment {
   updatedTimestamp?: utcDateTime;
 
   @doc("Gets list of container apps in this environment.")
+  @identifiers(#["containerAppId"])
   @visibility(Lifecycle.Read)
   containerApps: ContainerApp[];
 }

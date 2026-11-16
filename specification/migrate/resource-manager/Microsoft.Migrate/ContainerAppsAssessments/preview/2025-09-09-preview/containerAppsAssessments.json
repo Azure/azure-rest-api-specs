@@ -1880,14 +1880,14 @@
       "type": "object",
       "description": "Data model of Container App within an Azure Container Apps environment.",
       "properties": {
-        "id": {
+        "containerAppId": {
           "type": "string",
-          "description": "Gets id.",
+          "description": "Gets the Azure resource ID of the referenced container app.",
           "readOnly": true
         },
-        "name": {
+        "containerAppName": {
           "type": "string",
-          "description": "Gets name.",
+          "description": "Gets the name of the referenced container app.",
           "readOnly": true
         },
         "environmentName": {
@@ -1925,8 +1925,8 @@
         }
       },
       "required": [
-        "id",
-        "name",
+        "containerAppId",
+        "containerAppName",
         "environmentName"
       ]
     },
@@ -1992,7 +1992,10 @@
           "items": {
             "$ref": "#/definitions/ContainerApp"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "containerAppId"
+          ]
         }
       },
       "required": [
@@ -2263,14 +2266,14 @@
       "type": "object",
       "description": "ARM model of Azure Container Apps Cost Detail Properties.",
       "properties": {
-        "id": {
+        "containerAppId": {
           "type": "string",
-          "description": "Gets id.",
+          "description": "Gets the Azure resource ID of the referenced container app.",
           "readOnly": true
         },
-        "name": {
+        "containerAppName": {
           "type": "string",
-          "description": "Gets name.",
+          "description": "Gets the name of the referenced container app.",
           "readOnly": true
         },
         "environmentName": {
@@ -2308,8 +2311,8 @@
         }
       },
       "required": [
-        "id",
-        "name",
+        "containerAppId",
+        "containerAppName",
         "environmentName"
       ]
     },
@@ -2411,7 +2414,10 @@
           "items": {
             "$ref": "#/definitions/ContainerApp"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "containerAppId"
+          ]
         }
       },
       "required": [
