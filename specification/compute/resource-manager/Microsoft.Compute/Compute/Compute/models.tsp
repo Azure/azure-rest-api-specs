@@ -10166,7 +10166,6 @@ model RunCommandInputParameter {
    * The run command parameter value.
    */
   @added(Versions.v2026_09_01)
-  @secret
   value: string;
 }
 
