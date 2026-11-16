@@ -1407,3 +1407,12 @@ namespace Azure.AI.Projects {
 // `McpToolCallItem.Status` (ResponseItemAttributionExtensions) exposes this enum because
 // OpenAI does not model status on MCP tool calls.
 @@access(OpenAI.MCPToolCallStatus, Access.public, "csharp");
+
+// OutputItemCustomToolCall(Output).Status use OpenAI's CustomToolCallStatus and CustomToolCallOutputStatus
+// (custom code), so these enums are only used by the generated serialization.
+@@access(OpenAI.FunctionCallStatus, Access.internal, "csharp");
+@@access(OpenAI.FunctionCallOutputStatusEnum, Access.internal, "csharp");
+
+// ToolCallCaller (DirectToolCallCaller, ProgramToolCallCaller) and the *Param variants stay public:
+// OutputItemCustomToolCall(Output).Caller and the ItemField* tool call models expose them, and the
+// OpenAI SDK's caller types are internal, so there is no public @@alternateType target.
