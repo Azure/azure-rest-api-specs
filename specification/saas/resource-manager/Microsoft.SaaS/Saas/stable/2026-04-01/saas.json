@@ -125,7 +125,7 @@
         "tags": [
           "SaasTenantLevel"
         ],
-        "description": "List SaasTenantResource resources by tenant",
+        "description": "Lists all tenant-level SaaS resources accessible to the caller.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -161,7 +161,7 @@
         "tags": [
           "SaasTenantLevel"
         ],
-        "description": "Get a SaasTenantResource",
+        "description": "Gets a tenant-level SaaS resource by its identifier.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -198,81 +198,12 @@
           }
         }
       },
-      "put": {
-        "operationId": "SaasTenantLevel_CreateResource",
-        "tags": [
-          "SaasTenantLevel"
-        ],
-        "description": "Create a SaasTenantResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "resourceId",
-            "in": "path",
-            "description": "The name of the SaasTenantResource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,50}$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SaasTenantResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'SaasTenantResource' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/SaasTenantResource"
-            }
-          },
-          "201": {
-            "description": "Resource 'SaasTenantResource' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/SaasTenantResource"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create a tenant-level SaaS resource": {
-            "$ref": "./examples/SaasTenantPut.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
       "patch": {
         "operationId": "SaasTenantLevel_UpdateResource",
         "tags": [
           "SaasTenantLevel"
         ],
-        "description": "Update a SaasTenantResource",
+        "description": "Updates mutable properties or tags on an existing tenant-level SaaS resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -338,7 +269,7 @@
         "tags": [
           "SaasTenantLevel"
         ],
-        "description": "Delete a SaasTenantResource",
+        "description": "Deletes a tenant-level SaaS resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -394,7 +325,7 @@
         "tags": [
           "SaasTenantLevel"
         ],
-        "description": "A synchronous resource action.",
+        "description": "Generates a publisher access token for a tenant-level SaaS resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -432,7 +363,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.SaaS/checkNameAvailability": {
       "post": {
         "operationId": "SaasSubscriptionLevelGlobal_CheckNameAvailability",
-        "description": "Implements global CheckNameAvailability operations",
+        "description": "Checks whether a proposed SaaS resource name is available.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -510,7 +441,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.SaaS/resources": {
       "get": {
         "operationId": "SaasSubscriptionLevelGlobal_ListByAzureSubscription",
-        "description": "List SaasResource resources by subscription ID",
+        "description": "Lists all SaaS resources within an Azure subscription.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -543,13 +474,55 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SaaS/resources/validate": {
+      "post": {
+        "operationId": "SaasSubscriptionLevelGlobal_ValidatePurchaseBySubscription",
+        "description": "Validates a proposed SaaS purchase at subscription scope before a resource group is selected.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The proposed purchase request to validate.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaasPurchaseValidationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceValidationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate a SaaS purchase at subscription scope": {
+            "$ref": "./examples/SaasValidatePurchaseBySubscription.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources": {
       "get": {
         "operationId": "SaasSubscriptionLevel_ListByResourceGroup",
         "tags": [
           "SaasSubscriptionLevel"
         ],
-        "description": "List SaasResource resources by resource group",
+        "description": "Lists all SaaS resources within a resource group.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -591,7 +564,7 @@
         "tags": [
           "SaasSubscriptionLevel"
         ],
-        "description": "Get a SaasResource",
+        "description": "Gets a SaaS resource by its name.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -639,7 +612,7 @@
         "tags": [
           "SaasSubscriptionLevel"
         ],
-        "description": "Create a SaasResource",
+        "description": "Creates or updates a SaaS resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -714,7 +687,7 @@
         "tags": [
           "SaasSubscriptionLevel"
         ],
-        "description": "Update a SaasResource",
+        "description": "Updates mutable properties or tags on an existing SaaS resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -789,7 +762,7 @@
         "tags": [
           "SaasSubscriptionLevel"
         ],
-        "description": "Delete a SaasResource",
+        "description": "Deletes a SaaS resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -851,7 +824,7 @@
         "tags": [
           "SaasSubscriptionLevel"
         ],
-        "description": "A synchronous resource action.",
+        "description": "Generates a publisher access token for a SaaS resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -965,6 +938,107 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources/{resourceName}/validate": {
+      "post": {
+        "operationId": "SaasSubscriptionLevel_ValidateUpdate",
+        "tags": [
+          "SaasSubscriptionLevel"
+        ],
+        "description": "Validates a proposed update to an existing SaaS resource without modifying the resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the SaasResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaasResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceValidationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate an update to an existing SaaS resource": {
+            "$ref": "./examples/SaasValidateUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources/validate": {
+      "post": {
+        "operationId": "SaasSubscriptionLevelGlobal_ValidatePurchase",
+        "description": "Validates a proposed SaaS purchase within a resource group without creating the resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The proposed purchase request to validate.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaasPurchaseValidationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResourceValidationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate a SaaS purchase within a resource group": {
+            "$ref": "./examples/SaasValidatePurchaseByResourceGroup.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -992,6 +1066,48 @@
           "type": "string",
           "format": "date-time",
           "description": "The token expiry time."
+        }
+      }
+    },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
+    "CampaignMetadata": {
+      "type": "object",
+      "description": "Campaign attribution metadata supplied when creating a new subscription-level resource.\nAccepted only on create and purchase validation; never returned in responses or accepted on update.",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "The referral source that brought the customer (for example, azure-marketplace or contoso-newsletter)."
+        },
+        "medium": {
+          "type": "string",
+          "description": "The marketing medium (for example, cpc, banner, or email)."
+        },
+        "campaign": {
+          "type": "string",
+          "description": "The marketing campaign name or identifier."
+        },
+        "term": {
+          "type": "string",
+          "description": "The paid search term associated with the campaign."
+        },
+        "content": {
+          "type": "string",
+          "description": "The campaign content identifier used to differentiate links or placements."
+        },
+        "ocid": {
+          "type": "string",
+          "description": "The Microsoft campaign tracking identifier."
+        },
+        "mktcmpid": {
+          "type": "string",
+          "description": "The legacy Microsoft 365 marketing campaign identifier."
+        },
+        "src": {
+          "type": "string",
+          "description": "The legacy Microsoft 365 referral source identifier."
         }
       }
     },
@@ -1049,13 +1165,56 @@
         ]
       }
     },
+    "ResourceValidationError": {
+      "type": "object",
+      "description": "A machine-readable error code and human-readable message describing a validation failure.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Machine-readable validation error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable description of the validation failure."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ResourceValidationResult": {
+      "type": "object",
+      "description": "The result of validating a proposed purchase or resource update without modifying state.",
+      "properties": {
+        "isValid": {
+          "type": "boolean",
+          "description": "Indicates whether the proposed purchase or update passed validation."
+        },
+        "details": {
+          "type": "array",
+          "description": "The list of validation failures. Empty when `isValid` is `true`.",
+          "items": {
+            "$ref": "#/definitions/ResourceValidationError"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "isValid",
+        "details"
+      ]
+    },
     "SaasProvisioningState": {
       "type": "string",
       "description": "The provisioning state of the SaaS resource.",
       "enum": [
         "Succeeded",
         "Failed",
-        "Canceled"
+        "Canceled",
+        "Accepted",
+        "NotStarted",
+        "InProgress"
       ],
       "x-ms-enum": {
         "name": "SaasProvisioningState",
@@ -1075,14 +1234,199 @@
             "name": "Canceled",
             "value": "Canceled",
             "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "A resource write was accepted and is still being processed."
+          },
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The provisioning operation has not started."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The provisioning operation is currently running."
           }
         ]
       },
       "readOnly": true
     },
+    "SaasPurchaseValidationProperties": {
+      "type": "object",
+      "description": "SaaS purchase validation properties including the proposed resource name.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/SaasProvisioningState",
+          "description": "The status of the last provisioning operation performed on the resource.",
+          "readOnly": true
+        },
+        "assetId": {
+          "type": "string",
+          "description": "The SaaS asset identifier. Server-assigned unique identifier for the marketplace subscription.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional description. Used as subscription display name by Teams, Admin Center, and other consumers."
+        },
+        "status": {
+          "$ref": "#/definitions/SaasResourceStatus",
+          "description": "The SaaS subscription status. Server-assigned.",
+          "readOnly": true
+        },
+        "statusReason": {
+          "$ref": "#/definitions/SubscriptionStatusReason",
+          "description": "The reason for the current status. Server-assigned.",
+          "readOnly": true
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The seat count."
+        },
+        "publisherName": {
+          "type": "string",
+          "description": "The publisher name. Server-resolved from ProductCode.",
+          "readOnly": true
+        },
+        "planName": {
+          "type": "string",
+          "description": "The plan name. Server-resolved from ProductCode.",
+          "readOnly": true
+        },
+        "offerName": {
+          "type": "string",
+          "description": "The offer name. Server-resolved from ProductCode.",
+          "readOnly": true
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "The term unit (ISO 8601 duration, for example P1M or P1Y). Server-resolved from ProductCode.",
+          "readOnly": true
+        },
+        "billingPeriod": {
+          "type": "string",
+          "description": "The billing period (ISO 8601 duration). Server-resolved from ProductCode.",
+          "readOnly": true
+        },
+        "riskPropertyBagHeader": {
+          "type": "string",
+          "format": "password",
+          "description": "The risk property bag header (JSON format). Write-only — not returned in GET responses.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "termStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start date of the current term. Server-calculated.",
+          "readOnly": true
+        },
+        "termEndDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end date of the current term. Server-calculated.",
+          "readOnly": true
+        },
+        "futureStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The future start date of the subscription commitment, when available. Server-calculated.",
+          "readOnly": true
+        },
+        "autoRenew": {
+          "type": "boolean",
+          "description": "Whether the SaaS subscription will auto-renew upon term end."
+        },
+        "isFreeTrial": {
+          "type": "boolean",
+          "description": "Whether the current term is a free trial term. Server-determined.",
+          "readOnly": true
+        },
+        "storefront": {
+          "type": "string",
+          "description": "The storefront."
+        },
+        "purchaserEmail": {
+          "type": "string",
+          "format": "password",
+          "description": "The purchaser email. Server-derived from authenticated identity. Read-only.\n\nCustomer data (PII): NOT included in default GET responses. Returned only when\nthe request specifies `$expandCustomerData=true`. Callers requesting customer\ndata must have appropriate authorization and handle the value per GDPR requirements.\n\n`@secret` is applied so SDK generators emit `format: password`, ensuring the value\nis redacted in logs, CLI output, and diagnostic traces.",
+          "readOnly": true,
+          "x-ms-secret": true
+        },
+        "quoteId": {
+          "type": "string",
+          "description": "The quote identifier associated with the purchase."
+        },
+        "privateOfferId": {
+          "type": "string",
+          "description": "The private offer identifier."
+        },
+        "productCode": {
+          "type": "string",
+          "description": "The product code. Primary purchase identifier for GA — used to resolve term details server-side."
+        },
+        "intent": {
+          "$ref": "#/definitions/PatchIntent",
+          "description": "The intent for patch operations. Write-only — not returned in GET responses.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "campaign": {
+          "$ref": "#/definitions/CampaignMetadata",
+          "description": "Optional campaign attribution metadata for a new subscription-level purchase.\nAccepted only on create and purchase validation; never returned in responses or accepted on update.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "The proposed SaaS resource name to validate.",
+          "minLength": 3,
+          "maxLength": 24,
+          "pattern": "^[a-zA-Z0-9-]{3,24}$"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "SaasPurchaseValidationRequest": {
+      "type": "object",
+      "description": "Request payload for validating a proposed SaaS purchase without creating the resource.",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The geo-location where the resource lives. Must be `global` for SaaS resources."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/SaasPurchaseValidationProperties",
+          "description": "The proposed SaaS purchase properties, including the proposed resource name."
+        }
+      },
+      "required": [
+        "location",
+        "properties"
+      ]
+    },
     "SaasResource": {
       "type": "object",
-      "description": "SaaS ARM tracked resource for GA API version 2026-04-01. Inherits standard ARM envelope (id, name, type, location, tags, systemData).",
+      "description": "SaaS tracked resource for GA API version 2026-04-01. Inherits standard Azure Resource Manager envelope (id, name, type, location, tags, systemData).",
       "properties": {
         "properties": {
           "$ref": "#/definitions/SaasResourceProperties",
@@ -1118,7 +1462,7 @@
     },
     "SaasResourceProperties": {
       "type": "object",
-      "description": "SaaS resource properties for GA API version 2026-04-01.",
+      "description": "Subscription-level SaaS resource properties for GA API version 2026-04-01.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/SaasProvisioningState",
@@ -1127,16 +1471,16 @@
         },
         "assetId": {
           "type": "string",
-          "description": "The SaaS asset id. Server-assigned unique identifier for the marketplace subscription.",
+          "description": "The SaaS asset identifier. Server-assigned unique identifier for the marketplace subscription.",
           "readOnly": true
         },
         "description": {
           "type": "string",
-          "description": "Optional description. Used as subscription display name by Teams, Admin Center and other consumers."
+          "description": "Optional description. Used as subscription display name by Teams, Admin Center, and other consumers."
         },
         "status": {
           "$ref": "#/definitions/SaasResourceStatus",
-          "description": "The SaaS Subscription Status. Server-assigned.",
+          "description": "The SaaS subscription status. Server-assigned.",
           "readOnly": true
         },
         "statusReason": {
@@ -1166,7 +1510,7 @@
         },
         "termUnit": {
           "type": "string",
-          "description": "The term unit (ISO 8601 duration, e.g. P1M, P1Y). Server-resolved from ProductCode.",
+          "description": "The term unit (ISO 8601 duration, for example P1M or P1Y). Server-resolved from ProductCode.",
           "readOnly": true
         },
         "billingPeriod": {
@@ -1196,13 +1540,19 @@
           "description": "The end date of the current term. Server-calculated.",
           "readOnly": true
         },
+        "futureStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The future start date of the subscription commitment, when available. Server-calculated.",
+          "readOnly": true
+        },
         "autoRenew": {
           "type": "boolean",
-          "description": "Whether the SaaS subscription will auto renew upon term end."
+          "description": "Whether the SaaS subscription will auto-renew upon term end."
         },
         "isFreeTrial": {
           "type": "boolean",
-          "description": "Whether the current term is a Free Trial term. Server-determined.",
+          "description": "Whether the current term is a free trial term. Server-determined.",
           "readOnly": true
         },
         "storefront": {
@@ -1216,9 +1566,13 @@
           "readOnly": true,
           "x-ms-secret": true
         },
+        "quoteId": {
+          "type": "string",
+          "description": "The quote identifier associated with the purchase."
+        },
         "privateOfferId": {
           "type": "string",
-          "description": "The private offer id."
+          "description": "The private offer identifier."
         },
         "productCode": {
           "type": "string",
@@ -1229,6 +1583,13 @@
           "description": "The intent for patch operations. Write-only — not returned in GET responses.",
           "x-ms-mutability": [
             "update",
+            "create"
+          ]
+        },
+        "campaign": {
+          "$ref": "#/definitions/CampaignMetadata",
+          "description": "Optional campaign attribution metadata for a new subscription-level purchase.\nAccepted only on create and purchase validation; never returned in responses or accepted on update.",
+          "x-ms-mutability": [
             "create"
           ]
         }
@@ -1299,7 +1660,7 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "Optional description. Used as subscription display name by Teams, Admin Center and other consumers."
+          "description": "Optional description. Used as subscription display name by Teams, Admin Center, and other consumers."
         },
         "quantity": {
           "type": "integer",
@@ -1318,15 +1679,19 @@
         },
         "autoRenew": {
           "type": "boolean",
-          "description": "Whether the SaaS subscription will auto renew upon term end."
+          "description": "Whether the SaaS subscription will auto-renew upon term end."
         },
         "storefront": {
           "type": "string",
           "description": "The storefront."
         },
+        "quoteId": {
+          "type": "string",
+          "description": "The quote identifier associated with the purchase."
+        },
         "privateOfferId": {
           "type": "string",
-          "description": "The private offer id."
+          "description": "The private offer identifier."
         },
         "productCode": {
           "type": "string",
@@ -1344,10 +1709,10 @@
     },
     "SaasTenantResource": {
       "type": "object",
-      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "description": "Tenant-level SaaS proxy resource for GA API version 2026-04-01.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SaasResourceProperties",
+          "$ref": "#/definitions/SaasTenantResourceProperties",
           "description": "The resource-specific properties for this resource."
         },
         "tags": {
@@ -1385,6 +1750,134 @@
         "value"
       ]
     },
+    "SaasTenantResourceProperties": {
+      "type": "object",
+      "description": "Tenant-level SaaS resource properties for GA API version 2026-04-01.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/SaasProvisioningState",
+          "description": "The status of the last provisioning operation performed on the resource.",
+          "readOnly": true
+        },
+        "assetId": {
+          "type": "string",
+          "description": "The SaaS asset identifier. Server-assigned unique identifier for the marketplace subscription.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional description. Used as subscription display name by Teams, Admin Center, and other consumers."
+        },
+        "status": {
+          "$ref": "#/definitions/SaasResourceStatus",
+          "description": "The SaaS subscription status. Server-assigned.",
+          "readOnly": true
+        },
+        "statusReason": {
+          "$ref": "#/definitions/SubscriptionStatusReason",
+          "description": "The reason for the current status. Server-assigned.",
+          "readOnly": true
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The seat count."
+        },
+        "publisherName": {
+          "type": "string",
+          "description": "The publisher name. Server-resolved from ProductCode.",
+          "readOnly": true
+        },
+        "planName": {
+          "type": "string",
+          "description": "The plan name. Server-resolved from ProductCode.",
+          "readOnly": true
+        },
+        "offerName": {
+          "type": "string",
+          "description": "The offer name. Server-resolved from ProductCode.",
+          "readOnly": true
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "The term unit (ISO 8601 duration, for example P1M or P1Y). Server-resolved from ProductCode.",
+          "readOnly": true
+        },
+        "billingPeriod": {
+          "type": "string",
+          "description": "The billing period (ISO 8601 duration). Server-resolved from ProductCode.",
+          "readOnly": true
+        },
+        "riskPropertyBagHeader": {
+          "type": "string",
+          "format": "password",
+          "description": "The risk property bag header (JSON format). Write-only — not returned in GET responses.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "termStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start date of the current term. Server-calculated.",
+          "readOnly": true
+        },
+        "termEndDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end date of the current term. Server-calculated.",
+          "readOnly": true
+        },
+        "futureStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The future start date of the subscription commitment, when available. Server-calculated.",
+          "readOnly": true
+        },
+        "autoRenew": {
+          "type": "boolean",
+          "description": "Whether the SaaS subscription will auto-renew upon term end."
+        },
+        "isFreeTrial": {
+          "type": "boolean",
+          "description": "Whether the current term is a free trial term. Server-determined.",
+          "readOnly": true
+        },
+        "storefront": {
+          "type": "string",
+          "description": "The storefront."
+        },
+        "purchaserEmail": {
+          "type": "string",
+          "format": "password",
+          "description": "The purchaser email. Server-derived from authenticated identity. Read-only.\n\nCustomer data (PII): NOT included in default GET responses. Returned only when\nthe request specifies `$expandCustomerData=true`. Callers requesting customer\ndata must have appropriate authorization and handle the value per GDPR requirements.\n\n`@secret` is applied so SDK generators emit `format: password`, ensuring the value\nis redacted in logs, CLI output, and diagnostic traces.",
+          "readOnly": true,
+          "x-ms-secret": true
+        },
+        "quoteId": {
+          "type": "string",
+          "description": "The quote identifier associated with the purchase."
+        },
+        "privateOfferId": {
+          "type": "string",
+          "description": "The private offer identifier."
+        },
+        "productCode": {
+          "type": "string",
+          "description": "The product code. Primary purchase identifier for GA — used to resolve term details server-side."
+        },
+        "intent": {
+          "$ref": "#/definitions/PatchIntent",
+          "description": "The intent for patch operations. Write-only — not returned in GET responses.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
     "SaasTenantResourceUpdate": {
       "type": "object",
       "description": "The type used for update operations of the SaasTenantResource.",
@@ -1408,7 +1901,7 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "Optional description. Used as subscription display name by Teams, Admin Center and other consumers."
+          "description": "Optional description. Used as subscription display name by Teams, Admin Center, and other consumers."
         },
         "quantity": {
           "type": "integer",
@@ -1427,15 +1920,19 @@
         },
         "autoRenew": {
           "type": "boolean",
-          "description": "Whether the SaaS subscription will auto renew upon term end."
+          "description": "Whether the SaaS subscription will auto-renew upon term end."
         },
         "storefront": {
           "type": "string",
           "description": "The storefront."
         },
+        "quoteId": {
+          "type": "string",
+          "description": "The quote identifier associated with the purchase."
+        },
         "privateOfferId": {
           "type": "string",
-          "description": "The private offer id."
+          "description": "The private offer identifier."
         },
         "productCode": {
           "type": "string",

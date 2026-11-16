@@ -1,23 +1,26 @@
+import "@azure-tools/typespec-azure-core";
+
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
 using Azure.ResourceManager;
 
 namespace Microsoft.SaaS;
 
-/** SaaS resource properties for GA API version 2026-04-01. */
-model SaasResourceProperties {
+/** Tenant-level SaaS resource properties for GA API version 2026-04-01. */
+model SaasTenantResourceProperties {
   /** The status of the last provisioning operation performed on the resource. */
   @visibility(Lifecycle.Read)
   provisioningState?: SaasProvisioningState;
 
-  /** The SaaS asset id. Server-assigned unique identifier for the marketplace subscription. */
+  /** The SaaS asset identifier. Server-assigned unique identifier for the marketplace subscription. */
   @visibility(Lifecycle.Read)
   assetId?: string;
 
-  /** Optional description. Used as subscription display name by Teams, Admin Center and other consumers. */
+  /** Optional description. Used as subscription display name by Teams, Admin Center, and other consumers. */
   description?: string;
 
-  /** The SaaS Subscription Status. Server-assigned. */
+  /** The SaaS subscription status. Server-assigned. */
   @visibility(Lifecycle.Read)
   status?: SaasResourceStatus;
 
@@ -40,7 +43,7 @@ model SaasResourceProperties {
   @visibility(Lifecycle.Read)
   offerName?: string;
 
-  /** The term unit (ISO 8601 duration, e.g. P1M, P1Y). Server-resolved from ProductCode. */
+  /** The term unit (ISO 8601 duration, for example P1M or P1Y). Server-resolved from ProductCode. */
   @visibility(Lifecycle.Read)
   termUnit?: string;
 
@@ -61,15 +64,19 @@ model SaasResourceProperties {
   @visibility(Lifecycle.Read)
   termEndDate?: utcDateTime;
 
-  /** Whether the SaaS subscription will auto renew upon term end. */
+  /** The future start date of the subscription commitment, when available. Server-calculated. */
+  @visibility(Lifecycle.Read)
+  futureStartDate?: utcDateTime;
+
+  /** Whether the SaaS subscription will auto-renew upon term end. */
   autoRenew?: boolean;
 
-  /** Whether the current term is a Free Trial term. Server-determined. */
+  /** Whether the current term is a free trial term. Server-determined. */
   @visibility(Lifecycle.Read)
   isFreeTrial?: boolean;
 
   // NOTE: created and lastModified timestamps are provided by TrackedResource systemData
-  // (systemData.createdAt / systemData.lastModifiedAt) in the ARM resource envelope.
+  // (systemData.createdAt / systemData.lastModifiedAt) in the Azure resource envelope.
 
   /** The storefront. */
   storefront?: string;
@@ -98,7 +105,10 @@ model SaasResourceProperties {
 
   // NOTE: beneficiaryEmail removed from GA API.
 
-  /** The private offer id. */
+  /** The quote identifier associated with the purchase. */
+  quoteId?: string;
+
+  /** The private offer identifier. */
   privateOfferId?: string;
 
   /** The product code. Primary purchase identifier for GA — used to resolve term details server-side. */
@@ -109,11 +119,51 @@ model SaasResourceProperties {
   intent?: PatchIntent;
 }
 
-/** SaaS ARM tracked resource for GA API version 2026-04-01. Inherits standard ARM envelope (id, name, type, location, tags, systemData). */
+/** Subscription-level SaaS resource properties for GA API version 2026-04-01. */
+model SaasResourceProperties {
+  ...SaasTenantResourceProperties;
+
+  /**
+   * Optional campaign attribution metadata for a new subscription-level purchase.
+   * Accepted only on create and purchase validation; never returned in responses or accepted on update.
+   */
+  @visibility(Lifecycle.Create)
+  campaign?: CampaignMetadata;
+}
+
+/** SaaS tracked resource for GA API version 2026-04-01. Inherits standard Azure Resource Manager envelope (id, name, type, location, tags, systemData). */
 model SaasResource is TrackedResource<SaasResourceProperties> {
   ...ResourceNameParameter<
     Resource = SaasResource,
     KeyName = "resourceName",
     SegmentName = "resources"
   >;
+}
+
+/** The type used for update operations of the SaasResource. */
+model SaasResourceUpdate is Azure.ResourceManager.Foundations.ResourceUpdateModel<
+  SaasResource,
+  SaasResourceProperties
+>;
+
+/** SaaS purchase validation properties including the proposed resource name. */
+model SaasPurchaseValidationProperties {
+  ...SaasResourceProperties;
+
+  /** The proposed SaaS resource name to validate. */
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @minLength(3)
+  @maxLength(24)
+  name: string;
+}
+
+/** Request payload for validating a proposed SaaS purchase without creating the resource. */
+model SaasPurchaseValidationRequest {
+  /** The geo-location where the resource lives. Must be `global` for SaaS resources. */
+  location: azureLocation;
+
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The proposed SaaS purchase properties, including the proposed resource name. */
+  properties: SaasPurchaseValidationProperties;
 }

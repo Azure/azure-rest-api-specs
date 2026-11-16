@@ -9,6 +9,7 @@ import "./common.tsp";
 import "./saasResource.tsp";
 import "./subscriptionLevel.tsp";
 import "./tenantLevel.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
