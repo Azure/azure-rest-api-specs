@@ -39,7 +39,7 @@ model CustomAIModelProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("""
     The model identifier, interpreted per the referenced ModelSource:
-    - `HuggingFace`: the upstream `<org>/<repo>` id, e.g. `myorg/llama-3.1-8b-finetuned`.
+    - `HuggingFace`: the upstream `<org>/<repo>` id, e.g. `contoso/llama-3.1-8b-finetuned`.
     - `MicrosoftFoundry` with a project: `modelName/version`, e.g. `private-llama/1`.
     - `MicrosoftFoundry` with a registry: `modelName/version` as named in the
       registry, e.g. `meta-llama--Llama-3.1-8B/3` in `azure-huggingface`.
