@@ -46,7 +46,6 @@ using Azure.AI.Projects;
 // Java uses a handwritten Reactor Netty transport while TypeSpec generates the event models.
 @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!java");
 @@scope(VoiceAgentLiveWebSocket.connectLiveVoiceAgent, "!java");
-@@scope(Azure.AI.Projects.VoiceAgentWebSocket.connectVoiceAgent, "!java");
 @@clientName(Agents.patchAgentObject, "updateAgentDetails");
 @@clientName(Agents.getAgentVersion, "getAgentVersionDetails");
 @@clientName(TelephonyCampaigns.create, "createCampaign", "java");
@@ -271,11 +270,6 @@ using Azure.AI.Projects;
 @@clientName(
   OpenAI.RealtimeServerEventRealtimeServerEventError,
   "RealtimeErrorEvent",
-  "java"
-);
-@@clientName(
-  OpenAI.RealtimeServerEventErrorError,
-  "RealtimeServerErrorDetails",
   "java"
 );
 @@clientName(OpenAI.OutputTextContent.logprobs, "logProbs");
@@ -1327,9 +1321,6 @@ using Azure.AI.Projects;
   Access.public,
   "java"
 );
-@@scope(OpenAI.RealtimeConversationItemMessageSystem.type, "!java");
-@@scope(OpenAI.RealtimeConversationItemMessageUser.type, "!java");
-@@scope(OpenAI.RealtimeConversationItemMessageAssistant.type, "!java");
 @@access(MemoryStoreSearchResponse, Access.public);
 @@usage(MemoryStoreSearchResponse, Usage.output);
 

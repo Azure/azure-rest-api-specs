@@ -405,7 +405,6 @@ model ListAgentInsightRunsOptions {
 
 // Default name produces a style violation
 @@clientName(SASCredentials, "SasCredential", "java");
-@@clientName(SasCredential, "BlobReferenceSasCredential");
 
 // Singularize "Credentials" -> "Credential" for connection credential models
 @@clientName(BaseCredentials, "BaseCredential", "java");
