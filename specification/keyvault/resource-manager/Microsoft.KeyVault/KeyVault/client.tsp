@@ -502,6 +502,9 @@ enum NameAvailabilityReason {
   "csharp"
 );
 
+/**
+ * The type of action.
+ */
 enum PascalKeyRotationPolicyActionType {
   notify: "Notify",
   rotate: "Rotate",
