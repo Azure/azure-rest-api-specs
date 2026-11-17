@@ -126,6 +126,7 @@ interface Runs {
 
   /** Delete run services. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/no-request-body" "DELETE operations must not have a request body"
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/runs/{runId}/services")
   @delete
   deleteRunServices is Operation<
@@ -398,6 +399,7 @@ interface Runs {
 
   /** Delete run services by experiment ID. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/no-request-body" "DELETE operations must not have a request body"
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experimentids/{experimentId}/runs/{runId}/services")
   @delete
   deleteRunServicesByExperimentId is Operation<
@@ -625,6 +627,7 @@ interface Runs {
 
   /** Delete run services by experiment name. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
+  #suppress "@azure-tools/typespec-azure-core/no-request-body" "DELETE operations must not have a request body"
   @route("/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/runs/{runId}/services")
   @delete
   deleteRunServicesByExperimentName is Operation<
