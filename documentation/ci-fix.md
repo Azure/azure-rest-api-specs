@@ -205,6 +205,11 @@ The [LintDiff validation tool](https://github.com/Azure/azure-openapi-validator)
 Refer to [openapi-authoring-automated-guidelines](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md) for detailed description of all lint rules and how-to-fix guidance.
 If that guidance is not enough, please also refer to the [LintDiff rules.md doc](https://github.com/Azure/azure-openapi-validator/blob/main/docs/rules.md). It links to `.md` files related to given error, containing instructions how to fix them.
 
+### Choose between direct validation and full LintDiff
+
+- Run `azure-openapi-validator` directly for a faster diagnostic of validation errors and warnings in the current or new specification state. It does not perform a before-and-after comparison or include LintDiff-specific exclusions.
+- Run the full LintDiff process when you need behavior closer to the `Swagger LintDiff` PR workflow, including before-and-after comparison and LintDiff-specific exclusions.
+
 To reproduce LintDiff failures locally, see [CONTRIBUTING.md / How to locally reproduce a LintDiff failure occurring on a PR](https://github.com/Azure/azure-openapi-validator/blob/main/CONTRIBUTING.md#how-to-locally-reproduce-a-lintdiff-failure-occurring-on-a-pr).
 
 ## `Swagger LintDiff` for TypeSpec: troubleshooting guides
