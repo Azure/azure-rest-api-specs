@@ -16469,6 +16469,30 @@
       ],
       "x-ms-discriminator-value": "NodeImage"
     },
+    "NodeImageType": {
+      "type": "string",
+      "description": "Whether a node image is a standard release or a security-only patch.",
+      "enum": [
+        "Standard",
+        "SecurityPatch"
+      ],
+      "x-ms-enum": {
+        "name": "NodeImageType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "A base/standard node image release."
+          },
+          {
+            "name": "SecurityPatch",
+            "value": "SecurityPatch",
+            "description": "A security-only patch of a base node image."
+          }
+        ]
+      }
+    },
     "NodeImageUpgradeInsightProperties": {
       "type": "object",
       "description": "Properties for a single agent pool node OS image upgrade insight.",
@@ -16525,6 +16549,11 @@
         "fullName": {
           "type": "string",
           "description": "The OS + SKU + version of the node image. Example: AKSUbuntu-1804gen2containerd-2024.02.02"
+        },
+        "imageType": {
+          "$ref": "#/definitions/NodeImageType",
+          "description": "Whether this image is a standard release or a security-only patch.",
+          "readOnly": true
         }
       }
     },

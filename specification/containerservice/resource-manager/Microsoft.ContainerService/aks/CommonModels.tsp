@@ -1720,6 +1720,19 @@ model NodeImageVersionListConfig {
 @added(Versions.v2026_09_02_preview)
 model NodeImageVersionsListResult is Azure.Core.Page<NodeImageVersion>;
 
+/** Whether a node image is a standard release or a security-only patch. */
+@added(Versions.v2026_09_02_preview)
+union NodeImageType {
+  /** A base/standard node image release. */
+  Standard: "Standard",
+
+  /** A security-only patch of a base node image. */
+  SecurityPatch: "SecurityPatch",
+
+  /** Allows additional image types in future versions. */
+  string,
+}
+
 /**
  * node image version profile for given major.minor.patch release.
  */
@@ -1745,6 +1758,11 @@ model NodeImageVersion {
    * The OS + SKU + version of the node image. Example: AKSUbuntu-1804gen2containerd-2024.02.02
    */
   fullName?: string;
+
+  /** Whether this image is a standard release or a security-only patch. */
+  @added(Versions.v2026_09_02_preview)
+  @visibility(Lifecycle.Read)
+  imageType?: NodeImageType;
 }
 
 /**
