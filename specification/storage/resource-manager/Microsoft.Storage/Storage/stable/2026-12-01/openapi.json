@@ -15119,13 +15119,8 @@
         },
         "containerName": {
           "type": "string",
-          "description": "The name of the blob container that stores the metadata snapshots. If not specified, a default container is used. Can only be set when the policy is created.",
-          "minLength": 3,
-          "maxLength": 63,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The name of the blob container that stores the metadata snapshots.",
+          "readOnly": true
         },
         "definition": {
           "$ref": "#/definitions/MetadataSnapshotPolicyDefinition",

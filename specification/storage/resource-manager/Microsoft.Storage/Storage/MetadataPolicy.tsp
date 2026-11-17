@@ -60,12 +60,8 @@ model MetadataSnapshotPolicy {
   /** The status of the metadata snapshot policy. */
   status: MetadataSnapshotPolicyStatus;
 
-  /**
-   * The name of the blob container that stores the metadata snapshots. If not specified, a default container is used. Can only be set when the policy is created.
-   */
-  @minLength(3)
-  @maxLength(63)
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  /** The name of the blob container that stores the metadata snapshots. */
+  @visibility(Lifecycle.Read)
   containerName?: string;
 
   /** The server-managed metadata snapshot policy definition. */
