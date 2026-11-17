@@ -56,6 +56,18 @@ interface VoiceAgentWebSocket {
    *    above, which concerns the agent itself rather than its WebRTC capability.
    * 3. WebRTC compatibility (only when `transport=webrtc`): WebRTC does not support bring-your-own-model (BYOM)
    *    or hosted-agent voice agents; those requests fail with `400 Bad Request`.
+   *
+   * Authentication: send a Microsoft Entra token, or a client secret from `createVoiceClientSecret`. A browser
+   * that cannot set headers sends the client secret as the WebSocket subprotocol `authorization.bearer.<value>`
+   * alongside `realtime`, or, as for a Microsoft Entra token, as the `authorization=Bearer%20<value>` query
+   * parameter. A client secret is an opaque bearer credential for this agent and the user who created it; it is
+   * single-use and must be presented before its `expires_at`. Everything else about the connection is unchanged:
+   * the same query parameters, session options, events and WebRTC signaling as with a Microsoft Entra token.
+   * Client-secret failures are returned before the `101 Switching Protocols` upgrade: `401` with
+   * `invalid_voice_credential` when the secret is malformed, expired, already used or issued for another agent;
+   * `403` with `user_delegation_unavailable` when the user's delegation can no longer be used; `404` with
+   * `voice_credentials_disabled` when client secrets are not enabled for the region or subscription; and `503`
+   * with `voice_credential_unavailable` for a transient failure, in which case the secret is not consumed.
    */
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "A successful WebSocket 101 protocol switch has no HTTP entity body; messages begin as WebSocket frames after the upgrade."
   @summary("Connect to a voice agent")
@@ -103,11 +115,47 @@ interface VoiceAgentWebSocket {
       /** Selects a specific version of the voice agent for this session. */
       @query agent_version_override?: string;
 
-      /** The requested WebSocket subprotocol. Omit this header or request exactly `realtime`. */
+      /**
+       * The requested WebSocket subprotocol. Omit this header or request `realtime`. A browser that presents a client
+       * secret also lists `authorization.bearer.<value>`; that entry carries the credential only and is never
+       * negotiated.
+       */
       @header("Sec-WebSocket-Protocol")
       websocket_subprotocol?: VoiceAgentWebSocketSubprotocol;
     },
     VoiceAgentWebSocketUpgradeResponse
+  >;
+}
+
+/** Single-use client secrets that let an untrusted client, such as a browser, connect to a voice agent. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "An action on the agent's voice endpoint that issues a credential; it does not match a standard resource operation template."
+@tag("Voice Agent WebSocket")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+interface VoiceAgentClientSecrets {
+  /**
+   * Creates a single-use client secret that a browser or other untrusted client can use to open one connection to
+   * this voice agent, without receiving the caller's Microsoft Entra access token. Call it from a trusted backend
+   * with a delegated user token: application and managed-identity tokens are rejected with `403` and
+   * `user_delegation_required`, and a user whose delegation can no longer be used receives `403` with
+   * `user_delegation_unavailable`. The secret is bound to this project, this agent and the calling user; the agent
+   * version, transport and session options are chosen when connecting with `connectVoiceAgent`. Responses carry
+   * `Cache-Control: no-store`. Returns `404` with `voice_credentials_disabled` when client secrets are not enabled
+   * for the region or subscription.
+   */
+  @summary("Create a voice agent client secret")
+  @post
+  @route("/agents/{agent_name}/endpoint/protocols/voice/client_secrets")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  createVoiceClientSecret is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    {
+      /** The name of the voice agent. */
+      @path agent_name: string;
+
+      /** The request. It has no properties. */
+      @body body: CreateVoiceClientSecretRequest;
+    },
+    VoiceClientSecret
   >;
 }
 
