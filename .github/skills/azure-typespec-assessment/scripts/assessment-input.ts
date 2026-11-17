@@ -1,12 +1,15 @@
 import { spawnSync } from "node:child_process";
+import fs from "node:fs";
 import path from "node:path";
 import { isRecord } from "./cli.ts";
+import { normalizeSparseRoots, normalizeSpecification } from "./git-evidence.ts";
 
 type AssessmentInputDependencies = {
   getPullRequest?: (repo: string, value: string | number) => PullRequestInput;
 };
 type AssessmentInputOptions = {
   repo?: string;
+  repo_path?: string;
   pr?: string | number;
   base?: string;
   head?: string;
@@ -86,6 +89,97 @@ export function parsePullRequest(
 export function parseGitHubRepository(remoteUrl: string | undefined): GitHubRepository | undefined {
   const match = /github\.com[/:]([^/]+)\/([^/]+)$/i.exec(remoteUrl ?? "");
   return match ? { owner: match[1], repository: match[2].replace(/\.git$/i, "") } : undefined;
+}
+
+export function validateAssessmentInput<T extends AssessmentInputOptions>(
+  options: T,
+): T & { repo: string } {
+  const hasPr = options.pr !== undefined;
+  const hasHead = options.head !== undefined;
+  const resolvedInvocation = isRecord(options.invocation);
+  if (!resolvedInvocation && hasPr && (hasHead || options.base !== undefined)) {
+    throw new Error("--pr cannot be combined with --base or --head.");
+  }
+  if (hasHead && options.base === undefined) {
+    throw new Error("--head requires --base.");
+  }
+  for (const [name, value] of [
+    ["repo-path", options.repo_path],
+    ["repo", options.repo],
+    ["base", options.base],
+    ["head", options.head],
+  ]) {
+    if (value !== undefined && !value.trim()) {
+      throw new Error(`--${name} requires a nonempty value.`);
+    }
+  }
+  if (
+    options.repo_path !== undefined &&
+    options.repo !== undefined &&
+    path.resolve(options.repo_path) !== path.resolve(options.repo)
+  ) {
+    throw new Error(
+      "--repo-path and --repo refer to different directories. Use only --repo-path <local-directory>.",
+    );
+  }
+  if (
+    options.model_input_budget_bytes !== undefined &&
+    (!Number.isInteger(Number(options.model_input_budget_bytes)) ||
+      Number(options.model_input_budget_bytes) <= 0)
+  ) {
+    throw new Error("--model-input-budget-bytes requires a positive integer.");
+  }
+
+  const supplied = options.repo_path ?? options.repo;
+  const directory = path.resolve(supplied ?? process.cwd());
+  const label =
+    supplied === undefined
+      ? "current directory"
+      : `${options.repo_path !== undefined ? "--repo-path" : "--repo"} ${JSON.stringify(supplied)}`;
+  const guidance =
+    'Use --repo-path "<local-checkout-directory>" (--repo is a legacy alias), or omit it inside a Git worktree. ' +
+    "Pass GitHub PR URLs with --pr; owner/repo is not cloned automatically.";
+  if (!fs.existsSync(directory)) {
+    throw new Error(`Invalid ${label}: local directory does not exist: ${directory}. ${guidance}`);
+  }
+  if (!fs.statSync(directory).isDirectory()) {
+    throw new Error(`Invalid ${label}: not a directory: ${directory}. ${guidance}`);
+  }
+  const worktree = git(directory, ["rev-parse", "--show-cdup", "--show-toplevel"], {
+    allowFailure: true,
+  });
+  if (worktree.status !== 0) {
+    const detail = worktree.error?.message ?? worktree.stderr.trim();
+    throw new Error(
+      `Invalid ${label}: not a Git worktree: ${directory}. ${guidance}${detail ? `\n${detail}` : ""}`,
+    );
+  }
+  const [relativeRoot, absoluteRoot] = worktree.stdout.split(/\r?\n/);
+  // Preserve the caller's Windows short-path spelling when it identifies the same root.
+  const candidateRoot = path.resolve(directory, relativeRoot);
+  const repo =
+    fs.realpathSync.native(candidateRoot) === fs.realpathSync.native(absoluteRoot)
+      ? candidateRoot
+      : path.resolve(absoluteRoot);
+  if (!hasPr && !hasHead && !options.specification) {
+    throw new Error("--specification is required when no TypeSpec scope can be derived.");
+  }
+  const specification =
+    options.specification === undefined
+      ? "specification"
+      : normalizeSpecification(repo, options.specification);
+  normalizeSparseRoots(options.sparse_root ?? options.sparseRoots, specification);
+  if (hasPr && !resolvedInvocation) {
+    const remoteUrl = /^\d+$/.test(String(options.pr).trim())
+      ? git(repo, ["remote", "get-url", "origin"], { allowFailure: true }).stdout.trim()
+      : "";
+    parsePullRequest(options.pr, remoteUrl);
+  }
+  return {
+    ...options,
+    repo,
+    ...(options.repo_path !== undefined ? { repo_path: repo } : {}),
+  };
 }
 
 function resolveCommit(repo: string, ref: string): string | undefined {
@@ -221,7 +315,7 @@ export function resolveAssessmentInput(
   dependencies: AssessmentInputDependencies = {},
 ) {
   const started = performance.now();
-  const repo = path.resolve(options.repo ?? process.cwd());
+  const { repo } = validateAssessmentInput(options);
 
   const timings: Record<string, number> = {
     metadataMs: 0,
@@ -230,12 +324,6 @@ export function resolveAssessmentInput(
   };
   const hasPr = options.pr !== undefined;
   const hasHead = options.head !== undefined;
-  if (hasPr && (hasHead || options.base !== undefined)) {
-    throw new Error("--pr cannot be combined with --base or --head.");
-  }
-  if (hasHead && options.base === undefined) {
-    throw new Error("--head requires --base.");
-  }
 
   let base: string | undefined = options.base;
 

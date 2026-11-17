@@ -24,12 +24,17 @@ Use a supplied baseline without asking again. Existing-report replay does not
 need this question; for PR assessment, use the PR's actual target baseline.
 
 For every fresh assessment, the coordinator is the first operational command.
-For a PR, run `run-assessment-analysis.ts --pr <url-or-number> --repo <repo>
+For a PR, run `run-assessment-analysis.ts --pr <url-or-number> --repo-path <local-directory>
 --output <work>` immediately. For local code, run it immediately with
-`--base`, `--specification`, `--repo`, and `--output` once the baseline is
+`--base`, `--specification`, `--repo-path`, and `--output` once the baseline is
 known. Do not run separate Git status/diff/fetch/worktree, PR metadata,
 dependency, or project-discovery commands first. Diagnose only a concrete
 blocker returned by the coordinator.
+
+`--repo-path` is a local Git worktree directory, not a GitHub `owner/repo`
+identity; `--repo` remains a legacy alias. Omit both to use the Git worktree
+root containing the current directory, including from a subdirectory. Input
+validation runs before dependency setup or assessment output creation.
 
 Follow the [complete workflow](references/workflow.md). Apply the [classification rules](references/classification.md), including the detailed [downstream cases](references/downstream-breaking-cases.md), perform the [Azure Guidelines search](references/agentic-search.md) against the [official document catalog](references/reference-document-links.md), check [documentation completeness](references/document-quality.md), and produce exactly the [required outputs](references/output-contract.md).
 
