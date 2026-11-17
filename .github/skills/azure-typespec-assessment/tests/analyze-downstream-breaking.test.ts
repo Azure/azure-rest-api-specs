@@ -632,6 +632,42 @@ void test("compares the matching generic instance without blocking sibling insta
   );
 });
 
+void test("does not pair a single target generic candidate with different template arguments", (context) => {
+  const provenance = genericListProvenance();
+  const base = genericListPackage(false);
+  base.clients[0].methods = [base.clients[0].methods[0]];
+  base.models = base.models.filter(
+    (model) => model.name === "FirstListResult" || model.name === "First",
+  );
+  const current = genericListPackage(false);
+  current.clients[0].methods = [current.clients[0].methods[1]];
+  current.models = current.models.filter(
+    (model) => model.name === "SecondListResult" || model.name === "Second",
+  );
+
+  const result = analyzeShapes(context, base, current, [], undefined, {
+    base: {
+      schemaVersion: 1,
+      models: provenance.models.filter((model) => model.name === "FirstListResult"),
+    },
+    current: {
+      schemaVersion: 1,
+      models: provenance.models.filter((model) => model.name === "SecondListResult"),
+    },
+  });
+
+  assert.deepEqual(result.blockers, []);
+  assert.ok(!result.candidates.some((item) => item.rule === "model-identity-changed"));
+  const removal = result.candidates.find(
+    (item) =>
+      item.rule === "public-surface-changed" &&
+      item.crossLanguageDefinitionId === "Contoso.ListResult",
+  );
+  assert.ok(removal);
+  assert.equal(removal.evidenceFactIds.length, 1);
+  assert.equal(result.facts[removal.evidenceFactIds[0]].name, "FirstListResult");
+});
+
 void test("detects model base and discriminator hierarchy changes", (context) => {
   const cases: [string, (model: Record<string, unknown>, current: boolean) => void][] = [
     [
