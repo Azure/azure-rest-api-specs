@@ -6868,6 +6868,12 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 );
 
 @@alternateType(
+  Microsoft.Network.InterconnectGroupPropertiesFormat.resourceGuid,
+  uuid,
+  "csharp"
+);
+
+@@alternateType(
   Microsoft.Network.LocalNetworkGatewayPropertiesFormat.resourceGuid,
   uuid,
   "csharp"
