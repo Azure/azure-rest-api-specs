@@ -8,6 +8,15 @@ import {
 } from "./assessment-runtime.ts";
 import { isMain, parseArgs, readJsonObject, runMain } from "./cli.ts";
 import { assembleCompliance, readComplianceCatalog } from "./compliance-assessment.ts";
+import {
+  materializeSourceAssociation,
+  prepareSourceAssociation,
+  querySourceAssociation,
+  querySourceAssociationBatch,
+  SOURCE_ASSOCIATION_DECISIONS,
+  SOURCE_ASSOCIATION_OUTPUT,
+  type SourceAssociationHandoff,
+} from "./source-association.ts";
 import { canonicalJson } from "./stable-id.ts";
 import {
   hashArtifacts,
@@ -20,6 +29,8 @@ import {
 type CompactCandidateDecision = import("./agent-decisions.schema.js").CandidateDecision;
 
 type CompactGuidance = import("./agent-decisions.schema.js").Guidance;
+
+type CompactSourceReview = import("./agent-decisions.schema.js").SourceReview;
 
 type CompactDecisions =
   import("./agent-decisions.schema.js").TypeSpecAssessmentCompactAgentDecisions;
@@ -40,6 +51,8 @@ type ComplianceSearchRequest = import("./runtime-types.ts").ComplianceSearchRequ
 type InferenceCandidate = import("./runtime-types.ts").InferenceCandidate;
 
 type SourceChange = import("./runtime-types.ts").SourceChange;
+
+type SourceReviewDecision = import("./runtime-types.ts").SourceReviewDecision;
 
 type CatalogEntry = ReturnType<typeof readComplianceCatalog>[number];
 
@@ -71,6 +84,7 @@ type AgentIndex = {
     semanticIntentIds?: string[];
     restCandidateIds?: string[];
     downstreamCandidateIds?: string[];
+    sourceReviewCandidateIds?: string[];
     inferenceRequestIds?: string[];
     guidelineRequestIds?: string[];
   };
@@ -176,6 +190,164 @@ function validateCandidateDecision(decision: CompactCandidateDecision, label: st
   }
 }
 
+function canonicalDeclarationMap(sourceChanges: SourceChange[]) {
+  const declarations = new Map<string, import("./runtime-types.ts").SourceReviewDeclaration>();
+  for (const source of sourceChanges) {
+    for (const declaration of source.declarations ?? []) {
+      if (declarations.has(declaration.id)) {
+        throw new Error(`Canonical source contains duplicate declaration ${declaration.id}.`);
+      }
+      declarations.set(declaration.id, {
+        declarationId: declaration.id,
+        sourceChangeId: source.id,
+        qualifiedName: declaration.qualifiedName,
+        kind: declaration.kind,
+        revision: declaration.source.revision,
+        startLine: declaration.source.startLine,
+        endLine: declaration.source.endLine,
+        hunkIds: [...new Set(declaration.hunkIds ?? [])].sort(),
+      });
+    }
+  }
+  return declarations;
+}
+
+export function materializeSourceReviews(
+  reviews: CompactSourceReview[],
+  decisions: CompactCandidateDecision[],
+  modelInput: AssessmentModelInput,
+  inferenceCandidates: InferenceCandidate[],
+  sourceChanges: SourceChange[],
+): Map<string, SourceReviewDecision> {
+  const candidateIds = decisions.map((decision) => decision.candidateId);
+  exactCoverage(
+    candidateIds,
+    reviews.map((review) => review.candidateId),
+    "Source review",
+  );
+  const decisionsById = new Map(decisions.map((decision) => [decision.candidateId, decision]));
+  const requestsById = new Map(
+    (modelInput.sourceReviewRequests ?? []).map((request) => [request.candidateId, request]),
+  );
+  const availableDeclarations = new Map(
+    (modelInput.sourceReviewDeclarations ?? []).map((declaration) => [
+      declaration.declarationId,
+      declaration,
+    ]),
+  );
+  const inferredById = new Map(inferenceCandidates.map((candidate) => [candidate.id, candidate]));
+  const canonicalDeclarations = canonicalDeclarationMap(sourceChanges);
+
+  const result = new Map<string, SourceReviewDecision>();
+  for (const review of reviews) {
+    assertKeys(
+      review,
+      ["candidateId", "outcome", "selectedDeclarationIds", "rationale"],
+      `Source review ${review.candidateId ?? "<unknown>"}`,
+    );
+    requireText(review.candidateId, "Source review candidateId");
+    requireText(review.rationale, `Source review ${review.candidateId}.rationale`);
+    requireArray(
+      review.selectedDeclarationIds,
+      `Source review ${review.candidateId}.selectedDeclarationIds`,
+    );
+    if (!["keep", "refine", "associate", "unresolved", "not-applicable"].includes(review.outcome)) {
+      throw new Error(`Source review ${review.candidateId} has an invalid outcome.`);
+    }
+    if (duplicates(review.selectedDeclarationIds).length) {
+      throw new Error(`Source review ${review.candidateId} has duplicate declarations.`);
+    }
+    const decision = decisionsById.get(review.candidateId);
+    if (!decision)
+      throw new Error(`Source review ${review.candidateId} has no candidate decision.`);
+    const request = requestsById.get(review.candidateId);
+    const inferred = inferredById.get(review.candidateId);
+    const allowedIds = request
+      ? request.availableDeclarationIds
+      : inferred
+        ? sourceChanges
+            .filter((source) => inferred.sourceChangeIds.includes(source.id))
+            .flatMap((source) =>
+              (source.declarations ?? [])
+                .filter((declaration) =>
+                  declaration.hunkIds?.some((hunkId) => inferred.hunkIds.includes(hunkId)),
+                )
+                .map((declaration) => declaration.id),
+            )
+        : [];
+    if (request) {
+      for (const id of request.availableDeclarationIds) {
+        if (!availableDeclarations.has(id)) {
+          throw new Error(
+            `Source review request ${review.candidateId} cites missing declaration ${id}.`,
+          );
+        }
+      }
+    }
+    subset(
+      review.selectedDeclarationIds,
+      allowedIds,
+      `Source review ${review.candidateId}.selectedDeclarationIds`,
+    );
+    if (decision.decision === "reject") {
+      if (review.outcome !== "not-applicable" || review.selectedDeclarationIds.length) {
+        throw new Error(
+          `Rejected candidate ${review.candidateId} requires a not-applicable source review.`,
+        );
+      }
+    } else {
+      if (review.outcome === "not-applicable") {
+        throw new Error(
+          `Approved candidate ${review.candidateId} cannot have a not-applicable source review.`,
+        );
+      }
+      if (
+        ["keep", "refine", "associate"].includes(review.outcome) &&
+        !review.selectedDeclarationIds.length
+      ) {
+        throw new Error(
+          `Source review ${review.candidateId} ${review.outcome} requires declarations.`,
+        );
+      }
+      if (review.outcome === "unresolved" && review.selectedDeclarationIds.length) {
+        throw new Error(
+          `Unresolved source review ${review.candidateId} must not select declarations.`,
+        );
+      }
+      if (review.outcome === "keep") {
+        if (!request || request.deterministicStatus !== "associated") {
+          throw new Error(`Source review ${review.candidateId} cannot keep a missing proposal.`);
+        }
+        exactCoverage(
+          request.deterministicDeclarationIds,
+          review.selectedDeclarationIds,
+          `Source review ${review.candidateId} deterministic proposal`,
+        );
+      }
+      if (review.outcome === "refine" && request?.deterministicStatus !== "associated") {
+        throw new Error(`Source review ${review.candidateId} cannot refine a missing proposal.`);
+      }
+      if (review.outcome === "associate" && request?.deterministicStatus === "associated") {
+        throw new Error(
+          `Source review ${review.candidateId} must use refine instead of replacing an associated proposal.`,
+        );
+      }
+    }
+    const selectedDeclarations = review.selectedDeclarationIds.map((id) => {
+      const declaration = canonicalDeclarations.get(id);
+      if (!declaration) {
+        throw new Error(`Source review ${review.candidateId} cites unknown declaration ${id}.`);
+      }
+      return declaration;
+    });
+    result.set(review.candidateId, {
+      outcome: review.outcome,
+      selectedDeclarations,
+      rationale: review.rationale,
+    });
+  }
+  return result;
+}
 function materializeInference(
   decisions: CompactDecisions,
   modelInput: AssessmentModelInput,
@@ -238,7 +410,7 @@ function materializeInference(
         ],
         `Inferred candidate ${candidate.id ?? "<unknown>"}`,
       );
-      for (const field of ["id", "rule", "actual", "expected"]) {
+      for (const field of ["id", "rule", "actual", "expected"] as const) {
         requireText(candidate[field], `Inferred candidate ${candidate.id ?? "<unknown>"}.${field}`);
       }
       if (!request.allowedDimensions.includes(candidate.dimension)) {
@@ -794,6 +966,7 @@ function materializeJudgment(
   catalogById: Map<string, CatalogEntry>,
   fetchedById: Map<string, MaterializedComplianceDocument>,
   resolvedDeclarations: Map<string, string[]>,
+  sourceReviews: Map<string, SourceReviewDecision>,
 ): AssessmentJudgment {
   exactCoverage(
     modelInput.semanticReviewUnits.map((item) => item.reviewUnitId),
@@ -831,6 +1004,14 @@ function materializeJudgment(
   decisions.downstreamDecisions.forEach((item) =>
     validateCandidateDecision(item, `Downstream decision ${item.candidateId}`),
   );
+  const withSourceReview = (decision: CompactCandidateDecision) => {
+    if (decisions.schemaVersion === 2) return { ...decision };
+    const sourceReview = sourceReviews.get(decision.candidateId);
+    if (!sourceReview) {
+      throw new Error(`Missing source review for ${decision.candidateId}.`);
+    }
+    return { ...decision, sourceReview };
+  };
 
   exactCoverage(
     requests.map((item) => item.reviewUnitId),
@@ -949,9 +1130,10 @@ function materializeJudgment(
   });
   return {
     schemaVersion: 1,
+    ...(decisions.schemaVersion === 2 ? { pipelineVersion: 2 as const } : {}),
     semanticIntents: decisions.semanticSummaries,
-    restDecisions: decisions.restDecisions,
-    downstreamDecisions: decisions.downstreamDecisions,
+    restDecisions: decisions.restDecisions.map(withSourceReview),
+    downstreamDecisions: decisions.downstreamDecisions.map(withSourceReview),
     complianceDecisions,
     overallConfidence: decisions.overallConfidence,
     blockers: decisions.blockers,
@@ -968,6 +1150,7 @@ export function validateCompactDecisions(
       "semanticSummaries",
       "restDecisions",
       "downstreamDecisions",
+      "sourceReviews",
       "inferenceResults",
       "catalogScores",
       "fetchedDocuments",
@@ -979,8 +1162,11 @@ export function validateCompactDecisions(
     ],
     "Agent decisions",
   );
-  if (decisions.schemaVersion !== 1) {
+  if (decisions.schemaVersion !== 1 && decisions.schemaVersion !== 2) {
     throw new Error("Unsupported Agent decisions schemaVersion.");
+  }
+  if (decisions.schemaVersion === 2 && decisions.sourceReviews !== undefined) {
+    throw new Error("Judgment-only decisions must not contain sourceReviews.");
   }
   for (const field of [
     "semanticSummaries",
@@ -998,6 +1184,9 @@ export function validateCompactDecisions(
   }
   if (decisions.inferenceResults !== undefined) {
     requireArray(decisions.inferenceResults, "Agent decisions.inferenceResults");
+  }
+  if (decisions.schemaVersion === 1) {
+    requireArray(decisions.sourceReviews, "Agent decisions.sourceReviews");
   }
   if (!isSeverity(decisions.overallConfidence)) {
     throw new Error("Agent decisions.overallConfidence is invalid.");
@@ -1046,6 +1235,11 @@ function validateIndexCoverage(index: AgentIndex, modelInput: AssessmentModelInp
     modelInput.downstreamCandidates.map((item) => item.id),
     coverage.downstreamCandidateIds ?? [],
     "Agent index downstream candidate",
+  );
+  exactCoverage(
+    (modelInput.sourceReviewRequests ?? []).map((item) => item.candidateId),
+    coverage.sourceReviewCandidateIds ?? [],
+    "Agent index source review request",
   );
   exactCoverage(
     modelInput.inferenceRequests.map((item) => item.requestId),
@@ -1181,6 +1375,9 @@ export function materializeAssessmentResults({
     const materializationInputs = hashArtifacts(root, [INDEX_FILE, decisionsPath]);
     const agentDecisions = readJsonObject(resolveWorkPath(root, decisionsPath));
     validateCompactDecisions(agentDecisions);
+    if ((agentDecisions.schemaVersion === 2) !== (modelInput.pipelineVersion === 2)) {
+      throw new Error("Agent decisions pipeline does not match the canonical model input.");
+    }
     const requests = canonicalRequests(modelInput, artifacts);
     const catalog = readComplianceCatalog();
     const sourceArtifact = modelInput.artifactReferences?.sourceIndex ?? "source/source-index.json";
@@ -1193,6 +1390,16 @@ export function materializeAssessmentResults({
       sourceChanges,
     );
     const { inference, candidates } = materializeInference(agentDecisions, modelInput);
+    const sourceReviews =
+      agentDecisions.schemaVersion === 2
+        ? new Map<string, SourceReviewDecision>()
+        : materializeSourceReviews(
+            agentDecisions.sourceReviews ?? [],
+            [...agentDecisions.restDecisions, ...agentDecisions.downstreamDecisions],
+            modelInput,
+            candidates,
+            sourceChanges,
+          );
     const { evidence, catalogById, fetchedById } = materializeSearch(
       agentDecisions,
       requests,
@@ -1207,6 +1414,7 @@ export function materializeAssessmentResults({
       catalogById,
       fetchedById,
       resolvedDeclarations,
+      sourceReviews,
     );
     if (requests.length) {
       assertSearchEvidence(evidence);
@@ -1240,32 +1448,77 @@ export function materializeAssessmentResults({
         : total + fs.statSync(resolveWorkPath(root, relativePath)).size;
     }, 0);
     const materializationMs = Math.round(performance.now() - started);
-    transitionWorkflowState(root, "awaiting-finalization", {
-      runtimePhases: {
-        preparation,
-        materialization: createRuntimePhaseProvenance(
-          root,
-          runtime,
-          [INDEX_FILE, decisionsPath],
-          outputArtifacts.filter(([, value]) => value !== undefined).map(([file]) => file),
-        ),
+    transitionWorkflowState(
+      root,
+      modelInput.pipelineVersion === 2 ? "judgment-materialized" : "awaiting-finalization",
+      {
+        runtimePhases: {
+          preparation,
+          materialization: createRuntimePhaseProvenance(
+            root,
+            runtime,
+            [INDEX_FILE, decisionsPath],
+            outputArtifacts.filter(([, value]) => value !== undefined).map(([file]) => file),
+          ),
+        },
+        ...(modelInput.pipelineVersion === 2
+          ? {
+              judgmentArtifactHashes: hashArtifacts(
+                root,
+                outputArtifacts
+                  .filter(([, value]) => value !== undefined)
+                  .map(([relativePath]) => relativePath),
+              ),
+            }
+          : {}),
+        artifacts: {
+          ...(workflowState?.artifacts ?? {}),
+          inference: inference ? "inference.json" : null,
+          guidelineEvidence: "compliance-search-evidence.json",
+          judgment: "assessment-judgment.json",
+          agentDecisions: decisionsPath,
+        },
+        failure: undefined,
+        telemetry: {
+          materializedAt: new Date().toISOString(),
+          materializationMs,
+          materializedOutputBytes: outputBytes,
+          agentDecisionBytes: fs.statSync(resolveWorkPath(root, decisionsPath)).size,
+        },
       },
-      artifacts: {
-        ...(workflowState?.artifacts ?? {}),
-        inference: inference ? "inference.json" : null,
-        guidelineEvidence: "compliance-search-evidence.json",
-        judgment: "assessment-judgment.json",
-        agentDecisions: decisionsPath,
-      },
-      failure: undefined,
-      telemetry: {
-        materializedAt: new Date().toISOString(),
-        materializationMs,
-        materializedOutputBytes: outputBytes,
-        agentDecisionBytes: fs.statSync(resolveWorkPath(root, decisionsPath)).size,
-      },
-    });
+    );
+    if (modelInput.pipelineVersion === 2) {
+      const handoff: SourceAssociationHandoff = prepareSourceAssociation({ work: root });
+      return handoff.sourceAssociationRequired
+        ? {
+            status: handoff.status,
+            sourceAssociationRequired: true as const,
+            itemCount: handoff.itemCount,
+            inputPath: handoff.inputPath,
+            decisionsPath: handoff.decisionsPath,
+            draftPath: handoff.draftPath,
+            inferencePath: inference ? resolveWorkPath(root, "inference.json") : null,
+            guidelineEvidencePath: resolveWorkPath(root, "compliance-search-evidence.json"),
+            judgmentPath: resolveWorkPath(root, "assessment-judgment.json"),
+            materializationMs,
+            outputBytes,
+          }
+        : {
+            status: handoff.status,
+            sourceAssociationRequired: false as const,
+            itemCount: 0,
+            sourceAssociationPath: handoff.outputPath,
+            inferencePath: inference ? resolveWorkPath(root, "inference.json") : null,
+            guidelineEvidencePath: resolveWorkPath(root, "compliance-search-evidence.json"),
+            judgmentPath: resolveWorkPath(root, "assessment-judgment.json"),
+            materializationMs,
+            outputBytes,
+          };
+    }
     return {
+      status: "awaiting-finalization" as const,
+      sourceAssociationRequired: false as const,
+      itemCount: 0,
       inferencePath: inference ? resolveWorkPath(root, "inference.json") : null,
       guidelineEvidencePath: resolveWorkPath(root, "compliance-search-evidence.json"),
       judgmentPath: resolveWorkPath(root, "assessment-judgment.json"),
@@ -1291,9 +1544,83 @@ export function materializeAssessmentResults({
   }
 }
 
+function parseSourceQuerySpecs(args: Record<string, unknown>): {
+  itemId: string;
+  qualifiedName: string;
+}[] {
+  const specs: { itemId: string; qualifiedName: string }[] = [];
+  const parsePair = (pair: string) => {
+    const separator = pair.indexOf("=");
+    if (separator <= 0 || separator === pair.length - 1) {
+      throw new Error(
+        `Invalid --query entry "${pair}"; expected <item-id>=<qualified-declaration-name>.`,
+      );
+    }
+    return {
+      itemId: pair.slice(0, separator).trim(),
+      qualifiedName: pair.slice(separator + 1).trim(),
+    };
+  };
+  if (Array.isArray(args.query)) {
+    for (const raw of args.query) {
+      if (typeof raw !== "string") throw new Error("--query values must be strings.");
+      specs.push(parsePair(raw));
+    }
+  }
+  if (args.queries !== undefined) {
+    if (typeof args.queries !== "string") {
+      throw new Error("--queries must be a JSON array string.");
+    }
+    const parsed = JSON.parse(args.queries) as unknown;
+    requireArray(parsed, "--queries");
+    for (const entry of parsed) {
+      assertKeys(entry, ["itemId", "qualifiedName"], "--queries entry");
+      requireText(entry.itemId, "--queries entry.itemId");
+      requireText(entry.qualifiedName, "--queries entry.qualifiedName");
+      specs.push({ itemId: entry.itemId, qualifiedName: entry.qualifiedName });
+    }
+  }
+  if (args.item !== undefined || args.name !== undefined) {
+    if (typeof args.item !== "string" || !args.item.trim()) {
+      throw new Error("--item is required when using --name.");
+    }
+    const names = Array.isArray(args.name)
+      ? args.name
+      : typeof args.name === "string"
+        ? [args.name]
+        : [];
+    if (!names.length) {
+      throw new Error("--name is required when using --item.");
+    }
+    for (const name of names) {
+      if (typeof name !== "string" || !name.trim()) {
+        throw new Error("--name must be a non-empty declaration name.");
+      }
+      specs.push({ itemId: args.item.trim(), qualifiedName: name.trim() });
+    }
+  }
+  if (Array.isArray(args._)) {
+    for (const raw of args._) {
+      if (typeof raw === "string" && raw.includes("=")) {
+        specs.push(parsePair(raw));
+      }
+    }
+  }
+  if (!specs.length) {
+    throw new Error(
+      "Source query requires --item <item-id> --name <qualified-name> or repeatable --query <item-id>=<qualified-name>.",
+    );
+  }
+  return specs;
+}
+
 if (isMain(import.meta.url)) {
   void runMain(() => {
-    const args = parseArgs(process.argv.slice(2), { required: ["work"] });
+    const args = parseArgs(process.argv.slice(2), {
+      required: ["work"],
+      booleans: ["source-association", "query-source"],
+      arrays: ["name", "query"],
+    });
     const work = args.work;
     const decisions = args.decisions;
     if (typeof work !== "string") {
@@ -1302,12 +1629,57 @@ if (isMain(import.meta.url)) {
     if (decisions !== undefined && typeof decisions !== "string") {
       throw new Error("--decisions must be a string.");
     }
+    if (args.source_association && args.query_source) {
+      throw new Error("Cannot combine --source-association and --query-source.");
+    }
+    if (args.query_source) {
+      const specs = parseSourceQuerySpecs(args);
+      const output =
+        specs.length === 1
+          ? querySourceAssociation({
+              work,
+              itemId: specs[0].itemId,
+              qualifiedName: specs[0].qualifiedName,
+            })
+          : querySourceAssociationBatch({ work, queries: specs });
+      console.log(JSON.stringify(output));
+      return;
+    }
+    if (args.source_association) {
+      const started = performance.now();
+      const result = materializeSourceAssociation({
+        work,
+        decisions: decisions ?? SOURCE_ASSOCIATION_DECISIONS,
+      });
+      console.log(
+        JSON.stringify({
+          status: "ready-for-finalization",
+          sourceAssociation: resolveWorkPath(path.resolve(work), SOURCE_ASSOCIATION_OUTPUT),
+          sourceAssociationStatus: result.status,
+          findingCount: Object.keys(result.reviews).length,
+          sourceMaterializationMs: Math.round(performance.now() - started),
+        }),
+      );
+      return;
+    }
     const result = materializeAssessmentResults({
       work,
       decisions,
     });
     console.log(
       JSON.stringify({
+        status: result.status,
+        sourceAssociationRequired: result.sourceAssociationRequired,
+        itemCount: result.itemCount,
+        ...(result.sourceAssociationRequired
+          ? {
+              inputPath: result.inputPath,
+              decisionsPath: result.decisionsPath,
+              draftPath: result.draftPath,
+            }
+          : "sourceAssociationPath" in result
+            ? { sourceAssociation: result.sourceAssociationPath }
+            : {}),
         inference: result.inferencePath,
         guidelineEvidence: result.guidelineEvidencePath,
         judgment: result.judgmentPath,

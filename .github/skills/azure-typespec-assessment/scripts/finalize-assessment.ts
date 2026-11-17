@@ -11,6 +11,7 @@ import { assembleAssessment } from "./assemble-assessment.ts";
 import { isMain, parseArgs, readJsonObject, runMain } from "./cli.ts";
 import { renderAssessmentHtml } from "./render-assessment-html.ts";
 import { validateAssessment } from "./validate-assessment.ts";
+import { loadSourceAssociation, SOURCE_ASSOCIATION_OUTPUT } from "./source-association.ts";
 import {
   atomicWriteFile,
   atomicWriteJson,
@@ -51,10 +52,26 @@ export function finalizeAssessment({
 }) {
   const root = path.resolve(work);
   const started = performance.now();
+  let failurePhase = "awaiting-agent-judgment";
   try {
     const runtime = verifyAssessmentRuntime(root, import.meta.url);
     const preparation = verifyRuntimePhaseProvenance(root, "preparation", runtime);
     const materialization = verifyRuntimePhaseProvenance(root, "materialization", runtime);
+    const previousState = readWorkflowState(root);
+    const model = readJsonObject(path.join(root, "model-input.json"));
+    if (model.pipelineVersion === 2) {
+      failurePhase = "awaiting-source-association";
+      if (
+        previousState?.state !== "ready-for-finalization" &&
+        previousState?.state !== "complete"
+      ) {
+        throw new Error(
+          `Source association is incomplete (workflow state: ${previousState?.state ?? "unknown"}); run materialize-assessment-results.ts --work <work> --source-association before finalization.`,
+        );
+      }
+      loadSourceAssociation(root);
+      failurePhase = "ready-for-finalization";
+    }
     const inferenceArtifactAt = fileTimestamp(path.join(root, "inference.json"));
     const guidelineEvidenceAt = fileTimestamp(path.join(root, "compliance-search-evidence.json"));
     const judgmentArtifactAt = fileTimestamp(path.join(root, "assessment-judgment.json"));
@@ -63,7 +80,6 @@ export function finalizeAssessment({
       guidelineEvidenceAt,
       judgmentArtifactAt,
     ]);
-    const previousState = readWorkflowState(root);
     const deterministicReadyAt =
       typeof previousState?.telemetry?.deterministicReadyAt === "string"
         ? previousState.telemetry.deterministicReadyAt
@@ -138,7 +154,11 @@ export function finalizeAssessment({
         finalization: createRuntimePhaseProvenance(
           root,
           runtime,
-          [AGENT_INDEX_FILE, ...Object.keys(materialization.outputHashes)],
+          [
+            AGENT_INDEX_FILE,
+            ...Object.keys(materialization.outputHashes),
+            ...(model.pipelineVersion === 2 ? [SOURCE_ASSOCIATION_OUTPUT] : []),
+          ],
           ["assessment.json", "assessment.html"],
         ),
       },
@@ -148,7 +168,7 @@ export function finalizeAssessment({
     return { assessmentPath, reportPath, finalizationMs };
   } catch (error) {
     const message = compactError(error);
-    transitionWorkflowState(root, "awaiting-agent-judgment", {
+    transitionWorkflowState(root, failurePhase, {
       failure: {
         code:
           error instanceof AssessmentRuntimeError ? "runtime-tooling-error" : "finalization-failed",

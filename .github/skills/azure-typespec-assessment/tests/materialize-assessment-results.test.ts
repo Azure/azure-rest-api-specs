@@ -2,13 +2,16 @@ import { assert, test } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import {
   verifyAssessmentRuntime,
   verifyRuntimePhaseProvenance,
 } from "../scripts/assessment-runtime.ts";
 import { buildAgentWorkspace } from "../scripts/build-agent-workspace.ts";
+import { finalizeAssessment } from "../scripts/finalize-assessment.ts";
 import { readJson, writeJson } from "../scripts/cli.ts";
 import {
+  materializeSourceReviews,
   materializeAssessmentResults,
   validateCompactDecisions,
 } from "../scripts/materialize-assessment-results.ts";
@@ -33,9 +36,14 @@ type TestAgentDecisions = {
   [key: string]: unknown;
 };
 
-function fixture({ inference = false } = {}) {
+function fixture({
+  inference = false,
+  pipelineVersion,
+}: { inference?: boolean; pipelineVersion?: 2 } = {}) {
   const work = fs.mkdtempSync(path.join(process.cwd(), ".materializer & ' test-"));
   writeJson(path.join(work, "preparation-manifest.json"), {
+    schemaVersion: 1,
+    repository: { remoteUrl: "https://github.com/Azure/azure-rest-api-specs" },
     comparison: {
       mergeBaseCommit: "base",
       headCommit: "head",
@@ -43,6 +51,8 @@ function fixture({ inference = false } = {}) {
       workingTree: { staged: false, unstaged: false, untracked: false },
     },
     projects: [],
+    blockers: [],
+    changedFiles: [],
   });
   writeJson(path.join(work, "source", "source-index.json"), {
     sourceChanges: [],
@@ -63,15 +73,18 @@ function fixture({ inference = false } = {}) {
     status: "ready",
     candidates: [],
     facts: {},
+    rootCauses: [],
     blockers: [],
   });
   writeJson(path.join(work, "dimensions", "document-quality-input.json"), {
     schemaVersion: 4,
+    status: "ready",
     reviewUnits: [],
     blockers: [],
   });
   writeJson(path.join(work, "model-input.json"), {
     schemaVersion: 2,
+    ...(pipelineVersion === 2 ? { pipelineVersion } : {}),
     context: {
       sourceComparison: {
         baseCommit: "base",
@@ -92,7 +105,7 @@ function fixture({ inference = false } = {}) {
     semanticReviewUnits: [],
     restCandidates: [],
     downstreamCandidates: [],
-    downstreamRootCauses: [],
+    ...(pipelineVersion === 2 ? {} : { sourceReviewDeclarations: [], sourceReviewRequests: [] }),
     complianceSearchRequests: [],
     inferenceRequests: inference
       ? [
@@ -111,6 +124,72 @@ function fixture({ inference = false } = {}) {
   buildAgentWorkspace({ work });
   return work;
 }
+
+void test("materializes and freezes judgment without requiring source decisions in pipeline 2", () => {
+  const work = fixture({ pipelineVersion: 2 });
+  try {
+    const model = readJson(path.join(work, "model-input.json")) as AssessmentModelInput;
+    model.restCandidates = [{ id: "rest-rejected", evidenceSetId: "evidence-rejected" }];
+    model.evidenceSets = {
+      "evidence-rejected": {
+        sourceChangeIds: [],
+        hunkIds: [],
+        declarationIds: [],
+        evidenceFactIds: [],
+      },
+    };
+    writeJson(path.join(work, "model-input.json"), model);
+    writeJson(path.join(work, "dimensions", "rest-breaking-input.json"), {
+      status: "ready",
+      facts: {},
+      blockers: [],
+      candidates: [
+        {
+          id: "rest-rejected",
+          rule: "operation-removed",
+          defaultSeverity: "high",
+          actual: "Removed.",
+          expected: "Preserved.",
+          sourceChangeIds: [],
+          hunkIds: [],
+          declarationIds: [],
+          evidenceFactIds: [],
+          operationIds: ["Example_Get"],
+          reviewRequired: true,
+          contractChange: { rule: "operation-removed" },
+        },
+      ],
+    });
+    buildAgentWorkspace({ work });
+    const decisions = completedDecisions(work);
+    decisions.restDecisions = [
+      { candidateId: "rest-rejected", decision: "reject", rationale: "No confirmed breaking." },
+    ];
+    assert.equal(decisions.schemaVersion, 2);
+    assert.equal("sourceReviews" in decisions, false);
+    writeJson(path.join(work, "agent-workspace", "agent-decisions.json"), decisions);
+    const result = materializeAssessmentResults({ work });
+    assert.equal(result.status, "ready-for-finalization");
+    assert.equal(result.sourceAssociationRequired, false);
+    assert.equal(result.itemCount, 0);
+    const judgment = readJson(result.judgmentPath) as AssessmentJudgment;
+    assert.equal(judgment.pipelineVersion, 2);
+    const state = readJson(path.join(work, "workflow-state.json")) as {
+      state: string;
+      judgmentArtifactHashes: Record<string, string>;
+    };
+    assert.equal(state.state, "ready-for-finalization");
+    assert.ok(state.judgmentArtifactHashes["assessment-judgment.json"]);
+    assert.equal(
+      (readJson(path.join(work, "source-association.json")) as { status: string }).status,
+      "not-applicable",
+    );
+    const finalized = finalizeAssessment({ work });
+    assert.equal(fs.existsSync(finalized.reportPath), true);
+  } finally {
+    fs.rmSync(work, { recursive: true, force: true });
+  }
+});
 
 function completedDecisions(work: string) {
   const decisions = readJson(
@@ -246,6 +325,389 @@ void test("rejects changed canonical input before materialization", () => {
       () => materializeAssessmentResults({ work }),
       /Canonical assessment inputs changed/,
     );
+  } finally {
+    fs.rmSync(work, { recursive: true, force: true });
+  }
+});
+
+void test("source review materialization enforces deterministic selection outcomes", () => {
+  const sourceChanges = [
+    {
+      id: "source-1",
+      path: "main.tsp",
+      status: "modified",
+      origins: [],
+      hunks: [],
+      declarations: [
+        {
+          id: "declaration-1",
+          kind: "model",
+          qualifiedName: "Service.Request",
+          decorators: [],
+          versionedMembers: [],
+          hunkIds: ["hunk-1"],
+          source: { revision: "current", startLine: 10, endLine: 14 },
+        },
+        {
+          id: "declaration-2",
+          kind: "operation",
+          qualifiedName: "Service.create",
+          decorators: [],
+          versionedMembers: [],
+          hunkIds: ["hunk-1"],
+          source: { revision: "current", startLine: 16, endLine: 18 },
+        },
+      ],
+    },
+  ] as import("../scripts/runtime-types.ts").SourceChange[];
+  const modelInput = {
+    sourceReviewDeclarations: [
+      {
+        declarationId: "declaration-1",
+        sourceChangeId: "source-1",
+        qualifiedName: "Service.Request",
+        kind: "model",
+        revision: "current",
+        startLine: 10,
+        endLine: 14,
+        hunkIds: ["hunk-1"],
+      },
+      {
+        declarationId: "declaration-2",
+        sourceChangeId: "source-1",
+        qualifiedName: "Service.create",
+        kind: "operation",
+        revision: "current",
+        startLine: 16,
+        endLine: 18,
+        hunkIds: ["hunk-1"],
+      },
+    ],
+    sourceReviewRequests: [
+      {
+        candidateId: "rest-1",
+        dimension: "rest",
+        evidenceSetId: "evidence-1",
+        deterministicStatus: "associated",
+        deterministicDeclarationIds: ["declaration-1"],
+        availableDeclarationIds: ["declaration-1", "declaration-2"],
+        sourceChangeIds: ["source-1"],
+        hunkIds: ["hunk-1"],
+      },
+    ],
+  } as AssessmentModelInput;
+  const decisions = [
+    {
+      candidateId: "rest-1",
+      decision: "approve" as const,
+      severity: "high" as const,
+      rationale: "Breaking.",
+    },
+  ];
+
+  const kept = materializeSourceReviews(
+    [
+      {
+        candidateId: "rest-1",
+        outcome: "keep",
+        selectedDeclarationIds: ["declaration-1"],
+        rationale: "The deterministic request model is complete.",
+      },
+    ],
+    decisions,
+    modelInput,
+    [],
+    sourceChanges,
+  );
+  assert.deepEqual(
+    kept.get("rest-1")?.selectedDeclarations.map((item) => item.qualifiedName),
+    ["Service.Request"],
+  );
+
+  const refined = materializeSourceReviews(
+    [
+      {
+        candidateId: "rest-1",
+        outcome: "refine",
+        selectedDeclarationIds: ["declaration-1", "declaration-2"],
+        rationale: "The operation makes the request model use clear.",
+      },
+    ],
+    decisions,
+    modelInput,
+    [],
+    sourceChanges,
+  );
+  assert.equal(refined.get("rest-1")?.selectedDeclarations.length, 2);
+
+  assert.throws(
+    () =>
+      materializeSourceReviews(
+        [
+          {
+            candidateId: "rest-1",
+            outcome: "associate",
+            selectedDeclarationIds: ["declaration-2"],
+            rationale: "Invalid replacement.",
+          },
+        ],
+        decisions,
+        modelInput,
+        [],
+        sourceChanges,
+      ),
+    /must use refine/,
+  );
+  assert.throws(
+    () =>
+      materializeSourceReviews(
+        [
+          {
+            candidateId: "rest-1",
+            outcome: "keep",
+            selectedDeclarationIds: ["declaration-2"],
+            rationale: "Wrong deterministic set.",
+          },
+        ],
+        decisions,
+        modelInput,
+        [],
+        sourceChanges,
+      ),
+    /deterministic proposal coverage mismatch/,
+  );
+});
+
+void test("Option A pipelineVersion 2 performs automatic >0-breaking sequential handoff and guards premature finalization", () => {
+  const work = fixture({ pipelineVersion: 2 });
+  try {
+    fs.rmSync(path.join(work, "dimensions", "document-quality-input.json"), { force: true });
+    writeJson(path.join(work, "source", "source-index.json"), {
+      sourceChanges: [
+        {
+          id: "source-1",
+          path: "specification/contoso/main.tsp",
+          hunks: [
+            {
+              id: "hunk-1",
+              oldStart: 1,
+              oldLines: 2,
+              newStart: 1,
+              newLines: 4,
+              header: "@@ -1,2 +1,4 @@",
+              lines: [" model Widget {", "+  requiredTag: string;", " }"],
+            },
+          ],
+          declarations: [
+            {
+              id: "decl-widget",
+              kind: "model",
+              name: "Widget",
+              qualifiedName: "Contoso.Widget",
+              decorators: [],
+              versionedMembers: [],
+              hunkIds: ["hunk-1"],
+              source: { revision: "current", startLine: 1, endLine: 4 },
+              sourceSnippet: {
+                startLine: 1,
+                endLine: 4,
+                lines: ["model Widget {", "  requiredTag: string;", "}"],
+                truncated: false,
+              },
+            },
+          ],
+        },
+      ],
+    });
+    writeJson(path.join(work, "dimensions", "semantic-intents-input.json"), {
+      status: "ready",
+      facts: {},
+      reviewUnits: [
+        {
+          id: "semantic-1",
+          action: "modify",
+          sourceChangeIds: ["source-1"],
+          hunkIds: ["hunk-1"],
+          operationIds: [],
+        },
+      ],
+      blockers: [],
+    });
+    writeJson(path.join(work, "dimensions", "compliance-search-requests.json"), {
+      schemaVersion: 1,
+      requests: [
+        {
+          requestId: "compliance-1",
+          reviewUnitId: "semantic-1",
+          sourceChangeIds: ["source-1"],
+          hunkIds: ["hunk-1"],
+          declarationIds: [],
+          queryProfile: { servicePlane: "data-plane" },
+        },
+      ],
+    });
+    const opFact = {
+      id: "fact-op-target",
+      projectId: "project-1",
+      comparisonRole: "target",
+      operationId: "Widgets_Create",
+      method: "put",
+      path: "/widgets/{name}",
+      parameters: [],
+      request: {
+        kind: "body",
+        schema: {
+          kind: "object",
+          reference: "#/definitions/Contoso.Widget",
+          properties: [
+            { name: "requiredTag", required: true, schema: { kind: "string", type: "string" } },
+          ],
+        },
+      },
+      responses: [],
+    };
+    writeJson(path.join(work, "dimensions", "rest-breaking-input.json"), {
+      status: "ready",
+      facts: { "fact-op-target": opFact },
+      candidates: [
+        {
+          id: "rest-1",
+          projectId: "project-1",
+          rule: "property-required",
+          defaultSeverity: "high",
+          actual: "Request property requiredTag became required.",
+          expected: "Keep request properties optional.",
+          contractChange: { rule: "property-required", location: "request body.requiredTag" },
+          operationIds: ["Widgets_Create"],
+          sourceChangeIds: ["source-1"],
+          declarationIds: ["decl-widget"],
+          hunkIds: ["hunk-1"],
+          evidenceFactIds: ["fact-op-target"],
+          reviewRequired: true,
+        },
+      ],
+      blockers: [],
+    });
+    const model = readJson(path.join(work, "model-input.json")) as Record<string, unknown>;
+    model.artifactReferences = {
+      ...(model.artifactReferences as Record<string, unknown>),
+      complianceSearchRequests: "dimensions/compliance-search-requests.json",
+    };
+    model.facts = { "fact-op-target": opFact };
+    model.evidenceSets = {
+      "evidence-1": {
+        sourceChangeIds: ["source-1"],
+        hunkIds: ["hunk-1"],
+        declarationIds: ["decl-widget"],
+        declarationCount: 1,
+        evidenceFactIds: ["fact-op-target"],
+      },
+    };
+    model.semanticReviewUnits = [{ reviewUnitId: "semantic-1", evidenceSetId: "evidence-1" }];
+    model.complianceSearchRequests = [
+      {
+        requestId: "compliance-1",
+        reviewUnitId: "semantic-1",
+        evidenceSetId: "evidence-1",
+      },
+    ];
+    model.restCandidates = [
+      {
+        id: "rest-1",
+        operationIds: ["Widgets_Create"],
+        evidenceSetId: "evidence-1",
+      },
+    ];
+    writeJson(path.join(work, "model-input.json"), model);
+
+    buildAgentWorkspace({ work });
+    const decisions = completedDecisions(work) as Record<string, unknown>;
+    decisions.semanticSummaries = [
+      {
+        reviewUnitId: "semantic-1",
+        title: "Require requiredTag on Widget",
+        summary: "Makes requiredTag mandatory on Widget.",
+      },
+    ];
+    decisions.complianceJudgments = [
+      {
+        reviewUnitId: "semantic-1",
+        applicableGuidance: [],
+        declarationNames: [],
+        decision: "no-applicable-guidance",
+        actual: "Updates Widget request properties.",
+        rationale: "No applicable guidance.",
+      },
+    ];
+    decisions.restDecisions = [
+      {
+        candidateId: "rest-1",
+        decision: "approve",
+        severity: "high",
+        rationale: "Existing callers omitting requiredTag fail validation.",
+      },
+    ];
+    writeJson(path.join(work, "agent-workspace", "agent-decisions.json"), decisions);
+
+    const step2a = materializeAssessmentResults({ work });
+    assert.equal(step2a.status, "awaiting-source-association");
+    assert.equal(step2a.sourceAssociationRequired, true);
+    assert.equal(step2a.itemCount, 1);
+    assert.throws(() => finalizeAssessment({ work }), /Source association is incomplete/);
+    assert.equal(readWorkflowState(work)?.state, "awaiting-source-association");
+    const frozenBefore = fs.readFileSync(path.join(work, "assessment-judgment.json"), "utf8");
+
+    const saInput = readJson(
+      path.join(work, "agent-workspace", "source-association-input.json"),
+    ) as {
+      judgmentHash: string;
+      sourceIndexHash: string;
+      items: Array<{ id: string; proposal: { declarationIds: string[] } }>;
+    };
+    writeJson(path.join(work, "agent-workspace", "source-association-decisions.json"), {
+      schemaVersion: 1,
+      judgmentHash: saInput.judgmentHash,
+      sourceIndexHash: saInput.sourceIndexHash,
+      selections: [
+        {
+          itemId: saInput.items[0].id,
+          outcome: "keep",
+          selectedDeclarationIds: saInput.items[0].proposal.declarationIds,
+        },
+      ],
+    });
+    const entry = fileURLToPath(
+      new URL("../scripts/materialize-assessment-results.ts", import.meta.url),
+    );
+    const step2b = spawnSync(process.execPath, [entry, "--work", work, "--source-association"], {
+      encoding: "utf8",
+    });
+    assert.equal(step2b.status, 0, step2b.stderr);
+    assert.equal(
+      (JSON.parse(step2b.stdout) as { status: string }).status,
+      "ready-for-finalization",
+    );
+    assert.equal(
+      fs.readFileSync(path.join(work, "assessment-judgment.json"), "utf8"),
+      frozenBefore,
+    );
+    const finalized = finalizeAssessment({ work });
+    assert.ok(fs.existsSync(finalized.assessmentPath));
+    assert.ok(fs.existsSync(finalized.reportPath));
+    const finalJson = readJson(finalized.assessmentPath) as {
+      provenance: { sourceAssociationInput?: string };
+      dimensions: {
+        rest: {
+          findings: Array<{ sourceReview?: { outcome: string }; displaySources?: unknown[] }>;
+        };
+      };
+    };
+    assert.equal(
+      finalJson.provenance.sourceAssociationInput,
+      "agent-workspace/source-association-input.json",
+    );
+    assert.equal(finalJson.dimensions.rest.findings[0].sourceReview?.outcome, "keep");
+    assert.equal(finalJson.dimensions.rest.findings[0].displaySources?.length, 1);
   } finally {
     fs.rmSync(work, { recursive: true, force: true });
   }

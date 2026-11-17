@@ -81,10 +81,51 @@ function validateFinding(
     errors.push(`${prefix} has invalid severity.`);
   }
   if (!finding.rationale?.trim()) errors.push(`${prefix} is missing rationale.`);
-  if (!finding.sources?.length) errors.push(`${prefix} has no changed TypeSpec source.`);
+  const unresolvedSource =
+    finding.sourceReview?.outcome === "unresolved" &&
+    Boolean(finding.sourceReview.rationale?.trim()) &&
+    finding.sourceReview.selectedDeclarations.length === 0 &&
+    !finding.displaySources?.length &&
+    Boolean(finding.evidence?.length);
+  if (!finding.sources?.length && !unresolvedSource)
+    errors.push(`${prefix} has no changed TypeSpec source.`);
   for (const source of finding.sources ?? []) {
     if (!source.hunks?.length)
       errors.push(`${prefix} links source ${source.id} without changed hunks.`);
+  }
+  if (finding.sourceReview) {
+    const selectedIds = new Set(
+      finding.sourceReview.selectedDeclarations.map((item) => item.declarationId),
+    );
+    const canonicalIds = new Set(
+      (finding.sources ?? []).flatMap((source) =>
+        (source.declarations ?? []).map((declaration) => declaration.id),
+      ),
+    );
+    const displayIds = new Set(
+      (finding.displaySources ?? []).flatMap((source) =>
+        (source.declarations ?? []).map((declaration) => declaration.id),
+      ),
+    );
+    if (finding.sourceReview.outcome === "not-applicable") {
+      errors.push(`${prefix} cannot use a not-applicable source review.`);
+    }
+    if (finding.sourceReview.outcome === "unresolved") {
+      if (selectedIds.size || finding.displaySources?.length) {
+        errors.push(`${prefix} unresolved source review must not select display source.`);
+      }
+    } else if (!selectedIds.size) {
+      errors.push(`${prefix} source review selects no declarations.`);
+    }
+    for (const id of selectedIds) {
+      if (!canonicalIds.has(id)) errors.push(`${prefix} source review cites unknown ${id}.`);
+      if (!displayIds.has(id)) errors.push(`${prefix} display source omits selected ${id}.`);
+    }
+    for (const id of displayIds) {
+      if (!selectedIds.has(id)) errors.push(`${prefix} display source includes unselected ${id}.`);
+    }
+  } else if (finding.displaySources?.length) {
+    errors.push(`${prefix} has display source without source review provenance.`);
   }
   if (dimension === "REST" && !finding.operationIds?.length) {
     errors.push(`${prefix} has no affected operation.`);
@@ -824,8 +865,9 @@ export function validateAssessment(assessment: AssessmentOutput | LegacyAssessme
       }
     }
     if (
+      impact.affectedMethodCount !== undefined &&
       impact.affectedMethodCount !==
-      new Set((impact.affectedMethods ?? []).map((item) => item.symbol)).size
+        new Set((impact.affectedMethods ?? []).map((item) => item.symbol)).size
     ) {
       errors.push(`SDK type impact ${impact.id} has inconsistent method count.`);
     }

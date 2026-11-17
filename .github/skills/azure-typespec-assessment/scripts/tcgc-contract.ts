@@ -5,6 +5,8 @@ import { canonicalJson, stableId } from "./stable-id.ts";
 
 type NormalizedTcgcType = import("./runtime-types.ts").NormalizedTcgcType;
 
+type TcgcUsageDetails = import("./runtime-types.ts").TcgcUsageDetails;
+
 type NormalizedTcgcContract = import("./runtime-types.ts").NormalizedTcgcContract;
 
 type NormalizedTcgcMethod = import("./runtime-types.ts").NormalizedTcgcMethod;
@@ -892,6 +894,7 @@ function normalizeProperty(
     access: raw.access,
     discriminator: Boolean(raw.discriminator),
     usage: raw.usage,
+    usageDetails: decodeTcgcUsage(raw.usage),
     visibility: raw.visibility ?? [],
     serialization: normalizeSerialization(raw, context, location),
     crossLanguageDefinitionId: raw.crossLanguageDefinitionId,
@@ -913,6 +916,7 @@ function normalizeModel(raw: unknown, context: TcgcContext, index: number) {
     name: raw.name,
     access: raw.access,
     usage: raw.usage,
+    usageDetails: decodeTcgcUsage(raw.usage),
     properties: [],
     baseModel: raw.baseModel
       ? (concreteReferenceName(raw.baseModel, context) ?? raw.baseModel.name)
@@ -952,6 +956,7 @@ function normalizeEnum(raw: unknown, context: TcgcContext, index: number) {
     name: raw.name,
     access: raw.access,
     usage: raw.usage,
+    usageDetails: decodeTcgcUsage(raw.usage),
     isFixed: Boolean(raw.isFixed),
     isFlags: Boolean(raw.isFlags),
     isUnionAsEnum: Boolean(raw.isUnionAsEnum),
@@ -983,6 +988,7 @@ function normalizeUnion(raw: unknown, context: TcgcContext, index: number) {
       kind: "nullable",
       access: raw.access,
       usage: raw.usage,
+      usageDetails: decodeTcgcUsage(raw.usage),
       type: normalizeType(raw.type, context, `union:${unionIdentity}.type`),
     };
   }
@@ -994,6 +1000,7 @@ function normalizeUnion(raw: unknown, context: TcgcContext, index: number) {
     name: raw.name,
     access: raw.access,
     usage: raw.usage,
+    usageDetails: decodeTcgcUsage(raw.usage),
     variantTypes: array(raw.variantTypes, `union:${unionIdentity}.variantTypes`).map(
       (item, variantIndex) =>
         normalizeType(item, context, `union:${unionIdentity}.variantTypes[${variantIndex}]`),
@@ -1003,6 +1010,35 @@ function normalizeUnion(raw: unknown, context: TcgcContext, index: number) {
       context,
       `union:${unionIdentity}`,
     ),
+  };
+}
+
+const TCGC_USAGE_FLAGS = [
+  ["Input", 1 << 1],
+  ["Output", 1 << 2],
+  ["ApiVersionEnum", 1 << 3],
+  ["JsonMergePatch", 1 << 4],
+  ["MultipartFormData", 1 << 5],
+  ["Spread", 1 << 6],
+  ["Json", 1 << 8],
+  ["Xml", 1 << 9],
+  ["Exception", 1 << 10],
+  ["LroInitial", 1 << 11],
+  ["LroPolling", 1 << 12],
+  ["LroFinalEnvelope", 1 << 13],
+  ["External", 1 << 14],
+] as const;
+
+const TCGC_KNOWN_USAGE_MASK = TCGC_USAGE_FLAGS.reduce((mask, [, value]) => mask | value, 0);
+
+export function decodeTcgcUsage(value: unknown): TcgcUsageDetails | undefined {
+  if (typeof value !== "number" || !Number.isSafeInteger(value) || value < 0) return undefined;
+  return {
+    value,
+    flags: TCGC_USAGE_FLAGS.filter(([, flag]) => (value & flag) !== 0).map(([name]) => name),
+    input: (value & (1 << 1)) !== 0,
+    output: (value & (1 << 2)) !== 0,
+    unknownBits: value & ~TCGC_KNOWN_USAGE_MASK,
   };
 }
 
