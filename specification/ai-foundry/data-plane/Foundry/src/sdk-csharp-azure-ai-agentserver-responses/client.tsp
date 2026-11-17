@@ -1128,26 +1128,24 @@ namespace Azure.AI.Projects {
 // inline unions in the spec, so they have no addressable TypeSpec name to map. They stay
 // Azure-generated and are converted at the call sites that hand them to OpenAI types.
 
-// The custom-tool-call items have no counterpart in the OpenAI library, so they are emitted
-// here as `ResponseItem` subtypes. The `OutputItem` base is alternate-typed to
-// `OpenAI.Responses.ResponseItem`, so its derived models are not emitted on their own and
-// must be marked as used explicitly. Rename them to match the other OutputItem* models.
-@@clientName(
+// The custom-tool-call items map to the OpenAI library's own item types. Azure-only fields
+// (namespace, caller, async) are exposed through extension accessors over their JsonPatch.
+@@alternateType(
   OpenAI.CustomToolCallResource,
-  "OutputItemCustomToolCall",
+  {
+    identity: "OpenAI.Responses.CustomToolCallItem",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
-@@clientName(
+@@alternateType(
   OpenAI.CustomToolCallOutputResource,
-  "OutputItemCustomToolCallOutput",
-  "csharp"
-);
-@@access(OpenAI.CustomToolCallResource, Access.public, "csharp");
-@@access(OpenAI.CustomToolCallOutputResource, Access.public, "csharp");
-@@usage(OpenAI.CustomToolCallResource, Usage.input | Usage.output, "csharp");
-@@usage(
-  OpenAI.CustomToolCallOutputResource,
-  Usage.input | Usage.output,
+  {
+    identity: "OpenAI.Responses.CustomToolCallOutputItem",
+    package: "OpenAI",
+    minVersion: "2.12.0",
+  },
   "csharp"
 );
 
@@ -1203,14 +1201,6 @@ namespace Azure.AI.Projects {
 // so consumers opt in to the OpenAI experiment rather than to a separate AgentServer one.
 // Template instances (AgentsPagedResult<OpenAI.OutputItem>) and anonymous operation responses
 // cannot be targeted by augment decorators; their members still get targeted suppressions.
-@@TypeSpec.HttpClient.experimental(
-  OpenAI.CustomToolCallResource,
-  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
-);
-@@TypeSpec.HttpClient.experimental(
-  OpenAI.CustomToolCallOutputResource,
-  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
-);
 @@TypeSpec.HttpClient.experimental(
   OpenAI.CompactResource,
   #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
@@ -1408,11 +1398,11 @@ namespace Azure.AI.Projects {
 // OpenAI does not model status on MCP tool calls.
 @@access(OpenAI.MCPToolCallStatus, Access.public, "csharp");
 
-// OutputItemCustomToolCall(Output).Status use OpenAI's CustomToolCallStatus and CustomToolCallOutputStatus
-// (custom code), so these enums are only used by the generated serialization.
+// The custom tool call items map to OpenAI's types, so these enums are only used by the generated
+// serialization.
 @@access(OpenAI.FunctionCallStatus, Access.internal, "csharp");
 @@access(OpenAI.FunctionCallOutputStatusEnum, Access.internal, "csharp");
 
 // ToolCallCaller (DirectToolCallCaller, ProgramToolCallCaller) and the *Param variants stay public:
-// OutputItemCustomToolCall(Output).Caller and the ItemField* tool call models expose them, and the
+// the CustomToolCallItem/CustomToolCallOutputItem Caller extension accessors expose them, and the
 // OpenAI SDK's caller types are internal, so there is no public @@alternateType target.
