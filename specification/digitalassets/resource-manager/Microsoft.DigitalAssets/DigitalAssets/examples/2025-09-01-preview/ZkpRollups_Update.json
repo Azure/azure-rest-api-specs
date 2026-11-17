@@ -1,6 +1,6 @@
 {
   "operationId": "ZkpRollups_Update",
-  "title": "UpdateZkpRollup",
+  "title": "UpdateZkpRollupTagsIdentityAndBootNode",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "testrg",
@@ -9,6 +9,14 @@
     "properties": {
       "tags": {
         "env": "test"
+      },
+      "identity": {
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/additionalReader": null
+        }
+      },
+      "properties": {
+        "bootNodeIp": "10.0.0.4"
       }
     }
   },
@@ -52,7 +60,7 @@
           ],
           "serviceVpnPublicIp": "20.62.129.44",
           "serviceVpnAddressSpace": "10.160.0.0/21",
-          "bootNodeId": "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "bootNodeId": "79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8",
           "bootNodeIp": "10.0.0.4",
           "bootNodeP2pPort": 30303,
           "bootNodeRpcPort": 8545,
@@ -65,6 +73,13 @@
             "validUntil": "2026-09-18T14:32:00Z"
           }
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DigitalAssets/locations/eastus/operationStatuses/11111111-1111-1111-1111-111111111111?api-version=2025-09-01-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DigitalAssets/locations/eastus/operationStatuses/11111111-1111-1111-1111-111111111111?api-version=2025-09-01-preview",
+        "Retry-After": 30
       }
     }
   }

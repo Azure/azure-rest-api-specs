@@ -26,19 +26,12 @@ model PartitionProperties {
   operationalStatus?: OperationalStatus;
 }
 
-@doc("Tags-only update for a partition.")
-model PartitionTagsUpdate {
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null clears resource tags; omission preserves them."
-  @doc("Replacement resource tags. Omit to preserve existing tags; null or an empty object clears all tags.")
-  tags?: Record<string> | null;
-}
-
 @armResourceOperations(Partition)
 interface Partitions {
   get is ArmResourceRead<Partition>;
   @doc("Creates or replaces a partition.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Partition>;
-  update is ArmCustomPatchSync<Partition, PartitionTagsUpdate>;
+  update is ArmCustomPatchSync<Partition>;
   delete is ArmResourceDeleteWithoutOkAsync<
     Partition,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &

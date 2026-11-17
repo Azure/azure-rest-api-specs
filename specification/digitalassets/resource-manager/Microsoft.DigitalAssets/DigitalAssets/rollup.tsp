@@ -11,19 +11,21 @@ scalar EvmContractAddress extends string;
 
 @doc("Details of the DigitalAssets ZkpRollup.")
 model ZkpRollupProperties {
-  @doc("Rollup-level list of token owner account addresses used for auto-discovery.")
+  @doc("Rollup-level owner accounts used for contract discovery. Updates affect future discovery after configuration is applied; existing checkpoints and discovered contracts are preserved.")
   @minItems(1)
   @maxItems(100)
   tokenOwnerAccounts: EvmContractAddress[];
 
-  @doc("The fully qualified resource ID of the customer Key Vault used to resolve Besu node private keys.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The fully qualified resource ID of the customer Key Vault used to resolve Besu node private keys. Required on PUT and immutable after creation.")
   keyVaultId: armResourceIdentifier<[
     {
       type: "Microsoft.KeyVault/vaults";
     }
   ]>;
 
-  @doc("User-assigned managed identity resource ID used for customer Key Vault reads.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("User-assigned managed identity resource ID used for customer Key Vault reads. Immutable after creation; this identity must remain attached to the rollup.")
   keyVaultUserAssignedIdentityResourceId: armResourceIdentifier<[
     {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
@@ -37,11 +39,11 @@ model ZkpRollupProperties {
   blocksPerProof?: int32 = 2;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("Public IPv4 address of the customer's VPN device. Set on create or replace; not updatable via PATCH.")
+  @doc("Public IPv4 address of the customer's VPN device. Set on create and immutable afterward.")
   customerVpnPublicIp?: string;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("Customer on-premises address prefixes reachable across the VPN tunnel (the Local Network Gateway address space). Must not overlap the RP-reserved 10.128.0.0/10 block. Set on create or replace; not updatable via PATCH.")
+  @doc("Customer on-premises address prefixes reachable across the VPN tunnel (the Local Network Gateway address space). Must not overlap the RP-reserved 10.128.0.0/10 block. Set on create and immutable afterward.")
   @maxItems(25)
   customerOnPremAddressPrefixes?: string[];
 
@@ -53,22 +55,18 @@ model ZkpRollupProperties {
   @doc("Read-only address space (a /21 CIDR, e.g. 10.160.0.0/21) assigned to this service's end of the VPN tunnel. Populated once the service's VPN tunnel is provisioned.")
   serviceVpnAddressSpace?: string;
 
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("Enode id (public key) of the customer's L2 Besu boot node. Required on PUT. Set only on initial creation; cannot be changed by PUT or PATCH.")
+  @doc("Enode id (public key) of the customer's L2 Besu boot node. Required on PUT. Updates reconcile the existing partition and must remain on the same ledger.")
   bootNodeId: string;
 
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("Private IPv4 address of the customer's L2 Besu boot node. Required on PUT. Set only on initial creation; cannot be changed by PUT or PATCH.")
+  @doc("Private IPv4 address of the customer's L2 Besu boot node. Required on PUT. Updates reconcile the existing partition.")
   bootNodeIp: string;
 
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("P2P (devp2p) port of the customer's L2 Besu boot node. Required on PUT. Set only on initial creation; cannot be changed by PUT or PATCH.")
+  @doc("P2P (devp2p) port of the customer's L2 Besu boot node. Required on PUT. Updates reconcile the existing partition.")
   @minValue(1)
   @maxValue(65535)
   bootNodeP2pPort: int32;
 
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("JSON-RPC (HTTP) port of the customer's L2 Besu boot node. Required on PUT. Set only on initial creation; cannot be changed by PUT or PATCH.")
+  @doc("JSON-RPC (HTTP) port of the customer's L2 Besu boot node. Required on PUT. Updates reconcile the existing partition.")
   @minValue(1)
   @maxValue(65535)
   bootNodeRpcPort: int32;
@@ -90,13 +88,43 @@ model ZkpRollupProperties {
   operationalStatus?: OperationalStatus;
 }
 
-@doc("Tags and managed identity update for a ZkpRollup. Service configuration cannot be updated through PATCH.")
-model ZkpRollupUpdate {
-  ...ManagedServiceIdentityProperty;
+@doc("Properties that may be updated via PATCH on a ZkpRollup.")
+model ZkpRollupPatchProperties {
+  @doc("Replacement list of owner accounts for future contract discovery. Omission preserves the current list; existing checkpoints and discovered contracts are retained.")
+  @minItems(1)
+  @maxItems(100)
+  tokenOwnerAccounts?: EvmContractAddress[];
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null clears resource tags; omission preserves them."
-  @doc("Replacement resource tags. Omit to preserve existing tags; null or an empty object clears all tags.")
-  tags?: Record<string> | null;
+  @doc("Replacement boot-node public key on the same ledger. Omission preserves the current value.")
+  bootNodeId?: string;
+
+  @doc("Replacement boot-node IPv4 address. Omission preserves the current value.")
+  bootNodeIp?: string;
+
+  @doc("Replacement boot-node P2P port. Omission preserves the current value.")
+  @minValue(1)
+  @maxValue(65535)
+  bootNodeP2pPort?: int32;
+
+  @doc("Replacement boot-node JSON-RPC port. Omission preserves the current value.")
+  @minValue(1)
+  @maxValue(65535)
+  bootNodeRpcPort?: int32;
+}
+
+@doc("Partial managed-identity update. Omitted attachments remain; object entries add or retain an identity and null entries remove it. The selected Key Vault identity must remain attached.")
+model ZkpRollupIdentityUpdate
+  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedServiceIdentity>>;
+
+@doc("Rollup update payload. Omitted fields are preserved. Configuration changes may restart partition containers; tags and identity-only changes complete synchronously.")
+model ZkpRollupUpdate {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  @doc("Managed-identity attachment changes.")
+  identity?: ZkpRollupIdentityUpdate;
+
+  @doc("Mutable rollup configuration fields.")
+  properties?: ZkpRollupPatchProperties;
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -118,7 +146,14 @@ interface ZkpRollups {
   get is ArmResourceRead<ZkpRollup>;
   @doc("Creates or replaces a ZKP rollup.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ZkpRollup>;
-  update is ArmCustomPatchSync<ZkpRollup, ZkpRollupUpdate>;
+  @doc("Updates rollup tags, identity attachments or configuration. Metadata-only updates complete synchronously. Configuration changes reconcile the rollup and existing partition asynchronously, preserving checkpoints and discovered contracts.")
+  @finalOperation(ZkpRollups.get)
+  update is ArmCustomPatchAsync<
+    ZkpRollup,
+    ZkpRollupUpdate,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ZkpRollup> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
   delete is ArmResourceDeleteWithoutOkAsync<
     ZkpRollup,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &

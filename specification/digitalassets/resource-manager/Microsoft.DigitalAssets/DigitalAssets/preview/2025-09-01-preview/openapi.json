@@ -292,7 +292,7 @@
         "tags": [
           "ZkpRollups"
         ],
-        "description": "Update a ZkpRollup",
+        "description": "Updates rollup tags, identity attachments or configuration. Metadata-only updates complete synchronously. Configuration changes reconcile the rollup and existing partition asynchronously, preserving checkpoints and discovered contracts.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -328,6 +328,25 @@
               "$ref": "#/definitions/ZkpRollup"
             }
           },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -336,10 +355,17 @@
           }
         },
         "x-ms-examples": {
-          "UpdateZkpRollup": {
+          "UpdateZkpRollupConfiguration": {
+            "$ref": "../../examples/2025-09-01-preview/ZkpRollups_UpdateConfiguration.json"
+          },
+          "UpdateZkpRollupTagsIdentityAndBootNode": {
             "$ref": "../../examples/2025-09-01-preview/ZkpRollups_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "ZkpRollups_Delete",
@@ -816,12 +842,11 @@
     },
     "PartitionTagsUpdate": {
       "type": "object",
-      "description": "Tags-only update for a partition.",
+      "description": "The type used for updating tags in Partition resources.",
       "properties": {
         "tags": {
           "type": "object",
-          "description": "Replacement resource tags. Omit to preserve existing tags; null or an empty object clears all tags.",
-          "x-nullable": true,
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
@@ -902,6 +927,24 @@
         }
       ]
     },
+    "ZkpRollupIdentityUpdate": {
+      "type": "object",
+      "description": "Partial managed-identity update. Omitted attachments remain; object entries add or retain an identity and null entries remove it. The selected Key Vault identity must remain attached.",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity",
+            "x-nullable": true
+          }
+        }
+      }
+    },
     "ZkpRollupListResult": {
       "type": "object",
       "description": "The response of a ZkpRollup list operation.",
@@ -923,13 +966,50 @@
         "value"
       ]
     },
+    "ZkpRollupPatchProperties": {
+      "type": "object",
+      "description": "Properties that may be updated via PATCH on a ZkpRollup.",
+      "properties": {
+        "tokenOwnerAccounts": {
+          "type": "array",
+          "description": "Replacement list of owner accounts for future contract discovery. Omission preserves the current list; existing checkpoints and discovered contracts are retained.",
+          "minItems": 1,
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/EvmContractAddress"
+          }
+        },
+        "bootNodeId": {
+          "type": "string",
+          "description": "Replacement boot-node public key on the same ledger. Omission preserves the current value."
+        },
+        "bootNodeIp": {
+          "type": "string",
+          "description": "Replacement boot-node IPv4 address. Omission preserves the current value."
+        },
+        "bootNodeP2pPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Replacement boot-node P2P port. Omission preserves the current value.",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "bootNodeRpcPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Replacement boot-node JSON-RPC port. Omission preserves the current value.",
+          "minimum": 1,
+          "maximum": 65535
+        }
+      }
+    },
     "ZkpRollupProperties": {
       "type": "object",
       "description": "Details of the DigitalAssets ZkpRollup.",
       "properties": {
         "tokenOwnerAccounts": {
           "type": "array",
-          "description": "Rollup-level list of token owner account addresses used for auto-discovery.",
+          "description": "Rollup-level owner accounts used for contract discovery. Updates affect future discovery after configuration is applied; existing checkpoints and discovered contracts are preserved.",
           "minItems": 1,
           "maxItems": 100,
           "items": {
@@ -939,7 +1019,11 @@
         "keyVaultId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The fully qualified resource ID of the customer Key Vault used to resolve Besu node private keys.",
+          "description": "The fully qualified resource ID of the customer Key Vault used to resolve Besu node private keys. Required on PUT and immutable after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -951,7 +1035,11 @@
         "keyVaultUserAssignedIdentityResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "User-assigned managed identity resource ID used for customer Key Vault reads.",
+          "description": "User-assigned managed identity resource ID used for customer Key Vault reads. Immutable after creation; this identity must remain attached to the rollup.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -974,7 +1062,7 @@
         },
         "customerVpnPublicIp": {
           "type": "string",
-          "description": "Public IPv4 address of the customer's VPN device. Set on create or replace; not updatable via PATCH.",
+          "description": "Public IPv4 address of the customer's VPN device. Set on create and immutable afterward.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -982,7 +1070,7 @@
         },
         "customerOnPremAddressPrefixes": {
           "type": "array",
-          "description": "Customer on-premises address prefixes reachable across the VPN tunnel (the Local Network Gateway address space). Must not overlap the RP-reserved 10.128.0.0/10 block. Set on create or replace; not updatable via PATCH.",
+          "description": "Customer on-premises address prefixes reachable across the VPN tunnel (the Local Network Gateway address space). Must not overlap the RP-reserved 10.128.0.0/10 block. Set on create and immutable afterward.",
           "maxItems": 25,
           "items": {
             "type": "string"
@@ -1004,41 +1092,25 @@
         },
         "bootNodeId": {
           "type": "string",
-          "description": "Enode id (public key) of the customer's L2 Besu boot node. Required on PUT. Set only on initial creation; cannot be changed by PUT or PATCH.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "Enode id (public key) of the customer's L2 Besu boot node. Required on PUT. Updates reconcile the existing partition and must remain on the same ledger."
         },
         "bootNodeIp": {
           "type": "string",
-          "description": "Private IPv4 address of the customer's L2 Besu boot node. Required on PUT. Set only on initial creation; cannot be changed by PUT or PATCH.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "Private IPv4 address of the customer's L2 Besu boot node. Required on PUT. Updates reconcile the existing partition."
         },
         "bootNodeP2pPort": {
           "type": "integer",
           "format": "int32",
-          "description": "P2P (devp2p) port of the customer's L2 Besu boot node. Required on PUT. Set only on initial creation; cannot be changed by PUT or PATCH.",
+          "description": "P2P (devp2p) port of the customer's L2 Besu boot node. Required on PUT. Updates reconcile the existing partition.",
           "minimum": 1,
-          "maximum": 65535,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "maximum": 65535
         },
         "bootNodeRpcPort": {
           "type": "integer",
           "format": "int32",
-          "description": "JSON-RPC (HTTP) port of the customer's L2 Besu boot node. Required on PUT. Set only on initial creation; cannot be changed by PUT or PATCH.",
+          "description": "JSON-RPC (HTTP) port of the customer's L2 Besu boot node. Required on PUT. Updates reconcile the existing partition.",
           "minimum": 1,
-          "maximum": 65535,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "maximum": 65535
         },
         "serviceBusEndpoint": {
           "type": "string",
@@ -1082,19 +1154,22 @@
     },
     "ZkpRollupUpdate": {
       "type": "object",
-      "description": "Tags and managed identity update for a ZkpRollup. Service configuration cannot be updated through PATCH.",
+      "description": "Rollup update payload. Omitted fields are preserved. Configuration changes may restart partition containers; tags and identity-only changes complete synchronously.",
       "properties": {
-        "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
         "tags": {
           "type": "object",
-          "description": "Replacement resource tags. Omit to preserve existing tags; null or an empty object clears all tags.",
-          "x-nullable": true,
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "identity": {
+          "$ref": "#/definitions/ZkpRollupIdentityUpdate",
+          "description": "Managed-identity attachment changes."
+        },
+        "properties": {
+          "$ref": "#/definitions/ZkpRollupPatchProperties",
+          "description": "Mutable rollup configuration fields."
         }
       }
     }
