@@ -170,6 +170,7 @@ op regenerateKeyCustom(
 @@clientLocation(checkDomainAvailability, "ManagementClient", "go");
 @@clientLocation(checkSkuAvailability, "ManagementClient", "go");
 @@clientLocation(calculateModelCapacity, "ManagementClient", "go");
+@@clientName(AttachedAksClusters, "AttachedAKSClusters", "go");
 
 @@alternateType(
   Azure.ResourceManager.CommonTypes.Resource.id,
