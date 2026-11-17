@@ -36,8 +36,10 @@ beforeEach(async () => {
   // Resolve pnpm's links before exposing packages through the fixture's Windows junctions.
   for (const packageName of [
     "@typespec/compiler",
+    "@typespec/http",
     "@azure-tools/typespec-autorest",
     "@azure-tools/typespec-azure-core",
+    "@azure-tools/typespec-azure-resource-manager",
     "@azure-tools/typespec-azure-rulesets",
     "@azure-tools/typespec-azure-rulesets-original",
     "@azure-tools/typespec-client-generator-core",
@@ -84,6 +86,58 @@ async function run(...args: string[]): Promise<{ code: number; stdout: string; s
     return { code: error.code, stdout: error.stdout, stderr: error.stderr };
   }
 }
+
+it.each(["data-plane", "resource-manager"])(
+  "enforces a 200 list response with the %s and client-sdk rulesets",
+  async (profile) => {
+    const folder = join(root, project);
+    await writeFile(
+      join(folder, "tspconfig.yaml"),
+      `linter:\n  extends:\n    - "@azure-tools/typespec-azure-rulesets/${profile}"\n    - "@azure-tools/typespec-azure-rulesets/client-sdk"\n`,
+    );
+    const source = `import "@typespec/http";
+using TypeSpec.Http;
+
+/** A page of widgets. */
+model WidgetPage {
+  /** The widgets in this page. */
+  @pageItems widgets: string[];
+}
+
+/** Widget operations. */
+${
+  profile === "resource-manager"
+    ? '#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Synthetic test interface."'
+    : ""
+}
+interface Widgets {
+  /** List widgets. */
+  ${
+    profile === "data-plane"
+      ? '#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Synthetic test operation."'
+      : `#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "Synthetic test operation."
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "Synthetic test operation."`
+  }
+  @route("/widgets")
+  @get
+  @list
+  op listWidgets(): {
+    @statusCode status: STATUS;
+    @body body: WidgetPage;
+  };
+}
+`;
+    const rule = "@azure-tools/typespec-azure-core/list-operation-missing-200-response";
+    await writeFile(join(folder, "main.tsp"), source.replace("STATUS", "201"));
+    const missing200 = await compileTypeSpec(folder, { noEmit: true });
+    expect(missing200.success).toBe(false);
+    expect(JSON.stringify(missing200.diagnostics)).toContain(rule);
+
+    await writeFile(join(folder, "main.tsp"), source.replace("STATUS", "200"));
+    const with200 = await compileTypeSpec(folder, { noEmit: true });
+    expect(with200.success, JSON.stringify(with200.diagnostics)).toBe(true);
+  },
+);
 
 it("prints only a final summary by default and compact rule statuses with --verbose", async () => {
   const quiet = await run(project);
