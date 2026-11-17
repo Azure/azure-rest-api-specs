@@ -2097,6 +2097,9 @@
         "enableLoopbackAudio": {
           "description": "Enables loopback audio functionality for the call.",
           "type": "boolean"
+        },
+        "dtmfOptions": {
+          "$ref": "#/definitions/DtmfConfigurationOptions"
         }
       },
       "additionalProperties": false
@@ -2216,6 +2219,9 @@
         },
         "answeredFor": {
           "$ref": "#/definitions/PhoneNumberIdentifierModel"
+        },
+        "dtmfConfigurationOptions": {
+          "$ref": "#/definitions/DtmfConfigurationOptions"
         }
       },
       "additionalProperties": false
@@ -2816,6 +2822,9 @@
         "enableLoopbackAudio": {
           "description": "Enables loopback audio functionality for the call.",
           "type": "boolean"
+        },
+        "dtmfOptions": {
+          "$ref": "#/definitions/DtmfConfigurationOptions"
         }
       },
       "additionalProperties": false
@@ -2840,6 +2849,20 @@
         },
         "teamsPhoneCallDetails": {
           "$ref": "#/definitions/TeamsPhoneCallDetails"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DtmfConfigurationOptions": {
+      "description": "Represents the configuration for DTMF functionality in calls.",
+      "required": [
+        "enableDtmfBroadcastInGroupCalls"
+      ],
+      "type": "object",
+      "properties": {
+        "enableDtmfBroadcastInGroupCalls": {
+          "description": "Enabling DTMF broadcast allows DTMF tones to be transmitted during group calls.",
+          "type": "boolean"
         }
       },
       "additionalProperties": false
