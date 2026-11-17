@@ -1395,8 +1395,10 @@ namespace Azure.AI.Projects {
 );
 
 // `McpToolCallItem.Status` (ResponseItemAttributionExtensions) exposes this enum because
-// OpenAI does not model status on MCP tool calls.
+// OpenAI does not model status on MCP tool calls. Renamed to follow .NET acronym casing and
+// match OpenAI's `McpToolCallItem`.
 @@access(OpenAI.MCPToolCallStatus, Access.public, "csharp");
+@@clientName(OpenAI.MCPToolCallStatus, "McpToolCallStatus", "csharp");
 
 // The custom tool call items map to OpenAI's types, so these enums are only used by the generated
 // serialization.
