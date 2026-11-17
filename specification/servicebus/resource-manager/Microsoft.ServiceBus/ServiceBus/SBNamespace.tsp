@@ -94,13 +94,11 @@ interface SBNamespaces {
   @sharedRoute
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is ArmCustomPatchAsync<
     SBNamespace,
     PatchModel = SBNamespaceUpdateParameters,
-    Response =
-      | ArmResponse<SBNamespace>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SBNamespace> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = SBNamespace> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = ErrorResponse
   >;
 
