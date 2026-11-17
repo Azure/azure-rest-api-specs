@@ -1,0 +1,72 @@
+{
+  "title": "ValidationTestRuns_CreateOrUpdate_MaximumSet",
+  "operationId": "ValidationTestRuns_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgvalidate",
+    "cloudValidationName": "cvtest01",
+    "validationExecutionPlanName": "veptest01",
+    "executionPlanRunName": "veprun01",
+    "validationTestRunName": "vtrun01",
+    "resource": {}
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "status": "Completed",
+          "provisioningState": "Succeeded",
+          "startedAt": "2026-06-01T11:52:25.394Z",
+          "reportedAt": "2026-06-01T11:53:25.394Z",
+          "completedAt": "2026-06-01T11:54:25.394Z",
+          "testId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.PlatformValidation/validationTests/validation-test-001",
+          "inputsJson": "{\"region\":\"eastus\",\"sku\":\"standard\"}",
+          "passDetails": [
+            {
+              "resultCode": "AllChecksPassed",
+              "testName": "ConnectivityTest",
+              "resultDetails": "All checks completed successfully."
+            }
+          ]
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgvalidate/providers/Microsoft.PlatformValidation/cloudValidations/cvtest01/validationExecutionPlans/veptest01/executionPlanRuns/veprun01/validationTestRuns/vtrun01",
+        "name": "vtrun01",
+        "type": "Microsoft.PlatformValidation/cloudValidations/validationExecutionPlans/executionPlanRuns/validationTestRuns",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-06-01T11:52:22.926Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-06-01T11:54:25.394Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.PlatformValidation/locations/eastus/operationStatuses/11111111-2222-3333-4444-555555555555?api-version=2026-08-01-preview",
+        "Retry-After": 30
+      },
+      "body": {
+        "properties": {
+          "status": "Scheduled",
+          "provisioningState": "Succeeded",
+          "testId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.PlatformValidation/validationTests/validation-test-001",
+          "inputsJson": "{\"region\":\"eastus\",\"sku\":\"standard\"}"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgvalidate/providers/Microsoft.PlatformValidation/cloudValidations/cvtest01/validationExecutionPlans/veptest01/executionPlanRuns/veprun01/validationTestRuns/vtrun01",
+        "name": "vtrun01",
+        "type": "Microsoft.PlatformValidation/cloudValidations/validationExecutionPlans/executionPlanRuns/validationTestRuns",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-06-01T11:52:22.926Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-06-01T11:52:22.926Z"
+        }
+      }
+    }
+  }
+}
