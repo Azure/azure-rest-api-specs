@@ -256,7 +256,7 @@ model AzureCustomVoice extends AzureVoice {
   @maxValue(1)
   temperature?: float32;
 
-  /** URL of a custom lexicon file for pronunciation customization. */
+  /** URL of a custom lexicon (PLS) file for pronunciation customization. Accepts an HTTP(S) URL or an inline base64 data URL, for example `data:application/pls+xml;base64,<base64-encoded PLS>`. */
   custom_lexicon_url?: string;
 
   /** URL of a custom text normalization endpoint. */
@@ -326,7 +326,7 @@ model AzureStandardVoice extends AzureVoice {
   @maxValue(1)
   temperature?: float32;
 
-  /** URL of a custom lexicon file for pronunciation customization. */
+  /** URL of a custom lexicon (PLS) file for pronunciation customization. Accepts an HTTP(S) URL or an inline base64 data URL, for example `data:application/pls+xml;base64,<base64-encoded PLS>`. */
   custom_lexicon_url?: string;
 
   /** URL of a custom text normalization endpoint. */
@@ -398,7 +398,7 @@ model AzurePersonalVoice extends AzureVoice {
   /** Underlying neural model to use for personal voice. */
   `model`: PersonalVoiceModels;
 
-  /** URL of a custom lexicon file for pronunciation customization. */
+  /** URL of a custom lexicon (PLS) file for pronunciation customization. Accepts an HTTP(S) URL or an inline base64 data URL, for example `data:application/pls+xml;base64,<base64-encoded PLS>`. */
   custom_lexicon_url?: string;
 
   /** URL of a custom text normalization endpoint. */
@@ -490,7 +490,7 @@ model AzureAvatarVoiceSyncVoice extends AzureVoice {
   @maxValue(1)
   temperature?: float32;
 
-  /** URL of a custom lexicon file for pronunciation customization. */
+  /** URL of a custom lexicon (PLS) file for pronunciation customization. Accepts an HTTP(S) URL or an inline base64 data URL, for example `data:application/pls+xml;base64,<base64-encoded PLS>`. */
   custom_lexicon_url?: string;
 
   /** URL of a custom text normalization endpoint. */
