@@ -2790,7 +2790,7 @@
           {
             "name": "Enabled",
             "value": "Enabled",
-            "description": "The service automatically promotes a cross-region replica when it detects a regional outage on the primary cluster. Unreplicated writes can be lost."
+            "description": "The service automatically promotes a cross-region replica when it detects a regional outage on the primary cluster. Writes not yet replicated to the replica cluster can be lost."
           },
           {
             "name": "Disabled",
@@ -2813,10 +2813,7 @@
             "create"
           ]
         }
-      },
-      "required": [
-        "mode"
-      ]
+      }
     },
     "ShardingProperties": {
       "type": "object",

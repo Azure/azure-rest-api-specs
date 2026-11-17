@@ -244,7 +244,7 @@ model MongoClusterProperties {
 model ServiceManagedFailoverProperties {
   /** Whether service-managed failover is enabled for the cluster. */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  mode: ServiceManagedFailoverMode;
+  mode?: ServiceManagedFailoverMode;
 }
 
 /** The service-managed failover modes for a cluster. */
@@ -252,7 +252,7 @@ model ServiceManagedFailoverProperties {
 union ServiceManagedFailoverMode {
   string,
 
-  /** The service automatically promotes a cross-region replica when it detects a regional outage on the primary cluster. Unreplicated writes can be lost. */
+  /** The service automatically promotes a cross-region replica when it detects a regional outage on the primary cluster. Writes not yet replicated to the replica cluster can be lost. */
   Enabled: "Enabled",
 
   /** The service does not automatically promote a cross-region replica during a regional outage. */
