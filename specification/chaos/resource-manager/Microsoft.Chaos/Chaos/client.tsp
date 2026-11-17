@@ -4,10 +4,27 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Chaos;
 
+// Go
+@@clientName(
+  WorkspaceDiscoveryWarningReason.RbacValidationFailed,
+  "RBACValidationFailed",
+  "go"
+);
+
 // csharp
+@@alternateType(
+  WorkspaceCustomerManagedKeyOnboarding.applicationId,
+  Azure.Core.uuid,
+  "csharp"
+);
 @@clientName(
   WorkspaceCustomerManagedKeyEncryption.keyEncryptionKeyUrl,
   "keyEncryptionKeyUri",
+  "csharp"
+);
+@@clientName(
+  WorkspaceCustomerManagedKeyEncryptionPatch,
+  "WorkspaceCustomerManagedKeyEncryptionPatch",
   "csharp"
 );
 @@clientName(
@@ -25,6 +42,11 @@ using Microsoft.Chaos;
 @@clientName(ScenarioTemplate, "ChaosScenarioTemplate", "csharp");
 @@clientName(ScenarioTemplateVersion, "ChaosScenarioTemplateVersion", "csharp");
 @@clientName(ScenarioRun, "ChaosScenarioRun", "csharp");
+@@clientName(
+  ScenarioRunSummaryResource,
+  "ScenarioRunResourceSummary",
+  "csharp"
+);
 @@clientName(ScenarioConfiguration, "ChaosScenarioConfiguration", "csharp");
 @@clientName(DiscoveredResource, "ChaosDiscovered", "csharp");
 @@clientName(PrivateAccess, "ChaosPrivateAccess", "csharp");
@@ -96,11 +118,7 @@ using Microsoft.Chaos;
 @@clientName(PermissionsFixProperties.whatIfMode, "IsWhatIfMode", "csharp");
 @@clientName(Recommendation, "ChaosScenarioRecommendation", "csharp");
 @@clientName(Validation, "ChaosScenarioValidationData", "csharp");
-@@clientName(
-  WorkspaceEvaluation,
-  "ChaosWorkspaceTemplateEvaluationData",
-  "csharp"
-);
+@@clientName(WorkspaceEvaluation, "ChaosWorkspaceTemplateEvaluation", "csharp");
 @@clientName(
   LegacyWorkspaceEvaluation,
   "ChaosWorkspaceEvaluationData",
@@ -129,6 +147,13 @@ using Microsoft.Chaos;
 
 // python
 @@clientName(Microsoft.Chaos, "ChaosManagementClient", "python");
+
+// go
+@@clientName(
+  WorkspaceDiscoveryWarningReason.RbacValidationFailed,
+  exact("RBACValidationFailed"),
+  "go"
+);
 
 // java
 @@clientName(Microsoft.Chaos, "ChaosManagementClient", "java");

@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-core";
 import "../../main.tsp";
 import "../../recoveryPlans.tsp";
 import "./recoveryResource.tsp";
+import "./recoveryConfigProfile.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
@@ -109,6 +110,181 @@ model RecoveryPlanActionBaseResponse {
   @doc("JobId of the job triggered for Recovery Orchestration Plan.")
   jobId: string;
 }
+
+@added(Versions.v2026_12_30_preview)
+@doc("Request options shared by Restore and ValidateForRestore. Selections and recovery point policies apply only to this request and do not modify the recovery plan or its saved recovery configuration profiles.")
+model RecoveryPlanRestoreContent {
+  @added(Versions.v2026_12_30_preview)
+  @doc("An optional filter over the recovery plan's included resource catalog. Omission selects all included resources.")
+  resourceFilter?: RestoreResourceFilter;
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("The operation-wide recovery point policy. An explicit resource recoveryPointId or pointInTime takes precedence, followed by a recovery group policy, this operation policy, the associated profile policy, and finally Latest. All overrides are transient and do not modify saved profiles.")
+  recoveryPointPolicy?: RecoveryPointPolicy;
+}
+
+@added(Versions.v2026_12_30_preview)
+@doc("Whether matching resources are included in or excluded from this restore request.")
+union RestoreFilterType {
+  @added(Versions.v2026_12_30_preview)
+  @doc("Selects the union of resources matching the supplied recovery resource, workload, and recovery group selectors within the plan's included resource catalog.")
+  Include: "Include",
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("Removes the union of resources matching the supplied selectors from the plan's included resource catalog.")
+  Exclude: "Exclude",
+
+  string,
+}
+
+@added(Versions.v2026_12_30_preview)
+@doc("Selects included recovery plan resources by resource GUID, workload, or recovery group. Criteria form a union, not an intersection. Exclude removes that union and cannot specify recovery point IDs, point-in-time selections, or recovery group policy overrides.")
+model RestoreResourceFilter {
+  @added(Versions.v2026_12_30_preview)
+  @doc("Whether matching resources are included in or excluded from the request.")
+  filterType: RestoreFilterType;
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("Recovery resource GUID selectors with optional per-resource recovery point IDs or point-in-time selections. Duplicate recoveryResourceId values are not allowed.")
+  @identifiers(#["recoveryResourceId"])
+  recoveryResources?: RecoveryResourcesInput[];
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("Workload selectors combined with the recovery resource and recovery group selectors by union.")
+  workloadTypes?: WorkloadType[];
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("Recovery group selectors and optional request-only recovery point policy overrides. Duplicate recoveryGroupId values are not allowed.")
+  @identifiers(#["recoveryGroupId"])
+  recoveryGroups?: RecoveryGroupsInput[];
+}
+
+@added(Versions.v2026_12_30_preview)
+@doc("Selects a recovery resource within the plan by GUID. The service resolves its backup protected items from the resource catalog. recoveryPointId and pointInTime are alternatives; the service rejects a request containing both for the same resource. Either selection overrides group, operation, and profile policies. When neither is supplied, policy precedence applies. Exclude selectors must omit both.")
+model RecoveryResourcesInput {
+  @added(Versions.v2026_12_30_preview)
+  @doc("The GUID identifying the recovery resource within the selected recovery plan. This is not an Azure resource ID or a backup protected item ID.")
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  recoveryResourceId: string;
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("An optional recovery point name or full recovery point Azure resource ID. The service verifies ownership against the selected resource's backup protected items. Mutually exclusive with pointInTime and not allowed in Exclude filters.")
+  @minLength(1)
+  recoveryPointId?: string;
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("An optional UTC timestamp for point-in-time recovery of the selected resource. Mutually exclusive with recoveryPointId and not allowed in Exclude filters. The service validates that the resource supports point-in-time recovery and that the timestamp is recoverable.")
+  pointInTime?: utcDateTime;
+}
+
+@added(Versions.v2026_12_30_preview)
+@doc("Selects a recovery group in the recovery plan, with an optional request-only recovery point policy override. Used by Restore, ValidateForRestore, and FetchRecoveryPoints.")
+model RecoveryGroupsInput {
+  @added(Versions.v2026_12_30_preview)
+  @doc("The GUID identifying the recovery group within the recovery plan.")
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  recoveryGroupId: string;
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("A request-only recovery point policy for the selected recovery group. An explicit resource recovery point selection takes precedence; this policy overrides operation and profile defaults. Restore and ValidateForRestore Exclude filters cannot specify a recovery group policy.")
+  recoveryPointPolicy?: RecoveryPointPolicy;
+}
+
+@added(Versions.v2026_12_30_preview)
+@doc("Optional scope and request-only recovery point policy overrides for fetching recovery points. Overrides apply only to this request and do not modify the recovery plan or its saved recovery configuration profiles.")
+model FetchRecoveryPointsRequest {
+  @added(Versions.v2026_12_30_preview)
+  @doc("The request-wide recovery point policy override.")
+  recoveryPointPolicy?: RecoveryPointPolicy;
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("Selected recovery groups and their optional recovery point policy overrides.")
+  @identifiers(#["recoveryGroupId"])
+  recoveryGroups?: RecoveryGroupsInput[];
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("Selected sets of recovery resources, each with an optional shared recovery point policy override.")
+  @identifiers(#[])
+  recoveryResources?: RecoveryResourcePolicySet[];
+}
+
+@added(Versions.v2026_12_30_preview)
+@doc("Recovery resource selectors that share one optional request-only recovery point policy override.")
+model RecoveryResourcePolicySet {
+  @added(Versions.v2026_12_30_preview)
+  @doc("GUIDs identifying recovery resources within the recovery plan.")
+  recoveryResourceIds: RecoveryResourceGuid[];
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("The recovery point policy override shared by the recovery resources in this set.")
+  recoveryPointPolicy?: RecoveryPointPolicy;
+}
+
+@added(Versions.v2026_12_30_preview)
+@doc("The result of fetching recovery points for a recovery plan.")
+model FetchRecoveryPointsResult {
+  @added(Versions.v2026_12_30_preview)
+  @doc("Selections that correlate recovery resources with their selected recovery points.")
+  @identifiers(#["recoveryResourceId"])
+  recoveryPoints?: RecoveryPointDetails[];
+}
+
+@added(Versions.v2026_12_30_preview)
+@doc("The recovery point selected for a recovery resource.")
+model RecoveryPointDetails {
+  @added(Versions.v2026_12_30_preview)
+  @doc("The GUID identifying the recovery resource within the recovery plan.")
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  recoveryResourceId?: string;
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("The GUID of the recovery group that contains the recovery resource.")
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  recoveryGroupId?: string;
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("The identifier of the selected backup service recovery point. This is a numeric (long) value represented as a string.")
+  recoveryPointId?: string;
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("The UTC time at which the selected recovery point was created.")
+  recoveryPointTime?: utcDateTime;
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("The consistency of the selected recovery point for virtual machine and Azure Files workloads.")
+  recoveryPointType?: RecoveryPointType;
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("The backup mechanism of the selected recovery point for database workloads.")
+  backupType?: BackupType;
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("The optional threat status reported by the backup service.")
+  threatStatus?: string;
+}
+
+@added(Versions.v2026_12_30_preview)
+@doc("The consistency of a recovery point.")
+union RecoveryPointType {
+  @added(Versions.v2026_12_30_preview)
+  @doc("Application-consistent recovery point.")
+  AppConsistent: "AppConsistent",
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("Crash-consistent recovery point.")
+  CrashConsistent: "CrashConsistent",
+
+  @added(Versions.v2026_12_30_preview)
+  @doc("File-system-consistent recovery point.")
+  FileSystemConsistent: "FileSystemConsistent",
+
+  string,
+}
+
+@added(Versions.v2026_12_30_preview)
+@doc("A GUID identifying a recovery resource within a recovery plan.")
+@pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+scalar RecoveryResourceGuid extends string;
 
 @doc("TestFailoverCleanup post action request.")
 model TestFailoverCleanupRequest {
