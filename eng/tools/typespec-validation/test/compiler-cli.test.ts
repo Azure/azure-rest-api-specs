@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 import { promisify, stripVTControlCharacters } from "node:util";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
+import { renderDiagnosticContent } from "../src/diagnostic-content.ts";
 import { compileTypeSpec, formatTypeSpec } from "../src/typespec-compiler.ts";
 
 const exec = promisify(execFile);
@@ -84,6 +85,49 @@ async function run(...args: string[]): Promise<{ code: number; stdout: string; s
     return { code: error.code, stdout: error.stdout, stderr: error.stderr };
   }
 }
+
+it.each(["data-plane", "resource-manager"])(
+  "enforces no-request-body through the %s and client-sdk profiles",
+  async (profile) => {
+    const folder = join(root, project);
+    for (const packageName of ["@typespec/http", "@azure-tools/typespec-azure-resource-manager"]) {
+      await symlink(
+        await realpath(new URL(`../../../../node_modules/${packageName}`, import.meta.url)),
+        join(root, "node_modules", packageName),
+        "junction",
+      );
+    }
+    await writeFile(
+      join(folder, "tspconfig.yaml"),
+      `linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/${profile}"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
+`,
+    );
+    await writeFile(
+      join(folder, "main.tsp"),
+      `import "@typespec/http";
+using TypeSpec.Http;
+
+@route("/get-body") @get op getBody(@body body: string): void;
+@route("/delete-body") @delete op deleteBody(@body body: string): void;
+@route("/get") @get op getWithoutBody(): void;
+@route("/delete") @delete op deleteWithoutBody(): void;
+@route("/post") @post op postBody(@body body: string): void;
+`,
+    );
+
+    const result = await compileTypeSpec(folder, { noEmit: true });
+    const details = result.diagnostics?.[0]?.details;
+    expect(result.success).toBe(false);
+    if (details === undefined) throw new Error("Missing compiler diagnostic details");
+    const output = renderDiagnosticContent(details);
+    expect(output.match(/@azure-tools\/typespec-azure-core\/no-request-body/g)).toHaveLength(2);
+    expect(output).toContain("GET operations must not have a request body");
+    expect(output).toContain("DELETE operations must not have a request body");
+  },
+);
 
 it("prints only a final summary by default and compact rule statuses with --verbose", async () => {
   const quiet = await run(project);
