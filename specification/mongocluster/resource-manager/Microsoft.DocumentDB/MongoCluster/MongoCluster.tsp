@@ -232,6 +232,31 @@ model MongoClusterProperties {
   /** The network bypass mode for the cluster. Setting to 'AzureCosmosDB' allows the Azure Cosmos DB service to bypass network restrictions. */
   @added(Versions.v2026_02_01_preview)
   networkBypassMode?: NetworkBypassMode;
+
+  /** The service-managed failover configuration for the cluster. */
+  @added(Versions.v2026_10_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  serviceManagedFailover?: ServiceManagedFailoverProperties;
+}
+
+/** Configuration for automatic failover to a cross-region replica during a regional outage. */
+@added(Versions.v2026_10_15_preview)
+model ServiceManagedFailoverProperties {
+  /** Whether service-managed failover is enabled for the cluster. */
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  mode: ServiceManagedFailoverMode;
+}
+
+/** The service-managed failover modes for a cluster. */
+@added(Versions.v2026_10_15_preview)
+union ServiceManagedFailoverMode {
+  string,
+
+  /** The service automatically promotes a cross-region replica when it detects a regional outage on the primary cluster. Unreplicated writes can be lost. */
+  Enabled: "Enabled",
+
+  /** The service does not automatically promote a cross-region replica during a regional outage. */
+  Disabled: "Disabled",
 }
 
 /** The mode that the DocumentDB cluster is created with. */
