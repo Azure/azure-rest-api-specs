@@ -371,8 +371,8 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/nodeImageVersions": {
       "get": {
         "operationId": "ContainerService_ListNodeImageVersions",
-        "summary": "Gets a list of supported NodeImage versions in the specified subscription.",
-        "description": "Only returns the latest version of each node image. For example there may be an AKSUbuntu-1804gen2containerd-2024.01.26, but only AKSUbuntu-1804gen2containerd-2024.02.02 is visible in this list.",
+        "summary": "Lists eligible node image versions for the specified configuration.",
+        "description": "Lists available node images matching optional filters, in latest-only or bounded history mode.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -382,6 +382,15 @@
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/NodeImageVersionListConfig.filter"
+          },
+          {
+            "$ref": "#/parameters/NodeImageVersionListConfig.latestImagesOnly"
+          },
+          {
+            "$ref": "#/parameters/NodeImageVersionListConfig.lookback"
           }
         ],
         "responses": {
@@ -401,6 +410,9 @@
         "x-ms-examples": {
           "List Node Image Versions": {
             "$ref": "./examples/NodeImageVersions_List.json"
+          },
+          "List Node Image Versions with Filters and History": {
+            "$ref": "./examples/NodeImageVersions_ListFilteredHistory.json"
           }
         },
         "x-ms-pageable": {
@@ -19527,5 +19539,35 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "NodeImageVersionListConfig.filter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "Optional OData filter using eq comparisons joined with and.\nSupports image selectors and requiredFeatures eq 'name=value,name=value'.\nThe feature string uses custom capability matching. Other operators are not supported.",
+      "required": false,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "filter"
+    },
+    "NodeImageVersionListConfig.latestImagesOnly": {
+      "name": "latestImagesOnly",
+      "in": "query",
+      "description": "Return the latest standard image per variant. Patched-image selection remains under review.",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
+    },
+    "NodeImageVersionListConfig.lookback": {
+      "name": "lookback",
+      "in": "query",
+      "description": "History window in days. Ignored in latest-only mode.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 180,
+      "x-ms-parameter-location": "method"
+    }
+  }
 }

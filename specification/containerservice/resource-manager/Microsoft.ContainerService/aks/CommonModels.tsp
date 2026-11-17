@@ -1688,6 +1688,32 @@ model KubernetesPatchVersion {
   upgrades?: string[];
 }
 
+/** OData filtering and latest-only or bounded history discovery. */
+@added(Versions.v2026_09_02_preview)
+model NodeImageVersionListConfig {
+  /**
+   * Optional OData filter using eq comparisons joined with and.
+   * Supports image selectors and requiredFeatures eq 'name=value,name=value'.
+   * The feature string uses custom capability matching. Other operators are not supported.
+   */
+  @added(Versions.v2026_09_02_preview)
+  @query("$filter")
+  @minLength(1)
+  filter?: string;
+
+  /** Return the latest standard image per variant. Patched-image selection remains under review. */
+  @added(Versions.v2026_09_02_preview)
+  @query
+  latestImagesOnly?: boolean;
+
+  /** History window in days. Ignored in latest-only mode. */
+  @added(Versions.v2026_09_02_preview)
+  @query
+  @minValue(1)
+  @maxValue(180)
+  lookback?: int32;
+}
+
 /**
  * Holds an array NodeImageVersions
  */
