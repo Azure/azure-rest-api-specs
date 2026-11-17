@@ -16,6 +16,7 @@ import {
 import { Readme } from "@azure-tools/specs-shared/readme";
 import type { ImpactAssessment, ServiceImpact } from "@azure-tools/specs-shared/impact";
 import type { PRContext } from "./PRContext.ts";
+import { getApiDefinitionChanges } from "./api-changes.ts";
 
 type Plane = ServiceImpact["plane"];
 
@@ -42,7 +43,7 @@ export async function evaluateImpact(
     const directory = dirname(file);
     let plane = planesByDirectory.get(directory);
     if (plane === undefined) {
-      plane = getPlane(file, context);
+      plane = getPlane(file, [context.sourceDirectory, context.targetDirectory]);
       planesByDirectory.set(directory, plane);
     }
     const key = `${path}:${plane}`;
@@ -53,6 +54,7 @@ export async function evaluateImpact(
         plane,
         changes: [],
         hasAffectedReadme: false,
+        hasApiDefinitionChanges: false,
         typeSpec: false,
         newApiVersions: [],
         suppressionsChanged: false,
@@ -68,11 +70,20 @@ export async function evaluateImpact(
     return service;
   };
 
+  const { changedFiles: apiDefinitionChanges, unchangedMoves } = getApiDefinitionChanges(
+    context,
+    (file, root) => {
+      const service = getService(file);
+      return service && `${service.path}:${getPlane(file, [root])}`;
+    },
+  );
+
   for (const file of context.getChangedFiles()) {
     const service = getService(file);
     if (!service) continue;
     const kind = getChangeKind(file);
     if (!service.changes.includes(kind)) service.changes.push(kind);
+    service.hasApiDefinitionChanges ||= apiDefinitionChanges.has(file);
     const sourceFile = resolve(context.sourceDirectory, file);
     service.typeSpec ||=
       typespec(file) || (swagger(file) && isSwaggerGeneratedByTypeSpec(sourceFile));
@@ -88,6 +99,7 @@ export async function evaluateImpact(
       }
       if (
         version &&
+        !unchangedMoves.has(file) &&
         !existingVersions.includes(version) &&
         !service.newApiVersions.includes(version)
       ) {
@@ -135,12 +147,12 @@ function getChangeKind(file: string): ServiceImpact["changes"][number] {
   return "other";
 }
 
-function getPlane(file: string, context: PRContext): Plane {
+function getPlane(file: string, roots: readonly string[]): Plane {
   if (resourceManager(file)) return "resource-manager";
   if (dataPlane(file)) return "data-plane";
 
   // Older TypeSpec projects live beside their emitted plane directory.
-  for (const root of [context.sourceDirectory, context.targetDirectory]) {
+  for (const root of roots) {
     let folder = dirname(file);
     while (folder.startsWith("specification/")) {
       const configFile = resolve(root, folder, "tspconfig.yaml");
