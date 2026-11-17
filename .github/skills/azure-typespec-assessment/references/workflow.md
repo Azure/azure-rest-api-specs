@@ -1,13 +1,15 @@
 # Complete Read-Only Workflow
 
-Run the assessment in order. Each phase reference is self-contained; load only
+Run the 3-stage assessment in order. Each reference is self-contained; load only
 the phase currently being performed.
 
-1. [Prepare and run deterministic analysis](workflow/preparation.md).
-2. When preparation reports `awaiting-agent-judgment`, complete the
-   [bounded Agent judgment](workflow/agent-judgment.md).
-3. Perform the [Azure Guidelines search and materialize the decisions](workflow/compliance-and-materialization.md).
-4. [Finalize and serve the validated report](workflow/finalization.md).
+1. **Stage 1 — Deterministic Preparation & Analysis:**
+   [Prepare and run deterministic analysis](workflow/preparation.md).
+2. **Stage 2 — Unified AI Judgment & Post-Judgment Source Association (Single Agent Context):**
+   - **Step 2a (Judgment & Guidelines):** When preparation reports `awaiting-agent-judgment`, complete the [bounded Agent judgment](workflow/agent-judgment.md) and [Azure Guidelines search, judgment materialization, and source association](workflow/compliance-and-materialization.md).
+   - **Step 2b (Source Association in the same AI turn):** When `materialize-assessment-results.ts` reports `sourceAssociationRequired: true`, associate canonical TypeSpec source for confirmed REST/downstream breaking findings in the same AI turn (`materialize-assessment-results.ts --work <work> --source-association`). Zero confirmed breakings automatically record `not-applicable` and transition directly to `ready-for-finalization`.
+3. **Stage 3 — Guarded Finalization & Serving:**
+   [Finalize and serve the validated report](workflow/finalization.md).
 
 Do not skip phases, substitute manual repository inspection for preparation, or
 stop between preparation and Agent judgment. Assessment is complete only after

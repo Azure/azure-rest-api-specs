@@ -1,6 +1,8 @@
 # Guarded Finalization and Report Serving
 
-After materialization, run:
+Once Stage 2 reaches `ready-for-finalization` (via
+[judgment and source association materialization](compliance-and-materialization.md)),
+run:
 
 ```powershell
 node (Join-Path $Skill "scripts\finalize-assessment.ts") --work $Work
@@ -11,7 +13,9 @@ shared guideline evidence, and judgment coverage; assembles and validates the
 complete assessment; and atomically writes `assessment.json` and
 `assessment.html`. Failure to produce both valid artifacts is failure.
 `workflow-state.json` records preparation, Agent artifact, finalization,
-completion, blockers, artifact hashes, and phase timings.
+completion, blockers, artifact hashes, and phase timings. Pipeline-version-2
+finalization checks the frozen judgment, source input, queries, and result before
+joining display source. It refuses missing or stale source results.
 
 After rendering, start the report server through the host's attached background
 or long-lived process mechanism:
@@ -58,4 +62,8 @@ If materialization or assembly rejects schema or coverage, send only compact
 errors to the same Agent for **one correction turn**. Correct
 `agent-workspace\agent-decisions.json`, rerun materialization, then guarded
 finalization. Do not rerun preparation, compilation, analyzers, or create an
-independent judgment. If correction still fails, stop and report the blocker.
+independent judgment. For pipeline-version-2 Step 2b source errors, correct
+`agent-workspace\source-association-decisions.json` and rerun
+`materialize-assessment-results.ts --work <work> --source-association` without
+editing the frozen `assessment-judgment.json`. If correction still fails, stop
+and report the blocker.

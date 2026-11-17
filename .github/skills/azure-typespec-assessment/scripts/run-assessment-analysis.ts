@@ -97,6 +97,8 @@ type InputAccounting = {
     restCandidates: number;
     downstreamCandidates: number;
     downstreamRootCauses: number;
+    sourceReviewDeclarations: number;
+    sourceReviewRequests: number;
     complianceSearchRequests: number;
     inferenceRequests: number;
   };
@@ -104,6 +106,7 @@ type InputAccounting = {
 };
 type AnalysisModelInput = {
   schemaVersion: number;
+  pipelineVersion: 2;
   context: Record<string, unknown>;
   artifactReferences: AssessmentModelInput["artifactReferences"];
   evidenceSets: Record<string, import("./runtime-types.ts").EvidenceSet & Record<string, unknown>>;
@@ -332,6 +335,7 @@ function compactSdkFact(fact: AssessmentFact) {
     name: fact.name,
     access: fact.access,
     usage: fact.usage,
+    usageDetails: fact.usageDetails,
     reachable: fact.reachable,
     parameters: fact.parameters?.map((parameter) => ({
       position: parameter.position,
@@ -524,6 +528,7 @@ function evidenceSet(
   registry[id] ??= {
     sourceChangeIds: normalized.sourceChangeIds,
     hunkIds: normalized.hunkIds,
+    declarationIds: normalized.declarationIds,
     declarationCount: normalized.declarationIds.length,
     evidenceFactIds: normalized.evidenceFactIds,
     evidenceRef: { artifact, id: entityId },
@@ -1116,17 +1121,6 @@ function deterministicCoverage({
         downstreamCandidateIds,
       };
     }
-    if (declarationsByHunk.has(hunkId) || operationsByHunk.has(hunkId)) {
-      return {
-        hunkId,
-        status: "no-impact",
-        reason: declarationsByHunk.has(hunkId)
-          ? "declaration-mapped-and-contracts-compared"
-          : "operation-mapped-and-contracts-compared",
-        restCandidateIds: [],
-        downstreamCandidateIds: [],
-      };
-    }
     if (documentationOnly(source, hunkId)) {
       return {
         hunkId,
@@ -1160,6 +1154,17 @@ function deterministicCoverage({
         hunkId,
         status: "no-impact",
         reason: representedReason,
+        restCandidateIds: [],
+        downstreamCandidateIds: [],
+      };
+    }
+    if (declarationsByHunk.has(hunkId) || operationsByHunk.has(hunkId)) {
+      return {
+        hunkId,
+        status: "unknown",
+        reason: declarationsByHunk.has(hunkId)
+          ? "mapped-declaration-without-deterministic-candidate"
+          : "mapped-operation-without-deterministic-candidate",
         restCandidateIds: [],
         downstreamCandidateIds: [],
       };
@@ -1291,6 +1296,8 @@ function accountInput(
         restCandidates: input.restCandidates.length,
         downstreamCandidates: input.downstreamCandidates.length,
         downstreamRootCauses: input.downstreamRootCauses.length,
+        sourceReviewDeclarations: 0,
+        sourceReviewRequests: 0,
         complianceSearchRequests: input.complianceSearchRequests.length,
         inferenceRequests: input.inferenceRequests.length,
       },
@@ -1492,6 +1499,7 @@ export function buildModelInput({
 
   const input: AnalysisModelInput = {
     schemaVersion: 1,
+    pipelineVersion: 2,
     context: {
       sourceComparison: {
         baseCommit: manifest.comparison.mergeBaseCommit,

@@ -53,6 +53,14 @@ rejected.
 
 ## Compact Agent decisions
 
+New runs use `model-input.json.pipelineVersion: 2`, schema-version-2 judgment
+decisions without source reviews, and sequential post-judgment
+[source association](workflow/compliance-and-materialization.md) in the same AI
+stage (`agent-workspace\source-association-input.json` ->
+`agent-workspace\source-association-decisions.json` -> `source-association.json`).
+Historical single-phase decision artifacts remain readable. Final source
+selections are joined only after both steps validate their frozen hashes.
+
 Write `agent-workspace\agent-decisions.json` conforming to
 `scripts\agent-decisions.schema.json`. It contains only Agent-authored
 summaries, REST/downstream choices, optional inference, four score signals and

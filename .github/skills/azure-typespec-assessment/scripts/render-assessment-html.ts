@@ -1891,13 +1891,25 @@ ${rationale ? `<div class="breaking-rationale"><strong>Why this is breaking:</st
       const before = finding.evidence?.find((fact) => fact.comparisonRole === "baseline");
       const after = finding.evidence?.find((fact) => fact.comparisonRole === "target");
 
+      const formatUsage = (fact: AssessmentFact) => {
+        if (Array.isArray(fact.usage)) return fact.usage.map(String).join(", ");
+        if (fact.usageDetails?.flags.length) return fact.usageDetails.flags.join(", ");
+        if (
+          typeof fact.usage === "string" ||
+          typeof fact.usage === "number" ||
+          typeof fact.usage === "boolean"
+        ) {
+          return String(fact.usage);
+        }
+        return undefined;
+      };
       const display = (fact: AssessmentFact | undefined) =>
         fact
           ? [
               fact.access,
               fact.reachable === true ? "reachable" : undefined,
               fact.reachable === false ? "not reachable" : undefined,
-              fact.usage !== undefined ? `usage ${fact.usage.join(", ")}` : undefined,
+              formatUsage(fact) !== undefined ? `usage ${formatUsage(fact)}` : undefined,
             ]
               .filter(Boolean)
               .join(" · ")
