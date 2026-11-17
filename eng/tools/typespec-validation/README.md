@@ -102,6 +102,9 @@ pnpm tsv --all --check-unused-suppressions
 pnpm tsv --changed --check-unused-suppressions
 ```
 
+Both TSV CI workflows enable this experimental audit so unused suppressions
+surface as failing checks during evaluation of the proof of concept.
+
 The audit evaluates suppressed `FolderStructure`, `EmitAutorest`, `ServiceYaml`,
 and `ClientTspImport` checks without applying fixes. It also evaluates suppressed
 `SdkTspConfigValidation` sub-rules, including wildcard key patterns. An assessed

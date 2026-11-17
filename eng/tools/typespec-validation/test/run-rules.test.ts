@@ -1,5 +1,6 @@
 import { ConsoleLogger, defaultLogger } from "@azure-tools/specs-shared/logger";
 import { d } from "@azure-tools/specs-shared/testing";
+import { stripVTControlCharacters } from "node:util";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { verbatim } from "../src/diagnostic-content.ts";
 import { runRules } from "../src/index.ts";
@@ -59,7 +60,9 @@ describe("runRules", function () {
     expect(error).toHaveBeenCalledExactlyOnceWith(
       expect.stringContaining("Suppression for 'Fixed' does not hide a failure in /test."),
     );
-    expect(error.mock.calls[0][0]).toContain("suppressions.yaml:2:3");
+    expect(stripVTControlCharacters(String(error.mock.calls[0][0]))).toContain(
+      "suppressions.yaml:2:3",
+    );
   });
 
   it("reports an incomplete audit without turning a suppressed exception into failure", async () => {
