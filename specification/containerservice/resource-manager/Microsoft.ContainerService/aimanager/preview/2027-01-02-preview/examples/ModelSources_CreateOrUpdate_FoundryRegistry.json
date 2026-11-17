@@ -1,0 +1,76 @@
+{
+  "title": "Create or update a Microsoft Foundry registry model source",
+  "operationId": "ModelSources_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2027-01-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgaimanagers",
+    "If-Match": "\"00000000-0000-0000-0000-000000000000\"",
+    "If-None-Match": "*",
+    "aiManagerName": "aimanager1",
+    "modelSourceName": "azure-hf-registry",
+    "resource": {
+      "properties": {
+        "sourceType": "MicrosoftFoundry",
+        "description": "Microsoft Foundry azure-huggingface registry",
+        "microsoftFoundry": {
+          "publicRegistryName": "azure-huggingface"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "sourceType": "MicrosoftFoundry",
+          "description": "Microsoft Foundry azure-huggingface registry",
+          "microsoftFoundry": {
+            "publicRegistryName": "azure-huggingface"
+          }
+        },
+        "eTag": "\"00000000-0000-0000-0000-000000000000\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgaimanagers/providers/Microsoft.ContainerService/aiManagers/aimanager1/modelSources/azure-hf-registry",
+        "name": "azure-hf-registry",
+        "type": "Microsoft.ContainerService/aiManagers/modelSources",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-01-01T00:00:00.000Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ContainerService/locations/eastus/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-09-02-preview",
+        "Retry-After": 10
+      },
+      "body": {
+        "properties": {
+          "provisioningState": "Creating",
+          "sourceType": "MicrosoftFoundry",
+          "description": "Microsoft Foundry azure-huggingface registry",
+          "microsoftFoundry": {
+            "publicRegistryName": "azure-huggingface"
+          }
+        },
+        "eTag": "\"00000000-0000-0000-0000-000000000000\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgaimanagers/providers/Microsoft.ContainerService/aiManagers/aimanager1/modelSources/azure-hf-registry",
+        "name": "azure-hf-registry",
+        "type": "Microsoft.ContainerService/aiManagers/modelSources",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-01-01T00:00:00.000Z"
+        }
+      }
+    }
+  }
+}
