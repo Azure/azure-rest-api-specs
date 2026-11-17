@@ -21,47 +21,47 @@ using Azure.Core;
 
 @@clientName(
   Azure.ResourceManager.CommonTypes.AccessRule,
-  "NetworkSecurityPerimeterAccessRule",
+  "KeyVaultNetworkSecurityPerimeterAccessRule",
   "csharp"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.AccessRuleDirection,
-  "NetworkSecurityPerimeterAccessRuleDirection",
+  "KeyVaultNetworkSecurityPerimeterAccessRuleDirection",
   "csharp"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.AccessRuleProperties,
-  "NetworkSecurityPerimeterAccessRuleProperties",
+  "KeyVaultNetworkSecurityPerimeterAccessRuleProperties",
   "csharp"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.IssueType,
-  "NetworkSecurityPerimeterProvisioningIssueType",
+  "KeyVaultNetworkSecurityPerimeterProvisioningIssueType",
   "csharp"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.ProvisioningIssue,
-  "NetworkSecurityPerimeterProvisioningIssue",
+  "KeyVaultNetworkSecurityPerimeterProvisioningIssue",
   "csharp"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.ProvisioningIssueProperties,
-  "NetworkSecurityPerimeterProvisioningIssueProperties",
+  "KeyVaultNetworkSecurityPerimeterProvisioningIssueProperties",
   "csharp"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.Severity,
-  "NetworkSecurityPerimeterProvisioningIssueSeverity",
+  "KeyVaultNetworkSecurityPerimeterProvisioningIssueSeverity",
   "csharp"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.ResourceAssociation,
-  "NetworkSecurityPerimeterResourceAssociation",
+  "KeyVaultNetworkSecurityPerimeterResourceAssociation",
   "csharp"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.ResourceAssociationAccessMode,
-  "NetworkSecurityPerimeterResourceAssociationAccessMode",
+  "KeyVaultNetworkSecurityPerimeterResourceAssociationAccessMode",
   "csharp"
 );
 @@alternateType(
