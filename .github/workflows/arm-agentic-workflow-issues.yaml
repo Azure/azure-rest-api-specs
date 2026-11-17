@@ -1,0 +1,54 @@
+name: Label ARM Agentic Workflow Issues
+
+on: # zizmor: ignore[dangerous-triggers] Only reads issue metadata; no checkout or untrusted code execution.
+  workflow_run:
+    workflows: ["ARM API Review: Automated Workflow"]
+    types: [completed]
+
+permissions:
+  contents: read
+
+jobs:
+  label-failure-issues:
+    runs-on: ubuntu-slim
+    permissions:
+      issues: write
+    steps:
+      - name: Label failure issues from this ARM review run
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const run = context.payload.workflow_run;
+            const label = "ARM API Reviewer agent";
+            const marker =
+              `<!-- gh-aw-agentic-workflow: ${run.name}, id: ${run.id}, run: ${run.html_url} -->`;
+            // Issues created with GITHUB_TOKEN do not trigger issues workflows.
+            // Wait for the source run's conclusion job to finish reporting instead.
+            for await (const { data: issues } of github.paginate.iterator(
+              github.rest.issues.listForRepo,
+              {
+                ...context.repo,
+                state: "all",
+                labels: "agentic-workflows",
+                since: run.run_started_at,
+                per_page: 100,
+              },
+            )) {
+              for (const issue of issues) {
+                if (
+                  issue.pull_request ||
+                  !issue.body?.includes(marker) ||
+                  issue.labels.some(existing =>
+                    (typeof existing === "string" ? existing : existing.name) === label
+                  )
+                ) {
+                  continue;
+                }
+                await github.rest.issues.addLabels({
+                  ...context.repo,
+                  issue_number: issue.number,
+                  labels: [label],
+                });
+                core.info(`Labeled ARM workflow failure issue ${issue.html_url}`);
+              }
+            }
