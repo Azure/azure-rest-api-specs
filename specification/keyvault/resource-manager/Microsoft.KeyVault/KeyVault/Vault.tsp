@@ -36,7 +36,7 @@ model Vault is Azure.ResourceManager.ProxyResource<VaultProperties, false> {
   ...ManagedServiceIdentityProperty;
 }
 
-@@Versioning.added(Vault.identity, Versions.v2026_10_01_preview);
+@@Versioning.added(Vault.identity, Versions.v2027_01_01_preview);
 
 alias VaultsParentParameter = {
   ...ApiVersionParameter;

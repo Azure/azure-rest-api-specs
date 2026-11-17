@@ -31,7 +31,7 @@ model NetworkSecurityPerimeterParameters {
 }
 
 /** The key vault parent scope for network security perimeter configuration operations. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2027_01_01_preview)
 @armVirtualResource
 @resourceGroupResource
 model NetworkSecurityPerimeterVault {
@@ -46,7 +46,7 @@ model NetworkSecurityPerimeterVault {
 }
 
 /** A network security perimeter configuration associated with a key vault. */
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2027_01_01_preview)
 @parentResource(NetworkSecurityPerimeterVault)
 model NetworkSecurityPerimeterConfiguration
   is ProxyResource<CommonTypes.NetworkSecurityPerimeterConfigurationProperties> {
@@ -60,12 +60,12 @@ model NetworkSecurityPerimeterConfiguration
 
 /** Operations for network security perimeter configurations associated with a key vault. */
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "NSP operations explicitly reference the canonical v6 ApiVersionParameter through local parameters; this rule only recognizes a direct library spread, which would inherit the service-wide v5 reference."
-@added(Versions.v2026_10_01_preview)
+@added(Versions.v2027_01_01_preview)
 @armResourceOperations
 @tag("NetworkSecurityPerimeterConfigurations")
 interface NetworkSecurityPerimeterConfigurations {
   /** Gets the specified network security perimeter configuration for a key vault. */
-  @added(Versions.v2026_10_01_preview)
+  @added(Versions.v2027_01_01_preview)
   getConfiguration is ArmResourceRead<
     NetworkSecurityPerimeterConfiguration,
     BaseParameters = NetworkSecurityPerimeterParameters,
@@ -74,7 +74,7 @@ interface NetworkSecurityPerimeterConfigurations {
   >;
 
   /** Lists the network security perimeter configurations associated with a key vault. */
-  @added(Versions.v2026_10_01_preview)
+  @added(Versions.v2027_01_01_preview)
   listConfigurations is ArmResourceListByParent<
     NetworkSecurityPerimeterConfiguration,
     BaseParameters = NetworkSecurityPerimeterParameters,
@@ -83,7 +83,7 @@ interface NetworkSecurityPerimeterConfigurations {
   >;
 
   /** Reconciles the specified network security perimeter configuration for a key vault. */
-  @added(Versions.v2026_10_01_preview)
+  @added(Versions.v2027_01_01_preview)
   @action("reconcile")
   reconcileConfiguration is ArmResourceActionNoContentSync<
     NetworkSecurityPerimeterConfiguration,

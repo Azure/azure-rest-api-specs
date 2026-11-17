@@ -26,7 +26,36 @@ These are the global settings for the KeyVault API.
 
 ```yaml
 openapi-type: arm
-tag: package-2026-05-15
+tag: package-2026-12-31
+```
+
+### Tag: package-2026-12-31
+
+These settings apply only when `--tag=package-2026-12-31` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-12-31'
+input-file:
+  - stable/2026-12-31/openapi.json
+```
+
+### Tag: package-preview-2027-01
+
+These settings apply only when `--tag=package-preview-2027-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2027-01'
+input-file:
+  - preview/2027-01-01-preview/openapi.json
+suppressions:
+  - code: PatchBodyParametersSchema
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}"].patch.parameters[4].schema..*
+    reason: >-
+      Suspected false positive: protectionKeysWrappingKey is optional, and
+      omitting it preserves the existing configuration. Its required nested
+      members enforce completeness only when that atomic configuration is
+      supplied; they do not require it when updating unrelated vault properties.
+      Review requested at
+      https://github.com/Azure/azure-rest-api-specs/pull/47534#issuecomment-6351020880.
 ```
 
 ### Tag: package-preview-2026-10
