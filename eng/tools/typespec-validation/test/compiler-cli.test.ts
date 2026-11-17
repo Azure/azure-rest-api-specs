@@ -7,6 +7,7 @@ import { promisify, stripVTControlCharacters } from "node:util";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { compileTypeSpec, formatTypeSpec } from "../src/typespec-compiler.ts";
+import { diagnosticDetails } from "./diagnostics.ts";
 
 const exec = promisify(execFile);
 const cli = fileURLToPath(new URL("../cmd/tsv.js", import.meta.url));
@@ -84,6 +85,56 @@ async function run(...args: string[]): Promise<{ code: number; stdout: string; s
     return { code: error.code, stdout: error.stdout, stderr: error.stderr };
   }
 }
+
+it.each(["data-plane", "resource-manager"])(
+  "enforces known enum defaults through the %s and client-sdk profiles",
+  async (profile) => {
+    const folder = join(root, project);
+    await symlink(
+      await realpath(
+        new URL(
+          "../../../../node_modules/@azure-tools/typespec-azure-resource-manager",
+          import.meta.url,
+        ),
+      ),
+      join(root, "node_modules/@azure-tools/typespec-azure-resource-manager"),
+      "junction",
+    );
+    await writeFile(
+      join(folder, "tspconfig.yaml"),
+      `linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/${profile}"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
+`,
+    );
+    const source = `/** Kinds of pets. */
+union PetKind {
+  /** A cat. */
+  cat: "cat",
+  /** A dog. */
+  dog: "dog",
+  string,
+}
+/** A pet. */
+model Pet {
+  /** The kind of pet. */
+  kind: PetKind = "bird";
+}
+`;
+    await writeFile(join(folder, "main.tsp"), source);
+
+    const invalid = await compileTypeSpec(folder, { noEmit: true });
+    expect(invalid.success).toBe(false);
+    expect(diagnosticDetails(invalid.diagnostics?.[0])).toContain(
+      "@azure-tools/typespec-azure-core/use-known-enum-default",
+    );
+
+    await writeFile(join(folder, "main.tsp"), source.replace('"bird"', '"cat"'));
+    const valid = await compileTypeSpec(folder, { noEmit: true });
+    expect(valid.success, diagnosticDetails(valid.diagnostics?.[0])).toBe(true);
+  },
+);
 
 it("prints only a final summary by default and compact rule statuses with --verbose", async () => {
   const quiet = await run(project);
