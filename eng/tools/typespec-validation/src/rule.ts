@@ -4,7 +4,7 @@ import { type RuleResult } from "./rule-result.ts";
 export interface RuleExecutionOptions {
   /** Allow rules to apply fixes instead of only checking files. */
   readonly fix?: boolean;
-  /** Warn about supported suppressions that do not hide a failure in this project. */
+  /** Fail on supported suppressions that do not hide a failure in this project. */
   readonly checkUnusedSuppressions?: boolean;
 }
 

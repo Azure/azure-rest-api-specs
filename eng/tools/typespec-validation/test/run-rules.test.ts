@@ -27,8 +27,8 @@ afterEach(() => {
 });
 
 describe("runRules", function () {
-  it("audits suppressed rules read-only, warning only for an evaluated pass", async () => {
-    const warning = vi.spyOn(console, "warn").mockImplementation(() => {});
+  it("fails on unused suppressions while continuing to audit later rules read-only", async () => {
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
     const rules = [
       createRule("Fixed", { success: true }, { suppressable: true }),
       createRule("Needed", { success: false }, { suppressable: true }),
@@ -47,18 +47,19 @@ describe("runRules", function () {
       defaultLogger,
       { fix: true, checkUnusedSuppressions: true },
     );
-    expect(result.success).toBe(true);
-    expect(result.suppressed).toEqual(["Fixed", "Needed", "Skipped"]);
+    expect(result.success).toBe(false);
+    expect(result.failed).toEqual(["Fixed"]);
+    expect(result.suppressed).toEqual(["Needed", "Skipped"]);
     for (const rule of rules) {
       expect(rule.executeFn).toHaveBeenCalledWith("/test", defaultLogger, {
         fix: false,
         checkUnusedSuppressions: true,
       });
     }
-    expect(warning).toHaveBeenCalledExactlyOnceWith(
+    expect(error).toHaveBeenCalledExactlyOnceWith(
       expect.stringContaining("Suppression for 'Fixed' does not hide a failure in /test."),
     );
-    expect(warning.mock.calls[0][0]).toContain("suppressions.yaml:2:3");
+    expect(error.mock.calls[0][0]).toContain("suppressions.yaml:2:3");
   });
 
   it("reports an incomplete audit without turning a suppressed exception into failure", async () => {

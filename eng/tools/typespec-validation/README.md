@@ -93,7 +93,7 @@ correctness; it does not enforce policies based on versions added by a PR.
 
 ### Experimental unused-suppression audit
 
-Use `--check-unused-suppressions` to warn about supported `suppressions.yaml`
+Use `--check-unused-suppressions` to fail on supported `suppressions.yaml`
 exemptions that no longer hide a failure in an evaluated project:
 
 ```sh
@@ -105,9 +105,9 @@ pnpm tsv --changed --check-unused-suppressions
 The audit evaluates suppressed `FolderStructure`, `EmitAutorest`, `ServiceYaml`,
 and `ClientTspImport` checks without applying fixes. It also evaluates suppressed
 `SdkTspConfigValidation` sub-rules, including wildcard key patterns. An assessed
-check that passes produces a `tsv/unused-suppression` warning at its YAML entry's
-line and column. Suppressed failures remain suppressed, and audit warnings do not
-change the exit status. Errors encountered only while auditing are reported as
+check that passes produces a `tsv/unused-suppression` error at its YAML entry's
+line and column and makes validation exit nonzero. Suppressed failures remain
+suppressed. Errors encountered only while auditing are reported as non-failing
 `tsv/suppression-audit-incomplete` warnings.
 
 Findings are project-local, not an instruction to delete an entire entry: another

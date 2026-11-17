@@ -99,7 +99,7 @@ it("rejects conflicting check and fix modes before validating", async () => {
   });
 });
 
-it("reports project-local unused SDK suppressions through the CLI and batch workers", async () => {
+it("fails on project-local unused SDK suppressions through the CLI and batch workers", async () => {
   const project = "specification/service/data-plane/Project";
   await addProject(project);
   await initGit();
@@ -131,12 +131,18 @@ linter:
   );
   const normal = await run(project, "--check");
   expect(normal.stderr).toBe("");
-  const audited = await run(project, "--check", "--check-unused-suppressions");
-  expect(audited.stderr).toContain("suppressions.yaml:5:3 - warning tsv/unused-suppression:");
-  expect(audited.stderr).toContain("SdkTspConfigValidation/parameters.service-dir.default");
-  expect(audited.stderr).not.toContain("Suppression for 'FolderStructure'");
-  const batch = await run("--all", "--check-unused-suppressions");
-  expect(batch.stderr).toContain("SdkTspConfigValidation/parameters.service-dir.default");
+  await expect(run(project, "--check", "--check-unused-suppressions")).rejects.toMatchObject({
+    code: 1,
+    stderr: expect.stringContaining(
+      "suppressions.yaml:5:3 - error tsv/unused-suppression:",
+    ) as unknown,
+  });
+  await expect(run("--all", "--check-unused-suppressions")).rejects.toMatchObject({
+    code: 1,
+    stderr: expect.stringContaining(
+      "SdkTspConfigValidation/parameters.service-dir.default",
+    ) as unknown,
+  });
   expect(await readFile(join(root, project, "tspconfig.yaml"), "utf8")).toBe(config);
 });
 

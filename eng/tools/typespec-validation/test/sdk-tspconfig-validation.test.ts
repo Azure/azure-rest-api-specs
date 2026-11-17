@@ -1034,10 +1034,10 @@ describe("tspconfig", function () {
     const result = await rule.execute(managementTspconfigFolder, defaultLogger, {
       checkUnusedSuppressions: true,
     });
-    expect(result.success).toBe(true);
+    expect(result.success).toBe(false);
     expect(result.diagnostics).toEqual([
       expect.objectContaining({
-        severity: "warning",
+        severity: "error",
         code: "unused-suppression",
         path: suppression.source.path,
         location: { line: 4, column: 3 },
@@ -1096,7 +1096,7 @@ describe("tspconfig", function () {
     const result = await rule.execute(managementTspconfigFolder, defaultLogger, {
       checkUnusedSuppressions: true,
     });
-    expect(result.success).toBe(true);
+    expect(result.success).toBe(false);
     expect(result.diagnostics).toEqual([
       expect.objectContaining({
         code: "unused-suppression",

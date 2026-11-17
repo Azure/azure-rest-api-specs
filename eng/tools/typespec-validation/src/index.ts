@@ -65,6 +65,7 @@ export async function runRules(
         (s) => s.rules?.includes(rule.name) && (!s.subRules || s.subRules.length === 0),
       );
       if (ruleSuppressions.length > 0) {
+        let unused = false;
         if (options.checkUnusedSuppressions) {
           try {
             const assessed = await rule.execute(folder, logger, { ...options, fix: false });
@@ -76,6 +77,7 @@ export async function runRules(
               diagnostics.push(
                 ...ruleSuppressions.map((entry) => unusedSuppression(entry, rule.name, folder)),
               );
+              unused = true;
             }
           } catch (error) {
             diagnostics.push({
@@ -86,9 +88,15 @@ export async function runRules(
             });
           }
         }
-        logger.debug(`  Suppressed: ${ruleSuppressions[0].reason}`);
-        result.suppressed.push(rule.name);
-        reportStatus(rule.name, "SUPPRESSED");
+        if (unused) {
+          result.success = false;
+          result.failed.push(rule.name);
+          reportStatus(rule.name, "FAIL");
+        } else {
+          logger.debug(`  Suppressed: ${ruleSuppressions[0].reason}`);
+          result.suppressed.push(rule.name);
+          reportStatus(rule.name, "SUPPRESSED");
+        }
         continue;
       }
     }
@@ -191,7 +199,7 @@ export async function main({ fix: defaultFix }: RuleExecutionOptions = {}) {
     "check-unused-suppressions": {
       type: "boolean",
       description:
-        "Warn about unnecessary supported rule and SDK config sub-rule suppressions in evaluated projects (experimental).",
+        "Fail on unnecessary supported rule and SDK config sub-rule suppressions in evaluated projects (experimental).",
     },
     all: {
       type: "boolean",

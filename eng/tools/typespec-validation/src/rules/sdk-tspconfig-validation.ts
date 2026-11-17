@@ -1084,7 +1084,7 @@ export class SdkTspConfigValidationRule implements Rule {
     }
 
     return {
-      success,
+      success: success && !auditDiagnostics.some((diagnostic) => diagnostic.severity === "error"),
       diagnostics: [
         ...failedResults.flatMap((result) =>
           (result.diagnostics ?? []).map((diagnostic) => ({ ...diagnostic, path: tspConfigPath })),

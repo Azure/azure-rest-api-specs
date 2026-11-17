@@ -7,7 +7,7 @@ export function unusedSuppression(
   target: string,
 ): Diagnostic {
   return {
-    severity: "warning",
+    severity: "error",
     code: "unused-suppression",
     message: `Suppression for '${rule}' does not hide a failure in ${target}.`,
     path: suppression.source?.path,
