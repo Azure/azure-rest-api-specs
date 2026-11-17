@@ -111,6 +111,29 @@ describe("validateTypeSpecRemediationResult", () => {
       },
     ]);
     expect(normalized.report).toContain("Validated 1 remediation mapping");
+    expect(normalized.report).toContain("Target: `client.tsp`");
+    expect(normalized.report).toContain(
+      "Suggestion: Add a C#-scoped &#64;&#64;clientName decorator.",
+    );
+    expect(normalized.report).toContain("Confidence: `high`");
+    expect(normalized.report).toContain(`TypeSpec location: \`${SPEC_FILE}:1\``);
+  });
+
+  it("escapes agent-provided text in the Markdown report", () => {
+    const result = createResult();
+    result.findings[0].remediation.suggestion = "Ping @owners <script> | use `code`";
+
+    const report = validateTypeSpecRemediationResult(
+      reviewContext,
+      rawReviewResult,
+      typeSpecContext,
+      result,
+    ).report;
+
+    expect(report).toContain(
+      "Suggestion: Ping &#64;owners &lt;script&gt; &#124; use &#96;code&#96;",
+    );
+    expect(report).not.toContain("<script>");
   });
 
   describe("parseTypeSpecRemediationSafeOutput", () => {

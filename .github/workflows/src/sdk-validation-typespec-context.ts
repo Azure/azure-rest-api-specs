@@ -45,6 +45,10 @@ type MutableTypeSpecContextFile = Omit<TypeSpecContextFile, "roles"> & {
   roles: Set<TypeSpecContextFileRole>;
 };
 
+function getContextFileBytes(file: MutableTypeSpecContextFile): number {
+  return Buffer.byteLength(file.content ?? "") + Buffer.byteLength(file.patch ?? "");
+}
+
 type ChangedFile = {
   filename: string;
   previous_filename?: string;
@@ -382,6 +386,7 @@ export async function collectTypeSpecReviewContext(params: {
   const files = new Map<string, MutableTypeSpecContextFile>();
   const contentCache = new Map<string, Promise<string | undefined>>();
   const requestCount = { value: 0 };
+  let totalBytes = 0;
 
   const getContent = (filePath: string): Promise<string | undefined> => {
     const safePath = requireSafeContextPath(filePath);
@@ -406,13 +411,19 @@ export async function collectTypeSpecReviewContext(params: {
     metadata: Omit<Partial<TypeSpecContextFile>, "path" | "roles"> = {},
   ): void => {
     const safePath = requireSafeContextPath(filePath);
-    const existing = files.get(safePath) ?? {
-      path: safePath,
-      roles: new Set<TypeSpecContextFileRole>(),
-    };
-    existing.roles.add(role);
-    Object.assign(existing, metadata);
-    files.set(safePath, existing);
+    const existing = files.get(safePath);
+    const updated: MutableTypeSpecContextFile = existing
+      ? { ...existing, roles: new Set(existing.roles) }
+      : { path: safePath, roles: new Set<TypeSpecContextFileRole>() };
+    updated.roles.add(role);
+    Object.assign(updated, metadata);
+    const updatedTotalBytes =
+      totalBytes - (existing ? getContextFileBytes(existing) : 0) + getContextFileBytes(updated);
+    if (updatedTotalBytes > MAX_TYPESPEC_CONTEXT_TOTAL_BYTES) {
+      throw new Error(`TypeSpec context exceeds ${MAX_TYPESPEC_CONTEXT_TOTAL_BYTES} bytes`);
+    }
+    totalBytes = updatedTotalBytes;
+    files.set(safePath, updated);
     if (files.size > MAX_TYPESPEC_CONTEXT_FILES) {
       throw new Error(`TypeSpec context exceeds ${MAX_TYPESPEC_CONTEXT_FILES} files`);
     }
@@ -462,14 +473,6 @@ export async function collectTypeSpecReviewContext(params: {
   const contextFiles = [...files.values()]
     .map((file) => ({ ...file, roles: [...file.roles].sort() }))
     .sort((left, right) => left.path.localeCompare(right.path));
-  const totalBytes = contextFiles.reduce(
-    (total, file) =>
-      total + Buffer.byteLength(file.content ?? "") + Buffer.byteLength(file.patch ?? ""),
-    0,
-  );
-  if (totalBytes > MAX_TYPESPEC_CONTEXT_TOTAL_BYTES) {
-    throw new Error(`TypeSpec context exceeds ${MAX_TYPESPEC_CONTEXT_TOTAL_BYTES} bytes`);
-  }
 
   return {
     schemaVersion: 1,

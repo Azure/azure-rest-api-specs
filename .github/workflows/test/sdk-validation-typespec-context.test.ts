@@ -3,6 +3,7 @@ import {
   collectTypeSpecReviewContext,
   MAX_TYPESPEC_CONTEXT_API_REQUESTS,
   MAX_TYPESPEC_CONTEXT_FILES,
+  MAX_TYPESPEC_CONTEXT_TOTAL_BYTES,
 } from "../src/sdk-validation-typespec-context.ts";
 import { createMockContext, createMockGithub } from "./mocks.ts";
 
@@ -345,6 +346,33 @@ describe("collectTypeSpecReviewContext", () => {
       }),
     ).rejects.toThrow(`maximum is ${MAX_TYPESPEC_CONTEXT_API_REQUESTS}`);
     expect(github.rest.repos.getContent).not.toHaveBeenCalled();
+  });
+
+  it("stops loading content when the aggregate byte limit is exceeded", async () => {
+    const github = createMockGithub();
+    const context = createMockContext();
+    const changedFiles = Array.from({ length: 10 }, (_, index) => ({
+      filename: `${PROJECT_ROOT}/model-${index}.tsp`,
+      status: "modified",
+    }));
+    github.rest.repos.compareCommitsWithBasehead.mockResolvedValue({
+      data: { files: changedFiles },
+    });
+    const content = "x".repeat(1024 * 1024);
+    github.rest.repos.getContent.mockResolvedValue(repositoryFile(content));
+
+    await expect(
+      collectTypeSpecReviewContext({
+        github,
+        context,
+        prNumber: 42,
+        headSha: HEAD_SHA,
+        baseSha: BASE_SHA,
+        changedFileCount: changedFiles.length,
+        projectRoots: [PROJECT_ROOT],
+      }),
+    ).rejects.toThrow(`exceeds ${MAX_TYPESPEC_CONTEXT_TOTAL_BYTES} bytes`);
+    expect(github.rest.repos.getContent).toHaveBeenCalledTimes(9);
   });
 
   it("rejects an incomplete exact-revision comparison", async () => {

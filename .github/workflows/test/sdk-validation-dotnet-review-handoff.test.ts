@@ -13,6 +13,7 @@ import {
   MAX_SNAPSHOT_FILE_BYTES,
   MAX_SPEC_GEN_SDK_ARTIFACT_BYTES,
   extractAndValidateSdkReviewInputArchive,
+  getTypeSpecProjectRoots,
   PACKAGES_ARTIFACT_NAME,
   parseAndValidateAdoBuildDetailsUrl,
   runSdkValidationDotnetReviewHandoffImpl,
@@ -180,6 +181,15 @@ function createStreamingZip(entries: Record<string, Uint8Array>): Promise<Uint8A
 }
 
 describe("sdk-validation-dotnet-review-handoff", () => {
+  it("preserves SDK review for packages without TypeSpec provenance", () => {
+    const inputDirectory = createTempOutputDir();
+    const reviewInputDirectory = path.join(inputDirectory, "Azure.Widget", "review-input");
+    fs.mkdirSync(reviewInputDirectory, { recursive: true });
+    fs.writeFileSync(path.join(reviewInputDirectory, "Azure.Widget.csproj"), "<Project />");
+
+    expect(getTypeSpecProjectRoots(createSampleArtifact(), inputDirectory)).toEqual([]);
+  });
+
   beforeEach(() => {
     mockFetch.mockReset();
   });

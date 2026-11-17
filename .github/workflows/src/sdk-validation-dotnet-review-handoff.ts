@@ -755,7 +755,7 @@ export async function verifyPullRequestFreshness(params: {
   };
 }
 
-function getTypeSpecProjectRoots(
+export function getTypeSpecProjectRoots(
   artifact: SpecGenSdkArtifactInfo,
   inputDirectory: string,
 ): string[] {
@@ -769,9 +769,7 @@ function getTypeSpecProjectRoots(
       "tsp-location.yaml",
     );
     if (!fs.existsSync(locationPath)) {
-      throw new Error(
-        `SDK review snapshot '${request.reviewInputPath}' is missing tsp-location.yaml`,
-      );
+      continue;
     }
     const location = locationSchema.parse(parseYaml(fs.readFileSync(locationPath, "utf8")));
     if (
