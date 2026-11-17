@@ -60,9 +60,9 @@ enum Versions {
   @useDependency(LiftrBase.Versions.v3_preview)
   v2026_09_30: "2026-09-30",
 
-  @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v3_preview")
+  @doc("The 2026-11-03 stable API version, dependent on LiftrBase.Versions.v3_preview.")
   @useDependency(LiftrBase.Versions.v3_preview)
-  v10_preview: "2026-10-15-preview",
+  v2026_11_03: "2026-11-03",
 }
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -182,12 +182,12 @@ model LatestLinkedSaaSResponse {
 interface CloudAccounts {
   get is ArmResourceRead<CloudAccount>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CloudAccount>;
-  @removed(Versions.v10_preview)
-  @renamedFrom(Versions.v10_preview, "update")
+  @removed(Versions.v2026_11_03)
+  @renamedFrom(Versions.v2026_11_03, "update")
   @sharedRoute
   updateV1 is ArmResourcePatchAsync<CloudAccount, CloudAccountProperties>;
 
-  @added(Versions.v10_preview)
+  @added(Versions.v2026_11_03)
   @sharedRoute
   update is ArmCustomPatchAsync<CloudAccount, CloudAccountUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<CloudAccount>;
@@ -229,14 +229,14 @@ alias CloudAccountPatchProperties = {
 };
 
 @doc("Managed service identity (system assigned and/or user assigned identities)")
-@added(Versions.v10_preview)
+@added(Versions.v2026_11_03)
 model CloudAccountIdentityUpdate {
   ...OptionalProperties<UpdateableProperties<Azure.ResourceManager.CommonTypes.ManagedServiceIdentity>>;
 }
 
 // Identity is replaced so a PATCH can omit identity.type, as the previous contract allowed.
 @doc("The type used for update operations of the CloudAccount.")
-@added(Versions.v10_preview)
+@added(Versions.v2026_11_03)
 model CloudAccountUpdate {
   ...OmitProperties<
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -251,7 +251,7 @@ model CloudAccountUpdate {
 }
 
 @doc("Marketplace details that can be updated on a Commvault Cloud Account.")
-@added(Versions.v10_preview)
+@added(Versions.v2026_11_03)
 model CloudAccountMarketplaceUpdate {
   ...OptionalProperties<UpdateableProperties<OmitProperties<
     LiftrBase.MarketplaceDetails,
@@ -266,7 +266,7 @@ model CloudAccountMarketplaceUpdate {
 }
 
 @doc("Marketplace offer details that can be updated on a Commvault Cloud Account.")
-@added(Versions.v10_preview)
+@added(Versions.v2026_11_03)
 model CloudAccountOfferDetailsUpdate {
   ...OptionalProperties<UpdateableProperties<OmitProperties<
     LiftrBase.OfferDetails,
@@ -278,7 +278,7 @@ model CloudAccountOfferDetailsUpdate {
 }
 
 @doc("User details that can be updated on a Commvault Cloud Account.")
-@added(Versions.v10_preview)
+@added(Versions.v2026_11_03)
 model CloudAccountUserUpdate {
   ...OptionalProperties<UpdateableProperties<OmitProperties<
     LiftrBase.UserDetails,
@@ -401,18 +401,18 @@ union Vendor {
 
 @doc("Class of Commvault Storage")
 union StorageClassType {
-  // COLD has two members so its description can differ from v10_preview on; ColdLegacy is named Cool before then.
+  // COLD has two members so its description can differ from v2026_11_03 on; ColdLegacy is named Cool before then.
   @doc("Cold storage class")
-  @removed(Versions.v10_preview)
-  @renamedFrom(Versions.v10_preview, "Cool")
+  @removed(Versions.v2026_11_03)
+  @renamedFrom(Versions.v2026_11_03, "Cool")
   ColdLegacy: "COLD",
 
   @doc("Cold storage class. Requests that use COLD are rejected during validation; use COOL for the infrequent-access tier.")
-  @added(Versions.v10_preview)
+  @added(Versions.v2026_11_03)
   Cold: "COLD",
 
   @doc("Cool (infrequent-access) storage class")
-  @added(Versions.v10_preview)
+  @added(Versions.v2026_11_03)
   Cool: "COOL",
 
   @doc("Hot storage class")

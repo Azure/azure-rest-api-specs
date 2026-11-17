@@ -17,12 +17,6 @@ using Microsoft.ManagedIdentity;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(IdentityUpdate.properties);
 
-@@clientName(
-  Identities.update,
-  "Identities.update::parameters.properties",
-  "parameters"
-);
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   FederatedIdentityCredential.properties

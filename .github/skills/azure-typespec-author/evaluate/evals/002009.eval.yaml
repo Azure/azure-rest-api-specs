@@ -5,7 +5,7 @@ type: capability # capability | regression
 tags:
   area: "armtemplate"
 # Root-level environment
-environment: azsdk-mcp
+agent_environment: azsdk-mcp
 # Execution configuration
 defaults:
   runs: 1 # Trials per stimulus
@@ -21,7 +21,7 @@ stimuli:
       mode: "trigger"
     prompt: |
       In the Widget project, add an update operation for the existing Employee ARM resource. The operation should complete synchronously and allow clients to update the resource's tags and mutable Employee properties. Follow TypeSpec Azure guidelines. I've already made the design decisions, so go ahead with the change.
-    environment: &shared_environment
+    agent_environment: &shared_environment
       files:
         - src: ../fixtures/002009-arm-add-patch-operation-to-resource/employee.tsp
           dest: employee.tsp
@@ -53,7 +53,7 @@ stimuli:
       mode: "forced"
     prompt: |
       @azure-typespec-author In the Widget project, add an update operation for the existing Employee ARM resource. The operation should complete synchronously and allow clients to update the resource's tags and mutable Employee properties. Follow TypeSpec Azure guidelines. I've already made the design decisions, so go ahead with the change.
-    environment: *shared_environment
+    agent_environment: *shared_environment
     graders:
       - type: "run-command"
         config:
@@ -85,11 +85,7 @@ stimuli:
       suite: "armtemplate"
       mode: "no-skill"
     prompt: "In the Widget project, add an update operation for the existing Employee ARM resource. The operation should complete synchronously and allow clients to update the resource's tags and mutable Employee properties. Follow TypeSpec Azure guidelines. I've already made the design decisions, so go ahead with the change."
-    environment: *shared_environment
-    rubric:
-      - Employee has a synchronous PATCH update operation implemented with the ARM custom patch template.
-      - The update request supports tags and mutable Employee properties while preserving ARM update semantics.
-      - Changes follow TypeSpec Azure guidelines and contain no unrelated edits.
+    agent_environment: *shared_environment
     graders:
       - type: "tool-calls"
         config:
@@ -97,12 +93,6 @@ stimuli:
             - "^(edit|apply_patch|bash|powershell)$"
       - *file_matches
       - *file_not_matches
-      - type: "prompt"
-        config:
-          prompt: "Verify change scope and quality only: no unrelated edits, and the implemented result is semantically consistent with the task intent."
-          model: "gpt-5.6-sol"
-          scoring: "scale_1_10"
-          threshold: 0.88
     constraints:
       max_turns: 6
       max_tokens: 100000

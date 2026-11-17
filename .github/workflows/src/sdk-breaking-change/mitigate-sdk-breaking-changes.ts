@@ -73,7 +73,10 @@ export async function mitigateSdkBreakingChanges({
   specificationRepositoryPath: unresolvedSpecificationRepositoryPath,
   resultDirPath,
   azureSdkCliPath,
-}: { core: Core } & MitigateSdkBreakingChangesOptions): Promise<void> {
+  forwardOutput,
+}: { core: Core } & MitigateSdkBreakingChangesOptions & {
+    forwardOutput?: boolean;
+  }): Promise<void> {
   const analysisResult = AnalysisResultSchema.parse(
     JSON.parse(await readFile(analysisResultPath, "utf8")),
   );
@@ -86,6 +89,12 @@ export async function mitigateSdkBreakingChanges({
       ? `**Analyzed commit:** ${inlineCode(analysisResult.headSha)}`
       : undefined,
   ];
+  let azsdkOptions = undefined;
+  if (forwardOutput) {
+    azsdkOptions = {
+      forwardOutput: true,
+    };
+  }
   try {
     const specificationRepositoryPath = await realpath(unresolvedSpecificationRepositoryPath);
     const specificationRoot = await realpath(join(specificationRepositoryPath, "specification"));
@@ -143,7 +152,7 @@ export async function mitigateSdkBreakingChanges({
               "--tsp-project-path",
               typeSpecProjectPath,
               "--customization-request",
-              `Resolve this SDK breaking change: ${JSON.stringify({
+              `Resolve ${analysisResult.sdkLanguage} SDK breaking change: ${JSON.stringify({
                 breakingChange: change.breakingChange,
                 category: change.category,
                 suggestedFix: change.suggestedFix,
@@ -153,6 +162,7 @@ export async function mitigateSdkBreakingChanges({
               "--output",
               "json",
             ],
+            azsdkOptions,
           );
           await writeFile(commandResultPath, stdout);
 

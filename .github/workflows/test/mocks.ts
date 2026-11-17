@@ -38,6 +38,7 @@ function createMockGithubImpl() {
     rest: {
       actions: {
         createWorkflowDispatch: vi.fn(),
+        deleteArtifact: vi.fn(),
         getWorkflowRun: vi.fn(),
         downloadArtifact: vi.fn().mockResolvedValue({ data: new ArrayBuffer(0) }),
         listJobsForWorkflowRun: vi.fn().mockResolvedValue({ data: [] }),
