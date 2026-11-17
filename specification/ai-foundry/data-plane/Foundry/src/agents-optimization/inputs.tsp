@@ -6,7 +6,6 @@ import "../skills/models.tsp";
 // Only shared evaluation types are needed; the full models import also pulls in Data Generation Jobs.
 import "../openai/evaluations/common.tsp";
 import "../openai/evaluations/user_conversation_simulation.tsp";
-import "@azure-tools/openai-typespec/models/chat";
 
 using TypeSpec.Rest;
 

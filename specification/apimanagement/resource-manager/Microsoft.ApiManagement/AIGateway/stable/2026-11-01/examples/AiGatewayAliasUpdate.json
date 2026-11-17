@@ -19,7 +19,7 @@
           }
         ],
         "selectionOrder": [
-          "routing"
+          "priority"
         ],
         "policies": [
           {
@@ -42,8 +42,8 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/aliases/chat",
         "name": "chat",
         "type": "Microsoft.ApiManagement/aigateways/workspaces/aliases",
-        "eTag": "W/\"1\"",
         "properties": {
+          "provisioningState": "Succeeded",
           "aliasName": "chat",
           "description": "Stable chat model alias",
           "backendModels": [
@@ -54,7 +54,7 @@
             }
           ],
           "selectionOrder": [
-            "routing"
+            "priority"
           ],
           "policies": [
             {
@@ -66,6 +66,16 @@
               "counterKey": [
                 "identity"
               ]
+            }
+          ],
+          "supportedEndpoints": [
+            "openai/v1/chat/completions"
+          ],
+          "gatewayEndpoints": [
+            {
+              "url": "https://example-gateway.azure-api.net/default/models/openai/v1/chat/completions",
+              "baseUrl": "https://example-gateway.azure-api.net/default/models/openai/v1",
+              "api": "v1/chat/completions"
             }
           ]
         }

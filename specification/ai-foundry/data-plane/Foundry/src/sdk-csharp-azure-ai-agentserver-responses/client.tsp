@@ -1,5 +1,4 @@
 import "./main.tsp";
-import "@typespec/http-client";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
@@ -1129,46 +1128,47 @@ namespace Azure.AI.Projects {
 // compiled with targeted OPENAI001 suppressions instead of a package-wide one. No attribute is
 // emitted for these: their declarations live in the OpenAI library.
 // ============================================================================
-@@TypeSpec.HttpClient.experimental(
-  OpenAI.OutputItem,
-  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
-);
-@@TypeSpec.HttpClient.experimental(
-  OpenAI.InputItem,
-  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
-);
-@@TypeSpec.HttpClient.experimental(
-  OpenAI.ItemMessage,
-  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
-);
-@@TypeSpec.HttpClient.experimental(
-  OpenAI.Tool,
-  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
-);
-@@TypeSpec.HttpClient.experimental(
-  OpenAI.Response,
-  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
-);
-@@TypeSpec.HttpClient.experimental(
-  OpenAI.ResponseError,
-  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
-);
-@@TypeSpec.HttpClient.experimental(
-  OpenAI.Annotation,
-  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
-);
-@@TypeSpec.HttpClient.experimental(
-  OpenAI.ComputerAction,
-  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
-);
-@@TypeSpec.HttpClient.experimental(
-  OpenAI.ConversationParam,
-  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
-);
-@@TypeSpec.HttpClient.experimental(
-  OpenAI.ResponseUsage,
-  #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
-);
+// @@TypeSpec.HttpClient.experimental(
+//   OpenAI.OutputItem,
+//   #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+// );
+// @@Azure.ClientGenerator.Core.ex
+// @@TypeSpec.HttpClient.experimental(
+//   OpenAI.InputItem,
+//   #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+// );
+// @@TypeSpec.HttpClient.experimental(
+//   OpenAI.ItemMessage,
+//   #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+// );
+// @@TypeSpec.HttpClient.experimental(
+//   OpenAI.Tool,
+//   #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+// );
+// @@TypeSpec.HttpClient.experimental(
+//   OpenAI.Response,
+//   #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+// );
+// @@TypeSpec.HttpClient.experimental(
+//   OpenAI.ResponseError,
+//   #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+// );
+// @@TypeSpec.HttpClient.experimental(
+//   OpenAI.Annotation,
+//   #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+// );
+// @@TypeSpec.HttpClient.experimental(
+//   OpenAI.ComputerAction,
+//   #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+// );
+// @@TypeSpec.HttpClient.experimental(
+//   OpenAI.ConversationParam,
+//   #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+// );
+// @@TypeSpec.HttpClient.experimental(
+//   OpenAI.ResponseUsage,
+//   #{ emitterScope: "@typespec/http-client-csharp", diagnosticId: "OPENAI001" }
+// );
 
 // ============================================================================
 // Models pulled in by the @@usage roots and operations that no public member of this package

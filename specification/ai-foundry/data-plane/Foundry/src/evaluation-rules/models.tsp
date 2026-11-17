@@ -57,6 +57,7 @@ model ContinuousEvaluationRuleAction extends EvaluationRuleAction {
 }
 
 /** Preview form of `azure_ai_traces`. Returned only for rules backed by existing preview schedules; rejected on create and update. */
+@extension("x-ms-foundry-meta", AllConditionalEvaluationRuleActionPreviews)
 model TracesPreviewEvalRunDataSource extends EvalRunDataSource {
   /** The type of data source, always `azure_ai_traces_preview`. */
   type: "azure_ai_traces_preview";
@@ -65,14 +66,16 @@ model TracesPreviewEvalRunDataSource extends EvalRunDataSource {
 }
 
 /** Preview form of `azure_ai_trace_data_source`. Returned only for rules backed by existing preview schedules; rejected on create and update. */
-model AzureAITraceDataSourcePreviewEvalRunDataSource extends EvalRunDataSource {
+@extension("x-ms-foundry-meta", AllConditionalEvaluationRuleActionPreviews)
+model TraceSourcePreviewEvalRunDataSource extends EvalRunDataSource {
   /** The type of data source, always `azure_ai_trace_data_source_preview`. */
   type: "azure_ai_trace_data_source_preview";
 
-  ...OmitProperties<AzureAITraceDataSourceEvalRunDataSource, "type">;
+  ...OmitProperties<TraceSourceEvalRunDataSource, "type">;
 }
 
 /** Preview form of `azure_ai_user_conversation_simulation`. Returned only for rules backed by existing preview schedules; rejected on create and update. */
+@extension("x-ms-foundry-meta", AllConditionalEvaluationRuleActionPreviews)
 model UserConversationSimulationPreviewEvalRunDataSource
   extends EvalRunDataSource {
   /** The type of data source, always `azure_ai_user_conversation_simulation_preview`. */
@@ -88,13 +91,13 @@ union TraceEvaluationSource {
   traces: TracesEvalRunDataSource,
 
   /** Trace inputs selected through an existing TraceSource variant. */
-  traceDataSource: AzureAITraceDataSourceEvalRunDataSource,
+  traceDataSource: TraceSourceEvalRunDataSource,
 
   /** Response-only preview form of `traces`. */
   tracesPreview: TracesPreviewEvalRunDataSource,
 
   /** Response-only preview form of `traceDataSource`. */
-  traceDataSourcePreview: AzureAITraceDataSourcePreviewEvalRunDataSource,
+  traceDataSourcePreview: TraceSourcePreviewEvalRunDataSource,
 }
 
 /** Configures a scheduled evaluation of observed agent traces. */
@@ -124,7 +127,7 @@ union DatasetEvaluationSource {
   jsonl: OpenAI.CreateEvalJsonlRunDataSource,
 
   /** CSV inputs from a file ID. */
-  csv: EvalCsvRunDataSource,
+  csv: CsvEvalRunDataSource,
 
   /** Inputs that are sent to a model to generate completions before scoring. */
   completions: OpenAI.CreateEvalCompletionsRunDataSource,

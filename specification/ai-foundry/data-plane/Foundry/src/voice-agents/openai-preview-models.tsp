@@ -1,6 +1,4 @@
 import "@typespec/openapi";
-import "@azure-tools/openai-typespec/models/live";
-import "@azure-tools/openai-typespec/models/realtime";
 import "./agents.tsp";
 
 using TypeSpec.OpenAPI;
@@ -322,6 +320,16 @@ using Azure.AI.Projects;
 );
 @@extension(
   OpenAI.LiveServerEventLiveThinkingAppended,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveTransportDtmfReceived,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveTransportDtmfSent,
   "x-ms-foundry-meta",
   VoiceAgentRequiredPreview
 );

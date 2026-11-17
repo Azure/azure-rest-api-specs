@@ -3,7 +3,6 @@
 import "./inputs.tsp";
 import "./skill-results.tsp";
 import "../common/servicepatterns.tsp";
-import "@azure-tools/openai-typespec/models/chat";
 
 using TypeSpec.Rest;
 

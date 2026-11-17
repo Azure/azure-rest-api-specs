@@ -74,8 +74,13 @@ interface Operations {
  */
 enum Versions {
   /**
+   * The 2026-04-16 API Version.
+   */
+  v2026_04_16: "2026-04-16",
+
+  /**
    * The latest public preview API version.
    */
   @previewVersion
-  vLatestPreview: "2026-08-01-preview",
+  vLatestPreview: "2026-09-01-preview",
 }
