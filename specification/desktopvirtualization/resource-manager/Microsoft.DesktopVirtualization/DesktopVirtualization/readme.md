@@ -30,6 +30,87 @@ openapi-type: arm
 tag: package-2026-04-16
 ```
 
+### Tag: package-preview-2026-09-01-preview
+
+These settings apply only when `--tag=package-preview-2026-09-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-09-01-preview'
+input-file:
+  - preview/2026-09-01-preview/desktopvirtualization.json
+suppressions:
+  - code: RequiredPropertiesMissingInResourceModel
+    from: desktopvirtualization.json
+    reason: |
+      This /operations list contains supported-operation metadata, not ARM resource instances.
+      The current validator still requires read-only id, name, and type on its items;
+      those resource-identity requirements do not match the ResourceProviderOperation contract.
+    where:
+      - $.definitions.ResourceProviderOperationListResult
+  - code: PutResponseCodes
+    from: desktopvirtualization.json
+    reason: |
+      Discussed in the ARM API office hour and get approved. Our service are currently returning the 200
+      status code not 201, and this is already in the stable version.
+    where:
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+  - code: BodyTopLevelProperties
+    from: desktopvirtualization.json
+    reason: |
+      This GET-only endpoint returns provisioning-operation status, not an independently managed ARM
+      resource. Operation progress, start/end timestamps, and error information belong to the top-level
+      operation-status envelope; properties contains the session-host provisioning details. Moving the
+      operation metadata into properties would change the operation-status response contract.
+    where:
+      - $.definitions.SessionHostManagementProvisioningStatus
+      - $.definitions.SessionHostManagementUpdateStatus
+  - code: RequiredPropertiesMissingInResourceModel
+    from: desktopvirtualization.json
+    reason: |
+      This GET-only schema represents provisioning-operation status rather than a tracked or proxy
+      resource. Its optional id and name identify the asynchronous operation, and the response has no
+      ARM resource type. Requiring resource-envelope id, name, and type would change this operation-status
+      contract rather than describe an independently managed ARM resource.
+    where:
+      - $.definitions.SessionHostManagementProvisioningStatus
+      - $.definitions.SessionHostManagementUpdateStatus
+  - code: AvoidAdditionalProperties
+    from: desktopvirtualization.json
+    reason: |
+      vmTags contains customer-defined key/value tags applied to session host VMs, not arbitrary
+      service properties. This existing August Preview contract requires a string dictionary;
+      the rule's tag-name allowlist does not recognize vmTags.
+    where:
+      - $.definitions.ActiveSessionHostConfigurationProperties.properties.vmTags
+      - $.definitions.SessionHostConfigurationProperties.properties.vmTags
+      - $.definitions.SessionHostConfigurationPatchProperties.properties.vmTags
+  - code: ArmResourcePropertiesBag
+    from: desktopvirtualization.json
+    reason: |
+      The read-only properties.name field is part of the existing pooled-schedule Preview
+      response contract. Renaming or removing it would change that contract; September retains
+      the August schema unchanged.
+    where:
+      - $.definitions.ScalingPlanPooledSchedule
+  - code: PostResponseCodes
+    from: desktopvirtualization.json
+    reason: |
+      These existing Preview actions retain their August response contracts. The two control
+      actions return 202 with Location and no response body; retryProvisioning is synchronous
+      and returns an empty 200 response. Do not invent terminal response codes or bodies solely
+      to satisfy a rule that requires a different response combination.
+    where:
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/controlSessionHostProvisioning'].post
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHostManagements/default/controlSessionHostUpdate'].post
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/sessionHosts/{sessionHostName}/retryProvisioning'].post
+  - code: DefinitionsPropertiesNamesCamelCase
+    from: desktopvirtualization.json
+    reason: Property name follows RDP specification and existing naming conventions in the service.
+    where:
+      - $.definitions.HostPoolProperties.properties.allowRDPShortPathWithPrivateLink
+      - $.definitions.HostPoolPatchProperties.properties.allowRDPShortPathWithPrivateLink
+```
+
 ### Tag: package-2026-04-16
 
 These settings apply only when `--tag=package-2026-04-16` is specified on the command line.
