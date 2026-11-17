@@ -26,30 +26,6 @@ model OpenAIIntegrationRPModel
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-interface OpenAiCreateOrUpdateResourceOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-      },
-      {
-        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-        @path
-        @segment("monitors")
-        @pattern("^.*$")
-        monitorName: string,
-
-        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-        @path
-        @segment("openAIIntegrations")
-        @pattern("^[a-z][a-z0-9]*$")
-        integrationName: string,
-      },
-      ErrorType = ResourceProviderDefaultErrorResponse
-    > {}
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface OpenAIIntegrationRPModels {
@@ -64,11 +40,12 @@ interface OpenAIIntegrationRPModels {
   /**
    * Create or update an OpenAI integration rule for a given Elastic monitor resource, enabling advanced AI-driven observability and monitoring.
    */
-  createOrUpdate is OpenAiCreateOrUpdateResourceOps.CreateOrUpdateAsync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     OpenAIIntegrationRPModel,
     Response =
       | ArmResourceUpdatedResponse<OpenAIIntegrationRPModel>
       | ArmResourceCreatedResponse<OpenAIIntegrationRPModel, LroHeaders = {}>,
+    Error = ResourceProviderDefaultErrorResponse,
     OptionalRequestBody = true
   >;
 

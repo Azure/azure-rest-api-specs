@@ -42,6 +42,18 @@ model AiGatewayFrontend {
   defaultHostname?: string;
 }
 
+/** Public network access state for an AI Gateway. */
+@added(Versions.v2026_11_01)
+union AiGatewayPublicNetworkAccess {
+  string,
+
+  /** Public network access is enabled. */
+  Enabled: "Enabled",
+
+  /** Public network access is disabled. */
+  Disabled: "Disabled",
+}
+
 /** Properties of an AI Gateway. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewayProperties {
@@ -53,9 +65,19 @@ model AiGatewayProperties {
   @visibility(Lifecycle.Read)
   frontend?: AiGatewayFrontend;
 
-  /** Backend networking configuration. Can only be set when the AI Gateway is created. */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
+  /** Backend networking configuration. */
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   backend?: AiGatewayBackend;
+
+  /** Whether public network access is allowed for the AI Gateway. */
+  @added(Versions.v2026_11_01)
+  publicNetworkAccess?: AiGatewayPublicNetworkAccess;
+
+  /** Private endpoint connections associated with the AI Gateway. */
+  @added(Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  privateEndpointConnections?: AiGatewayPrivateEndpointConnection[];
 }
 
 /** An AI Gateway resource. */
@@ -75,10 +97,42 @@ model AiGatewayResource is Azure.ResourceManager.TrackedResource<
   ...Azure.ResourceManager.EntityTagProperty;
 }
 
+/** A private endpoint connection of an AI Gateway. */
+@added(Versions.v2026_11_01)
+@parentResource(AiGatewayResource)
+model AiGatewayPrivateEndpointConnection
+  is Azure.ResourceManager.PrivateEndpointConnectionResource;
+
+/** A private link resource of an AI Gateway. */
+@added(Versions.v2026_11_01)
+@parentResource(AiGatewayResource)
+model AiGatewayPrivateLinkResource is Azure.ResourceManager.PrivateLink;
+
 /** SKU fields to update on an AI Gateway. */
 @added(Versions.v2026_09_01_preview)
 model AiGatewaySkuUpdate
   is OptionalProperties<Azure.ResourceManager.CommonTypes.Sku>;
+
+/** Subnet fields to update on an AI Gateway. */
+@added(Versions.v2026_11_01)
+model AiGatewaySubnetUpdate is OptionalProperties<AiGatewaySubnet>;
+
+/** Backend networking configuration to update on an AI Gateway. */
+@added(Versions.v2026_11_01)
+model AiGatewayBackendUpdate {
+  /** Subnet through which the AI Gateway reaches backends. Omit it to keep the current subnet, or set it to null to remove it. */
+  subnet?: AiGatewaySubnetUpdate;
+}
+
+/** Properties for updating an AI Gateway. */
+@added(Versions.v2026_11_01)
+model AiGatewayUpdateProperties {
+  /** Whether public network access is allowed for the AI Gateway. */
+  publicNetworkAccess?: AiGatewayPublicNetworkAccess;
+
+  /** Backend networking configuration. */
+  backend?: AiGatewayBackendUpdate;
+}
 
 /** Parameters for updating an AI Gateway. */
 @added(Versions.v2026_09_01_preview)
@@ -88,4 +142,8 @@ model AiGatewayUpdateParameters {
 
   /** The SKU (Stock Keeping Unit) assigned to this resource. */
   sku?: AiGatewaySkuUpdate;
+
+  /** AI Gateway properties to update. */
+  @added(Versions.v2026_11_01)
+  properties?: AiGatewayUpdateProperties;
 }
