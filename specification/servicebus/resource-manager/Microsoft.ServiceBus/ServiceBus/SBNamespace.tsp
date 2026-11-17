@@ -71,7 +71,6 @@ interface SBNamespaces {
   /**
    * Updates a service namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Required to preserve wire compatibility with the legacy Service Bus ARM REST contract during OpenAPI-to-TypeSpec conversion; changing this shape would be a breaking change."
   @removed(Versions.v2026_01_01)
   @renamedFrom(Versions.v2026_01_01, "update")
