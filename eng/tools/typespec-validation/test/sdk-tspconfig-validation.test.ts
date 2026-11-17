@@ -2,7 +2,7 @@ import { defaultLogger } from "@azure-tools/specs-shared/logger";
 /* oxlint-disable */
 // TODO: Enable oxlint, fix errors
 
-import { afterEach, beforeEach, describe, it, type MockInstance, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from "vitest";
 
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { strictEqual } from "node:assert";
@@ -1005,6 +1005,105 @@ describe("tspconfig", function () {
   afterEach(() => {
     fileExistsSpy.mockReset();
     readTspConfigSpy.mockReset();
+  });
+
+  it("audits SDK sub-rule patterns independently and preserves suppressed failures", async () => {
+    const fixed = new TspConfigGoMgmtGenerateFakesTrueSubRule();
+    const needed = new TspConfigGoMgmtInjectSpansTrueSubRule();
+    vi.spyOn(fixed, "execute").mockResolvedValue({ success: true });
+    vi.spyOn(needed, "execute").mockResolvedValue({
+      success: false,
+      diagnostics: [{ severity: "error", code: "sdk", message: "Invalid value" }],
+    });
+    const prefix = "options.@azure-tools/typespec-go";
+    const suppression = {
+      tool: "TypeSpecValidation",
+      paths: ["tspconfig.yaml"],
+      rules: ["SdkTspConfigValidation"],
+      reason: "Legacy settings",
+      subRules: [
+        `${prefix}.generate-fakes`,
+        `${prefix}.inject-spans`,
+        `${prefix}.*`,
+        "unknown.key",
+      ],
+      source: { path: "/spec/suppressions.yaml", line: 4, column: 3 },
+    };
+    vi.spyOn(utils, "getSuppressions").mockResolvedValue([suppression]);
+    const rule = new SdkTspConfigValidationRule([fixed, needed], []);
+    const result = await rule.execute(managementTspconfigFolder, defaultLogger, {
+      checkUnusedSuppressions: true,
+    });
+    expect(result.success).toBe(true);
+    expect(result.diagnostics).toEqual([
+      expect.objectContaining({
+        severity: "warning",
+        code: "unused-suppression",
+        path: suppression.source.path,
+        location: { line: 4, column: 3 },
+        message: expect.stringContaining(`${prefix}.generate-fakes`),
+      }),
+    ]);
+  });
+
+  it("does not classify skipped SDK validations or audit errors as unused", async () => {
+    const skipped = new TspConfigGoMgmtGenerateFakesTrueSubRule();
+    const unavailable = new TspConfigGoMgmtInjectSpansTrueSubRule();
+    vi.spyOn(skipped, "execute").mockResolvedValue({ success: true, skipped: "Not applicable" });
+    vi.spyOn(unavailable, "execute").mockRejectedValue(new Error("Cannot read configuration"));
+    vi.spyOn(utils, "getSuppressions").mockResolvedValue([
+      {
+        tool: "TypeSpecValidation",
+        paths: ["tspconfig.yaml"],
+        rules: ["SdkTspConfigValidation"],
+        subRules: ["options.@azure-tools/typespec-go.*"],
+        reason: "Legacy settings",
+      },
+    ]);
+    const rule = new SdkTspConfigValidationRule([skipped, unavailable], []);
+    const result = await rule.execute(managementTspconfigFolder, defaultLogger, {
+      checkUnusedSuppressions: true,
+    });
+    expect(result.success).toBe(true);
+    expect(result.diagnostics).toEqual([
+      expect.objectContaining({
+        severity: "warning",
+        code: "suppression-audit-incomplete",
+        message: expect.stringContaining("Cannot read configuration"),
+      }),
+    ]);
+  });
+
+  it("audits real wildcard validations but leaves unconfigured optional emitters unassessed", async () => {
+    readTspConfigSpy.mockResolvedValue(
+      createParameterExample({ key: "service-dir", value: "sdk/example" }),
+    );
+    vi.spyOn(utils, "getSuppressions").mockResolvedValue([
+      {
+        tool: "TypeSpecValidation",
+        paths: ["tspconfig.yaml"],
+        rules: ["SdkTspConfigValidation"],
+        subRules: ["parameters.*", "options.@azure-tools/typespec-go.*"],
+        reason: "Legacy settings",
+      },
+    ]);
+    const optional = new TspConfigGoDpModuleMatchPatternSubRule();
+    const execute = vi.spyOn(optional, "execute");
+    const rule = new SdkTspConfigValidationRule(
+      [new TspConfigCommonAzServiceDirMatchPatternSubRule()],
+      [optional],
+    );
+    const result = await rule.execute(managementTspconfigFolder, defaultLogger, {
+      checkUnusedSuppressions: true,
+    });
+    expect(result.success).toBe(true);
+    expect(result.diagnostics).toEqual([
+      expect.objectContaining({
+        code: "unused-suppression",
+        message: expect.stringContaining("SdkTspConfigValidation/parameters.*"),
+      }),
+    ]);
+    expect(execute).not.toHaveBeenCalled();
   });
 
   const requiredTestCases = [

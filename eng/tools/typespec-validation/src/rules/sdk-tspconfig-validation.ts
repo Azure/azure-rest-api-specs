@@ -4,8 +4,9 @@
 import { type Suppression } from "@azure-tools/suppressions";
 import type { ILogger } from "@azure-tools/specs-shared/logger";
 import { join } from "pathe";
-import { failure, type RuleResult } from "../rule-result.ts";
-import { type Rule } from "../rule.ts";
+import { failure, type Diagnostic, type RuleResult } from "../rule-result.ts";
+import { type Rule, type RuleExecutionOptions } from "../rule.ts";
+import { unusedSuppression } from "../suppression-diagnostics.ts";
 import { exceptionDiagnostic } from "../diagnostics.ts";
 import { parseYaml } from "../tsp-config.ts";
 import { fileExists, getSuppressions, readTspConfig } from "../utils.ts";
@@ -962,9 +963,13 @@ export class SdkTspConfigValidationRule implements Rule {
     this.optionalRules = optionalSubRules;
   }
 
-  async execute(folder: string, logger: ILogger): Promise<RuleResult> {
+  async execute(
+    folder: string,
+    logger: ILogger,
+    options: RuleExecutionOptions = {},
+  ): Promise<RuleResult> {
     try {
-      return await this.executeRules(folder, logger);
+      return await this.executeRules(folder, logger, options);
     } catch (error) {
       logger.debug(error instanceof Error ? (error.stack ?? error.message) : String(error));
       return {
@@ -974,9 +979,15 @@ export class SdkTspConfigValidationRule implements Rule {
     }
   }
 
-  private async executeRules(folder: string, logger: ILogger): Promise<RuleResult> {
+  private async executeRules(
+    folder: string,
+    logger: ILogger,
+    { checkUnusedSuppressions = false }: RuleExecutionOptions,
+  ): Promise<RuleResult> {
     const tspConfigPath = join(folder, "tspconfig.yaml");
-    const suppressions = await getSuppressions(tspConfigPath);
+    const suppressions = checkUnusedSuppressions
+      ? await getSuppressions(tspConfigPath, { includeSource: true })
+      : await getSuppressions(tspConfigPath);
 
     const shouldSuppressEntireRule = suppressions.some(
       (s) => s.rules?.includes(this.name) === true && (!s.subRules || s.subRules.length === 0),
@@ -993,13 +1004,36 @@ export class SdkTspConfigValidationRule implements Rule {
 
     const failedResults = [];
     let success = true;
+    const assessments = new Map<TspconfigSubRuleBase, RuleResult>();
+    const auditDiagnostics: Diagnostic[] = [];
+    const executeSubRule = async (
+      subRule: TspconfigSubRuleBase,
+      evaluate: () => Promise<RuleResult> = () => subRule.execute(folder),
+    ): Promise<RuleResult> => {
+      if (!checkUnusedSuppressions || !this.isKeyPathSuppressed(subRule.getPathOfKeyToValidate())) {
+        return evaluate();
+      }
+      try {
+        const result = await evaluate();
+        assessments.set(subRule, result);
+      } catch (error) {
+        auditDiagnostics.push({
+          severity: "warning",
+          code: "suppression-audit-incomplete",
+          message: `Could not assess suppression for '${subRule.getPathOfKeyToValidate()}': ${String(error)}`,
+          path: tspConfigPath,
+        });
+      }
+      return { success: true };
+    };
 
     // Execute required rules
     for (const subRule of this.requiredRules) {
       // Check for both direct matches and wildcard patterns
-      if (this.isKeyPathSuppressed(subRule.getPathOfKeyToValidate())) continue;
+      if (!checkUnusedSuppressions && this.isKeyPathSuppressed(subRule.getPathOfKeyToValidate()))
+        continue;
 
-      const result = await subRule.execute(folder!);
+      const result = await executeSubRule(subRule);
       if (result.skipped) logger.debug(`${subRule.getPathOfKeyToValidate()}: ${result.skipped}`);
       if (!result.success) failedResults.push(result);
 
@@ -1008,30 +1042,55 @@ export class SdkTspConfigValidationRule implements Rule {
 
     // Execute optional rules (failures don't affect overall success)
     for (const subRule of this.optionalRules) {
-      if (this.isKeyPathSuppressed(subRule.getPathOfKeyToValidate())) continue;
-
-      // Skip if emitter is not configured
-      const config = await subRule.loadConfig(folder);
-      const emitterName = subRule.getEmitterName();
-      if (config && this.skipIfEmitterNotConfigured(config, emitterName)) {
-        logger.debug(
-          `Optional rule ${subRule.constructor.name} skipped because emitter ${emitterName} is not configured.`,
-        );
+      if (!checkUnusedSuppressions && this.isKeyPathSuppressed(subRule.getPathOfKeyToValidate()))
         continue;
-      }
 
-      const result = await subRule.execute(folder!);
+      const result = await executeSubRule(subRule, async () => {
+        const config = await subRule.loadConfig(folder);
+        const emitterName = subRule.getEmitterName();
+        if (config && this.skipIfEmitterNotConfigured(config, emitterName)) {
+          return {
+            success: true,
+            skipped: `Optional rule ${subRule.constructor.name} skipped because emitter ${emitterName} is not configured.`,
+          };
+        }
+        return subRule.execute(folder);
+      });
       if (result.skipped) logger.debug(`${subRule.getPathOfKeyToValidate()}: ${result.skipped}`);
       if (!result.success) failedResults.push(result);
       // Optional rules affect overall success when emitter is configured
       success &&= result.success;
     }
 
+    if (checkUnusedSuppressions) {
+      for (const suppression of suppressions.filter((s) => s.rules?.includes(this.name))) {
+        for (const pattern of suppression.subRules ?? []) {
+          const matchingRules = [...this.requiredRules, ...this.optionalRules].filter((rule) =>
+            matchesKeyPath(pattern, rule.getPathOfKeyToValidate()),
+          );
+          if (
+            matchingRules.length > 0 &&
+            matchingRules.every((rule) => {
+              const result = assessments.get(rule);
+              return result?.success && result.skipped === undefined && !result.diagnostics?.length;
+            })
+          ) {
+            auditDiagnostics.push(
+              unusedSuppression(suppression, `${this.name}/${pattern}`, tspConfigPath),
+            );
+          }
+        }
+      }
+    }
+
     return {
       success,
-      diagnostics: failedResults.flatMap((result) =>
-        (result.diagnostics ?? []).map((diagnostic) => ({ ...diagnostic, path: tspConfigPath })),
-      ),
+      diagnostics: [
+        ...failedResults.flatMap((result) =>
+          (result.diagnostics ?? []).map((diagnostic) => ({ ...diagnostic, path: tspConfigPath })),
+        ),
+        ...auditDiagnostics,
+      ],
     };
   }
 
@@ -1052,21 +1111,16 @@ export class SdkTspConfigValidationRule implements Rule {
   }
 
   private isKeyPathSuppressed(keyPath: string): boolean {
-    // Direct match
-    if (this.suppressedKeyPaths.has(keyPath)) {
-      return true;
-    }
-
-    // Only check for wildcard at the end (format: prefix.*)
     for (const suppressedPath of this.suppressedKeyPaths) {
-      if (suppressedPath.endsWith(".*")) {
-        const prefix = suppressedPath.slice(0, -2); // Remove the '.*' at the end
-        if (keyPath.startsWith(prefix)) {
-          return true;
-        }
-      }
+      if (matchesKeyPath(suppressedPath, keyPath)) return true;
     }
 
     return false;
   }
+}
+
+function matchesKeyPath(pattern: string, keyPath: string): boolean {
+  return (
+    pattern === keyPath || (pattern.endsWith(".*") && keyPath.startsWith(pattern.slice(0, -2)))
+  );
 }

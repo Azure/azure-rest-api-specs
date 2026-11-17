@@ -28,6 +28,7 @@ import { NpmPrefixRule } from "./rules/npm-prefix.ts";
 import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.ts";
 import { ServiceYamlRule } from "./rules/service-yaml.ts";
 import { fileExists, getSuppressions } from "./utils.ts";
+import { unusedSuppression } from "./suppression-diagnostics.ts";
 
 // Context argument may add new properties or override checkingAllSpecs
 export let context: Record<string, unknown> = { checkingAllSpecs: false };
@@ -64,6 +65,27 @@ export async function runRules(
         (s) => s.rules?.includes(rule.name) && (!s.subRules || s.subRules.length === 0),
       );
       if (ruleSuppressions.length > 0) {
+        if (options.checkUnusedSuppressions) {
+          try {
+            const assessed = await rule.execute(folder, logger, { ...options, fix: false });
+            if (
+              assessed.success &&
+              assessed.skipped === undefined &&
+              !assessed.diagnostics?.length
+            ) {
+              diagnostics.push(
+                ...ruleSuppressions.map((entry) => unusedSuppression(entry, rule.name, folder)),
+              );
+            }
+          } catch (error) {
+            diagnostics.push({
+              severity: "warning",
+              code: "suppression-audit-incomplete",
+              message: `Could not assess suppression for '${rule.name}': ${String(error)}`,
+              path: folder,
+            });
+          }
+        }
         logger.debug(`  Suppressed: ${ruleSuppressions[0].reason}`);
         result.suppressed.push(rule.name);
         reportStatus(rule.name, "SUPPRESSED");
@@ -165,6 +187,11 @@ export async function main({ fix: defaultFix }: RuleExecutionOptions = {}) {
       description:
         "Apply fixes and retain changes (default for single-project runs). " +
         "Validation still fails when files change.",
+    },
+    "check-unused-suppressions": {
+      type: "boolean",
+      description:
+        "Warn about unnecessary supported rule and SDK config sub-rule suppressions in evaluated projects (experimental).",
     },
     all: {
       type: "boolean",
@@ -315,6 +342,7 @@ export async function main({ fix: defaultFix }: RuleExecutionOptions = {}) {
       verbose: values.verbose,
       fix,
       concurrency,
+      checkUnusedSuppressions: values["check-unused-suppressions"],
     });
     if (!success) process.exitCode = 1;
     return;
@@ -336,6 +364,7 @@ export async function main({ fix: defaultFix }: RuleExecutionOptions = {}) {
       summaryFile,
       fix,
       concurrency,
+      checkUnusedSuppressions: values["check-unused-suppressions"],
     });
     if (!success) process.exitCode = 1;
     return;
@@ -364,7 +393,9 @@ export async function main({ fix: defaultFix }: RuleExecutionOptions = {}) {
   }
   logger.debug(`Running TypeSpecValidation on folder: ${absolutePath}`);
 
-  const suppressions: Suppression[] = await getSuppressions(absolutePath);
+  const suppressions: Suppression[] = await getSuppressions(absolutePath, {
+    includeSource: values["check-unused-suppressions"],
+  });
 
   // Suppressions for the whole tool must have no rules or sub-rules
   const toolSuppressions = suppressions.filter((s) => !s.rules?.length && !s.subRules?.length);
@@ -389,7 +420,10 @@ export async function main({ fix: defaultFix }: RuleExecutionOptions = {}) {
     new SdkTspConfigValidationRule(),
   ];
 
-  const result = await runRules(rules, absolutePath, suppressions, logger, { fix });
+  const result = await runRules(rules, absolutePath, suppressions, logger, {
+    fix,
+    ...(values["check-unused-suppressions"] ? { checkUnusedSuppressions: true } : {}),
+  });
 
   if (!result.success) {
     process.exitCode = 1;

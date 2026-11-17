@@ -1,5 +1,33 @@
 import { expect, test } from "vitest";
 import { type Suppression, getSuppressionsFromYaml } from "../src/suppressions.ts";
+import { resolve } from "node:path";
+
+test("opt-in source locations retain the matching entry's original YAML position", () => {
+  const yaml = `# Existing exemptions
+- tool: OtherTool
+  path: foo.json
+  reason: unrelated
+
+- tool: TestTool
+  paths: [foo.json, bar.json]
+  reason: needs review
+`;
+  const [suppression] = getSuppressionsFromYaml(
+    "TestTool",
+    "foo.json",
+    "suppressions.yaml",
+    yaml,
+    {},
+    { includeSource: true },
+  );
+  expect(suppression).toMatchObject({
+    paths: ["foo.json", "bar.json"],
+    source: { path: resolve("suppressions.yaml"), line: 6, column: 3 },
+  });
+  expect(
+    getSuppressionsFromYaml("TestTool", "foo.json", "suppressions.yaml", yaml)[0],
+  ).not.toHaveProperty("source");
+});
 
 test("empty suppressions.yaml", () => {
   const suppressions: Suppression[] = getSuppressionsFromYaml(

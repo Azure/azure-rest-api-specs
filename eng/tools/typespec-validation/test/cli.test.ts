@@ -99,6 +99,47 @@ it("rejects conflicting check and fix modes before validating", async () => {
   });
 });
 
+it("reports project-local unused SDK suppressions through the CLI and batch workers", async () => {
+  const project = "specification/service/data-plane/Project";
+  await addProject(project);
+  await initGit();
+  await writeFile(join(root, "package.json"), '{"private":true}');
+  const config = `parameters:
+  service-dir:
+    default: sdk/example
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+`;
+  await writeFile(join(root, project, "tspconfig.yaml"), config);
+  await writeFile(
+    join(root, project, "suppressions.yaml"),
+    `- tool: TypeSpecValidation
+  paths: ["."]
+  rules: [FolderStructure]
+  reason: Fixture has no TypeSpec entrypoint
+- tool: TypeSpecValidation
+  paths: [tspconfig.yaml]
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - parameters.service-dir.default
+    - options.@azure-tools/typespec-java.emitter-output-dir
+    - options.@azure-tools/typespec-python.emitter-output-dir
+    - options.@azure-tools/typespec-ts.package-details.name
+  reason: Previously invalid service directory
+`,
+  );
+  const normal = await run(project, "--check");
+  expect(normal.stderr).toBe("");
+  const audited = await run(project, "--check", "--check-unused-suppressions");
+  expect(audited.stderr).toContain("suppressions.yaml:5:3 - warning tsv/unused-suppression:");
+  expect(audited.stderr).toContain("SdkTspConfigValidation/parameters.service-dir.default");
+  expect(audited.stderr).not.toContain("Suppression for 'FolderStructure'");
+  const batch = await run("--all", "--check-unused-suppressions");
+  expect(batch.stderr).toContain("SdkTspConfigValidation/parameters.service-dir.default");
+  expect(await readFile(join(root, project, "tspconfig.yaml"), "utf8")).toBe(config);
+});
+
 it("requires an explicit project folder instead of resolving a missing argument to cwd", async () => {
   await writeFile(join(root, "tspconfig.yaml"), "");
   await expect(run()).rejects.toMatchObject({

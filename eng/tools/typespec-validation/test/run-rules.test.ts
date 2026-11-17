@@ -27,6 +27,56 @@ afterEach(() => {
 });
 
 describe("runRules", function () {
+  it("audits suppressed rules read-only, warning only for an evaluated pass", async () => {
+    const warning = vi.spyOn(console, "warn").mockImplementation(() => {});
+    const rules = [
+      createRule("Fixed", { success: true }, { suppressable: true }),
+      createRule("Needed", { success: false }, { suppressable: true }),
+      createRule("Skipped", { success: true, skipped: "Not applicable" }, { suppressable: true }),
+    ];
+    const result = await runRules(
+      rules,
+      "/test",
+      rules.map((rule) => ({
+        tool: "TypeSpecValidation",
+        paths: ["."],
+        rules: [rule.name],
+        reason: "legacy",
+        source: { path: "/test/suppressions.yaml", line: 2, column: 3 },
+      })),
+      defaultLogger,
+      { fix: true, checkUnusedSuppressions: true },
+    );
+    expect(result.success).toBe(true);
+    expect(result.suppressed).toEqual(["Fixed", "Needed", "Skipped"]);
+    for (const rule of rules) {
+      expect(rule.executeFn).toHaveBeenCalledWith("/test", defaultLogger, {
+        fix: false,
+        checkUnusedSuppressions: true,
+      });
+    }
+    expect(warning).toHaveBeenCalledExactlyOnceWith(
+      expect.stringContaining("Suppression for 'Fixed' does not hide a failure in /test."),
+    );
+    expect(warning.mock.calls[0][0]).toContain("suppressions.yaml:2:3");
+  });
+
+  it("reports an incomplete audit without turning a suppressed exception into failure", async () => {
+    const warning = vi.spyOn(console, "warn").mockImplementation(() => {});
+    const rule = createRule("Unavailable", { success: true }, { suppressable: true });
+    rule.executeFn.mockRejectedValue(new Error("Cannot read configuration"));
+    const result = await runRules(
+      [rule],
+      "/test",
+      [{ tool: "TypeSpecValidation", paths: ["."], rules: [rule.name], reason: "legacy" }],
+      defaultLogger,
+      { checkUnusedSuppressions: true },
+    );
+    expect(result.success).toBe(true);
+    expect(warning).toHaveBeenCalledWith(expect.stringContaining("suppression-audit-incomplete"));
+    expect(warning).not.toHaveBeenCalledWith(expect.stringContaining("unused-suppression"));
+  });
+
   it("forwards fix mode while still running validation-only rules", async () => {
     const fixable = createRule("Fixable", { success: true });
     const validationOnly = createRule("ValidationOnly", { success: true });
