@@ -14,8 +14,8 @@ model EmployeeProperties {
   /** Age of employee */
   age?: int32;
 
-  /** City of employee */
-  city?: string;
+  /** Country of employee */
+  country?: string;
 
   /** Email of employee */
   email?: string;
