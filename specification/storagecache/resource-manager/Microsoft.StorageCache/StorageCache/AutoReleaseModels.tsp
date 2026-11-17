@@ -327,12 +327,12 @@ model AutoReleaseJobProperties {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   adminStatus?: AutoReleaseJobAdminStatus = AutoReleaseJobAdminStatus.Enable;
 
-  /** Complete policy set. Policies are immutable after creation. */
+  /** Complete policy set. Required when creating a job. Policies are immutable after creation; when omitted from PUT for an existing job, the current policies are preserved. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @minItems(1)
   @maxItems(10)
   @identifiers(#["name"])
-  policies: AutoReleasePolicy[];
+  policies?: AutoReleasePolicy[];
 
   /** Latest status accepted by the resource provider. */
   @visibility(Lifecycle.Read)

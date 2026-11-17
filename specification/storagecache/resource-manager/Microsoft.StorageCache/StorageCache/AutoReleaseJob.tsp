@@ -81,7 +81,7 @@ interface AutoReleaseJobs {
 @@doc(AutoReleaseJob.properties, "Properties of the AutoRelease job.");
 @@doc(
   AutoReleaseJobs.createOrUpdate::parameters.resource,
-  "Object containing the complete policy set when creating an AutoRelease job. For an existing job, only adminStatus can be modified; when omitted, the service applies Enable. If read-only properties are included, they must match the existing values of those properties."
+  "Object containing the policy set and administrative status for an AutoRelease job. Policies are required when creating a job. For an existing job, policies may be omitted to preserve the current policy set; if supplied, they must match the existing policies. Only adminStatus can be modified, and when omitted, the service applies Enable. If read-only properties are included, they must match the existing values of those properties."
 );
 @@doc(
   AutoReleaseJobs.update::parameters.properties,

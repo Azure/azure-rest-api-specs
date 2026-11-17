@@ -1716,7 +1716,7 @@
           {
             "name": "resource",
             "in": "body",
-            "description": "Object containing the complete policy set when creating an AutoRelease job. For an existing job, only adminStatus can be modified; when omitted, the service applies Enable. If read-only properties are included, they must match the existing values of those properties.",
+            "description": "Object containing the policy set and administrative status for an AutoRelease job. Policies are required when creating a job. For an existing job, policies may be omitted to preserve the current policy set; if supplied, they must match the existing policies. Only adminStatus can be modified, and when omitted, the service applies Enable. If read-only properties are included, they must match the existing values of those properties.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AutoReleaseJob"
@@ -6687,7 +6687,7 @@
         },
         "policies": {
           "type": "array",
-          "description": "Complete policy set. Policies are immutable after creation.",
+          "description": "Complete policy set. Required when creating a job. Policies are immutable after creation; when omitted from PUT for an existing job, the current policies are preserved.",
           "minItems": 1,
           "maxItems": 10,
           "items": {
@@ -6706,10 +6706,7 @@
           "description": "Latest status accepted by the resource provider.",
           "readOnly": true
         }
-      },
-      "required": [
-        "policies"
-      ]
+      }
     },
     "AutoReleaseJobProvisioningState": {
       "type": "string",
