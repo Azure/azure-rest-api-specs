@@ -2621,10 +2621,10 @@ model DatabaseAccountUpdateProperties {
   enableMaterializedViews?: boolean;
 
   /**
-   * Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB account. This property is supported only for existing API for NoSQL accounts with continuous backup and all versions and deletes change feed enabled. This property cannot be set during account creation. Set to true to enable Integrated Embeddings. Setting true again after enablement is an idempotent no-op. Integrated Embeddings cannot be disabled after it is enabled; explicitly setting false after enablement returns 400 Bad Request. Omitting this property during an update preserves its current value.
+   * Set to true when creating a Cosmos DB for NoSQL account to enable Integrated Embeddings. Enabling it requires continuous backup and all versions and deletes change feed. This setting cannot be changed after account creation.
    */
   @added(Versions.v2026_09_01_preview)
-  @visibility(Lifecycle.Read, Lifecycle.Update)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   enableEmbeddingGenerator?: boolean;
 
   /**
@@ -2881,10 +2881,10 @@ model DatabaseAccountCreateUpdateProperties {
   enableMaterializedViews?: boolean;
 
   /**
-   * Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB account. This property is supported only for existing API for NoSQL accounts with continuous backup and all versions and deletes change feed enabled. This property cannot be set during account creation. Set to true to enable Integrated Embeddings. Setting true again after enablement is an idempotent no-op. Integrated Embeddings cannot be disabled after it is enabled; explicitly setting false after enablement returns 400 Bad Request. Omitting this property during an update preserves its current value.
+   * Set to true when creating a Cosmos DB for NoSQL account to enable Integrated Embeddings. Enabling it requires continuous backup and all versions and deletes change feed. This setting cannot be changed after account creation.
    */
   @added(Versions.v2026_09_01_preview)
-  @visibility(Lifecycle.Read, Lifecycle.Update)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   enableEmbeddingGenerator?: boolean;
 
   /**
