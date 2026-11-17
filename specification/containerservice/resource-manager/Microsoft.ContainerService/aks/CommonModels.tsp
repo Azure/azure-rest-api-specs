@@ -299,7 +299,7 @@ union OSSKU {
   /**
    * Use Ubuntu2604 as the OS for node images. For limitations and supported Kubernetes versions, see https://aka.ms/aks/supported-ubuntu-versions
    */
-  @added(Versions.v2026_10_02_preview)
+  @added(Versions.v2026_10_01)
   Ubuntu2604: "Ubuntu2604",
 }
 
