@@ -4,6 +4,12 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Migrate;
 
+@@clientName(
+  Microsoft.Migrate,
+  "MigrateContainerAppsAssessmentsMgmtClient",
+  "python"
+);
+
 @@clientName(DownloadUrl.assessmentReportUrl, "assessmentReportUri", "csharp");
 @@clientName(
   ContainerAppsAssessmentOptions,
