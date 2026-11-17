@@ -1147,6 +1147,20 @@ namespace Azure.AI.Projects {
   @@usage(OpenAI.LiveClientEvent, Usage.input | Usage.json);
   @@usage(OpenAI.LiveServerEvent, Usage.output | Usage.json);
 
+  #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Expose the native Live client event union in OpenAPI."
+  @doc("A client event sent over a GPT Live voice-agent WebSocket.")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  union VoiceAgentLiveClientEvent {
+    native: OpenAI.LiveClientEvent,
+  }
+
+  #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Expose the native Live server event union in OpenAPI."
+  @doc("A server event received over a GPT Live voice-agent WebSocket.")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  union VoiceAgentLiveServerEvent {
+    native: OpenAI.LiveServerEvent,
+  }
+
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Add Foundry persistence correlation to the primary session-started event without replacing native session metadata."
   @@copyProperties(
     OpenAI.LiveServerEventLiveSessionStarted,

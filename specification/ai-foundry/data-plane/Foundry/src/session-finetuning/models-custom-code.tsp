@@ -365,6 +365,15 @@ model LossFnInputs {
    * Omit or pass empty array to skip KL.
    */
   logprobs?: TensorData;
+
+  /** Decode-time head token IDs with shape (target_length, K), K <= 128. */
+  score_centering_head_tokens?: TensorData;
+
+  /** Decode-time sampler head logprobs matching the head token shape. */
+  score_centering_head_logprobs?: TensorData;
+
+  /** Optional 0/1 head-entry mask; inactive prompt/tool positions should be masked. */
+  score_centering_head_mask?: TensorData;
 }
 
 /** Reuse the service's discriminated text/image model input directly. */
@@ -397,6 +406,15 @@ model SampledSequence {
 
   /** Log-probability of each generated token. */
   logprobs?: float64[];
+
+  /** Independently selected decode-time top-K token IDs per generated token. */
+  score_centering_head_tokens?: int32[][];
+
+  /** Decode-time sampler logprobs corresponding to the head token IDs. */
+  score_centering_head_logprobs?: float64[][];
+
+  /** Verified decode-time checkpoint, token-prefix digest and probability mode. */
+  score_centering_provenance?: Record<string>;
 }
 
 /** SampleOperationResult. */
@@ -474,6 +492,12 @@ model SampleRequest {
 /** Token-generation sampling parameters. */
 @usage(Usage.input | Usage.output, "python")
 model SamplingParams {
+  // Reuse the service's capture constraints without introducing a client default.
+  ...PickProperties<
+    Azure.AI.Projects.SessionFineTuning.FineTuningSamplingParams,
+    "score_centering_head_size"
+  >;
+
   /** Maximum tokens to generate. */
   max_tokens: int32;
 

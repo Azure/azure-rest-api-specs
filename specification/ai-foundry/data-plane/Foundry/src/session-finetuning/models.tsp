@@ -16,6 +16,15 @@ namespace Azure.AI.ProjectsInternal {
 
     /** Log-probabilities of the generated tokens, when available. */
     logprobs?: float64[] | null;
+
+    /** Independently selected decode-time top-K token IDs per generated token. */
+    score_centering_head_tokens?: int32[][];
+
+    /** Decode-time sampler logprobs corresponding to the head token IDs. */
+    score_centering_head_logprobs?: float64[][];
+
+    /** Verified decode-time checkpoint, token-prefix digest and probability mode. */
+    score_centering_provenance?: Record<string>;
   }
 }
 
@@ -143,6 +152,12 @@ namespace Azure.AI.Projects.SessionFineTuning {
     /** REINFORCE-style importance-sampled policy gradient loss. */
     importance_sampling: "importance_sampling",
 
+    /** Experimental sum-reduced token-level truncated IS with detached upper-capped ratio weights. */
+    tis: "tis",
+
+    /** Experimental native partial-head score centering, optionally weighted with truncated IS. */
+    score_centering: "score_centering",
+
     /** PPO (Proximal Policy Optimization) clipped surrogate loss. */
     ppo: "ppo",
 
@@ -217,6 +232,9 @@ namespace Azure.AI.Projects.SessionFineTuning {
   model TensorData {
     /** The floating-point values of the tensor. */
     data: float64[];
+
+    /** Optional dimensions for multidimensional loss inputs. */
+    shape?: int32[];
   }
 
   /** A text-token or image chunk within a model input, identified by its type. */
@@ -334,6 +352,15 @@ namespace Azure.AI.Projects.SessionFineTuning {
 
   /** Token-generation sampling parameters. */
   model FineTuningSamplingParams {
+    /**
+     * Experimental decode-time head capture: 0 disables, 1..128 requests top-K.
+     * Requires temperature=1, top_p=1, top_k=-1 and no response_format.
+     * Unsupported with text-only input.
+     */
+    @minValue(0)
+    @maxValue(128)
+    score_centering_head_size?: int32;
+
     /** Maximum number of tokens to generate. Must be positive. */
     @minValue(1)
     max_tokens: int32;
@@ -378,6 +405,15 @@ namespace Azure.AI.Projects.SessionFineTuning {
      * Omit or pass empty array to skip KL.
      */
     logprobs?: TensorData;
+
+    /** Decode-time head token IDs with shape (target_length, K), K <= 128. */
+    score_centering_head_tokens?: TensorData;
+
+    /** Decode-time sampler head logprobs matching the head token shape. */
+    score_centering_head_logprobs?: TensorData;
+
+    /** Optional 0/1 head-entry mask; inactive prompt/tool positions should be masked. */
+    score_centering_head_mask?: TensorData;
   }
 
   /** A single training example. */
@@ -394,7 +430,11 @@ namespace Azure.AI.Projects.SessionFineTuning {
     /** PPO (Proximal Policy Optimization) / CISPO (Clipped Importance-Sampled Policy Optimization): lower clip threshold. */
     clip_low_threshold?: float64;
 
-    /** PPO (Proximal Policy Optimization) / CISPO (Clipped Importance-Sampled Policy Optimization): upper clip threshold. */
+    /**
+     * PPO / CISPO: upper clip threshold. TIS: upper-only token ratio cap,
+     * finite and at least 1; defaults to 2. Score centering: optional TIS
+     * weighting cap; omit for standalone centering.
+     */
     clip_high_threshold?: float64;
 
     /** SAPO (Soft Adaptive Policy Optimization): positive advantage temperature. */
@@ -1097,6 +1137,9 @@ namespace Azure.AI.Projects.SessionFineTuning {
   union FineTuningTextOnlyLossFn {
     /** Importance-sampling policy-gradient loss. */
     importance_sampling: "importance_sampling",
+
+    /** Experimental sum-reduced upper-only token-level truncated importance sampling. */
+    tis: "tis",
 
     /** Proximal policy optimization. */
     ppo: "ppo",
