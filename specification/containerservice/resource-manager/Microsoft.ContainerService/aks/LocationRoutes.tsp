@@ -53,9 +53,9 @@ interface TrustedAccessRolesOperationGroup {
 @added(Versions.v2026_09_02_preview)
 interface ContainerServiceOperationGroup {
   /**
-   * Only returns the latest version of each node image. For example there may be an AKSUbuntu-1804gen2containerd-2024.01.26, but only AKSUbuntu-1804gen2containerd-2024.02.02 is visible in this list.
+   * Lists available node images matching optional filters, in latest-only or bounded history mode.
    */
-  @summary("Gets a list of supported NodeImage versions in the specified subscription.")
+  @summary("Lists eligible node image versions for the specified configuration.")
   @autoRoute
   @get
   @list
@@ -63,7 +63,10 @@ interface ContainerServiceOperationGroup {
   listNodeImageVersions is ArmProviderActionSync<
     Response = NodeImageVersionsListResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationResourceParameter
+    Parameters = {
+      ...LocationResourceParameter;
+      ...NodeImageVersionListConfig;
+    }
   >;
 }
 

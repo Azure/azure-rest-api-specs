@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2026-09-02-preview",
+    "location": "eastus",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "$filter": "osSku eq 'Ubuntu' and architecture eq 'amd64' and requiredFeatures eq 'localDns=true,gpuDriverMode=Install'",
+    "latestImagesOnly": false,
+    "lookback": 60
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "imageType": "Standard",
+            "fullName": "AKSUbuntu-2204gen2containerd-202610.20.0",
+            "os": "AKSUbuntu",
+            "sku": "2204gen2containerd",
+            "version": "202610.20.0"
+          },
+          {
+            "imageType": "Standard",
+            "fullName": "AKSUbuntu-2204gen2containerd-202610.13.0",
+            "os": "AKSUbuntu",
+            "sku": "2204gen2containerd",
+            "version": "202610.13.0"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ContainerService_ListNodeImageVersions",
+  "title": "List Node Image Versions with Filters and History"
+}

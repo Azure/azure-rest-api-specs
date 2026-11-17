@@ -1688,11 +1688,50 @@ model KubernetesPatchVersion {
   upgrades?: string[];
 }
 
+/** OData filtering and latest-only or bounded history discovery. */
+@added(Versions.v2026_09_02_preview)
+model NodeImageVersionListConfig {
+  /**
+   * Optional OData filter using eq comparisons joined with and.
+   * Supports image selectors and requiredFeatures eq 'name=value,name=value'.
+   * The feature string uses custom capability matching. Other operators are not supported.
+   */
+  @added(Versions.v2026_09_02_preview)
+  @query("$filter")
+  @minLength(1)
+  filter?: string;
+
+  /** Return the latest standard image per variant. Patched-image selection remains under review. */
+  @added(Versions.v2026_09_02_preview)
+  @query
+  latestImagesOnly?: boolean;
+
+  /** History window in days. Ignored in latest-only mode. */
+  @added(Versions.v2026_09_02_preview)
+  @query
+  @minValue(1)
+  @maxValue(180)
+  lookback?: int32;
+}
+
 /**
  * Holds an array NodeImageVersions
  */
 @added(Versions.v2026_09_02_preview)
 model NodeImageVersionsListResult is Azure.Core.Page<NodeImageVersion>;
+
+/** Whether a node image is a standard release or a security-only patch. */
+@added(Versions.v2026_09_02_preview)
+union NodeImageType {
+  /** A base/standard node image release. */
+  Standard: "Standard",
+
+  /** A security-only patch of a base node image. */
+  SecurityPatch: "SecurityPatch",
+
+  /** Allows additional image types in future versions. */
+  string,
+}
 
 /**
  * node image version profile for given major.minor.patch release.
@@ -1719,6 +1758,11 @@ model NodeImageVersion {
    * The OS + SKU + version of the node image. Example: AKSUbuntu-1804gen2containerd-2024.02.02
    */
   fullName?: string;
+
+  /** Whether this image is a standard release or a security-only patch. */
+  @added(Versions.v2026_09_02_preview)
+  @visibility(Lifecycle.Read)
+  imageType?: NodeImageType;
 }
 
 /**
