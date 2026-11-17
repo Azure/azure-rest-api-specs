@@ -1052,7 +1052,7 @@ union ZonePlacementPolicyTypeLegacy {
 }
 
 /**
- * Specifies the policy for resource's placement in availability zone. Possible value is: **Auto** - An availability zone will be automatically picked by the system as part of resource creation.
+ * Specifies the policy for the resource's placement in an availability zone. Possible value is: **Auto** - An availability zone will be automatically picked by the system as part of resource creation.
  */
 @added(Versions.v2026_09_01)
 union ZonePlacementPolicyType {
@@ -7218,7 +7218,7 @@ model Placement {
   zonePlacementPolicyLegacy?: ZonePlacementPolicyTypeLegacy;
 
   /**
-   * Specifies the policy for resource's placement in availability zone. Possible value is: **Auto** - An availability zone will be automatically picked by the system as part of resource creation.
+   * Specifies the policy for the resource's placement in an availability zone. Possible value is: **Auto** - An availability zone will be automatically picked by the system as part of resource creation.
    */
   @added(Versions.v2026_09_01)
   zonePlacementPolicy?: ZonePlacementPolicyType;
