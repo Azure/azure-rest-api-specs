@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "api-version": "2026-10-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "agentPoolName": "nodepool1",
+    "parameters": {
+      "properties": {
+        "networkProfile": {
+          "nodePublicIPPrefixIDs": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/ipv4-prefix",
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/ipv6-prefix-new"
+          ]
+        },
+        "upgradeSettings": {
+          "maxSurge": "1"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/nodepool1",
+        "name": "nodepool1",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "type": "VirtualMachineScaleSets",
+          "mode": "User",
+          "count": 3,
+          "vmSize": "Standard_D4s_v3",
+          "osType": "Linux",
+          "enableNodePublicIP": true,
+          "nodePublicIPPrefixID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/ipv4-prefix",
+          "networkProfile": {
+            "nodePublicIPPrefixIDs": [
+              "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/ipv4-prefix",
+              "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/ipv6-prefix-new"
+            ]
+          },
+          "upgradeSettings": {
+            "maxSurge": "1"
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ContainerService/locations/eastus/operations/22222222-2222-2222-2222-222222222222?api-version=2026-10-02-preview"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/nodepool1",
+        "name": "nodepool1",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools",
+        "properties": {
+          "provisioningState": "Updating",
+          "type": "VirtualMachineScaleSets",
+          "mode": "User",
+          "count": 3,
+          "vmSize": "Standard_D4s_v3",
+          "osType": "Linux",
+          "enableNodePublicIP": true,
+          "nodePublicIPPrefixID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/ipv4-prefix",
+          "networkProfile": {
+            "nodePublicIPPrefixIDs": [
+              "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/ipv4-prefix",
+              "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/ipv6-prefix-new"
+            ]
+          },
+          "upgradeSettings": {
+            "maxSurge": "1"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "AgentPools_CreateOrUpdate",
+  "title": "Add or replace node public IP prefixes on an existing dual-stack pool with node public IPs"
+}
