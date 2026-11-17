@@ -70,6 +70,14 @@ using Azure.AI.Projects;
 
 @@clientName(ModelSamplingParams, "ModelSamplingParameters", "java");
 @@clientName(
+  MemoryStoreDefaultOptions.default_ttl_seconds,
+  "defaultTtl",
+  "java"
+);
+@@clientName(RoutingTraceEntry.latency_ms, "latency", "java");
+@@clientName(AgentOptimizationFixedTraceWindow.start_time, "startAt", "java");
+@@clientName(AgentOptimizationFixedTraceWindow.end_time, "endAt", "java");
+@@clientName(
   VoiceAgentPostCallConfig,
   "VoiceAgentPostCallConfiguration",
   "java"
@@ -1047,6 +1055,16 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.MCPToolFilter, "McpToolFilter");
 @@clientName(OpenAI.MCPToolRequireApproval, "McpToolRequireApproval");
 @@clientName(MCPToolboxTool, "McpToolboxTool");
+@@clientName(
+  MCPToolboxRequestHeaderBinding,
+  "McpToolboxRequestHeaderBinding",
+  "java"
+);
+@@clientName(
+  MCPToolboxRequestHeaderBindingSource,
+  "McpToolboxRequestHeaderBindingSource",
+  "java"
+);
 @@clientName(OpenAI.RealtimeMCPApprovalRequest, "RealtimeMcpApprovalInput");
 @@clientName(OpenAI.RealtimeMCPApprovalResponse, "RealtimeMcpApprovalOutput");
 @@clientName(OpenAI.RealtimeMCPApprovalResponse.approve, "approved");
@@ -1224,6 +1242,11 @@ using Azure.AI.Projects;
 
 @@clientName(AgentOptimizationJobs.create, "createOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob", "java");
+@@clientName(
+  AgentOptimizationJobs.downloadFile,
+  "downloadOptimizationJobFile",
+  "java"
+);
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs", "java");
 @@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob", "java");

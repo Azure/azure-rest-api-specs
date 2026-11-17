@@ -14,6 +14,8 @@ namespace Microsoft.NetApp;
  * External Cache resource, representing a cache volume on an external ONTAP system
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @parentResource(ExternalSvm)
 model ExternalCache
   is Azure.ResourceManager.ProxyResource<ExternalCacheProperties> {
@@ -29,6 +31,8 @@ model ExternalCache
  * External Cache properties
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ExternalCacheProperties {
   /**
    * Azure lifecycle management
@@ -93,9 +97,13 @@ model ExternalCacheProperties {
  * List of External Cache resources
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model ExternalCacheList is Azure.Core.Page<ExternalCache>;
 
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @armResourceOperations
 interface ExternalCaches {
   /**
