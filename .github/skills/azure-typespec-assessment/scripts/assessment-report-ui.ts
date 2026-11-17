@@ -601,9 +601,21 @@ function typeRows(type: string, findings: AssessmentFinding[]): ReportRow[] {
         after: current ? sdkTypeName(current.type) : "removed",
       });
     } else if (finding.rule === "public-surface-changed") {
+      const formatUsage = (fact: AssessmentFact) => {
+        if (Array.isArray(fact.usage)) return fact.usage.map(String).join(",");
+        if (fact.usageDetails?.flags.length) return fact.usageDetails.flags.join(",");
+        if (
+          typeof fact.usage === "string" ||
+          typeof fact.usage === "number" ||
+          typeof fact.usage === "boolean"
+        ) {
+          return String(fact.usage);
+        }
+        return "not recorded";
+      };
       const surface = (fact: AssessmentFact | undefined) =>
         fact
-          ? `access: ${fact.access ?? "not recorded"} · reachable: ${fact.reachable ?? "not recorded"} · usage: ${String(fact.usage ?? "not recorded")}`
+          ? `access: ${fact.access ?? "not recorded"} · reachable: ${fact.reachable ?? "not recorded"} · usage: ${formatUsage(fact)}`
           : "Not recorded";
       rows.push({
         area: "SDK type availability",

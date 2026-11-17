@@ -909,7 +909,8 @@ export function dedupeSemanticHunks(
   const unitsByHunk = new Map<string, { hunkId: string; units: InternalSemanticUnit[] }>();
   for (const unit of reviewUnits) {
     for (const hunkId of unit.hunkIds) {
-      const key = projectHunkKey(unit, hunkId);
+      // Canonical hunk IDs identify physical source globally, including shared projects.
+      const key = hunkId;
       const entry = unitsByHunk.get(key) ?? { hunkId, units: [] };
       entry.units.push(unit);
       unitsByHunk.set(key, entry);
@@ -943,9 +944,7 @@ export function dedupeSemanticHunks(
   }
 
   return reviewUnits.flatMap((unit) => {
-    const hunkIds = unit.hunkIds.filter(
-      (hunkId) => ownerByHunk.get(projectHunkKey(unit, hunkId)) === unit.id,
-    );
+    const hunkIds = unit.hunkIds.filter((hunkId) => ownerByHunk.get(hunkId) === unit.id);
     const transferredProjects = projectTransfers.get(unit.id) ?? [];
     const transferredOperations = operationTransfers.get(unit.id) ?? [];
     if (
@@ -1015,6 +1014,14 @@ export function dedupeSemanticHunks(
       ) as import("./runtime-types.ts").SemanticChangeType[],
       operations,
       operationIds: unique(operations.map((operation) => operation.operationId)),
+      beforeFactIds: unique([
+        ...(unit.beforeFactIds ?? []),
+        ...operations.map((operation) => operation.beforeFactId),
+      ]),
+      afterFactIds: unique([
+        ...(unit.afterFactIds ?? []),
+        ...operations.map((operation) => operation.afterFactId),
+      ]),
       ownedOperationIds: unique([
         ...unit.ownedOperationIds,
         ...transferredOperations.map((operation) => operation.operationId),
@@ -1058,7 +1065,7 @@ function mergeUnitGroup(
     ...new Map(
       units
         .flatMap((unit) => unit.operations)
-        .map((operation) => [operation.operationId, operation]),
+        .map((operation) => [`${operation.projectId ?? ""}\0${operation.operationId}`, operation]),
     ).values(),
   ]
     .map(stableOperationIdentity)
@@ -1075,9 +1082,10 @@ function mergeUnitGroup(
 
   const byOperation: Map<string, InternalSemanticOperation[]> = new Map();
   for (const operation of units.flatMap((unit) => unit.operations)) {
-    const values = byOperation.get(operation.operationId) ?? [];
+    const key = `${operation.projectId ?? ""}\0${operation.operationId}`;
+    const values = byOperation.get(key) ?? [];
     values.push(operation);
-    byOperation.set(operation.operationId, values);
+    byOperation.set(key, values);
   }
   const allOperations = [...byOperation.values()]
     .map((values) => {
@@ -1449,6 +1457,7 @@ function buildProjectUnits(
         const afterFactId = pair.after ? addFact(facts, project, "target", pair.after) : undefined;
         operations.push({
           operationId: pair.operationId,
+          projectId: project.id,
           beforeFactId,
           afterFactId,
           ...(comparisonUnavailable

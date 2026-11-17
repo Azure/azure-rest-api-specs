@@ -29,6 +29,9 @@ type AgentDecisionsDraft = {
   downstreamDecisions: {
     decision: string;
   }[];
+  sourceReviews: {
+    outcome: string;
+  }[];
   complianceJudgments: unknown[];
   catalogScores: unknown[];
 };
@@ -43,6 +46,7 @@ type AgentWorkspaceIndex = {
     semanticIntentIds: string[];
     downstreamCandidateIds: string[];
     inferenceRequestIds: string[];
+    sourceReviewCandidateIds: string[];
   };
   input: {
     path: string;
@@ -53,6 +57,7 @@ type AgentWorkspaceIndex = {
     assessedSemanticIntents: number;
     informationalSemanticIntents: number;
     guidelineRequests: number;
+    sourceReviewRequests: number;
   };
   materialization: {
     script: string;
@@ -222,7 +227,19 @@ function fixture() {
         evidenceSetId: "evidence-downstream",
       },
     ],
-    downstreamRootCauses: [],
+    sourceReviewDeclarations: [],
+    sourceReviewRequests: [
+      {
+        candidateId: "downstream-1",
+        dimension: "downstream",
+        evidenceSetId: "evidence-downstream",
+        deterministicStatus: "unresolved",
+        deterministicDeclarationIds: [],
+        availableDeclarationIds: [],
+        sourceChangeIds: [],
+        hunkIds: [],
+      },
+    ],
     complianceSearchRequests: [
       {
         requestId: "compliance-search-1",
@@ -254,11 +271,13 @@ void test("builds a compact complete Agent workspace", () => {
     assert.deepEqual(index.coverage.semanticIntentIds, ["semantic-1"]);
     assert.deepEqual(index.coverage.downstreamCandidateIds, ["downstream-1"]);
     assert.deepEqual(index.coverage.inferenceRequestIds, ["inference-request-1"]);
+    assert.deepEqual(index.coverage.sourceReviewCandidateIds, ["downstream-1"]);
     assert.equal(index.input.path, "model-input.json");
     assert.equal(index.input.readExactlyOnce, true);
     assert.equal(index.input.bytes, fs.statSync(path.join(work, "model-input.json")).size);
     assert.equal(index.counts.assessedSemanticIntents, 1);
     assert.equal(index.counts.informationalSemanticIntents, 0);
+    assert.equal(index.counts.sourceReviewRequests, 1);
     assert.equal(index.materialization.script, "scripts/materialize-assessment-results.ts");
     const runtimeRoot = fs.realpathSync(
       path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".."),
@@ -324,6 +343,7 @@ void test("builds a compact complete Agent workspace", () => {
     assert.equal(decisionsDraft.inferenceResults[0].decision, "__UNRESOLVED__");
     assert.equal(decisionsDraft.semanticSummaries[0].title, "");
     assert.equal(decisionsDraft.downstreamDecisions[0].decision, "__UNRESOLVED__");
+    assert.equal(decisionsDraft.sourceReviews[0].outcome, "__UNRESOLVED__");
     const state = readJson(path.join(work, "workflow-state.json")) as TestWorkflowState;
     assert.equal(state.state, "awaiting-agent-judgment");
     assert.equal(state.telemetry.agentIndexBytes, fs.statSync(result.indexPath).size);
@@ -332,6 +352,43 @@ void test("builds a compact complete Agent workspace", () => {
       verifyRuntimePhaseProvenance(work, "preparation", index.runtime).runtime,
       index.runtime,
     );
+
+    const modelInputPath = path.join(work, "model-input.json");
+    const v2Model = readJson(modelInputPath) as Record<string, unknown>;
+    v2Model.pipelineVersion = 2;
+    delete v2Model.sourceReviewDeclarations;
+    delete v2Model.sourceReviewRequests;
+    fs.writeFileSync(modelInputPath, `${JSON.stringify(v2Model, null, 2)}\n`, "utf8");
+    const v2Index = buildAgentWorkspace({ work }).index as AgentWorkspaceIndex & {
+      materialization: Record<string, unknown>;
+      requiredOutputs: {
+        sourceAssociationDecisions?: string;
+        materialized: { sourceAssociation?: string };
+      };
+    };
+    assert.deepEqual(v2Index.materialization.querySourceCommand, {
+      executable: process.execPath,
+      args: [
+        path.join(runtimeRoot, "scripts", "materialize-assessment-results.ts"),
+        "--work",
+        work,
+        "--query-source",
+      ],
+    });
+    assert.deepEqual(v2Index.materialization.sourceAssociationCommand, {
+      executable: process.execPath,
+      args: [
+        path.join(runtimeRoot, "scripts", "materialize-assessment-results.ts"),
+        "--work",
+        work,
+        "--source-association",
+      ],
+    });
+    assert.equal(
+      v2Index.requiredOutputs.sourceAssociationDecisions,
+      "agent-workspace/source-association-decisions.json",
+    );
+    assert.equal(v2Index.requiredOutputs.materialized.sourceAssociation, "source-association.json");
   } finally {
     fs.rmSync(work, { recursive: true, force: true });
   }
