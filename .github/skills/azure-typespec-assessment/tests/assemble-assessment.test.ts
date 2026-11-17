@@ -164,6 +164,10 @@ void test("validator accepts target-only artifact comparisons for new projects",
         apiVersion: "2026-10-01-preview",
         reason: "newest-added-version",
       },
+      available: {
+        base: ["2026-05-01-preview"],
+        current: ["2026-10-01-preview"],
+      },
     },
   ];
 
@@ -172,6 +176,19 @@ void test("validator accepts target-only artifact comparisons for new projects",
       error.startsWith("New-version artifact comparison"),
     ),
     [],
+  );
+
+  assessment.artifactComparisons[0].available = {
+    base: ["2026-05-01-preview"],
+    current: ["2026-05-01-preview", "2026-10-01-preview"],
+  };
+  assert.deepEqual(
+    validateAssessment(assessment).filter((error) =>
+      error.startsWith("New-version artifact comparison"),
+    ),
+    [
+      "New-version artifact comparison project-version must compile a retained baseline from the head source and may fall back to the base source only when removed from head.",
+    ],
   );
 });
 
