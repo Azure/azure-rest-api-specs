@@ -96,6 +96,11 @@ using TypeSpec.Versioning;
 
 @@clientName(Microsoft.Discovery, "DiscoveryMgmtClient", "python");
 
+// Preserve legacy Python enum member names.
+@@clientName(SystemSku.Standard_D4s_v6, exact("STANDARD_D4_S_V6"), "python");
+@@clientName(SystemSku.Standard_D4s_v5, exact("STANDARD_D4_S_V5"), "python");
+@@clientName(SystemSku.Standard_D4s_v4, exact("STANDARD_D4_S_V4"), "python");
+
 @doc("Tool tracked resource")
 @added(Microsoft.Discovery.Versions.v2026_02_01_preview)
 model ToolUpdate {
