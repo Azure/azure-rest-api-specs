@@ -2,9 +2,10 @@ name: azure-typespec-author-eval
 description: Evaluation suite for azure-typespec-author.
 version: "1.0"
 type: capability # capability | regression
-area: "versioning"
+tags:
+  area: "versioning"
 # Root-level environment
-environment: azsdk-mcp
+agent_environment: azsdk-mcp
 # Execution configuration
 defaults:
   runs: 1 # Trials per stimulus
@@ -20,7 +21,7 @@ stimuli:
       mode: "trigger"
     prompt: |
       Add a new stable version `2025-01-01` to my service. Carry over all the features from previous stable version.
-    environment: &shared_environment
+    agent_environment: &shared_environment
       files:
         - src: ../fixtures/001008-version-add-stable-after-stable/employee.tsp
           dest: employee.tsp
@@ -28,8 +29,8 @@ stimuli:
           dest: main.tsp
         - src: ../fixtures/Microsoft.Widget/Widget/package.json
           dest: package.json
-        - src: ../scripts/check-node-dependencies.js
-          dest: check-node-dependencies.js
+        - src: ../scripts/check-node-dependencies.ts
+          dest: check-node-dependencies.ts
         - src: ../fixtures/001008-version-add-stable-after-stable/readme.md
           dest: readme.md
         - src: ../fixtures/001008-version-add-stable-after-stable/shared.tsp
@@ -79,12 +80,12 @@ stimuli:
       commands:
         - 'node -e "const fs=require(''fs'');const t=process.env.FIXTURE_NODE_MODULES;if(t&&fs.existsSync(t)&&!fs.existsSync(''node_modules'')){fs.symlinkSync(t,''node_modules'',''junction'')}"'
     graders:
-      - type: "tool-calls"
+      - &tool_calls
+        type: "tool-calls"
         config:
           required:
             - "^(edit|apply_patch|bash|powershell)$"
             - "web_fetch"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
           disallowed:
             - "azure-sdk-mcp-azsdk_typespec_generate_authoring_plan"
             - azure-sdk-mcp-azsdk_typespec_retrieve_knowledge
@@ -101,24 +102,16 @@ stimuli:
       mode: "forced"
     prompt: |
       @azure-typespec-author Add a new stable version `2025-01-01` to my service. Carry over all the features from previous stable version.
-    environment: *shared_environment
+    agent_environment: *shared_environment
     graders:
-      - type: "tool-calls"
-        config:
-          required:
-            - "^(edit|apply_patch|bash|powershell)$"
-            - "web_fetch"
-            - "azure-sdk-mcp-azsdk_run_typespec_validation"
-          disallowed:
-            - "azure-sdk-mcp-azsdk_typespec_generate_authoring_plan"
-            - azure-sdk-mcp-azsdk_typespec_retrieve_knowledge
+      - *tool_calls
       - type: "run-command"
         config:
-          command: "node check-node-dependencies.js node_modules"
+          command: "node check-node-dependencies.ts node_modules"
           expected_exit_code: 0
       - type: "run-command"
         config:
-          command: "node check-node-dependencies.js packages"
+          command: "node check-node-dependencies.ts packages"
           expected_exit_code: 0
       - type: "run-command"
         config:
@@ -130,7 +123,6 @@ stimuli:
           path: "examples/2024-10-01/Employees_Get_MaximumSet_Gen.json"
       - &file_exists_example
         type: "file-exists"
-        name: "file-exists-example"
         config:
           path: "examples/2025-01-01/Employees_Get_MaximumSet_Gen.json"
       - &file_matches
@@ -140,13 +132,11 @@ stimuli:
           path: "main.tsp"
       - &file_matches_old_version
         type: "file-matches"
-        name: "file-matches-old-version"
         config:
           pattern: "2024-10-01"
           path: "main.tsp"
       - &file_matches_new_version
         type: "file-matches"
-        name: "file-matches-new-version"
         config:
           pattern: "2025-01-01"
           path: "main.tsp"
@@ -158,7 +148,7 @@ stimuli:
       suite: "versioning"
       mode: "no-skill"
     prompt: "Add a new stable version `2025-01-01` to my service. Carry over all the features from previous stable version."
-    environment: *shared_environment
+    agent_environment: *shared_environment
     rubric:
       - API version 2025-01-01 is added as a stable version after the previous stable version.
       - The new stable version carries forward all features and examples from 2024-10-01 without removing existing versions.

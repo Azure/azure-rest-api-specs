@@ -37,6 +37,23 @@ using Microsoft.ContainerRegistry;
 
 @@clientName(IPRule.value, exact("iPAddressOrRange"), "javascript");
 
+@@clientName(
+  AdditionalAuthenticationType.AwsElasticContainerRegistry,
+  "AWSElasticContainerRegistry",
+  "go"
+);
+@@clientName(EcrAuthenticationProperties, "ECRAuthenticationProperties", "go");
+@@clientName(
+  EcrAuthenticationUpdateProperties,
+  "ECRAuthenticationUpdateProperties",
+  "go"
+);
+@@clientName(
+  GarAuthenticationUpdateProperties,
+  "GARAuthenticationUpdateProperties",
+  "go"
+);
+
 // C# configurations for backward compatibility and naming conventions.
 // These settings restore the public API surface of the previous autorest-based SDK to avoid breaking changes.
 
@@ -286,6 +303,16 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(
   GarAuthenticationProperties,
   "GoogleArtifactRegistryCacheAuthentication",
+  "csharp"
+);
+@@clientName(
+  EcrAuthenticationProperties,
+  "AwsElasticContainerRegistryCacheAuthentication",
+  "csharp"
+);
+@@clientName(
+  EntraFederatedIdentityCredentialAuthenticationProperties,
+  "EntraFederatedIdentityCredentialCacheAuthentication",
   "csharp"
 );
 @@clientName(

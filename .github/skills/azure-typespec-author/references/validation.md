@@ -57,7 +57,7 @@ For naming customizations applied through the naming skill's scoped direct edits
    supplied or SDK generation was run by a separate authorized workflow.
 
 Use the decisions and verification guidance from
-`azsdk-common-typespec-naming`. Report profiles, exceptions, blockers, and
+`azure-typespec-sdk-naming`. Report profiles, exceptions, blockers, and
 unassessed targets. Naming guidance is independent of linting; installed
 linters remain part of normal validation.
 

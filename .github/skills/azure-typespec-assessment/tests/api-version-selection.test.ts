@@ -1,5 +1,11 @@
 import { assert, test } from "vitest";
-import { extractApiVersions, selectApiVersionPair } from "../scripts/api-version-selection.ts";
+import fs from "node:fs";
+import path from "node:path";
+import {
+  extractApiVersions,
+  resolveNewProjectApiVersions,
+  selectApiVersionPair,
+} from "../scripts/api-version-selection.ts";
 
 const source = (members: string) => `
 @versioned(Versions)
@@ -7,6 +13,123 @@ namespace Contoso;
 enum Versions {
 ${members}
 }`;
+
+void test("extracts decorated backtick members, explicit values, and mixed version syntax", () => {
+  const versions = extractApiVersions([
+    source(`
+  /** Example \`2099-01-01\`, not an enum member. */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  \`2026-04-06-preview\`,
+  // \`2099-02-01\`,
+  v2026_06_06: "2026-06-06",
+  \`previewAlias\`: "2026-07-06-preview"
+  `),
+  ]);
+
+  assert.deepEqual(versions, {
+    versioned: true,
+    versions: ["2026-04-06-preview", "2026-06-06", "2026-07-06-preview"],
+  });
+});
+
+void test("extracts versions from a custom enum name", () => {
+  const versions = extractApiVersions([
+    `
+@versioned(ApiVersions)
+namespace Contoso;
+`,
+    `
+namespace Contoso;
+enum ApiVersions {
+  v2026_02_01_preview: "2026-02-01-preview",
+  v2026_06_01_preview: "2026-06-01-preview",
+}
+`,
+  ]);
+
+  assert.deepEqual(versions, {
+    versioned: true,
+    versions: ["2026-02-01-preview", "2026-06-01-preview"],
+  });
+});
+
+void test("resolves qualified version enum references", () => {
+  const versions = extractApiVersions([
+    `
+@versioned(Contoso.ApiVersion)
+namespace Contoso;
+
+enum ApiVersion {
+  v2025_09_01: "2025-09-01",
+  v2026_10_01_preview: "2026-10-01-preview",
+}
+`,
+    `
+namespace Fabrikam;
+enum ApiVersion {
+  v2099_01_01: "2099-01-01",
+}
+`,
+  ]);
+
+  assert.deepEqual(versions, {
+    versioned: true,
+    versions: ["2025-09-01", "2026-10-01-preview"],
+  });
+});
+
+void test("does not extract members from unrelated enums", () => {
+  const versions = extractApiVersions([
+    `
+@versioned(ApiVersions)
+namespace Contoso;
+
+enum ApiVersions {
+  v2026_01_01: "2026-01-01",
+}
+
+enum Versions {
+  v2099_01_01: "2099-01-01",
+}
+
+enum DeploymentStages {
+  preview: "preview",
+}
+`,
+  ]);
+
+  assert.deepEqual(versions, {
+    versioned: true,
+    versions: ["2026-01-01"],
+  });
+});
+
+void test("preserves support for the conventional Versions enum", () => {
+  assert.deepEqual(extractApiVersions([source('v2025_01_01: "2025-01-01",')]), {
+    versioned: true,
+    versions: ["2025-01-01"],
+  });
+});
+
+void test("selects the latest stable baseline for a newly added backtick preview version", () => {
+  const base = extractApiVersions([source("`2026-04-06-preview`, `2026-06-06`,")]);
+  const current = extractApiVersions([
+    source("`2026-04-06-preview`, `2026-06-06`, `2026-07-06-preview`,"),
+  ]);
+  const pair = selectApiVersionPair({
+    base,
+    current,
+    baseCommit: "base-sha",
+    headCommit: "head-sha",
+  });
+
+  assert.equal(pair.mode, "new-api-version");
+  assert.equal(pair.baseline.sourceRevision, "current");
+  assert.equal(pair.baseline.commit, "head-sha");
+  assert.equal(pair.baseline.apiVersion, "2026-06-06");
+  assert.equal(pair.target.apiVersion, "2026-07-06-preview");
+  assert.deepEqual(pair.addedCurrentVersions, ["2026-07-06-preview"]);
+});
 
 void test("selects a newly added head version and the latest stable base version", () => {
   const base = extractApiVersions([
@@ -152,4 +275,26 @@ void test("compares a versioned base with an unversioned target", () => {
   assert.equal(pair.target.sourceRevision, "current");
   assert.equal(pair.target.apiVersion, undefined);
   assert.equal(pair.currentReason, "unversioned");
+});
+
+void test("selects only the target contract for a newly added project", (context) => {
+  const work = fs.mkdtempSync(path.join(process.cwd(), ".new-project-version-test-"));
+  context.onTestFinished(() => fs.rmSync(work, { recursive: true, force: true }));
+  const project = "specification/widgets/Widgets";
+  fs.mkdirSync(path.join(work, project), { recursive: true });
+  fs.writeFileSync(path.join(work, project, "main.tsp"), source('v2026_01_01: "2026-01-01",'));
+
+  const pair = resolveNewProjectApiVersions({
+    currentWorktree: work,
+    project,
+    headCommit: "head-sha",
+  });
+
+  assert.equal(pair.mode, "new-project");
+  assert.equal(pair.baseline.sourceRevision, "absent");
+  assert.match(pair.baseline.reason, /No pre-existing contract exists/);
+  assert.equal(pair.target.sourceRevision, "current");
+  assert.equal(pair.target.commit, "head-sha");
+  assert.equal(pair.target.apiVersion, "2026-01-01");
+  assert.deepEqual(pair.available, { base: [], current: ["2026-01-01"] });
 });

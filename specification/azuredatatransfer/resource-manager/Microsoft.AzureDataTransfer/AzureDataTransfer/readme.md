@@ -29,7 +29,16 @@ These are the global settings for the azuredatatransfer.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2026-02-06-preview
+tag: package-2026-06-29-preview
+```
+
+### Tag: package-2026-06-29-preview
+
+These settings apply only when `--tag=package-2026-06-29-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-06-29-preview'
+input-file:
+  - preview/2026-06-29-preview/azuredatatransfer.json
 ```
 
 ### Tag: package-2026-02-06-preview

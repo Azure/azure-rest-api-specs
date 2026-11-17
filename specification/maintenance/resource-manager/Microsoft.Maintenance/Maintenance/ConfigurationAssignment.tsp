@@ -102,6 +102,7 @@ interface ConfigurationAssignments {
   /**
    * Unregister configuration for resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   deleteParent is ConfigurationAssignmentOps.DeleteSync<
     ConfigurationAssignment,
     Response =
@@ -183,6 +184,7 @@ interface ConfigurationAssignmentOperationGroup {
   /**
    * Unregister configuration for resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   delete is ConfigurationAssignmentOperationGroupOps.DeleteSync<
     ConfigurationAssignment,
     Response =
@@ -246,6 +248,7 @@ interface ConfigurationAssignmentsForSubscriptions {
   /**
    * Unregister configuration for resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   delete is ConfigurationAssignmentsForSubscriptionOps.DeleteSync<
     ConfigurationAssignment,
     Response =
@@ -318,6 +321,7 @@ interface ConfigurationAssignmentsForResourceGroup {
   /**
    * Unregister configuration for resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   delete is ConfigurationAssignmentsForResourceGroupOps.DeleteSync<
     ConfigurationAssignment,
     Response =

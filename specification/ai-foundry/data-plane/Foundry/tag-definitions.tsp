@@ -20,6 +20,11 @@ using OpenAPI;
     parent: "Agents Root",
     description: "Agent Invocations (WebSocket)",
   },
+  #{
+    name: "Agent Voice Conversation Engine",
+    parent: "Agents Root",
+    description: "Hosted Voice Live Bridge connections",
+  },
   #{ name: "Agent Sessions", parent: "Agents Root" },
   #{ name: "Agent Session Files", parent: "Agents Root" },
   #{ name: "Agent Versions", parent: "Agents Root" },
