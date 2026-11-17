@@ -38,15 +38,17 @@ model CustomAIModelProperties {
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("""
-    The model identifier, interpreted per the referenced ModelSource type.
-    For `HuggingFace` sources this is the upstream `<org>/<repo>` id, e.g.
-    `meta-llama/Llama-2-7b-chat`. For `MicrosoftFoundry` sources this is
-    `modelName/version`, e.g. `private-llama/1`. Immutable after creation.
+    The model identifier, interpreted per the referenced ModelSource:
+    - `HuggingFace`: the upstream `<org>/<repo>` id, e.g. `myorg/llama-3.1-8b-finetuned`.
+    - `MicrosoftFoundry` with a project: `modelName/version`, e.g. `private-llama/1`.
+    - `MicrosoftFoundry` with a registry: `modelName/version` as named in the
+      registry, e.g. `meta-llama--Llama-3.1-8B/3` in `azure-huggingface`.
+    Immutable after creation.
     """)
   modelId: string;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("The base model this custom model was trained from (id + config.json). Immutable after creation.")
+  @doc("The base model this model is derived from, used to determine resource requirements and runtime configuration. If `config` and `totalWeightSizeBytes` are supplied they are used as-is; otherwise `id` must be a Hugging Face `<org>/<repo>` that is public or accessible with the ModelSource credential. Immutable after creation.")
   baseModel: BaseModelReference;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -66,7 +68,7 @@ model CustomAIModelProperties {
 @doc("Platform-resolved specification of a custom model. Extends `ModelSpec` with custom model-specific metadata. All fields are read-only. Reserved so custom-model-specific fields can be added without changing the SDK surface.")
 model CustomAIModelSpec is ModelSpec;
 
-@doc("The base model a custom model was trained from. A HuggingFace repository supplied by the user because the platform may lack access to private source repositories.")
+@doc("The base model a custom model is derived from, identified by its Hugging Face repository. Supplied by the user because the platform may lack access to private source repositories.")
 model BaseModelReference {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The HuggingFace `<org>/<repo>` id of the base model, e.g. `meta-llama/Llama-2-7b-chat`. Immutable after creation.")

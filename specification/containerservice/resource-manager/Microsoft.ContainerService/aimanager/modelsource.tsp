@@ -54,11 +54,16 @@ model ModelSourceProperties {
   @doc("An optional, free-form description of the source.")
   description?: string;
 
-  @doc("Credential the platform uses to authenticate to the source. Optional for public sources (e.g. ungated Hugging Face models).")
+  @doc("""
+    Credential the platform uses to authenticate to the source.
+    - `HuggingFace`: optional `inline` token, required for gated or private repositories.
+    - `MicrosoftFoundry` with `microsoftFoundry.projectResourceId`: `managedIdentity` is required.
+    - `MicrosoftFoundry` with `microsoftFoundry.publicRegistryName`: must be omitted; the platform authenticates with its own identity.
+    """)
   credential?: CredentialValue;
 
-  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Read)
-  @doc("Microsoft Foundry project reference. Required when `sourceType` is `MicrosoftFoundry`; must be omitted otherwise. Immutable after creation.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("Microsoft Foundry project or registry reference. Required when `sourceType` is `MicrosoftFoundry`; must be omitted otherwise. Immutable after creation.")
   microsoftFoundry?: MicrosoftFoundrySource;
 }
 
@@ -69,7 +74,7 @@ union ModelSourceType {
   @doc("A Hugging Face model registry.")
   HuggingFace: "HuggingFace",
 
-  @doc("A Microsoft Foundry project. Tenant-private models produced by internal training pipelines. Authenticated via a user-assigned managed identity (referenced in the credential and granted the `Foundry User` role on the project).")
+  @doc("Microsoft Foundry. Either a Foundry project containing tenant-private models, authenticated via a user-assigned managed identity (referenced in the credential and granted the `Foundry User` role on the project), or a Microsoft-curated public Foundry model registry, which requires no credential.")
   MicrosoftFoundry: "MicrosoftFoundry",
 }
 
@@ -105,20 +110,39 @@ model ManagedIdentityCredential {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Foundry is a valid name"
 @doc("""
-  Reference to a Microsoft Foundry project that backs a `MicrosoftFoundry`
-  ModelSource. Only the project Azure id is required; the Foundry account and its
-  data-plane endpoint (`*.services.ai.azure.com`) are resolved by the platform
-  from the project (the account is the project's parent resource).
+  Reference to the Microsoft Foundry location that backs a `MicrosoftFoundry`
+  ModelSource. Exactly one of `projectResourceId` or `publicRegistryName` must be
+  specified.
   
-  Authentication uses the user-assigned managed identity referenced in the
-  ModelSource `credential.managedIdentity`, which the user must grant the
-  `Foundry User` role (role definition id 53ca6127-db72-4b80-b1b0-d745d6d5456d)
-  on this project. See https://aka.ms/aks/aim-modelsource for more details.
+  - `projectResourceId`: a Foundry project containing tenant-private models. The
+    Foundry account and its data-plane endpoint (`*.services.ai.azure.com`) are
+    resolved by the platform from the project (the account is the project's
+    parent resource). Authentication uses the user-assigned managed identity
+    referenced in the ModelSource `credential.managedIdentity`, which the user
+    must grant the `Foundry User` role (role definition id
+    53ca6127-db72-4b80-b1b0-d745d6d5456d) on this project.
+  - `publicRegistryName`: a Microsoft-curated public Foundry model registry. No
+    credential may be supplied; the platform pulls with its own identity.
+  
+  See https://aka.ms/aks/aim-modelsource for more details.
   """)
 model MicrosoftFoundrySource {
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("The ARM resource id of the Foundry project. The scope on which the referenced managed identity must hold the `Foundry User` role. The account and endpoint host are derived from this id.")
-  projectResourceId: FoundryProjectResourceId;
+  @doc("The ARM resource id of the Foundry project. The scope on which the referenced managed identity must hold the `Foundry User` role. The account and endpoint host are derived from this id. Mutually exclusive with `publicRegistryName`. Immutable after creation.")
+  projectResourceId?: FoundryProjectResourceId;
+
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The name of a Microsoft-curated public Foundry model registry, e.g. `azure-huggingface`. No credential may be supplied when set. Mutually exclusive with `projectResourceId`. Immutable after creation.")
+  publicRegistryName?: FoundryPublicRegistryName;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Foundry is a valid name"
+@doc("A Microsoft-curated public Microsoft Foundry model registry. The set of supported registries may grow over time.")
+union FoundryPublicRegistryName {
+  string,
+
+  @doc("The `azure-huggingface` registry: Hugging Face models hosted by Microsoft Foundry. Model names use the `<org>--<repo>` form.")
+  AzureHuggingFace: "azure-huggingface",
 }
 
 @armResourceOperations
