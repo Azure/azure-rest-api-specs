@@ -12317,6 +12317,22 @@
             "required": false,
             "type": "boolean",
             "x-ms-client-name": "preventEncryptionScopeOverride"
+          },
+          {
+            "name": "x-ms-blob-access-point-configuration-name",
+            "in": "header",
+            "description": "The name of the Blob Access Point configuration to bind to the container at creation. If the unique ID is omitted, the service resolves and stores it. The binding cannot be changed after creation.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "blobAccessPointConfigurationName"
+          },
+          {
+            "name": "x-ms-blob-access-point-configuration-unique-id",
+            "in": "header",
+            "description": "The unique ID of the Blob Access Point configuration to bind to the container at creation. When supplied with the configuration name, the service validates that both identify the same configuration.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "blobAccessPointConfigurationUniqueId"
           }
         ],
         "responses": {
@@ -12542,6 +12558,14 @@
                 "format": "date-time-rfc7231",
                 "description": "The date-time that the resource was last modified."
               },
+              "x-ms-blob-access-point-configuration-name": {
+                "type": "string",
+                "description": "The name of the Blob Access Point configuration bound to the container. Omitted for ordinary containers."
+              },
+              "x-ms-blob-access-point-configuration-unique-id": {
+                "type": "string",
+                "description": "The unique ID of the Blob Access Point configuration bound to the container. Omitted for ordinary containers."
+              },
               "x-ms-blob-public-access": {
                 "type": "string",
                 "description": "The public access setting for the container.",
@@ -12590,6 +12614,10 @@
               "x-ms-immutable-storage-with-versioning-enabled": {
                 "type": "boolean",
                 "description": "Indicates whether version level WORM (Write Once, Read Many) is enabled on a container."
+              },
+              "x-ms-is-blob-access-point-container": {
+                "type": "boolean",
+                "description": "Indicates whether this is a Blob Access Point container. Omitted for ordinary containers."
               },
               "x-ms-lease-duration": {
                 "type": "string",
@@ -18054,6 +18082,21 @@
           "type": "boolean",
           "description": "Whether immutable storage with versioning is enabled.",
           "x-ms-client-name": "isImmutableStorageWithVersioningEnabled"
+        },
+        "IsBlobAccessPointContainer": {
+          "type": "boolean",
+          "description": "Indicates whether this is a Blob Access Point container. Omitted for ordinary containers.",
+          "x-ms-client-name": "isBlobAccessPointContainer"
+        },
+        "BlobAccessPointConfigurationName": {
+          "type": "string",
+          "description": "The name of the Blob Access Point configuration bound to the container. Omitted for ordinary containers.",
+          "x-ms-client-name": "blobAccessPointConfigurationName"
+        },
+        "BlobAccessPointConfigurationUniqueId": {
+          "type": "string",
+          "description": "The unique ID of the Blob Access Point configuration bound to the container. Omitted for ordinary containers.",
+          "x-ms-client-name": "blobAccessPointConfigurationUniqueId"
         }
       },
       "required": [
@@ -19553,6 +19596,7 @@
         "MissingRequiredQueryParameter",
         "MultipleConditionHeadersNotSupported",
         "NoAuthenticationInformation",
+        "OperationNotSupportedForBlobAccessPoint",
         "OperationTimedOut",
         "OutOfRangeInput",
         "OutOfRangeQueryParameterValue",
@@ -19802,6 +19846,11 @@
             "name": "NoAuthenticationInformation",
             "value": "NoAuthenticationInformation",
             "description": "No authentication information."
+          },
+          {
+            "name": "OperationNotSupportedForBlobAccessPoint",
+            "value": "OperationNotSupportedForBlobAccessPoint",
+            "description": "The operation is not supported for a Blob Access Point container."
           },
           {
             "name": "OperationTimedOut",
