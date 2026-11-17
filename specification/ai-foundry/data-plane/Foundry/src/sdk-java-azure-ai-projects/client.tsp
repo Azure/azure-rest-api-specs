@@ -25,8 +25,9 @@ using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects;
 
 // --------------------------------------------------------------------------------
-// Root client
+// Client structure and operation placement
 // --------------------------------------------------------------------------------
+
 @@clientName(Azure.AI.Projects, "AIProjectClient");
 
 // Java promotes the shared Foundry-Features header with @@clientLocation, not @@scope/@@clientInitialization.
@@ -35,9 +36,14 @@ namespace Azure.AI.Projects;
 // Moving the shared aliases keeps generated wire plumbing and automatically covers new operations using this pattern.
 @@scope(WithConditionalFoundryPreviewHeader.foundry_features, "!java");
 @@scope(WithRequiredFoundryPreviewHeader.foundry_features, "!java");
+@@clientLocation(EvaluatorGenerationJobs.create, Evaluators);
+@@clientLocation(EvaluatorGenerationJobs.get, Evaluators);
+@@clientLocation(EvaluatorGenerationJobs.list, Evaluators);
+@@clientLocation(EvaluatorGenerationJobs.cancel, Evaluators);
+@@clientLocation(EvaluatorGenerationJobs.delete, Evaluators);
 
 // --------------------------------------------------------------------------------
-// Renames - operations
+// Operation names and method behavior
 // --------------------------------------------------------------------------------
 
 // Connections
@@ -165,23 +171,51 @@ model ListAgentInsightRunsOptions {
   ...TypeSpec.Http.PlainData<AgentInsightsPageQueryParameters>;
   ...TypeSpec.Http.PlainData<AgentInsightRunFilters>;
 }
-
 @@usage(ListAgentInsightsOptions, Usage.input, "java");
 @@access(ListAgentInsightsOptions, Access.public, "java");
 @@usage(ListAgentInsightRunsOptions, Usage.input, "java");
 @@access(ListAgentInsightRunsOptions, Access.public, "java");
-
 @@convenientAPI(AgentInsightMonitors.listInsights, false, "java");
 @@convenientAPI(AgentInsightMonitors.listRuns, false, "java");
 
+// Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
+// input parameter that calls either on these two.
+@@access(Connections.get, Access.internal);
+@@access(Connections.getWithCredentials, Access.internal);
+
+// Disabled convenient API generation and make private to provide a custom shim returning `void` in the client
+@@convenientAPI(Skills.deleteSkill, false, "java");
+@@convenientAPI(Skills.deleteSkillVersion, false, "java");
+
+//making delete methods internal to add public shims that return void
+@@access(Skills.deleteSkill, Access.internal);
+@@clientName(Skills.deleteSkill, "internalDeleteSkill");
+@@access(Skills.deleteSkillVersion, Access.internal);
+@@clientName(Skills.deleteSkillVersion, "internalDeleteSkillVersion");
+
+// Preserve the existing Java paging overloads that accept an initial continuation token.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the GA Java paging API."
+@@clientOption(
+  PageAfterQueryParameter.after,
+  "includeContinuationTokenParameter",
+  true,
+  "java"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the GA Java paging API."
+@@clientOption(
+  AgentInsightsPageQueryParameters.after,
+  "includeContinuationTokenParameter",
+  true,
+  "java"
+);
+
 // --------------------------------------------------------------------------------
-// Renames - models
+// Model, property, and enum-member names
 // --------------------------------------------------------------------------------
 
 // // Less generic names
 @@clientName(Sku, "ModelDeploymentSku");
 @@clientName(SasCredential, "BlobReferenceSasCredential"); // Not to be confused with class "SASCredentials"
-
 @@clientName(Skill, "SkillDetails");
 
 // // More accurate naming
@@ -190,9 +224,7 @@ model ListAgentInsightRunsOptions {
 // Retain the existing public DatasetReference name.
 @@clientName(DatasetReference, "OptionalVersionDatasetReference", "java");
 @@clientName(VersionedDatasetReference, "DatasetReference", "java");
-
 @@clientName(EntraIDCredentials, "EntraIdCredentials");
-
 @@clientName(EvalResult, "EvaluationResult");
 @@clientName(EvalRun, "EvaluationRun");
 @@clientName(EvalRunDataSource, "EvaluationRunDataSource");
@@ -234,7 +266,6 @@ model ListAgentInsightRunsOptions {
 @@clientName(EvalRunResultCompareItem, "EvaluationRunResultCompareItem");
 @@clientName(EvalRunResultComparison, "EvaluationRunResultComparison");
 @@clientName(EvalRunResultSummary, "EvaluationRunResultSummary");
-
 @@clientName(ItemGenerationParams, "ItemGenerationParameters", "java");
 @@clientName(ItemGenerationParamsType, "ItemGenerationParametersType", "java");
 @@clientName(
@@ -277,7 +308,6 @@ model ListAgentInsightRunsOptions {
   "AgentInsightPrioritiesDetails",
   "java"
 );
-
 @@clientName(RedTeamItemGenerationParams.num_turns, "numberOfTurns", "java");
 @@clientName(
   RedTeamSeedPromptsItemGenerationParams.num_turns,
@@ -334,11 +364,8 @@ model ListAgentInsightRunsOptions {
 );
 @@clientName(DatasetEvaluationRuleAction.evalId, "evaluationId", "java");
 @@clientName(TraceEvaluationRuleAction.evalId, "evaluationId", "java");
-
 @@clientName(Index, "AIProjectIndex", "java");
-
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "schedule");
-
 @@clientName(BlobReference.blobUri, "blobUrl");
 @@clientName(SasCredential.sasUri, "sasUrl");
 @@clientName(DatasetVersion.dataUri, "dataUrl");
@@ -352,7 +379,6 @@ model ListAgentInsightRunsOptions {
 // OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse`
 // and `MemoryStoreUpdateResponse`.
 @@clientName(OpenAI.Error, "ApiError");
-
 @@clientName(RedTeamTargetConfig, "TargetConfig");
 
 // *Request → *Input renames for public body models
@@ -364,47 +390,20 @@ model ListAgentInsightRunsOptions {
 // *Response → *Result renames for public response models
 @@clientName(ModelPendingUploadResponse, "ModelPendingUploadResult");
 @@clientName(DispatchRoutineResponse, "DispatchRoutineResult");
-
 @@clientName(ContinuousEvaluationRuleAction.evalId, "evaluationId");
-
 @@clientName(EvaluatorDefinition.init_parameters, "initializationParameters");
-
 @@clientName(
   DataGenerationJobResult.generated_samples,
   "generatedSampleCount",
   "java"
 );
-
 @@clientName(AttackStrategy.Base64, "Base_64");
 @@clientName(AttackStrategy.ROT13, "ROT_13");
-
 @@clientName(AgentInsightHighlightedTrace.duration_ms, "Duration");
 @@clientName(EvaluatorHealthMetrics.n_dimensions, "numberOfDimensions", "java");
 
 // Preserve name on GA'd model
 @@clientName(FoundryEvaluationTarget, "Target");
-
-// --------------------------------------------------------------------------------
-// Usage / Public accessibility overrides
-// --------------------------------------------------------------------------------
-
-// Keep preview opt-in enum internal to Java; public builders use allowPreview(boolean).
-@@usage(FoundryFeaturesOptInKeys, Usage.input, "java");
-@@access(FoundryFeaturesOptInKeys, Access.internal, "java");
-
-// Azure-specific OpenAI eval extensions used with the Stainless OpenAI SDK.
-@@usage(
-  GraderAzureAIEvaluator,
-  Usage.input | Usage.output | Usage.json,
-  "java"
-);
-@@access(GraderAzureAIEvaluator, Access.public, "java");
-@@usage(
-  TestingCriterionAzureAIEvaluator,
-  Usage.input | Usage.output | Usage.json,
-  "java"
-);
-@@access(TestingCriterionAzureAIEvaluator, Access.public, "java");
 
 // Default name produces a style violation
 @@clientName(SASCredentials, "SasCredential", "java");
@@ -428,75 +427,34 @@ model ListAgentInsightRunsOptions {
 @@clientName(ConnectionType.APIKey, "API_KEY", "java");
 @@clientName(ConnectionType.RemoteTool, "REMOTE_TOOL_PREVIEW", "java");
 
-// Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
-// input parameter that calls either on these two.
-@@access(Connections.get, Access.internal);
-@@access(Connections.getWithCredentials, Access.internal);
-
 // The fix for ambiguous import of OperationState
 @@clientName(Azure.Core.Foundations.OperationState, "operationStatus", "java");
 
 // is_primary -> primary so accessors become isPrimary()/setPrimary()
 @@clientName(EvaluatorMetric.is_primary, "primary", "java");
 
-// Disabled convenient API generation and make private to provide a custom shim returning `void` in the client
-@@convenientAPI(Skills.deleteSkill, false, "java");
-@@convenientAPI(Skills.deleteSkillVersion, false, "java");
-
-//making delete methods internal to add public shims that return void
-@@access(Skills.deleteSkill, Access.internal);
-@@clientName(Skills.deleteSkill, "internalDeleteSkill");
-@@access(Skills.deleteSkillVersion, Access.internal);
-@@clientName(Skills.deleteSkillVersion, "internalDeleteSkillVersion");
-
 // --------------------------------------------------------------------------------
-// Type replacements / encodings
+// Visibility and usage
 // --------------------------------------------------------------------------------
 
-@alternateType(
-  {
-    identity: "com.azure.ai.projects.models.DatasetEvaluationSource",
-  },
-  "java"
-)
-model JavaDatasetEvaluationSource {}
+// Keep preview opt-in enum internal to Java; public builders use allowPreview(boolean).
+@@usage(FoundryFeaturesOptInKeys, Usage.input, "java");
+@@access(FoundryFeaturesOptInKeys, Access.internal, "java");
 
-@alternateType(
-  {
-    identity: "com.azure.ai.projects.models.TraceEvaluationSource",
-  },
+// Azure-specific OpenAI eval extensions used with the Stainless OpenAI SDK.
+@@usage(
+  GraderAzureAIEvaluator,
+  Usage.input | Usage.output | Usage.json,
   "java"
-)
-model JavaTraceEvaluationSource {}
+);
+@@access(GraderAzureAIEvaluator, Access.public, "java");
+@@usage(
+  TestingCriterionAzureAIEvaluator,
+  Usage.input | Usage.output | Usage.json,
+  "java"
+);
+@@access(TestingCriterionAzureAIEvaluator, Access.public, "java");
 
-@alternateType(
-  {
-    identity: "com.azure.ai.projects.models.UserConversationSimulationSource",
-  },
-  "java"
-)
-model JavaUserConversationSimulationSource {}
-
-@@alternateType(
-  DatasetEvaluationRuleAction.source,
-  JavaDatasetEvaluationSource,
-  "java"
-);
-@@alternateType(
-  TraceEvaluationRuleAction.source,
-  JavaTraceEvaluationSource,
-  "java"
-);
-@@alternateType(
-  UserConversationSimulationEvalRunDataSource.source,
-  JavaUserConversationSimulationSource,
-  "java"
-);
-@@alternateType(
-  UserConversationSimulationPreviewEvalRunDataSource.source,
-  JavaUserConversationSimulationSource,
-  "java"
-);
 // Keep the handwritten union variants reachable after replacing the source properties.
 @@usage(CsvEvalRunDataSource, Usage.input | Usage.output, "java");
 @@access(CsvEvalRunDataSource, Access.public, "java");
@@ -541,6 +499,134 @@ model JavaUserConversationSimulationSource {}
   "java"
 );
 
+// --------------------------------------------------------------------------------
+// Type replacements and encodings
+// --------------------------------------------------------------------------------
+
+@alternateType(
+  {
+    identity: "com.azure.ai.projects.models.DatasetEvaluationSource",
+  },
+  "java"
+)
+model JavaDatasetEvaluationSource {}
+@alternateType(
+  {
+    identity: "com.azure.ai.projects.models.TraceEvaluationSource",
+  },
+  "java"
+)
+model JavaTraceEvaluationSource {}
+@alternateType(
+  {
+    identity: "com.azure.ai.projects.models.UserConversationSimulationSource",
+  },
+  "java"
+)
+model JavaUserConversationSimulationSource {}
+@@alternateType(
+  DatasetEvaluationRuleAction.source,
+  JavaDatasetEvaluationSource,
+  "java"
+);
+@@alternateType(
+  TraceEvaluationRuleAction.source,
+  JavaTraceEvaluationSource,
+  "java"
+);
+@@alternateType(
+  UserConversationSimulationEvalRunDataSource.source,
+  JavaUserConversationSimulationSource,
+  "java"
+);
+@@alternateType(
+  UserConversationSimulationPreviewEvalRunDataSource.source,
+  JavaUserConversationSimulationSource,
+  "java"
+);
+
+// AzureAIModelTarget still uses the Projects sampling parameters independently.
+@alternateType(
+  {
+    identity: "com.azure.ai.agents.models.EvaluationModelConfiguration",
+  },
+  "java"
+)
+model AgentsEvaluationModelConfiguration {}
+@@alternateType(
+  EvaluationModelConfiguration,
+  AgentsEvaluationModelConfiguration,
+  "java"
+);
+@@alternateType(
+  UserConversationSimulationAudioEffectsConfiguration,
+  {
+    identity: "com.azure.ai.agents.models.UserConversationSimulationAudioEffectsConfiguration",
+  },
+  "java"
+);
+@@alternateType(
+  UserConversationSimulationUserBehaviorConfiguration,
+  {
+    identity: "com.azure.ai.agents.models.UserConversationSimulationUserBehaviorConfiguration",
+  },
+  "java"
+);
+@@alternateType(
+  UserConversationSimulationTestCase,
+  {
+    identity: "com.azure.ai.agents.models.UserConversationSimulationTestCase",
+  },
+  "java"
+);
+@@alternateType(
+  DayOfWeek,
+  {
+    identity: "java.time.DayOfWeek",
+  },
+  "java"
+);
+@@alternateType(
+  PageOrder,
+  {
+    identity: "com.azure.ai.agents.models.PageOrder",
+  },
+  "java"
+);
+
+// SasCredential (BlobReferenceSasCredential) type field should use the shared CredentialType enum
+@@alternateType(SasCredential.type, CredentialType, "java");
+
+// EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
+@@alternateType(EvaluatorVersion.created_at, utcDateTime, "java");
+@@alternateType(EvaluatorVersion.modified_at, utcDateTime, "java");
+
+// Schedule trigger datetime fields are typed as string in the spec but carry ISO-8601 timestamps
+@@alternateType(RecurrenceTrigger.startTime, utcDateTime, "java");
+@@alternateType(RecurrenceTrigger.endTime, utcDateTime, "java");
+@@alternateType(OneTimeTrigger.triggerAt, utcDateTime, "java");
+@@alternateType(CronTrigger.startTime, utcDateTime, "java");
+@@alternateType(CronTrigger.endTime, utcDateTime, "java");
+@@alternateType(ScheduleRun.triggerTime, utcDateTime, "java");
+
+// TimeZone property override via model indirection
+@alternateType(
+  {
+    identity: "java.util.TimeZone",
+  },
+  "java"
+)
+model TimeZoneType {}
+@@alternateType(RecurrenceTrigger.timeZone, TimeZoneType, "java");
+@@alternateType(CronTrigger.timeZone, TimeZoneType, "java");
+@@alternateType(OneTimeTrigger.timeZone, TimeZoneType, "java");
+@@alternateType(RoutineRunStatus, string, "java");
+@@alternateType(AgentInsightHighlightedTrace.total_tokens, int64, "java");
+
+// --------------------------------------------------------------------------------
+// OpenAI alternate types
+// --------------------------------------------------------------------------------
+
 @@alternateType(
   OpenAI.CreateEvalJsonlRunDataSource,
   {
@@ -557,7 +643,6 @@ model JavaUserConversationSimulationSource {}
   "java"
 )
 model OpenAICompletionsRunDataSource {}
-
 @alternateType(
   {
     identity: "com.openai.models.evals.runs.CreateEvalJsonlRunDataSource.Source",
@@ -565,7 +650,6 @@ model OpenAICompletionsRunDataSource {}
   "java"
 )
 model OpenAIJsonlRunDataSourceSource {}
-
 @@alternateType(
   TargetCompletionEvalRunDataSource.source,
   OpenAIJsonlRunDataSourceSource,
@@ -576,13 +660,11 @@ model OpenAIJsonlRunDataSourceSource {}
   OpenAIJsonlRunDataSourceSource,
   "java"
 );
-
 @@alternateType(
   OpenAI.CreateEvalCompletionsRunDataSource,
   OpenAICompletionsRunDataSource,
   "java"
 );
-
 @@alternateType(
   OpenAI.EvalJsonlFileContentSource,
   {
@@ -601,44 +683,6 @@ model OpenAIJsonlRunDataSourceSource {}
   OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference,
   {
     identity: "com.openai.models.evals.runs.CreateEvalCompletionsRunDataSource.InputMessages.ItemReference",
-  },
-  "java"
-);
-
-// AzureAIModelTarget still uses the Projects sampling parameters independently.
-@alternateType(
-  {
-    identity: "com.azure.ai.agents.models.EvaluationModelConfiguration",
-  },
-  "java"
-)
-model AgentsEvaluationModelConfiguration {}
-
-@@alternateType(
-  EvaluationModelConfiguration,
-  AgentsEvaluationModelConfiguration,
-  "java"
-);
-
-@@alternateType(
-  UserConversationSimulationAudioEffectsConfiguration,
-  {
-    identity: "com.azure.ai.agents.models.UserConversationSimulationAudioEffectsConfiguration",
-  },
-  "java"
-);
-@@alternateType(
-  UserConversationSimulationUserBehaviorConfiguration,
-  {
-    identity: "com.azure.ai.agents.models.UserConversationSimulationUserBehaviorConfiguration",
-  },
-  "java"
-);
-
-@@alternateType(
-  UserConversationSimulationTestCase,
-  {
-    identity: "com.azure.ai.agents.models.UserConversationSimulationTestCase",
   },
   "java"
 );
@@ -668,6 +712,13 @@ model AgentsEvaluationModelConfiguration {}
   "java"
 );
 
+//Suppress the OpenAI.Tool type to prevent from emitting entire tool model tree
+@@alternateType(OpenAI.Tool, unknown, "java");
+
+// --------------------------------------------------------------------------------
+// Expandable enums and unions
+// --------------------------------------------------------------------------------
+
 // GrammarSyntax1 → expandable GrammarSyntax enum
 // The OpenAI TypeSpec names this enum "GrammarSyntax1"; replace with an open union
 // so it generates as the extensible "GrammarSyntax" string enum in Java.
@@ -676,84 +727,5 @@ union GrammarSyntaxExpandable {
   lark: "lark",
   regex: "regex",
 }
-
 @@clientName(GrammarSyntaxExpandable, "GrammarSyntax", "java");
 @@alternateType(OpenAI.GrammarSyntax1, GrammarSyntaxExpandable, "java");
-
-@@alternateType(
-  DayOfWeek,
-  {
-    identity: "java.time.DayOfWeek",
-  },
-  "java"
-);
-
-@@alternateType(
-  PageOrder,
-  {
-    identity: "com.azure.ai.agents.models.PageOrder",
-  },
-  "java"
-);
-
-//Suppress the OpenAI.Tool type to prevent from emitting entire tool model tree
-@@alternateType(OpenAI.Tool, unknown, "java");
-
-// SasCredential (BlobReferenceSasCredential) type field should use the shared CredentialType enum
-@@alternateType(SasCredential.type, CredentialType, "java");
-
-// EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
-@@alternateType(EvaluatorVersion.created_at, utcDateTime, "java");
-@@alternateType(EvaluatorVersion.modified_at, utcDateTime, "java");
-
-// Schedule trigger datetime fields are typed as string in the spec but carry ISO-8601 timestamps
-@@alternateType(RecurrenceTrigger.startTime, utcDateTime, "java");
-@@alternateType(RecurrenceTrigger.endTime, utcDateTime, "java");
-@@alternateType(OneTimeTrigger.triggerAt, utcDateTime, "java");
-@@alternateType(CronTrigger.startTime, utcDateTime, "java");
-@@alternateType(CronTrigger.endTime, utcDateTime, "java");
-@@alternateType(ScheduleRun.triggerTime, utcDateTime, "java");
-
-// TimeZone property override via model indirection
-@alternateType(
-  {
-    identity: "java.util.TimeZone",
-  },
-  "java"
-)
-model TimeZoneType {}
-
-@@alternateType(RecurrenceTrigger.timeZone, TimeZoneType, "java");
-@@alternateType(CronTrigger.timeZone, TimeZoneType, "java");
-@@alternateType(OneTimeTrigger.timeZone, TimeZoneType, "java");
-
-@@alternateType(RoutineRunStatus, string, "java");
-
-@@alternateType(AgentInsightHighlightedTrace.total_tokens, int64, "java");
-
-// --------------------------------------------------------------------------------
-// Relocate EvaluatorGenerationJobs, EvaluationSuites, and
-// EvaluationSuiteGenerationJobs onto the Evaluators sub-client
-// --------------------------------------------------------------------------------
-
-@@clientLocation(EvaluatorGenerationJobs.create, Evaluators);
-@@clientLocation(EvaluatorGenerationJobs.get, Evaluators);
-@@clientLocation(EvaluatorGenerationJobs.list, Evaluators);
-@@clientLocation(EvaluatorGenerationJobs.cancel, Evaluators);
-@@clientLocation(EvaluatorGenerationJobs.delete, Evaluators);
-
-// Preserve the existing Java paging overloads that accept an initial continuation token.
-#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the GA Java paging API."
-@@clientOption(
-  PageAfterQueryParameter.after,
-  "includeContinuationTokenParameter",
-  true,
-  "java"
-);
-#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the GA Java paging API."
-@@clientOption(
-  AgentInsightsPageQueryParameters.after,
-  "includeContinuationTokenParameter",
-  true,
-  "java"
-);
