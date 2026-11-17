@@ -46,6 +46,7 @@ using Azure.AI.Projects;
 // Java uses a handwritten Reactor Netty transport while TypeSpec generates the event models.
 @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!java");
 @@scope(VoiceAgentLiveWebSocket.connectLiveVoiceAgent, "!java");
+@@scope(Azure.AI.Projects.VoiceAgentWebSocket.connectVoiceAgent, "!java");
 @@clientName(Agents.patchAgentObject, "updateAgentDetails");
 @@clientName(Agents.getAgentVersion, "getAgentVersionDetails");
 @@clientName(TelephonyCampaigns.create, "createCampaign", "java");
@@ -127,9 +128,6 @@ using Azure.AI.Projects;
   "java"
 );
 
-// Java's HTTP pipeline cannot expose the upgraded WebSocket connection or exchange frames.
-// Exclude this operation until the Java SDK has a supported WebSocket transport implementation.
-@@scope(Azure.AI.Projects.VoiceAgentWebSocket.connectVoiceAgent, "!java");
 @@access(Agents.createAgent, Access.internal);
 @@access(Agents.updateAgent, Access.internal);
 @@access(Agents.createAgentFromManifest, Access.internal);
@@ -142,14 +140,12 @@ using Azure.AI.Projects;
 @@clientName(MemoryStores.updateMemories, "internalUpdateMemories");
 @@clientName(MemoryStores.searchMemories, "internalSearchMemories");
 
-// Disabled convenient API generation and make private to provide a custom shim returning `void` in the client
+// Handwritten delete shims return void in place of these generated methods.
 @@convenientAPI(Agents.deleteAgent, false, "java");
 @@convenientAPI(Agents.deleteAgentVersion, false, "java");
 @@convenientAPI(MemoryStores.deleteMemoryStore, false, "java");
 @@convenientAPI(MemoryStores.deleteScope, false, "java");
 @@convenientAPI(MemoryStores.deleteMemory, false, "java");
-
-//making delete methods internal to add public shims that return void
 @@access(Agents.deleteAgentVersion, Access.internal);
 @@access(Agents.deleteAgent, Access.internal);
 @@access(MemoryStores.deleteMemoryStore, Access.internal);
@@ -1543,7 +1539,6 @@ union RealtimeConversationItemObject {
   "java"
 );
 
-// Reuse equivalent openai-java models instead of generating duplicate public types.
 @@alternateType(
   OpenAI.ChatCompletionTool,
   {
@@ -1639,11 +1634,7 @@ union RealtimeConversationItemObject {
   "java"
 );
 
-// AI Tooling: openai-java de-dup
-// Suppress emission of standalone models that are exact duplicates of openai-java classes.
-// Map them to their openai-java equivalents so the codegen does not emit its own versions.
-//   ComparisonFilter + ComparisonFilterType  → com.openai.models.ComparisonFilter
-//   CompoundFilter + CompoundFilterType      → com.openai.models.CompoundFilter
+// Mapping these filters also suppresses their generated enum types.
 @@alternateType(
   OpenAI.ComparisonFilter,
   {
@@ -1740,7 +1731,6 @@ union RealtimeConversationItemObject {
   "java"
 );
 
-// Reuse the remaining standalone Realtime shapes introduced with the voice-agent contract.
 @alternateType(
   {
     identity: "com.openai.models.realtime.RealtimeAudioFormats.AudioPcm.Rate",
@@ -2146,7 +2136,6 @@ model OpenAIRealtimeInputImageDetail {}
   "java"
 );
 
-// Reuse standalone OpenAI models.
 @@alternateType(
   OpenAI.TranscriptionLanguage,
   {

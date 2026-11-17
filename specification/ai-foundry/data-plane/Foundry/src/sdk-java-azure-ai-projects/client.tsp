@@ -183,11 +183,9 @@ model ListAgentInsightRunsOptions {
 @@access(Connections.get, Access.internal);
 @@access(Connections.getWithCredentials, Access.internal);
 
-// Disabled convenient API generation and make private to provide a custom shim returning `void` in the client
+// Handwritten delete shims return void in place of these generated methods.
 @@convenientAPI(Skills.deleteSkill, false, "java");
 @@convenientAPI(Skills.deleteSkillVersion, false, "java");
-
-//making delete methods internal to add public shims that return void
 @@access(Skills.deleteSkill, Access.internal);
 @@clientName(Skills.deleteSkill, "internalDeleteSkill");
 @@access(Skills.deleteSkillVersion, Access.internal);
