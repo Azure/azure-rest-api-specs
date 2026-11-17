@@ -631,7 +631,10 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
   }
 
   // Get the spec paths based on the batch run type
-  const specConfigsArray: SpecConfigs[] = getSpecPaths(batchType, commandInput.localSpecRepoPath);
+  const specConfigsArray: SpecConfigs[] = await getSpecPaths(
+    batchType,
+    commandInput.localSpecRepoPath,
+  );
 
   // Prepare variables
   let statusCode = 0;
