@@ -358,6 +358,25 @@ void test("finalization rejects output or decisions changed after successful mat
     const decisionsPath = path.join(work, "agent-workspace", "agent-decisions.json");
     fs.appendFileSync(decisionsPath, "\n");
     assert.throws(() => finalizeAssessment({ work }), /Stale materialization runtime provenance/);
+
+    const state = readWorkflowState(work);
+    const materialization = state?.runtimePhases?.materialization;
+    assert.ok(materialization);
+    const { ["agent-workspace/agent-decisions.json"]: _omitted, ...inputHashesWithoutDecisions } =
+      materialization.inputHashes;
+    transitionWorkflowState(work, "awaiting-finalization", {
+      runtimePhases: {
+        ...state?.runtimePhases,
+        materialization: {
+          ...materialization,
+          inputHashes: inputHashesWithoutDecisions,
+        },
+      },
+    });
+    assert.throws(
+      () => finalizeAssessment({ work }),
+      /Missing or unsupported successful materialization runtime provenance/,
+    );
     assert.equal(fs.existsSync(path.join(work, "assessment.json")), false);
   } finally {
     fs.rmSync(work, { recursive: true, force: true });

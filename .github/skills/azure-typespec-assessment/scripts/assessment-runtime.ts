@@ -11,6 +11,7 @@ import {
 } from "./workflow-state.ts";
 
 export const AGENT_INDEX_FILE = "agent-workspace/agent-index.json";
+export const AGENT_DECISIONS_FILE = "agent-workspace/agent-decisions.json";
 
 export type AssessmentRuntime = {
   schemaVersion: 1;
@@ -140,12 +141,36 @@ function isHashMap(value: unknown): value is Record<string, string> {
   );
 }
 
+function requiredMaterializationInputs(work: string): string[] {
+  let decisionsFile = AGENT_DECISIONS_FILE;
+  try {
+    const indexFile = resolveWorkPath(work, AGENT_INDEX_FILE);
+    if (fs.existsSync(indexFile)) {
+      const index = readJsonObject(indexFile);
+      const requiredOutputs = isRecord(index.requiredOutputs) ? index.requiredOutputs : undefined;
+      if (
+        typeof requiredOutputs?.agentDecisions === "string" &&
+        requiredOutputs.agentDecisions.trim()
+      ) {
+        const resolved = resolveWorkPath(work, requiredOutputs.agentDecisions);
+        decisionsFile = path.relative(path.resolve(work), resolved).replaceAll("\\", "/");
+      }
+    }
+  } catch (error) {
+    throw new AssessmentRuntimeError(
+      `Invalid materialization runtime provenance: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+  return [AGENT_INDEX_FILE, decisionsFile];
+}
+
 export function verifyRuntimePhaseProvenance(
   work: string,
   phase: "preparation" | "materialization",
   runtime: AssessmentRuntime,
 ): RuntimePhaseProvenance {
   const value = readWorkflowState(work)?.runtimePhases?.[phase];
+  const requiredInputs = phase === "materialization" ? requiredMaterializationInputs(work) : [];
   const requiredOutputs =
     phase === "preparation"
       ? [AGENT_INDEX_FILE]
@@ -157,8 +182,8 @@ export function verifyRuntimePhaseProvenance(
     !Number.isFinite(Date.parse(value.recordedAt)) ||
     !isHashMap(value.inputHashes) ||
     !isHashMap(value.outputHashes) ||
-    requiredOutputs.some((file) => !value.outputHashes[file]) ||
-    (phase === "materialization" && !value.inputHashes[AGENT_INDEX_FILE])
+    requiredInputs.some((file) => !value.inputHashes[file]) ||
+    requiredOutputs.some((file) => !value.outputHashes[file])
   ) {
     throw new AssessmentRuntimeError(
       `Missing or unsupported successful ${phase} runtime provenance. ` +
