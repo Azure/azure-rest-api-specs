@@ -133,16 +133,7 @@ model MicrosoftFoundrySource {
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The name of a Microsoft-curated public Foundry model registry, e.g. `azure-huggingface`. No credential may be supplied when set. Mutually exclusive with `projectResourceId`. Immutable after creation.")
-  publicRegistryName?: FoundryPublicRegistryName;
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Foundry is a valid name"
-@doc("A Microsoft-curated public Microsoft Foundry model registry. The set of supported registries may grow over time.")
-union FoundryPublicRegistryName {
-  string,
-
-  @doc("The `azure-huggingface` registry: Hugging Face models hosted by Microsoft Foundry. Model names use the `<org>--<repo>` form.")
-  AzureHuggingFace: "azure-huggingface",
+  publicRegistryName?: string;
 }
 
 @armResourceOperations

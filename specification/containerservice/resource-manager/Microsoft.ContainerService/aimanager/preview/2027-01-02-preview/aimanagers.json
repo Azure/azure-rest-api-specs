@@ -2872,24 +2872,6 @@
         ]
       }
     },
-    "FoundryPublicRegistryName": {
-      "type": "string",
-      "description": "A Microsoft-curated public Microsoft Foundry model registry. The set of supported registries may grow over time.",
-      "enum": [
-        "azure-huggingface"
-      ],
-      "x-ms-enum": {
-        "name": "FoundryPublicRegistryName",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AzureHuggingFace",
-            "value": "azure-huggingface",
-            "description": "The `azure-huggingface` registry: Hugging Face models hosted by Microsoft Foundry. Model names use the `<org>--<repo>` form."
-          }
-        ]
-      }
-    },
     "InfeasibilityReason": {
       "type": "object",
       "description": "Reason explaining why a `CalculateCostPlan` is not deployable. This is a per-plan annotation surfaced inside a successful `calculateCost` response, not an Azure Resource Manager error envelope.",
@@ -3000,7 +2982,7 @@
           ]
         },
         "publicRegistryName": {
-          "$ref": "#/definitions/FoundryPublicRegistryName",
+          "type": "string",
           "description": "The name of a Microsoft-curated public Foundry model registry, e.g. `azure-huggingface`. No credential may be supplied when set. Mutually exclusive with `projectResourceId`. Immutable after creation.",
           "x-ms-mutability": [
             "read",
