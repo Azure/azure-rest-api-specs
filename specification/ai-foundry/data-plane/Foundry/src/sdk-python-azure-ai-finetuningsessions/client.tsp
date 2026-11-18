@@ -28,6 +28,11 @@ namespace Azure.AI.FineTuning.Sessions;
 // with local destination validation; do not add separate raw Python methods.
 @@scope(CheckpointDownloads.prepare, "!python");
 @@scope(CheckpointDownloads.getFile, "!python");
+// Maintained sampling hooks own completion observation and acknowledgement.
+@@scope(CompletionFeeds.retrieve, "!python");
+// Maintained session creation hooks advertise and inspect these wire headers.
+@@scope(FineTuningClientCapabilitiesHeader.clientCapabilities, "!python");
+@@scope(FineTuningCompletionFeedHeader.useCompletionFeed, "!python");
 
 // Named SDK locations create the existing flat groups without defining HTTP
 // interfaces or copying operations. Routes remain on the service operations.
@@ -238,6 +243,11 @@ namespace Azure.AI.FineTuning.Sessions;
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.FineTuningCheckpoint,
   Checkpoint,
+  "python"
+);
+@@clientName(
+  Azure.AI.Projects.SessionFineTuning.FineTuningCheckpointPublicationState,
+  "CheckpointPublicationState",
   "python"
 );
 @@alternateType(

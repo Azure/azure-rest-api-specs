@@ -1,5 +1,7 @@
 import "../common/service.tsp";
 import "../common/custom-types.tsp";
+import "@typespec/events";
+import "@typespec/sse";
 
 namespace Azure.AI.ProjectsInternal {
   using Azure.AI.Projects;
@@ -14,10 +16,100 @@ namespace Azure.AI.ProjectsInternal {
 
     /** Log-probabilities of the generated tokens, when available. */
     logprobs?: float64[] | null;
+
+    /** Independently selected decode-time top-K token IDs per generated token. */
+    score_centering_head_tokens?: int32[][];
+
+    /** Decode-time sampler logprobs corresponding to the head token IDs. */
+    score_centering_head_logprobs?: float64[][];
+
+    /** Verified decode-time checkpoint, token-prefix digest and probability mode. */
+    score_centering_provenance?: Record<string>;
   }
 }
 
 namespace Azure.AI.Projects.SessionFineTuning {
+  /**
+   * An opaque completion-feed position consisting of two unsigned 64-bit decimal
+   * integers separated by a hyphen. Compare components numerically, not lexically.
+   */
+  @pattern("^[0-9]{1,20}-[0-9]{1,20}$")
+  scalar FineTuningCompletionCursor extends string;
+
+  /**
+   * Receipt and contiguous handled-prefix progress for one observation round.
+   * The service rejects unknown fields, cursor components above uint64, and
+   * processed_cursor greater than read_cursor. ACK is applied before SSE headers.
+   */
+  @Azure.ClientGenerator.Core.clientName(
+    "FineTuningRetrieveFuturesContent",
+    "csharp"
+  )
+  model FineTuningRetrieveFuturesRequest {
+    /** Last received event ID; reads return events strictly after this position. */
+    read_cursor?: FineTuningCompletionCursor = "0-0";
+
+    /**
+     * Contiguous handled prefix, no greater than read_cursor. ACK trims entries
+     * strictly below this position, not the entry at this position.
+     */
+    processed_cursor?: FineTuningCompletionCursor = "0-0";
+
+    /**
+     * Observation wait in seconds. Zero applies ACK only and returns HTTP 204.
+     * Positive waits are capped by the server at 30 seconds, including setup
+     * and streaming; the request accepts larger nonnegative integer values.
+     */
+    #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "The existing request accepts nonnegative integers without a fixed bit-size maximum; positive observation waits are capped server-side."
+    @minValue(0)
+    wait_seconds?: integer = 30;
+  }
+
+  /** Exact terminal statuses accepted by the completion notification protocol. */
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The completion protocol accepts only these two terminal sampling statuses."
+  union FineTuningCompletionStatus {
+    /** The sampling result was persisted successfully. */
+    completed: "completed",
+
+    /** Sampling failed and the terminal error was persisted. */
+    failed: "failed",
+  }
+
+  /** Notification of a persisted terminal sampling result, not the result itself. */
+  model FineTuningRequestCompletion {
+    /** Request identifier to retrieve using the existing request-status GET. */
+    @minLength(1)
+    @pattern("^\\S+$")
+    request_id: string;
+
+    /** Terminal status of the persisted sampling request. */
+    status: FineTuningCompletionStatus;
+  }
+
+  /**
+   * Events in a bounded observation response. Delivery may repeat; the event ID
+   * is a receipt cursor, not an ACK. A cursorless end event with data {} indicates
+   * planned expiry, not completion of all sampling work. Interrupted streams may
+   * omit end. Comments such as ': connected' do not advance either cursor.
+   */
+  #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "SSE event names discriminate distinct wire envelopes; the cursorless end event does not inherit completion metadata."
+  @TypeSpec.Events.events
+  union FineTuningCompletionEvents {
+    /** A terminal sampling notification with a separate SSE delivery ID. */
+    completion: {
+      /** Delivery position carried in the SSE id field, outside JSON data. */
+      id: FineTuningCompletionCursor,
+
+      /** JSON payload carried in the SSE data field. */
+      @TypeSpec.Events.data
+      data: FineTuningRequestCompletion,
+    },
+
+    /** Planned end of this observation window; no SSE id is emitted. */
+    @TypeSpec.SSE.terminalEvent
+    end: {},
+  }
+
   // clientName decorators are C#-only; Python and the wire/service contract are unchanged.
 
   // ─── Enums ────────────────────────────────────────────────────────────────────
@@ -59,6 +151,12 @@ namespace Azure.AI.Projects.SessionFineTuning {
 
     /** REINFORCE-style importance-sampled policy gradient loss. */
     importance_sampling: "importance_sampling",
+
+    /** Experimental sum-reduced token-level truncated IS with detached upper-capped ratio weights. */
+    tis: "tis",
+
+    /** Experimental native partial-head score centering, optionally weighted with truncated IS. */
+    score_centering: "score_centering",
 
     /** PPO (Proximal Policy Optimization) clipped surrogate loss. */
     ppo: "ppo",
@@ -134,6 +232,9 @@ namespace Azure.AI.Projects.SessionFineTuning {
   model TensorData {
     /** The floating-point values of the tensor. */
     data: float64[];
+
+    /** Optional dimensions for multidimensional loss inputs. */
+    shape?: int32[];
   }
 
   /** A text-token or image chunk within a model input, identified by its type. */
@@ -251,6 +352,15 @@ namespace Azure.AI.Projects.SessionFineTuning {
 
   /** Token-generation sampling parameters. */
   model FineTuningSamplingParams {
+    /**
+     * Experimental decode-time head capture: 0 disables, 1..128 requests top-K.
+     * Requires temperature=1, top_p=1, top_k=-1 and no response_format.
+     * Unsupported with text-only input.
+     */
+    @minValue(0)
+    @maxValue(128)
+    score_centering_head_size?: int32;
+
     /** Maximum number of tokens to generate. Must be positive. */
     @minValue(1)
     max_tokens: int32;
@@ -295,6 +405,15 @@ namespace Azure.AI.Projects.SessionFineTuning {
      * Omit or pass empty array to skip KL.
      */
     logprobs?: TensorData;
+
+    /** Decode-time head token IDs with shape (target_length, K), K <= 128. */
+    score_centering_head_tokens?: TensorData;
+
+    /** Decode-time sampler head logprobs matching the head token shape. */
+    score_centering_head_logprobs?: TensorData;
+
+    /** Optional 0/1 head-entry mask; inactive prompt/tool positions should be masked. */
+    score_centering_head_mask?: TensorData;
   }
 
   /** A single training example. */
@@ -311,7 +430,11 @@ namespace Azure.AI.Projects.SessionFineTuning {
     /** PPO (Proximal Policy Optimization) / CISPO (Clipped Importance-Sampled Policy Optimization): lower clip threshold. */
     clip_low_threshold?: float64;
 
-    /** PPO (Proximal Policy Optimization) / CISPO (Clipped Importance-Sampled Policy Optimization): upper clip threshold. */
+    /**
+     * PPO / CISPO: upper clip threshold. TIS: upper-only token ratio cap,
+     * finite and at least 1; defaults to 2. Score centering: optional TIS
+     * weighting cap; omit for standalone centering.
+     */
     clip_high_threshold?: float64;
 
     /** SAPO (Soft Adaptive Policy Optimization): positive advantage temperature. */
@@ -482,6 +605,41 @@ namespace Azure.AI.Projects.SessionFineTuning {
 
   // ─── Checkpoint resource ──────────────────────────────────────────────────────
 
+  /** Public publication progress, distinct from checkpoint save completion. */
+  model FineTuningCheckpointPublicationState {
+    /** Opaque identifier of the publication operation. */
+    @visibility(Lifecycle.Read)
+    operation_id: string;
+
+    /** Publication status: pending, completed, or failed. */
+    @visibility(Lifecycle.Read)
+    status: string;
+
+    /** Current publication phase. */
+    @visibility(Lifecycle.Read)
+    phase: string;
+
+    /** Sanitized reason for the current publication state. */
+    @visibility(Lifecycle.Read)
+    reason?: string | null;
+
+    /** Sanitized failure code, when available. */
+    @visibility(Lifecycle.Read)
+    error_code?: string | null;
+
+    /** Sanitized progress or failure message, when available. */
+    @visibility(Lifecycle.Read)
+    message?: string | null;
+
+    /** Opaque diagnostic reference, when available. */
+    @visibility(Lifecycle.Read)
+    debug_ref?: string | null;
+
+    /** Whether retrying the publication operation is recommended. */
+    @visibility(Lifecycle.Read)
+    should_retry?: boolean | null;
+  }
+
   /** A checkpoint item returned in GET /fine_tuning/sessions/{sessionId}/checkpoints. */
   model FineTuningCheckpoint {
     /** Identifier of the saved checkpoint within the session. */
@@ -494,11 +652,27 @@ namespace Azure.AI.Projects.SessionFineTuning {
     checkpoint_type: FineTuningCheckpointType;
 
     /**
-     * Timestamp when the checkpoint was saved.
+     * Timestamp when the checkpoint was saved, or null if saving has not completed.
      * The fine-tuning service returns an RFC 3339 UTC date-time string, not Unix epoch seconds.
      */
     @visibility(Lifecycle.Read)
-    time: utcDateTime;
+    time: utcDateTime | null;
+
+    /** Save status: pending, completed, or failed. This is not safety approval. */
+    @visibility(Lifecycle.Read)
+    status?: string;
+
+    /** Publication progress for a protected checkpoint, when available. */
+    @visibility(Lifecycle.Read)
+    publication?: FineTuningCheckpointPublicationState | null;
+
+    /** Whether publication is required before this checkpoint can be deployed. */
+    @visibility(Lifecycle.Read)
+    publication_required?: boolean;
+
+    /** Canonical deployment eligibility; null for an unprotected legacy checkpoint. */
+    @visibility(Lifecycle.Read)
+    deployment_eligible?: boolean | null;
 
     /** Training step associated with the checkpoint, when recorded. */
     @visibility(Lifecycle.Read)
@@ -963,6 +1137,9 @@ namespace Azure.AI.Projects.SessionFineTuning {
   union FineTuningTextOnlyLossFn {
     /** Importance-sampling policy-gradient loss. */
     importance_sampling: "importance_sampling",
+
+    /** Experimental sum-reduced upper-only token-level truncated importance sampling. */
+    tis: "tis",
 
     /** Proximal policy optimization. */
     ppo: "ppo",

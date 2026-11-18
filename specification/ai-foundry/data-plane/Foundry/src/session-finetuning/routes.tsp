@@ -37,6 +37,28 @@ op FineTuningSessionOperation<
 
 // ─── Fine-tuning sessions ─────────────────────────────────────────────────────
 
+/** Optional client capability advertisement on session creation. */
+model FineTuningClientCapabilitiesHeader {
+  /**
+   * Optional comma-separated, case-sensitive capability tokens. Advertising
+   * use_completion_feed permits negotiation but does not enable it alone.
+   * Omission preserves legacy polling and does not request feed publication.
+   */
+  @header("X-Loom-Client-Capabilities")
+  clientCapabilities?: string;
+}
+
+/** Optional server decision returned on session creation. */
+model FineTuningCompletionFeedHeader {
+  /**
+   * Use the feed only for the exact value true; false, absence, or any other
+   * value requires legacy polling. The service persists the session decision;
+   * this is not a request flag.
+   */
+  @header("X-Loom-Use-Completion-Feed")
+  useCompletionFeed?: string;
+}
+
 /** Creates and manages fine-tuning sessions in the project. */
 @route("/fine_tuning_sessions")
 @tag("FineTuningSessions")
@@ -53,8 +75,15 @@ interface FineTuningSessions {
     {
       /** Configuration of the fine-tuning session to create. */
       @body session: CreateFineTuningSessionRequest;
+
+      ...FineTuningClientCapabilitiesHeader;
     },
-    CreateFineTuningSessionResponse
+    {
+      ...FineTuningCompletionFeedHeader;
+
+      /** Session and initialization request identifiers. */
+      @body body: CreateFineTuningSessionResponse;
+    }
   >;
 
   /** List fine-tuning sessions in this project using offset-based pagination. */
@@ -432,6 +461,81 @@ interface Sampling {
 }
 
 // ─── Request-status polling ───────────────────────────────────────────────────
+
+/** ACK or feed setup failed before response headers; retry unchanged progress. */
+@error
+model FineTuningCompletionFeedUnavailable {
+  /** The owning completion feed is unavailable. */
+  @statusCode statusCode: 503;
+
+  /** Delay in seconds before retrying the same progress. */
+  @header("Retry-After") retryAfter: "5";
+
+  /** Existing setup-failure response body. */
+  @body body: FineTuningCompletionFeedError;
+}
+
+/** Safe body of a completion-feed setup failure. */
+model FineTuningCompletionFeedError {
+  /** Safe description of feed unavailability. */
+  detail: string;
+}
+
+/** Successful bounded observation response. */
+model FineTuningCompletionFeedResult {
+  /** A bounded observation stream is returned for positive waits. */
+  @statusCode statusCode: 200;
+
+  /** Completion events are not cached. */
+  @header("Cache-Control") cacheControl: "no-cache";
+
+  /** Disable reverse-proxy buffering of incremental events. */
+  @header("X-Accel-Buffering") accelBuffering: "no";
+
+  ...TypeSpec.SSE.SSEStream<FineTuningCompletionEvents>;
+}
+
+/** Successful ACK-only response without an event stream or body. */
+model FineTuningCompletionFeedAcknowledged {
+  /** ACK-only progress was applied without reading events. */
+  @statusCode statusCode: 204;
+}
+
+/**
+ * Observes terminal sampling notifications for an authorized owning session.
+ * This is not token streaming or an Azure LRO. Results remain on request GET.
+ */
+@route("/fine_tuning_sessions/{sessionId}/retrieve_futures")
+@tag("Operations")
+interface CompletionFeeds {
+  /**
+   * Apply processed_cursor ACK, then read a bounded text/event-stream window
+   * after read_cursor. Zero wait returns HTTP 204 without reading. Progress is
+   * supplied in JSON, not Last-Event-ID. ACK/setup failure returns HTTP 503 with
+   * Retry-After: 5; retry the same progress. Failure after headers interrupts the
+   * stream. Reads never provision a feed or opt a legacy session into one.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Completion observation preserves the existing bounded SSE POST and ACK-only HTTP 204 protocol, not an Azure LRO."
+  #suppress "@azure-tools/typespec-azure-core/no-error-status-codes" "The existing feed exposes a distinct pre-header HTTP 503 with Retry-After."
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "The existing protocol intentionally returns an SSE body for observation and no body for ACK-only progress."
+  @extension("x-ms-foundry-meta", FineTuningSessionsRequiredPreviews)
+  @post
+  @summary("Observe sampling completions and acknowledge progress")
+  retrieve(
+    ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.finetuning_sessions_v1_preview>,
+    ...FoundryDataPlaneApiVersionParameter,
+
+    /** Identifier of the owning fine-tuning session. */
+    @minLength(1) @path sessionId: string,
+
+    /** Receipt cursor, contiguous handled prefix, and bounded observation wait. */
+    @body progress: FineTuningRetrieveFuturesRequest,
+  ):
+    | FineTuningCompletionFeedResult
+    | FineTuningCompletionFeedAcknowledged
+    | FineTuningCompletionFeedUnavailable
+    | AzureRangeErrorResponse<ApiErrorResponse>;
+}
 
 /** Retrieves the raw processing status of a fine-tuning request. */
 @route("/fine_tuning_sessions/{sessionId}/request/{requestId}")
