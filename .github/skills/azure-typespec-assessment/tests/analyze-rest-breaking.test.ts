@@ -1009,3 +1009,107 @@ void test("excludes only proven singleton API-version selector changes, not othe
     }
   }
 });
+
+void test("merges inherited properties in base-to-derived order and avoids double-visiting ARM intersection own fields", (context) => {
+  const work = fs.mkdtempSync(path.join(process.cwd(), ".rest-inheritance-order-test-"));
+  context.onTestFinished(() => fs.rmSync(work, { recursive: true, force: true }));
+  const document = (current: boolean) => ({
+    swagger: "2.0",
+    info: { title: "Network", version: "2026-01-01" },
+    definitions: {
+      BaseConfig: {
+        type: "object",
+        properties: {
+          mode: { type: "string" },
+        },
+      },
+      DerivedConfig: {
+        type: "object",
+        allOf: [{ $ref: "#/definitions/BaseConfig" }],
+        properties: {
+          mode: { type: "string", enum: ["Standard", "Premium"] },
+        },
+      },
+      ...(current
+        ? {
+            ChildConfig: {
+              type: "object",
+              allOf: [{ $ref: "#/definitions/DerivedConfig" }],
+              properties: {
+                extra: { type: "string" },
+              },
+            },
+          }
+        : {}),
+      ArmWidget: {
+        type: "object",
+        allOf: [
+          {
+            $ref: "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource",
+          },
+          { $ref: "#/definitions/DerivedConfig" },
+        ],
+        additionalProperties: false,
+        properties: {
+          etag: { type: "string" },
+        },
+      },
+    },
+    paths: {
+      "/configs": {
+        put: {
+          operationId: "Configs_CreateOrUpdate",
+          parameters: [
+            {
+              name: "body",
+              in: "body",
+              required: true,
+              schema: current
+                ? {
+                    type: "object",
+                    allOf: [
+                      { $ref: "#/definitions/BaseConfig" },
+                      {
+                        type: "object",
+                        properties: {
+                          mode: { type: "string", enum: ["Standard", "Premium"] },
+                        },
+                      },
+                    ],
+                  }
+                : { $ref: "#/definitions/DerivedConfig" },
+            },
+          ],
+          responses: {
+            200: { schema: { $ref: "#/definitions/ArmWidget" } },
+          },
+        },
+      },
+    },
+  });
+  const artifact = (file: string) => ({
+    status: "succeeded",
+    format: "swagger-2.0",
+    files: [{ path: file, documentRole: "primary" }],
+  });
+  writeJson(path.join(work, "base.json"), document(false));
+  writeJson(path.join(work, "current.json"), document(true));
+  const result = analyzeRestBreaking({
+    workRoot: work,
+    manifest: {
+      projects: [
+        {
+          id: "project-1",
+          artifacts: {
+            base: { autorest: artifact("base.json") },
+            current: { autorest: artifact("current.json") },
+          },
+        },
+      ],
+    },
+    sourceIndex: { sourceChanges: [] },
+  } as unknown as Parameters<typeof analyzeRestBreaking>[0]);
+
+  assert.deepEqual(result.blockers, []);
+  assert.deepEqual(result.candidates, []);
+});
