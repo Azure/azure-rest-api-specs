@@ -232,6 +232,31 @@ model MongoClusterProperties {
   /** The network bypass mode for the cluster. Setting to 'AzureCosmosDB' allows the Azure Cosmos DB service to bypass network restrictions. */
   @added(Versions.v2026_02_01_preview)
   networkBypassMode?: NetworkBypassMode;
+
+  /** The service-managed failover configuration for the cluster. */
+  @added(Versions.v2026_10_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  serviceManagedFailover?: ServiceManagedFailoverProperties;
+}
+
+/** Configuration for automatic failover to a cross-region replica during a regional outage. */
+@added(Versions.v2026_10_15_preview)
+model ServiceManagedFailoverProperties {
+  /** Whether service-managed failover is enabled for the cluster. */
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  mode?: ServiceManagedFailoverMode;
+}
+
+/** The service-managed failover modes for a cluster. */
+@added(Versions.v2026_10_15_preview)
+union ServiceManagedFailoverMode {
+  string,
+
+  /** The service automatically promotes a cross-region replica when it detects a regional outage on the primary cluster. Writes not yet replicated to the replica cluster can be lost. */
+  Enabled: "Enabled",
+
+  /** The service does not automatically promote a cross-region replica during a regional outage. */
+  Disabled: "Disabled",
 }
 
 /** The mode that the DocumentDB cluster is created with. */
@@ -279,6 +304,12 @@ model StorageProperties {
 
   /** The type of storage to provision the cluster servers with. */
   @added(Versions.v2025_04_01_preview)
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "type")
+  oldType?: StorageType;
+
+  /** The type of storage to provision the cluster servers with. Defaults to 'PremiumSSDv2' when omitted during cluster creation. Omitting this property during an update leaves the storage type unchanged. */
+  @added(Versions.v2026_09_01)
   type?: StorageType;
 
   /** The IOPs of the storage assigned to each server. Only applicable if the type is 'PremiumSSDv2'. */

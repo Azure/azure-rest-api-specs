@@ -337,3 +337,15 @@ using TypeSpec.Http;
   "isLongTermSupport",
   "csharp"
 );
+
+@@clientName(
+  IdentityBindingOidcIssuerProfile,
+  "IdentityBindingOIDCIssuerProfile",
+  "go"
+);
+@@clientName(
+  IdentityBindingOidcIssuerProfile.oidcIssuerUrl,
+  "OIDCIssuerURL",
+  "go"
+);
+@@clientName(IdentityBindingProperties.oidcIssuer, "OIDCIssuer", "go");
