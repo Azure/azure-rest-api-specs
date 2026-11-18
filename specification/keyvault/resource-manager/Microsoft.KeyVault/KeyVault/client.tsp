@@ -19,6 +19,70 @@ using Azure.Core;
   "csharp,java,python,javascript"
 );
 
+@@clientName(
+  Azure.ResourceManager.CommonTypes.AccessRule,
+  "KeyVaultNetworkSecurityPerimeterAccessRule",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.AccessRuleDirection,
+  "KeyVaultNetworkSecurityPerimeterAccessRuleDirection",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.AccessRuleProperties,
+  "KeyVaultNetworkSecurityPerimeterAccessRuleProperties",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.IssueType,
+  "KeyVaultNetworkSecurityPerimeterProvisioningIssueType",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ProvisioningIssue,
+  "KeyVaultNetworkSecurityPerimeterProvisioningIssue",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ProvisioningIssueProperties,
+  "KeyVaultNetworkSecurityPerimeterProvisioningIssueProperties",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.Severity,
+  "KeyVaultNetworkSecurityPerimeterProvisioningIssueSeverity",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ResourceAssociation,
+  "KeyVaultNetworkSecurityPerimeterResourceAssociation",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ResourceAssociationAccessMode,
+  "KeyVaultNetworkSecurityPerimeterResourceAssociationAccessMode",
+  "csharp"
+);
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter.location,
+  azureLocation,
+  "csharp"
+);
+
+@@clientName(TokenBindingParameters, "TokenBindingConfiguration", "csharp");
+@@clientName(
+  VaultProperties.tokenBindingParameters,
+  "TokenBindingConfiguration",
+  "csharp"
+);
+@@clientName(
+  VaultPatchProperties.tokenBindingParameters,
+  "TokenBindingConfiguration",
+  "csharp"
+);
+@@clientName(WrappingKeyValue.kty, "KeyType", "csharp");
+
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "https://github.com/Azure/typespec-azure/issues/4090"
 #suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "https://github.com/Azure/typespec-azure/issues/4090"
 @@clientOption(
@@ -500,4 +564,31 @@ enum NameAvailabilityReason {
   "resource-name-constraint",
   #{ minLength: 1, maxLength: 127, pattern: "^[a-zA-Z0-9-]+$" },
   "csharp"
+);
+
+/**
+ * The type of action.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum PascalKeyRotationPolicyActionType {
+  /**
+   * Trigger Event Grid events.
+   */
+  notify: "Notify",
+
+  /**
+   * Rotate the key based on the key policy.
+   */
+  rotate: "Rotate",
+}
+
+@@alternateType(
+  KeyRotationPolicyActionType,
+  PascalKeyRotationPolicyActionType,
+  "rust"
+);
+@@clientName(
+  PascalKeyRotationPolicyActionType,
+  "KeyRotationPolicyActionType",
+  "rust"
 );
