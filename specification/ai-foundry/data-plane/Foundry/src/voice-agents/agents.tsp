@@ -547,6 +547,20 @@ union VoiceAgentGreetingMode {
 model VoiceAgentGreetingConfig {
   @doc("The greeting mode.")
   type: VoiceAgentGreetingMode;
+
+  /**
+   * Whether caller speech can interrupt the greeting. If false, the service defers turn detection,
+   * speech recognition, and automatic responses until it estimates that the greeting has finished playing.
+   */
+  interruptible?: boolean = true;
+
+  /**
+   * How the service handles caller audio during a non-interruptible greeting. If false, it processes the
+   * audio in arrival order after playback. If true, it treats the audio as silence of the same duration.
+   * Setting this to true requires `interruptible` to be false.
+   */
+  @encodedName("application/json", "ignore_user_speech_during_greeting")
+  ignoreUserSpeechDuringGreeting?: boolean = false;
 }
 
 @doc("A deterministic greeting rendered with the voice agent's structured inputs and synthesized without model-authored generation.")
