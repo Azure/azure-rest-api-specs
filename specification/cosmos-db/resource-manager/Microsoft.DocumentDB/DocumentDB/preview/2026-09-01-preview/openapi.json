@@ -43,9 +43,6 @@
       "name": "Operations"
     },
     {
-      "name": "SqlGlobalSecondaryIndexes"
-    },
-    {
       "name": "NetworkSecurityPerimeterConfigurations"
     },
     {
@@ -16016,10 +16013,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/globalSecondaryIndexes/{containerName}": {
       "put": {
-        "operationId": "SqlGlobalSecondaryIndexes_CreateOrUpdate",
-        "tags": [
-          "SqlGlobalSecondaryIndexes"
-        ],
+        "operationId": "SqlResources_CreateUpdateSqlGlobalSecondaryIndex",
         "description": "Creates or updates an Azure Cosmos DB SQL global secondary index container.",
         "parameters": [
           {
@@ -16056,7 +16050,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "createUpdateSqlGlobalSecondaryIndexParameters",
             "in": "body",
             "description": "The parameters for the SQL global secondary index container.",
             "required": true,
@@ -16067,9 +16061,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'SqlGlobalSecondaryIndex' update operation succeeded",
+            "description": "Resource 'SqlGlobalSecondaryIndexGetResults' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/SqlGlobalSecondaryIndex"
+              "$ref": "#/definitions/SqlGlobalSecondaryIndexGetResults"
             }
           },
           "202": {
@@ -16105,7 +16099,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/SqlGlobalSecondaryIndex"
+          "final-state-schema": "#/definitions/SqlGlobalSecondaryIndexGetResults"
         },
         "x-ms-long-running-operation": true
       }
@@ -32652,7 +32646,7 @@
       ],
       "x-ms-discriminator-value": "SqlDedicatedGateway"
     },
-    "SqlGlobalSecondaryIndex": {
+    "SqlGlobalSecondaryIndexGetResults": {
       "type": "object",
       "description": "An Azure Cosmos DB SQL global secondary index container.",
       "properties": {

@@ -21,7 +21,7 @@ import "./SqlDatabaseGetResults.tsp";
 import "./ThroughputSettingsGetResults.tsp";
 import "./ClientEncryptionKeyGetResults.tsp";
 import "./SqlContainerGetResults.tsp";
-import "./SqlGlobalSecondaryIndex.tsp";
+import "./SqlGlobalSecondaryIndexGetResults.tsp";
 import "./SqlStoredProcedureGetResults.tsp";
 import "./SqlUserDefinedFunctionGetResults.tsp";
 import "./SqlTriggerGetResults.tsp";
