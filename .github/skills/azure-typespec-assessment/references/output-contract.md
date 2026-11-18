@@ -76,6 +76,10 @@ Report model/type cards are scoped by project and API version, not just model
 name. When findings select different declarations or revisions in one file,
 their selected declarations and hunks are merged; same-named declarations in
 different files remain separate complete diffs.
+When a stored declaration excerpt is truncated, show its focused changed hunks
+instead of an incomplete declaration diff. If compact contract labels hide a
+change in requiredness, nullability, or constraints, retain its expected/actual
+contract descriptions in the before/after table.
 
 Write `agent-workspace\agent-decisions.json` conforming to
 `scripts\agent-decisions.schema.json`. It contains only Agent-authored
