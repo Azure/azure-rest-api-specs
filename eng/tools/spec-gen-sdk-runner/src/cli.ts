@@ -2,15 +2,12 @@ import { parseArgsWithHelp } from "@azure-tools/specs-shared/cli";
 import { exit } from "node:process";
 
 function stringOption(description: string) {
-  return { type: "string", multiple: true, description } as const;
+  return { type: "string", default: "", description } as const;
 }
 
 export function parseCliArguments(args = process.argv.slice(2)) {
   const parsed = parseArgsWithHelp({
     args,
-    // Pipelines may supply extra options; keep accepting them and positional arguments.
-    strict: false,
-    allowPositionals: true,
     options: {
       scp: stringOption("Local spec repository path (default: runner directory)."),
       lang: stringOption("SDK repository name (default: azure-sdk-for-net)."),
@@ -38,9 +35,4 @@ export function parseCliArguments(args = process.argv.slice(2)) {
     exit(0);
   }
   return parsed.values;
-}
-
-/** Preserve the legacy first-occurrence and empty/missing-value defaults. */
-export function firstArgumentValue(values: (string | boolean)[] | undefined): string {
-  return typeof values?.[0] === "string" ? values[0] : "";
 }

@@ -6,7 +6,7 @@ import {
   generateSdkForSingleSpec,
   generateSdkForSpecPr,
 } from "./commands.ts";
-import { firstArgumentValue, parseCliArguments } from "./cli.ts";
+import { parseCliArguments } from "./cli.ts";
 
 export { detectChangedSpecConfigFromChangedFiles } from "./spec-helpers.ts";
 export {
@@ -25,10 +25,10 @@ export async function main() {
   // Log the arguments to the console
   console.log("Arguments passed to the script:", args.join(" "));
   const parsedArgs = parseCliArguments(args);
-  const batchType = firstArgumentValue(parsedArgs["batch-type"]);
-  const pullRequestNumber = firstArgumentValue(parsedArgs["pr-number"]);
+  const batchType = parsedArgs["batch-type"];
+  const pullRequestNumber = parsedArgs["pr-number"];
   console.log("Current working directory:", process.cwd());
-  const workingFolder = firstArgumentValue(parsedArgs.wf) || path.join(process.cwd(), "..");
+  const workingFolder = parsedArgs.wf || path.join(process.cwd(), "..");
   const logFolder = path.join(workingFolder, "out/logs");
   if (!existsSync(logFolder)) {
     mkdirSync(logFolder, { recursive: true });

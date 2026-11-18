@@ -10,7 +10,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { inspect } from "node:util";
-import { firstArgumentValue, parseCliArguments } from "./cli.ts";
+import { parseCliArguments } from "./cli.ts";
 import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.ts";
 import { groupSpecConfigPaths } from "./spec-helpers.ts";
 import {
@@ -76,21 +76,17 @@ export function parseArguments(): SpecGenSdkCmdInput {
   const __dirname: string = path.dirname(__filename);
 
   const args = parseCliArguments();
-  const localSpecRepoPath: string = path.resolve(
-    firstArgumentValue(args.scp) || path.join(__dirname, ".."),
-  );
-  const sdkRepoName: string = firstArgumentValue(args.lang) || "azure-sdk-for-net";
+  const localSpecRepoPath: string = path.resolve(args.scp || path.join(__dirname, ".."));
+  const sdkRepoName: string = args.lang || "azure-sdk-for-net";
   const localSdkRepoPath: string = path.resolve(
-    firstArgumentValue(args.sdp) || path.join(localSpecRepoPath, "..", sdkRepoName),
+    args.sdp || path.join(localSpecRepoPath, "..", sdkRepoName),
   );
-  const workingFolder: string = path.resolve(
-    firstArgumentValue(args.wf) || path.join(localSpecRepoPath, ".."),
-  );
+  const workingFolder: string = path.resolve(args.wf || path.join(localSpecRepoPath, ".."));
 
   // Set runMode to "release" by default
   let runMode = "release";
-  const batchType = firstArgumentValue(args["batch-type"]);
-  const pullRequestNumber = firstArgumentValue(args["pr-number"]);
+  const batchType = args["batch-type"];
+  const pullRequestNumber = args["pr-number"];
   if (batchType) {
     runMode = "batch";
   } else if (pullRequestNumber) {
@@ -104,16 +100,16 @@ export function parseArguments(): SpecGenSdkCmdInput {
     sdkRepoName,
     sdkLanguage: SdkNameSchema.parse(sdkRepoName.replace("-pr", "")),
     runMode,
-    tspConfigPath: firstArgumentValue(args["tsp-config-relative-path"]),
-    readmePath: firstArgumentValue(args["readme-relative-path"]),
+    tspConfigPath: args["tsp-config-relative-path"],
+    readmePath: args["readme-relative-path"],
     prNumber: pullRequestNumber,
-    apiVersion: firstArgumentValue(args["api-version"]),
-    sdkReleaseType: firstArgumentValue(args["sdk-release-type"]),
-    typespecEmitter: firstArgumentValue(args["typespec-emitter"]) || undefined,
-    specCommitSha: firstArgumentValue(args.commit) || "HEAD",
-    specRepoHttpsUrl: firstArgumentValue(args["spec-repo-url"]),
-    headRepoHttpsUrl: firstArgumentValue(args["head-repo-url"]),
-    headBranch: firstArgumentValue(args["head-branch"]),
+    apiVersion: args["api-version"],
+    sdkReleaseType: args["sdk-release-type"],
+    typespecEmitter: args["typespec-emitter"] || undefined,
+    specCommitSha: args.commit || "HEAD",
+    specRepoHttpsUrl: args["spec-repo-url"],
+    headRepoHttpsUrl: args["head-repo-url"],
+    headBranch: args["head-branch"],
   };
 }
 

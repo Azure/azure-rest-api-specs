@@ -74,17 +74,12 @@ describe("commands.ts", () => {
   });
 
   describe("parseArguments", () => {
-    test("supports native equals syntax and stops parsing at the option separator", () => {
+    test("supports equals syntax", () => {
       vi.spyOn(process, "argv", "get").mockReturnValue([
         "node",
         "script",
         "--pr-number=123",
         "--commit=abc",
-        "--",
-        "--batch-type",
-        "all-specs",
-        "--commit",
-        "ignored",
       ]);
       expect(parseArguments()).toMatchObject({
         prNumber: "123",
@@ -93,13 +88,10 @@ describe("commands.ts", () => {
       });
     });
 
-    test("preserves first values, batch precedence, and forwarding with extra pipeline arguments", () => {
+    test("preserves batch precedence and forwards pipeline arguments", () => {
       vi.spyOn(process, "argv", "get").mockReturnValue([
         "node",
         "script",
-        "positional",
-        "--pipeline-option",
-        "extra",
         "--scp",
         "/spec repo",
         "--sdp",
@@ -110,12 +102,8 @@ describe("commands.ts", () => {
         "all-typespecs",
         "--pr-number",
         "123",
-        "--pr-number",
-        "456",
         "--commit",
         "first",
-        "--commit",
-        "second",
         "--typespec-emitter",
         "@azure-tools/typespec-ts-provisioning",
         "--tsp-config-relative-path",
@@ -161,13 +149,10 @@ describe("commands.ts", () => {
       ]);
     });
 
-    test.each([["--commit", ""], ["--commit"]])(
-      "preserves default commit for empty or missing values: %j",
-      (...args) => {
-        vi.spyOn(process, "argv", "get").mockReturnValue(["node", "script", ...args]);
-        expect(parseArguments().specCommitSha).toBe("HEAD");
-      },
-    );
+    test("uses the default commit when the value is empty", () => {
+      vi.spyOn(process, "argv", "get").mockReturnValue(["node", "script", "--commit", ""]);
+      expect(parseArguments().specCommitSha).toBe("HEAD");
+    });
 
     test.each([undefined, "", "@azure-tools/typespec-ts-provisioning"])(
       "forwards optional TypeSpec emitter %s to spec-gen-sdk",
