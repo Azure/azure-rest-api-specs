@@ -161,7 +161,11 @@ using Microsoft.Edge;
   "BulkPublishSolutionContent",
   "csharp"
 );
-@@clientName(BulkReviewSolutionParameter, "BulkReviewSolutionContent", "csharp");
+@@clientName(
+  BulkReviewSolutionParameter,
+  "BulkReviewSolutionContent",
+  "csharp"
+);
 @@clientName(InstallSolutionParameter, "InstallSolutionContent", "csharp");
 @@clientName(
   BulkDeploySolutionParameter,
