@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "resourceGroupName": "rg1",
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "databaseName": "databaseName",
+    "containerName": "indexContainer",
+    "resource": {
+      "location": "West US",
+      "tags": {},
+      "properties": {
+        "resource": {
+          "id": "indexContainer",
+          "partitionKey": {
+            "paths": [
+              "/AccountNumber"
+            ],
+            "kind": "Hash"
+          }
+        },
+        "options": {}
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName/globalSecondaryIndexes/indexContainer",
+        "name": "indexContainer",
+        "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/globalSecondaryIndexes",
+        "location": "West US",
+        "tags": {},
+        "properties": {
+          "resource": {
+            "id": "indexContainer",
+            "partitionKey": {
+              "paths": [
+                "/AccountNumber"
+              ],
+              "kind": "Hash"
+            }
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DocumentDB/locations/westus/operationsStatus/operationId?api-version=2026-09-01-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DocumentDB/locations/westus/operationsStatus/operationId?api-version=2026-09-01-preview"
+      }
+    }
+  },
+  "operationId": "SqlGlobalSecondaryIndexes_CreateOrUpdate",
+  "title": "CosmosDBSqlGlobalSecondaryIndexCreateUpdate"
+}
