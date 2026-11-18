@@ -27,6 +27,7 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
   - [`Swagger BreakingChange` and `BreakingChange(Cross-Version)`](#swagger-breakingchange-and-breakingchangecross-version)
     - [Run `oad` locally](#run-oad-locally)
   - [`Swagger LintDiff` and `Swagger Lint(RPaaS)`](#swagger-lintdiff-and-swagger-lintrpaas)
+    - [Choose between direct validation and full LintDiff](#choose-between-direct-validation-and-full-lintdiff)
   - [`Swagger LintDiff` for TypeSpec: troubleshooting guides](#swagger-lintdiff-for-typespec-troubleshooting-guides)
   - [`Swagger ModelValidation`](#swagger-modelvalidation)
   - [`Swagger PrettierCheck`](#swagger-prettiercheck)
