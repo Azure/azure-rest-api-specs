@@ -28,34 +28,29 @@ pnpm build
 
 ```bash
 # Basic usage
-pnpm exec openapi-diff-runner --spec-repo-path <spec-repo-path> --target-repo <github-repo> --pr-number <pr-number>
+pnpm exec openapi-diff-runner --srp <spec-repo-path> --repo <github-repo> --number <pr-number>
 
 # Example
 pnpm exec openapi-diff-runner \
-  --spec-repo-path /path/to/azure-rest-api-specs \
-  --target-repo Azure/azure-rest-api-specs \
-  --pr-number 12345 \
-  --base-branch main \
-  --run-type SameVersion
+  --srp /path/to/azure-rest-api-specs \
+  --repo Azure/azure-rest-api-specs \
+  --number 12345 \
+  --bb main \
+  --rt SameVersion
 ```
 
 ### Command Line Options
 
-| Option               | Alias | Description                         | Default                      |
-| -------------------- | ----- | ----------------------------------- | ---------------------------- |
-| `--spec-repo-path`   | `-p`  | Spec repository path                | Runner directory             |
-| `--target-repo`      | `-r`  | Target GitHub repository            | `azure/azure-rest-api-specs` |
-| `--source-repo`      | `-s`  | Source GitHub repository            | `azure/azure-rest-api-specs` |
-| `--pr-number`        | `-n`  | Pull request number                 | Required                     |
-| `--base-branch`      | `-b`  | Base branch                         | `main`                       |
-| `--run-type`         | `-t`  | Run type (SameVersion/CrossVersion) | `SameVersion`                |
-| `--head-commit`      | `-c`  | Head commit                         | `HEAD`                       |
-| `--pr-source-branch` |       | Source branch                       | Empty                        |
-| `--pr-target-branch` |       | Target branch                       | Empty                        |
-| `--help`             | `-h`  | Show help and exit                  |                              |
-
-Help is generated from the same shared CLI option definitions used for parsing.
-Unknown options and positional arguments are rejected.
+| Option     | Description                         | Default                      |
+| ---------- | ----------------------------------- | ---------------------------- |
+| `--srp`    | Spec repository path                | `../`                        |
+| `--repo`   | GitHub repository                   | `azure/azure-rest-api-specs` |
+| `--number` | Pull request number                 | Required                     |
+| `--bb`     | Base branch                         | `main`                       |
+| `--rt`     | Run type (SameVersion/CrossVersion) | `SameVersion`                |
+| `--hc`     | Head commit                         | `HEAD`                       |
+| `--sb`     | Source branch                       | From PR                      |
+| `--tb`     | Target branch                       | From PR                      |
 
 ## Breaking Change Types
 
