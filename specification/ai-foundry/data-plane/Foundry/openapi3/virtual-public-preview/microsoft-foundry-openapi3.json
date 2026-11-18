@@ -20970,7 +20970,7 @@
             "name": "searchType",
             "in": "query",
             "required": false,
-            "description": "Name matching mode supported by the selected service version.",
+            "description": "Name matching mode. The supported and default mode is \"prefix\".",
             "schema": {
               "type": "string"
             },
@@ -21415,11 +21415,22 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/KnowledgeSource"
+                "$ref": "#/components/schemas/KnowledgeSourceCreate"
               }
             }
           },
           "description": "The kind-specific source definition."
+        },
+        "x-ms-examples": {
+          "CreateFile": {
+            "$ref": "../../examples/v1/KnowledgeSources_CreateFile.json"
+          },
+          "CreateBlob": {
+            "$ref": "../../examples/v1/KnowledgeSources_CreateBlob.json"
+          },
+          "CreateWeb": {
+            "$ref": "../../examples/v1/KnowledgeSources_CreateWeb.json"
+          }
         },
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -21471,7 +21482,7 @@
             "name": "searchType",
             "in": "query",
             "required": false,
-            "description": "Name matching mode supported by the selected service version.",
+            "description": "Name matching mode. The supported and default mode is \"prefix\".",
             "schema": {
               "type": "string"
             },
@@ -21945,7 +21956,7 @@
             "name": "searchType",
             "in": "query",
             "required": false,
-            "description": "Name matching mode supported by the selected service version.",
+            "description": "Name matching mode. The supported and default mode is \"prefix\".",
             "schema": {
               "type": "string"
             },
@@ -47583,6 +47594,86 @@
           ]
         }
       },
+      "AzureBlobKnowledgeSourceCreate": {
+        "type": "object",
+        "required": [
+          "kind",
+          "azureBlobParameters"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "azureBlob"
+            ],
+            "description": "The source kind."
+          },
+          "azureBlobParameters": {
+            "$ref": "#/components/schemas/AzureBlobKnowledgeSourceCreateParameters",
+            "description": "Storage location and the project connection used for ingestion."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/KnowledgeSourceCreate"
+          }
+        ],
+        "description": "An Azure Blob source being created with its required project connection.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "AzureBlobKnowledgeSourceCreateParameters": {
+        "type": "object",
+        "required": [
+          "containerName",
+          "projectConnectionId"
+        ],
+        "properties": {
+          "containerName": {
+            "type": "string",
+            "description": "The Blob container to ingest."
+          },
+          "folderPath": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "An optional path prefix within the container."
+          },
+          "isADLSGen2": {
+            "type": "boolean",
+            "description": "Whether the source uses ADLS Gen2 semantics."
+          },
+          "ingestionParameters": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AzureBlobKnowledgeSourceIngestionParameters"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Source-specific ingestion settings."
+          },
+          "projectConnectionId": {
+            "type": "string",
+            "description": "The project connection name used to access the Blob container, not an ARM resource ID."
+          }
+        },
+        "description": "Blob location settings required when creating a source.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
       "AzureBlobKnowledgeSourceIngestionParameters": {
         "type": "object",
         "properties": {
@@ -47655,10 +47746,6 @@
           "containerName"
         ],
         "properties": {
-          "projectConnectionId": {
-            "type": "string",
-            "description": "Project connection name or ID. Required on creation; omit on update to retain the saved connection. Never returned on reads."
-          },
           "containerName": {
             "type": "string",
             "description": "The Blob container to ingest."
@@ -47691,6 +47778,54 @@
           }
         },
         "description": "Managed Blob location settings. Credentials, identities and backing Search endpoints are not exposed.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "AzureBlobKnowledgeSourceUpdateParameters": {
+        "type": "object",
+        "required": [
+          "containerName"
+        ],
+        "properties": {
+          "containerName": {
+            "type": "string",
+            "description": "The Blob container to ingest."
+          },
+          "folderPath": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "An optional path prefix within the container."
+          },
+          "isADLSGen2": {
+            "type": "boolean",
+            "description": "Whether the source uses ADLS Gen2 semantics."
+          },
+          "ingestionParameters": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AzureBlobKnowledgeSourceIngestionParameters"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Source-specific ingestion settings."
+          },
+          "projectConnectionId": {
+            "type": "string",
+            "description": "The project connection name; omit to retain the saved connection. Never use an ARM resource ID."
+          }
+        },
+        "description": "Blob location settings accepted on a named source update.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "Knowledge=V1Preview"
@@ -55618,6 +55753,48 @@
           ]
         }
       },
+      "FileKnowledgeSourceCreate": {
+        "type": "object",
+        "required": [
+          "kind",
+          "embeddingModelName"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "file"
+            ],
+            "description": "The source kind."
+          },
+          "embeddingModelName": {
+            "type": "string",
+            "description": "The project embedding deployment name, not the backing model name."
+          },
+          "contentExtractionMode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The content extraction mode used during file ingestion."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/KnowledgeSourceCreate"
+          }
+        ],
+        "description": "A File source being created with its embedding deployment.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
       "FileSearchToolboxTool": {
         "type": "object",
         "required": [
@@ -57807,6 +57984,49 @@
           ]
         }
       },
+      "KnowledgeSourceCreate": {
+        "type": "object",
+        "required": [
+          "name",
+          "kind"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The source name in the current project."
+          },
+          "kind": {
+            "$ref": "#/components/schemas/KnowledgeSourceKind",
+            "description": "The source kind. Unknown kinds can be returned without enabling their creation."
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "A description of the knowledge source."
+          }
+        },
+        "additionalProperties": {},
+        "discriminator": {
+          "propertyName": "kind",
+          "mapping": {
+            "file": "#/components/schemas/FileKnowledgeSourceCreate",
+            "azureBlob": "#/components/schemas/AzureBlobKnowledgeSourceCreate",
+            "web": "#/components/schemas/WebKnowledgeSourceCreate"
+          }
+        },
+        "description": "Source definitions accepted when creating a File, Blob, or Web source.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
       "KnowledgeSourceFile": {
         "type": "object",
         "required": [
@@ -58095,6 +58315,7 @@
           },
           "documentationLink": {
             "type": "string",
+            "format": "uri",
             "description": "Troubleshooting documentation supplied by the service."
           }
         },
@@ -58187,7 +58408,7 @@
             "description": "The content extraction mode used during file ingestion."
           },
           "azureBlobParameters": {
-            "$ref": "#/components/schemas/AzureBlobKnowledgeSourceParameters",
+            "$ref": "#/components/schemas/AzureBlobKnowledgeSourceUpdateParameters",
             "description": "Blob location and ingestion settings."
           },
           "webParameters": {
@@ -129770,6 +129991,36 @@
           }
         ],
         "description": "A managed web knowledge source.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Knowledge=V1Preview"
+          ]
+        }
+      },
+      "WebKnowledgeSourceCreate": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "web"
+            ],
+            "description": "The source kind."
+          },
+          "webParameters": {
+            "$ref": "#/components/schemas/WebKnowledgeSourceParameters",
+            "description": "Web domain configuration."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/KnowledgeSourceCreate"
+          }
+        ],
+        "description": "A Web source being created with optional domain settings.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "Knowledge=V1Preview"

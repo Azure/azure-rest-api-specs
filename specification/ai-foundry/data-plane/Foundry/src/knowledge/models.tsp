@@ -200,12 +200,46 @@ model AzureBlobKnowledgeSource extends KnowledgeSource {
   azureBlobParameters: AzureBlobKnowledgeSourceParameters;
 }
 
+/** Source definitions accepted when creating a File, Blob, or Web source. */
+@extension("x-ms-foundry-meta", KnowledgeRequiredPreviews)
+model KnowledgeSourceCreate is KnowledgeSource;
+
+/** A File source being created with its embedding deployment. */
+@extension("x-ms-foundry-meta", KnowledgeRequiredPreviews)
+model FileKnowledgeSourceCreate extends KnowledgeSourceCreate {
+  /** The source kind. */
+  kind: KnowledgeSourceKind.file;
+
+  /** The project embedding deployment name, not the backing model name. */
+  embeddingModelName: string;
+
+  /** The content extraction mode used during file ingestion. */
+  contentExtractionMode?: string | null;
+}
+
+/** An Azure Blob source being created with its required project connection. */
+@extension("x-ms-foundry-meta", KnowledgeRequiredPreviews)
+model AzureBlobKnowledgeSourceCreate extends KnowledgeSourceCreate {
+  /** The source kind. */
+  kind: KnowledgeSourceKind.azureBlob;
+
+  /** Storage location and the project connection used for ingestion. */
+  azureBlobParameters: AzureBlobKnowledgeSourceCreateParameters;
+}
+
+/** A Web source being created with optional domain settings. */
+@extension("x-ms-foundry-meta", KnowledgeRequiredPreviews)
+model WebKnowledgeSourceCreate extends KnowledgeSourceCreate {
+  /** The source kind. */
+  kind: KnowledgeSourceKind.web;
+
+  /** Web domain configuration. */
+  webParameters?: WebKnowledgeSourceParameters;
+}
+
 /** Managed Blob location settings. Credentials, identities and backing Search endpoints are not exposed. */
 @extension("x-ms-foundry-meta", KnowledgeRequiredPreviews)
 model AzureBlobKnowledgeSourceParameters {
-  /** Project connection name or ID. Required on creation; omit on update to retain the saved connection. Never returned on reads. */
-  projectConnectionId?: string;
-
   /** The Blob container to ingest. */
   containerName: string;
 
@@ -217,6 +251,22 @@ model AzureBlobKnowledgeSourceParameters {
 
   /** Source-specific ingestion settings. */
   ingestionParameters?: AzureBlobKnowledgeSourceIngestionParameters | null;
+}
+
+/** Blob location settings required when creating a source. */
+@extension("x-ms-foundry-meta", KnowledgeRequiredPreviews)
+model AzureBlobKnowledgeSourceCreateParameters
+  is AzureBlobKnowledgeSourceParameters {
+  /** The project connection name used to access the Blob container, not an ARM resource ID. */
+  projectConnectionId: string;
+}
+
+/** Blob location settings accepted on a named source update. */
+@extension("x-ms-foundry-meta", KnowledgeRequiredPreviews)
+model AzureBlobKnowledgeSourceUpdateParameters
+  is AzureBlobKnowledgeSourceParameters {
+  /** The project connection name; omit to retain the saved connection. Never use an ARM resource ID. */
+  projectConnectionId?: string;
 }
 
 /** Deployment/model pairs and content extraction settings for managed Blob ingestion. */
@@ -294,7 +344,7 @@ model KnowledgeSourceUpdate {
   contentExtractionMode?: string | null;
 
   /** Blob location and ingestion settings. */
-  azureBlobParameters?: AzureBlobKnowledgeSourceParameters;
+  azureBlobParameters?: AzureBlobKnowledgeSourceUpdateParameters;
 
   /** Web domain settings. */
   webParameters?: WebKnowledgeSourceParameters;
@@ -417,7 +467,7 @@ model KnowledgeSourceSynchronizationError {
   details?: string;
 
   /** Troubleshooting documentation supplied by the service. */
-  documentationLink?: string;
+  documentationLink?: url;
 }
 
 /** Historical source synchronization statistics. */
@@ -458,7 +508,7 @@ alias KnowledgeListParameters = {
   @query
   search?: string;
 
-  /** Name matching mode supported by the selected service version. */
+  /** Name matching mode. The supported and default mode is "prefix". */
   @query
   searchType?: string;
 };

@@ -136,11 +136,23 @@ interface KnowledgeSources {
   @post
   @route("/knowledge_sources")
   @extension("x-ms-foundry-meta", KnowledgeRequiredPreviews)
+  @extension(
+    "x-ms-examples",
+    #{
+      CreateFile: #{
+        $ref: "../../examples/v1/KnowledgeSources_CreateFile.json",
+      },
+      CreateBlob: #{
+        $ref: "../../examples/v1/KnowledgeSources_CreateBlob.json",
+      },
+      CreateWeb: #{ $ref: "../../examples/v1/KnowledgeSources_CreateWeb.json" },
+    }
+  )
   create is FoundryDataPlaneRequiredPreviewOperation<
     FoundryFeaturesOptInKeys.knowledge_v1_preview,
     {
       /** The kind-specific source definition. */
-      @body knowledge_source: KnowledgeSource;
+      @body knowledge_source: KnowledgeSourceCreate;
     },
     KnowledgeSource
   >;
