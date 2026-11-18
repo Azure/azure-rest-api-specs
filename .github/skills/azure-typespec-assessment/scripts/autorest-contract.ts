@@ -253,8 +253,16 @@ function referenceIdentity(
   const marker = "/autorest/";
   const index = normalized.lastIndexOf(marker);
   const documentPath =
-    index >= 0 ? normalized.slice(index + marker.length) : path.basename(normalized);
+    index >= 0
+      ? normalized.slice(index + marker.length)
+      : normalized.startsWith("autorest/")
+        ? normalized.slice("autorest/".length)
+        : path.basename(normalized);
   return `${documentPath}${pointer}`;
+}
+
+function referenceCacheKey(targetDocument: AutorestDocument, pointer: string): string {
+  return `${slash(targetDocument.absolutePath || targetDocument.path)}${pointer}`;
 }
 
 function stableExternalReference(rawRef: string, targetPath: string, pointer: string): string {
@@ -581,13 +589,14 @@ export function normalizeSchema(
   if (schemaObject.$ref) {
     const resolved = resolveReference(schemaObject.$ref, context.document, context.registry);
     if (resolved.unresolved) return { kind: "reference", ref: resolved.identity, unresolved: true };
-    state.visitedRefs.add(resolved.identity);
-    if (stack.has(resolved.identity)) {
-      state.cycleHits.add(resolved.identity);
+    const cacheKey = referenceCacheKey(resolved.document, resolved.pointer);
+    state.visitedRefs.add(cacheKey);
+    if (stack.has(cacheKey)) {
+      state.cycleHits.add(cacheKey);
       return { kind: "reference", ref: resolved.identity, cycle: true };
     }
     const cache = getNormalizedRefs(context);
-    const cached = cache.get(resolved.identity);
+    const cached = cache.get(cacheKey);
     let normalized: NormalizedSchema | undefined;
     if (cached) {
       let intersectsStack = false;
@@ -605,9 +614,9 @@ export function normalizeSchema(
     if (!normalized) {
       const innerState: RefTraversalState = {
         cycleHits: new Set<string>(),
-        visitedRefs: new Set<string>([resolved.identity]),
+        visitedRefs: new Set<string>([cacheKey]),
       };
-      stack.add(resolved.identity);
+      stack.add(cacheKey);
       normalized = normalizeSchema(
         resolved.value,
         {
@@ -618,12 +627,12 @@ export function normalizeSchema(
         stack,
         innerState,
       );
-      stack.delete(resolved.identity);
-      innerState.cycleHits.delete(resolved.identity);
+      stack.delete(cacheKey);
+      innerState.cycleHits.delete(cacheKey);
       for (const ref of innerState.visitedRefs) state.visitedRefs.add(ref);
       for (const target of innerState.cycleHits) state.cycleHits.add(target);
       if (innerState.cycleHits.size === 0) {
-        cache.set(resolved.identity, {
+        cache.set(cacheKey, {
           schema: normalized,
           visitedRefs: innerState.visitedRefs,
         });

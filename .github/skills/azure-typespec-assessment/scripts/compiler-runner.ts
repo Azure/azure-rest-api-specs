@@ -107,48 +107,263 @@ import { $lib, createSdkContext } from ${JSON.stringify(tcgcEntry)};
 
 export { $lib };
 
-function typeIdentity(value, seen = new Set()) {
-  if (value === undefined || value === null) return value;
-  if (typeof value !== "object") return value;
-  if (seen.has(value)) return { kind: value.kind ?? "cycle" };
-  seen.add(value);
+function compactObject(record) {
+  return Object.fromEntries(Object.entries(record).filter(([, item]) => item !== undefined));
+}
+
+function mapEntries(collection) {
+  if (!collection) return [];
+  if (typeof collection.entries === "function") return [...collection.entries()];
+  if (typeof collection === "object") return Object.entries(collection);
+  return [];
+}
+
+function sanitizeValue(entity, seen) {
+  if (entity === undefined || entity === null || typeof entity !== "object") return entity;
+  if (seen.has(entity)) {
+    return compactObject({
+      cycle: true,
+      entityKind: "Value",
+      valueKind: entity.valueKind,
+    });
+  }
+  seen.add(entity);
+  try {
+    const valueKind = entity.valueKind;
+    let payload;
+    switch (valueKind) {
+      case "StringValue":
+      case "BooleanValue":
+        payload = entity.value;
+        break;
+      case "NullValue":
+        payload = null;
+        break;
+      case "NumericValue":
+        payload =
+          entity.value && typeof entity.value.toString === "function"
+            ? entity.value.toString()
+            : entity.value !== undefined
+              ? String(entity.value)
+              : undefined;
+        break;
+      case "EnumValue":
+        payload = typeIdentity(entity.value, seen);
+        break;
+      case "ScalarValue":
+        payload = compactObject({
+          name: typeof entity.value?.name === "string" ? entity.value.name : undefined,
+          args: Array.isArray(entity.value?.args)
+            ? entity.value.args.map((arg) => typeIdentity(arg, seen))
+            : undefined,
+        });
+        break;
+      case "ArrayValue":
+        payload = Array.isArray(entity.values)
+          ? entity.values.map((item) => typeIdentity(item, seen))
+          : [];
+        break;
+      case "ObjectValue":
+        payload = mapEntries(entity.properties)
+          .sort(([left], [right]) => String(left).localeCompare(String(right)))
+          .map(([key, descriptor]) =>
+            compactObject({
+              name: String(key),
+              value: typeIdentity(
+                descriptor && typeof descriptor === "object" && "value" in descriptor
+                  ? descriptor.value
+                  : descriptor,
+                seen,
+              ),
+            }),
+          );
+        break;
+      default:
+        if (
+          typeof entity.value === "string" ||
+          typeof entity.value === "number" ||
+          typeof entity.value === "boolean" ||
+          entity.value === null
+        ) {
+          payload = entity.value;
+        } else if (typeof entity.name === "string" && entity.name.length > 0) {
+          payload = entity.name;
+        }
+        break;
+    }
+    return compactObject({
+      entityKind: "Value",
+      valueKind,
+      scalar: entity.scalar ? typeIdentity(entity.scalar, seen) : undefined,
+      type: entity.type ? typeIdentity(entity.type, seen) : undefined,
+      value: payload,
+    });
+  } finally {
+    seen.delete(entity);
+  }
+}
+
+function typeIdentity(rawValue, seen = new Set()) {
+  if (rawValue === undefined || rawValue === null) return rawValue;
+  if (typeof rawValue !== "object") return rawValue;
+  let value = rawValue;
+  while (
+    value &&
+    typeof value === "object" &&
+    value.entityKind === "Indeterminate" &&
+    value.type
+  ) {
+    value = value.type;
+  }
+  if (value === undefined || value === null || typeof value !== "object") return value;
+  if (value.entityKind === "Value") {
+    return sanitizeValue(value, seen);
+  }
   const namespace =
     value.namespace && typeof getNamespaceFullName === "function"
-      ? getNamespaceFullName(value.namespace)
+      ? getNamespaceFullName(value.namespace) || undefined
       : undefined;
-  const result = {
-    kind: value.kind,
-    name: value.name,
-    namespace,
-    value: value.value,
-    templateArguments: value.templateMapper?.args?.map((item) => typeIdentity(item, seen)),
-  };
-  seen.delete(value);
-  return Object.fromEntries(Object.entries(result).filter(([, item]) => item !== undefined));
+  const name = typeof value.name === "string" && value.name.length > 0 ? value.name : undefined;
+  if (seen.has(value)) {
+    return compactObject({
+      cycle: true,
+      kind: value.kind ?? value.entityKind ?? "cycle",
+      name,
+      namespace,
+    });
+  }
+  seen.add(value);
+  try {
+    const primitiveValue =
+      typeof value.value === "string" ||
+      typeof value.value === "number" ||
+      typeof value.value === "boolean" ||
+      value.value === null
+        ? value.value
+        : undefined;
+    const valueAsString =
+      value.kind === "Number" &&
+      typeof value.valueAsString === "string" &&
+      String(primitiveValue) !== value.valueAsString
+        ? value.valueAsString
+        : undefined;
+    const isAnonymousModel = value.kind === "Model" && !name;
+    const isUnnamedUnion = value.kind === "Union" && !name;
+    return compactObject({
+      kind: value.kind ?? value.entityKind,
+      name,
+      namespace,
+      value: primitiveValue,
+      valueAsString,
+      stringValue:
+        value.kind === "StringTemplate" && typeof value.stringValue === "string"
+          ? value.stringValue
+          : undefined,
+      spans:
+        value.kind === "StringTemplate" &&
+        typeof value.stringValue !== "string" &&
+        Array.isArray(value.spans)
+          ? value.spans.map((span) =>
+              compactObject({
+                isInterpolated: Boolean(span?.isInterpolated),
+                type: typeIdentity(span?.type, seen),
+              }),
+            )
+          : undefined,
+      templateArguments:
+        Array.isArray(value.templateMapper?.args) && value.templateMapper.args.length > 0
+          ? value.templateMapper.args.map((item) => typeIdentity(item, seen))
+          : undefined,
+      properties: isAnonymousModel
+        ? mapEntries(value.properties).map(([propKey, prop]) =>
+            compactObject({
+              name: typeof prop?.name === "string" ? prop.name : String(propKey),
+              optional: typeof prop?.optional === "boolean" ? prop.optional : undefined,
+              type: typeIdentity(prop?.type, seen),
+            }),
+          )
+        : undefined,
+      indexer:
+        isAnonymousModel && value.indexer
+          ? compactObject({
+              key: typeIdentity(value.indexer.key, seen),
+              value: typeIdentity(value.indexer.value, seen),
+            })
+          : undefined,
+      variants: isUnnamedUnion
+        ? mapEntries(value.variants).map(([variantKey, variant]) =>
+            compactObject({
+              name:
+                typeof variant?.name === "string"
+                  ? variant.name
+                  : typeof variantKey === "string"
+                    ? variantKey
+                    : undefined,
+              type: typeIdentity(variant?.type ?? variant, seen),
+            }),
+          )
+        : undefined,
+      values:
+        value.kind === "Tuple" && Array.isArray(value.values)
+          ? value.values.map((item) => typeIdentity(item, seen))
+          : undefined,
+      type:
+        (value.kind === "ModelProperty" || value.kind === "UnionVariant") && value.type
+          ? typeIdentity(value.type, seen)
+          : undefined,
+      model:
+        value.kind === "ModelProperty" && value.model
+          ? typeIdentity(value.model, seen)
+          : undefined,
+      enum:
+        value.kind === "EnumMember" && value.enum
+          ? typeIdentity(value.enum, seen)
+          : undefined,
+      union:
+        value.kind === "UnionVariant" && value.union
+          ? typeIdentity(value.union, seen)
+          : undefined,
+    });
+  } finally {
+    seen.delete(value);
+  }
 }
 
 function collectModels(sdkPackage) {
   const models = [];
   const seen = new Set();
-  const collect = (values) => {
+  const collect = (values, fallbackNamespace) => {
     for (const model of values ?? []) {
       if (!model || seen.has(model)) continue;
       seen.add(model);
       const args = model.__raw?.templateMapper?.args;
       if (!Array.isArray(args) || args.length === 0 || !model.crossLanguageDefinitionId) continue;
+      const namespace =
+        (typeof model.namespace === "string" && model.namespace.length > 0
+          ? model.namespace
+          : undefined) ??
+        fallbackNamespace ??
+        (model.__raw?.namespace && typeof getNamespaceFullName === "function"
+          ? getNamespaceFullName(model.__raw.namespace) || undefined
+          : undefined);
       models.push({
         crossLanguageDefinitionId: model.crossLanguageDefinitionId,
         name: model.name,
+        ...(namespace ? { namespace } : {}),
         templateArguments: args.map((item) => typeIdentity(item)),
       });
     }
   };
   const visitNamespace = (namespace) => {
-    collect(namespace?.models);
+    const namespaceName =
+      typeof namespace?.fullName === "string" && namespace.fullName.length > 0
+        ? namespace.fullName
+        : undefined;
+    collect(namespace?.models, namespaceName);
     for (const child of namespace?.namespaces ?? []) visitNamespace(child);
   };
-  collect(sdkPackage.models);
   for (const namespace of sdkPackage.namespaces ?? []) visitNamespace(namespace);
+  collect(sdkPackage.models, undefined);
   return models;
 }
 

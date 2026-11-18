@@ -246,6 +246,10 @@ function effectiveObjectContract(schema: NormalizedSchema): ObjectContract | und
     if (current.kind !== "object" && current.kind !== "intersection" && current.kind !== "any") {
       return false;
     }
+    if (current.kind === "intersection" && current.allOf?.length) {
+      return current.allOf.every(visit);
+    }
+    if (!(current.allOf ?? []).every(visit)) return false;
     for (const field of WIRE_CONSTRAINT_FIELDS) {
       if (current[field] === undefined) continue;
       const values = constraints.get(field) ?? [];
@@ -272,7 +276,7 @@ function effectiveObjectContract(schema: NormalizedSchema): ObjectContract | und
         });
       }
     }
-    return (current.allOf ?? []).every(visit);
+    return true;
   };
 
   if (!visit(schema)) return undefined;
