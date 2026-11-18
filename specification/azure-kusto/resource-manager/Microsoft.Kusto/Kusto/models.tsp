@@ -138,6 +138,36 @@ union AzureSkuName {
   Standard_L32as_v3: "Standard_L32as_v3",
 
   /**
+   * Standard_L8s_v4
+   */
+  Standard_L8s_v4: "Standard_L8s_v4",
+
+  /**
+   * Standard_L16s_v4
+   */
+  Standard_L16s_v4: "Standard_L16s_v4",
+
+  /**
+   * Standard_L32s_v4
+   */
+  Standard_L32s_v4: "Standard_L32s_v4",
+
+  /**
+   * Standard_L8as_v4
+   */
+  Standard_L8as_v4: "Standard_L8as_v4",
+
+  /**
+   * Standard_L16as_v4
+   */
+  Standard_L16as_v4: "Standard_L16as_v4",
+
+  /**
+   * Standard_L32as_v4
+   */
+  Standard_L32as_v4: "Standard_L32as_v4",
+
+  /**
    * Standard_E64i_v3
    */
   Standard_E64i_v3: "Standard_E64i_v3",
