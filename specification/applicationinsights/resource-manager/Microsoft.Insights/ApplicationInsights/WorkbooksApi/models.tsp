@@ -250,6 +250,7 @@ model WorkbookPropertiesUpdateParameters {
   /**
    * The unique revision id for this workbook definition
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   revision?: string | null;
 }

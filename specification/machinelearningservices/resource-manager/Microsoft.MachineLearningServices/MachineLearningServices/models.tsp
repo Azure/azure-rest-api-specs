@@ -4316,16 +4316,19 @@ model ScaleSettings {
   /**
    * Max number of nodes to use
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   maxNodeCount: int32;
 
   /**
    * Min number of nodes to use
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   minNodeCount?: int32 = 0;
 
   /**
    * Node Idle Time before scaling down amlCompute. This string needs to be in the RFC Format.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   nodeIdleTimeBeforeScaleDown?: duration;
 }
 

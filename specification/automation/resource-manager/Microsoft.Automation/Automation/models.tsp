@@ -5197,6 +5197,7 @@ model RuntimeEnvironmentUpdateParameters {
   /**
    * Metadata pertaining to creation and last modification of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   systemData?: SystemData;
 }
 
@@ -5420,6 +5421,7 @@ model ScheduleUpdateProperties {
   /**
    * Gets or sets a value indicating whether this schedule is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   isEnabled?: boolean;
 }
 
@@ -6346,6 +6348,7 @@ model WatcherUpdateParameters {
   /**
    * Gets or sets the name of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   name?: string;
 }
 
@@ -6516,6 +6519,7 @@ model WebhookUpdateProperties {
   /**
    * Gets or sets the description of the webhook.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   description?: string;
 }
 

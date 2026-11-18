@@ -3234,11 +3234,13 @@ model ConditionalCreditPatchRequestProperties {
   /**
    * Whether this conditional credit allows contributor billing accounts
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   allowContributors?: EnablementMode;
 
   /**
    * Updated milestones list (only applicable for primary conditional credits)
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   milestones?: ConditionalCreditMilestone[];
 }
 

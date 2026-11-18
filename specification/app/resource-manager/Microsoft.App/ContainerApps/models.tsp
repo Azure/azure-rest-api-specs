@@ -4321,11 +4321,13 @@ model JobPatchPropertiesProperties {
   /**
    * Outbound IP Addresses of a container apps job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   outboundIpAddresses?: string[];
 
   /**
    * The endpoint of the eventstream of the container apps job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   eventStreamEndpoint?: string;
 }
 
