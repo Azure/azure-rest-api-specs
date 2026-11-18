@@ -1237,7 +1237,7 @@ export interface DownstreamAnalysis {
   schemaVersion: number;
   status: "ready" | "blocked";
   facts: Record<string, AssessmentFact>;
-  rootCauses: DownstreamRootCause[];
+  rootCauses?: DownstreamRootCause[];
   candidates: DownstreamCandidate[];
   blockers: PreparationBlocker[];
 }

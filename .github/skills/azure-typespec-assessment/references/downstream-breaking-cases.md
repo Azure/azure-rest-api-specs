@@ -1,35 +1,31 @@
 # Downstream SDK Breaking Cases
 
-Review candidate evidence first; explain confirmed impacts using the
-method-first report layout. A candidate, a finding, a changed type, and an
-affected method are different units.
+Review candidate evidence first. Direct method changes and changed SDK types
+are separate report units; do not infer or enumerate consumer methods for a
+type-only change.
 
 ## 1. Read the bounded input
 
 1. Read `context.projects[].artifactComparison` for the baseline/target API
    versions and source revisions. Do not assume array order identifies sides.
 2. For each `downstreamCandidates` entry, retain its `id`, `rule`,
-   `crossLanguageDefinitionId`, `evidenceFactIds`, and `rootCauseIds`.
+   `crossLanguageDefinitionId`, and `evidenceFactIds`.
    `reviewRequired`, `defaultSeverity`, and generated `actual`/`expected` text
    describe a potential change, not a confirmed incompatibility.
 3. Read the referenced `facts` by `comparisonRole` and `factKind`. When compact
    facts omit necessary details, resolve `evidenceSetId` through `evidenceSets`
    and the declared `artifactReferences` to the canonical candidate, facts,
    declarations, and source hunks. Older inputs may embed source evidence.
-4. Read linked `downstreamRootCauses` for method/type facts and reference edges.
-   Root labels are not verdicts: `method-return-propagation` also groups
-   parameter, client, and customization candidates.
-
-Use normalized TCGC evidence and changed customization decorators, independently
-of REST compatibility. Never infer SDK behavior from REST findings or prior
-reports. Use cross-language IDs, scoped by project, with guarded fallback
-identities only when needed.
+   Use normalized TCGC evidence and changed customization decorators, independently
+   of REST compatibility. Never infer SDK behavior from REST findings or prior
+   reports. Use cross-language IDs, scoped by project, with guarded fallback
+   identities only when needed.
 
 ## 2. Judge each candidate
 
 Apply the [candidate rules](downstream-candidate-rules.md), including
-compatibility exceptions. Require an existing public or public-method-reachable
-contract and a source-linked cause; project-wide source membership alone does
+compatibility exceptions. Require an existing public SDK contract and a
+source-linked cause; project-wide source membership alone does
 not establish causality.
 
 Return exactly one `downstreamDecisions` entry per supplied candidate, including
@@ -69,12 +65,15 @@ No method path means mapping unavailable, not automatically no breaking
 change. Retain independently justified public type/client/customization
 findings without inventing methods from names, files, or REST operations.
 
-## 4. Explain results in the method-first layout
+## 4. Explain results in the method/type layout
 
 Presentation follows judgment; it must not reclassify evidence.
 
-- One card per distinct mapped SDK method, merging direct and indirect causes.
-  Show a concise cause and related Semantic intent links while collapsed.
+- Put direct normalized method changes in **Method changes**, one card per
+  distinct SDK method.
+- Put changed models, enums, unions, clients, and other public types in
+  **Model and type changes**, one card per type. List mapped affected methods
+  under the type instead of expanding one unchanged method card per consumer.
 - Keep "Why this is breaking" brief: one self-contained explanation per distinct
   consequence, shown separately when several apply. Do not concatenate long
   judgment paragraphs or truncate away the caller impact.
@@ -84,8 +83,11 @@ Presentation follows judgment; it must not reclassify evidence.
   paging/LRO behavior, or availability. Label path/query/header/body positions
   only from unambiguous evidence. Constant headers are not numbered caller
   inputs; client-owned parameters are not ordinary method arguments.
-- Nested type causes show per-method input/output location and member path,
-  evidence side, concrete before/after member or shape, and consequence.
-  Use a fallback card when mapping is unavailable.
+- Type cards show input/output location and member path when proven, evidence
+  side, concrete before/after member or shape, consequence, and decoded TCGC
+  usage flags. Use a mapping-unavailable notice when no method is proven.
+- After the rationale, show only the finding-specific relevant TypeSpec source
+  range. Keep complete source evidence in JSON and do not substitute
+  project-wide source.
 - Keep finding, mapped-method, and changed-type counts distinct. Show no
   affected REST operations or fabricated language-specific signatures.
