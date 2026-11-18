@@ -49,6 +49,10 @@ model SandboxGroupProperties {
   @added(Versions.v2026_11_01_preview)
   telemetryConfig?: SandboxGroupTelemetryConfig;
 
+  /** Encryption-at-rest configuration. It cannot be added to or removed from an existing sandbox group. On PUT, include the existing configuration to retain it. On PATCH, omit it to retain the current configuration; a supplied configuration replaces it. */
+  @added(Versions.v2026_11_01_preview)
+  encryption?: SandboxGroupEncryption;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Description is on the referenced type to avoid emitting a sibling of $ref."
   @visibility(Lifecycle.Read)
   provisioningState?: SandboxGroupProvisioningState;
@@ -131,6 +135,117 @@ model SandboxGroupPatchProperties {
   /** Lifecycle event export updates. Omit endpoints to preserve the current destinations; a supplied array replaces them. */
   @added(Versions.v2026_11_01_preview)
   telemetryConfig?: OptionalProperties<SandboxGroupTelemetryConfig>;
+
+  /** Encryption-at-rest configuration. Omit to preserve the current configuration; a supplied configuration replaces it. Encryption cannot be added to or removed from an existing sandbox group. */
+  @added(Versions.v2026_11_01_preview)
+  encryption?: SandboxGroupEncryption;
+}
+
+/** Encryption-at-rest configuration for a sandbox group. */
+@added(Versions.v2026_11_01_preview)
+@discriminator("keySource")
+model SandboxGroupEncryption {
+  /** The source of the encryption key. */
+  keySource: SandboxGroupEncryptionKeySource;
+}
+
+/** The source of the encryption key. */
+@added(Versions.v2026_11_01_preview)
+union SandboxGroupEncryptionKeySource {
+  /** Encryption uses a Microsoft-managed key. */
+  MicrosoftManaged: "MicrosoftManaged",
+
+  /** Encryption uses a customer-managed key. */
+  CustomerManaged: "CustomerManaged",
+
+  string,
+}
+
+/** Encryption protected by a Microsoft-managed key. */
+@added(Versions.v2026_11_01_preview)
+model SandboxGroupMicrosoftManagedEncryption extends SandboxGroupEncryption {
+  /** Encryption uses a Microsoft-managed key. */
+  keySource: "MicrosoftManaged";
+}
+
+/** Encryption protected by a customer-managed key. */
+@added(Versions.v2026_11_01_preview)
+model SandboxGroupCustomerManagedEncryption extends SandboxGroupEncryption {
+  /** Encryption uses a customer-managed key. */
+  keySource: "CustomerManaged";
+
+  /** The customer-managed key and identity used to access it. */
+  customerManagedKeyEncryption: SandboxGroupCustomerManagedKeyEncryption;
+}
+
+/** Customer-managed key settings for a sandbox group. */
+@added(Versions.v2026_11_01_preview)
+model SandboxGroupCustomerManagedKeyEncryption {
+  /** The identity used to access the key in Azure Key Vault. */
+  keyEncryptionKeyIdentity: SandboxGroupKeyEncryptionKeyIdentity;
+
+  /** The versioned or unversioned Azure Key Vault key URL. The vault must belong to the configured Azure cloud. */
+  keyEncryptionKeyUrl: url;
+}
+
+/** An identity used to access a customer-managed key. */
+@added(Versions.v2026_11_01_preview)
+@discriminator("identityType")
+model SandboxGroupKeyEncryptionKeyIdentity {
+  /** The type of identity used to access the key. */
+  identityType: SandboxGroupKeyEncryptionKeyIdentityType;
+
+  /** The application client ID used to access the key in a different tenant, in GUID format. */
+  federatedClientId?: string;
+}
+
+/** The type of identity used to access a customer-managed key. */
+@added(Versions.v2026_11_01_preview)
+union SandboxGroupKeyEncryptionKeyIdentityType {
+  /** The sandbox group's system-assigned identity. */
+  systemAssignedIdentity: "systemAssignedIdentity",
+
+  /** A user-assigned identity attached to the sandbox group. */
+  userAssignedIdentity: "userAssignedIdentity",
+
+  /** An identity delegated from another resource. */
+  delegatedResourceIdentity: "delegatedResourceIdentity",
+
+  string,
+}
+
+/** Uses the sandbox group's system-assigned identity to access the key. */
+@added(Versions.v2026_11_01_preview)
+model SandboxGroupSystemAssignedKeyIdentity
+  extends SandboxGroupKeyEncryptionKeyIdentity {
+  /** Selects the system-assigned identity. */
+  identityType: "systemAssignedIdentity";
+}
+
+/** Uses a user-assigned identity to access the key. */
+@added(Versions.v2026_11_01_preview)
+model SandboxGroupUserAssignedKeyIdentity
+  extends SandboxGroupKeyEncryptionKeyIdentity {
+  /** Selects a user-assigned identity. */
+  identityType: "userAssignedIdentity";
+
+  /** The resource ID of the user-assigned identity. */
+  userAssignedIdentityResourceId: armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+}
+
+/** Uses a delegated identity to access the key. */
+@added(Versions.v2026_11_01_preview)
+model SandboxGroupDelegatedKeyIdentity
+  extends SandboxGroupKeyEncryptionKeyIdentity {
+  /** Selects a delegated resource identity. */
+  identityType: "delegatedResourceIdentity";
+
+  /** The client ID of the delegated identity, in GUID format. */
+  delegatedIdentityClientId: string;
 }
 
 /** Lifecycle event export configuration for a sandbox group. */

@@ -17649,6 +17649,101 @@
         }
       ]
     },
+    "SandboxGroupCustomerManagedEncryption": {
+      "type": "object",
+      "description": "Encryption protected by a customer-managed key.",
+      "properties": {
+        "customerManagedKeyEncryption": {
+          "$ref": "#/definitions/SandboxGroupCustomerManagedKeyEncryption",
+          "description": "The customer-managed key and identity used to access it."
+        }
+      },
+      "required": [
+        "customerManagedKeyEncryption"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SandboxGroupEncryption"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomerManaged"
+    },
+    "SandboxGroupCustomerManagedKeyEncryption": {
+      "type": "object",
+      "description": "Customer-managed key settings for a sandbox group.",
+      "properties": {
+        "keyEncryptionKeyIdentity": {
+          "$ref": "#/definitions/SandboxGroupKeyEncryptionKeyIdentity",
+          "description": "The identity used to access the key in Azure Key Vault."
+        },
+        "keyEncryptionKeyUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The versioned or unversioned Azure Key Vault key URL. The vault must belong to the configured Azure cloud."
+        }
+      },
+      "required": [
+        "keyEncryptionKeyIdentity",
+        "keyEncryptionKeyUrl"
+      ]
+    },
+    "SandboxGroupDelegatedKeyIdentity": {
+      "type": "object",
+      "description": "Uses a delegated identity to access the key.",
+      "properties": {
+        "delegatedIdentityClientId": {
+          "type": "string",
+          "description": "The client ID of the delegated identity, in GUID format."
+        }
+      },
+      "required": [
+        "delegatedIdentityClientId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SandboxGroupKeyEncryptionKeyIdentity"
+        }
+      ],
+      "x-ms-discriminator-value": "delegatedResourceIdentity"
+    },
+    "SandboxGroupEncryption": {
+      "type": "object",
+      "description": "Encryption-at-rest configuration for a sandbox group.",
+      "properties": {
+        "keySource": {
+          "$ref": "#/definitions/SandboxGroupEncryptionKeySource",
+          "description": "The source of the encryption key."
+        }
+      },
+      "discriminator": "keySource",
+      "required": [
+        "keySource"
+      ]
+    },
+    "SandboxGroupEncryptionKeySource": {
+      "type": "string",
+      "description": "The source of the encryption key.",
+      "enum": [
+        "MicrosoftManaged",
+        "CustomerManaged"
+      ],
+      "x-ms-enum": {
+        "name": "SandboxGroupEncryptionKeySource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MicrosoftManaged",
+            "value": "MicrosoftManaged",
+            "description": "Encryption uses a Microsoft-managed key."
+          },
+          {
+            "name": "CustomerManaged",
+            "value": "CustomerManaged",
+            "description": "Encryption uses a customer-managed key."
+          }
+        ]
+      }
+    },
     "SandboxGroupEventHubTelemetryEndpoint": {
       "type": "object",
       "description": "An Event Hub destination for sandbox lifecycle events, delivered by the ADC platform.",
@@ -17730,6 +17825,54 @@
         }
       }
     },
+    "SandboxGroupKeyEncryptionKeyIdentity": {
+      "type": "object",
+      "description": "An identity used to access a customer-managed key.",
+      "properties": {
+        "identityType": {
+          "$ref": "#/definitions/SandboxGroupKeyEncryptionKeyIdentityType",
+          "description": "The type of identity used to access the key."
+        },
+        "federatedClientId": {
+          "type": "string",
+          "description": "The application client ID used to access the key in a different tenant, in GUID format."
+        }
+      },
+      "discriminator": "identityType",
+      "required": [
+        "identityType"
+      ]
+    },
+    "SandboxGroupKeyEncryptionKeyIdentityType": {
+      "type": "string",
+      "description": "The type of identity used to access a customer-managed key.",
+      "enum": [
+        "systemAssignedIdentity",
+        "userAssignedIdentity",
+        "delegatedResourceIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "SandboxGroupKeyEncryptionKeyIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "systemAssignedIdentity",
+            "value": "systemAssignedIdentity",
+            "description": "The sandbox group's system-assigned identity."
+          },
+          {
+            "name": "userAssignedIdentity",
+            "value": "userAssignedIdentity",
+            "description": "A user-assigned identity attached to the sandbox group."
+          },
+          {
+            "name": "delegatedResourceIdentity",
+            "value": "delegatedResourceIdentity",
+            "description": "An identity delegated from another resource."
+          }
+        ]
+      }
+    },
     "SandboxGroupListResult": {
       "type": "object",
       "description": "The response of a SandboxGroup list operation.",
@@ -17750,6 +17893,16 @@
       "required": [
         "value"
       ]
+    },
+    "SandboxGroupMicrosoftManagedEncryption": {
+      "type": "object",
+      "description": "Encryption protected by a Microsoft-managed key.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SandboxGroupEncryption"
+        }
+      ],
+      "x-ms-discriminator-value": "MicrosoftManaged"
     },
     "SandboxGroupPatch": {
       "type": "object",
@@ -17809,6 +17962,10 @@
               ]
             }
           }
+        },
+        "encryption": {
+          "$ref": "#/definitions/SandboxGroupEncryption",
+          "description": "Encryption-at-rest configuration. Omit to preserve the current configuration; a supplied configuration replaces it. Encryption cannot be added to or removed from an existing sandbox group."
         }
       }
     },
@@ -17840,6 +17997,10 @@
         "telemetryConfig": {
           "$ref": "#/definitions/SandboxGroupTelemetryConfig",
           "description": "Lifecycle event export configuration for sandboxes in this group."
+        },
+        "encryption": {
+          "$ref": "#/definitions/SandboxGroupEncryption",
+          "description": "Encryption-at-rest configuration. It cannot be added to or removed from an existing sandbox group. On PUT, include the existing configuration to retain it. On PATCH, omit it to retain the current configuration; a supplied configuration replaces it."
         },
         "provisioningState": {
           "$ref": "#/definitions/SandboxGroupProvisioningState",
@@ -17904,6 +18065,16 @@
         }
       ],
       "x-ms-discriminator-value": "SystemAssignedManagedIdentity"
+    },
+    "SandboxGroupSystemAssignedKeyIdentity": {
+      "type": "object",
+      "description": "Uses the sandbox group's system-assigned identity to access the key.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SandboxGroupKeyEncryptionKeyIdentity"
+        }
+      ],
+      "x-ms-discriminator-value": "systemAssignedIdentity"
     },
     "SandboxGroupTelemetryAuth": {
       "type": "object",
@@ -17990,6 +18161,33 @@
         }
       ],
       "x-ms-discriminator-value": "ManagedIdentity"
+    },
+    "SandboxGroupUserAssignedKeyIdentity": {
+      "type": "object",
+      "description": "Uses a user-assigned identity to access the key.",
+      "properties": {
+        "userAssignedIdentityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource ID of the user-assigned identity.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "userAssignedIdentityResourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SandboxGroupKeyEncryptionKeyIdentity"
+        }
+      ],
+      "x-ms-discriminator-value": "userAssignedIdentity"
     },
     "Scale": {
       "type": "object",
