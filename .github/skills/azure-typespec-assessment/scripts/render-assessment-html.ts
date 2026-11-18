@@ -608,6 +608,15 @@ function restContractDelta(finding: AssessmentFinding): RestContractDelta {
     beforeValue = { display: finding.expected };
     afterValue = { display: finding.actual };
   }
+  if (
+    beforeValue.display === afterValue.display &&
+    finding.expected &&
+    finding.actual &&
+    finding.expected !== finding.actual
+  ) {
+    beforeValue.display = finding.expected;
+    afterValue.display = finding.actual;
+  }
   const identity = restContractIdentity(finding);
 
   let areaKind: string | undefined;
@@ -1446,6 +1455,24 @@ export function renderCompleteModelDeclarations(
     .map(({ qualifiedName, base, current }) => {
       const baseSnippet = base?.declaration.sourceSnippet;
       const currentSnippet = current?.declaration.sourceSnippet;
+      const truncated = Boolean(baseSnippet?.truncated || currentSnippet?.truncated);
+      if (truncated) {
+        const sourceChanges = [...new Set([base?.source, current?.source])]
+          .filter((source): source is SourceChange => Boolean(source))
+          .map((source) => ({
+            ...source,
+            hunks: source.hunks.flatMap((hunk) =>
+              focusedHunkSegments(hunk, {
+                base: base?.source === source ? [base.declaration.source] : [],
+                current: current?.source === source ? [current.declaration.source] : [],
+              }),
+            ),
+          }));
+        const focused = renderSourceHunks(sourceChanges);
+        if (focused) {
+          return `<div class="declaration"><p class="report-small">${escapeHtml(qualifiedName)} exceeds the stored declaration excerpt; showing focused changes.</p>${focused}</div>`;
+        }
+      }
       const baseLines = baseSnippet?.lines ?? [];
       const currentLines = currentSnippet?.lines ?? [];
       const rowCount = baseLines.length + 1;
@@ -1508,7 +1535,6 @@ export function renderCompleteModelDeclarations(
         base?.source.path === current?.source.path
           ? base?.source.path
           : [base?.source.path, current?.source.path].filter(Boolean).join(" → ");
-      const truncated = Boolean(baseSnippet?.truncated || currentSnippet?.truncated);
       return `<div class="diff declaration model-declaration-diff"><div class="diff-path model-diff-path"><span>${escapeHtml(path ?? "")} · ${escapeHtml(qualifiedName)}</span><span class="model-diff-legend"><span class="model-diff-baseline">Baseline</span><span class="model-diff-target">Target</span></span></div><div class="model-diff-code">${rows
         .map(
           (row) =>
