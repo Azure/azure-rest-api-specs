@@ -98,6 +98,7 @@ type ContractValue = {
   schema?: NormalizedSchema;
   identity?: string;
   display?: string;
+  qualifiedDisplay?: string;
 };
 type ContractRow = {
   area?: string;
@@ -544,6 +545,48 @@ function responseHeaderValue(operation: AssessmentFact | undefined, name: string
   return { display: "removed" };
 }
 
+function qualifiedSchemaDisplay(
+  baseDisplay: string | undefined,
+  schema: NormalizedSchema | undefined,
+  required?: boolean,
+): string | undefined {
+  if (!schema || !baseDisplay || baseDisplay === "removed" || baseDisplay === "unavailable") {
+    return baseDisplay;
+  }
+  const qualifiers: string[] = [];
+  if (required === true) qualifiers.push("required");
+  else if (required === false) qualifiers.push("optional");
+  if (schema.nullable === true) qualifiers.push("nullable");
+  else if (schema.nullable === false) qualifiers.push("non-nullable");
+  if (schema.readOnly === true) qualifiers.push("readOnly");
+  else if (schema.readOnly === false) qualifiers.push("writable");
+  const constraintRecord =
+    schema.constraints &&
+    typeof schema.constraints === "object" &&
+    !Array.isArray(schema.constraints)
+      ? { ...(schema.constraints as Record<string, unknown>), ...schema }
+      : schema;
+  for (const key of [
+    "minLength",
+    "maxLength",
+    "minimum",
+    "maximum",
+    "exclusiveMinimum",
+    "exclusiveMaximum",
+    "multipleOf",
+    "pattern",
+    "minItems",
+    "maxItems",
+    "uniqueItems",
+  ]) {
+    const value = constraintRecord[key];
+    if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") {
+      qualifiers.push(`${key}=${String(value)}`);
+    }
+  }
+  return qualifiers.length ? `${baseDisplay} (${qualifiers.join(", ")})` : baseDisplay;
+}
+
 function responseSchemaValue(
   operation: AssessmentFact | undefined,
   location: string,
@@ -552,10 +595,17 @@ function responseSchemaValue(
   if (!match) return { display: "unavailable" };
   const response = (operation?.responses ?? []).find((item) => item.status === match[1]);
   if (!response) return { display: "removed" };
-  const result = schemaPath(response.schema, match[2]?.split(".") ?? []);
+  const segments = match[2]?.split(".").filter(Boolean) ?? [];
+  const result = schemaPath(response.schema, segments);
+  const display = schemaDisplay(result.schema);
   return {
     ...result,
-    display: schemaDisplay(result.schema),
+    display,
+    qualifiedDisplay: qualifiedSchemaDisplay(
+      display,
+      result.schema,
+      segments.length ? result.required : undefined,
+    ),
   };
 }
 
@@ -565,10 +615,15 @@ function requestSchemaValue(
 ): ContractValue {
   const match = location?.match(/^request body(?:\.(.*))?$/);
   if (!match) return { display: "unavailable" };
-  const result = schemaPath(operation?.request?.schema, match[1]?.split(".") ?? []);
+  if (!operation?.request) return { display: "removed" };
+  const segments = match[1]?.split(".").filter(Boolean) ?? [];
+  const result = schemaPath(operation.request.schema, segments);
+  const required = segments.length ? result.required : operation.request.required;
+  const display = schemaDisplay(result.schema);
   return {
     ...result,
-    display: schemaDisplay(result.schema),
+    display,
+    qualifiedDisplay: qualifiedSchemaDisplay(display, result.schema, required),
   };
 }
 
@@ -616,6 +671,14 @@ function restContractDelta(finding: AssessmentFinding): RestContractDelta {
   ) {
     beforeValue.display = finding.expected;
     afterValue.display = finding.actual;
+  } else if (
+    beforeValue.display === afterValue.display &&
+    beforeValue.qualifiedDisplay &&
+    afterValue.qualifiedDisplay &&
+    beforeValue.qualifiedDisplay !== afterValue.qualifiedDisplay
+  ) {
+    beforeValue.display = beforeValue.qualifiedDisplay;
+    afterValue.display = afterValue.qualifiedDisplay;
   }
   const identity = restContractIdentity(finding);
 
@@ -1455,16 +1518,60 @@ export function renderCompleteModelDeclarations(
     .map(({ qualifiedName, base, current }) => {
       const baseSnippet = base?.declaration.sourceSnippet;
       const currentSnippet = current?.declaration.sourceSnippet;
+      const effectiveRange = (
+        entry: { source: SourceChange; declaration: SourceDeclaration } | undefined,
+      ) =>
+        entry
+          ? {
+              startLine: Math.min(
+                entry.declaration.source.startLine,
+                entry.declaration.sourceSnippet?.startLine ?? entry.declaration.source.startLine,
+              ),
+              endLine: Math.max(
+                entry.declaration.source.endLine,
+                entry.declaration.sourceSnippet?.endLine ?? entry.declaration.source.endLine,
+              ),
+            }
+          : undefined;
+      const baseRange = effectiveRange(base);
+      const currentRange = effectiveRange(current);
+      const hunkExceedsSnippet = (
+        [
+          [base, baseRange, "-"],
+          [current, currentRange, "+"],
+        ] as const
+      ).some(([entry, range, prefix]) => {
+        const snippet = entry?.declaration.sourceSnippet;
+        if (!entry || !range || !snippet) return false;
+        return entry.source.hunks.some((hunk) => {
+          let baseLine = hunk.base?.startLine ?? 1;
+          let currentLine = hunk.current?.startLine ?? 1;
+          for (const line of hunk.lines) {
+            const lineNumber = prefix === "-" ? baseLine : currentLine;
+            if (
+              line.startsWith(prefix) &&
+              lineNumber >= range.startLine &&
+              lineNumber <= range.endLine &&
+              (lineNumber < snippet.startLine || lineNumber > snippet.endLine)
+            ) {
+              return true;
+            }
+            if (!line.startsWith("+")) baseLine += 1;
+            if (!line.startsWith("-")) currentLine += 1;
+          }
+          return false;
+        });
+      });
       const truncated = Boolean(baseSnippet?.truncated || currentSnippet?.truncated);
-      if (truncated) {
+      if (truncated || hunkExceedsSnippet) {
         const sourceChanges = [...new Set([base?.source, current?.source])]
           .filter((source): source is SourceChange => Boolean(source))
           .map((source) => ({
             ...source,
             hunks: source.hunks.flatMap((hunk) =>
               focusedHunkSegments(hunk, {
-                base: base?.source === source ? [base.declaration.source] : [],
-                current: current?.source === source ? [current.declaration.source] : [],
+                base: base?.source === source && baseRange ? [baseRange] : [],
+                current: current?.source === source && currentRange ? [currentRange] : [],
               }),
             ),
           }));

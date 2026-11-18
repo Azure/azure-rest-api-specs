@@ -558,6 +558,50 @@ void test("truncated model and operation excerpts retain changes beyond their st
   }
 });
 
+void test("declaration excerpts retain leading decorator changes and out-of-snippet hunks", () => {
+  const source: SourceChange = {
+    id: "source-decorator-and-tail",
+    path: "main.tsp",
+    status: "modified",
+    origins: [],
+    hunks: [
+      {
+        id: "hunk-decorator",
+        base: { startLine: 2, endLine: 2 },
+        current: { startLine: 2, endLine: 2 },
+        lines: ['-@visibility("read", "update")', '+@visibility("read")'],
+      },
+      {
+        id: "hunk-tail",
+        base: { startLine: 52, endLine: 52 },
+        current: { startLine: 52, endLine: 52 },
+        lines: ["-  tail?: string;", "+  tail: string;"],
+      },
+    ],
+    declarations: (["base", "current"] as const).map((revision) => ({
+      id: `decl-${revision}`,
+      kind: "model",
+      qualifiedName: "DecoratedModel",
+      decorators: [],
+      versionedMembers: [],
+      hunkIds: ["hunk-decorator", "hunk-tail"],
+      source: { revision, startLine: 5, endLine: 60 },
+      sourceSnippet: {
+        startLine: 1,
+        endLine: 40,
+        lines: Array.from({ length: 40 }, (_, index) => `  line${index}: string;`),
+        truncated: false,
+      },
+    })),
+  };
+  const html = renderCompleteModelDeclarations([source], ["DecoratedModel"], ["model"]);
+  assert.include(html, "-@visibility(&quot;read&quot;, &quot;update&quot;)");
+  assert.include(html, "+@visibility(&quot;read&quot;)");
+  assert.include(html, "-  tail?: string;");
+  assert.include(html, "+  tail: string;");
+  assert.include(html, "showing focused changes");
+});
+
 void test("renders one complete unified model diff for model changes", () => {
   const html = renderCompleteModelDeclarations(
     [
@@ -1177,6 +1221,118 @@ void test("request-body contract rows preserve requiredness, nullability and con
     assert.equal(delta.after, finding.actual);
     assert.notEqual(delta.before, delta.after);
   }
+});
+
+void test("request-body contract rows disambiguate schema qualifiers and owner cards without distinct prose", () => {
+  const bodyRequiredCards = restContractCards([
+    {
+      id: "rest-body-required",
+      rule: "request-body-required",
+      severity: "high",
+      actual: "",
+      expected: "",
+      rationale: "Request body is now required.",
+      contractChange: { location: "request body" },
+      operationIds: ["Widgets_Create"],
+      sources: [],
+      evidence: [
+        {
+          comparisonRole: "baseline",
+          operationId: "Widgets_Create",
+          request: {
+            kind: "body",
+            required: false,
+            schema: { kind: "object", reference: "#/definitions/Widget" },
+          },
+        },
+        {
+          comparisonRole: "target",
+          operationId: "Widgets_Create",
+          request: {
+            kind: "body",
+            required: true,
+            schema: { kind: "object", reference: "#/definitions/Widget" },
+          },
+        },
+      ],
+    },
+    {
+      id: "rest-member-constraints",
+      rule: "constraints-tightened",
+      severity: "medium",
+      actual: "",
+      expected: "",
+      rationale: "Tag length tightened.",
+      contractChange: { location: "request body.tag" },
+      operationIds: ["Widgets_Create"],
+      sources: [],
+      evidence: [
+        {
+          comparisonRole: "baseline",
+          operationId: "Widgets_Create",
+          request: {
+            kind: "body",
+            schema: {
+              kind: "object",
+              reference: "#/definitions/Widget",
+              properties: [
+                {
+                  name: "tag",
+                  required: false,
+                  schema: {
+                    kind: "scalar",
+                    type: "string",
+                    reference: "#/definitions/TagValue",
+                    nullable: true,
+                    maxLength: 64,
+                  },
+                },
+              ],
+            },
+          },
+        },
+        {
+          comparisonRole: "target",
+          operationId: "Widgets_Create",
+          request: {
+            kind: "body",
+            schema: {
+              kind: "object",
+              reference: "#/definitions/Widget",
+              properties: [
+                {
+                  name: "tag",
+                  required: true,
+                  schema: {
+                    kind: "scalar",
+                    type: "string",
+                    reference: "#/definitions/TagValue",
+                    nullable: false,
+                    maxLength: 16,
+                  },
+                },
+              ],
+            },
+          },
+        },
+      ],
+    },
+  ]);
+  assert.equal(bodyRequiredCards.length, 1);
+  assert.equal(bodyRequiredCards[0].identity, "Widget");
+  assert.deepEqual(
+    bodyRequiredCards[0].findings.map((finding) => [
+      finding.contractDelta.before,
+      finding.contractDelta.after,
+    ]),
+    [
+      ["Widget (optional)", "Widget (required)"],
+      [
+        "TagValue (optional, nullable, maxLength=64)",
+        "TagValue (required, non-nullable, maxLength=16)",
+      ],
+    ],
+  );
 });
 
 void test("renderer shows fetched Azure Guidelines guidance and expands failures", () => {
