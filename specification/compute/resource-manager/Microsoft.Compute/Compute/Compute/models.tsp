@@ -494,7 +494,7 @@ union AllocationStrategy {
 union SkuDistributionMode {
   string,
 
-  /** VMs may use different SKUs from the SkuProfile list (multi-SKU). This is the default behavior. */
+  /** VMs may use different SKUs from the SkuProfile list (multi-SKU). */
   Heterogeneous: "Heterogeneous",
 
   /** All VMs use a single SKU selected from the SkuProfile list. */
@@ -3950,7 +3950,7 @@ model SkuProfile {
   allocationStrategy?: AllocationStrategy;
 
   /**
-   * Specifies how VM SKUs are distributed across instances. Heterogeneous (default) allows multiple SKUs; Homogeneous pins all VMs to a single selected SKU from the SkuProfile list.
+   * Specifies how VM SKUs are distributed across instances. Heterogeneous allows multiple SKUs; Homogeneous pins all VMs to a single selected SKU from the SkuProfile list.
    */
   @added(Versions.v2026_09_01)
   skuDistributionMode?: SkuDistributionMode;
