@@ -3,6 +3,7 @@ import {
   collectTypeSpecReviewContext,
   MAX_TYPESPEC_CONTEXT_API_REQUESTS,
   MAX_TYPESPEC_CONTEXT_FILES,
+  MAX_TYPESPEC_CONTEXT_TOTAL_BYTES,
 } from "../src/sdk-validation-typespec-context.ts";
 import { createMockContext, createMockGithub } from "./mocks.ts";
 
@@ -77,6 +78,7 @@ describe("collectTypeSpecReviewContext", () => {
         files: [
           `${PROJECT_ROOT}/client.tsp`,
           `${PROJECT_ROOT}/main.tsp`,
+          `${PROJECT_ROOT}/private/nested/models.tsp`,
           `${PROJECT_ROOT}/tspconfig.yaml`,
         ],
       },
@@ -98,6 +100,120 @@ describe("collectTypeSpecReviewContext", () => {
       basehead: `${BASE_SHA}...${HEAD_SHA}`,
     });
     expect(github.rest.repos.getContent).toHaveBeenCalledTimes(4);
+  });
+
+  it("collects unchanged transitive local imports once and ignores package imports", async () => {
+    const github = createMockGithub();
+    const context = createMockContext();
+    const clientPath = `${PROJECT_ROOT}/client.tsp`;
+    const modelsPath = `${PROJECT_ROOT}/models.tsp`;
+    const commonPath = `${PROJECT_ROOT}/shared/common.tsp`;
+    github.rest.repos.compareCommitsWithBasehead.mockResolvedValue({
+      data: {
+        files: [
+          {
+            filename: clientPath,
+            status: "modified",
+            patch:
+              '@@ -1 +1 @@\n-@@clientName(Old, "Old", "csharp");\n+@@clientName(New, "New", "csharp");',
+          },
+        ],
+      },
+    });
+    github.rest.repos.getContent.mockImplementation((request) => {
+      const contents = new Map([
+        [clientPath, '@@clientName(New, "New", "csharp");'],
+        [`${PROJECT_ROOT}/tspconfig.yaml`, "emit: []"],
+        [
+          `${PROJECT_ROOT}/main.tsp`,
+          ['import "@azure-tools/typespec-azure-resource-manager";', 'import "./models.tsp";'].join(
+            "\n",
+          ),
+        ],
+        [modelsPath, 'import "./shared/common.tsp";\nmodel New {}'],
+        [commonPath, 'import "../main.tsp";\nscalar SharedName extends string;'],
+      ]);
+      const content = contents.get(String((request as { path: string }).path));
+      if (content === undefined) {
+        return Promise.reject(notFoundError());
+      }
+      return Promise.resolve(repositoryFile(content));
+    });
+
+    const result = await collectTypeSpecReviewContext({
+      github,
+      context,
+      prNumber: 42,
+      headSha: HEAD_SHA,
+      baseSha: BASE_SHA,
+      changedFileCount: 1,
+      projectRoots: [PROJECT_ROOT],
+    });
+
+    expect(result.projects).toEqual([
+      {
+        root: PROJECT_ROOT,
+        files: [
+          clientPath,
+          `${PROJECT_ROOT}/main.tsp`,
+          modelsPath,
+          commonPath,
+          `${PROJECT_ROOT}/tspconfig.yaml`,
+        ],
+      },
+    ]);
+    expect(result.files).toContainEqual({
+      path: modelsPath,
+      roles: ["source"],
+      content: 'import "./shared/common.tsp";\nmodel New {}',
+    });
+    expect(result.files).toContainEqual({
+      path: commonPath,
+      roles: ["source"],
+      content: 'import "../main.tsp";\nscalar SharedName extends string;',
+    });
+    expect(github.rest.repos.getContent).toHaveBeenCalledTimes(5);
+    expect(
+      github.rest.repos.getContent.mock.calls.some(
+        ([request]) =>
+          (request as { path: string }).path === "@azure-tools/typespec-azure-resource-manager",
+      ),
+    ).toBe(false);
+  });
+
+  it("rejects local imports that escape the specification tree", async () => {
+    const github = createMockGithub();
+    const context = createMockContext();
+    const clientPath = `${PROJECT_ROOT}/client.tsp`;
+    github.rest.repos.compareCommitsWithBasehead.mockResolvedValue({
+      data: {
+        files: [{ filename: clientPath, status: "modified" }],
+      },
+    });
+    github.rest.repos.getContent.mockImplementation((request) => {
+      const contents = new Map([
+        [clientPath, '@@clientName(New, "New", "csharp");'],
+        [`${PROJECT_ROOT}/tspconfig.yaml`, "emit: []"],
+        [`${PROJECT_ROOT}/main.tsp`, 'import "../../../eng/secret.tsp";'],
+      ]);
+      const content = contents.get(String((request as { path: string }).path));
+      if (content === undefined) {
+        return Promise.reject(notFoundError());
+      }
+      return Promise.resolve(repositoryFile(content));
+    });
+
+    await expect(
+      collectTypeSpecReviewContext({
+        github,
+        context,
+        prNumber: 42,
+        headSha: HEAD_SHA,
+        baseSha: BASE_SHA,
+        changedFileCount: 1,
+        projectRoots: [PROJECT_ROOT],
+      }),
+    ).rejects.toThrow("Invalid TypeSpec context path");
   });
 
   it("preserves deleted-file patches without requesting deleted content", async () => {
@@ -196,7 +312,7 @@ describe("collectTypeSpecReviewContext", () => {
         [addedPath, "model Added {}"],
         [renamedPath, "model Renamed {}"],
         [`${PROJECT_ROOT}/tspconfig.yaml`, "emit: []"],
-        [`${PROJECT_ROOT}/main.tsp`, 'import "./added.tsp";'],
+        [`${PROJECT_ROOT}/main.tsp`, 'import "./added model.tsp";'],
         [`${PROJECT_ROOT}/client.tsp`, '@@clientName(Added, "WidgetModel", "csharp");'],
       ]);
       const content = contents.get(String((request as { path: string }).path));
@@ -345,6 +461,77 @@ describe("collectTypeSpecReviewContext", () => {
       }),
     ).rejects.toThrow(`maximum is ${MAX_TYPESPEC_CONTEXT_API_REQUESTS}`);
     expect(github.rest.repos.getContent).not.toHaveBeenCalled();
+  });
+
+  it("stops recursive imports at the content request budget", async () => {
+    const github = createMockGithub();
+    const context = createMockContext();
+    const mainPath = `${PROJECT_ROOT}/main.tsp`;
+    github.rest.repos.compareCommitsWithBasehead.mockResolvedValue({
+      data: {
+        files: [{ filename: mainPath, status: "modified" }],
+      },
+    });
+    github.rest.repos.getContent.mockImplementation((request) => {
+      const filePath = String((request as { path: string }).path);
+      if (filePath === `${PROJECT_ROOT}/tspconfig.yaml`) {
+        return Promise.resolve(repositoryFile("emit: []"));
+      }
+      if (filePath === `${PROJECT_ROOT}/client.tsp`) {
+        return Promise.reject(notFoundError());
+      }
+      if (filePath === mainPath) {
+        return Promise.resolve(repositoryFile('import "./source-0.tsp";'));
+      }
+      const match = filePath.match(/\/source-(\d+)\.tsp$/);
+      if (!match) {
+        return Promise.reject(notFoundError());
+      }
+      const index = Number(match[1]);
+      return Promise.resolve(repositoryFile(`import "./source-${index + 1}.tsp";`));
+    });
+
+    await expect(
+      collectTypeSpecReviewContext({
+        github,
+        context,
+        prNumber: 42,
+        headSha: HEAD_SHA,
+        baseSha: BASE_SHA,
+        changedFileCount: 1,
+        projectRoots: [PROJECT_ROOT],
+      }),
+    ).rejects.toThrow(
+      `TypeSpec context exceeded ${MAX_TYPESPEC_CONTEXT_API_REQUESTS} GitHub content requests`,
+    );
+    expect(github.rest.repos.getContent).toHaveBeenCalledTimes(MAX_TYPESPEC_CONTEXT_API_REQUESTS);
+  });
+
+  it("stops loading content when the aggregate byte limit is exceeded", async () => {
+    const github = createMockGithub();
+    const context = createMockContext();
+    const changedFiles = Array.from({ length: 10 }, (_, index) => ({
+      filename: `${PROJECT_ROOT}/model-${index}.tsp`,
+      status: "modified",
+    }));
+    github.rest.repos.compareCommitsWithBasehead.mockResolvedValue({
+      data: { files: changedFiles },
+    });
+    const content = "x".repeat(1024 * 1024);
+    github.rest.repos.getContent.mockResolvedValue(repositoryFile(content));
+
+    await expect(
+      collectTypeSpecReviewContext({
+        github,
+        context,
+        prNumber: 42,
+        headSha: HEAD_SHA,
+        baseSha: BASE_SHA,
+        changedFileCount: changedFiles.length,
+        projectRoots: [PROJECT_ROOT],
+      }),
+    ).rejects.toThrow(`exceeds ${MAX_TYPESPEC_CONTEXT_TOTAL_BYTES} bytes`);
+    expect(github.rest.repos.getContent).toHaveBeenCalledTimes(9);
   });
 
   it("rejects an incomplete exact-revision comparison", async () => {

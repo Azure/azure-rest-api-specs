@@ -1,5 +1,6 @@
 import path from "node:path";
 import { isSafeRelativePosixPath } from "../../shared/src/sdk-types.ts";
+import { getLocalTypeSpecImports } from "../../typespec-import-parser/src/index.ts";
 import type { Context, GitHub } from "./github.ts";
 
 export const TYPESPEC_REVIEW_CONTEXT_FILE_NAME = "typespec-review-context.json";
@@ -15,7 +16,7 @@ const TYPESPEC_FILE_PATTERN = /\.tsp$/i;
 const TYPESPEC_CONFIG_FILE_NAME = "tspconfig.yaml";
 const PROJECT_CONTEXT_FILE_NAMES = [TYPESPEC_CONFIG_FILE_NAME, "main.tsp", "client.tsp"];
 
-export type TypeSpecContextFileRole = "changed" | "client" | "config" | "entrypoint";
+export type TypeSpecContextFileRole = "changed" | "client" | "config" | "entrypoint" | "source";
 
 export type TypeSpecContextFile = {
   path: string;
@@ -44,6 +45,10 @@ export type TypeSpecReviewContext = {
 type MutableTypeSpecContextFile = Omit<TypeSpecContextFile, "roles"> & {
   roles: Set<TypeSpecContextFileRole>;
 };
+
+function getContextFileBytes(file: MutableTypeSpecContextFile): number {
+  return Buffer.byteLength(file.content ?? "") + Buffer.byteLength(file.patch ?? "");
+}
 
 type ChangedFile = {
   filename: string;
@@ -106,6 +111,12 @@ function getChangedTypeSpecPath(file: {
     return file.previous_filename;
   }
   return undefined;
+}
+
+function resolveLocalTypeSpecImport(filePath: string, importPath: string): string {
+  return requireSafeContextPath(
+    path.posix.normalize(path.posix.join(path.posix.dirname(filePath), importPath)),
+  );
 }
 
 function decodeGitPath(value: string): string {
@@ -381,7 +392,9 @@ export async function collectTypeSpecReviewContext(params: {
 
   const files = new Map<string, MutableTypeSpecContextFile>();
   const contentCache = new Map<string, Promise<string | undefined>>();
+  const importCache = new Map<string, string[]>();
   const requestCount = { value: 0 };
+  let totalBytes = 0;
 
   const getContent = (filePath: string): Promise<string | undefined> => {
     const safePath = requireSafeContextPath(filePath);
@@ -406,13 +419,19 @@ export async function collectTypeSpecReviewContext(params: {
     metadata: Omit<Partial<TypeSpecContextFile>, "path" | "roles"> = {},
   ): void => {
     const safePath = requireSafeContextPath(filePath);
-    const existing = files.get(safePath) ?? {
-      path: safePath,
-      roles: new Set<TypeSpecContextFileRole>(),
-    };
-    existing.roles.add(role);
-    Object.assign(existing, metadata);
-    files.set(safePath, existing);
+    const existing = files.get(safePath);
+    const updated: MutableTypeSpecContextFile = existing
+      ? { ...existing, roles: new Set(existing.roles) }
+      : { path: safePath, roles: new Set<TypeSpecContextFileRole>() };
+    updated.roles.add(role);
+    Object.assign(updated, metadata);
+    const updatedTotalBytes =
+      totalBytes - (existing ? getContextFileBytes(existing) : 0) + getContextFileBytes(updated);
+    if (updatedTotalBytes > MAX_TYPESPEC_CONTEXT_TOTAL_BYTES) {
+      throw new Error(`TypeSpec context exceeds ${MAX_TYPESPEC_CONTEXT_TOTAL_BYTES} bytes`);
+    }
+    totalBytes = updatedTotalBytes;
+    files.set(safePath, updated);
     if (files.size > MAX_TYPESPEC_CONTEXT_FILES) {
       throw new Error(`TypeSpec context exceeds ${MAX_TYPESPEC_CONTEXT_FILES} files`);
     }
@@ -446,7 +465,18 @@ export async function collectTypeSpecReviewContext(params: {
 
   const projects = [];
   for (const projectRoot of safeProjectRoots) {
-    const projectFiles: string[] = [];
+    const projectFiles = new Set<string>();
+    const pendingSources: string[] = [];
+    for (const [filePath, file] of files) {
+      if (
+        filePath.startsWith(`${projectRoot}/`) &&
+        TYPESPEC_FILE_PATTERN.test(filePath) &&
+        file.content !== undefined
+      ) {
+        projectFiles.add(filePath);
+        pendingSources.push(filePath);
+      }
+    }
     for (const fileName of PROJECT_CONTEXT_FILE_NAMES) {
       const filePath = path.posix.join(projectRoot, fileName);
       const content = await getContent(filePath);
@@ -454,22 +484,49 @@ export async function collectTypeSpecReviewContext(params: {
         continue;
       }
       addFile(filePath, getFileRole(filePath), { content });
-      projectFiles.push(filePath);
+      projectFiles.add(filePath);
+      if (TYPESPEC_FILE_PATTERN.test(filePath)) {
+        pendingSources.push(filePath);
+      }
     }
-    projects.push({ root: projectRoot, files: projectFiles.sort() });
+
+    const visitedSources = new Set<string>();
+    while (pendingSources.length > 0) {
+      const sourcePath = pendingSources.shift()!;
+      if (visitedSources.has(sourcePath)) {
+        continue;
+      }
+      visitedSources.add(sourcePath);
+
+      const sourceContent = files.get(sourcePath)?.content;
+      if (sourceContent === undefined) {
+        continue;
+      }
+      let imports = importCache.get(sourcePath);
+      if (imports === undefined) {
+        imports = getLocalTypeSpecImports(sourcePath, sourceContent);
+        importCache.set(sourcePath, imports);
+      }
+      for (const importPath of imports) {
+        const importedPath = resolveLocalTypeSpecImport(sourcePath, importPath);
+        if (projectFiles.has(importedPath)) {
+          continue;
+        }
+        const importedContent = await getContent(importedPath);
+        if (importedContent === undefined) {
+          throw new Error(`Imported TypeSpec source '${importedPath}' was not found`);
+        }
+        addFile(importedPath, "source", { content: importedContent });
+        projectFiles.add(importedPath);
+        pendingSources.push(importedPath);
+      }
+    }
+    projects.push({ root: projectRoot, files: [...projectFiles].sort() });
   }
 
   const contextFiles = [...files.values()]
     .map((file) => ({ ...file, roles: [...file.roles].sort() }))
     .sort((left, right) => left.path.localeCompare(right.path));
-  const totalBytes = contextFiles.reduce(
-    (total, file) =>
-      total + Buffer.byteLength(file.content ?? "") + Buffer.byteLength(file.patch ?? ""),
-    0,
-  );
-  if (totalBytes > MAX_TYPESPEC_CONTEXT_TOTAL_BYTES) {
-    throw new Error(`TypeSpec context exceeds ${MAX_TYPESPEC_CONTEXT_TOTAL_BYTES} bytes`);
-  }
 
   return {
     schemaVersion: 1,

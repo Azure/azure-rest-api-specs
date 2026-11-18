@@ -13,6 +13,7 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
 - [Table of Contents](#table-of-contents)
 - [Prerequisites](#prerequisites)
 - [Checks troubleshooting guides](#checks-troubleshooting-guides)
+  - [Transient fetch failures](#transient-fetch-failures)
   - [`Format`](#format)
   - [`CredScan`](#credscan)
   - [`PoliCheck`](#policheck)
@@ -33,6 +34,7 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
     - [Prettier reference](#prettier-reference)
   - [`Swagger SemanticValidation`](#swagger-semanticvalidation)
   - [Spell Check](#spell-check)
+  - [`Summarize PR Impact`](#summarize-pr-impact)
   - [`TypeSpec Validation`](#typespec-validation)
   - [`TypeSpec Suppressions`](#typespec-suppressions)
   - [`license/cla`](#licensecla)
@@ -45,6 +47,26 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
 Most guides here require for you to have `npm` installed, which you can get by installing [Node.js](https://nodejs.org/en/download).
 
 # Checks troubleshooting guides
+
+## Transient fetch failures
+
+If a PR pipeline fails with a fetch-related error and the logs do not identify
+an actionable problem in the submitted changes, retry the failed run once
+before starting a deeper specification or pipeline investigation.
+For example, the CI run reported the following annotation:
+
+```
+Unhandled error: HttpError: fetch failed
+```
+
+This message indicates that a fetch operation failed, but does not by itself 
+identify the cause or establish that the submitted specification caused the failure.
+
+If the retry succeeds, ensure all required CI checks pass before requesting or
+re-requesting review. If the same fetch-related failure occurs again,
+investigate it as a persistent CI or repository issue. This guidance applies
+only to fetch-related errors without an actionable diagnostic and is not a
+general retry policy for all CI failures.
 
 ## `Format`
 
@@ -70,7 +92,9 @@ This check is owned by One Engineering System. See [1ES PoliCheck] for help.
 ## `Protected Files`
 
 Only allowlisted repository maintainers and trusted automation accounts may change
-protected tooling and configuration files. If you are not allowlisted, remove
+files outside `specification/`, except for the CODEOWNERS and skill exemptions below.
+This includes root files, documentation, tooling, and files in newly added directories.
+If you are not allowlisted, remove
 the changes listed in the check's errors from your PR, including any deletions or
 renames. If a tooling change is needed, open an issue for the repository maintainers.
 
@@ -106,7 +130,7 @@ If you have an issue or with any of checks listed in the first column of the tab
 |-----------------------------------|----------------| ------------------------------------------------------------- |
 | `SDK Validation - Go`            | Chenjie Shi     | [tadelesh](https://github.com/tadelesh)                       |
 | `SDK Validation - Java`          | Weidong Xu      | [weidongxu-microsoft](https://github.com/weidongxu-microsoft) |
-| `SDK Validation - JS`            | Qiaoqiao Zhang  | [qiaozha](https://github.com/qiaozha)                         |
+| `SDK Validation - JS`            | Jialin Huang    | [JialinHuang803](https://github.com/JialinHuang803)           |
 | `SDK Validation - .NET`          | Wei Hu          | [live1206](https://github.com/live1206)                       |
 | `SDK Validation - Python`        | Yuchao Yan      | [msyyc](https://github.com/msyyc)                             |
 
@@ -141,7 +165,7 @@ reviewer:
 | Language        | Reviewer        | GitHub login                                                  |
 |-----------------|-----------------| ------------------------------------------------------------- |
 | `Go`            | Chenjie Shi     | [tadelesh](https://github.com/tadelesh)                       |
-| `JS`            | Qiaoqiao Zhang  | [qiaozha](https://github.com/qiaozha)                         |
+| `JS`            | Jialin Huang    | [JialinHuang803](https://github.com/JialinHuang803)           |
 | `Python`        | Yuchao Yan      | [msyyc](https://github.com/msyyc)                             |
 
 ## `Swagger APIView`
@@ -177,7 +201,7 @@ Refer to [troubleshooting REST API documentation](https://eng.ms/docs/products/a
 
 ## `Swagger Avocado`
 
-Moved to https://github.com/Azure/azure-rest-api-specs/wiki/Swagger-Avocado
+See the [Swagger Avocado guide](./validation/swagger-avocado.md).
 
 ## `Swagger BreakingChange` and `BreakingChange(Cross-Version)`
 
@@ -207,7 +231,7 @@ To reproduce LintDiff failures locally, see [CONTRIBUTING.md / How to locally re
 
 ## `Swagger LintDiff` for TypeSpec: troubleshooting guides
 
-https://github.com/Azure/azure-rest-api-specs/wiki/Swagger-LintDiff-for-TypeSpec
+See [Swagger LintDiff for TypeSpec](./validation/swagger-lintdiff.md#typespec).
 
 ## `Swagger ModelValidation`
 
@@ -297,13 +321,19 @@ Spell checking is *case-insensitive* so you only need to add a word once in lowe
 
 For more information see [cspell configuration](https://cspell.org/configuration/).
 
+## `Summarize PR Impact`
+
+If the check fails with `pnpm: command not found`, an outdated PR branch may be the cause even when the spec changes are unrelated. The workflow loads the setup action from the PR head at `after/.github/actions/setup-node-install-deps`. An older copy of that action may run `npm ci` without installing `pnpm`, while the current workflow runs `pnpm exec summarize-impact`.
+
+Update the PR branch with the latest changes from its target branch (`main` or `RPSaaSMaster`), then rerun the check from the updated PR head. Rerunning the check on the old branch state can repeat the failure. This does not require changing spec files.
+
 ## `TypeSpec Validation`
 
 For failed batch validation, run the `pnpm install` and per-project `pnpm tsv`
 commands from the final failure summary at the repository root. In GitHub Actions,
 each failed project's error annotation also includes these reproduction instructions.
 
-https://github.com/Azure/azure-rest-api-specs/wiki/TypeSpec-Validation
+See the [TypeSpec validation guide](./validation/typespec-validation.md).
 
 ## `TypeSpec Suppressions`
 

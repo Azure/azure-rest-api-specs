@@ -1,0 +1,38 @@
+{
+  "operationId": "WorkspaceDiscoveries_Get",
+  "title": "Get a terminal failed discovery without an accepted inventory result.",
+  "parameters": {
+    "api-version": "2026-11-01",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
+    "resourceGroupName": "exampleRG",
+    "workspaceName": "exampleWorkspace",
+    "discoveryName": "00000000-0000-0000-0000-000000000005"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/discoveries/00000000-0000-0000-0000-000000000005",
+        "name": "00000000-0000-0000-0000-000000000005",
+        "type": "Microsoft.Chaos/workspaces/discoveries",
+        "properties": {
+          "status": "Failed",
+          "workspaceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace",
+          "errors": [
+            {
+              "errorCode": "ResourceDiscoveryScopeNotCompletedError",
+              "errorMessage": "The service could not accept the discovery completion data. Retry discovery or contact support if the failure persists."
+            }
+          ]
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "ResourceNotFound",
+          "message": "No retained workspace result was found for the requested name."
+        }
+      }
+    }
+  }
+}

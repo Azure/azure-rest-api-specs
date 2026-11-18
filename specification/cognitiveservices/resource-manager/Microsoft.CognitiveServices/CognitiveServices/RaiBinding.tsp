@@ -18,6 +18,8 @@ namespace Microsoft.CognitiveServices;
  * An account-scoped binding from an Azure resource to an Agent Control Specification policy.
  */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @parentResource(Account)
 model RaiBinding is Azure.ResourceManager.ProxyResource<RaiBindingProperties> {
   ...ResourceNameParameter<
@@ -44,6 +46,8 @@ model RaiBinding is Azure.ResourceManager.ProxyResource<RaiBindingProperties> {
 
 /** Optional parameters for listing RAI bindings. */
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model RaiBindingListParameters {
   /**
    * The maximum number of RAI bindings to return. Defaults to 50.
@@ -54,6 +58,8 @@ model RaiBindingListParameters {
 }
 
 @added(Versions.v2026_09_15_preview)
+@removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @armResourceOperations
 interface RaiBindings {
   /** Gets one RAI binding. */

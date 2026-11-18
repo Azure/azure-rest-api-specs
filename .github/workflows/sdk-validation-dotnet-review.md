@@ -146,6 +146,7 @@ safe-outputs:
           uses: actions/checkout@v7
           with:
             sparse-checkout: |
+              .github/shared/src/markdown.ts
               .github/workflows/src/sdk-validation-dotnet-review-result.ts
               .github/workflows/src/sdk-validation-typespec-remediation-result.ts
             persist-credentials: false

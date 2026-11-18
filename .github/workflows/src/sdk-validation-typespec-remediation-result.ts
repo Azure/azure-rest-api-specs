@@ -1,3 +1,5 @@
+import { escapeMarkdown, inlineCode } from "../../shared/src/markdown.ts";
+
 type ReviewContext = {
   source: { specPrNumber: number; specHeadSha: string };
   remediationSkill: { skillRevision: string };
@@ -109,6 +111,42 @@ function validateSourceLocation(
     throw new Error(`${findingLabel} sourceLocation.line is not changed by the spec PR`);
   }
   return { file, line };
+}
+
+function buildRemediationMarkdown(
+  source: ReviewContext["source"],
+  findings: NormalizedFinding[],
+): string {
+  const lines = [
+    "# TypeSpec remediation",
+    "",
+    `Validated ${findings.length} remediation mapping${findings.length === 1 ? "" : "s"} for specification PR #${source.specPrNumber}.`,
+    "",
+  ];
+  if (findings.length === 0) {
+    lines.push("No SDK findings required remediation.", "");
+    return lines.join("\n");
+  }
+
+  lines.push(`## Findings (${findings.length})`, "");
+  for (const finding of findings) {
+    const sourceLocation = finding.remediation.sourceLocation;
+    lines.push(
+      `- **${escapeMarkdown(finding.severity.toUpperCase())}** ${inlineCode(`${finding.generatedLocation.file}:${finding.generatedLocation.line}`)} ${escapeMarkdown(finding.title)}`,
+      `  Evidence: ${escapeMarkdown(finding.evidence)}`,
+      `  Target: ${inlineCode(finding.remediation.target)}`,
+      `  Suggestion: ${escapeMarkdown(finding.remediation.suggestion)}`,
+      `  Confidence: ${inlineCode(finding.remediation.confidence)}`,
+      ...(finding.remediation.specSymbol
+        ? [`  TypeSpec symbol: ${inlineCode(finding.remediation.specSymbol)}`]
+        : []),
+      ...(sourceLocation
+        ? [`  TypeSpec location: ${inlineCode(`${sourceLocation.file}:${sourceLocation.line}`)}`]
+        : []),
+      "",
+    );
+  }
+  return lines.join("\n");
 }
 
 export function parseTypeSpecRemediationSafeOutput(outputValue: unknown): unknown {
@@ -328,6 +366,6 @@ export function validateTypeSpecRemediationResult(
       source: reviewContext.source,
       findings,
     },
-    report: `# TypeSpec remediation\n\nValidated ${findings.length} remediation mapping${findings.length === 1 ? "" : "s"} for specification PR #${reviewContext.source.specPrNumber}.\n`,
+    report: buildRemediationMarkdown(reviewContext.source, findings),
   };
 }
