@@ -17,12 +17,15 @@ interface Agents {
   @get
   @route("/agents/{agent_name}")
   @tag("Agents")
+  @extension("x-ms-foundry-meta", ManagedAgentsConditionalPreviews)
   getAgent is FoundryDataPlaneOperation<
     {
+      ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.managed_agents_v1_preview>;
+
       /** The name of the agent to retrieve. */
       @path agent_name: string;
     },
-    AgentObject
+    AgentResource
   >;
 
   /**
@@ -37,12 +40,15 @@ interface Agents {
   @extension("x-ms-summary-override", "Create an agent")
   @extension(
     "x-ms-description-override",
-    "Creates a new agent or a new version of an existing agent."
+    "Creates a new agent or a new version of an existing agent. With the Managed Agents preview, a name-only request creates an Agent with a ready default identity and no version. Identity failure fails creation."
   )
   createAgent is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
-    CreateAgentRequest,
-    AgentObject
+    {
+      /** Existing full Agent creation, or preview identity-only creation. Managed versions are saved separately after identity creation. */
+      @body body: AgentCreateContent;
+    },
+    AgentResource
   >;
 
   /**
@@ -235,11 +241,13 @@ interface Agents {
   @route("/agents")
   @list
   @tag("Agents")
+  @extension("x-ms-foundry-meta", ManagedAgentsConditionalPreviews)
   listAgents is FoundryDataPlaneOperation<
     {
+      ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.managed_agents_v1_preview>;
       ...ListAgentQueryParameters;
     },
-    AgentsPagedResult<AgentObject>
+    AgentsPagedResult<AgentResource>
   >;
 
   /**
@@ -519,39 +527,54 @@ interface Agents {
 
   /**
    * Creates a new session for an agent endpoint.
-   * The endpoint resolves the backing agent version from `version_indicator` and
-   * enforces session ownership using the provided user identity for session-mutating operations.
+   * Hosted keeps its existing version_indicator request and response.
+   * Managed resolves the endpoint's configured version and validates the complete definition
+   * from that version or the Session according to definition_source, without a merge or request selector.
+   * Managed creation returns the Session with 201; Environment preparation and turns can proceed asynchronously.
+   * Managed requests use existing endpoint interact/action authorization and enforce creator isolation.
    */
   @summary("Create a session")
   @post
   @route("/agents/{agent_name}/endpoint/sessions")
   @tag("Agent Sessions")
+  @extension("x-ms-foundry-meta", ManagedAgentsConditionalPreviews)
   createSession is FoundryDataPlaneOperation<
     {
+      ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.managed_agents_v1_preview>;
+
       /** The name of the agent to create a session for. */
       @path agent_name: string;
 
-      ...CreateAgentSessionRequest;
+      /** Optional for Managed creation. An identical keyed retry returns the original result and resolved version; changed input conflicts. Without a key, deduplication is not guaranteed. Hosted behavior is unchanged. */
+      @header("Idempotency-Key")
+      idempotency_key?: string;
+
+      /** The owning Agent's definition kind selects Hosted or Managed validation, not a new Session-body discriminator. */
+      @body body: AgentSessionCreateContent;
     },
-    ResourceCreatedResponse<AgentSessionResource>
+    CreatedAgentSession
   >;
 
   /**
-   * Retrieves the details of a hosted agent session by agent name and session identifier.
+   * Retrieves a Hosted or Managed Session by Agent name and its opaque identifier.
+   * Managed requires existing endpoint interact/action authorization and creator isolation.
    */
   @summary("Get a session")
   @get
   @route("/agents/{agent_name}/endpoint/sessions/{session_id}")
   @tag("Agent Sessions")
+  @extension("x-ms-foundry-meta", ManagedAgentsConditionalPreviews)
   getSession is FoundryDataPlaneOperation<
     {
+      ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.managed_agents_v1_preview>;
+
       /** The name of the agent. */
       @path agent_name: string;
 
       /** The session identifier. */
       @path session_id: string;
     },
-    AgentSessionResource
+    AgentSession
   >;
 
   /**
@@ -593,20 +616,25 @@ interface Agents {
 
   /**
    * Returns a paged collection of sessions associated with the specified agent endpoint.
+   * Managed uses the existing endpoint interact/action permission and filters every result to the creator.
+   * The Agent's definition kind selects the Hosted or Managed response; existing Hosted paging is unchanged.
    */
   @summary("List sessions for an agent")
   @get
   @route("/agents/{agent_name}/endpoint/sessions")
   @list
   @tag("Agent Sessions")
+  @extension("x-ms-foundry-meta", ManagedAgentsConditionalPreviews)
   listSessions is FoundryDataPlaneOperation<
     {
+      ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.managed_agents_v1_preview>;
+
       /** The name of the agent. */
       @path agent_name: string;
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<AgentSessionResource>
+    AgentsPagedResult<AgentSession>
   >;
 
   /**

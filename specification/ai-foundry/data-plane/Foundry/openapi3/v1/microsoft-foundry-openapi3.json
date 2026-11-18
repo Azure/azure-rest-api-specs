@@ -2447,7 +2447,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AgentObject"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/AgentResource"
+                    },
+                    {
+                      "$ref": "#/components/schemas/AgentObject"
+                    }
+                  ]
                 }
               }
             }
@@ -2473,7 +2480,7 @@
             }
           }
         },
-        "x-ms-description-override": "Creates a new agent or a new version of an existing agent.",
+        "x-ms-description-override": "Creates a new agent or a new version of an existing agent. With the Managed Agents preview, a name-only request creates an Agent with a ready default identity and no version. Identity failure fails creation.",
         "x-ms-summary-override": "Create an agent",
         "x-ms-foundry-meta": {
           "conditional_previews": [
@@ -2484,6 +2491,7 @@
             "DigitalWorker=V1Preview",
             "GitHubCopilot=V1Preview",
             "Skills=V1Preview",
+            "ManagedAgents=V1Preview",
             "MicrosoftCopilot=V1Preview"
           ]
         },
@@ -2495,7 +2503,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateAgentRequest"
+                "$ref": "#/components/schemas/AgentCreateContent"
               }
             },
             "multipart/form-data": {
@@ -2509,7 +2517,7 @@
               }
             }
           },
-          "description": "The content multipart request content."
+          "description": "Existing full Agent creation, or preview identity-only creation. Managed versions are saved separately after identity creation. The content multipart request content."
         }
       },
       "get": {
@@ -2517,6 +2525,18 @@
         "summary": "List agents",
         "description": "Returns a paged collection of agent resources.",
         "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ManagedAgents=V1Preview"
+              ]
+            }
+          },
           {
             "name": "kind",
             "in": "query",
@@ -2595,7 +2615,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/AgentObject"
+                        "$ref": "#/components/schemas/AgentResource"
                       },
                       "description": "The requested list of items."
                     },
@@ -2640,7 +2660,12 @@
         },
         "tags": [
           "Agents"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "ManagedAgents=V1Preview"
+          ]
+        }
       }
     },
     "/agents/{agent_name}": {
@@ -2649,6 +2674,18 @@
         "summary": "Get an agent",
         "description": "Retrieves an agent definition by its unique name.",
         "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ManagedAgents=V1Preview"
+              ]
+            }
+          },
           {
             "name": "agent_name",
             "in": "path",
@@ -2675,7 +2712,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AgentObject"
+                  "$ref": "#/components/schemas/AgentResource"
                 }
               }
             }
@@ -2703,7 +2740,12 @@
         },
         "tags": [
           "Agents"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "ManagedAgents=V1Preview"
+          ]
+        }
       },
       "post": {
         "operationId": "Agents_updateAgent_Agents_updateAgentFromCode",
@@ -6095,13 +6137,34 @@
       "post": {
         "operationId": "Agents_createSession",
         "summary": "Create a session",
-        "description": "Creates a new session for an agent endpoint.\nThe endpoint resolves the backing agent version from `version_indicator` and\nenforces session ownership using the provided user identity for session-mutating operations.",
+        "description": "Creates a new session for an agent endpoint.\nHosted keeps its existing version_indicator request and response.\nManaged resolves the endpoint's configured version and validates the complete definition\nfrom that version or the Session according to definition_source, without a merge or request selector.\nManaged creation returns the Session with 201; Environment preparation and turns can proceed asynchronously.\nManaged requests use existing endpoint interact/action authorization and enforce creator isolation.",
         "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ManagedAgents=V1Preview"
+              ]
+            }
+          },
           {
             "name": "agent_name",
             "in": "path",
             "required": true,
             "description": "The name of the agent to create a session for.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "required": false,
+            "description": "Optional for Managed creation. An identical keyed retry returns the original result and resolved version; changed input conflicts. Without a key, deduplication is not guaranteed. Hosted behavior is unchanged.",
             "schema": {
               "type": "string"
             }
@@ -6119,11 +6182,11 @@
         ],
         "responses": {
           "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
+            "description": "The existing 201 Session-create response with the Hosted or Managed body.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AgentSessionResource"
+                  "$ref": "#/components/schemas/AgentSession"
                 }
               }
             }
@@ -6157,17 +6220,35 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateAgentSessionRequest"
+                "$ref": "#/components/schemas/AgentSessionCreateContent"
               }
             }
-          }
+          },
+          "description": "The owning Agent's definition kind selects Hosted or Managed validation, not a new Session-body discriminator."
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "ManagedAgents=V1Preview"
+          ]
         }
       },
       "get": {
         "operationId": "Agents_listSessions",
         "summary": "List sessions for an agent",
-        "description": "Returns a paged collection of sessions associated with the specified agent endpoint.",
+        "description": "Returns a paged collection of sessions associated with the specified agent endpoint.\nManaged uses the existing endpoint interact/action permission and filters every result to the creator.\nThe Agent's definition kind selects the Hosted or Managed response; existing Hosted paging is unchanged.",
         "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ManagedAgents=V1Preview"
+              ]
+            }
+          },
           {
             "name": "agent_name",
             "in": "path",
@@ -6245,7 +6326,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/AgentSessionResource"
+                        "$ref": "#/components/schemas/AgentSession"
                       },
                       "description": "The requested list of items."
                     },
@@ -6290,7 +6371,12 @@
         },
         "tags": [
           "Agent Sessions"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "ManagedAgents=V1Preview"
+          ]
+        }
       }
     },
     "/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files": {
@@ -6677,8 +6763,20 @@
       "get": {
         "operationId": "Agents_getSession",
         "summary": "Get a session",
-        "description": "Retrieves the details of a hosted agent session by agent name and session identifier.",
+        "description": "Retrieves a Hosted or Managed Session by Agent name and its opaque identifier.\nManaged requires existing endpoint interact/action authorization and creator isolation.",
         "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ManagedAgents=V1Preview"
+              ]
+            }
+          },
           {
             "name": "agent_name",
             "in": "path",
@@ -6714,7 +6812,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AgentSessionResource"
+                  "$ref": "#/components/schemas/AgentSession"
                 }
               }
             }
@@ -6742,7 +6840,12 @@
         },
         "tags": [
           "Agent Sessions"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "ManagedAgents=V1Preview"
+          ]
+        }
       },
       "delete": {
         "operationId": "Agents_deleteSession",
@@ -10184,6 +10287,7 @@
             "DigitalWorker=V1Preview",
             "GitHubCopilot=V1Preview",
             "Skills=V1Preview",
+            "ManagedAgents=V1Preview",
             "MicrosoftCopilot=V1Preview"
           ]
         },
@@ -35921,6 +36025,17 @@
           ]
         }
       },
+      "AgentCreateContent": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/CreateAgentRequest"
+          },
+          {
+            "$ref": "#/components/schemas/IdentityOnlyAgentCreateConfig"
+          }
+        ],
+        "description": "Existing full Agent creation or preview identity-only creation."
+      },
       "AgentDataGenerationJobSource": {
         "type": "object",
         "required": [
@@ -35973,6 +36088,7 @@
           "propertyName": "kind",
           "mapping": {
             "hosted": "#/components/schemas/HostedAgentDefinition",
+            "managed": "#/components/schemas/ManagedAgentDefinition",
             "prompt": "#/components/schemas/PromptAgentDefinition",
             "workflow": "#/components/schemas/WorkflowAgentDefinition",
             "external": "#/components/schemas/ExternalAgentDefinition",
@@ -35991,6 +36107,7 @@
           "DigitalWorker=V1Preview",
           "GitHubCopilot=V1Preview",
           "Skills=V1Preview",
+          "ManagedAgents=V1Preview",
           "MicrosoftCopilot=V1Preview"
         ],
         "description": "Feature opt-in keys for agent definition operations supporting conditional preview features."
@@ -37047,7 +37164,8 @@
               "hosted",
               "workflow",
               "external",
-              "voice"
+              "voice",
+              "managed"
             ]
           }
         ]
@@ -39211,6 +39329,39 @@
           }
         }
       },
+      "AgentResource": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/AgentObject"
+          },
+          {
+            "$ref": "#/components/schemas/IdentityOnlyAgentObject"
+          }
+        ],
+        "description": "Versioned Agents retain their existing shape; preview identity-only Agents omit versions and agent_endpoint."
+      },
+      "AgentSession": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/AgentSessionResource"
+          },
+          {
+            "$ref": "#/components/schemas/ManagedAgentSession"
+          }
+        ],
+        "description": "The existing Hosted response or the Managed response selected by the owning Agent's definition kind."
+      },
+      "AgentSessionCreateContent": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/CreateAgentSessionRequest"
+          },
+          {
+            "$ref": "#/components/schemas/ManagedAgentSessionCreateConfig"
+          }
+        ],
+        "description": "The request shape selected by the owning Agent's definition kind."
+      },
       "AgentSessionResource": {
         "type": "object",
         "required": [
@@ -39415,6 +39566,20 @@
         ],
         "description": "Trace evidence for skill optimization, selected independently of feedback availability."
       },
+      "AgentVersionDefinition": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/AgentDefinition"
+          },
+          {
+            "$ref": "#/components/schemas/ManagedAgentVersionDefinition"
+          },
+          {
+            "$ref": "#/components/schemas/SessionSourceManagedAgentDefinition"
+          }
+        ],
+        "description": "Existing Agent definitions and the two Managed version definition shapes. definition_source is Managed-version-only."
+      },
       "AgentVersionObject": {
         "type": "object",
         "required": [
@@ -39472,7 +39637,8 @@
             "description": "The Unix timestamp (seconds) when the agent was created."
           },
           "definition": {
-            "$ref": "#/components/schemas/AgentDefinition"
+            "$ref": "#/components/schemas/AgentVersionDefinition",
+            "description": "The saved definition, including a Managed version's definition-source choice."
           },
           "draft": {
             "type": "boolean",
@@ -42399,8 +42565,8 @@
             "description": "A human-readable description of the agent."
           },
           "definition": {
-            "$ref": "#/components/schemas/AgentDefinition",
-            "description": "The agent definition. This can be a prompt, workflow, hosted, external, or voice agent definition.",
+            "$ref": "#/components/schemas/AgentVersionDefinition",
+            "description": "The agent definition. Managed versions require an existing parent Agent. An agent-source Managed version contains the full executable definition; a session-source version declares only its kind and definition_source.",
             "x-ms-foundry-meta": {
               "conditional_previews": [
                 "A2AAgents=V1Preview",
@@ -42410,6 +42576,7 @@
                 "DigitalWorker=V1Preview",
                 "GitHubCopilot=V1Preview",
                 "Skills=V1Preview",
+                "ManagedAgents=V1Preview",
                 "MicrosoftCopilot=V1Preview"
               ]
             }
@@ -42455,6 +42622,7 @@
             "DigitalWorker=V1Preview",
             "GitHubCopilot=V1Preview",
             "Skills=V1Preview",
+            "ManagedAgents=V1Preview",
             "MicrosoftCopilot=V1Preview"
           ]
         }
@@ -42573,8 +42741,8 @@
             "description": "A human-readable description of the agent."
           },
           "definition": {
-            "$ref": "#/components/schemas/AgentDefinition",
-            "description": "The agent definition. This can be a prompt, workflow, hosted, external, or voice agent definition.",
+            "$ref": "#/components/schemas/AgentVersionDefinition",
+            "description": "The agent definition. Managed versions require an existing parent Agent. An agent-source Managed version contains the full executable definition; a session-source version declares only its kind and definition_source.",
             "x-ms-foundry-meta": {
               "conditional_previews": [
                 "A2AAgents=V1Preview",
@@ -42584,6 +42752,7 @@
                 "DigitalWorker=V1Preview",
                 "GitHubCopilot=V1Preview",
                 "Skills=V1Preview",
+                "ManagedAgents=V1Preview",
                 "MicrosoftCopilot=V1Preview"
               ]
             }
@@ -48021,6 +48190,102 @@
           ]
         }
       },
+      "IdentityOnlyAgentCreateConfig": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 63,
+            "description": "The project-local Agent name, using the existing Agent naming rules."
+          }
+        },
+        "description": "Creates an Agent and its ready default identity without an executable version.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ManagedAgents=V1Preview"
+          ]
+        }
+      },
+      "IdentityOnlyAgentObject": {
+        "type": "object",
+        "required": [
+          "object",
+          "id",
+          "name",
+          "state",
+          "configuration_state",
+          "instance_identity"
+        ],
+        "properties": {
+          "object": {
+            "type": "string",
+            "enum": [
+              "agent"
+            ],
+            "description": "The object type, which is always 'agent'."
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the agent."
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 63,
+            "description": "The name of the agent."
+          },
+          "state": {
+            "$ref": "#/components/schemas/AgentState",
+            "description": "The operational state of the agent. Controls whether the agent endpoint accepts or rejects requests.",
+            "readOnly": true
+          },
+          "configuration_state": {
+            "$ref": "#/components/schemas/AgentState",
+            "description": "The administrative configuration state of the agent. This reflects whether the agent was explicitly enabled or disabled, independently of identity-derived operational state.",
+            "readOnly": true
+          },
+          "state_source": {
+            "$ref": "#/components/schemas/AgentStateSource",
+            "description": "The source of the agent's operational state. When the agent is disabled, indicates where the disabled state originates from. Empty when not derived from a specific source.",
+            "readOnly": true
+          },
+          "digital_worker_type": {
+            "$ref": "#/components/schemas/DigitalWorkerType",
+            "description": "(Preview) The type of digital worker (previously known as `autopilot`). If omitted, it is not a digital worker.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "DigitalWorker=V1Preview"
+              ]
+            }
+          },
+          "blueprint": {
+            "$ref": "#/components/schemas/AgentIdentity",
+            "description": "The blueprint for the agent",
+            "readOnly": true
+          },
+          "blueprint_reference": {
+            "$ref": "#/components/schemas/AgentBlueprintReference",
+            "description": "The blueprint for the agent",
+            "readOnly": true
+          },
+          "agent_card": {
+            "$ref": "#/components/schemas/AgentCard"
+          },
+          "instance_identity": {
+            "$ref": "#/components/schemas/AgentIdentity",
+            "description": "The ready default Agent identity. Identity provisioning failure fails creation.",
+            "readOnly": true
+          }
+        },
+        "description": "An Agent whose identity is ready but which has no saved version or invocation endpoint.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ManagedAgents=V1Preview"
+          ]
+        }
+      },
       "ImmediateSchedule": {
         "type": "object",
         "required": [
@@ -49224,6 +49489,165 @@
         ],
         "description": "An MCP tool stored in a toolbox."
       },
+      "ManagedAgentCompaction": {
+        "type": "object",
+        "properties": {
+          "async": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Whether compaction runs in the background. Omission and null do not imply a common harness default."
+          }
+        },
+        "description": "Shared compaction configuration. Copilot behavior must be qualified before accepting a setting."
+      },
+      "ManagedAgentDefinition": {
+        "type": "object",
+        "required": [
+          "kind",
+          "model",
+          "harness"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "managed"
+            ],
+            "description": "The definition kind."
+          },
+          "model": {
+            "type": "string",
+            "description": "A model deployment compatible with the selected harness."
+          },
+          "harness": {
+            "$ref": "#/components/schemas/ManagedGitHubCopilotHarness",
+            "description": "The platform-managed harness. Private preview supports GitHub Copilot."
+          },
+          "instructions": {
+            "type": "string",
+            "description": "Instructions supplied to the harness."
+          },
+          "reasoning": {
+            "$ref": "#/components/schemas/ManagedAgentReasoning",
+            "description": "Model-supported reasoning settings."
+          },
+          "compaction": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ManagedAgentCompaction"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Shared compaction settings, subject to harness support; no shared default is implied."
+          },
+          "multi_agent": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ManagedAgentMultiAgent"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Shared subagent settings, subject to harness support; no shared default is implied."
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.Tool"
+            },
+            "description": "Complete typed tool declarations. Toolbox access uses the existing MCP tool."
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SkillReference"
+            },
+            "description": "Authorized versioned Foundry Skill references."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentDefinition"
+          }
+        ],
+        "description": "The complete executable Managed definition. Inline Sessions do not accept definition_source.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ManagedAgents=V1Preview"
+          ]
+        }
+      },
+      "ManagedAgentExecutableConfig": {
+        "type": "object",
+        "required": [
+          "model",
+          "harness"
+        ],
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "A model deployment compatible with the selected harness."
+          },
+          "harness": {
+            "$ref": "#/components/schemas/ManagedGitHubCopilotHarness",
+            "description": "The platform-managed harness. Private preview supports GitHub Copilot."
+          },
+          "instructions": {
+            "type": "string",
+            "description": "Instructions supplied to the harness."
+          },
+          "reasoning": {
+            "$ref": "#/components/schemas/ManagedAgentReasoning",
+            "description": "Model-supported reasoning settings."
+          },
+          "compaction": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ManagedAgentCompaction"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Shared compaction settings, subject to harness support; no shared default is implied."
+          },
+          "multi_agent": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ManagedAgentMultiAgent"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Shared subagent settings, subject to harness support; no shared default is implied."
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.Tool"
+            },
+            "description": "Complete typed tool declarations. Toolbox access uses the existing MCP tool."
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SkillReference"
+            },
+            "description": "Authorized versioned Foundry Skill references."
+          }
+        },
+        "description": "Executable fields shared by a saved Managed definition and a complete inline definition."
+      },
       "ManagedAgentIdentityBlueprintReference": {
         "type": "object",
         "required": [
@@ -49247,6 +49671,241 @@
             "$ref": "#/components/schemas/AgentBlueprintReference"
           }
         ]
+      },
+      "ManagedAgentMultiAgent": {
+        "type": "object",
+        "required": [
+          "enabled"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether subagents are enabled within the caller's authorized tools and resources."
+          },
+          "max_concurrent_subagents": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Requested concurrent-subagent limit, subject to harness support."
+          }
+        },
+        "description": "Shared subagent configuration. Unsupported modes or limits must be rejected."
+      },
+      "ManagedAgentReasoning": {
+        "type": "object",
+        "properties": {
+          "effort": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Requested reasoning effort; validate it against the selected deployment and harness."
+          }
+        },
+        "description": "Reasoning settings supported by the selected model and Managed harness."
+      },
+      "ManagedAgentSession": {
+        "type": "object",
+        "required": [
+          "object",
+          "id",
+          "agent_reference",
+          "agent_definition",
+          "status"
+        ],
+        "properties": {
+          "object": {
+            "type": "string",
+            "enum": [
+              "agent.session"
+            ],
+            "description": "The resource discriminator."
+          },
+          "id": {
+            "type": "string",
+            "description": "Opaque Session ID used unchanged as the existing session_id route parameter."
+          },
+          "agent_reference": {
+            "$ref": "#/components/schemas/ManagedSessionAgentReference",
+            "description": "The owning Agent and resolved configured version. This is not a request selector."
+          },
+          "agent_definition": {
+            "$ref": "#/components/schemas/ManagedAgentDefinition",
+            "description": "The complete effective executable definition, without the version-only definition_source."
+          },
+          "status": {
+            "$ref": "#/components/schemas/ManagedAgentSessionStatus",
+            "description": "The current state, independent of Environment allocation state."
+          },
+          "environment": {
+            "$ref": "#/components/schemas/ManagedPlatformEnvironment",
+            "description": "The recorded Environment selection when supplied, separate from allocation state."
+          },
+          "connection_group": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Selected project Connection IDs, without protected material."
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Descriptive Session labels."
+          }
+        },
+        "description": "A Managed Session, returned by creation even when Environment preparation or a turn is still in progress.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ManagedAgents=V1Preview"
+          ]
+        }
+      },
+      "ManagedAgentSessionCreateConfig": {
+        "type": "object",
+        "properties": {
+          "agent_definition": {
+            "$ref": "#/components/schemas/ManagedAgentDefinition",
+            "description": "Required for session-source versions and rejected for agent-source versions. No definition_source, partial override or merge is accepted here."
+          },
+          "environment": {
+            "$ref": "#/components/schemas/ManagedPlatformEnvironment",
+            "description": "Optional Environment selection. Omission is allowed; it does not inherit from the Agent or imply an allocation-mode default."
+          },
+          "connection_group": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Existing project Connection IDs, never inline credentials or a reusable Group ID."
+          },
+          "input": {
+            "$ref": "#/components/schemas/ManagedSessionInput",
+            "description": "Optional initial input. Omission submits no work. Supplied input waits for required identity and Environment readiness."
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Descriptive Session labels, not copied version metadata or permission grants."
+          }
+        },
+        "description": "Creates a Managed Session using the Agent endpoint's configured version.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ManagedAgents=V1Preview"
+          ]
+        }
+      },
+      "ManagedAgentSessionStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "idle",
+              "in_progress",
+              "requires_action",
+              "failed"
+            ]
+          }
+        ],
+        "description": "The current Managed Session state."
+      },
+      "ManagedAgentVersionDefinition": {
+        "type": "object",
+        "required": [
+          "kind",
+          "model",
+          "harness"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "managed"
+            ],
+            "description": "The definition kind."
+          },
+          "model": {
+            "type": "string",
+            "description": "A model deployment compatible with the selected harness."
+          },
+          "harness": {
+            "$ref": "#/components/schemas/ManagedGitHubCopilotHarness",
+            "description": "The platform-managed harness. Private preview supports GitHub Copilot."
+          },
+          "instructions": {
+            "type": "string",
+            "description": "Instructions supplied to the harness."
+          },
+          "reasoning": {
+            "$ref": "#/components/schemas/ManagedAgentReasoning",
+            "description": "Model-supported reasoning settings."
+          },
+          "compaction": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ManagedAgentCompaction"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Shared compaction settings, subject to harness support; no shared default is implied."
+          },
+          "multi_agent": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ManagedAgentMultiAgent"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Shared subagent settings, subject to harness support; no shared default is implied."
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.Tool"
+            },
+            "description": "Complete typed tool declarations. Toolbox access uses the existing MCP tool."
+          },
+          "skills": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SkillReference"
+            },
+            "description": "Authorized versioned Foundry Skill references."
+          },
+          "rai_config": {
+            "$ref": "#/components/schemas/RaiConfig",
+            "description": "Existing Agent-layer content-safety configuration."
+          },
+          "definition_source": {
+            "type": "string",
+            "enum": [
+              "agent"
+            ],
+            "description": "The version supplies the full definition. Omission selects agent source.",
+            "default": "agent"
+          }
+        },
+        "description": "Reusable executable configuration saved on an agent-source Managed version.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ManagedAgents=V1Preview"
+          ]
+        }
       },
       "ManagedAzureAISearchIndex": {
         "type": "object",
@@ -49289,6 +49948,187 @@
           }
         ],
         "description": "Managed Azure AI Search Index Definition"
+      },
+      "ManagedGitHubCopilotHarness": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "github_copilot_harness"
+            ],
+            "description": "The harness discriminator."
+          }
+        },
+        "description": "The Managed GitHub Copilot harness, distinct from existing Prompt preview harness values."
+      },
+      "ManagedPlatformEnvironment": {
+        "type": "object",
+        "required": [
+          "type",
+          "mode"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "platform_hosted"
+            ],
+            "description": "Use the platform-provided Environment."
+          },
+          "mode": {
+            "$ref": "#/components/schemas/ManagedPlatformEnvironmentMode",
+            "description": "Explicit allocation mode when the Environment selector is supplied."
+          }
+        },
+        "description": "A Session-level platform Environment selector, not live allocation state."
+      },
+      "ManagedPlatformEnvironmentMode": {
+        "type": "string",
+        "enum": [
+          "always",
+          "on_demand"
+        ],
+        "description": "Supported private-preview platform Environment allocation modes."
+      },
+      "ManagedSessionAgentReference": {
+        "type": "object",
+        "required": [
+          "name",
+          "version"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The owning Agent's project-local name."
+          },
+          "version": {
+            "type": "string",
+            "description": "The exact configured version, including for session-source creation."
+          }
+        },
+        "description": "The owning Agent and exact configured version resolved once at Session creation."
+      },
+      "ManagedSessionInput": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ManagedSessionInputMessage"
+            }
+          }
+        ],
+        "description": "Initial input for a Managed Session."
+      },
+      "ManagedSessionInputContent": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The content discriminator."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "input_text": "#/components/schemas/ManagedSessionInputText",
+            "input_image": "#/components/schemas/ManagedSessionInputImage"
+          }
+        },
+        "description": "Content accepted in initial user messages, subject to model and harness support."
+      },
+      "ManagedSessionInputImage": {
+        "type": "object",
+        "required": [
+          "type",
+          "image_url"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_image"
+            ],
+            "description": "The content discriminator."
+          },
+          "image_url": {
+            "type": "string",
+            "description": "The image URL or data URI."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ManagedSessionInputContent"
+          }
+        ],
+        "description": "Image content in an initial user message."
+      },
+      "ManagedSessionInputMessage": {
+        "type": "object",
+        "required": [
+          "role",
+          "content"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "message"
+            ],
+            "description": "The input-item discriminator.",
+            "default": "message"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "user"
+            ],
+            "description": "The message author."
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ManagedSessionInputContent"
+            },
+            "description": "The message content."
+          }
+        },
+        "description": "An initial user message."
+      },
+      "ManagedSessionInputText": {
+        "type": "object",
+        "required": [
+          "type",
+          "text"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_text"
+            ],
+            "description": "The content discriminator."
+          },
+          "text": {
+            "type": "string",
+            "description": "The user-supplied text."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ManagedSessionInputContent"
+          }
+        ],
+        "description": "Text content in an initial user message."
       },
       "McpProtocolConfiguration": {
         "type": "object",
@@ -103123,6 +103963,35 @@
         ],
         "description": "Known SSE event types emitted by the hosted agent session log stream.\nAdditional event types may be introduced in future versions."
       },
+      "SessionSourceManagedAgentDefinition": {
+        "type": "object",
+        "required": [
+          "kind",
+          "definition_source"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "managed"
+            ],
+            "description": "The definition kind."
+          },
+          "definition_source": {
+            "type": "string",
+            "enum": [
+              "session"
+            ],
+            "description": "Every Session supplies its complete executable definition."
+          }
+        },
+        "description": "A Managed version that requires a complete inline definition on every Session. No executable defaults are accepted.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "ManagedAgents=V1Preview"
+          ]
+        }
+      },
       "SharepointGroundingToolCall": {
         "type": "object",
         "required": [
@@ -107384,8 +108253,8 @@
             "description": "A human-readable description of the agent."
           },
           "definition": {
-            "$ref": "#/components/schemas/AgentDefinition",
-            "description": "The agent definition. This can be a prompt, workflow, hosted, external, or voice agent definition.",
+            "$ref": "#/components/schemas/AgentVersionDefinition",
+            "description": "The agent definition. Managed versions require an existing parent Agent. An agent-source Managed version contains the full executable definition; a session-source version declares only its kind and definition_source.",
             "x-ms-foundry-meta": {
               "conditional_previews": [
                 "A2AAgents=V1Preview",
@@ -107395,6 +108264,7 @@
                 "DigitalWorker=V1Preview",
                 "GitHubCopilot=V1Preview",
                 "Skills=V1Preview",
+                "ManagedAgents=V1Preview",
                 "MicrosoftCopilot=V1Preview"
               ]
             }
@@ -107413,6 +108283,7 @@
             "DigitalWorker=V1Preview",
             "GitHubCopilot=V1Preview",
             "Skills=V1Preview",
+            "ManagedAgents=V1Preview",
             "MicrosoftCopilot=V1Preview"
           ]
         }
