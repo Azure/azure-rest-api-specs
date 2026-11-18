@@ -28,6 +28,7 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
   - [`Swagger BreakingChange` and `BreakingChange(Cross-Version)`](#swagger-breakingchange-and-breakingchangecross-version)
     - [Run `oad` locally](#run-oad-locally)
   - [`Swagger LintDiff` and `Swagger Lint(RPaaS)`](#swagger-lintdiff-and-swagger-lintrpaas)
+    - [Choose between direct validation and full LintDiff](#choose-between-direct-validation-and-full-lintdiff)
   - [`Swagger LintDiff` for TypeSpec: troubleshooting guides](#swagger-lintdiff-for-typespec-troubleshooting-guides)
   - [`Swagger ModelValidation`](#swagger-modelvalidation)
   - [`Swagger PrettierCheck`](#swagger-prettiercheck)
@@ -228,6 +229,13 @@ Refer to [openapi-authoring-automated-guidelines](https://github.com/Azure/azure
 If that guidance is not enough, please also refer to the [LintDiff rules.md doc](https://github.com/Azure/azure-openapi-validator/blob/main/docs/rules.md). It links to `.md` files related to given error, containing instructions how to fix them.
 
 To reproduce LintDiff failures locally, see [CONTRIBUTING.md / How to locally reproduce a LintDiff failure occurring on a PR](https://github.com/Azure/azure-openapi-validator/blob/main/CONTRIBUTING.md#how-to-locally-reproduce-a-lintdiff-failure-occurring-on-a-pr).
+
+### Choose between direct validation and full LintDiff
+
+- To quickly see validation errors and warnings in the new state of your spec, run [`azure-openapi-validator`](https://github.com/Azure/azure-openapi-validator/wiki#usage) directly. It validates only the current state and does not compare it with the state before your PR.
+- To get results closer to the `Swagger LintDiff` PR check, run the full LintDiff process by following [`eng/tools/lint-diff/README.md`](https://github.com/Azure/azure-rest-api-specs/blob/main/eng/tools/lint-diff/README.md). It compares the validation results of the spec before and after your changes, just like the PR check.
+
+Results from the two approaches can differ, because only the full LintDiff process reports issues based on that before-and-after comparison.
 
 ## `Swagger LintDiff` for TypeSpec: troubleshooting guides
 
