@@ -272,15 +272,24 @@ model SandboxGroupEventHubTelemetryEndpoint {
   @pattern("^[A-Za-z0-9](?:[A-Za-z0-9._-]*[A-Za-z0-9])?$")
   eventHubName: string;
 
-  /** The event data to export. Only sandbox lifecycle events are supported. */
+  /** The event data to export. Currently, only sandbox lifecycle events are supported. */
   @minItems(1)
-  data: "LifecycleEvents"[];
+  data: SandboxGroupTelemetryData[];
 
   /** The delivery route. Sandbox group lifecycle events require platform-side delivery. */
   egressRouting: SandboxGroupTelemetryEgressRouting;
 
   /** Managed identity authentication for sending to the destination Event Hub. The identity must be assigned to this sandbox group and have permission to send to the Event Hub. */
   auth: SandboxGroupTelemetryAuth;
+}
+
+/** Event data supported by sandbox lifecycle export. */
+@added(Versions.v2026_11_01_preview)
+union SandboxGroupTelemetryData {
+  /** Sandbox lifecycle events. */
+  LifecycleEvents: "LifecycleEvents",
+
+  string,
 }
 
 /** Supported delivery routes for sandbox lifecycle event export. */

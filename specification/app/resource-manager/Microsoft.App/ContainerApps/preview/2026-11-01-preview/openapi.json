@@ -17771,16 +17771,10 @@
         },
         "data": {
           "type": "array",
-          "description": "The event data to export. Only sandbox lifecycle events are supported.",
+          "description": "The event data to export. Currently, only sandbox lifecycle events are supported.",
           "minItems": 1,
           "items": {
-            "type": "string",
-            "enum": [
-              "LifecycleEvents"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            }
+            "$ref": "#/definitions/SandboxGroupTelemetryData"
           }
         },
         "egressRouting": {
@@ -18128,6 +18122,24 @@
       "required": [
         "endpoints"
       ]
+    },
+    "SandboxGroupTelemetryData": {
+      "type": "string",
+      "description": "Event data supported by sandbox lifecycle export.",
+      "enum": [
+        "LifecycleEvents"
+      ],
+      "x-ms-enum": {
+        "name": "SandboxGroupTelemetryData",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LifecycleEvents",
+            "value": "LifecycleEvents",
+            "description": "Sandbox lifecycle events."
+          }
+        ]
+      }
     },
     "SandboxGroupTelemetryEgressRouting": {
       "type": "string",
