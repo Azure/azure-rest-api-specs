@@ -206,12 +206,14 @@ The [LintDiff validation tool](https://github.com/Azure/azure-openapi-validator)
 Refer to [openapi-authoring-automated-guidelines](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md) for detailed description of all lint rules and how-to-fix guidance.
 If that guidance is not enough, please also refer to the [LintDiff rules.md doc](https://github.com/Azure/azure-openapi-validator/blob/main/docs/rules.md). It links to `.md` files related to given error, containing instructions how to fix them.
 
+To reproduce LintDiff failures locally, see [CONTRIBUTING.md / How to locally reproduce a LintDiff failure occurring on a PR](https://github.com/Azure/azure-openapi-validator/blob/main/CONTRIBUTING.md#how-to-locally-reproduce-a-lintdiff-failure-occurring-on-a-pr).
+
 ### Choose between direct validation and full LintDiff
 
-- Run `azure-openapi-validator` directly for a faster diagnostic of validation errors and warnings in the current or new specification state. It does not perform a before-and-after comparison or include LintDiff-specific exclusions.
-- Run the full LintDiff process when you need behavior closer to the `Swagger LintDiff` PR workflow, including before-and-after comparison and LintDiff-specific exclusions.
+- To quickly see validation errors and warnings in the new state of your spec, run [`azure-openapi-validator`](https://github.com/Azure/azure-openapi-validator/wiki#usage) directly. It validates only the current state and does not compare it with the state before your PR.
+- To get results closer to the `Swagger LintDiff` PR check, run the full LintDiff process by following [`eng/tools/lint-diff/README.md`](https://github.com/Azure/azure-rest-api-specs/blob/main/eng/tools/lint-diff/README.md). It compares the validation results of the spec before and after your changes, just like the PR check.
 
-To reproduce LintDiff failures locally, see [CONTRIBUTING.md / How to locally reproduce a LintDiff failure occurring on a PR](https://github.com/Azure/azure-openapi-validator/blob/main/CONTRIBUTING.md#how-to-locally-reproduce-a-lintdiff-failure-occurring-on-a-pr).
+Results from the two approaches can differ, because only the full LintDiff process reports issues based on that before-and-after comparison.
 
 ## `Swagger LintDiff` for TypeSpec: troubleshooting guides
 
