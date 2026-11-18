@@ -55706,11 +55706,6 @@ components:
         action:
           type: string
           description: The variant discriminator.
-      discriminator:
-        propertyName: action
-        mapping:
-          cancel: '#/components/schemas/ManagedSessionBrowserAuthenticationCancelled'
-          submit: '#/components/schemas/ManagedSessionBrowserAuthenticationSubmitted'
       description: Common discriminator for credential-free browser approval history.
     ManagedSessionBrowserAuthenticationSubmitted:
       type: object
@@ -55776,14 +55771,6 @@ components:
         type:
           type: string
           description: The client-event discriminator.
-      discriminator:
-        propertyName: type
-        mapping:
-          agent.session.input.cancel: '#/components/schemas/ManagedSessionCancelInputEvent'
-          agent.session.input.tool_result: '#/components/schemas/ManagedSessionToolResultInputEvent'
-          agent.session.input.computer_use_approval_request_result: '#/components/schemas/ManagedSessionComputerUseInputEvent'
-          agent.session.input.mcp_approval_response: '#/components/schemas/ManagedSessionMcpApprovalInputEvent'
-          agent.session.input.message: '#/components/schemas/ManagedSessionMessageInputEvent'
       description: Common discriminator for accepted client-event shapes.
     ManagedSessionCloseSubagentCallItem:
       type: object
@@ -56556,42 +56543,6 @@ components:
             - type: string
             - type: 'null'
           description: Random alphanumeric padding when obfuscation is enabled. Ignore it for identity, ordering, and business logic.
-      discriminator:
-        propertyName: type
-        mapping:
-          agent.session.idle: '#/components/schemas/ManagedSessionIdleEvent'
-          agent.session.in_progress: '#/components/schemas/ManagedSessionInProgressEvent'
-          agent.session.requires_action: '#/components/schemas/ManagedSessionRequiresActionEvent'
-          agent.session.failed: '#/components/schemas/ManagedSessionFailedEvent'
-          agent.session.turn.created: '#/components/schemas/ManagedSessionTurnCreatedEvent'
-          agent.session.turn.in_progress: '#/components/schemas/ManagedSessionTurnInProgressEvent'
-          agent.session.turn.completed: '#/components/schemas/ManagedSessionTurnCompletedEvent'
-          agent.session.turn.failed: '#/components/schemas/ManagedSessionTurnFailedEvent'
-          agent.session.turn.cancelled: '#/components/schemas/ManagedSessionTurnCancelledEvent'
-          agent.session.turn.item.added: '#/components/schemas/ManagedSessionItemAddedEvent'
-          agent.session.turn.item.done: '#/components/schemas/ManagedSessionItemDoneEvent'
-          agent.session.turn.content_part.added: '#/components/schemas/ManagedSessionContentPartAddedEvent'
-          agent.session.turn.content_part.done: '#/components/schemas/ManagedSessionContentPartDoneEvent'
-          agent.session.turn.output_text.delta: '#/components/schemas/ManagedSessionOutputTextDeltaEvent'
-          agent.session.turn.output_text.done: '#/components/schemas/ManagedSessionOutputTextDoneEvent'
-          agent.session.turn.reasoning_summary_part.added: '#/components/schemas/ManagedSessionReasoningSummaryPartAddedEvent'
-          agent.session.turn.reasoning_summary_part.done: '#/components/schemas/ManagedSessionReasoningSummaryPartDoneEvent'
-          agent.session.turn.reasoning_summary_text.delta: '#/components/schemas/ManagedSessionReasoningSummaryTextDeltaEvent'
-          agent.session.turn.reasoning_summary_text.done: '#/components/schemas/ManagedSessionReasoningSummaryTextDoneEvent'
-          agent.output.command_execution_output.delta: '#/components/schemas/ManagedSessionCommandExecutionOutputDeltaEvent'
-          agent.session.environment.pending: '#/components/schemas/ManagedSessionEnvironmentPendingEvent'
-          agent.session.environment.ready: '#/components/schemas/ManagedSessionEnvironmentReadyEvent'
-          agent.session.environment.connected: '#/components/schemas/ManagedSessionEnvironmentConnectedEvent'
-          agent.session.environment.disconnected: '#/components/schemas/ManagedSessionEnvironmentDisconnectedEvent'
-          agent.session.environment.suspended: '#/components/schemas/ManagedSessionEnvironmentSuspendedEvent'
-          agent.session.environment.expired: '#/components/schemas/ManagedSessionEnvironmentExpiredEvent'
-          agent.session.environment.failed: '#/components/schemas/ManagedSessionEnvironmentFailedEvent'
-          agent.session.environment.reset: '#/components/schemas/ManagedSessionEnvironmentResetEvent'
-          agent.session.subagent.created: '#/components/schemas/ManagedSessionSubagentCreatedEvent'
-          agent.session.subagent.active: '#/components/schemas/ManagedSessionSubagentActiveEvent'
-          agent.session.subagent.closed: '#/components/schemas/ManagedSessionSubagentClosedEvent'
-          error: '#/components/schemas/ManagedSessionErrorEvent'
-          agent.session.created: '#/components/schemas/ManagedSessionCreatedEvent'
       description: Common server-event fields. Correlation is variant-specific; do not infer missing turn IDs.
     ManagedSessionEventReceipt:
       type: object
@@ -57028,30 +56979,6 @@ components:
         type:
           type: string
           description: The variant discriminator.
-      discriminator:
-        propertyName: type
-        mapping:
-          mcp_approval_request: '#/components/schemas/ManagedSessionMcpApprovalRequestItem'
-          reasoning: '#/components/schemas/ManagedSessionReasoningItem'
-          function_call: '#/components/schemas/ManagedSessionFunctionCallItem'
-          function_call_output: '#/components/schemas/ManagedSessionFunctionCallOutputItem'
-          agent_message: '#/components/schemas/ManagedSessionAgentMessageItem'
-          mcp_call: '#/components/schemas/ManagedSessionMcpCallItem'
-          computer_use_call: '#/components/schemas/ManagedSessionComputerUseCallItem'
-          computer_use_approval_request: '#/components/schemas/ManagedSessionComputerUseApprovalRequestItem'
-          computer_use_approval_request_result: '#/components/schemas/ManagedSessionComputerUseApprovalResponseItem'
-          web_search_call: '#/components/schemas/ManagedSessionWebSearchCallItem'
-          command_execution: '#/components/schemas/ManagedSessionCommandExecutionItem'
-          create_subagent_call: '#/components/schemas/ManagedSessionCreateSubagentCallItem'
-          send_subagent_input_call: '#/components/schemas/ManagedSessionSendSubagentInputCallItem'
-          resume_subagent_call: '#/components/schemas/ManagedSessionResumeSubagentCallItem'
-          wait_for_subagents_call: '#/components/schemas/ManagedSessionWaitForSubagentsCallItem'
-          interrupt_subagent_call: '#/components/schemas/ManagedSessionInterruptSubagentCallItem'
-          close_subagent_call: '#/components/schemas/ManagedSessionCloseSubagentCallItem'
-          tool_call: '#/components/schemas/ManagedSessionToolCallItem'
-          tool_result: '#/components/schemas/ManagedSessionToolResultItem'
-          mcp_approval_response: '#/components/schemas/ManagedSessionMcpApprovalResponseItem'
-          message: '#/components/schemas/ManagedSessionMessageItem'
       description: Common history discriminator. Individual variants retain their own required fields and nullability.
     ManagedSessionItemDoneEvent:
       type: object
@@ -57697,26 +57624,6 @@ components:
         type:
           type: string
           description: The variant discriminator.
-      discriminator:
-        propertyName: type
-        mapping:
-          reasoning: '#/components/schemas/ManagedSessionOutputReasoningItem'
-          function_call: '#/components/schemas/ManagedSessionOutputFunctionCallItem'
-          mcp_call: '#/components/schemas/ManagedSessionOutputMcpCallItem'
-          computer_use_call: '#/components/schemas/ManagedSessionOutputComputerUseCallItem'
-          computer_use_approval_request: '#/components/schemas/ManagedSessionOutputComputerUseApprovalRequestItem'
-          web_search_call: '#/components/schemas/ManagedSessionOutputWebSearchCallItem'
-          command_execution: '#/components/schemas/ManagedSessionOutputCommandExecutionItem'
-          create_subagent_call: '#/components/schemas/ManagedSessionOutputCreateSubagentCallItem'
-          send_subagent_input_call: '#/components/schemas/ManagedSessionOutputSendSubagentInputCallItem'
-          resume_subagent_call: '#/components/schemas/ManagedSessionOutputResumeSubagentCallItem'
-          wait_for_subagents_call: '#/components/schemas/ManagedSessionOutputWaitForSubagentsCallItem'
-          interrupt_subagent_call: '#/components/schemas/ManagedSessionOutputInterruptSubagentCallItem'
-          close_subagent_call: '#/components/schemas/ManagedSessionOutputCloseSubagentCallItem'
-          tool_call: '#/components/schemas/ManagedSessionOutputToolCallItem'
-          tool_result: '#/components/schemas/ManagedSessionOutputToolResultItem'
-          mcp_approval_request: '#/components/schemas/ManagedSessionOutputMcpApprovalRequestItem'
-          message: '#/components/schemas/ManagedSessionOutputMessageItem'
       description: Common output discriminator, separate from history-only messages and callback records.
     ManagedSessionOutputMcpApprovalRequestItem:
       type: object
@@ -58469,13 +58376,6 @@ components:
         type:
           type: string
           description: The required-action discriminator.
-      discriminator:
-        propertyName: type
-        mapping:
-          computer_use_approval_request: '#/components/schemas/ManagedSessionComputerUseRequiredAction'
-          environment_connection: '#/components/schemas/ManagedSessionEnvironmentRequiredAction'
-          mcp_approval_request: '#/components/schemas/ManagedSessionMcpApprovalRequiredAction'
-          function_call: '#/components/schemas/ManagedSessionFunctionCallRequiredAction'
       description: Common discriminator for typed pending client actions.
     ManagedSessionRequiresActionEvent:
       type: object
@@ -59102,13 +59002,6 @@ components:
         type:
           type: string
           description: The variant discriminator.
-      discriminator:
-        propertyName: type
-        mapping:
-          open_page: '#/components/schemas/ManagedSessionWebSearchOpenPage'
-          find_in_page: '#/components/schemas/ManagedSessionWebSearchFindInPage'
-          other: '#/components/schemas/ManagedSessionWebSearchOther'
-          search: '#/components/schemas/ManagedSessionWebSearchQuery'
       description: Common discriminator for typed web-search actions.
     ManagedSessionWebSearchCallItem:
       type: object

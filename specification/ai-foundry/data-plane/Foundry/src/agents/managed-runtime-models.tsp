@@ -8,14 +8,12 @@ using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 
 /** Common discriminator for typed pending client actions. */
-@discriminator("type")
 model ManagedSessionRequiredActionBase {
   /** The required-action discriminator. */
   type: string;
 }
 
 /** Common discriminator for accepted client-event shapes. */
-@discriminator("type")
 model ManagedSessionClientEventBase {
   /** The client-event discriminator. */
   type: string;
@@ -168,6 +166,7 @@ union ManagedSessionRequiredAction extends ManagedSessionRequiredActionBase {
 }
 
 /** A client function call with the original call and turn correlation. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionFunctionCallRequiredAction
   extends ManagedSessionRequiredActionBase {
   ...OmitProperties<OpenAI.SessionRequiredActionResourceFunctionCall, "type">;
@@ -177,6 +176,7 @@ model ManagedSessionFunctionCallRequiredAction
 }
 
 /** A typed computer-use approval. Availability remains harness- and milestone-specific. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionComputerUseRequiredAction
   extends ManagedSessionRequiredActionBase {
   ...OmitProperties<
@@ -189,6 +189,7 @@ model ManagedSessionComputerUseRequiredAction
 }
 
 /** An Environment connection action, not authorization to create a new Environment. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionEnvironmentRequiredAction
   extends ManagedSessionRequiredActionBase {
   ...OmitProperties<
@@ -201,6 +202,7 @@ model ManagedSessionEnvironmentRequiredAction
 }
 
 /** A proposed Foundry MCP approval action with the call the user is deciding on. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionMcpApprovalRequiredAction
   extends ManagedSessionRequiredActionBase {
   ...OmitProperties<ManagedSessionMcpApprovalRequestItem, "id" | "status">;
@@ -217,6 +219,7 @@ union ManagedSessionClientEvent extends ManagedSessionClientEventBase {
 }
 
 /** Starts a root turn when idle or steers the active root turn. Admission order does not promise model-consumption order. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionMessageInputEvent extends ManagedSessionClientEventBase {
   ...OmitProperties<OpenAI.SessionInputParamAgentSessionInputMessage, "type">;
 
@@ -225,6 +228,7 @@ model ManagedSessionMessageInputEvent extends ManagedSessionClientEventBase {
 }
 
 /** Cancels the root turn active at acceptance. No caller-selected turn_id is accepted. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionCancelInputEvent extends ManagedSessionClientEventBase {
   ...OmitProperties<OpenAI.SessionInputParamAgentSessionInputCancel, "type">;
 
@@ -233,6 +237,7 @@ model ManagedSessionCancelInputEvent extends ManagedSessionClientEventBase {
 }
 
 /** Submits a result for the specified pending function call. The service validates success/output/error consistency and rejects stale or unauthorized callbacks. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionToolResultInputEvent extends ManagedSessionClientEventBase {
   ...OmitProperties<
     OpenAI.SessionInputParamAgentSessionInputToolResult,
@@ -244,6 +249,7 @@ model ManagedSessionToolResultInputEvent extends ManagedSessionClientEventBase {
 }
 
 /** A typed computer-use response. Submitted credential values must never be copied into streamed or persisted history. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionComputerUseInputEvent
   extends ManagedSessionClientEventBase {
   ...OmitProperties<
@@ -256,6 +262,7 @@ model ManagedSessionComputerUseInputEvent
 }
 
 /** Approves or denies a pending MCP call in the proposed Foundry protocol. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionMcpApprovalInputEvent
   extends ManagedSessionClientEventBase {
   /** The event discriminator. */
@@ -315,7 +322,6 @@ model ManagedSessionEventsAccepted {
 }
 
 /** Common server-event fields. Correlation is variant-specific; do not infer missing turn IDs. */
-@discriminator("type")
 model ManagedSessionEventBase {
   /** The server-event discriminator. */
   type: string;
@@ -339,6 +345,7 @@ model ManagedSessionEventBase {
 }
 
 /** agent.session.created. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionCreatedEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionCreated,
@@ -350,6 +357,7 @@ model ManagedSessionCreatedEvent extends ManagedSessionEventBase {
 }
 
 /** agent.session.idle. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionIdleEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionIdle,
@@ -361,6 +369,7 @@ model ManagedSessionIdleEvent extends ManagedSessionEventBase {
 }
 
 /** agent.session.in_progress. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionInProgressEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionInProgress,
@@ -372,6 +381,7 @@ model ManagedSessionInProgressEvent extends ManagedSessionEventBase {
 }
 
 /** agent.session.requires_action. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionRequiresActionEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionRequiresAction,
@@ -383,6 +393,7 @@ model ManagedSessionRequiresActionEvent extends ManagedSessionEventBase {
 }
 
 /** agent.session.failed. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionFailedEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionFailed,
@@ -394,6 +405,7 @@ model ManagedSessionFailedEvent extends ManagedSessionEventBase {
 }
 
 /** agent.session.turn.created. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionTurnCreatedEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnCreated,
@@ -405,6 +417,7 @@ model ManagedSessionTurnCreatedEvent extends ManagedSessionEventBase {
 }
 
 /** agent.session.turn.in_progress. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionTurnInProgressEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnInProgress,
@@ -416,6 +429,7 @@ model ManagedSessionTurnInProgressEvent extends ManagedSessionEventBase {
 }
 
 /** agent.session.turn.completed. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionTurnCompletedEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnCompleted,
@@ -430,6 +444,7 @@ model ManagedSessionTurnCompletedEvent extends ManagedSessionEventBase {
 }
 
 /** agent.session.turn.failed. Additional provider usage belongs in raw_event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionTurnFailedEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnFailed,
@@ -441,6 +456,7 @@ model ManagedSessionTurnFailedEvent extends ManagedSessionEventBase {
 }
 
 /** agent.session.turn.cancelled. Additional provider usage belongs in raw_event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionTurnCancelledEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnCancelled,
@@ -452,6 +468,7 @@ model ManagedSessionTurnCancelledEvent extends ManagedSessionEventBase {
 }
 
 /** agent.session.turn.item.added. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 @example(#{
   type: "agent.session.turn.item.added",
   event_id: "evt_1",
@@ -480,6 +497,7 @@ model ManagedSessionItemAddedEvent extends ManagedSessionEventBase {
 }
 
 /** agent.session.turn.item.done. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionItemDoneEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnItemDone,
@@ -495,6 +513,7 @@ model ManagedSessionItemDoneEvent extends ManagedSessionEventBase {
 }
 
 /** agent.session.turn.content_part.added. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionContentPartAddedEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnContentPartAdded,
@@ -507,6 +526,7 @@ model ManagedSessionContentPartAddedEvent extends ManagedSessionEventBase {
 }
 
 /** agent.session.turn.content_part.done. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionContentPartDoneEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnContentPartDone,
@@ -519,6 +539,7 @@ model ManagedSessionContentPartDoneEvent extends ManagedSessionEventBase {
 }
 
 /** agent.session.turn.output_text.delta. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionOutputTextDeltaEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnOutputTextDelta,
@@ -531,6 +552,7 @@ model ManagedSessionOutputTextDeltaEvent extends ManagedSessionEventBase {
 }
 
 /** agent.session.turn.output_text.done. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionOutputTextDoneEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnOutputTextDone,
@@ -543,6 +565,7 @@ model ManagedSessionOutputTextDoneEvent extends ManagedSessionEventBase {
 }
 
 /** agent.session.turn.reasoning_summary_part.added. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionReasoningSummaryPartAddedEvent
   extends ManagedSessionEventBase {
   ...OmitProperties<
@@ -556,6 +579,7 @@ model ManagedSessionReasoningSummaryPartAddedEvent
 }
 
 /** agent.session.turn.reasoning_summary_part.done. Provider incomplete status belongs in raw_event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionReasoningSummaryPartDoneEvent
   extends ManagedSessionEventBase {
   ...OmitProperties<
@@ -569,6 +593,7 @@ model ManagedSessionReasoningSummaryPartDoneEvent
 }
 
 /** agent.session.turn.reasoning_summary_text.delta. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionReasoningSummaryTextDeltaEvent
   extends ManagedSessionEventBase {
   ...OmitProperties<
@@ -582,6 +607,7 @@ model ManagedSessionReasoningSummaryTextDeltaEvent
 }
 
 /** agent.session.turn.reasoning_summary_text.done. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionReasoningSummaryTextDoneEvent
   extends ManagedSessionEventBase {
   ...OmitProperties<
@@ -595,6 +621,7 @@ model ManagedSessionReasoningSummaryTextDoneEvent
 }
 
 /** agent.output.command_execution_output.delta. Provider turn correlation belongs in raw_event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionCommandExecutionOutputDeltaEvent
   extends ManagedSessionEventBase {
   ...OmitProperties<
@@ -604,6 +631,7 @@ model ManagedSessionCommandExecutionOutputDeltaEvent
 }
 
 /** agent.session.environment.pending. Provider turn correlation belongs in raw_event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionEnvironmentPendingEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionEnvironmentPending,
@@ -615,6 +643,7 @@ model ManagedSessionEnvironmentPendingEvent extends ManagedSessionEventBase {
 }
 
 /** agent.session.environment.ready. Provider turn correlation belongs in raw_event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionEnvironmentReadyEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionEnvironmentReady,
@@ -626,6 +655,7 @@ model ManagedSessionEnvironmentReadyEvent extends ManagedSessionEventBase {
 }
 
 /** agent.session.environment.connected. Provider turn correlation belongs in raw_event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionEnvironmentConnectedEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionEnvironmentConnected,
@@ -637,6 +667,7 @@ model ManagedSessionEnvironmentConnectedEvent extends ManagedSessionEventBase {
 }
 
 /** agent.session.environment.disconnected. Provider turn correlation belongs in raw_event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionEnvironmentDisconnectedEvent
   extends ManagedSessionEventBase {
   ...OmitProperties<
@@ -649,6 +680,7 @@ model ManagedSessionEnvironmentDisconnectedEvent
 }
 
 /** agent.session.environment.suspended. Provider turn correlation belongs in raw_event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionEnvironmentSuspendedEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionEnvironmentSuspended,
@@ -660,6 +692,7 @@ model ManagedSessionEnvironmentSuspendedEvent extends ManagedSessionEventBase {
 }
 
 /** agent.session.environment.expired. Provider turn correlation belongs in raw_event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionEnvironmentExpiredEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionEnvironmentExpired,
@@ -671,6 +704,7 @@ model ManagedSessionEnvironmentExpiredEvent extends ManagedSessionEventBase {
 }
 
 /** agent.session.environment.failed. Provider turn correlation belongs in raw_event. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionEnvironmentFailedEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionEnvironmentFailed,
@@ -682,6 +716,7 @@ model ManagedSessionEnvironmentFailedEvent extends ManagedSessionEventBase {
 }
 
 /** agent.session.environment.reset. Preserve environment_id, reset_count, and provider turn_id in raw_event; no Environment snapshot is fabricated. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionEnvironmentResetEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionEnvironmentReset,
@@ -695,6 +730,7 @@ model ManagedSessionEnvironmentResetEvent extends ManagedSessionEventBase {
 }
 
 /** agent.session.subagent.created. Subagent inspection remains a separate follow-up capability. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionSubagentCreatedEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionSubagentCreated,
@@ -703,6 +739,7 @@ model ManagedSessionSubagentCreatedEvent extends ManagedSessionEventBase {
 }
 
 /** agent.session.subagent.active. Subagent inspection remains a separate follow-up capability. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionSubagentActiveEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionSubagentActive,
@@ -711,6 +748,7 @@ model ManagedSessionSubagentActiveEvent extends ManagedSessionEventBase {
 }
 
 /** agent.session.subagent.closed. Subagent inspection remains a separate follow-up capability. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionSubagentClosedEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionSubagentClosed,
@@ -719,6 +757,7 @@ model ManagedSessionSubagentClosedEvent extends ManagedSessionEventBase {
 }
 
 /** error. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionErrorEvent extends ManagedSessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventError,

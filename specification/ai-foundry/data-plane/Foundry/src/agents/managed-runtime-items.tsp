@@ -3,28 +3,24 @@ using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 
 /** Common history discriminator. Individual variants retain their own required fields and nullability. */
-@discriminator("type")
 model ManagedSessionItemBase {
   /** The variant discriminator. */
   type: string;
 }
 
 /** Common output discriminator, separate from history-only messages and callback records. */
-@discriminator("type")
 model ManagedSessionOutputItemBase {
   /** The variant discriminator. */
   type: string;
 }
 
 /** Common discriminator for credential-free browser approval history. */
-@discriminator("action")
 model ManagedSessionBrowserAuthenticationHistoryResponseBase {
   /** The variant discriminator. */
   action: string;
 }
 
 /** Common discriminator for typed web-search actions. */
-@discriminator("type")
 model ManagedSessionWebSearchActionBase {
   /** The variant discriminator. */
   type: string;
@@ -58,6 +54,7 @@ union ManagedSessionItem extends ManagedSessionItemBase {
 }
 
 /** Preserves the OpenAI message history item, including optional provider fields. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionMessageItem extends ManagedSessionItemBase {
   ...OmitProperties<OpenAI.MessageItemResource, "id" | "phase" | "type">;
 
@@ -71,6 +68,7 @@ model ManagedSessionMessageItem extends ManagedSessionItemBase {
 }
 
 /** Preserves the OpenAI reasoning history item, including optional provider fields. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 @example(#{
   type: "reasoning",
   id: "item_reasoning",
@@ -84,11 +82,13 @@ model ManagedSessionReasoningItem extends ManagedSessionItemBase {
 }
 
 /** Preserves the OpenAI function_call history item, including optional provider fields. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionFunctionCallItem extends ManagedSessionItemBase {
   ...OpenAI.FunctionCallItemResource;
 }
 
 /** Preserves the OpenAI function_call_output history item, including optional provider fields. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionFunctionCallOutputItem extends ManagedSessionItemBase {
   ...OmitProperties<
     OpenAI.FunctionCallOutputItemResource,
@@ -105,6 +105,7 @@ model ManagedSessionFunctionCallOutputItem extends ManagedSessionItemBase {
 }
 
 /** Preserves the OpenAI agent_message history item, including optional provider fields. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionAgentMessageItem extends ManagedSessionItemBase {
   ...OmitProperties<OpenAI.AgentMessageItemResource, "type">;
 
@@ -113,11 +114,13 @@ model ManagedSessionAgentMessageItem extends ManagedSessionItemBase {
 }
 
 /** Preserves the OpenAI mcp_call history item, including optional provider fields. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionMcpCallItem extends ManagedSessionItemBase {
   ...OpenAI.McpCallItemResource;
 }
 
 /** Preserves the OpenAI computer_use_call history item, including optional provider fields. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionComputerUseCallItem extends ManagedSessionItemBase {
   ...OmitProperties<OpenAI.ComputerUseCallItemResource, "title" | "output">;
   ...OptionalProperties<PickProperties<
@@ -127,6 +130,7 @@ model ManagedSessionComputerUseCallItem extends ManagedSessionItemBase {
 }
 
 /** Preserves the OpenAI computer_use_approval_request history item, including optional provider fields. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionComputerUseApprovalRequestItem
   extends ManagedSessionItemBase {
   ...OmitProperties<OpenAI.BrowserAuthenticationRequestItemResource, "request">;
@@ -136,6 +140,7 @@ model ManagedSessionComputerUseApprovalRequestItem
 }
 
 /** Preserves the OpenAI computer_use_approval_request_result history item, including optional provider fields. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionComputerUseApprovalResponseItem
   extends ManagedSessionItemBase {
   ...OmitProperties<
@@ -151,6 +156,7 @@ model ManagedSessionComputerUseApprovalResponseItem
 }
 
 /** Preserves the OpenAI web_search_call history item, including optional provider fields. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionWebSearchCallItem extends ManagedSessionItemBase {
   ...OmitProperties<OpenAI.WebSearchCallItemResource, "action">;
 
@@ -159,6 +165,7 @@ model ManagedSessionWebSearchCallItem extends ManagedSessionItemBase {
 }
 
 /** Preserves the OpenAI command_execution history item, including optional provider fields. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionCommandExecutionItem extends ManagedSessionItemBase {
   ...OmitProperties<
     OpenAI.CommandExecutionItemResource,
@@ -171,6 +178,7 @@ model ManagedSessionCommandExecutionItem extends ManagedSessionItemBase {
 }
 
 /** Preserves the OpenAI create_subagent_call history item, including optional provider fields. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionCreateSubagentCallItem extends ManagedSessionItemBase {
   ...OmitProperties<
     OpenAI.CreateSubagentCallItemResource,
@@ -183,26 +191,31 @@ model ManagedSessionCreateSubagentCallItem extends ManagedSessionItemBase {
 }
 
 /** Preserves the OpenAI send_subagent_input_call history item, including optional provider fields. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionSendSubagentInputCallItem extends ManagedSessionItemBase {
   ...OpenAI.SendSubagentInputCallItemResource;
 }
 
 /** Preserves the OpenAI resume_subagent_call history item, including optional provider fields. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionResumeSubagentCallItem extends ManagedSessionItemBase {
   ...OpenAI.ResumeSubagentCallItemResource;
 }
 
 /** Preserves the OpenAI wait_for_subagents_call history item, including optional provider fields. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionWaitForSubagentsCallItem extends ManagedSessionItemBase {
   ...OpenAI.WaitForSubagentsCallItemResource;
 }
 
 /** Preserves the OpenAI interrupt_subagent_call history item, including optional provider fields. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionInterruptSubagentCallItem extends ManagedSessionItemBase {
   ...OpenAI.InterruptSubagentCallItemResource;
 }
 
 /** Preserves the OpenAI close_subagent_call history item, including optional provider fields. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionCloseSubagentCallItem extends ManagedSessionItemBase {
   ...OpenAI.CloseSubagentCallItemResource;
 }
@@ -228,6 +241,7 @@ union ManagedSessionBrowserAuthenticationHistoryResponse
 }
 
 /** An admitted browser submission with only its selected option retained. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionBrowserAuthenticationSubmitted
   extends ManagedSessionBrowserAuthenticationHistoryResponseBase {
   ...OmitProperties<
@@ -245,6 +259,7 @@ model ManagedSessionBrowserAuthenticationSubmitted
 }
 
 /** A cancelled browser authentication request. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionBrowserAuthenticationCancelled
   extends ManagedSessionBrowserAuthenticationHistoryResponseBase {
   ...OmitProperties<
@@ -266,6 +281,7 @@ union ManagedSessionWebSearchAction extends ManagedSessionWebSearchActionBase {
 }
 
 /** Preserves the upstream Search web-search action. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionWebSearchQuery extends ManagedSessionWebSearchActionBase {
   ...OmitProperties<
     OpenAI.WebSearchActionResourceSearch,
@@ -282,6 +298,7 @@ model ManagedSessionWebSearchQuery extends ManagedSessionWebSearchActionBase {
 }
 
 /** Preserves the upstream OpenPage web-search action. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionWebSearchOpenPage
   extends ManagedSessionWebSearchActionBase {
   ...OmitProperties<OpenAI.WebSearchActionResourceOpenPage, "url" | "type">;
@@ -296,6 +313,7 @@ model ManagedSessionWebSearchOpenPage
 }
 
 /** Preserves the upstream FindInPage web-search action. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionWebSearchFindInPage
   extends ManagedSessionWebSearchActionBase {
   ...OmitProperties<
@@ -313,6 +331,7 @@ model ManagedSessionWebSearchFindInPage
 }
 
 /** Preserves the upstream Other web-search action. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionWebSearchOther extends ManagedSessionWebSearchActionBase {
   ...OmitProperties<OpenAI.WebSearchActionResourceOther, "type">;
 
@@ -321,6 +340,7 @@ model ManagedSessionWebSearchOther extends ManagedSessionWebSearchActionBase {
 }
 
 /** A Foundry tool invocation used only when no upstream item type applies. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionToolCallItem extends ManagedSessionItemBase {
   /** The item discriminator. */
   type: "tool_call";
@@ -363,6 +383,7 @@ model ManagedSessionToolResultOutput {
 }
 
 /** A Foundry tool result used only when no upstream item type applies. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionToolResultItem extends ManagedSessionItemBase {
   /** The item discriminator. */
   type: "tool_result";
@@ -384,6 +405,7 @@ model ManagedSessionToolResultItem extends ManagedSessionItemBase {
 }
 
 /** A proposed Foundry MCP approval request recorded in item history. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionMcpApprovalRequestItem extends ManagedSessionItemBase {
   /** The item discriminator. */
   type: "mcp_approval_request";
@@ -411,6 +433,7 @@ model ManagedSessionMcpApprovalRequestItem extends ManagedSessionItemBase {
 }
 
 /** A proposed Foundry MCP approval response recorded in item history. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionMcpApprovalResponseItem extends ManagedSessionItemBase {
   /** The item discriminator. */
   type: "mcp_approval_response";
@@ -458,6 +481,7 @@ union ManagedSessionOutputItem extends ManagedSessionOutputItemBase {
 }
 
 /** Preserves the message output item without accepting its history-only counterparts. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionOutputMessageItem extends ManagedSessionOutputItemBase {
   ...OmitProperties<OpenAI.AssistantMessageItemResource, "phase" | "type">;
 
@@ -471,92 +495,108 @@ model ManagedSessionOutputMessageItem extends ManagedSessionOutputItemBase {
 }
 
 /** Preserves the reasoning output item without accepting its history-only counterparts. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionOutputReasoningItem extends ManagedSessionOutputItemBase {
   ...ManagedSessionReasoningItem;
 }
 
 /** Preserves the function_call output item without accepting its history-only counterparts. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionOutputFunctionCallItem
   extends ManagedSessionOutputItemBase {
   ...ManagedSessionFunctionCallItem;
 }
 
 /** Preserves the mcp_call output item without accepting its history-only counterparts. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionOutputMcpCallItem extends ManagedSessionOutputItemBase {
   ...ManagedSessionMcpCallItem;
 }
 
 /** Preserves the computer_use_call output item without accepting its history-only counterparts. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionOutputComputerUseCallItem
   extends ManagedSessionOutputItemBase {
   ...ManagedSessionComputerUseCallItem;
 }
 
 /** Preserves the computer_use_approval_request output item without accepting its history-only counterparts. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionOutputComputerUseApprovalRequestItem
   extends ManagedSessionOutputItemBase {
   ...ManagedSessionComputerUseApprovalRequestItem;
 }
 
 /** Preserves the web_search_call output item without accepting its history-only counterparts. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionOutputWebSearchCallItem
   extends ManagedSessionOutputItemBase {
   ...ManagedSessionWebSearchCallItem;
 }
 
 /** Preserves the command_execution output item without accepting its history-only counterparts. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionOutputCommandExecutionItem
   extends ManagedSessionOutputItemBase {
   ...ManagedSessionCommandExecutionItem;
 }
 
 /** Preserves the create_subagent_call output item without accepting its history-only counterparts. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionOutputCreateSubagentCallItem
   extends ManagedSessionOutputItemBase {
   ...ManagedSessionCreateSubagentCallItem;
 }
 
 /** Preserves the send_subagent_input_call output item without accepting its history-only counterparts. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionOutputSendSubagentInputCallItem
   extends ManagedSessionOutputItemBase {
   ...ManagedSessionSendSubagentInputCallItem;
 }
 
 /** Preserves the resume_subagent_call output item without accepting its history-only counterparts. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionOutputResumeSubagentCallItem
   extends ManagedSessionOutputItemBase {
   ...ManagedSessionResumeSubagentCallItem;
 }
 
 /** Preserves the wait_for_subagents_call output item without accepting its history-only counterparts. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionOutputWaitForSubagentsCallItem
   extends ManagedSessionOutputItemBase {
   ...ManagedSessionWaitForSubagentsCallItem;
 }
 
 /** Preserves the interrupt_subagent_call output item without accepting its history-only counterparts. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionOutputInterruptSubagentCallItem
   extends ManagedSessionOutputItemBase {
   ...ManagedSessionInterruptSubagentCallItem;
 }
 
 /** Preserves the close_subagent_call output item without accepting its history-only counterparts. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionOutputCloseSubagentCallItem
   extends ManagedSessionOutputItemBase {
   ...ManagedSessionCloseSubagentCallItem;
 }
 
 /** Preserves the tool_call output item without accepting its history-only counterparts. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionOutputToolCallItem extends ManagedSessionOutputItemBase {
   ...ManagedSessionToolCallItem;
 }
 
 /** Preserves the tool_result output item without accepting its history-only counterparts. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionOutputToolResultItem extends ManagedSessionOutputItemBase {
   ...ManagedSessionToolResultItem;
 }
 
 /** Preserves the mcp_approval_request output item without accepting its history-only counterparts. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model ManagedSessionOutputMcpApprovalRequestItem
   extends ManagedSessionOutputItemBase {
   ...ManagedSessionMcpApprovalRequestItem;
