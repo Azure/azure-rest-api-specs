@@ -3,7 +3,6 @@ import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { Ajv2020 } from "ajv/dist/2020.js";
 import {
   verifyAssessmentRuntime,
   verifyRuntimePhaseProvenance,
@@ -29,12 +28,6 @@ type ComplianceSearchEvidence =
   import("../scripts/compliance-search-evidence.schema.js").TypeSpecAzureGuidelinesSearchEvidence;
 
 type AssessmentModelInput = import("../scripts/runtime-types.ts").AssessmentModelInput;
-
-const validateJudgmentSchema = new Ajv2020({ strict: false, validateFormats: false }).compile(
-  readJsonObject(
-    fileURLToPath(new URL("../scripts/assessment-judgment.schema.json", import.meta.url)),
-  ),
-);
 
 type TestAgentDecisions = {
   catalogScores: CatalogScore[];
@@ -181,26 +174,7 @@ void test("materializes and freezes judgment without requiring source decisions 
     assert.equal(result.itemCount, 0);
     const judgment = readJson(result.judgmentPath) as AssessmentJudgment;
     assert.equal(judgment.pipelineVersion, 2);
-    assert.equal(
-      validateJudgmentSchema(judgment),
-      true,
-      JSON.stringify(validateJudgmentSchema.errors),
-    );
-    for (const dimension of ["restDecisions", "downstreamDecisions"] as const) {
-      for (const decision of ["approve", "reject"] as const) {
-        const judgmentOnly = {
-          ...judgment,
-          [dimension]: [
-            { candidateId: "rest-1", decision, rationale: "Evidence checked.", severity: "medium" },
-          ],
-        };
-        assert.equal(validateJudgmentSchema(judgmentOnly), true);
-        assert.equal(
-          validateJudgmentSchema({ ...judgmentOnly, pipelineVersion: undefined }),
-          false,
-        );
-      }
-    }
+    assert.equal("sourceReview" in judgment.restDecisions[0], false);
     const state = readJson(path.join(work, "workflow-state.json")) as {
       state: string;
       judgmentArtifactHashes: Record<string, string>;
@@ -216,6 +190,24 @@ void test("materializes and freezes judgment without requiring source decisions 
   } finally {
     fs.rmSync(work, { recursive: true, force: true });
   }
+});
+
+void test("judgment schema requires source reviews only for the legacy pipeline", () => {
+  const schema = readJsonObject(
+    fileURLToPath(new URL("../scripts/assessment-judgment.schema.json", import.meta.url)),
+  ) as {
+    $defs: { decisions: { items: { required: string[] } } };
+    if: unknown;
+    then: unknown;
+  };
+  assert.notInclude(schema.$defs.decisions.items.required, "sourceReview");
+  assert.deepEqual(schema.if, { not: { required: ["pipelineVersion"] } });
+  assert.deepEqual(schema.then, {
+    properties: {
+      restDecisions: { items: { required: ["sourceReview"] } },
+      downstreamDecisions: { items: { required: ["sourceReview"] } },
+    },
+  });
 });
 
 function completedDecisions(work: string) {
