@@ -164,6 +164,7 @@ namespace Azure.AI.Projects;
 @@clientName(EvalRunResultComparison.evaluator, "EvaluatorName", "csharp");
 @@clientName(EvalRunResultComparison.metric, "MetricName", "csharp");
 @@clientName(Dimension.always_applicable, "IsAlwaysApplicable");
+@@alternateType(Dimension.weight, int32 | null);
 
 @@alternateType(EvaluationScheduleTask.evalRun, unknown, "csharp");
 
