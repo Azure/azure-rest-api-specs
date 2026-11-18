@@ -455,7 +455,7 @@ model ManagedSessionTurnCancelledEvent extends ManagedSessionEventBase {
 @example(#{
   type: "agent.session.turn.item.added",
   event_id: "evt_1",
-  session_id: "sess_1",
+  session_id: "session_1",
   item: #{ type: "reasoning", id: "item_1", turn_id: "turn_1", summary: #[] },
   raw_event: #{ provider_data: #{ value: null } },
   obfuscation: null,
