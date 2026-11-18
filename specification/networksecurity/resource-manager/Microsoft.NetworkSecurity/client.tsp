@@ -110,3 +110,95 @@ namespace NetworkSecurityManagementClient {
   "VirtualMachineARMID",
   "go"
 );
+
+@@clientName(
+  Microsoft.NetworkSecurity.Member,
+  "AgentFabricMember",
+  "csharp"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.MemberProperties,
+  "AgentFabricMemberProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.MemberTagsUpdate,
+  "AgentFabricMemberPatch",
+  "csharp"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.MemberUpdateProperties,
+  "AgentFabricMemberUpdateProperties",
+  "csharp"
+);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Microsoft.NetworkSecurity.MemberTagsUpdate.properties,
+  "csharp"
+);
+
+@@clientName(
+  Microsoft.NetworkSecurity.PolicyGroup,
+  "NetworkSecurityPolicyGroup",
+  "csharp"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.PolicyGroupProperties,
+  "NetworkSecurityPolicyGroupProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.HttpMethod,
+  "UrlFilteringHttpMethod",
+  "csharp"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.ImagePullPolicy,
+  "AgentFabricSandboxImagePullPolicy",
+  "csharp"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.PolicyAction,
+  "NetworkSecurityPolicyAction",
+  "csharp"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.PolicyDirection,
+  "NetworkSecurityPolicyDirection",
+  "csharp"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.ProvisioningState,
+  "AgentFabricProvisioningState",
+  "csharp"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.WorkloadBase,
+  "AgentFabricWorkload",
+  "csharp"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.EgressTrustBundleCertificate.notBefore,
+  "StartsOn",
+  "csharp"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.EgressTrustBundleCertificate.notAfter,
+  "ExpiresOn",
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.NetworkSecurity.AgentFabric.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.NetworkSecurity.AgentFabricTagsUpdate.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.NetworkSecurity.AgentIdentity.tenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
