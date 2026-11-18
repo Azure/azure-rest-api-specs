@@ -1408,7 +1408,10 @@ model PrivateLinkServiceConnectionState {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy desgin"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "Legacy desgin"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Legacy desgin"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Register the existing non-standard resource without changing its published payload."
 @Azure.ResourceManager.Legacy.customAzureResource
+@Azure.ResourceManager.Private.genericResourceInternal
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model AzureProxyResource {
   /**
    * The ID of the resource.
