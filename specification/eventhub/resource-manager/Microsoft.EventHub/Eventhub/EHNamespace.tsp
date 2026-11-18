@@ -98,7 +98,7 @@ interface EHNamespaces {
   @sharedRoute
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is ArmCustomPatchAsync<
     EHNamespace,
     PatchModel = EHNamespace,
     Response =
