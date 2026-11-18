@@ -1381,7 +1381,7 @@ export function materializeAssessmentResults({
       throw new Error("Agent decisions pipeline does not match the canonical model input.");
     }
     const requests = canonicalRequests(modelInput, artifacts);
-    const catalog = readComplianceCatalog();
+    const catalog = requests.length ? readComplianceCatalog() : [];
     const sourceArtifact = modelInput.artifactReferences?.sourceIndex ?? "source/source-index.json";
     const rawSourceChanges = artifacts.get(sourceArtifact.replaceAll("\\", "/"))?.sourceChanges;
     requireArray(rawSourceChanges, "Canonical source changes");
