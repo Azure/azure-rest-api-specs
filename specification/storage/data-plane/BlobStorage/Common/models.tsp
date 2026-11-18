@@ -68,6 +68,14 @@ union StorageErrorCode {
   /** Authorization failure. */
   AuthorizationFailure: "AuthorizationFailure",
 
+  /** The specified Blob Access Point configuration name was not found. */
+  @added(Versions.v2026_12_06)
+  BlobAccessPointConfigurationNameNotFound: "BlobAccessPointConfigurationNameNotFound",
+
+  /** The specified unique ID does not match the named Blob Access Point configuration. */
+  @added(Versions.v2026_12_06)
+  BlobAccessPointConfigurationUniqueIdMismatch: "BlobAccessPointConfigurationUniqueIdMismatch",
+
   /** Condition headers not supported. */
   ConditionHeadersNotSupported: "ConditionHeadersNotSupported",
 
