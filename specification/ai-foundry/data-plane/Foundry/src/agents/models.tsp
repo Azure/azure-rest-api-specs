@@ -885,12 +885,61 @@ namespace Azure.AI.Projects {
     type: AgentEndpointAuthorizationSchemeType.BotServiceTenant;
   }
 
+  @doc("""
+    Authorizes inbound Activity Protocol messages using the Autopilot's instance read policy.
+    Supported only for M365 digital workers or agents published as Autopilots, with a native Activity Protocol endpoint.
+    Configure this scheme at creation with digital_worker_type set to m365, or after Autopilot publication.
+    It must be the sole authorization scheme, without legacy activity access_boundaries.
+    Channel authentication and the project tenant check still apply. This policy does not restrict outbound messages or chat recipients.
+    """)
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[AgentDefinitionOptInKeys.digital_worker_v1_preview],
+    }
+  )
+  model AccessBoundaryAuthorizationScheme
+    extends AgentEndpointAuthorizationScheme {
+    @doc("The authorization scheme type. Always `AccessBoundary`.")
+    type: AgentEndpointAuthorizationSchemeType.AccessBoundary;
+
+    @doc("The policy for delivering inbound messages to the Autopilot. No write policy is supported.")
+    read: ReadAccessPolicy;
+  }
+
+  @doc("A conversation-independent policy for delivering inbound messages to an Autopilot.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[AgentDefinitionOptInKeys.digital_worker_v1_preview],
+    }
+  )
+  model ReadAccessPolicy {
+    @doc("""
+      The senders allowed to prompt the Autopilot. Currently, only `allowlisted` is supported in requests: it uses the instance's existing interaction allowlist,
+      which implicitly includes the instance manager. An empty array denies user messages.
+      Trusted lifecycle events are not governed by this policy. Clients must handle unrecognized values in responses.
+      """)
+    responds_to: ReadAccessResponder[];
+  }
+
+  @doc("A category of senders allowed to prompt an Autopilot. Additional values may be returned in future responses.")
+  union ReadAccessResponder {
+    string,
+
+    @doc("Uses the instance's existing interaction allowlist, including implicit manager access.")
+    allowlisted: "allowlisted",
+  }
+
   union AgentEndpointAuthorizationSchemeType {
     string,
     Entra: "Entra",
     BotService: "BotService",
     BotServiceRbac: "BotServiceRbac",
     BotServiceTenant: "BotServiceTenant",
+
+    @doc("Use the Autopilot's instance read policy to authorize inbound Activity Protocol messages.")
+    AccessBoundary: "AccessBoundary",
   }
 
   @doc("Per-protocol configuration for the agent endpoint.")
@@ -1010,6 +1059,14 @@ namespace Azure.AI.Projects {
     protocol_configuration?: ProtocolConfiguration;
 
     @doc("The authorization schemes supported by the agent endpoint")
+    @extension(
+      "x-ms-foundry-meta",
+      #{
+        conditional_previews: #[
+          AgentDefinitionOptInKeys.digital_worker_v1_preview
+        ],
+      }
+    )
     authorization_schemes?: AgentEndpointAuthorizationScheme[];
 
     @doc("The Microsoft Agent Certification review status of the Microsoft 365 store title published for this agent. Server-populated and best-effort: it is absent when the status could not be determined, and an absent value must not be interpreted as the agent not being published. No value is terminal, because publishing a new version of an agent reuses the same store title and sends it back through review.")
