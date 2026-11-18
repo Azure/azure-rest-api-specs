@@ -27,7 +27,7 @@ remain required and are displayed with their related finding links.
 ## Before starting a local assessment
 
 Check whether the user explicitly supplied or confirmed the baseline for this
-assessment. If not, your first assessment action must be to ask:
+assessment. If not, your first assessment action must be to ask exactly:
 **"Compare against origin/main, or a different branch or commit?"**
 Use the host's user-question tool when available and wait for the answer.
 Do not start preflight, compute a merge base, create work artifacts, or run
@@ -65,7 +65,7 @@ Do not substitute a `file:` URL or only return filesystem paths.
 
 ## Boundaries
 
-- V1 is standalone and opt-in: run only when the user explicitly requests an assessment or review. Do not invoke this skill from `azure-typespec-author`, or automatically before or after its authoring and validation workflow. Integration is deferred to a future version.
+- Run when the user explicitly requests an assessment or review, including an accepted post-authoring offer from `azure-typespec-author`. That workflow offers fast assessment by default after successful authoring and validation, with an explicit Skip choice. An offer alone does not authorize assessment or select its baseline. Preserve this skill's baseline confirmation, coordinator-first, read-only, and required completion rules during the handoff.
 - Run complete mode only: merge-base through `HEAD`, staged, unstaged, and relevant untracked changes.
 - Derive semantic intents from changed TypeSpec source. Use AutoRest only to map those intents to REST operations and assess REST compatibility; use TCGC only for downstream SDK analysis.
 - Check deterministic hunk coverage in `model-input.json`. Resolve only its declared `artifactReferences` and `evidenceSetId` entries when full evidence is needed. Skip inference when all hunks have candidates or explicit deterministic classifications. For `unknown` hunks only, write and validate `inference.json` before final judgment.
