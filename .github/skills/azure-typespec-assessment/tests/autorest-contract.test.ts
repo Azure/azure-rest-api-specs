@@ -472,3 +472,91 @@ void test("does not reuse mutually recursive $ref cache entries across active ca
   const maxSize = Math.max(...sizes);
   assert.ok(maxSize < minSize + 64, `expected uniform ring sizes, got ${minSize}..${maxSize}`);
 });
+
+void test("isolates normalizedRefs cache across multiple openapi.json documents and normalizes relative autorest/ paths", () => {
+  const contract = normalizeAutorestDocuments([
+    {
+      path: "service-a/openapi.json",
+      document: {
+        swagger: "2.0",
+        info: { title: "ServiceA", version: "2026-01-01" },
+        definitions: {
+          Widget: {
+            type: "object",
+            properties: { alphaOnly: { type: "string" } },
+          },
+        },
+        paths: {
+          "/alpha": {
+            get: {
+              operationId: "Alpha_Get",
+              responses: { 200: { schema: { $ref: "#/definitions/Widget" } } },
+            },
+          },
+        },
+      },
+    },
+    {
+      path: "service-b/openapi.json",
+      document: {
+        swagger: "2.0",
+        info: { title: "ServiceB", version: "2026-01-01" },
+        definitions: {
+          Widget: {
+            type: "object",
+            properties: { betaOnly: { type: "integer", format: "int32" } },
+          },
+        },
+        paths: {
+          "/beta": {
+            get: {
+              operationId: "Beta_Get",
+              responses: { 200: { schema: { $ref: "#/definitions/Widget" } } },
+            },
+          },
+        },
+      },
+    },
+    {
+      path: "autorest/preview/2026-02-01-preview/openapi.json",
+      document: {
+        swagger: "2.0",
+        info: { title: "PreviewService", version: "2026-02-01-preview" },
+        definitions: {
+          Widget: {
+            type: "object",
+            properties: { previewOnly: { type: "boolean" } },
+          },
+        },
+        paths: {
+          "/preview": {
+            get: {
+              operationId: "Preview_Get",
+              responses: { 200: { schema: { $ref: "#/definitions/Widget" } } },
+            },
+          },
+        },
+      },
+    },
+  ]);
+
+  const alpha = contract.operations.find((op) => op.operationId === "Alpha_Get");
+  const beta = contract.operations.find((op) => op.operationId === "Beta_Get");
+  const preview = contract.operations.find((op) => op.operationId === "Preview_Get");
+  assert.deepEqual(
+    alpha?.responses[0].schema?.properties?.map((prop) => prop.name),
+    ["alphaOnly"],
+  );
+  assert.deepEqual(
+    beta?.responses[0].schema?.properties?.map((prop) => prop.name),
+    ["betaOnly"],
+  );
+  assert.deepEqual(
+    preview?.responses[0].schema?.properties?.map((prop) => prop.name),
+    ["previewOnly"],
+  );
+  assert.equal(
+    preview?.responses[0].schema?.reference,
+    "preview/2026-02-01-preview/openapi.json#/definitions/Widget",
+  );
+});

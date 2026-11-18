@@ -364,6 +364,7 @@ function resolveIdentity<T extends NormalizedTcgcMethod | NormalizedTcgcNamedTyp
   factKind: "method" | "model",
   blockers: PreparationBlocker[],
   facts: Record<string, AssessmentFact>,
+  baselines: T[] = [before],
 ): IdentityResolution<T> {
   const baselineIdentity = before.crossLanguageDefinitionId;
   if (!baselineIdentity) {
@@ -381,6 +382,9 @@ function resolveIdentity<T extends NormalizedTcgcMethod | NormalizedTcgcNamedTyp
     return { status: "blocked" };
   }
 
+  const baselinePeers = baselines.filter(
+    (peer) => peer.crossLanguageDefinitionId === baselineIdentity,
+  );
   const exact = targets.filter((target) => target.crossLanguageDefinitionId === baselineIdentity);
   if (exact.length > 0) {
     const baselineGenericIdentity =
@@ -408,7 +412,6 @@ function resolveIdentity<T extends NormalizedTcgcMethod | NormalizedTcgcNamedTyp
         return { status: "blocked" };
       }
       if (
-        exact.length === 1 ||
         exact.every(
           (target) =>
             "genericInstanceIdentity" in target &&
@@ -417,7 +420,26 @@ function resolveIdentity<T extends NormalizedTcgcMethod | NormalizedTcgcNamedTyp
       ) {
         return { status: "removed" };
       }
-    } else if (exact.length === 1) {
+      addIdentityBlocker(
+        blockers,
+        facts,
+        source,
+        projectId,
+        factKind,
+        before,
+        exact,
+        "target symbol lacks generic provenance needed to compare template arguments.",
+      );
+      return { status: "blocked" };
+    } else if (
+      exact.length === 1 &&
+      baselinePeers.length === 1 &&
+      !(
+        factKind === "model" &&
+        "genericInstanceIdentity" in exact[0] &&
+        typeof exact[0].genericInstanceIdentity === "string"
+      )
+    ) {
       return { status: "matched", target: exact[0] };
     }
     addIdentityBlocker(
@@ -428,7 +450,11 @@ function resolveIdentity<T extends NormalizedTcgcMethod | NormalizedTcgcNamedTyp
       factKind,
       before,
       exact,
-      "multiple target symbols have the same crossLanguageDefinitionId.",
+      exact.length > 1
+        ? "multiple target symbols have the same crossLanguageDefinitionId."
+        : baselinePeers.length > 1
+          ? "multiple baseline symbols share the same crossLanguageDefinitionId without generic provenance."
+          : "baseline symbol lacks generic provenance needed to compare template arguments.",
     );
     return { status: "blocked" };
   }
@@ -449,13 +475,76 @@ function resolveIdentity<T extends NormalizedTcgcMethod | NormalizedTcgcNamedTyp
       ) {
         continue;
       }
-      const match = renamedTargets.get(targetIdentity) ?? { target, declarationIds: [] };
+      const match = renamedTargets.get(target.identity) ?? { target, declarationIds: [] };
       match.declarationIds.push(rename.declarationId);
-      renamedTargets.set(targetIdentity, match);
+      renamedTargets.set(target.identity, match);
     }
   }
-  if (renamedTargets.size === 1) {
-    const [{ target, declarationIds }] = [...renamedTargets.values()];
+  const matches = [...renamedTargets.values()];
+  const beforeArgs =
+    factKind === "model" && "templateArguments" in before && Array.isArray(before.templateArguments)
+      ? canonicalJson(before.templateArguments)
+      : undefined;
+  const genericRenameInvolved =
+    beforeArgs !== undefined ||
+    baselinePeers.length > 1 ||
+    matches.some(
+      ({ target }) =>
+        "genericInstanceIdentity" in target && typeof target.genericInstanceIdentity === "string",
+    );
+  if (genericRenameInvolved) {
+    if (
+      beforeArgs !== undefined &&
+      matches.length > 0 &&
+      matches.every(
+        ({ target }) => "templateArguments" in target && Array.isArray(target.templateArguments),
+      )
+    ) {
+      const argMatches = matches.filter(
+        ({ target }) =>
+          "templateArguments" in target &&
+          Array.isArray(target.templateArguments) &&
+          canonicalJson(target.templateArguments) === beforeArgs,
+      );
+      const baselineSameArgs = baselinePeers.filter(
+        (peer) =>
+          "templateArguments" in peer &&
+          Array.isArray(peer.templateArguments) &&
+          canonicalJson(peer.templateArguments) === beforeArgs,
+      );
+      if (argMatches.length === 1 && baselineSameArgs.length === 1) {
+        const [{ target, declarationIds }] = argMatches;
+        return {
+          status: "matched",
+          target,
+          evidence: {
+            basis: "typespec-renamed-from",
+            baselineIdentity,
+            targetIdentity: target.crossLanguageDefinitionId as string,
+            declarationIds: unique(declarationIds),
+          },
+        };
+      }
+      if (argMatches.length === 0) {
+        return { status: "removed" };
+      }
+    }
+    addIdentityBlocker(
+      blockers,
+      facts,
+      source,
+      projectId,
+      factKind,
+      before,
+      matches.map((item) => item.target),
+      matches.length
+        ? "explicit @renamedFrom metadata on a generic template cannot be uniquely resolved without matching template-argument provenance."
+        : "explicit @renamedFrom metadata has no uniquely matching target crossLanguageDefinitionId.",
+    );
+    return { status: "blocked" };
+  }
+  if (matches.length === 1) {
+    const [{ target, declarationIds }] = matches;
     return {
       status: "matched",
       target,
@@ -475,8 +564,8 @@ function resolveIdentity<T extends NormalizedTcgcMethod | NormalizedTcgcNamedTyp
     projectId,
     factKind,
     before,
-    [...renamedTargets.values()].map((item) => item.target),
-    renamedTargets.size
+    matches.map((item) => item.target),
+    matches.length
       ? "explicit @renamedFrom metadata maps to multiple target symbols."
       : "explicit @renamedFrom metadata has no uniquely matching target crossLanguageDefinitionId.",
   );
@@ -784,6 +873,7 @@ function compareMethods(
       "method",
       blockers,
       facts,
+      base.methods,
     );
     const symbol = before.crossLanguageDefinitionId ?? before.identity;
     if (resolution.status === "blocked") continue;
@@ -942,7 +1032,8 @@ function compareModels(
   candidates: DownstreamCandidate[],
   blockers: PreparationBlocker[],
 ) {
-  for (const before of base.models.filter((item) => item.reachable)) {
+  const reachableBaseModels = base.models.filter((item) => item.reachable);
+  for (const before of reachableBaseModels) {
     const resolution = resolveIdentity(
       before,
       current.models,
@@ -951,6 +1042,7 @@ function compareModels(
       "model",
       blockers,
       facts,
+      reachableBaseModels,
     );
     const symbol = before.crossLanguageDefinitionId ?? before.identity;
     if (resolution.status === "blocked") continue;
