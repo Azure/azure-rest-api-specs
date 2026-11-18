@@ -17784,14 +17784,8 @@
           }
         },
         "egressRouting": {
-          "type": "string",
-          "description": "The delivery route. Sandbox group lifecycle events require platform-side delivery.",
-          "enum": [
-            "Platform"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/SandboxGroupTelemetryEgressRouting",
+          "description": "The delivery route. Sandbox group lifecycle events require platform-side delivery."
         },
         "auth": {
           "$ref": "#/definitions/SandboxGroupTelemetryAuth",
@@ -18134,6 +18128,24 @@
       "required": [
         "endpoints"
       ]
+    },
+    "SandboxGroupTelemetryEgressRouting": {
+      "type": "string",
+      "description": "Supported delivery routes for sandbox lifecycle event export.",
+      "enum": [
+        "Platform"
+      ],
+      "x-ms-enum": {
+        "name": "SandboxGroupTelemetryEgressRouting",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Platform",
+            "value": "Platform",
+            "description": "Event delivery is performed by the platform."
+          }
+        ]
+      }
     },
     "SandboxGroupUserAssignedIdentityTelemetryAuth": {
       "type": "object",

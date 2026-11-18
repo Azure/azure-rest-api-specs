@@ -277,10 +277,19 @@ model SandboxGroupEventHubTelemetryEndpoint {
   data: "LifecycleEvents"[];
 
   /** The delivery route. Sandbox group lifecycle events require platform-side delivery. */
-  egressRouting: "Platform";
+  egressRouting: SandboxGroupTelemetryEgressRouting;
 
   /** Managed identity authentication for sending to the destination Event Hub. The identity must be assigned to this sandbox group and have permission to send to the Event Hub. */
   auth: SandboxGroupTelemetryAuth;
+}
+
+/** Supported delivery routes for sandbox lifecycle event export. */
+@added(Versions.v2026_11_01_preview)
+union SandboxGroupTelemetryEgressRouting {
+  /** Event delivery is performed by the platform. */
+  Platform: "Platform",
+
+  string,
 }
 
 /** Managed identity authentication for sandbox group lifecycle event export. */
