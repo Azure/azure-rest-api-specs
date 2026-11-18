@@ -58996,7 +58996,7 @@ components:
             - type: boolean
             - type: 'null'
           description: Whether compaction runs in the background. Omission and null do not imply a common harness default.
-      description: Shared compaction configuration. Copilot behavior must be qualified before accepting a setting.
+      description: Shared compaction configuration, validated against the selected harness.
     ManagedAgentDefinition:
       type: object
       required:
@@ -59014,13 +59014,13 @@ components:
           description: A model deployment compatible with the selected harness.
         harness:
           $ref: '#/components/schemas/ManagedGitHubCopilotHarness'
-          description: The platform-managed harness. Private preview supports GitHub Copilot.
+          description: Typed harness-specific configuration. Private preview supports GitHub Copilot.
         instructions:
           type: string
           description: Instructions supplied to the harness.
         reasoning:
           $ref: '#/components/schemas/ManagedAgentReasoning'
-          description: Model-supported reasoning settings.
+          description: Shared reasoning settings, validated against the selected model and harness.
         compaction:
           anyOf:
             - $ref: '#/components/schemas/ManagedAgentCompaction'
@@ -59058,13 +59058,13 @@ components:
           description: A model deployment compatible with the selected harness.
         harness:
           $ref: '#/components/schemas/ManagedGitHubCopilotHarness'
-          description: The platform-managed harness. Private preview supports GitHub Copilot.
+          description: Typed harness-specific configuration. Private preview supports GitHub Copilot.
         instructions:
           type: string
           description: Instructions supplied to the harness.
         reasoning:
           $ref: '#/components/schemas/ManagedAgentReasoning'
-          description: Model-supported reasoning settings.
+          description: Shared reasoning settings, validated against the selected model and harness.
         compaction:
           anyOf:
             - $ref: '#/components/schemas/ManagedAgentCompaction'
@@ -59085,7 +59085,9 @@ components:
           items:
             $ref: '#/components/schemas/SkillReference'
           description: Authorized versioned Foundry Skill references.
-      description: Executable fields shared by a saved Managed definition and a complete inline definition.
+      description: |-
+        Executable fields shared by a saved Managed definition and a complete inline definition.
+        Reasoning, compaction, and subagent controls are shared; other harness-specific settings belong in harness.
     ManagedAgentIdentityBlueprint:
       type: object
       required:
@@ -59160,11 +59162,6 @@ components:
         environment:
           $ref: '#/components/schemas/ManagedPlatformEnvironment'
           description: The recorded Environment selection when supplied, separate from allocation state.
-        connection_group:
-          type: array
-          items:
-            type: string
-          description: Selected project Connection IDs, without protected material.
         metadata:
           type: object
           additionalProperties:
@@ -59183,11 +59180,6 @@ components:
         environment:
           $ref: '#/components/schemas/ManagedPlatformEnvironment'
           description: Optional Environment selection. Omission is allowed; it does not inherit from the Agent or imply an allocation-mode default.
-        connection_group:
-          type: array
-          items:
-            type: string
-          description: Existing project Connection IDs, never inline credentials or a reusable Group ID.
         input:
           $ref: '#/components/schemas/ManagedSessionInput'
           description: Optional initial input. Omission submits no work. Supplied input waits for required identity and Environment readiness.
@@ -59227,13 +59219,13 @@ components:
           description: A model deployment compatible with the selected harness.
         harness:
           $ref: '#/components/schemas/ManagedGitHubCopilotHarness'
-          description: The platform-managed harness. Private preview supports GitHub Copilot.
+          description: Typed harness-specific configuration. Private preview supports GitHub Copilot.
         instructions:
           type: string
           description: Instructions supplied to the harness.
         reasoning:
           $ref: '#/components/schemas/ManagedAgentReasoning'
-          description: Model-supported reasoning settings.
+          description: Shared reasoning settings, validated against the selected model and harness.
         compaction:
           anyOf:
             - $ref: '#/components/schemas/ManagedAgentCompaction'

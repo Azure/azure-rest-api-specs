@@ -39,18 +39,21 @@ union AgentResource {
   IdentityOnlyAgentObject,
 }
 
-/** Executable fields shared by a saved Managed definition and a complete inline definition. */
+/**
+ * Executable fields shared by a saved Managed definition and a complete inline definition.
+ * Reasoning, compaction, and subagent controls are shared; other harness-specific settings belong in harness.
+ */
 model ManagedAgentExecutableConfig {
   /** A model deployment compatible with the selected harness. */
   `model`: string;
 
-  /** The platform-managed harness. Private preview supports GitHub Copilot. */
+  /** Typed harness-specific configuration. Private preview supports GitHub Copilot. */
   harness: ManagedGitHubCopilotHarness;
 
   /** Instructions supplied to the harness. */
   instructions?: string;
 
-  /** Model-supported reasoning settings. */
+  /** Shared reasoning settings, validated against the selected model and harness. */
   reasoning?: ManagedAgentReasoning;
 
   /** Shared compaction settings, subject to harness support; no shared default is implied. */
@@ -120,7 +123,7 @@ model ManagedAgentReasoning {
   effort?: string | null;
 }
 
-/** Shared compaction configuration. Copilot behavior must be qualified before accepting a setting. */
+/** Shared compaction configuration, validated against the selected harness. */
 model ManagedAgentCompaction {
   /** Whether compaction runs in the background. Omission and null do not imply a common harness default. */
   async?: boolean | null;
@@ -206,9 +209,6 @@ model ManagedAgentSessionCreateConfig {
   /** Optional Environment selection. Omission is allowed; it does not inherit from the Agent or imply an allocation-mode default. */
   environment?: ManagedPlatformEnvironment;
 
-  /** Existing project Connection IDs, never inline credentials or a reusable Group ID. */
-  connection_group?: string[];
-
   /** Optional initial input. Omission submits no work. Supplied input waits for required identity and Environment readiness. */
   input?: ManagedSessionInput;
 
@@ -262,9 +262,6 @@ model ManagedAgentSession {
 
   /** The recorded Environment selection when supplied, separate from allocation state. */
   environment?: ManagedPlatformEnvironment;
-
-  /** Selected project Connection IDs, without protected material. */
-  connection_group?: string[];
 
   /** Descriptive Session labels. */
   metadata?: Record<string>;
