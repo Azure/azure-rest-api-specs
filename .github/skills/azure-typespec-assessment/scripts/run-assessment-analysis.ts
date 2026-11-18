@@ -1821,7 +1821,7 @@ export async function runAssessmentAnalysis(options: AssessmentAnalysisOptions) 
       ),
     }),
   });
-  writeJson(path.join(output, "model-input.json"), modelInput);
+  fs.writeFileSync(path.join(output, "model-input.json"), JSON.stringify(modelInput));
   const workspace = buildAgentWorkspace({ work: output });
   return {
     status: "awaiting-agent-judgment",

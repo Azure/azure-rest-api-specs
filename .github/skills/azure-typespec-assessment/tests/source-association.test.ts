@@ -179,6 +179,35 @@ function decisions(work: string, selection: unknown[]) {
   });
 }
 
+test("source input enforces its UTF-8 byte limit on the persisted payload", (context) => {
+  const { root, write } = fixture(context);
+  const model = JSON.parse(fs.readFileSync(path.join(root, "model-input.json"), "utf8")) as {
+    facts: Record<string, Record<string, unknown>>;
+  };
+  const fact = model.facts["operation-fact"];
+  fact.annotation = "";
+  write("model-input.json", model);
+  freeze(root);
+  buildSourceAssociation({ work: root });
+  const limit = 1024 * 1024;
+  const overhead = Buffer.byteLength(JSON.stringify(input(root)));
+  const annotation = "é".repeat(Math.floor((limit - overhead - 16) / 2));
+  fact.annotation = annotation;
+  write("model-input.json", model);
+  freeze(root);
+  buildSourceAssociation({ work: root });
+  const inputPath = path.join(root, "agent-workspace", "source-association-input.json");
+  const actualBytes = fs.statSync(inputPath).size;
+  assert.ok(actualBytes <= limit);
+  assert.ok(actualBytes >= limit - 32);
+  assert.equal(input(root).facts["operation-fact"].annotation, annotation);
+
+  fact.annotation = `${annotation}${"é".repeat(32)}`;
+  write("model-input.json", model);
+  freeze(root);
+  assert.throws(() => buildSourceAssociation({ work: root }), /exceeds the 1 MiB bound/);
+});
+
 test("shared semantic owners retain per-operation project and source isolation", (context) => {
   const { root, write } = fixture(context);
   const index = JSON.parse(
