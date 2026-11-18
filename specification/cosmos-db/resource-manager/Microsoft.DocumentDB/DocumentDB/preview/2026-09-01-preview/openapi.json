@@ -16045,14 +16045,14 @@
           {
             "name": "containerName",
             "in": "path",
-            "description": "Cosmos DB global secondary index container name.",
+            "description": "Cosmos DB container name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "createUpdateSqlGlobalSecondaryIndexParameters",
             "in": "body",
-            "description": "The parameters for the SQL global secondary index container.",
+            "description": "The parameters to provide for the current SQL container.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SqlContainerCreateUpdateParameters"
@@ -16061,9 +16061,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'SqlGlobalSecondaryIndexGetResults' update operation succeeded",
+            "description": "Resource 'SqlContainerGetResults' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/SqlGlobalSecondaryIndexGetResults"
+              "$ref": "#/definitions/SqlContainerGetResults"
             }
           },
           "202": {
@@ -16099,7 +16099,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/SqlGlobalSecondaryIndexGetResults"
+          "final-state-schema": "#/definitions/SqlContainerGetResults"
         },
         "x-ms-long-running-operation": true
       }
@@ -32645,41 +32645,6 @@
         }
       ],
       "x-ms-discriminator-value": "SqlDedicatedGateway"
-    },
-    "SqlGlobalSecondaryIndexGetResults": {
-      "type": "object",
-      "description": "An Azure Cosmos DB SQL global secondary index container.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SqlContainerGetProperties",
-          "description": "The properties of an Azure Cosmos DB SQL global secondary index container."
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the resource group to which the resource belongs.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \\\"defaultExperience\\\": \\\"Cassandra\\\". Current \\\"defaultExperience\\\" values also include \\\"Table\\\", \\\"Graph\\\", \\\"DocumentDB\\\", and \\\"MongoDB\\\".",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "identity": {
-          "$ref": "#/definitions/ManagedServiceIdentity",
-          "description": "Identity for the resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
     },
     "SqlRoleAssignmentCreateUpdateParameters": {
       "type": "object",
