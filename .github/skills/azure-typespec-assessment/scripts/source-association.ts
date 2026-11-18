@@ -6,6 +6,7 @@ import { stableId } from "./stable-id.ts";
 import { restContractIdentity } from "./assessment-display.ts";
 import { verifyAssessmentRuntime, verifyRuntimePhaseProvenance } from "./assessment-runtime.ts";
 import {
+  atomicWriteFile,
   atomicWriteJson,
   comparisonIdentity,
   hashArtifacts,
@@ -501,7 +502,8 @@ export function prepareSourceAssociation({ work }: { work: string }): SourceAsso
     });
   }
   input.items.sort((a, b) => a.id.localeCompare(b.id));
-  if (Buffer.byteLength(JSON.stringify(input)) > 1024 * 1024) {
+  const serializedInput = JSON.stringify(input);
+  if (Buffer.byteLength(serializedInput) > 1024 * 1024) {
     throw new Error(
       "Source association input exceeds the 1 MiB bound; narrow proven contexts before invoking source AI.",
     );
@@ -509,7 +511,7 @@ export function prepareSourceAssociation({ work }: { work: string }): SourceAsso
   const inputPath = resolveWorkPath(root, SOURCE_ASSOCIATION_INPUT);
   const draftPath = resolveWorkPath(root, SOURCE_ASSOCIATION_DECISIONS_DRAFT);
   const decisionsPath = resolveWorkPath(root, SOURCE_ASSOCIATION_DECISIONS);
-  atomicWriteJson(inputPath, input);
+  atomicWriteFile(inputPath, serializedInput);
   atomicWriteJson(draftPath, {
     schemaVersion: 1,
     judgmentHash: input.judgmentHash,
