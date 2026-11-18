@@ -16,8 +16,7 @@ namespace Microsoft.Cdn;
 /**
  * An agent link (web agent association) within a CDN profile.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
+@added(Versions.preview)
 @parentResource(Profile)
 model ProfileAgent
   is Azure.ResourceManager.ProxyResource<ProfileAgentProperties> {
@@ -32,20 +31,17 @@ model ProfileAgent
 /**
  * Defines a ProfileAgent response body for long-running operations.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
+@added(Versions.preview)
 model ProfileAgentAcceptedBody {
   /**
    * Defines a ProfileAgent response body
    */
   @bodyRoot
-  @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
+  @added(Versions.preview)
   _: ProfileAgent;
 }
 
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
+@added(Versions.preview)
 @armResourceOperations
 interface ProfileAgents {
   /**
