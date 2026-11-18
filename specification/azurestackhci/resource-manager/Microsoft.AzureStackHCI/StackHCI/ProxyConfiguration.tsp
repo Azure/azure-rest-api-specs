@@ -36,7 +36,6 @@ interface ProxyConfigurations {
 }
 
 /** A job that mutates the proxy configuration on an edge machine. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 @added(Versions.v2027_01_15_preview)
 @parentResource(ProxyConfiguration)
 model ProxyConfigurationJob
