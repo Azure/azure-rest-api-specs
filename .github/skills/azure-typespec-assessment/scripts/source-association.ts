@@ -80,6 +80,7 @@ export type SourceAssociationResult = {
   judgmentHash: string;
   sourceIndexHash: string;
   inputHash?: string;
+  decisionHashes?: Record<string, string>;
   status: "complete" | "partial" | "not-applicable";
   reviews: Record<string, SourceReviewDecision>;
 };
@@ -836,6 +837,7 @@ export function materializeSourceAssociation({
       judgmentHash: input.judgmentHash,
       sourceIndexHash: input.sourceIndexHash,
       inputHash: sha256File(resolveWorkPath(root, SOURCE_ASSOCIATION_INPUT)),
+      decisionHashes: hashArtifacts(root, [decisions]),
       status: !input.items.length
         ? "not-applicable"
         : selections.some((selection) => selection.outcome === "unresolved")
@@ -900,6 +902,7 @@ export function loadSourceAssociation(work: string): SourceAssociationResult {
     if (
       output.status !== "not-applicable" ||
       output.inputHash !== undefined ||
+      output.decisionHashes !== undefined ||
       Object.keys(output.reviews ?? {}).length !== 0
     ) {
       throw new Error(
@@ -910,6 +913,21 @@ export function loadSourceAssociation(work: string): SourceAssociationResult {
   }
   if (output.status !== "complete" && output.status !== "partial") {
     throw new Error("Confirmed breaking findings require complete or partial source association.");
+  }
+  if (
+    !output.decisionHashes ||
+    typeof output.decisionHashes !== "object" ||
+    Array.isArray(output.decisionHashes) ||
+    Object.keys(output.decisionHashes).length !== 1 ||
+    !Object.values(output.decisionHashes).every((hash) => typeof hash === "string")
+  ) {
+    throw new Error("Missing source decision hashes; rematerialize source association.");
+  }
+  const decisionErrors = verifyArtifactHashes(root, output.decisionHashes);
+  if (decisionErrors.length) {
+    throw new Error(
+      `Source decisions changed; rematerialize source association.\n${decisionErrors.join("\n")}`,
+    );
   }
   const { input } = checkedInput(root);
   if (output.inputHash !== sha256File(resolveWorkPath(root, SOURCE_ASSOCIATION_INPUT))) {

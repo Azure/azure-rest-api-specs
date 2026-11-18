@@ -485,6 +485,33 @@ test("no approved breakings skips source AI with a validated not-applicable resu
   assert.equal(loadSourceAssociation(root).status, "not-applicable");
 });
 
+test("changed or missing source decisions require rematerialization, including custom paths", (context) => {
+  const { root } = fixture(context);
+  buildSourceAssociation({ work: root });
+  const itemId = input(root).items[0].id;
+  decisions(root, [{ itemId, outcome: "keep", selectedDeclarationIds: ["decl-operation"] }]);
+  const defaultPath = path.join(root, "agent-workspace/source-association-decisions.json");
+  const customPath = "agent-workspace/custom-source-decisions.json";
+  fs.renameSync(defaultPath, path.join(root, customPath));
+  materializeSourceAssociation({ work: root, decisions: customPath });
+  assert.equal(loadSourceAssociation(root).reviews["rest-1"].outcome, "keep");
+
+  decisions(root, [
+    {
+      itemId,
+      outcome: "unresolved",
+      selectedDeclarationIds: [],
+      rationale: "No declaration can be proven.",
+    },
+  ]);
+  fs.renameSync(defaultPath, path.join(root, customPath));
+  assert.throws(() => loadSourceAssociation(root), /Source decisions changed/);
+  materializeSourceAssociation({ work: root, decisions: customPath });
+  assert.equal(loadSourceAssociation(root).reviews["rest-1"].outcome, "unresolved");
+  fs.rmSync(path.join(root, customPath));
+  assert.throws(() => loadSourceAssociation(root), /Missing artifact/);
+});
+
 test("removed generated type uses its proven operation declarations without consumer enumeration", (context) => {
   const { root, write } = fixture(context);
   const raw = JSON.parse(
