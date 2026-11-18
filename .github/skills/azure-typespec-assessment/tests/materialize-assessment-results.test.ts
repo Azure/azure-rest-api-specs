@@ -15,7 +15,7 @@ import {
   materializeAssessmentResults,
   validateCompactDecisions,
 } from "../scripts/materialize-assessment-results.ts";
-import { readWorkflowState } from "../scripts/workflow-state.ts";
+import { readWorkflowState, transitionWorkflowState } from "../scripts/workflow-state.ts";
 
 type CatalogScore = import("../scripts/agent-decisions.schema.js").CatalogScore;
 
@@ -726,6 +726,56 @@ void test("Option A pipelineVersion 2 performs automatic >0-breaking sequential 
     );
     assert.equal(finalJson.dimensions.rest.findings[0].sourceReview?.outcome, "keep");
     assert.equal(finalJson.dimensions.rest.findings[0].displaySources?.length, 1);
+  } finally {
+    fs.rmSync(work, { recursive: true, force: true });
+  }
+});
+
+void test("normalizes relative --decisions paths and requires inference.json provenance when applicable", () => {
+  const work = fixture({ inference: true, pipelineVersion: 2 });
+  try {
+    const decisions = completedDecisions(work);
+    decisions.inferenceResults = [
+      {
+        requestId: "inference-request-1",
+        decision: "no-impact",
+        rationale: "No wire compatibility impact.",
+        candidates: [],
+      },
+    ];
+    writeJson(path.join(work, "agent-workspace", "agent-decisions.json"), decisions);
+
+    materializeAssessmentResults({
+      work,
+      decisions: ".\\agent-workspace\\agent-decisions.json",
+    });
+    const runtime = verifyAssessmentRuntime(
+      work,
+      new URL("../scripts/materialize-assessment-results.ts", import.meta.url).href,
+    );
+    const provenance = verifyRuntimePhaseProvenance(work, "materialization", runtime);
+    assert.ok(provenance.inputHashes["agent-workspace/agent-decisions.json"]);
+    assert.isUndefined(provenance.inputHashes["./agent-workspace/agent-decisions.json"]);
+    assert.ok(provenance.outputHashes["inference.json"]);
+
+    const state = readWorkflowState(work);
+    const materialization = state?.runtimePhases?.materialization;
+    assert.ok(materialization);
+    const { ["inference.json"]: _omittedInference, ...outputHashesWithoutInference } =
+      materialization.outputHashes;
+    transitionWorkflowState(work, "ready-for-finalization", {
+      runtimePhases: {
+        ...state?.runtimePhases,
+        materialization: {
+          ...materialization,
+          outputHashes: outputHashesWithoutInference,
+        },
+      },
+    });
+    assert.throws(
+      () => verifyRuntimePhaseProvenance(work, "materialization", runtime),
+      /Missing or unsupported successful materialization runtime provenance/,
+    );
   } finally {
     fs.rmSync(work, { recursive: true, force: true });
   }
