@@ -64,6 +64,8 @@ stage (`agent-workspace\source-association-input.json` ->
 `agent-workspace\source-association-decisions.json` -> `source-association.json`).
 Historical single-phase decision artifacts remain readable. Final source
 selections are joined only after both steps validate their frozen hashes.
+The source result records the decision file's content hash (including custom
+decision paths); editing or removing that file requires source rematerialization.
 The judgment schema permits REST/downstream decisions without `sourceReview`
 in pipeline 2; historical single-phase judgments still require it.
 Evidence sets retain declaration counts and canonical artifact references, not
