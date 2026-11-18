@@ -3,13 +3,14 @@ import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { Ajv2020 } from "ajv/dist/2020.js";
 import {
   verifyAssessmentRuntime,
   verifyRuntimePhaseProvenance,
 } from "../scripts/assessment-runtime.ts";
 import { buildAgentWorkspace } from "../scripts/build-agent-workspace.ts";
 import { finalizeAssessment } from "../scripts/finalize-assessment.ts";
-import { readJson, writeJson } from "../scripts/cli.ts";
+import { readJson, readJsonObject, writeJson } from "../scripts/cli.ts";
 import {
   materializeSourceReviews,
   materializeAssessmentResults,
@@ -28,6 +29,12 @@ type ComplianceSearchEvidence =
   import("../scripts/compliance-search-evidence.schema.js").TypeSpecAzureGuidelinesSearchEvidence;
 
 type AssessmentModelInput = import("../scripts/runtime-types.ts").AssessmentModelInput;
+
+const validateJudgmentSchema = new Ajv2020({ strict: false, validateFormats: false }).compile(
+  readJsonObject(
+    fileURLToPath(new URL("../scripts/assessment-judgment.schema.json", import.meta.url)),
+  ),
+);
 
 type TestAgentDecisions = {
   catalogScores: CatalogScore[];
@@ -174,6 +181,26 @@ void test("materializes and freezes judgment without requiring source decisions 
     assert.equal(result.itemCount, 0);
     const judgment = readJson(result.judgmentPath) as AssessmentJudgment;
     assert.equal(judgment.pipelineVersion, 2);
+    assert.equal(
+      validateJudgmentSchema(judgment),
+      true,
+      JSON.stringify(validateJudgmentSchema.errors),
+    );
+    for (const dimension of ["restDecisions", "downstreamDecisions"] as const) {
+      for (const decision of ["approve", "reject"] as const) {
+        const judgmentOnly = {
+          ...judgment,
+          [dimension]: [
+            { candidateId: "rest-1", decision, rationale: "Evidence checked.", severity: "medium" },
+          ],
+        };
+        assert.equal(validateJudgmentSchema(judgmentOnly), true);
+        assert.equal(
+          validateJudgmentSchema({ ...judgmentOnly, pipelineVersion: undefined }),
+          false,
+        );
+      }
+    }
     const state = readJson(path.join(work, "workflow-state.json")) as {
       state: string;
       judgmentArtifactHashes: Record<string, string>;

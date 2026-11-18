@@ -733,6 +733,73 @@ void test("model input bounds repeated review evidence and retains downstream fa
   );
 });
 
+void test("model input does not repeat project-wide declarations for each REST candidate", () => {
+  const declarationIds = Array.from(
+    { length: 400 },
+    (_, index) => `declaration-${String(index).padStart(16, "0")}`,
+  );
+  const candidates = Array.from({ length: 150 }, (_, index) => ({
+    id: `rest-${index}`,
+    rule: "operation-removed",
+    actual: "Operation removed.",
+    expected: "Preserve operation.",
+    operationIds: [`Widgets_${index}`],
+    sourceChangeIds: ["source-1"],
+    hunkIds: ["hunk-1"],
+    declarationIds,
+    evidenceFactIds: [`rest-fact-${index}`],
+    reviewRequired: true,
+  }));
+  const input = buildModelInputFromFixture({
+    manifest: {
+      comparison: { mergeBaseCommit: "base", headCommit: "head", workingTree: {} },
+      projects: [{ id: "p", path: "specification/widget" }],
+      blockers: [],
+    },
+    sourceIndex: {
+      sourceChanges: [
+        {
+          id: "source-1",
+          path: "main.tsp",
+          hunks: [],
+          declarations: declarationIds.map((id) => ({
+            id,
+            kind: "model",
+            qualifiedName: id,
+            hunkIds: ["hunk-1"],
+          })),
+        },
+      ],
+    },
+    semantic: { status: "ready", facts: {}, reviewUnits: [], blockers: [] },
+    rest: {
+      status: "ready",
+      facts: Object.fromEntries(
+        candidates.map((candidate, index) => [
+          candidate.evidenceFactIds[0],
+          {
+            id: candidate.evidenceFactIds[0],
+            projectId: "p",
+            comparisonRole: "baseline",
+            operationId: `Widgets_${index}`,
+          },
+        ]),
+      ),
+      candidates,
+      blockers: [],
+    },
+    downstream: { status: "ready", facts: {}, candidates: [], rootCauses: [], blockers: [] },
+  });
+  assert.equal(input.restCandidates.length, 150);
+  assert.equal(Object.keys(input.evidenceSets).length, 150);
+  assert.ok(Buffer.byteLength(JSON.stringify(input)) < 200_000);
+  for (const evidence of Object.values(input.evidenceSets)) {
+    assert.equal(evidence.declarationCount, 400);
+    assert.equal(evidence.declarationIds, undefined);
+    assert.ok(evidence.evidenceRef);
+  }
+});
+
 void test("model input retains downstream method and bridge path facts", () => {
   const facts = Object.fromEntries(
     ["method", "wrapper", "type"].map((name) => [

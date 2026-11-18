@@ -185,13 +185,20 @@
       }
     }
   },
+  "if": { "not": { "required": ["pipelineVersion"] } },
+  "then": {
+    "properties": {
+      "restDecisions": { "items": { "required": ["sourceReview"] } },
+      "downstreamDecisions": { "items": { "required": ["sourceReview"] } }
+    }
+  },
   "$defs": {
     "decisions": {
       "type": "array",
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["candidateId", "decision", "rationale", "sourceReview"],
+        "required": ["candidateId", "decision", "rationale"],
         "properties": {
           "candidateId": {
             "type": "string"
