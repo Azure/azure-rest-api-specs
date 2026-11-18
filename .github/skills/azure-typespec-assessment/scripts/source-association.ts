@@ -347,7 +347,17 @@ export function prepareSourceAssociation({ work }: { work: string }): SourceAsso
             unit.projectId === fact.projectId ||
             unit.projectIds?.includes(fact.projectId),
         )
-        .flatMap((unit) => unit.operations ?? [])
+        .flatMap((unit) =>
+          (unit.operations ?? []).filter(
+            (operation) =>
+              !fact?.projectId ||
+              operation.projectId === fact.projectId ||
+              (!operation.projectId &&
+                unit.projectId === fact.projectId &&
+                (!unit.projectIds?.length ||
+                  unit.projectIds.every((projectId) => projectId === fact.projectId))),
+          ),
+        )
         .filter((operation) => candidate.operationIds?.includes(operation.operationId));
       const operationSources = new Set(
         operations.flatMap((operation) => operation.sourceChangeIds),

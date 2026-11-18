@@ -27,6 +27,7 @@ function freeze(root: string) {
     new URL("../scripts/source-association.ts", import.meta.url).href,
   );
   atomicWriteJson(path.join(root, "agent-workspace/agent-index.json"), { runtime });
+  atomicWriteJson(path.join(root, "agent-workspace/agent-decisions.json"), {});
   atomicWriteJson(path.join(root, "compliance-search-evidence.json"), {});
   transitionWorkflowState(root, "judgment-materialized", {
     runtime,
@@ -42,7 +43,7 @@ function freeze(root: string) {
       materialization: createRuntimePhaseProvenance(
         root,
         runtime,
-        ["agent-workspace/agent-index.json"],
+        ["agent-workspace/agent-index.json", "agent-workspace/agent-decisions.json"],
         ["assessment-judgment.json", "compliance-search-evidence.json"],
       ),
     },
@@ -177,6 +178,52 @@ function decisions(work: string, selection: unknown[]) {
     selections: selection,
   });
 }
+
+test("shared semantic owners retain per-operation project and source isolation", (context) => {
+  const { root, write } = fixture(context);
+  const index = JSON.parse(
+    fs.readFileSync(path.join(root, "source/source-index.json"), "utf8"),
+  ) as {
+    sourceChanges: { declarations: { kind: string; qualifiedName: string }[] }[];
+  };
+  index.sourceChanges[1].declarations[1].kind = "operation";
+  write("source/source-index.json", index);
+  write("dimensions/semantic-intents-input.json", {
+    reviewUnits: [
+      {
+        projectId: "other-project",
+        projectIds: ["project", "other-project"],
+        operations: [
+          {
+            projectId: "project",
+            operationId: "Service_Update",
+            sourceChangeIds: ["source-op"],
+            hunkIds: ["hunk-op"],
+          },
+          {
+            projectId: "other-project",
+            operationId: "Service_Update",
+            sourceChangeIds: ["source-unrelated"],
+            hunkIds: ["hunk-op"],
+          },
+        ],
+      },
+    ],
+  });
+  freeze(root);
+  buildSourceAssociation({ work: root });
+  const source = input(root);
+  assert.deepEqual(source.items[0].allowedSourceChangeIds, ["source-op"]);
+  assert.deepEqual(source.items[0].proposal.declarationIds, ["decl-operation"]);
+  assert.deepEqual(
+    querySourceAssociation({
+      work: root,
+      itemId: source.items[0].id,
+      qualifiedName: "Unrelated1",
+    }).declarations,
+    [],
+  );
+});
 
 test("REST source ownership uses canonical schemas, not lossy compact summaries", (context) => {
   const { root, write } = fixture(context);

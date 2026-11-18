@@ -10,7 +10,7 @@ export type Decisions = {
   decision: "approve" | "reject";
   severity?: "high" | "medium" | "low";
   rationale: string;
-  sourceReview: {
+  sourceReview?: {
     outcome: "keep" | "refine" | "associate" | "unresolved" | "not-applicable";
     selectedDeclarations: {
       declarationId: string;
