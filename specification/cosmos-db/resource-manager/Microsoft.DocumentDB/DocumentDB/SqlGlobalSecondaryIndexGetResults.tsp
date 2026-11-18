@@ -26,10 +26,10 @@ model SqlGlobalSecondaryIndexRoute is ProxyResource<SqlContainerGetProperties> {
 @added(Versions.v2026_09_01_preview)
 @armResourceOperations(#{ omitTags: true })
 interface SqlGlobalSecondaryIndexGetResultsOperationGroup {
-  /** Creates or updates an Azure Cosmos DB SQL global secondary index container. */
+  /** Creates an Azure Cosmos DB SQL global secondary index container. Container updates are not supported. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "This endpoint reuses the SQL container PUT contract, including its 200 and 202 responses."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "The resource model supplies only the alternate route; the response intentionally reuses SqlContainerGetResults."
-  createUpdateSqlGlobalSecondaryIndex is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
+  createSqlGlobalSecondaryIndex is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlGlobalSecondaryIndexRoute,
     Request = SqlContainerCreateUpdateParameters,
     Response =
@@ -41,6 +41,6 @@ interface SqlGlobalSecondaryIndexGetResultsOperationGroup {
 
 @@doc(SqlGlobalSecondaryIndexRoute.name, "Cosmos DB container name.");
 @@doc(
-  SqlGlobalSecondaryIndexGetResultsOperationGroup.createUpdateSqlGlobalSecondaryIndex::parameters.resource,
+  SqlGlobalSecondaryIndexGetResultsOperationGroup.createSqlGlobalSecondaryIndex::parameters.resource,
   "The parameters to provide for the current SQL container."
 );

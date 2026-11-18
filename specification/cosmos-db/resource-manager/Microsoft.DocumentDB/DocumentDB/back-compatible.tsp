@@ -482,12 +482,12 @@ using Microsoft.DocumentDB;
   SqlResources
 );
 @@clientLocation(
-  SqlGlobalSecondaryIndexGetResultsOperationGroup.createUpdateSqlGlobalSecondaryIndex,
+  SqlGlobalSecondaryIndexGetResultsOperationGroup.createSqlGlobalSecondaryIndex,
   SqlResources
 );
 @@clientName(
-  SqlGlobalSecondaryIndexGetResultsOperationGroup.createUpdateSqlGlobalSecondaryIndex::parameters.resource,
-  "createUpdateSqlGlobalSecondaryIndexParameters"
+  SqlGlobalSecondaryIndexGetResultsOperationGroup.createSqlGlobalSecondaryIndex::parameters.resource,
+  "createSqlGlobalSecondaryIndexParameters"
 );
 @@clientLocation(
   SqlContainerGetResultsOperationGroup.listSqlContainers,
