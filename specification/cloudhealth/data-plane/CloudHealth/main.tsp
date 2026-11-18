@@ -946,6 +946,12 @@ model HealthReportPayload {
   @doc("Name of the entity signal to report health for. An unknown name creates an external signal instance.")
   signalName: signalName;
 
+  @added(Versions.v2026_10_01_preview)
+  @doc("Display name of the entity signal to report health for")
+  @minLength(1)
+  @maxLength(260)
+  displayName?: string;
+
   @doc("Authoritative health state reported by the submitter. The service does not recalculate it from the reported value or evaluation rules.")
   healthState: HealthState;
 

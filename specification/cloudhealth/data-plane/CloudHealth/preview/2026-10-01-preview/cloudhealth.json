@@ -2315,6 +2315,12 @@
           "$ref": "#/definitions/signalName",
           "description": "Name of the entity signal to report health for. An unknown name creates an external signal instance."
         },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the entity signal to report health for",
+          "minLength": 1,
+          "maxLength": 260
+        },
         "healthState": {
           "$ref": "#/definitions/HealthState",
           "description": "Authoritative health state reported by the submitter. The service does not recalculate it from the reported value or evaluation rules."
