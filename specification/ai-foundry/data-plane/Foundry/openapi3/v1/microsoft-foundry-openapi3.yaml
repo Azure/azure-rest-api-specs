@@ -4240,188 +4240,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Voice Conversation Engine
-  /agents/{agent_name}/endpoint/sessions:
-    post:
-      operationId: Agents_createSession
-      summary: Create a session
-      description: |-
-        Creates a new session for an agent endpoint.
-        Hosted keeps its existing version_indicator request and response.
-        Managed resolves the endpoint's configured version and validates the complete definition
-        from that version or the Session according to definition_source, without a merge or request selector.
-        Managed creation returns the Session with 201; Environment preparation and turns can proceed asynchronously.
-        Managed requests use existing endpoint interact/action authorization and enforce creator isolation.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ManagedAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent to create a session for.
-          schema:
-            type: string
-        - name: Idempotency-Key
-          in: header
-          required: false
-          description: Optional for Managed creation. An identical keyed retry returns the original result and resolved version; changed input conflicts. Without a key, deduplication is not guaranteed. Hosted behavior is unchanged.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '201':
-          description: The existing 201 Session-create response with the Hosted or Managed body.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentSession'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Sessions
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AgentSessionCreateContent'
-        description: The owning Agent's definition kind selects Hosted or Managed validation, not a new Session-body discriminator.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - ManagedAgents=V1Preview
-    get:
-      operationId: Agents_listSessions
-      summary: List sessions for an agent
-      description: |-
-        Returns a paged collection of sessions associated with the specified agent endpoint.
-        Managed uses the existing endpoint interact/action permission and filters every result to the creator.
-        The Agent's definition kind selects the Hosted or Managed response; existing Hosted paging is unchanged.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ManagedAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/AgentSession'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Sessions
-      x-ms-foundry-meta:
-        conditional_previews:
-          - ManagedAgents=V1Preview
   /agents/{agent_name}/endpoint/sessions/{agent_session_id}/files:
     get:
       operationId: AgentSessionFiles_listSessionFiles
@@ -4690,960 +4508,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Session Files
-  /agents/{agent_name}/endpoint/sessions/{session_id}:
-    get:
-      operationId: Agents_getSession
-      summary: Get a session
-      description: |-
-        Retrieves a Hosted or Managed Session by Agent name and its opaque identifier.
-        Managed requires existing endpoint interact/action authorization and creator isolation.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ManagedAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: session_id
-          in: path
-          required: true
-          description: The session identifier.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentSession'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Sessions
-      x-ms-foundry-meta:
-        conditional_previews:
-          - ManagedAgents=V1Preview
-    delete:
-      operationId: Agents_deleteSession
-      summary: Delete a session
-      description: |-
-        Deletes a session synchronously.
-        Returns 204 No Content when the session is deleted or does not exist.
-      parameters:
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: session_id
-          in: path
-          required: true
-          description: The session identifier.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '204':
-          description: There is no content to send for this request, but the headers may be useful.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Sessions
-  /agents/{agent_name}/endpoint/sessions/{session_id}/events:
-    post:
-      operationId: Agents_createSessionEvents
-      summary: Submit session events
-      description: |-
-        Submits client events to a Managed Session and returns ordered admission receipts, not completed work.
-        A message starts a root turn when idle or steers the active root turn.
-        Cancellation targets the root turn active at acceptance; closing an event stream does not cancel it.
-        Uses existing endpoint interact/action authorization and service-side creator isolation for every event.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ManagedAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The owning Agent's project-local name.
-          schema:
-            type: string
-        - name: session_id
-          in: path
-          required: true
-          description: The opaque Session identifier.
-          schema:
-            type: string
-        - name: Idempotency-Key
-          in: header
-          required: false
-          description: |-
-            Optional key scoped to caller, project, and this route. An identical keyed retry returns the
-            original receipts; a different body under the same retained key conflicts with 409.
-            No retention duration or exactly-once external effects are implied. Without a key, deduplication
-            is not guaranteed.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '202':
-          description: The accepted event-submission response. This is not a long-running-operation polling resource.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ManagedSessionEventReceipts'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Sessions
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ManagedSessionSubmitEventsContent'
-        description: A nonempty batch of messages, cancellation, function results, or approval responses.
-      x-ms-foundry-meta:
-        required_previews:
-          - ManagedAgents=V1Preview
-    get:
-      operationId: Agents_streamSessionEvents
-      summary: Stream session events
-      description: |-
-        Streams live Managed Session events as SSE. This is not a durable event list or replay API.
-        No Last-Event-ID or sequence cursor is accepted. Reconnect by buffering a new stream and
-        reconciling Session, turn, and item snapshots. Text deltas are previews, not authoritative history.
-        Uses existing endpoint interact/action authorization and service-side creator isolation.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ManagedAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The owning Agent's project-local name.
-          schema:
-            type: string
-        - name: session_id
-          in: path
-          required: true
-          description: The opaque Session identifier.
-          schema:
-            type: string
-        - name: include_obfuscation
-          in: query
-          required: false
-          description: Whether events may include random obfuscation padding on this connection.
-          schema:
-            type: boolean
-            default: true
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            text/event-stream:
-              itemSchema:
-                type: object
-                properties:
-                  event:
-                    type: string
-                  data:
-                    type: string
-                required:
-                  - event
-                oneOf:
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionCreatedEvent'
-                      event:
-                        const: agent.session.created
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionIdleEvent'
-                      event:
-                        const: agent.session.idle
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionInProgressEvent'
-                      event:
-                        const: agent.session.in_progress
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionRequiresActionEvent'
-                      event:
-                        const: agent.session.requires_action
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionFailedEvent'
-                      event:
-                        const: agent.session.failed
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionTurnCreatedEvent'
-                      event:
-                        const: agent.session.turn.created
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionTurnInProgressEvent'
-                      event:
-                        const: agent.session.turn.in_progress
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionTurnCompletedEvent'
-                      event:
-                        const: agent.session.turn.completed
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionTurnFailedEvent'
-                      event:
-                        const: agent.session.turn.failed
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionTurnCancelledEvent'
-                      event:
-                        const: agent.session.turn.cancelled
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionItemAddedEvent'
-                      event:
-                        const: agent.session.turn.item.added
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionItemDoneEvent'
-                      event:
-                        const: agent.session.turn.item.done
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionContentPartAddedEvent'
-                      event:
-                        const: agent.session.turn.content_part.added
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionContentPartDoneEvent'
-                      event:
-                        const: agent.session.turn.content_part.done
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionOutputTextDeltaEvent'
-                      event:
-                        const: agent.session.turn.output_text.delta
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionOutputTextDoneEvent'
-                      event:
-                        const: agent.session.turn.output_text.done
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionReasoningSummaryPartAddedEvent'
-                      event:
-                        const: agent.session.turn.reasoning_summary_part.added
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionReasoningSummaryPartDoneEvent'
-                      event:
-                        const: agent.session.turn.reasoning_summary_part.done
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionReasoningSummaryTextDeltaEvent'
-                      event:
-                        const: agent.session.turn.reasoning_summary_text.delta
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionReasoningSummaryTextDoneEvent'
-                      event:
-                        const: agent.session.turn.reasoning_summary_text.done
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionCommandExecutionOutputDeltaEvent'
-                      event:
-                        const: agent.output.command_execution_output.delta
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionEnvironmentPendingEvent'
-                      event:
-                        const: agent.session.environment.pending
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionEnvironmentReadyEvent'
-                      event:
-                        const: agent.session.environment.ready
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionEnvironmentConnectedEvent'
-                      event:
-                        const: agent.session.environment.connected
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionEnvironmentDisconnectedEvent'
-                      event:
-                        const: agent.session.environment.disconnected
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionEnvironmentSuspendedEvent'
-                      event:
-                        const: agent.session.environment.suspended
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionEnvironmentExpiredEvent'
-                      event:
-                        const: agent.session.environment.expired
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionEnvironmentFailedEvent'
-                      event:
-                        const: agent.session.environment.failed
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionEnvironmentResetEvent'
-                      event:
-                        const: agent.session.environment.reset
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionSubagentCreatedEvent'
-                      event:
-                        const: agent.session.subagent.created
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionSubagentActiveEvent'
-                      event:
-                        const: agent.session.subagent.active
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionSubagentClosedEvent'
-                      event:
-                        const: agent.session.subagent.closed
-                  - properties:
-                      data:
-                        contentMediaType: application/json
-                        contentSchema:
-                          $ref: '#/components/schemas/ManagedSessionErrorEvent'
-                      event:
-                        const: error
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Sessions
-      x-ms-foundry-meta:
-        required_previews:
-          - ManagedAgents=V1Preview
-  /agents/{agent_name}/endpoint/sessions/{session_id}/items:
-    get:
-      operationId: Agents_listSessionItems
-      summary: List session items
-      description: |-
-        Lists typed Session history. This does not provide an audit log of every runtime event.
-        Uses existing endpoint interact/action authorization and service-side creator isolation.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ManagedAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The owning Agent's project-local name.
-          schema:
-            type: string
-        - name: session_id
-          in: path
-          required: true
-          description: The opaque Session identifier.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/ManagedSessionItem'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Sessions
-      x-ms-foundry-meta:
-        required_previews:
-          - ManagedAgents=V1Preview
-  /agents/{agent_name}/endpoint/sessions/{session_id}/turns:
-    get:
-      operationId: Agents_listSessionTurns
-      summary: List session turns
-      description: |-
-        Lists saved turns without inferring completion from transient stream events.
-        Uses existing endpoint interact/action authorization and service-side creator isolation.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ManagedAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The owning Agent's project-local name.
-          schema:
-            type: string
-        - name: session_id
-          in: path
-          required: true
-          description: The opaque Session identifier.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/ManagedSessionTurn'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Sessions
-      x-ms-foundry-meta:
-        required_previews:
-          - ManagedAgents=V1Preview
-  /agents/{agent_name}/endpoint/sessions/{session_id}/turns/{turn_id}:
-    get:
-      operationId: Agents_getSessionTurn
-      summary: Get a session turn
-      description: |-
-        Retrieves a saved turn and its recorded status, usage, and error.
-        Uses existing endpoint interact/action authorization and service-side creator isolation.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ManagedAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The owning Agent's project-local name.
-          schema:
-            type: string
-        - name: session_id
-          in: path
-          required: true
-          description: The opaque Session identifier.
-          schema:
-            type: string
-        - name: turn_id
-          in: path
-          required: true
-          description: The requested turn identifier.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ManagedSessionTurn'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Sessions
-      x-ms-foundry-meta:
-        required_previews:
-          - ManagedAgents=V1Preview
-  /agents/{agent_name}/endpoint/sessions/{session_id}/turns/{turn_id}/items:
-    get:
-      operationId: Agents_listSessionTurnItems
-      summary: List turn items
-      description: |-
-        Lists typed saved items for one turn, preserving the full upstream item payloads.
-        Uses existing endpoint interact/action authorization and service-side creator isolation.
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - ManagedAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The owning Agent's project-local name.
-          schema:
-            type: string
-        - name: session_id
-          in: path
-          required: true
-          description: The opaque Session identifier.
-          schema:
-            type: string
-        - name: turn_id
-          in: path
-          required: true
-          description: The requested turn identifier.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/ManagedSessionItem'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Sessions
-      x-ms-foundry-meta:
-        required_previews:
-          - ManagedAgents=V1Preview
-  /agents/{agent_name}/endpoint/sessions/{session_id}:stop:
-    post:
-      operationId: Agents_stopSession
-      summary: Stop a session
-      description: Terminates the specified hosted agent session and returns 204 No Content when the request succeeds.
-      parameters:
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: session_id
-          in: path
-          required: true
-          description: The session identifier.
-          schema:
-            type: string
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '204':
-          description: There is no content to send for this request, but the headers may be useful.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Sessions
   /agents/{agent_name}/import:
     post:
       operationId: Agents_updateAgentFromManifest
@@ -8335,6 +7199,1142 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agents
+  /agents/{name}/endpoint/sessions:
+    post:
+      operationId: Agents_createSession
+      summary: Create a session
+      description: |-
+        Creates a new session for an agent endpoint.
+        Hosted keeps its existing version_indicator request and response.
+        Managed resolves the endpoint's configured version and validates the complete definition
+        from that version or the Session according to definition_source, without a merge or request selector.
+        Managed creation returns the Session with 201; Environment preparation and turns can proceed asynchronously.
+        Managed requests use existing endpoint interact/action authorization and enforce creator isolation.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - ManagedAgents=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the agent to create a session for.
+          schema:
+            type: string
+        - name: Idempotency-Key
+          in: header
+          required: false
+          description: Optional for Managed creation. An identical keyed retry returns the original result and resolved version; changed input conflicts. Without a key, deduplication is not guaranteed. Hosted behavior is unchanged.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '201':
+          description: The existing 201 Session-create response with the Hosted or Managed body.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentSession'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Sessions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentSessionCreateContent'
+        description: The owning Agent's definition kind selects Hosted or Managed validation, not a new Session-body discriminator.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - ManagedAgents=V1Preview
+    get:
+      operationId: Agents_listSessions
+      summary: List sessions for an agent
+      description: |-
+        Returns a paged collection of sessions associated with the specified agent endpoint.
+        Managed uses the existing endpoint interact/action permission and filters every result to the creator.
+        The Agent's definition kind selects the Hosted or Managed response; existing Hosted paging is unchanged.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - ManagedAgents=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AgentSession'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Sessions
+      x-ms-foundry-meta:
+        conditional_previews:
+          - ManagedAgents=V1Preview
+  /agents/{name}/endpoint/sessions/{session_name}:
+    get:
+      operationId: Agents_getSession
+      summary: Get a session
+      description: |-
+        Retrieves a Hosted or Managed Session by Agent name and its opaque identifier.
+        Managed requires existing endpoint interact/action authorization and creator isolation.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - ManagedAgents=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: session_name
+          in: path
+          required: true
+          description: The session identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentSession'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Sessions
+      x-ms-foundry-meta:
+        conditional_previews:
+          - ManagedAgents=V1Preview
+    delete:
+      operationId: Agents_deleteSession
+      summary: Delete a session
+      description: |-
+        Deletes a session synchronously.
+        Returns 204 No Content when the session is deleted or does not exist.
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: session_name
+          in: path
+          required: true
+          description: The session identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Sessions
+  /agents/{name}/endpoint/sessions/{session_name}/events:
+    post:
+      operationId: Agents_createSessionEvents
+      summary: Submit session events
+      description: |-
+        Submits client events to a Managed Session and returns ordered admission receipts, not completed work.
+        A message starts a root turn when idle or steers the active root turn.
+        Cancellation targets the root turn active at acceptance; closing an event stream does not cancel it.
+        Uses existing endpoint interact/action authorization and service-side creator isolation for every event.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - ManagedAgents=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The owning Agent's project-local name.
+          schema:
+            type: string
+        - name: session_name
+          in: path
+          required: true
+          description: The opaque Session identifier.
+          schema:
+            type: string
+        - name: Idempotency-Key
+          in: header
+          required: false
+          description: |-
+            Optional key scoped to caller, project, and this route. An identical keyed retry returns the
+            original receipts; a different body under the same retained key conflicts with 409.
+            No retention duration or exactly-once external effects are implied. Without a key, deduplication
+            is not guaranteed.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '202':
+          description: The accepted event-submission response. This is not a long-running-operation polling resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagedSessionEventReceipts'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Sessions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManagedSessionSubmitEventsContent'
+        description: A nonempty batch of messages, cancellation, function results, or approval responses.
+      x-ms-foundry-meta:
+        required_previews:
+          - ManagedAgents=V1Preview
+    get:
+      operationId: Agents_streamSessionEvents
+      summary: Stream session events
+      description: |-
+        Streams live Managed Session events as SSE. This is not a durable event list or replay API.
+        No Last-Event-ID or sequence cursor is accepted. Reconnect by buffering a new stream and
+        reconciling Session, turn, and item snapshots. Text deltas are previews, not authoritative history.
+        Uses existing endpoint interact/action authorization and service-side creator isolation.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - ManagedAgents=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The owning Agent's project-local name.
+          schema:
+            type: string
+        - name: session_name
+          in: path
+          required: true
+          description: The opaque Session identifier.
+          schema:
+            type: string
+        - name: include_obfuscation
+          in: query
+          required: false
+          description: Whether events may include random obfuscation padding on this connection.
+          schema:
+            type: boolean
+            default: true
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            text/event-stream:
+              itemSchema:
+                type: object
+                properties:
+                  event:
+                    type: string
+                  data:
+                    type: string
+                required:
+                  - event
+                oneOf:
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionCreatedEvent'
+                      event:
+                        const: agent.session.created
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionIdleEvent'
+                      event:
+                        const: agent.session.idle
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionInProgressEvent'
+                      event:
+                        const: agent.session.in_progress
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionRequiresActionEvent'
+                      event:
+                        const: agent.session.requires_action
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionFailedEvent'
+                      event:
+                        const: agent.session.failed
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionTurnCreatedEvent'
+                      event:
+                        const: agent.session.turn.created
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionTurnInProgressEvent'
+                      event:
+                        const: agent.session.turn.in_progress
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionTurnCompletedEvent'
+                      event:
+                        const: agent.session.turn.completed
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionTurnFailedEvent'
+                      event:
+                        const: agent.session.turn.failed
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionTurnCancelledEvent'
+                      event:
+                        const: agent.session.turn.cancelled
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionItemAddedEvent'
+                      event:
+                        const: agent.session.turn.item.added
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionItemDoneEvent'
+                      event:
+                        const: agent.session.turn.item.done
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionContentPartAddedEvent'
+                      event:
+                        const: agent.session.turn.content_part.added
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionContentPartDoneEvent'
+                      event:
+                        const: agent.session.turn.content_part.done
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionOutputTextDeltaEvent'
+                      event:
+                        const: agent.session.turn.output_text.delta
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionOutputTextDoneEvent'
+                      event:
+                        const: agent.session.turn.output_text.done
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionReasoningSummaryPartAddedEvent'
+                      event:
+                        const: agent.session.turn.reasoning_summary_part.added
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionReasoningSummaryPartDoneEvent'
+                      event:
+                        const: agent.session.turn.reasoning_summary_part.done
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionReasoningSummaryTextDeltaEvent'
+                      event:
+                        const: agent.session.turn.reasoning_summary_text.delta
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionReasoningSummaryTextDoneEvent'
+                      event:
+                        const: agent.session.turn.reasoning_summary_text.done
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionCommandExecutionOutputDeltaEvent'
+                      event:
+                        const: agent.output.command_execution_output.delta
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionEnvironmentPendingEvent'
+                      event:
+                        const: agent.session.environment.pending
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionEnvironmentReadyEvent'
+                      event:
+                        const: agent.session.environment.ready
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionEnvironmentConnectedEvent'
+                      event:
+                        const: agent.session.environment.connected
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionEnvironmentDisconnectedEvent'
+                      event:
+                        const: agent.session.environment.disconnected
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionEnvironmentSuspendedEvent'
+                      event:
+                        const: agent.session.environment.suspended
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionEnvironmentExpiredEvent'
+                      event:
+                        const: agent.session.environment.expired
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionEnvironmentFailedEvent'
+                      event:
+                        const: agent.session.environment.failed
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionEnvironmentResetEvent'
+                      event:
+                        const: agent.session.environment.reset
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionSubagentCreatedEvent'
+                      event:
+                        const: agent.session.subagent.created
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionSubagentActiveEvent'
+                      event:
+                        const: agent.session.subagent.active
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionSubagentClosedEvent'
+                      event:
+                        const: agent.session.subagent.closed
+                  - properties:
+                      data:
+                        contentMediaType: application/json
+                        contentSchema:
+                          $ref: '#/components/schemas/ManagedSessionErrorEvent'
+                      event:
+                        const: error
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Sessions
+      x-ms-foundry-meta:
+        required_previews:
+          - ManagedAgents=V1Preview
+  /agents/{name}/endpoint/sessions/{session_name}/items:
+    get:
+      operationId: Agents_listSessionItems
+      summary: List session items
+      description: |-
+        Lists typed Session history. This does not provide an audit log of every runtime event.
+        Uses existing endpoint interact/action authorization and service-side creator isolation.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - ManagedAgents=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The owning Agent's project-local name.
+          schema:
+            type: string
+        - name: session_name
+          in: path
+          required: true
+          description: The opaque Session identifier.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ManagedSessionItem'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Sessions
+      x-ms-foundry-meta:
+        required_previews:
+          - ManagedAgents=V1Preview
+  /agents/{name}/endpoint/sessions/{session_name}/turns:
+    get:
+      operationId: Agents_listSessionTurns
+      summary: List session turns
+      description: |-
+        Lists saved turns without inferring completion from transient stream events.
+        Uses existing endpoint interact/action authorization and service-side creator isolation.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - ManagedAgents=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The owning Agent's project-local name.
+          schema:
+            type: string
+        - name: session_name
+          in: path
+          required: true
+          description: The opaque Session identifier.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ManagedSessionTurn'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Sessions
+      x-ms-foundry-meta:
+        required_previews:
+          - ManagedAgents=V1Preview
+  /agents/{name}/endpoint/sessions/{session_name}/turns/{turn_id}:
+    get:
+      operationId: Agents_getSessionTurn
+      summary: Get a session turn
+      description: |-
+        Retrieves a saved turn and its recorded status, usage, and error.
+        Uses existing endpoint interact/action authorization and service-side creator isolation.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - ManagedAgents=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The owning Agent's project-local name.
+          schema:
+            type: string
+        - name: session_name
+          in: path
+          required: true
+          description: The opaque Session identifier.
+          schema:
+            type: string
+        - name: turn_id
+          in: path
+          required: true
+          description: The requested turn identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManagedSessionTurn'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Sessions
+      x-ms-foundry-meta:
+        required_previews:
+          - ManagedAgents=V1Preview
+  /agents/{name}/endpoint/sessions/{session_name}/turns/{turn_id}/items:
+    get:
+      operationId: Agents_listSessionTurnItems
+      summary: List turn items
+      description: |-
+        Lists typed saved items for one turn, preserving the full upstream item payloads.
+        Uses existing endpoint interact/action authorization and service-side creator isolation.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - ManagedAgents=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The owning Agent's project-local name.
+          schema:
+            type: string
+        - name: session_name
+          in: path
+          required: true
+          description: The opaque Session identifier.
+          schema:
+            type: string
+        - name: turn_id
+          in: path
+          required: true
+          description: The requested turn identifier.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ManagedSessionItem'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Sessions
+      x-ms-foundry-meta:
+        required_previews:
+          - ManagedAgents=V1Preview
+  /agents/{name}/endpoint/sessions/{session_name}:stop:
+    post:
+      operationId: Agents_stopSession
+      summary: Stop a session
+      description: Terminates the specified hosted agent session and returns 204 No Content when the request succeeds.
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: session_name
+          in: path
+          required: true
+          description: The session identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Sessions
   /agents:generate:
     post:
       operationId: Agents_generateAgent

@@ -535,7 +535,7 @@ interface Agents {
    */
   @summary("Create a session")
   @post
-  @route("/agents/{agent_name}/endpoint/sessions")
+  @route("/agents/{name}/endpoint/sessions")
   @tag("Agent Sessions")
   @extension("x-ms-foundry-meta", ManagedAgentsConditionalPreviews)
   createSession is FoundryDataPlaneOperation<
@@ -543,7 +543,7 @@ interface Agents {
       ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.managed_agents_v1_preview>;
 
       /** The name of the agent to create a session for. */
-      @path agent_name: string;
+      @path("name") agent_name: string;
 
       /** Optional for Managed creation. An identical keyed retry returns the original result and resolved version; changed input conflicts. Without a key, deduplication is not guaranteed. Hosted behavior is unchanged. */
       @header("Idempotency-Key")
@@ -561,7 +561,7 @@ interface Agents {
    */
   @summary("Get a session")
   @get
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}")
+  @route("/agents/{name}/endpoint/sessions/{session_name}")
   @tag("Agent Sessions")
   @extension("x-ms-foundry-meta", ManagedAgentsConditionalPreviews)
   getSession is FoundryDataPlaneOperation<
@@ -569,10 +569,10 @@ interface Agents {
       ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.managed_agents_v1_preview>;
 
       /** The name of the agent. */
-      @path agent_name: string;
+      @path("name") agent_name: string;
 
       /** The session identifier. */
-      @path session_id: string;
+      @path("session_name") session_id: string;
     },
     AgentSession
   >;
@@ -583,15 +583,15 @@ interface Agents {
    */
   @summary("Delete a session")
   @delete
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}")
+  @route("/agents/{name}/endpoint/sessions/{session_name}")
   @tag("Agent Sessions")
   deleteSession is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
-      @path agent_name: string;
+      @path("name") agent_name: string;
 
       /** The session identifier. */
-      @path session_id: string;
+      @path("session_name") session_id: string;
     },
     NoContentResponse
   >;
@@ -601,15 +601,15 @@ interface Agents {
    */
   @summary("Stop a session")
   @post
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}:stop")
+  @route("/agents/{name}/endpoint/sessions/{session_name}:stop")
   @tag("Agent Sessions")
   stopSession is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
-      @path agent_name: string;
+      @path("name") agent_name: string;
 
       /** The session identifier. */
-      @path session_id: string;
+      @path("session_name") session_id: string;
     },
     NoContentResponse
   >;
@@ -621,7 +621,7 @@ interface Agents {
    */
   @summary("List sessions for an agent")
   @get
-  @route("/agents/{agent_name}/endpoint/sessions")
+  @route("/agents/{name}/endpoint/sessions")
   @list
   @tag("Agent Sessions")
   @extension("x-ms-foundry-meta", ManagedAgentsConditionalPreviews)
@@ -630,7 +630,7 @@ interface Agents {
       ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.managed_agents_v1_preview>;
 
       /** The name of the agent. */
-      @path agent_name: string;
+      @path("name") agent_name: string;
 
       ...CommonPageQueryParameters;
     },
@@ -645,17 +645,17 @@ interface Agents {
    */
   @summary("Submit session events")
   @post
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/events")
+  @route("/agents/{name}/endpoint/sessions/{session_name}/events")
   @tag("Agent Sessions")
   @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
   createSessionEvents is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.managed_agents_v1_preview,
     {
       /** The owning Agent's project-local name. */
-      @path agent_name: string;
+      @path("name") agent_name: string;
 
       /** The opaque Session identifier. */
-      @path session_id: string;
+      @path("session_name") session_id: string;
 
       /**
        * Optional key scoped to caller, project, and this route. An identical keyed retry returns the
@@ -680,17 +680,17 @@ interface Agents {
    */
   @summary("Stream session events")
   @get
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/events")
+  @route("/agents/{name}/endpoint/sessions/{session_name}/events")
   @tag("Agent Sessions")
   @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
   streamSessionEvents is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.managed_agents_v1_preview,
     {
       /** The owning Agent's project-local name. */
-      @path agent_name: string;
+      @path("name") agent_name: string;
 
       /** The opaque Session identifier. */
-      @path session_id: string;
+      @path("session_name") session_id: string;
 
       /** Whether events may include random obfuscation padding on this connection. */
       @query
@@ -705,7 +705,7 @@ interface Agents {
    */
   @summary("List session turns")
   @get
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/turns")
+  @route("/agents/{name}/endpoint/sessions/{session_name}/turns")
   @tag("Agent Sessions")
   @list
   @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
@@ -713,10 +713,10 @@ interface Agents {
     AgentDefinitionOptInKeys.managed_agents_v1_preview,
     {
       /** The owning Agent's project-local name. */
-      @path agent_name: string;
+      @path("name") agent_name: string;
 
       /** The opaque Session identifier. */
-      @path session_id: string;
+      @path("session_name") session_id: string;
 
       ...CommonPageQueryParameters;
     },
@@ -729,17 +729,17 @@ interface Agents {
    */
   @summary("Get a session turn")
   @get
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/turns/{turn_id}")
+  @route("/agents/{name}/endpoint/sessions/{session_name}/turns/{turn_id}")
   @tag("Agent Sessions")
   @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
   getSessionTurn is FoundryDataPlaneRequiredPreviewOperation<
     AgentDefinitionOptInKeys.managed_agents_v1_preview,
     {
       /** The owning Agent's project-local name. */
-      @path agent_name: string;
+      @path("name") agent_name: string;
 
       /** The opaque Session identifier. */
-      @path session_id: string;
+      @path("session_name") session_id: string;
 
       /** The requested turn identifier. */
       @path turn_id: string;
@@ -753,7 +753,7 @@ interface Agents {
    */
   @summary("List turn items")
   @get
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/turns/{turn_id}/items")
+  @route("/agents/{name}/endpoint/sessions/{session_name}/turns/{turn_id}/items")
   @tag("Agent Sessions")
   @list
   @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
@@ -761,10 +761,10 @@ interface Agents {
     AgentDefinitionOptInKeys.managed_agents_v1_preview,
     {
       /** The owning Agent's project-local name. */
-      @path agent_name: string;
+      @path("name") agent_name: string;
 
       /** The opaque Session identifier. */
-      @path session_id: string;
+      @path("session_name") session_id: string;
 
       /** The requested turn identifier. */
       @path turn_id: string;
@@ -780,7 +780,7 @@ interface Agents {
    */
   @summary("List session items")
   @get
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/items")
+  @route("/agents/{name}/endpoint/sessions/{session_name}/items")
   @tag("Agent Sessions")
   @list
   @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
@@ -788,10 +788,10 @@ interface Agents {
     AgentDefinitionOptInKeys.managed_agents_v1_preview,
     {
       /** The owning Agent's project-local name. */
-      @path agent_name: string;
+      @path("name") agent_name: string;
 
       /** The opaque Session identifier. */
-      @path session_id: string;
+      @path("session_name") session_id: string;
 
       ...CommonPageQueryParameters;
     },

@@ -1,3 +1,7 @@
+kind: project
+entrypoint: client.tsp
+features:
+  - union-extends
 parameters:
   "service-dir":
     default: "sdk/ai"
@@ -36,6 +40,7 @@ imports:
   - "@azure-tools/typespec-azure-core/experimental"
   - "@azure-tools/typespec-client-generator-core"
   # Note: Imports for OpenAI types may use alternate views per tspconfig.yaml
+  - "@azure-tools/openai-typespec/models/agents"
   - "@azure-tools/openai-typespec/models/responses"
 linter:
   extends:
