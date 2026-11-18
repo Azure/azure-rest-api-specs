@@ -638,6 +638,167 @@ interface Agents {
   >;
 
   /**
+   * Submits client events to a Managed Session and returns ordered admission receipts, not completed work.
+   * A message starts a root turn when idle or steers the active root turn.
+   * Cancellation targets the root turn active at acceptance; closing an event stream does not cancel it.
+   * Uses existing endpoint interact/action authorization and service-side creator isolation for every event.
+   */
+  @summary("Submit session events")
+  @post
+  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/events")
+  @tag("Agent Sessions")
+  @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
+  createSessionEvents is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.managed_agents_v1_preview,
+    {
+      /** The owning Agent's project-local name. */
+      @path agent_name: string;
+
+      /** The opaque Session identifier. */
+      @path session_id: string;
+
+      /**
+       * Optional key scoped to caller, project, and this route. An identical keyed retry returns the
+       * original receipts; a different body under the same retained key conflicts with 409.
+       * No retention duration or exactly-once external effects are implied. Without a key, deduplication
+       * is not guaranteed.
+       */
+      @header("Idempotency-Key")
+      idempotency_key?: string;
+
+      /** A nonempty batch of messages, cancellation, function results, or approval responses. */
+      @body body: ManagedSessionSubmitEventsContent;
+    },
+    ManagedSessionEventsAccepted
+  >;
+
+  /**
+   * Streams live Managed Session events as SSE. This is not a durable event list or replay API.
+   * No Last-Event-ID or sequence cursor is accepted. Reconnect by buffering a new stream and
+   * reconciling Session, turn, and item snapshots. Text deltas are previews, not authoritative history.
+   * Uses existing endpoint interact/action authorization and service-side creator isolation.
+   */
+  @summary("Stream session events")
+  @get
+  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/events")
+  @tag("Agent Sessions")
+  @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
+  streamSessionEvents is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.managed_agents_v1_preview,
+    {
+      /** The owning Agent's project-local name. */
+      @path agent_name: string;
+
+      /** The opaque Session identifier. */
+      @path session_id: string;
+
+      /** Whether events may include random obfuscation padding on this connection. */
+      @query
+      include_obfuscation?: boolean = true;
+    },
+    TypeSpec.SSE.SSEStream<ManagedSessionEvent>
+  >;
+
+  /**
+   * Lists saved turns without inferring completion from transient stream events.
+   * Uses existing endpoint interact/action authorization and service-side creator isolation.
+   */
+  @summary("List session turns")
+  @get
+  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/turns")
+  @tag("Agent Sessions")
+  @list
+  @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
+  listSessionTurns is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.managed_agents_v1_preview,
+    {
+      /** The owning Agent's project-local name. */
+      @path agent_name: string;
+
+      /** The opaque Session identifier. */
+      @path session_id: string;
+
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<ManagedSessionTurn>
+  >;
+
+  /**
+   * Retrieves a saved turn and its recorded status, usage, and error.
+   * Uses existing endpoint interact/action authorization and service-side creator isolation.
+   */
+  @summary("Get a session turn")
+  @get
+  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/turns/{turn_id}")
+  @tag("Agent Sessions")
+  @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
+  getSessionTurn is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.managed_agents_v1_preview,
+    {
+      /** The owning Agent's project-local name. */
+      @path agent_name: string;
+
+      /** The opaque Session identifier. */
+      @path session_id: string;
+
+      /** The requested turn identifier. */
+      @path turn_id: string;
+    },
+    ManagedSessionTurn
+  >;
+
+  /**
+   * Lists typed saved items for one turn, preserving the full upstream item payloads.
+   * Uses existing endpoint interact/action authorization and service-side creator isolation.
+   */
+  @summary("List turn items")
+  @get
+  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/turns/{turn_id}/items")
+  @tag("Agent Sessions")
+  @list
+  @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
+  listSessionTurnItems is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.managed_agents_v1_preview,
+    {
+      /** The owning Agent's project-local name. */
+      @path agent_name: string;
+
+      /** The opaque Session identifier. */
+      @path session_id: string;
+
+      /** The requested turn identifier. */
+      @path turn_id: string;
+
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<ManagedSessionItem>
+  >;
+
+  /**
+   * Lists typed Session history. This does not provide an audit log of every runtime event.
+   * Uses existing endpoint interact/action authorization and service-side creator isolation.
+   */
+  @summary("List session items")
+  @get
+  @route("/agents/{agent_name}/endpoint/sessions/{session_id}/items")
+  @tag("Agent Sessions")
+  @list
+  @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
+  listSessionItems is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.managed_agents_v1_preview,
+    {
+      /** The owning Agent's project-local name. */
+      @path agent_name: string;
+
+      /** The opaque Session identifier. */
+      @path session_id: string;
+
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<ManagedSessionItem>
+  >;
+
+  /**
    * Streams console logs (stdout / stderr) for a specific hosted agent session
    * as a Server-Sent Events (SSE) stream.
    *

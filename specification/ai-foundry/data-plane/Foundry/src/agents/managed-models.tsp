@@ -1,3 +1,5 @@
+import "./managed-runtime-models.tsp";
+
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
@@ -259,6 +261,12 @@ model ManagedAgentSession {
 
   /** The current state, independent of Environment allocation state. */
   status: ManagedAgentSessionStatus;
+
+  /** Pending client actions. When requires_action, inspect these before submitting callbacks; do not infer them from repeated stream events. */
+  required_actions?: ManagedSessionRequiredAction[];
+
+  /** Current allocated resource state, separate from Environment selection. */
+  resources?: ManagedSessionResources;
 
   /** The recorded Environment selection when supplied, separate from allocation state. */
   environment?: ManagedPlatformEnvironment;
