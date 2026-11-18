@@ -68,6 +68,14 @@ union StorageErrorCode {
   /** Authorization failure. */
   AuthorizationFailure: "AuthorizationFailure",
 
+  /** The specified Blob Access Point configuration name was not found. */
+  @added(Versions.v2026_12_06)
+  BlobAccessPointConfigurationNameNotFound: "BlobAccessPointConfigurationNameNotFound",
+
+  /** The specified unique ID does not match the named Blob Access Point configuration. */
+  @added(Versions.v2026_12_06)
+  BlobAccessPointConfigurationUniqueIdMismatch: "BlobAccessPointConfigurationUniqueIdMismatch",
+
   /** Condition headers not supported. */
   ConditionHeadersNotSupported: "ConditionHeadersNotSupported",
 
@@ -149,6 +157,10 @@ union StorageErrorCode {
 
   /** No authentication information. */
   NoAuthenticationInformation: "NoAuthenticationInformation",
+
+  /** The operation is not supported for a Blob Access Point container. */
+  @added(Versions.v2026_12_06)
+  OperationNotSupportedForBlobAccessPoint: "OperationNotSupportedForBlobAccessPoint",
 
   /** Operation timed out. */
   OperationTimedOut: "OperationTimedOut",
@@ -730,6 +742,21 @@ model ContainerProperties {
   /** Whether immutable storage with versioning is enabled. */
   @Xml.name("ImmutableStorageWithVersioningEnabled")
   isImmutableStorageWithVersioningEnabled?: boolean;
+
+  /** Indicates whether this is a Blob Access Point container. Omitted for ordinary containers. */
+  @added(Versions.v2026_12_06)
+  @Xml.name("IsBlobAccessPointContainer")
+  isBlobAccessPointContainer?: boolean;
+
+  /** The name of the Blob Access Point configuration bound to the container. Omitted for ordinary containers. */
+  @added(Versions.v2026_12_06)
+  @Xml.name("BlobAccessPointConfigurationName")
+  blobAccessPointConfigurationName?: string;
+
+  /** The unique ID of the Blob Access Point configuration bound to the container. Omitted for ordinary containers. */
+  @added(Versions.v2026_12_06)
+  @Xml.name("BlobAccessPointConfigurationUniqueId")
+  blobAccessPointConfigurationUniqueId?: string;
 }
 
 /** Stats for the storage service. */

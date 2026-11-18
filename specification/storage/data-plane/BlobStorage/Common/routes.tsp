@@ -271,6 +271,16 @@ interface Container {
       defaultEncryptionScope?: string;
 
       ...DenyEncryptionScopeOverrideParameter;
+
+      /** The name of the Blob Access Point configuration to bind to the container at creation. If the unique ID is omitted, the service resolves and stores it. The binding cannot be changed after creation. */
+      @added(Versions.v2026_12_06)
+      @header("x-ms-blob-access-point-configuration-name")
+      blobAccessPointConfigurationName?: string;
+
+      /** The unique ID of the Blob Access Point configuration to bind to the container at creation. When supplied with the configuration name, the service validates that both identify the same configuration. */
+      @added(Versions.v2026_12_06)
+      @header("x-ms-blob-access-point-configuration-unique-id")
+      blobAccessPointConfigurationUniqueId?: string;
     },
     {
       @statusCode statusCode: 201;
@@ -315,6 +325,21 @@ interface Container {
       /** Indicates whether version level WORM (Write Once, Read Many) is enabled on a container. */
       @header("x-ms-immutable-storage-with-versioning-enabled")
       isImmutableStorageWithVersioningEnabled?: boolean;
+
+      /** Indicates whether this is a Blob Access Point container. Omitted for ordinary containers. */
+      @added(Versions.v2026_12_06)
+      @header("x-ms-is-blob-access-point-container")
+      isBlobAccessPointContainer?: boolean;
+
+      /** The name of the Blob Access Point configuration bound to the container. Omitted for ordinary containers. */
+      @added(Versions.v2026_12_06)
+      @header("x-ms-blob-access-point-configuration-name")
+      blobAccessPointConfigurationName?: string;
+
+      /** The unique ID of the Blob Access Point configuration bound to the container. Omitted for ordinary containers. */
+      @added(Versions.v2026_12_06)
+      @header("x-ms-blob-access-point-configuration-unique-id")
+      blobAccessPointConfigurationUniqueId?: string;
     }
   >;
 
