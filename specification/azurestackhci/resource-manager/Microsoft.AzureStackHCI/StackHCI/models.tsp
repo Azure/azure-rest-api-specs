@@ -11962,6 +11962,104 @@ union ProxyConfigurationState {
   Drifted: "Drifted",
 }
 
+/**
+ * Base properties for a proxy configuration job.
+ */
+@added(Versions.v2027_01_15_preview)
+@discriminator("jobType")
+model ProxyConfigurationJobProperties {
+  /** Type of proxy configuration job. Determines the polymorphic subtype. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  jobType: ProxyConfigurationJobType;
+
+  /** Provisioning state of the proxy configuration job resource. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /** Unique, immutable job identifier. */
+  @visibility(Lifecycle.Read)
+  jobId?: string;
+
+  /** UTC time at which the job started. */
+  @visibility(Lifecycle.Read)
+  startTimeUtc?: utcDateTime;
+
+  /** UTC time at which the job completed. */
+  @visibility(Lifecycle.Read)
+  endTimeUtc?: utcDateTime;
+
+  /** Status of the job. */
+  @visibility(Lifecycle.Read)
+  status?: JobStatus;
+
+  /** Error details. */
+  @visibility(Lifecycle.Read)
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
+}
+
+/**
+ * Type of proxy configuration job.
+ */
+@added(Versions.v2027_01_15_preview)
+union ProxyConfigurationJobType {
+  string,
+
+  /** Push a new proxy configuration to the device. Updates desiredConfiguration on the proxy resource at job creation time. Rejected if configurationState is Drifted or if a ConfigureNetworking, ProvisionOs, or DownloadOs EdgeMachine job is in-flight. */
+  Apply: "Apply",
+
+  /** Reconcile a configuration drift. Does not require a clean configurationState — this is the intended remediation path. Sub-typed by syncDirection. */
+  Sync: "Sync",
+}
+
+/**
+ * Properties for an Apply job that pushes a new proxy configuration to the device.
+ */
+@added(Versions.v2027_01_15_preview)
+model ApplyProxyConfigurationJobProperties
+  extends ProxyConfigurationJobProperties {
+  /** Type of proxy configuration job. */
+  jobType: ProxyConfigurationJobType.Apply;
+
+  /** Whether to enable or disable the proxy on the device. When false, the proxy is disabled on the device but connectionUri and port are preserved in desiredConfiguration. */
+  isEnabled: boolean;
+
+  /** Connection URI of the proxy server. Required when isEnabled is true. */
+  connectionUri?: string;
+
+  /** Port number of the proxy server. Required when isEnabled is true. */
+  port?: string;
+
+  /** List of addresses or patterns that should bypass the proxy. */
+  bypassList?: string[];
+}
+
+/**
+ * Properties for a Sync job that reconciles configuration drift.
+ */
+@added(Versions.v2027_01_15_preview)
+model SyncProxyConfigurationJobProperties
+  extends ProxyConfigurationJobProperties {
+  /** Type of proxy configuration job. */
+  jobType: ProxyConfigurationJobType.Sync;
+
+  /** Direction of the sync operation. */
+  syncDirection: ProxySyncDirection;
+}
+
+/**
+ * Direction of a proxy configuration sync operation.
+ */
+@added(Versions.v2027_01_15_preview)
+union ProxySyncDirection {
+  string,
+
+  /** Re-push the current desiredConfiguration to the device. Use to recover after a failed Apply or to override an unwanted local device change. */
+  SyncToDevice: "SyncToDevice",
+
+  /** Copy reportedConfiguration into desiredConfiguration. Use to acknowledge and canonicalize a locally-made change on the device, clearing the Drifted state. */
+  AcceptReported: "AcceptReported",
+}
+
 ////////////////////////////////////////////////////////////////
 /////////// PRIVATE PREVIEW - Network Profile Models ///////////
 ////////////////////////////////////////////////////////////////
