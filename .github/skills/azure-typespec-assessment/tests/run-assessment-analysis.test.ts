@@ -866,7 +866,7 @@ void test("model input does not repeat project-wide declarations for each REST c
   }
 });
 
-void test("model input retains downstream method and bridge path facts", () => {
+void test("model input omits downstream consumer path facts", () => {
   const facts = Object.fromEntries(
     ["method", "wrapper", "type"].map((name) => [
       `sdk-${name}`,
@@ -940,14 +940,8 @@ void test("model input retains downstream method and bridge path facts", () => {
     },
   });
 
-  assert.deepEqual(Object.keys(input.facts), ["sdk-method", "sdk-type", "sdk-wrapper"]);
-  assert.ok(
-    input.downstreamRootCauses[0].referenceEvidence.every((edge) => {
-      assert.ok(edge.fromFactId);
-      assert.ok(edge.toFactId);
-      return Boolean(input.facts[edge.fromFactId] && input.facts[edge.toFactId]);
-    }),
-  );
+  assert.deepEqual(Object.keys(input.facts), ["sdk-type"]);
+  assert.equal("downstreamRootCauses" in input, false);
 });
 
 void test("model input retains downstream identity blocker facts", () => {

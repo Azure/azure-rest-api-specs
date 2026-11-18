@@ -96,7 +96,6 @@ type InputAccounting = {
     semanticReviewUnits: number;
     restCandidates: number;
     downstreamCandidates: number;
-    downstreamRootCauses: number;
     sourceReviewDeclarations: number;
     sourceReviewRequests: number;
     complianceSearchRequests: number;
@@ -115,7 +114,6 @@ type AnalysisModelInput = {
   informationalSemanticIntentIds: string[];
   restCandidates: AssessmentModelInput["restCandidates"];
   downstreamCandidates: AssessmentModelInput["downstreamCandidates"];
-  downstreamRootCauses: import("./runtime-types.ts").DownstreamRootCause[];
   complianceSearchRequests: AssessmentModelInput["complianceSearchRequests"];
   inferenceRequests: AssessmentModelInput["inferenceRequests"];
   blockers: unknown[];
@@ -446,20 +444,6 @@ function candidateReferencedFactIds(analysis: { candidates?: AssessmentCandidate
   return new Set(
     (analysis.candidates ?? []).flatMap((candidate) => candidate.evidenceFactIds ?? []),
   );
-}
-
-function downstreamReferencedFactIds(downstream: DownstreamAnalysis) {
-  const ids = candidateReferencedFactIds(downstream);
-  for (const rootCause of downstream.rootCauses ?? []) {
-    for (const id of [
-      ...(rootCause.methodFactIds ?? []),
-      ...(rootCause.typeFactIds ?? []),
-      ...(rootCause.referenceEvidence ?? []).flatMap((edge) => [edge.fromFactId, edge.toFactId]),
-    ]) {
-      if (id) ids.add(id);
-    }
-  }
-  return ids;
 }
 
 function semanticSourceExcerpts(
@@ -1294,7 +1278,6 @@ function accountInput(
         semanticReviewUnits: input.semanticReviewUnits.length,
         restCandidates: input.restCandidates.length,
         downstreamCandidates: input.downstreamCandidates.length,
-        downstreamRootCauses: input.downstreamRootCauses.length,
         sourceReviewDeclarations: 0,
         sourceReviewRequests: 0,
         complianceSearchRequests: input.complianceSearchRequests.length,
@@ -1413,16 +1396,9 @@ export function buildModelInput({
             retainedDownstreamCandidateIds.has(candidate.id),
         )
       : [];
-  const retainedRootCauseIds = new Set(
-    retainedDownstreamCandidates.flatMap((candidate) => candidate.rootCauseIds ?? []),
-  );
-  const retainedDownstreamRootCauses = (downstream.rootCauses ?? []).filter((rootCause) =>
-    retainedRootCauseIds.has(rootCause.id),
-  );
   const retainedDownstream = {
     ...downstream,
     candidates: retainedDownstreamCandidates,
-    rootCauses: retainedDownstreamRootCauses,
   };
 
   const evidenceSets: Record<
@@ -1449,7 +1425,7 @@ export function buildModelInput({
   const retainedFactIds = new Set([
     ...retainedInferenceFactIds,
     ...retainedRestCandidates.flatMap((candidate) => candidate.evidenceFactIds ?? []),
-    ...downstreamReferencedFactIds(retainedDownstream),
+    ...candidateReferencedFactIds(retainedDownstream),
     ...downstream.blockers.flatMap((blocker) => blocker.evidenceFactIds ?? []),
   ]);
 
@@ -1496,6 +1472,19 @@ export function buildModelInput({
     querySummary: compactQuerySummary(request.queryProfile),
   }));
 
+  const compactRestCandidates =
+    rest.status === "ready"
+      ? retainedRestCandidates.map((candidate) =>
+          compactCandidate(candidate, ARTIFACT_REFERENCES.restCandidates),
+        )
+      : [];
+  const compactDownstreamCandidates =
+    downstream.status === "ready"
+      ? retainedDownstreamCandidates.map((candidate) =>
+          compactCandidate(candidate, ARTIFACT_REFERENCES.downstreamCandidates),
+        )
+      : [];
+
   const input: AnalysisModelInput = {
     schemaVersion: 1,
     pipelineVersion: 2,
@@ -1533,19 +1522,8 @@ export function buildModelInput({
     facts: referencedFacts(semantic, rest, downstream, retainedFactIds),
     semanticReviewUnits,
     informationalSemanticIntentIds: informationalSemanticUnits.map((unit) => unit.id),
-    restCandidates:
-      rest.status === "ready"
-        ? retainedRestCandidates.map((candidate) =>
-            compactCandidate(candidate, ARTIFACT_REFERENCES.restCandidates),
-          )
-        : [],
-    downstreamCandidates:
-      downstream.status === "ready"
-        ? retainedDownstreamCandidates.map((candidate) =>
-            compactCandidate(candidate, ARTIFACT_REFERENCES.downstreamCandidates),
-          )
-        : [],
-    downstreamRootCauses: downstream.status === "ready" ? retainedDownstreamRootCauses : [],
+    restCandidates: compactRestCandidates,
+    downstreamCandidates: compactDownstreamCandidates,
     complianceSearchRequests,
     inferenceRequests,
     blockers: [

@@ -73,7 +73,6 @@ function fixture({
     status: "ready",
     candidates: [],
     facts: {},
-    rootCauses: [],
     blockers: [],
   });
   writeJson(path.join(work, "dimensions", "document-quality-input.json"), {
