@@ -114,6 +114,16 @@ using Microsoft.Edge;
 @@clientName(ErrorActionMode, "TaskErrorActionModeType", "csharp");
 @@clientName(ExecutionStatus, "EdgeExecutionStatus", "csharp");
 @@clientName(Hierarchy, "ContextHierarchy", "csharp");
+@@clientName(
+  HierarchyMetadata,
+  "EdgeConfigTemplateHierarchyMetadata",
+  "csharp"
+);
+@@clientName(
+  HierarchySelector,
+  "EdgeConfigTemplateHierarchySelector",
+  "csharp"
+);
 @@clientName(InternalState, "SolutionTemplateVersionInternalState", "csharp");
 @@clientName(JobParameterBase, "EdgeJobContent", "csharp");
 @@clientName(JobStatus, "EdgeJobStatus", "csharp");
@@ -140,6 +150,11 @@ using Microsoft.Edge;
   "csharp"
 );
 @@clientName(
+  SolutionTemplateMetadataUpdate,
+  "SolutionTemplateMetadataPatch",
+  "csharp"
+);
+@@clientName(
   SolutionTemplateVersionWithUpdateType,
   "EdgeSolutionTemplateVersionWithUpdateType",
   "csharp"
@@ -151,6 +166,7 @@ using Microsoft.Edge;
 @@clientName(StageStatus, "EdgeExecutionStageStatus", "csharp");
 @@clientName(State, "SolutionInstanceState", "csharp");
 @@clientName(StateCategory, "SolutionVersionStageState", "csharp");
+@@clientName(TargetMetadata, "SolutionDeploymentTargetMetadata", "csharp");
 @@clientName(TargetSnapshot, "EdgeTargetSnapshot", "csharp");
 @@clientName(TargetStatus, "EdgeTargetStatus", "csharp");
 @@clientName(UpdateType, "EdgeUpdateType", "csharp");
