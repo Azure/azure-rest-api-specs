@@ -114,6 +114,11 @@ as guidance.
 unit and one `inferenceRequests` item per `unknown` hunk. Do not create
 `inference.json` when the request array is empty.
 
+After successful contract comparison, declaration- or operation-mapped hunks
+without deterministic candidates are `no-impact`. Unsupported decorators or
+customizations detected by `inferenceGapReason()` remain `unknown` even when
+mapped; otherwise unclassified, completely unmapped hunks also remain `unknown`.
+
 When requests exist, the materializer writes `inference.json` conforming to
 `scripts\inference.schema.json`. Cover every request exactly once with
 `candidates`, `no-impact`, or `blocked`. Inferred candidates must remain within

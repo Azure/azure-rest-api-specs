@@ -278,7 +278,7 @@ void test("model input references canonical evidence without embedding sources",
     complianceSearchRequests: "dimensions/compliance-search-requests.json",
   });
   assert.equal(Object.keys(input.evidenceSets).length, 1);
-  assert.deepEqual(Object.keys(input.facts), ["operation-1"]);
+  assert.deepEqual(Object.keys(input.facts), []);
   assert.equal(input.semanticReviewUnits[0].affectedOperationCount, 1);
   assert.deepEqual(input.semanticReviewUnits[0].representativeOperationIds, ["operation-1"]);
   assert.equal(input.complianceSearchRequests.length, 1);
@@ -292,14 +292,12 @@ void test("model input references canonical evidence without embedding sources",
   assert.equal(input.complianceSearchRequests[0].querySummary.qualifiedNameCount, 1);
   assert.match(input.complianceSearchRequests[0].requestId, /^compliance-search-/);
   const coverage = deterministicCoverage(input.semanticReviewUnits[0]);
-  assert.deepEqual(coverage.coveredHunkIds, []);
-  assert.deepEqual(coverage.uncoveredHunkIds, ["hunk-1"]);
-  assert.equal(
-    coverage.classifications[0].reason,
-    "mapped-declaration-without-deterministic-candidate",
-  );
-  assert.equal(input.semanticReviewUnits[0].inferenceRequired, true);
-  assert.equal(input.inferenceRequests.length, 1);
+  assert.deepEqual(coverage.coveredHunkIds, ["hunk-1"]);
+  assert.deepEqual(coverage.uncoveredHunkIds, []);
+  assert.equal(coverage.classifications[0].status, "no-impact");
+  assert.equal(coverage.classifications[0].reason, "declaration-mapped-and-contracts-compared");
+  assert.equal(input.semanticReviewUnits[0].inferenceRequired, false);
+  assert.deepEqual(input.inferenceRequests, []);
   assert.equal(input.deferredDimensions, undefined);
   assert.equal(input.documentQualityReviewUnits, undefined);
   assert.equal(input.documentQualityCriterion, undefined);
@@ -639,6 +637,74 @@ void test("model input requests inference only for unknown hunks", () => {
   assert.equal(input.pipelineVersion, 2);
   assert.equal("sourceReviewRequests" in input, false);
   assert.equal("sourceReviewDeclarations" in input, false);
+});
+
+void test("compared operation hunks do not infer while unmapped hunks remain unknown", () => {
+  const input = buildModelInputFromFixture({
+    manifest: {
+      comparison: { mergeBaseCommit: "base", headCommit: "head", workingTree: {} },
+      projects: [{ id: "p", path: "specification/widget" }],
+      blockers: [],
+    },
+    sourceIndex: {
+      sourceChanges: [
+        {
+          id: "source-1",
+          path: "main.tsp",
+          hunks: [
+            {
+              id: "hunk-operation",
+              lines: ["-op get(): Widget;", "+op get(): Widget | Error;"],
+            },
+            {
+              id: "hunk-unmapped",
+              lines: ["-alias Old = string;", "+alias Current = string;"],
+            },
+          ],
+          declarations: [],
+        },
+      ],
+    },
+    semantic: {
+      status: "ready",
+      facts: {},
+      reviewUnits: [
+        {
+          id: "semantic-1",
+          projectId: "p",
+          sourceChangeIds: ["source-1"],
+          hunkIds: ["hunk-operation", "hunk-unmapped"],
+          declarationIds: [],
+          operations: [{ operationId: "Widgets_Get", hunkIds: ["hunk-operation"] }],
+        },
+      ],
+      blockers: [],
+    },
+    rest: { status: "ready", facts: {}, candidates: [], blockers: [] },
+    downstream: { status: "ready", facts: {}, candidates: [], blockers: [] },
+  });
+  const coverage = deterministicCoverage(input.semanticReviewUnits[0]);
+  assert.deepEqual(coverage.coveredHunkIds, ["hunk-operation"]);
+  assert.deepEqual(coverage.uncoveredHunkIds, ["hunk-unmapped"]);
+  assert.deepEqual(
+    coverage.classifications.map(({ hunkId, status, reason }) => ({ hunkId, status, reason })),
+    [
+      {
+        hunkId: "hunk-operation",
+        status: "no-impact",
+        reason: "operation-mapped-and-contracts-compared",
+      },
+      {
+        hunkId: "hunk-unmapped",
+        status: "unknown",
+        reason: "source-change-not-mapped-to-deterministic-contract-evidence",
+      },
+    ],
+  );
+  assert.deepEqual(
+    input.inferenceRequests.map((request) => request.hunkId),
+    ["hunk-unmapped"],
+  );
 });
 
 void test("model input bounds repeated review evidence and retains downstream facts", () => {
@@ -1089,7 +1155,7 @@ void test("multiline decorator bodies remain inference-visible", () => {
   }
 });
 
-void test("context-only scoped decorators do not hide unclassified declaration changes", () => {
+void test("context-only scoped decorators retain compared declaration coverage", () => {
   const input = buildModelInputFromFixture({
     manifest: {
       comparison: {
@@ -1145,14 +1211,15 @@ void test("context-only scoped decorators do not hide unclassified declaration c
     downstream: { status: "ready", facts: {}, candidates: [], blockers: [] },
   });
 
-  assert.equal(input.semanticReviewUnits[0].inferenceRequired, true);
+  assert.equal(input.semanticReviewUnits[0].inferenceRequired, false);
+  assert.deepEqual(input.inferenceRequests, []);
   assert.equal(
     deterministicCoverage(input.semanticReviewUnits[0]).classifications[0].reason,
-    "mapped-declaration-without-deterministic-candidate",
+    "declaration-mapped-and-contracts-compared",
   );
 });
 
-void test("parentheses in context decorator strings do not hide declaration changes", () => {
+void test("parentheses in context decorator strings retain compared declaration coverage", () => {
   const input = buildModelInputFromFixture({
     manifest: {
       comparison: {
@@ -1208,10 +1275,11 @@ void test("parentheses in context decorator strings do not hide declaration chan
     downstream: { status: "ready", facts: {}, candidates: [], blockers: [] },
   });
 
-  assert.equal(input.semanticReviewUnits[0].inferenceRequired, true);
+  assert.equal(input.semanticReviewUnits[0].inferenceRequired, false);
+  assert.deepEqual(input.inferenceRequests, []);
   assert.equal(
     deterministicCoverage(input.semanticReviewUnits[0]).classifications[0].reason,
-    "mapped-declaration-without-deterministic-candidate",
+    "declaration-mapped-and-contracts-compared",
   );
 });
 
