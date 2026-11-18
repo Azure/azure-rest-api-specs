@@ -9003,9 +9003,26 @@ paths:
       operationId: Agents_deleteSession
       summary: Delete a session
       description: |-
-        Deletes a session synchronously.
+        Deletes a Hosted or Managed Session synchronously.
+        If a Managed Session has an in-progress Turn, deletion returns 409 Conflict
+        without cancelling the Turn unless force=true.
+        The caller can cancel the Turn and retry deletion after it stops,
+        or retry deletion with force=true.
+        With force=true, active work is stopped and the Session is deleted.
+        Managed requires preview opt-in, existing endpoint interact/action authorization,
+        and creator isolation, including for forced deletion.
+        Deleting a Session does not delete its owning Agent, saved definitions, or shared resources.
         Returns 204 No Content when the session is deleted or does not exist.
+        Hosted deletion behavior is unchanged; force applies only to Managed Sessions.
       parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - ManagedAgents=V1Preview
         - name: name
           in: path
           required: true
@@ -9018,6 +9035,14 @@ paths:
           description: The session identifier.
           schema:
             type: string
+        - name: force
+          in: query
+          required: false
+          description: For Managed Sessions, stop active work and delete the Session when true. Defaults to false, which returns 409 for an in-progress Turn without cancelling it. Hosted behavior is unchanged.
+          schema:
+            type: boolean
+            default: false
+          explode: false
         - name: api-version
           in: query
           required: true
@@ -9042,6 +9067,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Sessions
+      x-ms-foundry-meta:
+        conditional_previews:
+          - ManagedAgents=V1Preview
   /agents/{name}/endpoint/sessions/{session_name}/events:
     post:
       operationId: Agents_createSessionEvents

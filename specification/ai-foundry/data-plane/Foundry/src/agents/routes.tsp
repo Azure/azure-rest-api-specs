@@ -578,20 +578,35 @@ interface Agents {
   >;
 
   /**
-   * Deletes a session synchronously.
+   * Deletes a Hosted or Managed Session synchronously.
+   * If a Managed Session has an in-progress Turn, deletion returns 409 Conflict
+   * without cancelling the Turn unless force=true.
+   * The caller can cancel the Turn and retry deletion after it stops,
+   * or retry deletion with force=true.
+   * With force=true, active work is stopped and the Session is deleted.
+   * Managed requires preview opt-in, existing endpoint interact/action authorization,
+   * and creator isolation, including for forced deletion.
+   * Deleting a Session does not delete its owning Agent, saved definitions, or shared resources.
    * Returns 204 No Content when the session is deleted or does not exist.
+   * Hosted deletion behavior is unchanged; force applies only to Managed Sessions.
    */
   @summary("Delete a session")
   @delete
   @route("/agents/{name}/endpoint/sessions/{session_name}")
   @tag("Agent Sessions")
+  @extension("x-ms-foundry-meta", ManagedAgentsConditionalPreviews)
   deleteSession is FoundryDataPlaneOperation<
     {
+      ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.managed_agents_v1_preview>;
+
       /** The name of the agent. */
       @path("name") agent_name: string;
 
       /** The session identifier. */
       @path("session_name") session_id: string;
+
+      /** For Managed Sessions, stop active work and delete the Session when true. Defaults to false, which returns 409 for an in-progress Turn without cancelling it. Hosted behavior is unchanged. */
+      @query force?: boolean = false;
     },
     NoContentResponse
   >;
