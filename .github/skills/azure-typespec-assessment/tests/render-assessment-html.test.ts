@@ -512,6 +512,52 @@ void test("complete declaration diffs retain same-named models in distinct files
   assert.include(html, "beta/models.tsp");
 });
 
+void test("truncated model and operation excerpts retain changes beyond their stored prefix", () => {
+  for (const kind of ["model", "operation"]) {
+    const source: SourceChange = {
+      id: "source-long",
+      path: "main.tsp",
+      status: "modified",
+      origins: [],
+      hunks: [
+        {
+          id: "hunk-late",
+          base: { startLine: 55, endLine: 56 },
+          current: { startLine: 55, endLine: 56 },
+          lines: ["   previous?: string;", "-  late?: string;", "+  late: string;"],
+        },
+        {
+          id: "hunk-unrelated",
+          base: { startLine: 100, endLine: 100 },
+          current: { startLine: 100, endLine: 100 },
+          lines: ["-model Unrelated {}", "+model UnrelatedRenamed {}"],
+        },
+      ],
+      declarations: (["base", "current"] as const).map((revision) => ({
+        id: `declaration-${revision}`,
+        kind,
+        qualifiedName: "LongDeclaration",
+        decorators: [],
+        versionedMembers: [],
+        hunkIds: ["hunk-late"],
+        source: { revision, startLine: 1, endLine: 62 },
+        sourceSnippet: {
+          startLine: 1,
+          endLine: 40,
+          lines: Array.from({ length: 40 }, (_, index) => `  p${index}?: string;`),
+          truncated: true,
+        },
+      })),
+    };
+    const html = renderCompleteModelDeclarations([source], ["LongDeclaration"], [kind]);
+    assert.include(html, '<span class="remove">-  late?: string;</span>');
+    assert.include(html, '<span class="add">+  late: string;</span>');
+    assert.include(html, "showing focused changes");
+    assert.notInclude(html, "Unrelated");
+    assert.equal((html.match(/class="add"/g) ?? []).length, 1);
+  }
+});
+
 void test("renders one complete unified model diff for model changes", () => {
   const html = renderCompleteModelDeclarations(
     [
@@ -1084,6 +1130,53 @@ void test("groups request-body property changes by their owning schema", () => {
       ["request body.newName", "removed", "string"],
     ],
   );
+});
+
+void test("request-body contract rows preserve requiredness, nullability and constraint changes", () => {
+  const cases = [
+    { rule: "property-required", before: { required: false }, after: { required: true } },
+    { rule: "nullable-restricted", before: { nullable: true }, after: { nullable: false } },
+    { rule: "constraints-tightened", before: { maxLength: 100 }, after: { maxLength: 10 } },
+  ];
+  for (const { rule, before, after } of cases) {
+    const fact = (comparisonRole: "baseline" | "target"): AssessmentFact => {
+      const constraints = comparisonRole === "baseline" ? before : after;
+      return {
+        comparisonRole,
+        operationId: "Widgets_Create",
+        request: {
+          kind: "body",
+          schema: {
+            kind: "object",
+            reference: "#/definitions/Widget",
+            properties: [
+              {
+                name: "name",
+                required: constraints.required ?? false,
+                schema: { kind: "scalar", type: "string", ...constraints },
+              },
+            ],
+          },
+        },
+      };
+    };
+    const finding: AssessmentFinding = {
+      id: `rest-${rule}`,
+      rule,
+      severity: "high",
+      actual: `name changed: ${JSON.stringify(after)}`,
+      expected: `name preserved: ${JSON.stringify(before)}`,
+      rationale: "Existing caller input is rejected.",
+      contractChange: { location: "request body.name" },
+      operationIds: ["Widgets_Create"],
+      sources: [],
+      evidence: [fact("baseline"), fact("target")],
+    };
+    const delta = restContractCards([finding])[0].findings[0].contractDelta;
+    assert.equal(delta.before, finding.expected);
+    assert.equal(delta.after, finding.actual);
+    assert.notEqual(delta.before, delta.after);
+  }
 });
 
 void test("renderer shows fetched Azure Guidelines guidance and expands failures", () => {
