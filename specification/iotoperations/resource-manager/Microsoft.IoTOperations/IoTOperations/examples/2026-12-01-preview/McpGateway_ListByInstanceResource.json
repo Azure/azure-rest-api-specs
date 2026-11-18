@@ -1,0 +1,48 @@
+{
+  "title": "McpGateway_ListByInstanceResource",
+  "operationId": "McpGateway_ListByInstanceResource",
+  "parameters": {
+    "api-version": "2026-12-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "my-aio-instance"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgiotoperations/providers/Microsoft.IoTOperations/instances/my-aio-instance/mcpGateways/default",
+            "name": "default",
+            "type": "Microsoft.IoTOperations/instances/mcpGateways",
+            "properties": {
+              "endpoint": {
+                "servicePort": 443,
+                "authentication": {
+                  "method": "ServiceAccountToken",
+                  "serviceAccountTokenSettings": {
+                    "audiences": [
+                      "aio-mcp-frontend"
+                    ]
+                  }
+                },
+                "tls": {
+                  "mode": "Manual",
+                  "manual": {
+                    "secretRef": "customer-gateway-tls"
+                  }
+                }
+              },
+              "provisioningState": "Succeeded",
+              "status": {
+                "healthState": {
+                  "status": "Available"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

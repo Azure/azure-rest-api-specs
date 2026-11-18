@@ -490,15 +490,41 @@ export function validateAssessment(assessment: AssessmentOutput | LegacyAssessme
         );
       }
     }
+    if (comparison.mode === "new-api-version") {
+      const project = assessment.projects?.find((item) => item.id === comparison.projectId);
+      const available =
+        comparison.available ??
+        project?.artifactComparison?.available ??
+        project?.apiVersions?.available;
+      const baselineVersion = comparison.baseline?.apiVersion;
+      const validCurrentBaseline =
+        comparison.baseline?.sourceRevision === "current" &&
+        comparison.baseline?.commit === assessment.comparison.headCommit &&
+        (!Array.isArray(available?.current) ||
+          Boolean(baselineVersion && available.current.includes(baselineVersion)));
+      const validRemovedBaseBaseline =
+        comparison.baseline?.sourceRevision === "base" &&
+        comparison.baseline?.commit === assessment.comparison.baseCommit &&
+        Boolean(
+          baselineVersion &&
+          Array.isArray(available?.base) &&
+          Array.isArray(available?.current) &&
+          available.base.includes(baselineVersion) &&
+          !available.current.includes(baselineVersion),
+        );
+      if (!validCurrentBaseline && !validRemovedBaseBaseline) {
+        errors.push(
+          `New-version artifact comparison ${comparison.projectId} must compile a retained baseline from the head source and may fall back to the base source only when removed from head.`,
+        );
+      }
+    }
     if (
       comparison.mode === "new-api-version" &&
-      (comparison.baseline?.sourceRevision !== "current" ||
-        comparison.target?.sourceRevision !== "current" ||
-        comparison.baseline?.commit !== assessment.comparison.headCommit ||
+      (comparison.target?.sourceRevision !== "current" ||
         comparison.target?.commit !== assessment.comparison.headCommit)
     ) {
       errors.push(
-        `New-version artifact comparison ${comparison.projectId} must compile both roles from the head source.`,
+        `New-version artifact comparison ${comparison.projectId} must compile the target from the head source.`,
       );
     }
     if (
