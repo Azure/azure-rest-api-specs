@@ -528,7 +528,6 @@ function evidenceSet(
   registry[id] ??= {
     sourceChangeIds: normalized.sourceChangeIds,
     hunkIds: normalized.hunkIds,
-    declarationIds: normalized.declarationIds,
     declarationCount: normalized.declarationIds.length,
     evidenceFactIds: normalized.evidenceFactIds,
     evidenceRef: { artifact, id: entityId },

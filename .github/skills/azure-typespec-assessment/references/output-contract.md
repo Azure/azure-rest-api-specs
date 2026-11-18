@@ -60,6 +60,11 @@ stage (`agent-workspace\source-association-input.json` ->
 `agent-workspace\source-association-decisions.json` -> `source-association.json`).
 Historical single-phase decision artifacts remain readable. Final source
 selections are joined only after both steps validate their frozen hashes.
+The judgment schema permits REST/downstream decisions without `sourceReview`
+in pipeline 2; historical single-phase judgments still require it.
+Evidence sets retain declaration counts and canonical artifact references, not
+repeated project-wide declaration ID lists. Shared Semantic owners retain
+per-operation project scope when proposing sources.
 
 Write `agent-workspace\agent-decisions.json` conforming to
 `scripts\agent-decisions.schema.json`. It contains only Agent-authored
