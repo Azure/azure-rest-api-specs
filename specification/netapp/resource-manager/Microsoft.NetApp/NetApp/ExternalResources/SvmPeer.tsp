@@ -14,6 +14,8 @@ namespace Microsoft.NetApp;
  * SVM Peer resource, represents a peer relationship between an external SVM and an Azure NetApp Files SVM
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @parentResource(ClusterPeer)
 model SvmPeer is Azure.ResourceManager.ProxyResource<SvmPeerProperties> {
   ...ResourceNameParameter<
@@ -28,6 +30,8 @@ model SvmPeer is Azure.ResourceManager.ProxyResource<SvmPeerProperties> {
  * SVM Peer properties
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model SvmPeerProperties {
   /**
    * Azure lifecycle management
@@ -94,9 +98,13 @@ model SvmPeerProperties {
  * List of SVM Peer resources
  */
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 model SvmPeerList is Azure.Core.Page<SvmPeer>;
 
 @added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
 @armResourceOperations
 interface SvmPeers {
   /**
