@@ -10,6 +10,7 @@ export function schemaPath(schema: NormalizedSchema | undefined, segments: strin
   let identity = schemaIdentity(current);
   let ownerIdentity = identity;
   let memberName: string | undefined;
+  let required: boolean | undefined;
   for (const raw of segments) {
     const name = raw.replace(/\[\]$/, "");
     ownerIdentity = identity;
@@ -17,15 +18,19 @@ export function schemaPath(schema: NormalizedSchema | undefined, segments: strin
     const property = (current ? effectiveSchemaProperties(current) : []).find(
       (property) => property.name === name,
     );
-    if (!property) return { schema: undefined, identity, ownerIdentity, memberName };
+    if (!property) {
+      return { schema: undefined, identity, ownerIdentity, memberName, required: undefined };
+    }
     current = property.schema;
+    required = property.required;
     identity = schemaIdentity(current) ?? identity;
     if (raw.endsWith("[]")) {
       current = current?.items;
+      required = undefined;
       identity = schemaIdentity(current) ?? identity;
     }
   }
-  return { schema: current, identity, ownerIdentity, memberName };
+  return { schema: current, identity, ownerIdentity, memberName, required };
 }
 
 export function restContractIdentity(finding: {
@@ -44,6 +49,8 @@ export function restContractIdentity(finding: {
     "required-property-added",
     "wire-type-changed",
     "nullable-restricted",
+    "constraints-tightened",
+    "readonly-changed",
   ]).has(finding.rule ?? "");
   const pathIdentity = (schema: NormalizedSchema | undefined, segments: string[]) => {
     const resolved = schemaPath(schema, segments);
