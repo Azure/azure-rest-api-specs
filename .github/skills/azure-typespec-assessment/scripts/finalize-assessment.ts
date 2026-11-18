@@ -11,12 +11,18 @@ import { assembleAssessment } from "./assemble-assessment.ts";
 import { isMain, parseArgs, readJsonObject, runMain } from "./cli.ts";
 import { renderAssessmentHtml } from "./render-assessment-html.ts";
 import { validateAssessment } from "./validate-assessment.ts";
-import { loadSourceAssociation, SOURCE_ASSOCIATION_OUTPUT } from "./source-association.ts";
+import {
+  loadSourceAssociation,
+  SOURCE_ASSOCIATION_OUTPUT,
+  type SourceAssociationResult,
+} from "./source-association.ts";
+import { canonicalJson } from "./stable-id.ts";
 import {
   atomicWriteFile,
   atomicWriteJson,
   hashArtifacts,
   readWorkflowState,
+  resolveWorkPath,
   transitionWorkflowState,
   verifyArtifactHashes,
 } from "./workflow-state.ts";
@@ -58,7 +64,35 @@ export function finalizeAssessment({
     const preparation = verifyRuntimePhaseProvenance(root, "preparation", runtime);
     const materialization = verifyRuntimePhaseProvenance(root, "materialization", runtime);
     const previousState = readWorkflowState(root);
+    const index = readJsonObject(resolveWorkPath(root, AGENT_INDEX_FILE));
+    const rawCanonicalHashes = index.canonicalArtifactHashes;
+    if (
+      !rawCanonicalHashes ||
+      typeof rawCanonicalHashes !== "object" ||
+      Array.isArray(rawCanonicalHashes) ||
+      Object.keys(rawCanonicalHashes).length === 0 ||
+      !Object.values(rawCanonicalHashes).every(
+        (value) => typeof value === "string" && /^sha256:[a-f0-9]{64}$/.test(value),
+      )
+    ) {
+      throw new Error(
+        "Canonical assessment input hashes are missing from agent-index.json; rerun deterministic analysis.",
+      );
+    }
+    const canonicalHashes = rawCanonicalHashes as Record<string, string>;
+    if (canonicalJson(canonicalHashes) !== canonicalJson(previousState?.artifactHashes ?? {})) {
+      throw new Error(
+        "Canonical assessment input hashes in workflow-state.json do not match agent-index.json; rerun deterministic analysis.",
+      );
+    }
+    const earlyHashErrors = verifyArtifactHashes(root, canonicalHashes);
+    if (earlyHashErrors.length) {
+      throw new Error(
+        `Canonical assessment inputs changed; rerun deterministic analysis.\n${earlyHashErrors.join("\n")}`,
+      );
+    }
     const model = readJsonObject(path.join(root, "model-input.json"));
+    let sourceAssociation: SourceAssociationResult | undefined;
     if (model.pipelineVersion === 2) {
       failurePhase = "awaiting-source-association";
       if (
@@ -69,7 +103,7 @@ export function finalizeAssessment({
           `Source association is incomplete (workflow state: ${previousState?.state ?? "unknown"}); run materialize-assessment-results.ts --work <work> --source-association before finalization.`,
         );
       }
-      loadSourceAssociation(root);
+      sourceAssociation = loadSourceAssociation(root);
       failurePhase = "ready-for-finalization";
     }
     const inferenceArtifactAt = fileTimestamp(path.join(root, "inference.json"));
@@ -104,7 +138,7 @@ export function finalizeAssessment({
           : { agentShellCommands: Number(agentShellCommands) }),
       },
     });
-    const hashErrors = verifyArtifactHashes(root, state.artifactHashes);
+    const hashErrors = verifyArtifactHashes(root, canonicalHashes);
     if (hashErrors.length) {
       throw new Error(
         `Canonical assessment inputs changed; rerun deterministic analysis.\n${hashErrors.join("\n")}`,
@@ -136,7 +170,14 @@ export function finalizeAssessment({
     const assessmentPath = path.join(root, "assessment.json");
     const reportPath = path.join(root, "assessment.html");
     verifyAssessmentRuntime(root, import.meta.url);
+    verifyRuntimePhaseProvenance(root, "preparation", runtime);
     verifyRuntimePhaseProvenance(root, "materialization", runtime);
+    const lateHashErrors = verifyArtifactHashes(root, canonicalHashes);
+    if (lateHashErrors.length) {
+      throw new Error(
+        `Canonical assessment inputs changed; rerun deterministic analysis.\n${lateHashErrors.join("\n")}`,
+      );
+    }
     atomicWriteJson(assessmentPath, assessment);
     atomicWriteFile(reportPath, html);
     const finalizationMs = Math.round(performance.now() - started);
@@ -157,7 +198,9 @@ export function finalizeAssessment({
           [
             AGENT_INDEX_FILE,
             ...Object.keys(materialization.outputHashes),
-            ...(model.pipelineVersion === 2 ? [SOURCE_ASSOCIATION_OUTPUT] : []),
+            ...(sourceAssociation
+              ? [SOURCE_ASSOCIATION_OUTPUT, ...Object.keys(sourceAssociation.decisionHashes ?? {})]
+              : []),
           ],
           ["assessment.json", "assessment.html"],
         ),

@@ -2,14 +2,19 @@ import fs from "node:fs";
 import path from "node:path";
 import { isDeepStrictEqual } from "node:util";
 import { readJsonObject } from "./cli.ts";
-import { stableId } from "./stable-id.ts";
+import { canonicalJson, stableId } from "./stable-id.ts";
 import { restContractIdentity } from "./assessment-display.ts";
-import { verifyAssessmentRuntime, verifyRuntimePhaseProvenance } from "./assessment-runtime.ts";
+import {
+  AGENT_INDEX_FILE,
+  verifyAssessmentRuntime,
+  verifyRuntimePhaseProvenance,
+} from "./assessment-runtime.ts";
 import {
   atomicWriteFile,
   atomicWriteJson,
   comparisonIdentity,
   hashArtifacts,
+  normalizeWorkRelativePath,
   readWorkflowState,
   resolveWorkPath,
   sha256File,
@@ -190,6 +195,37 @@ function canonical(work: string) {
   if (errors.length) throw new Error(`Frozen assessment inputs changed.\n${errors.join("\n")}`);
   const runtime = verifyAssessmentRuntime(work, import.meta.url);
   verifyRuntimePhaseProvenance(work, "materialization", runtime);
+  const indexFile = resolveWorkPath(work, AGENT_INDEX_FILE);
+  if (fs.existsSync(indexFile)) {
+    const index = readJsonObject(indexFile);
+    if (index.canonicalArtifactHashes !== undefined) {
+      if (
+        !index.canonicalArtifactHashes ||
+        typeof index.canonicalArtifactHashes !== "object" ||
+        Array.isArray(index.canonicalArtifactHashes) ||
+        Object.keys(index.canonicalArtifactHashes).length === 0 ||
+        !Object.values(index.canonicalArtifactHashes).every(
+          (value) => typeof value === "string" && /^sha256:[a-f0-9]{64}$/.test(value),
+        )
+      ) {
+        throw new Error("Invalid canonical assessment input hashes in agent-index.json.");
+      }
+      if (
+        canonicalJson(index.canonicalArtifactHashes) !== canonicalJson(state?.artifactHashes ?? {})
+      ) {
+        throw new Error(
+          "Canonical assessment input hashes in workflow-state.json do not match agent-index.json.",
+        );
+      }
+      const indexErrors = verifyArtifactHashes(
+        work,
+        index.canonicalArtifactHashes as Record<string, string>,
+      );
+      if (indexErrors.length) {
+        throw new Error(`Frozen assessment inputs changed.\n${indexErrors.join("\n")}`);
+      }
+    }
+  }
   const judgment = readJsonObject(
     resolveWorkPath(work, "assessment-judgment.json"),
   ) as unknown as AssessmentJudgment;
@@ -713,7 +749,8 @@ export function materializeSourceAssociation({
   const started = performance.now();
   try {
     const { frozen, input } = checkedInput(root);
-    const decisionsFile = resolveWorkPath(root, decisions);
+    const normalizedDecisions = normalizeWorkRelativePath(root, decisions);
+    const decisionsFile = resolveWorkPath(root, normalizedDecisions);
     const raw = readJsonObject(decisionsFile);
     keys(
       raw,
@@ -837,7 +874,7 @@ export function materializeSourceAssociation({
       judgmentHash: input.judgmentHash,
       sourceIndexHash: input.sourceIndexHash,
       inputHash: sha256File(resolveWorkPath(root, SOURCE_ASSOCIATION_INPUT)),
-      decisionHashes: hashArtifacts(root, [decisions]),
+      decisionHashes: hashArtifacts(root, [normalizedDecisions]),
       status: !input.items.length
         ? "not-applicable"
         : selections.some((selection) => selection.outcome === "unresolved")
@@ -854,7 +891,7 @@ export function materializeSourceAssociation({
       sourceResultHash: sha256File(outputPath),
       artifacts: {
         ...priorArtifacts,
-        sourceAssociationDecisions: decisions,
+        sourceAssociationDecisions: normalizedDecisions,
         sourceAssociation: SOURCE_ASSOCIATION_OUTPUT,
       },
       failure: undefined,
@@ -914,12 +951,22 @@ export function loadSourceAssociation(work: string): SourceAssociationResult {
   if (output.status !== "complete" && output.status !== "partial") {
     throw new Error("Confirmed breaking findings require complete or partial source association.");
   }
+  const stateArtifacts =
+    frozen.state?.artifacts && typeof frozen.state.artifacts === "object"
+      ? (frozen.state.artifacts as Record<string, unknown>)
+      : undefined;
+  const expectedDecisionsPath =
+    typeof stateArtifacts?.sourceAssociationDecisions === "string" &&
+    stateArtifacts.sourceAssociationDecisions.trim()
+      ? normalizeWorkRelativePath(root, stateArtifacts.sourceAssociationDecisions)
+      : SOURCE_ASSOCIATION_DECISIONS;
   if (
     !output.decisionHashes ||
     typeof output.decisionHashes !== "object" ||
     Array.isArray(output.decisionHashes) ||
     Object.keys(output.decisionHashes).length !== 1 ||
-    !Object.values(output.decisionHashes).every((hash) => typeof hash === "string")
+    typeof output.decisionHashes[expectedDecisionsPath] !== "string" ||
+    !/^sha256:[a-f0-9]{64}$/.test(output.decisionHashes[expectedDecisionsPath])
   ) {
     throw new Error("Missing source decision hashes; rematerialize source association.");
   }

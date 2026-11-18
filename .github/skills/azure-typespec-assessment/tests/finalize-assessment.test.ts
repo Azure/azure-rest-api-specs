@@ -344,6 +344,12 @@ void test("finalization retains canonical assessment input hash guards", () => {
     fs.appendFileSync(path.join(work, "preparation-manifest.json"), "\n");
     assert.throws(() => finalizeAssessment({ work }), /Canonical assessment inputs changed/);
     assert.equal(fs.existsSync(path.join(work, "assessment.json")), false);
+
+    transitionWorkflowState(work, "awaiting-finalization", {
+      artifactHashes: {},
+    });
+    assert.throws(() => finalizeAssessment({ work }), /do not match agent-index\.json/);
+    assert.equal(fs.existsSync(path.join(work, "assessment.json")), false);
   } finally {
     fs.rmSync(work, { recursive: true, force: true });
   }
@@ -394,6 +400,21 @@ void test("materialization accepts timestamp-only changes to the prepared index"
     assert.deepEqual(fs.readFileSync(indexPath), index);
     materializeAssessmentResults({ work });
     assert.ok(fs.existsSync(finalizeAssessment({ work }).assessmentPath));
+  } finally {
+    fs.rmSync(work, { recursive: true, force: true });
+  }
+});
+
+void test("finalization accepts normalized dot-prefixed --decisions paths end-to-end", () => {
+  const work = fixture();
+  try {
+    materializeAssessmentResults({
+      work,
+      decisions: ".\\agent-workspace\\agent-decisions.json",
+    });
+    const finalized = finalizeAssessment({ work });
+    assert.ok(fs.existsSync(finalized.assessmentPath));
+    assert.ok(fs.existsSync(finalized.reportPath));
   } finally {
     fs.rmSync(work, { recursive: true, force: true });
   }
