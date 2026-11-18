@@ -155,15 +155,19 @@ model PlacementPolicyUpdateProperties {
   @doc("Whether the placement policy is enabled or disabled")
   state?: PlacementPolicyState;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   @doc("Virtual machine members list")
   vmMembers?: string[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   @doc("Host members list")
   hostMembers?: string[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   @doc("vm-host placement policy affinity strength (should/must)")
   affinityStrength?: AffinityStrength;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   @doc("placement policy azure hybrid benefit opt-in type")
   azureHybridBenefitType?: AzureHybridBenefitType;
 }

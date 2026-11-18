@@ -2476,17 +2476,20 @@ model PackageCarrierDetails {
   /**
    * Carrier Account Number of customer for customer disk.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   @secret
   carrierAccountNumber?: string;
 
   /**
    * Name of the carrier.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   carrierName?: string;
 
   /**
    * Tracking Id of shipment.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   trackingId?: string;
 }
 

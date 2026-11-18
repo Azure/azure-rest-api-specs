@@ -735,6 +735,7 @@ model InformaticaOrganizationResourceUpdate
 
 /** Patchable Properties of the Informatica Organization resource */
 model OrganizationPropertiesCustomUpdate {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   @doc("Informatica Organization properties")
   informaticaOrganizationProperties?: InformaticaOrganizationResourceUpdate;
 
@@ -747,6 +748,7 @@ model OrganizationPropertiesCustomUpdate {
   @doc("Company Details")
   companyDetails?: CompanyDetailsUpdate;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   @doc("Existing Resource Id")
   existingResourceId?: Azure.Core.armResourceIdentifier<[]>;
 }

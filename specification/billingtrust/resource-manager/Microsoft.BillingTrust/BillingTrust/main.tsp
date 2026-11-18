@@ -320,6 +320,7 @@ model BusinessVerificationRuleProperties extends RuleProperties {
 @doc("Patch body for updating a rule. Polymorphic by `kind` — kind-specific patchable fields live on per-kind subtypes. PATCH cannot change a rule's kind; the discriminator carries the rule's existing kind for routing only.")
 @discriminator("kind")
 model RulePatchProperties {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   @doc("The kind of rule. Acts as a discriminator for per-kind patchable fields. Must match the existing rule's kind; PATCH cannot mutate kind.")
   kind: RuleKind;
 }

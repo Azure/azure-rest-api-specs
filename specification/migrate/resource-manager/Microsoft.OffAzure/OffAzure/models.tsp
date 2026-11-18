@@ -7734,6 +7734,7 @@ model VmwareSiteUpdateProperties {
   /**
    * The status of the last operation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   provisioningState?: ProvisioningState;
 }
 

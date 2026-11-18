@@ -3391,49 +3391,58 @@ model UpdateReplicationProtectedItemInputProperties {
   /**
    * Target Azure VM name given by the user.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recoveryAzureVMName?: string;
 
   /**
    * Target Azure VM size.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   recoveryAzureVMSize?: string;
 
   /**
    * Target Azure Network Id.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   selectedRecoveryAzureNetworkId?: string;
 
   /**
    * The Azure Network Id for test failover.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   selectedTfoAzureNetworkId?: string;
 
   /**
    * The selected source nic Id which will be used as the primary nic during failover.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   selectedSourceNicId?: string;
 
   /**
    * The selected option to enable RDP\SSH on target vm after failover. String value of SrsDataContract.EnableRDPOnTargetOption enum.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   enableRdpOnTargetOption?: string;
 
   /**
    * The list of VM nic details.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   vmNics?: VMNicInputDetails[];
 
   /**
    * License type.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   licenseType?: LicenseType;
 
   /**
    * The target availability set Id.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   recoveryAvailabilitySetId?: string;
 
   /**
