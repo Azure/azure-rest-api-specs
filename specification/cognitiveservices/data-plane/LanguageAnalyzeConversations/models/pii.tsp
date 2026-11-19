@@ -299,10 +299,6 @@ union ConversationPiiCategoriesExclude {
   @added(Versions.v2025_11_15_preview)
   GPE: "GPE",
 
-  /** Debit card number category (generic, not region specific) */
-  @added(Versions.v2026_11_15_preview)
-  DebitCard: "DebitCard",
-
   /** US Individual Taxpayer Identification Number category */
   @added(Versions.v2026_11_15_preview)
   USIndividualTaxpayerIdentification: "USIndividualTaxpayerIdentification",
