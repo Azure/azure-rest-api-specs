@@ -39,7 +39,7 @@ model DataflowGraphProperties {
 
   /** List of persistent volume claim-backed file stores exposed to graph nodes. */
   @identifiers(#["id"])
-  @added(Versions.`2026-11-01-preview`)
+  @added(Versions.`2026-12-01-preview`)
   fileStores?: DataflowGraphFileStore[];
 
   /** List of nodes in the dataflow graph. */
@@ -64,7 +64,7 @@ model DataflowGraphProperties {
 }
 
 /** File store exposed to dataflow graph nodes. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model DataflowGraphFileStore {
   /** Reference to the persistent volume claim that backs the file store. */
   @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
