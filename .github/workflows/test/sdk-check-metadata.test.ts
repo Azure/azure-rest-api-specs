@@ -1,4 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { encodeMetadata } from "../../../eng/tools/spec-gen-sdk-runner/src/publish-sdk-metadata.ts";
+import { SdkMetadataSchema } from "../../shared/src/sdk-check-metadata.ts";
 import { createMockSpecGenSdkArtifactInfo } from "../../shared/test/sdk-types.ts";
 import * as artifacts from "../src/artifacts.ts";
 import type { CheckRuns } from "../src/github.ts";
@@ -149,6 +151,30 @@ describe("private SDK check metadata consumers", () => {
     );
     expect(core.summary.addRaw).toHaveBeenCalledWith(expect.stringContaining("❌ failed | false"));
     expect(core.setOutput).toHaveBeenCalledWith("issue_number", 42);
+  });
+
+  it("consumes the publisher's actual wire output without a second protocol definition", async () => {
+    const artifact = {
+      ...sample.envelope.artifact,
+      result: "failed",
+      isSpecGenSdkCheckRequired: false,
+      labelAction: true,
+      future: { preserve: [1, false] },
+      apiViewRequestData: [{ packageName: "widget", filePath: "api.json", future: { keep: true } }],
+    };
+    sample.metadata.output.text = encodeMetadata(
+      JSON.stringify(artifact),
+      sample.envelope.build,
+      SdkMetadataSchema.shape.sourceCheck.parse(sample.envelope.sourceCheck),
+      HEAD,
+      "42",
+    );
+    expect(readPrivateSdkArtifact(sample.native, [sample.metadata], 42)).toEqual(artifact);
+    await status();
+    expect(github.rest.repos.createCommitStatus).toHaveBeenLastCalledWith(
+      expect.objectContaining({ state: "success" }),
+    );
+    expect((await labels()).labelAction).toBe(LabelAction.Add);
   });
 
   it("accepts private native names ending in ' - PR' while retaining exact source binding", async () => {

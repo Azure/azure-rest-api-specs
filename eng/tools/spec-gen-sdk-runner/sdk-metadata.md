@@ -4,6 +4,9 @@ ADO still generates and validates SDKs. This POC transports the **entire existin
 `spec-gen-sdk-artifact.json`**, not generated code/packages, to a companion GitHub
 check in `Azure/azure-rest-api-specs-pr`. There is no public JSON store.
 The native Azure Pipelines checks and existing artifact names remain unchanged.
+The same change includes the private GitHub status and label readers; public readers
+retain their ADO artifact path. Both ends use `@azure-tools/specs-shared/sdk-check-metadata`
+for the envelope schema, codecs, byte limit, check names, and native build identity.
 
 ## Trust boundary and deployment prerequisites
 
@@ -46,7 +49,7 @@ The publisher pipeline must:
   The template allocates a fresh Microsoft-hosted agent, checks out only trusted
   code, disables implicit artifact downloads, and never executes source artifacts.
 - Set protected variables `SdkMetadataCollectionUri` (canonical
-  `https://dev.azure.com/<organization>/`), `SdkMetadataProjectId` (internal project
+  `https://dev.azure.com/azure-sdk/`), `SdkMetadataProjectId` (internal project
   GUID), `SdkMetadataDefinitionIds` (explicit comma-separated numeric source
   definition allowlist), `SdkMetadataPublisherAppId`, `SdkMetadataKeyVault`, and
   `SdkMetadataKeyName`. There are **no default definition IDs or writer App ID**.
@@ -123,7 +126,7 @@ Its `details_url` is copied from the original native pipeline check.
   },
   "sourceCheck": {
     "id": 789,
-    "name": ".NET",
+    "name": "SDK Validation - .NET - PR",
     "startedAt": "2026-01-01T00:00:00Z",
     "completedAt": "2026-01-01T01:00:00Z"
   },
@@ -140,7 +143,7 @@ Its `details_url` is copied from the original native pipeline check.
 ```
 
 Example IDs are illustrative, not deployment defaults. `artifact` is the parsed
-original manifest, validated with `SpecGenSdkArtifactInfoSchema` **without
+original manifest, validated with the shared `SdkMetadataSchema` **without
 projecting away unknown fields**, including nested fields. No required flag or
 generation result is reconstructed from configuration. Its PR number/head SHA
 must match authenticated source-build trigger metadata.
@@ -189,5 +192,5 @@ identical existing publication.
 Publication happens **after** native pipeline completion. Consumers must expose
 missing/invalid metadata rather than treating it as success, and re-evaluate
 status/labels when the authenticated companion's completed event arrives.
-Neither this POC nor its companion consumer deploys App permissions, service
+This POC does not deploy App permissions, service
 connections, protected variables/environments, pipeline definitions, or triggers.

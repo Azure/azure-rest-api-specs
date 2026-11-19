@@ -1,13 +1,20 @@
-import { SpecGenSdkArtifactInfoSchema } from "@azure-tools/specs-shared/sdk-types";
+import {
+  nativeSdkBuildIdentity,
+  sdkMetadataCheckName,
+  sdkMetadataExternalId,
+  serializeSdkMetadata,
+  SdkMetadataGuidSchema,
+  SdkMetadataIdSchema,
+  SdkMetadataSchema,
+} from "@azure-tools/specs-shared/sdk-check-metadata";
 import * as z from "zod";
 import { downloadAzurePipelineArtifactFile } from "../../../../.github/workflows/src/artifacts.ts";
 
 const repository = "Azure/azure-rest-api-specs-pr";
-const positiveId = z.number().int().positive().safe();
-const guid = z.string().uuid();
+const positiveId = SdkMetadataIdSchema;
+const guid = SdkMetadataGuidSchema;
 const timestamp = z.iso.datetime({ offset: true });
 const sha = z.string().regex(/^[a-f0-9]{40}$/i);
-const MAX_TEXT_BYTES = 65_535;
 const MAX_MANIFEST_BYTES = 1024 * 1024;
 
 const buildSchema = z.object({
@@ -64,44 +71,12 @@ export interface PublisherOptions {
   fetchImpl?: typeof fetch;
 }
 
-function assertCollectionUri(value: string): string {
-  const url = new URL(value);
-  if (
-    url.protocol !== "https:" ||
-    url.hostname !== "dev.azure.com" ||
-    !/^\/[a-zA-Z0-9-]+\/$/.test(url.pathname) ||
-    url.port ||
-    url.username ||
-    url.password ||
-    url.search ||
-    url.hash
-  ) {
-    throw new Error(
-      "Expected an Azure DevOps collection URI https://dev.azure.com/<organization>/",
-    );
-  }
-  return url.href;
-}
-
-function matchesBuildUrl(
-  value: string | null,
-  collectionUri: string,
-  projectId: string,
-  buildId: number,
-): boolean {
-  if (!value) return false;
-  const expected = new URL(`${collectionUri}${projectId}/_build/results`);
-  const actual = new URL(value);
+function matchesBuildUrl(check: Check, projectId: string, buildId: number): boolean {
+  const actual = nativeSdkBuildIdentity(check);
   return (
-    actual.origin === expected.origin &&
-    [
-      expected.pathname.toLowerCase(),
-      `${new URL(collectionUri).pathname}internal/_build/results`.toLowerCase(),
-    ].includes(actual.pathname.toLowerCase()) &&
-    actual.searchParams.get("buildId") === String(buildId) &&
-    !actual.username &&
-    !actual.password &&
-    !actual.hash
+    actual.projectId.toLowerCase() === projectId.toLowerCase() &&
+    actual.buildId === buildId &&
+    [projectId.toLowerCase(), "internal"].includes(actual.projectRef.toLowerCase())
   );
 }
 
@@ -122,27 +97,25 @@ export function encodeMetadata(
   expectedPrNumber: string,
 ): string {
   const artifact: unknown = JSON.parse(manifest);
-  const validated = SpecGenSdkArtifactInfoSchema.parse(artifact);
+  const validated = SdkMetadataSchema.shape.artifact.parse(artifact);
   if (validated.headSha !== expectedHeadSha || validated.prNumber !== expectedPrNumber) {
     throw new Error("Manifest does not belong to the source build PR/head");
   }
-  const text = JSON.stringify({
+  return serializeSdkMetadata({
     schemaVersion: 1,
     kind: "spec-gen-sdk-metadata",
     build,
     sourceCheck,
     artifact,
   });
-  if (Buffer.byteLength(text, "utf8") > MAX_TEXT_BYTES) {
-    throw new Error("SDK metadata exceeds the 65,535-byte check output.text limit");
-  }
-  return text;
 }
 
 export async function publishSdkMetadata(
   options: PublisherOptions,
 ): Promise<"created" | "unchanged"> {
-  const collectionUri = assertCollectionUri(options.collectionUri);
+  const collectionUri = SdkMetadataSchema.shape.build.shape.collectionUri.parse(
+    options.collectionUri,
+  );
   const projectId = guid.parse(options.projectId);
   const buildId = positiveId.parse(options.buildId);
   const publisherAppId = positiveId.parse(options.publisherAppId);
@@ -232,7 +205,7 @@ export async function publishSdkMetadata(
         check.app.slug === "azure-pipelines" &&
         check.external_id?.toLowerCase() === nativeExternalId.toLowerCase() &&
         check.head_sha === headSha &&
-        matchesBuildUrl(check.details_url, collectionUri, projectId, buildId),
+        matchesBuildUrl(check, projectId, buildId),
     )
     .sort((a, b) => b.id - a.id)[0];
   if (
@@ -260,8 +233,8 @@ export async function publishSdkMetadata(
     startedAt: native.started_at,
     completedAt: native.completed_at,
   };
-  const externalId = `spec-gen-sdk-metadata:v1:${projectId}:${build.definition.id}:${buildId}:${stage.attempt}:${job.attempt}`;
-  const name = `SDK metadata / ${build.definition.id}`;
+  const externalId = sdkMetadataExternalId(identity);
+  const name = sdkMetadataCheckName(build.definition.id);
   const detailsUrl = native.details_url;
 
   let text: string | undefined;

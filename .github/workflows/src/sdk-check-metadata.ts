@@ -1,41 +1,13 @@
-import * as z from "zod";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import {
-  APIViewRequestDataSchema,
-  SpecGenSdkArtifactInfoSchema,
-  type SpecGenSdkArtifactInfo,
-} from "../../shared/src/sdk-types.ts";
-import { getAdoBuildInfoFromUrl } from "./artifacts.ts";
+  nativeSdkBuildIdentity,
+  parseSdkMetadata,
+  sdkMetadataCheckName,
+  sdkMetadataExternalIdPrefix,
+  SdkMetadataIdSchema,
+} from "../../shared/src/sdk-check-metadata.ts";
+import type { SpecGenSdkArtifactInfo } from "../../shared/src/sdk-types.ts";
 import type { CheckRuns, Core, GitHub } from "./github.ts";
-
-const PositiveInteger = z.number().int().positive().safe();
-const Guid = z.string().regex(/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i);
-const Timestamp = z.iso.datetime({ offset: true });
-const MetadataSchema = z.strictObject({
-  schemaVersion: z.literal(1),
-  kind: z.literal("spec-gen-sdk-metadata"),
-  build: z.strictObject({
-    collectionUri: z.literal("https://dev.azure.com/azure-sdk/"),
-    projectId: Guid,
-    definitionId: PositiveInteger,
-    buildId: PositiveInteger,
-    stageAttempt: PositiveInteger,
-    jobAttempt: PositiveInteger,
-    jobId: Guid,
-  }),
-  sourceCheck: z.strictObject({
-    id: PositiveInteger,
-    name: z.string().min(1),
-    startedAt: Timestamp,
-    completedAt: Timestamp,
-  }),
-  artifact: SpecGenSdkArtifactInfoSchema.extend({
-    headSha: z.string().regex(/^[0-9a-f]{40}$/i),
-    prNumber: z.string().regex(/^[1-9]\d*$/),
-    result: z.enum(["succeeded", "failed", "warning", "pending", "inProgress", "notEnabled"]),
-    apiViewRequestData: z.array(APIViewRequestDataSchema.passthrough()),
-  }).passthrough(),
-});
 
 const LANGUAGES: Record<string, SpecGenSdkArtifactInfo["language"]> = {
   "SDK Validation - .NET": "azure-sdk-for-net",
@@ -162,41 +134,18 @@ export async function loadPrivateSdkChecks({
   return { checks, allChecks, pr, prNumber };
 }
 
-function nativeBuild(check: CheckRuns[number]) {
-  const url = new URL(check.details_url ?? "");
-  const { buildId, projectUrl } = getAdoBuildInfoFromUrl(url.href);
-  const match = /^([1-9]\d*)\|([1-9]\d*)\|([0-9a-f-]+)$/i.exec(check.external_id ?? "");
-  const project = /^\/azure-sdk\/([A-Za-z0-9-]+)\/_build\/results$/.exec(url.pathname)?.[1];
-  if (
-    url.origin !== "https://dev.azure.com" ||
-    url.username ||
-    url.password ||
-    !match ||
-    !Guid.safeParse(match[3]).success ||
-    !project ||
-    projectUrl !== `https://dev.azure.com/azure-sdk/${project}` ||
-    (Guid.safeParse(project).success && project !== match[3]) ||
-    buildId !== match[2] ||
-    url.searchParams.getAll("buildId").length !== 1
-  ) {
-    throw new Error(`Invalid native SDK build identity for ${check.name}`);
-  }
-  // Named project URLs are valid; the native external ID supplies their immutable project GUID.
-  return { definitionId: Number(match[1]), buildId: Number(buildId), projectId: match[3] };
-}
-
 export function readPrivateSdkArtifact(
   native: CheckRuns[number],
   allChecks: CheckRuns,
   prNumber: number,
 ): SpecGenSdkArtifactInfo {
-  const expected = nativeBuild(native);
+  const expected = nativeSdkBuildIdentity(native);
   const appId = publisherAppId();
-  const prefix = `spec-gen-sdk-metadata:v1:${expected.projectId}:${expected.definitionId}:${expected.buildId}:`;
+  const prefix = sdkMetadataExternalIdPrefix(expected);
   const candidates = allChecks.filter(
     (check) =>
       check.app?.id === appId &&
-      check.name === `SDK metadata / ${expected.definitionId}` &&
+      check.name === sdkMetadataCheckName(expected.definitionId) &&
       check.head_sha === native.head_sha &&
       check.external_id?.startsWith(prefix),
   );
@@ -209,8 +158,8 @@ export function readPrivateSdkArtifact(
     if (
       parts.length !== 2 ||
       parts.some((part) => !/^[1-9]\d*$/.test(part)) ||
-      !PositiveInteger.safeParse(stageAttempt).success ||
-      !PositiveInteger.safeParse(jobAttempt).success
+      !SdkMetadataIdSchema.safeParse(stageAttempt).success ||
+      !SdkMetadataIdSchema.safeParse(jobAttempt).success
     ) {
       throw new Error(`Invalid SDK metadata attempt for ${native.name}`);
     }
@@ -220,10 +169,10 @@ export function readPrivateSdkArtifact(
   const selected = attempts[0];
   const check = selected.check;
   const text = check.output.text;
-  if (!text || Buffer.byteLength(text, "utf8") > 65_535) {
-    throw new Error(`Missing or oversized SDK metadata for ${native.name}`);
+  if (!text) {
+    throw new Error(`Missing SDK metadata for ${native.name}`);
   }
-  const { build, sourceCheck, artifact } = MetadataSchema.parse(JSON.parse(text));
+  const { build, sourceCheck, artifact } = parseSdkMetadata(text);
   if (
     check.status !== "completed" ||
     check.conclusion !== "neutral" ||

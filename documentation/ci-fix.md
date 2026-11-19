@@ -157,6 +157,8 @@ variable `SDK_METADATA_PUBLISHER_APP_ID`. Provision and verify the publisher bef
 these private consumers. Do not elevate the existing generation/reader App or give its
 PR-controlled jobs the writer credential. Missing or invalid publisher configuration fails
 closed; there is no Azure login or ADO download fallback. Public-repository behavior is unchanged.
+See the [publisher and reader deployment contract](../eng/tools/spec-gen-sdk-runner/sdk-metadata.md)
+for the shared protocol and protected pipeline prerequisites.
 
 ## `SDK Breaking Change Mitigation and Review`
 
