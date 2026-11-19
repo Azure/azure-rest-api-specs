@@ -34,6 +34,27 @@ interface Microsoft365Publishing {
   >;
 
   /**
+   * Unpublishes a Foundry agent from Microsoft 365 / Microsoft Teams.
+   *
+   * Tenant-scoped agent unpublishing is not supported.
+   * The caller must be authorized to unpublish the agent in its Foundry project.
+   * Authorization to the Foundry agent and authorization to remove the Microsoft 365 title are separate checks.
+   * In legacy delegated-user cleanup flows, if the published title is owned by a delegated publisher, the caller must
+   * also be authorized to remove that title. This is a conditional legacy ownership requirement, not a universal
+   * requirement for all unpublish operations.
+   */
+  @summary("Unpublish an agent from Microsoft 365")
+  @post
+  @route("/agents/{agent_name}/microsoft365/unpublish")
+  unpublishAgentFromMicrosoft365 is FoundryDataPlaneOperation<
+    {
+      /** The name of the agent to unpublish. */
+      @path agent_name: string;
+    },
+    NoContentResponse
+  >;
+
+  /**
    * Generates the Microsoft Teams app package (zip) for a Foundry agent from the supplied publish
    * request, without publishing it. Returns the app package as `application/zip`.
    */
