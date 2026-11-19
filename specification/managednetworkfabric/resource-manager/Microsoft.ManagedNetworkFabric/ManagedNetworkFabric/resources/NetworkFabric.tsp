@@ -20,8 +20,8 @@ model NetworkFabric is Azure.ResourceManager.TrackedResource<
   @visibility(Lifecycle.Read)
   name: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Preserves the existing preview API properties envelope before 2025-07-15; versioned renaming emits this field as properties."
   /** The NetworkFabric Properties */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Preserves the existing preview API properties envelope before 2025-07-15; versioned renaming emits this field as properties."
   @removed(Versions.v2025_07_15)
   @renamedFrom(Versions.v2025_07_15, "properties")
   propertiesDeprecated: NetworkFabricProperties;
