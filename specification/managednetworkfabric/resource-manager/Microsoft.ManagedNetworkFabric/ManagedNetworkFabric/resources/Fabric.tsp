@@ -18,6 +18,7 @@ model Fabric is Azure.ResourceManager.TrackedResource<FabricProperties, false> {
   @visibility(Lifecycle.Read)
   name: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Preserves the existing required kind envelope contract; ResourceKindProperty makes kind optional and adds a pattern constraint."
   @doc("Fabric kind: which party drives the switches. Set at create time and immutable.")
   @added(Versions.v2026_07_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
