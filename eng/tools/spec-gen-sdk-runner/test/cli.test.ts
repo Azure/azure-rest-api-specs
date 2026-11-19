@@ -11,6 +11,7 @@ describe("CLI arguments", () => {
     expect(result.stdout).toContain("Usage:");
     expect(result.stdout).toContain("--typespec-emitter");
     expect(result.stdout).toContain("--batch-type");
+    expect(result.stdout).not.toContain("##vso[task.complete result=Failed;]");
     expect(result.stdout).not.toContain("Current working directory:");
   });
 
@@ -22,6 +23,7 @@ describe("CLI arguments", () => {
     const result = spawnSync(process.execPath, [command, ...args], { encoding: "utf8" });
     expect(result.status).toBe(1);
     expect(result.stderr).toContain(code);
+    expect(result.stdout).toContain("##vso[task.complete result=Failed;]");
     expect(result.stdout).not.toContain("Current working directory:");
   });
 });
