@@ -175,6 +175,114 @@ describe("ARM review label handoff", () => {
       expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
       expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
     });
+
+    function createSummaryWithReports(reportUrls = true) {
+      const summary = createSummary([
+        "typespec-suppressions-review-required",
+        "package-name-review-required",
+      ]);
+      summary.github.rest.checks.listForRef.mockResolvedValue({
+        data: {
+          check_runs: [
+            {
+              name: "Summarize PR Impact",
+              status: "completed",
+              conclusion: "success",
+              check_suite: { id: 1 },
+            },
+            {
+              name: "Contributor readiness",
+              external_id: "contributor-readiness:123",
+              status: "completed",
+              conclusion: "neutral",
+              details_url: reportUrls
+                ? "https://github.com/Azure/azure-rest-api-specs/pull/123#issuecomment-13"
+                : "https://checks.example/access",
+            },
+          ],
+        },
+      });
+      if (reportUrls) {
+        summary.github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
+          data: [
+            {
+              context: "TypeSpec Suppressions",
+              state: "failure",
+              target_url: "https://github.com/Azure/azure-rest-api-specs/pull/123#issuecomment-11",
+              updated_at: "2026-11-16T12:00:00Z",
+            },
+            {
+              context: "Package Name Approval",
+              state: "pending",
+              target_url: "https://github.com/Azure/azure-rest-api-specs/pull/123#issuecomment-12",
+              updated_at: "2026-11-16T12:00:00Z",
+            },
+          ],
+        });
+      }
+      return summary;
+    }
+
+    it("links requirements using check/status URLs without discovering reports in comments", async () => {
+      const { github, run } = createSummaryWithReports();
+      github.rest.issues.listComments.mockResolvedValue({
+        data: [{ id: 99, body: "Old summary\n<!-- NextStepsToMerge -->" }],
+      });
+
+      await run();
+
+      expect(github.rest.issues.listComments).toHaveBeenCalledTimes(1);
+      expect(github.rest.repos.listCommitStatusesForRef).toHaveBeenCalledTimes(1);
+      expect(github.rest.checks.listForRef).toHaveBeenCalledTimes(1);
+      expect(github.rest.issues.createComment).not.toHaveBeenCalled();
+      expect(github.rest.issues.updateComment).toHaveBeenCalledWith(
+        expect.objectContaining({ comment_id: 99 }),
+      );
+      const { body } = github.rest.issues.updateComment.mock.calls[0][0] as { body: string };
+      const visible = marked.parse(body.split("<details>")[0]);
+      const prUrl = "https://github.com/Azure/azure-rest-api-specs/pull/123";
+      expect(visible).toContain(`<a href="${prUrl}#issuecomment-11">TypeSpec suppressions</a>`);
+      expect(visible).toContain(`<a href="${prUrl}#issuecomment-12">SDK package names</a>`);
+      expect(visible).toContain(`<a href="${prUrl}#issuecomment-13">Contributor readiness</a>`);
+      expect(body).not.toContain("https://checks.example/access");
+      expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+        expect.objectContaining({ state: "failure" }),
+      );
+    });
+
+    it.each(["github-actions[bot]", "contributor"])(
+      "preserves guidance without published URLs, ignoring report markers from %s",
+      async (login) => {
+        const { github, run } = createSummaryWithReports(false);
+        github.rest.issues.listComments.mockResolvedValue({
+          data: [
+            {
+              id: 14,
+              user: { login },
+              body: "<!-- TypeSpecSuppressionsReview -->\n<!-- package-name-review-bot -->\n<!-- contributor-readiness -->",
+            },
+          ],
+        });
+
+        await run();
+
+        const { body } = github.rest.issues.createComment.mock.calls[0][0] as { body: string };
+        const visible = marked.parse(body.split("<details>")[0]);
+        expect(visible).toContain("TypeSpec suppressions");
+        expect(visible).toContain("SDK package names");
+        expect(visible).toContain(
+          "Request approval for the suppressions listed in the TypeSpec review comment.",
+        );
+        expect(visible).toContain(
+          '<a href="https://checks.example/access">Contributor readiness</a>',
+        );
+        expect(body).not.toContain("#issuecomment-");
+        expect(github.rest.issues.listComments).toHaveBeenCalledTimes(1);
+        expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+          expect.objectContaining({ state: "failure" }),
+        );
+      },
+    );
   });
 
   describe("workflow_dispatch from Update Labels", () => {
@@ -542,6 +650,55 @@ describe("Summarize Checks Unit Tests", () => {
     expect(comment).toContain("Wait for this required check's result.");
     expect(comment).not.toContain("/running.svg");
     expect(result.result).toBe("pending");
+  });
+
+  it("retains same-PR report URLs across label refreshes without extra API requests", async () => {
+    const github = createMockGithub();
+    const core = createMockCore();
+    const reportUrl = "https://github.com/owner/repo/pull/1#issuecomment-12";
+    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
+      data: [
+        {
+          context: "Package Name Approval",
+          state: "pending",
+          updated_at: "2026-11-16T12:02:00Z",
+        },
+        {
+          context: "Package Name Approval",
+          state: "pending",
+          target_url: "https://github.com/owner/repo/pull/2#issuecomment-22",
+          updated_at: "2026-11-16T12:01:00Z",
+        },
+        {
+          context: "Package Name Approval",
+          state: "pending",
+          target_url: reportUrl,
+          updated_at: "2026-11-16T12:00:00Z",
+        },
+        {
+          context: "TypeSpec Suppressions",
+          state: "failure",
+          target_url: "https://github.com/owner/repo/pull/2#issuecomment-23",
+          updated_at: "2026-11-16T12:00:00Z",
+        },
+      ],
+    });
+
+    const [, , , reportLinks] = await getCheckRunTuple(
+      github,
+      core,
+      "owner",
+      "repo",
+      fullGitSha,
+      "main",
+      [],
+      1,
+    );
+
+    expect(reportLinks).toEqual({ "SDK package names": reportUrl });
+    expect(github.rest.repos.listCommitStatusesForRef).toHaveBeenCalledOnce();
+    expect(github.rest.checks.listForRef).toHaveBeenCalledOnce();
+    expect(github.rest.issues.listComments).not.toHaveBeenCalled();
   });
 
   describe("check result processing", () => {

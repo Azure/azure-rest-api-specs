@@ -42,8 +42,10 @@ describe("post-results", () => {
 
   beforeEach(() => {
     context.eventName = "";
+    mockCore.setOutput.mockClear();
     vi.mocked(extractInputs).mockReset();
     vi.mocked(commentOrUpdate).mockReset();
+    vi.mocked(commentOrUpdate).mockResolvedValue(99);
     vi.mocked(parseExistingComments).mockReset();
     vi.mocked(buildSuppressionsComment).mockReset();
     vi.mocked(renderSuppressionsCommentBody).mockReset();
@@ -104,7 +106,13 @@ describe("post-results", () => {
       42,
       "BODY: suppressions requiring review",
       "TypeSpecSuppressionsReview",
+      "github-actions[bot]",
     );
+    expect(mockCore.setOutput).toHaveBeenCalledWith(
+      "report_url",
+      "https://github.com/test-owner/test-repo/pull/42#issuecomment-99",
+    );
+    expect(github.rest.issues.listComments).not.toHaveBeenCalled();
   });
 
   it("applies the typespec-suppressions-review-required label when requiresApproval is true and label is absent", async () => {
@@ -207,6 +215,7 @@ describe("post-results", () => {
       42,
       "BODY: approval required",
       "TypeSpecSuppressionsReview",
+      "github-actions[bot]",
     );
   });
 
@@ -230,6 +239,7 @@ describe("post-results", () => {
       42,
       "BODY: approved",
       "TypeSpecSuppressionsReview",
+      "github-actions[bot]",
     );
   });
 
@@ -264,6 +274,11 @@ describe("post-results", () => {
     expect(call[4]).toBe(42);
     expect(call[5]).toContain("No TypeSpec suppressions require review");
     expect(call[6]).toBe("TypeSpecSuppressionsReview");
+    expect(mockCore.setOutput).toHaveBeenCalledWith(
+      "report_url",
+      "https://github.com/test-owner/test-repo/pull/42#issuecomment-99",
+    );
+    expect(github.rest.issues.listComments).toHaveBeenCalledOnce();
   });
 
   it("does nothing when nothing requires review and no prior comment exists", async () => {

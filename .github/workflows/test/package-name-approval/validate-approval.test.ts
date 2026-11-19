@@ -163,15 +163,26 @@ describe("validate-approval", () => {
       github.rest.pulls.get.mockResolvedValue({
         data: { labels: [{ name: "package-name-review-required" }] },
       });
-      (github.rest.issues as Record<string, unknown>).listComments = vi
-        .fn()
-        .mockResolvedValue({ data: [] });
+      github.rest.issues.listComments.mockResolvedValue({
+        data: [
+          {
+            id: 99,
+            user: { login: "github-actions[bot]", type: "Bot" },
+            body: "| java | `azure-compute` | `com.azure.compute` | ✅ | ⏳ Pending | @approver1 |\n<!-- package-name-review-bot -->",
+          },
+        ],
+      });
 
       await validateApproval(args());
 
       expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
         expect.objectContaining({ name: "package-name-java-pending" }),
       );
+      expect(core.setOutput).toHaveBeenCalledWith(
+        "report_url",
+        "https://github.com/owner/repo/pull/42#issuecomment-99",
+      );
+      expect(github.rest.issues.listComments).toHaveBeenCalledOnce();
     });
 
     it("should allow global approver to approve any language", async () => {

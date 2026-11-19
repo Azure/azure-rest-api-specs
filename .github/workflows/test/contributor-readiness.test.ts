@@ -774,6 +774,12 @@ describe("contributor readiness", () => {
       expect.objectContaining({ comment_id: 5 }),
     );
     expect(f.github.rest.issues.createComment).not.toHaveBeenCalled();
+    expect(f.createCheck).toHaveBeenCalledWith(
+      expect.objectContaining({
+        details_url: "https://github.com/Azure/example/pull/1#issuecomment-5",
+      }),
+    );
+    expect(f.github.rest.issues.listComments).toHaveBeenCalledOnce();
   });
 
   it("refreshes the timestamp across report surfaces when findings are unchanged", async () => {
@@ -802,6 +808,12 @@ describe("contributor readiness", () => {
     const report = refreshedBody.replace(`\n${marker}`, "");
     expect(f.core.summary.addRaw).toHaveBeenLastCalledWith(report);
     expect(f.createCheck.mock.lastCall?.[0]).toMatchObject({ output: { summary: report } });
+    expect(f.createCheck.mock.calls[0]?.[0]).toMatchObject({
+      details_url: "https://github.com/Azure/example/pull/1#issuecomment-1",
+    });
+    expect(f.createCheck.mock.lastCall?.[0]).toMatchObject({
+      details_url: "https://github.com/Azure/example/pull/1#issuecomment-5",
+    });
   });
 
   it("allows affected reviewers without write access to refresh", async () => {

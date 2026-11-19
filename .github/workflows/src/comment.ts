@@ -53,7 +53,8 @@ export function parseExistingComments(
  * @param commentIdentifier - The value that will be stored in an html comment so we can retrieve this comment later
  * @param commentUser - Optional GitHub author login used to filter existing
  * comments. When omitted, comments from all authors are considered.
- * @returns Resolves when the comment is created or updated.
+ * @param existingComments - Optional comments already fetched for this issue.
+ * @returns The ID of the created or existing comment.
  */
 export async function commentOrUpdate(
   github: GitHub,
@@ -64,15 +65,18 @@ export async function commentOrUpdate(
   body: string,
   commentIdentifier: string,
   commentUser?: string,
-): Promise<void> {
+  existingComments?: IssueComment[],
+): Promise<number> {
   const computedBody = body + `\n<!-- ${commentIdentifier} -->`;
 
-  let comments: IssueComment[] = await github.paginate(github.rest.issues.listComments, {
-    owner,
-    repo,
-    issue_number,
-    per_page: PER_PAGE_MAX,
-  });
+  let comments: IssueComment[] =
+    existingComments ??
+    (await github.paginate(github.rest.issues.listComments, {
+      owner,
+      repo,
+      issue_number,
+      per_page: PER_PAGE_MAX,
+    }));
 
   if (commentUser) {
     comments = comments.filter((comment) => comment.user?.login === commentUser);
@@ -82,7 +86,7 @@ export async function commentOrUpdate(
   if (commentId) {
     if (commentBody === computedBody) {
       core.info(`No update needed for comment ${commentId}.`);
-      return; // No-op if the body is the same
+      return commentId;
     }
     await github.rest.issues.updateComment({
       owner,
@@ -91,6 +95,7 @@ export async function commentOrUpdate(
       body: computedBody,
     });
     core.info(`Updated existing comment ${commentId}.`);
+    return commentId;
   } else {
     // Create a new comment
     const { data: newComment } = await github.rest.issues.createComment({
@@ -100,5 +105,6 @@ export async function commentOrUpdate(
       body: computedBody,
     });
     core.info(`Created new comment #${newComment.id}`);
+    return newComment.id;
   }
 }

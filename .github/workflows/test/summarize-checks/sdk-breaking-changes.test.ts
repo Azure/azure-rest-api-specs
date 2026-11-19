@@ -219,7 +219,7 @@ describe("SDK breaking-change summary", () => {
         workflowUrl,
       );
 
-      expect(github.rest.issues.listComments).toHaveBeenCalled();
+      expect(github.rest.issues.listComments).toHaveBeenCalledTimes(1);
       expect(github.rest.pulls.get).toHaveBeenCalledTimes(detected ? 2 : 1);
       expect(github.rest.issues.listLabelsOnIssue).not.toHaveBeenCalled();
       expect(github.rest.issues.createComment).not.toHaveBeenCalled();

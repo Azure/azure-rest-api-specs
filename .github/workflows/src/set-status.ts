@@ -18,6 +18,7 @@ export default async function setStatus(
   monitoredWorkflowName: string,
   requiredStatusName: string,
   overridingLabel: string,
+  reportUrl?: string,
 ): Promise<void> {
   const { owner, repo, head_sha, issue_number } = await extractInputs(github, context, core);
 
@@ -37,6 +38,7 @@ export default async function setStatus(
     monitoredWorkflowName,
     requiredStatusName,
     overridingLabel,
+    reportUrl,
   });
 }
 /* v8 ignore stop */
@@ -52,6 +54,7 @@ export async function setStatusImpl({
   monitoredWorkflowName,
   requiredStatusName,
   overridingLabel,
+  reportUrl,
 }: {
   owner: string;
   repo: string;
@@ -63,6 +66,7 @@ export async function setStatusImpl({
   monitoredWorkflowName: string;
   requiredStatusName: string;
   overridingLabel: string;
+  reportUrl?: string;
 }): Promise<void> {
   if (!isFullGitSha(head_sha)) {
     throw new Error(`head_sha is not a valid full git SHA: '${head_sha}'`);
@@ -131,9 +135,9 @@ export async function setStatusImpl({
      * Update target to the "Analyze Code" run, which contains the meaningful output.
      * @example https://github.com/Azure/azure-rest-api-specs/actions/runs/14509047569
      */
-    target_url = run.html_url;
+    target_url = reportUrl || run.html_url;
 
-    if (run.conclusion === CheckConclusion.FAILURE) {
+    if (run.conclusion === CheckConclusion.FAILURE && !reportUrl) {
       const jobSummaryArtifactName = "job-summary";
 
       // Check if run has a custom job summary
