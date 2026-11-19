@@ -129,6 +129,40 @@ using Microsoft.Chaos;
   "ChaosActionSupportedTargetType",
   "csharp"
 );
+@@clientName(ActionError, "ScenarioActionError", "csharp");
+@@clientName(ActionErrorDetail, "ScenarioActionErrorDetail", "csharp");
+@@clientName(FailureBehavior, "ScenarioFailureBehavior", "csharp");
+@@clientName(ParameterFormatType, "ScenarioParameterFormatType", "csharp");
+@@clientName(
+  ScenarioRunSummaryAction.failureSuppressed,
+  "IsFailureSuppressed",
+  "csharp"
+);
+@@clientName(
+  WorkspaceDiscoveryProperties.warningsTruncated,
+  "IsWarningListTruncated",
+  "csharp"
+);
+@@clientName(
+  WorkspaceEvaluationProperties.numTemplatesToEvaluate,
+  "TemplatesToEvaluateCount",
+  "csharp"
+);
+@@clientName(
+  WorkspaceEvaluationProperties.numTemplatesEvaluatedSucceeded,
+  "TemplatesEvaluatedSucceededCount",
+  "csharp"
+);
+@@clientName(
+  WorkspaceEvaluationProperties.numTemplatesEvaluatedFailed,
+  "TemplatesEvaluatedFailedCount",
+  "csharp"
+);
+@@clientName(
+  WorkspaceEvaluationProperties.numTemplatesEvaluatedCancelled,
+  "TemplatesEvaluatedCancelledCount",
+  "csharp"
+);
 
 // 2026-08-01-preview: `resultsV2` is the TypeSpec property name (renamed to avoid
 // collision with the legacy `results: ScenarioEvaluationResultItem[]`), but the

@@ -291,6 +291,7 @@ using TypeSpec.Http;
   "ContainerServiceFleetScheduledStartProperties",
   "csharp"
 );
+@@clientName(AllowedSubject, "IdentityBindingAllowedSubject", "csharp");
 
 @@alternateType(
   Azure.ResourceManager.EntityTagProperty.eTag,
@@ -302,6 +303,9 @@ using TypeSpec.Http;
   armResourceIdentifier,
   "csharp"
 );
+@@alternateType(IdentityBindingManagedIdentityProfile.objectId, uuid, "csharp");
+@@alternateType(IdentityBindingManagedIdentityProfile.clientId, uuid, "csharp");
+@@alternateType(IdentityBindingManagedIdentityProfile.tenantId, uuid, "csharp");
 @@usage(Gate, Usage.input, "csharp");
 @@usage(UpdateRunGateTargetProperties, Usage.input, "csharp");
 @@usage(GateTarget, Usage.input, "csharp");
