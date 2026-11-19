@@ -5,7 +5,7 @@ type: capability # capability | regression
 tags:
   area: "armtemplate"
 # Root-level environment
-environment: azsdk-mcp
+agent_environment: azsdk-mcp
 # Execution configuration
 defaults:
   runs: 1 # Trials per stimulus
@@ -21,7 +21,7 @@ stimuli:
       mode: "trigger"
     prompt: |
       In the Widget project, add a checkExistence (HEAD) operation to the existing Employee resource. Ensure the definition meets TypeSpec Azure guidelines.
-    environment: &shared_environment
+    agent_environment: &shared_environment
       files:
         - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
           dest: employee.tsp
@@ -53,7 +53,7 @@ stimuli:
       mode: "forced"
     prompt: |
       @azure-typespec-author In the Widget project, add a checkExistence (HEAD) operation to the existing Employee resource. Ensure the definition meets TypeSpec Azure guidelines.
-    environment: *shared_environment
+    agent_environment: *shared_environment
     rubric: &shared_rubric
       - Employee has a HEAD operation named checkExistence using ArmResourceCheckExistence<Employee>.
       - The operation follows TypeSpec Azure ARM resource-operation guidelines.
@@ -91,7 +91,7 @@ stimuli:
       suite: "armtemplate"
       mode: "no-skill"
     prompt: "In the Widget project, add a checkExistence (HEAD) operation to the existing Employee resource. Ensure the definition meets TypeSpec Azure guidelines."
-    environment: *shared_environment
+    agent_environment: *shared_environment
     rubric: *shared_rubric
     graders:
       - type: "tool-calls"

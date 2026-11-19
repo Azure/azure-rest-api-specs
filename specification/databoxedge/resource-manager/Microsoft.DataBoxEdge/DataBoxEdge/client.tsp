@@ -2145,6 +2145,28 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 @@clientName(RoleTypes.ASA, "Asa", "csharp");
 
 @@clientName(MetricDimension_V1, "MetricDimensionV1", "python");
+
+// Preserve legacy Python enum member names.
+@@clientName(
+  EncryptionAlgorithm.RSAES_PKCS1_v_1_5,
+  exact("RSAES_PKCS1_V1_5"),
+  "python"
+);
+@@clientName(SkuName.TEA_1Node, exact("TEA1_NODE"), "python");
+@@clientName(SkuName.TEA_1Node_UPS, exact("TEA1_NODE_UPS"), "python");
+@@clientName(SkuName.TEA_1Node_Heater, exact("TEA1_NODE_HEATER"), "python");
+@@clientName(
+  SkuName.TEA_1Node_UPS_Heater,
+  exact("TEA1_NODE_UPS_HEATER"),
+  "python"
+);
+@@clientName(SkuName.TEA_4Node_Heater, exact("TEA4_NODE_HEATER"), "python");
+@@clientName(
+  SkuName.TEA_4Node_UPS_Heater,
+  exact("TEA4_NODE_UPS_HEATER"),
+  "python"
+);
+
 @@clientName(MetricSpecification_V1, "MetricSpecificationV1", "python");
 @@clientName(RoleTypes.MEC, "Mec", "csharp");
 @@clientName(NetworkGroup.NonRDMA, "NonRdma", "csharp");
