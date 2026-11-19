@@ -25,6 +25,53 @@ model DaprComponent
   >;
 }
 
+alias DaprComponentOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name of the connected environment. */
+    @path
+    @segment("connectedEnvironments")
+    @key
+    connectedEnvironmentName: string;
+  },
+  {
+    /** Name of the Dapr Component. */
+    @path
+    @segment("daprComponents")
+    @key
+    componentName: string;
+  },
+  ResourceName = "DaprComponent"
+>;
+
+alias DaprComponentCustomErrorOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name of the connected environment. */
+    @path
+    @segment("connectedEnvironments")
+    @key
+    connectedEnvironmentName: string;
+  },
+  {
+    /** Name of the Dapr Component. */
+    @path
+    @segment("daprComponents")
+    @key
+    componentName: string;
+  },
+  ErrorType = DefaultErrorResponse,
+  ResourceName = "DaprComponent"
+>;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 @tag("DaprComponents")
@@ -33,7 +80,7 @@ interface ConnectedEnvironmentsDaprComponents {
    * Get a dapr component.
    */
   @summary("Get a dapr component.")
-  get is ArmResourceRead<DaprComponent, Error = DefaultErrorResponse>;
+  get is DaprComponentCustomErrorOps.Read<DaprComponent>;
 
   /**
    * Creates or updates a Dapr Component in a connected environment.
@@ -45,27 +92,25 @@ interface ConnectedEnvironmentsDaprComponents {
    * Delete a Dapr Component from a connected environment.
    */
   @summary("Delete a Dapr Component.")
-  delete is ArmResourceDeleteWithoutOkAsync<DaprComponent>;
+  delete is DaprComponentOps.DeleteWithoutOkAsync<DaprComponent>;
 
   /**
    * Get the Dapr Components for a connected environment.
    */
   @summary("Get the Dapr Components for a connected environment.")
-  list is ArmResourceListByParent<
+  list is DaprComponentCustomErrorOps.List<
     DaprComponent,
-    Response = ArmResponse<DaprComponentsCollection>,
-    Error = DefaultErrorResponse
+    Response = ArmResponse<DaprComponentsCollection>
   >;
 
   /**
    * List secrets for a dapr component
    */
   @summary("List secrets for a dapr component")
-  listSecrets is ArmResourceActionSync<
+  listSecrets is DaprComponentCustomErrorOps.ActionSync<
     DaprComponent,
     void,
-    ArmResponse<DaprSecretsCollection>,
-    Error = DefaultErrorResponse
+    ArmResponse<DaprSecretsCollection>
   >;
 }
 alias DaprComponentOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
