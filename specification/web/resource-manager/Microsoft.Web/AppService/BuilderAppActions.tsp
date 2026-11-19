@@ -33,18 +33,8 @@ model BuilderAppBeginSourceUploadRequest {
   /** Stable client key. Reusing the key requires identical immutable upload input. */
   idempotencyKey: string;
 
-  /** App manifest supplied separately from the archive, at most 1 MiB UTF-8. */
-  @maxLength(1048576)
-  manifestYaml: string;
-
-  /** Archive length in bytes, from 1 byte to 100 MiB. */
-  @minValue(1)
-  @maxValue(104857600)
-  contentLength: int64;
-
-  /** Lowercase SHA-256 digest of the archive. */
-  @pattern("^[0-9a-f]{64}$")
-  sha256: string;
+  /** Optional app manifest supplied separately from the archive. When supplied, its decoded UTF-8 content must not exceed 1 MiB. This byte limit is distinct from the serialized JSON request size. */
+  manifestYaml?: string;
 
   /** Self-reported workflow origin, used only for bounded audit metadata. */
   origin?: BuilderAppSourceUploadOrigin;
@@ -129,21 +119,33 @@ model BuilderAppDeployRequest {
   /** Stable request key. Supply this or the x-ms-client-request-id header. */
   idempotencyKey?: string;
 
-  /** Retained version to deploy. Cannot be combined with commitSha or uploaded source. */
+  /** Retained version to deploy. Cannot be combined with commitSha, buildMode, or uploaded source. */
   versionId?: string;
 
-  /** Whether to rebuild source rather than reuse retained artifacts. */
-  rebuild?: boolean;
+  /** Whether to rebuild source or reuse retained build artifacts. Defaults to ReuseArtifacts. Rebuild cannot be combined with commitSha or uploaded source. */
+  buildMode?: BuilderAppBuildMode;
 
   /** Exact repository commit, mutually exclusive with versionId and uploaded source. */
   @pattern("^[0-9a-fA-F]{40}$")
   commitSha?: string;
 
-  /** Uploaded source artifact. Cannot be combined with repository commit, version, or rebuild selection. */
+  /** Uploaded source artifact. Cannot be combined with repository commit, version, or build mode selection. */
   source?: BuilderAppUploadedDeploymentSource;
 }
 
-/** A previously uploaded source artifact and its integrity information. */
+/** Build modes for a deployment. */
+@added(Versions.v2026_11_15)
+union BuilderAppBuildMode {
+  /** Reuse retained build artifacts for the resolved source when available. */
+  ReuseArtifacts: "ReuseArtifacts",
+
+  /** Build the resolved source again even when retained artifacts exist. */
+  Rebuild: "Rebuild",
+
+  string,
+}
+
+/** A previously uploaded source artifact. Archive integrity metadata is computed by the service during upload. */
 @added(Versions.v2026_11_15)
 model BuilderAppUploadedDeploymentSource {
   /** Uploaded source discriminator. */
@@ -151,20 +153,18 @@ model BuilderAppUploadedDeploymentSource {
 
   /** Opaque identifier returned by beginSourceUpload. */
   artifactId: string;
-
-  /** Lowercase SHA-256 digest of the uploaded archive. */
-  @pattern("^[0-9a-f]{64}$")
-  sha256: string;
-
-  /** Uploaded archive length in bytes. */
-  @minValue(1)
-  @maxValue(104857600)
-  contentLength: int64;
 }
 
-/** Redeploy retained ready artifacts. Commit, version, source, and rebuild selection are not accepted. */
+/** Redeploy retained ready artifacts. Commit, version, source, and build mode selection are not accepted. */
 @added(Versions.v2026_11_15)
 model BuilderAppRedeployRequest {
+  /** Stable request key. Supply this or the x-ms-client-request-id header. */
+  idempotencyKey?: string;
+}
+
+/** Request to start or stop the app runtime. */
+@added(Versions.v2026_11_15)
+model BuilderAppRuntimeActionRequest {
   /** Stable request key. Supply this or the x-ms-client-request-id header. */
   idempotencyKey?: string;
 }

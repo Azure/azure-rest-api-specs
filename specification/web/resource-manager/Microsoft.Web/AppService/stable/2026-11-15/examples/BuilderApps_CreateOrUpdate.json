@@ -18,7 +18,7 @@
           "displayName": "contoso/storefront",
           "reference": "main",
           "rootDirectory": "apps/storefront",
-          "autoDeploy": true
+          "deploymentTrigger": "Push"
         },
         "versionConfiguration": {
           "variables": [
@@ -35,12 +35,36 @@
             {
               "name": "web"
             }
+          ],
+          "connections": [
+            {
+              "name": "orders-db",
+              "type": "azurePostgreSql",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/contoso-orders",
+              "managedIdentity": {
+                "type": "SystemAssigned"
+              },
+              "settings": [
+                {
+                  "field": "host",
+                  "value": "contoso-orders.postgres.database.azure.com",
+                  "environmentVariable": "PGHOST"
+                }
+              ],
+              "credentials": [
+                {
+                  "field": "password",
+                  "environmentVariable": "PGPASSWORD",
+                  "value": "example-value"
+                }
+              ]
+            }
           ]
         },
         "telemetry": {
           "azureMonitorLogs": {
-            "dceEndpoint": "https://contoso.westus2-1.ingest.monitor.azure.com",
-            "dcrImmutableId": "dcr-example",
+            "dataCollectionEndpointUrl": "https://contoso.westus2-1.ingest.monitor.azure.com",
+            "dataCollectionRuleImmutableId": "dcr-example",
             "streamName": "Custom-AppLogs"
           }
         },
@@ -50,9 +74,24 @@
               "name": "web",
               "minReplicas": 1,
               "maxReplicas": 3,
-              "cpuUtilizationPercent": 70
+              "cpuUtilizationPercent": 70,
+              "httpScaling": "RequestBased"
             }
           ]
+        },
+        "previews": {
+          "settings": {
+            "autoCreatePreviews": true,
+            "lifetimeHours": 72
+          },
+          "versionConfiguration": {
+            "variables": [
+              {
+                "name": "LOG_LEVEL",
+                "value": "debug"
+              }
+            ]
+          }
         }
       },
       "identity": {
@@ -77,10 +116,12 @@
             "displayName": "contoso/storefront",
             "reference": "main",
             "rootDirectory": "apps/storefront",
-            "autoDeploy": true
+            "deploymentTrigger": "Push"
           },
           "provisioningState": "Succeeded",
           "runtime": {
+            "desiredRunState": "running",
+            "runState": "running",
             "url": "https://contoso-storefront.example.com",
             "activeDeploymentId": "dep_8b41d7",
             "activeAppVersionId": "ver_example",
@@ -103,9 +144,56 @@
               {
                 "name": "STRIPE_KEY"
               }
+            ],
+            "connections": [
+              {
+                "name": "orders-db",
+                "type": "azurePostgreSql",
+                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/contoso-orders",
+                "managedIdentity": {
+                  "type": "SystemAssigned"
+                },
+                "settings": [
+                  {
+                    "field": "host",
+                    "value": "contoso-orders.postgres.database.azure.com",
+                    "environmentVariable": "PGHOST"
+                  }
+                ],
+                "credentials": [
+                  {
+                    "field": "password",
+                    "environmentVariable": "PGPASSWORD"
+                  }
+                ]
+              }
             ]
           },
-          "sourceIntegrationState": "Configured"
+          "sourceIntegrationState": "Configured",
+          "previews": {
+            "settings": {
+              "autoCreatePreviews": true,
+              "lifetimeHours": 72
+            },
+            "versionConfiguration": {
+              "variables": [
+                {
+                  "name": "LOG_LEVEL"
+                }
+              ]
+            }
+          },
+          "scaling": {
+            "components": [
+              {
+                "name": "web",
+                "minReplicas": 1,
+                "maxReplicas": 3,
+                "cpuUtilizationPercent": 70,
+                "httpScaling": "RequestBased"
+              }
+            ]
+          }
         },
         "systemData": {
           "createdBy": "user@contoso.com",
@@ -136,7 +224,7 @@
             "displayName": "contoso/storefront",
             "reference": "main",
             "rootDirectory": "apps/storefront",
-            "autoDeploy": true
+            "deploymentTrigger": "Push"
           },
           "provisioningState": "Succeeded",
           "versionConfiguration": {
@@ -147,9 +235,56 @@
               {
                 "name": "STRIPE_KEY"
               }
+            ],
+            "connections": [
+              {
+                "name": "orders-db",
+                "type": "azurePostgreSql",
+                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.DBforPostgreSQL/flexibleServers/contoso-orders",
+                "managedIdentity": {
+                  "type": "SystemAssigned"
+                },
+                "settings": [
+                  {
+                    "field": "host",
+                    "value": "contoso-orders.postgres.database.azure.com",
+                    "environmentVariable": "PGHOST"
+                  }
+                ],
+                "credentials": [
+                  {
+                    "field": "password",
+                    "environmentVariable": "PGPASSWORD"
+                  }
+                ]
+              }
             ]
           },
-          "sourceIntegrationState": "Configured"
+          "sourceIntegrationState": "Configured",
+          "previews": {
+            "settings": {
+              "autoCreatePreviews": true,
+              "lifetimeHours": 72
+            },
+            "versionConfiguration": {
+              "variables": [
+                {
+                  "name": "LOG_LEVEL"
+                }
+              ]
+            }
+          },
+          "scaling": {
+            "components": [
+              {
+                "name": "web",
+                "minReplicas": 1,
+                "maxReplicas": 3,
+                "cpuUtilizationPercent": 70,
+                "httpScaling": "RequestBased"
+              }
+            ]
+          }
         },
         "systemData": {
           "createdBy": "user@contoso.com",

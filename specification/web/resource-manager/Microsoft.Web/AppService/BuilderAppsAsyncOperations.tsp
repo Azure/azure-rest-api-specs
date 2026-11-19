@@ -40,17 +40,19 @@ interface BuilderAppsAsyncOperations {
     Error = DefaultErrorResponse
   >;
 
-  /** Get the location-scoped operation result resource. Pending operations return 202; completion returns 200 with the operation identity, including after app deletion. Read operation failure details from the status monitor and the app representation through its resource GET. */
+  /** Get a location-scoped operation result. Pending operations return bodyless 202. Successful identity saves return 200 with the BuilderApp; successful deployments, start and stop actions, and deletions return 204. Failed operations return their stored error. */
   @get
   @autoRoute
   getOperationResult is Foundations.ArmReadOperation<
     BuilderAppOperationResultParameters,
-    | ArmResponse<CommonTypes.Resource>
-    | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<
-        ArmOperationStatus,
-        void
+    | ArmResponse<BuilderApp>
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<
+        Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
+        BuilderApp,
+        string
       > &
-        Azure.Core.Foundations.RetryAfterHeader>,
+        Azure.Core.Foundations.RetryAfterHeader>
+    | ArmNoContentResponse<"The deployment, runtime action, or deletion completed successfully.">,
     DefaultErrorResponse
   >;
 }

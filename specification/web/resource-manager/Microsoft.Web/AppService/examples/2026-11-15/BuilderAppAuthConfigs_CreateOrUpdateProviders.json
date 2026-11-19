@@ -1,0 +1,168 @@
+{
+  "operationId": "BuilderAppAuthConfigs_CreateOrUpdate",
+  "title": "ReplaceBuilderAppAuthProviders",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-11-15",
+    "name": "contoso-storefront",
+    "If-Match": "\"revision-1\"",
+    "resource": {
+      "properties": {
+        "mode": "required",
+        "primaryBrowserProvider": "github",
+        "github": {
+          "state": "Enabled",
+          "applicationMode": "managed",
+          "allowedEmails": [
+            "developer@contoso.com"
+          ],
+          "allowedEmailDomains": [
+            "contoso.com"
+          ],
+          "allowedUsernames": [
+            "contoso-developer"
+          ],
+          "allowedEnterpriseShortcodes": [
+            "contoso"
+          ],
+          "allowedUserIds": [
+            12345678
+          ]
+        },
+        "entraId": {
+          "state": "Enabled",
+          "applicationMode": "managed",
+          "allowedEmails": [],
+          "allowedEmailDomains": [],
+          "allowedObjectIds": [
+            "11111111-1111-1111-1111-111111111111"
+          ],
+          "allowedTenantIds": [
+            "22222222-2222-2222-2222-222222222222"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"revision-2\"",
+        "Cache-Control": "private, no-store"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/builderApps/contoso-storefront/authConfigs/default",
+        "name": "default",
+        "type": "Microsoft.Web/builderApps/authConfigs",
+        "etag": "revision-2",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "mode": "required",
+          "primaryBrowserProvider": "github",
+          "github": {
+            "state": "Enabled",
+            "applicationMode": "managed",
+            "allowedEmails": [
+              "developer@contoso.com"
+            ],
+            "allowedEmailDomains": [
+              "contoso.com"
+            ],
+            "allowedUsernames": [
+              "contoso-developer"
+            ],
+            "allowedEnterpriseShortcodes": [
+              "contoso"
+            ],
+            "allowedUserIds": [
+              12345678
+            ]
+          },
+          "entraId": {
+            "state": "Enabled",
+            "applicationMode": "managed",
+            "allowedEmails": [],
+            "allowedEmailDomains": [],
+            "allowedObjectIds": [
+              "11111111-1111-1111-1111-111111111111"
+            ],
+            "allowedTenantIds": [
+              "22222222-2222-2222-2222-222222222222"
+            ]
+          },
+          "githubCallbackUrl": "https://contoso-storefront.example.com/.auth/login/github/callback",
+          "entraCallbackUrl": "https://contoso-storefront.example.com/.auth/login/aad/callback",
+          "entraSetup": {
+            "readiness": "notConfigured",
+            "setupMessage": "Select a user-assigned managed identity attached to this app.",
+            "userAssignedIdentities": []
+          },
+          "revision": 2,
+          "appliedRevision": 1,
+          "warnings": [],
+          "propagationPending": true
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "ETag": "\"revision-2\"",
+        "Cache-Control": "private, no-store"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/builderApps/contoso-storefront/authConfigs/default",
+        "name": "default",
+        "type": "Microsoft.Web/builderApps/authConfigs",
+        "etag": "revision-2",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "mode": "required",
+          "primaryBrowserProvider": "github",
+          "github": {
+            "state": "Enabled",
+            "applicationMode": "managed",
+            "allowedEmails": [
+              "developer@contoso.com"
+            ],
+            "allowedEmailDomains": [
+              "contoso.com"
+            ],
+            "allowedUsernames": [
+              "contoso-developer"
+            ],
+            "allowedEnterpriseShortcodes": [
+              "contoso"
+            ],
+            "allowedUserIds": [
+              12345678
+            ]
+          },
+          "entraId": {
+            "state": "Enabled",
+            "applicationMode": "managed",
+            "allowedEmails": [],
+            "allowedEmailDomains": [],
+            "allowedObjectIds": [
+              "11111111-1111-1111-1111-111111111111"
+            ],
+            "allowedTenantIds": [
+              "22222222-2222-2222-2222-222222222222"
+            ]
+          },
+          "githubCallbackUrl": "https://contoso-storefront.example.com/.auth/login/github/callback",
+          "entraCallbackUrl": "https://contoso-storefront.example.com/.auth/login/aad/callback",
+          "entraSetup": {
+            "readiness": "notConfigured",
+            "setupMessage": "Select a user-assigned managed identity attached to this app.",
+            "userAssignedIdentities": []
+          },
+          "revision": 2,
+          "appliedRevision": 1,
+          "warnings": [],
+          "propagationPending": true
+        }
+      }
+    }
+  }
+}

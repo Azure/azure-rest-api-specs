@@ -111,6 +111,12 @@
       "name": "BuilderAppAuthConfigs"
     },
     {
+      "name": "BuilderAppPreviews"
+    },
+    {
+      "name": "BuilderAppPreviewAuthConfigs"
+    },
+    {
       "name": "BuilderAppsAsyncOperations"
     }
   ],
@@ -1466,7 +1472,7 @@
         "tags": [
           "BuilderAppsAsyncOperations"
         ],
-        "description": "Get the location-scoped operation result resource. Pending operations return 202; completion returns 200 with the operation identity, including after app deletion. Read operation failure details from the status monitor and the app representation through its resource GET.",
+        "description": "Get a location-scoped operation result. Pending operations return bodyless 202. Successful identity saves return 200 with the BuilderApp; successful deployments, start and stop actions, and deletions return 204. Failed operations return their stored error.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1485,17 +1491,12 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+              "$ref": "#/definitions/BuilderApp"
             }
           },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1507,6 +1508,9 @@
               }
             }
           },
+          "204": {
+            "description": "The deployment, runtime action, or deletion completed successfully."
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1517,9 +1521,6 @@
         "x-ms-examples": {
           "GetBuilderAppOperationResult": {
             "$ref": "./examples/BuilderAppsAsyncOperations_GetOperationResult.json"
-          },
-          "GetBuilderAppOperationResultAfterDelete": {
-            "$ref": "./examples/BuilderAppsAsyncOperations_GetOperationResultAfterDelete.json"
           }
         }
       }
@@ -2783,7 +2784,7 @@
         "tags": [
           "BuilderApps"
         ],
-        "description": "Update a BuilderApp",
+        "description": "Update desired configuration. Identity updates save assignments; deploy separately after the save completes to apply them to the runtime.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2860,7 +2861,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/BuilderApp"
         },
         "x-ms-long-running-operation": true
       },
@@ -2869,7 +2871,7 @@
         "tags": [
           "BuilderApps"
         ],
-        "description": "Delete a BuilderApp",
+        "description": "Delete the app. The Location result returns 202 while deletion is pending and 204 after it succeeds.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2936,7 +2938,7 @@
         "tags": [
           "BuilderAppAuthConfigs"
         ],
-        "description": "List the always-present current configuration, including when authentication is disabled.",
+        "description": "List the always-present default configuration, including when authentication is disabled.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2992,7 +2994,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/authConfigs/current": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/authConfigs/default": {
       "get": {
         "operationId": "BuilderAppAuthConfigs_Get",
         "tags": [
@@ -3059,7 +3061,7 @@
         "tags": [
           "BuilderAppAuthConfigs"
         ],
-        "description": "Create or replace the current policy and return its credential-safe representation.",
+        "description": "Create or replace the default policy and return its credential-safe representation. Use mode disabled to turn off authentication without deleting the resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3149,83 +3151,9 @@
         "x-ms-examples": {
           "CreateOrUpdateBuilderAppAuthConfig": {
             "$ref": "./examples/BuilderAppAuthConfigs_CreateOrUpdate.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "BuilderAppAuthConfigs_Delete",
-        "tags": [
-          "BuilderAppAuthConfigs"
-        ],
-        "description": "Reset the singleton authentication policy. The configuration remains available through GET.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the BuilderApp",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]{1,58}[A-Za-z0-9]$"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "description": "Reset only when the current ETag matches.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "headers": {
-              "Cache-Control": {
-                "type": "string",
-                "description": "Authentication responses must not be stored.",
-                "enum": [
-                  "private, no-store"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              }
-            }
-          },
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. ",
-            "headers": {
-              "Cache-Control": {
-                "type": "string",
-                "description": "Authentication responses must not be stored.",
-                "enum": [
-                  "private, no-store"
-                ],
-                "x-ms-enum": {
-                  "modelAsString": false
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DeleteBuilderAppAuthConfig": {
-            "$ref": "./examples/BuilderAppAuthConfigs_Delete.json"
+          "ReplaceBuilderAppAuthProviders": {
+            "$ref": "./examples/BuilderAppAuthConfigs_CreateOrUpdateProviders.json"
           }
         }
       }
@@ -3280,6 +3208,9 @@
           }
         },
         "x-ms-examples": {
+          "BeginBuilderAppSourceUploadWithoutManifest": {
+            "$ref": "./examples/BuilderApps_BeginSourceUploadWithoutManifest.json"
+          },
           "BuilderApps_BeginSourceUpload": {
             "$ref": "./examples/BuilderApps_BeginSourceUpload.json"
           }
@@ -3292,7 +3223,7 @@
         "tags": [
           "BuilderApps"
         ],
-        "description": "Build and deploy repository source, a retained version, or an uploaded artifact. After asynchronous completion, read the app through its resource GET.",
+        "description": "Build and deploy repository source, a retained version, or an uploaded artifact. The operation has no final result body; the Location result returns 204 after success.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3318,19 +3249,13 @@
             "name": "body",
             "in": "body",
             "description": "The content of the action request",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/BuilderAppDeployRequest"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/BuilderApp"
-            }
-          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -3363,6 +3288,9 @@
           },
           "BuilderApps_DeployUploadedSource": {
             "$ref": "./examples/BuilderApps_DeployUploadedSource.json"
+          },
+          "RebuildBuilderApp": {
+            "$ref": "./examples/BuilderApps_DeployRebuild.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3430,13 +3358,570 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/previews": {
+      "get": {
+        "operationId": "BuilderAppPreviews_ListByBuilderApp",
+        "tags": [
+          "BuilderAppPreviews"
+        ],
+        "description": "List BuilderAppPreview resources by BuilderApp",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the BuilderApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]{1,58}[A-Za-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BuilderAppPreviewListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBuilderAppPreviews": {
+            "$ref": "./examples/BuilderAppPreviews_ListByBuilderApp.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/previews/{previewName}": {
+      "get": {
+        "operationId": "BuilderAppPreviews_Get",
+        "tags": [
+          "BuilderAppPreviews"
+        ],
+        "description": "Get a BuilderAppPreview",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the BuilderApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]{1,58}[A-Za-z0-9]$"
+          },
+          {
+            "name": "previewName",
+            "in": "path",
+            "description": "The name of the BuilderAppPreview",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BuilderAppPreview"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetBuilderAppPreview": {
+            "$ref": "./examples/BuilderAppPreviews_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "BuilderAppPreviews_CreateOrUpdate",
+        "tags": [
+          "BuilderAppPreviews"
+        ],
+        "description": "Create a preview of a branch. Existing previews cannot be replaced; delete and recreate the preview to change its branch.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the BuilderApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]{1,58}[A-Za-z0-9]$"
+          },
+          {
+            "name": "previewName",
+            "in": "path",
+            "description": "The name of the BuilderAppPreview",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,63}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BuilderAppPreview"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'BuilderAppPreview' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BuilderAppPreview"
+            }
+          },
+          "201": {
+            "description": "Resource 'BuilderAppPreview' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/BuilderAppPreview"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateBuilderAppPreview": {
+            "$ref": "./examples/BuilderAppPreviews_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "BuilderAppPreviews_Delete",
+        "tags": [
+          "BuilderAppPreviews"
+        ],
+        "description": "Delete a BuilderAppPreview",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the BuilderApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]{1,58}[A-Za-z0-9]$"
+          },
+          {
+            "name": "previewName",
+            "in": "path",
+            "description": "The name of the BuilderAppPreview",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteBuilderAppPreview": {
+            "$ref": "./examples/BuilderAppPreviews_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/previews/{previewName}/authConfigs": {
+      "get": {
+        "operationId": "BuilderAppPreviewAuthConfigs_ListByBuilderAppPreview",
+        "tags": [
+          "BuilderAppPreviewAuthConfigs"
+        ],
+        "description": "List the always-present default configuration, including when authentication is disabled.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the BuilderApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]{1,58}[A-Za-z0-9]$"
+          },
+          {
+            "name": "previewName",
+            "in": "path",
+            "description": "The name of the BuilderAppPreview",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Credential-safe preview authentication singleton collection with cache protection.",
+            "schema": {
+              "$ref": "#/definitions/BuilderAppPreviewAuthConfigListResult"
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "description": "Authentication responses must not be stored.",
+                "enum": [
+                  "private, no-store"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBuilderAppPreviewAuthConfigs": {
+            "$ref": "./examples/BuilderAppPreviewAuthConfigs_ListByBuilderAppPreview.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/previews/{previewName}/authConfigs/default": {
+      "get": {
+        "operationId": "BuilderAppPreviewAuthConfigs_Get",
+        "tags": [
+          "BuilderAppPreviewAuthConfigs"
+        ],
+        "description": "Get a BuilderAppPreviewAuthConfig",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the BuilderApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]{1,58}[A-Za-z0-9]$"
+          },
+          {
+            "name": "previewName",
+            "in": "path",
+            "description": "The name of the BuilderAppPreview",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Credential-safe preview authentication configuration response with cache protection and ETag.",
+            "schema": {
+              "$ref": "#/definitions/BuilderAppPreviewAuthConfig"
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "description": "Authentication responses must not be stored.",
+                "enum": [
+                  "private, no-store"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
+              },
+              "ETag": {
+                "type": "string",
+                "description": "Current entity tag."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetBuilderAppPreviewAuthConfig": {
+            "$ref": "./examples/BuilderAppPreviewAuthConfigs_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "BuilderAppPreviewAuthConfigs_CreateOrUpdate",
+        "tags": [
+          "BuilderAppPreviewAuthConfigs"
+        ],
+        "description": "Create or replace the preview's default policy and return its credential-safe representation. Use mode disabled to turn off authentication without deleting the resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the BuilderApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]{1,58}[A-Za-z0-9]$"
+          },
+          {
+            "name": "previewName",
+            "in": "path",
+            "description": "The name of the BuilderAppPreview",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,63}$"
+          },
+          {
+            "$ref": "#/parameters/BuilderAppAuthConditions.ifMatch"
+          },
+          {
+            "$ref": "#/parameters/BuilderAppAuthConditions.ifNoneMatch"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BuilderAppPreviewAuthConfig"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Credential-safe preview authentication configuration response with cache protection and ETag.",
+            "schema": {
+              "$ref": "#/definitions/BuilderAppPreviewAuthConfig"
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "description": "Authentication responses must not be stored.",
+                "enum": [
+                  "private, no-store"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
+              },
+              "ETag": {
+                "type": "string",
+                "description": "Current entity tag."
+              }
+            }
+          },
+          "201": {
+            "description": "Newly persisted preview authentication configuration with cache protection and ETag.",
+            "schema": {
+              "$ref": "#/definitions/BuilderAppPreviewAuthConfig"
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "description": "Authentication responses must not be stored.",
+                "enum": [
+                  "private, no-store"
+                ],
+                "x-ms-enum": {
+                  "modelAsString": false
+                }
+              },
+              "ETag": {
+                "type": "string",
+                "description": "Current entity tag."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateBuilderAppPreviewAuthConfig": {
+            "$ref": "./examples/BuilderAppPreviewAuthConfigs_CreateOrUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/previews/{previewName}/deploy": {
+      "post": {
+        "operationId": "BuilderAppPreviews_Deploy",
+        "tags": [
+          "BuilderAppPreviews"
+        ],
+        "description": "Deploy the head of the preview's branch or a retained version. The operation has no final result body.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the BuilderApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]{1,58}[A-Za-z0-9]$"
+          },
+          {
+            "name": "previewName",
+            "in": "path",
+            "description": "The name of the BuilderAppPreview",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,63}$"
+          },
+          {
+            "$ref": "#/parameters/BuilderAppDeploymentParameters"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BuilderAppPreviewDeployRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeployBuilderAppPreview": {
+            "$ref": "./examples/BuilderAppPreviews_Deploy.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/redeploy": {
       "post": {
         "operationId": "BuilderApps_Redeploy",
         "tags": [
           "BuilderApps"
         ],
-        "description": "Redeploy retained ready artifacts without resolving or rebuilding repository source. After asynchronous completion, read the app through its resource GET.",
+        "description": "Redeploy retained ready artifacts without resolving or rebuilding repository source. The operation has no final result body; the Location result returns 204 after success.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3462,19 +3947,13 @@
             "name": "body",
             "in": "body",
             "description": "The content of the action request",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/BuilderAppRedeployRequest"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/BuilderApp"
-            }
-          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -3504,6 +3983,158 @@
         "x-ms-examples": {
           "BuilderApps_Redeploy": {
             "$ref": "./examples/BuilderApps_Redeploy.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/start": {
+      "post": {
+        "operationId": "BuilderApps_Start",
+        "tags": [
+          "BuilderApps"
+        ],
+        "description": "Start the latest deployed runtime without rebuilding its application version. The operation has no final result body; the Location result returns 204 after success.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the BuilderApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]{1,58}[A-Za-z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/BuilderAppDeploymentParameters"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BuilderAppRuntimeActionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StartBuilderApp": {
+            "$ref": "./examples/BuilderApps_Start.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/stop": {
+      "post": {
+        "operationId": "BuilderApps_Stop",
+        "tags": [
+          "BuilderApps"
+        ],
+        "description": "Stop the app and block its public route without deleting its deployment. The operation has no final result body; the Location result returns 204 after success.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the BuilderApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]{1,58}[A-Za-z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/BuilderAppDeploymentParameters"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BuilderAppRuntimeActionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StopBuilderApp": {
+            "$ref": "./examples/BuilderApps_Stop.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -44468,6 +45099,41 @@
         }
       ]
     },
+    "BuilderAppArtifactCleanupScope": {
+      "type": "string",
+      "description": "Artifact cleanup scopes.",
+      "enum": [
+        "LifecycleArtifacts",
+        "LegacyRuntimeOnly",
+        "SubscriptionArtifacts"
+      ],
+      "x-ms-enum": {
+        "name": "BuilderAppArtifactCleanupScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LifecycleArtifacts",
+            "value": "LifecycleArtifacts",
+            "description": "Artifacts owned by this app's lifecycle."
+          },
+          {
+            "name": "LegacyRuntimeOnly",
+            "value": "LegacyRuntimeOnly",
+            "description": "Runtime state only, for apps created before artifact ownership tracking."
+          },
+          {
+            "name": "SubscriptionArtifacts",
+            "value": "SubscriptionArtifacts",
+            "description": "All artifacts in the subscription, during subscription deletion."
+          }
+        ]
+      }
+    },
+    "BuilderAppAuthAllowlistEntry": {
+      "type": "string",
+      "description": "An authentication allowlist entry, limited to 512 characters.",
+      "maxLength": 512
+    },
     "BuilderAppAuthApplicationMode": {
       "type": "string",
       "description": "Ownership of the OAuth application.",
@@ -44494,7 +45160,7 @@
     },
     "BuilderAppAuthConfig": {
       "type": "object",
-      "description": "Singleton application authentication configuration. DELETE resets it instead of removing the singleton.",
+      "description": "Fixed default application authentication configuration. Use PUT with mode disabled to turn off authentication; DELETE is not supported.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/BuilderAppAuthConfigProperties",
@@ -44602,6 +45268,28 @@
         }
       }
     },
+    "BuilderAppAuthEmailDomain": {
+      "type": "string",
+      "description": "An exact email domain without a leading `@`. Subdomains do not match.",
+      "maxLength": 511
+    },
+    "BuilderAppAuthEnterpriseShortcode": {
+      "type": "string",
+      "description": "An Enterprise Managed User short code without a leading underscore.",
+      "maxLength": 511
+    },
+    "BuilderAppAuthGitHubUserId": {
+      "type": "integer",
+      "format": "int64",
+      "description": "A positive GitHub user ID representable exactly by JSON clients.",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "BuilderAppAuthGitHubUsername": {
+      "type": "string",
+      "description": "A GitHub username matched exactly, ignoring case.",
+      "maxLength": 39
+    },
     "BuilderAppAuthMode": {
       "type": "string",
       "description": "Authentication enforcement modes.",
@@ -44617,7 +45305,7 @@
           {
             "name": "Disabled",
             "value": "disabled",
-            "description": "Authentication disabled; provider settings retained."
+            "description": "Authentication disabled; provider settings supplied in the replacement remain configured."
           },
           {
             "name": "Optional",
@@ -44656,18 +45344,42 @@
         ]
       }
     },
+    "BuilderAppAuthProviderState": {
+      "type": "string",
+      "description": "Provider participation in the application access policy, independent of the global authentication mode.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "BuilderAppAuthProviderState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The provider participates in authentication and authorization."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The provider is not used; settings supplied in the replacement can remain configured."
+          }
+        ]
+      }
+    },
     "BuilderAppAzureMonitorLogs": {
       "type": "object",
       "description": "Customer-owned Azure Monitor Logs ingestion destination.",
       "properties": {
-        "dceEndpoint": {
+        "dataCollectionEndpointUrl": {
           "type": "string",
           "format": "uri",
           "description": "HTTPS data collection endpoint under ingest.monitor.azure.com."
         },
-        "dcrImmutableId": {
+        "dataCollectionRuleImmutableId": {
           "type": "string",
-          "description": "Immutable data collection rule identifier."
+          "description": "Immutable data collection rule ingestion identifier, not the rule's Azure Resource Manager resource ID."
         },
         "streamName": {
           "type": "string",
@@ -44680,8 +45392,8 @@
         }
       },
       "required": [
-        "dceEndpoint",
-        "dcrImmutableId",
+        "dataCollectionEndpointUrl",
+        "dataCollectionRuleImmutableId",
         "streamName"
       ]
     },
@@ -44695,20 +45407,7 @@
         },
         "manifestYaml": {
           "type": "string",
-          "description": "App manifest supplied separately from the archive, at most 1 MiB UTF-8.",
-          "maxLength": 1048576
-        },
-        "contentLength": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Archive length in bytes, from 1 byte to 100 MiB.",
-          "minimum": 1,
-          "maximum": 104857600
-        },
-        "sha256": {
-          "type": "string",
-          "description": "Lowercase SHA-256 digest of the archive.",
-          "pattern": "^[0-9a-f]{64}$"
+          "description": "Optional app manifest supplied separately from the archive. When supplied, its decoded UTF-8 content must not exceed 1 MiB. This byte limit is distinct from the serialized JSON request size."
         },
         "origin": {
           "$ref": "#/definitions/BuilderAppSourceUploadOrigin",
@@ -44716,10 +45415,321 @@
         }
       },
       "required": [
-        "idempotencyKey",
-        "manifestYaml",
-        "contentLength",
-        "sha256"
+        "idempotencyKey"
+      ]
+    },
+    "BuilderAppBuildMode": {
+      "type": "string",
+      "description": "Build modes for a deployment.",
+      "enum": [
+        "ReuseArtifacts",
+        "Rebuild"
+      ],
+      "x-ms-enum": {
+        "name": "BuilderAppBuildMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ReuseArtifacts",
+            "value": "ReuseArtifacts",
+            "description": "Reuse retained build artifacts for the resolved source when available."
+          },
+          {
+            "name": "Rebuild",
+            "value": "Rebuild",
+            "description": "Build the resolved source again even when retained artifacts exist."
+          }
+        ]
+      }
+    },
+    "BuilderAppConnection": {
+      "type": "object",
+      "description": "A named service connection projected into application environment variables.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Connection name, unique ignoring case."
+        },
+        "type": {
+          "type": "string",
+          "description": "Connection profile type that defines the accepted settings and credential fields."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Destination resource validated by the connection profile, not the calling identity."
+        },
+        "managedIdentity": {
+          "$ref": "#/definitions/BuilderAppConnectionManagedIdentity",
+          "description": "Managed identity used by the application to reach the destination. Omission selects no identity."
+        },
+        "settings": {
+          "type": "array",
+          "description": "Non-secret settings mapped to application environment variables.",
+          "items": {
+            "$ref": "#/definitions/BuilderAppConnectionSetting"
+          },
+          "x-ms-identifiers": [
+            "field"
+          ]
+        },
+        "credentials": {
+          "type": "array",
+          "description": "Protected credential fields mapped to application environment variables.",
+          "items": {
+            "$ref": "#/definitions/BuilderAppConnectionCredential"
+          },
+          "x-ms-identifiers": [
+            "field"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "settings"
+      ]
+    },
+    "BuilderAppConnectionCredential": {
+      "type": "object",
+      "description": "A protected connection credential mapping.",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "Profile credential field name."
+        },
+        "environmentVariable": {
+          "type": "string",
+          "description": "Application environment variable that receives the credential at runtime only."
+        },
+        "value": {
+          "type": "string",
+          "format": "password",
+          "description": "Write-only credential value, stored as a protected variable and never returned. Omission preserves only an existing value for the same connection, field, and environment variable.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "field",
+        "environmentVariable"
+      ]
+    },
+    "BuilderAppConnectionIdentityType": {
+      "type": "string",
+      "description": "Connection identity types.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "BuilderAppConnectionIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "The app's system-assigned identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "An assigned user-managed identity."
+          }
+        ]
+      }
+    },
+    "BuilderAppConnectionManagedIdentity": {
+      "type": "object",
+      "description": "Identity selection for a connection.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/BuilderAppConnectionIdentityType",
+          "description": "SystemAssigned selects this app's identity; UserAssigned selects resourceId."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Assigned user-managed identity. Required when type is UserAssigned."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "BuilderAppConnectionSetting": {
+      "type": "object",
+      "description": "A non-secret connection setting.",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "Profile field name."
+        },
+        "value": {
+          "type": "string",
+          "description": "Setting value."
+        },
+        "environmentVariable": {
+          "type": "string",
+          "description": "Application environment variable that receives the value."
+        }
+      },
+      "required": [
+        "field",
+        "value",
+        "environmentVariable"
+      ]
+    },
+    "BuilderAppDeletionOperationStatus": {
+      "type": "string",
+      "description": "Deletion operation status.",
+      "enum": [
+        "InProgress",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "BuilderAppDeletionOperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Deletion is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Deletion completed."
+          }
+        ]
+      }
+    },
+    "BuilderAppDeletionPhase": {
+      "type": "string",
+      "description": "Deletion phases.",
+      "enum": [
+        "Queued",
+        "StoppingApp",
+        "WaitingForPublishers",
+        "DeletingArtifacts",
+        "Finalizing",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "BuilderAppDeletionPhase",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Queued",
+            "value": "Queued",
+            "description": "Deletion is queued."
+          },
+          {
+            "name": "StoppingApp",
+            "value": "StoppingApp",
+            "description": "The application runtime is being stopped."
+          },
+          {
+            "name": "WaitingForPublishers",
+            "value": "WaitingForPublishers",
+            "description": "Waiting for in-flight artifact publishers to drain."
+          },
+          {
+            "name": "DeletingArtifacts",
+            "value": "DeletingArtifacts",
+            "description": "Build and image artifacts are being deleted."
+          },
+          {
+            "name": "Finalizing",
+            "value": "Finalizing",
+            "description": "Remaining state is being removed."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Deletion completed."
+          }
+        ]
+      }
+    },
+    "BuilderAppDeletionProgress": {
+      "type": "object",
+      "description": "Deletion progress. Deadlines describe retry or eligibility times, never promised completion.",
+      "properties": {
+        "phase": {
+          "$ref": "#/definitions/BuilderAppDeletionPhase",
+          "description": "Current deletion phase."
+        },
+        "artifactCleanupScope": {
+          "$ref": "#/definitions/BuilderAppArtifactCleanupScope",
+          "description": "Artifacts removed by this deletion."
+        },
+        "publisherDrainUntil": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Earliest time in-flight artifact publishers are drained."
+        },
+        "nextRetryAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Next time a failed cleanup step is retried."
+        },
+        "retryAttemptCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of cleanup retries attempted."
+        },
+        "retryReason": {
+          "type": "string",
+          "description": "Reason for the pending retry."
+        }
+      },
+      "required": [
+        "phase",
+        "artifactCleanupScope",
+        "retryAttemptCount"
+      ]
+    },
+    "BuilderAppDeletionStatus": {
+      "type": "object",
+      "description": "Customer-safe deletion status.",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "Opaque deletion operation identifier."
+        },
+        "status": {
+          "$ref": "#/definitions/BuilderAppDeletionOperationStatus",
+          "description": "Deletion operation status."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time the deletion started."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time the deletion completed."
+        },
+        "operationUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Azure-AsyncOperation status URL for the deletion."
+        },
+        "properties": {
+          "$ref": "#/definitions/BuilderAppDeletionProgress",
+          "description": "Deletion progress."
+        }
+      },
+      "required": [
+        "operationId",
+        "status",
+        "startTime",
+        "properties"
       ]
     },
     "BuilderAppDeployRequest": {
@@ -44732,11 +45742,11 @@
         },
         "versionId": {
           "type": "string",
-          "description": "Retained version to deploy. Cannot be combined with commitSha or uploaded source."
+          "description": "Retained version to deploy. Cannot be combined with commitSha, buildMode, or uploaded source."
         },
-        "rebuild": {
-          "type": "boolean",
-          "description": "Whether to rebuild source rather than reuse retained artifacts."
+        "buildMode": {
+          "$ref": "#/definitions/BuilderAppBuildMode",
+          "description": "Whether to rebuild source or reuse retained build artifacts. Defaults to ReuseArtifacts. Rebuild cannot be combined with commitSha or uploaded source."
         },
         "commitSha": {
           "type": "string",
@@ -44745,17 +45755,65 @@
         },
         "source": {
           "$ref": "#/definitions/BuilderAppUploadedDeploymentSource",
-          "description": "Uploaded source artifact. Cannot be combined with repository commit, version, or rebuild selection."
+          "description": "Uploaded source artifact. Cannot be combined with repository commit, version, or build mode selection."
         }
+      }
+    },
+    "BuilderAppDeploymentTrigger": {
+      "type": "string",
+      "description": "What starts a deployment of the connected source reference.",
+      "enum": [
+        "Push",
+        "Manual"
+      ],
+      "x-ms-enum": {
+        "name": "BuilderAppDeploymentTrigger",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Push",
+            "value": "Push",
+            "description": "Each push to the selected reference creates a deployment."
+          },
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "Deployments start only through the deploy action."
+          }
+        ]
+      }
+    },
+    "BuilderAppDesiredRunState": {
+      "type": "string",
+      "description": "Requested run states.",
+      "enum": [
+        "running",
+        "stopped"
+      ],
+      "x-ms-enum": {
+        "name": "BuilderAppDesiredRunState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Running",
+            "value": "running",
+            "description": "The app should serve traffic."
+          },
+          {
+            "name": "Stopped",
+            "value": "stopped",
+            "description": "The app should be stopped and its public route blocked."
+          }
+        ]
       }
     },
     "BuilderAppEntraAuth": {
       "type": "object",
-      "description": "Microsoft Entra ID provider policy. Omitted allowlists default to empty lists on replacement.",
+      "description": "Microsoft Entra ID app sign-in policy, separate from authorization to deploy the Azure resource. Omitted allowlists default to empty lists on replacement. At most 100 combined entries are allowed across all lists, including customer application audiences. Invalid policies are rejected atomically, without truncation.",
       "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Whether this provider is enabled."
+        "state": {
+          "$ref": "#/definitions/BuilderAppAuthProviderState",
+          "description": "Whether this provider participates in authentication. Required whenever the Entra configuration is supplied."
         },
         "applicationMode": {
           "$ref": "#/definitions/BuilderAppAuthApplicationMode",
@@ -44765,35 +45823,42 @@
           "$ref": "#/definitions/BuilderAppEntraCustomerApplication",
           "description": "Customer-owned app registration and workload identity."
         },
-        "emails": {
+        "allowedEmails": {
           "type": "array",
-          "description": "Allowed email addresses; [] clears the allowlist.",
+          "description": "Complete email addresses, matched exactly ignoring case. After the tenant check, matching an email, email domain, or object ID grants access. Email selectors apply only to users, not application principals. Multitenant customer applications require a domain-owner-verified email claim (xms_edov), unless the token tenant is explicitly trusted by allowedTenantIds or a single-tenant registration.",
+          "maxItems": 100,
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/BuilderAppAuthAllowlistEntry"
           }
         },
-        "emailSuffixes": {
+        "allowedEmailDomains": {
           "type": "array",
-          "description": "Allowed email suffixes; [] clears the allowlist.",
+          "description": "Exact email domains without a leading `@`; subdomains do not match. Uses the same claim trust and OR semantics as allowedEmails. [] clears the list.",
+          "maxItems": 100,
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/BuilderAppAuthEmailDomain"
           }
         },
-        "objectIds": {
+        "allowedObjectIds": {
           "type": "array",
-          "description": "Allowed Entra object IDs; [] clears the allowlist.",
+          "description": "User or service-principal object IDs from the validated token's oid claim. Requires allowedTenantIds or a single-tenant customer registration to establish tenant context. Guest users match their object ID in the issuing resource tenant, not their home-tenant object ID. After the tenant check, object IDs are ORed with email and domain selectors.",
+          "maxItems": 100,
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/BuilderAppAuthAllowlistEntry"
           }
         },
-        "tenantIds": {
+        "allowedTenantIds": {
           "type": "array",
-          "description": "Allowed Entra tenant IDs; [] clears the allowlist.",
+          "description": "Directory IDs allowed to sign in to the hosted application, not the tenant of the Azure deployment. When populated, the validated token's tid must match before object/email rules are evaluated. If this is the only populated list, a matching tenant grants access. Empty means no additional tenant restriction beyond signInMode and issuer validation.",
+          "maxItems": 100,
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/BuilderAppAuthAllowlistEntry"
           }
         }
-      }
+      },
+      "required": [
+        "state"
+      ]
     },
     "BuilderAppEntraCustomerApplication": {
       "type": "object",
@@ -44805,11 +45870,11 @@
         },
         "homeTenantId": {
           "type": "string",
-          "description": "Registration home tenant ID."
+          "description": "App registration home tenant ID. The selected workload identity must belong to this tenant; allowedTenantIds controls the separate sign-in population."
         },
         "signInMode": {
           "$ref": "#/definitions/BuilderAppEntraSignInMode",
-          "description": "Supported account population. Defaults to singleTenant."
+          "description": "Supported sign-in population and issuer authority. Defaults to singleTenant. Guest users sign in as users of the token-issuing tenant."
         },
         "workloadIdentityResourceId": {
           "type": "string",
@@ -44819,8 +45884,9 @@
         "allowedAudiences": {
           "type": "array",
           "description": "Exact v2 API application-ID audiences; an empty list disables customer bearer authentication.",
+          "maxItems": 100,
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/BuilderAppAuthAllowlistEntry"
           }
         }
       },
@@ -44835,10 +45901,10 @@
       "description": "Non-secret setup projection. External registration and federation still require actual sign-in verification.",
       "properties": {
         "readiness": {
-          "type": "string",
-          "description": "Readiness of the committed local identity selection."
+          "$ref": "#/definitions/BuilderAppEntraSetupReadiness",
+          "description": "Machine-readable local identity readiness; does not prove that the registration, callback, or federation works or that sign-in succeeds."
         },
-        "message": {
+        "setupMessage": {
           "type": "string",
           "description": "Explanation and setup guidance."
         },
@@ -44884,7 +45950,7 @@
       },
       "required": [
         "readiness",
-        "message"
+        "setupMessage"
       ]
     },
     "BuilderAppEntraSetupIdentity": {
@@ -44908,6 +45974,36 @@
       "required": [
         "resourceId"
       ]
+    },
+    "BuilderAppEntraSetupReadiness": {
+      "type": "string",
+      "description": "Local readiness of a customer Entra application's selected managed identity.",
+      "enum": [
+        "notConfigured",
+        "unavailable",
+        "ready"
+      ],
+      "x-ms-enum": {
+        "name": "BuilderAppEntraSetupReadiness",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotConfigured",
+            "value": "notConfigured",
+            "description": "No customer Entra application is configured."
+          },
+          {
+            "name": "Unavailable",
+            "value": "unavailable",
+            "description": "The selected identity is not attached, is still provisioning, or belongs to a different tenant than the registration."
+          },
+          {
+            "name": "Ready",
+            "value": "ready",
+            "description": "The selected identity is attached, provisioned, and in the registration's home tenant. External sign-in has not been verified."
+          }
+        ]
+      }
     },
     "BuilderAppEntraSignInMode": {
       "type": "string",
@@ -44965,57 +46061,64 @@
     },
     "BuilderAppGitHubAuth": {
       "type": "object",
-      "description": "GitHub OAuth provider settings.",
+      "description": "GitHub OAuth provider settings. A user may match any populated allowlist; with all lists empty, any authenticated GitHub user is allowed. At most 100 combined entries are allowed across all lists. Invalid policies are rejected atomically, without truncation.",
       "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Whether this provider is enabled."
+        "state": {
+          "$ref": "#/definitions/BuilderAppAuthProviderState",
+          "description": "Whether this provider participates in authentication. Required whenever the GitHub configuration is supplied."
         },
         "applicationMode": {
           "$ref": "#/definitions/BuilderAppAuthApplicationMode",
           "description": "OAuth application ownership. Defaults to managed."
         },
-        "emails": {
+        "allowedEmails": {
           "type": "array",
-          "description": "Allowed email addresses.",
+          "description": "Complete verified email addresses, matched exactly ignoring case. Omission on PUT resets this list; [] clears it.",
+          "maxItems": 100,
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/BuilderAppAuthAllowlistEntry"
           }
         },
-        "emailSuffixes": {
+        "allowedEmailDomains": {
           "type": "array",
-          "description": "Allowed email suffixes.",
+          "description": "Verified email domains without a leading `@`, matched exactly ignoring case. Subdomains do not match. Combined with the other GitHub selectors using OR.",
+          "maxItems": 100,
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/BuilderAppAuthEmailDomain"
           }
         },
-        "usernames": {
+        "allowedUsernames": {
           "type": "array",
-          "description": "Allowed GitHub usernames.",
+          "description": "Exact GitHub usernames, matched ignoring case. Combined with the other GitHub selectors using OR.",
+          "maxItems": 100,
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/BuilderAppAuthGitHubUsername"
           }
         },
-        "usernameSuffixes": {
+        "allowedEnterpriseShortcodes": {
           "type": "array",
-          "description": "Allowed GitHub username suffixes.",
+          "description": "Enterprise Managed User short codes without a leading underscore. A value microsoft matches the enterprise-controlled _microsoft username suffix, ignoring case. This is not a GitHub organization or team membership check.",
+          "maxItems": 100,
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/BuilderAppAuthEnterpriseShortcode"
           }
         },
-        "userIds": {
+        "allowedUserIds": {
           "type": "array",
-          "description": "Allowed GitHub numeric user IDs.",
+          "description": "Stable numeric GitHub user IDs, independent of username changes. Combined with the other GitHub selectors using OR.",
+          "maxItems": 100,
           "items": {
-            "type": "integer",
-            "format": "int64"
+            "$ref": "#/definitions/BuilderAppAuthGitHubUserId"
           }
         },
         "customerApplication": {
           "$ref": "#/definitions/BuilderAppGitHubCustomerApplication",
           "description": "Customer-owned GitHub application configuration."
         }
-      }
+      },
+      "required": [
+        "state"
+      ]
     },
     "BuilderAppGitHubCustomerApplication": {
       "type": "object",
@@ -45032,7 +46135,7 @@
         "clientSecret": {
           "type": "string",
           "format": "password",
-          "description": "Write-only client secret. Omission retains the secret when clientId is unchanged.",
+          "description": "Write-only OAuth client secret, encrypted at rest and never returned. Supply a replacement to rotate it. Omission retains the existing secret only when clientId is unchanged; changing clientId requires its matching secret. Empty or null secrets are rejected. Omit the GitHub provider on PUT to remove its saved configuration. Mode disabled does not itself clear provider configuration supplied in the same replacement.",
           "x-ms-mutability": [
             "update",
             "create"
@@ -45049,9 +46152,33 @@
         "clientId"
       ]
     },
+    "BuilderAppHttpScaling": {
+      "type": "string",
+      "description": "HTTP request scaling modes.",
+      "enum": [
+        "RequestBased",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "BuilderAppHttpScaling",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RequestBased",
+            "value": "RequestBased",
+            "description": "Replicas scale with concurrent HTTP requests, in addition to any utilization targets."
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "HTTP traffic does not drive scaling."
+          }
+        ]
+      }
+    },
     "BuilderAppIdentityUpdate": {
       "type": "object",
-      "description": "Progress of an identity update and its deployment handoff.",
+      "description": "Progress of an identity save. Saving identity settings does not deploy them to the application runtime.",
       "properties": {
         "id": {
           "type": "string",
@@ -45075,10 +46202,6 @@
           "format": "arm-id",
           "description": "User-assigned identity selected for AZURE_CLIENT_ID."
         },
-        "deploymentId": {
-          "type": "string",
-          "description": "Deployment that owns runtime completion after handoff."
-        },
         "failure": {
           "$ref": "#/definitions/BuilderAppFailure",
           "description": "Failure details when the update fails."
@@ -45096,8 +46219,7 @@
       "description": "Identity update phases.",
       "enum": [
         "sourcePending",
-        "redeployPending",
-        "deploymentSubmitted",
+        "saved",
         "failed"
       ],
       "x-ms-enum": {
@@ -45107,17 +46229,12 @@
           {
             "name": "SourcePending",
             "value": "sourcePending",
-            "description": "Updating source identity."
+            "description": "Saving source identity settings."
           },
           {
-            "name": "RedeployPending",
-            "value": "redeployPending",
-            "description": "Preparing the redeployment."
-          },
-          {
-            "name": "DeploymentSubmitted",
-            "value": "deploymentSubmitted",
-            "description": "Deployment submitted; deployment polling owns completion."
+            "name": "Saved",
+            "value": "saved",
+            "description": "Identity settings saved. Deploy separately to apply the saved settings to the runtime."
           },
           {
             "name": "Failed",
@@ -45173,6 +46290,10 @@
       "type": "object",
       "description": "Mutable builder app properties accepted by PATCH.",
       "properties": {
+        "previews": {
+          "$ref": "#/definitions/BuilderAppPreviewsConfiguration",
+          "description": "Preview settings and shared variable overrides to update. Omitted members preserve their current values; a supplied member replaces that member."
+        },
         "source": {
           "$ref": "#/definitions/BuilderAppSourcePatch",
           "description": "Attach or update the same repository connection. Changing an attached repository identity is unsupported."
@@ -45184,13 +46305,13 @@
         "azureClientIdIdentityResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Desired user-assigned identity used for AZURE_CLIENT_ID, also available through PUT and GET."
+          "description": "Desired user-assigned identity used for AZURE_CLIENT_ID, also available through PUT and GET. In PATCH, supply it with an identity object, name a user-assigned identity in the resulting assignment, and omit source and versionConfiguration. The selection applies on the next deployment."
         }
       }
     },
     "BuilderAppPatchVersionConfiguration": {
       "type": "object",
-      "description": "PATCH accepts variables but not component configuration.",
+      "description": "PATCH accepts variables and connections but not component configuration.",
       "properties": {
         "variables": {
           "type": "array",
@@ -45202,6 +46323,237 @@
           "x-ms-identifiers": [
             "name"
           ]
+        },
+        "connections": {
+          "type": "array",
+          "description": "Omit to preserve; [] clears; a supplied list replaces the connections.",
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/definitions/BuilderAppConnection"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "BuilderAppPreview": {
+      "type": "object",
+      "description": "An ephemeral environment that deploys a branch of the parent builder app's repository. Previews cannot be updated; delete and recreate a preview to change it.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BuilderAppPreviewProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "BuilderAppPreviewAuthConfig": {
+      "type": "object",
+      "description": "Fixed default authentication configuration of a preview. Use PUT with mode disabled to turn off authentication; DELETE is not supported.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BuilderAppAuthConfigProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Resource Etag.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "BuilderAppPreviewAuthConfigListResult": {
+      "type": "object",
+      "description": "The response of a BuilderAppPreviewAuthConfig list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BuilderAppPreviewAuthConfig items on this page",
+          "items": {
+            "$ref": "#/definitions/BuilderAppPreviewAuthConfig"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BuilderAppPreviewDeployRequest": {
+      "type": "object",
+      "description": "Request to deploy the head of the preview's branch or a retained version. Commits and uploaded source are not accepted.",
+      "properties": {
+        "idempotencyKey": {
+          "type": "string",
+          "description": "Stable request key. Supply this or the x-ms-client-request-id header."
+        },
+        "versionId": {
+          "type": "string",
+          "description": "Retained version to deploy. Cannot be combined with buildMode."
+        },
+        "buildMode": {
+          "$ref": "#/definitions/BuilderAppBuildMode",
+          "description": "Whether to rebuild the branch head or reuse retained build artifacts. Defaults to ReuseArtifacts."
+        }
+      }
+    },
+    "BuilderAppPreviewListResult": {
+      "type": "object",
+      "description": "The response of a BuilderAppPreview list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The BuilderAppPreview items on this page",
+          "items": {
+            "$ref": "#/definitions/BuilderAppPreview"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BuilderAppPreviewProperties": {
+      "type": "object",
+      "description": "Preview configuration and read-only serving state. The preview is created in the parent app's region, and configuration other than the branch is inherited from the parent app.",
+      "properties": {
+        "branch": {
+          "type": "string",
+          "description": "Repository branch deployed by the preview.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "pullRequestNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Pull request that created the preview, when created automatically.",
+          "readOnly": true
+        },
+        "pullRequestTitle": {
+          "type": "string",
+          "description": "Title of the pull request that created the preview.",
+          "readOnly": true
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time after which the preview is deleted.",
+          "readOnly": true
+        },
+        "source": {
+          "$ref": "#/definitions/BuilderAppSource",
+          "description": "Repository connection inherited from the parent app.",
+          "readOnly": true
+        },
+        "sourceIntegrationState": {
+          "$ref": "#/definitions/BuilderAppSourceIntegrationState",
+          "description": "Current repository authorization state.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/BuilderAppProvisioningState",
+          "description": "Resource operation state, independent of application runtime health.",
+          "readOnly": true
+        },
+        "versionConfiguration": {
+          "$ref": "#/definitions/BuilderAppVersionConfiguration",
+          "description": "External configuration captured by the next preview version, including shared preview overrides.",
+          "readOnly": true
+        },
+        "telemetry": {
+          "$ref": "#/definitions/BuilderAppTelemetry",
+          "description": "Telemetry inherited from the parent app.",
+          "readOnly": true
+        },
+        "scaling": {
+          "$ref": "#/definitions/BuilderAppScaling",
+          "description": "Scaling inherited from the parent app.",
+          "readOnly": true
+        },
+        "runtime": {
+          "$ref": "#/definitions/BuilderAppRuntime",
+          "description": "The deployment currently serving traffic.",
+          "readOnly": true
+        },
+        "deletion": {
+          "$ref": "#/definitions/BuilderAppDeletionStatus",
+          "description": "Progress of the latest deletion of this preview name.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "branch"
+      ]
+    },
+    "BuilderAppPreviewSettings": {
+      "type": "object",
+      "description": "Preview creation and lifetime policy.",
+      "properties": {
+        "autoCreatePreviews": {
+          "type": "boolean",
+          "description": "Whether a preview is created automatically for each new same-repository pull request. Defaults to false."
+        },
+        "lifetimeHours": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Hours a preview lives before it is deleted. Defaults to 72.",
+          "minimum": 1,
+          "maximum": 168
+        }
+      }
+    },
+    "BuilderAppPreviewVersionConfiguration": {
+      "type": "object",
+      "description": "Shared variable overrides applied to previews.",
+      "properties": {
+        "variables": {
+          "type": "array",
+          "description": "Replaces the overrides; [] clears them. An entry without a value preserves the existing override with that name, not the app's value. Values are write-only.",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/BuilderAppVariable"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "variables"
+      ]
+    },
+    "BuilderAppPreviewsConfiguration": {
+      "type": "object",
+      "description": "Preview environment configuration inherited by previews created from this app.",
+      "properties": {
+        "settings": {
+          "$ref": "#/definitions/BuilderAppPreviewSettings",
+          "description": "Preview creation and lifetime policy."
+        },
+        "versionConfiguration": {
+          "$ref": "#/definitions/BuilderAppPreviewVersionConfiguration",
+          "description": "Variable overrides applied over the app's variables when a preview is created."
         }
       }
     },
@@ -45209,6 +46561,10 @@
       "type": "object",
       "description": "Desired configuration and read-only serving state of a builder app.",
       "properties": {
+        "previews": {
+          "$ref": "#/definitions/BuilderAppPreviewsConfiguration",
+          "description": "Preview environment settings and shared preview variable overrides. Omission on PUT resets them to defaults; omission on PATCH preserves them."
+        },
         "source": {
           "$ref": "#/definitions/BuilderAppSource",
           "description": "Optional repository connection. Once attached, the provider and repository ID cannot change."
@@ -45225,11 +46581,11 @@
         },
         "versionConfiguration": {
           "$ref": "#/definitions/BuilderAppVersionConfiguration",
-          "description": "Desired external configuration captured by the next application version."
+          "description": "Desired external configuration captured by the next application version. Omission on PUT resets it; omission on PATCH preserves it."
         },
         "telemetry": {
           "$ref": "#/definitions/BuilderAppTelemetry",
-          "description": "Telemetry applied independently of version activation. Omit to preserve; use {} to clear.",
+          "description": "Telemetry applied independently of version activation. Omission or {} on PUT disables export. Not accepted by PATCH.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -45250,7 +46606,12 @@
         },
         "identityUpdate": {
           "$ref": "#/definitions/BuilderAppIdentityUpdate",
-          "description": "Progress of the latest managed identity update.",
+          "description": "Progress of the latest managed identity save. Deploy separately to apply saved identity changes to the runtime.",
+          "readOnly": true
+        },
+        "deletion": {
+          "$ref": "#/definitions/BuilderAppDeletionStatus",
+          "description": "Progress of the latest deletion of this app name, retained after the app is recreated.",
           "readOnly": true
         },
         "azureClientIdIdentityResourceId": {
@@ -45311,7 +46672,7 @@
     },
     "BuilderAppRedeployRequest": {
       "type": "object",
-      "description": "Redeploy retained ready artifacts. Commit, version, source, and rebuild selection are not accepted.",
+      "description": "Redeploy retained ready artifacts. Commit, version, source, and build mode selection are not accepted.",
       "properties": {
         "idempotencyKey": {
           "type": "string",
@@ -45319,10 +46680,48 @@
         }
       }
     },
+    "BuilderAppRunState": {
+      "type": "string",
+      "description": "Observed run states.",
+      "enum": [
+        "running",
+        "stopped",
+        "unknown"
+      ],
+      "x-ms-enum": {
+        "name": "BuilderAppRunState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Running",
+            "value": "running",
+            "description": "The app is running."
+          },
+          {
+            "name": "Stopped",
+            "value": "stopped",
+            "description": "The app is stopped."
+          },
+          {
+            "name": "Unknown",
+            "value": "unknown",
+            "description": "The run state could not be determined."
+          }
+        ]
+      }
+    },
     "BuilderAppRuntime": {
       "type": "object",
       "description": "Serving-state projection, not an embedded deployment history.",
       "properties": {
+        "desiredRunState": {
+          "$ref": "#/definitions/BuilderAppDesiredRunState",
+          "description": "Run state requested through the start and stop actions."
+        },
+        "runState": {
+          "$ref": "#/definitions/BuilderAppRunState",
+          "description": "Observed run state of the application runtime."
+        },
         "url": {
           "type": "string",
           "format": "uri",
@@ -45338,7 +46737,17 @@
         },
         "versionConfiguration": {
           "$ref": "#/definitions/BuilderAppVersionConfiguration",
-          "description": "Configuration captured by the active version, excluding variable values."
+          "description": "Configuration captured by the active version, excluding variable and credential values."
+        }
+      }
+    },
+    "BuilderAppRuntimeActionRequest": {
+      "type": "object",
+      "description": "Request to start or stop the app runtime.",
+      "properties": {
+        "idempotencyKey": {
+          "type": "string",
+          "description": "Stable request key. Supply this or the x-ms-client-request-id header."
         }
       }
     },
@@ -45348,7 +46757,8 @@
       "properties": {
         "components": {
           "type": "array",
-          "description": "Scaling policies joined to the active manifest by component name.",
+          "description": "Scaling policies joined to the active manifest by component name. Names must be unique and identify scalable manifest components; unknown or static targets are rejected.",
+          "maxItems": 20,
           "items": {
             "$ref": "#/definitions/BuilderAppScalingComponent"
           },
@@ -45364,12 +46774,13 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Component name."
+          "description": "Component name.",
+          "maxLength": 63
         },
         "minReplicas": {
           "type": "integer",
           "format": "int32",
-          "description": "Minimum replicas; zero enables scale-to-zero.",
+          "description": "Minimum replicas; zero enables scale-to-zero and requires RequestBased HTTP scaling.",
           "minimum": 0
         },
         "maxReplicas": {
@@ -45389,9 +46800,9 @@
           "format": "int32",
           "description": "Target average memory utilization percentage."
         },
-        "httpEnabled": {
-          "type": "boolean",
-          "description": "Enable HTTP request-based scaling; a zero minimum always enables it."
+        "httpScaling": {
+          "$ref": "#/definitions/BuilderAppHttpScaling",
+          "description": "HTTP request scaling. Defaults to None, or RequestBased when minReplicas is zero."
         }
       },
       "required": [
@@ -45424,14 +46835,14 @@
           "type": "string",
           "description": "Repository-relative root for the app manifest and component paths."
         },
-        "autoDeploy": {
-          "type": "boolean",
-          "description": "Whether pushes to the selected reference automatically create deployments."
+        "deploymentTrigger": {
+          "$ref": "#/definitions/BuilderAppDeploymentTrigger",
+          "description": "Whether pushes to the selected reference automatically create deployments. Defaults to Push when attaching a repository; PATCH omission preserves the setting."
         },
         "authorizationToken": {
           "type": "string",
           "format": "password",
-          "description": "Short-lived source authorization assertion. Mutually exclusive with repositoryToken; never returned.",
+          "description": "Write-only source authorization assertion obtained from the BuilderApps repository-connection flow.\nValid for 10 minutes and bound to the repository, app, Azure caller, reference, and root directory.\nSupply this or repositoryToken when attaching or reauthorizing a repository.\nThis is not the Azure Resource Manager bearer token. It is not persisted or returned.\nRepository access is revalidated by the service; reconnect to obtain a new assertion after expiry or revocation.",
           "x-ms-mutability": [
             "update",
             "create"
@@ -45441,7 +46852,7 @@
         "repositoryToken": {
           "type": "string",
           "format": "password",
-          "description": "GitHub user credential used only during this write. Mutually exclusive with authorizationToken; never returned.",
+          "description": "Write-only GitHub user access token obtained through GitHub authorization or the BuilderApps repository-connection flow.\nThe token must identify a user with access to the selected repository; the BuilderApps GitHub application must also have access.\nUsed transiently to validate the user, repository, installation, and reference during this write; not persisted or returned.\nExpiry and revocation are controlled by GitHub. Obtain a replacement from the issuing authorization flow when needed.\nMutually exclusive with authorizationToken and distinct from the Azure Resource Manager bearer token.",
           "x-ms-mutability": [
             "update",
             "create"
@@ -45510,14 +46921,14 @@
           "type": "string",
           "description": "Repository-relative root for the app manifest and component paths."
         },
-        "autoDeploy": {
-          "type": "boolean",
-          "description": "Whether pushes to the selected reference automatically create deployments."
+        "deploymentTrigger": {
+          "$ref": "#/definitions/BuilderAppDeploymentTrigger",
+          "description": "Whether pushes to the selected reference automatically create deployments. Defaults to Push when attaching a repository; PATCH omission preserves the setting."
         },
         "authorizationToken": {
           "type": "string",
           "format": "password",
-          "description": "Short-lived source authorization assertion. Mutually exclusive with repositoryToken; never returned.",
+          "description": "Write-only source authorization assertion obtained from the BuilderApps repository-connection flow.\nValid for 10 minutes and bound to the repository, app, Azure caller, reference, and root directory.\nSupply this or repositoryToken when attaching or reauthorizing a repository.\nThis is not the Azure Resource Manager bearer token. It is not persisted or returned.\nRepository access is revalidated by the service; reconnect to obtain a new assertion after expiry or revocation.",
           "x-ms-mutability": [
             "update",
             "create"
@@ -45527,7 +46938,7 @@
         "repositoryToken": {
           "type": "string",
           "format": "password",
-          "description": "GitHub user credential used only during this write. Mutually exclusive with authorizationToken; never returned.",
+          "description": "Write-only GitHub user access token obtained through GitHub authorization or the BuilderApps repository-connection flow.\nThe token must identify a user with access to the selected repository; the BuilderApps GitHub application must also have access.\nUsed transiently to validate the user, repository, installation, and reference during this write; not persisted or returned.\nExpiry and revocation are controlled by GitHub. Obtain a replacement from the issuing authorization flow when needed.\nMutually exclusive with authorizationToken and distinct from the Azure Resource Manager bearer token.",
           "x-ms-mutability": [
             "update",
             "create"
@@ -45690,7 +47101,7 @@
     },
     "BuilderAppUploadedDeploymentSource": {
       "type": "object",
-      "description": "A previously uploaded source artifact and its integrity information.",
+      "description": "A previously uploaded source artifact. Archive integrity metadata is computed by the service during upload.",
       "properties": {
         "kind": {
           "type": "string",
@@ -45705,25 +47116,11 @@
         "artifactId": {
           "type": "string",
           "description": "Opaque identifier returned by beginSourceUpload."
-        },
-        "sha256": {
-          "type": "string",
-          "description": "Lowercase SHA-256 digest of the uploaded archive.",
-          "pattern": "^[0-9a-f]{64}$"
-        },
-        "contentLength": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Uploaded archive length in bytes.",
-          "minimum": 1,
-          "maximum": 104857600
         }
       },
       "required": [
         "kind",
-        "artifactId",
-        "sha256",
-        "contentLength"
+        "artifactId"
       ]
     },
     "BuilderAppVariable": {
@@ -45794,7 +47191,8 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Component name."
+          "description": "Component name. Must identify a component in the app manifest.",
+          "maxLength": 63
         }
       },
       "required": [
@@ -45807,7 +47205,7 @@
       "properties": {
         "variables": {
           "type": "array",
-          "description": "Omit to preserve variables; [] clears. An explicit list replaces the set.\nNames are unique ignoring case; PORT and BuilderApps platform-managed names are reserved.\nValues are limited to 32 KiB UTF-8 each; all names and values together to 64 KiB.",
+          "description": "Omission on PUT resets variables to an empty set; [] clears. An explicit list replaces the set.\nPATCH omission preserves the current set.\nNames are unique ignoring case; PORT and BuilderApps platform-managed names are reserved.\nValues are limited to 32 KiB UTF-8 each; all names and values together to 64 KiB.",
           "maxItems": 100,
           "items": {
             "$ref": "#/definitions/BuilderAppVariable"
@@ -45818,7 +47216,8 @@
         },
         "components": {
           "type": "array",
-          "description": "Named components in the version configuration. Not accepted by PATCH.",
+          "description": "Named components in the version configuration, unique by name. Not accepted by PATCH.",
+          "maxItems": 20,
           "items": {
             "$ref": "#/definitions/BuilderAppVersionComponent"
           },
@@ -45828,6 +47227,17 @@
           "x-ms-mutability": [
             "read",
             "create"
+          ]
+        },
+        "connections": {
+          "type": "array",
+          "description": "Service connections captured by the next application version, unique by name ignoring case.\nOmission on PUT resets connections; [] clears them. PATCH omission preserves them.",
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/definitions/BuilderAppConnection"
+          },
+          "x-ms-identifiers": [
+            "name"
           ]
         }
       }

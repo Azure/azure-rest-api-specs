@@ -29,6 +29,44 @@ namespace Customizations;
   "entraCallbackUri",
   "csharp"
 );
+@@clientName(
+  BuilderAppAzureMonitorLogs.dataCollectionEndpointUrl,
+  "dataCollectionEndpointUri",
+  "csharp"
+);
+@@clientName(
+  BuilderAppsAsyncOperations.getOperationStatus,
+  "getBuilderAppOperationStatus",
+  "csharp"
+);
+@@clientName(
+  BuilderAppRuntimeActionRequest,
+  "BuilderAppRuntimeActionContent",
+  "csharp"
+);
+@@clientName(
+  BuilderAppPreviewDeployRequest,
+  "BuilderAppPreviewDeployContent",
+  "csharp"
+);
+@@clientName(
+  BuilderAppPreviewAuthResponse,
+  "BuilderAppPreviewAuthResult",
+  "csharp"
+);
+@@clientName(BuilderAppDeletionStatus.operationUrl, "operationUri", "csharp");
+@@clientName(BuilderAppDeletionStatus.startTime, "startsOn", "csharp");
+@@clientName(BuilderAppDeletionStatus.endTime, "endsOn", "csharp");
+@@clientName(
+  BuilderAppPreviewSettings.lifetimeHours,
+  "lifetimeInHours",
+  "csharp"
+);
+@@clientName(
+  BuilderAppPreviewSettings.autoCreatePreviews,
+  "shouldAutoCreatePreviews",
+  "csharp"
+);
 
 // python
 @@clientName(Microsoft.Web, "WebSiteManagementClient", "python, javascript");
