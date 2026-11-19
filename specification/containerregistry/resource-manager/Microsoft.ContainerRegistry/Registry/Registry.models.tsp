@@ -295,6 +295,16 @@ model RegistryNameCheckRequest {
  */
 model RegistryProperties {
   /**
+   * The capacity reservation name in the registry's subscription, resource group and home region.
+   * An empty string creates an ordinary registry or removes an existing assignment.
+   * Omission preserves an assignment on update.
+   * PUT/PATCH responses show the accepted value; GET/list responses show the stored projection.
+   * Responses omit the property when unassigned.
+   */
+  @added(Versions.v2027_01_01_Preview)
+  reservation?: string;
+
+  /**
    * The URL that can be used to log into the container registry.
    */
   @visibility(Lifecycle.Read)
@@ -737,6 +747,14 @@ model RegistryUpdateParameters {
  * The parameters for updating the properties of a container registry.
  */
 model RegistryPropertiesUpdateParameters {
+  /**
+   * The capacity reservation name in the registry's subscription, resource group and home region.
+   * An empty string removes the assignment and returns to shared placement.
+   * Omission leaves the assignment unchanged.
+   */
+  @added(Versions.v2027_01_01_Preview)
+  reservation?: string;
+
   /**
    * The value that indicates whether the admin user is enabled.
    */
