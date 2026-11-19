@@ -16,6 +16,7 @@ tags:
   - name: Agent Telephony
   - name: TelephonyCampaigns
   - name: Agent Session Computes
+  - name: Connection Authorizations
   - name: AgentServer Task Storage
   - name: EvaluationSuiteGenerationJobs
   - name: Responses Root
@@ -2024,6 +2025,179 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agents
+  /agents/{agent_name}/endpoint/authorizations/{connection}:
+    get:
+      operationId: ConnectionAuthorizations_getAuthorization
+      summary: Get a connection authorization
+      description: |-
+        Returns the calling user's authorization of a connection for the agent. Read-only; never creates a link or a
+        grant.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - ConnectionAuthorizations=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: connection
+          in: path
+          required: true
+          description: The name of a project connection the agent uses.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionAuthorization'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Connection Authorizations
+      x-ms-foundry-meta:
+        required_previews:
+          - ConnectionAuthorizations=V1Preview
+  /agents/{agent_name}/endpoint/authorizations/{connection}:grant:
+    post:
+      operationId: ConnectionAuthorizations_grantAuthorization
+      summary: Grant a connection authorization
+      description: |-
+        Starts authorization of a connection for the agent. Returns a sign-in `url` when the user must authorize. Each
+        call can return a new link; use the latest.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - ConnectionAuthorizations=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: connection
+          in: path
+          required: true
+          description: The name of a project connection the agent uses.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionAuthorization'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Connection Authorizations
+      x-ms-foundry-meta:
+        required_previews:
+          - ConnectionAuthorizations=V1Preview
+  /agents/{agent_name}/endpoint/authorizations/{connection}:revoke:
+    post:
+      operationId: ConnectionAuthorizations_revokeAuthorization
+      summary: Revoke a connection authorization
+      description: |-
+        Revokes the calling user's authorization of a connection for the agent, so Foundry stops using the credential.
+        Succeeds when no authorization exists. The connection and the agent remain.
+      parameters:
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - ConnectionAuthorizations=V1Preview
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: connection
+          in: path
+          required: true
+          description: The name of a project connection the agent uses.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Connection Authorizations
+      x-ms-foundry-meta:
+        required_previews:
+          - ConnectionAuthorizations=V1Preview
   /agents/{agent_name}/endpoint/protocols/invocations:
     post:
       operationId: AgentInvocations_createAgentInvocation
@@ -48178,6 +48352,7 @@ components:
         - Skills=V1Preview
         - HostedAgents=V1Preview
         - ContainerAgents=V1Preview
+        - EgressCredentialRules=V1Preview
         - MicrosoftCopilot=V1Preview
       description: Feature opt-in keys for agent definition operations supporting conditional preview features.
     AgentEndpointAuthorizationScheme:
@@ -52985,6 +53160,63 @@ components:
           description: Metadata of the connection
           readOnly: true
       description: Response from the list and get connections operations
+    ConnectionAuthorization:
+      type: object
+      required:
+        - connection
+        - status
+      properties:
+        connection:
+          type: string
+          description: The project connection name. Equals the path key.
+        status:
+          $ref: '#/components/schemas/ConnectionAuthorizationStatus'
+          description: The authorization status.
+        url:
+          type: string
+          format: uri
+          description: 'An opaque, short-lived sign-in link. Present only on `:grant` when `status` is `authorization_required`. Treat it as a secret: show it only to the user and never log it.'
+        expires_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: When `url` expires. Present only with `url`.
+      description: The calling user's authorization of one project connection for one agent.
+    ConnectionAuthorizationStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - authorized
+            - authorization_required
+      description: Whether the calling user has authorized a connection for an agent.
+    ConnectionCredentialRule:
+      type: object
+      required:
+        - type
+        - connection_id
+        - destinations
+      properties:
+        type:
+          type: string
+          enum:
+            - connection
+        connection_id:
+          type: string
+          description: |-
+            The connection name, or the full ARM id of a connection in the agent's project. Stored and returned exactly as
+            sent.
+        mode:
+          $ref: '#/components/schemas/CredentialRuleMode'
+          description: How the credential is delivered to sandbox code. Only `mask` is supported.
+        destinations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CredentialDestination'
+          minItems: 1
+          maxItems: 25
+          description: 'Where egress sets the connection credential. Every destination must set `inject: true`.'
+      allOf:
+        - $ref: '#/components/schemas/CredentialRule'
+      description: A credential rule for an egress-enabled project connection.
     ConnectionType:
       anyOf:
         - type: string
@@ -53655,6 +53887,121 @@ components:
         response_id:
           type: string
           description: The response on which the item is created.
+    CredentialDestination:
+      type: object
+      required:
+        - match
+      properties:
+        match:
+          type: array
+          items:
+            $ref: '#/components/schemas/CredentialMatch'
+          minItems: 1
+          maxItems: 25
+          description: The requests this destination covers.
+        headers:
+          type: array
+          items:
+            $ref: '#/components/schemas/CredentialHeader'
+          description: 'The headers that carry the credential. Defaults to `Authorization: Bearer <credential>`. Required for `CustomKeys` connections.'
+        inject:
+          type: boolean
+          description: |-
+            When `true`, the credential is also set on a matching request that carries no placeholder or handle. When
+            `false`, it replaces only this rule's placeholder or handle.
+          default: false
+      description: Where a credential may be used and how it is written into the request.
+    CredentialHeader:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The header name. Defaults to `Authorization`. Hop-by-hop, framing, `Host`, and `Proxy-Authorization` are not allowed.
+          default: Authorization
+        type:
+          $ref: '#/components/schemas/CredentialHeaderType'
+          description: How the credential is written into the header. Defaults to `bearer` on `Authorization` and `raw` otherwise.
+        format:
+          type: string
+          description: 'For `raw`: a template with exactly one `{0}`, for example `token {0}`. Defaults to `{0}`.'
+        username:
+          type: string
+          description: 'For `basic`: the user name. Cannot contain `:`.'
+        key:
+          type: string
+          description: 'For `CustomKeys` connections: the name of the stored key that goes in this header.'
+      description: A header that carries the credential.
+    CredentialHeaderType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - bearer
+            - basic
+            - raw
+      description: How a credential is written into a header.
+    CredentialMatch:
+      type: object
+      required:
+        - host
+      properties:
+        host:
+          type: string
+          description: An exact host, `*.suffix` (subdomains only), or `*` (`entra_wildcard` rules only).
+        path:
+          type: string
+          description: An exact path, or a prefix ending in `/*`. Compared case-insensitively. Omit to match every path.
+        methods:
+          type: array
+          items:
+            type: string
+          description: HTTP methods, compared case-insensitively. Omit to match every method.
+      description: A request pattern covered by a credential destination.
+    CredentialRule:
+      type: object
+      required:
+        - name
+        - type
+      properties:
+        name:
+          type: string
+          pattern: ^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$
+          description: A unique name for the rule within the agent version.
+        type:
+          $ref: '#/components/schemas/CredentialRuleType'
+          description: The credential source.
+      discriminator:
+        propertyName: type
+        mapping:
+          entra: '#/components/schemas/EntraCredentialRule'
+          entra_wildcard: '#/components/schemas/EntraWildcardCredentialRule'
+          connection: '#/components/schemas/ConnectionCredentialRule'
+      description: A rule that binds one credential source to the destinations where egress may use it.
+    CredentialRuleIdentity:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - agent
+            - agent_on_behalf_of_user
+      description: Who a credential rule acts as.
+    CredentialRuleMode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - mask
+            - real
+      description: How a credential is delivered to code in the hosted agent sandbox.
+    CredentialRuleType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - entra
+            - entra_wildcard
+            - connection
+      description: The source of the credential that a credential rule delivers.
     CredentialType:
       anyOf:
         - type: string
@@ -54707,6 +55054,19 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V2Preview
+    EgressPolicy:
+      type: object
+      properties:
+        credential_rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/CredentialRule'
+          maxItems: 25
+          description: |-
+            Unordered rules that say which credential Foundry may attach to which outbound destination. When omitted or
+            empty, the version keeps today's behavior. When present, the sandbox token endpoint serves only resources covered
+            by a rule or a platform audience.
+      description: The egress settings of a hosted agent version.
     EndpointBasedEvaluatorDefinition:
       type: object
       required:
@@ -54753,6 +55113,43 @@ components:
             - Entra
       allOf:
         - $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
+    EntraCredentialRule:
+      type: object
+      required:
+        - type
+        - resource
+        - identity
+        - mode
+      properties:
+        type:
+          type: string
+          enum:
+            - entra
+        resource:
+          type: string
+          description: The Entra resource URI or application id, for example `https://graph.microsoft.com`. `*` is not allowed.
+        identity:
+          $ref: '#/components/schemas/CredentialRuleIdentity'
+          description: Who the rule acts as.
+        mode:
+          $ref: '#/components/schemas/CredentialRuleMode'
+          description: How the credential is delivered to sandbox code.
+        scopes:
+          type: array
+          items:
+            type: string
+          description: 'Fully qualified delegated scopes, such as `https://graph.microsoft.com/User.Read`. Allowed only with `identity: agent_on_behalf_of_user`. When omitted, the token is for `<resource>/.default`.'
+        destinations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CredentialDestination'
+          maxItems: 25
+          description: |-
+            Where egress may use the credential. Required for `mask`. Optional for `real`, where every destination must set
+            `inject: true`.
+      allOf:
+        - $ref: '#/components/schemas/CredentialRule'
+      description: A credential rule for one Entra resource.
     EntraIDCredentials:
       type: object
       required:
@@ -54767,6 +55164,36 @@ components:
       allOf:
         - $ref: '#/components/schemas/BaseCredentials'
       description: Entra ID credential definition
+    EntraWildcardCredentialRule:
+      type: object
+      required:
+        - type
+        - identity
+        - mode
+      properties:
+        type:
+          type: string
+          enum:
+            - entra_wildcard
+        identity:
+          $ref: '#/components/schemas/CredentialRuleIdentity'
+          description: |-
+            Who the rule acts as. With `mode: real`, only `agent` is accepted; a real on-behalf-of-user token needs an
+            `entra` rule that names the resource.
+        mode:
+          $ref: '#/components/schemas/CredentialRuleMode'
+          description: How the credential is delivered to sandbox code.
+        destinations:
+          type: array
+          items:
+            $ref: '#/components/schemas/CredentialDestination'
+          maxItems: 25
+          description: |-
+            Where egress may replace a wildcard placeholder. Required for `mask`, where no destination may set `inject: true`.
+            Not allowed for `real`.
+      allOf:
+        - $ref: '#/components/schemas/CredentialRule'
+      description: A credential rule for every non-platform Entra resource without an `entra` rule of its own.
     Eval:
       type: object
       required:
@@ -58171,6 +58598,12 @@ components:
         compute_primitives:
           $ref: '#/components/schemas/SessionComputePrimitives'
           description: Opt-in to session compute primitives (exec, ports) for sessions created for this agent version. Requires the `SessionCompute=V1Preview` feature. Each primitive defaults to off.
+        egress_policy:
+          $ref: '#/components/schemas/EgressPolicy'
+          description: 'Egress settings for this agent version. `credential_rules` say which credential Foundry may deliver and where egress may use it. Requires `Foundry-Features: EgressCredentialRules=V1Preview`.'
+          x-ms-foundry-meta:
+            conditional_previews:
+              - EgressCredentialRules=V1Preview
       allOf:
         - $ref: '#/components/schemas/AgentDefinition'
       description: The hosted agent definition.
