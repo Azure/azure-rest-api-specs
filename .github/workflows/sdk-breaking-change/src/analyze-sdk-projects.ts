@@ -1,5 +1,5 @@
-import { appendFile, mkdir, realpath, rename, writeFile } from "node:fs/promises";
-import { basename, dirname, isAbsolute, join, relative, sep } from "node:path";
+import { mkdir, realpath, writeFile } from "node:fs/promises";
+import { basename, dirname, join } from "node:path";
 import {
   parseAzsdkResponse,
   type AzsdkBuildResponse,
@@ -13,13 +13,16 @@ import {
   generateTypeSpecMetadata,
   type TypeSpecMetadata,
 } from "@azure-tools/specs-shared/typespec-metadata";
-import { SdkLanguage } from "../../src/sdk-breaking-change/resolve-analysis-inputs.ts";
 
-interface ProjectResult {
-  typespecProjectPath: string;
-  packageName: string;
-  resultsPath: string;
-}
+import { MarkdownHeadingId, type AnalysisResult } from "../../src/sdk-breaking-change/types.ts";
+import type { Core } from "../../src/github.ts";
+import {
+  escapeMarkdown,
+  inlineCode,
+  renderMarkdownDoc,
+  section,
+} from "@azure-tools/specs-shared/markdown";
+import { createHash } from "node:crypto";
 
 export interface AnalyzeSdkProjectsOptions {
   localSdkRepositoryPath: string;
@@ -30,16 +33,22 @@ export interface AnalyzeSdkProjectsOptions {
   sdkRepoName: string;
   analyzedSha: string;
   workflowUrl: string;
-  resultDir: string;
+  resultFilePath: string;
   azureSdkCliPath: string;
 }
 
-function isWithin(parent: string, child: string): boolean {
-  const path = relative(parent, child);
-  return path !== "" && path !== ".." && !path.startsWith(`..${sep}`) && !isAbsolute(path);
-}
+export const SdkLanguage = Object.freeze({
+  DotNet: "DotNet",
+  Go: "Go",
+  Java: "Java",
+  JavaScript: "JavaScript",
+  Python: "Python",
+} as const);
+
+export type SdkLanguage = (typeof SdkLanguage)[keyof typeof SdkLanguage];
 
 export async function analyzeSdkProjects({
+  core,
   localSdkRepositoryPath: unresolvedLocalSdkRepositoryPath,
   specificationRepositoryPath,
   typeSpecConfigPaths,
@@ -48,34 +57,86 @@ export async function analyzeSdkProjects({
   sdkRepoName,
   analyzedSha,
   workflowUrl,
-  resultDir,
+  resultFilePath,
   azureSdkCliPath,
-}: AnalyzeSdkProjectsOptions): Promise<void> {
+  forwardOutput,
+}: { core: Core } & AnalyzeSdkProjectsOptions & { forwardOutput?: boolean }): Promise<void> {
   const localSdkRepositoryPath = await realpath(unresolvedLocalSdkRepositoryPath);
-  const resultsDirectory = join(resultDir, "sdk-breaking-change-results");
-  const analysisLog = join(resultsDirectory, "analysis.log");
-  await mkdir(resultsDirectory, { recursive: true });
-  await writeFile(analysisLog, "");
-  await writeFile(
-    join(resultsDirectory, "trigger.json"),
-    `${JSON.stringify({
-      pullNumber,
-      sdkLanguage,
-      analyzedSha,
-      workflowUrl,
-    })}\n`,
-  );
+  await mkdir(dirname(resultFilePath), { recursive: true });
 
-  const projects: ProjectResult[] = [];
-  const packageNames = new Set<string>();
+  const analyzeResult: AnalysisResult = {
+    schemaVersion: 1,
+    prNumber: pullNumber,
+    headSha: analyzedSha,
+    sdkLanguage: sdkLanguage,
+    analysisWorkflowUrl: workflowUrl,
+    status: "success",
+    projects: [],
+  };
   const azureSdkCli = join(azureSdkCliPath, process.platform === "win32" ? "azsdk.exe" : "azsdk");
-  await writeFile(join(resultsDirectory, "projects.json"), "[]\n");
+  let azsdkOptions = undefined;
+  if (forwardOutput) {
+    azsdkOptions = {
+      forwardOutput: true,
+    };
+  }
 
+  const blocks = [
+    "## SDK breaking-change analysis",
+    analyzedSha ? `**Analyzed commit:** ${inlineCode(analyzedSha)}` : undefined,
+  ];
   try {
-    for (const [index, relativeConfigPath] of typeSpecConfigPaths.entries()) {
+    for (const [_index, relativeConfigPath] of typeSpecConfigPaths.entries()) {
       const typeSpecProjectPath = relativeConfigPath.replace(/\/tspconfig\.yaml$/, "");
+      blocks.push(`### ${escapeMarkdown(typeSpecProjectPath)}`);
       const configPath = join(specificationRepositoryPath, relativeConfigPath);
-      const generationResult = join(resultDir, "sdk-generation-result.json");
+
+      /* Get typespec metadata for the project */
+      const metadata: TypeSpecMetadata = await generateTypeSpecMetadata(dirname(configPath));
+      console.log(`Metadata for ${typeSpecProjectPath}:`, metadata);
+      const languageKey = resolveLanguageKey(sdkRepoName, metadata.languages);
+      if (!languageKey) {
+        const message = `No language key found for ${typeSpecProjectPath} and SDK repo ${sdkRepoName}. Skipping this project.`;
+        console.error(message);
+
+        analyzeResult.projects.push({
+          typespecProject: typeSpecProjectPath,
+          sdkPackage: "",
+          analysisStatus: "skipped",
+          breakingChanges: [],
+        });
+        blocks.push(`**Analysis is skipped:** ${escapeMarkdown(message)}`);
+        continue;
+      }
+      const languageMetadata = metadata.languages[languageKey];
+      if (!languageMetadata || languageMetadata.length === 0) {
+        const message = `No language metadata found for ${typeSpecProjectPath} and language ${sdkLanguage}. Skipping this project.`;
+        console.error(message);
+
+        analyzeResult.projects.push({
+          typespecProject: typeSpecProjectPath,
+          sdkPackage: "",
+          analysisStatus: "skipped",
+          breakingChanges: [],
+        });
+        blocks.push(`**Analysis is skipped:** ${escapeMarkdown(message)}`);
+        continue;
+      }
+      let packagePath = languageMetadata[0].outputDir;
+      if (!packagePath) {
+        const message = `No output directory found for ${typeSpecProjectPath} and language ${sdkLanguage}. Skipping this project.`;
+        console.error(message);
+        analyzeResult.projects.push({
+          typespecProject: typeSpecProjectPath,
+          sdkPackage: "",
+          analysisStatus: "skipped",
+          breakingChanges: [],
+        });
+        blocks.push(`**Analysis is skipped:** ${escapeMarkdown(message)}`);
+        continue;
+      }
+      packagePath = resolvePackagePath(packagePath, localSdkRepositoryPath);
+      const packageName = basename(packagePath);
 
       /* Generate the SDK package */
       const { stdout } = await execFile(azureSdkCli, [
@@ -91,45 +152,20 @@ export async function analyzeSdkProjects({
       const generateResponse: AzsdkGenerateResponse =
         parseAzsdkResponse<AzsdkGenerateResponse>(stdout);
       if (generateResponse.result !== "succeeded") {
-        throw new Error(
-          `Failed to generate SDK for ${typeSpecProjectPath}: ${generateResponse.response_error ?? "Unknown error"}`,
-        );
+        const message = `Failed to generate SDK for ${typeSpecProjectPath}: ${generateResponse.response_error ?? "Unknown error"}. Skipping this project.`;
+        console.error(message);
+        analyzeResult.projects.push({
+          typespecProject: typeSpecProjectPath,
+          sdkPackage: "",
+          analysisStatus: "failure",
+          breakingChanges: [],
+        });
+        blocks.push(`**Analysis failed:** ${escapeMarkdown(message)}`);
+        continue;
       }
-      await writeFile(generationResult, stdout);
-
-      const metadata: TypeSpecMetadata = await generateTypeSpecMetadata(dirname(configPath));
-      console.log(`Metadata for ${typeSpecProjectPath}:`, metadata);
-      const languageKey = resolveLanguageKey(sdkRepoName, metadata.languages);
-      if (!languageKey) {
-        throw new Error(
-          `Expected language key for ${typeSpecProjectPath} and SDK repo ${sdkRepoName}, but none was found.`,
-        );
-      }
-      const languageMetadata = metadata.languages[languageKey];
-      if (!languageMetadata || languageMetadata.length === 0) {
-        throw new Error(
-          `Expected language metadata for ${typeSpecProjectPath} and language ${sdkLanguage}, but none was found.`,
-        );
-      }
-      let packagePath = languageMetadata[0].outputDir;
-      if (!packagePath) {
-        throw new Error(
-          `Expected output directory for ${typeSpecProjectPath} and language ${sdkLanguage}, but none was found.`,
-        );
-      }
-      packagePath = resolvePackagePath(packagePath, localSdkRepositoryPath);
-
-      if (!isWithin(localSdkRepositoryPath, packagePath)) {
-        throw new Error(`Invalid generated package path: ${packagePath}`);
-      }
-      const packageName = basename(packagePath);
-      const resultsPath = packageNames.has(packageName)
-        ? `${packageName}-${index + 1}`
-        : packageName;
-      packageNames.add(packageName);
-      const projectResults = join(resultsDirectory, resultsPath);
-      await mkdir(projectResults, { recursive: true });
-      await rename(generationResult, join(projectResults, "generate.json"));
+      blocks.push(
+        `**generate.json:** \n\n\`\`\`\n${JSON.stringify(generateResponse, null, 2)}\n\`\`\``,
+      );
 
       /* Build the SDK package, skip for Python — interpreted language, no compilation needed */
       if (sdkLanguage !== SdkLanguage.Python) {
@@ -143,25 +179,40 @@ export async function analyzeSdkProjects({
         const { stdout: buildStdout } = await execFile(azureSdkCli, buildArgs);
         const buildResponse: AzsdkBuildResponse = parseAzsdkResponse(buildStdout);
         if (buildResponse.result !== "succeeded") {
-          throw new Error(
-            `Failed to build SDK for ${typeSpecProjectPath}: ${buildResponse.response_error ?? "Unknown error"}`,
-          );
+          const message = `Failed to build SDK for ${typeSpecProjectPath}: ${buildResponse.response_error ?? "Unknown error"}. Skipping this project.`;
+          console.error(message);
+          analyzeResult.projects.push({
+            typespecProject: typeSpecProjectPath,
+            sdkPackage: "",
+            analysisStatus: "failure",
+            breakingChanges: [],
+          });
+          blocks.push(`**Analysis failed:** ${escapeMarkdown(message)}`);
+          continue;
         }
-        await writeFile(join(projectResults, "build.json"), `${JSON.stringify(buildResponse)}\n`);
+        blocks.push(
+          `**build.json:** \n\n\`\`\`\n${JSON.stringify(buildResponse, null, 2)}\n\`\`\``,
+        );
       }
 
       /* Detect breaking changes */
-      const { stdout: breakingChangesStdout } = await execFile(azureSdkCli, [
-        "package",
-        "detect-breaking-change",
-        "--package-path",
-        packagePath,
-        "--tsp-config-path",
-        configPath,
-        "--output",
-        "json",
-      ]);
-      console.log("breakingChangesStdout: " + breakingChangesStdout);
+      const { stdout: breakingChangesStdout } = await execFile(
+        azureSdkCli,
+        [
+          "package",
+          "detect-breaking-change",
+          "--package-path",
+          packagePath,
+          "--tsp-config-path",
+          configPath,
+          "--output",
+          "json",
+        ],
+        azsdkOptions,
+      );
+      if (!forwardOutput) {
+        console.log("breakingChangesStdout: " + breakingChangesStdout);
+      }
       const breakingChangesResponse: AzsdkDetectBreakingChangeResponse =
         parseAzsdkResponse(breakingChangesStdout);
       if (
@@ -169,26 +220,69 @@ export async function analyzeSdkProjects({
         breakingChangesResponse.response_error ||
         breakingChangesResponse.response_errors?.length
       ) {
-        throw new Error(
-          `Failed to detect breaking changes for ${typeSpecProjectPath}: ${
-            breakingChangesResponse.response_error ??
-            breakingChangesResponse.response_errors?.join("; ") ??
-            "Unknown error"
-          }`,
-        );
+        const message = `Failed to detect breaking changes for ${typeSpecProjectPath}: ${
+          breakingChangesResponse.response_error ??
+          breakingChangesResponse.response_errors?.join("; ") ??
+          "Unknown error"
+        }`;
+        console.error(message);
+        blocks.push(`**Analysis failed:** ${escapeMarkdown(message)}`);
+        analyzeResult.projects.push({
+          typespecProject: typeSpecProjectPath,
+          sdkPackage: "",
+          analysisStatus: "failure",
+          breakingChanges: [],
+        });
+        continue;
       }
-      await writeFile(
-        join(projectResults, "breaking-changes.json"),
-        `${JSON.stringify(breakingChangesResponse)}\n`,
+      const breakingChanges =
+        breakingChangesResponse.result?.breakingChanges?.map((change) => {
+          const typedChange = change as {
+            breakingChange: string;
+            category: string;
+            resolution?: string;
+            originBreaks: string[];
+          };
+          return {
+            id: toEightDigitId(typedChange.breakingChange),
+            breakingChange: typedChange.breakingChange,
+            category: typedChange.category,
+            suggestedFix: typedChange.resolution ?? "",
+            originBreaks: typedChange.originBreaks,
+          };
+        }) ?? [];
+      if (breakingChangesResponse.result) {
+        breakingChangesResponse.result.breakingChanges = breakingChanges;
+      }
+      blocks.push(`**Analysis succeeded:**`);
+      const breakingChangeSection = section(
+        "Breaking Changes",
+        `\`\`\`\n${JSON.stringify(breakingChangesResponse, null, 2)}\n\`\`\``,
+        `${packageName}-${MarkdownHeadingId.BreakingChange}`,
       );
+      blocks.push(renderMarkdownDoc(breakingChangeSection, 2));
 
-      projects.push({ typespecProjectPath: typeSpecProjectPath, packageName, resultsPath });
-      await writeFile(join(resultsDirectory, "projects.json"), `${JSON.stringify(projects)}\n`);
+      analyzeResult.projects.push({
+        typespecProject: typeSpecProjectPath,
+        sdkPackage: packageName,
+        analysisStatus: "success",
+        breakingChanges: breakingChanges,
+      });
     }
+    await writeFile(resultFilePath, `${JSON.stringify(analyzeResult, null, 2)}\n`);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
-    await appendFile(analysisLog, `${message}\n`);
-    await writeFile(join(resultsDirectory, "error.log"), `${message}\n`);
-    throw error;
+    core.setFailed(message);
+    analyzeResult.status = "failure";
+    blocks.push(`**Analysis failed:** ${escapeMarkdown(message)}`);
+    await writeFile(resultFilePath, `${JSON.stringify(analyzeResult, null, 2)}\n`);
   }
+
+  // summary of the analysis results
+  await core.summary.addRaw(blocks.filter((block) => block !== undefined).join("\n\n")).write();
+}
+
+function toEightDigitId(value: string): string {
+  const hash = createHash("sha256").update(value).digest();
+  return (hash.readUInt32BE(0) % 100_000_000).toString().padStart(8, "0");
 }

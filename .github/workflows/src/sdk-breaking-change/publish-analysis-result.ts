@@ -1,22 +1,25 @@
+import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
-import { join } from "node:path";
-import { escapeMarkdown, table } from "@azure-tools/specs-shared/markdown";
-import { AnalysisResultSchema, type AnalysisResult } from "./create-analysis-result.ts";
+import {
+  escapeMarkdown,
+  renderMarkdownDoc,
+  section,
+  table,
+} from "@azure-tools/specs-shared/markdown";
+import { AnalysisResultSchema, MarkdownHeadingId, type AnalysisResult } from "./types.ts";
 import { publishResultInComment } from "./publish-result-in-comment.ts";
 import type { GitHubScriptArgs } from "../github.ts";
 
-export async function buildAnalysisReport(resultsPath: string): Promise<{
+export async function buildAnalysisReport(resultFilePath: string): Promise<{
   command: string;
   report: string;
   result: AnalysisResult;
 }> {
-  const result = AnalysisResultSchema.parse(
-    JSON.parse(await readFile(join(resultsPath, "sdk-breaking-change-analysis.json"), "utf8")),
-  );
+  const result = AnalysisResultSchema.parse(JSON.parse(await readFile(resultFilePath, "utf8")));
   const projectReports = result.projects.map((project) => {
     const tableRows: string[][] = project.breakingChanges.length
-      ? project.breakingChanges.map((change, index) => [
-          `${index + 1}`,
+      ? project.breakingChanges.map((change) => [
+          escapeMarkdown(change.id),
           escapeMarkdown(change.breakingChange),
           escapeMarkdown(change.category),
           escapeMarkdown(change.suggestedFix),
@@ -28,18 +31,30 @@ export async function buildAnalysisReport(resultsPath: string): Promise<{
       "",
       `**SDK Package:** ${project.sdkPackage}`,
       "",
-      table([["#", "Breaking change", "Category", "Suggested fix"], ...tableRows]),
+      project.analysisStatus === "success"
+        ? table([["ID", "Breaking change", "Category", "Suggested fix"], ...tableRows])
+        : `Analysis skipped or failed. Analysis status: ${project.analysisStatus}`,
     ];
-    projectReport.push("", `[SDK breaking change analysis details](${result.analysisWorkflowUrl})`);
+    const breakingChangeSummaryUrl = [
+      result.analysisWorkflowUrl,
+      "#",
+      `${project.sdkPackage}-${MarkdownHeadingId.BreakingChange}`,
+    ].join("");
+    projectReport.push(
+      "",
+      `[View SDK Breaking Change Analysis Details](${breakingChangeSummaryUrl})`,
+    );
     return projectReport;
   });
 
+  const analyseSection = section(
+    `SDK Breaking Change Analysis for ${result.sdkLanguage}`,
+    `**Analyzed commit:** \`${result.headSha}\``,
+  );
   return {
     command: `/azsdk sdk-breaking-analysis ${result.sdkLanguage}`,
     report: [
-      `## SDK Breaking changes for ${result.sdkLanguage}`,
-      "",
-      `**Analyzed commit:** \`${result.headSha}\``,
+      renderMarkdownDoc(analyseSection, 2),
       "",
       ...projectReports.flatMap((projectReport) => [...projectReport, ""]),
     ].join("\n"),
@@ -51,13 +66,18 @@ export async function publishAnalysisResult({
   github,
   context,
   core,
-}: GitHubScriptArgs): Promise<void> {
-  const resultsPath = process.env.RESULTS_PATH;
-  if (!resultsPath) {
-    throw new Error("RESULTS_PATH is required.");
+  resultFilePath,
+}: GitHubScriptArgs & { resultFilePath: string }): Promise<void> {
+  if (!resultFilePath) {
+    throw new Error("resultFilePath is required.");
+  }
+  if (!existsSync(resultFilePath)) {
+    throw new Error(`SDK analysis result file does not exist: ${resultFilePath}`);
   }
 
-  const { command, report, result } = await buildAnalysisReport(resultsPath);
+  const { command, report, result } = await buildAnalysisReport(resultFilePath);
+  core.setOutput("issue_number", result.prNumber);
+  core.setOutput("head_sha", result.headSha);
   if (result.status !== "success") {
     const errorMessage = `SDK breaking-change analysis failed.\n\n${result.errorMessage ?? ""}\n\n[See analysis workflow](${result.analysisWorkflowUrl})`;
     core.warning(errorMessage);
@@ -66,6 +86,7 @@ export async function publishAnalysisResult({
       result.prNumber,
       command,
       `❌ ${errorMessage}`,
+      result.headSha,
     );
     return;
   }
@@ -81,9 +102,16 @@ export async function publishAnalysisResult({
       result.prNumber,
       command,
       `⚠️ ${staleMessage}`,
+      result.headSha,
     );
     return;
   }
 
-  await publishResultInComment({ github, context, core }, result.prNumber, command, report);
+  await publishResultInComment(
+    { github, context, core },
+    result.prNumber,
+    command,
+    report,
+    result.headSha,
+  );
 }

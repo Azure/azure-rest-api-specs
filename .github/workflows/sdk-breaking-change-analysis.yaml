@@ -1,5 +1,5 @@
-# cspell:ignore Eeuo ghtools golangci GOPATH ltrimstr
-name: SDK Breaking Change Analysis - Analyze
+# cspell:ignore eeuo ghtools golangci GOPATH ltrimstr
+name: SDK Breaking Change Analysis
 
 on: # zizmor: ignore[dangerous-triggers] Only base/default-branch workflow code runs; PR content is checked out separately.
   workflow_run:
@@ -12,7 +12,7 @@ on: # zizmor: ignore[dangerous-triggers] Only base/default-branch workflow code 
         required: true
         type: string
       sdk_language:
-        description: "SDK language: DotNet, Go, Java, JavaScript, Python"
+        description: "SDK language: Net, Go, Java, Js, Python"
         required: true
         type: string
 
@@ -48,25 +48,18 @@ jobs:
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
+            // Resolve the analysis trigger inputs and publish analysis run status.
             const { resolveAnalysisTrigger } =
               await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/resolve-analysis-inputs.ts');
-            await resolveAnalysisTrigger({ github, context, core });
-
-  propagate-status:
-    needs: resolve
-    runs-on: ubuntu-latest
-    steps:
-      - name: Write analysis status
-        shell: bash
-        env:
-          SHOULD_RUN: ${{ needs.resolve.outputs.should-run }}
-        run: |
-          mkdir -p "${{ runner.temp }}/sdk-breaking-change-analysis"
-          printf '%s\n' "$SHOULD_RUN" > \
-            "${{ runner.temp }}/sdk-breaking-change-analysis/run"
-
-      - name: Upload analysis status
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+            await resolveAnalysisTrigger({
+              github,
+              context,
+              core,
+              statusArtifactPath: "${{ runner.temp }}/sdk-breaking-change-analysis/run",
+            });
+      - name: Publish analysis status
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: sdk-breaking-change-analysis-status
           path: ${{ runner.temp }}/sdk-breaking-change-analysis/run
@@ -98,45 +91,10 @@ jobs:
             eng
           persist-credentials: false
 
-      - name: Checkout specification PR head
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          repository: ${{ github.repository }}
-          # resolve-trigger restricts this to the current SHA of a branch in this repository.
-          # codeql[actions/untrusted-checkout/critical]
-          ref: ${{ needs.resolve.outputs.head-sha }}
-          path: repositories/azure-rest-api-specs
-          persist-credentials: false
-
       - name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
         with:
           additional-package: "@azure-tools/sdk-breaking-change-workflows"
-
-      - name: Resolve changed TypeSpec config paths
-        id: resolve-tsp-config-paths
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
-        env:
-          PR_NUMBER: ${{ needs.resolve.outputs.pr-number }}
-          HEAD_SHA: ${{ needs.resolve.outputs.head-sha }}
-        with:
-          script: |
-            const { resolveChangedTypeSpecConfigPathsFromPullRequest } =
-              await import('${{ github.workspace }}/.github/workflows/sdk-breaking-change/src/resolve-tsp-config-paths.ts');
-            await resolveChangedTypeSpecConfigPathsFromPullRequest({
-              github,
-              context,
-              core,
-              pullNumber: Number(process.env.PR_NUMBER),
-              expectedHeadSha: process.env.HEAD_SHA,
-              localSpecRepoPath: '${{ github.workspace }}/repositories/azure-rest-api-specs',
-            });
-
-      - name: Set up Node.js and install specification repository dependencies
-        uses: ./.github/actions/setup-node-install-deps
-        with:
-          working-directory: repositories/azure-rest-api-specs
-
       - name: Install Azure SDK CLI
         shell: pwsh
         run: ./eng/common/mcp/azure-sdk-mcp.ps1 -InstallDirectory $env:AZSDK_CLI_PATH
@@ -157,14 +115,14 @@ jobs:
           cache: false
 
       - name: Set up .NET
-        if: needs.resolve.outputs.sdk-language == 'DotNet'
-        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6.0.0
+        if: needs.resolve.outputs.sdk-language == 'Net'
+        uses: actions/setup-dotnet@0f4a354dd5547a28c70b7853dbd95d5b67886e73 # v6.1.0
         with:
           dotnet-version: "10.0.x"
 
       - name: Set up Python
         if: needs.resolve.outputs.sdk-language == 'Python'
-        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: "3.13"
 
@@ -216,7 +174,37 @@ jobs:
             --languages "$SDK_LANGUAGE" \
             --package-path "$SDK_REPOSITORY_PATH" \
             --yes
-
+      # Use the PR checkout only for TypeSpec specifications; run all actions and scripts from the trusted workflow checkout.
+      - name: Checkout specification PR head
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: ${{ needs.resolve.outputs.head-repository }}
+          ref: ${{ needs.resolve.outputs.head-sha }}
+          path: repositories/azure-rest-api-specs
+          persist-credentials: false
+      - name: Resolve changed TypeSpec config paths
+        if: needs.resolve.outputs.should-run == 'true'
+        id: resolve-tsp-config-paths
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          PR_NUMBER: ${{ needs.resolve.outputs.pr-number }}
+          HEAD_SHA: ${{ needs.resolve.outputs.head-sha }}
+        with:
+          script: |
+            const { resolveChangedTypeSpecConfigPathsFromPullRequest } =
+              await import('${{ github.workspace }}/.github/workflows/sdk-breaking-change/src/resolve-tsp-config-paths.ts');
+            await resolveChangedTypeSpecConfigPathsFromPullRequest({
+              github,
+              context,
+              core,
+              pullNumber: Number(process.env.PR_NUMBER),
+              expectedHeadSha: process.env.HEAD_SHA,
+              localSpecRepoPath: '${{ github.workspace }}/repositories/azure-rest-api-specs',
+            });
+      - name: Set up Node.js and install specification repository dependencies
+        uses: ./.github/actions/setup-node-install-deps
+        with:
+          working-directory: repositories/azure-rest-api-specs
       - name: Analyze SDK projects
         id: analyze-sdk-projects
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
@@ -235,70 +223,116 @@ jobs:
           script: |
             const { analyzeSdkProjects } =
               await import('${{ github.workspace }}/.github/workflows/sdk-breaking-change/src/analyze-sdk-projects.ts');
+            const typeSpecConfigPaths = process.env.TYPESPEC_CONFIG_PATHS;
+            if (!typeSpecConfigPaths) {
+              throw new Error(
+                "Resolve changed TypeSpec config paths did not produce tsp-config-paths.",
+              );
+            }
             await analyzeSdkProjects({
+              core,
               localSdkRepositoryPath: process.env.LOCAL_SDK_REPO_PATH,
               specificationRepositoryPath: process.env.SPEC_REPOSITORY_PATH,
-              typeSpecConfigPaths: JSON.parse(process.env.TYPESPEC_CONFIG_PATHS),
+              typeSpecConfigPaths: JSON.parse(typeSpecConfigPaths),
               pullNumber: Number(process.env.PR_NUMBER),
               sdkLanguage: process.env.SDK_LANGUAGE,
               sdkRepoName: process.env.SDK_REPO_NAME,
               analyzedSha: process.env.ANALYZED_SHA,
               workflowUrl: process.env.WORKFLOW_URL,
-              resultDir: process.env.RUNNER_TEMP,
+              resultFilePath: `${process.env.RUNNER_TEMP}/sdk-breaking-change-analysis-results/sdk-breaking-change-analysis.json`,
               azureSdkCliPath: process.env.AZSDK_CLI_PATH,
+              forwardOutput: true,
             });
 
-      - name: Publish result summary
-        if: always()
+      - name: Create SDK analysis Failure artifact
+        if: failure()
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
-          RESULTS_PATH: ${{ runner.temp }}/sdk-breaking-change-results
-          JOB_STATUS: ${{ job.status }}
-          ANALYSIS_OUTCOME: ${{ steps.analyze-sdk-projects.outcome }}
-          ANALYZED_SHA: ${{ needs.resolve.outputs.head-sha }}
-          JOB_LOG_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ job.check_run_id }}
-        with:
-          script: |
-            const { publishAnalysisSummary } =
-              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/publish-analysis-summary.ts');
-            await publishAnalysisSummary({
-              core,
-              resultsPath: process.env.RESULTS_PATH,
-              jobStatus: process.env.JOB_STATUS,
-              analysisOutcome: process.env.ANALYSIS_OUTCOME,
-              analyzedSha: process.env.ANALYZED_SHA,
-              jobLogUrl: process.env.JOB_LOG_URL,
-            });
-
-      - name: Create SDK analysis result artifact
-        if: always() && needs.resolve.outputs.head-sha != ''
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
-        env:
-          RESULTS_PATH: ${{ runner.temp }}/sdk-breaking-change-results
+          RESULT_FILE_PATH: ${{ runner.temp }}/sdk-breaking-change-analysis-results/sdk-breaking-change-analysis.json
           PR_NUMBER: ${{ needs.resolve.outputs.pr-number }}
           HEAD_SHA: ${{ needs.resolve.outputs.head-sha }}
           SDK_LANGUAGE: ${{ needs.resolve.outputs.sdk-language }}
-          ANALYSIS_WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          STATUS: ${{ steps.analyze-sdk-projects.outcome == 'success' && 'success' || 'failure' }}
+          WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         with:
           script: |
-            const { createAnalysisResult } =
-              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/create-analysis-result.ts');
-            await createAnalysisResult({
-              resultsPath: process.env.RESULTS_PATH,
-              prNumber: Number(process.env.PR_NUMBER),
-              headSha: process.env.HEAD_SHA,
-              sdkLanguage: process.env.SDK_LANGUAGE,
-              analysisWorkflowUrl: process.env.ANALYSIS_WORKFLOW_URL,
-              status: process.env.STATUS,
-            });
+            const { existsSync } = await import('node:fs');
+            const { mkdir, writeFile } = await import('node:fs/promises');
+            const { dirname } = await import('node:path');
+            const resultFilePath = process.env.RESULT_FILE_PATH;
+            if (!existsSync(resultFilePath)) {
+              const errorMessage =
+                "The analysis job failed. Check the workflow logs for setup or execution failures.";
+              core.warning(errorMessage);
+              await mkdir(dirname(resultFilePath), { recursive: true });
+              await writeFile(resultFilePath, JSON.stringify({
+                schemaVersion: 1,
+                prNumber: Number(process.env.PR_NUMBER),
+                headSha: process.env.HEAD_SHA,
+                sdkLanguage: process.env.SDK_LANGUAGE,
+                analysisWorkflowUrl: process.env.WORKFLOW_URL,
+                status: "failure",
+                errorMessage,
+                projects: [],
+              }, null, 2));
+            }
 
       - name: Upload SDK analysis results
         id: upload-results
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: sdk-breaking-change-results
-          path: ${{ runner.temp }}/sdk-breaking-change-results/sdk-breaking-change-analysis.json
-          if-no-files-found: warn
+          name: sdk-breaking-change-analysis-results
+          path: ${{ runner.temp }}/sdk-breaking-change-analysis-results/sdk-breaking-change-analysis.json
+          if-no-files-found: error
           retention-days: 7
+  publish-results:
+    needs: analyze
+    if: always() && (needs.analyze.result == 'success' || needs.analyze.result == 'failure')
+    runs-on: ubuntu-slim
+    permissions:
+      actions: read
+      contents: read
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          sparse-checkout: |
+            .github
+          persist-credentials: false
+
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+
+      - name: Download SDK analysis results
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: sdk-breaking-change-analysis-results
+          path: ${{ runner.temp }}/sdk-breaking-change-analysis-results
+
+      - name: Publish SDK breaking-change analysis result
+        id: publish-result
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const { publishAnalysisResult } =
+              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/publish-analysis-result.ts');
+            await publishAnalysisResult({
+              github,
+              context,
+              core,
+              resultFilePath: '${{ runner.temp }}/sdk-breaking-change-analysis-results/sdk-breaking-change-analysis.json',
+            });
+
+      - name: Upload PR number
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: issue-number
+          value: ${{ steps.publish-result.outputs.issue_number }}
+
+      - name: Upload PR head SHA
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: head-sha
+          value: ${{ steps.publish-result.outputs.head_sha }}

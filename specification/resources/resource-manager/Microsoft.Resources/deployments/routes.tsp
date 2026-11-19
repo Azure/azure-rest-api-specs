@@ -18,6 +18,7 @@ interface DeploymentsOperationGroup {
   /**
    * Calculate the hash of the given template.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing calculateTemplateHash retains its request-body shape; preserve wire compatibility."
   @tag("Deployments")
   @autoRoute
   calculateTemplateHash is ArmProviderActionSync<

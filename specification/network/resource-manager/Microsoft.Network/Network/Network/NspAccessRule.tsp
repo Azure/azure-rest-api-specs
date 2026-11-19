@@ -94,6 +94,7 @@ interface NspAccessRules {
   /**
    * Reconcile NSP access rules
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing reconcile retains its request-body shape; preserve wire compatibility."
   @tag("NetworkSecurityPerimeterAccessRules")
   reconcile is ArmResourceActionSync<
     NspAccessRule,

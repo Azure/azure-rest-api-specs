@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "api-version": "2026-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "aiGatewayName": "example-gateway",
+    "workspaceName": "default",
+    "modelProviderName": "custom-provider",
+    "resource": {
+      "properties": {
+        "modelProviderType": "Custom",
+        "displayName": "Custom provider",
+        "custom": {
+          "endpoint": {
+            "url": "https://api.contoso.com/v1"
+          }
+        },
+        "authentication": {
+          "headers": [
+            {
+              "name": "api-key",
+              "value": "{api-key}"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/modelProviders/custom-provider",
+        "name": "custom-provider",
+        "type": "Microsoft.ApiManagement/aigateways/workspaces/modelProviders",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "modelProviderType": "Custom",
+          "displayName": "Custom provider",
+          "custom": {
+            "endpoint": {
+              "url": "https://api.contoso.com/v1"
+            }
+          },
+          "authentication": {
+            "headers": [
+              {
+                "name": "api-key"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/modelProviders/custom-provider",
+        "name": "custom-provider",
+        "type": "Microsoft.ApiManagement/aigateways/workspaces/modelProviders",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "modelProviderType": "Custom",
+          "displayName": "Custom provider",
+          "custom": {
+            "endpoint": {
+              "url": "https://api.contoso.com/v1"
+            }
+          },
+          "authentication": {
+            "headers": [
+              {
+                "name": "api-key"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "operationId": "AiGatewayModelProviderResources_CreateOrUpdate",
+  "title": "Create a custom model provider with API key authentication"
+}

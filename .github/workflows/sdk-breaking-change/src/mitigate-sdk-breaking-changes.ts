@@ -2,12 +2,21 @@ import { mkdir, readFile, realpath, stat, writeFile } from "node:fs/promises";
 import { dirname, isAbsolute, join, relative, sep } from "node:path";
 import { parseAzsdkResponse } from "@azure-tools/spec-gen-sdk-runner/azsdk-adapter";
 import { execFile } from "@azure-tools/specs-shared/exec";
-import { AnalysisResultSchema } from "../../src/sdk-breaking-change/create-analysis-result.ts";
 import {
-  type MitigatedChange,
-  type MitigationResult,
+  AnalysisResultSchema,
   MitigationResultSchema,
-} from "../../src/sdk-breaking-change/mitigation-result.ts";
+  type MitigationResult,
+  type MitigatedChange,
+  MarkdownHeadingId,
+  SUPPRESSION_GUIDE_URL,
+} from "../../src/sdk-breaking-change/types.ts";
+import type { Core } from "../../src/github.ts";
+import {
+  escapeMarkdown,
+  inlineCode,
+  renderMarkdownDoc,
+  section,
+} from "@azure-tools/specs-shared/markdown";
 
 export interface AzsdkCustomizedCodeUpdateResponse {
   success: boolean;
@@ -41,10 +50,12 @@ async function writeResult(path: string, result: MitigationResult): Promise<void
 
 function BuildMigratedBreakingChange(
   customizedUpdateResult: AzsdkCustomizedCodeUpdateResponse,
+  id: string,
   breakingChange: string,
   suggestedFix: string,
 ): MitigatedChange {
   return {
+    id,
     breakingChange,
     suggestedFix,
     isResolved: customizedUpdateResult.success,
@@ -55,16 +66,35 @@ function BuildMigratedBreakingChange(
 }
 
 export async function mitigateSdkBreakingChanges({
+  core,
   analysisResultPath,
   mitigationResultPath,
   mitigationWorkflowUrl,
   specificationRepositoryPath: unresolvedSpecificationRepositoryPath,
   resultDirPath,
   azureSdkCliPath,
-}: MitigateSdkBreakingChangesOptions): Promise<void> {
+  forwardOutput,
+}: { core: Core } & MitigateSdkBreakingChangesOptions & {
+    forwardOutput?: boolean;
+  }): Promise<void> {
   const analysisResult = AnalysisResultSchema.parse(
     JSON.parse(await readFile(analysisResultPath, "utf8")),
   );
+  const analyzedProjects = analysisResult.projects.filter(
+    (project) => project.analysisStatus === "success",
+  );
+  const blocks = [
+    "## SDK breaking-change mitigation",
+    analysisResult.headSha
+      ? `**Analyzed commit:** ${inlineCode(analysisResult.headSha)}`
+      : undefined,
+  ];
+  let azsdkOptions = undefined;
+  if (forwardOutput) {
+    azsdkOptions = {
+      forwardOutput: true,
+    };
+  }
   try {
     const specificationRepositoryPath = await realpath(unresolvedSpecificationRepositoryPath);
     const specificationRoot = await realpath(join(specificationRepositoryPath, "specification"));
@@ -78,14 +108,14 @@ export async function mitigateSdkBreakingChanges({
       mitigationWorkflowUrl,
       status: "success",
       customizationCode: "",
-      projects: analysisResult.projects.map((project) => ({
+      projects: analyzedProjects.map((project) => ({
         typespecProject: project.typespecProject,
         sdkPackage: project.sdkPackage,
         breakingChanges: [],
       })),
     };
 
-    for (const [projectIndex, project] of analysisResult.projects.entries()) {
+    for (const [projectIndex, project] of analyzedProjects.entries()) {
       if (project.breakingChanges.length === 0) {
         console.log(`No SDK breaking changes found for ${project.typespecProject}.`);
         continue;
@@ -107,6 +137,7 @@ export async function mitigateSdkBreakingChanges({
         );
         const commandResultPath = join(resultDirPath, `sdk-mitigation-result-${changeIndex}.json`);
         let mitigatedChange: MitigatedChange = {
+          id: change.id,
           breakingChange: change.breakingChange,
           suggestedFix: change.suggestedFix,
           isResolved: false,
@@ -121,7 +152,7 @@ export async function mitigateSdkBreakingChanges({
               "--tsp-project-path",
               typeSpecProjectPath,
               "--customization-request",
-              `Resolve this SDK breaking change: ${JSON.stringify({
+              `Resolve ${analysisResult.sdkLanguage} SDK breaking change: ${JSON.stringify({
                 breakingChange: change.breakingChange,
                 category: change.category,
                 suggestedFix: change.suggestedFix,
@@ -131,17 +162,20 @@ export async function mitigateSdkBreakingChanges({
               "--output",
               "json",
             ],
+            azsdkOptions,
           );
           await writeFile(commandResultPath, stdout);
 
           try {
             mitigatedChange = BuildMigratedBreakingChange(
               parseAzsdkResponse<AzsdkCustomizedCodeUpdateResponse>(stdout),
+              change.id,
               change.breakingChange,
               change.suggestedFix,
             );
           } catch {
             mitigatedChange = {
+              id: change.id,
               breakingChange: change.breakingChange,
               suggestedFix: change.suggestedFix,
               isResolved: false,
@@ -153,17 +187,30 @@ export async function mitigateSdkBreakingChanges({
             error,
           );
           mitigatedChange = {
+            id: change.id,
             breakingChange: change.breakingChange,
             suggestedFix: change.suggestedFix,
             isResolved: false,
           };
         }
         mitigationResult.projects[projectIndex].breakingChanges.push(mitigatedChange);
+        const suppresionSection = section(
+          "Suppression",
+          `Follow the [suppression guideline](${SUPPRESSION_GUIDE_URL}) to add follow breaking change items to sdk-suppressions.yaml.\n\n\`\`\`yaml\n${change.originBreaks.join("\n")}\n\`\`\``,
+        );
+        const breakingChangeSection = section(
+          `Breaking Change ${change.id}`,
+          suppresionSection,
+          `breaking-change-${escapeMarkdown(change.id)}-${MarkdownHeadingId.Mitigation}`,
+        );
+        blocks.push(renderMarkdownDoc(breakingChangeSection, 2));
       }
     }
     await writeResult(mitigationResultPath, mitigationResult);
   } catch (error) {
     console.error("SDK breaking-change mitigation failed.", error);
+    const message = error instanceof Error ? error.message : String(error);
+    core.setFailed(message);
     const failureResult: MitigationResult = {
       schemaVersion: 1,
       status: "failure",
@@ -171,10 +218,13 @@ export async function mitigateSdkBreakingChanges({
       headSha: analysisResult.headSha,
       sdkLanguage: analysisResult.sdkLanguage,
       mitigationWorkflowUrl: mitigationWorkflowUrl,
-      errorMessage: (error as Error).message,
+      errorMessage: message,
       projects: [],
       customizationCode: "",
     };
     await writeResult(mitigationResultPath, failureResult);
   }
+
+  // summary of the mitigation
+  await core.summary.addRaw(blocks.filter((block) => block !== undefined).join("\n\n")).write();
 }

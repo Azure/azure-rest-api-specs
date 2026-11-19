@@ -72,6 +72,7 @@ using Microsoft.Cache;
   "ExportRedisEnterpriseDatabaseContent",
   "csharp"
 );
+@@clientName(FirewallRule, "RedisEnterpriseFirewallRule", "csharp");
 @@clientName(FlushParameters, "FlushRedisEnterpriseDatabaseContent", "csharp");
 @@clientName(ForceLinkParameters, "ForceLinkContent", "csharp");
 @@clientName(
@@ -106,8 +107,18 @@ using Microsoft.Cache;
   "csharp"
 );
 @@clientName(
+  MigrationProperties.rollbackEligibleUntil,
+  "RollbackEligibilityExpiresOn",
+  "csharp"
+);
+@@clientName(
   MigrationProvisioningState,
   "RedisEnterpriseMigrationProvisioningState",
+  "csharp"
+);
+@@clientName(
+  MigrationRollbackReason,
+  "RedisEnterpriseMigrationRollbackReason",
   "csharp"
 );
 @@clientName(

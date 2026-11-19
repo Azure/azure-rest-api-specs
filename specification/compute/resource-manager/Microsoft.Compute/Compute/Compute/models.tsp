@@ -1018,7 +1018,7 @@ union PatchOperationStatus {
 }
 
 /**
- * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.
+ * Specifies the policy for the resource's placement in an availability zone. Use **Auto** for Virtual Machines and Virtual Machine Scale Sets to let the system automatically select an availability zone during resource creation. **Any** remains supported for Virtual Machines for backward compatibility.
  */
 union ZonePlacementPolicyType {
   string,
@@ -1026,7 +1026,7 @@ union ZonePlacementPolicyType {
   Any: "Any",
 
   /**
-   * Automatic zone placement in a Virtual Machine Scale Set.
+   * Automatic zone placement for Virtual Machines and Virtual Machine Scale Sets.
    */
   @added(Versions.v2025_04_01)
   Auto: "Auto",
@@ -3087,6 +3087,14 @@ model VirtualMachineScaleSetIPConfigurationProperties {
   privateIPAddressVersion?: IPVersion;
 
   /**
+   * The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address.
+   */
+  @added(Versions.v2026_04_01)
+  @minValue(1)
+  @maxValue(128)
+  privateIPAddressPrefixLength?: int32;
+
+  /**
    * Specifies an array of references to backend address pools of application gateways. A scale set can reference backend address pools of multiple application gateways. Multiple scale sets cannot use the same application gateway.
    */
   applicationGatewayBackendAddressPools?: SubResource[];
@@ -4414,6 +4422,15 @@ model VirtualMachineScaleSetUpdateIPConfigurationProperties {
   privateIPAddressVersion?: IPVersion;
 
   /**
+   * The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable only on the update (PATCH) model so callers can explicitly clear an allocated prefix; the create/read models use a plain optional int32."
+  @added(Versions.v2026_04_01)
+  @minValue(1)
+  @maxValue(128)
+  privateIPAddressPrefixLength?: int32 | null;
+
+  /**
    * The application gateway backend address pools.
    */
   applicationGatewayBackendAddressPools?: SubResource[];
@@ -5622,7 +5639,7 @@ model StorageProfile {
   diskControllerType?: DiskControllerTypes;
 
   /**
-   * Specifies whether the regional disks should be aligned/moved to the VM zone. This is applicable only for VMs with placement property set. Please note that this change is irreversible. Minimum api-version: 2024-11-01.
+   * Specifies whether the regional disks should be aligned/moved to the VM zone. This is applicable **only** for VMs with placement.zonePlacementPolicy set to **Any**. Please note that this change is irreversible. Minimum api-version: 2024-11-01.
    */
   alignRegionalDisksToVMZone?: boolean;
 
@@ -6227,6 +6244,14 @@ model VirtualMachineNetworkInterfaceIPConfigurationProperties {
    * Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.
    */
   privateIPAddressVersion?: IPVersions;
+
+  /**
+   * The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address.
+   */
+  @added(Versions.v2026_04_01)
+  @minValue(1)
+  @maxValue(128)
+  privateIPAddressPrefixLength?: int32;
 
   /**
    * Specifies an array of references to application security group.
@@ -7104,7 +7129,7 @@ model LastPatchInstallationSummary {
  */
 model Placement {
   /**
-   * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.
+   * Specifies the policy for the resource's placement in an availability zone. Use **Auto** for Virtual Machines and Virtual Machine Scale Sets to let the system automatically select an availability zone during resource creation. **Any** remains supported for Virtual Machines for backward compatibility.
    */
   zonePlacementPolicy?: ZonePlacementPolicyType;
 
@@ -9214,7 +9239,7 @@ model CapacityReservationGroupProperties {
   instanceView?: CapacityReservationGroupInstanceView;
 
   /**
-   * Specifies the settings to enable sharing across subscriptions for the capacity reservation group resource. The capacity reservation group resource can generally be shared across subscriptions belonging to a single Azure AAD tenant or across AAD tenants if there is a trust relationship established between the tenants.  Block capacity reservation does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.
+   * Specifies the settings to enable sharing across subscriptions for the capacity reservation group resource. The capacity reservation group resource can be shared only across subscriptions belonging to the same Microsoft Entra ID tenant. Sharing across tenants is not supported. Block capacity reservation does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.
    */
   sharingProfile?: ResourceSharingProfile;
 

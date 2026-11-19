@@ -1,10 +1,14 @@
 import type { GitHubScriptArgs } from "../github.ts";
 import { readFile } from "node:fs/promises";
-import { escapeMarkdown, table } from "@azure-tools/specs-shared/markdown";
-import { type MitigationResult, MitigationResultSchema } from "./mitigation-result.ts";
+import {
+  details,
+  escapeMarkdown,
+  renderMarkdownDoc,
+  section,
+  table,
+} from "@azure-tools/specs-shared/markdown";
+import { MarkdownHeadingId, type MitigationResult, MitigationResultSchema } from "./types.ts";
 import { publishResultInComment } from "./publish-result-in-comment.ts";
-
-const MAX_CHANGED_CODE_LENGTH = 12_000;
 
 export async function buildMitigationReport({
   github,
@@ -33,64 +37,61 @@ export async function buildMitigationReport({
     core.warning(staleMessage);
     return { report: `⚠️ ${staleMessage}`, result };
   }
-  const projectSections = result.projects.flatMap((project) => {
-    const resolvedChanges: string[][] = project.breakingChanges
-      .filter((change) => change.isResolved)
-      .map((change) => [
-        escapeMarkdown(change.breakingChange),
-        escapeMarkdown(change.suggestedFix),
-        escapeMarkdown(change.typespecChangesSummary?.[0] as string),
-      ]);
-    const unresolvedChanges: string[][] = project.breakingChanges
-      .filter((change) => !change.isResolved)
-      .map((change) => [
-        escapeMarkdown(change.breakingChange),
-        escapeMarkdown(change.suggestedFix),
-      ]);
+  const projectMitigations = result.projects.flatMap((project) => {
+    const changes: string[][] = project.breakingChanges.map((change) => [
+      change.isResolved ? "✔️" : "❌",
+      `[${escapeMarkdown(change.id)}](${workflowSummaryUrl}#breaking-change-${escapeMarkdown(change.id)}-${MarkdownHeadingId.Mitigation} "How to Suppress")`,
+      escapeMarkdown(change.breakingChange),
+      change.suggestedFix ? escapeMarkdown(change.suggestedFix) : "",
+      change.typespecChangesSummary?.[0] ? escapeMarkdown(change.typespecChangesSummary[0]) : "",
+    ]);
     return [
       `**TypeSpec project:** ${project.typespecProject}`,
       "",
       `**SDK package:** ${project.sdkPackage}`,
       "",
-      "**Resolved Breaking Changes:**",
+      "**Breaking Changes:**",
       "",
-      table([
-        ["Breaking change", "Resolution", "TypeSpec changes"],
-        ...(resolvedChanges.length
-          ? resolvedChanges
-          : [["None", "No SDK breaking changes were resolved.", "-"]]),
-      ]),
-      "",
-      "**Unresolved Breaking Changes:**",
-      "",
-      table([
-        ["Breaking change", "Suggested resolution"],
-        ...(unresolvedChanges.length
-          ? unresolvedChanges
-          : [["None", "All SDK breaking changes were resolved."]]),
-      ]),
+      changes.length > 0
+        ? details(
+            "View breaking changes",
+            table([
+              ["Resolvable", "ID", "Breaking change", "Resolution", "TypeSpec changes"],
+              ...changes,
+            ]),
+            true,
+          )
+        : "None",
       "",
     ];
   });
 
-  const fullChangedCode = result.customizationCode.trim();
-  const changedCode =
-    fullChangedCode.length > MAX_CHANGED_CODE_LENGTH
-      ? `${fullChangedCode.slice(0, MAX_CHANGED_CODE_LENGTH)}\n... diff truncated.`
-      : fullChangedCode;
+  const sdkBreakingChangeMitigationSection = section(
+    `SDK Breaking Change Mitigation for ${result.sdkLanguage}`,
+    `**Mitigation upon commit:** \`${result.headSha}\``,
+  );
+  const projectSection = section("Breaking Change Mitigation", projectMitigations.join("\n\n"));
+  const changedCode = result.customizationCode.trim();
+  const customizedCodeSection = section(
+    "Customization Code",
+    changedCode
+      ? details("View customization Code", ["````diff", changedCode, "````"].join("\n"))
+      : "No mitigation changes were produced.",
+  );
+  const nextStep = section(
+    "Next Steps",
+    `<p>💡 Apply Mitigation: Apply the customization code to mitigate the breaking changes.</p>\n\n<p>💡 Suppress Breaking Changes: For accepted breaking changes, click the breaking change ID link to view suppression instructions and follow the suppression process.</p>`,
+  );
   return {
     report: [
-      `## SDK breaking-change mitigation for ${result.sdkLanguage}`,
+      `${renderMarkdownDoc(sdkBreakingChangeMitigationSection, 2)}`,
       "",
-      `**Mitigation upon commit:** \`${result.headSha}\``,
+      renderMarkdownDoc(projectSection, 3),
+      renderMarkdownDoc(customizedCodeSection, 3),
       "",
-      ...projectSections,
-      "**Customization Code:**",
-      "",
-      changedCode
-        ? ["````diff", changedCode, "````"].join("\n")
-        : "No mitigation changes were produced.",
       `[View customization code in the workflow summary](${workflowSummaryUrl})`,
+      "",
+      renderMarkdownDoc(nextStep, 3),
     ].join("\n"),
     result,
   };
@@ -113,10 +114,13 @@ export async function publishMitigationResult({
     mitigationResultPath,
     workflowSummaryUrl,
   });
+  core.setOutput("issue_number", buildResult.result.prNumber);
+  core.setOutput("head_sha", buildResult.result.headSha);
   await publishResultInComment(
     { github, context, core },
     buildResult.result.prNumber,
     `/azsdk sdk-breaking-mitigate ${buildResult.result.sdkLanguage}`,
     buildResult.report,
+    buildResult.result.headSha,
   );
 }

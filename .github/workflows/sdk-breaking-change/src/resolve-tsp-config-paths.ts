@@ -43,7 +43,10 @@ export async function resolveChangedTypeSpecConfigPathsFromPullRequest({
     [filename, previous_filename].filter((path): path is string => path !== undefined),
   );
 
-  const configPaths = detectChangedSpecConfigFromChangedFiles(localSpecRepoPath, changedFiles);
+  const configPaths = await detectChangedSpecConfigFromChangedFiles(
+    localSpecRepoPath,
+    changedFiles,
+  );
   if (configPaths.length === 0) {
     throw new Error("No tspconfig.yaml could be resolved from the changed TypeSpec files.");
   }

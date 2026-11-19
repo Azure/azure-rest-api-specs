@@ -8,6 +8,35 @@ import {
 } from "../mocks.ts";
 
 describe("publishResultInComment", () => {
+  it("records the report commit for the Next Steps to Merge summary", async () => {
+    const github = createMockGithub();
+    const headSha = "a".repeat(40);
+    await publishResultInComment(
+      { github, context: createMockContext(), core: createMockCore() },
+      42,
+      "/azsdk sdk-breaking-analysis Go",
+      "analysis report",
+      headSha,
+    );
+
+    const { body } = github.rest.issues.createComment.mock.calls[0][0] as { body: string };
+    expect(body).toContain(`<!-- sdk-breaking-change-head-sha: ${headSha} -->`);
+  });
+
+  it("rejects invalid report commit identifiers", async () => {
+    const github = createMockGithub();
+    await expect(
+      publishResultInComment(
+        { github, context: createMockContext(), core: createMockCore() },
+        42,
+        "/azsdk sdk-breaking-analysis Go",
+        "analysis report",
+        "invalid",
+      ),
+    ).rejects.toThrow("Invalid SDK breaking-change head SHA");
+    expect(github.rest.issues.createComment).not.toHaveBeenCalled();
+  });
+
   it("creates a comment with the command as the first line", async () => {
     const github = createMockGithub();
     const context = createMockContext();
@@ -40,9 +69,26 @@ describe("publishResultInComment", () => {
     const core = createMockCore();
     github.rest.issues.listComments.mockResolvedValue({
       data: [
-        { id: 10, body: "/azsdk sdk-breaking-analysis go\n\nold" },
-        { id: 20, body: "  /azsdk sdk-breaking-analysis Go\n\nnewer" },
-        { id: 30, body: "/azsdk sdk-breaking-analysis Python" },
+        {
+          id: 10,
+          user: { login: "github-actions[bot]" },
+          body: "/azsdk sdk-breaking-analysis Go\n\nold",
+        },
+        {
+          id: 20,
+          user: { login: "github-actions[bot]" },
+          body: "  /azsdk sdk-breaking-analysis Go\n\nnewer",
+        },
+        {
+          id: 30,
+          user: { login: "github-actions[bot]" },
+          body: "/azsdk sdk-breaking-analysis Python",
+        },
+        {
+          id: 40,
+          user: { login: "contributor" },
+          body: "/azsdk sdk-breaking-analysis Go\n\nuser-authored",
+        },
       ],
     });
 
@@ -72,7 +118,13 @@ describe("publishResultInComment", () => {
     const context = createMockContext();
     const core = createMockCore();
     github.rest.issues.listComments.mockResolvedValue({
-      data: [{ id: 10, body: "/azsdk sdk-breaking-analysis Go" }],
+      data: [
+        {
+          id: 10,
+          user: { login: "github-actions[bot]" },
+          body: "/azsdk sdk-breaking-analysis Go",
+        },
+      ],
     });
     github.rest.issues.updateComment.mockRejectedValue(createMockRequestError(403));
 

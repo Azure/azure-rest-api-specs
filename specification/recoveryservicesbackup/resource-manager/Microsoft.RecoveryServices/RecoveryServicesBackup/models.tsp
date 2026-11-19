@@ -104,6 +104,10 @@ union DataSourceType {
   SAPAseDatabase: "SAPAseDatabase",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SAPHanaDBInstance: "SAPHanaDBInstance",
+
+  /** A SQL Server instance. */
+  @added(Versions.v2026_10_01)
+  SQLInstance: "SQLInstance",
 }
 
 /**
@@ -787,6 +791,10 @@ union WorkloadType {
   SAPAseDatabase: "SAPAseDatabase",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SAPHanaDBInstance: "SAPHanaDBInstance",
+
+  /** A SQL Server instance. */
+  @added(Versions.v2026_10_01)
+  SQLInstance: "SQLInstance",
 }
 
 /**
@@ -1449,6 +1457,10 @@ union BackupItemType {
   SAPAseDatabase: "SAPAseDatabase",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SAPHanaDBInstance: "SAPHanaDBInstance",
+
+  /** A SQL Server instance. */
+  @added(Versions.v2026_10_01)
+  SQLInstance: "SQLInstance",
 }
 
 /**
@@ -4928,7 +4940,8 @@ model AzureVmWorkloadSQLInstanceProtectedItem extends ProtectedItem {
   /**
    * Name of Child Dbs protected under this parent.
    */
-  childDBNames?: string[];
+  @renamedFrom(Versions.v2026_10_01, "childDBNames")
+  childDatabaseNameList?: string[];
 
   /**
    * The state of instance protection.

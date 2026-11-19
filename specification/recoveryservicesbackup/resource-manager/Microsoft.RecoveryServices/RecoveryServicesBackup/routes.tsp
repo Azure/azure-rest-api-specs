@@ -198,6 +198,7 @@ interface Jobs {
     /**
      * OData filter options.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing export POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     $filter?: string,
   ): ArmAcceptedResponse<ExtraHeaders = {}> | ErrorResponse;
@@ -463,6 +464,7 @@ interface ProtectionContainersOperationGroup {
     /**
      * OData filter options.
      */
+    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing refresh POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     $filter?: string,
   ): ArmAcceptedResponse<ExtraHeaders = {}> | ErrorResponse;
@@ -798,7 +800,7 @@ interface RecoveryPointsExtendedInfo {
     | ArmResponse<RPExtendedInfoResourceList>
     | ArmAcceptedResponse<
         "Accepted",
-        ArmLroLocationHeader &
+        ArmLroLocationHeader<FinalResult = RPExtendedInfoResourceList> &
           Azure.Core.Foundations.RetryAfterHeader & {
             /**
              * A link to the shared fabric level operation status endpoint, which reports the status of this long
@@ -844,8 +846,14 @@ interface RecoveryPointsExtendedInfo {
     | ArmResponse<RPExtendedInfoResourceList>
     | ArmAcceptedResponse<
         "Accepted",
-        ArmLroLocationHeader &
-          Azure.Core.Foundations.RetryAfterHeader & {
+        {
+          /**
+           * A link to this endpoint, which a caller polling for the result of the prior getRPExtendedInfo
+           * operation can keep using while that operation is still running.
+           */
+          @header("Location")
+          location?: string;
+        } & Azure.Core.Foundations.RetryAfterHeader & {
             /**
              * A link to the shared fabric level operation status endpoint, which reports the status of the long
              * running operation whose result this endpoint returns.

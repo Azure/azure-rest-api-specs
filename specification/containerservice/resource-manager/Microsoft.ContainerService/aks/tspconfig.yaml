@@ -52,11 +52,16 @@ options:
     namespace: "Azure.ResourceManager.ContainerService"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     enable-wire-path-attribute: true
-    api-version: "2026-07-01"
   "@azure-typespec/http-client-csharp-provisioning":
     namespace: "Azure.Provisioning.ContainerService"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    api-version: "2026-01-01"
+  "@azure-tools/typespec-ts-provisioning":
+    emitter-output-dir: "{output-dir}/{service-dir}/provisioning-containerservice"
+    azure-sdk-for-js: true
+    generate-test: true
+    package-details:
+      name: "@azure/provisioning-containerservice"
+      description: "Azure Provisioning constructs for containerservice"
 
 linter:
   extends:

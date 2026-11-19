@@ -1,11 +1,37 @@
-import { mkdir, rm, writeFile } from "node:fs/promises";
-import { join } from "node:path";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { dirname, join } from "node:path";
+import { zipSync } from "fflate";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+
 import { resolveMitigationTrigger } from "../../src/sdk-breaking-change/resolve-mitigation-inputs.ts";
-import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
+import { createMockContext, createMockCore, createMockGithub, type MockGithub } from "../mocks.ts";
 
 const temporaryDirectory = join(import.meta.dirname, `results-${crypto.randomUUID()}`);
 const analysisResultPath = join(temporaryDirectory, "sdk-breaking-change-analysis.json");
+const analysisStatusPath = join(temporaryDirectory, "analysis-status", "run");
+const analysisArtifactName = "sdk-breaking-change-results";
+const analysisStatusArtifactName = "sdk-breaking-change-analysis-status";
+const mitigationStatusPath = join(temporaryDirectory, "mitigation-status", "run");
+const workflowRunId = 456;
+
+function mockArtifactDownloads(github: MockGithub): void {
+  github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+    data: {
+      artifacts: [
+        { id: 122, name: analysisStatusArtifactName },
+        { id: 123, name: analysisArtifactName },
+      ],
+    },
+  });
+  github.rest.actions.downloadArtifact.mockImplementation(async ({ artifact_id }) => {
+    const isStatus = artifact_id === 122;
+    const contents = await readFile(isStatus ? analysisStatusPath : analysisResultPath);
+    const archive = zipSync({
+      [isStatus ? "run" : "sdk-breaking-change-analysis.json"]: contents,
+    });
+    return { data: Uint8Array.from(archive).buffer };
+  });
+}
 
 async function writeAnalysisResult(overrides: Record<string, unknown> = {}): Promise<void> {
   await writeFile(
@@ -24,20 +50,23 @@ async function writeAnalysisResult(overrides: Record<string, unknown> = {}): Pro
 }
 
 beforeEach(async () => {
-  await mkdir(temporaryDirectory, { recursive: true });
+  await mkdir(dirname(analysisStatusPath), { recursive: true });
+  await writeFile(analysisStatusPath, "true\n");
 });
 
 afterEach(async () => {
   await rm(temporaryDirectory, { recursive: true, force: true });
+  vi.clearAllMocks();
 });
 
 describe("resolveMitigationTrigger", () => {
   it.each([
-    ["DotNet", "azure-sdk-for-net"],
+    ["Net", "azure-sdk-for-net"],
     ["Go", "azure-sdk-for-go"],
     ["Java", "azure-sdk-for-java"],
-    ["JavaScript", "azure-sdk-for-js"],
+    ["Js", "azure-sdk-for-js"],
     ["Python", "azure-sdk-for-python"],
+    ["Rust", "azure-sdk-for-rust"],
   ] as const)(
     "resolves %s mitigation inputs from a successful analysis result",
     async (sdkLanguage, sdkRepository) => {
@@ -45,6 +74,7 @@ describe("resolveMitigationTrigger", () => {
       const github = createMockGithub();
       const context = createMockContext();
       const core = createMockCore();
+      mockArtifactDownloads(github);
       github.rest.pulls.get.mockResolvedValue({
         data: {
           head: {
@@ -59,9 +89,32 @@ describe("resolveMitigationTrigger", () => {
         github,
         context,
         core,
+        analysisArtifactName,
+        analysisStatusArtifactName,
+        analysisStatusPath,
+        mitigationStatusPath,
         publishedResultsPath: analysisResultPath,
+        workflowRunId,
       });
 
+      expect(github.rest.actions.listWorkflowRunArtifacts).toHaveBeenCalledWith({
+        owner: "owner",
+        repo: "repo",
+        run_id: workflowRunId,
+        per_page: 100,
+      });
+      expect(github.rest.actions.downloadArtifact).toHaveBeenCalledWith({
+        owner: "owner",
+        repo: "repo",
+        artifact_id: 122,
+        archive_format: "zip",
+      });
+      expect(github.rest.actions.downloadArtifact).toHaveBeenCalledWith({
+        owner: "owner",
+        repo: "repo",
+        artifact_id: 123,
+        archive_format: "zip",
+      });
       expect(core.setOutput).toHaveBeenCalledWith("should-run", "true");
       expect(core.setOutput).toHaveBeenCalledWith("pr-number", 42);
       expect(core.setOutput).toHaveBeenCalledWith("sdk-language", sdkLanguage);
@@ -80,12 +133,18 @@ describe("resolveMitigationTrigger", () => {
     const github = createMockGithub();
     const context = createMockContext();
     const core = createMockCore();
+    mockArtifactDownloads(github);
 
     await resolveMitigationTrigger({
       github,
       context,
       core,
+      analysisArtifactName,
+      analysisStatusArtifactName,
+      analysisStatusPath,
+      mitigationStatusPath,
       publishedResultsPath: analysisResultPath,
+      workflowRunId,
     });
 
     expect(core.notice).toHaveBeenCalledWith("The SDK breaking-change analysis did not succeed.");
@@ -93,11 +152,12 @@ describe("resolveMitigationTrigger", () => {
     expect(github.rest.pulls.get).not.toHaveBeenCalled();
   });
 
-  it("rejects a stale analysis head SHA", async () => {
+  it("skips mitigation for a stale analysis head SHA", async () => {
     await writeAnalysisResult();
     const github = createMockGithub();
     const context = createMockContext();
     const core = createMockCore();
+    mockArtifactDownloads(github);
     github.rest.pulls.get.mockResolvedValue({
       data: {
         head: {
@@ -108,13 +168,45 @@ describe("resolveMitigationTrigger", () => {
       },
     });
 
-    await expect(
-      resolveMitigationTrigger({
-        github,
-        context,
-        core,
-        publishedResultsPath: analysisResultPath,
-      }),
-    ).rejects.toThrow("does not match analyzed head");
+    await resolveMitigationTrigger({
+      github,
+      context,
+      core,
+      analysisArtifactName,
+      analysisStatusArtifactName,
+      analysisStatusPath,
+      mitigationStatusPath,
+      publishedResultsPath: analysisResultPath,
+      workflowRunId,
+    });
+    expect(core.notice).toHaveBeenCalledWith(
+      `Pull request head ${"b".repeat(40)} does not match analyzed head ${"a".repeat(40)}.`,
+    );
+    expect(core.setOutput).toHaveBeenCalledWith("should-run", "false");
+  });
+
+  it("skips mitigation when analysis was not requested", async () => {
+    await writeFile(analysisStatusPath, "false\n");
+    const github = createMockGithub();
+    const context = createMockContext();
+    const core = createMockCore();
+    mockArtifactDownloads(github);
+
+    await resolveMitigationTrigger({
+      github,
+      context,
+      core,
+      analysisArtifactName,
+      analysisStatusArtifactName,
+      analysisStatusPath,
+      mitigationStatusPath,
+      publishedResultsPath: analysisResultPath,
+      workflowRunId,
+    });
+
+    expect(core.notice).toHaveBeenCalledWith("The SDK breaking-change analysis was not requested.");
+    expect(core.setOutput).toHaveBeenCalledWith("should-run", "false");
+    expect(github.rest.actions.downloadArtifact).toHaveBeenCalledTimes(1);
+    expect(github.rest.pulls.get).not.toHaveBeenCalled();
   });
 });

@@ -578,6 +578,7 @@ model RecommendationProperties {
    * The criticality score assigned to the recommendation.
    */
   @added(Versions.v2026_08_01_preview)
+  @removed(Versions.v2026_10_01)
   @visibility(Lifecycle.Read)
   criticalityScore?: string;
 
@@ -585,6 +586,7 @@ model RecommendationProperties {
    * The criticality assigned to the recommendation.
    */
   @added(Versions.v2026_08_01_preview)
+  @removed(Versions.v2026_10_01)
   @visibility(Lifecycle.Read)
   criticality?: string;
 
@@ -592,6 +594,7 @@ model RecommendationProperties {
    * The time when the recommendation's criticality score last changed.
    */
   @added(Versions.v2026_08_01_preview)
+  @removed(Versions.v2026_10_01)
   @visibility(Lifecycle.Read)
   scoreChangedAt?: string;
 
@@ -599,6 +602,7 @@ model RecommendationProperties {
    * The service group ID associated with the recommendation.
    */
   @added(Versions.v2026_08_01_preview)
+  @removed(Versions.v2026_10_01)
   @visibility(Lifecycle.Read)
   serviceGroupId?: string;
 
@@ -606,6 +610,7 @@ model RecommendationProperties {
    * The estimated savings associated with the recommendation.
    */
   @added(Versions.v2026_08_01_preview)
+  @removed(Versions.v2026_10_01)
   @visibility(Lifecycle.Read)
   savings?: ResourceRecommendationSavings;
 
