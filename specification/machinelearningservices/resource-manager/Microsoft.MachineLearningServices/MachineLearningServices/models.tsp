@@ -153,6 +153,7 @@ union ComputeType {
   SynapseSpark: "SynapseSpark",
 
   /** An attached Fabric custom Spark pool. */
+  @added(Versions.v2026_09_15_preview)
   FabricSpark: "FabricSpark",
 }
 
@@ -11521,6 +11522,7 @@ model SynapseSparkProperties {
 }
 
 /** An existing Fabric custom Spark pool attached to a Machine Learning workspace. */
+@added(Versions.v2026_09_15_preview)
 model FabricSpark extends Compute {
   /** Fabric workspace, Lakehouse, Environment, and Spark pool details. */
   properties?: FabricSparkProperties;
@@ -11530,6 +11532,7 @@ model FabricSpark extends Compute {
 }
 
 /** Resources belonging to the Fabric compute attachment. */
+@added(Versions.v2026_09_15_preview)
 model FabricSparkProperties {
   /** ID of the Fabric workspace. */
   fabricWorkspaceId: string;
