@@ -1,18 +1,19 @@
 - tool: TypeSpecValidation
   reason: >-
     This provider-level folder is the shared Network Security SDK composition,
-    not a REST service project. The NeuroShield REST project remains in its
-    service folder, while client.tsp and the five SDK emitter configurations
-    are intentionally shared at the provider level.
+    not a REST service project. The NeuroShield and Agent Fabric REST projects
+    remain in their service folders, while client.tsp and the five SDK emitter
+    configurations are intentionally shared at the provider level.
   rules:
     - FolderStructure
   paths:
     - .
 - tool: TypeSpecValidation
   reason: >-
-    NeuroShield is a REST-only child project. The canonical SDK configuration is
-    the parent tspconfig.yaml, which is validated separately. Repeating SDK
-    emitters here would create duplicate writers for the shared packages.
+    NeuroShield and Agent Fabric are REST-only child projects. The canonical
+    SDK configuration is the parent tspconfig.yaml, which is validated
+    separately. Repeating SDK emitters here would create duplicate writers for
+    the shared packages.
   rules:
     - SdkTspConfigValidation
   sub-rules:
@@ -24,3 +25,4 @@
     - options.@azure-tools/typespec-go.*
   paths:
     - neuroShield/tspconfig.yaml
+    - agentFabric/tspconfig.yaml

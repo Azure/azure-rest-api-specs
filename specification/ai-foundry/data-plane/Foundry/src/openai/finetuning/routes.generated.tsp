@@ -7,7 +7,6 @@
 import "../../common/models.tsp";
 import "@typespec/http";
 import "@typespec/openapi";
-import "@azure-tools/openai-typespec/models/fine-tuning";
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using OpenAI;

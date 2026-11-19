@@ -1,0 +1,84 @@
+{
+  "parameters": {
+    "subscriptionId": "daefabc0-95b4-48b3-b645-8a753a63c4fa",
+    "resourceGroupName": "resourceGroup1",
+    "hostPoolName": "hostPool1",
+    "api-version": "2026-09-01-preview",
+    "sessionHostConfiguration": {
+      "properties": {
+        "vmSizeId": "Standard_D4ads_v6",
+        "diskInfo": {
+          "managedDisk": {
+            "type": "StandardSSD_LRS"
+          },
+          "diffDiskSettings": {
+            "option": "Local",
+            "placement": "NvmeDisk"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.DesktopVirtualization/hostPools/hostPool1/sessionHostConfigurations/default/operationStatuses/ed5d502c-acaa-42ec-ad61-0d8488a9fd1d"
+      },
+      "body": {
+        "name": "default",
+        "id": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.DesktopVirtualization/hostPools/hostPool1/sessionHostConfigurations/default",
+        "type": "Microsoft.DesktopVirtualization/hostPools/sessionHostConfigurations",
+        "properties": {
+          "provisioningState": "Provisioning",
+          "vmNamePrefix": "nvme-vm",
+          "networkInfo": {
+            "subnetId": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1"
+          },
+          "vmSizeId": "Standard_D4ads_v6",
+          "diskInfo": {
+            "managedDisk": {
+              "type": "StandardSSD_LRS"
+            },
+            "diffDiskSettings": {
+              "option": "Local",
+              "placement": "NvmeDisk"
+            }
+          },
+          "imageInfo": {
+            "type": "Marketplace",
+            "marketplaceInfo": {
+              "offer": "Windows-10",
+              "publisher": "MicrosoftWindowsDesktop",
+              "sku": "19h2-ent",
+              "exactVersion": "2019.0.20190115"
+            }
+          },
+          "domainInfo": {
+            "joinType": "ActiveDirectory",
+            "activeDirectoryInfo": {
+              "domainCredentials": {
+                "usernameKeyVaultSecretUri": "https://myvault.vault.azure.net/secrets/myusername",
+                "passwordKeyVaultSecretUri": "https://myvault.vault.azure.net/secrets/mysecretname"
+              },
+              "ouPath": "OU=testOU,DC=domain,DC=Domain,DC=com",
+              "domainName": "wvdarmtest1.net"
+            }
+          },
+          "vmAdminCredentials": {
+            "usernameKeyVaultSecretUri": "https://myvault.vault.azure.net/secrets/myusername",
+            "passwordKeyVaultSecretUri": "https://myvault.vault.azure.net/secrets/mysecretname"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.DesktopVirtualization/hostPools/hostPool1/sessionHostConfigurations/default/operationResults/ed5d502c-acaa-42ec-ad61-0d8488a9fd1d",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.DesktopVirtualization/hostPools/hostPool1/sessionHostConfigurations/default/operationStatuses/ed5d502c-acaa-42ec-ad61-0d8488a9fd1d",
+        "Retry-After": "60"
+      }
+    }
+  },
+  "operationId": "SessionHostConfigurations_Update",
+  "title": "SessionHostConfigurations_UpdateNvmeDisk"
+}
