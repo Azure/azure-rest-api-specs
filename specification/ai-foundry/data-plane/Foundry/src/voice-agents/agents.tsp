@@ -7,6 +7,7 @@ import "../common/servicepatterns.tsp";
 import "../agents/models.tsp";
 import "../openai/responses/models.tsp";
 import "./handoff.tsp";
+import "./inbound-call-policy.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -122,6 +123,10 @@ model VoiceAgentBaseDefinition extends AgentDefinition {
 
   @doc("Template inputs for session instructions and supported greetings.")
   structured_inputs?: Record<StructuredInputDefinition>;
+
+  @doc("Inbound telephone call settings for this agent version. Does not apply to outbound calls or direct voice sessions.")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  telephony?: VoiceAgentTelephonyConfig;
 
   @doc("Persists conversation content and audio in Foundry, not native Live recordings. Defaults to false.")
   store?: boolean = false;
