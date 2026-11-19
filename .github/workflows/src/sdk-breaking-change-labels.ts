@@ -1,8 +1,13 @@
 import { SpecGenSdkArtifactInfoSchema, sdkLabels } from "../../shared/src/sdk-types.ts";
 import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.ts";
 import { extractInputs } from "./context.ts";
-import type { Core, GitHubScriptArgs } from "./github.ts";
+import type { Core, GitHubScriptArgs, WebhookEvent } from "./github.ts";
 import { LabelAction } from "./label.ts";
+import {
+  isPrivateSdkRepository,
+  loadPrivateSdkChecks,
+  readPrivateSdkArtifact,
+} from "./sdk-check-metadata.ts";
 
 const SUPPORTED_TARGET_BRANCHES = new Set(["main", "RPSaaSMaster"]);
 
@@ -20,7 +25,49 @@ export async function getLabelAndAction({ github, context, core }: GitHubScriptA
   labelName: string | undefined;
   labelAction: LabelAction;
   issueNumber: number;
+  headSha?: string;
 }> {
+  if (isPrivateSdkRepository(context.repo.owner, context.repo.repo)) {
+    const { check_run: triggerCheck } = context.payload as WebhookEvent<"check-run">;
+    const observation = await loadPrivateSdkChecks({
+      github,
+      core,
+      ...context.repo,
+      headSha: triggerCheck.head_sha,
+      eventCheckId: triggerCheck.id,
+    });
+    if (!observation) {
+      return { labelName: undefined, labelAction: LabelAction.None, issueNumber: NaN };
+    }
+    const { checks, allChecks, pr, prNumber } = observation;
+    const trigger = allChecks.find((check) => check.id === triggerCheck.id);
+    const matching = checks.filter(
+      (check) => check.name === trigger?.name || check.details_url === trigger?.details_url,
+    );
+    if (matching.length !== 1)
+      throw new Error("Cannot correlate metadata event to current SDK build");
+    const native = matching[0];
+    if (native.status !== "completed") {
+      core.info("Native SDK validation is still running; preserving existing labels.");
+      return {
+        labelName: undefined,
+        labelAction: LabelAction.None,
+        headSha: native.head_sha,
+        issueNumber: prNumber,
+      };
+    }
+    const artifact = readPrivateSdkArtifact(native, allChecks, prNumber);
+    const labelName = sdkLabels[artifact.language].breakingChange;
+    const labelAction =
+      !labelName || artifact.labelAction === undefined
+        ? LabelAction.None
+        : artifact.labelAction
+          ? SUPPORTED_TARGET_BRANCHES.has(pr.base.ref)
+            ? LabelAction.Add
+            : LabelAction.None
+          : LabelAction.Remove;
+    return { labelName, labelAction, headSha: artifact.headSha, issueNumber: prNumber };
+  }
   const inputs = await extractInputs(github, context, core);
   const details_url = inputs.details_url;
   if (!details_url) {
@@ -46,6 +93,8 @@ export async function getLabelAndAction({ github, context, core }: GitHubScriptA
     }
   }
 
+  core.setOutput("head_sha", result.headSha);
+  core.setOutput("issue_number", result.issueNumber);
   return result;
 }
 
