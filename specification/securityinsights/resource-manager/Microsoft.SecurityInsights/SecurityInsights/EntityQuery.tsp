@@ -34,44 +34,6 @@ model EntityQuery
 }
 
 @armResourceOperations
-interface EntityQueriesOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-
-        /**
-         * providerNamespace
-         */
-        @path
-        @segment("providers")
-        providerNamespace: "Microsoft.OperationalInsights",
-
-        /**
-         * The name of the workspace.
-         */
-        @segment("workspaces")
-        @key
-        @path
-        @minLength(1)
-        @maxLength(90)
-        @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
-        workspaceName: string,
-
-        ...Azure.ResourceManager.Legacy.Provider,
-      },
-      {
-        /**
-         * entity query ID
-         */
-        @path
-        @segment("entityQueries")
-        entityQueryId: string,
-      }
-    > {}
-
-@armResourceOperations
 interface EntityQueries {
   /**
    * Gets an entity query.
@@ -85,10 +47,11 @@ interface EntityQueries {
   /**
    * Creates or updates the entity query.
    */
-  createOrUpdate is EntityQueriesOps.CreateOrUpdateSync<
+  createOrUpdate is Azure.ResourceManager.Legacy.Extension.CreateOrReplaceSync<
+    workspaceExternalResource,
     EntityQuery,
-    Request = CustomEntityQuery,
-    OverrideErrorType = CloudError
+    CustomEntityQuery,
+    Error = CloudError
   >;
 
   /**
@@ -125,5 +88,4 @@ interface EntityQueries {
 );
 
 @@added(EntityQuery, Versions.v2025_10_01_preview);
-@@added(EntityQueriesOps, Versions.v2025_10_01_preview);
 @@added(EntityQueries, Versions.v2025_10_01_preview);
