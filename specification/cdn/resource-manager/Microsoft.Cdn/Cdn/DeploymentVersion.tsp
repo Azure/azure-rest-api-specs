@@ -16,8 +16,7 @@ namespace Microsoft.Cdn;
 /**
  * Deployment version object
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
+@added(Versions.preview)
 @parentResource(Profile)
 model DeploymentVersion
   is Azure.ResourceManager.ProxyResource<DeploymentVersionProperties> {
@@ -29,8 +28,7 @@ model DeploymentVersion
   >;
 }
 
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
+@added(Versions.preview)
 @armResourceOperations
 interface DeploymentVersions {
   /**
