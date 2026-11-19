@@ -46,7 +46,8 @@ function output(decisions: Decision[] = [decision()]) {
   return {
     items: decisions.map((item) => ({
       type: "apply_backlog_triage",
-      decision: JSON.stringify(item),
+      ...item,
+      evidence: item.evidence.join("\n"),
     })),
   };
 }
@@ -309,13 +310,13 @@ describe("backlog triage output boundary", () => {
   it("rejects oversized/duplicate selections and out-of-batch or duplicate checkpoints", () => {
     expect(() => parseSelection(Array(6).fill(selected[0]))).toThrow();
     expect(() => parseSelection([selected[0], selected[0]])).toThrow("Duplicate");
-    expect(() => parseDecisions(output([decision({ number: 2 })]), selected)).toThrow(
-      "out-of-batch",
-    );
+    expect(parseDecisions(output([decision({ number: 2 })]), selected).errors).toEqual([
+      expect.stringContaining("out-of-batch"),
+    ]);
     expect(() => parseDecisions(output([]), selected)).toThrow("checkpoint");
     const batch = [...selected, { number: 2, updatedAt }];
-    expect(() => parseDecisions({ items: [...output().items, ...output().items] }, batch)).toThrow(
-      "out-of-batch",
+    expect(parseDecisions({ items: [...output().items, ...output().items] }, batch).errors).toEqual(
+      [expect.stringContaining("out-of-batch")],
     );
     expect(() => parseDecisions(output([decision(), decision()]), selected)).toThrow("checkpoint");
   });
@@ -323,13 +324,13 @@ describe("backlog triage output boundary", () => {
   it("accepts completed checkpoints without requiring the rest of the selected batch", () => {
     const batch = [1, 2, 3, 4, 5].map((number) => ({ number, updatedAt }));
     const completed = [decision(), decision({ number: 2, action: "keep_open" })];
-    expect(parseDecisions(output(completed), batch)).toEqual(completed);
+    expect(parseDecisions(output(completed), batch).decisions).toEqual(completed);
   });
 
   it("accepts all five unique issue checkpoints", () => {
     const batch = [1, 2, 3, 4, 5].map((number) => ({ number, updatedAt }));
     const completed = batch.map(({ number }) => decision({ number }));
-    expect(parseDecisions(output(completed), batch)).toEqual(completed);
+    expect(parseDecisions(output(completed), batch).decisions).toEqual(completed);
   });
 
   it("reports collector rejections as failures without discarding accepted checkpoints", async () => {
@@ -371,15 +372,9 @@ describe("backlog triage output boundary", () => {
     expect(t.github.rest.issues.createComment).not.toHaveBeenCalled();
   });
 
-  it("rejects malformed checkpoint payloads instead of treating them as completed work", () => {
-    for (const item of [
-      { type: "apply_backlog_triage", decisions: JSON.stringify([decision()]) },
-      { type: "apply_backlog_triage", decision: "[" },
-      { type: "apply_backlog_triage", decision: JSON.stringify([decision()]) },
-      { type: "apply_backlog_triage", decision: JSON.stringify(null) },
-    ]) {
-      expect(() => parseDecisions({ items: [item] }, selected)).toThrow();
-    }
+  it("rejects legacy nested JSON instead of treating it as completed work", () => {
+    const item = { type: "apply_backlog_triage", decision: JSON.stringify(decision()) };
+    expect(parseDecisions({ items: [item] }, selected).errors).toHaveLength(1);
   });
 
   it("persists completed partial-batch work and selects unfinished issues on the next run", async () => {
@@ -460,8 +455,54 @@ describe("backlog triage output boundary", () => {
       decision({ action: "needs_author_feedback" }),
       decision({ action: "duplicate", duplicateOf: 1 }),
     ]) {
-      expect(() => parseDecisions(output([bad]), selected)).toThrow();
+      expect(parseDecisions(output([bad]), selected).errors).toHaveLength(1);
     }
+  });
+
+  it("preserves valid work before and after a rejected checkpoint and fails the run explicitly", async () => {
+    const t = setup();
+    t.issues.set(3, issue(3));
+    const batch = [1, 2, 3].map((number) => ({ number, updatedAt }));
+    await applyBacklogTriage(
+      t.args,
+      batch,
+      {
+        items: [
+          ...output([decision({ action: "keep_open" })]).items,
+          { type: "apply_backlog_triage", number: 2, decision: '{"evidence":["(redacted)' },
+          ...output([decision({ number: 3, action: "keep_open" })]).items,
+        ],
+      },
+      false,
+      now,
+    );
+    expect(Object.keys(parseState(t.state()).issues)).toEqual(["1", "3"]);
+    expect(t.core.error).toHaveBeenCalledWith(expect.stringContaining("Checkpoint 2"));
+    expect(t.core.setFailed).toHaveBeenCalledWith(expect.stringContaining("rejected 1 item"));
+    expect(t.get.mock.calls.some(([params]) => params.issue_number === 2)).toBe(false);
+  });
+
+  it("omits a redacted evidence line without corrupting the decision or losing retained URLs", async () => {
+    const t = setup();
+    const result = output();
+    result.items[0].evidence += "\n(www.rfceditor.org/redacted)";
+    await t.apply(result);
+    expect(t.update).toHaveBeenCalledOnce();
+    expect(t.comments[0].body).toContain("https://github.com/Azure/azure-rest-api-specs/pull/123");
+    expect(t.comments[0].body).not.toContain("redacted");
+    expect(t.core.warning).toHaveBeenCalledWith(expect.stringContaining("omitted evidence"));
+    expect(t.core.setFailed).not.toHaveBeenCalled();
+  });
+
+  it("does not close an issue when all evidence was redacted", async () => {
+    const t = setup();
+    const result = output();
+    result.items[0].evidence = "(www.rfceditor.org/redacted)";
+    await t.apply(result);
+    expect(t.update).not.toHaveBeenCalled();
+    expect(t.github.rest.issues.createComment).not.toHaveBeenCalled();
+    expect(t.core.setFailed).toHaveBeenCalledWith(expect.stringContaining("rejected 1 item"));
+    expect(t.state()).toBeUndefined();
   });
 
   it("dry-runs all actions without creating comments, labels, closures, or state", async () => {

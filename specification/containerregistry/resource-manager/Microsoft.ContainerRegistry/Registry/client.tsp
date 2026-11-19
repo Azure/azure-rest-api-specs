@@ -128,6 +128,17 @@ namespace Microsoft.ContainerRegistry {
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
+// OptionalProperties propagates these UUID mappings to the partial-update model.
+@@alternateType(
+  EntraFederatedIdentityCredentialAuthenticationProperties.federatedApplicationClientId,
+  uuid,
+  "csharp"
+);
+@@alternateType(
+  EntraFederatedIdentityCredentialAuthenticationProperties.sourceTenantId,
+  uuid,
+  "csharp"
+);
 @@alternateType(EventContent.id, uuid, "csharp");
 @@alternateType(EventInfo.id, uuid, "csharp");
 @@alternateType(EventRequestMessage.requestUri, url, "csharp");
@@ -306,8 +317,18 @@ namespace Microsoft.ContainerRegistry {
   "csharp"
 );
 @@clientName(
+  GarAuthenticationUpdateProperties,
+  "GoogleArtifactRegistryCacheAuthenticationUpdateProperties",
+  "csharp"
+);
+@@clientName(
   EcrAuthenticationProperties,
   "AwsElasticContainerRegistryCacheAuthentication",
+  "csharp"
+);
+@@clientName(
+  EcrAuthenticationUpdateProperties,
+  "AwsElasticContainerRegistryCacheAuthenticationUpdateProperties",
   "csharp"
 );
 @@clientName(

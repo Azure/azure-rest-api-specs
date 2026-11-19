@@ -112,6 +112,7 @@ tools:
     min-integrity: none
   web-fetch:
 safe-outputs:
+  report-failed-jobs: false
   staged: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
   jobs:
     apply-backlog-triage:
@@ -126,11 +127,36 @@ safe-outputs:
       permissions:
         contents: write
         issues: write
+        actions: read
       inputs:
-        decision:
-          description: "One completed issue decision as a JSON object string; call once per issue before starting the next investigation"
+        number:
+          description: "Selected issue number"
+          required: true
+          type: number
+        action:
+          description: "Issue outcome"
+          required: true
+          type: choice
+          options: [resolved, obsolete, duplicate, needs_author_feedback, keep_open, blocked]
+        confidence:
+          description: "Confidence in the decision"
+          required: true
+          type: choice
+          options: [high, medium, low]
+        rationale:
+          description: "Evidence-based rationale under 2,000 characters"
           required: true
           type: string
+        evidence:
+          description: "Up to eight public HTTPS evidence URLs, one per line; empty if unavailable. Do not JSON-encode."
+          required: true
+          type: string
+        question:
+          description: "Specific reporter question, required for needs_author_feedback"
+          type: string
+        duplicateOf:
+          description: "Canonical open issue number, required for duplicate"
+          type: number
       steps:
         - uses: actions/checkout@v7
           with:
@@ -161,6 +187,15 @@ safe-outputs:
               const staged = process.env.TRIAGE_DRY_RUN === "true" ||
                 process.env.GH_AW_SAFE_OUTPUTS_STAGED === "true";
               await applyBacklogTriage({ github, context, core }, selection, output, staged);
+        - name: Create or update backlog triage failure issue
+          if: ${{ failure() }}
+          uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+          with:
+            script: |
+              const { reportBacklogTriageFailure } = await import(
+                `${process.env.GITHUB_WORKSPACE}/.github/workflows/src/backlog-triage.ts`
+              );
+              await reportBacklogTriageFailure({ github, context, core });
   noop:
   threat-detection:
     engine:
@@ -295,8 +330,8 @@ and can close unanswered `needs-author-feedback` issues; do not add
 
 ## Checkpoint each completed issue
 
-Call `apply_backlog_triage` immediately after completing each issue, with a
-`decision` JSON string containing that issue's object:
+Call `apply_backlog_triage` immediately after completing each issue, with these
+separate tool arguments (not a JSON string inside a `decision` argument):
 
 ```json
 {
@@ -304,7 +339,7 @@ Call `apply_backlog_triage` immediately after completing each issue, with a
   "action": "resolved",
   "confidence": "high",
   "rationale": "The reported behavior is corrected in the affected contract and current client.",
-  "evidence": ["https://github.com/Azure/azure-rest-api-specs/pull/456"]
+  "evidence": "https://github.com/Azure/azure-rest-api-specs/pull/456"
 }
 ```
 
@@ -314,8 +349,11 @@ checkpoint. Finish and checkpoint one issue before investigating the next.
 If the run stops before another issue is finished, that issue has no checkpoint
 and remains eligible for the next run; never invent its outcome to complete a batch.
 
-Allowed confidence values are `high`, `medium`, and `low`. Evidence is an array
-of up to eight specific public HTTPS URLs. Include evidence for non-closures
+Allowed confidence values are `high`, `medium`, and `low`. Evidence is a string
+of up to eight specific public HTTPS URLs separated by newlines, not a JSON array.
+Safe-output ingestion can redact URLs outside its allowlist; the applier reports
+and omits those URLs, and still requires retained evidence for any closure.
+Include evidence for non-closures
 when available. `needs_author_feedback` also requires a plain-text `question`;
 `duplicate` also requires `duplicateOf`. Keep `rationale` under 2,000 characters
 and the question under 1,000 characters. Do not invent links or imply that source

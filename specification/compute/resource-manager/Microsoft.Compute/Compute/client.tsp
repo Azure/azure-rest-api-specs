@@ -32,6 +32,113 @@ using ComputeSku;
 )
 namespace ComputeCombine;
 
+// Preserve legacy Python enum member names.
+@@clientName(
+  VirtualMachineSizeTypes.Standard_A2m_v2,
+  exact("STANDARD_A2_M_V2"),
+  "python"
+);
+@@clientName(
+  VirtualMachineSizeTypes.Standard_A4m_v2,
+  exact("STANDARD_A4_M_V2"),
+  "python"
+);
+@@clientName(
+  VirtualMachineSizeTypes.Standard_A8m_v2,
+  exact("STANDARD_A8_M_V2"),
+  "python"
+);
+@@clientName(
+  VirtualMachineSizeTypes.Standard_B1s,
+  exact("STANDARD_B1_S"),
+  "python"
+);
+@@clientName(
+  VirtualMachineSizeTypes.Standard_B2s,
+  exact("STANDARD_B2_S"),
+  "python"
+);
+@@clientName(
+  VirtualMachineSizeTypes.Standard_D2s_v3,
+  exact("STANDARD_D2_S_V3"),
+  "python"
+);
+@@clientName(
+  VirtualMachineSizeTypes.Standard_D4s_v3,
+  exact("STANDARD_D4_S_V3"),
+  "python"
+);
+@@clientName(
+  VirtualMachineSizeTypes.Standard_D8s_v3,
+  exact("STANDARD_D8_S_V3"),
+  "python"
+);
+@@clientName(
+  VirtualMachineSizeTypes.Standard_E2s_v3,
+  exact("STANDARD_E2_S_V3"),
+  "python"
+);
+@@clientName(
+  VirtualMachineSizeTypes.Standard_E4s_v3,
+  exact("STANDARD_E4_S_V3"),
+  "python"
+);
+@@clientName(
+  VirtualMachineSizeTypes.Standard_E8s_v3,
+  exact("STANDARD_E8_S_V3"),
+  "python"
+);
+@@clientName(
+  VirtualMachineSizeTypes.Standard_F1s,
+  exact("STANDARD_F1_S"),
+  "python"
+);
+@@clientName(
+  VirtualMachineSizeTypes.Standard_F2s,
+  exact("STANDARD_F2_S"),
+  "python"
+);
+@@clientName(
+  VirtualMachineSizeTypes.Standard_F4s,
+  exact("STANDARD_F4_S"),
+  "python"
+);
+@@clientName(
+  VirtualMachineSizeTypes.Standard_F8s,
+  exact("STANDARD_F8_S"),
+  "python"
+);
+@@clientName(
+  VirtualMachineSizeTypes.Standard_F2s_v2,
+  exact("STANDARD_F2_S_V2"),
+  "python"
+);
+@@clientName(
+  VirtualMachineSizeTypes.Standard_F4s_v2,
+  exact("STANDARD_F4_S_V2"),
+  "python"
+);
+@@clientName(
+  VirtualMachineSizeTypes.Standard_F8s_v2,
+  exact("STANDARD_F8_S_V2"),
+  "python"
+);
+@@clientName(
+  VirtualMachineSizeTypes.Standard_H8m,
+  exact("STANDARD_H8_M"),
+  "python"
+);
+@@clientName(
+  VirtualMachineSizeTypes.Standard_L4s,
+  exact("STANDARD_L4_S"),
+  "python"
+);
+@@clientName(
+  VirtualMachineSizeTypes.Standard_L8s,
+  exact("STANDARD_L8_S"),
+  "python"
+);
+
 // VirtualMachineInstanceView needs input usage for premium layer constructor and setters
 @@usage(
   VirtualMachineInstanceView,
