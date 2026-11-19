@@ -5744,7 +5744,15 @@ paths:
     post:
       operationId: Microsoft365Publishing_unpublishAgentFromMicrosoft365
       summary: Unpublish an agent from Microsoft 365
-      description: Unpublishes a Foundry agent from Microsoft 365 / Microsoft Teams.
+      description: |-
+        Unpublishes a Foundry agent from Microsoft 365 / Microsoft Teams.
+
+        Tenant-scoped agent unpublishing is not supported.
+        The caller must be authorized to unpublish the agent in its Foundry project.
+        Authorization to the Foundry agent and authorization to remove the Microsoft 365 title are separate checks.
+        In legacy delegated-user cleanup flows, if the published title is owned by a delegated publisher, the caller must
+        also be authorized to remove that title. This is a conditional legacy ownership requirement, not a universal
+        requirement for all unpublish operations.
       parameters:
         - name: agent_name
           in: path
