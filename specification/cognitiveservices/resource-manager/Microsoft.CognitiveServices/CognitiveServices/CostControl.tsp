@@ -24,7 +24,7 @@ model AccountCostControl is ProxyResource<CostControlProperties> {
     Resource = AccountCostControl,
     KeyName = "costControlName",
     SegmentName = "costControls",
-    NamePattern = "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
+    NamePattern = "^[a-zA-Z0-9_-]{1,63}$"
   >;
 
   /** The opaque entity tag used for optimistic concurrency. */
@@ -44,7 +44,7 @@ model ProjectCostControl is ProxyResource<CostControlProperties> {
     Resource = ProjectCostControl,
     KeyName = "costControlName",
     SegmentName = "costControls",
-    NamePattern = "^(?:[a-zA-Z0-9][a-zA-Z0-9_.-]{0,63}|[_-][a-zA-Z0-9_-]{0,62})$"
+    NamePattern = "^[a-zA-Z0-9_-]{1,63}$"
   >;
 
   /** The opaque entity tag used for optimistic concurrency. */
@@ -574,13 +574,13 @@ interface ProjectCostControls {
 }
 
 @@minLength(AccountCostControl.name, 1);
-@@maxLength(AccountCostControl.name, 64);
+@@maxLength(AccountCostControl.name, 63);
 @@doc(
   AccountCostControl.name,
   "The cost-control name. Names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen."
 );
 @@minLength(ProjectCostControl.name, 1);
-@@maxLength(ProjectCostControl.name, 64);
+@@maxLength(ProjectCostControl.name, 63);
 @@doc(
   ProjectCostControl.name,
   "The cost-control name. Names contain 1-63 ASCII letters, numbers, underscores, or hyphens, including a leading underscore or hyphen."
