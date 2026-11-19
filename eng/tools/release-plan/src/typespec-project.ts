@@ -39,7 +39,7 @@ function getCachedTypeSpecMetadata(
 export const FOLDER_MIGRATION_LABEL = "FolderMigrationV2";
 
 /** Label indicating that release plan automation should not process a spec PR. */
-export const SKIP_RELEASE_PLAN_AUTOMATION_LABEL = "Skip-ReleasePlan-Automation";
+export const SKIP_RELEASE_PLAN_AUTOMATION_LABEL = "skip-releaseplan-automation";
 
 async function getTypeSpecProjectInfoFromFiles(
   allFiles: PullRequestChangedFile[],
@@ -119,7 +119,7 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
 
     if (
       labels.includes(FOLDER_MIGRATION_LABEL) ||
-      labels.includes(SKIP_RELEASE_PLAN_AUTOMATION_LABEL)
+      labels.some((label) => label.toLowerCase() === SKIP_RELEASE_PLAN_AUTOMATION_LABEL)
     ) {
       console.log(
         `PR #${associatedPrNumber} has a release plan automation skip label. Skipping release plan processing.`,
@@ -437,14 +437,20 @@ export function resolveTypeSpecMetadata(
   if (isPrivatePreview && apiVersions.size === 0) {
     for (const configs of Object.values(metadata.languages)) {
       for (const config of configs) {
-        if (config.apiVersion) {
-          return { apiVersion: config.apiVersion };
+        const apiVersion = config.apiVersion?.trim();
+        if (apiVersion) {
+          const key = apiVersion.toLowerCase();
+          if (!apiVersions.has(key)) {
+            apiVersions.set(key, apiVersion);
+          }
         }
       }
     }
-    throw new Error(
-      "No API version found in TypeSpec metadata. Configure api-version in tspconfig.yaml emitter options.",
-    );
+    if (apiVersions.size === 0) {
+      throw new Error(
+        "No API version found in TypeSpec metadata. Configure api-version in tspconfig.yaml emitter options.",
+      );
+    }
   }
 
   if (apiVersions.size === 0 && !hasPackage) {

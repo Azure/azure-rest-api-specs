@@ -6,7 +6,6 @@
 
 import "../../common/models.tsp";
 import "@typespec/http";
-import "@azure-tools/openai-typespec/models/images";
 import "@typespec/openapi";
 using TypeSpec.Http;
 using OpenAI;

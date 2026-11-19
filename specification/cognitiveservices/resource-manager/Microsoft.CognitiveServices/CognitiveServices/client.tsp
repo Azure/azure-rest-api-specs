@@ -11,6 +11,41 @@ using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.CognitiveServices;
 using Azure.ResourceManager;
 
+@TypeSpec.Versioning.versioned(Microsoft.CognitiveServices.Versions)
+namespace CognitiveServicesClientCustomizations {
+  /**
+   * Writable Arc deployment content for the JavaScript SDK.
+   */
+  @TypeSpec.Versioning.added(Versions.v2026_07_15_preview)
+  @TypeSpec.Versioning.removed(Versions.v2026_09_01)
+  @TypeSpec.Versioning.added(Versions.v2026_09_15_preview)
+  @TypeSpec.Versioning.removed(Versions.v2026_11_01)
+  @TypeSpec.Versioning.added(Versions.v2026_11_15_preview)
+  model ArcDeploymentCreateOrUpdateContent {
+    /**
+     * Properties used to create or replace an Arc deployment.
+     */
+    properties: TypeSpec.CreateOrUpdate<ArcDeploymentProperties>;
+
+    /**
+     * The Arc deployment SKU.
+     */
+    sku: ArcDeploymentSku;
+  }
+
+  /** The scope used to aggregate available managed compute capacity. */
+  @TypeSpec.Versioning.added(Versions.v2026_11_01)
+  union CognitiveServicesManagedComputeCapacityOfferScope {
+    string,
+
+    /** Capacity aggregated globally. */
+    Global: "Global",
+
+    /** Capacity aggregated within a data zone. */
+    DataZone: "DataZone",
+  }
+}
+
 @@clientName(
   Microsoft.CognitiveServices,
   "CognitiveServicesManagementClient",
@@ -99,6 +134,13 @@ op calculateModelCapacityCustom(
 
 @@override(calculateModelCapacity, calculateModelCapacityCustom, "javascript");
 
+// Exclude read-only response fields recursively from the JavaScript PUT input.
+@@alternateType(
+  ArcDeployments.createOrUpdate::parameters.resource,
+  CognitiveServicesClientCustomizations.ArcDeploymentCreateOrUpdateContent,
+  "javascript"
+);
+
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
@@ -140,6 +182,7 @@ op regenerateKeyCustom(
 @@clientLocation(checkDomainAvailability, "ManagementClient", "go");
 @@clientLocation(checkSkuAvailability, "ManagementClient", "go");
 @@clientLocation(calculateModelCapacity, "ManagementClient", "go");
+@@clientName(AttachedAksClusters, "AttachedAKSClusters", "go");
 
 @@alternateType(
   Azure.ResourceManager.CommonTypes.Resource.id,
@@ -160,6 +203,13 @@ op regenerateKeyCustom(
 );
 
 @@clientName(Account, "CognitiveServicesAccount", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Keep the nullable provider properties setter public so PATCH can clear all blocking actions."
+@@clientOption(
+  CostControlProviderPropertiesPatch,
+  "disable-safe-flatten",
+  true,
+  "csharp"
+);
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
 #suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning"
 @@clientOption(
@@ -205,6 +255,12 @@ op regenerateKeyCustom(
 @@alternateType(CommitmentPlan.etag, eTag, "csharp");
 @@clientName(Deployment, "CognitiveServicesAccountDeployment", "csharp");
 @@alternateType(Deployment.etag, eTag, "csharp");
+@@alternateType(ArcDeploymentModel.assetId, url, "csharp");
+@@clientName(
+  RaiAcsAnnotatorDefinition,
+  "RaiAcsAnnotatorConfiguration",
+  "csharp"
+);
 @@clientName(AgentApplication, "CognitiveServicesAgentApplication", "csharp");
 @@clientName(
   AgenticApplicationProperties,
@@ -326,6 +382,13 @@ op regenerateKeyCustom(
   ConnectionPropertiesV2BasicResource,
   "CognitiveServicesConnection",
   "csharp"
+);
+// Keep public SDK types while credential visibility excludes ordinary reads.
+@@alternateType(AccountWrite, Account);
+@@alternateType(AccountPropertiesRead, AccountProperties);
+@@alternateType(
+  ConnectionPropertiesV2BasicResourceRead,
+  ConnectionPropertiesV2BasicResource
 );
 @@clientName(
   ProjectCapabilityHost,
@@ -1180,6 +1243,31 @@ op regenerateKeyCustom(
 // Prefix generic type names with service context (2026-05-15-preview)
 @@clientName(VmPriority, "CognitiveServicesVmPriority", "csharp");
 @@clientName(
+  DeploymentSizeCapacity,
+  "CognitiveServicesManagedComputeDeploymentSizeCapacity",
+  "csharp"
+);
+@@clientName(
+  CertificateBundleReference,
+  "CognitiveServicesCertificateBundleReference",
+  "csharp"
+);
+@@clientName(
+  TrustedCertificateSource,
+  "CognitiveServicesTrustedCertificateSource",
+  "csharp"
+);
+@@clientName(
+  TrustedCertificateSourceType,
+  "CognitiveServicesTrustedCertificateSourceType",
+  "csharp"
+);
+@@clientName(
+  ManagedComputeCapacities.list,
+  "GetCognitiveServicesManagedComputeCapacities",
+  "csharp"
+);
+@@clientName(
   ManagedComputeCapacity,
   "CognitiveServicesManagedComputeCapacity",
   "csharp"
@@ -1272,8 +1360,16 @@ op regenerateKeyCustom(
   "CognitiveServicesComputeProvisioningState",
   "csharp"
 );
-@@clientName(CostControl, "CognitiveServicesAccountCostControl", "csharp");
-@@alternateType(CostControl.etag, eTag, "csharp");
+@@clientName(
+  AccountCostControl,
+  "CognitiveServicesAccountCostControl",
+  "csharp"
+);
+@@clientName(
+  ProjectCostControl,
+  "CognitiveServicesProjectCostControl",
+  "csharp"
+);
 @@alternateType(AdapterDeployment.etag, eTag, "csharp");
 @@alternateType(RaiBinding.etag, eTag, "csharp");
 @@alternateType(RaiRego.etag, eTag, "csharp");
@@ -1301,5 +1397,44 @@ op regenerateKeyCustom(
 @@clientName(
   RaiPolicyCustomExternalSafetyProviderReference.blocking,
   "IsBlocking",
+  "csharp"
+);
+
+@@alternateType(
+  ManagedComputeCapacityListParameters.deploymentId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ManagedComputeCapacityListParameters.location,
+  azureLocation,
+  "csharp"
+);
+@@alternateType(
+  DeploymentProperties.contextCacheContainerId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ManagedComputeCapacityProperties.offerScope,
+  CognitiveServicesClientCustomizations.CognitiveServicesManagedComputeCapacityOfferScope,
+  "csharp"
+);
+@@clientName(
+  RaiEgressHeaderValueRef,
+  "RaiEgressHeaderValueReference",
+  "csharp"
+);
+@@clientName(
+  RaiEgressManagedIdentityRef,
+  "RaiEgressManagedIdentityReference",
+  "csharp"
+);
+@@clientName(RaiEgressSecretRef, "RaiEgressSecretReference", "csharp");
+@@clientName(RaiEgressHeaderTransform.valueRef, "ValueReference", "csharp");
+@@clientName(RaiEgressHeaderValueRef.secretRef, "SecretReference", "csharp");
+@@clientName(
+  RaiEgressHeaderValueRef.managedIdentityRef,
+  "ManagedIdentityReference",
   "csharp"
 );

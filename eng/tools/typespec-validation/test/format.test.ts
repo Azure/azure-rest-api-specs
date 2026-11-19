@@ -24,8 +24,8 @@ beforeEach(() => {
 describe("FormatRule", () => {
   it("formats TypeSpec and tspconfig.yaml in one pass and checks files afterward", async () => {
     const logger = new ConsoleLogger(true);
-    const result = await new FormatRule().execute(mockFolder, logger);
-    expect(formatTypeSpec).toHaveBeenCalledExactlyOnceWith(mockFolder);
+    const result = await new FormatRule().execute(mockFolder, logger, { fix: true });
+    expect(formatTypeSpec).toHaveBeenCalledExactlyOnceWith(mockFolder, true);
     expect(gitDiffTopSpecFolder).toHaveBeenCalledExactlyOnceWith(mockFolder, logger);
     expect(result).toEqual({ success: true });
   });
@@ -54,7 +54,7 @@ describe("FormatRule", () => {
       files: ["specification/foo/Foo/tspconfig.yaml", "specification/foo/Shared/main.tsp"],
       diff,
     });
-    const result = await new FormatRule().execute(mockFolder, defaultLogger);
+    const result = await new FormatRule().execute(mockFolder, defaultLogger, { fix: true });
     expect(result).toMatchObject({
       success: false,
       diagnostics: [
@@ -83,7 +83,7 @@ describe("FormatRule", () => {
       files: ["main.tsp"],
       diff: "-old\n+new\n",
     });
-    const result = await new FormatRule().execute(mockFolder, defaultLogger);
+    const result = await new FormatRule().execute(mockFolder, defaultLogger, { fix: true });
     expect(result.success).toBe(false);
     expect(result.diagnostics?.map((diagnostic) => diagnostic.code)).toEqual([
       "format-output",

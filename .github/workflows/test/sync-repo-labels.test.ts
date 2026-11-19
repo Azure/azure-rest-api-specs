@@ -701,6 +701,96 @@ describe("archive label names", () => {
   });
 });
 
+describe("recreated retired labels", () => {
+  function recreatedFixture(expired = false) {
+    const f = fixture();
+    f.state.catalog.unconfiguredLabels = "archive";
+    const original = f.state.labels[1];
+    original.name = "archived: unconfigured";
+    if (!expired) original.archived_at = new Date().toISOString();
+    const copy = { ...canonical, id: 3, node_id: "label-3", name: extra.name };
+    f.state.labels.push(copy);
+    return { ...f, original, copy };
+  }
+
+  it("audits and deletes a recreated copy immediately while preserving the original and its history", async () => {
+    const f = recreatedFixture();
+    const original = structuredClone(f.original);
+    f.state.items = [
+      { number: 1, kind: "issue", state: "CLOSED", labels: new Set([original.name, "keep"]) },
+      { number: 2, kind: "pull_request", state: "OPEN", labels: new Set([f.copy.name, "keep"]) },
+    ];
+    const run = await f.prepare();
+    expect(
+      run.audit.deletions.map(({ label, items }) => [label.id, items.map(({ number }) => number)]),
+    ).toEqual([[f.copy.id, [2]]]);
+    await run.apply();
+    expect(f.state.labels).toEqual([canonical, original]);
+    expect(f.state.items.map(({ labels }) => [...labels])).toEqual([
+      [original.name, "keep"],
+      ["keep"],
+    ]);
+    expect(f.mutations()).toEqual([
+      { method: "DELETE", path: `${prefix}/labels/${f.copy.name}`, body: {} },
+    ]);
+    f.state.requests = [];
+    await (await f.prepare()).apply();
+    expect(f.mutations()).toEqual([]);
+  });
+
+  it("deletes copies before expired originals and does not block unrelated cleanup", async () => {
+    const f = recreatedFixture(true);
+    const unrelated = {
+      ...extra,
+      id: 4,
+      node_id: "label-4",
+      name: "archived: other",
+    };
+    f.state.labels.push(unrelated);
+    await (await f.prepare()).apply();
+    expect(f.state.labels).toEqual([canonical]);
+    expect(f.mutations().map(({ path }) => path)).toEqual([
+      `${prefix}/labels/${f.copy.name}`,
+      `${prefix}/labels/${unrelated.name}`,
+      `${prefix}/labels/${f.original.name}`,
+    ]);
+  });
+
+  it("preserves canonical classifications from both the original and a recreated alias", async () => {
+    const f = recreatedFixture();
+    f.state.catalog.labels[0].aliases = [f.copy.name];
+    f.state.items = [
+      { number: 1, kind: "issue", state: "OPEN", labels: new Set([f.copy.name]) },
+      { number: 2, kind: "pull_request", state: "MERGED", labels: new Set([f.original.name]) },
+    ];
+    await (await f.prepare()).apply();
+    expect(f.state.items.map(({ labels }) => [...labels])).toEqual([
+      [canonical.name],
+      [f.original.name, canonical.name],
+    ]);
+    expect(f.mutations().map(({ method }) => method)).toEqual(["POST", "POST", "DELETE"]);
+    expect(f.state.labels).toEqual([canonical, f.original]);
+  });
+
+  it("keeps the recreated copy if the original is no longer a managed archive", async () => {
+    const f = recreatedFixture();
+    const run = await f.prepare();
+    f.original.description = "Manually retained";
+    await expect(run.apply()).rejects.toThrow("Label changed");
+    expect(f.mutations()).toEqual([]);
+    expect(f.state.labels).toContain(f.copy);
+  });
+
+  it("audits recreated copies without deleting them in a dry run", async () => {
+    const f = recreatedFixture();
+    const run = await f.prepare(true);
+    expect(run.audit.deletions.map(({ label }) => label)).toEqual([f.copy]);
+    await run.apply();
+    expect(f.mutations()).toEqual([]);
+    expect(f.state.labels).toEqual([canonical, f.original, f.copy]);
+  });
+});
+
 describe("repository label synchronization", () => {
   it("paginates the complete live label inventory", async () => {
     const f = fixture();

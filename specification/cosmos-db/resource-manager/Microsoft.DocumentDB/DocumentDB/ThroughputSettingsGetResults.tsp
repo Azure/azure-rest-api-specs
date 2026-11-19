@@ -129,6 +129,8 @@ interface ThroughputSettingsGetResultsOperationGroup {
   /**
    * Retrieve throughput distribution for an Azure Cosmos DB SQL database
    */
+  @added(Versions.v2026_09_01_preview)
+  @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
   @action("retrieveThroughputDistribution")
   sqlDatabaseRetrieveThroughputDistribution is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
@@ -145,6 +147,8 @@ interface ThroughputSettingsGetResultsOperationGroup {
   /**
    * Redistribute throughput for an Azure Cosmos DB SQL database
    */
+  @added(Versions.v2026_09_01_preview)
+  @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
   @action("redistributeThroughput")
   sqlDatabaseRedistributeThroughput is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
@@ -248,6 +252,8 @@ interface SqlResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Retrieve throughput distribution for an Azure Cosmos DB SQL container
    */
+  @added(Versions.v2026_09_01_preview)
+  @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
   @action("retrieveThroughputDistribution")
   sqlContainerRetrieveThroughputDistribution is SqlResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
@@ -263,6 +269,8 @@ interface SqlResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Redistribute throughput for an Azure Cosmos DB SQL container
    */
+  @added(Versions.v2026_09_01_preview)
+  @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
   @action("redistributeThroughput")
   sqlContainerRedistributeThroughput is SqlResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
@@ -365,6 +373,8 @@ interface MongoDBResources {
   /**
    * Retrieve throughput distribution for an Azure Cosmos DB MongoDB database
    */
+  @added(Versions.v2026_09_01_preview)
+  @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
   @action("retrieveThroughputDistribution")
   mongoDBDatabaseRetrieveThroughputDistribution is MongoDBResourceOps.ActionAsync<
@@ -381,6 +391,8 @@ interface MongoDBResources {
   /**
    * Redistribute throughput for an Azure Cosmos DB MongoDB database
    */
+  @added(Versions.v2026_09_01_preview)
+  @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
   @action("redistributeThroughput")
   mongoDBDatabaseRedistributeThroughput is MongoDBResourceOps.ActionAsync<
@@ -458,6 +470,8 @@ interface MongoDBResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Retrieve throughput distribution for an Azure Cosmos DB MongoDB container
    */
+  @added(Versions.v2026_09_01_preview)
+  @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
   @action("retrieveThroughputDistribution")
   mongoDBContainerRetrieveThroughputDistribution is MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
@@ -475,6 +489,8 @@ interface MongoDBResourcesThroughputSettingsGetResultsOperationGroup {
    * Redistribute throughput for an Azure Cosmos DB MongoDB container
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_09_01_preview)
+  @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
   @action("redistributeThroughput")
   mongoDBContainerRedistributeThroughput is MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
@@ -814,6 +830,8 @@ alias ViewCassandraResourcesThroughputSettingsGetResultsOperationGroupOps = Azur
   "CassandraViewThroughputSetting"
 >;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_09_01_preview)
+@removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
 @armResourceOperations(#{ omitTags: true })
 interface ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup {

@@ -152,8 +152,9 @@ API-version selection collects metadata configurations with both
 `apiVersion` and `packageName`, trims versions, and deduplicates them case-insensitively.
 One concrete version permits automatic processing. Differing versions are reported
 as `multiple-versions` and require manual selection rather than selecting the first one. For
-`azure-rest-api-specs-pr`, if that produces no version, any emitter's non-empty
-`apiVersion` can be used without package metadata. Values such as `all` and
+`azure-rest-api-specs-pr`, if that produces no version, non-empty emitter versions
+are collected without requiring package metadata and compared by the same rule.
+Conflicting fallback versions also require manual selection. Values such as `all` and
 `multiple-versions` are preserved. If private-preview metadata provides no version,
 the tool skips creation and posts an error comment with the project path.
 
@@ -164,7 +165,7 @@ otherwise `GA`. SDK release type is independently `beta` for that suffix and
 
 ### Plan creation and comments
 
-PRs labeled `FolderMigrationV2` or `Skip-ReleasePlan-Automation` are skipped before
+PRs labeled `FolderMigrationV2` or `skip-releaseplan-automation` are skipped before
 changed files are fetched. Other changes to `.tsp` files or `tspconfig.yaml` under
 `specification` are processed without checking the `new-api-version` label.
 
