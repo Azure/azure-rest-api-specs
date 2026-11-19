@@ -122120,7 +122120,7 @@
           },
           "interruptible": {
             "type": "boolean",
-            "description": "Whether caller speech can interrupt the greeting. When true or omitted, follows the session's normal interruption policy.\nFor Realtime sessions, `audio.input.turn_detection.interrupt_response: false` prevents automatic speech interruption,\nand `audio.input.turn_detection: null` disables server-side turn detection and automatic speech interruption.\nExplicit client `response.cancel` can still stop a Realtime greeting even when `interruptible` is false.",
+            "description": "Whether caller speech can interrupt the greeting. True (the default) follows normal session policy;\nin Realtime, it doesn't override `audio.input.turn_detection.interrupt_response: false` or `audio.input.turn_detection: null`.\nClient cancellation (`response.cancel` in Realtime) and disconnection are unaffected.",
             "default": true
           },
           "ignore_user_speech_during_greeting": {
