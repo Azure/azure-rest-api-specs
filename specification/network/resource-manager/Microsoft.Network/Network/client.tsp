@@ -2298,6 +2298,11 @@ union ProvisioningStateUnion {
   "NetworkProxyResourceData",
   "csharp"
 );
+@@alternateType(
+  Microsoft.Network.ProxyResourceWithReadOnlyID,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
 @@clientName(WritableResource, "NetworkWritableResourceData", "csharp");
 @@clientName(
   Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.requestTimeout,
@@ -4388,6 +4393,19 @@ op replaceprivateDnsZoneGroupsList(
 @@clientName(NetworkGroupCreateOrUpdateEtagHeader.eTag, "etag", "java");
 
 // python
+
+// Preserve legacy Python enum member names.
+@@clientName(
+  ApplicationGatewaySkuFamily.Generation_1,
+  exact("GENERATION1"),
+  "python"
+);
+@@clientName(
+  ApplicationGatewaySkuFamily.Generation_2,
+  exact("GENERATION2"),
+  "python"
+);
+
 @@clientName(
   ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,
   "TLS_ECDHE_RSA_WITH_AES256_CBC_SHA384",
@@ -5767,6 +5785,19 @@ model LoadBalancingRulePropertiesWithAdditionalProperties {
 
 @@clientName(Common.Resource.type, "ResourceType", "csharp");
 
+@@clientName(Microsoft.Network.ChildResource.type, "ResourceType", "csharp");
+@@alternateType(
+  Microsoft.Network.ChildResource.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(Microsoft.Network.ProxyResource.type, "ResourceType", "csharp");
+@@alternateType(
+  Microsoft.Network.ProxyResource.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+
 @@clientName(Common.SubResource, "NetworkSubResource", "csharp");
 
 @@clientName(Common.SubResourceModel, "NetworkResourceData", "csharp");
@@ -6353,6 +6384,31 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
   "csharp"
 );
 @@alternateType(
+  Microsoft.Network.DdosDetectionRule.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.DdosMitigationRule.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ExpressRouteLagLink.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ExpressRouteLagMember.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Common.ResourceNavigationLink.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
   Microsoft.Network.VpnServerConfigRadiusServerRootCertificate.publicCertData,
   unknown,
   "csharp"
@@ -6820,6 +6876,12 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 
 @@alternateType(
   Microsoft.Network.ExpressRoutePortPropertiesFormat.resourceGuid,
+  uuid,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.InterconnectGroupPropertiesFormat.resourceGuid,
   uuid,
   "csharp"
 );
@@ -7973,6 +8035,41 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 );
 @@alternateType(
   Microsoft.Network.ExpressRoutePortAuthorization.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ExpressRouteLagAuthorization.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.DdosMitigationRule.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ExpressRouteLink.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ExpressRouteProviderPort.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.NetworkVirtualApplianceSku.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.PeerExpressRouteCircuitConnection.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VpnSiteLinkConnection.etag,
   Azure.Core.eTag,
   "csharp"
 );

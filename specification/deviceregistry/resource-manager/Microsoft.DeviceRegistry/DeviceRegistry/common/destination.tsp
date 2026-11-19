@@ -8,7 +8,7 @@ namespace Microsoft.DeviceRegistry;
 
 // Polymorphic Destinations
 @discriminator("target")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @doc("The type of the destination.")
 model DatasetDestination {
   @doc("Target destination.")
@@ -16,7 +16,7 @@ model DatasetDestination {
 }
 
 @discriminator("target")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @doc("The type of the destination.")
 model EventDestination {
   @doc("Target destination.")
@@ -24,7 +24,7 @@ model EventDestination {
 }
 
 @discriminator("target")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 @doc("The type of the destination.")
 model StreamDestination {
   @doc("Target destination.")
@@ -32,7 +32,7 @@ model StreamDestination {
 }
 
 @doc("The set of supported dataset destinations for an asset.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 union DatasetDestinationTarget {
   @doc("MQTT target.")
   Mqtt: "Mqtt",
@@ -47,7 +47,7 @@ union DatasetDestinationTarget {
 }
 
 @doc("The set of supported event destinations for an asset.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 union EventDestinationTarget {
   @doc("MQTT target.")
   Mqtt: "Mqtt",
@@ -59,7 +59,7 @@ union EventDestinationTarget {
 }
 
 @doc("The set of supported stream destinations for an asset.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 union StreamDestinationTarget {
   @doc("MQTT target.")
   Mqtt: "Mqtt",
@@ -71,7 +71,7 @@ union StreamDestinationTarget {
 }
 
 @doc("The type for a MQTT destination.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model DatasetMqttDestination extends DatasetDestination {
   @doc("The MQTT destination type.")
   target: DatasetDestinationTarget.Mqtt;
@@ -81,7 +81,7 @@ model DatasetMqttDestination extends DatasetDestination {
 }
 
 @doc("The type for a MQTT destination.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model EventMqttDestination extends EventDestination {
   @doc("The MQTT destination type.")
   target: EventDestinationTarget.Mqtt;
@@ -91,7 +91,7 @@ model EventMqttDestination extends EventDestination {
 }
 
 @doc("The type for a MQTT destination.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model StreamMqttDestination extends StreamDestination {
   @doc("The MQTT destination type.")
   target: StreamDestinationTarget.Mqtt;
@@ -101,7 +101,7 @@ model StreamMqttDestination extends StreamDestination {
 }
 
 @doc("The configuration for a MQTT destination.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model MqttDestinationConfiguration {
   @doc("The MQTT topic.")
   topic: string;
@@ -117,14 +117,14 @@ model MqttDestinationConfiguration {
 }
 
 @doc("The configuration for a storage destination.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model StorageDestinationConfiguration {
   @doc("The storage destination path.")
   path: string;
 }
 
 @doc("The configuration for a MQTT broker state store destination.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model BrokerStateStoreDestinationConfiguration {
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The MQTT broker state store destination key.")
@@ -132,7 +132,7 @@ model BrokerStateStoreDestinationConfiguration {
 }
 
 @doc("The set of supported QoS types for a MQTT destination.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 union MqttDestinationQos {
   @doc("QoS 0.")
   Qos0: "Qos0",
@@ -144,7 +144,7 @@ union MqttDestinationQos {
 }
 
 @doc("The type for a MQTT broker state store destination.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model DatasetBrokerStateStoreDestination extends DatasetDestination {
   @doc("The MQTT broker state store destination target.")
   target: DatasetDestinationTarget.BrokerStateStore;
@@ -154,7 +154,7 @@ model DatasetBrokerStateStoreDestination extends DatasetDestination {
 }
 
 @doc("The type for a storage destination.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model DatasetStorageDestination extends DatasetDestination {
   @doc("The storage destination type.")
   target: DatasetDestinationTarget.Storage;
@@ -164,7 +164,7 @@ model DatasetStorageDestination extends DatasetDestination {
 }
 
 @doc("The type for a storage destination.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model EventStorageDestination extends EventDestination {
   @doc("The storage destination type.")
   target: EventDestinationTarget.Storage;
@@ -174,7 +174,7 @@ model EventStorageDestination extends EventDestination {
 }
 
 @doc("The type for a storage destination.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model StreamStorageDestination extends StreamDestination {
   @doc("The storage destination type.")
   target: StreamDestinationTarget.Storage;

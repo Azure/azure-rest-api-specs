@@ -57,4 +57,11 @@ enum Versions {
 
   /** Azure DocumentDB clusters api version 2026-06-15-preview. */
   v2026_06_15_preview: "2026-06-15-preview",
+
+  /** Azure DocumentDB clusters api version 2026-09-01. */
+  v2026_09_01: "2026-09-01",
+
+  /** Azure DocumentDB clusters api version 2026-10-15-preview. */
+  @Azure.Core.previewVersion
+  v2026_10_15_preview: "2026-10-15-preview",
 }
