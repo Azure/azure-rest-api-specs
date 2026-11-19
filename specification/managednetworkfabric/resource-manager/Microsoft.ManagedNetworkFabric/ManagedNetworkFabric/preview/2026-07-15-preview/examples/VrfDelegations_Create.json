@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF",
+    "resourceGroupName": "example-rg",
+    "fabricName": "example-fabric",
+    "vrfName": "example-vrf",
+    "delegationName": "example-delegation",
+    "api-version": "2026-07-15-preview",
+    "resource": {
+      "properties": {
+        "fabricDelegationResourceId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/fabrics/example-fabric/delegations/example-delegation",
+        "limits": {
+          "vlanBudget": 8,
+          "publicIpAllowance": 2,
+          "managedNatEnabled": "True",
+          "maxSnatPorts": 512
+        },
+        "addressPrefixes": [
+          "10.1.0.0/16"
+        ],
+        "egressNetwork": "InternetDefault",
+        "administrativeState": "Enabled"
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/fabrics/example-fabric/vrfs/example-vrf/delegations/example-delegation",
+        "name": "example-delegation",
+        "type": "Microsoft.ManagedNetworkFabric/fabrics/vrfs/delegations",
+        "location": "eastus",
+        "properties": {
+          "fabricDelegationResourceId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/fabrics/example-fabric/delegations/example-delegation",
+          "limits": {
+            "vlanBudget": 8,
+            "publicIpAllowance": 2,
+            "managedNatEnabled": "True",
+            "maxSnatPorts": 512
+          },
+          "addressPrefixes": [
+            "10.1.0.0/16"
+          ],
+          "egressNetwork": "InternetDefault",
+          "administrativeState": "Enabled",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/fabrics/example-fabric/vrfs/example-vrf/delegations/example-delegation",
+        "name": "example-delegation",
+        "type": "Microsoft.ManagedNetworkFabric/fabrics/vrfs/delegations",
+        "location": "eastus",
+        "properties": {
+          "fabricDelegationResourceId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/fabrics/example-fabric/delegations/example-delegation",
+          "limits": {
+            "vlanBudget": 8,
+            "publicIpAllowance": 2,
+            "managedNatEnabled": "True",
+            "maxSnatPorts": 512
+          },
+          "addressPrefixes": [
+            "10.1.0.0/16"
+          ],
+          "egressNetwork": "InternetDefault",
+          "administrativeState": "Enabled",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "title": "VrfDelegations_Create",
+  "operationId": "VrfDelegations_Create"
+}

@@ -1,0 +1,124 @@
+{
+  "parameters": {
+    "subscriptionId": "1234ABCD-0A1B-1234-5678-123456ABCDEF",
+    "resourceGroupName": "example-rg",
+    "fabricName": "controller-fabric",
+    "api-version": "2026-07-15-preview",
+    "body": {
+      "location": "eastus",
+      "kind": "ControllerManaged",
+      "properties": {
+        "fabricSku": "2-rack-ha",
+        "customLocationId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ExtendedLocation/customLocations/example-cl",
+        "controllerManagedConfig": {
+          "controllerKind": "CiscoACI",
+          "endpoints": [
+            {
+              "url": "https://apic.example.com",
+              "role": "primary"
+            }
+          ],
+          "credentialSecretRef": {
+            "name": "apic-credentials"
+          },
+          "ciscoAciConfig": {
+            "physicalDomainName": "AzureLocal-PhysDom",
+            "aaepName": "AzureLocal-AAEP",
+            "vlanPool": {
+              "name": "AzureLocal-VlanPool",
+              "rangeStart": 100,
+              "rangeEnd": 200
+            },
+            "tenant": "AzureLocal",
+            "appProfile": "AzureLocal-AP"
+          },
+          "hydration": "Enabled"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/fabrics/controller-fabric",
+        "name": "controller-fabric",
+        "type": "Microsoft.ManagedNetworkFabric/fabrics",
+        "location": "eastus",
+        "kind": "ControllerManaged",
+        "properties": {
+          "fabricSku": "2-rack-ha",
+          "customLocationId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ExtendedLocation/customLocations/example-cl",
+          "controllerManagedConfig": {
+            "controllerKind": "CiscoACI",
+            "endpoints": [
+              {
+                "url": "https://apic.example.com",
+                "role": "primary"
+              }
+            ],
+            "credentialSecretRef": {
+              "name": "apic-credentials"
+            },
+            "ciscoAciConfig": {
+              "physicalDomainName": "AzureLocal-PhysDom",
+              "aaepName": "AzureLocal-AAEP",
+              "vlanPool": {
+                "name": "AzureLocal-VlanPool",
+                "rangeStart": 100,
+                "rangeEnd": 200
+              },
+              "tenant": "AzureLocal",
+              "appProfile": "AzureLocal-AP"
+            },
+            "hydration": "Enabled"
+          },
+          "controllerStatus": {
+            "connectionState": "Connected",
+            "activeEndpoint": "https://apic.example.com"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/fabrics/controller-fabric",
+        "name": "controller-fabric",
+        "type": "Microsoft.ManagedNetworkFabric/fabrics",
+        "location": "eastus",
+        "kind": "ControllerManaged",
+        "properties": {
+          "fabricSku": "2-rack-ha",
+          "customLocationId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ExtendedLocation/customLocations/example-cl",
+          "controllerManagedConfig": {
+            "controllerKind": "CiscoACI",
+            "endpoints": [
+              {
+                "url": "https://apic.example.com",
+                "role": "primary"
+              }
+            ],
+            "credentialSecretRef": {
+              "name": "apic-credentials"
+            },
+            "ciscoAciConfig": {
+              "physicalDomainName": "AzureLocal-PhysDom",
+              "aaepName": "AzureLocal-AAEP",
+              "vlanPool": {
+                "name": "AzureLocal-VlanPool",
+                "rangeStart": 100,
+                "rangeEnd": 200
+              },
+              "tenant": "AzureLocal",
+              "appProfile": "AzureLocal-AP"
+            },
+            "hydration": "Enabled"
+          },
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  },
+  "title": "Fabrics_Create_Controller",
+  "operationId": "Fabrics_Create"
+}
