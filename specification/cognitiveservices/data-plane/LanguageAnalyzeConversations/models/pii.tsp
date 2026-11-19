@@ -303,7 +303,7 @@ union ConversationPiiCategoriesExclude {
   @added(Versions.v2026_11_15_preview)
   DebitCard: "DebitCard",
 
-  /** US Individual Taxpayer Identification Number (ITIN) category */
+  /** US Individual Taxpayer Identification Number category */
   @added(Versions.v2026_11_15_preview)
   USIndividualTaxpayerIdentification: "USIndividualTaxpayerIdentification",
 
