@@ -159,6 +159,55 @@ void test("failed compiler programs never report @doc evidence ready", async () 
   assert.equal(required(required(sourceIndex.sourceChanges[0]).documentEvidence).status, "blocked");
 });
 
+void test("new projects compile and index only the target revision", async () => {
+  const sourceText = '@doc("A widget") model Widget {}';
+  const sourceIndex = buildSourceIndex({
+    repo: "repo",
+    mergeBase: "base",
+    headCommit: "head",
+    changedFiles: [{ path: "main.tsp", status: "added", origins: [] }],
+    readFile: (_repo, revision) => (revision === "base" ? null : sourceText),
+    diffFile: () => '@@ -0,0 +1 @@\n+@doc("A widget") model Widget {}',
+  });
+  const loadedWorktrees: string[] = [];
+  await addCompilerEvidence({
+    sourceIndex,
+    baseWorktree: "base",
+    currentWorktree: "current",
+    projects: ["main.tsp"],
+    projectsByRevision: { base: [], current: ["main.tsp"] },
+    loadCompiler: (worktree): CompilerApi => {
+      loadedWorktrees.push(worktree);
+      const file = {
+        path: path.resolve(worktree, "main.tsp"),
+        text: sourceText,
+        getLineAndCharacterOfPosition: () => ({ line: 0, character: 0 }),
+      };
+      return {
+        compilerVersion: "test",
+        NodeHost: {},
+        compile: () => ({
+          diagnostics: [],
+          sourceFiles: new Map([["main.tsp", { file }]]),
+        }),
+        navigateProgram: (_program, listeners) =>
+          listeners.model({ kind: "Model", name: "Widget" }),
+        getSourceLocation: () => ({ file, pos: 0, end: sourceText.length }),
+        getDoc: () => "A widget",
+      };
+    },
+  });
+
+  assert.deepEqual(loadedWorktrees, ["current"]);
+  assert.equal(sourceIndex.analysis.status, "ready");
+  assert.equal(required(required(sourceIndex.sourceChanges[0]).documentEvidence).status, "ready");
+  assert.ok(
+    required(sourceIndex.sourceChanges[0]).declarations.every(
+      (declaration) => declaration.source.revision === "current",
+    ),
+  );
+});
+
 void test("compiler evidence records only documentation presence on changed declarations", async () => {
   const sourceText = "model Widget { value: string; }";
   const sourceIndex = buildSourceIndex({

@@ -6,6 +6,12 @@ using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
 using Microsoft.ContainerService;
 
+// Preserve existing single-response SDK methods; .NET already exposes pageable methods.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keep existing SDK list methods and response-envelope return types."
+@@disablePageable(PrivateEndpointConnections.list, "!csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keep existing SDK list methods and response-envelope return types."
+@@disablePageable(ManagedClusters.privateLinkResourcesList, "!csharp");
+
 // Fix .NET code generation naming conflict: BootstrapAzureConfig has both an internal
 // BootstrapTokenInfo property and a flattened public string property that both resolve
 // to "BootstrapToken". Renaming the backing property avoids the CS0102 duplicate error.
@@ -15,17 +21,23 @@ using Microsoft.ContainerService;
   "csharp"
 );
 
-// .NET SDK naming: "Request" suffix is reserved for HTTP pipeline types; add the
-// AgentPool owner prefix so the request pairs symmetrically with its response
-// (PoolBootstrapData -> AgentPoolBootstrapInfo).
-@@clientName(
-  ListBootstrapDataRequest,
-  "AgentPoolBootstrapDataContent",
-  "csharp"
-);
-
 // .NET SDK naming: "Data" suffix is reserved for ResourceData/TrackedResourceData types.
 @@clientName(PoolBootstrapData, "AgentPoolBootstrapInfo", "csharp");
+
+// .NET SDK naming: scope the bootstrap helper types to the agent pool domain so they
+// are not confused with unrelated bootstrapping in IntelliSense.
+@@clientName(BootstrapAzureConfig, "AgentPoolBootstrapAzureConfig", "csharp");
+@@clientName(
+  BootstrapComponentVersions,
+  "AgentPoolBootstrapComponentVersions",
+  "csharp"
+);
+@@clientName(
+  BootstrapNetworkingConfig,
+  "AgentPoolBootstrapNetworkingConfig",
+  "csharp"
+);
+@@clientName(BootstrapNodeConfig, "AgentPoolBootstrapNodeConfig", "csharp");
 
 // .NET SDK naming: add RP/service context prefix for IntelliSense clarity.
 // AllowedSubject belongs to IdentityBinding (referenced only by
@@ -1399,6 +1411,19 @@ using Microsoft.ContainerService;
   "csharp"
 );
 @@clientName(ServiceAccountImagePullProfile.enabled, "IsEnabled", "csharp");
+// .NET SDK naming: boolean members use the "Is" prefix; the JSON name stays "enabled".
+@@clientName(
+  ManagedClusterStorageProfileDiskCSIDriverQuickAttachDetach.enabled,
+  "IsEnabled",
+  "csharp"
+);
+@@clientName(BastionProfile.enabled, "IsEnabled", "csharp");
+// The documentation identifies this value as an ARM resource ID; the wire format stays a string.
+@@alternateType(
+  ServiceAccountImagePullProfile.defaultManagedIdentityId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(
   TransitEncryptionType.mTLS,
   "ClientCertificateAuthentication",
@@ -1449,11 +1474,6 @@ using Microsoft.ContainerService;
   "GetManagedClusterKubernetesVersions",
   "csharp"
 );
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "List operation is pageable for .Net SDK"
-@@markAsPageable(PrivateEndpointConnections.list, "csharp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "List operation is pageable for .Net SDK"
-@@markAsPageable(ManagedClusters.privateLinkResourcesList, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Ensure backward compatibility for the .NET SDK"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
@@ -1766,6 +1786,27 @@ namespace Azure.ResourceManager.Models {
 @@clientName(
   SafeguardsAvailableVersion,
   "ContainerServiceSafeguardsAvailableVersion",
+  "csharp"
+);
+// Properties/helper models: carry the owning feature's context into the public names.
+@@clientName(
+  MaintenanceWindowResourceProperties,
+  "ContainerServiceManagedMaintenanceWindowProperties",
+  "csharp"
+);
+@@clientName(
+  MaintenanceWindowSource,
+  "UpgradeInsightMaintenanceWindowSource",
+  "csharp"
+);
+@@clientName(
+  GuardrailsAvailableVersionsProperties,
+  "ContainerServiceGuardrailsAvailableVersionsProperties",
+  "csharp"
+);
+@@clientName(
+  SafeguardsAvailableVersionsProperties,
+  "ContainerServiceSafeguardsAvailableVersionsProperties",
   "csharp"
 );
 // Profile models: add a service/resource prefix so they aren't confused with the

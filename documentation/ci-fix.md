@@ -13,12 +13,13 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
 - [Table of Contents](#table-of-contents)
 - [Prerequisites](#prerequisites)
 - [Checks troubleshooting guides](#checks-troubleshooting-guides)
+  - [Transient fetch failures](#transient-fetch-failures)
   - [`Format`](#format)
   - [`CredScan`](#credscan)
   - [`PoliCheck`](#policheck)
   - [`Protected Files`](#protected-files)
   - [`SDK Validation *` checks, like `SDK Validation - Go`](#sdk-validation--checks-like-sdk-validation---go)
-  - [`SDK Breaking Change Review`](#sdk-breaking-change-review)
+  - [`SDK Breaking Change Mitigation and Review`](#sdk-breaking-change-mitigation-and-review)
   - [`Swagger APIView`](#swagger-apiview)
     - [If an expected APIView was not generated, follow the step below to troubleshoot.](#if-an-expected-apiview-was-not-generated-follow-the-step-below-to-troubleshoot)
     - [Diagnosing APIView failure for SDK Language (not Swagger)](#diagnosing-apiview-failure-for-sdk-language-not-swagger)
@@ -27,12 +28,14 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
   - [`Swagger BreakingChange` and `BreakingChange(Cross-Version)`](#swagger-breakingchange-and-breakingchangecross-version)
     - [Run `oad` locally](#run-oad-locally)
   - [`Swagger LintDiff` and `Swagger Lint(RPaaS)`](#swagger-lintdiff-and-swagger-lintrpaas)
+    - [Choose between direct validation and full LintDiff](#choose-between-direct-validation-and-full-lintdiff)
   - [`Swagger LintDiff` for TypeSpec: troubleshooting guides](#swagger-lintdiff-for-typespec-troubleshooting-guides)
   - [`Swagger ModelValidation`](#swagger-modelvalidation)
   - [`Swagger PrettierCheck`](#swagger-prettiercheck)
     - [Prettier reference](#prettier-reference)
   - [`Swagger SemanticValidation`](#swagger-semanticvalidation)
   - [Spell Check](#spell-check)
+  - [`Summarize PR Impact`](#summarize-pr-impact)
   - [`TypeSpec Validation`](#typespec-validation)
   - [`TypeSpec Suppressions`](#typespec-suppressions)
   - [`license/cla`](#licensecla)
@@ -45,6 +48,26 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
 Most guides here require for you to have `npm` installed, which you can get by installing [Node.js](https://nodejs.org/en/download).
 
 # Checks troubleshooting guides
+
+## Transient fetch failures
+
+If a PR pipeline fails with a fetch-related error and the logs do not identify
+an actionable problem in the submitted changes, retry the failed run once
+before starting a deeper specification or pipeline investigation.
+For example, the CI run reported the following annotation:
+
+```
+Unhandled error: HttpError: fetch failed
+```
+
+This message indicates that a fetch operation failed, but does not by itself 
+identify the cause or establish that the submitted specification caused the failure.
+
+If the retry succeeds, ensure all required CI checks pass before requesting or
+re-requesting review. If the same fetch-related failure occurs again,
+investigate it as a persistent CI or repository issue. This guidance applies
+only to fetch-related errors without an actionable diagnostic and is not a
+general retry policy for all CI failures.
 
 ## `Format`
 
@@ -70,7 +93,9 @@ This check is owned by One Engineering System. See [1ES PoliCheck] for help.
 ## `Protected Files`
 
 Only allowlisted repository maintainers and trusted automation accounts may change
-protected tooling and configuration files. If you are not allowlisted, remove
+files outside `specification/`, except for the CODEOWNERS and skill exemptions below.
+This includes root files, documentation, tooling, and files in newly added directories.
+If you are not allowlisted, remove
 the changes listed in the check's errors from your PR, including any deletions or
 renames, or ask an allowlisted maintainer to review the changes and apply
 `protected-files-approved`.
@@ -110,7 +135,7 @@ If you have an issue or with any of checks listed in the first column of the tab
 |-----------------------------------|----------------| ------------------------------------------------------------- |
 | `SDK Validation - Go`            | Chenjie Shi     | [tadelesh](https://github.com/tadelesh)                       |
 | `SDK Validation - Java`          | Weidong Xu      | [weidongxu-microsoft](https://github.com/weidongxu-microsoft) |
-| `SDK Validation - JS`            | Qiaoqiao Zhang  | [qiaozha](https://github.com/qiaozha)                         |
+| `SDK Validation - JS`            | Jialin Huang    | [JialinHuang803](https://github.com/JialinHuang803)           |
 | `SDK Validation - .NET`          | Wei Hu          | [live1206](https://github.com/live1206)                       |
 | `SDK Validation - Python`        | Yuchao Yan      | [msyyc](https://github.com/msyyc)                             |
 
@@ -123,21 +148,29 @@ Do the following:
 2. If your investigation denotes this is likely a bug in the check itself and not your PR, reach out
   to the owner of the check per the aforementioned table.
 
-## `SDK Breaking Change Review`
+## `SDK Breaking Change Mitigation and Review`
 
 > [!IMPORTANT]
 >
-> - If your PR is flagged with any label that matches the pattern `BreakingChange-{Language}-Sdk`, the SDK breaking
-     changes will be reviewed by SDK reviewers around two business days after the completion of the first two review steps
-     in PR review workflow, i.e. REST API breaking change review and ARM review.
-> - If you need to suppress the SDK breaking changes, refer to [SDK Suppressions](https://aka.ms/azsdk/sdk-suppression).
+> If your PR has a label matching `BreakingChange-{Language}-Sdk`, complete these steps in
+> order:
+>
+> 1. **Mitigate the breaking changes.** The PR owner must follow the
+>    [SDK mitigation process](../.github/workflows/src/sdk-breaking-change/SDK-BREAKING-CHANGE-PROCESS.md#mitigation)
+>    and resolve each breaking change that can be mitigated.
+> 2. **Suppress accepted breaking changes.** If a breaking change is intentional and cannot be
+>    mitigated, follow the [SDK suppression process](https://aka.ms/azsdk/sdk-suppression).
+> 3. **Wait for SDK review.** After mitigation is complete, SDK reviewers review the remaining
+>    accepted breaking changes. This review typically occurs within two business days after the
+>    REST API breaking change review and ARM review are complete.
 
-If the SDK breaking changes haven't been reviewed after two additional business days, you may reach out to the reviewers:
+If the SDK breaking changes have not been reviewed within that period, contact the appropriate
+reviewer:
 
 | Language        | Reviewer        | GitHub login                                                  |
 |-----------------|-----------------| ------------------------------------------------------------- |
 | `Go`            | Chenjie Shi     | [tadelesh](https://github.com/tadelesh)                       |
-| `JS`            | Qiaoqiao Zhang  | [qiaozha](https://github.com/qiaozha)                         |
+| `JS`            | Jialin Huang    | [JialinHuang803](https://github.com/JialinHuang803)           |
 | `Python`        | Yuchao Yan      | [msyyc](https://github.com/msyyc)                             |
 
 ## `Swagger APIView`
@@ -173,7 +206,7 @@ Refer to [troubleshooting REST API documentation](https://eng.ms/docs/products/a
 
 ## `Swagger Avocado`
 
-Moved to https://github.com/Azure/azure-rest-api-specs/wiki/Swagger-Avocado
+See the [Swagger Avocado guide](./validation/swagger-avocado.md).
 
 ## `Swagger BreakingChange` and `BreakingChange(Cross-Version)`
 
@@ -201,9 +234,16 @@ If that guidance is not enough, please also refer to the [LintDiff rules.md doc]
 
 To reproduce LintDiff failures locally, see [CONTRIBUTING.md / How to locally reproduce a LintDiff failure occurring on a PR](https://github.com/Azure/azure-openapi-validator/blob/main/CONTRIBUTING.md#how-to-locally-reproduce-a-lintdiff-failure-occurring-on-a-pr).
 
+### Choose between direct validation and full LintDiff
+
+- To quickly see validation errors and warnings in the new state of your spec, run [`azure-openapi-validator`](https://github.com/Azure/azure-openapi-validator/wiki#usage) directly. It validates only the current state and does not compare it with the state before your PR.
+- To get results closer to the `Swagger LintDiff` PR check, run the full LintDiff process by following [`eng/tools/lint-diff/README.md`](https://github.com/Azure/azure-rest-api-specs/blob/main/eng/tools/lint-diff/README.md). It compares the validation results of the spec before and after your changes, just like the PR check.
+
+Results from the two approaches can differ, because only the full LintDiff process reports issues based on that before-and-after comparison.
+
 ## `Swagger LintDiff` for TypeSpec: troubleshooting guides
 
-https://github.com/Azure/azure-rest-api-specs/wiki/Swagger-LintDiff-for-TypeSpec
+See [Swagger LintDiff for TypeSpec](./validation/swagger-lintdiff.md#typespec).
 
 ## `Swagger ModelValidation`
 
@@ -293,13 +333,19 @@ Spell checking is *case-insensitive* so you only need to add a word once in lowe
 
 For more information see [cspell configuration](https://cspell.org/configuration/).
 
+## `Summarize PR Impact`
+
+If the check fails with `pnpm: command not found`, an outdated PR branch may be the cause even when the spec changes are unrelated. The workflow loads the setup action from the PR head at `after/.github/actions/setup-node-install-deps`. An older copy of that action may run `npm ci` without installing `pnpm`, while the current workflow runs `pnpm exec summarize-impact`.
+
+Update the PR branch with the latest changes from its target branch (`main` or `RPSaaSMaster`), then rerun the check from the updated PR head. Rerunning the check on the old branch state can repeat the failure. This does not require changing spec files.
+
 ## `TypeSpec Validation`
 
 For failed batch validation, run the `pnpm install` and per-project `pnpm tsv`
 commands from the final failure summary at the repository root. In GitHub Actions,
 each failed project's error annotation also includes these reproduction instructions.
 
-https://github.com/Azure/azure-rest-api-specs/wiki/TypeSpec-Validation
+See the [TypeSpec validation guide](./validation/typespec-validation.md).
 
 ## `TypeSpec Suppressions`
 
