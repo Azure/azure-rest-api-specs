@@ -118,6 +118,11 @@ using Microsoft.Resources;
 @@clientName(ChangeType, "WhatIfChangeType", "csharp");
 @@clientName(PropertyChangeType, "WhatIfPropertyChangeType", "csharp");
 @@alternateType(ResourceReference.id, armResourceIdentifier, "csharp");
+@@alternateType(
+  DeploymentResourceWhatIfPrediction.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(DeploymentExternalInput, "ArmDeploymentExternalInput", "csharp");
 @@clientName(
   DeploymentExternalInputDefinition,

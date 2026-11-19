@@ -58,7 +58,7 @@ $Specification = "<project-or-spec-root>"
 $Work = "<work-directory>"
 $Skill = Join-Path $Repo ".github\skills\azure-typespec-assessment"
 
-node (Join-Path $Skill "scripts\run-assessment-analysis.mjs") `
+node (Join-Path $Skill "scripts\run-assessment-analysis.ts") `
   --repo $Repo --base $Base --specification $Specification --output $Work
 ```
 
@@ -69,14 +69,14 @@ $Repo = $PWD
 $Work = "<work-directory>"
 $Skill = "<azure-typespec-assessment-skill-directory>"
 
-node (Join-Path $Skill "scripts\run-assessment-analysis.mjs") `
+node (Join-Path $Skill "scripts\run-assessment-analysis.ts") `
   --repo $Repo --pr "<pull-request-url-or-number>" --output $Work
 ```
 
 For an immutable comparison not identified by a PR:
 
 ```powershell
-node (Join-Path $Skill "scripts\run-assessment-analysis.mjs") `
+node (Join-Path $Skill "scripts\run-assessment-analysis.ts") `
   --repo $Repo --base "<base-ref-or-commit>" --head "<head-ref-or-commit>" `
   --output $Work
 ```

@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
 import { fullGitSha } from "../../shared/test/examples.ts";
-import getArmLabelAction from "../src/arm-auto-signoff/arm-auto-signoff-status.ts";
 import getBreakingChangeLabels from "../src/breaking-change-add-label-artifacts.ts";
 import type { GitHubScriptArgs } from "../src/github.ts";
 import postPackageResults from "../src/package-name-approval/post-results.ts";
@@ -14,7 +13,6 @@ import { createMockContext, createMockCore, createMockGithub } from "./mocks.ts"
 const consumers: [string, (args: GitHubScriptArgs) => Promise<unknown>][] = [
   ["shared status", (args) => setStatus(args, "analyzer", "status", "")],
   ["summary", summarizeChecks],
-  ["legacy ARM signoff", getArmLabelAction],
   ["breaking change labels", getBreakingChangeLabels],
   ["package results", postPackageResults],
   ["package status", setPackageStatus],
@@ -29,7 +27,6 @@ const labelConsumers: [string, (args: GitHubScriptArgs) => Promise<unknown>, str
     "Approved-Avocado",
   ],
   ["summary", summarizeChecks, "ARMReview"],
-  ["legacy ARM signoff", getArmLabelAction, "ARMAutoSignedOff-IncrementalTSP"],
 ];
 
 it.each(labelConsumers)(
@@ -45,11 +42,16 @@ it.each(labelConsumers)(
       pull_request: { number: 42, head: { sha: fullGitSha }, base: { ref: "main" } },
     };
     github.rest.pulls.get.mockResolvedValue({
-      data: { state: "open", labels: [{ name: label }] },
+      data: {
+        state: "open",
+        labels: [{ name: label }],
+        head: { sha: fullGitSha },
+        base: { ref: "main" },
+      },
     });
     github.rest.issues.createComment.mockResolvedValue({ data: { id: 1 } });
 
-    const result = await run({ github, context, core });
+    await run({ github, context, core });
 
     expect(github.rest.pulls.get).toHaveBeenCalledTimes(1);
     expect(github.rest.issues.listLabelsOnIssue).not.toHaveBeenCalled();
@@ -62,13 +64,6 @@ it.each(labelConsumers)(
         "body",
         expect.stringContaining(label),
       );
-    } else {
-      expect(result).toMatchObject({
-        labelActions: {
-          ARMSignedOff: "remove",
-          "ARMAutoSignedOff-IncrementalTSP": "remove",
-        },
-      });
     }
   },
 );

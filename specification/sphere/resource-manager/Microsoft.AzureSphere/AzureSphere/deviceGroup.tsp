@@ -8,7 +8,7 @@ using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AzureSphere;
 /**
- * An device group resource belonging to a product resource.
+ * A device group resource belonging to a product resource.
  */
 @parentResource(Product)
 model DeviceGroup is ProxyResource<DeviceGroupProperties> {

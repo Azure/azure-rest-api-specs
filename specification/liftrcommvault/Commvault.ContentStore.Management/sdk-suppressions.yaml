@@ -1,0 +1,16 @@
+suppressions:
+  azure-sdk-for-js:
+    - package: '@azure/arm-commvaultcontentstore'
+      breaking-changes:
+        - Operation CloudAccountsOperations.update has a new signature
+        - Removed Interface CloudAccountPropertiesUpdate
+        - Removed Interface ManagedServiceIdentityUpdate
+        - Removed Interface MarketplaceDetailsUpdate
+        - Removed Interface ResourceUpdate
+        - Removed Interface TrackedResourceUpdate
+        - Type of parameter identity of interface CloudAccountUpdate is changed from ManagedServiceIdentityUpdate to CloudAccountIdentityUpdate
+        - Type of parameter properties of interface CloudAccountUpdate is changed from CloudAccountPropertiesUpdate to CloudAccountUpdateProperties
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/commvaultcontentstore/armcommvaultcontentstore
+      breaking-changes:
+        - "Function `*CloudAccountsClient.BeginUpdate` parameter(s) have been changed from `(ctx context.Context, resourceGroupName string, cloudAccountName string, properties CloudAccount, options *CloudAccountsClientBeginUpdateOptions)` to `(ctx context.Context, resourceGroupName string, cloudAccountName string, properties CloudAccountUpdate, options *CloudAccountsClientBeginUpdateOptions)`"

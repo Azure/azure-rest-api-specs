@@ -12,10 +12,11 @@ import {
 import { parseExistingComments } from "./comment.ts";
 import type { Core, GitHub, GitHubScriptArgs, WebhookEvent } from "./github.ts";
 
-const COMMAND = "/azsdk check-access";
+export const CONTRIBUTOR_READINESS_COMMAND = "/azsdk check-access";
+export const CONTRIBUTOR_READINESS_CHECK_NAME = "Contributor readiness";
+export const CONTRIBUTOR_ONBOARDING_URL = "https://aka.ms/azsdk/access";
+
 const MARKER = "<!-- contributor-readiness -->";
-const CHECK_NAME = "Contributor readiness";
-const ONBOARDING = "https://aka.ms/azsdk/access";
 const ORGANIZATIONS = ["Azure"] as const;
 
 type PullRequest = Awaited<ReturnType<GitHub["rest"]["pulls"]["get"]>>["data"];
@@ -64,7 +65,9 @@ export async function resolveReadinessPullRequest(
   const { context } = inputs;
   if (context.eventName === "issue_comment") {
     const { issue, comment, sender } = context.payload as WebhookEvent<"issue-comment", "created">;
-    return issue.pull_request && comment.body.trim() === COMMAND && !isAutomation(sender)
+    return issue.pull_request &&
+      comment.body.trim() === CONTRIBUTOR_READINESS_COMMAND &&
+      !isAutomation(sender)
       ? issue.number
       : null;
   }
@@ -315,12 +318,12 @@ export async function evaluateReadinessParticipants(
     );
     if (write === false) {
       const impacts: string[] = [];
-      if (participant.roles.has("PR author"))
-        impacts.push("PR author cannot run Azure DevOps pipelines for this PR.");
+      if (participant.roles.has("PR author")) {
+        impacts.push("Cannot run Azure DevOps pipelines.");
+        impacts.push("Cannot add PR labels.");
+      }
       if (participant.roles.has("approved reviewer"))
-        impacts.push(
-          "Reviewer approval does not count toward required reviews (GitHub's green approval check). This reviewer must set up or renew their access.",
-        );
+        impacts.push("Approval does not count toward required reviews (GitHub's green check).");
       findings.push({
         subject: participant.login,
         message: "No repository write access.",
@@ -339,18 +342,18 @@ export function renderReadiness(
   verifiedParticipants: Participant[] = [],
 ): string {
   return renderMarkdownDoc(
-    section(
-      "Contributor readiness: required access",
+    section("Contributor readiness: required access", [
       findings.length
         ? [
-            "> [!WARNING]\n> **The access issues below can prevent PR approvals from counting or block Azure DevOps pipeline runs.**",
+            "> [!WARNING]\n> **Access issues can block approvals, Azure DevOps pipelines, or labeling.**",
             renderReadinessFindings(participants, findings),
-            `Internal contributors: ${link("setup / renew required access", ONBOARDING)}. Recheck: ${inlineCode(COMMAND)}.`,
+            `Internal contributors: ${link("set up / renew access", CONTRIBUTOR_ONBOARDING_URL)}. Recheck: ${inlineCode(CONTRIBUTOR_READINESS_COMMAND)}.`,
             renderVerifiedContributors(verifiedParticipants),
-            "Non-blocking report; external fork contributions are allowed. GitHub review rules still apply.",
+            "Non-blocking check; fix access issues to unblock affected actions.",
           ]
         : "✅ No contributor-readiness issues found.",
-    ),
+      `Last updated: ${new Date().toISOString()}`,
+    ]),
     2,
   );
 }
@@ -527,7 +530,7 @@ async function collectAuthorizedRefreshParticipants(
   const payload = context.payload as WebhookEvent<"issue-comment", "created">;
   if (
     payload.issue.number !== pr.number ||
-    payload.comment.body.trim() !== COMMAND ||
+    payload.comment.body.trim() !== CONTRIBUTOR_READINESS_COMMAND ||
     isAutomation(payload.sender)
   ) {
     throw new Error("Unexpected contributor readiness command");
@@ -563,7 +566,7 @@ async function publishReadinessReport(
   await github.rest.checks.create({
     owner,
     repo,
-    name: CHECK_NAME,
+    name: CONTRIBUTOR_READINESS_CHECK_NAME,
     head_sha: pr.head.sha,
     external_id: `contributor-readiness:${pr.number}`,
     status: "completed",
@@ -577,6 +580,21 @@ async function publishReadinessReport(
       summary: body,
     },
   });
+  if (context.runAttempt > 1) {
+    const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+      owner,
+      repo,
+      run_id: context.runId,
+      per_page: PER_PAGE_MAX,
+    });
+    for (const artifact of artifacts) {
+      if (artifact.name.startsWith("head-sha=") && artifact.name !== `head-sha=${pr.head.sha}`) {
+        await github.rest.actions.deleteArtifact({ owner, repo, artifact_id: artifact.id });
+      }
+    }
+  }
+  core.setOutput("issue_number", pr.number);
+  core.setOutput("head_sha", pr.head.sha);
   await updateReadinessComment(github, owner, repo, pr.number, body, findings.length > 0);
 }
 

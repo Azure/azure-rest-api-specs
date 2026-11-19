@@ -35,8 +35,7 @@ interface NginxConfigurationResponses {
   /**
    * Create or update the NGINX configuration for given NGINX deployment
    */
-  createOrUpdate is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
-    Extension.ResourceGroup,
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     NginxConfigurationResponse,
     NginxConfigurationRequest,
     OptionalRequestBody = true

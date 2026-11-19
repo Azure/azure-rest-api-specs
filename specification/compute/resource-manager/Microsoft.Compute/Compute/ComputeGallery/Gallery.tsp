@@ -147,7 +147,7 @@ interface Galleries {
       /**
        * The artifact name to be listed. If artifact type is Images, then the artifact name should be the gallery image name.
        */
-      @pattern("^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$")
+      @pattern("^[^_\\W][\\w-._]{0,79}(?<![-.])$")
       @path
       @segment("artifacts")
       artifactName: string;

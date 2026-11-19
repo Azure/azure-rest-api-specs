@@ -4,6 +4,23 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.ProviderHub;
 
+@@clientName(
+  EndpointRegistrations.createOrUpdate::parameters.resource,
+  "properties"
+);
+@@clientName(
+  EndpointRegistrations.createOrUpdateNestedResourceTypeFirst::parameters.resource,
+  "properties"
+);
+@@clientName(
+  EndpointRegistrations.createOrUpdateNestedResourceTypeSecond::parameters.resource,
+  "properties"
+);
+@@clientName(
+  EndpointRegistrations.createOrUpdateNestedResourceTypeThird::parameters.resource,
+  "properties"
+);
+
 @@clientName(Microsoft.ProviderHub, "ProviderHubMgmtClient", "python");
 
 @@clientLocation(ProviderRegistrations.checkinManifest, "Client", "go");

@@ -16,6 +16,12 @@ To see additional help and options, run:
 
 For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
 
+## General OpenAPI tooling
+
+The definition is Swagger 2.0. Before importing it into tools such as Swagger UI, set the standard `host` field in a local copy to your namespace's fully qualified domain name, such as `your-namespace.servicebus.windows.net`. Supply only the hostname, without a scheme or path. The checked-in `example-namespace.servicebus.windows.net` is a placeholder, not your namespace. Requests use HTTPS.
+
+AutoRest consumers continue to supply the existing `endpoint` parameter through `x-ms-parameterized-host`. Keep that extension and its parameter unchanged when configuring `host` for general OpenAPI tooling. Swagger 2.0 does not support variables in its standard `host` field.
+
 ---
 
 ## Configuration
@@ -40,7 +46,7 @@ input-file:
 
 ### Suppression
 
-``` yaml
+```yaml
 directive:
   - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
     from: servicebus.json

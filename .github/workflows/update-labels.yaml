@@ -1,6 +1,12 @@
 name: Update Labels
 
 on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: "Trusted Universal signoff run containing label-action artifacts"
+        required: true
+        type: string
   # TODO: If a pull request is manually labeled or unlabeled, get all artifacts associated with PR, and update labels
   # pull_request:
   #   types: [labeled, unlabeled]
@@ -8,27 +14,33 @@ on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base
   workflow_run:
     workflows:
       [
-        "ARM Auto SignOff - Set Status",
         "ARM Universal Auto SignOff",
         "ARM Modeling Review",
         "SDK Breaking Change Labels",
         "SDK Suppressions",
-        "TypeSpec Requirement",
+        "Spec Change Policies",
         "Breaking Change - Add Label Artifacts",
       ]
     types: [completed]
 
 permissions:
-  actions: read
   contents: read
-  pull-requests: write
 
 jobs:
   update-labels:
     name: Update Labels
+    permissions:
+      actions: read
+      contents: read
+      pull-requests: write
     if: >-
-      github.event.workflow_run.conclusion != 'skipped' &&
-      github.event.workflow_run.conclusion != 'cancelled'
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion != 'skipped' &&
+       github.event.workflow_run.conclusion != 'cancelled')
+
+    outputs:
+      head_sha: ${{ steps.update-labels.outputs.head_sha }}
+      issue_number: ${{ steps.update-labels.outputs.issue_number }}
 
     runs-on: ubuntu-slim
 
@@ -61,3 +73,37 @@ jobs:
         with:
           name: issue-number
           value: ${{ steps.update-labels.outputs.issue_number }}
+
+  # Own job so only it can write to Actions. A run created by workflow_dispatch uses
+  # GITHUB_TOKEN, so its completion does not fire the Summarize Checks workflow_run trigger;
+  # a workflow_run-route run still does, and dispatching there too would evaluate twice.
+  dispatch-summarize-checks:
+    name: Dispatch Summarize Checks
+    needs: update-labels
+    if: >-
+      github.event_name == 'workflow_dispatch' &&
+      needs.update-labels.outputs.head_sha != '' &&
+      needs.update-labels.outputs.issue_number != ''
+    permissions:
+      actions: write
+      contents: read
+    runs-on: ubuntu-slim
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            .github
+
+      - uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          PR_NUMBER: ${{ needs.update-labels.outputs.issue_number }}
+          HEAD_SHA: ${{ needs.update-labels.outputs.head_sha }}
+        with:
+          script: |
+            const { dispatchSummarizeChecks } =
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-signoff-dispatch.ts');
+            await dispatchSummarizeChecks(
+              { github, context, core },
+              { prNumber: process.env.PR_NUMBER, headSha: process.env.HEAD_SHA },
+            );
