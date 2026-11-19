@@ -42,7 +42,6 @@ export function evaluateReviewRequirements(
     clientCustomization:
       active &&
       !arm &&
-      context.targetBranch === "main" &&
       managementServices.some((service) => service.changes.includes("sdk-configuration")),
     dataPlane:
       active &&

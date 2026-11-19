@@ -111,8 +111,9 @@ The same approval policies protect both label additions and removals.
 
 ## Client customization review
 
-Management-plane PRs targeting `main` whose service changes are limited to `client.tsp`
-and/or `tspconfig.yaml` get `client-customization-review-required` instead of `ARMReview`.
+Non-draft management-plane PRs targeting `main`, `RPSaaSMaster`, `release*`, or
+`ARMCoreRPDev` whose service changes are limited to `client.tsp` and/or `tspconfig.yaml`
+get `client-customization-review-required` instead of `ARMReview`.
 Members of `azure-arm-sdk-reviewers` and global approvers may apply
 `client-customization-approved` after reviewing the changes. Approval is not
 automatically reset when new commits are pushed.

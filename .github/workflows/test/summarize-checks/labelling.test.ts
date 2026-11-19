@@ -380,25 +380,40 @@ describe("service-scoped impact labels", () => {
   const service = managementService;
   const context = { isDraft: false, targetBranch: "main" };
 
-  it("routes configuration-only changes on main to client customization review", () => {
-    const customization = {
-      schemaVersion: 2 as const,
-      services: [{ ...service, changes: ["sdk-configuration" as const] }],
-    };
-    const labels = updateLabels(["ARMReview"], customization, context);
-    expect([...labels.toAdd].sort()).toEqual([
-      "TypeSpec",
-      "client-customization-review-required",
-      "resource-manager",
-    ]);
-    expect([...labels.toRemove]).toEqual(["ARMReview"]);
+  it.each(["main", "RPSaaSMaster", "release-network-2025-03-01", "ARMCoreRPDev"])(
+    "routes configuration-only changes to client customization review on %s",
+    (targetBranch) => {
+      const customization = {
+        schemaVersion: 2 as const,
+        services: [{ ...service, changes: ["sdk-configuration" as const] }],
+      };
+      const labels = updateLabels(["ARMReview"], customization, {
+        isDraft: false,
+        targetBranch,
+      });
+      expect([...labels.toAdd].sort()).toEqual([
+        "TypeSpec",
+        "client-customization-review-required",
+        "resource-manager",
+      ]);
+      expect([...labels.toRemove]).toEqual(["ARMReview"]);
+    },
+  );
 
-    const otherBranch = updateLabels([], customization, {
-      isDraft: false,
-      targetBranch: "RPSaaSMaster",
-    });
-    expect([...otherBranch.toAdd].sort()).toEqual(["TypeSpec", "resource-manager"]);
-  });
+  it.each([
+    { isDraft: true, targetBranch: "main" },
+    { isDraft: false, targetBranch: "feature/customizations" },
+  ])(
+    "does not request customization review for $targetBranch (draft: $isDraft)",
+    (reviewContext) => {
+      const labels = updateLabels(
+        [],
+        { schemaVersion: 2, services: [{ ...service, changes: ["sdk-configuration"] }] },
+        reviewContext,
+      );
+      expect([...labels.toAdd].sort()).toEqual(["TypeSpec", "resource-manager"]);
+    },
+  );
 
   it.each([true, false])(
     "requires ARM review for other changes only when they affect an owning README: %s",
