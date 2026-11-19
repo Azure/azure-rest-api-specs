@@ -3,8 +3,9 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { SdkName } from "../../shared/src/sdk-types.ts";
 import { createMockSpecGenSdkArtifactInfo } from "../../shared/test/sdk-types.ts";
 import * as artifacts from "../src/artifacts.ts";
-import { setSpecGenSdkStatusImpl } from "../src/spec-gen-sdk-status.ts";
-import { createMockCore, createMockGithub } from "./mocks.ts";
+import * as inputs from "../src/context.ts";
+import setSpecGenSdkStatus, { setSpecGenSdkStatusImpl } from "../src/spec-gen-sdk-status.ts";
+import { createMockContext, createMockCore, createMockGithub } from "./mocks.ts";
 
 describe("spec-gen-sdk-status", () => {
   let mockGithub: ReturnType<typeof createMockGithub>;
@@ -412,5 +413,208 @@ describe("spec-gen-sdk-status", () => {
     // Outputs should still be set for downstream artifact upload steps.
     expect(mockCore.setOutput).toBeCalledWith("head_sha", "testSha");
     expect(mockCore.setOutput).toBeCalledWith("issue_number", 123);
+  });
+
+  describe("private repository GitHub-only aggregation", () => {
+    async function setPrivateStatus() {
+      await setSpecGenSdkStatusImpl({
+        owner: "Azure",
+        repo: "azure-rest-api-specs-pr",
+        head_sha: "testSha",
+        target_url: "https://example.com",
+        github: mockGithub,
+        core: mockCore,
+        issue_number: 123,
+      });
+    }
+
+    it("uses configured requiredness without downloading ADO artifacts", async () => {
+      mockGithub.rest.checks.listForRef.mockResolvedValue({
+        data: {
+          check_runs: [
+            {
+              app: { name: "Azure Pipelines" },
+              name: "SDK Validation - Go - PR",
+              status: "completed",
+              conclusion: "success",
+              details_url: null,
+            },
+            ...["Rust", "JS Provisioning Libraries", ".NET Provisioning Libraries"].map(
+              (language) => ({
+                app: { name: "Azure Pipelines" },
+                name: `SDK Validation - ${language} - PR`,
+                status: "completed",
+                conclusion: "failure",
+              }),
+            ),
+            {
+              app: { name: "Another App" },
+              name: "SDK Validation - Go - PR",
+              status: "completed",
+              conclusion: "failure",
+            },
+            {
+              app: { name: "Azure Pipelines" },
+              name: "Other Validation",
+              status: "completed",
+              conclusion: "failure",
+            },
+          ],
+        },
+      });
+
+      await setPrivateStatus();
+
+      expect(mockGithub.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+        expect.objectContaining({ state: "success", sha: "testSha" }),
+      );
+      expect(mockGithub.rest.checks.listForRef).toHaveBeenCalledWith(
+        expect.objectContaining({ ref: "testSha", filter: "latest", per_page: 100 }),
+      );
+      expect(getAzurePipelineArtifactMock).not.toHaveBeenCalled();
+      const summary: unknown = mockCore.summary.addRaw.mock.calls[0][0];
+      expect(summary).toContain("| Go | success | true |");
+      expect(summary).toContain("| Rust | failure | false |");
+      expect(summary).toContain("| JS Provisioning | failure | false |");
+      expect(summary).toContain("| .NET Provisioning | failure | false |");
+    });
+
+    it.each(["failure", "cancelled", null])(
+      "fails a required check with conclusion %s",
+      async (conclusion) => {
+        mockGithub.rest.checks.listForRef.mockResolvedValue({
+          data: {
+            check_runs: [
+              {
+                app: { name: "Azure Pipelines" },
+                name: "SDK Validation - .NET - PR",
+                status: "completed",
+                conclusion,
+              },
+            ],
+          },
+        });
+
+        await setPrivateStatus();
+
+        expect(mockGithub.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+          expect.objectContaining({
+            state: "failure",
+            description: "SDK Validation failed for .NET",
+          }),
+        );
+        expect(getAzurePipelineArtifactMock).not.toHaveBeenCalled();
+      },
+    );
+
+    it("accepts neutral and skipped required checks", async () => {
+      mockGithub.rest.checks.listForRef.mockResolvedValue({
+        data: {
+          check_runs: [
+            {
+              app: { name: "Azure Pipelines" },
+              name: "SDK Validation - Java - PR",
+              status: "completed",
+              conclusion: "neutral",
+            },
+            {
+              app: { name: "Azure Pipelines" },
+              name: "SDK Validation - Python",
+              status: "completed",
+              conclusion: "skipped",
+            },
+          ],
+        },
+      });
+
+      await setPrivateStatus();
+
+      expect(mockGithub.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+        expect.objectContaining({ state: "success" }),
+      );
+    });
+
+    it("waits for optional checks to finish too", async () => {
+      mockGithub.rest.checks.listForRef.mockResolvedValue({
+        data: {
+          check_runs: [
+            {
+              app: { name: "Azure Pipelines" },
+              name: "SDK Validation - Go - PR",
+              status: "completed",
+              conclusion: "success",
+            },
+            {
+              app: { name: "Azure Pipelines" },
+              name: "SDK Validation - Rust - PR",
+              status: "in_progress",
+              conclusion: null,
+            },
+          ],
+        },
+      });
+
+      await setPrivateStatus();
+
+      expect(mockGithub.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+        expect.objectContaining({ state: "pending" }),
+      );
+      expect(getAzurePipelineArtifactMock).not.toHaveBeenCalled();
+    });
+
+    it("rejects unconfigured SDK checks instead of silently exempting them", async () => {
+      mockGithub.rest.checks.listForRef.mockResolvedValue({
+        data: {
+          check_runs: [
+            {
+              app: { name: "Azure Pipelines" },
+              name: "SDK Validation - New Language - PR",
+              status: "completed",
+              conclusion: "success",
+            },
+          ],
+        },
+      });
+
+      await expect(setPrivateStatus()).rejects.toThrow("has no policy");
+      expect(mockGithub.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+      expect(getAzurePipelineArtifactMock).not.toHaveBeenCalled();
+    });
+
+    it("reevaluates reopened PRs without an ADO details URL", async () => {
+      const extractInputsMock = vi.spyOn(inputs, "extractInputs").mockResolvedValue({
+        owner: "Azure",
+        repo: "azure-rest-api-specs-pr",
+        head_sha: "testSha",
+        issue_number: 123,
+        run_id: NaN,
+      });
+      mockGithub.rest.checks.listForRef.mockResolvedValue({
+        data: {
+          check_runs: [
+            {
+              app: { name: "Azure Pipelines" },
+              name: "SDK Validation - Go - PR",
+              status: "completed",
+              conclusion: "success",
+            },
+          ],
+        },
+      });
+
+      try {
+        await setSpecGenSdkStatus({
+          github: mockGithub,
+          core: mockCore,
+          context: createMockContext(),
+        });
+      } finally {
+        extractInputsMock.mockRestore();
+      }
+
+      expect(mockGithub.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+        expect.objectContaining({ state: "success", sha: "testSha" }),
+      );
+    });
   });
 });

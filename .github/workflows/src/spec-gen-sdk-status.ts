@@ -1,4 +1,12 @@
-import { CheckStatus, CommitStatusState, PER_PAGE_MAX } from "../../shared/src/github.ts";
+import { readFileSync } from "node:fs";
+import { parse as parseYaml } from "yaml";
+import * as z from "zod";
+import {
+  CheckConclusion,
+  CheckStatus,
+  CommitStatusState,
+  PER_PAGE_MAX,
+} from "../../shared/src/github.ts";
 import { SpecGenSdkArtifactInfoSchema } from "../../shared/src/sdk-types.ts";
 import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.ts";
 import { extractInputs } from "./context.ts";
@@ -11,12 +19,9 @@ export default async function setSpecGenSdkStatus({
 }: GitHubScriptArgs): Promise<void> {
   const inputs = await extractInputs(github, context, core);
   const head_sha = inputs.head_sha;
-  const details_url = inputs.details_url;
   const issue_number = inputs.issue_number;
-  if (!details_url || !head_sha) {
-    throw new Error(
-      `Required inputs are not valid: details_url:${details_url}, head_sha:${head_sha}`,
-    );
+  if (!head_sha) {
+    throw new Error(`Required input is not valid: head_sha:${head_sha}`);
   }
   const owner = inputs.owner;
   const repo = inputs.repo;
@@ -60,6 +65,7 @@ export async function setSpecGenSdkStatusImpl({
     owner,
     repo,
     ref: head_sha,
+    filter: "latest",
     per_page: PER_PAGE_MAX,
   });
 
@@ -107,10 +113,10 @@ export async function setSpecGenSdkStatusImpl({
     });
   } else {
     // All checks are completed, check their conclusions
-    const result = await processResult({
-      checkRuns: specGenSdkChecks,
-      core,
-    });
+    const result =
+      repo === "azure-rest-api-specs-pr"
+        ? await processGitHubResult({ checkRuns: specGenSdkChecks, core })
+        : await processResult({ checkRuns: specGenSdkChecks, core });
 
     core.info(`All SDK Validation checks completed. Setting status to ${result.state}.`);
 
@@ -124,6 +130,60 @@ export async function setSpecGenSdkStatusImpl({
       target_url,
     });
   }
+}
+
+async function processGitHubResult({
+  checkRuns,
+  core,
+}: {
+  checkRuns: CheckRuns;
+  core: Core;
+}): Promise<{ state: CommitStatusState; description: string }> {
+  const requiredChecks = z
+    .record(z.string(), z.boolean())
+    .parse(
+      parseYaml(readFileSync(new URL("../../sdk-validation-status.yaml", import.meta.url), "utf8")),
+    );
+  const failedChecks: string[] = [];
+  let summaryContent = "## SDK Validation CI Checks Result\n\n";
+  summaryContent += "Results come from GitHub check conclusions; no ADO artifacts are read.\n\n";
+  summaryContent += "| Check | Conclusion | Required Check |\n";
+  summaryContent += "|-------|------------|---------------|\n";
+
+  for (const check of checkRuns) {
+    const name = check.name.replace(/ - PR$/, "");
+    const required = requiredChecks[name];
+    if (required === undefined) {
+      throw new Error(
+        `SDK Validation check '${check.name}' has no policy in .github/sdk-validation-status.yaml`,
+      );
+    }
+
+    const passed =
+      check.conclusion === CheckConclusion.SUCCESS ||
+      check.conclusion === CheckConclusion.NEUTRAL ||
+      check.conclusion === CheckConclusion.SKIPPED;
+    const displayName = name.replace(/^SDK Validation - /, "").replace(/ Libraries$/, "");
+    if (required && !passed) {
+      failedChecks.push(displayName);
+    }
+    core.info(`${check.name}: ${check.conclusion} (required: ${required})`);
+    summaryContent += `| ${displayName} | ${check.conclusion ?? "missing"} | ${required} |\n`;
+  }
+
+  const state = failedChecks.length === 0 ? CommitStatusState.SUCCESS : CommitStatusState.FAILURE;
+  summaryContent +=
+    state === CommitStatusState.SUCCESS
+      ? "\nAll required SDK Validation GitHub checks passed.\n"
+      : `\nSDK Validation GitHub checks failed for: ${failedChecks.join(", ")}.\n`;
+  await core.summary.addRaw(summaryContent).write();
+  return {
+    state,
+    description:
+      state === CommitStatusState.SUCCESS
+        ? "SDK Validation CI checks succeeded"
+        : `SDK Validation failed for ${failedChecks.join(", ")}`.slice(0, 140),
+  };
 }
 
 async function processResult({
