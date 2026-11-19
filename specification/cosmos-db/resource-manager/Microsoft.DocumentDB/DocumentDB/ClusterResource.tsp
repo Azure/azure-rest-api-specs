@@ -129,7 +129,6 @@ interface ClusterResources {
   /**
    * Invoke a command like nodetool for cassandra maintenance asynchronously
    */
-  @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
   invokeCommandAsync is ArmResourceActionAsyncBase<
@@ -146,7 +145,6 @@ interface ClusterResources {
   /**
    * List all commands currently running on ring info
    */
-  @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
   @list
@@ -162,7 +160,6 @@ interface ClusterResources {
   /**
    * Get details about a specified command that was run asynchronously.
    */
-  @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
   @get
@@ -187,7 +184,6 @@ interface ClusterResources {
   /**
    * List the backups of this cluster that are available to restore.
    */
-  @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
   @list
@@ -203,7 +199,6 @@ interface ClusterResources {
   /**
    * Get the properties of an individual backup of this cluster that is available to restore.
    */
-  @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
   @get

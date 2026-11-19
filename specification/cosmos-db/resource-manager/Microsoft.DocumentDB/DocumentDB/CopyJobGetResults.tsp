@@ -16,7 +16,6 @@ namespace Microsoft.DocumentDB;
 /**
  * A Cosmos DB Copy Job
  */
-@added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @parentResource(DatabaseAccountGetResults)
 @added(Versions.v2026_04_01_preview)
@@ -33,7 +32,6 @@ model CopyJobGetResults is Azure.ResourceManager.ProxyResource<
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
 @armResourceOperations(#{ omitTags: true })
