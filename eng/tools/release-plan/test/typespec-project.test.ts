@@ -1134,40 +1134,43 @@ describe("TypeSpec project detection edge cases", () => {
     expect(listFiles).not.toHaveBeenCalled();
   });
 
-  it("skips PRs labeled to opt out of release plan automation", async () => {
-    const listPullRequestsAssociatedWithCommit = vi.fn().mockResolvedValueOnce({
-      data: [{ number: 654, merged_at: "2026-10-26T00:00:00Z", merge_commit_sha: "skip123" }],
-    });
-    const get = vi.fn().mockResolvedValueOnce({
-      data: { labels: [{ name: "Skip-ReleasePlan-Automation" }] },
-    });
-    const listFiles = vi.fn();
+  it.each(["skip-releaseplan-automation", "SKIP-RELEASEPLAN-AUTOMATION"])(
+    "skips PRs labeled %s",
+    async (label) => {
+      const listPullRequestsAssociatedWithCommit = vi.fn().mockResolvedValueOnce({
+        data: [{ number: 654, merged_at: "2026-10-26T00:00:00Z", merge_commit_sha: "skip123" }],
+      });
+      const get = vi.fn().mockResolvedValueOnce({
+        data: { labels: [{ name: label }] },
+      });
+      const listFiles = vi.fn();
 
-    const result = await getTypeSpecProjectInfoFromCommit({
-      commitSha: "skip123",
-      owner: "Azure",
-      repo: "azure-rest-api-specs",
-      workspace,
-      octokit: {
-        rest: {
-          pulls: {
-            get,
-            listFiles,
-          },
-          repos: {
-            listPullRequestsAssociatedWithCommit,
-            getCommit: vi.fn(),
+      const result = await getTypeSpecProjectInfoFromCommit({
+        commitSha: "skip123",
+        owner: "Azure",
+        repo: "azure-rest-api-specs",
+        workspace,
+        octokit: {
+          rest: {
+            pulls: {
+              get,
+              listFiles,
+            },
+            repos: {
+              listPullRequestsAssociatedWithCommit,
+              getCommit: vi.fn(),
+            },
           },
         },
-      },
-    });
+      });
 
-    expect(result.skipReleasePlanAutomation).toBe(true);
-    expect(result.projectInfo).toBeNull();
-    expect(result.prNumber).toBe(654);
-    expect(result.hasNewApiVersionLabel).toBe(false);
-    expect(listFiles).not.toHaveBeenCalled();
-  });
+      expect(result.skipReleasePlanAutomation).toBe(true);
+      expect(result.projectInfo).toBeNull();
+      expect(result.prNumber).toBe(654);
+      expect(result.hasNewApiVersionLabel).toBe(false);
+      expect(listFiles).not.toHaveBeenCalled();
+    },
+  );
 
   it("ignores renamed files when detecting the API version", async () => {
     const projectPath = join(workspace, "specification/bar");

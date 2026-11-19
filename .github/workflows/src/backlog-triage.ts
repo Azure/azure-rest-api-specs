@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { escapeMarkdown } from "../../shared/src/markdown.ts";
 import type { GitHubScriptArgs } from "./github.ts";
+import { reportWorkflowFailure } from "./report-workflow-failure.ts";
 
 export const BATCH_SIZE = 5;
 export const STATE_BRANCH = "automation/backlog-triage";
@@ -283,7 +284,7 @@ export function parseSelection(value: unknown): Selection[] {
   return result;
 }
 
-export function parseDecisions(output: unknown, selection: Selection[]): Decision[] {
+export function parseDecisions(output: unknown, selection: Selection[]) {
   if (
     !record(output) ||
     !Array.isArray(output.items) ||
@@ -298,58 +299,79 @@ export function parseDecisions(output: unknown, selection: Selection[]): Decisio
     throw new Error("Expected one checkpoint per completed issue, within the selected batch");
   }
   const seen = new Set<number>();
-  return calls.map((call): Decision => {
-    if (!record(call) || typeof call.decision !== "string") {
-      throw new Error("Each checkpoint must contain a decision JSON string");
-    }
-    const item: unknown = JSON.parse(call.decision);
-    if (
-      !record(item) ||
-      typeof item.number !== "number" ||
-      !selection.some((issue) => issue.number === item.number) ||
-      seen.has(item.number) ||
-      !isAction(item.action) ||
-      !["high", "medium", "low"].includes(String(item.confidence)) ||
-      !text(item.rationale) ||
-      !Array.isArray(item.evidence) ||
-      item.evidence.length > 8
-    ) {
-      throw new Error("Invalid or out-of-batch triage decision");
-    }
-    const evidence = item.evidence.map((url: unknown) => {
-      if (!text(url, 2000)) throw new Error("Invalid evidence URL");
-      const parsed = new URL(url);
-      if (parsed.protocol !== "https:" || parsed.username || parsed.password) {
-        throw new Error("Evidence must be a public HTTPS URL without credentials");
+  const decisions: Decision[] = [];
+  const errors: string[] = [];
+  const warnings: string[] = [];
+  for (const [index, item] of calls.entries()) {
+    try {
+      if (
+        !record(item) ||
+        typeof item.number !== "number" ||
+        !selection.some((issue) => issue.number === item.number) ||
+        seen.has(item.number) ||
+        !isAction(item.action) ||
+        !["high", "medium", "low"].includes(String(item.confidence)) ||
+        !text(item.rationale) ||
+        typeof item.evidence !== "string"
+      ) {
+        throw new Error("Invalid or out-of-batch triage decision");
       }
-      return parsed.href.replaceAll("<", "%3C").replaceAll(">", "%3E");
-    });
-    if (isClosure(item.action) && (item.confidence !== "high" || !evidence.length)) {
-      throw new Error("Closing an issue requires high confidence and evidence");
+      const number = item.number;
+      const urls = item.evidence
+        .split("\n")
+        .map((url) => url.trim())
+        .filter(Boolean);
+      if (urls.length > 8) throw new Error("Expected at most eight evidence URLs");
+      const evidence = urls
+        .filter((url) => {
+          if (/^\((?:[\w.]+\/)?redacted\)$/.test(url)) {
+            warnings.push(
+              `Issue ${number}: omitted evidence URL redacted by safe-output ingestion.`,
+            );
+            return false;
+          }
+          return true;
+        })
+        .map((url) => {
+          if (!text(url, 2000)) throw new Error("Invalid evidence URL");
+          const parsed = new URL(url);
+          if (parsed.protocol !== "https:" || parsed.username || parsed.password) {
+            throw new Error("Evidence must be a public HTTPS URL without credentials");
+          }
+          return parsed.href.replaceAll("<", "%3C").replaceAll(">", "%3E");
+        });
+      if (isClosure(item.action) && (item.confidence !== "high" || !evidence.length)) {
+        throw new Error("Closing an issue requires high confidence and evidence");
+      }
+      if (item.action === "needs_author_feedback" && !text(item.question, 1000)) {
+        throw new Error("Author feedback requires a specific question");
+      }
+      if (
+        item.action === "duplicate" &&
+        (typeof item.duplicateOf !== "number" ||
+          !Number.isSafeInteger(item.duplicateOf) ||
+          item.duplicateOf < 1 ||
+          item.duplicateOf === item.number)
+      ) {
+        throw new Error("A duplicate requires a different canonical issue number");
+      }
+      seen.add(item.number);
+      decisions.push({
+        number: item.number,
+        action: item.action,
+        confidence: item.confidence as Decision["confidence"],
+        rationale: item.rationale,
+        evidence,
+        ...(item.action === "needs_author_feedback" ? { question: String(item.question) } : {}),
+        ...(item.action === "duplicate" ? { duplicateOf: Number(item.duplicateOf) } : {}),
+      });
+    } catch (error) {
+      errors.push(
+        `Checkpoint ${index + 1}: ${error instanceof Error ? error.message : String(error)}`,
+      );
     }
-    if (item.action === "needs_author_feedback" && !text(item.question, 1000)) {
-      throw new Error("Author feedback requires a specific question");
-    }
-    if (
-      item.action === "duplicate" &&
-      (typeof item.duplicateOf !== "number" ||
-        !Number.isSafeInteger(item.duplicateOf) ||
-        item.duplicateOf < 1 ||
-        item.duplicateOf === item.number)
-    ) {
-      throw new Error("A duplicate requires a different canonical issue number");
-    }
-    seen.add(item.number);
-    return {
-      number: item.number,
-      action: item.action,
-      confidence: item.confidence as Decision["confidence"],
-      rationale: item.rationale,
-      evidence,
-      ...(item.action === "needs_author_feedback" ? { question: String(item.question) } : {}),
-      ...(item.action === "duplicate" ? { duplicateOf: Number(item.duplicateOf) } : {}),
-    };
-  });
+  }
+  return { decisions, errors, warnings };
 }
 
 export async function applyBacklogTriage(
@@ -359,8 +381,10 @@ export async function applyBacklogTriage(
   staged: boolean,
   now = new Date(),
 ) {
-  const decisions = parseDecisions(output, selection);
+  const { decisions, errors, warnings } = parseDecisions(output, selection);
   const { github, context, core } = args;
+  for (const warning of warnings) core.warning(warning);
+  for (const error of errors) core.error(error);
   const pending = selection.filter(
     (issue) => !decisions.some((item) => item.number === issue.number),
   );
@@ -477,9 +501,23 @@ export async function applyBacklogTriage(
       )
       .write();
   }
-  if (record(output) && Array.isArray(output.errors) && output.errors.length > 0) {
+  const rejected =
+    errors.length + (record(output) && Array.isArray(output.errors) ? output.errors.length : 0);
+  if (rejected > 0) {
     core.setFailed(
-      `Safe-output collection rejected ${output.errors.length} item(s). Accepted checkpoints were processed; inspect agent_output.json errors for the rejected outputs.`,
+      `Safe-output collection rejected ${rejected} item(s). Accepted checkpoints were processed; inspect the job log and agent_output.json errors for the rejected outputs.`,
     );
   }
+}
+
+export async function reportBacklogTriageFailure(args: GitHubScriptArgs) {
+  return reportWorkflowFailure(args, {
+    marker: "<!-- backlog-triage-failure -->",
+    legacyMarker: "<!-- gh-aw-agentic-workflow: Backlog Triage,",
+    title: "[aw] Failed jobs: Backlog Triage",
+    description:
+      "Backlog triage failed. Completed valid checkpoints may already have been applied.",
+    guidance:
+      "Inspect the failed job logs and agent output artifacts. Fix the failure and rerun backlog triage; rejected or unfinished issues remain eligible.",
+  });
 }
