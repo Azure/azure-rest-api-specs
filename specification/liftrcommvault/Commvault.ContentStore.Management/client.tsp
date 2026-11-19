@@ -244,6 +244,34 @@ using Commvault.ContentStore;
   "csharp"
 );
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "UserAssignedIdentity exposes only read-only principalId and clientId response metadata, so UpdateableProperties removes both fields and intentionally produces an empty PATCH value model; in the userAssignedIdentities map, resource ID keys identify identities, empty-object values assign them, and null values remove them."
+@doc("User-assigned identity details supplied in a cloud account PATCH.")
+model CloudAccountUserAssignedIdentity {
+  ...UpdateableProperties<Azure.ResourceManager.CommonTypes.UserAssignedIdentity>;
+}
+
+@doc("Managed service identity details supplied in a cloud account PATCH.")
+model JavaScriptCloudAccountIdentityUpdate {
+  @doc("The type of managed identity assigned to this resource.")
+  type?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Preserves the userAssignedIdentities dictionary defined by Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, including nullable values keyed by identity resource IDs; this JavaScript-only customization changes the SDK model naming, not the REST contract."
+  @doc("The identities assigned to this resource by the user.")
+  userAssignedIdentities?: Record<CloudAccountUserAssignedIdentity | null>;
+}
+
+@@clientName(
+  JavaScriptCloudAccountIdentityUpdate,
+  "CloudAccountIdentityUpdate",
+  "javascript"
+);
+
+@@alternateType(
+  Commvault.ContentStore.CloudAccountIdentityUpdate,
+  JavaScriptCloudAccountIdentityUpdate,
+  "javascript"
+);
+
 // Use descriptive names consistently for related models and operations.
 @@clientName(BackupLevel, "CommvaultBackupLevel", "csharp");
 @@clientName(BackupRuleType, "CommvaultBackupRuleType", "csharp");

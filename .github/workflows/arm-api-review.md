@@ -2,7 +2,7 @@
 description: >
   Automatically review Azure REST API specification pull requests for
   conformance to ARM RPC rules and Azure REST API Guidelines. Triggers
-  initially after Summarize Checks establishes WaitForARMFeedback, or when that label is
+  for each newly ready head after Summarize Checks establishes WaitForARMFeedback, or when that label is
   explicitly added; re-reviews when ARMChangesRequested is removed;
   on demand via the /arm-review comment command.
 run-name: "ARM API Review #${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }} (${{ github.event_name }})"
@@ -41,7 +41,7 @@ on:
         required: false
         type: string
       reservation_url:
-        description: "Queued semantic-status URL from the automatic initial-review dispatcher"
+        description: "Queued semantic-status URL from the automatic per-head review dispatcher"
         required: false
         type: string
   permissions:
@@ -174,7 +174,7 @@ on:
   # the workflow; a maintainer must apply the `WaitForARMFeedback` label or run
   # `/arm-review`. This replaces the former hand-rolled collaborator check.
   roles: [admin, maintainer, write]
-  # Summarize Checks dispatches the initial review with GITHUB_TOKEN after readiness reconciliation.
+  # Summarize Checks dispatches each newly ready head with GITHUB_TOKEN after readiness reconciliation.
   # Bots do not have repository roles, so this explicit grant permits that
   # trusted handoff. The exact command gate below keeps
   # unrelated github-actions comments from activating the agent.
@@ -333,6 +333,7 @@ safe-outputs:
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
   submit-pull-request-review:
     max: 1
+    allowed-events: [COMMENT]
     footer: "if-body"
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
   # Autonomous mode: reply to and resolve trusted workflow-owned threads
@@ -958,6 +959,10 @@ verify that `head.sha` still equals the pinned session SHA. If it changed, do
 not post or mutate threads; follow the Step 5.6 restart path. Then post each
 finding as a `create-pull-request-review-comment` (inline) or `add-comment`
 (PR-level for summary), and call `submit-pull-request-review`.
+
+Always submit with `event: COMMENT`, including clean reviews. Never submit
+`APPROVE` or `REQUEST_CHANGES`; the semantic status and Step 7 labels carry
+the ARM review decision.
 
 The `submit-pull-request-review` body is **REQUIRED and MUST be non-empty**. The
 safe-output schema does not enforce this, so an empty body is accepted and

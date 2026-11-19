@@ -1,0 +1,169 @@
+{
+  "title": "PolicyGroups_CreateOrUpdate_TlsInspection_Rules",
+  "operationId": "PolicyGroups_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-11-03-preview",
+    "subscriptionId": "11809CA1-E126-4017-945E-AA795CD5C5A9",
+    "resourceGroupName": "rgnetworksecurity",
+    "policyGroupName": "tlsRulesPolicyGroup",
+    "resource": {
+      "location": "eastus",
+      "tags": {
+        "env": "test"
+      },
+      "properties": {
+        "displayName": "TLS Inspection Rules Policy Group",
+        "description": "Inspect only selected destinations; bypass the rest",
+        "priority": 100,
+        "networkSecurityPolicies": [
+          {
+            "type": "TlsInspection",
+            "source": {
+              "type": "WorkloadIdPatterns",
+              "patterns": [
+                "spiffe://contoso.com/ns/default/sa/*"
+              ]
+            },
+            "certificate": {
+              "mode": "AzureManagedCA"
+            },
+            "defaultAction": "Bypass",
+            "rules": [
+              {
+                "name": "inspectContosoApi",
+                "priority": 100,
+                "action": "Inspect",
+                "destinations": [
+                  {
+                    "type": "Fqdns",
+                    "fqdns": [
+                      "api.contoso.com",
+                      "*.contoso.net"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "displayName": "TLS Inspection Rules Policy Group",
+          "description": "Inspect only selected destinations; bypass the rest",
+          "priority": 100,
+          "networkSecurityPolicies": [
+            {
+              "type": "TlsInspection",
+              "source": {
+                "type": "WorkloadIdPatterns",
+                "patterns": [
+                  "spiffe://contoso.com/ns/default/sa/*"
+                ]
+              },
+              "certificate": {
+                "mode": "AzureManagedCA"
+              },
+              "defaultAction": "Bypass",
+              "rules": [
+                {
+                  "name": "inspectContosoApi",
+                  "priority": 100,
+                  "action": "Inspect",
+                  "destinations": [
+                    {
+                      "type": "Fqdns",
+                      "fqdns": [
+                        "api.contoso.com",
+                        "*.contoso.net"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.NetworkSecurity/policyGroups/tlsRulesPolicyGroup",
+        "name": "tlsRulesPolicyGroup",
+        "type": "Microsoft.NetworkSecurity/policyGroups",
+        "location": "eastus",
+        "tags": {
+          "env": "test"
+        },
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2025-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-01-01T00:00:00.000Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/providers/Microsoft.NetworkSecurity/locations/westus3/operationStatuses/00000000-0000-0000-0000-000000000001?api-version=2026-11-03-preview"
+      },
+      "body": {
+        "properties": {
+          "displayName": "TLS Inspection Rules Policy Group",
+          "description": "Inspect only selected destinations; bypass the rest",
+          "priority": 100,
+          "networkSecurityPolicies": [
+            {
+              "type": "TlsInspection",
+              "source": {
+                "type": "WorkloadIdPatterns",
+                "patterns": [
+                  "spiffe://contoso.com/ns/default/sa/*"
+                ]
+              },
+              "certificate": {
+                "mode": "AzureManagedCA"
+              },
+              "defaultAction": "Bypass",
+              "rules": [
+                {
+                  "name": "inspectContosoApi",
+                  "priority": 100,
+                  "action": "Inspect",
+                  "destinations": [
+                    {
+                      "type": "Fqdns",
+                      "fqdns": [
+                        "api.contoso.com",
+                        "*.contoso.net"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.NetworkSecurity/policyGroups/tlsRulesPolicyGroup",
+        "name": "tlsRulesPolicyGroup",
+        "type": "Microsoft.NetworkSecurity/policyGroups",
+        "location": "eastus",
+        "tags": {
+          "env": "test"
+        },
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2025-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-01-01T00:00:00.000Z"
+        }
+      }
+    }
+  }
+}
