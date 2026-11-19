@@ -309,6 +309,16 @@ stages:
               npm_config_userconfig: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
               TYPESPEC_EMITTER: $(TypeSpecEmitter)
 
+          # Immutable attempt-specific metadata for the isolated private-repo publisher.
+          # Keep the existing artifacts/native checks unchanged.
+          - ${{ if and(eq(variables['System.TeamProject'], 'internal'), eq(variables['Build.Repository.Name'], 'Azure/azure-rest-api-specs-pr'), eq(variables['Build.Reason'], 'PullRequest')) }}:
+              - task: PublishPipelineArtifact@1
+                displayName: "Publish private SDK metadata transport input"
+                condition: and(succeededOrFailed(), ne(variables['SpecGenSdkArtifactName'], ''))
+                inputs:
+                  artifactName: spec-gen-sdk-metadata-$(System.StageAttempt)-$(System.JobAttempt)
+                  path: "$(System.DefaultWorkingDirectory)/$(SpecGenSdkArtifactPath)/spec-gen-sdk-artifact.json"
+
           - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
             parameters:
               ArtifactName: $(SpecGenSdkArtifactName)

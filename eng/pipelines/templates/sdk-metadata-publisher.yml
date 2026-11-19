@@ -1,0 +1,91 @@
+# Use as an extends template from a protected PUBLIC specs publisher pipeline,
+# never from the source PR pipeline. See eng/tools/spec-gen-sdk-runner/sdk-metadata.md.
+parameters:
+  - name: SourceBuildId
+    type: string
+  - name: AzureServiceConnection
+    type: string
+  - name: PublisherEnvironment
+    type: string
+
+lockBehavior: sequential
+
+jobs:
+  - deployment: PublishSdkMetadata
+    displayName: Publish private SDK check metadata
+    environment: ${{ parameters.PublisherEnvironment }}
+    pool:
+      vmImage: ubuntu-latest
+    workspace:
+      clean: all
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - download: none
+            - checkout: self
+              clean: true
+              persistCredentials: false
+              fetchDepth: 1
+              sparseCheckoutDirectories: .github eng libs
+            - pwsh: |
+                if ($env:BUILD_REPOSITORY_NAME -cne 'Azure/azure-rest-api-specs' -or
+                    $env:BUILD_SOURCEBRANCH -cne 'refs/heads/main') {
+                  throw 'Publisher must execute protected public specs main, never PR code.'
+                }
+                $required = @(
+                  'SDK_METADATA_COLLECTION_URI', 'SDK_METADATA_PROJECT_ID',
+                  'SDK_METADATA_DEFINITION_IDS', 'SDK_METADATA_PUBLISHER_APP_ID',
+                  'SDK_METADATA_KEY_VAULT', 'SDK_METADATA_KEY_NAME'
+                )
+                foreach ($name in $required) {
+                  $value = [Environment]::GetEnvironmentVariable($name)
+                  if ([string]::IsNullOrWhiteSpace($value) -or $value.Contains('$(')) {
+                    throw "Missing protected publisher configuration: $name"
+                  }
+                }
+              displayName: Validate trusted publisher configuration
+              env:
+                SDK_METADATA_COLLECTION_URI: $(SdkMetadataCollectionUri)
+                SDK_METADATA_PROJECT_ID: $(SdkMetadataProjectId)
+                SDK_METADATA_DEFINITION_IDS: $(SdkMetadataDefinitionIds)
+                SDK_METADATA_PUBLISHER_APP_ID: $(SdkMetadataPublisherAppId)
+                SDK_METADATA_KEY_VAULT: $(SdkMetadataKeyVault)
+                SDK_METADATA_KEY_NAME: $(SdkMetadataKeyName)
+            - task: UseNode@1
+              inputs:
+                version: 24.x
+            - script: |
+                set -euo pipefail
+                npm run install-pnpm
+                pnpm install --frozen-lockfile --ignore-scripts
+              displayName: Install trusted publisher dependencies
+              workingDirectory: $(Build.SourcesDirectory)
+            - task: AzureCLI@2
+              displayName: Mint dedicated metadata writer token
+              inputs:
+                azureSubscription: ${{ parameters.AzureServiceConnection }}
+                scriptType: pscore
+                scriptLocation: inlineScript
+                inlineScript: |
+                  & ./eng/common/scripts/login-to-github.ps1 `
+                    -GitHubAppId $env:SDK_METADATA_PUBLISHER_APP_ID `
+                    -KeyVaultName $env:SDK_METADATA_KEY_VAULT `
+                    -KeyName $env:SDK_METADATA_KEY_NAME `
+                    -InstallationTokenOwners Azure
+              env:
+                SDK_METADATA_PUBLISHER_APP_ID: $(SdkMetadataPublisherAppId)
+                SDK_METADATA_KEY_VAULT: $(SdkMetadataKeyVault)
+                SDK_METADATA_KEY_NAME: $(SdkMetadataKeyName)
+                GITHUB_TOKEN_REQUEST: '{"repositories":["azure-rest-api-specs-pr"],"permissions":{"checks":"write"}}'
+            - script: node eng/tools/spec-gen-sdk-runner/src/publish-sdk-metadata-cli.ts
+              displayName: Publish immutable SDK metadata companion check
+              workingDirectory: $(Build.SourcesDirectory)
+              env:
+                SDK_METADATA_COLLECTION_URI: $(SdkMetadataCollectionUri)
+                SDK_METADATA_PROJECT_ID: $(SdkMetadataProjectId)
+                SDK_METADATA_DEFINITION_IDS: $(SdkMetadataDefinitionIds)
+                SDK_METADATA_PUBLISHER_APP_ID: $(SdkMetadataPublisherAppId)
+                SDK_METADATA_BUILD_ID: ${{ parameters.SourceBuildId }}
+                SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+                GH_TOKEN: $(GH_TOKEN)
