@@ -50619,6 +50619,52 @@
         ],
         "description": "An MCP tool stored in a toolbox."
       },
+      "ManagedAgentAdaptiveThinking": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "adaptive"
+            ],
+            "description": "The thinking-mode discriminator."
+          },
+          "display": {
+            "$ref": "#/components/schemas/ManagedAgentThinkingDisplay",
+            "description": "Supported thinking presentation; updates requires provider beta support."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ManagedAgentThinkingBase"
+          }
+        ],
+        "description": "Model-selected thinking."
+      },
+      "ManagedAgentBetweenToolsThinking": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "between_tools"
+            ],
+            "description": "The thinking-mode discriminator."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ManagedAgentThinkingBase"
+          }
+        ],
+        "description": "Between-tools thinking on a model that supports it; no budget or display fields."
+      },
       "ManagedAgentCompaction": {
         "type": "object",
         "properties": {
@@ -50631,10 +50677,16 @@
                 "type": "null"
               }
             ],
-            "description": "Whether compaction runs in the background. Omission and null do not imply a common harness default."
+            "description": "True requests background compaction; false requests blocking compaction, not disabled compaction. Provider threshold and pause controls are not equivalent. Omission and null do not imply a common harness default."
+          },
+          "token_threshold": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "Input-context token threshold for requesting compaction, measured with the selected model's tokenizer. Validate provider limits and scheduling support; this is not a hard context-size cap."
           }
         },
-        "description": "Shared compaction configuration, validated against the selected harness."
+        "description": "Shared harness orchestration, not a provider request body. Accept only modes the selected harness and model adapter implement."
       },
       "ManagedAgentDefinition": {
         "type": "object",
@@ -50656,8 +50708,8 @@
             "description": "A model deployment compatible with the selected harness."
           },
           "harness": {
-            "$ref": "#/components/schemas/ManagedGitHubCopilotHarness",
-            "description": "Typed harness-specific configuration. Private preview supports GitHub Copilot."
+            "$ref": "#/components/schemas/ManagedMicrosoftCopilotHarness",
+            "description": "Typed harness-specific configuration. Private preview supports Microsoft Copilot."
           },
           "instructions": {
             "type": "string",
@@ -50666,6 +50718,28 @@
           "reasoning": {
             "$ref": "#/components/schemas/ManagedAgentReasoning",
             "description": "Shared reasoning settings, validated against the selected model and harness."
+          },
+          "text": {
+            "$ref": "#/components/schemas/ManagedAgentTextConfig",
+            "description": "Shared output-format settings. Provider-specific verbosity belongs in model_configurations.text."
+          },
+          "max_output_tokens": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "Maximum generated tokens per model call, including reasoning/thinking, not a whole-turn budget. Validate the selected model's limits."
+          },
+          "tool_choice": {
+            "$ref": "#/components/schemas/ManagedAgentToolChoice",
+            "description": "Shared tool-selection intent. Forced choices require a supported model and an authorized declared function."
+          },
+          "parallel_tool_calls": {
+            "type": "boolean",
+            "description": "Whether a model response may contain multiple tool calls. False permits at most one; true does not require multiple calls or parallel execution."
+          },
+          "model_configurations": {
+            "$ref": "#/components/schemas/ManagedAgentModelConfigurations",
+            "description": "Flat provider-specific controls selected by model, not provider-keyed blocks or overrides of common fields. Reject unknown, misplaced, incompatible or unsupported settings."
           },
           "compaction": {
             "anyOf": [
@@ -50716,6 +50790,27 @@
           ]
         }
       },
+      "ManagedAgentDisabledThinking": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "disabled"
+            ],
+            "description": "The thinking-mode discriminator."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ManagedAgentThinkingBase"
+          }
+        ],
+        "description": "Disabled thinking, without presentation or budget fields."
+      },
       "ManagedAgentExecutableConfig": {
         "type": "object",
         "required": [
@@ -50728,8 +50823,8 @@
             "description": "A model deployment compatible with the selected harness."
           },
           "harness": {
-            "$ref": "#/components/schemas/ManagedGitHubCopilotHarness",
-            "description": "Typed harness-specific configuration. Private preview supports GitHub Copilot."
+            "$ref": "#/components/schemas/ManagedMicrosoftCopilotHarness",
+            "description": "Typed harness-specific configuration. Private preview supports Microsoft Copilot."
           },
           "instructions": {
             "type": "string",
@@ -50738,6 +50833,28 @@
           "reasoning": {
             "$ref": "#/components/schemas/ManagedAgentReasoning",
             "description": "Shared reasoning settings, validated against the selected model and harness."
+          },
+          "text": {
+            "$ref": "#/components/schemas/ManagedAgentTextConfig",
+            "description": "Shared output-format settings. Provider-specific verbosity belongs in model_configurations.text."
+          },
+          "max_output_tokens": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "Maximum generated tokens per model call, including reasoning/thinking, not a whole-turn budget. Validate the selected model's limits."
+          },
+          "tool_choice": {
+            "$ref": "#/components/schemas/ManagedAgentToolChoice",
+            "description": "Shared tool-selection intent. Forced choices require a supported model and an authorized declared function."
+          },
+          "parallel_tool_calls": {
+            "type": "boolean",
+            "description": "Whether a model response may contain multiple tool calls. False permits at most one; true does not require multiple calls or parallel execution."
+          },
+          "model_configurations": {
+            "$ref": "#/components/schemas/ManagedAgentModelConfigurations",
+            "description": "Flat provider-specific controls selected by model, not provider-keyed blocks or overrides of common fields. Reject unknown, misplaced, incompatible or unsupported settings."
           },
           "compaction": {
             "anyOf": [
@@ -50776,7 +50893,29 @@
             "description": "Authorized versioned Foundry Skill references."
           }
         },
-        "description": "Executable fields shared by a saved Managed definition and a complete inline definition.\nReasoning, compaction, and subagent controls are shared; other harness-specific settings belong in harness."
+        "description": "Executable fields shared by a saved Managed definition and a complete inline definition.\nMappable model controls stay here. Provider-specific model controls belong in model_configurations;\nexecution-specific settings belong in harness. Shared placement does not guarantee backend support."
+      },
+      "ManagedAgentFunctionToolChoice": {
+        "type": "object",
+        "required": [
+          "type",
+          "name"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "function"
+            ],
+            "description": "The tool-choice discriminator."
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Name of an authorized function in the resolved tool set."
+          }
+        },
+        "description": "A named function choice; provider-specific built-in tool selectors are not common choices."
       },
       "ManagedAgentIdentityBlueprintReference": {
         "type": "object",
@@ -50802,6 +50941,153 @@
           }
         ]
       },
+      "ManagedAgentJsonSchemaFormat": {
+        "type": "object",
+        "required": [
+          "type",
+          "schema"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "json_schema"
+            ],
+            "description": "The output-format discriminator."
+          },
+          "schema": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "JSON Schema object. Provider schema restrictions still apply."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ManagedAgentTextFormatBase"
+          }
+        ],
+        "description": "Structured output using a schema supported by the selected provider and model."
+      },
+      "ManagedAgentManualThinking": {
+        "type": "object",
+        "required": [
+          "type",
+          "budget_tokens"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "enabled"
+            ],
+            "description": "The thinking-mode discriminator."
+          },
+          "budget_tokens": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1024,
+            "description": "Thinking-token budget, at least 1024 and below the resolved per-call output-token limit. It is not inferred from reasoning.effort."
+          },
+          "display": {
+            "$ref": "#/components/schemas/ManagedAgentThinkingDisplay",
+            "description": "Supported thinking presentation; updates requires provider beta support."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ManagedAgentThinkingBase"
+          }
+        ],
+        "description": "Manual thinking on a compatible Claude model."
+      },
+      "ManagedAgentModelConfigurations": {
+        "type": "object",
+        "properties": {
+          "reasoning": {
+            "$ref": "#/components/schemas/ManagedAgentModelReasoningConfig",
+            "description": "OpenAI reasoning presentation, not shared effort."
+          },
+          "text": {
+            "$ref": "#/components/schemas/ManagedAgentModelTextConfig",
+            "description": "OpenAI text verbosity, not shared output format."
+          },
+          "thinking": {
+            "$ref": "#/components/schemas/ManagedAgentThinking",
+            "description": "Claude thinking mode, presentation and optional manual budget."
+          },
+          "temperature": {
+            "anyOf": [
+              {
+                "type": "number",
+                "format": "float"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minimum": 0,
+            "maximum": 2,
+            "description": "Provider sampling temperature. Current Claude Messages 2026-10-21 rejects this field; OpenAI model support varies."
+          },
+          "top_p": {
+            "anyOf": [
+              {
+                "type": "number",
+                "format": "float"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Provider nucleus-sampling probability. Current Claude Messages 2026-10-21 rejects this field; OpenAI model support varies."
+          },
+          "service_tier": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Native provider service tier, validated against the selected model, provider API and harness. No cross-provider tier equivalence is implied."
+          },
+          "pause_after_compaction": {
+            "type": "boolean",
+            "description": "Claude threshold-compaction pause control. Requires a supported threshold strategy and explicit compaction.async=false; it is not background scheduling."
+          }
+        },
+        "description": "Flat model-specific settings. The deployment selects the provider; this object cannot override reasoning.effort, text.format, token limits, tool choice or compaction scheduling."
+      },
+      "ManagedAgentModelReasoningConfig": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ManagedAgentReasoningSummary"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "OpenAI summary presentation; no automatic translation to Claude thinking.display."
+          }
+        },
+        "description": "Provider-specific reasoning presentation."
+      },
+      "ManagedAgentModelTextConfig": {
+        "type": "object",
+        "properties": {
+          "verbosity": {
+            "$ref": "#/components/schemas/ManagedAgentTextVerbosity",
+            "description": "OpenAI verbosity; not a substitute for effort or an output-token limit."
+          }
+        },
+        "description": "Provider-specific text presentation."
+      },
       "ManagedAgentMultiAgent": {
         "type": "object",
         "required": [
@@ -50820,6 +51106,27 @@
         },
         "description": "Shared subagent configuration. Unsupported modes or limits must be rejected."
       },
+      "ManagedAgentPlainTextFormat": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "text"
+            ],
+            "description": "The output-format discriminator."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ManagedAgentTextFormatBase"
+          }
+        ],
+        "description": "Unconstrained text output. The Claude adapter omits its structured-output format."
+      },
       "ManagedAgentReasoning": {
         "type": "object",
         "properties": {
@@ -50832,10 +51139,19 @@
                 "type": "null"
               }
             ],
-            "description": "Requested reasoning effort; validate it against the selected deployment and harness."
+            "description": "Requested relative effort, not a token budget. The model adapter must validate the selected deployment, provider API version and harness; reject unsupported values rather than translating them to an arbitrary budget or lower effort. Omission or null uses the selected model's default."
           }
         },
         "description": "Reasoning settings supported by the selected model and Managed harness."
+      },
+      "ManagedAgentReasoningSummary": {
+        "type": "string",
+        "enum": [
+          "concise",
+          "detailed",
+          "auto"
+        ],
+        "description": "OpenAI reasoning-summary selections, subject to model support."
       },
       "ManagedAgentSession": {
         "type": "object",
@@ -50947,6 +51263,122 @@
         ],
         "description": "The current Managed Session state."
       },
+      "ManagedAgentTextConfig": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "$ref": "#/components/schemas/ManagedAgentTextFormat",
+            "description": "Plain text or a supported JSON Schema. Reject a schema the selected model adapter cannot enforce."
+          }
+        },
+        "description": "Output controls with an OpenAI and Claude mapping."
+      },
+      "ManagedAgentTextFormat": {
+        "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ManagedAgentPlainTextFormat"
+          },
+          {
+            "$ref": "#/components/schemas/ManagedAgentJsonSchemaFormat"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "text": "#/components/schemas/ManagedAgentPlainTextFormat",
+            "json_schema": "#/components/schemas/ManagedAgentJsonSchemaFormat"
+          }
+        },
+        "description": "Common text-output format with each variant's required fields preserved."
+      },
+      "ManagedAgentTextFormatBase": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The output-format discriminator."
+          }
+        },
+        "description": "Common text-output format discriminator."
+      },
+      "ManagedAgentTextVerbosity": {
+        "type": "string",
+        "enum": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "description": "OpenAI text-verbosity selections."
+      },
+      "ManagedAgentThinking": {
+        "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ManagedAgentAdaptiveThinking"
+          },
+          {
+            "$ref": "#/components/schemas/ManagedAgentManualThinking"
+          },
+          {
+            "$ref": "#/components/schemas/ManagedAgentDisabledThinking"
+          },
+          {
+            "$ref": "#/components/schemas/ManagedAgentBetweenToolsThinking"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "adaptive": "#/components/schemas/ManagedAgentAdaptiveThinking",
+            "enabled": "#/components/schemas/ManagedAgentManualThinking",
+            "disabled": "#/components/schemas/ManagedAgentDisabledThinking",
+            "between_tools": "#/components/schemas/ManagedAgentBetweenToolsThinking"
+          }
+        },
+        "description": "Claude thinking configuration. Validate model/API/beta support and compatibility with common effort and tool choice."
+      },
+      "ManagedAgentThinkingBase": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The thinking-mode discriminator."
+          }
+        },
+        "description": "Claude thinking-mode discriminator."
+      },
+      "ManagedAgentThinkingDisplay": {
+        "type": "string",
+        "enum": [
+          "summarized",
+          "omitted",
+          "updates"
+        ],
+        "description": "Claude thinking presentation, not an OpenAI reasoning-summary enum."
+      },
+      "ManagedAgentToolChoice": {
+        "anyOf": [
+          {
+            "type": "string",
+            "enum": [
+              "auto",
+              "required",
+              "none"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/ManagedAgentFunctionToolChoice"
+          }
+        ],
+        "description": "Common automatic, required, disabled or named-function tool selection."
+      },
       "ManagedAgentVersionDefinition": {
         "type": "object",
         "required": [
@@ -50967,8 +51399,8 @@
             "description": "A model deployment compatible with the selected harness."
           },
           "harness": {
-            "$ref": "#/components/schemas/ManagedGitHubCopilotHarness",
-            "description": "Typed harness-specific configuration. Private preview supports GitHub Copilot."
+            "$ref": "#/components/schemas/ManagedMicrosoftCopilotHarness",
+            "description": "Typed harness-specific configuration. Private preview supports Microsoft Copilot."
           },
           "instructions": {
             "type": "string",
@@ -50977,6 +51409,28 @@
           "reasoning": {
             "$ref": "#/components/schemas/ManagedAgentReasoning",
             "description": "Shared reasoning settings, validated against the selected model and harness."
+          },
+          "text": {
+            "$ref": "#/components/schemas/ManagedAgentTextConfig",
+            "description": "Shared output-format settings. Provider-specific verbosity belongs in model_configurations.text."
+          },
+          "max_output_tokens": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "Maximum generated tokens per model call, including reasoning/thinking, not a whole-turn budget. Validate the selected model's limits."
+          },
+          "tool_choice": {
+            "$ref": "#/components/schemas/ManagedAgentToolChoice",
+            "description": "Shared tool-selection intent. Forced choices require a supported model and an authorized declared function."
+          },
+          "parallel_tool_calls": {
+            "type": "boolean",
+            "description": "Whether a model response may contain multiple tool calls. False permits at most one; true does not require multiple calls or parallel execution."
+          },
+          "model_configurations": {
+            "$ref": "#/components/schemas/ManagedAgentModelConfigurations",
+            "description": "Flat provider-specific controls selected by model, not provider-keyed blocks or overrides of common fields. Reject unknown, misplaced, incompatible or unsupported settings."
           },
           "compaction": {
             "anyOf": [
@@ -51076,7 +51530,7 @@
         ],
         "description": "Managed Azure AI Search Index Definition"
       },
-      "ManagedGitHubCopilotHarness": {
+      "ManagedMicrosoftCopilotHarness": {
         "type": "object",
         "required": [
           "type"
@@ -51085,12 +51539,12 @@
           "type": {
             "type": "string",
             "enum": [
-              "github_copilot_harness"
+              "microsoft_copilot_preview"
             ],
             "description": "The harness discriminator."
           }
         },
-        "description": "The Managed GitHub Copilot harness, distinct from existing Prompt preview harness values."
+        "description": "The Managed Microsoft Copilot harness. Its discriminator matches the current Prompt preview; the definition kind and contract remain distinct."
       },
       "ManagedPlatformEnvironment": {
         "type": "object",
@@ -51102,7 +51556,7 @@
           "type": {
             "type": "string",
             "enum": [
-              "platform_hosted"
+              "managed"
             ],
             "description": "Use the platform-provided Environment."
           },
@@ -51111,7 +51565,7 @@
             "description": "Explicit allocation mode when the Environment selector is supplied."
           }
         },
-        "description": "A Session-level platform Environment selector, not live allocation state."
+        "description": "A Session-level managed Environment selector, not live allocation state or an Agent definition kind."
       },
       "ManagedPlatformEnvironmentMode": {
         "type": "string",
