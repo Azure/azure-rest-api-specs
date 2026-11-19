@@ -1589,9 +1589,7 @@ paths:
           content:
             application/json:
               schema:
-                anyOf:
-                  - $ref: '#/components/schemas/AgentResource'
-                  - $ref: '#/components/schemas/AgentObject'
+                $ref: '#/components/schemas/AgentObject'
         4XX:
           description: Client error
           content:
@@ -1604,7 +1602,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
-      x-ms-description-override: Creates a new agent or a new version of an existing agent. With the Managed Agents preview, a name-only request creates an Agent with a ready default identity and no version. Identity failure fails creation.
+      x-ms-description-override: Creates a new agent or a new version of an existing agent.
       x-ms-summary-override: Create an agent
       x-ms-foundry-meta:
         conditional_previews:
@@ -1624,14 +1622,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AgentCreateContent'
+              $ref: '#/components/schemas/CreateAgentRequest'
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/CreateAgentFromCodeContent'
             encoding:
               metadata:
                 contentType: application/json
-        description: Existing full Agent creation, or preview identity-only creation. Managed versions are saved separately after identity creation. The content multipart request content.
+        description: The agent and its initial version definition. The content multipart request content.
     get:
       operationId: Agents_listAgents
       summary: List agents
@@ -1713,7 +1711,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/AgentResource'
+                      $ref: '#/components/schemas/AgentObject'
                     description: The requested list of items.
                   first_id:
                     type: string
@@ -1775,7 +1773,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AgentResource'
+                $ref: '#/components/schemas/AgentObject'
         4XX:
           description: Client error
           content:
@@ -6707,7 +6705,8 @@ paths:
           schema:
             type: string
       description: |-
-        Creates a new version for the specified agent and returns the created version resource. Creates a new agent version from code. Uploads the code zip and creates a new version
+        Creates a new version for the specified agent and returns the created version resource.
+        If the Agent does not exist, creates it and its default identity as part of first-version creation. Creates a new agent version from code. Uploads the code zip and creates a new version
         for an existing agent. The SHA-256 hex digest of the zip is provided in the
         `x-ms-code-zip-sha256` header for integrity and dedup.
         The request body is multipart/form-data with a JSON metadata part and a binary code part (part order is irrelevant).
@@ -6732,7 +6731,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
-      x-ms-description-override: Creates a new version for the specified agent and returns the created version resource.
+      x-ms-description-override: Creates a new version for the specified agent and returns the created version resource. If the Agent does not exist, creates it and its default identity as part of first-version creation. Managed agent-source and session-source definitions both use this operation; no separate identity-only setup request is required. Later versions reuse the Agent and identity.
       x-ms-summary-override: Create an agent version
       x-ms-foundry-meta:
         conditional_previews:
@@ -45504,11 +45503,6 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Insights=V1Preview
-    AgentCreateContent:
-      anyOf:
-        - $ref: '#/components/schemas/CreateAgentRequest'
-        - $ref: '#/components/schemas/IdentityOnlyAgentCreateConfig'
-      description: Existing full Agent creation or preview identity-only creation.
     AgentDataGenerationJobSource:
       type: object
       required:
@@ -47825,11 +47819,6 @@ components:
         version:
           type: string
           description: The version identifier of the agent.
-    AgentResource:
-      anyOf:
-        - $ref: '#/components/schemas/AgentObject'
-        - $ref: '#/components/schemas/IdentityOnlyAgentObject'
-      description: Versioned Agents retain their existing shape; preview identity-only Agents omit versions and agent_endpoint.
     AgentSession:
       anyOf:
         - $ref: '#/components/schemas/AgentSessionResource'
@@ -50142,7 +50131,7 @@ components:
           description: A human-readable description of the agent.
         definition:
           $ref: '#/components/schemas/AgentVersionDefinition'
-          description: The agent definition. Managed versions require an existing parent Agent. An agent-source Managed version contains the full executable definition; a session-source version declares only its kind and definition_source.
+          description: The agent definition. Creating the first Managed version also creates the owning Agent and its default identity if the Agent does not exist. An agent-source Managed version contains the full executable definition; a session-source version declares only its kind and definition_source.
           x-ms-foundry-meta:
             conditional_previews:
               - A2AAgents=V1Preview
@@ -50292,7 +50281,7 @@ components:
           description: A human-readable description of the agent.
         definition:
           $ref: '#/components/schemas/AgentVersionDefinition'
-          description: The agent definition. Managed versions require an existing parent Agent. An agent-source Managed version contains the full executable definition; a session-source version declares only its kind and definition_source.
+          description: The agent definition. Creating the first Managed version also creates the owning Agent and its default identity if the Agent does not exist. An agent-source Managed version contains the full executable definition; a session-source version declares only its kind and definition_source.
           x-ms-foundry-meta:
             conditional_previews:
               - A2AAgents=V1Preview
@@ -54359,77 +54348,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-    IdentityOnlyAgentCreateConfig:
-      type: object
-      required:
-        - name
-      properties:
-        name:
-          type: string
-          maxLength: 63
-          description: The project-local Agent name, using the existing Agent naming rules.
-      description: Creates an Agent and its ready default identity without an executable version.
-      x-ms-foundry-meta:
-        required_previews:
-          - ManagedAgents=V1Preview
-    IdentityOnlyAgentObject:
-      type: object
-      required:
-        - object
-        - id
-        - name
-        - state
-        - configuration_state
-        - instance_identity
-      properties:
-        object:
-          type: string
-          enum:
-            - agent
-          description: The object type, which is always 'agent'.
-        id:
-          type: string
-          description: The unique identifier of the agent.
-        name:
-          type: string
-          maxLength: 63
-          description: The name of the agent.
-        state:
-          $ref: '#/components/schemas/AgentState'
-          description: The operational state of the agent. Controls whether the agent endpoint accepts or rejects requests.
-          readOnly: true
-        configuration_state:
-          $ref: '#/components/schemas/AgentState'
-          description: The administrative configuration state of the agent. This reflects whether the agent was explicitly enabled or disabled, independently of identity-derived operational state.
-          readOnly: true
-        state_source:
-          $ref: '#/components/schemas/AgentStateSource'
-          description: The source of the agent's operational state. When the agent is disabled, indicates where the disabled state originates from. Empty when not derived from a specific source.
-          readOnly: true
-        digital_worker_type:
-          $ref: '#/components/schemas/DigitalWorkerType'
-          description: (Preview) The type of digital worker (previously known as `autopilot`). If omitted, it is not a digital worker.
-          x-ms-foundry-meta:
-            conditional_previews:
-              - DigitalWorker=V1Preview
-        blueprint:
-          $ref: '#/components/schemas/AgentIdentity'
-          description: The blueprint for the agent
-          readOnly: true
-        blueprint_reference:
-          $ref: '#/components/schemas/AgentBlueprintReference'
-          description: The blueprint for the agent
-          readOnly: true
-        agent_card:
-          $ref: '#/components/schemas/AgentCard'
-        instance_identity:
-          $ref: '#/components/schemas/AgentIdentity'
-          description: The ready default Agent identity. Identity provisioning failure fails creation.
-          readOnly: true
-      description: An Agent whose identity is ready but which has no saved version or invocation endpoint.
-      x-ms-foundry-meta:
-        required_previews:
-          - ManagedAgents=V1Preview
     ImmediateSchedule:
       type: object
       required:
@@ -102357,7 +102275,7 @@ components:
           description: A human-readable description of the agent.
         definition:
           $ref: '#/components/schemas/AgentVersionDefinition'
-          description: The agent definition. Managed versions require an existing parent Agent. An agent-source Managed version contains the full executable definition; a session-source version declares only its kind and definition_source.
+          description: The agent definition. Creating the first Managed version also creates the owning Agent and its default identity if the Agent does not exist. An agent-source Managed version contains the full executable definition; a session-source version declares only its kind and definition_source.
           x-ms-foundry-meta:
             conditional_previews:
               - A2AAgents=V1Preview

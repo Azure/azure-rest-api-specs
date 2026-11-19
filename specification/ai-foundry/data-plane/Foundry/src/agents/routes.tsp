@@ -25,7 +25,7 @@ interface Agents {
       /** The name of the agent to retrieve. */
       @path agent_name: string;
     },
-    AgentResource
+    AgentObject
   >;
 
   /**
@@ -40,15 +40,15 @@ interface Agents {
   @extension("x-ms-summary-override", "Create an agent")
   @extension(
     "x-ms-description-override",
-    "Creates a new agent or a new version of an existing agent. With the Managed Agents preview, a name-only request creates an Agent with a ready default identity and no version. Identity failure fails creation."
+    "Creates a new agent or a new version of an existing agent."
   )
   createAgent is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
     {
-      /** Existing full Agent creation, or preview identity-only creation. Managed versions are saved separately after identity creation. */
-      @body body: AgentCreateContent;
+      /** The agent and its initial version definition. */
+      @body body: CreateAgentRequest;
     },
-    AgentResource
+    AgentObject
   >;
 
   /**
@@ -247,11 +247,12 @@ interface Agents {
       ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.managed_agents_v1_preview>;
       ...ListAgentQueryParameters;
     },
-    AgentsPagedResult<AgentResource>
+    AgentsPagedResult<AgentObject>
   >;
 
   /**
    * Creates a new version for the specified agent and returns the created version resource.
+   * If the Agent does not exist, creates it and its default identity as part of first-version creation.
    */
   @summary("Create an agent version")
   @post
@@ -262,7 +263,7 @@ interface Agents {
   @extension("x-ms-summary-override", "Create an agent version")
   @extension(
     "x-ms-description-override",
-    "Creates a new version for the specified agent and returns the created version resource."
+    "Creates a new version for the specified agent and returns the created version resource. If the Agent does not exist, creates it and its default identity as part of first-version creation. Managed agent-source and session-source definitions both use this operation; no separate identity-only setup request is required. Later versions reuse the Agent and identity."
   )
   createAgentVersion is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,

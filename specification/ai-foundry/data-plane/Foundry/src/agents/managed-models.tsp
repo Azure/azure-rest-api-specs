@@ -13,34 +13,6 @@ const ManagedAgentsConditionalPreviews = #{
   conditional_previews: #[AgentDefinitionOptInKeys.managed_agents_v1_preview],
 };
 
-/** Creates an Agent and its ready default identity without an executable version. */
-@extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
-model IdentityOnlyAgentCreateConfig {
-  /** The project-local Agent name, using the existing Agent naming rules. */
-  @maxLength(63)
-  name: string;
-}
-
-/** An Agent whose identity is ready but which has no saved version or invocation endpoint. */
-@extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
-model IdentityOnlyAgentObject {
-  ...OmitProperties<
-    AgentObject,
-    "versions" | "agent_endpoint" | "instance_identity"
-  >;
-
-  /** The ready default Agent identity. Identity provisioning failure fails creation. */
-  @visibility(Lifecycle.Read)
-  instance_identity: AgentIdentity;
-}
-
-/** Versioned Agents retain their existing shape; preview identity-only Agents omit versions and agent_endpoint. */
-#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Preserve the existing AgentObject hierarchy; both variants use object=agent and cannot gain a new wire discriminator."
-union AgentResource {
-  AgentObject,
-  IdentityOnlyAgentObject,
-}
-
 /**
  * Executable fields shared by a saved Managed definition and a complete inline definition.
  * Reasoning, compaction, and subagent controls are shared; other harness-specific settings belong in harness.
@@ -280,13 +252,6 @@ model ManagedAgentSession {
 union AgentSession {
   AgentSessionResource,
   ManagedAgentSession,
-}
-
-/** Existing full Agent creation or preview identity-only creation. */
-#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Preserve the existing full-create model and the name-only preview shape without changing the existing model hierarchy."
-union AgentCreateContent {
-  CreateAgentRequest,
-  IdentityOnlyAgentCreateConfig,
 }
 
 /** The request shape selected by the owning Agent's definition kind. */

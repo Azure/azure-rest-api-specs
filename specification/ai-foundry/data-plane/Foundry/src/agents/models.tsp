@@ -69,7 +69,7 @@ namespace Azure.AI.Projects {
     @maxLength(512)
     description?: string;
 
-    @doc("The agent definition. Managed versions require an existing parent Agent. An agent-source Managed version contains the full executable definition; a session-source version declares only its kind and definition_source.")
+    @doc("The agent definition. Creating the first Managed version also creates the owning Agent and its default identity if the Agent does not exist. An agent-source Managed version contains the full executable definition; a session-source version declares only its kind and definition_source.")
     @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
     definition: AgentVersionDefinition;
 
