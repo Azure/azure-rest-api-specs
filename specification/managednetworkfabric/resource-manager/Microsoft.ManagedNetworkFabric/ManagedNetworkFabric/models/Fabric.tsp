@@ -433,10 +433,10 @@ model InfrastructureNetworks {
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_07_15_preview)
 model PlatformProxy {
-  @doc("HTTP proxy endpoint URL.")
+  @doc("HTTP proxy endpoint URL, or proxy bare host:port")
   httpProxy: string;
 
-  @doc("HTTPS proxy endpoint URL.")
+  @doc("HTTPS proxy endpoint URL, or proxy bare host:port for 443")
   httpsProxy: string;
 
   @doc("CIDRs, hostnames, and domain suffixes that bypass the proxy.")
@@ -713,10 +713,10 @@ model PatchInfrastructureNetworks {
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_07_15_preview)
 model PatchPlatformProxy {
-  @doc("HTTP proxy endpoint URL.")
+  @doc("HTTP proxy endpoint URL, or proxy bare host:port")
   httpProxy?: string;
 
-  @doc("HTTPS proxy endpoint URL.")
+  @doc("HTTPS proxy endpoint URL, or proxy bare host:port for 443")
   httpsProxy?: string;
 
   @doc("CIDRs, hostnames, and domain suffixes that bypass the proxy.")

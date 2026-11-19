@@ -133,7 +133,7 @@ union OperationalState {
   string,
 }
 
-@doc("Input method indicating whether configuration is provided inline or via a file URL.")
+@doc("Input method to configure Access Control List.")
 union ConfigurationType {
   @doc("File Configuration Type")
   File: "File",

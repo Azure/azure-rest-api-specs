@@ -1738,7 +1738,7 @@
             "description": "Name of the EdgeConnector.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -1766,7 +1766,7 @@
         "tags": [
           "EdgeConnectors"
         ],
-        "description": "Creates an EdgeConnector.",
+        "description": "Creates or updates an EdgeConnector.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1783,7 +1783,7 @@
             "description": "Name of the EdgeConnector.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "body",
@@ -1858,7 +1858,7 @@
             "description": "Name of the EdgeConnector.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "body",
@@ -1930,7 +1930,7 @@
             "description": "Name of the EdgeConnector.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -2034,7 +2034,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -2062,7 +2062,7 @@
         "tags": [
           "Fabrics"
         ],
-        "description": "Creates a Fabric.",
+        "description": "Creates or updates a Fabric.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2079,7 +2079,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "body",
@@ -2157,7 +2157,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "body",
@@ -2229,7 +2229,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -2291,7 +2291,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -2341,7 +2341,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "delegationName",
@@ -2349,9 +2349,7 @@
             "description": "Name of the FabricDelegation.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -2379,7 +2377,7 @@
         "tags": [
           "FabricDelegations"
         ],
-        "description": "Creates a FabricDelegation.",
+        "description": "Creates or updates a FabricDelegation.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2396,7 +2394,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "delegationName",
@@ -2404,9 +2402,7 @@
             "description": "Name of the FabricDelegation.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "resource",
@@ -2481,7 +2477,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "delegationName",
@@ -2489,9 +2485,7 @@
             "description": "Name of the FabricDelegation.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "properties",
@@ -2563,7 +2557,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "delegationName",
@@ -2571,9 +2565,7 @@
             "description": "Name of the FabricDelegation.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -2635,7 +2627,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -2685,7 +2677,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vlanName",
@@ -2693,9 +2685,7 @@
             "description": "Name of the Vlan.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -2723,7 +2713,7 @@
         "tags": [
           "Vlans"
         ],
-        "description": "Creates a Vlan.",
+        "description": "Creates or updates a Vlan.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2740,7 +2730,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vlanName",
@@ -2748,9 +2738,7 @@
             "description": "Name of the Vlan.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "resource",
@@ -2825,7 +2813,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vlanName",
@@ -2833,9 +2821,7 @@
             "description": "Name of the Vlan.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "properties",
@@ -2907,7 +2893,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vlanName",
@@ -2915,9 +2901,7 @@
             "description": "Name of the Vlan.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -2979,7 +2963,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -3029,7 +3013,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -3037,9 +3021,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -3067,7 +3049,7 @@
         "tags": [
           "Vrfs"
         ],
-        "description": "Creates a Vrf.",
+        "description": "Creates or updates a Vrf.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3084,7 +3066,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -3092,9 +3074,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "resource",
@@ -3169,7 +3149,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -3177,9 +3157,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "properties",
@@ -3251,7 +3229,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -3259,9 +3237,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -3323,7 +3299,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -3331,9 +3307,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -3383,7 +3357,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -3391,9 +3365,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "delegationName",
@@ -3401,9 +3373,7 @@
             "description": "Name of the VrfDelegation.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -3431,7 +3401,7 @@
         "tags": [
           "VrfDelegations"
         ],
-        "description": "Creates a VrfDelegation.",
+        "description": "Creates or updates a VrfDelegation.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3448,7 +3418,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -3456,9 +3426,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "delegationName",
@@ -3466,9 +3434,7 @@
             "description": "Name of the VrfDelegation.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "resource",
@@ -3543,7 +3509,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -3551,9 +3517,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "delegationName",
@@ -3561,9 +3525,7 @@
             "description": "Name of the VrfDelegation.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "properties",
@@ -3635,7 +3597,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -3643,9 +3605,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "delegationName",
@@ -3653,9 +3613,7 @@
             "description": "Name of the VrfDelegation.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -3717,7 +3675,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -3725,9 +3683,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -3777,7 +3733,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -3785,9 +3741,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "networkName",
@@ -3795,9 +3749,7 @@
             "description": "Name of the Network.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -3825,7 +3777,7 @@
         "tags": [
           "Networks"
         ],
-        "description": "Creates a Network.",
+        "description": "Creates or updates a Network.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3842,7 +3794,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -3850,9 +3802,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "networkName",
@@ -3860,9 +3810,7 @@
             "description": "Name of the Network.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "resource",
@@ -3937,7 +3885,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -3945,9 +3893,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "networkName",
@@ -3955,9 +3901,7 @@
             "description": "Name of the Network.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "properties",
@@ -4029,7 +3973,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -4037,9 +3981,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "networkName",
@@ -4047,9 +3989,7 @@
             "description": "Name of the Network.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -4111,7 +4051,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -4119,9 +4059,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -4171,7 +4109,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -4179,9 +4117,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "peeringName",
@@ -4189,9 +4125,7 @@
             "description": "Name of the Peering.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -4219,7 +4153,7 @@
         "tags": [
           "Peerings"
         ],
-        "description": "Creates a Peering.",
+        "description": "Creates or updates a Peering.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -4236,7 +4170,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -4244,9 +4178,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "peeringName",
@@ -4254,9 +4186,7 @@
             "description": "Name of the Peering.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "resource",
@@ -4331,7 +4261,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -4339,9 +4269,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "peeringName",
@@ -4349,9 +4277,7 @@
             "description": "Name of the Peering.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "properties",
@@ -4423,7 +4349,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -4431,9 +4357,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "peeringName",
@@ -4441,9 +4365,7 @@
             "description": "Name of the Peering.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -4505,7 +4427,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -4513,9 +4435,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -4565,7 +4485,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -4573,9 +4493,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "servicePeerName",
@@ -4583,9 +4501,7 @@
             "description": "Name of the ServicePeer.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -4613,7 +4529,7 @@
         "tags": [
           "ServicePeers"
         ],
-        "description": "Creates a ServicePeer.",
+        "description": "Creates or updates a ServicePeer.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -4630,7 +4546,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -4638,9 +4554,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "servicePeerName",
@@ -4648,9 +4562,7 @@
             "description": "Name of the ServicePeer.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "resource",
@@ -4725,7 +4637,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -4733,9 +4645,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "servicePeerName",
@@ -4743,9 +4653,7 @@
             "description": "Name of the ServicePeer.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "properties",
@@ -4817,7 +4725,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -4825,9 +4733,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "servicePeerName",
@@ -4835,9 +4741,7 @@
             "description": "Name of the ServicePeer.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           }
         ],
         "responses": {
@@ -4899,7 +4803,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -4907,9 +4811,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "servicePeerName",
@@ -4917,9 +4819,7 @@
             "description": "Name of the ServicePeer.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "body",
@@ -4993,7 +4893,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -5001,9 +4901,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "servicePeerName",
@@ -5011,9 +4909,7 @@
             "description": "Name of the ServicePeer.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "body",
@@ -5087,7 +4983,7 @@
             "description": "Name of the Fabric.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "vrfName",
@@ -5095,9 +4991,7 @@
             "description": "Name of the Vrf.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "servicePeerName",
@@ -5105,9 +4999,7 @@
             "description": "Name of the ServicePeer.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*$"
+            "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
             "name": "body",
@@ -9358,7 +9250,7 @@
             "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "description": "Request payload.",
             "required": true,
@@ -9433,7 +9325,7 @@
             "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
             "description": "Network Bootstrap Device properties to update.",
             "required": true,
@@ -9678,7 +9570,7 @@
             "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "description": "Request payload.",
             "required": true,
@@ -9761,7 +9653,7 @@
             "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
             "description": "NetworkBootstrapInterface properties to update. Only tags are supported.",
             "required": true,
@@ -14606,7 +14498,7 @@
             "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
@@ -14681,7 +14573,7 @@
             "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
             "description": "The resource properties to be updated.",
             "required": true,
@@ -19758,7 +19650,7 @@
     },
     "ConfigurationType": {
       "type": "string",
-      "description": "Input method indicating whether configuration is provided inline or via a file URL.",
+      "description": "Input method to configure Access Control List.",
       "enum": [
         "File",
         "Inline"
@@ -21927,6 +21819,10 @@
       "type": "object",
       "description": "Represents a physical network deployment hosting infrastructure network configuration.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/FabricProperties",
+          "description": "Fabric properties."
+        },
         "kind": {
           "$ref": "#/definitions/FabricKind",
           "description": "Fabric kind: which party drives the switches. Set at create time and immutable.",
@@ -21938,15 +21834,11 @@
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
-        },
-        "properties": {
-          "$ref": "#/definitions/FabricProperties",
-          "description": "Fabric properties."
         }
       },
       "required": [
-        "kind",
-        "properties"
+        "properties",
+        "kind"
       ],
       "allOf": [
         {
@@ -28552,7 +28444,7 @@
           "format": "int32",
           "description": "Number of compute racks associated to Network Fabric.",
           "minimum": 1,
-          "maximum": 8
+          "maximum": 16
         },
         "serverCountPerRack": {
           "type": "integer",
@@ -30038,7 +29930,6 @@
           "type": "string",
           "format": "arm-id",
           "description": "ARM resource ID of the source Network Tap Rule.",
-          "readOnly": true,
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
