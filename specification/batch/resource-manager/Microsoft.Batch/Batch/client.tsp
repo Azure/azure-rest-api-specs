@@ -44,6 +44,8 @@ using Microsoft.Batch;
 @@clientName(Microsoft.Batch.ContainerRegistry.username, "username", "java");
 @@clientName(Microsoft.Batch.UserIdentity.userName, "username", "java");
 
+@@clientName(EtagResponseHeaders.etag, "ETag", "go");
+
 @@clientName(
   Microsoft.Batch.PrivateLinkServiceConnectionState.actionsRequired,
   "ActionRequired",
@@ -71,6 +73,7 @@ using Microsoft.Batch;
   "csharp"
 );
 @@alternateType(ApplicationPackageProperties.storageUrl, url, "csharp");
+@@alternateType(ApplicationPackageProperties.storageUrlLegacy, url, "csharp");
 @@clientName(PublicNetworkAccessType, "BatchPublicNetworkAccess", "csharp");
 @@clientName(
   BatchAccountProperties.dedicatedCoreQuotaPerVMFamilyEnforced,
@@ -79,6 +82,11 @@ using Microsoft.Batch;
 );
 @@clientName(
   BatchAccountProperties.dedicatedCoreQuotaPerVMFamily,
+  "dedicatedCoreQuotaPerVmFamily",
+  "csharp"
+);
+@@clientName(
+  BatchAccountProperties.dedicatedCoreQuotaPerVMFamilyLegacy,
   "DedicatedCoreQuotaPerVmFamily",
   "csharp"
 );
@@ -270,6 +278,9 @@ using Microsoft.Batch;
 @@clientName(StartTask, "BatchAccountPoolStartTask", "csharp");
 @@clientName(ResourceFile.identityReference, "Identity", "csharp");
 @@clientName(ResourceFile, "BatchResourceFile", "csharp");
+@@clientName(Historical.ResourceFile, "BatchResourceFile", "csharp");
+@@clientName(Historical.ResourceFile, "ResourceFile", "autorest");
+@@clientNamespace(Historical.ResourceFile, "Microsoft.Batch", "go,javascript");
 @@alternateType(ResourceFile.httpUrl, url, "csharp");
 @@alternateType(ResourceFile.storageContainerUrl, url, "csharp");
 @@clientName(EnvironmentSetting, "BatchEnvironmentSetting", "csharp");
@@ -288,6 +299,11 @@ using Microsoft.Batch;
 @@clientName(LoginMode, "BatchWindowsLoginMode", "csharp");
 @@clientName(
   ApplicationPackageProperties.storageUrlExpiry,
+  "storageUriExpireOn",
+  "csharp"
+);
+@@clientName(
+  ApplicationPackageProperties.storageUrlExpiryLegacy,
   "StorageUriExpireOn",
   "csharp"
 );
