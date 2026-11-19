@@ -547,6 +547,36 @@ union ApplicationGatewayClientAuthVerificationModes {
 }
 
 /**
+ * Deployment tier of the Application Gateway.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This project uses legacy-feature-files output splitting; this union participates in the Application Gateway feature's emission."
+@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@added(Versions.v2026_05_01)
+union ApplicationGatewayDeploymentTier {
+  string,
+
+  /**
+   * Default deployment type.
+   */
+  Standard: "Standard",
+
+  /**
+   * Management NIC deployment type.
+   */
+  NetworkIsolated: "NetworkIsolated",
+
+  /**
+   * Accelerated deployment type.
+   */
+  Accelerated: "Accelerated",
+
+  /**
+   * Accelerated deployment type with reserved capacity and vertical scaling.
+   */
+  Elastic: "Elastic",
+}
+
+/**
  * Rule type.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -6375,6 +6405,12 @@ model ApplicationGatewayPropertiesFormat {
   sku?: ApplicationGatewaySku;
 
   /**
+   * Deployment tier of the application gateway resource. Only valid on Standard_v2 and WAF_v2 SKUs.
+   */
+  @added(Versions.v2026_05_01)
+  deploymentTier?: ApplicationGatewayDeploymentTier;
+
+  /**
    * SSL policy of the application gateway resource.
    */
   sslPolicy?: ApplicationGatewaySslPolicy;
@@ -6513,6 +6549,12 @@ model ApplicationGatewayPropertiesFormat {
    * Whether FIPS is enabled on the application gateway resource.
    */
   enableFips?: boolean;
+
+  /**
+   * Whether Confidential Compute is enabled on the application gateway resource.
+   */
+  @added(Versions.v2026_05_01)
+  enableConfidentialCompute?: boolean;
 
   /**
    * Autoscale Configuration.
@@ -9839,6 +9881,15 @@ model AzureFirewallPropertiesFormat {
    */
   @added(Versions.v2026_01_01)
   aiSecurityAddOn?: boolean;
+
+  /**
+   * The TCP idle timeout for the Azure Firewall, in minutes. Valid values range from 4 to 64, inclusive.
+   */
+  @added(Versions.v2026_05_01)
+  @minValue(4)
+  @maxValue(64)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tcpIdleTimeoutInMinutes?: int32;
 }
 
 /**
@@ -17487,6 +17538,12 @@ model NetworkVirtualAppliancePropertiesFormat {
   nvaSku?: VirtualApplianceSkuProperties;
 
   /**
+   * Configuration of the internal load balancer for a managed Network Virtual Appliance in a virtual hub or virtual network. Not applicable to partner-managed load balancers on SaaS NVAs. When omitted on create or update, Default distribution and a 5-minute idle timeout are used.
+   */
+  @added(Versions.v2026_05_01)
+  loadBalancerConfiguration?: NetworkVirtualApplianceLoadBalancerConfiguration;
+
+  /**
    * Address Prefix.
    */
   @visibility(Lifecycle.Read)
@@ -17627,6 +17684,49 @@ model NetworkVirtualAppliancePropertiesFormat {
   @added(Versions.v2025_09_01)
   @visibility(Lifecycle.Read)
   migrationStatus?: NetworkVirtualApplianceMigrationStatus;
+}
+
+/**
+ * The load distribution policy for a managed Network Virtual Appliance load-balancing rule.
+ */
+@added(Versions.v2026_05_01)
+union NetworkVirtualApplianceLoadDistribution {
+  string,
+
+  /**
+   * Distributes traffic using a five-tuple hash of source IP, destination IP, source port, destination port, and protocol.
+   */
+  Default: "Default",
+
+  /**
+   * Distributes traffic using a two-tuple hash of source IP and destination IP.
+   */
+  SourceIP: "SourceIP",
+
+  /**
+   * Distributes traffic using a three-tuple hash of source IP, destination IP, and protocol.
+   */
+  SourceIPProtocol: "SourceIPProtocol",
+}
+
+/**
+ * Load balancer settings shared by managed Network Virtual Appliances and their Permanent inbound security rules.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keep the shared NVA configuration in the existing virtualNetwork Swagger feature."
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@added(Versions.v2026_05_01)
+model NetworkVirtualApplianceLoadBalancerConfiguration {
+  /**
+   * The load distribution policy. Default uses a five-tuple hash of source IP, destination IP, source port, destination port, and protocol. SourceIP uses a two-tuple hash of source IP and destination IP. SourceIPProtocol uses a three-tuple hash of source IP, destination IP, and protocol. When omitted, Default is used.
+   */
+  loadDistribution?: NetworkVirtualApplianceLoadDistribution = NetworkVirtualApplianceLoadDistribution.Default;
+
+  /**
+   * The idle timeout of the load-balancing rule, in minutes. When omitted, the managed NVA platform default of 5 minutes is used. Values outside 4 through 100 are rejected with HTTP 400 InvalidParameter.
+   */
+  @minValue(4)
+  @maxValue(100)
+  idleTimeoutInMinutes?: int32 = 5;
 }
 
 /**
@@ -18240,6 +18340,12 @@ model InboundSecurityRules {
    * Public IP name in case of Permanent Rule type & Interface Name in case of Auto Expire Rule type
    */
   appliesOn?: string[];
+
+  /**
+   * Configuration of the Internet Ingress load-balancing rule for a managed Network Virtual Appliance. Supported only when the enclosing ruleType is Permanent; supplying this configuration for AutoExpire rules is rejected with HTTP 400 Bad Request. When omitted on create or update, Default distribution and a 5-minute idle timeout are used.
+   */
+  @added(Versions.v2026_05_01)
+  loadBalancerConfiguration?: NetworkVirtualApplianceLoadBalancerConfiguration;
 }
 
 /**

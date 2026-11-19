@@ -10,12 +10,13 @@
         "environment": "development"
       },
       "sku": {
-        "name": "AIGateway"
+        "name": "Standard"
       },
       "identity": {
         "type": "SystemAssigned"
       },
       "properties": {
+        "publicNetworkAccess": "Enabled",
         "backend": {
           "subnet": {
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Network/virtualNetworks/example-vnet/subnets/example-subnet"
@@ -35,7 +36,7 @@
           "environment": "development"
         },
         "sku": {
-          "name": "AIGateway"
+          "name": "Standard"
         },
         "identity": {
           "type": "SystemAssigned",
@@ -45,6 +46,7 @@
         "eTag": "\"AAAAAAAAAAE=\"",
         "properties": {
           "provisioningState": "Succeeded",
+          "publicNetworkAccess": "Enabled",
           "frontend": {
             "defaultHostname": "example-gateway.westus2.aigateway.azure-api.net"
           },
@@ -70,7 +72,7 @@
           "environment": "development"
         },
         "sku": {
-          "name": "AIGateway"
+          "name": "Standard"
         },
         "identity": {
           "type": "SystemAssigned",
@@ -80,6 +82,7 @@
         "eTag": "\"AAAAAAAAAAA=\"",
         "properties": {
           "provisioningState": "Activating",
+          "publicNetworkAccess": "Enabled",
           "backend": {
             "subnet": {
               "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Network/virtualNetworks/example-vnet/subnets/example-subnet"

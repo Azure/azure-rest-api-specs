@@ -1,7 +1,7 @@
 import { existsSync, globSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { isDeepStrictEqual } from "node:util";
-import * as commonmark from "commonmark";
+import { marked } from "marked";
 import { parse } from "yaml";
 import {
   clientCustomization,
@@ -207,13 +207,13 @@ export function getResourceProviderFromFilePath(file: string): string | undefine
 
 function getSuppressions(file: string): Record<string, unknown>[] {
   if (!existsSync(file)) return [];
-  const walker = new commonmark.Parser().parse(readFileSync(file, "utf8")).walker();
+  // Keep CommonMark block parsing rather than interpreting GFM tables as containers.
+  const tokens = marked.lexer(readFileSync(file, "utf8"), { gfm: false });
   const suppressions: Record<string, unknown>[] = [];
-  let event;
-  while ((event = walker.next())) {
-    if (!event.entering || event.node.type !== "code_block" || !event.node.literal) continue;
+  void marked.walkTokens(tokens, (token) => {
+    if (token.type !== "code" || typeof token.text !== "string" || !token.text) return;
     try {
-      const block = parse(event.node.literal) as {
+      const block = parse(token.text) as {
         directive?: Record<string, unknown>[];
         suppressions?: Record<string, unknown>[];
       } | null;
@@ -224,7 +224,7 @@ function getSuppressions(file: string): Record<string, unknown>[] {
     } catch (error) {
       console.warn(`Unable to read suppressions in ${file}: ${String(error)}`);
     }
-  }
+  });
   return suppressions;
 }
 
