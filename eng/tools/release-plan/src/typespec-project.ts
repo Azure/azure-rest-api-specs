@@ -42,7 +42,7 @@ export const NEW_API_VERSION_LABEL = "new-api-version";
 export const FOLDER_MIGRATION_LABEL = "FolderMigrationV2";
 
 /** Label indicating that release plan automation should not process a spec PR. */
-export const SKIP_RELEASE_PLAN_AUTOMATION_LABEL = "Skip-ReleasePlan-Automation";
+export const SKIP_RELEASE_PLAN_AUTOMATION_LABEL = "skip-releaseplan-automation";
 
 async function getTypeSpecProjectInfoFromFiles(
   allFiles: PullRequestChangedFile[],
@@ -122,7 +122,7 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
 
     if (
       labels.includes(FOLDER_MIGRATION_LABEL) ||
-      labels.includes(SKIP_RELEASE_PLAN_AUTOMATION_LABEL)
+      labels.some((label) => label.toLowerCase() === SKIP_RELEASE_PLAN_AUTOMATION_LABEL)
     ) {
       console.log(
         `PR #${associatedPrNumber} has a release plan automation skip label. Skipping release plan processing.`,
