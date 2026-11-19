@@ -1,0 +1,39 @@
+{
+  "title": "MigrateProjects_ImportWavePlanConfig_MaximumSet",
+  "operationId": "MigrateProjects_ImportWavePlanConfig",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "F4566D7C-05F8-41DC-A6B4-AFC0600F0AC0",
+    "resourceGroupName": "rgwaves",
+    "projectName": "myProjectName",
+    "body": {
+      "assessmentArmId": "/subscriptions/F4566D7C-05F8-41DC-A6B4-AFC0600F0AC0/resourceGroups/rgwaves/providers/Microsoft.Migrate/assessmentProjects/myProjectName/groups/group1/assessments/assessment1",
+      "migrationPath": "AzureVM",
+      "sasUri": "https://contosostorage.blob.core.windows.net/waveplans/config.md?sv=2024-11-04&sig=REDACTED"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "wavePlanName": "WavePlan_assessment1_AzureVM",
+        "provisioningState": "Succeeded",
+        "assessmentArmId": "/subscriptions/F4566D7C-05F8-41DC-A6B4-AFC0600F0AC0/resourceGroups/rgwaves/providers/Microsoft.Migrate/assessmentProjects/myProjectName/groups/group1/assessments/assessment1",
+        "migrationPath": "AzureVM",
+        "artifactProperties": {
+          "artifactId": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/MyResourceGroup/providers/Microsoft.Migrate/artifactStores/store1/artifacts/artifact1",
+          "versionId": "2"
+        },
+        "summary": {
+          "numberOfWaves": 5,
+          "risk": "Medium",
+          "confidence": "High"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}
