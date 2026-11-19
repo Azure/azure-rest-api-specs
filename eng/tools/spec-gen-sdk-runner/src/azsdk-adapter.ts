@@ -155,6 +155,7 @@ export function buildExecutionReport(
   packResponse: AzsdkPackResponse | undefined,
   emitterCheck: EmitterCheckResult,
   buildResponse?: AzsdkBuildResponse,
+  packageRootPath?: string,
 ): ExecutionReport {
   // If emitter is not enabled, return notEnabled result
   if (!emitterCheck.enabled) {
@@ -182,6 +183,7 @@ export function buildExecutionReport(
   //const artifactDir = artifactPath ? path.dirname(artifactPath) : undefined;
   const pkg: ExecutionReportPackage = {
     packageName: emitterCheck.packageName ?? generateResponse?.package_name ?? "",
+    ...(packageRootPath ? { packageRootPath } : {}),
     // Deferring apiview artifact processing until we create it for Rust by azsdk-cli
     apiViewArtifact: undefined,
     // Deferred fields:

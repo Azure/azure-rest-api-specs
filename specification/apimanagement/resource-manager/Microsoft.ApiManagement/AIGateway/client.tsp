@@ -26,6 +26,16 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
+  Microsoft.ApiManagement.AiGatewayToolServerResources.getOauth2LoginLinks,
+  "GetOAuth2LoginLinks",
+  "go"
+);
+@@clientName(
+  Microsoft.ApiManagement.AiGatewayToolServerOauth2LoginLinks,
+  "ToolServerOAuth2LoginLinks",
+  "go"
+);
+@@clientName(
   Microsoft.ApiManagement.AiGatewayEndpoint.baseUrl,
   "baseUri",
   "csharp"
