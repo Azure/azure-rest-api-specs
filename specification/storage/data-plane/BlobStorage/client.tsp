@@ -17,28 +17,28 @@ namespace Customizations;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   Service.listContainers,
-  "python,csharp,javascript,go"
+  "python,csharp,javascript,go,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   Service.findBlobsByTags,
-  "python,csharp,javascript,go"
+  "python,csharp,javascript,go,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   Container.findBlobsByTags,
-  "python,csharp,javascript,go"
+  "python,csharp,javascript,go,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   Container.listBlobs,
-  "python,csharp,javascript,go"
+  "python,csharp,javascript,go,java"
 );
 
 @@clientName(
   FilteredBlobResponse,
   "FilterBlobSegment",
-  "python,csharp,javascript,go"
+  "python,csharp,javascript,go,java"
 );
 @@clientName(FilteredBlobResponse.blobItems, "blobs", "javascript,go");
 @@clientName(
@@ -247,7 +247,7 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   Storage.Blob.PageBlob.getPageRanges,
-  "python,csharp,javascript,go"
+  "python,csharp,javascript,go,java"
 );
 
 #suppress "@azure-tools/typespec-client-generator-core/client-option" ""
@@ -262,7 +262,7 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   Storage.Blob.Blob.getLayout,
-  "python,csharp,javascript,go"
+  "python,csharp,javascript,go,java"
 );
 
 @@clientName(
@@ -780,7 +780,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(
   ListBlobsHierarchicalResponse,
   "ListBlobsHierarchySegmentResponse",
-  "go"
+  "go,java"
 );
 @@clientName(ListBlobsHierarchicalResponse.hierarchicalList, "segment", "go");
 @@clientName(ListBlobsResponse.blobItems, "segment", "go");
@@ -843,7 +843,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is to support legacy SDKs"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
   Storage.Blob.Container.listBlobHierarchySegment,
-  "python,javascript,csharp"
+  "python,javascript,csharp,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is to support legacy SDKs"
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(
@@ -1061,8 +1061,20 @@ model BlobServicePropertiesCsharp {
 @@access(JsonTextConfiguration, Access.internal, "csharp");
 @@access(BlobDeleteTypeCustom, Access.internal, "csharp");
 
-@@convenientAPI(Storage.Blob.Service.submitBatch, false, "csharp");
-@@convenientAPI(Storage.Blob.Container.submitBatch, false, "csharp");
+@@convenientAPI(Storage.Blob.Service.submitBatch, false, "csharp,java");
+@@convenientAPI(Storage.Blob.Container.submitBatch, false, "csharp,java");
+// The Arrow listings return a binary Apache Arrow stream (or XML when the service falls back), which Java parses
+// itself. A convenience method would deserialize that body as an XML string, so Java uses the protocol methods.
+@@convenientAPI(
+  Storage.Blob.Container.listBlobFlatSegmentApacheArrow,
+  false,
+  "java"
+);
+@@convenientAPI(
+  Storage.Blob.Container.listBlobHierarchySegmentApacheArrow,
+  false,
+  "java"
+);
 
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(
@@ -1376,3 +1388,238 @@ union AccessTierRust {
   /** Extensible. */
   string,
 }
+
+// ---- Java customizations (translated from the csharp scope; java shipped names track csharp) ----
+@@clientName(BlobServicePropertiesCsharp, "BlobServiceProperties", "java");
+// The shipped java type is the public com.azure.storage.blob.models.GeoReplicationStatus, which is what
+// GeoReplication.getStatus() returns; the csharp/go name would both rename it and hide it in implementation.
+@@clientName(GeoReplicationStatusType, "GeoReplicationStatus", "java");
+@@access(GeoReplicationStatusType, Access.public, "java");
+@@clientName(StorageErrorCode, "BlobErrorCode", "java");
+@@clientName(Container.listBlobs, "ListBlobFlatSegment", "java");
+@@clientName(BlobProperties, "BlobItemPropertiesInternal", "java");
+@@clientName(BlobItem, "BlobItemInternal", "java");
+@@clientName(ImmutabilityPolicyMode, "BlobImmutabilityPolicyMode", "java");
+@@clientName(SignedIdentifiers, "BlobSignedIdentifiers", "java");
+@@clientName(LeaseDuration, "LeaseDurationType", "java");
+@@clientName(Blob.setProperties, "SetHttpHeaders", "java");
+
+// Blob Query is defined on the BlockBlob interface, but the shipped java SDK exposes query() on
+// BlobClientBase/BlobAsyncClientBase and calls it through BlobsImpl. Keep the op group java saw under AutoRest.
+@@clientLocation(BlockBlob.query, Blob, "java");
+@@clientName(ListBlobsResponse, "ListBlobsFlatSegmentResponse", "java");
+@@clientName(Container.findBlobsByTags, "FilterBlobs", "java");
+@@clientName(Service.findBlobsByTags, "FilterBlobs", "java");
+@@clientName(Service.listContainers, "ListContainersSegment", "java");
+@@clientName(QueryType, "QueryFormatType", "java");
+@@clientName(QueryType.JSON, "Json", "java");
+@@clientName(ArrowField, "ArrowFieldInternal", "java");
+@@clientName(ArrowConfiguration, "ArrowTextConfigurationInternal", "java");
+@@clientName(ContainerItem, "BlobContainerItem", "java");
+@@clientName(ContainerProperties, "BlobContainerItemProperties", "java");
+@@clientName(JsonTextConfiguration, "JsonTextConfigurationInternal", "java");
+@@clientName(StorageServiceStats, "BlobServiceStatistics", "java");
+@@clientName(AccessPolicy.start, "StartsOn", "java");
+@@clientName(AccessPolicy.expiry, "ExpiresOn", "java");
+@@clientName(AccessPolicy.permission, "Permissions", "java");
+
+// AccessPolicy.start/expiry use @encode("rfc3339-fixed-width"), which typespec-java does not recognize and so
+// falls back to String. go and csharp override the same two properties for the same reason; without this java
+// generates getStartsOn(): String instead of the shipped OffsetDateTime.
+@@alternateType(AccessPolicy.start, utcDateTime, "java");
+@@alternateType(AccessPolicy.expiry, utcDateTime, "java");
+
+// UserDelegationKey/Block/BlockLookupList expose base64Bytes properties that the shipped java API surfaces as
+// String (the caller supplies an already-base64-encoded block id). go and python carry the same overrides.
+@@alternateType(UserDelegationKey.value, string, "java");
+@@alternateType(Block.name, string, "java");
+// The shipped accessors are getSizeLong/setSizeLong; the deprecated int getSize/setSize are added by the SDK customization.
+@@clientName(Block.size, "sizeLong", "java");
+// The block id lists are arrays: the override has to replace the ELEMENT type, so it must stay an array.
+// `string` on its own collapses the property to a single scalar, which generates `private String latest` and a
+// `toXml` that writes an unnamed text node instead of a repeated <Latest> element, breaking Put Block List and
+// the shipped `List<String>` public API.
+@@alternateType(BlockLookupList.committed, string[], "java");
+@@alternateType(BlockLookupList.uncommitted, string[], "java");
+@@alternateType(BlockLookupList.latest, string[], "java");
+@@alternateType(BlockIdParameter.blockid, string, "java");
+
+// BlobPrefix follows BlobItem: the generated model is internal and carries the BlobName, so the Encoded
+// attribute survives and ModelHelper can decode it; the public BlobPrefix is hand-owned and exposes a String.
+@@clientName(BlobPrefix, "BlobPrefixInternal", "java");
+@@access(BlobPrefix, Access.internal, "java");
+
+// The shipped java accessors spell these out; the spec's abbreviated property names would rename the public API.
+@@clientName(UserDelegationKey.signedOid, "signedObjectId", "java");
+@@clientName(UserDelegationKey.signedTid, "signedTenantId", "java");
+@@clientName(
+  UserDelegationKey.signedDelegatedUserTid,
+  "signedDelegatedUserTenantId",
+  "java"
+);
+
+// The shipped java constant is UNCOMMITTEDBLOBS (no underscore); the emitter would otherwise derive
+// UNCOMMITTED_BLOBS from the spec member name, renaming a public constant.
+@@clientName(ListBlobsIncludeItem.UncommittedBlobs, "uncommittedblobs", "java");
+
+// The shipped java KeyInfo takes the SAS start/expiry as pre-formatted ISO-8601 strings (the hand-written
+// BlobServiceClient formats them via Constants.ISO_8601_UTC_DATE_FORMATTER), and spells out the tenant id.
+// python, csharp, javascript and go all carry the same string override.
+@@alternateType(KeyInfo.start, string, "java");
+@@alternateType(KeyInfo.expiry, string, "java");
+@@clientName(KeyInfo.delegatedUserTid, "delegatedUserTenantId", "java");
+@@clientName(Metrics.includeApis, "IncludeApis", "java");
+// The csharp scope shortens these to Block/Page/Append, but the shipped java constants are BLOCK_BLOB,
+// PAGE_BLOB and APPEND_BLOB, which the spec member names already produce -- renaming them here would be a
+// breaking public API change.
+
+// The shipped java accessor spells the container property the other way round.
+@@clientName(
+  ContainerProperties.preventEncryptionScopeOverride,
+  "encryptionScopeOverridePrevented",
+  "java"
+);
+@@clientName(SkuName.StandardLRS, "StandardLrs", "java");
+@@clientName(SkuName.StandardGRS, "StandardGrs", "java");
+@@clientName(SkuName.StandardRAGRS, "StandardRagrs", "java");
+@@clientName(SkuName.StandardZRS, "StandardZrs", "java");
+@@clientName(SkuName.PremiumLRS, "PremiumLrs", "java");
+@@clientName(SkuName.StandardGZRS, "StandardGzrs", "java");
+@@clientName(SkuName.PremiumZRS, "PremiumZrs", "java");
+@@clientName(SkuName.StandardRAGZRS, "StandardRagzrs", "java");
+@@clientName(BlobDeleteTypeCustom, "BlobDeleteType", "java");
+
+// Models whose spec-native names would otherwise generate internal duplicates alongside the shipped public
+// types listed in custom-types. Without these the generated models reference the duplicate (e.g.
+// BlobServiceProperties.getLogging() returns implementation.models.Logging instead of the shipped
+// BlobAnalyticsLogging), which is a breaking public API change.
+@@clientName(AccessPolicy, "BlobAccessPolicy", "java");
+@@clientName(SignedIdentifier, "BlobSignedIdentifier", "java");
+@@clientName(CorsRule, "BlobCorsRule", "java");
+@@clientName(Logging, "BlobAnalyticsLogging", "java");
+@@clientName(Metrics, "BlobMetrics", "java");
+@@clientName(RetentionPolicy, "BlobRetentionPolicy", "java");
+@@clientName(LeaseStatus, "LeaseStatusType", "java");
+@@clientName(LeaseState, "LeaseStateType", "java");
+@@clientName(CopyStatus, "CopyStatusType", "java");
+@@clientName(
+  ListContainersIncludeType,
+  "ListBlobContainersIncludeType",
+  "java"
+);
+// Parquet serialization has no configurable properties, so Java writes the same empty element C++ does.
+@@alternateType(
+  QueryFormat.parquetTextConfiguration,
+  Customizations.StorageCppParquetConfiguration,
+  "java"
+);
+@@clientName(
+  StorageCppParquetConfiguration,
+  "ParquetTextConfiguration",
+  "java"
+);
+@@clientName(BlobHierarchyListSegmentJava, "BlobHierarchyListSegment", "java");
+
+// The hand-written layout-aware download keeps its own public BlobLayoutRange in implementation.util, so the wire
+// models keep the names the AutoRest layer gave them.
+@@clientName(BlobLayout, "BlobLayoutInternal", "java");
+@@clientName(BlobLayoutEndpoint, "BlobLayoutEndpointsEndpointItem", "java");
+@@clientName(BlobLayoutRange, "BlobLayoutRangesRangeItem", "java");
+
+// The hand-written BlobServiceClient pages on the NextMarker in the segment response body, so it needs the
+// response as a typed model. Without an explicit access/usage it is only consumed inline by the emitter's paging
+// helpers and no model is generated. BlobContainersSegment is the name the shipped java impl used.
+@@clientName(ListContainersResponse, "BlobContainersSegment", "java");
+@@access(ListContainersResponse, Access.internal, "java");
+@@usage(ListContainersResponse, Usage.output, "java");
+
+// go and csharp both flatten these XML metadata bags to a plain string map; java was missing the same
+// alternateType, so the emitter generated BlobMetadata/ObjectReplicationMetadata wrapper classes where the
+// shipped models expose Map<String, String>.
+@@alternateType(BlobItem.metadata, Record<string>, "java");
+@@alternateType(BlobItem.objectReplicationMetadata, Record<string>, "java");
+@@access(BlobProperties, Access.internal, "java");
+@@access(BlobItem, Access.internal, "java");
+@@access(ArrowField, Access.internal, "java");
+@@access(ArrowConfiguration, Access.internal, "java");
+@@access(DelimitedTextConfiguration, Access.internal, "java");
+@@access(JsonTextConfiguration, Access.internal, "java");
+@@access(BlobDeleteTypeCustom, Access.internal, "java");
+// Emit the error enum + list responses standalone for java (queue lesson).
+@@access(StorageErrorCode, Access.public, "java");
+@@usage(StorageErrorCode, Usage.output, "java");
+
+@@clientName(Storage.Blob, "AzureBlobStorage", "java");
+
+// java metadata as an x-ms-meta-* collection rather than a single header, mirroring the scopes the other
+// languages already carry on this property.
+@@alternateType(MetadataHeaders.metadata, Record<string>, "java");
+
+// Same for the object replication rules: the shipped BlobDownloadHeaders exposes them as an x-ms-or-* collection
+// that ModelHelper.getObjectReplicationSourcePolicies parses. rust, javascript, python and go already carry this.
+@@alternateType(
+  ObjectReplicationHeaders.objectReplicationRules,
+  Record<string>,
+  "java"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(
+  ObjectReplicationHeaders.objectReplicationRules,
+  "collectionHeaderPrefix",
+  "x-ms-or-",
+  "java"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(
+  MetadataHeaders.metadata,
+  "collectionHeaderPrefix",
+  "x-ms-meta-",
+  "java"
+);
+
+// Java's error model adds the detail fields the service returns for header and query parameter errors; the hand-written
+// client reads HeaderName to explain x-ms-version mismatches.
+@error
+@mediaTypeHint("application/xml")
+@TypeSpec.Xml.name("Error")
+model BlobStorageError {
+  ...Storage.Blob.Error;
+
+  /** The name of the header that caused the error. */
+  @TypeSpec.Xml.name("HeaderName") headerName?: string;
+
+  /** The value of the header that caused the error. */
+  @TypeSpec.Xml.name("HeaderValue") headerValue?: string;
+
+  /** The name of the query parameter that caused the error. */
+  @TypeSpec.Xml.name("QueryParameterName") queryParameterName?: string;
+
+  /** The value of the query parameter that caused the error. */
+  @TypeSpec.Xml.name("QueryParameterValue") queryParameterValue?: string;
+
+  /** The reason for the error. */
+  @TypeSpec.Xml.name("Reason") reason?: string;
+
+  /** Additional error detail. */
+  @TypeSpec.Xml.name("ExtendedErrorDetail") extendedErrorDetail?: string;
+}
+
+@@alternateType(Storage.Blob.Error, BlobStorageError, "java");
+
+// The required blob items make the Java emitter collect both unwrapped lists in locals, leaving the optional prefix list
+// unset, so any page with a prefix fails. With both lists optional, the emitter appends to field-initialized lists, so
+// the getters never return null, as in the shipped model, and the default XML root stays "Blobs".
+@TypeSpec.Xml.name("Blobs")
+model BlobHierarchyListSegmentJava {
+  /** The blob items. */
+  @TypeSpec.Xml.name("Blob")
+  @TypeSpec.Xml.unwrapped
+  blobItems?: Storage.Blob.BlobItem[];
+
+  /** The blob prefixes. */
+  @TypeSpec.Xml.name("BlobPrefix")
+  @TypeSpec.Xml.unwrapped
+  blobPrefixes?: Storage.Blob.BlobPrefix[];
+}
+
+@@alternateType(BlobHierarchyList, BlobHierarchyListSegmentJava, "java");

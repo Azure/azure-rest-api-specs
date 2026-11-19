@@ -31,10 +31,17 @@ options:
       name: "@azure/storage-blob"
       description: "Azure.Storage.Blob Service"
     flavor: azure
-  # "@azure-tools/typespec-java":
-  #   emitter-output-dir: "{output-dir}/{service-dir}/azure-storage-blob"
-  #   namespace: com.azure.storage.blob
-  #   flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-storage-blob"
+    namespace: "com.azure.storage.blob"
+    flavor: azure
+    generate-tests: false
+    max-overload: model
+    customization-class: "customization/src/main/java/BlobStorageCustomizations.java"
+    use-default-http-status-code-to-exception-type-mapping: false
+    models-subpackage: "implementation.models"
+    custom-types-subpackage: "models"
+    custom-types: "AccessTier,AccountKind,ArchiveStatus,BlobAccessPolicy,BlobAnalyticsLogging,BlobContainerEncryptionScope,BlobContainerItem,BlobContainerItemProperties,BlobCopySourceTagsMode,BlobCorsRule,BlobErrorCode,BlobHttpHeaders,BlobImmutabilityPolicyMode,BlobMetrics,BlobQueryHeaders,BlobRetentionPolicy,BlobServiceProperties,BlobServiceStatistics,BlobSignedIdentifier,BlobType,Block,BlockList,BlockListType,BlockLookupList,ClearRange,CopyStatusType,CpkInfo,CustomerProvidedKeyInfo,DeleteSnapshotsOptionType,EncryptionAlgorithmType,FileShareTokenIntent,FilterBlobsItem,GeoReplication,GeoReplicationStatus,GeoReplicationStatusType,KeyInfo,LeaseDurationType,LeaseStateType,LeaseStatusType,ListBlobContainersIncludeType,ListBlobsIncludeItem,PageList,PageRange,PathRenameMode,PublicAccessType,RehydratePriority,SequenceNumberActionType,SkuName,StaticWebsite,SyncCopyStatusType,UserDelegationKey"
   "@azure-tools/typespec-rust":
     package-dir: "azure_storage_blob"
     crate-name: "azure_storage_blob"
