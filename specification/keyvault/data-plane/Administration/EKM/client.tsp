@@ -23,6 +23,16 @@ namespace Customizations;
 
 @@clientName(KeyVault.EkmProxyInfo.ekmVendor, "EKMVendor", "go");
 @@clientName(KeyVault.EkmProxyInfo.ekmProduct, "EKMProduct", "go");
+@@clientName(
+  KeyVault.EkmConnection.serverCaCertificates,
+  "ServerCACertificates",
+  "go"
+);
+@@clientName(
+  KeyVault.EkmProxyClientCertificateInfo.caCertificates,
+  "CACertificates",
+  "go"
+);
 
 @@clientName(
   KeyVault.getEkmPrivateEndpointOperationStatus,

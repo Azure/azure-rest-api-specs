@@ -46,7 +46,7 @@ model PlaywrightWorkspaceProperties {
   reporting?: EnablementStatus = EnablementStatus.Disabled;
 
   @added(Versions.v2026_01_01_preview)
-  @doc("The URI of the Azure Storage account used to store workspace artifacts, test results, and reports.")
+  @doc("The URI of the Azure Storage account used to store workspace artifacts, test results, reports and browser profiles.")
   storageUri?: url;
 
   @added(Versions.v2026_08_01_preview)
@@ -69,6 +69,14 @@ model PlaywrightWorkspaceProperties {
   @added(Versions.v2026_11_01_preview)
   @doc("Specifies whether the browser proxy is enabled for the workspace.")
   browserProxy?: EnablementStatus = EnablementStatus.Enabled;
+
+  @added(Versions.v2026_11_10_preview)
+  @doc("Specifies whether the browser profile is enabled for the workspace.")
+  browserProfile?: EnablementStatus = EnablementStatus.Enabled;
+
+  @added(Versions.v2026_11_10_preview)
+  @doc("The Web Bot Authentication settings for the workspace.")
+  webBotAuth?: WebBotAuthSettings;
 }
 
 @doc("The status of the last resource operation.")
@@ -95,6 +103,53 @@ union EnablementStatus {
 
   @doc("The feature is disabled.")
   Disabled: "Disabled",
+}
+
+@added(Versions.v2026_11_10_preview)
+@doc("The Web Bot Authentication settings for a workspace.")
+model WebBotAuthSettings {
+  @doc("Controls whether Web Bot Authentication is enabled for the workspace.")
+  status?: EnablementStatus;
+
+  @doc("The signing key used for Web Bot Authentication. If omitted, the service defaults to Microsoft.")
+  signingKey?: WebBotAuthSigningKey = WebBotAuthSigningKey.Microsoft;
+
+  @visibility(Lifecycle.Read)
+  @doc("The URI of the public key directory used for HTTP message signature verification. This property is returned only when signingKey is Workspace.")
+  publicKeyDirectoryUri?: url;
+}
+
+@added(Versions.v2026_11_10_preview)
+@doc("The Web Bot Authentication settings that can be updated for a workspace.")
+model WebBotAuthSettingsUpdate {
+  ...OmitProperties<
+    OmitDefaults<PickProperties<WebBotAuthSettings, "status" | "signingKey">>,
+    "signingKey"
+  >;
+
+  @doc("The signing key used for Web Bot Authentication. If omitted, the existing signing key selection is preserved.")
+  signingKey?: WebBotAuthSigningKey;
+}
+
+@added(Versions.v2026_11_10_preview)
+@doc("The workspace properties that can be updated.")
+model PlaywrightWorkspacePatchProperties {
+  ...OmitProperties<PlaywrightWorkspaceProperties, "webBotAuth">;
+
+  @doc("The Web Bot Authentication settings for the workspace.")
+  webBotAuth?: WebBotAuthSettingsUpdate;
+}
+
+@added(Versions.v2026_11_10_preview)
+@doc("The signing key used for Web Bot Authentication.")
+union WebBotAuthSigningKey {
+  string,
+
+  @doc("Use a Microsoft-managed regional signing key common to all workspaces.")
+  Microsoft: "Microsoft",
+
+  @doc("Use a workspace-specific signing key.")
+  Workspace: "Workspace",
 }
 
 @doc("Managed identity properties for accessing Azure resources.")
