@@ -1,6 +1,7 @@
 import { Octokit } from "@octokit/rest";
 import { describe, expect, it, vi } from "vitest";
 import { reportLabelSyncFailure } from "../src/report-label-sync-failure.ts";
+import { reportBacklogTriageFailure } from "../src/backlog-triage.ts";
 import { createMockContext, createMockCore } from "./mocks.ts";
 
 const repo = { owner: "Azure", repo: "azure-rest-api-specs" };
@@ -22,7 +23,7 @@ function fixture() {
       {
         name: "sync",
         html_url: "https://github.com/Azure/azure-rest-api-specs/actions/runs/123/job/456",
-        conclusion: "failure",
+        conclusion: "failure" as string | null,
         steps: [{ name: "Apply audited changes", conclusion: "failure" }],
       },
     ],
@@ -98,6 +99,51 @@ function fixture() {
   const writes = () => state.requests.filter(({ method }) => method !== "GET");
   return { args, state, writes };
 }
+
+describe("backlog triage failure issues", () => {
+  it("includes the failed step while the applier job is still running its failure reporter", async () => {
+    const f = fixture();
+    f.state.jobs[0].conclusion = null;
+    await reportBacklogTriageFailure(f.args);
+    expect(f.state.issues[0].body).toContain("Apply audited changes");
+    expect(f.state.issues[0].body).toContain(": failure");
+  });
+
+  it("adopts an existing bot failure report, removes expiration, and reuses it on later runs", async () => {
+    const f = fixture();
+    f.state.issues = [
+      {
+        number: 48378,
+        title: "[aw] Failed jobs: Backlog Triage",
+        body: "<!-- gh-aw-agentic-workflow: Backlog Triage, id: 123 -->\n<!-- gh-aw-expires: 2026-11-26 -->",
+        html_url: "https://github.com/Azure/azure-rest-api-specs/issues/48378",
+      },
+    ];
+    await reportBacklogTriageFailure(f.args);
+    expect(f.state.issues[0].body).toContain("<!-- backlog-triage-failure -->");
+    expect(f.state.issues[0].body).not.toContain("gh-aw-expires");
+    f.args.context.runId = 124;
+    await reportBacklogTriageFailure(f.args);
+    expect(f.state.issues).toHaveLength(1);
+    expect(f.state.issues[0].body).toContain("/actions/runs/124/attempts/2");
+    expect(f.writes().map(({ method }) => method)).toEqual(["PATCH", "PATCH"]);
+  });
+
+  it("creates a report rather than adopting an unmarked issue with the same title", async () => {
+    const f = fixture();
+    f.state.issues = [
+      {
+        number: 1,
+        title: "[aw] Failed jobs: Backlog Triage",
+        body: "An unrelated report with the same title",
+        html_url: "https://github.com/Azure/azure-rest-api-specs/issues/1",
+      },
+    ];
+    await reportBacklogTriageFailure(f.args);
+    expect(f.writes().map(({ method }) => method)).toEqual(["POST"]);
+    expect(f.state.issues[1].body).toContain("<!-- backlog-triage-failure -->");
+  });
+});
 
 describe("label sync failure issues", () => {
   it("creates a tracking issue with the exact run attempt and failed step, without duplicate writes", async () => {

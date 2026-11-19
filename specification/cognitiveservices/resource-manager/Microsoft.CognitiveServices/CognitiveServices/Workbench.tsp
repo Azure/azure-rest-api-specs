@@ -26,6 +26,7 @@ namespace Microsoft.CognitiveServices;
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @parentResource(Project)
 model Workbench is Azure.ResourceManager.ProxyResource<
   WorkbenchProperties,
@@ -88,6 +89,7 @@ model Workbench is Azure.ResourceManager.ProxyResource<
  */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 model WorkbenchUpdate {
   /**
    * Properties of the workbench to update.
@@ -108,6 +110,7 @@ model WorkbenchUpdate {
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @armResourceOperations
 interface Workbenches {
   /**
@@ -138,6 +141,7 @@ interface Workbenches {
   @sharedRoute
   @added(Versions.v2026_09_15_preview)
   @removed(Versions.v2026_11_01)
+  @added(Versions.v2026_11_15_preview)
   @tag("Workbenches")
   // Explicit status-monitor responses infer the LRO without the Async template's final-state override.
   createOrUpdate is ArmResourceCreateOrReplaceSync<
@@ -179,6 +183,7 @@ interface Workbenches {
   @sharedRoute
   @added(Versions.v2026_09_15_preview)
   @removed(Versions.v2026_11_01)
+  @added(Versions.v2026_11_15_preview)
   @tag("Workbenches")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Workbench, PatchModel = WorkbenchUpdate>;
