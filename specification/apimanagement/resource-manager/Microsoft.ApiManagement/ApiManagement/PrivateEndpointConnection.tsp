@@ -15,6 +15,7 @@ namespace Microsoft.ApiManagement;
 model PrivateEndpointConnection is PrivateEndpointConnectionResource;
 alias PrivateEndpointOperations = PrivateEndpoints<PrivateEndpointConnection>;
 
+/** Legacy operations for private endpoint connections under an API Management service. */
 alias PrivateEndpointConnectionLegacyOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
