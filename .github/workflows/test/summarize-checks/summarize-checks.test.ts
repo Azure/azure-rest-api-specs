@@ -33,6 +33,7 @@ describe("ARM review label handoff", () => {
       });
       github.rest.pulls.get.mockResolvedValue({
         data: {
+          state: "open",
           head: { sha: fullGitSha },
           base: { ref: "main" },
           draft: false,
@@ -144,6 +145,7 @@ describe("ARM review label handoff", () => {
       const { github, core, run } = createSummary();
       github.rest.pulls.get.mockResolvedValue({
         data: {
+          state: "open",
           head: { sha: fullGitSha },
           base: { ref: "feature/example" },
           draft: true,
@@ -167,7 +169,9 @@ describe("ARM review label handoff", () => {
 
     it("does not apply an old head's impact to the current PR", async () => {
       const { github, run } = createSummary();
-      github.rest.pulls.get.mockResolvedValue({ data: { head: { sha: "different-head" } } });
+      github.rest.pulls.get.mockResolvedValue({
+        data: { state: "open", head: { sha: "different-head" } },
+      });
 
       await run();
 
@@ -195,7 +199,13 @@ describe("ARM review label handoff", () => {
       const core = createMockCore();
       github.rest.issues.listLabelsOnIssue.mockResolvedValue({ data: [] });
       github.rest.pulls.get.mockResolvedValue({
-        data: { head: { sha: fullGitSha }, base: { ref: "main" }, draft: false, labels: [] },
+        data: {
+          state: "open",
+          head: { sha: fullGitSha },
+          base: { ref: "main" },
+          draft: false,
+          labels: [],
+        },
       });
       github.rest.checks.listForRef.mockResolvedValue({ data: { check_runs: [] } });
       github.rest.issues.createComment.mockResolvedValue({ data: { id: 1 } });

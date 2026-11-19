@@ -42,6 +42,7 @@ import { intersect } from "../../../shared/src/set.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
 import { parseSignoffDispatchInputs } from "../arm-auto-signoff/arm-signoff-dispatch.ts";
 import { commentOrUpdate } from "../comment.ts";
+import { extractInputs, getOpenPullRequest } from "../context.ts";
 import {
   CONTRIBUTOR_ONBOARDING_URL,
   CONTRIBUTOR_READINESS_CHECK_NAME,
@@ -49,7 +50,6 @@ import {
 } from "../contributor-readiness.ts";
 import { statusBadge, type CommentStatus } from "./comment-status.ts";
 import { buildSdkBreakingChangesSummary, hasSdkBreakingChanges } from "./sdk-breaking-changes.ts";
-import { extractInputs } from "../context.ts";
 import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
 import {
   ImpactAssessmentSchema,
@@ -308,10 +308,8 @@ export default async function summarizeChecks({
     ));
   }
 
-  if (!issue_number) {
-    core.warning(`No issue number found for this event. Exiting summarize-checks.js early.`);
-    return;
-  }
+  const pr = await getOpenPullRequest(github, core, { owner, repo, issue_number });
+  if (!pr) return;
 
   // Publish PR identity as step outputs so the workflow can upload issue-number / head-sha
   // handoff artifacts. Downstream workflow_run consumers (e.g. data-plane review assignment)
@@ -334,6 +332,7 @@ export default async function summarizeChecks({
     head_sha,
     context.eventName,
     target_url,
+    pr,
   );
 }
 
@@ -367,6 +366,7 @@ export async function summarizeChecksImpl(
   head_sha: string,
   event_name: string,
   target_url: string,
+  existingPr?: NonNullable<Awaited<ReturnType<typeof getOpenPullRequest>>>,
 ): Promise<void> {
   core.info(`Handling ${event_name} event for PR #${issue_number} in ${owner}/${repo}.`);
 
@@ -375,7 +375,8 @@ export async function summarizeChecksImpl(
   await core.summary.write();
   core.setOutput("summary", process.env.GITHUB_STEP_SUMMARY);
 
-  const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: issue_number });
+  const pr = existingPr ?? (await getOpenPullRequest(github, core, { owner, repo, issue_number }));
+  if (!pr) return;
   if (pr.head.sha !== head_sha) {
     core.info(`Skipping summary for ${head_sha}; PR head is now ${pr.head.sha}.`);
     return;

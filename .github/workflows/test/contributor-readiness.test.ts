@@ -364,7 +364,7 @@ describe("contributor readiness", () => {
         ...f.context.repo,
         runId: f.context.runId,
       }),
-    ).resolves.toEqual({ headSha: pr.head.sha, issueNumber: pr.number });
+    ).resolves.toMatchObject({ headSha: pr.head.sha, issueNumber: pr.number });
     expect(f.github.rest.actions.deleteArtifact).toHaveBeenCalledExactlyOnceWith({
       ...f.context.repo,
       artifact_id: 1,

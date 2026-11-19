@@ -5,6 +5,9 @@ import { CoreLogger } from "./core-logger.ts";
 import type { Context, Core, GitHub, WebhookEvent } from "./github.ts";
 import { createLogHook, createRateLimitHook } from "./github.ts";
 import { getIssueNumber } from "./issues.ts";
+import { getCheckRunPullRequestNumber } from "./pull-request.ts";
+
+export { getOpenPullRequest } from "./pull-request.ts";
 
 export type PullRequest =
   RestEndpointMethodTypes["repos"]["listPullRequestsAssociatedWithCommit"]["response"]["data"][number];
@@ -36,6 +39,7 @@ export async function extractInputs(
   issue_number: number;
   run_id: number;
   details_url?: string;
+  artifactNames?: string[];
 }> {
   core.info("extractInputs()");
   core.info(`  eventName: ${context.eventName}`);
@@ -71,6 +75,7 @@ export async function extractInputs(
     issue_number: number;
     run_id: number;
     details_url?: string;
+    artifactNames?: string[];
   };
 
   // Add support for more event types as needed
@@ -132,6 +137,7 @@ export async function extractInputs(
 
     let issue_number: number;
     let head_sha: string;
+    let artifactNames: string[] | undefined;
 
     if (
       payload.workflow_run.event === "pull_request" ||
@@ -229,6 +235,7 @@ export async function extractInputs(
           ...getRepositoryInfo(payload.workflow_run.repository),
           runId: payload.workflow_run.id,
         });
+        artifactNames = artifactInputs.artifactNames;
         if (artifactInputs.headSha) {
           // The artifact can be newer than the SHA that triggered the run if a push landed in between.
           head_sha = artifactInputs.headSha;
@@ -257,6 +264,7 @@ export async function extractInputs(
       });
       head_sha = artifactInputs.headSha;
       issue_number = artifactInputs.issueNumber;
+      artifactNames = artifactInputs.artifactNames;
       if (!head_sha) {
         core.info(
           `Could not find 'head-sha' artifact, which is required to associate the triggering workflow run with the head SHA of a PR`,
@@ -278,6 +286,7 @@ export async function extractInputs(
       head_sha,
       issue_number,
       run_id: payload.workflow_run.id,
+      ...(artifactNames ? { artifactNames } : {}),
     };
   } else if (context.eventName === "check_run") {
     const payload = context.payload as WebhookEvent<"check-run">;
@@ -288,7 +297,7 @@ export async function extractInputs(
       repo: repositoryInfo.repo,
       head_sha: checkRun.head_sha,
       details_url: checkRun.details_url,
-      issue_number: NaN,
+      issue_number: getCheckRunPullRequestNumber(payload),
       run_id: NaN,
     };
   } else if (context.eventName === "check_suite" && context.payload.action === "completed") {
@@ -318,7 +327,8 @@ export async function extractInputs(
 /**
  * Reads the `head-sha=<sha>` and `issue-number=<n>` pairs from the artifact names of a workflow
  * run. Only call this for runs whose artifacts come from trusted code (see `extractInputs`).
- * @returns `headSha` ("" if absent) and `issueNumber` (NaN if absent or invalid).
+ * @returns `headSha` ("" if absent), `issueNumber` (NaN if absent or invalid), and artifact names
+ * for consumers to reuse without another API call.
  * @throws If the artifacts hold an invalid or conflicting head SHA, or conflicting PR numbers.
  */
 export async function getWorkflowRunArtifactInputs({
@@ -333,7 +343,7 @@ export async function getWorkflowRunArtifactInputs({
   owner: string;
   repo: string;
   runId: number;
-}): Promise<{ headSha: string; issueNumber: number }> {
+}): Promise<{ headSha: string; issueNumber: number; artifactNames: string[] }> {
   const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
     owner,
     repo,
@@ -342,7 +352,7 @@ export async function getWorkflowRunArtifactInputs({
   });
   const artifactNames = artifacts.map((artifact) => artifact.name);
   core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
-  return parseWorkflowRunArtifactInputs(artifactNames, core);
+  return { ...parseWorkflowRunArtifactInputs(artifactNames, core), artifactNames };
 }
 
 /**

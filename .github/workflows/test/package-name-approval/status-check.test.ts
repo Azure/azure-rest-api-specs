@@ -2,7 +2,8 @@ import type { GitHubScriptArgs } from "../../src/github.ts";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
 
-vi.mock("../../src/context.ts", () => ({
+vi.mock(import("../../src/context.ts"), async (importOriginal) => ({
+  ...(await importOriginal()),
   extractInputs: vi.fn(),
 }));
 
@@ -40,7 +41,7 @@ describe("status-check", () => {
 
   it("should pass when no package-name-review-required label", async () => {
     github.rest.pulls.get.mockResolvedValue({
-      data: { labels: [{ name: "other-label" }], head: { sha: "abc123" } },
+      data: { state: "open", labels: [{ name: "other-label" }], head: { sha: "abc123" } },
     });
 
     await statusCheck(args());
@@ -55,6 +56,7 @@ describe("status-check", () => {
   it("should fail when pending labels remain", async () => {
     github.rest.pulls.get.mockResolvedValue({
       data: {
+        state: "open",
         head: { sha: "abc123" },
         labels: [
           { name: "package-name-review-required" },
@@ -80,6 +82,7 @@ describe("status-check", () => {
   it("should pass when all package names approved", async () => {
     github.rest.pulls.get.mockResolvedValue({
       data: {
+        state: "open",
         head: { sha: "abc123" },
         labels: [
           { name: "package-name-review-required" },
@@ -101,6 +104,7 @@ describe("status-check", () => {
   it("should set pending when package-name-review-required but no pending or approved labels", async () => {
     github.rest.pulls.get.mockResolvedValue({
       data: {
+        state: "open",
         head: { sha: "abc123" },
         labels: [{ name: "package-name-review-required" }],
       },

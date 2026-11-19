@@ -35,7 +35,8 @@ vi.mock("../../src/comment.ts", () => ({
   parseExistingComments: vi.fn().mockReturnValue([undefined, undefined]),
 }));
 
-vi.mock("../../src/context.ts", () => ({
+vi.mock("../../src/context.ts", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("../../src/context.ts")>()),
   extractInputs: vi.fn(),
 }));
 
@@ -94,7 +95,7 @@ describe("post-results", () => {
       });
       vi.mocked(unlink).mockResolvedValue(undefined);
       github.rest.pulls.get.mockResolvedValue({
-        data: { labels: [], base: { ref: "main" } },
+        data: { state: "open", labels: [], base: { ref: "main" } },
       });
 
       await postResults({ github, context, core });

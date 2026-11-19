@@ -192,6 +192,7 @@ describe("SDK breaking-change summary", () => {
       const core = createMockCore();
       github.rest.pulls.get.mockResolvedValue({
         data: {
+          state: "open",
           head: { sha: headSha },
           base: { ref: "main" },
           draft: false,
@@ -243,6 +244,7 @@ describe("SDK breaking-change summary", () => {
     github.rest.pulls.get
       .mockResolvedValueOnce({
         data: {
+          state: "open",
           head: { sha: headSha },
           base: { ref: "main" },
           draft: false,

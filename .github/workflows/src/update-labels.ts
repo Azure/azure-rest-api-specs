@@ -1,15 +1,24 @@
 import { isFullGitSha } from "../../shared/src/git.ts";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
-import { extractInputs, getWorkflowRunArtifactInputs } from "../src/context.ts";
+import { extractInputs, getOpenPullRequest, getWorkflowRunArtifactInputs } from "./context.ts";
 import type { Context, Core, GitHub, GitHubScriptArgs, WebhookEvent } from "./github.ts";
 import { ArmAutoSignoffLabel } from "./arm-auto-signoff/arm-auto-signoff-labels.ts";
 
 export default async function updateLabels({ github, context, core }: GitHubScriptArgs) {
-  const { owner, repo, head_sha, issue_number, run_id } =
+  const { owner, repo, head_sha, issue_number, run_id, artifactNames } =
     context.eventName === "workflow_dispatch"
       ? await getUniversalSourceRunInputs(github, context, core)
       : await extractInputs(github, context, core);
-  await updateLabelsImpl({ owner, repo, head_sha, issue_number, run_id, github, core });
+  await updateLabelsImpl({
+    owner,
+    repo,
+    head_sha,
+    issue_number,
+    run_id,
+    artifactNames,
+    github,
+    core,
+  });
 }
 
 /**
@@ -32,14 +41,24 @@ async function getUniversalSourceRunInputs(github: GitHub, context: Context, cor
   ) {
     throw new Error("Update Labels dispatch source must be a Universal signoff run");
   }
-  const { headSha, issueNumber } = await getWorkflowRunArtifactInputs({
+  const { headSha, issueNumber, artifactNames } = await getWorkflowRunArtifactInputs({
     github,
     core,
     owner,
     repo,
     runId,
   });
-  return { owner, repo, head_sha: headSha, issue_number: issueNumber, run_id: runId };
+  if (!Number.isSafeInteger(issueNumber) || issueNumber <= 0) {
+    throw new Error(`Invalid value for 'issue_number': ${issueNumber}`);
+  }
+  return {
+    owner,
+    repo,
+    head_sha: headSha,
+    issue_number: issueNumber,
+    run_id: runId,
+    artifactNames,
+  };
 }
 
 export async function updateLabelsImpl({
@@ -48,6 +67,7 @@ export async function updateLabelsImpl({
   head_sha,
   issue_number,
   run_id,
+  artifactNames,
   github,
   core,
 }: {
@@ -56,36 +76,36 @@ export async function updateLabelsImpl({
   head_sha: string;
   issue_number: number;
   run_id: number;
+  artifactNames?: string[];
   github: GitHub;
   core: Core;
 }) {
-  if (isFullGitSha(head_sha)) {
-    core.setOutput("head_sha", head_sha);
-  } else {
-    core.info(`head_sha is not a valid full git SHA: '${head_sha}'`);
-  }
-
-  if (Number.isInteger(issue_number) && issue_number > 0) {
-    core.setOutput("issue_number", issue_number);
-  } else {
-    core.info(`issue_number must be a positive integer: ${issue_number}`);
-  }
-
   if (!run_id) {
     // TODO: List all artifacts of all workflows associated with issue_number
     throw new Error("Required input 'run_id' not found in env or context");
   }
 
-  // List artifacts from a single run_id
-  core.info(`listWorkflowRunArtifacts(${owner}, ${repo}, ${run_id})`);
-  const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
-    owner: owner,
-    repo: repo,
-    run_id: run_id,
-    per_page: PER_PAGE_MAX,
-  });
+  if (
+    artifactNames &&
+    !artifactNames.some((name) => name.startsWith("label-") && name.includes("="))
+  ) {
+    core.info("No label-action artifacts; skipping label updates and PR handoff.");
+    return;
+  }
 
-  const artifactNames: string[] = artifacts.map((a) => a.name);
+  if (!(await getOpenPullRequest(github, core, { owner, repo, issue_number }))) return;
+
+  if (!artifactNames) {
+    core.info(`listWorkflowRunArtifacts(${owner}, ${repo}, ${run_id})`);
+    artifactNames = (
+      await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+        owner,
+        repo,
+        run_id,
+        per_page: PER_PAGE_MAX,
+      })
+    ).map((a) => a.name);
+  }
 
   core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
 
@@ -125,11 +145,17 @@ export async function updateLabelsImpl({
   core.info(`labelsToAdd: ${JSON.stringify(labelsToAdd)}`);
   core.info(`labelsToRemove: ${JSON.stringify(labelsToRemove)}`);
 
-  if ((labelsToAdd.length > 0 || labelsToRemove.length > 0) && Number.isNaN(issue_number)) {
-    throw new Error(
-      `Invalid value for 'issue_number':${issue_number}. Expected an 'issue-number' artifact created by the workflow run.`,
-    );
+  if (labelsToAdd.length === 0 && labelsToRemove.length === 0) {
+    core.info("No label-action artifacts; skipping label updates and PR handoff.");
+    return;
   }
+
+  if (isFullGitSha(head_sha)) {
+    core.setOutput("head_sha", head_sha);
+  } else {
+    core.info(`head_sha is not a valid full git SHA: '${head_sha}'`);
+  }
+  core.setOutput("issue_number", issue_number);
 
   const pullRequestUrl = `https://github.com/${owner}/${repo}/pull/${issue_number}`;
   core.info(`pull request url: ${pullRequestUrl}`);

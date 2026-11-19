@@ -2,7 +2,8 @@ import type { GitHub, GitHubScriptArgs } from "../../src/github.ts";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
 
-vi.mock("../../src/context.ts", () => ({
+vi.mock(import("../../src/context.ts"), async (importOriginal) => ({
+  ...(await importOriginal()),
   extractInputs: vi.fn(),
 }));
 
@@ -64,7 +65,7 @@ describe("post-results", () => {
   function githubWithLabels(labels: string[]): GitHub {
     const github = createMockGithub();
     github.rest.pulls.get.mockResolvedValue({
-      data: { labels: labels.map((name) => ({ name })) },
+      data: { state: "open", labels: labels.map((name) => ({ name })) },
     });
     return github;
   }
