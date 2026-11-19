@@ -22,6 +22,9 @@ using Microsoft.DeviceRegistry;
 // Python Client configuration
 @@clientName(Microsoft.DeviceRegistry, "DeviceRegistryMgmtClient", "python");
 
+// Preserve the legacy Python enum member name.
+@@clientName(Format.Delta_1_0, exact("DELTA1_0"), "python");
+
 // CSharp Client configuration
 @@scope(OperationStatus.get, "!csharp");
 

@@ -1,0 +1,66 @@
+{
+  "title": "ClusterAssociations_CreateOrUpdate",
+  "operationId": "ClusterAssociations_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-10-07-preview",
+    "subscriptionId": "11809CA1-E126-4017-945E-AA795CD5C5A9",
+    "resourceGroupName": "rgnetworksecurity",
+    "agentFabricName": "testAIFabric",
+    "clusterAssociationName": "testClusterAssociation",
+    "If-None-Match": "*",
+    "resource": {
+      "properties": {
+        "clusterResourceId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgaks/providers/Microsoft.ContainerService/managedClusters/testCluster",
+        "sku": "Standard"
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "clusterResourceId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgaks/providers/Microsoft.ContainerService/managedClusters/testCluster",
+          "sku": "Standard",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.NetworkSecurity/agentFabrics/testAIFabric/clusterAssociations/testClusterAssociation",
+        "name": "testClusterAssociation",
+        "type": "Microsoft.NetworkSecurity/agentFabrics/clusterAssociations",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-09-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-09-01T00:00:00.000Z"
+        },
+        "location": "eastus"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/providers/Microsoft.NetworkSecurity/locations/westus3/operationStatuses/00000000-0000-0000-0000-000000000001?api-version=2026-10-07-preview"
+      },
+      "body": {
+        "properties": {
+          "clusterResourceId": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgaks/providers/Microsoft.ContainerService/managedClusters/testCluster",
+          "sku": "Standard",
+          "provisioningState": "Creating"
+        },
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgnetworksecurity/providers/Microsoft.NetworkSecurity/agentFabrics/testAIFabric/clusterAssociations/testClusterAssociation",
+        "name": "testClusterAssociation",
+        "type": "Microsoft.NetworkSecurity/agentFabrics/clusterAssociations",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-09-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-09-01T00:00:00.000Z"
+        },
+        "location": "eastus"
+      }
+    }
+  }
+}

@@ -176,24 +176,27 @@ export function prepareSpecGenSdkCommand(commandInput: SpecGenSdkCmdInput): stri
  * @param specRepoPath The specification repository path.
  * @returns The specConfigs array.
  */
-export function getSpecPaths(batchType: string, specRepoPath: string): SpecConfigs[] {
+export async function getSpecPaths(
+  batchType: string,
+  specRepoPath: string,
+): Promise<SpecConfigs[]> {
   let tspconfigs: string[] = [];
   let readmes: string[] = [];
   let skipUnmatchedReadmes = false;
   switch (batchType) {
     case "all-specs": {
-      tspconfigs = getAllTypeSpecPaths(specRepoPath);
+      tspconfigs = await getAllTypeSpecPaths(specRepoPath);
       readmes = findReadmeFiles(path.join(specRepoPath, "specification"));
       break;
     }
     case "all-typespecs": {
-      tspconfigs = getAllTypeSpecPaths(specRepoPath);
+      tspconfigs = await getAllTypeSpecPaths(specRepoPath);
       readmes = findReadmeFiles(path.join(specRepoPath, "specification"));
       skipUnmatchedReadmes = true;
       break;
     }
     case "all-mgmtplane-typespecs": {
-      tspconfigs = getAllTypeSpecPaths(specRepoPath).filter(
+      tspconfigs = (await getAllTypeSpecPaths(specRepoPath)).filter(
         (p) => p.includes(".Management") || p.includes("resource-manager"),
       );
       readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) =>
@@ -203,7 +206,7 @@ export function getSpecPaths(batchType: string, specRepoPath: string): SpecConfi
       break;
     }
     case "all-dataplane-typespecs": {
-      tspconfigs = getAllTypeSpecPaths(specRepoPath).filter(
+      tspconfigs = (await getAllTypeSpecPaths(specRepoPath)).filter(
         (p) => !p.includes(".Management") && !p.includes("resource-manager"),
       );
       readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) =>
