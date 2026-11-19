@@ -585,7 +585,7 @@ union CapacityModeTransitionStatus {
 }
 
 /**
- * Indicates the minimum allowed Tls version. The default is Tls 1.0, except for Cassandra and Mongo API's, which only work with Tls 1.2.
+ * The minimum TLS version allowed for requests to the database account. Accounts using the Cassandra or MongoDB API require TLS 1.2 or later.
  */
 union MinimalTlsVersion {
   string,
@@ -595,6 +595,10 @@ union MinimalTlsVersion {
   Tls11: "Tls11",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Tls12: "Tls12",
+
+  /** Sets TLS 1.3 as the minimum version for requests to the database account. */
+  @added(Versions.v2026_10_15)
+  Tls13: "Tls13",
 }
 
 /**
@@ -1770,7 +1774,7 @@ model DatabaseAccountGetProperties {
   enableBurstCapacity?: boolean;
 
   /**
-   * Indicates the minimum allowed Tls version. The default is Tls 1.0, except for Cassandra and Mongo API's, which only work with Tls 1.2.
+   * The minimum TLS version configured for this database account.
    */
   minimalTlsVersion?: MinimalTlsVersion;
 
@@ -2602,7 +2606,7 @@ model DatabaseAccountUpdateProperties {
   enableBurstCapacity?: boolean;
 
   /**
-   * Indicates the minimum allowed Tls version. The default is Tls 1.0, except for Cassandra and Mongo API's, which only work with Tls 1.2.
+   * The minimum TLS version to allow for requests to the database account. Omit this property in a PATCH request to keep the current setting.
    */
   minimalTlsVersion?: MinimalTlsVersion;
 
@@ -2850,7 +2854,7 @@ model DatabaseAccountCreateUpdateProperties {
   enableBurstCapacity?: boolean;
 
   /**
-   * Indicates the minimum allowed Tls version. The default is Tls 1.0, except for Cassandra and Mongo API's, which only work with Tls 1.2.
+   * The minimum TLS version to allow for requests to the database account. If omitted in a PUT request, the default is TLS 1.2. If a stricter service policy applies, a new account uses the policy minimum and an existing account keeps its current setting.
    */
   minimalTlsVersion?: MinimalTlsVersion;
 
