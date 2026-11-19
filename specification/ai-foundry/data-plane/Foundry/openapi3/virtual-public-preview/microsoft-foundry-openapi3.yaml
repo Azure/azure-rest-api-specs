@@ -106714,7 +106714,11 @@ components:
           description: The greeting mode.
         interruptible:
           type: boolean
-          description: Whether caller speech can interrupt the greeting.
+          description: |-
+            Whether caller speech can interrupt the greeting. When true or omitted, follows the session's normal interruption policy.
+            For Realtime sessions, `audio.input.turn_detection.interrupt_response: false` prevents automatic speech interruption,
+            and `audio.input.turn_detection: null` disables server-side turn detection and automatic speech interruption.
+            Explicit client `response.cancel` can still stop a Realtime greeting even when `interruptible` is false.
           default: true
         ignore_user_speech_during_greeting:
           type: boolean

@@ -548,7 +548,12 @@ model VoiceAgentGreetingConfig {
   @doc("The greeting mode.")
   type: VoiceAgentGreetingMode;
 
-  @doc("Whether caller speech can interrupt the greeting.")
+  @doc("""
+    Whether caller speech can interrupt the greeting. When true or omitted, follows the session's normal interruption policy.
+    For Realtime sessions, `audio.input.turn_detection.interrupt_response: false` prevents automatic speech interruption,
+    and `audio.input.turn_detection: null` disables server-side turn detection and automatic speech interruption.
+    Explicit client `response.cancel` can still stop a Realtime greeting even when `interruptible` is false.
+    """)
   interruptible?: boolean = true;
 
   @doc("Whether to ignore caller speech during a non-interruptible greeting instead of processing it after playback. Set to true only when `interruptible` is false.")
