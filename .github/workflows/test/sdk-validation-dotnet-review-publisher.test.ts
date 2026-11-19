@@ -9,7 +9,9 @@ const HEAD_SHA = "1".repeat(40);
 const SKILL_REVISION = "2".repeat(40);
 const REMEDIATION_SKILL_REVISION = "3".repeat(40);
 const BASELINE_SHA = "4".repeat(40);
-const SPEC_BASE_SHA = "5".repeat(40);
+const SPEC_BASE_TIP_SHA = "5".repeat(40);
+const SPEC_MERGE_BASE_SHA = "1".repeat(40);
+const SPEC_BASE_REF = "main";
 const SPEC_FILE = "specification/widget/Widget.Management/models.tsp";
 const temporaryDirectories: string[] = [];
 
@@ -21,11 +23,17 @@ async function writeJson(filePath: string, value: unknown): Promise<void> {
 async function createFixture(): Promise<{
   publicationContextPath: string;
   resultRootPath: string;
+  trustedContextRootPath: string;
 }> {
   const root = await mkdtemp(path.join(os.tmpdir(), "sdk-review-publisher-"));
   temporaryDirectories.push(root);
   const resultRootPath = path.join(root, "results");
-  const publicationContextPath = path.join(root, "publication", "typespec-review-context.json");
+  const trustedContextRootPath = path.join(root, "trusted-context");
+  const publicationContextPath = path.join(
+    root,
+    "publication",
+    "sdk-review-publication-context.json",
+  );
   await mkdir(resultRootPath, { recursive: true });
   const source = { specPrNumber: 42, specHeadSha: HEAD_SHA };
   const reviewContext = {
@@ -67,7 +75,11 @@ async function createFixture(): Promise<{
   };
   const typeSpecContext = {
     schemaVersion: 1,
-    source: { ...source, specBaseSha: SPEC_BASE_SHA },
+    source: {
+      ...source,
+      specBaseRef: SPEC_BASE_REF,
+      specMergeBaseSha: SPEC_MERGE_BASE_SHA,
+    },
     projects: [],
     files: [
       {
@@ -77,6 +89,15 @@ async function createFixture(): Promise<{
         patch: "@@ -1,3 +1,3 @@\n-model OldWidget {\n+model Widget {\n   name: string;\n }",
       },
     ],
+  };
+  const publicationContext = {
+    schemaVersion: 1,
+    source: typeSpecContext.source,
+    handoff: {
+      adoBuildId: "123",
+      workflowRunId: 456,
+      workflowRunAttempt: 1,
+    },
   };
   const remediationResult = {
     schemaVersion: 1,
@@ -106,9 +127,13 @@ async function createFixture(): Promise<{
     ],
   };
   await Promise.all([
-    writeJson(publicationContextPath, typeSpecContext),
+    writeJson(publicationContextPath, publicationContext),
     writeJson(
       path.join(resultRootPath, "sdk-review-workspaces", "sdk-review-context.json"),
+      reviewContext,
+    ),
+    writeJson(
+      path.join(trustedContextRootPath, "sdk-review-workspaces", "sdk-review-context.json"),
       reviewContext,
     ),
     writeJson(path.join(resultRootPath, "sdk-review-result.json"), rawResult),
@@ -117,13 +142,17 @@ async function createFixture(): Promise<{
       path.join(resultRootPath, "sdk-review-input", "typespec-review-context.json"),
       typeSpecContext,
     ),
+    writeJson(
+      path.join(trustedContextRootPath, "sdk-review-input", "typespec-review-context.json"),
+      typeSpecContext,
+    ),
     writeJson(path.join(resultRootPath, "typespec-remediation-result.json"), remediationResult),
     writeFile(
       path.join(resultRootPath, "typespec-remediation-result.md"),
       "# TypeSpec remediation\n",
     ),
   ]);
-  return { publicationContextPath, resultRootPath };
+  return { publicationContextPath, resultRootPath, trustedContextRootPath };
 }
 
 afterEach(async () => {
@@ -143,7 +172,7 @@ describe("publishSdkReviewResult", () => {
       data: {
         state: "open",
         head: { sha: "9".repeat(40) },
-        base: { sha: SPEC_BASE_SHA },
+        base: { ref: SPEC_BASE_REF, sha: SPEC_BASE_TIP_SHA },
       },
     });
 
@@ -159,14 +188,14 @@ describe("publishSdkReviewResult", () => {
     expect(github.rest.pulls.createReviewComment).not.toHaveBeenCalled();
   });
 
-  it("does not mutate a PR after its base changes", async () => {
+  it("publishes when the base tip advances without changing the merge base", async () => {
     const fixture = await createFixture();
     const github = createMockGithub();
     github.rest.pulls.get.mockResolvedValue({
       data: {
         state: "open",
         head: { sha: HEAD_SHA },
-        base: { sha: "9".repeat(40) },
+        base: { ref: SPEC_BASE_REF, sha: "9".repeat(40) },
       },
     });
 
@@ -178,8 +207,62 @@ describe("publishSdkReviewResult", () => {
       workflowRunUrl: "https://github.com/owner/repo/actions/runs/1",
     });
 
-    expect(github.rest.issues.createComment).not.toHaveBeenCalled();
+    expect(github.rest.issues.createComment).toHaveBeenCalled();
     expect(github.rest.pulls.createReviewComment).not.toHaveBeenCalled();
+  });
+
+  it("publishes rerun guidance when the comparison merge base changes", async () => {
+    const fixture = await createFixture();
+    const github = createMockGithub();
+    github.rest.pulls.get.mockResolvedValue({
+      data: {
+        state: "open",
+        head: { sha: HEAD_SHA },
+        base: { ref: SPEC_BASE_REF, sha: SPEC_BASE_TIP_SHA },
+      },
+    });
+    github.rest.repos.compareCommitsWithBasehead.mockResolvedValue({
+      data: { files: [], merge_base_commit: { sha: "9".repeat(40) } },
+    });
+
+    await publishSdkReviewResult({
+      githubScript: { github, context: createMockContext(), core: createMockCore() },
+      ...fixture,
+      validatedResultAvailable: true,
+      workflowConclusion: "success",
+      workflowRunUrl: "https://github.com/owner/repo/actions/runs/1",
+    });
+
+    const comment = github.rest.issues.createComment.mock.calls[0]?.[0] as unknown as {
+      body: string;
+    };
+    expect(comment.body).toContain("target branch comparison changed");
+  });
+
+  it("publishes rerun guidance when the base ref changes", async () => {
+    const fixture = await createFixture();
+    const github = createMockGithub();
+    github.rest.pulls.get.mockResolvedValue({
+      data: {
+        state: "open",
+        head: { sha: HEAD_SHA },
+        base: { ref: "release", sha: SPEC_BASE_TIP_SHA },
+      },
+    });
+
+    await publishSdkReviewResult({
+      githubScript: { github, context: createMockContext(), core: createMockCore() },
+      ...fixture,
+      validatedResultAvailable: true,
+      workflowConclusion: "success",
+      workflowRunUrl: "https://github.com/owner/repo/actions/runs/1",
+    });
+
+    expect(github.rest.repos.compareCommitsWithBasehead).not.toHaveBeenCalled();
+    const comment = github.rest.issues.createComment.mock.calls[0]?.[0] as unknown as {
+      body: string;
+    };
+    expect(comment.body).toContain("target branch comparison changed");
   });
 
   it("publishes failure guidance without reading result artifacts", async () => {
@@ -189,7 +272,7 @@ describe("publishSdkReviewResult", () => {
       data: {
         state: "open",
         head: { sha: HEAD_SHA },
-        base: { sha: SPEC_BASE_SHA },
+        base: { ref: SPEC_BASE_REF, sha: SPEC_BASE_TIP_SHA },
       },
     });
 
@@ -218,7 +301,7 @@ describe("publishSdkReviewResult", () => {
       data: {
         state: "open",
         head: { sha: HEAD_SHA },
-        base: { sha: SPEC_BASE_SHA },
+        base: { ref: SPEC_BASE_REF, sha: SPEC_BASE_TIP_SHA },
       },
     });
 
@@ -244,7 +327,7 @@ describe("publishSdkReviewResult", () => {
       data: {
         state: "open",
         head: { sha: HEAD_SHA },
-        base: { sha: SPEC_BASE_SHA },
+        base: { ref: SPEC_BASE_REF, sha: SPEC_BASE_TIP_SHA },
       },
     });
 
@@ -269,7 +352,7 @@ describe("publishSdkReviewResult", () => {
   it("rejects results for a different source than the trusted publication context", async () => {
     const fixture = await createFixture();
     const reviewContextPath = path.join(
-      fixture.resultRootPath,
+      fixture.trustedContextRootPath,
       "sdk-review-workspaces",
       "sdk-review-context.json",
     );
@@ -283,7 +366,7 @@ describe("publishSdkReviewResult", () => {
       data: {
         state: "open",
         head: { sha: HEAD_SHA },
-        base: { sha: SPEC_BASE_SHA },
+        base: { ref: SPEC_BASE_REF, sha: SPEC_BASE_TIP_SHA },
       },
     });
 

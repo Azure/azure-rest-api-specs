@@ -528,7 +528,7 @@ describe("sdk-validation-dotnet-review-handoff", () => {
         state: "open",
         changed_files: 0,
         head: { sha: SAMPLE_HEAD_SHA },
-        base: { sha: "1".repeat(40), repo: { full_name: "owner/repo" } },
+        base: { ref: "main", sha: "1".repeat(40), repo: { full_name: "owner/repo" } },
       },
     });
     mockGithub.rest.repos.getContent.mockRejectedValue(
@@ -576,7 +576,8 @@ describe("sdk-validation-dotnet-review-handoff", () => {
       source: {
         specPrNumber: 47607,
         specHeadSha: SAMPLE_HEAD_SHA,
-        specBaseSha: "1".repeat(40),
+        specBaseRef: "main",
+        specMergeBaseSha: "1".repeat(40),
       },
       projects: [
         {
@@ -585,6 +586,20 @@ describe("sdk-validation-dotnet-review-handoff", () => {
         },
       ],
       files: [],
+    });
+    expect(JSON.parse(fs.readFileSync(result.publicationContextPath!, "utf8"))).toEqual({
+      schemaVersion: 1,
+      source: {
+        specPrNumber: 47607,
+        specHeadSha: SAMPLE_HEAD_SHA,
+        specBaseRef: "main",
+        specMergeBaseSha: "1".repeat(40),
+      },
+      handoff: {
+        adoBuildId: SAMPLE_BUILD_ID,
+        workflowRunId: 123,
+        workflowRunAttempt: 1,
+      },
     });
     expect(
       fs.existsSync(
@@ -604,6 +619,71 @@ describe("sdk-validation-dotnet-review-handoff", () => {
     expect(mockGithub.rest.repos.createCommitStatus).not.toHaveBeenCalled();
   });
 
+  it("preserves publication identity before a missing packages artifact fails the handoff", async () => {
+    const mockGithub = createMockGithub();
+    const mockContext = createMockContext();
+    const mockCore = createMockCore();
+    const outputRootDir = createTempOutputDir();
+    const artifact = createSampleArtifact();
+    mockContext.payload = createSampleCheckRunPayload();
+    mockGithub.rest.pulls.get.mockResolvedValue({
+      data: {
+        number: 47607,
+        state: "open",
+        changed_files: 0,
+        head: { sha: SAMPLE_HEAD_SHA },
+        base: { ref: "main", sha: "1".repeat(40), repo: { full_name: "owner/repo" } },
+      },
+    });
+    mockFetch.mockImplementation((url) => {
+      const requestUrl = getRequestUrl(url);
+      if (requestUrl.includes("artifacts?api-version=7.0")) {
+        return Promise.resolve(
+          createArtifactListResponse([
+            {
+              name: SPEC_GEN_SDK_ARTIFACT_NAME,
+              downloadUrl: "https://artifacts.example.com/spec-gen",
+            },
+          ]),
+        );
+      }
+      if (requestUrl.includes("/spec-gen") && requestUrl.includes("format=file")) {
+        return Promise.resolve(
+          new Response(JSON.stringify(artifact), {
+            status: 200,
+            headers: { "content-length": String(JSON.stringify(artifact).length) },
+          }),
+        );
+      }
+      return Promise.resolve(new Response("Not Found", { status: 404 }));
+    });
+
+    await expect(
+      runSdkValidationDotnetReviewHandoffImpl({
+        github: mockGithub,
+        context: mockContext,
+        core: mockCore,
+        outputRootDir,
+        retryOptions: { initialDelayMs: 1 },
+        fetchImpl: mockFetch,
+      }),
+    ).rejects.toThrow("No matching 'packages' artifact");
+
+    const publicationContextPath = path.join(
+      outputRootDir,
+      `publication-context-build-${SAMPLE_BUILD_ID}`,
+      "sdk-review-publication-context.json",
+    );
+    expect(fs.existsSync(publicationContextPath)).toBe(true);
+    expect(mockCore.setOutput).toHaveBeenCalledWith(
+      "publication_context_path",
+      publicationContextPath,
+    );
+    expect(mockFetch.mock.calls.some(([url]) => getRequestUrl(url).includes("format=zip"))).toBe(
+      false,
+    );
+  });
+
   it("rejects stale PRs before downloading artifacts", async () => {
     const mockGithub = createMockGithub();
     const mockContext = createMockContext();
@@ -615,7 +695,7 @@ describe("sdk-validation-dotnet-review-handoff", () => {
         state: "open",
         changed_files: 0,
         head: { sha: "9".repeat(40) },
-        base: { sha: "1".repeat(40), repo: { full_name: "owner/repo" } },
+        base: { ref: "main", sha: "1".repeat(40), repo: { full_name: "owner/repo" } },
       },
     });
 
@@ -630,6 +710,7 @@ describe("sdk-validation-dotnet-review-handoff", () => {
     expect(result.status).toBe("skipped");
     expect(result.reason).toContain("Skipping stale or closed PR #47607");
     expect(mockFetch).not.toHaveBeenCalled();
+    expect(mockGithub.rest.repos.compareCommitsWithBasehead).not.toHaveBeenCalled();
   });
 
   it("skips review when SDK generation produced no reviewable packages", async () => {
@@ -641,7 +722,16 @@ describe("sdk-validation-dotnet-review-handoff", () => {
       apiViewRequestData: [],
     });
 
-    mockContext.payload = createSampleCheckRunPayload({ pull_requests: [] });
+    mockContext.payload = createSampleCheckRunPayload();
+    mockGithub.rest.pulls.get.mockResolvedValue({
+      data: {
+        number: 47607,
+        state: "open",
+        changed_files: 0,
+        head: { sha: SAMPLE_HEAD_SHA },
+        base: { ref: "main", sha: "1".repeat(40), repo: { full_name: "owner/repo" } },
+      },
+    });
     mockFetch.mockImplementation((url) => {
       const requestUrl = getRequestUrl(url);
       if (requestUrl.includes("artifacts?api-version=7.0")) {
@@ -680,7 +770,8 @@ describe("sdk-validation-dotnet-review-handoff", () => {
     expect(mockFetch.mock.calls.some(([url]) => getRequestUrl(url).includes("format=zip"))).toBe(
       false,
     );
-    expect(mockGithub.rest.pulls.get).not.toHaveBeenCalled();
+    expect(mockGithub.rest.pulls.get).toHaveBeenCalledTimes(1);
+    expect(mockGithub.rest.repos.compareCommitsWithBasehead).not.toHaveBeenCalled();
   });
 
   it("enforces the existing artifact byte limit", async () => {
@@ -694,7 +785,7 @@ describe("sdk-validation-dotnet-review-handoff", () => {
         state: "open",
         changed_files: 0,
         head: { sha: SAMPLE_HEAD_SHA },
-        base: { sha: "1".repeat(40), repo: { full_name: "owner/repo" } },
+        base: { ref: "main", sha: "1".repeat(40), repo: { full_name: "owner/repo" } },
       },
     });
     mockFetch.mockImplementation((url) => {

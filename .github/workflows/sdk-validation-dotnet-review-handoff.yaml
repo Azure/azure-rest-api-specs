@@ -44,6 +44,15 @@ jobs:
               await import('${{ github.workspace }}/.github/workflows/src/sdk-validation-dotnet-review-handoff.ts');
             return await runSdkValidationDotnetReviewHandoff({ github, context, core });
 
+      - name: Upload trusted publication context
+        if: ${{ always() && steps.review-handoff.outputs.publication_context_path }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: sdk-review-publication-context-build-${{ steps.review-handoff.outputs.build_id }}-attempt-${{ github.run_attempt }}
+          path: ${{ steps.review-handoff.outputs.publication_context_path }}
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Upload validated SDK naming review input
         if: ${{ steps.review-handoff.outputs.handoff_status == 'validated' && steps.review-handoff.outputs.input_dir }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

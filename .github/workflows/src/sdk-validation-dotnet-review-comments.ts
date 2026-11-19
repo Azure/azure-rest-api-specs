@@ -116,6 +116,19 @@ export function buildSdkReviewFailureSummary(headSha: string, workflowRunUrl: st
   ].join("\n");
 }
 
+export function buildSdkReviewStaleComparisonSummary(
+  headSha: string,
+  workflowRunUrl: string,
+): string {
+  return [
+    "## Generated .NET SDK review",
+    "",
+    `The target branch comparison changed while commit ${inlineCode(headSha)} was being reviewed, so its results were not published.`,
+    "",
+    `Rerun the SDK validation workflow for the current PR comparison. [Review workflow run](${workflowRunUrl})`,
+  ].join("\n");
+}
+
 export async function publishSdkReviewSummary(
   { github, context, core }: GitHubScriptArgs,
   pullNumber: number,
