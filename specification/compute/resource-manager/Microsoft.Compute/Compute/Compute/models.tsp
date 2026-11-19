@@ -5652,7 +5652,11 @@ model InstanceProfile {
   /**
    * Specifies the resource ID of the gallery Instance Profile version. The ID must use the format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/instanceProfiles/{instanceProfileName}/versions/{versionNumber}.
    */
-  id: string;
+  id: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/galleries/instanceProfiles/versions";
+    }
+  ]>;
 }
 
 /**
