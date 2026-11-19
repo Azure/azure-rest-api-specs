@@ -1,6 +1,7 @@
 import * as z from "zod";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import {
+  APIViewRequestDataSchema,
   SpecGenSdkArtifactInfoSchema,
   type SpecGenSdkArtifactInfo,
 } from "../../shared/src/sdk-types.ts";
@@ -32,7 +33,8 @@ const MetadataSchema = z.strictObject({
     headSha: z.string().regex(/^[0-9a-f]{40}$/i),
     prNumber: z.string().regex(/^[1-9]\d*$/),
     result: z.enum(["succeeded", "failed", "warning", "pending", "inProgress", "notEnabled"]),
-  }).strict(),
+    apiViewRequestData: z.array(APIViewRequestDataSchema.passthrough()),
+  }).passthrough(),
 });
 
 const LANGUAGES: Record<string, SpecGenSdkArtifactInfo["language"]> = {
@@ -164,19 +166,22 @@ function nativeBuild(check: CheckRuns[number]) {
   const url = new URL(check.details_url ?? "");
   const { buildId, projectUrl } = getAdoBuildInfoFromUrl(url.href);
   const match = /^([1-9]\d*)\|([1-9]\d*)\|([0-9a-f-]+)$/i.exec(check.external_id ?? "");
+  const project = /^\/azure-sdk\/([A-Za-z0-9-]+)\/_build\/results$/.exec(url.pathname)?.[1];
   if (
     url.origin !== "https://dev.azure.com" ||
     url.username ||
     url.password ||
     !match ||
     !Guid.safeParse(match[3]).success ||
-    projectUrl !== `https://dev.azure.com/azure-sdk/${match[3]}` ||
-    url.pathname !== `/azure-sdk/${match[3]}/_build/results` ||
+    !project ||
+    projectUrl !== `https://dev.azure.com/azure-sdk/${project}` ||
+    (Guid.safeParse(project).success && project !== match[3]) ||
     buildId !== match[2] ||
     url.searchParams.getAll("buildId").length !== 1
   ) {
     throw new Error(`Invalid native SDK build identity for ${check.name}`);
   }
+  // Named project URLs are valid; the native external ID supplies their immutable project GUID.
   return { definitionId: Number(match[1]), buildId: Number(buildId), projectId: match[3] };
 }
 

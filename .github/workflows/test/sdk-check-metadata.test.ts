@@ -177,6 +177,32 @@ describe("private SDK check metadata consumers", () => {
     await expect(labels()).rejects.toThrow("identity or transport mismatch");
   });
 
+  it("accepts named native project URLs and preserves complete manifest extensions", () => {
+    sample.native.details_url = sample.native.details_url!.replace(PROJECT, "internal");
+    sample.metadata.details_url = sample.native.details_url;
+    Object.assign(sample.envelope.artifact, { futureField: { retain: true } });
+    sample.envelope.artifact.apiViewRequestData = [
+      Object.assign(
+        { packageName: "Synthetic", filePath: "api.json" },
+        { futureRequestField: true },
+      ),
+    ];
+    publish();
+    expect(readPrivateSdkArtifact(sample.native, [sample.metadata], 42)).toEqual(
+      sample.envelope.artifact,
+    );
+  });
+
+  it("rejects a conflicting project GUID in the native build URL", () => {
+    sample.native.details_url = sample.native.details_url!.replace(
+      PROJECT,
+      "11111111-1111-4111-8111-111111111111",
+    );
+    expect(() => readPrivateSdkArtifact(sample.native, [sample.metadata], 42)).toThrow(
+      "Invalid native SDK build identity",
+    );
+  });
+
   it.each([
     [true, "main", LabelAction.Add],
     [true, "RPSaaSMaster", LabelAction.Add],
