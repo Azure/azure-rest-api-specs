@@ -565,3 +565,30 @@ enum NameAvailabilityReason {
   #{ minLength: 1, maxLength: 127, pattern: "^[a-zA-Z0-9-]+$" },
   "csharp"
 );
+
+/**
+ * The type of action.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum PascalKeyRotationPolicyActionType {
+  /**
+   * Trigger Event Grid events.
+   */
+  notify: "Notify",
+
+  /**
+   * Rotate the key based on the key policy.
+   */
+  rotate: "Rotate",
+}
+
+@@alternateType(
+  KeyRotationPolicyActionType,
+  PascalKeyRotationPolicyActionType,
+  "rust"
+);
+@@clientName(
+  PascalKeyRotationPolicyActionType,
+  "KeyRotationPolicyActionType",
+  "rust"
+);
