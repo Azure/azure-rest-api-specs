@@ -176,7 +176,7 @@ union AddressSpaceOwnership {
 }
 
 @added(Microsoft.Mission.Versions.v2026_10_01_preview)
-@doc("An address space entry for the enclave. Customer entries have ownership 'CustomerManaged'; the RP-injected managed address space has ownership 'ProductManaged' and is always the last element.")
+@doc("A customer-requested address space for the enclave. The RP returns this entry exactly as provided.")
 model AddressSpaceEntry {
   @doc("CIDR prefix length (e.g., 22, 23, 24). Determines the size of the address space.")
   @minValue(8)
@@ -185,9 +185,18 @@ model AddressSpaceEntry {
 
   @doc("CIDR notation address space (e.g., '10.0.0.0/23'). Optional — if omitted, RP allocates based on prefixLength. If provided, used as-is (custom address space).")
   addressSpace?: string;
+}
 
-  @doc("Indicates whether this address space is customer-managed or product-managed. Product-managed entries are RP-injected and always the last element(s) in the array.")
-  @visibility(Lifecycle.Read)
+@added(Microsoft.Mission.Versions.v2026_10_01_preview)
+@doc("An address space computed by the RP for the enclave. Customer-requested entries have ownership 'CustomerManaged'; the RP-managed address space has ownership 'ProductManaged' and is always the last element.")
+model ComputedAddressSpaceEntry {
+  @doc("CIDR prefix length of the address space.")
+  prefixLength?: int32;
+
+  @doc("CIDR notation address space allocated to the enclave (e.g., '10.0.0.0/23').")
+  addressSpace?: string;
+
+  @doc("Indicates whether this address space is customer-managed or product-managed.")
   ownership?: AddressSpaceOwnership;
 }
 
@@ -279,9 +288,15 @@ model VirtualEnclaveBaseModel {
   governedServiceList?: GovernedServiceItem[];
 
   @added(Microsoft.Mission.Versions.v2026_10_01_preview)
-  @doc("Address spaces for the enclave. Supports multiple entries. Customer specifies prefixLength, RP allocates and injects the addressSpace CIDR. Product-managed address spaces (ownership=productManaged) are RP-injected and always appear at the end of the array.")
+  @doc("Customer-requested address spaces for the enclave. Supports multiple entries. Each entry specifies a prefixLength for the RP to allocate, or a custom addressSpace CIDR. The RP returns these entries exactly as provided; allocated values are reported in computedAddressSpaces.")
   @identifiers(#[])
   addressSpaces?: AddressSpaceEntry[];
+
+  @added(Microsoft.Mission.Versions.v2026_10_01_preview)
+  @doc("Address spaces computed by the RP for the enclave. Contains an entry for each customer-requested address space with its allocated CIDR, followed by the product-managed address space.")
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  computedAddressSpaces?: ComputedAddressSpaceEntry[];
 
   @added(Microsoft.Mission.Versions.v2026_10_01_preview)
   @doc("The name of the enclave's virtual network.")

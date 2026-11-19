@@ -4160,7 +4160,7 @@
     },
     "AddressSpaceEntry": {
       "type": "object",
-      "description": "An address space entry for the enclave. Customer entries have ownership 'CustomerManaged'; the RP-injected managed address space has ownership 'ProductManaged' and is always the last element.",
+      "description": "A customer-requested address space for the enclave. The RP returns this entry exactly as provided.",
       "properties": {
         "prefixLength": {
           "type": "integer",
@@ -4172,11 +4172,6 @@
         "addressSpace": {
           "type": "string",
           "description": "CIDR notation address space (e.g., '10.0.0.0/23'). Optional — if omitted, RP allocates based on prefixLength. If provided, used as-is (custom address space)."
-        },
-        "ownership": {
-          "$ref": "#/definitions/AddressSpaceOwnership",
-          "description": "Indicates whether this address space is customer-managed or product-managed. Product-managed entries are RP-injected and always the last element(s) in the array.",
-          "readOnly": true
         }
       }
     },
@@ -5394,6 +5389,25 @@
       "required": [
         "value"
       ]
+    },
+    "ComputedAddressSpaceEntry": {
+      "type": "object",
+      "description": "An address space computed by the RP for the enclave. Customer-requested entries have ownership 'CustomerManaged'; the RP-managed address space has ownership 'ProductManaged' and is always the last element.",
+      "properties": {
+        "prefixLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "CIDR prefix length of the address space."
+        },
+        "addressSpace": {
+          "type": "string",
+          "description": "CIDR notation address space allocated to the enclave (e.g., '10.0.0.0/23')."
+        },
+        "ownership": {
+          "$ref": "#/definitions/AddressSpaceOwnership",
+          "description": "Indicates whether this address space is customer-managed or product-managed."
+        }
+      }
     },
     "DedicatedHubPatchModel": {
       "type": "object",
@@ -7675,7 +7689,7 @@
         },
         "addressSpaces": {
           "type": "array",
-          "description": "Address spaces for the enclave. Supports multiple entries. Customer specifies prefixLength, RP allocates and injects the addressSpace CIDR. Product-managed address spaces (ownership=productManaged) are RP-injected and always appear at the end of the array.",
+          "description": "Customer-requested address spaces for the enclave. Supports multiple entries. Each entry specifies a prefixLength for the RP to allocate, or a custom addressSpace CIDR. The RP returns these entries exactly as provided; allocated values are reported in computedAddressSpaces.",
           "items": {
             "$ref": "#/definitions/AddressSpaceEntry"
           },
@@ -7831,10 +7845,19 @@
         },
         "addressSpaces": {
           "type": "array",
-          "description": "Address spaces for the enclave. Supports multiple entries. Customer specifies prefixLength, RP allocates and injects the addressSpace CIDR. Product-managed address spaces (ownership=productManaged) are RP-injected and always appear at the end of the array.",
+          "description": "Customer-requested address spaces for the enclave. Supports multiple entries. Each entry specifies a prefixLength for the RP to allocate, or a custom addressSpace CIDR. The RP returns these entries exactly as provided; allocated values are reported in computedAddressSpaces.",
           "items": {
             "$ref": "#/definitions/AddressSpaceEntry"
           },
+          "x-ms-identifiers": []
+        },
+        "computedAddressSpaces": {
+          "type": "array",
+          "description": "Address spaces computed by the RP for the enclave. Contains an entry for each customer-requested address space with its allocated CIDR, followed by the product-managed address space.",
+          "items": {
+            "$ref": "#/definitions/ComputedAddressSpaceEntry"
+          },
+          "readOnly": true,
           "x-ms-identifiers": []
         },
         "networkName": {
