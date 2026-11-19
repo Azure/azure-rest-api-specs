@@ -13,6 +13,7 @@ jobs:
   sdk-breaking-change-labels:
     # Only run this job when the check run is 'SDK Validation *'
     if: |
+      github.repository != 'Azure/azure-rest-api-specs-pr' &&
       github.event.check_run.check_suite.app.name == 'Azure Pipelines' &&
       contains(github.event.check_run.name, 'SDK Validation')
     name: SDK Breaking Change Labels

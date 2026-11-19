@@ -16,6 +16,7 @@ import {
   generateArtifact,
   getBreakingChangeInfo,
   getExecutionReport,
+  getRequiredSettingValue,
   getSpecPaths,
   installLanguageToolchain,
   isBreakingChangeDetectionEnabled,
@@ -33,9 +34,14 @@ import {
 } from "./command-helpers.ts";
 import { checkEmitterEnabled, type EmitterCheckResult } from "./emitter-check.ts";
 import { LogLevel, logMessage, setVsoVariable, vsoAddAttachment, vsoLogIssue } from "./log.ts";
+import { completeBreakingChangeSignal } from "./native-check.ts";
 import { getGeneratedSdkApiVersions } from "./package-info.ts";
 import { validatePythonPackagesOnPyPI } from "./python-pypi-validation.ts";
-import { captureSdkReviewMetadata, type SdkReviewPackageChanges } from "./sdk-review-metadata.ts";
+import {
+  captureSdkReviewMetadata,
+  normalizePackageRootPath,
+  type SdkReviewPackageChanges,
+} from "./sdk-review-metadata.ts";
 import { resolveSdkRepoBranch } from "./sdk-validation-config.ts";
 import { detectChangedSpecConfigFiles } from "./spec-helpers.ts";
 import { type CommandResult, type ExecutionReport, type SpecGenSdkCmdInput } from "./types.ts";
@@ -342,19 +348,32 @@ export async function generateSdkForSingleSpec(): Promise<CommandResult> {
  * execution report and fold the result into it. Non-fatal by contract: any
  * failure leaves the package's existing breaking-change label untouched.
  */
-async function detectSdkBreakingChange(executionReport: ExecutionReport): Promise<void> {
+async function detectSdkBreakingChange(
+  executionReport: ExecutionReport,
+  sdkRepoPath?: string,
+): Promise<boolean | undefined> {
   const azsdkExe = process.env.AZSDK || "azsdk";
+  const signals: (boolean | undefined)[] = [];
   for (const pkg of executionReport.packages) {
     if (!pkg.packageRootPath) {
       logMessage(
         `Skipping breaking-change detection: no packageRootPath for ${pkg.packageName ?? "unknown package"}`,
         LogLevel.Warn,
       );
+      signals.push(undefined);
       continue;
     }
     let signal: boolean | undefined;
     try {
-      const args = prepareAzsdkDetectBreakingChangeCommand(pkg.packageRootPath);
+      let packagePath = pkg.packageRootPath;
+      if (sdkRepoPath) {
+        const relative = normalizePackageRootPath(sdkRepoPath, packagePath);
+        if (!relative) {
+          throw new Error(`Unsafe native SDK analysis package path: ${packagePath}`);
+        }
+        packagePath = path.resolve(sdkRepoPath, ...relative.split("/"));
+      }
+      const args = prepareAzsdkDetectBreakingChangeCommand(packagePath);
       logMessage(`Running: ${azsdkExe} ${args.join(" ")}`, LogLevel.Info);
       const output = await runCommandWithOutput(azsdkExe, args);
       const response = parseAzsdkResponse<AzsdkDetectBreakingChangeResponse>(output);
@@ -369,13 +388,20 @@ async function detectSdkBreakingChange(executionReport: ExecutionReport): Promis
     if (signal !== undefined) {
       pkg.shouldLabelBreakingChange = signal;
     }
+    signals.push(signal);
   }
+  return signals.length > 0 && signals.every((signal) => signal !== undefined)
+    ? signals.some((signal) => signal === true)
+    : undefined;
 }
 
 /* Generate SDKs for spec pull request */
 export async function generateSdkForSpecPr(): Promise<CommandResult> {
   // Parse the arguments
   const commandInput: SpecGenSdkCmdInput = parseArguments();
+  if (commandInput.nativeCheckSignal && !isPrivateSpecRepo(commandInput.specRepoHttpsUrl)) {
+    throw new Error("Native SDK check signaling is restricted to private spec PRs");
+  }
   // Construct the spec-gen-sdk command (used for OpenAPI fallback path)
   const specGenSdkCommand = prepareSpecGenSdkCommand(commandInput);
   // Get the spec paths from the changed files
@@ -395,6 +421,11 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
   let stagedArtifactsFolder = "";
   const apiViewRequestData: APIViewRequestData[] = [];
   const breakingChangeDetectionEnabled = isBreakingChangeDetectionEnabled();
+  const nativeReports: (ExecutionReport | undefined)[] = [];
+  const nativeSignals: (boolean | undefined)[] = [];
+  const nativeAnalysis =
+    commandInput.nativeCheckSignal === "breaking-present" ||
+    commandInput.nativeCheckSignal === "breaking-absent";
   // Tracks whether the SDK repo is currently checked out on a non-`main` branch
   // due to a `sdk-validation.yaml` pin from a previous spec in this run.
   let sdkRepoBranchSwitched = false;
@@ -411,6 +442,8 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
     let sdkReviewMetadata = new Map<string, SdkReviewPackageChanges>();
 
     if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
+      nativeReports.push(undefined);
+      nativeSignals.push(undefined);
       logMessage("Runner: no spec config file found in the changed files", LogLevel.Warn);
       continue;
     }
@@ -423,6 +456,8 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
     changedSpecPathText = "";
 
     if (tool === "unsupported") {
+      nativeReports.push(undefined);
+      nativeSignals.push(undefined);
       logMessage(
         `azsdk-cli is not available but is required for ${commandInput.sdkRepoName}. Skipping spec.`,
         LogLevel.Error,
@@ -541,18 +576,24 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
 
     // Run azsdk-cli breaking-change detection (spec-PR only, feature-flagged) and
     // let its definitive result override the label from spec-gen-sdk.
+    let nativeSignal: boolean | undefined;
     if (
-      breakingChangeDetectionEnabled &&
+      (breakingChangeDetectionEnabled || nativeAnalysis) &&
       changedSpec.typespecProject &&
       executionReport &&
       executionReport.packages.length > 0
     ) {
       try {
-        await detectSdkBreakingChange(executionReport);
+        nativeSignal = await detectSdkBreakingChange(
+          executionReport,
+          nativeAnalysis ? commandInput.localSdkRepoPath : undefined,
+        );
       } catch (error) {
         logMessage(`Runner: error in breaking-change detection:${inspect(error)}`, LogLevel.Warn);
       }
     }
+    nativeReports.push(executionReport);
+    nativeSignals.push(nativeSignal);
 
     // Process execution report (common path for both tools)
     try {
@@ -626,6 +667,21 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
   return {
     statusCode,
     executionResult: overallExecutionResult as CommandResult["executionResult"],
+    ...(commandInput.nativeCheckSignal
+      ? {
+          nativeCheck: {
+            required:
+              sdkGenerationExecuted &&
+              getRequiredSettingValue(
+                hasManagementPlaneSpecs,
+                hasTypeSpecProjects,
+                commandInput.sdkLanguage,
+                commandInput.typespecEmitter,
+              ),
+            breakingChange: completeBreakingChangeSignal(nativeReports, nativeSignals, statusCode),
+          },
+        }
+      : {}),
   };
 }
 

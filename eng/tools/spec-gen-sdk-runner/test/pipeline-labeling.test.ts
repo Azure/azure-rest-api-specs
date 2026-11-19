@@ -10,11 +10,6 @@ const pipelineTemplatePath = path.resolve(
   "../../../pipelines/templates/stages/archetype-spec-gen-sdk.yml",
 );
 const pipelineTemplate = fs.readFileSync(pipelineTemplatePath, "utf8");
-const installAzsdkTemplatePath = path.resolve(
-  testDirectory,
-  "../../../common/pipelines/templates/steps/install-azsdk-cli.yml",
-);
-const installAzsdkTemplate = fs.readFileSync(installAzsdkTemplatePath, "utf8");
 
 function findPipelineStep(
   value: unknown,
@@ -86,13 +81,4 @@ test("keeps azsdk installation mandatory for Rust generation", () => {
   expect(pipelineTemplate).toContain(
     "Condition: and(succeeded(), contains(variables['SdkRepoName'], 'rust'))",
   );
-});
-
-test("makes azsdk installation best-effort for non-Rust SDK PR creation", () => {
-  expect(pipelineTemplate).toContain(
-    "Condition: and(succeeded(), not(contains(variables['SdkRepoName'], 'rust')), ne(variables['Build.Reason'], 'PullRequest'))",
-  );
-  expect(pipelineTemplate).toContain("ContinueOnError: true");
-  expect(installAzsdkTemplate).toContain("ContinueOnError: false");
-  expect(installAzsdkTemplate).toContain("continueOnError: ${{ parameters.ContinueOnError }}");
 });

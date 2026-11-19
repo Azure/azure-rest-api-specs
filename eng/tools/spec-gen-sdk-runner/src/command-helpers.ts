@@ -11,6 +11,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { inspect } from "node:util";
 import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.ts";
+import { parseNativeCheckSignal } from "./native-check.ts";
 import { groupSpecConfigPaths } from "./spec-helpers.ts";
 import {
   type ExecutionReport,
@@ -115,6 +116,13 @@ export function parseArguments(): SpecGenSdkCmdInput {
     specRepoHttpsUrl: getArgumentValue(args, "--spec-repo-url", ""),
     headRepoHttpsUrl: getArgumentValue(args, "--head-repo-url", ""),
     headBranch: getArgumentValue(args, "--head-branch", ""),
+    ...(getArgumentValue(args, "--native-check-signal", "")
+      ? {
+          nativeCheckSignal: parseNativeCheckSignal(
+            getArgumentValue(args, "--native-check-signal", ""),
+          ),
+        }
+      : {}),
   };
 }
 
