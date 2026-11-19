@@ -230,7 +230,7 @@ export function readPrivateSdkArtifact(
     check.details_url !== native.details_url ||
     artifact.headSha !== native.head_sha ||
     artifact.prNumber !== String(prNumber) ||
-    artifact.language !== LANGUAGES[native.name]
+    artifact.language !== LANGUAGES[native.name.replace(/ - PR$/, "")]
   ) {
     throw new Error(`SDK metadata identity or transport mismatch for ${native.name}`);
   }

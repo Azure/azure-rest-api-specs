@@ -151,6 +151,32 @@ describe("private SDK check metadata consumers", () => {
     expect(core.setOutput).toHaveBeenCalledWith("issue_number", 42);
   });
 
+  it("accepts private native names ending in ' - PR' while retaining exact source binding", async () => {
+    sample.native.name = "SDK Validation - JS - PR";
+    sample.envelope.sourceCheck.name = sample.native.name;
+    publish();
+    await status();
+    expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+      expect.objectContaining({ state: "success" }),
+    );
+    expect((await labels()).labelAction).toBe(LabelAction.Remove);
+
+    sample.envelope.sourceCheck.name = "SDK Validation - JS";
+    publish();
+    await expect(labels()).rejects.toThrow("Stale or duplicate");
+  });
+
+  it("rejects unknown private native names instead of stripping arbitrary suffixes", async () => {
+    sample.native.name = "SDK Validation - JS - PR unexpected";
+    sample.envelope.sourceCheck.name = sample.native.name;
+    publish();
+    await status();
+    expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+      expect.objectContaining({ state: "failure" }),
+    );
+    await expect(labels()).rejects.toThrow("identity or transport mismatch");
+  });
+
   it.each([
     [true, "main", LabelAction.Add],
     [true, "RPSaaSMaster", LabelAction.Add],
