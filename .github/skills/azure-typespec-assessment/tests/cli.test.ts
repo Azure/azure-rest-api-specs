@@ -8,6 +8,9 @@ import { isMain, readJson } from "../scripts/cli.ts";
 
 type NoChangeManifest = {
   status: string;
+  repository: {
+    root: string;
+  };
   sparseCheckout: {
     roots: string[];
   };
@@ -78,13 +81,13 @@ void test("detects direct and linked entrypoints without running imported script
 });
 
 void test("linked assessment CLI accepts absolute scope and writes its no-change artifacts", (t) => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), "assessment-linked-cli-"));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "assessment linked cli "));
   const linked = path.join(root, "installed-skill");
   t.onTestFinished(() => {
     fs.rmSync(linked, { recursive: true, force: true });
     fs.rmSync(root, { recursive: true, force: true });
   });
-  const repo = path.join(root, "repo");
+  const repo = path.join(root, "Azure", "azure-rest-api-specs");
   const scope = path.join(repo, "specification", "widget");
   fs.mkdirSync(scope, { recursive: true });
   fs.writeFileSync(path.join(scope, "main.tsp"), "model Widget {}\n");
@@ -105,30 +108,28 @@ void test("linked assessment CLI accepts absolute scope and writes its no-change
   const missing = spawnSync(process.execPath, [script], { encoding: "utf8" });
   assert.equal(missing.status, 1);
   assert.match(missing.stderr, /Missing required argument --output/);
-  for (const [name, specification] of [
-    ["absolute", scope],
-    ["relative", "specification/widget"],
-  ]) {
+  for (const [name, flags, specification, cwd] of [
+    ["absolute", ["--repo-path", repo], scope, root],
+    ["legacy", ["--repo", repo], "specification/widget", root],
+    ["matching-aliases", ["--repo-path", repo, "--repo", repo], "specification/widget", root],
+    ["subdirectory", ["--repo-path", scope], "specification/widget", root],
+    ["legacy-subdirectory", ["--repo", scope], "specification/widget", root],
+    ["default-subdirectory", [], "specification/widget", scope],
+    ["relative-slug", ["--repo-path", "Azure/azure-rest-api-specs"], "specification/widget", root],
+    ["relative-legacy", ["--repo", "Azure/azure-rest-api-specs"], "specification/widget", root],
+    ["default-root", [], "specification/widget", repo],
+  ] satisfies [string, string[], string, string][]) {
     const output = path.join(root, name);
     const result = spawnSync(
       process.execPath,
-      [
-        script,
-        "--repo",
-        repo,
-        "--base",
-        "HEAD",
-        "--specification",
-        specification,
-        "--output",
-        output,
-      ],
-      { cwd: root, encoding: "utf8" },
+      [script, ...flags, "--base", "HEAD", "--specification", specification, "--output", output],
+      { cwd, encoding: "utf8" },
     );
     assert.equal(result.status, 0, result.stderr);
     assert.match(result.stdout, /no-changes:/);
     const manifest = readJson(path.join(output, "preparation-manifest.json")) as NoChangeManifest;
     assert.equal(manifest.status, "no-changes");
+    assert.equal(manifest.repository.root, repo);
     assert.deepEqual(manifest.sparseCheckout.roots, ["specification/widget"]);
     const input = readJson(path.join(output, "model-input.json")) as NoChangeInput;
     assert.equal(input.status, "no-changes");

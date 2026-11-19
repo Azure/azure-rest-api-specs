@@ -9,6 +9,7 @@ import {
   parseGitHubRepository,
   parsePullRequest,
   resolveAssessmentInput,
+  validateAssessmentInput,
 } from "../scripts/assessment-input.ts";
 
 function git(repo: string, ...args: string[]) {
@@ -158,6 +159,7 @@ void test("exposes pull request metadata for downstream reports", (t) => {
 
   assert.deepEqual(resolved.pullRequest, pullRequest);
   assert.deepEqual(resolved.invocation.pullRequest, pullRequest);
+  assert.equal(validateAssessmentInput(resolved).repo, repo);
 });
 
 void test("fetches missing explicit refs without checking them out", (t) => {
