@@ -1,12 +1,68 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { Script } from "node:vm";
 import { describe, expect, it } from "vitest";
 import { parse } from "yaml";
 
 const ROOT = join(import.meta.dirname, "..", "..", "..");
-const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor as new (
-  ...args: string[]
-) => (...args: unknown[]) => Promise<void>;
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null;
+}
+
+function getFindContextScript(workflow: unknown): string {
+  if (!isRecord(workflow) || !isRecord(workflow.jobs) || !isRecord(workflow.jobs.resolve)) {
+    throw new Error("Publisher workflow is missing the resolve job");
+  }
+
+  const steps = workflow.jobs.resolve.steps;
+  if (!Array.isArray(steps)) {
+    throw new Error("Publisher resolve job is missing steps");
+  }
+
+  const typedSteps: unknown[] = steps;
+  const findContextStep = typedSteps.find((step) => isRecord(step) && step.id === "find-context");
+  if (
+    !isRecord(findContextStep) ||
+    !isRecord(findContextStep.with) ||
+    typeof findContextStep.with.script !== "string"
+  ) {
+    throw new Error("Publisher workflow is missing the find-context script");
+  }
+
+  return findContextStep.with.script;
+}
+
+interface Artifact {
+  expired: boolean;
+  name: string;
+}
+
+type FindContextScript = (
+  github: {
+    rest: {
+      actions: {
+        listWorkflowRunArtifacts: () => Promise<{ data: { artifacts: Artifact[] } }>;
+      };
+    };
+  },
+  context: {
+    payload: {
+      workflow_run: {
+        conclusion: string;
+        id: number;
+        run_attempt: number;
+      };
+    };
+    repo: {
+      owner: string;
+      repo: string;
+    };
+  },
+  core: {
+    setOutput: (name: string, value: string) => void;
+  },
+) => Promise<void>;
 
 describe("generated .NET SDK review publisher workflow", () => {
   it("selects current-attempt artifacts and tolerates a missing validated result", async () => {
@@ -36,41 +92,45 @@ describe("generated .NET SDK review publisher workflow", () => {
   });
 
   it("reuses the latest preserved context when only failed jobs are rerun", async () => {
-    const workflow = parse(
+    const workflow: unknown = parse(
       await readFile(
         join(ROOT, ".github/workflows/sdk-validation-dotnet-review-publish.yml"),
         "utf8",
       ),
     );
-    const findContextStep = workflow.jobs.resolve.steps.find(
-      (step: { id?: string }) => step.id === "find-context",
-    );
     const outputs = new Map<string, string>();
     const runId = 123;
-    const script = new AsyncFunction("github", "context", "core", findContextStep.with.script);
+    const executable: unknown = new Script(
+      `(async (github, context, core) => {${getFindContextScript(workflow)}})`,
+    ).runInNewContext();
+    if (typeof executable !== "function") {
+      throw new Error("Find-context script did not compile to a function");
+    }
+    const script = executable as FindContextScript;
 
     await script(
       {
         rest: {
           actions: {
-            listWorkflowRunArtifacts: async () => ({
-              data: {
-                artifacts: [
-                  {
-                    expired: false,
-                    name: `sdk-review-publication-context-${runId}-attempt-1`,
-                  },
-                  {
-                    expired: false,
-                    name: `sdk-review-result-workflow-${runId}-attempt-2`,
-                  },
-                  {
-                    expired: false,
-                    name: `sdk-review-trusted-context-${runId}-attempt-2`,
-                  },
-                ],
-              },
-            }),
+            listWorkflowRunArtifacts: () =>
+              Promise.resolve({
+                data: {
+                  artifacts: [
+                    {
+                      expired: false,
+                      name: `sdk-review-publication-context-${runId}-attempt-1`,
+                    },
+                    {
+                      expired: false,
+                      name: `sdk-review-result-workflow-${runId}-attempt-2`,
+                    },
+                    {
+                      expired: false,
+                      name: `sdk-review-trusted-context-${runId}-attempt-2`,
+                    },
+                  ],
+                },
+              }),
           },
         },
       },
