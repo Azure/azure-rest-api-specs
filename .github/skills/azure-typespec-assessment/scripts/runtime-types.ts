@@ -1724,6 +1724,10 @@ export interface AssessmentOutput {
     mode?: string;
     baseline?: ArtifactSelection;
     target?: ArtifactSelection;
+    available?: {
+      base: string[];
+      current: string[];
+    };
   }[];
   confidence: "high" | "medium" | "low";
   safety: {

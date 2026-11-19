@@ -123,6 +123,8 @@ using Microsoft.NetApp;
 @@clientName(QuotaItemList, "SubscriptionQuotaItemList", "go");
 @@clientName(QuotaItemProperties, "SubscriptionQuotaItemProperties", "go");
 
+@@clientName(LdapServerType.OpenLdap, "OpenLDAP", "go");
+
 @@clientName(ExternalSvm, "ExternalSVM", "go");
 @@clientName(ExternalSvmProperties, "ExternalSVMProperties", "go");
 @@clientName(ExternalSvmList, "ExternalSVMList", "go");
@@ -690,7 +692,6 @@ using Microsoft.NetApp;
 @@clientName(ProtocolTypes.NFSv3, "Nfsv3", "csharp");
 @@clientName(ProtocolTypes.NFSv4, "Nfsv4", "csharp");
 @@clientName(ProtocolTypes.SMB, "Smb", "csharp");
-@@clientName(LdapServerType.OpenLDAP, "OpenLdap", "csharp");
 @@clientName(VolumeLanguage.utf8mb4, "Utf8Mb4", "csharp");
 @@clientName(ElasticProtocolType.NFSv3, "Nfsv3", "csharp");
 @@clientName(ElasticProtocolType.NFSv4, "Nfsv4", "csharp");
@@ -1021,3 +1022,43 @@ using Microsoft.NetApp;
   "Accounts",
   "!autorest"
 );
+
+@@clientName(VolumeLanguage.`ar.utf-8`, "AR_UTF8", "python");
+@@clientName(VolumeLanguage.`cs.utf-8`, "CS_UTF8", "python");
+@@clientName(VolumeLanguage.`c.utf-8`, "C_UTF8", "python");
+@@clientName(VolumeLanguage.`da.utf-8`, "DA_UTF8", "python");
+@@clientName(VolumeLanguage.`de.utf-8`, "DE_UTF8", "python");
+@@clientName(VolumeLanguage.`en-us.utf-8`, "EN_US_UTF8", "python");
+@@clientName(VolumeLanguage.`en.utf-8`, "EN_UTF8", "python");
+@@clientName(VolumeLanguage.`es.utf-8`, "ES_UTF8", "python");
+@@clientName(VolumeLanguage.`fi.utf-8`, "FI_UTF8", "python");
+@@clientName(VolumeLanguage.`fr.utf-8`, "FR_UTF8", "python");
+@@clientName(VolumeLanguage.`he.utf-8`, "HE_UTF8", "python");
+@@clientName(VolumeLanguage.`hr.utf-8`, "HR_UTF8", "python");
+@@clientName(VolumeLanguage.`hu.utf-8`, "HU_UTF8", "python");
+@@clientName(VolumeLanguage.`it.utf-8`, "IT_UTF8", "python");
+@@clientName(VolumeLanguage.`ja-jp.932`, "JA_JP932", "python");
+@@clientName(VolumeLanguage.`ja-jp.932.utf-8`, "JA_JP932_UTF8", "python");
+@@clientName(VolumeLanguage.`ja-jp.pck.utf-8`, "JA_JP_PCK_UTF8", "python");
+@@clientName(
+  VolumeLanguage.`ja-jp.pck-v2.utf-8`,
+  "JA_JP_PCK_V2_UTF8",
+  "python"
+);
+@@clientName(VolumeLanguage.`ja.utf-8`, "JA_UTF8", "python");
+@@clientName(VolumeLanguage.`ja-v1.utf-8`, "JA_V1_UTF8", "python");
+@@clientName(VolumeLanguage.`ko.utf-8`, "KO_UTF8", "python");
+@@clientName(VolumeLanguage.`nl.utf-8`, "NL_UTF8", "python");
+@@clientName(VolumeLanguage.`no.utf-8`, "NO_UTF8", "python");
+@@clientName(VolumeLanguage.`pl.utf-8`, "PL_UTF8", "python");
+@@clientName(VolumeLanguage.`pt.utf-8`, "PT_UTF8", "python");
+@@clientName(VolumeLanguage.`ro.utf-8`, "RO_UTF8", "python");
+@@clientName(VolumeLanguage.`ru.utf-8`, "RU_UTF8", "python");
+@@clientName(VolumeLanguage.`sk.utf-8`, "SK_UTF8", "python");
+@@clientName(VolumeLanguage.`sl.utf-8`, "SL_UTF8", "python");
+@@clientName(VolumeLanguage.`sv.utf-8`, "SV_UTF8", "python");
+@@clientName(VolumeLanguage.`tr.utf-8`, "TR_UTF8", "python");
+@@clientName(VolumeLanguage.`zh.gbk.utf-8`, "ZH_GBK_UTF8", "python");
+@@clientName(VolumeLanguage.`zh-tw.big5.utf-8`, "ZH_TW_BIG5_UTF8", "python");
+@@clientName(VolumeLanguage.`zh-tw.utf-8`, "ZH_TW_UTF8", "python");
+@@clientName(VolumeLanguage.`zh.utf-8`, "ZH_UTF8", "python");
