@@ -105736,6 +105736,32 @@ components:
         - virtual-public-preview
         - v1
       description: Microsoft Foundry API versions
+    VoiceAgentAlwaysAcceptInboundCallPolicy:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - always_accept
+          description: Always `always_accept`.
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentInboundCallPolicy'
+      description: Continue through normal setup for an eligible incoming call.
+    VoiceAgentAlwaysDeclineInboundCallPolicy:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - always_decline
+          description: Always `always_decline`.
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentInboundCallPolicy'
+      description: Decline an eligible incoming call before the Agent answers or accepts media.
     VoiceAgentAnimationConfig:
       type: object
       properties:
@@ -106171,6 +106197,12 @@ components:
           additionalProperties:
             $ref: '#/components/schemas/StructuredInputDefinition'
           description: Template inputs for session instructions and supported greetings.
+        telephony:
+          $ref: '#/components/schemas/VoiceAgentTelephonyConfig'
+          description: Inbound telephone call settings for this agent version. Does not apply to outbound calls or direct voice sessions.
+          x-ms-foundry-meta:
+            required_previews:
+              - VoiceAgents=V1Preview
         store:
           type: boolean
           description: Persists conversation content and audio in Foundry, not native Live recordings. Defaults to false.
@@ -106979,6 +107011,134 @@ components:
             - auto
           description: The adaptation strategy. Currently only `auto` is supported.
       description: Voice-optimized instruction adaptation applied while a handoff node is active.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentInboundCallPolicy:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/VoiceAgentInboundCallPolicyType'
+          description: The decision policy type.
+      discriminator:
+        propertyName: type
+        mapping:
+          always_accept: '#/components/schemas/VoiceAgentAlwaysAcceptInboundCallPolicy'
+          always_decline: '#/components/schemas/VoiceAgentAlwaysDeclineInboundCallPolicy'
+          webhook: '#/components/schemas/VoiceAgentWebhookInboundCallPolicy'
+      description: A decision policy for inbound calls. Existing provider authorization, routing, and caller allowlists apply to every policy.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentInboundCallPolicyType:
+      type: string
+      enum:
+        - always_accept
+        - always_decline
+        - webhook
+      description: The policy used to decide whether to admit an inbound call. Unknown values are invalid.
+    VoiceAgentInboundCallProvider:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - twilio
+            - azure-communication-service
+            - sip
+            - genesys-audiohook
+      description: The provider that delivered the inbound call.
+    VoiceAgentInboundCallWebhookAgent:
+      type: object
+      required:
+        - project_id
+        - name
+        - version
+      properties:
+        project_id:
+          type: string
+          description: The resolved Foundry project ID.
+        name:
+          type: string
+          description: The resolved Agent name.
+        version:
+          type: string
+          description: The resolved Agent version.
+      description: The Voice Agent version selected for this inbound call.
+    VoiceAgentInboundCallWebhookContent:
+      type: object
+      required:
+        - type
+        - schema_version
+        - event_id
+        - provider
+        - provider_call_id
+        - from
+        - to
+        - agent
+        - headers
+      properties:
+        type:
+          type: string
+          enum:
+            - telephony.inbound_call
+          description: Identifies the event as a synchronous inbound call decision request.
+        schema_version:
+          type: number
+          enum:
+            - 1
+          description: The webhook payload schema version.
+        event_id:
+          type: string
+          description: Opaque identifier stable across duplicate deliveries for the same admission.
+        provider:
+          $ref: '#/components/schemas/VoiceAgentInboundCallProvider'
+          description: The provider that delivered the call.
+        provider_call_id:
+          type: string
+          description: The provider call correlation ID. It is not a call control capability.
+        from:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Provider-reported caller identifier, or null if unavailable or withheld.
+        to:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Provider-reported callee identifier, or null if unavailable or withheld.
+        agent:
+          $ref: '#/components/schemas/VoiceAgentInboundCallWebhookAgent'
+          description: The Agent version whose inbound policy is being evaluated.
+        headers:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: Allowed call signaling headers as lower-case names with arrays of values. Empty when none are forwarded. Credentials and transport headers are excluded.
+      description: |-
+        JSON body sent by Foundry to the customer's inbound call decision endpoint. The exact body is
+        signed with the connection secret. This is a callback payload, not a Foundry operation.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentInboundCallWebhookDecision:
+      type: string
+      enum:
+        - accept
+        - decline
+      description: A case-sensitive inbound call decision. Other values are invalid.
+    VoiceAgentInboundCallWebhookResult:
+      type: object
+      required:
+        - decision
+      properties:
+        decision:
+          $ref: '#/components/schemas/VoiceAgentInboundCallWebhookDecision'
+          description: Whether Foundry should continue with the selected Agent version or decline the call.
+      description: JSON body returned by the customer endpoint with HTTP 200. Only the decision property is allowed. The decoded response must not exceed 1 KiB.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -109618,6 +109778,16 @@ components:
             - send_dtmf
             - send_sms
       description: A service-managed voice-session control action. Known values are stable; additional values may be added over time.
+    VoiceAgentTelephonyConfig:
+      type: object
+      properties:
+        inbound_call_policy:
+          $ref: '#/components/schemas/VoiceAgentInboundCallPolicy'
+          description: Decides whether to admit an eligible inbound telephone call before provider answer or media admission. Omit to keep the default accept behavior.
+      description: Telephony settings for a Voice Agent version.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentTemplateGreetingConfig:
       type: object
       required:
@@ -109965,6 +110135,35 @@ components:
       enum:
         - realtime
       description: The WebSocket subprotocol supported by a voice-agent connection.
+    VoiceAgentWebhookInboundCallPolicy:
+      type: object
+      required:
+        - type
+        - connection_name
+      properties:
+        type:
+          type: string
+          enum:
+            - webhook
+          description: Always `webhook`.
+        connection_name:
+          type: string
+          minLength: 1
+          description: Name of an authorized same-project Foundry connection containing the HTTPS endpoint and a write-only signing secret.
+          examples:
+            - support-call-admission
+        forward_headers:
+          type: array
+          items:
+            type: string
+          maxItems: 8
+          description: Names of call signaling headers to include in the payload if the provider permits them. Omit to forward no headers.
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentInboundCallPolicy'
+      description: |-
+        Request a synchronous decision from a customer HTTPS endpoint. A timeout, unsuccessful
+        request, or invalid response declines the call. For ACS/Teams Phone Extensibility, both
+        Event Grid delivery identity and the configured ACS source must be verified before sending.
     VoiceAudioCodec:
       anyOf:
         - type: string
