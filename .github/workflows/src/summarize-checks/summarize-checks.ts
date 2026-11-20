@@ -380,6 +380,39 @@ export async function summarizeChecksImpl(
     core.info(`Skipping summary for ${head_sha}; PR head is now ${pr.head.sha}.`);
     return;
   }
+  if (pr.base.repo.private && pr.head.repo && pr.head.repo.id !== pr.base.repo.id) {
+    const summary = "Fork pull requests are not supported in this private repository.";
+    const commentBody = renderMarkdownDoc(
+      section("Next Steps to Merge", [
+        statusBadge("failed", `**${summary}**`),
+        "Required validation workflows, including TypeSpec Validation, cannot run for fork pull requests under the organization's Actions policy. Waiting or rerunning the status workflows will not start validation.",
+        `Push your changes to a branch in ${inlineCode(pr.base.repo.full_name)}, then open a replacement pull request targeting ${inlineCode(pr.base.ref)} in that same repository. Link the replacement here and close this pull request.`,
+        `If you need repository write access, ${link("set up or renew access", CONTRIBUTOR_ONBOARDING_URL)}. Keep private specifications in the private repository; do not move them to the public repository.`,
+        link("Workflow run", target_url),
+      ]),
+      2,
+    );
+    core.warning(summary);
+    core.summary.addRaw(`\n${commentBody}\n\n`);
+    await core.summary.write();
+    await commentOrUpdate(
+      github,
+      core,
+      owner,
+      repo,
+      issue_number,
+      commentBody,
+      NEXT_STEPS_COMMENT_ID,
+    );
+    await updateCommitStatus(github, core, owner, repo, head_sha, {
+      name: AUTOMATED_CHECK_NAME,
+      summary,
+      result: "FAILURE",
+      target_url,
+    });
+    core.setOutput("arm_review_ready", false);
+    return;
+  }
   const reviewContext: ReviewContext = {
     isDraft: pr.draft ?? false,
     targetBranch: pr.base.ref,
