@@ -5,3 +5,5 @@ using Azure.Contoso.WidgetManager;
 using Azure.ClientGenerator.Core;
 
 @@clientName(Widgets, "ContosoWidgets", "csharp");
+@@clientName(WidgetUsage.windowStart, "WindowStartsOn", "csharp");
+@@clientName(WidgetUsage.windowEnd, "WindowEndsOn", "csharp");
