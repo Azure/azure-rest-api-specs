@@ -966,3 +966,108 @@ void test("does not retain consumer path facts for a target-only type reference"
   assert.ok(!Object.values(result.facts).some((fact) => fact.factKind === "method"));
   assert.ok(!result.candidates.some((item) => item.rule.startsWith("method-")));
 });
+
+void test("adding a second generic instantiation emits zero false-positive candidates on the unchanged first instantiation", (context) => {
+  const provenance = genericListProvenance();
+  const singleInstance = genericListPackage(false);
+  singleInstance.clients[0].methods = [singleInstance.clients[0].methods[0]];
+  singleInstance.models = singleInstance.models.filter(
+    (model) => model.name === "FirstListResult" || model.name === "First",
+  );
+  const dualInstance = genericListPackage(false);
+
+  const oneToTwo = analyzeShapes(context, singleInstance, dualInstance, [], undefined, {
+    base: {
+      schemaVersion: 1,
+      models: provenance.models.filter((model) => model.name === "FirstListResult"),
+    },
+    current: provenance,
+  });
+  assert.deepEqual(oneToTwo.blockers, []);
+  assert.deepEqual(oneToTwo.candidates, []);
+
+  const twoToOne = analyzeShapes(context, dualInstance, singleInstance, [], undefined, {
+    base: provenance,
+    current: {
+      schemaVersion: 1,
+      models: provenance.models.filter((model) => model.name === "FirstListResult"),
+    },
+  });
+  assert.deepEqual(twoToOne.blockers, []);
+  assert.deepEqual(
+    twoToOne.candidates.map((item) => [item.rule, item.crossLanguageDefinitionId]),
+    [
+      ["method-removed", "Contoso.Items.second"],
+      ["public-surface-changed", "Contoso.ListResult"],
+      ["public-surface-changed", "Contoso.Second"],
+    ],
+  );
+});
+
+void test("guards un-provenanced multi-instance baselines and generic @renamedFrom resolution", (context) => {
+  const dualBase = genericListPackage(false);
+  const singleCurrent = genericListPackage(false);
+  singleCurrent.clients[0].methods = [singleCurrent.clients[0].methods[0]];
+  singleCurrent.models = singleCurrent.models.filter(
+    (model) => model.name === "FirstListResult" || model.name === "First",
+  );
+
+  const unprovenanced = analyzeShapes(context, dualBase, singleCurrent);
+  assert.ok(
+    unprovenanced.blockers.some((item) =>
+      item.message.includes(
+        "multiple baseline symbols share the same crossLanguageDefinitionId without generic provenance",
+      ),
+    ),
+  );
+
+  const renamedCurrent = genericListPackage(false);
+  for (const model of renamedCurrent.models) {
+    if (model.crossLanguageDefinitionId === "Contoso.ListResult") {
+      model.crossLanguageDefinitionId = "Contoso.PagedResult";
+    }
+  }
+  const renameDeclarations = [
+    {
+      id: "rename-current",
+      kind: "model",
+      qualifiedName: "Contoso.PagedResult",
+      decorators: ['@renamedFrom(Versions.v2, "ListResult")'],
+      source: { revision: "current" },
+    },
+  ];
+  const renamedWithoutProvenance = analyzeShapes(
+    context,
+    dualBase,
+    renamedCurrent,
+    renameDeclarations,
+  );
+  assert.ok(
+    renamedWithoutProvenance.blockers.some((item) =>
+      item.message.includes("@renamedFrom metadata on a generic template"),
+    ),
+  );
+
+  const renamedProvenance = {
+    base: genericListProvenance(),
+    current: {
+      schemaVersion: 1 as const,
+      models: genericListProvenance().models.map((item) => ({
+        ...item,
+        crossLanguageDefinitionId: "Contoso.PagedResult",
+      })),
+    },
+  };
+  const renamedWithProvenance = analyzeShapes(
+    context,
+    dualBase,
+    renamedCurrent,
+    renameDeclarations,
+    undefined,
+    renamedProvenance,
+  );
+  assert.deepEqual(renamedWithProvenance.blockers, []);
+  assert.ok(
+    !renamedWithProvenance.candidates.some((item) => item.rule === "public-surface-changed"),
+  );
+});

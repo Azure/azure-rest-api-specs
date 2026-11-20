@@ -182,8 +182,14 @@ function referenceName(raw: unknown) {
   return value.crossLanguageDefinitionId ?? value.name;
 }
 
-function provenanceKey(crossLanguageDefinitionId?: string, name?: string) {
-  return `${crossLanguageDefinitionId ?? ""}\0${name ?? ""}`;
+function provenanceKey(crossLanguageDefinitionId?: string, name?: string, namespace?: string) {
+  return `${crossLanguageDefinitionId ?? ""}\0${namespace ?? ""}\0${name ?? ""}`;
+}
+
+function modelNamespace(raw: TcgcNode, context: TcgcContext): string | undefined {
+  return typeof raw.namespace === "string" && raw.namespace.length > 0
+    ? raw.namespace
+    : context.modelNamespaces?.get(raw);
 }
 
 function concreteReferenceName(raw: unknown, context: TcgcContext) {
@@ -191,10 +197,17 @@ function concreteReferenceName(raw: unknown, context: TcgcContext) {
   const concrete = context.concreteIdentities?.get(raw);
   if (concrete) return concrete;
   const value = raw as TcgcNode;
+  const ns = modelNamespace(value, context);
   return (
+    (ns
+      ? context.namedConcreteIdentities?.get(
+          provenanceKey(value.crossLanguageDefinitionId, value.name, ns),
+        )
+      : undefined) ??
     context.namedConcreteIdentities?.get(
       provenanceKey(value.crossLanguageDefinitionId, value.name),
-    ) ?? referenceName(raw)
+    ) ??
+    referenceName(raw)
   );
 }
 
@@ -1090,11 +1103,21 @@ function registerModelIdentities(
   provenanceArtifact?: TcgcProvenanceArtifact,
 ) {
   const provenanceByLocator = new Map<string, TcgcModelProvenance[]>();
+  const provenanceByNameOnly = new Map<string, TcgcModelProvenance[]>();
   for (const provenance of provenanceArtifact?.models ?? []) {
-    const key = provenanceKey(provenance.crossLanguageDefinitionId, provenance.name);
+    const key = provenanceKey(
+      provenance.crossLanguageDefinitionId,
+      provenance.name,
+      provenance.namespace,
+    );
     const values = provenanceByLocator.get(key) ?? [];
     values.push(provenance);
     provenanceByLocator.set(key, values);
+
+    const nameKey = provenanceKey(provenance.crossLanguageDefinitionId, provenance.name);
+    const nameValues = provenanceByNameOnly.get(nameKey) ?? [];
+    nameValues.push(provenance);
+    provenanceByNameOnly.set(nameKey, nameValues);
   }
   const modelsByDefinition = new Map<string, TcgcNode[]>();
   for (const model of models) {
@@ -1110,20 +1133,33 @@ function registerModelIdentities(
   for (const [definitionIdentity, values] of modelsByDefinition) {
     const concreteCounts = new Map<string, number>();
     for (const [index, model] of values.entries()) {
-      const locator = provenanceKey(definitionIdentity, model.name);
-      const provenance = provenanceByLocator.get(locator);
-      const matchedProvenance = provenance?.length === 1 ? provenance[0] : undefined;
+      const ns = modelNamespace(model, context);
+      const locator = provenanceKey(definitionIdentity, model.name, ns);
+      const nameOnlyLocator = provenanceKey(definitionIdentity, model.name);
+      const exactProvenance = provenanceByLocator.get(locator);
+      const sameNameModels = values.filter(
+        (item) => provenanceKey(item.crossLanguageDefinitionId, item.name) === nameOnlyLocator,
+      );
+      const fallbackProvenance =
+        sameNameModels.length === 1 ? provenanceByNameOnly.get(nameOnlyLocator) : undefined;
+      const matchedProvenance =
+        exactProvenance?.length === 1
+          ? exactProvenance[0]
+          : fallbackProvenance?.length === 1
+            ? fallbackProvenance[0]
+            : undefined;
       if (matchedProvenance) modelProvenance.set(model, matchedProvenance);
       const genericIdentity = matchedProvenance
         ? genericInstanceIdentity(matchedProvenance)
         : undefined;
       const baseIdentity =
-        values.length === 1
+        genericIdentity ??
+        (values.length === 1
           ? definitionIdentity
-          : (genericIdentity ??
-            stableId("sdk-model-local", {
+          : stableId("sdk-model-local", {
               definitionIdentity,
               name: model.name,
+              ...(ns ? { namespace: ns } : {}),
               index,
             }));
       const occurrence = concreteCounts.get(baseIdentity) ?? 0;
@@ -1132,13 +1168,20 @@ function registerModelIdentities(
         occurrence === 0 ? baseIdentity : `${baseIdentity}#${occurrence + 1}`;
       concreteIdentities.set(model, concreteIdentity);
       if (
+        ns &&
         values.filter(
           (item) =>
-            provenanceKey(item.crossLanguageDefinitionId, item.name) ===
-            provenanceKey(model.crossLanguageDefinitionId, model.name),
+            provenanceKey(
+              item.crossLanguageDefinitionId,
+              item.name,
+              modelNamespace(item, context),
+            ) === locator,
         ).length === 1
       ) {
         namedConcreteIdentities.set(locator, concreteIdentity);
+      }
+      if (sameNameModels.length === 1) {
+        namedConcreteIdentities.set(nameOnlyLocator, concreteIdentity);
       }
     }
   }
@@ -1249,6 +1292,19 @@ export function normalizeTcgcPackage(
       : deprecatedVersions,
   );
   const namespaces = collectNamespaces(root);
+  const modelNamespaces = new WeakMap<object, string>();
+  for (const { namespace, identity: namespaceIdentity } of namespaces) {
+    const nsName =
+      typeof namespace.fullName === "string" && namespace.fullName.length > 0
+        ? namespace.fullName
+        : namespaceIdentity;
+    for (const model of array(namespace.models, `namespace:${namespaceIdentity}.models`)) {
+      if (model && typeof model === "object" && !modelNamespaces.has(model)) {
+        modelNamespaces.set(model, nsName);
+      }
+    }
+  }
+  context.modelNamespaces = modelNamespaces;
   const modelObjects = uniqueObjects([
     ...array(root.models, "package.models"),
     ...namespaces.flatMap(({ namespace, identity: namespaceIdentity }) =>

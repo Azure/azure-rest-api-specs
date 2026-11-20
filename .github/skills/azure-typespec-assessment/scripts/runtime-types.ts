@@ -358,6 +358,7 @@ export interface TcgcNode {
   multipart?: TcgcNode;
   multipartOptions?: TcgcNode;
   name?: string;
+  namespace?: string;
   namespaces?: TcgcNode[];
   nextLinkOperation?: TcgcNode;
   operation?: TcgcNode;
@@ -411,6 +412,7 @@ export interface TcgcContext {
   conflicts: TcgcConflict[];
   concreteIdentities?: WeakMap<object, string>;
   namedConcreteIdentities?: Map<string, string>;
+  modelNamespaces?: WeakMap<object, string>;
   modelProvenance?: WeakMap<object, TcgcModelProvenance>;
 }
 
@@ -440,6 +442,7 @@ export interface TcgcArtifact {
 export interface TcgcModelProvenance {
   crossLanguageDefinitionId: string;
   name?: string;
+  namespace?: string;
   templateArguments: unknown[];
 }
 
