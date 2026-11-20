@@ -13,12 +13,6 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.RecoveryServices;
 
 /**
- * A string value that contains secret material.
- */
-@secret
-scalar SecretString extends string;
-
-/**
  * Value indicating whether the health error is customer resolvable.
  */
 union HealthErrorCustomerResolvability {
@@ -651,43 +645,6 @@ union RecoveryPointSyncType {
    * PerVmRecoveryPoint
    */
   PerVmRecoveryPoint: "PerVmRecoveryPoint",
-}
-
-/**
- * The IP version (address family) of an ip-config.
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Matches the existing IPConfigDetails / IPConfigInputDetails naming in this specification."
-@added(Versions.v2026_11_01)
-union IPVersion {
-  string,
-
-  /**
-   * The ip-config carries an IPv4 address.
-   */
-  IPv4: "IPv4",
-
-  /**
-   * The ip-config carries an IPv6 address.
-   */
-  IPv6: "IPv6",
-}
-
-/**
- * The vault level policy controlling whether the A2A recovery network configuration is automatically kept in sync with the source virtual machine.
- */
-@added(Versions.v2026_11_01)
-union RecoveryNetworkConfigAutoSyncPolicy {
-  string,
-
-  /**
-   * Automatic synchronization of the recovery network configuration is turned off. Recovery NIC settings are changed only through an explicit update operation.
-   */
-  Disabled: "Disabled",
-
-  /**
-   * Automatic synchronization of the recovery network configuration is turned on. Recovery NIC settings are refreshed from the source virtual machine as its network configuration changes.
-   */
-  Enabled: "Enabled",
 }
 
 /**
@@ -6487,12 +6444,6 @@ model VaultSettingProperties {
    * VMware to Azure provider type.
    */
   vmwareToAzureProviderType?: string;
-
-  /**
-   * The vault level policy controlling whether the A2A recovery network configuration is automatically kept in sync with the source virtual machine.
-   */
-  @added(Versions.v2026_11_01)
-  recoveryNetworkConfigAutoSync?: RecoveryNetworkConfigAutoSyncPolicy;
 }
 
 /**
@@ -6518,12 +6469,6 @@ model VaultSettingCreationInputProperties {
    * VMware to Azure provider type.
    */
   vmwareToAzureProviderType?: string;
-
-  /**
-   * The vault level policy controlling whether the A2A recovery network configuration is automatically kept in sync with the source virtual machine. If the property is omitted from the request body, the policy is set to `Disabled`.
-   */
-  @added(Versions.v2026_11_01)
-  recoveryNetworkConfigAutoSync?: RecoveryNetworkConfigAutoSyncPolicy;
 }
 
 /**
@@ -6665,24 +6610,6 @@ model A2AVmManagedDiskInputDetails {
    */
   @added(Versions.v2026_02_01)
   recoveryPublicNetworkAccess?: DiskPublicNetworkAccess;
-
-  /**
-   * The confidential disk encryption info for the managed disk. Applicable to CMK confidential VMs.
-   */
-  @added(Versions.v2026_11_01)
-  confidentialDiskEncryptionInfo?: ConfidentialDiskEncryptionInfo;
-}
-
-/**
- * A2A managed disk input details for cluster switch protection.
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Preserve the established A2A provider model naming convention."
-@added(Versions.v2026_11_01)
-model A2AClusterVmManagedDiskInputDetails {
-  ...OmitProperties<
-    A2AVmManagedDiskInputDetails,
-    "confidentialDiskEncryptionInfo"
-  >;
 }
 
 /**
@@ -6728,45 +6655,6 @@ model KeyEncryptionKeyInfo {
    * The KeyVault resource ARM Id for key.
    */
   keyVaultResourceArmId?: string;
-}
-
-/**
- * Confidential disk encryption info for an A2A CMK confidential VM managed disk. Specifies the confidential disk encryption set ID for the replica disk used during replication and the confidential disk encryption set ID for the target disk used after failover.
- */
-@added(Versions.v2026_11_01)
-model ConfidentialDiskEncryptionInfo {
-  /**
-   * The Azure resource ID of the confidential disk encryption set used for the replica disk. Applicable to CMK confidential VMs.
-   */
-  recoveryReplicaConfidentialDiskEncryptionSetId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.Compute/diskEncryptionSets";
-    }
-  ]>;
-
-  /**
-   * The Azure resource ID of the confidential disk encryption set used for the target disk after failover. Applicable to CMK confidential VMs.
-   */
-  recoveryTargetConfidentialDiskEncryptionSetId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.Compute/diskEncryptionSets";
-    }
-  ]>;
-}
-
-/**
- * Confidential disk encryption info used while updating replication of a CMK confidential VM managed disk.
- */
-@added(Versions.v2026_11_01)
-model UpdateConfidentialDiskEncryptionInfo {
-  /**
-   * The Azure resource ID of the confidential disk encryption set used for the target disk after failover. Applicable to CMK confidential VMs.
-   */
-  recoveryTargetConfidentialDiskEncryptionSetId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.Compute/diskEncryptionSets";
-    }
-  ]>;
 }
 
 /**
@@ -7385,16 +7273,6 @@ model A2AEnableProtectionInput extends EnableProtectionProviderSpecificInput {
   autoProtectionOfDataDisk?: AutoProtectionOfDataDisk;
 
   /**
-   * The Azure resource ID of the confidential data disk encryption user-assigned identity. Applicable to CMK confidential VM data disks.
-   */
-  @added(Versions.v2026_11_01)
-  recoveryConfidentialDataDiskEncryptionIdentity?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
-    }
-  ]>;
-
-  /**
    * The class type.
    */
   instanceType: "A2A";
@@ -7736,8 +7614,7 @@ model A2AProtectedItemDetail {
    * The list of vm managed disk details.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @typeChangedFrom(Versions.v2026_11_01, A2AVmManagedDiskInputDetails[])
-  vmManagedDisks?: A2AClusterVmManagedDiskInputDetails[];
+  vmManagedDisks?: A2AVmManagedDiskInputDetails[];
 
   /**
    * The recovery resource group Id.
@@ -7948,13 +7825,6 @@ model A2AProtectedManagedDiskDetails {
    */
   @added(Versions.v2026_02_01)
   recoveryPublicNetworkAccess?: DiskPublicNetworkAccess;
-
-  /**
-   * The confidential disk encryption info for the managed disk. Applicable to CMK confidential VMs.
-   */
-  @added(Versions.v2026_11_01)
-  @visibility(Lifecycle.Read)
-  confidentialDiskEncryptionInfo?: ConfidentialDiskEncryptionInfo;
 }
 
 /**
@@ -8402,16 +8272,6 @@ model A2AReplicationDetails extends ReplicationProviderSpecificSettings {
   platformFaultDomain?: int32;
 
   /**
-   * The Azure resource ID of the confidential data disk encryption user-assigned identity. Applicable to CMK confidential VM data disks.
-   */
-  @added(Versions.v2026_11_01)
-  recoveryConfidentialDataDiskEncryptionIdentity?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
-    }
-  ]>;
-
-  /**
    * Gets the Instance type.
    */
   instanceType: "A2A";
@@ -8567,13 +8427,6 @@ model IPConfigDetails {
   tfoPublicIPAddressId?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tfoLBBackendAddressPoolIds?: string[];
-
-  /**
-   * The IP version (IPv4 / IPv6) of the ip-config, as reported by the service. Read-only - it reflects the discovered NIC configuration and cannot be set by the caller. Orthogonal to the allocation type (static / dynamic). Omitted when IPv6 support is not enabled.
-   */
-  @added(Versions.v2026_11_01)
-  @visibility(Lifecycle.Read)
-  ipVersion?: IPVersion;
 }
 
 /**
@@ -9095,16 +8948,6 @@ model A2ASwitchProtectionInput extends SwitchProtectionProviderSpecificInput {
   diskEncryptionInfo?: DiskEncryptionInfo;
 
   /**
-   * The Azure resource ID of the confidential data disk encryption user-assigned identity. Applicable to CMK confidential VM data disks.
-   */
-  @added(Versions.v2026_11_01)
-  recoveryConfidentialDataDiskEncryptionIdentity?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
-    }
-  ]>;
-
-  /**
    * Gets the Instance type.
    */
   instanceType: "A2A";
@@ -9242,16 +9085,6 @@ model A2AUpdateReplicationProtectedItemInput
   platformFaultDomain?: int32;
 
   /**
-   * The Azure resource ID of the confidential data disk encryption user-assigned identity. Applicable to CMK confidential VM data disks.
-   */
-  @added(Versions.v2026_11_01)
-  recoveryConfidentialDataDiskEncryptionIdentity?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
-    }
-  ]>;
-
-  /**
    * The class type.
    */
   instanceType: "A2A";
@@ -9291,12 +9124,6 @@ model A2AVmManagedDiskUpdateDetails {
    * The target disk name for test failover operation.
    */
   tfoDiskName?: string;
-
-  /**
-   * The confidential disk encryption info to update for the managed disk. Only the recovery target confidential disk encryption set can be changed through this update operation. Applicable to A2A CMK confidential VMs.
-   */
-  @added(Versions.v2026_11_01)
-  confidentialDiskEncryptionInfo?: UpdateConfidentialDiskEncryptionInfo;
 }
 
 /**
@@ -10171,8 +9998,8 @@ model ExportJobDetails extends JobDetails {
   /**
    * The sas token to access blob.
    */
-  @typeChangedFrom(Versions.v2026_11_01, string)
-  sasToken?: SecretString;
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  sasToken?: string;
 
   /**
    * Gets the type of job details (see JobDetailsTypes enum for possible values).
@@ -10463,14 +10290,12 @@ model HyperVReplicaAzureApplyRecoveryPointInput
   /**
    * The primary kek certificate pfx.
    */
-  @typeChangedFrom(Versions.v2026_11_01, string)
-  primaryKekCertificatePfx?: SecretString;
+  primaryKekCertificatePfx?: string;
 
   /**
    * The secondary kek certificate pfx.
    */
-  @typeChangedFrom(Versions.v2026_11_01, string)
-  secondaryKekCertificatePfx?: SecretString;
+  secondaryKekCertificatePfx?: string;
 
   /**
    * The class type.
@@ -10847,14 +10672,12 @@ model HyperVReplicaAzurePlannedFailoverProviderInput
   /**
    * Primary kek certificate pfx.
    */
-  @typeChangedFrom(Versions.v2026_11_01, string)
-  primaryKekCertificatePfx?: SecretString;
+  primaryKekCertificatePfx?: string;
 
   /**
    * Secondary kek certificate pfx.
    */
-  @typeChangedFrom(Versions.v2026_11_01, string)
-  secondaryKekCertificatePfx?: SecretString;
+  secondaryKekCertificatePfx?: string;
 
   /**
    * The recovery point id to be passed to failover to a particular recovery point. In case of latest recovery point, null should be passed.
@@ -11295,14 +11118,12 @@ model HyperVReplicaAzureTestFailoverInput
   /**
    * Primary kek certificate pfx.
    */
-  @typeChangedFrom(Versions.v2026_11_01, string)
-  primaryKekCertificatePfx?: SecretString;
+  primaryKekCertificatePfx?: string;
 
   /**
    * Secondary kek certificate pfx.
    */
-  @typeChangedFrom(Versions.v2026_11_01, string)
-  secondaryKekCertificatePfx?: SecretString;
+  secondaryKekCertificatePfx?: string;
 
   /**
    * The recovery point id to be passed to test failover to a particular recovery point. In case of latest recovery point, null should be passed.
@@ -11329,14 +11150,12 @@ model HyperVReplicaAzureUnplannedFailoverInput
   /**
    * Primary kek certificate pfx.
    */
-  @typeChangedFrom(Versions.v2026_11_01, string)
-  primaryKekCertificatePfx?: SecretString;
+  primaryKekCertificatePfx?: string;
 
   /**
    * Secondary kek certificate pfx.
    */
-  @typeChangedFrom(Versions.v2026_11_01, string)
-  secondaryKekCertificatePfx?: SecretString;
+  secondaryKekCertificatePfx?: string;
 
   /**
    * The recovery point id to be passed to failover to a particular recovery point. In case of latest recovery point, null should be passed.
@@ -14638,12 +14457,6 @@ model InMageRcmEnableProtectionInput
   targetCapacityReservationGroupId?: string;
 
   /**
-   * The target extended location.
-   */
-  @added(Versions.v2026_11_01)
-  targetExtendedLocation?: ExtendedLocation;
-
-  /**
    * The class type.
    */
   instanceType: "InMageRcm";
@@ -16242,12 +16055,6 @@ model InMageRcmReplicationDetails extends ReplicationProviderSpecificSettings {
   targetAvailabilityZone?: string;
 
   /**
-   * The target extended location.
-   */
-  @added(Versions.v2026_11_01)
-  targetExtendedLocation?: ExtendedLocation;
-
-  /**
    * The target proximity placement group Id.
    */
   targetProximityPlacementGroupId?: string;
@@ -17779,14 +17586,12 @@ model RecoveryPlanHyperVReplicaAzureFailoverInput
   /**
    * The primary KEK certificate PFX.
    */
-  @typeChangedFrom(Versions.v2026_11_01, string)
-  primaryKekCertificatePfx?: SecretString;
+  primaryKekCertificatePfx?: string;
 
   /**
    * The secondary KEK certificate PFX.
    */
-  @typeChangedFrom(Versions.v2026_11_01, string)
-  secondaryKekCertificatePfx?: SecretString;
+  secondaryKekCertificatePfx?: string;
 
   /**
    * The recovery point type.

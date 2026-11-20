@@ -4883,9 +4883,9 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/migrationStatus": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/migrations/default": {
       "get": {
-        "operationId": "NamespaceMigrations_GetMigrationStatus",
+        "operationId": "NamespaceMigrations_Get",
         "tags": [
           "NamespaceMigrations"
         ],
@@ -4915,7 +4915,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NamespaceMigrationStatus"
+              "$ref": "#/definitions/NamespaceMigration"
             }
           },
           "default": {
@@ -4926,19 +4926,19 @@
           }
         },
         "x-ms-examples": {
-          "NamespaceMigrationsGetMigrationStatus": {
-            "$ref": "./examples/NameSpaces/NamespaceMigrationsGetMigrationStatus.json"
+          "NamespaceMigrationsGet": {
+            "$ref": "./examples/NameSpaces/NamespaceMigrationsGet.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/migrationReplicationLags": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/migrations/default/replicationLags": {
       "get": {
-        "operationId": "NamespaceMigrations_GetMigrationReplicationLags",
+        "operationId": "NamespaceMigrationReplicationLags_List",
         "tags": [
-          "NamespaceMigrations"
+          "NamespaceMigrationReplicationLags"
         ],
-        "description": "Gets the replication lags for an in-progress namespace migration.",
+        "description": "Lists the replication lags for an in-progress namespace migration.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -4964,7 +4964,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NamespaceMigrationReplicationLags"
+              "$ref": "#/definitions/NamespaceMigrationReplicationLagListResult"
             }
           },
           "default": {
@@ -4975,9 +4975,12 @@
           }
         },
         "x-ms-examples": {
-          "NamespaceMigrationsGetMigrationReplicationLags": {
-            "$ref": "./examples/NameSpaces/NamespaceMigrationsGetMigrationReplicationLags.json"
+          "NamespaceMigrationReplicationLagsList": {
+            "$ref": "./examples/NameSpaces/NamespaceMigrationReplicationLagsList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -8146,14 +8149,67 @@
         ]
       }
     },
-    "ReplicationLagProperties": {
+    "NamespaceMigration": {
       "type": "object",
-      "description": "The properties describing replication lag during a namespace migration.",
+      "description": "The migration of an Event Hubs namespace to a new SKU.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NamespaceMigrationProperties",
+          "description": "The properties of the namespace migration.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NamespaceMigrationReplicationLag": {
+      "type": "object",
+      "description": "The replication lag of a namespace migration for a single target.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NamespaceMigrationReplicationLagProperties",
+          "description": "The properties of the replication lag.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NamespaceMigrationReplicationLagListResult": {
+      "type": "object",
+      "description": "The response of a NamespaceMigrationReplicationLag list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NamespaceMigrationReplicationLag items on this page",
+          "items": {
+            "$ref": "#/definitions/NamespaceMigrationReplicationLag"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NamespaceMigrationReplicationLagProperties": {
+      "type": "object",
+      "description": "The properties of the replication lag of a namespace migration for a single target.",
       "properties": {
         "counterDescriptions": {
           "type": "array",
           "readOnly": true,
-          "description": "The descriptions of the counters reported in the replication lags.",
+          "description": "The descriptions of the counters reported in the replication lag.",
           "items": {
             "$ref": "#/definitions/ReplicationLagCounter"
           },
@@ -8161,10 +8217,21 @@
             "name"
           ]
         },
-        "replicationLags": {
+        "values": {
           "type": "array",
           "readOnly": true,
-          "description": "The replication lag information, broken down by target.",
+          "description": "The counter values aggregated at the target level.",
+          "items": {
+            "$ref": "#/definitions/ReplicaLagValue"
+          },
+          "x-ms-identifiers": [
+            "counterName"
+          ]
+        },
+        "breakdowns": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Further breakdowns of the replication lag for the target.",
           "items": {
             "$ref": "#/definitions/ReplicaLagInfo"
           },
@@ -8297,17 +8364,6 @@
         ]
       }
     },
-    "NamespaceMigrationStatus": {
-      "type": "object",
-      "description": "The status of a namespace migration.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NamespaceMigrationProperties",
-          "description": "The properties of the namespace migration.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "NamespaceMigrationProperties": {
       "type": "object",
       "description": "The properties of a namespace migration.",
@@ -8355,17 +8411,6 @@
           "$ref": "#/definitions/ReplicaState",
           "description": "The state of the replica in the target location.",
           "readOnly": true
-        }
-      }
-    },
-    "NamespaceMigrationReplicationLags": {
-      "type": "object",
-      "description": "The replication lag details for a namespace migration.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ReplicationLagProperties",
-          "description": "The replication lag properties.",
-          "x-ms-client-flatten": true
         }
       }
     },

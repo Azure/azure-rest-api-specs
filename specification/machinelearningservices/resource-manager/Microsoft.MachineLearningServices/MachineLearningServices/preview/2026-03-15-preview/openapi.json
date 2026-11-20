@@ -5673,57 +5673,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/capabilityHosts": {
-      "get": {
-        "operationId": "CapabilityHosts_List",
-        "tags": [
-          "CapabilityHosts"
-        ],
-        "summary": "List capability hosts in the workspace.",
-        "description": "Lists the capability hosts associated with the specified workspace.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "Azure Machine Learning Workspace Name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/CapabilityHostListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List capability hosts in the workspace.": {
-            "$ref": "./examples/CapabilityHost/list.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/capabilityHosts/{name}": {
       "get": {
         "operationId": "CapabilityHosts_Get",
@@ -22641,8 +22590,7 @@
             "value": "Deleting"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "AssetReferenceBase": {
       "type": "object",
@@ -23983,27 +23931,6 @@
         }
       ]
     },
-    "CapabilityHostListResult": {
-      "type": "object",
-      "description": "The response of a CapabilityHost list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The CapabilityHost items on this page",
-          "items": {
-            "$ref": "#/definitions/CapabilityHost"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "CapabilityHostProperties": {
       "type": "object",
       "properties": {
@@ -24131,8 +24058,7 @@
             "value": "Deleting"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "CategoricalDataDriftMetric": {
       "type": "string",
@@ -28574,8 +28500,7 @@
             "value": "Disabled"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "DefaultScaleSettings": {
       "type": "object",
@@ -28832,8 +28757,7 @@
             "value": "Canceled"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "DeploymentResourceConfiguration": {
       "type": "object",
@@ -29966,8 +29890,7 @@
             "value": "Canceled"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "EndpointResourceProperties": {
       "type": "object",
@@ -35200,8 +35123,7 @@
             "value": "Deleted"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "ManagedNetworkSettings": {
       "type": "object",
@@ -35589,8 +35511,7 @@
             "value": "Canceled"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "MarketplaceSubscriptionResourceArmPaginatedResult": {
       "type": "object",
@@ -38168,8 +38089,7 @@
             "value": "Unknown"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "PendingUploadCredentialDto": {
       "type": "object",
@@ -38390,8 +38310,7 @@
             "value": "Canceled"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "PredictionDriftMetricThresholdBase": {
       "type": "object",
@@ -38573,8 +38492,7 @@
             "value": "Failed"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "PrivateEndpointDestination": {
       "type": "object",
@@ -38841,8 +38759,7 @@
             "value": "Canceled"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "ProvisioningStatus": {
       "type": "string",
@@ -40811,8 +40728,7 @@
             "value": "Canceled"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "ScheduleResourceArmPaginatedResult": {
       "type": "object",

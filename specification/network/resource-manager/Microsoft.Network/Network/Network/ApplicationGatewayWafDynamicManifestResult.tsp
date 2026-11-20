@@ -12,15 +12,6 @@ using TypeSpec.OpenAPI;
 using Common;
 
 namespace Microsoft.Network;
-
-/** The regional location shared by the WAF dynamic manifest operations. */
-alias ApplicationGatewayWafDynamicManifestLocationParameter = {
-  /** The location for which the WAF dynamic manifest is requested. */
-  @path
-  @segment("locations")
-  location: string;
-};
-
 /**
  * Response for ApplicationGatewayWafDynamicManifest API service call.
  */
@@ -55,7 +46,11 @@ alias ApplicationGatewayWafDynamicManifestResultOps = Azure.ResourceManager.Lega
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
     ...Azure.ResourceManager.Legacy.Provider;
-    ...ApplicationGatewayWafDynamicManifestLocationParameter;
+
+    /** The location for which the WAF dynamic manifest is requested. */
+    @path
+    @segment("locations")
+    location: string;
   },
   {
     /** The name of the Application Gateway WAF Dynamic Manifest. */
@@ -84,7 +79,12 @@ interface ApplicationGatewayWafDynamicManifestResults {
   applicationGatewayWafDynamicManifestsGet is ArmResourceListByParent<
     ApplicationGatewayWafDynamicManifestResult,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Parameters = ApplicationGatewayWafDynamicManifestLocationParameter,
+    Parameters = {
+      /** The location for which the WAF dynamic manifest is requested. */
+      @path
+      @segment("locations")
+      location: string;
+    },
     Response = ArmResponse<ApplicationGatewayWafDynamicManifestResultList>,
     Error = CloudError
   >;

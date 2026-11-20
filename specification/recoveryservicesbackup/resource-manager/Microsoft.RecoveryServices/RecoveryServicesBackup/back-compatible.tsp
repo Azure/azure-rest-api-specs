@@ -143,12 +143,6 @@ using Microsoft.RecoveryServices;
   "!csharp"
 );
 
-@@clientLocation(RecoveryPointsExtendedInfo.getRPExtendedInfo, RecoveryPoints);
-@@clientLocation(
-  RecoveryPointsExtendedInfo.getRPExtendedInfoOperationResult,
-  RecoveryPoints
-);
-
 @@clientLocation(
   ProtectionIntentOperationGroup.validate,
   "ProtectionIntent",

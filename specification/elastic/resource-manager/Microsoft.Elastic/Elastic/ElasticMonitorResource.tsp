@@ -325,14 +325,12 @@ interface ElasticMonitorResources {
       /**
        * List of ips
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing createAndAssociateIPFilterCreate POST contract uses ips in the query; preserve wire compatibility."
       @query("ips")
       ips?: string;
 
       /**
        * Name of the traffic filter
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing createAndAssociateIPFilterCreate POST contract uses name in the query; preserve wire compatibility."
       @query("name")
       name?: string;
     },
@@ -358,21 +356,18 @@ interface ElasticMonitorResources {
       /**
        * Name of the traffic filter
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing createAndAssociatePLFilterCreate POST contract uses name in the query; preserve wire compatibility."
       @query("name")
       name?: string;
 
       /**
        * Guid of the private endpoint
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing createAndAssociatePLFilterCreate POST contract uses privateEndpointGuid in the query; preserve wire compatibility."
       @query("privateEndpointGuid")
       privateEndpointGuid?: string;
 
       /**
        * Name of the private endpoint
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing createAndAssociatePLFilterCreate POST contract uses privateEndpointName in the query; preserve wire compatibility."
       @query("privateEndpointName")
       privateEndpointName?: string;
     },
@@ -392,7 +387,6 @@ interface ElasticMonitorResources {
       /**
        * Ruleset Id of the filter
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing associate POST contract uses rulesetId in the query; preserve wire compatibility."
       @query("rulesetId")
       rulesetId?: string;
     },
@@ -411,7 +405,6 @@ interface ElasticMonitorResources {
       /**
        * Ruleset Id of the filter
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing detachAndDeleteTrafficFilterDelete POST contract uses rulesetId in the query; preserve wire compatibility."
       @query("rulesetId")
       rulesetId?: string;
     },
@@ -431,7 +424,6 @@ interface ElasticMonitorResources {
       /**
        * Ruleset Id of the filter
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing detachTrafficFilterUpdate POST contract uses rulesetId in the query; preserve wire compatibility."
       @query("rulesetId")
       rulesetId?: string;
     },
@@ -450,7 +442,6 @@ interface ElasticMonitorResources {
       /**
        * Ruleset Id of the filter
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing trafficFiltersDelete POST contract uses rulesetId in the query; preserve wire compatibility."
       @query("rulesetId")
       rulesetId?: string;
     },

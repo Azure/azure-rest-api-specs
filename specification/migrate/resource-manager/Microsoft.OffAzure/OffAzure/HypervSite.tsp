@@ -91,7 +91,6 @@ interface HypervSites {
   /**
    * Method to get site error summary.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing computeErrorSummary retains its request-body shape; preserve wire compatibility."
   @tag("HypervSitesController")
   computeErrorSummary is ArmResourceActionSync<
     HypervSite,
@@ -102,7 +101,6 @@ interface HypervSites {
   /**
    * Get a hyperv site usage.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing computeusage retains its request-body shape; preserve wire compatibility."
   @tag("HypervSitesController")
   computeusage is ArmResourceActionSync<
     HypervSite,
@@ -114,7 +112,6 @@ interface HypervSites {
    * Method to generate report containing
    *             machine and the deep discovery of the application installed in the machine.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing exportApplications retains its request-body shape; preserve wire compatibility."
   @tag("HypervSitesController")
   exportApplications is ArmResourceActionAsync<
     HypervSite,

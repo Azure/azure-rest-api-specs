@@ -82,7 +82,6 @@ interface ProtectionContainers {
       /**
        * OData filter options.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing inquire POST contract uses $filter in the query; preserve wire compatibility."
       @query("$filter")
       $filter?: string;
     }

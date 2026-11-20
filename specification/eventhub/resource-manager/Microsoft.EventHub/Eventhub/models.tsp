@@ -2138,37 +2138,6 @@ union ReplicaState {
 }
 
 /**
- * The replication lag details for a namespace migration.
- */
-@added(Versions.v2026_09_01_preview)
-model NamespaceMigrationReplicationLags {
-  /**
-   * The replication lag properties.
-   */
-  properties?: ReplicationLagProperties;
-}
-
-/**
- * The properties describing replication lag during a namespace migration.
- */
-@added(Versions.v2026_09_01_preview)
-model ReplicationLagProperties {
-  /**
-   * The descriptions of the counters reported in the replication lags.
-   */
-  @visibility(Lifecycle.Read)
-  @identifiers(#["name"])
-  counterDescriptions?: ReplicationLagCounter[];
-
-  /**
-   * The replication lag information, broken down by target.
-   */
-  @visibility(Lifecycle.Read)
-  @identifiers(#["name"])
-  replicationLags?: ReplicaLagInfo[];
-}
-
-/**
  * A description of a replication lag counter.
  */
 @added(Versions.v2026_09_01_preview)

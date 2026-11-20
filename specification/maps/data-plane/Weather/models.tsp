@@ -39,7 +39,6 @@ union WeatherDataUnit {
  * imagery, see [Weather services in Azure
  * Maps](/azure/azure-maps/weather-services-concepts#weather-icons).
  */
-#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 union IconCode {
   integer,
 
@@ -170,7 +169,6 @@ union IconCode {
  * translation. For more information, see [Weather services in
  * Azure Maps](/azure/azure-maps/weather-services-concepts#unit-types).
  */
-#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 union UnitType {
   integer,
 
@@ -323,7 +321,6 @@ union PrecipitationType {
  * - 2: Evening (7pm - 1am)
  * - 3: Overnight (1am - 7am)
  */
-#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 union DayQuarter {
   integer,
 
@@ -350,7 +347,6 @@ union DayQuarter {
  * - **3**: Take action
  * - **4**: Life-threatening, emergency
  */
-#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 union HazardIndex {
   integer,
 
@@ -582,7 +578,6 @@ union PollutantType {
  * Defines the duration for the air quality forecast, with options ranging from
  * 1 to 7 days. The default duration is 1 day.
  */
-#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 union DailyDuration {
   integer,
 
@@ -609,7 +604,6 @@ union DailyDuration {
 }
 
 /** Duration in hours for which the forecast is requested. */
-#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 union HourlyDuration {
   integer,
 

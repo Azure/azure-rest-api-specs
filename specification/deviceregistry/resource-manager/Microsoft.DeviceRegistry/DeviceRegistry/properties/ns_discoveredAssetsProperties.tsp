@@ -14,7 +14,7 @@ using Azure.ResourceManager;
 namespace Microsoft.DeviceRegistry;
 
 @doc("Defines the discovered asset properties.")
-@added(Versions.v2025_10_01)
+@added(Versions.v2025_07_01_preview)
 model NamespaceDiscoveredAssetProperties {
   @doc("Reference to the device that provides data for this asset. Must provide device name & endpoint on the device to use.")
   deviceRef: DeviceRef;
@@ -97,6 +97,12 @@ model NamespaceDiscoveredAssetProperties {
   @Azure.ResourceManager.identifiers(#[])
   datasets?: NamespaceDiscoveredDataset[];
 
+  @doc("Array of events that are part of the asset. Each event can have per-event configuration.")
+  @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2025_10_01)
+  @Azure.ResourceManager.identifiers(#[])
+  events?: NamespaceDiscoveredEvent[];
+
   @doc("Array of event groups that are part of the asset. Each event group can have per-event group configuration.")
   @added(Versions.v2025_10_01)
   @Azure.ResourceManager.identifiers(#[])
@@ -116,7 +122,7 @@ model NamespaceDiscoveredAssetProperties {
 }
 
 @doc("Defines the dataset properties.")
-@added(Versions.v2025_10_01)
+@added(Versions.v2025_07_01_preview)
 model NamespaceDiscoveredDataset {
   @doc("Name of the dataset.")
   name: string;
@@ -143,7 +149,7 @@ model NamespaceDiscoveredDataset {
 }
 
 @doc("Defines the data point properties.")
-@added(Versions.v2025_10_01)
+@added(Versions.v2025_07_01_preview)
 model NamespaceDiscoveredDataPoint {
   @doc("The name of the data point.")
   name: string;
@@ -159,11 +165,15 @@ model NamespaceDiscoveredDataPoint {
 }
 
 @doc("Defines the discovered dataset data point properties.")
-@added(Versions.v2025_10_01)
+@added(Versions.v2025_07_01_preview)
 model NamespaceDiscoveredDatasetDataPoint is NamespaceDiscoveredDataPoint {
   @doc("URI or type definition ID.")
   typeRef?: string;
 }
+
+@doc("Defines the discovered event data point properties.")
+@added(Versions.v2025_07_01_preview)
+model NamespaceDiscoveredEventDataPoint is NamespaceDiscoveredDataPoint;
 
 @doc("Defines the discovered event group properties.")
 @added(Versions.v2025_10_01)
@@ -190,7 +200,7 @@ model NamespaceDiscoveredEventGroup {
 }
 
 @doc("Defines the event properties.")
-@added(Versions.v2025_10_01)
+@added(Versions.v2025_07_01_preview)
 model NamespaceDiscoveredEvent {
   @doc("The name of the event.")
   name: string;
@@ -198,6 +208,11 @@ model NamespaceDiscoveredEvent {
   @doc("Reference to a data source for a given event.")
   @added(Versions.v2025_10_01)
   dataSource?: string;
+
+  @doc("The address of the notifier of the event in the asset (e.g. URL) so that a client can access the event on the asset.")
+  @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2025_10_01)
+  eventNotifier: string;
 
   @doc("Stringified JSON that contains connector-specific configuration for the event. For OPC UA, this could include configuration like, publishingInterval, samplingInterval, and queueSize.")
   eventConfiguration?: string;
@@ -209,12 +224,17 @@ model NamespaceDiscoveredEvent {
   @doc("URI or type definition ID.")
   typeRef?: string;
 
+  @doc("Array of data points that are part of the event. Each data point can have a per-data point configuration.")
+  @removed(Versions.v2025_10_01)
+  @identifiers(#[])
+  dataPoints?: NamespaceDiscoveredEventDataPoint[];
+
   @doc("UTC timestamp indicating when the event was added or modified.")
   lastUpdatedOn?: utcDateTime;
 }
 
 @doc("Defines the stream properties.")
-@added(Versions.v2025_10_01)
+@added(Versions.v2025_07_01_preview)
 model NamespaceDiscoveredStream {
   @doc("Name of the stream definition.")
   name: string;
@@ -234,7 +254,7 @@ model NamespaceDiscoveredStream {
 }
 
 @doc("Defines the management group properties.")
-@added(Versions.v2025_10_01)
+@added(Versions.v2025_07_01_preview)
 model NamespaceDiscoveredManagementGroup {
   @doc("Name of the management group.")
   name: string;
@@ -264,7 +284,7 @@ model NamespaceDiscoveredManagementGroup {
 }
 
 @doc("Defines the action properties.")
-@added(Versions.v2025_10_01)
+@added(Versions.v2025_07_01_preview)
 model NamespaceDiscoveredManagementAction {
   @doc("Name of the action.")
   name: string;
@@ -292,7 +312,7 @@ model NamespaceDiscoveredManagementAction {
 }
 
 @doc("Defines the ManagementAction's type.")
-@added(Versions.v2025_10_01)
+@added(Versions.v2025_07_01_preview)
 union NamespaceDiscoveredManagementActionType {
   @doc("Call action type.")
   Call: "Call",

@@ -28,10 +28,6 @@ namespace Microsoft.NetApp;
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_15_preview)
-@removed(Versions.v2026_07_01)
-@added(Versions.v2026_07_15_preview)
-@removed(Versions.v2026_08_01)
-@added(Versions.v2026_08_15_preview)
 @parentResource(ElasticAccount)
 model ElasticBackupPolicy is TrackedResource<ElasticBackupPolicyProperties> {
   ...ResourceNameParameter<
@@ -57,14 +53,9 @@ model ElasticBackupPolicy is TrackedResource<ElasticBackupPolicyProperties> {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_15_preview)
-@removed(Versions.v2026_07_01)
-@added(Versions.v2026_07_15_preview)
-@removed(Versions.v2026_08_01)
-@added(Versions.v2026_08_15_preview)
 model ElasticBackupPolicyProperties {
   /** Azure lifecycle management. */
   @visibility(Lifecycle.Read)
-  @typeChangedFrom(Versions.v2026_07_01, NetAppProvisioningStateOld)
   provisioningState?: NetAppProvisioningState;
 
   /** Daily backups count to keep */
@@ -104,10 +95,6 @@ model ElasticBackupPolicyProperties {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_15_preview)
-@removed(Versions.v2026_07_01)
-@added(Versions.v2026_07_15_preview)
-@removed(Versions.v2026_08_01)
-@added(Versions.v2026_08_15_preview)
 union ElasticBackupPolicyState {
   string,
 
@@ -134,10 +121,6 @@ interface ElasticBackupPolicies {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
-  @removed(Versions.v2026_07_01)
-  @added(Versions.v2026_07_15_preview)
-  @removed(Versions.v2026_08_01)
-  @added(Versions.v2026_08_15_preview)
   get is ArmResourceRead<ElasticBackupPolicy>;
 
   /**
@@ -154,10 +137,6 @@ interface ElasticBackupPolicies {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
-  @removed(Versions.v2026_07_01)
-  @added(Versions.v2026_07_15_preview)
-  @removed(Versions.v2026_08_01)
-  @added(Versions.v2026_08_15_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticBackupPolicy>;
 
   /**
@@ -174,10 +153,6 @@ interface ElasticBackupPolicies {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
-  @removed(Versions.v2026_07_01)
-  @added(Versions.v2026_07_15_preview)
-  @removed(Versions.v2026_08_01)
-  @added(Versions.v2026_08_15_preview)
   update is ArmCustomPatchAsync<
     ElasticBackupPolicy,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -200,10 +175,6 @@ interface ElasticBackupPolicies {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
-  @removed(Versions.v2026_07_01)
-  @added(Versions.v2026_07_15_preview)
-  @removed(Versions.v2026_08_01)
-  @added(Versions.v2026_08_15_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ElasticBackupPolicy>;
   /**
    * List and describe all Elastic Backup Policies in the elastic account.
@@ -219,10 +190,6 @@ interface ElasticBackupPolicies {
   @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_06_01)
   @added(Versions.v2026_06_15_preview)
-  @removed(Versions.v2026_07_01)
-  @added(Versions.v2026_07_15_preview)
-  @removed(Versions.v2026_08_01)
-  @added(Versions.v2026_08_15_preview)
   listByElasticAccount is ArmResourceListByParent<ElasticBackupPolicy>;
 }
 

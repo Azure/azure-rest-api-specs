@@ -344,10 +344,6 @@ using Http;
   "csharp"
 );
 @@clientName(TestResultStatus, "IotHubTestResultStatus", "csharp");
-@@clientName(ConnectionProfile, "IotHubConnectionProfile", "csharp");
-@@clientName(MessagePayloadFormat, "IotHubMessagePayloadFormat", "csharp");
-@@clientName(ErrorDetails, "DeviceRegistryLinkingErrorDetails", "csharp");
-@@clientName(TopicGroup, "MqttV5TopicGroup", "csharp");
 @@clientLocation(IotHubDescriptions.manualFailover, "IotHubResource", "csharp");
 
 /**

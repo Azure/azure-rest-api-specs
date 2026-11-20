@@ -153,7 +153,6 @@ describe("changedFiles", () => {
     "MixedCase.jSoN",
     "MixedCase.mD",
     "README.MD",
-    "TSPCONFIG.YAML",
     "not-spec/contosowidgetmanager/data-plane/readme.md",
     "not-spec/contosowidgetmanager/resource-manager/readme.md",
     "not-spec/contosowidgetmanager/Contoso.Management/main.tsp",
@@ -180,22 +179,6 @@ describe("changedFiles", () => {
   ];
 
   const filesResolved = files.map((f) => resolve(f));
-
-  it.each([
-    { filename: "readme.md", filter: readme },
-    { filename: "tspconfig.yaml", filter: tspconfig },
-  ])("filter:$filename matches the full filename, not a suffix", ({ filename, filter }) => {
-    const candidates = [
-      filename,
-      resolve(filename.toUpperCase()),
-      `specification\\service\\${filename}`,
-      `foo${filename}`,
-      resolve(`foo${filename}`),
-      `${filename}\n`,
-    ];
-
-    expect(candidates.filter(filter)).toEqual(candidates.slice(0, 3));
-  });
 
   it("filter:json", () => {
     const expected = [
@@ -260,7 +243,6 @@ describe("changedFiles", () => {
 
   it("filter:tspconfig", () => {
     const expected = [
-      "TSPCONFIG.YAML",
       "not-spec/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
       "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
     ];
@@ -269,7 +251,6 @@ describe("changedFiles", () => {
 
   it("filter:typespec", () => {
     const expected = [
-      "TSPCONFIG.YAML",
       "not-spec/contosowidgetmanager/Contoso.Management/main.tsp",
       "not-spec/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
       "specification/contosowidgetmanager/Contoso.Management/main.tsp",

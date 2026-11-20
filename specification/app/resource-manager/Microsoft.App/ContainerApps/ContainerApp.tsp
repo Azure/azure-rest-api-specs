@@ -129,7 +129,6 @@ interface ContainerApps {
       /**
        * Custom hostname.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listCustomHostNameAnalysis POST contract uses customHostname in the query; preserve wire compatibility."
       @query("customHostname")
       customHostname?: string;
     }

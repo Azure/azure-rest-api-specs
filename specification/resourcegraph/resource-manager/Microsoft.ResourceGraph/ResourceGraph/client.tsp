@@ -5,10 +5,9 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 
 import "./ResourceChanges/main.tsp";
-import "./ResourceGraphApi/query.tsp";
+import "./ResourceGraphApi/main.tsp";
 import "./ResourceHistory/main.tsp";
 import "./GraphQueryApi/main.tsp";
-import "./OnboardingApi/main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -18,13 +17,7 @@ using Azure.ClientGenerator.Core;
 
 @client({
   name: "ResourceGraphClient",
-  service: [
-    ResourceChanges,
-    ResourceGraphApi,
-    ResourceHistory,
-    GraphQueryApi,
-    OnboardingApi
-  ],
+  service: [ResourceChanges, ResourceGraphApi, ResourceHistory, GraphQueryApi],
   autoMergeService: true,
 })
 namespace Microsoft.ResourceGraph;
@@ -71,21 +64,6 @@ namespace Microsoft.ResourceGraph;
 );
 @@clientName(ResourceGraphApi.QueryResponse, "ResourceQueryResult", "csharp");
 @@clientName(ResourceGraphCommon.ErrorDetails, "FacetErrorDetails", "csharp");
-@@clientName(
-  ResourceGraphCommon.ErrorResponse,
-  "ResourceGraphErrorResponse",
-  "csharp"
-);
-@@clientName(
-  ResourceGraphCommon.ErrorResponse,
-  "ResourceGraphErrorResponse",
-  "java"
-);
-@@clientName(
-  ResourceGraphCommon.ErrorResponse,
-  "ResourceGraphErrorResponse",
-  "python"
-);
 
 // Rename DateTimeInterval properties to match GA SDK
 @@clientName(ResourceGraphCommon.DateTimeInterval.start, "StartOn", "csharp");

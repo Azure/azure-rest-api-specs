@@ -15,7 +15,6 @@ namespace Microsoft.Chaos;
 @armResourceOperations
 @removed(Microsoft.Chaos.Versions.v2025_01_01)
 @added(Microsoft.Chaos.Versions.v2026_05_01_preview)
-@removed(Microsoft.Chaos.Versions.v2026_11_01)
 interface PrivateAccesses {
   /**
    * Get a private access resource
@@ -71,9 +70,11 @@ interface PrivateAccesses {
   /**
    * Gets the private link resources possible under private access resource
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for Swagger LintDiff validation - x-ms-pageable extension must be specified for LIST APIs"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-pageable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core paging operations."
   @get
   @action("privateLinkResources")
-  @list
+  @OpenAPI.extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
   privateLinkResources is ArmResourceActionSync<
     PrivateAccess,
     void,

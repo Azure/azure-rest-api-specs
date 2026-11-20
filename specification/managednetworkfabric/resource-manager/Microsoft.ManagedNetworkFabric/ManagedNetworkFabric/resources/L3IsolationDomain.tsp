@@ -76,25 +76,11 @@ interface L3IsolationDomains {
     UpdateAdministrativeStateResponse
   >;
 
-  @action("validateConfiguration")
-  @removed(Versions.v2026_01_15_preview)
-  @renamedFrom(Versions.v2026_01_15_preview, "validateConfiguration")
-  @sharedRoute
-  @doc("Validates the configuration of the resources.")
-  validateConfigurationDeprecated is ArmResourceActionAsync<
-    L3IsolationDomain,
-    void,
-    ValidateConfigurationResponse
-  >;
-
-  @action("validateConfiguration")
-  @added(Versions.v2026_01_15_preview)
-  @sharedRoute
   @doc("Validates the configuration of the resources.")
   validateConfiguration is ArmResourceActionAsync<
     L3IsolationDomain,
     void,
-    ValidateConfigurationResponseV2
+    ValidateConfigurationResponse
   >;
 
   @doc("Commits the configuration of the given resources.")
@@ -116,13 +102,5 @@ interface L3IsolationDomains {
 );
 @@doc(
   L3IsolationDomains.updateAdministrativeState::parameters.body,
-  "Request payload."
-);
-@@doc(
-  L3IsolationDomains.validateConfigurationDeprecated::parameters.body,
-  "Request payload."
-);
-@@doc(
-  L3IsolationDomains.validateConfiguration::parameters.body,
   "Request payload."
 );

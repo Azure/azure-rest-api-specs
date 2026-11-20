@@ -822,14 +822,12 @@ interface Sites {
       /**
        * The duration to keep capturing in seconds.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing startWebSiteNetworkTrace POST contract uses durationInSeconds in the query; preserve wire compatibility."
       @query("durationInSeconds")
       durationInSeconds?: int32;
 
       /**
        * The maximum frame length in bytes (Optional).
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing startWebSiteNetworkTrace POST contract uses maxFrameLength in the query; preserve wire compatibility."
       @query("maxFrameLength")
       maxFrameLength?: int32;
 
@@ -837,7 +835,6 @@ interface Sites {
        * The Blob URL to store capture file.
        */
       #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing startWebSiteNetworkTrace POST contract uses sasUrl in the query; preserve wire compatibility."
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -863,14 +860,12 @@ interface Sites {
       /**
        * The duration to keep capturing in seconds.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing startWebSiteNetworkTraceOperation POST contract uses durationInSeconds in the query; preserve wire compatibility."
       @query("durationInSeconds")
       durationInSeconds?: int32;
 
       /**
        * The maximum frame length in bytes (Optional).
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing startWebSiteNetworkTraceOperation POST contract uses maxFrameLength in the query; preserve wire compatibility."
       @query("maxFrameLength")
       maxFrameLength?: int32;
 
@@ -878,7 +873,6 @@ interface Sites {
        * The Blob URL to store capture file.
        */
       #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing startWebSiteNetworkTraceOperation POST contract uses sasUrl in the query; preserve wire compatibility."
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -1094,14 +1088,12 @@ interface Sites {
       /**
        * Specify true to apply the configuration settings and restarts the app only if necessary. By default, the API always restarts and reprovisions the app.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing restart POST contract uses softRestart in the query; preserve wire compatibility."
       @query("softRestart")
       softRestart?: boolean;
 
       /**
        * Specify true to block until the app is restarted. By default, it is set to false, and the API responds immediately (asynchronous).
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing restart POST contract uses synchronous in the query; preserve wire compatibility."
       @query("synchronous")
       synchronous?: boolean;
     },
@@ -1245,14 +1237,12 @@ interface Sites {
       /**
        * The duration to keep capturing in seconds.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing startNetworkTrace POST contract uses durationInSeconds in the query; preserve wire compatibility."
       @query("durationInSeconds")
       durationInSeconds?: int32;
 
       /**
        * The maximum frame length in bytes (Optional).
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing startNetworkTrace POST contract uses maxFrameLength in the query; preserve wire compatibility."
       @query("maxFrameLength")
       maxFrameLength?: int32;
 
@@ -1260,7 +1250,6 @@ interface Sites {
        * The Blob URL to store capture file.
        */
       #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing startNetworkTrace POST contract uses sasUrl in the query; preserve wire compatibility."
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -2191,14 +2180,12 @@ interface WebApps {
       /**
        * The duration to keep capturing in seconds.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing startWebSiteNetworkTraceSlot POST contract uses durationInSeconds in the query; preserve wire compatibility."
       @query("durationInSeconds")
       durationInSeconds?: int32;
 
       /**
        * The maximum frame length in bytes (Optional).
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing startWebSiteNetworkTraceSlot POST contract uses maxFrameLength in the query; preserve wire compatibility."
       @query("maxFrameLength")
       maxFrameLength?: int32;
 
@@ -2206,7 +2193,6 @@ interface WebApps {
        * The Blob URL to store capture file.
        */
       #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing startWebSiteNetworkTraceSlot POST contract uses sasUrl in the query; preserve wire compatibility."
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -2232,14 +2218,12 @@ interface WebApps {
       /**
        * The duration to keep capturing in seconds.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing startWebSiteNetworkTraceOperationSlot POST contract uses durationInSeconds in the query; preserve wire compatibility."
       @query("durationInSeconds")
       durationInSeconds?: int32;
 
       /**
        * The maximum frame length in bytes (Optional).
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing startWebSiteNetworkTraceOperationSlot POST contract uses maxFrameLength in the query; preserve wire compatibility."
       @query("maxFrameLength")
       maxFrameLength?: int32;
 
@@ -2247,7 +2231,6 @@ interface WebApps {
        * The Blob URL to store capture file.
        */
       #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing startWebSiteNetworkTraceOperationSlot POST contract uses sasUrl in the query; preserve wire compatibility."
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -2461,14 +2444,12 @@ interface WebApps {
       /**
        * Specify true to apply the configuration settings and restarts the app only if necessary. By default, the API always restarts and reprovisions the app.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing restartSlot POST contract uses softRestart in the query; preserve wire compatibility."
       @query("softRestart")
       softRestart?: boolean;
 
       /**
        * Specify true to block until the app is restarted. By default, it is set to false, and the API responds immediately (asynchronous).
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing restartSlot POST contract uses synchronous in the query; preserve wire compatibility."
       @query("synchronous")
       synchronous?: boolean;
     },
@@ -2615,14 +2596,12 @@ interface WebApps {
       /**
        * The duration to keep capturing in seconds.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing startNetworkTraceSlot POST contract uses durationInSeconds in the query; preserve wire compatibility."
       @query("durationInSeconds")
       durationInSeconds?: int32;
 
       /**
        * The maximum frame length in bytes (Optional).
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing startNetworkTraceSlot POST contract uses maxFrameLength in the query; preserve wire compatibility."
       @query("maxFrameLength")
       maxFrameLength?: int32;
 
@@ -2630,7 +2609,6 @@ interface WebApps {
        * The Blob URL to store capture file.
        */
       #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing startNetworkTraceSlot POST contract uses sasUrl in the query; preserve wire compatibility."
       @query("sasUrl")
       sasUrl?: string;
     },

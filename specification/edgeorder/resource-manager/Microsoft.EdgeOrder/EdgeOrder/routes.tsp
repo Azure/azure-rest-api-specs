@@ -28,7 +28,6 @@ interface ProductsAndConfigurationsOperationGroup {
       /**
        * $skipToken is supported on list of configurations, which provides the next page in the list of configurations.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listConfigurations POST contract uses $skipToken in the query; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     }
@@ -46,14 +45,12 @@ interface ProductsAndConfigurationsOperationGroup {
       /**
        * $expand is supported on configurations parameter for product, which provides details on the configurations for the product.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listProductFamilies POST contract uses $expand in the query; preserve wire compatibility."
       @query("$expand")
       $expand?: string;
 
       /**
        * $skipToken is supported on list of product families, which provides the next page in the list of product families.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listProductFamilies POST contract uses $skipToken in the query; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     }
@@ -71,7 +68,6 @@ interface ProductsAndConfigurationsOperationGroup {
       /**
        * $skipToken is supported on list of product families metadata, which provides the next page in the list of product families metadata.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listProductFamiliesMetadata POST contract uses $skipToken in the query; preserve wire compatibility."
       @query("$skipToken")
       $skipToken?: string;
     }

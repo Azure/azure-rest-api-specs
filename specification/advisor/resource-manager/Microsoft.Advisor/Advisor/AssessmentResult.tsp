@@ -1,11 +1,9 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/versioning";
 import "./models.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.Versioning;
 
 namespace Microsoft.Advisor;
 /**
@@ -23,7 +21,6 @@ model AssessmentResult
 }
 
 @armResourceOperations
-@removed(Versions.v2026_10_01)
 interface AssessmentResults {
   /**
    * Get an existing Azure Advisor assessment.

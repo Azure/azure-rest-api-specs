@@ -471,7 +471,6 @@ interface AppServiceEnvironmentRecommendations {
       /**
        * Name of the app.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing disableAllForHostingEnvironment POST contract uses environmentName in the query; preserve wire compatibility."
       @query("environmentName")
       environmentName: string;
     },
@@ -496,7 +495,6 @@ interface AppServiceEnvironmentRecommendations {
       /**
        * Name of the app.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing resetAllFiltersForHostingEnvironment POST contract uses environmentName in the query; preserve wire compatibility."
       @query("environmentName")
       environmentName: string;
     },

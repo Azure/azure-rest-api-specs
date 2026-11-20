@@ -244,7 +244,6 @@ model NetworkTapRulePatchProperties {
   globalNetworkTapRuleActions?: GlobalNetworkTapRuleActionPatchProperties;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @doc("Polling interval in seconds.")
 union PollingIntervalInSeconds {
   int32,

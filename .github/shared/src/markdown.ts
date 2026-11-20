@@ -6,18 +6,16 @@ export interface MarkdownSection {
   kind: "section";
   title: string;
   body: MarkdownDoc;
-  id?: string;
 }
 
-/** Groups trusted inline Markdown and body blocks under a heading with an optional anchor ID. */
-export function section(title: string, body: MarkdownDoc, id?: string): MarkdownSection {
-  return { kind: "section", title, body, ...(id === undefined ? {} : { id }) };
+/** Groups trusted inline Markdown and body blocks under a heading. */
+export function section(title: string, body: MarkdownDoc): MarkdownSection {
+  return { kind: "section", title, body };
 }
 
 /** Renders document blocks with blank lines between them, omitting empty or absent blocks. */
 export function renderMarkdownDoc(doc: MarkdownDoc, heading = 1): string {
   const blocks: string[] = [];
-  const ids = new Set<string>();
 
   /** Flattens content while keeping nested heading levels local to each section. */
   function render(content: MarkdownDoc, level: number): void {
@@ -30,18 +28,6 @@ export function renderMarkdownDoc(doc: MarkdownDoc, heading = 1): string {
       if (!Number.isInteger(level) || level < 1 || level > 6) {
         throw new Error("Markdown headings must have a level from 1 to 6");
       }
-      if (content.id !== undefined) {
-        if (!/^[A-Za-z0-9_-]+$/.test(content.id)) {
-          throw new Error(
-            "Markdown heading IDs must contain only letters, digits, underscores or hyphens",
-          );
-        }
-        if (ids.has(content.id)) {
-          throw new Error(`Duplicate Markdown heading ID: ${content.id}`);
-        }
-        ids.add(content.id);
-        blocks.push(`<a name="${content.id}"></a>`);
-      }
       blocks.push(`${"#".repeat(level)} ${content.title}`);
       render(content.body, level + 1);
     }
@@ -52,7 +38,7 @@ export function renderMarkdownDoc(doc: MarkdownDoc, heading = 1): string {
 }
 
 /** Escapes plain text for an HTML element's text content, not an attribute. */
-export function escapeHtml(value: string): string {
+function escapeHtml(value: string): string {
   return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 }
 
@@ -87,11 +73,6 @@ export function link(label: string, url: string): string {
   return `[${label}](${url})`;
 }
 
-/** Joins trusted inline Markdown with spaces into a single paragraph. */
-export function paragraph(...parts: string[]): string {
-  return parts.join(" ");
-}
-
 /** Escapes table delimiters in one pass, preserving existing pipe escapes and trusted Markdown. */
 function escapeTableCell(value: string): string {
   const escaped: string[] = [];
@@ -124,9 +105,9 @@ export function unorderedList(items: readonly string[]): string {
 }
 
 /** Wraps a Markdown block in a GitHub details element with a plain-text summary. */
-export function details(summary: string, body: string, open = false): string {
+export function details(summary: string, body: string): string {
   return [
-    `<details${open ? " open" : ""}><summary>${escapeHtml(summary)}</summary>`,
+    `<details><summary>${escapeHtml(summary)}</summary>`,
     "",
     ...(body ? [body] : []),
     "",

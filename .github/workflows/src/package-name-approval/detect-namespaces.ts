@@ -1,6 +1,6 @@
 import { existsSync } from "node:fs";
 import { writeFile } from "node:fs/promises";
-import { dirname, join, posix } from "node:path";
+import { dirname, join } from "node:path";
 import { getChangedFilesStatuses, tspconfig } from "../../../shared/src/changed-files.ts";
 import { generateTypeSpecMetadata } from "../../../shared/src/typespec-metadata.ts";
 import type { Core, GitHubScriptArgs, WebhookEvent } from "../github.ts";
@@ -202,7 +202,6 @@ export default async function detectNamespaces({ context, core }: GitHubScriptAr
   const allConfiguredPackageNames: Record<string, string> = {};
 
   const allConfiguredNamespaces: Record<string, string> = {};
-  const changedProjectPaths = new Set<string>();
   let isMgmt = false;
   let isDataPlane = false;
 
@@ -239,10 +238,6 @@ export default async function detectNamespaces({ context, core }: GitHubScriptAr
       core,
     );
 
-    if (Object.keys(packageNames).length > 0) {
-      changedProjectPaths.add(posix.dirname(file));
-    }
-
     Object.assign(packageNamesFound, packageNames);
     Object.assign(namespacesFound, namespaces);
   }
@@ -267,10 +262,7 @@ export default async function detectNamespaces({ context, core }: GitHubScriptAr
     }
   }
 
-  const typespecPaths = [...changedProjectPaths];
   const results = {
-    typespecPath: typespecPaths.length === 1 ? typespecPaths[0] : null,
-    typespecPaths,
     namespacesFound: packageNamesFound,
     namespaces: namespacesFound,
     allConfiguredPackageNames,

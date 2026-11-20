@@ -396,9 +396,8 @@ model ResourceStateError {
   /**
    * The error code.
    */
-  @typeChangedFrom(Versions.v2026_11_01, int32)
   @visibility(Lifecycle.Read)
-  errorCode: string;
+  errorCode: int32;
 
   /**
    * The error message.

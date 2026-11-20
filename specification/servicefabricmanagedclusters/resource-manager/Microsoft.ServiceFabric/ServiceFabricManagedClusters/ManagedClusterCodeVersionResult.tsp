@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -11,7 +12,6 @@ using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 
 namespace Microsoft.ServiceFabric;
-
 /**
  * The result of the Service Fabric runtime versions
  */
@@ -56,12 +56,18 @@ interface ManagedClusterVersion {
     /**
      * The location for the cluster code versions. This is different from cluster location.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
+    @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     location: string,
 
     /**
      * The cluster code version.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
+    @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     clusterVersion: string,
   ): ArmResponse<ManagedClusterCodeVersionResult> | ErrorResponse;
@@ -83,6 +89,9 @@ interface ManagedClusterVersion {
     /**
      * The location for the cluster code versions. This is different from cluster location.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
+    @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     location: string,
   ): ArmResponse<ManagedClusterCodeVersionListResult> | ErrorResponse;
@@ -104,18 +113,27 @@ interface ManagedClusterVersion {
     /**
      * The location for the cluster code versions. This is different from cluster location.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
+    @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     location: string,
 
     /**
      * The operating system of the cluster.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
+    @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     environment: ManagedClusterVersionEnvironment,
 
     /**
      * The cluster code version.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
+    @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     clusterVersion: string,
   ): ArmResponse<ManagedClusterCodeVersionResult> | ErrorResponse;
@@ -137,12 +155,18 @@ interface ManagedClusterVersion {
     /**
      * The location for the cluster code versions. This is different from cluster location.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
+    @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     location: string,
 
     /**
      * The operating system of the cluster.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
+    @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     environment: ManagedClusterVersionEnvironment,
   ): ArmResponse<ManagedClusterCodeVersionListResult> | ErrorResponse;

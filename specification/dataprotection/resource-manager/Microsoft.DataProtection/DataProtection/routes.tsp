@@ -189,14 +189,12 @@ interface FetchSecondaryRecoveryPointsOperationGroup {
     /**
      * OData filter options.
      */
-    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing list POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     $filter?: string,
 
     /**
      * skipToken Filter.
      */
-    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing list POST contract uses $skipToken in the query; preserve wire compatibility."
     @query("$skipToken")
     $skipToken?: string,
 
@@ -246,7 +244,6 @@ interface FetchCrossRegionRestoreJobsOperationGroup {
     /**
      * OData filter options.
      */
-    #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing list POST contract uses $filter in the query; preserve wire compatibility."
     @query("$filter")
     $filter?: string,
 

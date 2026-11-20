@@ -661,7 +661,6 @@ namespace Microsoft.Batch {
   /**
    * The provisioned state of the resource
    */
-  #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing SDK contract; preserve the existing extensible union representation."
   union BatchProvisioningState {
     ProvisioningState,
     string,
@@ -670,7 +669,6 @@ namespace Microsoft.Batch {
   /**
    * The provisioning state of the private endpoint connection.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing SDK contract; preserve the existing extensible union representation."
   union BatchPrivateEndpointConnectionProvisioningState {
     PrivateEndpointConnectionProvisioningState,
     string,
@@ -679,7 +677,6 @@ namespace Microsoft.Batch {
   /**
    * The action when client IP address is matched.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing SDK contract; preserve the existing extensible union representation."
   union BatchIPRuleAction {
     IPRuleAction,
     string,
@@ -688,7 +685,6 @@ namespace Microsoft.Batch {
   /**
    * The location where the OS disk should be placed.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing SDK contract; preserve the existing extensible union representation."
   union BatchDiffDiskPlacement {
     DiffDiskPlacement,
     string,
@@ -697,7 +693,6 @@ namespace Microsoft.Batch {
   /**
    * The current state of the pool.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing SDK contract; preserve the existing extensible union representation."
   union BatchAccountPoolProvisioningState {
     PoolProvisioningState,
     string,
@@ -706,7 +701,6 @@ namespace Microsoft.Batch {
   /**
    * The provisioning state of the certificate.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing SDK contract; preserve the existing extensible union representation."
   union BatchAccountCertificateProvisioningState {
     CertificateProvisioningState,
     string,

@@ -1475,10 +1475,6 @@ model BackupInstanceResourceList extends DppResourceList {
 /**
  * Backup Instance
  */
-// CROSS-TENANT GUARD: CrossTenantBackupInstance (CrossTenantVaultMappingResource.tsp)
-// spreads this model via OmitProperties, so new fields flow through automatically —
-// except datasourceAuthCredentials, which it re-types. No action needed for routine
-// field additions.
 model BackupInstance {
   /**
    * Gets or sets the Backup Instance friendly name.
@@ -1805,10 +1801,6 @@ model InnerError {
 /**
  * Base class for different types of authentication credentials.
  */
-// CROSS-TENANT GUARD: the cross-tenant read projection forks this discriminated
-// hierarchy as CrossTenantAuthCredentials (+ CrossTenantSecretStoreBasedAuthCredentials)
-// in CrossTenantVaultMappingResource.tsp so that SecretStoreResource.value is excluded
-// from cross-tenant GET/LIST. If you add a NEW AuthCredentials subtype, mirror it there.
 @discriminator("objectType")
 model AuthCredentials {
   /**
@@ -4130,9 +4122,6 @@ model SecretStoreBasedAuthCredentials extends AuthCredentials {
 /**
  * Class representing a secret store resource.
  */
-// CROSS-TENANT GUARD: CrossTenantSecretStoreResource (CrossTenantVaultMappingResource.tsp)
-// spreads this model minus `value` for the cross-tenant read surface; uri/secretStoreType
-// changes flow through automatically.
 model SecretStoreResource {
   /**
    * Uri to get to the resource

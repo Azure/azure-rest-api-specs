@@ -1,6 +1,5 @@
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
-import { findTypeSpecProjects } from "@azure-tools/specs-shared/typespec-projects";
 import { getSuppressions } from "@azure-tools/suppressions";
 import { spawn } from "node:child_process";
 import { appendFile, stat } from "node:fs/promises";
@@ -9,8 +8,7 @@ import { fileURLToPath } from "node:url";
 import pc from "picocolors";
 import { simpleGit } from "simple-git";
 import { formatRuleSummary, supportsColor, type RuleCounts } from "./diagnostics.ts";
-import { findChangedProjects, type ChangedProjectsOptions } from "./find-projects.ts";
-import { cleanWorktree } from "./git-cleanup.ts";
+import { findChangedProjects, findProjects, type ChangedProjectsOptions } from "./find-projects.ts";
 
 interface RunOptions {
   gitClean?: boolean;
@@ -56,7 +54,7 @@ export async function runAll(
     throw new Error(`Please run TypeSpec Validation on a directory path: ${root}`);
   }
 
-  let projects = await findTypeSpecProjects(root);
+  let projects = await findProjects(root);
   if (projects.length === 0) {
     console.error(`No TypeSpec projects found in ${root}`);
     return false;
@@ -101,7 +99,6 @@ async function runProjects(
   options: RunOptions,
 ): Promise<boolean> {
   const git = simpleGit(root);
-  const logger = new ConsoleLogger(options.verbose);
   const gitClean = options.gitClean && !options.dryRun;
   const displayRoot = resolve(
     gitClean || (await git.checkIsRepo()) ? await getRootFolder(root) : process.cwd(),
@@ -181,7 +178,8 @@ async function runProjects(
       throw error;
     } finally {
       if (gitClean) {
-        await cleanWorktree(displayRoot, logger);
+        await git.raw(["restore", "--worktree", "--", "."]);
+        await git.clean("f", ["-d"]);
       }
     }
   }

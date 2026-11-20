@@ -80,7 +80,6 @@ interface Alerts {
       /**
        * New state of the alert.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing changeStateTenant POST contract uses newState in the query; preserve wire compatibility."
       @query("newState")
       newState: AlertState;
     },
@@ -378,7 +377,6 @@ interface AlertOperationGroup {
       /**
        * New state of the alert.
        */
-      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing changeState POST contract uses newState in the query; preserve wire compatibility."
       @query("newState")
       newState: AlertState;
     },

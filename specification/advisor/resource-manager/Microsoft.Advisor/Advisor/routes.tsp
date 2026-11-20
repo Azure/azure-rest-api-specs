@@ -200,7 +200,6 @@ interface AssessmentTypesOperationGroup {
   @list
   @get
   @action("assessmentTypes")
-  @removed(Versions.v2026_10_01)
   list is ArmProviderActionSync<
     Response = AssessmentTypeListResult,
     Scope = SubscriptionActionScope,
@@ -218,7 +217,6 @@ interface WorkloadsOperationGroup {
   @list
   @get
   @action("workloads")
-  @removed(Versions.v2026_10_01)
   list is ArmProviderActionSync<
     Response = WorkloadListResult,
     Scope = SubscriptionActionScope,

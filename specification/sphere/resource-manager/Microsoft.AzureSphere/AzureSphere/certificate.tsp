@@ -8,7 +8,7 @@ using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AzureSphere;
 /**
- * A certificate resource belonging to a catalog resource.
+ * An certificate resource belonging to a catalog resource.
  */
 @parentResource(Catalog)
 model Certificate is ProxyResource<CertificateProperties> {

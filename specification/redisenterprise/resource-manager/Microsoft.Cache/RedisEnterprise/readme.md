@@ -24,43 +24,9 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the RedisEnterprise API.
 
-```yaml
+``` yaml
 openapi-type: arm
-tag: package-preview-2026-10-01
-```
-
-### Tag: package-preview-2026-10-01
-
-These settings apply only when `--tag=package-preview-2026-10-01` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2026-10-01'
-input-file:
-  - preview/2026-10-01-preview/redisenterprise.json
-
-directive:
-  - suppress: PostResponseCodes
-    from: redisenterprise.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/migrations/default/unlinkMigratedEndpoint"].post
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/unlinkMigratedEndpoint"].post
-    reason: These long-running POST actions never return a 204. The service responds with 202 and reports the terminal state through the Azure-AsyncOperation / Location endpoints, so declaring a 204 on the action URL would misrepresent the service contract.
-```
-
-### Tag: package-2026-09-01
-
-These settings apply only when `--tag=package-2026-09-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2026-09-01'
-input-file:
-  - stable/2026-09-01/redisenterprise.json
-
-directive:
-  - suppress: PostResponseCodes
-    from: redisenterprise.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/migrations/default/unlinkMigratedEndpoint"].post
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/unlinkMigratedEndpoint"].post
-    reason: These long-running POST actions never return a 204. The service responds with 202 and reports the terminal state through the Azure-AsyncOperation / Location endpoints, so declaring a 204 on the action URL would misrepresent the service contract.
+tag: package-preview-2026-06-01
 ```
 
 ### Tag: package-preview-2026-06-01
@@ -175,7 +141,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-11'
+``` yaml $(tag) == 'package-2023-11'
 input-file:
   - stable/2023-11-01/redisenterprise.json
 ```
@@ -184,7 +150,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-10'
+``` yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - preview/2023-10-01-preview/redisenterprise.json
 ```
@@ -193,7 +159,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-08'
+``` yaml $(tag) == 'package-preview-2023-08'
 input-file:
   - preview/2023-08-01-preview/redisenterprise.json
 ```
@@ -202,7 +168,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-07'
+``` yaml $(tag) == 'package-2023-07'
 input-file:
   - stable/2023-07-01/redisenterprise.json
 ```
@@ -211,7 +177,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-03'
+``` yaml $(tag) == 'package-preview-2023-03'
 input-file:
   - preview/2023-03-01-preview/redisenterprise.json
 ```
@@ -220,7 +186,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-11'
+``` yaml $(tag) == 'package-preview-2022-11'
 input-file:
   - preview/2022-11-01-preview/redisenterprise.json
 ```
@@ -229,7 +195,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-01'
+``` yaml $(tag) == 'package-2022-01'
 input-file:
   - stable/2022-01-01/redisenterprise.json
 ```
@@ -238,7 +204,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-08'
+``` yaml $(tag) == 'package-2021-08'
 input-file:
   - stable/2021-08-01/redisenterprise.json
 ```
@@ -247,7 +213,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2021-02` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-02'
+``` yaml $(tag) == 'package-preview-2021-02'
 input-file:
   - preview/2021-02-01-preview/redisenterprise.json
 ```
@@ -256,7 +222,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-03'
+``` yaml $(tag) == 'package-2021-03'
 input-file:
   - stable/2021-03-01/redisenterprise.json
 ```
@@ -265,7 +231,7 @@ input-file:
 
 These settings apply only when `--tag=package-2020-10-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-10-01-preview'
+``` yaml $(tag) == 'package-2020-10-01-preview'
 input-file:
   - preview/2020-10-01-preview/redisenterprise.json
 ```
@@ -279,7 +245,7 @@ input-file:
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-```yaml $(swagger-to-sdk)
+``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python

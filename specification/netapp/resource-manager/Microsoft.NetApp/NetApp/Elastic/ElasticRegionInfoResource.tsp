@@ -28,10 +28,6 @@ namespace Microsoft.NetApp;
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_15_preview)
-@removed(Versions.v2026_07_01)
-@added(Versions.v2026_07_15_preview)
-@removed(Versions.v2026_08_01)
-@added(Versions.v2026_08_15_preview)
 @parentResource(SubscriptionLocationResource)
 model ElasticRegionInfoResource
   is Azure.ResourceManager.ProxyResource<ElasticRegionInfo> {
@@ -57,10 +53,6 @@ model ElasticRegionInfoResource
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_15_preview)
-@removed(Versions.v2026_07_01)
-@added(Versions.v2026_07_15_preview)
-@removed(Versions.v2026_08_01)
-@added(Versions.v2026_08_15_preview)
 model ElasticRegionInfo {
   /** Lists the logical availability zones in the specified region and indicates their current availability status for the subscription. This helps determine which zones can be used to deploy Elastic resources. */
   @identifiers(#["availabilityZone"])
@@ -102,10 +94,6 @@ union ZoneAvailabilityStatus {
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_15_preview)
-@removed(Versions.v2026_07_01)
-@added(Versions.v2026_07_15_preview)
-@removed(Versions.v2026_08_01)
-@added(Versions.v2026_08_15_preview)
 model ElasticRegionInfosList is Azure.Core.Page<ElasticRegionInfoResource>;
 
 @armResourceOperations
@@ -120,10 +108,6 @@ model ElasticRegionInfosList is Azure.Core.Page<ElasticRegionInfoResource>;
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_06_01)
 @added(Versions.v2026_06_15_preview)
-@removed(Versions.v2026_07_01)
-@added(Versions.v2026_07_15_preview)
-@removed(Versions.v2026_08_01)
-@added(Versions.v2026_08_15_preview)
 interface ElasticRegionInfoResources {
   /**
    * Provides storage to network proximity and logical zone mapping information.

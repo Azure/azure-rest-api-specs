@@ -217,7 +217,6 @@ interface HostPools {
   /**
    * Operation to list the RegistrationTokens associated with the HostPool.
    */
-  @list
   listRegistrationTokens is ArmResourceActionSync<
     HostPool,
     void,

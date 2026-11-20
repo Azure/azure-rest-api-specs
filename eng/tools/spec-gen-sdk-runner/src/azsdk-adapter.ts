@@ -101,28 +101,26 @@ export function getBreakingChangeSignal(
 /**
  * Parses JSON output from an azsdk-cli command.
  * The CLI emits log lines before the JSON payload. The JSON object is always
- * the last block in the output, so candidate opening braces are tried from
- * the end until the complete top-level object parses successfully.
+ * the last block in the output, so we search backwards for the opening brace.
  */
 export function parseAzsdkResponse<T>(output: string): T {
+  // The azsdk CLI emits log lines before the JSON payload.
+  // Find the last line that starts with '{' — this is the beginning of the JSON block.
   const lines = output.split("\n");
-  let parseError: unknown;
-  let foundCandidate = false;
+  let jsonStartLine = -1;
   for (let i = lines.length - 1; i >= 0; i--) {
     if (lines[i].trimStart().startsWith("{")) {
-      foundCandidate = true;
-      try {
-        return JSON.parse(lines.slice(i).join("\n")) as T;
-      } catch (error) {
-        parseError = error;
-      }
+      jsonStartLine = i;
+      break;
     }
   }
 
-  if (!foundCandidate) {
+  if (jsonStartLine === -1) {
     throw new SyntaxError(`No JSON object found in azsdk output: ${output.slice(0, 200)}`);
   }
-  throw parseError;
+
+  const jsonText = lines.slice(jsonStartLine).join("\n");
+  return JSON.parse(jsonText) as T;
 }
 
 // Deferred: extractArtifactPath will be re-enabled when stagedArtifactsFolder is published as pipeline artifact

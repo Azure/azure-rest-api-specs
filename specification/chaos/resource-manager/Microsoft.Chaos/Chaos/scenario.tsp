@@ -3,7 +3,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "@typespec/http";
 import "./scenario.models.tsp";
-import "./put-preconditions.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
@@ -21,10 +20,7 @@ interface Scenarios {
   /**
    * Create or update a scenario.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
-    Scenario,
-    Parameters = PutPreconditionHeaders
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Scenario>;
 
   /**
    * Delete a scenario.

@@ -8,7 +8,6 @@ import "./scenarioRun.models.tsp";
 import "./scenarioRun.tsp";
 import "./common.models.tsp";
 import "./lro-helpers.tsp";
-import "./put-preconditions.tsp";
 
 using Azure.ResourceManager;
 using Azure.Core;
@@ -31,10 +30,7 @@ interface ScenarioConfigurations {
   /**
    * Create or update a scenario definition.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    ScenarioConfiguration,
-    Parameters = PutPreconditionHeaders
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ScenarioConfiguration>;
 
   /**
    * Delete a scenario definition.

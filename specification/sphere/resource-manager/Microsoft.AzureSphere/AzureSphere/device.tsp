@@ -6,7 +6,7 @@ using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AzureSphere;
 /**
- * A device resource belonging to a device group resource.
+ * An device resource belonging to a device group resource.
  */
 @parentResource(DeviceGroup)
 model Device is ProxyResource<DeviceProperties> {

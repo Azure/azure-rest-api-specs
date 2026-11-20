@@ -8,7 +8,7 @@ import "./vmAttributes.tsp";
 import "./launchBulkInstancesOperation.tsp";
 import "./bulkCreateCustom.tsp";
 import "./bulkCreate.tsp";
-import "./recurringBulkActions.tsp";
+import "./recurringScheduledActions.tsp";
 import "./client.tsp";
 
 using Azure.ResourceManager;
