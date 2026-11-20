@@ -17,6 +17,7 @@ import "./common/versions.tsp";
 import "./common/auth.tsp";
 import "./operations/items.tsp";
 import "./operations/jobs.tsp";
+import "./operations/job-storage.tsp";
 import "./operations/sessions.tsp";
 import "./operations/providers.tsp";
 import "./operations/storage.tsp";
