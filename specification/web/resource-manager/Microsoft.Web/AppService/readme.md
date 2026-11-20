@@ -162,7 +162,7 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/start"].post
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/stop"].post
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/previews/{previewName}/deploy"].post
-    reason: These long-running POST actions have no final result body and use the standard ArmResourceActionNoResponseContentAsync template, which emits 202 and default. Adding 204 would violate the TypeSpec arm-post-operation-response-codes rule, which forbids responses other than 202, 200, and default on long-running POSTs; the two rules conflict for bodyless results. Completion is reported through Azure-AsyncOperation and the Location result.
+    reason: False positive from the validator on the recommended ArmResourceActionNoResponseContentAsync pattern, which emits 202 and default for a long-running POST with no final result body (see https://github.com/Azure/azure-openapi-validator/issues/809). Adding 204 would violate the TypeSpec arm-post-operation-response-codes rule, which permits only 202, 200 with a schema, and default on long-running POSTs. Completion is reported through Azure-AsyncOperation and the Location result.
 ```
 
 ### Tag: package-2026-08
