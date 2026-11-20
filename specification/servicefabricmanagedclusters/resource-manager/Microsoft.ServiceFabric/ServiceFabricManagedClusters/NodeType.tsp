@@ -880,7 +880,10 @@ model VaultSecretGroup {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "SubResource is a legacy payload reference model; customAzureResource is required to preserve generated x-ms-azure-resource metadata without using OpenAPI extensions."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "SubResource is a legacy payload reference model with only an optional id, not an addressable Azure resource."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "SubResource is a brownfield payload reference model; customAzureResource preserves the generated Swagger metadata without using OpenAPI extensions."
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Register the existing non-standard resource without changing its published payload."
 @Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+@Azure.ResourceManager.Private.genericResourceInternal
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model SubResource {
   /**
    * Azure resource identifier.

@@ -16,10 +16,12 @@ namespace Microsoft.AppConfiguration;
 /**
  * The snapshot resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Preserve the published ProxyResource base schema while declaring Snapshot properties with versioned requiredness."
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Register the existing non-standard resource without changing its published payload."
 @parentResource(ConfigurationStore)
-model Snapshot is Azure.ResourceManager.Legacy.CustomAzureProxyResource<false> {
+@Azure.ResourceManager.Private.genericResourceInternal
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
+model Snapshot extends Azure.ResourceManager.Foundations.ProxyResource {
   ...ResourceNameParameter<
     Resource = Snapshot,
     KeyName = "snapshotName",
