@@ -4534,7 +4534,7 @@
         "tags": [
           "InterconnectBlocks"
         ],
-        "description": "Creates or updates an Interconnect Block. When updating an Interconnect Block, only tags and sku.capacity may be modified.",
+        "description": "Creates or updates an Interconnect Block. When updating an Interconnect Block, only tags, sku.capacity and properties.sharingProfile may be modified. **Note:** Minimum api-version for properties.sharingProfile: 2026-09-01.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -4594,6 +4594,9 @@
           }
         },
         "x-ms-examples": {
+          "Create or update an Interconnect Block shared with other subscriptions.": {
+            "$ref": "./examples/interconnectBlockExamples/InterconnectBlocks_CreateOrUpdate_WithSharingProfile.json"
+          },
           "Create or update an Interconnect Block with a specific zone.": {
             "$ref": "./examples/interconnectBlockExamples/InterconnectBlocks_CreateOrUpdate.json"
           },
@@ -4612,7 +4615,7 @@
         "tags": [
           "InterconnectBlocks"
         ],
-        "description": "Updates an Interconnect Block. When updating an Interconnect Block, only tags and sku.capacity may be modified.",
+        "description": "Updates an Interconnect Block. When updating an Interconnect Block, only tags, sku.capacity and properties.sharingProfile may be modified. **Note:** Minimum api-version for properties.sharingProfile: 2026-09-01.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -4671,6 +4674,9 @@
         "x-ms-examples": {
           "Update an Interconnect Block.": {
             "$ref": "./examples/interconnectBlockExamples/InterconnectBlocks_Update.json"
+          },
+          "Update the subscriptions that an Interconnect Block is shared with.": {
+            "$ref": "./examples/interconnectBlockExamples/InterconnectBlocks_Update_SharingProfile.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -17598,6 +17604,10 @@
           "format": "date-time",
           "description": "Specifies the time at which the Interconnect Block resource was created.",
           "readOnly": true
+        },
+        "sharingProfile": {
+          "$ref": "#/definitions/ResourceSharingProfile",
+          "description": "Specifies the settings to enable sharing across subscriptions for the Interconnect Block resource. The Interconnect Block can be shared only with subscriptions belonging to the same Microsoft Entra ID tenant. Sharing across tenants is not supported. Removing a subscription from the sharing profile prevents new virtual machines in that subscription from being associated with the Interconnect Block; virtual machines that are already associated remain associated. **Note:** Minimum api-version: 2026-09-01."
         }
       },
       "required": [
@@ -17606,11 +17616,15 @@
     },
     "InterconnectBlockUpdate": {
       "type": "object",
-      "description": "Specifies information about the Interconnect Block. Only tags and sku.capacity can be updated.",
+      "description": "Specifies information about the Interconnect Block. Only tags, sku.capacity and properties.sharingProfile can be updated. **Note:** Minimum api-version for properties.sharingProfile: 2026-09-01.",
       "properties": {
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "SKU of the resource for which capacity needs to be pre-allocated. Only `sku.capacity` is mutable; `sku.name` is immutable."
+        },
+        "properties": {
+          "$ref": "#/definitions/InterconnectBlockUpdateProperties",
+          "description": "The updatable properties of the Interconnect Block."
         }
       },
       "allOf": [
@@ -17618,6 +17632,16 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ]
+    },
+    "InterconnectBlockUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Interconnect Block.",
+      "properties": {
+        "sharingProfile": {
+          "$ref": "#/definitions/ResourceSharingProfile",
+          "description": "Specifies the settings to enable sharing across subscriptions for the Interconnect Block resource. The Interconnect Block can be shared only with subscriptions belonging to the same Microsoft Entra ID tenant. Sharing across tenants is not supported. Removing a subscription from the sharing profile prevents new virtual machines in that subscription from being associated with the Interconnect Block; virtual machines that are already associated remain associated. **Note:** Minimum api-version: 2026-09-01."
+        }
+      }
     },
     "InterconnectGroupProfile": {
       "type": "object",
@@ -19808,7 +19832,7 @@
       "properties": {
         "subscriptionIds": {
           "type": "array",
-          "description": "Specifies an array of subscription resource IDs that capacity reservation group is shared with. Block Capacity Reservations does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.",
+          "description": "Specifies an array of subscription resource IDs that the resource is shared with, in the form '/subscriptions/{subscriptionId}'. Refer to the sharingProfile property of the containing resource for the supported scenarios and the minimum api-version.",
           "items": {
             "$ref": "../../common-types/v1/common.json#/definitions/SubResource"
           }
