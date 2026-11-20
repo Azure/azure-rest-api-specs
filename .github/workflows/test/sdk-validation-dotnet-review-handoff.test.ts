@@ -427,11 +427,16 @@ describe("sdk-validation-dotnet-review-handoff", () => {
     const archive = await createStreamingZip(snapshotFiles);
     const outputDirectory = createTempOutputDir();
 
-    expect(() =>
-      extractAndValidateSdkReviewInputArchive(archive, artifact, outputDirectory),
-    ).not.toThrow();
-    expect(
-      fs.existsSync(
+    // Keep ZIP parsing real, but avoid thousands of disk writes on Windows.
+    // The smaller extraction tests above cover the real filesystem.
+    const mkdirSpy = vi.spyOn(fs, "mkdirSync").mockImplementation(() => undefined);
+    const writeSpy = vi.spyOn(fs, "writeFileSync").mockImplementation(() => undefined);
+    try {
+      expect(() =>
+        extractAndValidateSdkReviewInputArchive(archive, artifact, outputDirectory),
+      ).not.toThrow();
+      expect(writeSpy).toHaveBeenCalledTimes(fileCount);
+      expect(writeSpy).toHaveBeenLastCalledWith(
         path.join(
           outputDirectory,
           "Azure.Widget",
@@ -440,8 +445,12 @@ describe("sdk-validation-dotnet-review-handoff", () => {
           "Generated",
           "Model4499.cs",
         ),
-      ),
-    ).toBe(true);
+        new Uint8Array(),
+      );
+    } finally {
+      mkdirSpy.mockRestore();
+      writeSpy.mockRestore();
+    }
   });
 
   it("rejects highly compressible oversized entries before extraction", () => {

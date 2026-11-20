@@ -44,7 +44,8 @@ alias ManagedCertificateOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("managedCertificates")
     @key
     managedCertificateName: string;
-  }
+  },
+  ResourceName = "ManagedCertificate"
 >;
 
 @armResourceOperations
