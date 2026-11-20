@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "createServiceGroupRequest": {
+      "properties": {
+        "displayName": "SQL Namespace",
+        "classification": "Namespace",
+        "parent": {
+          "resourceId": "/providers/Microsoft.Management/serviceGroups/RootGroup"
+        }
+      }
+    },
+    "serviceGroupName": "SQL"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "SQL",
+        "type": "Microsoft.Management/serviceGroups",
+        "id": "/providers/Microsoft.Management/serviceGroups/SQL",
+        "properties": {
+          "displayName": "SQL Namespace",
+          "classification": "Namespace",
+          "parent": {
+            "resourceId": "/providers/Microsoft.Management/serviceGroups/RootGroup"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "SQL",
+        "type": "Microsoft.Management/serviceGroups",
+        "id": "/providers/Microsoft.Management/serviceGroups/SQL",
+        "properties": {
+          "displayName": "SQL Namespace",
+          "classification": "Namespace",
+          "parent": {
+            "resourceId": "/providers/Microsoft.Management/serviceGroups/RootGroup"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "CreateOrUpdateServiceGroup",
+  "title": "PutNamespaceServiceGroup"
+}
