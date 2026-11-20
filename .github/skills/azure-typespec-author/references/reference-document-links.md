@@ -1,6 +1,6 @@
 # Reference Document Links
 
-## Add ARM Resource Type
+## ARM Resource Types
 
 - [ARM resource types and modeling](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-type/): Define tracked, proxy, tenant, extension, and child resources with the standard ARM resource templates.
 - [Specific extension resource sample](https://azure.github.io/typespec-azure/docs/samples/resource-manager/resource-types/specific-extension/): Define an extension resource and its scoped operations with the `Extension.*` templates.
@@ -9,12 +9,16 @@
 - [Private links](https://azure.github.io/typespec-azure/docs/howtos/arm/private-links/): Add private link resources and their standard operations to an ARM resource provider.
 - [Network security perimeter](https://azure.github.io/typespec-azure/docs/howtos/arm/network-security-perimeter/): Add network security perimeter configuration resources and operations to an ARM service.
 
-## Add ARM Resource Operation
+## ARM Resource Operations
 
 - [ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/): Use standard ARM templates for read, create or replace, update, delete, existence check, list, custom action, and provider action operations.
 - [Azure.ResourceManager interface reference](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/reference/interfaces/): Look up exact signatures and parameters for ARM resource and extension operation templates.
-- [Azure.Core operation interfaces](https://azure.github.io/typespec-azure/docs/getstarted/azure-core/step05/): Add data-plane resource interfaces with standard Azure.Core create, read, update, delete, list, and polling operation templates.
-- [Azure.Core interface reference](https://azure.github.io/typespec-azure/docs/libraries/azure-core/reference/interfaces/): Use Azure.Core resource operation templates for data-plane create, read, update, delete, and list operations.
+
+## Data-Plane Operations
+
+- [Azure.Core reference](https://azure.github.io/typespec-azure/docs/libraries/azure-core/reference): Full reference for Azure.Core decorators, interfaces, operations, and models.
+- [Standard resource operations](https://azure.github.io/typespec-azure/docs/libraries/azure-core/reference/interfaces): Azure.Core operation templates (ResourceRead, ResourceList, ResourceCreateOrUpdate, ResourceDelete, etc.).
+- [Data-plane getting started](https://azure.github.io/typespec-azure/docs/getstarted/azure-core/step01): Getting started guide for creating data-plane TypeSpec services with Azure.Core.
 
 ## API Versioning
 

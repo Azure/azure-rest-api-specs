@@ -153,6 +153,11 @@ function main() {
 - `defaultLogger` — shared non-debug logger instance.
 - `debugLogger` — shared debug-enabled logger instance.
 
+### `glob` — filesystem discovery
+
+- `globFiles(pattern, options)` — native glob discovery restricted to files, with optional `cwd`
+  and exclusion patterns. Includes file symlinks without traversing directory symlinks.
+
 ### `math` — math helpers
 
 - `toPercent(value, decimals)` — format a `0..1` ratio as a percentage string.
@@ -165,9 +170,11 @@ function main() {
 - `escapeMarkdown(text)` — escape untrusted single-line text, including HTML, table pipes and mentions.
 - `inlineCode(text)` — render nonempty code text, preserving embedded backticks and edge spaces.
 - `link(label, url)` — create a link from trusted inline Markdown and a trusted destination.
+- `paragraph(...parts)` — join trusted inline Markdown with spaces into a single paragraph.
 - `table([header, ...rows])` — render equal-width GFM rows, escaping pipes and preserving line breaks.
 - `unorderedList(items)` — render Markdown list items, indenting continuation lines.
-- `details(summary, body)` — create a collapsible block with a plain-text summary and Markdown body.
+- `details(summary, body, open = false)` — create a collapsible block with a plain-text summary
+  and Markdown body; pass `true` to expand it by default.
 
 Like [TypeSpec's Markdown helpers](https://github.com/microsoft/typespec/blob/main/packages/tspd/src/ref-doc/utils/markdown.ts),
 callers describe the document structure rather than hand-joining every line. Strings are trusted
@@ -213,6 +220,8 @@ const report = renderMarkdownDoc(
 ### `sdk-types` — SDK language types & schemas
 
 - `SdkName` — frozen enum of SDK language identifiers (Go/Java/Js/Net/Python/Rust).
+- `getSdkLanguage(repo)` — returns the SDK language name (for example, `JavaScript` for
+  `azure-sdk-for-js` and `DotNet` for `azure-sdk-for-net`); throws for unsupported repositories.
 - `SdkNameSchema`, `APIViewRequestDataSchema`, `SpecGenSdkArtifactInfoSchema` — zod schemas (plus
   inferred TypeScript types) for SDK tooling payloads.
 - `sdkLabels` — per-language SDK label configuration.
@@ -284,6 +293,27 @@ so the assertion still catches whitespace changes in the actual output.
 - `add(date, ms)` / `subtract(date, ms)` — date arithmetic.
 - `formatDuration(ms)` — human-readable duration string.
 - `getDuration(from, to)` — milliseconds between two dates.
+
+### `typespec-projects` — TypeSpec project discovery
+
+- `findTypeSpecProjects(root)` — sorted, unique absolute project directories beneath `root`.
+  Discovers `tspconfig.*`, including invalid extensions so validation can report them, and excludes
+  `node_modules`.
+- `findTypeSpecProjectsInChangedServices(repoRoot, changedFiles, logger?)` — discovers every project
+  in each `specification/<service>/` touched by repository-relative POSIX changed paths. Includes
+  sibling and nested projects for any file type, including deleted paths. Missing services are
+  skipped with a debug message; other filesystem failures propagate.
+- `findTypeSpecProjectsForChangedFiles(repoRoot, changedFiles, logger?)` — a sorted map from absolute
+  project directories to associated repository-relative POSIX changed paths. Searches upward for
+  `tspconfig.yaml`, selecting the nearest config in the old layout, or all ancestor configs in
+  `resource-manager`/`data-plane`. Does not include unrelated sibling or descendant projects.
+  Missing directories stop the search with a warning; other filesystem failures propagate.
+
+These helpers do not fetch changed files, inspect imports or `.Shared` libraries, pair Swagger
+READMEs, or apply a core-file/all-project fallback. Callers own those policies. Pass both old and
+new paths when a rename must select both services or projects. Results identify directories, not
+config paths; consumers requiring valid configs must account for invalid extensions returned by
+service discovery.
 
 ### `typespec-metadata` — TypeSpec SDK metadata
 

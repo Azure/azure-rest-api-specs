@@ -69,6 +69,30 @@ describe("parseAzsdkResponse", () => {
     expect(result.result).toBe("succeeded");
     expect(result.nested.key).toBe("value");
   });
+
+  test("parses multiline objects nested in an array", () => {
+    const output = [
+      "log line",
+      "{",
+      '  "result": {',
+      '    "breakingChanges": [',
+      "      {",
+      '        "breakingChange": "Model changed",',
+      '        "originBreaks": ["Struct removed"]',
+      "      }",
+      "    ],",
+      '    "hasBreakingChange": true',
+      "  }",
+      "}",
+    ].join("\n");
+
+    const result = parseAzsdkResponse<{
+      result: { breakingChanges: { breakingChange: string }[]; hasBreakingChange: boolean };
+    }>(output);
+
+    expect(result.result.breakingChanges[0].breakingChange).toBe("Model changed");
+    expect(result.result.hasBreakingChange).toBe(true);
+  });
 });
 
 describe("buildExecutionReport", () => {
@@ -144,15 +168,18 @@ describe("buildExecutionReport", () => {
   });
 
   test("returns succeeded when all steps succeed", () => {
+    const packageRootPath = "/tmp/azure-sdk-for-net/sdk/test/test-package";
     const report = buildExecutionReport(
       succeededGenerate,
       succeededPack,
       enabledEmitter,
       succeededBuild,
+      packageRootPath,
     );
     expect(report.executionResult).toBe("succeeded");
     expect(report.packages).toHaveLength(1);
     expect(report.packages[0].packageName).toBe("test-package");
+    expect(report.packages[0].packageRootPath).toBe(packageRootPath);
     expect(report.generateFromTypeSpec).toBe(true);
   });
 

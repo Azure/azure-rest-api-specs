@@ -947,7 +947,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/RPExtendedInfoResourceList"
         },
         "x-ms-long-running-operation": true
       }
@@ -1007,7 +1008,7 @@
               },
               "Location": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to this endpoint, which a caller polling for the result of the prior getRPExtendedInfo\noperation can keep using while that operation is still running."
               },
               "Retry-After": {
                 "type": "integer",
@@ -7317,7 +7318,7 @@
       "type": "object",
       "description": "Azure VM workload-specific protected item representing SQL Instance.",
       "properties": {
-        "childDBNames": {
+        "childDatabaseNameList": {
           "type": "array",
           "description": "Name of Child Dbs protected under this parent.",
           "items": {
@@ -8341,7 +8342,8 @@
         "AzureFileShare",
         "SAPHanaDatabase",
         "SAPAseDatabase",
-        "SAPHanaDBInstance"
+        "SAPHanaDBInstance",
+        "SQLInstance"
       ],
       "x-ms-enum": {
         "name": "BackupItemType",
@@ -8410,6 +8412,11 @@
           {
             "name": "SAPHanaDBInstance",
             "value": "SAPHanaDBInstance"
+          },
+          {
+            "name": "SQLInstance",
+            "value": "SQLInstance",
+            "description": "A SQL Server instance."
           }
         ]
       }
@@ -9621,7 +9628,8 @@
         "AzureFileShare",
         "SAPHanaDatabase",
         "SAPAseDatabase",
-        "SAPHanaDBInstance"
+        "SAPHanaDBInstance",
+        "SQLInstance"
       ],
       "x-ms-enum": {
         "name": "DataSourceType",
@@ -9690,6 +9698,11 @@
           {
             "name": "SAPHanaDBInstance",
             "value": "SAPHanaDBInstance"
+          },
+          {
+            "name": "SQLInstance",
+            "value": "SQLInstance",
+            "description": "A SQL Server instance."
           }
         ]
       }
@@ -16575,7 +16588,8 @@
         "AzureFileShare",
         "SAPHanaDatabase",
         "SAPAseDatabase",
-        "SAPHanaDBInstance"
+        "SAPHanaDBInstance",
+        "SQLInstance"
       ],
       "x-ms-enum": {
         "name": "WorkloadType",
@@ -16644,6 +16658,11 @@
           {
             "name": "SAPHanaDBInstance",
             "value": "SAPHanaDBInstance"
+          },
+          {
+            "name": "SQLInstance",
+            "value": "SQLInstance",
+            "description": "A SQL Server instance."
           }
         ]
       }

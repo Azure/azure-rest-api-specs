@@ -30,13 +30,17 @@
       "required": ["scope", "status"],
       "properties": {
         "scope": { "const": "rest-and-downstream-only" },
-        "status": { "enum": ["passed", "failed", "not-assessed"] }
+        "status": { "enum": ["passed", "failed", "not-assessed"] },
+        "verdict": { "enum": ["passed", "failed", "unknown"] },
+        "coverage": { "enum": ["complete", "partial", "blocked"] }
       }
     },
     "dimensions": {
       "type": "object",
       "required": ["semantic", "rest", "downstream", "compliance", "documentQuality"],
       "properties": {
+        "rest": { "$ref": "#/$defs/compatibilityDimension" },
+        "downstream": { "$ref": "#/$defs/compatibilityDimension" },
         "compliance": {
           "type": "object",
           "additionalProperties": false,
@@ -89,6 +93,18 @@
   },
   "$defs": {
     "nonemptyString": { "type": "string", "pattern": "\\S" },
+    "compatibilityDimension": {
+      "type": "object",
+      "required": ["status", "findings"],
+      "properties": {
+        "status": { "enum": ["passed", "failed", "not-assessed"] },
+        "verdict": { "enum": ["passed", "failed", "unknown"] },
+        "coverage": { "enum": ["complete", "partial", "blocked"] },
+        "findings": { "type": "array" },
+        "blockers": { "type": "array" },
+        "rejectedCandidateCount": { "type": "integer", "minimum": 0 }
+      }
+    },
     "ids": {
       "type": "array",
       "uniqueItems": true,

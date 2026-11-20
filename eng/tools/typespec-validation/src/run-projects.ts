@@ -1,5 +1,6 @@
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
+import { findTypeSpecProjects } from "@azure-tools/specs-shared/typespec-projects";
 import { getSuppressions } from "@azure-tools/suppressions";
 import { spawn } from "node:child_process";
 import { appendFile, stat } from "node:fs/promises";
@@ -8,13 +9,15 @@ import { fileURLToPath } from "node:url";
 import pc from "picocolors";
 import { simpleGit } from "simple-git";
 import { formatRuleSummary, supportsColor, type RuleCounts } from "./diagnostics.ts";
-import { findChangedProjects, findProjects, type ChangedProjectsOptions } from "./find-projects.ts";
+import { findChangedProjects, type ChangedProjectsOptions } from "./find-projects.ts";
 
 interface RunOptions {
   gitClean?: boolean;
   dryRun?: boolean;
   verbose?: boolean;
   summaryFile?: string;
+  fix?: boolean;
+  concurrency?: number;
 }
 
 interface RunContext {
@@ -54,7 +57,7 @@ export async function runAll(
     throw new Error(`Please run TypeSpec Validation on a directory path: ${root}`);
   }
 
-  let projects = await findProjects(root);
+  let projects = await findTypeSpecProjects(root);
   if (projects.length === 0) {
     console.error(`No TypeSpec projects found in ${root}`);
     return false;
@@ -98,7 +101,17 @@ async function runProjects(
   context: RunContext,
   options: RunOptions,
 ): Promise<boolean> {
-  const git = simpleGit(root);
+  const concurrency = options.concurrency ?? 1;
+  if (!Number.isSafeInteger(concurrency) || concurrency < 1) {
+    throw new Error("--concurrency must be a positive safe integer");
+  }
+  if (options.fix && concurrency > 1) {
+    throw new Error("--fix requires --concurrency=1 because formatter scopes may overlap");
+  }
+  const git = simpleGit({ baseDir: root, allowEnvironment: ["GIT_OPTIONAL_LOCKS"] }).env(
+    "GIT_OPTIONAL_LOCKS",
+    "0",
+  );
   const gitClean = options.gitClean && !options.dryRun;
   const displayRoot = resolve(
     gitClean || (await git.checkIsRepo()) ? await getRootFolder(root) : process.cwd(),
@@ -115,11 +128,42 @@ async function runProjects(
   console.log(
     `Checking ${projects.length} TypeSpec folders:\n${projects.map(displayPath).join("\n")}`,
   );
-  const failed: string[] = [];
+  if (!options.dryRun && concurrency > 1) {
+    console.log(`Running up to ${Math.min(concurrency, projects.length)} projects concurrently`);
+  }
+  const failedProjects = new Set<string>();
   const githubActions = process.env.GITHUB_ACTIONS === "true";
   const counts: RuleCounts = { PASS: 0, FAIL: 0, WARN: 0, SKIP: 0, SUPPRESSED: 0 };
 
-  for (const project of projects) {
+  const controller = new AbortController();
+  let nextProject = 0;
+  let stopped = false;
+  let fatalError: unknown;
+  const stop = (error: unknown) => {
+    if (stopped) return;
+    stopped = true;
+    fatalError = error;
+    controller.abort();
+  };
+  const interrupt = (signal: NodeJS.Signals) =>
+    stop(new Error(`TypeSpec Validation interrupted by ${signal}`));
+  const onSigint = () => interrupt("SIGINT");
+  const onSigterm = () => interrupt("SIGTERM");
+  process.on("SIGINT", onSigint);
+  process.on("SIGTERM", onSigterm);
+
+  async function worker() {
+    while (!stopped && nextProject < projects.length) {
+      const project = projects[nextProject++];
+      try {
+        await runProject(project);
+      } catch (error) {
+        stop(error);
+      }
+    }
+  }
+
+  async function runProject(project: string) {
     const name = displayPath(project);
     if (context.checkingAllSpecs) {
       const suppressions = await getSuppressions("TypeSpecValidationAll", project, {
@@ -131,22 +175,26 @@ async function runProjects(
         printProjectGroup(githubActions, "skip", name, [
           { stream: "stdout", text: `Suppressed: ${suppression.reason}` },
         ]);
-        continue;
+        return;
       }
     }
     if (options.dryRun) {
       console.log(`Dry run: would validate ${name} with context ${JSON.stringify(context)}`);
-      continue;
+      return;
     }
+    if (stopped) return;
 
     try {
-      const { success, segments } = await validateProject(project, context, options.verbose);
+      const { success, segments } = await validateProject(project, context, {
+        ...options,
+        signal: controller.signal,
+      });
       if (success) {
         counts.PASS++;
         printProjectGroup(githubActions, "pass", name, segments);
       } else {
         counts.FAIL++;
-        failed.push(name);
+        failedProjects.add(name);
         const message =
           `TypeSpec Validation failed for project ${name} run the following command locally to validate.\n` +
           getFailureInstructions([name]);
@@ -176,13 +224,21 @@ async function runProjects(
         ]);
       }
       throw error;
-    } finally {
-      if (gitClean) {
-        await git.raw(["restore", "--worktree", "--", "."]);
-        await git.clean("f", ["-d"]);
-      }
     }
   }
+
+  try {
+    await Promise.all(
+      Array.from({ length: options.dryRun ? 1 : Math.min(concurrency, projects.length) }, () =>
+        worker(),
+      ),
+    );
+  } finally {
+    process.removeListener("SIGINT", onSigint);
+    process.removeListener("SIGTERM", onSigterm);
+  }
+  if (stopped) throw fatalError;
+  const failed = projects.map(displayPath).filter((name) => failedProjects.has(name));
 
   if (!options.dryRun) {
     console.log("");
@@ -298,10 +354,16 @@ function selectShard(projects: string[], shard: string): string[] {
 function validateProject(
   folder: string,
   context: RunContext,
-  verbose = false,
+  {
+    verbose = false,
+    fix = false,
+    signal,
+  }: Pick<RunOptions, "verbose" | "fix"> & {
+    signal?: AbortSignal;
+  } = {},
 ): Promise<{ success: boolean; segments: OutputSegment[] }> {
   return new Promise((resolvePromise, reject) => {
-    const env = { ...process.env };
+    const env: NodeJS.ProcessEnv = { ...process.env, GIT_OPTIONAL_LOCKS: "0" };
     if (supportsColor()) {
       delete env.NO_COLOR;
       env.FORCE_COLOR = "1";
@@ -332,21 +394,37 @@ function validateProject(
     const child = spawn(
       process.execPath,
       [
-        fileURLToPath(new URL("../cmd/tsv.js", import.meta.url)),
+        fileURLToPath(new URL("./project-worker.ts", import.meta.url)),
         folder,
         JSON.stringify(context),
         ...(verbose ? ["--verbose"] : []),
+        ...(fix ? ["--fix"] : []),
       ],
       { stdio: ["ignore", "pipe", "pipe"], env },
     );
     child.stdout?.on("data", (chunk: Buffer) => capture("stdout", chunk));
     child.stderr?.on("data", (chunk: Buffer) => capture("stderr", chunk));
-    child.once("error", reject);
-    child.once("close", (code, signal) => {
-      if (signal) {
+    let launchError: Error | undefined;
+    let forceKill: NodeJS.Timeout | undefined;
+    const abort = () => {
+      forceKill = setTimeout(() => child.kill("SIGKILL"), 5_000);
+      forceKill.unref();
+      child.kill("SIGTERM");
+    };
+    signal?.addEventListener("abort", abort, { once: true });
+    if (signal?.aborted) abort();
+    child.once("error", (error) => {
+      launchError = error;
+    });
+    child.once("close", (code, terminationSignal) => {
+      clearTimeout(forceKill);
+      // Wait for close, not just error, so peers have exited before the batch returns.
+      if (launchError) {
+        reject(launchError);
+      } else if (terminationSignal) {
         reject(
           new ProjectTerminatedError(
-            `TypeSpec Validation for ${folder} terminated by ${signal}`,
+            `TypeSpec Validation for ${folder} terminated by ${terminationSignal}`,
             segments,
           ),
         );
@@ -354,5 +432,6 @@ function validateProject(
         resolvePromise({ success: code === 0, segments });
       }
     });
+    child.once("close", () => signal?.removeEventListener("abort", abort));
   });
 }

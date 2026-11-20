@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -737,6 +739,12 @@ model AutoscaleSettingResourcePatch {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
+
+  /**
+   * The managed service identities assigned to this resource. Only user-assigned identities are supported; 'SystemAssigned' and 'SystemAssigned,UserAssigned' are rejected. At most one user-assigned managed identity may be assigned to an autoscale setting. To remove the assigned identity, send 'type' as 'None'.
+   */
+  @added(Versions.v2025_09_01_preview)
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   /**
    * The autoscale setting properties of the update operation.

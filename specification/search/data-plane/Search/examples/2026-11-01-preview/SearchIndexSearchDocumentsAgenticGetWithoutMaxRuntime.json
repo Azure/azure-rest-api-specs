@@ -1,0 +1,68 @@
+{
+  "operationId": "Documents_SearchGet",
+  "title": "SearchIndexSearchDocumentsAgenticGetWithoutMaxRuntime",
+  "parameters": {
+    "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
+    "indexName": "hotels",
+    "api-version": "2026-11-01-preview",
+    "search": "Which hotels have ocean views?",
+    "queryType": "agentic",
+    "debug": "agentic",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "Accept": "application/json;odata.metadata=none"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@search.debug": {
+          "agentic": {
+            "terminationReason": "modelStopped",
+            "subQueries": [
+              {
+                "search": "coastal hotels with ocean views",
+                "iteration": 1
+              }
+            ],
+            "usage": {
+              "agenticPlanningTokens": 123,
+              "reasoningTokens": 456
+            }
+          }
+        },
+        "value": [
+          {
+            "@search.score": 1.0,
+            "id": "ocean-view-hotel",
+            "name": "Ocean View Hotel"
+          }
+        ]
+      }
+    },
+    "206": {
+      "body": {
+        "@search.debug": {
+          "agentic": {
+            "terminationReason": "modelStopped",
+            "subQueries": [
+              {
+                "search": "coastal hotels with ocean views",
+                "iteration": 1
+              }
+            ],
+            "usage": {
+              "agenticPlanningTokens": 123,
+              "reasoningTokens": 456
+            }
+          }
+        },
+        "value": [
+          {
+            "@search.score": 1.0,
+            "id": "ocean-view-hotel",
+            "name": "Ocean View Hotel"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -6,7 +6,6 @@
 
 import "../../common/models.tsp";
 import "@typespec/http";
-import "@azure-tools/openai-typespec/models/embeddings";
 using TypeSpec.Http;
 using OpenAI;
 namespace Azure.AI.Projects;

@@ -138,6 +138,7 @@ interface Remediations {
   /**
    * Deletes an existing remediation at management group scope.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   deleteAtManagementGroup is RemediationManagementGroupOps.DeleteSync<
     Remediation,
     Response = ArmResponse<Remediation> | ArmDeletedNoContentResponse,
@@ -188,6 +189,7 @@ interface Remediations {
   /**
    * Deletes an existing remediation at subscription scope.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   deleteAtSubscription is RemediationSubscriptionOps.DeleteSync<
     Remediation,
     Response = ArmResponse<Remediation> | ArmDeletedNoContentResponse,
@@ -233,6 +235,7 @@ interface Remediations {
        * Maximum number of records to return.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listDeploymentsAtSubscription POST contract uses $top in the query; preserve wire compatibility."
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -270,6 +273,7 @@ interface Remediations {
   /**
    * Deletes an existing remediation at resource group scope.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   deleteAtResourceGroup is RemediationResourceGroupOps.DeleteSync<
     Remediation,
     Response = ArmResponse<Remediation> | ArmDeletedNoContentResponse,
@@ -315,6 +319,7 @@ interface Remediations {
        * Maximum number of records to return.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listDeploymentsAtResourceGroup POST contract uses $top in the query; preserve wire compatibility."
       @query("$top")
       @minValue(0)
       Top?: int32;
@@ -352,6 +357,7 @@ interface Remediations {
   /**
    * Deletes an existing remediation at individual resource scope.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   deleteAtResource is RemediationAtResourceOps.DeleteSync<
     Remediation,
     Response = ArmResponse<Remediation> | ArmDeletedNoContentResponse
@@ -395,6 +401,7 @@ interface Remediations {
        * Maximum number of records to return.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing listDeploymentsAtResource POST contract uses $top in the query; preserve wire compatibility."
       @query("$top")
       @minValue(0)
       Top?: int32;

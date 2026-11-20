@@ -135,6 +135,7 @@ interface Runbooks {
       @header("Content-Type")
       contentType: "text/plain";
 
+      #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing replaceContent.runbookContent retains its request-body shape; preserve wire compatibility."
       @doc("The runbook draft content.")
       @bodyRoot
       runbookContent: string;
