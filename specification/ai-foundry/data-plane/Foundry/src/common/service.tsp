@@ -13,7 +13,7 @@ using TypeSpec.Versioning;
 )
 @service(#{ title: "Microsoft Foundry" })
 @server(
-  "{endpoint}",
+  "{project_endpoint}",
   "Microsoft Foundry",
   {
     @doc("""
@@ -23,7 +23,8 @@ using TypeSpec.Versioning;
       in your Hub, use the form
       "https://{ai-services-account-name}.services.ai.azure.com/api/projects/_project"
       """)
-    endpoint: url,
+    @Azure.ClientGenerator.Core.clientName("endpoint")
+    project_endpoint: url,
   }
 )
 @versioned(Versions)
