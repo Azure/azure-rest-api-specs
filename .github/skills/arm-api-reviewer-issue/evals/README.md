@@ -61,7 +61,7 @@ This test is separate from the model sessions and their read-only tool allowlist
 
 ## Coverage and limitations
 
-1. The three suites contain 24 cases. The routing suite covers novice concerns,
+1. The three suites contain 26 cases. The routing suite covers novice concerns,
    API-guidance and workflow feedback, anti-triggers, private evidence, and
    untrusted publication instructions. The data-plane boundary checks
    redirection without an ARM issue draft; reading the skill solely to confirm
@@ -72,7 +72,9 @@ This test is separate from the model sessions and their read-only tool allowlist
    verification, and mismatched read-back. It also covers metadata disclosure
    without push access, a Copilot assignment proposal for an
    implementation-ready draft, and labels or comments added by Issue Triage
-   after creation. Every multi-turn task checks that the skill is invoked.
+   after creation. Read-back cases also distinguish a missing approved Copilot
+   assignment from labels expected to be omitted without push access. Every
+   multi-turn task checks that the skill is invoked.
    Tasks whose expected behavior is defined only in the workflow reference also
    check that it is read. Prompts supply fixtures, not the expected behavior.
 3. Success claims are rejected with patterns such as "I created the issue" or
