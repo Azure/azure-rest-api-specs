@@ -16014,7 +16014,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/globalSecondaryIndexes/{containerName}": {
       "put": {
         "operationId": "SqlResources_CreateSqlGlobalSecondaryIndex",
-        "description": "Creates an Azure Cosmos DB SQL global secondary index container. Container updates are not supported.",
+        "description": "Creates an Azure Cosmos DB SQL global secondary index container. Container updates are not supported. Requests without a materialized view definition return 400 Bad Request.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -16085,6 +16085,12 @@
               }
             }
           },
+          "400": {
+            "description": "The server could not understand the request due to invalid syntax.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -16095,6 +16101,9 @@
         "x-ms-examples": {
           "CosmosDBSqlGlobalSecondaryIndexCreate": {
             "$ref": "./examples/CosmosDBSqlGlobalSecondaryIndexCreate.json"
+          },
+          "CosmosDBSqlGlobalSecondaryIndexCreateBadRequest": {
+            "$ref": "./examples/CosmosDBSqlGlobalSecondaryIndexCreateBadRequest.json"
           }
         },
         "x-ms-long-running-operation-options": {

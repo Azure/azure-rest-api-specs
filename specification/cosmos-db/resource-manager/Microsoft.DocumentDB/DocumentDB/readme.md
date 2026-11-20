@@ -873,6 +873,15 @@ input-file:
 
 ``` yaml
 directive:
+  - suppress: RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE
+    from:
+      - preview/2026-09-01-preview/openapi.json
+      - preview\2026-09-01-preview\openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/globalSecondaryIndexes/{containerName}"].put.responses["200"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/globalSecondaryIndexes/{containerName}"].put.responses["202"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/globalSecondaryIndexes/{containerName}"].put.responses["400"]
+    reason: The GSI creation and BadRequest examples show different outcomes for different requests. A regular container request without materializedViewDefinition returns only 400, not 200 or 202. Together the examples cover all three statuses. Only per-example status completeness is suppressed; request and response schema validation remains enabled.
   - suppress: TrackedResourceGetOperation
     from: cosmos-db.json
     where: $.definitions.DatabaseAccountCreateUpdateParameters

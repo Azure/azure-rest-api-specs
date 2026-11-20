@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "resourceGroupName": "rg1",
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "databaseName": "databaseName",
+    "containerName": "regularContainer",
+    "createSqlGlobalSecondaryIndexParameters": {
+      "location": "West US",
+      "tags": {},
+      "properties": {
+        "resource": {
+          "id": "regularContainer",
+          "partitionKey": {
+            "paths": [
+              "/AccountNumber"
+            ],
+            "kind": "Hash"
+          }
+        },
+        "options": {}
+      }
+    }
+  },
+  "responses": {
+    "400": {
+      "body": {
+        "error": {
+          "code": "BadRequest",
+          "message": "Only global secondary index (materialized view) containers can be created through the globalSecondaryIndexes endpoint. Specify materializedViewDefinition to create a global secondary index container."
+        }
+      }
+    }
+  },
+  "operationId": "SqlResources_CreateSqlGlobalSecondaryIndex",
+  "title": "CosmosDBSqlGlobalSecondaryIndexCreateBadRequest"
+}
