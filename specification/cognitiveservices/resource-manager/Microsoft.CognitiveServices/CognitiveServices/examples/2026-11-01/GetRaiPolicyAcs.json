@@ -1,0 +1,34 @@
+{
+  "operationId": "RaiPolicies_Get",
+  "parameters": {
+    "accountName": "safety-account",
+    "api-version": "2026-11-01",
+    "raiPolicyName": "agent-guard",
+    "resourceGroupName": "resource-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Get an ACS policy",
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"00000000-0000-0000-0000-000000000003\""
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group/providers/Microsoft.CognitiveServices/accounts/safety-account/raiPolicies/agent-guard",
+        "name": "agent-guard",
+        "type": "Microsoft.CognitiveServices/accounts/raiPolicies",
+        "etag": "\"00000000-0000-0000-0000-000000000003\"",
+        "properties": {
+          "type": "UserManaged",
+          "customBlocklists": [
+            {
+              "blocklistName": "blocked-terms",
+              "source": "Prompt",
+              "blocking": true
+            }
+          ]
+        }
+      }
+    }
+  }
+}

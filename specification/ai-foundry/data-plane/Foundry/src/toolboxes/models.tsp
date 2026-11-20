@@ -98,6 +98,7 @@ union ToolboxToolType {
   azure_ai_search: ToolboxAzureAISearchToolType,
   openapi: ToolboxOpenApiToolType,
   a2a_preview: ToolboxA2APreviewToolType,
+  #deprecated "This legacy Browser Automation tool is deprecated and is no longer available. Please use the latest Browser Automation tool instead. See https://aka.ms/bat/docs."
   browser_automation_preview: ToolboxBrowserAutomationPreviewToolType,
   reminder_preview: ToolboxReminderPreviewToolType,
   work_iq_preview: ToolboxWorkIQPreviewToolType,
@@ -231,11 +232,50 @@ model ShellToolboxTool extends ToolboxTool {
 }
 
 /**
+ * The source used to resolve a request header value for an MCP server.
+ */
+union MCPToolboxRequestHeaderBindingSource {
+  string,
+
+  /**
+   * Resolve the value from headers supplied by the client.
+   */
+  client_headers: "client_headers",
+}
+
+/**
+ * A binding that supplies a request header to an MCP server.
+ */
+model MCPToolboxRequestHeaderBinding {
+  /**
+   * The name of the HTTP header to forward to the MCP server. Must be a non-empty HTTP field-name token.
+   */
+  @minLength(1)
+  @pattern("^[!#$%&'*+.^_`|~0-9A-Za-z-]+(?![\\s\\S])")
+  header_name: string;
+
+  /**
+   * The source of the header value, for example `client_headers`.
+   */
+  source: MCPToolboxRequestHeaderBindingSource;
+
+  /**
+   * Whether the client must supply this header.
+   */
+  required: boolean;
+}
+
+/**
  * An MCP tool stored in a toolbox.
  */
 model MCPToolboxTool extends ToolboxTool {
   type: ToolboxMCPToolType;
   ...ToolFields<OpenAI.MCPTool>;
+
+  /**
+   * Bindings that supply request headers to this MCP server.
+   */
+  request_header_bindings?: MCPToolboxRequestHeaderBinding[];
 }
 
 /**
@@ -273,10 +313,15 @@ model A2APreviewToolboxTool extends ToolboxTool {
 
 /**
  * A browser automation tool stored in a toolbox.
+ * BrowserAutomationPreviewToolboxTool is deprecated.
+ * Please use BrowserAutomationToolboxTool instead.
+ * See https://aka.ms/bat/docs for more information on Browser automation tool.
  */
+#deprecated "This legacy Browser Automation tool is deprecated and is no longer available. Please use the latest Browser Automation tool instead. See https://aka.ms/bat/docs."
 @extension("x-ms-foundry-meta", PreviewTool)
 model BrowserAutomationPreviewToolboxTool extends ToolboxTool {
   type: ToolboxBrowserAutomationPreviewToolType;
+  #suppress "deprecated" "Intentional reuse of the legacy model for backward compatibility."
   ...ToolFields<BrowserAutomationPreviewTool>;
 }
 

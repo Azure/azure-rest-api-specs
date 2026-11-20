@@ -33,8 +33,16 @@ namespace Microsoft.RedHatOpenShift {
     "csharp"
   );
 
+  // Use "PascalCase" for acronyms
+  @@clientName(KmsKeyVaultType.ManagedHSM, "ManagedHsm", "csharp");
+
   // Add top-level resource name prefix to cluster model and type names
   @@clientName(ApiProfile, "HcpOpenShiftClusterApiProfile", "csharp");
+  @@clientName(
+    ClusterActiveVersion,
+    "HcpOpenShiftClusterActiveVersion",
+    "csharp"
+  );
   @@clientName(
     ClusterAutoscalingProfile,
     "HcpOpenShiftClusterAutoscalingProfile",
@@ -48,6 +56,11 @@ namespace Microsoft.RedHatOpenShift {
   @@clientName(
     ClusterImageRegistryState,
     "HcpOpenShiftClusterImageRegistryState",
+    "csharp"
+  );
+  @@clientName(
+    ClusterResourceStatus,
+    "HcpOpenShiftClusterResourceStatus",
     "csharp"
   );
   @@clientName(Condition, "HcpOpenShiftClusterCondition", "csharp");
@@ -94,6 +107,7 @@ namespace Microsoft.RedHatOpenShift {
     "csharp"
   );
   @@clientName(KmsKey, "HcpOpenShiftClusterKmsKey", "csharp");
+  @@clientName(KmsKeyVaultType, "HcpOpenShiftClusterKmsKeyVaultType", "csharp");
   @@clientName(NetworkProfile, "HcpOpenShiftClusterNetworkProfile", "csharp");
   @@clientName(NetworkType, "HcpOpenShiftClusterNetworkType", "csharp");
   @@clientName(
@@ -103,7 +117,11 @@ namespace Microsoft.RedHatOpenShift {
   );
   @@clientName(OutboundType, "HcpOpenShiftClusterOutboundType", "csharp");
   @@clientName(PlatformProfile, "HcpOpenShiftClusterPlatformProfile", "csharp");
-  @@clientName(ResourceStatus, "HcpOpenShiftClusterResourceStatus", "csharp");
+  @@clientName(
+    ResourceStatus,
+    "HcpOpenShiftClusterBaseResourceStatus",
+    "csharp"
+  );
   @@clientName(StatusType, "HcpOpenShiftClusterConditionStatusType", "csharp");
   @@clientName(
     UserAssignedIdentitiesProfile,
@@ -128,6 +146,11 @@ namespace Microsoft.RedHatOpenShift {
     "csharp"
   );
   @@clientName(
+    NodePoolActiveVersion,
+    "HcpOpenShiftClusterNodePoolActiveVersion",
+    "csharp"
+  );
+  @@clientName(
     NodePoolPlatformProfile,
     "HcpOpenShiftClusterNodePoolPlatformProfile",
     "csharp"
@@ -135,6 +158,11 @@ namespace Microsoft.RedHatOpenShift {
   @@clientName(
     NodePoolProperties,
     "HcpOpenShiftClusterNodePoolProperties",
+    "csharp"
+  );
+  @@clientName(
+    NodePoolResourceStatus,
+    "HcpOpenShiftClusterNodePoolResourceStatus",
     "csharp"
   );
   @@clientName(

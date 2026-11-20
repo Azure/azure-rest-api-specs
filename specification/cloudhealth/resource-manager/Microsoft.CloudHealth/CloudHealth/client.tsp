@@ -29,8 +29,26 @@ using Microsoft.CloudHealth;
   "HealthModelDiscoveryRuleProperties",
   "csharp"
 );
+@@clientName(DiscoveryError, "HealthModelDiscoveryError", "csharp");
+@@clientName(
+  DiscoveryRuleSpecification,
+  "HealthModelDiscoveryRuleSpecification",
+  "csharp"
+);
+@@clientName(
+  DiscoveryRuleRecommendedSignalsBehavior,
+  "HealthModelDiscoveryRuleRecommendedSignalsBehavior",
+  "csharp"
+);
+@@clientName(
+  DiscoveryRuleRelationshipDiscoveryBehavior,
+  "HealthModelDiscoveryRuleRelationshipDiscoveryBehavior",
+  "csharp"
+);
 @@clientName(Entity, "HealthModelEntity", "csharp");
 @@clientName(EntityProperties, "HealthModelEntityProperties", "csharp");
+@@clientName(EntityCoordinates, "HealthModelEntityCoordinates", "csharp");
+@@clientName(EntityImpact, "HealthModelEntityImpact", "csharp");
 @@clientName(Relationship, "HealthModelRelationship", "csharp");
 @@clientName(
   RelationshipProperties,
@@ -51,15 +69,17 @@ using Microsoft.CloudHealth;
 @@clientName(HealthState, "EntityHealthState", "csharp");
 @@clientName(AggregationType, "HealthStateAggregationType", "csharp");
 @@clientName(AggregationUnit, "HealthStateAggregationUnit", "csharp");
-@@clientName(ThresholdRule, "EntitySignalThresholdRuleV1", "csharp");
-@@clientName(IconDefinition, "EntityIcon", "csharp");
+@@clientName(IconDefinition, "HealthModelEntityIcon", "csharp");
 @@clientName(RefreshInterval, "EntitySignalRefreshInterval", "csharp");
-@@clientName(SignalAssignment, "EntitySignalAssignment", "csharp");
-@@clientName(SignalGroup, "EntitySignalGroup", "csharp");
+@@clientName(RefreshInterval.PT1M, "OneMinute", "csharp");
+@@clientName(RefreshInterval.PT5M, "FiveMinutes", "csharp");
+@@clientName(RefreshInterval.PT10M, "TenMinutes", "csharp");
+@@clientName(RefreshInterval.PT15M, "FifteenMinutes", "csharp");
+@@clientName(RefreshInterval.PT30M, "ThirtyMinutes", "csharp");
+@@clientName(RefreshInterval.PT1H, "OneHour", "csharp");
+@@clientName(RefreshInterval.PT2H, "TwoHours", "csharp");
 @@clientName(SignalKind, "EntitySignalKind", "csharp");
 @@clientName(SignalOperator, "EntitySignalOperator", "csharp");
-
-@@clientName(SignalOperator.Equals, "EqualsValue", "csharp");
 
 @@clientName(
   DynamicThresholdSensitivity,
@@ -95,10 +115,10 @@ using Microsoft.CloudHealth;
 @@clientName(HealthReportRequest, "EntityHealthReportContent", "csharp");
 @@clientName(
   MetricAggregationType,
-  "CloudHealthMetricAggregationType",
+  "HealthModelMetricAggregationType",
   "csharp"
 );
-@@clientName(SignalConfiguration, "CloudHealthSignalConfiguration", "csharp");
+@@clientName(SignalConfiguration, "HealthModelSignalConfiguration", "csharp");
 @@alternateType(
   SignalConfiguration.applicableResourceTypes,
   Azure.Core.armResourceType[],
@@ -106,15 +126,26 @@ using Microsoft.CloudHealth;
 );
 @@clientName(
   SignalInstanceProperties,
-  "CloudHealthSignalInstanceProperties",
+  "HealthModelSignalInstanceProperties",
   "csharp"
 );
-@@clientName(SignalStatus, "CloudHealthSignalStatus", "csharp");
+@@clientName(SignalStatus, "HealthModelSignalStatus", "csharp");
+@@clientName(
+  SignalHistoryDataPoint,
+  "HealthModelSignalHistoryDataPoint",
+  "csharp"
+);
+@@clientName(
+  SignalRecommendationConfiguration,
+  "HealthModelSignalRecommendationConfiguration",
+  "csharp"
+);
 @@clientName(ThresholdRuleV2, "EntitySignalThresholdRule", "csharp");
 @@clientName(ThresholdRuleV2.operator, "SignalOperator", "csharp");
 @@clientName(SignalGroups, "EntitySignalGroups", "csharp");
-@@clientName(AzureResourceSignal, "ResourceSignal", "csharp");
-@@clientName(AzureResourceSignals, "ResourceSignals", "csharp");
+@@clientName(AzureResourceSignal, "HealthModelResourceMetricSignal", "csharp");
+@@clientName(AzureResourceSignals, "HealthModelResourceSignals", "csharp");
+@@clientName(ExternalSignal, "HealthModelExternalSignal", "csharp");
 @@clientName(AzureMonitorWorkspaceSignals, "MonitorWorkspaceSignals", "csharp");
 @@clientName(
   AzureResourceHealthSignalStatus,
@@ -123,12 +154,20 @@ using Microsoft.CloudHealth;
 );
 @@clientName(AzureResourceHealthSignal, "ResourceHealthSignal", "csharp");
 @@clientName(
+  SignalAggregationGroup,
+  "HealthModelSignalAggregationGroup",
+  "csharp"
+);
+@@clientName(
   SignalAggregationGroup.ignoreUnknown,
   "shouldIgnoreUnknown",
   "csharp"
 );
-@@clientName(DependenciesSignalGroup, "DependenciesSignalGroupV1", "csharp");
-@@clientName(DependenciesSignalGroupV2, "DependenciesSignalGroup", "csharp");
+@@clientName(
+  DependenciesSignalGroupV2,
+  "HealthModelDependenciesSignalGroup",
+  "csharp"
+);
 @@clientName(
   DependenciesSignalGroupV2.ignoreUnknown,
   "shouldIgnoreUnknown",
@@ -151,12 +190,6 @@ namespace Microsoft.CloudHealth {
     @maxLength(260)
     displayName?: string;
 
-    @removed(Versions.v2026_01_01_preview)
-    @doc("Azure Resource Graph query text in KQL syntax. The query must return at least a column named 'id' which contains the resource ID of the discovered resources.")
-    @minLength(1)
-    @maxLength(5000)
-    resourceGraphQuery: string;
-
     @doc("Reference to the name of the authentication setting which is used for querying Azure Resource Graph. The same authentication setting will also be assigned to any discovered entities.")
     authenticationSetting: authenticationSettingName;
 
@@ -166,7 +199,6 @@ namespace Microsoft.CloudHealth {
     @doc("Whether to add all recommended signals to the discovered entities.")
     addRecommendedSignals: DiscoveryRuleRecommendedSignalsBehavior;
 
-    @added(Versions.v2026_01_01_preview)
     @doc("Specification of the discovery rule defining how entities are discovered.")
     specification: DiscoveryRuleSpecification;
 
@@ -187,11 +219,6 @@ namespace Microsoft.CloudHealth {
   }
 }
 
-@@alternateType(
-  DiscoveryRules.createOrUpdateV1::parameters.resource,
-  DiscoveryRuleResourceCreate,
-  "javascript"
-);
 @@alternateType(
   DiscoveryRules.createOrUpdate::parameters.resource,
   DiscoveryRuleResourceCreate,

@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2026-10-01-preview",
+    "parameters": {
+      "properties": {
+        "enableCrossTenantAccessProtection": true
+      }
+    },
+    "resourceGroupName": "sample-resource-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "sample-vault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sample-vault",
+        "type": "Microsoft.KeyVault/vaults",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault",
+        "location": "westus",
+        "properties": {
+          "enableCrossTenantAccessProtection": true,
+          "enableRbacAuthorization": true,
+          "provisioningState": "Succeeded",
+          "sku": {
+            "name": "standard",
+            "family": "A"
+          },
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "vaultUri": "https://sample-vault.vault.azure.net"
+        },
+        "tags": {}
+      }
+    },
+    "201": {
+      "body": {
+        "name": "sample-vault",
+        "type": "Microsoft.KeyVault/vaults",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault",
+        "location": "westus",
+        "properties": {
+          "enableCrossTenantAccessProtection": true,
+          "enableRbacAuthorization": true,
+          "provisioningState": "Succeeded",
+          "sku": {
+            "name": "standard",
+            "family": "A"
+          },
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "vaultUri": "https://sample-vault.vault.azure.net"
+        },
+        "tags": {}
+      }
+    }
+  },
+  "operationId": "Vaults_Update",
+  "title": "Enable cross-tenant access protection on an existing vault"
+}
