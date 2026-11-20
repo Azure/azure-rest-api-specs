@@ -1,32 +1,9 @@
-import fs from "node:fs";
-import path from "node:path";
-import { inspect } from "node:util";
+import {
+  generateTypeSpecMetadata,
+  type TypeSpecLanguageMetadata,
+  type TypeSpecMetadata,
+} from "@azure-tools/specs-shared/typespec-metadata";
 import { LogLevel, logMessage } from "./log.ts";
-import { execAsync } from "./utils.ts";
-
-/**
- * Metadata output from the @azure-tools/typespec-metadata emitter.
- */
-export interface TypeSpecMetadata {
-  emitterVersion: string;
-  generatedAt: string;
-  typespec: {
-    namespace: string;
-    documentation?: string;
-    type: "data" | "management";
-  };
-  languages: Record<string, LanguageMetadata[]>;
-  sourceConfigPath: string;
-}
-
-export interface LanguageMetadata {
-  emitterName: string;
-  packageName: string;
-  namespace?: string;
-  outputDir?: string;
-  flavor?: string;
-  serviceDir?: string;
-}
 
 export interface EmitterCheckResult {
   enabled: boolean;
@@ -51,9 +28,9 @@ const SDK_REPO_TO_LANGUAGE_KEY: Record<string, string[]> = {
  * Resolves the language key from the SDK repo name by checking which key
  * exists in the typespec-metadata output.
  */
-function resolveLanguageKey(
+export function resolveLanguageKey(
   sdkRepoName: string,
-  languages: Record<string, LanguageMetadata[]>,
+  languages: Record<string, TypeSpecLanguageMetadata[]>,
 ): string | undefined {
   const normalizedName = sdkRepoName.replace("-pr", "");
   const candidates = SDK_REPO_TO_LANGUAGE_KEY[normalizedName];
@@ -75,70 +52,22 @@ export async function checkEmitterEnabled(
   tspConfigDir: string,
   sdkRepoName: string,
 ): Promise<EmitterCheckResult> {
-  const metadataOutputDir = path.join(tspConfigDir, "@azure-tools", "typespec-metadata");
-
-  try {
-    // Run tsp compile with the typespec-metadata emitter using default options.
-    // Override output-dir to tspConfigDir so the metadata file lands in a
-    // predictable location regardless of the tspconfig.yaml output-dir setting.
-    // Use npx to resolve the locally-installed tsp binary from node_modules/.bin.
-    const tspCommand = [
-      "npx tsp compile",
-      `"${tspConfigDir}"`,
-      '--emit "@azure-tools/typespec-metadata"',
-      `--output-dir "${tspConfigDir}"`,
-      '--option "@azure-tools/typespec-metadata.format=json"',
-    ].join(" ");
-
-    logMessage(`Running typespec-metadata emitter: ${tspCommand}`, LogLevel.Debug);
-    const { stderr } = await execAsync(tspCommand, { cwd: tspConfigDir });
-    if (stderr) {
-      logMessage(`typespec-metadata emitter warnings: ${stderr}`, LogLevel.Warn);
-    }
-
-    // Find the metadata JSON file
-    const jsonPath = path.join(metadataOutputDir, "typespec-metadata.json");
-    if (!fs.existsSync(jsonPath)) {
-      logMessage(`typespec-metadata output not found in ${metadataOutputDir}`, LogLevel.Error);
-      return { enabled: false };
-    }
-
-    const raw = fs.readFileSync(jsonPath, "utf8");
-    const metadata = JSON.parse(raw) as TypeSpecMetadata;
-
-    // Check if the target language is configured
-    const languageKey = resolveLanguageKey(sdkRepoName, metadata.languages);
-    if (!languageKey) {
-      logMessage(
-        `Language emitter not enabled for ${sdkRepoName} in tspconfig.yaml`,
-        LogLevel.Info,
-      );
-      return { enabled: false, metadata, languageKey: undefined };
-    }
-
-    const langMetadata = metadata.languages[languageKey][0];
-    logMessage(
-      `Language emitter enabled for ${sdkRepoName}: ${langMetadata.emitterName} (package: ${langMetadata.packageName})`,
-      LogLevel.Info,
-    );
-
-    return {
-      enabled: true,
-      metadata,
-      languageKey,
-      packageName: langMetadata.packageName,
-    };
-  } catch (error) {
-    logMessage(`Error running typespec-metadata emitter: ${inspect(error)}`, LogLevel.Error);
-    return { enabled: false };
-  } finally {
-    // Clean up the metadata output directory
-    try {
-      if (fs.existsSync(metadataOutputDir)) {
-        fs.rmSync(metadataOutputDir, { recursive: true });
-      }
-    } catch {
-      // Ignore cleanup errors
-    }
+  const metadata = await generateTypeSpecMetadata(tspConfigDir);
+  const languageKey = resolveLanguageKey(sdkRepoName, metadata.languages);
+  const langMetadata = languageKey ? metadata.languages[languageKey][0] : undefined;
+  if (!langMetadata) {
+    logMessage(`Language emitter not enabled for ${sdkRepoName} in tspconfig.yaml`, LogLevel.Info);
+    return { enabled: false, metadata, languageKey };
   }
+
+  logMessage(
+    `Language emitter enabled for ${sdkRepoName}: ${langMetadata.emitterName} (package: ${langMetadata.packageName})`,
+    LogLevel.Info,
+  );
+  return {
+    enabled: true,
+    metadata,
+    languageKey,
+    packageName: langMetadata.packageName,
+  };
 }

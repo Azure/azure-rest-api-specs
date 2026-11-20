@@ -6,6 +6,7 @@ using Microsoft.Cdn;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 
+@@clientName(AFDDomainMtlsParameters, "AFDDomainMTLSParameters", "go");
 @@clientName(
   CertificateSourceParameters,
   "CertificateSourceParametersBase",
@@ -1508,10 +1509,38 @@ using Azure.ResourceManager;
 );
 @@clientName(Endpoints.listResourceUsage, "GetResourceUsages", "csharp");
 @@clientName(RuleSets.listResourceUsage, "GetResourceUsages", "csharp");
+@@clientName(RuleSetProperties.batchMode, "IsBatchMode", "csharp");
 
 // Python SDK customizations: preserve client name and enum member names from the
 // pre-migration Swagger SDK to avoid breaking changes for existing consumers.
 @@clientName(Microsoft.Cdn, "CdnManagementClient", "python");
+
+// Preserve legacy Python enum member names.
+@@clientName(
+  AfdCustomizedCipherSuiteForTls13.TLS_AES_128_GCM_SHA256,
+  exact("TLS_AES128_GCM_SHA256"),
+  "python"
+);
+@@clientName(
+  AfdCustomizedCipherSuiteForTls13.TLS_AES_256_GCM_SHA384,
+  exact("TLS_AES256_GCM_SHA384"),
+  "python"
+);
+@@clientName(LogMetricsGranularity.P1D, exact("P1_D"), "python");
+@@clientName(MetricsGranularity.P1D, exact("P1_D"), "python");
+@@clientName(
+  SkuName.Standard_955BandWidth_ChinaCdn,
+  exact("STANDARD955_BAND_WIDTH_CHINA_CDN"),
+  "python"
+);
+@@clientName(
+  SkuName.StandardPlus_955BandWidth_ChinaCdn,
+  exact("STANDARD_PLUS955_BAND_WIDTH_CHINA_CDN"),
+  "python"
+);
+@@clientName(WafGranularity.P1D, exact("P1_D"), "python");
+@@clientName(WafMetricsGranularity.P1D, exact("P1_D"), "python");
+
 @@clientName(DeliveryRuleActionName, "DeliveryRuleActionEnum", "python");
 @@clientName(
   PolicySettingsDefaultCustomBlockResponseStatusCode.`200`,
@@ -1561,6 +1590,40 @@ using Azure.ResourceManager;
   "python"
 );
 @@clientName(MatchProcessingBehavior.Continue, "CONTINUE_ENUM", "python");
+
+// Preserve the last pre-migration Front Door name constraints for C# provisioning compatibility.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning"
+@@clientOption(
+  AFDEndpoint,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 46, pattern: "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning"
+@@clientOption(
+  AFDOriginGroup,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 90, pattern: "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning"
+@@clientOption(
+  AFDOrigin,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 90, pattern: "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning"
+@@clientOption(
+  Route,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 90, pattern: "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$" },
+  "csharp"
+);
 
 // Mark CustomDomains.create as ARM CreateOrUpdate operation
 // so that the SDK generator produces CreateOrUpdate methods

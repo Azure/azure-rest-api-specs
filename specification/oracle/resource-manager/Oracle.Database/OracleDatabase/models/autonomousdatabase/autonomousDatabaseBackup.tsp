@@ -122,6 +122,11 @@ model AutonomousDatabaseBackupProperties {
   @doc("Azure resource provisioning state.")
   @visibility(Lifecycle.Read)
   provisioningState?: AzureResourceProvisioningState;
+
+  @added(Versions.v20260401_preview)
+  @doc("The destination where this backup is stored.")
+  @visibility(Lifecycle.Read)
+  backupDestination?: BackupDestinationType;
 }
 
 @doc("Details to restore an Oracle Autonomous Database.")

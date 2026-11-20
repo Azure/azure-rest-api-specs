@@ -25,13 +25,6 @@ model ReplicationExtensionModel
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-openapi"
-@@OpenAPI.extension(
-  ReplicationExtension.create::parameters.resource,
-  "x-ms-client-name",
-  "body"
-);
-
 @armResourceOperations
 interface ReplicationExtension {
   /**

@@ -74,10 +74,16 @@ enum Versions {
   v2025_11_01: "2025-11-01",
 
   /**
+   * The 2026-11-01 API version.
+   */
+  v2026_11_01: "2026-11-01",
+
+  /**
    * The latest preview API version.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/version-progression" "Keep the published preview last to preserve its version projections while adding the GA."
   @previewVersion
-  vLatestPreview: "2026-03-01-preview",
+  vLatestPreview: "2026-10-15-preview",
 }
 
 interface Operations

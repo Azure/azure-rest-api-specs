@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2026-07-01",
+    "containerAppName": "testcontainerapp0",
+    "privateLinkResourceName": "containerApps",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "containerApps",
+        "type": "Microsoft.App/containerApps/privateLinkResources",
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/containerApps/testcontainerapp0/privateLinkResources/containerApps",
+        "properties": {
+          "groupId": "containerApps",
+          "requiredMembers": [
+            "containerApps"
+          ],
+          "requiredZoneNames": [
+            "privatelink.northcentralus.azurecontainerapps.io"
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "ContainerAppPrivateLinkResources_Get",
+  "title": "Get a Private Link Resource by Container App"
+}

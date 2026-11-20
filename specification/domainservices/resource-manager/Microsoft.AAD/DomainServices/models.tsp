@@ -231,6 +231,23 @@ union FilteredSync {
 }
 
 /**
+ * The source used for filtered synchronization group entitlements.
+ */
+union EntitlementSourceMode {
+  string,
+
+  /**
+   * Group entitlements are read from and written to the legacy first-party synchronization application.
+   */
+  LegacyFirstParty: "LegacyFirstParty",
+
+  /**
+   * Group entitlements are read from and written to the current third-party synchronization application.
+   */
+  CurrentThirdParty: "CurrentThirdParty",
+}
+
+/**
  * All or CloudOnly, All users in AAD are synced to AAD DS domain or only users actively syncing in the cloud
  */
 union SyncScope {
@@ -494,6 +511,24 @@ model DomainServiceProperties {
    */
   @visibility(Lifecycle.Read)
   syncApplicationId?: string;
+
+  /**
+   * The object ID of the administrator group associated with the Domain Services deployment.
+   */
+  @visibility(Lifecycle.Read)
+  adminGroupObjectId?: string;
+
+  /**
+   * The source used for filtered synchronization group entitlements.
+   */
+  @visibility(Lifecycle.Read)
+  entitlementSourceMode?: EntitlementSourceMode;
+
+  /**
+   * The group IDs used to initialize the filtered synchronization application app roles.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  initialFilteredSyncGroupIds?: string[];
 
   /**
    * List of ReplicaSets

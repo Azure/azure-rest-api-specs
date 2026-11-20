@@ -138,17 +138,52 @@ using Microsoft.ServiceNetworking;
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
+@@alternateType(
+  TrafficControllerProperties.privateEndpointConnections,
+  Azure.ResourceManager.Models.SubResource[],
+  "csharp"
+);
+@@alternateType(
+  FrontendAssociation.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateEndpointConnection.properties,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateLinkResource.properties,
+  "csharp"
+);
 
 @@clientName(
-  Versions.v2023_11_01,
-  "$DO_NOT_NORMALIZE$V2023_11_01",
-  "javascript"
+  PrivateEndpointConnection,
+  "ServiceNetworkingPrivateEndpointConnection",
+  "csharp"
 );
 @@clientName(
-  Versions.v2025_05_01,
-  "$DO_NOT_NORMALIZE$V2025_05_01",
-  "javascript"
+  PrivateLinkResource,
+  "ServiceNetworkingPrivateLinkResource",
+  "csharp"
 );
+@@clientName(
+  PublicNetworkAccess,
+  "TrafficControllerPublicNetworkAccess",
+  "csharp"
+);
+@@clientName(
+  PrivateLinkServiceConnectionStatus,
+  "ServiceNetworkingPrivateLinkServiceConnectionStatus",
+  "csharp"
+);
+
+@@clientName(Versions.v2023_11_01, exact("V2023_11_01"), "javascript");
+@@clientName(Versions.v2025_05_01, exact("V2025_05_01"), "javascript");
+@@clientName(Versions.v2026_03_01, exact("V2026_03_01"), "javascript");
 
 // we add this model in this namespace in order to replace some models with this model via alternateType decorator
 namespace Azure.ResourceManager.Models {

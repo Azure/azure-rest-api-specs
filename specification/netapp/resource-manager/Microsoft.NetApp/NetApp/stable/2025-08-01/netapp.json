@@ -5659,6 +5659,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "Subvolumes_List": {
             "$ref": "./examples/Subvolumes_List.json"
@@ -5739,6 +5740,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "Subvolumes_Get": {
             "$ref": "./examples/Subvolumes_Get.json"
@@ -5750,7 +5752,7 @@
         "tags": [
           "SubvolumeInfos"
         ],
-        "description": "Creates a subvolume in the path or clones the subvolume mentioned in the parentPath",
+        "description": "Creates a subvolume in the path or clones the subvolume mentioned in the parentPath\nDeprecated. This operation will be removed in a future API version.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -5854,6 +5856,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "Subvolumes_Create": {
             "$ref": "./examples/Subvolumes_Create.json"
@@ -5957,6 +5960,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "Subvolumes_Update": {
             "$ref": "./examples/Subvolumes_Update.json"
@@ -6051,6 +6055,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "Subvolumes_Delete": {
             "$ref": "./examples/Subvolumes_Delete.json"
@@ -6146,6 +6151,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "Subvolumes_Metadata": {
             "$ref": "./examples/Subvolumes_Metadata.json"
@@ -11912,7 +11918,7 @@
         },
         "protocolTypes": {
           "type": "array",
-          "description": "Set of protocol types, default NFSv3, CIFS for SMB protocol",
+          "description": "Specify the protocol types for the volume. Supported values are NFSv3, NFSv4.1, and CIFS. For SMB volumes, specify CIFS.\nThe value SMB isn't supported in the protocolTypes property. Default: NFSv3",
           "items": {
             "type": "string"
           }
@@ -12089,7 +12095,7 @@
         },
         "protocolTypes": {
           "type": "array",
-          "description": "Set of protocol types, default NFSv3, CIFS for SMB protocol",
+          "description": "Specify the protocol types for the volume. Supported values are NFSv3, NFSv4.1, and CIFS. For SMB volumes, specify CIFS.\nThe value SMB isn't supported in the protocolTypes property. Default: NFSv3",
           "items": {
             "type": "string"
           }

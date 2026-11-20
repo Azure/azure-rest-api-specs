@@ -5,6 +5,65 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.DataProtection;
 
+// Go
+@@clientName(DppCrossTenantVaultMappings, "DPPCrossTenantVaultMappings", "go");
+@@clientName(
+  DppCrossTenantVaultMappingStatus,
+  "DPPCrossTenantVaultMappingStatus",
+  "go"
+);
+@@clientName(
+  BackupInstancesFromDppCrossTenantVault,
+  "BackupInstancesFromDPPCrossTenantVault",
+  "go"
+);
+@@clientName(
+  BackupInstanceFromDppCrossTenantVault,
+  "BackupInstanceFromDPPCrossTenantVault",
+  "go"
+);
+@@clientName(
+  RestoresFromDppCrossTenantVault,
+  "RestoresFromDPPCrossTenantVault",
+  "go"
+);
+@@clientName(
+  ValidateRestoreFromDppCrossTenantVault,
+  "ValidateRestoreFromDPPCrossTenantVault",
+  "go"
+);
+@@clientName(
+  RestorableTimeRangesFromDppCrossTenantVault,
+  "RestorableTimeRangesFromDPPCrossTenantVault",
+  "go"
+);
+@@clientName(
+  RecoveryPointsFromDppCrossTenantVault,
+  "RecoveryPointsFromDPPCrossTenantVault",
+  "go"
+);
+@@clientName(
+  RecoveryPointFromDppCrossTenantVault,
+  "RecoveryPointFromDPPCrossTenantVault",
+  "go"
+);
+@@clientName(
+  BackupJobsFromDppCrossTenantVault,
+  "BackupJobsFromDPPCrossTenantVault",
+  "go"
+);
+@@clientName(JobFromDppCrossTenantVault, "JobFromDPPCrossTenantVault", "go");
+@@clientName(
+  BackupInstanceOperationStatusFromDppCrossTenantVault,
+  "BackupInstanceOperationStatusFromDPPCrossTenantVault",
+  "go"
+);
+@@clientName(
+  BackupInstanceOperationResultFromDppCrossTenantVault,
+  "BackupInstanceOperationResultFromDPPCrossTenantVault",
+  "go"
+);
+
 // Fix property name changes (ID -> Id)
 @@clientName(DatasourceSet.resourceID, "resourceId", "java");
 @@clientName(Datasource.resourceID, "resourceId", "java");
@@ -458,6 +517,16 @@ using Microsoft.DataProtection;
   azureLocation,
   "csharp"
 );
+@@clientName(
+  GenericBackupDatasourceParameters,
+  "GenericBackupDataSourceSettings",
+  "csharp"
+);
+@@clientName(
+  GenericRestoreDatasourceCriteria,
+  "GenericRestoreDataSourceCriteria",
+  "csharp"
+);
 @@clientName(IdentityDetails, "DataProtectionIdentityDetails", "csharp");
 @@clientName(
   IdentityDetails.userAssignedIdentityArmUrl,
@@ -659,6 +728,13 @@ using Microsoft.DataProtection;
 );
 @@clientName(SecretStoreResource, "SecretStoreResourceInfo", "csharp");
 @@alternateType(SecretStoreResource.uri, url, "csharp");
+// Cross-tenant read-projection variants (parity with the shared models above).
+@@alternateType(CrossTenantSecretStoreResource.uri, url, "csharp");
+@@clientName(
+  CrossTenantBackupInstance.datasourceAuthCredentials,
+  "DataSourceAuthCredentials",
+  "csharp"
+);
 @@clientName(SecureScoreLevel, "BackupVaultSecureScoreLevel", "csharp");
 @@clientName(SecuritySettings, "BackupVaultSecuritySettings", "csharp");
 @@clientName(SoftDeleteSettings, "BackupVaultSoftDeleteSettings", "csharp");
@@ -814,7 +890,7 @@ using Microsoft.DataProtection;
   "csharp"
 );
 @@clientName(
-  BackupInstanceResources.resumeProtection::parameters.body,
+  BackupInstanceResources.resumeProtectionPreview::parameters.body,
   "content",
   "csharp"
 );
@@ -1007,3 +1083,22 @@ model BackupFindRestorableTimeRangesResponse
 @@usage(JobExtendedInfo, Usage.input, "csharp");
 @@usage(JobSubTask, Usage.input, "csharp");
 @@usage(RestoreJobRecoveryPointDetails, Usage.input, "csharp");
+
+// CSharp SDK: cross-tenant restore response models — satisfy csharp-model-suffix (Response -> Result)
+@@clientName(
+  CrossTenantVaultMappingStatusResponse,
+  "CrossTenantVaultMappingStatusResult",
+  "csharp"
+);
+@@clientName(
+  CrossTenantOperationResultAcceptedResponse,
+  "CrossTenantOperationResultAcceptedResult",
+  "csharp"
+);
+
+// CSharp SDK: cross-tenant restore request models — satisfy csharp-model-suffix (Request -> Content)
+@@clientName(
+  CrossTenantVaultMappingRemoveRequest,
+  "CrossTenantVaultMappingRemoveContent",
+  "csharp"
+);

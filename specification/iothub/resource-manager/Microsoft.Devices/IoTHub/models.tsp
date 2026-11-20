@@ -171,6 +171,7 @@ union RoutingSource {
   /**
    * DigitalTwinChangeEvents
    */
+  @removed(Versions.v2026_11_01)
   DigitalTwinChangeEvents: "DigitalTwinChangeEvents",
 
   /**
@@ -181,7 +182,21 @@ union RoutingSource {
   /**
    * MqttBrokerMessages
    */
+  @removed(Versions.v2026_11_01)
   MqttBrokerMessages: "MqttBrokerMessages",
+}
+
+/**
+ * The source to which the fallback route is applied.
+ */
+@added(Versions.v2026_11_01)
+union FallbackRouteSource {
+  string,
+
+  /**
+   * Device-to-cloud messages sent by devices.
+   */
+  DeviceMessages: "DeviceMessages",
 }
 
 /**
@@ -742,6 +757,55 @@ model ErrorDetails {
 }
 
 /**
+ * The connection profile that the IoT hub uses for device connections.
+ */
+@added(Versions.v2026_10_01_preview)
+@removed(Versions.v2026_11_01)
+union ConnectionProfile {
+  string,
+
+  /**
+   * Classic connection profile.
+   */
+  Classic: "Classic",
+
+  /**
+   * MQTT v5 connection profile.
+   */
+  MqttV5: "MqttV5",
+}
+
+/**
+ * Settings for an Event Grid-backed MQTT v5 IoT hub.
+ */
+@added(Versions.v2026_10_01_preview)
+@removed(Versions.v2026_11_01)
+model MqttV5Settings {
+  /**
+   * The customer-defined groups of topic templates that devices publish to.
+   */
+  @identifiers(#["topicGroupId"])
+  topicGroups?: TopicGroup[];
+}
+
+/**
+ * A named set of topic templates for an Event Grid-backed MQTT v5 IoT hub.
+ */
+@added(Versions.v2026_10_01_preview)
+@removed(Versions.v2026_11_01)
+model TopicGroup {
+  /**
+   * The customer-supplied identifier used to reconcile the topic group during updates.
+   */
+  topicGroupId?: string;
+
+  /**
+   * The topic templates in this group.
+   */
+  topicTemplates?: string[];
+}
+
+/**
  * The properties of an IoT hub.
  */
 model IotHubProperties {
@@ -876,6 +940,7 @@ model IotHubProperties {
   /**
    * The device streams properties of iothub.
    */
+  @removed(Versions.v2026_11_01)
   deviceStreams?: IotHubPropertiesDeviceStreams;
 
   /**
@@ -886,6 +951,7 @@ model IotHubProperties {
   /**
    * The encryption properties for the IoT hub.
    */
+  @removed(Versions.v2026_11_01)
   encryption?: EncryptionPropertiesDescription;
 
   /**
@@ -903,16 +969,41 @@ model IotHubProperties {
   /**
    * This property store root certificate related information
    */
+  @removed(Versions.v2026_11_01)
   rootCertificate?: RootCertificateProperties;
 
   /**
    * This property specifies the IP Version the hub is currently utilizing.
    */
+  @removed(Versions.v2026_11_01)
   ipVersion?: IpVersion;
+
+  /**
+   * The connection profile that the IoT hub uses for device connections. Defaults to 'Classic'.
+   */
+  @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
+  connectionProfile?: ConnectionProfile = ConnectionProfile.Classic;
+
+  /**
+   * The custom topic configuration for an Event Grid-backed MQTT v5 IoT hub. This property is valid only when connectionProfile is 'MqttV5'.
+   */
+  @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
+  mqttV5Settings?: MqttV5Settings;
 
   /**
    * Represents properties related to the Azure Device Registry (ADR).
    */
+  @removed(Versions.v2026_10_01_preview)
+  @renamedFrom(Versions.v2026_10_01_preview, "deviceRegistry")
+  deviceRegistryV1?: DeviceRegistry;
+
+  /**
+   * Represents properties related to the Azure Device Registry (ADR).
+   */
+  @added(Versions.v2026_10_01_preview)
+  @visibility(Lifecycle.Read)
   deviceRegistry?: DeviceRegistry;
 
   /**
@@ -1177,6 +1268,25 @@ model RoutingEndpoints {
 }
 
 /**
+ * The supported formats for message payloads delivered to routing endpoints.
+ */
+@added(Versions.v2026_10_01_preview)
+@removed(Versions.v2026_11_01)
+union MessagePayloadFormat {
+  string,
+
+  /**
+   * Formats the message as a com.do.telemetry.observation.v1 payload.
+   */
+  DOObservationV1: "DOObservationV1",
+
+  /**
+   * Preserves the original message payload.
+   */
+  None: "None",
+}
+
+/**
  * The properties related to an event stream endpoint.
  */
 @added(Versions.v2026_05_01_preview)
@@ -1227,6 +1337,13 @@ model RoutingEventStreamProperties {
    * The unique GUID of the custom source for the event stream.
    */
   sourceId?: string;
+
+  /**
+   * The format of the message payload delivered to this endpoint.
+   */
+  @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
+  messagePayloadFormat?: MessagePayloadFormat;
 }
 
 /**
@@ -1279,6 +1396,13 @@ model RoutingServiceBusQueueEndpointProperties {
    * The name of the resource group of the service bus queue endpoint.
    */
   resourceGroup?: string;
+
+  /**
+   * The format of the message payload delivered to this endpoint.
+   */
+  @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
+  messagePayloadFormat?: MessagePayloadFormat;
 }
 
 /**
@@ -1341,6 +1465,13 @@ model RoutingServiceBusTopicEndpointProperties {
    * The name of the resource group of the service bus topic endpoint.
    */
   resourceGroup?: string;
+
+  /**
+   * The format of the message payload delivered to this endpoint.
+   */
+  @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
+  messagePayloadFormat?: MessagePayloadFormat;
 }
 
 /**
@@ -1393,6 +1524,13 @@ model RoutingEventHubProperties {
    * The name of the resource group of the event hub endpoint.
    */
   resourceGroup?: string;
+
+  /**
+   * The format of the message payload delivered to this endpoint.
+   */
+  @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
+  messagePayloadFormat?: MessagePayloadFormat;
 }
 
 /**
@@ -1469,6 +1607,13 @@ model RoutingStorageContainerProperties {
    * Encoding that is used to serialize messages to blobs. Supported values are 'avro', 'avrodeflate', and 'JSON'. Default value is 'avro'.
    */
   encoding?: RoutingStorageContainerPropertiesEncoding;
+
+  /**
+   * The format of the message payload delivered to this endpoint.
+   */
+  @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
+  messagePayloadFormat?: MessagePayloadFormat;
 }
 
 /**
@@ -1544,6 +1689,13 @@ model RoutingCosmosDBSqlApiProperties {
    * The template for generating a synthetic partition key value for use with this cosmos DB sql container. The template must include at least one of the following placeholders: {iothub}, {deviceid}, {DD}, {MM}, and {YYYY}. Any one placeholder may be specified at most once, but order and non-placeholder components are arbitrary. This parameter is only required if PartitionKeyName is specified.
    */
   partitionKeyTemplate?: string;
+
+  /**
+   * The format of the message payload delivered to this endpoint.
+   */
+  @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
+  messagePayloadFormat?: MessagePayloadFormat;
 }
 
 /**
@@ -1565,6 +1717,13 @@ model RouteProperties {
    * The condition that is evaluated to apply the routing rule. If no condition is provided, it evaluates to true by default. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language
    */
   condition?: string;
+
+  /**
+   * The data schema reference that is used to interpret the message body.
+   */
+  @added(Versions.v2026_10_01_preview)
+  @removed(Versions.v2026_11_01)
+  dataSchema?: string;
 
   /**
    * The list of endpoints to which messages that satisfy the condition are routed. Currently only one endpoint is allowed.
@@ -1591,7 +1750,8 @@ model FallbackRouteProperties {
   /**
    * The source to which the routing rule is to be applied to. For example, DeviceMessages
    */
-  source: RoutingSource;
+  @typeChangedFrom(Versions.v2026_11_01, RoutingSource)
+  source: FallbackRouteSource;
 
   /**
    * The condition which is evaluated in order to apply the fallback route. If the condition is not provided it will evaluate to true by default. For grammar, See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language
@@ -1788,6 +1948,7 @@ model IotHubLocationDescription {
 /**
  * This property store root certificate related information
  */
+@removed(Versions.v2026_11_01)
 model RootCertificateProperties {
   /**
    * This property when set to true, hub will use G2 cert; while it's set to false, hub uses Baltimore Cert.
@@ -1812,9 +1973,115 @@ model DeviceRegistry {
   namespaceResourceId?: Azure.Core.armResourceIdentifier;
 
   /**
+   * The UUID of the associated Azure Device Registry namespace.
+   */
+  @added(Versions.v2026_10_01_preview)
+  namespaceUuid?: string;
+
+  /**
+   * The host name for the data plane endpoint of the associated Azure Device Registry.
+   */
+  @added(Versions.v2026_10_01_preview)
+  dataPlaneHostName?: string;
+
+  /**
    * The identity used to manage the ADR namespace from the data plane.
    */
+  @removed(Versions.v2026_10_01_preview)
   identityResourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * The identity used to manage the ADR namespace from the data plane.
+   */
+  @added(Versions.v2026_10_01_preview)
+  identity?: DeviceRegistryIdentity;
+
+  /**
+   * The properties related to linking the IoT Hub with the Azure Device Registry.
+   */
+  @added(Versions.v2026_10_01_preview)
+  @visibility(Lifecycle.Read)
+  linkingProperties?: DeviceRegistryLinkingProperties;
+}
+
+/**
+ * The identity used to manage the ADR namespace from the data plane.
+ */
+@added(Versions.v2026_10_01_preview)
+model DeviceRegistryIdentity {
+  /**
+   * The type of the identity.
+   */
+  type?: DeviceRegistryIdentityType;
+
+  /**
+   * The user assigned identity if the identity type is 'UserAssigned'.
+   */
+  userAssignedIdentity?: Azure.Core.armResourceIdentifier;
+}
+
+/**
+ * The type of the identity.
+ */
+@added(Versions.v2026_10_01_preview)
+union DeviceRegistryIdentityType {
+  string,
+
+  /**
+   * Use a system-assigned managed identity to manage the ADR namespace.
+   */
+  SystemAssigned: "SystemAssigned",
+
+  /**
+   * Use a user-assigned managed identity to manage the ADR namespace.
+   */
+  UserAssigned: "UserAssigned",
+}
+
+/**
+ * The properties related to linking the IoT Hub with the Azure Device Registry.
+ */
+@added(Versions.v2026_10_01_preview)
+model DeviceRegistryLinkingProperties {
+  /**
+   * Indicates whether the IoT Hub is linked with an Azure Device Registry.
+   */
+  @visibility(Lifecycle.Read)
+  state?: DeviceRegistryLinkingState;
+
+  /**
+   * The last error encountered when linking the IoT Hub with an Azure Device Registry.
+   */
+  @visibility(Lifecycle.Read)
+  error?: ErrorDetails;
+}
+
+/**
+ * Indicates whether the IoT Hub is linked with an Azure Device Registry.
+ */
+@added(Versions.v2026_10_01_preview)
+union DeviceRegistryLinkingState {
+  string,
+
+  /**
+   * The IoT Hub linking with an Azure Device Registry is in progress.
+   */
+  InProgress: "InProgress",
+
+  /**
+   * The IoT Hub is successfully linked with an Azure Device Registry.
+   */
+  Success: "Success",
+
+  /**
+   * The linked Azure Device Registry is no longer associated with the IoT Hub.
+   */
+  Orphaned: "Orphaned",
+
+  /**
+   * The IoT Hub failed to link with an Azure Device Registry.
+   */
+  Failed: "Failed",
 }
 
 /**
@@ -2638,7 +2905,14 @@ model CertificateProperties {
   /**
    * The reference to policy stored in Azure Device Registry (ADR).
    */
+  @removed(Versions.v2026_10_01_preview)
   policyResourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Full certificate authority resource ID for ADR linked standard SKU hubs.
+   */
+  @added(Versions.v2026_10_01_preview)
+  certificateAuthorityResourceId?: Azure.Core.armResourceIdentifier;
 }
 
 /**
@@ -2737,7 +3011,14 @@ model CertificatePropertiesWithNonce {
   /**
    * The reference to policy stored in Azure Device Registry (ADR).
    */
+  @removed(Versions.v2026_10_01_preview)
   policyResourceId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Full certificate authority resource ID for ADR linked standard SKU hubs.
+   */
+  @added(Versions.v2026_10_01_preview)
+  certificateAuthorityResourceId?: Azure.Core.armResourceIdentifier;
 }
 
 /**

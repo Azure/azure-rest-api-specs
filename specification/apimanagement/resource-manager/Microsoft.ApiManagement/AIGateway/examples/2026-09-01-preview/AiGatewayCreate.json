@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "aiGatewayName": "example-gateway",
+    "resource": {
+      "location": "westus2",
+      "tags": {
+        "environment": "development"
+      },
+      "sku": {
+        "name": "AIGateway"
+      },
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "backend": {
+          "subnet": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Network/virtualNetworks/example-vnet/subnets/example-subnet"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway",
+        "name": "example-gateway",
+        "type": "Microsoft.ApiManagement/aigateways",
+        "location": "westus2",
+        "tags": {
+          "environment": "development"
+        },
+        "sku": {
+          "name": "AIGateway"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "11111111-1111-1111-1111-111111111111",
+          "tenantId": "22222222-2222-2222-2222-222222222222"
+        },
+        "eTag": "\"AAAAAAAAAAE=\"",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "frontend": {
+            "defaultHostname": "example-gateway.westus2.aigateway.azure-api.net"
+          },
+          "backend": {
+            "subnet": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Network/virtualNetworks/example-vnet/subnets/example-subnet"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ApiManagement/locations/westus2/aiGatewayOperationStatuses/example-operation?api-version=2026-09-01-preview",
+        "Retry-After": 10
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway",
+        "name": "example-gateway",
+        "type": "Microsoft.ApiManagement/aigateways",
+        "location": "westus2",
+        "tags": {
+          "environment": "development"
+        },
+        "sku": {
+          "name": "AIGateway"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "11111111-1111-1111-1111-111111111111",
+          "tenantId": "22222222-2222-2222-2222-222222222222"
+        },
+        "eTag": "\"AAAAAAAAAAA=\"",
+        "properties": {
+          "provisioningState": "Activating",
+          "backend": {
+            "subnet": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Network/virtualNetworks/example-vnet/subnets/example-subnet"
+            }
+          }
+        }
+      }
+    }
+  },
+  "operationId": "AiGatewayResources_CreateOrUpdate",
+  "title": "Create an AI Gateway"
+}

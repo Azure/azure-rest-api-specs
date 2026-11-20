@@ -1,0 +1,129 @@
+{
+  "title": "GoldenGateDeployments_Update_MaximumSet",
+  "operationId": "GoldenGateDeployments_Update",
+  "parameters": {
+    "api-version": "2026-04-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgopenapi",
+    "goldenGateDeploymentName": "deployment1",
+    "properties": {
+      "zones": [
+        "sample-value"
+      ],
+      "tags": {
+        "key1006": "dzpmio"
+      },
+      "properties": {
+        "backupSchedule": {
+          "bucketName": "yd",
+          "compartmentId": "ocid1.autonomousdatabase.oc1..aaaaa3klq",
+          "frequencyBackupScheduled": "Daily",
+          "isMetadataOnly": true,
+          "namespaceName": "sample-name",
+          "timeBackupScheduled": "2026-04-01T10:00:00Z"
+        },
+        "cpuCoreCount": 19,
+        "licenseModel": "LicenseIncluded",
+        "maintenanceConfiguration": {
+          "bundleReleaseUpgradePeriodInDays": 1,
+          "interimReleaseUpgradePeriodInDays": 11,
+          "isInterimReleaseAutoUpgradeEnabled": true,
+          "majorReleaseUpgradePeriodInDays": 15,
+          "securityPatchUpgradePeriodInDays": 8
+        },
+        "maintenanceWindow": {
+          "day": "Monday",
+          "startHour": 6
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "backupSchedule": {
+            "bucketName": "yd",
+            "compartmentId": "ocid1.autonomousdatabase.oc1..aaaaa3klq",
+            "frequencyBackupScheduled": "Daily",
+            "isMetadataOnly": true,
+            "namespaceName": "sample-name",
+            "timeBackupScheduled": "2026-04-01T10:00:00Z"
+          },
+          "compartment": "ocid1.autonomousdatabase.oc1..aaaaa3klq",
+          "ocid": "ocid1.autonomousdatabase.oc1..aaaaa3klq",
+          "cpuCoreCount": 2,
+          "displayName": "sample-value",
+          "category": "DataReplication",
+          "deploymentType": "Ogg",
+          "deploymentUrl": "https://microsoft.com/afpf",
+          "environmentType": "Production",
+          "ingressIps": [
+            "n"
+          ],
+          "licenseModel": "LicenseIncluded",
+          "lifecycleDetails": "sample-value",
+          "lifecycleState": "Creating",
+          "timeCreated": "2026-04-01T10:00:00Z",
+          "timeUpdated": "2026-04-01T10:00:00Z",
+          "maintenanceConfiguration": {
+            "bundleReleaseUpgradePeriodInDays": 1,
+            "interimReleaseUpgradePeriodInDays": 11,
+            "isInterimReleaseAutoUpgradeEnabled": true,
+            "majorReleaseUpgradePeriodInDays": 15,
+            "securityPatchUpgradePeriodInDays": 8
+          },
+          "maintenanceWindow": {
+            "day": "Monday",
+            "startHour": 6
+          },
+          "networkAnchorId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Oracle.Database/networkAnchors/networkanchor1",
+          "oggData": {
+            "adminUsername": "sample-value",
+            "certificate": "sample-value",
+            "credentialStore": "GoldenGate",
+            "deploymentName": "sample-name",
+            "groupToRolesMapping": {
+              "administratorGroupId": "sample-value",
+              "operatorGroupId": "sample-value",
+              "securityGroupId": "sample-value",
+              "userGroupId": "sample-value",
+              "identityDomainId": "sample-value"
+            },
+            "oggVersion": "sample-value",
+            "passwordSecretId": "sample-value"
+          },
+          "privateIpAddress": "10.0.0.5",
+          "provisioningState": "Succeeded",
+          "resourceAnchorId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Oracle.Database/resourceAnchors/anchor1",
+          "storageUtilizationInBytes": 11,
+          "timeZone": "2026-04-01T10:00:00Z",
+          "version": "wayrpf"
+        },
+        "zones": [
+          "lpajkpexzt"
+        ],
+        "tags": {
+          "key8328": "sample-value"
+        },
+        "location": "ngddrf",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgopenapi/providers/Oracle.Database/goldenGateDeployments/sample-value",
+        "name": "sample-value",
+        "type": "Oracle.Database/goldenGateDeployments",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-05-19T21:55:28.644Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-05-19T21:55:28.644Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

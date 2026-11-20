@@ -1,0 +1,29 @@
+{
+  "operationId": "KnowledgeSources_IngestFileReplacement",
+  "title": "SearchServiceIngestKnowledgeSourceFileReplacement",
+  "parameters": {
+    "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
+    "sourceName": "hr-files",
+    "fileId": "file-00000000000000000000000000000001",
+    "api-version": "2026-11-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "metadata": {
+      "fileName": "handbook.txt"
+    },
+    "content": "RW1wbG95ZWUgaGFuZGJvb2su"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Id": "00000000-0000-0000-0000-000000000001",
+        "Operation-Location": "https://typespecpreviewexampleservice.search.windows.net/knowledgesources('hr-files')/files/operations/00000000-0000-0000-0000-000000000001?api-version=2026-11-01-preview",
+        "Retry-After": "30"
+      },
+      "body": {
+        "id": "00000000-0000-0000-0000-000000000001",
+        "kind": "knowledgeSourceFileIngestion",
+        "status": "Running"
+      }
+    }
+  }
+}

@@ -728,6 +728,24 @@
         }
       }
     },
+    "ApprovalReference": {
+      "type": "object",
+      "description": "Reference to an existing approved private endpoint used to inherit its connection approval state.",
+      "properties": {
+        "privateEndpointId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource id of an existing approved private endpoint whose approval state is inherited by this connection.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/privateEndpoints"
+              }
+            ]
+          }
+        }
+      }
+    },
     "BackendAddressPool": {
       "type": "object",
       "description": "Pool of backend IP addresses.",
@@ -2832,6 +2850,12 @@
           "description": "The MAC address of the network interface.",
           "readOnly": true
         },
+        "networkAdapterIndex": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the physical network adapter.",
+          "minimum": 0
+        },
         "primary": {
           "type": "boolean",
           "description": "Whether this is a primary network interface on a virtual machine.",
@@ -3464,6 +3488,10 @@
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/PrivateLinkServiceConnectionState",
           "description": "A collection of read-only information about the state of the connection to the remote resource."
+        },
+        "approvalReference": {
+          "$ref": "#/definitions/ApprovalReference",
+          "description": "A reference to an existing approved private endpoint whose connection approval state should be inherited by this connection at creation time."
         }
       }
     },

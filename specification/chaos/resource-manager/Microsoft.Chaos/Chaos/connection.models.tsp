@@ -68,11 +68,6 @@ model ConnectionProperties {
   certificateIssuer?: string;
 
   /**
-   * The dSTS principal name used to authenticate the connection.
-   */
-  dstsPrincipal?: string;
-
-  /**
    * The regional Chaos Studio data-plane endpoint assigned to this connection.
    * Clients and agents use this endpoint to reach the Chaos Studio data plane
    * for the connection.
@@ -108,11 +103,6 @@ union ConnectionKind {
    * A connection backed by the Chaos agent installed on the target resource.
    */
   ChaosAgent: "ChaosAgent",
-
-  /**
-   * A connection backed by Cloud Service Fault Injection (CSFI).
-   */
-  Csfi: "Csfi",
 }
 
 /**

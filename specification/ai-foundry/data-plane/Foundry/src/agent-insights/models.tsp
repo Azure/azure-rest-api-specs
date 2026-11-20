@@ -1,0 +1,459 @@
+import "../common/models.tsp";
+import "../common/servicepatterns.tsp";
+
+using TypeSpec.Rest;
+using Azure.Core;
+
+namespace Azure.AI.Projects;
+
+/** The lifecycle status of an agent insight. */
+union AgentInsightStatus {
+  string,
+
+  /** The insight is active and should be reviewed. */
+  active: "active",
+
+  /** The insight was resolved by the user. */
+  resolved: "resolved",
+
+  /** The insight was ignored by the user. */
+  ignored: "ignored",
+}
+
+/** The severity of an agent insight. */
+union AgentInsightSeverity {
+  string,
+
+  /** The insight has high severity. */
+  high: "high",
+
+  /** The insight has medium severity. */
+  medium: "medium",
+
+  /** The insight has low severity. */
+  low: "low",
+}
+
+/** A highlighted trace that provides evidence for an agent insight. */
+model AgentInsightHighlightedTrace {
+  /** The trace identifier. */
+  @key("trace_id")
+  @visibility(Lifecycle.Read)
+  trace_id: string;
+
+  /** A short summary of the trace. */
+  summary: string;
+
+  /** The end-to-end duration of the trace in milliseconds. */
+  duration_ms: FoundryDurationMilliseconds;
+
+  /** Aggregate input and output tokens reported across all model inference calls in this trace, including calls to different models. Intended for relative usage comparison, not cost estimation. */
+  total_tokens?: int32;
+
+  /** The time when the trace was recorded. */
+  timestamp: FoundryTimestamp;
+}
+
+/** A lightweight trace reference linked to an agent insight as supporting evidence. */
+model AgentInsightLinkedTrace {
+  /** The trace identifier. */
+  @key("trace_id")
+  @visibility(Lifecycle.Read)
+  trace_id: string;
+
+  /** The time when the trace was recorded. */
+  @visibility(Lifecycle.Read)
+  timestamp: FoundryTimestamp;
+}
+
+/** The customer-renderable kind of an agent insight's proposed fix. */
+union AgentInsightProposedFixKind {
+  string,
+
+  /** Text-only remediation guidance. */
+  prose: "prose",
+
+  /** A validated source-code change. */
+  code_change: "code_change",
+
+  /** A validated Prompt change. */
+  prompt_change: "prompt_change",
+}
+
+/** The Prompt surface changed by a proposed fix. */
+union AgentInsightPromptSurface {
+  string,
+
+  /** The Prompt instructions. */
+  instructions: "instructions",
+
+  /** A function tool definition. */
+  tool: "tool",
+}
+
+/** A customer-renderable change in a proposed fix. */
+model AgentInsightProposedFixChange {
+  /** The source path changed by a code change. */
+  path?: string;
+
+  /** The language of the changed source path. */
+  language?: string;
+
+  /** The unified diff for the changed source path. */
+  diff?: string;
+
+  /** The Prompt surface changed by a Prompt change. */
+  surface?: AgentInsightPromptSurface;
+
+  /** The user-visible target within a Prompt surface, when needed. */
+  target?: string;
+
+  /** The bounded Prompt value before the change. Present for Prompt changes, including when null. */
+  old_value?: unknown | null;
+
+  /** The bounded Prompt value after the change. Present for Prompt changes, including when null. */
+  new_value?: unknown | null;
+}
+
+/** A recommended fix for an agent insight. */
+model AgentInsightProposedFix {
+  /** The proposed-fix discriminator. */
+  kind: AgentInsightProposedFixKind;
+
+  /** The human-readable remediation guidance. */
+  text: string;
+
+  /** The concrete changes. Omitted for a prose-only fix. */
+  changes?: AgentInsightProposedFixChange[];
+}
+
+/** The recommended remediation for an agent insight. */
+model AgentInsightRecommendedAction {
+  /** The single recommended fix for the issue represented by the insight. */
+  proposed_fix: AgentInsightProposedFix;
+}
+
+/** Additional insight details. Omitted unless details are requested. */
+model AgentInsightDetails {
+  /** Up to 5 highlighted traces that provide evidence for this insight. */
+  @maxItems(5)
+  highlighted_traces: AgentInsightHighlightedTrace[];
+
+  /** Up to 200 most recent traces linked to this insight as supporting evidence. */
+  @maxItems(200)
+  linked_traces: AgentInsightLinkedTrace[];
+
+  /** The recommended remediation for this insight. */
+  recommended_actions: AgentInsightRecommendedAction;
+}
+
+/** A persisted issue discovered from an agent's traces. */
+model AgentInsight {
+  /** The insight identifier. */
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  /** The Agent Insights monitor this insight belongs to. */
+  @visibility(Lifecycle.Read)
+  monitor_id: string;
+
+  /** The agent this insight belongs to. */
+  @visibility(Lifecycle.Read)
+  agent_name: string;
+
+  /** The latest immutable agent version associated with this insight. */
+  @visibility(Lifecycle.Read)
+  agent_version: string;
+
+  /** A short title for the issue. */
+  @visibility(Lifecycle.Read)
+  title: string;
+
+  /** The severity of the issue. */
+  @visibility(Lifecycle.Read)
+  severity: AgentInsightSeverity;
+
+  /** An open, service-generated category label for the issue. Clients must accept previously unseen values. */
+  @visibility(Lifecycle.Read)
+  category: string;
+
+  /** The lifecycle status of the insight. */
+  @visibility(Lifecycle.Read)
+  status: AgentInsightStatus;
+
+  /** The number of traces that provide evidence for this insight. */
+  @visibility(Lifecycle.Read)
+  trace_count: int32;
+
+  /** The time when this insight was created. */
+  @visibility(Lifecycle.Read)
+  created_at: FoundryTimestamp;
+
+  /** The time when this insight was last updated. */
+  @visibility(Lifecycle.Read)
+  updated_at: FoundryTimestamp;
+
+  /** The root-cause diagnosis for the issue. */
+  @visibility(Lifecycle.Read)
+  description: string;
+
+  /** Additional insight details. Omitted unless details are requested. */
+  @visibility(Lifecycle.Read)
+  details?: AgentInsightDetails;
+}
+
+alias AgentInsightUpdate = {
+  /** The lifecycle status to apply to the insight. */
+  status?: AgentInsightStatus;
+};
+
+/** Structured reason why scheduled generation is suspended for a monitor. */
+model AgentInsightSuspension {
+  /** Stable, machine-readable suspension category. */
+  code: string;
+
+  /** Human-readable description of the suspension. */
+  message: string;
+
+  /** The time when the suspension occurred. */
+  occurred_at: FoundryTimestamp;
+
+  /** Additional reason-specific suspension details. */
+  details?: Record<unknown>;
+}
+
+/** Service-generated agent summary. */
+@example(#{
+  markdown: "# Agent summary\n\nThis agent answers support questions from product documentation.",
+})
+model AgentInsightSummary {
+  /** Summary in Markdown. */
+  @visibility(Lifecycle.Read)
+  markdown: string;
+}
+
+/** Monitor analysis priorities. */
+@example(#{
+  categories: #["cost_tokens", "latency"],
+  instructions: "Focus on latency and token waste.",
+})
+model AgentInsightPriorities {
+  /** Up to 20 distinct normalized category identifiers (128 UTF-8 bytes each). Empty uses defaults. */
+  @minItems(0)
+  categories: string[];
+
+  /** Analysis guidance, up to 2,000 UTF-8 bytes after trimming. Null or blank removes guidance. */
+  instructions?: string | null;
+}
+
+/** Monitor analysis priorities returned by the service. */
+model AgentInsightPrioritiesRead {
+  /** Up to 20 distinct normalized category identifiers. Can include legacy names containing commas. Empty uses defaults. */
+  @minItems(0)
+  categories: string[];
+
+  /** Analysis guidance. Omitted when unavailable. */
+  instructions?: string;
+}
+
+/** Estimated Agent Insights cost. */
+model AgentInsightEstimatedCost {
+  /** Estimated cost amount. */
+  amount: float64;
+
+  /** Currency for the estimated cost amount. Agent Insights estimates are reported in US dollars. */
+  currency: "USD";
+}
+
+/** A per-agent Agent Insights monitor that owns configuration, runs, and discovered insights. */
+model AgentInsightMonitor {
+  /** The monitor identifier. */
+  @key("monitor_id")
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  /** The agent this monitor analyzes. There can be only one monitor per agent. */
+  @visibility(Lifecycle.Read)
+  agent_name: string;
+
+  /** Whether scheduled insight generation is armed for the monitor. */
+  @visibility(Lifecycle.Read)
+  enabled: boolean;
+
+  /** Interval between scheduled insight runs, in hours. */
+  @visibility(Lifecycle.Read)
+  @minValue(3)
+  @maxValue(2160)
+  run_interval_hours: float64;
+
+  /** The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'. */
+  @visibility(Lifecycle.Read)
+  model_deployment_name: string;
+
+  /** The next time a scheduled agent insight run will start. Omitted when scheduled generation is disabled. */
+  @visibility(Lifecycle.Read)
+  next_scheduled_run_at?: FoundryTimestamp;
+
+  /** Estimated cost accumulated by Agent Insights for this monitor. */
+  @visibility(Lifecycle.Read)
+  estimated_cost?: AgentInsightEstimatedCost;
+
+  /** Why the system suspended scheduled generation. Null when the monitor is not suspended. */
+  @visibility(Lifecycle.Read)
+  suspension: AgentInsightSuspension | null;
+
+  /** Generated summary. Omitted when unavailable. */
+  @visibility(Lifecycle.Read)
+  agent_summary?: AgentInsightSummary;
+
+  /** Analysis priorities. Omitted when not configured. */
+  @visibility(Lifecycle.Read)
+  priorities?: AgentInsightPrioritiesRead;
+
+  /** The time when this monitor was last updated. */
+  @visibility(Lifecycle.Read)
+  updated_at: FoundryTimestamp;
+}
+
+/** Monitor list item without the summary. */
+model AgentInsightMonitorListItem is OmitProperties<
+  AgentInsightMonitor,
+  "agent_summary"
+>;
+
+alias AgentInsightMonitorCreate = {
+  /** The agent this monitor should analyze. */
+  agent_name: string;
+
+  /** Whether scheduled insight generation should be armed. Defaults to false. */
+  enabled?: boolean = false;
+
+  /** Interval between scheduled insight runs, in hours. Defaults to 6. */
+  @minValue(3)
+  @maxValue(2160)
+  run_interval_hours?: float64 = 6;
+
+  /** The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'. */
+  model_deployment_name: string;
+
+  /** Analysis priorities for the monitor. */
+  priorities?: AgentInsightPriorities;
+};
+
+alias AgentInsightMonitorUpdate = {
+  /** Whether scheduled insight generation is armed for the monitor. */
+  enabled?: boolean;
+
+  /** Interval between scheduled insight runs, in hours. */
+  @minValue(3)
+  @maxValue(2160)
+  run_interval_hours?: float64;
+
+  /** The model deployment to use for analyzing traces. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'. */
+  model_deployment_name?: string;
+
+  /** Replaces all priorities. Omit to preserve them; null clears them. */
+  priorities?: AgentInsightPriorities | null;
+};
+
+/** The trigger that started an agent insight run. */
+union AgentInsightRunTrigger {
+  string,
+
+  /** The run was started on demand by a user or client. */
+  on_demand: "on_demand",
+
+  /** The run was started by scheduled insight generation. */
+  scheduled: "scheduled",
+}
+
+alias AgentInsightRunCreateParameters = {
+  /** Optional finite positive number of hours of trace history to analyze, up to 2,160. Defaults to 168. */
+  @minValueExclusive(0)
+  @maxValue(2160)
+  lookback_hours?: float64 = 168;
+};
+
+/** Inputs recorded for an Agent Insights run. */
+model AgentInsightRunInputs {
+  ...AgentInsightRunCreateParameters;
+}
+
+/** Result statistics produced when an agent insight run succeeds. */
+model AgentInsightRunResult {
+  /** The number of traces in the analyzed time window. */
+  traces_in_window: int32;
+
+  /** The number of traces analyzed by the run. */
+  traces_analyzed: int32;
+
+  /** The number of insights created by the run. */
+  insights_created: int32;
+
+  /** The number of insights updated by the run. */
+  insights_updated: int32;
+
+  /** The number of insights reopened by the run. */
+  insights_reopened: int32;
+
+  /** Token usage for the run's insight-generation analysis. */
+  token_usage: AgentInsightTokenUsage;
+}
+
+/** Token usage for an Agent Insights run. */
+model AgentInsightTokenUsage {
+  /** The number of input tokens used by the run. */
+  input_tokens: int32;
+
+  /** The number of output tokens used by the run. */
+  output_tokens: int32;
+
+  /** The number of input tokens served from cache. */
+  cached_tokens?: int32;
+
+  /** The total number of tokens used by the run. */
+  total_tokens: int32;
+}
+
+/** A long-running run that analyzes one agent's traces and updates that agent's insights. */
+model AgentInsightRun is JobLike<AgentInsightRunResult, AgentInsightRunInputs> {
+  /** The Agent Insights monitor this run belongs to. */
+  @visibility(Lifecycle.Read)
+  monitor_id: string;
+
+  /** The agent whose traces are analyzed by this run. */
+  @visibility(Lifecycle.Read)
+  agent_name: string;
+
+  /** The trigger that started the run. */
+  @visibility(Lifecycle.Read)
+  trigger: AgentInsightRunTrigger;
+
+  /** The time when this run was created. */
+  @visibility(Lifecycle.Read)
+  created_at: FoundryTimestamp;
+
+  /** The time when this run was last updated. */
+  @visibility(Lifecycle.Read)
+  updated_at: FoundryTimestamp;
+
+  /** The start of the trace window analyzed by this run. */
+  @visibility(Lifecycle.Read)
+  window_start: FoundryTimestamp;
+
+  /** The end of the trace window analyzed by this run. */
+  @visibility(Lifecycle.Read)
+  window_end: FoundryTimestamp;
+
+  /** The time when this run started processing. */
+  @visibility(Lifecycle.Read)
+  started_at?: FoundryTimestamp;
+
+  /** The time when this run reached a terminal status. */
+  @visibility(Lifecycle.Read)
+  completed_at?: FoundryTimestamp;
+
+  /** The model deployment used to analyze traces for this run. */
+  @visibility(Lifecycle.Read)
+  model_deployment_name: string;
+}

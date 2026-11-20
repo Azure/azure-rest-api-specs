@@ -32,10 +32,12 @@ model RecoveryServicesProvider
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-model RecoveryServicesProviderAcceptedLroResponse<FinalResult extends
-  | TypeSpec.Reflection.Model
-  | unknown
-  | void = RecoveryServicesProvider>
+model RecoveryServicesProviderAcceptedLroResponse<
+  FinalResult extends
+    | TypeSpec.Reflection.Model
+    | unknown
+    | void = RecoveryServicesProvider
+>
   is ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = FinalResult> &
     Azure.Core.Foundations.RetryAfterHeader>;
 

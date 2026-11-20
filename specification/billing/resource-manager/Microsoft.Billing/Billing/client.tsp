@@ -798,12 +798,6 @@ using Microsoft.Billing;
   "csharp"
 );
 
-// Workaround for MPG emitter no-matching-items-property error on
-// BillingAccounts.savingsPlansListByBillingAccount — the C# emitter cannot resolve inherited
-// value/nextLink properties through `extends SavingsPlanModelList is Page<SavingsPlanModel>`.
-// Tracking: https://github.com/Azure/azure-sdk-for-net/issues/59567. Remove once fixed.
-@@scope(BillingAccounts.savingsPlansListByBillingAccount, "!csharp");
-
 // Restore public setters / parameterless ctors on input models that the new spec marks output-only.
 // MPG generator drops setters and ctors when usage is read-only; @@usage(Usage.input, "csharp")
 // restores both — required for GA 1.2.2 input + Transfer detail resources whose ctors were public.

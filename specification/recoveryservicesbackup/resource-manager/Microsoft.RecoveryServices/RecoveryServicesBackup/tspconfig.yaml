@@ -29,6 +29,9 @@ options:
     service-name: "Recovery Services Backup"
     flavor: azure
     use-object-for-unknown: true
+    remove-inner:
+      - InstantItemRecoveryTarget
+      - OperationStatusProvisionIlrExtendedInfo
   "@azure-tools/typespec-ts":
     compatibility-lro: true
     emitter-output-dir: "{output-dir}/{service-dir}/arm-recoveryservicesbackup"
@@ -39,7 +42,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/recoveryservices"
     emitter-output-dir: "{output-dir}/{service-dir}/armrecoveryservicesbackup"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armrecoveryservicesbackup/v5"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armrecoveryservicesbackup"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

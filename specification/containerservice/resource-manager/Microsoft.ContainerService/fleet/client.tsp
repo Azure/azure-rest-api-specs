@@ -105,6 +105,7 @@ using TypeSpec.Http;
 @@clientName(FleetMemberStatus, "ContainerServiceFleetMemberStatus", "csharp");
 @@clientName(FleetStatus, "ContainerServiceFleetStatus", "csharp");
 @@clientName(Timing, "ContainerServiceFleetGateTiming", "csharp");
+@@clientName(DayOfWeek, "ContainerServiceFleetDayOfWeek", "csharp");
 @@clientName(AgentProfile, "ContainerServiceFleetAgentProfile", "csharp");
 @@clientName(
   APIServerAccessProfile,
@@ -182,11 +183,31 @@ using TypeSpec.Http;
   "ContainerServiceFleetPropagationPolicy",
   "csharp"
 );
+@@clientName(
+  PropagationPolicyPatch,
+  "ContainerServiceFleetPropagationPolicyPatch",
+  "csharp"
+);
 @@clientName(PropagationType, "ContainerServiceFleetPropagationType", "csharp");
 @@clientName(ResourceQuota, "ContainerServiceFleetResourceQuota", "csharp");
 @@clientName(
   Placement.V1.PlacementPolicy,
   "ContainerServiceFleetPlacementPolicy",
+  "csharp"
+);
+@@clientName(
+  Placement.V1.PlacementPolicyPatch,
+  "ContainerServiceFleetPlacementPolicyPatch",
+  "csharp"
+);
+@@clientName(
+  Placement.V1.RolloutStrategy,
+  "ContainerServiceFleetRolloutStrategy",
+  "csharp"
+);
+@@clientName(
+  Placement.V1.RolloutStrategyType,
+  "ContainerServiceFleetRolloutStrategyType",
   "csharp"
 );
 @@clientName(
@@ -205,6 +226,11 @@ using TypeSpec.Http;
   "csharp"
 );
 @@clientName(
+  Placement.V1.ClusterSelectorTermPatch,
+  "ContainerServiceFleetClusterSelectorTermPatch",
+  "csharp"
+);
+@@clientName(
   Placement.V1.PropertySelectorOperator,
   "ContainerServiceFleetPropertySelectorOperator",
   "csharp"
@@ -212,6 +238,11 @@ using TypeSpec.Http;
 @@clientName(
   Placement.V1.PropertySelectorRequirement,
   "ContainerServiceFleetPropertySelectorRequirement",
+  "csharp"
+);
+@@clientName(
+  Placement.V1.PropertySelectorRequirementPatch,
+  "ContainerServiceFleetPropertySelectorRequirementPatch",
   "csharp"
 );
 @@clientName(
@@ -231,6 +262,11 @@ using TypeSpec.Http;
   "csharp"
 );
 @@clientName(
+  Meta.V1.LabelSelectorPatch,
+  "ContainerServiceFleetLabelSelectorPatch",
+  "csharp"
+);
+@@clientName(
   Meta.V1.LabelSelectorOperator,
   "ContainerServiceFleetLabelSelectorOperator",
   "csharp"
@@ -240,6 +276,22 @@ using TypeSpec.Http;
   "ContainerServiceFleetLabelSelectorRequirement",
   "csharp"
 );
+@@clientName(
+  Meta.V1.LabelSelectorRequirementPatch,
+  "ContainerServiceFleetLabelSelectorRequirementPatch",
+  "csharp"
+);
+@@clientName(
+  ScheduledStartConfiguration,
+  "ContainerServiceFleetScheduledStartConfiguration",
+  "csharp"
+);
+@@clientName(
+  ScheduledStartProperties,
+  "ContainerServiceFleetScheduledStartProperties",
+  "csharp"
+);
+@@clientName(AllowedSubject, "IdentityBindingAllowedSubject", "csharp");
 
 @@alternateType(
   Azure.ResourceManager.EntityTagProperty.eTag,
@@ -251,6 +303,9 @@ using TypeSpec.Http;
   armResourceIdentifier,
   "csharp"
 );
+@@alternateType(IdentityBindingManagedIdentityProfile.objectId, uuid, "csharp");
+@@alternateType(IdentityBindingManagedIdentityProfile.clientId, uuid, "csharp");
+@@alternateType(IdentityBindingManagedIdentityProfile.tenantId, uuid, "csharp");
 @@usage(Gate, Usage.input, "csharp");
 @@usage(UpdateRunGateTargetProperties, Usage.input, "csharp");
 @@usage(GateTarget, Usage.input, "csharp");
@@ -286,3 +341,15 @@ using TypeSpec.Http;
   "isLongTermSupport",
   "csharp"
 );
+
+@@clientName(
+  IdentityBindingOidcIssuerProfile,
+  "IdentityBindingOIDCIssuerProfile",
+  "go"
+);
+@@clientName(
+  IdentityBindingOidcIssuerProfile.oidcIssuerUrl,
+  "OIDCIssuerURL",
+  "go"
+);
+@@clientName(IdentityBindingProperties.oidcIssuer, "OIDCIssuer", "go");

@@ -4,7 +4,6 @@ import "@typespec/versioning";
 import "./routes.tsp";
 import "./client.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 

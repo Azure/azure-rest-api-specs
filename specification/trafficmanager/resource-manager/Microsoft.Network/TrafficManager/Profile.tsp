@@ -61,6 +61,7 @@ interface Profiles {
   /**
    * Deletes a Traffic Manager profile.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   delete is ProfileOps.DeleteSync<
     Profile,
     Response = ArmResponse<DeleteOperationResult> | ArmDeletedNoContentResponse

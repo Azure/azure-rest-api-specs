@@ -43,6 +43,7 @@ model FunctionTool extends Tool {
  * literal options like 'auto' as well as structured references to defined tools.
  */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" // This is how it's represented OpeAI Style.
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 union ToolChoice {
   ToolChoiceLiteral,
   ToolChoiceObject,
@@ -96,7 +97,7 @@ model MCPServer extends Tool {
   headers?: Record<string>;
   allowed_tools?: string[];
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval is represented this way in OpenAI style."
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline union to avoid breaking changes."
   require_approval?: MCPApprovalType | Record<string[]>;
 }
 

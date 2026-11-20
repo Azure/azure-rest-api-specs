@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01",
+    "bastionHostName": "bastionhosttenant",
+    "parameters": {
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/bastionidentity": {}
+        }
+      },
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "bastionhosttenant",
+        "type": "Microsoft.Network/bastionHosts",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/bastionHosts/bastionhosttenant",
+        "location": "West US",
+        "properties": {
+          "disableCopyPaste": false,
+          "dnsName": "bst-9d89d361-100e-4c01-b92d-466548c476dc.bastion.azure.com",
+          "enableIpConnect": false,
+          "enableKerberos": false,
+          "enablePrivateOnlyBastion": false,
+          "enableSessionRecording": false,
+          "enableShareableLink": false,
+          "enableTunneling": false,
+          "ipConfigurations": [
+            {
+              "name": "bastionHostIpConfiguration",
+              "type": "Microsoft.Network/bastionHosts/bastionHostIpConfigurations",
+              "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/bastionHosts/bastionhosttenant/bastionHostIpConfigurations/bastionHostIpConfiguration",
+              "properties": {
+                "privateIPAllocationMethod": "Dynamic",
+                "provisioningState": "Succeeded",
+                "publicIPAddress": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/pipName"
+                },
+                "subnet": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet2/subnets/BastionHostSubnet"
+                }
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "scaleUnits": 2
+        },
+        "sku": {
+          "name": "Standard"
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "identity": {
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/bastionidentity": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status"
+      }
+    }
+  },
+  "operationId": "BastionHosts_Update",
+  "title": "Patch Bastion Host"
+}

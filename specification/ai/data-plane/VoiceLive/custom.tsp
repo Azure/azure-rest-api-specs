@@ -80,7 +80,7 @@ model RequestSession {
 
   /** Maximum number of tokens to generate in the response. Default is unlimited. */
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "This is how it's represented OpenAI Style."
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline union to avoid breaking changes."
   max_response_output_tokens?: int32 | "inf";
 
   /**
@@ -611,6 +611,7 @@ model AzureRealtimeNativeVoice {
 
 /** Union of all supported voice configurations. */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" // This is how the service implemented the model...
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 union Voice {
   OAIVoice,
   OpenAIVoice,
@@ -676,7 +677,7 @@ model AudioInputTranscriptionOptions {
    * 'whisper-1', 'gpt-4o-transcribe', 'gpt-4o-mini-transcribe',
    * 'mai-transcribe-1', 'azure-speech'.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline union to avoid breaking changes."
   @typeChangedFrom(
     Versions.v2026_04_10,
 
@@ -726,7 +727,7 @@ union Modality {
 @discriminator("model")
 @usage(RequestUsage)
 model EouDetection {
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline union to avoid breaking changes."
   @typeChangedFrom(
     Versions.v2026_06_01_preview,
 
@@ -992,7 +993,7 @@ model AzureSemanticVadMultilingual extends TurnDetection {
 @usage(RequestUsage)
 model AudioNoiseReduction {
   /** The type of noise reduction model. */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Keeping inline union to avoid breaking changes."
   type: "azure_deep_noise_suppression" | "near_field" | "far_field" | string;
 }
 
@@ -1218,6 +1219,7 @@ union InterimResponseTrigger {
 
 /** Union of interim response configuration types. */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" // Discriminated union for interim response config types.
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 @added(Versions.v2026_01_01_preview)
 union InterimResponseConfig {
   StaticInterimResponseConfig,

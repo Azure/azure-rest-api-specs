@@ -4,16 +4,13 @@ using Azure.Core.Experimental;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 
-#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-namespace Azure.AI.Projects {
-  //
-  // Tool inputs -- definitions used before model evaluation to configure agents, threads, and messages
-  //
+namespace Azure.AI.ProjectsInternal {
+  using Azure.AI.Projects;
 
-  // Preview tools (must end with "_preview"):
   union _PreviewAgentToolType {
     a2a_preview: "a2a_preview",
     bing_custom_search_preview: "bing_custom_search_preview",
+    #deprecated "This legacy Browser Automation tool is deprecated and is no longer available. Please use the latest Browser Automation tool instead. See https://aka.ms/bat/docs."
     browser_automation_preview: "browser_automation_preview",
     fabric_dataagent_preview: "fabric_dataagent_preview",
     sharepoint_grounding_preview: "sharepoint_grounding_preview",
@@ -21,16 +18,16 @@ namespace Azure.AI.Projects {
     work_iq_preview: "work_iq_preview",
     fabric_iq_preview: "fabric_iq_preview",
     toolbox_search_preview: "toolbox_search_preview",
-
-    @removed(Versions.v1)
     web_iq_preview: "web_iq_preview",
+    github_copilot_toolset_preview: "github_copilot_toolset_preview",
   }
 
-  // General availability tools:
   union _AgentToolType {
+    a2a: "a2a",
     azure_ai_search: "azure_ai_search",
     azure_function: "azure_function",
     bing_grounding: "bing_grounding",
+    browser_automation: "browser_automation",
     capture_structured_outputs: "capture_structured_outputs",
     openapi: "openapi",
 
@@ -38,14 +35,93 @@ namespace Azure.AI.Projects {
     memory_search: "memory_search",
   }
 
-  const PreviewTool = #{ required_previews: #["preview_tool"] };
-
-  @@copyVariants(OpenAI.ToolType, Azure.AI.Projects._PreviewAgentToolType);
-  @@copyVariants(OpenAI.ToolType, Azure.AI.Projects._AgentToolType);
+  union _MicrosoftCopilotAgentToolType {
+    microsoft_copilot_toolset_preview: "microsoft_copilot_toolset_preview",
+  }
 
   union _AgentIncludable {
     "memory_search_call.results",
   }
+
+  /**
+   * A Index resource.
+   */
+  model IndexResource {
+    /**
+     * An index connection ID in an IndexResource attached to this agent.
+     */
+    project_connection_id?: string;
+
+    /**
+     * The name of an index in an IndexResource attached to this agent.
+     */
+    index_name?: string;
+  }
+
+  /**
+   * A set of project connection resources currently used by either the `bing_grounding`, `fabric_dataagent`, or `sharepoint_grounding` tools.
+   */
+  model ToolProjectConnectionList {
+    /**
+     * The project connections attached to this tool. There can be a maximum of 1 connection
+     * resource attached to the tool.
+     */
+    @maxItems(1)
+    project_connections?: ToolProjectConnection[];
+  }
+
+  /** Common configuration for an agent implementing the A2A protocol. */
+  model A2AToolBase {
+    /**
+     * Base URL of the agent.
+     */
+    base_url?: url;
+
+    /**
+     * The path to the agent card relative to the `base_url`.
+     * If not provided, defaults to  `/.well-known/agent-card.json`
+     */
+    agent_card_path?: string;
+
+    /**
+     * The connection ID in the project for the A2A server.
+     * The connection stores authentication and other connection details needed to connect to the A2A server.
+     */
+    project_connection_id?: string;
+
+    /**
+     * When `true`, Foundry sends its credentials when fetching the remote
+     * agent's Agent Card. The service defaults to `false` if a value is not
+     * specified by the caller (anonymous fetch).
+     */
+    send_credentials_for_agent_card?: boolean = false;
+  }
+}
+
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+namespace Azure.AI.Projects {
+  //
+  // Tool inputs -- definitions used before model evaluation to configure agents, threads, and messages
+  //
+
+  // Preview tools (must end with "_preview"):
+  alias _PreviewAgentToolType = Azure.AI.ProjectsInternal._PreviewAgentToolType;
+
+  // General availability tools:
+  alias _AgentToolType = Azure.AI.ProjectsInternal._AgentToolType;
+
+  alias _MicrosoftCopilotAgentToolType = Azure.AI.ProjectsInternal._MicrosoftCopilotAgentToolType;
+
+  const PreviewTool = #{ required_previews: #["preview_tool"] };
+
+  @@copyVariants(OpenAI.ToolType, Azure.AI.Projects._PreviewAgentToolType);
+  @@copyVariants(OpenAI.ToolType, Azure.AI.Projects._AgentToolType);
+  @@copyVariants(
+    OpenAI.ToolType,
+    Azure.AI.Projects._MicrosoftCopilotAgentToolType
+  );
+
+  alias _AgentIncludable = Azure.AI.ProjectsInternal._AgentIncludable;
 
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyVariants(OpenAI.IncludeEnum, Azure.AI.Projects._AgentIncludable);
@@ -77,6 +153,134 @@ namespace Azure.AI.Projects {
     #deprecated "This property is deprecated and will be removed in a future version."
     tool_configs?: Record<ToolConfig>;
   };
+
+  @doc("A customer-configurable Microsoft Copilot built-in tool.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[
+        AgentDefinitionOptInKeys.microsoft_copilot_v1_preview
+      ],
+    }
+  )
+  union MicrosoftCopilotBuiltInTool {
+    @doc("Read and search files in the harness workspace.")
+    filesystem_read: "filesystem_read",
+
+    @doc("Create and modify files in the harness workspace.")
+    filesystem_write: "filesystem_write",
+
+    @doc("Execute operating-system commands.")
+    shell: "shell",
+
+    @doc("Fetch content and search external network resources.")
+    web: "web",
+
+    @doc("Delegate work to additional agents.")
+    subagents: "subagents",
+  }
+
+  @doc("The default enablement setting for Microsoft Copilot built-in tools.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[
+        AgentDefinitionOptInKeys.microsoft_copilot_v1_preview
+      ],
+    }
+  )
+  model MicrosoftCopilotToolsetDefaultConfig {
+    @doc("Whether built-in tools are enabled by default. Defaults to true.")
+    enabled?: boolean = true;
+  }
+
+  @doc("An enablement override for a Microsoft Copilot built-in tool.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[
+        AgentDefinitionOptInKeys.microsoft_copilot_v1_preview
+      ],
+    }
+  )
+  model MicrosoftCopilotToolsetConfig {
+    @doc("The built-in tool to configure.")
+    name: MicrosoftCopilotBuiltInTool;
+
+    @doc("Whether the built-in tool is enabled. If omitted, the toolset default applies.")
+    enabled?: boolean;
+  }
+
+  @doc("Configuration overrides for Microsoft Copilot built-in tools.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[
+        AgentDefinitionOptInKeys.microsoft_copilot_v1_preview
+      ],
+    }
+  )
+  model MicrosoftCopilotToolsetPreview extends OpenAI.Tool {
+    @doc("The type of the toolset. Always `microsoft_copilot_toolset_preview`.")
+    type: "microsoft_copilot_toolset_preview";
+
+    @doc("The default configuration for built-in tools. If omitted, built-in tools are enabled by default.")
+    default_config?: MicrosoftCopilotToolsetDefaultConfig;
+
+    @doc("Per-tool configuration overrides. Duplicate built-in tool names are not allowed.")
+    configs?: MicrosoftCopilotToolsetConfig[];
+  }
+
+  @doc("The legacy GitHub Copilot built-in tool names retained for compatibility. Use `MicrosoftCopilotBuiltInTool` for new integrations.")
+  union GitHubCopilotBuiltInTool {
+    @doc("Read and search files in the harness workspace.")
+    filesystem_read: "filesystem_read",
+
+    @doc("Create and modify files in the harness workspace.")
+    filesystem_write: "filesystem_write",
+
+    @doc("Execute operating-system commands.")
+    shell: "shell",
+
+    @doc("Fetch content and search external network resources.")
+    web: "web",
+
+    @doc("Delegate work to additional agents.")
+    subagents: "subagents",
+  }
+
+  @doc("The legacy default enablement setting retained for compatibility. Use `MicrosoftCopilotToolsetDefaultConfig` for new integrations.")
+  model GitHubCopilotToolsetDefaultConfig {
+    @doc("Whether built-in tools are enabled by default. Defaults to true.")
+    enabled?: boolean = true;
+  }
+
+  @doc("The legacy per-tool enablement override retained for compatibility. Use `MicrosoftCopilotToolsetConfig` for new integrations.")
+  model GitHubCopilotToolsetConfig {
+    @doc("The built-in tool to configure.")
+    name: GitHubCopilotBuiltInTool;
+
+    @doc("Whether the built-in tool is enabled. If omitted, the toolset default applies.")
+    enabled?: boolean;
+  }
+
+  @doc("The legacy GitHub Copilot toolset retained for compatibility. Use `MicrosoftCopilotToolsetPreview` for new integrations.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview],
+    }
+  )
+  model GitHubCopilotToolsetPreview extends OpenAI.Tool {
+    @doc("The legacy type of the toolset. Always `github_copilot_toolset_preview`; use `microsoft_copilot_toolset_preview` for new integrations.")
+    type: "github_copilot_toolset_preview";
+
+    @doc("The default configuration for built-in tools. If omitted, built-in tools are enabled by default.")
+    default_config?: GitHubCopilotToolsetDefaultConfig;
+
+    @doc("Per-tool configuration overrides. Duplicate built-in tool names are not allowed.")
+    configs?: GitHubCopilotToolsetConfig[];
+  }
 
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyProperties(
@@ -272,20 +476,7 @@ namespace Azure.AI.Projects {
     indexes: AISearchIndexResource[];
   }
 
-  /**
-   * A Index resource.
-   */
-  model IndexResource {
-    /**
-     * An index connection ID in an IndexResource attached to this agent.
-     */
-    project_connection_id?: string;
-
-    /**
-     * The name of an index in an IndexResource attached to this agent.
-     */
-    index_name?: string;
-  }
+  alias IndexResource = Azure.AI.ProjectsInternal.IndexResource;
 
   /**
    * A AI Search Index resource.
@@ -369,7 +560,11 @@ namespace Azure.AI.Projects {
 
   /**
    * The input definition information for a Browser Automation Tool, as used to configure an Agent.
+   * BrowserAutomationPreviewTool is deprecated.
+   * Please use BrowserAutomationTool instead.
+   * See https://aka.ms/bat/docs for more information on Browser automation tool.
    */
+  #deprecated "This legacy Browser Automation tool is deprecated and is no longer available. Please use the latest Browser Automation tool instead. See https://aka.ms/bat/docs."
   @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationPreviewTool extends OpenAI.Tool {
     /**
@@ -384,9 +579,23 @@ namespace Azure.AI.Projects {
   }
 
   /**
+   * The input definition information for a Browser Automation Tool, as used to configure an Agent.
+   */
+  model BrowserAutomationTool extends OpenAI.Tool {
+    /**
+     * The object type, which is always 'browser_automation'.
+     */
+    type: "browser_automation";
+
+    /**
+     * The Browser Automation Tool parameters.
+     */
+    browser_automation: BrowserAutomationToolParameters;
+  }
+
+  /**
    * Definition of input parameters for the Browser Automation Tool.
    */
-  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolParameters {
     /**
      * The project connection parameters associated with the Browser Automation Tool.
@@ -397,7 +606,6 @@ namespace Azure.AI.Projects {
   /**
    * Definition of input parameters for the connection used by the Browser Automation Tool.
    */
-  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolConnectionParameters {
     /**
      * The ID of the project connection to your Azure Playwright resource.
@@ -429,6 +637,7 @@ namespace Azure.AI.Projects {
     /**
      * The definition of azure function and its parameters.
      */
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
     function: {
       /**
        * The name of the function to be called.
@@ -604,17 +813,7 @@ namespace Azure.AI.Projects {
     project_connection_id: string;
   }
 
-  /**
-   * A set of project connection resources currently used by either the `bing_grounding`, `fabric_dataagent`, or `sharepoint_grounding` tools.
-   */
-  model ToolProjectConnectionList {
-    /**
-     * The project connections attached to this tool. There can be a maximum of 1 connection
-     * resource attached to the tool.
-     */
-    @maxItems(1)
-    project_connections?: ToolProjectConnection[];
-  }
+  alias ToolProjectConnectionList = Azure.AI.ProjectsInternal.ToolProjectConnectionList;
 
   /**
    * Search configuration for Bing Grounding
@@ -780,6 +979,16 @@ namespace Azure.AI.Projects {
     outputs: StructuredOutputDefinition;
   }
 
+  /** Supported A2A protocol versions. */
+  union A2AProtocolVersion {
+    string,
+
+    /** A2A protocol version 1.0. */
+    v1_0: "1.0",
+  }
+
+  alias A2AToolBase = Azure.AI.ProjectsInternal.A2AToolBase;
+
   /**
    * An agent implementing the A2A protocol.
    */
@@ -790,29 +999,24 @@ namespace Azure.AI.Projects {
      */
     type: "a2a_preview";
 
+    ...A2AToolBase;
+  }
+
+  /**
+   * An agent implementing the A2A protocol.
+   */
+  model A2ATool extends OpenAI.Tool {
     /**
-     * Base URL of the agent.
+     * The type of the tool. Always `"a2a"`.
      */
-    base_url?: url;
+    type: "a2a";
+
+    ...A2AToolBase;
 
     /**
-     * The path to the agent card relative to the `base_url`.
-     * If not provided, defaults to  `/.well-known/agent-card.json`
+     * The A2A protocol version supported by the agent.
      */
-    agent_card_path?: string;
-
-    /**
-     * The connection ID in the project for the A2A server.
-     * The connection stores authentication and other connection details needed to connect to the A2A server.
-     */
-    project_connection_id?: string;
-
-    /**
-     * When `true`, Foundry sends its credentials when fetching the remote
-     * agent's Agent Card. The service defaults to `false` if a value is not
-     * specified by the caller (anonymous fetch).
-     */
-    send_credentials_for_agent_card?: boolean = false;
+    a2a_version: A2AProtocolVersion;
   }
 
   /**
@@ -860,14 +1064,13 @@ namespace Azure.AI.Projects {
      * (Optional) Whether the agent requires approval before executing actions. Default is always.
      */
     #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval uses OpenAI union type."
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching OpenAI MCP tool pattern."
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
     require_approval?: OpenAI.MCPToolRequireApproval | string | null = "always";
   }
 
   /**
    * A WebIQ server-side tool.
    */
-  @removed(Versions.v1)
   @extension("x-ms-foundry-meta", PreviewTool)
   model WebIQPreviewTool extends OpenAI.Tool {
     /**
@@ -881,20 +1084,15 @@ namespace Azure.AI.Projects {
     project_connection_id: string;
 
     /**
-     * The label of the WebIQ MCP server to connect to.
+     * The label of the WebIQ MCP server to connect to. When omitted, the service defaults to connection name extracted from project_connection_id.
      */
     server_label?: string;
 
     /**
-     * The URL of the WebIQ MCP server. If not provided, the URL from the project connection will be used.
-     */
-    server_url?: url;
-
-    /**
-     * Whether the agent requires approval before executing actions. Default is always.
+     * Whether the agent requires approval before executing actions. When omitted, the service defaults to "always".
      */
     #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval uses OpenAI union type."
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching OpenAI MCP tool pattern."
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
     require_approval?: OpenAI.MCPToolRequireApproval | string | null = "always";
   }
 
@@ -980,7 +1178,8 @@ namespace Azure.AI.Projects {
   // Tool Call Output Content Type
   // ==============================================================================
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Output can be multiple types"
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Output can be multiple types"
+  #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
   @doc("The output content from a tool call, which can be a dictionary, string, or array.")
   union ToolCallOutputContent {
     @doc("A dictionary/object output.")
@@ -1168,7 +1367,6 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   @doc("A browser automation tool call.")
-  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolCall extends OpenAI.OutputItem {
     type: "browser_automation_preview_call";
 
@@ -1183,7 +1381,6 @@ namespace Azure.AI.Projects {
   }
 
   @doc("The output of a browser automation tool call.")
-  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolCallOutput extends OpenAI.OutputItem {
     type: "browser_automation_preview_call_output";
 
@@ -1236,7 +1433,6 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   @doc("An Azure Function tool call.")
-  @extension("x-ms-foundry-meta", PreviewTool)
   model AzureFunctionToolCall extends OpenAI.OutputItem {
     type: "azure_function_call";
 

@@ -27,7 +27,7 @@ These are the global settings for the ManagedOps.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-07-28-preview
+tag: package-2026-01-06-preview
 ```
 
 ### Tag: package-2025-07-28-preview
@@ -37,6 +37,15 @@ These settings apply only when `--tag=package-2025-07-28-preview` is specified o
 ```yaml $(tag) == 'package-2025-07-28-preview'
 input-file:
   - Microsoft.ManagedOps/preview/2025-07-28-preview/managedops.json
+```
+
+### Tag: package-2026-01-06-preview
+
+These settings apply only when `--tag=package-2026-01-06-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-01-06-preview'
+input-file:
+  - Microsoft.ManagedOps/preview/2026-01-06-preview/managedops.json
 ```
 
 ---

@@ -29,15 +29,19 @@ using Microsoft.Resources;
 );
 @@clientName(SpecificResources.update::parameters.properties, "parameters");
 
-@@clientLocation(TagsResources.getAtScope, "Tags", "!javascript");
-@@clientLocation(TagsResources.createOrUpdateAtScope, "Tags", "!javascript");
+@@clientLocation(TagsResources.getAtScope, "Tags", "!javascript,!java");
+@@clientLocation(
+  TagsResources.createOrUpdateAtScope,
+  "Tags",
+  "!javascript,!java"
+);
 @@clientName(
   TagsResources.createOrUpdateAtScope::parameters.resource,
   "parameters"
 );
-@@clientLocation(TagsResources.updateAtScope, "Tags", "!javascript");
+@@clientLocation(TagsResources.updateAtScope, "Tags", "!javascript,!java");
 @@clientName(TagsResources.updateAtScope::parameters.properties, "parameters");
-@@clientLocation(TagsResources.deleteAtScope, "Tags", "!javascript");
+@@clientLocation(TagsResources.deleteAtScope, "Tags", "!javascript,!java");
 
 @@clientLocation(ProvidersOperationGroup.listAtTenantScope, "Providers");
 @@clientLocation(ProvidersOperationGroup.unregister, "Providers");
@@ -58,11 +62,19 @@ using Microsoft.Resources;
 
 @@clientLocation(ResourcesOperationGroup.list, "Resources");
 
-@@clientLocation(TagsOperationGroup.deleteValue, "Tags", "!javascript");
-@@clientLocation(TagsOperationGroup.createOrUpdateValue, "Tags", "!javascript");
-@@clientLocation(TagsOperationGroup.createOrUpdate, "Tags", "!javascript");
-@@clientLocation(TagsOperationGroup.delete, "Tags", "!javascript");
-@@clientLocation(TagsOperationGroup.list, "Tags", "!javascript");
+@@clientLocation(TagsOperationGroup.deleteValue, "Tags", "!javascript,!java");
+@@clientLocation(
+  TagsOperationGroup.createOrUpdateValue,
+  "Tags",
+  "!javascript,!java"
+);
+@@clientLocation(
+  TagsOperationGroup.createOrUpdate,
+  "Tags",
+  "!javascript,!java"
+);
+@@clientLocation(TagsOperationGroup.delete, "Tags", "!javascript,!java");
+@@clientLocation(TagsOperationGroup.list, "Tags", "!javascript,!java");
 @@clientLocation(TagsResources.getAtScope, "TagsOperations", "javascript");
 @@clientLocation(
   TagsResources.createOrUpdateAtScope,

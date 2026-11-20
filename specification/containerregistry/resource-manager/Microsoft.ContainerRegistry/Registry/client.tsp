@@ -28,6 +28,7 @@ using Microsoft.ContainerRegistry;
 );
 
 @@usage(Webhook, Usage.input | Usage.output, "java");
+@@usage(TriggerStatus, Usage.input | Usage.output, "java");
 
 @@clientName(
   MyPrivateLinkResource,
@@ -35,16 +36,50 @@ using Microsoft.ContainerRegistry;
   "java,javascript,go,python"
 );
 
-@@clientName(IPRule.value, "$DO_NOT_NORMALIZE$iPAddressOrRange", "javascript");
+@@clientName(IPRule.value, exact("iPAddressOrRange"), "javascript");
+
+@@clientName(
+  AdditionalAuthenticationType.AwsElasticContainerRegistry,
+  "AWSElasticContainerRegistry",
+  "go"
+);
+@@clientName(EcrAuthenticationProperties, "ECRAuthenticationProperties", "go");
+@@clientName(
+  EcrAuthenticationUpdateProperties,
+  "ECRAuthenticationUpdateProperties",
+  "go"
+);
+@@clientName(
+  GarAuthenticationUpdateProperties,
+  "GARAuthenticationUpdateProperties",
+  "go"
+);
 
 // C# configurations for backward compatibility and naming conventions.
 // These settings restore the public API surface of the previous autorest-based SDK to avoid breaking changes.
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning"
+@@clientOption(
+  Registry,
+  "resource-rbac-roles",
+  #{
+    AcrDelete: "c2f4ef07-c644-48eb-af81-4b1b4947fb11",
+    AcrImageSigner: "6cef56e8-d556-48e5-a04f-b8e64114680f",
+    AcrPull: "7f951dda-4ed3-4680-a7ca-43fe172d538d",
+    AcrPush: "8311e382-0749-4cb8-b61a-304f252e45ec",
+    AcrQuarantineReader: "cdda3590-29a3-44f6-95f2-9f980659eb04",
+    AcrQuarantineWriter: "c8d4ff99-41c3-41a8-9f60-21dfdad59608",
+  },
+  "csharp"
+);
 
 // ContainerRegistryResourceTypeExtensible is a custom extensible union wrapping the original enum,
 // allowing the RegistryNameCheckRequest.type property to accept both known enum values and arbitrary strings,
 // which matches the behavior of the previous SDK where the type was represented as a plain string.
 namespace Microsoft.ContainerRegistry {
   /** Extensible union for ContainerRegistryResourceType to accept both known enum values and arbitrary strings. */
+  #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing SDK contract; preserve the existing extensible union representation."
   union ContainerRegistryResourceTypeExtensible {
     ContainerRegistryResourceType,
     string,
@@ -92,6 +127,17 @@ namespace Microsoft.ContainerRegistry {
 @@alternateType(
   CredentialSetUpdateParameters.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+// OptionalProperties propagates these UUID mappings to the partial-update model.
+@@alternateType(
+  EntraFederatedIdentityCredentialAuthenticationProperties.federatedApplicationClientId,
+  uuid,
+  "csharp"
+);
+@@alternateType(
+  EntraFederatedIdentityCredentialAuthenticationProperties.sourceTenantId,
+  uuid,
   "csharp"
 );
 @@alternateType(EventContent.id, uuid, "csharp");
@@ -179,6 +225,7 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(ArchiveVersion, "ContainerRegistryArchiveVersion", "csharp");
 @@clientName(AuditLogStatus, "ConnectedRegistryAuditLogStatus", "csharp");
 @@clientName(AuthCredential, "ContainerRegistryAuthCredential", "csharp");
+@@clientName(AuthType, "ContainerRegistryAuthType", "csharp");
 @@clientName(
   AzureADAuthenticationAsArmPolicyStatus,
   "AadAuthenticationAsArmPolicyStatus",
@@ -268,6 +315,26 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(
   GarAuthenticationProperties,
   "GoogleArtifactRegistryCacheAuthentication",
+  "csharp"
+);
+@@clientName(
+  GarAuthenticationUpdateProperties,
+  "GoogleArtifactRegistryCacheAuthenticationUpdateProperties",
+  "csharp"
+);
+@@clientName(
+  EcrAuthenticationProperties,
+  "AwsElasticContainerRegistryCacheAuthentication",
+  "csharp"
+);
+@@clientName(
+  EcrAuthenticationUpdateProperties,
+  "AwsElasticContainerRegistryCacheAuthenticationUpdateProperties",
+  "csharp"
+);
+@@clientName(
+  EntraFederatedIdentityCredentialAuthenticationProperties,
+  "EntraFederatedIdentityCredentialCacheAuthentication",
   "csharp"
 );
 @@clientName(

@@ -34,7 +34,79 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2026-05
+tag: package-2026-09
+```
+
+### Tag: package-preview-2026-09
+
+These settings apply only when `--tag=package-preview-2026-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2026-09'
+input-file:
+  - preview/2026-09-02-preview/managedClusters.json
+```
+
+### Tag: package-2026-09
+
+These settings apply only when `--tag=package-2026-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-09'
+input-file:
+  - stable/2026-09-01/managedClusters.json
+```
+
+### Tag: package-preview-2026-08
+
+These settings apply only when `--tag=package-preview-2026-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2026-08'
+input-file:
+  - preview/2026-08-02-preview/managedClusters.json
+```
+
+### Tag: package-2026-08
+
+These settings apply only when `--tag=package-2026-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-08'
+input-file:
+  - stable/2026-08-01/managedClusters.json
+```
+
+### Tag: package-preview-2026-07
+
+These settings apply only when `--tag=package-preview-2026-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2026-07'
+input-file:
+  - preview/2026-07-02-preview/managedClusters.json
+```
+
+### Tag: package-2026-07
+
+These settings apply only when `--tag=package-2026-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-07'
+input-file:
+  - stable/2026-07-01/managedClusters.json
+```
+
+### Tag: package-preview-2026-06
+
+These settings apply only when `--tag=package-preview-2026-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2026-06'
+input-file:
+  - preview/2026-06-02-preview/managedClusters.json
+```
+
+### Tag: package-2026-06
+
+These settings apply only when `--tag=package-2026-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-06'
+input-file:
+  - stable/2026-06-01/managedClusters.json
 ```
 
 ### Tag: package-preview-2026-05
@@ -1496,7 +1568,35 @@ See configuration in [readme.java.md](./readme.java.md)
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: managedClusters.json
+    where: $.definitions.ManagedClusterProperties.properties.enableRBAC
     reason: Name change of "enableRBAC" property would break compatibility
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: managedClusters.json
+    where:
+      - $.definitions.AgentPoolGPUProfile.properties.installGPUDriver
+      - $.definitions.AgentPoolSecurityProfile.properties.enableVTPM
+      - $.definitions.BootstrapKubeletConfig.properties.clusterFQDN
+      - $.definitions.ContainerServiceNetworkProfile.properties.clusterAPIConnectivityProfile
+      - $.definitions.LocalDNSProfile.properties.kubeDNSOverrides
+      - $.definitions.LocalDNSProfile.properties.vnetDNSOverrides
+      - $.definitions.MachineOSProfile.properties.enableFIPS
+      - $.definitions.MachineProperties.properties.localDNSProfile
+      - $.definitions.MachineSecurityProfile.properties.enableVTPM
+      - $.definitions.ManagedClusterAADProfile.properties.enableAzureRBAC
+      - $.definitions.ManagedClusterAPIServerAccessProfile.properties.enablePrivateClusterPublicFQDN
+      - $.definitions.ManagedClusterAPIServerAccessProfile.properties.privateDNSZone
+      - $.definitions.ManagedClusterAgentPoolProfileProperties.properties.enableFIPS
+      - $.definitions.ManagedClusterAgentPoolProfileProperties.properties.localDNSProfile
+      - $.definitions.ManagedClusterIngressProfileWebAppRouting.properties.gatewayAPIImplementations
+      - $.definitions.ManagedClusterProperties.properties.azurePortalFQDN
+      - $.definitions.ManagedClusterProperties.properties.enableFIPS
+      - $.definitions.ManagedClusterProperties.properties.privateFQDN
+      - $.definitions.ManagedClusterStorageProfile.properties.blobCSIDriver
+      - $.definitions.ManagedClusterStorageProfile.properties.diskCSIDriver
+      - $.definitions.ManagedClusterStorageProfile.properties.fileCSIDriver
+      - $.definitions.ManagedClusterWindowsProfile.properties.enableCSIProxy
+      - $.definitions.SnapshotProperties.properties.enableFIPS
+    reason: These published GPU, security, DNS/FQDN, storage CSI, and gateway API acronym spellings must remain wire-compatible. This exception applies only to the enumerated existing properties, not new properties.
   - suppress: TrackedResourcePatchOperation
     from: containerService.json
     reason: ACS service is deprecated so a PATCH endpoint won't be implemented
@@ -1540,4 +1640,12 @@ directive:
     from: managedClusters.json
     where: $.definitions.VmSkusListResult
     reason: The List VM Skus API is a proxy for the Compute Resource Skus API. Defining a GET endpoint that follows the SKU contract (which in turn does not follow the standard ARM resource model) is allowed as previously discussed in an ARM API review email thread. (tilovell@microsoft.com, suhasrao@microsoft.com)
+  - suppress: BodyTopLevelProperties
+    from: managedClusters.json
+    where: $.definitions.OperationStatusResult
+    reason: OperationStatusResult mirrors the ARM common type shape (`error`, `operations`, `resourceId`, plus `status`, `percentComplete`, `startTime`, `endTime`, etc.) and adds the AKS-specific read-only `operationType` and `subOperationType` properties. It is only used as an async-operation-status response body, not as a PUT resource body, so the tracked-resource envelope restriction does not apply.
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: managedClusters.json
+    where: $.definitions.OperationStatusResult
+    reason: OperationStatusResult is an async-operation-status response envelope, not an ARM tracked or proxy resource. It locally declares the ARM common OperationStatusResult fields and adds AKS-specific read-only fields. Therefore, the tracked-resource requirement for read-only name/id/type properties does not apply.
 ```

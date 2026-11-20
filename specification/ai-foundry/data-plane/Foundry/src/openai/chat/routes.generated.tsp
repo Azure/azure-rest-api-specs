@@ -6,16 +6,14 @@
 
 import "../../common/models.tsp";
 import "@typespec/http";
-import "@azure-tools/openai-typespec/models/common";
 import "@typespec/openapi";
-import "@azure-tools/openai-typespec/models/chat";
 using TypeSpec.Http;
 using OpenAI;
 using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 @route("openai/v1/chat")
 @tag("Chat")
-interface Chat {
+interface ChatGenerated {
   /**
    * Lists chat completions matching the request filters.
    */
@@ -60,26 +58,6 @@ interface Chat {
       order?: OpenAI.OrderEnum = OrderEnum.asc;
     },
     OpenAI.ChatCompletionList
-  >;
-
-  /**
-   * Creates a chat completion from the supplied request.
-   */
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("Create a chat completion")
-  @route("completions")
-  @post
-  createChatCompletion is OpenAIOperation<
-    {
-      /** The request body. */
-      @body
-      body: OpenAI.CreateChatCompletionRequest;
-    },
-    OpenAI.CreateChatCompletionResponse
   >;
 
   /**

@@ -110,6 +110,61 @@ async function listRevisionFiles(
     .map(normalizeRepoPath);
 }
 
+interface RenamedPaths {
+  specPathsByHead: Map<string, string>;
+  filePathsByBase: Map<string, string>;
+}
+
+async function findRenamedPaths(
+  repoRoot: string,
+  baseRevision: string,
+  headRevision: string,
+): Promise<RenamedPaths> {
+  const git = simpleGit(repoRoot);
+  const output = await git.raw([
+    "diff",
+    "--name-status",
+    "-z",
+    "--find-renames",
+    baseRevision,
+    headRevision,
+    "--",
+    ":(glob)specification/**/tspconfig.yaml",
+    ":(glob)specification/**/*.tsp",
+  ]);
+  const fields = output.split("\0");
+  const specPathsByHead = new Map<string, string>();
+  const filePathsByBase = new Map<string, string>();
+
+  for (let index = 0; index < fields.length;) {
+    const status = fields[index++];
+    if (!status) {
+      break;
+    }
+
+    if (status.startsWith("R")) {
+      const baseConfigPath = fields[index++];
+      const headConfigPath = fields[index++];
+      if (baseConfigPath && headConfigPath) {
+        const normalizedBasePath = normalizeRepoPath(baseConfigPath);
+        const normalizedHeadPath = normalizeRepoPath(headConfigPath);
+        filePathsByBase.set(normalizedBasePath, normalizedHeadPath);
+        if (isTypeSpecConfigFile(normalizedHeadPath)) {
+          specPathsByHead.set(
+            normalizeRepoPath(path.posix.dirname(normalizedHeadPath)),
+            normalizeRepoPath(path.posix.dirname(normalizedBasePath)),
+          );
+        }
+      }
+      continue;
+    }
+
+    index++;
+  }
+
+  return { specPathsByHead, filePathsByBase };
+}
+
 async function readRevisionFile(
   repoRoot: string,
   revision: string,
@@ -127,13 +182,27 @@ async function readRevisionFile(
   }
 }
 
+function excludeNestedTypeSpecProjects(files: string[], specPath: string): string[] {
+  const nestedSpecPaths = files
+    .filter(isTypeSpecConfigFile)
+    .map((filePath) => normalizeRepoPath(path.posix.dirname(filePath)))
+    .filter((configSpecPath) => configSpecPath !== specPath);
+
+  return files.filter(
+    (filePath) =>
+      !nestedSpecPaths.some((nestedSpecPath) => filePath.startsWith(`${nestedSpecPath}/`)),
+  );
+}
+
 async function collectRevisionSuppressions(
   repoRoot: string,
   revision: string,
-  specPath: string,
+  revisionSpecPath: string,
+  reportSpecPath = revisionSpecPath,
+  renamedFilePaths = new Map<string, string>(),
 ): Promise<SuppressionRecord[]> {
-  const files = await listRevisionFiles(repoRoot, revision, specPath);
-  const relevantFiles = files.filter(
+  const files = await listRevisionFiles(repoRoot, revision, revisionSpecPath);
+  const relevantFiles = excludeNestedTypeSpecProjects(files, revisionSpecPath).filter(
     (filePath) => isTypeSpecSourceFile(filePath) || isTypeSpecConfigFile(filePath),
   );
 
@@ -144,10 +213,17 @@ async function collectRevisionSuppressions(
       continue;
     }
 
+    const renamedFilePath = renamedFilePaths.get(filePath);
+    const reportFilePath =
+      renamedFilePath?.startsWith(`${reportSpecPath}/`) === true
+        ? renamedFilePath
+        : normalizeRepoPath(
+            path.posix.join(reportSpecPath, path.posix.relative(revisionSpecPath, filePath)),
+          );
     if (isTypeSpecConfigFile(filePath)) {
-      suppressions.push(...extractTspconfigSuppressions(specPath, filePath, content));
+      suppressions.push(...extractTspconfigSuppressions(reportSpecPath, reportFilePath, content));
     } else if (isTypeSpecSourceFile(filePath)) {
-      suppressions.push(...extractInlineSuppressions(specPath, filePath, content));
+      suppressions.push(...extractInlineSuppressions(reportSpecPath, reportFilePath, content));
     }
   }
 
@@ -200,7 +276,7 @@ async function collectDirectorySuppressions(
   specPath: string,
 ): Promise<SuppressionRecord[]> {
   const files = await listDirectoryFiles(repoRoot, specPath);
-  const relevantFiles = files.filter(
+  const relevantFiles = excludeNestedTypeSpecProjects(files, specPath).filter(
     (filePath) => isTypeSpecSourceFile(filePath) || isTypeSpecConfigFile(filePath),
   );
 
@@ -283,13 +359,36 @@ export async function analyzeTypeSpecSuppressions(
     ),
   ).sort((left, right) => left.localeCompare(right));
 
+  let renamedPaths: RenamedPaths | undefined;
   const specReports: SpecSuppressionReport[] = [];
 
   for (const specPath of specPaths) {
-    const [baseFiles, headFiles] = await Promise.all([
+    let baseSpecPath = specPath;
+    const [initialBaseFiles, headFiles] = await Promise.all([
       listRevisionFiles(repoRoot, options.baseRevision, specPath),
       listRevisionFiles(repoRoot, options.headRevision, specPath),
     ]);
+    let baseFiles = initialBaseFiles;
+
+    const baseHasConfig = baseFiles.some(
+      (filePath) => path.posix.basename(filePath) === "tspconfig.yaml",
+    );
+    const headHasConfig = headFiles.some(
+      (filePath) => path.posix.basename(filePath) === "tspconfig.yaml",
+    );
+    const revisionFilePathsChanged =
+      baseFiles.some((filePath) => !headFiles.includes(filePath)) ||
+      headFiles.some((filePath) => !baseFiles.includes(filePath));
+    if (revisionFilePathsChanged) {
+      renamedPaths ??= await findRenamedPaths(repoRoot, options.baseRevision, options.headRevision);
+    }
+
+    if (!baseHasConfig && headHasConfig) {
+      baseSpecPath = renamedPaths?.specPathsByHead.get(specPath) ?? specPath;
+      if (baseSpecPath !== specPath) {
+        baseFiles = await listRevisionFiles(repoRoot, options.baseRevision, baseSpecPath);
+      }
+    }
 
     const hasConfig = [...baseFiles, ...headFiles].some(
       (filePath) => path.posix.basename(filePath) === "tspconfig.yaml",
@@ -301,7 +400,13 @@ export async function analyzeTypeSpecSuppressions(
     }
 
     const [baseSuppressions, headSuppressions] = await Promise.all([
-      collectRevisionSuppressions(repoRoot, options.baseRevision, specPath),
+      collectRevisionSuppressions(
+        repoRoot,
+        options.baseRevision,
+        baseSpecPath,
+        specPath,
+        renamedPaths?.filePathsByBase,
+      ),
       collectRevisionSuppressions(repoRoot, options.headRevision, specPath),
     ]);
 

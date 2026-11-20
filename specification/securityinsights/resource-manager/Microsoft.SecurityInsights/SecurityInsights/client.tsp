@@ -70,6 +70,13 @@ using Azure.ClientGenerator.Core.Legacy;
   "python"
 );
 @@clientName(FileHashAlgorithm.SHA256AC, "SHA256_AC", "python");
+
+// Preserve the legacy Python enum member name.
+@@clientName(
+  MicrosoftSecurityProductName.`Office 365 Advanced Threat Protection`,
+  exact("OFFICE365_ADVANCED_THREAT_PROTECTION"),
+  "python"
+);
 @@clientName(
   MstiDataConnectorDataTypesMicrosoftEmergingThreatFeed,
   "MSTIDataConnectorDataTypesMicrosoftEmergingThreatFeed",
@@ -416,7 +423,8 @@ using Azure.ClientGenerator.Core.Legacy;
 );
 @@clientName(ElevationToken, "SecurityInsightsProcessElevationToken", "csharp");
 @@clientName(EnrichmentDomainBody, "EnrichmentDomainContent", "csharp");
-@@clientName(EnrichmentDomainWhois.expires, "ExpireOn", "csharp");
+@@clientName(EnrichmentDomainWhois.expires, "ExpiresOn", "csharp");
+@@clientName(EnrichmentDomainWhois.created, "CreatedOn", "csharp");
 @@clientName(EnrichmentDomainWhois.updated, "UpdatedOn", "csharp");
 @@clientName(EnrichmentIpAddressBody, "EnrichmentIPAddressContent", "csharp");
 @@clientName(Entity, "SecurityInsightsEntity", "csharp");
@@ -465,12 +473,12 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(FileImportProperties.createdTimeUTC, "CreatedOn", "csharp");
 @@clientName(
   FileImportProperties.filesValidUntilTimeUTC,
-  "FilesValidUntil",
+  "FilesExpirationOn",
   "csharp"
 );
 @@clientName(
   FileImportProperties.importValidUntilTimeUTC,
-  "ImportValidUntil",
+  "ImportExpirationOn",
   "csharp"
 );
 @@clientName(FileImport, "SecurityInsightsFileImport", "csharp");
@@ -1143,6 +1151,7 @@ using Azure.ClientGenerator.Core.Legacy;
   "csharp"
 );
 @@clientName(SupportTier, "SecurityInsightsSupportTier", "csharp");
+@@clientName(TeamInformation.teamCreationTimeUtc, "CreatedOn", "csharp");
 @@clientName(TemplateModel, "SecurityInsightsTemplate", "csharp");
 @@clientName(
   TemplateProperties,
@@ -1269,6 +1278,11 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(
   TIDataConnectorProperties.tipLookbackPeriod,
   "TipLookbackOn",
+  "csharp"
+);
+@@clientName(
+  TiTaxiiDataConnectorProperties.taxiiLookbackPeriod,
+  "TaxiiLookbackOn",
   "csharp"
 );
 @@clientName(TIDataConnector, "SecurityInsightsTIDataConnector", "csharp");
@@ -1611,6 +1625,22 @@ using Azure.ClientGenerator.Core.Legacy;
 
 @@alternateType(
   ActionPropertiesBase.logicAppResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  RecommendationProperties.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  WorkspaceManagerMemberProperties.targetWorkspaceResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(JobItem.resourceId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(
+  AssignmentItem.resourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );

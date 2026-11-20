@@ -34,7 +34,7 @@ These are the global settings for the AppService API.
 title: AppServiceManagementClient
 description: AppService Management Client
 openapi-type: arm
-tag: package-2026-07
+tag: package-2026-09
 ```
 
 ### Suppression
@@ -100,6 +100,98 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/MSDeploy"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/MSDeploy/log"]
     reason: MSDeploy is the intentional name matching the existing service API.
+  - suppress: EvenSegmentedPathForPutOperation
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/egress"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/egress"]
+    reason: >-
+      egress is the fixed name of a Microsoft.Web singleton config resource, so the path intentionally ends
+      with the literal resource name rather than a resource-name parameter.
+  - suppress: PathForNestedResource
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/egress"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/egress"]
+    reason: >-
+      egress follows the established Microsoft.Web sites/config singleton path shape and intentionally uses
+      a fixed nested-resource name.
+  - suppress: AvoidAdditionalProperties
+    from: openapi.json
+    where:
+      - $.definitions.EgressConfigProperties.properties.connections
+      - $.definitions.VirtualConnection.properties.settings
+    reason: >-
+      These two dictionaries match the Websites service contract: SiteEgressConfig.Connections maps customer-chosen
+      connection names to typed VirtualConnectionEntry values, and VirtualConnectionEntry.Settings maps app setting
+      or connection string names to typed VirtualConnectionSettingRole values. The generated additionalProperties
+      schemas reference VirtualConnection and VirtualConnectionSetting respectively; neither accepts arbitrary
+      untyped values. The former VirtualConnection.properties property bag has been removed. AvoidAdditionalProperties
+      still reports errors for these typed maps, whose customer-defined keys cannot be replaced with a fixed set of
+      model properties without changing the service contract, so this exception is limited to these two properties.
+  - suppress: AllProxyResourcesShouldHaveDelete
+    from: openapi.json
+    where:
+      - $.definitions.EgressConfig
+    reason: >-
+      The service exposes GET and PUT, but no DELETE route, for the site and deployment-slot egress configuration.
+      PUT replaces the stored connections in full; omitting properties.connections or supplying an empty object
+      for properties.connections deletes the stored egress configuration. GET returns an empty configuration when
+      none is stored. The specification retains this PUT-clear contract rather than advertising an unsupported
+      DELETE operation. This exception is limited to EgressConfig and requires ARM suppression approval.
+  - suppress: PutResponseCodes
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/silos/{siloName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/silos/{siloName}"].put
+    reason: The implemented silo PUT returns 202 with the silo resource body, Location, Azure-AsyncOperation, and Retry-After when create or update work is queued, or 200 when no update is needed. BuildSiteSiloResponse and BuildServerFarmSiloResponse use CsmHelper.CreateAsyncResponse, which returns 202 rather than 201. This exception is limited to these two PUT operations and requires explicit ARM async-contract approval; it does not assert that 202 is the standard ARM PUT contract.
+  - suppress: ProvisioningStateSpecifiedForLROPut
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/silos/{siloName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/silos/{siloName}"].put
+    reason: The implemented silo PUT has no 201 response. Its 202 response carries the silo resource with provisioningState InProgress and polling headers, while the synchronous no-op 200 response carries provisioningState Succeeded. The rule expects provisioningState on a 201 response. This exception is limited to these two PUT operations and requires explicit ARM async-contract approval.
+  - suppress: LroErrorContent
+    from: openapi.json
+    reason: Every Microsoft.Web operation in this specification returns the App Service error schema (DefaultErrorResponse) rather than the common-types ARM ErrorResponse, including the long-running silo PUT and DELETE operations introduced by API version 2026-08-01. A single consistent error contract across the whole App Service surface is required for compatibility with existing clients that parse the service native error format, and changing the already published legacy operations would be a breaking change. This suppression cannot be narrowed with a where clause because LroErrorContent reports on the schema.$ref node inside each error response rather than on the path or the operation, and autorest suppression selectors must match the reported json path exactly, so a path scoped or operation scoped where clause never matches. The only long-running operations added in 2026-08-01 are the PUT and DELETE on sites/{name}/silos/{siloName} and on serverfarms/{name}/silos/{siloName}.
+  - suppress: EvenSegmentedPathForPutOperation
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/silos/{siloName}/virtualNetworkConnections/virtualNetwork"]
+    reason: The silo virtual network connection is a singleton child resource whose resource name is the fixed literal virtualNetwork, so the path already has an even number of segments. The rule reports it only because it treats default as the sole acceptable singleton name literal, which is the known TypeSpec singleton false positive tracked by https://github.com/Azure/azure-openapi-validator/issues/646. The virtualNetwork literal is required for consistency with the existing App Service singleton /sites/{name}/networkConfig/virtualNetwork, which exposes the same SwiftVirtualNetwork resource and is reported by this same rule in every prior API version.
+  - suppress: PathForNestedResource
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/silos/{siloName}/virtualNetworkConnections/virtualNetwork"]
+    reason: The silo virtual network connection is a singleton child resource, so its final segment is the fixed literal virtualNetwork rather than a name template parameter. The rule accepts only a template parameter or the literal default for a nested resource name, so this is a false positive for a singleton. The virtualNetwork literal is required for consistency with the existing App Service singleton /sites/{name}/networkConfig/virtualNetwork, which exposes the same SwiftVirtualNetwork resource and is reported by this same rule in every prior API version.
+  - suppress: XmsPageableForListCalls
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/silos/{siloName}/virtualNetworkIntegrations"].get
+    reason: This GET inspects the virtual network integrations of a single silo and returns one nonpaged object. Its properties array contains the bounded set of subnet integrations and their allocation metadata, while its root metadata identifies the backing plan's virtual network integrations. It is not a resource collection and has no continuation contract, value property, or nextLink. Adding x-ms-pageable would incorrectly advertise pagination for this inspection response.
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/silos/{siloName}/virtualNetworkIntegrations"].get.responses["200"].schema.properties
+    reason: This GET returns a nonpaged inspection result, not a collection of addressable resources. GetSiloVnetIntegrationsAsync delegates to GetVnetIntegrationsFromServerFarm, which returns ResponseMessageEnvelope<List<SwiftVirtualNetwork>> with subnet entries under properties. Replacing the deployed envelope with value and nextLink would change the service contract. This suppression is limited to this operation's response properties.
+  - suppress: LocationMustHaveXmsMutability
+    from: openapi.json
+    where: $.definitions.ServerFarmSiloVnetIntegrationsResult.properties.location
+    reason: This location is read-only metadata in a GET-only inspection result, not the location of a resource that clients create or update. The result has no create operation, so adding create mutability would misrepresent the implemented contract. This exception is limited to the inspection result's location property.
+```
+
+### Tag: package-2026-09
+
+These settings apply only when `--tag=package-2026-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-09'
+input-file:
+  - stable/2026-09-01/openapi.json
+```
+
+### Tag: package-2026-08
+
+These settings apply only when `--tag=package-2026-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-08'
+input-file:
+    - stable/2026-08-01/openapi.json
 ```
 
 ### Tag: package-2026-07
@@ -108,7 +200,7 @@ These settings apply only when `--tag=package-2026-07` is specified on the comma
 
 ```yaml $(tag) == 'package-2026-07'
 input-file:
-    - stable/2026-07-15/openapi.json
+  - stable/2026-07-15/openapi.json
 ```
 
 ### Tag: package-2026-03
@@ -117,7 +209,7 @@ These settings apply only when `--tag=package-2026-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2026-03'
 input-file:
-    - stable/2026-03-15/openapi.json
+  - stable/2026-03-15/openapi.json
 ```
 
 ### Tag: package-2026-03-01-preview
@@ -126,7 +218,7 @@ These settings apply only when `--tag=package-2026-03-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2026-03-01-preview'
 input-file:
-    - preview/2026-03-01-preview/openapi.json
+  - preview/2026-03-01-preview/openapi.json
 ```
 
 ### Tag: package-2025-05
@@ -135,7 +227,7 @@ These settings apply only when `--tag=package-2025-05` is specified on the comma
 
 ```yaml $(tag) == 'package-2025-05'
 input-file:
-    - stable/2025-05-01/openapi.json
+  - stable/2025-05-01/openapi.json
 ```
 
 ### Tag: package-2025-03
@@ -144,7 +236,7 @@ These settings apply only when `--tag=package-2025-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2025-03'
 input-file:
-    - stable/2025-03-01/openapi.json
+  - stable/2025-03-01/openapi.json
 ```
 
 ### Tag: package-2024-11
@@ -153,21 +245,21 @@ These settings apply only when `--tag=package-2024-11` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-11'
 input-file:
-    - stable/2024-11-01/AppServiceEnvironments.json
-    - stable/2024-11-01/AppServicePlans.json
-    - stable/2024-11-01/Certificates.json
-    - stable/2024-11-01/CommonDefinitions.json
-    - stable/2024-11-01/DeletedWebApps.json
-    - stable/2024-11-01/Diagnostics.json
-    - stable/2024-11-01/Global.json
-    - stable/2024-11-01/KubeEnvironments.json
-    - stable/2024-11-01/Provider.json
-    - stable/2024-11-01/Recommendations.json
-    - stable/2024-11-01/ResourceHealthMetadata.json
-    - stable/2024-11-01/ResourceProvider.json
-    - stable/2024-11-01/SiteCertificates.json
-    - stable/2024-11-01/StaticSites.json
-    - stable/2024-11-01/WebApps.json
+  - stable/2024-11-01/AppServiceEnvironments.json
+  - stable/2024-11-01/AppServicePlans.json
+  - stable/2024-11-01/Certificates.json
+  - stable/2024-11-01/CommonDefinitions.json
+  - stable/2024-11-01/DeletedWebApps.json
+  - stable/2024-11-01/Diagnostics.json
+  - stable/2024-11-01/Global.json
+  - stable/2024-11-01/KubeEnvironments.json
+  - stable/2024-11-01/Provider.json
+  - stable/2024-11-01/Recommendations.json
+  - stable/2024-11-01/ResourceHealthMetadata.json
+  - stable/2024-11-01/ResourceProvider.json
+  - stable/2024-11-01/SiteCertificates.json
+  - stable/2024-11-01/StaticSites.json
+  - stable/2024-11-01/WebApps.json
 ```
 
 ### Tag: package-2024-04
@@ -176,20 +268,20 @@ These settings apply only when `--tag=package-2024-04` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-04'
 input-file:
-    - stable/2024-04-01/AppServiceEnvironments.json
-    - stable/2024-04-01/AppServicePlans.json
-    - stable/2024-04-01/Certificates.json
-    - stable/2024-04-01/CommonDefinitions.json
-    - stable/2024-04-01/DeletedWebApps.json
-    - stable/2024-04-01/Diagnostics.json
-    - stable/2024-04-01/Global.json
-    - stable/2024-04-01/KubeEnvironments.json
-    - stable/2024-04-01/Provider.json
-    - stable/2024-04-01/Recommendations.json
-    - stable/2024-04-01/ResourceHealthMetadata.json
-    - stable/2024-04-01/ResourceProvider.json
-    - stable/2024-04-01/StaticSites.json
-    - stable/2024-04-01/WebApps.json
+  - stable/2024-04-01/AppServiceEnvironments.json
+  - stable/2024-04-01/AppServicePlans.json
+  - stable/2024-04-01/Certificates.json
+  - stable/2024-04-01/CommonDefinitions.json
+  - stable/2024-04-01/DeletedWebApps.json
+  - stable/2024-04-01/Diagnostics.json
+  - stable/2024-04-01/Global.json
+  - stable/2024-04-01/KubeEnvironments.json
+  - stable/2024-04-01/Provider.json
+  - stable/2024-04-01/Recommendations.json
+  - stable/2024-04-01/ResourceHealthMetadata.json
+  - stable/2024-04-01/ResourceProvider.json
+  - stable/2024-04-01/StaticSites.json
+  - stable/2024-04-01/WebApps.json
 ```
 
 ### Tag: package-2023-12
@@ -198,22 +290,22 @@ These settings apply only when `--tag=package-2023-12` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-12'
 input-file:
-    - stable/2023-12-01/AppServiceEnvironments.json
-    - stable/2023-12-01/AppServicePlans.json
-    - stable/2023-12-01/Certificates.json
-    - stable/2023-12-01/CommonDefinitions.json
-    - stable/2023-12-01/ContainerApps.json
-    - stable/2023-12-01/ContainerAppsRevisions.json
-    - stable/2023-12-01/DeletedWebApps.json
-    - stable/2023-12-01/Diagnostics.json
-    - stable/2023-12-01/Global.json
-    - stable/2023-12-01/KubeEnvironments.json
-    - stable/2023-12-01/Provider.json
-    - stable/2023-12-01/Recommendations.json
-    - stable/2023-12-01/ResourceHealthMetadata.json
-    - stable/2023-12-01/ResourceProvider.json
-    - stable/2023-12-01/StaticSites.json
-    - stable/2023-12-01/WebApps.json
+  - stable/2023-12-01/AppServiceEnvironments.json
+  - stable/2023-12-01/AppServicePlans.json
+  - stable/2023-12-01/Certificates.json
+  - stable/2023-12-01/CommonDefinitions.json
+  - stable/2023-12-01/ContainerApps.json
+  - stable/2023-12-01/ContainerAppsRevisions.json
+  - stable/2023-12-01/DeletedWebApps.json
+  - stable/2023-12-01/Diagnostics.json
+  - stable/2023-12-01/Global.json
+  - stable/2023-12-01/KubeEnvironments.json
+  - stable/2023-12-01/Provider.json
+  - stable/2023-12-01/Recommendations.json
+  - stable/2023-12-01/ResourceHealthMetadata.json
+  - stable/2023-12-01/ResourceProvider.json
+  - stable/2023-12-01/StaticSites.json
+  - stable/2023-12-01/WebApps.json
 directive:
   # suppress each RPC 3016 error
   - where: $.definitions.FunctionSecrets.properties.trigger_url
@@ -348,22 +440,22 @@ These settings apply only when `--tag=package-2023-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-01'
 input-file:
-    - stable/2023-01-01/AppServiceEnvironments.json
-    - stable/2023-01-01/AppServicePlans.json
-    - stable/2023-01-01/Certificates.json
-    - stable/2023-01-01/CommonDefinitions.json
-    - stable/2023-01-01/ContainerApps.json
-    - stable/2023-01-01/ContainerAppsRevisions.json
-    - stable/2023-01-01/DeletedWebApps.json
-    - stable/2023-01-01/Diagnostics.json
-    - stable/2023-01-01/Global.json
-    - stable/2023-01-01/KubeEnvironments.json
-    - stable/2023-01-01/Provider.json
-    - stable/2023-01-01/Recommendations.json
-    - stable/2023-01-01/ResourceHealthMetadata.json
-    - stable/2023-01-01/ResourceProvider.json
-    - stable/2023-01-01/StaticSites.json
-    - stable/2023-01-01/WebApps.json
+  - stable/2023-01-01/AppServiceEnvironments.json
+  - stable/2023-01-01/AppServicePlans.json
+  - stable/2023-01-01/Certificates.json
+  - stable/2023-01-01/CommonDefinitions.json
+  - stable/2023-01-01/ContainerApps.json
+  - stable/2023-01-01/ContainerAppsRevisions.json
+  - stable/2023-01-01/DeletedWebApps.json
+  - stable/2023-01-01/Diagnostics.json
+  - stable/2023-01-01/Global.json
+  - stable/2023-01-01/KubeEnvironments.json
+  - stable/2023-01-01/Provider.json
+  - stable/2023-01-01/Recommendations.json
+  - stable/2023-01-01/ResourceHealthMetadata.json
+  - stable/2023-01-01/ResourceProvider.json
+  - stable/2023-01-01/StaticSites.json
+  - stable/2023-01-01/WebApps.json
 directive:
   # suppress each RPC 3016 error
   - where: $.definitions.FunctionSecrets.properties.trigger_url
@@ -498,22 +590,22 @@ These settings apply only when `--tag=package-2022-09` is specified on the comma
 
 ```yaml $(tag) == 'package-2022-09'
 input-file:
-    - stable/2022-09-01/AppServiceEnvironments.json
-    - stable/2022-09-01/AppServicePlans.json
-    - stable/2022-09-01/Certificates.json
-    - stable/2022-09-01/CommonDefinitions.json
-    - stable/2022-09-01/ContainerApps.json
-    - stable/2022-09-01/ContainerAppsRevisions.json
-    - stable/2022-09-01/DeletedWebApps.json
-    - stable/2022-09-01/Diagnostics.json
-    - stable/2022-09-01/Global.json
-    - stable/2022-09-01/KubeEnvironments.json
-    - stable/2022-09-01/Provider.json
-    - stable/2022-09-01/Recommendations.json
-    - stable/2022-09-01/ResourceHealthMetadata.json
-    - stable/2022-09-01/ResourceProvider.json
-    - stable/2022-09-01/StaticSites.json
-    - stable/2022-09-01/WebApps.json
+  - stable/2022-09-01/AppServiceEnvironments.json
+  - stable/2022-09-01/AppServicePlans.json
+  - stable/2022-09-01/Certificates.json
+  - stable/2022-09-01/CommonDefinitions.json
+  - stable/2022-09-01/ContainerApps.json
+  - stable/2022-09-01/ContainerAppsRevisions.json
+  - stable/2022-09-01/DeletedWebApps.json
+  - stable/2022-09-01/Diagnostics.json
+  - stable/2022-09-01/Global.json
+  - stable/2022-09-01/KubeEnvironments.json
+  - stable/2022-09-01/Provider.json
+  - stable/2022-09-01/Recommendations.json
+  - stable/2022-09-01/ResourceHealthMetadata.json
+  - stable/2022-09-01/ResourceProvider.json
+  - stable/2022-09-01/StaticSites.json
+  - stable/2022-09-01/WebApps.json
 directive:
   # suppress each RPC 3016 error
   - where: $.definitions.FunctionSecrets.properties.trigger_url
@@ -648,22 +740,22 @@ These settings apply only when `--tag=package-2022-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2022-03' || $(tag) == 'package-2022-03-only'
 input-file:
-    - stable/2022-03-01/AppServiceEnvironments.json
-    - stable/2022-03-01/AppServicePlans.json
-    - stable/2022-03-01/Certificates.json
-    - stable/2022-03-01/CommonDefinitions.json
-    - stable/2022-03-01/ContainerApps.json
-    - stable/2022-03-01/ContainerAppsRevisions.json
-    - stable/2022-03-01/DeletedWebApps.json
-    - stable/2022-03-01/Diagnostics.json
-    - stable/2022-03-01/Global.json
-    - stable/2022-03-01/KubeEnvironments.json
-    - stable/2022-03-01/Provider.json
-    - stable/2022-03-01/Recommendations.json
-    - stable/2022-03-01/ResourceHealthMetadata.json
-    - stable/2022-03-01/ResourceProvider.json
-    - stable/2022-03-01/StaticSites.json
-    - stable/2022-03-01/WebApps.json
+  - stable/2022-03-01/AppServiceEnvironments.json
+  - stable/2022-03-01/AppServicePlans.json
+  - stable/2022-03-01/Certificates.json
+  - stable/2022-03-01/CommonDefinitions.json
+  - stable/2022-03-01/ContainerApps.json
+  - stable/2022-03-01/ContainerAppsRevisions.json
+  - stable/2022-03-01/DeletedWebApps.json
+  - stable/2022-03-01/Diagnostics.json
+  - stable/2022-03-01/Global.json
+  - stable/2022-03-01/KubeEnvironments.json
+  - stable/2022-03-01/Provider.json
+  - stable/2022-03-01/Recommendations.json
+  - stable/2022-03-01/ResourceHealthMetadata.json
+  - stable/2022-03-01/ResourceProvider.json
+  - stable/2022-03-01/StaticSites.json
+  - stable/2022-03-01/WebApps.json
 directive:
   # suppress each RPC 3016 error
   - where: $.definitions.FunctionSecrets.properties.trigger_url
@@ -798,22 +890,22 @@ These settings apply only when `--tag=package-2021-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2021-03'  || $(tag) == 'package-2021-03-only'
 input-file:
-    - stable/2021-03-01/AppServiceEnvironments.json
-    - stable/2021-03-01/AppServicePlans.json
-    - stable/2021-03-01/Certificates.json
-    - stable/2021-03-01/CommonDefinitions.json
-    - stable/2021-03-01/ContainerApps.json
-    - stable/2021-03-01/ContainerAppsRevisions.json
-    - stable/2021-03-01/DeletedWebApps.json
-    - stable/2021-03-01/Diagnostics.json
-    - stable/2021-03-01/Global.json
-    - stable/2021-03-01/KubeEnvironments.json
-    - stable/2021-03-01/Provider.json
-    - stable/2021-03-01/Recommendations.json
-    - stable/2021-03-01/ResourceHealthMetadata.json
-    - stable/2021-03-01/ResourceProvider.json
-    - stable/2021-03-01/StaticSites.json
-    - stable/2021-03-01/WebApps.json
+  - stable/2021-03-01/AppServiceEnvironments.json
+  - stable/2021-03-01/AppServicePlans.json
+  - stable/2021-03-01/Certificates.json
+  - stable/2021-03-01/CommonDefinitions.json
+  - stable/2021-03-01/ContainerApps.json
+  - stable/2021-03-01/ContainerAppsRevisions.json
+  - stable/2021-03-01/DeletedWebApps.json
+  - stable/2021-03-01/Diagnostics.json
+  - stable/2021-03-01/Global.json
+  - stable/2021-03-01/KubeEnvironments.json
+  - stable/2021-03-01/Provider.json
+  - stable/2021-03-01/Recommendations.json
+  - stable/2021-03-01/ResourceHealthMetadata.json
+  - stable/2021-03-01/ResourceProvider.json
+  - stable/2021-03-01/StaticSites.json
+  - stable/2021-03-01/WebApps.json
 directive:
   # suppress each RPC 3016 error
   - where: $.definitions.FunctionSecrets.properties.trigger_url
@@ -948,20 +1040,20 @@ These settings apply only when `--tag=package-2021-02` is specified on the comma
 
 ```yaml $(tag) == 'package-2021-02' || $(tag) == 'package-2021-02-only'
 input-file:
-- stable/2021-02-01/AppServiceEnvironments.json
-- stable/2021-02-01/AppServicePlans.json
-- stable/2021-02-01/Certificates.json
-- stable/2021-02-01/CommonDefinitions.json
-- stable/2021-02-01/DeletedWebApps.json
-- stable/2021-02-01/Diagnostics.json
-- stable/2021-02-01/Global.json
-- stable/2021-02-01/KubeEnvironments.json
-- stable/2021-02-01/Provider.json
-- stable/2021-02-01/Recommendations.json
-- stable/2021-02-01/ResourceHealthMetadata.json
-- stable/2021-02-01/ResourceProvider.json
-- stable/2021-02-01/StaticSites.json
-- stable/2021-02-01/WebApps.json
+  - stable/2021-02-01/AppServiceEnvironments.json
+  - stable/2021-02-01/AppServicePlans.json
+  - stable/2021-02-01/Certificates.json
+  - stable/2021-02-01/CommonDefinitions.json
+  - stable/2021-02-01/DeletedWebApps.json
+  - stable/2021-02-01/Diagnostics.json
+  - stable/2021-02-01/Global.json
+  - stable/2021-02-01/KubeEnvironments.json
+  - stable/2021-02-01/Provider.json
+  - stable/2021-02-01/Recommendations.json
+  - stable/2021-02-01/ResourceHealthMetadata.json
+  - stable/2021-02-01/ResourceProvider.json
+  - stable/2021-02-01/StaticSites.json
+  - stable/2021-02-01/WebApps.json
 directive:
   # suppress each RPC 3016 error
   - where: $.definitions.FunctionSecrets.properties.trigger_url
@@ -1084,20 +1176,20 @@ These settings apply only when `--tag=package-2021-01-15` is specified on the co
 
 ```yaml $(tag) == 'package-2021-01-15' || $(tag) == 'package-2021-01-15-only'
 input-file:
-    - stable/2021-01-15/AppServiceEnvironments.json
-    - stable/2021-01-15/AppServicePlans.json
-    - stable/2021-01-15/Certificates.json
-    - stable/2021-01-15/CommonDefinitions.json
-    - stable/2021-01-15/DeletedWebApps.json
-    - stable/2021-01-15/Diagnostics.json
-    - stable/2021-01-15/Global.json
-    - stable/2021-01-15/KubeEnvironments.json
-    - stable/2021-01-15/Provider.json
-    - stable/2021-01-15/Recommendations.json
-    - stable/2021-01-15/ResourceHealthMetadata.json
-    - stable/2021-01-15/ResourceProvider.json
-    - stable/2021-01-15/StaticSites.json
-    - stable/2021-01-15/WebApps.json
+  - stable/2021-01-15/AppServiceEnvironments.json
+  - stable/2021-01-15/AppServicePlans.json
+  - stable/2021-01-15/Certificates.json
+  - stable/2021-01-15/CommonDefinitions.json
+  - stable/2021-01-15/DeletedWebApps.json
+  - stable/2021-01-15/Diagnostics.json
+  - stable/2021-01-15/Global.json
+  - stable/2021-01-15/KubeEnvironments.json
+  - stable/2021-01-15/Provider.json
+  - stable/2021-01-15/Recommendations.json
+  - stable/2021-01-15/ResourceHealthMetadata.json
+  - stable/2021-01-15/ResourceProvider.json
+  - stable/2021-01-15/StaticSites.json
+  - stable/2021-01-15/WebApps.json
 directive:
   # suppress each RPC 3016 error
   - where: $.definitions.FunctionSecrets.properties.trigger_url
@@ -1196,20 +1288,20 @@ These settings apply only when `--tag=package-2021-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2021-01' || $(tag) == 'package-2021-01-only'
 input-file:
-    - stable/2021-01-01/AppServiceEnvironments.json
-    - stable/2021-01-01/AppServicePlans.json
-    - stable/2021-01-01/Certificates.json
-    - stable/2021-01-01/CommonDefinitions.json
-    - stable/2021-01-01/DeletedWebApps.json
-    - stable/2021-01-01/Diagnostics.json
-    - stable/2021-01-01/Global.json
-    - stable/2021-01-01/Provider.json
-    - stable/2021-01-01/Recommendations.json
-    - stable/2021-01-01/ResourceHealthMetadata.json
-    - stable/2021-01-01/ResourceProvider.json
-    - stable/2021-01-01/StaticSites.json
-    - stable/2021-01-01/WebApps.json
-    - stable/2021-01-01/KubeEnvironments.json
+  - stable/2021-01-01/AppServiceEnvironments.json
+  - stable/2021-01-01/AppServicePlans.json
+  - stable/2021-01-01/Certificates.json
+  - stable/2021-01-01/CommonDefinitions.json
+  - stable/2021-01-01/DeletedWebApps.json
+  - stable/2021-01-01/Diagnostics.json
+  - stable/2021-01-01/Global.json
+  - stable/2021-01-01/Provider.json
+  - stable/2021-01-01/Recommendations.json
+  - stable/2021-01-01/ResourceHealthMetadata.json
+  - stable/2021-01-01/ResourceProvider.json
+  - stable/2021-01-01/StaticSites.json
+  - stable/2021-01-01/WebApps.json
+  - stable/2021-01-01/KubeEnvironments.json
 directive:
   # suppress each RPC 3016 error
   - where: $.definitions.FunctionSecrets.properties.trigger_url
@@ -1272,19 +1364,19 @@ NOTE: Currently these tags are the same, but it will need to be split if any fil
 
 ```yaml $(tag) == 'package-2020-12' || $(tag) == 'package-2020-12-only'
 input-file:
-    - stable/2020-12-01/Certificates.json
-    - stable/2020-12-01/CommonDefinitions.json
-    - stable/2020-12-01/DeletedWebApps.json
-    - stable/2020-12-01/Diagnostics.json
-    - stable/2020-12-01/Global.json
-    - stable/2020-12-01/Provider.json
-    - stable/2020-12-01/Recommendations.json
-    - stable/2020-12-01/ResourceProvider.json
-    - stable/2020-12-01/WebApps.json
-    - stable/2020-12-01/StaticSites.json
-    - stable/2020-12-01/AppServiceEnvironments.json
-    - stable/2020-12-01/AppServicePlans.json
-    - stable/2020-12-01/ResourceHealthMetadata.json
+  - stable/2020-12-01/Certificates.json
+  - stable/2020-12-01/CommonDefinitions.json
+  - stable/2020-12-01/DeletedWebApps.json
+  - stable/2020-12-01/Diagnostics.json
+  - stable/2020-12-01/Global.json
+  - stable/2020-12-01/Provider.json
+  - stable/2020-12-01/Recommendations.json
+  - stable/2020-12-01/ResourceProvider.json
+  - stable/2020-12-01/WebApps.json
+  - stable/2020-12-01/StaticSites.json
+  - stable/2020-12-01/AppServiceEnvironments.json
+  - stable/2020-12-01/AppServicePlans.json
+  - stable/2020-12-01/ResourceHealthMetadata.json
 directive:
   # suppress each RPC 3016 error
   - where: $.definitions.FunctionSecrets.properties.trigger_url
@@ -1344,18 +1436,18 @@ NOTE: Currently these tags are the same, but it will need to be split if any fil
 
 ```yaml $(tag) == 'package-2020-10' || $(tag) == 'package-2020-10-only'
 input-file:
-    - stable/2020-10-01/Certificates.json
-    - stable/2020-10-01/CommonDefinitions.json
-    - stable/2020-10-01/DeletedWebApps.json
-    - stable/2020-10-01/Diagnostics.json
-    - stable/2020-10-01/Provider.json
-    - stable/2020-10-01/Recommendations.json
-    - stable/2020-10-01/ResourceProvider.json
-    - stable/2020-10-01/WebApps.json
-    - stable/2020-10-01/StaticSites.json
-    - stable/2020-10-01/AppServiceEnvironments.json
-    - stable/2020-10-01/AppServicePlans.json
-    - stable/2020-10-01/ResourceHealthMetadata.json
+  - stable/2020-10-01/Certificates.json
+  - stable/2020-10-01/CommonDefinitions.json
+  - stable/2020-10-01/DeletedWebApps.json
+  - stable/2020-10-01/Diagnostics.json
+  - stable/2020-10-01/Provider.json
+  - stable/2020-10-01/Recommendations.json
+  - stable/2020-10-01/ResourceProvider.json
+  - stable/2020-10-01/WebApps.json
+  - stable/2020-10-01/StaticSites.json
+  - stable/2020-10-01/AppServiceEnvironments.json
+  - stable/2020-10-01/AppServicePlans.json
+  - stable/2020-10-01/ResourceHealthMetadata.json
 directive:
   # suppress each RPC 3016 error
   - where: $.definitions.FunctionSecrets.properties.trigger_url
@@ -1379,18 +1471,18 @@ NOTE: Currently these tags are the same, but it will need to be split if any fil
 
 ```yaml $(tag) == 'package-2020-09' || $(tag) == 'package-2020-09-only'
 input-file:
-    - stable/2020-09-01/Certificates.json
-    - stable/2020-09-01/CommonDefinitions.json
-    - stable/2020-09-01/DeletedWebApps.json
-    - stable/2020-09-01/Diagnostics.json
-    - stable/2020-09-01/Provider.json
-    - stable/2020-09-01/Recommendations.json
-    - stable/2020-09-01/ResourceProvider.json
-    - stable/2020-09-01/WebApps.json
-    - stable/2020-09-01/StaticSites.json
-    - stable/2020-09-01/AppServiceEnvironments.json
-    - stable/2020-09-01/AppServicePlans.json
-    - stable/2020-09-01/ResourceHealthMetadata.json
+  - stable/2020-09-01/Certificates.json
+  - stable/2020-09-01/CommonDefinitions.json
+  - stable/2020-09-01/DeletedWebApps.json
+  - stable/2020-09-01/Diagnostics.json
+  - stable/2020-09-01/Provider.json
+  - stable/2020-09-01/Recommendations.json
+  - stable/2020-09-01/ResourceProvider.json
+  - stable/2020-09-01/WebApps.json
+  - stable/2020-09-01/StaticSites.json
+  - stable/2020-09-01/AppServiceEnvironments.json
+  - stable/2020-09-01/AppServicePlans.json
+  - stable/2020-09-01/ResourceHealthMetadata.json
 directive:
   # suppress each RPC 3016 error
   - where: $.definitions.FunctionSecrets.properties.trigger_url
@@ -1418,18 +1510,18 @@ NOTE: Currently these tags are the same, but it will need to be split if any fil
 
 ```yaml $(tag) == 'package-2020-06' || $(tag) == 'package-2020-06-only'
 input-file:
-    - stable/2020-06-01/Certificates.json
-    - stable/2020-06-01/CommonDefinitions.json
-    - stable/2020-06-01/DeletedWebApps.json
-    - stable/2020-06-01/Diagnostics.json
-    - stable/2020-06-01/Provider.json
-    - stable/2020-06-01/Recommendations.json
-    - stable/2020-06-01/ResourceProvider.json
-    - stable/2020-06-01/WebApps.json
-    - stable/2020-06-01/StaticSites.json
-    - stable/2020-06-01/AppServiceEnvironments.json
-    - stable/2020-06-01/AppServicePlans.json
-    - stable/2020-06-01/ResourceHealthMetadata.json
+  - stable/2020-06-01/Certificates.json
+  - stable/2020-06-01/CommonDefinitions.json
+  - stable/2020-06-01/DeletedWebApps.json
+  - stable/2020-06-01/Diagnostics.json
+  - stable/2020-06-01/Provider.json
+  - stable/2020-06-01/Recommendations.json
+  - stable/2020-06-01/ResourceProvider.json
+  - stable/2020-06-01/WebApps.json
+  - stable/2020-06-01/StaticSites.json
+  - stable/2020-06-01/AppServiceEnvironments.json
+  - stable/2020-06-01/AppServicePlans.json
+  - stable/2020-06-01/ResourceHealthMetadata.json
 directive:
   # suppress each RPC 3016 error
   - where: $.definitions.FunctionSecrets.properties.trigger_url
@@ -1445,18 +1537,18 @@ NOTE: Currently these tags are the same, but it will need to be split if any fil
 
 ```yaml $(tag) == 'package-2019-08' || $(tag) == 'package-2019-08-only'
 input-file:
-    - stable/2019-08-01/Certificates.json
-    - stable/2019-08-01/CommonDefinitions.json
-    - stable/2019-08-01/DeletedWebApps.json
-    - stable/2019-08-01/Diagnostics.json
-    - stable/2019-08-01/Provider.json
-    - stable/2019-08-01/Recommendations.json
-    - stable/2019-08-01/ResourceProvider.json
-    - stable/2019-08-01/WebApps.json
-    - stable/2019-08-01/StaticSites.json
-    - stable/2019-08-01/AppServiceEnvironments.json
-    - stable/2019-08-01/AppServicePlans.json
-    - stable/2019-08-01/ResourceHealthMetadata.json
+  - stable/2019-08-01/Certificates.json
+  - stable/2019-08-01/CommonDefinitions.json
+  - stable/2019-08-01/DeletedWebApps.json
+  - stable/2019-08-01/Diagnostics.json
+  - stable/2019-08-01/Provider.json
+  - stable/2019-08-01/Recommendations.json
+  - stable/2019-08-01/ResourceProvider.json
+  - stable/2019-08-01/WebApps.json
+  - stable/2019-08-01/StaticSites.json
+  - stable/2019-08-01/AppServiceEnvironments.json
+  - stable/2019-08-01/AppServicePlans.json
+  - stable/2019-08-01/ResourceHealthMetadata.json
 ```
 
 ### Tag: package-2018-12
@@ -1465,17 +1557,17 @@ These settings apply only when `--tag=package-2018-12` is specified on the comma
 
 ```yaml $(tag) == 'package-2018-12'
 input-file:
-    - stable/2018-11-01/Certificates.json
-    - stable/2018-02-01/CommonDefinitions.json
-    - stable/2018-02-01/DeletedWebApps.json
-    - stable/2018-02-01/Diagnostics.json
-    - stable/2018-02-01/Provider.json
-    - stable/2018-02-01/Recommendations.json
-    - stable/2018-02-01/ResourceProvider.json
-    - stable/2018-11-01/WebApps.json
-    - stable/2018-02-01/AppServiceEnvironments.json
-    - stable/2018-02-01/AppServicePlans.json
-    - stable/2018-02-01/ResourceHealthMetadata.json
+  - stable/2018-11-01/Certificates.json
+  - stable/2018-02-01/CommonDefinitions.json
+  - stable/2018-02-01/DeletedWebApps.json
+  - stable/2018-02-01/Diagnostics.json
+  - stable/2018-02-01/Provider.json
+  - stable/2018-02-01/Recommendations.json
+  - stable/2018-02-01/ResourceProvider.json
+  - stable/2018-11-01/WebApps.json
+  - stable/2018-02-01/AppServiceEnvironments.json
+  - stable/2018-02-01/AppServicePlans.json
+  - stable/2018-02-01/ResourceHealthMetadata.json
 directive:
   # suppress each RPC 3019 error
   - where: $.definitions.Identifier.properties
@@ -1490,17 +1582,17 @@ These settings apply only when `--tag=package-2018-11` is specified on the comma
 
 ```yaml $(tag) == 'package-2018-11'
 input-file:
-    - stable/2018-11-01/Certificates.json
-    - stable/2018-02-01/CommonDefinitions.json
-    - stable/2018-02-01/DeletedWebApps.json
-    - stable/2018-02-01/Diagnostics.json
-    - stable/2018-02-01/Provider.json
-    - stable/2018-02-01/Recommendations.json
-    - stable/2018-02-01/ResourceProvider.json
-    - stable/2018-02-01/WebApps.json
-    - stable/2018-02-01/AppServiceEnvironments.json
-    - stable/2018-02-01/AppServicePlans.json
-    - stable/2018-02-01/ResourceHealthMetadata.json
+  - stable/2018-11-01/Certificates.json
+  - stable/2018-02-01/CommonDefinitions.json
+  - stable/2018-02-01/DeletedWebApps.json
+  - stable/2018-02-01/Diagnostics.json
+  - stable/2018-02-01/Provider.json
+  - stable/2018-02-01/Recommendations.json
+  - stable/2018-02-01/ResourceProvider.json
+  - stable/2018-02-01/WebApps.json
+  - stable/2018-02-01/AppServiceEnvironments.json
+  - stable/2018-02-01/AppServicePlans.json
+  - stable/2018-02-01/ResourceHealthMetadata.json
 directive:
   # suppress each RPC 3019 error
   - where: $.definitions.Identifier.properties
@@ -1530,17 +1622,17 @@ These settings apply only when `--tag=package-2018-02` is specified on the comma
 
 ```yaml $(tag) == 'package-2018-02'
 input-file:
-    - stable/2018-02-01/Certificates.json
-    - stable/2018-02-01/CommonDefinitions.json
-    - stable/2018-02-01/DeletedWebApps.json
-    - stable/2018-02-01/Diagnostics.json
-    - stable/2018-02-01/Provider.json
-    - stable/2018-02-01/Recommendations.json
-    - stable/2018-02-01/ResourceProvider.json
-    - stable/2018-02-01/WebApps.json
-    - stable/2018-02-01/AppServiceEnvironments.json
-    - stable/2018-02-01/AppServicePlans.json
-    - stable/2018-02-01/ResourceHealthMetadata.json
+  - stable/2018-02-01/Certificates.json
+  - stable/2018-02-01/CommonDefinitions.json
+  - stable/2018-02-01/DeletedWebApps.json
+  - stable/2018-02-01/Diagnostics.json
+  - stable/2018-02-01/Provider.json
+  - stable/2018-02-01/Recommendations.json
+  - stable/2018-02-01/ResourceProvider.json
+  - stable/2018-02-01/WebApps.json
+  - stable/2018-02-01/AppServiceEnvironments.json
+  - stable/2018-02-01/AppServicePlans.json
+  - stable/2018-02-01/ResourceHealthMetadata.json
 directive:
   # suppress each RPC 3019 error
   - where: $.definitions.Identifier.properties
@@ -1555,17 +1647,17 @@ These settings apply only when `--tag=package-2018-02` is specified on the comma
 
 ```yaml $(tag) == 'package-2018-02-only'
 input-file:
-    - stable/2018-02-01/Certificates.json
-    - stable/2018-02-01/CommonDefinitions.json
-    - stable/2018-02-01/DeletedWebApps.json
-    - stable/2018-02-01/Diagnostics.json
-    - stable/2018-02-01/Provider.json
-    - stable/2018-02-01/Recommendations.json
-    - stable/2018-02-01/ResourceProvider.json
-    - stable/2018-02-01/WebApps.json
-    - stable/2018-02-01/AppServiceEnvironments.json
-    - stable/2018-02-01/AppServicePlans.json
-    - stable/2018-02-01/ResourceHealthMetadata.json
+  - stable/2018-02-01/Certificates.json
+  - stable/2018-02-01/CommonDefinitions.json
+  - stable/2018-02-01/DeletedWebApps.json
+  - stable/2018-02-01/Diagnostics.json
+  - stable/2018-02-01/Provider.json
+  - stable/2018-02-01/Recommendations.json
+  - stable/2018-02-01/ResourceProvider.json
+  - stable/2018-02-01/WebApps.json
+  - stable/2018-02-01/AppServiceEnvironments.json
+  - stable/2018-02-01/AppServicePlans.json
+  - stable/2018-02-01/ResourceHealthMetadata.json
 directive:
   # suppress each RPC 3019 error
   - where: $.definitions.Identifier.properties
@@ -1580,17 +1672,17 @@ These settings apply only when `--tag=package-2016-09` is specified on the comma
 
 ```yaml $(tag) == 'package-2016-09'
 input-file:
-    - stable/2016-03-01/Certificates.json
-    - stable/2016-03-01/CommonDefinitions.json
-    - stable/2016-03-01/DeletedWebApps.json
-    - stable/2016-03-01/Diagnostics.json
-    - stable/2016-03-01/Provider.json
-    - stable/2016-03-01/Recommendations.json
-    - stable/2016-03-01/ResourceHealthMetadata.json
-    - stable/2016-03-01/ResourceProvider.json
-    - stable/2016-08-01/WebApps.json
-    - stable/2016-09-01/AppServiceEnvironments.json
-    - stable/2016-09-01/AppServicePlans.json
+  - stable/2016-03-01/Certificates.json
+  - stable/2016-03-01/CommonDefinitions.json
+  - stable/2016-03-01/DeletedWebApps.json
+  - stable/2016-03-01/Diagnostics.json
+  - stable/2016-03-01/Provider.json
+  - stable/2016-03-01/Recommendations.json
+  - stable/2016-03-01/ResourceHealthMetadata.json
+  - stable/2016-03-01/ResourceProvider.json
+  - stable/2016-08-01/WebApps.json
+  - stable/2016-09-01/AppServiceEnvironments.json
+  - stable/2016-09-01/AppServicePlans.json
 directive:
   # suppress each RPC 3019 error
   - where: $.definitions.User.properties
@@ -1705,8 +1797,8 @@ These settings apply only when `--tag=package-2016-09-only` is specified on the 
 
 ```yaml $(tag) == 'package-2016-09-only'
 input-file:
-    - stable/2016-09-01/AppServiceEnvironments.json
-    - stable/2016-09-01/AppServicePlans.json
+  - stable/2016-09-01/AppServiceEnvironments.json
+  - stable/2016-09-01/AppServicePlans.json
 directive:
   # suppress each RPC 3019 error
   - where: $.definitions.User.properties
@@ -1821,7 +1913,7 @@ These settings apply only when `--tag=package-2016-08-only` is specified on the 
 
 ```yaml $(tag) == 'package-2016-08-only'
 input-file:
-    - stable/2016-08-01/WebApps.json
+  - stable/2016-08-01/WebApps.json
 directive:
   # suppress each RPC 3019 error
   - where: $.definitions.User.properties
@@ -1936,14 +2028,14 @@ These settings apply only when `--tag=package-2016-03-only` is specified on the 
 
 ```yaml $(tag) == 'package-2016-03-only'
 input-file:
-    - stable/2016-03-01/Certificates.json
-    - stable/2016-03-01/CommonDefinitions.json
-    - stable/2016-03-01/DeletedWebApps.json
-    - stable/2016-03-01/Diagnostics.json
-    - stable/2016-03-01/Provider.json
-    - stable/2016-03-01/Recommendations.json
-    - stable/2016-03-01/ResourceHealthMetadata.json
-    - stable/2016-03-01/ResourceProvider.json
+  - stable/2016-03-01/Certificates.json
+  - stable/2016-03-01/CommonDefinitions.json
+  - stable/2016-03-01/DeletedWebApps.json
+  - stable/2016-03-01/Diagnostics.json
+  - stable/2016-03-01/Provider.json
+  - stable/2016-03-01/Recommendations.json
+  - stable/2016-03-01/ResourceHealthMetadata.json
+  - stable/2016-03-01/ResourceProvider.json
 directive:
   # suppress each RPC 3019 error
   - where: $.definitions.User.properties
@@ -2284,7 +2376,7 @@ These settings apply only when `--tag=package-2016-06-01` is specified on the co
 
 ```yaml $(tag) == 'package-2016-06-01'
 input-file:
-    - stable/2016-06-01/logicAppsManagementClient.json
+  - stable/2016-06-01/logicAppsManagementClient.json
 ```
 
 ### Tag: package-2015-08-preview
@@ -2293,8 +2385,8 @@ These settings apply only when `--tag=package-2015-08-preview` is specified on t
 
 ```yaml $(tag) == 'package-2015-08-preview'
 input-file:
-    - stable/2015-08-01/service.json
-    - preview/2015-08-01-preview/logicAppsManagementClient.json
+  - stable/2015-08-01/service.json
+  - preview/2015-08-01-preview/logicAppsManagementClient.json
 ```
 
 ### Tag: package-2016-09-01-web
@@ -2303,8 +2395,8 @@ These settings apply only when `--tag=package-2016-09-01-web` is specified on th
 
 ```yaml $(tag) == 'package-2016-09-01-web'
 input-file:
-    - stable/2016-09-01/AppServiceEnvironments.json
-    - stable/2016-09-01/AppServicePlans.json
+  - stable/2016-09-01/AppServiceEnvironments.json
+  - stable/2016-09-01/AppServicePlans.json
 ```
 
 ### Tag: package-2016-08-01-web
@@ -2322,14 +2414,14 @@ These settings apply only when `--tag=package-2016-03-01-web` is specified on th
 
 ```yaml $(tag) == 'package-2016-03-01-web'
 input-file:
-    - stable/2016-03-01/Certificates.json
-    - stable/2016-03-01/CommonDefinitions.json
-    - stable/2016-03-01/DeletedWebApps.json
-    - stable/2016-03-01/Diagnostics.json
-    - stable/2016-03-01/Provider.json
-    - stable/2016-03-01/Recommendations.json
-    - stable/2016-03-01/ResourceHealthMetadata.json
-    - stable/2016-03-01/ResourceProvider.json
+  - stable/2016-03-01/Certificates.json
+  - stable/2016-03-01/CommonDefinitions.json
+  - stable/2016-03-01/DeletedWebApps.json
+  - stable/2016-03-01/Diagnostics.json
+  - stable/2016-03-01/Provider.json
+  - stable/2016-03-01/Recommendations.json
+  - stable/2016-03-01/ResourceHealthMetadata.json
+  - stable/2016-03-01/ResourceProvider.json
 ```
 
 ---
@@ -2371,14 +2463,14 @@ Creating this tag to pick proper resources from the hybrid profile for csharp co
 
 ```yaml $(tag) == 'package-2018-03-01-hybrid'
 input-file:
-    - stable/2016-03-01/Certificates.json
-    - stable/2016-03-01/CommonDefinitions.json
-    - stable/2016-08-01/WebApps.json
-    - stable/2016-03-01/ResourceProvider.json
-    - stable/2016-03-01/Provider.json
-    - stable/2016-03-01/Recommendations.json
-    - stable/2016-09-01/AppServiceEnvironments.json
-    - stable/2016-09-01/AppServicePlans.json
+  - stable/2016-03-01/Certificates.json
+  - stable/2016-03-01/CommonDefinitions.json
+  - stable/2016-08-01/WebApps.json
+  - stable/2016-03-01/ResourceProvider.json
+  - stable/2016-03-01/Provider.json
+  - stable/2016-03-01/Recommendations.json
+  - stable/2016-09-01/AppServiceEnvironments.json
+  - stable/2016-09-01/AppServicePlans.json
 ```
 
 ### Tag: profile-hybrid-2019-03-01
@@ -2388,14 +2480,14 @@ Creating this tag to pick proper resources from the hybrid profile.
 
 ```yaml $(tag) == 'profile-hybrid-2019-03-01'
 input-file:
-    - stable/2018-02-01/Certificates.json
-    - stable/2018-02-01/CommonDefinitions.json
-    - stable/2018-02-01/WebApps.json
-    - stable/2018-02-01/ResourceProvider.json
-    - stable/2018-02-01/AppServicePlans.json
-    - stable/2018-02-01/Provider.json
-    - stable/2018-02-01/ResourceProvider.json
-    - stable/2018-02-01/Recommendations.json
+  - stable/2018-02-01/Certificates.json
+  - stable/2018-02-01/CommonDefinitions.json
+  - stable/2018-02-01/WebApps.json
+  - stable/2018-02-01/ResourceProvider.json
+  - stable/2018-02-01/AppServicePlans.json
+  - stable/2018-02-01/Provider.json
+  - stable/2018-02-01/ResourceProvider.json
+  - stable/2018-02-01/Recommendations.json
 ```
 
 ### Tag: profile-hybrid-2020-09-01
@@ -2405,11 +2497,11 @@ Creating this tag to pick proper resources from the hybrid profile.
 
 ```yaml $(tag) == 'profile-hybrid-2020-09-01'
 input-file:
-    - stable/2018-02-01/Certificates.json
-    - stable/2018-02-01/WebApps.json
-    - stable/2018-02-01/ResourceProvider.json
-    - stable/2018-02-01/AppServicePlans.json
-    - stable/2018-02-01/Provider.json
-    - stable/2018-02-01/ResourceProvider.json
-    - stable/2018-02-01/Recommendations.json
+  - stable/2018-02-01/Certificates.json
+  - stable/2018-02-01/WebApps.json
+  - stable/2018-02-01/ResourceProvider.json
+  - stable/2018-02-01/AppServicePlans.json
+  - stable/2018-02-01/Provider.json
+  - stable/2018-02-01/ResourceProvider.json
+  - stable/2018-02-01/Recommendations.json
 ```

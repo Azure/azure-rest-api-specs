@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "2026-07-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myRg",
+    "sandboxGroupName": "testgroup"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRg/providers/Microsoft.App/sandboxGroups/testgroup/vnetConnections/myVnetConnection",
+            "name": "myVnetConnection",
+            "type": "Microsoft.App/sandboxGroups/vnetConnections",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRg/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VnetConnections_ListBySandboxGroup",
+  "title": "List VnetConnections by SandboxGroup"
+}

@@ -1,0 +1,28 @@
+{
+  "operationId": "Quotas_ListWorkspaceUsages",
+  "title": "List workspace quota usages.",
+  "parameters": {
+    "api-version": "2026-01-15-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "myresourcegroup",
+    "workspaceName": "myworkspace",
+    "providerId": "provider1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "providerId": "provider1",
+            "scope": "WorkspaceTarget",
+            "targetId": "provider1.target1",
+            "usage": {
+              "standardMinutesLifetime": 42.0
+            },
+            "lastModifiedTime": "2026-01-11T08:15:00Z"
+          }
+        ]
+      }
+    }
+  }
+}

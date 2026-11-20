@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/manufacturingplatform"
 output-dir: "{project-root}/../"
 emit:
   - "@azure-tools/typespec-autorest"
@@ -12,6 +15,9 @@ options:
   "@azure-tools/typespec-providerhub-controller":
     emitter-output-dir: "{output-dir}/generated"
     code-kind: model
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.ManufacturingPlatform"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/manufacturingplatform"
     emitter-output-dir: "{output-dir}/{service-dir}/armmanufacturingplatform"

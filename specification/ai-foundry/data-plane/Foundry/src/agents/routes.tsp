@@ -1,5 +1,6 @@
 import "../common/models.tsp";
 import "./models.tsp";
+import "../voice-agents/agents.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -45,6 +46,22 @@ interface Agents {
   >;
 
   /**
+   * Generates and creates an agent from kind-specific high-level inputs.
+   * The generated definition remains fully editable through the standard agent versioning operations.
+   */
+  @summary("Generate an agent")
+  @post
+  @route("/agents:generate")
+  @tag("Agents")
+  generateAgent is FoundryDataPlaneOperation<
+    {
+      /** The kind-specific inputs for generating and creating an agent. */
+      @body body: GenerateAgentRequest;
+    },
+    AgentObject
+  >;
+
+  /**
    * Creates a new code-based agent. Uploads the code zip and creates the agent in a single call.
    * The agent name is provided in the `x-ms-agent-name` header since POST /agents has no name in the URL path.
    * The SHA-256 hex digest of the zip is provided in the `x-ms-code-zip-sha256` header for integrity and dedup.
@@ -57,8 +74,11 @@ interface Agents {
   @route("/agents")
   @sharedRoute
   @tag("Agents")
+  @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   createAgentFromCode is FoundryDataPlaneOperation<
     {
+      ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys>;
+
       /** The content type of the request body. */
       @header contentType: "multipart/form-data";
 
@@ -114,8 +134,14 @@ interface Agents {
   @route("/agents/{agent_name}")
   @sharedRoute
   @tag("Agents")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ conditional_previews: #[AgentDefinitionOptInKeys.a2a_agents_v1_preview] }
+  )
   updateAgentFromCode is FoundryDataPlaneOperation<
     {
+      ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys>;
+
       /**
        * The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
        * - Must start and end with alphanumeric characters,
@@ -146,8 +172,15 @@ interface Agents {
   @post
   @route("/agents:import")
   @tag("Agents")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ conditional_previews: #[AgentDefinitionOptInKeys.a2a_agents_v1_preview] }
+  )
   createAgentFromManifest is FoundryDataPlaneOperation<
-    CreateAgentFromManifestRequest,
+    {
+      ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.a2a_agents_v1_preview>;
+      ...CreateAgentFromManifestRequest;
+    },
     AgentObject
   >;
 
@@ -159,8 +192,14 @@ interface Agents {
   @post
   @route("/agents/{agent_name}/import")
   @tag("Agents")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ conditional_previews: #[AgentDefinitionOptInKeys.a2a_agents_v1_preview] }
+  )
   updateAgentFromManifest is FoundryDataPlaneOperation<
     {
+      ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.a2a_agents_v1_preview>;
+
       /** The name of the agent to update. */
       @path agent_name: string;
 
@@ -242,8 +281,14 @@ interface Agents {
   @post
   @route("/agents/{agent_name}/versions:import")
   @tag("Agent Versions")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ conditional_previews: #[AgentDefinitionOptInKeys.a2a_agents_v1_preview] }
+  )
   createAgentVersionFromManifest is FoundryDataPlaneOperation<
     {
+      ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.a2a_agents_v1_preview>;
+
       /**
        * The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
        * - Must start and end with alphanumeric characters,
@@ -340,13 +385,19 @@ interface Agents {
   /**
    * Applies a merge-patch update to the specified agent endpoint configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
   @summary("Update an agent endpoint")
   @patch(#{ implicitOptionality: true })
   @route("/agents/{agent_name}")
   @tag("Agents")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ conditional_previews: #[AgentDefinitionOptInKeys.a2a_agents_v1_preview] }
+  )
   patchAgentObject is FoundryDataPlaneOperation<
     {
+      ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.a2a_agents_v1_preview>;
+
       /** The name of the agent to retrieve. */
       @summary("The name of the agent to retrieve")
       @path
@@ -373,8 +424,11 @@ interface Agents {
   @route("/agents/{agent_name}/versions")
   @sharedRoute
   @tag("Agent Versions")
+  @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   createAgentVersionFromCode is FoundryDataPlaneOperation<
     {
+      ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys>;
+
       /**
        * The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
        * - Must start and end with alphanumeric characters,

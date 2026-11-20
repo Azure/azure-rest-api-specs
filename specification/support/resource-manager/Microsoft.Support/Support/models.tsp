@@ -162,6 +162,18 @@ enum Type {
 }
 
 /**
+ * The type of support resource for resource Id lookup.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility with the existing closed ResourceType x-ms-enum contract."
+@added(Versions.v2025_06_01_preview)
+enum ResourceType {
+  /**
+   * Microsoft Support ticket resource type.
+   */
+  `Microsoft.Support/supportTickets`,
+}
+
+/**
  * The operation supported by Microsoft Support resource provider.
  */
 model Operation {
@@ -370,8 +382,6 @@ model ProblemClassificationsClassificationResult {
   /**
    * Related service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @OpenAPI.extension("x-ms-client-flatten", true)
   @added(Versions.v2025_06_01_preview)
   relatedService?: ClassificationService;
 }
@@ -1053,12 +1063,7 @@ model LookUpResourceIdRequest {
   /**
    * The type of resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
-  @OpenAPI.extension(
-    "x-ms-enum",
-    #{ name: "ResourceType", modelAsString: false }
-  )
-  type?: "Microsoft.Support/supportTickets";
+  type?: ResourceType;
 }
 
 /**

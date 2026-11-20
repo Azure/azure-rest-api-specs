@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contosoNetAppRg",
+    "externalClusterName": "contoso-external-cluster",
+    "peerId": "peerA",
+    "api-version": "2026-08-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalClusters/contoso-external-cluster/clusterPeers/peerA/svmPeers/svm-peerA",
+            "name": "svm-peerA",
+            "type": "Microsoft.NetApp/externalClusters/clusterPeers/svmPeers",
+            "properties": {
+              "anfSvmName": "anf-svm",
+              "externalSvmResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalClusters/contoso-external-cluster/externalSvms/contoso-svm",
+              "status": "Active",
+              "acceptCommand": "vserver peer accept -vserver contoso-svm-1 -peer-vserver anf-svm",
+              "peerTypes": [
+                "Replication"
+              ],
+              "hybridReplicationResourceIds": [
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/hybridReplications/contosoHybridReplication"
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalClusters/contoso-external-cluster/clusterPeers/peerA/svmPeers/svm-peer2",
+            "name": "svm-peer2",
+            "type": "Microsoft.NetApp/externalClusters/clusterPeers/svmPeers",
+            "properties": {
+              "anfSvmName": "anf-svm-2",
+              "externalSvmResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalClusters/contoso-external-cluster/externalSvms/svm2",
+              "status": "Pending",
+              "acceptCommand": "vserver peer accept -vserver contoso-svm-2 -peer-vserver anf-svm-2",
+              "peerTypes": [
+                "Cache"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SvmPeers_ListByParent",
+  "title": "SvmPeers_ListByParent"
+}

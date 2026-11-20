@@ -1,0 +1,142 @@
+{
+  "parameters": {
+    "api-version": "2026-11-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "aiGatewayName": "example-gateway",
+    "workspaceName": "default",
+    "toolServerName": "openapi-tools",
+    "resource": {
+      "properties": {
+        "endpoints": [
+          {
+            "id": "inline-endpoint",
+            "namespace": "weather",
+            "kind": "openApi",
+            "openApi": {
+              "specSource": {
+                "type": "inline",
+                "contentBase64": "eyJvcGVuYXBpIjoiMy4wLjMiLCJpbmZvIjp7InRpdGxlIjoiRXhhbXBsZSB3ZWF0aGVyIHRvb2xzIiwidmVyc2lvbiI6IjEuMC4wIn0sInNlcnZlcnMiOlt7InVybCI6Imh0dHBzOi8vYXBpLmNvbnRvc28uY29tIn1dLCJwYXRocyI6eyIvd2VhdGhlciI6eyJnZXQiOnsib3BlcmF0aW9uSWQiOiJnZXRXZWF0aGVyIiwicmVzcG9uc2VzIjp7IjIwMCI6eyJkZXNjcmlwdGlvbiI6IlN1Y2Nlc3MifX19fX19"
+              }
+            },
+            "authentication": {
+              "headers": [
+                {
+                  "name": "x-api-key",
+                  "value": "{api-key}"
+                }
+              ]
+            },
+            "mode": "failClosed"
+          },
+          {
+            "id": "url-endpoint",
+            "namespace": "forecast",
+            "kind": "openApi",
+            "openApi": {
+              "specSource": {
+                "type": "url",
+                "url": "https://api.contoso.com/openapi.json"
+              }
+            },
+            "mode": "failOpen"
+          }
+        ],
+        "displayName": "OpenAPI tools",
+        "toolServerType": "openApi"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/toolServers/openapi-tools",
+        "name": "openapi-tools",
+        "type": "Microsoft.ApiManagement/aigateways/workspaces/toolServers",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "endpoints": [
+            {
+              "id": "inline-endpoint",
+              "namespace": "weather",
+              "kind": "openApi",
+              "openApi": {
+                "specSource": {
+                  "type": "inline"
+                }
+              },
+              "authentication": {
+                "headers": [
+                  {
+                    "name": "x-api-key"
+                  }
+                ]
+              },
+              "mode": "failClosed"
+            },
+            {
+              "id": "url-endpoint",
+              "namespace": "forecast",
+              "kind": "openApi",
+              "openApi": {
+                "specSource": {
+                  "type": "url",
+                  "url": "https://api.contoso.com/openapi.json"
+                }
+              },
+              "mode": "failOpen"
+            }
+          ],
+          "displayName": "OpenAPI tools",
+          "toolServerType": "openApi"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default/toolServers/openapi-tools",
+        "name": "openapi-tools",
+        "type": "Microsoft.ApiManagement/aigateways/workspaces/toolServers",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "endpoints": [
+            {
+              "id": "inline-endpoint",
+              "namespace": "weather",
+              "kind": "openApi",
+              "openApi": {
+                "specSource": {
+                  "type": "inline"
+                }
+              },
+              "authentication": {
+                "headers": [
+                  {
+                    "name": "x-api-key"
+                  }
+                ]
+              },
+              "mode": "failClosed"
+            },
+            {
+              "id": "url-endpoint",
+              "namespace": "forecast",
+              "kind": "openApi",
+              "openApi": {
+                "specSource": {
+                  "type": "url",
+                  "url": "https://api.contoso.com/openapi.json"
+                }
+              },
+              "mode": "failOpen"
+            }
+          ],
+          "displayName": "OpenAPI tools",
+          "toolServerType": "openApi"
+        }
+      }
+    }
+  },
+  "operationId": "AiGatewayToolServerResources_CreateOrUpdate",
+  "title": "Create an OpenAPI tool server with inline and URL document sources"
+}

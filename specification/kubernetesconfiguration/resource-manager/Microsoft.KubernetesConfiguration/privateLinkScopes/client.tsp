@@ -4,6 +4,56 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 
 @@clientName(
+  Microsoft.KubernetesConfiguration.ProvisioningState,
+  "KubernetesConfigurationPrivateLinkScopeProvisioningState",
+  "csharp"
+);
+@@clientName(
+  Microsoft.KubernetesConfiguration.PublicNetworkAccessType,
+  "KubernetesConfigurationPrivateLinkScopePublicNetworkAccessType",
+  "csharp"
+);
+@@clientName(
+  Microsoft.KubernetesConfiguration.PrivateEndpointConnection,
+  "KubernetesConfigurationPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(
+  Microsoft.KubernetesConfiguration.PrivateLinkResource,
+  "KubernetesConfigurationPrivateLinkResource",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.KubernetesConfiguration.KubernetesConfigurationPrivateLinkScopeProperties.clusterResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.KubernetesConfiguration.KubernetesConfigurationPrivateLinkScopeProperties.privateLinkScopeId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.PrivateEndpoint.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the existing C# pageable collection."
+@@Legacy.markAsPageable(
+  Microsoft.KubernetesConfiguration.PrivateEndpointConnections.listByPrivateLinkScope,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the existing C# pageable collection."
+@@Legacy.markAsPageable(
+  Microsoft.KubernetesConfiguration.PrivateLinkResources.listByPrivateLinkScope,
+  "csharp"
+);
+@@clientName(
   Microsoft.KubernetesConfiguration,
   "KubernetesConfigurationPrivateLinkScopesMgmtClient",
   "python"

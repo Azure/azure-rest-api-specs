@@ -1,0 +1,283 @@
+import "./models.tsp";
+
+using TypeSpec.Http;
+using Azure.Core;
+
+namespace Azure.AI.Projects;
+
+alias AgentInsightsPageQueryParameters = {
+  /** A cursor that identifies the last item in the previous page. */
+  @query
+  @continuationToken
+  after?: string;
+
+  /** A cursor that identifies the first item in the next page. */
+  @query before?: string;
+
+  /** The maximum number of items to return. Defaults to 20. */
+  @query
+  @minValue(1)
+  @maxValue(100)
+  limit?: int32 = 20;
+
+  /** Sort order by creation time. Defaults to descending. */
+  @query order?: PageOrder = "desc";
+};
+
+alias AgentInsightListFilters = {
+  /** Match any listed category. Commas separate identifiers; identifiers containing commas cannot be filtered individually. */
+  @query(#{ explode: false })
+  categories?: string[];
+
+  /** Match any listed severity. */
+  @query(#{ explode: false })
+  severities?: AgentInsightSeverity[];
+
+  /** Match any listed status. */
+  @query(#{ explode: false })
+  statuses?: AgentInsightStatus[];
+};
+
+alias AgentInsightReadOptions = {
+  /** Whether to include expanded insight details such as evidence and run links in the response. Defaults to false. */
+  @query include_details?: boolean = false;
+};
+
+alias AgentInsightMonitorFilters = {
+  /** Filter monitors by agent name. */
+  @query agent_name?: string;
+};
+
+alias AgentInsightRunFilters = {
+  /** Filter runs by status. */
+  @query status?: JobStatus;
+
+  /** Filter runs by trigger. */
+  @query trigger?: AgentInsightRunTrigger;
+};
+
+alias AgentInsightMonitorCreatedResponse = ResourceCreatedResponse<AgentInsightMonitor> & {
+  /** URL of the created monitor. */
+  @header("Location")
+  location: string;
+};
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Agent Insights uses project-standard FoundryDataPlaneOperation templates for Foundry data-plane routing and error handling."
+@tag("Agent Insight Monitors")
+interface AgentInsightMonitors {
+  /** List Agent Insights monitors, optionally filtered by agent name. */
+  @get
+  @list
+  @route("/agent_insight_monitors")
+  list is FoundryDataPlaneOperation<
+    {
+      ...AgentInsightsPageQueryParameters;
+      ...AgentInsightMonitorFilters;
+    },
+    AgentsPagedResult<AgentInsightMonitorListItem>
+  >;
+
+  /** Create an Agent Insights monitor for an agent. */
+  @post
+  @route("/agent_insight_monitors")
+  create is FoundryDataPlaneOperation<
+    {
+      ...AgentInsightMonitorCreate;
+    },
+    AgentInsightMonitorCreatedResponse
+  >;
+
+  /** Get an Agent Insights monitor. */
+  @get
+  @route("/agent_insight_monitors/{monitor_id}")
+  get is FoundryDataPlaneOperation<
+    {
+      /** The identifier of the monitor. */
+      @path monitor_id: string;
+    },
+    AgentInsightMonitor
+  >;
+
+  /** Delete an Agent Insights monitor and all of its runs, insights, and state. */
+  @delete
+  @route("/agent_insight_monitors/{monitor_id}")
+  delete is FoundryDataPlaneOperation<
+    {
+      /** The identifier of the monitor. */
+      @path monitor_id: string;
+    },
+    NoContentResponse
+  >;
+
+  /** Update an Agent Insights monitor. */
+  @patch
+  @route("/agent_insight_monitors/{monitor_id}")
+  @opExample(
+    #{
+      parameters: #{
+        apiVersion: "v1",
+        monitor_id: "monitor_123",
+        content_type: "application/merge-patch+json",
+        priorities: #{ categories: #["latency"], instructions: null },
+      },
+    },
+    #{ title: "Replace categories and clear instructions" }
+  )
+  @opExample(
+    #{
+      parameters: #{
+        apiVersion: "v1",
+        monitor_id: "monitor_123",
+        content_type: "application/merge-patch+json",
+        priorities: null,
+      },
+    },
+    #{ title: "Clear priorities" }
+  )
+  @opExample(
+    #{
+      parameters: #{
+        apiVersion: "v1",
+        monitor_id: "monitor_123",
+        content_type: "application/merge-patch+json",
+        priorities: #{ categories: #[] },
+      },
+    },
+    #{ title: "Use default categories" }
+  )
+  update is FoundryDataPlaneOperation<
+    {
+      /** The identifier of the monitor. */
+      @path monitor_id: string;
+
+      /** Content type for patch operations. */
+      @header("Content-Type")
+      content_type: "application/merge-patch+json";
+
+      ...AgentInsightMonitorUpdate;
+    },
+    OkResponse & AgentInsightMonitor
+  >;
+
+  /** Reset an Agent Insights monitor's generated summary, checkpoint, and active insight state. */
+  @post
+  @route("/agent_insight_monitors/{monitor_id}:reset")
+  reset is FoundryDataPlaneOperation<
+    {
+      /** The identifier of the monitor. */
+      @path monitor_id: string;
+    },
+    NoContentResponse
+  >;
+
+  /** Start an Agent Insights run for a monitor. */
+  @post
+  @route("/agent_insight_monitors/{monitor_id}/runs")
+  @pollingOperation(AgentInsightMonitors.getRun)
+  createRun is FoundryDataPlaneOperation<
+    {
+      ...WithOperationId;
+
+      /** The identifier of the monitor. */
+      @path monitor_id: string;
+
+      ...AgentInsightRunCreateParameters;
+    },
+    JobCreatedResponse<AgentInsightRun>
+  >;
+
+  /** List Agent Insights runs for a monitor. */
+  @get
+  @list
+  @route("/agent_insight_monitors/{monitor_id}/runs")
+  listRuns is FoundryDataPlaneOperation<
+    {
+      /** The identifier of the monitor. */
+      @path monitor_id: string;
+
+      ...AgentInsightsPageQueryParameters;
+      ...AgentInsightRunFilters;
+    },
+    AgentsPagedResult<AgentInsightRun>
+  >;
+
+  /** Get an Agent Insights run. */
+  @get
+  @route("/agent_insight_monitors/{monitor_id}/runs/{run_id}")
+  getRun is FoundryDataPlaneOperation<
+    {
+      /** The identifier of the monitor. */
+      @path monitor_id: string;
+
+      /** The identifier of the run. */
+      @path run_id: string;
+    },
+    AgentInsightRun
+  >;
+
+  /** Cancel an Agent Insights run. */
+  @post
+  @route("/agent_insight_monitors/{monitor_id}/runs/{run_id}:cancel")
+  cancelRun is FoundryDataPlaneOperation<
+    {
+      /** The identifier of the monitor. */
+      @path monitor_id: string;
+
+      /** The identifier of the run. */
+      @path run_id: string;
+    },
+    OkResponse & AgentInsightRun
+  >;
+
+  /** List current insights for a monitor. Filter types combine with AND; values within each list combine with OR. */
+  @get
+  @list
+  @route("/agent_insight_monitors/{monitor_id}/insights")
+  listInsights is FoundryDataPlaneOperation<
+    {
+      /** The identifier of the monitor. */
+      @path monitor_id: string;
+
+      ...AgentInsightsPageQueryParameters;
+      ...AgentInsightListFilters;
+      ...AgentInsightReadOptions;
+    },
+    AgentsPagedResult<AgentInsight>
+  >;
+
+  /** Get a full insight for an Agent Insights monitor. */
+  @get
+  @route("/agent_insight_monitors/{monitor_id}/insights/{insight_id}")
+  getInsight is FoundryDataPlaneOperation<
+    {
+      /** The identifier of the monitor. */
+      @path monitor_id: string;
+
+      /** The identifier of the insight. */
+      @path insight_id: string;
+
+      ...AgentInsightReadOptions;
+    },
+    AgentInsight
+  >;
+
+  /** Update the lifecycle status of an insight. */
+  @patch
+  @route("/agent_insight_monitors/{monitor_id}/insights/{insight_id}")
+  updateInsight is FoundryDataPlaneOperation<
+    {
+      /** The identifier of the monitor. */
+      @path monitor_id: string;
+
+      /** The identifier of the insight. */
+      @path insight_id: string;
+
+      /** Content type for patch operations. */
+      @header("Content-Type")
+      content_type: "application/merge-patch+json";
+
+      ...AgentInsightUpdate;
+    },
+    OkResponse & AgentInsight
+  >;
+}

@@ -1,16 +1,15 @@
 import "../common/models.tsp";
 import "../common/servicepatterns.tsp";
 import "./models.tsp";
+import "./diagnostics.tsp";
 
 namespace Azure.AI.Projects;
 using Http;
 using OpenAPI;
 using Azure.Core;
 
-alias EvaluatorsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
-
 alias ListEvaluatorVersionsParameters = {
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Auto-suppressed warnings non-applicable rules during import."
   @doc("Filter evaluators by type. Possible values: 'all', 'custom', 'builtin'.")
   @Http.query
   type?: EvaluatorType | "all";
@@ -20,8 +19,70 @@ alias ListEvaluatorVersionsParameters = {
   limit?: int32 = 20;
 };
 
+alias ListEvaluatorDiagnosticsParameters = {
+  ...OmitProperties<CommonPageQueryParameters, "order" | "limit">;
+
+  @doc("The maximum number of lineage entries to return, between 1 and 100. The default is 20.")
+  @minValue(1)
+  @maxValue(100)
+  @query
+  limit?: int32 = 20;
+
+  @doc("Sort completed diagnostics by `occurred_at`, then diagnostic identifier. The default is `desc`.")
+  @query
+  order?: PageOrder = "desc";
+
+  @doc("Inclusive lower bound for the diagnostic occurrence time, expressed as Unix seconds.")
+  @query
+  start_time?: FoundryTimestamp;
+
+  @doc("Inclusive upper bound for the diagnostic occurrence time, expressed as Unix seconds. Includes all entries occurring within that second.")
+  @query
+  end_time?: FoundryTimestamp;
+
+  @doc("Filter lineage diagnostics by the exact published evaluator version.")
+  @query
+  evaluator_version?: EvaluatorVersionNumber;
+
+  @doc("Filter completed diagnostics for one public rubric dimension identifier.")
+  @minLength(1)
+  @maxLength(128)
+  @query
+  dimension_id?: string;
+
+  @doc("Filter by one or more completed diagnostic types by repeating the query parameter.")
+  @minItems(1)
+  @query(#{ explode: true })
+  type?: EvaluatorDiagnosticType[];
+};
+
 @tag("Evaluators")
 interface Evaluators {
+  /**
+   * Returns immutable publication lineage for the specified evaluator.
+   *
+   * Time, evaluator-version, dimension, and type filters are intersected.
+   * Returns recorded changes from completed evaluator version writes.
+   * Historical backfill and diagnostic calculation jobs are not included.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Evaluator diagnostics are immutable completed resources with custom evaluator-scoped filtering."
+  @summary("List evaluator diagnostics")
+  @route("/evaluators/{name}/diagnostics")
+  @get
+  @list
+  @extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
+  listDiagnostics is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    {
+      @doc("The evaluator name.")
+      @path
+      name: string;
+
+      ...ListEvaluatorDiagnosticsParameters;
+    },
+    CompletedEvaluatorDiagnosticsPage
+  >;
+
   // GET /evaluators/{name}/versions
   /** Returns the available versions for the specified evaluator. */
   #suppress "@azure-tools/typespec-azure-core/verb-conflict" "Resource action used as a building block."
@@ -32,7 +93,7 @@ interface Evaluators {
   @list
   listVersions is FoundryStandardResourceOperations.ResourceAction<
     EvaluatorVersion,
-    ListEvaluatorVersionsParameters & EvaluatorsPreviewHeader,
+    ListEvaluatorVersionsParameters,
     Azure.Core.Page<EvaluatorVersion>
   >;
 
@@ -43,7 +104,7 @@ interface Evaluators {
   @Rest.listsResource(EvaluatorVersion)
   listLatestVersions is FoundryResourceList<
     EvaluatorVersion,
-    ListEvaluatorVersionsParameters & EvaluatorsPreviewHeader,
+    ListEvaluatorVersionsParameters,
     Azure.Core.Page<EvaluatorVersion>
   >;
 
@@ -54,8 +115,6 @@ interface Evaluators {
   getVersion is FoundryResourceOperation<
     EvaluatorVersion,
     {
-      ...EvaluatorsPreviewHeader;
-
       @doc(
         "The specific version id of the {name} to retrieve.",
         EvaluatorVersion
@@ -75,8 +134,6 @@ interface Evaluators {
   deleteVersion is FoundryResourceOperation<
     EvaluatorVersion,
     {
-      ...EvaluatorsPreviewHeader;
-
       @doc("The version of the {name} to delete.", EvaluatorVersion)
       @Rest.segment("versions")
       @Http.path
@@ -94,8 +151,6 @@ interface Evaluators {
   createVersion is FoundryResourceOperation<
     EvaluatorVersion,
     {
-      ...EvaluatorsPreviewHeader;
-
       @Http.bodyRoot
       evaluator_version: EvaluatorVersion;
     },
@@ -111,8 +166,6 @@ interface Evaluators {
   updateVersion is FoundryResourceOperation<
     EvaluatorVersion,
     {
-      ...EvaluatorsPreviewHeader;
-
       @doc("The version of the {name} to update.", EvaluatorVersion)
       @Rest.segment("versions")
       @Http.path
@@ -130,12 +183,7 @@ interface Evaluators {
   @summary("Start a pending upload")
   @post
   @route("/evaluators/{name}/versions/{version}/startPendingUpload")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
-  )
-  startPendingUpload is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+  startPendingUpload is FoundryDataPlaneOperation<
     {
       /** The name path parameter. */
       @path
@@ -159,12 +207,7 @@ interface Evaluators {
   @summary("Get evaluator credentials")
   @post
   @route("/evaluators/{name}/versions/{version}/credentials")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
-  )
-  getCredentials is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+  getCredentials is FoundryDataPlaneOperation<
     {
       /** The name path parameter. */
       @path
@@ -187,10 +230,6 @@ interface Evaluators {
 // Evaluator Generation Jobs (LRO — follows DataGenerationJobs pattern)
 // ============================================================================
 
-const EvaluatorGenerationJobsRequiredPreviews = #{
-  required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
-};
-
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 @tag("EvaluatorGenerationJobs")
@@ -199,13 +238,19 @@ interface EvaluatorGenerationJobs {
    * Creates an evaluator generation job. The service generates rubric-based evaluator
    * definitions from the provided source materials asynchronously.
    */
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
   @summary("Create an evaluator generation job")
   @route("evaluator_generation_jobs")
-  @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
   @pollingOperation(EvaluatorGenerationJobs.get)
-  create is postJobPreview<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    EvaluatorGenerationJob
+  @post
+  create is FoundryDataPlaneOperation<
+    {
+      ...WithOperationId;
+
+      /** The evaluator generation job inputs to create. */
+      @body job: EvaluatorGenerationInputs;
+    },
+    JobCreatedResponse<EvaluatorGenerationJob>
   >;
 
   /**
@@ -213,11 +258,7 @@ interface EvaluatorGenerationJobs {
    */
   @summary("Get an evaluator generation job")
   @route("evaluator_generation_jobs/{jobId}")
-  @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
-  get is queryJobStatusPreview<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    EvaluatorGenerationJob
-  >;
+  get is queryJobStatus<EvaluatorGenerationJob>;
 
   /**
    * Returns a list of evaluator generation jobs. The List API has up to a few
@@ -227,22 +268,14 @@ interface EvaluatorGenerationJobs {
    */
   @summary("List evaluator generation jobs")
   @route("evaluator_generation_jobs")
-  @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
-  list is listJobsPreview<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    EvaluatorGenerationJob
-  >;
+  list is listJobs<EvaluatorGenerationJob>;
 
   /**
    * Cancels an evaluator generation job by its ID.
    */
   @summary("Cancel an evaluator generation job")
   @route("evaluator_generation_jobs/{jobId}:cancel")
-  @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
-  cancel is cancelJobPreview<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    EvaluatorGenerationJob
-  >;
+  cancel is cancelJob<EvaluatorGenerationJob>;
 
   /**
    * Deletes an evaluator generation job by its ID. Deletes the job record only;
@@ -250,6 +283,5 @@ interface EvaluatorGenerationJobs {
    */
   @summary("Delete an evaluator generation job")
   @route("evaluator_generation_jobs/{jobId}")
-  @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
-  delete is deleteJobPreview<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
+  delete is deleteJob<EvaluatorGenerationJob>;
 }

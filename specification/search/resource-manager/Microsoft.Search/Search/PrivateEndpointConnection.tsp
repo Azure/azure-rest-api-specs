@@ -41,11 +41,6 @@ interface PrivateEndpointConnections {
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
-      @OpenAPI.extension(
-        "x-ms-parameter-grouping",
-        #{ name: "search-management-request-options" }
-      )
-      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Error = CloudError
@@ -66,11 +61,6 @@ interface PrivateEndpointConnections {
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
-      @OpenAPI.extension(
-        "x-ms-parameter-grouping",
-        #{ name: "search-management-request-options" }
-      )
-      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Response = ArmResourceUpdatedResponse<PrivateEndpointConnection>,
@@ -84,6 +74,7 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Pre-existing API contract: retains 200/404 response."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
   @externalDocs("https://aka.ms/search-manage")
   delete is ArmResourceDeleteSync<
     PrivateEndpointConnection,
@@ -94,11 +85,6 @@ interface PrivateEndpointConnections {
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
-      @OpenAPI.extension(
-        "x-ms-parameter-grouping",
-        #{ name: "search-management-request-options" }
-      )
-      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Response = ArmResponse<PrivateEndpointConnection> | NotFoundResponse,
@@ -119,11 +105,6 @@ interface PrivateEndpointConnections {
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
-      @OpenAPI.extension(
-        "x-ms-parameter-grouping",
-        #{ name: "search-management-request-options" }
-      )
-      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Response = PrivateEndpointConnectionListResult,

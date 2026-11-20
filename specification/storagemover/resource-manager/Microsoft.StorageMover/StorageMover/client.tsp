@@ -107,7 +107,7 @@ using Azure.Core;
 );
 @@alternateType(
   JobDefinitionProperties.crossTenantEndpointResourceId,
-  string,
+  armResourceIdentifier,
   "csharp"
 );
 @@clientName(

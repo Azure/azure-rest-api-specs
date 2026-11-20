@@ -5,9 +5,84 @@ import "../../common/models.tsp";
 using Azure.Core.Experimental;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
+
+namespace Azure.AI.ProjectsInternal {
+  using Azure.AI.Projects;
+
+  /** Azure specific fields used in the creation of "Response" object (i.e. "AgentReference") */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+  model AzureCreateResponseOptions {
+    /** The agent to use for generating the response. */
+    agent_reference?: AgentReference;
+
+    /** The structured inputs to the response that can participate in prompt template substitution or tool argument bindings. */
+    structured_inputs?: Record<unknown>;
+
+    /**
+     * User security context contains several parameters that describe the application itself, and the end user that interacts with the application. These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
+     */
+    user_security_context?: AzureUserSecurityContext;
+
+    /**
+     * Per-request configuration for Model Router inference calls.
+     * Supported on Model Router endpoints (deployed or instant if supported).
+     * Returns a 400 (Bad Request) error when the target is not a Model Router endpoint.
+     */
+    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+    routing_config?: RoutingConfiguration;
+  }
+
+  /** Azure specific fields returned in a "Response" object */
+  model AzureCreateResponseDetails {
+    /** The agent used for this response */
+    agent_reference: AgentReference | null;
+
+    /** Model selection metadata providing visibility into routing decisions. Present when the request was handled by Model Router. */
+    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+    model_selection_details?: ModelSelectionDetails;
+  }
+
+  union _AgentItemType {
+    structured_outputs: "structured_outputs",
+    oauth_consent_request: "oauth_consent_request",
+    memory_search_call: "memory_search_call",
+    memory_command_preview_call: "memory_command_preview_call",
+    memory_command_preview_call_output: "memory_command_preview_call_output",
+    workflow_action: "workflow_action",
+    a2a_preview_call: "a2a_preview_call",
+    a2a_preview_call_output: "a2a_preview_call_output",
+    bing_grounding_call: "bing_grounding_call",
+    bing_grounding_call_output: "bing_grounding_call_output",
+    sharepoint_grounding_preview_call: "sharepoint_grounding_preview_call",
+    sharepoint_grounding_preview_call_output: "sharepoint_grounding_preview_call_output",
+    azure_ai_search_call: "azure_ai_search_call",
+    azure_ai_search_call_output: "azure_ai_search_call_output",
+    bing_custom_search_preview_call: "bing_custom_search_preview_call",
+    bing_custom_search_preview_call_output: "bing_custom_search_preview_call_output",
+    openapi_call: "openapi_call",
+    openapi_call_output: "openapi_call_output",
+    browser_automation_preview_call: "browser_automation_preview_call",
+    browser_automation_preview_call_output: "browser_automation_preview_call_output",
+    fabric_dataagent_preview_call: "fabric_dataagent_preview_call",
+    fabric_dataagent_preview_call_output: "fabric_dataagent_preview_call_output",
+    azure_function_call: "azure_function_call",
+    azure_function_call_output: "azure_function_call_output",
+  }
+
+  union ResponseObjectType {
+    response: "response",
+  }
+}
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Experimental features applied to augment inherited OpenAI models"
 namespace Azure.AI.Projects {
+  const ModelRoutersRequiredPreviews = #{
+    conditional_previews: #[
+      FoundryFeaturesOptInKeys.model_router_controls_v1_preview
+    ],
+  };
+
   @@changePropertyType(OpenAI.CreateResponse.`model`, string);
   @@changePropertyType(OpenAI.Response.`model`, string);
   @@changePropertyType(OpenAI.CompactResponseMethodPublicBody.`model`, string);
@@ -50,19 +125,70 @@ namespace Azure.AI.Projects {
   );
 
   // Any fields marked with `@removed` need to be placed directly under `@@copyProperties`
-  /** Azure specific fields used in the creation of "Response" object (i.e. "AgentReference") */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-  model AzureCreateResponseOptions {
-    /** The agent to use for generating the response. */
-    agent_reference?: AgentReference;
+  alias AzureCreateResponseOptions = Azure.AI.ProjectsInternal.AzureCreateResponseOptions;
 
-    /** The structured inputs to the response that can participate in prompt template substitution or tool argument bindings. */
-    structured_inputs?: Record<unknown>;
+  /**
+   * Per-request configuration for Model Router inference calls.
+   * Supported on Model Router endpoints (deployed or instant if supported).
+   * Returns a 400 (Bad Request) error when the target is not a Model Router endpoint.
+   */
+  model RoutingConfiguration {
+    /**
+     * Session affinity configuration for reusing an eligible model across requests in the same conversation.
+     * If omitted, adaptive affinity is used when a supported conversation identifier is available.
+     */
+    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+    session_affinity?: SessionAffinityConfiguration;
+
+    /** Overrides the routing objective for this request. If omitted, the configured routing mode is used. */
+    mode?: ModelRouterMode;
+
+    /** Model names used to narrow the configured model pool for this request. If omitted, the configured model pool is used. */
+    @minItems(1)
+    models?: string[];
 
     /**
-     * User security context contains several parameters that describe the application itself, and the end user that interacts with the application. These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
+     * When true, restricts routing to qualified model and serving API combinations that support
+     * all applicable request parameters. Returns 400 (Bad Request) when none qualify.
+     * Defaults to false when omitted. Explicit null and non-boolean values return 400.
+     * Requires the Foundry-Features: ModelRouterControls=V1Preview header.
+     * Applies only to qualified model, API, and adapter mappings, not every provider-native option.
+     * This setting is request-scoped; it does not introduce stored deployment defaults.
      */
-    user_security_context?: AzureUserSecurityContext;
+    // Naming aligns with OpenRouter's require_parameters; LiteLLM exposes the inverse as drop_params.
+    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+    require_parameters?: boolean = false;
+  }
+
+  /** Request settings that control Model Router session affinity. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  model SessionAffinityConfiguration {
+    /** Controls how session affinity influences model selection for this request. When omitted, adaptive affinity is used. */
+    strategy?: SessionAffinityRequestStrategy = SessionAffinityRequestStrategy.adaptive;
+
+    /** Deprecated request alias for `strategy`. Ignored when `strategy` is also supplied. */
+    #deprecated "Use `strategy` instead."
+    mode?: SessionAffinityRequestStrategy;
+
+    /**
+     * An opaque, application-owned conversation identifier. Use the same value for related requests.
+     * The value is not returned in the response and must not contain secrets or personally identifiable information.
+     */
+    session_id?: string;
+  }
+
+  /** Request strategies supported by Model Router session affinity. */
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service rejects unknown request strategies with a 400 response."
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  union SessionAffinityRequestStrategy {
+    /** Attempts to reuse the model associated with the selected conversation identifier. */
+    sticky: "sticky",
+
+    /** Chooses between the associated model and a newly ranked model by balancing expected response quality and cache benefit. */
+    adaptive: "adaptive",
+
+    /** Disables affinity state lookup and update for this request. */
+    none: "none",
   }
 
   @@copyProperties(
@@ -89,10 +215,161 @@ namespace Azure.AI.Projects {
   );
 
   // Any fields marked with `@removed` need to be placed directly under `@@copyProperties`
-  /** Azure specific fields returned in a "Response" object */
-  model AzureCreateResponseDetails {
-    /** The agent used for this response */
-    agent_reference: AgentReference | null;
+  alias AzureCreateResponseDetails = Azure.AI.ProjectsInternal.AzureCreateResponseDetails;
+
+  /** The routing mode used by Model Router for the request. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  union ModelRouterMode {
+    string,
+
+    /** Default routing strategy balancing cost and accuracy across eligible models. */
+    balanced: "balanced",
+
+    /** Prioritizes cost. */
+    cost: "cost",
+
+    /** Prioritizes accuracy. */
+    quality: "quality",
+  }
+
+  /** A value returned in a response header from a model routing attempt. */
+  #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  union ModelRouterResponseHeaderValue {
+    string,
+    int32,
+  }
+
+  /** Error details returned by a model routing attempt. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  model ModelRouterAttemptError {
+    /** A service-defined error code. */
+    code?: string;
+
+    /** A human-readable description of the error. */
+    message: string;
+  }
+
+  /** The HTTP-style result returned by a model routing attempt. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  model ModelRouterAttemptResult {
+    /** The HTTP status code returned by the model. */
+    @minValue(100)
+    @maxValue(599)
+    status: int32;
+
+    /** Response headers returned by the model. */
+    headers?: Record<ModelRouterResponseHeaderValue>;
+
+    /** Error details returned when the attempt did not succeed. */
+    error?: ModelRouterAttemptError;
+  }
+
+  /** A single routing attempt targeting a specific model. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  model ModelRouterAttempt {
+    /** The model targeted in this attempt. */
+    `model`: string;
+
+    /** How this attempt concluded — whether the model served the request successfully or encountered an error. */
+    result: ModelRouterAttemptResult;
+  }
+
+  /** A single entry in the routing trace representing one inference turn. Each entry contains the latency and the ordered list of attempts for that turn. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  model RoutingTraceEntry {
+    /** Identifier of the output item/turn this routing decision is associated with. This is omitted for Chat Completions. */
+    output_id?: string;
+
+    /** Time in milliseconds spent in the routing decision for this turn. */
+    #suppress "@azure-tools/typespec-azure-core/known-encoding" "Service uses milliseconds."
+    @encode(DurationKnownEncoding.milliseconds, uint32)
+    latency_ms: duration;
+
+    /** Ordered list of routing attempts. First element is the initial selection; subsequent elements are fallback attempts. There is always at least one attempt. */
+    @minItems(1)
+    attempts: ModelRouterAttempt[];
+  }
+
+  /** Routing decision metadata from Model Router. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  model ModelRouterDetails {
+    /** The routing mode for the request. */
+    mode: ModelRouterMode;
+
+    /** Session affinity metadata for the routing decision. Omitted when affinity metadata is unavailable or the preview feature is not enabled. */
+    session_affinity?: SessionAffinityDetails;
+
+    /** Ordered trace of routing decisions. Contains one entry for Chat Completions, and may contain multiple entries for Responses API or agent scenarios where multiple inference turns occur. */
+    routing_trace: RoutingTraceEntry[];
+  }
+
+  /** Effective Model Router session affinity metadata for a request. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  model SessionAffinityDetails {
+    /** The effective session affinity strategy. */
+    strategy: SessionAffinityStrategy;
+
+    /** The identity source selected after applying precedence. Omitted when affinity is disabled. */
+    source?: SessionAffinitySource;
+
+    /** The final affinity outcome for the model that served the response. Omitted when affinity is disabled or no usable identity was available. */
+    decision?: SessionAffinityDecision;
+  }
+
+  /** Effective strategies reported for Model Router session affinity. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  union SessionAffinityStrategy {
+    string,
+
+    /** The associated eligible model was preferred for the request. */
+    sticky: "sticky",
+
+    /** Model Router chose between the associated model and a newly ranked model for the request. */
+    adaptive: "adaptive",
+
+    /** Affinity was disabled for the request. */
+    none: "none",
+  }
+
+  /** Conversation identifier sources supported by Model Router session affinity. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  union SessionAffinitySource {
+    string,
+
+    /** An explicit session identifier supplied in the request body. */
+    session_id_payload: "session_id_payload",
+
+    /** An explicit session identifier supplied in the `x-ms-session-id` request header. */
+    session_id_header: "session_id_header",
+
+    /** No usable conversation identifier was available. */
+    not_available: "not_available",
+
+    /** A service-derived fingerprint based on Responses linkage or request content. */
+    derived_fingerprint: "derived_fingerprint",
+  }
+
+  /** Final outcomes reported for Model Router session affinity. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  union SessionAffinityDecision {
+    string,
+
+    /** A new model association was initialized. */
+    initialize: "initialize",
+
+    /** The previously associated model served the response. */
+    retain: "retain",
+
+    /** A different model served the response and the association is updated after success. */
+    switch: "switch",
+  }
+
+  /** Model selection metadata providing visibility into routing decisions. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  model ModelSelectionDetails {
+    /** Routing decision metadata from Model Router. Present when the request was handled by Model Router. */
+    model_router_details: ModelRouterDetails;
   }
 
   @@withoutOmittedProperties(OpenAI.CodeInterpreterTool, "container");
@@ -104,7 +381,7 @@ namespace Azure.AI.Projects {
        * optional `memory_limit` setting.
        * If not provided, the service assumes auto.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Copying existing union type."
+      #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Copying existing union type."
       container?: string | OpenAI.AutoCodeInterpreterToolParam,
     }
   );
@@ -163,32 +440,7 @@ namespace Azure.AI.Projects {
   //  2. Define extended base types using the new extended discriminator
   //  3. Replace references to pre-extension base types with extended base types
 
-  union _AgentItemType {
-    structured_outputs: "structured_outputs",
-    oauth_consent_request: "oauth_consent_request",
-    memory_search_call: "memory_search_call",
-    memory_command_preview_call: "memory_command_preview_call",
-    memory_command_preview_call_output: "memory_command_preview_call_output",
-    workflow_action: "workflow_action",
-    a2a_preview_call: "a2a_preview_call",
-    a2a_preview_call_output: "a2a_preview_call_output",
-    bing_grounding_call: "bing_grounding_call",
-    bing_grounding_call_output: "bing_grounding_call_output",
-    sharepoint_grounding_preview_call: "sharepoint_grounding_preview_call",
-    sharepoint_grounding_preview_call_output: "sharepoint_grounding_preview_call_output",
-    azure_ai_search_call: "azure_ai_search_call",
-    azure_ai_search_call_output: "azure_ai_search_call_output",
-    bing_custom_search_preview_call: "bing_custom_search_preview_call",
-    bing_custom_search_preview_call_output: "bing_custom_search_preview_call_output",
-    openapi_call: "openapi_call",
-    openapi_call_output: "openapi_call_output",
-    browser_automation_preview_call: "browser_automation_preview_call",
-    browser_automation_preview_call_output: "browser_automation_preview_call_output",
-    fabric_dataagent_preview_call: "fabric_dataagent_preview_call",
-    fabric_dataagent_preview_call_output: "fabric_dataagent_preview_call_output",
-    azure_function_call: "azure_function_call",
-    azure_function_call_output: "azure_function_call_output",
-  }
+  alias _AgentItemType = Azure.AI.ProjectsInternal._AgentItemType;
 
   @@copyVariants(OpenAI.ItemType, _AgentItemType);
   @@copyVariants(OpenAI.ItemResourceType, _AgentItemType);
@@ -200,7 +452,7 @@ namespace Azure.AI.Projects {
     {
       /** The information about the creator of the item */
       #suppress "@azure-tools/typespec-autorest/union-unsupported" "Temporary suppression to allow union type."
-      #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "This is required due to a conflict with the service."
+      #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "This is required due to a conflict with the service."
       @removed(Versions.v1)
       created_by?: CreatedBy | string,
 
@@ -243,14 +495,12 @@ namespace Azure.AI.Projects {
     @doc("ID of the previous action if this action follows another.")
     previous_action_id?: string;
 
-    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Auto-suppressed warnings non-applicable rules during import."
     @doc("Status of the action (e.g., 'in_progress', 'completed', 'failed', 'cancelled').")
     status: "completed" | "failed" | "in_progress" | "cancelled";
   }
 
-  union ResponseObjectType {
-    response: "response",
-  }
+  alias ResponseObjectType = Azure.AI.ProjectsInternal.ResponseObjectType;
 
   @doc("The result of a delete response operation.")
   model DeleteResponseResult {

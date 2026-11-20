@@ -181,8 +181,8 @@ enum ListBlobsShowOnlyGo {
 @@alternateType(ListBlobsShowOnly, ListBlobsShowOnlyGo, "go");
 @@alternateType(ContentMD5ResponseHeader.contentMD5, string, "go");
 @@alternateType(PathItem.eTag, string, "go");
-@@alternateType(BlobPropertiesInternal.etag, string, "go");
 @@clientName(PathItem, "Path", "go");
+@@clientName(BlobPropertiesInternal.etag, "ETag", "go");
 @@clientName(BlobItem, "PathItemInternal", "go");
 @@clientName(BlobHierarchyListSegment.blobItems, "PathItems", "go");
 @@clientName(BlobPropertiesInternal, "PathPropertiesInternal", "go");
@@ -217,3 +217,50 @@ enum ListBlobsShowOnlyGo {
   true,
   "go"
 );
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(
+  Path.delete,
+  "responseEnvelopeName",
+  "PathClientDeleteResponseInternal",
+  "go"
+);
+
+// C++ customizations
+@@access(Service.listFileSystems, Access.internal, "cpp");
+@@access(FileSystem.create, Access.internal, "cpp");
+@@access(FileSystem.setProperties, Access.internal, "cpp");
+@@access(FileSystem.getProperties, Access.internal, "cpp");
+@@access(FileSystem.delete, Access.internal, "cpp");
+@@access(FileSystem.listBlobHierarchySegment, Access.internal, "cpp");
+@@access(Path.update, Access.internal, "cpp");
+@@access(Path.lease, Access.internal, "cpp");
+@@access(Path.read, Access.internal, "cpp");
+@@access(Path.setExpiry, Access.internal, "cpp");
+
+@@alternateType(ContentMD5ResponseHeader.contentMD5, string, "cpp");
+@@alternateType(ContentMD5ResponseHeaderBytes.contentMD5, string, "cpp");
+@@alternateType(ContentCrc64ResponseHeader.contentCrc64, string, "cpp");
+@@alternateType(EtagResponseHeader.eTag, Azure.Core.eTag | null, "cpp");
+@@alternateType(
+  LastModifiedResponseHeader.lastModified,
+  utcDateTime | null,
+  "cpp"
+);
+@@alternateType(
+  CreationTimeResponseHeader.creationTime,
+  utcDateTime | null,
+  "cpp"
+);
+@@alternateType(ExpiryTimeResponseHeader.expiresOn, utcDateTime | null, "cpp");
+
+/** A path returned to the C++ protocol client. */
+@clientName("PathItem", "cpp")
+model PathItemCpp {
+  ...OmitProperties<PathItem, "eTag">;
+
+  /** The entity tag, when returned by the service. */
+  @encodedName("application/json", "etag")
+  eTag?: Azure.Core.eTag;
+}
+
+@@alternateType(PathItem, PathItemCpp, "cpp");

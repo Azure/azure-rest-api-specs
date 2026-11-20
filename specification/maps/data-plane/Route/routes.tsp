@@ -583,18 +583,11 @@ interface Route {
    * request's parameters, the request does not meet the requirements and will not
    * be processed.
    *
-   * | Max matrix size | Max number of origins  | Max number of destinations |
-   * Additional limits
-   *
-   * |------------------|------------------------|----------------------------|------------|
-   * | 100              | 100         | 100              | N/A |
-   * | 200              | 200         | 200              | All origins and
-   * destinations should be contained in an axis-aligned 400 km x 400 km bounding
-   * box. Otherwise, some matrix cells will be resolved as OUT_OF_REGION.  |
-   * | 2500             | 1000        | 1000             | - `departAt` or
-   * `arriveAt` must be any.<br> - `traffic` must be historical.<br> - `travelMode`
-   * must be either driving or truck<br> - No other parameters can be used
-   * explicitly   |
+   * Max matrix size | Max number of origins  | Max number of destinations | Additional limits
+   * ----------------|------------------------|----------------------------|------------------
+   * 100             | 100         | 100              | N/A
+   * 200             | 200         | 200              | All origins and destinations should be contained in an axis-aligned 400 km x 400 km bounding box. Otherwise, some matrix cells will be resolved as OUT_OF_REGION.
+   * 2500            | 1000        | 1000             | - `departAt` or `arriveAt` must be any.<br> - `traffic` must be historical.<br> - `travelMode` must be either driving or truck<br> - No other parameters can be used explicitly.
    *
    *
    * Examples:
@@ -741,19 +734,10 @@ interface Route {
    * request's parameters, the request does not meet the requirements and will not
    * be processed.
    *
-   *  | Max matrix size  | Max number of origins | Max number of destinations  |
-   * Additional limits |
-   *
-   * |------------------|-----------------------|-----------------------------|-------------------|
-   * | 2500             | 1000                  | 1000                        | All
-   * origins and destinations should be contained in an axis-aligned 400 km x 400 km
-   * bounding box. Otherwise some matrix cells will be resolved as OUT_OF_REGION.  |
-   * | 50,000           | 10,000                | 10,000                      | -
-   * `departAt` or `arriveAt` must be any.<br>- `traffic` must be historical.<br/>-
-   * `optimizeRoute` must be fastest.<br/>- `travelMode` must be
-   * either driving or truck. <br/>- No other parameters can be used explicitly.  |
-   *
-   *
+   * Max matrix size  | Max number of origins | Max number of destinations  | Additional limits
+   * -----------------|-----------------------|-----------------------------|-------------------
+   * 2500             | 1000                  | 1000                        | All origins and destinations should be contained in an axis-aligned 400 km x 400 km bounding box. Otherwise some matrix cells will be resolved as OUT_OF_REGION.
+   * 50,000           | 10,000                | 10,000                      | - `departAt` or `arriveAt` must be any.<br>- `traffic` must be historical.<br/>- `optimizeRoute` must be fastest.<br/>- `travelMode` must be either driving or truck. <br/>- No other parameters can be used explicitly.
    *
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API contract"

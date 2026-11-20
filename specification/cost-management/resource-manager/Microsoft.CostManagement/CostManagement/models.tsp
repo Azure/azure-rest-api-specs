@@ -1574,6 +1574,7 @@ model RecommendationUsageDetails {
   /**
    * On-demand charges for each hour between firstConsumptionDate and lastConsumptionDate that were used for computing benefit recommendations.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "Preserve the existing decimal wire format for compatibility; changing numeric precision requires service review."
   @visibility(Lifecycle.Read)
   charges?: decimal[];
 }
@@ -4875,6 +4876,7 @@ model MarkupRuleProperties {
 /**
  * Markup rule list result. It contains a list of Markup rules.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2026_06_01)
 model MarkupRulePagedResponse {
   /**

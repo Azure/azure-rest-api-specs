@@ -35,60 +35,6 @@ modelerfour:
   flatten-models: false
 ```
 
-### Tag: package-2019-11-04-preview
-
-These settings apply only when `--tag=package-2019-11-04-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-11-04-preview'
-input-file:
-  - preview/2019-11-04-preview/quantum.json
-```
-
-### Tag: package-2022-01-10-preview
-
-These settings apply only when `--tag=package-2022-01-10-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2022-01-10-preview'
-input-file:
-  - preview/2022-01-10-preview/quantum.json
-```
-
-### Tag: package-2023-11-13-preview
-
-These settings apply only when `--tag=package-2023-11-13-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2023-11-13-preview'
-input-file:
-  - preview/2023-11-13-preview/quantum.json
-```
-
-### Tag: package-2025-01-01-preview
-
-These settings apply only when `--tag=package-2025-01-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2025-01-01-preview'
-input-file:
-  - preview/2025-01-01-preview/quantum.json
-```
-
-### Tag: package-2025-08-11-preview
-
-These settings apply only when `--tag=package-2025-08-11-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2025-08-11-preview'
-input-file:
-  - preview/2025-08-11-preview/quantum.json
-```
-
-### Tag: package-2025-11-01-preview
-
-These settings apply only when `--tag=package-2025-11-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2025-11-01-preview'
-input-file:
-  - preview/2025-11-01-preview/quantum.json
-```
-
 ### Tag: package-2025-12-15-preview
 
 These settings apply only when `--tag=package-2025-12-15-preview` is specified on the command line.

@@ -23,7 +23,7 @@ Within the azure-rest-api-specs repository, the TypeSpec specification serves as
 
 ### Detailed information
 
-- [Setting up local environment for TypeSpec](./typespec-rest-api-dev-process.md#2-repo-setup--prerequisites)
-- Read up on [Folder Structure for TypeSpec](./typespec-structure-guidelines.md)
-- [Setting up a new TypeSpec project](./typespec-rest-api-dev-process.md#3-creating-a-new-typespec-project)
-- [Setting up and regenerate SDK projects](./typespec-rest-api-dev-process.md#5-generate-sdk-code-from-a-typespec-project)
+- [Setting up local environment for TypeSpec](./contributing/typespec-development-process.md#2-repo-setup--prerequisites)
+- Read up on [Folder Structure for TypeSpec](https://aka.ms/azsdk/spec-dirs)
+- [Setting up a new TypeSpec project](./contributing/typespec-development-process.md#3-creating-a-new-typespec-project)
+- [Setting up and regenerate SDK projects](./contributing/typespec-development-process.md#5-generate-sdk-code-from-a-typespec-project)

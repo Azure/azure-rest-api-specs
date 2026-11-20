@@ -33,9 +33,7 @@ function errorResult(error: string): {
   };
 }
 
-export function validateSdkSuppressionsFile(
-  suppressionContent: string | object | undefined | null,
-): {
+export function validateSdkSuppressionsFile(suppressionContent: unknown): {
   result: boolean;
   message: string;
 } {

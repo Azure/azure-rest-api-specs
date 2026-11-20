@@ -563,6 +563,18 @@ union TargetType {
   FlowType: "FlowType",
 
   /**
+   * The action executing is targeting a storage flow.
+   */
+  @added(Versions.v2026_06_29_preview)
+  StorageTransferFlow: "StorageTransferFlow",
+
+  /**
+   * The action executing is targeting a messaging flow.
+   */
+  @added(Versions.v2026_06_29_preview)
+  MessagingTransferFlow: "MessagingTransferFlow",
+
+  /**
    * The action executing is targeting a flow profile.
    */
   @added(Versions.v2026_02_06_preview)
@@ -572,6 +584,7 @@ union TargetType {
 /**
  * The request used to list approved schemas within the resource provider. ListApprovedSchemaRequest has reached end of life support starting version 2025-05-30-preview. Please manage schemas with a FlowProfile resource instead.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model ListApprovedSchemasRequest {
   /**
    * The name of the pipeline to filter approved schemas.
@@ -1132,6 +1145,7 @@ model SelectedResource {
 /**
  * The option associated with messaging flows.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model MessagingOptions {
   /**
    * Billing tier for this messaging flow
@@ -1148,6 +1162,7 @@ model MessagingOptions {
 /**
  * Properties specific to API Flow Type
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 model ApiFlowOptions {
   /**
    * Remote host to which communication needs to be made. The property has reached end of life support starting version 2025-05-30-preview. Please create and use the remoteEndpointSettings.endpoint property instead.
@@ -1662,6 +1677,7 @@ model PipelineConnectionProperties {
 /**
  * Defines the required request body for retrieving Pipeline metadata for a provided pipeline.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
 @added(Versions.v2026_02_06_preview)
 model ListPipelineMetadataRequest {
   /**
@@ -1726,4 +1742,38 @@ model DirectionSettings {
    * The pricing options available for messaging flows in this direction.
    */
   messagingFlowsPricingOptions?: FlowBillingTier[];
+
+  /**
+   * The one-to-one mappings between storage flow locations in this cloud and
+   * corresponding storage flow locations in the other cloud for this direction.
+   * Each location and paired location appears in at most one mapping.
+   */
+  @added(Versions.v2026_06_29_preview)
+  @identifiers(#["location"])
+  storageLocationMappings?: LocationMapping[];
+
+  /**
+   * The one-to-one mappings between messaging flow locations in this cloud and
+   * corresponding messaging flow locations in the other cloud for this direction.
+   * Each location and paired location appears in at most one mapping.
+   */
+  @added(Versions.v2026_06_29_preview)
+  @identifiers(#["location"])
+  messagingLocationMappings?: LocationMapping[];
+}
+/**
+ * Maps a flow location in this cloud to the corresponding flow location
+ * in the other cloud.
+ */
+@added(Versions.v2026_06_29_preview)
+model LocationMapping {
+  /**
+   * The Azure location name of the flow in this cloud.
+   */
+  location: string;
+
+  /**
+   * The Azure location name of the corresponding flow in the other cloud.
+   */
+  pairedLocation: string;
 }

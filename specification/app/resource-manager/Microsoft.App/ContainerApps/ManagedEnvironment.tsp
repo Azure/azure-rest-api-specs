@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 /**
@@ -142,6 +144,19 @@ interface ManagedEnvironments {
   >;
 
   /**
+   * Checks whether a Managed Environment can be migrated to a target mode.
+   */
+  @added(Versions.v2026_07_01)
+  @action("checkMigrationEligibility")
+  @summary("Checks whether a Managed Environment can be migrated to a target mode.")
+  checkMigrationEligibility is ArmResourceActionSync<
+    ManagedEnvironment,
+    CheckMigrationEligibilityRequest,
+    ArmResponse<CheckMigrationEligibilityResponse>,
+    Error = DefaultErrorResponse
+  >;
+
+  /**
    * List private link resources for a given managed environment.
    */
   @list
@@ -172,4 +187,8 @@ interface ManagedEnvironments {
 @@doc(
   ManagedEnvironments.checkNameAvailability::parameters.body,
   "The check name availability request."
+);
+@@doc(
+  ManagedEnvironments.checkMigrationEligibility::parameters.body,
+  "The migration eligibility check request."
 );

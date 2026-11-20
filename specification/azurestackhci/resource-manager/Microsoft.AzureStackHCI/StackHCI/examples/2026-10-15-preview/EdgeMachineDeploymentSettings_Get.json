@@ -1,0 +1,67 @@
+{
+  "title": "EdgeMachineDeploymentSettings_Get",
+  "operationId": "EdgeMachineDeploymentSettings_Get",
+  "parameters": {
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "edgeMachineName": "EdgeMachine01",
+    "deploymentSettingName": "default",
+    "api-version": "2026-10-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "deploymentConfiguration": {
+            "version": "10.2.0.0",
+            "scaleUnits": [
+              {
+                "deploymentData": {
+                  "storageType": "SANISCSI",
+                  "iScsiConfig": {
+                    "iScsiNetworkConfig": {
+                      "adapterProperties": {
+                        "jumboPacket": 9014
+                      },
+                      "adapterIPConfig": [
+                        {
+                          "networkAdapterName": "iSCSI-A",
+                          "vlanId": 401,
+                          "addressPrefix": "10.10.50.0/24",
+                          "targetPortalAddresses": [
+                            {
+                              "ipAddress": "10.0.0.1",
+                              "nextHop": "10.10.50.1"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "chapSettings": {
+                      "chapType": "Bidirectional"
+                    },
+                    "initiatorIqn": "iqn.2025-01.com.example:storage-target"
+                  }
+                }
+              }
+            ]
+          },
+          "provisioningState": "Succeeded",
+          "reportedProperties": {
+            "validationStatus": {
+              "status": "Success",
+              "steps": []
+            },
+            "deploymentStatus": {
+              "status": "Success",
+              "steps": []
+            }
+          }
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/EdgeMachine01/deploymentSettings/default",
+        "name": "default",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/deploymentSettings"
+      }
+    }
+  }
+}

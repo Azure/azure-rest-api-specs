@@ -122,10 +122,13 @@ interface Galleries {
    * List soft-deleted resources of an artifact in the gallery, such as soft-deleted gallery image version of an image.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface"
   @get
   @action("versions")
   @list
+  @armResourceList(GallerySoftDeletedResourceList)
   @tag("SoftDelete")
   @operationId("SoftDeletedResource_ListByArtifactName")
   listByArtifactName is ComputeResourceActionSync<
@@ -144,7 +147,7 @@ interface Galleries {
       /**
        * The artifact name to be listed. If artifact type is Images, then the artifact name should be the gallery image name.
        */
-      @pattern("^[a-zA-Z0-9]+([_]?[a-zA-Z0-9]+)*$")
+      @pattern("^[^_\\W][\\w-._]{0,79}(?<![-.])$")
       @path
       @segment("artifacts")
       artifactName: string;
