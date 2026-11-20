@@ -217,15 +217,6 @@ const report = renderMarkdownDoc(
 - `Readme` — model of an autorest `readme.md`: `getGlobalConfig()`, `getTags()`, `path`,
   `specModel`, `toJSONAsync(options)`, `toString()`.
 
-### `sdk-check-metadata` — private SDK check transport
-
-- `SdkMetadataSchema`, `SdkMetadata` — the shared versioned envelope and complete manifest contract.
-- `serializeSdkMetadata(value)`, `parseSdkMetadata(text)` — validate the same wire contract and
-  UTF-8 byte budget on both sides, preserving unknown manifest fields.
-- `sdkMetadataCheckName`, `sdkMetadataExternalId`, `sdkMetadataExternalIdPrefix` — companion
-  check naming and source-attempt identity.
-- `nativeSdkBuildIdentity(check)` — correlate native build URLs and immutable external IDs.
-
 ### `sdk-types` — SDK language types & schemas
 
 - `SdkName` — frozen enum of SDK language identifiers (Go/Java/Js/Net/Python/Rust).

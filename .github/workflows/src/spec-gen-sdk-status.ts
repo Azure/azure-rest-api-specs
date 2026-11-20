@@ -1,16 +1,9 @@
 import { CheckStatus, CommitStatusState, PER_PAGE_MAX } from "../../shared/src/github.ts";
-import {
-  SpecGenSdkArtifactInfoSchema,
-  type SpecGenSdkArtifactInfo,
-} from "../../shared/src/sdk-types.ts";
+import { SpecGenSdkArtifactInfoSchema } from "../../shared/src/sdk-types.ts";
 import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.ts";
 import { extractInputs } from "./context.ts";
-import type { CheckRuns, Core, GitHub, GitHubScriptArgs, WebhookEvent } from "./github.ts";
-import {
-  isPrivateSdkRepository,
-  loadPrivateSdkChecks,
-  readPrivateSdkArtifact,
-} from "./sdk-check-metadata.ts";
+import type { CheckRuns, Core, GitHub, GitHubScriptArgs } from "./github.ts";
+import { getSdkMetadataFromChecks, usesSdkMetadataChecks } from "./sdk-metadata-check.ts";
 
 export default async function setSpecGenSdkStatus({
   github,
@@ -21,7 +14,7 @@ export default async function setSpecGenSdkStatus({
   const head_sha = inputs.head_sha;
   const details_url = inputs.details_url;
   const issue_number = inputs.issue_number;
-  if ((!details_url && context.eventName !== "pull_request_target") || !head_sha) {
+  if (!details_url || !head_sha) {
     throw new Error(
       `Required inputs are not valid: details_url:${details_url}, head_sha:${head_sha}`,
     );
@@ -41,10 +34,6 @@ export default async function setSpecGenSdkStatus({
     github,
     core,
     issue_number,
-    eventCheckId:
-      context.eventName === "check_run"
-        ? (context.payload as WebhookEvent<"check-run">).check_run.id
-        : undefined,
   });
 }
 
@@ -56,7 +45,6 @@ export async function setSpecGenSdkStatusImpl({
   github,
   core,
   issue_number,
-  eventCheckId,
 }: {
   owner: string;
   repo: string;
@@ -65,60 +53,8 @@ export async function setSpecGenSdkStatusImpl({
   issue_number: number;
   github: GitHub;
   core: Core;
-  eventCheckId?: number;
 }): Promise<void> {
   const statusName = "SDK Validation Status";
-  if (isPrivateSdkRepository(owner, repo)) {
-    const observation = await loadPrivateSdkChecks({
-      github,
-      core,
-      owner,
-      repo,
-      headSha: head_sha,
-      issueNumber: issue_number,
-      eventCheckId,
-    });
-    if (!observation) return;
-    let result: { state: CommitStatusState; description: string };
-    if (observation.checks.some((check) => check.status !== CheckStatus.COMPLETED)) {
-      result = {
-        state: CommitStatusState.PENDING,
-        description: "Waiting for all SDK Validation checks to complete",
-      };
-    } else {
-      try {
-        const artifacts = new Map(
-          observation.checks.map((check) => [
-            check.id,
-            readPrivateSdkArtifact(check, observation.allChecks, observation.prNumber),
-          ]),
-        );
-        result = await processResult({ checkRuns: observation.checks, core, artifacts });
-      } catch (error) {
-        // A terminal native build without valid metadata is an error, not an endless pending status.
-        core.setFailed("SDK metadata unavailable or invalid; inspect/rerun the trusted publisher");
-        core.error(error instanceof Error ? error.message : String(error));
-        await core.summary
-          .addRaw(
-            "## SDK Validation CI Checks Result\n\n❌ Metadata unavailable or invalid. Inspect/rerun the trusted SDK metadata publisher. No ADO fallback is used.\n",
-          )
-          .write();
-        result = {
-          state: CommitStatusState.FAILURE,
-          description: "SDK metadata unavailable or invalid; inspect the publisher",
-        };
-      }
-    }
-    await github.rest.repos.createCommitStatus({
-      owner,
-      repo,
-      sha: head_sha,
-      context: statusName,
-      target_url,
-      ...result,
-    });
-    return;
-  }
   core.setOutput("head_sha", head_sha);
   core.setOutput("issue_number", issue_number);
   const checks = await github.paginate(github.rest.checks.listForRef, {
@@ -175,6 +111,7 @@ export async function setSpecGenSdkStatusImpl({
     const result = await processResult({
       checkRuns: specGenSdkChecks,
       core,
+      metadataChecks: usesSdkMetadataChecks(owner, repo) ? checks : undefined,
     });
 
     core.info(`All SDK Validation checks completed. Setting status to ${result.state}.`);
@@ -194,11 +131,12 @@ export async function setSpecGenSdkStatusImpl({
 async function processResult({
   checkRuns,
   core,
-  artifacts,
+  metadataChecks,
 }: {
   checkRuns: CheckRuns;
   core: Core;
-  artifacts?: Map<CheckRuns[number]["id"], SpecGenSdkArtifactInfo>;
+  /** When set, read manifests from SDK metadata checks instead of Azure DevOps. */
+  metadataChecks?: CheckRuns;
 }): Promise<{ state: CommitStatusState; description: string }> {
   let state: CommitStatusState = CommitStatusState.SUCCESS;
   let specGenSdkFailedRequiredLanguages = "";
@@ -214,32 +152,30 @@ async function processResult({
     if (checkRun.details_url === null) {
       throw new Error(`'details_url' is null in Check Run '${checkRun.name}'`);
     }
-    let artifactJsonObj = artifacts?.get(checkRun.id);
-    if (artifacts && !artifactJsonObj) throw new Error("Missing validated SDK metadata");
-    if (!artifactJsonObj) {
+    const artifactName = "spec-gen-sdk-artifact";
+    let artifactData: string;
+    if (metadataChecks) {
+      artifactData = getSdkMetadataFromChecks(checkRun, metadataChecks);
+    } else {
       const buildInfo = getAdoBuildInfoFromUrl(checkRun.details_url);
-      const ado_project_url = buildInfo.projectUrl;
-      const ado_build_id = buildInfo.buildId;
-      const artifactName = "spec-gen-sdk-artifact";
-      const artifactFileName = `${artifactName}.json`;
       const result = await getAzurePipelineArtifact({
-        ado_build_id,
-        ado_project_url,
+        ado_build_id: buildInfo.buildId,
+        ado_project_url: buildInfo.projectUrl,
         artifactName,
-        artifactFileName,
+        artifactFileName: `${artifactName}.json`,
         core,
         fallbackToFailedArtifact: true,
-        token: process.env.ADO_TOKEN,
       });
-      // Parse the JSON data
-      if (!result.artifactData) {
-        throw new Error(
-          `Artifact '${artifactName}' not found in the build with details_url:${checkRun.details_url}`,
-        );
-      }
-
-      artifactJsonObj = SpecGenSdkArtifactInfoSchema.parse(JSON.parse(result.artifactData));
+      artifactData = result.artifactData;
     }
+    // Parse the JSON data
+    if (!artifactData) {
+      throw new Error(
+        `Artifact '${artifactName}' not found in the build with details_url:${checkRun.details_url}`,
+      );
+    }
+
+    const artifactJsonObj = SpecGenSdkArtifactInfoSchema.parse(JSON.parse(artifactData));
     const language = artifactJsonObj.language;
     const shortLanguageName = language.split("-").pop();
     const executionResult = artifactJsonObj.result;

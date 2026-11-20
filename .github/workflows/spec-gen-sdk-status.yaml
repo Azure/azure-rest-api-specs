@@ -2,7 +2,7 @@ name: "SDK Validation Status"
 
 on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
   check_run:
-    types: [created, completed, rerequested]
+    types: [completed]
   # Azure DevOps pipelines (which report the "SDK Validation" check runs) do not re-trigger when a
   # PR is reopened, so the "check_run" event alone would never refresh the status. Re-evaluate the
   # existing check runs on reopen using pull_request_target (privileged, runs in the target branch).
@@ -13,25 +13,19 @@ permissions:
   contents: read
   checks: read
   statuses: write
-  pull-requests: read
 
 env:
-  SDK_METADATA_PUBLISHER_APP_ID: ${{ vars.SDK_METADATA_PUBLISHER_APP_ID }}
+  # ID of the GitHub App that publishes SDK metadata checks in azure-rest-api-specs-pr
+  SDK_METADATA_APP_ID: ${{ vars.SDK_METADATA_APP_ID }}
 
 jobs:
   sdk-validation-status:
     if: |
       (github.event_name == 'pull_request_target' && github.event.pull_request.state == 'open') ||
       (github.event.check_run.check_suite.app.name == 'Azure Pipelines' &&
-      contains(github.event.check_run.name, 'SDK Validation') &&
-      (github.event.action == 'completed' || github.repository == 'Azure/azure-rest-api-specs-pr')) ||
-      (github.repository == 'Azure/azure-rest-api-specs-pr' &&
-      startsWith(github.event.check_run.name, 'SDK metadata / '))
+      contains(github.event.check_run.name, 'SDK Validation'))
     name: "SDK Validation Status"
     runs-on: ubuntu-slim
-    concurrency:
-      group: sdk-validation-status-${{ github.event.check_run.head_sha || github.event.pull_request.head.sha }}
-      cancel-in-progress: false
     steps:
       # *** IMPORTANT ***
       # For workflows that are triggered by the pull_request_target event, the workflow runs in the

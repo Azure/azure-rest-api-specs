@@ -181,6 +181,52 @@ describe("sdk-breaking-change-labels", () => {
 
       expect(result.labelAction).toBe(LabelAction.None);
     });
+    it("should read the manifest from the SDK metadata check in azure-rest-api-specs-pr", async () => {
+      vi.stubEnv("SDK_METADATA_APP_ID", "555");
+      const { extractInputs } = await import("../src/context.ts");
+      (extractInputs as import("vitest").Mock).mockResolvedValue({
+        details_url: "https://dev.azure.com/azure-sdk/p/_build/results?buildId=2",
+      });
+      const context = createMockContext();
+      context.repo = { owner: "Azure", repo: "azure-rest-api-specs-pr" };
+      context.payload = {
+        check_run: { head_sha: "abc123", external_id: "7|2|p", started_at: "2026-11-19T10:00:00Z" },
+      };
+      mockGithub.rest.checks.listForRef.mockResolvedValue({
+        data: {
+          check_runs: [
+            {
+              id: 10,
+              app: { id: 555 },
+              external_id: "7|2|p",
+              completed_at: "2026-11-19T10:05:00Z",
+              output: {
+                text: JSON.stringify(
+                  createMockSpecGenSdkArtifactInfo({
+                    labelAction: true,
+                    language: "azure-sdk-for-js",
+                    prNumber: "123",
+                  }),
+                ),
+              },
+            },
+          ],
+        },
+      });
+
+      const result = await getLabelAndAction({ github: mockGithub, context, core: mockCore });
+
+      expect(mockFetch).not.toHaveBeenCalled();
+      expect(mockGithub.rest.checks.listForRef).toHaveBeenCalledWith(
+        expect.objectContaining({ ref: "abc123", app_id: 555 }),
+      );
+      expect(result).toMatchObject({
+        labelName: sdkLabels["azure-sdk-for-js"].breakingChange,
+        labelAction: LabelAction.Add,
+        issueNumber: 123,
+      });
+      vi.unstubAllEnvs();
+    });
     it("should retain labelAction Remove without checking the target branch", async () => {
       // Setup inputs
       const inputs = {

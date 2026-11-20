@@ -309,15 +309,33 @@ stages:
               npm_config_userconfig: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
               TYPESPEC_EMITTER: $(TypeSpecEmitter)
 
-          # Immutable attempt-specific metadata for the isolated private-repo publisher.
-          # Keep the existing artifacts/native checks unchanged.
-          - ${{ if and(eq(variables['System.TeamProject'], 'internal'), eq(variables['Build.Repository.Name'], 'Azure/azure-rest-api-specs-pr'), eq(variables['Build.Reason'], 'PullRequest')) }}:
-              - task: PublishPipelineArtifact@1
-                displayName: "Publish private SDK metadata transport input"
-                condition: and(succeededOrFailed(), ne(variables['SpecGenSdkArtifactName'], ''))
+          # azure-rest-api-specs-pr workflows can't authenticate to Azure DevOps to read the manifest, so copy it
+          # into a GitHub check with a dedicated App (checks:write, installed only on that repo). Skipped until the
+          # SdkMetadataGitHubAppId/SdkMetadataGitHubKeyName variables are configured; GitHub workflows read the
+          # same App ID from the SDK_METADATA_APP_ID repository variable.
+          - ${{ if and(eq(variables['System.TeamProject'], 'internal'), eq(variables['Build.Reason'], 'PullRequest')) }}:
+              - task: AzureCLI@2
+                displayName: "Login to GitHub (SDK metadata)"
+                condition: and(succeededOrFailed(), ne(variables['SpecGenSdkArtifactName'], ''), ne(variables['SdkMetadataGitHubAppId'], ''))
                 inputs:
-                  artifactName: spec-gen-sdk-metadata-$(System.StageAttempt)-$(System.JobAttempt)
-                  path: "$(System.DefaultWorkingDirectory)/$(SpecGenSdkArtifactPath)/spec-gen-sdk-artifact.json"
+                  azureSubscription: "AzureSDKEngKeyVault Secrets"
+                  scriptType: pscore
+                  scriptLocation: scriptPath
+                  scriptPath: $(SpecRepoDirectory)/eng/common/scripts/login-to-github.ps1
+                  arguments: >
+                    -GitHubAppId '$(SdkMetadataGitHubAppId)'
+                    -KeyName '$(SdkMetadataGitHubKeyName)'
+                    -InstallationTokenOwners 'Azure'
+                    -VariableNamePrefix 'SdkMetadataGitHubToken'
+                env:
+                  GITHUB_TOKEN_REQUEST: '{"repositories":["azure-rest-api-specs-pr"],"permissions":{"checks":"write"}}'
+
+              - script: node eng/tools/spec-gen-sdk-runner/src/publish-sdk-metadata.ts "$(System.DefaultWorkingDirectory)/$(SpecGenSdkArtifactPath)/spec-gen-sdk-artifact.json"
+                displayName: "Publish SDK metadata check"
+                condition: and(succeededOrFailed(), ne(variables['SpecGenSdkArtifactName'], ''), ne(variables['SdkMetadataGitHubAppId'], ''))
+                workingDirectory: $(SpecRepoDirectory)
+                env:
+                  GH_TOKEN: $(SdkMetadataGitHubToken)
 
           - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
             parameters:

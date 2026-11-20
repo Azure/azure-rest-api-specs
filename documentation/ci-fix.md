@@ -144,21 +144,10 @@ Do the following:
 2. If your investigation denotes this is likely a bug in the check itself and not your PR, reach out
   to the owner of the check per the aforementioned table.
 
-In `Azure/azure-rest-api-specs-pr`, `SDK Validation Status` and `SDK Breaking Change Labels`
-read the complete SDK manifest from a companion `SDK metadata / <definitionId>` check,
-not from Azure DevOps. A completed native build without valid metadata fails visibly and
-does not remove breaking-change labels. Inspect the companion check's summary and rerun
-the trusted metadata publisher after fixing its failure. Its completion automatically
-refreshes the consumers. While the native build is running, validation remains pending.
-
-Deployment requires a dedicated GitHub App with Checks write access, used only by the
-trusted ADO completion publisher, and its numeric App ID in the protected repository Actions
-variable `SDK_METADATA_PUBLISHER_APP_ID`. Provision and verify the publisher before enabling
-these private consumers. Do not elevate the existing generation/reader App or give its
-PR-controlled jobs the writer credential. Missing or invalid publisher configuration fails
-closed; there is no Azure login or ADO download fallback. Public-repository behavior is unchanged.
-See the [publisher and reader deployment contract](../eng/tools/spec-gen-sdk-runner/sdk-metadata.md)
-for the shared protocol and protected pipeline prerequisites.
+In `Azure/azure-rest-api-specs-pr`, `SDK Validation Status` and `SDK Breaking Change Labels` read each
+build's results from its `SDK metadata - <language> (<definitionId>)` check instead of Azure DevOps.
+If they report the `spec-gen-sdk-artifact` as not found, check the `Publish SDK metadata check` step
+in the pipeline run logs, then rerun the failed SDK Validation job.
 
 ## `SDK Breaking Change Mitigation and Review`
 

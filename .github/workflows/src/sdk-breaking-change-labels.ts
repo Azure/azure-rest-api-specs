@@ -1,13 +1,14 @@
+import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { SpecGenSdkArtifactInfoSchema, sdkLabels } from "../../shared/src/sdk-types.ts";
 import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.ts";
 import { extractInputs } from "./context.ts";
 import type { Core, GitHubScriptArgs, WebhookEvent } from "./github.ts";
 import { LabelAction } from "./label.ts";
 import {
-  isPrivateSdkRepository,
-  loadPrivateSdkChecks,
-  readPrivateSdkArtifact,
-} from "./sdk-check-metadata.ts";
+  getSdkMetadataAppId,
+  getSdkMetadataFromChecks,
+  usesSdkMetadataChecks,
+} from "./sdk-metadata-check.ts";
 
 const SUPPORTED_TARGET_BRANCHES = new Set(["main", "RPSaaSMaster"]);
 
@@ -25,57 +26,27 @@ export async function getLabelAndAction({ github, context, core }: GitHubScriptA
   labelName: string | undefined;
   labelAction: LabelAction;
   issueNumber: number;
-  headSha?: string;
 }> {
-  if (isPrivateSdkRepository(context.repo.owner, context.repo.repo)) {
-    const { check_run: triggerCheck } = context.payload as WebhookEvent<"check-run">;
-    const observation = await loadPrivateSdkChecks({
-      github,
-      core,
-      ...context.repo,
-      headSha: triggerCheck.head_sha,
-      eventCheckId: triggerCheck.id,
-    });
-    if (!observation) {
-      return { labelName: undefined, labelAction: LabelAction.None, issueNumber: NaN };
-    }
-    const { checks, allChecks, pr, prNumber } = observation;
-    const trigger = allChecks.find((check) => check.id === triggerCheck.id);
-    const matching = checks.filter(
-      (check) => check.name === trigger?.name || check.details_url === trigger?.details_url,
-    );
-    if (matching.length !== 1)
-      throw new Error("Cannot correlate metadata event to current SDK build");
-    const native = matching[0];
-    if (native.status !== "completed") {
-      core.info("Native SDK validation is still running; preserving existing labels.");
-      return {
-        labelName: undefined,
-        labelAction: LabelAction.None,
-        headSha: native.head_sha,
-        issueNumber: prNumber,
-      };
-    }
-    const artifact = readPrivateSdkArtifact(native, allChecks, prNumber);
-    const labelName = sdkLabels[artifact.language].breakingChange;
-    const labelAction =
-      !labelName || artifact.labelAction === undefined
-        ? LabelAction.None
-        : artifact.labelAction
-          ? SUPPORTED_TARGET_BRANCHES.has(pr.base.ref)
-            ? LabelAction.Add
-            : LabelAction.None
-          : LabelAction.Remove;
-    return { labelName, labelAction, headSha: artifact.headSha, issueNumber: prNumber };
-  }
   const inputs = await extractInputs(github, context, core);
   const details_url = inputs.details_url;
   if (!details_url) {
     throw new Error(`Required inputs are not valid: details_url:${details_url}`);
   }
+  let artifactData: string | undefined;
+  if (usesSdkMetadataChecks(context.repo.owner, context.repo.repo)) {
+    const { check_run } = context.payload as WebhookEvent<"check-run">;
+    const metadataChecks = await github.paginate(github.rest.checks.listForRef, {
+      ...context.repo,
+      ref: check_run.head_sha,
+      app_id: getSdkMetadataAppId(),
+      per_page: PER_PAGE_MAX,
+    });
+    artifactData = getSdkMetadataFromChecks(check_run, metadataChecks);
+  }
   const result = await getLabelAndActionImpl({
     details_url,
     core,
+    artifactData,
   });
 
   // This requirement only scopes label additions; target-branch handling for removals will be added later.
@@ -93,8 +64,6 @@ export async function getLabelAndAction({ github, context, core }: GitHubScriptA
     }
   }
 
-  core.setOutput("head_sha", result.headSha);
-  core.setOutput("issue_number", result.issueNumber);
   return result;
 }
 
@@ -102,10 +71,13 @@ export async function getLabelAndActionImpl({
   details_url,
   core,
   retryOptions = {},
+  artifactData,
 }: {
   details_url: string;
   core: Core;
   retryOptions?: import("./retries.ts").RetryOptions;
+  /** Manifest already read from an SDK metadata check; skips the Azure DevOps download. */
+  artifactData?: string;
 }): Promise<{
   labelName: string | undefined;
   labelAction: LabelAction;
@@ -120,32 +92,29 @@ export async function getLabelAndActionImpl({
   let labelAction;
 
   let labelName: string | undefined = "";
-  const buildInfo = getAdoBuildInfoFromUrl(details_url);
-  const ado_project_url = buildInfo.projectUrl;
-  const ado_build_id = buildInfo.buildId;
   const artifactName = "spec-gen-sdk-artifact";
-  const artifactFileName = artifactName + ".json";
-  const result = await getAzurePipelineArtifact({
-    ado_build_id,
-    ado_project_url,
-    artifactName,
-    artifactFileName,
-    core,
-    retryOptions,
-    fallbackToFailedArtifact: true,
-    token: process.env.ADO_TOKEN,
-  });
+  if (artifactData === undefined) {
+    const buildInfo = getAdoBuildInfoFromUrl(details_url);
+    const result = await getAzurePipelineArtifact({
+      ado_build_id: buildInfo.buildId,
+      ado_project_url: buildInfo.projectUrl,
+      artifactName,
+      artifactFileName: artifactName + ".json",
+      core,
+      retryOptions,
+      fallbackToFailedArtifact: true,
+    });
+    artifactData = result.artifactData;
+  }
   // Parse the JSON data
-  if (!result.artifactData) {
+  if (!artifactData) {
     core.warning(
       `Artifact '${artifactName}' not found in the build with details_url:${details_url} or failed to download it.`,
     );
   } else {
-    core.info(`Artifact content: ${result.artifactData}`);
+    core.info(`Artifact content: ${artifactData}`);
     // Parse the JSON data
-    const specGenSdkArtifactInfo = SpecGenSdkArtifactInfoSchema.parse(
-      JSON.parse(result.artifactData),
-    );
+    const specGenSdkArtifactInfo = SpecGenSdkArtifactInfoSchema.parse(JSON.parse(artifactData));
     const labelActionText = specGenSdkArtifactInfo.labelAction;
 
     head_sha = specGenSdkArtifactInfo.headSha;
