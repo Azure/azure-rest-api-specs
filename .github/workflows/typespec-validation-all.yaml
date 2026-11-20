@@ -77,6 +77,9 @@ jobs:
         uses: ./.github/actions/setup-node-install-deps
 
       - name: Validate All Specs
+        env:
+          # Experimental: validate up to 20 projects per worker process, with cached compiler reads.
+          TSV_PROJECTS_PER_WORKER: 20
         run: >-
           node eng/tools/typespec-validation/cmd/tsv.js --all
           --shard=${{ matrix.shard }}/${{ matrix.total-shards }} --git-clean specification

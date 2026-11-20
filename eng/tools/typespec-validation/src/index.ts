@@ -348,19 +348,35 @@ export async function main({ fix: defaultFix }: RuleExecutionOptions = {}) {
     return;
   }
 
-  if (parsedArgs.positionals[1]) {
-    context = { ...context, ...(JSON.parse(parsedArgs.positionals[1]) as Record<string, unknown>) };
+  const projectContext = parsedArgs.positionals[1]
+    ? (JSON.parse(parsedArgs.positionals[1]) as Record<string, unknown>)
+    : {};
+  if (!(await validateFolder(folder, projectContext, logger, { fix }))) {
+    process.exitCode = 1;
   }
+}
+
+/**
+ * Validate one project folder. Resets the suppression context for each call, so a process can
+ * validate several projects in turn.
+ */
+export async function validateFolder(
+  folder: string,
+  projectContext: Record<string, unknown>,
+  logger: ILogger,
+  { fix }: RuleExecutionOptions,
+): Promise<boolean> {
+  context = { checkingAllSpecs: false, ...projectContext };
 
   const absolutePath = resolve(folder);
 
   if (!(await fileExists(absolutePath))) {
     console.log(`Folder ${absolutePath} does not exist`);
-    process.exit(1);
+    return false;
   }
   if (!(await stat(absolutePath)).isDirectory()) {
     console.log(`Please run TypeSpec Validation on a directory path`);
-    process.exit(1);
+    return false;
   }
   logger.debug(`Running TypeSpecValidation on folder: ${absolutePath}`);
 
@@ -372,7 +388,7 @@ export async function main({ fix: defaultFix }: RuleExecutionOptions = {}) {
   if (toolSuppressions && toolSuppressions[0]) {
     // Use reason from first matching suppression and ignore rest
     console.log(`  Suppressed: ${suppressions[0].reason}`);
-    return;
+    return true;
   }
 
   const rules: Rule[] = [
@@ -390,8 +406,5 @@ export async function main({ fix: defaultFix }: RuleExecutionOptions = {}) {
   ];
 
   const result = await runRules(rules, absolutePath, suppressions, logger, { fix });
-
-  if (!result.success) {
-    process.exitCode = 1;
-  }
+  return result.success;
 }

@@ -22,6 +22,38 @@ export interface CompileResult extends RuleResult {
   changedFiles?: string[];
 }
 
+let cachedHost: CompilerHost | undefined;
+
+/**
+ * Share file reads, stats and directory listings across every later check-only compilation in
+ * this process, so projects validated by the same worker don't re-read common libraries and specs.
+ * Results, including missing files, are kept for the life of the process: only enable this while
+ * nothing modifies the checkout. Fix-mode compilations always read through.
+ */
+export function enableCompilerFileCache(): void {
+  const memoize = <T>(read: (path: string) => Promise<T>) => {
+    const cache = new Map<string, Promise<T>>();
+    return (path: string) => {
+      let result = cache.get(path);
+      if (!result) {
+        result = read(path);
+        // Rejections are cached too; callers that await the promise still observe them.
+        result.catch(() => {});
+        cache.set(path, result);
+      }
+      return result;
+    };
+  };
+  cachedHost ??= {
+    ...NodeHost,
+    readFile: memoize((path) => NodeHost.readFile(path)),
+    readUrl: memoize((url) => NodeHost.readUrl(url)),
+    stat: memoize((path) => NodeHost.stat(path)),
+    realpath: memoize((path) => NodeHost.realpath(path)),
+    readDir: memoize((path) => NodeHost.readDir(path)),
+  };
+}
+
 export async function compileTypeSpec(
   entrypoint: string,
   options: { noEmit?: boolean; fix?: boolean } = {},
@@ -32,7 +64,7 @@ export async function compileTypeSpec(
   const changedFiles = new Set<string>();
   const logs: string[] = [];
   const host: CompilerHost = {
-    ...NodeHost,
+    ...((!fix && cachedHost) || NodeHost),
     logSink: { log: (log) => logs.push(`${log.level}: ${log.message}`) },
     writeFile: async (path, content) => {
       emittedFiles.push(relative(cwd, path));
