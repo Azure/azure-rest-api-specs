@@ -46,7 +46,8 @@ model WorkspaceConnectionPropertiesV2BasicResource is Azure.ResourceManager.Prox
   @path
   @typeChangedFrom(Versions.v2026_09_15_preview, LegacyConnectionName)
   @typeChangedFrom(Versions.v2026_11_01, ConnectionName)
-  name: LegacyConnectionName;
+  @typeChangedFrom(Versions.v2026_11_15_preview, LegacyConnectionName)
+  name: ConnectionName;
 }
 
 @armResourceOperations
@@ -120,6 +121,7 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   @removed(Versions.v2026_09_01)
   @added(Versions.v2026_09_15_preview)
   @removed(Versions.v2026_11_01)
+  @added(Versions.v2026_11_15_preview)
   @summary("Test machine learning workspaces connections under the specified workspace.")
   @action("testconnection")
   testConnection is ArmResourceActionAsyncBase<
@@ -144,6 +146,7 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   @removed(Versions.v2026_09_01)
   @added(Versions.v2026_09_15_preview)
   @removed(Versions.v2026_11_01)
+  @added(Versions.v2026_11_15_preview)
   @summary("Get available models under the Azure OpenAI connection.")
   @list
   @get

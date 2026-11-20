@@ -28,6 +28,7 @@ namespace Microsoft.MachineLearningServices;
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @parentResource(Workspace)
 model InferenceEndpoint is Azure.ResourceManager.TrackedResource<
   InferenceEndpointProperties,
@@ -64,6 +65,7 @@ model InferenceEndpoint is Azure.ResourceManager.TrackedResource<
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @armResourceOperations
 interface InferenceEndpointOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -111,6 +113,7 @@ interface InferenceEndpointOps
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @armResourceOperations
 interface InferenceEndpoints {
   /**
