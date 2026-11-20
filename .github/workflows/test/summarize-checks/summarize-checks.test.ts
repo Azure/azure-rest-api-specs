@@ -23,6 +23,72 @@ export type CheckRunData = import("../../src/summarize-checks/summarize-checks.t
 const mockCore = createMockCore();
 const WORKFLOW_URL = "http://github.com/a/fake/workflowrun/url";
 
+describe("private fork pull requests", () => {
+  async function summarizeSource(isPrivate: boolean, isFork: boolean) {
+    const github = createMockGithub();
+    const core = createMockCore();
+    const repo = isPrivate ? "azure-rest-api-specs-pr" : "azure-rest-api-specs";
+    github.rest.pulls.get.mockResolvedValue({
+      data: {
+        head: { sha: fullGitSha, repo: { id: isFork ? 2 : 1 } },
+        base: {
+          ref: "RPSaaSMaster",
+          repo: { id: 1, private: isPrivate, full_name: `Azure/${repo}` },
+        },
+        draft: false,
+        labels: [],
+      },
+    });
+
+    await summarizeChecksImpl(
+      github,
+      core,
+      "Azure",
+      repo,
+      123,
+      fullGitSha,
+      "pull_request_target",
+      WORKFLOW_URL,
+    );
+    return { github, core };
+  }
+
+  it("explains how to replace a private fork PR even when impact assessment never runs", async () => {
+    const { github, core } = await summarizeSource(true, true);
+
+    const [{ body: comment }] = github.rest.issues.createComment.mock.calls[0] as [
+      { body: string },
+    ];
+    expect(comment).toContain("| PR source |");
+    expect(comment).toContain("| PR impact assessment |");
+    expect(comment).toContain("Open a replacement PR from a branch in this private repository");
+    expect(comment).toContain("https://aka.ms/azsdk/access");
+    expect(comment).toContain("do not move them to the public repository");
+    expect(comment).not.toContain("Still evaluating");
+    expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+      expect.objectContaining({
+        sha: fullGitSha,
+        state: "failure",
+      }),
+    );
+    expect(core.setOutput).toHaveBeenCalledWith("arm_review_ready", false);
+  });
+
+  it.each([
+    { source: "a public fork", isPrivate: false, isFork: true },
+    { source: "a branch in the private repository", isPrivate: true, isFork: false },
+  ])("preserves normal evaluation for $source", async ({ isPrivate, isFork }) => {
+    const { github } = await summarizeSource(isPrivate, isFork);
+
+    const [{ body }] = github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
+    expect(body).toContain("Still evaluating");
+    expect(body).not.toContain("| PR source |");
+    expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+      expect.objectContaining({ state: "pending" }),
+    );
+  });
+});
+
 describe("ARM review label handoff", () => {
   describe("Summarize Checks integration", () => {
     function createSummary(existingLabels: string[] = ["ARMReview"]) {
@@ -34,7 +100,7 @@ describe("ARM review label handoff", () => {
       github.rest.pulls.get.mockResolvedValue({
         data: {
           head: { sha: fullGitSha },
-          base: { ref: "main" },
+          base: { ref: "main", repo: { private: false } },
           draft: false,
           labels: existingLabels.map((name) => ({ name })),
         },
@@ -145,7 +211,7 @@ describe("ARM review label handoff", () => {
       github.rest.pulls.get.mockResolvedValue({
         data: {
           head: { sha: fullGitSha },
-          base: { ref: "feature/example" },
+          base: { ref: "feature/example", repo: { private: false } },
           draft: true,
           labels: [{ name: "ARMReview" }],
         },
@@ -195,7 +261,12 @@ describe("ARM review label handoff", () => {
       const core = createMockCore();
       github.rest.issues.listLabelsOnIssue.mockResolvedValue({ data: [] });
       github.rest.pulls.get.mockResolvedValue({
-        data: { head: { sha: fullGitSha }, base: { ref: "main" }, draft: false, labels: [] },
+        data: {
+          head: { sha: fullGitSha },
+          base: { ref: "main", repo: { private: false } },
+          draft: false,
+          labels: [],
+        },
       });
       github.rest.checks.listForRef.mockResolvedValue({ data: { check_runs: [] } });
       github.rest.issues.createComment.mockResolvedValue({ data: { id: 1 } });

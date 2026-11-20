@@ -13,12 +13,13 @@ A conversational skill that guides developers through building a complete PowerS
 
 ## MCP Tools
 
-**Prerequisite:** The GitHub MCP server must be configured and running. If any MCP tool call fails with a connection or server error, instruct the developer to add the following to their VS Code MCP configuration file (`.vscode/mcp.json` or the workspace `.mcp.json`):
+**Prerequisite:** The GitHub MCP server must be configured and running. If any MCP tool call fails with a connection or server error, instruct the developer to add the following to the repo-root `.mcp.json`:
 
 ```json
 {
-  "servers": {
+  "mcpServers": {
     "github": {
+      "type": "http",
       "url": "https://api.githubcopilot.com/mcp/"
     }
   }
@@ -416,11 +417,12 @@ For edge cases or when the developer requests detailed rationale, fetch the full
 
 ## Troubleshooting
 
-- **GitHub MCP Server not connected / tool calls fail**: The GitHub MCP server is required for this skill. If any `github-mcp-server` tool call fails, instruct the developer to add the following to their `.vscode/mcp.json` (or workspace `.mcp.json`), then reload VS Code:
+- **GitHub MCP Server not connected / tool calls fail**: The GitHub MCP server is required for this skill. If any `github-mcp-server` tool call fails, instruct the developer to add the following to the repo-root `.mcp.json`, then reload VS Code:
   ```json
   {
-    "servers": {
+    "mcpServers": {
       "github": {
+        "type": "http",
         "url": "https://api.githubcopilot.com/mcp/"
       }
     }
