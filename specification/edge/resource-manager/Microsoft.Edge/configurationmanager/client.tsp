@@ -75,6 +75,11 @@ using Microsoft.Edge;
   "IsExternalValidationEnabled",
   "csharp"
 );
+@@clientName(
+  SolutionTemplateUpdateProperties.enableExternalValidation,
+  "IsExternalValidationEnabled",
+  "csharp"
+);
 @@clientName(SolutionTemplateVersion, "EdgeSolutionTemplateVersion", "csharp");
 @@clientName(
   SolutionTemplateVersionProperties,
@@ -99,14 +104,27 @@ using Microsoft.Edge;
 );
 @@clientName(ActiveState, "InstanceActiveState", "csharp");
 @@clientName(Capability, "ContextCapability", "csharp");
+@@clientName(CMStages, "WorkloadOrchestrationStage", "csharp");
 @@clientName(ComponentStatus, "TargetComponentStatus", "csharp");
 @@clientName(ConfigurationModel, "EdgeSchemaConfigurationModelType", "csharp");
+@@clientName(ConfigurationState, "SolutionConfigurationState", "csharp");
 @@clientName(ConfigurationType, "EdgeSchemaConfigurationType", "csharp");
 @@clientName(DeploymentStatus, "EdgeDeploymentStatus", "csharp");
 @@clientName(ErrorAction, "TaskErrorAction", "csharp");
 @@clientName(ErrorActionMode, "TaskErrorActionModeType", "csharp");
 @@clientName(ExecutionStatus, "EdgeExecutionStatus", "csharp");
 @@clientName(Hierarchy, "ContextHierarchy", "csharp");
+@@clientName(
+  HierarchyMetadata,
+  "EdgeConfigTemplateHierarchyMetadata",
+  "csharp"
+);
+@@clientName(
+  HierarchySelector,
+  "EdgeConfigTemplateHierarchySelector",
+  "csharp"
+);
+@@clientName(InternalState, "SolutionTemplateVersionInternalState", "csharp");
 @@clientName(JobParameterBase, "EdgeJobContent", "csharp");
 @@clientName(JobStatus, "EdgeJobStatus", "csharp");
 @@clientName(JobStep, "EdgeJobStep", "csharp");
@@ -132,15 +150,23 @@ using Microsoft.Edge;
   "csharp"
 );
 @@clientName(
+  SolutionTemplateMetadataUpdate,
+  "SolutionTemplateMetadataPatch",
+  "csharp"
+);
+@@clientName(
   SolutionTemplateVersionWithUpdateType,
   "EdgeSolutionTemplateVersionWithUpdateType",
   "csharp"
 );
 @@clientName(SolutionUpdateProperties, "EdgeSolutionPatchProperties", "csharp");
+@@clientName(StageMap, "SolutionStageMap", "csharp");
 @@clientName(StageSpec, "EdgeWorkflowStageSpec", "csharp");
 @@clientName(TaskSpec, "EdgeWorkflowTaskSpec", "csharp");
 @@clientName(StageStatus, "EdgeExecutionStageStatus", "csharp");
 @@clientName(State, "SolutionInstanceState", "csharp");
+@@clientName(StateCategory, "SolutionVersionStageState", "csharp");
+@@clientName(TargetMetadata, "SolutionDeploymentTargetMetadata", "csharp");
 @@clientName(TargetSnapshot, "EdgeTargetSnapshot", "csharp");
 @@clientName(TargetStatus, "EdgeTargetStatus", "csharp");
 @@clientName(UpdateType, "EdgeUpdateType", "csharp");
@@ -149,6 +175,11 @@ using Microsoft.Edge;
 @@clientName(
   BulkPublishSolutionParameter,
   "BulkPublishSolutionContent",
+  "csharp"
+);
+@@clientName(
+  BulkReviewSolutionParameter,
+  "BulkReviewSolutionContent",
   "csharp"
 );
 @@clientName(InstallSolutionParameter, "InstallSolutionContent", "csharp");
@@ -179,6 +210,8 @@ using Microsoft.Edge;
 @@clientName(SolutionVersionParameter, "EdgeSolutionVersionContent", "csharp");
 @@clientName(VersionParameter, "EdgeVersionContent", "csharp");
 @@clientName(DeployJobParameter, "DeployJobContent", "csharp");
+@@clientName(PublishJobParameter, "PublishJobContent", "csharp");
+@@clientName(UninstallJobParameter, "UninstallJobContent", "csharp");
 
 @@alternateType(EntityTagProperty.eTag, eTag, "csharp");
 @@alternateType(
