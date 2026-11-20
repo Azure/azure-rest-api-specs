@@ -1399,7 +1399,11 @@ union AccessTierRust {
 @@clientName(Container.listBlobs, "ListBlobFlatSegment", "java");
 @@clientName(BlobProperties, "BlobItemPropertiesInternal", "java");
 @@clientName(BlobItem, "BlobItemInternal", "java");
-@@clientName(ImmutabilityPolicyMode, "BlobImmutabilityPolicyMode", "java");
+@@clientName(
+  BlobImmutabilityPolicyModeJava,
+  "BlobImmutabilityPolicyMode",
+  "java"
+);
 @@clientName(SignedIdentifiers, "BlobSignedIdentifiers", "java");
 @@clientName(LeaseDuration, "LeaseDurationType", "java");
 @@clientName(Blob.setProperties, "SetHttpHeaders", "java");
@@ -1623,3 +1627,19 @@ model BlobHierarchyListSegmentJava {
 }
 
 @@alternateType(BlobHierarchyList, BlobHierarchyListSegmentJava, "java");
+
+// Java shipped this enum with capitalized values, which its toString() returns and its requests send, in this
+// order (exposed through ordinal() and values()). The service accepts either casing.
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
+enum BlobImmutabilityPolicyModeJava {
+  /** Response only. The immutability policy is mutable. */
+  Mutable: "Mutable",
+
+  /** The immutability policy is unlocked. */
+  Unlocked: "Unlocked",
+
+  /** The immutability policy is locked. */
+  Locked: "Locked",
+}
+
+@@alternateType(ImmutabilityPolicyMode, BlobImmutabilityPolicyModeJava, "java");
