@@ -339,6 +339,21 @@ options:
   });
 
   describe("v2", () => {
+    it("accepts examples.yaml without requiring an examples directory", async () => {
+      vi.mocked(nativeGlob.globFiles).mockResolvedValue([]);
+      gitRootSpy.mockResolvedValue("/gitroot");
+      fileExistsSpy.mockImplementation((file: string) =>
+        Promise.resolve(!file.endsWith("/examples")),
+      );
+
+      const result = await new FolderStructureRule().execute(
+        "/gitroot/specification/foo/data-plane/Foo",
+        defaultLogger,
+      );
+
+      assert(result.success);
+    });
+
     it("should fail if no tspconfig.yaml", async function () {
       vi.spyOn(utils, "getSuppressions").mockResolvedValue([]);
 
