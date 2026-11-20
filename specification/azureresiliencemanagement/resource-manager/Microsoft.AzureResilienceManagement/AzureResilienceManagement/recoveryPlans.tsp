@@ -9,6 +9,7 @@ import "./models/common/Job.tsp";
 import "./models/common/JobResource.tsp";
 import "./models/common/ChildJob.tsp";
 import "./models/recoveryPlan/recoveryPlan.tsp";
+import "./models/recoveryPlan/recoveryConfigProfile.tsp";
 import "./models/recoveryPlan/recoveryGroup.tsp";
 import "./models/recoveryPlan/recoveryResource.tsp";
 import "./models/recoveryPlan/recoveryActions.tsp";
@@ -125,6 +126,49 @@ interface RecoveryPlans {
 
 model RecoveryPlanListResult is ResourceListResult<RecoveryPlan>;
 @@identifiers(RecoveryPlanListResult.value, #["id"]);
+
+@armResourceOperations
+@added(Versions.v2026_11_30_preview)
+@doc("Operations for managing recovery configuration profiles.")
+interface RecoveryConfigProfiles {
+  @added(Versions.v2026_11_30_preview)
+  @route(ServiceGroupRoute)
+  @doc("Gets a recovery configuration profile.")
+  get is ArmResourceRead<RecoveryConfigProfile, ServiceGroupParameters>;
+
+  @added(Versions.v2026_11_30_preview)
+  @route(ServiceGroupRoute)
+  @doc("Creates or replaces a recovery configuration profile.")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    RecoveryConfigProfile,
+    ServiceGroupParameters
+  >;
+
+  @added(Versions.v2026_11_30_preview)
+  @route(ServiceGroupRoute)
+  @doc("Updates a recovery configuration profile. Omitted fields remain unchanged.")
+  update is ArmResourcePatchAsync<
+    RecoveryConfigProfile,
+    RecoveryConfigProfileProperties,
+    ServiceGroupParameters
+  >;
+
+  @added(Versions.v2026_11_30_preview)
+  @route(ServiceGroupRoute)
+  @doc("Lists recovery configuration profiles under a recovery plan.")
+  list is ArmResourceListByParent<
+    RecoveryConfigProfile,
+    ServiceGroupParameters
+  >;
+
+  @added(Versions.v2026_11_30_preview)
+  @route(ServiceGroupRoute)
+  @doc("Deletes a recovery configuration profile.")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    RecoveryConfigProfile,
+    ServiceGroupParameters
+  >;
+}
 
 @armResourceOperations
 @doc("Actions for managing Recovery Orchestration Plans.")
@@ -453,6 +497,51 @@ interface RecoveryPlanActions {
     void,
     RecoveryPlanActionBaseResponse,
     ServiceGroupAndRequestHeadersParameters,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  @added(Versions.v2026_12_30_preview)
+  @route(ServiceGroupRoute)
+  @post
+  @doc("Starts a job to validate restore readiness for the selected included recovery resources. Returns a job acknowledgement, not qualification results. Readiness failures are reported through the job, task, and job resource error details. Omitted request content selects all included resources using policy defaults; request overrides do not modify saved profiles.")
+  validateForRestore is ArmResourceActionAsync<
+    RecoveryPlan,
+    RecoveryPlanRestoreContent,
+    RecoveryPlanActionBaseResponse,
+    ServiceGroupAndRequestHeadersParameters,
+    OptionalRequestBody = true,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  @added(Versions.v2026_12_30_preview)
+  @route(ServiceGroupRoute)
+  @post
+  @doc("Starts a restore job for the selected included recovery resources. Omitted request content selects all included resources using policy defaults. Recovery point selections and policy overrides apply only to this request and do not modify saved profiles.")
+  restore is ArmResourceActionAsync<
+    RecoveryPlan,
+    RecoveryPlanRestoreContent,
+    RecoveryPlanActionBaseResponse,
+    ServiceGroupAndRequestHeadersParameters,
+    OptionalRequestBody = true,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  @added(Versions.v2026_12_30_preview)
+  @route(ServiceGroupRoute)
+  @post
+  @doc("Fetches the recovery point selected for each selected recovery resource using the effective recovery point policy. Request policy overrides apply only to this request and do not modify saved profiles. The final result of the long-running operation contains the selected recovery points.")
+  fetchRecoveryPoints is ArmResourceActionAsync<
+    RecoveryPlan,
+    FetchRecoveryPointsRequest,
+    FetchRecoveryPointsResult,
+    ServiceGroupAndRequestHeadersParameters,
+    OptionalRequestBody = true,
     LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader

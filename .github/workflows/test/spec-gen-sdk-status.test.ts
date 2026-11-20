@@ -207,7 +207,7 @@ describe("spec-gen-sdk-status", () => {
         repo: "testRepo",
         sha: "testSha",
         state: "failure",
-        description: expect.stringContaining("failed for") as unknown,
+        description: "SDK Validation failed for java languages",
       }),
     );
   });
@@ -243,6 +243,45 @@ describe("spec-gen-sdk-status", () => {
     expect(mockCore.summary.addRaw).toHaveBeenCalled();
     expect(mockCore.summary.addRaw.mock.calls[0][0]).toContain("SDK Validation CI Checks Result");
     expect(mockCore.summary.write).toHaveBeenCalled();
+  });
+
+  it.each([
+    ["SDK Validation - JS Libraries", "JS"],
+    ["SDK Validation - .NET Libraries", ".NET"],
+    ["SDK Validation - JS Provisioning Libraries", "JS Provisioning"],
+    ["SDK Validation - .NET Provisioning Libraries", ".NET Provisioning"],
+    ["SDK Validation - Python", "Python"],
+    ["SDK Validation", "SDK Validation"],
+    ["Custom SDK Validation - JS Libraries Extra", "Custom SDK Validation - JS Libraries Extra"],
+  ])("should display %s as %s in the summary", async (name, displayName) => {
+    mockGithub.rest.checks.listForRef.mockResolvedValue({
+      data: {
+        check_runs: [
+          {
+            app: { name: "Azure Pipelines" },
+            name,
+            status: "completed",
+            conclusion: "success",
+            details_url: "https://dev.azure.com/project/_build/results?buildId=123",
+          },
+        ],
+      },
+    });
+
+    await setSpecGenSdkStatusImpl({
+      owner: "testOwner",
+      repo: "testRepo",
+      head_sha: "testSha",
+      target_url: "https://example.com",
+      github: mockGithub,
+      core: mockCore,
+      issue_number: 123,
+    });
+
+    const summary: unknown = mockCore.summary.addRaw.mock.calls[0][0];
+    expect(summary).toContain("| Check | Status | Required Check |\n");
+    expect(summary).toContain(`| ${displayName} | ✅ succeeded | true |\n`);
+    expect(mockCore.info).toHaveBeenCalledWith(`Processing check run: ${name} (success)`);
   });
 
   it("should handle artifact download failures", async () => {

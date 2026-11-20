@@ -388,6 +388,7 @@ model IotDpsPropertiesDescription {
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_06_01_preview)
   @removed(Versions.v2026_08_31)
+  @added(Versions.v2026_11_01)
   @maxItems(1)
   @identifiers(#["namespaceUuid"])
   deviceRegistryNamespaces?: DeviceRegistryNamespaceDescription[];
@@ -604,6 +605,7 @@ model DeviceRegistryNamespaceDescription {
    */
   @added(Versions.v2026_06_01_preview)
   @removed(Versions.v2026_08_31)
+  @added(Versions.v2026_11_01)
   namespaceUuid?: string;
 
   /**
@@ -611,6 +613,7 @@ model DeviceRegistryNamespaceDescription {
    */
   @added(Versions.v2026_06_01_preview)
   @removed(Versions.v2026_08_31)
+  @added(Versions.v2026_11_01)
   dataAddress?: string;
 
   /**
@@ -618,6 +621,7 @@ model DeviceRegistryNamespaceDescription {
    */
   @added(Versions.v2026_06_01_preview)
   @removed(Versions.v2026_08_31)
+  @added(Versions.v2026_11_01)
   location?: Azure.Core.azureLocation;
 
   /**
@@ -625,6 +629,7 @@ model DeviceRegistryNamespaceDescription {
    */
   @added(Versions.v2026_06_01_preview)
   @removed(Versions.v2026_08_31)
+  @added(Versions.v2026_11_01)
   linkingState?: LinkingState;
 }
 
@@ -999,6 +1004,7 @@ model CertificateBodyDescription {
  */
 @added(Versions.v2026_06_01_preview)
 @removed(Versions.v2026_08_31)
+@added(Versions.v2026_11_01)
 union LinkingState {
   string,
 

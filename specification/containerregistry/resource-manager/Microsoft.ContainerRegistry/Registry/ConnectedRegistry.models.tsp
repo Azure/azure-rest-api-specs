@@ -292,7 +292,7 @@ model SyncProperties {
   /**
    * The resource ID of the ACR token used to authenticate the connected registry to its parent during sync.
    */
-  @madeOptional(Versions.vLatestPreview)
+  @madeOptional(Versions.v2026_11_01)
   tokenId?: string;
 
   /**

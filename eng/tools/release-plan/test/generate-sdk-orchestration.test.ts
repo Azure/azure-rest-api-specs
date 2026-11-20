@@ -226,4 +226,29 @@ describe("runGenerateSdk orchestration", () => {
     await expect(runGenerateSdk(cliArgs, deps)).resolves.toBeUndefined();
     expect(calls.some((c) => c[0] === "release-plan" && c[1] === "update")).toBe(false);
   });
+
+  it.each(["", "a".repeat(40)])(
+    "allows an existing-ID plan with an empty API version and SHA '%s'",
+    async (sha) => {
+      const target = { SpecAPIVersion: "", SpecCommitSHA: sha };
+      const { deps, calls } = createHarness({
+        artifact: JSON.stringify({
+          outcome: "existing_by_id",
+          releasePlan: {
+            release_plan_details: {
+              ReleasePlanId: "12345",
+              WorkItemId: "9001",
+              APISpecProjectPath: SPEC_PATH,
+              ...target,
+            },
+          },
+          details: { releasePlanId: "12345" },
+        }),
+        getResponses: [buildPlan(target)],
+      });
+      await runGenerateSdk(cliArgs, deps);
+      expect(calls.filter((args) => args[0] === "spec-workflow")).toHaveLength(5);
+      expect(calls.some((args) => args.includes("--api-version"))).toBe(false);
+    },
+  );
 });

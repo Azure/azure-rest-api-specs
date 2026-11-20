@@ -1,0 +1,77 @@
+{
+  "operationId": "Ontologies_CreateOrUpdate",
+  "title": "Declare a node-only ontology using default onboarding settings",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "offeringName": "contoso-insights",
+    "ontologyName": "1",
+    "resource": {
+      "properties": {
+        "nodeTypeRefs": [
+          {
+            "resourceType": "Microsoft.Compute/virtualMachines"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceGraph/offerings/contoso-insights/ontologies/1",
+        "name": "1",
+        "type": "Microsoft.ResourceGraph/offerings/ontologies",
+        "properties": {
+          "autoOnboard": false,
+          "nodeTypeRefs": [
+            {
+              "resourceType": "Microsoft.Compute/virtualMachines"
+            }
+          ],
+          "edgeTypeRefs": [],
+          "provisioningState": "Succeeded",
+          "reviewStatus": "Submitted",
+          "validationStatus": "Unknown",
+          "validationDetails": [
+            {
+              "kind": "Node",
+              "resourceType": "Microsoft.Compute/virtualMachines",
+              "availability": "Unknown",
+              "reviewStatus": "Submitted",
+              "message": "Type is not known to the platform catalog and no dataOnboarding covers it."
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceGraph/offerings/contoso-insights/ontologies/1",
+        "name": "1",
+        "type": "Microsoft.ResourceGraph/offerings/ontologies",
+        "properties": {
+          "autoOnboard": false,
+          "nodeTypeRefs": [
+            {
+              "resourceType": "Microsoft.Compute/virtualMachines"
+            }
+          ],
+          "edgeTypeRefs": [],
+          "provisioningState": "Succeeded",
+          "reviewStatus": "Submitted",
+          "validationStatus": "Unknown",
+          "validationDetails": [
+            {
+              "kind": "Node",
+              "resourceType": "Microsoft.Compute/virtualMachines",
+              "availability": "Unknown",
+              "reviewStatus": "Submitted",
+              "message": "Type is not known to the platform catalog and no dataOnboarding covers it."
+            }
+          ]
+        }
+      }
+    }
+  }
+}

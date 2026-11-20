@@ -82,14 +82,31 @@ model BulkCreateEnvelope {
   @doc("Zones in which the BulkCreate is available")
   zones?: Array<string>;
 
+  // Spread the ARM common-types envelope property; versioning and docs are
+  // applied below via augment decorators.
+  ...ExtendedLocationProperty;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Placement matches the established compute contract and is applied uniformly to every virtual machine created by the operation."
+  @added(Versions.`2026-10-06-preview`)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The availability zone placement constraints applied to the virtual machines created by the BulkCreate operation.")
+  placement?: Placement;
+
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags free-form object matches the established compute contract."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Tags is a standard ARM resource property."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Preserved for compatibility with earlier preview versions; removed from GA."
   @doc("Resource tags.")
   tags?: Record<string>;
 
   ...ManagedServiceIdentityProperty;
   ...ResourcePlanProperty;
 }
+
+@@removed(BulkCreateEnvelope.tags, Versions.`2026-10-16`);
+@@added(BulkCreateEnvelope.extendedLocation, Versions.`2026-10-06-preview`);
+@@doc(
+  BulkCreateEnvelope.extendedLocation,
+  "The extended location of the virtual machines created by the BulkCreate operation."
+);
 
 @added(Versions.`2026-09-06-preview`)
 @doc("Location based BulkCreate resource. The location is part of the resource path.")
@@ -135,13 +152,16 @@ model BulkCreateProperties {
   @doc("Specifies capacity type for launching instances. It can be in terms of VMs or vCPUs.")
   capacityType?: CapacityType;
 
+  @removed(Versions.`2026-10-06-preview`)
   @doc("The minimum capacity, expressed in units specified by capacityType, that Azure must be able to allocate for the request to proceed. If Azure cannot allocate at least this capacity with high confidence, the request is rejected with 409 Conflict (InsufficientCapacity) and no VMs are created. Otherwise, Azure allocates as much capacity as possible, up to the requested capacity. Must be greater than 0, less than capacity, and requires partialFulfillmentPolicy.mode to be Enabled.")
   @minValue(1)
   minCapacity?: int32;
 
+  @removed(Versions.`2026-10-06-preview`)
   @doc("Controls how partial fulfillment is handled for a BulkCreate request. When enabled, Azure creates only the VMs or vCPUs it has high confidence can be successfully allocated, instead of attempting the entire request and potentially returning allocation failures.")
   partialFulfillmentPolicy?: PartialFulfillmentPolicy;
 
+  @removed(Versions.`2026-10-06-preview`)
   @doc("Configuration Options for Regular or Spot instances in BulkCreate.")
   priorityProfile: PriorityProfile;
 
@@ -188,7 +208,7 @@ model BulkCreateOperationStatusListResult {
 }
 
 // ============================================================
-// Routes: BulkCreate interface (8 operations)
+// Routes: BulkCreate interface
 // ============================================================
 
 @added(Versions.`2026-09-06-preview`)
@@ -222,18 +242,28 @@ interface BulkCreate {
     | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
     | ErrorResponse;
 
-  @doc("Creates or updates BulkCreates.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  @renamedFrom(Versions.`2026-10-16`, "createOrUpdate")
+  @doc("Creates virtual machines in bulk.")
+  create is ArmResourceCreateOrUpdateAsync<
     Resource = LocationBasedBulkCreate,
-    Parameters = BulkCreateId
+    Parameters = BulkCreateId,
+    Response =
+      | BulkCreateUpdatedResponse<LocationBasedBulkCreate>
+      | ArmResourceCreatedResponse<
+          LocationBasedBulkCreate,
+          ArmAsyncOperationHeader<FinalResult = LocationBasedBulkCreate> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
+  @removed(Versions.`2026-10-16`)
   @doc("Deletes BulkCreates.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Resource = LocationBasedBulkCreate,
     Parameters = BulkCreateId & BulkCreateDeleteInstancesParameter
   >;
 
+  @removed(Versions.`2026-10-16`)
   @doc("Cancels BulkCreate instances that have not yet launched.")
   cancel is ArmResourceActionNoResponseContentAsync<
     Resource = LocationBasedBulkCreate,

@@ -1,0 +1,31 @@
+{
+  "operationId": "LogFiles_Get",
+  "title": "Get captured log file metadata",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "example-resource-group",
+    "clusterName": "example-cluster",
+    "logFileName": "11111111-1111-1111-1111-111111111111",
+    "api-version": "2026-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/logFiles/11111111-1111-1111-1111-111111111111",
+        "name": "11111111-1111-1111-1111-111111111111",
+        "type": "Microsoft.HorizonDb/clusters/logFiles",
+        "properties": {
+          "logType": "PostgreSqlServer",
+          "createdAtUtc": "2026-09-11T12:00:00Z",
+          "lastModifiedAtUtc": "2026-09-11T12:15:00Z",
+          "retentionExpiresAtUtc": "2026-09-25T12:00:00Z",
+          "isMutable": true,
+          "sizeInKilobytes": 2048,
+          "pool": "example-pool-01",
+          "node": "node-01",
+          "role": "ReadWrite"
+        }
+      }
+    }
+  }
+}

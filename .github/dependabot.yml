@@ -9,6 +9,11 @@ updates:
       default-days: 7
     exclude-paths:
       - ".github/workflows/*.lock.{yaml,yml}"
+    groups:
+      actions-minor-patch:
+        patterns:
+          - "*"
+        update-types: ["minor", "patch"]
   - package-ecosystem: "npm"
     directories:
       - "/"

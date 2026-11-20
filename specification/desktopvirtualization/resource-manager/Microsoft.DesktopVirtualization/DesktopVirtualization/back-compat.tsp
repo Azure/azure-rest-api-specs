@@ -7,6 +7,30 @@ import "./Workspace.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.DesktopVirtualization;
 
+@@visibility(ActiveSessionHostConfigurationList.nextLink, Lifecycle.Read);
+@@visibility(AppAttachPackageList.nextLink, Lifecycle.Read);
+@@visibility(ApplicationGroupList.nextLink, Lifecycle.Read);
+@@visibility(ApplicationList.nextLink, Lifecycle.Read);
+@@visibility(DesktopList.nextLink, Lifecycle.Read);
+@@visibility(ExpandMsixImageList.nextLink, Lifecycle.Read);
+@@visibility(HostPoolList.nextLink, Lifecycle.Read);
+@@visibility(MSIXPackageList.nextLink, Lifecycle.Read);
+@@visibility(
+  PrivateEndpointConnectionListResultWithSystemData.nextLink,
+  Lifecycle.Read
+);
+@@visibility(PrivateLinkResourceListResult.nextLink, Lifecycle.Read);
+@@visibility(ResourceProviderOperationListResult.nextLink, Lifecycle.Read);
+@@visibility(ScalingPlanList.nextLink, Lifecycle.Read);
+@@visibility(ScalingPlanPersonalScheduleList.nextLink, Lifecycle.Read);
+@@visibility(ScalingPlanPooledScheduleList.nextLink, Lifecycle.Read);
+@@visibility(SessionHostConfigurationList.nextLink, Lifecycle.Read);
+@@visibility(SessionHostList.nextLink, Lifecycle.Read);
+@@visibility(SessionHostManagementList.nextLink, Lifecycle.Read);
+@@visibility(StartMenuItemList.nextLink, Lifecycle.Read);
+@@visibility(UserSessionList.nextLink, Lifecycle.Read);
+@@visibility(WorkspaceList.nextLink, Lifecycle.Read);
+
 @@clientName(CustomPrivateEndpointConnection, "PrivateEndpointConnections");
 
 @@clientName(AppAttachPackages, "AppAttachPackage");

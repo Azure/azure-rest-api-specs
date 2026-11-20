@@ -22,6 +22,7 @@ export type AzsdkRunner = (args: string[]) => CommandResult;
 export interface ReleasePlanCommandContext {
   prUrl?: string;
   tspProjectPath: string;
+  specCommitSha: string;
   apiReleaseType: ApiReleaseType;
   sdkReleaseType: "beta" | "stable";
   targetMonth: string;
@@ -98,6 +99,7 @@ export interface EnsureReleasePlanResult {
         prUrl: string;
         tspProjectPath: string;
         apiVersion: string;
+        specCommitSha: string;
         apiReleaseType: ApiReleaseType;
         sdkReleaseType: "beta" | "stable";
         targetReleaseMonth: string;
@@ -106,6 +108,9 @@ export interface EnsureReleasePlanResult {
 
 export interface CommitProjectInfoResult {
   projectInfo: TypeSpecProjectInfo | null;
+  changedFiles: PullRequestChangedFile[];
+  multipleProjectPaths?: string[];
+  projectError?: { tspProjectPath: string; message: string };
   prNumber?: number;
   hasNewApiVersionLabel: boolean;
   skipReleasePlanAutomation?: boolean;
@@ -113,7 +118,6 @@ export interface CommitProjectInfoResult {
 
 export interface CliArguments {
   commitSha?: string;
-  prNumber?: number;
   releasePlanId?: string;
   owner: string;
   repo: string;
@@ -148,7 +152,11 @@ export interface OctokitLike {
         repo: string;
         commit_sha: string;
       }) => Promise<{
-        data: Array<{ number: number }>;
+        data: Array<{
+          number: number;
+          merged_at?: string | null;
+          merge_commit_sha?: string | null;
+        }>;
       }>;
       getCommit: (params: { owner: string; repo: string; ref: string }) => Promise<{
         data: {

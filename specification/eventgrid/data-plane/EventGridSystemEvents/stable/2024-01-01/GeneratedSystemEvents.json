@@ -1260,6 +1260,20 @@
         "engagementType"
       ]
     },
+    "AcsIncomingCallCallArrivalDisplayInfo": {
+      "type": "object",
+      "description": "Display metadata associated with an incoming call arrival.",
+      "properties": {
+        "teamsTenantId": {
+          "type": "string",
+          "description": "The destination resource account's Microsoft Teams tenant ID."
+        },
+        "destinationPhoneNumber": {
+          "type": "string",
+          "description": "The E.164 number dialed for the incoming call."
+        }
+      }
+    },
     "AcsIncomingCallCustomContext": {
       "type": "object",
       "description": "Custom Context of Incoming Call",
@@ -1279,6 +1293,10 @@
             "type": "string"
           },
           "readOnly": true
+        },
+        "teamsPhoneCallDetails": {
+          "$ref": "#/definitions/AcsIncomingCallTeamsPhoneCallDetails",
+          "description": "Teams phone call details associated with the incoming call."
         }
       },
       "required": [
@@ -1324,6 +1342,10 @@
           "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The communication identifier on behalf of whom the call is made."
         },
+        "callArrivalDisplayInfo": {
+          "$ref": "#/definitions/AcsIncomingCallCallArrivalDisplayInfo",
+          "description": "Display metadata associated with the incoming call arrival."
+        },
         "correlationId": {
           "type": "string",
           "description": "CorrelationId (CallId)."
@@ -1334,6 +1356,110 @@
         "from",
         "customContext"
       ]
+    },
+    "AcsIncomingCallTeamsPhoneCallDetails": {
+      "type": "object",
+      "description": "Teams phone call details associated with an incoming call.",
+      "properties": {
+        "teamsPhoneCallerDetails": {
+          "$ref": "#/definitions/AcsIncomingCallTeamsPhoneCallerDetails",
+          "description": "Details about the original caller."
+        },
+        "teamsPhoneSourceDetails": {
+          "$ref": "#/definitions/AcsIncomingCallTeamsPhoneSourceDetails",
+          "description": "Details about the entity that created the call details."
+        },
+        "sessionId": {
+          "type": "string",
+          "description": "The identifier for the call session."
+        },
+        "intent": {
+          "type": "string",
+          "description": "The intent of the call."
+        },
+        "callTopic": {
+          "type": "string",
+          "description": "A short description of the reason for the call."
+        },
+        "callContext": {
+          "type": "string",
+          "description": "A summary of the call."
+        },
+        "transcriptUrl": {
+          "type": "string",
+          "description": "The URL for fetching the call transcript."
+        },
+        "callSentiment": {
+          "type": "string",
+          "description": "The sentiment of the call."
+        },
+        "suggestedActions": {
+          "type": "string",
+          "description": "Recommended actions for resolving the caller's issue."
+        }
+      }
+    },
+    "AcsIncomingCallTeamsPhoneCallerDetails": {
+      "type": "object",
+      "description": "Details about the original Teams phone caller.",
+      "properties": {
+        "caller": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The caller's communication identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "The caller's name."
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "The caller's phone number."
+        },
+        "recordId": {
+          "type": "string",
+          "description": "The caller's record identifier."
+        },
+        "screenPopUrl": {
+          "type": "string",
+          "description": "The URL to display information about the caller."
+        },
+        "isAuthenticated": {
+          "type": "boolean",
+          "description": "Whether the caller was authenticated."
+        },
+        "additionalCallerInformation": {
+          "type": "object",
+          "description": "Additional caller information keyed by field name.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AcsIncomingCallTeamsPhoneSourceDetails": {
+      "type": "object",
+      "description": "Details about the entity that supplied the Teams phone call details.",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The communication identifier of the source entity."
+        },
+        "language": {
+          "type": "string",
+          "description": "The ISO 639 language of the source entity."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the source entity."
+        },
+        "intendedTargets": {
+          "type": "object",
+          "description": "The intended targets keyed by target name.",
+          "additionalProperties": {
+            "$ref": "#/definitions/CommunicationIdentifierModel"
+          }
+        }
+      }
     },
     "AcsInteractiveReplyKind": {
       "type": "string",

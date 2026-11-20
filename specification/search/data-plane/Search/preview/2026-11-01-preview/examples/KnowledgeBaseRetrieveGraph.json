@@ -1,0 +1,156 @@
+{
+  "operationId": "KnowledgeRetrieval_Retrieve",
+  "title": "KnowledgeBaseRetrieveGraph",
+  "parameters": {
+    "endpoint": "https://typespecpreviewexampleservice.search.windows.net",
+    "knowledgeBaseName": "people-kb",
+    "api-version": "2026-11-01-preview",
+    "Accept": "application/json;odata.metadata=minimal",
+    "x-ms-query-source-authorization": null,
+    "x-ms-query-work-iq-source-authorization": null,
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "retrievalRequest": {
+      "messages": [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Who employs Ada?"
+            }
+          ]
+        }
+      ],
+      "includeActivity": true,
+      "outputMode": "extractiveData",
+      "knowledgeSourceParams": [
+        {
+          "knowledgeSourceName": "people-documents",
+          "includeReferences": true,
+          "includeReferenceSourceData": true,
+          "kind": "azureBlob",
+          "graphParameters": {
+            "provenance": {
+              "kind": "hydrate",
+              "hydrateDocuments": {
+                "select": "uid,snippet",
+                "top": 5
+              }
+            },
+            "includeQuery": true
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "response": [],
+        "activity": [
+          {
+            "type": "graphSearch",
+            "id": 1,
+            "knowledgeSourceName": "people-documents",
+            "count": 1,
+            "graphSearchArguments": {
+              "naturalLanguageQuery": "Who employs Ada?",
+              "graphIndexName": "people-graph",
+              "gql": "MATCH (p:Person)-[:worksFor]->(o:Organization) RETURN o.name AS organization",
+              "outcome": "Success",
+              "attempts": 1,
+              "inputTokens": 180,
+              "outputTokens": 32,
+              "modelElapsedMs": 420,
+              "modelName": "gpt-4o-mini"
+            }
+          }
+        ],
+        "references": [
+          {
+            "type": "graphSearch",
+            "id": "83dd7d40",
+            "activitySource": 1,
+            "graphIndexName": "people-graph",
+            "sourceData": {
+              "columns": [
+                "organization"
+              ],
+              "rows": [
+                {
+                  "organization": "Contoso"
+                }
+              ],
+              "attempts": 1,
+              "elapsedMs": 450
+            }
+          },
+          {
+            "type": "graphSearch",
+            "id": "83dd7d41",
+            "activitySource": 1,
+            "graphIndexName": "people-graph",
+            "sourceData": {
+              "uid": "chunk-1",
+              "snippet": "Ada works for Contoso."
+            }
+          }
+        ]
+      }
+    },
+    "206": {
+      "body": {
+        "response": [],
+        "activity": [
+          {
+            "type": "graphSearch",
+            "id": 1,
+            "knowledgeSourceName": "people-documents",
+            "count": 1,
+            "graphSearchArguments": {
+              "naturalLanguageQuery": "Who employs Ada?",
+              "graphIndexName": "people-graph",
+              "gql": "MATCH (p:Person)-[:worksFor]->(o:Organization) RETURN o.name AS organization",
+              "outcome": "Success",
+              "attempts": 1,
+              "inputTokens": 180,
+              "outputTokens": 32,
+              "modelElapsedMs": 420,
+              "modelName": "gpt-4o-mini"
+            }
+          }
+        ],
+        "references": [
+          {
+            "type": "graphSearch",
+            "id": "83dd7d40",
+            "activitySource": 1,
+            "graphIndexName": "people-graph",
+            "sourceData": {
+              "columns": [
+                "organization"
+              ],
+              "rows": [
+                {
+                  "organization": "Contoso"
+                }
+              ],
+              "attempts": 1,
+              "elapsedMs": 450
+            }
+          },
+          {
+            "type": "graphSearch",
+            "id": "83dd7d41",
+            "activitySource": 1,
+            "graphIndexName": "people-graph",
+            "sourceData": {
+              "uid": "chunk-1",
+              "snippet": "Ada works for Contoso."
+            }
+          }
+        ]
+      }
+    }
+  }
+}

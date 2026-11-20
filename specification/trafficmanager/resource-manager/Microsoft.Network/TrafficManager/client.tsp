@@ -236,6 +236,7 @@ op getReplace(
 /**
  * The type of the heatmap.
  */
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing SDK contract; preserve the existing extensible union representation."
 union TrafficManagerHeatMapType {
   HeatMapType,
   string,

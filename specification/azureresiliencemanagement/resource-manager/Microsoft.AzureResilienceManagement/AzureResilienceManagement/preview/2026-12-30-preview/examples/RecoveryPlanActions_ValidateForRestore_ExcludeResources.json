@@ -1,0 +1,42 @@
+{
+  "title": "Validate restore readiness excluding selected resources and recovery groups",
+  "operationId": "RecoveryPlanActions_ValidateForRestore",
+  "parameters": {
+    "serviceGroupName": "sampleServiceGroupName",
+    "api-version": "2026-12-30-preview",
+    "operation-id": "d02c569b-7362-4815-a215-f92a17865f33",
+    "recoveryPlanName": "samplePlanName",
+    "body": {
+      "resourceFilter": {
+        "filterType": "Exclude",
+        "recoveryResources": [
+          {
+            "recoveryResourceId": "12345678-9012-3456-7890-123456789012"
+          }
+        ],
+        "workloadTypes": [
+          "AzureFileShare"
+        ],
+        "recoveryGroups": [
+          {
+            "recoveryGroupId": "82647166-048a-4914-9b48-90514eb8de4e"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "jobId": "c56888ef-9ced-4001-a6d4-7145a0309bdb"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.AzureResilienceManagement/locations/eastus/operationStatuses/d02c569b-7362-4815-a215-f92a17865f33?api-version=2026-12-30-preview",
+        "Location": "https://management.azure.com/providers/Microsoft.AzureResilienceManagement/locations/eastus/operationStatuses/d02c569b-7362-4815-a215-f92a17865f33?api-version=2026-12-30-preview",
+        "Retry-After": 10
+      }
+    }
+  }
+}
