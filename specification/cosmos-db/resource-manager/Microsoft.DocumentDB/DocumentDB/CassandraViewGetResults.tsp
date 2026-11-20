@@ -16,7 +16,6 @@ namespace Microsoft.DocumentDB;
 /**
  * An Azure Cosmos DB Cassandra view.
  */
-@added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @parentResource(CassandraKeyspaceGetResults)
 @added(Versions.v2026_04_01_preview)
@@ -45,7 +44,6 @@ model CassandraViewGetResults
   identity?: ManagedServiceIdentity;
 }
 
-@added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
 @armResourceOperations(#{ omitTags: true })
