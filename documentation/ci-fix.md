@@ -144,10 +144,11 @@ Do the following:
 2. If your investigation denotes this is likely a bug in the check itself and not your PR, reach out
   to the owner of the check per the aforementioned table.
 
-In `Azure/azure-rest-api-specs-pr`, `SDK Validation Status` and `SDK Breaking Change Labels` read each
-build's results from its `SDK metadata - <language> (<definitionId>)` check instead of Azure DevOps.
-If they report the `spec-gen-sdk-artifact` as not found, check the `Publish SDK metadata check` step
-in the pipeline run logs, then rerun the failed SDK Validation job.
+`SDK Validation Status` and `SDK Breaking Change Labels` read each build's results from its
+`SDK metadata - <language> (<definitionId>)` check when present, and otherwise from the Azure DevOps
+build artifact. In `Azure/azure-rest-api-specs-pr`, which can't read Azure DevOps artifacts, a
+`spec-gen-sdk-artifact` not found error means the check wasn't published: inspect the
+`Publish SDK metadata check` step in the pipeline run logs, then rerun the failed SDK Validation job.
 
 ## `SDK Breaking Change Mitigation and Review`
 

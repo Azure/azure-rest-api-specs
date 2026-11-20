@@ -3,7 +3,7 @@ import { SpecGenSdkArtifactInfoSchema } from "../../shared/src/sdk-types.ts";
 import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.ts";
 import { extractInputs } from "./context.ts";
 import type { CheckRuns, Core, GitHub, GitHubScriptArgs } from "./github.ts";
-import { getSdkMetadataFromChecks, usesSdkMetadataChecks } from "./sdk-metadata-check.ts";
+import { getSdkMetadataFromChecks } from "./sdk-metadata-check.ts";
 
 export default async function setSpecGenSdkStatus({
   github,
@@ -111,7 +111,7 @@ export async function setSpecGenSdkStatusImpl({
     const result = await processResult({
       checkRuns: specGenSdkChecks,
       core,
-      metadataChecks: usesSdkMetadataChecks(owner, repo) ? checks : undefined,
+      allChecks: checks,
     });
 
     core.info(`All SDK Validation checks completed. Setting status to ${result.state}.`);
@@ -131,12 +131,12 @@ export async function setSpecGenSdkStatusImpl({
 async function processResult({
   checkRuns,
   core,
-  metadataChecks,
+  allChecks,
 }: {
   checkRuns: CheckRuns;
   core: Core;
-  /** When set, read manifests from SDK metadata checks instead of Azure DevOps. */
-  metadataChecks?: CheckRuns;
+  /** All checks on the commit, searched for SDK metadata checks before falling back to Azure DevOps. */
+  allChecks: CheckRuns;
 }): Promise<{ state: CommitStatusState; description: string }> {
   let state: CommitStatusState = CommitStatusState.SUCCESS;
   let specGenSdkFailedRequiredLanguages = "";
@@ -153,10 +153,8 @@ async function processResult({
       throw new Error(`'details_url' is null in Check Run '${checkRun.name}'`);
     }
     const artifactName = "spec-gen-sdk-artifact";
-    let artifactData: string;
-    if (metadataChecks) {
-      artifactData = getSdkMetadataFromChecks(checkRun, metadataChecks);
-    } else {
+    let artifactData = getSdkMetadataFromChecks(checkRun, allChecks);
+    if (!artifactData) {
       const buildInfo = getAdoBuildInfoFromUrl(checkRun.details_url);
       const result = await getAzurePipelineArtifact({
         ado_build_id: buildInfo.buildId,

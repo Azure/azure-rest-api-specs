@@ -309,10 +309,11 @@ stages:
               npm_config_userconfig: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
               TYPESPEC_EMITTER: $(TypeSpecEmitter)
 
-          # azure-rest-api-specs-pr workflows can't authenticate to Azure DevOps to read the manifest, so copy it
-          # into a GitHub check with a dedicated App (checks:write, installed only on that repo). Skipped until the
-          # SdkMetadataGitHubAppId/SdkMetadataGitHubKeyName variables are configured; GitHub workflows read the
-          # same App ID from the SDK_METADATA_APP_ID repository variable.
+          # Copy the manifest into a GitHub check (dedicated App with only checks:write) so the SDK Validation Status
+          # and SDK Breaking Change Labels workflows can read it without Azure DevOps credentials. Skipped until the
+          # SdkMetadataGitHubAppId/SdkMetadataGitHubKeyName variables are configured; workflows read the same App ID
+          # from the SDK_METADATA_APP_ID repository variable and otherwise download the Azure DevOps artifact.
+          # Public-project fork PR builds can't use the signing service connection, so they keep using that fallback.
           - ${{ if and(eq(variables['System.TeamProject'], 'internal'), eq(variables['Build.Reason'], 'PullRequest')) }}:
               - task: AzureCLI@2
                 displayName: "Login to GitHub (SDK metadata)"

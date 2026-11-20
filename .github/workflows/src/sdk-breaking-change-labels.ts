@@ -4,11 +4,7 @@ import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.ts
 import { extractInputs } from "./context.ts";
 import type { Core, GitHubScriptArgs, WebhookEvent } from "./github.ts";
 import { LabelAction } from "./label.ts";
-import {
-  getSdkMetadataAppId,
-  getSdkMetadataFromChecks,
-  usesSdkMetadataChecks,
-} from "./sdk-metadata-check.ts";
+import { getSdkMetadataAppId, getSdkMetadataFromChecks } from "./sdk-metadata-check.ts";
 
 const SUPPORTED_TARGET_BRANCHES = new Set(["main", "RPSaaSMaster"]);
 
@@ -32,13 +28,14 @@ export async function getLabelAndAction({ github, context, core }: GitHubScriptA
   if (!details_url) {
     throw new Error(`Required inputs are not valid: details_url:${details_url}`);
   }
-  let artifactData: string | undefined;
-  if (usesSdkMetadataChecks(context.repo.owner, context.repo.repo)) {
+  let artifactData = "";
+  const metadataAppId = getSdkMetadataAppId();
+  if (metadataAppId !== undefined) {
     const { check_run } = context.payload as WebhookEvent<"check-run">;
     const metadataChecks = await github.paginate(github.rest.checks.listForRef, {
       ...context.repo,
       ref: check_run.head_sha,
-      app_id: getSdkMetadataAppId(),
+      app_id: metadataAppId,
       per_page: PER_PAGE_MAX,
     });
     artifactData = getSdkMetadataFromChecks(check_run, metadataChecks);
@@ -76,7 +73,7 @@ export async function getLabelAndActionImpl({
   details_url: string;
   core: Core;
   retryOptions?: import("./retries.ts").RetryOptions;
-  /** Manifest already read from an SDK metadata check; skips the Azure DevOps download. */
+  /** Manifest read from an SDK metadata check; when empty, it's downloaded from Azure DevOps. */
   artifactData?: string;
 }): Promise<{
   labelName: string | undefined;
@@ -93,7 +90,7 @@ export async function getLabelAndActionImpl({
 
   let labelName: string | undefined = "";
   const artifactName = "spec-gen-sdk-artifact";
-  if (artifactData === undefined) {
+  if (!artifactData) {
     const buildInfo = getAdoBuildInfoFromUrl(details_url);
     const result = await getAzurePipelineArtifact({
       ado_build_id: buildInfo.buildId,

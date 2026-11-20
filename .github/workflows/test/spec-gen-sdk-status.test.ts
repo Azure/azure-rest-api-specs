@@ -414,7 +414,7 @@ describe("spec-gen-sdk-status", () => {
     expect(mockCore.setOutput).toBeCalledWith("issue_number", 123);
   });
 
-  describe("in azure-rest-api-specs-pr", () => {
+  describe("with SDK metadata checks", () => {
     const nativeCheck = {
       id: 1,
       app: { id: 9426, name: "Azure Pipelines" },
@@ -489,15 +489,18 @@ describe("spec-gen-sdk-status", () => {
       );
     });
 
-    it("ignores metadata published before the Azure Pipelines check (re)started", async () => {
+    it("falls back to Azure DevOps when metadata predates the Azure Pipelines check (re)start", async () => {
       mockGithub.rest.checks.listForRef.mockResolvedValue({
         data: {
-          check_runs: [nativeCheck, metadataCheck(10, 555, "succeeded", "2026-11-19T09:00:00Z")],
+          check_runs: [nativeCheck, metadataCheck(10, 555, "failed", "2026-11-19T09:00:00Z")],
         },
       });
+      getAzurePipelineArtifactMock.mockResolvedValue({ artifactData: "" });
 
       await expect(setStatus()).rejects.toThrow("Artifact 'spec-gen-sdk-artifact' not found");
-      expect(getAzurePipelineArtifactMock).not.toHaveBeenCalled();
+      expect(getAzurePipelineArtifactMock).toHaveBeenCalledWith(
+        expect.objectContaining({ ado_build_id: "2" }),
+      );
     });
   });
 });
