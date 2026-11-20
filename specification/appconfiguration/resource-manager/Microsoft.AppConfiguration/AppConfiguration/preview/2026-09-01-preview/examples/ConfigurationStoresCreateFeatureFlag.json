@@ -1,0 +1,284 @@
+{
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "configStoreName": "contoso",
+    "featureFlagName": "checkoutV2$Production",
+    "resource": {
+      "properties": {
+        "enabled": true,
+        "description": "Enables the updated checkout experience.",
+        "conditions": {
+          "requirementType": "All",
+          "filters": [
+            {
+              "name": "Microsoft.TimeWindow",
+              "parameters": [
+                {
+                  "name": "Start",
+                  "value": "2026-09-01T00:00:00Z"
+                },
+                {
+                  "name": "End",
+                  "value": "2026-12-31T23:59:59Z"
+                }
+              ]
+            }
+          ]
+        },
+        "variants": [
+          {
+            "name": "On",
+            "value": "true",
+            "contentType": "application/json",
+            "statusOverride": "None"
+          },
+          {
+            "name": "Off",
+            "value": "false",
+            "contentType": "application/json",
+            "statusOverride": "Disabled"
+          }
+        ],
+        "allocation": {
+          "defaultWhenDisabled": "Off",
+          "defaultWhenEnabled": "On",
+          "percentile": [
+            {
+              "variant": "On",
+              "from": 0,
+              "to": 80
+            },
+            {
+              "variant": "Off",
+              "from": 80,
+              "to": 100
+            }
+          ],
+          "user": [
+            {
+              "variant": "On",
+              "users": [
+                "alice",
+                "bob"
+              ]
+            }
+          ],
+          "group": [
+            {
+              "variant": "On",
+              "groups": [
+                "beta-testers"
+              ]
+            }
+          ],
+          "seed": "checkoutV2"
+        },
+        "telemetry": {
+          "enabled": true,
+          "metadata": [
+            {
+              "name": "Tags.Environment",
+              "value": "production"
+            }
+          ]
+        },
+        "tags": {
+          "team": "checkout",
+          "environment": "production"
+        }
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "c80fb759-c965-4c6a-9110-9b2b2d038882"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "checkoutV2$Production",
+        "type": "Microsoft.AppConfiguration/configurationStores/featureFlags",
+        "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso/featureFlags/checkoutV2$Production",
+        "properties": {
+          "enabled": true,
+          "label": "Production",
+          "description": "Enables the updated checkout experience.",
+          "conditions": {
+            "requirementType": "All",
+            "filters": [
+              {
+                "name": "Microsoft.TimeWindow",
+                "parameters": [
+                  {
+                    "name": "Start",
+                    "value": "2026-09-01T00:00:00Z"
+                  },
+                  {
+                    "name": "End",
+                    "value": "2026-12-31T23:59:59Z"
+                  }
+                ]
+              }
+            ]
+          },
+          "variants": [
+            {
+              "name": "On",
+              "value": "true",
+              "contentType": "application/json",
+              "statusOverride": "None"
+            },
+            {
+              "name": "Off",
+              "value": "false",
+              "contentType": "application/json",
+              "statusOverride": "Disabled"
+            }
+          ],
+          "allocation": {
+            "defaultWhenDisabled": "Off",
+            "defaultWhenEnabled": "On",
+            "percentile": [
+              {
+                "variant": "On",
+                "from": 0,
+                "to": 80
+              },
+              {
+                "variant": "Off",
+                "from": 80,
+                "to": 100
+              }
+            ],
+            "user": [
+              {
+                "variant": "On",
+                "users": [
+                  "alice",
+                  "bob"
+                ]
+              }
+            ],
+            "group": [
+              {
+                "variant": "On",
+                "groups": [
+                  "beta-testers"
+                ]
+              }
+            ],
+            "seed": "checkoutV2"
+          },
+          "telemetry": {
+            "enabled": true,
+            "metadata": [
+              {
+                "name": "Tags.Environment",
+                "value": "production"
+              }
+            ]
+          },
+          "tags": {
+            "team": "checkout",
+            "environment": "production"
+          },
+          "lastModified": "2026-09-01T16:52:32+00:00",
+          "eTag": "7XpB48ET4VAlB9068ft6fKMyA3m"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "checkoutV2$Production",
+        "type": "Microsoft.AppConfiguration/configurationStores/featureFlags",
+        "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso/featureFlags/checkoutV2$Production",
+        "properties": {
+          "enabled": true,
+          "label": "Production",
+          "description": "Enables the updated checkout experience.",
+          "conditions": {
+            "requirementType": "All",
+            "filters": [
+              {
+                "name": "Microsoft.TimeWindow",
+                "parameters": [
+                  {
+                    "name": "Start",
+                    "value": "2026-09-01T00:00:00Z"
+                  },
+                  {
+                    "name": "End",
+                    "value": "2026-12-31T23:59:59Z"
+                  }
+                ]
+              }
+            ]
+          },
+          "variants": [
+            {
+              "name": "On",
+              "value": "true",
+              "contentType": "application/json",
+              "statusOverride": "None"
+            },
+            {
+              "name": "Off",
+              "value": "false",
+              "contentType": "application/json",
+              "statusOverride": "Disabled"
+            }
+          ],
+          "allocation": {
+            "defaultWhenDisabled": "Off",
+            "defaultWhenEnabled": "On",
+            "percentile": [
+              {
+                "variant": "On",
+                "from": 0,
+                "to": 80
+              },
+              {
+                "variant": "Off",
+                "from": 80,
+                "to": 100
+              }
+            ],
+            "user": [
+              {
+                "variant": "On",
+                "users": [
+                  "alice",
+                  "bob"
+                ]
+              }
+            ],
+            "group": [
+              {
+                "variant": "On",
+                "groups": [
+                  "beta-testers"
+                ]
+              }
+            ],
+            "seed": "checkoutV2"
+          },
+          "telemetry": {
+            "enabled": true,
+            "metadata": [
+              {
+                "name": "Tags.Environment",
+                "value": "production"
+              }
+            ]
+          },
+          "tags": {
+            "team": "checkout",
+            "environment": "production"
+          },
+          "lastModified": "2026-09-01T16:52:32+00:00",
+          "eTag": "7XpB48ET4VAlB9068ft6fKMyA3m"
+        }
+      }
+    }
+  },
+  "operationId": "FeatureFlags_CreateOrUpdate",
+  "title": "FeatureFlags_CreateOrUpdate"
+}
