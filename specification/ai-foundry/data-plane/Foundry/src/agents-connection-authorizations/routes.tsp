@@ -59,8 +59,7 @@ interface ConnectionAuthorizations {
 
   /**
    * Revokes the calling user's authorization of a connection for the agent, so Foundry stops using the credential.
-   * Succeeds when no authorization exists. The connection and the agent remain. Skips the connection check, so a user
-   * can always remove a stored grant after the agent or connection changes.
+   * Succeeds when no authorization exists. The connection and the agent remain.
    */
   @summary("Revoke a connection authorization")
   @post
