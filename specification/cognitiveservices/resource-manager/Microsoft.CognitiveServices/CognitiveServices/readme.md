@@ -258,6 +258,11 @@ suppressions:
     where:
       - $.definitions.ManagedComputeDeploymentProperties.properties.capabilities
   - code: AvoidAdditionalProperties
+    reason: capabilities is a read-only string map copied from the managed compute deployment that serves the adapter. Keys are dynamic capability names not predefined by the service, backed by a Dictionary of string. Same pattern as ManagedComputeDeploymentProperties.capabilities.
+    from: cognitiveservices.json
+    where:
+      - $.definitions.AdapterDeploymentProperties.properties.capabilities
+  - code: AvoidAdditionalProperties
     reason: Account and project tool-label values are dictionaries of customer-defined label names and string values. The referenced schema definitions hold those actual dictionaries; fixed properties would prevent customers from assigning their own labels.
     from: cognitiveservices.json
     where:
