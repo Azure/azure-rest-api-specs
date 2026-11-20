@@ -26,7 +26,46 @@ These are the global settings for the professionalservice.
 
 ```yaml
 openapi-type: arm
-tag: package-2023-07-01-preview
+tag: package-2026-05-01
+```
+
+### Tag: package-2026-05-01
+
+These settings apply only when `--tag=package-2026-05-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-05-01'
+input-file:
+  - stable/2026-05-01/professionalservice.json
+```
+
+### Suppression
+
+```yaml
+directive:
+  - suppress: ParametersInPointGet
+    from: professionalservice.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProfessionalService/resources/{resourceName}"].get.parameters
+    reason: >-
+      The optional `$expandCustomerData` query parameter is required to gate PII (purchaser email) per the
+      ARM PII guidelines (https://aka.ms/arm-pii). The default GET response excludes customer data so that
+      downstream control plane components (e.g. ARG) do not cache PII. Callers must explicitly opt in via
+      `$expandCustomerData=true` to retrieve the PII. Approved with the ARM reviewer.
+  - suppress: PathForResourceAction
+    from: professionalservice.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ProfessionalService/resources/validate"]
+    reason: >-
+      Pre-creation purchase validation runs at subscription scope before a resource group or resource
+      instance exists, so no `{resourceName}` path segment can be supplied in the URI. The route mirrors
+      the instance-level `resources/{resourceName}/validate` action and receives the proposed resource
+      name in `properties.name`.
+  - suppress: PathForResourceAction
+    from: professionalservice.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProfessionalService/resources/validate"]
+    reason: >-
+      Pre-creation purchase validation runs within a resource group before the resource instance is
+      created, so no `{resourceName}` path segment exists yet in Azure Resource Manager. The route mirrors
+      the instance-level `resources/{resourceName}/validate` action and receives the proposed resource
+      name in `properties.name`.
 ```
 
 ### Tag: package-2023-07-01-preview
