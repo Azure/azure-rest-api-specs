@@ -58,4 +58,10 @@ enum Versions {
    * The 2026-11-02-preview API version.
    */
   v2026_11_02_preview: "2026-11-02-preview",
+
+  /**
+   * The 2027-01-31-preview API version. Adds namespace-scoped enrollment-group
+   * targeting for S2 provisioning services with Azure Device Registry enabled.
+   */
+  v2027_01_31_preview: "2027-01-31-preview",
 }
