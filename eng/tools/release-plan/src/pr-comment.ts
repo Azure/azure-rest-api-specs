@@ -1,3 +1,5 @@
+import { normalizeApiVersion } from "./sdk-workflow-common.ts";
+
 /**
  * Parameters for creating a PR comment about release plan creation.
  */
@@ -29,7 +31,6 @@ export interface PrCommentParams {
   apiVersion: string;
   /** TypeSpec project path */
   tspProjectPath: string;
-  manualCreationRequired?: boolean;
 }
 
 /**
@@ -49,24 +50,13 @@ export interface PrCommentParams {
  * });
  */
 export async function postReleasePlanComment(params: PrCommentParams): Promise<void> {
-  const {
-    octokit,
-    owner,
-    repo,
-    prNumber,
-    planId,
-    planLink,
-    apiVersion,
-    tspProjectPath,
-    manualCreationRequired,
-  } = params;
+  const { octokit, owner, repo, prNumber, planId, planLink, apiVersion, tspProjectPath } = params;
 
   const body = buildReleaseplanCommentBody({
     planId,
     planLink,
     apiVersion,
     tspProjectPath,
-    manualCreationRequired,
   });
 
   try {
@@ -100,7 +90,6 @@ export interface CommentBodyParams {
   apiVersion: string;
   /** TypeSpec project path */
   tspProjectPath: string;
-  manualCreationRequired?: boolean;
 }
 
 /**
@@ -109,23 +98,13 @@ export interface CommentBodyParams {
  * @returns Formatted markdown comment body
  */
 export function buildReleaseplanCommentBody(params: CommentBodyParams): string {
-  const { planId, planLink, apiVersion, tspProjectPath, manualCreationRequired } = params;
-
-  if (manualCreationRequired) {
-    return (
-      "### Manual Release Plan Required\n\n" +
-      "A single concrete API version could not be determined from TypeSpec metadata. " +
-      "No release-plan lookup or creation was attempted, and SDK generation is skipped.\n\n" +
-      "Select the intended API version and create or link a plan in " +
-      "[Release Planner](https://aka.ms/azsdk/releaseplan-dashboard). " +
-      "Then rerun this pipeline with the `ReleasePlanId` parameter.\n\n" +
-      `**TypeSpec project:** \`${tspProjectPath}\`\n`
-    );
-  }
+  const { planId, planLink, apiVersion, tspProjectPath } = params;
+  const isMultiVersion = !normalizeApiVersion(apiVersion);
 
   let body = `### ✅ Release Plan Created\n\n`;
-  body +=
-    "No release plan in `In Progress` or `Finished` status was found for this API version.\n\n";
+  body += isMultiVersion
+    ? "No reusable unversioned release plan was found for this project and release type.\n\n"
+    : "No release plan in `In Progress` or `Finished` status was found for this API version.\n\n";
   body += `| Field | Value |\n|-------|-------|\n`;
 
   if (planLink) {
@@ -136,10 +115,10 @@ export function buildReleaseplanCommentBody(params: CommentBodyParams): string {
     body += `| **Release Plan ID** | ${planId} |\n`;
   }
 
-  body += `| **API Version** | \`${apiVersion}\` |\n`;
+  body += `| **API Version** | ${isMultiVersion ? "Multiple or unspecified (empty plan version)" : `\`${apiVersion}\``} |\n`;
   body += `| **TypeSpec Project** | \`${tspProjectPath}\` |\n`;
 
-  if (apiVersion === "all" || apiVersion === "multiple-versions") {
+  if (isMultiVersion) {
     body +=
       "\n> **Note:** This project targets multiple API versions. Check the release plan for SDK generation details.\n";
   } else {
@@ -219,10 +198,9 @@ export async function postReleasePlanErrorComment(params: ErrorCommentParams): P
     body += `\n**TypeSpec Project:** \`${tspProjectPath}\`\n`;
   }
   if (apiVersion) {
-    body +=
-      apiVersion === "all" || apiVersion === "multiple-versions"
-        ? "\n**API Version:** Multiple versions; select the intended version if creating a plan manually.\n"
-        : `\n**API Version:** \`${apiVersion}\`\n`;
+    body += !normalizeApiVersion(apiVersion)
+      ? "\n**API Version:** Multiple versions (unversioned release plan).\n"
+      : `\n**API Version:** \`${apiVersion}\`\n`;
   }
 
   body +=

@@ -446,14 +446,9 @@ export function resolveTypeSpecMetadata(
         }
       }
     }
-    if (apiVersions.size === 0) {
-      throw new Error(
-        "No API version found in TypeSpec metadata. Configure api-version in tspconfig.yaml emitter options.",
-      );
-    }
   }
 
-  if (apiVersions.size === 0 && !hasPackage) {
+  if (!isPrivatePreview && apiVersions.size === 0 && !hasPackage) {
     throw new Error("No valid language configurations found in TypeSpec metadata");
   }
 

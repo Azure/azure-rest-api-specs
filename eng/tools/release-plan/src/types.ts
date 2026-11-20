@@ -92,13 +92,7 @@ export interface ReleasePlanDetails extends Record<string, unknown> {
 }
 
 export interface EnsureReleasePlanResult {
-  outcome:
-    | "existing_by_id"
-    | "existing_by_pr"
-    | "existing_by_path"
-    | "created"
-    | "not_found"
-    | "manual_required";
+  outcome: "existing_by_id" | "existing_by_pr" | "existing_by_path" | "created" | "not_found";
   releasePlan: ReleasePlanData | null;
   details:
     | { releasePlanId: string }

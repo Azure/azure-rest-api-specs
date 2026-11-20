@@ -421,17 +421,65 @@ describe("ensureReleasePlan", () => {
   });
 
   it.each(["", " ", "all", "multiple-versions", "ALL"])(
-    "requires manual selection without CLI reads or writes for version '%s'",
+    "reuses an empty-version plan through the explicit multi-version flow for '%s'",
     (apiVersion) => {
-      const runner = vi.fn<AzsdkRunner>();
+      const plan = buildPlan(100, { SpecAPIVersion: "" });
+      const runner = vi.fn<AzsdkRunner>(() => ({
+        exitCode: 0,
+        stdout: JSON.stringify(plan),
+        stderr: "",
+      }));
 
       expect(ensureReleasePlan({ ...baseContext, apiVersion }, runner)).toMatchObject({
-        outcome: "manual_required",
-        releasePlan: null,
+        outcome: "existing_by_path",
+        releasePlan: plan,
       });
-      expect(runner).not.toHaveBeenCalled();
+      expect(runner).toHaveBeenCalledExactlyOnceWith([
+        "release-plan",
+        "get",
+        "--typespec-path",
+        typespecPath,
+        "--api-version",
+        "",
+        "--api-release-type",
+        baseContext.apiReleaseType,
+        "--pull-request",
+        baseContext.prUrl,
+        "--output",
+        "json",
+      ]);
     },
   );
+
+  it.each(["all", "multiple-versions"])(
+    "creates an empty-version plan for %s when no reusable plan is found",
+    (apiVersion) => {
+      const plan = buildPlan(123, { SpecAPIVersion: "" }, "created");
+      const runner = vi
+        .fn<AzsdkRunner>()
+        .mockReturnValueOnce({ exitCode: 1, stdout: noMatchJson, stderr: "" })
+        .mockReturnValueOnce({ exitCode: 0, stdout: JSON.stringify(plan), stderr: "" });
+
+      expect(ensureReleasePlan({ ...baseContext, apiVersion }, runner)).toMatchObject({
+        outcome: "created",
+        releasePlan: plan,
+      });
+      expect(runner.mock.calls[1][0]).toEqual(
+        expect.arrayContaining(["--expected-api-version", ""]),
+      );
+    },
+  );
+
+  it("does not accept an empty-version plan for a concrete API version", () => {
+    const runner = vi.fn<AzsdkRunner>(() => ({
+      exitCode: 0,
+      stdout: JSON.stringify(buildPlan(100, { SpecAPIVersion: "" })),
+      stderr: "",
+    }));
+
+    expect(() => ensureReleasePlan(baseContext, runner)).toThrow("does not match");
+    expect(runner).toHaveBeenCalledOnce();
+  });
 
   it("classifies CLI reuse as existing and does not regenerate a released SDK", async () => {
     const plan = buildPlan(100);

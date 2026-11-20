@@ -8,5 +8,5 @@
 - Skip SDK generation for finished plans and include clearer creation and error recovery instructions in PR comments.
 - Report lookup command and JSON errors instead of treating them as missing release plans.
 - Distinguish CLI creation from reuse, validate returned plan identity, and assert the expected API version before writes.
-- Require manual selection for ambiguous metadata without performing plan lookups or creation; older CLI contracts stop before automatic creation.
+- Preserve automatic creation and reuse for multi-version/empty metadata through the CLI's explicit empty-version flow; keep concrete-version matching strict and stop on unsupported CLI contracts.
 - Select a pull request only when it is merged and its merge commit SHA matches the triggering commit, rather than using the first associated pull request.

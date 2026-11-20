@@ -1,8 +1,8 @@
 import path from "node:path";
 
-export function isConcreteApiVersion(value: string): boolean {
-  const version = value.trim().toLowerCase();
-  return version.length > 0 && version !== "all" && version !== "multiple-versions";
+export function normalizeApiVersion(value: string): string {
+  const version = value.trim();
+  return ["all", "multiple-versions"].includes(version.toLowerCase()) ? "" : version;
 }
 
 export function toStringValue(value: unknown): string {

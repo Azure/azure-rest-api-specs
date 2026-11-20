@@ -1,7 +1,7 @@
 import { spawnSync } from "node:child_process";
 import path, { join } from "node:path";
 import process from "node:process";
-import { isConcreteApiVersion } from "./sdk-workflow-common.ts";
+import { normalizeApiVersion } from "./sdk-workflow-common.ts";
 import type {
   ApiReleaseType,
   AzsdkRunner,
@@ -29,18 +29,11 @@ export function ensureReleasePlan(
   context: ReleasePlanCommandContext,
   runner: AzsdkRunner,
 ): EnsureReleasePlanResult {
-  if (!isConcreteApiVersion(context.apiVersion)) {
-    return {
-      outcome: "manual_required",
-      releasePlan: null,
-      details: buildDetails(context),
-    };
-  }
-
   const existingByPath = runGetReleasePlanByPath(
     context.tspProjectPath,
     context.apiVersion,
     context.apiReleaseType,
+    context.prUrl,
     runner,
   );
   if (existingByPath) {
@@ -71,7 +64,10 @@ function validateReturnedPlan(plan: ReleasePlanData, context: ReleasePlanCommand
   ) {
     throw new Error("Release plan response is missing its API version, status, or project path.");
   }
-  if (details.SpecAPIVersion.trim().toLowerCase() !== context.apiVersion.trim().toLowerCase()) {
+  if (
+    normalizeApiVersion(details.SpecAPIVersion).toLowerCase() !==
+    normalizeApiVersion(context.apiVersion).toLowerCase()
+  ) {
     throw new Error(
       `Release plan API version '${details.SpecAPIVersion}' does not match '${context.apiVersion}'.`,
     );
@@ -120,6 +116,7 @@ function runGetReleasePlanByPath(
   tspProjectPath: string,
   apiVersion: string,
   apiReleaseType: ApiReleaseType,
+  prUrl: string | undefined,
   runner: AzsdkRunner,
 ): ReleasePlanData | null {
   const args = [
@@ -128,9 +125,10 @@ function runGetReleasePlanByPath(
     "--typespec-path",
     tspProjectPath,
     "--api-version",
-    apiVersion,
+    normalizeApiVersion(apiVersion),
     "--api-release-type",
     apiReleaseType,
+    ...(prUrl && !normalizeApiVersion(apiVersion) ? ["--pull-request", prUrl] : []),
     "--output",
     "json",
   ];
@@ -219,7 +217,7 @@ function runCreateReleasePlan(
     "--test-release",
     String(context.testReleasePlan),
     "--expected-api-version",
-    context.apiVersion,
+    normalizeApiVersion(context.apiVersion),
     ...(context.apiReleaseType === "Private Preview"
       ? []
       : ["--spec-commit-sha", context.specCommitSha]),

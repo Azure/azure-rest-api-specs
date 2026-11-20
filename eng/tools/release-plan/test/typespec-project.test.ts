@@ -604,18 +604,12 @@ describe("TypeSpec path discovery", () => {
       });
 
       expect(result.prNumber).toBe(42);
-      if (apiVersion) {
-        expect(result.projectInfo).toEqual({
-          tspProjectPath: service,
-          apiVersion,
-          isPreview: apiVersion.endsWith("-preview"),
-        });
-        expect(result.projectError).toBeUndefined();
-      } else {
-        expect(result.projectInfo).toBeNull();
-        expect(result.projectError?.tspProjectPath).toBe(service);
-        expect(result.projectError?.message).toContain("No API version found");
-      }
+      expect(result.projectInfo).toEqual({
+        tspProjectPath: service,
+        apiVersion: apiVersion ?? "",
+        isPreview: apiVersion?.endsWith("-preview") ?? false,
+      });
+      expect(result.projectError).toBeUndefined();
       expect(generateTypeSpecMetadata).toHaveBeenCalledTimes(1);
     },
   );
@@ -1293,10 +1287,8 @@ describe("TypeSpec metadata resolution", () => {
     {},
     { unknown: [{ emitterName: "@azure-tools/typespec-autorest" }] },
     { python: [{ emitterName: "python", packageName: "azure-mgmt-sample", apiVersion: "" }] },
-  ])("rejects a private preview with no emitter API version", (languages) => {
-    expect(() => resolveTypeSpecMetadata(createMetadata(languages), true)).toThrow(
-      "No API version found",
-    );
+  ])("uses the unversioned flow for a private preview with no emitter API version", (languages) => {
+    expect(resolveTypeSpecMetadata(createMetadata(languages), true)).toEqual({ apiVersion: "" });
   });
 
   it("parses valid TypeSpec metadata with multiple languages", () => {

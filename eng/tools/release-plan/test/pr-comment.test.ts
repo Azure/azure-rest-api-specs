@@ -41,11 +41,26 @@ describe("PR comment creation", () => {
       );
       expect(comment.body).not.toContain("Release Plan Created");
       if (apiVersion === "all" || apiVersion === "multiple-versions") {
-        expect(comment.body).toContain("select the intended version");
+        expect(comment.body).toContain("unversioned release plan");
         expect(comment.body).not.toContain(`\`${apiVersion}\``);
       } else {
         expect(comment.body).toContain(`\`${apiVersion}\``);
       }
+    },
+  );
+
+  it.each(["all", "multiple-versions", ""])(
+    "describes successful unversioned creation for metadata '%s'",
+    (apiVersion) => {
+      const body = buildReleaseplanCommentBody({
+        apiVersion,
+        tspProjectPath: "specification/compute/resource-manager/Microsoft.Compute/Compute",
+      });
+
+      expect(body).toContain("Release Plan Created");
+      expect(body).toContain("unversioned release plan");
+      expect(body).toContain("empty plan version");
+      expect(body).not.toContain("Manual Release Plan Required");
     },
   );
 

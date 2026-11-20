@@ -134,7 +134,7 @@ describe("release plan CLI", () => {
   );
 
   it.each(["In Progress", "Finished"])(
-    "does not guess a Compute API version from an existing blank-version %s plan",
+    "reuses a Compute multi-version plan in %s status without requiring manual selection",
     async (status) => {
       const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
       const computePath = "specification/compute/resource-manager/Microsoft.Compute/Compute";
@@ -154,21 +154,25 @@ describe("release plan CLI", () => {
         exitCode: 0,
         stdout: JSON.stringify({
           outcome: "existing",
-          release_plan_details: { SpecAPIVersion: "", Status: status },
+          release_plan_details: {
+            SpecAPIVersion: "",
+            Status: status,
+            APISpecProjectPath: computePath,
+            ReleasePlanId: 123,
+          },
         }),
         stderr: "",
       });
 
       await main();
 
-      expect(mocks.runner).not.toHaveBeenCalled();
+      expect(mocks.runner).toHaveBeenCalledOnce();
       expect(JSON.parse(readFileSync(outputFile, "utf8"))).toMatchObject({
-        outcome: "manual_required",
-        releasePlan: null,
+        outcome: "existing_by_path",
+        releasePlan: { release_plan_details: { SpecAPIVersion: "" } },
       });
-      expect(mocks.createComment.mock.calls[0][0].body).toContain("Manual Release Plan Required");
-      expect(mocks.createComment.mock.calls[0][0].body).toContain("ReleasePlanId");
-      expect(warn).toHaveBeenCalledWith(expect.stringContaining("Manual release plan required"));
+      expect(mocks.createComment).not.toHaveBeenCalled();
+      expect(warn).not.toHaveBeenCalled();
     },
   );
 
@@ -334,7 +338,7 @@ describe("release plan CLI", () => {
   );
 
   it.each(["all", "multiple-versions"])(
-    "requires manual version selection for private-preview metadata %s",
+    "creates an unversioned plan for private-preview metadata %s",
     async (apiVersion) => {
       mocks.parseCliArguments.mockReturnValue({
         commitSha: "abc123",
@@ -353,6 +357,23 @@ describe("release plan CLI", () => {
       const actual =
         await vi.importActual<typeof import("../src/release-plan.ts")>("../src/release-plan.ts");
       mocks.ensureReleasePlan.mockImplementation(actual.ensureReleasePlan);
+      mocks.runner.mockImplementation((args: string[]) => ({
+        exitCode: 0,
+        stdout: JSON.stringify(
+          args[1] === "get"
+            ? { outcome: "not_found" }
+            : {
+                outcome: "created",
+                release_plan_details: {
+                  ReleasePlanId: 123,
+                  APISpecProjectPath: projectPath,
+                  SpecAPIVersion: "",
+                  Status: "Finished",
+                },
+              },
+        ),
+        stderr: "",
+      }));
 
       await main();
 
@@ -362,8 +383,11 @@ describe("release plan CLI", () => {
       );
       expect(existsSync(outputFile)).toBe(true);
       expect(mocks.createComment).toHaveBeenCalledOnce();
-      expect(mocks.runner).not.toHaveBeenCalled();
-      expect(mocks.createComment.mock.calls[0][0].body).toContain("Manual Release Plan Required");
+      expect(mocks.runner).toHaveBeenCalledTimes(2);
+      expect(mocks.createComment.mock.calls[0][0].body).toContain("Release Plan Created");
+      expect(mocks.createComment.mock.calls[0][0].body).not.toContain(
+        "Manual Release Plan Required",
+      );
     },
   );
 
