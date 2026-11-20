@@ -193,7 +193,7 @@ describe("SDK breaking-change summary", () => {
       github.rest.pulls.get.mockResolvedValue({
         data: {
           head: { sha: headSha },
-          base: { ref: "main" },
+          base: { ref: "main", repo: { private: false } },
           draft: false,
           labels: detected ? [{ name: "BreakingChange-Go-Sdk" }] : [],
         },
@@ -244,7 +244,7 @@ describe("SDK breaking-change summary", () => {
       .mockResolvedValueOnce({
         data: {
           head: { sha: headSha },
-          base: { ref: "main" },
+          base: { ref: "main", repo: { private: false } },
           draft: false,
           labels: [{ name: "BreakingChange-Go-Sdk" }],
         },

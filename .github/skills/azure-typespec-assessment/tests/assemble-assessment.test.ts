@@ -146,6 +146,50 @@ void test("validator accepts target-only artifact comparisons for new projects",
     validateAssessment(assessment).filter((error) => error.startsWith("Artifact comparison")),
     [],
   );
+
+  assessment.projects = [{ id: "project-version" }] as AssessmentOutput["projects"];
+  assessment.artifactComparisons = [
+    {
+      projectId: "project-version",
+      mode: "new-api-version",
+      baseline: {
+        sourceRevision: "base",
+        commit: "base",
+        apiVersion: "2026-05-01-preview",
+        reason: "previous-latest-preview",
+      },
+      target: {
+        sourceRevision: "current",
+        commit: "head",
+        apiVersion: "2026-10-01-preview",
+        reason: "newest-added-version",
+      },
+      available: {
+        base: ["2026-05-01-preview"],
+        current: ["2026-10-01-preview"],
+      },
+    },
+  ];
+
+  assert.deepEqual(
+    validateAssessment(assessment).filter((error) =>
+      error.startsWith("New-version artifact comparison"),
+    ),
+    [],
+  );
+
+  assessment.artifactComparisons[0].available = {
+    base: ["2026-05-01-preview"],
+    current: ["2026-05-01-preview", "2026-10-01-preview"],
+  };
+  assert.deepEqual(
+    validateAssessment(assessment).filter((error) =>
+      error.startsWith("New-version artifact comparison"),
+    ),
+    [
+      "New-version artifact comparison project-version must compile a retained baseline from the head source and may fall back to the base source only when removed from head.",
+    ],
+  );
 });
 
 function fixture() {

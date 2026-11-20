@@ -193,7 +193,7 @@ union RoleAssignmentMode {
 /**
  * Whether or not per-region endpoints are enabled for accessing the registry.
  */
-@added(Versions.vLatestPreview)
+@added(Versions.v2026_11_01)
 union RegionalEndpoints {
   string,
 
@@ -353,15 +353,25 @@ model RegistryProperties {
   /**
    * Enable per-region endpoints for accessing registry.
    */
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_11_01)
   regionalEndpoints?: RegionalEndpoints;
 
   /**
    * List of host names that will serve registry when RegionalEndpoints is enabled.
    */
   @visibility(Lifecycle.Read)
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_11_01)
   regionalEndpointHostNames?: string[];
+
+  /**
+   * The connectivity protocol for the registry, such as IPv4 or dual stack (IPv4 and IPv6).
+   */
+  // Keep GA PUT defaults out of preview SDK initialization without changing the public property name.
+  @added(Versions.v2026_11_01)
+  @removed(Versions.vLatestPreview)
+  @renamedFrom(Versions.vLatestPreview, "endpointProtocol")
+  @encodedName("application/json", "endpointProtocol")
+  gaEndpointProtocol?: EndpointProtocol = EndpointProtocol.IPv4;
 
   /**
    * The connectivity protocol for the registry, such as IPv4 or dual stack (IPv4 and IPv6).
@@ -476,7 +486,7 @@ model NetworkRuleSet {
   /**
    * The virtual network rules.
    */
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_11_01)
   @identifiers(#[])
   virtualNetworkRules?: VirtualNetworkRule[];
 
@@ -505,7 +515,7 @@ model IPRule {
 /**
  * Virtual network rule.
  */
-@added(Versions.vLatestPreview)
+@added(Versions.v2026_11_01)
 model VirtualNetworkRule {
   /**
    * The action of virtual network rule.
@@ -765,13 +775,13 @@ model RegistryPropertiesUpdateParameters {
   /**
    * Enable per-region endpoints for accessing registry.
    */
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_11_01)
   regionalEndpoints?: RegionalEndpoints;
 
   /**
    * The connectivity protocol for the registry, such as IPv4 or dual stack (IPv4 and IPv6).
    */
-  @added(Versions.vLatestPreview)
+  @added(Versions.v2026_11_01)
   endpointProtocol?: EndpointProtocol;
 
   /**
