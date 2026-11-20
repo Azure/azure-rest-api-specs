@@ -1,0 +1,429 @@
+import { mkdtemp, mkdir, writeFile } from "node:fs/promises";
+import os from "node:os";
+import path from "node:path";
+import { afterEach, describe, expect, it } from "vitest";
+import { publishSdkReviewResult } from "../src/sdk-validation-dotnet-review-publisher.ts";
+import { createMockContext, createMockCore, createMockGithub } from "./mocks.ts";
+
+const HEAD_SHA = "1".repeat(40);
+const SKILL_REVISION = "2".repeat(40);
+const REMEDIATION_SKILL_REVISION = "3".repeat(40);
+const BASELINE_SHA = "4".repeat(40);
+const SPEC_BASE_TIP_SHA = "5".repeat(40);
+const SPEC_MERGE_BASE_SHA = "1".repeat(40);
+const SPEC_BASE_REF = "main";
+const SPEC_FILE = "specification/widget/Widget.Management/models.tsp";
+const temporaryDirectories: string[] = [];
+
+async function writeJson(filePath: string, value: unknown): Promise<void> {
+  await mkdir(path.dirname(filePath), { recursive: true });
+  await writeFile(filePath, JSON.stringify(value));
+}
+
+async function createFixture(): Promise<{
+  publicationContextPath: string;
+  resultRootPath: string;
+  trustedContextRootPath: string;
+}> {
+  const root = await mkdtemp(path.join(os.tmpdir(), "sdk-review-publisher-"));
+  temporaryDirectories.push(root);
+  const resultRootPath = path.join(root, "results");
+  const trustedContextRootPath = path.join(root, "trusted-context");
+  const publicationContextPath = path.join(
+    root,
+    "publication",
+    "sdk-review-publication-context.json",
+  );
+  await mkdir(resultRootPath, { recursive: true });
+  const source = { specPrNumber: 42, specHeadSha: HEAD_SHA };
+  const reviewContext = {
+    source,
+    canonicalSkill: { skillRevision: SKILL_REVISION },
+    remediationSkill: { skillRevision: REMEDIATION_SKILL_REVISION },
+    workspaces: [
+      {
+        baselineCommitSha: BASELINE_SHA,
+        packages: [
+          {
+            packageName: "Azure.Widget",
+            changedFiles: ["sdk/widget/Azure.Widget/src/Generated/Widget.cs"],
+          },
+        ],
+      },
+    ],
+  };
+  const rawResult = {
+    schemaVersion: 1,
+    status: "completed",
+    skillRevision: SKILL_REVISION,
+    source,
+    reviews: [
+      {
+        baselineCommitSha: BASELINE_SHA,
+        packages: ["Azure.Widget"],
+        findings: [
+          {
+            severity: "high",
+            file: "sdk/widget/Azure.Widget/src/Generated/Widget.cs",
+            line: 12,
+            title: "Generic model name",
+            description: "The generated model lacks service context.",
+          },
+        ],
+      },
+    ],
+  };
+  const typeSpecContext = {
+    schemaVersion: 1,
+    source: {
+      ...source,
+      specBaseRef: SPEC_BASE_REF,
+      specMergeBaseSha: SPEC_MERGE_BASE_SHA,
+    },
+    projects: [],
+    files: [
+      {
+        path: SPEC_FILE,
+        roles: ["changed"],
+        content: "model Widget {\n  name: string;\n}\n",
+        patch: "@@ -1,3 +1,3 @@\n-model OldWidget {\n+model Widget {\n   name: string;\n }",
+      },
+    ],
+  };
+  const publicationContext = {
+    schemaVersion: 1,
+    source: typeSpecContext.source,
+    handoff: {
+      adoBuildId: "123",
+      workflowRunId: 456,
+      workflowRunAttempt: 1,
+    },
+  };
+  const remediationResult = {
+    schemaVersion: 1,
+    status: "completed",
+    skillRevision: REMEDIATION_SKILL_REVISION,
+    source,
+    findings: [
+      {
+        reviewIndex: 0,
+        findingIndex: 0,
+        severity: "high",
+        generatedLocation: {
+          file: rawResult.reviews[0].findings[0].file,
+          line: 12,
+        },
+        category: "naming",
+        title: "Generic model name",
+        evidence: "The generated model lacks service context.",
+        remediation: {
+          target: "client.tsp",
+          languageScopes: ["csharp"],
+          suggestion: "Add a C#-scoped @@clientName decorator.",
+          confidence: "high",
+          sourceLocation: { file: SPEC_FILE, line: 1 },
+        },
+      },
+    ],
+  };
+  await Promise.all([
+    writeJson(publicationContextPath, publicationContext),
+    writeJson(
+      path.join(resultRootPath, "sdk-review-workspaces", "sdk-review-context.json"),
+      reviewContext,
+    ),
+    writeJson(
+      path.join(trustedContextRootPath, "sdk-review-workspaces", "sdk-review-context.json"),
+      reviewContext,
+    ),
+    writeJson(path.join(resultRootPath, "sdk-review-result.json"), rawResult),
+    writeFile(path.join(resultRootPath, "sdk-review-result.md"), "# SDK review\n"),
+    writeJson(
+      path.join(resultRootPath, "sdk-review-input", "typespec-review-context.json"),
+      typeSpecContext,
+    ),
+    writeJson(
+      path.join(trustedContextRootPath, "sdk-review-input", "typespec-review-context.json"),
+      typeSpecContext,
+    ),
+    writeJson(path.join(resultRootPath, "typespec-remediation-result.json"), remediationResult),
+    writeFile(
+      path.join(resultRootPath, "typespec-remediation-result.md"),
+      "# TypeSpec remediation\n",
+    ),
+  ]);
+  return { publicationContextPath, resultRootPath, trustedContextRootPath };
+}
+
+afterEach(async () => {
+  const { rm } = await import("node:fs/promises");
+  await Promise.all(
+    temporaryDirectories
+      .splice(0)
+      .map((directory) => rm(directory, { recursive: true, force: true })),
+  );
+});
+
+describe("publishSdkReviewResult", () => {
+  it("does not mutate a PR after its head changes", async () => {
+    const fixture = await createFixture();
+    const github = createMockGithub();
+    github.rest.pulls.get.mockResolvedValue({
+      data: {
+        state: "open",
+        head: { sha: "9".repeat(40) },
+        base: { ref: SPEC_BASE_REF, sha: SPEC_BASE_TIP_SHA },
+      },
+    });
+
+    await publishSdkReviewResult({
+      githubScript: { github, context: createMockContext(), core: createMockCore() },
+      ...fixture,
+      validatedResultAvailable: true,
+      workflowConclusion: "success",
+      workflowRunUrl: "https://github.com/owner/repo/actions/runs/1",
+    });
+
+    expect(github.rest.issues.createComment).not.toHaveBeenCalled();
+    expect(github.rest.pulls.createReviewComment).not.toHaveBeenCalled();
+  });
+
+  it("publishes when the base tip advances without changing the merge base", async () => {
+    const fixture = await createFixture();
+    const github = createMockGithub();
+    github.rest.pulls.get.mockResolvedValue({
+      data: {
+        state: "open",
+        head: { sha: HEAD_SHA },
+        base: { ref: SPEC_BASE_REF, sha: "9".repeat(40) },
+      },
+    });
+
+    await publishSdkReviewResult({
+      githubScript: { github, context: createMockContext(), core: createMockCore() },
+      ...fixture,
+      validatedResultAvailable: true,
+      workflowConclusion: "success",
+      workflowRunUrl: "https://github.com/owner/repo/actions/runs/1",
+    });
+
+    expect(github.rest.issues.createComment).toHaveBeenCalled();
+    expect(github.rest.pulls.createReviewComment).not.toHaveBeenCalled();
+  });
+
+  it("publishes rerun guidance when the comparison merge base changes", async () => {
+    const fixture = await createFixture();
+    const github = createMockGithub();
+    github.rest.pulls.get.mockResolvedValue({
+      data: {
+        state: "open",
+        head: { sha: HEAD_SHA },
+        base: { ref: SPEC_BASE_REF, sha: SPEC_BASE_TIP_SHA },
+      },
+    });
+    github.rest.repos.compareCommitsWithBasehead.mockResolvedValue({
+      data: { files: [], merge_base_commit: { sha: "9".repeat(40) } },
+    });
+
+    await publishSdkReviewResult({
+      githubScript: { github, context: createMockContext(), core: createMockCore() },
+      ...fixture,
+      validatedResultAvailable: true,
+      workflowConclusion: "success",
+      workflowRunUrl: "https://github.com/owner/repo/actions/runs/1",
+    });
+
+    const comment = github.rest.issues.createComment.mock.calls[0]?.[0] as unknown as {
+      body: string;
+    };
+    expect(comment.body).toContain("target branch comparison changed");
+  });
+
+  it("publishes rerun guidance when the base ref changes", async () => {
+    const fixture = await createFixture();
+    const github = createMockGithub();
+    github.rest.pulls.get.mockResolvedValue({
+      data: {
+        state: "open",
+        head: { sha: HEAD_SHA },
+        base: { ref: "release", sha: SPEC_BASE_TIP_SHA },
+      },
+    });
+
+    await publishSdkReviewResult({
+      githubScript: { github, context: createMockContext(), core: createMockCore() },
+      ...fixture,
+      validatedResultAvailable: true,
+      workflowConclusion: "success",
+      workflowRunUrl: "https://github.com/owner/repo/actions/runs/1",
+    });
+
+    expect(github.rest.repos.compareCommitsWithBasehead).not.toHaveBeenCalled();
+    const comment = github.rest.issues.createComment.mock.calls[0]?.[0] as unknown as {
+      body: string;
+    };
+    expect(comment.body).toContain("target branch comparison changed");
+  });
+
+  it("publishes failure guidance without reading result artifacts", async () => {
+    const fixture = await createFixture();
+    const github = createMockGithub();
+    github.rest.pulls.get.mockResolvedValue({
+      data: {
+        state: "open",
+        head: { sha: HEAD_SHA },
+        base: { ref: SPEC_BASE_REF, sha: SPEC_BASE_TIP_SHA },
+      },
+    });
+
+    await publishSdkReviewResult({
+      githubScript: { github, context: createMockContext(), core: createMockCore() },
+      ...fixture,
+      resultRootPath: path.join(fixture.resultRootPath, "missing"),
+      validatedResultAvailable: false,
+      workflowConclusion: "failure",
+      workflowRunUrl: "https://github.com/owner/repo/actions/runs/1",
+    });
+
+    const failureComment = github.rest.issues.createComment.mock.calls[0]?.[0] as unknown as {
+      issue_number: number;
+      body: string;
+    };
+    expect(failureComment.issue_number).toBe(42);
+    expect(failureComment.body).toContain("did not finish");
+    expect(github.rest.pulls.createReviewComment).not.toHaveBeenCalled();
+  });
+
+  it("publishes incomplete guidance when a successful agent run has no validated result", async () => {
+    const fixture = await createFixture();
+    const github = createMockGithub();
+    github.rest.pulls.get.mockResolvedValue({
+      data: {
+        state: "open",
+        head: { sha: HEAD_SHA },
+        base: { ref: SPEC_BASE_REF, sha: SPEC_BASE_TIP_SHA },
+      },
+    });
+
+    await publishSdkReviewResult({
+      githubScript: { github, context: createMockContext(), core: createMockCore() },
+      ...fixture,
+      resultRootPath: path.join(fixture.resultRootPath, "missing"),
+      validatedResultAvailable: false,
+      workflowConclusion: "success",
+      workflowRunUrl: "https://github.com/owner/repo/actions/runs/1",
+    });
+
+    const failureComment = github.rest.issues.createComment.mock.calls[0]?.[0] as unknown as {
+      body: string;
+    };
+    expect(failureComment.body).toContain("did not finish");
+  });
+
+  it("revalidates and publishes successful results", async () => {
+    const fixture = await createFixture();
+    const github = createMockGithub();
+    github.rest.pulls.get.mockResolvedValue({
+      data: {
+        state: "open",
+        head: { sha: HEAD_SHA },
+        base: { ref: SPEC_BASE_REF, sha: SPEC_BASE_TIP_SHA },
+      },
+    });
+
+    await publishSdkReviewResult({
+      githubScript: { github, context: createMockContext(), core: createMockCore() },
+      ...fixture,
+      validatedResultAvailable: true,
+      workflowConclusion: "success",
+      workflowRunUrl: "https://github.com/owner/repo/actions/runs/1",
+    });
+
+    expect(github.rest.pulls.createReviewComment).not.toHaveBeenCalled();
+    const summaryComment = github.rest.issues.createComment.mock.calls[0]?.[0] as unknown as {
+      issue_number: number;
+      body: string;
+    };
+    expect(summaryComment.issue_number).toBe(42);
+    expect(summaryComment.body).toContain("The generated model lacks service context.");
+    expect(summaryComment.body).toContain("View complete validated workflow results");
+  });
+
+  it("rejects results for a different source than the trusted publication context", async () => {
+    const fixture = await createFixture();
+    const reviewContextPath = path.join(
+      fixture.trustedContextRootPath,
+      "sdk-review-workspaces",
+      "sdk-review-context.json",
+    );
+    const reviewContext = JSON.parse(
+      await (await import("node:fs/promises")).readFile(reviewContextPath, "utf8"),
+    ) as { source: { specPrNumber: number } };
+    reviewContext.source.specPrNumber = 99;
+    await writeJson(reviewContextPath, reviewContext);
+    const github = createMockGithub();
+    github.rest.pulls.get.mockResolvedValue({
+      data: {
+        state: "open",
+        head: { sha: HEAD_SHA },
+        base: { ref: SPEC_BASE_REF, sha: SPEC_BASE_TIP_SHA },
+      },
+    });
+
+    await expect(
+      publishSdkReviewResult({
+        githubScript: { github, context: createMockContext(), core: createMockCore() },
+        ...fixture,
+        validatedResultAvailable: true,
+        workflowConclusion: "success",
+        workflowRunUrl: "https://github.com/owner/repo/actions/runs/1",
+      }),
+    ).rejects.toThrow("trusted publication context");
+
+    expect(github.rest.pulls.get).not.toHaveBeenCalled();
+    expect(github.rest.issues.createComment).not.toHaveBeenCalled();
+    expect(github.rest.pulls.createReviewComment).not.toHaveBeenCalled();
+  });
+
+  it("validates exact-line mappings against the protected pre-agent context", async () => {
+    const fixture = await createFixture();
+    const remediationResultPath = path.join(
+      fixture.resultRootPath,
+      "typespec-remediation-result.json",
+    );
+    const remediationResult = JSON.parse(
+      await (await import("node:fs/promises")).readFile(remediationResultPath, "utf8"),
+    ) as {
+      findings: Array<{
+        remediation: { sourceLocation: { line: number } };
+      }>;
+    };
+    remediationResult.findings[0].remediation.sourceLocation.line = 2;
+    await writeJson(remediationResultPath, remediationResult);
+    const resultContextPath = path.join(
+      fixture.resultRootPath,
+      "sdk-review-input",
+      "typespec-review-context.json",
+    );
+    const resultContext = JSON.parse(
+      await (await import("node:fs/promises")).readFile(resultContextPath, "utf8"),
+    ) as { files: Array<{ patch: string }> };
+    resultContext.files[0].patch =
+      "@@ -1,3 +1,3 @@\n model Widget {\n-  oldName: string;\n+  name: string;\n }";
+    await writeJson(resultContextPath, resultContext);
+    const github = createMockGithub();
+
+    await expect(
+      publishSdkReviewResult({
+        githubScript: { github, context: createMockContext(), core: createMockCore() },
+        ...fixture,
+        validatedResultAvailable: true,
+        workflowConclusion: "success",
+        workflowRunUrl: "https://github.com/owner/repo/actions/runs/1",
+      }),
+    ).rejects.toThrow("is not changed by the spec PR");
+
+    expect(github.rest.pulls.get).not.toHaveBeenCalled();
+    expect(github.rest.pulls.createReviewComment).not.toHaveBeenCalled();
+  });
+});

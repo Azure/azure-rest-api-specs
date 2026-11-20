@@ -33,7 +33,8 @@ export type TypeSpecReviewContext = {
   source: {
     specPrNumber: number;
     specHeadSha: string;
-    specBaseSha: string;
+    specBaseRef: string;
+    specMergeBaseSha: string;
   };
   projects: Array<{
     root: string;
@@ -368,11 +369,13 @@ export async function collectTypeSpecReviewContext(params: {
   context: Context;
   prNumber: number;
   headSha: string;
+  baseRef: string;
   baseSha: string;
   changedFileCount: number;
   projectRoots: readonly string[];
 }): Promise<TypeSpecReviewContext> {
-  const { github, context, prNumber, headSha, baseSha, changedFileCount, projectRoots } = params;
+  const { github, context, prNumber, headSha, baseRef, baseSha, changedFileCount, projectRoots } =
+    params;
   // Compare immutable commits so patches and file contents describe the same revision.
   const changedFiles = (
     await getChangedFiles({ github, context, baseSha, headSha, changedFileCount })
@@ -533,7 +536,8 @@ export async function collectTypeSpecReviewContext(params: {
     source: {
       specPrNumber: prNumber,
       specHeadSha: headSha,
-      specBaseSha: baseSha,
+      specBaseRef: baseRef,
+      specMergeBaseSha: baseSha,
     },
     projects,
     files: contextFiles,

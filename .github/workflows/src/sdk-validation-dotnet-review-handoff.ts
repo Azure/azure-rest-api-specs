@@ -23,6 +23,10 @@ import {
 import type { Context, Core, GitHub, GitHubScriptArgs } from "./github.ts";
 import type { RetryOptions } from "./retries.ts";
 import {
+  SDK_REVIEW_PUBLICATION_CONTEXT_FILE_NAME,
+  type SdkReviewPublicationContext,
+} from "./sdk-validation-dotnet-review-publication-context.ts";
+import {
   collectTypeSpecReviewContext,
   TYPESPEC_REVIEW_CONTEXT_FILE_NAME,
 } from "./sdk-validation-typespec-context.ts";
@@ -100,6 +104,7 @@ export type SdkReviewHandoffResult = {
   headSha?: string;
   inputDirectory?: string;
   artifactPath?: string;
+  publicationContextPath?: string;
   typeSpecContextPath?: string;
   summaryPath?: string;
   entryCount: number;
@@ -720,14 +725,16 @@ export async function verifyPullRequestFreshness(params: {
   context: Context;
   prNumber: number;
   expectedHeadSha: string;
+  resolveMergeBase?: boolean;
 }): Promise<{
-  baseSha: string;
+  baseRef: string;
   changedFileCount: number;
   currentHeadSha: string;
   isFresh: boolean;
+  mergeBaseSha?: string;
   state: string;
 }> {
-  const { github, context, prNumber, expectedHeadSha } = params;
+  const { github, context, prNumber, expectedHeadSha, resolveMergeBase = true } = params;
   const { data: pullRequest } = await github.rest.pulls.get({
     owner: context.repo.owner,
     repo: context.repo.repo,
@@ -737,6 +744,7 @@ export async function verifyPullRequestFreshness(params: {
   validatePullRequestRepository(context, prNumber, pullRequest);
   const currentHeadSha = pullRequest.head.sha;
   const baseSha = pullRequest.base.sha;
+  const baseRef = pullRequest.base.ref;
   const changedFileCount = pullRequest.changed_files;
   if (!/^[0-9a-f]{40}$/i.test(baseSha)) {
     throw new Error(`PR #${prNumber} has an invalid base SHA '${baseSha}'`);
@@ -744,13 +752,29 @@ export async function verifyPullRequestFreshness(params: {
   if (!Number.isSafeInteger(changedFileCount) || changedFileCount < 0) {
     throw new Error(`PR #${prNumber} has an invalid changed file count '${changedFileCount}'`);
   }
+  if (typeof baseRef !== "string" || baseRef.length === 0) {
+    throw new Error(`PR #${prNumber} has an invalid base ref '${baseRef}'`);
+  }
+  const isFresh =
+    pullRequest.state === "open" && currentHeadSha.toLowerCase() === expectedHeadSha.toLowerCase();
+  let mergeBaseSha: string | undefined;
+  if (isFresh && resolveMergeBase) {
+    const { data: comparison } = await github.rest.repos.compareCommitsWithBasehead({
+      owner: context.repo.owner,
+      repo: context.repo.repo,
+      basehead: `${baseSha}...${currentHeadSha}`,
+    });
+    mergeBaseSha = comparison.merge_base_commit?.sha;
+    if (typeof mergeBaseSha !== "string" || !/^[0-9a-f]{40}$/i.test(mergeBaseSha)) {
+      throw new Error(`PR #${prNumber} has an invalid merge-base SHA '${mergeBaseSha}'`);
+    }
+  }
   return {
-    baseSha,
+    baseRef,
     changedFileCount,
     currentHeadSha,
-    isFresh:
-      pullRequest.state === "open" &&
-      currentHeadSha.toLowerCase() === expectedHeadSha.toLowerCase(),
+    isFresh,
+    mergeBaseSha,
     state: pullRequest.state,
   };
 }
@@ -846,14 +870,15 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
   const event = eventValidation.event;
   if (event.eventPrNumbers.length === 1) {
     const primaryPrNumber = event.eventPrNumbers[0];
-    const prStatus = await verifyPullRequestFreshness({
+    const primaryPrStatus = await verifyPullRequestFreshness({
       github,
       context,
       prNumber: primaryPrNumber,
       expectedHeadSha: event.headSha,
+      resolveMergeBase: false,
     });
-    if (!prStatus.isFresh) {
-      const reason = `Skipping stale or closed PR #${primaryPrNumber}: state='${prStatus.state}', currentHeadSha='${prStatus.currentHeadSha}', checkRunHeadSha='${event.headSha}'`;
+    if (!primaryPrStatus.isFresh) {
+      const reason = `Skipping stale or closed PR #${primaryPrNumber}: state='${primaryPrStatus.state}', currentHeadSha='${primaryPrStatus.currentHeadSha}', checkRunHeadSha='${event.headSha}'`;
       core.info(reason);
       return {
         status: "skipped",
@@ -919,11 +944,6 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
       entryCount: 0,
     };
   }
-  if (!packagesArtifactResolution) {
-    throw new Error(
-      `No matching '${PACKAGES_ARTIFACT_NAME}' artifact found for '${artifactResolution.artifactName}' on build ${event.adoBuild.buildId}`,
-    );
-  }
   const prNumber = verifyReviewInputAgainstCheckRun(artifact, event);
 
   const prStatus = await verifyPullRequestFreshness({
@@ -943,6 +963,46 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
       headSha: event.headSha,
       entryCount: 0,
     };
+  }
+  if (!prStatus.mergeBaseSha) {
+    throw new Error(`PR #${prNumber} is missing a validated merge-base SHA`);
+  }
+
+  fs.mkdirSync(outputRootDir, { recursive: true });
+  const publicationContext: SdkReviewPublicationContext = {
+    schemaVersion: 1,
+    source: {
+      specPrNumber: prNumber,
+      specHeadSha: event.headSha,
+      specBaseRef: prStatus.baseRef,
+      specMergeBaseSha: prStatus.mergeBaseSha,
+    },
+    handoff: {
+      adoBuildId: event.adoBuild.buildId,
+      workflowRunId: context.runId,
+      workflowRunAttempt: context.runAttempt,
+    },
+  };
+  const publicationContextPath = path.resolve(
+    outputRootDir,
+    `publication-context-build-${event.adoBuild.buildId}`,
+    SDK_REVIEW_PUBLICATION_CONTEXT_FILE_NAME,
+  );
+  fs.mkdirSync(path.dirname(publicationContextPath), { recursive: true });
+  fs.writeFileSync(
+    publicationContextPath,
+    JSON.stringify(publicationContext, undefined, 2),
+    "utf8",
+  );
+  core.setOutput("publication_context_path", publicationContextPath);
+  core.setOutput("pr_number", String(prNumber));
+  core.setOutput("head_sha", event.headSha);
+  core.setOutput("build_id", event.adoBuild.buildId);
+
+  if (!packagesArtifactResolution) {
+    throw new Error(
+      `No matching '${PACKAGES_ARTIFACT_NAME}' artifact found for '${artifactResolution.artifactName}' on build ${event.adoBuild.buildId}`,
+    );
   }
 
   const packagesArchiveBytes = await downloadAzurePipelineArtifactArchive({
@@ -968,7 +1028,8 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
     context,
     prNumber,
     headSha: event.headSha,
-    baseSha: prStatus.baseSha,
+    baseRef: prStatus.baseRef,
+    baseSha: prStatus.mergeBaseSha,
     changedFileCount: prStatus.changedFileCount,
     projectRoots,
   });
@@ -986,10 +1047,6 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
   core.setOutput("handoff_status", "validated");
   core.setOutput("input_dir", inputDirectory);
   core.setOutput("summary_path", summaryPath);
-  core.setOutput("pr_number", String(prNumber));
-  core.setOutput("head_sha", event.headSha);
-  core.setOutput("build_id", event.adoBuild.buildId);
-
   return {
     status: "validated",
     buildId: event.adoBuild.buildId,
@@ -997,6 +1054,7 @@ export async function runSdkValidationDotnetReviewHandoffImpl(
     headSha: event.headSha,
     inputDirectory,
     artifactPath,
+    publicationContextPath,
     typeSpecContextPath,
     summaryPath,
     entryCount: artifact.apiViewRequestData.length,

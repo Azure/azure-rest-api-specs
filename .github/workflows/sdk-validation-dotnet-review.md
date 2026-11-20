@@ -26,22 +26,78 @@ on:
             run_id: context.payload.workflow_run.id,
             per_page: 100,
           });
-          const artifacts = response.data.artifacts.filter(
+          const currentAttemptArtifacts = response.data.artifacts.filter(
             (artifact) =>
               !artifact.expired &&
-              artifact.name.startsWith("sdk-naming-review-input-build-") &&
               artifact.name.endsWith(attemptSuffix),
           );
-          if (artifacts.length > 1) {
-            throw new Error(`Expected at most one validated SDK review input, found ${artifacts.length}`);
+          const inputArtifacts = currentAttemptArtifacts.filter((artifact) =>
+            artifact.name.startsWith("sdk-naming-review-input-build-"),
+          );
+          const publicationContextArtifacts = currentAttemptArtifacts.filter((artifact) =>
+            artifact.name.startsWith("sdk-review-publication-context-build-"),
+          );
+          if (inputArtifacts.length > 1) {
+            throw new Error(`Expected at most one validated SDK review input, found ${inputArtifacts.length}`);
           }
-          core.setOutput("has_input", artifacts.length === 1 ? "true" : "false");
-          core.setOutput("artifact_name", artifacts[0]?.name ?? "");
+          if (publicationContextArtifacts.length > 1) {
+            throw new Error(`Expected at most one trusted publication context, found ${publicationContextArtifacts.length}`);
+          }
+          const inputArtifact = inputArtifacts[0];
+          const publicationContextArtifact = publicationContextArtifacts[0];
+          const inputBuildId = inputArtifact?.name.match(
+            /^sdk-naming-review-input-build-(\d+)-attempt-\d+$/,
+          )?.[1];
+          const publicationContextBuildId = publicationContextArtifact?.name.match(
+            /^sdk-review-publication-context-build-(\d+)-attempt-\d+$/,
+          )?.[1];
+          const pairMatches =
+            inputBuildId !== undefined &&
+            publicationContextBuildId !== undefined &&
+            inputBuildId === publicationContextBuildId;
+          core.setOutput("has_input", inputArtifact ? "true" : "false");
+          core.setOutput("has_publication_context", publicationContextArtifact ? "true" : "false");
+          core.setOutput("pair_matches", pairMatches ? "true" : "false");
+          core.setOutput("artifact_name", inputArtifact?.name ?? "");
+          core.setOutput(
+            "publication_context_artifact_name",
+            publicationContextArtifact?.name ?? "",
+          );
+    - name: Download trusted publication context
+      if: steps.find-input.outputs.has_publication_context == 'true'
+      uses: actions/download-artifact@v8
+      with:
+        name: ${{ steps.find-input.outputs.publication_context_artifact_name }}
+        path: /tmp/gh-aw/sdk-review-publication-context
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        run-id: ${{ github.event.workflow_run.id }}
+    - name: Preserve trusted publication context
+      if: steps.find-input.outputs.has_publication_context == 'true'
+      uses: actions/upload-artifact@v7
+      with:
+        name: sdk-review-publication-context-${{ github.event.workflow_run.id }}-attempt-${{ github.run_attempt }}
+        path: /tmp/gh-aw/sdk-review-publication-context/sdk-review-publication-context.json
+        if-no-files-found: error
+        retention-days: 7
+    - id: validate-input-pair
+      name: Validate trusted review input pair
+      if: >-
+        steps.find-input.outputs.has_input == 'true' ||
+        steps.find-input.outputs.has_publication_context == 'true'
+      uses: actions/github-script@v9
+      with:
+        script: |
+          if (process.env.PAIR_MATCHES !== "true") {
+            throw new Error("Validated SDK review input and publication context are missing or mismatched");
+          }
+          core.setOutput("ready", "true");
+      env:
+        PAIR_MATCHES: ${{ steps.find-input.outputs.pair_matches }}
 jobs:
   pre-activation:
     outputs:
       artifact_name: ${{ steps.find-input.outputs.artifact_name }}
-      has_input: ${{ steps.find-input.outputs.has_input }}
+      has_input: ${{ steps.validate-input-pair.outputs.ready || 'false' }}
   agent:
     needs: pre-activation
 if: >-

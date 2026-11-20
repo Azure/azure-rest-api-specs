@@ -59,11 +59,17 @@ function createMockGithubImpl() {
         updateComment: vi.fn(),
       },
       pulls: {
+        createReviewComment: vi.fn().mockResolvedValue({ data: { id: 1 } }),
+        deleteReviewComment: vi.fn(),
         get: vi.fn(),
         listFiles: vi.fn().mockResolvedValue({ data: [] }),
+        listReviewComments: vi.fn().mockResolvedValue({ data: [] }),
+        updateReviewComment: vi.fn(),
       },
       repos: {
-        compareCommitsWithBasehead: vi.fn().mockResolvedValue({ data: { files: [] } }),
+        compareCommitsWithBasehead: vi.fn().mockResolvedValue({
+          data: { files: [], merge_base_commit: { sha: "1".repeat(40) } },
+        }),
         createCommitStatus: vi.fn(),
         getContent: vi.fn(),
         getBranchRules: vi.fn().mockResolvedValue({ data: [] }),
@@ -122,6 +128,8 @@ function createMockContextImpl() {
   return {
     eventName: "check_run",
     payload: {},
+    runAttempt: 1,
+    runId: 123,
     repo: {
       owner: "owner",
       repo: "repo",
