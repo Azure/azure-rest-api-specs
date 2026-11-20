@@ -1,0 +1,70 @@
+{
+  "title": "ProxyConfigurationJobs_List",
+  "operationId": "ProxyConfigurationJobs_List",
+  "parameters": {
+    "api-version": "2027-01-15-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "edgeMachineName": "machine01",
+    "proxyConfigurationName": "default"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "jobType": "Apply",
+              "isEnabled": true,
+              "connectionUri": "http://newproxy.contoso.com",
+              "port": "3128",
+              "bypassList": [
+                "localhost",
+                "*.contoso.com",
+                "*.azure.com"
+              ],
+              "provisioningState": "Succeeded",
+              "jobId": "c1e2d3f4-a5b6-7890-abcd-ef1234567890",
+              "startTimeUtc": "2026-04-10T21:00:00Z",
+              "endTimeUtc": "2026-04-10T21:01:45Z",
+              "status": "DeploymentSuccess"
+            },
+            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine01/proxyConfigurations/default/jobs/apply-proxy-20260410",
+            "name": "apply-proxy-20260410",
+            "type": "Microsoft.AzureStackHCI/edgeMachines/proxyConfigurations/jobs",
+            "systemData": {
+              "createdBy": "user1@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-04-10T21:00:00Z",
+              "lastModifiedBy": "user1@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-04-10T21:01:45Z"
+            }
+          },
+          {
+            "properties": {
+              "jobType": "Sync",
+              "syncDirection": "SyncToDevice",
+              "provisioningState": "Succeeded",
+              "jobId": "d4e5f6a7-b8c9-0123-abcd-ef4567890123",
+              "startTimeUtc": "2026-04-11T10:00:00Z",
+              "endTimeUtc": "2026-04-11T10:01:30Z",
+              "status": "DeploymentSuccess"
+            },
+            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine01/proxyConfigurations/default/jobs/sync-to-device-20260411",
+            "name": "sync-to-device-20260411",
+            "type": "Microsoft.AzureStackHCI/edgeMachines/proxyConfigurations/jobs",
+            "systemData": {
+              "createdBy": "user1@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-04-11T10:00:00Z",
+              "lastModifiedBy": "user1@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-04-11T10:01:30Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
