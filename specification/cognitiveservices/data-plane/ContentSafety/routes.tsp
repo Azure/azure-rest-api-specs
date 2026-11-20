@@ -107,19 +107,25 @@ interface UnifiedOperations {
 
   @added(ContentSafety.Versions.v2026_10_15_preview)
   @summary("Unified Moderate")
-  @doc("Synchronously evaluate a canonical Agent Hooks 0.1 context and return a closed canonical Verdict plus a separate evaluation receipt. The hosted API supports two selector profiles. The Foundry-project profile requires targetResourceId plus one exact selected Guardrail through the all-or-none selectedPolicyId/revision/digest tuple. AACS may additionally resolve zero or more explicit administrator policies bound to the target or its ancestors; no binding is required for the selected-Guardrail-only case. The named-policy profile uses policyId without requiring a Foundry project. Exactly one profile is selected; targetResourceId and policyId cannot be combined. Local Copilot and WorkIQ integrations use in-process Agent Hooks/ACS rather than this hosted protocol. The receipt binds its policy metadata to the exact API version, AgentContext and admitted selectors through an RFC 8785 SHA-256 request digest. The calling host recomputes that binding and owns transform application, final enforcement, approvals, timeouts, audit and any separate host-action attestation. The receipt proves evaluation evidence, not host enforcement or feature activation. Body identity metadata and customer-settable headers are not authorization. Request and response limits are 1,048,576 decoded UTF-8 JSON bytes and container depth 64 including the root. Duplicate members, ambiguous selectors and over-limit requests are errors, not truncated successful responses.")
+  @doc("""
+    Evaluate one Agent Hooks 0.1 context. Supply either policyId or a project target and the exact selected Guardrail tuple, never both.
+    Project evaluation includes any administrator policies bound to the target or its ancestors; an administrator binding is not required.
+    HTTP 200 means evaluation completed, not that the action is allowed. The host validates the envelope and the request binding in extensions.aacs.receipt before enforcing verdict.
+    Only the host can apply a transform, obtain approval, or release an action. Identity fields in the context do not grant access.
+    Each request and response is limited to 1,048,576 bytes of decoded UTF-8 JSON and a container depth of 64 including the root. Duplicate object members and over-limit messages are invalid.
+    """)
   @route("/content:unifiedModerate")
   @sharedRoute
   @post
   unifiedModerate is Azure.Core.RpcOperation<
     {
       @query
-      @doc("Full Azure resource ID of the governed Foundry project used to resolve explicit administrator hierarchy bindings. It is not the selected Guardrail or binding resource ID. The target must be under the authenticated serving account and requires a verified producer. Required with the selectedPolicyId/revision/digest tuple for the Foundry-project profile and forbidden when policyId is present.")
+      @doc("Resource ID of the governed Foundry project under the authenticated serving account. Supply it with selectedPolicyId, selectedPolicyRevision and selectedPolicySemanticDigest; omit it when using policyId.")
       @minLength(1)
       targetResourceId?: string;
 
       @query
-      @doc("Authorized named policy selector for the named-policy gateway profile. It may be a supported policy name or full policy resource ID according to the serving account's existing selector grammar. Required when targetResourceId is absent and forbidden when targetResourceId or selectedPolicyId is present.")
+      @doc("Policy name or full policy resource ID for evaluation against the serving account. Supply it alone, without any project selectors.")
       @minLength(1)
       policyId?: string;
 
@@ -129,7 +135,7 @@ interface UnifiedOperations {
       selectedPolicyId?: string;
 
       @query
-      @doc("Opaque exact selected Guardrail revision admitted for the operation. Current RP/PMS resources use the RP-assigned ETag preserved verbatim. Required exactly when selectedPolicyId is present.")
+      @doc("Exact revision of the selected Guardrail. Preserve the revision verbatim, including quoting when it is an ETag. Required with selectedPolicyId.")
       @minLength(1)
       selectedPolicyRevision?: string;
 
@@ -147,7 +153,7 @@ interface UnifiedOperations {
     },
     AgentEvaluationResult,
     {},
-    AgentEvaluationError | Azure.Core.Foundations.ErrorResponse
+    AgentEvaluationError
   >;
 }
 

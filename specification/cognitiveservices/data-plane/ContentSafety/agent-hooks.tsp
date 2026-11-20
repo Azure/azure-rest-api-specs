@@ -11,7 +11,7 @@ namespace ContentSafety;
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Agent Hooks 0.1 defines a closed set of interception points; unsupported points must fail validation."
 @added(Versions.v2026_10_15_preview)
-@doc("The closed set of Agent Hooks 0.1 interception points. The service never infers the point from the agent identifier.")
+@doc("The eight interception points in Agent Hooks 0.1. The caller supplies the point explicitly.")
 union AgentInterceptionPoint {
   @doc("Before the execution session starts.")
   AgentStartup: "agent_startup",
@@ -65,7 +65,7 @@ union AacsSubjectRole {
 }
 
 @added(Versions.v2026_10_15_preview)
-@doc("Minimal Azure AI Content Safety (AACS) request metadata for existing non-Hooks classification paths.")
+@doc("Content Safety classifier metadata for inputs that need a subject role not represented by the canonical payload.")
 model AacsContextExtension {
   @doc("Optional original classifier subject role for existing Azure AI Content Safety (AACS) prompt, completion and tool paths when the canonical payload cannot represent it. Canonical payload roles take precedence; contradictory claims, unsupported roles, and use at model/startup/shutdown points are rejected. Point-derived roles are defaults only. This does not authorize a caller or change the interception point.")
   role?: AacsSubjectRole;
@@ -77,7 +77,7 @@ model AacsContextExtension {
 model AgentContextExtensions {
   ...AgentJsonObject;
 
-  @doc("Optional Azure AI Content Safety (AACS) metadata; do not copy the legacy Unified Moderate body here.")
+  @doc("Optional Content Safety classifier metadata.")
   aacs?: AacsContextExtension;
 }
 
@@ -320,7 +320,7 @@ model AgentOutput {
 }
 
 @added(Versions.v2026_10_15_preview)
-@doc("Caller-reported execution-session summary. The evaluation service does not initiate shutdown or undo previous actions.")
+@doc("Caller-reported execution-session summary. Reporting shutdown does not undo actions already taken.")
 model AgentSummary {
   @doc("Why the session ended.")
   reason: AgentShutdownReason;
@@ -375,11 +375,11 @@ model AgentActor {
 @added(Versions.v2026_10_15_preview)
 @doc("Optional caller-reported budget counters.")
 model AgentBudgets {
-  @doc("Reported tool-call count.")
+  @doc("Host-reported tool-call budget counter. Agent Hooks 0.1 represents budget counters as JSON numbers, unlike the integer tool_calls in the shutdown summary.")
   @encodedName("application/json", "tool_call_count")
   toolCallCount?: float64;
 
-  @doc("Reported token count.")
+  @doc("Host-reported token budget counter. Agent Hooks 0.1 represents budget counters as JSON numbers, unlike the integer token counts in model usage.")
   @encodedName("application/json", "token_count")
   tokenCount?: float64;
 
@@ -404,7 +404,7 @@ model AgentContext {
   @clientName("interceptionPoint")
   interception_point: AgentInterceptionPoint;
 
-  @doc("UTC instant when the host constructed the context.")
+  @doc("UTC instant when the host constructed this context, not when the agent or session was created.")
   timestamp: utcDateTime;
 
   @doc("Strictly increasing, non-negative emission sequence within the session.")
@@ -583,7 +583,7 @@ model AgentWarning {
 @doc("An opaque offline-verifiable evidence pointer. The host must not automatically dereference verification pointers. Its canonical JSON representation is limited to 10,240 UTF-8 bytes.")
 model AgentEvidence {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Agent Hooks evidence permits a null artefact pointer."
-  @doc("Optional content address or URI of an evidence artefact.")
+  @doc("Optional content address or URI of the evidence artifact. The Agent Hooks wire name is artefact.")
   artefact?: string | null;
 
   @doc("Optional named verification pointers.")
@@ -671,6 +671,9 @@ union AgentPolicyLayerKind {
   @doc("An explicitly selected primary policy for a named-policy gateway evaluation.")
   NamedPolicy: "namedPolicy",
 
+  @doc("An administrator-required policy evaluated alongside the selected policy.")
+  RequiredPolicy: "requiredPolicy",
+
   @doc("A mandatory subscription policy.")
   Subscription: "subscription",
 
@@ -691,7 +694,7 @@ model AgentEvaluatedPolicyLayer {
   @minLength(1)
   policyResourceId: string;
 
-  @doc("Exact opaque policy revision. For current RP/PMS resources this is the RP-assigned ETag, preserved verbatim.")
+  @doc("Opaque revision of the evaluated policy. Compare the returned value verbatim, including quoting when the revision is an ETag.")
   @minLength(1)
   policyRevision: string;
 
@@ -744,9 +747,9 @@ model AgentHarmResult {
   license?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The October hosted transport admits exactly the Foundry-project and named-policy profiles. Local in-process integrations do not call this route."
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The receipt discriminator selects one of the two supported policy selection profiles."
 @added(Versions.v2026_10_15_preview)
-@doc("Hosted Unified Moderate evaluation profile. Local Copilot and WorkIQ integrations use in-process Agent Hooks/ACS and are not represented by this hosted HTTP profile.")
+@doc("How the request selected the policies to evaluate.")
 union AgentEvaluationProfile {
   @doc("A governed Foundry project with one exact selected Guardrail and zero or more explicit administrator hierarchy policies.")
   FoundryProject: "foundryProject",
@@ -756,7 +759,7 @@ union AgentEvaluationProfile {
 }
 
 @added(Versions.v2026_10_15_preview)
-@doc("Cryptographic binding between this receipt and the exact Unified Moderate request. The host recomputes the digest before trusting receipt metadata.")
+@doc("Digest binding the receipt to the exact Unified Moderate request. It is not a signature over the verdict or receipt.")
 model AgentEvaluationRequestBinding {
   @doc("Digest algorithm. SHA-256 is required for this receipt version.")
   algorithm: "sha256";
@@ -771,7 +774,7 @@ model AgentEvaluationRequestBinding {
 
 @added(Versions.v2026_10_15_preview)
 @discriminator("profile")
-@doc("Common versioned receipt fields for one AACS evaluation attempt. The receipt proves what was evaluated; it does not replace the Verdict or prove that the calling host enforced it.")
+@doc("Policy evidence reported by Content Safety for one evaluation attempt. The receipt does not replace the verdict or attest that the calling host enforced it.")
 model AgentPolicyEvaluationReceipt {
   @doc("Receipt schema version. This version is tied to the October transport contract rather than customer-controlled feature activation.")
   receiptVersion: "2026-10-15-preview";
@@ -779,11 +782,11 @@ model AgentPolicyEvaluationReceipt {
   @doc("Hosted evaluation profile.")
   profile: AgentEvaluationProfile;
 
-  @doc("Stable evaluation identifier used to join AACS evaluation evidence to a separate host action or release attestation.")
+  @doc("Service-generated identifier for correlating this evaluation with the caller's records.")
   @minLength(1)
   evaluationId: string;
 
-  @doc("One-based attempt number for evaluation retries sharing the same evaluation identifier.")
+  @doc("One-based attempt number for this evaluation. A new request need not reuse the previous evaluation identifier.")
   @minValue(1)
   attempt: int64;
 
@@ -791,19 +794,20 @@ model AgentPolicyEvaluationReceipt {
   requestBinding: AgentEvaluationRequestBinding;
 
   @doc("Exact policy layers evaluated and composed into the aggregate Verdict.")
+  @minItems(1)
   evaluatedPolicyLayers: AgentEvaluatedPolicyLayer[];
 
   @doc("The single intervention point evaluated by this receipt.")
   evaluatedInterventionPoint: AgentInterceptionPoint;
 
-  @doc("Intervention points required by every applicable policy layer. This states policy requirements, not host support and not points executed in this evaluation.")
+  @doc("Union of the intervention points required by the applicable policy layers. This is not a list of points supported by the host or executed by this request.")
   requiredInterventionPoints: AgentInterceptionPoint[];
 
-  @doc("AACS host-profile version included in executable artifact identity.")
+  @doc("Version of the evaluation host profile used to identify the executable policy artifact.")
   @minLength(1)
   hostProfileVersion: string;
 
-  @doc("Authenticated producer resource ID established by the service transport. This value is service-derived and never accepted from the request body or a customer-settable identity header.")
+  @doc("Resource ID established by the service: the serving account for a named-policy request, or the authorized producer for a project request. It is not taken from the AgentContext.")
   @minLength(1)
   authenticatedProducerResourceId: string;
 
@@ -813,7 +817,7 @@ model AgentPolicyEvaluationReceipt {
 }
 
 @added(Versions.v2026_10_15_preview)
-@doc("Receipt for a governed Foundry project. The selected Guardrail and every explicit administrator hierarchy policy are identified independently in evaluatedPolicyLayers. The project fields identify the exact RP project incarnation used for this attempt; they do not describe a generated project policy or assert host readiness.")
+@doc("Receipt for a project evaluation. The selected Guardrail and any additional policies are listed separately in evaluatedPolicyLayers.")
 model AgentFoundryProjectReceipt extends AgentPolicyEvaluationReceipt {
   profile: "foundryProject";
 
@@ -821,7 +825,7 @@ model AgentFoundryProjectReceipt extends AgentPolicyEvaluationReceipt {
   @minLength(1)
   targetResourceId: string;
 
-  @doc("RP-owned project incarnation that changes when the target is deleted, recreated or moved. The runtime obtains it from an authenticated current-project projection; it is not caller metadata.")
+  @doc("Identifier of the project incarnation evaluated for this request, not just its reusable resource ID.")
   @pattern("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
   targetIncarnation: string;
 }
@@ -833,13 +837,27 @@ model AgentNamedPolicyReceipt extends AgentPolicyEvaluationReceipt {
 }
 
 @added(Versions.v2026_10_15_preview)
-@doc("October Unified Moderate transport response. Verdict is the canonical closed Agent Hooks object. Receipt is separate transport metadata used by the host to fence enforcement and join later host-action evidence.")
+@doc("Content Safety data in the aacs response extension. This metadata does not change the verdict.")
+model AacsEvaluationExtension {
+  @doc("Receipt binding this evaluation to the request and policies.")
+  receipt: AgentPolicyEvaluationReceipt;
+}
+
+@added(Versions.v2026_10_15_preview)
+@doc("Agent Hooks response extensions keyed by provider namespace. Content Safety always includes the aacs namespace. The RFC 8785 canonical JSON representation of the entire extensions object must not exceed 65,536 UTF-8 bytes.")
+model AgentEvaluationExtensions {
+  @doc("Content Safety evaluation metadata.")
+  aacs: AacsEvaluationExtension;
+}
+
+@added(Versions.v2026_10_15_preview)
+@doc("Agent Hooks 0.1 interceptor response envelope. Only verdict and extensions are allowed at the root. Validate the whole envelope before acting on its verdict. This operation always includes the Content Safety receipt under extensions.aacs.receipt.")
 model AgentEvaluationResult {
   @doc("Canonical aggregate Agent Hooks Verdict.")
   verdict: AgentVerdict;
 
-  @doc("Policy-evaluation receipt for this attempt.")
-  receipt: AgentPolicyEvaluationReceipt;
+  @doc("Namespaced transport metadata, separate from the decision the host enforces.")
+  extensions: AgentEvaluationExtensions;
 }
 
 @added(Versions.v2026_10_15_preview)
@@ -847,28 +865,28 @@ model AgentEvaluationResult {
 union AgentEvaluationErrorCode {
   string,
 
-  @doc("The selector combination or AgentContext is invalid.")
+  @doc("HTTP 400: the selector combination or AgentContext is invalid.")
   InvalidRequest: "InvalidRequest",
 
-  @doc("selectedPolicyId was supplied without both selectedPolicyRevision and selectedPolicySemanticDigest.")
+  @doc("HTTP 400: selectedPolicyId was supplied without both selectedPolicyRevision and selectedPolicySemanticDigest.")
   SelectedPolicyRevisionRequired: "SelectedPolicyRevisionRequired",
 
-  @doc("The selected Guardrail no longer matches the admitted revision or semantic digest.")
+  @doc("HTTP 409: the selected Guardrail no longer matches the admitted revision or semantic digest.")
   SelectedPolicyRevisionMismatch: "SelectedPolicyRevisionMismatch",
 
-  @doc("The exact admitted selected Guardrail revision was deleted or is no longer resolvable.")
+  @doc("HTTP 409: the exact selected Guardrail revision was deleted or is no longer resolvable.")
   SelectedPolicyRevisionUnavailable: "SelectedPolicyRevisionUnavailable",
 
-  @doc("The trusted project identity, selected Guardrail or explicit administrator hierarchy changed before evaluation completed.")
+  @doc("HTTP 409, project profile: the project identity or bound policy state changed before evaluation completed.")
   PolicyFenceChanged: "PolicyFenceChanged",
 
-  @doc("The caller or host profile does not support a mandatory policy requirement.")
+  @doc("HTTP 409: the host profile does not support a mandatory policy requirement.")
   UnsupportedCapability: "UnsupportedCapability",
 
-  @doc("The selected Guardrail or a required explicit administrator hierarchy policy is unavailable.")
+  @doc("HTTP 503: a required policy layer is unavailable.")
   PolicyLayerUnavailable: "PolicyLayerUnavailable",
 
-  @doc("The October native route is registered but disabled for this region, cohort or target.")
+  @doc("HTTP 404: the native evaluation route is disabled for this target.")
   NativeRouteDisabled: "NativeRouteDisabled",
 }
 
@@ -890,12 +908,6 @@ model AgentEvaluationErrorDetail {
 
 @added(Versions.v2026_10_15_preview)
 @error
-@doc("A validation, authorization, conflict, throttling or operational failure. This is an HTTP error, never a successful allow verdict. Known codes include InvalidRequest, SelectedPolicyRevisionRequired, SelectedPolicyRevisionMismatch, SelectedPolicyRevisionUnavailable, PolicyFenceChanged, UnsupportedCapability, PolicyLayerUnavailable and NativeRouteDisabled.")
-model AgentEvaluationError {
-  ...Azure.Core.Foundations.ErrorResponseBase<AgentEvaluationErrorDetail>;
-
-  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "These literals declare HTTP transport status codes, not an extensible body enum."
-  @statusCode
-  @doc("The HTTP failure status.")
-  statusCode: 400 | 401 | 403 | 404 | 409 | 429 | 500 | 503;
-}
+@doc("An unsuccessful evaluation returns an Azure error, not a verdict. Responses include 400 for invalid input, 401 or 403 for authentication or authorization, 404 for a disabled route, 409 for conflicting project or policy state, 429 for throttling, and 5xx for service failures. Check error.code for the specific failure.")
+model AgentEvaluationError
+  is Azure.Core.Foundations.ErrorResponseBase<AgentEvaluationErrorDetail>;

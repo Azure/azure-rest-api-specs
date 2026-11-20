@@ -96,8 +96,15 @@ input-file:
 
 These settings apply only when `--tag=package-2026-10-15-preview` is specified.
 This version evolves Unified Moderate on its existing route to canonical Agent
-Hooks requests and Verdict responses. Previously released versions retain their
-existing request and response representations.
+Hooks contexts and interceptor response envelopes. Validate the entire envelope
+before passing its `verdict` to an in-process interceptor. Content Safety puts
+the evaluation receipt at `extensions.aacs.receipt`, not inside the verdict
+or at the envelope root. The digest binds the request; it does not attest that
+the host applied the decision. Earlier versions retain their own wire contracts.
+
+The normative response schema and the canonical extension-size limit are in
+Agent Hooks 0.1, section 5.5:
+https://github.com/responsibleai/agent-hooks/blob/501eac2eb9cc675e73b7d9b93508e90d31c1c5fb/spec/AGENT-HOOKS-0.1.md#55-transport-response-envelope
 
 ```yaml $(tag) == 'package-2026-10-15-preview'
 input-file:
