@@ -1,0 +1,594 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.EdgeOperator - Azure Local Disconnected Operations log collection",
+    "version": "2026-06-01-preview",
+    "description": "Microsoft.EdgeOperator management API for Azure Local Disconnected Operations log collection.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "LogCollections"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOperator/collectLogs": {
+      "post": {
+        "operationId": "LogCollectionActions_CollectLogs",
+        "tags": [
+          "LogCollections"
+        ],
+        "description": "Starts collecting logs for the specified time range. Returns 202 Accepted with no response body.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CollectLogsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LogCollectionActions_CollectLogs": {
+            "$ref": "./examples/LogCollectionActions_CollectLogs.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOperator/collectLogsIndirect": {
+      "post": {
+        "operationId": "LogCollectionActions_CollectLogsIndirect",
+        "tags": [
+          "LogCollections"
+        ],
+        "description": "Starts collecting logs to the specified destination path. Returns 202 Accepted with no response body.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CollectLogsIndirectRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LogCollectionActions_CollectLogsIndirect": {
+            "$ref": "./examples/LogCollectionActions_CollectLogsIndirect.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOperator/logCollections": {
+      "get": {
+        "operationId": "LogCollections_ListBySubscription",
+        "tags": [
+          "LogCollections"
+        ],
+        "description": "Lists log collection job history from the specified date and time.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LogCollectionHistoryParameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LogCollectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LogCollections_ListBySubscription": {
+            "$ref": "./examples/LogCollections_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeOperator/logCollections/{jobId}": {
+      "get": {
+        "operationId": "LogCollections_Get",
+        "tags": [
+          "LogCollections"
+        ],
+        "description": "Gets the status and available history details of a log collection job by its GUID identifier.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The name of the LogCollection",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LogCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LogCollections_Get": {
+            "$ref": "./examples/LogCollections_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CollectLogsIndirectRequest": {
+      "type": "object",
+      "description": "The time range, destination, and optional credentials for indirect log collection.",
+      "properties": {
+        "fromDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start of the log collection time range, in UTC."
+        },
+        "toDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end of the log collection time range, in UTC. Must be later than fromDate."
+        },
+        "saveToPath": {
+          "type": "string",
+          "description": "The absolute UNC path to the destination file share where the collected logs\nare saved, for example `\\\\fileserver\\share\\logs`.\nThe destination must be accessible to the log-collection backend.",
+          "minLength": 1
+        },
+        "userName": {
+          "type": "string",
+          "description": "The user name used to access the destination path, when authentication is required."
+        },
+        "userPassword": {
+          "type": "string",
+          "format": "password",
+          "description": "The password used to access the destination path, when authentication is required.",
+          "x-ms-secret": true
+        },
+        "filterRoles": {
+          "type": "array",
+          "description": "The roles to collect logs from. Omit to use the service's default role selection.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "fromDate",
+        "toDate",
+        "saveToPath"
+      ]
+    },
+    "CollectLogsRequest": {
+      "type": "object",
+      "description": "The time range and optional role filter for collecting logs.",
+      "properties": {
+        "fromDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start of the log collection time range, in UTC."
+        },
+        "toDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end of the log collection time range, in UTC. Must be later than fromDate."
+        },
+        "filterRoles": {
+          "type": "array",
+          "description": "The roles to collect logs from. Omit to use the service's default role selection.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "fromDate",
+        "toDate"
+      ]
+    },
+    "LogCollection": {
+      "type": "object",
+      "description": "A read-only log collection job created by collectLogs or collectLogsIndirect.\nThe request subscription must be the Operator subscription; requests for other subscriptions are rejected.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LogCollectionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LogCollectionErrorDetails": {
+      "type": "object",
+      "description": "Error details reported by the log collection service.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The service-defined error code. Omitted when no code is available.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message. Omitted when no message is available.",
+          "readOnly": true
+        }
+      }
+    },
+    "LogCollectionJobType": {
+      "type": "string",
+      "description": "The type of a log collection job.",
+      "enum": [
+        "OnDemand",
+        "Scheduled"
+      ],
+      "x-ms-enum": {
+        "name": "LogCollectionJobType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OnDemand",
+            "value": "OnDemand",
+            "description": "The job was started on demand by a collectLogs or collectLogsIndirect request."
+          },
+          {
+            "name": "Scheduled",
+            "value": "Scheduled",
+            "description": "The job was started by the log collection service on a schedule."
+          }
+        ]
+      }
+    },
+    "LogCollectionListResult": {
+      "type": "object",
+      "description": "A page of log collection job history. The service currently returns all matching jobs in a single page.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The log collection jobs in the requested history window.",
+          "items": {
+            "$ref": "#/definitions/LogCollection"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the next page of jobs. Omitted when all matching jobs have been returned.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LogCollectionProperties": {
+      "type": "object",
+      "description": "The status and available history details of a log collection job.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/LogCollectionProvisioningState",
+          "description": "The provisioning state derived from the log collection service's job state.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The job start time in UTC, when available.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The job completion time in UTC, when available.",
+          "readOnly": true
+        },
+        "collectionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The collection start time in UTC, when available in job history.",
+          "readOnly": true
+        },
+        "collectionEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The collection completion time in UTC, when available in job history.",
+          "readOnly": true
+        },
+        "fromDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The requested start of the log time range in UTC, when available in job history.",
+          "readOnly": true
+        },
+        "toDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The requested end of the log time range in UTC, when available in job history.",
+          "readOnly": true
+        },
+        "jobType": {
+          "$ref": "#/definitions/LogCollectionJobType",
+          "description": "The job type, when available in job history.",
+          "readOnly": true
+        },
+        "storageKind": {
+          "$ref": "#/definitions/LogCollectionStorageKind",
+          "description": "Where the collected logs are delivered, when available in job history.",
+          "readOnly": true
+        },
+        "saveToPath": {
+          "type": "string",
+          "description": "The absolute UNC path to the destination file share where the collected logs\nare saved, for example `\\\\fileserver\\share\\logs`.\nPresent only when storageKind is FileShare.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "A free-text description of why the job ran, when available in job history.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/LogCollectionErrorDetails",
+          "description": "The error details associated with the job. Omitted when the service reports no error.",
+          "readOnly": true
+        },
+        "uploadDetails": {
+          "$ref": "#/definitions/LogCollectionUploadDetails",
+          "description": "The upload details associated with the job. Omitted when the service reports no upload details.",
+          "readOnly": true
+        }
+      }
+    },
+    "LogCollectionProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a log collection job.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Running"
+      ],
+      "x-ms-enum": {
+        "name": "LogCollectionProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Log collection is in progress."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "LogCollectionStorageKind": {
+      "type": "string",
+      "description": "Where the collected logs are delivered.",
+      "enum": [
+        "Azure",
+        "FileShare"
+      ],
+      "x-ms-enum": {
+        "name": "LogCollectionStorageKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Azure",
+            "value": "Azure",
+            "description": "The collected logs are sent to Azure. Used by jobs started with collectLogs."
+          },
+          {
+            "name": "FileShare",
+            "value": "FileShare",
+            "description": "The collected logs are saved to a file share. Used by jobs started with collectLogsIndirect; the share is reported in saveToPath."
+          }
+        ]
+      }
+    },
+    "LogCollectionUploadDetails": {
+      "type": "object",
+      "description": "Upload details reported by the log collection service.",
+      "properties": {
+        "uploadStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The upload start time in UTC. Omitted when unavailable.",
+          "readOnly": true
+        },
+        "uploadSizeInMb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The size in megabytes of the collected logs, as reported by the log collection service.",
+          "readOnly": true
+        },
+        "uploadNumberOfFiles": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of collected log files, as reported by the log collection service.",
+          "readOnly": true
+        },
+        "uploadDirectory": {
+          "type": "string",
+          "description": "The directory containing the uploaded logs. Omitted when unavailable.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "LogCollectionHistoryParameters": {
+      "name": "fromDate",
+      "in": "query",
+      "description": "The earliest date and time in UTC for which job history is requested.\nThe downstream log collection service requires a history start time and supports no other filter criteria,\nso this is a typed parameter rather than an OData $filter expression.",
+      "required": true,
+      "type": "string",
+      "format": "date-time",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
