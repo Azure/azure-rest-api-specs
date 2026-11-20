@@ -11,6 +11,23 @@ using TypeSpec.Rest;
 
 namespace Azure.AI.Projects;
 
+@@doc(
+  OpenAI.ChatCompletionTool.function,
+  "The function definition exposed to the model as a tool."
+);
+@@doc(
+  OpenAI.FunctionObject,
+  "Defines a function that a model can call, including its name and argument schema."
+);
+@@doc(
+  OpenAI.FunctionObject.parameters,
+  "The function's parameters, described as a JSON Schema object."
+);
+@@doc(
+  OpenAI.FunctionObject.strict,
+  "Whether generated arguments must strictly follow the parameter schema."
+);
+
 // ---------------------------------------------------------------------------
 // Input enums / unions
 // ---------------------------------------------------------------------------

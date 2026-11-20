@@ -324,6 +324,16 @@ using Azure.AI.Projects;
   VoiceAgentRequiredPreview
 );
 @@extension(
+  OpenAI.LiveServerEventLiveTransportDtmfReceived,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
+  OpenAI.LiveServerEventLiveTransportDtmfSent,
+  "x-ms-foundry-meta",
+  VoiceAgentRequiredPreview
+);
+@@extension(
   OpenAI.LiveServerEventType,
   "x-ms-foundry-meta",
   VoiceAgentRequiredPreview

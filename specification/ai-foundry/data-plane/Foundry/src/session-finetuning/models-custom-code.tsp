@@ -10,35 +10,51 @@
 // Do not mark them internal merely because they support SDK custom code.
 // Any future internal-only helper must use @access(Access.internal, "python")
 // (or the corresponding language scope) and must not appear in public signatures.
-// The existing namespace is retained to preserve generated type identifiers.
-// Maintained Python hooks provide additional behavior; the model-by-model
-// rationale and generation toolchain are recorded in the SDK generation guide.
+// Public Python names and namespaces remain unchanged. These SDK projections
+// share the domain namespace configured by the SDK generation entrypoint.
+// Maintained Python hooks provide additional behavior.
 
 import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@clientNamespace("azure.ai.finetuningsessions", "python")
-namespace Azure.AI.FineTuning.Sessions.Loom;
+namespace Azure.AI.FineTuning.Sessions;
 
 // Aliases reference the same type graph; no fields or enum values are copied.
 alias CheckpointType = Azure.AI.Projects.SessionFineTuning.FineTuningCheckpointType;
 alias LossFn = Azure.AI.Projects.SessionFineTuning.FineTuningLossFn;
 alias SessionType = Azure.AI.Projects.SessionFineTuning.FineTuningSessionType;
-alias StopCriteria = Azure.AI.Projects.SessionFineTuning.FineTuningStopCriteria;
 alias ModelInputChunk = Azure.AI.Projects.SessionFineTuning.FineTuningInputChunkText;
 alias Cursor = Azure.AI.Projects.SessionFineTuning.FineTuningCursor;
 alias LossFnConfig = Azure.AI.Projects.SessionFineTuning.LossFnConfig;
 alias Datum = Azure.AI.Projects.SessionFineTuning.FineTuningDatum;
 alias ForwardBackwardInput = Azure.AI.Projects.SessionFineTuning.ForwardBackwardInput;
-alias ForwardBackwardRequest = Azure.AI.Projects.SessionFineTuning.ForwardBackwardRequest;
 alias ForwardRequest = Azure.AI.Projects.SessionFineTuning.ForwardRequest;
 alias OptimStepRequest = Azure.AI.Projects.SessionFineTuning.OptimStepRequest;
 alias Session = Azure.AI.Projects.SessionFineTuning.FineTuningSession;
 alias SessionList = Azure.AI.Projects.SessionFineTuning.FineTuningSessionList;
 alias CheckpointList = Azure.AI.Projects.SessionFineTuning.FineTuningCheckpointList;
 alias SaveCheckpointRequest = Azure.AI.Projects.SessionFineTuning.SaveCheckpointRequest;
+
+/** Existing Python list-based stop criteria, normalized by maintained sampling hooks. */
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "The existing public Python alias accepts primitive lists, not an object hierarchy."
+@usage(Usage.input | Usage.output, "python")
+union StopCriteria {
+  int32[],
+  string[],
+}
+
+/**
+ * Existing token-native raw-operation constructor. Maintained convenience
+ * methods serialize reference-based text-only requests without changing it.
+ */
+@usage(Usage.input | Usage.output, "python")
+@clientName("ForwardBackwardContent", "csharp")
+model ForwardBackwardRequest {
+  /** Batch inputs for the combined forward and backward pass. */
+  forward_backward_input: ForwardBackwardInput;
+}
 
 /** Lifecycle status of an async fine-tuning operation — standard Azure LRO values. */
 @usage(Usage.input | Usage.output, "python")
@@ -400,8 +416,8 @@ model SampleOperationResult extends OperationResult {
   topk_prompt_logprobs?: (unknown[][] | null)[];
 
   /**
-   * Per-call prefill and sample token COGS, including counts,
-   * duration, throughput, and prefill cache-hit tokens when supported.
+   * Service-reported sampling metrics, including token counts, duration,
+   * throughput, and prompt cache-hit counts when supported.
    */
   metrics?: Record<unknown>;
 }
