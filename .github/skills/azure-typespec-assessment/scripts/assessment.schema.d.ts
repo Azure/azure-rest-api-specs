@@ -53,19 +53,6 @@ export type Ids1 = [NonemptyString];
 export type Ids2 = [NonemptyString];
 /**
  * This interface was referenced by `TypeSpecAssessment`'s JSON-Schema
- * via the `definition` "compatibilityDimension".
- */
-export interface CompatibilityDimension {
-  status: "passed" | "failed" | "not-assessed";
-  verdict?: "passed" | "failed" | "unknown";
-  coverage?: "complete" | "partial" | "blocked";
-  findings: unknown[];
-  blockers?: unknown[];
-  rejectedCandidateCount?: number;
-  [k: string]: unknown;
-}
-/**
- * This interface was referenced by `TypeSpecAssessment`'s JSON-Schema
  * via the `definition` "documentCheck".
  */
 export type DocumentCheck = {
@@ -83,6 +70,7 @@ export type DocumentCheck = {
 
 export interface TypeSpecAssessment {
   schemaVersion: 1;
+  assessmentMode?: "full" | "fast";
   pullRequest?: {
     number: number;
     url: string;
@@ -108,7 +96,7 @@ export interface TypeSpecAssessment {
     rest: CompatibilityDimension;
     downstream: CompatibilityDimension;
     compliance: {
-      status: "passed" | "failed" | "not-assessed";
+      status: "passed" | "failed" | "not-assessed" | "skipped";
       summary: string;
       coverage: {
         [k: string]: unknown;
@@ -131,6 +119,19 @@ export interface TypeSpecAssessment {
     [k: string]: unknown;
   };
   blockers: unknown[];
+  [k: string]: unknown;
+}
+/**
+ * This interface was referenced by `TypeSpecAssessment`'s JSON-Schema
+ * via the `definition` "compatibilityDimension".
+ */
+export interface CompatibilityDimension {
+  status: "passed" | "failed" | "not-assessed";
+  verdict?: "passed" | "failed" | "unknown";
+  coverage?: "complete" | "partial" | "blocked";
+  findings: unknown[];
+  blockers?: unknown[];
+  rejectedCandidateCount?: number;
   [k: string]: unknown;
 }
 /**
