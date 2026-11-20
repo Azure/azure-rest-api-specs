@@ -616,6 +616,28 @@ model VoiceHostedAgentConversationEngine extends VoiceConversationEngine {
   @pattern("^(?:[1-9][0-9]{0,18}|draft-[1-9][0-9]{0,18})$")
   @maxLength(25)
   version?: string;
+
+  @doc("The Hosted Session prewarming policy. Omission or null disables prewarming; an object with type `auto` permits service-managed prewarmed sessions using existing service settings. This does not enable multiplexing, Agent startup model warmup, or language-model inference warmup. This versioned definition setting cannot be changed through connection-time session overrides or session.update; saving the definition does not create sessions.")
+  session_warmup?: VoiceAgentSessionWarmupPolicy | null = null;
+
+  @doc("The Hosted Session multiplexing policy. Omission or null disables multiplexing; an object with type `auto` permits independent calls to share a compatible session using existing service and authorized target settings. This policy is independent of session_warmup. The application must support concurrent connections and isolate state per call. This versioned definition setting cannot be changed through connection-time session overrides or session.update.")
+  session_multiplexing?: VoiceAgentSessionMultiplexingPolicy | null = null;
+}
+
+@doc("A service-managed Hosted Session prewarming policy. Currently only type `auto` is supported; pool size is not configurable through this object.")
+model VoiceAgentSessionWarmupPolicy {
+  ...Record<never>;
+
+  @doc("The prewarming strategy. The only supported value is `auto`.")
+  type: "auto";
+}
+
+@doc("A service-managed Hosted Session multiplexing policy. Currently only type `auto` is supported; maximum concurrent calls are not configurable through this object.")
+model VoiceAgentSessionMultiplexingPolicy {
+  ...Record<never>;
+
+  @doc("The multiplexing strategy. The only supported value is `auto`.")
+  type: "auto";
 }
 
 @doc("The tool kinds supported by a voice agent.")

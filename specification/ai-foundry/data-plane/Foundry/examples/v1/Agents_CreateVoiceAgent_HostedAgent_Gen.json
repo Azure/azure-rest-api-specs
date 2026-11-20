@@ -11,7 +11,11 @@
       "conversation_engine": {
         "type": "hosted_agent",
         "name": "customer-support-text-agent",
-        "version": "3"
+        "version": "3",
+        "session_warmup": {
+          "type": "auto"
+        },
+        "session_multiplexing": null
       },
       "output_modalities": [
         "audio"
@@ -26,6 +30,7 @@
         "id": "agent_customer_support_voice",
         "name": "customer-support-voice-agent",
         "state": "enabled",
+        "configuration_state": "enabled",
         "versions": {
           "latest": {
             "metadata": null,
@@ -40,7 +45,11 @@
               "conversation_engine": {
                 "type": "hosted_agent",
                 "name": "customer-support-text-agent",
-                "version": "3"
+                "version": "3",
+                "session_warmup": {
+                  "type": "auto"
+                },
+                "session_multiplexing": null
               },
               "output_modalities": [
                 "audio"
