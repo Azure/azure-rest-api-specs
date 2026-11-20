@@ -216,11 +216,55 @@ describe("change impact", () => {
         expect(impact.services.find((service) => service.plane === toPlane)).toMatchObject({
           hasApiDefinitionChanges: changed,
         });
+        expect(impact.services.find((service) => service.plane === toPlane)?.changes).toContain(
+          "sdk-configuration",
+        );
+        expect(impact.services.find((service) => service.plane === fromPlane)).toMatchObject({
+          hasApiDefinitionChanges: changed,
+        });
       } finally {
         await rm(folder, { recursive: true, force: true });
       }
     },
   );
+
+  it("separates deleted and modified contracts in a retargeted project directory", async () => {
+    const folder = await mkdtemp(join(tmpdir(), "impact-retargeted-deletion-"));
+    try {
+      const before = join(folder, "before");
+      const after = join(folder, "after");
+      const project = "specification/example/Example.Service";
+      const deleted = `${project}/models.tsp`;
+      const modified = `${project}/main.tsp`;
+      const config = `${project}/tspconfig.yaml`;
+      await mkdir(join(before, project), { recursive: true });
+      await mkdir(join(after, project), { recursive: true });
+      await writeFile(
+        join(before, config),
+        "linter:\n  extends:\n    - '@azure-tools/typespec-azure-rulesets/data-plane'\n",
+      );
+      await writeFile(
+        join(after, config),
+        "linter:\n  extends:\n    - '@azure-tools/typespec-azure-rulesets/resource-manager'\n",
+      );
+      await writeFile(join(before, deleted), "namespace Example;\nmodel Widget {}\n");
+      await writeFile(join(before, modified), "namespace Example;\n");
+      await writeFile(join(after, modified), "namespace Example;\nmodel Resource {}\n");
+      const impact = await evaluateImpact(
+        context({ deletions: [deleted], modifications: [config, modified] }, after, before),
+        [],
+      );
+      expect(impact.services).toMatchObject([
+        { plane: "data-plane", hasApiDefinitionChanges: true, changes: ["api"] },
+        {
+          plane: "resource-manager",
+          hasApiDefinitionChanges: true,
+        },
+      ]);
+    } finally {
+      await rm(folder, { recursive: true, force: true });
+    }
+  });
 
   it.each(["unchanged", "edited", "new-version", "extra-copy", "other-service", "other-plane"])(
     "distinguishes unchanged unified-folder migrations from %s changes",

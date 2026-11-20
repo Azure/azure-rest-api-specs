@@ -28,6 +28,7 @@ export async function evaluateImpact(
   const services = new Map<string, ServiceImpact>();
   const versionsByProvider = new Map<string, string[]>();
   const planesByDirectory = new Map<string, Plane>();
+  const deletions = new Set(context.fileList?.deletions);
   const readmes = await context.getReadmeDiffs();
   // Discovered README paths use native separators, whereas Git paths use forward slashes.
   const changedReadmes = [
@@ -36,15 +37,21 @@ export async function evaluateImpact(
     ...(readmes.deletions ?? []),
   ].map((entry) => entry.readme.replaceAll("\\", "/"));
 
-  const getService = (file: string): ServiceImpact | undefined => {
+  const getService = (
+    file: string,
+    root = deletions.has(file) ? context.targetDirectory : context.sourceDirectory,
+  ): ServiceImpact | undefined => {
     const match = /^specification\/([^/]+)\//.exec(file);
     if (!match) return undefined;
     const path = `specification/${match[1]}`;
-    const directory = dirname(file);
-    let plane = planesByDirectory.get(directory);
+    const directoryKey = `${root}:${dirname(file)}`;
+    let plane = planesByDirectory.get(directoryKey);
     if (plane === undefined) {
-      plane = getPlane(file, [context.sourceDirectory, context.targetDirectory]);
-      planesByDirectory.set(directory, plane);
+      plane = getPlane(
+        file,
+        root === context.targetDirectory ? [root] : [root, context.targetDirectory],
+      );
+      planesByDirectory.set(directoryKey, plane);
     }
     const key = `${path}:${plane}`;
     let service = services.get(key);
@@ -73,7 +80,7 @@ export async function evaluateImpact(
   const { changedFiles: apiDefinitionChanges, unchangedMoves } = getApiDefinitionChanges(
     context,
     (file, root) => {
-      const service = getService(file);
+      const service = getService(file, root);
       return service && `${service.path}:${getPlane(file, [root])}`;
     },
   );
