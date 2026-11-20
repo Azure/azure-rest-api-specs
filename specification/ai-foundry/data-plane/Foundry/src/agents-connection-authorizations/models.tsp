@@ -24,6 +24,29 @@ alias ConnectionAuthorizationPathParams = {
   @path connection: string;
 };
 
+/** Authorization state is per user and short-lived, so no response is cached. */
+alias ConnectionAuthorizationNoStore = {
+  /** Always `no-store`. */
+  @header("Cache-Control")
+  cache_control: "no-store";
+};
+
+/** The `:grant` response: the authorization, never cached. */
+alias ConnectionAuthorizationGrantResponse = ConnectionAuthorization &
+  ConnectionAuthorizationNoStore;
+
+/** The `GET` response: the authorization, never cached, with a polling hint while authorization is pending. */
+alias ConnectionAuthorizationGetResponse = ConnectionAuthorization &
+  ConnectionAuthorizationNoStore & {
+    /** Seconds to wait before polling again. Present when `status` is `authorization_required`; poll no faster. */
+    @header("Retry-After")
+    retry_after?: int32;
+  };
+
+/** The `:revoke` response: no content, never cached. */
+alias ConnectionAuthorizationRevokeResponse = NoContentResponse &
+  ConnectionAuthorizationNoStore;
+
 @doc("Whether the calling user has authorized a connection for an agent.")
 @removed(Versions.v1)
 union ConnectionAuthorizationStatus {

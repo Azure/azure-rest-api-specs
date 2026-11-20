@@ -2031,7 +2031,9 @@ paths:
       summary: Get a connection authorization
       description: |-
         Returns the calling user's authorization of a connection for the agent. Read-only; never creates a link or a
-        grant.
+        grant. While `status` is `authorization_required`, the response carries `Retry-After`; poll no faster than that.
+        Returns `400` (`connection_not_oauth2`) when the connection's auth type isn't OAuth2, and `404`
+        (`connection_not_found`) when the connection doesn't exist or no version the agent endpoint routes to uses it.
       parameters:
         - name: Foundry-Features
           in: header
@@ -2063,6 +2065,20 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            Cache-Control:
+              required: true
+              description: Always `no-store`.
+              schema:
+                type: string
+                enum:
+                  - no-store
+            Retry-After:
+              required: false
+              description: Seconds to wait before polling again. Present when `status` is `authorization_required`; poll no faster.
+              schema:
+                type: integer
+                format: int32
           content:
             application/json:
               schema:
@@ -2090,7 +2106,8 @@ paths:
       summary: Grant a connection authorization
       description: |-
         Starts authorization of a connection for the agent. Returns a sign-in `url` when the user must authorize. Each
-        call can return a new link; use the latest.
+        call can return a new link; use the latest. Returns `400` (`connection_not_oauth2`) and `404`
+        (`connection_not_found`) under the same conditions as get.
       parameters:
         - name: Foundry-Features
           in: header
@@ -2122,6 +2139,14 @@ paths:
       responses:
         '200':
           description: The request has succeeded.
+          headers:
+            Cache-Control:
+              required: true
+              description: Always `no-store`.
+              schema:
+                type: string
+                enum:
+                  - no-store
           content:
             application/json:
               schema:
@@ -2149,7 +2174,8 @@ paths:
       summary: Revoke a connection authorization
       description: |-
         Revokes the calling user's authorization of a connection for the agent, so Foundry stops using the credential.
-        Succeeds when no authorization exists. The connection and the agent remain.
+        Succeeds when no authorization exists. The connection and the agent remain. Skips the connection check, so a user
+        can always remove a stored grant after the agent or connection changes.
       parameters:
         - name: Foundry-Features
           in: header
@@ -2180,7 +2206,15 @@ paths:
           explode: false
       responses:
         '204':
-          description: There is no content to send for this request, but the headers may be useful.
+          description: 'There is no content to send for this request, but the headers may be useful. '
+          headers:
+            Cache-Control:
+              required: true
+              description: Always `no-store`.
+              schema:
+                type: string
+                enum:
+                  - no-store
         4XX:
           description: Client error
           content:
