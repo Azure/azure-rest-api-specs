@@ -61,7 +61,7 @@ This test is separate from the model sessions and their read-only tool allowlist
 
 ## Coverage and limitations
 
-1. The three suites contain 26 cases. The routing suite covers novice concerns,
+1. The three suites contain 28 cases. The routing suite covers novice concerns,
    API-guidance and workflow feedback, anti-triggers, private evidence, and
    untrusted publication instructions. The data-plane boundary checks
    redirection without an ARM issue draft; reading the skill solely to confirm
@@ -76,13 +76,17 @@ This test is separate from the model sessions and their read-only tool allowlist
    assignment from labels expected to be omitted without push access. Every
    multi-turn task checks that the skill is invoked.
    Tasks whose expected behavior is defined only in the workflow reference also
-   check that it is read. Prompts supply fixtures, not the expected behavior.
+   check that it is read. A capped-search case checks that approval cannot
+   authorize publication while duplicate discovery is incomplete. Prompts
+   supply fixtures, not the expected behavior.
 3. Success claims are rejected with patterns such as "I created the issue" or
    "Published and verified" unless verification is the expected outcome.
 4. The mocked suite makes the model call a read-only MCP fixture for two labeled
-   issue-list pages and find the duplicate on the second page. Tool-argument
-   graders check repository, state, label, and pagination. It does not query
-   live GitHub or expose any issue-writing tool.
+   issue-list pages and find the duplicate on the second page. Another case
+   follows a capped title search with complete all-open-issue listing, excludes
+   a pull-request record, and finds an unlabeled duplicate on the second page.
+   Tool-argument graders check repository, state, label, and pagination. It
+   does not query live GitHub or expose any issue-writing tool.
 5. Main-chat text is graded, but the host's actual approval-dialog ordering and
    activity indicator are not integration-tested. Supplied records are fixture
    context, not live results. These tests do not prove successful GitHub

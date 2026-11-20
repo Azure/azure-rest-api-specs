@@ -80,6 +80,42 @@ mcp_mocks:
                     WaitForARMFeedback with GITHUB_TOKEN. Requests an explicit,
                     reliable queue-to-review dispatch rather than another PR event.
               has_next_page: false
+          - match:
+              owner: Azure
+              repo: azure-rest-api-specs
+              state: open
+              labels: []
+              page: 1
+            return:
+              issues:
+                - number: 47517
+                  title: "ARM API Reviewer agent: consolidate review summaries"
+                  html_url: https://github.com/Azure/azure-rest-api-specs/pull/47517
+                  state: open
+                  labels: []
+                  pull_request:
+                    url: https://api.github.com/repos/Azure/azure-rest-api-specs/pulls/47517
+                  body: Remove redundant summary posts from clean ARM reviews.
+              has_next_page: true
+              next_page: 2
+          - match:
+              owner: Azure
+              repo: azure-rest-api-specs
+              state: open
+              labels: []
+              page: 2
+            return:
+              issues:
+                - number: 47516
+                  title: "ARM API Reviewer agent: consolidate review summaries"
+                  html_url: https://github.com/Azure/azure-rest-api-specs/issues/47516
+                  state: open
+                  labels: []
+                  body: >
+                    Tracks redundant summary posts on clean ARM reviews.
+                    Requests one complete review body without a separate,
+                    unconditional summary comment.
+              has_next_page: false
 metrics:
   - name: behavior_quality
     weight: 1

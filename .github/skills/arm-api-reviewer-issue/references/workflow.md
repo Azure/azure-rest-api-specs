@@ -62,21 +62,32 @@ actionable next step. Do not assume that a reported symptom establishes a cause.
    identifies a matching open issue that you cannot recheck live, still return
    its full URL as the existing issue and state that it was not rechecked. For related but distinct work, explain
    the difference in the draft.
-5. If the labeled list has no exact duplicate, also search open issues titled
-   with the `ARM API Reviewer agent` prefix. Issues filed by accounts without
-   push access may not have the label yet:
+5. If the labeled list has no exact duplicate, retrieve all open issues with
+   complete REST pagination and inspect those titled with the
+   `ARM API Reviewer agent` prefix. Issues filed by accounts without push
+   access may not have the label yet:
 
    ```text
-   gh search issues --repo Azure/azure-rest-api-specs --state open --match title "ARM API Reviewer agent" --limit 200 --json number,title,url,labels,body
+   gh api --method GET repos/Azure/azure-rest-api-specs/issues -f state=open -f per_page=100 --paginate --slurp
    ```
+
+   Reuse a complete all-open-issue listing if already retrieved. Filter titles
+   locally and exclude objects with a `pull_request` field. Do not substitute
+   a capped search for this listing: reaching a result limit, such as 200,
+   or receiving a truncation warning means discovery is incomplete. Retrieve
+   the remaining issues through the paginated listing instead of merely
+   increasing the search limit.
 
    Use targeted searches in closed issues only as needed.
 
 6. Use equivalent available GitHub tools if `gh` is unavailable, preserving
    pagination and every approval/privacy rule. Do not guess tool names.
-7. If issue discovery is unavailable or incomplete, explain the blocker. A
-   provisional draft is possible, but publication is blocked until this check
-   succeeds. Do not claim that no duplicate exists.
+7. Discovery is complete only after every required page is retrieved
+   successfully and no next page remains. A result cap, truncation, or failed
+   page cannot establish the absence of a duplicate. If issue discovery is
+   unavailable or incomplete, explain the blocker. A provisional draft is
+   possible, but publication is blocked until this check succeeds, even after
+   draft approval. Do not claim that no duplicate exists.
 
 ## 3. Research, then ask focused questions
 
