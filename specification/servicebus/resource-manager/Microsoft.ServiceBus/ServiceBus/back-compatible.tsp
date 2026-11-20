@@ -27,6 +27,8 @@ using Microsoft.ServiceBus;
 @@clientLocation(SBNamespaces.get, "Namespaces");
 @@clientLocation(SBNamespaces.createOrUpdate, "Namespaces");
 @@clientName(SBNamespaces.createOrUpdate::parameters.resource, "parameters");
+@@clientLocation(SBNamespaces.updateLegacy, "Namespaces");
+@@clientName(SBNamespaces.updateLegacy::parameters.properties, "parameters");
 @@clientLocation(SBNamespaces.update, "Namespaces");
 @@clientName(SBNamespaces.update::parameters.properties, "parameters");
 @@clientLocation(SBNamespaces.delete, "Namespaces");
