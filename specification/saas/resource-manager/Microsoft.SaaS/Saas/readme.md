@@ -26,7 +26,54 @@ These are the global settings for the saas.
 
 ```yaml
 openapi-type: arm
-tag: package-2018-03-01-beta
+tag: package-2026-04-01
+```
+
+### Tag: package-2026-04-01
+
+These settings apply only when `--tag=package-2026-04-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-04-01'
+input-file:
+  - stable/2026-04-01/saas.json
+```
+
+### Suppression
+
+```yaml
+directive:
+  - suppress: ParametersInPointGet
+    from: saas.json
+    where: $.paths["/providers/Microsoft.SaaS/saasresources/{resourceId}"].get.parameters
+    reason: >-
+      The optional `$expandCustomerData` query parameter is required to gate PII (purchaser email) per the
+      ARM PII guidelines (https://aka.ms/arm-pii). The default GET response excludes customer data so that
+      downstream control plane components (e.g. ARG) do not cache PII. Callers must explicitly opt in via
+      `$expandCustomerData=true` to retrieve the PII. Approved with the ARM reviewer.
+  - suppress: ParametersInPointGet
+    from: saas.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources/{resourceName}"].get.parameters
+    reason: >-
+      The optional `$expandCustomerData` query parameter is required to gate PII (purchaser email) per the
+      ARM PII guidelines (https://aka.ms/arm-pii). The default GET response excludes customer data so that
+      downstream control plane components (e.g. ARG) do not cache PII. Callers must explicitly opt in via
+      `$expandCustomerData=true` to retrieve the PII. Approved with the ARM reviewer.
+  - suppress: PathForResourceAction
+    from: saas.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.SaaS/resources/validate"]
+    reason: >-
+      Pre-creation purchase validation runs at subscription scope before a resource group or resource
+      instance exists, so no `{resourceName}` path segment can be supplied in the URI. The route mirrors
+      the instance-level `resources/{resourceName}/validate` action and receives the proposed resource
+      name in `properties.name`.
+  - suppress: PathForResourceAction
+    from: saas.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources/validate"]
+    reason: >-
+      Pre-creation purchase validation runs within a resource group before the resource instance is
+      created, so no `{resourceName}` path segment exists yet in Azure Resource Manager. The route mirrors
+      the instance-level `resources/{resourceName}/validate` action and receives the proposed resource
+      name in `properties.name`.
 ```
 
 ### Tag: package-2018-03-01-beta
