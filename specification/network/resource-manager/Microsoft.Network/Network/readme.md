@@ -68,25 +68,37 @@ input-file:
   - stable/2026-05-01/virtualNetwork.json
   - stable/2026-05-01/virtualNetworkAppliance.json
   - stable/2026-05-01/virtualWan.json
-  - stable/2018-10-01/vmssNetwork.json
+  - stable/2026-05-01/vmssNetworkConfiguration.json
+  - stable/2026-05-01/vmssPublicIpAddress.json
 suppressions:
-  # --- stable/2018-10-01/vmssNetwork.json ---
-  # Frozen VMSS captured-schema surface. See "Note: VMSS `2018-10-01` captured-schema
-  # exception" at the top of this readme. These are pre-existing traits of the 2018-10-01
-  # contract; every one of them would be a breaking change to "fix".
+  # --- VMSS fixed 2018-10-01 compatibility surface ---
+  # See "Note: VMSS fixed `2018-10-01` captured-schema exception" at the top of this readme.
+  # These are released traits of the VMSS contract and cannot be changed without breaking clients.
   - code: PathResourceProviderMatchNamespace
-    from: vmssNetwork.json
-    reason: The VMSS network APIs are intentionally exposed under Microsoft.Compute paths - they are scale-set sub-resources belonging to the Compute resource manifest, while being served by Microsoft.Network. This path shape shipped in 2018-10-01 and cannot change without breaking every existing VMSS network client.
+    from: vmssNetworkConfiguration.json
+    reason: The VMSS network APIs are intentionally exposed under Microsoft.Compute paths - they are scale-set sub-resources belonging to the Compute resource manifest, while being served by Microsoft.Network. This path shape shipped in 2018-10-01 and cannot change without breaking existing VMSS network clients.
+  - code: PathResourceProviderMatchNamespace
+    from: vmssPublicIpAddress.json
+    reason: The VMSS public IP APIs are intentionally exposed under Microsoft.Compute paths - they are scale-set sub-resources belonging to the Compute resource manifest, while being served by Microsoft.Network. This path shape shipped in 2018-10-01 and cannot change without breaking existing VMSS network clients.
   - code: ResourceNameRestriction
-    from: vmssNetwork.json
-    reason: virtualMachineScaleSetName, networkInterfaceName and ipConfigurationName are path parameters of the frozen 2018-10-01 VMSS surface and shipped without a pattern constraint. Adding one now would be a breaking change for existing clients of this stable version.
+    from: vmssNetworkConfiguration.json
+    reason: virtualMachineScaleSetName, networkInterfaceName and ipConfigurationName are path parameters of the fixed 2018-10-01 VMSS contract and shipped without pattern constraints. Adding constraints now would be a breaking change for existing clients.
+  - code: ResourceNameRestriction
+    from: vmssPublicIpAddress.json
+    reason: virtualMachineScaleSetName, networkInterfaceName, ipConfigurationName and publicIpAddressName are path parameters of the fixed 2018-10-01 VMSS contract and shipped without pattern constraints. Adding constraints now would be a breaking change for existing clients.
   - code: OperationIdNounVerb
-    from: vmssNetwork.json
-    reason: The NetworkInterfaces_* and PublicIPAddresses_* operation IDs shipped in 2018-10-01 and are baked into released SDKs for .NET, Python, Java, JS, Go, PowerShell, CLI and Terraform. As the rule documentation itself notes, renaming operation IDs after an SDK has shipped is a breaking change.
+    from: vmssNetworkConfiguration.json
+    reason: The NetworkInterfaces_* operation IDs shipped in 2018-10-01 and are baked into released SDKs for .NET, Python, Java, JavaScript, Go, PowerShell, CLI and Terraform. Renaming these operation IDs would be a breaking change.
   - code: ParametersInPointGet
-    from: vmssNetwork.json
-    reason: The $expand query parameter on NetworkInterfaces_GetVirtualMachineScaleSetNetworkInterface shipped in 2018-10-01. Removing it would be a breaking change for existing clients of this stable version.
-  # --- stable/2026-03-01/networkGateway.json ---
+    from: vmssNetworkConfiguration.json
+    reason: The $expand query parameter on the VMSS network interface point GET operations shipped in 2018-10-01. Removing it would be a breaking change for existing clients.
+  - code: ParametersInPointGet
+    from: vmssPublicIpAddress.json
+    reason: The $expand query parameter on the VMSS public IP address point GET operation shipped in 2018-10-01. Removing it would be a breaking change for existing clients.
+  - code: PathResourceProviderNamePascalCase
+    from: vmssNetworkConfiguration.json
+    reason: The lowercase microsoft.Compute provider spelling on the VMSS IP configuration list route shipped in 2018-10-01. Normalizing the released route is outside this compatibility-only change.
+  # --- stable/2026-05-01/networkGateway.json ---
   - code: ResourceNameRestriction
     from: networkGateway.json
     reason: virtualNetworkGatewayName is an existing parent resource path parameter, used consistently across all 36 VirtualNetworkGateways operations in this spec - none of which define a pattern (established in 2025-07-01 and earlier). Adding a pattern only on the new VirtualNetworkGateways_GetEffectiveRoutes operation would be inconsistent with the rest of the resource, and adding it across all operations would be a breaking change to prior API versions.
