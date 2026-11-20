@@ -39,4 +39,8 @@ alias AzureDataAIApiKeyAuth = ApiKeyAuth<
 enum Versions {
   /** 2026-10-30 generally available version. */
   v2026_10_30: "2026-10-30",
+
+  /** 2026-11-01-preview version */
+  @Azure.Core.previewVersion
+  v2026_11_01_preview: "2026-11-01-preview",
 }

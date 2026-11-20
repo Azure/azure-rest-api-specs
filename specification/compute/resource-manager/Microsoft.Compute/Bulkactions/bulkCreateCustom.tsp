@@ -108,7 +108,7 @@ model BulkCreateCustomEnvelope {
   placement?: Placement;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags free-form object matches the established compute contract."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Tags is a standard ARM resource property."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Preserved for compatibility with earlier preview versions; removed from GA."
   @doc("Resource tags.")
   tags?: Record<string>;
 
@@ -116,6 +116,7 @@ model BulkCreateCustomEnvelope {
   ...ResourcePlanProperty;
 }
 
+@@removed(BulkCreateCustomEnvelope.tags, Versions.`2026-10-16`);
 @@added(
   BulkCreateCustomEnvelope.extendedLocation,
   Versions.`2026-10-06-preview`
@@ -320,7 +321,7 @@ model BulkCreateCustomListResult {
 }
 
 // ============================================================
-// Routes: BulkCreateCustom interface (8 operations)
+// Routes: BulkCreateCustom interface
 // ============================================================
 
 @added(Versions.`2026-07-06-preview`)
@@ -354,18 +355,28 @@ interface BulkCreateCustom {
     | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
     | ErrorResponse;
 
-  @doc("Creates or updates BulkCreateCustoms.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+  @renamedFrom(Versions.`2026-10-16`, "createOrUpdate")
+  @doc("Creates virtual machines in bulk with custom settings.")
+  create is ArmResourceCreateOrUpdateAsync<
     Resource = LocationBasedBulkCreateCustom,
-    Parameters = BulkCreateCustomId
+    Parameters = BulkCreateCustomId,
+    Response =
+      | BulkCreateUpdatedResponse<LocationBasedBulkCreateCustom>
+      | ArmResourceCreatedResponse<
+          LocationBasedBulkCreateCustom,
+          ArmAsyncOperationHeader<FinalResult = LocationBasedBulkCreateCustom> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
+  @removed(Versions.`2026-10-16`)
   @doc("Deletes BulkCreateCustoms.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Resource = LocationBasedBulkCreateCustom,
     Parameters = BulkCreateCustomId & BulkCreateCustomDeleteInstancesParameter
   >;
 
+  @removed(Versions.`2026-10-16`)
   @doc("Cancels BulkCreateCustom instances that have not yet launched.")
   cancel is ArmResourceActionNoResponseContentAsync<
     Resource = LocationBasedBulkCreateCustom,

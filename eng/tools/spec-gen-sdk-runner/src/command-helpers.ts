@@ -176,24 +176,27 @@ export function prepareSpecGenSdkCommand(commandInput: SpecGenSdkCmdInput): stri
  * @param specRepoPath The specification repository path.
  * @returns The specConfigs array.
  */
-export function getSpecPaths(batchType: string, specRepoPath: string): SpecConfigs[] {
+export async function getSpecPaths(
+  batchType: string,
+  specRepoPath: string,
+): Promise<SpecConfigs[]> {
   let tspconfigs: string[] = [];
   let readmes: string[] = [];
   let skipUnmatchedReadmes = false;
   switch (batchType) {
     case "all-specs": {
-      tspconfigs = getAllTypeSpecPaths(specRepoPath);
+      tspconfigs = await getAllTypeSpecPaths(specRepoPath);
       readmes = findReadmeFiles(path.join(specRepoPath, "specification"));
       break;
     }
     case "all-typespecs": {
-      tspconfigs = getAllTypeSpecPaths(specRepoPath);
+      tspconfigs = await getAllTypeSpecPaths(specRepoPath);
       readmes = findReadmeFiles(path.join(specRepoPath, "specification"));
       skipUnmatchedReadmes = true;
       break;
     }
     case "all-mgmtplane-typespecs": {
-      tspconfigs = getAllTypeSpecPaths(specRepoPath).filter(
+      tspconfigs = (await getAllTypeSpecPaths(specRepoPath)).filter(
         (p) => p.includes(".Management") || p.includes("resource-manager"),
       );
       readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) =>
@@ -203,7 +206,7 @@ export function getSpecPaths(batchType: string, specRepoPath: string): SpecConfi
       break;
     }
     case "all-dataplane-typespecs": {
-      tspconfigs = getAllTypeSpecPaths(specRepoPath).filter(
+      tspconfigs = (await getAllTypeSpecPaths(specRepoPath)).filter(
         (p) => !p.includes(".Management") && !p.includes("resource-manager"),
       );
       readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) =>
@@ -408,6 +411,7 @@ export function generateArtifact(
         hasManagementPlaneSpecs,
         hasTypeSpecProjects,
         commandInput.sdkLanguage,
+        commandInput.typespecEmitter,
       );
     }
 
@@ -443,13 +447,23 @@ export function generateArtifact(
  * @param hasManagementPlaneSpecs - A flag indicating whether there are management plane specs.
  * @param hasTypeSpecProjects - A flag indicating whether there are TypeSpec projects.
  * @param sdkName - The SDK name.
+ * @param typespecEmitter - The explicitly selected TypeSpec emitter.
  * @returns boolean indicating whether the SDK check is required.
  */
 export function getRequiredSettingValue(
   hasManagementPlaneSpecs: boolean,
   hasTypeSpecProjects: boolean,
   sdkName: SdkName,
+  typespecEmitter?: string,
 ): boolean {
+  // Provisioning validation runs and reports failures, but is not yet a merge gate.
+  if (
+    (sdkName === SdkName.Js && typespecEmitter === "@azure-tools/typespec-ts-provisioning") ||
+    (sdkName === SdkName.Net &&
+      typespecEmitter === "@azure-typespec/http-client-csharp-provisioning")
+  ) {
+    return false;
+  }
   // If the SDK is azure-sdk-for-net, return false if there are no TypeSpec projects.
   if (sdkName === "azure-sdk-for-net" && !hasTypeSpecProjects) {
     return false;

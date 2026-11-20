@@ -3,7 +3,7 @@
   "description": "This example shows how to get list of backup policies. The number of results in a page are limited to maximum of two using the MaxResult parameter.",
   "parameters": {
     "api-version": "6.4",
-    "MaxResults": 3
+    "MaxResults": 2
   },
   "responses": {
     "200": {
@@ -33,30 +33,6 @@
               "RetentionPolicyType": "Basic",
               "MinimumNumberOfBackups": 30,
               "RetentionDuration": "P29D"
-            }
-          },
-          {
-            "Name": "SampleDsmsBackupPolicy",
-            "AutoRestoreOnDataLoss": false,
-            "MaxIncrementalBackups": 3,
-            "Schedule": {
-              "ScheduleKind": "TimeBased",
-              "ScheduleFrequencyType": "Daily",
-              "RunTimes": [
-                "0001-01-01T09:00:00Z",
-                "0001-01-01T17:00:00Z"
-              ]
-            },
-            "Storage": {
-              "StorageKind": "DsmsAzureBlobStore",
-              "FriendlyName": "DsmsAzure_storagesample",
-              "StorageCredentialsSourceLocation": "https://sample-dsms.dsms.core.winows.net/dsms/samplecredentiallocation/storageaccounts/samplestorageac/servicefabricbackup/samplebackup",
-              "ContainerName": "BackupContainer"
-            },
-            "RetentionPolicy": {
-              "RetentionPolicyType": "Basic",
-              "MinimumNumberOfBackups": 10,
-              "RetentionDuration": "P3M"
             }
           },
           {

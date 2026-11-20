@@ -1,0 +1,40 @@
+{
+  "title": "EdgeRegistry_ListByInstanceResource_MaximumSet",
+  "operationId": "EdgeRegistry_ListByInstanceResource",
+  "parameters": {
+    "api-version": "2026-12-01-preview",
+    "subscriptionId": "5ce7b0e2-8e44-4517-9151-43e3d7b6f985",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "aio-instance"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/5ce7b0e2-8e44-4517-9151-43e3d7b6f985/resourceGroups/rgiotoperations/providers/Microsoft.IoTOperations/instances/aio-instance/edgeRegistries/edge-registry",
+            "name": "edge-registry",
+            "type": "Microsoft.IoTOperations/instances/edgeRegistries",
+            "extendedLocation": {
+              "name": "/subscriptions/5ce7b0e2-8e44-4517-9151-43e3d7b6f985/resourceGroups/rgiotoperations/providers/Microsoft.ExtendedLocation/customLocations/aio-location",
+              "type": "CustomLocation"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "status": {
+                "healthState": {
+                  "status": "Available",
+                  "lastTransitionTime": "2026-10-26T17:00:00Z",
+                  "lastUpdateTime": "2026-10-26T17:05:00Z",
+                  "message": "The Edge Registry service is healthy.",
+                  "reasonCode": "Healthy"
+                }
+              }
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/5ce7b0e2-8e44-4517-9151-43e3d7b6f985/resourceGroups/rgiotoperations/providers/Microsoft.IoTOperations/instances/aio-instance/edgeRegistries?api-version=2026-12-01-preview&$skiptoken=next-page"
+      }
+    }
+  }
+}

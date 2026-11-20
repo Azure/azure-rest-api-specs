@@ -1254,17 +1254,6 @@ export function renderReportSections(
       value === "unknown" ? "verdict unknown" : (value?.replaceAll("-", " ") ?? "Not assessed");
     return `<span class="report-badge ${value === "passed" ? "add" : value === "failed" ? "remove" : "unknown"}">${escape(label)}</span>`;
   };
-  const coverageBadge = (value: string | undefined) => {
-    if (!value) return "";
-    const label =
-      value === "complete"
-        ? "complete coverage"
-        : value === "partial"
-          ? "partial coverage"
-          : "coverage blocked";
-    const style = value === "complete" ? "neutral" : "unknown";
-    return `<span class="report-badge ${style} coverage">${label}</span>`;
-  };
 
   const sectionHead = (title: string, description: string, metadata: string) =>
     `<div class="report-section-head"><div><h2>${escape(title)}</h2><p>${escape(description)}</p></div><div class="report-section-meta">${metadata}</div></div>`;
@@ -1749,11 +1738,11 @@ export function renderReportSections(
     },
     {
       findingCount: restCount,
-      html: `<section id="rest-breaking">${sectionHead("REST breaking changes", "Compatibility verdict and evidence coverage are reported independently.", status(dimensions.rest.verdict ?? restStatus) + coverageBadge(dimensions.rest.coverage) + count(`${restCards.length} operations · ${restFindings.length + (dimensions.rest.legacyFindings?.length ?? 0)} findings`))}${restBody || `<div class="report-empty">${restStatus === "not-assessed" ? "No REST compatibility verdict is available for the covered scope." : "No confirmed REST breaking changes."}</div>`}</section>`,
+      html: `<section id="rest-breaking">${sectionHead("REST breaking changes", "Compatibility verdict and confirmed findings.", status(dimensions.rest.verdict ?? restStatus) + count(`${restCards.length} operations · ${restFindings.length + (dimensions.rest.legacyFindings?.length ?? 0)} findings`))}${restBody || `<div class="report-empty">${restStatus === "not-assessed" ? "No REST compatibility verdict is available for the covered scope." : "No confirmed REST breaking changes."}</div>`}</section>`,
     },
     {
       findingCount: downstreamCount,
-      html: `<section id="downstream-breaking">${sectionHead("Downstream breaking changes", "Compatibility verdict and evidence coverage are reported independently.", status(dimensions.downstream.verdict ?? downstreamStatus) + coverageBadge(dimensions.downstream.coverage) + count(`${downstream.methods.length} mapped methods · ${downstream.types.length} changed types`))}${downstreamBody || `<div class="report-empty">${downstreamStatus === "not-assessed" ? "No downstream compatibility verdict is available for the covered scope." : "No downstream breaking changes detected."}</div>`}</section>`,
+      html: `<section id="downstream-breaking">${sectionHead("Downstream breaking changes", "Compatibility verdict and confirmed findings.", status(dimensions.downstream.verdict ?? downstreamStatus) + count(`${downstream.methods.length} mapped methods · ${downstream.types.length} changed types`))}${downstreamBody || `<div class="report-empty">${downstreamStatus === "not-assessed" ? "No downstream compatibility verdict is available for the covered scope." : "No downstream breaking changes detected."}</div>`}</section>`,
     },
     { findingCount: documentQuality.findings?.length ?? 0, html: documentBody.html },
   ];
