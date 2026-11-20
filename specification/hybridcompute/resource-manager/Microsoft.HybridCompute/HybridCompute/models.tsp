@@ -1494,7 +1494,7 @@ model AgentConfiguration {
   /**
    * Specifies whether Azure Arc extension downloads are configured to use Delivery Optimization.
    */
-  @added(Versions.v2026_09_01)
+  @added(Versions.v2026_12_01)
   @visibility(Lifecycle.Read)
   deliveryOptimizationEnabled?: string;
 
