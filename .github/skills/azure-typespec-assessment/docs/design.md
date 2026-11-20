@@ -189,6 +189,14 @@ run when a hunk has no compatibility impact. Inference runs only for hunks
 whose deterministic coverage status is `unknown`; the Agent records the compact
 decision and the materializer writes `inference.json`.
 
+A source hunk mapped to a declaration or operation is not automatically
+`no-impact` merely because no known REST or downstream candidate rule matched.
+Unless it is deterministically documentation-only, contract-neutral supporting
+source, or an explicitly represented artifact-only change, it remains
+`unknown` and is sent to inference with its complete referenced evidence. This
+prevents the candidate rule catalog from acting as an accidental compatibility
+whitelist.
+
 ## 1. Preparation manifest
 
 File: `preparation-manifest.json`
@@ -1227,6 +1235,45 @@ changed-type, and mapped-method counts remain distinct.
 The bounded judgment procedure and candidate-specific compatibility rules are
 defined in [Downstream SDK Breaking Cases](../references/downstream-breaking-cases.md)
 and [Downstream Candidate Rules](../references/downstream-candidate-rules.md).
+
+### Finding-specific TypeSpec source review
+
+New runs use `pipelineVersion: 2`: compatibility judgment and display-source
+completion execute as two sequential steps inside the single AI stage. Step 2a
+judgment decisions use `schemaVersion: 2` and omit source reviews. Immediately
+when `materialize-assessment-results.ts` freezes `assessment-judgment.json`, it
+either records `not-applicable` `source-association.json` (zero confirmed
+REST/downstream breakings) or writes `agent-workspace/source-association-input.json`
+for confirmed REST/downstream findings only. Rejected candidates do not receive
+source tasks. In Step 2b (same AI turn), the agent writes one selection per
+confirmed contract item to `agent-workspace/source-association-decisions.json`
+(`rationale` optional for `keep`) and runs
+`materialize-assessment-results.ts --work <work> --source-association` to cover
+all accepted finding IDs without rewriting frozen judgment. See the
+[Stage 2 workflow](../references/workflow/compliance-and-materialization.md).
+
+The source stage can:
+
+- keep the deterministic proposal unchanged;
+- refine an existing proposal to a clearer complete minimal declaration set;
+- associate declarations when deterministic mapping did not find one;
+- leave an approved finding explicitly unresolved.
+
+Historical single-phase inputs retain their original per-candidate
+`sourceReviews` contract, including `not-applicable` for rejected candidates.
+
+The complete minimal set contains the declarations needed to understand the
+breaking change and its immediate TypeSpec context. It must not be a lone
+contextless changed line, but it must also exclude unrelated declarations from
+the same file or shared diff hunk.
+
+The Agent selects only declaration IDs; it never authors source text. The
+materializer validates candidate coverage and allowed declaration ownership,
+then resolves IDs against the canonical source index. Assembly preserves the
+full canonical finding `sources` for audit and stores the reviewed projection
+separately as `displaySources`. Rendering prefers `displaySources` and clips
+shared hunks to the selected declaration ranges. An unresolved outcome remains
+visible in the report instead of silently falling back to broad source.
 
 ### Semantic and finding relationships
 

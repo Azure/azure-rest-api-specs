@@ -124,7 +124,7 @@ function decisionsDraft(modelInput: AssessmentModelInput, declarationNames: Map<
     rationale: "",
   });
   return {
-    schemaVersion: 1,
+    schemaVersion: modelInput.pipelineVersion === 2 ? 2 : 1,
     semanticSummaries: modelInput.semanticReviewUnits.map((unit) => ({
       reviewUnitId: unit.reviewUnitId,
       title: "",
@@ -132,6 +132,16 @@ function decisionsDraft(modelInput: AssessmentModelInput, declarationNames: Map<
     })),
     restDecisions: modelInput.restCandidates.map(decision),
     downstreamDecisions: modelInput.downstreamCandidates.map(decision),
+    ...(modelInput.pipelineVersion === 2
+      ? {}
+      : {
+          sourceReviews: (modelInput.sourceReviewRequests ?? []).map((request) => ({
+            candidateId: request.candidateId,
+            outcome: "__UNRESOLVED__",
+            selectedDeclarationIds: request.deterministicDeclarationIds,
+            rationale: "",
+          })),
+        }),
     ...(modelInput.inferenceRequests.length
       ? {
           inferenceResults: modelInput.inferenceRequests.map((request) => ({
@@ -193,6 +203,22 @@ export function buildAgentWorkspace({ work }: { work: string }) {
   fs.rmSync(resolveWorkPath(root, "agent-workspace/assessment-judgment.draft.json"), {
     force: true,
   });
+  fs.rmSync(resolveWorkPath(root, "agent-workspace/source-association-input.json"), {
+    force: true,
+  });
+  fs.rmSync(resolveWorkPath(root, "agent-workspace/source-association-decisions.draft.json"), {
+    force: true,
+  });
+  fs.rmSync(resolveWorkPath(root, "agent-workspace/source-association-decisions.json"), {
+    force: true,
+  });
+  fs.rmSync(resolveWorkPath(root, "agent-workspace/source-queries"), {
+    recursive: true,
+    force: true,
+  });
+  fs.rmSync(resolveWorkPath(root, "source-association.json"), {
+    force: true,
+  });
   atomicWriteJson(
     resolveWorkPath(root, DECISIONS_DRAFT),
     decisionsDraft(modelInput, declarationNamesByIntent(root, modelInput)),
@@ -207,6 +233,7 @@ export function buildAgentWorkspace({ work }: { work: string }) {
     schemaVersion: 1,
     preparationId: randomUUID(),
     runtime,
+    ...(modelInput.pipelineVersion === 2 ? { pipelineVersion: 2 } : {}),
     comparisonIdentity: comparisonIdentity(modelInput),
     input: {
       path: "model-input.json",
@@ -218,26 +245,49 @@ export function buildAgentWorkspace({ work }: { work: string }) {
       informationalSemanticIntents: modelInput.informationalSemanticIntentIds?.length ?? 0,
       restCandidates: modelInput.restCandidates.length,
       downstreamCandidates: modelInput.downstreamCandidates.length,
+      sourceReviewRequests: modelInput.sourceReviewRequests?.length ?? 0,
       inferenceRequests: modelInput.inferenceRequests.length,
       guidelineRequests: modelInput.complianceSearchRequests.length,
     },
     requiredOutputs: {
       agentDecisions: DECISIONS_FILE,
+      ...(modelInput.pipelineVersion === 2
+        ? {
+            sourceAssociationDecisions: "agent-workspace/source-association-decisions.json",
+          }
+        : {}),
       materialized: {
         inference: modelInput.inferenceRequests.length > 0 ? "inference.json" : null,
         guidelineEvidence: "compliance-search-evidence.json",
         judgment: "assessment-judgment.json",
+        ...(modelInput.pipelineVersion === 2
+          ? { sourceAssociation: "source-association.json" }
+          : {}),
       },
       structuredResult: "assessment.json",
       report: "assessment.html",
       schemas: {
         agentDecisions: "scripts/agent-decisions.schema.json",
+        ...(modelInput.pipelineVersion === 2
+          ? {
+              sourceAssociationDecisions: "scripts/source-association-decisions.schema.json",
+            }
+          : {}),
         inference: "scripts/inference.schema.json",
         guidelineEvidence: "scripts/compliance-search-evidence.schema.json",
         judgment: "scripts/assessment-judgment.schema.json",
       },
       resolvedSchemas: {
         agentDecisions: path.join(runtime.root, "scripts", "agent-decisions.schema.json"),
+        ...(modelInput.pipelineVersion === 2
+          ? {
+              sourceAssociationDecisions: path.join(
+                runtime.root,
+                "scripts",
+                "source-association-decisions.schema.json",
+              ),
+            }
+          : {}),
         inference: path.join(runtime.root, "scripts", "inference.schema.json"),
         guidelineEvidence: path.join(
           runtime.root,
@@ -250,6 +300,11 @@ export function buildAgentWorkspace({ work }: { work: string }) {
     },
     drafts: {
       agentDecisions: DECISIONS_DRAFT,
+      ...(modelInput.pipelineVersion === 2
+        ? {
+            sourceAssociationDecisions: "agent-workspace/source-association-decisions.draft.json",
+          }
+        : {}),
     },
     materialization: {
       script: "scripts/materialize-assessment-results.ts",
@@ -257,6 +312,20 @@ export function buildAgentWorkspace({ work }: { work: string }) {
         "--work",
         root,
       ]),
+      ...(modelInput.pipelineVersion === 2
+        ? {
+            querySourceCommand: resolvedRuntimeCommand(
+              runtime,
+              "scripts/materialize-assessment-results.ts",
+              ["--work", root, "--query-source"],
+            ),
+            sourceAssociationCommand: resolvedRuntimeCommand(
+              runtime,
+              "scripts/materialize-assessment-results.ts",
+              ["--work", root, "--source-association"],
+            ),
+          }
+        : {}),
     },
     finalization: {
       script: "scripts/finalize-assessment.ts",
@@ -278,20 +347,37 @@ export function buildAgentWorkspace({ work }: { work: string }) {
       informationalSemanticIntentIds: modelInput.informationalSemanticIntentIds ?? [],
       restCandidateIds: modelInput.restCandidates.map((candidate) => candidate.id),
       downstreamCandidateIds: modelInput.downstreamCandidates.map((candidate) => candidate.id),
+      sourceReviewCandidateIds: (modelInput.sourceReviewRequests ?? []).map(
+        (request) => request.candidateId,
+      ),
       inferenceRequestIds: modelInput.inferenceRequests.map((request) => request.requestId),
       guidelineRequestIds: modelInput.complianceSearchRequests.map((request) => request.requestId),
     },
     completionChecklist: [
       "Read model-input.json exactly once.",
       ...(modelInput.inferenceRequests.length
-        ? ["Resolve every inference request in the compact Agent decisions."]
+        ? [
+            "Resolve every inference request in the compact Agent decisions and judge any inferred candidates.",
+          ]
         : []),
+      ...(modelInput.pipelineVersion === 2
+        ? [
+            "Step 2a (Judgment): complete semanticSummaries, restDecisions, downstreamDecisions, inferenceResults (if any), and Azure Guidelines judgments in agent-workspace/agent-decisions.json without sourceReviews.",
+          ]
+        : [
+            "Review deterministic TypeSpec source proposals for every candidate, including inferred candidates; select only canonical declaration IDs.",
+          ]),
       ...(modelInput.complianceSearchRequests.length
         ? [
             "Score the full catalog, fetch the first four retrievable documents with fallback, and complete the compact Agent decisions; use only prefilled intent-scoped declarationNames in complianceJudgments.",
           ]
         : []),
       "Execute materialization.command using its exact executable and args, without substituting another runtime; require all materialized Agent artifacts.",
+      ...(modelInput.pipelineVersion === 2
+        ? [
+            "Step 2b (Source Association in the same AI turn): inspect materialization.command output. If sourceAssociationRequired is false, proceed directly to finalization.command. If sourceAssociationRequired is true, immediately read agent-workspace/source-association-input.json once, optionally run materialization.querySourceCommand (passing --item <item-id> --name <qualified-name> or repeatable --query <item-id>=<qualified-name>), write agent-workspace/source-association-decisions.json (rationale is optional when outcome is keep), and run materialization.sourceAssociationCommand without modifying frozen judgment.",
+          ]
+        : []),
       "Execute finalization.command using its exact executable and args; require validated assessment.json and assessment.html.",
       "Execute serving.command using its exact executable and args as an attached long-lived process, immediately read its startup output without waiting for process completion or a completion notification, and return its localhost URL as the clickable Assessment report link with the absolute assessment.json path.",
     ],
@@ -312,6 +398,10 @@ export function buildAgentWorkspace({ work }: { work: string }) {
     runtimePhases: {
       preparation: createRuntimePhaseProvenance(root, runtime, [], [INDEX_FILE]),
     },
+    judgmentArtifactHashes: undefined,
+    sourceInputHash: undefined,
+    sourceQueryHashes: undefined,
+    sourceResultHash: undefined,
     resultHashes: undefined,
     failure: undefined,
     telemetry: {

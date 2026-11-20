@@ -1,6 +1,8 @@
 # Bounded Judgment Classification
 
-The deterministic scripts identify review units, facts, and candidates. The Agent interprets them; it does not discover additional changes.
+The deterministic scripts identify review units, facts, candidates, and
+unclassified source hunks. The Agent interprets them; it does not discover
+additional changes.
 
 ## Evidence boundaries
 
@@ -11,6 +13,17 @@ The deterministic scripts identify review units, facts, and candidates. The Agen
 | Downstream | TCGC SDK-surface candidate facts and changed customization decorators                                                    | Approve only when language-neutral generated public/runtime SDK behavior can break existing SDK users; otherwise reject. |
 
 REST and downstream decisions are independent. A REST-compatible change can still break generated SDK users. Never use TCGC to classify REST compatibility or AutoRest to infer SDK surface.
+
+Known candidate rule IDs are classification aids, not an exhaustive whitelist.
+If a mapped declaration or operation changes but no known candidate is emitted,
+the coordinator keeps the hunk `unknown` and supplies its complete bounded
+evidence for inference. Do not force it into an inaccurate known rule. If the
+evidence is incomplete or unsupported, return a blocker/not-assessed result
+rather than a no-impact decision.
+
+TCGC `usage` is a bitmask, not a count. Use the supplied decoded flag names and
+the explicit `input`/`output` booleans when judging directionality. Preserve the
+raw value and any `unknownBits`; do not infer a meaning for unknown bits.
 
 Downstream method/model candidates are supplied only after deterministic
 identity resolution. Exact cross-language definition identity and explicit

@@ -1,3 +1,84 @@
+import type { AssessmentFact, NormalizedSchema } from "./runtime-types.ts";
+
+export function schemaIdentity(schema: NormalizedSchema | undefined): string | undefined {
+  return schema?.enumMetadata?.name ?? schema?.reference?.split("/").at(-1);
+}
+
+export function schemaPath(schema: NormalizedSchema | undefined, segments: string[]) {
+  let current = schema;
+  let identity = schemaIdentity(current);
+  let ownerIdentity = identity;
+  let memberName: string | undefined;
+  for (const raw of segments) {
+    const name = raw.replace(/\[\]$/, "");
+    ownerIdentity = identity;
+    memberName = name;
+    const property = current?.properties?.find((property) => property.name === name);
+    if (!property) return { schema: undefined, identity, ownerIdentity, memberName };
+    current = property.schema;
+    identity = schemaIdentity(current) ?? identity;
+    if (raw.endsWith("[]")) {
+      current = current?.items;
+      identity = schemaIdentity(current) ?? identity;
+    }
+  }
+  return { schema: current, identity, ownerIdentity, memberName };
+}
+
+export function restContractIdentity(finding: {
+  contractChange?: { location?: string };
+  operationIds?: string[];
+  evidence?: AssessmentFact[];
+  rule?: string;
+}) {
+  const facts = finding.evidence ?? [];
+  const before = facts.find((fact) => fact.comparisonRole === "baseline") ?? facts[0];
+  const after = facts.find((fact) => fact.comparisonRole === "target") ?? facts[1];
+  const location = finding.contractChange?.location ?? finding.rule ?? "";
+  const memberChange = new Set([
+    "serialized-property-removed",
+    "property-required",
+    "required-property-added",
+    "wire-type-changed",
+    "nullable-restricted",
+  ]).has(finding.rule ?? "");
+  const pathIdentity = (schema: NormalizedSchema | undefined, segments: string[]) => {
+    const resolved = schemaPath(schema, segments);
+    return memberChange && segments.length ? resolved.ownerIdentity : resolved.identity;
+  };
+  const identity = (fact: AssessmentFact | undefined) => {
+    const request = location.match(/^request body(?:\.(.*))?$/);
+    if (request) return pathIdentity(fact?.request?.schema, request[1]?.split(".") ?? []);
+    const response = location.match(/^response ([^.]+)(?:\.(.*))?$/);
+    if (response) {
+      return pathIdentity(
+        fact?.responses?.find((item) => item.status === response[1])?.schema,
+        response[2]?.split(".") ?? [],
+      );
+    }
+    if (finding.rule?.startsWith("parameter-") || finding.rule === "required-parameter-added") {
+      return schemaIdentity(
+        fact?.parameters?.find((parameter) => parameter.name === location)?.schema,
+      );
+    }
+    if (finding.rule?.startsWith("response-header-")) {
+      for (const response of fact?.responses ?? []) {
+        const header = response.headers?.find(
+          (header) => header.name?.toLowerCase() === location.toLowerCase(),
+        );
+        if (header) return schemaIdentity(header.schema);
+      }
+    }
+    return undefined;
+  };
+  return (
+    identity(before) ??
+    identity(after) ??
+    finding.operationIds?.[0] ??
+    "Unmapped REST contract change"
+  );
+}
+
 type AssessmentDimension = {
   status: string;
   verdict?: CompatibilityVerdict;

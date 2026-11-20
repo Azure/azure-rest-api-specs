@@ -97,6 +97,8 @@ type InputAccounting = {
     restCandidates: number;
     downstreamCandidates: number;
     downstreamRootCauses: number;
+    sourceReviewDeclarations: number;
+    sourceReviewRequests: number;
     complianceSearchRequests: number;
     inferenceRequests: number;
   };
@@ -104,6 +106,7 @@ type InputAccounting = {
 };
 type AnalysisModelInput = {
   schemaVersion: number;
+  pipelineVersion: 2;
   context: Record<string, unknown>;
   artifactReferences: AssessmentModelInput["artifactReferences"];
   evidenceSets: Record<string, import("./runtime-types.ts").EvidenceSet & Record<string, unknown>>;
@@ -332,6 +335,7 @@ function compactSdkFact(fact: AssessmentFact) {
     name: fact.name,
     access: fact.access,
     usage: fact.usage,
+    usageDetails: fact.usageDetails,
     reachable: fact.reachable,
     parameters: fact.parameters?.map((parameter) => ({
       position: parameter.position,
@@ -1291,6 +1295,8 @@ function accountInput(
         restCandidates: input.restCandidates.length,
         downstreamCandidates: input.downstreamCandidates.length,
         downstreamRootCauses: input.downstreamRootCauses.length,
+        sourceReviewDeclarations: 0,
+        sourceReviewRequests: 0,
         complianceSearchRequests: input.complianceSearchRequests.length,
         inferenceRequests: input.inferenceRequests.length,
       },
@@ -1492,6 +1498,7 @@ export function buildModelInput({
 
   const input: AnalysisModelInput = {
     schemaVersion: 1,
+    pipelineVersion: 2,
     context: {
       sourceComparison: {
         baseCommit: manifest.comparison.mergeBaseCommit,
@@ -1814,7 +1821,7 @@ export async function runAssessmentAnalysis(options: AssessmentAnalysisOptions) 
       ),
     }),
   });
-  writeJson(path.join(output, "model-input.json"), modelInput);
+  fs.writeFileSync(path.join(output, "model-input.json"), JSON.stringify(modelInput));
   const workspace = buildAgentWorkspace({ work: output });
   return {
     status: "awaiting-agent-judgment",

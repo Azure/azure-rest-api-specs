@@ -294,6 +294,8 @@ void test("model input references canonical evidence without embedding sources",
   const coverage = deterministicCoverage(input.semanticReviewUnits[0]);
   assert.deepEqual(coverage.coveredHunkIds, ["hunk-1"]);
   assert.deepEqual(coverage.uncoveredHunkIds, []);
+  assert.equal(coverage.classifications[0].status, "no-impact");
+  assert.equal(coverage.classifications[0].reason, "declaration-mapped-and-contracts-compared");
   assert.equal(input.semanticReviewUnits[0].inferenceRequired, false);
   assert.deepEqual(input.inferenceRequests, []);
   assert.equal(input.deferredDimensions, undefined);
@@ -632,6 +634,77 @@ void test("model input requests inference only for unknown hunks", () => {
     hunkId: "hunk-1",
   });
   assert.deepEqual(input.inferenceRequests[0].allowedDimensions, ["rest", "downstream"]);
+  assert.equal(input.pipelineVersion, 2);
+  assert.equal("sourceReviewRequests" in input, false);
+  assert.equal("sourceReviewDeclarations" in input, false);
+});
+
+void test("compared operation hunks do not infer while unmapped hunks remain unknown", () => {
+  const input = buildModelInputFromFixture({
+    manifest: {
+      comparison: { mergeBaseCommit: "base", headCommit: "head", workingTree: {} },
+      projects: [{ id: "p", path: "specification/widget" }],
+      blockers: [],
+    },
+    sourceIndex: {
+      sourceChanges: [
+        {
+          id: "source-1",
+          path: "main.tsp",
+          hunks: [
+            {
+              id: "hunk-operation",
+              lines: ["-op get(): Widget;", "+op get(): Widget | Error;"],
+            },
+            {
+              id: "hunk-unmapped",
+              lines: ["-alias Old = string;", "+alias Current = string;"],
+            },
+          ],
+          declarations: [],
+        },
+      ],
+    },
+    semantic: {
+      status: "ready",
+      facts: {},
+      reviewUnits: [
+        {
+          id: "semantic-1",
+          projectId: "p",
+          sourceChangeIds: ["source-1"],
+          hunkIds: ["hunk-operation", "hunk-unmapped"],
+          declarationIds: [],
+          operations: [{ operationId: "Widgets_Get", hunkIds: ["hunk-operation"] }],
+        },
+      ],
+      blockers: [],
+    },
+    rest: { status: "ready", facts: {}, candidates: [], blockers: [] },
+    downstream: { status: "ready", facts: {}, candidates: [], blockers: [] },
+  });
+  const coverage = deterministicCoverage(input.semanticReviewUnits[0]);
+  assert.deepEqual(coverage.coveredHunkIds, ["hunk-operation"]);
+  assert.deepEqual(coverage.uncoveredHunkIds, ["hunk-unmapped"]);
+  assert.deepEqual(
+    coverage.classifications.map(({ hunkId, status, reason }) => ({ hunkId, status, reason })),
+    [
+      {
+        hunkId: "hunk-operation",
+        status: "no-impact",
+        reason: "operation-mapped-and-contracts-compared",
+      },
+      {
+        hunkId: "hunk-unmapped",
+        status: "unknown",
+        reason: "source-change-not-mapped-to-deterministic-contract-evidence",
+      },
+    ],
+  );
+  assert.deepEqual(
+    input.inferenceRequests.map((request) => request.hunkId),
+    ["hunk-unmapped"],
+  );
 });
 
 void test("model input bounds repeated review evidence and retains downstream facts", () => {
@@ -724,6 +797,73 @@ void test("model input bounds repeated review evidence and retains downstream fa
     input.evidenceSets[input.downstreamCandidates[0].evidenceSetId].declarationCount,
     100,
   );
+});
+
+void test("model input does not repeat project-wide declarations for each REST candidate", () => {
+  const declarationIds = Array.from(
+    { length: 400 },
+    (_, index) => `declaration-${String(index).padStart(16, "0")}`,
+  );
+  const candidates = Array.from({ length: 150 }, (_, index) => ({
+    id: `rest-${index}`,
+    rule: "operation-removed",
+    actual: "Operation removed.",
+    expected: "Preserve operation.",
+    operationIds: [`Widgets_${index}`],
+    sourceChangeIds: ["source-1"],
+    hunkIds: ["hunk-1"],
+    declarationIds,
+    evidenceFactIds: [`rest-fact-${index}`],
+    reviewRequired: true,
+  }));
+  const input = buildModelInputFromFixture({
+    manifest: {
+      comparison: { mergeBaseCommit: "base", headCommit: "head", workingTree: {} },
+      projects: [{ id: "p", path: "specification/widget" }],
+      blockers: [],
+    },
+    sourceIndex: {
+      sourceChanges: [
+        {
+          id: "source-1",
+          path: "main.tsp",
+          hunks: [],
+          declarations: declarationIds.map((id) => ({
+            id,
+            kind: "model",
+            qualifiedName: id,
+            hunkIds: ["hunk-1"],
+          })),
+        },
+      ],
+    },
+    semantic: { status: "ready", facts: {}, reviewUnits: [], blockers: [] },
+    rest: {
+      status: "ready",
+      facts: Object.fromEntries(
+        candidates.map((candidate, index) => [
+          candidate.evidenceFactIds[0],
+          {
+            id: candidate.evidenceFactIds[0],
+            projectId: "p",
+            comparisonRole: "baseline",
+            operationId: `Widgets_${index}`,
+          },
+        ]),
+      ),
+      candidates,
+      blockers: [],
+    },
+    downstream: { status: "ready", facts: {}, candidates: [], rootCauses: [], blockers: [] },
+  });
+  assert.equal(input.restCandidates.length, 150);
+  assert.equal(Object.keys(input.evidenceSets).length, 150);
+  assert.ok(Buffer.byteLength(JSON.stringify(input)) < 200_000);
+  for (const evidence of Object.values(input.evidenceSets)) {
+    assert.equal(evidence.declarationCount, 400);
+    assert.equal(evidence.declarationIds, undefined);
+    assert.ok(evidence.evidenceRef);
+  }
 });
 
 void test("model input retains downstream method and bridge path facts", () => {
@@ -1015,7 +1155,7 @@ void test("multiline decorator bodies remain inference-visible", () => {
   }
 });
 
-void test("context-only scoped decorators do not force inference", () => {
+void test("context-only scoped decorators retain compared declaration coverage", () => {
   const input = buildModelInputFromFixture({
     manifest: {
       comparison: {
@@ -1072,9 +1212,14 @@ void test("context-only scoped decorators do not force inference", () => {
   });
 
   assert.equal(input.semanticReviewUnits[0].inferenceRequired, false);
+  assert.deepEqual(input.inferenceRequests, []);
+  assert.equal(
+    deterministicCoverage(input.semanticReviewUnits[0]).classifications[0].reason,
+    "declaration-mapped-and-contracts-compared",
+  );
 });
 
-void test("parentheses in context decorator strings do not leak decorator scope", () => {
+void test("parentheses in context decorator strings retain compared declaration coverage", () => {
   const input = buildModelInputFromFixture({
     manifest: {
       comparison: {
@@ -1131,6 +1276,11 @@ void test("parentheses in context decorator strings do not leak decorator scope"
   });
 
   assert.equal(input.semanticReviewUnits[0].inferenceRequired, false);
+  assert.deepEqual(input.inferenceRequests, []);
+  assert.equal(
+    deterministicCoverage(input.semanticReviewUnits[0]).classifications[0].reason,
+    "declaration-mapped-and-contracts-compared",
+  );
 });
 
 void test("direct doc decorator changes remain semantic-only", () => {
