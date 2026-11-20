@@ -18,6 +18,7 @@ interface RunOptions {
   summaryFile?: string;
   fix?: boolean;
   concurrency?: number;
+  checkUnusedSuppressions?: boolean;
 }
 
 interface RunContext {
@@ -357,8 +358,9 @@ function validateProject(
   {
     verbose = false,
     fix = false,
+    checkUnusedSuppressions = false,
     signal,
-  }: Pick<RunOptions, "verbose" | "fix"> & {
+  }: Pick<RunOptions, "verbose" | "fix" | "checkUnusedSuppressions"> & {
     signal?: AbortSignal;
   } = {},
 ): Promise<{ success: boolean; segments: OutputSegment[] }> {
@@ -399,6 +401,7 @@ function validateProject(
         JSON.stringify(context),
         ...(verbose ? ["--verbose"] : []),
         ...(fix ? ["--fix"] : []),
+        ...(checkUnusedSuppressions ? ["--check-unused-suppressions"] : []),
       ],
       { stdio: ["ignore", "pipe", "pipe"], env },
     );

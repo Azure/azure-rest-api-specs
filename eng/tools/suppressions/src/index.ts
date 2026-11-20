@@ -1,5 +1,10 @@
 import { exit } from "node:process";
-import { getSuppressions, getSuppressionsForTools, type Suppression } from "./suppressions.ts";
+import {
+  getSuppressions,
+  getSuppressionsForTools,
+  type Suppression,
+  type SuppressionOptions,
+} from "./suppressions.ts";
 
 function getUsage(): string {
   return (
@@ -29,4 +34,4 @@ export async function main() {
   }
 }
 
-export { getSuppressions, getSuppressionsForTools, type Suppression };
+export { getSuppressions, getSuppressionsForTools, type Suppression, type SuppressionOptions };

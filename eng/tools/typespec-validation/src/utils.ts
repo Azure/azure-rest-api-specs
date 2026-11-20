@@ -4,6 +4,7 @@ import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import {
   getSuppressions as getSuppressionsImpl,
   type Suppression,
+  type SuppressionOptions,
 } from "@azure-tools/suppressions";
 import { access, readdir, readFile } from "node:fs/promises";
 import { basename, dirname, join, resolve } from "pathe";
@@ -64,8 +65,11 @@ export async function readTspConfig(folder: string) {
   return readFile(join(folder, "tspconfig.yaml"), "utf-8");
 }
 
-export async function getSuppressions(path: string): Promise<Suppression[]> {
-  return getSuppressionsImpl("TypeSpecValidation", path, context);
+export async function getSuppressions(
+  path: string,
+  options: SuppressionOptions = {},
+): Promise<Suppression[]> {
+  return getSuppressionsImpl("TypeSpecValidation", path, context, options);
 }
 
 export function getStructureVersion(relativePath: string): 1 | 2 {

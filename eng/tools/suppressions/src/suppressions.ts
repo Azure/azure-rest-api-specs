@@ -5,7 +5,7 @@ import { createRequire } from "node:module";
 import { dirname, join, resolve, sep } from "node:path";
 import { sep as posixSep } from "node:path/posix";
 import vm from "node:vm";
-import { parse as yamlParse } from "yaml";
+import { isSeq, LineCounter, parse as yamlParse, parseDocument } from "yaml";
 import * as z from "zod";
 
 export interface Suppression {
@@ -17,6 +17,12 @@ export interface Suppression {
   rules?: string[];
   subRules?: string[];
   reason: string;
+  source?: { path: string; line: number; column: number };
+}
+
+export interface SuppressionOptions {
+  /** Include the YAML entry's location for diagnostics without changing default API output. */
+  includeSource?: boolean;
 }
 
 const suppressionSchema = z.array(
@@ -79,6 +85,7 @@ export async function getSuppressions(
   tool: string,
   path: string,
   context: Record<string, unknown> = {},
+  options: SuppressionOptions = {},
 ): Promise<Suppression[]> {
   path = resolve(path);
 
@@ -96,6 +103,7 @@ export async function getSuppressions(
         suppressionsFile,
         await readFile(suppressionsFile, { encoding: "utf8" }),
         context,
+        options,
       ),
     );
   }
@@ -158,12 +166,16 @@ export function getSuppressionsFromYaml(
   suppressionsFile: string,
   suppressionsYaml: string,
   context: Record<string, unknown> = {},
+  options: SuppressionOptions = {},
 ): Suppression[] {
   path = resolve(path);
   suppressionsFile = resolve(suppressionsFile);
 
+  const lineCounter = options.includeSource ? new LineCounter() : undefined;
+  const document = lineCounter ? parseDocument(suppressionsYaml, { lineCounter }) : undefined;
+  if (document?.errors.length) throw document.errors[0];
   // Treat empty yaml as empty array
-  const parsedYaml: unknown = yamlParse(suppressionsYaml) ?? [];
+  const parsedYaml: unknown = (document ? document.toJS() : yamlParse(suppressionsYaml)) ?? [];
 
   let suppressions: Suppression[];
   try {
@@ -175,6 +187,17 @@ export function getSuppressionsFromYaml(
       finalErr = new Error(z.prettifyError(err), { cause: err });
     }
     throw finalErr;
+  }
+
+  if (document && lineCounter && isSeq(document.contents)) {
+    const entries = document.contents.items;
+    suppressions.forEach((suppression, index) => {
+      const offset = entries[index]?.range?.[0];
+      if (offset !== undefined) {
+        const { line, col } = lineCounter.linePos(offset);
+        suppression.source = { path: suppressionsFile, line, column: col };
+      }
+    });
   }
 
   // Make "require" available inside sandbox for CJS imports
