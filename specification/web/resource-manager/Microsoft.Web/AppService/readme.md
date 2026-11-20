@@ -154,6 +154,15 @@ directive:
       - $.definitions.BuilderAppRuntimeActionRequest.properties.idempotencyKey
       - $.definitions.BuilderAppPreviewDeployRequest.properties.idempotencyKey
     reason: These request-only, client-generated retry correlation identifiers are not credentials and grant no authorization. The secret-name suffix heuristic flags idempotencyKey; marking these values as secrets would misrepresent the contract.
+  - suppress: PostResponseCodes
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/deploy"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/redeploy"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/start"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/stop"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/previews/{previewName}/deploy"].post
+    reason: These long-running POST actions have no final result body and use the standard ArmResourceActionNoResponseContentAsync template, which emits 202 and default. Adding 204 would violate the TypeSpec arm-post-operation-response-codes rule, which forbids responses other than 202, 200, and default on long-running POSTs; the two rules conflict for bodyless results. Completion is reported through Azure-AsyncOperation and the Location result.
 ```
 
 ### Tag: package-2026-08

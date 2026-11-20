@@ -95,10 +95,10 @@ model BuilderAppPreviewSettings {
 /** Shared variable overrides applied to previews. */
 @added(Versions.v2026_11_15)
 model BuilderAppPreviewVersionConfiguration {
-  /** Replaces the overrides; [] clears them. An entry without a value preserves the existing override with that name, not the app's value. Values are write-only. */
+  /** Replaces the overrides; [] clears them. Required when previews.versionConfiguration is supplied. An entry without a value preserves the existing override with that name, not the app's value. Values are write-only. */
   @maxItems(100)
   @identifiers(#["name"])
-  variables: BuilderAppVariable[];
+  variables?: BuilderAppVariable[];
 }
 
 /** Customer-safe deletion status. */

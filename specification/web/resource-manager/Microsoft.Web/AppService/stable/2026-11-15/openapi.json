@@ -1466,65 +1466,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/builderAppsOperationResults/{operationId}": {
-      "get": {
-        "operationId": "BuilderAppsAsyncOperations_GetOperationResult",
-        "tags": [
-          "BuilderAppsAsyncOperations"
-        ],
-        "description": "Get a location-scoped operation result. Pending operations return bodyless 202. Successful identity saves return 200 with the BuilderApp; successful deployments, start and stop actions, and deletions return 204. Failed operations return their stored error.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/BuilderApp"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "The deployment, runtime action, or deletion completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetBuilderAppOperationResult": {
-            "$ref": "./examples/BuilderAppsAsyncOperations_GetOperationResult.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/builderAppsOperationStatuses/{operationId}": {
       "get": {
         "operationId": "BuilderAppsAsyncOperations_GetOperationStatus",
@@ -46529,7 +46470,7 @@
       "properties": {
         "variables": {
           "type": "array",
-          "description": "Replaces the overrides; [] clears them. An entry without a value preserves the existing override with that name, not the app's value. Values are write-only.",
+          "description": "Replaces the overrides; [] clears them. Required when previews.versionConfiguration is supplied. An entry without a value preserves the existing override with that name, not the app's value. Values are write-only.",
           "maxItems": 100,
           "items": {
             "$ref": "#/definitions/BuilderAppVariable"
@@ -46538,10 +46479,7 @@
             "name"
           ]
         }
-      },
-      "required": [
-        "variables"
-      ]
+      }
     },
     "BuilderAppPreviewsConfiguration": {
       "type": "object",

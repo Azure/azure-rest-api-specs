@@ -148,6 +148,7 @@ model BuilderAppPreviewAuthListResult {
 }
 
 /** Preview authentication configuration operations. */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The default authentication configuration always exists; it is disabled through PUT with mode disabled rather than deleted."
 @added(Versions.v2026_11_15)
 @armResourceOperations
 interface BuilderAppPreviewAuthConfigs {
