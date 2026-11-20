@@ -20,7 +20,7 @@ model EmployeeProperties {
   /** Age of employee */
   age?: int32;
 
-  /** City of employee */
+  /** The city where the employee is located. */
   city?: string;
 
   /** Profile of employee */
@@ -54,10 +54,16 @@ union ProvisioningState {
 
 @armResourceOperations
 interface Employees {
+  /** Gets an employee by name within a resource group. */
   get is ArmResourceRead<Employee>;
+  /** Creates an employee or replaces an existing employee within a resource group. */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Employee>;
+  /** Updates the specified properties of an employee within a resource group. */
   update is ArmResourcePatchSync<Employee, EmployeeProperties>;
+  /** Deletes an employee within a resource group. */
   delete is ArmResourceDeleteWithoutOkAsync<Employee>;
+  /** Lists the employees within a resource group. */
   listByResourceGroup is ArmResourceListByParent<Employee>;
+  /** Lists the employees across all resource groups in a subscription. */
   listBySubscription is ArmListBySubscription<Employee>;
 }
