@@ -26,7 +26,7 @@ These are the global settings for the Content Safety.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2026-09-01-preview
+tag: package-2026-10-15-preview
 ```
 
 ### Tag: package-2023-04-30-preview
@@ -90,6 +90,25 @@ These settings apply only when `--tag=package-2026-09-01-preview` is specified o
 ```yaml $(tag) == 'package-2026-09-01-preview'
 input-file:
   - preview/2026-09-01-preview/contentsafety.json
+```
+
+### Tag: package-2026-10-15-preview
+
+These settings apply only when `--tag=package-2026-10-15-preview` is specified.
+This version evolves Unified Moderate on its existing route to canonical Agent
+Hooks contexts and interceptor response envelopes. Validate the entire envelope
+before passing its `verdict` to an in-process interceptor. Content Safety puts
+the evaluation receipt at `extensions.aacs.receipt`, not inside the verdict
+or at the envelope root. The digest binds the request; it does not attest that
+the host applied the decision. Earlier versions retain their own wire contracts.
+
+The normative response schema and the canonical extension-size limit are in
+Agent Hooks 0.1, section 5.5:
+https://github.com/responsibleai/agent-hooks/blob/501eac2eb9cc675e73b7d9b93508e90d31c1c5fb/spec/AGENT-HOOKS-0.1.md#55-transport-response-envelope
+
+```yaml $(tag) == 'package-2026-10-15-preview'
+input-file:
+  - preview/2026-10-15-preview/contentsafety.json
 ```
 
 # Suppressions
