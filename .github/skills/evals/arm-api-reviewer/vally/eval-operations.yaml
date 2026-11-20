@@ -8,7 +8,7 @@ description: |
 # root environment into each stimulus environment, and the path resolves relative to this
 # file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
 # effect when the run passes --skill-dir, which neither the local nor the CI runner does.
-environment:
+agent_environment:
   skills:
     - "../../../azure-api-review"
 
@@ -18,8 +18,6 @@ tags:
 defaults:
   runs: 1
   timeout: "300s"
-  model: gpt-5.6-sol?effort=high
-  judge_model: claude-sonnet-4.6
 
 scoring:
   threshold: 0.7
@@ -32,16 +30,14 @@ stimuli:
         - src: "../fixtures/arm-openapi/patch-violations.json"
           dest: "specification/gadgetsvc/resource-manager/Microsoft.GadgetService/stable/2025-01-01/gadgetsvc.json"
     prompt: >
-      Review the following ARM resource-manager OpenAPI specification file for
-      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
-      service with no previous API version. Report all findings with rule IDs,
-      line numbers, and fix suggestions.
+      Review the following ARM resource-manager OpenAPI specification file for compliance with Azure REST API Guidelines and ARM RPC rules. This is a new service with no previous API version. Report all findings with rule IDs, line numbers, and fix suggestions.
 
       File: specification/gadgetsvc/resource-manager/Microsoft.GadgetService/stable/2025-01-01/gadgetsvc.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-contains
         config:
           substring: "PATCH"
@@ -61,16 +57,14 @@ stimuli:
         - src: "../fixtures/arm-openapi/put-response-mismatch.json"
           dest: "specification/itemsvc/resource-manager/Microsoft.ItemService/stable/2025-01-01/itemsvc.json"
     prompt: >
-      Review the following ARM resource-manager OpenAPI specification file for
-      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
-      service with no previous API version. Report all findings with rule IDs,
-      line numbers, and fix suggestions.
+      Review the following ARM resource-manager OpenAPI specification file for compliance with Azure REST API Guidelines and ARM RPC rules. This is a new service with no previous API version. Report all findings with rule IDs, line numbers, and fix suggestions.
 
       File: specification/itemsvc/resource-manager/Microsoft.ItemService/stable/2025-01-01/itemsvc.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
         config:
           pattern: "(?i)200"
@@ -89,16 +83,14 @@ stimuli:
         - src: "../fixtures/arm-openapi/delete-violations.json"
           dest: "specification/delsvc/resource-manager/Microsoft.DelService/stable/2025-01-01/delsvc.json"
     prompt: >
-      Review the following ARM resource-manager OpenAPI specification file for
-      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
-      service with no previous API version. Report all findings with rule IDs,
-      line numbers, and fix suggestions.
+      Review the following ARM resource-manager OpenAPI specification file for compliance with Azure REST API Guidelines and ARM RPC rules. This is a new service with no previous API version. Report all findings with rule IDs, line numbers, and fix suggestions.
 
       File: specification/delsvc/resource-manager/Microsoft.DelService/stable/2025-01-01/delsvc.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-contains
         config:
           substring: "DELETE"
@@ -118,16 +110,14 @@ stimuli:
         - src: "../fixtures/arm-openapi/lro-violations.json"
           dest: "specification/lrosvc/resource-manager/Microsoft.LroService/stable/2025-01-01/lrosvc.json"
     prompt: >
-      Review the following ARM resource-manager OpenAPI specification file for
-      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
-      service with no previous API version. Report all findings with rule IDs,
-      line numbers, and fix suggestions.
+      Review the following ARM resource-manager OpenAPI specification file for compliance with Azure REST API Guidelines and ARM RPC rules. This is a new service with no previous API version. Report all findings with rule IDs, line numbers, and fix suggestions.
 
       File: specification/lrosvc/resource-manager/Microsoft.LroService/stable/2025-01-01/lrosvc.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-contains
         config:
           substring: "202"
