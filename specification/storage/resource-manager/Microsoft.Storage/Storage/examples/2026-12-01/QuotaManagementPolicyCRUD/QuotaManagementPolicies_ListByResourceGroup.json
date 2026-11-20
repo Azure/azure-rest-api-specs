@@ -1,0 +1,42 @@
+{
+  "operationId": "QuotaManagementPolicies_ListByResourceGroup",
+  "title": "List quota management policies by resource group",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-12-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/quotaManagementPolicies/policy1",
+            "name": "policy1",
+            "type": "Microsoft.Storage/quotaManagementPolicies",
+            "location": "eastus",
+            "properties": {
+              "state": "Enabled",
+              "description": "Production storage quota policy",
+              "ingressInGbps": 100,
+              "egressInGbps": 200,
+              "tpsInKtps": 50,
+              "capacityInGb": 10240,
+              "softQuotaPercentage": 80,
+              "provisioningState": "Succeeded"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/quotaManagementPolicies?api-version=2026-12-01&$skiptoken=next-page"
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "InternalServerError",
+          "message": "An unexpected error occurred"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "operationId": "QuotaManagementGroups_Update",
+  "title": "Update quota management group tags",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-12-01",
+    "quotaManagementGroupName": "empty-qmg",
+    "properties": {
+      "tags": {
+        "environment": "test"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/quotaManagementGroups/empty-qmg",
+        "name": "empty-qmg",
+        "type": "Microsoft.Storage/quotaManagementGroups",
+        "location": "eastus",
+        "tags": {
+          "environment": "test"
+        },
+        "properties": {
+          "membershipType": "None",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/quotaManagementGroups/empty-qmg?api-version=2026-12-01",
+        "Retry-After": "10"
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "InvalidOperation",
+          "message": "Invalid request body or parameters"
+        }
+      }
+    }
+  }
+}

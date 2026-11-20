@@ -1,0 +1,54 @@
+{
+  "operationId": "QuotaManagementPolicies_CreateOrUpdate",
+  "title": "Create a quota management policy with minimum properties",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-12-01",
+    "policyName": "minimal-policy",
+    "resource": {
+      "location": "eastus",
+      "properties": {
+        "state": "Enabled"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/quotaManagementPolicies/minimal-policy",
+        "name": "minimal-policy",
+        "type": "Microsoft.Storage/quotaManagementPolicies",
+        "location": "eastus",
+        "properties": {
+          "state": "Enabled",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Storage/locations/eastus/operationStatuses/22222222-2222-2222-2222-222222222222?api-version=2026-12-01",
+        "Retry-After": "10"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/quotaManagementPolicies/minimal-policy",
+        "name": "minimal-policy",
+        "type": "Microsoft.Storage/quotaManagementPolicies",
+        "location": "eastus",
+        "properties": {
+          "state": "Enabled",
+          "provisioningState": "Creating"
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "InvalidOperation",
+          "message": "Invalid request body or parameters"
+        }
+      }
+    }
+  }
+}
