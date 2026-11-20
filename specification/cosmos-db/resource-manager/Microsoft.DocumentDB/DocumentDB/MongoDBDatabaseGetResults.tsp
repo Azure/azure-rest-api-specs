@@ -44,6 +44,7 @@ model MongoDBDatabaseGetResults
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@tag("CosmosDB")
 interface MongoDBDatabaseGetResultsOperationGroup {
   /**
    * Gets the MongoDB databases under an existing Azure Cosmos DB database account with the provided name.

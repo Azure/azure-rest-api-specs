@@ -43,6 +43,21 @@
       "name": "Operations"
     },
     {
+      "name": "CosmosDB"
+    },
+    {
+      "name": "Restorables"
+    },
+    {
+      "name": "Rbacs"
+    },
+    {
+      "name": "Mongorbacs"
+    },
+    {
+      "name": "ManagedCassandras"
+    },
+    {
       "name": "NetworkSecurityPerimeterConfigurations"
     },
     {
@@ -67,6 +82,9 @@
       "name": "MaterializedViewsBuilder"
     },
     {
+      "name": "Services"
+    },
+    {
       "name": "ThroughputPools"
     },
     {
@@ -77,6 +95,9 @@
     "/providers/Microsoft.DocumentDB/databaseAccountNames/{accountName}": {
       "head": {
         "operationId": "DatabaseAccounts_CheckNameExists",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Checks that the Azure Cosmos DB account name already exists. A valid account name may contain only lowercase letters, numbers, and the '-' character, and must be between 3 and 50 characters.",
         "parameters": [
           {
@@ -153,6 +174,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/cassandraClusters": {
       "get": {
         "operationId": "CassandraClusters_ListBySubscription",
+        "tags": [
+          "ManagedCassandras"
+        ],
         "description": "List all managed Cassandra clusters in this subscription.",
         "parameters": [
           {
@@ -189,6 +213,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/databaseAccounts": {
       "get": {
         "operationId": "DatabaseAccounts_List",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Lists all the Azure Cosmos DB database accounts available under the subscription.",
         "parameters": [
           {
@@ -225,6 +252,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/fleets": {
       "get": {
         "operationId": "Fleet_List",
+        "tags": [
+          "Fleets"
+        ],
         "description": "Lists all the fleets under the subscription.",
         "parameters": [
           {
@@ -297,6 +327,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations": {
       "get": {
         "operationId": "Locations_List",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "List Cosmos DB locations and their properties",
         "parameters": [
           {
@@ -333,6 +366,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}": {
       "get": {
         "operationId": "Locations_Get",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Get the properties of an existing Cosmos DB location",
         "parameters": [
           {
@@ -373,6 +409,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts": {
       "get": {
         "operationId": "RestorableDatabaseAccounts_ListByLocation",
+        "tags": [
+          "Restorables"
+        ],
         "description": "Lists all the restorable Azure Cosmos DB database accounts available under the subscription and in a region.  This call requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/read' permission.",
         "parameters": [
           {
@@ -416,6 +455,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}": {
       "get": {
         "operationId": "RestorableDatabaseAccounts_GetByLocation",
+        "tags": [
+          "Restorables"
+        ],
         "description": "Retrieves the properties of an existing Azure Cosmos DB restorable database account.  This call requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/read/*' permission.",
         "parameters": [
           {
@@ -463,6 +505,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableGraphs": {
       "get": {
         "operationId": "RestorableGremlinGraphs_List",
+        "tags": [
+          "Restorables"
+        ],
         "description": "Show the event feed of all mutations done on all the Azure Cosmos DB Gremlin graphs under a specific database. This helps in scenario where container was accidentally deleted. This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission",
         "parameters": [
           {
@@ -534,6 +579,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableGremlinDatabases": {
       "get": {
         "operationId": "RestorableGremlinDatabases_List",
+        "tags": [
+          "Restorables"
+        ],
         "description": "Show the event feed of all mutations done on all the Azure Cosmos DB Gremlin databases under the restorable account. This helps in scenario where database was accidentally deleted to get the deletion time. This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission",
         "parameters": [
           {
@@ -584,6 +632,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableGremlinResources": {
       "get": {
         "operationId": "RestorableGremlinResources_List",
+        "tags": [
+          "Restorables"
+        ],
         "description": "Return a list of gremlin database and graphs combo that exist on the account at the given timestamp and location. This helps in scenarios to validate what resources exist at given timestamp and location. This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission.",
         "parameters": [
           {
@@ -648,6 +699,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableMongodbCollections": {
       "get": {
         "operationId": "RestorableMongodbCollections_List",
+        "tags": [
+          "Restorables"
+        ],
         "description": "Show the event feed of all mutations done on all the Azure Cosmos DB MongoDB collections under a specific database.  This helps in scenario where container was accidentally deleted.  This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission",
         "parameters": [
           {
@@ -719,6 +773,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableMongodbDatabases": {
       "get": {
         "operationId": "RestorableMongodbDatabases_List",
+        "tags": [
+          "Restorables"
+        ],
         "description": "Show the event feed of all mutations done on all the Azure Cosmos DB MongoDB databases under the restorable account.  This helps in scenario where database was accidentally deleted to get the deletion time.  This API requires  'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission",
         "parameters": [
           {
@@ -769,6 +826,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableMongodbResources": {
       "get": {
         "operationId": "RestorableMongodbResources_List",
+        "tags": [
+          "Restorables"
+        ],
         "description": "Return a list of database and collection combo that exist on the account at the given timestamp and location. This helps in scenarios to validate what resources exist at given timestamp and location. This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission.",
         "parameters": [
           {
@@ -833,6 +893,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableSqlContainers": {
       "get": {
         "operationId": "RestorableSqlContainers_List",
+        "tags": [
+          "Restorables"
+        ],
         "description": "Show the event feed of all mutations done on all the Azure Cosmos DB SQL containers under a specific database.  This helps in scenario where container was accidentally deleted.  This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission",
         "parameters": [
           {
@@ -904,6 +967,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableSqlDatabases": {
       "get": {
         "operationId": "RestorableSqlDatabases_List",
+        "tags": [
+          "Restorables"
+        ],
         "description": "Show the event feed of all mutations done on all the Azure Cosmos DB SQL databases under the restorable account.  This helps in scenario where database was accidentally deleted to get the deletion time.  This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission",
         "parameters": [
           {
@@ -954,6 +1020,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableSqlResources": {
       "get": {
         "operationId": "RestorableSqlResources_List",
+        "tags": [
+          "Restorables"
+        ],
         "description": "Return a list of database and container combo that exist on the account at the given timestamp and location. This helps in scenarios to validate what resources exist at given timestamp and location. This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission.",
         "parameters": [
           {
@@ -1018,6 +1087,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableTableResources": {
       "get": {
         "operationId": "RestorableTableResources_List",
+        "tags": [
+          "Restorables"
+        ],
         "description": "Return a list of tables that exist on the account at the given timestamp and location. This helps in scenarios to validate what resources exist at given timestamp and location. This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission.",
         "parameters": [
           {
@@ -1082,6 +1154,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{instanceId}/restorableTables": {
       "get": {
         "operationId": "RestorableTables_List",
+        "tags": [
+          "Restorables"
+        ],
         "description": "Show the event feed of all mutations done on all the Azure Cosmos DB Tables. This helps in scenario where table was accidentally deleted. This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission",
         "parameters": [
           {
@@ -1185,6 +1260,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/restorableDatabaseAccounts": {
       "get": {
         "operationId": "RestorableDatabaseAccounts_List",
+        "tags": [
+          "Restorables"
+        ],
         "description": "Lists all the restorable Azure Cosmos DB database accounts available under the subscription. This call requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/read' permission.",
         "parameters": [
           {
@@ -1257,6 +1335,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters": {
       "get": {
         "operationId": "CassandraClusters_ListByResourceGroup",
+        "tags": [
+          "ManagedCassandras"
+        ],
         "description": "List all managed Cassandra clusters in this resource group.",
         "parameters": [
           {
@@ -1296,6 +1377,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}": {
       "get": {
         "operationId": "CassandraClusters_Get",
+        "tags": [
+          "ManagedCassandras"
+        ],
         "description": "Get the properties of a managed Cassandra cluster.",
         "parameters": [
           {
@@ -1340,6 +1424,9 @@
       },
       "put": {
         "operationId": "CassandraClusters_CreateUpdate",
+        "tags": [
+          "ManagedCassandras"
+        ],
         "description": "Create or update a managed Cassandra cluster. When updating, you must specify all writable properties. To update only some properties, use PATCH.",
         "parameters": [
           {
@@ -1415,6 +1502,9 @@
       },
       "patch": {
         "operationId": "CassandraClusters_Update",
+        "tags": [
+          "ManagedCassandras"
+        ],
         "description": "Updates some of the properties of a managed Cassandra cluster.",
         "parameters": [
           {
@@ -1490,6 +1580,9 @@
       },
       "delete": {
         "operationId": "CassandraClusters_Delete",
+        "tags": [
+          "ManagedCassandras"
+        ],
         "description": "Deletes a managed Cassandra cluster.",
         "parameters": [
           {
@@ -1551,6 +1644,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/backups": {
       "get": {
         "operationId": "CassandraClusters_ListBackups",
+        "tags": [
+          "ManagedCassandras"
+        ],
         "description": "List the backups of this cluster that are available to restore.",
         "parameters": [
           {
@@ -1600,6 +1696,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/backups/{backupId}": {
       "get": {
         "operationId": "CassandraClusters_GetBackup",
+        "tags": [
+          "ManagedCassandras"
+        ],
         "description": "Get the properties of an individual backup of this cluster that is available to restore.",
         "parameters": [
           {
@@ -1656,6 +1755,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/commands": {
       "get": {
         "operationId": "CassandraClusters_ListCommand",
+        "tags": [
+          "ManagedCassandras"
+        ],
         "description": "List all commands currently running on ring info",
         "parameters": [
           {
@@ -1705,6 +1807,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/commands/{commandId}": {
       "get": {
         "operationId": "CassandraClusters_GetCommandAsync",
+        "tags": [
+          "ManagedCassandras"
+        ],
         "description": "Get details about a specified command that was run asynchronously.",
         "parameters": [
           {
@@ -1761,6 +1866,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/dataCenters": {
       "get": {
         "operationId": "CassandraDataCenters_List",
+        "tags": [
+          "ManagedCassandras"
+        ],
         "description": "List all data centers in a particular managed Cassandra cluster.",
         "parameters": [
           {
@@ -1810,6 +1918,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/dataCenters/{dataCenterName}": {
       "get": {
         "operationId": "CassandraDataCenters_Get",
+        "tags": [
+          "ManagedCassandras"
+        ],
         "description": "Get the properties of a managed Cassandra data center.",
         "parameters": [
           {
@@ -1864,6 +1975,9 @@
       },
       "put": {
         "operationId": "CassandraDataCenters_CreateUpdate",
+        "tags": [
+          "ManagedCassandras"
+        ],
         "description": "Create or update a managed Cassandra data center. When updating, overwrite all properties. To update only some properties, use PATCH.",
         "parameters": [
           {
@@ -1949,6 +2063,9 @@
       },
       "patch": {
         "operationId": "CassandraDataCenters_Update",
+        "tags": [
+          "ManagedCassandras"
+        ],
         "description": "Update some of the properties of a managed Cassandra data center.",
         "parameters": [
           {
@@ -2034,6 +2151,9 @@
       },
       "delete": {
         "operationId": "CassandraDataCenters_Delete",
+        "tags": [
+          "ManagedCassandras"
+        ],
         "description": "Delete a managed Cassandra data center.",
         "parameters": [
           {
@@ -2105,6 +2225,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/deallocate": {
       "post": {
         "operationId": "CassandraClusters_Deallocate",
+        "tags": [
+          "ManagedCassandras"
+        ],
         "description": "Deallocate the Managed Cassandra Cluster and Associated Data Centers. Deallocation will deallocate the host virtual machine of this cluster, and reserved the data disk. This won't do anything on an already deallocated cluster. Use Start to restart the cluster.",
         "parameters": [
           {
@@ -2170,6 +2293,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/invokeCommand": {
       "post": {
         "operationId": "CassandraClusters_InvokeCommand",
+        "tags": [
+          "ManagedCassandras"
+        ],
         "description": "Invoke a command like nodetool for cassandra maintenance",
         "parameters": [
           {
@@ -2241,6 +2367,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/invokeCommandAsync": {
       "post": {
         "operationId": "CassandraClusters_InvokeCommandAsync",
+        "tags": [
+          "ManagedCassandras"
+        ],
         "description": "Invoke a command like nodetool for cassandra maintenance asynchronously",
         "parameters": [
           {
@@ -2320,6 +2449,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/start": {
       "post": {
         "operationId": "CassandraClusters_Start",
+        "tags": [
+          "ManagedCassandras"
+        ],
         "description": "Start the Managed Cassandra Cluster and Associated Data Centers. Start will start the host virtual machine of this cluster with reserved data disk. This won't do anything on an already running cluster. Use Deallocate to deallocate the cluster.",
         "parameters": [
           {
@@ -2378,6 +2510,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/status": {
       "get": {
         "operationId": "CassandraClusters_Status",
+        "tags": [
+          "ManagedCassandras"
+        ],
         "description": "Gets the CPU, memory, and disk usage statistics for each Cassandra node in a cluster.",
         "parameters": [
           {
@@ -2424,6 +2559,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts": {
       "get": {
         "operationId": "DatabaseAccounts_ListByResourceGroup",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Lists all the Azure Cosmos DB database accounts available under the given resource group.",
         "parameters": [
           {
@@ -2463,6 +2601,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}": {
       "get": {
         "operationId": "DatabaseAccounts_Get",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Retrieves the properties of an existing Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -2507,6 +2648,9 @@
       },
       "put": {
         "operationId": "DatabaseAccounts_CreateOrUpdate",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Creates or updates an Azure Cosmos DB database account. The \"Update\" method is preferred when performing updates on an account.",
         "parameters": [
           {
@@ -2577,6 +2721,9 @@
       },
       "patch": {
         "operationId": "DatabaseAccounts_Update",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Updates the properties of an existing Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -2641,6 +2788,9 @@
       },
       "delete": {
         "operationId": "DatabaseAccounts_Delete",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Deletes an existing Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -2702,6 +2852,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces": {
       "get": {
         "operationId": "CassandraResources_ListCassandraKeyspaces",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Lists the Cassandra keyspaces under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -2751,6 +2904,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}": {
       "get": {
         "operationId": "CassandraResources_GetCassandraKeyspace",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Gets the Cassandra keyspaces under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
           {
@@ -2802,6 +2958,9 @@
       },
       "put": {
         "operationId": "CassandraResources_CreateUpdateCassandraKeyspace",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Create or update an Azure Cosmos DB Cassandra keyspace",
         "parameters": [
           {
@@ -2886,6 +3045,9 @@
       },
       "delete": {
         "operationId": "CassandraResources_DeleteCassandraKeyspace",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Deletes an existing Azure Cosmos DB Cassandra keyspace.",
         "parameters": [
           {
@@ -2954,6 +3116,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/tables": {
       "get": {
         "operationId": "CassandraResources_ListCassandraTables",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Lists the Cassandra table under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -3010,6 +3175,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/tables/{tableName}": {
       "get": {
         "operationId": "CassandraResources_GetCassandraTable",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Gets the Cassandra table under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -3068,6 +3236,9 @@
       },
       "put": {
         "operationId": "CassandraResources_CreateUpdateCassandraTable",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Create or update an Azure Cosmos DB Cassandra Table",
         "parameters": [
           {
@@ -3159,6 +3330,9 @@
       },
       "delete": {
         "operationId": "CassandraResources_DeleteCassandraTable",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Deletes an existing Azure Cosmos DB Cassandra table.",
         "parameters": [
           {
@@ -3234,6 +3408,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/tables/{tableName}/throughputSettings/default": {
       "get": {
         "operationId": "CassandraResources_GetCassandraTableThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Gets the RUs per second of the Cassandra table under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
           {
@@ -3292,6 +3469,9 @@
       },
       "put": {
         "operationId": "CassandraResources_UpdateCassandraTableThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Update RUs per second of an Azure Cosmos DB Cassandra table",
         "parameters": [
           {
@@ -3385,6 +3565,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/tables/{tableName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
         "operationId": "CassandraResources_MigrateCassandraTableToAutoscale",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Migrate an Azure Cosmos DB Cassandra table from manual throughput to autoscale",
         "parameters": [
           {
@@ -3469,6 +3652,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/tables/{tableName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
         "operationId": "CassandraResources_MigrateCassandraTableToManualThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Migrate an Azure Cosmos DB Cassandra table from autoscale to manual throughput",
         "parameters": [
           {
@@ -3553,6 +3739,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/throughputSettings/default": {
       "get": {
         "operationId": "CassandraResources_GetCassandraKeyspaceThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Gets the RUs per second of the Cassandra Keyspace under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
           {
@@ -3604,6 +3793,9 @@
       },
       "put": {
         "operationId": "CassandraResources_UpdateCassandraKeyspaceThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Update RUs per second of an Azure Cosmos DB Cassandra Keyspace",
         "parameters": [
           {
@@ -3690,6 +3882,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
         "operationId": "CassandraResources_MigrateCassandraKeyspaceToAutoscale",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Migrate an Azure Cosmos DB Cassandra Keyspace from manual throughput to autoscale",
         "parameters": [
           {
@@ -3767,6 +3962,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
         "operationId": "CassandraResources_MigrateCassandraKeyspaceToManualThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Migrate an Azure Cosmos DB Cassandra Keyspace from autoscale to manual throughput",
         "parameters": [
           {
@@ -4132,6 +4330,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/views/{viewName}/throughputSettings/default": {
       "get": {
         "operationId": "CassandraResources_GetCassandraViewThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Gets the RUs per second of the Cassandra view under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
           {
@@ -4190,6 +4391,9 @@
       },
       "put": {
         "operationId": "CassandraResources_UpdateCassandraViewThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Update RUs per second of an Azure Cosmos DB Cassandra view",
         "parameters": [
           {
@@ -4283,6 +4487,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/views/{viewName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
         "operationId": "CassandraResources_MigrateCassandraViewToAutoscale",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Migrate an Azure Cosmos DB Cassandra view from manual throughput to autoscale",
         "parameters": [
           {
@@ -4367,6 +4574,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/views/{viewName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
         "operationId": "CassandraResources_MigrateCassandraViewToManualThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Migrate an Azure Cosmos DB Cassandra view from autoscale to manual throughput",
         "parameters": [
           {
@@ -4451,6 +4661,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraRoleAssignments": {
       "get": {
         "operationId": "CassandraResources_ListCassandraRoleAssignments",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Retrieves the list of all Azure Cosmos DB Cassandra Role Assignments.",
         "parameters": [
           {
@@ -4500,6 +4713,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraRoleAssignments/{roleAssignmentId}": {
       "get": {
         "operationId": "CassandraResources_GetCassandraRoleAssignment",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Retrieves the properties of an existing Azure Cosmos DB Cassandra Role Assignment with the given Id.",
         "parameters": [
           {
@@ -4551,6 +4767,9 @@
       },
       "put": {
         "operationId": "CassandraResources_CreateUpdateCassandraRoleAssignment",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Creates or updates an Azure Cosmos DB Cassandra Role Assignment.",
         "parameters": [
           {
@@ -4635,6 +4854,9 @@
       },
       "delete": {
         "operationId": "CassandraResources_DeleteCassandraRoleAssignment",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Deletes an existing Azure Cosmos DB Cassandra Role Assignment.",
         "parameters": [
           {
@@ -4706,6 +4928,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraRoleDefinitions": {
       "get": {
         "operationId": "CassandraResources_ListCassandraRoleDefinitions",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Retrieves the list of all Azure Cosmos DB Cassandra Role Definitions.",
         "parameters": [
           {
@@ -4755,6 +4980,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraRoleDefinitions/{roleDefinitionId}": {
       "get": {
         "operationId": "CassandraResources_GetCassandraRoleDefinition",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Retrieves the properties of an existing Azure Cosmos DB Cassandra Role Definition with the given Id.",
         "parameters": [
           {
@@ -4806,6 +5034,9 @@
       },
       "put": {
         "operationId": "CassandraResources_CreateUpdateCassandraRoleDefinition",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Creates or updates an Azure Cosmos DB Cassandra Role Definition.",
         "parameters": [
           {
@@ -4890,6 +5121,9 @@
       },
       "delete": {
         "operationId": "CassandraResources_DeleteCassandraRoleDefinition",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Deletes an existing Azure Cosmos DB Cassandra Role Definition.",
         "parameters": [
           {
@@ -5911,6 +6145,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/metricDefinitions": {
       "get": {
         "operationId": "Collection_ListMetricDefinitions",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Retrieves metric definitions for the given collection.",
         "parameters": [
           {
@@ -5974,6 +6211,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/metrics": {
       "get": {
         "operationId": "Collection_ListMetrics",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Retrieves the metrics determined by the given filter for the given database account and collection.",
         "parameters": [
           {
@@ -6044,6 +6284,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/partitionKeyRangeId/{partitionKeyRangeId}/metrics": {
       "get": {
         "operationId": "PartitionKeyRangeId_ListMetrics",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Retrieves the metrics determined by the given filter for the given partition key range id.",
         "parameters": [
           {
@@ -6121,6 +6364,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/partitions/metrics": {
       "get": {
         "operationId": "CollectionPartition_ListMetrics",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Retrieves the metrics determined by the given filter for the given collection, split by partition.",
         "parameters": [
           {
@@ -6191,6 +6437,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/partitions/usages": {
       "get": {
         "operationId": "CollectionPartition_ListUsages",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Retrieves the usages (most recent storage data) for the given collection, split by partition.",
         "parameters": [
           {
@@ -6261,6 +6510,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/usages": {
       "get": {
         "operationId": "Collection_ListUsages",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Retrieves the usages (most recent storage data) for the given collection.",
         "parameters": [
           {
@@ -6331,6 +6583,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/metricDefinitions": {
       "get": {
         "operationId": "Database_ListMetricDefinitions",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Retrieves metric definitions for the given database.",
         "parameters": [
           {
@@ -6387,6 +6642,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/metrics": {
       "get": {
         "operationId": "Database_ListMetrics",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Retrieves the metrics determined by the given filter for the given database account and database.",
         "parameters": [
           {
@@ -6450,6 +6708,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/usages": {
       "get": {
         "operationId": "Database_ListUsages",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Retrieves the usages (most recent data) for the given database.",
         "parameters": [
           {
@@ -6513,6 +6774,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/failoverPriorityChange": {
       "post": {
         "operationId": "DatabaseAccounts_FailoverPriorityChange",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Changes the failover priority for the Azure Cosmos DB database account. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.",
         "parameters": [
           {
@@ -6843,6 +7107,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases": {
       "get": {
         "operationId": "GremlinResources_ListGremlinDatabases",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Lists the Gremlin databases under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -6892,6 +7159,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}": {
       "get": {
         "operationId": "GremlinResources_GetGremlinDatabase",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Gets the Gremlin databases under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
           {
@@ -6943,6 +7213,9 @@
       },
       "put": {
         "operationId": "GremlinResources_CreateUpdateGremlinDatabase",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Create or update an Azure Cosmos DB Gremlin database",
         "parameters": [
           {
@@ -7027,6 +7300,9 @@
       },
       "delete": {
         "operationId": "GremlinResources_DeleteGremlinDatabase",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Deletes an existing Azure Cosmos DB Gremlin database.",
         "parameters": [
           {
@@ -7095,6 +7371,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/graphs": {
       "get": {
         "operationId": "GremlinResources_ListGremlinGraphs",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Lists the Gremlin graph under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -7151,6 +7430,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/graphs/{graphName}": {
       "get": {
         "operationId": "GremlinResources_GetGremlinGraph",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Gets the Gremlin graph under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -7209,6 +7491,9 @@
       },
       "put": {
         "operationId": "GremlinResources_CreateUpdateGremlinGraph",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Create or update an Azure Cosmos DB Gremlin graph",
         "parameters": [
           {
@@ -7300,6 +7585,9 @@
       },
       "delete": {
         "operationId": "GremlinResources_DeleteGremlinGraph",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Deletes an existing Azure Cosmos DB Gremlin graph.",
         "parameters": [
           {
@@ -7375,6 +7663,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/graphs/{graphName}/retrieveContinuousBackupInformation": {
       "post": {
         "operationId": "GremlinResources_RetrieveContinuousBackupInformation",
+        "tags": [
+          "Restorables"
+        ],
         "description": "Retrieves continuous backup information for a gremlin graph.",
         "parameters": [
           {
@@ -7463,6 +7754,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/graphs/{graphName}/throughputSettings/default": {
       "get": {
         "operationId": "GremlinResources_GetGremlinGraphThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Gets the Gremlin graph throughput under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
           {
@@ -7521,6 +7815,9 @@
       },
       "put": {
         "operationId": "GremlinResources_UpdateGremlinGraphThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Update RUs per second of an Azure Cosmos DB Gremlin graph",
         "parameters": [
           {
@@ -7614,6 +7911,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/graphs/{graphName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
         "operationId": "GremlinResources_MigrateGremlinGraphToAutoscale",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Migrate an Azure Cosmos DB Gremlin graph from manual throughput to autoscale",
         "parameters": [
           {
@@ -7698,6 +7998,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/graphs/{graphName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
         "operationId": "GremlinResources_MigrateGremlinGraphToManualThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Migrate an Azure Cosmos DB Gremlin graph from autoscale to manual throughput",
         "parameters": [
           {
@@ -7782,6 +8085,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/throughputSettings/default": {
       "get": {
         "operationId": "GremlinResources_GetGremlinDatabaseThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Gets the RUs per second of the Gremlin database under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
           {
@@ -7833,6 +8139,9 @@
       },
       "put": {
         "operationId": "GremlinResources_UpdateGremlinDatabaseThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Update RUs per second of an Azure Cosmos DB Gremlin database",
         "parameters": [
           {
@@ -7919,6 +8228,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
         "operationId": "GremlinResources_MigrateGremlinDatabaseToAutoscale",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Migrate an Azure Cosmos DB Gremlin database from manual throughput to autoscale",
         "parameters": [
           {
@@ -7996,6 +8308,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
         "operationId": "GremlinResources_MigrateGremlinDatabaseToManualThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Migrate an Azure Cosmos DB Gremlin database from autoscale to manual throughput",
         "parameters": [
           {
@@ -8073,6 +8388,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinRoleAssignments": {
       "get": {
         "operationId": "GremlinResources_ListGremlinRoleAssignments",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Retrieves the list of all Azure Cosmos DB Gremlin Role Assignments.",
         "parameters": [
           {
@@ -8122,6 +8440,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinRoleAssignments/{roleAssignmentId}": {
       "get": {
         "operationId": "GremlinResources_GetGremlinRoleAssignment",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Retrieves the properties of an existing Azure Cosmos DB Gremlin Role Assignment with the given Id.",
         "parameters": [
           {
@@ -8173,6 +8494,9 @@
       },
       "put": {
         "operationId": "GremlinResources_CreateUpdateGremlinRoleAssignment",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Creates or updates an Azure Cosmos DB Gremlin Role Assignment.",
         "parameters": [
           {
@@ -8257,6 +8581,9 @@
       },
       "delete": {
         "operationId": "GremlinResources_DeleteGremlinRoleAssignment",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Deletes an existing Azure Cosmos DB Gremlin Role Assignment.",
         "parameters": [
           {
@@ -8328,6 +8655,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinRoleDefinitions": {
       "get": {
         "operationId": "GremlinResources_ListGremlinRoleDefinitions",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Retrieves the list of all Azure Cosmos DB Gremlin Role Definitions.",
         "parameters": [
           {
@@ -8377,6 +8707,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinRoleDefinitions/{roleDefinitionId}": {
       "get": {
         "operationId": "GremlinResources_GetGremlinRoleDefinition",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Retrieves the properties of an existing Azure Cosmos DB Gremlin Role Definition with the given Id.",
         "parameters": [
           {
@@ -8428,6 +8761,9 @@
       },
       "put": {
         "operationId": "GremlinResources_CreateUpdateGremlinRoleDefinition",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Creates or updates an Azure Cosmos DB Gremlin Role Definition.",
         "parameters": [
           {
@@ -8512,6 +8848,9 @@
       },
       "delete": {
         "operationId": "GremlinResources_DeleteGremlinRoleDefinition",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Deletes an existing Azure Cosmos DB Gremlin Role Definition.",
         "parameters": [
           {
@@ -8583,6 +8922,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/listConnectionStrings": {
       "post": {
         "operationId": "DatabaseAccounts_ListConnectionStrings",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Lists the connection strings for the specified Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -8632,6 +8974,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/listKeys": {
       "post": {
         "operationId": "DatabaseAccounts_ListKeys",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Lists the access keys for the specified Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -8678,6 +9023,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/metricDefinitions": {
       "get": {
         "operationId": "DatabaseAccounts_ListMetricDefinitions",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Retrieves metric definitions for the given database account.",
         "parameters": [
           {
@@ -8727,6 +9075,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/metrics": {
       "get": {
         "operationId": "DatabaseAccounts_ListMetrics",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Retrieves the metrics determined by the given filter for the given database account.",
         "parameters": [
           {
@@ -8783,6 +9134,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongoMIRoleAssignments": {
       "get": {
         "operationId": "MongoMIResources_ListMongoMIRoleAssignments",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Retrieves the list of all Azure Cosmos DB MongoMI Role Assignments.",
         "parameters": [
           {
@@ -8832,6 +9186,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongoMIRoleAssignments/{roleAssignmentId}": {
       "get": {
         "operationId": "MongoMIResources_GetMongoMIRoleAssignment",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Retrieves the properties of an existing Azure Cosmos DB MongoMI Role Assignment with the given Id.",
         "parameters": [
           {
@@ -8883,6 +9240,9 @@
       },
       "put": {
         "operationId": "MongoMIResources_CreateUpdateMongoMIRoleAssignment",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Creates or updates an Azure Cosmos DB MongoMI Role Assignment.",
         "parameters": [
           {
@@ -8967,6 +9327,9 @@
       },
       "delete": {
         "operationId": "MongoMIResources_DeleteMongoMIRoleAssignment",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Deletes an existing Azure Cosmos DB MongoMI Role Assignment.",
         "parameters": [
           {
@@ -9038,6 +9401,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongoMIRoleDefinitions": {
       "get": {
         "operationId": "MongoMIResources_ListMongoMIRoleDefinitions",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Retrieves the list of all Azure Cosmos DB MongoMI Role Definitions.",
         "parameters": [
           {
@@ -9087,6 +9453,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongoMIRoleDefinitions/{roleDefinitionId}": {
       "get": {
         "operationId": "MongoMIResources_GetMongoMIRoleDefinition",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Retrieves the properties of an existing Azure Cosmos DB MongoMI Role Definition with the given Id.",
         "parameters": [
           {
@@ -9138,6 +9507,9 @@
       },
       "put": {
         "operationId": "MongoMIResources_CreateUpdateMongoMIRoleDefinition",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Creates or updates an Azure Cosmos DB MongoMI Role Definition.",
         "parameters": [
           {
@@ -9222,6 +9594,9 @@
       },
       "delete": {
         "operationId": "MongoMIResources_DeleteMongoMIRoleDefinition",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Deletes an existing Azure Cosmos DB MongoMI Role Definition.",
         "parameters": [
           {
@@ -9293,6 +9668,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases": {
       "get": {
         "operationId": "MongoDBResources_ListMongoDBDatabases",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Lists the MongoDB databases under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -9342,6 +9720,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}": {
       "get": {
         "operationId": "MongoDBResources_GetMongoDBDatabase",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Gets the MongoDB databases under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
           {
@@ -9393,6 +9774,9 @@
       },
       "put": {
         "operationId": "MongoDBResources_CreateUpdateMongoDBDatabase",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Create or updates Azure Cosmos DB MongoDB database",
         "parameters": [
           {
@@ -9480,6 +9864,9 @@
       },
       "delete": {
         "operationId": "MongoDBResources_DeleteMongoDBDatabase",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Deletes an existing Azure Cosmos DB MongoDB database.",
         "parameters": [
           {
@@ -9548,6 +9935,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections": {
       "get": {
         "operationId": "MongoDBResources_ListMongoDBCollections",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Lists the MongoDB collection under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -9604,6 +9994,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}": {
       "get": {
         "operationId": "MongoDBResources_GetMongoDBCollection",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Gets the MongoDB collection under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -9662,6 +10055,9 @@
       },
       "put": {
         "operationId": "MongoDBResources_CreateUpdateMongoDBCollection",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Create or update an Azure Cosmos DB MongoDB Collection",
         "parameters": [
           {
@@ -9756,6 +10152,9 @@
       },
       "delete": {
         "operationId": "MongoDBResources_DeleteMongoDBCollection",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Deletes an existing Azure Cosmos DB MongoDB Collection.",
         "parameters": [
           {
@@ -9831,6 +10230,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/partitionMerge": {
       "post": {
         "operationId": "MongoDBResources_ListMongoDBCollectionPartitionMerge",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Merges the partitions of a MongoDB Collection",
         "parameters": [
           {
@@ -9924,6 +10326,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/retrieveContinuousBackupInformation": {
       "post": {
         "operationId": "MongoDBResources_RetrieveContinuousBackupInformation",
+        "tags": [
+          "Restorables"
+        ],
         "description": "Retrieves continuous backup information for a Mongodb collection.",
         "parameters": [
           {
@@ -10012,6 +10417,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/default": {
       "get": {
         "operationId": "MongoDBResources_GetMongoDBCollectionThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Gets the RUs per second of the MongoDB collection under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
           {
@@ -10070,6 +10478,9 @@
       },
       "put": {
         "operationId": "MongoDBResources_UpdateMongoDBCollectionThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Update the RUs per second of an Azure Cosmos DB MongoDB collection",
         "parameters": [
           {
@@ -10163,6 +10574,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
         "operationId": "MongoDBResources_MigrateMongoDBCollectionToAutoscale",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Migrate an Azure Cosmos DB MongoDB collection from manual throughput to autoscale",
         "parameters": [
           {
@@ -10247,6 +10661,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
         "operationId": "MongoDBResources_MigrateMongoDBCollectionToManualThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Migrate an Azure Cosmos DB MongoDB collection from autoscale to manual throughput",
         "parameters": [
           {
@@ -10331,6 +10748,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/default/redistributeThroughput": {
       "post": {
         "operationId": "MongoDBResources_MongoDBContainerRedistributeThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Redistribute throughput for an Azure Cosmos DB MongoDB container",
         "parameters": [
           {
@@ -10424,6 +10844,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/default/retrieveThroughputDistribution": {
       "post": {
         "operationId": "MongoDBResources_MongoDBContainerRetrieveThroughputDistribution",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Retrieve throughput distribution for an Azure Cosmos DB MongoDB container",
         "parameters": [
           {
@@ -10517,6 +10940,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/partitionMerge": {
       "post": {
         "operationId": "MongoDBResources_MongoDBDatabasePartitionMerge",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Merges the partitions of a MongoDB database",
         "parameters": [
           {
@@ -10603,6 +11029,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/throughputSettings/default": {
       "get": {
         "operationId": "MongoDBResources_GetMongoDBDatabaseThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Gets the RUs per second of the MongoDB database under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
           {
@@ -10654,6 +11083,9 @@
       },
       "put": {
         "operationId": "MongoDBResources_UpdateMongoDBDatabaseThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Update RUs per second of the an Azure Cosmos DB MongoDB database",
         "parameters": [
           {
@@ -10740,6 +11172,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
         "operationId": "MongoDBResources_MigrateMongoDBDatabaseToAutoscale",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Migrate an Azure Cosmos DB MongoDB database from manual throughput to autoscale",
         "parameters": [
           {
@@ -10817,6 +11252,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
         "operationId": "MongoDBResources_MigrateMongoDBDatabaseToManualThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Migrate an Azure Cosmos DB MongoDB database from autoscale to manual throughput",
         "parameters": [
           {
@@ -10894,6 +11332,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/throughputSettings/default/redistributeThroughput": {
       "post": {
         "operationId": "MongoDBResources_MongoDBDatabaseRedistributeThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Redistribute throughput for an Azure Cosmos DB MongoDB database",
         "parameters": [
           {
@@ -10980,6 +11421,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/throughputSettings/default/retrieveThroughputDistribution": {
       "post": {
         "operationId": "MongoDBResources_MongoDBDatabaseRetrieveThroughputDistribution",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Retrieve throughput distribution for an Azure Cosmos DB MongoDB database",
         "parameters": [
           {
@@ -11066,6 +11510,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbRoleDefinitions": {
       "get": {
         "operationId": "MongoDBResources_ListMongoRoleDefinitions",
+        "tags": [
+          "Mongorbacs"
+        ],
         "description": "Retrieves the list of all Azure Cosmos DB Mongo Role Definitions.",
         "parameters": [
           {
@@ -11115,6 +11562,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbRoleDefinitions/{mongoRoleDefinitionId}": {
       "get": {
         "operationId": "MongoDBResources_GetMongoRoleDefinition",
+        "tags": [
+          "Mongorbacs"
+        ],
         "description": "Retrieves the properties of an existing Azure Cosmos DB Mongo Role Definition with the given Id.",
         "parameters": [
           {
@@ -11166,6 +11616,9 @@
       },
       "put": {
         "operationId": "MongoDBResources_CreateUpdateMongoRoleDefinition",
+        "tags": [
+          "Mongorbacs"
+        ],
         "description": "Creates or updates an Azure Cosmos DB Mongo Role Definition.",
         "parameters": [
           {
@@ -11245,6 +11698,9 @@
       },
       "delete": {
         "operationId": "MongoDBResources_DeleteMongoRoleDefinition",
+        "tags": [
+          "Mongorbacs"
+        ],
         "description": "Deletes an existing Azure Cosmos DB Mongo Role Definition.",
         "parameters": [
           {
@@ -11316,6 +11772,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbUserDefinitions": {
       "get": {
         "operationId": "MongoDBResources_ListMongoUserDefinitions",
+        "tags": [
+          "Mongorbacs"
+        ],
         "description": "Retrieves the list of all Azure Cosmos DB Mongo User Definition.",
         "parameters": [
           {
@@ -11365,6 +11824,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbUserDefinitions/{mongoUserDefinitionId}": {
       "get": {
         "operationId": "MongoDBResources_GetMongoUserDefinition",
+        "tags": [
+          "Mongorbacs"
+        ],
         "description": "Retrieves the properties of an existing Azure Cosmos DB Mongo User Definition with the given Id.",
         "parameters": [
           {
@@ -11416,6 +11878,9 @@
       },
       "put": {
         "operationId": "MongoDBResources_CreateUpdateMongoUserDefinition",
+        "tags": [
+          "Mongorbacs"
+        ],
         "description": "Creates or updates an Azure Cosmos DB Mongo User Definition.",
         "parameters": [
           {
@@ -11495,6 +11960,9 @@
       },
       "delete": {
         "operationId": "MongoDBResources_DeleteMongoUserDefinition",
+        "tags": [
+          "Mongorbacs"
+        ],
         "description": "Deletes an existing Azure Cosmos DB Mongo User Definition.",
         "parameters": [
           {
@@ -12271,6 +12739,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/offlineRegion": {
       "post": {
         "operationId": "DatabaseAccounts_OfflineRegion",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Offline the specified region for the specified Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -12346,6 +12817,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/onlineRegion": {
       "post": {
         "operationId": "DatabaseAccounts_OnlineRegion",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Online the specified region for the specified Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -12421,6 +12895,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/percentile/metrics": {
       "get": {
         "operationId": "Percentile_ListMetrics",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Retrieves the metrics determined by the given filter for the given database account. This url is only for PBS and Replication Latency data",
         "parameters": [
           {
@@ -12844,6 +13321,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/readonlykeys": {
       "get": {
         "operationId": "DatabaseAccounts_GetReadOnlyKeys",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Lists the read-only access keys for the specified Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -12888,6 +13368,9 @@
       },
       "post": {
         "operationId": "DatabaseAccounts_ListReadOnlyKeys",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Lists the read-only access keys for the specified Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -12934,6 +13417,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/regenerateKey": {
       "post": {
         "operationId": "DatabaseAccounts_RegenerateKey",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Regenerates an access key for the specified Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -13009,6 +13495,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/region/{region}/databases/{databaseRid}/collections/{collectionRid}/metrics": {
       "get": {
         "operationId": "CollectionRegion_ListMetrics",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Retrieves the metrics determined by the given filter for the given database account, collection and region.",
         "parameters": [
           {
@@ -13086,6 +13575,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/region/{region}/databases/{databaseRid}/collections/{collectionRid}/partitionKeyRangeId/{partitionKeyRangeId}/metrics": {
       "get": {
         "operationId": "PartitionKeyRangeIdRegion_ListMetrics",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Retrieves the metrics determined by the given filter for the given partition key range id and region.",
         "parameters": [
           {
@@ -13170,6 +13662,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/region/{region}/databases/{databaseRid}/collections/{collectionRid}/partitions/metrics": {
       "get": {
         "operationId": "CollectionPartitionRegion_ListMetrics",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Retrieves the metrics determined by the given filter for the given collection and region, split by partition.",
         "parameters": [
           {
@@ -13247,6 +13742,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/region/{region}/metrics": {
       "get": {
         "operationId": "DatabaseAccountRegion_ListMetrics",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Retrieves the metrics determined by the given filter for the given database account and region.",
         "parameters": [
           {
@@ -13310,6 +13808,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/services": {
       "get": {
         "operationId": "Service_List",
+        "tags": [
+          "Services"
+        ],
         "description": "Gets the status of service.",
         "parameters": [
           {
@@ -13611,6 +14112,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sourceRegion/{sourceRegion}/targetRegion/{targetRegion}/percentile/metrics": {
       "get": {
         "operationId": "PercentileSourceTarget_ListMetrics",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Retrieves the metrics determined by the given filter for the given account, source and target region. This url is only for PBS and Replication Latency data",
         "parameters": [
           {
@@ -13681,6 +14185,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases": {
       "get": {
         "operationId": "SqlResources_ListSqlDatabases",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Lists the SQL databases under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -13730,6 +14237,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}": {
       "get": {
         "operationId": "SqlResources_GetSqlDatabase",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Gets the SQL database under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
           {
@@ -13781,6 +14291,9 @@
       },
       "put": {
         "operationId": "SqlResources_CreateUpdateSqlDatabase",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Create or update an Azure Cosmos DB SQL database",
         "parameters": [
           {
@@ -13868,6 +14381,9 @@
       },
       "delete": {
         "operationId": "SqlResources_DeleteSqlDatabase",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Deletes an existing Azure Cosmos DB SQL database.",
         "parameters": [
           {
@@ -13936,6 +14452,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/clientEncryptionKeys": {
       "get": {
         "operationId": "SqlResources_ListClientEncryptionKeys",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Lists the ClientEncryptionKeys under an existing Azure Cosmos DB SQL database.",
         "parameters": [
           {
@@ -13992,6 +14511,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/clientEncryptionKeys/{clientEncryptionKeyName}": {
       "get": {
         "operationId": "SqlResources_GetClientEncryptionKey",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Gets the ClientEncryptionKey under an existing Azure Cosmos DB SQL database.",
         "parameters": [
           {
@@ -14050,6 +14572,9 @@
       },
       "put": {
         "operationId": "SqlResources_CreateUpdateClientEncryptionKey",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Create or update a ClientEncryptionKey. This API is meant to be invoked via tools such as the Azure Powershell (instead of directly).",
         "parameters": [
           {
@@ -14143,6 +14668,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers": {
       "get": {
         "operationId": "SqlResources_ListSqlContainers",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Lists the SQL container under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -14199,6 +14727,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}": {
       "get": {
         "operationId": "SqlResources_GetSqlContainer",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Gets the SQL container under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -14257,6 +14788,9 @@
       },
       "put": {
         "operationId": "SqlResources_CreateUpdateSqlContainer",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Create or update an Azure Cosmos DB SQL container",
         "parameters": [
           {
@@ -14354,6 +14888,9 @@
       },
       "delete": {
         "operationId": "SqlResources_DeleteSqlContainer",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Deletes an existing Azure Cosmos DB SQL container.",
         "parameters": [
           {
@@ -14429,6 +14966,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/partitionMerge": {
       "post": {
         "operationId": "SqlResources_ListSqlContainerPartitionMerge",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Merges the partitions of a SQL Container",
         "parameters": [
           {
@@ -14517,6 +15057,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/retrieveContinuousBackupInformation": {
       "post": {
         "operationId": "SqlResources_RetrieveContinuousBackupInformation",
+        "tags": [
+          "Restorables"
+        ],
         "description": "Retrieves continuous backup information for a container resource.",
         "parameters": [
           {
@@ -14605,6 +15148,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/storedProcedures": {
       "get": {
         "operationId": "SqlResources_ListSqlStoredProcedures",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Lists the SQL storedProcedure under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -14668,6 +15214,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/storedProcedures/{storedProcedureName}": {
       "get": {
         "operationId": "SqlResources_GetSqlStoredProcedure",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Gets the SQL storedProcedure under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -14733,6 +15282,9 @@
       },
       "put": {
         "operationId": "SqlResources_CreateUpdateSqlStoredProcedure",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Create or update an Azure Cosmos DB SQL storedProcedure",
         "parameters": [
           {
@@ -14831,6 +15383,9 @@
       },
       "delete": {
         "operationId": "SqlResources_DeleteSqlStoredProcedure",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Deletes an existing Azure Cosmos DB SQL storedProcedure.",
         "parameters": [
           {
@@ -14913,6 +15468,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/default": {
       "get": {
         "operationId": "SqlResources_GetSqlContainerThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Gets the RUs per second of the SQL container under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -14971,6 +15529,9 @@
       },
       "put": {
         "operationId": "SqlResources_UpdateSqlContainerThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Update RUs per second of an Azure Cosmos DB SQL container",
         "parameters": [
           {
@@ -15064,6 +15625,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
         "operationId": "SqlResources_MigrateSqlContainerToAutoscale",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Migrate an Azure Cosmos DB SQL container from manual throughput to autoscale",
         "parameters": [
           {
@@ -15143,6 +15707,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
         "operationId": "SqlResources_MigrateSqlContainerToManualThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Migrate an Azure Cosmos DB SQL container from autoscale to manual throughput",
         "parameters": [
           {
@@ -15222,6 +15789,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/default/redistributeThroughput": {
       "post": {
         "operationId": "SqlResources_SqlContainerRedistributeThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Redistribute throughput for an Azure Cosmos DB SQL container",
         "parameters": [
           {
@@ -15310,6 +15880,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/default/retrieveThroughputDistribution": {
       "post": {
         "operationId": "SqlResources_SqlContainerRetrieveThroughputDistribution",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Retrieve throughput distribution for an Azure Cosmos DB SQL container",
         "parameters": [
           {
@@ -15398,6 +15971,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/triggers": {
       "get": {
         "operationId": "SqlResources_ListSqlTriggers",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Lists the SQL trigger under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -15461,6 +16037,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/triggers/{triggerName}": {
       "get": {
         "operationId": "SqlResources_GetSqlTrigger",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Gets the SQL trigger under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -15526,6 +16105,9 @@
       },
       "put": {
         "operationId": "SqlResources_CreateUpdateSqlTrigger",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Create or update an Azure Cosmos DB SQL trigger",
         "parameters": [
           {
@@ -15624,6 +16206,9 @@
       },
       "delete": {
         "operationId": "SqlResources_DeleteSqlTrigger",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Deletes an existing Azure Cosmos DB SQL trigger.",
         "parameters": [
           {
@@ -15706,6 +16291,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/userDefinedFunctions": {
       "get": {
         "operationId": "SqlResources_ListSqlUserDefinedFunctions",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Lists the SQL userDefinedFunction under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -15769,6 +16357,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/userDefinedFunctions/{userDefinedFunctionName}": {
       "get": {
         "operationId": "SqlResources_GetSqlUserDefinedFunction",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Gets the SQL userDefinedFunction under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -15834,6 +16425,9 @@
       },
       "put": {
         "operationId": "SqlResources_CreateUpdateSqlUserDefinedFunction",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Create or update an Azure Cosmos DB SQL userDefinedFunction",
         "parameters": [
           {
@@ -15932,6 +16526,9 @@
       },
       "delete": {
         "operationId": "SqlResources_DeleteSqlUserDefinedFunction",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Deletes an existing Azure Cosmos DB SQL userDefinedFunction.",
         "parameters": [
           {
@@ -16014,6 +16611,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/partitionMerge": {
       "post": {
         "operationId": "SqlResources_SqlDatabasePartitionMerge",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Merges the partitions of a SQL database",
         "parameters": [
           {
@@ -16100,6 +16700,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/default": {
       "get": {
         "operationId": "SqlResources_GetSqlDatabaseThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Gets the RUs per second of the SQL database under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
           {
@@ -16151,6 +16754,9 @@
       },
       "put": {
         "operationId": "SqlResources_UpdateSqlDatabaseThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Update RUs per second of an Azure Cosmos DB SQL database",
         "parameters": [
           {
@@ -16237,6 +16843,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
         "operationId": "SqlResources_MigrateSqlDatabaseToAutoscale",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Migrate an Azure Cosmos DB SQL database from manual throughput to autoscale",
         "parameters": [
           {
@@ -16314,6 +16923,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
         "operationId": "SqlResources_MigrateSqlDatabaseToManualThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Migrate an Azure Cosmos DB SQL database from autoscale to manual throughput",
         "parameters": [
           {
@@ -16391,6 +17003,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/default/redistributeThroughput": {
       "post": {
         "operationId": "SqlResources_SqlDatabaseRedistributeThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Redistribute throughput for an Azure Cosmos DB SQL database",
         "parameters": [
           {
@@ -16477,6 +17092,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/default/retrieveThroughputDistribution": {
       "post": {
         "operationId": "SqlResources_SqlDatabaseRetrieveThroughputDistribution",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Retrieve throughput distribution for an Azure Cosmos DB SQL database",
         "parameters": [
           {
@@ -16563,6 +17181,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlRoleAssignments": {
       "get": {
         "operationId": "SqlResources_ListSqlRoleAssignments",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Retrieves the list of all Azure Cosmos DB SQL Role Assignments.",
         "parameters": [
           {
@@ -16612,6 +17233,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlRoleAssignments/{roleAssignmentId}": {
       "get": {
         "operationId": "SqlResources_GetSqlRoleAssignment",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Retrieves the properties of an existing Azure Cosmos DB SQL Role Assignment with the given Id.",
         "parameters": [
           {
@@ -16663,6 +17287,9 @@
       },
       "put": {
         "operationId": "SqlResources_CreateUpdateSqlRoleAssignment",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Creates or updates an Azure Cosmos DB SQL Role Assignment.",
         "parameters": [
           {
@@ -16742,6 +17369,9 @@
       },
       "delete": {
         "operationId": "SqlResources_DeleteSqlRoleAssignment",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Deletes an existing Azure Cosmos DB SQL Role Assignment.",
         "parameters": [
           {
@@ -16813,6 +17443,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlRoleDefinitions": {
       "get": {
         "operationId": "SqlResources_ListSqlRoleDefinitions",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Retrieves the list of all Azure Cosmos DB SQL Role Definitions.",
         "parameters": [
           {
@@ -16862,6 +17495,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlRoleDefinitions/{roleDefinitionId}": {
       "get": {
         "operationId": "SqlResources_GetSqlRoleDefinition",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Retrieves the properties of an existing Azure Cosmos DB SQL Role Definition with the given Id.",
         "parameters": [
           {
@@ -16913,6 +17549,9 @@
       },
       "put": {
         "operationId": "SqlResources_CreateUpdateSqlRoleDefinition",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Creates or updates an Azure Cosmos DB SQL Role Definition.",
         "parameters": [
           {
@@ -16992,6 +17631,9 @@
       },
       "delete": {
         "operationId": "SqlResources_DeleteSqlRoleDefinition",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Deletes an existing Azure Cosmos DB SQL Role Definition.",
         "parameters": [
           {
@@ -17063,6 +17705,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tableRoleAssignments": {
       "get": {
         "operationId": "TableResources_ListTableRoleAssignments",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Retrieves the list of all Azure Cosmos DB Table Role Assignments.",
         "parameters": [
           {
@@ -17112,6 +17757,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tableRoleAssignments/{roleAssignmentId}": {
       "get": {
         "operationId": "TableResources_GetTableRoleAssignment",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Retrieves the properties of an existing Azure Cosmos DB Table Role Assignment with the given Id.",
         "parameters": [
           {
@@ -17163,6 +17811,9 @@
       },
       "put": {
         "operationId": "TableResources_CreateUpdateTableRoleAssignment",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Creates or updates an Azure Cosmos DB Table Role Assignment.",
         "parameters": [
           {
@@ -17247,6 +17898,9 @@
       },
       "delete": {
         "operationId": "TableResources_DeleteTableRoleAssignment",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Deletes an existing Azure Cosmos DB Table Role Assignment.",
         "parameters": [
           {
@@ -17318,6 +17972,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tableRoleDefinitions": {
       "get": {
         "operationId": "TableResources_ListTableRoleDefinitions",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Retrieves the list of all Azure Cosmos DB Table Role Definitions.",
         "parameters": [
           {
@@ -17367,6 +18024,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tableRoleDefinitions/{roleDefinitionId}": {
       "get": {
         "operationId": "TableResources_GetTableRoleDefinition",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Retrieves the properties of an existing Azure Cosmos DB Table Role Definition with the given Id.",
         "parameters": [
           {
@@ -17418,6 +18078,9 @@
       },
       "put": {
         "operationId": "TableResources_CreateUpdateTableRoleDefinition",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Creates or updates an Azure Cosmos DB Table Role Definition.",
         "parameters": [
           {
@@ -17497,6 +18160,9 @@
       },
       "delete": {
         "operationId": "TableResources_DeleteTableRoleDefinition",
+        "tags": [
+          "Rbacs"
+        ],
         "description": "Deletes an existing Azure Cosmos DB Table Role Definition.",
         "parameters": [
           {
@@ -17568,6 +18234,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tables": {
       "get": {
         "operationId": "TableResources_ListTables",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Lists the Tables under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
@@ -17617,6 +18286,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tables/{tableName}": {
       "get": {
         "operationId": "TableResources_GetTable",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Gets the Tables under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
           {
@@ -17668,6 +18340,9 @@
       },
       "put": {
         "operationId": "TableResources_CreateUpdateTable",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Create or update an Azure Cosmos DB Table",
         "parameters": [
           {
@@ -17752,6 +18427,9 @@
       },
       "delete": {
         "operationId": "TableResources_DeleteTable",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Deletes an existing Azure Cosmos DB Table.",
         "parameters": [
           {
@@ -17820,6 +18498,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tables/{tableName}/retrieveContinuousBackupInformation": {
       "post": {
         "operationId": "TableResources_RetrieveContinuousBackupInformation",
+        "tags": [
+          "Restorables"
+        ],
         "description": "Retrieves continuous backup information for a table.",
         "parameters": [
           {
@@ -17901,6 +18582,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tables/{tableName}/throughputSettings/default": {
       "get": {
         "operationId": "TableResources_GetTableThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Gets the RUs per second of the Table under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
           {
@@ -17952,6 +18636,9 @@
       },
       "put": {
         "operationId": "TableResources_UpdateTableThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Update RUs per second of an Azure Cosmos DB Table",
         "parameters": [
           {
@@ -18038,6 +18725,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tables/{tableName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
         "operationId": "TableResources_MigrateTableToAutoscale",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Migrate an Azure Cosmos DB Table from manual throughput to autoscale",
         "parameters": [
           {
@@ -18115,6 +18805,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tables/{tableName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
         "operationId": "TableResources_MigrateTableToManualThroughput",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Migrate an Azure Cosmos DB Table from autoscale to manual throughput",
         "parameters": [
           {
@@ -18192,6 +18885,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/targetRegion/{targetRegion}/percentile/metrics": {
       "get": {
         "operationId": "PercentileTarget_ListMetrics",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Retrieves the metrics determined by the given filter for the given account target region. This url is only for PBS and Replication Latency data",
         "parameters": [
           {
@@ -18255,6 +18951,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/usages": {
       "get": {
         "operationId": "DatabaseAccounts_ListUsages",
+        "tags": [
+          "CosmosDB"
+        ],
         "description": "Retrieves the usages (most recent data) for the given database account.",
         "parameters": [
           {
@@ -18353,6 +19052,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/fleets/{fleetName}": {
       "get": {
         "operationId": "Fleet_Get",
+        "tags": [
+          "Fleets"
+        ],
         "description": "Retrieves the properties of an existing Azure Cosmos DB fleet under a subscription",
         "parameters": [
           {
@@ -18397,6 +19099,9 @@
       },
       "put": {
         "operationId": "Fleet_Create",
+        "tags": [
+          "Fleets"
+        ],
         "description": "Creates an Azure Cosmos DB fleet under a subscription.",
         "parameters": [
           {
@@ -18456,6 +19161,9 @@
       },
       "patch": {
         "operationId": "Fleet_Update",
+        "tags": [
+          "Fleets"
+        ],
         "description": "Updates the properties of an existing Azure Cosmos DB Fleet.",
         "parameters": [
           {
@@ -18509,6 +19217,9 @@
       },
       "delete": {
         "operationId": "Fleet_Delete",
+        "tags": [
+          "Fleets"
+        ],
         "description": "Deletes an existing Azure Cosmos DB Fleet.",
         "parameters": [
           {
@@ -18823,6 +19534,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/fleets/{fleetName}/fleetspaces": {
       "get": {
         "operationId": "Fleetspace_List",
+        "tags": [
+          "Fleets"
+        ],
         "description": "Lists all the fleetspaces under a fleet.",
         "parameters": [
           {
@@ -18872,6 +19586,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/fleets/{fleetName}/fleetspaces/{fleetspaceName}": {
       "get": {
         "operationId": "Fleetspace_Get",
+        "tags": [
+          "Fleets"
+        ],
         "description": "Retrieves the properties of an existing Azure Cosmos DB fleetspace under a fleet",
         "parameters": [
           {
@@ -18926,6 +19643,9 @@
       },
       "put": {
         "operationId": "Fleetspace_Create",
+        "tags": [
+          "Fleets"
+        ],
         "description": "Creates an Azure Cosmos DB fleetspace under a fleet.",
         "parameters": [
           {
@@ -19011,6 +19731,9 @@
       },
       "patch": {
         "operationId": "Fleetspace_Update",
+        "tags": [
+          "Fleets"
+        ],
         "description": "Update the properties of an existing Azure Cosmos DB fleetspace under a fleet.",
         "parameters": [
           {
@@ -19098,6 +19821,9 @@
       },
       "delete": {
         "operationId": "Fleetspace_Delete",
+        "tags": [
+          "Fleets"
+        ],
         "description": "Deletes an existing Azure Cosmos DB Fleetspace.",
         "parameters": [
           {
@@ -19174,6 +19900,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/fleets/{fleetName}/fleetspaces/{fleetspaceName}/fleetspaceAccounts": {
       "get": {
         "operationId": "FleetspaceAccount_List",
+        "tags": [
+          "Fleets"
+        ],
         "description": "Lists all the fleetspaces accounts  under a fleetspace.",
         "parameters": [
           {
@@ -19233,6 +19962,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/fleets/{fleetName}/fleetspaces/{fleetspaceName}/fleetspaceAccounts/{fleetspaceAccountName}": {
       "get": {
         "operationId": "FleetspaceAccount_Get",
+        "tags": [
+          "Fleets"
+        ],
         "description": "Retrieves the properties of an existing Azure Cosmos DB fleetspace account under a fleetspace",
         "parameters": [
           {
@@ -19297,6 +20029,9 @@
       },
       "put": {
         "operationId": "FleetspaceAccount_Create",
+        "tags": [
+          "Fleets"
+        ],
         "description": "Creates an Azure Cosmos DB fleetspace account under a fleetspace.",
         "parameters": [
           {
@@ -19392,6 +20127,9 @@
       },
       "delete": {
         "operationId": "FleetspaceAccount_Delete",
+        "tags": [
+          "Fleets"
+        ],
         "description": "Removes an existing Azure Cosmos DB fleetspace account from a fleetspace.",
         "parameters": [
           {

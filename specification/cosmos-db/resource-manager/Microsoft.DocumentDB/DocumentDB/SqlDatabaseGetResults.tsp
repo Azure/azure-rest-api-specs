@@ -43,6 +43,7 @@ model SqlDatabaseGetResults
 }
 
 @armResourceOperations(#{ omitTags: true })
+@tag("CosmosDB")
 interface SqlResources {
   /**
    * Gets the SQL database under an existing Azure Cosmos DB database account with the provided name.

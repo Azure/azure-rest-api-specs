@@ -27,6 +27,7 @@ model ClientEncryptionKeyGetResults
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@tag("CosmosDB")
 interface ClientEncryptionKeyGetResultsOperationGroup {
   /**
    * Gets the ClientEncryptionKey under an existing Azure Cosmos DB SQL database.

@@ -26,6 +26,7 @@ model SqlRoleAssignmentGetResults
 }
 
 @armResourceOperations(#{ omitTags: true })
+@tag("Rbacs")
 interface SqlRoleAssignmentGetResultsOperationGroup {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB SQL Role Assignment with the given Id.

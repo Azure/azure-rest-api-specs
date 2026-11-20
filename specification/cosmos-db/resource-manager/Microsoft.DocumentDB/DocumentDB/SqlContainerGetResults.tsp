@@ -47,12 +47,14 @@ interface SqlContainerGetResultsOperationGroup {
   /**
    * Gets the SQL container under an existing Azure Cosmos DB database account.
    */
+  @tag("CosmosDB")
   getSqlContainer is ArmResourceRead<SqlContainerGetResults>;
 
   /**
    * Create or update an Azure Cosmos DB SQL container
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("CosmosDB")
   createUpdateSqlContainer is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlContainerGetResults,
     Request = SqlContainerCreateUpdateParameters,
@@ -65,6 +67,7 @@ interface SqlContainerGetResultsOperationGroup {
   /**
    * Deletes an existing Azure Cosmos DB SQL container.
    */
+  @tag("CosmosDB")
   deleteSqlContainer is ArmResourceDeleteWithoutOkAsync<
     SqlContainerGetResults,
     Response =
@@ -75,6 +78,7 @@ interface SqlContainerGetResultsOperationGroup {
   /**
    * Lists the SQL container under an existing Azure Cosmos DB database account.
    */
+  @tag("CosmosDB")
   listSqlContainers is ArmResourceListByParent<
     SqlContainerGetResults,
     Response = ArmResponse<SqlContainerListResult>
@@ -87,6 +91,7 @@ interface SqlContainerGetResultsOperationGroup {
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
   @action("partitionMerge")
+  @tag("CosmosDB")
   listSqlContainerPartitionMerge is ArmResourceActionAsyncBase<
     SqlContainerGetResults,
     MergeParameters,
@@ -100,6 +105,7 @@ interface SqlContainerGetResultsOperationGroup {
   /**
    * Retrieves continuous backup information for a container resource.
    */
+  @tag("Restorables")
   retrieveContinuousBackupInformation is ArmResourceActionAsync<
     SqlContainerGetResults,
     ContinuousBackupRestoreLocation,

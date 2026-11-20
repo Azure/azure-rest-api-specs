@@ -26,6 +26,7 @@ model SqlRoleDefinitionGetResults
 }
 
 @armResourceOperations(#{ omitTags: true })
+@tag("Rbacs")
 interface SqlRoleDefinitionGetResultsOperationGroup {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB SQL Role Definition with the given Id.

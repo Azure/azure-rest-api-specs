@@ -74,6 +74,7 @@ interface ServiceResources {
   /**
    * Gets the status of service.
    */
+  @tag("Services")
   list is ArmResourceListByParent<
     ServiceResource,
     Response = ArmResponse<ServiceResourceListResult>,
