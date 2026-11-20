@@ -40,7 +40,6 @@ jobs:
         with:
           sparse-checkout: |
             .github
-            eng
           persist-credentials: false
       - name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
@@ -72,6 +71,7 @@ jobs:
     if: needs.resolve.outputs.should-run == 'true'
     permissions:
       contents: read
+      pull-requests: read
       copilot-requests: write
     concurrency:
       group: >-
@@ -91,8 +91,10 @@ jobs:
             eng
           persist-credentials: false
 
-      - name: Set up Node.js and install dependencies
-        uses: ./.github/actions/setup-node-install-deps
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+        with:
+          additional-package: "@azure-tools/sdk-breaking-change-workflows"
       - name: Install Azure SDK CLI
         shell: pwsh
         run: ./eng/common/mcp/azure-sdk-mcp.ps1 -InstallDirectory $env:AZSDK_CLI_PATH
@@ -186,17 +188,23 @@ jobs:
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           PR_NUMBER: ${{ needs.resolve.outputs.pr-number }}
+          HEAD_SHA: ${{ needs.resolve.outputs.head-sha }}
         with:
           script: |
             const { resolveChangedTypeSpecConfigPathsFromPullRequest } =
-              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/resolve-analysis-inputs.ts');
+              await import('${{ github.workspace }}/.github/workflows/sdk-breaking-change/src/resolve-tsp-config-paths.ts');
             await resolveChangedTypeSpecConfigPathsFromPullRequest({
               github,
               context,
               core,
               pullNumber: Number(process.env.PR_NUMBER),
+              expectedHeadSha: process.env.HEAD_SHA,
               localSpecRepoPath: '${{ github.workspace }}/repositories/azure-rest-api-specs',
             });
+      - name: Set up Node.js and install specification repository dependencies
+        uses: ./.github/actions/setup-node-install-deps
+        with:
+          working-directory: repositories/azure-rest-api-specs
       - name: Analyze SDK projects
         id: analyze-sdk-projects
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
@@ -214,7 +222,7 @@ jobs:
         with:
           script: |
             const { analyzeSdkProjects } =
-              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/analyze-sdk-projects.ts');
+              await import('${{ github.workspace }}/.github/workflows/sdk-breaking-change/src/analyze-sdk-projects.ts');
             const typeSpecConfigPaths = process.env.TYPESPEC_CONFIG_PATHS;
             if (!typeSpecConfigPaths) {
               throw new Error(
@@ -291,7 +299,6 @@ jobs:
         with:
           sparse-checkout: |
             .github
-            eng
           persist-credentials: false
 
       - name: Install dependencies for github-script actions

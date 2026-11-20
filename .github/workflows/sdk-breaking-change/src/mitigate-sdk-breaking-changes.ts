@@ -1,6 +1,6 @@
 import { mkdir, readFile, realpath, stat, writeFile } from "node:fs/promises";
 import { dirname, isAbsolute, join, relative, sep } from "node:path";
-import { parseAzsdkResponse } from "@azure-tools/spec-gen-sdk-runner";
+import { parseAzsdkResponse } from "@azure-tools/spec-gen-sdk-runner/azsdk-adapter";
 import { execFile } from "@azure-tools/specs-shared/exec";
 import {
   AnalysisResultSchema,
@@ -9,8 +9,8 @@ import {
   type MitigatedChange,
   MarkdownHeadingId,
   SUPPRESSION_GUIDE_URL,
-} from "./types.ts";
-import type { Core } from "../github.ts";
+} from "../../src/sdk-breaking-change/types.ts";
+import type { Core } from "../../src/github.ts";
 import {
   escapeMarkdown,
   inlineCode,

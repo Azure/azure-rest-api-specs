@@ -2,20 +2,20 @@ import { mkdir, realpath, writeFile } from "node:fs/promises";
 import { basename, dirname, join } from "node:path";
 import {
   parseAzsdkResponse,
-  resolveLanguageKey,
-  resolvePackagePath,
   type AzsdkBuildResponse,
   type AzsdkDetectBreakingChangeResponse,
   type AzsdkGenerateResponse,
-} from "@azure-tools/spec-gen-sdk-runner";
+} from "@azure-tools/spec-gen-sdk-runner/azsdk-adapter";
+import { resolvePackagePath } from "@azure-tools/spec-gen-sdk-runner/command-helpers";
+import { resolveLanguageKey } from "@azure-tools/spec-gen-sdk-runner/emitter-check";
 import { execFile } from "@azure-tools/specs-shared/exec";
 import {
   generateTypeSpecMetadata,
   type TypeSpecMetadata,
 } from "@azure-tools/specs-shared/typespec-metadata";
 
-import { MarkdownHeadingId, type AnalysisResult } from "./types.ts";
-import type { Core } from "../github.ts";
+import { MarkdownHeadingId, type AnalysisResult } from "../../src/sdk-breaking-change/types.ts";
+import type { Core } from "../../src/github.ts";
 import {
   escapeMarkdown,
   inlineCode,

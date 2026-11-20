@@ -27,7 +27,6 @@ jobs:
         with:
           sparse-checkout: |
             .github
-            eng
           persist-credentials: false
 
       - name: Install dependencies for github-script actions
@@ -84,7 +83,7 @@ jobs:
       - name: Install dependencies for github-script actions
         uses: ./.github/actions/setup-node-install-deps
         with:
-          install-command: "pnpm install --frozen-lockfile --prod --prefer-offline --config.trust-lockfile=true --filter=azure-rest-api-specs-github..."
+          install-command: "pnpm install --frozen-lockfile --prod --prefer-offline --config.trust-lockfile=true --filter=azure-rest-api-specs-github... --filter=@azure-tools/sdk-breaking-change-workflows..."
           cache: "false"
 
       - name: Install Azure SDK CLI
@@ -98,11 +97,6 @@ jobs:
           path: ${{ runner.temp }}/sdk-breaking-change-analysis-results
           github-token: ${{ github.token }}
           run-id: ${{ github.event.workflow_run.id }}
-
-      - name: Set up Node.js and install specification repository dependencies
-        uses: ./.github/actions/setup-node-install-deps
-        with:
-          cache: "false"
 
       - name: Set up GitHub Copilot CLI
         id: setup-copilot-cli
@@ -128,6 +122,12 @@ jobs:
           path: repositories/azure-rest-api-specs
           persist-credentials: false
 
+      - name: Set up Node.js and install specification repository dependencies
+        uses: ./.github/actions/setup-node-install-deps
+        with:
+          working-directory: repositories/azure-rest-api-specs
+          cache: "false"
+
       - name: Mitigate SDK breaking changes
         id: mitigate-sdk-breaking-changes
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
@@ -141,7 +141,7 @@ jobs:
         with:
           script: |
             const { mitigateSdkBreakingChanges } =
-              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/mitigate-sdk-breaking-changes.ts');
+              await import('${{ github.workspace }}/.github/workflows/sdk-breaking-change/src/mitigate-sdk-breaking-changes.ts');
             await mitigateSdkBreakingChanges({
               core,
               analysisResultPath: process.env.ANALYSIS_RESULT_PATH,
@@ -250,7 +250,6 @@ jobs:
         with:
           sparse-checkout: |
             .github
-            eng
           persist-credentials: false
 
       - name: Install dependencies for github-script actions

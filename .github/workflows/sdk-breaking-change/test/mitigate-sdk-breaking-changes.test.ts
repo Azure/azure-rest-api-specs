@@ -14,8 +14,8 @@ import {
   AnalysisResultSchema,
   MitigationResultSchema,
 } from "../../src/sdk-breaking-change/types.ts";
-import { mitigateSdkBreakingChanges } from "../../src/sdk-breaking-change/mitigate-sdk-breaking-changes.ts";
-import { createMockCore } from "../mocks.ts";
+import { mitigateSdkBreakingChanges } from "../src/mitigate-sdk-breaking-changes.ts";
+import { createMockCore } from "../../test/mocks.ts";
 
 let temporaryDirectory: string;
 let analysisResultPath: string;
