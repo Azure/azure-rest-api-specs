@@ -7,7 +7,7 @@ using Azure.ResourceManager;
 namespace Microsoft.DeviceRegistry;
 
 @doc("Defines the error object with properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model Error {
   @doc("Error code for classification of errors (ex: '400', '404', '500', etc.).")
   @visibility(Lifecycle.Read)
@@ -24,7 +24,7 @@ model Error {
 }
 
 @doc("Defines the error details properties.")
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2025_10_01)
 model ErrorDetails {
   @doc("Multi-part error code for classification and root causing of errors (ex: 400.200.100.432).")
   @visibility(Lifecycle.Read)

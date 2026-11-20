@@ -25,13 +25,13 @@ model PlaywrightWorkspaceProperties {
   provisioningState?: ProvisioningState;
 
   @visibility(Lifecycle.Read)
-  @doc("The workspace data plane service API URI.")
+  @doc("The API endpoint for workspace data plane operations.")
   dataplaneUri?: url;
 
-  @doc("Controls the connection region for client workers to cloud-hosted browsers. When enabled, workers connect to browsers in the closest Azure region for lower latency. When disabled, workers connect to browsers in the Azure region where the workspace was created.")
+  @doc("Specifies where client workers connect to cloud-hosted browsers. When Enabled, workers connect to browsers in the nearest Azure region to reduce latency. When Disabled, workers connect to browsers in the workspace's Azure region.")
   regionalAffinity?: EnablementStatus = EnablementStatus.Enabled;
 
-  @doc("Enables the workspace to use local authentication through service access tokens for operations.")
+  @doc("Specifies whether service access tokens can be used to authenticate workspace operations.")
   localAuth?: EnablementStatus = EnablementStatus.Disabled;
 
   @visibility(Lifecycle.Read)
@@ -42,16 +42,16 @@ model PlaywrightWorkspaceProperties {
   workspaceId?: string;
 
   @added(Versions.v2026_02_01_preview)
-  @doc("Indicates whether reporting is enabled for the workspace. When set to true, reports will be generated and available for the workspace.")
+  @doc("Specifies whether test reporting is enabled for the workspace.")
   reporting?: EnablementStatus = EnablementStatus.Disabled;
 
   @added(Versions.v2026_01_01_preview)
-  @doc("The URI of the Azure storage account used to store workspace artifacts, test results, and reports.")
+  @doc("The URI of the Azure Storage account used to store workspace artifacts, test results, reports and browser profiles.")
   storageUri?: url;
 
   @added(Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("The ARM resource ID of the virtual network subnet to inject the workspace into for private network connectivity. This is of the form '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Network/virtualNetworks/{virtualNetwork}/subnets/{subnet}'. This value cannot be changed after the workspace is created.")
+  @doc("The Azure Resource Manager resource ID of the subnet used for private network connectivity. Before creating the workspace, ensure the subnet meets the virtual network prerequisites at https://aka.ms/pww/docs/vnet. Format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Network/virtualNetworks/{virtualNetwork}/subnets/{subnet}. This value cannot be changed after workspace creation.")
   subnetId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/virtualNetworks/subnets";
@@ -59,12 +59,24 @@ model PlaywrightWorkspaceProperties {
   ]>;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("Enables session artifact recording for the workspace.")
+  @doc("Specifies whether session artifact recording is enabled for the workspace.")
   sessionArtifacts?: EnablementStatus = EnablementStatus.Disabled;
 
   @added(Versions.v2026_10_01_preview)
   @doc("The managed identity used to manage session artifacts in the storage account.")
   storageIdentity?: ManagedIdentity;
+
+  @added(Versions.v2026_11_01_preview)
+  @doc("Specifies whether the browser proxy is enabled for the workspace.")
+  browserProxy?: EnablementStatus = EnablementStatus.Enabled;
+
+  @added(Versions.v2026_11_10_preview)
+  @doc("Specifies whether the browser profile is enabled for the workspace.")
+  browserProfile?: EnablementStatus = EnablementStatus.Enabled;
+
+  @added(Versions.v2026_11_10_preview)
+  @doc("The Web Bot Authentication settings for the workspace.")
+  webBotAuth?: WebBotAuthSettings;
 }
 
 @doc("The status of the last resource operation.")
@@ -93,13 +105,59 @@ union EnablementStatus {
   Disabled: "Disabled",
 }
 
-@added(Versions.v2026_10_01_preview)
-@doc("The managed identity used to manage session artifacts in the storage account.")
+@added(Versions.v2026_11_10_preview)
+@doc("The Web Bot Authentication settings for a workspace.")
+model WebBotAuthSettings {
+  @doc("Controls whether Web Bot Authentication is enabled for the workspace.")
+  status?: EnablementStatus;
+
+  @doc("The signing key used for Web Bot Authentication. If omitted, the service defaults to Microsoft.")
+  signingKey?: WebBotAuthSigningKey = WebBotAuthSigningKey.Microsoft;
+
+  @visibility(Lifecycle.Read)
+  @doc("The URI of the public key directory used for HTTP message signature verification. This property is returned only when signingKey is Workspace.")
+  publicKeyDirectoryUri?: url;
+}
+
+@added(Versions.v2026_11_10_preview)
+@doc("The Web Bot Authentication settings that can be updated for a workspace.")
+model WebBotAuthSettingsUpdate {
+  ...OmitProperties<
+    OmitDefaults<PickProperties<WebBotAuthSettings, "status" | "signingKey">>,
+    "signingKey"
+  >;
+
+  @doc("The signing key used for Web Bot Authentication. If omitted, the existing signing key selection is preserved.")
+  signingKey?: WebBotAuthSigningKey;
+}
+
+@added(Versions.v2026_11_10_preview)
+@doc("The workspace properties that can be updated.")
+model PlaywrightWorkspacePatchProperties {
+  ...OmitProperties<PlaywrightWorkspaceProperties, "webBotAuth">;
+
+  @doc("The Web Bot Authentication settings for the workspace.")
+  webBotAuth?: WebBotAuthSettingsUpdate;
+}
+
+@added(Versions.v2026_11_10_preview)
+@doc("The signing key used for Web Bot Authentication.")
+union WebBotAuthSigningKey {
+  string,
+
+  @doc("Use a Microsoft-managed regional signing key common to all workspaces.")
+  Microsoft: "Microsoft",
+
+  @doc("Use a workspace-specific signing key.")
+  Workspace: "Workspace",
+}
+
+@doc("Managed identity properties for accessing Azure resources.")
 model ManagedIdentity {
-  @doc("The type of managed identity used to access a resource.")
+  @doc("The managed identity type: SystemAssigned or UserAssigned.")
   type?: IdentityType;
 
-  @doc("The ARM resource ID of the user-assigned managed identity. This value is required when type is UserAssigned and must be omitted when type is SystemAssigned.")
+  @doc("The Azure Resource Manager resource ID of the user-assigned managed identity. Required when type is UserAssigned. Omit when type is SystemAssigned.")
   resourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
@@ -107,14 +165,13 @@ model ManagedIdentity {
   ]>;
 }
 
-@added(Versions.v2026_10_01_preview)
-@doc("The type of managed identity used to access a resource.")
+@doc("The type of managed identity used to access Azure resources.")
 union IdentityType {
   string,
 
-  @doc("Use the workspace system-assigned managed identity.")
+  @doc("System-assigned managed identity.")
   SystemAssigned: "SystemAssigned",
 
-  @doc("Use a user-assigned managed identity.")
+  @doc("User-assigned managed identity.")
   UserAssigned: "UserAssigned",
 }

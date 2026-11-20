@@ -1,0 +1,86 @@
+{
+  "title": "RecoveryConfigProfiles_Update",
+  "operationId": "RecoveryConfigProfiles_Update",
+  "parameters": {
+    "serviceGroupName": "contoso-service-group",
+    "recoveryPlanName": "cyber-plan",
+    "recoveryConfigProfileName": "azure-vm-default",
+    "api-version": "2026-11-30-preview",
+    "properties": {
+      "properties": {
+        "workloadConfig": {
+          "workloadType": "AzureVm",
+          "resourceGroup": {
+            "armResourceType": "Microsoft.Resources/resourceGroups",
+            "provisioningMode": "Existing",
+            "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg"
+          },
+          "virtualNetwork": {
+            "armResourceType": "Microsoft.Network/virtualNetworks",
+            "provisioningMode": "Existing",
+            "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Network/virtualNetworks/cyber-recovery-vnet"
+          },
+          "subnet": {
+            "armResourceType": "Microsoft.Network/virtualNetworks/subnets",
+            "provisioningMode": "Existing",
+            "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Network/virtualNetworks/cyber-recovery-vnet/subnets/default"
+          },
+          "storageAccount": {
+            "armResourceType": "Microsoft.Storage/storageAccounts",
+            "provisioningMode": "Existing",
+            "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Storage/storageAccounts/cyberrecoverystorage"
+          },
+          "targetNamePrefix": "updated-cr-"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/serviceGroups/contoso-service-group/providers/Microsoft.AzureResilienceManagement/recoveryPlans/cyber-plan/recoveryConfigProfiles/azure-vm-default",
+        "name": "azure-vm-default",
+        "type": "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryConfigProfiles",
+        "properties": {
+          "workloadType": "AzureVm",
+          "targetScope": {
+            "subscriptionId": "12345678-1234-1234-1234-123456789012",
+            "location": "eastus2"
+          },
+          "workloadConfig": {
+            "workloadType": "AzureVm",
+            "resourceGroup": {
+              "armResourceType": "Microsoft.Resources/resourceGroups",
+              "provisioningMode": "Existing",
+              "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg"
+            },
+            "virtualNetwork": {
+              "armResourceType": "Microsoft.Network/virtualNetworks",
+              "provisioningMode": "Existing",
+              "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Network/virtualNetworks/cyber-recovery-vnet"
+            },
+            "subnet": {
+              "armResourceType": "Microsoft.Network/virtualNetworks/subnets",
+              "provisioningMode": "Existing",
+              "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Network/virtualNetworks/cyber-recovery-vnet/subnets/default"
+            },
+            "storageAccount": {
+              "armResourceType": "Microsoft.Storage/storageAccounts",
+              "provisioningMode": "Existing",
+              "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/cyber-recovery-rg/providers/Microsoft.Storage/storageAccounts/cyberrecoverystorage"
+            },
+            "targetNamePrefix": "updated-cr-",
+            "recoveryType": "CreateNewVM"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.Management/serviceGroups/contoso-service-group/providers/Microsoft.AzureResilienceManagement/operationStatuses/00000000-0000-0000-0000-000000000001?api-version=2026-11-30-preview",
+        "Retry-After": 30
+      }
+    }
+  }
+}

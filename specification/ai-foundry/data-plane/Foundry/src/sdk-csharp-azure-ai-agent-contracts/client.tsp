@@ -22,6 +22,12 @@ namespace OpenAI {
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" ""
 @clientNamespace("Azure.AI.Agents.Contracts.V2.Models")
 namespace Azure.AI.Projects {
+  @@clientNamespace(
+    Azure.AI.ProjectsInternal,
+    "Azure.AI.Agents.Contracts.V2.Models",
+    "csharp"
+  );
+
   union _AdditionalToolTypes {
     remote_tool: "remote_tool",
   }

@@ -1,6 +1,5 @@
-# Vally eval CI for .github/skills, using the eval framework synced from azure-sdk-tools under
-# eng/common. Extends archetype-eval.yml directly; mcpSetupTemplate points at this repo's own
-# /eng/pipelines/templates/steps/eval-mcp-setup.yml (the MCP build swap point).
+# Vally eval CI for .github/skills, using the shared jobs synced from azure-sdk-tools under
+# eng/common. Pipeline-specific network settings stay in this entrypoint.
 #
 # Pilot scope: hermetic mock scenarios only, scheduled/manual runs (no pr trigger yet).
 
@@ -16,6 +15,19 @@ schedules:
         - main
     always: true
 
+resources:
+  repositories:
+    - repository: 1ESPipelineTemplates
+      type: git
+      name: 1ESPipelineTemplates/1ESPipelineTemplates
+      ref: refs/tags/release
+
+parameters:
+  - name: publishDashboardResults
+    displayName: Publish trusted main results to the eval dashboard
+    type: boolean
+    default: true
+
 variables:
   # Managed-pool image selection (LINUXPOOL/LINUXVMIMAGE). Repo-local.
   - template: /eng/pipelines/templates/variables/image.yml
@@ -24,21 +36,49 @@ variables:
   - group: AzSDK_Eval_Variable_group
 
 extends:
-  template: /eng/common/pipelines/templates/stages/archetype-eval.yml
+  ${{ if eq(variables['System.TeamProject'], 'internal') }}:
+    template: v1/1ES.Official.PipelineTemplate.yml@1ESPipelineTemplates
+  ${{ else }}:
+    template: v1/1ES.Unofficial.PipelineTemplate.yml@1ESPipelineTemplates
   parameters:
-    mcpSetupTemplate: /eng/pipelines/templates/steps/eval-mcp-setup.yml
-    TestType: mock
-    vallyRoot: .github/skills
-    # All rooted at .github/skills, so one Prepare/Eval/Summary run covers every suite
-    # (collect-stimuli.ts shards by `area` tag, falling back to parent folder name):
-    #   - '*/evals/*.eval.yaml' — trigger.eval.yaml suites, one per skill.
-    #   - '*/evals/eval.yaml'   — capability suites (plain eval.yaml, doesn't match *.eval.yaml).
-    #   - 'evals/arm-api-reviewer/vally/eval-*.yaml' — ARM API Reviewer suite (own nested
-    #     .vally.yaml/fixtures, no MCP server needed; folded in here instead of a second
-    #     pipeline since eval-shard.yml only supports one Prepare stage per pipeline).
-    evalGlobs:
-      - "*/evals/*.eval.yaml"
-      - "*/evals/eval.yaml"
-      - "evals/arm-api-reviewer/vally/eval-*.yaml"
-    # Raised from 20 to 45m to cover the ARM suite's single fallback shard (17 files, no area tags).
-    shardTimeoutInMinutes: 45
+    settings:
+      skipBuildTagsForGitHubPullRequests: true
+      ${{ if and(parameters.publishDashboardResults, eq(variables['System.CollectionUri'], 'https://dev.azure.com/azure-sdk/'), eq(variables['System.TeamProject'], 'internal'), eq(variables['Build.Repository.Name'], 'Azure/azure-rest-api-specs'), eq(variables['Build.SourceBranch'], 'refs/heads/main'), in(variables['Build.Reason'], 'IndividualCI', 'BatchedCI', 'Schedule', 'Manual')) }}:
+        networkIsolationPolicy: DefaultDeny, CFSClean, CFSClean2, CFSClean3, AzureStorage
+    sdl:
+      sourceAnalysisPool:
+        name: $(WINDOWSPOOL)
+        image: $(WINDOWSVMIMAGE)
+        os: windows
+    stages:
+      - stage: Prepare
+        displayName: Build MCP
+        jobs:
+          - template: /eng/common/pipelines/templates/jobs/build-mcp.yml@self
+            parameters:
+              mcpSetupTemplate: /eng/pipelines/templates/steps/eval-mcp-setup.yml
+              TestType: mock
+          - template: /eng/common/pipelines/templates/jobs/generate-eval-matrix.yml@self
+            parameters:
+              vallyRoot: .github/skills
+              evalGlobs:
+                - "*/evals/*.eval.yaml"
+                - "*/evals/eval.yaml"
+                - "evals/arm-api-reviewer/vally/eval-*.yaml"
+      - stage: Eval
+        displayName: Run eval shards
+        dependsOn: Prepare
+        jobs:
+          - template: /eng/common/pipelines/templates/jobs/eval-shard.yml@self
+            parameters:
+              vallyRoot: .github/skills
+              shardTimeoutInMinutes: 45
+      - stage: Summary
+        displayName: Summarize results
+        dependsOn: [Prepare, Eval]
+        condition: always()
+        jobs:
+          - template: /eng/common/pipelines/templates/jobs/eval-summarize.yml@self
+            parameters:
+              createDashboardBundle: true
+              publishDashboardResults: ${{ parameters.publishDashboardResults }}

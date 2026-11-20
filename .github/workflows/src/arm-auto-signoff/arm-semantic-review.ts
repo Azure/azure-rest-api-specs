@@ -1,4 +1,5 @@
 import { CommitStatusState } from "../../../shared/src/github.ts";
+import { includesSegment } from "../../../shared/src/path.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
 
 /*
@@ -208,7 +209,8 @@ export function evaluateSemanticReview(result: SemanticReviewResult): EvaluatedS
 /*
  * Automated-review size limits. They mirror the cap in the reviewer prompt (`arm-api-review.md`,
  * Trigger Validation); keep both in step. A PR above either limit is only partly reviewed, so a
- * human must review it. The model's own `scope` is untrusted, so these are checked independently.
+ * human must review it. Example directories do not count toward either limit. The model's own
+ * `scope` is untrusted, so these are checked independently.
  */
 const MAX_SPECIFICATION_FILES = 50;
 const MAX_SPECIFICATION_LINES = 5_000;
@@ -233,7 +235,7 @@ export type ChangedFile = {
   deletions: number;
 };
 
-/** Running totals of the `specification/` changes seen so far. */
+/** Running totals of the non-example `specification/` changes seen so far. */
 export type SpecificationTotals = { files: number; lines: number };
 
 /** The status reason for a PR whose `specification/` changes exceed the limits. */
@@ -252,7 +254,7 @@ export type SizeCheck =
  *   list is cut off. Neither can prove coverage, so a human must review.
  * - If the whole PR is within the limits, so is its `specification/` subset: nothing more to check.
  * - Otherwise the PR may still be fine (for example many docs files and few specification
- *   files), so the caller must list the files and count only `specification/` changes.
+ *   files), so the caller must list the files and count only non-example `specification/` changes.
  *
  * The reasons are fixed strings because they are published in the status; never add model output.
  */
@@ -278,8 +280,8 @@ export function checkPullRequestSize(pullRequest: PullRequestCounts): SizeCheck 
 
 /**
  * Second step of the size check, run once per page of the file list: add that page's
- * `specification/` changes to the running `totals`. A renamed or moved file counts when its old or
- * its new path is under `specification/`, so a file moved out of it is not missed.
+ * non-example `specification/` changes to the running `totals`. A renamed or moved file counts when
+ * either path is a non-example specification, so moving a spec into examples cannot hide it.
  *
  * Totals only grow, so once they are over the limits the answer is final and a caller can stop
  * reading pages.
@@ -290,10 +292,13 @@ export function addSpecificationChanges(
   totals: SpecificationTotals,
   files: ChangedFile[],
 ): boolean {
+  const isCountedSpecification = (path: string) =>
+    path.startsWith("specification/") && !includesSegment(path, "examples");
+
   for (const file of files) {
     if (
-      file.filename.startsWith("specification/") ||
-      file.previous_filename?.startsWith("specification/")
+      isCountedSpecification(file.filename) ||
+      (file.previous_filename !== undefined && isCountedSpecification(file.previous_filename))
     ) {
       totals.files++;
       totals.lines += file.additions + file.deletions;

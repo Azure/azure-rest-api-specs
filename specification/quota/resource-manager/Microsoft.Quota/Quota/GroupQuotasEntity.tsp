@@ -23,45 +23,6 @@ model GroupQuotasEntity
   >;
 }
 
-alias GroupQuotasEntitiesOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
-
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Management";
-
-    /**
-     * The management group ID.
-     */
-    @path
-    @segment("managementGroups")
-    @key
-    @minLength(3)
-    @maxLength(63)
-    managementGroupId: string;
-  },
-  {
-    ...Extension.ExtensionProviderNamespace<QuotaAllocationRequestStatus>;
-  },
-  {
-    ...Extension.ExtensionProviderNamespace<QuotaAllocationRequestStatus>;
-
-    /**
-     * The GroupQuota name. The name should be unique for the provided context tenantId/MgId.
-     */
-    @path
-    @segment("groupQuotas")
-    @minLength(3)
-    @maxLength(63)
-    @key
-    @pattern("^[a-z][a-z0-9]*$")
-    groupQuotaName: string;
-  }
->;
-
 alias groupQuotaOps = Azure.ResourceManager.Legacy.RoutedOperations<
   {
     ...ApiVersionParameter;
@@ -107,7 +68,8 @@ interface GroupQuotasEntities {
    * Creates a new GroupQuota for the name passed. A RequestId will be returned by the Service. The status can be polled periodically. The status Async polling is using standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations. Use the OperationsStatus URI provided in Azure-AsyncOperation header, the duration will be specified in retry-after header. Once the operation gets to terminal state - Succeeded | Failed, then the URI will change to Get URI and full details can be checked.
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  createOrUpdate is GroupQuotasEntitiesOps.CreateOrUpdateAsync<
+  createOrUpdate is Azure.ResourceManager.Legacy.Extension.CreateOrReplaceAsync<
+    Extension.ManagementGroup<"managementGroupId">,
     GroupQuotasEntity,
     Response =
       | ArmResourceUpdatedResponse<GroupQuotasEntity>
@@ -124,7 +86,8 @@ interface GroupQuotasEntities {
    *  Any change in the filters will be applicable to the future quota assignments, existing quota allocated to subscriptions from the GroupQuotas remains unchanged.
    */
   @patch(#{ implicitOptionality: false })
-  update is GroupQuotasEntitiesOps.CustomPatchAsync<
+  update is Azure.ResourceManager.Legacy.Extension.CustomPatchAsync<
+    Extension.ManagementGroup<"managementGroupId">,
     GroupQuotasEntity,
     PatchModel = GroupQuotasEntityPatch,
     Response =

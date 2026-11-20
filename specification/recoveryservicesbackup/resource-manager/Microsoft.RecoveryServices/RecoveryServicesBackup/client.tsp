@@ -2255,6 +2255,8 @@ op protectionPolicyOperationStatusesGet(
 @@clientName(RestoreRequestResource, "TriggerRestoreContent", "csharp");
 @@clientName(RestoreRequest, "RestoreContent", "csharp");
 @@clientName(GetRPExtendedInfoRequest, "GetRPExtendedInfoContent", "csharp");
+@@clientName(RPExtendedInfoResource, "RecoveryPointExtendedInfo", "csharp");
+@@clientName(IaasVMRPExtendedInfo, "IaasVMRecoveryPointExtendedInfo", "csharp");
 
 // .NET API review (2026-10-01 additions): align new public .NET types with naming
 // conventions. These adjust only client-facing C# names; the wire contract is unchanged.
