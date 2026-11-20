@@ -1322,7 +1322,7 @@ describe("TypeSpec metadata resolution", () => {
     expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
   });
 
-  it("identifies differing metadata versions as requiring manual selection", () => {
+  it("uses the unversioned flow when metadata contains differing API versions", () => {
     const metadata = createMetadata({
       csharp: [
         {
