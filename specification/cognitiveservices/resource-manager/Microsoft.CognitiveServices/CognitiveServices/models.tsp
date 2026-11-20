@@ -6992,7 +6992,7 @@ model AdapterDeploymentProperties {
    * deployment's value until atomic cutover.
    * Example: { agentsV2: "true" }.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<capabilities> type used for 'AdapterDeploymentProperties' to support extensible key-value pairs matching service behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Read-only projection of the serving managed compute deployment's capabilities map; capability names are dynamic (e.g. agentsV2) and cannot be enumerated as fixed properties. Same pattern as ManagedComputeDeploymentProperties.capabilities."
   @added(Versions.v2026_11_15_preview)
   @visibility(Lifecycle.Read)
   capabilities?: Record<string>;
