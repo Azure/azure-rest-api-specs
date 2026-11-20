@@ -57,7 +57,7 @@ interface InterconnectBlocks {
   >;
 
   /**
-   * Creates or updates an Interconnect Block. When updating an Interconnect Block, only tags and sku.capacity may be modified.
+   * Creates or updates an Interconnect Block. When updating an Interconnect Block, only tags, sku.capacity and properties.sharingProfile may be modified. **Note:** Minimum api-version for properties.sharingProfile: 2026-09-01.
    */
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     InterconnectBlock,
@@ -66,7 +66,7 @@ interface InterconnectBlocks {
   >;
 
   /**
-   * Updates an Interconnect Block. When updating an Interconnect Block, only tags and sku.capacity may be modified.
+   * Updates an Interconnect Block. When updating an Interconnect Block, only tags, sku.capacity and properties.sharingProfile may be modified. **Note:** Minimum api-version for properties.sharingProfile: 2026-09-01.
    */
   @patch(#{ implicitOptionality: false })
   update is ComputeCustomPatchAsync<
