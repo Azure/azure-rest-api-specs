@@ -13,6 +13,7 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
   "@azure-typespec/http-client-csharp-mgmt":
+    api-version: "2026-11-01"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     package-name: "Azure.ResourceManager.ContainerRegistry"
     namespace: "Azure.ResourceManager.ContainerRegistry"
@@ -22,6 +23,7 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     api-version: "2025-11-01"
   "@azure-tools/typespec-python":
+    api-version: "2026-11-01"
     service-dir: "sdk/containerregistry"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-containerregistry"
     namespace: "azure.mgmt.containerregistry"
@@ -29,16 +31,20 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
+    api-version: "2026-11-01"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-containerregistry"
     namespace: "com.azure.resourcemanager.containerregistry"
     service-name: "Container Registry"
     flavor: azure
     premium: true
+    preserve-model:
+      - TriggerStatus
     enable-sync-stack: false
     use-object-for-unknown: true
     client-side-validations: true
     generate-tests: false
   "@azure-tools/typespec-ts":
+    api-version: "2026-11-01"
     emitter-output-dir: "{output-dir}/{service-dir}/arm-containerregistry"
     flavor: azure
     experimental-extensible-enums: true
@@ -46,6 +52,7 @@ options:
     package-details:
       name: "@azure/arm-containerregistry"
   "@azure-tools/typespec-go":
+    api-version: "2026-11-01"
     service-dir: "sdk/resourcemanager/containerregistry"
     emitter-output-dir: "{output-dir}/{service-dir}/armcontainerregistry"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcontainerregistry"
