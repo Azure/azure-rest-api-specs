@@ -45,7 +45,14 @@ model WidgetSuite {
 
 @doc("Usage statistics for a widget over the last 30 days.")
 @added(Versions.v2026_12_01_Preview)
+@resource("usage")
+@parentResource(WidgetSuite)
 model WidgetUsage {
+  @key("usageId")
+  @doc("The usage singleton identifier.")
+  @visibility(Lifecycle.Read)
+  id: "current";
+
   @doc("The number of times the widget was used in the last 30 days.")
   usageCount: int64;
 
@@ -81,7 +88,5 @@ interface Widgets {
 
   @doc("Get how many times a Widget was used in the last 30 days.")
   @added(Versions.v2026_12_01_Preview)
-  @get
-  @segment("usage")
-  getWidgetUsage is Foundations.ResourceOperation<WidgetSuite, {}, WidgetUsage>;
+  getWidgetUsage is ResourceRead<WidgetUsage>;
 }
