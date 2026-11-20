@@ -20,7 +20,7 @@ model EmployeeProperties {
   /** Age of employee */
   age?: int32;
 
-  /** City of employee */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "TEST ONLY: intentionally omit sample property documentation to exercise TypeSpec suppression approval; do not merge."
   city?: string;
 
   /** Profile of employee */
