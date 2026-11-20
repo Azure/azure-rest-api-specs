@@ -14633,39 +14633,6 @@
         }
       ]
     },
-    "AdapterDeploymentLastOperation": {
-      "type": "object",
-      "description": "The most recently requested adapter lifecycle operation.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/AdapterDeploymentOperationType",
-          "description": "The type of lifecycle operation."
-        },
-        "status": {
-          "$ref": "#/definitions/AdapterDeploymentOperationState",
-          "description": "The current or terminal operation state."
-        },
-        "requestedTargetDeploymentName": {
-          "type": "string",
-          "description": "The target deployment requested by a create or re-target operation."
-        },
-        "startedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time at which the operation started."
-        },
-        "completedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time at which the operation reached a terminal state."
-        }
-      },
-      "required": [
-        "type",
-        "status",
-        "startedAt"
-      ]
-    },
     "AdapterDeploymentListResult": {
       "type": "object",
       "description": "A paginated collection of adapter deployments.",
@@ -14688,73 +14655,6 @@
         "value"
       ]
     },
-    "AdapterDeploymentOperationState": {
-      "type": "string",
-      "description": "Lifecycle operation states reported by an adapter deployment.",
-      "enum": [
-        "Accepted",
-        "Running",
-        "Succeeded",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "AdapterDeploymentOperationState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "The operation was accepted."
-          },
-          {
-            "name": "Running",
-            "value": "Running",
-            "description": "The operation is running."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The operation completed successfully."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The operation failed."
-          }
-        ]
-      },
-      "readOnly": true
-    },
-    "AdapterDeploymentOperationType": {
-      "type": "string",
-      "description": "Lifecycle operation types reported by an adapter deployment.",
-      "enum": [
-        "Create",
-        "Update",
-        "Delete"
-      ],
-      "x-ms-enum": {
-        "name": "AdapterDeploymentOperationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Create",
-            "value": "Create",
-            "description": "Creates the adapter deployment."
-          },
-          {
-            "name": "Update",
-            "value": "Update",
-            "description": "Re-targets the adapter deployment."
-          },
-          {
-            "name": "Delete",
-            "value": "Delete",
-            "description": "Deletes the adapter deployment."
-          }
-        ]
-      }
-    },
     "AdapterDeploymentProperties": {
       "type": "object",
       "description": "Properties of an adapter deployment.",
@@ -14770,12 +14670,7 @@
         },
         "targetDeploymentName": {
           "type": "string",
-          "description": "The name of the compatible managed compute parent deployment.\nThe service resolves this name within the adapter's owning account; full\nAzure Resource Manager resource IDs and cross-account references are not accepted. It cannot\nequal the adapter deployment's resource name. Updating this value\nre-targets the adapter while its source model remains unchanged."
-        },
-        "activeTargetDeploymentName": {
-          "type": "string",
-          "description": "The managed compute deployment currently serving the adapter.\nDuring re-targeting this remains the prior deployment until atomic cutover.",
-          "readOnly": true
+          "description": "The name of the compatible managed compute deployment that serves the adapter.\nFor PUT requests, this specifies the target deployment. In a re-targeting PUT\nresponse and subsequent GET responses, this remains the currently serving\ndeployment until atomic cutover, after which it changes to the new target.\nThe service resolves the name within the adapter's owning account; full\nAzure Resource Manager resource IDs and cross-account references are not accepted.\nIt cannot equal the adapter deployment's resource name."
         },
         "capabilities": {
           "type": "object",
@@ -14788,11 +14683,6 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the adapter deployment.",
-          "readOnly": true
-        },
-        "lastOperation": {
-          "$ref": "#/definitions/AdapterDeploymentLastOperation",
-          "description": "Information about the most recently requested lifecycle operation.",
           "readOnly": true
         }
       },
