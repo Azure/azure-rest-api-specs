@@ -3,6 +3,8 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "./PolicyInsightsApi/main.tsp";
 import "./PolicyTrackedResourcesApi/main.tsp";
+import "./PolicyAuthoringApi/main.tsp";
+import "./PolicySimulationApi/main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -15,7 +17,12 @@ using PolicyTrackedResourcesApi;
 
 @client({
   name: "PolicyInsightsManagementClient",
-  service: [PolicyInsightsApi, PolicyTrackedResourcesApi],
+  service: [
+    PolicyInsightsApi,
+    PolicyTrackedResourcesApi,
+    PolicyAuthoringApi,
+    PolicySimulationApi
+  ],
   autoMergeService: true,
 })
 namespace PolicyInsightsManagementClient;

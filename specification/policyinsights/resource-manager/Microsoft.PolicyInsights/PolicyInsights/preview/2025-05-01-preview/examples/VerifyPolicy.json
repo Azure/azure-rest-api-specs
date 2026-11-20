@@ -1,0 +1,39 @@
+{
+  "title": "Verify a policy requiring HTTPS for storage accounts",
+  "operationId": "PolicyMcp_VerifyPolicy",
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "body": {
+      "policyDefinition": {
+        "properties": {
+          "displayName": "Require secure transfer for storage accounts",
+          "mode": "All",
+          "policyRule": {
+            "if": {
+              "allOf": [
+                {
+                  "field": "type",
+                  "equals": "Microsoft.Storage/storageAccounts"
+                },
+                {
+                  "field": "Microsoft.Storage/storageAccounts/supportsHttpsTrafficOnly",
+                  "equals": false
+                }
+              ]
+            },
+            "then": {
+              "effect": "deny"
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "verificationResult": "AllValid"
+      }
+    }
+  }
+}
