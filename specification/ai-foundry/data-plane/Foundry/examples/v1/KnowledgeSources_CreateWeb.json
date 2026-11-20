@@ -1,0 +1,41 @@
+{
+  "title": "Create a Web knowledge source",
+  "operationId": "KnowledgeSources_create",
+  "parameters": {
+    "endpoint": "https://foundry.example.com/api/projects/sample-project",
+    "api-version": "v1",
+    "Foundry-Features": "Knowledge=V1Preview",
+    "knowledge_source": {
+      "name": "public-help",
+      "kind": "web",
+      "webParameters": {
+        "domains": {
+          "allowedDomains": [
+            {
+              "address": "https://help.example.com",
+              "includeSubpages": true
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "public-help",
+        "kind": "web",
+        "webParameters": {
+          "domains": {
+            "allowedDomains": [
+              {
+                "address": "https://help.example.com",
+                "includeSubpages": true
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

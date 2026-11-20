@@ -1,0 +1,25 @@
+{
+  "title": "Create a File knowledge source",
+  "operationId": "KnowledgeSources_create",
+  "parameters": {
+    "endpoint": "https://foundry.example.com/api/projects/sample-project",
+    "api-version": "v1",
+    "Foundry-Features": "Knowledge=V1Preview",
+    "knowledge_source": {
+      "name": "product-guides",
+      "kind": "file",
+      "description": "Uploaded product documentation.",
+      "embeddingModelName": "guides-embedding-deployment"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "product-guides",
+        "kind": "file",
+        "description": "Uploaded product documentation.",
+        "embeddingModelName": "guides-embedding-deployment"
+      }
+    }
+  }
+}

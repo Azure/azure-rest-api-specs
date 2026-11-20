@@ -38,6 +38,8 @@ using OpenAPI;
   #{ name: "Fine-tuning", parent: "Platform APIs", summary: "Fine-Tuning" },
   #{ name: "Models", parent: "Platform APIs" },
   #{ name: "Memory Stores", parent: "Platform APIs" },
+  #{ name: "Knowledge Bases", parent: "Platform APIs" },
+  #{ name: "Knowledge Sources", parent: "Platform APIs" },
   #{ name: "Chat", parent: "Platform APIs" },
   #{ name: "Assistants", parent: "Platform APIs" },
   #{ name: "Audio", parent: "Platform APIs" },

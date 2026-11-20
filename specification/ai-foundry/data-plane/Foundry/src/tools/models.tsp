@@ -20,6 +20,7 @@ namespace Azure.AI.ProjectsInternal {
     toolbox_search_preview: "toolbox_search_preview",
     web_iq_preview: "web_iq_preview",
     github_copilot_toolset_preview: "github_copilot_toolset_preview",
+    knowledge_base_preview: "knowledge_base_preview",
   }
 
   union _AgentToolType {
@@ -113,6 +114,24 @@ namespace Azure.AI.Projects {
   alias _MicrosoftCopilotAgentToolType = Azure.AI.ProjectsInternal._MicrosoftCopilotAgentToolType;
 
   const PreviewTool = #{ required_previews: #["preview_tool"] };
+
+  /** A project-scoped knowledge base attached to an agent. */
+  @extension("x-ms-foundry-meta", PreviewTool)
+  model KnowledgeBaseTool extends OpenAI.Tool {
+    /** The native Knowledge tool discriminator. */
+    type: "knowledge_base_preview";
+
+    /** The knowledge base to use in the current Foundry project. */
+    knowledge_base: KnowledgeBaseToolParameters;
+  }
+
+  /** The native Knowledge tool's saved project-scoped reference. */
+  @extension("x-ms-foundry-meta", PreviewTool)
+  model KnowledgeBaseToolParameters {
+    /** The knowledge-base name. */
+    @minLength(1)
+    name: string;
+  }
 
   @@copyVariants(OpenAI.ToolType, Azure.AI.Projects._PreviewAgentToolType);
   @@copyVariants(OpenAI.ToolType, Azure.AI.Projects._AgentToolType);
