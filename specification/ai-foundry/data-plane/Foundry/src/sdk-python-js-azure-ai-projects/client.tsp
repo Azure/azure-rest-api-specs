@@ -54,6 +54,14 @@ using Azure.AI.Projects;
 @@clientNamespace(OpenAI, "azure.ai.projects", "python");
 @@clientNamespace(Azure.AI.ProjectsInternal, "Azure.AI.Projects", "javascript");
 
+// Python emits these models in one namespace with existing Agent and OpenAI types.
+@@clientName(
+  ManagedAgents.MicrosoftCopilotHarness,
+  "ManagedMicrosoftCopilotHarness",
+  "python"
+);
+@@clientName(ManagedAgents.Reasoning, "ManagedAgentReasoning", "python");
+
 // The original schemas below are not emitted as Python classes, but their client
 // names are still checked for collisions, including the default language scope.
 // The ...Base suffix only frees the existing public names for the Tool wrappers;

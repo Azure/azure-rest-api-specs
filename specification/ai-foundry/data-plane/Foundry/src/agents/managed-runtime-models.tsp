@@ -5,22 +5,22 @@ import "./managed-runtime-items.tsp";
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Azure.AI.Projects;
+namespace Azure.AI.Projects.ManagedAgents;
 
 /** Common discriminator for typed pending client actions. */
-model ManagedSessionRequiredActionBase {
+model SessionRequiredActionBase {
   /** The required-action discriminator. */
   type: string;
 }
 
 /** Common discriminator for accepted client-event shapes. */
-model ManagedSessionClientEventBase {
+model SessionClientEventBase {
   /** The client-event discriminator. */
   type: string;
 }
 
 /** Token counters shared by turns and completion events. Additional breakdowns are present when known. */
-model ManagedSessionTokenUsage {
+model SessionTokenUsage {
   /** Input tokens consumed by the agent. */
   input_tokens: int64;
 
@@ -38,7 +38,7 @@ model ManagedSessionTokenUsage {
 }
 
 /** The current state of a Managed Session turn. */
-union ManagedSessionTurnStatus {
+union SessionTurnStatus {
   string,
 
   /** Work is awaiting execution. */
@@ -61,7 +61,7 @@ union ManagedSessionTurnStatus {
 }
 
 /** A customer-safe turn failure. Codes are extensible across supported harnesses. */
-model ManagedSessionTurnError {
+model SessionTurnError {
   /** A machine-readable failure category. */
   code: string;
 
@@ -71,10 +71,7 @@ model ManagedSessionTurnError {
 
 /** One unit of agent work, not one model request. Provider agent IDs are not renamed to the route Agent name. */
 @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
-model ManagedSessionTurn {
-  /** The resource discriminator. */
-  object: "agent.session.turn";
-
+model SessionTurn {
   /** The turn identifier. */
   id: string;
 
@@ -88,7 +85,7 @@ model ManagedSessionTurn {
   subagent_id: string | null;
 
   /** The current turn state. */
-  status: ManagedSessionTurnStatus;
+  status: SessionTurnStatus;
 
   /** Creation time as Unix seconds. */
   created_at: int64;
@@ -100,14 +97,14 @@ model ManagedSessionTurn {
   completed_at: int64 | null;
 
   /** Best-effort token usage, or null when unavailable. */
-  usage: ManagedSessionTokenUsage | null;
+  usage: SessionTokenUsage | null;
 
   /** A failure description, or null when there is no failure. */
-  error: ManagedSessionTurnError | null;
+  error: SessionTurnError | null;
 }
 
 /** Current allocation or connection state, separate from the Session's Environment selector. */
-union ManagedSessionEnvironmentStatus {
+union SessionEnvironmentStatus {
   string,
 
   /** No Environment has been allocated. */
@@ -136,12 +133,12 @@ union ManagedSessionEnvironmentStatus {
 }
 
 /** An Environment snapshot carried by Session inspection and runtime events, not an Environment resource API. */
-model ManagedSessionEnvironmentState {
+model SessionEnvironmentState {
   /** The allocated identifier, or null before allocation. */
   id: string | null;
 
   /** The current state. */
-  status: ManagedSessionEnvironmentStatus;
+  status: SessionEnvironmentStatus;
 
   /** The Environment type, when known. */
   type?: string;
@@ -151,24 +148,23 @@ model ManagedSessionEnvironmentState {
 }
 
 /** Response-only allocated resource state. */
-model ManagedSessionResources {
+model SessionResources {
   /** The allocated Environment state, or null when no Environment is used. */
-  environment?: ManagedSessionEnvironmentState | null;
+  environment?: SessionEnvironmentState | null;
 }
 
 /** Pending function, computer-use, Environment, or MCP actions. Unsupported capabilities must not be requested by a harness. */
 @discriminated(#{ envelope: "none", discriminatorPropertyName: "type" })
-union ManagedSessionRequiredAction extends ManagedSessionRequiredActionBase {
-  function_call: ManagedSessionFunctionCallRequiredAction,
-  computer_use_approval_request: ManagedSessionComputerUseRequiredAction,
-  environment_connection: ManagedSessionEnvironmentRequiredAction,
-  mcp_approval_request: ManagedSessionMcpApprovalRequiredAction,
+union SessionRequiredAction extends SessionRequiredActionBase {
+  function_call: SessionFunctionCallRequiredAction,
+  computer_use_approval_request: SessionComputerUseRequiredAction,
+  environment_connection: SessionEnvironmentRequiredAction,
+  mcp_approval_request: SessionMcpApprovalRequiredAction,
 }
 
 /** A client function call with the original call and turn correlation. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionFunctionCallRequiredAction
-  extends ManagedSessionRequiredActionBase {
+model SessionFunctionCallRequiredAction extends SessionRequiredActionBase {
   ...OmitProperties<OpenAI.SessionRequiredActionResourceFunctionCall, "type">;
 
   /** The variant discriminator. */
@@ -177,8 +173,7 @@ model ManagedSessionFunctionCallRequiredAction
 
 /** A typed computer-use approval. Availability remains harness- and milestone-specific. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionComputerUseRequiredAction
-  extends ManagedSessionRequiredActionBase {
+model SessionComputerUseRequiredAction extends SessionRequiredActionBase {
   ...OmitProperties<
     OpenAI.SessionRequiredActionResourceComputerUseApprovalRequest,
     "type"
@@ -190,8 +185,7 @@ model ManagedSessionComputerUseRequiredAction
 
 /** An Environment connection action, not authorization to create a new Environment. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionEnvironmentRequiredAction
-  extends ManagedSessionRequiredActionBase {
+model SessionEnvironmentRequiredAction extends SessionRequiredActionBase {
   ...OmitProperties<
     OpenAI.SessionRequiredActionResourceEnvironmentConnection,
     "type"
@@ -203,24 +197,23 @@ model ManagedSessionEnvironmentRequiredAction
 
 /** A proposed Foundry MCP approval action with the call the user is deciding on. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionMcpApprovalRequiredAction
-  extends ManagedSessionRequiredActionBase {
-  ...OmitProperties<ManagedSessionMcpApprovalRequestItem, "id" | "status">;
+model SessionMcpApprovalRequiredAction extends SessionRequiredActionBase {
+  ...OmitProperties<SessionMcpApprovalRequestItem, "id" | "status">;
 }
 
 /** Client inputs. The Foundry Boolean MCP decision is not an alias for OpenAI's approve/deny/cancel response. */
 @discriminated(#{ envelope: "none", discriminatorPropertyName: "type" })
-union ManagedSessionClientEvent extends ManagedSessionClientEventBase {
-  `agent.session.input.message`: ManagedSessionMessageInputEvent,
-  `agent.session.input.cancel`: ManagedSessionCancelInputEvent,
-  `agent.session.input.tool_result`: ManagedSessionToolResultInputEvent,
-  `agent.session.input.computer_use_approval_request_result`: ManagedSessionComputerUseInputEvent,
-  `agent.session.input.mcp_approval_response`: ManagedSessionMcpApprovalInputEvent,
+union SessionClientEvent extends SessionClientEventBase {
+  `agent.session.input.message`: SessionMessageInputEvent,
+  `agent.session.input.cancel`: SessionCancelInputEvent,
+  `agent.session.input.tool_result`: SessionToolResultInputEvent,
+  `agent.session.input.computer_use_approval_request_result`: SessionComputerUseInputEvent,
+  `agent.session.input.mcp_approval_response`: SessionMcpApprovalInputEvent,
 }
 
 /** Starts a root turn when idle or steers the active root turn. Admission order does not promise model-consumption order. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionMessageInputEvent extends ManagedSessionClientEventBase {
+model SessionMessageInputEvent extends SessionClientEventBase {
   ...OmitProperties<OpenAI.SessionInputParamAgentSessionInputMessage, "type">;
 
   /** The variant discriminator. */
@@ -229,7 +222,7 @@ model ManagedSessionMessageInputEvent extends ManagedSessionClientEventBase {
 
 /** Cancels the root turn active at acceptance. No caller-selected turn_id is accepted. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionCancelInputEvent extends ManagedSessionClientEventBase {
+model SessionCancelInputEvent extends SessionClientEventBase {
   ...OmitProperties<OpenAI.SessionInputParamAgentSessionInputCancel, "type">;
 
   /** The variant discriminator. */
@@ -238,7 +231,7 @@ model ManagedSessionCancelInputEvent extends ManagedSessionClientEventBase {
 
 /** Submits a result for the specified pending function call. The service validates success/output/error consistency and rejects stale or unauthorized callbacks. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionToolResultInputEvent extends ManagedSessionClientEventBase {
+model SessionToolResultInputEvent extends SessionClientEventBase {
   ...OmitProperties<
     OpenAI.SessionInputParamAgentSessionInputToolResult,
     "type"
@@ -250,8 +243,7 @@ model ManagedSessionToolResultInputEvent extends ManagedSessionClientEventBase {
 
 /** A typed computer-use response. Submitted credential values must never be copied into streamed or persisted history. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionComputerUseInputEvent
-  extends ManagedSessionClientEventBase {
+model SessionComputerUseInputEvent extends SessionClientEventBase {
   ...OmitProperties<
     OpenAI.SessionInputParamAgentSessionInputComputerUseApprovalRequestResult,
     "type"
@@ -263,8 +255,7 @@ model ManagedSessionComputerUseInputEvent
 
 /** Approves or denies a pending MCP call in the proposed Foundry protocol. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionMcpApprovalInputEvent
-  extends ManagedSessionClientEventBase {
+model SessionMcpApprovalInputEvent extends SessionClientEventBase {
   /** The event discriminator. */
   type: "agent.session.input.mcp_approval_response";
 
@@ -282,14 +273,14 @@ model ManagedSessionMcpApprovalInputEvent
 }
 
 /** A nonempty batch of client events. Cancellation, results, and approvals use the same creator isolation as messages. */
-model ManagedSessionSubmitEventsContent {
+model SessionSubmitEventsContent {
   /** Events submitted in request order. */
   @minItems(1)
-  events: ManagedSessionClientEvent[];
+  events: SessionClientEvent[];
 }
 
 /** Admission of one client event, not completion of the work or proof that the model consumed it. */
-model ManagedSessionEventReceipt {
+model SessionEventReceipt {
   /** The accepted event identifier. */
   event_id: string;
 
@@ -303,26 +294,26 @@ model ManagedSessionEventReceipt {
   item_id: string | null;
 
   /** The turn state observed at admission. */
-  turn_status: ManagedSessionTurnStatus;
+  turn_status: SessionTurnStatus;
 }
 
 /** One admission receipt per submitted event, in request order. No replay cursor is implied. */
-model ManagedSessionEventReceipts {
+model SessionEventReceipts {
   /** Ordered event receipts. */
   @minItems(1)
-  receipts: ManagedSessionEventReceipt[];
+  receipts: SessionEventReceipt[];
 }
 
 /** The accepted event-submission response. This is not a long-running-operation polling resource. */
-model ManagedSessionEventsAccepted {
+model SessionEventsAccepted {
   ...AcceptedResponse;
 
   /** Admission receipts for the submitted events. */
-  @body body: ManagedSessionEventReceipts;
+  @body body: SessionEventReceipts;
 }
 
 /** Common server-event fields. Correlation is variant-specific; do not infer missing turn IDs. */
-model ManagedSessionEventBase {
+model SessionEventBase {
   /** The server-event discriminator. */
   type: string;
 
@@ -346,125 +337,125 @@ model ManagedSessionEventBase {
 
 /** agent.session.created. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionCreatedEvent extends ManagedSessionEventBase {
+model SessionCreatedEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionCreated,
     "event_id" | "session_id" | "obfuscation" | "session"
   >;
 
   /** The current Managed Session, including pending actions. */
-  session: ManagedAgentSession;
+  session: Session;
 }
 
 /** agent.session.idle. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionIdleEvent extends ManagedSessionEventBase {
+model SessionIdleEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionIdle,
     "event_id" | "session_id" | "obfuscation" | "session"
   >;
 
   /** The current Managed Session, including pending actions. */
-  session: ManagedAgentSession;
+  session: Session;
 }
 
 /** agent.session.in_progress. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionInProgressEvent extends ManagedSessionEventBase {
+model SessionInProgressEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionInProgress,
     "event_id" | "session_id" | "obfuscation" | "session"
   >;
 
   /** The current Managed Session, including pending actions. */
-  session: ManagedAgentSession;
+  session: Session;
 }
 
 /** agent.session.requires_action. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionRequiresActionEvent extends ManagedSessionEventBase {
+model SessionRequiresActionEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionRequiresAction,
     "event_id" | "session_id" | "obfuscation" | "session"
   >;
 
   /** The current Managed Session, including pending actions. */
-  session: ManagedAgentSession;
+  session: Session;
 }
 
 /** agent.session.failed. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionFailedEvent extends ManagedSessionEventBase {
+model SessionFailedEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionFailed,
     "event_id" | "session_id" | "obfuscation" | "session"
   >;
 
   /** The current Managed Session, including pending actions. */
-  session: ManagedAgentSession;
+  session: Session;
 }
 
 /** agent.session.turn.created. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionTurnCreatedEvent extends ManagedSessionEventBase {
+model SessionTurnCreatedEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnCreated,
     "event_id" | "session_id" | "obfuscation" | "turn"
   >;
 
   /** The affected turn, including its current state and recorded outcome. */
-  turn: ManagedSessionTurn;
+  turn: SessionTurn;
 }
 
 /** agent.session.turn.in_progress. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionTurnInProgressEvent extends ManagedSessionEventBase {
+model SessionTurnInProgressEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnInProgress,
     "event_id" | "session_id" | "obfuscation" | "turn"
   >;
 
   /** The affected turn, including its current state and recorded outcome. */
-  turn: ManagedSessionTurn;
+  turn: SessionTurn;
 }
 
 /** agent.session.turn.completed. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionTurnCompletedEvent extends ManagedSessionEventBase {
+model SessionTurnCompletedEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnCompleted,
     "event_id" | "session_id" | "obfuscation" | "turn" | "usage"
   >;
 
   /** The affected turn, including its current state and recorded outcome. */
-  turn: ManagedSessionTurn;
+  turn: SessionTurn;
 
   /** Root-agent token usage when available. */
-  usage?: ManagedSessionTokenUsage | null;
+  usage?: SessionTokenUsage | null;
 }
 
 /** agent.session.turn.failed. Additional provider usage belongs in raw_event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionTurnFailedEvent extends ManagedSessionEventBase {
+model SessionTurnFailedEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnFailed,
     "event_id" | "session_id" | "obfuscation" | "turn" | "usage"
   >;
 
   /** The affected turn, including its current state and recorded outcome. */
-  turn: ManagedSessionTurn;
+  turn: SessionTurn;
 }
 
 /** agent.session.turn.cancelled. Additional provider usage belongs in raw_event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionTurnCancelledEvent extends ManagedSessionEventBase {
+model SessionTurnCancelledEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnCancelled,
     "event_id" | "session_id" | "obfuscation" | "turn" | "usage"
   >;
 
   /** The affected turn, including its current state and recorded outcome. */
-  turn: ManagedSessionTurn;
+  turn: SessionTurn;
 }
 
 /** agent.session.turn.item.added. */
@@ -477,7 +468,7 @@ model ManagedSessionTurnCancelledEvent extends ManagedSessionEventBase {
   raw_event: #{ provider_data: #{ value: null } },
   obfuscation: null,
 })
-model ManagedSessionItemAddedEvent extends ManagedSessionEventBase {
+model SessionItemAddedEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnItemAdded,
     | "turn_id"
@@ -493,12 +484,12 @@ model ManagedSessionItemAddedEvent extends ManagedSessionEventBase {
   >>;
 
   /** The saved history item, without flattening its provider payload. */
-  item: ManagedSessionItem;
+  item: SessionItem;
 }
 
 /** agent.session.turn.item.done. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionItemDoneEvent extends ManagedSessionEventBase {
+model SessionItemDoneEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnItemDone,
     "turn_id" | "event_id" | "session_id" | "obfuscation" | "item"
@@ -509,12 +500,12 @@ model ManagedSessionItemDoneEvent extends ManagedSessionEventBase {
   >>;
 
   /** The completed output item, without flattening its provider payload. */
-  item: ManagedSessionOutputItem;
+  item: SessionOutputItem;
 }
 
 /** agent.session.turn.content_part.added. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionContentPartAddedEvent extends ManagedSessionEventBase {
+model SessionContentPartAddedEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnContentPartAdded,
     "turn_id" | "event_id" | "session_id" | "obfuscation"
@@ -527,7 +518,7 @@ model ManagedSessionContentPartAddedEvent extends ManagedSessionEventBase {
 
 /** agent.session.turn.content_part.done. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionContentPartDoneEvent extends ManagedSessionEventBase {
+model SessionContentPartDoneEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnContentPartDone,
     "turn_id" | "event_id" | "session_id" | "obfuscation"
@@ -540,7 +531,7 @@ model ManagedSessionContentPartDoneEvent extends ManagedSessionEventBase {
 
 /** agent.session.turn.output_text.delta. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionOutputTextDeltaEvent extends ManagedSessionEventBase {
+model SessionOutputTextDeltaEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnOutputTextDelta,
     "turn_id" | "event_id" | "session_id" | "obfuscation"
@@ -553,7 +544,7 @@ model ManagedSessionOutputTextDeltaEvent extends ManagedSessionEventBase {
 
 /** agent.session.turn.output_text.done. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionOutputTextDoneEvent extends ManagedSessionEventBase {
+model SessionOutputTextDoneEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnOutputTextDone,
     "turn_id" | "event_id" | "session_id" | "obfuscation"
@@ -566,8 +557,7 @@ model ManagedSessionOutputTextDoneEvent extends ManagedSessionEventBase {
 
 /** agent.session.turn.reasoning_summary_part.added. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionReasoningSummaryPartAddedEvent
-  extends ManagedSessionEventBase {
+model SessionReasoningSummaryPartAddedEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnReasoningSummaryPartAdded,
     "turn_id" | "event_id" | "session_id" | "obfuscation"
@@ -580,8 +570,7 @@ model ManagedSessionReasoningSummaryPartAddedEvent
 
 /** agent.session.turn.reasoning_summary_part.done. Provider incomplete status belongs in raw_event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionReasoningSummaryPartDoneEvent
-  extends ManagedSessionEventBase {
+model SessionReasoningSummaryPartDoneEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnReasoningSummaryPartDone,
     "turn_id" | "event_id" | "session_id" | "obfuscation" | "status"
@@ -594,8 +583,7 @@ model ManagedSessionReasoningSummaryPartDoneEvent
 
 /** agent.session.turn.reasoning_summary_text.delta. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionReasoningSummaryTextDeltaEvent
-  extends ManagedSessionEventBase {
+model SessionReasoningSummaryTextDeltaEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnReasoningSummaryTextDelta,
     "turn_id" | "event_id" | "session_id" | "obfuscation"
@@ -608,8 +596,7 @@ model ManagedSessionReasoningSummaryTextDeltaEvent
 
 /** agent.session.turn.reasoning_summary_text.done. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionReasoningSummaryTextDoneEvent
-  extends ManagedSessionEventBase {
+model SessionReasoningSummaryTextDoneEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnReasoningSummaryTextDone,
     "turn_id" | "event_id" | "session_id" | "obfuscation"
@@ -622,8 +609,7 @@ model ManagedSessionReasoningSummaryTextDoneEvent
 
 /** agent.output.command_execution_output.delta. Provider turn correlation belongs in raw_event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionCommandExecutionOutputDeltaEvent
-  extends ManagedSessionEventBase {
+model SessionCommandExecutionOutputDeltaEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentOutputCommandExecutionOutputDelta,
     "event_id" | "session_id" | "obfuscation" | "turn_id"
@@ -632,92 +618,91 @@ model ManagedSessionCommandExecutionOutputDeltaEvent
 
 /** agent.session.environment.pending. Provider turn correlation belongs in raw_event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionEnvironmentPendingEvent extends ManagedSessionEventBase {
+model SessionEnvironmentPendingEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionEnvironmentPending,
     "event_id" | "session_id" | "obfuscation" | "turn_id" | "environment"
   >;
 
   /** Current allocation or connection state, not the Session's Environment selector. */
-  environment: ManagedSessionEnvironmentState;
+  environment: SessionEnvironmentState;
 }
 
 /** agent.session.environment.ready. Provider turn correlation belongs in raw_event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionEnvironmentReadyEvent extends ManagedSessionEventBase {
+model SessionEnvironmentReadyEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionEnvironmentReady,
     "event_id" | "session_id" | "obfuscation" | "turn_id" | "environment"
   >;
 
   /** Current allocation or connection state, not the Session's Environment selector. */
-  environment: ManagedSessionEnvironmentState;
+  environment: SessionEnvironmentState;
 }
 
 /** agent.session.environment.connected. Provider turn correlation belongs in raw_event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionEnvironmentConnectedEvent extends ManagedSessionEventBase {
+model SessionEnvironmentConnectedEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionEnvironmentConnected,
     "event_id" | "session_id" | "obfuscation" | "turn_id" | "environment"
   >;
 
   /** Current allocation or connection state, not the Session's Environment selector. */
-  environment: ManagedSessionEnvironmentState;
+  environment: SessionEnvironmentState;
 }
 
 /** agent.session.environment.disconnected. Provider turn correlation belongs in raw_event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionEnvironmentDisconnectedEvent
-  extends ManagedSessionEventBase {
+model SessionEnvironmentDisconnectedEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionEnvironmentDisconnected,
     "event_id" | "session_id" | "obfuscation" | "turn_id" | "environment"
   >;
 
   /** Current allocation or connection state, not the Session's Environment selector. */
-  environment: ManagedSessionEnvironmentState;
+  environment: SessionEnvironmentState;
 }
 
 /** agent.session.environment.suspended. Provider turn correlation belongs in raw_event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionEnvironmentSuspendedEvent extends ManagedSessionEventBase {
+model SessionEnvironmentSuspendedEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionEnvironmentSuspended,
     "event_id" | "session_id" | "obfuscation" | "turn_id" | "environment"
   >;
 
   /** Current allocation or connection state, not the Session's Environment selector. */
-  environment: ManagedSessionEnvironmentState;
+  environment: SessionEnvironmentState;
 }
 
 /** agent.session.environment.expired. Provider turn correlation belongs in raw_event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionEnvironmentExpiredEvent extends ManagedSessionEventBase {
+model SessionEnvironmentExpiredEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionEnvironmentExpired,
     "event_id" | "session_id" | "obfuscation" | "turn_id" | "environment"
   >;
 
   /** Current allocation or connection state, not the Session's Environment selector. */
-  environment: ManagedSessionEnvironmentState;
+  environment: SessionEnvironmentState;
 }
 
 /** agent.session.environment.failed. Provider turn correlation belongs in raw_event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionEnvironmentFailedEvent extends ManagedSessionEventBase {
+model SessionEnvironmentFailedEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionEnvironmentFailed,
     "event_id" | "session_id" | "obfuscation" | "turn_id" | "environment"
   >;
 
   /** Current allocation or connection state, not the Session's Environment selector. */
-  environment: ManagedSessionEnvironmentState;
+  environment: SessionEnvironmentState;
 }
 
 /** agent.session.environment.reset. Preserve environment_id, reset_count, and provider turn_id in raw_event; no Environment snapshot is fabricated. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionEnvironmentResetEvent extends ManagedSessionEventBase {
+model SessionEnvironmentResetEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionEnvironmentReset,
     | "event_id"
@@ -731,7 +716,7 @@ model ManagedSessionEnvironmentResetEvent extends ManagedSessionEventBase {
 
 /** agent.session.subagent.created. Subagent inspection remains a separate follow-up capability. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionSubagentCreatedEvent extends ManagedSessionEventBase {
+model SessionSubagentCreatedEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionSubagentCreated,
     "event_id" | "session_id" | "obfuscation"
@@ -740,7 +725,7 @@ model ManagedSessionSubagentCreatedEvent extends ManagedSessionEventBase {
 
 /** agent.session.subagent.active. Subagent inspection remains a separate follow-up capability. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionSubagentActiveEvent extends ManagedSessionEventBase {
+model SessionSubagentActiveEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionSubagentActive,
     "event_id" | "session_id" | "obfuscation"
@@ -749,7 +734,7 @@ model ManagedSessionSubagentActiveEvent extends ManagedSessionEventBase {
 
 /** agent.session.subagent.closed. Subagent inspection remains a separate follow-up capability. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionSubagentClosedEvent extends ManagedSessionEventBase {
+model SessionSubagentClosedEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionSubagentClosed,
     "event_id" | "session_id" | "obfuscation"
@@ -758,7 +743,7 @@ model ManagedSessionSubagentClosedEvent extends ManagedSessionEventBase {
 
 /** error. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
-model ManagedSessionErrorEvent extends ManagedSessionEventBase {
+model SessionErrorEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventError,
     "event_id" | "session_id" | "obfuscation"
@@ -769,103 +754,103 @@ model ManagedSessionErrorEvent extends ManagedSessionEventBase {
 @TypeSpec.Events.events
 @discriminated(#{ envelope: "none", discriminatorPropertyName: "type" })
 @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
-union ManagedSessionEvent extends ManagedSessionEventBase {
+union SessionEvent extends SessionEventBase {
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.created`: ManagedSessionCreatedEvent,
+  `agent.session.created`: SessionCreatedEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.idle`: ManagedSessionIdleEvent,
+  `agent.session.idle`: SessionIdleEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.in_progress`: ManagedSessionInProgressEvent,
+  `agent.session.in_progress`: SessionInProgressEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.requires_action`: ManagedSessionRequiresActionEvent,
+  `agent.session.requires_action`: SessionRequiresActionEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.failed`: ManagedSessionFailedEvent,
+  `agent.session.failed`: SessionFailedEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.turn.created`: ManagedSessionTurnCreatedEvent,
+  `agent.session.turn.created`: SessionTurnCreatedEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.turn.in_progress`: ManagedSessionTurnInProgressEvent,
+  `agent.session.turn.in_progress`: SessionTurnInProgressEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.turn.completed`: ManagedSessionTurnCompletedEvent,
+  `agent.session.turn.completed`: SessionTurnCompletedEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.turn.failed`: ManagedSessionTurnFailedEvent,
+  `agent.session.turn.failed`: SessionTurnFailedEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.turn.cancelled`: ManagedSessionTurnCancelledEvent,
+  `agent.session.turn.cancelled`: SessionTurnCancelledEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.turn.item.added`: ManagedSessionItemAddedEvent,
+  `agent.session.turn.item.added`: SessionItemAddedEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.turn.item.done`: ManagedSessionItemDoneEvent,
+  `agent.session.turn.item.done`: SessionItemDoneEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.turn.content_part.added`: ManagedSessionContentPartAddedEvent,
+  `agent.session.turn.content_part.added`: SessionContentPartAddedEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.turn.content_part.done`: ManagedSessionContentPartDoneEvent,
+  `agent.session.turn.content_part.done`: SessionContentPartDoneEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.turn.output_text.delta`: ManagedSessionOutputTextDeltaEvent,
+  `agent.session.turn.output_text.delta`: SessionOutputTextDeltaEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.turn.output_text.done`: ManagedSessionOutputTextDoneEvent,
+  `agent.session.turn.output_text.done`: SessionOutputTextDoneEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.turn.reasoning_summary_part.added`: ManagedSessionReasoningSummaryPartAddedEvent,
+  `agent.session.turn.reasoning_summary_part.added`: SessionReasoningSummaryPartAddedEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.turn.reasoning_summary_part.done`: ManagedSessionReasoningSummaryPartDoneEvent,
+  `agent.session.turn.reasoning_summary_part.done`: SessionReasoningSummaryPartDoneEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.turn.reasoning_summary_text.delta`: ManagedSessionReasoningSummaryTextDeltaEvent,
+  `agent.session.turn.reasoning_summary_text.delta`: SessionReasoningSummaryTextDeltaEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.turn.reasoning_summary_text.done`: ManagedSessionReasoningSummaryTextDoneEvent,
+  `agent.session.turn.reasoning_summary_text.done`: SessionReasoningSummaryTextDoneEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.output.command_execution_output.delta`: ManagedSessionCommandExecutionOutputDeltaEvent,
+  `agent.output.command_execution_output.delta`: SessionCommandExecutionOutputDeltaEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.environment.pending`: ManagedSessionEnvironmentPendingEvent,
+  `agent.session.environment.pending`: SessionEnvironmentPendingEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.environment.ready`: ManagedSessionEnvironmentReadyEvent,
+  `agent.session.environment.ready`: SessionEnvironmentReadyEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.environment.connected`: ManagedSessionEnvironmentConnectedEvent,
+  `agent.session.environment.connected`: SessionEnvironmentConnectedEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.environment.disconnected`: ManagedSessionEnvironmentDisconnectedEvent,
+  `agent.session.environment.disconnected`: SessionEnvironmentDisconnectedEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.environment.suspended`: ManagedSessionEnvironmentSuspendedEvent,
+  `agent.session.environment.suspended`: SessionEnvironmentSuspendedEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.environment.expired`: ManagedSessionEnvironmentExpiredEvent,
+  `agent.session.environment.expired`: SessionEnvironmentExpiredEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.environment.failed`: ManagedSessionEnvironmentFailedEvent,
+  `agent.session.environment.failed`: SessionEnvironmentFailedEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.environment.reset`: ManagedSessionEnvironmentResetEvent,
+  `agent.session.environment.reset`: SessionEnvironmentResetEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.subagent.created`: ManagedSessionSubagentCreatedEvent,
+  `agent.session.subagent.created`: SessionSubagentCreatedEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.subagent.active`: ManagedSessionSubagentActiveEvent,
+  `agent.session.subagent.active`: SessionSubagentActiveEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.session.subagent.closed`: ManagedSessionSubagentClosedEvent,
+  `agent.session.subagent.closed`: SessionSubagentClosedEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  error: ManagedSessionErrorEvent,
+  error: SessionErrorEvent,
 }

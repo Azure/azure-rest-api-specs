@@ -683,9 +683,9 @@ interface Agents {
       idempotency_key?: string;
 
       /** A nonempty batch of messages, cancellation, function results, or approval responses. */
-      @body body: ManagedSessionSubmitEventsContent;
+      @body body: ManagedAgents.SessionSubmitEventsContent;
     },
-    ManagedSessionEventsAccepted
+    ManagedAgents.SessionEventsAccepted
   >;
 
   /**
@@ -712,7 +712,7 @@ interface Agents {
       @query
       include_obfuscation?: boolean = true;
     },
-    TypeSpec.SSE.SSEStream<ManagedSessionEvent>
+    TypeSpec.SSE.SSEStream<ManagedAgents.SessionEvent>
   >;
 
   /**
@@ -736,7 +736,7 @@ interface Agents {
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<ManagedSessionTurn>
+    AgentsPagedResult<ManagedAgents.SessionTurn>
   >;
 
   /**
@@ -760,7 +760,7 @@ interface Agents {
       /** The requested turn identifier. */
       @path turn_id: string;
     },
-    ManagedSessionTurn
+    ManagedAgents.SessionTurn
   >;
 
   /**
@@ -787,7 +787,7 @@ interface Agents {
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<ManagedSessionItem>
+    AgentsPagedResult<ManagedAgents.SessionItem>
   >;
 
   /**
@@ -811,7 +811,7 @@ interface Agents {
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<ManagedSessionItem>
+    AgentsPagedResult<ManagedAgents.SessionItem>
   >;
 
   /**
