@@ -59,8 +59,9 @@ describe("private fork pull requests", () => {
     const [{ body: comment }] = github.rest.issues.createComment.mock.calls[0] as [
       { body: string },
     ];
-    expect(comment).toContain("Push your changes to a branch in `Azure/azure-rest-api-specs-pr`");
-    expect(comment).toContain("targeting `RPSaaSMaster`");
+    expect(comment).toContain("| PR source |");
+    expect(comment).toContain("| PR impact assessment |");
+    expect(comment).toContain("Open a replacement PR from a branch in this private repository");
     expect(comment).toContain("https://aka.ms/azsdk/access");
     expect(comment).toContain("do not move them to the public repository");
     expect(comment).not.toContain("Still evaluating");
@@ -68,7 +69,6 @@ describe("private fork pull requests", () => {
       expect.objectContaining({
         sha: fullGitSha,
         state: "failure",
-        description: "Fork pull requests are not supported in this private repository.",
       }),
     );
     expect(core.setOutput).toHaveBeenCalledWith("arm_review_ready", false);
@@ -82,6 +82,7 @@ describe("private fork pull requests", () => {
 
     const [{ body }] = github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
     expect(body).toContain("Still evaluating");
+    expect(body).not.toContain("| PR source |");
     expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
       expect.objectContaining({ state: "pending" }),
     );
