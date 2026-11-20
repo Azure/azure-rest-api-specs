@@ -219,11 +219,7 @@ using TypeSpec.Http;
   "PartnerMirroringUri",
   "csharp"
 );
-@@alternateType(
-  FailoverGroupSpec.partnerMirroringURL,
-  url,
-  "csharp"
-);
+@@alternateType(FailoverGroupSpec.partnerMirroringURL, url, "csharp");
 @@clientName(DataControllerResource, "DataController", "csharp");
 @@clientName(
   ActiveDirectoryConnectorResource,
