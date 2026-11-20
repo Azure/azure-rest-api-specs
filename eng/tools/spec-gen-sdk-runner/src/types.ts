@@ -1,4 +1,5 @@
 import { SdkName } from "@azure-tools/specs-shared/sdk-types";
+import type { NativeCheckSignal } from "./native-check.ts";
 
 /**
  * SDK automation execution state.
@@ -66,6 +67,7 @@ export interface SpecGenSdkCmdInput {
   specRepoHttpsUrl: string;
   headRepoHttpsUrl?: string;
   headBranch?: string;
+  nativeCheckSignal?: NativeCheckSignal;
 }
 
 /*
@@ -103,6 +105,7 @@ export interface PlaneTypeSettings {
 export interface CommandResult {
   statusCode: number;
   executionResult: ExecutionResult | "";
+  nativeCheck?: { required: boolean; breakingChange: boolean | undefined };
 }
 
 export const SpecGenSdkRequiredSettings: Record<SdkName, PlaneTypeSettings> = {

@@ -1,4 +1,8 @@
 parameters:
+  - name: NativeCheckSignal
+    type: string
+    default: "none"
+    values: ["none", "validation", "breaking-present", "breaking-absent"]
   - name: SpecRepoUrl
     type: string
   - name: SdkRepoUrl
@@ -236,12 +240,16 @@ stages:
           - template: /eng/common/pipelines/templates/steps/install-azsdk-cli.yml
             parameters:
               SourceRootPath: $(SpecRepoDirectory)
-              Condition: and(succeeded(), not(contains(variables['SdkRepoName'], 'rust')), ne(variables['Build.Reason'], 'PullRequest'))
+              Condition: and(succeeded(), not(contains(variables['SdkRepoName'], 'rust')), or(ne(variables['Build.Reason'], 'PullRequest'), in('${{ parameters.NativeCheckSignal }}', 'breaking-present', 'breaking-absent')))
               ContinueOnError: true
 
           - script: |
               set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
               optional_params=()
+              NATIVE_CHECK_SIGNAL="${NATIVE_CHECK_SIGNAL:-none}"
+              if [ "$NATIVE_CHECK_SIGNAL" != "none" ]; then
+                optional_params+=(--native-check-signal "$NATIVE_CHECK_SIGNAL")
+              fi
               # Azure DevOps leaves undefined macros unexpanded.
               if [[ -n "${TYPESPEC_EMITTER:-}" && "$TYPESPEC_EMITTER" != '$('*')' ]]; then
                 optional_params+=(--typespec-emitter "$TYPESPEC_EMITTER")
@@ -294,32 +302,48 @@ stages:
               # Artifacts feed, which does not serve registry signatures.
               npm_config_userconfig="$(SpecRepoDirectory)/.npmrc" pnpm install --frozen-lockfile
               echo "##[endgroup]"
-              node $(SpecRepoDirectory)/eng/tools/spec-gen-sdk-runner/cmd/spec-gen-sdk-runner.js \
+              run_sdk() {
+                node $(SpecRepoDirectory)/eng/tools/spec-gen-sdk-runner/cmd/spec-gen-sdk-runner.js \
                 --scp $(SpecRepoDirectory) \
                 --sdp $(SdkRepoDirectory) \
                 --wf $(System.DefaultWorkingDirectory) \
                 --lang $(SdkRepoName) \
                 --commit $updatedSpecRepoCommit \
                 --spec-repo-url ${{ parameters.SpecRepoUrl }} \
-                "${optional_params[@]}" || true # return true always to suppress exit error logging
+                "${optional_params[@]}"
+              }
+              if [ "$NATIVE_CHECK_SIGNAL" = "none" ]; then
+                run_sdk || true # Preserve the existing artifact-based flow.
+              else
+                # Child logging commands must not override this predicate's task result.
+                native_log="$(Agent.TempDirectory)/native-sdk-check.log"
+                set +e
+                run_sdk > "$native_log" 2>&1
+                native_status=$?
+                set -e
+                sed 's/##/# #/g' "$native_log"
+                exit "$native_status"
+              fi
             displayName: "Generate SDK"
             ${{ if eq(parameters.ForceCreateEvenWithFailures, true) }}:
               continueOnError: true
             env:
               npm_config_userconfig: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
               TYPESPEC_EMITTER: $(TypeSpecEmitter)
+              NATIVE_CHECK_SIGNAL: ${{ parameters.NativeCheckSignal }}
 
-          - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
-            parameters:
-              ArtifactName: $(SpecGenSdkArtifactName)
-              ArtifactPath: "$(System.DefaultWorkingDirectory)/$(SpecGenSdkArtifactPath)"
-              CustomCondition: and(succeededOrFailed(), ne(variables['SpecGenSdkArtifactName'], ''))
+          - ${{ if eq(parameters.NativeCheckSignal, 'none') }}:
+              - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
+                parameters:
+                  ArtifactName: $(SpecGenSdkArtifactName)
+                  ArtifactPath: "$(System.DefaultWorkingDirectory)/$(SpecGenSdkArtifactPath)"
+                  CustomCondition: and(succeededOrFailed(), ne(variables['SpecGenSdkArtifactName'], ''))
 
-          - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
-            parameters:
-              ArtifactName: $(PipelineArtifactsName)
-              ArtifactPath: $(StagedArtifactsFolder)
-              CustomCondition: and(succeededOrFailed(), ne(variables['StagedArtifactsFolder'], ''))
+              - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
+                parameters:
+                  ArtifactName: $(PipelineArtifactsName)
+                  ArtifactPath: $(StagedArtifactsFolder)
+                  CustomCondition: and(succeededOrFailed(), ne(variables['StagedArtifactsFolder'], ''))
 
           - ${{ if and(eq(variables['System.TeamProject'], 'internal'), eq(parameters.CreatePullRequest, true), ne(variables['Build.Reason'], 'PullRequest')) }}:
               - template: /eng/common/pipelines/templates/steps/login-to-github.yml

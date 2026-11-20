@@ -7,6 +7,7 @@ import {
   generateSdkForSpecPr,
 } from "./commands.ts";
 import { getArgumentValue } from "./utils.ts";
+import { nativeCheckExitCode, parseNativeCheckSignal } from "./native-check.ts";
 
 export { detectChangedSpecConfigFromChangedFiles } from "./spec-helpers.ts";
 export {
@@ -26,6 +27,10 @@ export async function main() {
   console.log("Arguments passed to the script:", args.join(" "));
   const batchType: string = getArgumentValue(args, "--batch-type", "");
   const pullRequestNumber: string = getArgumentValue(args, "--pr-number", "");
+  const nativeSignal = parseNativeCheckSignal(getArgumentValue(args, "--native-check-signal", ""));
+  if (nativeSignal && (!pullRequestNumber || batchType)) {
+    throw new Error("Native SDK checks require a spec pull request, not release or batch mode");
+  }
   console.log("Current working directory:", process.cwd());
   const workingFolder: string = getArgumentValue(args, "--wf", path.join(process.cwd(), ".."));
   const logFolder = path.join(workingFolder, "out/logs");
@@ -45,6 +50,11 @@ export async function main() {
     console.error("Unhandled exception in spec-gen-sdk-runner:", error);
     console.log("##vso[task.complete result=Failed;]");
     exit(1);
+  }
+  if (nativeSignal) {
+    const code = nativeCheckExitCode(nativeSignal, result);
+    console.log(`Native SDK predicate ${nativeSignal}: ${code === 0 ? "proven" : "not proven"}`);
+    exit(code);
   }
   if (result.statusCode !== 0) {
     console.log("##vso[task.complete result=Failed;]");
