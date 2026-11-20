@@ -81,6 +81,7 @@ interface Widgets {
 
   @doc("Get how many times a Widget was used in the last 30 days.")
   @added(Versions.v2026_12_01_Preview)
-  @action("getUsage")
-  getWidgetUsage is ResourceAction<WidgetSuite, {}, WidgetUsage>;
+  @get
+  @segment("usage")
+  getWidgetUsage is Foundations.ResourceOperation<WidgetSuite, {}, WidgetUsage>;
 }

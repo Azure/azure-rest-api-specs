@@ -263,49 +263,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/widgets/{widgetName}:getUsage": {
-      "post": {
-        "operationId": "Widgets_GetWidgetUsage",
-        "description": "Get how many times a Widget was used in the last 30 days.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "widgetName",
-            "in": "path",
-            "description": "The widget name.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/WidgetUsage"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get widget usage for the last 30 days.": {
-            "$ref": "./examples/Widgets_GetWidgetUsageSample.json"
-          }
-        }
-      }
-    },
     "/widgets/{widgetName}/operations/{operationId}": {
       "get": {
         "operationId": "Widgets_GetWidgetOperationStatus",
@@ -375,6 +332,49 @@
         "x-ms-examples": {
           "Widgets_GetWidgetOperationStatus": {
             "$ref": "./examples/Widgets_GetWidgetOperationStatusSample.json"
+          }
+        }
+      }
+    },
+    "/widgets/{widgetName}/usage": {
+      "get": {
+        "operationId": "Widgets_GetWidgetUsage",
+        "description": "Get how many times a Widget was used in the last 30 days.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "widgetName",
+            "in": "path",
+            "description": "The widget name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/WidgetUsage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get widget usage for the last 30 days.": {
+            "$ref": "./examples/Widgets_GetWidgetUsageSample.json"
           }
         }
       }
