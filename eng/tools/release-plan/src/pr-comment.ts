@@ -1,3 +1,5 @@
+import { normalizeApiVersion } from "./sdk-workflow-common.ts";
+
 /**
  * Parameters for creating a PR comment about release plan creation.
  */
@@ -97,8 +99,12 @@ export interface CommentBodyParams {
  */
 export function buildReleaseplanCommentBody(params: CommentBodyParams): string {
   const { planId, planLink, apiVersion, tspProjectPath } = params;
+  const isMultiVersion = !normalizeApiVersion(apiVersion);
 
   let body = `### ✅ Release Plan Created\n\n`;
+  body += isMultiVersion
+    ? "No reusable unversioned release plan was found for this project and release type.\n\n"
+    : "No release plan in `In Progress` or `Finished` status was found for this API version.\n\n";
   body += `| Field | Value |\n|-------|-------|\n`;
 
   if (planLink) {
@@ -109,11 +115,16 @@ export function buildReleaseplanCommentBody(params: CommentBodyParams): string {
     body += `| **Release Plan ID** | ${planId} |\n`;
   }
 
-  body += `| **API Version** | \`${apiVersion}\` |\n`;
+  body += `| **API Version** | ${isMultiVersion ? "Multiple or unspecified (empty plan version)" : `\`${apiVersion}\``} |\n`;
   body += `| **TypeSpec Project** | \`${tspProjectPath}\` |\n`;
 
-  body += `\n> **Note:** The SDK will be generated based on API version \`${apiVersion}\`. `;
-  body += `This is the final API version detected from the changes in this pull request.\n`;
+  if (isMultiVersion) {
+    body +=
+      "\n> **Note:** This project targets multiple API versions. Check the release plan for SDK generation details.\n";
+  } else {
+    body += `\n> **Note:** The SDK will be generated based on API version \`${apiVersion}\`. `;
+    body += `This is the final API version detected from the changes in this pull request.\n`;
+  }
 
   return body;
 }
@@ -145,6 +156,7 @@ export interface ErrorCommentParams {
   error: string;
   /** TypeSpec project path */
   tspProjectPath?: string;
+  apiVersion?: string;
 }
 
 export async function postMultipleProjectsComment(
@@ -172,21 +184,29 @@ export async function postMultipleProjectsComment(
 }
 
 /**
- * Post an error comment on a GitHub PR indicating release plan creation failed.
+ * Post an error comment on a GitHub PR indicating release plan processing failed.
  * @param params - Error comment parameters
  * @throws Error if GitHub API call fails
  */
 export async function postReleasePlanErrorComment(params: ErrorCommentParams): Promise<void> {
-  const { octokit, owner, repo, prNumber, error, tspProjectPath } = params;
+  const { octokit, owner, repo, prNumber, error, tspProjectPath, apiVersion } = params;
 
-  let body = `### ❌ Release Plan Creation Failed\n\n`;
+  let body = `### ❌ Release Plan Processing Failed\n\n`;
   body += `**Error:** \`\`\`\n${error}\n\`\`\`\n`;
 
   if (tspProjectPath) {
     body += `\n**TypeSpec Project:** \`${tspProjectPath}\`\n`;
   }
+  if (apiVersion) {
+    body += !normalizeApiVersion(apiVersion)
+      ? "\n**API Version:** Multiple versions (unversioned release plan).\n"
+      : `\n**API Version:** \`${apiVersion}\`\n`;
+  }
 
-  body += `\n**Action Required:** Create a release plan manually using [aka.ms/azsdk/releaseplan-dashboard](https://aka.ms/azsdk/releaseplan-dashboard).\n`;
+  body +=
+    "\n**Action Required:** Check existing plans and fix the error before rerunning this pipeline. " +
+    "You can also create or link a plan manually in " +
+    "[Release Planner](https://aka.ms/azsdk/releaseplan-dashboard).\n";
 
   try {
     if (!octokit.rest.issues?.createComment) {

@@ -1,5 +1,10 @@
 import path from "node:path";
 
+export function normalizeApiVersion(value: string): string {
+  const version = value.trim();
+  return ["all", "multiple-versions"].includes(version.toLowerCase()) ? "" : version;
+}
+
 export function toStringValue(value: unknown): string {
   if (value === null || value === undefined) {
     return "";

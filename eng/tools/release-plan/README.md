@@ -62,12 +62,13 @@ pnpm exec create-release-plan --release-plan-id 12345 `
   --output-file .\out\release-plan.json
 ```
 
-The result contains `outcome`, `releasePlan`, and `details`. Outcomes are
-`created`, `existing_by_pr`, `existing_by_path`, `existing_by_id`, or `not_found`.
+The result contains `outcome`, `releasePlan`, and `details`. Discovery returns
+`created` or `existing_by_path`; direct ID retrieval returns `existing_by_id`.
+Downstream commands also accept older `existing_by_pr` and `not_found` artifacts.
 Downstream commands read the plan's `release_plan_details`, including
 `ReleasePlanId`, `WorkItemId`, and `APISpecProjectPath`.
 
-Discovery skips, including ambiguous projects or a missing resolvable API version,
+Discovery skips, including ambiguous projects or metadata generation errors,
 do not write a result artifact. Use a fresh output location for each run so a
 previous artifact cannot be mistaken for a new result.
 
@@ -103,6 +104,8 @@ are merged are also skipped. Open or closed-unmerged SDK PRs permit regeneration
 an indeterminate PR status causes that language to be skipped. Newly created
 plans generate every non-excluded language. Generation attempts continue after
 a language fails, then the command fails with the list of failed languages.
+Finished plans skip SDK generation, based on the current plan status retrieved
+from the service rather than the artifact's older status.
 
 ## Architecture
 
@@ -145,31 +148,64 @@ Resolved paths are deduplicated. Multiple subservices can therefore resolve to
 one SDK project. If multiple project paths remain, automation creates no plan,
 writes no artifact, and posts a PR comment listing the paths when a PR is known.
 
-API-version selection normally uses the first metadata configuration with both
-`apiVersion` and `packageName`; it does not sort versions. For
-`azure-rest-api-specs-pr`, if that produces no version, any emitter's non-empty
-`apiVersion` can be used without package metadata. Values such as `all` and
-`multiple-versions` are preserved. If private-preview metadata provides no version,
-the tool skips creation and posts an error comment with the project path.
+API-version selection collects metadata configurations with both
+`apiVersion` and `packageName`, trims versions, and deduplicates them case-insensitively.
+One concrete version permits exact-version processing. Differing versions are reported
+as `multiple-versions` and use the unversioned flow rather than selecting the first one. For
+`azure-rest-api-specs-pr`, if that produces no version, non-empty emitter versions
+are collected without requiring package metadata and compared by the same rule.
+Conflicting fallback versions also use the unversioned flow. Values such as `all` and
+`multiple-versions` are preserved in metadata; blank or multi-version metadata is
+normalized to an empty API version for CLI lookup, creation, and returned-plan validation.
 
 The private repository always selects the `Private Preview` API release type.
 Other repositories select `Public Preview` for versions ending in `-preview`,
 otherwise `GA`. SDK release type is independently `beta` for that suffix and
-`stable` otherwise, including for `all` and `multiple-versions`.
+`stable` otherwise. Multi-version projects retain their automatic release-plan
+and eligible management-plane SDK-generation behavior.
 
 ### Plan creation and comments
 
 PRs labeled `FolderMigrationV2` or `skip-releaseplan-automation` are skipped before
-changed files are fetched. Otherwise, the tool looks for an existing plan by PR
-and API release type, then by project path, API version, and API release type.
-Creation is allowed only when the PR has `new-api-version` or a `tspconfig.yaml`
-appears in the changed files. Creating a plan also requires an associated PR.
-The target release month is next month.
+changed files are fetched. Other changes to `.tsp` files or `tspconfig.yaml` under
+`specification` are processed without checking the `new-api-version` label.
 
-Successful creation comments include the plan link/ID, API version, and resolved
-TypeSpec project path. Reusing an existing plan does not post a creation comment.
-API-version resolution errors are reported on the associated PR; failures from
-the subsequent plan operation are commented when creation was eligible.
+The tool searches by project path, API version, and API release type. It reuses a
+plan only when its normalized API version matches and its status is `In Progress` or
+`Finished` (case-insensitive). A plan linked to the PR but targeting another
+version does not prevent creation. If no matching plan is found, the tool creates
+one. Creation requires an associated PR; the target release month is next month.
+A returned plan missing its API version, status, or project path is an error, not permission
+to create a possible duplicate.
+
+Automatic processing requires a CLI that reports explicit `existing`, `created`,
+and `not_found` outcomes and supports `--expected-api-version`. The tool checks
+that lookup contract before calling create, passes the expected version as a
+metadata assertion, and validates the returned plan's project, version, and status.
+If the CLI creates no plan because it reused a matching one, the artifact remains
+`existing_by_path`; released or merged SDKs are not treated as newly generated.
+
+When metadata is blank, `all`, `multiple-versions`, or differs between packages,
+the tool sends an explicit empty version to the CLI. The CLI first searches for
+an empty-version plan by project and release type, then falls back to the PR.
+If no reusable plan exists, it creates an empty-version plan. The same
+`--expected-api-version` assertion supports this flow; no hardcoded project list
+or manual single-version selection is required. A blank plan is never accepted
+for a concrete-version request.
+An existing concrete-version plan of the same project/release type prevents
+creation of an additional unversioned plan and is reported as a conflict.
+
+Successful creation comments explain why a new plan was needed and include its
+link/ID, API version, and resolved TypeSpec project path. Reusing an existing plan
+does not post a creation comment. Intentional skips and matching finished plans
+do not request manual creation.
+
+API-version resolution errors and failures from plan lookup or creation are
+reported on the associated PR. Lookup and creation failures also produce an Azure Pipelines warning
+with recovery instructions and a Release Planner link. Multi-version comments
+explain that the release plan is unversioned. Lookup command failures and invalid JSON
+stop processing; they do not trigger creation. Only the CLI's explicit
+`outcome: "not_found"` response permits creation; an error message alone does not.
 
 ### Pipeline integration
 
