@@ -1,4 +1,5 @@
 import type { AssessmentFact, NormalizedSchema } from "./runtime-types.ts";
+import { effectiveSchemaProperties } from "./autorest-contract.ts";
 
 export function schemaIdentity(schema: NormalizedSchema | undefined): string | undefined {
   return schema?.enumMetadata?.name ?? schema?.reference?.split("/").at(-1);
@@ -13,7 +14,9 @@ export function schemaPath(schema: NormalizedSchema | undefined, segments: strin
     const name = raw.replace(/\[\]$/, "");
     ownerIdentity = identity;
     memberName = name;
-    const property = current?.properties?.find((property) => property.name === name);
+    const property = (current ? effectiveSchemaProperties(current) : []).find(
+      (property) => property.name === name,
+    );
     if (!property) return { schema: undefined, identity, ownerIdentity, memberName };
     current = property.schema;
     identity = schemaIdentity(current) ?? identity;
