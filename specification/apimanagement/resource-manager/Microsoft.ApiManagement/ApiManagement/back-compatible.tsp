@@ -768,6 +768,7 @@ using Microsoft.ApiManagement;
 @@clientName(BackendContracts.update::parameters.properties, "parameters");
 @@clientLocation(BackendContracts.delete, "Backend");
 @@clientLocation(BackendContracts.listByService, "Backend");
+@@clientLocation(BackendContracts.listSecrets, "Backend");
 @@clientLocation(BackendContracts.reconnect, "Backend");
 @@clientName(BackendContracts.reconnect::parameters.body, "parameters");
 @@clientName(
