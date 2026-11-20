@@ -680,7 +680,9 @@ describe("ARM API review workflow", () => {
     ]) {
       expect(source).toContain(`| \`${action}\``);
     }
-    expect(source).toContain("(<verification-status>, N iteration(s), <outcome>)");
+    expect(source).toContain(
+      "Critic verification: <verification-status> (N iteration(s), <outcome>).",
+    );
     expect(source).toContain("Critic unavailable; reviewer self-check only");
     expect(source).not.toContain("(critic-verified, N iteration(s), <outcome>)");
     expect(compiled).toContain("reply_to_pull_request_review_comment");
@@ -818,9 +820,9 @@ describe("ARM API review posting reliability", () => {
     expect(source).toContain("record-arm-semantic-review:");
     expect(source).toContain("scope:");
     expect(source).toContain("completeness:");
-    expect(source).toContain("### Step 9: Record Semantic Result");
+    expect(source).toContain("### Step 8: Record Semantic Result");
     expect(collapsed).toContain(
-      "Call `record_arm_semantic_review` exactly once after queuing the summary",
+      "Call `record_arm_semantic_review` exactly once after queuing the review body",
     );
     expect(compiled).toContain("record_arm_semantic_review");
     expect(compiled).toContain("ARM Semantic Review");
@@ -904,17 +906,15 @@ describe("ARM API review posting reliability", () => {
     expect(source).not.toContain("downgrade Blocking findings to Warning");
   });
 
-  it("makes the Step 8 summary comment unconditional", async () => {
+  it("uses the review body as the single run summary", async () => {
     const source = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
 
-    expect(source).toContain("This is **unconditional**:");
-    // Reconciliation-only runs previously posted replies and resolutions but no summary.
     expect(source).toContain(
-      "including runs whose only other outputs were reconciliation replies and thread resolutions",
+      "This review body is the **single** public header and summary for the run",
     );
-    expect(source).toContain(
-      "A run that queues replies, resolutions or inline findings but no summary comment is a defect.",
-    );
+    expect(source).toContain("Never duplicate it with a separate top-level summary comment.");
+    expect(source).not.toContain("### Step 8: Summary Comment");
+    expect(source).not.toContain("## ARM API Review Summary");
   });
 
   it("pins the scoped-review disclosure above the approval labels line", async () => {
@@ -923,9 +923,9 @@ describe("ARM API review posting reliability", () => {
     expect(source).toContain(
       "Fill the scoped-review disclosure slot whenever **either** a scoped review ran",
     );
-    expect(source).toContain("The summary block order is fixed");
+    expect(source).toContain("The review-body block order is fixed");
     expect(source).toContain(
-      "Placing the disclosure after the approval labels or after the counts table is a template violation even when its content is correct.",
+      "Placing the scope disclosure after the approval labels or after the counts table is a template violation even when its content is correct.",
     );
   });
 
@@ -942,20 +942,25 @@ describe("ARM API review posting reliability", () => {
     );
   });
 
-  it("keeps the reviewer agent consistent with the workflow's summary mandate", async () => {
-    const agent = await readFile(join(ROOT, AGENT_FILE), "utf8");
-    const collapsed = collapseWhitespace(agent);
+  it("keeps the shared parity reference consistent with the workflow's summary mandate", async () => {
+    const [workflow, parity] = await Promise.all([
+      readFile(join(ROOT, SOURCE_FILE), "utf8"),
+      readFile(
+        join(ROOT, ".github/skills/azure-api-review/references/reviewer-posted-parity.md"),
+        "utf8",
+      ),
+    ]);
 
-    // The forbidden one-field marker must never appear verbatim in a prompt:
-    // a live run reproduced exactly this shape after it was shown as an
-    // anti-example.
-    expect(agent).not.toContain("<!-- posted-by: arm-api-reviewer-agent -->");
-    expect(collapsed).toContain("Emitting the **one-field marker form**");
-
-    // The agent previously claimed summaries are not posted by default, which
-    // contradicted the workflow's unconditional Step 8 mandate.
-    expect(collapsed).not.toContain("the agent does not post summary comments by default");
-    expect(collapsed).toContain("its Step 8 posts a summary comment on **every** run");
+    expect(collapseWhitespace(workflow)).toContain(
+      "This review body is the **single** public header and summary for the run",
+    );
+    expect(collapseWhitespace(parity)).toContain(
+      "Every posted ARM review uses exactly one non-empty review body",
+    );
+    for (const source of [workflow, parity].map(collapseWhitespace)) {
+      expect(source).toContain("No issues found.");
+      expect(source).toContain("separate top-level summary comment");
+    }
   });
 });
 
@@ -1028,21 +1033,19 @@ describe("ARM API review consistency and hardening", () => {
     expect(agent).toContain("disclosed **only as a count and themes**");
   });
 
-  it("requires a non-empty review body and a visible attribution preamble in the agent", async () => {
-    const agent = collapseWhitespace(await readFile(join(ROOT, AGENT_FILE), "utf8"));
+  it("requires the unified review body even when there are no findings", async () => {
+    const workflow = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
 
-    // Ported from the workflow, which already enforced this. Empty-body reviews
-    // left findings with no provenance but a hidden HTML marker.
-    expect(agent).toContain("This body is **REQUIRED and MUST be non-empty**");
-    expect(agent).toContain("substitute `unknown` for that one value");
-    expect(agent).toContain(
+    expect(workflow).toContain(
+      "The `submit-pull-request-review` body is **REQUIRED and MUST be non-empty**.",
+    );
+    expect(workflow).toContain("substitute `unknown` for that one value");
+    expect(workflow).toContain(
       "Dropping the body is never an acceptable fallback for a missing field.",
     );
-
-    // Post-condition: re-fetch and confirm a visible preamble actually landed.
-    expect(agent).toContain("**Visible-attribution post-condition (MANDATORY");
-    expect(agent).toContain("does **not** satisfy this check");
-    expect(agent).toContain("post the preamble template above as a **top-level PR comment**");
+    expect(workflow).toContain(
+      "submit the same review body with `No issues found.` rather than calling `noop` or posting a top-level comment",
+    );
   });
 
   it("teaches PowerShell-safe gh fallbacks and caps shell-syntax retries", async () => {
@@ -1111,7 +1114,7 @@ describe("ARM API review consistency and hardening", () => {
     // template whose order is declared fixed.
     expect(source).toContain("<critic-unavailable caution block");
     expect(source).toContain("**Independent Critic verification did not run.**");
-    expect(source).toContain("then the Critic-unavailable caution block when applicable");
+    expect(source).toContain("the Critic-unavailable caution block when applicable");
 
     // Truncation must be able to trigger the disclosure on its own, since a PR
     // can be truncated without exceeding the size cap.
@@ -1128,17 +1131,16 @@ describe("ARM API review consistency and hardening", () => {
     ]);
     const collapsedAgent = collapseWhitespace(agent);
 
-    // The interactive agent posts no summary comment by default, so the
-    // review-body preamble is the only always-present surface. Over-cap
-    // candidates also need a legal action token, or they get posted (breaking
-    // the cap) or dropped (breaking the disclosure).
+    // The review-body preamble is the only always-present summary surface.
+    // Over-cap candidates also need a legal action token, or they get posted
+    // (breaking the cap) or dropped (breaking the disclosure).
     expect(collapsedAgent).toContain("OVERFLOW-NOT-POSTED");
     expect(collapsedAgent).toContain("this agent does not post a summary comment by default");
     expect(collapsedAgent).toContain("never rendered as canonical finding bodies");
     expect(collapsedAgent).toContain(
       "<overflow disclosure -- include only when candidates were excluded by the 20-comment limit; omit otherwise>",
     );
-    expect(workflow.match(/<overflow disclosure -- include only/g)).toHaveLength(2);
+    expect(workflow.match(/<overflow disclosure -- include only/g)).toHaveLength(1);
 
     // There is one 20-comment limit. These phrases belonged to the discarded
     // 50-comment/per-category design and would create a second overflow path.
@@ -1554,7 +1556,7 @@ describe("ARM API review live-run regressions", () => {
     );
   });
 
-  it("puts the scoped-review disclosure slot inside the summary template", async () => {
+  it("puts the scoped-review disclosure slot inside the review-body template", async () => {
     const source = await readFile(join(ROOT, SOURCE_FILE), "utf8");
     const collapsed = collapseWhitespace(source);
 
@@ -1562,7 +1564,7 @@ describe("ARM API review live-run regressions", () => {
     // counts table. The slot must appear in the fenced template itself, between
     // the "Reviewed PR" line and the "Approval labels observed" line.
     const template = source.slice(
-      source.indexOf("## ARM API Review Summary"),
+      source.indexOf("## ARM API Review"),
       source.indexOf("<one-sentence summary of key themes"),
     );
     expect(template).toContain("<scoped-review disclosure line");
@@ -1573,11 +1575,11 @@ describe("ARM API review live-run regressions", () => {
     // And the lead-in must be the literal `**Scoped review:**`, not a variant.
     expect(collapsed).toContain("for example `**Scope note:**`");
     expect(collapsed).toContain(
-      "Placing the disclosure after the approval labels or after the counts table is a template violation",
+      "Placing the scope disclosure after the approval labels or after the counts table is a template violation",
     );
   });
 
-  it("routes findings on unchanged files to the summary instead of inline", async () => {
+  it("routes findings on unchanged files to the review body instead of inline", async () => {
     const source = await readFile(join(ROOT, SOURCE_FILE), "utf8");
     const collapsed = collapseWhitespace(source);
 
@@ -1592,16 +1594,15 @@ describe("ARM API review live-run regressions", () => {
     );
   });
 
-  it("keeps the review body's finding range honest", async () => {
+  it("does not claim unpublished inline finding numbers in the review body", async () => {
     const source = await readFile(join(ROOT, SOURCE_FILE), "utf8");
     const collapsed = collapseWhitespace(source);
 
-    // The live review body said "See inline comments for findings 1-2" when
-    // only finding 1 was ever published.
+    expect(source).not.toContain("<range-or-list>");
+    expect(collapsed).not.toContain("All findings are reported in the summary comment.");
     expect(collapsed).toContain(
-      "must enumerate only findings that were actually queued as inline comments",
+      "findings on unchanged files -- include only when a finding cannot be anchored to the PR diff",
     );
-    expect(collapsed).toContain("All findings are reported in the summary comment.");
   });
 
   it("teaches a marker form that survives both prompt rendering and publication", async () => {
