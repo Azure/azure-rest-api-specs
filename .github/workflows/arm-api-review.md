@@ -1079,9 +1079,10 @@ Before queuing any `create-pull-request-review-comment`, confirm its `path`
 appears in the PR's changed-file list. If it does not:
 
 1. Do **not** queue the inline comment.
-2. Report the finding in the review body instead, under a
-   **`Findings on unchanged files`** subsection, naming the file and the rule ID
-   and carrying the same severity.
+2. Include the full, unchanged canonical finding body in the review body,
+   under a **`Findings on unchanged files`** subsection. Preserve its evidence,
+   file and rule citations, severity, classification, suggested fix, and
+   telemetry marker; a summary theme alone does not satisfy this requirement.
 3. Count it in the summary's category table exactly as if it had been posted
    inline, so the counts stay truthful.
 
