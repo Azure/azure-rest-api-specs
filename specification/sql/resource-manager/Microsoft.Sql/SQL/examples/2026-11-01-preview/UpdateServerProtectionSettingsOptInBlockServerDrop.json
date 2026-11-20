@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "protection-rg",
+    "serverName": "protection-server",
+    "serverProtectionSettingsName": "default",
+    "parameters": {
+      "properties": {
+        "blockDropWhenImmutablePitrBackupInRetention": "enabled"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/protection-rg/providers/Microsoft.Sql/servers/protection-server/serverProtectionSettings/default",
+        "name": "default",
+        "type": "Microsoft.Sql/servers/serverProtectionSettings",
+        "properties": {
+          "blockDropWhenImmutablePitrBackupInRetention": "enabled"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "operation": "UpdateServerProtectionSettings",
+        "startTime": "2026-11-01T00:00:00Z"
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/protection-rg/providers/Microsoft.Sql/locations/eastus/serverProtectionSettingsAzureAsyncOperation/11111111-1111-1111-1111-111111111111?api-version=2026-11-01-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/protection-rg/providers/Microsoft.Sql/locations/eastus/serverProtectionSettingsOperationResults/11111111-1111-1111-1111-111111111111?api-version=2026-11-01-preview",
+        "Retry-After": 15
+      }
+    }
+  },
+  "operationId": "ServerProtectionSettings_CreateOrUpdate",
+  "title": "Opt in block server drop"
+}

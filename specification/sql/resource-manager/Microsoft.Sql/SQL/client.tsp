@@ -6,6 +6,17 @@ using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
 using Microsoft.Sql;
 
+@@clientName(ReaderEndpoints.createOrUpdate::parameters.resource, "parameters");
+@@clientName(ReaderEndpoints.update::parameters.properties, "parameters");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserves x-ms-client-flatten from the source reader endpoint Swagger. Approval is required for flattening on this new public API."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ReaderEndpoint.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserves x-ms-client-flatten from the source reader endpoint PATCH Swagger. Approval is required for flattening on this new public API."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ReaderEndpointUpdate.properties
+);
+
 // TODO: remove this when breaking change is allowed
 @@alternateType(
   SecurityAlertsPolicyProperties.state,
@@ -19,6 +30,21 @@ using Microsoft.Sql;
 );
 
 @@clientName(Microsoft.Sql, "SqlManagementClient", "java,javascript,python");
+
+@@clientName(ServerProtectionSettingsOperations, "ServerProtectionSettings");
+@@clientName(
+  ServerProtectionSettingsOperations.createOrUpdate::parameters.resource,
+  "parameters"
+);
+
+@@clientName(
+  ManagedInstanceServerProtectionSettingsOperations,
+  "ManagedInstanceServerProtectionSettings"
+);
+@@clientName(
+  ManagedInstanceServerProtectionSettingsOperations.createOrUpdate::parameters.resource,
+  "parameters"
+);
 
 @@clientName(SyncAgentLinkedDatabaseProperties.userName, "username", "java");
 @@clientName(SyncMemberProperties.userName, "username", "java");
@@ -785,6 +811,11 @@ using Microsoft.Sql;
 @@alternateType(ServicePrincipal.clientId, uuid, "csharp");
 @@alternateType(ServicePrincipal.tenantId, uuid, "csharp");
 @@alternateType(
+  ManagedDatabaseProperties.legacyRestorableDroppedDatabaseId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
   ManagedDatabaseProperties.restorableDroppedDatabaseId,
   armResourceIdentifier,
   "csharp"
@@ -1508,6 +1539,11 @@ union SqlNameAvailabilityResourceType {
   "csharp"
 );
 @@alternateType(ManagedInstanceOperation.name, uuid, "csharp");
+@@alternateType(
+  DistributedAvailabilityGroupDatabaseOperation.name,
+  uuid,
+  "csharp"
+);
 @@alternateType(InstancePoolOperation.name, uuid, "csharp");
 @@clientName(ElasticPools.cancel, "CancelElasticPoolOperation", "csharp");
 

@@ -40,10 +40,14 @@ import "./DataMaskingPolicy.tsp";
 import "./DataWarehouseUserActivities.tsp";
 import "./DeletedServer.tsp";
 import "./DistributedAvailabilityGroup.tsp";
+import "./DistributedAvailabilityGroupDatabaseOperation.tsp";
+import "./DistributedAvailabilityGroupDatabaseOperationFeatureRegistration.tsp";
 import "./ElasticPool.tsp";
 import "./EncryptionProtector.tsp";
 import "./EndpointCertificate.tsp";
 import "./FailoverGroup.tsp";
+import "./ReaderEndpoint.tsp";
+import "./ReaderEndpointFeatureRegistration.tsp";
 import "./FirewallRule.tsp";
 import "./GeoBackupPolicy.tsp";
 import "./InstanceFailoverGroup.tsp";
@@ -65,6 +69,7 @@ import "./LongTermRetentionPolicy.tsp";
 import "./MaintenanceWindowOptions.tsp";
 import "./MaintenanceWindows.tsp";
 import "./ManagedBackupShortTermRetentionPolicy.tsp";
+import "./ManagedDatabaseFromDroppedManagedInstanceBackupShortTermRetentionPolicies.tsp";
 import "./ManagedDatabaseAdvancedThreatProtection.tsp";
 import "./ManagedDatabaseMoveOperationResult.tsp";
 import "./ManagedInstanceQuery.tsp";
@@ -84,6 +89,7 @@ import "./ManagedInstanceOperation.tsp";
 import "./ManagedInstancePrivateEndpointConnection.tsp";
 import "./ManagedInstancePrivateLink.tsp";
 import "./ManagedInstance.tsp";
+import "./ManagedInstanceServerProtectionSettings.tsp";
 import "./ManagedInstanceVulnerabilityAssessment.tsp";
 import "./ManagedLedgerDigestUploads.tsp";
 import "./ManagedServerDnsAlias.tsp";
@@ -97,6 +103,9 @@ import "./RecoverableManagedDatabase.tsp";
 import "./ReplicationLink.tsp";
 import "./RestorableDroppedDatabase.tsp";
 import "./RestorableDroppedManagedDatabase.tsp";
+import "./RestorableDroppedManagedDatabasesFromDroppedManagedInstance.tsp";
+import "./RestorableDroppedManagedInstancesByLocation.tsp";
+import "./RestoreFromDroppedManagedInstanceFeatureRegistration.tsp";
 import "./RestorePoint.tsp";
 import "./ServerAdvancedThreatProtection.tsp";
 import "./ServerAutomaticTuning.tsp";
@@ -107,6 +116,7 @@ import "./ServerConnectionPolicy.tsp";
 import "./ServerDevOpsAuditingSettings.tsp";
 import "./ServerDnsAlias.tsp";
 import "./ServerKey.tsp";
+import "./ServerProtectionSettings.tsp";
 import "./Server.tsp";
 import "./ServerSecurityAlertPolicy.tsp";
 import "./ServerTrustCertificate.tsp";
@@ -136,7 +146,9 @@ using TypeSpec.Versioning;
 /**
  * The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.
  */
-@Azure.ResourceManager.Legacy.features(Features)
+@Azure.ResourceManager.Legacy.features(
+  Microsoft.SqlFeatureRegistration.DistributedAvailabilityGroupDatabaseOperationFeatures
+)
 @armProviderNamespace
 @service(#{ title: "SqlManagementClient" })
 @versioned(Versions)
@@ -452,6 +464,12 @@ enum Versions {
    * The 2026-08-01-preview API version.
    */
   v2026_08_01_preview: "2026-08-01-preview",
+
+  /**
+   * The 2026-11-01-preview API version.
+   */
+  @previewVersion
+  v2026_11_01_preview: "2026-11-01-preview",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
