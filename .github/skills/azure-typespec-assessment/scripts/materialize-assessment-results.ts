@@ -20,6 +20,7 @@ import {
 import { canonicalJson } from "./stable-id.ts";
 import {
   hashArtifacts,
+  normalizeWorkRelativePath,
   readWorkflowState,
   resolveWorkPath,
   transitionWorkflowState,
@@ -1372,8 +1373,9 @@ export function materializeAssessmentResults({
         readJsonObject(resolveWorkPath(root, relativePath)),
       );
     }
-    const materializationInputs = hashArtifacts(root, [INDEX_FILE, decisionsPath]);
-    const agentDecisions = readJsonObject(resolveWorkPath(root, decisionsPath));
+    const normalizedDecisionsPath = normalizeWorkRelativePath(root, decisionsPath);
+    const materializationInputs = hashArtifacts(root, [INDEX_FILE, normalizedDecisionsPath]);
+    const agentDecisions = readJsonObject(resolveWorkPath(root, normalizedDecisionsPath));
     validateCompactDecisions(agentDecisions);
     if ((agentDecisions.schemaVersion === 2) !== (modelInput.pipelineVersion === 2)) {
       throw new Error("Agent decisions pipeline does not match the canonical model input.");
@@ -1457,7 +1459,7 @@ export function materializeAssessmentResults({
           materialization: createRuntimePhaseProvenance(
             root,
             runtime,
-            [INDEX_FILE, decisionsPath],
+            [INDEX_FILE, normalizedDecisionsPath],
             outputArtifacts.filter(([, value]) => value !== undefined).map(([file]) => file),
           ),
         },
@@ -1476,14 +1478,14 @@ export function materializeAssessmentResults({
           inference: inference ? "inference.json" : null,
           guidelineEvidence: "compliance-search-evidence.json",
           judgment: "assessment-judgment.json",
-          agentDecisions: decisionsPath,
+          agentDecisions: normalizedDecisionsPath,
         },
         failure: undefined,
         telemetry: {
           materializedAt: new Date().toISOString(),
           materializationMs,
           materializedOutputBytes: outputBytes,
-          agentDecisionBytes: fs.statSync(resolveWorkPath(root, decisionsPath)).size,
+          agentDecisionBytes: fs.statSync(resolveWorkPath(root, normalizedDecisionsPath)).size,
         },
       },
     );

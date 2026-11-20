@@ -493,6 +493,20 @@ test("changed or missing source decisions require rematerialization, including c
   const defaultPath = path.join(root, "agent-workspace/source-association-decisions.json");
   const customPath = "agent-workspace/custom-source-decisions.json";
   fs.renameSync(defaultPath, path.join(root, customPath));
+  materializeSourceAssociation({ work: root, decisions: `.\\${customPath.replaceAll("/", "\\")}` });
+  assert.equal(loadSourceAssociation(root).reviews["rest-1"].outcome, "keep");
+
+  const outputPath = path.join(root, "source-association.json");
+  const forgedOutput = JSON.parse(fs.readFileSync(outputPath, "utf8")) as {
+    decisionHashes: Record<string, string>;
+  };
+  forgedOutput.decisionHashes = hashArtifacts(root, ["model-input.json"]);
+  atomicWriteJson(outputPath, forgedOutput);
+  transitionWorkflowState(root, "ready-for-finalization", {
+    sourceResultHash: hashArtifacts(root, ["source-association.json"])["source-association.json"],
+  });
+  assert.throws(() => loadSourceAssociation(root), /Missing source decision hashes/);
+
   materializeSourceAssociation({ work: root, decisions: customPath });
   assert.equal(loadSourceAssociation(root).reviews["rest-1"].outcome, "keep");
 

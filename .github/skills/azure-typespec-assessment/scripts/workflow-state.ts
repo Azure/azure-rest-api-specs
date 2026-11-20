@@ -98,14 +98,29 @@ export function resolveWorkPath(work: string, relativePath: string): string {
   return resolved;
 }
 
+export function normalizeWorkRelativePath(work: string, relativePath: string): string {
+  const root = path.resolve(work);
+  const resolved = resolveWorkPath(work, relativePath);
+  const normalized = path.relative(root, resolved).replaceAll("\\", "/");
+  if (!normalized) {
+    throw new Error(
+      `Artifact path must address a file within the work directory: ${relativePath}.`,
+    );
+  }
+  return normalized;
+}
+
 export function hashArtifacts(work: string, relativePaths: string[]): Record<string, string> {
+  const normalizedPaths = [
+    ...new Set(relativePaths.map((relativePath) => normalizeWorkRelativePath(work, relativePath))),
+  ].sort();
   return Object.fromEntries(
-    [...new Set(relativePaths)].sort().map((relativePath) => {
+    normalizedPaths.map((relativePath) => {
       const file = resolveWorkPath(work, relativePath);
       if (!fs.existsSync(file)) {
         throw new Error(`Missing canonical artifact: ${relativePath}.`);
       }
-      return [relativePath.replaceAll("\\", "/"), sha256File(file)];
+      return [relativePath, sha256File(file)];
     }),
   );
 }
