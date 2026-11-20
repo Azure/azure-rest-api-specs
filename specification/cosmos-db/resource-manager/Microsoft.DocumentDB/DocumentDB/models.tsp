@@ -595,6 +595,12 @@ union MinimalTlsVersion {
   Tls11: "Tls11",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Tls12: "Tls12",
+
+  /**
+   * Sets the minimum TLS version allowed for requests to the database account to TLS 1.3.
+   */
+  @added(Versions.v2026_10_15)
+  Tls13: "Tls13",
 }
 
 /**
