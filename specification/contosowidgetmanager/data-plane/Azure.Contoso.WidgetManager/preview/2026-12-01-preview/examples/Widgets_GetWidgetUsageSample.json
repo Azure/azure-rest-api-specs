@@ -1,0 +1,27 @@
+{
+  "operationId": "Widgets_GetWidgetUsage",
+  "title": "Get widget usage for the last 30 days.",
+  "parameters": {
+    "api-version": "2026-12-01-preview",
+    "widgetName": "searchbox"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "current",
+        "usageCount": 1250,
+        "windowStart": "2026-11-01T00:00:00Z",
+        "windowEnd": "2026-12-01T00:00:00Z"
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message",
+          "details": []
+        }
+      }
+    }
+  }
+}
