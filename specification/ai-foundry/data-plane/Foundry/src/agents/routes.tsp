@@ -17,8 +17,11 @@ interface Agents {
   @get
   @route("/agents/{agent_name}")
   @tag("Agents")
+  @extension("x-ms-foundry-meta", ManagedAgentsConditionalPreviews)
   getAgent is FoundryDataPlaneOperation<
     {
+      ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.managed_agents_v1_preview>;
+
       /** The name of the agent to retrieve. */
       @path agent_name: string;
     },
@@ -41,7 +44,10 @@ interface Agents {
   )
   createAgent is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
-    CreateAgentRequest,
+    {
+      /** The agent and its initial version definition. */
+      @body body: CreateAgentRequest;
+    },
     AgentObject
   >;
 
@@ -235,8 +241,10 @@ interface Agents {
   @route("/agents")
   @list
   @tag("Agents")
+  @extension("x-ms-foundry-meta", ManagedAgentsConditionalPreviews)
   listAgents is FoundryDataPlaneOperation<
     {
+      ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.managed_agents_v1_preview>;
       ...ListAgentQueryParameters;
     },
     AgentsPagedResult<AgentObject>
@@ -244,6 +252,7 @@ interface Agents {
 
   /**
    * Creates a new version for the specified agent and returns the created version resource.
+   * If the Agent does not exist, creates it and its default identity as part of first-version creation.
    */
   @summary("Create an agent version")
   @post
@@ -254,7 +263,7 @@ interface Agents {
   @extension("x-ms-summary-override", "Create an agent version")
   @extension(
     "x-ms-description-override",
-    "Creates a new version for the specified agent and returns the created version resource."
+    "Creates a new version for the specified agent and returns the created version resource. If the Agent does not exist, creates it and its default identity as part of first-version creation. Managed agent-source and session-source definitions both use this operation; no separate identity-only setup request is required. Later versions reuse the Agent and identity."
   )
   createAgentVersion is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys,
@@ -519,56 +528,86 @@ interface Agents {
 
   /**
    * Creates a new session for an agent endpoint.
-   * The endpoint resolves the backing agent version from `version_indicator` and
-   * enforces session ownership using the provided user identity for session-mutating operations.
+   * Hosted keeps its existing version_indicator request and response.
+   * Managed resolves the endpoint's configured version and validates the complete definition
+   * from that version or the Session according to definition_source, without a merge or request selector.
+   * Managed creation returns the Session with 201; Environment preparation and turns can proceed asynchronously.
+   * Managed requests use existing endpoint interact/action authorization and enforce creator isolation.
    */
   @summary("Create a session")
   @post
-  @route("/agents/{agent_name}/endpoint/sessions")
+  @route("/agents/{name}/endpoint/sessions")
   @tag("Agent Sessions")
+  @extension("x-ms-foundry-meta", ManagedAgentsConditionalPreviews)
   createSession is FoundryDataPlaneOperation<
     {
-      /** The name of the agent to create a session for. */
-      @path agent_name: string;
+      ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.managed_agents_v1_preview>;
 
-      ...CreateAgentSessionRequest;
+      /** The name of the agent to create a session for. */
+      @path("name") agent_name: string;
+
+      /** Optional for Managed creation. An identical keyed retry returns the original result and resolved version; changed input conflicts. Without a key, deduplication is not guaranteed. Hosted behavior is unchanged. */
+      @header("Idempotency-Key")
+      idempotency_key?: string;
+
+      /** The owning Agent's definition kind selects Hosted or Managed validation, not a new Session-body discriminator. */
+      @body body: AgentSessionCreateContent;
     },
-    ResourceCreatedResponse<AgentSessionResource>
+    CreatedAgentSession
   >;
 
   /**
-   * Retrieves the details of a hosted agent session by agent name and session identifier.
+   * Retrieves a Hosted or Managed Session by Agent name and its opaque identifier.
+   * Managed requires existing endpoint interact/action authorization and creator isolation.
    */
   @summary("Get a session")
   @get
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}")
+  @route("/agents/{name}/endpoint/sessions/{session_name}")
   @tag("Agent Sessions")
+  @extension("x-ms-foundry-meta", ManagedAgentsConditionalPreviews)
   getSession is FoundryDataPlaneOperation<
     {
+      ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.managed_agents_v1_preview>;
+
       /** The name of the agent. */
-      @path agent_name: string;
+      @path("name") agent_name: string;
 
       /** The session identifier. */
-      @path session_id: string;
+      @path("session_name") session_id: string;
     },
-    AgentSessionResource
+    AgentSession
   >;
 
   /**
-   * Deletes a session synchronously.
+   * Deletes a Hosted or Managed Session synchronously.
+   * If a Managed Session has an in-progress Turn, deletion returns 409 Conflict
+   * without cancelling the Turn unless force=true.
+   * The caller can cancel the Turn and retry deletion after it stops,
+   * or retry deletion with force=true.
+   * With force=true, active work is stopped and the Session is deleted.
+   * Managed requires preview opt-in, existing endpoint interact/action authorization,
+   * and creator isolation, including for forced deletion.
+   * Deleting a Session does not delete its owning Agent, saved definitions, or shared resources.
    * Returns 204 No Content when the session is deleted or does not exist.
+   * Hosted deletion behavior is unchanged; force applies only to Managed Sessions.
    */
   @summary("Delete a session")
   @delete
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}")
+  @route("/agents/{name}/endpoint/sessions/{session_name}")
   @tag("Agent Sessions")
+  @extension("x-ms-foundry-meta", ManagedAgentsConditionalPreviews)
   deleteSession is FoundryDataPlaneOperation<
     {
+      ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.managed_agents_v1_preview>;
+
       /** The name of the agent. */
-      @path agent_name: string;
+      @path("name") agent_name: string;
 
       /** The session identifier. */
-      @path session_id: string;
+      @path("session_name") session_id: string;
+
+      /** For Managed Sessions, stop active work and delete the Session when true. Defaults to false, which returns 409 for an in-progress Turn without cancelling it. Hosted behavior is unchanged. */
+      @query force?: boolean = false;
     },
     NoContentResponse
   >;
@@ -578,35 +617,201 @@ interface Agents {
    */
   @summary("Stop a session")
   @post
-  @route("/agents/{agent_name}/endpoint/sessions/{session_id}:stop")
+  @route("/agents/{name}/endpoint/sessions/{session_name}:stop")
   @tag("Agent Sessions")
   stopSession is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
-      @path agent_name: string;
+      @path("name") agent_name: string;
 
       /** The session identifier. */
-      @path session_id: string;
+      @path("session_name") session_id: string;
     },
     NoContentResponse
   >;
 
   /**
    * Returns a paged collection of sessions associated with the specified agent endpoint.
+   * Managed uses the existing endpoint interact/action permission and filters every result to the creator.
+   * The Agent's definition kind selects the Hosted or Managed response; existing Hosted paging is unchanged.
    */
   @summary("List sessions for an agent")
   @get
-  @route("/agents/{agent_name}/endpoint/sessions")
+  @route("/agents/{name}/endpoint/sessions")
   @list
   @tag("Agent Sessions")
+  @extension("x-ms-foundry-meta", ManagedAgentsConditionalPreviews)
   listSessions is FoundryDataPlaneOperation<
     {
+      ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.managed_agents_v1_preview>;
+
       /** The name of the agent. */
-      @path agent_name: string;
+      @path("name") agent_name: string;
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<AgentSessionResource>
+    AgentsPagedResult<AgentSession>
+  >;
+
+  /**
+   * Submits client events to a Managed Session and returns ordered admission receipts, not completed work.
+   * A message starts a root turn when idle or steers the active root turn.
+   * Cancellation targets the root turn active at acceptance; closing an event stream does not cancel it.
+   * Uses existing endpoint interact/action authorization and service-side creator isolation for every event.
+   */
+  @summary("Submit session events")
+  @post
+  @route("/agents/{name}/endpoint/sessions/{session_name}/events")
+  @tag("Agent Sessions")
+  @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
+  createSessionEvents is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.managed_agents_v1_preview,
+    {
+      /** The owning Agent's project-local name. */
+      @path("name") agent_name: string;
+
+      /** The opaque Session identifier. */
+      @path("session_name") session_id: string;
+
+      /**
+       * Optional key scoped to caller, project, and this route. An identical keyed retry returns the
+       * original receipts; a different body under the same retained key conflicts with 409.
+       * No retention duration or exactly-once external effects are implied. Without a key, deduplication
+       * is not guaranteed.
+       */
+      @header("Idempotency-Key")
+      idempotency_key?: string;
+
+      /** A nonempty batch of messages, cancellation, function results, or approval responses. */
+      @body body: ManagedAgents.SessionSubmitEventsContent;
+    },
+    ManagedAgents.SessionEventsAccepted
+  >;
+
+  /**
+   * Streams live Managed Session events as SSE. This is not a durable event list or replay API.
+   * No Last-Event-ID or sequence cursor is accepted. Reconnect by buffering a new stream and
+   * reconciling Session, turn, and item snapshots. Text deltas are previews, not authoritative history.
+   * Uses existing endpoint interact/action authorization and service-side creator isolation.
+   */
+  @summary("Stream session events")
+  @get
+  @route("/agents/{name}/endpoint/sessions/{session_name}/events")
+  @tag("Agent Sessions")
+  @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
+  streamSessionEvents is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.managed_agents_v1_preview,
+    {
+      /** The owning Agent's project-local name. */
+      @path("name") agent_name: string;
+
+      /** The opaque Session identifier. */
+      @path("session_name") session_id: string;
+
+      /** Whether events may include random obfuscation padding on this connection. */
+      @query
+      include_obfuscation?: boolean = true;
+    },
+    TypeSpec.SSE.SSEStream<ManagedAgents.SessionEvent>
+  >;
+
+  /**
+   * Lists saved turns without inferring completion from transient stream events.
+   * Uses existing endpoint interact/action authorization and service-side creator isolation.
+   */
+  @summary("List session turns")
+  @get
+  @route("/agents/{name}/endpoint/sessions/{session_name}/turns")
+  @tag("Agent Sessions")
+  @list
+  @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
+  listSessionTurns is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.managed_agents_v1_preview,
+    {
+      /** The owning Agent's project-local name. */
+      @path("name") agent_name: string;
+
+      /** The opaque Session identifier. */
+      @path("session_name") session_id: string;
+
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<ManagedAgents.SessionTurn>
+  >;
+
+  /**
+   * Retrieves a saved turn and its recorded status, usage, and error.
+   * Uses existing endpoint interact/action authorization and service-side creator isolation.
+   */
+  @summary("Get a session turn")
+  @get
+  @route("/agents/{name}/endpoint/sessions/{session_name}/turns/{turn_id}")
+  @tag("Agent Sessions")
+  @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
+  getSessionTurn is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.managed_agents_v1_preview,
+    {
+      /** The owning Agent's project-local name. */
+      @path("name") agent_name: string;
+
+      /** The opaque Session identifier. */
+      @path("session_name") session_id: string;
+
+      /** The requested turn identifier. */
+      @path turn_id: string;
+    },
+    ManagedAgents.SessionTurn
+  >;
+
+  /**
+   * Lists typed saved items for one turn, preserving the full upstream item payloads.
+   * Uses existing endpoint interact/action authorization and service-side creator isolation.
+   */
+  @summary("List turn items")
+  @get
+  @route("/agents/{name}/endpoint/sessions/{session_name}/turns/{turn_id}/items")
+  @tag("Agent Sessions")
+  @list
+  @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
+  listSessionTurnItems is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.managed_agents_v1_preview,
+    {
+      /** The owning Agent's project-local name. */
+      @path("name") agent_name: string;
+
+      /** The opaque Session identifier. */
+      @path("session_name") session_id: string;
+
+      /** The requested turn identifier. */
+      @path turn_id: string;
+
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<ManagedAgents.SessionItem>
+  >;
+
+  /**
+   * Lists typed Session history. This does not provide an audit log of every runtime event.
+   * Uses existing endpoint interact/action authorization and service-side creator isolation.
+   */
+  @summary("List session items")
+  @get
+  @route("/agents/{name}/endpoint/sessions/{session_name}/items")
+  @tag("Agent Sessions")
+  @list
+  @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
+  listSessionItems is FoundryDataPlaneRequiredPreviewOperation<
+    AgentDefinitionOptInKeys.managed_agents_v1_preview,
+    {
+      /** The owning Agent's project-local name. */
+      @path("name") agent_name: string;
+
+      /** The opaque Session identifier. */
+      @path("session_name") session_id: string;
+
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<ManagedAgents.SessionItem>
   >;
 
   /**
