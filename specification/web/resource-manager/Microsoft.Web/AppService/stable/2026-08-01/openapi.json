@@ -41942,7 +41942,7 @@
         "pfxBlob": {
           "type": "string",
           "format": "byte",
-          "description": "Pfx blob."
+          "description": "Base64-encoded PFX certificate. This property should not be used together with\n`keyVaultId` or `keyVaultSecretName`, or to update an existing Key Vault-linked certificate."
         },
         "siteName": {
           "type": "string",
@@ -42000,7 +42000,7 @@
         "keyVaultId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Azure Key Vault Csm resource Id.",
+          "description": "Resource ID of the Azure Key Vault containing the certificate. Specify this property\ntogether with `keyVaultSecretName` to import a certificate from Key Vault.\nThis property should not be used together with `pfxBlob`.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -42011,7 +42011,7 @@
         },
         "keyVaultSecretName": {
           "type": "string",
-          "description": "Azure Key Vault secret name."
+          "description": "Name of the Azure Key Vault secret containing the certificate. Specify this property\ntogether with `keyVaultId` to import a certificate from Key Vault.\nThis property should not be used together with `pfxBlob`."
         },
         "keyVaultSecretStatus": {
           "$ref": "#/definitions/KeyVaultSecretStatus",
