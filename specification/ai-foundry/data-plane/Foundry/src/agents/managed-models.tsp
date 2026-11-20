@@ -318,7 +318,7 @@ namespace ManagedAgents {
     type: "managed";
 
     /** Explicit allocation mode when the Environment selector is supplied. */
-    mode: PlatformEnvironmentMode;
+    provisioning_mode: PlatformEnvironmentMode;
   }
 
   /** Content accepted in initial user messages, subject to model and harness support. */

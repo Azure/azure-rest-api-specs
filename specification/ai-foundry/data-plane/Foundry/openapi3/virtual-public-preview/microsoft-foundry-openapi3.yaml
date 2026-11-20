@@ -60028,14 +60028,14 @@ components:
       type: object
       required:
         - type
-        - mode
+        - provisioning_mode
       properties:
         type:
           type: string
           enum:
             - managed
           description: Use the platform-provided Environment.
-        mode:
+        provisioning_mode:
           $ref: '#/components/schemas/ManagedAgents.PlatformEnvironmentMode'
           description: Explicit allocation mode when the Environment selector is supplied.
       description: A Session-level managed Environment selector, not live allocation state or an Agent definition kind.
