@@ -39,7 +39,10 @@ export function evaluateReviewRequirements(
     dataPlane:
       active &&
       impact.services.some(
-        (service) => service.plane === "data-plane" && service.newApiVersions.length > 0,
+        (service) =>
+          service.plane === "data-plane" &&
+          // In-flight older artifacts retain their original new-version-only behavior.
+          (service.hasApiDefinitionChanges ?? service.newApiVersions.length > 0),
       ),
     suppressions: impact.services.some(
       (service) => service.plane === "resource-manager" && service.suppressionsChanged,

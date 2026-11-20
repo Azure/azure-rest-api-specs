@@ -468,8 +468,8 @@ export function processImpactAssessment(
   const dataplaneLabel = new Label("data-plane", labelContext.present);
   dataplaneLabel.shouldBePresent = services.some((service) => service.plane === "data-plane");
 
-  // Auto-applied intake signal for data-plane stewardship review. Present exactly when a
-  // data-plane service introduces a new API version. This single label is what the merge gate, reviewer
+  // Auto-applied intake signal for qualifying data-plane API-definition changes in any version.
+  // This single label is what the merge gate, reviewer
   // assignment, and the review queue all key off. Reviewer assignment is owned by the
   // azure-sdk-automation GitHub App (it requests the reviewer team with its own identity,
   // which the default Actions token cannot do). See rulesPri0dataPlane below.
@@ -790,8 +790,10 @@ const rulesPri0dataPlane: RequiredLabelRule[] = [
       `${labelBadge("data-plane-review-signoff")}.`,
     ),
     troubleshootingGuide: paragraph(
-      `Your PR requires an API stewardship review as it introduces a new data-plane API`,
-      `version (label: ${labelBadge("data-plane-review-requested")}). A data-plane API reviewer is`,
+      `API stewardship review was requested for your PR`,
+      `(label: ${labelBadge("data-plane-review-requested")}). API-definition changes in new or`,
+      `existing data-plane versions request review automatically; review can also be requested`,
+      `manually. A data-plane API reviewer is`,
       `assigned from the pool and unblocks merge by applying the protected`,
       `${labelBadge("data-plane-review-signoff")} label. To request or expedite the`,
       `${link("offline REST API review", "https://eng.ms/docs/products/azure-developer-experience/design/api-review#requesting-an-offline-rest-api-review")},`,
