@@ -226,6 +226,12 @@ union OpenIdConnectClientCredentialMethod {
 @@alternateType(SourceControlProperties.repoUrl, url, "csharp");
 
 // C# @@clientName customizations.
+@@clientName(
+  SandboxGroupCustomerManagedKeyEncryption.keyEncryptionKeyUrl,
+  "KeyEncryptionKeyUri",
+  "csharp"
+);
+
 @@clientName(Affinity, "StickySessionAffinity", "csharp");
 
 @@clientName(IngressStickySessions.affinity, "StickySessionAffinity", "csharp");
