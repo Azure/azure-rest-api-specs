@@ -28,6 +28,14 @@ To ensure you see the same results from TypeSpecValidation in your PR check and 
    4. `pnpm tsv specification/contosowidgetmanager/Contoso.Management`
    5. `git status`
    6. If any changes, `git add`, `git commit`, `git push` to update your PR.
+
+  Unexpected generated Swagger or example differences are commonly caused by either:
+
+  - running `pnpm tsv <folder>` before synchronizing the PR branch with its base branch; or
+  - changing TypeSpec source or examples without rerunning `pnpm tsv <folder>` and committing the generated files.
+
+  Synchronize your PR branch with the base branch, rerun `pnpm tsv <folder>`, and review the generated changes. If the changes are expected, commit and push them to your PR branch.
+
 3. If you are still having problems, try cloning your branch to a new folder, or try on another machine.
 4. If the problem can be reproduced on a clean machine, request assistance from the [TypeSpec Discussion](https://teams.microsoft.com/l/channel/19%3A906c1efbbec54dc8949ac736633e6bdf%40thread.skype/TypeSpec%20Discussion?groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47) teams channel.
 
@@ -173,6 +181,14 @@ They currently evaluate the five management-plane SDK emitters listed above. Bot
 - The project configures no SDK language emitters.
 - The project is a multiple-service project, because the metadata emitter reports `multiple-versions` for every language emitter instead of the API version each emitter is configured with.
 - The pull request adds no new TypeSpec API version.
+
+#### Projects with no SDK language emitters
+
+When a project configures no SDK language emitters in `tspconfig.yaml`, there are no emitter API-version settings for `MultipleNewApiVersions` or `StaleApiVersionPin` to compare. TypeSpecValidation therefore skips both rules. This is the expected result and does not require adding temporary SDK emitters or suppressing either rule.
+
+If TypeSpecValidation still reports a failure, check the rule name in the validation output. A failure from another rule should be investigated according to that rule; it does not mean that `MultipleNewApiVersions` or `StaleApiVersionPin` was evaluated with hidden SDK emitters.
+
+This behavior applies specifically to these two API-version rules. It does not determine whether other SDK-related configuration or automation exists elsewhere in the repository.
 
 ### Running the rules locally
 
