@@ -487,6 +487,20 @@ union AllocationStrategy {
   Prioritized: "Prioritized",
 }
 
+/**
+ * Specifies how VM SKUs are distributed across instances in the virtual machine scale set.
+ */
+@added(Versions.v2026_09_01)
+union SkuDistributionMode {
+  string,
+
+  /** VMs may use different SKUs from the SkuProfile list (multi-SKU). */
+  Heterogeneous: "Heterogeneous",
+
+  /** All VMs use a single SKU selected from the SkuProfile list. */
+  Homogeneous: "Homogeneous",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ExpandTypesForGetVMScaleSets {
   string,
@@ -1020,15 +1034,33 @@ union PatchOperationStatus {
 /**
  * Specifies the policy for the resource's placement in an availability zone. Use **Auto** for Virtual Machines and Virtual Machine Scale Sets to let the system automatically select an availability zone during resource creation. **Any** remains supported for Virtual Machines for backward compatibility.
  */
-union ZonePlacementPolicyType {
+@removed(Versions.v2026_09_01)
+@renamedFrom(Versions.v2026_09_01, "ZonePlacementPolicyType")
+union ZonePlacementPolicyTypeLegacy {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Automatic zone placement for Virtual Machines in API versions before 2026-09-01, retained for backward compatibility.
+   */
   Any: "Any",
 
   /**
    * Automatic zone placement for Virtual Machines and Virtual Machine Scale Sets.
    */
   @added(Versions.v2025_04_01)
+  Auto: "Auto",
+}
+
+/**
+ * Specifies the policy for the resource's placement in an availability zone. Possible value is: **Auto** - An availability zone will be automatically picked by the system as part of resource creation.
+ */
+@added(Versions.v2026_09_01)
+union ZonePlacementPolicyType {
+  string,
+
+  /**
+   * Automatic zone placement for Virtual Machines and Virtual Machine Scale Sets.
+   */
   Auto: "Auto",
 }
 
@@ -1242,6 +1274,10 @@ union LifecycleHookActionState {
 
   /** The lifecycle hook for the target resource is rejected. */
   Rejected: "Rejected",
+
+  /** A terminal state that indicates the lifecycle hook for the target resource is no longer relevant & was abandoned by the platform. No further action on the target is expected from the customer. */
+  @added(Versions.v2026_09_01)
+  Abandoned: "Abandoned",
 }
 
 /**
@@ -1256,6 +1292,10 @@ union VMScaleSetLifecycleHookEventState {
 
   /** The lifecycle hook event is completed. i.e., all the target resources in the event have moved to a terminal state. */
   Completed: "Completed",
+
+  /** A terminal state that indicates the lifecycle hook event is no longer relevant & was abandoned by the platform. No further action on the event is expected from the customer. */
+  @added(Versions.v2026_09_01)
+  Abandoned: "Abandoned",
 }
 
 /**
@@ -2107,6 +2147,23 @@ model ScheduledEventsPolicy {
    */
   @added(Versions.v2025_04_01)
   allInstancesDown?: AllInstancesDown;
+
+  /**
+   * The configuration parameters used to opt in to Extended Scheduled Events.
+   */
+  @added(Versions.v2026_09_01)
+  extendedScheduledEvents?: ExtendedScheduledEvents;
+}
+
+/**
+ * Specifies Extended Scheduled Events related configurations. Extended Scheduled Events give longer notice before maintenance and repair events.
+ */
+@added(Versions.v2026_09_01)
+model ExtendedScheduledEvents {
+  /**
+   * Specifies whether to opt in to Extended Scheduled Events. The setting takes effect only on supported hardware.
+   */
+  enable?: boolean;
 }
 
 /**
@@ -3272,12 +3329,12 @@ model SecurityProfile {
  */
 model UefiSettings {
   /**
-   * Specifies whether secure boot should be enabled on the virtual machine. Minimum api-version: 2020-12-01.
+   * Specifies whether secure boot should be enabled on the virtual machine. Minimum api-version: 2020-12-01. Starting with api-version 2026-09-01, if not specified, this defaults to true when a Trusted Launch virtual machine is created or an existing virtual machine is upgraded to Trusted Launch, unless vTpmEnabled is explicitly set to false.
    */
   secureBootEnabled?: boolean;
 
   /**
-   * Specifies whether vTPM should be enabled on the virtual machine. Minimum api-version: 2020-12-01.
+   * Specifies whether vTPM should be enabled on the virtual machine. Minimum api-version: 2020-12-01. Starting with api-version 2026-09-01, if not specified, this defaults to true when a Trusted Launch virtual machine is created or an existing virtual machine is upgraded to Trusted Launch, unless secureBootEnabled is explicitly set to false.
    */
   vTpmEnabled?: boolean;
 }
@@ -3555,6 +3612,7 @@ model ApplicationProfile {
 /**
  * Specifies the required information to reference a compute gallery application version
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The existing VM application response does not include provisioningState."
 model VMGalleryApplication {
   /**
    * Optional, Specifies a passthrough value for more generic context.
@@ -3567,9 +3625,30 @@ model VMGalleryApplication {
   order?: int32;
 
   /**
+   * Specifies whether the gallery application is managed outside the VM application extension.
+   */
+  @added(Versions.v2026_09_01)
+  manuallyManaged?: boolean;
+
+  /**
    * Specifies the GalleryApplicationVersion resource id on the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{application}/versions/{version}
    */
   packageReferenceId: string;
+
+  /**
+   *  This is the id of "Directly" SharedGalleries. Such references represent the "fake" proxy-only resources
+   *  created in "sharedTo" subscriptions. These are shared directly to a subscription/Microsoft Entra ID tenant, instead of using RBAC-based sharing.
+   *  The resource id looks like:
+   *  /sharedGalleries/{SharedGalleryUniqueName}/applications/{applicationName}/versions/1.0.0
+   */
+  @added(Versions.v2026_09_01)
+  sharedGalleryApplicationId?: string;
+
+  /**
+   * Specifies the community gallery application version resource id on the form of /communityGalleries/{PublicGalleryName}/applications/{applicationName}/versions/{version}
+   */
+  @added(Versions.v2026_09_01)
+  communityGalleryApplicationId?: string;
 
   /**
    * Optional, Specifies the uri to an azure blob that will replace the default configuration for the package if provided
@@ -3582,9 +3661,129 @@ model VMGalleryApplication {
   treatFailureAsDeploymentFailure?: boolean;
 
   /**
+   * Contains the deployment status of this application
+   * Populated only if requested using GET {VMApplicationName}?$expand=instanceView
+   * It is ignored if set in the request body of the PUT api.
+   */
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Read)
+  instanceView?: VMGalleryApplicationInstanceView;
+
+  /**
    * If set to true, when a new Gallery Application version is available in PIR/SIG, it will be automatically updated for the VM/VMSS
    */
   enableAutomaticUpgrade?: boolean;
+
+  /**
+   * Zero or more custom actions. These are always processed with PATCH semantics.
+   */
+  @added(Versions.v2026_09_01)
+  @identifiers(#[])
+  customActions?: VMGalleryApplicationCustomAction[];
+}
+
+/**
+ * Specifies the properties of a gallery application resource.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The existing VM application response does not include provisioningState."
+@added(Versions.v2026_09_01)
+model VMGalleryApplicationProperties is OmitProperties<
+  VMGalleryApplication,
+  "tags"
+>;
+
+/**
+ * Specifies a custom action for a gallery application.
+ */
+@added(Versions.v2026_09_01)
+model VMGalleryApplicationCustomAction {
+  /**
+   * Required. The name of the action to run.
+   */
+  name: string;
+
+  /**
+   * Optional. A unique identifier that distinguishes this run of the action from any other.
+   * Note that in practice this should be a guid, but we have no constraints. We really only
+   * care whether it's different than the previous value. The unique identifier of the custom action.
+   */
+  uniqueIdentifier?: string;
+
+  /**
+   * Optional. The order in which the custom action should be executed.
+   */
+  order?: int32;
+
+  /**
+   * Optional. The list of parameters for the custom action.
+   */
+  @identifiers(#[])
+  parameters?: VMGalleryApplicationCustomActionParameter[];
+}
+
+/**
+ * Specifies a custom action parameter for a gallery application.
+ */
+@added(Versions.v2026_09_01)
+model VMGalleryApplicationCustomActionParameter {
+  /**
+   * The name of the custom action parameter.
+   */
+  name: string;
+
+  /**
+   * The value of the custom action parameter.
+   */
+  value: string;
+}
+
+/**
+ * Specifies the instance view of a gallery application.
+ */
+@added(Versions.v2026_09_01)
+model VMGalleryApplicationInstanceView {
+  /**
+   * The application status status information.
+   */
+  @identifiers(#[])
+  statuses?: InstanceViewStatus[];
+
+  /**
+   * The name of the application.
+   */
+  name?: string;
+
+  /**
+   * The version of the application.
+   */
+  version?: string;
+
+  /**
+   * The current status of the application
+   */
+  result?: string;
+
+  /**
+   * The list of actions performed on the application instance.
+   */
+  @identifiers(#[])
+  actionsPerformed: VMGalleryApplicationInstanceViewAction[];
+}
+
+/**
+ * Specifies the action being performed on the application instance and its result.
+ */
+@added(Versions.v2026_09_01)
+model VMGalleryApplicationInstanceViewAction {
+  /**
+   * The action being performed.
+   */
+  operation?: string;
+
+  /**
+   * The result of the action performed.
+   */
+  result?: string;
 }
 
 /**
@@ -3893,6 +4092,12 @@ model SkuProfile {
    * Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated.
    */
   allocationStrategy?: AllocationStrategy;
+
+  /**
+   * Specifies how VM SKUs are distributed across instances. Heterogeneous allows multiple SKUs; Homogeneous pins all VMs to a single selected SKU from the SkuProfile list.
+   */
+  @added(Versions.v2026_09_01)
+  skuDistributionMode?: SkuDistributionMode;
 
   /**
    * Specifies the policy that controls whether the platform may automatically migrate scale set instances to a different VM size from the SKU profile depending on platform demands. When omitted, automatic SKU migration is disabled.
@@ -5584,6 +5789,21 @@ model BootDiagnosticsInstanceView {
 }
 
 /**
+ * Specifies the Instance Profile reference for a virtual machine.
+ */
+@added(Versions.v2026_09_01)
+model InstanceProfile {
+  /**
+   * Specifies the resource ID of the gallery Instance Profile version. The ID must use the format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/instanceProfiles/{instanceProfileName}/versions/{versionNumber}.
+   */
+  id: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/galleries/instanceProfiles/versions";
+    }
+  ]>;
+}
+
+/**
  * Specifies the FlexProfile for a virtual machine. When set, Azure may deploy a compatible alternative VM size based on capacity and placement considerations, and the deployed size is returned in hardwareProfile.vmSize. See the properties.flexProfile description for the full usage rules, including how it interacts with hardwareProfile.vmSize.
  */
 @added(Versions.v2026_04_01)
@@ -5643,6 +5863,7 @@ model StorageProfile {
   /**
    * Specifies whether the regional disks should be aligned/moved to the VM zone. This is applicable **only** for VMs with placement.zonePlacementPolicy set to **Any**. Please note that this change is irreversible. Minimum api-version: 2024-11-01.
    */
+  @removed(Versions.v2026_09_01)
   alignRegionalDisksToVMZone?: boolean;
 
   /**
@@ -5664,6 +5885,113 @@ model ZoneMovement {
 }
 
 /**
+ * Specifies the protection type configured for a virtual machine.
+ */
+@added(Versions.v2026_09_01)
+union VirtualMachineProtectionType {
+  string,
+
+  /**
+   * The virtual machine is not protected.
+   */
+  None: "None",
+
+  /**
+   * The virtual machine uses Basic VM Protection. The platform creates periodic restore points for the virtual machine. Please refer to https://aka.ms/BasicVMProtection/PeriodicRestorePoints for more details.
+   */
+  Basic: "Basic",
+
+  /**
+   * The virtual machine is protected by Azure Backup.
+   */
+  AzureBackup: "AzureBackup",
+}
+
+/**
+ * The provisioning state of a virtual machine protection resource.
+ */
+// Instantiate the union to inline its schema so readOnly is not ignored beside a $ref.
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "CRP never returns Canceled for the VirtualMachineProtection singleton, so only the states the service returns are listed."
+@added(Versions.v2026_09_01)
+union VirtualMachineProtectionProvisioningState<Extensible = string> {
+  Extensible,
+
+  /** Resource has been created. */
+  Succeeded: "Succeeded",
+
+  /** Resource creation failed. */
+  Failed: "Failed",
+
+  /** The protection configuration is being created. */
+  Creating: "Creating",
+
+  /** The protection configuration is being updated. */
+  Updating: "Updating",
+
+  /** The virtual machine is being deleted. */
+  Deleting: "Deleting",
+}
+
+/**
+ * Specifies the properties of a virtual machine protection resource.
+ */
+@added(Versions.v2026_09_01)
+model VirtualMachineProtectionProperties {
+  /**
+   * The protection type. Customers can set this property to None or Basic. AzureBackup is set only by the Azure Backup service.
+   */
+  protectionType: VirtualMachineProtectionType;
+
+  /**
+   * The provisioning state, which only appears in the response. Canceled is not expected to be returned for virtual machine protection.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: VirtualMachineProtectionProvisioningState<string>;
+
+  /**
+   * The resource ID of the restore point collection associated with the virtual machine. This collection holds the periodic restore points created by the platform. Please refer to https://aka.ms/BasicVMProtection/PeriodicRestorePoints for more details.
+   */
+  @visibility(Lifecycle.Read)
+  restorePointCollectionId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/restorePointCollections";
+    }
+  ]>;
+
+  /**
+   * The resource ID of the Azure Backup protected item associated with the virtual machine.
+   */
+  @visibility(Lifecycle.Read)
+  backupResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems";
+    }
+  ]>;
+}
+
+/**
+ * Specifies the protection information projected in the virtual machine response.
+ */
+@added(Versions.v2026_09_01)
+model VirtualMachineProtectionPropertiesMinimalSet {
+  /**
+   * The protection type configured for the virtual machine.
+   */
+  @visibility(Lifecycle.Read)
+  protectionType?: VirtualMachineProtectionType;
+
+  /**
+   * The resource ID of the restore point collection associated with the virtual machine. This collection holds the periodic restore points created by the platform. Please refer to https://aka.ms/BasicVMProtection/PeriodicRestorePoints for more details.
+   */
+  @visibility(Lifecycle.Read)
+  restorePointCollectionId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/restorePointCollections";
+    }
+  ]>;
+}
+
+/**
  * Gets resiliency solutions enabled on the VM. This includes backup or disaster recovery solutions.
  */
 @added(Versions.v2025_11_01)
@@ -5672,6 +6000,28 @@ model ResiliencyProfile {
    * Zone movement configuration.
    */
   zoneMovement?: ZoneMovement;
+
+  /**
+   * [Preview Feature] The read-only protection information for the virtual machine.
+   */
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Read)
+  vmProtection?: VirtualMachineProtectionPropertiesMinimalSet;
+}
+
+/**
+ * Specifies the restore point used to restore a virtual machine.
+ */
+@added(Versions.v2026_09_01)
+model VirtualMachineRestoreParameters {
+  /**
+   * The resource ID of the restore point whose disks are used to restore the virtual machine.
+   */
+  restorePointId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/restorePointCollections/restorePoints";
+    }
+  ]>;
 }
 
 /**
@@ -6717,6 +7067,13 @@ model VirtualMachineProperties {
   hardwareProfile?: HardwareProfile;
 
   /**
+   * Specifies the instance profile related details of a virtual machine.
+   */
+  @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  instanceProfile?: InstanceProfile;
+
+  /**
    * [Preview Feature] Specifies a FlexProfile for VM size. Azure may deploy a compatible alternative VM size based on capacity and placement considerations, and returns the deployed size in hardwareProfile.vmSize. A request that adds flexProfile must omit hardwareProfile.vmSize. For a virtual machine that uses FlexProfile, a hardwareProfile.vmSize equal to the deployed size is ignored, so a GET response can be sent back unchanged. A PATCH request that omits flexProfile keeps it. A PUT request that omits flexProfile and sets hardwareProfile.vmSize clears it. This property cannot exist along with a non-null properties.availabilitySet, properties.capacityReservation, properties.host, properties.hostGroup, properties.proximityPlacementGroup or properties.virtualMachineScaleSet.
    */
   @added(Versions.v2026_04_01)
@@ -6868,6 +7225,12 @@ model VirtualMachineProperties {
    */
   @added(Versions.v2025_11_01)
   resiliencyProfile?: ResiliencyProfile;
+
+  /**
+   * Sets up run command service for supporting immediate run command execution in the future.
+   */
+  @added(Versions.v2026_09_01)
+  installRunCommandAsService?: boolean;
 }
 
 /**
@@ -7133,6 +7496,14 @@ model Placement {
   /**
    * Specifies the policy for the resource's placement in an availability zone. Use **Auto** for Virtual Machines and Virtual Machine Scale Sets to let the system automatically select an availability zone during resource creation. **Any** remains supported for Virtual Machines for backward compatibility.
    */
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "zonePlacementPolicy")
+  zonePlacementPolicyLegacy?: ZonePlacementPolicyTypeLegacy;
+
+  /**
+   * Specifies the policy for the resource's placement in an availability zone. Possible value is: **Auto** - An availability zone will be automatically picked by the system as part of resource creation.
+   */
+  @added(Versions.v2026_09_01)
   zonePlacementPolicy?: ZonePlacementPolicyType;
 
   /**
@@ -9800,7 +10171,17 @@ model VirtualMachineRunCommandProperties {
   /**
    * The parameters used by the script.
    */
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "protectedParameters")
   @identifiers(#["name"])
+  protectedParametersLegacy?: RunCommandInputParameter[];
+
+  /**
+   * The parameters used by the script.
+   */
+  @added(Versions.v2026_09_01)
+  @identifiers(#["name"])
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   protectedParameters?: RunCommandInputParameter[];
 
   /**
@@ -9817,7 +10198,23 @@ model VirtualMachineRunCommandProperties {
    * Specifies the user account password on the VM when executing the run command.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Backward compatibility: keeping wire format unchanged for existing API versions"
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "runAsPassword")
+  runAsPasswordLegacy?: string;
+
+  /**
+   * Specifies the user account password on the VM when executing the run command.
+   */
+  @added(Versions.v2026_09_01)
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   runAsPassword?: string;
+
+  /**
+   * Optional. If set to true, the command will be run immediately bypassing typical pipelines to reach the VM directly..
+   */
+  @added(Versions.v2026_09_01)
+  runImmediately?: boolean;
 
   /**
    * The timeout in seconds to execute the run command.
@@ -9861,6 +10258,13 @@ model VirtualMachineRunCommandProperties {
    * Optional. If set to true, any failure in the script will fail the deployment and ProvisioningState will be marked as Failed. If set to false, ProvisioningState would only reflect whether the run command was run or not by the extensions platform, it would not indicate whether script failed in case of script failures. See instance view of run command in case of script failures to see executionMessage, output, error: https://aka.ms/runcommandmanaged#get-execution-status-and-results
    */
   treatFailureAsDeploymentFailure?: boolean;
+
+  /**
+   * Optional. If true, sequence number of the extension will be incremented even if the script and settings have been executed in previous execution part of previous sequence number.
+   * Increasing the sequence number should result in re-running the Run Command again when Linux or Windows Run Command is execution on VM.
+   */
+  @added(Versions.v2026_09_01)
+  forceRerun?: boolean;
 }
 
 /**
@@ -9927,6 +10331,14 @@ model RunCommandInputParameter {
   /**
    * The run command parameter value.
    */
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "value")
+  valueLegacy: string;
+
+  /**
+   * The run command parameter value.
+   */
+  @added(Versions.v2026_09_01)
   value: string;
 }
 

@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVM",
+    "api-version": "2026-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/applications/myGalleryApplication",
+            "name": "myGalleryApplication",
+            "type": "Microsoft.Compute/virtualMachines/applications",
+            "properties": {
+              "packageReferenceId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGallery/applications/myApplication/versions/1.0.0",
+              "sharedGalleryApplicationId": "/sharedGalleries/mySharedGallery/applications/myApplication/versions/1.0.0",
+              "manuallyManaged": false
+            }
+          },
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/applications/myCommunityGalleryApplication",
+            "name": "myCommunityGalleryApplication",
+            "type": "Microsoft.Compute/virtualMachines/applications",
+            "properties": {
+              "packageReferenceId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGallery/applications/myCommunityApplication/versions/2.0.0",
+              "communityGalleryApplicationId": "/CommunityGalleries/myCommunityGallery/Applications/myCommunityApplication/Versions/2.0.0"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "VirtualMachineVMGalleryApplications_List",
+  "title": "List gallery applications installed on a virtual machine."
+}

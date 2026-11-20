@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2026-04-01
+tag: package-2026-09-01
 
 directive:
   - where:
@@ -371,6 +371,30 @@ suppressions:
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/deallocate"].post.parameters
 # Suppressions for existing API versions for ComputeRP.json
+  - code: ParametersInPointGet
+    reason: The optional $expand=instanceView query parameter is required to retrieve the gallery application instance view.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/applications/{applicationName}"].get.parameters
+  - code: ParametersInPointGet
+    reason: The optional $expand=instanceView query parameter is required to retrieve the gallery application instance view.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/applications/{applicationName}"].get.parameters
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: The existing VM gallery application response contract does not include provisioningState.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/applications/{applicationName}"].put
+  - code: ProvisioningStateSpecifiedForLROPatch
+    reason: The existing VM gallery application response contract does not include provisioningState.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/applications/{applicationName}"].patch.responses["200"]
+  - code: PatchResponseCodes
+    reason: The VM gallery application PATCH service contract returns 200 with the updated resource and does not return 202. Adding a 202 response would misrepresent the wire behavior and change generated SDK response handling.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/applications/{applicationName}"].patch
+  - code: LroPatch202
+    reason: The VM gallery application PATCH service contract returns 200 with the updated resource and does not return 202. Adding a 202 response would misrepresent the wire behavior and change generated SDK response handling.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/applications/{applicationName}"].patch
   - code: GetCollectionResponseSchema
     reason: VirtualMachineRunCommands list returns a different schema than individual get by design.
     from: ComputeRP.json
@@ -692,6 +716,10 @@ suppressions:
     reason: Existing PUT response codes maintained for backward compatibility.
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}"].put
+  - code: PutResponseCodes
+    reason: VirtualMachineProtection is a singleton that always exists on the virtual machine, so the service never returns 201. It returns 200 for both synchronous and asynchronous updates.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmProtections/default"].put
 
   - code: PostResponseCodes
     reason: Existing POST response codes maintained for backward compatibility.
@@ -864,6 +892,14 @@ suppressions:
     reason: Existing LRO PUT operation maintained for backward compatibility.
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}"].put
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: The service never returns 201 for the VirtualMachineProtection singleton, so there is no 201 response schema. The 200 response schema includes provisioningState, the same as VirtualMachineScaleSetVMs_Update.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmProtections/default"].put
+  - code: ProvisioningStateValidation
+    reason: The service never returns Canceled for the VirtualMachineProtection singleton, so the enum lists only the provisioning states the service returns.
+    from: ComputeRP.json
+    where: $.definitions.VirtualMachineProtectionProperties.properties.provisioningState
   - code: RequestSchemaForTrackedResourcesMustHaveTags
     reason: Existing tracked resource request schema for backward compatibility.
     from: ComputeRP.json
@@ -884,6 +920,27 @@ suppressions:
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/diagnosticRunCommands/{runCommandName}"].get.parameters
     reason: Required query parameter for GET
+```
+
+### Tag: package-2026-09-01
+
+These settings apply only when `--tag=package-2026-09-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-09-01'
+input-file:
+  - stable/2026-09-01/ComputeRP.json
+  - stable/2026-03-02/DiskRP.json
+  - stable/2021-07-01/skus.json
+  - stable/2026-03-03/GalleryRP.json
+```
+
+### Tag: package-2026-09-01-only
+
+These settings apply only when `--tag=package-2026-09-01-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-09-01-only'
+input-file:
+  - stable/2026-09-01/ComputeRP.json
 ```
 
 ### Tag: package-2026-03-03
@@ -964,15 +1021,6 @@ input-file:
   - stable/2025-03-03/GalleryRP.json
 ```
 
-### Tag: package-2026-03-02-only
-
-These settings apply only when `--tag=package-2026-03-02-only` is specified on the command line.
-
-```yaml $(tag) == 'package-2026-03-02-only'
-input-file:
-  - stable/2026-03-02/DiskRP.json
-```
-
 ### Tag: package-2026-03-01-only
 
 These settings apply only when `--tag=package-2026-03-01-only` is specified on the command line.
@@ -980,6 +1028,15 @@ These settings apply only when `--tag=package-2026-03-01-only` is specified on t
 ```yaml $(tag) == 'package-2026-03-01-only'
 input-file:
   - stable/2026-03-01/ComputeRP.json
+```
+
+### Tag: package-2026-03-02-only
+
+These settings apply only when `--tag=package-2026-03-02-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03-02-only'
+input-file:
+  - stable/2026-03-02/DiskRP.json
 ```
 
 ### Tag: package-2025-11-01
@@ -1002,7 +1059,6 @@ These settings apply only when `--tag=package-2025-11-01-only` is specified on t
 input-file:
   - stable/2025-11-01/ComputeRP.json
 ```
-
 
 ### Tag: package-2025-04-01
 
