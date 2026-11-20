@@ -1,0 +1,62 @@
+{
+  "operationId": "Entity_ListDiagnosis",
+  "title": "List entity diagnosis with unavailable signal evidence",
+  "parameters": {
+    "endpoint": "https://contoso-1f33ba.eastus.data.cloudhealth.azure.com",
+    "api-version": "2026-10-01-preview",
+    "entityName": "backend-api",
+    "maxDepth": 0
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "requestedEntityName": "backend-api",
+        "observedAt": "2026-06-05T12:30:00Z",
+        "status": "Partial",
+        "value": [
+          {
+            "entityName": "backend-api",
+            "nonContributingDependencyNames": [],
+            "evidence": {
+              "healthState": "Unknown",
+              "outcome": "HealthUnknown",
+              "determiningInputCategories": [],
+              "signals": [
+                {
+                  "kind": "Signal",
+                  "signalName": "cpu-utilization",
+                  "healthState": "Unknown",
+                  "history": {
+                    "status": "Unavailable",
+                    "truncated": false,
+                    "value": []
+                  }
+                }
+              ],
+              "dependencies": [],
+              "signalGroupAggregations": []
+            }
+          }
+        ],
+        "partial": [
+          {
+            "reason": "SignalUnavailable",
+            "affectedCount": 1
+          }
+        ]
+      }
+    },
+    "default": {
+      "headers": {
+        "Retry-After": "30",
+        "x-ms-error-code": "ServiceUnavailable"
+      },
+      "body": {
+        "error": {
+          "code": "ServiceUnavailable",
+          "message": "The service is temporarily unavailable. Retry after the specified delay."
+        }
+      }
+    }
+  }
+}

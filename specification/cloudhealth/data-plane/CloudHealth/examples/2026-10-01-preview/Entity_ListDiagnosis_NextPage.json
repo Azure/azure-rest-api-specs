@@ -1,0 +1,81 @@
+{
+  "operationId": "Entity_ListDiagnosis",
+  "title": "List entity diagnosis next page",
+  "parameters": {
+    "endpoint": "https://contoso-1f33ba.eastus.data.cloudhealth.azure.com",
+    "api-version": "2026-10-01-preview",
+    "entityName": "frontend-web-app",
+    "maxDepth": 1,
+    "timestamp": "2026-06-05T12:30:00Z",
+    "nextMarker": "eyJwYWdlIjoyfQ"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "requestedEntityName": "frontend-web-app",
+        "observedAt": "2026-06-05T12:30:00Z",
+        "status": "Complete",
+        "value": [
+          {
+            "entityName": "orders-database",
+            "parentEntityName": "frontend-web-app",
+            "contributedHealthState": "Degraded",
+            "azureResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Microsoft.Sql/servers/orders-sql/databases/orders-database",
+            "nonContributingDependencyNames": [],
+            "evidence": {
+              "healthState": "Degraded",
+              "lastHealthTransitionAt": "2026-06-05T12:10:00Z",
+              "outcome": "ContributingInputsAndAggregation",
+              "determiningInputCategories": [
+                "Dependency"
+              ],
+              "signals": [],
+              "dependencies": [
+                {
+                  "entityName": "orders-storage",
+                  "contributedHealthState": "Degraded",
+                  "boundary": "MaxDepth"
+                }
+              ],
+              "dependencyAggregation": {
+                "effectiveAggregation": {
+                  "configuration": {
+                    "aggregationType": "WorstOf",
+                    "ignoreUnknown": false
+                  },
+                  "resolution": "Configured"
+                },
+                "healthState": "Degraded",
+                "inputCounts": {
+                  "total": 1,
+                  "evaluated": 1,
+                  "healthy": 0,
+                  "degraded": 1,
+                  "unhealthy": 0,
+                  "unknown": 0
+                },
+                "calculation": {
+                  "metric": "WorstInputHealthState"
+                }
+              },
+              "signalGroupAggregations": []
+            }
+          }
+        ],
+        "partial": []
+      }
+    },
+    "default": {
+      "headers": {
+        "Retry-After": "30",
+        "x-ms-error-code": "ServiceUnavailable"
+      },
+      "body": {
+        "error": {
+          "code": "ServiceUnavailable",
+          "message": "The service is temporarily unavailable. Retry after the specified delay."
+        }
+      }
+    }
+  }
+}
