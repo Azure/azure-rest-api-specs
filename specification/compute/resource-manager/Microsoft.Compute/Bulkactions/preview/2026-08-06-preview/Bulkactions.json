@@ -645,7 +645,7 @@
         "tags": [
           "BulkCreateCustom"
         ],
-        "description": "Creates or updates BulkCreateCustoms.",
+        "description": "Creates virtual machines in bulk with custom settings.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -688,6 +688,12 @@
             "description": "Resource 'LocationBasedBulkCreateCustom' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/LocationBasedBulkCreateCustom"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
             }
           },
           "201": {
