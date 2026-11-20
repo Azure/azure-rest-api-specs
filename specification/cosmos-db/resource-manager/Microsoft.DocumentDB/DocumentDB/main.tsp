@@ -102,6 +102,13 @@ enum Versions {
   v2026_07_15: "2026-07-15",
 
   /**
+   * The 2026-09-01-preview API version.
+   */
+  #suppress "@azure-tools/typespec-azure-core/preview-version-last-member" "Retain the published preview contract; preview-only declarations are removed in 2026-10-15 with @removed."
+  @Azure.Core.previewVersion
+  v2026_09_01_preview: "2026-09-01-preview",
+
+  /**
    * The 2026-10-15 API version.
    */
   v2026_10_15: "2026-10-15",

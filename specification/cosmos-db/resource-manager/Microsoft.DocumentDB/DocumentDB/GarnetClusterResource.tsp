@@ -15,6 +15,8 @@ namespace Microsoft.DocumentDB;
 /**
  * Representation of a Garnet cache cluster.
  */
+@removed(Versions.v2026_10_15)
+@added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
 model GarnetClusterResource
@@ -33,6 +35,8 @@ model GarnetClusterResource
   identity?: ManagedCassandraManagedServiceIdentity;
 }
 
+@removed(Versions.v2026_10_15)
+@added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
 @armResourceOperations(#{ omitTags: true })
