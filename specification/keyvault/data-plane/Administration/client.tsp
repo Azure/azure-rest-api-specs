@@ -136,6 +136,21 @@ interface KeyVaultEkmRestClient {
   deleteEkmConnection is KeyVault.deleteEkmConnection;
 }
 
+/** Client initialization parameters for the Key Vault EKM client. */
+model KeyVaultEkmClientInitialization {
+  /** The base URL of the Key Vault instance (e.g. https://myvault.vault.azure.net/) */
+  @paramAlias("vaultBaseUrl")
+  vaultUri: url;
+}
+
+@@clientInitialization(
+  KeyVaultEkmRestClient,
+  {
+    parameters: KeyVaultEkmClientInitialization,
+  },
+  "csharp"
+);
+
 @@access(KeyVault.fullBackup, Access.internal, "csharp");
 @@access(KeyVault.fullRestoreOperation, Access.internal, "csharp");
 @@access(KeyVault.fullBackupStatus, Access.internal, "csharp");
