@@ -43,11 +43,10 @@ interface TenantLevelSharedGalleryInvites {
   tenantLevelGallerySharingAccept is ComputeResourceActionAsyncBase<
     TenantLevelSharedGalleryInvite,
     void,
-    | ArmAcceptedLroResponse<
-        "Resource operation accepted.",
-        ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-      >
-    | (ArmNoContentResponse<"Action completed successfully."> & {})
+    ArmAcceptedLroResponse<
+      "Resource operation accepted.",
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    > | (ArmNoContentResponse<"Action completed successfully."> & {})
   >;
 
   /**
@@ -61,10 +60,9 @@ interface TenantLevelSharedGalleryInvites {
   tenantLevelGallerySharingReject is ComputeResourceActionAsyncBase<
     TenantLevelSharedGalleryInvite,
     void,
-    | ArmAcceptedLroResponse<
-        "Resource operation accepted.",
-        ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-      >
-    | (ArmNoContentResponse<"Action completed successfully."> & {})
+    ArmAcceptedLroResponse<
+      "Resource operation accepted.",
+      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    > | (ArmNoContentResponse<"Action completed successfully."> & {})
   >;
 }

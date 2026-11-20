@@ -8,85 +8,70 @@ using Microsoft.Compute;
 
 // Service-level SDK names.
 @@clientName(Microsoft.Compute, "RecommenderMgmtClient", "python");
-@@clientName(
-  Microsoft.Compute,
+@@clientName(Microsoft.Compute,
   "ComputeRecommenderManagementClient",
   "javascript"
 );
 
 // Shared placement score SDK types.
-@@doc(
-  PlacementScore,
+@@doc(PlacementScore,
   "The placement score for a virtual machine SKU, region, and availability zone combination."
 );
-@@doc(
-  PlacementScore.score,
+@@doc(PlacementScore.score,
   "A placement score indicating the likelihood of successfully allocating the specified virtual machines."
 );
 @@alternateType(PlacementScore.region, azureLocation, "csharp");
 @@clientName(PlacementScore, "ComputeRecommenderPlacementScore", "csharp");
 @@clientName(ResourceSize, "ComputeRecommenderResourceSize", "csharp");
-@@clientName(
-  PlacementScoresProperties,
+@@clientName(PlacementScoresProperties,
   "ComputeRecommenderPlacementScoresProperties",
   "csharp"
 );
 
 // Spot placement score SDK names preserve the existing C# API surface.
-@@alternateType(
-  SpotPlacementScoresInput.desiredLocations,
+@@alternateType(SpotPlacementScoresInput.desiredLocations,
   azureLocation[],
   "csharp"
 );
-@@clientName(
-  SpotPlacementScoresInput,
+@@clientName(SpotPlacementScoresInput,
   "ComputeRecommenderGenerateContent",
   "csharp"
 );
-@@alternateType(
-  SpotPlacementScoresResponse.desiredLocations,
+@@alternateType(SpotPlacementScoresResponse.desiredLocations,
   azureLocation[],
   "csharp"
 );
-@@clientName(
-  SpotPlacementScoresResponse,
+@@clientName(SpotPlacementScoresResponse,
   "ComputeRecommenderGenerateResult",
   "csharp"
 );
 @@clientName(SpotPlacementScoresBase, "ComputeRecommenderDiagnostic", "csharp");
-@@clientName(
-  PlacementScoresProperties.supportedResourceTypes,
+@@clientName(PlacementScoresProperties.supportedResourceTypes,
   "ComputeRecommenderDiagnosticSupportedResourceTypes",
   "csharp"
 );
 @@clientName(SpotPlacementScores.post, "generate", "csharp");
 
 // Regular compute placement score SDK names use the explicit operation group name.
-@@doc(
-  ComputePlacementScoresResponse,
+@@doc(ComputePlacementScoresResponse,
   "The results of scoring placement for regular virtual machines."
 );
-@@doc(
-  ComputePlacementScoresResponse.placementScores,
+@@doc(ComputePlacementScoresResponse.placementScores,
   "Placement scores indicating the likelihood of successfully allocating the specified regular virtual machines."
 );
-@@clientName(
-  ComputePlacementScoresInput,
+@@clientName(ComputePlacementScoresInput,
   "ComputePlacementScoresGenerateContent",
   "csharp"
 );
-@@clientName(
-  ComputePlacementScoresInput.availabilityZones,
+@@clientName(ComputePlacementScoresInput.availabilityZones,
   "IsZonal",
   "csharp"
 );
-@@clientName(
-  ComputePlacementScoresResponse,
+@@clientName(ComputePlacementScoresResponse,
   "ComputePlacementScoresGenerateResult",
   "csharp"
 );
-@@clientName(
-  ComputePlacementScoresResponse.availabilityZones,
+@@clientName(ComputePlacementScoresResponse.availabilityZones,
   "IsZonal",
   "csharp"
 );
@@ -95,24 +80,20 @@ using Microsoft.Compute;
 
 // SKU mix placement score SDK names.
 @@clientName(SkuMixPlacementVMSize, "SkuMixPlacementVmSize", "csharp");
-@@clientName(
-  SkuMixPlacementRequest,
+@@clientName(SkuMixPlacementRequest,
   "ComputeSkuMixPlacementGenerateContent",
   "csharp"
 );
-@@clientName(
-  SkuMixPlacementResponse,
+@@clientName(SkuMixPlacementResponse,
   "ComputeSkuMixPlacementGenerateResult",
   "csharp"
 );
-@@clientName(
-  SkuMixPlacementDeploymentChoice,
+@@clientName(SkuMixPlacementDeploymentChoice,
   "ComputeSkuMixPlacementDeploymentChoice",
   "csharp"
 );
 @@clientName(SkuMixPlacementItem, "ComputeSkuMixPlacementItem", "csharp");
-@@clientName(
-  SkuMixPlacementCapacityLimit,
+@@clientName(SkuMixPlacementCapacityLimit,
   "ComputeSkuMixPlacementCapacityLimit",
   "csharp"
 );

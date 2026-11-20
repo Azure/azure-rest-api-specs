@@ -84,20 +84,16 @@ interface ComputePlacementScores {
 }
 
 @@doc(SpotPlacementScoresBase.name, "");
-@@doc(
-  SpotPlacementScoresBase.properties,
+@@doc(SpotPlacementScoresBase.properties,
   "Contains additional properties of a placement scores resource."
 );
-@@doc(
-  SpotPlacementScores.post::parameters.body,
+@@doc(SpotPlacementScores.post::parameters.body,
   "SpotPlacementScores object supplied in the body of the Post spot placement scores operation."
 );
 @@doc(ComputePlacementScoresBase.name, "");
-@@doc(
-  ComputePlacementScoresBase.properties,
+@@doc(ComputePlacementScoresBase.properties,
   "Contains additional properties of a placement scores resource."
 );
-@@doc(
-  ComputePlacementScores.post::parameters.body,
+@@doc(ComputePlacementScores.post::parameters.body,
   "ComputePlacementScores object supplied in the body of the Post compute placement scores operation."
 );
