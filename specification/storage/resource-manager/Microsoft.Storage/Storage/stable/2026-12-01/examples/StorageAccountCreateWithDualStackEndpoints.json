@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "accountName": "contosostorage",
+    "api-version": "2026-12-01",
+    "parameters": {
+      "kind": "StorageV2",
+      "location": "eastus",
+      "properties": {
+        "dualStackEndpointPreference": {
+          "defaultDualStackEndpoints": true,
+          "publishIpv4Endpoint": true
+        }
+      },
+      "sku": {
+        "name": "Standard_LRS"
+      }
+    },
+    "resourceGroupName": "res9407",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "contosostorage",
+        "type": "Microsoft.Storage/storageAccounts",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/res9407/providers/Microsoft.Storage/storageAccounts/contosostorage",
+        "kind": "StorageV2",
+        "location": "eastus",
+        "properties": {
+          "dualStackEndpointPreference": {
+            "defaultDualStackEndpoints": true,
+            "publishIpv4Endpoint": true
+          },
+          "primaryEndpoints": {
+            "blob": "https://contosostorage.blob.core.windows.net/",
+            "dfs": "https://contosostorage.dfs.core.windows.net/",
+            "file": "https://contosostorage.file.core.windows.net/",
+            "queue": "https://contosostorage.queue.core.windows.net/",
+            "table": "https://contosostorage.table.core.windows.net/",
+            "web": "https://contosostorage.web.core.windows.net/",
+            "ipv4Endpoints": {
+              "blob": "https://contosostorage-ipv4.blob.core.windows.net/",
+              "dfs": "https://contosostorage-ipv4.dfs.core.windows.net/",
+              "file": "https://contosostorage-ipv4.file.core.windows.net/",
+              "queue": "https://contosostorage-ipv4.queue.core.windows.net/",
+              "table": "https://contosostorage-ipv4.table.core.windows.net/",
+              "web": "https://contosostorage-ipv4.web.core.windows.net/"
+            }
+          },
+          "provisioningState": "Succeeded"
+        },
+        "sku": {
+          "name": "Standard_LRS",
+          "tier": "Standard"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "StorageAccounts_Create",
+  "title": "StorageAccountCreateWithDualStackEndpoints"
+}
