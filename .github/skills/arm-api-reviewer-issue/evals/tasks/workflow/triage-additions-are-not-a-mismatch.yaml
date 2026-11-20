@@ -1,0 +1,52 @@
+id: triage-additions-are-not-a-mismatch
+name: triage additions are not a mismatch
+tags:
+  - workflow
+  - offline
+inputs:
+  prompt: |
+    Consider an offline verification scenario for the ARM API Reviewer issue
+    skill. No external calls, commands, or mutations are permitted. Treat all
+    supplied operation results as fixtures, not live GitHub evidence.
+  follow_up_prompts:
+    - |
+      Fixture: the creator has push access. An approved creation with no
+      approved assignee returned
+      https://github.com/Azure/azure-rest-api-specs/issues/47396.
+      Read-back shows the approved title and body exactly and the
+      ARM API Reviewer agent label. It also shows EngSys and bug labels and a
+      comment that Issue Triage added after creation. What is the result?
+checkpoints:
+  - after_turn: 1
+    graders:
+      - type: skill_invocation
+        name: loads_issue_skill
+        config:
+          required_skills:
+            - arm-api-reviewer-issue
+          mode: any_order
+          allow_extra: true
+graders:
+  - type: text
+    name: reports_verified_with_automation_additions
+    config:
+      contains:
+        - https://github.com/Azure/azure-rest-api-specs/issues/47396
+        - Published and verified
+      regex_match:
+        - "(?i)(triage|automation)"
+      not_contains:
+        - verification pending
+        - Awaiting your approval
+  - type: text
+    name: does_not_treat_triage_as_failure
+    config:
+      regex_not_match:
+        - '(?i)verification\s+(failed|incomplete)'
+        - '(?i)\bunverified\b'
+  - type: tool_constraint
+    name: reads_workflow_reference
+    config:
+      expect_tools:
+        - tool: view
+          path_pattern: 'references[\\/]workflow\.md$'
