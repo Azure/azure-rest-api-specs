@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "accountName": "filestoragepv2",
+    "api-version": "2026-12-01",
+    "fileShare": {
+      "properties": {
+        "metadata": {
+          "purpose": "updated"
+        }
+      }
+    },
+    "resourceGroupName": "scaleNamespaceExample",
+    "shareName": "scale-share",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "scale-share",
+        "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scaleNamespaceExample/providers/Microsoft.Storage/storageAccounts/filestoragepv2/fileServices/default/shares/scale-share",
+        "properties": {
+          "enabledProtocols": "NFS",
+          "metadata": {
+            "purpose": "updated"
+          },
+          "provisionedBandwidthMibps": 200,
+          "provisionedIops": 5000,
+          "scaleMode": "Scale",
+          "shareQuota": 100
+        }
+      }
+    }
+  },
+  "operationId": "FileShares_Update",
+  "title": "Update metadata while preserving the Scale Namespace mode of an existing NFS share"
+}

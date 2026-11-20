@@ -235,6 +235,24 @@ union EnabledProtocols {
 }
 
 /**
+ * The mode of the Scale Namespace feature for an NFS file share.
+ */
+@added(Versions.v2026_12_01)
+union FileShareScaleMode {
+  string,
+
+  /**
+   * Uses Compatibility mode for the Scale Namespace feature. This is the default when no mode is specified.
+   */
+  Compatibility: "Compatibility",
+
+  /**
+   * Uses Scale mode for the Scale Namespace feature.
+   */
+  Scale: "Scale",
+}
+
+/**
  * The property is for NFS share only. The default is NoRootSquash.
  */
 union RootSquashType {
@@ -2389,6 +2407,13 @@ model FileShareProperties {
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   enabledProtocols?: EnabledProtocols;
+
+  /**
+   * The mode of the Scale Namespace feature for the file share. Supported only for NFS shares in FileStorage Provisioned v2 accounts. If omitted when creating a share, the mode defaults to Compatibility. PATCH requests that omit this property preserve the existing mode. The mode cannot be changed after creation; an attempt to change it through PATCH returns HTTP 400 with error code PropertyIsImmutable. Get and list operations return Compatibility when no mode was specified at creation.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2026_12_01)
+  scaleMode?: FileShareScaleMode = "Compatibility";
 
   /**
    * The property is for NFS share only. The default is NoRootSquash.

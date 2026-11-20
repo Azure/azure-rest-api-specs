@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./FileServiceProperties.tsp";
 
@@ -9,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Storage;
 /**
@@ -29,6 +31,32 @@ model FileShare is Azure.ResourceManager.ProxyResource<FileShareProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
+}
+
+/**
+ * The file-share properties retained for update compatibility, excluding the create-only Scale Namespace setting.
+ */
+model FileShareUpdateProperties is OmitProperties<
+  FileShareProperties,
+  "scaleMode"
+>;
+
+/**
+ * The parameters for updating a file share without applying the creation-only Scale Namespace default. The existing mode is preserved when omitted. Attempts to change the mode return HTTP 400 with error code PropertyIsImmutable.
+ */
+model FileSharePatch {
+  ...OmitProperties<CommonTypes.AzureEntityResource, "type">;
+
+  /**
+   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts".
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The resource-specific properties for this resource.
+   */
+  properties?: FileShareUpdateProperties;
 }
 
 @armResourceOperations
@@ -76,7 +104,7 @@ interface FileShares {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     FileShare,
-    PatchModel = FileShare,
+    PatchModel = FileSharePatch,
     Error = CloudError
   >;
 
@@ -146,5 +174,10 @@ interface FileShares {
 @@doc(
   FileShares.update::parameters.properties,
   "Properties to update for the file share."
+);
+@@typeChangedFrom(
+  FileShares.update::parameters.properties,
+  Versions.v2026_12_01,
+  FileShare
 );
 @@doc(FileShares.restore::parameters.body, "");
