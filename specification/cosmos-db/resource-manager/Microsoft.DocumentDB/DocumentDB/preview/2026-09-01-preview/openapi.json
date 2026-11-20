@@ -16011,6 +16011,108 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/globalSecondaryIndexes/{containerName}": {
+      "put": {
+        "operationId": "SqlResources_CreateSqlGlobalSecondaryIndex",
+        "description": "Creates an Azure Cosmos DB SQL global secondary index container. Container updates are not supported. Requests without a materialized view definition return 400 Bad Request.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "Cosmos DB database name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "Cosmos DB container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "createSqlGlobalSecondaryIndexParameters",
+            "in": "body",
+            "description": "The parameters to provide for the current SQL container.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlContainerCreateUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SqlContainerGetResults' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SqlContainerGetResults"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "400": {
+            "description": "The server could not understand the request due to invalid syntax.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBSqlGlobalSecondaryIndexCreate": {
+            "$ref": "./examples/CosmosDBSqlGlobalSecondaryIndexCreate.json"
+          },
+          "CosmosDBSqlGlobalSecondaryIndexCreateBadRequest": {
+            "$ref": "./examples/CosmosDBSqlGlobalSecondaryIndexCreateBadRequest.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/SqlContainerGetResults"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/partitionMerge": {
       "post": {
         "operationId": "SqlResources_SqlDatabasePartitionMerge",
