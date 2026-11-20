@@ -3,13 +3,12 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "../Common/NetworkInterface.tsp";
+import "./NetworkInterface.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Network;
 
@@ -45,8 +44,7 @@ alias NetworkInterfaceOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @armResourceOperations
 interface NetworkInterfaces {
   /**
@@ -88,8 +86,7 @@ alias NetworkInterfaceOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOpe
   }
 >;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @armResourceOperations(#{ omitTags: true })
 interface NetworkInterfaceOperationGroup {
   /**

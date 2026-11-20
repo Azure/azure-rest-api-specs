@@ -3,28 +3,22 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
-using Common;
 
 namespace Microsoft.Network;
 /**
  * NetworkVirtualAppliance Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model NetworkVirtualAppliance extends Common.Resource {
-  properties?: NetworkVirtualAppliancePropertiesFormat;
-
+@featureFile(Features.virtualNetwork)
+model NetworkVirtualAppliance
+  is ResourceInstance<NetworkVirtualAppliancePropertiesFormat> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
   @visibility(Lifecycle.Read)
   @path
   @key("networkVirtualApplianceName")
@@ -35,7 +29,7 @@ model NetworkVirtualAppliance extends Common.Resource {
    * The service principal that has read access to cloud-init and config blob.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  identity?: Common.ManagedServiceIdentity;
+  identity?: ManagedServiceIdentity;
 
   /** A unique read-only string that changes whenever the resource is updated. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -67,8 +61,7 @@ alias NetworkVirtualApplianceNetworkVirtualApplianceOps = Azure.ResourceManager.
   }
 >;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+@featureFile(Features.virtualWAN)
 @armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface NetworkVirtualApplianceConnections {
   /**
@@ -135,8 +128,7 @@ interface NetworkVirtualApplianceConnections {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @armResourceOperations
 interface NetworkVirtualAppliances {
   /**
@@ -236,6 +228,7 @@ interface NetworkVirtualAppliances {
   /**
    * Prepares the migration of the specified Network Virtual Appliance. This is the first step of a migration workflow, such as migrating to a new OS version or to the new internal load balancer architecture.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The generic resource marker exposes this legacy action response shape."
   @added(Versions.v2025_09_01)
   prepareMigration is ArmResourceActionAsyncBase<
     NetworkVirtualAppliance,
@@ -250,6 +243,7 @@ interface NetworkVirtualAppliances {
   /**
    * Executes the migration of the specified Network Virtual Appliance. This step performs the migration workflow that was previously prepared.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The generic resource marker exposes this legacy action response shape."
   @added(Versions.v2025_09_01)
   executeMigration is ArmResourceActionAsyncBase<
     NetworkVirtualAppliance,
@@ -264,6 +258,7 @@ interface NetworkVirtualAppliances {
   /**
    * Commits the migration of the specified Network Virtual Appliance. This finalizes a previously executed migration workflow.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The generic resource marker exposes this legacy action response shape."
   @added(Versions.v2025_09_01)
   commitMigration is ArmResourceActionAsyncBase<
     NetworkVirtualAppliance,
@@ -278,6 +273,7 @@ interface NetworkVirtualAppliances {
   /**
    * Aborts an in-progress migration of the specified Network Virtual Appliance and rolls back to the previous state.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The generic resource marker exposes this legacy action response shape."
   @added(Versions.v2025_09_01)
   abortMigration is ArmResourceActionAsyncBase<
     NetworkVirtualAppliance,

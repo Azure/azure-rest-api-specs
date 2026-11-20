@@ -4,28 +4,21 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Network;
 /**
  * Bastion Host resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model BastionHost extends Common.Resource {
-  properties?: BastionHostPropertiesFormat;
-
+@featureFile(Features.virtualNetwork)
+model BastionHost is ResourceInstance<BastionHostPropertiesFormat> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
   @visibility(Lifecycle.Read)
   @path
   @key("bastionHostName")
@@ -50,12 +43,12 @@ model BastionHost extends Common.Resource {
   /**
    * The identity assigned to the Bastion Host resource
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The generic resource marker exposes this legacy resource envelope property."
   @added(Versions.v2026_01_01)
-  identity?: Common.ManagedServiceIdentity;
+  identity?: ManagedServiceIdentity;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @armResourceOperations
 interface BastionHosts {
   /**

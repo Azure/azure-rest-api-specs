@@ -3,34 +3,25 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Network;
 /**
  * Azure Web Category Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.azureWebCategory)
-@Http.Private.includeInapplicableMetadataInPayload(false)
+@featureFile(Features.azureWebCategory)
 @subscriptionResource
-model AzureWebCategory extends ProxyResource {
-  /**
-   * Properties of the Azure Web Category.
-   */
-  properties?: AzureWebCategoryPropertiesFormat;
-
+model AzureWebCategory
+  is ProxyResourceInstance<AzureWebCategoryPropertiesFormat> {
   /**
    * The name of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
   @visibility(Lifecycle.Read)
   @path
   @key("name")
@@ -38,8 +29,7 @@ model AzureWebCategory extends ProxyResource {
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.azureWebCategory)
+@featureFile(Features.azureWebCategory)
 @armResourceOperations(#{ omitTags: true })
 interface AzureWebCategories {
   /**

@@ -4,13 +4,12 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./NetworkInterface.tsp";
-import "../Common/PublicIPAddress.tsp";
+import "./PublicIPAddress.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Network;
 
@@ -75,8 +74,7 @@ alias PublicIPAddressSubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperat
   }
 >;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @armResourceOperations(#{ omitTags: true })
 interface PublicIPAddresses {
   /**
@@ -122,8 +120,7 @@ alias PublicIPAddressOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOper
 >;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @armResourceOperations(#{ omitTags: true })
 interface PublicIPAddressOperationGroup {
   /**
