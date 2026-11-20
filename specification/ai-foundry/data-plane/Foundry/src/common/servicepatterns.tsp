@@ -27,6 +27,10 @@ namespace Azure.AI.ProjectsInternal {
     /** Session compute primitives preview (compute, exec, logs, ports and egress policy on hosted agent sessions). */
     @removed(Versions.v1)
     session_compute_v1_preview: "SessionCompute=V1Preview",
+
+    /** Connection authorizations preview: get, grant, and revoke a user's authorization of a connection for an agent. */
+    @removed(Versions.v1)
+    connection_authorizations_v1_preview: "ConnectionAuthorizations=V1Preview",
   }
 }
 
@@ -125,6 +129,10 @@ namespace Azure.AI.Projects {
 
     @removed(Versions.v1)
     container_agents_v1_preview: "ContainerAgents=V1Preview",
+
+    /** Egress credential rules for hosted agents. */
+    @removed(Versions.v1)
+    egress_credential_rules_v1_preview: "EgressCredentialRules=V1Preview",
 
     /** The Microsoft Copilot V1 preview feature opt-in. */
     microsoft_copilot_v1_preview: "MicrosoftCopilot=V1Preview",

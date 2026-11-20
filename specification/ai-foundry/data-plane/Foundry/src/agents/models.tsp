@@ -1,6 +1,7 @@
 import "../openai/responses/models.tsp";
 import "../common/servicepatterns.tsp";
 import "../skills/models.tsp";
+import "../agents-egress-credential-rules/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -729,6 +730,18 @@ namespace Azure.AI.Projects {
     @doc("Opt-in to session compute primitives (exec, ports) for sessions created for this agent version. Requires the `SessionCompute=V1Preview` feature. Each primitive defaults to off.")
     @removed(Versions.v1)
     compute_primitives?: SessionComputePrimitives;
+
+    @doc("Egress settings for this agent version. `credential_rules` say which credential Foundry may deliver and where egress may use it. Requires `Foundry-Features: EgressCredentialRules=V1Preview`.")
+    @removed(Versions.v1)
+    @extension(
+      "x-ms-foundry-meta",
+      #{
+        conditional_previews: #[
+          AgentDefinitionOptInKeys.egress_credential_rules_v1_preview
+        ],
+      }
+    )
+    egress_policy?: EgressPolicy;
   }
 
   @doc("Opt-in flags for session compute primitives on a hosted agent version.")
