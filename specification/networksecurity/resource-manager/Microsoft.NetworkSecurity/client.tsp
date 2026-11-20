@@ -111,11 +111,7 @@ namespace NetworkSecurityManagementClient {
   "go"
 );
 
-@@clientName(
-  Microsoft.NetworkSecurity.Member,
-  "AgentFabricMember",
-  "csharp"
-);
+@@clientName(Microsoft.NetworkSecurity.Member, "AgentFabricMember", "csharp");
 @@clientName(
   Microsoft.NetworkSecurity.MemberProperties,
   "AgentFabricMemberProperties",
@@ -131,6 +127,7 @@ namespace NetworkSecurityManagementClient {
   "AgentFabricMemberUpdateProperties",
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Flatten exposes the member PATCH fqdn as AgentFabricMemberPatch.Fqdn in C# without changing the wire format."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   Microsoft.NetworkSecurity.MemberTagsUpdate.properties,
   "csharp"
