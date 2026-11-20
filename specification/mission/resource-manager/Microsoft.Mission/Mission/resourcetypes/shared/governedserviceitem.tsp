@@ -70,22 +70,19 @@ model GovernedServiceItem {
   @visibility(Lifecycle.Read)
   serviceName?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backwards compatibility - Existing union"
   @doc("Governance option for this service (Allow, Deny, ExceptionOnly, or NotApplicable).")
-  option?: "Allow" | "Deny" | "ExceptionOnly" | "NotApplicable" | string;
+  option?: GovernedServiceItemOption;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backwards compatibility - Existing union"
   @doc("Initiative enforcement (Enabled or Disabled).")
-  enforcement?: "Enabled" | "Disabled" | string;
+  enforcement?: GovernedServiceItemEnforcement;
 
   @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Policies set to auditOnly (True or False).")
   auditOnly?: boolean;
 
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backwards compatibility - Existing union"
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Enforcement mode for policy. AuditOnly, Enforce, or None.")
-  policyAction?: "AuditOnly" | "Enforce" | "None" | string;
+  policyAction?: GovernedServiceItemPolicyAction;
 
   @doc("Initiatives associated with this service.")
   @visibility(Lifecycle.Read)

@@ -67,6 +67,7 @@ interface InvoicesOperationGroup {
 
     /** A list of download details for individual documents. */
     #suppress "@azure-tools/typespec-azure-core/request-body-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing downloadDocumentsByBillingSubscription.downloadUrls retains its request-body shape; preserve wire compatibility."
     @body
     @identifiers(#[])
     downloadUrls: DocumentDownloadRequest[],

@@ -27,7 +27,7 @@ These are the global settings for the ResourceGraph API.
 ``` yaml
 title: ResourceGraphClient
 openapi-type: arm
-tag: package-preview-2023-09
+tag: package-2024-04-stable
 ```
 
 ### Validations
@@ -39,6 +39,41 @@ azure-validator: true
 semantic-validator: true
 model-validator: true
 message-format: json
+```
+
+### Tag: package-2024-04-stable
+
+The default package selects only the original published 2024-04-01 stable query
+and saved-query APIs, including their original Operations discovery. This intentionally
+excludes preview APIs from default AutoRest SDK generation. Changes and History remain
+available through the unchanged `2024-04` and other earlier tags; Copilot remains
+available through `package-preview-2023-09`. Every previous tag and published Swagger
+file is preserved without promoting legacy operations to 2026.
+
+```yaml $(tag) == 'package-2024-04-stable'
+input-file:
+  - stable/2024-04-01/resourcegraph.json
+  - stable/2024-04-01/graphquery.json
+```
+
+### Tag: package-preview-2026-05
+
+Select this tag explicitly for onboarding and its provider-wide Operations discovery
+at 2026-05-01-preview. It does not include legacy query, saved-query, Changes, History
+or Copilot operations. Do not combine it with the original query Swagger, which has
+its own Operations definition.
+
+`tsp compile ./OnboardingApi` emits only onboarding into this service's preview
+folder. The root remains SDK-only, without `main.tsp` or a root `service.yaml`;
+the independently compiled modules own their manifests. `client.tsp` is the aggregate
+TypeSpec SDK entry point with independently versioned modules and one Operations
+definition; it does not define the default AutoRest package. See
+[onboarding implementation alignment](onboarding.md) for the preview contract and
+outstanding ARM review considerations.
+
+```yaml $(tag) == 'package-preview-2026-05'
+input-file:
+  - preview/2026-05-01-preview/OnboardingApi-aggregate.json
 ```
 
 ### Tag: package-2024-04

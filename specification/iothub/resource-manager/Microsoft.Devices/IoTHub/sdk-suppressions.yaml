@@ -1,0 +1,21 @@
+suppressions:
+  azure-sdk-for-go:
+    - package: 'sdk/resourcemanager/iothub/armiothub'
+      breaking-changes:
+        - Type of `FallbackRouteProperties.Source` has been changed from `*RoutingSource` to `*FallbackRouteSource`
+        - Type of `RoutingTwin.Tags` has been changed from `any` to `map[string]any`
+        - Type of `RoutingTwinProperties.Desired` has been changed from `any` to `map[string]any`
+        - Type of `RoutingTwinProperties.Reported` has been changed from `any` to `map[string]any`
+        - Struct `CertificateBodyDescription` has been removed
+        - Struct `Resource` has been removed
+  azure-sdk-for-js:
+    - package: '@azure/arm-iothub'
+      breaking-changes:
+        - Removed Interface CertificateBodyDescription
+        - Removed Interface IotHubResourceGetEndpointHealthOptionalParams
+        - Removed Interface IotHubResourceGetQuotaMetricsOptionalParams
+        - Removed Interface IotHubResourceGetValidSkusOptionalParams
+        - Removed Interface PrivateLinkResourcesGetOptionalParams
+        - Removed Interface PrivateLinkResourcesListOptionalParams
+        - Interface Resource no longer has parameter location
+        - Interface Resource no longer has parameter tags

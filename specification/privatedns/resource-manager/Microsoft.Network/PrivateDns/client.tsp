@@ -37,6 +37,7 @@ using Microsoft.Network;
 @@clientName(RecordType.TXT, "Txt", "csharp");
 @@clientName(ProvisioningState, "PrivateDnsProvisioningState", "csharp");
 @@clientName(ResolutionPolicy, "PrivateDnsResolutionPolicy", "csharp");
+@@clientName(SubResource, "PrivateDnsSubResourceInfo", "csharp");
 @@clientName(ARecord, "PrivateDnsARecordInfo", "csharp");
 @@clientName(AaaaRecord, "PrivateDnsAaaaRecordInfo", "csharp");
 @@clientName(CnameRecord, "PrivateDnsCnameRecordInfo", "csharp");
@@ -46,6 +47,16 @@ using Microsoft.Network;
 @@clientName(SrvRecord, "PrivateDnsSrvRecordInfo", "csharp");
 @@clientName(TxtRecord, "PrivateDnsTxtRecordInfo", "csharp");
 @@clientName(RecordSetProperties, "PrivateDnsRecordSetProperties", "csharp");
+@@clientName(
+  PrivateDnsResourceReferenceRequest,
+  "PrivateDnsResourceReferenceContent",
+  "csharp"
+);
+@@clientName(
+  PrivateDnsResourceReferenceOperations.getByTargetResources,
+  "GetPrivateDnsResourceReferencesByTargetResources",
+  "csharp"
+);
 @@clientName(
   PrivateZoneProperties.maxNumberOfRecordSets,
   "maxNumberOfRecords",
@@ -117,6 +128,7 @@ using Microsoft.Network;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+@@alternateType(SubResource.id, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(ARecord.ipv4Address, Azure.Core.ipV4Address, "csharp");
 @@alternateType(AaaaRecord.ipv6Address, Azure.Core.ipV6Address, "csharp");
 @@alternateType(

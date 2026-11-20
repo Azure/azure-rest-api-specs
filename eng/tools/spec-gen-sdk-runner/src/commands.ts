@@ -32,8 +32,10 @@ import {
   setPipelineVariables,
 } from "./command-helpers.ts";
 import { checkEmitterEnabled, type EmitterCheckResult } from "./emitter-check.ts";
-import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.ts";
+import { LogLevel, logMessage, setVsoVariable, vsoAddAttachment, vsoLogIssue } from "./log.ts";
+import { getGeneratedSdkApiVersions } from "./package-info.ts";
 import { validatePythonPackagesOnPyPI } from "./python-pypi-validation.ts";
+import { captureSdkReviewMetadata, type SdkReviewPackageChanges } from "./sdk-review-metadata.ts";
 import { resolveSdkRepoBranch } from "./sdk-validation-config.ts";
 import { detectChangedSpecConfigFiles } from "./spec-helpers.ts";
 import { type CommandResult, type ExecutionReport, type SpecGenSdkCmdInput } from "./types.ts";
@@ -161,6 +163,7 @@ async function runAzsdkGeneration(
 
   // Step 4 & 5: On success, build (if not Python) then pack
   let packResponse: AzsdkPackResponse | undefined;
+  let packageRootPath: string | undefined;
   if (
     generateResponse?.result === "succeeded" &&
     emitterCheck.metadata &&
@@ -169,6 +172,7 @@ async function runAzsdkGeneration(
     const langMeta = emitterCheck.metadata.languages[emitterCheck.languageKey]?.[0];
     if (langMeta?.outputDir) {
       const packagePath = resolvePackagePath(langMeta.outputDir, commandInput.localSdkRepoPath);
+      packageRootPath = packagePath;
       const isPython = commandInput.sdkRepoName.replace("-pr", "") === "azure-sdk-for-python";
       let buildSucceeded = true;
 
@@ -216,7 +220,11 @@ async function runAzsdkGeneration(
     packResponse,
     emitterCheck,
     buildResponse,
+    packageRootPath,
   );
+  if (executionReport.packages[0]) {
+    executionReport.packages[0].packageRootPath = packageRootPath;
+  }
   return { executionReport, statusCode };
 }
 
@@ -316,6 +324,11 @@ export async function generateSdkForSingleSpec(): Promise<CommandResult> {
     setBuildFailedLabelVariable(commandInput, executionReport);
   }
 
+  const apiVersions = executionReport
+    ? await getGeneratedSdkApiVersions(executionReport, commandInput)
+    : "";
+  setVsoVariable("GeneratedSDKApiVersions", apiVersions);
+
   logMessage("ending group logging", LogLevel.EndGroup);
   if (executionReport?.vsoLogPath) {
     logIssuesToPipeline(executionReport.vsoLogPath, specConfigPathText);
@@ -394,6 +407,9 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
   await installLanguageToolchain(commandInput);
 
   for (const changedSpec of changedSpecs) {
+    executionReport = undefined;
+    let sdkReviewMetadata = new Map<string, SdkReviewPackageChanges>();
+
     if (!changedSpec.typespecProject && !changedSpec.readmeMd) {
       logMessage("Runner: no spec config file found in the changed files", LogLevel.Warn);
       continue;
@@ -549,13 +565,24 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
           hasTypeSpecProjects = true;
         }
 
+        try {
+          sdkReviewMetadata = await captureSdkReviewMetadata(commandInput, executionReport);
+        } catch (error) {
+          logMessage(
+            `Runner: failed capturing SDK review metadata:${inspect(error)}`,
+            LogLevel.Warn,
+          );
+        }
+
         if (executionReport.stagedArtifactsFolder) {
           stagedArtifactsFolder = executionReport.stagedArtifactsFolder;
           for (const pkg of executionReport.packages) {
             if (pkg.apiViewArtifact && pkg.packageName) {
+              const reviewMetadata = sdkReviewMetadata.get(pkg.packageName);
               apiViewRequestData.push({
                 packageName: pkg.packageName,
                 filePath: path.relative(stagedArtifactsFolder, pkg.apiViewArtifact),
+                ...(reviewMetadata ?? {}),
               });
             }
           }
@@ -620,7 +647,10 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
   }
 
   // Get the spec paths based on the batch run type
-  const specConfigsArray: SpecConfigs[] = getSpecPaths(batchType, commandInput.localSpecRepoPath);
+  const specConfigsArray: SpecConfigs[] = await getSpecPaths(
+    batchType,
+    commandInput.localSpecRepoPath,
+  );
 
   // Prepare variables
   let statusCode = 0;

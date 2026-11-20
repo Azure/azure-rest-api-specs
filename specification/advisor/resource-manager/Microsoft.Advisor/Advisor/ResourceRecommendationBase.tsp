@@ -64,6 +64,9 @@ interface ResourceRecommendationBases {
    * Obtains cached recommendations for a subscription. The recommendations are generated or computed by invoking generateRecommendations.
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2026_08_01_preview)
+  @added(Versions.v2026_10_01)
+  @sharedRoute
   list is ArmResourceListByParent<
     ResourceRecommendationBase,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
@@ -76,7 +79,7 @@ interface ResourceRecommendationBases {
        * <br>**Note:** Each `trackingIds/any(...)` predicate matches a single tracking ID; supplying multiple values inside one predicate is not supported. To match several tracking IDs, combine predicates with `or`. `trackingIds` can also be combined with the other supported filter properties using `and`.<br>
        * <br>**Note:** A tracking ID is an Azure Service Health tracking ID, for example 'VN1S-1V8'. It is not a GUID and is not the same value as `RecommendationTypeGuid`. A single tracking ID can map to more than one recommendation type, so a result set filtered by `trackingIds` is not guaranteed to contain a single `RecommendationTypeGuid`. `trackingIds` is a filter-only property and is not returned on the recommendation resource; use the recommendation metadata API to resolve a tracking ID to the recommendation types that carry it.<br>
        * <br>Valid options for SubCategory:<br>['BusinessContinuity', 'DisasterRecovery', 'HighAvailability', 'MonitoringAndAlerting', 'Other', 'Personalized', 'PrioritizedRecommendations', 'Scalability', 'ServiceUpgradeAndRetirement', 'Validation']<br>
-       * <br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=SubCategory eq 'ServiceUpgradeAndRetirement' and RetirementDate le '2024-01-01' and RetirementDate ge '2028-01-01'. Filter can be applied on trackingIds as well.<br>- $filter=trackingIds/any(t: t eq 'VN1S-1V8')<br>- $filter=ResourceId eq '/subscriptions/{subscriptionId}/resourceGroups/MyResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorage' and trackingIds/any(t: t eq 'VN1S-1V8')<br>- $filter=trackingIds/any(t: t eq 'VN1S-1V8') or trackingIds/any(t: t eq '6TH2-BV8')
+       * <br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=SubCategory eq 'ServiceUpgradeAndRetirement' and RetirementDate ge '2024-01-01' and RetirementDate le '2028-01-01'. Filter can be applied on trackingIds as well.<br>- $filter=trackingIds/any(t: t eq 'VN1S-1V8')<br>- $filter=ResourceId eq '/subscriptions/{subscriptionId}/resourceGroups/MyResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorage' and trackingIds/any(t: t eq 'VN1S-1V8')<br>- $filter=trackingIds/any(t: t eq 'VN1S-1V8') or trackingIds/any(t: t eq '6TH2-BV8')
        */
       @query("$filter")
       $filter?: string;
@@ -97,9 +100,54 @@ interface ResourceRecommendationBases {
   >;
 
   /**
+   * Obtains recommendations for a subscription.
+   */
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_08_01_preview)
+  @removed(Versions.v2026_10_01)
+  @renamedFrom(Versions.v2026_10_01, "list")
+  @sharedRoute
+  listWithMode is ArmResourceListByParent<
+    ResourceRecommendationBase,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Parameters = {
+      /**
+       * The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)', 'SubCategory', 'RetirementDate', '[RecommendationStatus](#recommendationStatus)', 'Criticality'] with operators ['eq', 'and', 'or', 'lt', 'gt', 'le', 'ge']<br>.
+       * <br>**Note:** `Control` is a legacy filter property and will be deprecated in the future. Please use `SubCategory` for filtering recommendation subcategory.<br>
+       * <br>**Note:** `RecommendationStatus` filter is available from API Version 2026-02-01-preview and onwards.<br>
+       * <br>**Note:** `Criticality` filter is available from API Version 2026-08-01-preview and onwards.<br>
+       * <br>Valid options for SubCategory:<br>['BusinessContinuity', 'DisasterRecovery', 'HighAvailability', 'MonitoringAndAlerting', 'Other', 'Personalized', 'PrioritizedRecommendations', 'Scalability', 'ServiceUpgradeAndRetirement', 'Validation']<br>
+       * <br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=SubCategory eq 'ServiceUpgradeAndRetirement' and RetirementDate le '2028-01-01' and RetirementDate ge '2024-01-01'<br>-$filter=Criticality eq 'Critical'
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * The recommendation retrieval mode.
+       */
+      @query("mode")
+      mode?: RecommendationListMode;
+
+      /**
+       * The number of recommendations per page if a paged version of this API is being used.
+       */
+      @query("$top")
+      $top?: int32;
+
+      /**
+       * The page-continuation token to use with a paged version of this API.
+       */
+      @query("$skipToken")
+      $skipToken?: string;
+    },
+    Error = ArmDefaultErrorResponse
+  >;
+
+  /**
    * Obtains cached recommendations for a subscription. The recommendations are generated or computed by invoking generateRecommendations.
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2026_10_01)
   listByTenant is ArmResourceListByParent<
     ResourceRecommendationBase,
     BaseParameters = Azure.ResourceManager.Foundations.ExtensionBaseParameters,
@@ -122,6 +170,105 @@ interface ResourceRecommendationBases {
       @query("$skipToken")
       $skipToken?: string;
     },
+    Error = ArmDefaultErrorResponse
+  >;
+}
+
+/**
+ * The mode used to retrieve recommendations.
+ */
+@added(Versions.v2026_08_01_preview)
+union RecommendationListMode {
+  string,
+
+  /**
+   * Returns all recommendations.
+   */
+  All: "all",
+
+  /**
+   * Returns recommendations in descending order of criticality score, if present.
+   */
+  Contextual: "contextual",
+}
+
+/**
+ * A service group targeted by Advisor recommendation operations.
+ */
+alias AdvisorServiceGroup = Extension.ExternalResource<
+  TargetNamespace = "Microsoft.Management",
+  ResourceType = "serviceGroups",
+  ResourceParameterName = "serviceGroupName",
+  NamePattern = "^[a-zA-Z0-9\\-_().~]{1,90}$",
+  Description = "The name of the service group.",
+  ParentType = "Tenant"
+>;
+
+/**
+ * Advisor recommendation operations scoped to a service group.
+ */
+@armResourceOperations
+@added(Versions.v2026_08_01_preview)
+@removed(Versions.v2026_10_01)
+interface ServiceGroupRecommendations {
+  /**
+   * Obtains recommendations for a service group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "The operation uses the standard ARM default error response."
+  list is Extension.ListByTarget<
+    AdvisorServiceGroup,
+    ResourceRecommendationBase,
+    Parameters = {
+      /**
+       * The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)', 'SubCategory', 'RetirementDate', '[RecommendationStatus](#recommendationStatus)', 'Criticality'] with operators ['eq', 'and', 'or', 'lt', 'gt', 'le', 'ge']<br>.
+       * <br>**Note:** `Control` is a legacy filter property and will be deprecated in the future. Please use `SubCategory` for filtering recommendation subcategory.<br>
+       * <br>**Note:** `RecommendationStatus` filter is available from API Version 2026-02-01-preview and onwards.<br>
+       * <br>**Note:** `Criticality` filter is available from API Version 2026-08-01-preview and onwards.<br>
+       * <br>Valid options for SubCategory:<br>['BusinessContinuity', 'DisasterRecovery', 'HighAvailability', 'MonitoringAndAlerting', 'Other', 'Personalized', 'PrioritizedRecommendations', 'Scalability', 'ServiceUpgradeAndRetirement', 'Validation']<br>
+       * <br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'<br>-$filter=SubCategory eq 'ServiceUpgradeAndRetirement' and RetirementDate le '2028-01-01' and RetirementDate ge '2024-01-01'<br>-$filter=Criticality eq 'High'
+       */
+      @query("$filter")
+      $filter?: string;
+
+      /**
+       * The recommendation retrieval mode.
+       */
+      @query("mode")
+      mode?: RecommendationListMode;
+
+      /**
+       * The number of recommendations per page.
+       */
+      @query("$top")
+      $top?: int32;
+
+      /**
+       * The page-continuation token for the next page.
+       */
+      @query("$skipToken")
+      $skipToken?: string;
+    },
+    Error = ArmDefaultErrorResponse
+  >;
+
+  /**
+   * Obtains details of a recommendation for a service group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "The operation uses the standard ARM default error response."
+  get is Extension.Read<
+    AdvisorServiceGroup,
+    ResourceRecommendationBase,
+    Error = ArmDefaultErrorResponse
+  >;
+
+  /**
+   * Updates the state of a recommendation for a service group.
+   */
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "The operation uses the standard ARM default error response."
+  update is Extension.CustomPatchSync<
+    AdvisorServiceGroup,
+    ResourceRecommendationBase,
+    PatchModel = RecommendationPatchPayload,
     Error = ArmDefaultErrorResponse
   >;
 }

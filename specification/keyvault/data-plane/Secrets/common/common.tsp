@@ -14,6 +14,7 @@ alias KeyVaultOperation<
  */
 #suppress "@azure-tools/typespec-azure-core/no-nullable" "Intentionally nullable model"
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backcompatibility with existing clients"
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing API contract; preserve the existing API and SDK union representation."
 union Error {
   null,
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backcompatibility with existing clients"

@@ -16,7 +16,7 @@ namespace Microsoft.CognitiveServices;
  * Cognitive Services account is an Azure resource representing the provisioned account, it's type, location and SKU.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy usage decorator required for 'Account' to maintain SDK backward compatibility"
-model Account is Azure.ResourceManager.ProxyResource<AccountProperties> {
+model Account is Azure.ResourceManager.ProxyResource<AccountPropertiesRead> {
   ...ResourceNameParameter<
     Resource = Account,
     KeyName = "accountName",
@@ -58,6 +58,60 @@ model Account is Azure.ResourceManager.ProxyResource<AccountProperties> {
   identity?: Identity;
 }
 
+@@typeChangedFrom(Account.properties, Versions.v2026_11_01, AccountProperties);
+
+/** Cognitive Services account parameters accepted by create and update operations. */
+@added(Versions.v2026_11_01)
+model AccountWrite is Azure.ResourceManager.ProxyResource<AccountProperties> {
+  ...ResourceNameParameter<
+    Resource = AccountWrite,
+    KeyName = "accountName",
+    SegmentName = "accounts",
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+  >;
+  ...OmitProperties<
+    Account,
+    "id" | "name" | "type" | "properties" | "systemData"
+  >;
+}
+
+@@maxLength(AccountWrite.name, 64);
+@@minLength(AccountWrite.name, 2);
+@@doc(AccountWrite.name, "The name of Cognitive Services account.");
+@@doc(AccountWrite.properties, "Properties of Cognitive Services account.");
+
+/** Versioned account body shared by the legacy create and update templates. */
+model AccountWriteBody<LegacyResource extends Azure.ResourceManager.Foundations.SimpleResource> {
+  /** The parameters to provide for the created account. */
+  @bodyRoot
+  @typeChangedFrom(Versions.v2026_11_01, LegacyResource)
+  account: AccountWrite;
+}
+
+/** Account properties returned without stored credentials. */
+@added(Versions.v2026_11_01)
+model AccountPropertiesRead {
+  ...OmitProperties<
+    AccountProperties,
+    "migrationToken" | "migrationTokenLegacy" | "apiProperties"
+  >;
+
+  /** The api properties for special APIs. */
+  apiProperties?: ApiPropertiesRead;
+}
+
+/** API-specific properties returned without stored credentials. */
+@added(Versions.v2026_11_01)
+model ApiPropertiesRead is OmitProperties<
+  ApiProperties,
+  | "qnaAzureSearchEndpointKey"
+  | "qnaAzureSearchEndpointKeyLegacy"
+  | "eventHubConnectionString"
+  | "eventHubConnectionStringLegacy"
+  | "storageAccountConnectionString"
+  | "storageAccountConnectionStringLegacy"
+>;
+
 @armResourceOperations
 interface AccountOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -96,6 +150,8 @@ interface Accounts {
   @tag("CognitiveServicesAccounts")
   create is AccountOps.CreateOrUpdateAsync<
     Account,
+    Request = void,
+    Parameters = AccountWriteBody<Account>,
     Response =
       | ArmResourceUpdatedResponse<Account>
       | ArmResourceCreatedResponse<Account>
@@ -110,11 +166,13 @@ interface Accounts {
    * Updates a Cognitive Services account
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "'create' returns no response body, matching existing service endpoint behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "The legacy template retains an invisible void body placeholder. The actual versioned account body includes tags and the existing mutable envelope properties."
   @tag("CognitiveServicesAccounts")
   @patch(#{ implicitOptionality: false })
   update is AccountOps.CustomPatchAsync<
     Account,
-    PatchModel = Account,
+    PatchModel = void,
+    Parameters = AccountWriteBody<Account>,
     Response =
       | ArmResponse<Account>
       | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Account> &
@@ -253,6 +311,9 @@ interface Accounts {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
+  @removed(Versions.v2026_11_01)
+  @added(Versions.v2026_11_15_preview)
   @tag("CognitiveServicesAccounts")
   evaluateDeploymentPolicies is AccountOps.ActionSync<
     Account,
@@ -323,14 +384,9 @@ interface DeletedAccounts {
 @@minLength(Account.name, 2);
 @@doc(Account.name, "The name of Cognitive Services account.");
 @@doc(Account.properties, "Properties of Cognitive Services account.");
-@@doc(
-  Accounts.create::parameters.resource,
-  "The parameters to provide for the created account."
-);
-@@doc(
-  Accounts.update::parameters.properties,
-  "The parameters to provide for the created account."
-);
+// The versioned account body replaces the legacy templates' void body placeholders.
+@@visibility(Accounts.create::parameters.resource, Lifecycle.Read);
+@@visibility(Accounts.update::parameters.properties, Lifecycle.Read);
 @@doc(Accounts.regenerateKey::parameters.body, "regenerate key parameters.");
 @@doc(
   Accounts.createOrUpdate::parameters.resource,

@@ -1,0 +1,35 @@
+{
+  "title": "Organizations_ListWorkspaces",
+  "operationId": "Organizations_ListWorkspaces",
+  "parameters": {
+    "api-version": "2026-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso-rg",
+    "organizationName": "contoso-org"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "partnerResourceId": "workspace-0001",
+            "name": "Contoso Production",
+            "ownerEmail": "owner@contoso.com",
+            "isDefault": true,
+            "status": "active",
+            "isManagedByLiftr": true,
+            "armResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Kore.AgentPlatform/organizations/contoso-org/workspaces/contoso-production"
+          },
+          {
+            "partnerResourceId": "workspace-0002",
+            "name": "Partner Managed Workspace",
+            "ownerEmail": "admin@contoso.com",
+            "isDefault": false,
+            "status": "active",
+            "isManagedByLiftr": false
+          }
+        ]
+      }
+    }
+  }
+}
