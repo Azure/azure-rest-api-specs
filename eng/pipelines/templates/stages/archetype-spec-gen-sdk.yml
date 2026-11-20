@@ -309,6 +309,35 @@ stages:
               npm_config_userconfig: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
               TYPESPEC_EMITTER: $(TypeSpecEmitter)
 
+          # Copy the manifest into a GitHub check (dedicated App with only checks:write) so the SDK Validation Status
+          # and SDK Breaking Change Labels workflows can read it without Azure DevOps credentials. Skipped until the
+          # SdkMetadataGitHubAppId/SdkMetadataGitHubKeyName variables are configured; workflows read the same App ID
+          # from the SDK_METADATA_APP_ID repository variable and otherwise download the Azure DevOps artifact.
+          # Public-project fork PR builds can't use the signing service connection, so they keep using that fallback.
+          - ${{ if and(eq(variables['System.TeamProject'], 'internal'), eq(variables['Build.Reason'], 'PullRequest')) }}:
+              - task: AzureCLI@2
+                displayName: "Login to GitHub (SDK metadata)"
+                condition: and(succeededOrFailed(), ne(variables['SpecGenSdkArtifactName'], ''), ne(variables['SdkMetadataGitHubAppId'], ''))
+                inputs:
+                  azureSubscription: "AzureSDKEngKeyVault Secrets"
+                  scriptType: pscore
+                  scriptLocation: scriptPath
+                  scriptPath: $(SpecRepoDirectory)/eng/common/scripts/login-to-github.ps1
+                  arguments: >
+                    -GitHubAppId '$(SdkMetadataGitHubAppId)'
+                    -KeyName '$(SdkMetadataGitHubKeyName)'
+                    -InstallationTokenOwners 'Azure'
+                    -VariableNamePrefix 'SdkMetadataGitHubToken'
+                env:
+                  GITHUB_TOKEN_REQUEST: '{"repositories":["azure-rest-api-specs-pr"],"permissions":{"checks":"write"}}'
+
+              - script: node eng/tools/spec-gen-sdk-runner/src/publish-sdk-metadata.ts "$(System.DefaultWorkingDirectory)/$(SpecGenSdkArtifactPath)/spec-gen-sdk-artifact.json"
+                displayName: "Publish SDK metadata check"
+                condition: and(succeededOrFailed(), ne(variables['SpecGenSdkArtifactName'], ''), ne(variables['SdkMetadataGitHubAppId'], ''))
+                workingDirectory: $(SpecRepoDirectory)
+                env:
+                  GH_TOKEN: $(SdkMetadataGitHubToken)
+
           - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
             parameters:
               ArtifactName: $(SpecGenSdkArtifactName)

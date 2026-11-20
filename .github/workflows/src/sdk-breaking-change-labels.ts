@@ -1,8 +1,10 @@
+import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { SpecGenSdkArtifactInfoSchema, sdkLabels } from "../../shared/src/sdk-types.ts";
 import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.ts";
 import { extractInputs } from "./context.ts";
-import type { Core, GitHubScriptArgs } from "./github.ts";
+import type { Core, GitHubScriptArgs, WebhookEvent } from "./github.ts";
 import { LabelAction } from "./label.ts";
+import { getSdkMetadataAppId, getSdkMetadataFromChecks } from "./sdk-metadata-check.ts";
 
 const SUPPORTED_TARGET_BRANCHES = new Set(["main", "RPSaaSMaster"]);
 
@@ -26,9 +28,22 @@ export async function getLabelAndAction({ github, context, core }: GitHubScriptA
   if (!details_url) {
     throw new Error(`Required inputs are not valid: details_url:${details_url}`);
   }
+  let artifactData = "";
+  const metadataAppId = getSdkMetadataAppId();
+  if (metadataAppId !== undefined) {
+    const { check_run } = context.payload as WebhookEvent<"check-run">;
+    const metadataChecks = await github.paginate(github.rest.checks.listForRef, {
+      ...context.repo,
+      ref: check_run.head_sha,
+      app_id: metadataAppId,
+      per_page: PER_PAGE_MAX,
+    });
+    artifactData = getSdkMetadataFromChecks(check_run, metadataChecks);
+  }
   const result = await getLabelAndActionImpl({
     details_url,
     core,
+    artifactData,
   });
 
   // This requirement only scopes label additions; target-branch handling for removals will be added later.
@@ -53,10 +68,13 @@ export async function getLabelAndActionImpl({
   details_url,
   core,
   retryOptions = {},
+  artifactData,
 }: {
   details_url: string;
   core: Core;
   retryOptions?: import("./retries.ts").RetryOptions;
+  /** Manifest read from an SDK metadata check; when empty, it's downloaded from Azure DevOps. */
+  artifactData?: string;
 }): Promise<{
   labelName: string | undefined;
   labelAction: LabelAction;
@@ -71,32 +89,29 @@ export async function getLabelAndActionImpl({
   let labelAction;
 
   let labelName: string | undefined = "";
-  const buildInfo = getAdoBuildInfoFromUrl(details_url);
-  const ado_project_url = buildInfo.projectUrl;
-  const ado_build_id = buildInfo.buildId;
   const artifactName = "spec-gen-sdk-artifact";
-  const artifactFileName = artifactName + ".json";
-  const result = await getAzurePipelineArtifact({
-    ado_build_id,
-    ado_project_url,
-    artifactName,
-    artifactFileName,
-    core,
-    retryOptions,
-    fallbackToFailedArtifact: true,
-    token: process.env.ADO_TOKEN,
-  });
+  if (!artifactData) {
+    const buildInfo = getAdoBuildInfoFromUrl(details_url);
+    const result = await getAzurePipelineArtifact({
+      ado_build_id: buildInfo.buildId,
+      ado_project_url: buildInfo.projectUrl,
+      artifactName,
+      artifactFileName: artifactName + ".json",
+      core,
+      retryOptions,
+      fallbackToFailedArtifact: true,
+    });
+    artifactData = result.artifactData;
+  }
   // Parse the JSON data
-  if (!result.artifactData) {
+  if (!artifactData) {
     core.warning(
       `Artifact '${artifactName}' not found in the build with details_url:${details_url} or failed to download it.`,
     );
   } else {
-    core.info(`Artifact content: ${result.artifactData}`);
+    core.info(`Artifact content: ${artifactData}`);
     // Parse the JSON data
-    const specGenSdkArtifactInfo = SpecGenSdkArtifactInfoSchema.parse(
-      JSON.parse(result.artifactData),
-    );
+    const specGenSdkArtifactInfo = SpecGenSdkArtifactInfoSchema.parse(JSON.parse(artifactData));
     const labelActionText = specGenSdkArtifactInfo.labelAction;
 
     head_sha = specGenSdkArtifactInfo.headSha;

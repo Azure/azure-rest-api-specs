@@ -413,4 +413,94 @@ describe("spec-gen-sdk-status", () => {
     expect(mockCore.setOutput).toBeCalledWith("head_sha", "testSha");
     expect(mockCore.setOutput).toBeCalledWith("issue_number", 123);
   });
+
+  describe("with SDK metadata checks", () => {
+    const nativeCheck = {
+      id: 1,
+      app: { id: 9426, name: "Azure Pipelines" },
+      name: "SDK Validation - Java",
+      status: "completed",
+      conclusion: "success",
+      details_url: "https://dev.azure.com/azure-sdk/p/_build/results?buildId=2",
+      external_id: "7|2|p",
+      started_at: "2026-11-19T10:00:00Z",
+    };
+    const metadataCheck = (
+      id: number,
+      appId: number,
+      result: "succeeded" | "failed",
+      completed_at = "2026-11-19T10:05:00Z",
+    ) => ({
+      id,
+      app: { id: appId, name: "SDK Metadata" },
+      name: "SDK metadata - azure-sdk-for-java (7)",
+      external_id: "7|2|p",
+      completed_at,
+      output: {
+        text: JSON.stringify(
+          createMockSpecGenSdkArtifactInfo({
+            language: SdkName.Java,
+            result,
+            isSpecGenSdkCheckRequired: true,
+          }),
+        ),
+      },
+    });
+    const setStatus = () =>
+      setSpecGenSdkStatusImpl({
+        owner: "Azure",
+        repo: "azure-rest-api-specs-pr",
+        head_sha: "testSha",
+        target_url: "https://example.com",
+        github: mockGithub,
+        core: mockCore,
+        issue_number: 123,
+      });
+
+    beforeEach(() => {
+      vi.stubEnv("SDK_METADATA_APP_ID", "555");
+    });
+
+    afterEach(() => {
+      vi.unstubAllEnvs();
+    });
+
+    it("reads the manifest from the newest SDK metadata check instead of Azure DevOps", async () => {
+      mockGithub.rest.checks.listForRef.mockResolvedValue({
+        data: {
+          check_runs: [
+            nativeCheck,
+            metadataCheck(10, 555, "succeeded"),
+            metadataCheck(11, 555, "failed"),
+            // Same external_id from another App must be ignored.
+            metadataCheck(12, 999, "succeeded"),
+          ],
+        },
+      });
+
+      await setStatus();
+
+      expect(getAzurePipelineArtifactMock).not.toHaveBeenCalled();
+      expect(mockGithub.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+        expect.objectContaining({
+          state: "failure",
+          description: "SDK Validation failed for java languages",
+        }),
+      );
+    });
+
+    it("falls back to Azure DevOps when metadata predates the Azure Pipelines check (re)start", async () => {
+      mockGithub.rest.checks.listForRef.mockResolvedValue({
+        data: {
+          check_runs: [nativeCheck, metadataCheck(10, 555, "failed", "2026-11-19T09:00:00Z")],
+        },
+      });
+      getAzurePipelineArtifactMock.mockResolvedValue({ artifactData: "" });
+
+      await expect(setStatus()).rejects.toThrow("Artifact 'spec-gen-sdk-artifact' not found");
+      expect(getAzurePipelineArtifactMock).toHaveBeenCalledWith(
+        expect.objectContaining({ ado_build_id: "2" }),
+      );
+    });
+  });
 });
