@@ -19,6 +19,7 @@ namespace Microsoft.Network;
 model NetworkInterfaceIPConfiguration
   is SubResourceInstance<NetworkInterfaceIPConfigurationPropertiesFormat> {
   #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
   @visibility(Lifecycle.Read)
   @path
   @key("ipConfigurationName")

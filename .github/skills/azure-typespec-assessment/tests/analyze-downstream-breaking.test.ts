@@ -240,6 +240,40 @@ function analyzeShapes(
   );
 }
 
+void test("new projects are complete and non-breaking without baseline artifacts", () => {
+  const result = analyzeDownstreamBreaking({
+    manifest: {
+      projects: [
+        {
+          id: "project-new",
+          classification: "new",
+          sourceChangeIds: ["source-new"],
+          artifacts: {},
+          artifactComparison: {
+            mode: "new-project",
+            baseline: {
+              sourceRevision: "absent",
+              reason: "No pre-existing SDK contract exists.",
+            },
+            target: {
+              sourceRevision: "current",
+              commit: "head",
+              reason: "unversioned",
+            },
+            addedCurrentVersions: [],
+            available: { base: [], current: [] },
+          },
+        },
+      ],
+    },
+    sourceIndex: { sourceChanges: [] },
+  } as unknown as Parameters<typeof analyzeDownstreamBreaking>[0]);
+
+  assert.equal(result.status, "ready");
+  assert.deepEqual(result.candidates, []);
+  assert.deepEqual(result.blockers, []);
+});
+
 void test("detects PR 43308-style kind/response/LRO changes without inventing parameter changes", (context) => {
   const result = analyzeShapes(context, packageShape(false), packageShape(true));
   const rules = new Set(result.candidates.map((item) => item.rule));

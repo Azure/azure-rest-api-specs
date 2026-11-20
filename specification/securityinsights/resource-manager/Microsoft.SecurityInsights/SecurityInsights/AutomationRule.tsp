@@ -30,46 +30,6 @@ model AutomationRule is Azure.ResourceManager.ProxyResource<
   etag?: string;
 }
 
-// Added manually only to fix optional request body
-alias AutomationRuleOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.OperationalInsights";
-
-    /**
-     * The name of the workspace.
-     */
-    @segment("workspaces")
-    @key
-    @path
-    @minLength(1)
-    @maxLength(90)
-    @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
-    workspaceName: string;
-  },
-  {
-    ...Extension.ExtensionProviderNamespace<AutomationRule>;
-  },
-  {
-    ...Extension.ExtensionProviderNamespace<AutomationRule>;
-
-    /**
-     * The automation rule ID.
-     */
-    @path
-    @key
-    @segment("automationRules")
-    automationRuleId: string;
-  }
->;
-
 @armResourceOperations(#{ omitTags: true })
 interface AutomationRules {
   /**
@@ -86,10 +46,11 @@ interface AutomationRules {
    * Creates or updates the automation rule.
    */
   @tag("automationRules")
-  createOrUpdate is AutomationRuleOps.CreateOrUpdateSync<
+  createOrUpdate is Azure.ResourceManager.Legacy.Extension.CreateOrReplaceSync<
+    OperationalInsights,
     AutomationRule,
-    OptionalRequestBody = true,
-    ErrorType = CloudError
+    Error = CloudError,
+    OptionalRequestBody = true
   >;
 
   /**

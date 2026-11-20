@@ -19,6 +19,7 @@ namespace Microsoft.Network;
 @featureFile(Features.expressRoute)
 model ExpressRouteCircuit
   is ResourceInstance<ExpressRouteCircuitPropertiesFormat> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
   @visibility(Lifecycle.Read)
   @path
   @key("circuitName")
@@ -28,6 +29,7 @@ model ExpressRouteCircuit
   /**
    * A unique read-only string that changes whenever the resource is updated.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The generic resource marker exposes this legacy resource envelope property."
   @visibility(Lifecycle.Read)
   etag?: string;
 

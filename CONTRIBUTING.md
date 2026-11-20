@@ -4,6 +4,8 @@
 
 This file provides general guidance for developers that are creating or updating REST API definitions for Azure.
 
+For local prerequisites and installation, see [toolchain setup](./documentation/contributing/toolchain-setup.md).
+
 ## Table of Contents
 
 <!--
@@ -62,12 +64,20 @@ See the [README.md](./README.md) for a description of the directory structure to
 Repository label definitions are maintained through pull requests. See
 [repository labels](./eng/README.md#repository-labels) for validation and synchronization guidance.
 
-If you want to contribute to the repository, follow these steps:
+For the public `Azure/azure-rest-api-specs` repository, follow these steps:
 
 1. Fork the repository and create a new branch for your changes.
 2. Push the changes to the branch in your fork until the branch is ready to be integrated.
 3. Rebase your branch if needed to incorporate any changes to **main** and submit a pull request to the **main** branch using either the "control plane" or "data plane" PR template -- the main PR template lets you select which one.
 4. Resolve any issues flagged by the [Pull Request checks](#pull-request-checks).
+
+**Private repository (`Azure/azure-rest-api-specs-pr`):** Do not open pull requests from forks.
+Organization policy prevents required validation workflows, including TypeSpec Validation, from
+running on private fork pull requests. Push your changes to a branch in the private repository and
+open a pull request from that branch instead. For an existing fork pull request, open and link a
+replacement pull request from a same-repository branch, then close the original. If you need write
+access, [set up or renew access](https://aka.ms/azsdk/access). Keep private specifications in the
+private repository; do not move them to the public repository.
 
 **Note:** Microsoft employees can use tooling for adding a new API version available [here](https://eng.ms/docs/products/azure-developer-experience/design/api-specs/api-specs), specially if not working with TypeSpec.
 
@@ -93,7 +103,7 @@ Every PR in this repo will go through a series of PR checks, including:
 
 Internal contributors need **Azure organization membership and repository write access** for the PR workflow to work correctly. Microsoft organization membership is not required by the contributor-readiness check. Without repository write access, a PR author cannot run Azure DevOps pipelines for the PR, and a reviewer cannot provide an approval that counts toward required reviews (GitHub's green approval check). The reviewer must set up or renew their own access. Other GitHub approval rules still apply.
 
-The contributor-readiness report separates access issues from their PR impact. It checks PR authors, commit authors/committers, and reviewers with an `APPROVED` review; comments and other review states do not add reviewer participants. When findings exist, a collapsed section shows contributors with verified public Azure membership and repository write access. The check does not inspect Azure DevOps roles, and private membership or unavailable lookups do not prove missing write access. This check is non-blocking; external fork contributions remain allowed. Internal contributors can [set up or renew required access](https://aka.ms/azsdk/access), then comment `/azsdk check-access` on the PR to refresh the report.
+The contributor-readiness report separates access issues from their PR impact. It checks PR authors, commit authors/committers, and reviewers with an `APPROVED` review; comments and other review states do not add reviewer participants. When findings exist, a collapsed section shows contributors with verified public Azure membership and repository write access. The check does not inspect Azure DevOps roles, and private membership or unavailable lookups do not prove missing write access. This check is non-blocking; external fork contributions to the public repository remain allowed. Internal contributors can [set up or renew required access](https://aka.ms/azsdk/access), then comment `/azsdk check-access` on the PR to refresh the report.
 
 When any of these PR checks fails it will post a comment to the PR with links to information on how to resolve the problem.
 There is also the [CI Fix Guide](https://aka.ms/ci-fix) that describes how to fix common PR check failures.

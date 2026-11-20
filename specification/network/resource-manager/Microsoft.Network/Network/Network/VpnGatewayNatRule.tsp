@@ -21,6 +21,7 @@ model VpnGatewayNatRule is SubResourceInstance<VpnGatewayNatRuleProperties> {
   /**
    * The name of the resource that is unique within a resource group. This name can be used to access the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
   @visibility(Lifecycle.Read)
   @path
   @key("natRuleName")

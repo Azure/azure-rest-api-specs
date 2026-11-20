@@ -20,10 +20,12 @@ namespace Microsoft.Network;
 @added(Versions.v2025_09_01)
 model ExpressRouteLag is ResourceInstance<ExpressRouteLagPropertiesFormat> {
   /** The unique identifier of the resource. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The generic resource marker exposes this legacy resource envelope property."
   @visibility(Lifecycle.Read)
   id?: string;
 
   /** The type of the resource. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The generic resource marker exposes this legacy resource envelope property."
   @visibility(Lifecycle.Read)
   type?: string;
 

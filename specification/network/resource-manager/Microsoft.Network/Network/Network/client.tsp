@@ -4434,6 +4434,19 @@ op replaceprivateDnsZoneGroupsList(
 @@clientName(NetworkGroupCreateOrUpdateEtagHeader.eTag, "etag", "java");
 
 // python
+
+// Preserve legacy Python enum member names.
+@@clientName(
+  ApplicationGatewaySkuFamily.Generation_1,
+  exact("GENERATION1"),
+  "python"
+);
+@@clientName(
+  ApplicationGatewaySkuFamily.Generation_2,
+  exact("GENERATION2"),
+  "python"
+);
+
 @@clientName(
   ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,
   "TLS_ECDHE_RSA_WITH_AES256_CBC_SHA384",
@@ -6966,6 +6979,12 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 
 @@alternateType(
   Microsoft.Network.ExpressRoutePortPropertiesFormat.resourceGuid,
+  uuid,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.InterconnectGroupPropertiesFormat.resourceGuid,
   uuid,
   "csharp"
 );

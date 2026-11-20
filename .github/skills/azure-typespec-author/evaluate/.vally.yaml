@@ -19,13 +19,13 @@ environments:
   azsdk-mcp:
     skills: &sdkSkills
       - ../..
-      - ../../../azsdk-common-typespec-naming
+      - ../../../azure-typespec-sdk-naming
       # Competitors must be available to the routing-boundary cases.
       - ../../../azure-typespec-assessment
       - ../../../azsdk-common-generate-sdk-locally
     commands: &cleanSkillInputs
       - >-
-        node -e "const fs=require('fs');for(const dir of ['azure-typespec-author','azsdk-common-typespec-naming','azure-typespec-assessment','azsdk-common-generate-sdk-locally']){if(!fs.existsSync(dir))continue;for(const entry of fs.readdirSync(dir)){if(entry!=='SKILL.md'&&entry!=='references')fs.rmSync(dir+'/'+entry,{recursive:true,force:true});}}"
+        node -e "const fs=require('fs');for(const dir of ['azure-typespec-author','azure-typespec-sdk-naming','azure-typespec-assessment','azsdk-common-generate-sdk-locally']){if(!fs.existsSync(dir))continue;for(const entry of fs.readdirSync(dir)){if(entry!=='SKILL.md'&&entry!=='references')fs.rmSync(dir+'/'+entry,{recursive:true,force:true});}}"
     files:
       - src: ../fixtures/instructions-test/copilot-instructions.md
         dest: .github/copilot-instructions.md

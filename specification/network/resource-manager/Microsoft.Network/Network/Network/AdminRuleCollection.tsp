@@ -19,6 +19,7 @@ namespace Microsoft.Network;
 @parentResource(SecurityAdminConfiguration)
 model AdminRuleCollection
   is ChildResourceInstance<AdminRuleCollectionPropertiesFormat> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
   @visibility(Lifecycle.Read)
   @path
   @key("ruleCollectionName")
@@ -28,6 +29,7 @@ model AdminRuleCollection
   /**
    * The system metadata related to this resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The generic resource marker exposes this legacy resource envelope property."
   @visibility(Lifecycle.Read)
   systemData?: Azure.ResourceManager.Foundations.SystemData;
 }

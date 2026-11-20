@@ -18,6 +18,7 @@ namespace Microsoft.Network;
  */
 @featureFile(Features.virtualNetwork)
 model BastionHost is ResourceInstance<BastionHostPropertiesFormat> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
   @visibility(Lifecycle.Read)
   @path
   @key("bastionHostName")
@@ -42,6 +43,7 @@ model BastionHost is ResourceInstance<BastionHostPropertiesFormat> {
   /**
    * The identity assigned to the Bastion Host resource
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The generic resource marker exposes this legacy resource envelope property."
   @added(Versions.v2026_01_01)
   identity?: ManagedServiceIdentity;
 }

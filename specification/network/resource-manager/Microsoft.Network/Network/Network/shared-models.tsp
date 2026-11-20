@@ -868,6 +868,13 @@ model NetworkInterfacePropertiesFormat {
   macAddress?: string;
 
   /**
+   * The index of the physical network adapter.
+   */
+  @added(Versions.v2026_05_01)
+  @minValue(0)
+  networkAdapterIndex?: int32;
+
+  /**
    * Whether this is a primary network interface on a virtual machine.
    */
   @visibility(Lifecycle.Read)
@@ -963,6 +970,7 @@ model SubResource {
   /**
    * Resource ID.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The generic resource marker exposes this legacy resource envelope property."
   id?: string;
 }
 
@@ -977,6 +985,7 @@ model Resource {
   /**
    * Resource ID.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The generic resource marker exposes this legacy resource envelope property."
   id?: string;
 
   /**
@@ -988,18 +997,21 @@ model Resource {
   /**
    * Resource type.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The generic resource marker exposes this legacy resource envelope property."
   @visibility(Lifecycle.Read)
   type?: string;
 
   /**
    * Resource location.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The generic resource marker exposes this legacy resource envelope property."
   location?: string;
 
   /**
    * Resource tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The generic resource marker exposes this legacy resource envelope property."
   tags?: Record<string>;
 }
 
@@ -1020,6 +1032,7 @@ model SubResourceModel extends SubResource {
   /**
    * Type of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The generic resource marker exposes this legacy resource envelope property."
   @visibility(Lifecycle.Read)
   type?: string;
 }

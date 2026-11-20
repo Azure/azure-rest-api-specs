@@ -18,6 +18,7 @@ namespace Microsoft.Network;
 @featureFile(Features.networkManager)
 @parentResource(NetworkGroup)
 model StaticMember is ChildResourceInstance<StaticMemberProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
   @visibility(Lifecycle.Read)
   @path
   @key("staticMemberName")
@@ -27,6 +28,7 @@ model StaticMember is ChildResourceInstance<StaticMemberProperties> {
   /**
    * The system metadata related to this resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The generic resource marker exposes this legacy resource envelope property."
   @visibility(Lifecycle.Read)
   systemData?: Azure.ResourceManager.Foundations.SystemData;
 }

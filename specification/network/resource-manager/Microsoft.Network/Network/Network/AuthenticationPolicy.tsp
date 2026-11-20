@@ -41,6 +41,7 @@ model AuthenticationPolicy
   identity?: ManagedServiceIdentity;
 
   /** The system metadata related to this resource. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The generic resource marker exposes this legacy resource envelope property."
   @visibility(Lifecycle.Read)
   systemData?: Azure.ResourceManager.Foundations.SystemData;
 }

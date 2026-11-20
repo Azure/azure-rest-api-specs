@@ -28,7 +28,16 @@ These are the global settings for the Batch API.
 title: BatchManagementClient
 description: Batch Client
 openapi-type: arm
-tag: package-2025-06
+tag: package-2026-10
+```
+
+### Tag: package-2026-10
+
+These settings apply only when `--tag=package-2026-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-10'
+input-file:
+  - stable/2026-10-01/openapi.json
 ```
 
 ### Tag: package-2025-06

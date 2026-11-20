@@ -59,6 +59,139 @@ void test("validator rejects passed dimensions with blockers", () => {
   assert.ok(errors.includes("REST status must be not-assessed."));
 });
 
+void test("validator accepts target-only artifact comparisons for new projects", () => {
+  const assessment = {
+    schemaVersion: 1,
+    comparison: {
+      baseRef: "origin/main",
+      baseCommit: "base",
+      headCommit: "head",
+      workingTree: {},
+    },
+    projects: [{ id: "project-new" }],
+    artifactComparisons: [
+      {
+        projectId: "project-new",
+        mode: "new-project",
+        baseline: {
+          sourceRevision: "absent",
+          reason:
+            "No pre-existing contract exists because the project is absent from the baseline.",
+        },
+        target: {
+          sourceRevision: "current",
+          commit: "head",
+          reason: "latest-version",
+        },
+      },
+    ],
+    confidence: "high",
+    safety: {
+      scope: "rest-and-downstream-only",
+      status: "passed",
+      verdict: "passed",
+      coverage: "complete",
+    },
+    dimensions: {
+      semantic: { status: "assessed", items: [], blockers: [] },
+      rest: {
+        status: "passed",
+        verdict: "passed",
+        coverage: "complete",
+        findings: [],
+        blockers: [],
+      },
+      downstream: {
+        status: "passed",
+        verdict: "passed",
+        coverage: "complete",
+        findings: [],
+        blockers: [],
+      },
+      compliance: {
+        status: "passed",
+        summary: "No assessed Semantic intents require Azure Guidelines review.",
+        coverage: {
+          semanticIntentCount: 0,
+          assessedIntentCount: 0,
+          selectedDocumentCount: 0,
+          unassessedIntentIds: [],
+        },
+        intentAssessments: [],
+        findings: [],
+        retrievalFailures: [],
+        blockers: [],
+      },
+      documentQuality: {
+        status: "not-applicable",
+        summary: "No eligible declarations.",
+        coverage: {
+          semanticIntentCount: 0,
+          assessedIntentCount: 0,
+          declarationCount: 0,
+          documentedDeclarationCount: 0,
+          missingDeclarationCount: 0,
+          unassessedIntentIds: [],
+          notApplicableIntentIds: [],
+        },
+        intentAssessments: [],
+        findings: [],
+        blockers: [],
+      },
+    },
+    blockers: [],
+  } as unknown as AssessmentOutput;
+
+  assert.deepEqual(
+    validateAssessment(assessment).filter((error) => error.startsWith("Artifact comparison")),
+    [],
+  );
+
+  assessment.projects = [{ id: "project-version" }] as AssessmentOutput["projects"];
+  assessment.artifactComparisons = [
+    {
+      projectId: "project-version",
+      mode: "new-api-version",
+      baseline: {
+        sourceRevision: "base",
+        commit: "base",
+        apiVersion: "2026-05-01-preview",
+        reason: "previous-latest-preview",
+      },
+      target: {
+        sourceRevision: "current",
+        commit: "head",
+        apiVersion: "2026-10-01-preview",
+        reason: "newest-added-version",
+      },
+      available: {
+        base: ["2026-05-01-preview"],
+        current: ["2026-10-01-preview"],
+      },
+    },
+  ];
+
+  assert.deepEqual(
+    validateAssessment(assessment).filter((error) =>
+      error.startsWith("New-version artifact comparison"),
+    ),
+    [],
+  );
+
+  assessment.artifactComparisons[0].available = {
+    base: ["2026-05-01-preview"],
+    current: ["2026-05-01-preview", "2026-10-01-preview"],
+  };
+  assert.deepEqual(
+    validateAssessment(assessment).filter((error) =>
+      error.startsWith("New-version artifact comparison"),
+    ),
+    [
+      "New-version artifact comparison project-version must compile a retained baseline from the head source and may fall back to the base source only when removed from head.",
+    ],
+  );
+});
+
 function fixture() {
   const work = fs.mkdtempSync(path.join(os.tmpdir(), "typespec-assessment-"));
   writeJson(path.join(work, "preparation-manifest.json"), {

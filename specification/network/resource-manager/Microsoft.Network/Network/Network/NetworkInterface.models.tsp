@@ -16,6 +16,7 @@ namespace Microsoft.Network;
 @featureFile(Features.virtualNetwork)
 model NetworkInterface is ResourceInstance<NetworkInterfacePropertiesFormat> {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
   @visibility(Lifecycle.Read)
   @path
   @key("networkInterfaceName")

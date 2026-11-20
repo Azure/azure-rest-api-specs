@@ -5,6 +5,9 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.Workloads;
 
+// Preserve the legacy Python enum member name.
+@@clientName(SAPProductType.S4HANA, exact("S4HANA"), "python");
+
 @@clientName(
   Microsoft.Workloads,
   "WorkloadsSapVirtualInstanceMgmtClient",

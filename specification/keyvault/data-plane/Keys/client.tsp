@@ -569,6 +569,11 @@ op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
 @@clientName(KeyAttributes.hsmPlatform, "HSMPlatform", "go");
 @@clientName(KeyRestoreParameters.keyBundleBackup, "KeyBackup", "go");
 @@clientName(KeyOperationsParameters, "KeyOperationParameters", "go");
+@@clientName(
+  SecureKeyUnWrapOperationParameters,
+  "SecureKeyUnwrapOperationParameters",
+  "go"
+);
 
 @@clientName(KeyImportParameters.hsm, "HSM", "go");
 @@clientName(KeyReleaseParameters.enc, "algorithm", "go");
@@ -584,6 +589,7 @@ op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
 @@clientName(JsonWebKey.kid, "KID", "go");
 @@clientName(KeyItem.kid, "KID", "go");
 @@clientName(KeyOperationResult.kid, "KID", "go");
+@@clientName(SecureKeyOperationResult.kid, "KID", "go");
 @@clientName(KeyOperationsParameters.iv, "IV", "go");
 @@clientName(KeyOperationResult.iv, "IV", "go");
 

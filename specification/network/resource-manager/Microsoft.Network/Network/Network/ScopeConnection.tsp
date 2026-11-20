@@ -18,6 +18,7 @@ namespace Microsoft.Network;
 @parentResource(NetworkManager)
 @featureFile(Features.networkManager)
 model ScopeConnection is ChildResourceInstance<ScopeConnectionProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
   @visibility(Lifecycle.Read)
   @path
   @key("scopeConnectionName")
@@ -34,6 +35,7 @@ model ScopeConnection is ChildResourceInstance<ScopeConnectionProperties> {
   /**
    * The system metadata related to this resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The generic resource marker exposes this legacy resource envelope property."
   @visibility(Lifecycle.Read)
   systemData?: Azure.ResourceManager.Foundations.SystemData;
 }

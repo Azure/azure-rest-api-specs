@@ -380,7 +380,7 @@ These documents in this repo provide additional context:
 - [OpenAPI authoring automated guidelines](../../../documentation/openapi-authoring-automated-guidelines.md)
 - [Swagger extensions](https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md)
 - [CI fix guide](../../../documentation/ci-fix.md)
-- [TypeSpec dev process](https://github.com/Azure/azure-rest-api-specs/wiki/Azure-REST-API,-SDK-development-process-with-TypeSpec)
+- [TypeSpec dev process](../../../documentation/contributing/typespec-development-process.md)
 
 ## Relationship to Instruction Files
 

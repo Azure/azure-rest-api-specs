@@ -19,6 +19,7 @@ namespace Microsoft.Network;
 @parentResource(NetworkManager)
 model IpamPool is CommonTrackedResourceInstance<IpamPoolProperties, false> {
   /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The generic resource marker exposes this legacy resource envelope property."
   @visibility(Lifecycle.Read)
   etag?: string;
 
