@@ -286,7 +286,7 @@ namespace JavaScriptToolCompatibility {
     "never",
   }
 
-  @clientName("$DO_NOT_NORMALIZE$_FileSearchToolFiltersValue", "javascript")
+  @clientName("ComparisonFilterValueItems", "javascript")
   union FileSearchToolFiltersValueItems {
     string,
     numeric,
