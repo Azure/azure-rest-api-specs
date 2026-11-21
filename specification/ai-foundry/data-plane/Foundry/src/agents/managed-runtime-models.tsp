@@ -103,7 +103,7 @@ model SessionTurn {
   error: SessionTurnError | null;
 }
 
-/** Current allocation or connection state, separate from the Session's Environment selector. */
+/** Current allocation or connection status reported in the Session's Environment. */
 union SessionEnvironmentStatus {
   string,
 
@@ -132,25 +132,22 @@ union SessionEnvironmentStatus {
   failed: "failed",
 }
 
-/** An Environment snapshot carried by Session inspection and runtime events, not an Environment resource API. */
+/** Environment selection and state carried by Session inspection and runtime events, not a standalone Environment resource API. */
 model SessionEnvironmentState {
-  /** The allocated identifier, or null before allocation. */
+  /** The allocated identifier, or null before allocation or when allocation is disabled. */
   id: string | null;
 
   /** The current state. */
   status: SessionEnvironmentStatus;
 
-  /** The Environment type, when known. */
+  /** The recorded native Environment selection type, when known. */
   type?: string;
+
+  /** The recorded managed provisioning mode, when supplied. Omission does not select a default. */
+  provisioning_mode?: PlatformEnvironmentMode;
 
   /** A customer-safe preparation or connection error. */
   error?: OpenAI.SessionEnvironmentErrorResource | null;
-}
-
-/** Response-only allocated resource state. */
-model SessionResources {
-  /** The allocated Environment state, or null when no Environment is used. */
-  environment?: SessionEnvironmentState | null;
 }
 
 /** Pending function, computer-use, Environment, or MCP actions. Unsupported capabilities must not be requested by a harness. */
@@ -607,12 +604,15 @@ model SessionReasoningSummaryTextDoneEvent extends SessionEventBase {
   >>;
 }
 
-/** agent.output.command_execution_output.delta. Provider turn correlation belongs in raw_event. */
+/** agent.session.turn.command_execution_output.delta. Provider turn correlation belongs in raw_event. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model SessionCommandExecutionOutputDeltaEvent extends SessionEventBase {
+  /** The native command-output event discriminator. */
+  type: "agent.session.turn.command_execution_output.delta";
+
   ...OmitProperties<
     OpenAI.SessionEventAgentOutputCommandExecutionOutputDelta,
-    "event_id" | "session_id" | "obfuscation" | "turn_id"
+    "type" | "event_id" | "session_id" | "obfuscation" | "turn_id"
   >;
 }
 
@@ -624,7 +624,7 @@ model SessionEnvironmentPendingEvent extends SessionEventBase {
     "event_id" | "session_id" | "obfuscation" | "turn_id" | "environment"
   >;
 
-  /** Current allocation or connection state, not the Session's Environment selector. */
+  /** Current Environment snapshot; selection fields are included when known. */
   environment: SessionEnvironmentState;
 }
 
@@ -636,7 +636,7 @@ model SessionEnvironmentReadyEvent extends SessionEventBase {
     "event_id" | "session_id" | "obfuscation" | "turn_id" | "environment"
   >;
 
-  /** Current allocation or connection state, not the Session's Environment selector. */
+  /** Current Environment snapshot; selection fields are included when known. */
   environment: SessionEnvironmentState;
 }
 
@@ -648,7 +648,7 @@ model SessionEnvironmentConnectedEvent extends SessionEventBase {
     "event_id" | "session_id" | "obfuscation" | "turn_id" | "environment"
   >;
 
-  /** Current allocation or connection state, not the Session's Environment selector. */
+  /** Current Environment snapshot; selection fields are included when known. */
   environment: SessionEnvironmentState;
 }
 
@@ -660,7 +660,7 @@ model SessionEnvironmentDisconnectedEvent extends SessionEventBase {
     "event_id" | "session_id" | "obfuscation" | "turn_id" | "environment"
   >;
 
-  /** Current allocation or connection state, not the Session's Environment selector. */
+  /** Current Environment snapshot; selection fields are included when known. */
   environment: SessionEnvironmentState;
 }
 
@@ -672,7 +672,7 @@ model SessionEnvironmentSuspendedEvent extends SessionEventBase {
     "event_id" | "session_id" | "obfuscation" | "turn_id" | "environment"
   >;
 
-  /** Current allocation or connection state, not the Session's Environment selector. */
+  /** Current Environment snapshot; selection fields are included when known. */
   environment: SessionEnvironmentState;
 }
 
@@ -684,7 +684,7 @@ model SessionEnvironmentExpiredEvent extends SessionEventBase {
     "event_id" | "session_id" | "obfuscation" | "turn_id" | "environment"
   >;
 
-  /** Current allocation or connection state, not the Session's Environment selector. */
+  /** Current Environment snapshot; selection fields are included when known. */
   environment: SessionEnvironmentState;
 }
 
@@ -696,7 +696,7 @@ model SessionEnvironmentFailedEvent extends SessionEventBase {
     "event_id" | "session_id" | "obfuscation" | "turn_id" | "environment"
   >;
 
-  /** Current allocation or connection state, not the Session's Environment selector. */
+  /** Current Environment snapshot; selection fields are included when known. */
   environment: SessionEnvironmentState;
 }
 
@@ -816,7 +816,7 @@ union SessionEvent extends SessionEventBase {
   `agent.session.turn.reasoning_summary_text.done`: SessionReasoningSummaryTextDoneEvent,
 
   @TypeSpec.Events.contentType("application/json")
-  `agent.output.command_execution_output.delta`: SessionCommandExecutionOutputDeltaEvent,
+  `agent.session.turn.command_execution_output.delta`: SessionCommandExecutionOutputDeltaEvent,
 
   @TypeSpec.Events.contentType("application/json")
   `agent.session.environment.pending`: SessionEnvironmentPendingEvent,

@@ -11325,7 +11325,7 @@
                           }
                         },
                         "event": {
-                          "const": "agent.output.command_execution_output.delta"
+                          "const": "agent.session.turn.command_execution_output.delta"
                         }
                       }
                     },
@@ -51119,13 +51119,9 @@
             },
             "description": "Pending client actions. When requires_action, inspect these before submitting callbacks; do not infer them from repeated stream events."
           },
-          "resources": {
-            "$ref": "#/components/schemas/ManagedAgents.SessionResources",
-            "description": "Current allocated resource state, separate from Environment selection."
-          },
           "environment": {
-            "$ref": "#/components/schemas/ManagedAgents.PlatformEnvironment",
-            "description": "The recorded Environment selection when supplied, separate from allocation state."
+            "$ref": "#/components/schemas/ManagedAgents.SessionEnvironmentState",
+            "description": "Environment selection and current state, when recorded or available."
           },
           "metadata": {
             "type": "object",
@@ -51603,11 +51599,9 @@
           "type": {
             "type": "string",
             "enum": [
-              "agent.output.command_execution_output.delta"
+              "agent.session.turn.command_execution_output.delta"
             ],
-            "description": "The type of the object. Always `agent.output.command_execution_output.delta`.",
-            "x-stainless-const": true,
-            "default": "agent.output.command_execution_output.delta"
+            "description": "The native command-output event discriminator."
           },
           "item_id": {
             "type": "string",
@@ -51632,7 +51626,7 @@
             "$ref": "#/components/schemas/ManagedAgents.SessionEventBase"
           }
         ],
-        "description": "agent.output.command_execution_output.delta. Provider turn correlation belongs in raw_event."
+        "description": "agent.session.turn.command_execution_output.delta. Provider turn correlation belongs in raw_event."
       },
       "ManagedAgents.SessionComputerUseApprovalRequestItem": {
         "type": "object",
@@ -52136,7 +52130,7 @@
           },
           "environment": {
             "$ref": "#/components/schemas/ManagedAgents.SessionEnvironmentState",
-            "description": "Current allocation or connection state, not the Session's Environment selector."
+            "description": "Current Environment snapshot; selection fields are included when known."
           }
         },
         "allOf": [
@@ -52164,7 +52158,7 @@
           },
           "environment": {
             "$ref": "#/components/schemas/ManagedAgents.SessionEnvironmentState",
-            "description": "Current allocation or connection state, not the Session's Environment selector."
+            "description": "Current Environment snapshot; selection fields are included when known."
           }
         },
         "allOf": [
@@ -52192,7 +52186,7 @@
           },
           "environment": {
             "$ref": "#/components/schemas/ManagedAgents.SessionEnvironmentState",
-            "description": "Current allocation or connection state, not the Session's Environment selector."
+            "description": "Current Environment snapshot; selection fields are included when known."
           }
         },
         "allOf": [
@@ -52220,7 +52214,7 @@
           },
           "environment": {
             "$ref": "#/components/schemas/ManagedAgents.SessionEnvironmentState",
-            "description": "Current allocation or connection state, not the Session's Environment selector."
+            "description": "Current Environment snapshot; selection fields are included when known."
           }
         },
         "allOf": [
@@ -52248,7 +52242,7 @@
           },
           "environment": {
             "$ref": "#/components/schemas/ManagedAgents.SessionEnvironmentState",
-            "description": "Current allocation or connection state, not the Session's Environment selector."
+            "description": "Current Environment snapshot; selection fields are included when known."
           }
         },
         "allOf": [
@@ -52276,7 +52270,7 @@
           },
           "environment": {
             "$ref": "#/components/schemas/ManagedAgents.SessionEnvironmentState",
-            "description": "Current allocation or connection state, not the Session's Environment selector."
+            "description": "Current Environment snapshot; selection fields are included when known."
           }
         },
         "allOf": [
@@ -52352,7 +52346,7 @@
                 "type": "null"
               }
             ],
-            "description": "The allocated identifier, or null before allocation."
+            "description": "The allocated identifier, or null before allocation or when allocation is disabled."
           },
           "status": {
             "$ref": "#/components/schemas/ManagedAgents.SessionEnvironmentStatus",
@@ -52360,7 +52354,11 @@
           },
           "type": {
             "type": "string",
-            "description": "The Environment type, when known."
+            "description": "The recorded native Environment selection type, when known."
+          },
+          "provisioning_mode": {
+            "$ref": "#/components/schemas/ManagedAgents.PlatformEnvironmentMode",
+            "description": "The recorded managed provisioning mode, when supplied. Omission does not select a default."
           },
           "error": {
             "anyOf": [
@@ -52374,7 +52372,7 @@
             "description": "A customer-safe preparation or connection error."
           }
         },
-        "description": "An Environment snapshot carried by Session inspection and runtime events, not an Environment resource API."
+        "description": "Environment selection and state carried by Session inspection and runtime events, not a standalone Environment resource API."
       },
       "ManagedAgents.SessionEnvironmentStatus": {
         "anyOf": [
@@ -52395,7 +52393,7 @@
             ]
           }
         ],
-        "description": "Current allocation or connection state, separate from the Session's Environment selector."
+        "description": "Current allocation or connection status reported in the Session's Environment."
       },
       "ManagedAgents.SessionEnvironmentSuspendedEvent": {
         "type": "object",
@@ -52415,7 +52413,7 @@
           },
           "environment": {
             "$ref": "#/components/schemas/ManagedAgents.SessionEnvironmentState",
-            "description": "Current allocation or connection state, not the Session's Environment selector."
+            "description": "Current Environment snapshot; selection fields are included when known."
           }
         },
         "allOf": [
@@ -52579,7 +52577,7 @@
             "agent.session.turn.reasoning_summary_part.done": "#/components/schemas/ManagedAgents.SessionReasoningSummaryPartDoneEvent",
             "agent.session.turn.reasoning_summary_text.delta": "#/components/schemas/ManagedAgents.SessionReasoningSummaryTextDeltaEvent",
             "agent.session.turn.reasoning_summary_text.done": "#/components/schemas/ManagedAgents.SessionReasoningSummaryTextDoneEvent",
-            "agent.output.command_execution_output.delta": "#/components/schemas/ManagedAgents.SessionCommandExecutionOutputDeltaEvent",
+            "agent.session.turn.command_execution_output.delta": "#/components/schemas/ManagedAgents.SessionCommandExecutionOutputDeltaEvent",
             "agent.session.environment.pending": "#/components/schemas/ManagedAgents.SessionEnvironmentPendingEvent",
             "agent.session.environment.ready": "#/components/schemas/ManagedAgents.SessionEnvironmentReadyEvent",
             "agent.session.environment.connected": "#/components/schemas/ManagedAgents.SessionEnvironmentConnectedEvent",
@@ -55346,23 +55344,6 @@
           }
         ],
         "description": "agent.session.requires_action."
-      },
-      "ManagedAgents.SessionResources": {
-        "type": "object",
-        "properties": {
-          "environment": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ManagedAgents.SessionEnvironmentState"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The allocated Environment state, or null when no Environment is used."
-          }
-        },
-        "description": "Response-only allocated resource state."
       },
       "ManagedAgents.SessionResumeSubagentCallItem": {
         "type": "object",

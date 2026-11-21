@@ -425,11 +425,8 @@ namespace ManagedAgents {
     /** Pending client actions. When requires_action, inspect these before submitting callbacks; do not infer them from repeated stream events. */
     required_actions?: SessionRequiredAction[];
 
-    /** Current allocated resource state, separate from Environment selection. */
-    resources?: SessionResources;
-
-    /** The recorded Environment selection when supplied, separate from allocation state. */
-    environment?: PlatformEnvironment;
+    /** Environment selection and current state, when recorded or available. */
+    environment?: SessionEnvironmentState;
 
     /** Descriptive Session labels. */
     metadata?: Record<string>;
