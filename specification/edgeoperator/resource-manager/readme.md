@@ -33,5 +33,6 @@ Each service under `Microsoft.EdgeOperator` is configured by its own `readme.md`
 
 - [SystemReadiness](Microsoft.EdgeOperator/SystemReadiness/readme.md)
 - [ObservabilityConfiguration](Microsoft.EdgeOperator/ObservabilityConfiguration/readme.md)
+- [LogCollections](Microsoft.EdgeOperator/LogCollections/readme.md)
 
 ---

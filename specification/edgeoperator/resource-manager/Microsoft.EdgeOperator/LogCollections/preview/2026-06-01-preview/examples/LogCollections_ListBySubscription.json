@@ -1,0 +1,62 @@
+{
+  "title": "LogCollections_ListBySubscription",
+  "operationId": "LogCollections_ListBySubscription",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "fromDate": "2026-08-28T00:00:00Z"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.EdgeOperator/logCollections/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "name": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            "type": "Microsoft.EdgeOperator/logCollections",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "startTime": "2026-08-28T20:36:34.695+00:00",
+              "endTime": "2026-08-28T20:37:12.482+00:00",
+              "collectionTime": "2026-08-28T20:36:34.695+00:00",
+              "collectionEndTime": "2026-08-28T20:37:12.482+00:00",
+              "fromDate": "2026-08-28T20:33:28.292+00:00",
+              "toDate": "2026-08-28T20:36:28.292+00:00",
+              "jobType": "OnDemand",
+              "storageKind": "Azure",
+              "reason": "User initiated",
+              "uploadDetails": {
+                "uploadStartTime": "2026-08-28T20:36:34.695+00:00",
+                "uploadSizeInMb": 794,
+                "uploadNumberOfFiles": 34
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.EdgeOperator/logCollections/ffffffff-1111-2222-3333-444444444444",
+            "name": "ffffffff-1111-2222-3333-444444444444",
+            "type": "Microsoft.EdgeOperator/logCollections",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "startTime": "2026-08-28T21:02:10.118+00:00",
+              "endTime": "2026-08-28T21:03:05.904+00:00",
+              "collectionTime": "2026-08-28T21:02:10.118+00:00",
+              "collectionEndTime": "2026-08-28T21:03:05.904+00:00",
+              "fromDate": "2026-08-28T20:00:00+00:00",
+              "toDate": "2026-08-28T21:00:00+00:00",
+              "jobType": "OnDemand",
+              "storageKind": "FileShare",
+              "saveToPath": "\\\\fileserver01\\diagnostics\\logs",
+              "reason": "User initiated",
+              "uploadDetails": {
+                "uploadStartTime": "2026-08-28T21:02:10.118+00:00",
+                "uploadSizeInMb": 612,
+                "uploadNumberOfFiles": 29
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

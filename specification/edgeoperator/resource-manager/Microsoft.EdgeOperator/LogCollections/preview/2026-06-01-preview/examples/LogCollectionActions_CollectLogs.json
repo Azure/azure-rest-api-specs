@@ -1,0 +1,25 @@
+{
+  "title": "LogCollectionActions_CollectLogs",
+  "operationId": "LogCollectionActions_CollectLogs",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "body": {
+      "fromDate": "2026-06-01T10:00:00Z",
+      "toDate": "2026-06-01T11:00:00Z",
+      "filterRoles": [
+        "Diagnostics"
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.EdgeOperator/locations/local/operationStatuses/11111111-2222-3333-4444-555555555555?api-version=2026-06-01-preview",
+        "Location": "https://management.azure.com/providers/Microsoft.EdgeOperator/locations/local/operationStatuses/11111111-2222-3333-4444-555555555555?api-version=2026-06-01-preview",
+        "Retry-After": "30"
+      }
+    },
+    "204": {}
+  }
+}
