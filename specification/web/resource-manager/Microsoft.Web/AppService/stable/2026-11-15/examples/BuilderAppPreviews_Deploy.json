@@ -1,0 +1,23 @@
+{
+  "operationId": "BuilderAppPreviews_Deploy",
+  "title": "DeployBuilderAppPreview",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-11-15",
+    "name": "contoso-storefront",
+    "previewName": "feature-checkout",
+    "body": {
+      "clientOperationId": "preview-deploy-example"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Web/locations/westus2/builderAppsOperationStatuses/dep_preview_example?api-version=2026-11-15",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Web/locations/westus2/builderAppsOperationResults/dep_preview_example?api-version=2026-11-15",
+        "Retry-After": "10"
+      }
+    }
+  }
+}
