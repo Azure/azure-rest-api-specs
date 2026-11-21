@@ -71,6 +71,23 @@ restates field meanings for in-file readability.
 | 9   | Graphs status                      | `Graphs: false; graph-mode: fast-path` | `Graphs: true` = Mermaid graphs in the Step 6 report and full graph diff. When false, `graph-mode` is required: `fast-path`, `size-downgrade`, or `derivation-failed`. The latter two re-derive sensitive data flow in summary form; only `derivation-failed` requires the Step 3.5 caution banner. |
 | 10  | Current iteration number           | `1`                                    | `1` through `3`. The Critic's output header echoes this verbatim.                                                                                                                                                                                                                                   |
 
+### Active-finding evidence in reconciliation
+
+For a covered Blocking finding that may be fixed or covered by an approval
+exception, Input #6 must distinguish the posting action from whether the
+finding remains active at the pinned head. Include the current resolution
+state, finding-specific author confirmation and URL when applicable, current
+matching approval labels, and proof of the active or addressed disposition.
+Use the shared [active-finding and addressed-exception
+rules](../../skills/azure-api-review/references/reviewer-posted-parity.md#active-findings-and-addressed-approval-exceptions).
+
+The Critic independently rechecks this evidence and the active Blocking total.
+`SKIP-COVERED` is not proof that a finding remains active. Reject a plan that
+retains an addressed exception as active, ignores the author confirmation, or
+excludes an unchanged violation solely because a thread is resolved. Preserve
+historical severity; correcting the active total is not a severity downgrade.
+Missing discussion evidence follows the existing incomplete-review path.
+
 ### Local source binding
 
 For a local review, Input #1 starts with `local workspace:` and Input #2 is the

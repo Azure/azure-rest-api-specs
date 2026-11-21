@@ -1479,3 +1479,146 @@ stimuli:
       - Uses RESOLVE-AND-REPOST because the matching inline anchor moved and both marker and trusted author prove workflow ownership
       - Does not use SKIP-COVERED even though line movement does not change semantic finding identity
       - Plans one replacement at the current line and no duplicate standalone finding
+
+  # 160029 -- Addressed exceptions are historical coverage, not active blockers
+  - name: addressed-exceptions-excluded-from-active-blockers
+    tags:
+      focus: approved-exception-reconciliation
+    environment:
+      files:
+        - src: "../../../azure-api-review/references/reviewer-posted-parity.md"
+          dest: ".github/skills/azure-api-review/references/reviewer-posted-parity.md"
+    prompt: |
+      Read `.github/skills/azure-api-review/SKILL.md`, the shared
+      reviewer-posted-parity rules, and Reviewer/Critic protocol.
+      Reconcile a full ARM review at pinned head
+      `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`. All discussion surfaces were
+      fetched completely. No inline anchor shifted.
+
+      The PR currently has `Versioning-Approved-PrivatePreview` and
+      `Versioning-Approved-NotReleased`. Two trusted workflow-owned versioning
+      threads are resolved: one covers the new Widget resource, the other the
+      new optional WidgetProperties.healthStatus property in the existing
+      preview version. Before this run, the PR author explicitly confirmed in
+      each thread that these approvals cover that specific change. The replies
+      are at `/discussion/widget-approval` and `/discussion/health-approval`.
+      These are valid matching approvals, their scope is unchanged at this
+      head, and the Critic independently verified all of this evidence.
+
+      A third, unrelated finding is still active: a new list example has an
+      invalid nextLink URL. Its correctness and Blocking severity are already
+      Critic-verified. No approval covers it.
+
+      Return only JSON with `active_blocking_count`,
+      `addressed_exception_count`, `covered_action`, and `reason`.
+      Use a canonical uppercase reconciliation token in `covered_action`;
+      prose synonyms or invented action names are invalid.
+      Reconcile the two historical versioning findings without rewriting or
+      downgrading them. Do not post comments, resolve threads, or grant signoff.
+    graders:
+      - type: output-matches
+        name: "only-unrelated-finding-remains-active"
+        config:
+          pattern: '"active_blocking_count"\s*:\s*1\b'
+      - type: output-matches
+        name: "both-exceptions-are-addressed"
+        config:
+          pattern: '"addressed_exception_count"\s*:\s*2\b'
+      - type: output-contains
+        name: "covered-findings-not-posted-again"
+        config:
+          substring: "SKIP-COVERED"
+      - type: prompt
+    rubric:
+      - Active Blocking count is one, retaining the unrelated nextLink finding
+      - The two specifically confirmed and resolved exceptions are historical coverage, not active blockers
+      - SKIP-COVERED controls duplicate posting independently of the active count
+      - Original finding severity and classification are preserved
+      - The reasoning uses current approval scope, author confirmations, and resolution, not labels alone
+
+  # 160030 -- Resolution and broad labels alone cannot waive an active finding
+  - name: resolution-without-confirmed-approval-remains-blocking
+    tags:
+      focus: approved-exception-reconciliation
+    environment:
+      files:
+        - src: "../../../azure-api-review/references/reviewer-posted-parity.md"
+          dest: ".github/skills/azure-api-review/references/reviewer-posted-parity.md"
+    prompt: |
+      Read `.github/skills/azure-api-review/SKILL.md`, the shared
+      reviewer-posted-parity rules, and Reviewer/Critic protocol.
+      Reconcile a full ARM review at pinned head
+      `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`. All discussion surfaces were
+      fetched completely. No inline anchor shifted.
+
+      One trusted workflow-owned versioning thread is resolved, but its schema
+      change remains in the current preview contract. The PR has
+      `Versioning-Approved-PrivatePreview`. The author only said "we are in
+      private preview" and resolved the thread. There is no finding-specific
+      confirmation that the approval covers this change, and no code fix.
+      The violation itself is Critic-verified.
+
+      Return only JSON with `active_blocking_count`,
+      `addressed_exception_count`, and `reason`. Do not post, resolve, or sign
+      off. Distinguish resolution from proof of a fix or approved exception.
+    graders:
+      - type: output-matches
+        name: "unchanged-violation-remains-active"
+        config:
+          pattern: '"active_blocking_count"\s*:\s*1\b'
+      - type: output-matches
+        name: "no-exception-established"
+        config:
+          pattern: '"addressed_exception_count"\s*:\s*0\b'
+      - type: prompt
+    rubric:
+      - The unresolved approval gap keeps one currently applicable Blocking finding
+      - A broad approval label and resolved thread do not establish coverage
+      - Generic private-preview rationale is not finding-specific author confirmation
+      - The reason identifies the missing confirmation without granting signoff
+
+  # 160031 -- A previous confirmation cannot authorize a later expanded change
+  - name: approval-scope-drift-remains-blocking
+    tags:
+      focus: approved-exception-reconciliation
+    environment:
+      files:
+        - src: "../../../azure-api-review/references/reviewer-posted-parity.md"
+          dest: ".github/skills/azure-api-review/references/reviewer-posted-parity.md"
+    prompt: |
+      Read `.github/skills/azure-api-review/SKILL.md`, the shared
+      reviewer-posted-parity rules, and Reviewer/Critic protocol.
+      Reconcile a full ARM review at pinned head
+      `bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb`. All discussion surfaces were
+      fetched completely. No inline anchor shifted.
+
+      A trusted workflow-owned thread on WidgetProperties.healthStatus was
+      resolved after the author explicitly confirmed a valid versioning
+      approval for adding that optional read-only property. The matching
+      Versioning-Approved label is still present.
+
+      A later commit now makes the same property required in request bodies.
+      This new, Critic-verified breaking change is explicitly outside the
+      recorded approval scope. Current guidance therefore contradicts the
+      earlier addressed conclusion; there is no approval for the current
+      change and no code fix.
+
+      Return only JSON with `active_blocking_count`, `action`, and `reason`.
+      Do not post or
+      resolve anything. Use the existing conflict action to explain the scope
+      change instead of silently reviving the old finding.
+    graders:
+      - type: output-matches
+        name: "new-unapproved-change-remains-active"
+        config:
+          pattern: '"active_blocking_count"\s*:\s*1\b'
+      - type: output-contains
+        name: "changed-scope-is-clarified"
+        config:
+          substring: "CLARIFY-CONFLICT"
+      - type: prompt
+    rubric:
+      - The current change remains one active Blocking finding despite the resolved thread and earlier confirmation
+      - The previous approval cannot authorize a change outside its recorded scope
+      - CLARIFY-CONFLICT explains the later change and remaining approval gap in the existing thread
+      - The response does not silently skip the current violation or grant signoff

@@ -103,6 +103,46 @@ Top-level comments and review bodies have no inline anchor and can use
 `SKIP-COVERED`. Resolved, outdated, or marker-free items still count as
 coverage and follow the same precedence.
 
+### Active findings and addressed approval exceptions
+
+Posting action and active finding state are separate decisions. `SKIP-COVERED`
+means that prior discussion covers the finding; it does not mean that the
+finding still blocks the current head. Preserve the original finding body,
+severity, classification, and audit history when an exception is addressed.
+Do not count that historical finding as an active blocker merely because its
+original severity was Blocking.
+
+For each covered finding, record the current thread resolution state, the
+latest finding-specific author reply and its URL, the matching current approval
+labels, and the evidence that the finding remains active or is addressed.
+Evaluate the whole conversation, not only its original finding comment.
+
+A same-version approval exception is addressed only when all of the following
+are verified against the pinned review:
+
+- A current approval label in the applicable family covers this kind of
+  exception; an unrelated approval label is not sufficient.
+- The PR author explicitly confirmed that the approval covers this specific
+  API element and change. A broad label, generic preview rationale, or request
+  to ignore review is not finding-specific confirmation.
+- The corresponding conversation is resolved, and no later change or
+  contradictory evidence invalidates the confirmed scope at the current head.
+
+When these conditions hold, keep the prior finding as historical coverage,
+exclude it from the currently applicable Blocking count, and do not ask for
+the same confirmation again. Author confirmation supplies scope evidence for
+the existing approval; it does not grant approval or authorize an unrelated
+change. The Critic must independently verify each condition from the complete
+discussion inventory and current PR metadata.
+
+Resolution alone is not proof of a fix or approval. A resolved thread whose
+violation remains without an applicable confirmed exception still counts as
+active. If approval is missing, withdrawn, contradicted, or does not cover the
+current change, explain the concrete remaining gap. Apply `CLARIFY-CONFLICT`
+when current guidance contradicts a prior addressed conclusion; do not silently
+revive it as another standalone finding. Preserve the existing rules for
+human-owned threads and incomplete discussion retrieval.
+
 ### Contradiction handling
 
 A contradiction exists when the new session would give materially incompatible
