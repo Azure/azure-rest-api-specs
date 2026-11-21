@@ -145,15 +145,6 @@ These settings apply only when `--tag=package-2026-11` is specified on the comma
 input-file:
     - stable/2026-11-15/openapi.json
 directive:
-  - suppress: XMSSecretInResponse
-    from: openapi.json
-    where:
-      - $.definitions.BuilderAppBeginSourceUploadRequest.properties.idempotencyKey
-      - $.definitions.BuilderAppDeployRequest.properties.idempotencyKey
-      - $.definitions.BuilderAppRedeployRequest.properties.idempotencyKey
-      - $.definitions.BuilderAppRuntimeActionRequest.properties.idempotencyKey
-      - $.definitions.BuilderAppPreviewDeployRequest.properties.idempotencyKey
-    reason: These request-only, client-generated retry correlation identifiers are not credentials and grant no authorization. The secret-name suffix heuristic flags idempotencyKey; marking these values as secrets would misrepresent the contract.
   - suppress: PostResponseCodes
     from: openapi.json
     where:

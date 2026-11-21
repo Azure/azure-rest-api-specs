@@ -45342,9 +45342,9 @@
       "type": "object",
       "description": "Request to begin or replay a bounded source archive upload.",
       "properties": {
-        "idempotencyKey": {
+        "clientOperationId": {
           "type": "string",
-          "description": "Stable client key. Reusing the key requires identical immutable upload input."
+          "description": "Client-generated GUID identifying this upload. Repeating a request with the same value replays the existing session; the upload input must be identical."
         },
         "manifestYaml": {
           "type": "string",
@@ -45356,7 +45356,7 @@
         }
       },
       "required": [
-        "idempotencyKey"
+        "clientOperationId"
       ]
     },
     "BuilderAppBuildMode": {
@@ -45677,9 +45677,9 @@
       "type": "object",
       "description": "Request to build or deploy a connected reference, retained version, or uploaded source.",
       "properties": {
-        "idempotencyKey": {
+        "clientOperationId": {
           "type": "string",
-          "description": "Stable request key. Supply this or the x-ms-client-request-id header."
+          "description": "Client-generated identifier that deduplicates retries of this operation; repeating it returns the original operation. Supply this or the x-ms-client-request-id header."
         },
         "versionId": {
           "type": "string",
@@ -46338,9 +46338,9 @@
       "type": "object",
       "description": "Request to deploy the head of the preview's branch or a retained version. Commits and uploaded source are not accepted.",
       "properties": {
-        "idempotencyKey": {
+        "clientOperationId": {
           "type": "string",
-          "description": "Stable request key. Supply this or the x-ms-client-request-id header."
+          "description": "Client-generated identifier that deduplicates retries of this operation; repeating it returns the original operation. Supply this or the x-ms-client-request-id header."
         },
         "versionId": {
           "type": "string",
@@ -46612,9 +46612,9 @@
       "type": "object",
       "description": "Redeploy retained ready artifacts. Commit, version, source, and build mode selection are not accepted.",
       "properties": {
-        "idempotencyKey": {
+        "clientOperationId": {
           "type": "string",
-          "description": "Stable request key. Supply this or the x-ms-client-request-id header."
+          "description": "Client-generated identifier that deduplicates retries of this operation; repeating it returns the original operation. Supply this or the x-ms-client-request-id header."
         }
       }
     },
@@ -46683,9 +46683,9 @@
       "type": "object",
       "description": "Request to start or stop the app runtime.",
       "properties": {
-        "idempotencyKey": {
+        "clientOperationId": {
           "type": "string",
-          "description": "Stable request key. Supply this or the x-ms-client-request-id header."
+          "description": "Client-generated identifier that deduplicates retries of this operation; repeating it returns the original operation. Supply this or the x-ms-client-request-id header."
         }
       }
     },
@@ -65175,7 +65175,7 @@
     "BuilderAppDeploymentParameters": {
       "name": "x-ms-client-request-id",
       "in": "header",
-      "description": "Stable request identifier used when the body omits idempotencyKey.",
+      "description": "Stable request identifier used when the body omits clientOperationId.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",

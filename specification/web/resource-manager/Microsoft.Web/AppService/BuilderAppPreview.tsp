@@ -79,8 +79,8 @@ model BuilderAppPreviewProperties {
 /** Request to deploy the head of the preview's branch or a retained version. Commits and uploaded source are not accepted. */
 @added(Versions.v2026_11_15)
 model BuilderAppPreviewDeployRequest {
-  /** Stable request key. Supply this or the x-ms-client-request-id header. */
-  idempotencyKey?: string;
+  /** Client-generated identifier that deduplicates retries of this operation; repeating it returns the original operation. Supply this or the x-ms-client-request-id header. */
+  clientOperationId?: string;
 
   /** Retained version to deploy. Cannot be combined with buildMode. */
   versionId?: string;

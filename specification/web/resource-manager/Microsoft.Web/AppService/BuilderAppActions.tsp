@@ -30,8 +30,8 @@ model BuilderAppVariableValue {
 /** Request to begin or replay a bounded source archive upload. */
 @added(Versions.v2026_11_15)
 model BuilderAppBeginSourceUploadRequest {
-  /** Stable client key. Reusing the key requires identical immutable upload input. */
-  idempotencyKey: string;
+  /** Client-generated GUID identifying this upload. Repeating a request with the same value replays the existing session; the upload input must be identical. */
+  clientOperationId: string;
 
   /** Optional app manifest supplied separately from the archive. When supplied, its decoded UTF-8 content must not exceed 1 MiB. This byte limit is distinct from the serialized JSON request size. */
   manifestYaml?: string;
@@ -116,8 +116,8 @@ model BuilderAppSourceUpload {
 /** Request to build or deploy a connected reference, retained version, or uploaded source. */
 @added(Versions.v2026_11_15)
 model BuilderAppDeployRequest {
-  /** Stable request key. Supply this or the x-ms-client-request-id header. */
-  idempotencyKey?: string;
+  /** Client-generated identifier that deduplicates retries of this operation; repeating it returns the original operation. Supply this or the x-ms-client-request-id header. */
+  clientOperationId?: string;
 
   /** Retained version to deploy. Cannot be combined with commitSha, buildMode, or uploaded source. */
   versionId?: string;
@@ -158,21 +158,21 @@ model BuilderAppUploadedDeploymentSource {
 /** Redeploy retained ready artifacts. Commit, version, source, and build mode selection are not accepted. */
 @added(Versions.v2026_11_15)
 model BuilderAppRedeployRequest {
-  /** Stable request key. Supply this or the x-ms-client-request-id header. */
-  idempotencyKey?: string;
+  /** Client-generated identifier that deduplicates retries of this operation; repeating it returns the original operation. Supply this or the x-ms-client-request-id header. */
+  clientOperationId?: string;
 }
 
 /** Request to start or stop the app runtime. */
 @added(Versions.v2026_11_15)
 model BuilderAppRuntimeActionRequest {
-  /** Stable request key. Supply this or the x-ms-client-request-id header. */
-  idempotencyKey?: string;
+  /** Client-generated identifier that deduplicates retries of this operation; repeating it returns the original operation. Supply this or the x-ms-client-request-id header. */
+  clientOperationId?: string;
 }
 
-/** Optional client request identifier used as the deployment idempotency key. */
+/** Optional client request identifier used when the body omits clientOperationId. */
 @added(Versions.v2026_11_15)
 model BuilderAppDeploymentParameters {
-  /** Stable request identifier used when the body omits idempotencyKey. */
+  /** Stable request identifier used when the body omits clientOperationId. */
   @header("x-ms-client-request-id")
   clientRequestId?: string;
 }
