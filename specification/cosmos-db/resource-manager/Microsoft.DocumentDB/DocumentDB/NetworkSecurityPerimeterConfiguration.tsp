@@ -16,6 +16,7 @@ namespace Microsoft.DocumentDB;
 /**
  * Network security perimeter (NSP) configuration resource
  */
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @parentResource(DatabaseAccountGetResults)
@@ -30,6 +31,7 @@ model NetworkSecurityPerimeterConfiguration
   >;
 }
 
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)

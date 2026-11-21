@@ -53,6 +53,7 @@ model CassandraRoleAssignmentListResult
   is ResourceListResult<CassandraRoleAssignmentResource>;
 
 /** Properties of a Garnet cache cluster. */
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -134,6 +135,7 @@ union AllocationState {
 }
 
 /** The authentication method used for the Garnet cluster. */
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -234,6 +236,7 @@ model GarnetClusterResourcePatchProperties {
   /**
    * The authentication method used for the Garnet cluster.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -242,6 +245,7 @@ model GarnetClusterResourcePatchProperties {
   /**
    * Flag to indicate if persistence is enabled for the Garnet cluster.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -326,6 +330,7 @@ model MaterializedViewsProperties {
 }
 
 model FleetListResult is ResourceListResult<FleetResource>;
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -333,6 +338,7 @@ model ThroughputPoolsListResult is ResourceListResult<ThroughputPoolResource>;
 model TableRoleDefinitionListResult
   is ResourceListResult<TableRoleDefinitionResource>;
 
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -342,6 +348,7 @@ model ThroughputPoolAccountsListResult
 model TableRoleAssignmentListResult
   is ResourceListResult<TableRoleAssignmentResource>;
 
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -496,6 +503,7 @@ union AnalyticalStorageSchemaType {
 /**
  * Configuration for soft delete on the Cosmos DB account.
  */
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -603,6 +611,12 @@ union MinimalTlsVersion {
   Tls11: "Tls11",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Tls12: "Tls12",
+
+  /**
+   * Sets the minimum TLS version allowed for requests to the database account to TLS 1.3.
+   */
+  @added(Versions.v2026_10_15)
+  Tls13: "Tls13",
 }
 
 /**
@@ -1287,6 +1301,7 @@ union ContinuousTier {
   Continuous30Days: "Continuous30Days",
 
   /** Continuous 35 Days backup tier. */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -1307,6 +1322,7 @@ union DedicatedGatewayType {
 /**
  * Indicates whether the node is functioning or not.
  */
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 union NodeStatus {
@@ -1321,6 +1337,7 @@ union NodeStatus {
  * Indicates whether what action to take for the Chaos Fault.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 enum SupportedActions {
@@ -1393,6 +1410,7 @@ enum RoleDefinitionType {
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -1402,6 +1420,7 @@ model chaosFaultListResponse is Azure.Core.Page<chaosFaultResource>;
  * A request object to enable/disable the chaos fault.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -1438,6 +1457,7 @@ model chaosFaultProperties {
  * The properties of a Copy Job
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -1549,6 +1569,7 @@ model CloudError {
 /**
  * The List operation response, that contains the Copy Jobs and their properties.
  */
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -1733,6 +1754,7 @@ model DatabaseAccountGetProperties {
   /**
    * The Object representing the different Diagnostic log settings for the Cosmos DB Account.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -1751,6 +1773,7 @@ model DatabaseAccountGetProperties {
   /**
    * Indicates the capacityMode of the Cosmos DB account.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -1759,6 +1782,7 @@ model DatabaseAccountGetProperties {
   /**
    * The object that represents the migration state for the CapacityMode of the Cosmos DB account.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -1767,6 +1791,7 @@ model DatabaseAccountGetProperties {
   /**
    * Flag to indicate whether to enable MaterializedViews on the Cosmos DB account
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -1775,6 +1800,7 @@ model DatabaseAccountGetProperties {
   /**
    * Flag to indicate whether Integrated Embeddings is enabled on the Cosmos DB account. This property is supported only for API for NoSQL accounts.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @visibility(Lifecycle.Create, Lifecycle.Read)
   enableEmbeddingGenerator?: boolean;
@@ -1829,6 +1855,7 @@ model DatabaseAccountGetProperties {
   /**
    * Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -1837,6 +1864,7 @@ model DatabaseAccountGetProperties {
   /**
    * The configuration for soft delete on the Cosmos DB account.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -1846,6 +1874,7 @@ model DatabaseAccountGetProperties {
    * Total dedicated throughput (RU/s) for database account. Represents the sum of all manual provisioned throughput and all autoscale max RU/s across all shared throughput databases and dedicated throughput containers in the account for 1 region. READ ONLY.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -1855,6 +1884,7 @@ model DatabaseAccountGetProperties {
    * When this account is part of a fleetspace with throughput pooling enabled, this is the maximum additional throughput (RU/s) that can be consumed from the pool, summed across all shared throughput databases and dedicated throughput containers in the account for 1 region.  READ ONLY.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -2246,6 +2276,7 @@ model CorsPolicy {
 /**
  * Indicates what diagnostic log settings are to be enabled.
  */
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 model DiagnosticLogSettings {
@@ -2353,6 +2384,7 @@ model AccountKeyMetadata {
    * If the value is missing from the object, it means there is no recorded data plane
    * usage for this key.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @visibility(Lifecycle.Read)
@@ -2589,6 +2621,7 @@ model DatabaseAccountUpdateProperties {
   /**
    * The Object representing the different Diagnostic log settings for the Cosmos DB Account.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -2607,6 +2640,7 @@ model DatabaseAccountUpdateProperties {
   /**
    * Indicates the capacityMode of the Cosmos DB account.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -2615,6 +2649,7 @@ model DatabaseAccountUpdateProperties {
   /**
    * Flag to indicate whether to enable MaterializedViews on the Cosmos DB account
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -2623,6 +2658,7 @@ model DatabaseAccountUpdateProperties {
   /**
    * Set to true when creating a Cosmos DB for NoSQL account to enable Integrated Embeddings. Enabling it requires continuous backup and all versions and deletes change feed. This setting cannot be changed after account creation.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @visibility(Lifecycle.Create, Lifecycle.Read)
   enableEmbeddingGenerator?: boolean;
@@ -2671,6 +2707,7 @@ model DatabaseAccountUpdateProperties {
   /**
    * Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -2679,6 +2716,7 @@ model DatabaseAccountUpdateProperties {
   /**
    * The configuration for soft delete on the Cosmos DB account.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -2844,6 +2882,7 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * The Object representing the different Diagnostic log settings for the Cosmos DB Account.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -2867,6 +2906,7 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * Indicates the capacityMode of the Cosmos DB account.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -2875,6 +2915,7 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * Flag to indicate whether to enable MaterializedViews on the Cosmos DB account
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -2883,6 +2924,7 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * Set to true when creating a Cosmos DB for NoSQL account to enable Integrated Embeddings. Enabling it requires continuous backup and all versions and deletes change feed. This setting cannot be changed after account creation.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @visibility(Lifecycle.Create, Lifecycle.Read)
   enableEmbeddingGenerator?: boolean;
@@ -2931,6 +2973,7 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -2939,6 +2982,7 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * The configuration for soft delete on the Cosmos DB account.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -3086,6 +3130,7 @@ model DatabaseAccountRegenerateKeyParameters {
   /**
    * Optional flag indicating whether to skip account keys last usage check.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -3561,6 +3606,7 @@ model MetricAvailability {
 /**
  * The List operation response, that contains the Graph resource and their properties.
  */
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -3581,6 +3627,7 @@ model GraphResourcesListResult {
  * The properties of an Azure Cosmos DB SQL database
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -3594,6 +3641,7 @@ model GraphResourceGetProperties {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -3602,6 +3650,7 @@ model GraphResourceGetPropertiesResource extends GraphResource {}
 /**
  * Cosmos DB Graph resource object
  */
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -3614,6 +3663,7 @@ model GraphResource {
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -3645,6 +3695,7 @@ model AutoscaleSettings {
  * Parameters to create and update Cosmos DB Graph resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -3662,6 +3713,7 @@ model GraphResourceCreateUpdateProperties {
   /**
    * The standard JSON format of a Graph resource
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -4152,6 +4204,7 @@ model SqlContainerResource {
   /**
    * The configuration for defining Materialized Views. This must be specified only for creating a Materialized View container.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -4160,6 +4213,7 @@ model SqlContainerResource {
   /**
    * Materialized Views defined on the container.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -4168,6 +4222,7 @@ model SqlContainerResource {
   /**
    * Materialized Views Properties defined for source container.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -4191,6 +4246,7 @@ model SqlContainerResource {
   /**
    * The Data Masking policy for the container.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -4555,11 +4611,13 @@ model VectorEmbedding {
   /**
    * The embedding source configuration to automatically generate embeddings at the configured paths.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   embeddingSource?: EmbeddingSource;
 }
 
 /** Represents the embedding source configuration for Integrated Embeddings. When specified on a vector embedding, the service will automatically generate embeddings from source document fields. */
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 model EmbeddingSource {
   /** The non-empty list of top-level source paths in the document to generate embeddings from. A source path cannot be the same as the destination vector embedding path. */
@@ -4590,6 +4648,7 @@ model EmbeddingSource {
 /**
  * The type of authentication to use when calling the embedding provider API.
  */
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 union EmbeddingSourceAuthenticationType {
   string,
@@ -4688,12 +4747,14 @@ model FullTextPolicy {
   /**
    * The full text package type.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   package?: FullTextPackageType;
 
   /**
    * The default full text analysis specification inherited by full text paths that omit these settings.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   defaultSpec?: FullTextSpec;
 
@@ -4721,30 +4782,35 @@ model FullTextPath {
   /**
    * The tokenizer method for this path.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   tokenizer?: FullTextTokenizerType;
 
   /**
    * The filter pipeline applied to this path.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   filters?: FullTextFilterType[];
 
   /**
    * The stop word list kind for this path.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   stopWordListKind?: StopWordListKindType;
 
   /**
    * Custom words to add to the stop word list for this path.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   addStopWords?: string[];
 
   /**
    * Words to remove from the built-in stop word list for this path.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   removeStopWords?: string[];
 }
@@ -4752,6 +4818,7 @@ model FullTextPath {
 /**
  * The default full text analysis specification for a full text policy.
  */
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 model FullTextSpec {
   /**
@@ -4861,6 +4928,7 @@ model physicalPartitionStorageInfo {
  * Cosmos DB retrieve throughput parameters object
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -4874,6 +4942,7 @@ model RetrieveThroughputParameters extends ARMResourceProperties {
 /**
  * Properties to retrieve throughput for Azure Cosmos DB resource.
  */
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 model RetrieveThroughputProperties {
@@ -4887,6 +4956,7 @@ model RetrieveThroughputProperties {
 /**
  * Resource to retrieve throughput information for Cosmos DB resource
  */
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 model RetrieveThroughputPropertiesResource {
@@ -4900,6 +4970,7 @@ model RetrieveThroughputPropertiesResource {
 /**
  * PhysicalPartitionId object
  */
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 model PhysicalPartitionId {
@@ -4914,6 +4985,7 @@ model PhysicalPartitionId {
  * An Azure Cosmos DB PhysicalPartitionThroughputInfoResult object.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -4927,6 +4999,7 @@ model PhysicalPartitionThroughputInfoResult extends ARMResourceProperties {
 /**
  * The properties of an Azure Cosmos DB PhysicalPartitionThroughputInfoResult object
  */
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 model PhysicalPartitionThroughputInfoResultProperties {
@@ -4942,6 +5015,7 @@ model PhysicalPartitionThroughputInfoResultProperties {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -4951,6 +5025,7 @@ model PhysicalPartitionThroughputInfoResultPropertiesResource
 /**
  * The properties of an Azure Cosmos DB PhysicalPartitionThroughputInfoProperties object
  */
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 model PhysicalPartitionThroughputInfoProperties {
@@ -4968,6 +5043,7 @@ model PhysicalPartitionThroughputInfoResource {
   /**
    * Id of a physical partition
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -4989,6 +5065,7 @@ model PhysicalPartitionThroughputInfoResource {
  @added(Versions.v2026_04_01_preview)
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -5002,6 +5079,7 @@ model RedistributeThroughputParameters extends ARMResourceProperties {
 /**
  * Properties to redistribute throughput for Azure Cosmos DB resource.
  */
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 model RedistributeThroughputProperties {
@@ -5015,6 +5093,7 @@ model RedistributeThroughputProperties {
 /**
  * Resource to redistribute throughput for Azure Cosmos DB resource
  */
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 model RedistributeThroughputPropertiesResource {
@@ -6072,6 +6151,7 @@ model LocationProperties {
 /**
  * The List operation response, that contains the Cassandra views and their properties.
  */
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -6092,6 +6172,7 @@ model CassandraViewListResult {
  * The properties of an Azure Cosmos DB Cassandra view
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -6104,6 +6185,7 @@ model CassandraViewGetProperties {
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -6118,6 +6200,7 @@ model CassandraViewResource {
   /**
    * Name of the Cosmos DB Cassandra view
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -6132,6 +6215,7 @@ model CassandraViewResource {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -6140,6 +6224,7 @@ model CassandraViewGetPropertiesOptions extends OptionsResource {}
  * Parameters to create and update Cosmos DB Cassandra view.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -6158,6 +6243,7 @@ model CassandraViewCreateUpdateProperties {
   /**
    * The standard JSON format of a Cassandra view
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -6173,6 +6259,7 @@ model CassandraViewCreateUpdateProperties {
  * Parameters to create Data Transfer Job
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -6187,6 +6274,7 @@ model CreateJobRequest extends ARMProxyResource {
  * The properties of a DataTransfer Job
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -6271,6 +6359,7 @@ model DataTransferDataSourceSink {
 /**
  * The List operation response, that contains the Data Transfer jobs and their properties.
  */
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -6294,6 +6383,7 @@ model ListClusters {
 /**
  * List of Garnet clusters.
  */
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -6426,6 +6516,7 @@ model ClusterResourceProperties {
   /**
    * Type of the cluster. If set to Production, some operations might not be permitted on cluster.
    */
+  @removed(Versions.v2026_10_15)
   @added(Versions.v2026_09_01_preview)
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
@@ -8753,6 +8844,7 @@ model TableRoleAssignmentResourceProperties {
 /**
  * Properties to update Azure Cosmos DB throughput pool.
  */
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -8773,6 +8865,7 @@ model ThroughputPoolProperties {
  * Represents a throughput pool resource for updates.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -8786,6 +8879,7 @@ model ThroughputPoolUpdate {
 /**
  * An Azure Cosmos DB Global Database Account which is part of a Throughputpool.
  */
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
@@ -9023,6 +9117,7 @@ model FleetResourceUpdate {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_10_15)
 @added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
