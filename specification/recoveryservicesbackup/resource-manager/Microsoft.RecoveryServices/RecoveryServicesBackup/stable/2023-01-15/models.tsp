@@ -1116,8 +1116,7 @@ union RecoveryPointTierStatus {
 /**
  * Backup management usage for vault.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
-model BackupManagementUsageList extends ResourceList {
+model BackupManagementUsageList {
   /**
    * The list of backup management usages for the given vault.
    */
