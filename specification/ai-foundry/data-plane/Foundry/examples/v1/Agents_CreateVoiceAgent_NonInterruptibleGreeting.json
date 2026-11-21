@@ -1,0 +1,53 @@
+{
+  "title": "Agents_CreateVoiceAgent_NonInterruptibleGreeting",
+  "operationId": "Agents_createAgent_Agents_createAgentFromCode",
+  "parameters": {
+    "api-version": "v1",
+    "name": "visitor-information",
+    "definition": {
+      "kind": "voice",
+      "sub_protocol": "realtime",
+      "model_type": "managed",
+      "model": "gpt-realtime",
+      "greeting": {
+        "type": "template",
+        "text": "Welcome to visitor information. Please ask your question after this introduction.",
+        "interruptible": false,
+        "ignore_user_speech_during_greeting": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "object": "agent",
+        "id": "agent_visitor_information",
+        "name": "visitor-information",
+        "state": "enabled",
+        "configuration_state": "enabled",
+        "versions": {
+          "latest": {
+            "metadata": null,
+            "object": "agent.version",
+            "id": "agent_visitor_information:1",
+            "name": "visitor-information",
+            "version": "1",
+            "created_at": 1791792000,
+            "definition": {
+              "kind": "voice",
+              "sub_protocol": "realtime",
+              "model_type": "managed",
+              "model": "gpt-realtime",
+              "greeting": {
+                "type": "template",
+                "text": "Welcome to visitor information. Please ask your question after this introduction.",
+                "interruptible": false,
+                "ignore_user_speech_during_greeting": true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

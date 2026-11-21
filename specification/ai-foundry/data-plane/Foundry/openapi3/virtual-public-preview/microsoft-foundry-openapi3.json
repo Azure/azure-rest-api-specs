@@ -122117,6 +122117,16 @@
           "type": {
             "$ref": "#/components/schemas/VoiceAgentGreetingMode",
             "description": "The greeting mode."
+          },
+          "interruptible": {
+            "type": "boolean",
+            "description": "Whether caller speech can interrupt the greeting. True (the default) follows normal session policy;\nin Realtime, it doesn't override `audio.input.turn_detection.interrupt_response: false` or `audio.input.turn_detection: null`.\nClient cancellation (`response.cancel` in Realtime) and disconnection are unaffected.",
+            "default": true
+          },
+          "ignore_user_speech_during_greeting": {
+            "type": "boolean",
+            "description": "Whether to ignore caller speech during a non-interruptible greeting instead of processing it after playback. Set to true only when `interruptible` is false.",
+            "default": false
           }
         },
         "discriminator": {

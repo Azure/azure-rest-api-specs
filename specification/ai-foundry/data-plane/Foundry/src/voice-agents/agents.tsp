@@ -547,6 +547,16 @@ union VoiceAgentGreetingMode {
 model VoiceAgentGreetingConfig {
   @doc("The greeting mode.")
   type: VoiceAgentGreetingMode;
+
+  @doc("""
+    Whether caller speech can interrupt the greeting. True (the default) follows normal session policy;
+    in Realtime, it doesn't override `audio.input.turn_detection.interrupt_response: false` or `audio.input.turn_detection: null`.
+    Client cancellation (`response.cancel` in Realtime) and disconnection are unaffected.
+    """)
+  interruptible?: boolean = true;
+
+  @doc("Whether to ignore caller speech during a non-interruptible greeting instead of processing it after playback. Set to true only when `interruptible` is false.")
+  ignore_user_speech_during_greeting?: boolean = false;
 }
 
 @doc("A deterministic greeting rendered with the voice agent's structured inputs and synthesized without model-authored generation.")
