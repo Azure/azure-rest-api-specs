@@ -2488,13 +2488,17 @@
       "properties": {
         "accessSAS": {
           "type": "string",
+          "format": "password",
           "description": "A SAS uri for accessing a disk.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         },
         "securityDataAccessSAS": {
           "type": "string",
+          "format": "password",
           "description": "A SAS uri for accessing a VM guest state.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         }
       }
     },
