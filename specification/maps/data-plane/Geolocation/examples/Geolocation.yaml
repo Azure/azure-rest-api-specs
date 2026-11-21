@@ -1,0 +1,18 @@
+$namespace: MapsGeolocation
+
+Geolocation.getIPToLocation:
+  - title: Successfully retrieve country/region code from IP address
+    id: GetIpToLocation
+    request:
+      query:
+        ip: 2001:4898:80e8:b::189
+      path:
+        endpoint: https://atlas.microsoft.com
+        format: json
+    responses:
+      200:
+        body:
+          countryRegion:
+            isoCode: US
+          ipAddress: 2001:4898:80e8:b::189
+        headers: {}
