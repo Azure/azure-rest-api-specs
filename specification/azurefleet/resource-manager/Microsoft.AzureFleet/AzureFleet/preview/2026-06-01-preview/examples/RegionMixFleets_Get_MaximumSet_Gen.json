@@ -1,0 +1,46 @@
+{
+  "title": "RegionMixFleets_Get_MaximumSet_Gen",
+  "operationId": "RegionMixFleets_Get",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "subscriptionId": "1DC2F28C-A625-4B0E-9748-9885A3C9E9EB",
+    "resourceGroupName": "rgazurefleet",
+    "regionMixFleetName": "testRegionMixFleet"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "virtualMachineScaleSets": [
+            {
+              "virtualMachineScaleSet": {
+                "id": "/subscriptions/1DC2F28C-A625-4B0E-9748-9885A3C9E9EB/resourceGroups/rgazurefleet/providers/Microsoft.Compute/virtualMachineScaleSets/myVmssEastUs"
+              }
+            },
+            {
+              "virtualMachineScaleSet": {
+                "id": "/subscriptions/1DC2F28C-A625-4B0E-9748-9885A3C9E9EB/resourceGroups/rgazurefleet/providers/Microsoft.Compute/virtualMachineScaleSets/myVmssWestUs"
+              }
+            }
+          ]
+        },
+        "tags": {
+          "key1": "value1"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/1DC2F28C-A625-4B0E-9748-9885A3C9E9EB/resourceGroups/rgazurefleet/providers/Microsoft.AzureFleet/regionMixFleets/testRegionMixFleet",
+        "name": "testRegionMixFleet",
+        "type": "Microsoft.AzureFleet/regionMixFleets",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-06-01T17:29:11.123Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-06-01T17:29:11.123Z"
+        }
+      }
+    }
+  }
+}

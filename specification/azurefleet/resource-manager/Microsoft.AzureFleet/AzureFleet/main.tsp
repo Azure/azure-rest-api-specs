@@ -8,6 +8,7 @@ import "./fleet.tsp";
 import "./baseVirtualMachineProfile.tsp";
 import "./virtualMachineScaleSet.tsp";
 import "./virtualMachine.tsp";
+import "./regionMixFleet.tsp";
 import "./back-compatible.tsp";
 import "./client.tsp";
 

@@ -43,6 +43,9 @@
     },
     {
       "name": "Fleets"
+    },
+    {
+      "name": "RegionMixFleets"
     }
   ],
   "paths": {
@@ -117,6 +120,45 @@
         "x-ms-examples": {
           "Fleets_ListBySubscription_MaximumSet_Gen": {
             "$ref": "./examples/Fleets_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureFleet/regionMixFleets": {
+      "get": {
+        "operationId": "RegionMixFleets_ListBySubscription",
+        "tags": [
+          "RegionMixFleets"
+        ],
+        "description": "List RegionMixFleet resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RegionMixFleetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegionMixFleets_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/RegionMixFleets_ListBySubscription_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -528,6 +570,302 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureFleet/regionMixFleets": {
+      "get": {
+        "operationId": "RegionMixFleets_ListByResourceGroup",
+        "tags": [
+          "RegionMixFleets"
+        ],
+        "description": "List RegionMixFleet resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RegionMixFleetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegionMixFleets_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/RegionMixFleets_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureFleet/regionMixFleets/{regionMixFleetName}": {
+      "get": {
+        "operationId": "RegionMixFleets_Get",
+        "tags": [
+          "RegionMixFleets"
+        ],
+        "description": "Get a RegionMixFleet",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "regionMixFleetName",
+            "in": "path",
+            "description": "The name of the RegionMixFleet",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RegionMixFleet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegionMixFleets_Get_MaximumSet_Gen": {
+            "$ref": "./examples/RegionMixFleets_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "RegionMixFleets_CreateOrUpdate",
+        "tags": [
+          "RegionMixFleets"
+        ],
+        "description": "Create a RegionMixFleet",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "regionMixFleetName",
+            "in": "path",
+            "description": "The name of the RegionMixFleet",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegionMixFleet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'RegionMixFleet' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RegionMixFleet"
+            }
+          },
+          "201": {
+            "description": "Resource 'RegionMixFleet' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RegionMixFleet"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegionMixFleets_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/RegionMixFleets_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "RegionMixFleets_Update",
+        "tags": [
+          "RegionMixFleets"
+        ],
+        "description": "Update a RegionMixFleet",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "regionMixFleetName",
+            "in": "path",
+            "description": "The name of the RegionMixFleet",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegionMixFleetUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RegionMixFleet"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegionMixFleets_Update_MaximumSet_Gen": {
+            "$ref": "./examples/RegionMixFleets_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "RegionMixFleets_Delete",
+        "tags": [
+          "RegionMixFleets"
+        ],
+        "description": "Delete a RegionMixFleet",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "regionMixFleetName",
+            "in": "path",
+            "description": "The name of the RegionMixFleet",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegionMixFleets_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/RegionMixFleets_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -2061,6 +2399,93 @@
           }
         ]
       }
+    },
+    "RegionMixFleet": {
+      "type": "object",
+      "description": "A RegionMix Fleet resource that groups virtual machine scale sets across regions.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RegionMixFleetProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "RegionMixFleetListResult": {
+      "type": "object",
+      "description": "The response of a RegionMixFleet list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RegionMixFleet items on this page",
+          "items": {
+            "$ref": "#/definitions/RegionMixFleet"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RegionMixFleetProperties": {
+      "type": "object",
+      "description": "Details of the RegionMix Fleet.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "virtualMachineScaleSets": {
+          "type": "array",
+          "description": "The virtual machine scale sets that are part of the RegionMix Fleet.",
+          "items": {
+            "$ref": "#/definitions/RegionMixFleetVirtualMachineScaleSet"
+          },
+          "x-ms-identifiers": [
+            "virtualMachineScaleSet/id"
+          ]
+        }
+      }
+    },
+    "RegionMixFleetUpdate": {
+      "type": "object",
+      "description": "RegionMix Fleet update model.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/RegionMixFleetProperties",
+          "description": "RP-specific updatable properties."
+        }
+      }
+    },
+    "RegionMixFleetVirtualMachineScaleSet": {
+      "type": "object",
+      "description": "A virtual machine scale set that is part of a RegionMix Fleet.",
+      "properties": {
+        "virtualMachineScaleSet": {
+          "$ref": "#/definitions/ApiEntityReference",
+          "description": "Reference to the Microsoft.Compute virtual machine scale set resource."
+        }
+      },
+      "required": [
+        "virtualMachineScaleSet"
+      ]
     },
     "RegularPriorityAllocationStrategy": {
       "type": "string",
