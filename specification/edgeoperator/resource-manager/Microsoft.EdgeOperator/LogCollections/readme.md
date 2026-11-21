@@ -54,14 +54,10 @@ input-file:
 ```yaml
 suppressions:
   - code: AllProxyResourcesShouldHaveDelete
-    from: logCollections.json
+    from: preview/2026-06-01-preview/logCollections.json
     where: $.definitions.LogCollection
     reason: Log collection jobs are service-created history records and cannot be deleted by callers.
 directive:
-  - suppress: OperationsAPIImplementation
-    from: logCollections.json
-    where: $
-    reason: The shared Microsoft.EdgeOperator Operations API is published by the sibling SystemReadiness project.
   - suppress: OperationsAPIImplementation
     from: preview/2026-06-01-preview/logCollections.json
     where: $
