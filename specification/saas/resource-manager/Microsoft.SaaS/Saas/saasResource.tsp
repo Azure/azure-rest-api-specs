@@ -7,8 +7,8 @@ using Azure.ResourceManager;
 
 namespace Microsoft.SaaS;
 
-/** Tenant-level SaaS resource properties for GA API version 2026-04-01. */
-model SaasTenantResourceProperties {
+/** SaaS resource properties for GA API version 2026-04-01. */
+model SaasResourceProperties {
   /** The status of the last provisioning operation performed on the resource. */
   @visibility(Lifecycle.Read)
   provisioningState?: SaasProvisioningState;
@@ -122,18 +122,6 @@ model SaasTenantResourceProperties {
   /** The intent for patch operations. Write-only — not returned in GET responses. */
   @visibility(Lifecycle.Create, Lifecycle.Update)
   intent?: PatchIntent;
-}
-
-/** Subscription-level SaaS resource properties for GA API version 2026-04-01. */
-model SaasResourceProperties {
-  ...SaasTenantResourceProperties;
-
-  /**
-   * Optional campaign attribution metadata for a new subscription-level purchase.
-   * Accepted only on create and purchase validation; never returned in responses or accepted on update.
-   */
-  @visibility(Lifecycle.Create)
-  campaign?: CampaignMetadata;
 }
 
 /** SaaS tracked resource for GA API version 2026-04-01. Inherits standard Azure Resource Manager envelope (id, name, type, location, tags, systemData). */

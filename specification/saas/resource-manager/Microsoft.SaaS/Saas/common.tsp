@@ -56,36 +56,6 @@ model AccessTokenResult {
   expiryTime?: utcDateTime;
 }
 
-/**
- * Campaign attribution metadata supplied when creating a new subscription-level resource.
- * Accepted only on create and purchase validation; never returned in responses or accepted on update.
- */
-model CampaignMetadata {
-  /** The referral source that brought the customer (for example, azure-marketplace or contoso-newsletter). */
-  source?: string;
-
-  /** The marketing medium (for example, cpc, banner, or email). */
-  medium?: string;
-
-  /** The marketing campaign name or identifier. */
-  campaign?: string;
-
-  /** The paid search term associated with the campaign. */
-  term?: string;
-
-  /** The campaign content identifier used to differentiate links or placements. */
-  content?: string;
-
-  /** The Microsoft campaign tracking identifier. */
-  ocid?: string;
-
-  /** The legacy Microsoft 365 marketing campaign identifier. */
-  mktcmpid?: string;
-
-  /** The legacy Microsoft 365 referral source identifier. */
-  src?: string;
-}
-
 /** A machine-readable error code and human-readable message describing a validation failure. */
 model ResourceValidationError {
   /** Machine-readable validation error code. */

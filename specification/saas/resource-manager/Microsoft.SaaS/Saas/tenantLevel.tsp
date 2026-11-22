@@ -12,7 +12,7 @@ namespace Microsoft.SaaS;
 
 /** Tenant-level SaaS proxy resource for GA API version 2026-04-01. */
 @tenantResource
-model SaasTenantResource is ProxyResource<SaasTenantResourceProperties> {
+model SaasTenantResource is ProxyResource<SaasResourceProperties> {
   ...ResourceNameParameter<
     Resource = SaasTenantResource,
     KeyName = "resourceId",
@@ -25,7 +25,7 @@ model SaasTenantResource is ProxyResource<SaasTenantResourceProperties> {
 /** The type used for update operations of the SaasTenantResource. */
 model SaasTenantResourceUpdate is Azure.ResourceManager.Foundations.ResourceUpdateModel<
   SaasTenantResource,
-  SaasTenantResourceProperties
+  SaasResourceProperties
 >;
 
 @armResourceOperations
