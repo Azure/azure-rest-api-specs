@@ -3,9 +3,26 @@ import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Rest;
 using Azure.ResourceManager;
 
 namespace Microsoft.Network;
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "The SDK hierarchy customization in client.tsp marks the shared ARM proxy-resource foundation as custom; resources using this standard template remain standard ARM proxy resources."
+model StandardProxyResourceInstance<
+  Properties extends {},
+  KeyName extends valueof string,
+  SegmentName extends valueof string,
+  NamePattern extends valueof string,
+  PropertiesOptional extends valueof boolean = true
+> is Azure.ResourceManager.ProxyResource<Properties, PropertiesOptional> {
+  @visibility(Lifecycle.Read)
+  @path
+  @key(KeyName)
+  @segment(SegmentName)
+  @pattern(NamePattern)
+  name: string;
+}
 
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required for backward compatibility with converted specs."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The template preserves the legacy resource envelope."
