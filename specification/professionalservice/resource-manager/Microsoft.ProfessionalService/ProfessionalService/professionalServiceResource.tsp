@@ -105,13 +105,6 @@ model ProfessionalServiceResourceProperties {
 
   /** The product code. Primary purchase identifier for GA — used to resolve term details server-side. */
   productCode: string;
-
-  /**
-   * Optional campaign attribution metadata for a new subscription-level purchase.
-   * Accepted only on create and purchase validation; never returned in responses or accepted on update.
-   */
-  @visibility(Lifecycle.Create)
-  campaign?: CampaignMetadata;
 }
 
 /** Professional Service tracked resource for GA API version 2026-05-01. Inherits standard Azure Resource Manager envelope (id, name, type, location, tags, systemData). */
