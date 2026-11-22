@@ -1,0 +1,42 @@
+{
+  "title": "RunbookExecutions_PerformAction_MaximumSet",
+  "operationId": "RunbookExecutions_PerformAction",
+  "parameters": {
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD",
+    "resourceGroupName": "rgwaves",
+    "projectName": "project1",
+    "runbookName": "runbook1",
+    "runbookExecutionName": "execution1",
+    "body": {
+      "action": "Pause",
+      "comment": "Paused for a scheduled validation window.",
+      "targetId": "workstream1",
+      "entities": [
+        "entity1"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "runbookArtifactVersionId": "runbook-version-3",
+          "executionArtifactId": "execution-artifact-1",
+          "status": "Paused",
+          "startTime": "2026-08-01T12:00:00Z"
+        },
+        "id": "/subscriptions/F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD/resourceGroups/rgwaves/providers/Microsoft.Migrate/migrateProjects/project1/runbooks/runbook1/executions/execution1",
+        "name": "execution1",
+        "type": "Microsoft.Migrate/migrateProjects/runbooks/executions"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/providers/Microsoft.Migrate/locations/eastus/operationStatuses/pause-execution1",
+        "Retry-After": 30
+      }
+    }
+  }
+}
