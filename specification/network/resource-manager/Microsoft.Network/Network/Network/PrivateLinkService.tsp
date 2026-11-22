@@ -64,8 +64,9 @@ interface PrivateLinkServices {
    * Gets all private link service in a subscription.
    */
   @tag("PrivateLinkServices")
-  listBySubscription is ArmListBySubscription<
+  listBySubscription is ArmListBySubscriptionWithResourceName<
     PrivateLinkService,
+    OverrideResourceName = "PrivateLinkService",
     Error = Error
   >;
 }

@@ -66,8 +66,9 @@ interface ApplicationSecurityGroups {
    * Gets all application security groups in a subscription.
    */
   @tag("ApplicationSecurityGroups")
-  listAll is ArmListBySubscription<
+  listAll is ArmListBySubscriptionWithResourceName<
     ApplicationSecurityGroup,
+    OverrideResourceName = "ApplicationSecurityGroup",
     Error = CloudError
   >;
 }

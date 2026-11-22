@@ -114,8 +114,9 @@ interface NetworkManagers {
    * List all network managers in a subscription.
    */
   @tag("NetworkManagers")
-  listBySubscription is ArmListBySubscription<
+  listBySubscription is ArmListBySubscriptionWithResourceName<
     NetworkManager,
+    OverrideResourceName = "NetworkManager",
     Parameters = {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.

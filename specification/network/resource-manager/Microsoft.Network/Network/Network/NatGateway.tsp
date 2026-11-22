@@ -77,7 +77,11 @@ interface NatGateways {
   /**
    * Gets all the Nat Gateways in a subscription.
    */
-  listAll is ArmListBySubscription<NatGateway, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    NatGateway,
+    OverrideResourceName = "NatGateway",
+    Error = CloudError
+  >;
 }
 
 @@doc(NatGateway.name, "The name of the nat gateway.");

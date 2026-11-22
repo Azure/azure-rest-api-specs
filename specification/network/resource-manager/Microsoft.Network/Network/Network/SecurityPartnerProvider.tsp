@@ -82,7 +82,11 @@ interface SecurityPartnerProviders {
   /**
    * Gets all the Security Partner Providers in a subscription.
    */
-  list is ArmListBySubscription<SecurityPartnerProvider, Error = CloudError>;
+  list is ArmListBySubscriptionWithResourceName<
+    SecurityPartnerProvider,
+    OverrideResourceName = "SecurityPartnerProvider",
+    Error = CloudError
+  >;
 }
 
 @@doc(

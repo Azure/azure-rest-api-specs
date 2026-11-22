@@ -86,7 +86,11 @@ interface DdosCustomPolicies {
    */
   @added(Versions.v2025_07_01)
   @tag("ddosCustomPolicies")
-  listAll is ArmListBySubscription<DdosCustomPolicy, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    DdosCustomPolicy,
+    OverrideResourceName = "DdosCustomPolicy",
+    Error = CloudError
+  >;
 }
 
 @@doc(DdosCustomPolicy.name, "The name of the DDoS custom policy.");

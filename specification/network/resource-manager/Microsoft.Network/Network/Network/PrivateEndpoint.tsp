@@ -93,7 +93,11 @@ interface PrivateEndpoints {
    */
   @tag("PrivateEndpoints")
   @autoRoute
-  listBySubscription is ArmListBySubscription<PrivateEndpoint, Error = Error>;
+  listBySubscription is ArmListBySubscriptionWithResourceName<
+    PrivateEndpoint,
+    OverrideResourceName = "PrivateEndpoint",
+    Error = Error
+  >;
 
   /**
    * Deletes the specified private dns zone group.

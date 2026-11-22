@@ -90,7 +90,11 @@ interface IpAllocations {
   /**
    * Gets all IpAllocations in a subscription.
    */
-  list is ArmListBySubscription<IpAllocation, Error = CloudError>;
+  list is ArmListBySubscriptionWithResourceName<
+    IpAllocation,
+    OverrideResourceName = "IpAllocation",
+    Error = CloudError
+  >;
 }
 
 @@doc(IpAllocation.name, "The name of the IpAllocation.");

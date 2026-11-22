@@ -139,8 +139,9 @@ interface VpnGateways {
    * Lists all the VpnGateways in a subscription.
    */
   @autoRoute
-  list is ArmListBySubscription<
+  list is ArmListBySubscriptionWithResourceName<
     VpnGateway,
+    OverrideResourceName = "VpnGateway",
     Response = ArmResponse<ListVpnGatewaysResult>,
     Error = CloudError
   >;

@@ -152,7 +152,11 @@ interface NetworkInterfaceOperationGroup {
    * Gets all network interfaces in a subscription.
    */
   @tag("NetworkInterfaces")
-  listAll is ArmListBySubscription<NetworkInterface, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    NetworkInterface,
+    OverrideResourceName = "NetworkInterfaces",
+    Error = CloudError
+  >;
 
   /**
    * Gets all route tables applied to a network interface.

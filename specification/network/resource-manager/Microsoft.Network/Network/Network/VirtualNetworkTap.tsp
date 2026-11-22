@@ -56,7 +56,11 @@ interface VirtualNetworkTaps {
    * Gets all the VirtualNetworkTaps in a subscription.
    */
   @tag("VirtualNetworkTaps")
-  listAll is ArmListBySubscription<VirtualNetworkTap, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    VirtualNetworkTap,
+    OverrideResourceName = "VirtualNetworkTap",
+    Error = CloudError
+  >;
 }
 
 @@doc(VirtualNetworkTap.name, "The name of virtual network tap.");

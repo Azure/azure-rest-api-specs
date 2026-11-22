@@ -8,6 +8,20 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Network;
 
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "The standard subscription list template does not expose the legacy logical resource name needed to associate converted list operations with their resources."
+@Azure.ResourceManager.Private.legacyResourceOperation(
+  Resource,
+  "list",
+  OverrideResourceName
+)
+op ArmListBySubscriptionWithResourceName<
+  Resource extends Azure.ResourceManager.Foundations.SimpleResource,
+  OverrideResourceName extends valueof string,
+  Parameters extends {} = {},
+  Response extends {} = ArmResponse<ResourceListResult<Resource>>,
+  Error extends {} = ErrorResponse
+> is ArmListBySubscription<Resource, Parameters, Response, Error>;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "The SDK hierarchy customization in client.tsp marks the shared ARM proxy-resource foundation as custom; resources using this standard template remain standard ARM proxy resources."
 model StandardProxyResourceInstance<
   Properties extends {},

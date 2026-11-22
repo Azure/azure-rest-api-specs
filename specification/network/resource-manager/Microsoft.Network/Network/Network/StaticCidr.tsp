@@ -78,7 +78,8 @@ interface StaticCidrs {
   create is StaticCidrOps.CreateOrUpdateSync<
     StaticCidr,
     OptionalRequestBody = true,
-    OverrideErrorType = CommonErrorResponse
+    OverrideErrorType = CommonErrorResponse,
+    OverrideResourceName = "StaticCidr"
   >;
 
   /**

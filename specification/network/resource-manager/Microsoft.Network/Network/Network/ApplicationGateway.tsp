@@ -93,7 +93,11 @@ interface ApplicationGateways {
    * Gets all the application gateways in a subscription.
    */
   @tag("ApplicationGateways")
-  listAll is ArmListBySubscription<ApplicationGateway, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    ApplicationGateway,
+    OverrideResourceName = "ApplicationGateway",
+    Error = CloudError
+  >;
 
   /**
    * Starts the specified application gateway.

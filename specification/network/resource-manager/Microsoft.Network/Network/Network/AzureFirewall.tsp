@@ -105,7 +105,11 @@ interface AzureFirewalls {
    * Gets all the Azure Firewalls in a subscription.
    */
   @tag("AzureFirewalls")
-  listAll is ArmListBySubscription<AzureFirewall, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    AzureFirewall,
+    OverrideResourceName = "AzureFirewall",
+    Error = CloudError
+  >;
 
   /**
    * Retrieves a list of all IP prefixes that azure firewall has learned to not SNAT.

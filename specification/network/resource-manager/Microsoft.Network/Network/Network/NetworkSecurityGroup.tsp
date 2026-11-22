@@ -69,7 +69,11 @@ interface NetworkSecurityGroups {
   /**
    * Gets all network security groups in a subscription.
    */
-  listAll is ArmListBySubscription<NetworkSecurityGroup, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    NetworkSecurityGroup,
+    OverrideResourceName = "NetworkSecurityGroup",
+    Error = CloudError
+  >;
 }
 
 @@doc(NetworkSecurityGroup.name, "The name of the network security group.");

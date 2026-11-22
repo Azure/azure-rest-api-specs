@@ -129,7 +129,11 @@ interface RouteFilters {
    */
   @tag("RouteFilters")
   @autoRoute
-  list is ArmListBySubscription<RouteFilter, Error = CloudError>;
+  list is ArmListBySubscriptionWithResourceName<
+    RouteFilter,
+    OverrideResourceName = "RouteFilter",
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified rule from a route filter.

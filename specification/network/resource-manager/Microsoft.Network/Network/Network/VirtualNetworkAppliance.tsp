@@ -75,7 +75,11 @@ interface VirtualNetworkAppliances {
   /**
    * Gets all virtual network appliances in a subscription.
    */
-  listAll is ArmListBySubscription<VirtualNetworkAppliance, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    VirtualNetworkAppliance,
+    OverrideResourceName = "VirtualNetworkAppliance",
+    Error = CloudError
+  >;
 }
 
 @@doc(

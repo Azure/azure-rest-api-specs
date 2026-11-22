@@ -73,7 +73,11 @@ interface DscpConfigurations {
    * Gets all dscp configurations in a subscription.
    */
   @tag("DscpConfigurations")
-  listAll is ArmListBySubscription<DscpConfiguration, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    DscpConfiguration,
+    OverrideResourceName = "DscpConfiguration",
+    Error = CloudError
+  >;
 }
 
 @@doc(DscpConfiguration.name, "The name of the resource.");

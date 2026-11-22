@@ -109,7 +109,11 @@ interface PublicIPPrefixes {
   /**
    * Gets all the public IP prefixes in a subscription.
    */
-  listAll is ArmListBySubscription<PublicIPPrefix, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    PublicIPPrefix,
+    OverrideResourceName = "PublicIPPrefix",
+    Error = CloudError
+  >;
 }
 
 @@doc(PublicIPPrefix.name, "The name of the public IP prefix.");

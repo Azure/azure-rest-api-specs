@@ -211,7 +211,11 @@ interface AuthenticationPolicies {
    * Gets all the authentication policies in a subscription.
    */
   @tag("AuthenticationPolicies")
-  listAll is ArmListBySubscription<AuthenticationPolicy, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    AuthenticationPolicy,
+    OverrideResourceName = "AuthenticationPolicy",
+    Error = CloudError
+  >;
 }
 
 @@doc(AuthenticationPolicy.name, "The name of the authentication policy.");

@@ -900,7 +900,7 @@ using TypeSpec.Versioning;
   "CreateOrUpdate"
 );
 @@clientName(
-  ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate::parameters.body,
+  ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate::parameters.resource,
   "peeringParameters"
 );
 @@clientName(

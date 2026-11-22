@@ -72,7 +72,11 @@ interface ServiceEndpointPolicies {
   /**
    * Gets all the service endpoint policies in a subscription.
    */
-  list is ArmListBySubscription<ServiceEndpointPolicy, Error = CloudError>;
+  list is ArmListBySubscriptionWithResourceName<
+    ServiceEndpointPolicy,
+    OverrideResourceName = "ServiceEndpointPolicy",
+    Error = CloudError
+  >;
 }
 
 @@doc(ServiceEndpointPolicy.name, "The name of the service endpoint policy.");

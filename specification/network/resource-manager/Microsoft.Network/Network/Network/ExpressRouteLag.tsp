@@ -183,8 +183,9 @@ interface ExpressRouteLags {
    */
   @tag("ExpressRouteLags")
   @autoRoute
-  list is ArmListBySubscription<
+  list is ArmListBySubscriptionWithResourceName<
     ExpressRouteLag,
+    OverrideResourceName = "ExpressRouteLag",
     Response = ExpressRouteLagListResult,
     Error = CloudError
   >;
