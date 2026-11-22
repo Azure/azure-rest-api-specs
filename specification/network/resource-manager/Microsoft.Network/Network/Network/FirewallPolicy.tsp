@@ -108,7 +108,11 @@ interface FirewallPolicies {
    * Gets all the Firewall Policies in a subscription.
    */
   @tag("FirewallPolicies")
-  listAll is ArmListBySubscription<FirewallPolicy, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    FirewallPolicy,
+    OverrideResourceName = "FirewallPolicy",
+    Error = CloudError
+  >;
 
   /**
    * Retrieves the current status of IDPS signatures for the relevant policy. Maximal amount of returned signatures is 1000.

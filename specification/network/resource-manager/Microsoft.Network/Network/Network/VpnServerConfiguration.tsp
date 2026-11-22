@@ -85,8 +85,9 @@ interface VpnServerConfigurations {
   /**
    * Lists all the VpnServerConfigurations in a subscription.
    */
-  list is ArmListBySubscription<
+  list is ArmListBySubscriptionWithResourceName<
     VpnServerConfiguration,
+    OverrideResourceName = "VpnServerConfiguration",
     Response = ArmResponse<ListVpnServerConfigurationsResult>,
     Error = CloudError
   >;

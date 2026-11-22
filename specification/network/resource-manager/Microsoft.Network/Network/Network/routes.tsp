@@ -251,7 +251,8 @@ interface NetworkInterfacesOperationGroup {
   listCloudServiceNetworkInterfaces is RoutesNetworkInterfaceOps.List<
     NetworkInterface,
     Response = ResourceListResult<NetworkInterface>,
-    OverrideErrorType = CloudError
+    OverrideErrorType = CloudError,
+    OverrideResourceName = "NetworkInterfaces"
   >;
 }
 
@@ -268,7 +269,8 @@ interface PublicIPAddressesOperationGroup {
   listCloudServicePublicIPAddresses is CloudServicesOps.List<
     PublicIPAddress,
     Response = ResourceListResult<PublicIPAddress>,
-    OverrideErrorType = CloudError
+    OverrideErrorType = CloudError,
+    OverrideResourceName = "PublicIpAddresses"
   >;
 }
 

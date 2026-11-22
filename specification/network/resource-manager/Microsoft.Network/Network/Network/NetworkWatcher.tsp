@@ -121,8 +121,9 @@ interface NetworkWatchers {
    */
   @tag("NetworkWatchers")
   @autoRoute
-  listAll is ArmListBySubscription<
+  listAll is ArmListBySubscriptionWithResourceName<
     NetworkWatcher,
+    OverrideResourceName = "NetworkWatcher",
     Response = ArmResponse<NetworkWatcherListResult>,
     Error = ErrorResponse
   >;

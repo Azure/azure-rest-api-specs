@@ -105,7 +105,11 @@ interface InterconnectGroups {
   /**
    * Gets all interconnect groups in a subscription.
    */
-  listAll is ArmListBySubscription<InterconnectGroup, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    InterconnectGroup,
+    OverrideResourceName = "InterconnectGroup",
+    Error = CloudError
+  >;
 
   /**
    * Gets node availability for all subgroups in the specified interconnect group.

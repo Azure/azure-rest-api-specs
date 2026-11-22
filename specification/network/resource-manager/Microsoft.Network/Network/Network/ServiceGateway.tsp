@@ -105,7 +105,11 @@ interface ServiceGateways {
   /**
    * Gets all the service gateways in a subscription.
    */
-  listAll is ArmListBySubscription<ServiceGateway, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    ServiceGateway,
+    OverrideResourceName = "ServiceGateway",
+    Error = CloudError
+  >;
 
   /**
    * Creates or updates address locations within the service gateway.

@@ -101,7 +101,11 @@ interface LoadBalancers {
   /**
    * Gets all the load balancers in a subscription.
    */
-  listAll is ArmListBySubscription<LoadBalancer, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    LoadBalancer,
+    OverrideResourceName = "LoadBalancer",
+    Error = CloudError
+  >;
 
   /**
    * Migrate load balancer to IP Based

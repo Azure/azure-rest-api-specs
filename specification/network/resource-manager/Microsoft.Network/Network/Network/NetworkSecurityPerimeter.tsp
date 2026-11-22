@@ -104,8 +104,9 @@ interface NetworkSecurityPerimeters {
   /**
    * List all network security perimeters in a subscription.
    */
-  listBySubscription is ArmListBySubscription<
+  listBySubscription is ArmListBySubscriptionWithResourceName<
     NetworkSecurityPerimeter,
+    OverrideResourceName = "NetworkSecurityPerimeter",
     Parameters = {
       /**
        * An optional query parameter which specifies the maximum number of records to be returned by the server.

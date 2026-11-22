@@ -69,7 +69,11 @@ interface RouteTables {
   /**
    * Gets all route tables in a subscription.
    */
-  listAll is ArmListBySubscription<RouteTable, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    RouteTable,
+    OverrideResourceName = "RouteTable",
+    Error = CloudError
+  >;
 }
 
 @@doc(RouteTable.name, "The name of the route table.");

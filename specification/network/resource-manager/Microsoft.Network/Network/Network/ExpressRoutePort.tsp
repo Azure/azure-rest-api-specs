@@ -126,8 +126,9 @@ interface ExpressRoutePorts {
    */
   @tag("ExpressRoutePorts")
   @autoRoute
-  list is ArmListBySubscription<
+  list is ArmListBySubscriptionWithResourceName<
     ExpressRoutePort,
+    OverrideResourceName = "ExpressRoutePort",
     Response = ExpressRoutePortListResult,
     Error = CloudError
   >;

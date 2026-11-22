@@ -84,8 +84,9 @@ interface VpnSites {
   /**
    * Lists all the VpnSites in a subscription.
    */
-  list is ArmListBySubscription<
+  list is ArmListBySubscriptionWithResourceName<
     VpnSite,
+    OverrideResourceName = "VpnSite",
     Response = ArmResponse<ListVpnSitesResult>,
     Error = CloudError
   >;

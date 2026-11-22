@@ -145,8 +145,9 @@ interface VirtualHubs {
    * Lists all the VirtualHubs in a subscription.
    */
   @autoRoute
-  list is ArmListBySubscription<
+  list is ArmListBySubscriptionWithResourceName<
     VirtualHub,
+    OverrideResourceName = "VirtualHub",
     Response = ArmResponse<ListVirtualHubsResult>,
     Error = CloudError
   >;

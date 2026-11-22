@@ -86,7 +86,11 @@ interface NetworkProfiles {
   /**
    * Gets all the network profiles in a subscription.
    */
-  listAll is ArmListBySubscription<NetworkProfile, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    NetworkProfile,
+    OverrideResourceName = "NetworkProfile",
+    Error = CloudError
+  >;
 }
 
 @@doc(NetworkProfile.name, "The name of the public IP prefix.");

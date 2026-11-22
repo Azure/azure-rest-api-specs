@@ -105,8 +105,9 @@ interface VirtualWans {
   /**
    * Lists all the VirtualWANs in a subscription.
    */
-  list is ArmListBySubscription<
+  list is ArmListBySubscriptionWithResourceName<
     VirtualWAN,
+    OverrideResourceName = "VirtualWAN",
     Response = ArmResponse<ListVirtualWANsResult>,
     Error = CloudError
   >;

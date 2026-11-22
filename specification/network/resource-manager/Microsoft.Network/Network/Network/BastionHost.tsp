@@ -119,7 +119,11 @@ interface BastionHosts {
   /**
    * Lists all Bastion Hosts in a subscription.
    */
-  list is ArmListBySubscription<BastionHost, Error = CloudError>;
+  list is ArmListBySubscriptionWithResourceName<
+    BastionHost,
+    OverrideResourceName = "BastionHost",
+    Error = CloudError
+  >;
 
   /**
    * Creates a Bastion Shareable Links for all the VMs specified in the request.

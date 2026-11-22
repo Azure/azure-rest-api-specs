@@ -188,7 +188,8 @@ interface PublicIPAddressOperationGroup {
   @tag("PublicIPAddresses")
   listAll is PublicIPAddressSubscriptionOps.List<
     PublicIPAddress,
-    OverrideErrorType = CloudError
+    OverrideErrorType = CloudError,
+    OverrideResourceName = "PublicIpAddresses"
   >;
 
   /**

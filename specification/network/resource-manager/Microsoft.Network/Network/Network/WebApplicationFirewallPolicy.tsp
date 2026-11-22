@@ -73,8 +73,9 @@ interface WebApplicationFirewallPolicies {
   /**
    * Gets all the WAF policies in a subscription.
    */
-  listAll is ArmListBySubscription<
+  listAll is ArmListBySubscriptionWithResourceName<
     WebApplicationFirewallPolicy,
+    OverrideResourceName = "WebApplicationFirewallPolicy",
     Response = WebApplicationFirewallPolicyListResult,
     Error = CloudError
   >;

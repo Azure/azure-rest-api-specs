@@ -191,7 +191,11 @@ interface NetworkVirtualAppliances {
   /**
    * Gets all Network Virtual Appliances in a subscription.
    */
-  list is ArmListBySubscription<NetworkVirtualAppliance, Error = CloudError>;
+  list is ArmListBySubscriptionWithResourceName<
+    NetworkVirtualAppliance,
+    OverrideResourceName = "NetworkVirtualAppliance",
+    Error = CloudError
+  >;
 
   /**
    * Restarts one or more VMs belonging to the specified Network Virtual Appliance.

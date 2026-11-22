@@ -105,8 +105,9 @@ interface P2SVpnGateways {
   /**
    * Lists all the P2SVpnGateways in a subscription.
    */
-  list is ArmListBySubscription<
+  list is ArmListBySubscriptionWithResourceName<
     P2SVpnGateway,
+    OverrideResourceName = "P2SVpnGateway",
     Response = ArmResponse<ListP2SVpnGatewaysResult>,
     Error = CloudError
   >;

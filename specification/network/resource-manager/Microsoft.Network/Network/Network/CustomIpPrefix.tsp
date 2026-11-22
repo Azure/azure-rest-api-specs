@@ -99,7 +99,11 @@ interface CustomIpPrefixes {
   /**
    * Gets all the custom IP prefixes in a subscription.
    */
-  listAll is ArmListBySubscription<CustomIpPrefix, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    CustomIpPrefix,
+    OverrideResourceName = "CustomIpPrefix",
+    Error = CloudError
+  >;
 }
 
 @@doc(CustomIpPrefix.name, "The name of the custom IP prefix.");

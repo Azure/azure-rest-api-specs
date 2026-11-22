@@ -77,7 +77,11 @@ interface VirtualNetworks {
    * Gets all virtual networks in a subscription.
    */
   @tag("VirtualNetworks")
-  listAll is ArmListBySubscription<VirtualNetwork, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    VirtualNetwork,
+    OverrideResourceName = "VirtualNetwork",
+    Error = CloudError
+  >;
 
   /**
    * Checks whether a private IP address is available for use.

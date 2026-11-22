@@ -82,7 +82,11 @@ interface DdosProtectionPlans {
   /**
    * Gets all DDoS protection plans in a subscription.
    */
-  list is ArmListBySubscription<DdosProtectionPlan, Error = CloudError>;
+  list is ArmListBySubscriptionWithResourceName<
+    DdosProtectionPlan,
+    OverrideResourceName = "DdosProtectionPlan",
+    Error = CloudError
+  >;
 }
 
 @@doc(DdosProtectionPlan.name, "The name of the DDoS protection plan.");

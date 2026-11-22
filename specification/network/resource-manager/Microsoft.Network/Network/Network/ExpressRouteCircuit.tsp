@@ -93,7 +93,11 @@ interface ExpressRouteCircuits {
    * Gets all the express route circuits in a subscription.
    */
   @tag("ExpressRouteCircuits")
-  listAll is ArmListBySubscription<ExpressRouteCircuit, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    ExpressRouteCircuit,
+    OverrideResourceName = "ExpressRouteCircuit",
+    Error = CloudError
+  >;
 
   /**
    * Gets all the stats from an express route circuit in a resource group.

@@ -130,7 +130,11 @@ interface FirstPartyServiceTags {
   /**
    * Gets all the first party service tags in a subscription.
    */
-  listAll is ArmListBySubscription<FirstPartyServiceTag, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    FirstPartyServiceTag,
+    OverrideResourceName = "FirstPartyServiceTag",
+    Error = CloudError
+  >;
 }
 
 @@doc(FirstPartyServiceTag.name, "The name of the first party service tag.");
