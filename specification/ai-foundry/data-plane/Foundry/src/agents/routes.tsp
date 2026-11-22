@@ -529,8 +529,9 @@ interface Agents {
   /**
    * Creates a new session for an agent endpoint.
    * Hosted keeps its existing version_indicator request and response.
-   * Managed resolves the endpoint's configured version and validates the complete definition
-   * from that version or the Session according to definition_source, without a merge or request selector.
+   * Managed requires an explicit version_indicator for an existing version of the route Agent.
+   * It validates the complete definition from that version or the Session according to definition_source,
+   * without a merge. Managed agent_session_id is an optional echoed label, not the generated routing ID.
    * Managed creation returns the Session with 201; Environment preparation and turns can proceed asynchronously.
    * Managed requests use existing endpoint interact/action authorization and enforce creator isolation.
    */
@@ -689,7 +690,9 @@ interface Agents {
   >;
 
   /**
-   * Streams live Managed Session events as SSE. This is not a durable event list or replay API.
+   * Streams live Managed Session events as SSE, including typed subagent lifecycle, turn, and item events.
+   * Root and child turns share event types; turn.subagent_id distinguishes them when a turn is present.
+   * This is not a durable event list, replay API, or dedicated child-history endpoint.
    * No Last-Event-ID or sequence cursor is accepted. Reconnect by buffering a new stream and
    * reconciling Session, turn, and item snapshots. Text deltas are previews, not authoritative history.
    * Uses existing endpoint interact/action authorization and service-side creator isolation.

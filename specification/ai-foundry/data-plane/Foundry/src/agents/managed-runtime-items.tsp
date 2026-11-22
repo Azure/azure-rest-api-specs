@@ -26,7 +26,7 @@ model SessionWebSearchActionBase {
   type: string;
 }
 
-/** All saved OpenAI Session item variants plus Foundry tool and MCP approval records. */
+/** All saved OpenAI Session item variants plus Foundry tool and MCP approval records. Includes all six subagent coordination calls and history-only agent_message; item.turn_id identifies the containing turn, not the target child's turn. */
 @discriminated(#{ envelope: "none", discriminatorPropertyName: "type" })
 @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
 union SessionItem extends SessionItemBase {
@@ -104,8 +104,16 @@ model SessionFunctionCallOutputItem extends SessionItemBase {
   >>;
 }
 
-/** Preserves the OpenAI agent_message history item, including optional provider fields. */
+/** An interagent message in saved history or item.added events. Sender and recipient are runtime agent IDs; this record has no status and is not an item.done output variant. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
+@example(#{
+  type: "agent_message",
+  id: "item_child_message",
+  turn_id: "turn_root",
+  sender_agent_id: "subagent_1",
+  recipient_agent_id: "provider_root",
+  content: #[],
+})
 model SessionAgentMessageItem extends SessionItemBase {
   ...OmitProperties<OpenAI.AgentMessageItemResource, "type">;
 
@@ -175,7 +183,7 @@ model SessionCommandExecutionItem extends SessionItemBase {
   >>;
 }
 
-/** Preserves the OpenAI create_subagent_call history item, including optional provider fields. */
+/** A harness-issued delegation call. agent_id identifies the requesting agent, not the newly created child; lifecycle events supply the child ID and parent relationship. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model SessionCreateSubagentCallItem extends SessionItemBase {
   ...OmitProperties<

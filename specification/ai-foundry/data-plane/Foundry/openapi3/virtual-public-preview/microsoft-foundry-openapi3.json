@@ -12679,7 +12679,7 @@
       "post": {
         "operationId": "Agents_createSession",
         "summary": "Create a session",
-        "description": "Creates a new session for an agent endpoint.\nHosted keeps its existing version_indicator request and response.\nManaged resolves the endpoint's configured version and validates the complete definition\nfrom that version or the Session according to definition_source, without a merge or request selector.\nManaged creation returns the Session with 201; Environment preparation and turns can proceed asynchronously.\nManaged requests use existing endpoint interact/action authorization and enforce creator isolation.",
+        "description": "Creates a new session for an agent endpoint.\nHosted keeps its existing version_indicator request and response.\nManaged requires an explicit version_indicator for an existing version of the route Agent.\nIt validates the complete definition from that version or the Session according to definition_source,\nwithout a merge. Managed agent_session_id is an optional echoed label, not the generated routing ID.\nManaged creation returns the Session with 201; Environment preparation and turns can proceed asynchronously.\nManaged requests use existing endpoint interact/action authorization and enforce creator isolation.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -13212,7 +13212,7 @@
       "get": {
         "operationId": "Agents_streamSessionEvents",
         "summary": "Stream session events",
-        "description": "Streams live Managed Session events as SSE. This is not a durable event list or replay API.\nNo Last-Event-ID or sequence cursor is accepted. Reconnect by buffering a new stream and\nreconciling Session, turn, and item snapshots. Text deltas are previews, not authoritative history.\nUses existing endpoint interact/action authorization and service-side creator isolation.",
+        "description": "Streams live Managed Session events as SSE, including typed subagent lifecycle, turn, and item events.\nRoot and child turns share event types; turn.subagent_id distinguishes them when a turn is present.\nThis is not a durable event list, replay API, or dedicated child-history endpoint.\nNo Last-Event-ID or sequence cursor is accepted. Reconnect by buffering a new stream and\nreconciling Session, turn, and item snapshots. Text deltas are previews, not authoritative history.\nUses existing endpoint interact/action authorization and service-side creator isolation.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -57689,16 +57689,22 @@
           "id",
           "agent_reference",
           "agent_definition",
-          "status"
+          "status",
+          "created_at",
+          "last_accessed_at"
         ],
         "properties": {
           "id": {
             "type": "string",
-            "description": "Opaque Session ID used unchanged as the existing session_id route parameter."
+            "description": "Service-generated opaque Session ID used unchanged as the existing session_id route parameter, regardless of any caller label."
+          },
+          "agent_session_id": {
+            "type": "string",
+            "description": "The caller's non-unique label, echoed when supplied at creation. Never use it to address the Session."
           },
           "agent_reference": {
             "$ref": "#/components/schemas/ManagedAgents.SessionAgentReference",
-            "description": "The owning Agent and resolved configured version. This is not a request selector."
+            "description": "The owning Agent and resolved requested version. This is not a request selector."
           },
           "agent_definition": {
             "$ref": "#/components/schemas/ManagedAgents.Definition",
@@ -57725,6 +57731,24 @@
               "type": "string"
             },
             "description": "Descriptive Session labels."
+          },
+          "created_at": {
+            "type": "integer",
+            "format": "unixtime",
+            "description": "The Unix timestamp in seconds when the Session was created.",
+            "readOnly": true
+          },
+          "last_accessed_at": {
+            "type": "integer",
+            "format": "unixtime",
+            "description": "The Unix timestamp in seconds when the Session was last accessed.",
+            "readOnly": true
+          },
+          "expires_at": {
+            "type": "integer",
+            "format": "unixtime",
+            "description": "The Unix timestamp in seconds when the Session expires, when an expiry is recorded. Omission does not imply the Hosted rolling 30-day policy.",
+            "readOnly": true
           }
         },
         "description": "A Managed Session, returned by creation even when Environment preparation or a turn is still in progress.",
@@ -57787,7 +57811,17 @@
             "$ref": "#/components/schemas/ManagedAgents.SessionItemBase"
           }
         ],
-        "description": "Preserves the OpenAI agent_message history item, including optional provider fields."
+        "description": "An interagent message in saved history or item.added events. Sender and recipient are runtime agent IDs; this record has no status and is not an item.done output variant.",
+        "examples": [
+          {
+            "type": "agent_message",
+            "id": "item_child_message",
+            "turn_id": "turn_root",
+            "sender_agent_id": "subagent_1",
+            "recipient_agent_id": "provider_root",
+            "content": []
+          }
+        ]
       },
       "ManagedAgents.SessionAgentReference": {
         "type": "object",
@@ -57802,10 +57836,10 @@
           },
           "version": {
             "type": "string",
-            "description": "The exact configured version, including for session-source creation."
+            "description": "The exact version selected by version_indicator, including for session-source creation."
           }
         },
-        "description": "The owning Agent and exact configured version resolved once at Session creation."
+        "description": "The owning Agent and exact requested version resolved once at Session creation."
       },
       "ManagedAgents.SessionBrowserAuthenticationCancelled": {
         "type": "object",
@@ -58572,7 +58606,18 @@
       },
       "ManagedAgents.SessionCreateConfig": {
         "type": "object",
+        "required": [
+          "version_indicator"
+        ],
         "properties": {
+          "version_indicator": {
+            "$ref": "#/components/schemas/VersionRefIndicator",
+            "description": "Required exact version of the route Agent, including a session-source version when supplying an inline definition."
+          },
+          "agent_session_id": {
+            "type": "string",
+            "description": "Optional caller label, echoed unchanged. It need not be unique and never selects the service-generated Session ID or acts as an idempotency key."
+          },
           "agent_definition": {
             "$ref": "#/components/schemas/ManagedAgents.Definition",
             "description": "Required for session-source versions and rejected for agent-source versions. No definition_source, partial override or merge is accepted here."
@@ -58593,7 +58638,7 @@
             "description": "Descriptive Session labels, not copied version metadata or permission grants."
           }
         },
-        "description": "Creates a Managed Session using the Agent endpoint's configured version.",
+        "description": "Creates a Managed Session using an explicit version reference under the route Agent.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "ManagedAgents=V1Preview"
@@ -58678,7 +58723,7 @@
             "$ref": "#/components/schemas/ManagedAgents.SessionItemBase"
           }
         ],
-        "description": "Preserves the OpenAI create_subagent_call history item, including optional provider fields."
+        "description": "A harness-issued delegation call. agent_id identifies the requesting agent, not the newly created child; lifecycle events supply the child ID and parent relationship."
       },
       "ManagedAgents.SessionCreatedEvent": {
         "type": "object",
@@ -59804,7 +59849,7 @@
             "mcp_approval_response": "#/components/schemas/ManagedAgents.SessionMcpApprovalResponseItem"
           }
         },
-        "description": "All saved OpenAI Session item variants plus Foundry tool and MCP approval records.",
+        "description": "All saved OpenAI Session item variants plus Foundry tool and MCP approval records. Includes all six subagent coordination calls and history-only agent_message; item.turn_id identifies the containing turn, not the target child's turn.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "ManagedAgents=V1Preview"
@@ -59855,7 +59900,7 @@
           },
           "item": {
             "$ref": "#/components/schemas/ManagedAgents.SessionItem",
-            "description": "The saved history item, without flattening its provider payload."
+            "description": "The saved history item, including subagent calls and interagent messages, without flattening its provider payload."
           }
         },
         "allOf": [
@@ -59943,7 +59988,26 @@
             "$ref": "#/components/schemas/ManagedAgents.SessionEventBase"
           }
         ],
-        "description": "agent.session.turn.item.done."
+        "description": "agent.session.turn.item.done, including completed subagent coordination calls. History-only agent_message records use item.added and saved history, not this output union.",
+        "examples": [
+          {
+            "type": "agent.session.turn.item.done",
+            "event_id": "evt_delegate_1",
+            "session_id": "sess_team",
+            "turn_id": "turn_root",
+            "output_index": 0,
+            "item": {
+              "type": "create_subagent_call",
+              "id": "item_delegate_1",
+              "turn_id": "turn_root",
+              "status": "completed",
+              "agent_id": "provider_root",
+              "content": [],
+              "model": null,
+              "reasoning_effort": null
+            }
+          }
+        ]
       },
       "ManagedAgents.SessionMcpApprovalInputEvent": {
         "type": "object",
@@ -62092,14 +62156,20 @@
           {
             "type": "string",
             "enum": [
+              "creating",
+              "active",
               "idle",
+              "updating",
               "in_progress",
               "requires_action",
-              "failed"
+              "failed",
+              "deleting",
+              "deleted",
+              "expired"
             ]
           }
         ],
-        "description": "The current Managed Session state."
+        "description": "Managed Session lifecycle and work states. Includes Hosted lifecycle names without inheriting Hosted compute or expiry behavior."
       },
       "ManagedAgents.SessionSubagentActiveEvent": {
         "type": "object",
@@ -62127,7 +62197,7 @@
             "$ref": "#/components/schemas/ManagedAgents.SessionEventBase"
           }
         ],
-        "description": "agent.session.subagent.active. Subagent inspection remains a separate follow-up capability."
+        "description": "agent.session.subagent.active. Active means the child remains available, including between turns; it is not a running-turn status. Dedicated child inspection APIs remain deferred."
       },
       "ManagedAgents.SessionSubagentClosedEvent": {
         "type": "object",
@@ -62155,7 +62225,7 @@
             "$ref": "#/components/schemas/ManagedAgents.SessionEventBase"
           }
         ],
-        "description": "agent.session.subagent.closed. Subagent inspection remains a separate follow-up capability."
+        "description": "agent.session.subagent.closed. The child is closed, not necessarily its parent or the root turn. Dedicated child inspection APIs remain deferred."
       },
       "ManagedAgents.SessionSubagentCreatedEvent": {
         "type": "object",
@@ -62183,7 +62253,25 @@
             "$ref": "#/components/schemas/ManagedAgents.SessionEventBase"
           }
         ],
-        "description": "agent.session.subagent.created. Subagent inspection remains a separate follow-up capability."
+        "description": "agent.session.subagent.created. The typed subagent retains its ID, parent agent, state, and timestamps; dedicated child inspection APIs remain deferred.",
+        "examples": [
+          {
+            "type": "agent.session.subagent.created",
+            "event_id": "evt_subagent_1",
+            "session_id": "sess_team",
+            "subagent": {
+              "id": "subagent_1",
+              "object": "agent.session.subagent",
+              "session_id": "sess_team",
+              "name": "release-1-3",
+              "instructions": null,
+              "parent_agent_id": "provider_root",
+              "status": "active",
+              "opened_at": 1795000001,
+              "closed_at": null
+            }
+          }
+        ]
       },
       "ManagedAgents.SessionSubmitEventsContent": {
         "type": "object",
@@ -62465,7 +62553,7 @@
                 "type": "null"
               }
             ],
-            "description": "The subagent identifier, or null for a root turn."
+            "description": "The subagent identifier, or null for a root turn. Correlate with subagent lifecycle events; do not infer a parent turn from arrival order."
           },
           "status": {
             "$ref": "#/components/schemas/ManagedAgents.SessionTurnStatus",
@@ -62523,7 +62611,21 @@
             "description": "A failure description, or null when there is no failure."
           }
         },
-        "description": "One unit of agent work, not one model request. Provider agent IDs are not renamed to the route Agent name.",
+        "description": "One unit of root or subagent work, not one model request. A child terminal state does not complete the root turn. Provider agent IDs are not renamed to the route Agent name.",
+        "examples": [
+          {
+            "id": "turn_child",
+            "session_id": "sess_team",
+            "agent_id": "subagent_1",
+            "subagent_id": "subagent_1",
+            "status": "completed",
+            "created_at": 1795000001,
+            "started_at": 1795000002,
+            "completed_at": 1795000005,
+            "usage": null,
+            "error": null
+          }
+        ],
         "x-ms-foundry-meta": {
           "required_previews": [
             "ManagedAgents=V1Preview"
@@ -62599,7 +62701,7 @@
                 "type": "null"
               }
             ],
-            "description": "Root-agent token usage when available."
+            "description": "Root-agent token usage when available. Use turn.usage for the affected turn; do not sum overlapping root and child counters."
           }
         },
         "allOf": [
@@ -62607,7 +62709,27 @@
             "$ref": "#/components/schemas/ManagedAgents.SessionEventBase"
           }
         ],
-        "description": "agent.session.turn.completed."
+        "description": "agent.session.turn.completed for a root or child turn. Inspect turn.subagent_id before treating this as root completion.",
+        "examples": [
+          {
+            "type": "agent.session.turn.completed",
+            "event_id": "evt_child_done_1",
+            "session_id": "sess_team",
+            "turn_id": "turn_child",
+            "turn": {
+              "id": "turn_child",
+              "session_id": "sess_team",
+              "agent_id": "subagent_1",
+              "subagent_id": "subagent_1",
+              "status": "completed",
+              "created_at": 1795000001,
+              "started_at": 1795000002,
+              "completed_at": 1795000005,
+              "usage": null,
+              "error": null
+            }
+          }
+        ]
       },
       "ManagedAgents.SessionTurnCreatedEvent": {
         "type": "object",

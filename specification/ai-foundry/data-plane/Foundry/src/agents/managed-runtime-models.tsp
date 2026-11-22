@@ -69,8 +69,20 @@ model SessionTurnError {
   message: string;
 }
 
-/** One unit of agent work, not one model request. Provider agent IDs are not renamed to the route Agent name. */
+/** One unit of root or subagent work, not one model request. A child terminal state does not complete the root turn. Provider agent IDs are not renamed to the route Agent name. */
 @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
+@example(#{
+  id: "turn_child",
+  session_id: "sess_team",
+  agent_id: "subagent_1",
+  subagent_id: "subagent_1",
+  status: "completed",
+  created_at: 1795000001,
+  started_at: 1795000002,
+  completed_at: 1795000005,
+  usage: null,
+  error: null,
+})
 model SessionTurn {
   /** The turn identifier. */
   id: string;
@@ -81,7 +93,7 @@ model SessionTurn {
   /** The identity of the agent that ran the turn. */
   agent_id: string;
 
-  /** The subagent identifier, or null for a root turn. */
+  /** The subagent identifier, or null for a root turn. Correlate with subagent lifecycle events; do not infer a parent turn from arrival order. */
   subagent_id: string | null;
 
   /** The current turn state. */
@@ -416,8 +428,26 @@ model SessionTurnInProgressEvent extends SessionEventBase {
   turn: SessionTurn;
 }
 
-/** agent.session.turn.completed. */
+/** agent.session.turn.completed for a root or child turn. Inspect turn.subagent_id before treating this as root completion. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
+@example(#{
+  type: "agent.session.turn.completed",
+  event_id: "evt_child_done_1",
+  session_id: "sess_team",
+  turn_id: "turn_child",
+  turn: #{
+    id: "turn_child",
+    session_id: "sess_team",
+    agent_id: "subagent_1",
+    subagent_id: "subagent_1",
+    status: "completed",
+    created_at: 1795000001,
+    started_at: 1795000002,
+    completed_at: 1795000005,
+    usage: null,
+    error: null,
+  },
+})
 model SessionTurnCompletedEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnCompleted,
@@ -427,7 +457,7 @@ model SessionTurnCompletedEvent extends SessionEventBase {
   /** The affected turn, including its current state and recorded outcome. */
   turn: SessionTurn;
 
-  /** Root-agent token usage when available. */
+  /** Root-agent token usage when available. Use turn.usage for the affected turn; do not sum overlapping root and child counters. */
   usage?: SessionTokenUsage | null;
 }
 
@@ -480,12 +510,29 @@ model SessionItemAddedEvent extends SessionEventBase {
     "turn_id" | "output_index"
   >>;
 
-  /** The saved history item, without flattening its provider payload. */
+  /** The saved history item, including subagent calls and interagent messages, without flattening its provider payload. */
   item: SessionItem;
 }
 
-/** agent.session.turn.item.done. */
+/** agent.session.turn.item.done, including completed subagent coordination calls. History-only agent_message records use item.added and saved history, not this output union. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
+@example(#{
+  type: "agent.session.turn.item.done",
+  event_id: "evt_delegate_1",
+  session_id: "sess_team",
+  turn_id: "turn_root",
+  output_index: 0,
+  item: #{
+    type: "create_subagent_call",
+    id: "item_delegate_1",
+    turn_id: "turn_root",
+    status: OpenAI.FunctionCallStatusResource.completed,
+    agent_id: "provider_root",
+    content: #[],
+    `model`: null,
+    reasoning_effort: null,
+  },
+})
 model SessionItemDoneEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnItemDone,
@@ -714,8 +761,24 @@ model SessionEnvironmentResetEvent extends SessionEventBase {
   >;
 }
 
-/** agent.session.subagent.created. Subagent inspection remains a separate follow-up capability. */
+/** agent.session.subagent.created. The typed subagent retains its ID, parent agent, state, and timestamps; dedicated child inspection APIs remain deferred. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
+@example(#{
+  type: "agent.session.subagent.created",
+  event_id: "evt_subagent_1",
+  session_id: "sess_team",
+  subagent: #{
+    id: "subagent_1",
+    object: OpenAI.SubagentObjectResource.`agent.session.subagent`,
+    session_id: "sess_team",
+    name: "release-1-3",
+    instructions: null,
+    parent_agent_id: "provider_root",
+    status: OpenAI.SubagentStatusResource.active,
+    opened_at: 1795000001,
+    closed_at: null,
+  },
+})
 model SessionSubagentCreatedEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionSubagentCreated,
@@ -723,7 +786,7 @@ model SessionSubagentCreatedEvent extends SessionEventBase {
   >;
 }
 
-/** agent.session.subagent.active. Subagent inspection remains a separate follow-up capability. */
+/** agent.session.subagent.active. Active means the child remains available, including between turns; it is not a running-turn status. Dedicated child inspection APIs remain deferred. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model SessionSubagentActiveEvent extends SessionEventBase {
   ...OmitProperties<
@@ -732,7 +795,7 @@ model SessionSubagentActiveEvent extends SessionEventBase {
   >;
 }
 
-/** agent.session.subagent.closed. Subagent inspection remains a separate follow-up capability. */
+/** agent.session.subagent.closed. The child is closed, not necessarily its parent or the root turn. Dedicated child inspection APIs remain deferred. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model SessionSubagentClosedEvent extends SessionEventBase {
   ...OmitProperties<

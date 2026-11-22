@@ -365,9 +365,15 @@ namespace ManagedAgents {
     SessionInputMessage[],
   }
 
-  /** Creates a Managed Session using the Agent endpoint's configured version. */
+  /** Creates a Managed Session using an explicit version reference under the route Agent. */
   @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
   model SessionCreateConfig {
+    /** Required exact version of the route Agent, including a session-source version when supplying an inline definition. */
+    version_indicator: VersionRefIndicator;
+
+    /** Optional caller label, echoed unchanged. It need not be unique and never selects the service-generated Session ID or acts as an idempotency key. */
+    agent_session_id?: string;
+
     /** Required for session-source versions and rejected for agent-source versions. No definition_source, partial override or merge is accepted here. */
     agent_definition?: Definition;
 
@@ -381,21 +387,30 @@ namespace ManagedAgents {
     metadata?: Record<string>;
   }
 
-  /** The owning Agent and exact configured version resolved once at Session creation. */
+  /** The owning Agent and exact requested version resolved once at Session creation. */
   model SessionAgentReference {
     /** The owning Agent's project-local name. */
     name: string;
 
-    /** The exact configured version, including for session-source creation. */
+    /** The exact version selected by version_indicator, including for session-source creation. */
     version: string;
   }
 
-  /** The current Managed Session state. */
+  /** Managed Session lifecycle and work states. Includes Hosted lifecycle names without inheriting Hosted compute or expiry behavior. */
   union SessionStatus {
     string,
 
+    /** Session initialization is in progress. */
+    creating: "creating",
+
+    /** The Session is operational. This does not by itself indicate that a turn is running. */
+    active: "active",
+
     /** No turn is currently running. */
     idle: "idle",
+
+    /** A supported Session lifecycle update is in progress. This does not add a configuration-update operation. */
+    updating: "updating",
 
     /** A turn is in progress. */
     in_progress: "in_progress",
@@ -405,15 +420,27 @@ namespace ManagedAgents {
 
     /** The Session failed. */
     failed: "failed",
+
+    /** Session cleanup is in progress. The delete operation retains its synchronous response contract. */
+    deleting: "deleting",
+
+    /** The Session has been deleted. */
+    deleted: "deleted",
+
+    /** The Session has expired under its retention policy; no fixed lifetime is implied. */
+    expired: "expired",
   }
 
   /** A Managed Session, returned by creation even when Environment preparation or a turn is still in progress. */
   @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
   model Session {
-    /** Opaque Session ID used unchanged as the existing session_id route parameter. */
+    /** Service-generated opaque Session ID used unchanged as the existing session_id route parameter, regardless of any caller label. */
     id: string;
 
-    /** The owning Agent and resolved configured version. This is not a request selector. */
+    /** The caller's non-unique label, echoed when supplied at creation. Never use it to address the Session. */
+    agent_session_id?: string;
+
+    /** The owning Agent and resolved requested version. This is not a request selector. */
     agent_reference: SessionAgentReference;
 
     /** The complete effective executable definition, without the version-only definition_source. */
@@ -430,6 +457,21 @@ namespace ManagedAgents {
 
     /** Descriptive Session labels. */
     metadata?: Record<string>;
+
+    /** The Unix timestamp in seconds when the Session was created. */
+    @encode("unixTimestamp", int64)
+    @visibility(Lifecycle.Read)
+    created_at: utcDateTime;
+
+    /** The Unix timestamp in seconds when the Session was last accessed. */
+    @encode("unixTimestamp", int64)
+    @visibility(Lifecycle.Read)
+    last_accessed_at: utcDateTime;
+
+    /** The Unix timestamp in seconds when the Session expires, when an expiry is recorded. Omission does not imply the Hosted rolling 30-day policy. */
+    @encode("unixTimestamp", int64)
+    @visibility(Lifecycle.Read)
+    expires_at?: utcDateTime;
   }
 }
 
@@ -449,7 +491,7 @@ union AgentSession {
 }
 
 /** The request shape selected by the owning Agent's definition kind. */
-#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Managed creation can use an empty object; Hosted retains its required version_indicator and existing model hierarchy."
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "The route Agent selects Hosted or Managed validation without a new wire discriminator; both require version_indicator and Hosted retains its existing model hierarchy."
 union AgentSessionCreateContent {
   CreateAgentSessionRequest,
   ManagedAgents.SessionCreateConfig,
