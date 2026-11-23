@@ -8,3 +8,8 @@ using Azure.ClientGenerator.Core;
   "CostManagementPriceEstimationMgmtClient",
   "python"
 );
+
+@@scope(
+  Microsoft.CostManagement.PriceEstimation.getEstimatePricesOperationResult,
+  "!java"
+);
