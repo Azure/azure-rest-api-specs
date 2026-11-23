@@ -3,10 +3,10 @@
 `VoiceHostedAgentConversationEngine` supports two optional, nullable policy
 objects under `conversation_engine.type: hosted_agent`:
 
-- `session_warmup` permits eligible calls to use service-managed prewarmed Hosted
+- `session_prewarming` permits eligible calls to use service-managed prewarmed Hosted
   Sessions. It does not enable multiplexing, Agent startup model warmup, or
   language-model inference warmup.
-- `session_multiplexing` permits independent calls to share a compatible Hosted
+- `session_sharing` permits independent calls to share a compatible Hosted
   Session. The application must support concurrent connections and isolate mutable
   state per call.
 
