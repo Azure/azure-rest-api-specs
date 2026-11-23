@@ -573,8 +573,7 @@ model VMExtensionPayload {
   /**
    * Ingestion key of the environment
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: if this is a value that should be kept private, mark as @secret"
-  ingestionKey?: string;
+  ingestionKey?: SecretIngestionKey;
 
   /**
    * Id of the environment created

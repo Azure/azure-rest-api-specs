@@ -154,9 +154,7 @@ using TypeSpec.Versioning;
 @@Legacy.flattenProperty(NetworkFabricSku.properties);
 
 @@clientName(NetworkFabrics.create::parameters.resource, "body");
-@@clientName(NetworkFabrics.createDeprecated::parameters.resource, "body");
 @@clientName(NetworkFabrics.update::parameters.properties, "body");
-@@clientName(NetworkFabrics.updateDeprecated::parameters.properties, "body");
 @@clientName(NetworkFabrics.provision, "provision");
 @@clientName(NetworkFabrics.deprovision, "deprovision");
 @@clientName(NetworkFabrics.upgrade, "upgrade");
@@ -243,12 +241,7 @@ model NetworkDevicesListResult is Azure.Core.Page<NetworkDevice>;
 model NetworkFabricControllersListResult
   is Azure.Core.Page<NetworkFabricController>;
 model NetworkFabricSkusListResult is Azure.Core.Page<NetworkFabricSku>;
-@added(Versions.v2025_07_15)
 model NetworkFabricsListResult is Azure.Core.Page<NetworkFabric>;
-@removed(Versions.v2025_07_15)
-@renamedFrom(Versions.v2025_07_15, "NetworkFabricsListResult")
-model NetworkFabricsListResultDeprecated
-  is Azure.Core.Page<NetworkFabricDeprecated>;
 model NetworkPacketBrokersListResult is Azure.Core.Page<NetworkPacketBroker>;
 model NetworkRacksListResult is Azure.Core.Page<NetworkRack>;
 model NetworkTapRulesListResult is Azure.Core.Page<NetworkTapRule>;
@@ -262,4 +255,4 @@ model NetworkToNetworkInterconnectsList
   is Azure.Core.Page<NetworkToNetworkInterconnect>;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(NetworkFabricDeprecated.properties, "javascript");
+@@Legacy.flattenProperty(NetworkFabric.flattenedProperties, "javascript");

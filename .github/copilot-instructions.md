@@ -7,6 +7,10 @@
      see copilot-review-instructions.md in this same directory.
      Docs: https://docs.github.com/en/copilot/concepts/agents/code-review -->
 
+# Shared engineering code (`eng/common`)
+
+Do not edit `eng/common` directly in this repository. It is synchronized shared code whose authoritative source is [`eng/common` in Azure/azure-sdk-tools](https://github.com/Azure/azure-sdk-tools/tree/main/eng/common). Author changes there, then let the normal sync process propagate them to this repository and other consuming repositories; local edits here will be overwritten by future syncs. See the [common engineering system documentation](https://github.com/Azure/azure-sdk-tools/blob/main/doc/common/common_engsys.md) for the contribution and sync workflow.
+
 # New TypeSpec projects
 
 Refer to [new-typespec-project.instructions.md](./instructions/typespec-project.instructions.md) for detailed steps on:
