@@ -93,14 +93,9 @@ All lease files are automatically validated with the following requirements:
 
 ## Troubleshooting
 
-If your PR is for a newly detected resource provider and fails the **ARM Modeling Review** check with an error that no lease file was found, the lease has expired, or the resource provider does not have a valid ARM lease, treat it as an ARM lease requirement issue rather than a generic validation failure.
-
-- Follow the pull request's **next steps to merge** instructions to resolve the lease requirement.
-- Verify that the required lease exists and is valid on public `main`. The check reads leases from public `main`, so a lease file added only in the pull request branch will not satisfy it.
-- If the pull request instructions or check output direct you to, contact the **ARM Modeling Review** check owner for help completing the lease resolution process.
-
 If your PR check **"ARM Lease Validation"** is failing, review the error messages in the check output and fix the issues in your `lease.yaml` file. Common causes include:
 
+- **Missing or expired lease for a newly detected resource provider**: If the **ARM Modeling Review** check reports that no lease file was found, the lease has expired, or the resource provider does not have a valid ARM lease, follow the pull request's **Next Steps to Merge** instructions. Verify that the required lease exists and is valid on public `main`; a lease file added only in the pull request branch will not satisfy the check. Contact the **ARM Modeling Review** check owner if the pull request instructions or check output direct you to.
 - **Invalid folder structure**: Ensure the path follows `<orgName>/<rpNamespace>/[<serviceName>]/lease.yaml` with lowercase org name
 - **Resource provider mismatch**: The `resource-provider` value must match the `<rpNamespace>` folder name exactly
 - **Past start date**: The `startdate` must be a valid date in `YYYY-MM-DD` format
