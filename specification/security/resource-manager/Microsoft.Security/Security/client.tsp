@@ -2318,14 +2318,15 @@ op sqlVulnerabilityAssessmentScanResultsGet(
 op alertsListResourceGroupLevelByRegionCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
 
   /** The location where ASC stores the data of the subscription. can be retrieved from Get locations */
   @path
   @segment("locations")
   @key
   ascLocation: Azure.Core.azureLocation,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
 ): ArmResponse<AlertList> | ErrorResponse;
 
 @@override(
