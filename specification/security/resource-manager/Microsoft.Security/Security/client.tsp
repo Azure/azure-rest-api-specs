@@ -2450,8 +2450,8 @@ model JitNetworkAccessPolicyCreate {
   "javascript"
 );
 
-@@clientLocation(SecuritySolutionsAPI.TopologyResource.get, "Topology");
+@@clientLocation(SecuritySolutionsAPI.TopologyResources.get, "Topology");
 @@clientLocation(
-  SecuritySolutionsAPI.TopologyResource.listByHomeRegion,
+  SecuritySolutionsAPI.TopologyResources.listByHomeRegion,
   "Topology"
 );
