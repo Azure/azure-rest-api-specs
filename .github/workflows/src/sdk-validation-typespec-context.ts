@@ -114,8 +114,13 @@ function getChangedTypeSpecPath(file: {
 }
 
 function resolveLocalTypeSpecImport(filePath: string, importPath: string): string {
+  const resolvedPath = path.posix.join(path.posix.dirname(filePath), importPath);
   return requireSafeContextPath(
-    path.posix.normalize(path.posix.join(path.posix.dirname(filePath), importPath)),
+    path.posix.normalize(
+      TYPESPEC_FILE_PATTERN.test(importPath)
+        ? resolvedPath
+        : path.posix.join(resolvedPath, "main.tsp"),
+    ),
   );
 }
 

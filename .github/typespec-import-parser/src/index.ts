@@ -1,6 +1,6 @@
 import { isImportStatement, parse } from "@typespec/compiler/ast";
 
-const TYPESPEC_FILE_PATTERN = /\.tsp$/i;
+const JAVASCRIPT_FILE_PATTERN = /\.[cm]?js$/i;
 
 export function getLocalTypeSpecImports(filePath: string, content: string): string[] {
   const script = parse(content);
@@ -18,7 +18,7 @@ export function getLocalTypeSpecImports(filePath: string, content: string): stri
         .filter(
           (importPath) =>
             (importPath.startsWith("./") || importPath.startsWith("../")) &&
-            TYPESPEC_FILE_PATTERN.test(importPath),
+            !JAVASCRIPT_FILE_PATTERN.test(importPath),
         ),
     ),
   ].sort();

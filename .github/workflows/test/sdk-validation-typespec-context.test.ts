@@ -106,7 +106,7 @@ describe("collectTypeSpecReviewContext", () => {
     const github = createMockGithub();
     const context = createMockContext();
     const clientPath = `${PROJECT_ROOT}/client.tsp`;
-    const modelsPath = `${PROJECT_ROOT}/models.tsp`;
+    const modelsPath = `${PROJECT_ROOT}/Shared.Models/main.tsp`;
     const commonPath = `${PROJECT_ROOT}/shared/common.tsp`;
     github.rest.repos.compareCommitsWithBasehead.mockResolvedValue({
       data: {
@@ -126,11 +126,13 @@ describe("collectTypeSpecReviewContext", () => {
         [`${PROJECT_ROOT}/tspconfig.yaml`, "emit: []"],
         [
           `${PROJECT_ROOT}/main.tsp`,
-          ['import "@azure-tools/typespec-azure-resource-manager";', 'import "./models.tsp";'].join(
-            "\n",
-          ),
+          [
+            'import "@azure-tools/typespec-azure-resource-manager";',
+            'import "./decorators.js";',
+            'import "./Shared.Models";',
+          ].join("\n"),
         ],
-        [modelsPath, 'import "./shared/common.tsp";\nmodel New {}'],
+        [modelsPath, 'import "../shared/common.tsp";\nmodel New {}'],
         [commonPath, 'import "../main.tsp";\nscalar SharedName extends string;'],
       ]);
       const content = contents.get(String((request as { path: string }).path));
@@ -154,9 +156,9 @@ describe("collectTypeSpecReviewContext", () => {
       {
         root: PROJECT_ROOT,
         files: [
+          modelsPath,
           clientPath,
           `${PROJECT_ROOT}/main.tsp`,
-          modelsPath,
           commonPath,
           `${PROJECT_ROOT}/tspconfig.yaml`,
         ],
@@ -165,7 +167,7 @@ describe("collectTypeSpecReviewContext", () => {
     expect(result.files).toContainEqual({
       path: modelsPath,
       roles: ["source"],
-      content: 'import "./shared/common.tsp";\nmodel New {}',
+      content: 'import "../shared/common.tsp";\nmodel New {}',
     });
     expect(result.files).toContainEqual({
       path: commonPath,
@@ -176,7 +178,10 @@ describe("collectTypeSpecReviewContext", () => {
     expect(
       github.rest.repos.getContent.mock.calls.some(
         ([request]) =>
-          (request as { path: string }).path === "@azure-tools/typespec-azure-resource-manager",
+          [
+            "@azure-tools/typespec-azure-resource-manager",
+            `${PROJECT_ROOT}/decorators.js/main.tsp`,
+          ].includes((request as { path: string }).path),
       ),
     ).toBe(false);
   });
