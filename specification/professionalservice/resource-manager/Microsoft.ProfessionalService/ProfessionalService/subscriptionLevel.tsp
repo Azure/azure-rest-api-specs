@@ -62,7 +62,7 @@ interface ProfessionalServiceSubscriptionLevelGlobal {
 
   /** Validates a proposed Professional Service purchase within a resource group without creating the resource. */
   @post
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProfessionalService/resources/validate")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProfessionalService/validate")
   validatePurchase(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -75,7 +75,7 @@ interface ProfessionalServiceSubscriptionLevelGlobal {
 
   /** Validates a proposed Professional Service purchase at subscription scope before a resource group is selected. */
   @post
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ProfessionalService/resources/validate")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ProfessionalService/validate")
   validatePurchaseBySubscription(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
