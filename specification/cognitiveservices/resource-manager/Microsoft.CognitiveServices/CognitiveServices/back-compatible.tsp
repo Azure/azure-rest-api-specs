@@ -3,8 +3,6 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.CognitiveServices;
 
-@@clientName(Accounts.create::parameters.resource, "account");
-@@clientName(Accounts.update::parameters.properties, "account");
 @@clientName(Accounts.regenerateKey::parameters.body, "parameters");
 @@clientLocation(
   Accounts.privateLinkResourcesList,

@@ -4,6 +4,7 @@ import "../voice-agents/routes.tsp";
 import "../toolboxes/routes.tsp";
 import "../skills/routes.tsp";
 import "../agents-session-files/routes.tsp";
+import "../agents-session-compute/routes.tsp";
 import "../managed-blueprints/routes.tsp";
 import "../agents-optimization/routes.tsp";
 
@@ -13,6 +14,23 @@ using Azure.Core.Experimental;
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @clientNamespace("Azure.AI.Projects.Agents")
 namespace Azure.AI.Projects {
+  // Customize the source properties spread into VoiceAgentServerVadTurnDetection.
+  @@alternateType(
+    OpenAI.RealtimeTurnDetectionServerVad.idle_timeout_ms,
+    FoundryDurationMilliseconds,
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.RealtimeTurnDetectionServerVad.prefix_padding_ms,
+    FoundryDurationMilliseconds,
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.RealtimeTurnDetectionServerVad.silence_duration_ms,
+    FoundryDurationMilliseconds,
+    "csharp"
+  );
+
   @@usage(CreateAgentVersionFromManifestRequest, Usage.input);
   @@access(CreateAgentVersionFromManifestRequest, Access.public);
 
@@ -31,10 +49,17 @@ namespace Azure.AI.Projects {
   @@scope(OpenAI.RealtimeConversationItemMessageUser.type, "!csharp");
   @@scope(OpenAI.RealtimeConversationItemMessageAssistant.type, "!csharp");
 
+  @@clientName(OpenAI.Delegation, "LiveDelegation", "csharp");
+
   // --------------------------------------------------------------------------------
   // Fix the xref.
   // --------------------------------------------------------------------------------
   @@clientNamespace(OpenAI, "Azure.AI.Projects.Agents", "csharp");
+  @@clientNamespace(
+    Azure.AI.ProjectsInternal,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
 
   // --------------------------------------------------------------------------------
   // Root client
@@ -68,6 +93,27 @@ namespace Azure.AI.Projects {
   // because its class is not reusing tool, defined in OpenAI or Azure.AI.Projects.OpenAI
   @@clientName(OpenApiTool.openapi, "FunctionDefinition", "csharp");
   @@clientName(FabricIQPreviewTool.server_url, "ServerUri");
+  // Target source properties so names propagate through model spreads.
+  @@clientName(A2ATool.base_url, "BaseUri", "csharp");
+  @@clientName(A2APreviewTool.base_url, "BaseUri", "csharp");
+  @@clientName(OpenAI.MCPTool.server_url, "ServerUri", "csharp");
+  @@clientName(TelephonyBinding.incoming_call_url, "IncomingCallUri", "csharp");
+  @@clientName(
+    TelephonyBindingListItem.incoming_call_url,
+    "IncomingCallUri",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentAudioOutputConfig.custom_lexicon_url,
+    "CustomLexiconUri",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentAudioOutputConfig.custom_text_normalization_url,
+    "CustomTextNormalizationUri",
+    "csharp"
+  );
+  @@clientName(VoiceAgentAvatarVideoBackground.image_url, "ImageUri", "csharp");
   @@clientName(
     BrowserAutomationPreviewTool.browser_automation_preview,
     "ToolParameters",
@@ -101,6 +147,148 @@ namespace Azure.AI.Projects {
   // because its class is not reusing tool, defined in OpenAI or Azure.AI.Projects.OpenAI
 
   @@clientName(AgentEndpointConfig, "AgentEndpointConfiguration");
+  @@clientName(TelemetryConfig, "TelemetryConfiguration", "csharp");
+  @@clientName(
+    VoiceAgentGreetingConfig,
+    "VoiceAgentGreetingConfiguration",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentTemplateGreetingConfig,
+    "VoiceAgentTemplateGreetingConfiguration",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentLlmGeneratedGreetingConfig,
+    "VoiceAgentLlmGeneratedGreetingConfiguration",
+    "csharp"
+  );
+  @@clientName(VoiceAgentAudioConfig, "VoiceAgentAudioConfiguration", "csharp");
+  @@clientName(
+    VoiceAgentAudioInputConfig,
+    "VoiceAgentAudioInputConfiguration",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentAudioOutputConfig,
+    "VoiceAgentAudioOutputConfiguration",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentTurnDetectionConfig,
+    "VoiceAgentTurnDetectionConfiguration",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentSoundscapeConfig,
+    "VoiceAgentSoundscapeConfiguration",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentSoundscapeTrackConfig,
+    "VoiceAgentSoundscapeTrackConfiguration",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentSoundscapeSourceConfig,
+    "VoiceAgentSoundscapeSourceConfiguration",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentSoundscapeWorkingTrackConfig,
+    "VoiceAgentSoundscapeWorkingTrackConfiguration",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentInterimResponseConfig,
+    "VoiceAgentInterimResponseConfiguration",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentStaticInterimResponseConfig,
+    "VoiceAgentStaticInterimResponseConfiguration",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentLlmInterimResponseConfig,
+    "VoiceAgentLlmInterimResponseConfiguration",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentAvatarConfig,
+    "VoiceAgentAvatarConfiguration",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentSubagentConfig,
+    "VoiceAgentSubagentConfiguration",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentPostCallConfig,
+    "VoiceAgentPostCallConfiguration",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentSessionUpdateConfig,
+    "VoiceAgentSessionUpdateConfiguration",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentSessionAvatarConfig,
+    "VoiceAgentSessionAvatarConfiguration",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentAnimationConfig,
+    "VoiceAgentAnimationConfiguration",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentSessionResponseConfig,
+    "VoiceAgentSessionResponseConfiguration",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentAvatarVideoParams,
+    "VoiceAgentAvatarVideoParameters",
+    "csharp"
+  );
+  @@clientName(OpenAI.InlineSkillParam, "InlineSkill", "csharp");
+  @@clientName(OpenAI.InlineSkillSourceParam, "InlineSkillSource", "csharp");
+  @@clientName(SkillReference, "AgentSkillReference", "csharp");
+  @@clientName(OpenAI.SkillReferenceParam, "SkillReference", "csharp");
+  @@clientName(
+    HeaderTelemetryEndpointAuth,
+    "HeaderTelemetryEndpointAuthentication",
+    "csharp"
+  );
+  @@clientName(VersionRefIndicator, "VersionReferenceIndicator", "csharp");
+  @@clientName(
+    AgentOptimizationCandidatePromotionInfo,
+    "AgentOptimizationCandidatePromotion",
+    "csharp"
+  );
+  @@clientName(
+    OpenAI.FileSearchTool.max_num_results,
+    "MaxResultCount",
+    "csharp"
+  );
+  @@clientName(
+    UserConversationSimulationConfiguration.desired_num_turns,
+    "DesiredTurnCount",
+    "csharp"
+  );
+  @@clientName(
+    UserConversationSimulationConfiguration.max_num_turns,
+    "MaxTurnCount",
+    "csharp"
+  );
+  @@clientName(
+    ToolboxPolicies.rai_config,
+    "ContentFilterConfiguration",
+    "csharp"
+  );
   @@clientName(TelemetryEndpointAuth, "TelemetryEndpointAuthentication");
   @@clientName(TelemetryEndpoint.auth, "Authentication");
   @@clientName(TelemetryEndpoint.data, "ExportedDataTypes");
@@ -158,6 +346,7 @@ namespace Azure.AI.Projects {
 
   // WebSocket protocol upgrades are not representable by the C# HTTP client generator.
   @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!csharp");
+  @@scope(VoiceAgentLiveWebSocket.connectLiveVoiceAgent, "!csharp");
 
   // Keep VoiceAgentTransport reachable even though the WebSocket operation that references it is excluded.
   @@usage(VoiceAgentTransport, Usage.input | Usage.json);
@@ -166,13 +355,125 @@ namespace Azure.AI.Projects {
   // Change types to avoid serialization as BinaryData
   @@alternateType(OpenAI.RealtimeResponse.metadata, Record<unknown>);
   @@alternateType(OpenAI.MCPTool.allowed_tools, OpenAI.MCPToolFilter | null);
+  //@@alternateType(OpenAI.FileSearchTool.ranking_options, OpenAI.RankingOptions);
 
   // Rename Time properties for compliance
+  @@clientName(TelephonyCallSummary.duration_ms, "Duration", "csharp");
+  @@clientName(TelephonyCallRecord.duration_ms, "Duration", "csharp");
+  @@clientName(VoiceAudioItem.duration_ms, "Duration", "csharp");
+  @@clientName(VoiceGeneratedAudioItem.duration_ms, "Duration", "csharp");
+  @@clientName(VoiceRecording.duration_ms, "Duration", "csharp");
+  @@clientName(VoiceAudioItem.start_offset_ms, "StartOffset", "csharp");
+  @@clientName(
+    VoiceGeneratedAudioItem.start_offset_ms,
+    "StartOffset",
+    "csharp"
+  );
+  @@clientName(AgentOptimizationJob.run_duration_ms, "RunDuration", "csharp");
+  @@clientName(
+    AgentOptimizationJobLatency.avg_latency_ms,
+    "AvgLatency",
+    "csharp"
+  );
+  @@clientName(
+    AgentOptimizationCandidateEvaluation.avg_latency_ms,
+    "AvgLatency",
+    "csharp"
+  );
+  @@clientName(
+    SessionConfiguration.idle_timeout_seconds,
+    "IdleTimeout",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentEndOfUtteranceDetection.timeout_ms,
+    "Timeout",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentInterimResponseConfig.latency_threshold_ms,
+    "LatencyThreshold",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentAzureSemanticVadOptions.prefix_padding_ms,
+    "PrefixPadding",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentAzureSemanticVadOptions.silence_duration_ms,
+    "SilenceDuration",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentAzureSemanticVadOptions.speech_duration_ms,
+    "SpeechDuration",
+    "csharp"
+  );
   @@clientName(
     VoiceAgentAzureSemanticVadOptions.idle_timeout_ms,
     "IdleTimeout"
   );
+  @@clientName(
+    OpenAI.RealtimeTurnDetectionServerVad.idle_timeout_ms,
+    "IdleTimeout",
+    "csharp"
+  );
+  @@clientName(
+    OpenAI.RealtimeTurnDetectionServerVad.prefix_padding_ms,
+    "PrefixPadding",
+    "csharp"
+  );
+  @@clientName(
+    OpenAI.RealtimeTurnDetectionServerVad.silence_duration_ms,
+    "SilenceDuration",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentServerVadTurnDetection.speech_duration_ms,
+    "SpeechDuration",
+    "csharp"
+  );
   @@clientName(VoiceAgentSubagent.invoke_timeout_seconds, "InvokeTimeout");
+  @@clientName(
+    VoiceAgentSoundscapeWorkingTrackConfig.delay_ms,
+    "Delay",
+    "csharp"
+  );
+  @@clientName(VoiceAgentHandoffCondition.delay_ms, "Delay", "csharp");
+  @@clientName(VoiceAgentHandoffEdgeState.delay_ms, "Delay", "csharp");
+
+  // Align turn-detection flags with the OpenAI SDK.
+  @@clientName(
+    OpenAI.RealtimeTurnDetectionServerVad.create_response,
+    "CreateResponseEnabled",
+    "csharp"
+  );
+  @@clientName(
+    OpenAI.RealtimeTurnDetectionServerVad.interrupt_response,
+    "InterruptResponseEnabled",
+    "csharp"
+  );
+  @@clientName(
+    OpenAI.RealtimeTurnDetectionSemanticVad.create_response,
+    "CreateResponseEnabled",
+    "csharp"
+  );
+  @@clientName(
+    OpenAI.RealtimeTurnDetectionSemanticVad.interrupt_response,
+    "InterruptResponseEnabled",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentAzureSemanticVadOptions.create_response,
+    "CreateResponseEnabled",
+    "csharp"
+  );
+  @@clientName(
+    VoiceAgentAzureSemanticVadOptions.interrupt_response,
+    "InterruptResponseEnabled",
+    "csharp"
+  );
 
   // --------------------------------------------------------------------------------
   // Hide session operations, containing the foundry features
@@ -184,6 +485,30 @@ namespace Azure.AI.Projects {
   @@access(Agents.getSession, Access.internal);
   @@access(Agents.deleteSession, Access.internal);
   @@access(Agents.stopSession, Access.internal);
+
+  // --------------------------------------------------------------------------------
+  // Session compute models: C# names that avoid the reserved Options/Request/Response suffixes
+  // --------------------------------------------------------------------------------
+  @@clientName(
+    SessionComputeProviderOptions,
+    "SessionComputeProviderConfig",
+    "csharp"
+  );
+  @@clientName(
+    SessionComputeExecRequest,
+    "SessionComputeExecContent",
+    "csharp"
+  );
+  @@clientName(
+    SessionComputePortRequest,
+    "SessionComputePortContent",
+    "csharp"
+  );
+  @@clientName(
+    SessionComputeExecStreamUpgradeResponse,
+    "SessionComputeExecStreamUpgradeResult",
+    "csharp"
+  );
 
   // --------------------------------------------------------------------------------
   // Toolboxes sub‐client
@@ -587,6 +912,15 @@ namespace Azure.AI.Projects {
     Azure.AI.Projects.WebIQPreviewTool,
     {
       identity: "Azure.AI.Extensions.OpenAI.WebIQPreviewTool",
+      package: "Azure.AI.Extensions.OpenAI",
+      minVersion: "3.0.0-alpha.20260908.3",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    Azure.AI.Projects.AgentReference,
+    {
+      identity: "Azure.AI.Extensions.OpenAI.AgentReference",
       package: "Azure.AI.Extensions.OpenAI",
       minVersion: "3.0.0-alpha.20260908.3",
     },
@@ -1130,6 +1464,15 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
+  @@alternateType(
+    OpenAI.RankingOptions,
+    {
+      identity: "OpenAI.Responses.FileSearchToolRankingOptions",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
   // And now drop classes that aren't referenced, and aren't pruned.
   @@alternateType(
     OpenAI.ToolChoiceParamType,
@@ -1168,13 +1511,6 @@ namespace Azure.AI.Projects {
   );
   @@alternateType(
     OpenAI.CompoundFilter,
-    {
-      identity: "System.Object",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.RankingOptions,
     {
       identity: "System.Object",
     },
@@ -1294,6 +1630,8 @@ namespace Azure.AI.Projects {
   @@access(AgentTelephony.replaceTelephonyTransferTargets, Access.internal);
   @@access(AgentTelephony.createTelephonyCallJob, Access.internal);
   @@access(AgentTelephony.getTelephonyCallJob, Access.internal);
+  @@access(AgentTelephony.listTelephonyCallJobs, Access.internal);
+  @@access(AgentTelephony.deleteTelephonyCallJob, Access.internal);
   @@access(AgentTelephony.cancelTelephonyCallJob, Access.internal);
 
   // --------------------------------------------------------------------------------

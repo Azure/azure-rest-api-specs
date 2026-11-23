@@ -1,0 +1,53 @@
+{
+  "title": "McpGateway_Get",
+  "operationId": "McpGateway_Get",
+  "parameters": {
+    "api-version": "2026-12-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgiotoperations",
+    "instanceName": "my-aio-instance",
+    "mcpGatewayName": "default"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgiotoperations/providers/Microsoft.IoTOperations/instances/my-aio-instance/mcpGateways/default",
+        "name": "default",
+        "type": "Microsoft.IoTOperations/instances/mcpGateways",
+        "properties": {
+          "endpoint": {
+            "servicePort": 443,
+            "authentication": {
+              "method": "ServiceAccountToken",
+              "serviceAccountTokenSettings": {
+                "audiences": [
+                  "aio-mcp-frontend"
+                ]
+              }
+            },
+            "tls": {
+              "mode": "Automatic",
+              "certManagerCertificateSpec": {
+                "issuerRef": {
+                  "name": "customer-issuer",
+                  "kind": "Issuer",
+                  "group": "cert-manager.io"
+                }
+              }
+            }
+          },
+          "provisioningState": "Succeeded",
+          "status": {
+            "healthState": {
+              "status": "Degraded",
+              "lastTransitionTime": "2026-10-22T00:00:00Z",
+              "lastUpdateTime": "2026-10-22T00:01:00Z",
+              "reasonCode": "GatewayCapacityReduced",
+              "message": "The gateway is serving with reduced capacity."
+            }
+          }
+        }
+      }
+    }
+  }
+}

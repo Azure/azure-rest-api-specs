@@ -41,7 +41,8 @@ resource-manager, without describing the change as an API change:
 }
 ```
 
-`changes` distinguishes API definitions, examples, SDK configuration, readmes, and other files.
+`changes` distinguishes API definitions, examples, SDK configuration (`client.tsp` and
+`tspconfig.yaml`), readmes, and other files.
 `hasAffectedReadme` identifies changes associated with an owning README, even when that README is
 unchanged. This preserves ARM review for policy and manifest changes without making every `other`
 file review-relevant or removing the SDK-configuration-only exemption.
