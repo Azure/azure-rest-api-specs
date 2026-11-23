@@ -10,7 +10,7 @@ using Microsoft.Marketplace;
 // csharp configartion
 @@clientName(
   AdminRequestApprovalsResource,
-  "MarketplaceAdminApprovalRequest",
+  exact("MarketplaceAdminRequestApproval"),
   "csharp"
 );
 @@clientName(
