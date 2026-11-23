@@ -26,8 +26,7 @@ does not make unspecified properties valid now.
 Neither property belongs on the Voice Agent root, the generic conversation-engine
 base, a model-backed/native Live definition, a Hosted Agent manifest/protocol
 record, or a Bridge message. The service rejects misplaced root properties even
-when `null`. The earlier draft's boolean property names are not public aliases;
-private runtime features are not public configuration properties.
+when `null`. Only the policy names defined above are supported.
 
 These are versioned definition settings selected before session acquisition.
 Neither connection-time session overrides nor `session.update` may change them.
@@ -47,9 +46,8 @@ Request and response examples preserve explicit values and omission respectively
 This specification does not deploy Vienna, Voice Live, SDKs, or infrastructure.
 The revised names and nullable-object shape require matching TypeSpec-derived
 SDKs, Vienna serialization/materialization and policy-to-feature mapping, and
-Voice Live definition recognition and independent allocation support. Earlier
-boolean implementations do not establish support for this contract. Deploy and
-verify compatible receivers before sending revised definitions; schema
+Voice Live definition recognition and independent allocation support. Deploy and
+verify compatible receivers before sending definitions; schema
 recognition alone does not establish runtime support. Matching nested-field
 recognition also avoids advisory definition-validation errors.
 
