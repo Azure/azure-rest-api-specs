@@ -26,6 +26,13 @@ eval shards must be resolved before claiming live dashboard onboarding is comple
 
 ## SDK generation pipeline variables
 
+Run `pnpm exec spec-gen-sdk-runner --help` from `eng/tools/spec-gen-sdk-runner`
+for the SDK runner's generated CLI help. Options accept `--option value` and
+`--option=value`; repeated options use the last value. Unknown options, positional
+arguments, and options missing a value are rejected. Omitted options retain their
+defaults. SDK command arguments are forwarded as individual arguments, including
+paths containing spaces.
+
 The [spec-gen-sdk pipeline](pipelines/spec-gen-sdk.yml) selects its SDK repository
 using the Azure DevOps pipeline UI variable `SdkRepoUrl`. Provisioning library
 pipelines can also set the optional UI variable `TypeSpecEmitter`, for example

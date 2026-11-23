@@ -42,7 +42,8 @@ resource-manager, without describing the change as an API change:
 }
 ```
 
-`changes` distinguishes API definitions, examples, SDK configuration, readmes, and other files.
+`changes` distinguishes API definitions, examples, SDK configuration (`client.tsp` and
+`tspconfig.yaml`), readmes, and other files.
 `hasApiDefinitionChanges` records additions, edits, and removals of TypeSpec contract files or
 Swagger/OpenAPI definitions. It excludes `client.tsp`, package manifests/lockfiles, and
 TypeScript/JavaScript build configuration. The existing example and scenario exclusions still apply.

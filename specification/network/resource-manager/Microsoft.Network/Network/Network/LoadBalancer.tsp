@@ -4,14 +4,13 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
-import "../Common/LoadBalancer.tsp";
+import "./LoadBalancer.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
-using Common;
 
 namespace Microsoft.Network;
 
@@ -38,8 +37,7 @@ alias LoadBalancerLoadBalancerOps = Azure.ResourceManager.Legacy.LegacyOperation
   }
 >;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
+@featureFile(Features.loadBalancer)
 @armResourceOperations
 interface LoadBalancers {
   /**
@@ -103,7 +101,11 @@ interface LoadBalancers {
   /**
    * Gets all the load balancers in a subscription.
    */
-  listAll is ArmListBySubscription<LoadBalancer, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    LoadBalancer,
+    OverrideResourceName = "LoadBalancer",
+    Error = CloudError
+  >;
 
   /**
    * Migrate load balancer to IP Based

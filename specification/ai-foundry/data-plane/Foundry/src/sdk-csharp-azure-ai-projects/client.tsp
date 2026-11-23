@@ -150,6 +150,11 @@ namespace Azure.AI.Projects;
   OpenAI.InputImageContentParamAutoParam,
   "InternalInputImageContentParamAutoParam"
 );
+@@clientName(
+  AzureAIModelTarget.sampling_params,
+  "SamplingParameters",
+  "csharp"
+);
 // --------------------------------------------------------------------------------
 // Evaluators sub‐client
 // --------------------------------------------------------------------------------

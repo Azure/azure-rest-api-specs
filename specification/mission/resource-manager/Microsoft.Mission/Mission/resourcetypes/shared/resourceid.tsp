@@ -100,6 +100,14 @@ scalar DedicatedHubResourceId
     }
   ]>;
 
+@added(Microsoft.Mission.Versions.v2026_10_01_preview)
+scalar CommunityEndpointResourceId
+  extends armResourceIdentifier<[
+    {
+      type: "Microsoft.Mission/communities/communityEndpoints",
+    }
+  ]>;
+
 @added(Microsoft.Mission.Versions.v2025_11_01_preview)
 scalar VirtualHubResourceId
   extends armResourceIdentifier<[

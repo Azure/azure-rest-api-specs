@@ -15,6 +15,7 @@ import {
   parseArguments,
   prepareAzsdkDetectBreakingChangeCommand,
   prepareSpecGenSdkCommand,
+  resolvePackagePath,
   selectGenerationTool,
   setBuildFailedLabelVariable,
   setPipelineVariables,
@@ -32,6 +33,16 @@ const repoRoot = path.resolve(path.dirname(currentFilePath), "../fixtures/");
 describe("commands.ts", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+  });
+
+  describe("resolvePackagePath", () => {
+    test("resolves the typespec metadata output directory against the SDK repository", () => {
+      const sdkRepoPath = path.resolve("tmp", "azure-sdk-for-net");
+
+      expect(
+        resolvePackagePath("{output-dir}/sdk/keyvault/Azure.Security.KeyVault.Keys", sdkRepoPath),
+      ).toBe(path.join(sdkRepoPath, "sdk", "keyvault", "Azure.Security.KeyVault.Keys"));
+    });
   });
 
   describe("setPipelineVariables", () => {
@@ -74,6 +85,86 @@ describe("commands.ts", () => {
   });
 
   describe("parseArguments", () => {
+    test("supports equals syntax", () => {
+      vi.spyOn(process, "argv", "get").mockReturnValue([
+        "node",
+        "script",
+        "--pr-number=123",
+        "--commit=abc",
+      ]);
+      expect(parseArguments()).toMatchObject({
+        prNumber: "123",
+        specCommitSha: "abc",
+        runMode: "spec-pull-request",
+      });
+    });
+
+    test("preserves batch precedence and forwards pipeline arguments", () => {
+      vi.spyOn(process, "argv", "get").mockReturnValue([
+        "node",
+        "script",
+        "--scp",
+        "/spec repo",
+        "--sdp",
+        "/sdk repo",
+        "--wf",
+        "/work folder",
+        "--batch-type",
+        "all-typespecs",
+        "--pr-number",
+        "123",
+        "--commit",
+        "first",
+        "--typespec-emitter",
+        "@azure-tools/typespec-ts-provisioning",
+        "--tsp-config-relative-path",
+        "service/tspconfig.yaml",
+        "--head-repo-url",
+        "https://github.com/source/specs",
+        "--head-branch",
+        "feature",
+      ]);
+      const input = parseArguments();
+      expect(input).toMatchObject({
+        localSpecRepoPath: path.resolve("/spec repo"),
+        localSdkRepoPath: path.resolve("/sdk repo"),
+        workingFolder: path.resolve("/work folder"),
+        runMode: "batch",
+        prNumber: "123",
+        specCommitSha: "first",
+      });
+      expect(prepareSpecGenSdkCommand(input)).toEqual([
+        "spec-gen-sdk",
+        "--scp",
+        input.localSpecRepoPath,
+        "--sdp",
+        input.localSdkRepoPath,
+        "--wf",
+        input.workingFolder,
+        "-l",
+        "azure-sdk-for-net",
+        "-c",
+        "first",
+        "--rm",
+        "batch",
+        "--pr-number",
+        "123",
+        "--tsp-config-relative-path",
+        "service/tspconfig.yaml",
+        "--head-repo-url",
+        "https://github.com/source/specs",
+        "--head-branch",
+        "feature",
+        "--typespec-emitter",
+        "@azure-tools/typespec-ts-provisioning",
+      ]);
+    });
+
+    test("uses the default commit when the value is empty", () => {
+      vi.spyOn(process, "argv", "get").mockReturnValue(["node", "script", "--commit", ""]);
+      expect(parseArguments().specCommitSha).toBe("HEAD");
+    });
+
     test.each([undefined, "", "@azure-tools/typespec-ts-provisioning"])(
       "forwards optional TypeSpec emitter %s to spec-gen-sdk",
       (emitter) => {

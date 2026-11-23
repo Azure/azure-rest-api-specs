@@ -73,11 +73,23 @@ model MigrationEntityProperties is AzureResourceProperties {
   migrationStrategy?: Strategy;
 
   @doc("Execution Stage of Migration Entity.")
+  @removed(ApiVersions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
+  @renamedFrom(ApiVersions.v2026_08_01_preview, "executionStage")
+  oldExecutionStage?: string;
+
+  @doc("Execution Stage of Migration Entity.")
+  @added(ApiVersions.v2026_08_01_preview)
   executionStage?: string;
 
   @doc("Execution Status of Migration Entity.")
+  @removed(ApiVersions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
+  @renamedFrom(ApiVersions.v2026_08_01_preview, "executionStatus")
+  oldExecutionStatus?: string;
+
+  @doc("Execution Status of Migration Entity.")
+  @added(ApiVersions.v2026_08_01_preview)
   executionStatus?: string;
 
   @doc("Execution Readiness of Migration Entity.")
@@ -94,7 +106,37 @@ model MigrationEntityProperties is AzureResourceProperties {
   migrationPath?: string;
 
   @doc("Assessed Entity ARM Id")
+  @removed(ApiVersions.v2026_08_01_preview)
+  @renamedFrom(ApiVersions.v2026_08_01_preview, "assessedEntityArmId")
+  oldAssessedEntityArmId?: string;
+
+  @doc("Assessed Entity Azure resource Id")
+  @added(ApiVersions.v2026_08_01_preview)
   assessedEntityArmId?: string;
+
+  @doc("Migration status reported by the migration tool.")
+  @added(ApiVersions.v2026_08_01_preview)
+  toolReportedMigrationStatus?: string;
+}
+
+@doc("Properties that can be updated on a migration entity.")
+@added(ApiVersions.v2026_08_01_preview)
+model MigrationEntityPatchProperties {
+  @doc("Execution stage of the migration entity.")
+  executionStage?: string;
+
+  @doc("Execution status of the migration entity.")
+  executionStatus?: string;
+
+  @doc("Migration status reported by the migration tool.")
+  toolReportedMigrationStatus?: string;
+}
+
+@doc("Patch request for a migration entity.")
+@added(ApiVersions.v2026_08_01_preview)
+model MigrationEntityPatch {
+  @doc("Properties to update on the migration entity.")
+  properties?: MigrationEntityPatchProperties;
 }
 
 @doc("The base Migration Specific Properties model.")
