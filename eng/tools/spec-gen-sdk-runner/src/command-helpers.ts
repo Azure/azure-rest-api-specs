@@ -10,6 +10,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { inspect } from "node:util";
+import { parseCliArguments } from "./cli.ts";
 import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.ts";
 import { groupSpecConfigPaths } from "./spec-helpers.ts";
 import {
@@ -22,7 +23,6 @@ import {
   execAsync,
   findReadmeFiles,
   getAllTypeSpecPaths,
-  getArgumentValue,
   objectToMap,
   type SpecConfigs,
 } from "./utils.ts";
@@ -75,23 +75,18 @@ export function parseArguments(): SpecGenSdkCmdInput {
   const __filename: string = fileURLToPath(import.meta.url);
   const __dirname: string = path.dirname(__filename);
 
-  // Get the arguments passed to the script
-  const args: string[] = process.argv.slice(2);
-  const localSpecRepoPath: string = path.resolve(
-    getArgumentValue(args, "--scp", path.join(__dirname, "..")),
-  );
-  const sdkRepoName: string = getArgumentValue(args, "--lang", "azure-sdk-for-net");
+  const args = parseCliArguments();
+  const localSpecRepoPath: string = path.resolve(args.scp || path.join(__dirname, ".."));
+  const sdkRepoName: string = args.lang || "azure-sdk-for-net";
   const localSdkRepoPath: string = path.resolve(
-    getArgumentValue(args, "--sdp", path.join(localSpecRepoPath, "..", sdkRepoName)),
+    args.sdp || path.join(localSpecRepoPath, "..", sdkRepoName),
   );
-  const workingFolder: string = path.resolve(
-    getArgumentValue(args, "--wf", path.join(localSpecRepoPath, "..")),
-  );
+  const workingFolder: string = path.resolve(args.wf || path.join(localSpecRepoPath, ".."));
 
   // Set runMode to "release" by default
   let runMode = "release";
-  const batchType: string = getArgumentValue(args, "--batch-type", "");
-  const pullRequestNumber: string = getArgumentValue(args, "--pr-number", "");
+  const batchType = args["batch-type"];
+  const pullRequestNumber = args["pr-number"];
   if (batchType) {
     runMode = "batch";
   } else if (pullRequestNumber) {
@@ -105,15 +100,16 @@ export function parseArguments(): SpecGenSdkCmdInput {
     sdkRepoName,
     sdkLanguage: SdkNameSchema.parse(sdkRepoName.replace("-pr", "")),
     runMode,
-    tspConfigPath: getArgumentValue(args, "--tsp-config-relative-path", ""),
-    readmePath: getArgumentValue(args, "--readme-relative-path", ""),
-    prNumber: getArgumentValue(args, "--pr-number", ""),
-    apiVersion: getArgumentValue(args, "--api-version", ""),
-    sdkReleaseType: getArgumentValue(args, "--sdk-release-type", ""),
-    specCommitSha: getArgumentValue(args, "--commit", "HEAD"),
-    specRepoHttpsUrl: getArgumentValue(args, "--spec-repo-url", ""),
-    headRepoHttpsUrl: getArgumentValue(args, "--head-repo-url", ""),
-    headBranch: getArgumentValue(args, "--head-branch", ""),
+    tspConfigPath: args["tsp-config-relative-path"],
+    readmePath: args["readme-relative-path"],
+    prNumber: pullRequestNumber,
+    apiVersion: args["api-version"],
+    sdkReleaseType: args["sdk-release-type"],
+    typespecEmitter: args["typespec-emitter"] || undefined,
+    specCommitSha: args.commit || "HEAD",
+    specRepoHttpsUrl: args["spec-repo-url"],
+    headRepoHttpsUrl: args["head-repo-url"],
+    headBranch: args["head-branch"],
   };
 }
 
@@ -163,6 +159,9 @@ export function prepareSpecGenSdkCommand(commandInput: SpecGenSdkCmdInput): stri
   if (commandInput.sdkReleaseType) {
     specGenSdkCommand.push("--sdk-release-type", commandInput.sdkReleaseType);
   }
+  if (commandInput.typespecEmitter) {
+    specGenSdkCommand.push("--typespec-emitter", commandInput.typespecEmitter);
+  }
   return specGenSdkCommand;
 }
 
@@ -172,24 +171,27 @@ export function prepareSpecGenSdkCommand(commandInput: SpecGenSdkCmdInput): stri
  * @param specRepoPath The specification repository path.
  * @returns The specConfigs array.
  */
-export function getSpecPaths(batchType: string, specRepoPath: string): SpecConfigs[] {
+export async function getSpecPaths(
+  batchType: string,
+  specRepoPath: string,
+): Promise<SpecConfigs[]> {
   let tspconfigs: string[] = [];
   let readmes: string[] = [];
   let skipUnmatchedReadmes = false;
   switch (batchType) {
     case "all-specs": {
-      tspconfigs = getAllTypeSpecPaths(specRepoPath);
+      tspconfigs = await getAllTypeSpecPaths(specRepoPath);
       readmes = findReadmeFiles(path.join(specRepoPath, "specification"));
       break;
     }
     case "all-typespecs": {
-      tspconfigs = getAllTypeSpecPaths(specRepoPath);
+      tspconfigs = await getAllTypeSpecPaths(specRepoPath);
       readmes = findReadmeFiles(path.join(specRepoPath, "specification"));
       skipUnmatchedReadmes = true;
       break;
     }
     case "all-mgmtplane-typespecs": {
-      tspconfigs = getAllTypeSpecPaths(specRepoPath).filter(
+      tspconfigs = (await getAllTypeSpecPaths(specRepoPath)).filter(
         (p) => p.includes(".Management") || p.includes("resource-manager"),
       );
       readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) =>
@@ -199,7 +201,7 @@ export function getSpecPaths(batchType: string, specRepoPath: string): SpecConfi
       break;
     }
     case "all-dataplane-typespecs": {
-      tspconfigs = getAllTypeSpecPaths(specRepoPath).filter(
+      tspconfigs = (await getAllTypeSpecPaths(specRepoPath)).filter(
         (p) => !p.includes(".Management") && !p.includes("resource-manager"),
       );
       readmes = findReadmeFiles(path.join(specRepoPath, "specification")).filter((p) =>
@@ -404,6 +406,7 @@ export function generateArtifact(
         hasManagementPlaneSpecs,
         hasTypeSpecProjects,
         commandInput.sdkLanguage,
+        commandInput.typespecEmitter,
       );
     }
 
@@ -439,13 +442,23 @@ export function generateArtifact(
  * @param hasManagementPlaneSpecs - A flag indicating whether there are management plane specs.
  * @param hasTypeSpecProjects - A flag indicating whether there are TypeSpec projects.
  * @param sdkName - The SDK name.
+ * @param typespecEmitter - The explicitly selected TypeSpec emitter.
  * @returns boolean indicating whether the SDK check is required.
  */
 export function getRequiredSettingValue(
   hasManagementPlaneSpecs: boolean,
   hasTypeSpecProjects: boolean,
   sdkName: SdkName,
+  typespecEmitter?: string,
 ): boolean {
+  // Provisioning validation runs and reports failures, but is not yet a merge gate.
+  if (
+    (sdkName === SdkName.Js && typespecEmitter === "@azure-tools/typespec-ts-provisioning") ||
+    (sdkName === SdkName.Net &&
+      typespecEmitter === "@azure-typespec/http-client-csharp-provisioning")
+  ) {
+    return false;
+  }
   // If the SDK is azure-sdk-for-net, return false if there are no TypeSpec projects.
   if (sdkName === "azure-sdk-for-net" && !hasTypeSpecProjects) {
     return false;

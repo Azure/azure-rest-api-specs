@@ -2,8 +2,12 @@ import { stringify } from "yaml";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, relative } from "node:path";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { diffSuppression, getAllApiVersionFromRPFolder } from "../src/impact.ts";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import {
+  diffSuppression,
+  getAllApiVersionFromRPFolder,
+  getRPFolderFromSwaggerFile,
+} from "../src/impact.ts";
 
 describe("native impact utilities", () => {
   let folder: string;
@@ -13,6 +17,7 @@ describe("native impact utilities", () => {
   });
 
   afterEach(async () => {
+    vi.restoreAllMocks();
     await rm(folder, { recursive: true, force: true });
   });
 
@@ -38,6 +43,14 @@ describe("native impact utilities", () => {
     }
   });
 
+  it("distinguishes an undotted data-plane provider from an identically named service and file", () => {
+    expect(
+      getRPFolderFromSwaggerFile(
+        "specification/example/data-plane/example/stable/2026-01-01/example.json",
+      ),
+    ).toBe("specification/example/data-plane/example");
+  });
+
   it("compares nested suppression values independently of object key order", async () => {
     const before = join(folder, "before.md");
     const after = join(folder, "after.md");
@@ -58,5 +71,63 @@ describe("native impact utilities", () => {
     await writeFile(after, "```yaml\n" + stringify({ suppressions: [changed] }) + "```\n");
 
     expect(diffSuppression(before, after)).toEqual([changed]);
+  });
+
+  it("extracts fenced and indented suppressions inside lists and blockquotes regardless of language", async () => {
+    const after = join(folder, "after.md");
+    await writeFile(
+      after,
+      [
+        "> - ```yaml $(tag) == 'package-test'",
+        ">   directive:",
+        ">     - suppress: NestedDirective",
+        ">       reason: |",
+        ">         Keep the trailing newline.",
+        ">     - transform: ignored",
+        ">   ```",
+        "",
+        "- Indented configuration:",
+        "",
+        "      suppressions:",
+        "        - code: IndentedSuppression",
+        "",
+        "~~~json",
+        '{"suppressions": [{"code": "JsonSuppression"}]}',
+        "~~~",
+        "",
+        "```",
+        "suppressions:",
+        "  - code: UnlabelledSuppression",
+        "```",
+        "",
+        "<!--",
+        "```yaml",
+        "suppressions:",
+        "  - code: HiddenSuppression",
+        "```",
+        "-->",
+      ].join("\n"),
+    );
+
+    expect(diffSuppression(join(folder, "missing.md"), after)).toEqual([
+      { suppress: "NestedDirective", reason: "Keep the trailing newline.\n" },
+      { code: "IndentedSuppression" },
+      { code: "JsonSuppression" },
+      { code: "UnlabelledSuppression" },
+    ]);
+  });
+
+  it("warns about invalid YAML and continues collecting later suppressions", async () => {
+    const after = join(folder, "after.md");
+    await writeFile(
+      after,
+      "```yaml\nsuppressions: [\n```\n\n```yaml\nsuppressions:\n  - code: ValidRule\n```\n",
+    );
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+
+    expect(diffSuppression(join(folder, "missing.md"), after)).toEqual([{ code: "ValidRule" }]);
+    expect(warn).toHaveBeenCalledExactlyOnceWith(
+      expect.stringContaining(`Unable to read suppressions in ${after}: YAMLParseError:`),
+    );
   });
 });

@@ -32,7 +32,7 @@ These are the global settings for the ServiceFabricManagedClustersManagementClie
 title: ServiceFabricManagedClustersManagementClient
 description: Service Fabric Managed Clusters Management Client
 openapi-type: arm
-tag: package-2026-05-preview
+tag: package-2026-09-preview
 
 directive:
   - suppress: ListInOperationName
@@ -80,6 +80,15 @@ directive:
       - $.parameters.resourceGroupNameParameter.name
   - suppress: OperationsApiSchemaUsesCommonTypes
     reason: Common type operations api schema is not compatible with existing API spec. Work planned (https://msazure.visualstudio.com/One/_workitems/edit/24841215)
+```
+
+### Tag: package-2026-09-preview
+
+These settings apply only when `--tag=package-2026-09-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-09-preview'
+input-file:
+- preview/2026-09-01-preview/servicefabricmanagedclusters.json
 ```
 
 ### Tag: package-2026-05-preview
@@ -486,6 +495,7 @@ suppressions:
   - code: PostResponseCodes
     reason: Known issue https://github.com/Azure/azure-openapi-validator/issues/809 where 202 with final state schema via location are incorrectly flagged
     where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/reimageAllDisks"].post
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/startFaultSimulation"].post
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/stopFaultSimulation"].post
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/startFaultSimulation"].post

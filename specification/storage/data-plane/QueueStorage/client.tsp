@@ -364,3 +364,25 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.Queues, "omitSlashFromEmptyRoute", true, "csharp");
+
+// C++ customizations
+@@alternateType(MetadataHeaders.metadata, Record<string>, "cpp");
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "C++ prefix header collection support."
+@@clientOption(
+  MetadataHeaders.metadata,
+  "collectionHeaderPrefix",
+  "x-ms-meta-",
+  "cpp"
+);
+@@alternateType(KeyInfo.start, string, "cpp");
+@@alternateType(KeyInfo.expiry, string, "cpp");
+@@alternateType(GeoReplication.lastSyncTime, utcDateTime | null, "cpp");
+
+/** Statistics returned to the C++ queue protocol client. */
+@TypeSpec.Xml.name("StorageServiceStats")
+@clientName("QueueServiceStats", "cpp")
+model QueueServiceStatsCpp {
+  ...QueueServiceStats;
+}
+
+@@alternateType(QueueServiceStats, QueueServiceStatsCpp, "cpp");

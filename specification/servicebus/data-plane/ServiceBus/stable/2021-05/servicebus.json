@@ -3,7 +3,7 @@
   "info": {
     "version": "2021-05",
     "title": "ServiceBusManagementClient",
-    "description": "Azure Service Bus client for managing Queues, Topics, and Subscriptions.",
+    "description": "Azure Service Bus client for managing Queues, Topics, and Subscriptions. For general OpenAPI tooling, replace the host with your namespace's fully qualified domain name before sending requests.",
     "x-ms-code-generation-settings": {
       "internalConstructors": true,
       "name": "ServiceBusManagementClient"
@@ -27,6 +27,7 @@
       }
     }
   },
+  "host": "example-namespace.servicebus.windows.net",
   "x-ms-parameterized-host": {
     "hostTemplate": "{endpoint}",
     "parameters": [
@@ -2081,6 +2082,7 @@
           "Topic Operations"
         ],
         "operationId": "Entity_Put",
+        "summary": "Create or update a queue or topic",
         "description": "Create or update a queue or topic at the provided entityName",
         "parameters": [
           {
@@ -2253,6 +2255,7 @@
           "Subscription Operations"
         ],
         "operationId": "Subscription_Put",
+        "summary": "Create or update a subscription",
         "description": "Create or update a subscription",
         "parameters": [
           {
@@ -2442,6 +2445,7 @@
           "Rule Operations"
         ],
         "operationId": "Rule_Put",
+        "summary": "Create or update a rule",
         "description": "Create or update a rule",
         "parameters": [
           {

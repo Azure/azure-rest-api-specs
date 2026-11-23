@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { getWorkflowRunArtifactInputs } from "../context.ts";
+import { getLatestCommitStatuses } from "../commit-statuses.ts";
 import type { GitHubScriptArgs } from "../github.ts";
 import {
   addSpecificationChanges,
@@ -14,7 +15,6 @@ import {
   SemanticReviewCompletion,
   SemanticReviewScope,
   SPECIFICATION_OVER_LIMITS_REASON,
-  type CommitStatus,
   type SpecificationTotals,
   type EvaluatedSemanticReview,
 } from "./arm-semantic-review.ts";
@@ -227,14 +227,15 @@ export default async function publishArmSemanticReviewStatus({
     };
   }
 
-  await publishStatus(
-    { github, core },
-    owner,
-    repo,
-    headSha,
-    getRunStatusUrl(context, owner, repo),
-    status,
+  const targetUrl = getRunStatusUrl(context, owner, repo);
+  const latestStatus = getLatestSemanticReviewStatus(
+    await getLatestCommitStatuses(github, owner, repo, headSha),
   );
+  if (latestStatus?.state !== CommitStatusState.PENDING || latestStatus.target_url !== targetUrl) {
+    core.info("This reviewer attempt no longer owns the Pending status; result is unchanged");
+    return { headSha, issueNumber, statusPublished: false };
+  }
+  await publishStatus({ github, core }, owner, repo, headSha, targetUrl, status);
   return { headSha, issueNumber, statusPublished: true };
 }
 
@@ -268,10 +269,7 @@ export async function finalizeUnpublishedArmSemanticReview({
 
   const targetUrl = getRunStatusUrl(context, owner, repo);
   core.info(`Checking whether ${targetUrl} left a Pending status on ${headSha}`);
-  const statuses: CommitStatus[] = await github.paginate(
-    github.rest.repos.listCommitStatusesForRef,
-    { owner, repo, ref: headSha, per_page: PER_PAGE_MAX },
-  );
+  const statuses = await getLatestCommitStatuses(github, owner, repo, headSha);
   const latestStatus = getLatestSemanticReviewStatus(statuses);
   core.info(
     `Latest ${ARM_SEMANTIC_REVIEW_STATUS}: ${latestStatus?.state ?? "none"} ` +

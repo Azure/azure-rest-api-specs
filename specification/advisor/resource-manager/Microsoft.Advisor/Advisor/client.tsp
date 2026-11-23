@@ -62,7 +62,7 @@ using Microsoft.Advisor;
 @@clientName(Microsoft.Advisor.CpuThreshold.`20`, "TWENTY", "python");
 
 @@scope(ResourceRecommendationBases.list, "!csharp");
-@@scope(ResourceRecommendationBases.listV1, "!csharp");
+@@scope(ResourceRecommendationBases.listWithMode, "!csharp");
 @@scope(Operations.list, "!csharp");
 @@clientName(PredictionResponse, "AdvisorPredictionResult", "csharp");
 @@clientName(

@@ -90,6 +90,12 @@ model VolumeProperties {
   @added(Versions.v2026_07_01)
   @removed(Versions.v2026_07_15_preview)
   @renamedFrom(Versions.v2026_07_15_preview, "usageThreshold")
+  @added(Versions.v2026_08_01)
+  @removed(Versions.v2026_08_15_preview)
+  @renamedFrom(Versions.v2026_08_15_preview, "usageThreshold")
+  @added(Versions.v2026_09_01)
+  @removed(Versions.v2026_09_15_preview)
+  @renamedFrom(Versions.v2026_09_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThresholdOld: int64 = 107374182400;
@@ -112,6 +118,10 @@ model VolumeProperties {
   @added(Versions.v2026_06_15_preview)
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_08_01)
+  @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold: int64 = 107374182400;
@@ -275,6 +285,9 @@ model VolumeProperties {
    * Enables or disables SMB opportunistic lock property for SMB Shares. Only applicable for SMB/DualProtocol volume
    */
   @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_08_01)
+  @added(Versions.v2026_08_15_preview)
+  @added(Versions.v2026_09_01)
   smbOplocks?: SmbOplocks;
 
   /**
@@ -321,6 +334,9 @@ model VolumeProperties {
   @added(Versions.v2026_06_15_preview)
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_08_01)
+  @added(Versions.v2026_08_15_preview)
+  @added(Versions.v2026_09_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   ldapServerType?: LdapServerType;
 
@@ -386,6 +402,14 @@ model VolumeProperties {
   isDefaultQuotaEnabled?: boolean = false;
 
   /**
+   * Async Directory Delete configuration for the volume.
+   */
+  @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
+  asyncDirectoryDelete?: AsyncDirectoryDelete;
+
+  /**
    * Default user quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies .
    */
   defaultUserQuotaInKiBs?: int64 = 0;
@@ -446,6 +470,7 @@ model VolumeProperties {
    */
   #suppress "deprecated" "Suppress this warning until the property is removed."
   #deprecated "Deprecated. This property will be removed in a future API version."
+  @removed(Versions.v2026_09_01)
   enableSubvolumes?: EnableSubvolumes = EnableSubvolumes.Disabled;
 
   /**
@@ -479,6 +504,10 @@ model VolumeProperties {
   @added(Versions.v2026_06_15_preview)
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_08_01)
+  @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   largeVolumeType?: LargeVolumeType;
 
@@ -512,6 +541,10 @@ model VolumeProperties {
   @added(Versions.v2026_06_15_preview)
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_08_01)
+  @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   language?: VolumeLanguage;
 
   /**
@@ -546,6 +579,67 @@ model VolumeProperties {
   @added(Versions.v2026_05_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   breakthroughMode?: BreakthroughMode;
+
+  /**
+   * Geographic namespace properties for this volume.
+   */
+  @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
+  geoNamespaceProperties?: VolumeNamespaceProperties;
+
+  /**
+   * Specifies the workload application type.
+   */
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  workloadApplicationType?: WorkloadApplicationType;
+}
+
+/**
+ * Indicates whether a volume is designated as an origin for cache volumes.
+ */
+@added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
+union OriginVolume {
+  string,
+
+  /**
+   * This volume is not designated as an origin for cache volumes.
+   */
+  Disabled: "Disabled",
+
+  /**
+   * This volume is designated as an origin for one or more cache volumes.
+   */
+  Enabled: "Enabled",
+}
+
+/**
+ * Geographic namespace properties for a volume.
+ */
+@added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
+model VolumeNamespaceProperties {
+  /**
+   * Indicates whether this volume is designated as an origin for cache volumes.
+   */
+  originVolume?: OriginVolume;
+}
+
+/**
+ * Geographic namespace properties for a volume patch operation.
+ */
+@added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
+model VolumePatchNamespaceProperties {
+  /**
+   * Indicates whether this volume is designated as an origin for cache volumes.
+   */
+  originVolume?: OriginVolume;
 }
 
 /**
@@ -562,7 +656,15 @@ union LdapServerType {
   /**
    * The volume should use OpenLDAP for LDAP connections.
    */
-  OpenLDAP: "OpenLDAP",
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "OpenLDAP")
+  OpenLDAPOld: "OpenLDAP",
+
+  /**
+   * The volume should use OpenLdap for LDAP connections.
+   */
+  @added(Versions.v2026_09_01)
+  OpenLdap: "OpenLdap",
 }
 
 /**
@@ -1376,6 +1478,12 @@ model VolumePatchProperties {
   @added(Versions.v2026_07_01)
   @removed(Versions.v2026_07_15_preview)
   @renamedFrom(Versions.v2026_07_15_preview, "usageThreshold")
+  @added(Versions.v2026_08_01)
+  @removed(Versions.v2026_08_15_preview)
+  @renamedFrom(Versions.v2026_08_15_preview, "usageThreshold")
+  @added(Versions.v2026_09_01)
+  @removed(Versions.v2026_09_15_preview)
+  @renamedFrom(Versions.v2026_09_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThreshold20250901?: int64;
@@ -1398,6 +1506,10 @@ model VolumePatchProperties {
   @added(Versions.v2026_06_15_preview)
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_08_01)
+  @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold?: int64;
@@ -1427,6 +1539,14 @@ model VolumePatchProperties {
    * Specifies if default quota is enabled for the volume.
    */
   isDefaultQuotaEnabled?: boolean;
+
+  /**
+   * Async Directory Delete configuration for the volume.
+   */
+  @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
+  asyncDirectoryDelete?: AsyncDirectoryDelete;
 
   /**
    * Default user quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies .
@@ -1489,7 +1609,18 @@ model VolumePatchProperties {
    * Enables or disables SMB opportunistic lock property for SMB Shares. Only applicable for SMB/DualProtocol volume
    */
   @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_08_01)
+  @added(Versions.v2026_08_15_preview)
+  @added(Versions.v2026_09_01)
   smbOplocks?: SmbOplocks;
+
+  /**
+   * Geographic namespace properties for this volume.
+   */
+  @added(Versions.v2026_08_15_preview)
+  @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
+  geoNamespaceProperties?: VolumePatchNamespaceProperties;
 }
 
 /**
@@ -2122,6 +2253,9 @@ union SmbNonBrowsable {
  * SMB opportunistic-lock setting shared by volume and cache resources. Omit the property when unspecified.
  */
 @added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_08_01)
+@added(Versions.v2026_08_15_preview)
+@added(Versions.v2026_09_01)
 union SmbOplocks {
   string,
 
@@ -2219,6 +2353,7 @@ union AvsDataStore {
  * Deprecated. This type will be removed in a future API version.
  */
 #deprecated "Deprecated. This type will be removed in a future API version."
+@removed(Versions.v2026_09_01)
 union EnableSubvolumes {
   string,
 
@@ -2231,6 +2366,46 @@ union EnableSubvolumes {
    * subvolumes are not enabled
    */
   Disabled: "Disabled",
+}
+
+/**
+ * Whether Async Directory Delete is enabled for the volume.
+ */
+@added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
+union AsyncDirectoryDeleteStatus {
+  string,
+
+  /**
+   * Async Directory Delete is enabled
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Async Directory Delete is disabled
+   */
+  Disabled: "Disabled",
+}
+
+/**
+ * Async Directory Delete configuration for the volume.
+ */
+@added(Versions.v2026_08_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
+model AsyncDirectoryDelete {
+  /**
+   * Specifies whether Async Directory Delete is enabled for the volume.
+   */
+  status?: AsyncDirectoryDeleteStatus;
+
+  /**
+   * The name of the Trash bin folder for deleted files. Max length of 255. Must contain at least one alphanumeric character (A-Z, a-z, 0-9) and may include dots (.), underscores (_), and hyphens (-).
+   */
+  @maxLength(255)
+  @pattern("^[a-zA-Z0-9._-]*[a-zA-Z0-9][a-zA-Z0-9._-]*$")
+  trashBinName?: string;
 }
 
 /**
@@ -2291,6 +2466,52 @@ union BreakthroughMode {
    * The volume uses configuration that provides basic performance and throughput.
    */
   Disabled: "Disabled",
+}
+
+/**
+ * The type of workload application for the volume.
+ */
+union WorkloadApplicationType {
+  string,
+
+  /** Database - SAP HANA */
+  DatabaseSAPHANA: "DatabaseSAPHANA",
+
+  /** Database - DB2 */
+  DatabaseDB2: "DatabaseDB2",
+
+  /** Database - Oracle */
+  DatabaseOracle: "DatabaseOracle",
+
+  /** Database - Other */
+  DatabaseOther: "DatabaseOther",
+
+  /** AVD - FSLogix */
+  AVDFSLogix: "AVDFSLogix",
+
+  /** AVD - Other */
+  AVDOther: "AVDOther",
+
+  /** Citrix - FSLogix */
+  CitrixFSLogix: "CitrixFSLogix",
+
+  /** Citrix - Other */
+  CitrixOther: "CitrixOther",
+
+  /** Azure VMware Solution - Datastore */
+  AzureVMwareSolutionDatastore: "AzureVMwareSolutionDatastore",
+
+  /** Azure VMware Solution - Guest mount */
+  AzureVMwareSolutionGuestMount: "AzureVMwareSolutionGuestMount",
+
+  /** Azure Red Hat OpenShift */
+  AzureRedHatOpenShift: "AzureRedHatOpenShift",
+
+  /** Azure Kubernetes Service */
+  AzureKubernetesService: "AzureKubernetesService",
+
+  /** Other workload application */
+  Other: "Other",
 }
 
 /**

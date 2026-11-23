@@ -121,6 +121,7 @@ interface ComputeResources {
   /**
    * Updates the custom services list. The list of custom services provided shall be overwritten.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing updateCustomServices retains its request-body shape; preserve wire compatibility."
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
@@ -130,6 +131,7 @@ interface ComputeResources {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   @action("customServices")
   updateCustomServices is ArmResourceActionSync<
     ComputeResource,
@@ -161,6 +163,7 @@ interface ComputeResources {
   /**
    * Update Data Mounts of a Machine Learning compute.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-model-request-body" "Back compat: Existing updateDataMounts retains its request-body shape; preserve wire compatibility."
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
@@ -170,6 +173,7 @@ interface ComputeResources {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   @summary("Update Data Mounts of a Machine Learning compute.")
   updateDataMounts is ArmResourceActionSync<
     ComputeResource,
@@ -221,6 +225,7 @@ interface ComputeResources {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   updateIdleShutdownSetting is ArmResourceActionSync<
     ComputeResource,
     IdleShutdownSetting,
@@ -242,6 +247,7 @@ interface ComputeResources {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   @operationId("Compute_getAllowedResizeSizes")
   @action("getAllowedVmSizesForResize")
   getAllowedResizeSizes is ArmResourceActionSync<
@@ -262,6 +268,7 @@ interface ComputeResources {
   @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @removed(Versions.v2026_09_01)
+  @added(Versions.v2026_09_15_preview)
   resize is ArmResourceActionAsyncBase<
     ComputeResource,
     ResizeSchema,

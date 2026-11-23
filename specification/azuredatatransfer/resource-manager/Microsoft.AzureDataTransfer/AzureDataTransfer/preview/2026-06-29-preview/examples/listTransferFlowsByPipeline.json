@@ -1,0 +1,52 @@
+{
+  "title": "Lists the storage and messaging transfer flows that use a pipeline",
+  "operationId": "Pipelines_ListTransferFlows",
+  "parameters": {
+    "api-version": "2026-06-29-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testRG",
+    "pipelineName": "testPipeline",
+    "body": {
+      "flows": {
+        "status": "Enabled",
+        "dataClassTypes": [
+          "Files",
+          "Messaging"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/storageTransferFlows/testStorageTransferFlow",
+            "status": "Enabled",
+            "transferRole": "Source",
+            "flowProfileName": "flowProfileName",
+            "remoteTransferFlowResourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/remoteRG/providers/Microsoft.AzureDataTransfer/storageTransferFlows/remoteStorageTransferFlow",
+            "dataResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Storage/storageAccounts/testsa/blobServices/default/containers/testcontainer",
+            "requestor": "user@contoso.com",
+            "pipeline": "testPipeline",
+            "dataClassType": "Files",
+            "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/messagingTransferFlows/testMessagingTransferFlow",
+            "status": "AwaitingApproval",
+            "transferRole": "Source",
+            "flowProfileName": "flowProfileName",
+            "remoteTransferFlowResourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/remoteRG/providers/Microsoft.AzureDataTransfer/messagingTransferFlows/remoteMessagingTransferFlow",
+            "dataResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.ServiceBus/namespaces/testnamespace/queues/testqueue",
+            "requestor": "user@contoso.com",
+            "pipeline": "testPipeline",
+            "dataClassType": "Messaging",
+            "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/pipelines/testPipeline/listTransferFlows?api-version=2026-06-29-preview&$skipToken=abc123"
+      }
+    }
+  }
+}

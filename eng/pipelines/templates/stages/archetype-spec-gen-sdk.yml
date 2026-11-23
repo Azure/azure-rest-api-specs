@@ -124,8 +124,9 @@ stages:
               Write-Host "Will use commitish for SDK repo checkout: '$checkoutCommitish'"
               $prStatus = 'draft'
               Write-Host "##vso[task.setvariable variable=SdkPrStatus]$prStatus"
-              $releasePlanInfo = ''
-              Write-Host "##vso[task.setvariable variable=ReleasePlanInfo]$releasePlanInfo"
+              $releasePlanMetadata = if (${{ parameters.ReleasePlanWorkItemId }} -ne 0) { '{"unavailable":true}' } else { '{}' }
+              Write-Host "##vso[task.setvariable variable=ReleasePlanMetadata]$releasePlanMetadata"
+              Write-Host "##vso[task.setvariable variable=GeneratedSDKApiVersionsJson][]"
               $prUrl = ""
               Write-Host "##vso[task.setvariable variable=PullRequestUrl]$prUrl"
               $buildFailedLabel = ""
@@ -232,38 +233,47 @@ stages:
               SourceRootPath: $(SpecRepoDirectory)
               Condition: and(succeeded(), contains(variables['SdkRepoName'], 'rust'))
 
+          - template: /eng/common/pipelines/templates/steps/install-azsdk-cli.yml
+            parameters:
+              SourceRootPath: $(SpecRepoDirectory)
+              Condition: and(succeeded(), not(contains(variables['SdkRepoName'], 'rust')), ne(variables['Build.Reason'], 'PullRequest'))
+              ContinueOnError: true
+
           - script: |
               set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
-              optional_params=""
+              optional_params=()
+              # Azure DevOps leaves undefined macros unexpanded.
+              if [[ -n "${TYPESPEC_EMITTER:-}" && "$TYPESPEC_EMITTER" != '$('*')' ]]; then
+                optional_params+=(--typespec-emitter "$TYPESPEC_EMITTER")
+              fi
               sdk_gen_info="Configurations: "
 
               if [ "$(Build.Reason)" != "PullRequest" ] && [ "${{ parameters.ConfigType }}" = "TypeSpec" ]; then
-                optional_params="$optional_params --tsp-config-relative-path ${{ parameters.ConfigPath }}"
+                optional_params+=(--tsp-config-relative-path "${{ parameters.ConfigPath }}")
                 sdk_gen_info="$sdk_gen_info '${{ parameters.ConfigPath }}',"
               elif [ "$(Build.Reason)" != "PullRequest" ] && [ "${{ parameters.ConfigType }}" = "OpenAPI" ]; then
-                optional_params="$optional_params --readme-relative-path ${{ parameters.ConfigPath }}"
+                optional_params+=(--readme-relative-path "${{ parameters.ConfigPath }}")
                 sdk_gen_info="$sdk_gen_info '${{ parameters.ConfigPath }}',"
               fi
 
               updatedSpecRepoCommit="$(SpecRepoCommit)"
               if [ "$(Build.Reason)" = "PullRequest" ]; then
-                optional_params="$optional_params --pr-number $(System.PullRequest.PullRequestNumber)"
+                optional_params+=(--pr-number "$(System.PullRequest.PullRequestNumber)")
                 specPrUrl="${{ parameters.SpecRepoUrl }}/pull/$(System.PullRequest.PullRequestNumber)"
                 sdk_gen_info="$sdk_gen_info spec PR: $specPrUrl"
                 updatedSpecRepoCommit="$(System.PullRequest.SourceCommitId)"
               fi
 
               if [ "${{ parameters.SpecBatchTypes }}" != "" ]; then
-                optional_params="$optional_params --batch-type ${{ parameters.SpecBatchTypes }}"
+                optional_params+=(--batch-type "${{ parameters.SpecBatchTypes }}")
                 sdk_gen_info="$sdk_gen_info SpecBatchTypes: ${{ parameters.SpecBatchTypes }},"
               fi
 
               if [ "${{ parameters.ApiVersion }}" != "" ] && [ "${{ parameters.ApiVersion }}" != "none" ]; then
-                optional_params="$optional_params --api-version ${{ parameters.ApiVersion }}"
-                sdk_gen_info="$sdk_gen_info API Version: ${{ parameters.ApiVersion }},"
+                optional_params+=(--api-version "${{ parameters.ApiVersion }}")
               fi
               if [ "${{ parameters.SdkReleaseType }}" != "" ] && [ "${{ parameters.SdkReleaseType }}" != "none" ]; then
-                optional_params="$optional_params --sdk-release-type ${{ parameters.SdkReleaseType }}"
+                optional_params+=(--sdk-release-type "${{ parameters.SdkReleaseType }}")
                 sdk_gen_info="$sdk_gen_info SDK Release Type: ${{ parameters.SdkReleaseType }},"
               fi
               sdk_gen_info="$sdk_gen_info and CommitSHA: '$updatedSpecRepoCommit' in SpecRepo: '${{ parameters.SpecRepoUrl }}'"
@@ -291,12 +301,13 @@ stages:
                 --lang $(SdkRepoName) \
                 --commit $updatedSpecRepoCommit \
                 --spec-repo-url ${{ parameters.SpecRepoUrl }} \
-                $optional_params || true # return true always to suppress exit error logging
+                "${optional_params[@]}" || true # return true always to suppress exit error logging
             displayName: "Generate SDK"
             ${{ if eq(parameters.ForceCreateEvenWithFailures, true) }}:
               continueOnError: true
             env:
               npm_config_userconfig: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
+              TYPESPEC_EMITTER: $(TypeSpecEmitter)
 
           - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
             parameters:
@@ -342,10 +353,12 @@ stages:
                       azureSubscription: opensource-api-connection
                       scriptType: pscore
                       scriptLocation: inlineScript
+                      powerShellIgnoreLASTEXITCODE: true
                       inlineScript: |
-                        $releasePlanInfo = & "$(SpecRepoDirectory)/eng/scripts/Get-ReleasePlan-Info.ps1" ${{ parameters.ReleasePlanWorkItemId }}
-                        Write-Host "##vso[task.setvariable variable=ReleasePlanInfo]$releasePlanInfo"
-                        Write-Host "Release Plan Info: $releasePlanInfo"
+                        $releasePlanMetadata = & "$(SpecRepoDirectory)/eng/scripts/Get-ReleasePlan-Info.ps1" -ReleasePlanWorkItemId ${{ parameters.ReleasePlanWorkItemId }} -AsJson
+                        $escapedMetadata = $releasePlanMetadata.Replace('%', '%AZP25').Replace("`r", '%0D').Replace("`n", '%0A')
+                        Write-Host "##vso[task.setvariable variable=ReleasePlanMetadata]$escapedMetadata"
+                        Write-Host "Release Plan Metadata: $releasePlanMetadata"
 
               - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
                 parameters:
@@ -373,19 +386,44 @@ stages:
                 inputs:
                   pwsh: true
                   workingDirectory: $(SdkRepoDirectory)
-                  filePath: $(SdkRepoDirectory)/eng/common/scripts/Submit-PullRequest.ps1
-                  arguments: >
-                    -RepoOwner "azure"
-                    -RepoName "$(SdkRepoName)"
-                    -BaseBranch "main"
-                    -PROwner "$(SdkRepoOwner)"
-                    -PRBranch "$(SdkPullRequestSourceBranch)"
-                    -AuthToken "$(GH_TOKEN)"
-                    -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
-                    -PRBody "$(GeneratedSDKInformation)  $(ReleasePlanInfo)"
-                    -PRLabels "$(BuildFailedLabel)"
-                    -OpenAsDraft $$(OpenSdkPullRequestAsDraft)
-                    -UpdateExistingPullRequest $true
+                  targetType: inline
+                  script: |
+                    $bodyParameters = @{
+                      ConfigType = $env:SDK_PR_CONFIG_TYPE
+                      ConfigPath = $env:SDK_PR_CONFIG_PATH
+                      SpecRepoUrl = $env:SDK_PR_SPEC_REPO_URL
+                      SpecCommitSha = $env:SDK_PR_SPEC_COMMIT_SHA
+                      PipelineRun = $env:SDK_PR_PIPELINE_RUN
+                      SdkReleaseType = $env:SDK_PR_RELEASE_TYPE
+                      ApiVersionsJson = $env:GENERATED_SDK_API_VERSIONS_JSON
+                      ReleasePlanJson = $env:RELEASE_PLAN_METADATA
+                    }
+                    $prBody = & "$(SpecRepoDirectory)/eng/scripts/New-SdkPullRequestBody.ps1" @bodyParameters
+
+                    $prParameters = @{
+                      RepoOwner = "azure"
+                      RepoName = "$(SdkRepoName)"
+                      BaseBranch = "main"
+                      PROwner = "$(SdkRepoOwner)"
+                      PRBranch = "$(SdkPullRequestSourceBranch)"
+                      AuthToken = "$(GH_TOKEN)"
+                      PRTitle = "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
+                      PRBody = $prBody
+                      PRLabels = "$(BuildFailedLabel)"
+                      OpenAsDraft = $$(OpenSdkPullRequestAsDraft)
+                      UpdateExistingPullRequest = $true
+                    }
+
+                    & "$(SdkRepoDirectory)/eng/common/scripts/Submit-PullRequest.ps1" @prParameters
+                env:
+                  SDK_PR_CONFIG_TYPE: ${{ parameters.ConfigType }}
+                  SDK_PR_CONFIG_PATH: ${{ parameters.ConfigPath }}
+                  SDK_PR_SPEC_REPO_URL: ${{ parameters.SpecRepoUrl }}
+                  SDK_PR_SPEC_COMMIT_SHA: $(SpecRepoCommit)
+                  SDK_PR_PIPELINE_RUN: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)
+                  SDK_PR_RELEASE_TYPE: ${{ parameters.SdkReleaseType }}
+                  GENERATED_SDK_API_VERSIONS_JSON: $(GeneratedSDKApiVersionsJson)
+                  RELEASE_PLAN_METADATA: $(ReleasePlanMetadata)
 
               - ${{ if endsWith(parameters.TriggerSource, '-release') }}:
                   - task: PowerShell@2

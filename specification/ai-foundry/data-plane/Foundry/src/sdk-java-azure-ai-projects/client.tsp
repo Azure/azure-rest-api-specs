@@ -18,7 +18,6 @@ import "../routines/routes.tsp";
 import "../skills/routes.tsp";
 import "../data_generation_jobs/routes.tsp";
 
-import "../sdk-common/ops-relocation-agent-insights.tsp";
 import "../sdk-common/ops-relocation-projects.tsp";
 import "../sdk-common/ops-relocation-datasets.tsp";
 
@@ -79,6 +78,7 @@ namespace Azure.AI.Projects;
 @@clientName(EvaluationTaxonomies.update, "updateEvaluationTaxonomy");
 
 // Evaluators
+@@clientName(Evaluators.listDiagnostics, "listEvaluatorDiagnostics");
 @@clientName(Evaluators.listVersions, "listEvaluatorVersions");
 @@clientName(Evaluators.getVersion, "getEvaluatorVersion");
 @@clientName(Evaluators.createVersion, "createEvaluatorVersion");
@@ -146,6 +146,34 @@ namespace Azure.AI.Projects;
 @@clientName(AgentInsightMonitors.getInsight, "getAgentInsight");
 @@clientName(AgentInsightMonitors.updateInsight, "updateAgentInsight");
 
+// Options bags for the SDK-written list convenience methods.
+/** Options for listing insights for an Agent Insights monitor. */
+model ListAgentInsightsOptions {
+  /** The identifier of the monitor. */
+  monitor_id: string;
+
+  ...TypeSpec.Http.PlainData<AgentInsightsPageQueryParameters>;
+  ...TypeSpec.Http.PlainData<AgentInsightListFilters>;
+  ...TypeSpec.Http.PlainData<AgentInsightReadOptions>;
+}
+
+/** Options for listing runs for an Agent Insights monitor. */
+model ListAgentInsightRunsOptions {
+  /** The identifier of the monitor. */
+  monitor_id: string;
+
+  ...TypeSpec.Http.PlainData<AgentInsightsPageQueryParameters>;
+  ...TypeSpec.Http.PlainData<AgentInsightRunFilters>;
+}
+
+@@usage(ListAgentInsightsOptions, Usage.input, "java");
+@@access(ListAgentInsightsOptions, Access.public, "java");
+@@usage(ListAgentInsightRunsOptions, Usage.input, "java");
+@@access(ListAgentInsightRunsOptions, Access.public, "java");
+
+@@convenientAPI(AgentInsightMonitors.listInsights, false, "java");
+@@convenientAPI(AgentInsightMonitors.listRuns, false, "java");
+
 // --------------------------------------------------------------------------------
 // Renames - models
 // --------------------------------------------------------------------------------
@@ -159,16 +187,153 @@ namespace Azure.AI.Projects;
 // // More accurate naming
 @@clientName(AssetCredentialResponse, "DatasetCredential");
 
+// Retain the existing public DatasetReference name.
+@@clientName(DatasetReference, "OptionalVersionDatasetReference", "java");
+@@clientName(VersionedDatasetReference, "DatasetReference", "java");
+
 @@clientName(EntraIDCredentials, "EntraIdCredentials");
 
 @@clientName(EvalResult, "EvaluationResult");
 @@clientName(EvalRun, "EvaluationRun");
 @@clientName(EvalRunDataSource, "EvaluationRunDataSource");
+@@clientName(
+  UserConversationSimulationEvalRunDataSource,
+  "UserConversationSimulationEvaluationRunDataSource",
+  "java"
+);
+@@clientName(
+  UserConversationSimulationPreviewEvalRunDataSource,
+  "UserConversationSimulationPreviewEvaluationRunDataSource",
+  "java"
+);
+@@clientName(
+  TraceSourceEvalRunDataSource,
+  "TraceSourceEvaluationRunDataSource",
+  "java"
+);
+@@clientName(
+  TraceSourcePreviewEvalRunDataSource,
+  "TraceSourcePreviewEvaluationRunDataSource",
+  "java"
+);
+@@clientName(CsvEvalRunDataSource, "CsvEvaluationRunDataSource", "java");
+@@clientName(EvalCsvFileIdSource, "EvaluationCsvFileIdSource", "java");
+@@clientName(TracesEvalRunDataSource, "TracesEvaluationRunDataSource", "java");
+@@clientName(
+  TracesPreviewEvalRunDataSource,
+  "TracesPreviewEvaluationRunDataSource",
+  "java"
+);
+@@clientName(
+  TargetCompletionEvalRunDataSource,
+  "TargetCompletionEvaluationRunDataSource",
+  "java"
+);
 @@clientName(EvalRunOutputItem, "EvaluationRunOutputItem");
 @@clientName(EvalRunOutputItemResult, "EvaluationRunOutputItemResult");
 @@clientName(EvalRunResultCompareItem, "EvaluationRunResultCompareItem");
 @@clientName(EvalRunResultComparison, "EvaluationRunResultComparison");
 @@clientName(EvalRunResultSummary, "EvaluationRunResultSummary");
+
+@@clientName(ItemGenerationParams, "ItemGenerationParameters", "java");
+@@clientName(ItemGenerationParamsType, "ItemGenerationParametersType", "java");
+@@clientName(
+  RedTeamItemGenerationParams,
+  "RedTeamItemGenerationParameters",
+  "java"
+);
+@@clientName(
+  RedTeamSeedPromptsItemGenerationParams,
+  "RedTeamSeedPromptsItemGenerationParameters",
+  "java"
+);
+@@clientName(
+  RedTeamTaxonomyItemGenerationParams,
+  "RedTeamTaxonomyItemGenerationParameters",
+  "java"
+);
+@@clientName(
+  ResponseRetrievalItemGenerationParams,
+  "ResponseRetrievalItemGenerationParameters",
+  "java"
+);
+@@clientName(
+  SyntheticDataGenerationItemGenerationParams,
+  "SyntheticDataGenerationItemGenerationParameters",
+  "java"
+);
+@@clientName(
+  TargetCompletionItemGenerationParams,
+  "TargetCompletionItemGenerationParameters",
+  "java"
+);
+@@clientName(
+  SyntheticDataGenItemGenerationParamsType,
+  "SyntheticDataGenerationItemGenerationParametersType",
+  "java"
+);
+@@clientName(
+  AgentInsightPrioritiesRead,
+  "AgentInsightPrioritiesDetails",
+  "java"
+);
+
+@@clientName(RedTeamItemGenerationParams.num_turns, "numberOfTurns", "java");
+@@clientName(
+  RedTeamSeedPromptsItemGenerationParams.num_turns,
+  "numberOfTurns",
+  "java"
+);
+@@clientName(
+  RedTeamTaxonomyItemGenerationParams.num_turns,
+  "numberOfTurns",
+  "java"
+);
+@@clientName(
+  UserConversationSimulationDefaultConfiguration.max_num_turns,
+  "maximumNumberOfTurns",
+  "java"
+);
+@@clientName(
+  UserConversationSimulationDefaultConfiguration.desired_num_turns,
+  "desiredNumberOfTurns",
+  "java"
+);
+@@clientName(
+  ResponseRetrievalItemGenerationParams.max_num_turns,
+  "maximumNumberOfTurns",
+  "java"
+);
+@@clientName(AgentFilterTraceSource.start_time, "startAt", "java");
+@@clientName(AgentFilterTraceSource.end_time, "endAt", "java");
+@@clientName(
+  AgentInsightDetails.recommended_actions,
+  "recommendedAction",
+  "java"
+);
+@@clientName(CronTrigger.startTime, "startAt", "java");
+@@clientName(CronTrigger.endTime, "endAt", "java");
+@@clientName(RecurrenceTrigger.startTime, "startAt", "java");
+@@clientName(RecurrenceTrigger.endTime, "endAt", "java");
+@@clientName(
+  TargetCompletionEvalRunDataSource.item_generation_params,
+  "itemGenerationParameters",
+  "java"
+);
+@@clientName(TracesEvalRunDataSource.end_time, "endAt", "java");
+@@clientName(
+  TracesEvalRunDataSource.ingestion_delay_seconds,
+  "ingestionDelay",
+  "java"
+);
+@@clientName(TracesPreviewEvalRunDataSource.end_time, "endAt", "java");
+@@clientName(
+  TracesPreviewEvalRunDataSource.ingestion_delay_seconds,
+  "ingestionDelay",
+  "java"
+);
+@@clientName(DatasetEvaluationRuleAction.evalId, "evaluationId", "java");
+@@clientName(TraceEvaluationRuleAction.evalId, "evaluationId", "java");
 
 @@clientName(Index, "AIProjectIndex", "java");
 
@@ -214,6 +379,7 @@ namespace Azure.AI.Projects;
 @@clientName(AttackStrategy.ROT13, "ROT_13");
 
 @@clientName(AgentInsightHighlightedTrace.duration_ms, "Duration");
+@@clientName(EvaluatorHealthMetrics.n_dimensions, "numberOfDimensions", "java");
 
 // Preserve name on GA'd model
 @@clientName(FoundryEvaluationTarget, "Target");
@@ -286,6 +452,196 @@ namespace Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // Type replacements / encodings
 // --------------------------------------------------------------------------------
+
+@alternateType(
+  {
+    identity: "com.azure.ai.projects.models.DatasetEvaluationSource",
+  },
+  "java"
+)
+model JavaDatasetEvaluationSource {}
+
+@alternateType(
+  {
+    identity: "com.azure.ai.projects.models.TraceEvaluationSource",
+  },
+  "java"
+)
+model JavaTraceEvaluationSource {}
+
+@alternateType(
+  {
+    identity: "com.azure.ai.projects.models.UserConversationSimulationSource",
+  },
+  "java"
+)
+model JavaUserConversationSimulationSource {}
+
+@@alternateType(
+  DatasetEvaluationRuleAction.source,
+  JavaDatasetEvaluationSource,
+  "java"
+);
+@@alternateType(
+  TraceEvaluationRuleAction.source,
+  JavaTraceEvaluationSource,
+  "java"
+);
+@@alternateType(
+  UserConversationSimulationEvalRunDataSource.source,
+  JavaUserConversationSimulationSource,
+  "java"
+);
+@@alternateType(
+  UserConversationSimulationPreviewEvalRunDataSource.source,
+  JavaUserConversationSimulationSource,
+  "java"
+);
+// Keep the handwritten union variants reachable after replacing the source properties.
+@@usage(CsvEvalRunDataSource, Usage.input | Usage.output, "java");
+@@access(CsvEvalRunDataSource, Access.public, "java");
+@@usage(TargetCompletionEvalRunDataSource, Usage.input | Usage.output, "java");
+@@access(TargetCompletionEvalRunDataSource, Access.public, "java");
+@@usage(
+  UserConversationSimulationEvalRunDataSource,
+  Usage.input | Usage.output,
+  "java"
+);
+@@access(UserConversationSimulationEvalRunDataSource, Access.public, "java");
+@@usage(
+  UserConversationSimulationPreviewEvalRunDataSource,
+  Usage.input | Usage.output,
+  "java"
+);
+@@access(
+  UserConversationSimulationPreviewEvalRunDataSource,
+  Access.public,
+  "java"
+);
+@@usage(TracesEvalRunDataSource, Usage.input | Usage.output, "java");
+@@access(TracesEvalRunDataSource, Access.public, "java");
+@@usage(TracesPreviewEvalRunDataSource, Usage.input | Usage.output, "java");
+@@access(TracesPreviewEvalRunDataSource, Access.public, "java");
+@@usage(TraceSourceEvalRunDataSource, Usage.input | Usage.output, "java");
+@@access(TraceSourceEvalRunDataSource, Access.public, "java");
+@@usage(
+  TraceSourcePreviewEvalRunDataSource,
+  Usage.input | Usage.output,
+  "java"
+);
+@@access(TraceSourcePreviewEvalRunDataSource, Access.public, "java");
+@@usage(
+  UserConversationSimulationInlineTestCasesSource,
+  Usage.input | Usage.output,
+  "java"
+);
+@@access(
+  UserConversationSimulationInlineTestCasesSource,
+  Access.public,
+  "java"
+);
+
+@@alternateType(
+  OpenAI.CreateEvalJsonlRunDataSource,
+  {
+    identity: "com.openai.models.evals.runs.CreateEvalJsonlRunDataSource",
+  },
+  "java"
+);
+
+// Keep the unused input-message and response-format discriminator hierarchies opaque.
+@alternateType(
+  {
+    identity: "com.openai.models.evals.runs.CreateEvalCompletionsRunDataSource",
+  },
+  "java"
+)
+model OpenAICompletionsRunDataSource {}
+
+@alternateType(
+  {
+    identity: "com.openai.models.evals.runs.CreateEvalJsonlRunDataSource.Source",
+  },
+  "java"
+)
+model OpenAIJsonlRunDataSourceSource {}
+
+@@alternateType(
+  TargetCompletionEvalRunDataSource.source,
+  OpenAIJsonlRunDataSourceSource,
+  "java"
+);
+@@alternateType(
+  ResponseRetrievalItemGenerationParams.source,
+  OpenAIJsonlRunDataSourceSource,
+  "java"
+);
+
+@@alternateType(
+  OpenAI.CreateEvalCompletionsRunDataSource,
+  OpenAICompletionsRunDataSource,
+  "java"
+);
+
+@@alternateType(
+  OpenAI.EvalJsonlFileContentSource,
+  {
+    identity: "com.openai.models.evals.runs.CreateEvalJsonlRunDataSource.Source.FileContent",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.EvalJsonlFileIdSource,
+  {
+    identity: "com.openai.models.evals.runs.CreateEvalJsonlRunDataSource.Source.FileId",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.CreateEvalCompletionsRunDataSourceInputMessagesItemReference,
+  {
+    identity: "com.openai.models.evals.runs.CreateEvalCompletionsRunDataSource.InputMessages.ItemReference",
+  },
+  "java"
+);
+
+// AzureAIModelTarget still uses the Projects sampling parameters independently.
+@alternateType(
+  {
+    identity: "com.azure.ai.agents.models.EvaluationModelConfiguration",
+  },
+  "java"
+)
+model AgentsEvaluationModelConfiguration {}
+
+@@alternateType(
+  EvaluationModelConfiguration,
+  AgentsEvaluationModelConfiguration,
+  "java"
+);
+
+@@alternateType(
+  UserConversationSimulationAudioEffectsConfiguration,
+  {
+    identity: "com.azure.ai.agents.models.UserConversationSimulationAudioEffectsConfiguration",
+  },
+  "java"
+);
+@@alternateType(
+  UserConversationSimulationUserBehaviorConfiguration,
+  {
+    identity: "com.azure.ai.agents.models.UserConversationSimulationUserBehaviorConfiguration",
+  },
+  "java"
+);
+
+@@alternateType(
+  UserConversationSimulationTestCase,
+  {
+    identity: "com.azure.ai.agents.models.UserConversationSimulationTestCase",
+  },
+  "java"
+);
 
 // OpenAI de-dup: suppress ComparisonFilter & CompoundFilter (and their anonymous
 // enum types FileSearchToolFiltersType / FileSearchToolFiltersType1) in favour of
@@ -368,6 +724,8 @@ union GrammarSyntaxExpandable {
 model TimeZoneType {}
 
 @@alternateType(RecurrenceTrigger.timeZone, TimeZoneType, "java");
+@@alternateType(CronTrigger.timeZone, TimeZoneType, "java");
+@@alternateType(OneTimeTrigger.timeZone, TimeZoneType, "java");
 
 @@alternateType(RoutineRunStatus, string, "java");
 
@@ -383,3 +741,19 @@ model TimeZoneType {}
 @@clientLocation(EvaluatorGenerationJobs.list, Evaluators);
 @@clientLocation(EvaluatorGenerationJobs.cancel, Evaluators);
 @@clientLocation(EvaluatorGenerationJobs.delete, Evaluators);
+
+// Preserve the existing Java paging overloads that accept an initial continuation token.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the GA Java paging API."
+@@clientOption(
+  PageAfterQueryParameter.after,
+  "includeContinuationTokenParameter",
+  true,
+  "java"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve the GA Java paging API."
+@@clientOption(
+  AgentInsightsPageQueryParameters.after,
+  "includeContinuationTokenParameter",
+  true,
+  "java"
+);
