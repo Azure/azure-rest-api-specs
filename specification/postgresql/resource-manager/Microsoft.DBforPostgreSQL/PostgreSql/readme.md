@@ -6,6 +6,31 @@ This is the AutoRest configuration file for Sql.
 
 ---
 
+## TypeSpec source organization
+
+- `main.tsp` defines the service and API versions and imports the entity files.
+- Each entity file contains its models, supporting types, and operations. For example,
+  `Server.tsp`, `Migration.tsp`, and `MaintenanceEvent.tsp` describe those entities.
+- `Operations.tsp` defines the supported-operation listing and its metadata models.
+- `shared-models.tsp` contains shared types and the location parameter used by provider operations.
+- `client.tsp` and `back-compatible.tsp` retain SDK customizations and compatibility definitions.
+
+File names organize the source; they do not determine operation group names.
+Existing interfaces and client customizations are preserved for compatibility.
+TypeSpec interfaces cannot be split across declarations, so feature actions that
+belong to `Servers` remain in `Server.tsp`, with cross-references to their feature files:
+
+| Feature file | Operations in that file | Related operations in `Server.tsp` |
+| --- | --- | --- |
+| [Capability.tsp](Capability.tsp) | `CapabilitiesByLocationOperationGroup.list` | `Servers.list` (server capabilities) |
+| [CapturedLog.tsp](CapturedLog.tsp) | Models only | `Servers.listByServer` (captured logs) |
+| [BackupsLongTermRetentionOperation.tsp](BackupsLongTermRetentionOperation.tsp) | `BackupsLongTermRetentionOperations` | `Servers.checkPrerequisites`, `Servers.start` |
+| [Migration.tsp](Migration.tsp) | `Migrations` | `Servers.checkNameAvailability` |
+| [MajorVersionUpgradePrecheck.tsp](MajorVersionUpgradePrecheck.tsp) | `MajorVersionUpgradePrecheck` | `Servers.startMajorVersionUpgradePrecheck` |
+
+`TuningOptions.tsp` contains the tuning resource, its operations, and all object
+recommendation models returned by `TuningOptionsOperationGroup.listRecommendations`.
+
 ## Getting Started
 
 To build the SDK for PostgreSQL, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:

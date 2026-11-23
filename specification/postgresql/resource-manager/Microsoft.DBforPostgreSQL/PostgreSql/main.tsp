@@ -11,7 +11,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./models.tsp";
+import "./shared-models.tsp";
 import "./back-compatible.tsp";
 import "./AdministratorMicrosoftEntra.tsp";
 import "./AdvancedThreatProtectionSettingsModel.tsp";
@@ -26,7 +26,16 @@ import "./PrivateLinkResource.tsp";
 import "./Server.tsp";
 import "./TuningOptions.tsp";
 import "./VirtualEndpoint.tsp";
-import "./routes.tsp";
+import "./Capability.tsp";
+import "./CapturedLog.tsp";
+import "./DbAgent.tsp";
+import "./MaintenanceEvent.tsp";
+import "./MajorVersionUpgradePrecheck.tsp";
+import "./NameAvailability.tsp";
+import "./Operations.tsp";
+import "./PrivateDnsZoneSuffix.tsp";
+import "./QuotaUsage.tsp";
+import "./VirtualNetworkSubnetUsage.tsp";
 import "./client.tsp";
 
 using TypeSpec.Rest;
@@ -64,16 +73,3 @@ enum Versions {
   @doc("The 2026-10-01 API version.")
   v2026_10_01: "2026-10-01",
 }
-
-/**
- * This is the interface that implements the standard Azure Resource Manager operation that returns
- * all supported RP operations. You should have exactly one declaration for each
- * Azure Resource Manager service. It implements
- *   GET "/providers/Microsoft.ContosoProviderHub/operations"
- */
-interface Operations
-  extends Azure.ResourceManager.Legacy.Operations<
-      ArmResponse<OperationList>,
-      ErrorResponse
-    > {}
-@@doc(Operations.list, "Lists all available REST API operations.");

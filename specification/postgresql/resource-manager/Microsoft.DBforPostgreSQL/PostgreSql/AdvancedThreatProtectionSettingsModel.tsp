@@ -1,16 +1,20 @@
+import "@typespec/rest";
+import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
-import "@typespec/rest";
-import "./models.tsp";
 import "./Server.tsp";
 
 using TypeSpec.Rest;
-using Azure.ResourceManager;
 using TypeSpec.Http;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
+using Azure.Core;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.DBforPostgreSQL;
+
 /**
  * Advanced threat protection settings of the server.
  */
@@ -58,11 +62,56 @@ interface AdvancedThreatProtectionSettingsModels {
   AdvancedThreatProtectionSettingsModel.name,
   "Name of the advanced threat protection settings."
 );
+
 @@doc(
   AdvancedThreatProtectionSettingsModel.properties,
   "Advanced threat protection properties."
 );
+
 @@doc(
   AdvancedThreatProtectionSettingsModels.createOrUpdate::parameters.resource,
   "The Advanced Threat Protection state for the server."
 );
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+union ThreatProtectionName {
+  string,
+
+  /** Default advanced threat protection settings. */
+  Default: "Default",
+}
+
+/**
+ * Specifies the state of the advanced threat protection, whether it is enabled, disabled, or a state has not been applied yet on the server.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum ThreatProtectionState {
+  Enabled,
+  Disabled,
+}
+
+/**
+ * List of advanced threat protection settings for a server.
+ */
+model AdvancedThreatProtectionSettingsList
+  is Azure.Core.Page<AdvancedThreatProtectionSettingsModel>;
+
+/**
+ * Properties of advanced threat protection state for a server.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model AdvancedThreatProtectionSettingsProperties {
+  /**
+   * Specifies the state of the advanced threat protection, whether it is enabled, disabled, or a state has not been applied yet on the server.
+   */
+  state: ThreatProtectionState;
+
+  /**
+   * Specifies the creation time (UTC) of the policy.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  creationTime?: utcDateTime;
+}
+
+@@visibility(AdvancedThreatProtectionSettingsList.value, Lifecycle.Read);

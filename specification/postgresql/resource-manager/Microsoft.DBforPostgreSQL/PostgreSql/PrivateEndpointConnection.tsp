@@ -1,21 +1,26 @@
+import "@typespec/rest";
+import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
-import "@typespec/rest";
-import "./models.tsp";
 import "./Server.tsp";
 
 using TypeSpec.Rest;
-using Azure.ResourceManager;
 using TypeSpec.Http;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
+using Azure.Core;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager.Legacy;
 
 namespace Microsoft.DBforPostgreSQL;
+
 /**
  * The private endpoint connection resource.
  */
 model PrivateEndpointConnection is PrivateEndpointConnectionResource;
+
 alias PrivateEndpointOperations = Azure.ResourceManager.PrivateEndpoints<PrivateEndpointConnection>;
 
 @armResourceOperations
@@ -58,7 +63,16 @@ interface PrivateEndpointConnections {
 }
 
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
+
 @@doc(
   PrivateEndpointConnections.update::parameters.resource,
   "Parameters required to update a private endpoint connection."
 );
+
+/**
+ * List of private endpoint connections.
+ */
+model PrivateEndpointConnectionList
+  is Azure.Core.Page<PrivateEndpointConnection>;
+
+@@visibility(PrivateEndpointConnectionList.value, Lifecycle.Read);

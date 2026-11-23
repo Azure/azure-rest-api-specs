@@ -1,17 +1,20 @@
+import "@typespec/rest";
+import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
-import "@typespec/rest";
-import "./models.tsp";
 import "./Server.tsp";
 
 using TypeSpec.Rest;
-using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 using Azure.Core;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.DBforPostgreSQL;
+
 /**
  * Represents a database.
  */
@@ -64,13 +67,40 @@ interface Databases {
 }
 
 @@maxLength(Database.name, 63);
+
 @@minLength(Database.name, 1);
+
 @@doc(
   Database.name,
   "Name of the database (case-sensitive). Exact database names can be retrieved by getting the list of all existing databases in a server."
 );
+
 @@doc(Database.properties, "Properties of a database.");
+
 @@doc(
   Databases.create::parameters.resource,
   "Parameters required to create a new database."
 );
+
+/**
+ * Properties of a database.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model DatabaseProperties {
+  /**
+   * Character set of the database.
+   */
+  @pattern("^[a-zA-Z]+\\w*$")
+  charset?: string;
+
+  /**
+   * Collation of the database.
+   */
+  @pattern("^[a-zA-Z\\-]+([. ]|\\w)*$")
+  collation?: string;
+}
+
+/**
+ * List of all databases in a server.
+ */
+model DatabaseList is Azure.Core.Page<Database>;
