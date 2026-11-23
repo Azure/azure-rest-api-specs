@@ -8211,6 +8211,53 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/getSshTrustAnchor": {
+      "post": {
+        "operationId": "EdgeMachines_GetSshTrustAnchor",
+        "tags": [
+          "EdgeMachines"
+        ],
+        "description": "Retrieve the SSH trust anchor public keys for an edge machine.\nHTTP 200 describes the approved eventual success contract. Key retrieval is\nnot implemented yet; the current implementation returns HTTP 501 without a body.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineSshTrustAnchorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve SSH trust anchor public keys using getSshTrustAnchor (intended POST success contract; currently not implemented)": {
+            "$ref": "./examples/EdgeMachines_GetSshTrustAnchor.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/gpus": {
       "get": {
         "operationId": "EdgeMachineGpus_List",
@@ -8768,6 +8815,118 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/issueSshCertificateForAdmin": {
+      "post": {
+        "operationId": "EdgeMachines_IssueSshCertificateForAdmin",
+        "tags": [
+          "EdgeMachines"
+        ],
+        "description": "Request an SSH authorization proof with the Administrator role selected by the endpoint.\nHTTP 200 describes the intended production contract. The current implementation\nvalidates required public-key and duration fields, then returns HTTP 501 without a body.\nCertificate issuance and role-specific authorization are not implemented yet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineSshCertificateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineSshCertificateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Administrator SSH action (intended success; issuance currently not implemented)": {
+            "$ref": "./examples/EdgeMachines_IssueSshCertificateForAdmin.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/issueSshCertificateForContributor": {
+      "post": {
+        "operationId": "EdgeMachines_IssueSshCertificateForContributor",
+        "tags": [
+          "EdgeMachines"
+        ],
+        "description": "Request an SSH authorization proof with the Contributor role selected by the endpoint.\nHTTP 200 describes the intended production contract. The current implementation\nvalidates required public-key and duration fields, then returns HTTP 501 without a body.\nCertificate issuance and role-specific authorization are not implemented yet.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineSshCertificateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineSshCertificateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Contributor SSH action (intended success; issuance currently not implemented)": {
+            "$ref": "./examples/EdgeMachines_IssueSshCertificateForContributor.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/jobs": {
@@ -18062,6 +18221,103 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "EdgeMachineSshCertificateRequest": {
+      "type": "object",
+      "description": "Shared request for the role-specific SSH actions. The endpoint selects the role.\nThe current placeholder implementation validates only the required nonblank public\nkey and the duration range; username derivation and validity defaults describe\nintended issuance behavior and are not implemented yet.",
+      "properties": {
+        "userPublicKey": {
+          "type": "string",
+          "description": "Required nonblank SSH public key in OpenSSH format."
+        },
+        "username": {
+          "type": "string",
+          "description": "Requested SSH username. Intended to be derived from the public-key comment\nwhen omitted; derivation is not implemented in the placeholder endpoints."
+        },
+        "durationInHours": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Requested validity duration in hours.",
+          "minimum": 1,
+          "maximum": 8
+        },
+        "validFrom": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Requested validity start. Intended to default to current UTC time when omitted;\nthis default is not implemented in the placeholder endpoints."
+        },
+        "validTo": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Requested expiry. Intended to be derived from durationInHours when omitted;\nthis default is not implemented in the placeholder endpoints."
+        }
+      },
+      "required": [
+        "userPublicKey",
+        "durationInHours"
+      ]
+    },
+    "EdgeMachineSshCertificateResponse": {
+      "type": "object",
+      "description": "Intended success response for the role-specific SSH certificate actions.\nIssuance is not implemented; the current endpoints return HTTP 501 without a body.",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "SSH username authorized by the signatures.",
+          "readOnly": true
+        },
+        "role": {
+          "type": "string",
+          "description": "SSH role selected by the certificate action.",
+          "readOnly": true
+        },
+        "validFrom": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start of the issued authorization validity period.",
+          "readOnly": true
+        },
+        "validTo": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiry of the issued authorization validity period.",
+          "readOnly": true
+        },
+        "userSshJsonWebSignature": {
+          "type": "array",
+          "format": "password",
+          "description": "User SSH authorization signatures in JSON Web Signature format.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "username",
+        "role",
+        "validFrom",
+        "validTo",
+        "userSshJsonWebSignature"
+      ]
+    },
+    "EdgeMachineSshTrustAnchorResponse": {
+      "type": "object",
+      "description": "SSH trust anchor public keys for an edge machine.",
+      "properties": {
+        "publicKeys": {
+          "type": "array",
+          "description": "SSH public keys in OpenSSH public-key format. Multiple key algorithms are supported.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "publicKeys"
       ]
     },
     "EdgeMachineState": {

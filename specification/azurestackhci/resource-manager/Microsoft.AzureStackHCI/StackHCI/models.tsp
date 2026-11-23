@@ -7405,6 +7405,85 @@ model ProvisioningDetails {
   userDetails?: UserDetails[];
 }
 
+////////////////////////////////////////////////////////////////
+//////////////// Edge Machine SSH Certificate Models ////////////
+////////////////////////////////////////////////////////////////
+
+/**
+ * Shared request for the role-specific SSH actions. The endpoint selects the role.
+ * The current placeholder implementation validates only the required nonblank public
+ * key and the duration range; username derivation and validity defaults describe
+ * intended issuance behavior and are not implemented yet.
+ */
+@added(Versions.v2027_01_15_preview)
+model EdgeMachineSshCertificateRequest {
+  /** Required nonblank SSH public key in OpenSSH format. */
+  userPublicKey: string;
+
+  /**
+   * Requested SSH username. Intended to be derived from the public-key comment
+   * when omitted; derivation is not implemented in the placeholder endpoints.
+   */
+  username?: string;
+
+  /** Requested validity duration in hours. */
+  @minValue(1)
+  @maxValue(8)
+  durationInHours: int32;
+
+  /**
+   * Requested validity start. Intended to default to current UTC time when omitted;
+   * this default is not implemented in the placeholder endpoints.
+   */
+  validFrom?: utcDateTime;
+
+  /**
+   * Requested expiry. Intended to be derived from durationInHours when omitted;
+   * this default is not implemented in the placeholder endpoints.
+   */
+  validTo?: utcDateTime;
+}
+
+/**
+ * Intended success response for the role-specific SSH certificate actions.
+ * Issuance is not implemented; the current endpoints return HTTP 501 without a body.
+ */
+@added(Versions.v2027_01_15_preview)
+model EdgeMachineSshCertificateResponse {
+  /** SSH username authorized by the signatures. */
+  @visibility(Lifecycle.Read)
+  username: string;
+
+  /** SSH role selected by the certificate action. */
+  @visibility(Lifecycle.Read)
+  role: string;
+
+  /** Start of the issued authorization validity period. */
+  @visibility(Lifecycle.Read)
+  validFrom: utcDateTime;
+
+  /** Expiry of the issued authorization validity period. */
+  @visibility(Lifecycle.Read)
+  validTo: utcDateTime;
+
+  /** User SSH authorization signatures in JSON Web Signature format. */
+  @secret
+  @visibility(Lifecycle.Read)
+  userSshJsonWebSignature: string[];
+}
+
+////////////////////////////////////////////////////////////////
+//////////// Edge Machine SSH Trust Anchor Models ///////////////
+////////////////////////////////////////////////////////////////
+
+/** SSH trust anchor public keys for an edge machine. */
+@added(Versions.v2027_01_15_preview)
+model EdgeMachineSshTrustAnchorResponse {
+  /** SSH public keys in OpenSSH public-key format. Multiple key algorithms are supported. */
+  @visibility(Lifecycle.Read)
+  publicKeys: string[];
+}
+
 /**
  * Details for ownership voucher.
  */
