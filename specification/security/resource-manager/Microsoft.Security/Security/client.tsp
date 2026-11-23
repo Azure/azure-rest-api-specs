@@ -2331,7 +2331,7 @@ op alertsListResourceGroupLevelByRegionCustomized(
 @@override(
   AlertOperationGroup.listResourceGroupLevelByRegion,
   alertsListResourceGroupLevelByRegionCustomized,
-  "python,go,java"
+  "python,go,java,javascript"
 );
 
 @@alternateType(

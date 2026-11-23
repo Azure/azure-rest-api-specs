@@ -57,8 +57,12 @@ using Common;
   "TopologyResources",
   "csharp"
 );
-@@clientLocation(TopologyResources.get, "Topology", "javascript");
-@@clientLocation(TopologyResources.listByHomeRegion, "Topology", "javascript");
+@@clientLocation(TopologyResources.get, "Topology", "javascript,go");
+@@clientLocation(
+  TopologyResources.listByHomeRegion,
+  "Topology",
+  "javascript,go"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(TopologyResource.properties);
 
