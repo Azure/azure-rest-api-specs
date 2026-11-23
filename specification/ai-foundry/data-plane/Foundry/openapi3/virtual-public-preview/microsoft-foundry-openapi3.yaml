@@ -106462,10 +106462,10 @@ components:
           type: string
           enum:
             - auto
-          description: The multiplexing strategy. The only supported value is `auto`.
+          description: The session sharing strategy. The only supported value is `auto`.
       unevaluatedProperties:
         not: {}
-      description: A service-managed Hosted Session multiplexing policy. Currently only type `auto` is supported; maximum concurrent calls are not configurable through this object.
+      description: A service-managed Hosted Session sharing policy. Currently only type `auto` is supported; maximum concurrent calls are not configurable through this object.
     VoiceAgentSessionUpdate:
       $ref: '#/components/schemas/VoiceAgentSessionUpdateConfig'
       description: The session configuration accepted by a voice-agent session update event.
@@ -107410,13 +107410,13 @@ components:
           anyOf:
             - $ref: '#/components/schemas/VoiceAgentSessionPrewarmingPolicy'
             - type: 'null'
-          description: The Hosted Session prewarming policy. Omission or null disables prewarming; an object with type `auto` permits service-managed prewarmed sessions using existing service settings. This does not enable multiplexing, Agent startup model warmup, or language-model inference warmup. This versioned definition setting cannot be changed through connection-time session overrides or session.update; saving the definition does not create sessions.
+          description: The Hosted Session prewarming policy. Omission or null disables prewarming; an object with type `auto` permits service-managed prewarmed sessions using existing service settings. This does not enable session sharing, Agent startup model warmup, or language-model inference warmup. This versioned definition setting cannot be changed through connection-time session overrides or session.update; saving the definition does not create sessions.
           default: null
         session_sharing:
           anyOf:
             - $ref: '#/components/schemas/VoiceAgentSessionSharingPolicy'
             - type: 'null'
-          description: The Hosted Session multiplexing policy. Omission or null disables multiplexing; an object with type `auto` permits independent calls to share a compatible session using existing service and authorized target settings. This policy is independent of session_prewarming. The application must support concurrent connections and isolate state per call. This versioned definition setting cannot be changed through connection-time session overrides or session.update.
+          description: The Hosted Session sharing policy. Omission or null disables session sharing; an object with type `auto` permits independent calls to share a compatible session using existing service and authorized target settings. This policy is independent of session_prewarming. The application must support concurrent connections and isolate state per call. This versioned definition setting cannot be changed through connection-time session overrides or session.update.
           default: null
       unevaluatedProperties:
         not: {}

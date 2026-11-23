@@ -4,7 +4,7 @@
 objects under `conversation_engine.type: hosted_agent`:
 
 - `session_prewarming` permits eligible calls to use service-managed prewarmed Hosted
-  Sessions. It does not enable multiplexing, Agent startup model warmup, or
+  Sessions. It does not enable session sharing, Agent startup model warmup, or
   language-model inference warmup.
 - `session_sharing` permits independent calls to share a compatible Hosted
   Session. The application must support concurrent connections and isolate mutable

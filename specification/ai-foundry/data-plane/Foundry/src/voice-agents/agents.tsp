@@ -617,10 +617,10 @@ model VoiceHostedAgentConversationEngine extends VoiceConversationEngine {
   @maxLength(25)
   version?: string;
 
-  @doc("The Hosted Session prewarming policy. Omission or null disables prewarming; an object with type `auto` permits service-managed prewarmed sessions using existing service settings. This does not enable multiplexing, Agent startup model warmup, or language-model inference warmup. This versioned definition setting cannot be changed through connection-time session overrides or session.update; saving the definition does not create sessions.")
+  @doc("The Hosted Session prewarming policy. Omission or null disables prewarming; an object with type `auto` permits service-managed prewarmed sessions using existing service settings. This does not enable session sharing, Agent startup model warmup, or language-model inference warmup. This versioned definition setting cannot be changed through connection-time session overrides or session.update; saving the definition does not create sessions.")
   session_prewarming?: VoiceAgentSessionPrewarmingPolicy | null = null;
 
-  @doc("The Hosted Session multiplexing policy. Omission or null disables multiplexing; an object with type `auto` permits independent calls to share a compatible session using existing service and authorized target settings. This policy is independent of session_prewarming. The application must support concurrent connections and isolate state per call. This versioned definition setting cannot be changed through connection-time session overrides or session.update.")
+  @doc("The Hosted Session sharing policy. Omission or null disables session sharing; an object with type `auto` permits independent calls to share a compatible session using existing service and authorized target settings. This policy is independent of session_prewarming. The application must support concurrent connections and isolate state per call. This versioned definition setting cannot be changed through connection-time session overrides or session.update.")
   session_sharing?: VoiceAgentSessionSharingPolicy | null = null;
 }
 
@@ -632,11 +632,11 @@ model VoiceAgentSessionPrewarmingPolicy {
   type: "auto";
 }
 
-@doc("A service-managed Hosted Session multiplexing policy. Currently only type `auto` is supported; maximum concurrent calls are not configurable through this object.")
+@doc("A service-managed Hosted Session sharing policy. Currently only type `auto` is supported; maximum concurrent calls are not configurable through this object.")
 model VoiceAgentSessionSharingPolicy {
   ...Record<never>;
 
-  @doc("The multiplexing strategy. The only supported value is `auto`.")
+  @doc("The session sharing strategy. The only supported value is `auto`.")
   type: "auto";
 }
 
