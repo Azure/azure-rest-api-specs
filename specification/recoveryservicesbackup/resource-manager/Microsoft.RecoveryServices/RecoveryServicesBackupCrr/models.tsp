@@ -1218,24 +1218,38 @@ model NewErrorResponse {
   };
 }
 
+/** ARM Resource. */
+model Resource {
+  /** Resource Id represents the complete path to the resource. */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /** Resource name associated with the resource. */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /** Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/... */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /** Resource location. */
+  location?: string;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Faithful migration: the frozen stable/2023-01-15 action envelope defines tags as an open string dictionary."
+  tags?: Record<string>;
+
+  /** Optional ETag. */
+  eTag?: string;
+}
+
 /**
  * AAD properties response resource.
  */
-model AadPropertiesResource
-  is Azure.ResourceManager.ProxyResource<AadPropertiesModel> {
-  ...ResourceNameParameter<AadPropertiesResource, NamePattern = "">;
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: Azure.Core.azureLocation;
-
-  /**
-   * Optional ETag.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
-  eTag?: string;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Faithful migration: preserve the frozen stable/2023-01-15 allOf composition for this legacy action envelope without applying ARM resource semantics."
+model AadPropertiesResource extends Resource {
+  /** AAD properties. */
+  properties?: AadPropertiesModel;
 }
 
 @@doc(AadPropertiesResource.properties, "AADPropertiesResource properties");
@@ -1622,21 +1636,10 @@ model OperationStatusExtendedInfo {
 /**
  * Cross-region restore access token resource.
  */
-model CrrAccessTokenResource
-  is Azure.ResourceManager.ProxyResource<CrrAccessToken> {
-  ...ResourceNameParameter<CrrAccessTokenResource, NamePattern = "">;
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: Azure.Core.azureLocation;
-
-  /**
-   * Optional ETag.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
-  eTag?: string;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Faithful migration: preserve the frozen stable/2023-01-15 allOf composition for this legacy action envelope without applying ARM resource semantics."
+model CrrAccessTokenResource extends Resource {
+  /** Cross-region restore access token properties. */
+  properties?: CrrAccessToken;
 }
 
 @@doc(CrrAccessTokenResource.properties, "CrrAccessTokenResource properties");
@@ -3333,21 +3336,10 @@ model BmsrpQueryObject {
 /**
  * Request object for fetching CRR jobs.
  */
-model CrrJobRequestResource
-  is Azure.ResourceManager.ProxyResource<CrrJobRequest> {
-  ...ResourceNameParameter<CrrJobRequestResource, NamePattern = "">;
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: Azure.Core.azureLocation;
-
-  /**
-   * Optional ETag.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
-  eTag?: string;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Faithful migration: preserve the frozen stable/2023-01-15 allOf composition for this retained legacy SDK model without applying ARM resource semantics."
+model CrrJobRequestResource extends Resource {
+  /** CRR job request properties. */
+  properties?: CrrJobRequest;
 }
 
 @@doc(CrrJobRequestResource.properties, "CrrJobRequestResource properties");
@@ -3387,21 +3379,10 @@ model ClientScriptForConnect {
 /**
  * Cross-region restore request resource.
  */
-model CrossRegionRestoreRequestResource
-  is Azure.ResourceManager.ProxyResource<CrossRegionRestoreRequest> {
-  ...ResourceNameParameter<CrossRegionRestoreRequestResource, NamePattern = "">;
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  /** The geo-location where the resource lives */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: Azure.Core.azureLocation;
-
-  /**
-   * Optional ETag.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
-  eTag?: string;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Faithful migration: preserve the frozen stable/2023-01-15 allOf composition for this retained legacy SDK model without applying ARM resource semantics."
+model CrossRegionRestoreRequestResource extends Resource {
+  /** Cross-region restore request properties. */
+  properties?: CrossRegionRestoreRequest;
 }
 
 @@doc(
