@@ -222,6 +222,18 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
       await myFunction({ github, context, core });
 ```
 
+Workflow-specific engineering dependencies belong in a separate private workspace package, not
+`.github/package.json`. SDK breaking-change execution lives in
+`.github/workflows/sdk-breaking-change`; its processing jobs pass
+`additional-package: "@azure-tools/sdk-breaking-change-workflows"` to `install-deps-github-script`.
+Gates and publishers use the default minimal install and must not import execution modules.
+Keep artifact schemas separate from execution code so publishers do not load SDK tooling.
+
+Register isolated workflow packages in `pnpm-workspace.yaml` and their Vitest configs in the root
+test workspace. Production import checks must first import common sources with only the minimal
+install, then install and check each isolated package separately. The import helper accepts the
+source directories for the package being checked.
+
 ### Common Patterns
 
 - **GitHub API calls**: All GitHub API calls go through `github.rest.*` (Octokit)
