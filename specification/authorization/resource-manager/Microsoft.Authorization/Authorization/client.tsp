@@ -110,6 +110,16 @@ union RoleManagementScopeType {
 
 // Restore C# GA resource, model, and extensible-enum names.
 @@clientName(
+  RoleAssignmentScheduleRequest,
+  exact("RoleAssignmentScheduleRequest"),
+  "csharp"
+);
+@@clientName(
+  RoleEligibilityScheduleRequest,
+  exact("RoleEligibilityScheduleRequest"),
+  "csharp"
+);
+@@clientName(
   Microsoft.ProviderOperations.ProviderOperationsMetadata,
   "AuthorizationProviderOperationsMetadata",
   "csharp"
