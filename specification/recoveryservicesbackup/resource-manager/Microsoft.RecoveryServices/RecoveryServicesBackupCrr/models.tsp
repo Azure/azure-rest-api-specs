@@ -1219,6 +1219,10 @@ model NewErrorResponse {
 }
 
 /** ARM Resource. */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Faithful migration: the frozen stable/2023-01-15 shared Resource definition requires x-ms-azure-resource: true; the legacy custom resource decorator is the native brownfield mechanism for preserving that published metadata."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "Faithful migration: this shared compatibility base is not an addressable resource and therefore has no resource name key."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Faithful migration: this brownfield compatibility base preserves the frozen stable/2023-01-15 Resource definition and x-ms-azure-resource marker."
+@Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
 model Resource {
   /** Resource Id represents the complete path to the resource. */
   @visibility(Lifecycle.Read)
@@ -1247,6 +1251,8 @@ model Resource {
  * AAD properties response resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Faithful migration: preserve the frozen stable/2023-01-15 allOf composition for this legacy action envelope without applying ARM resource semantics."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "Faithful migration: this legacy action envelope is not independently addressable and therefore has no resource name key."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Faithful migration: this brownfield action envelope inherits the frozen shared Resource composition."
 model AadPropertiesResource extends Resource {
   /** AAD properties. */
   properties?: AadPropertiesModel;
@@ -1637,6 +1643,8 @@ model OperationStatusExtendedInfo {
  * Cross-region restore access token resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Faithful migration: preserve the frozen stable/2023-01-15 allOf composition for this legacy action envelope without applying ARM resource semantics."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "Faithful migration: this legacy action envelope is not independently addressable and therefore has no resource name key."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Faithful migration: this brownfield action envelope inherits the frozen shared Resource composition."
 model CrrAccessTokenResource extends Resource {
   /** Cross-region restore access token properties. */
   properties?: CrrAccessToken;
@@ -3337,6 +3345,8 @@ model BmsrpQueryObject {
  * Request object for fetching CRR jobs.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Faithful migration: preserve the frozen stable/2023-01-15 allOf composition for this retained legacy SDK model without applying ARM resource semantics."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "Faithful migration: this retained legacy compatibility model is not independently addressable and therefore has no resource name key."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Faithful migration: this brownfield compatibility model inherits the frozen shared Resource composition."
 model CrrJobRequestResource extends Resource {
   /** CRR job request properties. */
   properties?: CrrJobRequest;
@@ -3380,6 +3390,8 @@ model ClientScriptForConnect {
  * Cross-region restore request resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Faithful migration: preserve the frozen stable/2023-01-15 allOf composition for this retained legacy SDK model without applying ARM resource semantics."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "Faithful migration: this retained legacy compatibility model is not independently addressable and therefore has no resource name key."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Faithful migration: this brownfield compatibility model inherits the frozen shared Resource composition."
 model CrossRegionRestoreRequestResource extends Resource {
   /** Cross-region restore request properties. */
   properties?: CrossRegionRestoreRequest;

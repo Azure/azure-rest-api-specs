@@ -165,6 +165,7 @@ interface BackupCrrJobs {
       /**
        * skipToken Filter.
        */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Faithful migration: the frozen stable/2023-01-15 BackupCrrJobs POST contract exposes $skipToken as a query parameter; moving it into the body would break the published wire contract."
       @query("$skipToken")
       $skipToken?: string;
     },
