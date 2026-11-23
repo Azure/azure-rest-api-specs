@@ -172,6 +172,14 @@ model Capability extends CapabilityBase {
   supportedServerVersions?: ServerVersionCapability[];
 
   /**
+   * Supported major versions of PostgreSQL for Elastic Clusters, including their features and major version upgrade targets. This list is independent of supportedServerVersions. Location and standalone-server capabilities return deployment versions, or an empty list when Elastic Cluster provisioning is unavailable. For an existing Elastic Cluster, server capabilities retain its current version and include higher supported deployment versions when provisioning is available. Upgrade targets are evaluated independently and can be empty.
+   */
+  @added(Versions.v2027_01_01)
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  supportedElasticClustersVersions?: ServerVersionCapability[];
+
+  /**
    * Features supported.
    */
   @visibility(Lifecycle.Read)
