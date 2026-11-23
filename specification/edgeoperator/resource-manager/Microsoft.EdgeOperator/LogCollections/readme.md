@@ -51,14 +51,17 @@ input-file:
 
 ### Suppressions
 
+Use Swagger basenames in `from`: AutoRest matches suppressions against internal
+source URIs with percent-encoded directory separators before decoding them for diagnostics.
+
 ```yaml
 suppressions:
   - code: AllProxyResourcesShouldHaveDelete
-    from: preview/2026-06-01-preview/logCollections.json
+    from: logCollections.json
     where: $.definitions.LogCollection
     reason: Log collection jobs are service-created history records and cannot be deleted by callers.
 directive:
   - suppress: OperationsAPIImplementation
-    from: preview/2026-06-01-preview/logCollections.json
+    from: logCollections.json
     reason: The shared Microsoft.EdgeOperator Operations API is published by the sibling SystemReadiness project.
 ```
