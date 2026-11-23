@@ -125673,6 +125673,25 @@
         ],
         "description": "Additional fields that a voice-agent session may include in service outputs."
       },
+      "VoiceAgentSessionPrewarmingPolicy": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "auto"
+            ],
+            "description": "The prewarming strategy. The only supported value is `auto`."
+          }
+        },
+        "unevaluatedProperties": {
+          "not": {}
+        },
+        "description": "A service-managed Hosted Session prewarming policy. Currently only type `auto` is supported; pool size is not configurable through this object."
+      },
       "VoiceAgentSessionResponse": {
         "$ref": "#/components/schemas/VoiceAgentSessionResponseConfig",
         "description": "The effective session configuration returned in voice-agent session lifecycle events."
@@ -125807,6 +125826,25 @@
           }
         },
         "description": "The effective stable realtime session settings returned by the voice-agent service."
+      },
+      "VoiceAgentSessionSharingPolicy": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "auto"
+            ],
+            "description": "The session sharing strategy. The only supported value is `auto`."
+          }
+        },
+        "unevaluatedProperties": {
+          "not": {}
+        },
+        "description": "A service-managed Hosted Session sharing policy. Currently only type `auto` is supported; maximum concurrent calls are not configurable through this object."
       },
       "VoiceAgentSessionUpdate": {
         "$ref": "#/components/schemas/VoiceAgentSessionUpdateConfig",
@@ -127111,6 +127149,30 @@
             "maxLength": 25,
             "pattern": "^(?:[1-9][0-9]{0,18}|draft-[1-9][0-9]{0,18})$",
             "description": "The target agent version. Omit this property to select the latest version when the voice session starts. When supplied, use a positive integer or `draft-{positive-unix-timestamp}` whose numeric component fits in a signed 64-bit integer."
+          },
+          "session_prewarming": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentSessionPrewarmingPolicy"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The Hosted Session prewarming policy. Omission or null disables prewarming; an object with type `auto` permits service-managed prewarmed sessions using existing service settings. This does not enable session sharing, Agent startup model warmup, or language-model inference warmup. This versioned definition setting cannot be changed through connection-time session overrides or session.update; saving the definition does not create sessions.",
+            "default": null
+          },
+          "session_sharing": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentSessionSharingPolicy"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The Hosted Session sharing policy. Omission or null disables session sharing; an object with type `auto` permits independent calls to share a compatible session using existing service and authorized target settings. This policy is independent of session_prewarming. The application must support concurrent connections and isolate state per call. This versioned definition setting cannot be changed through connection-time session overrides or session.update.",
+            "default": null
           }
         },
         "unevaluatedProperties": {
