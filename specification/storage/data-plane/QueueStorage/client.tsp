@@ -423,23 +423,12 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
 @@clientName(Queue.deleteMessage, "Delete", "java");
 
-@@clientLocation(QueueClient.receiveMessages, QueueClient, "java");
-@@clientLocation(QueueClient.sendMessage, QueueClient, "java");
-@@clientLocation(QueueClient.peekMessages, QueueClient, "java");
-@@clientLocation(QueueClient.clear, QueueClient, "java");
-@@clientLocation(QueueClient.updateMessage, QueueClient, "java");
-@@clientLocation(QueueClient.deleteMessage, QueueClient, "java");
-
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Queue.getProperties, "responseHeadersAsModel", true, "java");
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Queue.updateMessage, "responseHeadersAsModel", true, "java");
 
-@@access(StorageErrorCode, Access.public, "java");
-@@usage(StorageErrorCode, Usage.output, "java");
 @@clientName(ListQueuesResponse, "ListQueuesSegmentResponse", "java");
-@@access(ListQueuesResponse, Access.public, "java");
-@@usage(ListQueuesResponse, Usage.output, "java");
 
 /** The error returned by the Queue service, including the fields the Java SDK surfaces on QueueStorageException. */
 @error
