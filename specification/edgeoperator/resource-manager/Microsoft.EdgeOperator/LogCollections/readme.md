@@ -60,6 +60,5 @@ suppressions:
 directive:
   - suppress: OperationsAPIImplementation
     from: preview/2026-06-01-preview/logCollections.json
-    where: $
     reason: The shared Microsoft.EdgeOperator Operations API is published by the sibling SystemReadiness project.
 ```
