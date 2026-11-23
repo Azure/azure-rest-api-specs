@@ -10,7 +10,7 @@ using Azure.ResourceManager;
 namespace Microsoft.IoTOperations;
 
 /** An MCP server connection resource. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 @parentResource(InstanceResource)
 model McpServerConnectionResource
   is ProxyResource<McpServerConnectionProperties> {
@@ -30,23 +30,23 @@ model McpServerConnectionResource
 }
 
 /** The configuration of an MCP server connection. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model McpServerConnectionProperties {
   /** The Kubernetes service that hosts the MCP server. */
   service: McpServerConnectionService;
 
   /** The name of the ConfigMap that contains the trusted certificate authority bundle. */
   @minLength(1)
-  @renamedFrom(Versions.`2026-11-01-preview`, "trustBundle")
+  @renamedFrom(Versions.`2026-12-01-preview`, "trustBundle")
   trustedCaCertificateConfigMapRef?: string;
 
   /** The MCP protocol version in YYYY-MM-DD format. */
   @pattern("^\\d{4}-\\d{2}-\\d{2}$")
-  @renamedFrom(Versions.`2026-11-01-preview`, "protocolVersion")
+  @renamedFrom(Versions.`2026-12-01-preview`, "protocolVersion")
   mcpProtocolVersion?: string;
 
   /** The authentication configuration used to connect to the MCP server. */
-  @added(Versions.`2026-11-01-preview`)
+  @added(Versions.`2026-12-01-preview`)
   authentication?: McpServerConnectionAuthentication;
 
   /** The authorization configuration for the MCP server connection. */
@@ -62,19 +62,19 @@ model McpServerConnectionProperties {
 }
 
 /** A reference to the Kubernetes service that hosts an MCP server. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model McpServerConnectionService {
   /** The name of the Kubernetes service. */
   @minLength(1)
   name: string;
 
   /** The namespace of the Kubernetes service. */
-  @added(Versions.`2026-11-01-preview`)
+  @added(Versions.`2026-12-01-preview`)
   @minLength(1)
   `namespace`?: string;
 
   /** The port of the Kubernetes service that hosts the MCP endpoint. */
-  @added(Versions.`2026-11-01-preview`)
+  @added(Versions.`2026-12-01-preview`)
   @minValue(1)
   @maxValue(65535)
   port?: int32;
@@ -84,7 +84,7 @@ model McpServerConnectionService {
 }
 
 /** The authentication configuration used to connect to the MCP server. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model McpServerConnectionAuthentication {
   /** The authentication method. Only ServiceAccountToken is supported. */
   method: ServiceAccountTokenMethod;
@@ -94,14 +94,14 @@ model McpServerConnectionAuthentication {
 }
 
 /** The Kubernetes service account token settings for an MCP server connection. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model McpServerConnectionServiceAccountTokenSettings {
   /** The audience for the service account token. */
   audience?: string;
 }
 
 /** The authorization configuration for an MCP server connection. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 @discriminator("mode")
 model McpServerConnectionAuthorization {
   /** The authorization mode. */
@@ -109,7 +109,7 @@ model McpServerConnectionAuthorization {
 }
 
 /** The supported authorization modes for an MCP server connection. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 union McpServerConnectionAuthorizationMode {
   string,
 
@@ -121,7 +121,7 @@ union McpServerConnectionAuthorizationMode {
 }
 
 /** Policy-based authorization for an MCP server connection. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model McpServerConnectionPolicyBasedAuthorization
   extends McpServerConnectionAuthorization {
   /** The authorization mode. */
@@ -132,7 +132,7 @@ model McpServerConnectionPolicyBasedAuthorization
 }
 
 /** Disabled authorization for an MCP server connection. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model McpServerConnectionDisabledAuthorization
   extends McpServerConnectionAuthorization {
   /** The authorization mode. */
@@ -140,7 +140,7 @@ model McpServerConnectionDisabledAuthorization
 }
 
 /** A reference to an MCP authorization policy in the same Kubernetes namespace. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model McpAuthorizationPolicyReference {
   /** The name of the MCP authorization policy. */
   @minLength(1)
@@ -148,7 +148,7 @@ model McpAuthorizationPolicyReference {
 }
 
 /** The runtime status of an MCP server connection. */
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 model McpServerConnectionStatus {
   /** The health state of the MCP server connection. */
   @visibility(Lifecycle.Read)

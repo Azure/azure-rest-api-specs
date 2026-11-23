@@ -37,6 +37,7 @@ function createMockGithubImpl() {
     rest: {
       actions: {
         createWorkflowDispatch: vi.fn(),
+        deleteArtifact: vi.fn(),
         getWorkflowRun: vi.fn(),
         downloadArtifact: vi.fn().mockResolvedValue({ data: new ArrayBuffer(0) }),
         listJobsForWorkflowRun: vi.fn().mockResolvedValue({ data: [] }),
@@ -119,6 +120,7 @@ export function createMockContext(): Context & ReturnType<typeof createMockConte
 // Partial mock of `context` parameter passed into github-script actions
 function createMockContextImpl() {
   return {
+    eventName: "check_run",
     payload: {},
     repo: {
       owner: "owner",

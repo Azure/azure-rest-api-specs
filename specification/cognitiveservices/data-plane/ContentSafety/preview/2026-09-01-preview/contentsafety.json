@@ -200,6 +200,9 @@
         "x-ms-examples": {
           "Get Content Provenance Detection Status": {
             "$ref": "./examples/ProvenanceGetOperationStatus.json"
+          },
+          "Get Content Provenance Detection Status with a Metadata result": {
+            "$ref": "./examples/ProvenanceGetOperationStatusMetadata.json"
           }
         }
       }
@@ -208,7 +211,7 @@
       "post": {
         "operationId": "ContentProvenanceOperations_Detect",
         "summary": "Start Content Provenance Detection",
-        "description": "Starts an asynchronous Content Provenance Detection operation that inspects the supplied media for Microsoft-issued C2PA and imperceptible watermark signals indicating the content was created or modified using AI.",
+        "description": "Starts an asynchronous Content Provenance Detection operation that inspects the supplied image, audio, video, or text content for signals indicating the content was created or modified using AI: Microsoft-issued C2PA credentials, imperceptible watermarks in media, and AI declarations in metadata.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -216,7 +219,7 @@
           {
             "name": "options",
             "in": "body",
-            "description": "Options describing the media to inspect using Content Provenance Detection.",
+            "description": "Options describing the content to inspect using Content Provenance Detection.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/DetectProvenanceOptions"
@@ -1305,19 +1308,19 @@
           {
             "name": "NoProvenanceDetected",
             "value": "NoProvenanceDetected",
-            "description": "No supported Microsoft-issued C2PA or imperceptible watermark signal was detected.\nThis doesn't necessarily mean the content wasn't AI-generated; it means no supported signal was found."
+            "description": "No supported Microsoft-issued C2PA, imperceptible watermark signal, or AI declaration in metadata was detected.\nThis doesn't necessarily mean the content wasn't AI-generated; it means no supported signal was found."
           },
           {
             "name": "ProvenanceDetected",
             "value": "ProvenanceDetected",
-            "description": "At least one supported Microsoft-issued C2PA or imperceptible watermark signal was detected."
+            "description": "At least one supported Microsoft-issued C2PA, imperceptible watermark signal, or AI declaration in metadata was detected."
           }
         ]
       }
     },
     "DetectProvenanceOptions": {
       "type": "object",
-      "description": "Input describing the media to inspect using Content Provenance Detection.",
+      "description": "Input describing the content to inspect using Content Provenance Detection.",
       "properties": {
         "content": {
           "$ref": "#/definitions/ProvenanceContent",
@@ -1376,7 +1379,7 @@
     },
     "DetectedProvenance": {
       "type": "object",
-      "description": "A Microsoft-issued provenance signal indicating the media was created or modified using AI.",
+      "description": "A provenance signal indicating the content was created or modified using AI.",
       "properties": {
         "type": {
           "$ref": "#/definitions/DetectedProvenanceType",
@@ -1402,7 +1405,8 @@
       "description": "Detected provenance record type.",
       "enum": [
         "C2PA",
-        "Watermark"
+        "Watermark",
+        "Metadata"
       ],
       "x-ms-enum": {
         "name": "DetectedProvenanceType",
@@ -1417,6 +1421,11 @@
             "name": "Watermark",
             "value": "Watermark",
             "description": "Provenance came from an imperceptible watermark."
+          },
+          {
+            "name": "Metadata",
+            "value": "Metadata",
+            "description": "Provenance came from an AI declaration in metadata."
           }
         ]
       }
@@ -1553,7 +1562,7 @@
         "uri": {
           "type": "string",
           "format": "uri",
-          "description": "Blob URI of the media to inspect. Media up to 100 MB is supported. Supported formats: image (JPEG, PNG, GIF, WebP), audio (MP3, WAV), and video (MP4)."
+          "description": "Blob URI of the content to inspect. Supported content: image, audio, video, and text."
         }
       },
       "required": [

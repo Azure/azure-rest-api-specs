@@ -1,0 +1,41 @@
+{
+  "title": "Links the messaging transfer flow to its remote messaging transfer flow",
+  "operationId": "MessagingTransferFlows_LinkRemoteFlow",
+  "parameters": {
+    "api-version": "2026-06-29-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testRG",
+    "messagingTransferFlowName": "testMessagingTransferFlow"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/messagingTransferFlows/testMessagingTransferFlow",
+        "name": "testMessagingTransferFlow",
+        "type": "Microsoft.AzureDataTransfer/messagingTransferFlows",
+        "location": "eastus",
+        "tags": {
+          "key1": "value1"
+        },
+        "properties": {
+          "pipeline": "testPipeline",
+          "flowId": "6f2c41a5-6e29-4c40-a033-b4de81d4a681",
+          "transferRole": "Source",
+          "remoteTransferFlowResourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/remoteRG/providers/Microsoft.AzureDataTransfer/messagingTransferFlows/remoteMessagingTransferFlow",
+          "status": "Enabled",
+          "flowProfileName": "flowProfileName",
+          "provisioningState": "Succeeded",
+          "messagingDataResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.ServiceBus/namespaces/testnamespace/queues/testqueue",
+          "messagingOptions": {
+            "billingTier": "Standard"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.AzureDataTransfer/locations/eastus/operationStatuses/00000000-0000-0000-0000-000000000001?api-version=2026-06-29-preview"
+      }
+    }
+  }
+}

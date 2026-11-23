@@ -7,11 +7,28 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
+// This is equivalent to `TrackedResource<NetworkFabricProperties, false>`, but declares the `properties`
+// envelope property explicitly so that it can be versioned. The client flattening of `properties`
+// differs between api-versions, and `@@Legacy.flattenProperty` cannot be versioned.
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Needed to define a resource whose properties envelope differs by api-version"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Equivalent to the standard TrackedResource template"
 @doc("The Network Fabric resource definition.")
-model NetworkFabric is Azure.ResourceManager.TrackedResource<
-  NetworkFabricProperties,
-  false
-> {
+@Azure.ResourceManager.Private.armResourceInternal(NetworkFabricProperties)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
+model NetworkFabric extends Azure.ResourceManager.Foundations.TrackedResource {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The properties envelope is versioned to change client flattening"
+  @doc("The NetworkFabric Properties")
+  @added(Versions.v2025_07_15)
+  properties: NetworkFabricProperties;
+
+  // In the preview versions before 2025-07-15, the properties property is not flattened in the
+  // swagger (x-ms-client-flatten), so it is modeled as a separate property with a different flattening.
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The properties envelope is versioned to change client flattening"
+  @doc("The NetworkFabric Properties")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "properties")
+  flattenedProperties: NetworkFabricProperties;
+
   @doc("Name of the Network Fabric.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -20,22 +37,11 @@ model NetworkFabric is Azure.ResourceManager.TrackedResource<
   @visibility(Lifecycle.Read)
   name: string;
 
-  /** The NetworkFabric Properties */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Preserves the existing preview API properties envelope before 2025-07-15; versioned renaming emits this field as properties."
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "properties")
-  propertiesDeprecated: NetworkFabricProperties;
-
-  ...ManagedServiceIdentityProperty;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
+  @added(Versions.v2024_06_15_preview)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
-
-@@added(NetworkFabric.properties, Versions.v2025_07_15);
-@@doc(NetworkFabric.properties, "The NetworkFabric Properties");
-@@added(NetworkFabric.identity, Versions.v2024_06_15_preview);
-@@doc(
-  NetworkFabric.identity,
-  "The managed service identities assigned to this resource."
-);
 
 @armResourceOperations
 interface NetworkFabrics {
@@ -444,7 +450,6 @@ interface NetworkFabrics {
 }
 
 @@doc(NetworkFabrics.create::parameters.resource, "Request payload.");
-@@doc(NetworkFabrics.runValidation::parameters.body, "Request payload.");
 @@doc(
   NetworkFabrics.update::parameters.properties,
   "Network Fabric properties to update."

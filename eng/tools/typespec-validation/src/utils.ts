@@ -73,7 +73,12 @@ export function getStructureVersion(relativePath: string): 1 | 2 {
 }
 
 export async function gitDiffTopSpecFolder(folder: string, logger: ILogger) {
-  const git = simpleGit(folder);
+  // Neither status nor diff should refresh cached stat data in the index.
+  const git = simpleGit({
+    baseDir: folder,
+    allowEnvironment: ["GIT_OPTIONAL_LOCKS"],
+    config: ["diff.autoRefreshIndex=false"],
+  }).env("GIT_OPTIONAL_LOCKS", "0");
   const topSpecFolder = resolve(folder).replace(/(^.*specification\/[^/]*)(.*)/, "$1");
   logger.debug(`Checking generated files in ${topSpecFolder}`);
   const gitStatus = await git.status(["--porcelain", "--untracked-files=all", "--", topSpecFolder]);

@@ -26,6 +26,7 @@ namespace Azure.AI.Projects;
 // Fix the xref.
 // --------------------------------------------------------------------------------
 @@clientNamespace(OpenAI, "Azure.AI.Projects", "csharp");
+@@clientNamespace(Azure.AI.ProjectsInternal, "Azure.AI.Projects", "csharp");
 @@clientNamespace(Azure.Core.Foundations, "Azure.AI.Projects", "csharp");
 
 // --------------------------------------------------------------------------------
@@ -152,6 +153,7 @@ namespace Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // Evaluators sub‐client
 // --------------------------------------------------------------------------------
+@@access(Evaluators.listDiagnostics, Access.public);
 @@clientName(Evaluators.getCredentials, "GetCredential");
 @@access(Evaluators.getCredentials, Access.internal);
 @@access(Evaluators.startPendingUpload, Access.internal);
@@ -558,6 +560,16 @@ namespace Azure.AI.Projects;
     identity: "Azure.AI.Extensions.OpenAI.WebIQPreviewTool",
     package: "Azure.AI.Extensions.OpenAI",
     minVersion: "3.0.0-alpha.20260908.3",
+  },
+  "csharp"
+);
+
+@@alternateType(
+  Azure.AI.Projects.ModelSamplingParams,
+  {
+    identity: "Azure.AI.Projects.Agents.ModelSamplingParams",
+    package: "Azure.AI.Projects.Agents",
+    minVersion: "3.0.0-beta.6",
   },
   "csharp"
 );
