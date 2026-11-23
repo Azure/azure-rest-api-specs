@@ -50,6 +50,7 @@ jobs:
       # PR conversation comments need pull-request write access, despite using the Issues API.
       pull-requests: write
       checks: write
+      actions: write # Delete stale SHA handoffs when rerunning this workflow.
     steps:
       # Never check out or execute PR code, including when refreshing a fork review.
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -58,6 +59,7 @@ jobs:
           ref: ${{ github.event.repository.default_branch }}
           sparse-checkout: .github
       - uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        id: readiness
         env:
           PR_NUMBER: ${{ needs.resolve.outputs.pr }}
         with:
@@ -65,3 +67,13 @@ jobs:
             const { checkContributorReadiness } =
               await import('${{ github.workspace }}/.github/workflows/src/contributor-readiness.ts');
             await checkContributorReadiness({ github, context, core }, Number(process.env.PR_NUMBER));
+      - if: ${{ always() && steps.readiness.outputs.issue_number }}
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: issue-number
+          value: ${{ steps.readiness.outputs.issue_number }}
+      - if: ${{ always() && steps.readiness.outputs.head_sha }}
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: head-sha
+          value: ${{ steps.readiness.outputs.head_sha }}

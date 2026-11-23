@@ -12013,6 +12013,103 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/egress": {
+      "get": {
+        "operationId": "WebApps_GetEgressConfig",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the stored egress configuration for an app.",
+        "description": "Gets the egress configuration stored for an app, including its connections.\nReturns an empty configuration when none is stored.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EgressConfig"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "WebApps_CreateOrUpdateEgressConfig",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Creates or replaces the egress configuration for an app.",
+        "description": "Creates or replaces the egress configuration for an app. The supplied\nconnections replace the stored ones in full, so connections omitted from\nthe request are deleted; omitting connections entirely, or supplying an\nempty object, deletes the configuration for the app. Returns 201 when no\nconfiguration was stored for the app beforehand and 200 otherwise, with the\nstored configuration in the response body.\n\nThe request is normalized and then structurally and semantically validated\nbefore persistence. Invalid configurations are rejected, including requests\nwhose referenced setting names appear to contain credentials, which return\n400 Bad Request.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EgressConfig"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EgressConfig' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EgressConfig"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/EgressConfig"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/logs": {
       "get": {
         "operationId": "WebApps_GetDiagnosticLogsConfiguration",
@@ -25597,6 +25694,117 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ConnectionStringDictionary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/egress": {
+      "get": {
+        "operationId": "WebApps_GetEgressConfigSlot",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the stored egress configuration for a deployment slot.",
+        "description": "Gets the egress configuration stored for a deployment slot, including its\nconnections. Returns an empty configuration when none is stored.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EgressConfig"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "WebApps_CreateOrUpdateEgressConfigSlot",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Creates or replaces the egress configuration for a deployment slot.",
+        "description": "Creates or replaces the egress configuration for a deployment slot. The\nsupplied connections replace the stored ones in full, so connections\nomitted from the request are deleted; omitting connections entirely, or\nsupplying an empty object, deletes the configuration for the slot. Returns\n201 when no configuration was stored for the slot beforehand and 200\notherwise, with the stored configuration in the response body.\n\nThe request is normalized and then structurally and semantically validated\nbefore persistence. Invalid configurations are rejected, including requests\nwhose referenced setting names appear to contain credentials, which return\n400 Bad Request.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EgressConfig"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EgressConfig' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EgressConfig"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/EgressConfig"
             }
           },
           "default": {
@@ -50215,6 +50423,62 @@
         "modelAsString": false
       }
     },
+    "EgressConfig": {
+      "type": "object",
+      "description": "Egress configuration for a web app. Declares which app settings\nand connection strings are virtualized so secrets never enter the application\nsandbox at runtime.\n\nThis is a proxy-only configuration singleton following the established pattern\nof other config sub-resources (authsettingsV2, azurestorageaccounts).",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EgressConfigProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EgressConfigProperties": {
+      "type": "object",
+      "description": "Properties of the egress configuration.",
+      "properties": {
+        "enabled": {
+          "$ref": "#/definitions/EgressEnabledState",
+          "description": "Whether virtual connections are enabled for this site."
+        },
+        "connections": {
+          "type": "object",
+          "description": "All virtualized connections. Key is a customer-chosen connection name\n(e.g., \"sql\", \"cache\", \"storage\") of at most 256 characters, which must not\nend in whitespace and must be unique within the site regardless of casing.\n\nThis collection is authoritative: a write replaces the stored connections in\nfull, and omitting it (or supplying an empty object) deletes the egress\nconfiguration for the site.",
+          "additionalProperties": {
+            "$ref": "#/definitions/VirtualConnection"
+          }
+        }
+      }
+    },
+    "EgressEnabledState": {
+      "type": "string",
+      "description": "Enabled state for virtual connections.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "EgressEnabledState",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Virtual connections are enabled — proxy intercepts configured settings."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Virtual connections are disabled — all settings pass through unchanged."
+          }
+        ]
+      }
+    },
     "EnabledConfig": {
       "type": "object",
       "description": "Enabled configuration.",
@@ -62767,6 +63031,203 @@
             "virtualPath"
           ]
         }
+      }
+    },
+    "VirtualConnection": {
+      "type": "object",
+      "description": "Declares one backend connection to virtualize. Maps one or more app settings\n(or connection strings) to a proxy configuration with a specific protocol\nand authentication strategy.",
+      "properties": {
+        "settings": {
+          "type": "object",
+          "description": "Settings that compose this connection. Key is the app setting\n(or connection string) name; value describes its role in the connection.\nSetting keys must be nonempty, must not end in whitespace, and must be\nunique within the connection regardless of casing.\n\nAll referenced setting names must already exist in the selected source\nwhen the egress configuration is written. Missing app settings, missing\nconnection strings, or ambiguous connection-string references cause\ncreate/update validation to fail.",
+          "additionalProperties": {
+            "$ref": "#/definitions/VirtualConnectionSetting"
+          }
+        },
+        "source": {
+          "type": "string",
+          "description": "Where to look up the settings. Default: \"AppSettings\". Each connection pulls\nfrom exactly one source — create separate connections if you need settings\nfrom both sources.",
+          "default": "AppSettings",
+          "enum": [
+            "AppSettings",
+            "ConnectionStrings"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualConnectionSettingSource",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "AppSettings",
+                "value": "AppSettings",
+                "description": "App Settings (config/appsettings)."
+              },
+              {
+                "name": "ConnectionStrings",
+                "value": "ConnectionStrings",
+                "description": "Connection Strings (config/connectionstrings)."
+              }
+            ]
+          }
+        },
+        "protocol": {
+          "$ref": "#/definitions/VirtualConnectionProtocol",
+          "description": "Protocol for the backend service."
+        },
+        "auth": {
+          "$ref": "#/definitions/VirtualConnectionAuthType",
+          "description": "Authentication strategy for the backend connection.\n\"Credential\" — proxy injects the original secret (from setting value).\n\"ManagedIdentity\" — proxy acquires a managed identity token for upstream auth."
+        },
+        "identityScope": {
+          "type": "string",
+          "description": "Scope used for managed identity token acquisition. Required when auth=ManagedIdentity;\nmust contain at least one non-whitespace character and not exceed 2,048 characters.\nThe caller must supply the scope; the platform does not infer it from the protocol\nor host. Create/update rejects a missing, blank, or overlength scope.\nOmit this property when auth=Credential; supplying it causes create/update to fail."
+        },
+        "identityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Per-connection override for the user-assigned managed identity resource ID.\nUsed when multiple connections target different backends that require\ndifferent identities.\n\nOnly relevant when auth=ManagedIdentity. If omitted, create/update uses\nthe app's system-assigned identity and rejects the request if that identity\ndoes not exist. If supplied, the referenced identity must already be\nassigned to the app; otherwise create/update validation fails.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        },
+        "credentialInjection": {
+          "$ref": "#/definitions/VirtualConnectionCredentialInjection",
+          "description": "How to inject a standalone credential into upstream HTTP requests.\nRequired when protocol=Http + auth=Credential and the credential is a\nseparate setting. Not needed for role=\"Value\" or auth=ManagedIdentity."
+        }
+      },
+      "required": [
+        "settings",
+        "protocol",
+        "auth"
+      ]
+    },
+    "VirtualConnectionAuthType": {
+      "type": "string",
+      "description": "Authentication strategy for upstream connections.",
+      "enum": [
+        "Credential",
+        "ManagedIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualConnectionAuthType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Credential",
+            "value": "Credential",
+            "description": "Proxy injects the original credential from the setting value."
+          },
+          {
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity",
+            "description": "Proxy acquires a Managed Identity token for upstream auth."
+          }
+        ]
+      }
+    },
+    "VirtualConnectionCredentialInjection": {
+      "type": "object",
+      "description": "Describes how the proxy injects a standalone credential setting into upstream\nHTTP requests. Only applies when protocol=Http and the credential is a\nseparate setting (not embedded in a value/URL).",
+      "properties": {
+        "header": {
+          "type": "string",
+          "description": "HTTP header name to inject the credential into (e.g., \"Authorization\", \"X-API-Key\")."
+        },
+        "format": {
+          "type": "string",
+          "description": "Format string for the header value. Use {value} as placeholder for the\ncredential. Default: raw credential value (no formatting).\nExamples: \"Bearer {value}\", \"Basic {value}\", \"ApiKey {value}\"."
+        }
+      },
+      "required": [
+        "header"
+      ]
+    },
+    "VirtualConnectionProtocol": {
+      "type": "string",
+      "description": "Protocol for the backend service.",
+      "enum": [
+        "Http",
+        "Tds",
+        "Redis",
+        "Postgres"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualConnectionProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Http",
+            "value": "Http",
+            "description": "HTTP/HTTPS (Azure Storage, Cosmos DB REST, Key Vault, custom APIs)."
+          },
+          {
+            "name": "Tds",
+            "value": "Tds",
+            "description": "TDS (Azure SQL, SQL Server)."
+          },
+          {
+            "name": "Redis",
+            "value": "Redis",
+            "description": "RESP (Azure Cache for Redis)."
+          },
+          {
+            "name": "Postgres",
+            "value": "Postgres",
+            "description": "PostgreSQL wire protocol (Azure Database for PostgreSQL)."
+          }
+        ]
+      }
+    },
+    "VirtualConnectionSetting": {
+      "type": "object",
+      "description": "Describes the role of a single app setting or connection string within a\nvirtual connection.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/VirtualConnectionSettingRole",
+          "description": "The role this setting plays in the connection. The platform uses this to\ndetermine runtime behavior:\n- \"Credential\" settings are masked (app never sees the real value).\n- \"Host\"/\"Value\" settings identify the intercept target.\n- \"Username\" settings feed protocol auth construction."
+        }
+      },
+      "required": [
+        "role"
+      ]
+    },
+    "VirtualConnectionSettingRole": {
+      "type": "string",
+      "description": "The role a setting plays in a connection.",
+      "enum": [
+        "Host",
+        "Credential",
+        "Username",
+        "Value"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualConnectionSettingRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Host",
+            "value": "Host",
+            "description": "Plain hostname or IP — identifies the intercept target."
+          },
+          {
+            "name": "Credential",
+            "value": "Credential",
+            "description": "Standalone secret (password, key, SAS token) — masked from app, used or replaced by proxy."
+          },
+          {
+            "name": "Username",
+            "value": "Username",
+            "description": "Standalone username — used for protocol auth construction (e.g., Redis ACL OID)."
+          },
+          {
+            "name": "Value",
+            "value": "Value",
+            "description": "Composite value (connection string, SAS URL, DSN, Redis URI) — proxy parses based on protocol."
+          }
+        ]
       }
     },
     "VirtualDirectory": {

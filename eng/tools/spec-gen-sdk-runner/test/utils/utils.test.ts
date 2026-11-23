@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, test, vi } from "vitest";
 import {
   findFilesRecursive,
   findReadmeFiles,
-  getArgumentValue,
+  getAllTypeSpecPaths,
   getRelativePathFromSpecification,
   mapToObject,
   normalizePath,
@@ -16,6 +16,18 @@ const currentFilePath = fileURLToPath(import.meta.url);
 const repoRoot = path.resolve(path.dirname(currentFilePath), "../fixtures/");
 
 describe("Utils", () => {
+  test("discovers repository-relative TypeSpec configs without invoking PowerShell", async () => {
+    const projects = (await getAllTypeSpecPaths(repoRoot)).map(normalizePath);
+
+    expect(projects).toContain(
+      "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
+    );
+    expect(projects).toContain(
+      "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/Service1/SubService1/tspconfig.yaml",
+    );
+    expect(projects.every((project) => project.startsWith("specification/"))).toBe(true);
+  });
+
   describe("findFilesRecursive", () => {
     test("finds all tspconfig.yaml files recursively", () => {
       const searchPath = path.normalize(`${repoRoot}/specification/contosowidgetmanager`);
@@ -68,14 +80,6 @@ describe("Utils", () => {
         `${repoRoot}/specification/contosowidgetmanager/Contoso.Management`,
       );
       expect(results).toEqual([]);
-    });
-  });
-
-  describe("getArgumentValue", () => {
-    test("return the argument value", () => {
-      const args = ["--batch-type", "all-specs", "--pr-number", "9527"];
-      const result = getArgumentValue(args, "--batch-type", "");
-      expect(result).toBe("all-specs");
     });
   });
 

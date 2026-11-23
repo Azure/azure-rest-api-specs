@@ -410,7 +410,7 @@
     },
     "ComputePlacementScoresResponse": {
       "type": "object",
-      "description": "ComputePlacementScores API response.",
+      "description": "The results of scoring placement for regular virtual machines.",
       "properties": {
         "desiredLocations": {
           "type": "array",
@@ -437,7 +437,7 @@
         },
         "placementScores": {
           "type": "array",
-          "description": "A placement score indicating the likelihood of successfully allocating the specified Spot VM(s), as well as the expected lifetimes of the Spot VM(s) after allocation.",
+          "description": "Placement scores indicating the likelihood of successfully allocating the specified regular virtual machines.",
           "items": {
             "$ref": "#/definitions/PlacementScore"
           }
@@ -446,7 +446,7 @@
     },
     "PlacementScore": {
       "type": "object",
-      "description": "The spot placement score for sku/region/zone combination.",
+      "description": "The placement score for a virtual machine SKU, region, and availability zone combination.",
       "properties": {
         "sku": {
           "type": "string",
@@ -462,7 +462,7 @@
         },
         "score": {
           "$ref": "#/definitions/PlacementScoreValue",
-          "description": "A placement score indicating the likelihood of successfully allocating the specified Spot VM(s), as well as the expected lifetimes of the Spot VM(s) after allocation."
+          "description": "A placement score indicating the likelihood of successfully allocating the specified virtual machines."
         },
         "placementPreference": {
           "type": "integer",

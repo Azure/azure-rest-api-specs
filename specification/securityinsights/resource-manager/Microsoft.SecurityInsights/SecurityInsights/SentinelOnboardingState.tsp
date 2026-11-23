@@ -126,7 +126,8 @@ interface SentinelOnboardingStates {
   create is SentinelOnboardingStatesOps.CreateOrUpdateSync<
     SentinelOnboardingState,
     ErrorType = CloudError,
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    OverrideResourceName = "ExternalResourceSentinelOnboardingState"
   >;
 
   /**

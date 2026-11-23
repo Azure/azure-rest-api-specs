@@ -4,38 +4,29 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./FirewallPolicy.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Network;
 /**
  * Contains all specific policy signatures overrides for the IDPS
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
-@Http.Private.includeInapplicableMetadataInPayload(false)
+@featureFile(Features.firewallPolicy)
 @singleton("default")
 @parentResource(FirewallPolicy)
-model SignaturesOverrides extends WritableResource {
-  /**
-   * Will contain the properties of the resource (the actual signature overrides)
-   */
-  properties?: SignaturesOverridesProperties;
-
+model SignaturesOverrides
+  is WritableResourceInstance<SignaturesOverridesProperties> {
   /**
    * The name of the resource.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-key-invalid-chars" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
   @visibility(Lifecycle.Read)
   @path
   @key("SignaturesOverridesName")
@@ -64,8 +55,7 @@ alias FirewallPolicyIdpsSignaturesOverridesListOps = Azure.ResourceManager.Legac
 >;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@featureFile(Features.firewallPolicy)
 @armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface FirewallPolicyIdpsSignaturesOverrides {
   /**

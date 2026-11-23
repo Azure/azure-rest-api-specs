@@ -4,28 +4,22 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
-using Common;
 
 namespace Microsoft.Network;
 /**
  * ExpressRouteCircuit resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ExpressRouteCircuit extends Common.Resource {
-  properties?: ExpressRouteCircuitPropertiesFormat;
-
+@featureFile(Features.expressRoute)
+model ExpressRouteCircuit
+  is ResourceInstance<ExpressRouteCircuitPropertiesFormat> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
   @visibility(Lifecycle.Read)
   @path
   @key("circuitName")
@@ -35,6 +29,7 @@ model ExpressRouteCircuit extends Common.Resource {
   /**
    * A unique read-only string that changes whenever the resource is updated.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The generic resource marker exposes this legacy resource envelope property."
   @visibility(Lifecycle.Read)
   etag?: string;
 
@@ -45,8 +40,7 @@ model ExpressRouteCircuit extends Common.Resource {
   sku?: ExpressRouteCircuitSku;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@featureFile(Features.expressRoute)
 @armResourceOperations(#{ omitTags: true })
 interface ExpressRouteCircuits {
   /**
@@ -99,7 +93,11 @@ interface ExpressRouteCircuits {
    * Gets all the express route circuits in a subscription.
    */
   @tag("ExpressRouteCircuits")
-  listAll is ArmListBySubscription<ExpressRouteCircuit, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    ExpressRouteCircuit,
+    OverrideResourceName = "ExpressRouteCircuit",
+    Error = CloudError
+  >;
 
   /**
    * Gets all the stats from an express route circuit in a resource group.

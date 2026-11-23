@@ -1,3 +1,24 @@
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to split as an independent service.
+  rules: [FolderStructure]
+  paths:
+    - .
+
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to split as an independent service.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.*
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-ts.*
+    - parameters.service-dir.default
+    - options.@azure-typespec/http-client-csharp-mgmt.*
+  paths:
+    - tspconfig.yaml
+
 - tool: TypeSpecRequirement
   path: ./preview/2015-05-01-preview/*.json
   reason: Brownfield service not ready to migrate

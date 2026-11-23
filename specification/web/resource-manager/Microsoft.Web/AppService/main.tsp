@@ -49,6 +49,7 @@ import "./AIGateway.tsp";
 import "./BackupItem.tsp";
 import "./CsmPublishingCredentialsPoliciesEntity.tsp";
 import "./SiteAuthSettingsV2.tsp";
+import "./EgressConfig.tsp";
 import "./ApiKVReference.tsp";
 import "./SiteLogsConfig.tsp";
 import "./SlotConfigNamesResource.tsp";
@@ -141,6 +142,11 @@ enum Versions {
    * The 2026-08-01 API version.
    */
   v2026_08_01: "2026-08-01",
+
+  /**
+   * The 2026-09-01 API version.
+   */
+  v2026_09_01: "2026-09-01",
 
   /**
    * The 2026-11-15 API version.

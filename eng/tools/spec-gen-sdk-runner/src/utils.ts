@@ -1,5 +1,6 @@
 import { getChangedFiles as getChangedFilesShared } from "@azure-tools/specs-shared/changed-files";
-import { exec, spawn, spawnSync } from "node:child_process";
+import { findTypeSpecProjects } from "@azure-tools/specs-shared/typespec-projects";
+import { exec, spawn } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { inspect, promisify } from "node:util";
@@ -226,11 +227,6 @@ export function findReadmeFiles(directory: string): string[] {
   return findFilesRecursive(directory, "readme.md");
 }
 
-export function getArgumentValue(args: string[], flag: string, defaultValue: string): string {
-  const index = args.indexOf(flag);
-  return index !== -1 && args[index + 1] ? args[index + 1] : defaultValue;
-}
-
 export function isPrivateSpecRepo(specRepoHttpsUrl: string): boolean {
   const normalizedUrl = specRepoHttpsUrl
     .toLowerCase()
@@ -309,83 +305,11 @@ export async function runCommandWithOutput(executable: string, args: string[]): 
 /*
  * Get the list of all type spec project folder paths
  */
-export function getAllTypeSpecPaths(specRepoPath: string): string[] {
-  const scriptPath = path.resolve(specRepoPath, "eng/scripts/Get-TypeSpec-Folders.ps1");
-  const args = [
-    "-NoProfile",
-    "-ExecutionPolicy",
-    "Bypass",
-    "-File",
-    scriptPath,
-    "-CheckAll",
-    "$true",
-  ];
-  const output = runPowerShellScript(args);
-  if (!output) {
-    logMessage("Error getting type spec paths", LogLevel.Error);
-    return [];
-  }
-  try {
-    const specConfigPaths = output.split("\n").map((line) => path.join(line, "tspconfig.yaml"));
-    //remove the last element which is 'true' or 'false'
-    specConfigPaths.pop();
-    return specConfigPaths;
-  } catch (error) {
-    logMessage(`Error parsing PowerShell output:${inspect(error)}`, LogLevel.Error);
-    return [];
-  }
-}
-
-/**
- * Runs a PowerShell script with the given arguments.
- * Automatically detects the correct executable path for the current platform (Windows/Linux/macOS).
- * Logs errors and warnings as appropriate.
- */
-export function runPowerShellScript(args: string[]): string | undefined {
-  const pwshPath = getPwshExecutablePath();
-  if (!pwshPath) {
-    logMessage("No valid PowerShell executable found on this system.", LogLevel.Error);
-    return undefined;
-  }
-
-  const result = spawnSync(pwshPath, args, { encoding: "utf8" });
-
-  if (result.error) {
-    logMessage(`Error executing PowerShell script:${result.error}`, LogLevel.Error);
-    return undefined;
-  }
-  if (result.stderr) {
-    logMessage(`PowerShell script error output:${result.stderr}`, LogLevel.Error);
-  }
-  return result.stdout?.trim();
-}
-
-/**
- * Determines the appropriate PowerShell executable path for the current OS.
- * Prefers 'pwsh' (PowerShell Core) over 'powershell' (Windows PowerShell).
- * Returns undefined if no executable is found.
- */
-function getPwshExecutablePath(): string | undefined {
-  const isWindows = process.platform === "win32";
-  const candidates = isWindows ? ["pwsh.exe", "powershell.exe"] : ["pwsh"]; // Linux/macOS generally only support pwsh
-  for (const cmd of candidates) {
-    if (isCommandAvailable(cmd)) {
-      return cmd;
-    }
-  }
-  return undefined;
-}
-
-/**
- * Checks if a command is available in PATH by trying to spawn it with '--version'.
- */
-function isCommandAvailable(command: string): boolean {
-  try {
-    const result = spawnSync(command, ["--version"], { encoding: "utf8" });
-    return result.status === 0;
-  } catch {
-    return false;
-  }
+export async function getAllTypeSpecPaths(specRepoPath: string): Promise<string[]> {
+  const projects = await findTypeSpecProjects(path.join(specRepoPath, "specification"));
+  return projects.map((project) =>
+    path.join(path.relative(specRepoPath, project), "tspconfig.yaml"),
+  );
 }
 
 // Function to get changed files using simple-git via shared library
@@ -440,49 +364,10 @@ export function findParentWithFile(
 }
 
 /**
- * Searches upward from a starting path to find ALL parent directories containing a file matching the given pattern
- * @param startPath - The directory path to start searching from
- * @param searchFile - Regular expression pattern to match the target file name
- * @param specRepoFolder - The root folder of the repository
- * @param stopAtFolder - Optional boundary directory where the search should stop
- * @returns Array of directory paths containing the matching file, ordered from nearest to farthest (child to parent)
- */
-export function findAllParentsWithFile(
-  startPath: string,
-  searchFile: RegExp,
-  specRepoFolder: string,
-  stopAtFolder?: string,
-): string[] {
-  const results: string[] = [];
-  let currentPath = startPath;
-
-  while (currentPath) {
-    try {
-      const absolutePath = path.resolve(specRepoFolder, currentPath);
-      const files = fs.readdirSync(absolutePath);
-      if (files.some((file) => searchFile.test(file))) {
-        results.push(currentPath);
-      }
-    } catch (error) {
-      logMessage(`Error reading directory: ${currentPath} with ${inspect(error)}`, LogLevel.Warn);
-      return results;
-    }
-    currentPath = path.dirname(currentPath);
-    // Check if we've reached the root of the path (stopAtFolder) or
-    // if we've reached '.' which prevents infinite loops with path.dirname('.')
-    if ((stopAtFolder && currentPath === stopAtFolder) || currentPath === ".") {
-      break;
-    }
-  }
-  return results;
-}
-
-/**
  * Searches for parent directories containing specific files for a list of files
  * Optimizes the search by grouping files in the same directory to avoid redundant searches
  * @param files - Array of file paths to process
  * @param options - Search configuration options
- * @param options.findAll - When true and path contains 'resource-manager' or 'data-plane', find all matching parent folders instead of just the nearest one
  * @returns Object mapping parent directory paths to arrays of related files
  */
 export function searchRelatedParentFolders(
@@ -491,7 +376,6 @@ export function searchRelatedParentFolders(
     searchFileRegex: RegExp;
     specRepoFolder: string;
     stopAtFolder?: string;
-    findAll?: boolean;
   },
 ): { [folderPath: string]: string[] } {
   const result: { [folderPath: string]: string[] } = {};
@@ -510,38 +394,17 @@ export function searchRelatedParentFolders(
 
   // Search parent folder only once per unique directory
   for (const [dir, dirFiles] of Object.entries(filesByDir)) {
-    // Only use findAll for v2 folder structure paths (containing resource-manager or data-plane)
-    const isV2FolderStructure = dir.includes("resource-manager") || dir.includes("data-plane");
-    const shouldFindAll = options.findAll && isV2FolderStructure;
-
-    if (shouldFindAll) {
-      // Find ALL parent folders with matching file for v2 folder structure
-      const parentFolders = findAllParentsWithFile(
-        dir,
-        options.searchFileRegex,
-        options.specRepoFolder,
-        options.stopAtFolder,
-      );
-      for (const parentFolder of parentFolders) {
-        if (!result[parentFolder]) {
-          result[parentFolder] = [];
-        }
-        result[parentFolder].push(...dirFiles);
+    const parentFolder = findParentWithFile(
+      dir,
+      options.searchFileRegex,
+      options.specRepoFolder,
+      options.stopAtFolder,
+    );
+    if (parentFolder) {
+      if (!result[parentFolder]) {
+        result[parentFolder] = [];
       }
-    } else {
-      // Find only the NEAREST parent folder (existing behavior)
-      const parentFolder = findParentWithFile(
-        dir,
-        options.searchFileRegex,
-        options.specRepoFolder,
-        options.stopAtFolder,
-      );
-      if (parentFolder) {
-        if (!result[parentFolder]) {
-          result[parentFolder] = [];
-        }
-        result[parentFolder].push(...dirFiles);
-      }
+      result[parentFolder].push(...dirFiles);
     }
   }
 
