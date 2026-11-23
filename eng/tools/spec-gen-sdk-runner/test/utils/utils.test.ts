@@ -5,7 +5,6 @@ import {
   findFilesRecursive,
   findReadmeFiles,
   getAllTypeSpecPaths,
-  getArgumentValue,
   getRelativePathFromSpecification,
   mapToObject,
   normalizePath,
@@ -81,14 +80,6 @@ describe("Utils", () => {
         `${repoRoot}/specification/contosowidgetmanager/Contoso.Management`,
       );
       expect(results).toEqual([]);
-    });
-  });
-
-  describe("getArgumentValue", () => {
-    test("return the argument value", () => {
-      const args = ["--batch-type", "all-specs", "--pr-number", "9527"];
-      const result = getArgumentValue(args, "--batch-type", "");
-      expect(result).toBe("all-specs");
     });
   });
 
