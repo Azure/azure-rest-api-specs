@@ -13388,3 +13388,75 @@ model CapacitySettingPatchProperties {
    */
   appliedPolicy?: AppliedCapacityPolicy;
 }
+
+/** A page of provision OS job resources. */
+@added(Versions.v2027_01_15_preview)
+model ProvisionOsJobListResult is Azure.Core.Page<ProvisionOsJobs>;
+
+/** Type of operation performed by provision OS jobs. */
+@added(Versions.v2027_01_15_preview)
+union ProvisionOsJobOperationType {
+  string,
+
+  /** Update the operating system. */
+  Update: "Update",
+
+  /** Reset the operating system. */
+  Reset: "Reset",
+
+  /** Provision the operating system. */
+  Provision: "Provision",
+}
+
+/** Final status of a provision OS job. */
+@added(Versions.v2027_01_15_preview)
+union ProvisionOsJobStatus {
+  string,
+
+  /** The job completed successfully. */
+  Completed: "Completed",
+
+  /** The job failed. */
+  Failed: "Failed",
+}
+
+/** Target operating system type of the provision OS job. */
+@added(Versions.v2027_01_15_preview)
+union TargetOsType {
+  string,
+
+  /** AzureLinux OS. */
+  AzureLinux: "AzureLinux",
+
+  /** HCI OS. */
+  HCI: "HCI",
+
+  /** Azure Linux restricted operating environment OS. */
+  AzureLinuxROE: "AzureLinuxROE",
+}
+
+/** Properties of the provision OS jobs resource. */
+@added(Versions.v2027_01_15_preview)
+model EdgeMachineProvisionOsJobProperties {
+  /** The UTC date and time at which the job started. */
+  startedAt?: utcDateTime;
+
+  /** The UTC date and time at which the job completed. */
+  completedAt?: utcDateTime;
+
+  /** Type of operation performed by the job. */
+  operationType?: ProvisionOsJobOperationType;
+
+  /** Status of the job. */
+  status?: ProvisionOsJobStatus;
+
+  /** Target operating system type of the job. */
+  targetOsType?: TargetOsType;
+
+  /** Provisioning state of the latest Azure Resource Manager operation on the resource. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /** Job details included in GET and list responses. */
+  jobProperties?: ProvisionOsJobProperties;
+}

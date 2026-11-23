@@ -34,6 +34,7 @@ import "./UpdateSummaries.tsp";
 import "./ValidatedSolutionRecipe.tsp";
 import "./EdgeMachine.tsp";
 import "./EdgeMachineJobs.tsp";
+import "./EdgeMachineProvisionOsJobs.tsp";
 import "./EdgeMachineUpdate.tsp";
 import "./ValidateOwnershipVouchers.tsp";
 import "./ClusterJobs.tsp";
