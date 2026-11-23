@@ -21,6 +21,7 @@ describe("util", function () {
       isClean: () => true,
     });
     vi.mocked(simpleGit).mockReturnValue({
+      env: vi.fn().mockReturnThis(),
       revparse: revparseMock,
       show: showMock,
       status: statusMock,

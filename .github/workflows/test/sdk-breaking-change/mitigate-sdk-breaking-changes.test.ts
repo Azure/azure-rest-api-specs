@@ -120,6 +120,7 @@ describe("mitigateSdkBreakingChanges", () => {
       specificationRepositoryPath,
       resultDirPath: temporaryDirectory,
       azureSdkCliPath: join(temporaryDirectory, "azsdk"),
+      forwardOutput: true,
     });
 
     const result = MitigationResultSchema.parse(
@@ -140,7 +141,7 @@ describe("mitigateSdkBreakingChanges", () => {
     );
     expect(args).toContain("customized-update");
     expect(args?.[(args?.indexOf("--customization-request") ?? -2) + 1]).toContain("Model changed");
-    expect(options).toBeUndefined();
+    expect(options).toEqual({ forwardOutput: true });
     expect(core.summary.addRaw).toHaveBeenCalledExactlyOnceWith(
       [
         "## SDK breaking-change mitigation",

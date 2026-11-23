@@ -4,8 +4,8 @@ version: "1.0"
 type: capability # capability | regression
 tags:
   area: "versioning"
-# Root-level environment
-environment: azsdk-mcp
+# Root-level agent_environment
+agent_environment: azsdk-mcp
 # Execution configuration
 defaults:
   runs: 1 # Trials per stimulus
@@ -20,7 +20,7 @@ stimuli:
       suite: "versioning"
       mode: "trigger"
     prompt: "I added `...Azure.ResourceManager.ManagedServiceIdentityProperty;` which updates all my existing API versions and introduces a breaking change. I want to introduce the properties of the spread model '...ManagedServiceIdentityProperty' in API version 2025-05-04-preview only."
-    environment: &shared_environment
+    agent_environment: &shared_environment
       files:
         - src: ../fixtures/001-share-version-new-feature/employee.tsp
           dest: employee.tsp
@@ -51,7 +51,7 @@ stimuli:
       suite: "versioning"
       mode: "forced"
     prompt: "@azure-typespec-author I added `...Azure.ResourceManager.ManagedServiceIdentityProperty;` which updates all my existing API versions and introduces a breaking change. I want to introduce the properties of the spread model '...ManagedServiceIdentityProperty' in API version 2025-05-04-preview only."
-    environment: *shared_environment
+    agent_environment: *shared_environment
     rubric: &shared_rubric
       - The ManagedServiceIdentityProperty spread is retained and Employee.identity is introduced only in API version 2025-05-04-preview.
       - Earlier API versions, including 2021-11-01, do not expose the identity property.
@@ -99,7 +99,7 @@ stimuli:
       suite: "versioning"
       mode: "no-skill"
     prompt: "I added `...Azure.ResourceManager.ManagedServiceIdentityProperty;` which updates all my existing API versions and introduces a breaking change. I want to introduce the properties of the spread model '...ManagedServiceIdentityProperty' in API version 2025-05-04-preview only."
-    environment: *shared_environment
+    agent_environment: *shared_environment
     rubric: *shared_rubric
     graders:
       - type: "tool-calls"

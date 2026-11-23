@@ -4,7 +4,7 @@ version: "1.0"
 type: capability
 tags:
   area: "dataplane"
-environment: azsdk-mcp
+agent_environment: azsdk-mcp
 defaults:
   runs: 1
   timeout: 660s
@@ -16,7 +16,7 @@ stimuli:
       suite: dataplane
       mode: trigger
     prompt: Rename the `color` property to `widgetColor` in the WidgetSuite model only for version `2023-06-01-preview`. Also add this new version to the Versions enum and carry forward all other existing features. All material design decisions are provided, so proceed without confirmation.
-    environment: &shared_environment
+    agent_environment: &shared_environment
       files:
         - src: ../fixtures/006009-dp-version-property-renamed/main.tsp
           dest: main.tsp
@@ -41,7 +41,7 @@ stimuli:
       suite: dataplane
       mode: forced
     prompt: "@azure-typespec-author Rename the `color` property to `widgetColor` in the WidgetSuite model only for version `2023-06-01-preview`. Also add this new version to the Versions enum and carry forward all other existing features. All material design decisions are provided, so proceed without confirmation."
-    environment: *shared_environment
+    agent_environment: *shared_environment
     rubric: &shared_rubric
       - WidgetSuite.color is renamed to widgetColor only in API version 2023-06-01-preview using valid TypeSpec versioning.
       - Version 2023-06-01-preview is added to the Versions enum and the prior property name is preserved for earlier versions.
@@ -83,7 +83,7 @@ stimuli:
       suite: dataplane
       mode: no-skill
     prompt: Rename the `color` property to `widgetColor` in the WidgetSuite model only for version `2023-06-01-preview`. Also add this new version to the Versions enum and carry forward all other existing features. All material design decisions are provided, so proceed without confirmation.
-    environment: *shared_environment
+    agent_environment: *shared_environment
     rubric: *shared_rubric
     graders:
       - type: tool-calls
