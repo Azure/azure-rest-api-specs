@@ -11,17 +11,17 @@ namespace Customizations;
 @@alternateType(
   FileCreationTimeParameter.fileCreationTime,
   string,
-  "python,csharp,javascript,go,java"
+  "python,csharp,javascript,go"
 );
 @@alternateType(
   FileLastWriteTimeParameter.fileLastWriteTime,
   string,
-  "python,csharp,javascript,go,java"
+  "python,csharp,javascript,go"
 );
 @@alternateType(
   FileChangeTimeParameter.fileChangeTime,
   string,
-  "python,csharp,javascript,go,java"
+  "python,csharp,javascript,go"
 );
 @@alternateType(
   FileCreationTimeResponseHeader.fileCreationTime,
@@ -439,7 +439,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is for legacy compatibility"
 @@Legacy.disablePageable(
   Storage.File.Directory.listFilesAndDirectoriesSegment,
-  "python,javascript,csharp,java"
+  "python,javascript,csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This is for legacy compatibility"
 @@Legacy.disablePageable(
@@ -662,13 +662,6 @@ model AzureFileStorageClientParameters {
 
 // java: the generated copy-status response header must reference the public CopyStatusType custom-type.
 @@clientName(CopyStatus, "CopyStatusType", "java");
-// java: emit the public ShareErrorCode enum. In DPG it is otherwise orphaned (the error model isn't
-// referenced by a retained typed operation), so tag it public+output to force emission into the
-// custom-types (public models) package.
-@@access(StorageErrorCode, Access.public, "java");
-@@usage(StorageErrorCode, Usage.output, "java");
-// @@access(CopyStatus, Access.public, "java");
-// @@usage(CopyStatus, Usage.output, "java");
 
 // java: richer client doc for the token-intent enum than the terse spec description (SDK-only; does not change OpenAPI).
 @@clientDoc(
