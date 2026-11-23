@@ -63,7 +63,7 @@ interface SaasSubscriptionLevelGlobal {
 
   /** Validates a proposed SaaS purchase within a resource group without creating the resource. */
   @post
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/resources/validate")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SaaS/validate")
   validatePurchase(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -76,7 +76,7 @@ interface SaasSubscriptionLevelGlobal {
 
   /** Validates a proposed SaaS purchase at subscription scope before a resource group is selected. */
   @post
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.SaaS/resources/validate")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.SaaS/validate")
   validatePurchaseBySubscription(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
