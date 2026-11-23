@@ -3,28 +3,22 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Network;
 /**
  * P2SVpnGateway Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model P2SVpnGateway extends TrackedResourceWithSettableIdOptionalLocation {
-  properties?: P2SVpnGatewayProperties;
-
+@featureFile(Features.virtualWAN)
+model P2SVpnGateway
+  is TrackedResourceWithSettableIdOptionalLocationInstance<P2SVpnGatewayProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
   @visibility(Lifecycle.Read)
   @path
   @key("gatewayName")
@@ -56,8 +50,7 @@ alias P2SVpnGatewayOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+@featureFile(Features.virtualWAN)
 @armResourceOperations(#{ omitTags: true })
 interface P2SVpnGateways {
   /**
@@ -112,8 +105,9 @@ interface P2SVpnGateways {
   /**
    * Lists all the P2SVpnGateways in a subscription.
    */
-  list is ArmListBySubscription<
+  list is ArmListBySubscriptionWithResourceName<
     P2SVpnGateway,
+    OverrideResourceName = "P2SVpnGateway",
     Response = ArmResponse<ListP2SVpnGatewaysResult>,
     Error = CloudError
   >;

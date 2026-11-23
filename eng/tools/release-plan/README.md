@@ -159,7 +159,7 @@ otherwise `GA`. SDK release type is independently `beta` for that suffix and
 
 ### Plan creation and comments
 
-PRs labeled `FolderMigrationV2` or `Skip-ReleasePlan-Automation` are skipped before
+PRs labeled `FolderMigrationV2` or `skip-releaseplan-automation` are skipped before
 changed files are fetched. Otherwise, the tool looks for an existing plan by PR
 and API release type, then by project path, API version, and API release type.
 Creation is allowed only when the PR has `new-api-version` or a `tspconfig.yaml`

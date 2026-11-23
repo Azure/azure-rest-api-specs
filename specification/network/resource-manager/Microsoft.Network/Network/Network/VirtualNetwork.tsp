@@ -4,19 +4,17 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
-import "../Common/VirtualNetwork.tsp";
+import "./VirtualNetwork.models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Network;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @armResourceOperations(#{ omitTags: true })
 interface VirtualNetworks {
   /**
@@ -79,7 +77,11 @@ interface VirtualNetworks {
    * Gets all virtual networks in a subscription.
    */
   @tag("VirtualNetworks")
-  listAll is ArmListBySubscription<VirtualNetwork, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    VirtualNetwork,
+    OverrideResourceName = "VirtualNetwork",
+    Error = CloudError
+  >;
 
   /**
    * Checks whether a private IP address is available for use.
@@ -163,8 +165,7 @@ interface VirtualNetworks {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.networkManager)
+@featureFile(Features.networkManager)
 @armResourceOperations(#{ omitTags: true })
 interface EffectiveConfigurations {
   /**
