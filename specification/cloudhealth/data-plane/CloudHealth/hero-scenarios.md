@@ -239,9 +239,6 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-  "requestedEntityName": "frontend-web-app",
-  "observedAt": "2026-11-17T12:30:00Z",
-  "status": "Complete",
   "value": [
     {
       "entityName": "frontend-web-app",
@@ -271,12 +268,11 @@ Content-Type: application/json
       }
     }
   ],
-  "partial": [],
   "nextLink": "https://contoso-1f33ba.eastus.data.cloudhealth.azure.com/api/entities/frontend-web-app/diagnosis?api-version=2026-10-01-preview&maxDepth=1&timestamp=2026-11-17T12%3A30%3A00Z&nextMarker=eyJwYWdlIjoyfQ"
 }
 ```
 
-`Complete` describes the evidence quality on this page, not whether paging is finished. The caller follows `nextLink` unchanged rather than constructing a new diagnosis request. The `orders-database` dependency has no boundary merely because its fragment arrives on the next page.
+The caller follows `nextLink` unchanged rather than constructing a new diagnosis request. The `orders-database` dependency has no boundary merely because its fragment arrives on the next page.
 
 ```http
 GET https://contoso-1f33ba.eastus.data.cloudhealth.azure.com/api/entities/frontend-web-app/diagnosis?api-version=2026-10-01-preview&maxDepth=1&timestamp=2026-11-17T12%3A30%3A00Z&nextMarker=eyJwYWdlIjoyfQ
@@ -286,9 +282,6 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-  "requestedEntityName": "frontend-web-app",
-  "observedAt": "2026-11-17T12:30:00Z",
-  "status": "Complete",
   "value": [
     {
       "entityName": "orders-database",
@@ -313,16 +306,15 @@ Content-Type: application/json
         "signalGroupAggregations": []
       }
     }
-  ],
-  "partial": []
+  ]
 }
 ```
 
-No `nextLink` means the bounded diagnosis has been delivered. Depth does not reset between pages: `orders-storage` lies beyond the requested depth and is marked `MaxDepth`, without making the result partial. The caller can route the database investigation to `data-platform` while separately investigating the frontend signal; the healthy backend is not a causal contributor.
+No `nextLink` means the bounded diagnosis has been delivered. Depth does not reset between pages: `orders-storage` lies beyond the requested depth and is marked `MaxDepth`. The caller can route the database investigation to `data-platform` while separately investigating the frontend signal; the healthy backend is not a causal contributor.
 
-`status` and `partial` must be inspected on every page. Genuinely unavailable or capped evidence within scope produces `Partial` and reason details, even if other pages are `Complete`; ordinary page breaks do not. For a concrete unavailable-signal response, see [the partial diagnosis example](examples/2026-10-01-preview/Entity_ListDiagnosis_Partial.json).
+When signal or entity evidence is unavailable within a fragment, the fragment's `evidence.outcome` or signal `history.status` reflects that state directly. For a concrete unavailable-signal response, see [the unavailable signal evidence example](examples/2026-10-01-preview/Entity_ListDiagnosis_Partial.json).
 
-All pages preserve the same as-of time. When `timestamp` is omitted, the first page resolves `observedAt` and continuations preserve it. This is not an immutable snapshot: late-arriving data can still affect later reads. MCP integrations should preserve the page metadata when presenting evidence to an agent, rather than returning only the flattened fragments.
+All pages preserve the same as-of time. When `timestamp` is omitted, the first page resolves the evaluation timestamp and `nextLink` continuations preserve it. This is not an immutable snapshot: late-arriving data can still affect later reads.
 
 ## Compare incident impact against the configured health objective
 
@@ -331,7 +323,7 @@ After assessing the incident, the engineer needs to distinguish a short-term obj
 **Prerequisites:** The frontend entity has a configured 95% Health Objective and retained health-state history covering both windows. The caller has Microsoft Entra authorization for the data-plane endpoint. The windows are within the last 30 days.
 
 ```http
-GET /api/entities/frontend-web-app/healthAnalysis?api-version=2026-10-01-preview&endAt=2026-11-18T00%3A00%3A00Z&lookbacks=PT24H&lookbacks=P7D&timestamp=2026-11-18T00%3A00%3A00Z
+GET /api/entities/frontend-web-app/healthAnalysis?api-version=2026-10-01-preview&endAt=2026-11-18T00%3A00%3A00Z&lookbacks=PT24H,P7D&timestamp=2026-11-18T00%3A00%3A00Z
 Accept: application/json
 
 HTTP/1.1 200 OK
@@ -389,7 +381,7 @@ Content-Type: application/json
 }
 ```
 
-Supply `lookbacks` as repeated query parameters, not a comma-separated string. A request accepts one through ten unique, positive fixed ISO 8601 durations, with each window starting within the last 30 days. Results follow the requested lookback order. `endAt` anchors the analysis windows; `timestamp` selects the entity configuration supplying the Health Objective, not a replacement end time.
+Supply `lookbacks` as a comma-separated list of ISO 8601 durations. A request accepts one through ten unique, positive fixed ISO 8601 durations, with each window starting within the last 30 days. Results follow the requested lookback order. `endAt` anchors the analysis windows; `timestamp` selects the entity configuration supplying the Health Objective, not a replacement end time.
 
 The 24-hour window contains 90 minutes of Non-Healthy time against a 72-minute allowance: the objective was missed by 18 minutes, or 25% of the allowance. `exceededNonHealthyPercent` is the relative percentage above the allowance, not a percentage-point difference. The seven-day window remains within its allowance, so the engineer can prioritize the recent regression without misreporting a week-long breach. Non-Healthy time includes Degraded, Unhealthy, and Unknown.
 

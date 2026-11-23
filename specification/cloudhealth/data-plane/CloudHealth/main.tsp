@@ -34,9 +34,6 @@ alias EntityReadOperations = Azure.Core.ResourceOperations<
 
 @doc("Service API versions.")
 enum Versions {
-  @doc("The 2026-06-01-preview version.")
-  v2026_06_01_preview: "2026-06-01-preview",
-
   @doc("The 2026-10-01-preview version.")
   @previewVersion
   v2026_10_01_preview: "2026-10-01-preview",
@@ -276,7 +273,6 @@ model EntityDiagnosticSnapshot {
   signalAggregationGroups: EntityDiagnosticSignalAggregationGroup[];
 
   @doc("Optional set of labels (key-value pairs)")
-  @added(Versions.v2026_10_01_preview)
   tags?: Record<string4096>;
 }
 
@@ -290,20 +286,7 @@ model EntitySignalRoute {
   signalName: signalName;
 }
 
-@doc("Evidence-quality status of this diagnosis page. It is page-local and independent of paging.")
-@added(Versions.v2026_10_01_preview)
-union EntityDiagnosisStatus {
-  string,
-
-  @doc("All evidence in this page's scope is present. May coexist with nextLink; reaching maxDepth is still Complete.")
-  Complete: "Complete",
-
-  @doc("Evidence within the requested scope is unavailable, pending, or hard-capped and is not supplied by later pages.")
-  Partial: "Partial",
-}
-
 @doc("Outcome of evaluating an entity's health evidence.")
-@added(Versions.v2026_10_01_preview)
 union EntityDiagnosisOutcome {
   string,
 
@@ -324,7 +307,6 @@ union EntityDiagnosisOutcome {
 }
 
 @doc("Kind of signal evidence emitted by diagnosis.")
-@added(Versions.v2026_10_01_preview)
 union EntityDiagnosisSignalKind {
   string,
 
@@ -339,7 +321,6 @@ union EntityDiagnosisSignalKind {
 }
 
 @doc("Availability status of signal history in diagnosis evidence.")
-@added(Versions.v2026_10_01_preview)
 union EntityDiagnosisSignalHistoryStatus {
   string,
 
@@ -354,7 +335,6 @@ union EntityDiagnosisSignalHistoryStatus {
 }
 
 @doc("Boundary classification for dependency traversal in diagnosis evidence.")
-@added(Versions.v2026_10_01_preview)
 union EntityDiagnosisDependencyBoundary {
   string,
 
@@ -378,7 +358,6 @@ union EntityDiagnosisDependencyBoundary {
 }
 
 @doc("Category of input that determined an aggregation outcome.")
-@added(Versions.v2026_10_01_preview)
 union EntityDiagnosisDeterminingInputCategory {
   string,
 
@@ -393,7 +372,6 @@ union EntityDiagnosisDeterminingInputCategory {
 }
 
 @doc("Metric describing how the aggregation calculation was derived.")
-@added(Versions.v2026_10_01_preview)
 union EntityDiagnosisAggregationMetric {
   string,
 
@@ -410,41 +388,7 @@ union EntityDiagnosisAggregationMetric {
   NotHealthyInputs: "NotHealthyInputs",
 }
 
-@doc("Reason evidence within scope is unavailable or capped and not supplied by later pages. Ordinary paging is never a reason.")
-@added(Versions.v2026_10_01_preview)
-union EntityDiagnosisPartialReason {
-  string,
-
-  @doc("Evaluation stopped due to entity-evidence budget limits.")
-  EntityBudget: "EntityBudget",
-
-  @doc("Evaluation stopped due to causal-input budget limits.")
-  InputBudget: "InputBudget",
-
-  @doc("Evaluation stopped due to signal-evidence budget limits.")
-  SignalBudget: "SignalBudget",
-
-  @doc("Evaluation stopped due to execution-time budget limits.")
-  TimeBudget: "TimeBudget",
-
-  @doc("Evidence was irretrievably dropped by a hard response-size cap rather than moved to a later page.")
-  ResponseSize: "ResponseSize",
-
-  @doc("Evaluation is still pending for part of the requested evidence.")
-  EvaluationPending: "EvaluationPending",
-
-  @doc("Dependency evidence was unavailable for part of the response.")
-  DependencyUnavailable: "DependencyUnavailable",
-
-  @doc("Signal evidence was unavailable for part of the response.")
-  SignalUnavailable: "SignalUnavailable",
-
-  @doc("Signal history was unavailable for part of the response.")
-  HistoryUnavailable: "HistoryUnavailable",
-}
-
 @doc("A single signal history point in diagnosis evidence.")
-@added(Versions.v2026_10_01_preview)
 model EntityDiagnosisSignalHistoryPoint {
   @doc("Timestamp when the signal point occurred (UTC).")
   occurredAt: utcDateTime;
@@ -457,7 +401,6 @@ model EntityDiagnosisSignalHistoryPoint {
 }
 
 @doc("Signal history attached to diagnosis evidence.")
-@added(Versions.v2026_10_01_preview)
 model EntityDiagnosisSignalHistory {
   @doc("Availability status for signal history in the current response.")
   status: EntityDiagnosisSignalHistoryStatus;
@@ -470,7 +413,6 @@ model EntityDiagnosisSignalHistory {
 }
 
 @doc("Signal-level diagnosis evidence.")
-@added(Versions.v2026_10_01_preview)
 model EntityDiagnosisSignalEvidence {
   @doc("Signal evidence kind.")
   kind: EntityDiagnosisSignalKind;
@@ -486,7 +428,6 @@ model EntityDiagnosisSignalEvidence {
 }
 
 @doc("Dependency-level diagnosis evidence.")
-@added(Versions.v2026_10_01_preview)
 model EntityDiagnosisDependencyEvidence {
   @doc("Dependency entity name.")
   entityName: entityName;
@@ -502,7 +443,6 @@ model EntityDiagnosisDependencyEvidence {
 }
 
 @doc("Input counts used by bounded aggregation evidence.")
-@added(Versions.v2026_10_01_preview)
 model EntityDiagnosisAggregationInputCounts {
   @doc("Total configured inputs considered by the aggregation.")
   @minValue(0)
@@ -530,7 +470,6 @@ model EntityDiagnosisAggregationInputCounts {
 }
 
 @doc("Numeric boundary used by aggregation classification bands.")
-@added(Versions.v2026_10_01_preview)
 model EntityDiagnosisAggregationBound {
   @doc("Boundary value.")
   value: float64;
@@ -540,7 +479,6 @@ model EntityDiagnosisAggregationBound {
 }
 
 @doc("Optional lower and upper classification boundaries for aggregation values.")
-@added(Versions.v2026_10_01_preview)
 model EntityDiagnosisAggregationClassificationBand {
   @doc("Optional lower boundary for the classification.")
   lowerBound?: EntityDiagnosisAggregationBound;
@@ -550,7 +488,6 @@ model EntityDiagnosisAggregationClassificationBand {
 }
 
 @doc("Optional aggregation calculation details.")
-@added(Versions.v2026_10_01_preview)
 model EntityDiagnosisAggregationCalculation {
   @doc("Metric used for the calculation.")
   metric: EntityDiagnosisAggregationMetric;
@@ -566,7 +503,6 @@ model EntityDiagnosisAggregationCalculation {
 }
 
 @doc("Bounded aggregation evidence explaining a computed diagnosis state.")
-@added(Versions.v2026_10_01_preview)
 model EntityDiagnosisAggregationEvidence {
   @doc("Effective aggregation and provenance used for this computation.")
   effectiveAggregation: EntityDiagnosticEffectiveAggregation;
@@ -582,7 +518,6 @@ model EntityDiagnosisAggregationEvidence {
 }
 
 @doc("Causal signal-group aggregation evidence for one contributing group.")
-@added(Versions.v2026_10_01_preview)
 model EntityDiagnosisSignalGroupAggregationEvidence {
   @doc("Signal-aggregation group name.")
   name: string;
@@ -592,7 +527,6 @@ model EntityDiagnosisSignalGroupAggregationEvidence {
 }
 
 @doc("Entity-level diagnosis evidence.")
-@added(Versions.v2026_10_01_preview)
 model EntityDiagnosisEntityEvidence {
   @doc("Observed health state for the entity.")
   healthState: HealthState;
@@ -621,7 +555,6 @@ model EntityDiagnosisEntityEvidence {
 }
 
 @doc("A diagnosis fragment in the entity diagnosis response.")
-@added(Versions.v2026_10_01_preview)
 model EntityDiagnosisFragment {
   @doc("Entity name represented by this diagnosis fragment.")
   entityName: entityName;
@@ -645,39 +578,17 @@ model EntityDiagnosisFragment {
   tags?: Record<string4096>;
 }
 
-@doc("Details describing why this diagnosis page is partial.")
-@added(Versions.v2026_10_01_preview)
-model EntityDiagnosisPartialDetail {
-  @doc("Reason code for this partial-diagnosis detail.")
-  reason: EntityDiagnosisPartialReason;
-
-  @doc("Count of affected evidence nodes for this partial reason.")
-  affectedCount: int32;
-}
-
 @doc("One page of a bounded entity diagnosis.")
-@added(Versions.v2026_10_01_preview)
-model EntityDiagnosisResult {
-  @doc("Entity name requested in the diagnosis operation.")
-  requestedEntityName: entityName;
+model EntityDiagnosisResult is Page<EntityDiagnosisFragment>;
 
-  @doc("As-of time (UTC) used to evaluate every page of this diagnosis. Late-arriving data can still affect later reads; it is not an immutable snapshot.")
-  observedAt: utcDateTime;
-
-  @doc("Page-local evidence-quality status.")
-  status: EntityDiagnosisStatus;
-
-  @doc("Diagnosis fragments on this page.")
-  @pageItems
-  value: EntityDiagnosisFragment[];
-
-  @doc("Page-local partial details; empty when status is Complete.")
-  partial: EntityDiagnosisPartialDetail[];
-
-  @doc("URI of the next page, preserving entity, api-version, maxDepth and timestamp. Sole indicator of more pages; absent on the last page.")
-  @nextLink
-  nextLink?: url;
-}
+@@doc(
+  EntityDiagnosisResult.value,
+  "Diagnosis fragments on this page."
+);
+@@doc(
+  EntityDiagnosisResult.nextLink,
+  "URI of the next page, preserving entity, api-version, maxDepth and timestamp. Sole indicator of more pages; absent on the last page."
+);
 
 @error
 @doc("Returned when a data-plane request fails.")
@@ -731,7 +642,6 @@ model EntityHealthStateHistoryPage is Page<EntityHealthStatePeriod>;
   "The full URI to fetch the next page of results; absent when there is no next page."
 );
 
-@added(Versions.v2026_10_01_preview)
 @doc("Whether an objective result is conclusive for its requested window.")
 union EntityHealthObjectiveEvaluationStatus {
   string,
@@ -746,7 +656,6 @@ union EntityHealthObjectiveEvaluationStatus {
   NotConfigured: "NotConfigured",
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Health-objective calculation for one analysis window.")
 model EntityHealthObjectiveAnalysis {
   @doc("""
@@ -799,7 +708,6 @@ model EntityHealthObjectiveAnalysis {
   isMet?: boolean;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Time spent in each health state within an analysis window.")
 model EntityHealthStateDurations {
   @doc("Duration spent Healthy.")
@@ -815,7 +723,6 @@ model EntityHealthStateDurations {
   `unknown`: duration;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Health-state durations and evaluation of the entity's configured Health Objective for one lookback window.")
 model EntityHealthAnalysisResult {
   @doc("Requested ISO 8601 lookback duration.")
@@ -834,7 +741,6 @@ model EntityHealthAnalysisResult {
   objective: EntityHealthObjectiveAnalysis;
 }
 
-@added(Versions.v2026_10_01_preview)
 @doc("Health analysis for an entity over the requested lookback windows.")
 model EntityHealthAnalysisQueryResult {
   @doc("The analysis results, in the same order as the requested lookbacks.")
@@ -946,7 +852,6 @@ model HealthReportPayload {
   @doc("Name of the entity signal to report health for. An unknown name creates an external signal instance.")
   signalName: signalName;
 
-  @added(Versions.v2026_10_01_preview)
   @doc("Display name of the entity signal to report health for")
   @minLength(1)
   @maxLength(260)
@@ -1080,15 +985,13 @@ interface Entity {
       {
         @doc("Timestamp to use for the operation. When specified, the version of the entity at this point in time is retrieved. If not specified, the latest version is used.")
         @query
-        @added(Versions.v2026_10_01_preview)
         timestamp?: utcDateTime;
       },
       Azure.Core.Traits.TraitContext.Read
     >
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Paged diagnosis is a '/diagnosis' subpath of the entity that returns a custom evidence envelope; no Azure.Core resource operation template preserves this wire contract."
-  @added(Versions.v2026_10_01_preview)
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Paged diagnosis must keep the '/diagnosis' subpath of the entity and pageable diagnosis fragment payload shape; no Azure.Core resource operation template preserves this wire contract."
   @route("/api/entities/{entityName}/diagnosis")
   @doc("Return one bounded diagnosis for an entity, paged through nextLink.")
   @list
@@ -1108,7 +1011,6 @@ interface Entity {
 
       @doc("As-of time for the diagnosis. If not specified, the latest time is resolved on the first page and reused by all pages.")
       @query
-      @added(Versions.v2026_10_01_preview)
       timestamp?: utcDateTime;
     },
     EntityDiagnosisResult,
@@ -1153,7 +1055,6 @@ interface EntityHealthStateHistory {
 @route("/api/entities/{entityName}/healthAnalysis")
 interface EntityHealthAnalysis {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This operation computes bounded multi-window health-analysis results on the /healthAnalysis subpath rather than reading or listing a resource, and the resource lifecycle templates do not represent its request and response contract."
-  @added(Versions.v2026_10_01_preview)
   @doc("Calculate health-state durations and evaluate the entity's configured Health Objective over one or more lookback windows.")
   @get
   getHealthAnalysis is Operation<
@@ -1162,9 +1063,8 @@ interface EntityHealthAnalysis {
       @query
       endAt?: utcDateTime;
 
-      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "The health analysis endpoint requires repeated lookbacks query parameters; comma-separated serialization would change the service wire contract."
-      @doc("Lookback periods supplied as repeated query parameters and measured back from `endAt`. Each must be a unique, positive fixed ISO 8601 duration whose window starts within the last 30 days.")
-      @query(#{ explode: true })
+      @doc("Lookback periods measured back from `endAt`. Each must be a unique, positive fixed ISO 8601 duration whose window starts within the last 30 days.")
+      @query
       @minItems(1)
       @maxItems(10)
       lookbacks: string[];

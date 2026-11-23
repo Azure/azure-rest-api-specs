@@ -350,13 +350,13 @@
           {
             "name": "lookbacks",
             "in": "query",
-            "description": "Lookback periods supplied as repeated query parameters and measured back from `endAt`. Each must be a unique, positive fixed ISO 8601 duration whose window starts within the last 30 days.",
+            "description": "Lookback periods measured back from `endAt`. Each must be a unique, positive fixed ISO 8601 duration whose window starts within the last 30 days.",
             "required": true,
             "type": "array",
             "items": {
               "type": "string"
             },
-            "collectionFormat": "multi",
+            "collectionFormat": "csv",
             "minItems": 1,
             "maxItems": 10
           },
@@ -1403,120 +1403,15 @@
         ]
       }
     },
-    "EntityDiagnosisPartialDetail": {
-      "type": "object",
-      "description": "Details describing why this diagnosis page is partial.",
-      "properties": {
-        "reason": {
-          "$ref": "#/definitions/EntityDiagnosisPartialReason",
-          "description": "Reason code for this partial-diagnosis detail."
-        },
-        "affectedCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Count of affected evidence nodes for this partial reason."
-        }
-      },
-      "required": [
-        "reason",
-        "affectedCount"
-      ]
-    },
-    "EntityDiagnosisPartialReason": {
-      "type": "string",
-      "description": "Reason evidence within scope is unavailable or capped and not supplied by later pages. Ordinary paging is never a reason.",
-      "enum": [
-        "EntityBudget",
-        "InputBudget",
-        "SignalBudget",
-        "TimeBudget",
-        "ResponseSize",
-        "EvaluationPending",
-        "DependencyUnavailable",
-        "SignalUnavailable",
-        "HistoryUnavailable"
-      ],
-      "x-ms-enum": {
-        "name": "EntityDiagnosisPartialReason",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "EntityBudget",
-            "value": "EntityBudget",
-            "description": "Evaluation stopped due to entity-evidence budget limits."
-          },
-          {
-            "name": "InputBudget",
-            "value": "InputBudget",
-            "description": "Evaluation stopped due to causal-input budget limits."
-          },
-          {
-            "name": "SignalBudget",
-            "value": "SignalBudget",
-            "description": "Evaluation stopped due to signal-evidence budget limits."
-          },
-          {
-            "name": "TimeBudget",
-            "value": "TimeBudget",
-            "description": "Evaluation stopped due to execution-time budget limits."
-          },
-          {
-            "name": "ResponseSize",
-            "value": "ResponseSize",
-            "description": "Evidence was irretrievably dropped by a hard response-size cap rather than moved to a later page."
-          },
-          {
-            "name": "EvaluationPending",
-            "value": "EvaluationPending",
-            "description": "Evaluation is still pending for part of the requested evidence."
-          },
-          {
-            "name": "DependencyUnavailable",
-            "value": "DependencyUnavailable",
-            "description": "Dependency evidence was unavailable for part of the response."
-          },
-          {
-            "name": "SignalUnavailable",
-            "value": "SignalUnavailable",
-            "description": "Signal evidence was unavailable for part of the response."
-          },
-          {
-            "name": "HistoryUnavailable",
-            "value": "HistoryUnavailable",
-            "description": "Signal history was unavailable for part of the response."
-          }
-        ]
-      }
-    },
     "EntityDiagnosisResult": {
       "type": "object",
       "description": "One page of a bounded entity diagnosis.",
       "properties": {
-        "requestedEntityName": {
-          "$ref": "#/definitions/entityName",
-          "description": "Entity name requested in the diagnosis operation."
-        },
-        "observedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "As-of time (UTC) used to evaluate every page of this diagnosis. Late-arriving data can still affect later reads; it is not an immutable snapshot."
-        },
-        "status": {
-          "$ref": "#/definitions/EntityDiagnosisStatus",
-          "description": "Page-local evidence-quality status."
-        },
         "value": {
           "type": "array",
           "description": "Diagnosis fragments on this page.",
           "items": {
             "$ref": "#/definitions/EntityDiagnosisFragment"
-          }
-        },
-        "partial": {
-          "type": "array",
-          "description": "Page-local partial details; empty when status is Complete.",
-          "items": {
-            "$ref": "#/definitions/EntityDiagnosisPartialDetail"
           }
         },
         "nextLink": {
@@ -1526,11 +1421,7 @@
         }
       },
       "required": [
-        "requestedEntityName",
-        "observedAt",
-        "status",
-        "value",
-        "partial"
+        "value"
       ]
     },
     "EntityDiagnosisSignalEvidence": {
@@ -1683,30 +1574,6 @@
             "name": "UnresolvedSignal",
             "value": "UnresolvedSignal",
             "description": "Configured signal reference that could not be resolved."
-          }
-        ]
-      }
-    },
-    "EntityDiagnosisStatus": {
-      "type": "string",
-      "description": "Evidence-quality status of this diagnosis page. It is page-local and independent of paging.",
-      "enum": [
-        "Complete",
-        "Partial"
-      ],
-      "x-ms-enum": {
-        "name": "EntityDiagnosisStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Complete",
-            "value": "Complete",
-            "description": "All evidence in this page's scope is present. May coexist with nextLink; reaching maxDepth is still Complete."
-          },
-          {
-            "name": "Partial",
-            "value": "Partial",
-            "description": "Evidence within the requested scope is unavailable, pending, or hard-capped and is not supplied by later pages."
           }
         ]
       }
