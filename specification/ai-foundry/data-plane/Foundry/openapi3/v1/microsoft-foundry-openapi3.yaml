@@ -95372,6 +95372,15 @@ components:
         target:
           $ref: '#/components/schemas/TelephonyTransferTargetName'
           description: The name of a transfer target configured for the voice agent.
+        sip_headers:
+          type: array
+          items:
+            $ref: '#/components/schemas/TelephonyTransferSipHeader'
+          maxItems: 5
+          description: Custom SIP headers for this transfer only. A header with the same name, ignoring case, as a header configured on the target replaces it; the combined set is limited to 5 headers. Requires a `sip` destination and the `VoiceAgents=V1Preview` opt-in.
+          x-ms-foundry-meta:
+            required_previews:
+              - VoiceAgents=V1Preview
       description: A request to transfer an active telephony call to a configured target.
     TelephonyCampaign:
       type: object
@@ -95744,6 +95753,33 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+    TelephonyTransferSipHeader:
+      type: object
+      required:
+        - name
+        - value
+      properties:
+        name:
+          $ref: '#/components/schemas/TelephonyTransferSipHeaderName'
+          description: The header name. Names must be unique, ignoring case, within one transfer.
+        value:
+          type: string
+          minLength: 1
+          maxLength: 256
+          description: 'The header value after any template rendering. Allowed characters are ASCII letters, digits, and `= ; . ! % * _ + ~ - : @ /`; control characters, spaces, `<`, `>`, `?`, and `&` are rejected. A `User-to-User` value follows RFC 7433, for example `48656c6c6f;encoding=hex`.'
+      description: A custom SIP header carried on a transfer. The service URI-encodes each header into the `sip:` Refer-To target so that the transfer recipient can copy it into the new call. Headers apply only to `sip` destinations; other destination types reject them.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    TelephonyTransferSipHeaderName:
+      type: string
+      minLength: 3
+      maxLength: 64
+      pattern: ^(?:[Uu]ser-[Tt]o-[Uu]ser|[Xx]-(?![Mm][Ss]-)[A-Za-z0-9][A-Za-z0-9.!%*_+~-]{0,61})$
+      description: 'A custom SIP header name sent on a transfer: `User-to-User`, or an extension header that starts with `X-` or `x-`. Names are sent with the case given. Standard SIP headers and the reserved `X-MS-` prefix are rejected.'
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     TelephonyTransferTarget:
       type: object
       required:
@@ -95762,6 +95798,15 @@ components:
         destination:
           $ref: '#/components/schemas/TelephonyAddress'
           description: The shared typed address to transfer to. The selected provider validates supported destination types.
+        sip_headers:
+          type: array
+          items:
+            $ref: '#/components/schemas/TelephonyTransferSipHeader'
+          maxItems: 5
+          description: Custom SIP headers sent when this target is used. Values may use `{{@system.*}}` templates, rendered at transfer time; a header whose value renders empty is omitted. Requires a `sip` destination and the `VoiceAgents=V1Preview` opt-in.
+          x-ms-foundry-meta:
+            required_previews:
+              - VoiceAgents=V1Preview
       description: A named destination to which the voice agent may transfer a call.
     TelephonyTransferTargetName:
       type: string
@@ -101216,6 +101261,32 @@ components:
           minimum: 1
           default: 20
       description: The configured transfer routing policy. The model selects a target name, not destinations or routing settings.
+    VoiceAgentTransferSipHeader:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          $ref: '#/components/schemas/TelephonyTransferSipHeaderName'
+          description: The header name. Names must be unique, ignoring case, within one target.
+        value:
+          type: string
+          minLength: 1
+          maxLength: 256
+          description: A literal or templated value, such as `{{@system.sip_call_id}}`. When omitted, the model supplies the value and `description` is required. The model can't override an author value.
+        description:
+          type: string
+          minLength: 1
+          maxLength: 512
+          description: 'Model-visible guidance that describes the value to supply, for example `Reason code: billing, clinical, or other`. Required when `value` is omitted; not allowed otherwise.'
+        required:
+          type: boolean
+          description: Whether a transfer call fails validation when the model doesn't supply this header. Defaults to false, which omits the header. Applies only when `value` is omitted.
+          default: false
+      description: A custom SIP header configured on a system-tool transfer target. Set `value` for an author-defined or templated value, or omit it and set `description` so that the model supplies the value in each transfer call.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentTransferStrategy:
       anyOf:
         - type: string
@@ -101273,7 +101344,16 @@ components:
         routing:
           $ref: '#/components/schemas/VoiceAgentTransferRouting'
           description: The trusted routing policy for this target.
-      description: A configured logical transfer target. Only its name and description are model-visible; destinations and routing are executor settings.
+        sip_headers:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoiceAgentTransferSipHeader'
+          maxItems: 5
+          description: Custom SIP headers sent with transfers to this target. Model-supplied headers appear as a `sip_headers` object argument of the `transfer` tool, keyed by header name. Requires `sip` destinations and the `VoiceAgents=V1Preview` opt-in.
+          x-ms-foundry-meta:
+            required_previews:
+              - VoiceAgents=V1Preview
+      description: A configured logical transfer target. Its name, description, and the names and descriptions of model-supplied SIP headers are model-visible; destinations, routing, and author header values are executor settings.
     VoiceAgentTransport:
       anyOf:
         - type: string
