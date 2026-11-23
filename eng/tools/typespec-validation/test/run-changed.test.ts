@@ -1,6 +1,6 @@
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import { d } from "@azure-tools/specs-shared/testing";
-import { ChildProcess, spawn } from "node:child_process";
+import { spawn } from "node:child_process";
 import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "pathe";
@@ -8,6 +8,8 @@ import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { findChangedProjects } from "../src/find-projects.ts";
 import { runChanged } from "../src/run-projects.ts";
+import type { WorkerRequest } from "../src/worker-protocol.ts";
+import { mockProjectWorker, type MockProjectWorker } from "./project-worker-mock.ts";
 
 vi.mock("../src/find-projects.ts", async (importOriginal) => ({
   ...(await importOriginal()),
@@ -20,6 +22,8 @@ vi.mock("node:child_process", async (importOriginal) => ({
 
 let root: string;
 let project: string;
+const onRequest = vi.fn<(request: WorkerRequest, worker: MockProjectWorker) => void>();
+const requests = () => onRequest.mock.calls.map(([request]) => request);
 
 beforeEach(async () => {
   root = resolve(await realpath(await mkdtemp(join(tmpdir(), "tsv-changed-"))));
@@ -36,13 +40,10 @@ beforeEach(async () => {
       projects: [project],
       checkingAllSpecs: false,
     });
+  onRequest.mockReset().mockImplementation((_request, worker) => worker.respond(true));
   vi.mocked(spawn)
     .mockReset()
-    .mockImplementation(() => {
-      const child = new ChildProcess();
-      queueMicrotask(() => child.emit("close", 0, null));
-      return child;
-    });
+    .mockImplementation(() => mockProjectWorker(onRequest).child);
 });
 
 afterEach(async () => {
@@ -59,10 +60,11 @@ it("uses the repository root and passes the default revisions to each project", 
     ignoreCoreFiles: undefined,
     logger: expect.any(ConsoleLogger) as unknown,
   });
-  expect(vi.mocked(spawn).mock.calls[0][1]).toEqual([
-    expect.stringMatching(/[/\\]src[/\\]project-worker\.ts$/),
-    project,
-    '{"checkingAllSpecs":false,"baseCommitish":"HEAD^","headCommitish":"HEAD"}',
+  expect(requests()).toEqual([
+    {
+      folder: project,
+      context: { checkingAllSpecs: false, baseCommitish: "HEAD^", headCommitish: "HEAD" },
+    },
   ]);
   expect(vi.mocked(findChangedProjects).mock.calls[0][1].logger.isDebug()).toBe(false);
 });
@@ -81,9 +83,11 @@ it("passes explicit revisions and the core-file policy without losing context", 
     ignoreCoreFiles: true,
     logger: expect.any(ConsoleLogger) as unknown,
   });
-  expect(vi.mocked(spawn).mock.calls[0][1]?.[2]).toBe(
-    '{"checkingAllSpecs":false,"baseCommitish":"origin/main","headCommitish":"feature"}',
-  );
+  expect(requests()[0].context).toEqual({
+    checkingAllSpecs: false,
+    baseCommitish: "origin/main",
+    headCommitish: "feature",
+  });
 });
 
 it("forwards verbose logging without adding presentation options to suppression context", async () => {
@@ -97,10 +101,13 @@ it("forwards verbose logging without adding presentation options to suppression 
   expect(vi.mocked(findChangedProjects).mock.calls[0][1].logger.isDebug()).toBe(true);
   expect(vi.mocked(spawn).mock.calls[0][1]).toEqual([
     expect.stringMatching(/[/\\]src[/\\]project-worker\.ts$/),
-    project,
-    '{"checkingAllSpecs":false,"baseCommitish":"HEAD^","headCommitish":"HEAD"}',
     "--verbose",
   ]);
+  expect(requests()[0].context).toEqual({
+    checkingAllSpecs: false,
+    baseCommitish: "HEAD^",
+    headCommitish: "HEAD",
+  });
 });
 
 it("does not honor all-spec suppressions for scoped changed projects", async () => {
@@ -136,9 +143,11 @@ it("sets all-spec context on child processes after a core-file fallback", async 
     checkingAllSpecs: true,
   });
   await expect(runChanged(root)).resolves.toBe(true);
-  expect(vi.mocked(spawn).mock.calls[0][1]?.[2]).toBe(
-    '{"checkingAllSpecs":true,"baseCommitish":"HEAD^","headCommitish":"HEAD"}',
-  );
+  expect(requests()[0].context).toEqual({
+    checkingAllSpecs: true,
+    baseCommitish: "HEAD^",
+    headCommitish: "HEAD",
+  });
 });
 
 it.each([false, true])(
@@ -186,13 +195,9 @@ it.each(["false", "true"])(
       .addConfig("commit.gpgsign", "false")
       .add(".")
       .commit("Fixture");
-    vi.mocked(spawn).mockImplementationOnce(() => {
-      const child = new ChildProcess();
-      queueMicrotask(() => child.emit("close", 1, null));
-      return child;
-    });
+    onRequest.mockImplementationOnce((_request, worker) => worker.respond(false));
     await expect(runChanged(root, { gitClean: true })).resolves.toBe(false);
-    expect(spawn).toHaveBeenCalledTimes(2);
+    expect(requests().map(({ folder }) => folder)).toEqual([project, other]);
     expect((await git.status()).isClean()).toBe(true);
     expect(console.error).toHaveBeenLastCalledWith(d`
       TypeSpec Validation failed for some folder to fix run and address any errors:

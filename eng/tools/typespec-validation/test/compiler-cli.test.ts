@@ -244,6 +244,20 @@ it("retains per-project CI annotations and compiler diagnostics in batch mode", 
   expect(result.stderr).not.toContain("invalid-ref");
 });
 
+it("keeps project results and diagnostics separate when a batch reuses a worker", async () => {
+  const sibling = "specification/service/data-plane/Sibling";
+  await cp(join(root, project), join(root, sibling), { recursive: true });
+  await writeFile(join(root, sibling, "main.tsp"), "model Invalid {\n  value: Unknown;\n}\n");
+
+  const result = await run("--all", "--concurrency=1");
+
+  expect(result.code).toBe(1);
+  expect(result.stdout, result.stderr).toContain(`pass ${project}`);
+  expect(result.stdout).toContain(`fail ${sibling}`);
+  expect(result.stderr.match(/invalid-ref/g)).toHaveLength(1);
+  expect(result.stderr).toContain(`${sibling}/main.tsp`);
+});
+
 it.each(["--all", "--changed"])(
   "checks sibling emissions in %s without changing their shared baseline or Git index",
   async (mode) => {

@@ -10,6 +10,13 @@ import pc from "picocolors";
 import { simpleGit } from "simple-git";
 import { formatRuleSummary, supportsColor, type RuleCounts } from "./diagnostics.ts";
 import { findChangedProjects, type ChangedProjectsOptions } from "./find-projects.ts";
+import {
+  OutputCapture,
+  type OutputSegment,
+  type RunContext,
+  type WorkerMessage,
+  type WorkerRequest,
+} from "./worker-protocol.ts";
 
 interface RunOptions {
   gitClean?: boolean;
@@ -20,30 +27,7 @@ interface RunOptions {
   concurrency?: number;
 }
 
-interface RunContext {
-  checkingAllSpecs: boolean;
-  baseCommitish?: string;
-  headCommitish?: string;
-}
-
 type ProjectStatus = "pass" | "fail" | "skip";
-
-export type OutputStream = "stdout" | "stderr";
-export interface OutputSegment {
-  stream: OutputStream;
-  text: string;
-}
-
-/** A project sent to a reusable `project-worker.ts --serve` process. */
-export interface WorkerRequest {
-  folder: string;
-  context: RunContext;
-}
-
-export interface WorkerResponse {
-  success: boolean;
-  segments: OutputSegment[];
-}
 
 /** Thrown when a child is terminated by a signal; carries any output captured before termination. */
 class ProjectTerminatedError extends Error {
@@ -55,9 +39,7 @@ class ProjectTerminatedError extends Error {
   }
 }
 
-// Cap captured output per project so a runaway diagnostic (e.g. a huge generated-file diff)
-// can't grow runner memory without bound; excess output is dropped, not buffered.
-export const MAX_CAPTURED_OUTPUT_BYTES = 10 * 1024 * 1024;
+const MAX_PROJECTS_PER_WORKER = 20;
 
 export async function runAll(
   folder: string,
@@ -119,11 +101,6 @@ async function runProjects(
   if (options.fix && concurrency > 1) {
     throw new Error("--fix requires --concurrency=1 because formatter scopes may overlap");
   }
-  // Experimental: validate several projects per process to reuse loaded modules and cached reads.
-  const projectsPerWorker = Number(process.env.TSV_PROJECTS_PER_WORKER ?? "1");
-  if (!Number.isSafeInteger(projectsPerWorker) || projectsPerWorker < 1) {
-    throw new Error("TSV_PROJECTS_PER_WORKER must be a positive safe integer");
-  }
   const git = simpleGit({ baseDir: root, allowEnvironment: ["GIT_OPTIONAL_LOCKS"] }).env(
     "GIT_OPTIONAL_LOCKS",
     "0",
@@ -169,25 +146,22 @@ async function runProjects(
   process.on("SIGTERM", onSigterm);
 
   async function worker() {
-    const reusable =
-      projectsPerWorker > 1
-        ? new ReusableProjectWorker(projectsPerWorker, { ...options, signal: controller.signal })
-        : undefined;
+    const projectWorker = new ProjectWorker({ ...options, signal: controller.signal });
     try {
       while (!stopped && nextProject < projects.length) {
         const project = projects[nextProject++];
         try {
-          await runProject(project, reusable);
+          await runProject(project, projectWorker);
         } catch (error) {
           stop(error);
         }
       }
     } finally {
-      await reusable?.close();
+      await projectWorker.close();
     }
   }
 
-  async function runProject(project: string, reusable?: ReusableProjectWorker) {
+  async function runProject(project: string, projectWorker: ProjectWorker) {
     const name = displayPath(project);
     if (context.checkingAllSpecs) {
       const suppressions = await getSuppressions("TypeSpecValidationAll", project, {
@@ -209,12 +183,7 @@ async function runProjects(
     if (stopped) return;
 
     try {
-      const { success, segments } = reusable
-        ? await reusable.validate(project, context)
-        : await validateProject(project, context, {
-            ...options,
-            signal: controller.signal,
-          });
+      const { success, segments } = await projectWorker.validate(project, context);
       if (success) {
         counts.PASS++;
         printProjectGroup(githubActions, "pass", name, segments);
@@ -376,85 +345,6 @@ function selectShard(projects: string[], shard: string): string[] {
   return projects.slice(start, end);
 }
 
-/** Run a project's validation as a child process, capturing its output to attribute it to a titled group. */
-function validateProject(
-  folder: string,
-  context: RunContext,
-  {
-    verbose = false,
-    fix = false,
-    signal,
-  }: Pick<RunOptions, "verbose" | "fix"> & {
-    signal?: AbortSignal;
-  } = {},
-): Promise<{ success: boolean; segments: OutputSegment[] }> {
-  return new Promise((resolvePromise, reject) => {
-    const env = childEnv();
-    // Segments are recorded in capture order (not grouped by stream) so interleaved
-    // stdout/stderr writes from the child can be replayed in their real relative order.
-    const segments: OutputSegment[] = [];
-    let capturedBytes = 0;
-    let truncated = false;
-    const capture = (stream: OutputStream, chunk: Buffer) => {
-      // Keep draining the pipe even once truncated, so a chatty child can't stall on backpressure.
-      if (truncated) return;
-      capturedBytes += chunk.length;
-      if (capturedBytes > MAX_CAPTURED_OUTPUT_BYTES) {
-        truncated = true;
-        segments.push({
-          stream,
-          text: `\n[output truncated: exceeded ${MAX_CAPTURED_OUTPUT_BYTES / (1024 * 1024)} MiB]\n`,
-        });
-        return;
-      }
-      segments.push({ stream, text: chunk.toString("utf8") });
-    };
-    // A child process keeps each project's context and exit status independent.
-    const child = spawn(
-      process.execPath,
-      [
-        workerPath,
-        folder,
-        JSON.stringify(context),
-        ...(verbose ? ["--verbose"] : []),
-        ...(fix ? ["--fix"] : []),
-      ],
-      { stdio: ["ignore", "pipe", "pipe"], env },
-    );
-    child.stdout?.on("data", (chunk: Buffer) => capture("stdout", chunk));
-    child.stderr?.on("data", (chunk: Buffer) => capture("stderr", chunk));
-    let launchError: Error | undefined;
-    let forceKill: NodeJS.Timeout | undefined;
-    const abort = () => {
-      forceKill = setTimeout(() => child.kill("SIGKILL"), 5_000);
-      forceKill.unref();
-      child.kill("SIGTERM");
-    };
-    signal?.addEventListener("abort", abort, { once: true });
-    if (signal?.aborted) abort();
-    child.once("error", (error) => {
-      launchError = error;
-    });
-    child.once("close", (code, terminationSignal) => {
-      clearTimeout(forceKill);
-      // Wait for close, not just error, so peers have exited before the batch returns.
-      if (launchError) {
-        reject(launchError);
-      } else if (terminationSignal) {
-        reject(
-          new ProjectTerminatedError(
-            `TypeSpec Validation for ${folder} terminated by ${terminationSignal}`,
-            segments,
-          ),
-        );
-      } else {
-        resolvePromise({ success: code === 0, segments });
-      }
-    });
-    child.once("close", () => signal?.removeEventListener("abort", abort));
-  });
-}
-
 const workerPath = fileURLToPath(new URL("./project-worker.ts", import.meta.url));
 
 function childEnv(): NodeJS.ProcessEnv {
@@ -470,21 +360,15 @@ function childEnv(): NodeJS.ProcessEnv {
 }
 
 /**
- * A worker process that validates projects one at a time over IPC and is replaced after a fixed
- * number of projects, bounding memory retained by loaded programs and cached reads.
+ * A worker validates projects one at a time and is recycled to bound cached data and memory.
  */
-class ReusableProjectWorker {
+class ProjectWorker {
   #child: ChildProcess | undefined;
   #validated = 0;
-  #stray: OutputSegment[] = [];
-  readonly #limit: number;
+  #output = new OutputCapture();
   readonly #options: Pick<RunOptions, "verbose" | "fix"> & { signal: AbortSignal };
 
-  constructor(
-    limit: number,
-    options: Pick<RunOptions, "verbose" | "fix"> & { signal: AbortSignal },
-  ) {
-    this.#limit = limit;
+  constructor(options: Pick<RunOptions, "verbose" | "fix"> & { signal: AbortSignal }) {
     this.#options = options;
   }
 
@@ -492,41 +376,46 @@ class ReusableProjectWorker {
     folder: string,
     context: RunContext,
   ): Promise<{ success: boolean; segments: OutputSegment[] }> {
-    if (this.#validated >= this.#limit) await this.close();
+    if (this.#validated >= MAX_PROJECTS_PER_WORKER) await this.close();
     const child = (this.#child ??= this.#start());
     this.#validated++;
     return new Promise((resolvePromise, reject) => {
-      const takeOutput = () => this.#stray.splice(0);
+      let settled = false;
       const cleanup = () => {
         child.off("message", onMessage);
         child.off("exit", onExit);
         child.off("error", onError);
       };
-      const onMessage = (response: WorkerResponse) => {
+      const finish = () => {
+        if (settled) return false;
+        settled = true;
         cleanup();
-        resolvePromise({
-          success: response.success,
-          segments: [...takeOutput(), ...response.segments],
-        });
+        return true;
+      };
+      const onMessage = (message: WorkerMessage) => {
+        if (message.kind === "output") {
+          for (const segment of message.segments) this.#output.append(segment.stream, segment.text);
+        } else if (message.kind === "result" && finish()) {
+          resolvePromise({ success: message.success, segments: this.#output.take() });
+        }
       };
       const onError = (error: Error) => {
-        cleanup();
-        reject(error);
+        if (finish()) reject(error);
       };
       const onExit = (code: number | null, signal: NodeJS.Signals | null) => {
-        cleanup();
+        if (!finish()) return;
         if (signal) {
           reject(
             new ProjectTerminatedError(
               `TypeSpec Validation for ${folder} terminated by ${signal}`,
-              takeOutput(),
+              this.#output.take(),
             ),
           );
         } else {
           resolvePromise({
             success: false,
             segments: [
-              ...takeOutput(),
+              ...this.#output.take(),
               { stream: "stderr", text: `TypeSpec Validation worker exited with code ${code}` },
             ],
           });
@@ -535,48 +424,69 @@ class ReusableProjectWorker {
       child.on("message", onMessage);
       child.once("exit", onExit);
       child.once("error", onError);
-      child.send({ folder, context } satisfies WorkerRequest);
+      try {
+        child.send({ folder, context } satisfies WorkerRequest, (error) => {
+          if (error) onError(error);
+        });
+      } catch (error) {
+        if (finish()) reject(error instanceof Error ? error : new Error(String(error)));
+      }
     });
   }
 
-  /** Let the current process exit after its last project, and wait until it has. */
   async close(): Promise<void> {
     const child = this.#child;
     this.#child = undefined;
     this.#validated = 0;
     if (!child || child.exitCode !== null || child.signalCode !== null) return;
-    // Wait for "exit": "close" may never fire once the IPC channel has been disconnected.
-    const exited = new Promise((resolveExit) => child.once("exit", resolveExit));
-    if (child.connected) child.disconnect();
-    await exited;
+    await new Promise<void>((resolveExit) => {
+      const finish = () => {
+        child.off("exit", finish);
+        child.off("close", finish);
+        child.off("error", onError);
+        resolveExit();
+      };
+      const onError = () => {
+        if (child.pid === undefined) finish();
+      };
+      child.once("exit", finish);
+      child.once("close", finish);
+      child.on("error", onError);
+      if (child.connected) child.disconnect();
+      else if (child.pid === undefined) finish();
+    });
   }
 
   #start(): ChildProcess {
     const { verbose = false, fix = false, signal } = this.#options;
     const child = spawn(
       process.execPath,
-      [workerPath, "--serve", ...(verbose ? ["--verbose"] : []), ...(fix ? ["--fix"] : [])],
+      [workerPath, ...(verbose ? ["--verbose"] : []), ...(fix ? ["--fix"] : [])],
       { stdio: ["ignore", "pipe", "pipe", "ipc"], env: childEnv() },
     );
-    // Output written outside a project's capture, e.g. by a crash, is attributed to the next result.
-    child.stdout?.on("data", (chunk: Buffer) =>
-      this.#stray.push({ stream: "stdout", text: chunk.toString("utf8") }),
-    );
-    child.stderr?.on("data", (chunk: Buffer) =>
-      this.#stray.push({ stream: "stderr", text: chunk.toString("utf8") }),
-    );
+    child.stdout?.on("data", (chunk: Buffer) => this.#output.append("stdout", chunk));
+    child.stderr?.on("data", (chunk: Buffer) => this.#output.append("stderr", chunk));
     let forceKill: NodeJS.Timeout | undefined;
     const abort = () => {
+      if (child.pid === undefined || child.exitCode !== null || child.signalCode !== null) return;
       forceKill = setTimeout(() => child.kill("SIGKILL"), 5_000);
       forceKill.unref();
       child.kill("SIGTERM");
     };
     signal.addEventListener("abort", abort, { once: true });
     if (signal.aborted) abort();
-    child.once("exit", () => {
+    const cleanup = () => {
       clearTimeout(forceKill);
       signal.removeEventListener("abort", abort);
-      if (this.#child === child) this.#child = undefined;
+      if (this.#child === child) {
+        this.#child = undefined;
+        this.#validated = 0;
+      }
+    };
+    child.once("exit", cleanup);
+    child.once("close", cleanup);
+    child.on("error", () => {
+      if (child.pid === undefined) cleanup();
     });
     return child;
   }
