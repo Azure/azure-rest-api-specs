@@ -43,14 +43,16 @@ using Azure.Core;
 @server(
   "{vaultBaseUrl}",
   "The key vault client performs cryptographic key operations and vault operations against the Key Vault service.",
-  {
-    /**
-     * The base URL of the Key Vault instance (e.g. https://myvault.vault.azure.net/)
-     */
-    vaultBaseUrl: url,
-  }
+  ServiceParams
 )
 namespace KeyVault;
+
+alias ServiceParams = {
+  /**
+   * The base URL of the Key Vault instance (e.g. https://myvault.vault.azure.net/)
+   */
+  vaultBaseUrl: url;
+};
 
 /**
  * The available API versions.
