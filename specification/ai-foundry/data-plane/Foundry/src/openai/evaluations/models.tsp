@@ -717,7 +717,10 @@ model AgentFilterTraceSource extends TraceSource {
   /** The identifier of the agent to filter traces by. */
   agent_id?: string;
 
-  /** The name of the agent to filter traces by. */
+  /**
+   * The name of the agent to filter traces by.
+   * When omitted and the evaluation's `testing_criteria` references a rubric evaluator generated from an agent source (`generation_agent_source`), the service automatically infers `agent_name` from that rubric evaluator.
+   */
   agent_name?: string;
 
   /** The version of the agent to filter traces by. */
