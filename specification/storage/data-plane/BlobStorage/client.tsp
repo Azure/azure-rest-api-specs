@@ -1390,11 +1390,9 @@ union AccessTierRust {
 }
 
 // ---- Java customizations (translated from the csharp scope; java shipped names track csharp) ----
-@@clientName(BlobServicePropertiesCsharp, "BlobServiceProperties", "java");
 // The shipped java type is the public com.azure.storage.blob.models.GeoReplicationStatus, which is what
 // GeoReplication.getStatus() returns; the csharp/go name would both rename it and hide it in implementation.
 @@clientName(GeoReplicationStatusType, "GeoReplicationStatus", "java");
-@@access(GeoReplicationStatusType, Access.public, "java");
 @@clientName(StorageErrorCode, "BlobErrorCode", "java");
 @@clientName(Container.listBlobs, "ListBlobFlatSegment", "java");
 @@clientName(BlobProperties, "BlobItemPropertiesInternal", "java");
@@ -1416,7 +1414,6 @@ union AccessTierRust {
 @@clientName(Service.findBlobsByTags, "FilterBlobs", "java");
 @@clientName(Service.listContainers, "ListContainersSegment", "java");
 @@clientName(QueryType, "QueryFormatType", "java");
-@@clientName(QueryType.JSON, "Json", "java");
 @@clientName(ArrowField, "ArrowFieldInternal", "java");
 @@clientName(ArrowConfiguration, "ArrowTextConfigurationInternal", "java");
 @@clientName(ContainerItem, "BlobContainerItem", "java");
@@ -1451,7 +1448,6 @@ union AccessTierRust {
 // BlobPrefix follows BlobItem: the generated model is internal and carries the BlobName, so the Encoded
 // attribute survives and ModelHelper can decode it; the public BlobPrefix is hand-owned and exposes a String.
 @@clientName(BlobPrefix, "BlobPrefixInternal", "java");
-@@access(BlobPrefix, Access.internal, "java");
 
 // The shipped java accessors spell these out; the spec's abbreviated property names would rename the public API.
 @@clientName(UserDelegationKey.signedOid, "signedObjectId", "java");
@@ -1472,7 +1468,6 @@ union AccessTierRust {
 @@alternateType(KeyInfo.start, string, "java");
 @@alternateType(KeyInfo.expiry, string, "java");
 @@clientName(KeyInfo.delegatedUserTid, "delegatedUserTenantId", "java");
-@@clientName(Metrics.includeApis, "IncludeApis", "java");
 // The csharp scope shortens these to Block/Page/Append, but the shipped java constants are BLOCK_BLOB,
 // PAGE_BLOB and APPEND_BLOB, which the spec member names already produce -- renaming them here would be a
 // breaking public API change.
@@ -1483,15 +1478,6 @@ union AccessTierRust {
   "encryptionScopeOverridePrevented",
   "java"
 );
-@@clientName(SkuName.StandardLRS, "StandardLrs", "java");
-@@clientName(SkuName.StandardGRS, "StandardGrs", "java");
-@@clientName(SkuName.StandardRAGRS, "StandardRagrs", "java");
-@@clientName(SkuName.StandardZRS, "StandardZrs", "java");
-@@clientName(SkuName.PremiumLRS, "PremiumLrs", "java");
-@@clientName(SkuName.StandardGZRS, "StandardGzrs", "java");
-@@clientName(SkuName.PremiumZRS, "PremiumZrs", "java");
-@@clientName(SkuName.StandardRAGZRS, "StandardRagzrs", "java");
-@@clientName(BlobDeleteTypeCustom, "BlobDeleteType", "java");
 
 // Models whose spec-native names would otherwise generate internal duplicates alongside the shipped public
 // types listed in custom-types. Without these the generated models reference the duplicate (e.g.
@@ -1530,28 +1516,15 @@ union AccessTierRust {
 @@clientName(BlobLayoutEndpoint, "BlobLayoutEndpointsEndpointItem", "java");
 @@clientName(BlobLayoutRange, "BlobLayoutRangesRangeItem", "java");
 
-// The hand-written BlobServiceClient pages on the NextMarker in the segment response body, so it needs the
-// response as a typed model. Without an explicit access/usage it is only consumed inline by the emitter's paging
-// helpers and no model is generated. BlobContainersSegment is the name the shipped java impl used.
+// The hand-written BlobServiceClient pages on the NextMarker in the segment response body. BlobContainersSegment is
+// the name the shipped java impl used.
 @@clientName(ListContainersResponse, "BlobContainersSegment", "java");
-@@access(ListContainersResponse, Access.internal, "java");
-@@usage(ListContainersResponse, Usage.output, "java");
 
 // go and csharp both flatten these XML metadata bags to a plain string map; java was missing the same
 // alternateType, so the emitter generated BlobMetadata/ObjectReplicationMetadata wrapper classes where the
 // shipped models expose Map<String, String>.
 @@alternateType(BlobItem.metadata, Record<string>, "java");
 @@alternateType(BlobItem.objectReplicationMetadata, Record<string>, "java");
-@@access(BlobProperties, Access.internal, "java");
-@@access(BlobItem, Access.internal, "java");
-@@access(ArrowField, Access.internal, "java");
-@@access(ArrowConfiguration, Access.internal, "java");
-@@access(DelimitedTextConfiguration, Access.internal, "java");
-@@access(JsonTextConfiguration, Access.internal, "java");
-@@access(BlobDeleteTypeCustom, Access.internal, "java");
-// Emit the error enum + list responses standalone for java (queue lesson).
-@@access(StorageErrorCode, Access.public, "java");
-@@usage(StorageErrorCode, Usage.output, "java");
 
 @@clientName(Storage.Blob, "AzureBlobStorage", "java");
 
