@@ -279,9 +279,15 @@ export interface AutorestArtifact {
   outputDirectory?: string;
 }
 
+export interface NormalizedRefCacheEntry {
+  schema: NormalizedSchema;
+  visitedRefs: Set<string>;
+}
+
 export interface AutorestContext {
   document: AutorestDocument;
   registry: Map<string, AutorestDocument>;
+  normalizedRefs?: Map<string, NormalizedRefCacheEntry>;
   pointer: string;
   route?: string;
   routeSource?: string;

@@ -484,6 +484,95 @@ void test("groups REST contract deltas by schema identity and retains affected o
   assert.equal(cards[0].findings[0].contractDelta.after, "removed");
 });
 
+void test("resolves REST contract deltas and semantic contract rows through inherited allOf properties", () => {
+  const operation = (
+    comparisonRole: "baseline" | "target",
+    operationId: string,
+  ): AssessmentFact => ({
+    comparisonRole,
+    operationId,
+    apiVersion: "v1",
+    method: "get",
+    path: "/widgets",
+    parameters: [],
+    responses: [
+      {
+        status: "200",
+        headers: [],
+        schema: {
+          kind: "object",
+          reference: "stable/v1.json#/definitions/Widget",
+          allOf: [
+            {
+              kind: "object",
+              reference: "stable/v1.json#/definitions/BaseWidget",
+              properties:
+                comparisonRole === "baseline"
+                  ? [
+                      {
+                        name: "state",
+                        required: true,
+                        schema: {
+                          kind: "enum",
+                          type: "string",
+                          reference: "stable/v1.json#/definitions/WidgetState",
+                          values: ["Ready", "Deleted"],
+                        },
+                      },
+                    ]
+                  : [],
+            },
+          ],
+          properties: [
+            { name: "name", required: false, schema: { kind: "scalar", type: "string" } },
+          ],
+        },
+      },
+    ],
+  });
+
+  const findings: RestFindingFixture[] = [
+    {
+      id: "rest-inherited-0",
+      rule: "serialized-property-removed",
+      severity: "high",
+      contractChange: {
+        rule: "serialized-property-removed",
+        location: "response 200.state",
+      },
+      operationIds: ["Widgets_Get"],
+      relatedSemanticIntents: ["semantic-1"],
+      sources: [],
+      evidence: [operation("baseline", "Widgets_Get"), operation("target", "Widgets_Get")],
+    },
+  ];
+
+  const cards = fixtureRestContractCards(findings);
+  assert.equal(cards.length, 1);
+  assert.equal(cards[0].identity, "WidgetState");
+  assert.equal(cards[0].findings[0].contractDelta.before, "WidgetState { Ready | Deleted }");
+  assert.equal(cards[0].findings[0].contractDelta.after, "removed");
+
+  const rows = operationContractRows(
+    {
+      operationId: "Widgets_Get",
+      baseline: operation("baseline", "Widgets_Get"),
+      target: operation("target", "Widgets_Get"),
+      changes: ["responses"],
+      sourceChangeIds: [],
+      hunkIds: [],
+      declarationIds: [],
+      matchBasis: "exact",
+    },
+    findings as unknown as AssessmentFinding[],
+    "semantic-1",
+  );
+  const stateRow = rows.find((row) => row.area === "response 200.state");
+  assert.ok(stateRow);
+  assert.match(stateRow.before, /WidgetState \{ Ready \| Deleted \}/);
+  assert.equal(stateRow.after, "removed");
+});
+
 void test("renderer shows fetched Azure Guidelines guidance and expands failures", () => {
   const catalog = readComplianceCatalog();
   const scores = [10, 9, 8, 7];
