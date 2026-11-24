@@ -186,15 +186,11 @@ describe("handlePackageNamePrEvent", () => {
     await handlePackageNamePrEvent({ github, context, core });
 
     expect(validateLabelChange).toHaveBeenCalledTimes(1);
-    expect(validateLabelChange).toHaveBeenCalledWith(
-      expect.objectContaining({
-        change: expect.objectContaining({
-          action: "unlabeled",
-          targetLabel: "package-name-java-pending",
-          actor: "mallory",
-        }),
-      }),
-    );
+    expect(vi.mocked(validateLabelChange).mock.calls[0][0].change).toMatchObject({
+      action: "unlabeled",
+      targetLabel: "package-name-java-pending",
+      actor: "mallory",
+    });
   });
 
   it("ignores a reopened hint without a matching recent reopen", async () => {
