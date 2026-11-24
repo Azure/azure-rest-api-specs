@@ -121,3 +121,28 @@ union PutKeyValueRequestContentTypeGo {
 );
 @@access(PutKeyValueRequestContentTypeGo, Access.internal, "!go");
 @@scope(PutKeyValueRequestContentTypeGo, "go");
+
+// Rust specific customizations
+@@alternateType(SnapshotStatus, AnnotatedSnapshotStatus, "rust");
+@@clientName(AnnotatedSnapshotStatus, "SnapshotStatus", "rust");
+@@scope(AnnotatedSnapshotStatus, "rust");
+
+@doc("Snapshot status.")
+@lroStatus
+union AnnotatedSnapshotStatus {
+  @doc("Provisioning")
+  provisioning: "provisioning",
+
+  @doc("Ready")
+  @lroSucceeded
+  ready: "ready",
+
+  @doc("Archived")
+  archived: "archived",
+
+  @doc("Failed")
+  @lroFailed
+  failed: "failed",
+
+  string,
+}
