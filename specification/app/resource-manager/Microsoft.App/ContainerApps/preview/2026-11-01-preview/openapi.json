@@ -17952,8 +17952,14 @@
           }
         },
         "encryption": {
-          "$ref": "#/definitions/SandboxGroupEncryption",
-          "description": "Encryption-at-rest configuration. Omit to preserve the current configuration; a supplied configuration replaces it. Encryption cannot be added to or removed from an existing sandbox group."
+          "type": "object",
+          "description": "Encryption-at-rest configuration. Omit to preserve the current configuration; a supplied configuration replaces it. Encryption cannot be added to or removed from an existing sandbox group.",
+          "properties": {
+            "keySource": {
+              "$ref": "#/definitions/SandboxGroupEncryptionKeySource",
+              "description": "The source of the encryption key."
+            }
+          }
         }
       }
     },

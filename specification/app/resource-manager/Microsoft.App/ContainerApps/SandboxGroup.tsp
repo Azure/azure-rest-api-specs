@@ -138,7 +138,7 @@ model SandboxGroupPatchProperties {
 
   /** Encryption-at-rest configuration. Omit to preserve the current configuration; a supplied configuration replaces it. Encryption cannot be added to or removed from an existing sandbox group. */
   @added(Versions.v2026_11_01_preview)
-  encryption?: SandboxGroupEncryption;
+  encryption?: OptionalProperties<SandboxGroupEncryption>;
 }
 
 /** Encryption-at-rest configuration for a sandbox group. */
