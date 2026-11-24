@@ -652,7 +652,7 @@ interface Entity {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
-  #suppress "@azure-tools/typespec-azure-core/no-request-body" "DELETE operations must not have a request body"
+  #suppress "@azure-tools/typespec-azure-core/no-request-body" "Compatibility: Preserve the existing Atlas DELETE body that identifies the business metadata to remove."
   @doc("Remove business metadata from an entity.")
   @route("/atlas/v2/entity/guid/{guid}/businessmetadata")
   @delete
@@ -701,7 +701,7 @@ interface Entity {
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use unknown to model Object"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an Atlas existing api"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
-  #suppress "@azure-tools/typespec-azure-core/no-request-body" "DELETE operations must not have a request body"
+  #suppress "@azure-tools/typespec-azure-core/no-request-body" "Compatibility: Preserve the existing Atlas DELETE body that identifies the business metadata attributes to remove."
   @doc("Delete business metadata attributes from an entity.")
   @route("/atlas/v2/entity/guid/{guid}/businessmetadata/{businessMetadataName}")
   @delete
@@ -781,7 +781,7 @@ interface Entity {
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
-  #suppress "@azure-tools/typespec-azure-core/no-request-body" "DELETE operations must not have a request body"
+  #suppress "@azure-tools/typespec-azure-core/no-request-body" "Compatibility: Preserve the existing Atlas DELETE body that contains the labels to remove."
   @doc("Delete given labels to a given entity.")
   @route("/atlas/v2/entity/guid/{guid}/labels")
   @delete
@@ -842,7 +842,7 @@ interface Entity {
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
-  #suppress "@azure-tools/typespec-azure-core/no-request-body" "DELETE operations must not have a request body"
+  #suppress "@azure-tools/typespec-azure-core/no-request-body" "Compatibility: Preserve the existing Atlas DELETE body that contains labels to remove from the uniquely identified entity."
   @doc("""
     Delete given labels to a given entity identified by its type and unique
     attribute.
@@ -1348,7 +1348,7 @@ interface Glossary {
   #suppress "@azure-tools/typespec-azure-core/request-body-problem" "This is Atlas API behavior"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
-  #suppress "@azure-tools/typespec-azure-core/no-request-body" "DELETE operations must not have a request body"
+  #suppress "@azure-tools/typespec-azure-core/no-request-body" "Compatibility: Preserve the existing Atlas DELETE body that identifies the term assignments to remove."
   @doc("Delete the term assignment for the given list of related objects.")
   @route("/atlas/v2/glossary/terms/{termId}/assignedEntities")
   @delete
@@ -2084,7 +2084,7 @@ interface Type {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is Atlas API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This is Atlas API, which does not require api version"
-  #suppress "@azure-tools/typespec-azure-core/no-request-body" "DELETE operations must not have a request body"
+  #suppress "@azure-tools/typespec-azure-core/no-request-body" "Compatibility: Preserve the existing Atlas bulk-delete body that identifies the type definitions to remove."
   @doc("Delete API for all types in bulk.")
   @route("/atlas/v2/types/typedefs")
   @delete
