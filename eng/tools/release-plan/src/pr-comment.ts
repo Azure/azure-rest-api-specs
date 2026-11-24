@@ -118,14 +118,6 @@ export function buildReleaseplanCommentBody(params: CommentBodyParams): string {
   body += `| **API Version** | ${isMultiVersion ? "Multiple or unspecified (empty plan version)" : `\`${apiVersion}\``} |\n`;
   body += `| **TypeSpec Project** | \`${tspProjectPath}\` |\n`;
 
-  if (isMultiVersion) {
-    body +=
-      "\n> **Note:** This project targets multiple API versions. Check the release plan for SDK generation details.\n";
-  } else {
-    body += `\n> **Note:** The SDK will be generated based on API version \`${apiVersion}\`. `;
-    body += `This is the final API version detected from the changes in this pull request.\n`;
-  }
-
   return body;
 }
 

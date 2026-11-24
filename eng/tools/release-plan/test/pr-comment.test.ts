@@ -121,7 +121,6 @@ describe("PR comment creation", () => {
     expect(body).toContain("123");
     expect(body).toContain("2025-06-01-preview");
     expect(body).toContain("specification/foo/Contoso.Service");
-    expect(body).toContain("The SDK will be generated based on API version `2025-06-01-preview`");
   });
 
   it("builds comment body without link", () => {

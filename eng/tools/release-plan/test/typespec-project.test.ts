@@ -1255,20 +1255,11 @@ describe("TypeSpec metadata resolution", () => {
     const projectPath = "specification/example/resource-manager/Example";
     const absolutePath = join(workspace, projectPath);
     const metadata = createMetadata({
-      csharp: [
-        {
-          emitterName: "csharp",
-          packageName: "Azure.ResourceManager.Example",
-          apiVersion: versions[0],
-        },
-      ],
-      java: [
-        {
-          emitterName: "java",
-          packageName: "com.azure.resourcemanager.example",
-          apiVersion: versions[1],
-        },
-      ],
+      csharp: versions.map((apiVersion) => ({
+        emitterName: "csharp",
+        packageName: "Azure.ResourceManager.Example",
+        apiVersion,
+      })),
     });
     const result = await getTypeSpecProjectVersionFromMetadata(
       absolutePath,
