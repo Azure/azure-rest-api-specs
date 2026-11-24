@@ -64,6 +64,13 @@ mode excludes them.
 Production behavior lives under `scripts/`. Code under `evals/` and `tests/`
 is not imported or used by the runtime.
 
+Preparation, materialization, and finalization must use the same originating
+assessment runtime. Phase records bind its root and code fingerprint to
+input/output content hashes. Integrity checks do not compare filesystem
+timestamps or inode identity: metadata changes and byte-identical replacements
+are harmless. Changed content, runtime mismatches, and missing successful phase
+records remain errors.
+
 The coordinator bootstraps the skill's workspace-locked dependencies before
 loading the assessment implementation. When the installed `yaml` version is
 missing or does not match the skill importer in the root `pnpm-lock.yaml`, it
@@ -328,7 +335,9 @@ Preparation rules:
 2. Capture committed, staged, unstaged, and relevant untracked TypeSpec files.
 3. Discover affected `tspconfig.yaml` project roots.
 4. Create detached service-scoped sparse base/current worktrees for source
-   analysis. Artifact roles may both use the current worktree.
+   analysis, including the revision-local `eng/typespec-rulesets` workspace
+   package as a checkout-only support root. Artifact roles may both use the
+   current worktree.
 5. Apply dirty overlays only to the temporary current worktree.
 6. Detect and prepare the locked npm or pnpm toolchain for each worktree.
 7. Select one source revision and API version for each artifact-comparison
@@ -1099,7 +1108,14 @@ connect related candidates and facts but are not candidate rules.
 
 Method and model comparison requires deterministic identity evidence. An exact,
 unique `crossLanguageDefinitionId` pairs the same symbol across baseline and
-target. A changed identity may be paired only through unique source-owned
+target. TCGC generic instantiations may share a declaration ID, so the existing
+TCGC emit pass also records minimal compiler template-argument provenance before
+the upstream YAML serializer removes raw compiler types. Normalization assigns
+distinct concrete node identities for references, reachability, and graph
+construction, while cross-revision pairing uses the declaration plus canonical
+template arguments. It never uses the complete model shape, collection position,
+or generated friendly name as correspondence evidence. A changed identity may
+be paired only through unique source-owned
 `@renamedFrom` metadata whose old and new qualified declarations resolve to
 unique cross-language definitions. Generated display names, HTTP routes,
 request/response shapes, property overlap, and coincident additions/removals
@@ -1107,6 +1123,12 @@ never establish identity. Missing or ambiguous evidence emits an
 evidence-backed downstream blocker and preserves the baseline/target facts
 instead of fabricating a replacement. Additions and removals remain independent
 when no canonical relationship exists.
+
+Blockers limit only the evidence they actually make unavailable. Deterministic
+candidates with independently resolved facts remain available for Agent
+judgment, and confirmed findings coexist with blockers as failed verdicts with
+partial coverage. An unrelated identity blocker is not a reason to reject a
+candidate.
 
 For `model-property-added-required` candidates, Agent judgment must use the
 model's effective direction:

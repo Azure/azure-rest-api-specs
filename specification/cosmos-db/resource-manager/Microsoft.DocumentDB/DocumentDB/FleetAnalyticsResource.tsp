@@ -16,6 +16,7 @@ namespace Microsoft.DocumentDB;
 /**
  * An Azure Cosmos DB FleetAnalytics.
  */
+@added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @parentResource(FleetResource)
 @added(Versions.v2026_04_01_preview)
@@ -29,6 +30,7 @@ model FleetAnalyticsResource
   >;
 }
 
+@added(Versions.v2026_09_01_preview)
 @removed(Versions.v2026_07_15)
 @added(Versions.v2026_04_01_preview)
 @armResourceOperations(#{ omitTags: true })

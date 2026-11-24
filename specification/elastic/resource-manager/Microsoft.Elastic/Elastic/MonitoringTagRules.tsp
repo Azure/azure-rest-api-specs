@@ -24,31 +24,6 @@ model MonitoringTagRules
     NamePattern = "^.*$"
   >;
 }
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-interface TagRulesCreateOrUpdateResourceOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-      },
-      {
-        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-        @path
-        @segment("monitors")
-        @pattern("^.*$")
-        monitorName: string,
-
-        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-        @path
-        @segment("tagRules")
-        @pattern("^.*$")
-        ruleSetName: string,
-      },
-      ErrorType = ResourceProviderDefaultErrorResponse
-    > {}
-
 @armResourceOperations
 interface TagRules {
   /**
@@ -63,9 +38,10 @@ interface TagRules {
    * Create or update a tag rule set for a given Elastic monitor resource, enabling fine-grained control over observability based on resource tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  createOrUpdate is TagRulesCreateOrUpdateResourceOps.CreateOrUpdateAsync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     MonitoringTagRules,
     Response = ArmResourceUpdatedResponse<MonitoringTagRules>,
+    Error = ResourceProviderDefaultErrorResponse,
     OptionalRequestBody = true
   >;
 

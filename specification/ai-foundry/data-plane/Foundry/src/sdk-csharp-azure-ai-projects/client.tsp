@@ -150,6 +150,11 @@ namespace Azure.AI.Projects;
   OpenAI.InputImageContentParamAutoParam,
   "InternalInputImageContentParamAutoParam"
 );
+@@clientName(
+  AzureAIModelTarget.sampling_params,
+  "SamplingParameters",
+  "csharp"
+);
 // --------------------------------------------------------------------------------
 // Evaluators sub‐client
 // --------------------------------------------------------------------------------
@@ -560,6 +565,16 @@ namespace Azure.AI.Projects;
     identity: "Azure.AI.Extensions.OpenAI.WebIQPreviewTool",
     package: "Azure.AI.Extensions.OpenAI",
     minVersion: "3.0.0-alpha.20260908.3",
+  },
+  "csharp"
+);
+
+@@alternateType(
+  Azure.AI.Projects.ModelSamplingParams,
+  {
+    identity: "Azure.AI.Projects.Agents.ModelSamplingParams",
+    package: "Azure.AI.Projects.Agents",
+    minVersion: "3.0.0-beta.6",
   },
   "csharp"
 );

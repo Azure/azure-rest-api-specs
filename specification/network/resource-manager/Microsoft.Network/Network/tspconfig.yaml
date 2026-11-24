@@ -1,7 +1,19 @@
+emit:
+  - "@azure-tools/typespec-autorest"
 parameters:
   "service-dir":
     default: "sdk/network"
 options:
+  "@azure-tools/typespec-autorest":
+    type-name-strategy: "name-only"
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    emit-lro-options: "all"
+    examples-dir: "{project-root}/examples"
+    output-file: "{version-status}/{version}/{feature}.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    output-splitting: "legacy-feature-files"
   "@azure-tools/typespec-python":
     service-dir: "sdk/network"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-network"

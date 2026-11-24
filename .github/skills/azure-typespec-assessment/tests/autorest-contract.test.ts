@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import {
   discoverAutorestDocuments,
+  effectiveSchemaProperties,
   normalizeAutorestDocuments,
   responseStatusKind,
   sameAutorestContract,
@@ -156,8 +157,7 @@ void test("normalizes Swagger 2 paths, x-ms-paths, refs, allOf, multipart, and r
   assert.ok(createRequest);
   const createSchema = createRequest.schema;
   assert.ok(createSchema);
-  const createProperties = createSchema.properties;
-  assert.ok(createProperties);
+  const createProperties = effectiveSchemaProperties(createSchema);
   assert.equal(createSchema.kind, "object");
   assert.deepEqual(
     createProperties.map((item) => item.name),
@@ -193,6 +193,97 @@ void test("normalizes Swagger 2 paths, x-ms-paths, refs, allOf, multipart, and r
   assert.ok(list);
   assert.equal(list.routeSource, "x-ms-paths");
   assert.equal(list.responses[0].status, "2XX");
+});
+
+void test("keeps nested shared allOf schemas finite while preserving effective properties", () => {
+  const root = path.resolve("virtual-nested-autorest");
+  const contract = normalizeAutorestDocuments([
+    {
+      path: "feature.json",
+      absolutePath: path.join(root, "feature.json"),
+      documentRole: "feature",
+      document: {
+        swagger: "2.0",
+        info: { title: "Feature", version: "2026-01-01" },
+        definitions: {
+          Base: {
+            type: "object",
+            properties: { id: { type: "string" } },
+          },
+          Shared: {
+            allOf: [{ $ref: "#/definitions/Base" }],
+            properties: { name: { type: "string" } },
+          },
+          Widget: {
+            allOf: [{ $ref: "#/definitions/Shared" }, { $ref: "#/definitions/Shared" }],
+            properties: { state: { type: "string" } },
+          },
+        },
+        paths: {
+          "/widgets": {
+            get: {
+              operationId: "Widgets_Get",
+              responses: { 200: { schema: { $ref: "#/definitions/Widget" } } },
+            },
+          },
+        },
+      },
+    },
+  ]);
+
+  const schema = contract.operations[0].responses[0].schema;
+  assert.ok(schema);
+  assert.deepEqual(
+    schema.properties?.map((property) => property.name),
+    ["state"],
+  );
+  assert.deepEqual(
+    effectiveSchemaProperties(schema).map((property) => property.name),
+    ["id", "name", "state"],
+  );
+  assert.ok(JSON.stringify(contract).length < 10_000);
+});
+
+void test("preserves the own schema as a mixed allOf composition branch", () => {
+  const root = path.resolve("virtual-mixed-autorest");
+  const contract = normalizeAutorestDocuments([
+    {
+      path: "feature.json",
+      absolutePath: path.join(root, "feature.json"),
+      documentRole: "feature",
+      document: {
+        swagger: "2.0",
+        info: { title: "Feature", version: "2026-01-01" },
+        definitions: {
+          Mixed: {
+            allOf: [{ type: "string" }],
+            properties: { id: { type: "string" } },
+          },
+        },
+        paths: {
+          "/mixed": {
+            get: {
+              operationId: "Mixed_Get",
+              responses: { 200: { schema: { $ref: "#/definitions/Mixed" } } },
+            },
+          },
+        },
+      },
+    },
+  ]);
+
+  const schema = contract.operations[0].responses[0].schema;
+  assert.ok(schema);
+  assert.equal(schema.kind, "intersection");
+  assert.equal(schema.allOf?.length, 2);
+  assert.deepEqual(
+    schema.allOf?.[1].properties?.map((property) => property.name),
+    ["id"],
+  );
+  assert.deepEqual(
+    effectiveSchemaProperties(schema).map((property) => property.name),
+    ["id"],
+  );
 });
 
 void test("discovers configurable multi-file output from service manifest and rejects OpenAPI 3", (context) => {
@@ -253,4 +344,131 @@ void test("keeps resolved reference identities stable across base and current ar
     ]).operations[0].responses[0].schema;
 
   assert.deepEqual(normalize("base"), normalize("current"));
+});
+
+void test("deduplicates diamond allOf hierarchies without exponential contract expansion", () => {
+  const depth = 25;
+  const buildDiamondDefinitions = (withUnresolvedRoot: boolean) => {
+    const definitions: Record<string, unknown> = {
+      D0: {
+        ...(withUnresolvedRoot
+          ? {
+              allOf: [
+                {
+                  $ref: "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource",
+                },
+              ],
+            }
+          : {}),
+        type: "object",
+        properties: {
+          p0: { type: "string" },
+          overridden: { type: "string" },
+        },
+      },
+    };
+    for (let index = 1; index <= depth; index += 1) {
+      const prev = `D${index - 1}`;
+      definitions[`L${index}`] = {
+        type: "object",
+        allOf: [{ $ref: `#/definitions/${prev}` }],
+        properties: { [`l${index}`]: { type: "string" } },
+      };
+      definitions[`R${index}`] = {
+        type: "object",
+        allOf: [{ $ref: `#/definitions/${prev}` }],
+        properties: { [`r${index}`]: { type: "string" } },
+      };
+      definitions[`D${index}`] = {
+        type: "object",
+        allOf: [{ $ref: `#/definitions/L${index}` }, { $ref: `#/definitions/R${index}` }],
+        properties: {
+          [`d${index}`]: { type: "string" },
+          ...(index === depth ? { overridden: { type: "integer", format: "int32" } } : {}),
+        },
+      };
+    }
+    return definitions;
+  };
+
+  for (const withUnresolvedRoot of [false, true]) {
+    const contract = normalizeAutorestDocuments([
+      {
+        path: "projects/diamond/current/autorest/stable/2026-01-01/diamond.json",
+        document: {
+          swagger: "2.0",
+          info: { title: "Diamond", version: "2026-01-01" },
+          definitions: buildDiamondDefinitions(withUnresolvedRoot),
+          paths: {
+            "/diamond": {
+              get: {
+                operationId: "Diamond_Get",
+                responses: { 200: { schema: { $ref: `#/definitions/D${depth}` } } },
+              },
+            },
+          },
+        },
+      },
+    ]);
+
+    const schema = contract.operations[0].responses[0].schema;
+    assert.ok(schema);
+    assert.ok((schema.allOf?.length ?? 0) <= depth * 3 + 2);
+    const props = effectiveSchemaProperties(schema);
+    assert.equal(props.length, depth * 3 + 2);
+    assert.equal(props.find((item) => item.name === "overridden")?.schema.type, "integer");
+    assert.ok(schema.references?.includes("stable/2026-01-01/diamond.json#/definitions/D0"));
+    assert.ok(schema.references?.includes(`stable/2026-01-01/diamond.json#/definitions/L${depth}`));
+    assert.ok(schema.references?.includes(`stable/2026-01-01/diamond.json#/definitions/R${depth}`));
+    assert.ok(JSON.stringify(contract).length < 60_000);
+  }
+});
+
+void test("does not reuse mutually recursive $ref cache entries across active caller cycles", () => {
+  const ringSize = 14;
+  const definitions: Record<string, unknown> = {
+    Resource: {
+      type: "object",
+      properties: {
+        id: { type: "string" },
+        name: { type: "string" },
+      },
+    },
+  };
+  const paths: Record<string, unknown> = {};
+  for (let index = 0; index < ringSize; index += 1) {
+    const next = (index + 1) % ringSize;
+    definitions[`Node${index}`] = {
+      type: "object",
+      allOf: [{ $ref: "#/definitions/Resource" }],
+      properties: {
+        peer: { $ref: `#/definitions/Node${next}` },
+        label: { type: "string" },
+      },
+    };
+    paths[`/nodes/${index}`] = {
+      get: {
+        operationId: `Nodes_Get${index}`,
+        responses: { 200: { schema: { $ref: `#/definitions/Node${index}` } } },
+      },
+    };
+  }
+
+  const contract = normalizeAutorestDocuments([
+    {
+      path: "projects/ring/current/autorest/stable/2026-01-01/ring.json",
+      document: {
+        swagger: "2.0",
+        info: { title: "Ring", version: "2026-01-01" },
+        definitions,
+        paths,
+      },
+    },
+  ]);
+
+  assert.equal(contract.operations.length, ringSize);
+  const sizes = contract.operations.map((operation) => JSON.stringify(operation).length);
+  const minSize = Math.min(...sizes);
+  const maxSize = Math.max(...sizes);
+  assert.ok(maxSize < minSize + 64, `expected uniform ring sizes, got ${minSize}..${maxSize}`);
 });

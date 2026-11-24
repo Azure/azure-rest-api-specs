@@ -1,5 +1,4 @@
-import "./Network/main.tsp";
-import "./Vmss/main.tsp";
+import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/versioning";
 
@@ -10,8 +9,6 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.Core;
 using Microsoft.Network;
-using Microsoft.Compute;
-using Common;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Generate the IDPS signature override list as a C# pageable resource operation."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
@@ -144,7 +141,7 @@ using Common;
   "csharp"
 );
 @@clientName(
-  Common.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  Microsoft.Network.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
@@ -169,7 +166,7 @@ using Common;
   "csharp"
 );
 @@clientName(
-  Common.PrivateLinkServiceConnectionProperties.privateLinkServiceConnectionState,
+  Microsoft.Network.PrivateLinkServiceConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
@@ -185,8 +182,16 @@ using Common;
 );
 
 // In 1.15.0 FlowLogProperties is the format object, not the FlowLogInformation property bag.
-@@clientName(Common.FlowLogFormatParameters, "FlowLogProperties", "csharp");
-@@clientName(Common.FlowLogFormatParameters.type, "FormatType", "csharp");
+@@clientName(
+  Microsoft.Network.FlowLogFormatParameters,
+  "FlowLogProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.FlowLogFormatParameters.type,
+  "FormatType",
+  "csharp"
+);
 @@clientName(
   Microsoft.Network.FlowLogProperties,
   "FlowLogInformationProperties",
@@ -194,7 +199,7 @@ using Common;
 );
 // Both flow-log entry points expose the released active name on the same nested wire field.
 @@clientName(
-  Common.TrafficAnalyticsProperties.networkWatcherFlowAnalyticsConfiguration,
+  Microsoft.Network.TrafficAnalyticsProperties.networkWatcherFlowAnalyticsConfiguration,
   "TrafficAnalyticsConfiguration",
   "csharp"
 );
@@ -254,21 +259,21 @@ using Common;
 // Preserve the naming requirements used by the released C# provisioning library.
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve C# provisioning resource naming compatibility."
 @@clientOption(
-  Common.NetworkSecurityGroup,
+  Microsoft.Network.NetworkSecurityGroup,
   "resource-name-constraint",
   #{ minLength: 1, maxLength: 80, pattern: "^[a-zA-Z0-9_.-]+$" },
   "csharp"
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve C# provisioning resource naming compatibility."
 @@clientOption(
-  Common.VirtualNetwork,
+  Microsoft.Network.VirtualNetwork,
   "resource-name-constraint",
   #{ minLength: 2, maxLength: 64, pattern: "^[a-zA-Z0-9_.-]+$" },
   "csharp"
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve C# provisioning resource naming compatibility."
 @@clientOption(
-  Common.NetworkInterface,
+  Microsoft.Network.NetworkInterface,
   "resource-name-constraint",
   #{ minLength: 1, maxLength: 80, pattern: "^[a-zA-Z0-9_.-]+$" },
   "csharp"
@@ -313,12 +318,11 @@ using Common;
   "csharp"
 );
 
-// This empty namespace is the merged SDK client target used by later client
+// This empty namespace is the SDK client target used by later client
 // customizations such as @@clientName and @@clientLocation.
-#suppress "@azure-tools/typespec-client-generator-core/inconsistent-multiple-service-dependency" "CombineClient intentionally merges the Microsoft.Network and Microsoft.Compute (VMSS) services into a single SDK client surface via autoMergeService; the resulting multiple-service dependency is by design for this combined client target."
 @client({
   name: "CombineClient",
-  service: [Microsoft.Network, Microsoft.Compute],
+  service: Microsoft.Network,
   autoMergeService: true,
 })
 namespace CombineClient {
@@ -344,22 +348,22 @@ namespace Azure.ResourceManager.Models {
   "csharp"
 );
 @@alternateType(
-  Common.NatGatewayPropertiesFormat.publicIpAddresses,
+  Microsoft.Network.NatGatewayPropertiesFormat.publicIpAddresses,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 @@alternateType(
-  Common.NatGatewayPropertiesFormat.publicIpAddressesV6,
+  Microsoft.Network.NatGatewayPropertiesFormat.publicIpAddressesV6,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 @@alternateType(
-  Common.NatGatewayPropertiesFormat.publicIpPrefixes,
+  Microsoft.Network.NatGatewayPropertiesFormat.publicIpPrefixes,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 @@alternateType(
-  Common.NatGatewayPropertiesFormat.publicIpPrefixesV6,
+  Microsoft.Network.NatGatewayPropertiesFormat.publicIpPrefixesV6,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
@@ -370,7 +374,7 @@ namespace Azure.ResourceManager.Models {
 );
 // Restore released element types while keeping native property storage and wire serialization.
 @@alternateType(
-  Common.SubnetPropertiesFormat.ipAllocations,
+  Microsoft.Network.SubnetPropertiesFormat.ipAllocations,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
@@ -387,27 +391,38 @@ namespace Azure.ResourceManager.Models {
     | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
-
 @@clientLocation(
-  Microsoft.Compute.NetworkInterfaceIPConfigurations.getVirtualMachineScaleSetIpConfiguration,
+  Microsoft.Network.VmssNetworkInterfaceIPConfigurations.getVirtualMachineScaleSetIpConfiguration,
   Microsoft.Network.NetworkInterfaces,
   "java,javascript,python,go"
 );
 
 @@clientLocation(
-  Microsoft.Compute.NetworkInterfaceIPConfigurations.listVirtualMachineScaleSetIpConfigurations,
+  Microsoft.Network.VmssNetworkInterfaceIPConfigurations.listVirtualMachineScaleSetIpConfigurations,
   Microsoft.Network.NetworkInterfaces,
   "java,javascript,python,go"
 );
 
 @@clientLocation(
-  Microsoft.Compute.NetworkInterfacesOperationGroup.listVirtualMachineScaleSetNetworkInterfaces,
+  Microsoft.Network.VmssNetworkInterfacesOperationGroup.listVirtualMachineScaleSetNetworkInterfaces,
   Microsoft.Network.NetworkInterfaces,
   "java,javascript,python,go"
 );
 
 @@clientLocation(
-  Microsoft.Compute.PublicIPAddressesOperationGroup.listVirtualMachineScaleSetPublicIPAddresses,
+  Microsoft.Network.VmssNetworkInterfaces.getVirtualMachineScaleSetNetworkInterface,
+  Microsoft.Network.NetworkInterfaces,
+  "java,javascript,go,python"
+);
+
+@@clientLocation(
+  Microsoft.Network.VmssNetworkInterfaces.listVirtualMachineScaleSetVMNetworkInterfaces,
+  Microsoft.Network.NetworkInterfaces,
+  "java,javascript,go,python"
+);
+
+@@clientLocation(
+  Microsoft.Network.VmssPublicIPAddressesOperationGroup.listVirtualMachineScaleSetPublicIPAddresses,
   Microsoft.Network.PublicIPAddresses,
   "java,javascript,python,go"
 );
@@ -459,7 +474,7 @@ namespace Azure.ResourceManager.Models {
 @@clientName(Microsoft.Network.QosIpRange.endIP, "endIp", "java");
 // Mitigate ProvisioningState split: create unified union with all values
 @@clientName(
-  Common.ProvisioningState,
+  Microsoft.Network.ProvisioningState,
   "CommonProvisioningState",
   "java,javascript"
 );
@@ -526,7 +541,7 @@ union ProvisioningStateUnion {
   "java"
 );
 @@alternateType(
-  Common.ApplicationGatewayBackendAddressPoolPropertiesFormat.provisioningState,
+  Microsoft.Network.ApplicationGatewayBackendAddressPoolPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -566,7 +581,7 @@ union ProvisioningStateUnion {
   "java"
 );
 @@alternateType(
-  Common.ApplicationGatewayIPConfigurationPropertiesFormat.provisioningState,
+  Microsoft.Network.ApplicationGatewayIPConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -651,7 +666,7 @@ union ProvisioningStateUnion {
   "java"
 );
 @@alternateType(
-  Common.ApplicationSecurityGroupPropertiesFormat.provisioningState,
+  Microsoft.Network.ApplicationSecurityGroupPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -691,7 +706,7 @@ union ProvisioningStateUnion {
   "java"
 );
 @@alternateType(
-  Common.BackendAddressPoolPropertiesFormat.provisioningState,
+  Microsoft.Network.BackendAddressPoolPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -841,12 +856,12 @@ union ProvisioningStateUnion {
   "java"
 );
 @@alternateType(
-  Common.FlowLogPropertiesFormat.provisioningState,
+  Microsoft.Network.FlowLogPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
 @@alternateType(
-  Common.FrontendIPConfigurationPropertiesFormat.provisioningState,
+  Microsoft.Network.FrontendIPConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -866,12 +881,12 @@ union ProvisioningStateUnion {
   "java"
 );
 @@alternateType(
-  Common.InboundNatPoolPropertiesFormat.provisioningState,
+  Microsoft.Network.InboundNatPoolPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
 @@alternateType(
-  Common.InboundNatRulePropertiesFormat.provisioningState,
+  Microsoft.Network.InboundNatRulePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -886,12 +901,12 @@ union ProvisioningStateUnion {
   "java"
 );
 @@alternateType(
-  Common.IPConfigurationProfilePropertiesFormat.provisioningState,
+  Microsoft.Network.IPConfigurationProfilePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
 @@alternateType(
-  Common.IPConfigurationPropertiesFormat.provisioningState,
+  Microsoft.Network.IPConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -901,12 +916,12 @@ union ProvisioningStateUnion {
   "java"
 );
 @@alternateType(
-  Common.LoadBalancerPropertiesFormat.provisioningState,
+  Microsoft.Network.LoadBalancerPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
 @@alternateType(
-  Common.LoadBalancingRulePropertiesFormat.provisioningState,
+  Microsoft.Network.LoadBalancingRulePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -916,7 +931,7 @@ union ProvisioningStateUnion {
   "java"
 );
 @@alternateType(
-  Common.NatGatewayPropertiesFormat.provisioningState,
+  Microsoft.Network.NatGatewayPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -926,17 +941,17 @@ union ProvisioningStateUnion {
   "java"
 );
 @@alternateType(
-  Common.NetworkInterfaceIPConfigurationPropertiesFormat.provisioningState,
+  Microsoft.Network.NetworkInterfaceIPConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
 @@alternateType(
-  Common.NetworkInterfacePropertiesFormat.provisioningState,
+  Microsoft.Network.NetworkInterfacePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
 @@alternateType(
-  Common.NetworkInterfaceTapConfigurationPropertiesFormat.provisioningState,
+  Microsoft.Network.NetworkInterfaceTapConfigurationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -956,7 +971,7 @@ union ProvisioningStateUnion {
   "java"
 );
 @@alternateType(
-  Common.NetworkSecurityGroupPropertiesFormat.provisioningState,
+  Microsoft.Network.NetworkSecurityGroupPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -971,12 +986,12 @@ union ProvisioningStateUnion {
   "java"
 );
 @@alternateType(
-  Common.NetworkWatcherPropertiesFormat.provisioningState,
+  Microsoft.Network.NetworkWatcherPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
 @@alternateType(
-  Common.OutboundRulePropertiesFormat.provisioningState,
+  Microsoft.Network.OutboundRulePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -1006,37 +1021,37 @@ union ProvisioningStateUnion {
   "java"
 );
 @@alternateType(
-  Common.PrivateEndpointConnectionProperties.provisioningState,
+  Microsoft.Network.PrivateEndpointConnectionProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
 @@alternateType(
-  Common.PrivateEndpointProperties.provisioningState,
+  Microsoft.Network.PrivateEndpointProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
 @@alternateType(
-  Common.PrivateLinkServiceConnectionProperties.provisioningState,
+  Microsoft.Network.PrivateLinkServiceConnectionProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
 @@alternateType(
-  Common.PrivateLinkServiceIpConfigurationProperties.provisioningState,
+  Microsoft.Network.PrivateLinkServiceIpConfigurationProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
 @@alternateType(
-  Common.PrivateLinkServiceProperties.provisioningState,
+  Microsoft.Network.PrivateLinkServiceProperties.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
 @@alternateType(
-  Common.ProbePropertiesFormat.provisioningState,
+  Microsoft.Network.ProbePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
 @@alternateType(
-  Common.PublicIPAddressPropertiesFormat.provisioningState,
+  Microsoft.Network.PublicIPAddressPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -1061,7 +1076,7 @@ union ProvisioningStateUnion {
   "java"
 );
 @@alternateType(
-  Common.ResourceNavigationLinkFormat.provisioningState,
+  Microsoft.Network.ResourceNavigationLinkFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -1081,12 +1096,12 @@ union ProvisioningStateUnion {
   "java"
 );
 @@alternateType(
-  Common.RoutePropertiesFormat.provisioningState,
+  Microsoft.Network.RoutePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
 @@alternateType(
-  Common.RouteTablePropertiesFormat.provisioningState,
+  Microsoft.Network.RouteTablePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -1116,7 +1131,7 @@ union ProvisioningStateUnion {
   "java"
 );
 @@alternateType(
-  Common.SecurityRulePropertiesFormat.provisioningState,
+  Microsoft.Network.SecurityRulePropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -1136,27 +1151,27 @@ union ProvisioningStateUnion {
   "java"
 );
 @@alternateType(
-  Common.ServiceAssociationLinkPropertiesFormat.provisioningState,
+  Microsoft.Network.ServiceAssociationLinkPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
 @@alternateType(
-  Common.ServiceDelegationPropertiesFormat.provisioningState,
+  Microsoft.Network.ServiceDelegationPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
 @@alternateType(
-  Common.ServiceEndpointPolicyDefinitionPropertiesFormat.provisioningState,
+  Microsoft.Network.ServiceEndpointPolicyDefinitionPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
 @@alternateType(
-  Common.ServiceEndpointPolicyPropertiesFormat.provisioningState,
+  Microsoft.Network.ServiceEndpointPolicyPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
 @@alternateType(
-  Common.ServiceEndpointPropertiesFormat.provisioningState,
+  Microsoft.Network.ServiceEndpointPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -1181,7 +1196,7 @@ union ProvisioningStateUnion {
   "java"
 );
 @@alternateType(
-  Common.SubnetPropertiesFormat.provisioningState,
+  Microsoft.Network.SubnetPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -1246,17 +1261,17 @@ union ProvisioningStateUnion {
   "java"
 );
 @@alternateType(
-  Common.VirtualNetworkPeeringPropertiesFormat.provisioningState,
+  Microsoft.Network.VirtualNetworkPeeringPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
 @@alternateType(
-  Common.VirtualNetworkPropertiesFormat.provisioningState,
+  Microsoft.Network.VirtualNetworkPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
 @@alternateType(
-  Common.VirtualNetworkTapPropertiesFormat.provisioningState,
+  Microsoft.Network.VirtualNetworkTapPropertiesFormat.provisioningState,
   ProvisioningStateUnion,
   "java"
 );
@@ -1334,13 +1349,21 @@ union ProvisioningStateUnion {
 @@clientName(Microsoft.Network.ErrorResponse, "NetworkErrorResponse", "java");
 
 // IP → Ip naming mitigations for backward compatibility with hand-written wrapper code
-@@clientName(Common.PublicIPAddress, "PublicIpAddress", "java");
+@@clientName(Microsoft.Network.PublicIPAddress, "PublicIpAddress", "java");
 @@clientName(Microsoft.Network.PublicIPPrefix, "PublicIpPrefix", "java");
-@@clientName(Common.FrontendIPConfiguration, "FrontendIpConfiguration", "java");
-@@clientName(Common.IPConfiguration, "IpConfiguration", "java");
-@@clientName(Common.IPConfigurationProfile, "IpConfigurationProfile", "java");
 @@clientName(
-  Common.NetworkInterfaceIPConfiguration,
+  Microsoft.Network.FrontendIPConfiguration,
+  "FrontendIpConfiguration",
+  "java"
+);
+@@clientName(Microsoft.Network.IPConfiguration, "IpConfiguration", "java");
+@@clientName(
+  Microsoft.Network.IPConfigurationProfile,
+  "IpConfigurationProfile",
+  "java"
+);
+@@clientName(
+  Microsoft.Network.NetworkInterfaceIPConfiguration,
   "NetworkInterfaceIpConfiguration",
   "java"
 );
@@ -1365,7 +1388,7 @@ union ProvisioningStateUnion {
   "java"
 );
 @@clientName(
-  Common.ApplicationGatewayIPConfiguration,
+  Microsoft.Network.ApplicationGatewayIPConfiguration,
   "ApplicationGatewayIpConfiguration",
   "java"
 );
@@ -1374,20 +1397,31 @@ union ProvisioningStateUnion {
   "ApplicationGatewayFrontendIpConfiguration",
   "java"
 );
-@@clientName(Common.IPAllocationMethod, "IpAllocationMethod", "java");
-@@clientName(Common.IPVersion, "IpVersion", "java");
-@@clientName(Common.PublicIPAddressSku, "PublicIpAddressSku", "java");
-@@clientName(Common.PublicIPAddressSkuName, "PublicIpAddressSkuName", "java");
+@@clientName(
+  Microsoft.Network.IPAllocationMethod,
+  "IpAllocationMethod",
+  "java"
+);
+@@clientName(Microsoft.Network.IPVersion, "IpVersion", "java");
+@@clientName(
+  Microsoft.Network.PublicIPAddressSku,
+  "PublicIpAddressSku",
+  "java"
+);
+@@clientName(
+  Microsoft.Network.PublicIPAddressSkuName,
+  "PublicIpAddressSkuName",
+  "java"
+);
 @@clientName(Microsoft.Network.PublicIPPrefixSku, "PublicIpPrefixSku", "java");
 @@clientName(
-  Common.PublicIPAddressDnsSettings,
+  Microsoft.Network.PublicIPAddressDnsSettings,
   "PublicIpAddressDnsSettings",
   "java"
 );
 
 // Interface/client IP → Ip renames
 @@clientName(Microsoft.Network.PublicIPAddresses, "PublicIpAddresses", "java");
-@@clientName(Microsoft.Compute.PublicIPAddresses, "PublicIpAddresses", "java");
 @@clientName(Microsoft.Network.PublicIPPrefixes, "PublicIpPrefixes", "java");
 @@clientName(
   Microsoft.Network.PublicIPAddressOperationGroup,
@@ -1397,87 +1431,87 @@ union ProvisioningStateUnion {
 
 // Property-level IP → Ip renames on PropertiesFormat models (Common)
 @@clientName(
-  Common.IPConfigurationPropertiesFormat.privateIPAddress,
+  Microsoft.Network.IPConfigurationPropertiesFormat.privateIPAddress,
   "privateIpAddress",
   "java"
 );
 @@clientName(
-  Common.IPConfigurationPropertiesFormat.publicIPAddress,
+  Microsoft.Network.IPConfigurationPropertiesFormat.publicIPAddress,
   "publicIpAddress",
   "java"
 );
 @@clientName(
-  Common.NetworkInterfaceIPConfigurationPropertiesFormat.privateIPAddress,
+  Microsoft.Network.NetworkInterfaceIPConfigurationPropertiesFormat.privateIPAddress,
   "privateIpAddress",
   "java"
 );
 @@clientName(
-  Common.NetworkInterfaceIPConfigurationPropertiesFormat.publicIPAddress,
+  Microsoft.Network.NetworkInterfaceIPConfigurationPropertiesFormat.publicIPAddress,
   "publicIpAddress",
   "java"
 );
 @@clientName(
-  Common.FrontendIPConfigurationPropertiesFormat.privateIPAddress,
+  Microsoft.Network.FrontendIPConfigurationPropertiesFormat.privateIPAddress,
   "privateIpAddress",
   "java"
 );
 @@clientName(
-  Common.FrontendIPConfigurationPropertiesFormat.publicIPAddress,
+  Microsoft.Network.FrontendIPConfigurationPropertiesFormat.publicIPAddress,
   "publicIpAddress",
   "java"
 );
 @@clientName(
-  Common.ApplicationGatewayBackendAddressPoolPropertiesFormat.backendIPConfigurations,
+  Microsoft.Network.ApplicationGatewayBackendAddressPoolPropertiesFormat.backendIPConfigurations,
   "backendIpConfigurations",
   "java"
 );
 @@clientName(
-  Common.BackendAddressPoolPropertiesFormat.backendIPConfigurations,
+  Microsoft.Network.BackendAddressPoolPropertiesFormat.backendIPConfigurations,
   "backendIpConfigurations",
   "java"
 );
 @@clientName(
-  Common.InboundNatRulePropertiesFormat.frontendIPConfiguration,
+  Microsoft.Network.InboundNatRulePropertiesFormat.frontendIPConfiguration,
   "frontendIpConfiguration",
   "java"
 );
 @@clientName(
-  Common.InboundNatPoolPropertiesFormat.frontendIPConfiguration,
+  Microsoft.Network.InboundNatPoolPropertiesFormat.frontendIPConfiguration,
   "frontendIpConfiguration",
   "java"
 );
 @@clientName(
-  Common.LoadBalancingRulePropertiesFormat.frontendIPConfiguration,
+  Microsoft.Network.LoadBalancingRulePropertiesFormat.frontendIPConfiguration,
   "frontendIpConfiguration",
   "java"
 );
 @@clientName(
-  Common.OutboundRulePropertiesFormat.frontendIPConfigurations,
+  Microsoft.Network.OutboundRulePropertiesFormat.frontendIPConfigurations,
   "frontendIpConfigurations",
   "java"
 );
 @@clientName(
-  Common.LoadBalancerPropertiesFormat.frontendIPConfigurations,
+  Microsoft.Network.LoadBalancerPropertiesFormat.frontendIPConfigurations,
   "frontendIpConfigurations",
   "java"
 );
 @@clientName(
-  Common.PrivateEndpointIPConfigurationProperties.privateIPAddress,
+  Microsoft.Network.PrivateEndpointIPConfigurationProperties.privateIPAddress,
   "privateIpAddress",
   "java"
 );
 @@clientName(
-  Common.PrivateLinkServiceIpConfigurationProperties.privateIPAddress,
+  Microsoft.Network.PrivateLinkServiceIpConfigurationProperties.privateIPAddress,
   "privateIpAddress",
   "java"
 );
 @@clientName(
-  Common.PrivateLinkServiceProperties.destinationIPAddress,
+  Microsoft.Network.PrivateLinkServiceProperties.destinationIPAddress,
   "destinationIpAddress",
   "java"
 );
 @@clientName(
-  Common.ApplicationGatewayIPConfigurationPropertiesFormat.subnet,
+  Microsoft.Network.ApplicationGatewayIPConfigurationPropertiesFormat.subnet,
   "subnet",
   "java"
 );
@@ -1594,12 +1628,12 @@ union ProvisioningStateUnion {
   "java"
 );
 @@clientName(
-  Common.PublicIPAddressPropertiesFormat.servicePublicIPAddress,
+  Microsoft.Network.PublicIPAddressPropertiesFormat.servicePublicIPAddress,
   "servicePublicIpAddress",
   "java"
 );
 @@clientName(
-  Common.PublicIPAddressPropertiesFormat.linkedPublicIPAddress,
+  Microsoft.Network.PublicIPAddressPropertiesFormat.linkedPublicIPAddress,
   "linkedPublicIpAddress",
   "java"
 );
@@ -1668,21 +1702,21 @@ union ProvisioningStateUnion {
 // Preserve released C# constructors and writable leaves in output-only model graphs.
 // Do not change HTTP operations or properties explicitly marked Read.
 @@usage(
-  Common.IPConfiguration,
+  Microsoft.Network.IPConfiguration,
 
     | Azure.ClientGenerator.Core.Usage.input
     | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@usage(
-  Common.ResourceNavigationLink,
+  Microsoft.Network.ResourceNavigationLink,
 
     | Azure.ClientGenerator.Core.Usage.input
     | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
 @@usage(
-  Common.ServiceAssociationLink,
+  Microsoft.Network.ServiceAssociationLink,
 
     | Azure.ClientGenerator.Core.Usage.input
     | Azure.ClientGenerator.Core.Usage.output,
@@ -1801,72 +1835,72 @@ union ProvisioningStateUnion {
 
 // More property-level IP → Ip renames
 @@clientName(
-  Common.NetworkInterfacePropertiesFormat.enableIPForwarding,
+  Microsoft.Network.NetworkInterfacePropertiesFormat.enableIPForwarding,
   "enableIpForwarding",
   "java"
 );
 @@clientName(
-  Common.InboundNatRulePropertiesFormat.enableFloatingIP,
+  Microsoft.Network.InboundNatRulePropertiesFormat.enableFloatingIP,
   "enableFloatingIp",
   "java"
 );
 @@clientName(
-  Common.InboundNatRulePropertiesFormat.backendIPConfiguration,
+  Microsoft.Network.InboundNatRulePropertiesFormat.backendIPConfiguration,
   "backendIpConfiguration",
   "java"
 );
 @@clientName(
-  Common.LoadBalancingRulePropertiesFormat.enableFloatingIP,
+  Microsoft.Network.LoadBalancingRulePropertiesFormat.enableFloatingIP,
   "enableFloatingIp",
   "java"
 );
 @@clientName(
-  Common.InboundNatPoolPropertiesFormat.enableFloatingIP,
+  Microsoft.Network.InboundNatPoolPropertiesFormat.enableFloatingIP,
   "enableFloatingIp",
   "java"
 );
 @@clientName(
-  Common.IPConfigurationPropertiesFormat.privateIPAllocationMethod,
+  Microsoft.Network.IPConfigurationPropertiesFormat.privateIPAllocationMethod,
   "privateIpAllocationMethod",
   "java"
 );
 @@clientName(
-  Common.PublicIPAddressPropertiesFormat.publicIPAllocationMethod,
+  Microsoft.Network.PublicIPAddressPropertiesFormat.publicIPAllocationMethod,
   "publicIpAllocationMethod",
   "java"
 );
 @@clientName(
-  Common.PublicIPAddressPropertiesFormat.publicIPAddressVersion,
+  Microsoft.Network.PublicIPAddressPropertiesFormat.publicIPAddressVersion,
   "publicIpAddressVersion",
   "java"
 );
 @@clientName(
-  Common.NetworkInterfaceIPConfigurationPropertiesFormat.privateIPAllocationMethod,
+  Microsoft.Network.NetworkInterfaceIPConfigurationPropertiesFormat.privateIPAllocationMethod,
   "privateIpAllocationMethod",
   "java"
 );
 @@clientName(
-  Common.NetworkInterfaceIPConfigurationPropertiesFormat.privateIPAddressVersion,
+  Microsoft.Network.NetworkInterfaceIPConfigurationPropertiesFormat.privateIPAddressVersion,
   "privateIpAddressVersion",
   "java"
 );
 @@clientName(
-  Common.FrontendIPConfigurationPropertiesFormat.privateIPAllocationMethod,
+  Microsoft.Network.FrontendIPConfigurationPropertiesFormat.privateIPAllocationMethod,
   "privateIpAllocationMethod",
   "java"
 );
 @@clientName(
-  Common.FrontendIPConfigurationPropertiesFormat.privateIPAddressVersion,
+  Microsoft.Network.FrontendIPConfigurationPropertiesFormat.privateIPAddressVersion,
   "privateIpAddressVersion",
   "java"
 );
 @@clientName(
-  Common.PrivateLinkServiceIpConfigurationProperties.privateIPAllocationMethod,
+  Microsoft.Network.PrivateLinkServiceIpConfigurationProperties.privateIPAllocationMethod,
   "privateIpAllocationMethod",
   "java"
 );
 @@clientName(
-  Common.PrivateLinkServiceIpConfigurationProperties.privateIPAddressVersion,
+  Microsoft.Network.PrivateLinkServiceIpConfigurationProperties.privateIPAddressVersion,
   "privateIpAddressVersion",
   "java"
 );
@@ -2056,7 +2090,7 @@ union ProvisioningStateUnion {
 
 // Move VMSS listVirtualMachineScaleSetNetworkInterfaces to NetworkInterfaces client for Java
 @@clientLocation(
-  Microsoft.Compute.NetworkInterfacesOperationGroup.listVirtualMachineScaleSetNetworkInterfaces,
+  Microsoft.Network.VmssNetworkInterfacesOperationGroup.listVirtualMachineScaleSetNetworkInterfaces,
   Microsoft.Network.NetworkInterfaces,
   "java"
 );
@@ -2167,7 +2201,7 @@ union ProvisioningStateUnion {
   "csharp"
 );
 @@clientName(
-  Common.PublicIPAddressPropertiesFormat.upgradedToV2,
+  Microsoft.Network.PublicIPAddressPropertiesFormat.upgradedToV2,
   "IsUpgradedToV2",
   "csharp"
 );
@@ -2303,7 +2337,6 @@ union ProvisioningStateUnion {
   Azure.ResourceManager.CommonTypes.ProxyResource,
   "csharp"
 );
-@@clientName(WritableResource, "NetworkWritableResourceData", "csharp");
 @@clientName(
   Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.requestTimeout,
   "RequestTimeoutInSeconds",
@@ -2365,110 +2398,114 @@ union ProvisioningStateUnion {
   "csharp"
 );
 @@clientName(
-  Common.TrafficAnalyticsConfigurationProperties.trafficAnalyticsInterval,
+  Microsoft.Network.TrafficAnalyticsConfigurationProperties.trafficAnalyticsInterval,
   "TrafficAnalyticsIntervalInMinutes",
   "csharp"
 );
 // Preserve previous GA C# acronym casing for Network properties migrated from Swagger.
 @@clientName(
-  Common.ApplicationGatewayBackendAddress.ipAddress,
+  Microsoft.Network.ApplicationGatewayBackendAddress.ipAddress,
   "IPAddress",
   "csharp"
 );
 @@clientName(
-  Common.CustomDnsConfigPropertiesFormat.ipAddresses,
+  Microsoft.Network.CustomDnsConfigPropertiesFormat.ipAddresses,
   "IPAddresses",
   "csharp"
 );
-@@clientName(Common.IpTag.ipTagType, "IPTagType", "csharp");
+@@clientName(Microsoft.Network.IpTag.ipTagType, "IPTagType", "csharp");
 @@clientName(
-  Common.IpamPoolPrefixAllocation.numberOfIpAddresses,
+  Microsoft.Network.IpamPoolPrefixAllocation.numberOfIpAddresses,
   "NumberOfIPAddresses",
   "csharp"
 );
 @@clientName(
-  Common.LoadBalancerBackendAddressPropertiesFormat.ipAddress,
+  Microsoft.Network.LoadBalancerBackendAddressPropertiesFormat.ipAddress,
   "IPAddress",
   "csharp"
 );
 @@clientName(
-  Common.NatGatewayPropertiesFormat.publicIpAddresses,
+  Microsoft.Network.NatGatewayPropertiesFormat.publicIpAddresses,
   "PublicIPAddresses",
   "csharp"
 );
 @@clientName(
-  Common.NatGatewayPropertiesFormat.publicIpAddressesV6,
+  Microsoft.Network.NatGatewayPropertiesFormat.publicIpAddressesV6,
   "PublicIPAddressesV6",
   "csharp"
 );
 @@clientName(
-  Common.NatGatewayPropertiesFormat.publicIpPrefixes,
+  Microsoft.Network.NatGatewayPropertiesFormat.publicIpPrefixes,
   "PublicIPPrefixes",
   "csharp"
 );
 @@clientName(
-  Common.NatGatewayPropertiesFormat.publicIpPrefixesV6,
+  Microsoft.Network.NatGatewayPropertiesFormat.publicIpPrefixesV6,
   "PublicIPPrefixesV6",
   "csharp"
 );
 @@clientName(
-  Common.NetworkInterfacePropertiesFormat.ipConfigurations,
+  Microsoft.Network.NetworkInterfacePropertiesFormat.ipConfigurations,
   "IPConfigurations",
   "csharp"
 );
 @@clientName(
-  Common.PrivateEndpointProperties.ipConfigurations,
+  Microsoft.Network.PrivateEndpointProperties.ipConfigurations,
   "IPConfigurations",
   "csharp"
 );
 @@clientName(
-  Common.PrivateEndpointProperties.ipVersionType,
+  Microsoft.Network.PrivateEndpointProperties.ipVersionType,
   "IPVersionType",
   "csharp"
 );
 @@clientName(
-  Common.PrivateLinkServiceProperties.ipConfigurations,
+  Microsoft.Network.PrivateLinkServiceProperties.ipConfigurations,
   "IPConfigurations",
   "csharp"
 );
 @@clientName(
-  Common.PrivateLinkServiceProperties.loadBalancerFrontendIpConfigurations,
+  Microsoft.Network.PrivateLinkServiceProperties.loadBalancerFrontendIpConfigurations,
   "LoadBalancerFrontendIPConfigurations",
   "csharp"
 );
 @@clientName(
-  Common.PublicIPAddressPropertiesFormat.ipAddress,
+  Microsoft.Network.PublicIPAddressPropertiesFormat.ipAddress,
   "IPAddress",
   "csharp"
 );
 @@clientName(
-  Common.PublicIPAddressPropertiesFormat.ipConfiguration,
+  Microsoft.Network.PublicIPAddressPropertiesFormat.ipConfiguration,
   "IPConfiguration",
   "csharp"
 );
-@@clientName(Common.PublicIPAddressPropertiesFormat.ipTags, "IPTags", "csharp");
 @@clientName(
-  Common.RoutePropertiesFormat.nextHopIpAddress,
+  Microsoft.Network.PublicIPAddressPropertiesFormat.ipTags,
+  "IPTags",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.RoutePropertiesFormat.nextHopIpAddress,
   "NextHopIPAddress",
   "csharp"
 );
 @@clientName(
-  Common.SubnetPropertiesFormat.ipAllocations,
+  Microsoft.Network.SubnetPropertiesFormat.ipAllocations,
   "IPAllocations",
   "csharp"
 );
 @@clientName(
-  Common.SubnetPropertiesFormat.ipConfigurationProfiles,
+  Microsoft.Network.SubnetPropertiesFormat.ipConfigurationProfiles,
   "IPConfigurationProfiles",
   "csharp"
 );
 @@clientName(
-  Common.SubnetPropertiesFormat.ipConfigurations,
+  Microsoft.Network.SubnetPropertiesFormat.ipConfigurations,
   "IPConfigurations",
   "csharp"
 );
 @@clientName(
-  Common.VirtualNetworkPropertiesFormat.ipAllocations,
+  Microsoft.Network.VirtualNetworkPropertiesFormat.ipAllocations,
   "IPAllocations",
   "csharp"
 );
@@ -3271,12 +3308,12 @@ union ProvisioningStateUnion {
   "csharp"
 );
 @@clientName(
-  Common.FlowLogFormatType.JSON,
+  Microsoft.Network.FlowLogFormatType.JSON,
   Azure.ClientGenerator.Core.exact("Json"),
   "csharp"
 );
 @@clientName(
-  Common.GatewayLoadBalancerTunnelProtocol.VXLAN,
+  Microsoft.Network.GatewayLoadBalancerTunnelProtocol.VXLAN,
   Azure.ClientGenerator.Core.exact("Vxlan"),
   "csharp"
 );
@@ -3894,10 +3931,10 @@ union ProvisioningStateUnion {
 );
 @@clientName(ExplicitProxy, "ExplicitProxySettings", "go");
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "This client-generation override target intentionally does not define a separate service operation decorator."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "The SDK override operation reuses the existing ApiVersionParameter spread to preserve the released operation signature."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "This standalone operation is an SDK override target and is not part of the service operation interface."
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "This operation exists only as an SDK override target; public documentation is retained on the overridden service operation."
 op availablePrivateEndpointTypesOperationGroupListByResourceGroup(
   /**
    * The location of the domain name.
@@ -3927,10 +3964,10 @@ op availablePrivateEndpointTypesOperationGroupListByResourceGroup(
   "go,python,java"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "This client-generation override target intentionally does not define a separate service operation decorator."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "The SDK override operation reuses the existing ApiVersionParameter spread to preserve the released operation signature."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "This standalone operation is an SDK override target and is not part of the service operation interface."
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "This operation exists only as an SDK override target; public documentation is retained on the overridden service operation."
 op availablePrivateEndpointTypesOperationGroupList(
   /**
    * The location of the domain name.
@@ -3954,10 +3991,10 @@ op availablePrivateEndpointTypesOperationGroupList(
   "go,java"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "This client-generation override target intentionally does not define a separate service operation decorator."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "The SDK override operation reuses the existing ApiVersionParameter spread to preserve the released operation signature."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "This standalone operation is an SDK override target and is not part of the service operation interface."
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "This operation exists only as an SDK override target; public documentation is retained on the overridden service operation."
 op privateLinkServicesCheckPrivateLinkServiceVisibilityByResourceGroup(
   /**
    * The location of the domain name.
@@ -3997,10 +4034,10 @@ op privateLinkServicesCheckPrivateLinkServiceVisibilityByResourceGroup(
   "go,python,java"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "This client-generation override target intentionally does not define a separate service operation decorator."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "The SDK override operation reuses the existing ApiVersionParameter spread to preserve the released operation signature."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "This standalone operation is an SDK override target and is not part of the service operation interface."
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "This operation exists only as an SDK override target; public documentation is retained on the overridden service operation."
 op privateLinkServicesOperationGrouplistAutoApprovedPrivateLinkServicesByResourceGroup(
   /**
    * The location of the domain name.
@@ -4030,10 +4067,10 @@ op privateLinkServicesOperationGrouplistAutoApprovedPrivateLinkServicesByResourc
   "go,python,java"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "This client-generation override target intentionally does not define a separate service operation decorator."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "The SDK override operation reuses the existing ApiVersionParameter spread to preserve the released operation signature."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "This standalone operation is an SDK override target and is not part of the service operation interface."
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "This operation exists only as an SDK override target; public documentation is retained on the overridden service operation."
 op replaceAvailableResourceGroupDelegationsOperationGroupList(
   /**
    * The location of the domain name.
@@ -4055,7 +4092,7 @@ op replaceAvailableResourceGroupDelegationsOperationGroupList(
 
   @body
   body: void,
-): Microsoft.Network.AvailableDelegationsResult | Common.CloudError;
+): Microsoft.Network.AvailableDelegationsResult | Microsoft.Network.CloudError;
 
 @@override(
   AvailableResourceGroupDelegationsOperationGroup.list,
@@ -4063,10 +4100,10 @@ op replaceAvailableResourceGroupDelegationsOperationGroupList(
   "go,python,java"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "This client-generation override target intentionally does not define a separate service operation decorator."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "The SDK override operation reuses the existing ApiVersionParameter spread to preserve the released operation signature."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "This standalone operation is an SDK override target and is not part of the service operation interface."
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "This operation exists only as an SDK override target; public documentation is retained on the overridden service operation."
 op replaceprivateDnsZoneGroupsList(
   /**
    * The name of the private endpoint.
@@ -4090,7 +4127,7 @@ op replaceprivateDnsZoneGroupsList(
   body: void,
 ):
   | Azure.ResourceManager.ArmResponse<Microsoft.Network.PrivateDnsZoneGroupListResult>
-  | Common.CloudError;
+  | Microsoft.Network.CloudError;
 
 @@override(
   Microsoft.Network.PrivateEndpoints.privateDnsZoneGroupsList,
@@ -4123,12 +4160,12 @@ op replaceprivateDnsZoneGroupsList(
   "java"
 );
 @@clientName(
-  Common.PrivateEndpointIPConfiguration,
+  Microsoft.Network.PrivateEndpointIPConfiguration,
   "PrivateEndpointIpConfiguration",
   "java"
 );
 @@clientName(
-  Common.PrivateEndpointIPVersionType,
+  Microsoft.Network.PrivateEndpointIPVersionType,
   "PrivateEndpointIpVersionType",
   "java"
 );
@@ -4138,7 +4175,7 @@ op replaceprivateDnsZoneGroupsList(
   "java"
 );
 @@clientName(
-  Common.NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties,
+  Microsoft.Network.NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties,
   "NetworkInterfaceIpConfigurationPrivateLinkConnectionProperties",
   "java"
 );
@@ -4158,11 +4195,15 @@ op replaceprivateDnsZoneGroupsList(
   "java"
 );
 @@clientName(
-  Common.PublicIPAddressMigrationPhase,
+  Microsoft.Network.PublicIPAddressMigrationPhase,
   "PublicIpAddressMigrationPhase",
   "java"
 );
-@@clientName(Common.PublicIPAddressSkuTier, "PublicIpAddressSkuTier", "java");
+@@clientName(
+  Microsoft.Network.PublicIPAddressSkuTier,
+  "PublicIpAddressSkuTier",
+  "java"
+);
 @@clientName(
   Microsoft.Network.PublicIPPrefixSkuName,
   "PublicIpPrefixSkuName",
@@ -4276,12 +4317,12 @@ op replaceprivateDnsZoneGroupsList(
   "java"
 );
 @@clientName(
-  Common.LoadBalancerBackendAddressPropertiesFormat.loadBalancerFrontendIPConfiguration,
+  Microsoft.Network.LoadBalancerBackendAddressPropertiesFormat.loadBalancerFrontendIPConfiguration,
   "loadBalancerFrontendIpConfiguration",
   "java"
 );
 @@clientName(
-  Common.LoadBalancerBackendAddressPropertiesFormat.networkInterfaceIPConfiguration,
+  Microsoft.Network.LoadBalancerBackendAddressPropertiesFormat.networkInterfaceIPConfiguration,
   "networkInterfaceIpConfiguration",
   "java"
 );
@@ -4297,7 +4338,7 @@ op replaceprivateDnsZoneGroupsList(
 );
 // Fluent model renames (IP→Ip, JWT→Jwt, LOA→Loa)
 @@clientName(
-  Common.ApplicationGatewayIPConfigurationPropertiesFormat,
+  Microsoft.Network.ApplicationGatewayIPConfigurationPropertiesFormat,
   "ApplicationGatewayIpConfigurationPropertiesFormat",
   "java"
 );
@@ -4317,7 +4358,7 @@ op replaceprivateDnsZoneGroupsList(
   "java"
 );
 @@clientName(
-  Common.FrontendIPConfigurationPropertiesFormat,
+  Microsoft.Network.FrontendIPConfigurationPropertiesFormat,
   "FrontendIpConfigurationPropertiesFormat",
   "java"
 );
@@ -4327,12 +4368,12 @@ op replaceprivateDnsZoneGroupsList(
   "java"
 );
 @@clientName(
-  Common.IPConfigurationProfilePropertiesFormat,
+  Microsoft.Network.IPConfigurationProfilePropertiesFormat,
   "IpConfigurationProfilePropertiesFormat",
   "java"
 );
 @@clientName(
-  Common.IPConfigurationPropertiesFormat,
+  Microsoft.Network.IPConfigurationPropertiesFormat,
   "IpConfigurationPropertiesFormat",
   "java"
 );
@@ -4343,17 +4384,17 @@ op replaceprivateDnsZoneGroupsList(
   "java"
 );
 @@clientName(
-  Common.NetworkInterfaceIPConfigurationPropertiesFormat,
+  Microsoft.Network.NetworkInterfaceIPConfigurationPropertiesFormat,
   "NetworkInterfaceIpConfigurationPropertiesFormat",
   "java"
 );
 @@clientName(
-  Common.PrivateEndpointIPConfigurationProperties,
+  Microsoft.Network.PrivateEndpointIPConfigurationProperties,
   "PrivateEndpointIpConfigurationProperties",
   "java"
 );
 @@clientName(
-  Common.PublicIPAddressPropertiesFormat,
+  Microsoft.Network.PublicIPAddressPropertiesFormat,
   "PublicIpAddressPropertiesFormat",
   "java"
 );
@@ -4393,6 +4434,19 @@ op replaceprivateDnsZoneGroupsList(
 @@clientName(NetworkGroupCreateOrUpdateEtagHeader.eTag, "etag", "java");
 
 // python
+
+// Preserve legacy Python enum member names.
+@@clientName(
+  ApplicationGatewaySkuFamily.Generation_1,
+  exact("GENERATION1"),
+  "python"
+);
+@@clientName(
+  ApplicationGatewaySkuFamily.Generation_2,
+  exact("GENERATION2"),
+  "python"
+);
+
 @@clientName(
   ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,
   "TLS_ECDHE_RSA_WITH_AES256_CBC_SHA384",
@@ -4724,16 +4778,16 @@ op replaceprivateDnsZoneGroupsList(
   "python,javascript"
 );
 
-// Move Microsoft.Compute.PublicIPAddresses operations to Microsoft.Network.PublicIPAddresses for Java
+// Move Microsoft.Network.VmssPublicIPAddresses operations to Microsoft.Network.PublicIPAddresses for Java
 @@clientLocation(
-  Microsoft.Compute.PublicIPAddresses.getVirtualMachineScaleSetPublicIPAddress,
+  Microsoft.Network.VmssPublicIPAddresses.getVirtualMachineScaleSetPublicIPAddress,
   Microsoft.Network.PublicIPAddresses,
-  "java"
+  "java,javascript,go,python"
 );
 @@clientLocation(
-  Microsoft.Compute.PublicIPAddresses.listVirtualMachineScaleSetVMPublicIPAddresses,
+  Microsoft.Network.VmssPublicIPAddresses.listVirtualMachineScaleSetVMPublicIPAddresses,
   Microsoft.Network.PublicIPAddresses,
-  "java"
+  "java,javascript,go,python"
 );
 
 // Method renames to maintain backward compatibility for Java
@@ -4771,17 +4825,17 @@ op replaceprivateDnsZoneGroupsList(
   "java"
 );
 @@clientName(
-  Microsoft.Compute.PublicIPAddresses.getVirtualMachineScaleSetPublicIPAddress,
+  Microsoft.Network.VmssPublicIPAddresses.getVirtualMachineScaleSetPublicIPAddress,
   "getVirtualMachineScaleSetPublicIpAddress",
   "java"
 );
 @@clientName(
-  Microsoft.Compute.PublicIPAddresses.listVirtualMachineScaleSetVMPublicIPAddresses,
+  Microsoft.Network.VmssPublicIPAddresses.listVirtualMachineScaleSetVMPublicIPAddresses,
   "listVirtualMachineScaleSetVMPublicIpAddresses",
   "java"
 );
 @@clientName(
-  Microsoft.Compute.PublicIPAddressesOperationGroup.listVirtualMachineScaleSetPublicIPAddresses,
+  Microsoft.Network.VmssPublicIPAddressesOperationGroup.listVirtualMachineScaleSetPublicIPAddresses,
   "listVirtualMachineScaleSetPublicIpAddresses",
   "java"
 );
@@ -4840,48 +4894,60 @@ op replaceprivateDnsZoneGroupsList(
 
 // C# customizations for Azure.ResourceManager.Network MPG migration.
 // C# naming mitigations for brownfield Network acronyms and shared model names.
-@@clientName(Common.ProvisioningState, "NetworkProvisioningState", "csharp");
-
-@@clientName(Common.IPAllocationMethod, "NetworkIPAllocationMethod", "csharp");
-
-@@clientName(Common.IPVersion, "NetworkIPVersion", "csharp");
+@@clientName(
+  Microsoft.Network.ProvisioningState,
+  "NetworkProvisioningState",
+  "csharp"
+);
 
 @@clientName(
-  Common.ServiceEndpointPropertiesFormat,
+  Microsoft.Network.IPAllocationMethod,
+  "NetworkIPAllocationMethod",
+  "csharp"
+);
+
+@@clientName(Microsoft.Network.IPVersion, "NetworkIPVersion", "csharp");
+
+@@clientName(
+  Microsoft.Network.ServiceEndpointPropertiesFormat,
   "ServiceEndpointProperties",
   "csharp"
 );
 
-@@clientName(Common.IPConfiguration, "NetworkIPConfiguration", "csharp");
+@@clientName(
+  Microsoft.Network.IPConfiguration,
+  "NetworkIPConfiguration",
+  "csharp"
+);
 
 @@clientName(
-  Common.IPConfigurationProfile,
+  Microsoft.Network.IPConfigurationProfile,
   "NetworkIPConfigurationProfile",
   "csharp"
 );
 
 @@clientName(
-  Common.PrivateLinkServiceConnection,
+  Microsoft.Network.PrivateLinkServiceConnection,
   "NetworkPrivateLinkServiceConnection",
   "csharp"
 );
 
 @@clientName(
-  Common.CustomDnsConfigPropertiesFormat,
+  Microsoft.Network.CustomDnsConfigPropertiesFormat,
   "CustomDnsConfigProperties",
   "csharp"
 );
 
 @@clientName(
-  Common.PrivateLinkServiceIpConfiguration,
+  Microsoft.Network.PrivateLinkServiceIpConfiguration,
   "PrivateLinkServiceIPConfiguration",
   "csharp"
 );
 
-@@clientName(Common.IpTag, "IPTag", "csharp");
+@@clientName(Microsoft.Network.IpTag, "IPTag", "csharp");
 
 @@clientName(
-  Common.LoadBalancingRulePropertiesFormat,
+  Microsoft.Network.LoadBalancingRulePropertiesFormat,
   "LoadBalancingRuleProperties",
   "csharp"
 );
@@ -4889,12 +4955,12 @@ op replaceprivateDnsZoneGroupsList(
 /** Properties of the load balancer. */
 @clientName("LoadBalancingRuleProperties", "csharp")
 model LoadBalancingRulePropertiesWithAdditionalProperties {
-  ...Common.LoadBalancingRulePropertiesFormat;
+  ...Microsoft.Network.LoadBalancingRulePropertiesFormat;
   ...Record<unknown>;
 }
 
 @@alternateType(
-  Common.LoadBalancingRulePropertiesFormat,
+  Microsoft.Network.LoadBalancingRulePropertiesFormat,
   LoadBalancingRulePropertiesWithAdditionalProperties,
   "csharp"
 );
@@ -4919,7 +4985,7 @@ model LoadBalancingRulePropertiesWithAdditionalProperties {
 
 // Reuse the shared identity model for every reference, including FlowLog.identity.
 @@alternateType(
-  Common.ManagedServiceIdentity,
+  Microsoft.Network.ManagedServiceIdentity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
@@ -4959,38 +5025,50 @@ model LoadBalancingRulePropertiesWithAdditionalProperties {
 );
 
 @@clientName(
-  Common.PublicIpAddressDnsSettingsDomainNameLabelScope,
+  Microsoft.Network.PublicIpAddressDnsSettingsDomainNameLabelScope,
   "PublicIPAddressDnsSettingsDomainNameLabelScope",
   "csharp"
 );
 
-@@clientName(Common.AddressSpace, "VirtualNetworkAddressSpace", "csharp");
+@@clientName(
+  Microsoft.Network.AddressSpace,
+  "VirtualNetworkAddressSpace",
+  "csharp"
+);
 
 @@clientName(
-  Common.TransportProtocol,
+  Microsoft.Network.TransportProtocol,
   "LoadBalancingTransportProtocol",
   "csharp"
 );
 
-@@clientName(Common.Delegation, "ServiceDelegation", "csharp");
+@@clientName(Microsoft.Network.Delegation, "ServiceDelegation", "csharp");
 
 @@clientName(
-  Common.VirtualNetworkPrivateEndpointNetworkPolicies,
+  Microsoft.Network.VirtualNetworkPrivateEndpointNetworkPolicies,
   "VirtualNetworkPrivateEndpointNetworkPolicy",
   "csharp"
 );
 
 @@clientName(
-  Common.VirtualNetworkPrivateLinkServiceNetworkPolicies,
+  Microsoft.Network.VirtualNetworkPrivateLinkServiceNetworkPolicies,
   "VirtualNetworkPrivateLinkServiceNetworkPolicy",
   "csharp"
 );
 
-@@clientName(Common.AccessMode, "PrivateLinkServiceAccessMode", "csharp");
+@@clientName(
+  Microsoft.Network.AccessMode,
+  "PrivateLinkServiceAccessMode",
+  "csharp"
+);
 
-@@clientName(Common.SyncMode, "BackendAddressSyncMode", "csharp");
+@@clientName(Microsoft.Network.SyncMode, "BackendAddressSyncMode", "csharp");
 
-@@clientName(Common.InboundNatPool, "LoadBalancerInboundNatPool", "csharp");
+@@clientName(
+  Microsoft.Network.InboundNatPool,
+  "LoadBalancerInboundNatPool",
+  "csharp"
+);
 
 @@clientName(Microsoft.Network.CustomIpPrefix, "CustomIPPrefix", "csharp");
 
@@ -5690,7 +5768,11 @@ model LoadBalancingRulePropertiesWithAdditionalProperties {
   "csharp"
 );
 
-@@clientName(Common.DeleteOptions, "IPAddressDeleteOption", "csharp");
+@@clientName(
+  Microsoft.Network.DeleteOptions,
+  "IPAddressDeleteOption",
+  "csharp"
+);
 
 @@clientName(
   Microsoft.Network.ConfigurationType,
@@ -5733,7 +5815,7 @@ model LoadBalancingRulePropertiesWithAdditionalProperties {
 @@clientName(Microsoft.Network.IPTraffic, "NetworkVerifierIPTraffic", "csharp");
 
 @@clientName(
-  Common.PrivateEndpointVNetPolicies,
+  Microsoft.Network.PrivateEndpointVNetPolicies,
   "PrivateEndpointVnetPolicy",
   "csharp"
 );
@@ -5762,16 +5844,20 @@ model LoadBalancingRulePropertiesWithAdditionalProperties {
   "csharp"
 );
 
-@@clientName(Common.Resource, "NetworkTrackedResourceData", "csharp");
-
-@@alternateType(
-  Microsoft.Network.TrackedResourceWithSettableIdOptionalLocation,
-  Common.Resource,
+@@clientName(
+  Microsoft.Network.Resource,
+  "NetworkTrackedResourceData",
   "csharp"
 );
 
-@@clientName(Common.Resource.type, "ResourceType", "csharp");
+@@clientName(Microsoft.Network.SubResource, "NetworkSubResource", "csharp");
+@@alternateType(
+  Microsoft.Network.TrackedResourceWithSettableIdOptionalLocation,
+  Microsoft.Network.Resource,
+  "csharp"
+);
 
+@@clientName(Microsoft.Network.Resource.type, "ResourceType", "csharp");
 @@clientName(Microsoft.Network.ChildResource.type, "ResourceType", "csharp");
 @@alternateType(
   Microsoft.Network.ChildResource.type,
@@ -5785,11 +5871,21 @@ model LoadBalancingRulePropertiesWithAdditionalProperties {
   "csharp"
 );
 
-@@clientName(Common.SubResource, "NetworkSubResource", "csharp");
+@@clientName(Microsoft.Network.SubResourceModel.type, "ResourceType", "csharp");
 
-@@clientName(Common.SubResourceModel, "NetworkResourceData", "csharp");
+@@clientName(
+  Microsoft.Network.SubResourceModel,
+  "NetworkResourceData",
+  "csharp"
+);
 
-@@clientName(Common.SubResourceModel.type, "ResourceType", "csharp");
+@@clientName(
+  Microsoft.Network.WritableResource,
+  "NetworkWritableResourceData",
+  "csharp"
+);
+
+@@clientName(Microsoft.Network.WritableResource.type, "ResourceType", "csharp");
 
 @@clientName(
   Microsoft.Network.EndpointServiceResult.type,
@@ -5797,36 +5893,36 @@ model LoadBalancingRulePropertiesWithAdditionalProperties {
   "csharp"
 );
 
-@@clientName(Microsoft.Network.WritableResource.type, "ResourceType", "csharp");
-
 @@clientName(
-  Common.InboundNatPoolPropertiesFormat,
+  Microsoft.Network.InboundNatPoolPropertiesFormat,
   "LoadBalancerInboundNatPoolProperties",
+  "csharp"
+);
+
+@@alternateType(Microsoft.Network.Resource.id, armResourceIdentifier, "csharp");
+
+@@alternateType(
+  Microsoft.Network.SubResource.id,
+  armResourceIdentifier,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.WritableResource.type,
+  Azure.Core.armResourceType,
   "csharp"
 );
 
 /** Properties of Inbound NAT pool. */
 @clientName("LoadBalancerInboundNatPoolProperties", "csharp")
 model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
-  ...Common.InboundNatPoolPropertiesFormat;
+  ...Microsoft.Network.InboundNatPoolPropertiesFormat;
   ...Record<unknown>;
 }
 
 @@alternateType(
-  Common.InboundNatPoolPropertiesFormat,
+  Microsoft.Network.InboundNatPoolPropertiesFormat,
   LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties,
-  "csharp"
-);
-
-@@alternateType(Common.Resource.id, armResourceIdentifier, "csharp");
-
-@@alternateType(Common.Resource.type, Azure.Core.armResourceType, "csharp");
-
-@@alternateType(Common.SubResource.id, armResourceIdentifier, "csharp");
-
-@@alternateType(
-  Common.SubResourceModel.type,
-  Azure.Core.armResourceType,
   "csharp"
 );
 
@@ -5854,66 +5950,78 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
   "csharp"
 );
 @@clientName(
-  Common.ApplicationGatewayBackendAddressPool.type,
+  Microsoft.Network.ApplicationGatewayBackendAddressPool.type,
   "ResourceType",
   "csharp"
 );
 @@alternateType(
-  Common.ApplicationGatewayBackendAddressPool.type,
+  Microsoft.Network.ApplicationGatewayBackendAddressPool.type,
   Azure.Core.armResourceType,
   "csharp"
 );
 @@clientName(
-  Common.ApplicationGatewayIPConfiguration.type,
+  Microsoft.Network.ApplicationGatewayIPConfiguration.type,
   "ResourceType",
   "csharp"
 );
 @@alternateType(
-  Common.ApplicationGatewayIPConfiguration.type,
+  Microsoft.Network.ApplicationGatewayIPConfiguration.type,
   Azure.Core.armResourceType,
   "csharp"
 );
-@@clientName(Common.InboundNatPool.type, "ResourceType", "csharp");
+@@clientName(Microsoft.Network.InboundNatPool.type, "ResourceType", "csharp");
 @@alternateType(
-  Common.InboundNatPool.type,
-  Azure.Core.armResourceType,
-  "csharp"
-);
-@@clientName(Common.IPConfigurationProfile.type, "ResourceType", "csharp");
-@@alternateType(
-  Common.IPConfigurationProfile.type,
+  Microsoft.Network.InboundNatPool.type,
   Azure.Core.armResourceType,
   "csharp"
 );
 @@clientName(
-  Common.PrivateLinkServiceConnection.type,
+  Microsoft.Network.IPConfigurationProfile.type,
   "ResourceType",
   "csharp"
 );
 @@alternateType(
-  Common.PrivateLinkServiceConnection.type,
+  Microsoft.Network.IPConfigurationProfile.type,
   Azure.Core.armResourceType,
   "csharp"
 );
 @@clientName(
-  Common.PrivateLinkServiceIpConfiguration.type,
+  Microsoft.Network.PrivateLinkServiceConnection.type,
   "ResourceType",
   "csharp"
 );
 @@alternateType(
-  Common.PrivateLinkServiceIpConfiguration.type,
+  Microsoft.Network.PrivateLinkServiceConnection.type,
   Azure.Core.armResourceType,
   "csharp"
 );
-@@clientName(Common.ResourceNavigationLink.type, "ResourceType", "csharp");
+@@clientName(
+  Microsoft.Network.PrivateLinkServiceIpConfiguration.type,
+  "ResourceType",
+  "csharp"
+);
 @@alternateType(
-  Common.ResourceNavigationLink.type,
+  Microsoft.Network.PrivateLinkServiceIpConfiguration.type,
   Azure.Core.armResourceType,
   "csharp"
 );
-@@clientName(Common.ServiceAssociationLink.type, "ResourceType", "csharp");
+@@clientName(
+  Microsoft.Network.ResourceNavigationLink.type,
+  "ResourceType",
+  "csharp"
+);
 @@alternateType(
-  Common.ServiceAssociationLink.type,
+  Microsoft.Network.ResourceNavigationLink.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ServiceAssociationLink.type,
+  "ResourceType",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ServiceAssociationLink.type,
   Azure.Core.armResourceType,
   "csharp"
 );
@@ -6270,7 +6378,7 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
   "csharp"
 );
 @@alternateType(
-  Common.BackendAddressPoolPropertiesFormat.location,
+  Microsoft.Network.BackendAddressPoolPropertiesFormat.location,
   azureLocation,
   "csharp"
 );
@@ -6331,37 +6439,37 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
   "csharp"
 );
 @@alternateType(
-  Common.PrivateEndpointIPConfigurationProperties.privateIPAddress,
+  Microsoft.Network.PrivateEndpointIPConfigurationProperties.privateIPAddress,
   ipV4Address,
   "csharp"
 );
 @@alternateType(
-  Common.ResourceNavigationLinkFormat.linkedResourceType,
+  Microsoft.Network.ResourceNavigationLinkFormat.linkedResourceType,
   Azure.Core.armResourceType,
   "csharp"
 );
 @@alternateType(
-  Common.ServiceAssociationLinkPropertiesFormat.linkedResourceType,
+  Microsoft.Network.ServiceAssociationLinkPropertiesFormat.linkedResourceType,
   Azure.Core.armResourceType,
   "csharp"
 );
 @@alternateType(
-  Common.ServiceAssociationLinkPropertiesFormat.locations,
+  Microsoft.Network.ServiceAssociationLinkPropertiesFormat.locations,
   azureLocation[],
   "csharp"
 );
 @@alternateType(
-  Common.ServiceEndpointPolicyDefinitionPropertiesFormat.serviceResources,
+  Microsoft.Network.ServiceEndpointPolicyDefinitionPropertiesFormat.serviceResources,
   armResourceIdentifier[],
   "csharp"
 );
 @@alternateType(
-  Common.ServiceEndpointPropertiesFormat.locations,
+  Microsoft.Network.ServiceEndpointPropertiesFormat.locations,
   azureLocation[],
   "csharp"
 );
 @@alternateType(
-  Common.TrafficAnalyticsConfigurationProperties.workspaceResourceId,
+  Microsoft.Network.TrafficAnalyticsConfigurationProperties.workspaceResourceId,
   armResourceIdentifier,
   "csharp"
 );
@@ -6391,7 +6499,7 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
   "csharp"
 );
 @@alternateType(
-  Common.ResourceNavigationLink.id,
+  Microsoft.Network.ResourceNavigationLink.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -6497,13 +6605,13 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 );
 
 @@alternateType(
-  Common.FlowLogPropertiesFormat.targetResourceId,
+  Microsoft.Network.FlowLogPropertiesFormat.targetResourceId,
   armResourceIdentifier,
   "csharp"
 );
 
 @@alternateType(
-  Common.FlowLogPropertiesFormat.storageId,
+  Microsoft.Network.FlowLogPropertiesFormat.storageId,
   armResourceIdentifier,
   "csharp"
 );
@@ -6533,7 +6641,7 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 );
 
 @@alternateType(
-  Common.PrivateLinkServiceConnectionProperties.privateLinkServiceId,
+  Microsoft.Network.PrivateLinkServiceConnectionProperties.privateLinkServiceId,
   armResourceIdentifier,
   "csharp"
 );
@@ -6545,13 +6653,13 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 );
 
 @@alternateType(
-  Common.ResourceNavigationLinkFormat.link,
+  Microsoft.Network.ResourceNavigationLinkFormat.link,
   armResourceIdentifier,
   "csharp"
 );
 
 @@alternateType(
-  Common.ServiceAssociationLinkPropertiesFormat.link,
+  Microsoft.Network.ServiceAssociationLinkPropertiesFormat.link,
   armResourceIdentifier,
   "csharp"
 );
@@ -6738,65 +6846,73 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 );
 
 @@alternateType(
-  Common.ApplicationSecurityGroupPropertiesFormat.resourceGuid,
+  Microsoft.Network.ApplicationSecurityGroupPropertiesFormat.resourceGuid,
   uuid,
   "csharp"
 );
 
 @@alternateType(
-  Common.FlowLogPropertiesFormat.targetResourceGuid,
+  Microsoft.Network.FlowLogPropertiesFormat.targetResourceGuid,
   uuid,
   "csharp"
 );
 
 @@alternateType(
-  Common.LoadBalancerPropertiesFormat.resourceGuid,
-  uuid,
-  "csharp"
-);
-
-@@alternateType(Common.NatGatewayPropertiesFormat.resourceGuid, uuid, "csharp");
-
-@@alternateType(
-  Common.NetworkInterfacePropertiesFormat.resourceGuid,
+  Microsoft.Network.LoadBalancerPropertiesFormat.resourceGuid,
   uuid,
   "csharp"
 );
 
 @@alternateType(
-  Common.NetworkSecurityGroupPropertiesFormat.resourceGuid,
+  Microsoft.Network.NatGatewayPropertiesFormat.resourceGuid,
   uuid,
   "csharp"
 );
 
 @@alternateType(
-  Common.PublicIPAddressPropertiesFormat.resourceGuid,
-  uuid,
-  "csharp"
-);
-
-@@alternateType(Common.RouteTablePropertiesFormat.resourceGuid, uuid, "csharp");
-
-@@alternateType(
-  Common.ServiceEndpointPolicyPropertiesFormat.resourceGuid,
+  Microsoft.Network.NetworkInterfacePropertiesFormat.resourceGuid,
   uuid,
   "csharp"
 );
 
 @@alternateType(
-  Common.VirtualNetworkPeeringPropertiesFormat.resourceGuid,
+  Microsoft.Network.NetworkSecurityGroupPropertiesFormat.resourceGuid,
   uuid,
   "csharp"
 );
 
 @@alternateType(
-  Common.VirtualNetworkPropertiesFormat.resourceGuid,
+  Microsoft.Network.PublicIPAddressPropertiesFormat.resourceGuid,
   uuid,
   "csharp"
 );
 
 @@alternateType(
-  Common.VirtualNetworkTapPropertiesFormat.resourceGuid,
+  Microsoft.Network.RouteTablePropertiesFormat.resourceGuid,
+  uuid,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.ServiceEndpointPolicyPropertiesFormat.resourceGuid,
+  uuid,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.VirtualNetworkPeeringPropertiesFormat.resourceGuid,
+  uuid,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.VirtualNetworkPropertiesFormat.resourceGuid,
+  uuid,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.VirtualNetworkTapPropertiesFormat.resourceGuid,
   uuid,
   "csharp"
 );
@@ -6863,6 +6979,12 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 
 @@alternateType(
   Microsoft.Network.ExpressRoutePortPropertiesFormat.resourceGuid,
+  uuid,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.InterconnectGroupPropertiesFormat.resourceGuid,
   uuid,
   "csharp"
 );
@@ -7062,37 +7184,37 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 );
 
 @@alternateType(
-  Common.LoadBalancer.extendedLocation,
+  Microsoft.Network.LoadBalancer.extendedLocation,
   Azure.ResourceManager.CommonTypes.ExtendedLocation,
   "csharp"
 );
 
 @@alternateType(
-  Common.NetworkInterface.extendedLocation,
+  Microsoft.Network.NetworkInterface.extendedLocation,
   Azure.ResourceManager.CommonTypes.ExtendedLocation,
   "csharp"
 );
 
 @@alternateType(
-  Common.PrivateEndpoint.extendedLocation,
+  Microsoft.Network.PrivateEndpoint.extendedLocation,
   Azure.ResourceManager.CommonTypes.ExtendedLocation,
   "csharp"
 );
 
 @@alternateType(
-  Common.PrivateLinkService.extendedLocation,
+  Microsoft.Network.PrivateLinkService.extendedLocation,
   Azure.ResourceManager.CommonTypes.ExtendedLocation,
   "csharp"
 );
 
 @@alternateType(
-  Common.PublicIPAddress.extendedLocation,
+  Microsoft.Network.PublicIPAddress.extendedLocation,
   Azure.ResourceManager.CommonTypes.ExtendedLocation,
   "csharp"
 );
 
 @@alternateType(
-  Common.VirtualNetwork.extendedLocation,
+  Microsoft.Network.VirtualNetwork.extendedLocation,
   Azure.ResourceManager.CommonTypes.ExtendedLocation,
   "csharp"
 );
@@ -7124,103 +7246,103 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 // Preserve the old AutoRest-created writable subresource base for C#.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  Common.NetworkInterfaceIPConfiguration,
+  Microsoft.Network.NetworkInterfaceIPConfiguration,
   Microsoft.Network.WritableResource,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  Common.Route,
+  Microsoft.Network.Route,
   Microsoft.Network.WritableResource,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  Common.SecurityRule,
+  Microsoft.Network.SecurityRule,
   Microsoft.Network.WritableResource,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  Common.Subnet,
+  Microsoft.Network.Subnet,
   Microsoft.Network.WritableResource,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  Common.VirtualNetworkPeering,
+  Microsoft.Network.VirtualNetworkPeering,
   Microsoft.Network.WritableResource,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the previous Network AutoRest C# hierarchy."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  Common.Delegation,
+  Microsoft.Network.Delegation,
   Microsoft.Network.WritableResource,
   "csharp"
 );
 
 // Preserve WritableSubResource-based collections from the old AutoRest API surface.
 @@alternateType(
-  Common.BackendAddressPoolPropertiesFormat.inboundNatRules,
+  Microsoft.Network.BackendAddressPoolPropertiesFormat.inboundNatRules,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 
 @@alternateType(
-  Common.BackendAddressPoolPropertiesFormat.loadBalancingRules,
+  Microsoft.Network.BackendAddressPoolPropertiesFormat.loadBalancingRules,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 
 @@alternateType(
-  Common.BackendAddressPoolPropertiesFormat.outboundRules,
+  Microsoft.Network.BackendAddressPoolPropertiesFormat.outboundRules,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 
 @@alternateType(
-  Common.FrontendIPConfigurationPropertiesFormat.inboundNatPools,
+  Microsoft.Network.FrontendIPConfigurationPropertiesFormat.inboundNatPools,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 
 @@alternateType(
-  Common.FrontendIPConfigurationPropertiesFormat.inboundNatRules,
+  Microsoft.Network.FrontendIPConfigurationPropertiesFormat.inboundNatRules,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 
 @@alternateType(
-  Common.FrontendIPConfigurationPropertiesFormat.loadBalancingRules,
+  Microsoft.Network.FrontendIPConfigurationPropertiesFormat.loadBalancingRules,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 
 @@alternateType(
-  Common.FrontendIPConfigurationPropertiesFormat.outboundRules,
+  Microsoft.Network.FrontendIPConfigurationPropertiesFormat.outboundRules,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 
 @@alternateType(
-  Common.NatGatewayPropertiesFormat.subnets,
+  Microsoft.Network.NatGatewayPropertiesFormat.subnets,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 
 @@alternateType(
-  Common.OutboundRulePropertiesFormat.frontendIPConfigurations,
+  Microsoft.Network.OutboundRulePropertiesFormat.frontendIPConfigurations,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
 
 @@alternateType(
-  Common.ProbePropertiesFormat.loadBalancingRules,
+  Microsoft.Network.ProbePropertiesFormat.loadBalancingRules,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );
@@ -7553,12 +7675,12 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 
 // C# API compatibility: previous GA exposed these ETag fields as Azure.ETag.
 @@alternateType(
-  Common.NetworkInterfaceIPConfiguration.etag,
+  Microsoft.Network.NetworkInterfaceIPConfiguration.etag,
   Azure.Core.eTag,
   "csharp"
 );
 
-@@alternateType(Common.SecurityRule.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Microsoft.Network.SecurityRule.etag, Azure.Core.eTag, "csharp");
 @@alternateType(
   Microsoft.Network.ProxyResource.etag,
   Azure.Core.eTag,
@@ -7595,8 +7717,16 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
   Azure.Core.eTag,
   "csharp"
 );
-@@alternateType(Common.PrivateEndpoint.etag, Azure.Core.eTag, "csharp");
-@@alternateType(Common.PrivateLinkService.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Microsoft.Network.PrivateEndpoint.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.PrivateLinkService.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
 @@alternateType(
   Microsoft.Network.VirtualNetworkGatewayNatRule.etag,
   Azure.Core.eTag,
@@ -7666,12 +7796,12 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
   "csharp"
 );
 @@clientName(
-  Common.GatewayLoadBalancerTunnelInterface.type,
+  Microsoft.Network.GatewayLoadBalancerTunnelInterface.type,
   "InterfaceType",
   "csharp"
 );
 @@clientName(
-  Common.LoadBalancerBackendAddressPropertiesFormat.loadBalancerFrontendIPConfiguration,
+  Microsoft.Network.LoadBalancerBackendAddressPropertiesFormat.loadBalancerFrontendIPConfiguration,
   "LoadBalancerFrontendIPConfiguration",
   "csharp"
 );
@@ -7681,7 +7811,7 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
   "csharp"
 );
 @@clientName(
-  Common.PrivateEndpointIPConfiguration.type,
+  Microsoft.Network.PrivateEndpointIPConfiguration.type,
   "PrivateEndpointIPConfigurationType",
   "csharp"
 );
@@ -7691,12 +7821,12 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
   "csharp"
 );
 @@clientName(
-  Common.SubnetPropertiesFormat.privateEndpointNetworkPolicies,
+  Microsoft.Network.SubnetPropertiesFormat.privateEndpointNetworkPolicies,
   "PrivateEndpointNetworkPolicy",
   "csharp"
 );
 @@clientName(
-  Common.SubnetPropertiesFormat.privateLinkServiceNetworkPolicies,
+  Microsoft.Network.SubnetPropertiesFormat.privateLinkServiceNetworkPolicies,
   "PrivateLinkServiceNetworkPolicy",
   "csharp"
 );
@@ -7706,91 +7836,158 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
   "csharp"
 );
 @@clientName(
-  Common.VirtualNetworkPropertiesFormat.privateEndpointVNetPolicies,
+  Microsoft.Network.VirtualNetworkPropertiesFormat.privateEndpointVNetPolicies,
   "PrivateEndpointVnetPolicy",
   "csharp"
 );
-@@clientName(Common.VirtualNetworkEncryption.enabled, "IsEnabled", "csharp");
 @@clientName(
-  Common.VirtualNetworkPeeringPropertiesFormat.peerCompleteVnets,
+  Microsoft.Network.VirtualNetworkEncryption.enabled,
+  "IsEnabled",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.VirtualNetworkPeeringPropertiesFormat.peerCompleteVnets,
   "AreCompleteVnetsPeered",
   "csharp"
 );
 
 // C# provisioning API compatibility: retain Azure.ETag for existing ETag properties.
 @@alternateType(
-  Common.ApplicationGatewayBackendAddressPool.etag,
+  Microsoft.Network.ApplicationGatewayBackendAddressPool.etag,
   Azure.Core.eTag,
   "csharp"
 );
 @@alternateType(
-  Common.ApplicationGatewayIPConfiguration.etag,
+  Microsoft.Network.ApplicationGatewayIPConfiguration.etag,
   Azure.Core.eTag,
   "csharp"
 );
 @@alternateType(
-  Common.ApplicationSecurityGroup.etag,
-  Azure.Core.eTag,
-  "csharp"
-);
-@@alternateType(Common.BackendAddressPool.etag, Azure.Core.eTag, "csharp");
-@@alternateType(Common.Delegation.etag, Azure.Core.eTag, "csharp");
-@@alternateType(Common.FlowLog.etag, Azure.Core.eTag, "csharp");
-@@alternateType(Common.FrontendIPConfiguration.etag, Azure.Core.eTag, "csharp");
-@@alternateType(Common.IPConfiguration.etag, Azure.Core.eTag, "csharp");
-@@alternateType(Common.IPConfigurationProfile.etag, Azure.Core.eTag, "csharp");
-@@alternateType(Common.InboundNatPool.etag, Azure.Core.eTag, "csharp");
-@@alternateType(Common.InboundNatRule.etag, Azure.Core.eTag, "csharp");
-@@alternateType(Common.LoadBalancer.etag, Azure.Core.eTag, "csharp");
-@@alternateType(Common.LoadBalancingRule.etag, Azure.Core.eTag, "csharp");
-@@alternateType(Common.NatGateway.etag, Azure.Core.eTag, "csharp");
-@@alternateType(Common.NetworkInterface.etag, Azure.Core.eTag, "csharp");
-@@alternateType(
-  Common.NetworkInterfaceTapConfiguration.etag,
-  Azure.Core.eTag,
-  "csharp"
-);
-@@alternateType(Common.NetworkSecurityGroup.etag, Azure.Core.eTag, "csharp");
-@@alternateType(Common.NetworkWatcher.etag, Azure.Core.eTag, "csharp");
-@@alternateType(Common.OutboundRule.etag, Azure.Core.eTag, "csharp");
-@@alternateType(
-  Common.PrivateEndpointConnection.etag,
+  Microsoft.Network.ApplicationSecurityGroup.etag,
   Azure.Core.eTag,
   "csharp"
 );
 @@alternateType(
-  Common.PrivateEndpointIPConfiguration.etag,
+  Microsoft.Network.BackendAddressPool.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(Microsoft.Network.Delegation.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Microsoft.Network.FlowLog.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Microsoft.Network.FrontendIPConfiguration.etag,
   Azure.Core.eTag,
   "csharp"
 );
 @@alternateType(
-  Common.PrivateLinkServiceConnection.etag,
+  Microsoft.Network.IPConfiguration.etag,
   Azure.Core.eTag,
   "csharp"
 );
 @@alternateType(
-  Common.PrivateLinkServiceIpConfiguration.etag,
+  Microsoft.Network.IPConfigurationProfile.etag,
   Azure.Core.eTag,
   "csharp"
 );
-@@alternateType(Common.Probe.etag, Azure.Core.eTag, "csharp");
-@@alternateType(Common.PublicIPAddress.etag, Azure.Core.eTag, "csharp");
-@@alternateType(Common.ResourceNavigationLink.etag, Azure.Core.eTag, "csharp");
-@@alternateType(Common.Route.etag, Azure.Core.eTag, "csharp");
-@@alternateType(Common.RouteTable.etag, Azure.Core.eTag, "csharp");
-@@alternateType(Common.ServiceAssociationLink.etag, Azure.Core.eTag, "csharp");
-@@alternateType(Common.ServiceEndpointPolicy.etag, Azure.Core.eTag, "csharp");
 @@alternateType(
-  Common.ServiceEndpointPolicyDefinition.etag,
+  Microsoft.Network.InboundNatPool.etag,
   Azure.Core.eTag,
   "csharp"
 );
-@@alternateType(Common.Subnet.etag, Azure.Core.eTag, "csharp");
-@@alternateType(Common.VirtualNetwork.etag, Azure.Core.eTag, "csharp");
-@@alternateType(Common.VirtualNetworkPeering.etag, Azure.Core.eTag, "csharp");
-@@alternateType(Common.VirtualNetworkTap.etag, Azure.Core.eTag, "csharp");
 @@alternateType(
-  Microsoft.Network.AdminRuleCollection.etag,
+  Microsoft.Network.InboundNatRule.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(Microsoft.Network.LoadBalancer.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Microsoft.Network.LoadBalancingRule.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(Microsoft.Network.NatGateway.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Microsoft.Network.NetworkInterface.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.NetworkInterfaceTapConfiguration.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.NetworkSecurityGroup.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.NetworkWatcher.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(Microsoft.Network.OutboundRule.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Microsoft.Network.PrivateEndpointConnection.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.PrivateEndpointIPConfiguration.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.PrivateLinkServiceConnection.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.PrivateLinkServiceIpConfiguration.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(Microsoft.Network.Probe.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Microsoft.Network.PublicIPAddress.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ResourceNavigationLink.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(Microsoft.Network.Route.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Microsoft.Network.RouteTable.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Microsoft.Network.ServiceAssociationLink.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ServiceEndpointPolicy.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ServiceEndpointPolicyDefinition.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(Microsoft.Network.Subnet.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Microsoft.Network.VirtualNetwork.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VirtualNetworkPeering.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VirtualNetworkTap.etag,
   Azure.Core.eTag,
   "csharp"
 );
@@ -8144,12 +8341,6 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
   Azure.Core.eTag,
   "csharp"
 );
-@@alternateType(Microsoft.Network.RoutingRule.etag, Azure.Core.eTag, "csharp");
-@@alternateType(
-  Microsoft.Network.RoutingRuleCollection.etag,
-  Azure.Core.eTag,
-  "csharp"
-);
 @@alternateType(
   Microsoft.Network.ScopeConnection.etag,
   Azure.Core.eTag,
@@ -8161,26 +8352,10 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
   "csharp"
 );
 @@alternateType(
-  Microsoft.Network.SecurityUserConfiguration.etag,
-  Azure.Core.eTag,
-  "csharp"
-);
-@@alternateType(
-  Microsoft.Network.SecurityUserRule.etag,
-  Azure.Core.eTag,
-  "csharp"
-);
-@@alternateType(
-  Microsoft.Network.SecurityUserRuleCollection.etag,
-  Azure.Core.eTag,
-  "csharp"
-);
-@@alternateType(
   Microsoft.Network.ServiceGateway.etag,
   Azure.Core.eTag,
   "csharp"
 );
-@@alternateType(Microsoft.Network.StaticMember.etag, Azure.Core.eTag, "csharp");
 @@alternateType(
   Microsoft.Network.VerifierWorkspace.etag,
   Azure.Core.eTag,
@@ -8285,92 +8460,92 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield C# SDK resource hierarchy compatibility without generated Swagger changes."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Microsoft.Network.ExpressRouteConnection,
-  Common.SubResourceModel,
+  Microsoft.Network.SubResourceModel,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield C# SDK resource hierarchy compatibility without generated Swagger changes."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Microsoft.Network.ExpressRouteCrossConnectionPeering,
-  Common.SubResourceModel,
+  Microsoft.Network.SubResourceModel,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield C# SDK resource hierarchy compatibility without generated Swagger changes."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Microsoft.Network.ExpressRouteLink,
-  Common.SubResourceModel,
+  Microsoft.Network.SubResourceModel,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield C# SDK resource hierarchy compatibility without generated Swagger changes."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Microsoft.Network.HubVirtualNetworkConnection,
-  Common.SubResourceModel,
+  Microsoft.Network.SubResourceModel,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield C# SDK resource hierarchy compatibility without generated Swagger changes."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Microsoft.Network.NetworkVirtualApplianceConnection,
-  Common.SubResourceModel,
+  Microsoft.Network.SubResourceModel,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield C# SDK resource hierarchy compatibility without generated Swagger changes."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Microsoft.Network.PrivateDnsZoneGroup,
-  Common.SubResourceModel,
+  Microsoft.Network.SubResourceModel,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield C# SDK resource hierarchy compatibility without generated Swagger changes."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Microsoft.Network.RouteFilterRule,
-  Common.SubResourceModel,
+  Microsoft.Network.SubResourceModel,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield C# SDK resource hierarchy compatibility without generated Swagger changes."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Microsoft.Network.VirtualHubRouteTableV2,
-  Common.SubResourceModel,
+  Microsoft.Network.SubResourceModel,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Brownfield C# SDK resource hierarchy compatibility without generated Swagger changes."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Microsoft.Network.VpnConnection,
-  Common.SubResourceModel,
+  Microsoft.Network.SubResourceModel,
   "csharp"
 );
 
 @@clientLocation(
-  Microsoft.Compute.NetworkInterfacesOperationGroup.listVirtualMachineScaleSetNetworkInterfaces,
+  Microsoft.Network.VmssNetworkInterfacesOperationGroup.listVirtualMachineScaleSetNetworkInterfaces,
   "VirtualMachineScaleSetNetwork",
   "csharp"
 );
 
 @@clientLocation(
-  Microsoft.Compute.NetworkInterfaces.listVirtualMachineScaleSetVMNetworkInterfaces,
+  Microsoft.Network.VmssNetworkInterfaces.listVirtualMachineScaleSetVMNetworkInterfaces,
   "VirtualMachineScaleSetNetworkInterfaces",
   "csharp"
 );
 
 @@clientLocation(
-  Microsoft.Compute.NetworkInterfaces.getVirtualMachineScaleSetNetworkInterface,
+  Microsoft.Network.VmssNetworkInterfaces.getVirtualMachineScaleSetNetworkInterface,
   "VirtualMachineScaleSetNetworkInterfaces",
   "csharp"
 );
 
 @@clientName(
-  Microsoft.Compute.NetworkInterfaceIPConfigurations,
+  Microsoft.Network.VmssNetworkInterfaceIPConfigurations,
   "VirtualMachineScaleSetNetworkInterfaceIPConfigurations",
   "csharp"
 );
 
 @@clientName(
-  Microsoft.Compute.PublicIPAddresses,
+  Microsoft.Network.VmssPublicIPAddresses,
   "VirtualMachineScaleSetNetworkInterfaceIPConfigurationPublicIPAddresses",
   "csharp"
 );
@@ -8612,7 +8787,7 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 );
 
 @@clientName(
-  Common.PrivateEndpointConnection,
+  Microsoft.Network.PrivateEndpointConnection,
   "NetworkPrivateEndpointConnection",
   "csharp"
 );
@@ -8716,7 +8891,7 @@ model LoadBalancerInboundNatPoolPropertiesWithAdditionalProperties {
 
 // Restore released native reference storage and names instead of disconnected facades.
 @@alternateType(
-  Common.VirtualNetworkPropertiesFormat.ipAllocations,
+  Microsoft.Network.VirtualNetworkPropertiesFormat.ipAllocations,
   Azure.ResourceManager.Models.WritableSubResource[],
   "csharp"
 );

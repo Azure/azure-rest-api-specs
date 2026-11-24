@@ -28,12 +28,14 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
   - [`Swagger BreakingChange` and `BreakingChange(Cross-Version)`](#swagger-breakingchange-and-breakingchangecross-version)
     - [Run `oad` locally](#run-oad-locally)
   - [`Swagger LintDiff` and `Swagger Lint(RPaaS)`](#swagger-lintdiff-and-swagger-lintrpaas)
+    - [Choose between direct validation and full LintDiff](#choose-between-direct-validation-and-full-lintdiff)
   - [`Swagger LintDiff` for TypeSpec: troubleshooting guides](#swagger-lintdiff-for-typespec-troubleshooting-guides)
   - [`Swagger ModelValidation`](#swagger-modelvalidation)
   - [`Swagger PrettierCheck`](#swagger-prettiercheck)
     - [Prettier reference](#prettier-reference)
   - [`Swagger SemanticValidation`](#swagger-semanticvalidation)
   - [Spell Check](#spell-check)
+  - [`Summarize PR Impact`](#summarize-pr-impact)
   - [`TypeSpec Validation`](#typespec-validation)
   - [`TypeSpec Suppressions`](#typespec-suppressions)
   - [`license/cla`](#licensecla)
@@ -228,6 +230,13 @@ If that guidance is not enough, please also refer to the [LintDiff rules.md doc]
 
 To reproduce LintDiff failures locally, see [CONTRIBUTING.md / How to locally reproduce a LintDiff failure occurring on a PR](https://github.com/Azure/azure-openapi-validator/blob/main/CONTRIBUTING.md#how-to-locally-reproduce-a-lintdiff-failure-occurring-on-a-pr).
 
+### Choose between direct validation and full LintDiff
+
+- To quickly see validation errors and warnings in the new state of your spec, run [`azure-openapi-validator`](https://github.com/Azure/azure-openapi-validator/wiki#usage) directly. It validates only the current state and does not compare it with the state before your PR.
+- To get results closer to the `Swagger LintDiff` PR check, run the full LintDiff process by following [`eng/tools/lint-diff/README.md`](https://github.com/Azure/azure-rest-api-specs/blob/main/eng/tools/lint-diff/README.md). It compares the validation results of the spec before and after your changes, just like the PR check.
+
+Results from the two approaches can differ, because only the full LintDiff process reports issues based on that before-and-after comparison.
+
 ## `Swagger LintDiff` for TypeSpec: troubleshooting guides
 
 See [Swagger LintDiff for TypeSpec](./validation/swagger-lintdiff.md#typespec).
@@ -244,6 +253,8 @@ oav validate-example <openapi-spec-path>
 Please see [readme](https://github.com/Azure/oav/blob/bd04e228b4181c53769ed88e561dec5212e77253/README.md) for how to install or run tool in details.
 Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
 Refer to [Swagger-Example-Generation](https://github.com/Azure/oav/blob/develop/documentation/example-generation.md) for example automatic generation.
+
+When ModelValidation reports an example/schema mismatch, review the reported example and schema together. A validation error does not by itself establish whether the example or the specification is incorrect; check the actual service behavior and intended API contract before deciding what to change. For `OBJECT_ADDITIONAL_PROPERTIES`, determine whether the reported property is accepted by the service and belongs to the intended API contract. Correct the example or schema as appropriate, then rerun validation.
 
 ## `Swagger PrettierCheck`
 
@@ -319,6 +330,12 @@ overrides:
 Spell checking is *case-insensitive* so you only need to add a word once in lower-case. Try to kept the word list sorted for easier discovery.
 
 For more information see [cspell configuration](https://cspell.org/configuration/).
+
+## `Summarize PR Impact`
+
+If the check fails with `pnpm: command not found`, an outdated PR branch may be the cause even when the spec changes are unrelated. The workflow loads the setup action from the PR head at `after/.github/actions/setup-node-install-deps`. An older copy of that action may run `npm ci` without installing `pnpm`, while the current workflow runs `pnpm exec summarize-impact`.
+
+Update the PR branch with the latest changes from its target branch (`main` or `RPSaaSMaster`), then rerun the check from the updated PR head. Rerunning the check on the old branch state can repeat the failure. This does not require changing spec files.
 
 ## `TypeSpec Validation`
 
