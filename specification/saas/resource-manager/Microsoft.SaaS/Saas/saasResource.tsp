@@ -119,8 +119,7 @@ model SaasResourceProperties {
   /** The product code. Primary purchase identifier for GA — used to resolve term details server-side. */
   productCode?: string;
 
-  /** The intent for patch operations. Write-only — not returned in GET responses. */
-  @visibility(Lifecycle.Create, Lifecycle.Update)
+  /** Optional update intent specifying how term dates are handled during plan or term updates. */
   intent?: PatchIntent;
 }
 
