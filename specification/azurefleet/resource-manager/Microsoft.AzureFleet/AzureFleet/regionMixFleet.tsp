@@ -56,12 +56,32 @@ model RegionMixFleetUpdate {
 interface RegionMixFleets {
   get is ArmResourceRead<RegionMixFleet>;
 
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<RegionMixFleet>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    RegionMixFleet,
+    Response =
+      | (ArmResourceUpdatedResponse<RegionMixFleet> &
+          ArmAsyncOperationHeader<FinalResult = RegionMixFleet> &
+          Azure.Core.Foundations.RetryAfterHeader)
+      | ArmResourceCreatedResponse<
+          RegionMixFleet,
+          ArmAsyncOperationHeader<FinalResult = RegionMixFleet> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+  >;
 
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<RegionMixFleet, RegionMixFleetUpdate>;
+  update is ArmCustomPatchAsync<
+    RegionMixFleet,
+    RegionMixFleetUpdate,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = RegionMixFleet> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
-  delete is ArmResourceDeleteWithoutOkAsync<RegionMixFleet>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    RegionMixFleet,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   listByResourceGroup is ArmResourceListByParent<RegionMixFleet>;
 
