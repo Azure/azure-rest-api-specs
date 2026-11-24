@@ -1160,7 +1160,7 @@ model VaultProperties {
   /**
    * Property to specify whether the vault will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked. This will override the set firewall rules, meaning that even if the firewall rules are present we will not honor the rules.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "False positive: publicNetworkAccess is a public network-access policy setting, not a secret or credential."
   publicNetworkAccess?: string = "enabled";
 
   /**
@@ -2394,6 +2394,13 @@ model SecretCreateOrUpdateParameters {
 }
 
 /**
+ * The value of a secret.
+ */
+@Versioning.added(KeyVault.Versions.v2026_12_01)
+@secret
+scalar SecretValue extends string;
+
+/**
  * Properties of the secret
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2401,7 +2408,8 @@ model SecretProperties {
   /**
    * The value of the secret. NOTE: 'value' will never be returned from the service, as APIs using this model are is intended for internal use in ARM deployments. Users should use the data-plane REST service for interaction with vault secrets.
    */
-  value?: string;
+  @Versioning.typeChangedFrom(KeyVault.Versions.v2026_12_01, string)
+  value?: SecretValue;
 
   /**
    * The content type of the secret.
@@ -2496,7 +2504,8 @@ model SecretPatchProperties {
   /**
    * The value of the secret.
    */
-  value?: string;
+  @Versioning.typeChangedFrom(KeyVault.Versions.v2026_12_01, string)
+  value?: SecretValue;
 
   /**
    * The content type of the secret.
