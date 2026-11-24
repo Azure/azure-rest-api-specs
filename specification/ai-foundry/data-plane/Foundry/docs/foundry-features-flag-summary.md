@@ -15,12 +15,36 @@ in order to enable preview features on these GA routes.
 
 | Operation Group | Operation | Method | Path | Foundry-Features Header Value |
 |-----------------|-----------|--------|------|-------------------------------|
-| Agents | Create | POST | `/agents` | Optional: `ContainerAgents=V1Preview`, `WorkflowAgents=V1Preview` |
-| Agents | Update | POST | `/agents/{agent_name}` | Optional: `ContainerAgents=V1Preview`, `WorkflowAgents=V1Preview` |
-| Agents | Create Version | POST | `/agents/{agent_name}/versions` | Optional: `ContainerAgents=V1Preview`, `WorkflowAgents=V1Preview` |
+| Agents | Create (JSON or code upload) | POST | `/agents` | Optional: `ContainerAgents=V1Preview`, `WorkflowAgents=V1Preview`, `A2AAgents=V1Preview` |
+| Agents | Update (JSON or code upload) | POST | `/agents/{agent_name}` | Optional: `ContainerAgents=V1Preview`, `WorkflowAgents=V1Preview`, `A2AAgents=V1Preview` |
+| Agents | Create Version (JSON or code upload) | POST | `/agents/{agent_name}/versions` | Optional: `ContainerAgents=V1Preview`, `WorkflowAgents=V1Preview`, `A2AAgents=V1Preview` |
+| Agents | Create From Manifest | POST | `/agents:import` | Required when the materialized hosted agent declares `a2a` in `protocol_versions`: `A2AAgents=V1Preview` |
+| Agents | Update From Manifest | POST | `/agents/{agent_name}/import` | Required when the materialized hosted agent declares `a2a` in `protocol_versions`: `A2AAgents=V1Preview` |
+| Agents | Create Version From Manifest | POST | `/agents/{agent_name}/versions:import` | Required when the materialized hosted agent version declares `a2a` in `protocol_versions`: `A2AAgents=V1Preview` |
+| Agents | Update Endpoint | PATCH | `/agents/{agent_name}` | Required only when modifying a hosted agent's A2A passthrough endpoint configuration: `A2AAgents=V1Preview` |
 | Evaluation Rules | CreateOrUpdate | PUT | `/evaluationrules/{id}` | Optional: `Evaluations=V1Preview` |
+| Data Generation Jobs | Create | POST | `/data_generation_jobs` | Required for `type: conversations`, `type: traces` with `generate_test_case_rubric: true`, `scenario: supervised_finetuning_preview`, or `scenario: reinforcement_finetuning_preview`: `DataGenerationJobs=V1Preview`; not required for ordinary evaluation turn samples without rubric generation |
 
 Note that only v1 operations are included in the above table. If an operation (or interface) is decorated with `@removed(Versions.v1)` the are not included here.
+
+### A2A agents
+
+Only hosted-agent A2A passthrough is in preview. Creating or modifying a hosted
+agent definition that declares `a2a` in `protocol_versions` requires
+`Foundry-Features: A2AAgents=V1Preview`. The header is supported on the JSON
+and multipart code-upload agent create, update, and create-version writes, on
+manifest imports that materialize a hosted agent, and on endpoint PATCH when it
+modifies a hosted agent's A2A passthrough configuration, in both `v1` and
+`virtual-public-preview`.
+
+Prompt-agent A2A translation remains GA: configuring
+`agent_endpoint.protocol_configuration.a2a` for a prompt agent (including
+through endpoint PATCH) does not require the A2A opt-in, and the header can be
+omitted. Other protocols, agent-card updates, and
+getting, listing, deleting, or referencing existing agents do not require it.
+A2A inference is out of scope for this opt-in. The `x-ms-foundry-meta`
+annotations describe this preview contract; they do not implement runtime
+enforcement.
 
 ## v1 Preview routes with required "Foundry-Features" HTTP header to enable preview features
 
@@ -73,11 +97,6 @@ in order to successfully complete operations using these routes.
 | Skills | List | GET | `/skills` | Required: `Skills=V1Preview` |
 | Skills | Update | POST | `/skills/{name}` | Required: `Skills=V1Preview` |
 | Skills | Delete | DELETE | `/skills/{name}` | Required: `Skills=V1Preview` |
-| Data Generation Jobs | Get | GET | `/data_generation_jobs/{jobId}` | Required: `DataGenerationJobs=V1Preview` |
-| Data Generation Jobs | List | GET | `/data_generation_jobs` | Required: `DataGenerationJobs=V1Preview` |
-| Data Generation Jobs | Create | POST | `/data_generation_jobs` | Required: `DataGenerationJobs=V1Preview` |
-| Data Generation Jobs | Cancel | POST | `/data_generation_jobs/{jobId}:cancel` | Required: `DataGenerationJobs=V1Preview` |
-| Data Generation Jobs | Delete | DELETE | `/data_generation_jobs/{jobId}` | Required: `DataGenerationJobs=V1Preview` |
 | Agent Insight Monitors | List | GET | `/agent_insight_monitors` | Required: `AgentInsights=V1Preview` |
 | Agent Insight Monitors | Create | POST | `/agent_insight_monitors` | Required: `AgentInsights=V1Preview` |
 | Agent Insight Monitors | Get | GET | `/agent_insight_monitors/{monitor_id}` | Required: `AgentInsights=V1Preview` |

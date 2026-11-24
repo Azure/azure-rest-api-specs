@@ -1,6 +1,4 @@
 import "@typespec/openapi";
-import "@azure-tools/openai-typespec/models/live";
-import "@azure-tools/openai-typespec/models/realtime";
 import "./agents.tsp";
 
 using TypeSpec.OpenAPI;

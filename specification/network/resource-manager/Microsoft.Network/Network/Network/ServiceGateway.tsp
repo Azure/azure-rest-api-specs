@@ -3,29 +3,22 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
-using Common;
 using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Network;
 /**
  * ServiceGateway resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "ServiceGateway uses Http.Private.includeInapplicableMetadataInPayload to suppress irrelevant ARM envelope properties from the response payload, which is required for correct wire format compatibility."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "ServiceGateway extends SecurityPerimeterTrackedResource, a shared base type defined in the Common namespace that captures the standard NSP-linked tracked resource shape. Refactoring to a standard ARM resource would require breaking changes to the existing API surface."
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "ServiceGateway inherits from SecurityPerimeterTrackedResource to share common NSP envelope properties (identity, kind, etag) across all security perimeter resource types. Composition would duplicate these definitions across the codebase."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "ServiceGateway uses Azure.ResourceManager.Legacy.feature gating to align with the NSP feature flag pattern used across all perimeter-linked resources in this namespace."
-@Azure.ResourceManager.Legacy.feature(Features.serviceGateway)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ServiceGateway extends SecurityPerimeterTrackedResource {
-  properties?: ServiceGatewayPropertiesFormat;
-
+@featureFile(Features.serviceGateway)
+model ServiceGateway
+  is SecurityPerimeterTrackedResourceInstance<ServiceGatewayPropertiesFormat> {
   /**
    * The name of the resource.
    */
@@ -37,6 +30,7 @@ model ServiceGateway extends SecurityPerimeterTrackedResource {
   name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The generic resource marker exposes this legacy resource envelope property."
   @visibility(Lifecycle.Read)
   etag?: string;
 
@@ -72,8 +66,7 @@ model ServiceGatewayActionOkResponse {
   body: ServiceGatewayActionOkResponseBody;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "ServiceGateways interface uses Azure.ResourceManager.Legacy.feature gating to conditionally expose operations only when the serviceGateway feature flag is enabled, consistent with the feature-gating pattern used across all NSP-linked resource operations in this namespace."
-@Azure.ResourceManager.Legacy.feature(Features.serviceGateway)
+@featureFile(Features.serviceGateway)
 @armResourceOperations
 interface ServiceGateways {
   /**
@@ -112,7 +105,11 @@ interface ServiceGateways {
   /**
    * Gets all the service gateways in a subscription.
    */
-  listAll is ArmListBySubscription<ServiceGateway, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    ServiceGateway,
+    OverrideResourceName = "ServiceGateway",
+    Error = CloudError
+  >;
 
   /**
    * Creates or updates address locations within the service gateway.
@@ -127,6 +124,7 @@ interface ServiceGateways {
    *
    * For address-level partial updates, if no services are provided, the existing services will be considered for deletion.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The generic resource marker exposes this legacy action response shape."
   @removed(Versions.v2025_09_01)
   @action("updateAddressLocations")
   @sharedRoute
@@ -168,6 +166,7 @@ interface ServiceGateways {
    * Full update replaces all existing services with the new list provided in the request.
    * Partial update modifies only the specified services.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The generic resource marker exposes this legacy action response shape."
   @removed(Versions.v2025_09_01)
   @action("updateServices")
   @sharedRoute

@@ -1,16 +1,25 @@
 import "./neuroShield/main.tsp";
+import "./agentFabric/main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
 @client({
   name: "NetworkSecurityManagementClient",
-  service: [NeuroShield.Management],
+  service: [NeuroShield.Management, Microsoft.NetworkSecurity],
   autoMergeService: true,
 })
 namespace NetworkSecurityManagementClient {
 
 }
+
+// NeuroShield and Agent Fabric both declare the provider-wide
+// GET /providers/Microsoft.NetworkSecurity/operations list. Keep the single
+// released NeuroShield Operations.list method in the shared client.
+@@scope(
+  Microsoft.NetworkSecurity.Operations.list,
+  "!(csharp, python, java, javascript, go)"
+);
 
 @@clientName(
   NetworkSecurityManagementClient,
@@ -100,4 +109,93 @@ namespace NetworkSecurityManagementClient {
   NeuroShield.Management.NeuroShieldMitigationProperties.virtualMachineArmId,
   "VirtualMachineARMID",
   "go"
+);
+
+@@clientName(Microsoft.NetworkSecurity.Member, "AgentFabricMember", "csharp");
+@@clientName(
+  Microsoft.NetworkSecurity.MemberProperties,
+  "AgentFabricMemberProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.MemberTagsUpdate,
+  "AgentFabricMemberPatch",
+  "csharp"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.MemberUpdateProperties,
+  "AgentFabricMemberUpdateProperties",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Flatten exposes the member PATCH fqdn as AgentFabricMemberPatch.Fqdn in C# without changing the wire format."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Microsoft.NetworkSecurity.MemberTagsUpdate.properties,
+  "csharp"
+);
+
+@@clientName(
+  Microsoft.NetworkSecurity.PolicyGroup,
+  "NetworkSecurityPolicyGroup",
+  "csharp"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.PolicyGroupProperties,
+  "NetworkSecurityPolicyGroupProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.HttpMethod,
+  "UrlFilteringHttpMethod",
+  "csharp"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.ImagePullPolicy,
+  "AgentFabricSandboxImagePullPolicy",
+  "csharp"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.PolicyAction,
+  "NetworkSecurityPolicyAction",
+  "csharp"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.PolicyDirection,
+  "NetworkSecurityPolicyDirection",
+  "csharp"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.ProvisioningState,
+  "AgentFabricProvisioningState",
+  "csharp"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.WorkloadBase,
+  "AgentFabricWorkload",
+  "csharp"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.EgressTrustBundleCertificate.notBefore,
+  "StartsOn",
+  "csharp"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.EgressTrustBundleCertificate.notAfter,
+  "ExpiresOn",
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.NetworkSecurity.AgentFabric.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.NetworkSecurity.AgentFabricTagsUpdate.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.NetworkSecurity.AgentIdentity.tenantId,
+  Azure.Core.uuid,
+  "csharp"
 );

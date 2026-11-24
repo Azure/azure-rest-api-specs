@@ -4,28 +4,21 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
-using Common;
 
 namespace Microsoft.Network;
 /**
  * A DDoS custom policy in a resource group.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model DdosCustomPolicy extends Common.Resource {
-  properties?: DdosCustomPolicyPropertiesFormat;
-
+@featureFile(Features.virtualNetwork)
+model DdosCustomPolicy is ResourceInstance<DdosCustomPolicyPropertiesFormat> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
   @visibility(Lifecycle.Read)
   @path
   @key("ddosCustomPolicyName")
@@ -38,8 +31,7 @@ model DdosCustomPolicy extends Common.Resource {
   etag?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @armResourceOperations(#{ omitTags: true })
 interface DdosCustomPolicies {
   /**
@@ -94,7 +86,11 @@ interface DdosCustomPolicies {
    */
   @added(Versions.v2025_07_01)
   @tag("ddosCustomPolicies")
-  listAll is ArmListBySubscription<DdosCustomPolicy, Error = CloudError>;
+  listAll is ArmListBySubscriptionWithResourceName<
+    DdosCustomPolicy,
+    OverrideResourceName = "DdosCustomPolicy",
+    Error = CloudError
+  >;
 }
 
 @@doc(DdosCustomPolicy.name, "The name of the DDoS custom policy.");

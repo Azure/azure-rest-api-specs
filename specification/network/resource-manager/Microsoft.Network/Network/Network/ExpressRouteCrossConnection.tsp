@@ -4,28 +4,23 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
-using Common;
 
 namespace Microsoft.Network;
+
 /**
  * ExpressRouteCrossConnection resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ExpressRouteCrossConnection extends Common.Resource {
-  properties?: ExpressRouteCrossConnectionProperties;
-
+@featureFile(Features.expressRoute)
+model ExpressRouteCrossConnection
+  is ResourceInstance<ExpressRouteCrossConnectionProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
   @visibility(Lifecycle.Read)
   @path
   @key("crossConnectionName")
@@ -36,6 +31,24 @@ model ExpressRouteCrossConnection extends Common.Resource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   etag?: string;
+}
+
+/**
+ * Resource identity for a peering in an ExpressRoute cross connection.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The resource-only identity reuses the existing serialized peering schema."
+@Azure.ResourceManager.Legacy.externalTypeRef("#/definitions/ExpressRouteCrossConnectionPeering")
+@featureFile(Features.expressRoute)
+@parentResource(ExpressRouteCrossConnection)
+model ExpressRouteCrossConnectionPeeringResource
+  is ChildResourceWithoutPropertiesInstance<{}> {
+  /** The name of the peering. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
+  @visibility(Lifecycle.Read)
+  @path
+  @key("peeringName")
+  @segment("peerings")
+  name: string;
 }
 
 alias ExpressRouteCrossConnectionPeeringOps = Azure.ResourceManager.Legacy.RoutedOperations<
@@ -62,9 +75,127 @@ alias ExpressRouteCrossConnectionPeeringOps = Azure.ResourceManager.Legacy.Route
   }
 >;
 
+alias ExpressRouteCrossConnectionPeeringListOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** The name of the ExpressRouteCrossConnection (service key of the circuit). */
+    @path
+    @segment("expressRouteCrossConnections")
+    @key
+    crossConnectionName: string;
+  },
+  {
+    /** The name of the peering. */
+    @path
+    @segment("peerings")
+    @key
+    peeringName: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings",
+  }
+>;
+alias ExpressRouteCrossConnectionArpTablesOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** The name of the ExpressRouteCrossConnection (service key of the circuit). */
+    @path
+    @segment("expressRouteCrossConnections")
+    @key
+    crossConnectionName: string;
+
+    /** The name of the peering. */
+    @path
+    @segment("peerings")
+    @key
+    peeringName: string;
+  },
+  {
+    /** The path of the device. */
+    @path
+    @segment("arpTables")
+    @key
+    devicePath: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/arpTables/{devicePath}",
+  }
+>;
+
+alias ExpressRouteCrossConnectionRouteTablesOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** The name of the ExpressRouteCrossConnection (service key of the circuit). */
+    @path
+    @segment("expressRouteCrossConnections")
+    @key
+    crossConnectionName: string;
+
+    /** The name of the peering. */
+    @path
+    @segment("peerings")
+    @key
+    peeringName: string;
+  },
+  {
+    /** The path of the device. */
+    @path
+    @segment("routeTables")
+    @key
+    devicePath: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/routeTables/{devicePath}",
+  }
+>;
+
+alias ExpressRouteCrossConnectionRouteTablesSummaryOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+
+    /** The name of the ExpressRouteCrossConnection (service key of the circuit). */
+    @path
+    @segment("expressRouteCrossConnections")
+    @key
+    crossConnectionName: string;
+
+    /** The name of the peering. */
+    @path
+    @segment("peerings")
+    @key
+    peeringName: string;
+  },
+  {
+    /** The path of the device. */
+    @path
+    @segment("routeTablesSummary")
+    @key
+    devicePath: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/routeTablesSummary/{devicePath}",
+  }
+>;
+
+@doc("Azure operation completed successfully.")
+model ExpressRouteCrossConnectionPeeringDeleteOkResult {
+  /** The HTTP status code. */
+  @statusCode statusCode: 200;
+}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@featureFile(Features.expressRoute)
 @armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface ExpressRouteCrossConnections {
   /**
@@ -114,8 +245,9 @@ interface ExpressRouteCrossConnections {
    */
   @tag("ExpressRouteCrossConnections")
   @autoRoute
-  list is ArmListBySubscription<
+  list is ArmListBySubscriptionWithResourceName<
     ExpressRouteCrossConnection,
+    OverrideResourceName = "ExpressRouteCrossConnection",
     Parameters = {
       /**
        * The filter to apply on the operation. For example, you can use $filter=name eq '{circuitServiceKey}'.
@@ -131,29 +263,17 @@ interface ExpressRouteCrossConnections {
    */
   @tag("ExpressRouteCrossConnectionArpTable")
   @post
-  @autoRoute
-  listArpTable is ArmResourceRead<
-    ExpressRouteCrossConnection,
-    Parameters = {
-      /**
-       * The name of the peering.
-       */
-      @path
-      @segment("peerings")
-      peeringName: string;
-
-      /**
-       * The path of the device.
-       */
-      @path
-      @segment("arpTables")
-      devicePath: string;
-    },
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/arpTables/{devicePath}")
+  listArpTable is ExpressRouteCrossConnectionArpTablesOps.ActionAsync<
+    ExpressRouteCrossConnectionPeeringResource,
+    void,
+    void,
     Response =
       | ArmResponse<ExpressRouteCircuitsArpTableListResult>
       | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteCircuitsArpTableListResult> &
           Azure.Core.Foundations.RetryAfterHeader>,
-    Error = CloudError
+    OverrideErrorType = CloudError,
+    OverrideResourceName = "ExpressRouteCrossConnectionPeering"
   >;
 
   /**
@@ -161,29 +281,17 @@ interface ExpressRouteCrossConnections {
    */
   @tag("ExpressRouteCrossConnectionRouteTableSummary")
   @post
-  @autoRoute
-  listRoutesTableSummary is ArmResourceRead<
-    ExpressRouteCrossConnection,
-    Parameters = {
-      /**
-       * The name of the peering.
-       */
-      @path
-      @segment("peerings")
-      peeringName: string;
-
-      /**
-       * The path of the device.
-       */
-      @path
-      @segment("routeTablesSummary")
-      devicePath: string;
-    },
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/routeTablesSummary/{devicePath}")
+  listRoutesTableSummary is ExpressRouteCrossConnectionRouteTablesSummaryOps.ActionAsync<
+    ExpressRouteCrossConnectionPeeringResource,
+    void,
+    void,
     Response =
       | ArmResponse<ExpressRouteCrossConnectionsRoutesTableSummaryListResult>
       | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteCrossConnectionsRoutesTableSummaryListResult> &
           Azure.Core.Foundations.RetryAfterHeader>,
-    Error = CloudError
+    OverrideErrorType = CloudError,
+    OverrideResourceName = "ExpressRouteCrossConnectionPeering"
   >;
 
   /**
@@ -191,44 +299,33 @@ interface ExpressRouteCrossConnections {
    */
   @tag("ExpressRouteCrossConnectionRouteTable")
   @post
-  @autoRoute
-  listRoutesTable is ArmResourceRead<
-    ExpressRouteCrossConnection,
-    Parameters = {
-      /**
-       * The name of the peering.
-       */
-      @path
-      @segment("peerings")
-      peeringName: string;
-
-      /**
-       * The path of the device.
-       */
-      @path
-      @segment("routeTables")
-      devicePath: string;
-    },
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/routeTables/{devicePath}")
+  listRoutesTable is ExpressRouteCrossConnectionRouteTablesOps.ActionAsync<
+    ExpressRouteCrossConnectionPeeringResource,
+    void,
+    void,
     Response =
       | ArmResponse<ExpressRouteCircuitsRoutesTableListResult>
       | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteCircuitsRoutesTableListResult> &
           Azure.Core.Foundations.RetryAfterHeader>,
-    Error = CloudError
+    OverrideErrorType = CloudError,
+    OverrideResourceName = "ExpressRouteCrossConnectionPeering"
   >;
 
   /**
    * Gets all peerings in a specified ExpressRouteCrossConnection.
    */
   @tag("ExpressRouteCrossConnectionPeerings")
-  @list
   @get
-  @autoRoute
-  @action("peerings")
-  expressRouteCrossConnectionPeeringsList is ArmResourceActionSync<
-    ExpressRouteCrossConnection,
-    void,
-    ArmResponse<ExpressRouteCrossConnectionPeeringList>,
-    Error = CloudError
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings")
+  expressRouteCrossConnectionPeeringsList is ExpressRouteCrossConnectionPeeringListOps.List<
+    ExpressRouteCrossConnectionPeeringResource,
+    Response = ArmResponse<ExpressRouteCrossConnectionPeeringList>,
+    OverrideErrorType = CloudError,
+    OverrideRouteOptions = #{
+      route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings",
+    },
+    OverrideResourceName = "ExpressRouteCrossConnectionPeering"
   >;
 
   /**
@@ -237,18 +334,15 @@ interface ExpressRouteCrossConnections {
   @tag("ExpressRouteCrossConnectionPeerings")
   @delete
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}")
-  delete is ExpressRouteCrossConnectionPeeringOps.ActionAsync<
-    ExpressRouteCrossConnection,
-    void,
-    void,
+  delete is ExpressRouteCrossConnectionPeeringOps.DeleteWithoutOkAsync<
+    ExpressRouteCrossConnectionPeeringResource,
     Response =
-      | {
-          @body body: void;
-        }
+      | ExpressRouteCrossConnectionPeeringDeleteOkResult
       | ArmAcceptedLroResponse<LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
           ArmLroLocationHeader<FinalResult = void>>
       | NoContentResponse,
-    OverrideErrorType = CloudError
+    OverrideErrorType = CloudError,
+    OverrideResourceName = "ExpressRouteCrossConnectionPeering"
   >;
 
   /**
@@ -257,11 +351,11 @@ interface ExpressRouteCrossConnections {
   @tag("ExpressRouteCrossConnectionPeerings")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}")
-  expressRouteCrossConnectionPeeringsGet is ExpressRouteCrossConnectionPeeringOps.ActionSync<
-    ExpressRouteCrossConnection,
-    void,
+  expressRouteCrossConnectionPeeringsGet is ExpressRouteCrossConnectionPeeringOps.Read<
+    ExpressRouteCrossConnectionPeeringResource,
     Response = ArmResponse<ExpressRouteCrossConnectionPeering>,
-    OverrideErrorType = CloudError
+    OverrideErrorType = CloudError,
+    OverrideResourceName = "ExpressRouteCrossConnectionPeering"
   >;
 
   /**
@@ -272,10 +366,8 @@ interface ExpressRouteCrossConnections {
   @put
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}")
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  expressRouteCrossConnectionPeeringsCreateOrUpdate is ExpressRouteCrossConnectionPeeringOps.ActionAsync<
-    ExpressRouteCrossConnection,
-    ExpressRouteCrossConnectionPeering,
-    void,
+  expressRouteCrossConnectionPeeringsCreateOrUpdate is ExpressRouteCrossConnectionPeeringOps.CreateOrUpdateAsync<
+    ExpressRouteCrossConnectionPeeringResource,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = ExpressRouteCrossConnectionPeering> &
       Azure.Core.Foundations.RetryAfterHeader,
     Response =
@@ -285,7 +377,9 @@ interface ExpressRouteCrossConnections {
           LroHeaders = ArmAsyncOperationHeader<FinalResult = ExpressRouteCrossConnectionPeering> &
             Azure.Core.Foundations.RetryAfterHeader
         >,
-    OverrideErrorType = CloudError
+    OverrideErrorType = CloudError,
+    Request = ExpressRouteCrossConnectionPeering,
+    OverrideResourceName = "ExpressRouteCrossConnectionPeering"
   >;
 
   /**
@@ -426,7 +520,7 @@ interface ExpressRouteCrossConnections {
   "Parameters supplied to update express route cross connection tags."
 );
 @@doc(
-  ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate::parameters.body,
+  ExpressRouteCrossConnections.expressRouteCrossConnectionPeeringsCreateOrUpdate::parameters.resource,
   "Parameters supplied to the create or update ExpressRouteCrossConnection peering operation."
 );
 @@doc(

@@ -4,28 +4,21 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
-using Common;
 
 namespace Microsoft.Network;
 /**
  * ExpressRoute gateway resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ExpressRouteGateway extends Common.Resource {
-  properties?: ExpressRouteGatewayProperties;
-
+@featureFile(Features.virtualWAN)
+model ExpressRouteGateway is ResourceInstance<ExpressRouteGatewayProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
   @visibility(Lifecycle.Read)
   @path
   @key("expressRouteGatewayName")
@@ -85,8 +78,7 @@ alias ExpressRouteConnectionOps = Azure.ResourceManager.Legacy.RoutedOperations<
   }
 >;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+@featureFile(Features.virtualWAN)
 @armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface ExpressRouteGateways {
   /**
