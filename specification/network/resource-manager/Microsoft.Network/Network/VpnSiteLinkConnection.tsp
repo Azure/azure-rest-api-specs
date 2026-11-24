@@ -1,0 +1,131 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./VpnGateway.tsp";
+import "./shared-models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Network;
+/**
+ * VpnSiteLinkConnection Resource.
+ */
+@featureFile(Features.virtualWAN)
+@parentResource(VpnGateway)
+model VpnSiteLinkConnection
+  is SubResourceInstance<VpnSiteLinkConnectionProperties> {
+  /**
+   * The name of the resource that is unique within a resource group. This name can be used to access the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
+  @visibility(Lifecycle.Read)
+  @path
+  @key("linkConnectionName")
+  @segment("vpnLinkConnections")
+  name: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  etag?: string;
+}
+
+alias VpnSiteLinkConnectionsOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the vpn gateway. */
+    @path
+    @segment("vpnGateways")
+    @key
+    gatewayName: string;
+
+    /** The name of the vpn connection. */
+    @path
+    @segment("vpnConnections")
+    @key
+    connectionName: string;
+  },
+  {
+    /** The name of the vpn link connection. */
+    @path
+    @segment("vpnLinkConnections")
+    @key
+    linkConnectionName: string;
+  }
+>;
+
+@featureFile(Features.virtualWAN)
+@armResourceOperations(#{ omitTags: true })
+interface VpnSiteLinkConnections {
+  /**
+   * Retrieves the details of a vpn site link connection.
+   */
+  get is VpnSiteLinkConnectionsOps.Read<
+    VpnSiteLinkConnection,
+    OverrideErrorType = CloudError
+  >;
+
+  /**
+   * Retrieves all vpn site link connections for a particular virtual wan vpn gateway vpn connection.
+   */
+  listByVpnConnection is ArmResourceListByParent<
+    VpnSiteLinkConnection,
+    Parameters = {
+      /** The name of the vpn connection. */
+      @path
+      @segment("vpnConnections")
+      @key
+      connectionName: string;
+    },
+    Response = ArmResponse<ListVpnSiteLinkConnectionsResult>,
+    Error = CloudError
+  >;
+
+  /**
+   * Resets the VpnLink connection specified.
+   */
+  @tag("vpnLinkConnections")
+  @action("resetconnection")
+  resetConnection is VpnSiteLinkConnectionsOps.ActionAsync<
+    VpnSiteLinkConnection,
+    Request = void,
+    Result = void,
+    Response = ArmAcceptedLroResponse,
+    OverrideErrorType = ErrorResponse
+  >;
+
+  /**
+   * Lists IKE Security Associations for Vpn Site Link Connection in the specified resource group.
+   */
+  @action("getikesas")
+  getIkeSas is VpnSiteLinkConnectionsOps.ActionAsync<
+    VpnSiteLinkConnection,
+    void,
+    {
+      @body body: stringApplicationJson;
+    },
+    LroHeaders = ArmLroLocationHeader<FinalResult = stringApplicationJson> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    OverrideErrorType = ErrorResponse
+  >;
+}
+
+@@doc(
+  VpnSiteLinkConnection.name,
+  "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+);
+@@doc(
+  VpnSiteLinkConnection.properties,
+  "Properties of the VPN site link connection."
+);

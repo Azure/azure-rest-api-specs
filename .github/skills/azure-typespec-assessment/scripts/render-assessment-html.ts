@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { extractApiVersions, selectApiVersionPair } from "./api-version-selection.ts";
 import { documentQualitySummary, renderReportSections } from "./assessment-report-ui.ts";
+import { effectiveSchemaProperties } from "./autorest-contract.ts";
 import { isMain, parseArgs, readJsonObject, runMain } from "./cli.ts";
 import { validateAssessment } from "./validate-assessment.ts";
 
@@ -512,7 +513,9 @@ function schemaPath(schema: NormalizedSchema | undefined, pathSegments: string[]
   for (const rawSegment of pathSegments) {
     const isArray = rawSegment.endsWith("[]");
     const name = rawSegment.replace(/\[\]$/, "");
-    const property = (current?.properties ?? []).find((item) => item.name === name);
+    const property = (current ? effectiveSchemaProperties(current) : []).find(
+      (item) => item.name === name,
+    );
     if (!property) return { schema: undefined, identity };
     current = property.schema;
     identity = schemaIdentity(current) ?? identity;
@@ -732,10 +735,10 @@ function schemaContractRows(
     rows.push(...schemaContractRows(before.items, after.items, `${area}[]`));
   }
   const beforeProperties = new Map(
-    (before.properties ?? []).map((property) => [property.name, property]),
+    effectiveSchemaProperties(before).map((property) => [property.name, property]),
   );
   const afterProperties = new Map(
-    (after.properties ?? []).map((property) => [property.name, property]),
+    effectiveSchemaProperties(after).map((property) => [property.name, property]),
   );
   for (const name of [...new Set([...beforeProperties.keys(), ...afterProperties.keys()])].sort()) {
     const previous = beforeProperties.get(name);

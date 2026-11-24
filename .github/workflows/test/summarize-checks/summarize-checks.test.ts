@@ -176,6 +176,52 @@ describe("ARM review label handoff", () => {
       );
     });
 
+    it.each([false, true])(
+      "applies data-plane intake from the artifact without redundant API calls: %s",
+      async (hasApiDefinitionChanges) => {
+        const { github, run } = createSummary(["TypeSpec", "data-plane"]);
+        github.rest.actions.downloadArtifact.mockImplementation(() =>
+          Promise.resolve({
+            data: new Response(
+              JSON.stringify({
+                schemaVersion: 2,
+                services: [
+                  {
+                    path: "specification/example",
+                    plane: "data-plane",
+                    changes: ["api"],
+                    hasApiDefinitionChanges,
+                    typeSpec: true,
+                    newApiVersions: [],
+                    suppressionsChanged: false,
+                    resourceProvider: {
+                      newNamespaces: [],
+                      usesRpaas: false,
+                      hasAddedDefinitions: false,
+                      registered: false,
+                    },
+                  },
+                ],
+              }),
+            ).body,
+          }),
+        );
+
+        await run();
+
+        if (hasApiDefinitionChanges) {
+          expect(github.rest.issues.addLabels).toHaveBeenCalledExactlyOnceWith(
+            expect.objectContaining({ labels: ["data-plane-review-requested"] }),
+          );
+        } else {
+          expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+        }
+        expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+        expect(github.rest.pulls.get).toHaveBeenCalledTimes(1);
+        expect(github.rest.issues.listLabelsOnIssue).not.toHaveBeenCalled();
+      },
+    );
+
     it("allows the dispatch job to recover an already-present queue label", async () => {
       const { core, run } = createSummary(["ARMReview", "WaitForARMFeedback"]);
 
@@ -842,6 +888,27 @@ describe("Summarize Checks Unit Tests", () => {
       expect(completed).not.toContain("Neutral check");
       expect(result.result).toBe("FAILURE");
     });
+
+    it.each([false, true])(
+      "gates existing-version intake on protected signoff, not legacy approval: %s",
+      (signedOff) => {
+        const [comment, status] = summarize({
+          labels: [
+            "data-plane",
+            "PublishToCustomers",
+            "data-plane-review-requested",
+            "APIStewardshipBoard-SignedOff",
+            ...(signedOff ? ["data-plane-review-signoff"] : []),
+          ],
+        });
+        expect(status.result).toBe(signedOff ? "SUCCESS" : "FAILURE");
+        if (!signedOff) {
+          expect(comment).toContain("Data-plane API review");
+          expect(comment).toContain("existing data-plane versions");
+          expect(comment).toContain("data-plane-review-signoff");
+        }
+      },
+    );
 
     it("shows all blocking approvals and failures in the main table regardless of priority", () => {
       const [comment, status] = summarize({

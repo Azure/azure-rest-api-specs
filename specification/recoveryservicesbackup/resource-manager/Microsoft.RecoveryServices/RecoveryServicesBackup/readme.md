@@ -57,6 +57,15 @@ semantic-validator: true
 message-format: json
 ```
 
+### Tag: package-preview-2026-10-31-preview
+
+These settings apply only when `--tag=package-preview-2026-10-31-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-10-31-preview'
+input-file:
+  - preview/2026-10-31-preview/bms.json
+```
+
 ### Tag: package-2026-11-01
 
 These settings apply only when `--tag=package-2026-11-01` is specified on the command line.
@@ -713,4 +722,12 @@ suppressions:
   - from: bms.json
     code: GuidUsage
     reason: GUIDs are used for sourceTenantId, aadTenantId, servicePrincipalClientId, and servicePrincipalObjectId under Cross Tenant Restore properties. Suppression added upon feedback from ARM reviewer.
+  - from: bms.json
+    code: XMSSecretInResponse
+    where:
+      - $.definitions.AzureFileShareBrowseRecoveryPointRequest.properties.continuationToken
+      - $.definitions.AzureFileShareBrowseRecoveryPointRequestResource.properties.properties.properties.continuationToken
+      - $.definitions.AzureFileShareBrowseRecoveryPointResponse.properties.continuationToken
+      - $.definitions.AzureFileShareBrowseRecoveryPointResponseResource.properties.properties.properties.continuationToken
+    reason: The continuation token contains opaque pagination state returned by Browse and supplied unchanged in the next Browse request. It is not authentication material or a credential.
 ```

@@ -4,18 +4,19 @@ import { isDeepStrictEqual } from "node:util";
 import { marked } from "marked";
 import { parse } from "yaml";
 import {
+  clientCustomization,
   dataPlane,
   example,
   readme,
   resourceManager,
   swagger,
   tsp,
-  tspconfig,
   typespec,
 } from "@azure-tools/specs-shared/changed-files";
 import { Readme } from "@azure-tools/specs-shared/readme";
 import type { ImpactAssessment, ServiceImpact } from "@azure-tools/specs-shared/impact";
 import type { PRContext } from "./PRContext.ts";
+import { getApiDefinitionChanges } from "./api-changes.ts";
 
 type Plane = ServiceImpact["plane"];
 
@@ -27,6 +28,7 @@ export async function evaluateImpact(
   const services = new Map<string, ServiceImpact>();
   const versionsByProvider = new Map<string, string[]>();
   const planesByDirectory = new Map<string, Plane>();
+  const deletions = new Set(context.fileList?.deletions);
   const readmes = await context.getReadmeDiffs();
   // Discovered README paths use native separators, whereas Git paths use forward slashes.
   const changedReadmes = [
@@ -35,15 +37,21 @@ export async function evaluateImpact(
     ...(readmes.deletions ?? []),
   ].map((entry) => entry.readme.replaceAll("\\", "/"));
 
-  const getService = (file: string): ServiceImpact | undefined => {
+  const getService = (
+    file: string,
+    root = deletions.has(file) ? context.targetDirectory : context.sourceDirectory,
+  ): ServiceImpact | undefined => {
     const match = /^specification\/([^/]+)\//.exec(file);
     if (!match) return undefined;
     const path = `specification/${match[1]}`;
-    const directory = dirname(file);
-    let plane = planesByDirectory.get(directory);
+    const directoryKey = `${root}:${dirname(file)}`;
+    let plane = planesByDirectory.get(directoryKey);
     if (plane === undefined) {
-      plane = getPlane(file, context);
-      planesByDirectory.set(directory, plane);
+      plane = getPlane(
+        file,
+        root === context.targetDirectory ? [root] : [root, context.targetDirectory],
+      );
+      planesByDirectory.set(directoryKey, plane);
     }
     const key = `${path}:${plane}`;
     let service = services.get(key);
@@ -53,6 +61,7 @@ export async function evaluateImpact(
         plane,
         changes: [],
         hasAffectedReadme: false,
+        hasApiDefinitionChanges: false,
         typeSpec: false,
         newApiVersions: [],
         suppressionsChanged: false,
@@ -68,11 +77,20 @@ export async function evaluateImpact(
     return service;
   };
 
+  const { changedFiles: apiDefinitionChanges, unchangedMoves } = getApiDefinitionChanges(
+    context,
+    (file, root) => {
+      const service = getService(file, root);
+      return service && `${service.path}:${getPlane(file, [root])}`;
+    },
+  );
+
   for (const file of context.getChangedFiles()) {
     const service = getService(file);
     if (!service) continue;
     const kind = getChangeKind(file);
     if (!service.changes.includes(kind)) service.changes.push(kind);
+    service.hasApiDefinitionChanges ||= apiDefinitionChanges.has(file);
     const sourceFile = resolve(context.sourceDirectory, file);
     service.typeSpec ||=
       typespec(file) || (swagger(file) && isSwaggerGeneratedByTypeSpec(sourceFile));
@@ -88,6 +106,7 @@ export async function evaluateImpact(
       }
       if (
         version &&
+        !unchangedMoves.has(file) &&
         !existingVersions.includes(version) &&
         !service.newApiVersions.includes(version)
       ) {
@@ -128,19 +147,19 @@ export async function evaluateImpact(
 }
 
 function getChangeKind(file: string): ServiceImpact["changes"][number] {
-  if (tspconfig(file)) return "sdk-configuration";
+  if (clientCustomization(file)) return "sdk-configuration";
   if (example(file)) return "examples";
   if (swagger(file) || tsp(file)) return "api";
   if (readme(file)) return "readme";
   return "other";
 }
 
-function getPlane(file: string, context: PRContext): Plane {
+function getPlane(file: string, roots: readonly string[]): Plane {
   if (resourceManager(file)) return "resource-manager";
   if (dataPlane(file)) return "data-plane";
 
   // Older TypeSpec projects live beside their emitted plane directory.
-  for (const root of [context.sourceDirectory, context.targetDirectory]) {
+  for (const root of roots) {
     let folder = dirname(file);
     while (folder.startsWith("specification/")) {
       const configFile = resolve(root, folder, "tspconfig.yaml");
