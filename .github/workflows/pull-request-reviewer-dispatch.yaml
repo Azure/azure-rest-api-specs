@@ -1,0 +1,53 @@
+# Starts the gh-aw reviewers (ARM API Review, Data-Plane API Review, Hero Scenarios) for PR
+# activity that used to reach them through pull_request_target. See src/reviewer-dispatch.ts for
+# the trust model.
+name: "Pull Request Reviewer Dispatch"
+
+on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only default-branch code runs.
+  workflow_run:
+    workflows: ["Pull Request Event"]
+    types: [completed]
+
+permissions: {}
+
+jobs:
+  dispatch:
+    name: Dispatch Reviewer
+    # The display_title (intake run-name) is untrusted, so it is only used here to skip runs
+    # cheaply. A PR that changes it can only suppress its own reviewer routes.
+    if: >-
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.conclusion == 'success' &&
+      (endsWith(github.event.workflow_run.display_title, ' labeled WaitForARMFeedback') ||
+       endsWith(github.event.workflow_run.display_title, ' unlabeled ARMChangesRequested') ||
+       endsWith(github.event.workflow_run.display_title, ' labeled data-plane-review-requested') ||
+       endsWith(github.event.workflow_run.display_title, ' labeled hero-scenarios-needed') ||
+       endsWith(github.event.workflow_run.display_title, ' opened') ||
+       endsWith(github.event.workflow_run.display_title, ' synchronize') ||
+       endsWith(github.event.workflow_run.display_title, ' ready_for_review'))
+    runs-on: ubuntu-slim
+    permissions:
+      # actions.createWorkflowDispatch
+      actions: write
+      # repos.getCollaboratorPermissionLevel, checkout
+      contents: read
+      # issues.listEvents
+      issues: read
+      # pulls.get
+      pull-requests: read
+    steps:
+      # workflow_run runs from the default branch with a privileged token. Do not check out,
+      # build, or run code from the head of the pull request.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            .github
+
+      - name: Dispatch reviewer
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const { default: dispatchReviewer } =
+              await import('${{ github.workspace }}/.github/workflows/src/reviewer-dispatch.ts');
+            await dispatchReviewer({ github, context, core });

@@ -1,13 +1,8 @@
 name: "SDK Validation Status"
 
-on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
+on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only default-branch code runs.
   check_run:
     types: [completed]
-  # Azure DevOps pipelines (which report the "SDK Validation" check runs) do not re-trigger when a
-  # PR is reopened, so the "check_run" event alone would never refresh the status. Re-evaluate the
-  # existing check runs on reopen using pull_request_target (privileged, runs in the target branch).
-  pull_request_target:
-    types: [reopened]
 
 permissions:
   contents: read
@@ -18,24 +13,19 @@ permissions:
 jobs:
   sdk-validation-status:
     if: |
-      (github.event_name == 'pull_request_target' && github.event.pull_request.state == 'open') ||
-      (github.event.check_run.check_suite.app.name == 'Azure Pipelines' &&
-      contains(github.event.check_run.name, 'SDK Validation'))
+      github.event.check_run.check_suite.app.name == 'Azure Pipelines' &&
+      contains(github.event.check_run.name, 'SDK Validation')
     name: "SDK Validation Status"
     runs-on: ubuntu-slim
     steps:
       # *** IMPORTANT ***
-      # For workflows that are triggered by the pull_request_target event, the workflow runs in the
-      # context of the base of the pull request.  You should make sure that you do not check out,
-      # build, or run untrusted code from the head of the pull request.
+      # check_run runs from the default branch with a privileged token. Do not check out, build,
+      # or run code from the head of the pull request.
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
           # Only needs .github folder for automation, not the files in the PR (analyzed in a
           # separate workflow).
-          #
-          # Uses the .github folder from the PR base branch (pull_request_target trigger),
-          # or the repo default branch (other triggers).
           sparse-checkout: |
             .github
 

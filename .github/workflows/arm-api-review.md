@@ -15,19 +15,16 @@ timeout-minutes: 30
 # output and a stale Pending/Error status. A finished older review is harmless
 # because its result is bound to its own head SHA.
 concurrency:
-  group: "gh-aw-${{ github.workflow }}-${{ ((github.event_name == 'issue_comment' && (github.event.comment.body != '/arm-review' || github.event.issue.pull_request == null)) || (github.event_name == 'pull_request_target' && !((github.event.action == 'labeled' && github.event.label.name == 'WaitForARMFeedback') || (github.event.action == 'unlabeled' && github.event.label.name == 'ARMChangesRequested')))) && github.run_id || github.event.issue.number || github.event.pull_request.number || github.event.inputs.pr_number || github.run_id }}"
+  group: "gh-aw-${{ github.workflow }}-${{ (github.event_name == 'issue_comment' && (github.event.comment.body != '/arm-review' || github.event.issue.pull_request == null)) && github.run_id || github.event.issue.number || github.event.inputs.pr_number || github.run_id }}"
   cancel-in-progress: false
 on:
-  # Fork PRs ARE supported (`forks: ["*"]`), matching every other PR workflow in
-  # this repo (see data-plane-api-review.md). This is safe because the agent
-  # never checks out untrusted PR head code (`checkout: false` below) and reads
-  # spec files only through the read-only GitHub MCP toolset; its only write
-  # channel is gh-aw `safe-outputs`. The `roles` gate below restricts manual
-  # triggers to write-access users; trusted repository automation can dispatch
-  # a review after adding WaitForARMFeedback.
-  pull_request_target:
-    types: [labeled, unlabeled]
-    forks: ["*"]
+  # Fork PRs are supported. The agent never checks out untrusted PR head code
+  # (`checkout: false` below) and reads spec files only through the read-only
+  # GitHub MCP toolset; its only write channel is gh-aw `safe-outputs`.
+  # Adding WaitForARMFeedback or removing ARMChangesRequested no longer uses
+  # pull_request_target: Pull Request Reviewer Dispatch verifies the label event
+  # and its write-access actor, then starts this workflow with workflow_dispatch.
+  # The `roles` gate below restricts manual triggers to write-access users.
   issue_comment:
     types: [created]
   workflow_dispatch:
@@ -237,12 +234,6 @@ jobs:
 # done by the agent in natural language (see "Trigger Validation" below).
 if: >
   github.event_name == 'workflow_dispatch' ||
-  (github.event_name == 'pull_request_target' &&
-   github.event.pull_request.draft == false &&
-   ((github.event.action == 'labeled' &&
-     github.event.label.name == 'WaitForARMFeedback') ||
-    (github.event.action == 'unlabeled' &&
-     github.event.label.name == 'ARMChangesRequested'))) ||
   (github.event_name == 'issue_comment' &&
    github.event.action == 'created' &&
    github.event.issue.pull_request != null &&
@@ -256,7 +247,7 @@ permissions:
   copilot-requests: write
   pull-requests: read
 # The agent reads PR files through the GitHub MCP toolsets, never from disk, so
-# no checkout is needed, and pull_request_target must NOT check out untrusted
+# no checkout is needed, and a privileged run must NOT check out untrusted
 # fork head code (the classic "pwn request" vector). gh-aw still sparse-checks-
 # out `.github`, where this agent's own instruction/skill imports live, so they
 # remain readable. This is the primary guardrail that makes `forks: ["*"]` above
@@ -556,11 +547,10 @@ The authoritative target PR is
 `#${{ needs.pre_activation.outputs.target_pr_number }}`, resolved by the
 pre-activation step from the event-specific source below:
 
-| Event                 | PR number source                   |
-| --------------------- | ---------------------------------- |
-| `pull_request_target` | `github.event.pull_request.number` |
-| `issue_comment`       | `github.event.issue.number`        |
-| `workflow_dispatch`   | `github.event.inputs.pr_number`    |
+| Event               | PR number source                |
+| ------------------- | ------------------------------- |
+| `issue_comment`     | `github.event.issue.number`     |
+| `workflow_dispatch` | `github.event.inputs.pr_number` |
 
 The workflow trigger (`if:` condition) and gh-aw's built-in role check have
 already guaranteed, before this agent starts, that:
@@ -569,19 +559,19 @@ already guaranteed, before this agent starts, that:
   or is the explicitly allowlisted `github-actions[bot]` repository automation.
   This replaces any manual collaborator check. Do **not** re-verify
   permissions.
-- The event is eligible: a `labeled` run only fires when `WaitForARMFeedback`
-  is added to a non-draft PR; an `unlabeled` run only fires when
-  `ARMChangesRequested` is removed from a non-draft PR. This removal is an
-  explicit re-review request and does not require `WaitForARMFeedback`;
-  Summarize Checks reconciles the queue labels independently. An
-  `issue_comment` run only fires for a PR comment whose body is exactly
-  `/arm-review`;
-  `workflow_dispatch` supports explicit runs and the trusted Summarize Checks
+- The event is eligible. Pull Request Reviewer Dispatch starts a
+  `workflow_dispatch` run only when a write-access user adds
+  `WaitForARMFeedback` to, or removes `ARMChangesRequested` from, a non-draft
+  PR. That removal is an explicit re-review request and does not require
+  `WaitForARMFeedback`; Summarize Checks reconciles the queue labels
+  independently. An `issue_comment` run only fires for a PR comment whose body
+  is exactly `/arm-review`;
+  `workflow_dispatch` also supports explicit runs and the trusted Summarize Checks
   initial-review handoff after it reconciles the queue label. Automated handoffs validate the
   expected head SHA, live queue label, request marker, and pending reservation before
   starting. Explicit requests can re-review the same SHA. PR opens, pushes, and
   ready-for-review events do not directly trigger this workflow.
-- Fork PRs **are** supported (`forks: ["*"]`). They are reviewed safely because
+- Fork PRs **are** supported. They are reviewed safely because
   the agent never checks out untrusted PR head code (`checkout: false`), reads
   spec files only through the read-only GitHub MCP toolset
   (`min-integrity: approved`), and writes only through gh-aw `safe-outputs`. The

@@ -1,12 +1,11 @@
-import type { GitHubScriptArgs } from "../github.ts";
+import type { GitHubScriptArgs, WebhookEvent } from "../github.ts";
 /*
   Entry point for the dedicated "TypeSpec Suppressions Review" pull request
   comment, mirroring the namespace-approval post-results.js pattern.
 
-  Run from the typespec-suppressions-comment.yaml workflow on:
-    - workflow_run:completed of "TypeSpec Suppressions - Analyze Code"
-    - pull_request_target: labeled / unlabeled (to refresh ✅/❌ on the
-      typespec-suppressions-approved label)
+  Run from the typespec-suppressions-status.yaml workflow on workflow_run:completed of:
+    - "TypeSpec Suppressions - Analyze Code" (a new analysis)
+    - "Pull Request Event" intake (to refresh ✅/❌ after label changes)
 
   It resolves PR context, reads the current labels for approval state, downloads
   the latest Analyze Code report artifact (by head_sha), and posts or updates a
@@ -17,6 +16,7 @@ import type { GitHubScriptArgs } from "../github.ts";
 import { PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { commentOrUpdate, parseExistingComments } from "../comment.ts";
 import { extractInputs } from "../context.ts";
+import { PULL_REQUEST_EVENT_WORKFLOW } from "../pull-request-event.ts";
 import {
   TYPESPEC_SUPPRESSIONS_APPROVED_LABEL,
   TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL,
@@ -76,7 +76,11 @@ export default async function postSuppressionsResults({ github, context, core }:
   });
 
   const labelNames: string[] = pr.labels.map((label: { name?: string }) => label.name ?? "");
-  const isNewAnalysis = context.eventName === "workflow_run";
+  // Intake runs only signal PR activity (e.g. a label change); they never produce a new report.
+  const isNewAnalysis =
+    context.eventName === "workflow_run" &&
+    (context.payload as WebhookEvent<"workflow-run">).workflow_run?.name !==
+      PULL_REQUEST_EVENT_WORKFLOW;
 
   const result = await buildSuppressionsComment(
     github,

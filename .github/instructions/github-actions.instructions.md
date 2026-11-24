@@ -236,7 +236,7 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 ### Security
 
 - **Secrets**: Never commit secrets or tokens to code
-- **Pull request target**: Use `pull_request_target` carefully; only support specific actions
+- **Pull request target**: Do not add new `pull_request_target` triggers; GitHub blocks them by default from December 2, 2026. For PR activity that needs write access, react to the unprivileged "Pull Request Event" intake (`pull-request-event.yaml`) with a `workflow_run` handler that re-reads PR state from the API and treats intake data (including its run-name) as untrusted.
 - **Permissions**: Define minimal `permissions` in workflow files
 - **Token usage**: Use `GITHUB_TOKEN` with least privilege
 - **Action references**: Pin external actions to a full commit SHA and retain a matching full release version comment (e.g., `# v7.0.0`) for dependency updates. Do not use floating major or minor version comments.

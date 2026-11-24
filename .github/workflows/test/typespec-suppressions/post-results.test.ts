@@ -42,6 +42,7 @@ describe("post-results", () => {
 
   beforeEach(() => {
     context.eventName = "";
+    context.payload = {};
     vi.mocked(extractInputs).mockReset();
     vi.mocked(commentOrUpdate).mockReset();
     vi.mocked(parseExistingComments).mockReset();
@@ -233,8 +234,9 @@ describe("post-results", () => {
     );
   });
 
-  it("preserves approval when refreshing after a label event", async () => {
-    context.eventName = "pull_request_target";
+  it("preserves approval when refreshing after Pull Request Event intake", async () => {
+    context.eventName = "workflow_run";
+    context.payload = { workflow_run: { name: "Pull Request Event" } };
     const github = githubWithLabels(["typespec-suppressions-approved"]);
     vi.mocked(buildSuppressionsComment).mockResolvedValue(suppressionResult("BODY", true));
 
@@ -249,6 +251,7 @@ describe("post-results", () => {
       42,
       ["typespec-suppressions-approved"],
     );
+    expect(shouldInvalidateSuppressionApproval).not.toHaveBeenCalled();
     expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
   });
 

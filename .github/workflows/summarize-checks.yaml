@@ -1,6 +1,6 @@
 name: "Summarize Checks"
 
-on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
+on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only default-branch code runs.
   # ARM signoff only: Universal dispatches Update Labels, and a run started by a GITHUB_TOKEN
   # dispatch does not fire the "Update Labels" workflow_run trigger below when it completes. That
   # Update Labels run dispatches this one instead. All other routes are unchanged.
@@ -35,18 +35,11 @@ on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base
       - "SDK Breaking Change Analysis"
       - "SDK Breaking Change Mitigation"
       - "SDK Breaking Change Labels"
+      # Unprivileged pull_request intake: labeled/unlabeled/opened/synchronize/reopened/edited/
+      # ready_for_review/converted_to_draft on open PRs.
+      - "Pull Request Event"
     types:
       - completed
-  pull_request_target: # when a PR is labeled. NOT pull_request, because that would run on the PR branch, not the base branch.
-    types:
-      - labeled
-      - unlabeled
-      - opened
-      - synchronize
-      - reopened
-      - edited
-      - ready_for_review
-      - converted_to_draft
 
 permissions:
   contents: read # for actions/checkout
@@ -66,24 +59,19 @@ jobs:
       arm_review_ready: ${{ steps.summarize-checks.outputs.arm_review_ready }}
     if: >-
       github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'pull_request_target' && github.event.pull_request.state == 'open') ||
       (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion != 'skipped')
     name: "Summarize Checks"
     runs-on: ubuntu-slim
 
     steps:
       # *** IMPORTANT ***
-      # For workflows that are triggered by the pull_request_target event, the workflow runs in the
-      # context of the base of the pull request.  You should make sure that you do not check out,
-      # build, or run untrusted code from the head of the pull request.
+      # workflow_run and workflow_dispatch run from the default branch with a privileged token.
+      # Do not check out, build, or run code from the head of the pull request.
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
           # Only needs .github folder for automation, not the files in the PR (analyzed in a
           # separate workflow).
-          #
-          # Uses the .github folder from the PR base branch (pull_request_target trigger),
-          # or the repo default branch (other triggers).
           sparse-checkout: |
             .github
 
