@@ -612,7 +612,7 @@ namespace Azure.AI.Projects {
     @doc("The shared typed address to transfer to. The selected provider validates supported destination types.")
     destination: TelephonyAddress;
 
-    @doc("Custom SIP headers sent when this target is used. Values may use `{{@system.*}}` templates, rendered at transfer time; a header whose value renders empty is omitted. Requires a `sip` destination and the `VoiceAgents=V1Preview` opt-in.")
+    @doc("Literal custom SIP headers sent when this target is used on a Direct SIP call. Templates aren't rendered for API transfer targets; use the transfer request's `sip_headers` for per-call values. Requires a `sip` destination and the `VoiceAgents=V1Preview` opt-in.")
     @maxItems(5)
     @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
     sip_headers?: TelephonyTransferSipHeader[];
@@ -1436,7 +1436,7 @@ namespace Azure.AI.Projects {
     @doc("A Microsoft Teams identity. Source addresses require a nonempty resource-account object GUID; transfer destinations also support 28:orgid:{guid}.")
     teams: "teams",
 
-    @doc("A SIP or SIPS destination for transfer, supported for Twilio and Direct SIP calls. URI headers (`?...`) aren't accepted in the value; use `sip_headers` instead. SIP is in preview and requires the `VoiceAgents=V1Preview` opt-in.")
+    @doc("A SIP or SIPS destination for transfer, supported for Twilio and Direct SIP calls. Use `sip_headers` (Direct SIP only) rather than URI headers (`?...`) in the value. SIP is in preview and requires the `VoiceAgents=V1Preview` opt-in.")
     sip: "sip",
   }
 

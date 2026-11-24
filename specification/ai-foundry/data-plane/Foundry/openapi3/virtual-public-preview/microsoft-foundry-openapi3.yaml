@@ -100929,7 +100929,7 @@ components:
           items:
             $ref: '#/components/schemas/TelephonyTransferSipHeader'
           maxItems: 5
-          description: Custom SIP headers sent when this target is used. Values may use `{{@system.*}}` templates, rendered at transfer time; a header whose value renders empty is omitted. Requires a `sip` destination and the `VoiceAgents=V1Preview` opt-in.
+          description: Literal custom SIP headers sent when this target is used on a Direct SIP call. Templates aren't rendered for API transfer targets; use the transfer request's `sip_headers` for per-call values. Requires a `sip` destination and the `VoiceAgents=V1Preview` opt-in.
           x-ms-foundry-meta:
             required_previews:
               - VoiceAgents=V1Preview
