@@ -215,25 +215,30 @@ stages:
                 TokenToUseForAuth: $(GH_TOKEN)
                 PreserveAuthToken: true
 
+          - task: UseNode@1
+            inputs:
+              version: $(NodeVersion)
+            displayName: "Install Node.js"
+
           - ${{ if and(eq(variables['System.TeamProject'], 'internal'), ne(variables['Build.Reason'], 'PullRequest'), eq(parameters.ConfigType, 'TypeSpec')) }}:
               - task: AzureCLI@2
                 displayName: Check for conflicting SDK release plans
                 inputs:
                   azureSubscription: opensource-api-connection
-                  scriptType: pscore
-                  scriptLocation: scriptPath
-                  scriptPath: $(SpecRepoDirectory)/eng/scripts/Assert-NoConflictingSdkReleasePlan.ps1
-                  arguments: >
-                    -TypeSpecConfigPath $env:SDK_GENERATION_TYPESPEC_CONFIG_PATH
-                    -SdkRepoName "$(SdkRepoName)"
-                    -ReleasePlanWorkItemId ${{ parameters.ReleasePlanWorkItemId }}
+                  scriptType: bash
+                  scriptLocation: inlineScript
+                  workingDirectory: $(SpecRepoDirectory)
+                  inlineScript: |
+                    set -euo pipefail
+                    ADO_TOKEN="$(az account get-access-token --resource 499b84ac-1321-427f-aa17-267ca6975798 --query accessToken --output tsv)"
+                    ADO_TOKEN="$ADO_TOKEN" node --input-type=module --eval '
+                      import { assertNoConflictingSdkReleasePlan } from "./eng/tools/release-plan/src/release-plan.ts";
+                      const [configPath, sdkRepoName, workItemId] = process.argv.slice(1);
+                      await assertNoConflictingSdkReleasePlan(configPath, sdkRepoName, Number(workItemId), process.env.ADO_TOKEN);
+                    ' -- "$TYPESPEC_CONFIG_PATH" "$SDK_REPO_NAME" "${{ parameters.ReleasePlanWorkItemId }}"
                 env:
-                  SDK_GENERATION_TYPESPEC_CONFIG_PATH: ${{ parameters.ConfigPath }}
-
-          - task: UseNode@1
-            inputs:
-              version: $(NodeVersion)
-            displayName: "Install Node.js"
+                  TYPESPEC_CONFIG_PATH: ${{ parameters.ConfigPath }}
+                  SDK_REPO_NAME: $(SdkRepoName)
 
           - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
             parameters:
@@ -475,7 +480,7 @@ stages:
 
                   - task: AzureCLI@2
                     displayName: Link pull request to release plan
-                    condition: not(endsWith(variables['SdkRepoName'], '-pr'))
+                    condition: and(ne(variables['GeneratedSDKInformation'], ''), not(endsWith(variables['SdkRepoName'], '-pr')))
                     continueOnError: true
                     inputs:
                       azureSubscription: opensource-api-connection

@@ -291,6 +291,105 @@ export function getReleasePlanResultById(
   };
 }
 
+const releasePlanLanguageBySdkRepo = new Map([
+  ["azure-sdk-for-net", "Dotnet"],
+  ["azure-sdk-for-js", "JavaScript"],
+  ["azure-sdk-for-python", "Python"],
+  ["azure-sdk-for-java", "Java"],
+  ["azure-sdk-for-go", "Go"],
+]);
+
+export async function assertNoConflictingSdkReleasePlan(
+  typeSpecConfigPath: string,
+  sdkRepoName: string,
+  releasePlanWorkItemId: number,
+  accessToken: string | undefined,
+): Promise<void> {
+  const language = releasePlanLanguageBySdkRepo.get(sdkRepoName.toLowerCase().replace(/-pr$/, ""));
+  if (!language) {
+    console.log(`Release plans do not track SDK pull requests for '${sdkRepoName}'.`);
+    return;
+  }
+  if (
+    !Number.isInteger(releasePlanWorkItemId) ||
+    releasePlanWorkItemId < 0 ||
+    releasePlanWorkItemId > 2_147_483_647
+  ) {
+    throw new Error("ReleasePlanWorkItemId must be 0 or a positive Azure DevOps work item ID.");
+  }
+  if (!accessToken) {
+    throw new Error("An Azure DevOps access token is required to check SDK release plans.");
+  }
+
+  const typeSpecProjectPath = path.posix.dirname(path.posix.normalize(typeSpecConfigPath));
+  const query = `SELECT [System.Id] FROM WorkItems WHERE [System.TeamProject] = 'Release'
+    AND [System.WorkItemType] = 'Release Plan'
+    AND [Custom.ApiSpecProjectPath] = '${typeSpecProjectPath.replaceAll("'", "''")}'
+    AND [System.State] NOT IN ('Closed','Duplicate','Abandoned','Finished')
+    AND [System.Tags] NOT CONTAINS 'Release Planner App Test'`;
+  const { workItems } = (await queryReleasePlanWorkItems("wiql", { query }, accessToken)) as {
+    workItems: { id: number }[];
+  };
+  if (workItems.length === 0) {
+    return;
+  }
+
+  const pullRequestField = `Custom.SDKPullRequestFor${language}`;
+  const releaseStatusField = `Custom.ReleaseStatusFor${language}`;
+  const { value: activePlans } = (await queryReleasePlanWorkItems(
+    "workitemsbatch",
+    {
+      ids: workItems.map(({ id }) => id),
+      fields: [pullRequestField, releaseStatusField],
+      errorPolicy: "Fail",
+    },
+    accessToken,
+  )) as { value: { id: number; fields: Record<string, string | undefined> }[] };
+
+  if (
+    activePlans.some(
+      (plan) => plan.id === releasePlanWorkItemId && plan.fields[pullRequestField]?.trim(),
+    )
+  ) {
+    return;
+  }
+  const conflictingPlan = activePlans.find(
+    (plan) =>
+      plan.id !== releasePlanWorkItemId &&
+      plan.fields[pullRequestField]?.trim() &&
+      plan.fields[releaseStatusField]?.toLowerCase() !== "released",
+  );
+  if (conflictingPlan) {
+    throw new Error(
+      `SDK generation for '${typeSpecProjectPath}' is blocked because active release plan work item ${conflictingPlan.id} ` +
+        `already has an unreleased ${language} SDK pull request. Complete or abandon that plan before generating for a different plan. ` +
+        "See https://aka.ms/azsdk/releaseplan-dashboard.",
+    );
+  }
+}
+
+async function queryReleasePlanWorkItems(
+  endpoint: "wiql" | "workitemsbatch",
+  body: object,
+  accessToken: string,
+): Promise<unknown> {
+  const response = await fetch(
+    `https://dev.azure.com/azure-sdk/Release/_apis/wit/${endpoint}?api-version=7.1`,
+    {
+      method: "POST",
+      headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+      redirect: "error",
+    },
+  );
+  if (!response.ok) {
+    throw new Error(
+      `Could not check SDK release plans: Azure DevOps ${endpoint} returned HTTP ${response.status}.`,
+    );
+  }
+  return response.json();
+}
+
 /**
  * Computes the target release month as "Month YYYY" for next month.
  * @returns Target release month string (e.g., "July 2026")

@@ -1,11 +1,134 @@
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import {
+  assertNoConflictingSdkReleasePlan,
   ensureReleasePlan,
   getApiReleaseType,
   getReleasePlanResultById,
   getSdkReleaseType,
 } from "../src/release-plan.ts";
 import type { AzsdkRunner, ReleasePlanDetails } from "../src/types.ts";
+
+describe("SDK generation release-plan check", () => {
+  const configPath = "specification/contoso/./Contoso's.Service/tspconfig.yaml";
+  const pythonRepo = "azure-sdk-for-python";
+  const sdkPr = "https://github.com/Azure/azure-sdk-for-python/pull/42";
+  const token = "test-token";
+
+  function mockActivePlans(plans: { id: number; fields: Record<string, string> }[]) {
+    return vi
+      .spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce(Response.json({ workItems: plans.map(({ id }) => ({ id })) }))
+      .mockResolvedValueOnce(Response.json({ value: plans }));
+  }
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it.each([
+    ["azure-sdk-for-net", "Dotnet"],
+    ["azure-sdk-for-js", "JavaScript"],
+    ["azure-sdk-for-python-pr", "Python"],
+    ["azure-sdk-for-java", "Java"],
+    ["azure-sdk-for-go", "Go"],
+  ])("blocks %s generation without a selected plan", async (sdkRepo, language) => {
+    mockActivePlans([{ id: 101, fields: { [`Custom.SDKPullRequestFor${language}`]: sdkPr } }]);
+
+    await expect(assertNoConflictingSdkReleasePlan(configPath, sdkRepo, 0, token)).rejects.toThrow(
+      `work item 101 already has an unreleased ${language} SDK pull request`,
+    );
+  });
+
+  it("blocks a different selected plan without a pull request for this language", async () => {
+    mockActivePlans([
+      { id: 101, fields: { "Custom.SDKPullRequestForPython": sdkPr } },
+      { id: 102, fields: { "Custom.SDKPullRequestForJava": sdkPr } },
+    ]);
+
+    await expect(
+      assertNoConflictingSdkReleasePlan(configPath, pythonRepo, 102, token),
+    ).rejects.toThrow("work item 101");
+  });
+
+  it("allows reruns when the selected active plan already has a pull request for this language", async () => {
+    mockActivePlans([
+      { id: 101, fields: { "Custom.SDKPullRequestForPython": sdkPr } },
+      { id: 102, fields: { "Custom.SDKPullRequestForPython": `${sdkPr}1` } },
+    ]);
+
+    await expect(
+      assertNoConflictingSdkReleasePlan(configPath, pythonRepo, 102, token),
+    ).resolves.toBeUndefined();
+  });
+
+  it("allows generation when plans have no same-language unreleased pull request", async () => {
+    mockActivePlans([
+      { id: 101, fields: {} },
+      { id: 102, fields: { "Custom.SDKPullRequestForJava": sdkPr } },
+      {
+        id: 103,
+        fields: {
+          "Custom.SDKPullRequestForPython": sdkPr,
+          "Custom.ReleaseStatusForPython": "Released",
+        },
+      },
+    ]);
+
+    await expect(
+      assertNoConflictingSdkReleasePlan(configPath, pythonRepo, 0, token),
+    ).resolves.toBeUndefined();
+  });
+
+  it("queries only active non-test plans for the normalized project path", async () => {
+    const fetch = mockActivePlans([]);
+
+    await expect(
+      assertNoConflictingSdkReleasePlan(configPath, pythonRepo, 0, token),
+    ).resolves.toBeUndefined();
+
+    expect(fetch).toHaveBeenCalledOnce();
+    const [url, options] = fetch.mock.calls[0];
+    expect(url).toBe("https://dev.azure.com/azure-sdk/Release/_apis/wit/wiql?api-version=7.1");
+    expect(options?.body).toContain(
+      "[Custom.ApiSpecProjectPath] = 'specification/contoso/Contoso''s.Service'",
+    );
+    expect(options?.body).toContain(
+      "[System.State] NOT IN ('Closed','Duplicate','Abandoned','Finished')",
+    );
+    expect(options?.body).toContain("[System.Tags] NOT CONTAINS 'Release Planner App Test'");
+  });
+
+  it("fails when release plan fields cannot be read", async () => {
+    const fetch = vi
+      .spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce(Response.json({ workItems: [{ id: 101 }] }))
+      .mockResolvedValueOnce(new Response(null, { status: 503 }));
+
+    await expect(
+      assertNoConflictingSdkReleasePlan(configPath, pythonRepo, 0, token),
+    ).rejects.toThrow("Azure DevOps workitemsbatch returned HTTP 503");
+    expect(fetch).toHaveBeenNthCalledWith(
+      2,
+      "https://dev.azure.com/azure-sdk/Release/_apis/wit/workitemsbatch?api-version=7.1",
+      expect.objectContaining({
+        body: JSON.stringify({
+          ids: [101],
+          fields: ["Custom.SDKPullRequestForPython", "Custom.ReleaseStatusForPython"],
+          errorPolicy: "Fail",
+        }),
+      }),
+    );
+  });
+
+  it("does not look up plans for SDK languages the release planner does not track", async () => {
+    const fetch = mockActivePlans([]);
+
+    await expect(
+      assertNoConflictingSdkReleasePlan(configPath, "azure-sdk-for-rust", 0, undefined),
+    ).resolves.toBeUndefined();
+    expect(fetch).not.toHaveBeenCalled();
+  });
+});
 
 describe("release type helpers", () => {
   it("sets Private Preview for private specs repo", () => {
