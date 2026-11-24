@@ -212,6 +212,11 @@ using Microsoft.Billing;
   "csharp"
 );
 @@clientName(
+  BillingAccounts.savingsPlansListByBillingAccount,
+  "GetByBillingAccount",
+  "csharp"
+);
+@@clientName(
   BillingAccounts.resolveByBillingAccount,
   "resolveByBillingAccountBillingRoleAssignment",
   "csharp"
