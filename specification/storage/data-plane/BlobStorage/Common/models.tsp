@@ -951,6 +951,33 @@ union AccessTier {
   @added(Versions.v2026_06_06)
   Smart: "Smart",
 
+  /** The low-latency SSD-backed tier for Block blobs. Transitions between Turbo and Hot, Cool, or Cold are supported. Archive blobs must first be rehydrated to a supported online tier. */
+  @added(Versions.v2027_05_07)
+  Turbo: "Turbo",
+
+  /** Extensible. */
+  string,
+}
+
+/** Indicates whether migration to Turbo storage is pending. */
+@added(Versions.v2027_05_07)
+union TurboStatus {
+  /** Migration to SSD storage is pending. The status is omitted after migration completes. */
+  Pending: "pending",
+
+  /** Extensible. */
+  string,
+}
+
+/** Indicates whether Turbo was implicitly assigned on ingestion or explicitly selected by the user, independently of migration completion. */
+@added(Versions.v2027_05_07)
+union TierManagedBy {
+  /** The blob's tier was implicitly set to Turbo on ingestion. */
+  System: "system",
+
+  /** Turbo was explicitly selected by the user. */
+  User: "user",
+
   /** Extensible. */
   string,
 }
@@ -1125,6 +1152,16 @@ model BlobProperties {
 
   /** The archive status of the blob. */
   @Xml.name("ArchiveStatus") archiveStatus?: ArchiveStatus;
+
+  /** Indicates whether migration to Turbo storage is pending. Omitted after migration to SSD storage completes. */
+  @added(Versions.v2027_05_07)
+  @Xml.name("TurboStatus")
+  turboStatus?: TurboStatus;
+
+  /** Indicates whether Turbo was implicitly assigned on ingestion or explicitly selected by the user. */
+  @added(Versions.v2027_05_07)
+  @Xml.name("TierManagedBy")
+  tierManagedBy?: TierManagedBy;
 
   /** The smart access tier of the blob. */
   @added(Versions.v2026_06_06)
@@ -2471,6 +2508,19 @@ alias AccessTierHeader = {
   /** The tier to be set on the blob. */
   @header("x-ms-access-tier")
   tier?: AccessTier;
+};
+
+/** The optional Turbo metadata returned by blob read operations. */
+alias TurboResponseHeaders = {
+  /** Indicates whether migration to Turbo storage is pending. Omitted after migration to SSD storage completes. */
+  @added(Versions.v2027_05_07)
+  @header("x-ms-turbo-status")
+  turboStatus?: TurboStatus;
+
+  /** Indicates whether Turbo was implicitly assigned on ingestion or explicitly selected by the user, independently of migration completion. */
+  @added(Versions.v2027_05_07)
+  @header("x-ms-tier-managed-by")
+  tierManagedBy?: TierManagedBy;
 };
 
 /** The content MD5 parameter. */

@@ -930,6 +930,8 @@ interface Blob {
         @header("x-ms-access-tier")
         accessTier?: string;
 
+        ...TurboResponseHeaders;
+
         /** Included if the access tier is inferred. */
         @added(Versions.v2026_10_06)
         @header("x-ms-access-tier-inferred")
@@ -1002,6 +1004,8 @@ interface Blob {
         @added(Versions.v2026_10_06)
         @header("x-ms-access-tier")
         accessTier?: string;
+
+        ...TurboResponseHeaders;
 
         /** Included if the access tier is inferred. */
         @added(Versions.v2026_10_06)
@@ -1086,6 +1090,8 @@ interface Blob {
       /** The access tier of the blob. */
       @header("x-ms-access-tier")
       accessTier?: string;
+
+      ...TurboResponseHeaders;
 
       /** Included if the access tier is inferred. */
       @header("x-ms-access-tier-inferred")
