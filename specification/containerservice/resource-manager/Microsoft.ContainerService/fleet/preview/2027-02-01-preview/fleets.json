@@ -327,6 +327,9 @@
         "x-ms-examples": {
           "Creates a Fleet resource with a long running operation.": {
             "$ref": "./examples/Fleets_CreateOrUpdate.json"
+          },
+          "Creates or updates a Fleet with customer-specified outbound public IP addresses.": {
+            "$ref": "./examples/Fleets_CreateOrUpdate_WithEgressPublicIps.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4522,6 +4525,41 @@
         }
       }
     },
+    "FleetHubNetworkingProfile": {
+      "type": "object",
+      "description": "Networking settings for the Fleet hub.",
+      "properties": {
+        "egressPublicIpResourceIds": {
+          "type": "array",
+          "description": "The resource IDs of the public IP addresses used for outbound traffic from the Fleet hub. At most one public IP address is supported. If omitted or empty, the service creates managed outbound public IP address.",
+          "maxItems": 1,
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Network/publicIPAddresses"
+                }
+              ]
+            }
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "effectiveEgressPublicIpAddresses": {
+          "type": "array",
+          "description": "The actual public IP addresses used for outbound traffic from the Fleet hub.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "FleetHubProfile": {
       "type": "object",
       "description": "The FleetHubProfile configures the fleet hub.",
@@ -4548,6 +4586,14 @@
         "agentProfile": {
           "$ref": "#/definitions/AgentProfile",
           "description": "The agent profile for the Fleet hub.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "networkingProfile": {
+          "$ref": "#/definitions/FleetHubNetworkingProfile",
+          "description": "The networking configuration for the Fleet hub.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -5742,7 +5788,7 @@
         },
         "values": {
           "type": "array",
-          "description": "values is an array of string values, the values array must be non-empty.",
+          "description": "values is an array of string values. For In or NotIn, the array must be non-empty. For Exists or DoesNotExist, the array must be empty or omitted.",
           "items": {
             "type": "string"
           }
@@ -5754,10 +5800,8 @@
       "description": "Managed identity profile for the identity binding.",
       "properties": {
         "resourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource ID of the managed identity.",
-          "pattern": "^/subscriptions/[a-zA-Z0-9-]+/resourceGroups/[a-zA-Z0-9-]+/providers/Microsoft.ManagedIdentity/userAssignedIdentities/[a-zA-Z0-9-]+$",
+          "$ref": "#/definitions/UserAssignedIdentityResourceId",
+          "description": "The resource ID of the user-assigned managed identity.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -7830,6 +7874,18 @@
             "name": "SecurityPatch",
             "value": "SecurityPatch",
             "description": "  Applies security patches to the nodes of the target clusters.\n  For information on the behavior of update run for security patch upgrade,\n  see https://learn.microsoft.com/en-us/azure/kubernetes-fleet/update-orchestration?tabs=azure-portal"
+          }
+        ]
+      }
+    },
+    "UserAssignedIdentityResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
           }
         ]
       }
