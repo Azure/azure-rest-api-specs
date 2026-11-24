@@ -230,15 +230,30 @@ stages:
                   workingDirectory: $(SpecRepoDirectory)
                   inlineScript: |
                     set -euo pipefail
+                    echo "##vso[task.setvariable variable=SdkReleasePlanCheck]blocked"
                     ADO_TOKEN="$(az account get-access-token --resource 499b84ac-1321-427f-aa17-267ca6975798 --query accessToken --output tsv)"
                     ADO_TOKEN="$ADO_TOKEN" node --input-type=module --eval '
                       import { assertNoConflictingSdkReleasePlan } from "./eng/tools/release-plan/src/release-plan.ts";
-                      const [configPath, sdkRepoName, workItemId] = process.argv.slice(1);
-                      await assertNoConflictingSdkReleasePlan(configPath, sdkRepoName, Number(workItemId), process.env.ADO_TOKEN);
-                    ' -- "$TYPESPEC_CONFIG_PATH" "$SDK_REPO_NAME" "${{ parameters.ReleasePlanWorkItemId }}"
+                      const env = process.env;
+                      await assertNoConflictingSdkReleasePlan({
+                        typeSpecConfigPath: env.TYPESPEC_CONFIG_PATH,
+                        sdkRepoName: env.SDK_REPO_NAME,
+                        sdkRepoOwner: env.SDK_REPO_OWNER,
+                        sdkCheckoutBranch: env.SDK_CHECKOUT_BRANCH,
+                        releasePlanWorkItemId: Number(env.RELEASE_PLAN_WORK_ITEM_ID),
+                        createPullRequest: env.CREATE_SDK_PULL_REQUEST === "true",
+                      }, env.ADO_TOKEN, env.GH_TOKEN);
+                    '
+                    echo "##vso[task.setvariable variable=SdkReleasePlanCheck]passed"
                 env:
                   TYPESPEC_CONFIG_PATH: ${{ parameters.ConfigPath }}
                   SDK_REPO_NAME: $(SdkRepoName)
+                  SDK_REPO_OWNER: $(SdkRepoOwner)
+                  SDK_CHECKOUT_BRANCH: $(CheckoutCommitish)
+                  RELEASE_PLAN_WORK_ITEM_ID: ${{ parameters.ReleasePlanWorkItemId }}
+                  CREATE_SDK_PULL_REQUEST: ${{ iif(parameters.CreatePullRequest, 'true', 'false') }}
+                  ${{ if endsWith(variables['Build.Repository.Name'], '-pr') }}:
+                    GH_TOKEN: $(GH_TOKEN)
 
           - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
             parameters:
@@ -480,7 +495,7 @@ stages:
 
                   - task: AzureCLI@2
                     displayName: Link pull request to release plan
-                    condition: and(ne(variables['GeneratedSDKInformation'], ''), not(endsWith(variables['SdkRepoName'], '-pr')))
+                    condition: and(ne(variables['SdkReleasePlanCheck'], 'blocked'), not(endsWith(variables['SdkRepoName'], '-pr')))
                     continueOnError: true
                     inputs:
                       azureSubscription: opensource-api-connection

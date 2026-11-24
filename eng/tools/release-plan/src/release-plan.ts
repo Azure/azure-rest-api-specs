@@ -299,12 +299,28 @@ const releasePlanLanguageBySdkRepo = new Map([
   ["azure-sdk-for-go", "Go"],
 ]);
 
+const inactiveReleasePlanStates = ["Closed", "Duplicate", "Abandoned", "Finished"];
+
+interface SdkReleasePlanCheck {
+  typeSpecConfigPath: string;
+  sdkRepoName: string;
+  sdkRepoOwner: string;
+  sdkCheckoutBranch: string;
+  releasePlanWorkItemId: number;
+  createPullRequest: boolean;
+}
+
+interface ReleasePlanWorkItem {
+  id: number;
+  fields: Record<string, string | undefined>;
+}
+
 export async function assertNoConflictingSdkReleasePlan(
-  typeSpecConfigPath: string,
-  sdkRepoName: string,
-  releasePlanWorkItemId: number,
+  check: SdkReleasePlanCheck,
   accessToken: string | undefined,
+  githubToken?: string,
 ): Promise<void> {
+  const { typeSpecConfigPath, sdkRepoName, releasePlanWorkItemId, createPullRequest } = check;
   const language = releasePlanLanguageBySdkRepo.get(sdkRepoName.toLowerCase().replace(/-pr$/, ""));
   if (!language) {
     console.log(`Release plans do not track SDK pull requests for '${sdkRepoName}'.`);
@@ -322,43 +338,64 @@ export async function assertNoConflictingSdkReleasePlan(
   }
 
   const typeSpecProjectPath = path.posix.dirname(path.posix.normalize(typeSpecConfigPath));
+  const inactiveStates = inactiveReleasePlanStates.map((state) => `'${state}'`).join(",");
+  const activePlansFilter = `[System.State] NOT IN (${inactiveStates})`;
+  // Include an explicitly selected plan even if it is inactive, to verify its project and tags.
+  const planFilter = releasePlanWorkItemId
+    ? `(${activePlansFilter} OR [System.Id] = ${releasePlanWorkItemId})`
+    : activePlansFilter;
   const query = `SELECT [System.Id] FROM WorkItems WHERE [System.TeamProject] = 'Release'
     AND [System.WorkItemType] = 'Release Plan'
     AND [Custom.ApiSpecProjectPath] = '${typeSpecProjectPath.replaceAll("'", "''")}'
-    AND [System.State] NOT IN ('Closed','Duplicate','Abandoned','Finished')
-    AND [System.Tags] NOT CONTAINS 'Release Planner App Test'`;
+    AND ${planFilter}`;
   const { workItems } = (await queryReleasePlanWorkItems("wiql", { query }, accessToken)) as {
     workItems: { id: number }[];
   };
-  if (workItems.length === 0) {
-    return;
-  }
 
   const pullRequestField = `Custom.SDKPullRequestFor${language}`;
   const releaseStatusField = `Custom.ReleaseStatusFor${language}`;
-  const { value: activePlans } = (await queryReleasePlanWorkItems(
-    "workitemsbatch",
-    {
-      ids: workItems.map(({ id }) => id),
-      fields: [pullRequestField, releaseStatusField],
-      errorPolicy: "Fail",
-    },
-    accessToken,
-  )) as { value: { id: number; fields: Record<string, string | undefined> }[] };
+  const { value: plans } = workItems.length
+    ? ((await queryReleasePlanWorkItems(
+        "workitemsbatch",
+        {
+          ids: workItems.map(({ id }) => id),
+          fields: ["System.State", "System.Tags", pullRequestField, releaseStatusField],
+          errorPolicy: "Fail",
+        },
+        accessToken,
+      )) as { value: ReleasePlanWorkItem[] })
+    : { value: [] };
 
-  if (
-    activePlans.some(
-      (plan) => plan.id === releasePlanWorkItemId && plan.fields[pullRequestField]?.trim(),
-    )
-  ) {
-    return;
+  const selectedPlan = plans.find(({ id }) => id === releasePlanWorkItemId);
+  if (releasePlanWorkItemId && !selectedPlan) {
+    throw new Error(
+      `Could not find release plan work item ${releasePlanWorkItemId} for TypeSpec project '${typeSpecProjectPath}'.`,
+    );
   }
-  const conflictingPlan = activePlans.find(
+  const isTestPlan = (plan?: ReleasePlanWorkItem) =>
+    plan?.fields["System.Tags"]
+      ?.split(";")
+      .some((tag) => tag.trim().toLowerCase() === "release planner app test") ?? false;
+  const selectedIsTestPlan = isTestPlan(selectedPlan);
+  const conflictingPlan = plans.find(
     (plan) =>
       plan.id !== releasePlanWorkItemId &&
+      isTestPlan(plan) === selectedIsTestPlan &&
       plan.fields[pullRequestField]?.trim() &&
       plan.fields[releaseStatusField]?.toLowerCase() !== "released",
   );
+  const selectedPullRequest = selectedPlan?.fields[pullRequestField]?.trim();
+  const selectedPlanIsActive = !inactiveReleasePlanStates.includes(
+    selectedPlan?.fields["System.State"] ?? "",
+  );
+  if (
+    selectedPullRequest &&
+    (conflictingPlan ? selectedPlanIsActive : createPullRequest) &&
+    (await verifyOpenSdkPullRequestBranch(selectedPullRequest, check, githubToken))
+  ) {
+    return;
+  }
+
   if (conflictingPlan) {
     throw new Error(
       `SDK generation for '${typeSpecProjectPath}' is blocked because active release plan work item ${conflictingPlan.id} ` +
@@ -366,6 +403,53 @@ export async function assertNoConflictingSdkReleasePlan(
         "See https://aka.ms/azsdk/releaseplan-dashboard.",
     );
   }
+}
+
+async function verifyOpenSdkPullRequestBranch(
+  url: string,
+  { sdkRepoName, sdkRepoOwner, sdkCheckoutBranch }: SdkReleasePlanCheck,
+  githubToken?: string,
+): Promise<boolean> {
+  const match = /^https:\/\/github\.com\/Azure\/([\w-]+)\/pull\/(\d+)\/?$/i.exec(url);
+  if (!match || match[1].toLowerCase() !== sdkRepoName.toLowerCase()) {
+    throw new Error(`The release plan's SDK pull request must be in Azure/${sdkRepoName}.`);
+  }
+  const headers = new Headers({ Accept: "application/vnd.github+json" });
+  if (githubToken) {
+    headers.set("Authorization", `Bearer ${githubToken}`);
+  }
+  const response = await fetch(`https://api.github.com/repos/Azure/${match[1]}/pulls/${match[2]}`, {
+    headers,
+    redirect: "error",
+  });
+  if (!response.ok) {
+    throw new Error(
+      `Could not check the linked SDK pull request: GitHub returned HTTP ${response.status}.`,
+    );
+  }
+  const pullRequest = (await response.json()) as {
+    state: "open" | "closed";
+    base: { ref: string };
+    head: { ref: string; repo: { full_name: string } | null };
+  };
+  if (pullRequest.state === "closed") {
+    return false;
+  }
+  const headRepo = `${sdkRepoOwner}/${sdkRepoName}`.toLowerCase();
+  if (
+    pullRequest.state !== "open" ||
+    pullRequest.base.ref !== "main" ||
+    pullRequest.head.repo?.full_name.toLowerCase() !== headRepo ||
+    pullRequest.head.ref === "main"
+  ) {
+    throw new Error(`The linked SDK pull request #${match[2]} cannot be updated by this pipeline.`);
+  }
+  if (pullRequest.head.ref !== sdkCheckoutBranch) {
+    throw new Error(
+      `Set SdkRepoBranch to '${pullRequest.head.ref}' to update the existing SDK pull request #${match[2]}.`,
+    );
+  }
+  return true;
 }
 
 async function queryReleasePlanWorkItems(
