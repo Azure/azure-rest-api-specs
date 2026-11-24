@@ -215,6 +215,21 @@ stages:
                 TokenToUseForAuth: $(GH_TOKEN)
                 PreserveAuthToken: true
 
+          - ${{ if and(eq(variables['System.TeamProject'], 'internal'), ne(variables['Build.Reason'], 'PullRequest'), eq(parameters.ConfigType, 'TypeSpec')) }}:
+              - task: AzureCLI@2
+                displayName: Check for conflicting SDK release plans
+                inputs:
+                  azureSubscription: opensource-api-connection
+                  scriptType: pscore
+                  scriptLocation: scriptPath
+                  scriptPath: $(SpecRepoDirectory)/eng/scripts/Assert-NoConflictingSdkReleasePlan.ps1
+                  arguments: >
+                    -TypeSpecConfigPath $env:SDK_GENERATION_TYPESPEC_CONFIG_PATH
+                    -SdkRepoName "$(SdkRepoName)"
+                    -ReleasePlanWorkItemId ${{ parameters.ReleasePlanWorkItemId }}
+                env:
+                  SDK_GENERATION_TYPESPEC_CONFIG_PATH: ${{ parameters.ConfigPath }}
+
           - task: UseNode@1
             inputs:
               version: $(NodeVersion)
