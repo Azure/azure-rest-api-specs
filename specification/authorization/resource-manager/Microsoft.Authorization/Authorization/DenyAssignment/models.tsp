@@ -90,6 +90,7 @@ model DenyAssignmentProperties {
   /**
    * Determines if the deny assignment applies to child scopes. Default value is false.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-bool-prefix" "Impact assessment: Retain doNotApplyToChildScopes and its existing value semantics pending C# review; an affirmative client-name override alone cannot invert the boolean."
   doNotApplyToChildScopes?: boolean;
 
   /**

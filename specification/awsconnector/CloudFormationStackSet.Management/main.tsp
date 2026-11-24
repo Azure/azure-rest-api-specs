@@ -160,6 +160,7 @@ union PermissionModel {
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Active")
 model ActiveModel {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-bool-prefix" "Impact assessment: Retain the existing C#-scoped activecsharp override while applicability is reviewed; this project's configuration emits only AutoRest and does not extend the client-sdk ruleset."
   @doc("When true, StackSets performs non-conflicting operations concurrently and queues conflicting operations. After conflicting operations finish, StackSets starts queued operations in request order.")
   @clientName("activecsharp", "csharp")
   active?: boolean;

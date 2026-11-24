@@ -1802,6 +1802,7 @@ model IndexingResult {
   errorMessage?: string;
 
   /** A value indicating whether the indexing operation succeeded for the document identified by the key. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-bool-prefix" "Impact assessment: Retain the existing succeeded client-name override pending C# review; it already describes an affirmative indexing outcome but the rule rejects single-word names."
   @visibility(Lifecycle.Read)
   status: boolean;
 
