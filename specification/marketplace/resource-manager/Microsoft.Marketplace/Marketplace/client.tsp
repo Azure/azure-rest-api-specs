@@ -20,7 +20,11 @@ using Microsoft.Marketplace;
 );
 @@clientName(Collection, "PrivateStoreCollectionInfo", "csharp");
 @@clientName(Offer, "PrivateStoreOffer", "csharp");
-@@clientName(RequestApprovalResource, "MarketplaceApprovalRequest", "csharp");
+@@clientName(
+  RequestApprovalResource,
+  exact("MarketplaceRequestApproval"),
+  "csharp"
+);
 @@clientName(SubscriptionsResponse, "SubscriptionsResult", "csharp");
 @@clientName(
   AcknowledgeOfferNotificationDetails.acknowledge,
