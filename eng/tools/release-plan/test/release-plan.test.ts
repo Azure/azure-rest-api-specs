@@ -110,6 +110,8 @@ describe("ensureReleasePlan", () => {
         baseContext.apiVersion,
         "--api-release-type",
         baseContext.apiReleaseType,
+        "--pull-request",
+        baseContext.prUrl,
         "--output",
         "json",
       ]);
@@ -118,7 +120,7 @@ describe("ensureReleasePlan", () => {
 
   it("returns existing release plan when found by path with a different linked PR", () => {
     const runner = createRunner({
-      [`release-plan get --typespec-path ${typespecPath} --api-version 2026-06-01-preview --api-release-type Public Preview --output json`]:
+      [`release-plan get --typespec-path ${typespecPath} --api-version 2026-06-01-preview --api-release-type Public Preview --pull-request ${baseContext.prUrl} --output json`]:
         {
           code: 0,
           out: JSON.stringify(
@@ -141,7 +143,7 @@ describe("ensureReleasePlan", () => {
 
   it("creates release plan when no existing plan is found", () => {
     const runner = createRunner({
-      [`release-plan get --typespec-path ${typespecPath} --api-version 2026-06-01-preview --api-release-type Public Preview --output json`]:
+      [`release-plan get --typespec-path ${typespecPath} --api-version 2026-06-01-preview --api-release-type Public Preview --pull-request ${baseContext.prUrl} --output json`]:
         {
           code: 1,
           out: noMatchJson,
@@ -161,7 +163,7 @@ describe("ensureReleasePlan", () => {
   it("passes test-release true when enabled", () => {
     const testReleaseContext = { ...baseContext, testReleasePlan: true };
     const runner = createRunner({
-      [`release-plan get --typespec-path ${typespecPath} --api-version 2026-06-01-preview --api-release-type Public Preview --output json`]:
+      [`release-plan get --typespec-path ${typespecPath} --api-version 2026-06-01-preview --api-release-type Public Preview --pull-request ${baseContext.prUrl} --output json`]:
         {
           code: 1,
           out: noMatchJson,
@@ -227,7 +229,7 @@ describe("ensureReleasePlan", () => {
 
   it("handles malformed JSON response from create", () => {
     const runner = createRunner({
-      [`release-plan get --typespec-path ${typespecPath} --api-version 2026-06-01-preview --api-release-type Public Preview --output json`]:
+      [`release-plan get --typespec-path ${typespecPath} --api-version 2026-06-01-preview --api-release-type Public Preview --pull-request ${baseContext.prUrl} --output json`]:
         {
           code: 1,
           out: noMatchJson,
@@ -244,7 +246,7 @@ describe("ensureReleasePlan", () => {
 
   it("handles create command failure", () => {
     const runner = createRunner({
-      [`release-plan get --typespec-path ${typespecPath} --api-version 2026-06-01-preview --api-release-type Public Preview --output json`]:
+      [`release-plan get --typespec-path ${typespecPath} --api-version 2026-06-01-preview --api-release-type Public Preview --pull-request ${baseContext.prUrl} --output json`]:
         {
           code: 1,
           out: noMatchJson,
@@ -263,7 +265,7 @@ describe("ensureReleasePlan", () => {
   it("correctly handles december to january month wrap", () => {
     const decContext = { ...baseContext, targetMonth: "December 2025" };
     const runner = createRunner({
-      [`release-plan get --typespec-path ${typespecPath} --api-version 2026-06-01-preview --api-release-type Public Preview --output json`]:
+      [`release-plan get --typespec-path ${typespecPath} --api-version 2026-06-01-preview --api-release-type Public Preview --pull-request ${baseContext.prUrl} --output json`]:
         {
           code: 1,
           out: noMatchJson,
@@ -402,6 +404,8 @@ describe("ensureReleasePlan", () => {
         baseContext.apiVersion,
         "--api-release-type",
         apiReleaseType,
+        "--pull-request",
+        baseContext.prUrl,
         "--output",
         "json",
       ]);

@@ -174,9 +174,9 @@ and targets the next month.
 
 The CLI must support `existing`/`created`/`not_found` outcomes and
 `--expected-api-version`. Reused plans remain `existing_by_path`, not `created`.
-For empty-version metadata, the CLI searches by project and release type, then
-falls back to the PR. An existing concrete-version plan is a conflict; empty
-never acts as a wildcard for a concrete-version request.
+The caller supplies the PR link so the CLI can prefer a matching PR-linked plan
+before exact project/version lookup. Other-version plans do not block an empty-version
+no-match result; empty never acts as a wildcard for a concrete-version request.
 
 Creation comments include the plan link/ID, API version, and project. Reused plans
 do not get creation comments. Processing failures produce a pipeline warning and

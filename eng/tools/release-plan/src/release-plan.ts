@@ -128,7 +128,7 @@ function runGetReleasePlanByPath(
     normalizeApiVersion(apiVersion),
     "--api-release-type",
     apiReleaseType,
-    ...(prUrl && !normalizeApiVersion(apiVersion) ? ["--pull-request", prUrl] : []),
+    ...(prUrl ? ["--pull-request", prUrl] : []),
     "--output",
     "json",
   ];
