@@ -57468,25 +57468,25 @@
           },
           "reasoning": {
             "$ref": "#/components/schemas/ManagedAgentReasoning",
-            "description": "Shared reasoning settings, validated against the selected model and harness."
+            "description": "Shared reasoning settings, validated against the selected model and harness. When omitted, the selected model's default reasoning effort is used."
           },
           "text": {
             "$ref": "#/components/schemas/TextConfig",
-            "description": "Shared output-format settings. Provider-specific verbosity belongs in model_configurations.text."
+            "description": "Shared output-format settings. When omitted, no structured-output format is requested. Provider-specific verbosity belongs in model_configurations.text."
           },
           "max_output_tokens": {
             "type": "integer",
             "format": "int32",
             "minimum": 1,
-            "description": "Maximum generated tokens per model call, including reasoning/thinking, not a whole-turn budget. Validate the selected model's limits."
+            "description": "Maximum generated tokens per model call, including reasoning/thinking, not a whole-turn budget. When omitted, the selected model and harness determine the limit; no shared numeric default is specified. Validate the selected model's limits."
           },
           "tool_choice": {
             "$ref": "#/components/schemas/ToolChoice",
-            "description": "Shared tool-selection intent. Forced choices require a supported model and an authorized declared function."
+            "description": "Shared tool-selection intent. When omitted, the selected model and harness determine tool selection; no shared default is specified. Forced choices require a supported model and an authorized declared function."
           },
           "parallel_tool_calls": {
             "type": "boolean",
-            "description": "Whether a model response may contain multiple tool calls. False permits at most one; true does not require multiple calls or parallel execution."
+            "description": "Whether a model response may contain multiple tool calls. When omitted, the selected model and harness determine this behavior; no shared default is specified. False permits at most one; true does not require multiple calls or parallel execution."
           },
           "model_configurations": {
             "$ref": "#/components/schemas/ModelConfigurations",
@@ -57579,6 +57579,9 @@
       },
       "ManagedAgentReasoning": {
         "type": "object",
+        "required": [
+          "effort"
+        ],
         "properties": {
           "effort": {
             "anyOf": [
@@ -57589,7 +57592,7 @@
                 "type": "null"
               }
             ],
-            "description": "Requested relative effort, not a token budget. The model adapter must validate the selected deployment, provider API version and harness; reject unsupported values rather than translating them to an arbitrary budget or lower effort. Omission or null uses the selected model's default."
+            "description": "Model-specific effort name, not a closed set of known values or a token budget. The model adapter must validate the selected deployment, provider API version and harness; reject unsupported values rather than translating them to an arbitrary budget or lower effort. Null uses the selected model's default."
           }
         },
         "description": "Reasoning settings supported by the selected model and Managed harness."
@@ -57645,25 +57648,25 @@
           },
           "reasoning": {
             "$ref": "#/components/schemas/ManagedAgentReasoning",
-            "description": "Shared reasoning settings, validated against the selected model and harness."
+            "description": "Shared reasoning settings, validated against the selected model and harness. When omitted, the selected model's default reasoning effort is used."
           },
           "text": {
             "$ref": "#/components/schemas/TextConfig",
-            "description": "Shared output-format settings. Provider-specific verbosity belongs in model_configurations.text."
+            "description": "Shared output-format settings. When omitted, no structured-output format is requested. Provider-specific verbosity belongs in model_configurations.text."
           },
           "max_output_tokens": {
             "type": "integer",
             "format": "int32",
             "minimum": 1,
-            "description": "Maximum generated tokens per model call, including reasoning/thinking, not a whole-turn budget. Validate the selected model's limits."
+            "description": "Maximum generated tokens per model call, including reasoning/thinking, not a whole-turn budget. When omitted, the selected model and harness determine the limit; no shared numeric default is specified. Validate the selected model's limits."
           },
           "tool_choice": {
             "$ref": "#/components/schemas/ToolChoice",
-            "description": "Shared tool-selection intent. Forced choices require a supported model and an authorized declared function."
+            "description": "Shared tool-selection intent. When omitted, the selected model and harness determine tool selection; no shared default is specified. Forced choices require a supported model and an authorized declared function."
           },
           "parallel_tool_calls": {
             "type": "boolean",
-            "description": "Whether a model response may contain multiple tool calls. False permits at most one; true does not require multiple calls or parallel execution."
+            "description": "Whether a model response may contain multiple tool calls. When omitted, the selected model and harness determine this behavior; no shared default is specified. False permits at most one; true does not require multiple calls or parallel execution."
           },
           "model_configurations": {
             "$ref": "#/components/schemas/ModelConfigurations",
@@ -59167,7 +59170,7 @@
                 "type": "null"
               }
             ],
-            "description": "OpenAI summary presentation; no automatic translation to Claude thinking.display."
+            "description": "OpenAI summary presentation. Omission or null does not request a reasoning summary. No automatic translation to Claude thinking.display."
           }
         },
         "description": "Provider-specific reasoning presentation."
@@ -59388,7 +59391,7 @@
         "properties": {
           "verbosity": {
             "$ref": "#/components/schemas/TextVerbosity",
-            "description": "OpenAI verbosity; not a substitute for effort or an output-token limit."
+            "description": "OpenAI verbosity; not a substitute for effort or an output-token limit. When omitted, the OpenAI default of medium applies for models that support verbosity."
           }
         },
         "description": "Provider-specific text presentation."
@@ -110040,13 +110043,20 @@
         "description": "An SSE event-type to text-field selector for streaming invocation output."
       },
       "ReasoningSummary": {
-        "type": "string",
-        "enum": [
-          "concise",
-          "detailed",
-          "auto"
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "concise",
+              "detailed",
+              "auto"
+            ]
+          }
         ],
-        "description": "OpenAI reasoning-summary selections, subject to model support."
+        "description": "Known OpenAI reasoning-summary selections, subject to model support."
       },
       "RecurrenceSchedule": {
         "type": "object",
@@ -122604,6 +122614,9 @@
       },
       "TextConfig": {
         "type": "object",
+        "required": [
+          "format"
+        ],
         "properties": {
           "format": {
             "$ref": "#/components/schemas/TextFormat",
@@ -122645,13 +122658,20 @@
         "description": "Common text-output format discriminator."
       },
       "TextVerbosity": {
-        "type": "string",
-        "enum": [
-          "low",
-          "medium",
-          "high"
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ]
+          }
         ],
-        "description": "OpenAI text-verbosity selections."
+        "description": "Known OpenAI text-verbosity selections, subject to model support."
       },
       "Thinking": {
         "type": "object",
@@ -122761,6 +122781,9 @@
       "ToolChoice": {
         "anyOf": [
           {
+            "type": "string"
+          },
+          {
             "type": "string",
             "enum": [
               "auto",
@@ -122772,7 +122795,7 @@
             "$ref": "#/components/schemas/FunctionToolChoice"
           }
         ],
-        "description": "Common automatic, required, disabled or named-function tool selection."
+        "description": "Common tool selection with extensible string modes. Values must be supported by the selected model and harness."
       },
       "ToolConfig": {
         "type": "object",

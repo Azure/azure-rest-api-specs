@@ -33,20 +33,20 @@ model ManagedAgentDefinition extends AgentDefinition {
   /** Instructions supplied to the harness. */
   instructions?: string;
 
-  /** Shared reasoning settings, validated against the selected model and harness. */
+  /** Shared reasoning settings, validated against the selected model and harness. When omitted, the selected model's default reasoning effort is used. */
   reasoning?: ManagedAgentReasoning;
 
-  /** Shared output-format settings. Provider-specific verbosity belongs in model_configurations.text. */
+  /** Shared output-format settings. When omitted, no structured-output format is requested. Provider-specific verbosity belongs in model_configurations.text. */
   text?: TextConfig;
 
-  /** Maximum generated tokens per model call, including reasoning/thinking, not a whole-turn budget. Validate the selected model's limits. */
+  /** Maximum generated tokens per model call, including reasoning/thinking, not a whole-turn budget. When omitted, the selected model and harness determine the limit; no shared numeric default is specified. Validate the selected model's limits. */
   @minValue(1)
   max_output_tokens?: int32;
 
-  /** Shared tool-selection intent. Forced choices require a supported model and an authorized declared function. */
+  /** Shared tool-selection intent. When omitted, the selected model and harness determine tool selection; no shared default is specified. Forced choices require a supported model and an authorized declared function. */
   tool_choice?: ToolChoice;
 
-  /** Whether a model response may contain multiple tool calls. False permits at most one; true does not require multiple calls or parallel execution. */
+  /** Whether a model response may contain multiple tool calls. When omitted, the selected model and harness determine this behavior; no shared default is specified. False permits at most one; true does not require multiple calls or parallel execution. */
   parallel_tool_calls?: boolean;
 
   /** Flat provider-specific controls selected by model, not provider-keyed blocks or overrides of common fields. Reject unknown, misplaced, incompatible or unsupported settings. */
@@ -95,14 +95,14 @@ model ManagedMicrosoftCopilotHarness {
 
 /** Reasoning settings supported by the selected model and Managed harness. */
 model ManagedAgentReasoning {
-  /** Requested relative effort, not a token budget. The model adapter must validate the selected deployment, provider API version and harness; reject unsupported values rather than translating them to an arbitrary budget or lower effort. Omission or null uses the selected model's default. */
-  effort?: string | null;
+  /** Model-specific effort name, not a closed set of known values or a token budget. The model adapter must validate the selected deployment, provider API version and harness; reject unsupported values rather than translating them to an arbitrary budget or lower effort. Null uses the selected model's default. */
+  effort: string | null;
 }
 
 /** Output controls with an OpenAI and Claude mapping. */
 model TextConfig {
   /** Plain text or a supported JSON Schema. Reject a schema the selected model adapter cannot enforce. */
-  format?: TextFormat;
+  format: TextFormat;
 }
 
 /** Common text-output format discriminator. */
@@ -135,9 +135,11 @@ model JsonSchemaFormat extends TextFormatBase {
   schema: Record<unknown>;
 }
 
-/** Common automatic, required, disabled or named-function tool selection. */
+/** Common tool selection with extensible string modes. Values must be supported by the selected model and harness. */
 #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Tool selection accepts a string mode or a named-function object, not models sharing a discriminator."
 union ToolChoice {
+  string,
+
   /** Let the model choose whether to call tools. */
   auto: "auto",
 
@@ -181,12 +183,14 @@ model ModelConfigurations {
 
 /** Provider-specific reasoning presentation. */
 model ModelReasoningConfig {
-  /** OpenAI summary presentation; no automatic translation to Claude thinking.display. */
+  /** OpenAI summary presentation. Omission or null does not request a reasoning summary. No automatic translation to Claude thinking.display. */
   summary?: ReasoningSummary | null;
 }
 
-/** OpenAI reasoning-summary selections, subject to model support. */
+/** Known OpenAI reasoning-summary selections, subject to model support. */
 union ReasoningSummary {
+  string,
+
   /** Request a concise summary. */
   concise: "concise",
 
@@ -199,12 +203,14 @@ union ReasoningSummary {
 
 /** Provider-specific text presentation. */
 model ModelTextConfig {
-  /** OpenAI verbosity; not a substitute for effort or an output-token limit. */
+  /** OpenAI verbosity; not a substitute for effort or an output-token limit. When omitted, the OpenAI default of medium applies for models that support verbosity. */
   verbosity?: TextVerbosity;
 }
 
-/** OpenAI text-verbosity selections. */
+/** Known OpenAI text-verbosity selections, subject to model support. */
 union TextVerbosity {
+  string,
+
   /** Request less output text. */
   low: "low",
 
