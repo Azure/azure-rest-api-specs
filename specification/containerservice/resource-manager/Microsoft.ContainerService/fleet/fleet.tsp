@@ -109,7 +109,7 @@ model FleetHubNetworkingProfile {
   @maxItems(1)
   egressPublicIpResourceIds?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.Network/publicIPAddresses",
+      type: "Microsoft.Network/publicIPAddresses";
     }
   ]>[];
 
