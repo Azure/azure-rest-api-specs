@@ -253,7 +253,7 @@ model FirmwareResourceProperties {
    * The list of firmware class identifiers (typically GUIDs).
    */
   @visibility(Lifecycle.Read)
-  firmwareClass?: string[];
+  firmwareClasses?: string[];
 }
 
 // ============================================================================
