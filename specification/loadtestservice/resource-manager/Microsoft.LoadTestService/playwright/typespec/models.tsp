@@ -50,8 +50,19 @@ model PlaywrightWorkspaceProperties {
   storageUri?: url;
 
   @added(Versions.v2026_08_01_preview)
+  @removed(Versions.v2026_12_01_preview)
+  @renamedFrom(Versions.v2026_12_01_preview, "subnetId")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The Azure Resource Manager resource ID of the subnet used for private network connectivity. Before creating the workspace, ensure the subnet meets the virtual network prerequisites at https://aka.ms/pww/docs/vnet. Format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Network/virtualNetworks/{virtualNetwork}/subnets/{subnet}. This value cannot be changed after workspace creation.")
+  oldSubnetId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
+    }
+  ]>;
+
+  @added(Versions.v2026_12_01_preview)
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  @doc("The Azure Resource Manager resource ID of the subnet used for private network connectivity. Before configuring the workspace, ensure the subnet meets the virtual network prerequisites at https://aka.ms/pww/docs/vnet. Format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Network/virtualNetworks/{virtualNetwork}/subnets/{subnet}.")
   subnetId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/virtualNetworks/subnets";
