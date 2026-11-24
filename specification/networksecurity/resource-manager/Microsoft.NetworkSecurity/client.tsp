@@ -144,7 +144,11 @@ namespace NetworkSecurityManagementClient {
 @@clientName(Microsoft.NetworkSecurity.McpMatchType, "MCPMatchType", "go");
 @@clientName(Microsoft.NetworkSecurity.McpMatchCase, "MCPMatchCase", "go");
 @@clientName(Microsoft.NetworkSecurity.McpToolMethod, "MCPToolMethod", "go");
-@@clientName(Microsoft.NetworkSecurity.McpPromptMethod, "MCPPromptMethod", "go");
+@@clientName(
+  Microsoft.NetworkSecurity.McpPromptMethod,
+  "MCPPromptMethod",
+  "go"
+);
 @@clientName(
   Microsoft.NetworkSecurity.FqdnFilteringDestinationType.Fqdns,
   "FQDNs",
@@ -245,11 +249,7 @@ namespace NetworkSecurityManagementClient {
   "MCPPolicyFQDNsDestination",
   "go"
 );
-@@clientName(
-  Microsoft.NetworkSecurity.McpMatchValue,
-  "MCPMatchValue",
-  "go"
-);
+@@clientName(Microsoft.NetworkSecurity.McpMatchValue, "MCPMatchValue", "go");
 @@clientName(
   Microsoft.NetworkSecurity.McpStringMatching,
   "MCPStringMatching",
