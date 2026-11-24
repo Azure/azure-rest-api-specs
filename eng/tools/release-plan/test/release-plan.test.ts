@@ -25,6 +25,7 @@ describe("SDK generation release-plan check", () => {
   const testTags = { "System.Tags": "Release Planner App Test" };
   const check = (planId = 0, branch = "main", createPr = true) =>
     assertNoConflictingSdkReleasePlan(
+      "Python",
       "specification/contoso/./Contoso's.Service/tspconfig.yaml",
       sdkPushRepo,
       branch,

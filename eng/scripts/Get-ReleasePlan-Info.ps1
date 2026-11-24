@@ -1,18 +1,22 @@
 param(    
     [Parameter(Mandatory = $true)]
     $ReleasePlanWorkItemId,
-    [switch]$AsJson
+    [switch]$AsJson,
+    [switch]$CheckSdkGeneration
 )
 
 <#
 .SYNOPSIS
-Updates the pull request URL and status in the specified release plan work item for a given programming language.
+Reads release plan details or checks for conflicting SDK generation.
 
 .PARAMETER ReleasePlanWorkItemId
-The ID of the release plan work item to update.
+The release plan work item ID. Use 0 to check for conflicts without a selected plan.
 
 .PARAMETER AsJson
 Returns structured release plan metadata instead of the legacy description text.
+
+.PARAMETER CheckSdkGeneration
+Runs the SDK generation check using the pipeline's TypeSpec path and SDK repository.
 
 #>
 
@@ -20,6 +24,16 @@ Set-StrictMode -Version 3
 $ErrorActionPreference = 'Stop'
 
 . $PSScriptRoot/../common/scripts/Helpers/DevOps-WorkItem-Helpers.ps1
+
+if ($CheckSdkGeneration) {
+    $sdkRepoName = $env:SDK_PUSH_REPO.Split('/')[-1]
+    $language = Get-LanguageDevOpsName ($sdkRepoName -replace '^azure-sdk-for-|-pr$', '')
+    if ($language) {
+        node "$PSScriptRoot/../tools/release-plan/src/release-plan.ts" $language $ReleasePlanWorkItemId
+        exit $LASTEXITCODE
+    }
+    return
+}
 
 $releasePlanInfoUnavailableMessage = "Release plan information is not available. Create a release plan and link SDK pull request to the release plan. Refer aka.ms/azsdk/releaseplan-dashboard for more info."
 $releasePlanInfo = $releasePlanInfoUnavailableMessage

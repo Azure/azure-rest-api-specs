@@ -291,14 +291,6 @@ export function getReleasePlanResultById(
   };
 }
 
-const releasePlanLanguageBySdkRepo = new Map([
-  ["azure-sdk-for-net", "Dotnet"],
-  ["azure-sdk-for-js", "JavaScript"],
-  ["azure-sdk-for-python", "Python"],
-  ["azure-sdk-for-java", "Java"],
-  ["azure-sdk-for-go", "Go"],
-]);
-
 const inactiveReleasePlanStates = ["Closed", "Duplicate", "Abandoned", "Finished"];
 
 interface ReleasePlanWorkItem {
@@ -307,25 +299,21 @@ interface ReleasePlanWorkItem {
 }
 
 export async function assertNoConflictingSdkReleasePlan(
+  releasePlanLanguage: string,
   typeSpecConfigPath: string,
   sdkPushRepo: string,
   sdkCheckoutBranch: string,
   releasePlanWorkItemId: number,
   createPullRequest: boolean,
 ): Promise<void> {
-  const sdkRepoName = path.posix.basename(sdkPushRepo);
-  const language = releasePlanLanguageBySdkRepo.get(sdkRepoName.toLowerCase().replace(/-pr$/, ""));
-  if (!language) {
-    return;
-  }
   if (!Number.isInteger(releasePlanWorkItemId) || releasePlanWorkItemId < 0) {
     throw new Error("ReleasePlanWorkItemId must be 0 or a positive Azure DevOps work item ID.");
   }
 
   const typeSpecProjectPath = path.posix.dirname(path.posix.normalize(typeSpecConfigPath));
   const inactiveStates = inactiveReleasePlanStates.map((state) => `'${state}'`).join(",");
-  const pullRequestField = `Custom.SDKPullRequestFor${language}`;
-  const releaseStatusField = `Custom.ReleaseStatusFor${language}`;
+  const pullRequestField = `Custom.SDKPullRequestFor${releasePlanLanguage}`;
+  const releaseStatusField = `Custom.ReleaseStatusFor${releasePlanLanguage}`;
   const query = `SELECT [System.Id], [System.State], [System.Tags], [${pullRequestField}], [${releaseStatusField}]
     FROM WorkItems WHERE [System.TeamProject] = 'Release'
     AND [System.WorkItemType] = 'Release Plan'
@@ -379,7 +367,7 @@ export async function assertNoConflictingSdkReleasePlan(
   }
   if (conflictingPlan) {
     throw new Error(
-      `Release plan work item ${conflictingPlan.id} already has an unreleased ${language} SDK PR for '${typeSpecProjectPath}'. ` +
+      `Release plan work item ${conflictingPlan.id} already has an unreleased ${releasePlanLanguage} SDK PR for '${typeSpecProjectPath}'. ` +
         "Complete or abandon that plan before generating. See https://aka.ms/azsdk/releaseplan-dashboard.",
     );
   }
@@ -429,22 +417,19 @@ async function checkSdkPullRequestBranch(
 }
 
 if (import.meta.main) {
-  const {
-    TYPESPEC_CONFIG_PATH,
-    SDK_PUSH_REPO,
-    SDK_CHECKOUT_BRANCH,
-    RELEASE_PLAN_WORK_ITEM_ID,
-    CREATE_SDK_PULL_REQUEST,
-  } = process.env;
+  const [releasePlanLanguage, workItemId] = process.argv.slice(2);
+  const { TYPESPEC_CONFIG_PATH, SDK_PUSH_REPO, SDK_CHECKOUT_BRANCH, CREATE_SDK_PULL_REQUEST } =
+    process.env;
   try {
-    if (!TYPESPEC_CONFIG_PATH || !SDK_PUSH_REPO) {
-      throw new Error("Missing TypeSpec config path or SDK repository.");
+    if (!releasePlanLanguage || !TYPESPEC_CONFIG_PATH || !SDK_PUSH_REPO) {
+      throw new Error("Missing release plan language, TypeSpec config path, or SDK repository.");
     }
     await assertNoConflictingSdkReleasePlan(
+      releasePlanLanguage,
       TYPESPEC_CONFIG_PATH,
       SDK_PUSH_REPO,
       SDK_CHECKOUT_BRANCH ?? "",
-      Number(RELEASE_PLAN_WORK_ITEM_ID),
+      Number(workItemId),
       CREATE_SDK_PULL_REQUEST === "true",
     );
   } catch (error) {
