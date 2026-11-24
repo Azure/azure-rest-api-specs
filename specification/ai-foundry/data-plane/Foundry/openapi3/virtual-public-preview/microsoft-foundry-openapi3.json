@@ -116525,9 +116525,6 @@
       },
       "SyntheticDataGenerationConfiguration": {
         "type": "object",
-        "required": [
-          "generation_sources"
-        ],
         "properties": {
           "test_case_count": {
             "type": "integer",
@@ -116543,7 +116540,7 @@
             "items": {
               "$ref": "#/components/schemas/DataGenerationJobSource"
             },
-            "description": "Seed generation sources (prompt, agent, or file) forwarded to the data generation endpoint. Multiple sources may be provided."
+            "description": "Seed generation sources (prompt, agent, or file) forwarded to the data generation endpoint. Multiple sources may be provided. Optional when evaluating a rubric evaluator against an agent target, in which case the service seeds generation from the target agent and the rubric's dimensions when omitted."
           }
         },
         "description": "Seed data-generation configuration for `SyntheticDataGenerationWithSimulationEvalRunDataSource`. The `generation_sources` are forwarded directly to the data generation endpoint to produce the seed test cases that are subsequently simulated."
@@ -116639,10 +116636,7 @@
       "SyntheticDataGenerationWithSimulationEvalRunDataSource": {
         "type": "object",
         "required": [
-          "type",
-          "synthetic_data_generation_configuration",
-          "model_configuration",
-          "target"
+          "type"
         ],
         "properties": {
           "type": {
@@ -116654,11 +116648,11 @@
           },
           "synthetic_data_generation_configuration": {
             "$ref": "#/components/schemas/SyntheticDataGenerationConfiguration",
-            "description": "Seed data-generation configuration: how many test cases to generate, the optional output dataset name, and the generation sources forwarded to the data generation endpoint."
+            "description": "Seed data-generation configuration: how many test cases to generate, the optional output dataset name, and the generation sources. Optional when evaluating a rubric evaluator against an agent target; when omitted, the service defaults apply and generation is seeded from the target agent and the rubric's dimensions."
           },
           "model_configuration": {
             "$ref": "#/components/schemas/EvaluationModelConfiguration",
-            "description": "Model used both to generate the seed test cases and to simulate the user side of each conversation against the evaluated `target`."
+            "description": "Model used both to generate the seed test cases and to simulate the user side of each conversation against the evaluated `target`. Optional when `testing_criteria` contains a safety rubric evaluator (which uses service-managed simulator capacity); required when using customer-model synthetic data generation."
           },
           "default_simulation_configuration": {
             "$ref": "#/components/schemas/UserConversationSimulationDefaultConfiguration",
@@ -116666,7 +116660,7 @@
           },
           "target": {
             "$ref": "#/components/schemas/FoundryEvaluationTarget",
-            "description": "Model or agent being evaluated. It receives turns from the simulated user during the conversation simulation."
+            "description": "Model or agent being evaluated. It receives turns from the simulated user during the conversation simulation. Optional when `testing_criteria` contains a rubric evaluator generated from an agent source (`generation_agent_source`), in which case the service infers the target agent automatically."
           }
         },
         "allOf": [
@@ -116674,7 +116668,7 @@
             "$ref": "#/components/schemas/EvalRunDataSource"
           }
         ],
-        "description": "Generates seed test-case scenarios via the data generation endpoint and then evaluates a `target`\nby simulating multi-turn user conversations over those scenarios.\n\nThe `generation_sources` in `synthetic_data_generation_configuration` are forwarded to the data\ngeneration backend to produce seed test cases. Each generated scenario is then simulated against\n`target`: the model in `model_configuration` plays the simulated user and drives the conversation\naccording to `default_simulation_configuration` until it reaches the desired length or maximum turn\nlimit. The evaluation's testing criteria are then applied to the generated conversations."
+        "description": "Generates seed test-case scenarios and then evaluates a `target`\nby simulating multi-turn user conversations over those scenarios.\n\nFor safety rubric evaluations, the service derives test scenarios from the saved safety rubric's\nbehavior categories and the target agent's instructions/tools and runs the multi-turn ASSERT tester\nloop using service-managed simulator capacity. For quality rubric and standard evaluations,\n`generation_sources` in `synthetic_data_generation_configuration` (or the inferred target agent and\nrubric dimensions when omitted) are forwarded to the data generation backend to produce seed test\ncases, and the model in `model_configuration` plays the simulated user against `target` according to\n`default_simulation_configuration`. The evaluation's testing criteria are then applied to the\ngenerated conversations."
       },
       "SystemMessage": {
         "type": "object",
