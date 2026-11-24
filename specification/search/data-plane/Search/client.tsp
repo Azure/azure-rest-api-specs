@@ -11,6 +11,16 @@ using Search;
 namespace Customizations;
 
 @@clientName(Search.GraphQueryRequest, "GraphQueryContent", "csharp");
+@@clientName(
+  Search.UploadKnowledgeSourceFileMultipartRequest,
+  "UploadKnowledgeSourceFileMultipartContent",
+  "csharp"
+);
+@@clientName(
+  Search.UpdateKnowledgeSourceFileRequest,
+  "UpdateKnowledgeSourceFileContent",
+  "csharp"
+);
 
 // Graph query, index configuration, and knowledge retrieval use the same client families as
 // their existing document/index/knowledge-base counterparts.
