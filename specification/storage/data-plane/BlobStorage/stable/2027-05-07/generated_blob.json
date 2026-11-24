@@ -16958,7 +16958,7 @@
     },
     "AccessTier": {
       "type": "string",
-      "description": "The access tiers accepted by tier-setting requests.",
+      "description": "The access tiers.",
       "enum": [
         "P4",
         "P6",
@@ -17753,7 +17753,7 @@
           "x-ms-client-name": "remainingRetentionDays"
         },
         "AccessTier": {
-          "$ref": "#/definitions/BlobResponseAccessTier",
+          "$ref": "#/definitions/AccessTier",
           "description": "The access tier of the blob.",
           "x-ms-client-name": "accessTier"
         },
@@ -17849,126 +17849,6 @@
       ],
       "xml": {
         "name": "Properties"
-      }
-    },
-    "BlobResponseAccessTier": {
-      "type": "string",
-      "description": "The access tiers reported for a blob.",
-      "enum": [
-        "P4",
-        "P6",
-        "P10",
-        "P15",
-        "P20",
-        "P30",
-        "P40",
-        "P50",
-        "P60",
-        "P70",
-        "P80",
-        "Hot",
-        "Cool",
-        "Archive",
-        "Premium",
-        "Cold",
-        "Smart",
-        "Turbo"
-      ],
-      "x-ms-enum": {
-        "name": "BlobResponseAccessTier",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "P4",
-            "value": "P4",
-            "description": "The P4 access tier."
-          },
-          {
-            "name": "P6",
-            "value": "P6",
-            "description": "The P6 access tier."
-          },
-          {
-            "name": "P10",
-            "value": "P10",
-            "description": "The P10 access tier."
-          },
-          {
-            "name": "P15",
-            "value": "P15",
-            "description": "The P15 access tier."
-          },
-          {
-            "name": "P20",
-            "value": "P20",
-            "description": "The P20 access tier."
-          },
-          {
-            "name": "P30",
-            "value": "P30",
-            "description": "The P30 access tier."
-          },
-          {
-            "name": "P40",
-            "value": "P40",
-            "description": "The P40 access tier."
-          },
-          {
-            "name": "P50",
-            "value": "P50",
-            "description": "The P50 access tier."
-          },
-          {
-            "name": "P60",
-            "value": "P60",
-            "description": "The P60 access tier."
-          },
-          {
-            "name": "P70",
-            "value": "P70",
-            "description": "The P70 access tier."
-          },
-          {
-            "name": "P80",
-            "value": "P80",
-            "description": "The P80 access tier."
-          },
-          {
-            "name": "Hot",
-            "value": "Hot",
-            "description": "The Hot access tier."
-          },
-          {
-            "name": "Cool",
-            "value": "Cool",
-            "description": "The Cool access tier."
-          },
-          {
-            "name": "Archive",
-            "value": "Archive",
-            "description": "The Archive access tier."
-          },
-          {
-            "name": "Premium",
-            "value": "Premium",
-            "description": "The Premium access tier."
-          },
-          {
-            "name": "Cold",
-            "value": "Cold",
-            "description": "The Cold access tier."
-          },
-          {
-            "name": "Smart",
-            "value": "Smart",
-            "description": "The Smart access tier."
-          },
-          {
-            "name": "Turbo",
-            "value": "Turbo",
-            "description": "The low-latency SSD-backed tier for block blobs."
-          }
-        ]
       }
     },
     "BlobServiceProperties": {

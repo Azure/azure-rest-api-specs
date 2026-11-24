@@ -565,7 +565,7 @@ model BlobPropertiesGo {
   @Xml.name("RemainingRetentionDays") remainingRetentionDays?: int32;
 
   /** The access tier of the blob. */
-  @Xml.name("AccessTier") accessTier?: BlobResponseAccessTier;
+  @Xml.name("AccessTier") accessTier?: AccessTier;
 
   /** Whether the access tier is inferred. */
   @Xml.name("AccessTierInferred") accessTierInferred?: boolean;
@@ -574,10 +574,12 @@ model BlobPropertiesGo {
   @Xml.name("ArchiveStatus") archiveStatus?: ArchiveStatus;
 
   /** Indicates whether migration to Turbo storage is pending. Omitted after migration to SSD storage completes. */
+  @added(Versions.v2027_05_07)
   @Xml.name("TurboStatus")
   turboStatus?: TurboStatus;
 
   /** Indicates whether Turbo was implicitly assigned on ingestion or explicitly selected by the user. */
+  @added(Versions.v2027_05_07)
   @Xml.name("TierManagedBy")
   tierManagedBy?: TierManagedBy;
 
@@ -1331,10 +1333,6 @@ model StorageCppParquetConfiguration {}
 @@clientName(AccessTierRust, "AccessTier", "rust");
 @@clientNamespace(AccessTierRust, "Azure.Storage.Blobs", "rust");
 
-@@alternateType(BlobResponseAccessTier, BlobResponseAccessTierRust, "rust");
-@@clientName(BlobResponseAccessTierRust, "BlobResponseAccessTier", "rust");
-@@clientNamespace(BlobResponseAccessTierRust, "Azure.Storage.Blobs", "rust");
-
 /** The access tiers. */
 union AccessTierRust {
   /** The P4 access tier. */
@@ -1387,63 +1385,6 @@ union AccessTierRust {
 
   /** The low-latency SSD-backed tier for Block blobs. Transitions between Turbo and Hot, Cool, or Cold are supported. Archive blobs must first be rehydrated to a supported online tier. */
   @added(Versions.v2027_05_07)
-  Turbo: "Turbo",
-
-  /** Extensible. */
-  string,
-}
-
-/** The access tiers reported for a blob, excluding the Smart tier for Rust. */
-union BlobResponseAccessTierRust {
-  /** The P4 access tier. */
-  P4: "P4",
-
-  /** The P6 access tier. */
-  P6: "P6",
-
-  /** The P10 access tier. */
-  P10: "P10",
-
-  /** The P15 access tier. */
-  P15: "P15",
-
-  /** The P20 access tier. */
-  P20: "P20",
-
-  /** The P30 access tier. */
-  P30: "P30",
-
-  /** The P40 access tier. */
-  P40: "P40",
-
-  /** The P50 access tier. */
-  P50: "P50",
-
-  /** The P60 access tier. */
-  P60: "P60",
-
-  /** The P70 access tier. */
-  P70: "P70",
-
-  /** The P80 access tier. */
-  P80: "P80",
-
-  /** The Hot access tier. */
-  Hot: "Hot",
-
-  /** The Cool access tier. */
-  Cool: "Cool",
-
-  /** The Archive access tier. */
-  Archive: "Archive",
-
-  /** The Premium access tier. */
-  Premium: "Premium",
-
-  /** The Cold access tier. */
-  Cold: "Cold",
-
-  /** The low-latency SSD-backed tier for block blobs. */
   Turbo: "Turbo",
 
   /** Extensible. */
