@@ -225,14 +225,15 @@ stages:
                 displayName: Check for conflicting SDK release plans
                 inputs:
                   azureSubscription: opensource-api-connection
-                  scriptType: pscore
-                  scriptLocation: scriptPath
-                  scriptPath: $(SpecRepoDirectory)/eng/scripts/Get-ReleasePlan-Info.ps1
-                  arguments: -ReleasePlanWorkItemId ${{ parameters.ReleasePlanWorkItemId }} -CheckSdkGeneration
+                  scriptType: bash
+                  scriptLocation: inlineScript
+                  workingDirectory: $(SpecRepoDirectory)
+                  inlineScript: node eng/tools/release-plan/src/release-plan.ts
                 env:
                   TYPESPEC_CONFIG_PATH: ${{ parameters.ConfigPath }}
                   SDK_PUSH_REPO: $(SdkRepoOwner)/$(SdkRepoName)
                   SDK_CHECKOUT_BRANCH: $(CheckoutCommitish)
+                  RELEASE_PLAN_WORK_ITEM_ID: ${{ parameters.ReleasePlanWorkItemId }}
                   CREATE_SDK_PULL_REQUEST: ${{ iif(parameters.CreatePullRequest, 'true', 'false') }}
                   ${{ if endsWith(variables['Build.Repository.Name'], '-pr') }}:
                     GH_TOKEN: $(GH_TOKEN)
