@@ -89,7 +89,7 @@ interface Certificates {
   >;
 
   /**
-   * Description for Get all certificates in a resource group.
+   * Description for Get all certificates in a resource group. Starting with api-version 2024-04-01, each certificate in the list contains summary properties only (canonicalName, thumbprint, keyVaultId, keyVaultSecretName, keyVaultSecretStatus, tags). The expirationDate property can also be missing, for example on uploaded certificates. To get the full certificate, including subjectName, hostNames, issuer, issueDate and expirationDate, call Get on that certificate.
    */
   @summary("Get all certificates in a resource group.")
   listByResourceGroup is CertificateOps.List<
@@ -99,7 +99,7 @@ interface Certificates {
   >;
 
   /**
-   * Description for Get all certificates for a subscription.
+   * Description for Get all certificates for a subscription. Starting with api-version 2024-04-01, each certificate in the list contains summary properties only (canonicalName, thumbprint, keyVaultId, keyVaultSecretName, keyVaultSecretStatus, tags). The expirationDate property can also be missing, for example on uploaded certificates. To get the full certificate, including subjectName, hostNames, issuer, issueDate and expirationDate, call Get on that certificate.
    */
   @summary("Get all certificates for a subscription.")
   list is Azure.ResourceManager.Extension.ListByTarget<
