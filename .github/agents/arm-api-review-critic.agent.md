@@ -430,7 +430,7 @@ re-verify the reconciliation plan (Input #6).
 
 Call `pull_request_read(method: "get")` and independently inventory the exact current PR label
 names matching `BreakingChange-Approved-*`, `Versioning-Approved-*`,
-`Approved-Suppression`, or `Approved-TypeSpecSuppression`. Compare that
+`Approved-Suppression`, or `typespec-suppressions-approved`. Compare that
 inventory with the report's `Approval labels observed` line.
 
 - A missing inventory line, an omitted matching label, or a listed label that
@@ -439,13 +439,16 @@ inventory with the report's `Approval labels observed` line.
   paragraph names the observed applicable label or states that no label in the
   applicable breaking-change/versioning family was observed.
 - For each suppression finding, perform the same check using
-  `Approved-Suppression` or `Approved-TypeSpecSuppression` as applicable.
+  `Approved-Suppression` or `typespec-suppressions-approved` as applicable.
 - Missing or contradictory finding guidance is
   `FAIL: approval-context-missing`.
-- A label must not cause a finding to be dropped or downgraded. The context must
-  ask the author to confirm that the PR-level approval covers the specific
-  finding and explain that, when it does, the remaining action is to resolve
-  the conversation.
+- A label alone must not cause a finding to be dropped or downgraded. Unless
+  the shared addressed-exception criteria are already verified, the context
+  must ask the author to confirm that the PR-level approval covers the
+  specific finding and explain that, when it does, the remaining action is to
+  resolve the conversation. On re-review, independently verify those criteria
+  before requesting confirmation again; preserve an addressed finding's
+  historical body and severity without treating it as an active blocker.
 
 If labels changed after the Reviewer's Step 1 snapshot, return the mismatch so
 the Reviewer can refresh the inventory and canonical comment bodies before

@@ -1,4 +1,5 @@
 import { spawnSync } from "node:child_process";
+import { pathToFileURL } from "node:url";
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
@@ -28,6 +29,10 @@ type CompilerCommand = {
   displayExecutable: string;
 };
 
+const TCGC_EMITTER = "@azure-tools/typespec-client-generator-core";
+const TCGC_PROVENANCE_EMITTER = "@azure-tools/assessment-tcgc-provenance";
+const TCGC_PROVENANCE_FILE = "tcgc-provenance.json";
+
 function hashFile(file: string): string {
   return crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex");
 }
@@ -46,6 +51,123 @@ function findFiles(root: string, predicate: (file: string) => boolean): string[]
   };
   visit(root);
   return files.sort();
+}
+
+function packageEntry(worktree: string, packageName: string) {
+  const manifestPath = path.join(
+    worktree,
+    "node_modules",
+    ...packageName.split("/"),
+    "package.json",
+  );
+  if (!fs.existsSync(manifestPath)) {
+    throw new Error(`Package manifest not found at ${manifestPath}.`);
+  }
+  const manifest = readJsonObject(manifestPath);
+  const exports = isRecord(manifest.exports) ? manifest.exports : undefined;
+  const rootExport = exports?.["."];
+  const entry =
+    typeof rootExport === "string"
+      ? rootExport
+      : isRecord(rootExport) && typeof rootExport.default === "string"
+        ? rootExport.default
+        : typeof manifest.main === "string"
+          ? manifest.main
+          : undefined;
+  if (!entry) throw new Error(`Package ${packageName} has no JavaScript entry point.`);
+  const resolved = path.resolve(path.dirname(manifestPath), entry);
+  if (!fs.existsSync(resolved)) {
+    throw new Error(`Package ${packageName} entry point does not exist at ${resolved}.`);
+  }
+  return resolved;
+}
+
+export function writeTcgcProvenanceEmitter(worktree: string, workRoot: string) {
+  const directory = path.join(workRoot, "inputs", "tcgc-provenance-emitter");
+  fs.mkdirSync(directory, { recursive: true });
+  const tcgcEntry = pathToFileURL(packageEntry(worktree, TCGC_EMITTER)).href;
+  const compilerEntry = pathToFileURL(packageEntry(worktree, "@typespec/compiler")).href;
+  fs.writeFileSync(
+    path.join(directory, "package.json"),
+    `${JSON.stringify(
+      {
+        name: TCGC_PROVENANCE_EMITTER,
+        private: true,
+        type: "module",
+        main: "./index.mjs",
+      },
+      null,
+      2,
+    )}\n`,
+  );
+  fs.writeFileSync(
+    path.join(directory, "index.mjs"),
+    `import { emitFile, getNamespaceFullName } from ${JSON.stringify(compilerEntry)};
+import { $lib, createSdkContext } from ${JSON.stringify(tcgcEntry)};
+
+export { $lib };
+
+function typeIdentity(value, seen = new Set()) {
+  if (value === undefined || value === null) return value;
+  if (typeof value !== "object") return value;
+  if (seen.has(value)) return { kind: value.kind ?? "cycle" };
+  seen.add(value);
+  const namespace =
+    value.namespace && typeof getNamespaceFullName === "function"
+      ? getNamespaceFullName(value.namespace)
+      : undefined;
+  const result = {
+    kind: value.kind,
+    name: value.name,
+    namespace,
+    value: value.value,
+    templateArguments: value.templateMapper?.args?.map((item) => typeIdentity(item, seen)),
+  };
+  seen.delete(value);
+  return Object.fromEntries(Object.entries(result).filter(([, item]) => item !== undefined));
+}
+
+function collectModels(sdkPackage) {
+  const models = [];
+  const seen = new Set();
+  const collect = (values) => {
+    for (const model of values ?? []) {
+      if (!model || seen.has(model)) continue;
+      seen.add(model);
+      const args = model.__raw?.templateMapper?.args;
+      if (!Array.isArray(args) || args.length === 0 || !model.crossLanguageDefinitionId) continue;
+      models.push({
+        crossLanguageDefinitionId: model.crossLanguageDefinitionId,
+        name: model.name,
+        templateArguments: args.map((item) => typeIdentity(item)),
+      });
+    }
+  };
+  const visitNamespace = (namespace) => {
+    collect(namespace?.models);
+    for (const child of namespace?.namespaces ?? []) visitNamespace(child);
+  };
+  collect(sdkPackage.models);
+  for (const namespace of sdkPackage.namespaces ?? []) visitNamespace(namespace);
+  return models;
+}
+
+export async function $onEmit(context) {
+  if (context.program.compilerOptions.noEmit) return;
+  const sdkContext = await createSdkContext(context, ${JSON.stringify(TCGC_EMITTER)}, {
+    exportTCGCoutput: true,
+  });
+  context.program.reportDiagnostics(sdkContext.diagnostics);
+  await emitFile(context.program, {
+    path: context.emitterOutputDir + "/${TCGC_PROVENANCE_FILE}",
+    content:
+      JSON.stringify({ schemaVersion: 1, models: collectModels(sdkContext.sdkPackage) }, null, 2) +
+      "\\n",
+  });
+}
+`,
+  );
+  return directory;
 }
 
 export function resolveTsp(
@@ -103,14 +225,17 @@ function runEmitter({
   fs.mkdirSync(output, { recursive: true });
   fs.mkdirSync(path.dirname(log), { recursive: true });
   const command = resolveTsp(worktree);
+  const emittedPackage =
+    emitter === TCGC_EMITTER ? writeTcgcProvenanceEmitter(worktree, workRoot) : emitter;
+  const emitterOptionName = emitter === TCGC_EMITTER ? TCGC_PROVENANCE_EMITTER : emitter;
   const args = [
     "compile",
     path.join(worktree, project),
-    `--emit=${emitter}`,
-    `--option=${emitter}.emitter-output-dir=${output}`,
+    `--emit=${emittedPackage}`,
+    `--option=${emitterOptionName}.emitter-output-dir=${output}`,
     "--warn-as-error",
   ];
-  if (emitter === "@azure-tools/typespec-client-generator-core") {
+  if (emitter === TCGC_EMITTER) {
     const emptyExamples = path.join(workRoot, "inputs", "empty-examples");
     fs.mkdirSync(emptyExamples, { recursive: true });
     const projectExamples = path.join(worktree, project, "examples");
@@ -121,12 +246,11 @@ function runEmitter({
       }
     }
     if (apiVersion) fs.mkdirSync(path.join(emptyExamples, apiVersion), { recursive: true });
-    args.push(`--option=${emitter}.examples-dir=${emptyExamples}`);
+    args.push(`--option=${emitterOptionName}.examples-dir=${emptyExamples}`);
   }
   if (apiVersion) {
-    const option =
-      emitter === "@azure-tools/typespec-client-generator-core" ? "api-version" : "version";
-    args.push(`--option=${emitter}.${option}=${apiVersion}`);
+    const option = emitter === TCGC_EMITTER ? "api-version" : "version";
+    args.push(`--option=${emitterOptionName}.${option}=${apiVersion}`);
   }
   const started = performance.now();
   const result = spawnSync(command.executable, [...command.args, ...args], {
@@ -246,6 +370,10 @@ export function runProjectCompilers({
       files: findFiles(tcgcOutput, (file) => path.basename(file) === "tcgc-output.yaml").map(
         (file) => ({ path: path.relative(workRoot, file), contentHash: hashFile(file) }),
       ),
+      provenanceFile: findFiles(
+        tcgcOutput,
+        (file) => path.basename(file) === TCGC_PROVENANCE_FILE,
+      ).map((file) => ({ path: path.relative(workRoot, file), contentHash: hashFile(file) }))[0],
     },
   };
 }

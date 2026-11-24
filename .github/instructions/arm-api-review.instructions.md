@@ -75,7 +75,7 @@ API review:
   `BreakingChange-Approved-`.
 - API versioning approvals: labels beginning with `Versioning-Approved-`.
 - OpenAPI suppression approval: `Approved-Suppression`.
-- TypeSpec suppression approval: `Approved-TypeSpecSuppression`.
+- TypeSpec suppression approval: `typespec-suppressions-approved`.
 
 Do not treat SDK-language approval labels, package-name approvals, namespace
 approvals, or an arbitrary label containing the word `Approved` as API-review
@@ -105,7 +105,7 @@ finding. Every posted breaking-change or suppression finding MUST include an
 - Cross-version breaking changes check `BreakingChange-Approved-*`.
 - Same-version or published-version exceptions check `Versioning-Approved-*`.
 - OpenAPI suppression findings check `Approved-Suppression`.
-- TypeSpec suppression findings check `Approved-TypeSpecSuppression`.
+- TypeSpec suppression findings check `typespec-suppressions-approved`.
 
 - **Matching label observed:** name the exact label and ask the author to
   confirm that it covers this specific breaking change or suppression. State

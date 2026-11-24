@@ -605,7 +605,7 @@ read-only `github` toolset. If any check fails, act as directed and stop.
    If the PR carries `skip-arm-review`, call `noop` and stop (opt-out).
    From the same response, capture the exact label names matching
    `BreakingChange-Approved-*`, `Versioning-Approved-*`,
-   `Approved-Suppression`, or `Approved-TypeSpecSuppression`. This is the
+   `Approved-Suppression`, or `typespec-suppressions-approved`. This is the
    approval-label inventory for the review; record `none` when it is empty.
 3. **`specification/` scope** — call `pull_request_read(method: "get_files")` and
    paginate the file list. **Check whether it was truncated before deciding
@@ -862,20 +862,22 @@ workflow runs in **autonomous mode**, so apply the Action column below (the
 reconciliation acts directly, without human confirmation):
 
 Line movement does not make a finding new, but it does select the action. Choose
-exactly one action with this precedence: contradiction, shifted inline anchor,
-other actionable coverage, then no coverage.
+exactly one action with this precedence: contradiction, verified addressed
+approval exception with unchanged scope, active shifted inline anchor, other
+actionable coverage, then no coverage.
 
-| Scenario                                                                | Action token            | Behavior                                                                                                               |
-| ----------------------------------------------------------------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| New guidance contradicts an existing inline thread                      | `CLARIFY-CONFLICT`      | Reply with the prior position, current evidence/guidance, and why it changed; resolve only superseded agent guidance   |
-| New guidance contradicts top-level comment(s) or review body            | `CLARIFY-CONFLICT`      | Post one consolidated top-level clarification linking every contradicted item; do not post separate duplicate findings |
-| Same finding, line shifted, trusted workflow-owned inline thread        | `RESOLVE-AND-REPOST`    | Resolve the stale trusted thread and post one replacement at the current line                                          |
-| Same finding, line shifted, any other inline thread                     | `REPLY-LINE-SHIFT`      | Reply with the current line; do not resolve the thread                                                                 |
-| Same semantic finding, actionable coverage, no shifted inline anchor    | `SKIP-COVERED`          | Do not post; record the existing URL                                                                                   |
-| Violation already fixed, trusted workflow-owned inline thread           | `THANK-AND-RESOLVE`     | Queue the fix reply and thread resolution                                                                              |
-| Violation already fixed, any other inline thread                        | `PROPOSE-HUMAN-RESOLVE` | Never auto-resolve; autonomous mode leaves it untouched                                                                |
-| Candidate excluded by the 20-comment limit                              | `OVERFLOW-NOT-POSTED`   | Do not post; disclose only the aggregate count and themes                                                              |
-| No actionable prior coverage or contradiction on any discussion surface | `POST-NEW`              | Post one new finding                                                                                                   |
+| Scenario                                                                                  | Action token            | Behavior                                                                                                                  |
+| ----------------------------------------------------------------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| New guidance contradicts an existing inline thread                                        | `CLARIFY-CONFLICT`      | Reply with the prior position, current evidence/guidance, and why it changed; resolve only superseded agent guidance      |
+| New guidance contradicts top-level comment(s) or review body                              | `CLARIFY-CONFLICT`      | Post one consolidated top-level clarification linking every contradicted item; do not post separate duplicate findings    |
+| Verified addressed approval exception, unchanged scope, even if its inline anchor shifted | `SKIP-COVERED`          | Keep historical coverage and the resolved thread unchanged; no repost, line-shift reply, or repeated confirmation request |
+| Same active finding, line shifted, trusted workflow-owned inline thread                   | `RESOLVE-AND-REPOST`    | Resolve the stale trusted thread and post one replacement at the current line                                             |
+| Same active finding, line shifted, any other inline thread                                | `REPLY-LINE-SHIFT`      | Reply with the current line; do not resolve the thread                                                                    |
+| Same semantic finding, actionable coverage, no shifted inline anchor                      | `SKIP-COVERED`          | Do not post; record the existing URL                                                                                      |
+| Violation already fixed, trusted workflow-owned inline thread                             | `THANK-AND-RESOLVE`     | Queue the fix reply and thread resolution                                                                                 |
+| Violation already fixed, any other inline thread                                          | `PROPOSE-HUMAN-RESOLVE` | Never auto-resolve; autonomous mode leaves it untouched                                                                   |
+| Candidate excluded by the 20-comment limit                                                | `OVERFLOW-NOT-POSTED`   | Do not post; disclose only the aggregate count and themes                                                                 |
+| No actionable prior coverage or contradiction on any discussion surface                   | `POST-NEW`              | Post one new finding                                                                                                      |
 
 **Resolution rules (autonomous mode):**
 
@@ -1139,7 +1141,7 @@ comment. Never prefix a bare finding number with `#`.
 For breaking-change findings, use `BreakingChange-Approved-*` for cross-version
 breaks and `Versioning-Approved-*` for same-version or published-version
 exceptions. For suppression findings, use `Approved-Suppression` for OpenAPI
-suppression flows and `Approved-TypeSpecSuppression` for TypeSpec suppression
+suppression flows and `typespec-suppressions-approved` for TypeSpec suppression
 flows. The `Approval context` paragraph must name an observed matching label or
 state that no matching label was observed. A label does not remove or downgrade
 the finding; it changes the remaining author action when the approval covers

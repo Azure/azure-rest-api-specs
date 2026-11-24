@@ -1,5 +1,9 @@
 import path from "node:path";
-import { normalizeAutorestContract, sameAutorestContract } from "./autorest-contract.ts";
+import {
+  effectiveSchemaProperties,
+  normalizeAutorestContract,
+  sameAutorestContract,
+} from "./autorest-contract.ts";
 import { isMain, isRecord, parseArgs, readJsonObject, runMain, writeJson } from "./cli.ts";
 import { semanticIntentType } from "./semantic-assessment-scope.ts";
 import { attachSemanticChangeFacts, isVersionGovernanceOnly } from "./semantic-change-facts.ts";
@@ -283,8 +287,9 @@ function compactSchema(
     if (schema[key] !== undefined) result[key] = schema[key];
   }
   if (schema.references?.length) result.references = schema.references;
-  if (depth < 2 && schema.properties?.length) {
-    result.properties = schema.properties.map((property) => ({
+  const properties = effectiveSchemaProperties(schema);
+  if (depth < 2 && properties.length) {
+    result.properties = properties.map((property) => ({
       name: property.name,
       required: property.required,
       schema: compactRequiredSchema(property.schema, depth + 1),
@@ -1576,6 +1581,16 @@ export function analyzeSemanticIntents(options: {
         projectId: project.id,
         message: error instanceof Error ? error.message : String(error),
       });
+      const sourceUnits = buildProjectUnits(
+        project,
+        undefined,
+        { schemaVersion: 1, documents: [], operations: [] },
+        sourceIndex,
+        facts,
+        () => new Set(),
+      );
+      reviewUnits.push(...sourceUnits);
+      if (sourceUnits.length) analyzedProjects += 1;
     }
   }
   for (const unit of reviewUnits) {

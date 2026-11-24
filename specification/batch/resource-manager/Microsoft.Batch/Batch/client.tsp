@@ -574,6 +574,8 @@ using Microsoft.Batch;
 @@clientName(ProxyAgentSettings, "BatchProxyAgentSettings", "csharp");
 @@clientName(VMDiskSecurityProfile, "VmDiskSecurityProfile", "csharp");
 @@clientName(ResizeError, "BatchResizeError", "csharp");
+@@clientName(VmSizeProperties.vCPUsAvailable, "VcpusAvailable", "csharp");
+@@clientName(VmSizeProperties.vCPUsPerCore, "VcpusPerCore", "csharp");
 @@alternateType(
   PrivateEndpointConnection.etag,
   Azure.Core.EtagProperty.etag,

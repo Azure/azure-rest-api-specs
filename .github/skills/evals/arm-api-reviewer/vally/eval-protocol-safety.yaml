@@ -1488,51 +1488,77 @@ stimuli:
       files:
         - src: "../../../azure-api-review/references/reviewer-posted-parity.md"
           dest: ".github/skills/azure-api-review/references/reviewer-posted-parity.md"
+        - src: "../../../../workflows/arm-api-review.md"
+          dest: ".github/workflows/arm-api-review.md"
     prompt: |
       Read `.github/skills/azure-api-review/SKILL.md`, the shared
-      reviewer-posted-parity rules, and Reviewer/Critic protocol.
+      reviewer-posted-parity rules, Reviewer/Critic protocol, interactive
+      Reviewer, and `.github/workflows/arm-api-review.md`.
       Reconcile a full ARM review at pinned head
       `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`. All discussion surfaces were
-      fetched completely. No inline anchor shifted.
+      fetched completely. Unrelated imports, decorators, and documentation
+      moved the following inline anchors without changing the affected API
+      elements, suppressions, or approval scope. All four threads are resolved:
 
-      The PR currently has `Versioning-Approved-PrivatePreview` and
-      `Versioning-Approved-NotReleased`. Two trusted workflow-owned versioning
-      threads are resolved: one covers the new Widget resource, the other the
-      new optional WidgetProperties.healthStatus property in the existing
-      preview version. Before this run, the PR author explicitly confirmed in
-      each thread that these approvals cover that specific change. The replies
-      are at `/discussion/widget-approval` and `/discussion/health-approval`.
-      These are valid matching approvals, their scope is unchanged at this
-      head, and the Critic independently verified all of this evidence.
+      - `same_version`: trusted workflow-owned finding on the new optional
+        WidgetProperties.healthStatus property in an existing preview version,
+        line 140 now 180; `Versioning-Approved-PrivatePreview` is current.
+      - `cross_version`: human-origin finding on an approved removal of
+        WidgetProperties.legacyStatus between API versions, line 77 now 121;
+        `BreakingChange-Approved-Benign` is current.
+      - `openapi_suppression`: trusted workflow-owned finding on the approved
+        readme suppression of rule R2001 for WidgetList, line 55 now 70;
+        `Approved-Suppression` is current.
+      - `typespec_suppression`: human-origin finding on the approved
+        `#suppress` for Widget.properties, line 99 now 145;
+        `typespec-suppressions-approved` is current.
 
-      A third, unrelated finding is still active: a new list example has an
+      For each thread, the PR author explicitly confirmed before this run that
+      its current approval covers that specific element and change, at
+      `/discussion/<finding-key>-approval`. These are valid matching approvals,
+      their scope is unchanged, and the Critic independently verified the
+      labels, confirmations, resolution, and current source evidence.
+
+      A fifth, unrelated finding is still active: a new list example has an
       invalid nextLink URL. Its correctness and Blocking severity are already
       Critic-verified. No approval covers it.
 
       Return only JSON with `active_blocking_count`,
-      `addressed_exception_count`, `covered_action`, and `reason`.
-      Use a canonical uppercase reconciliation token in `covered_action`;
-      prose synonyms or invented action names are invalid.
-      Reconcile the two historical versioning findings without rewriting or
-      downgrading them. Do not post comments, resolve threads, or grant signoff.
+      `addressed_exception_count`, `actions`, and `reason`. In `actions`, map
+      each of the four finding keys to its canonical uppercase reconciliation
+      token. Give the shared decision for interactive and autonomous reviews.
+      Do not post comments, resolve threads, or grant signoff.
     graders:
       - type: output-matches
         name: "only-unrelated-finding-remains-active"
         config:
           pattern: '"active_blocking_count"\s*:\s*1\b'
       - type: output-matches
-        name: "both-exceptions-are-addressed"
+        name: "all-four-exceptions-are-addressed"
         config:
-          pattern: '"addressed_exception_count"\s*:\s*2\b'
-      - type: output-contains
-        name: "covered-findings-not-posted-again"
+          pattern: '"addressed_exception_count"\s*:\s*4\b'
+      - type: output-matches
+        name: "same-version-moved-exception-not-posted-again"
         config:
-          substring: "SKIP-COVERED"
+          pattern: '"same_version"\s*:\s*"SKIP-COVERED"'
+      - type: output-matches
+        name: "cross-version-moved-exception-not-posted-again"
+        config:
+          pattern: '"cross_version"\s*:\s*"SKIP-COVERED"'
+      - type: output-matches
+        name: "openapi-moved-exception-not-posted-again"
+        config:
+          pattern: '"openapi_suppression"\s*:\s*"SKIP-COVERED"'
+      - type: output-matches
+        name: "typespec-moved-exception-not-posted-again"
+        config:
+          pattern: '"typespec_suppression"\s*:\s*"SKIP-COVERED"'
       - type: prompt
     rubric:
       - Active Blocking count is one, retaining the unrelated nextLink finding
-      - The two specifically confirmed and resolved exceptions are historical coverage, not active blockers
-      - SKIP-COVERED controls duplicate posting independently of the active count
+      - All four approval kinds use the correct matching labels and are historical coverage, not active blockers
+      - Every moved addressed exception uses SKIP-COVERED with no repost, reopening, relocation reply, or repeated confirmation request
+      - The same addressed-exception decisions apply to the interactive Reviewer and autonomous workflow
       - Original finding severity and classification are preserved
       - The reasoning uses current approval scope, author confirmations, and resolution, not labels alone
 
@@ -1551,31 +1577,42 @@ stimuli:
       `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`. All discussion surfaces were
       fetched completely. No inline anchor shifted.
 
-      One trusted workflow-owned versioning thread is resolved, but its schema
-      change remains in the current preview contract. The PR has
-      `Versioning-Approved-PrivatePreview`. The author only said "we are in
-      private preview" and resolved the thread. There is no finding-specific
-      confirmation that the approval covers this change, and no code fix.
-      The violation itself is Critic-verified.
+      Five covered findings still have Critic-verified Blocking violations and
+      no code fix. The only approval-like labels currently present are
+      `Versioning-Approved-PrivatePreview` and `Approved-TypeSpecSuppression`:
+
+      - A versioning thread is resolved, but the author only said "we are in
+        private preview"; there is no finding-specific confirmation.
+      - A TypeSpec suppression thread is resolved and specifically confirmed,
+        but the only suppression label is `Approved-TypeSpecSuppression`.
+      - A cross-version breaking-change thread is resolved and specifically
+        confirmed, but only the versioning approval above is present.
+      - An OpenAPI suppression thread is resolved and specifically confirmed,
+        but its `Approved-Suppression` label was withdrawn.
+      - A different versioning thread has a specifically confirmed approval
+        whose scope is unchanged, but the conversation is still unresolved.
 
       Return only JSON with `active_blocking_count`,
-      `addressed_exception_count`, and `reason`. Do not post, resolve, or sign
-      off. Distinguish resolution from proof of a fix or approved exception.
+      `addressed_exception_count`, and `reason`. Explain each finding's
+      remaining gap. Do not post, resolve, or sign off.
     graders:
       - type: output-matches
         name: "unchanged-violation-remains-active"
         config:
-          pattern: '"active_blocking_count"\s*:\s*1\b'
+          pattern: '"active_blocking_count"\s*:\s*5\b'
       - type: output-matches
         name: "no-exception-established"
         config:
           pattern: '"addressed_exception_count"\s*:\s*0\b'
       - type: prompt
     rubric:
-      - The unresolved approval gap keeps one currently applicable Blocking finding
+      - All five approval or resolution gaps remain active Blocking findings
       - A broad approval label and resolved thread do not establish coverage
       - Generic private-preview rationale is not finding-specific author confirmation
-      - The reason identifies the missing confirmation without granting signoff
+      - Approved-TypeSpecSuppression is not the canonical typespec-suppressions-approved label
+      - A versioning label cannot approve a cross-version breaking change and a withdrawn suppression label cannot approve the current suppression
+      - A confirmed approval does not establish an addressed exception while its thread is unresolved
+      - The reason identifies each remaining gap without granting signoff
 
   # 160031 -- A previous confirmation cannot authorize a later expanded change
   - name: approval-scope-drift-remains-blocking
@@ -1590,7 +1627,7 @@ stimuli:
       reviewer-posted-parity rules, and Reviewer/Critic protocol.
       Reconcile a full ARM review at pinned head
       `bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb`. All discussion surfaces were
-      fetched completely. No inline anchor shifted.
+      fetched completely. The prior inline anchor moved from line 140 to 180.
 
       A trusted workflow-owned thread on WidgetProperties.healthStatus was
       resolved after the author explicitly confirmed a valid versioning
@@ -1620,5 +1657,5 @@ stimuli:
     rubric:
       - The current change remains one active Blocking finding despite the resolved thread and earlier confirmation
       - The previous approval cannot authorize a change outside its recorded scope
-      - CLARIFY-CONFLICT explains the later change and remaining approval gap in the existing thread
+      - CLARIFY-CONFLICT takes precedence over line-shift actions and explains the later change and remaining approval gap in the existing thread
       - The response does not silently skip the current violation or grant signoff

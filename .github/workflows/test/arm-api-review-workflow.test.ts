@@ -608,9 +608,6 @@ describe("ARM API review workflow", () => {
     expect(collapseWhitespace(parity)).toContain(
       "Line movement does not make the finding new, but it does select the reconciliation action",
     );
-    expect(collapseWhitespace(parity)).toContain(
-      "Therefore `SKIP-COVERED` applies only when no matching inline anchor shifted",
-    );
     expect(collapseWhitespace(skill)).toContain(
       "`SKIP-COVERED` for other actionable coverage, then `POST-NEW`",
     );
