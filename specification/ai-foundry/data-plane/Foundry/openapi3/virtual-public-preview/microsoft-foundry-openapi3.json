@@ -6142,6 +6142,18 @@
         "description": "Returns files and directories at the specified path in the session sandbox.\nThe response includes only the immediate children of the target directory and defaults to the session home directory when no path is supplied.",
         "parameters": [
           {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ManagedAgents=V1Preview"
+              ]
+            }
+          },
+          {
             "name": "agent_name",
             "in": "path",
             "required": true,
@@ -6154,7 +6166,7 @@
             "name": "agent_session_id",
             "in": "path",
             "required": true,
-            "description": "The session ID.",
+            "description": "The Hosted session ID or service-generated Managed Session id. This parameter is not a caller label.",
             "schema": {
               "type": "string"
             }
@@ -6256,13 +6268,30 @@
         },
         "tags": [
           "Agent Session Files"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "ManagedAgents=V1Preview"
+          ]
+        }
       },
       "delete": {
         "operationId": "AgentSessionFiles_deleteSessionFile",
         "summary": "Delete a session file",
         "description": "Deletes the specified file or directory from the session sandbox.\nWhen `recursive` is false, deleting a non-empty directory returns 409 Conflict.",
         "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ManagedAgents=V1Preview"
+              ]
+            }
+          },
           {
             "name": "agent_name",
             "in": "path",
@@ -6276,7 +6305,7 @@
             "name": "agent_session_id",
             "in": "path",
             "required": true,
-            "description": "The session ID.",
+            "description": "The Hosted session ID or service-generated Managed Session id. This parameter is not a caller label.",
             "schema": {
               "type": "string"
             }
@@ -6340,7 +6369,12 @@
         },
         "tags": [
           "Agent Session Files"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "ManagedAgents=V1Preview"
+          ]
+        }
       }
     },
     "/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files/content": {
@@ -6349,6 +6383,18 @@
         "summary": "Upload a session file",
         "description": "Uploads binary file content to the specified path in the session sandbox.\nThe service stores the file relative to the session home directory and rejects payloads larger than 50 MB.",
         "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ManagedAgents=V1Preview"
+              ]
+            }
+          },
           {
             "name": "agent_name",
             "in": "path",
@@ -6362,7 +6408,7 @@
             "name": "agent_session_id",
             "in": "path",
             "required": true,
-            "description": "The session ID.",
+            "description": "The Hosted session ID or service-generated Managed Session id. This parameter is not a caller label.",
             "schema": {
               "type": "string"
             }
@@ -6432,6 +6478,11 @@
               }
             }
           }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "ManagedAgents=V1Preview"
+          ]
         }
       },
       "get": {
@@ -6439,6 +6490,18 @@
         "summary": "Download a session file",
         "description": "Downloads the file at the specified sandbox path as a binary stream.\nThe path is resolved relative to the session home directory.",
         "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ManagedAgents=V1Preview"
+              ]
+            }
+          },
           {
             "name": "agent_name",
             "in": "path",
@@ -6452,7 +6515,7 @@
             "name": "agent_session_id",
             "in": "path",
             "required": true,
-            "description": "The session ID.",
+            "description": "The Hosted session ID or service-generated Managed Session id. This parameter is not a caller label.",
             "schema": {
               "type": "string"
             }
@@ -6512,7 +6575,12 @@
         },
         "tags": [
           "Agent Session Files"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "ManagedAgents=V1Preview"
+          ]
+        }
       }
     },
     "/agents/{agent_name}/endpoint/sessions/{session_id}/computes": {
@@ -12679,7 +12747,7 @@
       "post": {
         "operationId": "Agents_createSession",
         "summary": "Create a session",
-        "description": "Creates a new session for an agent endpoint.\nHosted keeps its existing version_indicator request and response.\nManaged requires an explicit version_indicator for an existing version of the route Agent.\nIt validates the complete definition from that version or the Session according to definition_source,\nwithout a merge. Managed agent_session_id is an optional echoed label, not the generated routing ID.\nManaged creation returns the Session with 201; Environment preparation and turns can proceed asynchronously.\nManaged requests use existing endpoint interact/action authorization and enforce creator isolation.",
+        "description": "Creates a new session for an agent endpoint.\nHosted keeps its existing version_indicator request and response.\nManaged requires an explicit version_indicator for an existing version of the route Agent.\nIt validates the complete definition from that version or the Session according to definition_source,\nwithout a merge. Managed rejects caller-supplied id and agent_session_id and always generates the routing ID.\nManaged creation returns the Session with 201; Environment preparation and turns can proceed asynchronously.\nManaged repeatability is optional: send both Repeatability-Request-ID and Repeatability-First-Sent or neither.\nAn identical retained-ID retry returns the original result and resolved version; changed input conflicts.\nWithout the pair, deduplication is not guaranteed. Hosted behavior is unchanged.\nManaged requests use existing endpoint interact/action authorization and enforce creator isolation.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -12703,13 +12771,10 @@
             }
           },
           {
-            "name": "Idempotency-Key",
-            "in": "header",
-            "required": false,
-            "description": "Optional for Managed creation. An identical keyed retry returns the original result and resolved version; changed input conflicts. Without a key, deduplication is not guaranteed. Hosted behavior is unchanged.",
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/components/parameters/ManagedAgents.SessionRepeatabilityRequestHeaders.repeatabilityRequestId"
           },
           {
             "name": "api-version",
@@ -12725,6 +12790,15 @@
         "responses": {
           "201": {
             "description": "The existing 201 Session-create response with the Hosted or Managed body.",
+            "headers": {
+              "Repeatability-Result": {
+                "required": false,
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.RepeatabilityResult"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -13105,7 +13179,7 @@
       "post": {
         "operationId": "Agents_createSessionEvents",
         "summary": "Submit session events",
-        "description": "Submits client events to a Managed Session and returns ordered admission receipts, not completed work.\nA message starts a root turn when idle or steers the active root turn.\nCancellation targets the root turn active at acceptance; closing an event stream does not cancel it.\nUses existing endpoint interact/action authorization and service-side creator isolation for every event.",
+        "description": "Submits one client event in an events array to a Managed Session and returns admission receipts, not completed work.\nPrivate preview accepts exactly one event per request; multi-event batches are not supported.\nA message starts a root turn when idle or steers the active root turn.\nCancellation targets the root turn active at acceptance; closing an event stream does not cancel it.\nOptional repeatability requires both Repeatability-Request-ID and Repeatability-First-Sent.\nAn identical retained-ID retry returns the original receipts; a different body conflicts with 409.\nReuse the original UUID, first-sent timestamp, and body. Without the pair, deduplication is not guaranteed.\nRepeatability does not guarantee exactly-once external tool effects.\nUses existing endpoint interact/action authorization and service-side creator isolation for every event.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -13138,13 +13212,10 @@
             }
           },
           {
-            "name": "Idempotency-Key",
-            "in": "header",
-            "required": false,
-            "description": "Optional key scoped to caller, project, and this route. An identical keyed retry returns the\noriginal receipts; a different body under the same retained key conflicts with 409.\nNo retention duration or exactly-once external effects are implied. Without a key, deduplication\nis not guaranteed.",
-            "schema": {
-              "type": "string"
-            }
+            "$ref": "#/components/parameters/Azure.Core.RepeatabilityRequestHeaders.repeatabilityFirstSent"
+          },
+          {
+            "$ref": "#/components/parameters/ManagedAgents.SessionRepeatabilityRequestHeaders.repeatabilityRequestId"
           },
           {
             "name": "api-version",
@@ -13160,6 +13231,15 @@
         "responses": {
           "202": {
             "description": "The accepted event-submission response. This is not a long-running-operation polling resource.",
+            "headers": {
+              "Repeatability-Result": {
+                "required": false,
+                "description": "Indicates whether the repeatable request was accepted or rejected.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.RepeatabilityResult"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -13201,7 +13281,7 @@
               }
             }
           },
-          "description": "A nonempty batch of messages, cancellation, function results, or approval responses."
+          "description": "Exactly one message, cancellation, function result, or supported approval response in an events array."
         },
         "x-ms-foundry-meta": {
           "required_previews": [
@@ -41316,6 +41396,15 @@
         },
         "explode": false
       },
+      "ManagedAgents.SessionRepeatabilityRequestHeaders.repeatabilityRequestId": {
+        "name": "Repeatability-Request-ID",
+        "in": "header",
+        "required": false,
+        "description": "Client-generated UUID for one logical request. Reuse it with the original Repeatability-First-Sent and body on retries.",
+        "schema": {
+          "$ref": "#/components/schemas/Azure.Core.uuid"
+        }
+      },
       "UpdateToolboxRequest.name": {
         "name": "name",
         "in": "path",
@@ -46704,6 +46793,14 @@
           }
         ],
         "description": "Enum describing allowed operation states."
+      },
+      "Azure.Core.RepeatabilityResult": {
+        "type": "string",
+        "enum": [
+          "accepted",
+          "rejected"
+        ],
+        "description": "Repeatability Result header options"
       },
       "Azure.Core.eTag": {
         "type": "string",
@@ -57696,11 +57793,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "Service-generated opaque Session ID used unchanged as the existing session_id route parameter, regardless of any caller label."
-          },
-          "agent_session_id": {
-            "type": "string",
-            "description": "The caller's non-unique label, echoed when supplied at creation. Never use it to address the Session."
+            "description": "Service-generated opaque Session ID used unchanged as the existing session_id route parameter. Callers cannot select or reuse this ID at creation."
           },
           "agent_reference": {
             "$ref": "#/components/schemas/ManagedAgents.SessionAgentReference",
@@ -57811,7 +57904,7 @@
             "$ref": "#/components/schemas/ManagedAgents.SessionItemBase"
           }
         ],
-        "description": "An interagent message in saved history or item.added events. Sender and recipient are runtime agent IDs; this record has no status and is not an item.done output variant.",
+        "description": "An interagent message in saved history and item events. Sender and recipient are runtime agent IDs. The record has no call status and is not the root's final answer.",
         "examples": [
           {
             "type": "agent_message",
@@ -58614,10 +58707,6 @@
             "$ref": "#/components/schemas/VersionRefIndicator",
             "description": "Required exact version of the route Agent, including a session-source version when supplying an inline definition."
           },
-          "agent_session_id": {
-            "type": "string",
-            "description": "Optional caller label, echoed unchanged. It need not be unique and never selects the service-generated Session ID or acts as an idempotency key."
-          },
           "agent_definition": {
             "$ref": "#/components/schemas/ManagedAgents.Definition",
             "description": "Required for session-source versions and rejected for agent-source versions. No definition_source, partial override or merge is accepted here."
@@ -58638,7 +58727,7 @@
             "description": "Descriptive Session labels, not copied version metadata or permission grants."
           }
         },
-        "description": "Creates a Managed Session using an explicit version reference under the route Agent.",
+        "description": "Creates a Managed Session using an explicit version reference under the route Agent. The service generates the Session ID; caller-supplied id and agent_session_id are rejected.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "ManagedAgents=V1Preview"
@@ -58716,6 +58805,42 @@
             ],
             "minLength": 0,
             "description": "The reasoning effort requested for the spawned agent."
+          },
+          "subagent_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The created child, or null when creation was refused."
+          },
+          "agent_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The harness-defined child agent type, when known."
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The child name, when known."
+          },
+          "error": {
+            "description": "The harness-provided JSON error, or null when no error was reported."
           }
         },
         "allOf": [
@@ -58723,7 +58848,7 @@
             "$ref": "#/components/schemas/ManagedAgents.SessionItemBase"
           }
         ],
-        "description": "A harness-issued delegation call. agent_id identifies the requesting agent, not the newly created child; lifecycle events supply the child ID and parent relationship."
+        "description": "A background delegation call. agent_id identifies the requesting agent; subagent_id identifies the new child when available. Completing this call does not complete the child's work."
       },
       "ManagedAgents.SessionCreatedEvent": {
         "type": "object",
@@ -59331,6 +59456,7 @@
               "$ref": "#/components/schemas/ManagedAgents.SessionEventReceipt"
             },
             "minItems": 1,
+            "maxItems": 1,
             "description": "Ordered event receipts."
           }
         },
@@ -59754,7 +59880,7 @@
             "$ref": "#/components/schemas/ManagedAgents.SessionItemBase"
           }
         ],
-        "description": "Preserves the OpenAI interrupt_subagent_call history item, including optional provider fields."
+        "description": "Preserves the OpenAI interrupt_subagent_call history item. Not supported by the Copilot private-preview harness."
       },
       "ManagedAgents.SessionItem": {
         "type": "object",
@@ -59791,6 +59917,9 @@
           },
           {
             "$ref": "#/components/schemas/ManagedAgents.SessionCommandExecutionItem"
+          },
+          {
+            "$ref": "#/components/schemas/ManagedAgents.SessionSubagentCallItem"
           },
           {
             "$ref": "#/components/schemas/ManagedAgents.SessionCreateSubagentCallItem"
@@ -59837,6 +59966,7 @@
             "computer_use_approval_request_result": "#/components/schemas/ManagedAgents.SessionComputerUseApprovalResponseItem",
             "web_search_call": "#/components/schemas/ManagedAgents.SessionWebSearchCallItem",
             "command_execution": "#/components/schemas/ManagedAgents.SessionCommandExecutionItem",
+            "subagent_call": "#/components/schemas/ManagedAgents.SessionSubagentCallItem",
             "create_subagent_call": "#/components/schemas/ManagedAgents.SessionCreateSubagentCallItem",
             "send_subagent_input_call": "#/components/schemas/ManagedAgents.SessionSendSubagentInputCallItem",
             "resume_subagent_call": "#/components/schemas/ManagedAgents.SessionResumeSubagentCallItem",
@@ -59849,7 +59979,7 @@
             "mcp_approval_response": "#/components/schemas/ManagedAgents.SessionMcpApprovalResponseItem"
           }
         },
-        "description": "All saved OpenAI Session item variants plus Foundry tool and MCP approval records. Includes all six subagent coordination calls and history-only agent_message; item.turn_id identifies the containing turn, not the target child's turn.",
+        "description": "Saved Session items, including foreground delegation, provider-specific subagent coordination, and interagent messages. item.turn_id identifies the containing turn, not the target child's turn. Variant availability depends on the harness; Copilot private preview does not support resume or interrupt.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "ManagedAgents=V1Preview"
@@ -59979,8 +60109,8 @@
             "description": "The ID of the turn associated with the event, when applicable."
           },
           "item": {
-            "$ref": "#/components/schemas/ManagedAgents.SessionOutputItem",
-            "description": "The completed output item, without flattening its provider payload."
+            "$ref": "#/components/schemas/ManagedAgents.SessionItem",
+            "description": "The completed saved item, without flattening its provider payload or treating it as final root output."
           }
         },
         "allOf": [
@@ -59988,8 +60118,23 @@
             "$ref": "#/components/schemas/ManagedAgents.SessionEventBase"
           }
         ],
-        "description": "agent.session.turn.item.done, including completed subagent coordination calls. History-only agent_message records use item.added and saved history, not this output union.",
+        "description": "agent.session.turn.item.done for a completed saved item, including user input, function-call results, subagent calls, and interagent messages. This is not limited to assistant output.",
         "examples": [
+          {
+            "type": "agent.session.turn.item.done",
+            "event_id": "evt_child_message_done",
+            "session_id": "sess_team",
+            "turn_id": "turn_root",
+            "output_index": 1,
+            "item": {
+              "type": "agent_message",
+              "id": "item_child_message",
+              "turn_id": "turn_root",
+              "sender_agent_id": "subagent_1",
+              "recipient_agent_id": "provider_root",
+              "content": []
+            }
+          },
           {
             "type": "agent.session.turn.item.done",
             "event_id": "evt_delegate_1",
@@ -60700,6 +60845,42 @@
             ],
             "minLength": 0,
             "description": "The reasoning effort requested for the spawned agent."
+          },
+          "subagent_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The created child, or null when creation was refused."
+          },
+          "agent_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The harness-defined child agent type, when known."
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The child name, when known."
+          },
+          "error": {
+            "description": "The harness-provided JSON error, or null when no error was reported."
           }
         },
         "allOf": [
@@ -60845,6 +61026,9 @@
             "$ref": "#/components/schemas/ManagedAgents.SessionOutputCommandExecutionItem"
           },
           {
+            "$ref": "#/components/schemas/ManagedAgents.SessionOutputSubagentCallItem"
+          },
+          {
             "$ref": "#/components/schemas/ManagedAgents.SessionOutputCreateSubagentCallItem"
           },
           {
@@ -60883,6 +61067,7 @@
             "computer_use_approval_request": "#/components/schemas/ManagedAgents.SessionOutputComputerUseApprovalRequestItem",
             "web_search_call": "#/components/schemas/ManagedAgents.SessionOutputWebSearchCallItem",
             "command_execution": "#/components/schemas/ManagedAgents.SessionOutputCommandExecutionItem",
+            "subagent_call": "#/components/schemas/ManagedAgents.SessionOutputSubagentCallItem",
             "create_subagent_call": "#/components/schemas/ManagedAgents.SessionOutputCreateSubagentCallItem",
             "send_subagent_input_call": "#/components/schemas/ManagedAgents.SessionOutputSendSubagentInputCallItem",
             "resume_subagent_call": "#/components/schemas/ManagedAgents.SessionOutputResumeSubagentCallItem",
@@ -61230,8 +61415,8 @@
           "turn_id",
           "status",
           "sender_agent_id",
-          "recipient_agent_id",
-          "content"
+          "content",
+          "recipient_agent_id"
         ],
         "properties": {
           "type": {
@@ -61262,11 +61447,6 @@
             "minLength": 0,
             "description": "The ID of the agent sending the input."
           },
-          "recipient_agent_id": {
-            "type": "string",
-            "minLength": 0,
-            "description": "The ID of the agent receiving the input."
-          },
           "content": {
             "type": "array",
             "items": {
@@ -61275,6 +61455,20 @@
             "minItems": 0,
             "maxItems": 2000,
             "description": "The input sent to the receiving agent."
+          },
+          "recipient_agent_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The target child, or null when the call failed before resolving a recipient."
+          },
+          "error": {
+            "description": "The harness-provided JSON error, or null when no error was reported."
           }
         },
         "allOf": [
@@ -61283,6 +61477,87 @@
           }
         ],
         "description": "Preserves the send_subagent_input_call output item without accepting its history-only counterparts."
+      },
+      "ManagedAgents.SessionOutputSubagentCallItem": {
+        "type": "object",
+        "required": [
+          "type",
+          "id",
+          "turn_id",
+          "status",
+          "subagent_id",
+          "agent_type",
+          "name",
+          "description",
+          "prompt",
+          "output",
+          "error"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "subagent_call"
+            ],
+            "description": "The item discriminator."
+          },
+          "id": {
+            "type": "string",
+            "description": "The stable delegation item identifier."
+          },
+          "turn_id": {
+            "type": "string",
+            "description": "The turn that issued the delegation."
+          },
+          "status": {
+            "$ref": "#/components/schemas/OpenAI.FunctionCallStatusResource",
+            "description": "The delegation call state, independent of the parent turn's state."
+          },
+          "subagent_id": {
+            "type": "string",
+            "description": "The child executing this call."
+          },
+          "agent_type": {
+            "type": "string",
+            "description": "The harness-defined child agent type."
+          },
+          "name": {
+            "type": "string",
+            "description": "The child name recorded for this call."
+          },
+          "description": {
+            "type": "string",
+            "description": "The delegated task description."
+          },
+          "prompt": {
+            "type": "string",
+            "description": "The prompt sent to the child."
+          },
+          "output": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The child's output, or null before a result is available."
+          },
+          "error": {
+            "description": "The harness-provided JSON error, or null when no error was reported."
+          },
+          "usage": {
+            "$ref": "#/components/schemas/ManagedAgents.SessionSubagentUsage",
+            "description": "Informational child token usage, when reported."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ManagedAgents.SessionOutputItemBase"
+          }
+        ],
+        "description": "Preserves the foreground subagent_call output item."
       },
       "ManagedAgents.SessionOutputTextDeltaEvent": {
         "type": "object",
@@ -61557,6 +61832,9 @@
             "minItems": 0,
             "maxItems": 2000,
             "description": "The IDs of the agents to wait for."
+          },
+          "error": {
+            "description": "The harness-provided JSON error, or null when no error was reported."
           }
         },
         "allOf": [
@@ -62055,7 +62333,7 @@
             "$ref": "#/components/schemas/ManagedAgents.SessionItemBase"
           }
         ],
-        "description": "Preserves the OpenAI resume_subagent_call history item, including optional provider fields."
+        "description": "Preserves the OpenAI resume_subagent_call history item. Not supported by the Copilot private-preview harness."
       },
       "ManagedAgents.SessionSendSubagentInputCallItem": {
         "type": "object",
@@ -62065,8 +62343,8 @@
           "turn_id",
           "status",
           "sender_agent_id",
-          "recipient_agent_id",
-          "content"
+          "content",
+          "recipient_agent_id"
         ],
         "properties": {
           "type": {
@@ -62097,11 +62375,6 @@
             "minLength": 0,
             "description": "The ID of the agent sending the input."
           },
-          "recipient_agent_id": {
-            "type": "string",
-            "minLength": 0,
-            "description": "The ID of the agent receiving the input."
-          },
           "content": {
             "type": "array",
             "items": {
@@ -62110,6 +62383,20 @@
             "minItems": 0,
             "maxItems": 2000,
             "description": "The input sent to the receiving agent."
+          },
+          "recipient_agent_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The target child, or null when the call failed before resolving a recipient."
+          },
+          "error": {
+            "description": "The harness-provided JSON error, or null when no error was reported."
           }
         },
         "allOf": [
@@ -62117,7 +62404,22 @@
             "$ref": "#/components/schemas/ManagedAgents.SessionItemBase"
           }
         ],
-        "description": "Preserves the OpenAI send_subagent_input_call history item, including optional provider fields."
+        "description": "Preserves the OpenAI send_subagent_input_call history item, including optional provider fields.",
+        "examples": [
+          {
+            "type": "send_subagent_input_call",
+            "id": "item_failed_send",
+            "turn_id": "turn_root",
+            "sender_agent_id": "provider_root",
+            "recipient_agent_id": null,
+            "content": [],
+            "status": "failed",
+            "error": {
+              "code": "invalid_recipient",
+              "message": "The target subagent could not be resolved."
+            }
+          }
+        ]
       },
       "ManagedAgents.SessionSourceDefinition": {
         "type": "object",
@@ -62199,6 +62501,105 @@
         ],
         "description": "agent.session.subagent.active. Active means the child remains available, including between turns; it is not a running-turn status. Dedicated child inspection APIs remain deferred."
       },
+      "ManagedAgents.SessionSubagentCallItem": {
+        "type": "object",
+        "required": [
+          "type",
+          "id",
+          "turn_id",
+          "status",
+          "subagent_id",
+          "agent_type",
+          "name",
+          "description",
+          "prompt",
+          "output",
+          "error"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "subagent_call"
+            ],
+            "description": "The item discriminator."
+          },
+          "id": {
+            "type": "string",
+            "description": "The stable delegation item identifier."
+          },
+          "turn_id": {
+            "type": "string",
+            "description": "The turn that issued the delegation."
+          },
+          "status": {
+            "$ref": "#/components/schemas/OpenAI.FunctionCallStatusResource",
+            "description": "The delegation call state, independent of the parent turn's state."
+          },
+          "subagent_id": {
+            "type": "string",
+            "description": "The child executing this call."
+          },
+          "agent_type": {
+            "type": "string",
+            "description": "The harness-defined child agent type."
+          },
+          "name": {
+            "type": "string",
+            "description": "The child name recorded for this call."
+          },
+          "description": {
+            "type": "string",
+            "description": "The delegated task description."
+          },
+          "prompt": {
+            "type": "string",
+            "description": "The prompt sent to the child."
+          },
+          "output": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The child's output, or null before a result is available."
+          },
+          "error": {
+            "description": "The harness-provided JSON error, or null when no error was reported."
+          },
+          "usage": {
+            "$ref": "#/components/schemas/ManagedAgents.SessionSubagentUsage",
+            "description": "Informational child token usage, when reported."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ManagedAgents.SessionItemBase"
+          }
+        ],
+        "description": "A foreground delegation call that completes when its child returns. Unlike create_subagent_call, it carries the child's output.",
+        "examples": [
+          {
+            "type": "subagent_call",
+            "id": "item_foreground",
+            "turn_id": "turn_root",
+            "status": "completed",
+            "subagent_id": "subagent_1",
+            "agent_type": "explore",
+            "name": "release-notes",
+            "description": "Compare the supplied release notes.",
+            "prompt": "Find the changes in the supplied notes.",
+            "output": "Retry handling improved.",
+            "error": null,
+            "usage": {
+              "total_tokens": 42
+            }
+          }
+        ]
+      },
       "ManagedAgents.SessionSubagentClosedEvent": {
         "type": "object",
         "required": [
@@ -62273,6 +62674,21 @@
           }
         ]
       },
+      "ManagedAgents.SessionSubagentUsage": {
+        "type": "object",
+        "required": [
+          "total_tokens"
+        ],
+        "properties": {
+          "total_tokens": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 0,
+            "description": "Total tokens reported for the child, not an additional root-turn charge."
+          }
+        },
+        "description": "Informational token usage reported for a foreground subagent call."
+      },
       "ManagedAgents.SessionSubmitEventsContent": {
         "type": "object",
         "required": [
@@ -62285,10 +62701,11 @@
               "$ref": "#/components/schemas/ManagedAgents.SessionClientEvent"
             },
             "minItems": 1,
-            "description": "Events submitted in request order."
+            "maxItems": 1,
+            "description": "The single event to submit."
           }
         },
-        "description": "A nonempty batch of client events. Cancellation, results, and approvals use the same creator isolation as messages."
+        "description": "An events array containing exactly one client event in private preview. Cancellation, results, and supported approvals use the same creator isolation as messages. Multi-event batching is deferred."
       },
       "ManagedAgents.SessionTokenUsage": {
         "type": "object",
@@ -62917,6 +63334,9 @@
             "minItems": 0,
             "maxItems": 2000,
             "description": "The IDs of the agents to wait for."
+          },
+          "error": {
+            "description": "The harness-provided JSON error, or null when no error was reported."
           }
         },
         "allOf": [

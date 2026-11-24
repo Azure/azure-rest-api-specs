@@ -302,7 +302,7 @@ namespace ManagedAgents {
 
   /** Supported private-preview platform Environment allocation modes. */
   union PlatformEnvironmentMode {
-    /** Prepare the platform Environment for the Session. */
+    /** Start preparing the platform Environment at Session creation. Creation success does not guarantee that the Environment is ready. */
     always: "always",
 
     /** Prepare the platform Environment on demand. */
@@ -365,14 +365,23 @@ namespace ManagedAgents {
     SessionInputMessage[],
   }
 
-  /** Creates a Managed Session using an explicit version reference under the route Agent. */
+  /** Optional repeatability headers for Managed Session creation and event submission. Supply both headers or neither. */
+  model SessionRepeatabilityRequestHeaders {
+    ...OmitProperties<
+      Azure.Core.RepeatabilityRequestHeaders,
+      "repeatabilityRequestId"
+    >;
+
+    /** Client-generated UUID for one logical request. Reuse it with the original Repeatability-First-Sent and body on retries. */
+    @header("Repeatability-Request-ID")
+    repeatabilityRequestId?: Azure.Core.uuid;
+  }
+
+  /** Creates a Managed Session using an explicit version reference under the route Agent. The service generates the Session ID; caller-supplied id and agent_session_id are rejected. */
   @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
   model SessionCreateConfig {
     /** Required exact version of the route Agent, including a session-source version when supplying an inline definition. */
     version_indicator: VersionRefIndicator;
-
-    /** Optional caller label, echoed unchanged. It need not be unique and never selects the service-generated Session ID or acts as an idempotency key. */
-    agent_session_id?: string;
 
     /** Required for session-source versions and rejected for agent-source versions. No definition_source, partial override or merge is accepted here. */
     agent_definition?: Definition;
@@ -434,11 +443,8 @@ namespace ManagedAgents {
   /** A Managed Session, returned by creation even when Environment preparation or a turn is still in progress. */
   @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
   model Session {
-    /** Service-generated opaque Session ID used unchanged as the existing session_id route parameter, regardless of any caller label. */
+    /** Service-generated opaque Session ID used unchanged as the existing session_id route parameter. Callers cannot select or reuse this ID at creation. */
     id: string;
-
-    /** The caller's non-unique label, echoed when supplied at creation. Never use it to address the Session. */
-    agent_session_id?: string;
 
     /** The owning Agent and resolved requested version. This is not a request selector. */
     agent_reference: SessionAgentReference;
@@ -500,6 +506,7 @@ union AgentSessionCreateContent {
 /** The existing 201 Session-create response with the Hosted or Managed body. */
 model CreatedAgentSession {
   ...CreatedResponse;
+  ...Azure.Core.RepeatabilityResponseHeaders;
 
   /** The created Session, not a provisioning job. */
   @body body: AgentSession;

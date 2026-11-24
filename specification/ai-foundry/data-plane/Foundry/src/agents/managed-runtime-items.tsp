@@ -26,7 +26,7 @@ model SessionWebSearchActionBase {
   type: string;
 }
 
-/** All saved OpenAI Session item variants plus Foundry tool and MCP approval records. Includes all six subagent coordination calls and history-only agent_message; item.turn_id identifies the containing turn, not the target child's turn. */
+/** Saved Session items, including foreground delegation, provider-specific subagent coordination, and interagent messages. item.turn_id identifies the containing turn, not the target child's turn. Variant availability depends on the harness; Copilot private preview does not support resume or interrupt. */
 @discriminated(#{ envelope: "none", discriminatorPropertyName: "type" })
 @extension("x-ms-foundry-meta", ManagedAgentsRequiredPreviews)
 union SessionItem extends SessionItemBase {
@@ -41,6 +41,7 @@ union SessionItem extends SessionItemBase {
   computer_use_approval_request_result: SessionComputerUseApprovalResponseItem,
   web_search_call: SessionWebSearchCallItem,
   command_execution: SessionCommandExecutionItem,
+  subagent_call: SessionSubagentCallItem,
   create_subagent_call: SessionCreateSubagentCallItem,
   send_subagent_input_call: SessionSendSubagentInputCallItem,
   resume_subagent_call: SessionResumeSubagentCallItem,
@@ -104,7 +105,7 @@ model SessionFunctionCallOutputItem extends SessionItemBase {
   >>;
 }
 
-/** An interagent message in saved history or item.added events. Sender and recipient are runtime agent IDs; this record has no status and is not an item.done output variant. */
+/** An interagent message in saved history and item events. Sender and recipient are runtime agent IDs. The record has no call status and is not the root's final answer. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 @example(#{
   type: "agent_message",
@@ -183,7 +184,68 @@ model SessionCommandExecutionItem extends SessionItemBase {
   >>;
 }
 
-/** A harness-issued delegation call. agent_id identifies the requesting agent, not the newly created child; lifecycle events supply the child ID and parent relationship. */
+/** Informational token usage reported for a foreground subagent call. */
+model SessionSubagentUsage {
+  /** Total tokens reported for the child, not an additional root-turn charge. */
+  @minValue(0)
+  total_tokens: int64;
+}
+
+/** A foreground delegation call that completes when its child returns. Unlike create_subagent_call, it carries the child's output. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
+@example(#{
+  type: "subagent_call",
+  id: "item_foreground",
+  turn_id: "turn_root",
+  status: OpenAI.FunctionCallStatusResource.completed,
+  subagent_id: "subagent_1",
+  agent_type: "explore",
+  name: "release-notes",
+  description: "Compare the supplied release notes.",
+  prompt: "Find the changes in the supplied notes.",
+  output: "Retry handling improved.",
+  error: null,
+  usage: #{ total_tokens: 42 },
+})
+model SessionSubagentCallItem extends SessionItemBase {
+  /** The item discriminator. */
+  type: "subagent_call";
+
+  /** The stable delegation item identifier. */
+  id: string;
+
+  /** The turn that issued the delegation. */
+  turn_id: string;
+
+  /** The delegation call state, independent of the parent turn's state. */
+  status: OpenAI.FunctionCallStatusResource;
+
+  /** The child executing this call. */
+  subagent_id: string;
+
+  /** The harness-defined child agent type. */
+  agent_type: string;
+
+  /** The child name recorded for this call. */
+  name: string;
+
+  /** The delegated task description. */
+  description: string;
+
+  /** The prompt sent to the child. */
+  prompt: string;
+
+  /** The child's output, or null before a result is available. */
+  output: string | null;
+
+  /** The harness-provided JSON error, or null when no error was reported. */
+  error: unknown;
+
+  /** Informational child token usage, when reported. */
+  usage?: SessionSubagentUsage;
+}
+
+/** A background delegation call. agent_id identifies the requesting agent; subagent_id identifies the new child when available. Completing this call does not complete the child's work. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model SessionCreateSubagentCallItem extends SessionItemBase {
   ...OmitProperties<
@@ -194,15 +256,49 @@ model SessionCreateSubagentCallItem extends SessionItemBase {
     OpenAI.CreateSubagentCallItemResource,
     "model" | "reasoning_effort"
   >>;
+
+  /** The created child, or null when creation was refused. */
+  subagent_id?: string | null;
+
+  /** The harness-defined child agent type, when known. */
+  agent_type?: string | null;
+
+  /** The child name, when known. */
+  name?: string | null;
+
+  /** The harness-provided JSON error, or null when no error was reported. */
+  error?: unknown;
 }
 
 /** Preserves the OpenAI send_subagent_input_call history item, including optional provider fields. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
+@example(#{
+  type: "send_subagent_input_call",
+  id: "item_failed_send",
+  turn_id: "turn_root",
+  sender_agent_id: "provider_root",
+  recipient_agent_id: null,
+  content: #[],
+  status: OpenAI.FunctionCallStatusResource.failed,
+  error: #{
+    code: "invalid_recipient",
+    message: "The target subagent could not be resolved.",
+  },
+})
 model SessionSendSubagentInputCallItem extends SessionItemBase {
-  ...OpenAI.SendSubagentInputCallItemResource;
+  ...OmitProperties<
+    OpenAI.SendSubagentInputCallItemResource,
+    "recipient_agent_id"
+  >;
+
+  /** The target child, or null when the call failed before resolving a recipient. */
+  recipient_agent_id: string | null;
+
+  /** The harness-provided JSON error, or null when no error was reported. */
+  error?: unknown;
 }
 
-/** Preserves the OpenAI resume_subagent_call history item, including optional provider fields. */
+/** Preserves the OpenAI resume_subagent_call history item. Not supported by the Copilot private-preview harness. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model SessionResumeSubagentCallItem extends SessionItemBase {
   ...OpenAI.ResumeSubagentCallItemResource;
@@ -212,9 +308,12 @@ model SessionResumeSubagentCallItem extends SessionItemBase {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model SessionWaitForSubagentsCallItem extends SessionItemBase {
   ...OpenAI.WaitForSubagentsCallItemResource;
+
+  /** The harness-provided JSON error, or null when no error was reported. */
+  error?: unknown;
 }
 
-/** Preserves the OpenAI interrupt_subagent_call history item, including optional provider fields. */
+/** Preserves the OpenAI interrupt_subagent_call history item. Not supported by the Copilot private-preview harness. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model SessionInterruptSubagentCallItem extends SessionItemBase {
   ...OpenAI.InterruptSubagentCallItemResource;
@@ -473,6 +572,7 @@ union SessionOutputItem extends SessionOutputItemBase {
   computer_use_approval_request: SessionOutputComputerUseApprovalRequestItem,
   web_search_call: SessionOutputWebSearchCallItem,
   command_execution: SessionOutputCommandExecutionItem,
+  subagent_call: SessionOutputSubagentCallItem,
   create_subagent_call: SessionOutputCreateSubagentCallItem,
   send_subagent_input_call: SessionOutputSendSubagentInputCallItem,
   resume_subagent_call: SessionOutputResumeSubagentCallItem,
@@ -539,6 +639,12 @@ model SessionOutputWebSearchCallItem extends SessionOutputItemBase {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model SessionOutputCommandExecutionItem extends SessionOutputItemBase {
   ...SessionCommandExecutionItem;
+}
+
+/** Preserves the foreground subagent_call output item. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
+model SessionOutputSubagentCallItem extends SessionOutputItemBase {
+  ...SessionSubagentCallItem;
 }
 
 /** Preserves the create_subagent_call output item without accepting its history-only counterparts. */

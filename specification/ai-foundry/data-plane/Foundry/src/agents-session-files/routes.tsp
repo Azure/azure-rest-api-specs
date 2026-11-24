@@ -1,16 +1,23 @@
 import "../common/models.tsp";
 import "../common/servicepatterns.tsp";
+import "../agents/managed-models.tsp";
 import "./models.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
 /**
- * Session-scoped file operations for hosted agent sandboxes.
+ * Session-scoped file operations shared by Hosted and Managed agent sandboxes.
  *
  * These endpoints enable uploading, downloading, listing, and deleting
- * files within a live ADC sandbox session. All file content is streamed
+ * files within a Session workspace. Hosted retains its existing ADC sandbox behavior.
+ * Managed uses the service-generated Session ID, the ManagedAgents preview opt-in,
+ * existing endpoint interact/action authorization, and Session creator isolation.
+ * An available Managed Environment is required; these operations do not create a
+ * standalone Environment or Vault, and POST events does not upload file bytes.
+ * All file content is streamed
  * end-to-end (no buffering in Agents service memory).
  *
  * Sessions are scoped to agent endpoints (not individual versions), allowing
@@ -27,8 +34,10 @@ interface AgentSessionFiles {
   @summary("Upload a session file")
   @put
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files/content")
+  @extension("x-ms-foundry-meta", ManagedAgentsConditionalPreviews)
   uploadSessionFile is FoundryDataPlaneOperation<
     {
+      ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.managed_agents_v1_preview>;
       ...UploadSessionFileParams;
     },
     ResourceCreatedResponse<SessionFileWriteResponse>
@@ -41,8 +50,10 @@ interface AgentSessionFiles {
   @summary("Download a session file")
   @get
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files/content")
+  @extension("x-ms-foundry-meta", ManagedAgentsConditionalPreviews)
   downloadSessionFile is FoundryDataPlaneOperation<
     {
+      ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.managed_agents_v1_preview>;
       ...DownloadSessionFileParams;
     },
     bytes
@@ -56,8 +67,10 @@ interface AgentSessionFiles {
   @get
   @list
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files")
+  @extension("x-ms-foundry-meta", ManagedAgentsConditionalPreviews)
   listSessionFiles is FoundryDataPlaneOperation<
     {
+      ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.managed_agents_v1_preview>;
       ...ListSessionFilesParams;
       ...CommonPageQueryParameters;
     },
@@ -71,8 +84,10 @@ interface AgentSessionFiles {
   @summary("Delete a session file")
   @delete
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files")
+  @extension("x-ms-foundry-meta", ManagedAgentsConditionalPreviews)
   deleteSessionFile is FoundryDataPlaneOperation<
     {
+      ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.managed_agents_v1_preview>;
       ...DeleteSessionFileParams;
     },
     void

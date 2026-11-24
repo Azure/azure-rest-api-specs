@@ -531,8 +531,11 @@ interface Agents {
    * Hosted keeps its existing version_indicator request and response.
    * Managed requires an explicit version_indicator for an existing version of the route Agent.
    * It validates the complete definition from that version or the Session according to definition_source,
-   * without a merge. Managed agent_session_id is an optional echoed label, not the generated routing ID.
+   * without a merge. Managed rejects caller-supplied id and agent_session_id and always generates the routing ID.
    * Managed creation returns the Session with 201; Environment preparation and turns can proceed asynchronously.
+   * Managed repeatability is optional: send both Repeatability-Request-ID and Repeatability-First-Sent or neither.
+   * An identical retained-ID retry returns the original result and resolved version; changed input conflicts.
+   * Without the pair, deduplication is not guaranteed. Hosted behavior is unchanged.
    * Managed requests use existing endpoint interact/action authorization and enforce creator isolation.
    */
   @summary("Create a session")
@@ -547,9 +550,7 @@ interface Agents {
       /** The name of the agent to create a session for. */
       @path("name") agent_name: string;
 
-      /** Optional for Managed creation. An identical keyed retry returns the original result and resolved version; changed input conflicts. Without a key, deduplication is not guaranteed. Hosted behavior is unchanged. */
-      @header("Idempotency-Key")
-      idempotency_key?: string;
+      ...ManagedAgents.SessionRepeatabilityRequestHeaders;
 
       /** The owning Agent's definition kind selects Hosted or Managed validation, not a new Session-body discriminator. */
       @body body: AgentSessionCreateContent;
@@ -655,9 +656,14 @@ interface Agents {
   >;
 
   /**
-   * Submits client events to a Managed Session and returns ordered admission receipts, not completed work.
+   * Submits one client event in an events array to a Managed Session and returns admission receipts, not completed work.
+   * Private preview accepts exactly one event per request; multi-event batches are not supported.
    * A message starts a root turn when idle or steers the active root turn.
    * Cancellation targets the root turn active at acceptance; closing an event stream does not cancel it.
+   * Optional repeatability requires both Repeatability-Request-ID and Repeatability-First-Sent.
+   * An identical retained-ID retry returns the original receipts; a different body conflicts with 409.
+   * Reuse the original UUID, first-sent timestamp, and body. Without the pair, deduplication is not guaranteed.
+   * Repeatability does not guarantee exactly-once external tool effects.
    * Uses existing endpoint interact/action authorization and service-side creator isolation for every event.
    */
   @summary("Submit session events")
@@ -674,16 +680,9 @@ interface Agents {
       /** The opaque Session identifier. */
       @path("session_name") session_id: string;
 
-      /**
-       * Optional key scoped to caller, project, and this route. An identical keyed retry returns the
-       * original receipts; a different body under the same retained key conflicts with 409.
-       * No retention duration or exactly-once external effects are implied. Without a key, deduplication
-       * is not guaranteed.
-       */
-      @header("Idempotency-Key")
-      idempotency_key?: string;
+      ...ManagedAgents.SessionRepeatabilityRequestHeaders;
 
-      /** A nonempty batch of messages, cancellation, function results, or approval responses. */
+      /** Exactly one message, cancellation, function result, or supported approval response in an events array. */
       @body body: ManagedAgents.SessionSubmitEventsContent;
     },
     ManagedAgents.SessionEventsAccepted

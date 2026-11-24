@@ -281,10 +281,11 @@ model SessionMcpApprovalInputEvent extends SessionClientEventBase {
   reason?: string;
 }
 
-/** A nonempty batch of client events. Cancellation, results, and approvals use the same creator isolation as messages. */
+/** An events array containing exactly one client event in private preview. Cancellation, results, and supported approvals use the same creator isolation as messages. Multi-event batching is deferred. */
 model SessionSubmitEventsContent {
-  /** Events submitted in request order. */
+  /** The single event to submit. */
   @minItems(1)
+  @maxItems(1)
   events: SessionClientEvent[];
 }
 
@@ -310,12 +311,14 @@ model SessionEventReceipt {
 model SessionEventReceipts {
   /** Ordered event receipts. */
   @minItems(1)
+  @maxItems(1)
   receipts: SessionEventReceipt[];
 }
 
 /** The accepted event-submission response. This is not a long-running-operation polling resource. */
 model SessionEventsAccepted {
   ...AcceptedResponse;
+  ...Azure.Core.RepeatabilityResponseHeaders;
 
   /** Admission receipts for the submitted events. */
   @body body: SessionEventReceipts;
@@ -514,7 +517,7 @@ model SessionItemAddedEvent extends SessionEventBase {
   item: SessionItem;
 }
 
-/** agent.session.turn.item.done, including completed subagent coordination calls. History-only agent_message records use item.added and saved history, not this output union. */
+/** agent.session.turn.item.done for a completed saved item, including user input, function-call results, subagent calls, and interagent messages. This is not limited to assistant output. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 @example(#{
   type: "agent.session.turn.item.done",
@@ -533,6 +536,21 @@ model SessionItemAddedEvent extends SessionEventBase {
     reasoning_effort: null,
   },
 })
+@example(#{
+  type: "agent.session.turn.item.done",
+  event_id: "evt_child_message_done",
+  session_id: "sess_team",
+  turn_id: "turn_root",
+  output_index: 1,
+  item: #{
+    type: "agent_message",
+    id: "item_child_message",
+    turn_id: "turn_root",
+    sender_agent_id: "subagent_1",
+    recipient_agent_id: "provider_root",
+    content: #[],
+  },
+})
 model SessionItemDoneEvent extends SessionEventBase {
   ...OmitProperties<
     OpenAI.SessionEventAgentSessionTurnItemDone,
@@ -543,8 +561,8 @@ model SessionItemDoneEvent extends SessionEventBase {
     "turn_id"
   >>;
 
-  /** The completed output item, without flattening its provider payload. */
-  item: SessionOutputItem;
+  /** The completed saved item, without flattening its provider payload or treating it as final root output. */
+  item: SessionItem;
 }
 
 /** agent.session.turn.content_part.added. */
