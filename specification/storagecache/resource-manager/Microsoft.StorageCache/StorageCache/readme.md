@@ -38,6 +38,19 @@ These settings apply only when `--tag=package-2027-01-01` is specified on the co
 input-file:
   - stable/2027-01-01/openapi.json
 suppressions:
+  - code: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    where:
+      - $.definitions.AmlFilesystemProperties.properties.provisioningState
+      - $.definitions.AutoExportJobProperties.properties.provisioningState
+      - $.definitions.AutoImportJobProperties.properties.provisioningState
+      - $.definitions.AutoReleaseJobProperties.properties.provisioningState
+      - $.definitions.CacheProperties.properties.provisioningState
+      - $.definitions.ExpansionJobProperties.properties.provisioningState
+      - $.definitions.ImportJobProperties.properties.provisioningState
+      - $.definitions.RebalanceJobProperties.properties.provisioningState
+      - $.definitions.StorageTargetProperties.properties.provisioningState
+    reason: These properties are authored read-only in TypeSpec, but OpenAPI 2.0 resolution drops readOnly beside $ref. The documented use-read-only-status-schema emitter option changes inherited status schemas from readOnly false to true between 2026-08-01 and 2027-01-01, triggering cross-version ReadonlyPropertyChanged breaking changes, so the suppression is scoped to the exact affected properties.
   - code: PostResponseCodes
     from: openapi.json
     where:
