@@ -19,13 +19,10 @@ parameters:
 
 variables:
   - template: /eng/pipelines/templates/variables/image.yml
-  - group: AzSDK_Eval_Variable_group
-  - name: TypeSpecAuthorEvalExtraArgs
-    value: "--tag mode=no-skill --skill-dir /tmp/no-skills"
+  - name: TypeSpecAuthorEvalMode
+    value: no-skill
   - name: AZSDK_EVAL_MCP_KIND
     value: ${{ parameters.McpKind }}
-  - name: TypeSpecAuthorEvalRuns
-    value: ${{ parameters.Runs }}
 
 extends:
   template: /eng/common/pipelines/templates/stages/archetype-eval.yml
@@ -35,14 +32,17 @@ extends:
       - "evals/*.eval.yaml"
     mcpSetupTemplate: /eng/pipelines/templates/steps/eval-mcp-setup.yml
     TestType: ${{ parameters.McpKind }}
-    evalInvokeTemplate: /.github/skills/azure-typespec-author/evaluate/pipeline/typespec-author-noskill-eval-invoke.yml
+    vallyArguments:
+      - --tag
+      - mode=no-skill
+      - --runs
+      - ${{ format('{0}', parameters.Runs) }}
     UseAzSdkAuthentication: ${{ eq(parameters.McpKind, 'live') }}
+    azureSubscription: azuresdkqabot-dev
     preEvalTemplate: /.github/skills/azure-typespec-author/evaluate/pipeline/typespec-author-preeval.yml
     failOnFailedTests: false
-    # Keep timeout scaling aligned with the with-skill benchmark.
+    # Keep each shard below the installation token's one-hour lifetime.
     ${{ if eq(parameters.Runs, 1) }}:
       shardTimeoutInMinutes: 50
-    ${{ elseif eq(parameters.Runs, 2) }}:
-      shardTimeoutInMinutes: 80
     ${{ else }}:
-      shardTimeoutInMinutes: 120
+      shardTimeoutInMinutes: 55
