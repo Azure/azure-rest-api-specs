@@ -38,44 +38,87 @@ These settings apply only when `--tag=package-2027-01-01` is specified on the co
 input-file:
   - stable/2027-01-01/openapi.json
 suppressions:
-  - code: ProvisioningStateMustBeReadOnly
-    from: openapi.json
-    reason: provisioningState is authored readOnly in TypeSpec (@visibility(Lifecycle.Read)) and emitted as { $ref, readOnly true }; the rule evaluates the resolved OpenAPI 2.0 document where a readOnly sibling of a $ref is dropped during resolution — a known TypeSpec/OpenAPI 2.0 limitation (see https://github.com/Azure/azure-openapi-validator/issues/637) confirmed by ARM review. The emitter limitation was not introduced by the AutoReleaseJob resource type; the same generated shape exists in the approved GA 2026-01-01 resources.
-  - code: LatestVersionOfCommonTypesMustBeUsed
-    from: openapi.json
-    reason: The StorageCache spec is authored against common-types v3 across every shipped version; upgrading common-types would regenerate and break the already-released GA specs. Pre-existing across all versions and surfaced only because a newer openapi-validator was pulled in via a main-branch merge; not introduced by the AutoReleaseJob resource type.
   - code: PostResponseCodes
     from: openapi.json
+    where:
+      - $.paths['/subscriptions/{subscriptionId}/providers/Microsoft.StorageCache/checkAmlFSSubnets'].post
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/archive'].post
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/cancelArchive'].post
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/debugInfo'].post
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/flush'].post
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/spaceAllocation'].post
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/start'].post
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/startPrimingJob'].post
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/stop'].post
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/dnsRefresh'].post
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/flush'].post
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/invalidate'].post
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/restoreDefaults'].post
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/resume'].post
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/suspend'].post
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/upgrade'].post
     reason: LRO POST response-code shape on pre-existing operations (the deprecated caches resource) emitted by shared definitions; present in shipped versions and surfaced only by a newer openapi-validator. Not introduced by the AutoReleaseJob resource type.
   - code: PutResponseCodes
     from: openapi.json
+    where:
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}'].put
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}'].put
     reason: LRO PUT response-code shape on pre-existing operations emitted by shared definitions; present in shipped versions and surfaced only by a newer openapi-validator. Not introduced by the AutoReleaseJob resource type.
   - code: DeleteResponseCodes
     from: openapi.json
+    where:
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}'].delete
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}'].delete
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}'].delete
     reason: LRO DELETE response-code shape on pre-existing operations emitted by shared definitions; present in shipped versions and surfaced only by a newer openapi-validator. Not introduced by the AutoReleaseJob resource type.
   - code: LroErrorContent
     from: openapi.json
+    where:
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}'].delete.responses.default.schema.$ref
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}'].patch.responses.default.schema.$ref
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}'].put.responses.default.schema.$ref
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}'].delete.responses.default.schema.$ref
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}'].patch.responses.default.schema.$ref
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}'].put.responses.default.schema.$ref
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/debugInfo'].post.responses.default.schema.$ref
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/flush'].post.responses.default.schema.$ref
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/pausePrimingJob'].post.responses.default.schema.$ref
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/resumePrimingJob'].post.responses.default.schema.$ref
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/spaceAllocation'].post.responses.default.schema.$ref
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/start'].post.responses.default.schema.$ref
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/startPrimingJob'].post.responses.default.schema.$ref
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/stop'].post.responses.default.schema.$ref
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/stopPrimingJob'].post.responses.default.schema.$ref
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}'].delete.responses.default.schema.$ref
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}'].put.responses.default.schema.$ref
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/dnsRefresh'].post.responses.default.schema.$ref
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/flush'].post.responses.default.schema.$ref
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/invalidate'].post.responses.default.schema.$ref
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/restoreDefaults'].post.responses.default.schema.$ref
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/resume'].post.responses.default.schema.$ref
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}/suspend'].post.responses.default.schema.$ref
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/upgrade'].post.responses.default.schema.$ref
     reason: LRO error responses use the pre-existing common-types v3 error schema shared across every StorageCache version; surfaced only by a newer openapi-validator and not introduced by the AutoReleaseJob resource type.
-  - code: EnumInsteadOfBoolean
-    from: openapi.json
-    reason: Boolean properties on pre-existing inherited definitions shared across shipped versions; surfaced only by a newer openapi-validator and not introduced by the AutoReleaseJob resource type.
-  - code: OperationIdNounConflictingModelNames
-    from: openapi.json
-    reason: Operation-id noun matches a pre-existing model name on inherited operations; present in shipped versions and surfaced only by a newer openapi-validator. Not introduced by the AutoReleaseJob resource type.
   - code: AvoidAdditionalProperties
     from: openapi.json
+    where:
+      - $.definitions.AscOperationProperties.properties.output
+      - $.definitions.UnknownTarget.properties.attributes
     reason: additionalProperties on pre-existing inherited definitions shared across shipped versions; surfaced only by a newer openapi-validator and not introduced by the AutoReleaseJob resource type.
-  - code: LocationMustHaveXmsMutability
-    from: openapi.json
-    reason: location property x-ms-mutability on pre-existing tracked resources shared across shipped versions; surfaced only by a newer openapi-validator and not introduced by the AutoReleaseJob resource type.
   - code: GuidUsage
     from: openapi.json
+    where:
+      - $.definitions.AmlFilesystemProperties.properties.clusterUuid.format
     reason: GUID-typed property on pre-existing inherited definitions; present in shipped versions and surfaced only by a newer openapi-validator. Not introduced by the AutoReleaseJob resource type.
   - code: ParametersSchemaAsTypeObject
     from: openapi.json
+    where:
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/spaceAllocation'].post.parameters[4].schema.type
     reason: Object-typed parameter schema on pre-existing inherited operations; present in shipped versions and surfaced only by a newer openapi-validator. Not introduced by the AutoReleaseJob resource type.
   - code: RequestSchemaForTrackedResourcesMustHaveTags
     from: openapi.json
+    where:
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/storageTargets/{storageTargetName}'].put
     reason: Tracked-resource request schema tags on pre-existing resources shared across shipped versions; surfaced only by a newer openapi-validator and not introduced by the AutoReleaseJob resource type.
 ```
 
