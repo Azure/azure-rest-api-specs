@@ -4891,13 +4891,6 @@ op replaceprivateDnsZoneGroupsList(
   CommonTypes.ProxyResource,
   "java"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released Java SDK's capability resource base."
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  Microsoft.Network.VirtualNetworkApplianceCapability,
-  Azure.ResourceManager.ProxyResource<Microsoft.Network.VirtualNetworkApplianceCapabilityProperties>,
-  "java"
-);
-
 // C# customizations for Azure.ResourceManager.Network MPG migration.
 // C# naming mitigations for brownfield Network acronyms and shared model names.
 @@clientName(
