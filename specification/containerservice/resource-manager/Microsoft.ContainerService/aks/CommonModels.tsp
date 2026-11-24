@@ -1741,9 +1741,8 @@ union NodeImageType {
 }
 
 /** Global AKS-managed SDP validation progress and outcome for a node image. */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "The API contract restricts global SDP validation status to exactly three values."
 @added(Versions.v2026_09_02_preview)
-enum NodeImageGlobalSdpValidationStatus {
+union NodeImageGlobalSdpValidationStatus {
   /** The corresponding AgentBakerService release is still rolling out; the globally available image has not yet been validated in every region. */
   InProgress: "InProgress",
 
@@ -1752,6 +1751,9 @@ enum NodeImageGlobalSdpValidationStatus {
 
   /** The corresponding AgentBakerService rollout failed or was abandoned, and the image was marked failed/defective. */
   Failed: "Failed",
+
+  /** Allows additional validation states in future versions. */
+  string,
 }
 
 /**
