@@ -29,6 +29,9 @@ describe("generated .NET SDK review workflow", () => {
     expect(review.indexOf("Preserve trusted publication context")).toBeLessThan(
       review.indexOf("Download validated SDK review input"),
     );
+    expect(review).toContain(
+      "sdk-review-publication-context-${{ github.run_id }}-attempt-${{ github.run_attempt }}",
+    );
     expect(review).not.toContain(
       "path: /tmp/gh-aw/sdk-review-input/typespec-review-context.json\n      if-no-files-found: error\n      retention-days: 7",
     );

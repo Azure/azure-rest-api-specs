@@ -75,7 +75,7 @@ on:
       if: steps.find-input.outputs.has_publication_context == 'true'
       uses: actions/upload-artifact@v7
       with:
-        name: sdk-review-publication-context-${{ github.event.workflow_run.id }}-attempt-${{ github.run_attempt }}
+        name: sdk-review-publication-context-${{ github.run_id }}-attempt-${{ github.run_attempt }}
         path: /tmp/gh-aw/sdk-review-publication-context/sdk-review-publication-context.json
         if-no-files-found: error
         retention-days: 7

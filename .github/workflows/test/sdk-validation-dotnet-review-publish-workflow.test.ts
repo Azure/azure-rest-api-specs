@@ -99,7 +99,8 @@ describe("generated .NET SDK review publisher workflow", () => {
       ),
     );
     const outputs = new Map<string, string>();
-    const runId = 123;
+    const handoffRunId = 123;
+    const reviewRunId = 456;
     const executable: unknown = new Script(
       `(async (github, context, core) => {${getFindContextScript(workflow)}})`,
     ).runInNewContext();
@@ -118,15 +119,15 @@ describe("generated .NET SDK review publisher workflow", () => {
                   artifacts: [
                     {
                       expired: false,
-                      name: `sdk-review-publication-context-${runId}-attempt-1`,
+                      name: `sdk-review-publication-context-${reviewRunId}-attempt-1`,
                     },
                     {
                       expired: false,
-                      name: `sdk-review-result-workflow-${runId}-attempt-2`,
+                      name: `sdk-review-result-workflow-${handoffRunId}-attempt-2`,
                     },
                     {
                       expired: false,
-                      name: `sdk-review-trusted-context-${runId}-attempt-2`,
+                      name: `sdk-review-trusted-context-${handoffRunId}-attempt-2`,
                     },
                   ],
                 },
@@ -138,7 +139,7 @@ describe("generated .NET SDK review publisher workflow", () => {
         payload: {
           workflow_run: {
             conclusion: "success",
-            id: runId,
+            id: reviewRunId,
             run_attempt: 2,
           },
         },
@@ -152,12 +153,14 @@ describe("generated .NET SDK review publisher workflow", () => {
       },
     );
 
-    expect(outputs.get("artifact-name")).toBe(`sdk-review-publication-context-${runId}-attempt-1`);
+    expect(outputs.get("artifact-name")).toBe(
+      `sdk-review-publication-context-${reviewRunId}-attempt-1`,
+    );
     expect(outputs.get("result-artifact-name")).toBe(
-      `sdk-review-result-workflow-${runId}-attempt-2`,
+      `sdk-review-result-workflow-${handoffRunId}-attempt-2`,
     );
     expect(outputs.get("trusted-context-artifact-name")).toBe(
-      `sdk-review-trusted-context-${runId}-attempt-2`,
+      `sdk-review-trusted-context-${handoffRunId}-attempt-2`,
     );
     expect(outputs.get("validated-result-available")).toBe("true");
   });
