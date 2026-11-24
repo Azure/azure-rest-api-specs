@@ -13,8 +13,7 @@ using Azure.Core;
 namespace Microsoft.AzureFleet;
 
 /** A RegionMix Fleet resource that groups virtual machine scale sets across regions. */
-@added(Versions.v2026_06_01_preview)
-@removed(Versions.v2026_08_01)
+@added(Versions.v2026_12_01_preview)
 model RegionMixFleet is TrackedResource<RegionMixFleetProperties> {
   ...ResourceNameParameter<
     Resource = RegionMixFleet,
@@ -25,8 +24,7 @@ model RegionMixFleet is TrackedResource<RegionMixFleetProperties> {
 }
 
 /** Details of the RegionMix Fleet. */
-@added(Versions.v2026_06_01_preview)
-@removed(Versions.v2026_08_01)
+@added(Versions.v2026_12_01_preview)
 model RegionMixFleetProperties {
   /** The status of the last operation. */
   @visibility(Lifecycle.Read)
@@ -38,16 +36,14 @@ model RegionMixFleetProperties {
 }
 
 /** A virtual machine scale set that is part of a RegionMix Fleet. */
-@added(Versions.v2026_06_01_preview)
-@removed(Versions.v2026_08_01)
+@added(Versions.v2026_12_01_preview)
 model RegionMixFleetVirtualMachineScaleSet {
   /** Reference to the Microsoft.Compute virtual machine scale set resource. */
   virtualMachineScaleSet: ApiEntityReference;
 }
 
 /** RegionMix Fleet update model. */
-@added(Versions.v2026_06_01_preview)
-@removed(Versions.v2026_08_01)
+@added(Versions.v2026_12_01_preview)
 model RegionMixFleetUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
@@ -55,8 +51,7 @@ model RegionMixFleetUpdate {
   properties?: RegionMixFleetProperties;
 }
 
-@added(Versions.v2026_06_01_preview)
-@removed(Versions.v2026_08_01)
+@added(Versions.v2026_12_01_preview)
 @armResourceOperations
 interface RegionMixFleets {
   get is ArmResourceRead<RegionMixFleet>;

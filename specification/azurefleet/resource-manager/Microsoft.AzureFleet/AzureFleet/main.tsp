@@ -47,6 +47,11 @@ enum Versions {
   /** Fleet stable Api version with mode, vmNamePrefix, capacityType properties */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2026_08_01: "2026-08-01",
+
+  /** RegionMix Fleet preview Api version */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @Azure.Core.previewVersion
+  v2026_12_01_preview: "2026-12-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
