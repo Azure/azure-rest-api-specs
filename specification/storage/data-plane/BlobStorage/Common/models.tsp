@@ -897,7 +897,7 @@ model AccessPolicy {
   @Xml.name("Permission") permission?: string;
 }
 
-/** The access tiers. */
+/** The access tiers accepted by tier-setting requests. */
 union AccessTier {
   /** The P4 access tier. */
   P4: "P4",
@@ -959,8 +959,68 @@ union AccessTier {
   string,
 }
 
+/** The access tiers reported for a blob. */
+union BlobResponseAccessTier {
+  /** The P4 access tier. */
+  P4: "P4",
+
+  /** The P6 access tier. */
+  P6: "P6",
+
+  /** The P10 access tier. */
+  P10: "P10",
+
+  /** The P15 access tier. */
+  P15: "P15",
+
+  /** The P20 access tier. */
+  P20: "P20",
+
+  /** The P30 access tier. */
+  P30: "P30",
+
+  /** The P40 access tier. */
+  P40: "P40",
+
+  /** The P50 access tier. */
+  P50: "P50",
+
+  /** The P60 access tier. */
+  P60: "P60",
+
+  /** The P70 access tier. */
+  P70: "P70",
+
+  /** The P80 access tier. */
+  P80: "P80",
+
+  /** The Hot access tier. */
+  Hot: "Hot",
+
+  /** The Cool access tier. */
+  Cool: "Cool",
+
+  /** The Archive access tier. */
+  Archive: "Archive",
+
+  /** The Premium access tier. */
+  Premium: "Premium",
+
+  /** The Cold access tier. */
+  Cold: "Cold",
+
+  /** The Smart access tier. */
+  @added(Versions.v2026_06_06)
+  Smart: "Smart",
+
+  /** The low-latency SSD-backed tier for block blobs. */
+  Turbo: "Turbo",
+
+  /** Extensible. */
+  string,
+}
+
 /** Indicates whether migration to Turbo storage is pending. */
-@added(Versions.v2027_05_07)
 union TurboStatus {
   /** Migration to SSD storage is pending. The status is omitted after migration completes. */
   Pending: "pending",
@@ -970,7 +1030,6 @@ union TurboStatus {
 }
 
 /** Indicates whether Turbo was implicitly assigned on ingestion or explicitly selected by the user, independently of migration completion. */
-@added(Versions.v2027_05_07)
 union TierManagedBy {
   /** The blob's tier was implicitly set to Turbo on ingestion. */
   System: "system",
@@ -1145,7 +1204,7 @@ model BlobProperties {
   @Xml.name("RemainingRetentionDays") remainingRetentionDays?: int32;
 
   /** The access tier of the blob. */
-  @Xml.name("AccessTier") accessTier?: AccessTier;
+  @Xml.name("AccessTier") accessTier?: BlobResponseAccessTier;
 
   /** Whether the access tier is inferred. */
   @Xml.name("AccessTierInferred") accessTierInferred?: boolean;
@@ -1154,12 +1213,10 @@ model BlobProperties {
   @Xml.name("ArchiveStatus") archiveStatus?: ArchiveStatus;
 
   /** Indicates whether migration to Turbo storage is pending. Omitted after migration to SSD storage completes. */
-  @added(Versions.v2027_05_07)
   @Xml.name("TurboStatus")
   turboStatus?: TurboStatus;
 
   /** Indicates whether Turbo was implicitly assigned on ingestion or explicitly selected by the user. */
-  @added(Versions.v2027_05_07)
   @Xml.name("TierManagedBy")
   tierManagedBy?: TierManagedBy;
 
@@ -2513,12 +2570,10 @@ alias AccessTierHeader = {
 /** The optional Turbo metadata returned by blob read operations. */
 alias TurboResponseHeaders = {
   /** Indicates whether migration to Turbo storage is pending. Omitted after migration to SSD storage completes. */
-  @added(Versions.v2027_05_07)
   @header("x-ms-turbo-status")
   turboStatus?: TurboStatus;
 
   /** Indicates whether Turbo was implicitly assigned on ingestion or explicitly selected by the user, independently of migration completion. */
-  @added(Versions.v2027_05_07)
   @header("x-ms-tier-managed-by")
   tierManagedBy?: TierManagedBy;
 };
