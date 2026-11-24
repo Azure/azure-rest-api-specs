@@ -4,6 +4,7 @@
  **/
 
 import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
+import { labelBadge } from "./label-badge.ts";
 import {
   inlineCode,
   link,
@@ -51,7 +52,7 @@ export const specChangePoliciesTsg = paragraph(
 export const typeSpecSuppressionsTsg = paragraph(
   "This PR introduced TypeSpec suppressions that require review. Inspect the suppression details in the",
   "**TypeSpec suppressions requiring review** comment on this PR and ask the appropriate reviewer to apply the",
-  `${inlineCode(TYPESPEC_SUPPRESSIONS_APPROVED_LABEL)} label. ${diagramTsg(1, true)}.`,
+  `${labelBadge(TYPESPEC_SUPPRESSIONS_APPROVED_LABEL)} label. ${diagramTsg(1, true)}.`,
 );
 
 export const brchHref = link("aka.ms/brch", "https://aka.ms/brch");
@@ -61,8 +62,8 @@ export const brchTsg = `To unblock this PR, follow the process at ${brchHref}.`;
 export function wrapInArmReviewMessage(message: MarkdownDoc): string {
   return renderMarkdownDoc([
     paragraph(
-      "This PR is in purview of the ARM review (label: `ARMReview`).",
-      "This PR must get `ARMSignedOff` label from an ARM reviewer.",
+      `This PR is in purview of the ARM review (label: ${labelBadge("ARMReview")}).`,
+      `This PR must get ${labelBadge("ARMSignedOff")} label from an ARM reviewer.`,
     ),
     message,
     `For details of the ARM review, see ${link("aka.ms/azsdk/pr-arm-review", "https://aka.ms/azsdk/pr-arm-review")}`,
@@ -70,5 +71,8 @@ export function wrapInArmReviewMessage(message: MarkdownDoc): string {
 }
 
 export function notReadyForArmReviewReason(label: string): string {
-  return `This PR is ${inlineCode("NotReadyForARMReview")} because it has the ${inlineCode(label)} label.`;
+  return paragraph(
+    `This PR is ${labelBadge("NotReadyForARMReview")}`,
+    `because it has the ${labelBadge(label)} label.`,
+  );
 }

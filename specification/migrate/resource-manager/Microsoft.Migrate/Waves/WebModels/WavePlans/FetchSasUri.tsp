@@ -49,16 +49,16 @@ model FetchSasUriRequest {
 @added(ApiVersions.v2026_06_01_preview)
 model FetchSasUriResponse {
   @doc("The write-targeted SAS URI to which the caller should PUT the CSV payload.")
-  @removed(ApiVersions.v2026_09_01_preview)
-  @renamedFrom(ApiVersions.v2026_09_01_preview, "sasUri")
+  @removed(ApiVersions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
+  @renamedFrom(ApiVersions.v2026_08_01_preview, "sasUri")
   oldSasUri: string;
 
   @doc("The write-targeted SAS URI to which the caller should PUT the CSV payload.")
-  @added(ApiVersions.v2026_09_01_preview)
+  @added(ApiVersions.v2026_08_01_preview)
   @secret
   @visibility(Lifecycle.Read)
-  sasUri: string;
+  sasUri: url;
 
   @doc("The UTC expiration timestamp of the returned SAS URI.")
   @visibility(Lifecycle.Read)

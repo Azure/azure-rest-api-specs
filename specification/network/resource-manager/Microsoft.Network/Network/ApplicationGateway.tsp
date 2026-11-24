@@ -1,0 +1,200 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./shared-models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Network;
+/**
+ * Application gateway resource.
+ */
+@featureFile(Features.applicationGateway)
+model ApplicationGateway
+  is ResourceInstance<ApplicationGatewayPropertiesFormat> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
+  @visibility(Lifecycle.Read)
+  @path
+  @key("applicationGatewayName")
+  @segment("applicationGateways")
+  name: string;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /** A list of availability zones denoting where the resource needs to come from. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  zones?: string[];
+
+  /**
+   * The identity of the application gateway, if configured.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  identity?: ManagedServiceIdentity;
+}
+
+@featureFile(Features.applicationGateway)
+@armResourceOperations(#{ omitTags: true })
+interface ApplicationGateways {
+  /**
+   * Gets the specified application gateway.
+   */
+  @tag("ApplicationGateways")
+  get is ArmResourceRead<ApplicationGateway, Error = CloudError>;
+
+  /**
+   * Creates or updates the specified application gateway.
+   */
+  @tag("ApplicationGateways")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ApplicationGateway,
+    Error = CloudError
+  >;
+
+  /**
+   * Updates the specified application gateway tags.
+   */
+  @tag("ApplicationGateways")
+  @patch(#{ implicitOptionality: false })
+  updateTags is ArmCustomPatchSync<
+    ApplicationGateway,
+    PatchModel = TagsObject,
+    Error = CloudError
+  >;
+
+  /**
+   * Deletes the specified application gateway.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ApplicationGateways")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ApplicationGateway,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
+
+  /**
+   * Lists all application gateways in a resource group.
+   */
+  @tag("ApplicationGateways")
+  list is ArmResourceListByParent<ApplicationGateway, Error = CloudError>;
+
+  /**
+   * Gets all the application gateways in a subscription.
+   */
+  @tag("ApplicationGateways")
+  listAll is ArmListBySubscriptionWithResourceName<
+    ApplicationGateway,
+    OverrideResourceName = "ApplicationGateway",
+    Error = CloudError
+  >;
+
+  /**
+   * Starts the specified application gateway.
+   */
+  @tag("ApplicationGateways")
+  start is ArmResourceActionAsync<
+    ApplicationGateway,
+    void,
+    Response = {
+      @body body: void;
+    },
+    Error = CloudError,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
+  >;
+
+  /**
+   * Stops the specified application gateway in a resource group.
+   */
+  @tag("ApplicationGateways")
+  stop is ArmResourceActionAsync<
+    ApplicationGateway,
+    void,
+    Response = {
+      @body body: void;
+    },
+    Error = CloudError,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
+  >;
+
+  /**
+   * Gets the backend health of the specified application gateway in a resource group.
+   */
+  @tag("ApplicationGateways")
+  @action("backendhealth")
+  backendHealth is ArmResourceActionAsync<
+    ApplicationGateway,
+    void,
+    ApplicationGatewayBackendHealth,
+    Parameters = {
+      /**
+       * Expands BackendAddressPool and BackendHttpSettings referenced in backend health.
+       */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing backendHealth POST contract uses $expand in the query; preserve wire compatibility."
+      @query("$expand")
+      $expand?: string;
+    },
+    Error = CloudError
+  >;
+
+  /**
+   * Gets the backend health for given combination of backend pool and http setting of the specified application gateway in a resource group.
+   */
+  @tag("ApplicationGateways")
+  @action("getBackendHealthOnDemand")
+  backendHealthOnDemand is ArmResourceActionAsync<
+    ApplicationGateway,
+    ApplicationGatewayOnDemandProbe,
+    ApplicationGatewayBackendHealthOnDemand,
+    Parameters = {
+      /**
+       * Expands BackendAddressPool and BackendHttpSettings referenced in backend health.
+       */
+      #suppress "@azure-tools/typespec-azure-resource-manager/no-query-in-post" "Back compat: Existing backendHealthOnDemand POST contract uses $expand in the query; preserve wire compatibility."
+      @query("$expand")
+      $expand?: string;
+    },
+    Error = CloudError
+  >;
+
+  /**
+   * Lists all private link resources on an application gateway.
+   */
+  @tag("ApplicationGatewayPrivateLinkResources")
+  @list
+  @get
+  @action("privateLinkResources")
+  applicationGatewayPrivateLinkResourcesList is ArmResourceActionSync<
+    ApplicationGateway,
+    void,
+    ArmResponse<ResourceListResult<ApplicationGatewayPrivateLinkResource>>,
+    Error = CloudError
+  >;
+}
+
+@@doc(ApplicationGateway.name, "The name of the application gateway.");
+@@doc(ApplicationGateway.properties, "Properties of the application gateway.");
+@@doc(
+  ApplicationGateways.createOrUpdate::parameters.resource,
+  "Parameters supplied to the create or update application gateway operation."
+);
+@@doc(
+  ApplicationGateways.updateTags::parameters.properties,
+  "Parameters supplied to update application gateway tags."
+);
+@@doc(
+  ApplicationGateways.backendHealthOnDemand::parameters.body,
+  "Request body for on-demand test probe operation."
+);

@@ -1,0 +1,86 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./shared-models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Network;
+
+/** The regional location shared by the WAF dynamic manifest operations. */
+alias ApplicationGatewayWafDynamicManifestLocationParameter = {
+  /** The location for which the WAF dynamic manifest is requested. */
+  @path
+  @segment("locations")
+  location: string;
+};
+
+/**
+ * Response for ApplicationGatewayWafDynamicManifest API service call.
+ */
+@featureFile(Features.applicationGateway)
+@singleton("dafault")
+@subscriptionResource
+model ApplicationGatewayWafDynamicManifestResult
+  is ProxyResourceWithSettableIdInstance<ApplicationGatewayWafDynamicManifestPropertiesResult> {
+  /**
+   * The name of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
+  @visibility(Lifecycle.Read)
+  @path
+  @key("applicationGatewayWafDynamicManifest")
+  @segment("applicationGatewayWafDynamicManifests")
+  name: string;
+}
+
+alias ApplicationGatewayWafDynamicManifestResultOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+    ...ApplicationGatewayWafDynamicManifestLocationParameter;
+  },
+  {
+    /** The name of the Application Gateway WAF Dynamic Manifest. */
+    @path
+    @segment("applicationGatewayWafDynamicManifests")
+    @key
+    applicationGatewayWafDynamicManifestName: "dafault";
+  }
+>;
+
+@featureFile(Features.applicationGateway)
+@armResourceOperations(#{ omitTags: true })
+interface ApplicationGatewayWafDynamicManifestResults {
+  /**
+   * Gets the regional application gateway waf manifest.
+   */
+  get is ApplicationGatewayWafDynamicManifestResultOps.Read<
+    ApplicationGatewayWafDynamicManifestResult,
+    OverrideErrorType = CloudError
+  >;
+
+  /**
+   * Gets the regional application gateway waf manifest.
+   */
+  applicationGatewayWafDynamicManifestsGet is ArmResourceListByParent<
+    ApplicationGatewayWafDynamicManifestResult,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Parameters = ApplicationGatewayWafDynamicManifestLocationParameter,
+    Response = ArmResponse<ApplicationGatewayWafDynamicManifestResultList>,
+    Error = CloudError
+  >;
+}
+
+@@doc(ApplicationGatewayWafDynamicManifestResult.name, "");
+@@doc(
+  ApplicationGatewayWafDynamicManifestResult.properties,
+  "Properties of the ApplicationGatewayWafDynamicManifest ."
+);

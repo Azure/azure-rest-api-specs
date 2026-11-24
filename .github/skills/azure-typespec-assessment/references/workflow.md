@@ -14,3 +14,9 @@ stop between preparation and Agent judgment. Assessment is complete only after
 guarded finalization produces validated `assessment.json` and
 `assessment.html`, the attached report server is running, and the response
 includes its clickable `http://127.0.0.1:<port>/assessment.html` URL.
+
+Use the originating runtime commands in the Agent index throughout the run.
+Phase integrity is based on the runtime binding, successful phase records, and
+input/output content hashes. Filesystem timestamps and inode identity are not
+integrity signals: touching a file or replacing it with identical bytes does
+not invalidate a phase. Changed content or runtime code still requires recovery.

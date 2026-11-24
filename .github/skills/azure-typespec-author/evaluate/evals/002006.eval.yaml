@@ -5,7 +5,7 @@ type: capability # capability | regression
 tags:
   area: "armtemplate"
 # Root-level environment
-environment: azsdk-mcp
+agent_environment: azsdk-mcp
 # Execution configuration
 defaults:
   runs: 1 # Trials per stimulus
@@ -21,7 +21,7 @@ stimuli:
       mode: "trigger"
     prompt: |
       In API version `2024-10-01-preview`, add a child resource named `AddressResource` under the existing Employee ARM resource. Its optional properties are street1, street2, city, state, postalCode, and country, along with a read-only provisioning state. Support the standard operations for a child ARM resource. Follow TypeSpec Azure guidelines. I've already made the design decisions, so go ahead with the change.
-    environment: &shared_environment
+    agent_environment: &shared_environment
       files:
         - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
           dest: employee.tsp
@@ -57,7 +57,7 @@ stimuli:
       mode: "forced"
     prompt: |
       @azure-typespec-author In API version `2024-10-01-preview`, add a child resource named `AddressResource` under the existing Employee ARM resource. Its optional properties are street1, street2, city, state, postalCode, and country, along with a read-only provisioning state. Support the standard operations for a child ARM resource. Follow TypeSpec Azure guidelines. I've already made the design decisions, so go ahead with the change.
-    environment: *shared_environment
+    agent_environment: *shared_environment
     graders:
       - type: "run-command"
         config:
@@ -78,91 +78,76 @@ stimuli:
           path: "*.tsp"
       - &file_matches_resource_model
         type: "file-matches"
-        name: "file-matches-resource-model"
         config:
           pattern: "model AddressResource is ProxyResource<AddressProperties>|model AddressResource is ProxyResource<AddressResourceProperties>"
           path: "*.tsp"
       - &file_matches_interface
         type: "file-matches"
-        name: "file-matches-interface"
         config:
           pattern: "interface Addresses|interface AddressResource"
           path: "*.tsp"
       - &file_matches_properties_model
         type: "file-matches"
-        name: "file-matches-properties-model"
         config:
           pattern: "model AddressProperties|model AddressResourceProperties"
           path: "*.tsp"
       - &file_matches_street1_property
         type: "file-matches"
-        name: "file-matches-street1-property"
         config:
           pattern: 'street1\?: string;'
           path: "*.tsp"
       - &file_matches_street2_property
         type: "file-matches"
-        name: "file-matches-street2-property"
         config:
           pattern: 'street2\?: string;'
           path: "*.tsp"
       - &file_matches_city_property
         type: "file-matches"
-        name: "file-matches-city-property"
         config:
           pattern: 'city\?: string;'
           path: "*.tsp"
       - &file_matches_state_property
         type: "file-matches"
-        name: "file-matches-state-property"
         config:
           pattern: 'state\?: string;'
           path: "*.tsp"
       - &file_matches_postal_code_property
         type: "file-matches"
-        name: "file-matches-postal-code-property"
         config:
           pattern: 'postalCode\?: string;'
           path: "*.tsp"
       - &file_matches_country_property
         type: "file-matches"
-        name: "file-matches-country-property"
         config:
           pattern: 'country\?: string;'
           path: "*.tsp"
       - &file_matches_visibility
         type: "file-matches"
-        name: "file-matches-visibility"
         config:
           pattern: '@visibility\(Lifecycle\.Read\)'
           path: "*.tsp"
       - &file_matches_provisioning_state_property
         type: "file-matches"
-        name: "file-matches-provisioning-state-property"
         config:
           pattern: 'provisioningState\?: ProvisioningState;'
           path: "*.tsp"
       - &file_matches_read_operation
         type: "file-matches"
-        name: "file-matches-read-operation"
         config:
           pattern: "ArmResourceRead<AddressResource>"
           path: "*.tsp"
       - &file_matches_create_operation
         type: "file-matches"
-        name: "file-matches-create-operation"
         config:
           pattern: "ArmResourceCreateOrReplaceAsync<AddressResource>|ArmResourceCreateOrReplaceSync<AddressResource>"
           path: "*.tsp"
       - &file_matches_delete_operation
         type: "file-matches"
-        name: "file-matches-delete-operation"
         config:
           pattern: "ArmResourceDeleteWithoutOkAsync<AddressResource>|ArmResourceDeleteSync<AddressResource>"
           path: "*.tsp"
       - &file_matches_list_operation
         type: "file-matches"
-        name: "file-matches-list-operation"
         config:
           pattern: "ArmResourceListByParent<AddressResource>"
           path: "*.tsp"
@@ -175,7 +160,7 @@ stimuli:
       mode: "no-skill"
     prompt: |
       In API version `2024-10-01-preview`, add a child resource named `AddressResource` under the existing Employee ARM resource. Its optional properties are street1, street2, city, state, postalCode, and country, along with a read-only provisioning state. Support the standard operations for a child ARM resource. Follow TypeSpec Azure guidelines. I've already made the design decisions, so go ahead with the change.
-    environment: *shared_environment
+    agent_environment: *shared_environment
     rubric:
       - AddressResource is defined as a child proxy resource of Employee with the requested optional address properties and a read-only provisioning state.
       - The child resource is introduced in API version 2024-10-01-preview and follows TypeSpec Azure ARM guidelines.

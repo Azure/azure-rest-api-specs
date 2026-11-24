@@ -1,0 +1,73 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./FirewallPolicyRuleCollectionGroup.tsp";
+import "./shared-models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Network;
+/**
+ * Rule Collection Group resource.
+ */
+@featureFile(Features.firewallPolicy)
+@singleton("default")
+@parentResource(FirewallPolicyRuleCollectionGroup)
+model FirewallPolicyRuleCollectionGroupDraft
+  is SubResourceInstance<FirewallPolicyRuleCollectionGroupDraftProperties> {
+  /**
+   * The name of the resource that is unique within a resource group. This name can be used to access the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
+  @visibility(Lifecycle.Read)
+  @path
+  @key("ruleCollectionGroupDraft")
+  @segment("ruleCollectionGroupDrafts")
+  name: string;
+}
+
+@featureFile(Features.firewallPolicy)
+@armResourceOperations(#{ omitTags: true })
+interface FirewallPolicyRuleCollectionGroupDrafts {
+  /**
+   * Get Rule Collection Group Draft.
+   */
+  get is ArmResourceRead<
+    FirewallPolicyRuleCollectionGroupDraft,
+    Error = CloudError
+  >;
+
+  /**
+   * Create or Update Rule Collection Group Draft.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    FirewallPolicyRuleCollectionGroupDraft,
+    Error = CloudError
+  >;
+
+  /**
+   * Delete Rule Collection Group Draft.
+   */
+  delete is ArmResourceDeleteSync<
+    FirewallPolicyRuleCollectionGroupDraft,
+    Error = CloudError
+  >;
+}
+
+@@doc(
+  FirewallPolicyRuleCollectionGroupDraft.name,
+  "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+);
+@@doc(
+  FirewallPolicyRuleCollectionGroupDraft.properties,
+  "The properties of the firewall policy rule collection group."
+);
+@@doc(
+  FirewallPolicyRuleCollectionGroupDrafts.createOrUpdate::parameters.resource,
+  "Parameters supplied to the create or update FirewallPolicyRuleCollectionGroup operation."
+);

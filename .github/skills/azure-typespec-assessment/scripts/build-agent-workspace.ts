@@ -1,5 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
+import { randomUUID } from "node:crypto";
+import {
+  captureAssessmentRuntime,
+  createRuntimePhaseProvenance,
+  resolvedRuntimeCommand,
+} from "./assessment-runtime.ts";
 import { isMain, parseArgs, readJsonObject, runMain } from "./cli.ts";
 import { readComplianceCatalog } from "./compliance-assessment.ts";
 import {
@@ -174,6 +180,7 @@ function canonicalPaths(modelInput: AssessmentModelInput) {
 export function buildAgentWorkspace({ work }: { work: string }) {
   const started = performance.now();
   const root = path.resolve(work);
+  const runtime = captureAssessmentRuntime(import.meta.url);
   const modelInputPath = path.join(root, "model-input.json");
   if (!fs.existsSync(modelInputPath)) throw new Error("Missing model-input.json.");
   const modelInput = readJsonObject(modelInputPath) as AssessmentModelInput;
@@ -198,6 +205,8 @@ export function buildAgentWorkspace({ work }: { work: string }) {
   const modelInputBytes = fs.statSync(modelInputPath).size;
   const index = {
     schemaVersion: 1,
+    preparationId: randomUUID(),
+    runtime,
     comparisonIdentity: comparisonIdentity(modelInput),
     input: {
       path: "model-input.json",
@@ -227,19 +236,38 @@ export function buildAgentWorkspace({ work }: { work: string }) {
         guidelineEvidence: "scripts/compliance-search-evidence.schema.json",
         judgment: "scripts/assessment-judgment.schema.json",
       },
+      resolvedSchemas: {
+        agentDecisions: path.join(runtime.root, "scripts", "agent-decisions.schema.json"),
+        inference: path.join(runtime.root, "scripts", "inference.schema.json"),
+        guidelineEvidence: path.join(
+          runtime.root,
+          "scripts",
+          "compliance-search-evidence.schema.json",
+        ),
+        judgment: path.join(runtime.root, "scripts", "assessment-judgment.schema.json"),
+        assessment: path.join(runtime.root, "scripts", "assessment.schema.json"),
+      },
     },
     drafts: {
       agentDecisions: DECISIONS_DRAFT,
     },
     materialization: {
       script: "scripts/materialize-assessment-results.ts",
-      command:
-        "node <skill-directory>/scripts/materialize-assessment-results.ts --work <work-directory>",
+      command: resolvedRuntimeCommand(runtime, "scripts/materialize-assessment-results.ts", [
+        "--work",
+        root,
+      ]),
+    },
+    finalization: {
+      script: "scripts/finalize-assessment.ts",
+      command: resolvedRuntimeCommand(runtime, "scripts/finalize-assessment.ts", ["--work", root]),
     },
     serving: {
       script: "scripts/serve-assessment.ts",
-      command:
-        "node <skill-directory>/scripts/serve-assessment.ts --file <work-directory>/assessment.html",
+      command: resolvedRuntimeCommand(runtime, "scripts/serve-assessment.ts", [
+        "--file",
+        path.join(root, "assessment.html"),
+      ]),
       requiredOutput: "http://127.0.0.1:<port>/assessment.html",
       longLived: true,
       readStartupOutputImmediately: true,
@@ -263,9 +291,9 @@ export function buildAgentWorkspace({ work }: { work: string }) {
             "Score the full catalog, fetch the first four retrievable documents with fallback, and complete the compact Agent decisions; use only prefilled intent-scoped declarationNames in complianceJudgments.",
           ]
         : []),
-      "Run materialize-assessment-results.ts and require all materialized Agent artifacts.",
-      "Run finalize-assessment.ts and require validated assessment.json and assessment.html.",
-      "Start serve-assessment.ts as an attached long-lived process, immediately read its startup output without waiting for process completion or a completion notification, and return its localhost URL as the clickable Assessment report link with the absolute assessment.json path.",
+      "Execute materialization.command using its exact executable and args, without substituting another runtime; require all materialized Agent artifacts.",
+      "Execute finalization.command using its exact executable and args; require validated assessment.json and assessment.html.",
+      "Execute serving.command using its exact executable and args as an attached long-lived process, immediately read its startup output without waiting for process completion or a completion notification, and return its localhost URL as the clickable Assessment report link with the absolute assessment.json path.",
     ],
     canonicalArtifactHashes: artifactHashes,
   };
@@ -280,6 +308,11 @@ export function buildAgentWorkspace({ work }: { work: string }) {
       agentDecisionsDraft: DECISIONS_DRAFT,
     },
     artifactHashes,
+    runtime,
+    runtimePhases: {
+      preparation: createRuntimePhaseProvenance(root, runtime, [], [INDEX_FILE]),
+    },
+    resultHashes: undefined,
     failure: undefined,
     telemetry: {
       deterministicReadyAt: new Date().toISOString(),

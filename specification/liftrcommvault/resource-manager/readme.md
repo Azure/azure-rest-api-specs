@@ -27,7 +27,20 @@ These are the global settings for the Commvault.ContentStore.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2026-09-30
+tag: package-2026-11-03
+```
+
+### Tag: package-2026-11-03
+
+These settings apply only when `--tag=package-2026-11-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-11-03'
+input-file:
+  - Commvault.ContentStore/stable/2026-11-03/commvault.json
+
+suppressions:
+  - code: PathContainsResourceType
+    reason: The resource provider name 'Commvault.ContentStore' cannot have 'Microsoft' in it as it is a Azure Native ISV service`.
 ```
 
 ### Tag: package-2026-09-30

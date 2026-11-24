@@ -1,3 +1,4 @@
+import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { parse as parseYaml } from "yaml";
@@ -9,6 +10,8 @@ type AutorestArtifact = import("./runtime-types.ts").AutorestArtifact;
 type AutorestContext = import("./runtime-types.ts").AutorestContext;
 
 type AutorestDocument = import("./runtime-types.ts").AutorestDocument;
+
+type NormalizedRefCacheEntry = import("./runtime-types.ts").NormalizedRefCacheEntry;
 
 type NormalizedSchema = import("./runtime-types.ts").NormalizedSchema;
 
@@ -307,10 +310,16 @@ function isEnumValue(value: unknown): value is string | number | boolean {
   return typeof value === "string" || typeof value === "number" || typeof value === "boolean";
 }
 
+type RefTraversalState = {
+  cycleHits: Set<string>;
+  visitedRefs: Set<string>;
+};
+
 function ownSchema(
   schema: OpenApiSchema,
   context: AutorestContext,
   stack: Set<string>,
+  state: RefTraversalState,
 ): NormalizedSchema {
   const result: NormalizedSchema = { kind: "any" };
   const type =
@@ -333,6 +342,7 @@ function ownSchema(
       schema.items,
       { ...context, pointer: `${context.pointer}/items` },
       stack,
+      state,
     );
     if (schema.collectionFormat !== undefined) result.collectionFormat = schema.collectionFormat;
   } else if (type === "object" || schema.properties || schema.additionalProperties !== undefined) {
@@ -350,6 +360,7 @@ function ownSchema(
             pointer: `${context.pointer}/properties/${name.replaceAll("~", "~0").replaceAll("/", "~1")}`,
           },
           stack,
+          state,
         ),
       }));
     if (schema.additionalProperties !== undefined) {
@@ -365,6 +376,7 @@ function ownSchema(
                   pointer: `${context.pointer}/additionalProperties`,
                 },
                 stack,
+                state,
               );
     }
   } else if (type) {
@@ -404,37 +416,163 @@ function ownSchema(
   return result;
 }
 
+const strippedAllOfCache = new WeakMap<NormalizedSchema, NormalizedSchema>();
+const schemaDigestCache = new WeakMap<object, string>();
+
+function stripNestedAllOf(schema: NormalizedSchema): NormalizedSchema {
+  if (schema.allOf === undefined) return schema;
+  const cached = strippedAllOfCache.get(schema);
+  if (cached !== undefined) return cached;
+  const { allOf: _allOf, references: _references, ...own } = schema;
+  const stripped: NormalizedSchema = schema.reference
+    ? { ...own, references: [schema.reference] }
+    : own;
+  strippedAllOfCache.set(schema, stripped);
+  return stripped;
+}
+
+function schemaDigest(value: unknown): string {
+  if (value === null || typeof value !== "object") {
+    return JSON.stringify(value) ?? "undefined";
+  }
+  const cached = schemaDigestCache.get(value);
+  if (cached !== undefined) return cached;
+  const hash = crypto.createHash("sha256");
+  if (Array.isArray(value)) {
+    hash.update("[");
+    for (let index = 0; index < value.length; index += 1) {
+      if (index > 0) hash.update(",");
+      hash.update(schemaDigest(value[index]));
+    }
+    hash.update("]");
+  } else {
+    hash.update("{");
+    const entries = Object.entries(value as Record<string, unknown>)
+      .filter(([, entry]) => entry !== undefined)
+      .sort(([left], [right]) => left.localeCompare(right));
+    for (let index = 0; index < entries.length; index += 1) {
+      if (index > 0) hash.update(",");
+      const [key, entry] = entries[index];
+      hash.update(JSON.stringify(key));
+      hash.update(":");
+      hash.update(schemaDigest(entry));
+    }
+    hash.update("}");
+  }
+  const digest = hash.digest("hex");
+  schemaDigestCache.set(value, digest);
+  return digest;
+}
+
+function schemaBranchKey(schema: NormalizedSchema): string {
+  return schemaDigest(schema);
+}
+
+function flattenObjectAllOf(parts: NormalizedSchema[]): NormalizedSchema[] {
+  const flattened: NormalizedSchema[] = [];
+  const seen = new Set<string>();
+  const visit = (part: NormalizedSchema) => {
+    for (const ancestor of part.allOf ?? []) visit(ancestor);
+    const ownBranch = stripNestedAllOf(part);
+    const key = schemaBranchKey(ownBranch);
+    if (seen.has(key)) return;
+    seen.add(key);
+    flattened.push(ownBranch);
+  };
+  for (const part of parts) visit(part);
+  return flattened;
+}
+
+function flattenIntersectionAllOf(
+  parts: NormalizedSchema[],
+  own: NormalizedSchema,
+): NormalizedSchema[] {
+  const flattened: NormalizedSchema[] = [];
+  const seen = new Set<string>();
+  const pushBranch = (branch: NormalizedSchema) => {
+    const key = schemaBranchKey(branch);
+    if (seen.has(key)) return;
+    seen.add(key);
+    flattened.push(branch);
+  };
+  const visit = (part: NormalizedSchema) => {
+    if (part.kind === "intersection" && Array.isArray(part.allOf)) {
+      const children = part.allOf;
+      for (let index = 0; index < children.length; index += 1) {
+        const child = children[index];
+        if (
+          index === children.length - 1 &&
+          part.reference &&
+          !children.some((item) => item.reference === part.reference)
+        ) {
+          visit({
+            ...child,
+            reference: part.reference,
+            references: [part.reference],
+          });
+        } else {
+          visit(child);
+        }
+      }
+      return;
+    }
+    if ((part.kind === "object" || part.kind === "any") && Array.isArray(part.allOf)) {
+      for (const ancestor of part.allOf) visit(ancestor);
+      pushBranch(stripNestedAllOf(part));
+      return;
+    }
+    pushBranch(part);
+  };
+  for (const part of parts) visit(part);
+  pushBranch(own);
+  return flattened;
+}
+
 function mergeAllOf(parts: NormalizedSchema[], own: NormalizedSchema): NormalizedSchema {
   const references = new Set(own.references ?? []);
   for (const part of parts) for (const item of part.references ?? []) references.add(item);
   if ([...parts, own].every((item) => item.kind === "object" || item.kind === "any")) {
-    const properties: Map<string, NonNullable<NormalizedSchema["properties"]>[number]> = new Map();
-
-    let additionalProperties: boolean | NormalizedSchema | undefined;
-    for (const item of [...parts, own]) {
-      for (const property of item.properties ?? []) properties.set(property.name, property);
-      if (item.additionalProperties !== undefined) additionalProperties = item.additionalProperties;
-    }
     const result = {
       ...own,
       kind: "object",
-      properties: [...properties.values()].sort((left, right) =>
-        left.name.localeCompare(right.name),
-      ),
+      allOf: flattenObjectAllOf(parts),
     };
-    if (additionalProperties !== undefined) result.additionalProperties = additionalProperties;
     if (references.size) result.references = [...references].sort();
     return result;
   }
-  const result = { ...own, kind: "intersection", allOf: parts };
+  const result = {
+    ...own,
+    kind: "intersection",
+    allOf: flattenIntersectionAllOf(parts, own),
+  };
   if (references.size) result.references = [...references].sort();
   return result;
+}
+
+export function effectiveSchemaProperties(
+  schema: NormalizedSchema,
+): NonNullable<NormalizedSchema["properties"]> {
+  const properties = new Map<string, NonNullable<NormalizedSchema["properties"]>[number]>();
+  const visit = (current: NormalizedSchema) => {
+    for (const part of current.allOf ?? []) visit(part);
+    for (const property of current.properties ?? []) properties.set(property.name, property);
+  };
+  visit(schema);
+  return [...properties.values()].sort((left, right) => left.name.localeCompare(right.name));
+}
+
+function getNormalizedRefs(context: AutorestContext): Map<string, NormalizedRefCacheEntry> {
+  if (!context.normalizedRefs) {
+    context.normalizedRefs = new Map<string, NormalizedRefCacheEntry>();
+  }
+  return context.normalizedRefs;
 }
 
 export function normalizeSchema(
   schema: unknown,
   context: AutorestContext,
   stack: Set<string> = new Set(),
+  state: RefTraversalState = { cycleHits: new Set(), visitedRefs: new Set() },
 ): NormalizedSchema {
   if (!schema || typeof schema !== "object" || Array.isArray(schema)) {
     throw unsupported(`schema at ${context.pointer} must be an object`);
@@ -443,22 +581,57 @@ export function normalizeSchema(
   if (schemaObject.$ref) {
     const resolved = resolveReference(schemaObject.$ref, context.document, context.registry);
     if (resolved.unresolved) return { kind: "reference", ref: resolved.identity, unresolved: true };
-    if (stack.has(resolved.identity))
+    state.visitedRefs.add(resolved.identity);
+    if (stack.has(resolved.identity)) {
+      state.cycleHits.add(resolved.identity);
       return { kind: "reference", ref: resolved.identity, cycle: true };
-    stack.add(resolved.identity);
-    const normalized = normalizeSchema(
-      resolved.value,
-      {
-        ...context,
-        document: resolved.document,
-        pointer: resolved.pointer,
-      },
-      stack,
-    );
-    stack.delete(resolved.identity);
+    }
+    const cache = getNormalizedRefs(context);
+    const cached = cache.get(resolved.identity);
+    let normalized: NormalizedSchema | undefined;
+    if (cached) {
+      let intersectsStack = false;
+      for (const active of stack) {
+        if (cached.visitedRefs.has(active)) {
+          intersectsStack = true;
+          break;
+        }
+      }
+      if (!intersectsStack) {
+        normalized = cached.schema;
+        for (const ref of cached.visitedRefs) state.visitedRefs.add(ref);
+      }
+    }
+    if (!normalized) {
+      const innerState: RefTraversalState = {
+        cycleHits: new Set<string>(),
+        visitedRefs: new Set<string>([resolved.identity]),
+      };
+      stack.add(resolved.identity);
+      normalized = normalizeSchema(
+        resolved.value,
+        {
+          ...context,
+          document: resolved.document,
+          pointer: resolved.pointer,
+        },
+        stack,
+        innerState,
+      );
+      stack.delete(resolved.identity);
+      innerState.cycleHits.delete(resolved.identity);
+      for (const ref of innerState.visitedRefs) state.visitedRefs.add(ref);
+      for (const target of innerState.cycleHits) state.cycleHits.add(target);
+      if (innerState.cycleHits.size === 0) {
+        cache.set(resolved.identity, {
+          schema: normalized,
+          visitedRefs: innerState.visitedRefs,
+        });
+      }
+    }
     const sibling = { ...schemaObject };
     delete sibling.$ref;
-    const siblingSchema = ownSchema(sibling, context, stack);
+    const siblingSchema = ownSchema(sibling, context, stack, state);
     const siblingFields =
       siblingSchema.kind === "any"
         ? Object.fromEntries(Object.entries(siblingSchema).filter(([key]) => key !== "kind"))
@@ -470,12 +643,17 @@ export function normalizeSchema(
       references: [...new Set([resolved.identity, ...(normalized.references ?? [])])].sort(),
     };
   }
-  const own = ownSchema(schemaObject, context, stack);
+  const own = ownSchema(schemaObject, context, stack, state);
   if (!schemaObject.allOf) return own;
   if (!Array.isArray(schemaObject.allOf))
     throw unsupported(`allOf at ${context.pointer} must be an array`);
   const parts = schemaObject.allOf.map((part, index) =>
-    normalizeSchema(part, { ...context, pointer: `${context.pointer}/allOf/${index}` }, stack),
+    normalizeSchema(
+      part,
+      { ...context, pointer: `${context.pointer}/allOf/${index}` },
+      stack,
+      state,
+    ),
   );
   return mergeAllOf(parts, own);
 }
@@ -750,6 +928,7 @@ export function normalizeAutorestDocuments(entries: unknown[]): NormalizedAutore
   const registry: Map<string, AutorestDocument> = new Map(
     documents.map((item) => [item.absolutePath, item]),
   );
+  const normalizedRefs: Map<string, NormalizedRefCacheEntry> = new Map();
 
   const operations: ReturnType<typeof normalizeOperation>[] = [];
   for (const document of documents.sort((left, right) => left.path.localeCompare(right.path))) {
@@ -776,6 +955,7 @@ export function normalizeAutorestDocuments(entries: unknown[]): NormalizedAutore
               {
                 document,
                 registry,
+                normalizedRefs,
                 route,
                 routeSource,
                 method: method.toLowerCase(),

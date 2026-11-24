@@ -2,7 +2,7 @@ import { SdkName } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
-import { LogIssueType, vsoLogIssue } from "../src/log.ts";
+import { LogIssueType, setVsoVariable, vsoLogIssue } from "../src/log.ts";
 import { getGeneratedSdkApiVersions } from "../src/package-info.ts";
 import { type ExecutionReport, type SpecGenSdkCmdInput } from "../src/types.ts";
 import { runCommandWithOutput } from "../src/utils.ts";
@@ -10,6 +10,7 @@ import { runCommandWithOutput } from "../src/utils.ts";
 vi.mock("../src/utils.ts", () => ({ runCommandWithOutput: vi.fn() }));
 vi.mock("../src/log.ts", () => ({
   LogIssueType: { Warning: "warning" },
+  setVsoVariable: vi.fn(),
   vsoLogIssue: vi.fn(),
 }));
 
@@ -77,6 +78,10 @@ describe("getGeneratedSdkApiVersions", () => {
     ]);
     expect(fs.existsSync(outputDir)).toBe(false);
     expect(vsoLogIssue).not.toHaveBeenCalled();
+    expect(setVsoVariable).toHaveBeenCalledWith(
+      "GeneratedSDKApiVersionsJson",
+      JSON.stringify([{ version: "2024-01-01" }]),
+    );
   });
 
   test("reads package info exported into nested directories", async () => {
@@ -134,6 +139,16 @@ describe("getGeneratedSdkApiVersions", () => {
       "azsdk",
       expect.arrayContaining(["--package-path", absolutePath]),
     );
+    expect(setVsoVariable).toHaveBeenCalledWith(
+      "GeneratedSDKApiVersionsJson",
+      JSON.stringify([
+        { version: "2025-01-01", namespace: "Example" },
+        { version: "2026-01-01", namespace: "Other" },
+        { version: "2025-01-01", namespace: "Another" },
+        { version: "2024-01-01" },
+        { version: "2023-01-01" },
+      ]),
+    );
   });
 
   test.each([
@@ -173,6 +188,7 @@ describe("getGeneratedSdkApiVersions", () => {
       });
       expect(await getGeneratedSdkApiVersions(report("sdk/package"), commandInput)).toBe("");
       expect(vsoLogIssue).not.toHaveBeenCalled();
+      expect(setVsoVariable).toHaveBeenCalledWith("GeneratedSDKApiVersionsJson", "[]");
     },
   );
 
@@ -233,6 +249,10 @@ describe("getGeneratedSdkApiVersions", () => {
     expect(vsoLogIssue).toHaveBeenCalledWith(
       expect.stringContaining("CLI failed"),
       LogIssueType.Warning,
+    );
+    expect(setVsoVariable).toHaveBeenCalledWith(
+      "GeneratedSDKApiVersionsJson",
+      JSON.stringify([{ version: "2024-01-01" }]),
     );
   });
 

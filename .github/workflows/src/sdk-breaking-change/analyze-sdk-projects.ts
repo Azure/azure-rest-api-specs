@@ -59,7 +59,8 @@ export async function analyzeSdkProjects({
   workflowUrl,
   resultFilePath,
   azureSdkCliPath,
-}: { core: Core } & AnalyzeSdkProjectsOptions): Promise<void> {
+  forwardOutput,
+}: { core: Core } & AnalyzeSdkProjectsOptions & { forwardOutput?: boolean }): Promise<void> {
   const localSdkRepositoryPath = await realpath(unresolvedLocalSdkRepositoryPath);
   await mkdir(dirname(resultFilePath), { recursive: true });
 
@@ -73,6 +74,12 @@ export async function analyzeSdkProjects({
     projects: [],
   };
   const azureSdkCli = join(azureSdkCliPath, process.platform === "win32" ? "azsdk.exe" : "azsdk");
+  let azsdkOptions = undefined;
+  if (forwardOutput) {
+    azsdkOptions = {
+      forwardOutput: true,
+    };
+  }
 
   const blocks = [
     "## SDK breaking-change analysis",
@@ -189,17 +196,23 @@ export async function analyzeSdkProjects({
       }
 
       /* Detect breaking changes */
-      const { stdout: breakingChangesStdout } = await execFile(azureSdkCli, [
-        "package",
-        "detect-breaking-change",
-        "--package-path",
-        packagePath,
-        "--tsp-config-path",
-        configPath,
-        "--output",
-        "json",
-      ]);
-      console.log("breakingChangesStdout: " + breakingChangesStdout);
+      const { stdout: breakingChangesStdout } = await execFile(
+        azureSdkCli,
+        [
+          "package",
+          "detect-breaking-change",
+          "--package-path",
+          packagePath,
+          "--tsp-config-path",
+          configPath,
+          "--output",
+          "json",
+        ],
+        azsdkOptions,
+      );
+      if (!forwardOutput) {
+        console.log("breakingChangesStdout: " + breakingChangesStdout);
+      }
       const breakingChangesResponse: AzsdkDetectBreakingChangeResponse =
         parseAzsdkResponse(breakingChangesStdout);
       if (
