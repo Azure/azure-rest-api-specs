@@ -1,4 +1,4 @@
-import type { GitHubScriptArgs } from "../github.ts";
+import type { Core, GitHub, GitHubScriptArgs } from "../github.ts";
 import { extractInputs } from "../context.ts";
 
 /**
@@ -6,6 +6,22 @@ import { extractInputs } from "../context.ts";
  */
 export default async function statusCheck({ github, context, core }: GitHubScriptArgs) {
   const { owner, repo, issue_number } = await extractInputs(github, context, core);
+  await setPackageNameStatus({ github, core, owner, repo, prNumber: issue_number });
+}
+
+export async function setPackageNameStatus({
+  github,
+  core,
+  owner,
+  repo,
+  prNumber: issue_number,
+}: {
+  github: GitHub;
+  core: Core;
+  owner: string;
+  repo: string;
+  prNumber: number;
+}) {
   const { data: pr } = await github.rest.pulls.get({
     owner,
     repo,

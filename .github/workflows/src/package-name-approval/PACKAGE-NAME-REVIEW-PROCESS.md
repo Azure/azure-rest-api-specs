@@ -141,12 +141,14 @@ Package name format validation (regex-based naming rules from `.github/package-n
 
 ## Security Model
 
-The approval workflow uses `pull_request_target` events, which grant write access to the repository. This is required because `pull_request` events from forks run with read-only permissions and cannot modify labels or commit statuses.
+The approval workflows need write access to labels and commit statuses, which `pull_request` events from forks do not have. They use `workflow_run`, which runs default-branch code with a privileged token.
 
 Mitigations:
 
 - **Detection runs in read-only context:** The `pull_request` workflow (`package-name-approval-code.yaml`) checks out the PR and runs `tsp compile` to extract metadata. This workflow has read-only permissions and cannot modify labels or commit statuses.
-- **Label/status changes use `pull_request_target` and `workflow_run`:** These workflows have write access but only read configuration files (approvers YAML, format rules) from the base branch, never execute PR code.
+- **Label/status changes use `workflow_run`:** These workflows have write access but only read configuration files (approvers YAML, format rules) from the base branch, never execute PR code.
+- **Label changes are confirmed through the API:** `package-name-approval-validation.yaml` reacts to the unprivileged "Pull Request Event" intake. Its run-name is untrusted, so the handler reads the label change and its actor from the PR's issue events, and requires it to be the latest change for that label, made by the run's triggering actor within the last 10 minutes.
+- **Closed PRs:** The intake only runs for open PRs. Package-name label changes made while a PR was closed are validated when it is reopened.
 - **Unauthorized label reversal:** If an unauthorized user adds an approval label, the workflow removes it and posts a warning comment.
 - **Unauthorized removal guard:** If an unauthorized user removes a pending label, the workflow re-applies it.
 - **Approver allowlist:** Only users listed in `.github/protected-labels.yml` can approve package names.

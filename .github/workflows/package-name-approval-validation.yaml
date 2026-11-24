@@ -1,27 +1,34 @@
 name: "Package Name Approval - Validate Labels"
 
-on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
-  pull_request_target:
-    types:
-      - labeled
-      - unlabeled
-    branches:
-      - main
+# Handles package-name-* label changes and PR reopens reported by the unprivileged
+# "Pull Request Event" intake. See src/package-name-approval/handle-pr-event.ts for the trust model.
+on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only default-branch code runs.
+  workflow_run:
+    workflows: ["Pull Request Event"]
+    types: [completed]
 
 permissions:
   contents: read
+  # issues.listEvents
+  issues: read
   pull-requests: write
   statuses: write
 
 jobs:
   validate-approval:
     name: Validate Package Name Approval
-    # Keep authorization enforcement active on closed PRs so reopening cannot bypass approvals.
-    if: startsWith(github.event.label.name, 'package-name-')
+    # The display_title (intake run-name) is untrusted, so it is only used here to skip runs
+    # cheaply. Labels changed while a PR is closed are replayed when it is reopened.
+    if: >-
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.conclusion == 'success' &&
+      (contains(github.event.workflow_run.display_title, ' labeled package-name-') ||
+       contains(github.event.workflow_run.display_title, ' unlabeled package-name-') ||
+       endsWith(github.event.workflow_run.display_title, ' reopened'))
     runs-on: ubuntu-24.04
     steps:
-      # IMPORTANT: This workflow uses pull_request_target, which runs with repo write permissions.
-      # Only base-branch code is checked out below. Do NOT checkout or run code from the PR head.
+      # workflow_run runs from the default branch with a privileged token. Do not check out,
+      # build, or run code from the head of the pull request.
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
@@ -31,19 +38,10 @@ jobs:
       - name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
 
-      - name: Validate package name approval label
+      - name: Validate package name approval labels
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
-            const { default: validateApproval } =
-              await import('${{ github.workspace }}/.github/workflows/src/package-name-approval/validate-approval.ts');
-            await validateApproval({ github, context, core });
-
-      - name: Update package name approval status
-        if: github.event.pull_request.state == 'open'
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
-        with:
-          script: |
-            const { default: statusCheck } =
-              await import('${{ github.workspace }}/.github/workflows/src/package-name-approval/status-check.ts');
-            await statusCheck({ github, context, core });
+            const { default: handlePackageNamePrEvent } =
+              await import('${{ github.workspace }}/.github/workflows/src/package-name-approval/handle-pr-event.ts');
+            await handlePackageNamePrEvent({ github, context, core });
