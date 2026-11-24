@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "parameters": {
+      "properties": {
+        "targetResources": [
+          {
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateTrafficManagerProfiles/ptm-profile1"
+          }
+        ]
+      }
+    },
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "privateDnsResourceReferences": [
+            {
+              "privateDnsResources": [
+                {
+                  "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/A/ptmlinkrecord"
+                }
+              ],
+              "targetResource": {
+                "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateTrafficManagerProfiles/ptm-profile1"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "PrivateDnsResourceReference_GetByTargetResources",
+  "title": "Get Private DNS resource reference"
+}

@@ -16,7 +16,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(Microsoft.HorizonDb, "HorizonDBMgmtClient", "csharp");
 @@clientName(
-  Microsoft.HorizonDb.CreateModeCluster,
+  Microsoft.HorizonDb.ClusterCreateMode,
   "HorizonDBClusterCreateMode",
   "csharp"
 );
@@ -279,7 +279,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(
   Microsoft.HorizonDb.LogCaptureConfigurationPropertiesForPatchUpdate,
-  "LogCaptureConfigurationPatchProperties",
+  "HorizonDBLogCaptureConfigurationPatchProperties",
   "csharp"
 );
 @@clientName(
@@ -337,6 +337,235 @@ using Azure.ClientGenerator.Core;
   "StartsOn",
   "csharp"
 );
+@@clientName(
+  Microsoft.HorizonDb.IdentityAssignment,
+  "ChangeDataCaptureIdentityAssignment",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.BackupProperties,
+  "HorizonDBClusterBackupProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.GeoRedundancyState,
+  "HorizonDBClusterBackupGeoRedundancyState",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.EndpointProperties,
+  "HorizonDBEndpointProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.EndpointRole,
+  "HorizonDBEndpointRole",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.EndpointScope,
+  "HorizonDBEndpointScope",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ClusterCapability,
+  "HorizonDBClusterCapability",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ClusterFeatureCapability,
+  "HorizonDBClusterFeatureCapability",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ClusterState,
+  "HorizonDBClusterState",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ComputeGenerationCapability,
+  "HorizonDBComputeGenerationCapability",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ComputeModelCapability,
+  "HorizonDBComputeModelCapability",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ComputeProcessorCapability,
+  "HorizonDBComputeProcessorCapability",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ComputeProcessorType,
+  "HorizonDBComputeProcessorType",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ComputeSizeCapability,
+  "HorizonDBComputeSizeCapability",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ProvisionedComputeModelCapability,
+  "HorizonDBProvisionedComputeModelCapability",
+  "csharp"
+);
+@@clientName(Microsoft.HorizonDb.NodeRole, "HorizonDBNodeRole", "csharp");
+@@clientName(
+  Microsoft.HorizonDb.MaintenanceEvent,
+  "HorizonDBMaintenanceEvent",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.MaintenanceEventProperties,
+  "HorizonDBMaintenanceEventProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.MaintenanceEventStatus,
+  "HorizonDBMaintenanceEventStatus",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.MaintenanceType,
+  "HorizonDBMaintenanceType",
+  "csharp"
+);
+@@clientName(Microsoft.HorizonDb.LogFile, "HorizonDBLogFile", "csharp");
+@@clientName(
+  Microsoft.HorizonDb.LogFileProperties,
+  "HorizonDBLogFileProperties",
+  "csharp"
+);
+@@clientName(Microsoft.HorizonDb.LogFileType, "HorizonDBLogFileType", "csharp");
+@@clientName(
+  Microsoft.HorizonDb.DefaultParameterGroup,
+  "HorizonDBDefaultParameterGroup",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.DefaultParameterGroupProperties,
+  "HorizonDBDefaultParameterGroupProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.FirewallRule,
+  "HorizonDBFirewallRule",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.PoolCapability,
+  "HorizonDBPoolCapability",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.PoolFeatureCapability,
+  "HorizonDBPoolFeatureCapability",
+  "csharp"
+);
+@@clientName(Microsoft.HorizonDb.PoolState, "HorizonDBPoolState", "csharp");
+@@clientName(
+  Microsoft.HorizonDb.LogCaptureConfiguration,
+  "HorizonDBLogCaptureConfiguration",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.LogCaptureConfigurationForPatchUpdate,
+  "HorizonDBLogCaptureConfigurationPatch",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.LogCaptureConfigurationProperties,
+  "HorizonDBLogCaptureConfigurationProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.LogCaptureState,
+  "HorizonDBLogCaptureState",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.PasswordAuthentication,
+  "HorizonDBPasswordAuthentication",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.PasswordAuthenticationForPatchUpdate,
+  "HorizonDBPasswordAuthenticationPatch",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.PasswordAuthenticationProperties,
+  "HorizonDBPasswordAuthenticationProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.PasswordAuthenticationPropertiesForPatchUpdate,
+  "HorizonDBPasswordAuthenticationPatchProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ScheduledMaintenanceManagementType,
+  "HorizonDBScheduledMaintenanceManagementType",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ScheduledMaintenanceProperties,
+  "HorizonDBScheduledMaintenanceProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.SystemScheduledMaintenanceProperties,
+  "HorizonDBSystemScheduledMaintenanceProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ParameterApplyMethod,
+  "HorizonDBParameterApplyMethod",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ParameterGroupSyncStatus,
+  "HorizonDBParameterGroupSyncStatus",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.ParameterValueSource,
+  "HorizonDBParameterValueSource",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.PoolComputeModelForPatchUpdate,
+  "HorizonDBPoolComputeModelPatch",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.PoolPropertiesForPatchUpdate,
+  "HorizonDBPoolPatchProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.IdentityValidationStatus.validatedAtUtc,
+  "ValidatedOn",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.LogFileProperties.createdAtUtc,
+  "CreatedOn",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.LogFileProperties.lastModifiedAtUtc,
+  "LastModifiedOn",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.LogFileProperties.retentionExpiresAtUtc,
+  "RetentionExpiresOn",
+  "csharp"
+);
 @@alternateType(
   Microsoft.HorizonDb.ChangeDataCaptureCapability.eTag,
   Azure.Core.eTag,
@@ -355,5 +584,30 @@ using Azure.ClientGenerator.Core;
 @@alternateType(
   Microsoft.HorizonDb.IdentityAssignment.eTag,
   Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.HorizonDb.ChangeDataCaptureIdentityAssignmentProperties.principalId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.HorizonDb.ChangeDataCaptureIdentityAssignmentProperties.tenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.HorizonDb.MicrosoftEntraAdministratorProperties.objectId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.HorizonDb.MicrosoftEntraAdministratorProperties.tenantId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.HorizonDb.MicrosoftEntraAdministratorPropertiesForAdd.tenantId,
+  Azure.Core.uuid,
   "csharp"
 );
