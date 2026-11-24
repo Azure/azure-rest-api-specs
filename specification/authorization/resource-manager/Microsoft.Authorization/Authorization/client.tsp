@@ -88,6 +88,66 @@ union RoleManagementScopeType {
   "PrivilegedResourceMemberType"
 );
 @@clientName(
+  Microsoft.PrivilegedAccess.ParentResource,
+  "ParentResourceScope",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PrivilegedAccess.ResourceProjection,
+  "PrivilegedResourceProjection",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PrivilegedAccess.RelatedResourceProjection,
+  "RelatedPrivilegedResourceProjection",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PrivilegedAccess.RoleSource,
+  "RoleAssignmentSource",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PrivilegedAccess.DirectRoleSource,
+  "DirectRoleAssignmentSource",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PrivilegedAccess.GroupRoleSource,
+  "GroupRoleAssignmentSource",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PrivilegedAccess.AssignmentStatus,
+  "RoleAssignmentStatus",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PrivilegedAccess.ScheduleInfo,
+  "RoleAssignmentScheduleDetails",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PrivilegedAccess.ScheduleExpiration,
+  "RoleAssignmentScheduleExpiration",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PrivilegedAccess.ScheduleExpirationType,
+  "RoleAssignmentScheduleExpirationType",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PrivilegedAccess.ScopeKind,
+  "ResourceScopeKind",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PrivilegedAccess.AccessScopeFilter,
+  "PrivilegedResourceAccessScopeFilter",
+  "csharp"
+);
+@@clientName(
   Microsoft.Authorization.UsersOrServicePrincipalSetUserType,
   "UserType",
   "python"
