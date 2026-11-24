@@ -1586,8 +1586,6 @@ describe("ARM API review live-run regressions", () => {
     // The live run queued an inline comment on a readme.md that the PR never
     // touched. The publisher dropped it with only a warning and still reported
     // `Failed: 0`, so the Warning finding vanished while the summary counted it.
-    expect(collapsed).toContain("**Inline comments must target a file in the PR diff.**");
-    expect(collapsed).toContain("silently dropped with a warning");
     expect(collapsed).toContain("**`Findings on unchanged files`**");
     expect(collapsed).toContain(
       "Count it in the summary's category table exactly as if it had been posted inline",

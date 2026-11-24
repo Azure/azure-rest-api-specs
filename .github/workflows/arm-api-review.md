@@ -1067,24 +1067,32 @@ Replies (`reply-to-pull-request-review-comment`) and thread resolutions
 (`resolve-pull-request-review-thread`) from Step 5.5 have their own budgets and
 do **not** count toward the 20.
 
-**Inline comments must target a file in the PR diff.** The publisher can only
-attach an inline comment to a file that the PR actually changed; a comment whose
-`path` is absent from the diff is **silently dropped with a warning**, and the
-run still reports zero failures. A finding about an unchanged file -- a
-`readme.md` whose AutoRest tag was never wired up, a `main.tsp` that should have
-gained a version member, a shared `types.json` -- is legitimate and must still
-be reported, but it cannot be reported inline.
+**Inline comments require a valid PR-diff line anchor.** A changed filename
+alone is not sufficient. Before queuing any
+`create-pull-request-review-comment`, verify against the diff for the pinned
+base/head SHAs that the path and every specified line or range are valid on
+the configured `RIGHT` side of a diff hunk. Added lines and unchanged context
+lines within that hunk may be valid anchors; an unchanged line outside the
+hunks is not, even when another part of the same file changed. Do not use a
+deleted-only `LEFT` line as a `RIGHT` anchor.
 
-Before queuing any `create-pull-request-review-comment`, confirm its `path`
-appears in the PR's changed-file list. If it does not:
+A finding about an unchanged file or an unchanged line outside a modified
+file's hunks remains legitimate. If its anchor is absent or cannot be verified
+(for example, because the patch is missing or truncated):
 
 1. Do **not** queue the inline comment.
 2. Include the full, unchanged canonical finding body in the review body,
    under a **`Findings on unchanged files`** subsection. Preserve its evidence,
    file and rule citations, severity, classification, suggested fix, and
    telemetry marker; a summary theme alone does not satisfy this requirement.
+   This subsection also holds findings on lines without valid anchors inside
+   modified files. Retain the actual file and line citation; never substitute
+   a nearby changed line just to obtain an anchor.
 3. Count it in the summary's category table exactly as if it had been posted
    inline, so the counts stay truthful.
+
+Do not rely on the publisher's 422 recovery to preserve canonical findings:
+its unanchored-comment fallback can replace them with shortened excerpts.
 
 Never describe a dropped finding as though it were posted: the review body must
 not reference an inline finding number that was not published.

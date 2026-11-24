@@ -1,0 +1,105 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "./models.tsp";
+import "./shared-models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
+
+namespace Microsoft.Network;
+/**
+ * A DDoS custom policy in a resource group.
+ */
+@featureFile(Features.virtualNetwork)
+model DdosCustomPolicy is ResourceInstance<DdosCustomPolicyPropertiesFormat> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
+  @visibility(Lifecycle.Read)
+  @path
+  @key("ddosCustomPolicyName")
+  @segment("ddosCustomPolicies")
+  name: string;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  etag?: string;
+}
+
+@featureFile(Features.virtualNetwork)
+@armResourceOperations(#{ omitTags: true })
+interface DdosCustomPolicies {
+  /**
+   * Gets information about the specified DDoS custom policy.
+   */
+  @tag("ddosCustomPolicies")
+  get is ArmResourceRead<DdosCustomPolicy, Error = CloudError>;
+
+  /**
+   * Creates or updates a DDoS custom policy.
+   */
+  @tag("ddosCustomPolicies")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    DdosCustomPolicy,
+    Error = CloudError
+  >;
+
+  /**
+   * Update a DDoS custom policy tags.
+   */
+  @tag("ddosCustomPolicies")
+  @patch(#{ implicitOptionality: false })
+  updateTags is ArmCustomPatchSync<
+    DdosCustomPolicy,
+    PatchModel = TagsObject,
+    Error = CloudError
+  >;
+
+  /**
+   * Deletes the specified DDoS custom policy.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ddosCustomPolicies")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    DdosCustomPolicy,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
+
+  /**
+   * Gets all the DDoS custom policies in a resource group.
+   */
+  @added(Versions.v2025_07_01)
+  @tag("ddosCustomPolicies")
+  list is ArmResourceListByParent<DdosCustomPolicy, Error = CloudError>;
+
+  /**
+   * Gets all the DDoS custom policies in a subscription.
+   */
+  @added(Versions.v2025_07_01)
+  @tag("ddosCustomPolicies")
+  listAll is ArmListBySubscriptionWithResourceName<
+    DdosCustomPolicy,
+    OverrideResourceName = "DdosCustomPolicy",
+    Error = CloudError
+  >;
+}
+
+@@doc(DdosCustomPolicy.name, "The name of the DDoS custom policy.");
+@@doc(DdosCustomPolicy.properties, "Properties of the DDoS custom policy.");
+@@doc(
+  DdosCustomPolicies.createOrUpdate::parameters.resource,
+  "Parameters supplied to the create or update operation."
+);
+@@doc(
+  DdosCustomPolicies.updateTags::parameters.properties,
+  "Parameters supplied to update DDoS custom policy resource tags."
+);

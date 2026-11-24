@@ -886,6 +886,8 @@ stimuli:
       files:
         - src: "../../../../workflows/arm-api-review.md"
           dest: ".github/workflows/arm-api-review.md"
+        - src: "../../../azure-api-review/references/reviewer-posted-parity.md"
+          dest: ".github/skills/azure-api-review/references/reviewer-posted-parity.md"
     prompt: |
       Read `.github/agents/arm-api-reviewer.agent.md`, the single review-body
       summary contract in the reviewer-posted-parity reference, and the
@@ -894,26 +896,56 @@ stimuli:
 
       You are reviewing PR Azure/azure-rest-api-specs#44941.
       Step 1 pinned session head SHA
-      `eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee`. The Critic returned
+      `eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee` and base SHA
+      `dddddddddddddddddddddddddddddddddddddddd`. The Critic returned
       `Finding accuracy: PASS` on all entries after one iteration. This is a
       full review; all file and discussion pages are complete. No approval
       labels matched, and nothing was excluded by the output budget.
-      The plan has two POST-NEW inline findings: one Blocking and one Warning.
-      A third, Suggestion finding cannot be anchored to the diff; its complete
-      approved canonical body is:
+      All six canonical findings are approved for publication. The selected
+      inline side is RIGHT in both modes. Complete source evidence was read;
+      the following fixture describes only the posting-anchor diff:
 
-      **[EXISTING] Suggestion** `Widget.properties.status`
-      Issue: Keep the documented response-only shape.
-      Fix: Retain `readOnly: true`.
+      - `models.tsp` is modified, with this complete patch:
+        @@ -10,4 +10,4 @@
+         model Widget {
+        -  legacyName?: string;
+        +  name?: string;
+           status?: string;
+         }
+      - `unknown.tsp` is modified but its patch is unavailable. Its current
+        source and the finding were verified independently of anchor routing.
+      - `legacy.tsp` is deleted, with patch:
+        @@ -1 +0,0 @@
+        -model Legacy {}
+      - `readme.md` is not in the PR's changed-file list.
 
-      Its canonical interactive marker is:
+      Findings ADDED (Blocking, models.tsp line 11) and CONTEXT (Warning,
+      models.tsp line 12) cite the pinned head. The four Suggestion findings
+      below cite: UNCHANGED-1, readme.md line 40; UNANCHORED-2, models.tsp
+      line 80; PATCH-UNKNOWN-3, unknown.tsp line 20; LEFT-ONLY-4, legacy.tsp
+      base-side line 1 with no corresponding RIGHT-side line. These are all
+      POST-NEW findings; determine their posting surfaces from the rules.
+
+      Complete canonical content strings before their telemetry markers:
+      BEGIN_CANONICAL_CONTENT_JSON
+      {
+        "UNCHANGED-1": "**[EXISTING] Suggestion** `Widget.properties.status`\nIssue: Keep the documented response-only shape.\nFix: Retain `readOnly: true`.",
+        "UNANCHORED-2": "**[EXISTING] Suggestion** `models.tsp:80`\nIssue: Preserve the response-only status contract on `WidgetProperties` while reviewing this existing shared model. The finding applies to the actual model at line 80, not to the unrelated name change near line 11. Keep the existing field optional for compatibility, retain the current documented wire name, and ensure the generated response schema continues to describe the same response-only property. This canonical explanation is deliberately longer than a publisher fallback excerpt, so preserving only the introductory sentences would omit the actionable TypeSpec fix and its attribution.\nFix:\n```typespec\nmodel WidgetProperties {\n  @visibility(Lifecycle.Read)\n  status?: string;\n}\n```",
+        "PATCH-UNKNOWN-3": "**[EXISTING] Suggestion** `unknown.tsp:20`\nIssue: Preserve the verified model documentation.\nFix: Retain its complete documentation block.",
+        "LEFT-ONLY-4": "**[EXISTING] Suggestion** `legacy.tsp:1` (base side)\nIssue: Record the verified migration guidance for the removed model.\nFix: Retain that guidance without inventing a RIGHT-side source line."
+      }
+      END_CANONICAL_CONTENT_JSON
+
+      The canonical interactive marker for UNCHANGED-1 is:
       <!-- posted-by: arm-api-reviewer-agent | rule: UNCHANGED-1 | category: property-design | severity: suggestion | classification: existing | critic: pass | head-sha: eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee -->
 
-      Its canonical autonomous marker is:
+      The canonical autonomous marker for UNCHANGED-1 is:
       _posted-by: arm-api-reviewer-agent | rule: UNCHANGED-1 | category: property-design | severity: suggestion | classification: existing | critic: pass | head-sha: eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee_
 
-      Each mode's canonical finding body is the three content lines followed
-      by its own marker above. Use the surface-appropriate canonical body.
+      Each canonical body is its content string, a blank line, and its own
+      surface-appropriate marker above. For the other three Suggestion bodies,
+      replace only the marker's rule value with their finding key. Preserve
+      all other fields. Preserve every content byte, code fence, and marker.
 
       The interactive reviewer explicitly approved publishing this plan.
       The autonomous run was triggered by `workflow_dispatch`.
@@ -921,7 +953,13 @@ stimuli:
       Return only JSON containing `interactive_review_body`,
       `autonomous_review_body`, `interactive_extra_summary_count`,
       `autonomous_extra_summary_count`, `interactive_top_level_finding_count`,
-      and `autonomous_top_level_finding_count`. Provide complete rendered
+      `autonomous_top_level_finding_count`, `interactive_inline_ids`, and
+      `autonomous_inline_ids`. The inline-ID arrays list only findings actually
+      queued inline, in publication order. Each `top_level_finding_count`
+      counts standalone PR conversation comments posted through the issue-comment
+      API, not canonical entries within the review body. Each
+      `extra_summary_count` counts standalone summaries outside that review.
+      Provide complete rendered
       review bodies, not an explanation or template. Do not call GitHub tools
       or publish anything.
     constraints:
@@ -956,12 +994,21 @@ stimuli:
         name: "no autonomous standalone unchanged finding"
         config:
           pattern: '"autonomous_top_level_finding_count"\s*:\s*0\b'
+      - type: output-matches
+        name: "interactive-valid-anchors-only"
+        config:
+          pattern: '"interactive_inline_ids"\s*:\s*\[\s*"ADDED"\s*,\s*"CONTEXT"\s*\]'
+      - type: output-matches
+        name: "autonomous-valid-anchors-only"
+        config:
+          pattern: '"autonomous_inline_ids"\s*:\s*\[\s*"ADDED"\s*,\s*"CONTEXT"\s*\]'
       - type: prompt
     rubric:
       - Both entry points render a complete non-empty review body headed `## ARM API Review`, retaining the pinned SHA and Critic verification
-      - Both bodies include the complete UNCHANGED-1 canonical finding in a Findings on unchanged files subsection without paraphrasing; interactive uses its HTML marker and autonomous uses its visible marker
+      - Both bodies include all four complete Suggestion canonical bodies exactly once in a Findings on unchanged files subsection without paraphrasing, including the long UNANCHORED-2 content and full TypeSpec fix; interactive uses HTML markers and autonomous uses visible markers
       - The unchanged-file entry is the narrowly scoped alternative to an invalid inline anchor, not a summarized or dropped finding; exact one-to-one canonical-content parity is preserved
-      - Both category tables count one Blocking, one Warning, and one Suggestion finding; the unchanged-file finding is not dropped from totals
+      - Both inline-ID arrays contain only ADDED and CONTEXT; unchanged context lines inside a hunk remain eligible but a changed filename alone cannot anchor an outside-hunk line, unknown patch, or LEFT-only line on the RIGHT
+      - Both category tables count one Blocking, one Warning, and four Suggestion findings; no fallback finding is dropped from totals or described as posted inline
       - Both bodies include the approval-label inventory and run themes with no unresolved template placeholders
       - The autonomous body records workflow_dispatch as its trigger rather than inventing another event
       - All four extra-summary and standalone-finding counts are zero; interactive consent does not authorize a duplicate summary

@@ -1614,6 +1614,18 @@ approved publishing it; create and submit one pending review even when no
 inline finding is queued. Local/read-only reviews and cancelled plans do not
 publish a review.
 
+Before adding an inline finding, verify its path, side, and any line range
+against the diff for the pinned base/head SHAs. A modified filename alone is
+not enough: added lines and unchanged context lines within a hunk may be valid,
+but an unchanged line outside the hunks has no valid inline anchor. Do not
+reuse a deleted `LEFT` line as a `RIGHT` anchor. If the patch is missing or
+truncated and the anchor cannot be verified, or no valid anchor exists, retain
+the complete canonical finding once in `Findings on unchanged files` in the
+single review body, even when its file was modified. Do not select a nearby
+changed line, shorten the body, or wait for a 422 before choosing this route.
+This changes only the posting surface, not the finding or review-completeness
+requirements.
+
 1. **Wait for explicit confirmation** from the reviewer before any post, reply, or resolution.
 2. **POST-NEW** - create a pending review with `pull_request_review_write(method: "create")`, add one finding at a time with `add_comment_to_pending_review` attached to the specific file and **exact line number** in the plan, then submit **once** with `pull_request_review_write(method: "submit_pending")`, passing the **Review-body preamble** defined below as that call's `body`. **Every inline finding produced by a run goes through this one review.** Do not split findings across multiple reviews, and never submit a review with an empty body -- an empty-body `COMMENTED` review leaves its findings with no visible attribution and is a defect. Format and telemetry rules below apply.
 3. **RESOLVE-AND-REPOST** (Scenario B) - resolve the cited trusted workflow-owned thread first, then post a new comment at the corrected line and include the cross-reference text: "_(Updated from previous comment at <url> - line shifted due to code changes.)_" Format and telemetry rules below apply to the new comment.

@@ -172,7 +172,9 @@ be fetched, reconciliation is incomplete and follows the existing
    - the trailing telemetry marker (including all required fields).
      If a legitimate finding has no valid anchor in the PR diff, place that
      same complete canonical body once in the review body's `Findings on
-       unchanged files` subsection. This is a posting-surface exception, not
+     unchanged files` subsection. This includes unchanged lines outside the
+     diff hunks of a modified file, not just files absent from the diff. This
+     is a posting-surface exception, not
      permission to replace the finding with a summary theme or shortened text.
 3. **No re-authoring during payload assembly.** Heredoc rebuilds,
    payload-time JSON-string escaping, multi-finding consolidation, or
@@ -185,6 +187,12 @@ be fetched, reconciliation is incomplete and follows the existing
    exactly one complete canonical entry: an inline review comment when its
    path and line can be anchored to the PR diff, or a separately delimited
    entry in the review body's unchanged-file subsection when they cannot.
+   Verify the path, side, and any line range against the diff at the pinned
+   base/head SHAs before queuing an inline entry. A changed filename alone is
+   not proof of a valid anchor. Added lines and unchanged context lines in a
+   hunk may be valid; unchanged lines outside the hunks are not. When a patch
+   is missing or truncated and anchor validity cannot be established, use the
+   full-body subsection rather than guessing or relying on publisher recovery.
    Never invent an anchor or modify an unrelated file to obtain one. In
    interactive mode the human-approved subset **MUST** map one-to-one to
    these posted entries; in autonomous mode every net-new finding in the
