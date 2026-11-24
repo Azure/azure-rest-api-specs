@@ -18653,7 +18653,7 @@
         },
         "wellKnownGalleryScriptRemediations": {
           "type": "array",
-          "description": "ARM resource IDs of explicitly versioned gallery scripts that are\npre-staged for execution from Windows Recovery Environment (WinRE).\nThis property may only be specified when Windows recovery is enabled.\nEach entry must identify an explicit gallery-script version, and the list\ncannot contain multiple versions of the same gallery script.\nOmitting this property on update preserves the existing remediation set;\nspecifying an empty array clears it.",
+          "description": "References to explicitly versioned gallery scripts that are\npre-staged for execution from Windows Recovery Environment (WinRE).\nSupports the following gallery script version reference formats:\n- Private galleries: `/galleries/{gallery}/scripts/{script}/versions/{version}`.\n- Direct-shared galleries: `/sharedGalleries/{galleryUniqueName}/scripts/{script}/versions/{version}`.\n- Community galleries: `/communityGalleries/{galleryPublicName}/scripts/{script}/versions/{version}`.\nThe Compute control plane validates the references and applicable access\nrequirements.\nThis property may only be specified when Windows recovery is enabled.\nEach entry must identify an explicit gallery-script version, and the list\ncannot contain multiple versions of the same gallery script.\nOmitting this property on update preserves the existing remediation set;\nspecifying an empty array clears it.",
           "items": {
             "type": "string"
           }

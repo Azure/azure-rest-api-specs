@@ -2257,8 +2257,14 @@ model RecoveryProfile {
   enableWindowsRecovery?: boolean;
 
   /**
-   * ARM resource IDs of explicitly versioned gallery scripts that are
+   * References to explicitly versioned gallery scripts that are
    * pre-staged for execution from Windows Recovery Environment (WinRE).
+   * Supports the following gallery script version reference formats:
+   * - Private galleries: `/galleries/{gallery}/scripts/{script}/versions/{version}`.
+   * - Direct-shared galleries: `/sharedGalleries/{galleryUniqueName}/scripts/{script}/versions/{version}`.
+   * - Community galleries: `/communityGalleries/{galleryPublicName}/scripts/{script}/versions/{version}`.
+   * The Compute control plane validates the references and applicable access
+   * requirements.
    * This property may only be specified when Windows recovery is enabled.
    * Each entry must identify an explicit gallery-script version, and the list
    * cannot contain multiple versions of the same gallery script.
