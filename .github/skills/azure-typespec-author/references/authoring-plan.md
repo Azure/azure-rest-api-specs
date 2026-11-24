@@ -6,17 +6,17 @@
 
 ### 3.1.1 Reuse the authoring grounding
 
-Step 2 already read the reference catalog, classified the complete request as covered
-or uncovered, and executed exactly one knowledge route before collecting any missing
-decisions. Reuse that route's fetched content here.
+Step 2 already called `azsdk_typespec_retrieve_knowledge` for the complete request
+and project analysis before collecting any missing decisions. Reuse the returned
+context here.
 
-Do not call Agentic Search, `azsdk_typespec_retrieve_knowledge`, or an authoring-plan
-MCP during planning. If the grounding is insufficient, return to Step 2 and refine
-the same selected route there; never switch routes or make an ungrounded plan.
+Do not call `azsdk_typespec_retrieve_knowledge` or an authoring-plan MCP during
+planning. If the grounding is insufficient, return to Step 2 and refine the
+retrieval request there; never switch guidance sources or make an ungrounded plan.
 
 ### 3.1.2 Build the authoring plan locally
 
-Synthesize the selected guidance and finalized intake result into a concrete plan.
+Synthesize the retrieved guidance and finalized intake result into a concrete plan.
 
 Document your final plan with references to supporting documents, and ensure the plan follows the retrieved context above.
 
@@ -35,7 +35,8 @@ SDK-visible changes include that analysis by default unless the user opts out.
 
 ### API Versioning
 
-> API Versioning **is covered** by [reference-document-links.md](reference-document-links.md), so Step 2 **MUST** use **Agentic Search** and call `web_fetch` on the matching versioning document before finalizing intake. Reuse that guidance here. Do **not** call `azsdk_typespec_retrieve_knowledge` or `azsdk_typespec_generate_authoring_plan`.
+> Reuse the API versioning context returned by `azsdk_typespec_retrieve_knowledge`
+> during Step 2; do not call retrieval during planning.
 
 For requests that add, replace, or promote a version:
 
@@ -56,10 +57,10 @@ For requests that add, replace, or promote a version:
 
 ### ARM Resource Operations
 
-> ARM resource operations are covered by
-> [reference-document-links.md](reference-document-links.md), including existence
-> checks, custom actions, LRO behavior, and response/header changes. Reuse the
-> Agentic Search grounding from Step 2; do not call retrieval during planning.
+> Reuse the ARM resource operations context returned by
+> `azsdk_typespec_retrieve_knowledge` during Step 2, including existence checks,
+> custom actions, LRO behavior, and response/header changes. Do not call retrieval
+> during planning.
 
 For PATCH operations that update tags and mutable resource properties:
 
@@ -75,9 +76,9 @@ For PATCH operations that update tags and mutable resource properties:
 
 ### Data-Plane Operations
 
-> Data-plane operations are covered by
-> [reference-document-links.md](reference-document-links.md). Reuse the Agentic
-> Search grounding from Step 2; do not call retrieval during planning.
+> Reuse the data-plane operations context returned by
+> `azsdk_typespec_retrieve_knowledge` during Step 2; do not call retrieval during
+> planning.
 
 Key guidance for data-plane:
 

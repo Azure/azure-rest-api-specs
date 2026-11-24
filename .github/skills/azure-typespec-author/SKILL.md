@@ -4,7 +4,7 @@ license: MIT
 metadata:
   version: "1.0.0"
 description: "Authors Azure TypeSpec API specifications. MUST BE USED for all .tsp changes except naming-only client.tsp SDK overrides handled by azure-typespec-sdk-naming. WHEN: versions, resources, operations, models, properties, decorators, visibility, constraints, breaking changes, LRO for ARM or data-plane. DO NOT USE FOR: naming-only client.tsp overrides, SDK generation/releases, single MCP calls. INVOKES: azure-sdk-mcp:azsdk_typespec_retrieve_knowledge, azure-sdk-mcp:azsdk_run_typespec_validation."
-compatibility: "Optionally uses the azure-sdk-mcp server with azure-sdk-mcp:azsdk_typespec_retrieve_knowledge and azure-sdk-mcp:azsdk_run_typespec_validation tools"
+compatibility: "Requires the azure-sdk-mcp server with azure-sdk-mcp:azsdk_typespec_retrieve_knowledge for guidance; optionally uses azure-sdk-mcp:azsdk_run_typespec_validation"
 ---
 
 # Azure TypeSpec Author
@@ -33,17 +33,18 @@ This includes but is not limited to:
 
 | Tool                                              | Purpose                                                                                                                  |
 | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `azure-sdk-mcp:azsdk_typespec_retrieve_knowledge` | Retrieve authoring knowledge for requests not covered by the reference catalog; Agentic Search handles covered requests. |
+| `azure-sdk-mcp:azsdk_typespec_retrieve_knowledge` | Retrieve authoring guidance as context for every request during intake. |
 | `azure-sdk-mcp:azsdk_run_typespec_validation`     | Validate TypeSpec.                                                                                                       |
 
-These MCP tools are optional capabilities, not prerequisites. Call them at their
-documented workflow stages when they are exposed. When retrieval MCP is not exposed,
-continue the selected knowledge route with authoritative Agentic Search. When
-validation MCP is not exposed, continue with the mandatory local compile and
-case-specific checks.
+Use `azsdk_typespec_retrieve_knowledge` as the sole source of authoring guidance.
+Call it during intake with the complete request and project analysis, then reuse
+the returned context for intake, local planning, editing, and citations. If it is
+not exposed or cannot provide sufficient guidance, report a blocker; do not use
+Web search or direct documentation fetching as a fallback. When validation MCP is
+not exposed, continue with the mandatory local compile and case-specific checks.
 
 An exposed tool that returns an error, times out, or fails authentication is not
-unavailable. Report that failure instead of silently taking its fallback.
+unavailable. Report that failure instead of silently continuing.
 
 Install `azure-typespec-sdk-naming` alongside this skill. Invoke it by name for naming guidance; do not copy its rules into this skill. If unavailable, report the naming coverage gap rather than inventing a replacement.
 
@@ -57,10 +58,9 @@ Install `azure-typespec-sdk-naming` alongside this skill. Invoke it by name for 
 - **Keep source and client plans separate** — Step 3 plans ordinary TypeSpec source changes. Step 4 offers an explicit opt-out from the [client configuration workflow](references/client-configuration.md), which is recommended and included by default for SDK-visible changes. The authoring skill owns declaration edits; the naming skill owns `client.tsp` edits through its apply workflow.
 - **Always validate** — follow [validation](references/validation.md) after every edit. Run validation MCP when available and always run `tsp compile .`; absence of the validation MCP tool is not a blocker.
 - **Always cite references** — provide links that justify the approach.
-- **Attempt catalog access before selecting a knowledge route** — after project analysis, read the reference catalog during intake. Retry the installed catalog path when its first read fails, then try the canonical repository copy through an available repository-file reader. If the catalog still cannot be read, continue Agentic Search by locating authoritative TypeSpec or Azure documentation directly; catalog access failure is not a blocker and does not by itself select the retrieval MCP route.
-- **Select and execute one knowledge route during intake** — classify the complete request as covered or uncovered after reading the catalog. Covered requests use Agentic Search. If any material authoring topic is uncovered, use `azsdk_typespec_retrieve_knowledge` for the complete request when the tool is exposed; if it is not exposed, use authoritative Agentic Search for the complete request. Do not call both knowledge routes. Step 3 reuses the fetched content and must not retrieve it again.
-- **Never call `azsdk_typespec_generate_authoring_plan`** — synthesize the authoring plan locally from the selected grounding source.
-- **Do not edit before grounding** — follow `Analyze → Read catalog → Classify coverage → Ground once during intake → Plan source locally → Plan client configuration unless opted out → Apply → Validate`. If neither the selected MCP route nor authoritative Web grounding can provide sufficient guidance, report a blocker instead of making ungrounded edits.
+- **Retrieve guidance during intake** — use only `azsdk_typespec_retrieve_knowledge` for every request, regardless of case. Do not read a reference catalog to classify coverage or select another guidance source. Retain the returned context and supporting URLs; do not retrieve again solely for planning or citations.
+- **Never call `azsdk_typespec_generate_authoring_plan`** — synthesize the authoring plan locally from the retrieved context.
+- **Do not edit before grounding** — follow `Analyze → Retrieve guidance during intake → Plan source locally → Plan client configuration unless opted out → Apply → Validate`. If retrieval cannot provide sufficient guidance, report a blocker instead of making ungrounded edits.
 - **Validation is not retrieval** — calling `azsdk_run_typespec_validation` after edits does not violate the one-source rule. If that tool is unavailable, record the skip and continue with `tsp compile .`.
 - **Preserve dependency setup** — never delete `node_modules`, `packages`,
   restored tools, or fixture links during validation cleanup, even if they were
@@ -130,8 +130,6 @@ Output all referenced document URLs from the source plan in Step 3 and any clien
 | [intake.md](references/intake.md)                                     | Step 2: general + case-specific intake        |
 | [authoring-plan.md](references/authoring-plan.md)                     | Step 3: build TypeSpec source plan locally    |
 | [client-configuration.md](references/client-configuration.md)         | Step 4: client configuration unless opted out |
-| [agentic-search.md](references/agentic-search.md)                     | Procedure: fetch URLs → extract guidance      |
-| [reference-document-links.md](references/reference-document-links.md) | Catalog of external guide URLs                |
 | [validation.md](references/validation.md)                             | Step 6: validate → compile → verify           |
 
 ## Examples

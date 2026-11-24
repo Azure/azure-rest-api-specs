@@ -4,25 +4,28 @@
 
 ## 2.1 General Intake (All Cases)
 
-1. call `azsdk_typespec_retrieve_knowledge` to fetch guidance
+1. Call `azsdk_typespec_retrieve_knowledge` with the complete user request and
+   Step 1 project analysis to fetch authoring guidance as context.
 2. Use the fetched guidance to determine the material intake decisions and retain it
    for the authoring plan.
-3. Using the selected guidance, the Step 1 result, and the user's request, identify
+3. Using the retrieved guidance, the Step 1 result, and the user's request, identify
    every matching case from the table below.
 4. Gather only material information that is not already supplied or directly
    available from the project. If no case matches, skip Step 2.2.
 
-Do not call an authoring-plan or validation MCP tool during intake. If the selected
-knowledge route cannot obtain sufficient authoritative guidance, report a blocker
-instead of switching routes. Do not plan, edit, or validate during intake. Step 3
-must reuse this grounding record without repeating Agentic Search or retrieval.
+Do not call an authoring-plan or validation MCP tool during intake. Use only
+`azsdk_typespec_retrieve_knowledge` for guidance; do not use Web search, direct
+documentation fetching, or catalog-based coverage classification. If the tool is
+unavailable or cannot obtain sufficient guidance, report a blocker. Do not plan,
+edit, or validate during intake. Step 3 must reuse this grounding record without
+repeating retrieval solely for planning or citations.
 
-| Case | Name                    | Description                                            | Service Type     | Knowledge route          |
-| ---- | ----------------------- | ------------------------------------------------------ | ---------------- | ------------------------ |
-| 1    | ARM Resource Types      | Define a new ARM resource with operations              | ARM              | Covered — Agentic Search |
-| 2    | ARM Resource Operations | Add CRUD or custom actions on an existing resource     | ARM              | Covered — Agentic Search |
-| 3    | API Versioning          | Add, bump, or promote an API version (preview/stable)  | ARM / Data-plane | Covered — Agentic Search |
-| 4    | Data-Plane Operations   | Add CRUD or custom operations on a data-plane resource | Data-plane       | Covered — Agentic Search |
+| Case | Name                    | Description                                            | Service Type     |
+| ---- | ----------------------- | ------------------------------------------------------ | ---------------- |
+| 1    | ARM Resource Types      | Define a new ARM resource with operations              | ARM              |
+| 2    | ARM Resource Operations | Add CRUD or custom actions on an existing resource     | ARM              |
+| 3    | API Versioning          | Add, bump, or promote an API version (preview/stable)  | ARM / Data-plane |
+| 4    | Data-Plane Operations   | Add CRUD or custom operations on a data-plane resource | Data-plane       |
 
 ---
 
