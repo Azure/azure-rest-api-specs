@@ -1,0 +1,78 @@
+{
+  "title": "Creates or updates a Fleet with customer-specified outbound public IP addresses.",
+  "operationId": "Fleets_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2027-02-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgfleets",
+    "fleetName": "contoso-fleet",
+    "resource": {
+      "location": "eastus2",
+      "properties": {
+        "hubProfile": {
+          "apiServerAccessProfile": {
+            "enablePrivateCluster": true
+          },
+          "networkingProfile": {
+            "egressPublicIpResourceIds": [
+              "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/net-rg/providers/Microsoft.Network/publicIPAddresses/fleet-egress"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgfleets/providers/Microsoft.ContainerService/fleets/contoso-fleet",
+        "name": "contoso-fleet",
+        "type": "Microsoft.ContainerService/fleets",
+        "location": "eastus2",
+        "properties": {
+          "hubProfile": {
+            "apiServerAccessProfile": {
+              "enablePrivateCluster": true
+            },
+            "networkingProfile": {
+              "egressPublicIpResourceIds": [
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/net-rg/providers/Microsoft.Network/publicIPAddresses/fleet-egress"
+              ],
+              "effectiveEgressPublicIpAddresses": [
+                "203.0.113.10"
+              ]
+            }
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ContainerService/locations/eastus2/operationStatuses/00000000-0000-0000-0000-000000000001?api-version=2027-02-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgfleets/providers/Microsoft.ContainerService/fleets/contoso-fleet",
+        "name": "contoso-fleet",
+        "type": "Microsoft.ContainerService/fleets",
+        "location": "eastus2",
+        "properties": {
+          "hubProfile": {
+            "apiServerAccessProfile": {
+              "enablePrivateCluster": true
+            },
+            "networkingProfile": {
+              "egressPublicIpResourceIds": [
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/net-rg/providers/Microsoft.Network/publicIPAddresses/fleet-egress"
+              ],
+              "effectiveEgressPublicIpAddresses": [
+                "203.0.113.10"
+              ]
+            }
+          },
+          "provisioningState": "Creating"
+        }
+      }
+    }
+  }
+}
