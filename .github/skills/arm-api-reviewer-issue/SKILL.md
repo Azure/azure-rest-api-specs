@@ -1,11 +1,6 @@
 ---
 name: arm-api-reviewer-issue
-description: >
-  Report issues about the ARM API Reviewer agent only. USE FOR: ARM reviewer
-  feedback, file an ARM reviewer issue, its API-guidance interpretation,
-  review process, and repository workflows. DO NOT USE FOR: Data-Plane API
-  Reviewer feedback or issues, general service API bugs, SDK generation, or
-  posting PR comments. Do not draft or file ARM issues for excluded requests.
+description: "File ARM API Reviewer issues. USE FOR: issue reports, false positives, drafts, publication checks, and recovery scenarios. DO NOT USE FOR: TypeSpec authoring or fixes (azure-typespec-author), TypeSpec diff assessments (azure-typespec-assessment), Data-Plane API Reviewer concerns, service API bugs, SDK generation, PR comments. Never draft or file issues for excluded requests."
 license: MIT
 metadata:
   version: "1.0.0"

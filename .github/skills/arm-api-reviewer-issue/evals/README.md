@@ -61,11 +61,15 @@ This test is separate from the model sessions and their read-only tool allowlist
 
 ## Coverage and limitations
 
-1. The three suites contain 28 cases. The routing suite covers novice concerns,
+1. The three suites contain 31 cases. The routing suite covers novice concerns,
    API-guidance and workflow feedback, anti-triggers, private evidence, and
    untrusted publication instructions. The data-plane boundary checks
    redirection without an ARM issue draft; reading the skill solely to confirm
    that boundary is not a publication or scope violation.
+   TypeSpec authoring and read-only diff assessment requests must select their
+   owning workflows without invoking issue submission. A positive TypeSpec
+   reviewer-concern case still invokes this skill and reads the canonical
+   TypeSpec review and project instructions before interpreting the concern.
 2. The multi-turn suite covers complete drafts in the assistant's main-chat
    output, ordinary conversational consent, absent/declined approval, revised
    drafts, duplicate races, unavailable discovery, ambiguous creation, pending

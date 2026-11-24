@@ -36,6 +36,13 @@ actionable next step. Do not assume that a reported symptom establishes a cause.
 2. Determine whether this is a bug report, improvement request, documentation
    concern, or a question that needs a decision. Route unrelated service API
    bugs, SDK work, and data-plane reviewer concerns outside this skill.
+   Route requests to author or fix TypeSpec specifications to
+   `azure-typespec-author`, and read-only TypeSpec diff assessments to
+   `azure-typespec-assessment`, even when prompted by ARM reviewer feedback.
+   Do not draft or file issues for those requests. Reporting a suspected
+   reviewer false positive remains in scope, including TypeSpec concerns;
+   research for that report does not authorize specification changes or a
+   full diff assessment.
 3. Do not begin with an API-specification form or require an API version,
    contract citation, workflow name, or technical diagnosis.
 
@@ -94,18 +101,20 @@ actionable next step. Do not assume that a reported symptom establishes a cause.
 1. Use public repository context to identify the relevant component and
    authoritative guidance. Load only resources needed for the concern:
 
-   | Concern                                     | Starting resources                                                                                                                                                                                                                                                                                                                                                                                   |
-   | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | Reviewer behavior and documented experience | [Reviewer guide](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/api-reviewer-agent.md), [reviewer definition](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/agents/arm-api-reviewer.agent.md)                                                                                                                                                               |
-   | API rules, contracts, and interpretation    | [Shared API review guidance](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/skills/azure-api-review/SKILL.md), [ARM instructions](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/instructions/arm-api-review.instructions.md), [OpenAPI instructions](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/instructions/openapi-review.instructions.md) |
-   | Automatic review, labels, and signoff       | [Reviewer workflow](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/workflows/arm-api-review.md), [Summarize Checks](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/workflows/summarize-checks.yaml), [semantic review and signoff design](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/workflows/src/arm-auto-signoff/README.md)                |
-   | Repository workflow implementation          | [Engineering review guidance](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/skills/engineering-code-review/SKILL.md), [GitHub Actions standards](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/instructions/github-actions.instructions.md)                                                                                                                      |
+   | Concern                                     | Starting resources                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+   | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | Reviewer behavior and documented experience | [Reviewer guide](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/api-reviewer-agent.md), [reviewer definition](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/agents/arm-api-reviewer.agent.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+   | API rules, contracts, and interpretation    | [Shared API review guidance](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/skills/azure-api-review/SKILL.md), [ARM instructions](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/instructions/arm-api-review.instructions.md), [OpenAPI instructions](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/instructions/openapi-review.instructions.md), [TypeSpec review instructions](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/instructions/typespec-review.instructions.md), [TypeSpec project instructions](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/instructions/typespec-project.instructions.md) |
+   | Automatic review, labels, and signoff       | [Reviewer workflow](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/workflows/arm-api-review.md), [Summarize Checks](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/workflows/summarize-checks.yaml), [semantic review and signoff design](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/workflows/src/arm-auto-signoff/README.md)                                                                                                                                                                                                                                                                                                              |
+   | Repository workflow implementation          | [Engineering review guidance](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/skills/engineering-code-review/SKILL.md), [GitHub Actions standards](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/instructions/github-actions.instructions.md)                                                                                                                                                                                                                                                                                                                                                                                                                    |
 
    Prefer the matching files in the local repository when available; these
    public links also work when the skill is evaluated or copied independently.
    Use them as canonical sources, not permission to start another workflow.
    Do not copy their rules into a new policy or claim that a formal API review
    or Critic verification took place unless it actually did.
+   For a TypeSpec-specific concern, read the TypeSpec review and project
+   instructions before interpreting its rule or declaring a false positive.
 
 2. Refresh linked PR state, head/base revisions, and relevant issue status.
    Pin source links to the revision supporting the claim. Verify quoted rules
@@ -165,6 +174,9 @@ actionable next step. Do not assume that a reported symptom establishes a cause.
    Replace template placeholders before seeking publication approval.
 7. Before showing a preview, check the exact five headings and their order,
    the 2-3 sentence Summary, Solution details, public references, and style.
+   Check the applicable publication-metadata disclosures below. When proposing
+   Copilot, include its assignment-time issue context and the limitation that
+   later issue comments are not supplied to it.
    Correct any omission or unsupported claim before requesting approval.
 
 ### Publication metadata

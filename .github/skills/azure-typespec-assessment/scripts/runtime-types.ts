@@ -279,9 +279,15 @@ export interface AutorestArtifact {
   outputDirectory?: string;
 }
 
+export interface NormalizedRefCacheEntry {
+  schema: NormalizedSchema;
+  visitedRefs: Set<string>;
+}
+
 export interface AutorestContext {
   document: AutorestDocument;
   registry: Map<string, AutorestDocument>;
+  normalizedRefs?: Map<string, NormalizedRefCacheEntry>;
   pointer: string;
   route?: string;
   routeSource?: string;
@@ -403,6 +409,9 @@ export interface TcgcConflict {
 
 export interface TcgcContext {
   conflicts: TcgcConflict[];
+  concreteIdentities?: WeakMap<object, string>;
+  namedConcreteIdentities?: Map<string, string>;
+  modelProvenance?: WeakMap<object, TcgcModelProvenance>;
 }
 
 export interface NormalizedTcgcType {
@@ -425,6 +434,18 @@ export interface NormalizedTcgcType {
 export interface TcgcArtifact {
   format?: string;
   files?: { path: string }[];
+  provenanceFile?: { path: string; contentHash?: string };
+}
+
+export interface TcgcModelProvenance {
+  crossLanguageDefinitionId: string;
+  name?: string;
+  templateArguments: unknown[];
+}
+
+export interface TcgcProvenanceArtifact {
+  schemaVersion: 1;
+  models: TcgcModelProvenance[];
 }
 
 export interface NormalizedTcgcParameter {
@@ -473,6 +494,8 @@ export interface NormalizedTcgcMethod {
 export interface NormalizedTcgcNamedType {
   identity: string;
   crossLanguageDefinitionId?: string;
+  genericInstanceIdentity?: string;
+  templateArguments?: unknown[];
   name?: string;
   access?: string;
   reachable?: boolean;
@@ -1031,7 +1054,13 @@ export interface PreparationManifest {
     };
     [key: string]: unknown;
   };
-  sparseCheckout: { mode: string; roots: string[]; verified: boolean };
+  sparseCheckout: {
+    mode: string;
+    roots: string[];
+    supportRoots?: string[];
+    workspaceRoots?: string[];
+    verified: boolean;
+  };
   changedFiles: ChangedFile[];
   projects: PreparationProject[];
   blockers: PreparationBlocker[];
