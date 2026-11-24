@@ -36,4 +36,5 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           EVENT_ACTION: ${{ github.event.action }}
           LABEL_NAME: ${{ github.event.label.name }}
-        run: echo "PR #${PR_NUMBER} ${EVENT_ACTION} ${LABEL_NAME}"
+        run: |
+          echo "PR #${PR_NUMBER} ${EVENT_ACTION} ${LABEL_NAME}"

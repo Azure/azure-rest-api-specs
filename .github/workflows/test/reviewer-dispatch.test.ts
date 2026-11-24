@@ -239,7 +239,7 @@ describe("dispatchReviewer", () => {
     { event: "pull_request_target" },
     { conclusion: "skipped" },
     { display_title: "Some PR title" },
-  ])("makes no API calls for non-intake or unparseable runs: %j", async (overrides) => {
+  ])("makes no API calls for non-intake or invalid runs: %j", async (overrides) => {
     intake("PR #5 labeled WaitForARMFeedback", overrides);
 
     await dispatchReviewer({ github, context, core });

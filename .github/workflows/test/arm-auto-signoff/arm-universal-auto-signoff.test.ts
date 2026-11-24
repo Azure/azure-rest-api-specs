@@ -424,21 +424,12 @@ describe("ARM Universal Auto SignOff workflow", () => {
     expect(workflow).not.toContain("ARM Semantic Review - Set Status");
   });
 
-  it("re-evaluates on every policy-relevant label", async () => {
+  it("re-evaluates on every pull request intake event without pull_request_target", async () => {
     const workflow = await readWorkflow("arm-universal-auto-signoff.yaml");
 
-    for (const label of [
-      "Approved-Suppression",
-      "ARMAutoSignedOff",
-      "ARMManualSignoffRequired",
-      "ARMReview",
-      "ARMSignedOff",
-      "NotReadyForARMReview",
-      "SuppressionReviewRequired",
-    ]) {
-      expect(workflow).toContain(`github.event.label.name == '${label}'`);
-    }
-    expect(workflow).not.toContain("ARMAutoSignedOff-Test");
+    expect(workflow).toContain('- "Pull Request Event"');
+    expect(workflow).not.toContain("pull_request_target");
+    expect(workflow).not.toContain("github.event.label.name");
   });
 
   it("does not write labels or statuses, and emits an artifact for every managed label", async () => {
