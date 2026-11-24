@@ -184,8 +184,6 @@ using TypeSpec.Versioning;
 
 @@clientName(Fleet, "ComputeFleet", "csharp");
 
-@@clientName(RegionMixFleetUpdate, "RegionMixFleetPatch", "csharp");
-
 @@clientName(FleetProperties, "ComputeFleetProperties", "csharp");
 @@clientName(FleetProperties.timeCreated, "CreatedOn", "csharp");
 
