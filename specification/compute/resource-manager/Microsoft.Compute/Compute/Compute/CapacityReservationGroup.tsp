@@ -44,15 +44,20 @@ interface CapacityReservationGroups {
   /**
    * The operation to create or update a capacity reservation group. When updating a capacity reservation group, only tags and sharing profile may be modified. Please refer to https://aka.ms/CapacityReservation for more details.
    */
-  createOrUpdate is ComputeResourceCreateOrReplaceSync<CapacityReservationGroup>;
+  createOrUpdate is ComputeResourceCreateOrReplaceAsync<CapacityReservationGroup>;
 
   /**
    * The operation to update a capacity reservation group. When updating a capacity reservation group, only tags and sharing profile may be modified.
    */
   @patch(#{ implicitOptionality: false })
-  update is ComputeCustomPatchSync<
+  update is ComputeCustomPatchAsync<
     CapacityReservationGroup,
-    CapacityReservationGroupUpdate
+    CapacityReservationGroupUpdate,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = CapacityReservationGroup> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResponse<CapacityReservationGroup> &
+      ArmAsyncOperationHeader<FinalResult = CapacityReservationGroup> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
