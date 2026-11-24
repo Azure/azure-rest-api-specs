@@ -391,6 +391,9 @@
           },
           {
             "$ref": "#/parameters/NodeImageVersionListConfig.lookback"
+          },
+          {
+            "$ref": "#/parameters/NodeImageVersionListConfig.pageSize"
           }
         ],
         "responses": {
@@ -16469,6 +16472,37 @@
       ],
       "x-ms-discriminator-value": "NodeImage"
     },
+    "NodeImageGlobalSdpValidationStatus": {
+      "type": "string",
+      "description": "Global AKS-managed SDP validation progress and outcome for a node image.",
+      "enum": [
+        "InProgress",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "NodeImageGlobalSdpValidationStatus",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The corresponding AgentBakerService release is still rolling out; the globally available image has not yet been validated in every region."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The corresponding AgentBakerService rollout completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The corresponding AgentBakerService rollout failed or was abandoned, and the image was marked failed/defective."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "NodeImageType": {
       "type": "string",
       "description": "Whether a node image is a standard release or a security-only patch.",
@@ -16554,8 +16588,22 @@
           "$ref": "#/definitions/NodeImageType",
           "description": "Whether this image is a standard release or a security-only patch.",
           "readOnly": true
+        },
+        "globalSdpValidationStatus": {
+          "$ref": "#/definitions/NodeImageGlobalSdpValidationStatus",
+          "description": "Eventually consistent global AKS-managed SDP validation status, populated on every returned image.",
+          "readOnly": true
+        },
+        "currentDefaultInLocation": {
+          "type": "boolean",
+          "description": "Whether regional AgentBakerService identifies this image as the current AKS default for its distro in the requested location.",
+          "readOnly": true
         }
-      }
+      },
+      "required": [
+        "globalSdpValidationStatus",
+        "currentDefaultInLocation"
+      ]
     },
     "NodeImageVersionsListResult": {
       "type": "object",
@@ -19582,7 +19630,7 @@
     "NodeImageVersionListConfig.latestImagesOnly": {
       "name": "latestImagesOnly",
       "in": "query",
-      "description": "Return the latest standard image per variant. Patched-image selection remains under review.",
+      "description": "Return the latest standard image per variant and, when requested, all eligible patches for those base images.",
       "required": false,
       "type": "boolean",
       "x-ms-parameter-location": "method"
@@ -19596,6 +19644,18 @@
       "format": "int32",
       "minimum": 1,
       "maximum": 180,
+      "x-ms-parameter-location": "method"
+    },
+    "NodeImageVersionListConfig.pageSize": {
+      "name": "pageSize",
+      "in": "query",
+      "description": "Maximum images per page. Pages may contain fewer items.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 100,
+      "minimum": 1,
+      "maximum": 1000,
       "x-ms-parameter-location": "method"
     }
   }

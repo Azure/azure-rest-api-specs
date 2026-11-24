@@ -1701,7 +1701,7 @@ model NodeImageVersionListConfig {
   @minLength(1)
   filter?: string;
 
-  /** Return the latest standard image per variant. Patched-image selection remains under review. */
+  /** Return the latest standard image per variant and, when requested, all eligible patches for those base images. */
   @added(Versions.v2026_09_02_preview)
   @query
   latestImagesOnly?: boolean;
@@ -1712,6 +1712,13 @@ model NodeImageVersionListConfig {
   @minValue(1)
   @maxValue(180)
   lookback?: int32;
+
+  /** Maximum images per page. Pages may contain fewer items. */
+  @added(Versions.v2026_09_02_preview)
+  @query
+  @minValue(1)
+  @maxValue(1000)
+  pageSize?: int32 = 100;
 }
 
 /**
@@ -1731,6 +1738,20 @@ union NodeImageType {
 
   /** Allows additional image types in future versions. */
   string,
+}
+
+/** Global AKS-managed SDP validation progress and outcome for a node image. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "The API contract restricts global SDP validation status to exactly three values."
+@added(Versions.v2026_09_02_preview)
+enum NodeImageGlobalSdpValidationStatus {
+  /** The corresponding AgentBakerService release is still rolling out; the globally available image has not yet been validated in every region. */
+  InProgress: "InProgress",
+
+  /** The corresponding AgentBakerService rollout completed successfully. */
+  Succeeded: "Succeeded",
+
+  /** The corresponding AgentBakerService rollout failed or was abandoned, and the image was marked failed/defective. */
+  Failed: "Failed",
 }
 
 /**
@@ -1763,6 +1784,16 @@ model NodeImageVersion {
   @added(Versions.v2026_09_02_preview)
   @visibility(Lifecycle.Read)
   imageType?: NodeImageType;
+
+  /** Eventually consistent global AKS-managed SDP validation status, populated on every returned image. */
+  @added(Versions.v2026_09_02_preview)
+  @visibility(Lifecycle.Read)
+  globalSdpValidationStatus: NodeImageGlobalSdpValidationStatus;
+
+  /** Whether regional AgentBakerService identifies this image as the current AKS default for its distro in the requested location. */
+  @added(Versions.v2026_09_02_preview)
+  @visibility(Lifecycle.Read)
+  currentDefaultInLocation: boolean;
 }
 
 /**
