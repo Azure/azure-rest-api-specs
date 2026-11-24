@@ -45,9 +45,22 @@ the manifest and report.
 
 ## Commands
 
-The coordinator verifies and, when necessary, installs the skill's own locked
+The coordinator parses arguments and validates local inputs before dependency
+setup, PR/network access, fetches, worktree creation, compilation, or output
+creation. It then verifies and, when necessary, installs the skill's own locked
 dependencies before loading the assessment implementation. Do not run a
 separate dependency-install command.
+
+Prefer `--repo-path "<local-checkout-directory>"`. The directory must exist and
+belong to a Git worktree; a subdirectory resolves to its worktree root. With
+neither repository option, the coordinator uses the Git worktree root containing
+the current directory. `--repo` remains a backward-compatible local-path alias,
+not the `gh --repo owner/repo` convention. If both flags are supplied, they must
+resolve to the same directory. Existing relative paths such as
+`Azure/azure-rest-api-specs` are valid local paths; nonexistent paths never fall
+back to the current checkout or trigger cloning. Put GitHub repository identity
+in a full `--pr` URL (or `owner/repo#number`) instead. Quote paths containing
+spaces.
 
 For local code, set values using the confirmed baseline:
 
@@ -59,7 +72,7 @@ $Work = "<work-directory>"
 $Skill = Join-Path $Repo ".github\skills\azure-typespec-assessment"
 
 node (Join-Path $Skill "scripts\run-assessment-analysis.ts") `
-  --repo $Repo --base $Base --specification $Specification --output $Work
+  --repo-path "$Repo" --base $Base --specification $Specification --output "$Work"
 ```
 
 For a PR, run directly without separate metadata or checkout commands:
@@ -70,15 +83,15 @@ $Work = "<work-directory>"
 $Skill = "<azure-typespec-assessment-skill-directory>"
 
 node (Join-Path $Skill "scripts\run-assessment-analysis.ts") `
-  --repo $Repo --pr "<pull-request-url-or-number>" --output $Work
+  --repo-path "$Repo" --pr "<pull-request-url-or-number>" --output "$Work"
 ```
 
 For an immutable comparison not identified by a PR:
 
 ```powershell
 node (Join-Path $Skill "scripts\run-assessment-analysis.ts") `
-  --repo $Repo --base "<base-ref-or-commit>" --head "<head-ref-or-commit>" `
-  --output $Work
+  --repo-path "$Repo" --base "<base-ref-or-commit>" --head "<head-ref-or-commit>" `
+  --output "$Work"
 ```
 
 `--specification` is optional for PR and explicit-head modes; omitted scope is

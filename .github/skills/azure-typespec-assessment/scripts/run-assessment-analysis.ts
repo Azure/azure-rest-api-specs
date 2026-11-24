@@ -1,40 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
+import { resolveAssessmentInput, validateAssessmentInput } from "./assessment-input.ts";
+import { parseArgs, isMain, isRecord, readJsonObject, runMain, writeJson } from "./cli.ts";
+import { buildComplianceSearchRequests } from "./compliance-search-request.ts";
+import { partitionSemanticIntents } from "./semantic-assessment-scope.ts";
 import { ensureSkillDependencies } from "./skill-dependencies.ts";
-
-await ensureSkillDependencies();
-
-const [
-  { parseArgs, isMain, isRecord, readJsonObject, runMain, writeJson },
-  { prepareAssessment },
-  { analyzeSemanticIntents },
-  { analyzeRestBreaking },
-  { analyzeDownstreamBreaking },
-  { validateAssessment },
-  { renderAssessmentHtml },
-  { buildComplianceSearchRequests },
-  { buildDocumentQualityInput },
-  { stableId },
-  { resolveAssessmentInput },
-  { buildAgentWorkspace },
-  { partitionSemanticIntents },
-  { transitionWorkflowState },
-] = await Promise.all([
-  import("./cli.ts"),
-  import("./prepare-assessment.ts"),
-  import("./analyze-semantic-intents.ts"),
-  import("./analyze-rest-breaking.ts"),
-  import("./analyze-downstream-breaking.ts"),
-  import("./validate-assessment.ts"),
-  import("./render-assessment-html.ts"),
-  import("./compliance-search-request.ts"),
-  import("./document-quality-input.ts"),
-  import("./stable-id.ts"),
-  import("./assessment-input.ts"),
-  import("./build-agent-workspace.ts"),
-  import("./semantic-assessment-scope.ts"),
-  import("./workflow-state.ts"),
-]);
+import { stableId } from "./stable-id.ts";
 
 type AssessmentFact = import("./runtime-types.ts").AssessmentFact;
 
@@ -74,6 +45,7 @@ type CliArguments = Record<string, string | boolean | string[] | undefined> & {
 type AssessmentAnalysisOptions = {
   output: string;
   repo?: string;
+  repo_path?: string;
   pr?: string | number;
   base?: string;
   head?: string;
@@ -1617,6 +1589,9 @@ export function blockedAssessment(
 }
 
 export function assertFreshOutput(output: string) {
+  if (fs.existsSync(output) && !fs.statSync(output).isDirectory()) {
+    throw new Error(`--output must be a directory: ${output}. Choose a new --output directory.`);
+  }
   if (fs.existsSync(output) && fs.readdirSync(output, { withFileTypes: true }).length) {
     throw new Error(
       `Assessment output directory must be empty: ${output}. Choose a new --output directory.`,
@@ -1659,9 +1634,35 @@ function readSourceIndex(file: string): SourceIndex {
 }
 
 export async function runAssessmentAnalysis(options: AssessmentAnalysisOptions) {
+  const validatedOptions = validateAssessmentInput(options);
+  if (!options.output.trim()) throw new Error("--output requires a nonempty value.");
   const output = path.resolve(options.output);
   assertFreshOutput(output);
-  const resolvedOptions = options.invocation ? options : resolveAssessmentInput(options);
+  await ensureSkillDependencies();
+  const [
+    { prepareAssessment },
+    { analyzeSemanticIntents },
+    { analyzeRestBreaking },
+    { analyzeDownstreamBreaking },
+    { validateAssessment },
+    { renderAssessmentHtml },
+    { buildDocumentQualityInput },
+    { buildAgentWorkspace },
+    { transitionWorkflowState },
+  ] = await Promise.all([
+    import("./prepare-assessment.ts"),
+    import("./analyze-semantic-intents.ts"),
+    import("./analyze-rest-breaking.ts"),
+    import("./analyze-downstream-breaking.ts"),
+    import("./validate-assessment.ts"),
+    import("./render-assessment-html.ts"),
+    import("./document-quality-input.ts"),
+    import("./build-agent-workspace.ts"),
+    import("./workflow-state.ts"),
+  ]);
+  const resolvedOptions = options.invocation
+    ? validatedOptions
+    : resolveAssessmentInput(validatedOptions);
   fs.mkdirSync(output, { recursive: true });
   transitionWorkflowState(output, "preparing", {
     invocation: resolvedOptions.invocation,
@@ -1749,12 +1750,6 @@ export async function runAssessmentAnalysis(options: AssessmentAnalysisOptions) 
     options.model_input_budget_bytes === undefined
       ? undefined
       : Number(options.model_input_budget_bytes);
-  if (
-    configuredMaximum !== undefined &&
-    (!Number.isInteger(configuredMaximum) || configuredMaximum <= 0)
-  ) {
-    throw new Error("--model-input-budget-bytes requires a positive integer.");
-  }
   const modelInput = buildModelInput({
     manifest,
     sourceIndex,
@@ -1795,6 +1790,7 @@ function assessmentOptionsFromArgs(args: CliArguments): AssessmentAnalysisOption
   for (const name of [
     "output",
     "repo",
+    "repo_path",
     "base",
     "head",
     "specification",
@@ -1824,7 +1820,6 @@ if (isMain(import.meta.url)) {
   void runMain(async () => {
     const args = parseArgs(process.argv.slice(2), {
       required: ["output"],
-      defaults: { repo: process.cwd() },
       arrays: ["sparse-root"],
     });
     const options = assessmentOptionsFromArgs(args);

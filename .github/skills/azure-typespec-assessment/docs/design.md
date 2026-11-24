@@ -51,7 +51,16 @@ Run the documented CLI directly, including when the installed skill is a
 directory junction or symbolic link. The shared entrypoint guard resolves that
 link; a successful command must produce its documented output, not silently
 skip execution. Specification paths may be absolute or repository-relative;
-normalize them relative to `--repo` before deriving sparse roots.
+normalize them relative to the Git worktree root selected by `--repo-path`
+before deriving sparse roots. `--repo` remains a local-path alias; conflicting
+repository flags are errors. Without either flag, use the Git worktree root
+containing the current directory, even when invoked from a subdirectory.
+Explicit paths must exist, be directories, and belong to a Git worktree.
+Validate arguments, repository paths, scope, model-input budget, and fresh
+output before dependency bootstrap, PR/network access, fetches, worktree
+creation, compilation, or output creation. This startup phase uses only Node
+built-ins and local Git. Never reinterpret an invalid path as a GitHub
+repository identity, clone it, or fall back to another checkout.
 
 The coordinator is the first operational command for local, PR, and explicit
 base/head assessments. PR mode accepts `--pr`, resolves metadata with one
@@ -64,8 +73,10 @@ mode excludes them.
 Production behavior lives under `scripts/`. Code under `evals/` and `tests/`
 is not imported or used by the runtime.
 
-The coordinator bootstraps the skill's workspace-locked dependencies before
-loading the assessment implementation. When the installed `yaml` version is
+After local input validation, the coordinator bootstraps the skill's
+workspace-locked dependencies before loading the assessment implementation.
+Importing coordinator helpers alone does not bootstrap dependencies. When the
+installed `yaml` version is
 missing or does not match the skill importer in the root `pnpm-lock.yaml`, it
 runs the repository's exact pnpm version with a frozen lockfile and lifecycle
 scripts disabled under an installation lock. Normal downstream commands reuse
