@@ -207,6 +207,11 @@ union RoleManagementScopeType {
 
 // Apply reviewed C# names for Access Review and Role Management APIs.
 @@clientName(
+  Microsoft.AttributeNamespaces.ScopeAccessReviewScheduleDefinitions.listForMyApproval,
+  "GetAccessReviewScheduleDefinitionsAssignedForMyApproval",
+  "csharp"
+);
+@@clientName(
   Microsoft.AttributeNamespaces.AccessReviewScheduleSettings.mailNotificationsEnabled,
   "IsMailNotificationsEnabled",
   "csharp"
