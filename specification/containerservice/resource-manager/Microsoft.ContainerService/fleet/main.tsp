@@ -1,6 +1,7 @@
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./clustermeshprofile.tsp";
+import "./ambientprofile.tsp";
 import "./fleet.tsp";
 import "./fleetmember.tsp";
 import "./fleetnamespace.tsp";

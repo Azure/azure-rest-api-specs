@@ -1,0 +1,35 @@
+{
+  "title": "List ambient profiles in a Fleet with pagination.",
+  "operationId": "AmbientProfiles_ListByFleet",
+  "parameters": {
+    "api-version": "2027-02-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "fleet-rg",
+    "fleetName": "demo"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/fleet-rg/providers/Microsoft.ContainerService/fleets/demo/ambientProfiles/prod-ambient",
+            "name": "prod-ambient",
+            "type": "Microsoft.ContainerService/fleets/ambientProfiles",
+            "eTag": "\"profile-etag\"",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "memberSelector": {
+                "byLabel": "network=prod-ambient"
+              },
+              "appNetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/fleet-appnet-prod-managed-rg/providers/Microsoft.AppLink/appLinks/prod-appnet",
+              "status": {
+                "lastOperationId": "00000000-0000-0000-0000-000000000002"
+              }
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/fleet-rg/providers/Microsoft.ContainerService/fleets/demo/ambientProfiles?api-version=2027-02-01-preview&$skiptoken=next-page"
+      }
+    }
+  }
+}

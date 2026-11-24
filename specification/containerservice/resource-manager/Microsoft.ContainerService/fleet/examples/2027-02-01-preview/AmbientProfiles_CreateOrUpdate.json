@@ -1,0 +1,60 @@
+{
+  "title": "Create an ambient profile and its backing AppNet without applying membership.",
+  "operationId": "AmbientProfiles_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2027-02-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "fleet-rg",
+    "fleetName": "demo",
+    "ambientProfileName": "prod-ambient",
+    "resource": {
+      "properties": {
+        "memberSelector": {
+          "byLabel": "network=prod-ambient"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000001/providers/Microsoft.ContainerService/locations/eastus/operations/00000000-0000-0000-0000-000000000002?api-version=2027-02-01-preview",
+        "Retry-After": "10"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/fleet-rg/providers/Microsoft.ContainerService/fleets/demo/ambientProfiles/prod-ambient",
+        "name": "prod-ambient",
+        "type": "Microsoft.ContainerService/fleets/ambientProfiles",
+        "eTag": "\"profile-etag\"",
+        "properties": {
+          "provisioningState": "Creating",
+          "memberSelector": {
+            "byLabel": "network=prod-ambient"
+          },
+          "appNetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/fleet-appnet-prod-managed-rg/providers/Microsoft.AppLink/appLinks/prod-appnet",
+          "status": {
+            "lastOperationId": "00000000-0000-0000-0000-000000000002"
+          }
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/fleet-rg/providers/Microsoft.ContainerService/fleets/demo/ambientProfiles/prod-ambient",
+        "name": "prod-ambient",
+        "type": "Microsoft.ContainerService/fleets/ambientProfiles",
+        "eTag": "\"profile-etag\"",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "memberSelector": {
+            "byLabel": "network=prod-ambient"
+          },
+          "appNetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/fleet-appnet-prod-managed-rg/providers/Microsoft.AppLink/appLinks/prod-appnet",
+          "status": {
+            "lastOperationId": "00000000-0000-0000-0000-000000000002"
+          }
+        }
+      }
+    }
+  }
+}
