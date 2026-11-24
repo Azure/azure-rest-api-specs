@@ -159,10 +159,12 @@ Conflicting fallback versions also use the unversioned flow. Values such as `all
 normalized to an empty API version for CLI lookup, creation, and returned-plan validation.
 
 The private repository always selects the `Private Preview` API release type.
-Other repositories select `Public Preview` for versions ending in `-preview`,
-otherwise `GA`. SDK release type is independently `beta` for that suffix and
-`stable` otherwise. Multi-version projects retain their automatic release-plan
-and eligible management-plane SDK-generation behavior.
+Other repositories select `Public Preview` and SDK release type `beta` when every
+resolved API version ends in `-preview`; otherwise they use `GA` and `stable`.
+This classification uses the original versions before they are collapsed to
+`multiple-versions`. Empty or unspecified metadata keeps the `GA`/`stable` default.
+Multi-version projects retain their automatic release-plan and eligible
+management-plane SDK-generation behavior.
 
 ### Plan creation and comments
 

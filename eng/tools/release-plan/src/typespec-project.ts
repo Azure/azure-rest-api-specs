@@ -397,15 +397,13 @@ export async function findTspConfigDir(
 }
 
 /**
- * Extracts the API version from TypeSpec metadata. Private previews can fall back
+ * Extracts API versions and preview status from TypeSpec metadata. Private previews can fall back
  * to any emitter's version without requiring SDK package metadata.
  */
 export function resolveTypeSpecMetadata(
   metadata: TypeSpecMetadata,
   isPrivatePreview = false,
-): {
-  apiVersion: string;
-} {
+): Pick<TypeSpecProjectInfo, "apiVersion" | "isPreview"> {
   const apiVersions = new Map<string, string>();
   let hasPackage = false;
 
@@ -455,12 +453,15 @@ export function resolveTypeSpecMetadata(
   return {
     apiVersion:
       apiVersions.size > 1 ? "multiple-versions" : (apiVersions.values().next().value ?? ""),
+    isPreview:
+      apiVersions.size > 0 &&
+      [...apiVersions.keys()].every((version) => version.endsWith("-preview")),
   };
 }
 
 /**
  * Gets TypeSpec project version info using TypeSpec metadata emitter.
- * Runs the metadata emitter and derives preview status from the API version suffix.
+ * Runs the metadata emitter and retains preview status from the original API versions.
  * @param tspProjectAbsPath Absolute path to TypeSpec project
  * @param tspProjectRelPath Relative path to TypeSpec project (for logging)
  * @returns TypeSpecProjectInfo with apiVersion and isPreview, or throws error
@@ -473,8 +474,7 @@ export async function getTypeSpecProjectVersionFromMetadata(
 ): Promise<TypeSpecProjectInfo> {
   try {
     const metadata = await getCachedTypeSpecMetadata(tspProjectAbsPath, metadataCache);
-    const { apiVersion } = resolveTypeSpecMetadata(metadata, isPrivatePreview);
-    const isPreview = apiVersion.endsWith("-preview");
+    const { apiVersion, isPreview } = resolveTypeSpecMetadata(metadata, isPrivatePreview);
 
     console.log(
       `Found TypeSpec project at ${tspProjectRelPath} with API version ${apiVersion} (${isPreview ? "preview" : "stable"})`,

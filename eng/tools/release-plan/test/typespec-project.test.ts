@@ -6,6 +6,7 @@ import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { getApiReleaseType, getSdkReleaseType } from "../src/release-plan.ts";
 
 const { mockMetadataMap, mockLanguagesMap } = vi.hoisted(() => ({
   mockMetadataMap: new Map<string, { apiVersion: string; sdkType: "stable" | "preview" }>(),
@@ -1234,6 +1235,58 @@ describe("pull request label helpers", () => {
 });
 
 describe("TypeSpec metadata resolution", () => {
+  it.each([
+    {
+      name: "multiple preview versions",
+      versions: ["2026-06-01-preview", "2026-05-01-preview"],
+      isPreview: true,
+    },
+    {
+      name: "mixed preview and stable versions",
+      versions: ["2026-06-01-preview", "2026-05-01"],
+      isPreview: false,
+    },
+    {
+      name: "multiple stable versions",
+      versions: ["2026-06-01", "2026-05-01"],
+      isPreview: false,
+    },
+  ])("keeps release maturity for $name", async ({ versions, isPreview }) => {
+    const projectPath = "specification/example/resource-manager/Example";
+    const absolutePath = join(workspace, projectPath);
+    const metadata = createMetadata({
+      csharp: [
+        {
+          emitterName: "csharp",
+          packageName: "Azure.ResourceManager.Example",
+          apiVersion: versions[0],
+        },
+      ],
+      java: [
+        {
+          emitterName: "java",
+          packageName: "com.azure.resourcemanager.example",
+          apiVersion: versions[1],
+        },
+      ],
+    });
+    const result = await getTypeSpecProjectVersionFromMetadata(
+      absolutePath,
+      projectPath,
+      new Map([[absolutePath, Promise.resolve(metadata)]]),
+    );
+
+    expect(result).toEqual({
+      tspProjectPath: projectPath,
+      apiVersion: "multiple-versions",
+      isPreview,
+    });
+    expect(getApiReleaseType(result.isPreview, "azure-rest-api-specs")).toBe(
+      isPreview ? "Public Preview" : "GA",
+    );
+    expect(getSdkReleaseType(result.isPreview)).toBe(isPreview ? "beta" : "stable");
+  });
+
   it("does not choose the first version from conflicting private-preview fallback metadata", () => {
     const metadata = createMetadata({
       unknown: [
@@ -1242,7 +1295,10 @@ describe("TypeSpec metadata resolution", () => {
       ],
     });
 
-    expect(resolveTypeSpecMetadata(metadata, true)).toEqual({ apiVersion: "multiple-versions" });
+    expect(resolveTypeSpecMetadata(metadata, true)).toEqual({
+      apiVersion: "multiple-versions",
+      isPreview: true,
+    });
   });
 
   it("normalizes matching private-preview fallback versions before comparing them", () => {
@@ -1253,7 +1309,10 @@ describe("TypeSpec metadata resolution", () => {
       ],
     });
 
-    expect(resolveTypeSpecMetadata(metadata, true)).toEqual({ apiVersion: "2026-01-01-preview" });
+    expect(resolveTypeSpecMetadata(metadata, true)).toEqual({
+      apiVersion: "2026-01-01-preview",
+      isPreview: true,
+    });
   });
 
   it("prefers existing SDK version resolution over the private-preview fallback", () => {
@@ -1270,6 +1329,7 @@ describe("TypeSpec metadata resolution", () => {
 
     expect(resolveTypeSpecMetadata(metadata, true)).toEqual({
       apiVersion: "2026-01-01-preview",
+      isPreview: true,
     });
   });
 
@@ -1288,7 +1348,10 @@ describe("TypeSpec metadata resolution", () => {
     { unknown: [{ emitterName: "@azure-tools/typespec-autorest" }] },
     { python: [{ emitterName: "python", packageName: "azure-mgmt-sample", apiVersion: "" }] },
   ])("uses the unversioned flow for a private preview with no emitter API version", (languages) => {
-    expect(resolveTypeSpecMetadata(createMetadata(languages), true)).toEqual({ apiVersion: "" });
+    expect(resolveTypeSpecMetadata(createMetadata(languages), true)).toEqual({
+      apiVersion: "",
+      isPreview: false,
+    });
   });
 
   it("parses valid TypeSpec metadata with multiple languages", () => {
@@ -1319,7 +1382,10 @@ describe("TypeSpec metadata resolution", () => {
       ],
     });
 
-    expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
+    expect(resolveTypeSpecMetadata(metadata)).toEqual({
+      apiVersion: "2025-08-01",
+      isPreview: false,
+    });
   });
 
   it("uses the unversioned flow when metadata contains differing API versions", () => {
@@ -1342,7 +1408,10 @@ describe("TypeSpec metadata resolution", () => {
       ],
     });
 
-    expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "multiple-versions" });
+    expect(resolveTypeSpecMetadata(metadata)).toEqual({
+      apiVersion: "multiple-versions",
+      isPreview: false,
+    });
   });
 
   it("ignores conflicting SDK types when resolving the API version", () => {
@@ -1365,7 +1434,10 @@ describe("TypeSpec metadata resolution", () => {
       ],
     });
 
-    expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
+    expect(resolveTypeSpecMetadata(metadata)).toEqual({
+      apiVersion: "2025-08-01",
+      isPreview: false,
+    });
   });
 
   it("keeps the existing concrete version when one language has no version", () => {
@@ -1395,7 +1467,10 @@ describe("TypeSpec metadata resolution", () => {
       ],
     });
 
-    expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
+    expect(resolveTypeSpecMetadata(metadata)).toEqual({
+      apiVersion: "2025-08-01",
+      isPreview: false,
+    });
   });
 
   it("uses language configs with missing SDK type", () => {
@@ -1423,7 +1498,10 @@ describe("TypeSpec metadata resolution", () => {
       ],
     });
 
-    expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
+    expect(resolveTypeSpecMetadata(metadata)).toEqual({
+      apiVersion: "2025-08-01",
+      isPreview: false,
+    });
   });
 
   it("throws error when no valid language configurations found", () => {
@@ -1462,6 +1540,7 @@ describe("TypeSpec metadata resolution", () => {
 
     expect(resolveTypeSpecMetadata(metadata)).toEqual({
       apiVersion: "2025-08-01-preview",
+      isPreview: true,
     });
   });
 
