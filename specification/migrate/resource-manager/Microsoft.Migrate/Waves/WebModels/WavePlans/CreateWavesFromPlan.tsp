@@ -54,8 +54,16 @@ model CreateWavesFromPlanResponse {
   skippedWaves: int32;
 
   @doc("The read-only SAS URI for the exported error CSV.")
+  @removed(ApiVersions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
-  sasUri?: string;
+  @renamedFrom(ApiVersions.v2026_08_01_preview, "sasUri")
+  oldSasUri?: string;
+
+  @doc("The read-only SAS URI for the exported error CSV.")
+  @added(ApiVersions.v2026_08_01_preview)
+  @secret
+  @visibility(Lifecycle.Read)
+  sasUri?: url;
 
   @doc("The expiry timestamp (UTC) for the error CSV SAS URI.")
   @visibility(Lifecycle.Read)

@@ -1,0 +1,9 @@
+steps:
+  - script: node --experimental-strip-types "$(Build.SourcesDirectory)/eng/scripts/set-eval-models.ts"
+    displayName: Apply pipeline-owned eval models
+    env:
+      SPEC_EVAL_ROOT: $(Build.SourcesDirectory)/.github/skills
+      SPEC_EVAL_ARGS: $(evalArgs)
+      SPEC_EVAL_MODEL: $(EvalModel)
+      SPEC_ARM_EVAL_MODEL: $(ArmEvalModel)
+      SPEC_EVAL_JUDGE_MODEL: $(EvalJudgeModel)

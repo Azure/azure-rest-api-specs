@@ -52,43 +52,6 @@ model ResourceSku {
   name: string;
 }
 @armResourceOperations
-interface ElasticMonitorCreateOrUpdateResourceOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-      },
-      {
-        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-        @path
-        @segment("monitors")
-        @pattern("^.*$")
-        monitorName: string,
-      },
-      ErrorType = ResourceProviderDefaultErrorResponse
-    > {}
-
-@armResourceOperations
-interface ElasticMonitorUpdateResourceOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-      },
-      {
-        #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-        @path
-        @segment("monitors")
-        @pattern("^.*$")
-        monitorName: string,
-      }
-    > {}
-
-@armResourceOperations
 interface ElasticMonitorResources {
   /**
    * Get detailed properties of a specific Elastic monitor resource, helping you manage observability and performance.
@@ -101,8 +64,9 @@ interface ElasticMonitorResources {
   /**
    * Create a new Elastic monitor resource in your Azure subscription, enabling observability and monitoring of your Azure resources through Elastic.
    */
-  create is ElasticMonitorCreateOrUpdateResourceOps.CreateOrUpdateAsync<
+  create is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     ElasticMonitorResource,
+    Error = ResourceProviderDefaultErrorResponse,
     OptionalRequestBody = true
   >;
 
@@ -111,7 +75,7 @@ interface ElasticMonitorResources {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  update is ElasticMonitorUpdateResourceOps.CustomPatchAsync<
+  update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     ElasticMonitorResource,
     PatchModel = ElasticMonitorResourceUpdateParameters,
     Response =

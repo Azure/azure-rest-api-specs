@@ -4,31 +4,23 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./VerifierWorkspace.tsp";
-import "../Common/main.tsp";
+import "./shared-models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Common;
 
 namespace Microsoft.Network;
 /**
  * Configuration information for analysis run.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-@Http.Private.includeInapplicableMetadataInPayload(false)
+@featureFile(Features.virtualNetwork)
 @parentResource(VerifierWorkspace)
-model ReachabilityAnalysisRun extends CommonProxyResource {
-  /**
-   * Properties of the reachability analysis run.
-   */
-  properties: ReachabilityAnalysisRunProperties;
-
+model ReachabilityAnalysisRun is CommonProxyResourceInstance<
+  ReachabilityAnalysisRunProperties,
+  false
+> {
   /**
    * The name of the resource.
    */
@@ -42,12 +34,12 @@ model ReachabilityAnalysisRun extends CommonProxyResource {
   /**
    * The system metadata related to this resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The generic resource marker exposes this legacy resource envelope property."
   @visibility(Lifecycle.Read)
   systemData?: Azure.ResourceManager.Foundations.SystemData;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @armResourceOperations
 interface ReachabilityAnalysisRuns {
   /**

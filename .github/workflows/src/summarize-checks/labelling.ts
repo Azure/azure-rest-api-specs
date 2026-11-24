@@ -19,6 +19,8 @@ import { includesEvery, includesNone } from "../../../shared/src/array.ts";
 import { link, paragraph, renderMarkdownDoc, unorderedList } from "../../../shared/src/markdown.ts";
 import { labelBadge } from "./label-badge.ts";
 import {
+  CLIENT_CUSTOMIZATION_APPROVED_LABEL,
+  CLIENT_CUSTOMIZATION_REVIEW_REQUIRED_LABEL,
   TYPESPEC_SUPPRESSIONS_APPROVED_LABEL,
   TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL,
 } from "../label.ts";
@@ -458,6 +460,12 @@ export function processImpactAssessment(
 
   const armReviewLabel = new Label("ARMReview", labelContext.present);
   armReviewLabel.shouldBePresent = reviews.arm;
+  const clientCustomizationLabel = new Label(
+    CLIENT_CUSTOMIZATION_REVIEW_REQUIRED_LABEL,
+    labelContext.present,
+  );
+  clientCustomizationLabel.shouldBePresent = reviews.clientCustomization;
+  clientCustomizationLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   const newApiVersionLabel = new Label("new-api-version", labelContext.present);
   newApiVersionLabel.shouldBePresent =
     specReviewApplies(context) && services.some((service) => service.newApiVersions.length > 0);
@@ -1239,6 +1247,23 @@ const rulesPri1Namespace: RequiredLabelRule[] = [
   },
 ];
 
+const rulesPri1ClientCustomization: RequiredLabelRule[] = [
+  {
+    precedence: 1,
+    anyPrerequisiteLabels: [CLIENT_CUSTOMIZATION_REVIEW_REQUIRED_LABEL],
+    anyRequiredLabels: [CLIENT_CUSTOMIZATION_APPROVED_LABEL],
+    name: "SDK client customizations",
+    awaitingReview: true,
+    nextStep: `Wait for Azure/azure-arm-sdk-reviewers to review and apply ${CLIENT_CUSTOMIZATION_APPROVED_LABEL}.`,
+    troubleshootingGuide: renderMarkdownDoc([
+      paragraph(
+        `This management-plane PR changes only \`client.tsp\` and/or \`tspconfig.yaml\`, so it needs`,
+        `SDK client customization review instead of ARM API review.`,
+      ),
+    ]),
+  },
+];
+
 /** @type {RequiredLabelRule[]} */
 const rulesPri1TypeSpecSuppressions = [
   // When typespec-suppressions-review-required is present, require typespec-suppressions-approved before
@@ -1276,6 +1301,7 @@ export const requiredLabelsRules = rulesPri0dataPlane
   .concat(rulesPri1ArmRev)
   .concat(rulesPri1Suppressions)
   .concat(rulesPri1Namespace)
+  .concat(rulesPri1ClientCustomization)
   .concat(rulesPri1TypeSpecSuppressions)
   .concat(rulesPri2Sdk)
   .concat(rulesPri2LegacySdk)

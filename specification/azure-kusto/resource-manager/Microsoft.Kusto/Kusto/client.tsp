@@ -28,6 +28,46 @@ using Microsoft.Kusto;
 @@clientName(EventHubDataFormat.W3CLOGFILE, "W3_CLOGFILE", "python");
 @@clientName(EventGridDataFormat.W3CLOGFILE, "W3_CLOGFILE", "python");
 
+// Preserve legacy Python enum member names.
+@@clientName(
+  AzureSkuName.`Dev(No SLA)_Standard_E2a_v4`,
+  exact("DEV_NO_SLA_STANDARD_E2_A_V4"),
+  "python"
+);
+@@clientName(AzureSkuName.Standard_L4s, exact("STANDARD_L4_S"), "python");
+@@clientName(AzureSkuName.Standard_L8s, exact("STANDARD_L8_S"), "python");
+@@clientName(AzureSkuName.Standard_L8s_v2, exact("STANDARD_L8_S_V2"), "python");
+@@clientName(AzureSkuName.Standard_L8s_v3, exact("STANDARD_L8_S_V3"), "python");
+@@clientName(AzureSkuName.Standard_E2a_v4, exact("STANDARD_E2_A_V4"), "python");
+@@clientName(AzureSkuName.Standard_E4a_v4, exact("STANDARD_E4_A_V4"), "python");
+@@clientName(AzureSkuName.Standard_E8a_v4, exact("STANDARD_E8_A_V4"), "python");
+@@clientName(
+  AzureSkuName.`Standard_E8s_v4+1TB_PS`,
+  exact("STANDARD_E8_S_V4_1_TB_PS"),
+  "python"
+);
+@@clientName(
+  AzureSkuName.`Standard_E8s_v4+2TB_PS`,
+  exact("STANDARD_E8_S_V4_2_TB_PS"),
+  "python"
+);
+@@clientName(
+  AzureSkuName.`Standard_E8s_v5+1TB_PS`,
+  exact("STANDARD_E8_S_V5_1_TB_PS"),
+  "python"
+);
+@@clientName(
+  AzureSkuName.`Standard_E8s_v5+2TB_PS`,
+  exact("STANDARD_E8_S_V5_2_TB_PS"),
+  "python"
+);
+@@clientName(AzureSkuName.Standard_E2d_v4, exact("STANDARD_E2_D_V4"), "python");
+@@clientName(AzureSkuName.Standard_E4d_v4, exact("STANDARD_E4_D_V4"), "python");
+@@clientName(AzureSkuName.Standard_E8d_v4, exact("STANDARD_E8_D_V4"), "python");
+@@clientName(AzureSkuName.Standard_E2d_v5, exact("STANDARD_E2_D_V5"), "python");
+@@clientName(AzureSkuName.Standard_E4d_v5, exact("STANDARD_E4_D_V5"), "python");
+@@clientName(AzureSkuName.Standard_E8d_v5, exact("STANDARD_E8_D_V5"), "python");
+
 // C# client customizations for Kusto MPG migration (preserve GA Azure.ResourceManager.Kusto names).
 // Model/enum/property renames + property type adjustments mirror the previous AutoRest rename-mapping.
 

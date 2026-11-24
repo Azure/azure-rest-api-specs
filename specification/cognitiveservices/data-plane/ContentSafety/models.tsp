@@ -533,13 +533,13 @@ union ProvenanceOperationKind {
 @added(ContentSafety.Versions.v2026_09_01_preview)
 @doc("Source content descriptor for a Content Provenance Detection operation.")
 model ProvenanceContent {
-  @doc("Blob URI of the media to inspect. Media up to 100 MB is supported. Supported formats: image (JPEG, PNG, GIF, WebP), audio (MP3, WAV), and video (MP4).")
+  @doc("Blob URI of the content to inspect. Supported content: image, audio, video, and text.")
   uri: url;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ContentSafety.Versions.v2026_09_01_preview)
-@doc("Input describing the media to inspect using Content Provenance Detection.")
+@doc("Input describing the content to inspect using Content Provenance Detection.")
 model DetectProvenanceOptions {
   @doc("Source content to inspect.")
   content: ProvenanceContent;
@@ -551,17 +551,17 @@ union DetectOutcome {
   string,
 
   /**
-   * No supported Microsoft-issued C2PA or imperceptible watermark signal was detected.
+   * No supported Microsoft-issued C2PA, imperceptible watermark signal, or AI declaration in metadata was detected.
    * This doesn't necessarily mean the content wasn't AI-generated; it means no supported signal was found.
    */
   NoProvenanceDetected: "NoProvenanceDetected",
 
-  /** At least one supported Microsoft-issued C2PA or imperceptible watermark signal was detected. */
+  /** At least one supported Microsoft-issued C2PA, imperceptible watermark signal, or AI declaration in metadata was detected. */
   ProvenanceDetected: "ProvenanceDetected",
 }
 
 @added(ContentSafety.Versions.v2026_09_01_preview)
-@doc("A Microsoft-issued provenance signal indicating the media was created or modified using AI.")
+@doc("A provenance signal indicating the content was created or modified using AI.")
 model DetectedProvenance {
   @doc("Detected provenance record type.")
   type?: DetectedProvenanceType;
@@ -586,6 +586,9 @@ union DetectedProvenanceType {
 
   /** Provenance came from an imperceptible watermark. */
   Watermark: "Watermark",
+
+  /** Provenance came from an AI declaration in metadata. */
+  Metadata: "Metadata",
 }
 
 @added(ContentSafety.Versions.v2026_09_01_preview)
