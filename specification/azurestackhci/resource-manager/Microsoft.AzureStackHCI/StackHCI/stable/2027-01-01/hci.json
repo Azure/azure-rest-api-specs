@@ -3246,9 +3246,6 @@
           "ClusterJobs_Get_GpuCreatePartitionJob": {
             "$ref": "./examples/ClusterJobs_Get_GpuCreatePartitionJob.json"
           },
-          "ClusterJobs_Get_GpuSwitchModeJob": {
-            "$ref": "./examples/ClusterJobs_Get_GpuSwitchModeJob.json"
-          },
           "ClusterJobs_Get_RepairServerJob": {
             "$ref": "./examples/ClusterJobs_Get_RepairServerJob.json"
           }
@@ -3341,9 +3338,6 @@
           },
           "ClusterJobs_CreateOrUpdate_GpuCreatePartitionJob": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_GpuCreatePartition.json"
-          },
-          "ClusterJobs_CreateOrUpdate_GpuSwitchModeJob": {
-            "$ref": "./examples/ClusterJobs_CreateOrUpdate_GpuSwitchMode.json"
           },
           "ClusterJobs_CreateOrUpdate_RepairServerJob": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_RepairServer.json"
@@ -6963,9 +6957,6 @@
           },
           "EdgeMachineGpuJobs_Get_CreatePartition": {
             "$ref": "./examples/EdgeMachineGpuJobs_Get_CreatePartition.json"
-          },
-          "EdgeMachineGpuJobs_Get_SwitchMode": {
-            "$ref": "./examples/EdgeMachineGpuJobs_Get_SwitchMode.json"
           }
         }
       },
@@ -7053,9 +7044,6 @@
         "x-ms-examples": {
           "EdgeMachineGpuJobs_CreateOrUpdate_CreatePartition": {
             "$ref": "./examples/EdgeMachineGpuJobs_CreateOrUpdate_CreatePartition.json"
-          },
-          "EdgeMachineGpuJobs_CreateOrUpdate_SwitchMode": {
-            "$ref": "./examples/EdgeMachineGpuJobs_CreateOrUpdate_SwitchMode.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -13463,8 +13451,7 @@
       "type": "string",
       "description": "GPU Job Type supported for Edge Machine GPU operations.",
       "enum": [
-        "CreatePartition",
-        "SwitchMode"
+        "CreatePartition"
       ],
       "x-ms-enum": {
         "name": "EdgeMachineGpuJobType",
@@ -13474,11 +13461,6 @@
             "name": "CreatePartition",
             "value": "CreatePartition",
             "description": "Create GPU partitions for virtualization and workload isolation."
-          },
-          {
-            "name": "SwitchMode",
-            "value": "SwitchMode",
-            "description": "Switch GPU mode between DDA and GPU-P for different workload requirements."
           }
         ]
       }
@@ -15537,25 +15519,6 @@
         }
       }
     },
-    "GpuSwitchModeJobProperties": {
-      "type": "object",
-      "description": "Properties for switching GPU mode between DDA and GPU-P for different workload requirements.",
-      "properties": {
-        "mode": {
-          "$ref": "#/definitions/GpuMode",
-          "description": "Desired GPU mode to switch to."
-        }
-      },
-      "required": [
-        "mode"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ClusterJobProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "GpuSwitchMode"
-    },
     "GpuVendorType": {
       "type": "string",
       "description": "GPU Vendor Type supported.",
@@ -16206,7 +16169,6 @@
         "AddServer",
         "RepairServer",
         "GpuCreatePartition",
-        "GpuSwitchMode",
         "ConfigureCVM",
         "ConfigureSdnIntegration",
         "ConfigureLocalAvailabilityZone"
@@ -16229,11 +16191,6 @@
             "name": "GpuCreatePartition",
             "value": "GpuCreatePartition",
             "description": "Job to create GPU partitions for the cluster."
-          },
-          {
-            "name": "GpuSwitchMode",
-            "value": "GpuSwitchMode",
-            "description": "Job to switch GPU mode for the cluster."
           },
           {
             "name": "ConfigureCVM",
@@ -21757,25 +21714,6 @@
           "readOnly": true
         }
       }
-    },
-    "SwitchModeGpuJobProperties": {
-      "type": "object",
-      "description": "Properties for switching GPU mode between DDA and GPU-P for different workload requirements.",
-      "properties": {
-        "mode": {
-          "$ref": "#/definitions/GpuMode",
-          "description": "Desired GPU mode to switch to."
-        }
-      },
-      "required": [
-        "mode"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/EdgeMachineGpuJobProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "SwitchMode"
     },
     "SyncConfigurationJobProperties": {
       "type": "object",

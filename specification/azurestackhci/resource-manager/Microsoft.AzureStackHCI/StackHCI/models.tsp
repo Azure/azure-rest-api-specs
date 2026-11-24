@@ -38,10 +38,6 @@ union HciJobType {
   @added(Versions.v2027_01_01)
   GpuCreatePartition: "GpuCreatePartition",
 
-  /** Job to switch GPU mode for the cluster. */
-  @added(Versions.v2027_01_01)
-  GpuSwitchMode: "GpuSwitchMode",
-
   /** Job to configure the confidential computing mode for the GPUs in the cluster. */
   @added(Versions.v2027_01_15_preview)
   ConfigureGpuConfidentialComputeMode: "ConfigureGpuConfidentialComputeMode",
@@ -9770,20 +9766,6 @@ model GpuCreatePartitionJobProperties extends ClusterJobProperties {
 }
 
 /**
- * Properties for switching GPU mode between DDA and GPU-P for different workload requirements.
- */
-@added(Versions.v2027_01_01)
-model GpuSwitchModeJobProperties extends ClusterJobProperties {
-  /** ClusterJob Type to support polymorphic resource. */
-  jobType: HciJobType.GpuSwitchMode;
-
-  /**
-   * Desired GPU mode to switch to.
-   */
-  mode: GpuMode;
-}
-
-/**
  * Properties for configuring the confidential computing mode for the GPUs in the cluster.
  */
 @added(Versions.v2027_01_15_preview)
@@ -10199,11 +10181,6 @@ union EdgeMachineGpuJobType {
   CreatePartition: "CreatePartition",
 
   /**
-   * Switch GPU mode between DDA and GPU-P for different workload requirements.
-   */
-  SwitchMode: "SwitchMode",
-
-  /**
    * Configure the confidential computing mode on the GPU.
    */
   @added(Versions.v2027_01_15_preview)
@@ -10275,22 +10252,6 @@ model CreatePartitionGpuJobProperties extends EdgeMachineGpuJobProperties {
    * Number of partitions to be created on the GPU.
    */
   partitionCount: int32;
-}
-
-/**
- * Properties for switching GPU mode between DDA and GPU-P for different workload requirements.
- */
-@added(Versions.v2027_01_01)
-model SwitchModeGpuJobProperties extends EdgeMachineGpuJobProperties {
-  /**
-   * Type of GPU job to be performed.
-   */
-  jobType: EdgeMachineGpuJobType.SwitchMode;
-
-  /**
-   * Desired GPU mode to switch to.
-   */
-  mode: GpuMode;
 }
 
 /**
