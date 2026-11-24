@@ -38,13 +38,6 @@ model VirtualNetworkApplianceCapability is StandardProxyResourceInstance<
   kind: VirtualNetworkApplianceCapabilityKind;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released Java SDK's capability resource base."
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
-  VirtualNetworkApplianceCapability,
-  Azure.ResourceManager.ProxyResource<VirtualNetworkApplianceCapabilityProperties>,
-  "java"
-);
-
 /**
  * The Private Link Gateway FastPath capability. Private Link fast-path programming on the appliance's gateway;
  * supported on a dual-stack appliance.
