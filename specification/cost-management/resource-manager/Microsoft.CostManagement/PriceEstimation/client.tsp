@@ -9,6 +9,12 @@ using Azure.ClientGenerator.Core;
   "python"
 );
 
+@@clientName(
+  Microsoft.CostManagement,
+  "CostManagementPriceEstimationManagementClient",
+  "javascript"
+);
+
 // estimatePrices polls this GET through its Location header; Java must not expose it as an LRO initiator.
 @@scope(
   Microsoft.CostManagement.PriceEstimation.getEstimatePricesOperationResult,

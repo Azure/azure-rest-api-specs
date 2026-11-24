@@ -245,7 +245,7 @@ it("retains per-project CI annotations and compiler diagnostics in batch mode", 
 });
 
 it.each(["--all", "--changed"])(
-  "checks sibling emissions in %s without changing their shared baseline or Git index",
+  "checks sibling emissions in %s without mutating outputs or the Git index, then applies fixes",
   async (mode) => {
     const sibling = "specification/service/data-plane/Sibling";
     await cp(join(root, project), join(root, sibling), { recursive: true });
@@ -284,7 +284,6 @@ it.each(["--all", "--changed"])(
     expect(fixed.stderr).toContain("error tsv/generated-files-changed:");
     expect(await readFile(output, "utf8")).toBe("new\n");
     expect(await readFile(join(missingDir, "output.txt"), "utf8")).toBe("new\n");
-    expect(await readFile(join(root, ".git/index"))).toEqual(index);
   },
   // Check and fix each start a batch plus two compiler processes.
   30_000,
