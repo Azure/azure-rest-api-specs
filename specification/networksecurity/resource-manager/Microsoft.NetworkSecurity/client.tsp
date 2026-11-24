@@ -111,6 +111,203 @@ namespace NetworkSecurityManagementClient {
   "go"
 );
 
+@@clientName(
+  Microsoft.NetworkSecurity.NetworkSecurityPolicyType.FqdnFiltering,
+  "FQDNFiltering",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.NetworkSecurityPolicyType.Mcp,
+  "MCP",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.FqdnFilteringSourceType,
+  "FQDNFilteringSourceType",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.FqdnFilteringDestinationType,
+  "FQDNFilteringDestinationType",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.McpPolicySourceType,
+  "MCPPolicySourceType",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.McpPolicyDestinationType,
+  "MCPPolicyDestinationType",
+  "go"
+);
+@@clientName(Microsoft.NetworkSecurity.McpMatchType, "MCPMatchType", "go");
+@@clientName(Microsoft.NetworkSecurity.McpMatchCase, "MCPMatchCase", "go");
+@@clientName(Microsoft.NetworkSecurity.McpToolMethod, "MCPToolMethod", "go");
+@@clientName(Microsoft.NetworkSecurity.McpPromptMethod, "MCPPromptMethod", "go");
+@@clientName(
+  Microsoft.NetworkSecurity.FqdnFilteringDestinationType.Fqdns,
+  "FQDNs",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.McpPolicyDestinationType.Fqdns,
+  "FQDNs",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.UrlFilteringDestinationType.Fqdns,
+  "FQDNs",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.TlsInspectionRuleDestinationType.Fqdns,
+  "FQDNs",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.FqdnFilteringDestination,
+  "FQDNFilteringDestination",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.FqdnFilteringSource,
+  "FQDNFilteringSource",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.McpPolicyDestination,
+  "MCPPolicyDestination",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.McpPolicySource,
+  "MCPPolicySource",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.FqdnFilteringWorkloadIdPatternsSource,
+  "FQDNFilteringWorkloadIDPatternsSource",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.FqdnFilteringAddressPrefixesSource,
+  "FQDNFilteringAddressPrefixesSource",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.FqdnFilteringFqdnsDestination,
+  "FQDNFilteringFQDNsDestination",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.FqdnFilteringPolicy,
+  "FQDNFilteringPolicy",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.UrlFilteringFqdnsDestination,
+  "URLFilteringFQDNsDestination",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.TlsInspectionRuleFqdnsDestination,
+  "TLSInspectionRuleFQDNsDestination",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.AzureManagedCaCertificate,
+  "AzureManagedCACertificate",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.McpPolicyWorkloadIdPatternsSource,
+  "MCPPolicyWorkloadIDPatternsSource",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.McpPolicyAddressPrefixesSource,
+  "MCPPolicyAddressPrefixesSource",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.McpPolicyWorkloadIdPatternsDestination,
+  "MCPPolicyWorkloadIDPatternsDestination",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.McpPolicyAddressPrefixesDestination,
+  "MCPPolicyAddressPrefixesDestination",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.McpPolicyFqdnsDestination,
+  "MCPPolicyFQDNsDestination",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.McpMatchValue,
+  "MCPMatchValue",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.McpStringMatching,
+  "MCPStringMatching",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.McpArgumentMatching,
+  "MCPArgumentMatching",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.McpToolMatching,
+  "MCPToolMatching",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.McpPromptMatching,
+  "MCPPromptMatching",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.McpRuleDestinationMatching,
+  "MCPRuleDestinationMatching",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.McpRuleMatchingConditions,
+  "MCPRuleMatchingConditions",
+  "go"
+);
+@@clientName(Microsoft.NetworkSecurity.McpRule, "MCPRule", "go");
+@@clientName(Microsoft.NetworkSecurity.McpPolicy, "MCPPolicy", "go");
+@@clientName(
+  Microsoft.NetworkSecurity.FqdnFilteringFqdnsDestination.fqdns,
+  "FQDNs",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.UrlFilteringFqdnsDestination.fqdns,
+  "FQDNs",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.McpPolicyFqdnsDestination.fqdns,
+  "FQDNs",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.TlsInspectionRuleFqdnsDestination.fqdns,
+  "FQDNs",
+  "go"
+);
+@@clientName(
+  Microsoft.NetworkSecurity.McpRuleDestinationMatching.serverFqdns,
+  "ServerFQDNs",
+  "go"
+);
+
 @@clientName(Microsoft.NetworkSecurity.Member, "AgentFabricMember", "csharp");
 @@clientName(
   Microsoft.NetworkSecurity.MemberProperties,
