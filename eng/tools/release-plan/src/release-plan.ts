@@ -1,4 +1,4 @@
-import { spawnSync } from "node:child_process";
+import { execFileSync, spawnSync } from "node:child_process";
 import path, { join } from "node:path";
 import process from "node:process";
 import type {
@@ -301,70 +301,54 @@ const releasePlanLanguageBySdkRepo = new Map([
 
 const inactiveReleasePlanStates = ["Closed", "Duplicate", "Abandoned", "Finished"];
 
-interface SdkReleasePlanCheck {
-  typeSpecConfigPath: string;
-  sdkRepoName: string;
-  sdkRepoOwner: string;
-  sdkCheckoutBranch: string;
-  releasePlanWorkItemId: number;
-  createPullRequest: boolean;
-}
-
 interface ReleasePlanWorkItem {
   id: number;
   fields: Record<string, string | undefined>;
 }
 
 export async function assertNoConflictingSdkReleasePlan(
-  check: SdkReleasePlanCheck,
-  accessToken: string | undefined,
-  githubToken?: string,
+  typeSpecConfigPath: string,
+  sdkPushRepo: string,
+  sdkCheckoutBranch: string,
+  releasePlanWorkItemId: number,
+  createPullRequest: boolean,
 ): Promise<void> {
-  const { typeSpecConfigPath, sdkRepoName, releasePlanWorkItemId, createPullRequest } = check;
+  const sdkRepoName = path.posix.basename(sdkPushRepo);
   const language = releasePlanLanguageBySdkRepo.get(sdkRepoName.toLowerCase().replace(/-pr$/, ""));
   if (!language) {
-    console.log(`Release plans do not track SDK pull requests for '${sdkRepoName}'.`);
     return;
   }
-  if (
-    !Number.isInteger(releasePlanWorkItemId) ||
-    releasePlanWorkItemId < 0 ||
-    releasePlanWorkItemId > 2_147_483_647
-  ) {
+  if (!Number.isInteger(releasePlanWorkItemId) || releasePlanWorkItemId < 0) {
     throw new Error("ReleasePlanWorkItemId must be 0 or a positive Azure DevOps work item ID.");
-  }
-  if (!accessToken) {
-    throw new Error("An Azure DevOps access token is required to check SDK release plans.");
   }
 
   const typeSpecProjectPath = path.posix.dirname(path.posix.normalize(typeSpecConfigPath));
   const inactiveStates = inactiveReleasePlanStates.map((state) => `'${state}'`).join(",");
-  const activePlansFilter = `[System.State] NOT IN (${inactiveStates})`;
-  // Include an explicitly selected plan even if it is inactive, to verify its project and tags.
-  const planFilter = releasePlanWorkItemId
-    ? `(${activePlansFilter} OR [System.Id] = ${releasePlanWorkItemId})`
-    : activePlansFilter;
-  const query = `SELECT [System.Id] FROM WorkItems WHERE [System.TeamProject] = 'Release'
-    AND [System.WorkItemType] = 'Release Plan'
-    AND [Custom.ApiSpecProjectPath] = '${typeSpecProjectPath.replaceAll("'", "''")}'
-    AND ${planFilter}`;
-  const { workItems } = (await queryReleasePlanWorkItems("wiql", { query }, accessToken)) as {
-    workItems: { id: number }[];
-  };
-
   const pullRequestField = `Custom.SDKPullRequestFor${language}`;
   const releaseStatusField = `Custom.ReleaseStatusFor${language}`;
-  const { value: plans } = workItems.length
-    ? ((await queryReleasePlanWorkItems(
-        "workitemsbatch",
-        {
-          ids: workItems.map(({ id }) => id),
-          fields: ["System.State", "System.Tags", pullRequestField, releaseStatusField],
-          errorPolicy: "Fail",
-        },
-        accessToken,
-      )) as { value: ReleasePlanWorkItem[] })
-    : { value: [] };
+  const query = `SELECT [System.Id], [System.State], [System.Tags], [${pullRequestField}], [${releaseStatusField}]
+    FROM WorkItems WHERE [System.TeamProject] = 'Release'
+    AND [System.WorkItemType] = 'Release Plan'
+    AND [Custom.ApiSpecProjectPath] = '${typeSpecProjectPath.replaceAll("'", "''")}'
+    AND ([System.State] NOT IN (${inactiveStates}) OR [System.Id] = ${releasePlanWorkItemId})`;
+  // AzureCLI@2 has already signed in. Azure Boards returns the fields in the SELECT.
+  const output = execFileSync(
+    "az",
+    [
+      "boards",
+      "query",
+      "--org",
+      "https://dev.azure.com/azure-sdk",
+      "--detect",
+      "false",
+      "--wiql",
+      query,
+      "-o",
+      "json",
+    ],
+    { encoding: "utf8", stdio: ["ignore", "pipe", "inherit"] },
+  );
+  const plans = (JSON.parse(output.trim() || "null") as ReleasePlanWorkItem[] | null) ?? [];
 
   const selectedPlan = plans.find(({ id }) => id === releasePlanWorkItemId);
   if (releasePlanWorkItemId && !selectedPlan) {
@@ -373,9 +357,7 @@ export async function assertNoConflictingSdkReleasePlan(
     );
   }
   const isTestPlan = (plan?: ReleasePlanWorkItem) =>
-    plan?.fields["System.Tags"]
-      ?.split(";")
-      .some((tag) => tag.trim().toLowerCase() === "release planner app test") ?? false;
+    plan?.fields["System.Tags"]?.toLowerCase().includes("release planner app test") ?? false;
   const selectedIsTestPlan = isTestPlan(selectedPlan);
   const conflictingPlan = plans.find(
     (plan) =>
@@ -391,35 +373,31 @@ export async function assertNoConflictingSdkReleasePlan(
   if (
     selectedPullRequest &&
     (conflictingPlan ? selectedPlanIsActive : createPullRequest) &&
-    (await verifyOpenSdkPullRequestBranch(selectedPullRequest, check, githubToken))
+    (await checkSdkPullRequestBranch(selectedPullRequest, sdkPushRepo, sdkCheckoutBranch))
   ) {
     return;
   }
-
   if (conflictingPlan) {
     throw new Error(
-      `SDK generation for '${typeSpecProjectPath}' is blocked because active release plan work item ${conflictingPlan.id} ` +
-        `already has an unreleased ${language} SDK pull request. Complete or abandon that plan before generating for a different plan. ` +
-        "See https://aka.ms/azsdk/releaseplan-dashboard.",
+      `Release plan work item ${conflictingPlan.id} already has an unreleased ${language} SDK PR for '${typeSpecProjectPath}'. ` +
+        "Complete or abandon that plan before generating. See https://aka.ms/azsdk/releaseplan-dashboard.",
     );
   }
 }
 
-async function verifyOpenSdkPullRequestBranch(
+async function checkSdkPullRequestBranch(
   url: string,
-  { sdkRepoName, sdkRepoOwner, sdkCheckoutBranch }: SdkReleasePlanCheck,
-  githubToken?: string,
+  sdkPushRepo: string,
+  sdkCheckoutBranch: string,
 ): Promise<boolean> {
+  const sdkRepoName = path.posix.basename(sdkPushRepo);
   const match = /^https:\/\/github\.com\/Azure\/([\w-]+)\/pull\/(\d+)\/?$/i.exec(url);
   if (!match || match[1].toLowerCase() !== sdkRepoName.toLowerCase()) {
     throw new Error(`The release plan's SDK pull request must be in Azure/${sdkRepoName}.`);
   }
-  const headers = new Headers({ Accept: "application/vnd.github+json" });
-  if (githubToken) {
-    headers.set("Authorization", `Bearer ${githubToken}`);
-  }
+  const githubToken = process.env.GH_TOKEN;
   const response = await fetch(`https://api.github.com/repos/Azure/${match[1]}/pulls/${match[2]}`, {
-    headers,
+    headers: githubToken ? { Authorization: `Bearer ${githubToken}` } : undefined,
     redirect: "error",
   });
   if (!response.ok) {
@@ -432,14 +410,12 @@ async function verifyOpenSdkPullRequestBranch(
     base: { ref: string };
     head: { ref: string; repo: { full_name: string } | null };
   };
-  if (pullRequest.state === "closed") {
+  if (pullRequest.state !== "open") {
     return false;
   }
-  const headRepo = `${sdkRepoOwner}/${sdkRepoName}`.toLowerCase();
   if (
-    pullRequest.state !== "open" ||
     pullRequest.base.ref !== "main" ||
-    pullRequest.head.repo?.full_name.toLowerCase() !== headRepo ||
+    pullRequest.head.repo?.full_name.toLowerCase() !== sdkPushRepo.toLowerCase() ||
     pullRequest.head.ref === "main"
   ) {
     throw new Error(`The linked SDK pull request #${match[2]} cannot be updated by this pipeline.`);
@@ -452,26 +428,30 @@ async function verifyOpenSdkPullRequestBranch(
   return true;
 }
 
-async function queryReleasePlanWorkItems(
-  endpoint: "wiql" | "workitemsbatch",
-  body: object,
-  accessToken: string,
-): Promise<unknown> {
-  const response = await fetch(
-    `https://dev.azure.com/azure-sdk/Release/_apis/wit/${endpoint}?api-version=7.1`,
-    {
-      method: "POST",
-      headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-      redirect: "error",
-    },
-  );
-  if (!response.ok) {
-    throw new Error(
-      `Could not check SDK release plans: Azure DevOps ${endpoint} returned HTTP ${response.status}.`,
+if (import.meta.main) {
+  const {
+    TYPESPEC_CONFIG_PATH,
+    SDK_PUSH_REPO,
+    SDK_CHECKOUT_BRANCH,
+    RELEASE_PLAN_WORK_ITEM_ID,
+    CREATE_SDK_PULL_REQUEST,
+  } = process.env;
+  try {
+    if (!TYPESPEC_CONFIG_PATH || !SDK_PUSH_REPO) {
+      throw new Error("Missing TypeSpec config path or SDK repository.");
+    }
+    await assertNoConflictingSdkReleasePlan(
+      TYPESPEC_CONFIG_PATH,
+      SDK_PUSH_REPO,
+      SDK_CHECKOUT_BRANCH ?? "",
+      Number(RELEASE_PLAN_WORK_ITEM_ID),
+      CREATE_SDK_PULL_REQUEST === "true",
     );
+  } catch (error) {
+    console.error(error instanceof Error ? error.message : error);
+    console.log("##vso[task.setvariable variable=SdkGenerationBlocked]true");
+    process.exitCode = 1;
   }
-  return response.json();
 }
 
 /**

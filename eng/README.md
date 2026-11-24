@@ -51,13 +51,10 @@ For local runs, use Vally's `--model <model>` and `--judge-model <model>` option
 
 ## SDK generation pipeline variables
 
-Internal TypeSpec SDK generation stops if another active release plan for the
-same TypeSpec project has an unreleased SDK pull request for the same language.
-The check runs even when `ReleasePlanWorkItemId` is `0`. To regenerate for an
-active plan with an open SDK pull request, pass its work item ID and set
-`SdkRepoBranch` to the pull request's source branch. Runs for a test release
-plan check other test plans. Runs without a work item ID check production
-plans. Spec PR validation, batch generation, and OpenAPI runs are unchanged.
+Internal TypeSpec SDK generation stops if another active plan has an unreleased
+SDK PR for the same project and language. This also applies without a work item
+ID. To update an open SDK PR, pass the plan's work item ID and set `SdkRepoBranch`
+to the PR's source branch. Test plans are checked separately from production plans.
 
 Run `pnpm exec spec-gen-sdk-runner --help` from `eng/tools/spec-gen-sdk-runner`
 for the SDK runner's generated CLI help. Options accept `--option value` and
