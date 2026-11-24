@@ -274,7 +274,6 @@ model LogAlertRuleProperties {
   /**
    * The flag which indicates whether this scheduled query rule is enabled. Value should be true or false
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-bool-prefix" "Impact assessment: Retain the existing enabled member while the C# naming policy is reviewed; this affirmative state name would otherwise require a client-name change."
   enabled?: boolean;
 
   /**

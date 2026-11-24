@@ -283,7 +283,7 @@ model KnowledgeSourceParams {
   alwaysQuerySource?: boolean;
 
   /** Indicates that this knowledge source should be excluded from the request's candidate set and never queried at retrieval time. The exclusion is request-local and does not modify knowledge base membership. Cannot be combined with alwaysQuerySource on the same knowledge source. */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-bool-prefix" "Impact assessment: Retain neverQuerySource and its request-local exclusion semantics pending C# review; renaming it to an affirmative query flag would not invert its values."
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-bool-prefix" "Back compat: Preserve neverQuerySource, where true excludes this source from the request's candidate set. Renaming it to an affirmative query-source flag would reverse the interpretation of true without inverting its value."
   @added(Versions.v2026_11_01_preview)
   @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
