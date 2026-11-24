@@ -183,6 +183,16 @@ These settings apply only when `--tag=package-2026-11` is specified on the comma
 ```yaml $(tag) == 'package-2026-11'
 input-file:
     - stable/2026-11-15/openapi.json
+directive:
+  - suppress: PostResponseCodes
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/deploy"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/redeploy"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/start"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/stop"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/previews/{previewName}/deploy"].post
+    reason: False positive from the validator on the recommended ArmResourceActionNoResponseContentAsync pattern, which emits 202 and default for a long-running POST with no final result body (see https://github.com/Azure/azure-openapi-validator/issues/809). Adding 204 would violate the TypeSpec arm-post-operation-response-codes rule, which permits only 202, 200 with a schema, and default on long-running POSTs. Completion is reported through Azure-AsyncOperation and the Location result.
 ```
 
 ### Tag: package-2026-09

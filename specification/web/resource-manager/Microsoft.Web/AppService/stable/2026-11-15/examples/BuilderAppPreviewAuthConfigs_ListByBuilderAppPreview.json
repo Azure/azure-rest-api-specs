@@ -1,0 +1,38 @@
+{
+  "operationId": "BuilderAppPreviewAuthConfigs_ListByBuilderAppPreview",
+  "title": "ListBuilderAppPreviewAuthConfigs",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-11-15",
+    "name": "contoso-storefront",
+    "previewName": "feature-checkout"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Cache-Control": "private, no-store"
+      },
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/builderApps/contoso-storefront/previews/feature-checkout/authConfigs/default",
+            "name": "default",
+            "type": "Microsoft.Web/builderApps/previews/authConfigs",
+            "etag": "revision-1",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "mode": "disabled",
+              "primaryBrowserProvider": "github",
+              "githubCallbackUrl": "https://feature-checkout.contoso-storefront.example.com/.auth/login/github/callback",
+              "revision": 1,
+              "appliedRevision": 1,
+              "warnings": [],
+              "propagationPending": false
+            }
+          }
+        ]
+      }
+    }
+  }
+}

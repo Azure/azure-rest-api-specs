@@ -1,0 +1,56 @@
+{
+  "operationId": "BuilderAppPreviews_Get",
+  "title": "GetBuilderAppPreview",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-11-15",
+    "name": "contoso-storefront",
+    "previewName": "feature-checkout"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/builderApps/contoso-storefront/previews/feature-checkout",
+        "name": "feature-checkout",
+        "type": "Microsoft.Web/builderApps/previews",
+        "properties": {
+          "branch": "feature/checkout",
+          "expiresAt": "2026-11-13T17:32:04.123Z",
+          "source": {
+            "provider": "github",
+            "id": "123456789",
+            "displayName": "contoso/storefront",
+            "reference": "feature/checkout",
+            "rootDirectory": "apps/storefront",
+            "deploymentTrigger": "Push"
+          },
+          "sourceIntegrationState": "Configured",
+          "provisioningState": "Succeeded",
+          "versionConfiguration": {
+            "variables": [
+              {
+                "name": "LOG_LEVEL"
+              }
+            ]
+          },
+          "runtime": {
+            "desiredRunState": "running",
+            "runState": "running",
+            "url": "https://feature-checkout.contoso-storefront.example.com",
+            "activeDeploymentId": "dep_preview_example",
+            "activeAppVersionId": "ver_preview_example"
+          }
+        },
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-11-10T17:32:04.123Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-11-10T17:32:04.123Z"
+        }
+      }
+    }
+  }
+}

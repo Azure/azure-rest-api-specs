@@ -1,0 +1,23 @@
+{
+  "operationId": "BuilderApps_Deploy",
+  "title": "BuilderApps_Deploy",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-11-15",
+    "name": "contoso-storefront",
+    "body": {
+      "clientOperationId": "deploy-example",
+      "commitSha": "b17e9c4a6d2f8e1b0c5a7d3f9e2b4c6a8d0f1e37"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Web/locations/westus2/builderAppsOperationStatuses/dep_example?api-version=2026-11-15",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Web/locations/westus2/builderAppsOperationResults/dep_example?api-version=2026-11-15",
+        "Retry-After": "10"
+      }
+    }
+  }
+}

@@ -89,6 +89,10 @@ import "./SiteSilo.tsp";
 import "./ServerFarmSilo.tsp";
 import "./ManagedTrafficConfig.tsp";
 import "./LastKnownGood.tsp";
+import "./BuilderApp.tsp";
+import "./BuilderAppAuthConfig.tsp";
+import "./BuilderAppPreview.tsp";
+import "./BuilderAppsAsyncOperations.tsp";
 import "./routes.tsp";
 import "./client.tsp";
 

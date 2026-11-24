@@ -10,6 +10,64 @@ using Azure.Core;
 
 namespace Customizations;
 
+@@clientName(
+  BuilderAppBeginSourceUploadRequest,
+  "BuilderAppBeginSourceUploadContent",
+  "csharp"
+);
+@@clientName(BuilderAppDeployRequest, "BuilderAppDeployContent", "csharp");
+@@clientName(BuilderAppRedeployRequest, "BuilderAppRedeployContent", "csharp");
+@@clientName(BuilderAppAuthResponse, "BuilderAppAuthResult", "csharp");
+@@clientName(BuilderAppSourceUpload.uploadUrl, "uploadUri", "csharp");
+@@clientName(
+  BuilderAppAuthConfigProperties.githubCallbackUrl,
+  "githubCallbackUri",
+  "csharp"
+);
+@@clientName(
+  BuilderAppAuthConfigProperties.entraCallbackUrl,
+  "entraCallbackUri",
+  "csharp"
+);
+@@clientName(
+  BuilderAppAzureMonitorLogs.dataCollectionEndpointUrl,
+  "dataCollectionEndpointUri",
+  "csharp"
+);
+@@clientName(
+  BuilderAppsAsyncOperations.getOperationStatus,
+  "getBuilderAppOperationStatus",
+  "csharp"
+);
+@@clientName(
+  BuilderAppRuntimeActionRequest,
+  "BuilderAppRuntimeActionContent",
+  "csharp"
+);
+@@clientName(
+  BuilderAppPreviewDeployRequest,
+  "BuilderAppPreviewDeployContent",
+  "csharp"
+);
+@@clientName(
+  BuilderAppPreviewAuthResponse,
+  "BuilderAppPreviewAuthResult",
+  "csharp"
+);
+@@clientName(BuilderAppDeletionStatus.operationUrl, "operationUri", "csharp");
+@@clientName(BuilderAppDeletionStatus.startTime, "startsOn", "csharp");
+@@clientName(BuilderAppDeletionStatus.endTime, "endsOn", "csharp");
+@@clientName(
+  BuilderAppPreviewSettings.lifetimeHours,
+  "lifetimeInHours",
+  "csharp"
+);
+@@clientName(
+  BuilderAppPreviewSettings.autoCreatePreviews,
+  "shouldAutoCreatePreviews",
+  "csharp"
+);
+
 @@clientLocation(EgressConfigs.createOrUpdateEgressConfig, WebApps, "!csharp");
 @@clientLocation(EgressConfigs.getEgressConfig, WebApps, "!csharp");
 @@clientLocation(
@@ -7196,6 +7254,21 @@ union ConfigReferenceSource {
   Microsoft.Web.ManagedServiceIdentity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "BuilderAppManagedServiceIdentity",
+  "python, java, go"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.UserAssignedIdentity,
+  "BuilderAppUserAssignedIdentityInfo",
+  "python, java, go"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType,
+  "BuilderAppManagedServiceIdentityType",
+  "python, java, go"
 );
 @@clientName(
   AppServiceEnvironment.ipsslAddressCount,
