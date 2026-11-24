@@ -563,10 +563,10 @@ namespace Azure.AI.Projects {
   @pattern("^[A-Za-z0-9][A-Za-z0-9_-]{0,63}(?![\\s\\S])")
   scalar TelephonyTransferTargetName extends string;
 
-  @doc("A custom SIP header name sent on a transfer: `User-to-User`, or an extension header that starts with `X-` or `x-`. Names are sent with the case given. Standard SIP headers and the reserved `X-MS-` prefix are rejected.")
+  @doc("A custom SIP header name sent on a transfer: `User-to-User` (any case), or an extension header that starts with `X-` or `x-`. Names are sent with the case given and compared ignoring case. Standard SIP headers, the reserved `X-MS-` prefix and `%` are rejected.")
   @minLength(3)
   @maxLength(64)
-  @pattern("^(?:[Uu]ser-[Tt]o-[Uu]ser|[Xx]-(?![Mm][Ss]-)[A-Za-z0-9][A-Za-z0-9.!%*_+~-]{0,61})$")
+  @pattern("^(?:[Uu][Ss][Ee][Rr]-[Tt][Oo]-[Uu][Ss][Ee][Rr]|[Xx]-(?![Mm][Ss]-)[A-Za-z0-9][A-Za-z0-9.!*_+~-]{0,61})$")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   scalar TelephonyTransferSipHeaderName extends string;
 
