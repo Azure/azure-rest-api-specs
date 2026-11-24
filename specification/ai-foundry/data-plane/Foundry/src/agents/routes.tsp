@@ -550,7 +550,7 @@ interface Agents {
       /** The name of the agent to create a session for. */
       @path("name") agent_name: string;
 
-      ...ManagedAgents.SessionRepeatabilityRequestHeaders;
+      ...SessionRepeatabilityRequestHeaders;
 
       /** The owning Agent's definition kind selects Hosted or Managed validation, not a new Session-body discriminator. */
       @body body: AgentSessionCreateContent;
@@ -680,12 +680,12 @@ interface Agents {
       /** The opaque Session identifier. */
       @path("session_name") session_id: string;
 
-      ...ManagedAgents.SessionRepeatabilityRequestHeaders;
+      ...SessionRepeatabilityRequestHeaders;
 
       /** Exactly one message, cancellation, function result, or supported approval response in an events array. */
-      @body body: ManagedAgents.SessionSubmitEventsContent;
+      @body body: SessionSubmitEventsContent;
     },
-    ManagedAgents.SessionEventsAccepted
+    SessionEventsAccepted
   >;
 
   /**
@@ -714,7 +714,7 @@ interface Agents {
       @query
       include_obfuscation?: boolean = true;
     },
-    TypeSpec.SSE.SSEStream<ManagedAgents.SessionEvent>
+    TypeSpec.SSE.SSEStream<SessionEvent>
   >;
 
   /**
@@ -738,7 +738,7 @@ interface Agents {
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<ManagedAgents.SessionTurn>
+    AgentsPagedResult<SessionTurn>
   >;
 
   /**
@@ -762,7 +762,7 @@ interface Agents {
       /** The requested turn identifier. */
       @path turn_id: string;
     },
-    ManagedAgents.SessionTurn
+    SessionTurn
   >;
 
   /**
@@ -789,7 +789,7 @@ interface Agents {
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<ManagedAgents.SessionItem>
+    AgentsPagedResult<SessionItem>
   >;
 
   /**
@@ -813,7 +813,7 @@ interface Agents {
 
       ...CommonPageQueryParameters;
     },
-    AgentsPagedResult<ManagedAgents.SessionItem>
+    AgentsPagedResult<SessionItem>
   >;
 
   /**

@@ -5,7 +5,7 @@ import "./managed-runtime-items.tsp";
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
-namespace Azure.AI.Projects.ManagedAgents;
+namespace Azure.AI.Projects;
 
 /** Common discriminator for typed pending client actions. */
 model SessionRequiredActionBase {

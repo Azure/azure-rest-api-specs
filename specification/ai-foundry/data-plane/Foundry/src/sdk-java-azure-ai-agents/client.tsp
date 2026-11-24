@@ -294,11 +294,6 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 
 @@clientNamespace(Azure.AI.Projects, "com.azure.ai.agents", "java");
-@@clientNamespace(
-  Azure.AI.Projects.ManagedAgents,
-  "com.azure.ai.agents.managedagents",
-  "java"
-);
 @@clientName(Azure.AI.Projects, "AgentsClient");
 
 @@clientName(OpenAI.OutputTextContent.logprobs, "logProbs");

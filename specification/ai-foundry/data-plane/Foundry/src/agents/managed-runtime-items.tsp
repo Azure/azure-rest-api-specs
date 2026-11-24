@@ -1,6 +1,6 @@
 using TypeSpec.OpenAPI;
 
-namespace Azure.AI.Projects.ManagedAgents;
+namespace Azure.AI.Projects;
 
 /** Common history discriminator. Individual variants retain their own required fields and nullability. */
 model SessionItemBase {
