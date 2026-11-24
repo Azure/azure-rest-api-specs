@@ -6,13 +6,13 @@
 
 ### 3.1.1 Reuse the authoring grounding
 
-Step 2 already read the reference catalog, classified the complete request as covered
-or uncovered, and executed exactly one knowledge route before collecting any missing
-decisions. Reuse that route's fetched content here.
+Step 2 already attempted to read the reference catalog and used Agentic Search for
+the complete request before collecting any missing decisions. Reuse its fetched
+content here.
 
-Do not call Agentic Search, `azsdk_typespec_retrieve_knowledge`, or an authoring-plan
-MCP during planning. If the grounding is insufficient, return to Step 2 and refine
-the same selected route there; never switch routes or make an ungrounded plan.
+Do not call Agentic Search or an authoring-plan MCP during planning. If the grounding
+is insufficient, return to Step 2 and refine the search there; do not make an
+ungrounded plan.
 
 ### 3.1.2 Build the authoring plan locally
 
@@ -35,7 +35,7 @@ SDK-visible changes include that analysis by default unless the user opts out.
 
 ### API Versioning
 
-> API Versioning **is covered** by [reference-document-links.md](reference-document-links.md), so Step 2 **MUST** use **Agentic Search** and call `web_fetch` on the matching versioning document before finalizing intake. Reuse that guidance here. Do **not** call `azsdk_typespec_retrieve_knowledge` or `azsdk_typespec_generate_authoring_plan`.
+> For API Versioning, Step 2 **MUST** use **Agentic Search** and call `web_fetch` on the matching versioning document before finalizing intake. Reuse that guidance here. Do **not** call `azsdk_typespec_generate_authoring_plan`.
 
 For requests that add, replace, or promote a version:
 

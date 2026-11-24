@@ -4,47 +4,34 @@
 
 ## 2.1 General Intake (All Cases)
 
-Select and execute one knowledge route before deciding what additional information
+Use Agentic Search for authoring guidance before deciding what additional information
 to collect:
 
 1. Read the installed
    [reference-document-links.md](reference-document-links.md). If that read fails,
    retry the installed skill path. If local access remains unavailable, recover the
    canonical repository copy through an available repository-file reader.
-2. Classify the complete request:
-   - **Covered** — the catalog covers every material authoring topic.
-   - **Uncovered** — one or more material authoring topics are absent from the
-     catalog. A partially covered request is classified as uncovered for its complete
-     knowledge route.
-3. Execute exactly one route for the complete request:
-   - **Covered** — run [agentic search](agentic-search.md).
-   - **Uncovered** — call `azsdk_typespec_retrieve_knowledge` when it is exposed. If
-     it is not exposed, run Agentic Search against authoritative TypeSpec or Azure
-     documentation instead.
-   - **Catalog unavailable** — run Agentic Search against authoritative TypeSpec or
-     Azure documentation. Catalog access failure is not a blocker and does not by
-     itself select retrieval.
-4. Do not call both Agentic Search and retrieval for the same request. Retain the
-   selected route's fetched content for Step 3; the authoring-plan step must reuse it
-   without another knowledge call.
-5. Use the fetched guidance to determine the material intake decisions and retain it
+2. Run [Agentic Search](agentic-search.md) for the complete request. If the catalog
+   is unavailable or does not cover a topic, locate authoritative TypeSpec or Azure
+   documentation directly. Catalog access failure is not a blocker.
+3. Use the fetched guidance to determine the material intake decisions and retain it
    for the authoring plan.
-6. Using the selected guidance, the Step 1 result, and the user's request, identify
+4. Using the guidance, the Step 1 result, and the user's request, identify
    every matching case from the table below.
-7. Gather only material information that is not already supplied or directly
+5. Gather only material information that is not already supplied or directly
    available from the project. If no case matches, skip Step 2.2.
 
-Do not call an authoring-plan or validation MCP tool during intake. If the selected
-knowledge route cannot obtain sufficient authoritative guidance, report a blocker
-instead of switching routes. Do not plan, edit, or validate during intake. Step 3
-must reuse this grounding record without repeating Agentic Search or retrieval.
+Do not call an authoring-plan or validation MCP tool during intake. If Agentic Search
+cannot obtain sufficient authoritative guidance, report a blocker. Do not plan,
+edit, or validate during intake. Step 3 must reuse this grounding record without
+repeating the search.
 
-| Case | Name                    | Description                                            | Service Type     | Knowledge route          |
-| ---- | ----------------------- | ------------------------------------------------------ | ---------------- | ------------------------ |
-| 1    | ARM Resource Types      | Define a new ARM resource with operations              | ARM              | Covered — Agentic Search |
-| 2    | ARM Resource Operations | Add CRUD or custom actions on an existing resource     | ARM              | Covered — Agentic Search |
-| 3    | API Versioning          | Add, bump, or promote an API version (preview/stable)  | ARM / Data-plane | Covered — Agentic Search |
-| 4    | Data-Plane Operations   | Add CRUD or custom operations on a data-plane resource | Data-plane       | Covered — Agentic Search |
+| Case | Name                    | Description                                            | Service Type     |
+| ---- | ----------------------- | ------------------------------------------------------ | ---------------- |
+| 1    | ARM Resource Types      | Define a new ARM resource with operations              | ARM              |
+| 2    | ARM Resource Operations | Add CRUD or custom actions on an existing resource     | ARM              |
+| 3    | API Versioning          | Add, bump, or promote an API version (preview/stable)  | ARM / Data-plane |
+| 4    | Data-Plane Operations   | Add CRUD or custom operations on a data-plane resource | Data-plane       |
 
 ---
 
