@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2026-03-19-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroupName",
+    "machineName": "myMachineName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "jsmith",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroupName/providers/Microsoft.HybridCompute/machines/myMachineName/providers/Microsoft.GuestConfiguration/users/jsmith",
+            "type": "Microsoft.GuestConfiguration/users",
+            "properties": {
+              "lastObservedAt": "2026-04-16T01:12:58.5988849Z",
+              "fullName": "John Smith",
+              "description": "Built-in account for administering the computer",
+              "sid": "S-1-5-21-3623811015-3361044348-30300820",
+              "domain": "CONTOSO",
+              "enabled": true,
+              "lockout": false,
+              "passwordExpires": true,
+              "passwordLastSet": "2024-11-15T09:32:00Z",
+              "passwordRequired": true,
+              "accountExpires": "2025-06-30T23:59:59Z",
+              "userPasswordChangePermission": true,
+              "passwordExpiresInUTC": "2025-06-30T23:59:59Z"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ArcUsers_List",
+  "title": "List all user account inventory items for an Arc machine"
+}

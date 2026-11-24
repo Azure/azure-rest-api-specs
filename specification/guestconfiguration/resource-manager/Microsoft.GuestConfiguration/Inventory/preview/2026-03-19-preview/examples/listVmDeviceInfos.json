@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2026-03-19-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroupName",
+    "vmName": "myVMName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "MyPC",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myVMName/providers/Microsoft.GuestConfiguration/deviceInfos/MyPC",
+            "type": "Microsoft.GuestConfiguration/deviceInfos",
+            "properties": {
+              "lastObservedAt": "2026-04-16T01:12:58.5988849Z",
+              "biosVersion": "1.2.3",
+              "biosReleaseDate": "2024-06-15T00:00:00Z",
+              "systemManufacturer": "Contoso",
+              "systemProductName": "MyPC"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "VmDeviceInfos_List",
+  "title": "List all device info inventory items for a virtual machine"
+}

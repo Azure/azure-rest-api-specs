@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2026-03-19-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroupName",
+    "vmName": "myVMName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "A1B2C3D4E5F6A7B8C9D0E1F2A3B4C5D6E7F8A9B0",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myVMName/providers/Microsoft.GuestConfiguration/certificates/A1B2C3D4E5F6A7B8C9D0E1F2A3B4C5D6E7F8A9B0",
+            "type": "Microsoft.GuestConfiguration/certificates",
+            "properties": {
+              "lastObservedAt": "2026-04-16T01:12:58.5988849Z",
+              "subject": "CN=*.contoso.com, O=Contoso Ltd, L=Redmond",
+              "issuer": "CN=DigiCert Global G2 TLS RSA SHA256 2020 CA1",
+              "notBefore": "2024-01-15T00:00:00Z",
+              "notAfter": "2025-01-15T23:59:59Z",
+              "thumbprint": "A1B2C3D4E5F6A7B8C9D0E1F2A3B4C5D6E7F8A9B0",
+              "hasPrivateKey": true,
+              "keyAlgorithm": "RSA",
+              "keySize": 2048,
+              "keyUsage": [
+                "Digital Signature",
+                "Key Encipherment"
+              ],
+              "serialNumber": "0A1B2C3D4E5F6789",
+              "eku": [
+                "Server Authentication (1.3.6.1.5.5.7.3.1)"
+              ],
+              "san": [
+                "*.contoso.com",
+                "contoso.com"
+              ]
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "VmCertificates_List",
+  "title": "List all certificate inventory items for a virtual machine"
+}

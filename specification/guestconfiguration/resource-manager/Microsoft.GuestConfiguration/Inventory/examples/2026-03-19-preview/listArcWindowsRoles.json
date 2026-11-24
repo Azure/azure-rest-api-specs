@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2026-03-19-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroupName",
+    "machineName": "myMachineName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "AD-Domain-Services",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroupName/providers/Microsoft.HybridCompute/machines/myMachineName/providers/Microsoft.GuestConfiguration/windowsRoles/AD-Domain-Services",
+            "type": "Microsoft.GuestConfiguration/windowsRoles",
+            "properties": {
+              "lastObservedAt": "2026-04-16T01:12:58.5988849Z",
+              "displayName": "Active Directory Domain Services",
+              "description": "Active Directory Domain Services (AD DS) stores information about objects on the network.",
+              "installedState": "Installed",
+              "path": "C:\\Windows\\WinSxS",
+              "parentRole": "Active-Directory-Domain-Services",
+              "dependsOn": [
+                "RSAT-AD-Tools"
+              ],
+              "subFeatures": [
+                "AD-Domain-Services"
+              ]
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ArcWindowsRoles_List",
+  "title": "List all windows role inventory items for an Arc machine"
+}

@@ -1,0 +1,2602 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "GuestConfiguration",
+    "version": "2026-03-19-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "VmApplications"
+    },
+    {
+      "name": "VmCertificates"
+    },
+    {
+      "name": "VmWindowsRoles"
+    },
+    {
+      "name": "VmUsers"
+    },
+    {
+      "name": "VmServices"
+    },
+    {
+      "name": "VmGroups"
+    },
+    {
+      "name": "VmDeviceInfos"
+    },
+    {
+      "name": "VmFirmwareResources"
+    },
+    {
+      "name": "ArcApplications"
+    },
+    {
+      "name": "ArcCertificates"
+    },
+    {
+      "name": "ArcWindowsRoles"
+    },
+    {
+      "name": "ArcUsers"
+    },
+    {
+      "name": "ArcServices"
+    },
+    {
+      "name": "ArcGroups"
+    },
+    {
+      "name": "ArcDeviceInfos"
+    },
+    {
+      "name": "ArcFirmwareResources"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.GuestConfiguration/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all of the available GuestConfiguration Inventory REST API operations": {
+            "$ref": "./examples/listOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/applications": {
+      "get": {
+        "operationId": "VmApplications_List",
+        "tags": [
+          "VmApplications"
+        ],
+        "description": "List all application inventory items for a virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all application inventory items for a virtual machine": {
+            "$ref": "./examples/listVmApplications.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/applications/{applicationName}": {
+      "get": {
+        "operationId": "VmApplications_Get",
+        "tags": [
+          "VmApplications"
+        ],
+        "description": "Get a specific application inventory item for a virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "Name of the application inventory item.",
+            "required": true,
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an application inventory item for a virtual machine": {
+            "$ref": "./examples/getVmApplication.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/certificates": {
+      "get": {
+        "operationId": "VmCertificates_List",
+        "tags": [
+          "VmCertificates"
+        ],
+        "description": "List all certificate inventory items for a virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CertificateList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all certificate inventory items for a virtual machine": {
+            "$ref": "./examples/listVmCertificates.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/certificates/{certificateName}": {
+      "get": {
+        "operationId": "VmCertificates_Get",
+        "tags": [
+          "VmCertificates"
+        ],
+        "description": "Get a specific certificate inventory item for a virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "description": "Thumbprint of the certificate.",
+            "required": true,
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Certificate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a certificate inventory item for a virtual machine": {
+            "$ref": "./examples/getVmCertificate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/deviceInfos": {
+      "get": {
+        "operationId": "VmDeviceInfos_List",
+        "tags": [
+          "VmDeviceInfos"
+        ],
+        "description": "List all device info inventory items for a virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceInfoList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all device info inventory items for a virtual machine": {
+            "$ref": "./examples/listVmDeviceInfos.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/deviceInfos/{deviceInfoName}": {
+      "get": {
+        "operationId": "VmDeviceInfos_Get",
+        "tags": [
+          "VmDeviceInfos"
+        ],
+        "description": "Get a specific device info inventory item for a virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "deviceInfoName",
+            "in": "path",
+            "description": "The system product name, used as the unique identifier for the device info inventory item.",
+            "required": true,
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a device info inventory item for a virtual machine": {
+            "$ref": "./examples/getVmDeviceInfo.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/firmwareResources": {
+      "get": {
+        "operationId": "VmFirmwareResources_List",
+        "tags": [
+          "VmFirmwareResources"
+        ],
+        "description": "List all firmware inventory items for a virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirmwareResourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all firmware inventory items for a virtual machine": {
+            "$ref": "./examples/listVmFirmwareResources.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/firmwareResources/{firmwareResourceName}": {
+      "get": {
+        "operationId": "VmFirmwareResources_Get",
+        "tags": [
+          "VmFirmwareResources"
+        ],
+        "description": "Get a specific firmware inventory item for a virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "firmwareResourceName",
+            "in": "path",
+            "description": "The firmware class, used as the unique identifier for the firmware inventory item.",
+            "required": true,
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirmwareResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a firmware inventory item for a virtual machine": {
+            "$ref": "./examples/getVmFirmwareResource.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/groups": {
+      "get": {
+        "operationId": "VmGroups_List",
+        "tags": [
+          "VmGroups"
+        ],
+        "description": "List all group inventory items for a virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GroupList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all group inventory items for a virtual machine": {
+            "$ref": "./examples/listVmGroups.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/groups/{groupName}": {
+      "get": {
+        "operationId": "VmGroups_Get",
+        "tags": [
+          "VmGroups"
+        ],
+        "description": "Get a specific group inventory item for a virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "Name of the group.",
+            "required": true,
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Group"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a group inventory item for a virtual machine": {
+            "$ref": "./examples/getVmGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/services": {
+      "get": {
+        "operationId": "VmServices_List",
+        "tags": [
+          "VmServices"
+        ],
+        "description": "List all service inventory items for a virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all service inventory items for a virtual machine": {
+            "$ref": "./examples/listVmServices.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/services/{serviceName}": {
+      "get": {
+        "operationId": "VmServices_Get",
+        "tags": [
+          "VmServices"
+        ],
+        "description": "Get a specific service inventory item for a virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "Name of the service.",
+            "required": true,
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Service"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a service inventory item for a virtual machine": {
+            "$ref": "./examples/getVmService.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/users": {
+      "get": {
+        "operationId": "VmUsers_List",
+        "tags": [
+          "VmUsers"
+        ],
+        "description": "List all user account inventory items for a virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UserList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all user account inventory items for a virtual machine": {
+            "$ref": "./examples/listVmUsers.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/users/{userName}": {
+      "get": {
+        "operationId": "VmUsers_Get",
+        "tags": [
+          "VmUsers"
+        ],
+        "description": "Get a specific user account inventory item for a virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "userName",
+            "in": "path",
+            "description": "Login name of the user account.",
+            "required": true,
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a user account inventory item for a virtual machine": {
+            "$ref": "./examples/getVmUser.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/windowsRoles": {
+      "get": {
+        "operationId": "VmWindowsRoles_List",
+        "tags": [
+          "VmWindowsRoles"
+        ],
+        "description": "List all windows role inventory items for a virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WindowsRoleList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all windows role inventory items for a virtual machine": {
+            "$ref": "./examples/listVmWindowsRoles.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/windowsRoles/{windowsRoleName}": {
+      "get": {
+        "operationId": "VmWindowsRoles_Get",
+        "tags": [
+          "VmWindowsRoles"
+        ],
+        "description": "Get a specific windows role inventory item for a virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "windowsRoleName",
+            "in": "path",
+            "description": "Name of the windows role.",
+            "required": true,
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WindowsRole"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a windows role inventory item for a virtual machine": {
+            "$ref": "./examples/getVmWindowsRole.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/applications": {
+      "get": {
+        "operationId": "ArcApplications_List",
+        "tags": [
+          "ArcApplications"
+        ],
+        "description": "List all application inventory items for an Arc machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the ARC machine.",
+            "required": true,
+            "type": "string",
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all application inventory items for an Arc machine": {
+            "$ref": "./examples/listArcApplications.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/applications/{applicationName}": {
+      "get": {
+        "operationId": "ArcApplications_Get",
+        "tags": [
+          "ArcApplications"
+        ],
+        "description": "Get a specific application inventory item for an Arc machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the ARC machine.",
+            "required": true,
+            "type": "string",
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "Name of the application inventory item.",
+            "required": true,
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an application inventory item for an Arc machine": {
+            "$ref": "./examples/getArcApplication.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/certificates": {
+      "get": {
+        "operationId": "ArcCertificates_List",
+        "tags": [
+          "ArcCertificates"
+        ],
+        "description": "List all certificate inventory items for an Arc machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the ARC machine.",
+            "required": true,
+            "type": "string",
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CertificateList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all certificate inventory items for an Arc machine": {
+            "$ref": "./examples/listArcCertificates.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/certificates/{certificateName}": {
+      "get": {
+        "operationId": "ArcCertificates_Get",
+        "tags": [
+          "ArcCertificates"
+        ],
+        "description": "Get a specific certificate inventory item for an Arc machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the ARC machine.",
+            "required": true,
+            "type": "string",
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "description": "Thumbprint of the certificate.",
+            "required": true,
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Certificate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a certificate inventory item for an Arc machine": {
+            "$ref": "./examples/getArcCertificate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/deviceInfos": {
+      "get": {
+        "operationId": "ArcDeviceInfos_List",
+        "tags": [
+          "ArcDeviceInfos"
+        ],
+        "description": "List all device info inventory items for an Arc machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the ARC machine.",
+            "required": true,
+            "type": "string",
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceInfoList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all device info inventory items for an Arc machine": {
+            "$ref": "./examples/listArcDeviceInfos.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/deviceInfos/{deviceInfoName}": {
+      "get": {
+        "operationId": "ArcDeviceInfos_Get",
+        "tags": [
+          "ArcDeviceInfos"
+        ],
+        "description": "Get a specific device info inventory item for an Arc machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the ARC machine.",
+            "required": true,
+            "type": "string",
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "deviceInfoName",
+            "in": "path",
+            "description": "The system product name, used as the unique identifier for the device info inventory item.",
+            "required": true,
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceInfo"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a device info inventory item for an Arc machine": {
+            "$ref": "./examples/getArcDeviceInfo.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/firmwareResources": {
+      "get": {
+        "operationId": "ArcFirmwareResources_List",
+        "tags": [
+          "ArcFirmwareResources"
+        ],
+        "description": "List all firmware inventory items for an Arc machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the ARC machine.",
+            "required": true,
+            "type": "string",
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirmwareResourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all firmware inventory items for an Arc machine": {
+            "$ref": "./examples/listArcFirmwareResources.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/firmwareResources/{firmwareResourceName}": {
+      "get": {
+        "operationId": "ArcFirmwareResources_Get",
+        "tags": [
+          "ArcFirmwareResources"
+        ],
+        "description": "Get a specific firmware inventory item for an Arc machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the ARC machine.",
+            "required": true,
+            "type": "string",
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "firmwareResourceName",
+            "in": "path",
+            "description": "The firmware class, used as the unique identifier for the firmware inventory item.",
+            "required": true,
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirmwareResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a firmware inventory item for an Arc machine": {
+            "$ref": "./examples/getArcFirmwareResource.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/groups": {
+      "get": {
+        "operationId": "ArcGroups_List",
+        "tags": [
+          "ArcGroups"
+        ],
+        "description": "List all group inventory items for an Arc machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the ARC machine.",
+            "required": true,
+            "type": "string",
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GroupList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all group inventory items for an Arc machine": {
+            "$ref": "./examples/listArcGroups.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/groups/{groupName}": {
+      "get": {
+        "operationId": "ArcGroups_Get",
+        "tags": [
+          "ArcGroups"
+        ],
+        "description": "Get a specific group inventory item for an Arc machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the ARC machine.",
+            "required": true,
+            "type": "string",
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "Name of the group.",
+            "required": true,
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Group"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a group inventory item for an Arc machine": {
+            "$ref": "./examples/getArcGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/services": {
+      "get": {
+        "operationId": "ArcServices_List",
+        "tags": [
+          "ArcServices"
+        ],
+        "description": "List all service inventory items for an Arc machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the ARC machine.",
+            "required": true,
+            "type": "string",
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all service inventory items for an Arc machine": {
+            "$ref": "./examples/listArcServices.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/services/{serviceName}": {
+      "get": {
+        "operationId": "ArcServices_Get",
+        "tags": [
+          "ArcServices"
+        ],
+        "description": "Get a specific service inventory item for an Arc machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the ARC machine.",
+            "required": true,
+            "type": "string",
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "Name of the service.",
+            "required": true,
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Service"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a service inventory item for an Arc machine": {
+            "$ref": "./examples/getArcService.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/users": {
+      "get": {
+        "operationId": "ArcUsers_List",
+        "tags": [
+          "ArcUsers"
+        ],
+        "description": "List all user account inventory items for an Arc machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the ARC machine.",
+            "required": true,
+            "type": "string",
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UserList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all user account inventory items for an Arc machine": {
+            "$ref": "./examples/listArcUsers.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/users/{userName}": {
+      "get": {
+        "operationId": "ArcUsers_Get",
+        "tags": [
+          "ArcUsers"
+        ],
+        "description": "Get a specific user account inventory item for an Arc machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the ARC machine.",
+            "required": true,
+            "type": "string",
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "userName",
+            "in": "path",
+            "description": "Login name of the user account.",
+            "required": true,
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a user account inventory item for an Arc machine": {
+            "$ref": "./examples/getArcUser.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/windowsRoles": {
+      "get": {
+        "operationId": "ArcWindowsRoles_List",
+        "tags": [
+          "ArcWindowsRoles"
+        ],
+        "description": "List all windows role inventory items for an Arc machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the ARC machine.",
+            "required": true,
+            "type": "string",
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WindowsRoleList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all windows role inventory items for an Arc machine": {
+            "$ref": "./examples/listArcWindowsRoles.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/providers/Microsoft.GuestConfiguration/windowsRoles/{windowsRoleName}": {
+      "get": {
+        "operationId": "ArcWindowsRoles_Get",
+        "tags": [
+          "ArcWindowsRoles"
+        ],
+        "description": "Get a specific windows role inventory item for an Arc machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The name of the ARC machine.",
+            "required": true,
+            "type": "string",
+            "maxLength": 54,
+            "pattern": "^[a-zA-Z0-9](?:[-a-zA-Z0-9_.]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "windowsRoleName",
+            "in": "path",
+            "description": "Name of the windows role.",
+            "required": true,
+            "type": "string",
+            "maxLength": 128,
+            "pattern": "^[a-zA-Z0-9][-a-zA-Z0-9_.]*[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WindowsRole"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a windows role inventory item for an Arc machine": {
+            "$ref": "./examples/getArcWindowsRole.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Application": {
+      "type": "object",
+      "description": "An application inventory resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ApplicationList": {
+      "type": "object",
+      "description": "The response of the list applications operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of application inventory items.",
+          "items": {
+            "$ref": "#/definitions/Application"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items.",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationProperties": {
+      "type": "object",
+      "description": "Properties of an installed application inventory item.",
+      "properties": {
+        "lastObservedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the inventory item was last observed on the machine.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "Installed version string.",
+          "readOnly": true
+        },
+        "publisher": {
+          "type": "string",
+          "description": "Vendor or publisher of the application.",
+          "readOnly": true
+        },
+        "architecture": {
+          "type": "string",
+          "description": "CPU architecture of the installed package.",
+          "readOnly": true
+        },
+        "applicationType": {
+          "type": "string",
+          "description": "Application type classification.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable display name of the application.",
+          "readOnly": true
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Product code that identifies the installed application.",
+          "readOnly": true
+        },
+        "packageCode": {
+          "type": "string",
+          "description": "Package code that identifies the installed package.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Free-text description of the application.",
+          "readOnly": true
+        },
+        "installDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time the application was installed.",
+          "readOnly": true
+        },
+        "installLocation": {
+          "type": "string",
+          "description": "Filesystem path where the application is installed.",
+          "readOnly": true
+        },
+        "installSource": {
+          "type": "string",
+          "description": "Original media path or URL the installer was run from.",
+          "readOnly": true
+        },
+        "packageSource": {
+          "type": "string",
+          "description": "Source from which the application package was installed.",
+          "readOnly": true
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL associated with the installed application.",
+          "readOnly": true
+        },
+        "uninstallString": {
+          "type": "string",
+          "description": "Registry-derived command to remove the application.",
+          "readOnly": true
+        }
+      }
+    },
+    "Certificate": {
+      "type": "object",
+      "description": "A certificate inventory resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CertificateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CertificateList": {
+      "type": "object",
+      "description": "The response of the list certificates operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of certificate inventory items.",
+          "items": {
+            "$ref": "#/definitions/Certificate"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items.",
+          "readOnly": true
+        }
+      }
+    },
+    "CertificateProperties": {
+      "type": "object",
+      "description": "Properties of a certificate inventory item.",
+      "properties": {
+        "lastObservedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the inventory item was last observed on the machine.",
+          "readOnly": true
+        },
+        "subject": {
+          "type": "string",
+          "description": "Subject distinguished name of the certificate.",
+          "readOnly": true
+        },
+        "issuer": {
+          "type": "string",
+          "description": "Distinguished name of the certificate authority that issued the certificate.",
+          "readOnly": true
+        },
+        "notBefore": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start date of the certificate validity period.",
+          "readOnly": true
+        },
+        "notAfter": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration date of the certificate.",
+          "readOnly": true
+        },
+        "thumbprint": {
+          "type": "string",
+          "description": "SHA-1 hash of the certificate (legacy thumbprint).",
+          "readOnly": true
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "Serial number assigned to the certificate by its issuer.",
+          "readOnly": true
+        },
+        "hasPrivateKey": {
+          "type": "boolean",
+          "description": "Whether the certificate has an associated private key.",
+          "readOnly": true
+        },
+        "keyAlgorithm": {
+          "type": "string",
+          "description": "Public key algorithm type.",
+          "readOnly": true
+        },
+        "keySize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length of the public key in bits.",
+          "readOnly": true
+        },
+        "keyUsage": {
+          "type": "array",
+          "description": "Key usage flags defining permitted cryptographic operations.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "eku": {
+          "type": "array",
+          "description": "Extended key usage purposes (Server Auth, Client Auth, Code Signing, etc.).",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "san": {
+          "type": "array",
+          "description": "Subject alternative names (SANs) from the certificate.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "DeviceInfo": {
+      "type": "object",
+      "description": "A device info inventory resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeviceInfoProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DeviceInfoList": {
+      "type": "object",
+      "description": "The response of the list device info operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of device info inventory items.",
+          "items": {
+            "$ref": "#/definitions/DeviceInfo"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items.",
+          "readOnly": true
+        }
+      }
+    },
+    "DeviceInfoProperties": {
+      "type": "object",
+      "description": "Properties of a device info inventory item.",
+      "properties": {
+        "lastObservedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the inventory item was last observed on the machine.",
+          "readOnly": true
+        },
+        "biosVersion": {
+          "type": "string",
+          "description": "The BIOS version reported by the system.",
+          "readOnly": true
+        },
+        "biosReleaseDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The BIOS release date reported by the system.",
+          "readOnly": true
+        },
+        "systemManufacturer": {
+          "type": "string",
+          "description": "The system manufacturer name.",
+          "readOnly": true
+        },
+        "systemProductName": {
+          "type": "string",
+          "description": "The system product name.",
+          "readOnly": true
+        }
+      }
+    },
+    "FirmwareResource": {
+      "type": "object",
+      "description": "A firmware inventory resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FirmwareResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "FirmwareResourceList": {
+      "type": "object",
+      "description": "The response of the list firmware resources operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of firmware inventory items.",
+          "items": {
+            "$ref": "#/definitions/FirmwareResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items.",
+          "readOnly": true
+        }
+      }
+    },
+    "FirmwareResourceProperties": {
+      "type": "object",
+      "description": "Properties of a firmware inventory item.",
+      "properties": {
+        "lastObservedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the inventory item was last observed on the machine.",
+          "readOnly": true
+        },
+        "firmwareClass": {
+          "type": "array",
+          "description": "The list of firmware class identifiers (typically GUIDs).",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "Group": {
+      "type": "object",
+      "description": "A group inventory resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GroupProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GroupList": {
+      "type": "object",
+      "description": "The response of the list groups operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of group inventory items.",
+          "items": {
+            "$ref": "#/definitions/Group"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items.",
+          "readOnly": true
+        }
+      }
+    },
+    "GroupProperties": {
+      "type": "object",
+      "description": "Properties of a group inventory item.",
+      "properties": {
+        "lastObservedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the inventory item was last observed on the machine.",
+          "readOnly": true
+        },
+        "groupId": {
+          "type": "string",
+          "description": "Unique identifier for the group.",
+          "readOnly": true
+        },
+        "localAccount": {
+          "type": "boolean",
+          "description": "Whether this group is a local account.",
+          "readOnly": true
+        },
+        "comment": {
+          "type": "string",
+          "description": "Free-text comment describing the group's purpose.",
+          "readOnly": true
+        },
+        "members": {
+          "type": "array",
+          "description": "List of user accounts and/or nested groups that are members of this group.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "Service": {
+      "type": "object",
+      "description": "A service inventory resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ServiceList": {
+      "type": "object",
+      "description": "The response of the list services operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of service inventory items.",
+          "items": {
+            "$ref": "#/definitions/Service"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items.",
+          "readOnly": true
+        }
+      }
+    },
+    "ServiceProperties": {
+      "type": "object",
+      "description": "Properties of a service inventory item.",
+      "properties": {
+        "lastObservedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the inventory item was last observed on the machine.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable name shown in the Services console.",
+          "readOnly": true
+        },
+        "serviceType": {
+          "type": "string",
+          "description": "Classification of the service (own process, shared, kernel driver, etc.).",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Free-text summary of what the service does.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Current runtime state: Running, Stopped, Paused.",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "description": "Detailed runtime state including transitional states.",
+          "readOnly": true
+        },
+        "processId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The OS process ID (PID) of the running service instance.",
+          "readOnly": true
+        },
+        "startType": {
+          "type": "string",
+          "description": "How the service is configured to launch (Auto, Manual, Disabled).",
+          "readOnly": true
+        },
+        "pathName": {
+          "type": "string",
+          "description": "Fully qualified path to the service binary.",
+          "readOnly": true
+        },
+        "userName": {
+          "type": "string",
+          "description": "The account name under which the service runs.",
+          "readOnly": true
+        },
+        "acceptPause": {
+          "type": "boolean",
+          "description": "Whether the service can be paused and resumed.",
+          "readOnly": true
+        },
+        "acceptStop": {
+          "type": "boolean",
+          "description": "Whether the service can be stopped.",
+          "readOnly": true
+        },
+        "delayedAutoStart": {
+          "type": "boolean",
+          "description": "Whether automatic startup is delayed.",
+          "readOnly": true
+        },
+        "started": {
+          "type": "boolean",
+          "description": "Whether the service has started.",
+          "readOnly": true
+        },
+        "exitCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The exit code from the last service termination.",
+          "readOnly": true
+        },
+        "errorControl": {
+          "type": "string",
+          "description": "Severity of the error if this service fails to start during startup.",
+          "readOnly": true
+        },
+        "checkPoint": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The checkpoint value from the last service state update.",
+          "readOnly": true
+        },
+        "desktopInteract": {
+          "type": "boolean",
+          "description": "Whether the service can interact with the desktop.",
+          "readOnly": true
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "description": "A user account inventory resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UserProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "UserList": {
+      "type": "object",
+      "description": "The response of the list users operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of user inventory items.",
+          "items": {
+            "$ref": "#/definitions/User"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items.",
+          "readOnly": true
+        }
+      }
+    },
+    "UserProperties": {
+      "type": "object",
+      "description": "Properties of a user account inventory item.",
+      "properties": {
+        "lastObservedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the inventory item was last observed on the machine.",
+          "readOnly": true
+        },
+        "fullName": {
+          "type": "string",
+          "description": "The full display name of the user.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Free-text description of the account's purpose.",
+          "readOnly": true
+        },
+        "sid": {
+          "type": "string",
+          "description": "The Security Identifier — unique, immutable ID.",
+          "readOnly": true
+        },
+        "domain": {
+          "type": "string",
+          "description": "The domain or machine name the account belongs to.",
+          "readOnly": true
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the account is currently active and can log in.",
+          "readOnly": true
+        },
+        "lockout": {
+          "type": "boolean",
+          "description": "Whether the account is currently locked out.",
+          "readOnly": true
+        },
+        "userPasswordChangePermission": {
+          "type": "boolean",
+          "description": "Whether the user is allowed to change their own password.",
+          "readOnly": true
+        },
+        "passwordExpires": {
+          "type": "boolean",
+          "description": "Whether the account's password has an expiration date set.",
+          "readOnly": true
+        },
+        "passwordExpiresInUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Password expiration time in UTC.",
+          "readOnly": true
+        },
+        "passwordLastSet": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the password was last changed.",
+          "readOnly": true
+        },
+        "passwordRequired": {
+          "type": "boolean",
+          "description": "Whether a password is required to log in.",
+          "readOnly": true
+        },
+        "accountExpires": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date when the entire account expires.",
+          "readOnly": true
+        }
+      }
+    },
+    "WindowsRole": {
+      "type": "object",
+      "description": "A windows role inventory resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WindowsRoleProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WindowsRoleList": {
+      "type": "object",
+      "description": "The response of the list windows roles operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of windows role inventory items.",
+          "items": {
+            "$ref": "#/definitions/WindowsRole"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items.",
+          "readOnly": true
+        }
+      }
+    },
+    "WindowsRoleProperties": {
+      "type": "object",
+      "description": "Properties of a windows role inventory item.",
+      "properties": {
+        "lastObservedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the inventory item was last observed on the machine.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable display name of the feature.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Free-text description of the feature's purpose.",
+          "readOnly": true
+        },
+        "installedState": {
+          "type": "string",
+          "description": "Current installation state of the feature on this machine.",
+          "readOnly": true
+        },
+        "path": {
+          "type": "string",
+          "description": "Installation path of the Windows role.",
+          "readOnly": true
+        },
+        "parentRole": {
+          "type": "string",
+          "description": "Parent role of this Windows role.",
+          "readOnly": true
+        },
+        "dependsOn": {
+          "type": "array",
+          "description": "Roles or features that this Windows role depends on.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "subFeatures": {
+          "type": "array",
+          "description": "Child features included in this Windows role.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

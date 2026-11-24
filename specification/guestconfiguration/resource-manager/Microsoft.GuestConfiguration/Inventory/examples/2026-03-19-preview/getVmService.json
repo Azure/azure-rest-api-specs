@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2026-03-19-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroupName",
+    "vmName": "myVmName",
+    "serviceName": "W3SVC"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "W3SVC",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myVmName/providers/Microsoft.GuestConfiguration/services/W3SVC",
+        "type": "Microsoft.GuestConfiguration/services",
+        "properties": {
+          "lastObservedAt": "2026-04-16T01:12:58.5988849Z",
+          "displayName": "World Wide Web Publishing Service",
+          "serviceType": "Own Process",
+          "description": "Provides Web connectivity and administration through the Internet Information Services Manager.",
+          "status": "Running",
+          "state": "Running",
+          "processId": 1284,
+          "pathName": "C:\\Windows\\system32\\svchost.exe -k iissvcs",
+          "exitCode": 0,
+          "errorControl": "Normal",
+          "checkPoint": 0,
+          "desktopInteract": false,
+          "startType": "Automatic",
+          "userName": "LocalSystem",
+          "acceptPause": true,
+          "acceptStop": true,
+          "delayedAutoStart": false,
+          "started": true
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "VmServices_Get",
+  "title": "Get a service inventory item for a virtual machine"
+}
