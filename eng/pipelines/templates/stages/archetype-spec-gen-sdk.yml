@@ -432,7 +432,7 @@ stages:
                       BaseBranch = "main"
                       PROwner = "$(SdkRepoOwner)"
                       PRBranch = "$(SdkPullRequestSourceBranch)"
-                      AuthToken = "$(GH_TOKEN)"
+                      AuthToken = $env:SDK_PR_GITHUB_TOKEN
                       PRTitle = "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
                       PRBody = $prBody
                       PRLabels = "$(BuildFailedLabel)"
@@ -492,13 +492,16 @@ stages:
                     inputs:
                       pwsh: true
                       workingDirectory: $(SdkRepoDirectory)
-                      filePath: $(SdkRepoDirectory)/eng/common/scripts/Add-IssueLabels.ps1
-                      arguments: >
-                        -RepoOwner "azure"
-                        -RepoName "$(SdkRepoName)"
-                        -IssueNumber "$(Submitted.PullRequest.Number)"
-                        -Labels "auto-release"
-                        -AuthToken "$(GH_TOKEN)"
+                      targetType: inline
+                      script: |
+                        & "$(SdkRepoDirectory)/eng/common/scripts/Add-IssueLabels.ps1" `
+                          -RepoOwner "azure" `
+                          -RepoName "$(SdkRepoName)" `
+                          -IssueNumber "$(Submitted.PullRequest.Number)" `
+                          -Labels "auto-release" `
+                          -AuthToken $env:SDK_PR_GITHUB_TOKEN
+                    env:
+                      SDK_PR_GITHUB_TOKEN: $(GH_TOKEN)
 
               - ${{ if ne(parameters.ReleasePlanWorkItemId, 0) }}:
                   - pwsh: |

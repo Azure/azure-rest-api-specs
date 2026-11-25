@@ -399,7 +399,7 @@ describe("SDK pull request description", () => {
       fs.mkdirSync(commonScripts, { recursive: true });
       fs.writeFileSync(
         path.join(commonScripts, "Submit-PullRequest.ps1"),
-        "param($RepoOwner,$RepoName,$BaseBranch,$PROwner,$PRBranch,$AuthToken,$PRTitle,$PRBody,$PRLabels,$OpenAsDraft,$UpdateExistingPullRequest)\nWrite-Host '##vso[task.setvariable variable=Submitted.PullRequest.Number]123'\n@{ body=$PRBody; draft=$OpenAsDraft; update=$UpdateExistingPullRequest } | ConvertTo-Json -Compress",
+        "param($RepoOwner,$RepoName,$BaseBranch,$PROwner,$PRBranch,$AuthToken,$PRTitle,$PRBody,$PRLabels,$OpenAsDraft,$UpdateExistingPullRequest)\nWrite-Host '##vso[task.setvariable variable=Submitted.PullRequest.Number]123'\n@{ body=$PRBody; draft=$OpenAsDraft; update=$UpdateExistingPullRequest; token=$AuthToken } | ConvertTo-Json -Compress",
       );
       fs.writeFileSync(
         path.join(commonScripts, "Invoke-GitHubAPI.ps1"),
@@ -447,7 +447,6 @@ describe("SDK pull request description", () => {
         SdkRepoName: "azure-sdk-for-example",
         SdkRepoOwner: "azure",
         SdkPullRequestSourceBranch: "probe",
-        GH_TOKEN: "not-a-real-token",
         PrTitle: "Probe",
         "Build.DefinitionName": "SDK Generation",
         "Build.BuildId": "42",
@@ -500,6 +499,7 @@ describe("SDK pull request description", () => {
         body: expected.value,
         draft: true,
         update: true,
+        token: "not-a-real-token",
       });
       if (lookup === "failure") {
         expect(warnings).toContain(
@@ -567,6 +567,47 @@ describe("SDK pull request description", () => {
       }
     },
   );
+
+  test("adds the auto-release label using the env-mapped token", () => {
+    const pipeline: unknown = parse(
+      fs.readFileSync(
+        path.join(repoRoot, "eng/pipelines/templates/stages/archetype-spec-gen-sdk.yml"),
+        "utf8",
+      ),
+    );
+    const script = findPipelineScript(pipeline, "Add auto-release label");
+    const macros: Record<string, string> = {
+      SdkRepoDirectory: repoRoot,
+      SdkRepoName: "azure-sdk-for-example",
+      "Submitted.PullRequest.Number": "123",
+    };
+    const expanded = script?.replace(/\$\(([^)]+)\)/g, (_match, name: string) => {
+      if (!(name in macros)) {
+        throw new Error(`Unexpected pipeline macro: ${name}`);
+      }
+      return macros[name];
+    });
+    const result = runPowerShell(
+      `
+      $ErrorActionPreference = 'Stop'
+      function Invoke-RestMethod {
+        param($Method,$Uri,$Headers,$Body,$MaximumRetryCount)
+        $global:labelCall = @{ method=$Method; uri=$Uri; payload=($Body | ConvertFrom-Json); token=$Headers.Authorization }
+      }
+      ${expanded}
+      $global:labelCall | ConvertTo-Json -Compress -Depth 5
+      `,
+      { SDK_PR_GITHUB_TOKEN: "not-a-real-token" },
+    );
+    expect(result.stderr).toBe("");
+    expect(result.status).toBe(0);
+    expect(JSON.parse(result.stdout)).toEqual({
+      method: "POST",
+      uri: "https://api.github.com/repos/azure/azure-sdk-for-example/issues/123/labels",
+      payload: { labels: ["auto-release"] },
+      token: "bearer not-a-real-token",
+    });
+  });
 });
 
 describe("API Versions regeneration warning", () => {
