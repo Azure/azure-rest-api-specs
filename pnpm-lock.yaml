@@ -227,6 +227,12 @@ catalogs:
     '@azure/openapi-markdown':
       specifier: 0.9.4
       version: 0.9.4
+    '@github/copilot':
+      specifier: ^1.0.68
+      version: 1.0.113
+    '@github/copilot-sdk':
+      specifier: 1.0.0-beta.5
+      version: 1.0.0-beta.5
     '@js-temporal/polyfill':
       specifier: 0.5.1
       version: 0.5.1
@@ -323,6 +329,9 @@ catalogs:
     '@vitest/utils':
       specifier: ^5.0.0
       version: 5.1.0
+    adm-zip:
+      specifier: 0.6.1
+      version: 0.6.1
     ajv:
       specifier: ^8.17.1
       version: 8.20.0
@@ -402,7 +411,7 @@ catalogs:
       specifier: ^18.0.0
       version: 18.2.0
     zod:
-      specifier: ^4.3.5
+      specifier: ^4.6.6
       version: 4.6.7
 
 overrides:
@@ -417,6 +426,7 @@ overrides:
   minimatch@^3.0.0: ^3.1.5
   superagent: ^10.2.3
   undici@^5.0.0: ^6.0.0
+  zod@<4.6.6: ^4.6.6
 
 importers:
 
@@ -727,6 +737,18 @@ importers:
       yaml:
         specifier: 'catalog:'
         version: 2.9.1
+
+  .github/skills/azure-typespec-author/agentic-doc-refinement:
+    dependencies:
+      '@github/copilot':
+        specifier: 'catalog:'
+        version: 1.0.113
+      '@github/copilot-sdk':
+        specifier: 'catalog:'
+        version: 1.0.0-beta.5
+      adm-zip:
+        specifier: 'catalog:'
+        version: 0.6.1
 
   eng/scripts:
     dependencies:
@@ -1439,6 +1461,66 @@ packages:
 
   '@ewoudenberg/difflib@0.1.0':
     resolution: {integrity: sha512-OU5P5mJyD3OoWYMWY+yIgwvgNS9cFAU10f+DDuvtogcWQOoJIsQ4Hy2McSfUfhKjq8L0FuWVb4Rt7kgA+XK86A==}
+
+  '@github/copilot-darwin-arm64@1.0.113':
+    resolution: {integrity: sha512-fJAVzvYdhP0tbvi+NJHwxCF/6e3EXyB8MzkNUNSBDewjo1pVWnY5NWlkz6pkwZ6jypwhxu/b3acsNVlcHvA3eg==}
+    cpu: [arm64]
+    os: [darwin]
+    hasBin: true
+
+  '@github/copilot-darwin-x64@1.0.113':
+    resolution: {integrity: sha512-HwI/IBjlPxcYAjgSykvikrFJw+WWVys2M6atvfp453BmborFm7worK+XdIS7rsmLZIgP4sy8p02xcdxdteRwuQ==}
+    cpu: [x64]
+    os: [darwin]
+    hasBin: true
+
+  '@github/copilot-linux-arm64@1.0.113':
+    resolution: {integrity: sha512-XYuDknYEs8lCrzgi7xFCLq/GdtyzqjVhH7++rE0k2PweoEJJmTKr+vR4bv79tD0Wt/ZEXiORDUrjZRHD8PSspg==}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+    hasBin: true
+
+  '@github/copilot-linux-x64@1.0.113':
+    resolution: {integrity: sha512-VrNX0yu1236MDq2+c/6wnTk6UYyiHymbPQmX+lRajK6g7X1dTbrcUT8PCykfh+qkwNoWZgIJU4h66icEknRdnw==}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+    hasBin: true
+
+  '@github/copilot-linuxmusl-arm64@1.0.113':
+    resolution: {integrity: sha512-rYlSjgxRd4xTmPNXgMSnaGfra4cWUbs8n+OXEgffg+yyfAtliKXQCcgZq9V0duwQ6ldQEzDD9EhpqaMbwg5RrQ==}
+    cpu: [arm64]
+    os: [linux]
+    libc: [musl]
+    hasBin: true
+
+  '@github/copilot-linuxmusl-x64@1.0.113':
+    resolution: {integrity: sha512-an/iQqtJSzXy9/jd2cRkeYY0PMsU5F5hOUYJzDUi6lU2BfJEN3XR6N6L11HMz/RoxL26UvS6YvKxA8JcW/GTHw==}
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
+    hasBin: true
+
+  '@github/copilot-sdk@1.0.0-beta.5':
+    resolution: {integrity: sha1-B4hS7rtYs03ZVwHY2k9M2nwj13g=}
+    engines: {node: '>=20.0.0'}
+
+  '@github/copilot-win32-arm64@1.0.113':
+    resolution: {integrity: sha512-cX/bMlF4AHXYHvi+0wXLcpF9VevcpH7snUxLXuzvSLSa6pUeewxLVfOrGLaeolU9SkMIgIGz/k/CJuYzhegciQ==}
+    cpu: [arm64]
+    os: [win32]
+    hasBin: true
+
+  '@github/copilot-win32-x64@1.0.113':
+    resolution: {integrity: sha512-9kSlxFPs19x3tagg58nSNgqElssGGuk2Y2m42b8lby0euhLDjzWv53Yy/YTp2CBUzYKmDcxLu5BANLhFcMp+RQ==}
+    cpu: [x64]
+    os: [win32]
+    hasBin: true
+
+  '@github/copilot@1.0.113':
+    resolution: {integrity: sha512-x7P0jgiXIYAJxNA3rnzrnAk6eTdsrjfk7FcaYeyaAOKack17j9C6z+HQLmzb2Sju7Mdf+I2y1k5wq4Wsmg5utg==}
+    hasBin: true
 
   '@inquirer/ansi@2.1.0':
     resolution: {integrity: sha512-63GU5AD9KhNbWM0jlhHoMJTEFck2upFOPxHlnCKf3xYTV3rjTUUQfodihmTnfYQzMLS29oy8lK/gA1eJgu4bhA==}
@@ -2733,6 +2815,10 @@ packages:
 
   '@vue/shared@3.5.45':
     resolution: {integrity: sha512-ue9fgHmVNPlP7iW3+cxoBX/Cnlw53dHlVSw0JKGY6z1lObg8pHoj928M2nzG4/yVsMZ3NaRZ2s2z61uC16NDwQ==}
+
+  adm-zip@0.6.1:
+    resolution: {integrity: sha512-Xwrja8nx9e5o2N1my4DsKCeKpdrnACyr1wtbPxBDgGzKzKyE9kRtBFA8mWldI+RVlD7CBZNWY/wQ2+ydwOR6kQ==}
+    engines: {node: '>=14.0'}
 
   agent-base@7.1.4:
     resolution: {integrity: sha512-MnA+YT8fwfJPgBx3m60MNqakm30XOkyIoH1y6huTQvC0PwZG7ki8NacLBcrPbNoo8vEZy7Jpuk7+jMO+CUovTQ==}
@@ -4384,6 +4470,10 @@ packages:
     resolution: {integrity: sha512-T24Jb5V48e4VgYliUXMnZ379ItbrXgOimweKaJshD84z+8q7ZOZjJan0MeDe+Ugb+uqERDVV8SBmemaGMSMugA==}
     engines: {node: '>=4.0.0 || >=6.0.0'}
 
+  vscode-jsonrpc@8.2.1:
+    resolution: {integrity: sha1-oyLMDx2X95T/2cTNKomKC94JfzQ=}
+    engines: {node: '>=14.0.0'}
+
   vscode-languageserver-protocol@3.18.5:
     resolution: {integrity: sha512-FW4fBMzZ99N8xeob4py0l050wgCoRgTpEq5Xcsb9lM1bc29UKGR/wSV+4knaqFxssFHajy7OzNiKP/m3U1ZEuA==}
 
@@ -4992,6 +5082,49 @@ snapshots:
   '@ewoudenberg/difflib@0.1.0':
     dependencies:
       heap: 0.2.7
+
+  '@github/copilot-darwin-arm64@1.0.113':
+    optional: true
+
+  '@github/copilot-darwin-x64@1.0.113':
+    optional: true
+
+  '@github/copilot-linux-arm64@1.0.113':
+    optional: true
+
+  '@github/copilot-linux-x64@1.0.113':
+    optional: true
+
+  '@github/copilot-linuxmusl-arm64@1.0.113':
+    optional: true
+
+  '@github/copilot-linuxmusl-x64@1.0.113':
+    optional: true
+
+  '@github/copilot-sdk@1.0.0-beta.5':
+    dependencies:
+      '@github/copilot': 1.0.113
+      vscode-jsonrpc: 8.2.1
+      zod: 4.6.7
+
+  '@github/copilot-win32-arm64@1.0.113':
+    optional: true
+
+  '@github/copilot-win32-x64@1.0.113':
+    optional: true
+
+  '@github/copilot@1.0.113':
+    dependencies:
+      detect-libc: 2.1.2
+    optionalDependencies:
+      '@github/copilot-darwin-arm64': 1.0.113
+      '@github/copilot-darwin-x64': 1.0.113
+      '@github/copilot-linux-arm64': 1.0.113
+      '@github/copilot-linux-x64': 1.0.113
+      '@github/copilot-linuxmusl-arm64': 1.0.113
+      '@github/copilot-linuxmusl-x64': 1.0.113
+      '@github/copilot-win32-arm64': 1.0.113
+      '@github/copilot-win32-x64': 1.0.113
 
   '@inquirer/ansi@2.1.0': {}
 
@@ -6231,6 +6364,8 @@ snapshots:
       '@vue/shared': 3.5.45
 
   '@vue/shared@3.5.45': {}
+
+  adm-zip@0.6.1: {}
 
   agent-base@7.1.4: {}
 
@@ -7948,6 +8083,8 @@ snapshots:
   vscode-jsonrpc@10.0.0: {}
 
   vscode-jsonrpc@3.6.2: {}
+
+  vscode-jsonrpc@8.2.1: {}
 
   vscode-languageserver-protocol@3.18.5:
     dependencies:

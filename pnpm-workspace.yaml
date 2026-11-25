@@ -2,6 +2,7 @@ packages:
   - ".github"
   - ".github/shared"
   - ".github/skills/azure-typespec-assessment"
+  - ".github/skills/azure-typespec-author/agentic-doc-refinement"
   - "eng/scripts"
   - "eng/typespec-rulesets"
   - "eng/tools"
@@ -12,6 +13,7 @@ minimumReleaseAge: 10080 # 7 days
 minimumReleaseAgeExclude:
   - "@typespec/*"
   - "@azure-tools/*"
+  - "adm-zip@0.6.1" # Security fixes for the doc-refinement artifact extractor.
 
 allowBuilds:
   "@scarf/scarf": false
@@ -32,6 +34,7 @@ overrides:
   "minimatch@^3.0.0": "^3.1.5"
   "superagent": "^10.2.3"
   "undici@^5.0.0": "^6.0.0"
+  "zod@<4.6.6": "^4.6.6"
 
 catalog:
   "@actions/core": ^3.0.0
@@ -55,6 +58,8 @@ catalog:
   "@azure/avocado": 0.12.1
   "@azure/oad": 0.12.4
   "@azure/openapi-markdown": 0.9.4
+  "@github/copilot": ^1.0.68
+  "@github/copilot-sdk": 1.0.0-beta.5
   "@js-temporal/polyfill": 0.5.1
   "@microsoft.azure/openapi-validator": 2.2.4
   "@microsoft.azure/openapi-validator-core": 1.0.7
@@ -87,6 +92,7 @@ catalog:
   "@typespec/xml": 0.88.0
   "@vitest/coverage-v8": ^5.0.0
   "@vitest/utils": ^5.0.0
+  adm-zip: 0.6.1
   ajv: ^8.17.1
   autorest: ^3.8.0
   change-case: ^5.4.4
@@ -113,4 +119,4 @@ catalog:
   vitest: ^5.0.0
   yaml: ^2.4.2
   yargs: ^18.0.0
-  zod: ^4.3.5
+  zod: ^4.6.6
