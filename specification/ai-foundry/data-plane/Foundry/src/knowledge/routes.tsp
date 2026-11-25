@@ -19,7 +19,7 @@ union KnowledgeSourceStatusResult {
 }
 
 /** Author reusable knowledge-base definitions in the current Foundry project. */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Preserve the existing managed Knowledge routes and Search-compatible paging contract."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Preserve the managed Knowledge route structure and opaque URL continuation."
 @tag("Knowledge Bases")
 interface KnowledgeBases {
   /** Create a knowledge base. A duplicate name does not overwrite the saved definition. */
@@ -128,7 +128,7 @@ interface KnowledgeBases {
 }
 
 /** Author reusable sources and inspect existing ingestion diagnostics. */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Preserve the existing managed Knowledge routes, named POST updates and Search-compatible paging contract."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Preserve the managed Knowledge route structure, named POST updates and opaque URL continuation."
 @tag("Knowledge Sources")
 interface KnowledgeSources {
   /** Create a source. Provision source connections and permissions explicitly before this call. */

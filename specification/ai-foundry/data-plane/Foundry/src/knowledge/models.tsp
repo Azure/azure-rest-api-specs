@@ -14,10 +14,10 @@ const KnowledgeRequiredPreviews = #{
 @extension("x-ms-foundry-meta", KnowledgeRequiredPreviews)
 model KnowledgeBaseModelReference {
   /** The deployment name in the current Foundry project. */
-  deploymentName: string;
+  deployment_name: string;
 
   /** The actual model name, which can differ from the deployment name. */
-  modelName: string;
+  model_name: string;
 }
 
 /** A reusable knowledge source referenced by a knowledge base. */
@@ -27,10 +27,10 @@ model KnowledgeSourceReference {
   name: string;
 
   /** Whether extracted images can be served during retrieval. */
-  enableImageServing?: boolean;
+  enable_image_serving?: boolean;
 
   /** Whether freshness-aware retrieval is enabled for this source. */
-  enableFreshness?: boolean;
+  enable_freshness?: boolean;
 }
 
 /** The output produced when the knowledge base is used for retrieval. */
@@ -39,10 +39,10 @@ union KnowledgeRetrievalOutputMode {
   string,
 
   /** Return source content without answer synthesis. */
-  extractiveData: "extractiveData",
+  extractive_data: "extractive_data",
 
   /** Synthesize an answer from the source content. */
-  answerSynthesis: "answerSynthesis",
+  answer_synthesis: "answer_synthesis",
 }
 
 /** Retrieval reasoning settings. */
@@ -81,10 +81,10 @@ model KnowledgeRetrievalMediumReasoningEffort
 @extension("x-ms-foundry-meta", KnowledgeRequiredPreviews)
 model KnowledgeBaseCorsConfig {
   /** Origins allowed to access the knowledge base. */
-  allowedOrigins: string[];
+  allowed_origins: string[];
 
   /** The duration, in seconds, for which a preflight response can be cached. */
-  maxAgeInSeconds?: int64;
+  max_age_in_seconds?: int64;
 }
 
 /** A project-scoped knowledge-base definition. */
@@ -97,29 +97,28 @@ model KnowledgeBase {
   description?: string | null;
 
   /** Sources to use when the knowledge base is queried. */
-  knowledgeSources: KnowledgeSourceReference[];
+  knowledge_sources: KnowledgeSourceReference[];
 
   /** Model/deployment pairs used for retrieval planning and synthesis. */
   models?: KnowledgeBaseModelReference[];
 
-  /** The retrieval output mode. */
-  outputMode?: KnowledgeRetrievalOutputMode;
+  /** The retrieval output mode. If omitted, the service returns extracted source content without answer synthesis. */
+  output_mode?: KnowledgeRetrievalOutputMode;
 
   /** Instructions used for retrieval. */
-  retrievalInstructions?: string | null;
+  retrieval_instructions?: string | null;
 
   /** Instructions used for answer synthesis. */
-  answerInstructions?: string | null;
+  answer_instructions?: string | null;
 
-  /** Retrieval reasoning settings. */
-  retrievalReasoningEffort?: KnowledgeRetrievalReasoningEffort;
+  /** Retrieval reasoning settings. If omitted, the backing retrieval service selects its default for the enabled feature set. Set this explicitly for predictable planning behavior. */
+  retrieval_reasoning_effort?: KnowledgeRetrievalReasoningEffort;
 
   /** Cross-origin access settings. */
-  corsOptions?: KnowledgeBaseCorsConfig;
+  cors_options?: KnowledgeBaseCorsConfig;
 
   /** The saved definition's concurrency token. Pass it through If-Match, not the request body. */
   @visibility(Lifecycle.Read)
-  @encodedName("application/json", "@odata.etag")
   etag?: string;
 }
 
@@ -132,18 +131,16 @@ union KnowledgeSourceKind {
   file: "file",
 
   /** Content ingested from an Azure Blob connection. */
-  azureBlob: "azureBlob",
+  azure_blob: "azure_blob",
 
   /** Content retrieved from the web. */
   web: "web",
 }
 
-/** A reusable, project-scoped knowledge source. */
+/** A reusable, project-scoped knowledge source with explicitly modeled configuration. */
 @discriminator("kind")
 @extension("x-ms-foundry-meta", KnowledgeRequiredPreviews)
 model KnowledgeSource {
-  ...Record<unknown>;
-
   /** The source name in the current project. */
   name: string;
 
@@ -157,8 +154,6 @@ model KnowledgeSource {
 /** A source summary returned by the managed list operation. */
 @extension("x-ms-foundry-meta", KnowledgeRequiredPreviews)
 model KnowledgeSourceListItem {
-  ...Record<unknown>;
-
   /** The source name in the current project. */
   name: string;
 
@@ -176,10 +171,10 @@ model FileKnowledgeSource extends KnowledgeSource {
   kind: KnowledgeSourceKind.file;
 
   /** The project embedding deployment name, not the backing model name. */
-  embeddingModelName: string;
+  embedding_model_name: string;
 
   /** The content extraction mode used during file ingestion. */
-  contentExtractionMode?: string | null;
+  content_extraction_mode?: string | null;
 
   /** Metadata for the currently embedded page of files. */
   @visibility(Lifecycle.Read)
@@ -187,17 +182,17 @@ model FileKnowledgeSource extends KnowledgeSource {
 
   /** Continuation for an embedded file page. Use the source's file-list operation for full iteration. */
   @visibility(Lifecycle.Read)
-  filesNextLink?: url;
+  files_next_link?: url;
 }
 
 /** An Azure Blob source using an explicitly provisioned project connection. */
 @extension("x-ms-foundry-meta", KnowledgeRequiredPreviews)
 model AzureBlobKnowledgeSource extends KnowledgeSource {
   /** The source kind. */
-  kind: KnowledgeSourceKind.azureBlob;
+  kind: KnowledgeSourceKind.azure_blob;
 
   /** Storage location and ingestion settings. */
-  azureBlobParameters: AzureBlobKnowledgeSourceParameters;
+  azure_blob_parameters: AzureBlobKnowledgeSourceParameters;
 }
 
 /** Source definitions accepted when creating a File, Blob, or Web source. */
@@ -211,20 +206,20 @@ model FileKnowledgeSourceCreate extends KnowledgeSourceCreate {
   kind: KnowledgeSourceKind.file;
 
   /** The project embedding deployment name, not the backing model name. */
-  embeddingModelName: string;
+  embedding_model_name: string;
 
   /** The content extraction mode used during file ingestion. */
-  contentExtractionMode?: string | null;
+  content_extraction_mode?: string | null;
 }
 
 /** An Azure Blob source being created with its required project connection. */
 @extension("x-ms-foundry-meta", KnowledgeRequiredPreviews)
 model AzureBlobKnowledgeSourceCreate extends KnowledgeSourceCreate {
   /** The source kind. */
-  kind: KnowledgeSourceKind.azureBlob;
+  kind: KnowledgeSourceKind.azure_blob;
 
   /** Storage location and the project connection used for ingestion. */
-  azureBlobParameters: AzureBlobKnowledgeSourceCreateParameters;
+  azure_blob_parameters: AzureBlobKnowledgeSourceCreateParameters;
 }
 
 /** A Web source being created with optional domain settings. */
@@ -233,24 +228,24 @@ model WebKnowledgeSourceCreate extends KnowledgeSourceCreate {
   /** The source kind. */
   kind: KnowledgeSourceKind.web;
 
-  /** Web domain configuration. */
-  webParameters?: WebKnowledgeSourceParameters;
+  /** Web domain configuration. Omit or supply an empty object to apply no domain allow/block restrictions. */
+  web_parameters?: WebKnowledgeSourceParameters;
 }
 
 /** Managed Blob location settings. Credentials, identities and backing Search endpoints are not exposed. */
 @extension("x-ms-foundry-meta", KnowledgeRequiredPreviews)
 model AzureBlobKnowledgeSourceParameters {
   /** The Blob container to ingest. */
-  containerName: string;
+  container_name: string;
 
   /** An optional path prefix within the container. */
-  folderPath?: string | null;
+  folder_path?: string | null;
 
   /** Whether the source uses ADLS Gen2 semantics. */
-  isADLSGen2?: boolean;
+  is_adls_gen2?: boolean;
 
   /** Source-specific ingestion settings. */
-  ingestionParameters?: AzureBlobKnowledgeSourceIngestionParameters | null;
+  ingestion_parameters?: AzureBlobKnowledgeSourceIngestionParameters | null;
 }
 
 /** Blob location settings required when creating a source. */
@@ -258,7 +253,7 @@ model AzureBlobKnowledgeSourceParameters {
 model AzureBlobKnowledgeSourceCreateParameters
   is AzureBlobKnowledgeSourceParameters {
   /** The project connection name used to access the Blob container, not an ARM resource ID. */
-  projectConnectionId: string;
+  project_connection_id: string;
 }
 
 /** Blob location settings accepted on a named source update. */
@@ -266,26 +261,26 @@ model AzureBlobKnowledgeSourceCreateParameters
 model AzureBlobKnowledgeSourceUpdateParameters
   is AzureBlobKnowledgeSourceParameters {
   /** The project connection name; omit to retain the saved connection. Never use an ARM resource ID. */
-  projectConnectionId?: string;
+  project_connection_id?: string;
 }
 
 /** Deployment/model pairs and content extraction settings for managed Blob ingestion. */
 @extension("x-ms-foundry-meta", KnowledgeRequiredPreviews)
 model AzureBlobKnowledgeSourceIngestionParameters {
   /** The content extraction mode. */
-  contentExtractionMode?: string | null;
+  content_extraction_mode?: string | null;
 
   /** The project embedding deployment name. */
-  embeddingModel?: string | null;
+  embedding_model?: string | null;
 
   /** The actual backing model name for the embedding deployment. */
-  embeddingModelName?: string | null;
+  embedding_model_name?: string | null;
 
   /** The project chat completion deployment name. */
-  chatCompletionModel?: string | null;
+  chat_completion_model?: string | null;
 
   /** The actual backing model name for the chat completion deployment. */
-  chatCompletionModelName?: string | null;
+  chat_completion_model_name?: string | null;
 }
 
 /** A managed web knowledge source. */
@@ -294,14 +289,14 @@ model WebKnowledgeSource extends KnowledgeSource {
   /** The source kind. */
   kind: KnowledgeSourceKind.web;
 
-  /** Web domain configuration. */
-  webParameters?: WebKnowledgeSourceParameters;
+  /** Web domain configuration. Omit or supply an empty object to apply no domain allow/block restrictions. */
+  web_parameters?: WebKnowledgeSourceParameters;
 }
 
 /** Parameters that control the domains used for web retrieval. */
 @extension("x-ms-foundry-meta", KnowledgeRequiredPreviews)
 model WebKnowledgeSourceParameters {
-  /** Domain allow and block configuration. */
+  /** Domain allow and block configuration. Omit or supply an empty object to apply no domain restrictions. */
   domains?: WebKnowledgeSourceDomains;
 }
 
@@ -309,10 +304,10 @@ model WebKnowledgeSourceParameters {
 @extension("x-ms-foundry-meta", KnowledgeRequiredPreviews)
 model WebKnowledgeSourceDomains {
   /** Domains allowed in web results. */
-  allowedDomains?: WebKnowledgeSourceDomain[];
+  allowed_domains?: WebKnowledgeSourceDomain[];
 
   /** Domains blocked from web results. */
-  blockedDomains?: WebKnowledgeSourceDomain[];
+  blocked_domains?: WebKnowledgeSourceDomain[];
 }
 
 /** A domain used by a web knowledge source. */
@@ -322,7 +317,7 @@ model WebKnowledgeSourceDomain {
   address: string;
 
   /** Whether subpages of the domain can be returned. */
-  includeSubpages?: boolean;
+  include_subpages?: boolean;
 }
 
 /** Mutable source fields accepted by the existing named POST update operation. */
@@ -338,38 +333,38 @@ model KnowledgeSourceUpdate {
   description?: string | null;
 
   /** File embedding deployment, when supplied. Must match the saved value. */
-  embeddingModelName?: string;
+  embedding_model_name?: string;
 
   /** The content extraction mode used during file ingestion. */
-  contentExtractionMode?: string | null;
+  content_extraction_mode?: string | null;
 
   /** Blob location and ingestion settings. */
-  azureBlobParameters?: AzureBlobKnowledgeSourceUpdateParameters;
+  azure_blob_parameters?: AzureBlobKnowledgeSourceUpdateParameters;
 
   /** Web domain settings. */
-  webParameters?: WebKnowledgeSourceParameters;
+  web_parameters?: WebKnowledgeSourceParameters;
 }
 
 /** Public metadata for an uploaded file. */
 @extension("x-ms-foundry-meta", KnowledgeRequiredPreviews)
 model KnowledgeSourceFile {
   /** The returned file identifier used for deletion. */
-  fileId?: string;
+  file_id?: string;
 
   /** The original file name. */
-  fileName: string;
+  file_name: string;
 
   /** The file size, in bytes. */
-  fileSizeBytes?: int64;
+  file_size_bytes?: int64;
 
   /** When the file was created. */
-  createdAt?: utcDateTime;
+  created_at?: utcDateTime;
 
   /** When the file was last updated. */
-  lastUpdatedAt?: utcDateTime;
+  last_updated_at?: utcDateTime;
 
   /** Processing failure information. A successful upload can still include this field. */
-  errorMessage?: string | null;
+  error_message?: string | null;
 
   /** The directory-like prefix derived from the file name. */
   prefix?: string;
@@ -378,10 +373,10 @@ model KnowledgeSourceFile {
   metadata?: Record<string>;
 
   /** The parsing mode applied to the file. */
-  parsingMode?: string;
+  parsing_mode?: string;
 
   /** The extraction mode applied to the file. */
-  extractionMode?: string;
+  extraction_mode?: string;
 }
 
 /** Existing Search synchronization diagnostics, not a per-upload readiness guarantee. */
@@ -393,16 +388,16 @@ model KnowledgeSourceStatus {
   kind?: KnowledgeSourceKind;
 
   /** Source provisioning/synchronization status. Active does not mean a specific upload is searchable. */
-  synchronizationStatus?: string;
+  synchronization_status?: string;
 
   /** The synchronization interval, when configured. */
-  synchronizationInterval?: string | null;
+  synchronization_interval?: string | null;
 
   /** Diagnostics for the current synchronization run. */
-  currentSynchronizationState?: KnowledgeSourceSynchronizationState | null;
+  current_synchronization_state?: KnowledgeSourceSynchronizationState | null;
 
   /** Diagnostics for the last completed synchronization run. */
-  lastSynchronizationState?:
+  last_synchronization_state?:
     | KnowledgeSourceCompletedSynchronizationState
     | null;
 
@@ -414,16 +409,16 @@ model KnowledgeSourceStatus {
 @extension("x-ms-foundry-meta", KnowledgeRequiredPreviews)
 model KnowledgeSourceSynchronizationState {
   /** The synchronization start time. */
-  startTime: utcDateTime;
+  start_time: utcDateTime;
 
   /** The number of successfully processed updates. */
-  itemsUpdatesProcessed: int32;
+  items_updates_processed: int32;
 
   /** The number of failed updates. */
-  itemsUpdatesFailed: int32;
+  items_updates_failed: int32;
 
   /** The number of skipped items. */
-  itemsSkipped: int32;
+  items_skipped: int32;
 
   /** Document-level errors returned for this run. */
   errors?: KnowledgeSourceSynchronizationError[];
@@ -433,54 +428,54 @@ model KnowledgeSourceSynchronizationState {
 @extension("x-ms-foundry-meta", KnowledgeRequiredPreviews)
 model KnowledgeSourceCompletedSynchronizationState {
   /** The synchronization start time. */
-  startTime: utcDateTime;
+  start_time: utcDateTime;
 
   /** The synchronization end time. */
-  endTime: utcDateTime;
+  end_time: utcDateTime;
 
   /** The number of successfully processed updates. */
-  itemsUpdatesProcessed: int32;
+  items_updates_processed: int32;
 
   /** The number of failed updates. */
-  itemsUpdatesFailed: int32;
+  items_updates_failed: int32;
 
   /** The number of skipped items. */
-  itemsSkipped: int32;
+  items_skipped: int32;
 }
 
 /** A document-level synchronization error. */
 @extension("x-ms-foundry-meta", KnowledgeRequiredPreviews)
 model KnowledgeSourceSynchronizationError {
   /** The failed document identifier. */
-  docId?: string;
+  doc_id?: string;
 
   /** The failure category expressed as an HTTP-like status code. */
-  statusCode?: int32;
+  status_code?: int32;
 
   /** The component reporting the error. */
   name?: string;
 
   /** Customer-visible failure information. */
-  errorMessage: string;
+  error_message: string;
 
   /** Additional failure details. */
   details?: string;
 
   /** Troubleshooting documentation supplied by the service. */
-  documentationLink?: url;
+  documentation_link?: url;
 }
 
 /** Historical source synchronization statistics. */
 @extension("x-ms-foundry-meta", KnowledgeRequiredPreviews)
 model KnowledgeSourceStatistics {
   /** The number of synchronizations. */
-  totalSynchronization: int32;
+  total_synchronization: int32;
 
   /** Average synchronization duration, in HH:MM:SS format. */
-  averageSynchronizationDuration: string;
+  average_synchronization_duration: string;
 
   /** Average processed items per synchronization. */
-  averageItemsProcessedPerSynchronization: int32;
+  average_items_processed_per_synchronization: int32;
 }
 
 /** One server-driven page of managed Knowledge resources. */
@@ -492,8 +487,7 @@ model KnowledgeListResult<T> {
 
   /** An opaque, project-scoped URL for the next page. */
   @nextLink
-  @encodedName("application/json", "@odata.nextLink")
-  nextLink?: url;
+  next_link?: url;
 }
 
 alias KnowledgeListParameters = {
@@ -502,7 +496,7 @@ alias KnowledgeListParameters = {
   @pageSize
   @minValue(1)
   @maxValue(3000)
-  pageSize?: int32;
+  page_size?: int32;
 
   /** Filter resources by name. */
   @query
@@ -510,5 +504,5 @@ alias KnowledgeListParameters = {
 
   /** Name matching mode. The supported and default mode is "prefix". */
   @query
-  searchType?: string;
+  search_type?: string;
 };

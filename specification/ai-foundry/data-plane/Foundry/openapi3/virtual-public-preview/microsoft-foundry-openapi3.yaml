@@ -14175,7 +14175,7 @@ paths:
             type: string
             enum:
               - Knowledge=V1Preview
-        - name: pageSize
+        - name: page_size
           in: query
           required: false
           description: The requested page size. The service can return fewer items.
@@ -14192,7 +14192,7 @@ paths:
           schema:
             type: string
           explode: false
-        - name: searchType
+        - name: search_type
           in: query
           required: false
           description: Name matching mode. The supported and default mode is "prefix".
@@ -14221,7 +14221,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/KnowledgeBase'
                     description: The resources in the current page.
-                  '@odata.nextLink':
+                  next_link:
                     type: string
                     format: uri
                     description: An opaque, project-scoped URL for the next page.
@@ -14508,7 +14508,7 @@ paths:
             type: string
             enum:
               - Knowledge=V1Preview
-        - name: pageSize
+        - name: page_size
           in: query
           required: false
           description: The requested page size. The service can return fewer items.
@@ -14525,7 +14525,7 @@ paths:
           schema:
             type: string
           explode: false
-        - name: searchType
+        - name: search_type
           in: query
           required: false
           description: Name matching mode. The supported and default mode is "prefix".
@@ -14554,7 +14554,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/KnowledgeSourceListItem'
                     description: The resources in the current page.
-                  '@odata.nextLink':
+                  next_link:
                     type: string
                     format: uri
                     description: An opaque, project-scoped URL for the next page.
@@ -14816,7 +14816,7 @@ paths:
           description: The File source name.
           schema:
             type: string
-        - name: pageSize
+        - name: page_size
           in: query
           required: false
           description: The requested page size. The service can return fewer items.
@@ -14833,7 +14833,7 @@ paths:
           schema:
             type: string
           explode: false
-        - name: searchType
+        - name: search_type
           in: query
           required: false
           description: Name matching mode. The supported and default mode is "prefix".
@@ -14869,7 +14869,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/KnowledgeSourceFile'
                     description: The resources in the current page.
-                  '@odata.nextLink':
+                  next_link:
                     type: string
                     format: uri
                     description: An opaque, project-scoped URL for the next page.
@@ -52605,14 +52605,14 @@ components:
       type: object
       required:
         - kind
-        - azureBlobParameters
+        - azure_blob_parameters
       properties:
         kind:
           type: string
           enum:
-            - azureBlob
+            - azure_blob
           description: The source kind.
-        azureBlobParameters:
+        azure_blob_parameters:
           $ref: '#/components/schemas/AzureBlobKnowledgeSourceParameters'
           description: Storage location and ingestion settings.
       allOf:
@@ -52625,14 +52625,14 @@ components:
       type: object
       required:
         - kind
-        - azureBlobParameters
+        - azure_blob_parameters
       properties:
         kind:
           type: string
           enum:
-            - azureBlob
+            - azure_blob
           description: The source kind.
-        azureBlobParameters:
+        azure_blob_parameters:
           $ref: '#/components/schemas/AzureBlobKnowledgeSourceCreateParameters'
           description: Storage location and the project connection used for ingestion.
       allOf:
@@ -52644,26 +52644,26 @@ components:
     AzureBlobKnowledgeSourceCreateParameters:
       type: object
       required:
-        - containerName
-        - projectConnectionId
+        - container_name
+        - project_connection_id
       properties:
-        containerName:
+        container_name:
           type: string
           description: The Blob container to ingest.
-        folderPath:
+        folder_path:
           anyOf:
             - type: string
             - type: 'null'
           description: An optional path prefix within the container.
-        isADLSGen2:
+        is_adls_gen2:
           type: boolean
           description: Whether the source uses ADLS Gen2 semantics.
-        ingestionParameters:
+        ingestion_parameters:
           anyOf:
             - $ref: '#/components/schemas/AzureBlobKnowledgeSourceIngestionParameters'
             - type: 'null'
           description: Source-specific ingestion settings.
-        projectConnectionId:
+        project_connection_id:
           type: string
           description: The project connection name used to access the Blob container, not an ARM resource ID.
       description: Blob location settings required when creating a source.
@@ -52673,27 +52673,27 @@ components:
     AzureBlobKnowledgeSourceIngestionParameters:
       type: object
       properties:
-        contentExtractionMode:
+        content_extraction_mode:
           anyOf:
             - type: string
             - type: 'null'
           description: The content extraction mode.
-        embeddingModel:
+        embedding_model:
           anyOf:
             - type: string
             - type: 'null'
           description: The project embedding deployment name.
-        embeddingModelName:
+        embedding_model_name:
           anyOf:
             - type: string
             - type: 'null'
           description: The actual backing model name for the embedding deployment.
-        chatCompletionModel:
+        chat_completion_model:
           anyOf:
             - type: string
             - type: 'null'
           description: The project chat completion deployment name.
-        chatCompletionModelName:
+        chat_completion_model_name:
           anyOf:
             - type: string
             - type: 'null'
@@ -52705,20 +52705,20 @@ components:
     AzureBlobKnowledgeSourceParameters:
       type: object
       required:
-        - containerName
+        - container_name
       properties:
-        containerName:
+        container_name:
           type: string
           description: The Blob container to ingest.
-        folderPath:
+        folder_path:
           anyOf:
             - type: string
             - type: 'null'
           description: An optional path prefix within the container.
-        isADLSGen2:
+        is_adls_gen2:
           type: boolean
           description: Whether the source uses ADLS Gen2 semantics.
-        ingestionParameters:
+        ingestion_parameters:
           anyOf:
             - $ref: '#/components/schemas/AzureBlobKnowledgeSourceIngestionParameters'
             - type: 'null'
@@ -52730,25 +52730,25 @@ components:
     AzureBlobKnowledgeSourceUpdateParameters:
       type: object
       required:
-        - containerName
+        - container_name
       properties:
-        containerName:
+        container_name:
           type: string
           description: The Blob container to ingest.
-        folderPath:
+        folder_path:
           anyOf:
             - type: string
             - type: 'null'
           description: An optional path prefix within the container.
-        isADLSGen2:
+        is_adls_gen2:
           type: boolean
           description: Whether the source uses ADLS Gen2 semantics.
-        ingestionParameters:
+        ingestion_parameters:
           anyOf:
             - $ref: '#/components/schemas/AzureBlobKnowledgeSourceIngestionParameters'
             - type: 'null'
           description: Source-specific ingestion settings.
-        projectConnectionId:
+        project_connection_id:
           type: string
           description: The project connection name; omit to retain the saved connection. Never use an ARM resource ID.
       description: Blob location settings accepted on a named source update.
@@ -58665,17 +58665,17 @@ components:
       type: object
       required:
         - kind
-        - embeddingModelName
+        - embedding_model_name
       properties:
         kind:
           type: string
           enum:
             - file
           description: The source kind.
-        embeddingModelName:
+        embedding_model_name:
           type: string
           description: The project embedding deployment name, not the backing model name.
-        contentExtractionMode:
+        content_extraction_mode:
           anyOf:
             - type: string
             - type: 'null'
@@ -58686,7 +58686,7 @@ components:
             $ref: '#/components/schemas/KnowledgeSourceFile'
           description: Metadata for the currently embedded page of files.
           readOnly: true
-        filesNextLink:
+        files_next_link:
           type: string
           format: uri
           description: Continuation for an embedded file page. Use the source's file-list operation for full iteration.
@@ -58701,17 +58701,17 @@ components:
       type: object
       required:
         - kind
-        - embeddingModelName
+        - embedding_model_name
       properties:
         kind:
           type: string
           enum:
             - file
           description: The source kind.
-        embeddingModelName:
+        embedding_model_name:
           type: string
           description: The project embedding deployment name, not the backing model name.
-        contentExtractionMode:
+        content_extraction_mode:
           anyOf:
             - type: string
             - type: 'null'
@@ -59929,7 +59929,7 @@ components:
       type: object
       required:
         - name
-        - knowledgeSources
+        - knowledge_sources
       properties:
         name:
           type: string
@@ -59939,7 +59939,7 @@ components:
             - type: string
             - type: 'null'
           description: A description of the knowledge base.
-        knowledgeSources:
+        knowledge_sources:
           type: array
           items:
             $ref: '#/components/schemas/KnowledgeSourceReference'
@@ -59949,26 +59949,26 @@ components:
           items:
             $ref: '#/components/schemas/KnowledgeBaseModelReference'
           description: Model/deployment pairs used for retrieval planning and synthesis.
-        outputMode:
+        output_mode:
           $ref: '#/components/schemas/KnowledgeRetrievalOutputMode'
-          description: The retrieval output mode.
-        retrievalInstructions:
+          description: The retrieval output mode. If omitted, the service returns extracted source content without answer synthesis.
+        retrieval_instructions:
           anyOf:
             - type: string
             - type: 'null'
           description: Instructions used for retrieval.
-        answerInstructions:
+        answer_instructions:
           anyOf:
             - type: string
             - type: 'null'
           description: Instructions used for answer synthesis.
-        retrievalReasoningEffort:
+        retrieval_reasoning_effort:
           $ref: '#/components/schemas/KnowledgeRetrievalReasoningEffort'
-          description: Retrieval reasoning settings.
-        corsOptions:
+          description: Retrieval reasoning settings. If omitted, the backing retrieval service selects its default for the enabled feature set. Set this explicitly for predictable planning behavior.
+        cors_options:
           $ref: '#/components/schemas/KnowledgeBaseCorsConfig'
           description: Cross-origin access settings.
-        '@odata.etag':
+        etag:
           type: string
           description: The saved definition's concurrency token. Pass it through If-Match, not the request body.
           readOnly: true
@@ -59979,14 +59979,14 @@ components:
     KnowledgeBaseCorsConfig:
       type: object
       required:
-        - allowedOrigins
+        - allowed_origins
       properties:
-        allowedOrigins:
+        allowed_origins:
           type: array
           items:
             type: string
           description: Origins allowed to access the knowledge base.
-        maxAgeInSeconds:
+        max_age_in_seconds:
           type: integer
           format: int64
           description: The duration, in seconds, for which a preflight response can be cached.
@@ -59997,13 +59997,13 @@ components:
     KnowledgeBaseModelReference:
       type: object
       required:
-        - deploymentName
-        - modelName
+        - deployment_name
+        - model_name
       properties:
-        deploymentName:
+        deployment_name:
           type: string
           description: The deployment name in the current Foundry project.
-        modelName:
+        model_name:
           type: string
           description: The actual model name, which can differ from the deployment name.
       description: A project model deployment and its actual backing model name.
@@ -60096,8 +60096,8 @@ components:
         - type: string
         - type: string
           enum:
-            - extractiveData
-            - answerSynthesis
+            - extractive_data
+            - answer_synthesis
       description: The output produced when the knowledge base is used for retrieval.
       x-ms-foundry-meta:
         required_previews:
@@ -60137,43 +60137,42 @@ components:
             - type: string
             - type: 'null'
           description: A description of the knowledge source.
-      additionalProperties: {}
       discriminator:
         propertyName: kind
         mapping:
           file: '#/components/schemas/FileKnowledgeSource'
-          azureBlob: '#/components/schemas/AzureBlobKnowledgeSource'
+          azure_blob: '#/components/schemas/AzureBlobKnowledgeSource'
           web: '#/components/schemas/WebKnowledgeSource'
-      description: A reusable, project-scoped knowledge source.
+      description: A reusable, project-scoped knowledge source with explicitly modeled configuration.
       x-ms-foundry-meta:
         required_previews:
           - Knowledge=V1Preview
     KnowledgeSourceCompletedSynchronizationState:
       type: object
       required:
-        - startTime
-        - endTime
-        - itemsUpdatesProcessed
-        - itemsUpdatesFailed
-        - itemsSkipped
+        - start_time
+        - end_time
+        - items_updates_processed
+        - items_updates_failed
+        - items_skipped
       properties:
-        startTime:
+        start_time:
           type: string
           format: date-time
           description: The synchronization start time.
-        endTime:
+        end_time:
           type: string
           format: date-time
           description: The synchronization end time.
-        itemsUpdatesProcessed:
+        items_updates_processed:
           type: integer
           format: int32
           description: The number of successfully processed updates.
-        itemsUpdatesFailed:
+        items_updates_failed:
           type: integer
           format: int32
           description: The number of failed updates.
-        itemsSkipped:
+        items_skipped:
           type: integer
           format: int32
           description: The number of skipped items.
@@ -60198,12 +60197,11 @@ components:
             - type: string
             - type: 'null'
           description: A description of the knowledge source.
-      additionalProperties: {}
       discriminator:
         propertyName: kind
         mapping:
           file: '#/components/schemas/FileKnowledgeSourceCreate'
-          azureBlob: '#/components/schemas/AzureBlobKnowledgeSourceCreate'
+          azure_blob: '#/components/schemas/AzureBlobKnowledgeSourceCreate'
           web: '#/components/schemas/WebKnowledgeSourceCreate'
       description: Source definitions accepted when creating a File, Blob, or Web source.
       x-ms-foundry-meta:
@@ -60212,27 +60210,27 @@ components:
     KnowledgeSourceFile:
       type: object
       required:
-        - fileName
+        - file_name
       properties:
-        fileId:
+        file_id:
           type: string
           description: The returned file identifier used for deletion.
-        fileName:
+        file_name:
           type: string
           description: The original file name.
-        fileSizeBytes:
+        file_size_bytes:
           type: integer
           format: int64
           description: The file size, in bytes.
-        createdAt:
+        created_at:
           type: string
           format: date-time
           description: When the file was created.
-        lastUpdatedAt:
+        last_updated_at:
           type: string
           format: date-time
           description: When the file was last updated.
-        errorMessage:
+        error_message:
           anyOf:
             - type: string
             - type: 'null'
@@ -60245,10 +60243,10 @@ components:
           additionalProperties:
             type: string
           description: Custom file metadata.
-        parsingMode:
+        parsing_mode:
           type: string
           description: The parsing mode applied to the file.
-        extractionMode:
+        extraction_mode:
           type: string
           description: The extraction mode applied to the file.
       description: Public metadata for an uploaded file.
@@ -60261,7 +60259,7 @@ components:
         - type: string
           enum:
             - file
-            - azureBlob
+            - azure_blob
             - web
       description: Source kinds exposed by the baseline managed Knowledge experience.
       x-ms-foundry-meta:
@@ -60284,7 +60282,6 @@ components:
             - type: string
             - type: 'null'
           description: A description of the source.
-      additionalProperties: {}
       description: A source summary returned by the managed list operation.
       x-ms-foundry-meta:
         required_previews:
@@ -60297,10 +60294,10 @@ components:
         name:
           type: string
           description: The source name in the current project.
-        enableImageServing:
+        enable_image_serving:
           type: boolean
           description: Whether extracted images can be served during retrieval.
-        enableFreshness:
+        enable_freshness:
           type: boolean
           description: Whether freshness-aware retrieval is enabled for this source.
       description: A reusable knowledge source referenced by a knowledge base.
@@ -60310,18 +60307,18 @@ components:
     KnowledgeSourceStatistics:
       type: object
       required:
-        - totalSynchronization
-        - averageSynchronizationDuration
-        - averageItemsProcessedPerSynchronization
+        - total_synchronization
+        - average_synchronization_duration
+        - average_items_processed_per_synchronization
       properties:
-        totalSynchronization:
+        total_synchronization:
           type: integer
           format: int32
           description: The number of synchronizations.
-        averageSynchronizationDuration:
+        average_synchronization_duration:
           type: string
           description: Average synchronization duration, in HH:MM:SS format.
-        averageItemsProcessedPerSynchronization:
+        average_items_processed_per_synchronization:
           type: integer
           format: int32
           description: Average processed items per synchronization.
@@ -60335,20 +60332,20 @@ components:
         kind:
           $ref: '#/components/schemas/KnowledgeSourceKind'
           description: The source kind, when supplied by the selected Search version.
-        synchronizationStatus:
+        synchronization_status:
           type: string
           description: Source provisioning/synchronization status. Active does not mean a specific upload is searchable.
-        synchronizationInterval:
+        synchronization_interval:
           anyOf:
             - type: string
             - type: 'null'
           description: The synchronization interval, when configured.
-        currentSynchronizationState:
+        current_synchronization_state:
           anyOf:
             - $ref: '#/components/schemas/KnowledgeSourceSynchronizationState'
             - type: 'null'
           description: Diagnostics for the current synchronization run.
-        lastSynchronizationState:
+        last_synchronization_state:
           anyOf:
             - $ref: '#/components/schemas/KnowledgeSourceCompletedSynchronizationState'
             - type: 'null'
@@ -60374,25 +60371,25 @@ components:
     KnowledgeSourceSynchronizationError:
       type: object
       required:
-        - errorMessage
+        - error_message
       properties:
-        docId:
+        doc_id:
           type: string
           description: The failed document identifier.
-        statusCode:
+        status_code:
           type: integer
           format: int32
           description: The failure category expressed as an HTTP-like status code.
         name:
           type: string
           description: The component reporting the error.
-        errorMessage:
+        error_message:
           type: string
           description: Customer-visible failure information.
         details:
           type: string
           description: Additional failure details.
-        documentationLink:
+        documentation_link:
           type: string
           format: uri
           description: Troubleshooting documentation supplied by the service.
@@ -60403,24 +60400,24 @@ components:
     KnowledgeSourceSynchronizationState:
       type: object
       required:
-        - startTime
-        - itemsUpdatesProcessed
-        - itemsUpdatesFailed
-        - itemsSkipped
+        - start_time
+        - items_updates_processed
+        - items_updates_failed
+        - items_skipped
       properties:
-        startTime:
+        start_time:
           type: string
           format: date-time
           description: The synchronization start time.
-        itemsUpdatesProcessed:
+        items_updates_processed:
           type: integer
           format: int32
           description: The number of successfully processed updates.
-        itemsUpdatesFailed:
+        items_updates_failed:
           type: integer
           format: int32
           description: The number of failed updates.
-        itemsSkipped:
+        items_skipped:
           type: integer
           format: int32
           description: The number of skipped items.
@@ -60447,18 +60444,18 @@ components:
             - type: string
             - type: 'null'
           description: The source description.
-        embeddingModelName:
+        embedding_model_name:
           type: string
           description: File embedding deployment, when supplied. Must match the saved value.
-        contentExtractionMode:
+        content_extraction_mode:
           anyOf:
             - type: string
             - type: 'null'
           description: The content extraction mode used during file ingestion.
-        azureBlobParameters:
+        azure_blob_parameters:
           $ref: '#/components/schemas/AzureBlobKnowledgeSourceUpdateParameters'
           description: Blob location and ingestion settings.
-        webParameters:
+        web_parameters:
           $ref: '#/components/schemas/WebKnowledgeSourceParameters'
           description: Web domain settings.
       description: Mutable source fields accepted by the existing named POST update operation.
@@ -112045,9 +112042,9 @@ components:
           enum:
             - web
           description: The source kind.
-        webParameters:
+        web_parameters:
           $ref: '#/components/schemas/WebKnowledgeSourceParameters'
-          description: Web domain configuration.
+          description: Web domain configuration. Omit or supply an empty object to apply no domain allow/block restrictions.
       allOf:
         - $ref: '#/components/schemas/KnowledgeSource'
       description: A managed web knowledge source.
@@ -112064,9 +112061,9 @@ components:
           enum:
             - web
           description: The source kind.
-        webParameters:
+        web_parameters:
           $ref: '#/components/schemas/WebKnowledgeSourceParameters'
-          description: Web domain configuration.
+          description: Web domain configuration. Omit or supply an empty object to apply no domain allow/block restrictions.
       allOf:
         - $ref: '#/components/schemas/KnowledgeSourceCreate'
       description: A Web source being created with optional domain settings.
@@ -112081,7 +112078,7 @@ components:
         address:
           type: string
           description: The domain address.
-        includeSubpages:
+        include_subpages:
           type: boolean
           description: Whether subpages of the domain can be returned.
       description: A domain used by a web knowledge source.
@@ -112091,12 +112088,12 @@ components:
     WebKnowledgeSourceDomains:
       type: object
       properties:
-        allowedDomains:
+        allowed_domains:
           type: array
           items:
             $ref: '#/components/schemas/WebKnowledgeSourceDomain'
           description: Domains allowed in web results.
-        blockedDomains:
+        blocked_domains:
           type: array
           items:
             $ref: '#/components/schemas/WebKnowledgeSourceDomain'
@@ -112110,7 +112107,7 @@ components:
       properties:
         domains:
           $ref: '#/components/schemas/WebKnowledgeSourceDomains'
-          description: Domain allow and block configuration.
+          description: Domain allow and block configuration. Omit or supply an empty object to apply no domain restrictions.
       description: Parameters that control the domains used for web retrieval.
       x-ms-foundry-meta:
         required_previews:
