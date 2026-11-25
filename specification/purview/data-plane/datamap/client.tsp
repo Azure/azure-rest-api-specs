@@ -32,6 +32,7 @@ namespace Customizations;
 @@clientName(TypeDefinition.get, "GetTypeDefinition", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/no-request-body" "Back compatibility: Preserve existing Atlas Entity client signatures for DELETE operations with metadata or label removal bodies."
 @operationGroup
 interface Entity {
   createOrUpdate is PurviewDataMap.Entity.createOrUpdate;
@@ -73,6 +74,7 @@ interface Entity {
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/no-request-body" "Back compatibility: Preserve the existing Atlas Glossary client signature that deletes term assignments using a list of related objects."
 @operationGroup
 interface Glossary {
   batchGet is PurviewDataMap.Glossary.list;
@@ -132,6 +134,7 @@ interface Relationship {
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+#suppress "@azure-tools/typespec-azure-core/no-request-body" "Back compatibility: Preserve the existing Atlas Type Definition client signature for bulk deletion using an AtlasTypesDef body."
 @operationGroup
 interface TypeDefinition {
   getBusinessMetadataById is PurviewDataMap.Type.getBusinessMetadataDefByGuid;
