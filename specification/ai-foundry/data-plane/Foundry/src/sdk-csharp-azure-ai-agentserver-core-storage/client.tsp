@@ -219,12 +219,14 @@ model StateStoreItemKey {
 }
 
 /** Sort order for state-store list requests. */
-enum ListRequestOrder {
+union ListRequestOrder {
   /** Ascending order. */
   Asc: "asc",
 
   /** Descending order. */
   Desc: "desc",
+
+  string,
 }
 
 /** A page of state stores. */
