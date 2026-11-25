@@ -563,6 +563,25 @@ namespace Azure.AI.Projects {
   @pattern("^[A-Za-z0-9][A-Za-z0-9_-]{0,63}(?![\\s\\S])")
   scalar TelephonyTransferTargetName extends string;
 
+  @doc("A custom SIP header name sent on a transfer: `User-to-User` (any case), or an extension header that starts with `X-` or `x-`. Names are sent with the case given and compared ignoring case. Standard SIP headers, the reserved `X-MS-` prefix and `%` are rejected.")
+  @minLength(3)
+  @maxLength(64)
+  @pattern("^(?:[Uu][Ss][Ee][Rr]-[Tt][Oo]-[Uu][Ss][Ee][Rr]|[Xx]-(?![Mm][Ss]-)[A-Za-z0-9][A-Za-z0-9.!*_+~-]{0,61})$")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  scalar TelephonyTransferSipHeaderName extends string;
+
+  @doc("A custom SIP header carried on a transfer. The service URI-encodes each header into the `sip:` Refer-To target so that the transfer recipient can copy it into the new call. Headers apply only to `sip` destinations; other destination types reject them.")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  model TelephonyTransferSipHeader {
+    @doc("The header name. Names must be unique, ignoring case, within one transfer.")
+    name: TelephonyTransferSipHeaderName;
+
+    @doc("The header value after any template rendering. Allowed characters are ASCII letters, digits, and `= ; . ! % * _ + ~ - : @ / |`; control characters, spaces, `<`, `>`, `?`, and `&` are rejected. A `User-to-User` value follows RFC 7433, for example `48656c6c6f;encoding=hex`.")
+    @minLength(1)
+    @maxLength(256)
+    value: string;
+  }
+
   @doc("A telephony provider supported by an agent binding. Known values are stable; additional values may be added over time.")
   @extension("x-ms-foundry-meta", VoiceAgentConditionalPreview)
   union TelephonyProvider {
@@ -592,6 +611,11 @@ namespace Azure.AI.Projects {
 
     @doc("The shared typed address to transfer to. The selected provider validates supported destination types.")
     destination: TelephonyAddress;
+
+    @doc("Literal custom SIP headers sent when this target is used on a Direct SIP call. Templates aren't rendered for API transfer targets; use the transfer request's `sip_headers` for per-call values. Requires a `sip` destination and the `VoiceAgents=V1Preview` opt-in.")
+    @maxItems(5)
+    @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+    sip_headers?: TelephonyTransferSipHeader[];
   }
 
   @doc("The request to update an existing telephony binding. Every property is optional and the binding's provider is immutable.")
@@ -1336,6 +1360,11 @@ namespace Azure.AI.Projects {
   model TelephonyCallTransferRequest {
     @doc("The name of a transfer target configured for the voice agent.")
     target: TelephonyTransferTargetName;
+
+    @doc("Custom SIP headers for this transfer only. A header with the same name, ignoring case, as a header configured on the target replaces it; the combined set is limited to 5 headers. Requires a `sip` destination and the `VoiceAgents=V1Preview` opt-in.")
+    @maxItems(5)
+    @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+    sip_headers?: TelephonyTransferSipHeader[];
   }
 
   @doc("The telephony transfer targets configured for one voice agent.")
@@ -1407,7 +1436,7 @@ namespace Azure.AI.Projects {
     @doc("A Microsoft Teams identity. Source addresses require a nonempty resource-account object GUID; transfer destinations also support 28:orgid:{guid}.")
     teams: "teams",
 
-    @doc("A SIP or SIPS destination for transfer. SIP is in preview and requires the `VoiceAgents=V1Preview` opt-in.")
+    @doc("A SIP or SIPS destination for transfer, supported for Twilio and Direct SIP calls. Use `sip_headers` (Direct SIP only) rather than URI headers (`?...`) in the value. SIP is in preview and requires the `VoiceAgents=V1Preview` opt-in.")
     sip: "sip",
   }
 

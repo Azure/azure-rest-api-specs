@@ -819,7 +819,27 @@ model VoiceAgentTransferDestination {
   value: string;
 }
 
-@doc("A configured logical transfer target. Only its name and description are model-visible; destinations and routing are executor settings.")
+@doc("A custom SIP header configured on a system-tool transfer target. Set `value` for an author-defined or templated value, or omit it and set `description` so that the model supplies the value in each transfer call.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model VoiceAgentTransferSipHeader {
+  @doc("The header name. Names must be unique, ignoring case, within one target.")
+  name: TelephonyTransferSipHeaderName;
+
+  @doc("A literal or templated value, such as `{{@system.sip_call_id}}` or `{{@system.sip_user_to_user}}` (the inbound call's `User-to-User` header). A templated header that renders empty or with characters a SIP URI header can't carry is omitted. When omitted, the model supplies the value and `description` is required. The model can't override an author value.")
+  @minLength(1)
+  @maxLength(256)
+  value?: string;
+
+  @doc("Model-visible guidance that describes the value to supply, for example `Reason code: billing, clinical, or other`. Required when `value` is omitted; not allowed otherwise.")
+  @minLength(1)
+  @maxLength(512)
+  description?: string;
+
+  @doc("Whether a transfer call fails validation when the model doesn't supply this header. Defaults to false, which omits the header. Applies only when `value` is omitted.")
+  required?: boolean = false;
+}
+
+@doc("A configured logical transfer target. Its name, description, and the names and descriptions of model-supplied SIP headers are model-visible; destinations, routing, and author header values are executor settings.")
 model VoiceAgentTransferTarget {
   @doc("The non-blank logical target name. Names must be unique after trimming within the transfer tool.")
   @minLength(1)
@@ -835,6 +855,11 @@ model VoiceAgentTransferTarget {
 
   @doc("The trusted routing policy for this target.")
   routing: VoiceAgentTransferRouting;
+
+  @doc("Custom SIP headers sent with transfers to this target. Model-supplied headers appear as a `sip_headers` object argument of the `transfer` tool, keyed by header name. Requires `sip` destinations and the `VoiceAgents=V1Preview` opt-in.")
+  @maxItems(5)
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  sip_headers?: VoiceAgentTransferSipHeader[];
 }
 
 @doc("Requests a transfer to an explicitly configured logical target.")
