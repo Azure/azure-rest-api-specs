@@ -60,6 +60,7 @@ alias EndpointResourceListParameters = {
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @parentResource(Workspace)
 model EndpointResourcePropertiesBasicResource is Azure.ResourceManager.ProxyResource<
   EndpointResourceProperties,
@@ -88,6 +89,7 @@ model EndpointResourcePropertiesBasicResource is Azure.ResourceManager.ProxyReso
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
+@added(Versions.v2026_11_15_preview)
 @armResourceOperations
 interface EndpointResourcePropertiesBasicResources {
   /**
