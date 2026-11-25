@@ -42,7 +42,7 @@ directive:
   - suppress: PostResponseCodes
     from: devopsinfrastructure.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevOpsInfrastructure/pools/{poolName}/purge"].post
-    reason: Pools_Purge is a synchronous action that returns 200 with no body, matching the existing Pools_DeleteResources action on the same resource.
+    reason: Pools_Purge is a synchronous action and the service returns 200 with no body on success. Declaring 204 instead would cause generated clients to reject the service's actual response.
 ```
 
 ### Tag: package-stable-2026-11-12
