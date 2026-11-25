@@ -98,7 +98,7 @@ Step 2: Identify API spec status
 **Actions**:
 
 1. Prompt user to confirm if the TypeSpec spec is already merged in the main branch of https://github.com/Azure/azure-rest-api-specs : "Is your TypeSpec specification already merged in the main branch of repository(https://github.com/Azure/azure-rest-api-specs)? (yes/no)"
-2. If already merged, complete [API version selection](#api-version-selection), then follow the steps in [typespec to sdk](../../eng/common/instructions/azsdk-tools/typespec-to-sdk.instructions.md) to generate the SDK
+2. If already merged, follow the steps in [typespec to sdk](../../eng/common/instructions/azsdk-tools/typespec-to-sdk.instructions.md) to generate the SDK
 3. If no, proceed to Step 3 to review and commit changes
    **Success Criteria**: User decision on spec readiness obtained
 
@@ -119,7 +119,7 @@ Step 4: Review and Commit Changes
 **Actions**:
 
 1. Run `azsdk_get_modified_typespec_projects` to identify changes
-2. If no changes found, inform: "No TypeSpec projects were modified in current branch" complete [API version selection](#api-version-selection), and go to SDK generation mentioned in [typespec to sdk](../../eng/common/instructions/azsdk-tools/typespec-to-sdk.instructions.md).
+2. If no changes found, inform: "No TypeSpec projects were modified in current branch" and go to SDK generation mentioned in [typespec to sdk](../../eng/common/instructions/azsdk-tools/typespec-to-sdk.instructions.md).
 3. Display all modified files (excluding `.github` and `.vscode` folders)
 4. Prompt user: "Please review the modified files. Do you want to commit these changes? (yes/no)"
 5. If yes: - If on main branch, prompt user: "You are currently on the main branch. Please create a new branch using `git checkout -b <branch-name>` before proceeding." - Wait for user confirmation before continuing - Run `git add <modified-files>` - Prompt for commit message - Run `git commit -m "<user-provided-message>"` - Run `git push -u origin <current-branch-name>`
@@ -142,26 +142,45 @@ Step 5: Create Specification Pull Request
 4. Inform the user to follow the instructions on spec PR to get approval from API reviewers and merge the spec PR.
    **Success Criteria**: Specification pull request exists
 
-### API version selection
-
-Complete this check before following the steps in [typespec to sdk](../../eng/common/instructions/azsdk-tools/typespec-to-sdk.instructions.md) to generate the SDK, including when the spec is already merged or has no new changes.
-
-Determine the effective API version: use the user's explicit selection or, for pipeline generation when it is absent or `none`, the selected release plan's API version. If neither establishes a target, inspect the generation configuration or ask the user. Confirm the target exists in the project or spec PR and compare it with the latest version on `main` and in the target TypeSpec snapshot (for example, using the `Versions` enum or `service.yaml`). Do not infer version ordering from presence or absence on `main`; ask if the target or ordering cannot be determined.
-
-Before changing pins or generating, check the applicable [TypeSpec Validation rules](https://github.com/Azure/azure-rest-api-specs/wiki/TypeSpec-Validation#adding-multiple-api-versions-in-one-pull-request) for management-plane spec PRs, regardless of the requested version:
-
-- When one API version is added, `StaleApiVersionPin` can reject emitters pinned to an older version.
-- When multiple API versions are added, `MultipleNewApiVersions` requires the SDK emitters it evaluates to target the oldest newly added version, subject to the documented rule exceptions.
-
-If the effective target conflicts with an applicable rule, discuss a compliant PR/release sequence or obtain an approved exception before pinning or generating. Do not suppress a rule automatically.
-
-If the effective version is older than the latest on `main` or is not the latest in the target snapshot, explain that unpinned SDK emitters resolve to the latest version in the TypeSpec project, so they may not generate the requested version. Before generating locally or through the pipeline:
-
-1. Record each emitter's existing `api-version`, including when it is absent. Guide the user to set the same target `api-version` under every configured SDK language emitter in `tspconfig.yaml`: C#, Java, JavaScript/TypeScript, Python, and Go where configured. Use the project's actual C# emitter and preserve all other options. Pinning only some emitters is not sufficient.
-2. Keep the pins in the original spec PR. For pipeline generation, commit and push the pins and verify that the selected spec snapshot contains both the target version and the pins. A release plan's saved spec SHA takes precedence over newer PR commits; update it to an appropriate commit if needed. For local generation, verify the input snapshot contains the target version and the pins.
-3. After the spec PR is merged and SDKs for the pinned version are generated and released, tell the user to submit a follow-up PR reverting the temporary pin changes: remove added pins and restore pre-existing pins that are still intentional. Discuss stale or conflicting pins and any required exceptions with the user before changing them. Otherwise SDKs may continue targeting an older version and later spec PRs can fail `StaleApiVersionPin`.
-
 Follow the steps in [typespec to sdk](../../eng/common/instructions/azsdk-tools/typespec-to-sdk.instructions.md) to generate the SDK.
+
+## How to pin/unpin api-version for a TypeSpec project
+
+This is optional and is not part of the default SDK generation workflow. SDK emitters generate the latest API version in the TypeSpec project unless `api-version` is set in `tspconfig.yaml`. Pin `api-version` in `tspconfig.yaml` only if the SDK needs to be generated from an API version that is not the latest, for example to regenerate and release an SDK for an older API version after an emitter bug fix.
+
+### Pin api-version
+
+1. Prompt the user for the API version to use.
+2. Confirm with the user: "The latest API version in the specs repo is `<latest-version>`. Do you want to generate the SDK using `<api-version>` instead? (yes/no)". Continue only if the user confirms.
+3. Add the `api-version` property to every SDK emitter configured in the project's `tspconfig.yaml`. Pinning only some emitters is not sufficient. Use the emitter names already in the project's `tspconfig.yaml` and keep all other emitter options unchanged. For example:
+
+   ```yaml
+   options:
+     "@azure-tools/typespec-python":
+       api-version: "2024-01-01"
+       # existing options
+     "@azure-tools/typespec-java":
+       api-version: "2024-01-01"
+       # existing options
+     "@azure-tools/typespec-ts":
+       api-version: "2024-01-01"
+       # existing options
+     "@azure-tools/typespec-go":
+       api-version: "2024-01-01"
+       # existing options
+     "@azure-typespec/http-client-csharp-mgmt":
+       api-version: "2024-01-01"
+       # existing options
+   ```
+
+4. Suggest that the user create a pull request in the [azure-rest-api-specs](https://github.com/Azure/azure-rest-api-specs) repo with the change, then generate the SDK from it.
+
+### Unpin api-version
+
+After the SDK for the pinned API version is generated and released, unpin it so later SDKs use the latest API version:
+
+1. Remove the `api-version` property from every SDK emitter in `tspconfig.yaml`.
+2. Suggest that the user create a pull request in the [azure-rest-api-specs](https://github.com/Azure/azure-rest-api-specs) repo with the change.
 
 ## SDK customizations in TypeSpec projects
 
