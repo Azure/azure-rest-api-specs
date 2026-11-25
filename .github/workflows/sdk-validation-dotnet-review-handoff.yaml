@@ -33,7 +33,7 @@ jobs:
       - name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
         with:
-          include-typespec-import-parser: "true"
+          additional-package: "@azure-tools/typespec-import-parser"
 
       - id: review-handoff
         name: Validate existing SDK generation artifact

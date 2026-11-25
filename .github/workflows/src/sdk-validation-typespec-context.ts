@@ -1,6 +1,5 @@
 import path from "node:path";
 import { isSafeRelativePosixPath } from "../../shared/src/sdk-types.ts";
-import { getLocalTypeSpecImports } from "../../typespec-import-parser/src/index.ts";
 import type { Context, GitHub } from "./github.ts";
 
 export const TYPESPEC_REVIEW_CONTEXT_FILE_NAME = "typespec-review-context.json";
@@ -378,6 +377,7 @@ export async function collectTypeSpecReviewContext(params: {
   projectRoots: readonly string[];
 }): Promise<TypeSpecReviewContext> {
   const { github, context, prNumber, headSha, baseSha, changedFileCount, projectRoots } = params;
+  const { getLocalTypeSpecImports } = await import("../../typespec-import-parser/src/index.ts");
   // Compare immutable commits so patches and file contents describe the same revision.
   const changedFiles = (
     await getChangedFiles({ github, context, baseSha, headSha, changedFileCount })
@@ -509,7 +509,7 @@ export async function collectTypeSpecReviewContext(params: {
       }
       let imports = importCache.get(sourcePath);
       if (imports === undefined) {
-        imports = getLocalTypeSpecImports(sourcePath, sourceContent);
+        imports = await getLocalTypeSpecImports(sourcePath, sourceContent);
         importCache.set(sourcePath, imports);
       }
       for (const importPath of imports) {

@@ -1,25 +1,39 @@
-import { isImportStatement, parse } from "@typespec/compiler/ast";
+import { createSourceFile, NodeHost, NoTarget, type CompilerHost } from "@typespec/compiler";
+import { unsafe_createSourceLoader } from "@typespec/compiler/experimental";
 
 const JAVASCRIPT_FILE_PATTERN = /\.[cm]?js$/i;
 
-export function getLocalTypeSpecImports(filePath: string, content: string): string[] {
-  const script = parse(content);
-  if (script.parseDiagnostics.length > 0) {
+export async function getLocalTypeSpecImports(
+  filePath: string,
+  content: string,
+): Promise<string[]> {
+  const host: CompilerHost = {
+    ...NodeHost,
+    readFile: async (requestedPath) => {
+      if (requestedPath !== filePath) {
+        throw new Error(`Unexpected TypeSpec source request '${requestedPath}'`);
+      }
+      return createSourceFile(content, filePath);
+    },
+  };
+  const loader = await unsafe_createSourceLoader(host, { externals: () => true });
+  await loader.importFile(filePath, NoTarget, undefined, "entrypoint");
+  const errors = loader.resolution.diagnostics.filter(
+    (diagnostic) => diagnostic.severity === "error",
+  );
+  if (errors.length > 0) {
     throw new Error(
-      `Unable to parse TypeSpec imports from '${filePath}': ${script.parseDiagnostics.length} diagnostic(s)`,
+      `Unable to load TypeSpec imports from '${filePath}': ${errors.length} error diagnostic(s)`,
     );
   }
 
   return [
     ...new Set(
-      script.statements
-        .filter(isImportStatement)
-        .map((statement) => statement.path.value)
-        .filter(
-          (importPath) =>
-            (importPath.startsWith("./") || importPath.startsWith("../")) &&
-            !JAVASCRIPT_FILE_PATTERN.test(importPath),
-        ),
+      loader.resolution.externals.filter(
+        (importPath) =>
+          (importPath.startsWith("./") || importPath.startsWith("../")) &&
+          !JAVASCRIPT_FILE_PATTERN.test(importPath),
+      ),
     ),
   ].sort();
 }
