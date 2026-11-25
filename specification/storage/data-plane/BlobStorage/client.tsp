@@ -750,7 +750,7 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientName(BlobServiceClient, "ServiceClient", "go");
 @@clientName(BlobDeleteTypeCustom, "DeleteType", "go");
 @@clientName(BlobExpiryOptions, "ExpiryOptions", "go");
-@@clientName(BlobHierarchyList, "BlobHierarchyListSegment", "go");
+@@clientName(BlobHierarchyList, "BlobHierarchyListSegment", "go,java");
 @@clientName(BlobItem.objectReplicationMetadata, "OrMetadata", "go");
 @@clientName(BlobPublicAccessResponseHeader.access, "BlobPublicAccess", "go");
 @@clientName(BlobServiceProperties, "StorageServiceProperties", "go");
@@ -1496,7 +1496,6 @@ union AccessTierRust {
   "ParquetTextConfiguration",
   "java"
 );
-@@clientName(BlobHierarchyListSegmentJava, "BlobHierarchyListSegment", "java");
 
 // The hand-written layout-aware download keeps its own public BlobLayoutRange in implementation.util, so the wire
 // models keep the names the AutoRest layer gave them.
@@ -1570,23 +1569,6 @@ model BlobStorageError {
 }
 
 @@alternateType(Storage.Blob.Error, BlobStorageError, "java");
-
-// A page can hold only blob prefixes, or nothing. With both lists optional, the emitter appends to field-initialized
-// lists, so the getters never return null, as in the shipped model, and the default XML root stays "Blobs".
-@TypeSpec.Xml.name("Blobs")
-model BlobHierarchyListSegmentJava {
-  /** The blob items. */
-  @TypeSpec.Xml.name("Blob")
-  @TypeSpec.Xml.unwrapped
-  blobItems?: Storage.Blob.BlobItem[];
-
-  /** The blob prefixes. */
-  @TypeSpec.Xml.name("BlobPrefix")
-  @TypeSpec.Xml.unwrapped
-  blobPrefixes?: Storage.Blob.BlobPrefix[];
-}
-
-@@alternateType(BlobHierarchyList, BlobHierarchyListSegmentJava, "java");
 
 // Java shipped this enum with capitalized values, which its toString() returns and its requests send, in this
 // order (exposed through ordinal() and values()). The service accepts either casing.
