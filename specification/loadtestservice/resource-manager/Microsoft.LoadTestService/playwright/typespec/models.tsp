@@ -145,7 +145,13 @@ model WebBotAuthSettingsUpdate {
 @added(Versions.v2026_11_10_preview)
 @doc("The workspace properties that can be updated.")
 model PlaywrightWorkspacePatchProperties {
-  ...OmitProperties<PlaywrightWorkspaceProperties, "webBotAuth">;
+  ...OmitProperties<PlaywrightWorkspaceProperties, "webBotAuth" | "subnetId">;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "PATCH uses null to disconnect the workspace from its subnet; omission preserves the existing subnet."
+  @added(Versions.v2026_12_01_preview)
+  @visibility(Lifecycle.Update)
+  @doc("The Azure Resource Manager resource ID of the subnet used for private network connectivity. Set to null to disconnect the workspace from its subnet. If omitted, the existing subnet configuration is preserved. Before configuring a subnet, ensure it meets the virtual network prerequisites at https://aka.ms/pww/docs/vnet.")
+  subnetId?: PlaywrightWorkspaceProperties.subnetId | null;
 
   @doc("The Web Bot Authentication settings for the workspace.")
   webBotAuth?: WebBotAuthSettingsUpdate;

@@ -508,6 +508,9 @@
           "PlaywrightWorkspaces_Update": {
             "$ref": "./examples/PlaywrightWorkspaces_Update.json"
           },
+          "PlaywrightWorkspaces_Update_ClearSubnet": {
+            "$ref": "./examples/PlaywrightWorkspaces_Update_ClearSubnet.json"
+          },
           "PlaywrightWorkspaces_Update_MinimumSet": {
             "$ref": "./examples/PlaywrightWorkspaces_Update_MinimumSet.json"
           }
@@ -1262,23 +1265,6 @@
           "format": "uri",
           "description": "The URI of the Azure Storage account used to store workspace artifacts, test results, reports and browser profiles."
         },
-        "subnetId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The Azure Resource Manager resource ID of the subnet used for private network connectivity. Before configuring the workspace, ensure the subnet meets the virtual network prerequisites at https://aka.ms/pww/docs/vnet. Format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Network/virtualNetworks/{virtualNetwork}/subnets/{subnet}.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ],
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Network/virtualNetworks/subnets"
-              }
-            ]
-          }
-        },
         "sessionArtifacts": {
           "$ref": "#/definitions/EnablementStatus",
           "description": "Specifies whether session artifact recording is enabled for the workspace."
@@ -1294,6 +1280,22 @@
         "browserProfile": {
           "$ref": "#/definitions/EnablementStatus",
           "description": "Specifies whether the browser profile is enabled for the workspace."
+        },
+        "subnetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Resource Manager resource ID of the subnet used for private network connectivity. Set to null to disconnect the workspace from its subnet. If omitted, the existing subnet configuration is preserved. Before configuring a subnet, ensure it meets the virtual network prerequisites at https://aka.ms/pww/docs/vnet.",
+          "x-nullable": true,
+          "x-ms-mutability": [
+            "update"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
         },
         "webBotAuth": {
           "$ref": "#/definitions/WebBotAuthSettingsUpdate",
