@@ -1381,7 +1381,7 @@ model CostAllocationRuleDetails {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SourceCostAllocationResource extends CostAllocationResource {
   /**
-   * Source Resources for cost allocation. This list cannot contain more than 25 values.
+   * Source Resources for cost allocation. This list cannot contain more than 200 values.
    */
   values: string[];
 }
@@ -1407,7 +1407,7 @@ model CostAllocationResource {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TargetCostAllocationResource extends CostAllocationResource {
   /**
-   * Target resources for cost allocation. This list cannot contain more than 25 values.
+   * Target resources for cost allocation. This list cannot contain more than 200 values.
    */
   @identifiers(#["name"])
   values: CostAllocationProportion[];
