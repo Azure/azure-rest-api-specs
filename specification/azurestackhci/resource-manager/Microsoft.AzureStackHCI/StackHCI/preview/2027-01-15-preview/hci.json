@@ -13214,6 +13214,11 @@
           "description": "Is Management Cluster, when true indicates that the cluster is used for managing other clusters",
           "readOnly": true
         },
+        "managementClusterType": {
+          "$ref": "#/definitions/ManagementClusterType",
+          "description": "Management cluster type.",
+          "readOnly": true
+        },
         "logCollectionProperties": {
           "$ref": "#/definitions/LogCollectionProperties",
           "description": "Log Collection properties of the cluster."
@@ -14776,6 +14781,10 @@
         "isManagementCluster": {
           "type": "boolean",
           "description": "Is Management Cluster, when true indicates that the cluster is used for managing other clusters"
+        },
+        "managementClusterType": {
+          "$ref": "#/definitions/ManagementClusterType",
+          "description": "Management cluster type."
         },
         "adouPath": {
           "type": "string",
@@ -21996,6 +22005,30 @@
           "description": "Node-local memory available for placement after system reserve, workload allocation,\nand policy reservation.",
           "readOnly": true
         }
+      }
+    },
+    "ManagementClusterType": {
+      "type": "string",
+      "description": "Management cluster type.",
+      "enum": [
+        "ALDO",
+        "ALDOMC"
+      ],
+      "x-ms-enum": {
+        "name": "ManagementClusterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ALDO",
+            "value": "ALDO",
+            "description": "ALDO management cluster type."
+          },
+          {
+            "name": "ALDOMC",
+            "value": "ALDOMC",
+            "description": "ALDOMC management cluster type."
+          }
+        ]
       }
     },
     "Metadata": {

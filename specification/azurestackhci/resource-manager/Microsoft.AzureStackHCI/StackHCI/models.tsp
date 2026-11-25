@@ -2128,6 +2128,18 @@ model ReconcileArcSettingsRequestProperties {
  */
 model ClusterList is Azure.Core.Page<Cluster>;
 
+/** Management cluster type. */
+@added(Versions.v2027_01_15_preview)
+union ManagementClusterType {
+  string,
+
+  /** ALDO management cluster type. */
+  ALDO: "ALDO",
+
+  /** ALDOMC management cluster type. */
+  ALDOMC: "ALDOMC",
+}
+
 /**
  * Cluster properties.
  */
@@ -2198,6 +2210,11 @@ model ClusterProperties {
    */
   @visibility(Lifecycle.Read)
   isManagementCluster?: boolean;
+
+  /** Management cluster type. */
+  @added(Versions.v2027_01_15_preview)
+  @visibility(Lifecycle.Read)
+  managementClusterType?: ManagementClusterType;
 
   /**
    * Log Collection properties of the cluster.
@@ -3235,6 +3252,10 @@ model DeploymentData {
    * Is Management Cluster, when true indicates that the cluster is used for managing other clusters
    */
   isManagementCluster?: boolean;
+
+  /** Management cluster type. */
+  @added(Versions.v2027_01_15_preview)
+  managementClusterType?: ManagementClusterType;
 
   /**
    * The path to the Active Directory Organizational Unit container object prepared for the deployment.
