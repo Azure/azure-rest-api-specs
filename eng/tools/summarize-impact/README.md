@@ -27,6 +27,7 @@ resource-manager, without describing the change as an API change:
       "plane": "resource-manager",
       "changes": ["sdk-configuration"],
       "hasAffectedReadme": false,
+      "hasApiDefinitionChanges": false,
       "typeSpec": true,
       "newApiVersions": [],
       "suppressionsChanged": false,
@@ -43,6 +44,11 @@ resource-manager, without describing the change as an API change:
 
 `changes` distinguishes API definitions, examples, SDK configuration (`client.tsp` and
 `tspconfig.yaml`), readmes, and other files.
+`hasApiDefinitionChanges` records additions, edits, and removals of TypeSpec contract files or
+Swagger/OpenAPI definitions. It excludes `client.tsp`, package manifests/lockfiles, and
+TypeScript/JavaScript build configuration. The existing example and scenario exclusions still apply.
+Inline documentation, formatting, lint, and decorator edits in contract files count as changes.
+The broader `changes` categories remain independent so ARM review behavior stays unchanged.
 `hasAffectedReadme` identifies changes associated with an owning README, even when that README is
 unchanged. This preserves ARM review for policy and manifest changes without making every `other`
 file review-relevant or removing the SDK-configuration-only exemption.
@@ -50,6 +56,10 @@ file review-relevant or removing the SDK-configuration-only exemption.
 Plane classification uses path segments or the owning TypeSpec configuration's AutoRest output
 plane/linter ruleset. Unresolved files use `unknown`; deleted projects can use the baseline config.
 New API versions are compared against their own resource provider in the baseline checkout.
+Byte-identical API definitions deleted and added within the same service and plane are matched
+one-to-one as relocations. They do not count as contract changes or new versions. Extra copies,
+content edits, and cross-service or cross-plane moves do not get this exemption. Matching uses
+the local checkouts, not migration labels or additional GitHub requests.
 Resource-provider facts describe namespace additions, RPaaS configuration, added Swagger definitions,
 and registration in the baseline checkout's `.github/arm-leases` directory.
 
@@ -57,6 +67,10 @@ and registration in the baseline checkout's `.github/arm-leases` directory.
 status and target branch, then reconciles labels separately. ARM review exemptions do not remove the
 resource-manager classification. Version additions and suppression changes are scoped to their
 service and plane, so unrelated changes cannot trigger another service's review.
+Data-plane contract changes request review in both new and existing versions. The request label is
+add-only, preserving manual requests and existing human signoff.
 
 The reader also accepts legacy flat artifacts from existing runs. Those artifacts retain their
 original aggregate behavior because their per-service attribution cannot be recovered.
+Older per-service artifacts without `hasApiDefinitionChanges` retain new-version-only intake until
+the impact assessment runs again.

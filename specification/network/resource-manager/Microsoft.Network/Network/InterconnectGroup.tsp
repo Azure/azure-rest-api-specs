@@ -38,7 +38,7 @@ model InterconnectGroup is ResourceInstance<InterconnectGroupPropertiesFormat> {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "flattenProperty is required for backward compatibility with existing Network SDKs"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   InterconnectGroup.properties,
-  "!javascript"
+  "!(javascript, java)"
 );
 @@doc(InterconnectGroup.properties, "Properties of the interconnect group.");
 
@@ -62,7 +62,7 @@ model Subgroup is SubResourceInstance<SubgroupProperties> {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "flattenProperty is required for backward compatibility with existing Network SDKs"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   Subgroup.properties,
-  "!javascript"
+  "!(javascript, java)"
 );
 
 @added(Versions.v2025_07_01)
