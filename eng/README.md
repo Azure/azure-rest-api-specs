@@ -86,6 +86,24 @@ requiredness, as do pipelines with a missing or empty `TypeSpecEmitter`.
 Dedicated provisioning validation pipelines must configure the matching emitter;
 this does not create pipelines or change live pipeline settings.
 
+When a generation run updates an existing SDK PR on the same source branch, its
+description compares actual generated API-version sets, grouped by reported
+namespace. A change warning stays until generation returns to the pre-change set;
+repeating the changed set does not clear it. Comparison snapshots are stored in
+the description, inside the existing v1 ownership markers. Do not remove them.
+Missing or partial metadata produces a comparison-unavailable diagnostic, not a
+version-removal warning. An unreadable prior PR or damaged snapshot cannot
+establish that an earlier warning was resolved; restore the valid baseline to
+recover that comparison. New PRs establish their own baseline. This does not
+change API-version selection or compare against release-plan expectations.
+Pre-feature descriptions lack a completeness record: the first update reports
+comparison unavailable and records the current complete set for later runs.
+Confirmed version changes on an existing SDK PR also add the
+`spec-api-versions-changed` label, including reruns with a retained verified
+warning. When a rerun verifies that versions match the baseline, the pipeline
+removes the label. New PRs never receive it. Unknown comparisons leave the label
+unchanged. Other labels are preserved, and label failures do not block the run.
+
 ## Spec Change Policies
 
 [Spec Change Policies](tools/spec-change-policies/README.md) checks TypeSpec usage and

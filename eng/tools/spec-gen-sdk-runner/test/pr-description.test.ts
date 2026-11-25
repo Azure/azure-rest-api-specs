@@ -30,7 +30,7 @@ function runPowerShell(script: string, env: Record<string, string>) {
   return result;
 }
 
-function render(parameters: Record<string, string> = {}) {
+function render(parameters: Record<string, string | boolean> = {}) {
   return runPowerShell(
     `
     $ErrorActionPreference = 'Stop'
@@ -66,7 +66,7 @@ function scriptOutput(result: ReturnType<typeof runPowerShell>) {
   return { value: output.value, warnings };
 }
 
-function renderedBody(parameters: Record<string, string> = {}): string {
+function renderedBody(parameters: Record<string, string | boolean> = {}): string {
   const output = scriptOutput(render(parameters));
   expect(output.warnings).toEqual([]);
   return output.value;
@@ -90,6 +90,14 @@ function findPipelineScript(
         if (typeof script === "string") {
           return script;
         }
+      }
+      if (
+        "filePath" in value.inputs &&
+        typeof value.inputs.filePath === "string" &&
+        "arguments" in value.inputs &&
+        typeof value.inputs.arguments === "string"
+      ) {
+        return `& "${value.inputs.filePath}" ${value.inputs.arguments}`;
       }
     }
     throw new Error(`The ${displayName} task must contain an inline script.`);
@@ -300,50 +308,160 @@ describe("SDK pull request description", () => {
     expect(result.stdout).not.toContain("## SDK Generation Details");
   });
 
-  test.each([
+  test.each<{
+    apiVersions: string;
+    releasePlan: string;
+    lookup: string;
+    scenario?: string;
+    labelAction?: "add" | "remove" | "none";
+    existingLabel?: boolean;
+  }>([
     {
       apiVersions: JSON.stringify([{ version: "2025-01-01", namespace: "Example" }]),
       releasePlan: "{}",
+      lookup: "new",
     },
-    { apiVersions: "invalid JSON", releasePlan: "invalid JSON" },
-  ])("submits a complete body even with optional metadata %j", ({ apiVersions, releasePlan }) => {
-    const sdkRoot = fs.mkdtempSync(path.join(os.tmpdir(), "sdk-pr-description-"));
-    temporaryDirectories.push(sdkRoot);
-    const commonScripts = path.join(sdkRoot, "eng/common/scripts");
-    fs.mkdirSync(commonScripts, { recursive: true });
-    fs.writeFileSync(
-      path.join(commonScripts, "Submit-PullRequest.ps1"),
-      "param($RepoOwner,$RepoName,$BaseBranch,$PROwner,$PRBranch,$AuthToken,$PRTitle,$PRBody,$PRLabels,$OpenAsDraft,$UpdateExistingPullRequest)\n@{ body=$PRBody; draft=$OpenAsDraft; update=$UpdateExistingPullRequest } | ConvertTo-Json -Compress",
-    );
-    const pipeline: unknown = parse(
-      fs.readFileSync(
-        path.join(repoRoot, "eng/pipelines/templates/stages/archetype-spec-gen-sdk.yml"),
-        "utf8",
-      ),
-    );
-    const script = findPipelineScript(pipeline, "Create pull request");
-    expect(script).toBeDefined();
-    const macros: Record<string, string> = {
-      SpecRepoDirectory: repoRoot,
-      SdkRepoDirectory: sdkRoot,
-      SdkRepoName: "azure-sdk-for-example",
-      SdkRepoOwner: "azure",
-      SdkPullRequestSourceBranch: "probe",
-      GH_TOKEN: "not-a-real-token",
-      PrTitle: "Probe",
-      "Build.DefinitionName": "SDK Generation",
-      "Build.BuildId": "42",
-      BuildFailedLabel: "",
-      OpenSdkPullRequestAsDraft: "true",
-    };
-    const expanded = script?.replace(/\$\(([^)]+)\)/g, (_match, name: string) => {
-      if (!(name in macros)) {
-        throw new Error(`Unexpected pipeline macro: ${name}`);
+    { apiVersions: "invalid JSON", releasePlan: "invalid JSON", lookup: "new" },
+    {
+      apiVersions: JSON.stringify([{ version: "2026-01-01", namespace: "Example" }]),
+      releasePlan: "{}",
+      lookup: "existing",
+      labelAction: "add",
+    },
+    {
+      apiVersions: JSON.stringify([{ version: "2026-01-01", namespace: "Example" }]),
+      releasePlan: "{}",
+      lookup: "failure",
+    },
+    {
+      apiVersions: '[{"version":"2025-01-01","namespace":"Example"}]',
+      releasePlan: "{}",
+      lookup: "existing",
+      scenario: "unchanged",
+    },
+    {
+      apiVersions: '[{"version":"2025-01-01","namespace":"Example"}]',
+      releasePlan: "{}",
+      lookup: "existing",
+      scenario: "unchanged",
+      existingLabel: true,
+      labelAction: "remove",
+    },
+    {
+      apiVersions: '[{"version":"2026-01-01","namespace":"Example"}]',
+      releasePlan: "{}",
+      lookup: "existing",
+      scenario: "already-labeled",
+      existingLabel: true,
+    },
+    {
+      apiVersions: '[{"version":"2026-01-01","namespace":"Example"}]',
+      releasePlan: "{}",
+      lookup: "existing",
+      scenario: "repeat",
+      labelAction: "add",
+    },
+    {
+      apiVersions: '[{"version":"2026-01-01","namespace":"Example"}]',
+      releasePlan: "{}",
+      lookup: "existing",
+      scenario: "incomplete",
+      existingLabel: true,
+    },
+    {
+      apiVersions: "invalid JSON",
+      releasePlan: "{}",
+      lookup: "existing",
+      scenario: "unavailable-repeat",
+      labelAction: "add",
+    },
+    {
+      apiVersions: '[{"version":"2025-01-01","namespace":"Example"}]',
+      releasePlan: "{}",
+      lookup: "existing",
+      scenario: "resolved",
+      existingLabel: true,
+      labelAction: "remove",
+    },
+  ])(
+    "submits a complete body even with optional metadata %j",
+    ({
+      apiVersions,
+      releasePlan,
+      lookup,
+      scenario,
+      labelAction = "none",
+      existingLabel = false,
+    }) => {
+      const sdkRoot = fs.mkdtempSync(path.join(os.tmpdir(), "sdk-pr-description-"));
+      temporaryDirectories.push(sdkRoot);
+      const commonScripts = path.join(sdkRoot, "eng/common/scripts");
+      fs.mkdirSync(commonScripts, { recursive: true });
+      fs.writeFileSync(
+        path.join(commonScripts, "Submit-PullRequest.ps1"),
+        "param($RepoOwner,$RepoName,$BaseBranch,$PROwner,$PRBranch,$AuthToken,$PRTitle,$PRBody,$PRLabels,$OpenAsDraft,$UpdateExistingPullRequest)\nWrite-Host '##vso[task.setvariable variable=Submitted.PullRequest.Number]123'\n@{ body=$PRBody; draft=$OpenAsDraft; update=$UpdateExistingPullRequest } | ConvertTo-Json -Compress",
+      );
+      fs.writeFileSync(
+        path.join(commonScripts, "Invoke-GitHubAPI.ps1"),
+        `
+      function Get-GitHubPullRequests {
+        param($RepoOwner,$RepoName,$Head,$Base,$AuthToken)
+        if ($env:PR_LOOKUP -eq 'failure') { throw 'lookup failed' }
+        if ($RepoOwner -ne 'azure' -or $RepoName -ne 'azure-sdk-for-example' -or $Head -ne 'azure:probe' -or $Base -ne 'main' -or $AuthToken -ne 'not-a-real-token') {
+          throw 'Unexpected PR lookup parameters'
+        }
+        if ($env:PR_LOOKUP -eq 'existing') {
+          @{ body = $env:PREVIOUS_PR_BODY; labels = @(@{ name = 'Mgmt' }) + @(if ($env:EXISTING_LABEL -eq 'true') { @{ name = 'spec-api-versions-changed' } }) }
+        }
       }
-      return macros[name];
-    });
-    const result = runPowerShell(
-      `
+      `,
+      );
+      const baseline = renderedBody({
+        ApiVersionsJson: '[{"version":"2025-01-01","namespace":"Example"}]',
+        CompareApiVersions: true,
+        ApiVersionsComplete: true,
+        PreviousPullRequestState: "new",
+      });
+      const previousBody =
+        scenario === "repeat" || scenario === "unavailable-repeat" || scenario === "resolved"
+          ? renderedBody({
+              ApiVersionsJson: '[{"version":"2026-01-01","namespace":"Example"}]',
+              CompareApiVersions: true,
+              ApiVersionsComplete: true,
+              PreviousPullRequestState: "existing",
+              PreviousBody: baseline,
+            })
+          : baseline;
+      const complete = apiVersions !== "invalid JSON" && scenario !== "incomplete";
+      const pipeline: unknown = parse(
+        fs.readFileSync(
+          path.join(repoRoot, "eng/pipelines/templates/stages/archetype-spec-gen-sdk.yml"),
+          "utf8",
+        ),
+      );
+      const script = findPipelineScript(pipeline, "Create pull request");
+      expect(script).toBeDefined();
+      const macros: Record<string, string> = {
+        SpecRepoDirectory: repoRoot,
+        SdkRepoDirectory: sdkRoot,
+        SdkRepoName: "azure-sdk-for-example",
+        SdkRepoOwner: "azure",
+        SdkPullRequestSourceBranch: "probe",
+        GH_TOKEN: "not-a-real-token",
+        PrTitle: "Probe",
+        "Build.DefinitionName": "SDK Generation",
+        "Build.BuildId": "42",
+        BuildFailedLabel: "",
+        OpenSdkPullRequestAsDraft: "true",
+      };
+      const expanded = script?.replace(/\$\(([^)]+)\)/g, (_match, name: string) => {
+        if (!(name in macros)) {
+          throw new Error(`Unexpected pipeline macro: ${name}`);
+        }
+        return macros[name];
+      });
+      const result = runPowerShell(
+        `
       $ErrorActionPreference = 'Stop'
       $output = @(& { ${expanded} } 6>&1)
       @{
@@ -351,27 +469,328 @@ describe("SDK pull request description", () => {
         warnings = @($output | Where-Object { $_ -is [System.Management.Automation.InformationRecord] } | ForEach-Object { $_.ToString() })
       } | ConvertTo-Json -Compress
       `,
-      {
-        SDK_PR_CONFIG_TYPE: requiredParameters.ConfigType,
-        SDK_PR_CONFIG_PATH: requiredParameters.ConfigPath,
-        SDK_PR_SPEC_REPO_URL: requiredParameters.SpecRepoUrl,
-        SDK_PR_SPEC_COMMIT_SHA: requiredParameters.SpecCommitSha,
-        SDK_PR_PIPELINE_RUN: requiredParameters.PipelineRun,
-        SDK_PR_RELEASE_TYPE: "",
-        GENERATED_SDK_API_VERSIONS_JSON: apiVersions,
-        RELEASE_PLAN_METADATA: releasePlan,
-      },
+        {
+          SDK_PR_CONFIG_TYPE: requiredParameters.ConfigType,
+          SDK_PR_CONFIG_PATH: requiredParameters.ConfigPath,
+          SDK_PR_SPEC_REPO_URL: requiredParameters.SpecRepoUrl,
+          SDK_PR_SPEC_COMMIT_SHA: requiredParameters.SpecCommitSha,
+          SDK_PR_PIPELINE_RUN: requiredParameters.PipelineRun,
+          SDK_PR_RELEASE_TYPE: "",
+          GENERATED_SDK_API_VERSIONS_JSON: apiVersions,
+          GENERATED_SDK_API_VERSIONS_COMPLETE: String(complete),
+          SDK_PR_GITHUB_TOKEN: "not-a-real-token",
+          RELEASE_PLAN_METADATA: releasePlan,
+          PREVIOUS_PR_BODY: previousBody,
+          PR_LOOKUP: lookup,
+          EXISTING_LABEL: String(existingLabel),
+        },
+      );
+      const { value: submission, warnings } = scriptOutput(result);
+      const expected = scriptOutput(
+        render({
+          ApiVersionsJson: apiVersions,
+          ReleasePlanJson: releasePlan,
+          CompareApiVersions: true,
+          ApiVersionsComplete: complete,
+          PreviousBody: lookup === "existing" ? previousBody : "",
+          PreviousPullRequestState: lookup === "failure" ? "unknown" : lookup,
+        }),
+      );
+      expect(JSON.parse(submission)).toEqual({
+        body: expected.value,
+        draft: true,
+        update: true,
+      });
+      if (lookup === "failure") {
+        expect(warnings).toContain(
+          "##vso[task.logissue type=warning]API Versions comparison unavailable: could not read the previous PR description.",
+        );
+      }
+      expect(warnings).toEqual(expect.arrayContaining(expected.warnings));
+      const signalPrefix = "##vso[task.setvariable variable=SpecApiVersionsChangedLabelAction]";
+      const signal = warnings.find(
+        (entry): entry is string => typeof entry === "string" && entry.startsWith(signalPrefix),
+      );
+      expect(signal).toBe(`${signalPrefix}${labelAction}`);
+      const submittedNumber = "##vso[task.setvariable variable=Submitted.PullRequest.Number]123";
+      expect(warnings.indexOf(submittedNumber)).toBeLessThan(warnings.indexOf(signal));
+
+      if (labelAction !== "none") {
+        const labelScript = findPipelineScript(pipeline, "Update API versions changed label");
+        expect(labelScript).toBeDefined();
+        const labelMacros: Record<string, string> = {
+          ...macros,
+          SdkRepoDirectory: repoRoot,
+          "Submitted.PullRequest.Number": "123",
+        };
+        const expandedLabelScript = labelScript?.replace(
+          /\$\(([^)]+)\)/g,
+          (_match, name: string) => {
+            if (!(name in labelMacros)) {
+              throw new Error(`Unexpected labeling macro: ${name}`);
+            }
+            return labelMacros[name];
+          },
+        );
+        const labelResult = runPowerShell(
+          `
+          $ErrorActionPreference = 'Stop'
+          $global:labelCalls = @()
+          function Invoke-RestMethod {
+            param($Method,$Uri,$Headers,$Body,$MaximumRetryCount)
+            $global:labelCalls += @{ method=$Method; uri=$Uri; payload=$(if ($Body) { $Body | ConvertFrom-Json } else { $null }); token=$Headers.Authorization }
+          }
+          ${expandedLabelScript}
+          ConvertTo-Json -InputObject @($global:labelCalls) -Compress -Depth 5
+          `,
+          { LABEL_ACTION: labelAction, SDK_PR_GITHUB_TOKEN: "not-a-real-token" },
+        );
+        expect(labelResult.stderr).toBe("");
+        expect(labelResult.status).toBe(0);
+        const labelUri =
+          "https://api.github.com/repos/azure/azure-sdk-for-example/issues/123/labels";
+        expect(JSON.parse(labelResult.stdout)).toEqual([
+          labelAction === "add"
+            ? {
+                method: "POST",
+                uri: labelUri,
+                payload: { labels: ["spec-api-versions-changed"] },
+                token: "bearer not-a-real-token",
+              }
+            : {
+                method: "DELETE",
+                uri: `${labelUri}/spec-api-versions-changed`,
+                payload: null,
+                token: "bearer not-a-real-token",
+              },
+        ]);
+      }
+    },
+  );
+});
+
+describe("API Versions regeneration warning", () => {
+  const warningTitle = "**API Versions changed during regeneration.**";
+  const previousVersions = [
+    { version: "2026-06-01", namespace: "Microsoft.Network" },
+    { version: "2026-09-01-preview", namespace: "Microsoft.Network" },
+    { version: "2026-01-01", namespace: "Microsoft.Storage" },
+    { version: "unchanged", namespace: "Microsoft.Unchanged" },
+  ];
+  const currentVersions = [
+    { version: "2026-06-01", namespace: "Microsoft.Network" },
+    { version: "2026-10-01-preview", namespace: "Microsoft.Network" },
+    { version: "2026-07-01", namespace: "Microsoft.Compute" },
+    { version: "unchanged", namespace: "Microsoft.Unchanged" },
+  ];
+  function compare(
+    versions: unknown,
+    previousBody = "",
+    options: Record<string, string | boolean> = {},
+  ) {
+    return scriptOutput(
+      render({
+        CompareApiVersions: true,
+        ApiVersionsComplete: true,
+        ApiVersionsJson: JSON.stringify(versions),
+        PreviousPullRequestState: previousBody ? "existing" : "new",
+        PreviousBody: previousBody,
+        ...options,
+      }),
     );
-    const { value: submission, warnings } = scriptOutput(result);
-    const expected = scriptOutput(
-      render({ ApiVersionsJson: apiVersions, ReleasePlanJson: releasePlan }),
+  }
+  function changeSection(body: string) {
+    return body
+      .split("<!-- azsdk-api-version-warning:v1:start -->")[1]
+      ?.split("<!-- azsdk-api-version-warning:v1:end -->")[0];
+  }
+
+  test("a new PR establishes a snapshot without inventing a change", () => {
+    const { value: body, warnings } = compare(currentVersions);
+    expect(warnings).toEqual([]);
+    expect(body).not.toContain(warningTitle);
+    expect(body).not.toContain("comparison unavailable");
+    expect(body).toContain("<!-- azsdk-api-version-comparison:v1:");
+    expect(body).toContain("| **API versions** |");
+    expect(body.startsWith("<!-- azsdk-autopr-description:v1:start -->")).toBe(true);
+    expect(body.endsWith("<!-- azsdk-autopr-description:v1:end -->")).toBe(true);
+  });
+
+  test("shows only changed groups above details, including added and removed namespaces", () => {
+    const previous = compare(previousVersions).value;
+    const { value: body, warnings } = compare(currentVersions, previous);
+    expect(warnings).toEqual([]);
+    expect(body.indexOf(warningTitle)).toBeLessThan(body.indexOf("## SDK Generation Details"));
+    expect(body).toContain(
+      "> Review the changes below. If unintended, create a spec PR that sets the intended API version in `tspconfig.yaml`. Merging that PR will trigger SDK regeneration.",
     );
-    expect(JSON.parse(submission)).toEqual({
-      body: expected.value,
-      draft: true,
-      update: true,
+    const section = changeSection(body);
+    expect(section).toContain("| Namespace | Previous API Versions | Current API Versions |");
+    expect(section).toContain(
+      "| `Microsoft.Network` | `2026-06-01`<br>`2026-09-01-preview` | `2026-06-01`<br>`2026-10-01-preview` |",
+    );
+    expect(section).toContain("| `Microsoft.Compute` | Not present | `2026-07-01` |");
+    expect(section).toContain("| `Microsoft.Storage` | `2026-01-01` | Not present |");
+    expect(section).not.toContain("Microsoft.Unchanged");
+    expect(body.split("## SDK Generation Details")[1]).toContain("Microsoft.Unchanged");
+  });
+
+  test("ignores order and duplicate entries but preserves namespace associations and case", () => {
+    const previous = compare([
+      { version: "x", namespace: "A" },
+      { version: "y", namespace: "B" },
+    ]).value;
+    const unchanged = compare(
+      [
+        { version: "y", namespace: "B" },
+        { version: "x", namespace: "A" },
+        { version: "x", namespace: "A" },
+      ],
+      previous,
+    ).value;
+    expect(unchanged).not.toContain(warningTitle);
+    const changed = compare(
+      [
+        { version: "y", namespace: "A" },
+        { version: "x", namespace: "b" },
+      ],
+      unchanged,
+    ).value;
+    expect(changeSection(changed)).toContain("| `A` | `x` | `y` |");
+    expect(changeSection(changed)).toContain("| `B` | `y` | Not present |");
+    expect(changeSection(changed)).toContain("| `b` | Not present | `x` |");
+  });
+
+  test("does not infer namespaces or chronological ordering", () => {
+    const previous = compare([
+      { version: "z", namespace: null },
+      { version: "named", namespace: "A" },
+    ]).value;
+    const body = compare([{ version: "a" }, { version: "named", namespace: "A" }], previous).value;
+    expect(changeSection(body)).toContain("| Namespace not reported | `z` | `a` |");
+    expect(changeSection(body)).not.toContain("| `A` |");
+  });
+
+  test("does not mistake a pre-feature table for a complete baseline", () => {
+    const previous = renderedBody({ ApiVersionsJson: JSON.stringify(previousVersions) });
+    const { value: body, warnings } = compare(currentVersions, previous);
+    expect(warnings).toContainEqual(expect.stringContaining("API Versions comparison unavailable"));
+    expect(body).not.toContain(warningTitle);
+    expect(compare(currentVersions, body).warnings).toEqual([]);
+    expect(compare(previousVersions, body).value).toContain(warningTitle);
+  });
+
+  test("keeps an unresolved warning across repeated runs and clears only on return to its baseline", () => {
+    const baseline = compare(previousVersions).value;
+    const changed = compare(currentVersions, baseline).value;
+    const repeated = compare(currentVersions, changed).value;
+    expect(repeated).toBe(changed);
+    const resolved = compare([...previousVersions].reverse(), repeated).value;
+    expect(resolved).not.toContain(warningTitle);
+    expect(resolved).not.toContain("comparison unavailable");
+  });
+
+  test("updates a pending warning against the original baseline, not the latest repeat", () => {
+    const baseline = compare([{ version: "a", namespace: "A" }]).value;
+    const changed = compare([{ version: "b", namespace: "A" }], baseline).value;
+    const updated = compare([{ version: "c", namespace: "A" }], changed).value;
+    expect(changeSection(updated)).toContain("| `A` | `a` | `c` |");
+    expect(changeSection(updated)).not.toContain("`b`");
+  });
+
+  test("unknown current data retains an existing warning without mistaking partial data for removals", () => {
+    const baseline = compare(previousVersions).value;
+    const changed = compare(currentVersions, baseline).value;
+    const { value: unknown, warnings } = compare([], changed, { ApiVersionsComplete: false });
+    expect(warnings).toContainEqual(expect.stringContaining("API Versions comparison unavailable"));
+    expect(changeSection(unknown)).toBe(changeSection(changed));
+    expect(unknown).toContain("The warning table retains the last verified comparison");
+    const stillChanged = compare(currentVersions, unknown).value;
+    expect(changeSection(stillChanged)).toBe(changeSection(changed));
+    expect(stillChanged).not.toContain("comparison unavailable");
+    const restored = compare(previousVersions, unknown).value;
+    expect(restored).not.toContain(warningTitle);
+  });
+
+  test.each(["", "legacy unstructured body", "pre-feature v1 without API versions"])(
+    "unknown previous metadata emits a diagnostic, not a version-change warning: %s",
+    (previous) => {
+      const { value: body, warnings } = compare(
+        currentVersions,
+        previous.startsWith("pre-feature") ? renderedBody() : previous,
+        {
+          PreviousPullRequestState: "existing",
+        },
+      );
+      expect(warnings).toContainEqual(
+        expect.stringContaining("API Versions comparison unavailable"),
+      );
+      expect(body).not.toContain(warningTitle);
+      expect(body).not.toContain("| Namespace | Previous API Versions");
+      const next = compare(currentVersions, body).value;
+      expect(next).not.toContain("comparison unavailable");
+    },
+  );
+
+  test.each(["not JSON", '[{"version":"x"},{"version":123}]'])(
+    "malformed current data is unknown even when marked complete: %s",
+    (versions) => {
+      const baseline = compare(previousVersions).value;
+      const { value: body, warnings } = compare([], baseline, { ApiVersionsJson: versions });
+      expect(warnings).toContainEqual(
+        expect.stringContaining("API Versions comparison unavailable"),
+      );
+      expect(body).not.toContain(warningTitle);
+      expect(compare(previousVersions, body).warnings).toContainEqual(
+        expect.stringContaining("API Versions comparison unavailable"),
+      );
+    },
+  );
+
+  test("explicitly complete empty snapshots represent genuine additions or removals", () => {
+    const empty = compare([]).value;
+    const added = compare([{ version: "x" }], empty).value;
+    expect(changeSection(added)).toContain("| Namespace not reported | Not present | `x` |");
+    const removed = compare([], compare([{ version: "x" }]).value).value;
+    expect(changeSection(removed)).toContain("| Namespace not reported | `x` | Not present |");
+  });
+
+  test("a failed prior-PR read cannot silently declare a previous warning resolved", () => {
+    const { value: first, warnings } = compare(currentVersions, "", {
+      PreviousPullRequestState: "unknown",
     });
-    expect(warnings).toEqual(expected.warnings);
+    expect(warnings).toContainEqual(
+      expect.stringContaining("Any earlier API Versions warning remains unresolved"),
+    );
+    const next = compare(currentVersions, first);
+    expect(next.warnings).toContainEqual(expect.stringContaining("comparison unavailable"));
+    expect(next.value).not.toContain(warningTitle);
+  });
+
+  test("malformed persisted state preserves the last warning and an unresolved diagnostic", () => {
+    const baseline = compare(previousVersions).value;
+    const changed = compare(currentVersions, baseline).value;
+    const damaged = changed.replace(
+      /<!-- azsdk-api-version-comparison:v1:[A-Za-z0-9+/=]+ -->/,
+      "<!-- azsdk-api-version-comparison:v1:bm90LWpzb24= -->",
+    );
+    const unknown = compare(currentVersions, damaged);
+    expect(unknown.warnings).toContainEqual(expect.stringContaining("state is malformed"));
+    expect(changeSection(unknown.value)).toBe(changeSection(changed));
+    const next = compare(currentVersions, unknown.value);
+    expect(changeSection(next.value)).toBe(changeSection(changed));
+    expect(next.value).toContain("comparison unavailable");
+  });
+
+  test("escapes comparison cells and keeps HTML comment delimiters out of stored metadata", () => {
+    const namespace = "A|`B\n--> <!--unexpected-->";
+    const baseline = compare([{ version: "a|b", namespace }]).value;
+    const body = compare([{ version: "c``d", namespace }], baseline).value;
+    expect(changeSection(body)).toContain("``A\\|`B --> <!--unexpected-->``");
+    expect(changeSection(body)).toContain("`a\\|b`");
+    expect(changeSection(body)).toContain("```c``d```");
+    expect(body.match(/<!-- azsdk-api-version-comparison:v1:/g)).toHaveLength(1);
+    expect(compare([{ version: "c``d", namespace }], body).value).toBe(body);
   });
 });
 
