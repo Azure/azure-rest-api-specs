@@ -16,6 +16,7 @@ import "./models/dataflows/dataflowProfiles.tsp";
 import "./models/dataflows/dataflows.tsp";
 import "./models/dataflows/dataflowGraphs.tsp";
 import "./models/registryEndpoints/registryEndpoint.tsp";
+import "./models/edgeRegistry/edgeRegistry.tsp";
 import "./models/akri/connectorTemplate.tsp";
 import "./models/akri/connector.tsp";
 import "./models/akri/service.tsp";
@@ -24,6 +25,7 @@ import "./models/akri/aioConnectorConfiguration.tsp";
 import "./models/akri/aioApplicationConfiguration.tsp";
 import "./models/ai/mcpServerConnection.tsp";
 import "./models/ai/mcpAuthorizationPolicy.tsp";
+import "./models/ai/mcpGateway.tsp";
 import "./client.tsp";
 
 using TypeSpec.Http;
@@ -68,10 +70,10 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2026-10-01`,
 
-  /** 2026-11-01-preview */
+  /** 2026-12-01-preview */
   @Azure.Core.previewVersion
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  `2026-11-01-preview`,
+  `2026-12-01-preview`,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -173,6 +175,24 @@ interface RegistryEndpoint {
   listByInstanceResource is ArmResourceListByParent<RegistryEndpointResource>;
 }
 
+@armResourceOperations
+@added(Versions.`2026-12-01-preview`)
+interface EdgeRegistry {
+  get is ArmResourceRead<EdgeRegistryResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<EdgeRegistryResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<EdgeRegistryResource>;
+  listByInstanceResource is ArmResourceListByParent<EdgeRegistryResource>;
+}
+
+@armResourceOperations
+@added(Versions.`2026-12-01-preview`)
+interface McpGateway {
+  get is ArmResourceRead<McpGatewayResource>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<McpGatewayResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<McpGatewayResource>;
+  listByInstanceResource is ArmResourceListByParent<McpGatewayResource>;
+}
+
 // /instance/akriConnectorTemplates resource Operations
 @armResourceOperations
 @added(Versions.`2025-07-01-preview`)
@@ -205,7 +225,7 @@ interface AkriService {
 
 // /instance/mcpServerConnections resource Operations
 @armResourceOperations
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 interface McpServerConnection {
   get is ArmResourceRead<McpServerConnectionResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<McpServerConnectionResource>;
@@ -215,7 +235,7 @@ interface McpServerConnection {
 
 // /instance/mcpAuthorizationPolicies resource Operations
 @armResourceOperations
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 interface McpAuthorizationPolicy {
   get is ArmResourceRead<McpAuthorizationPolicyResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<McpAuthorizationPolicyResource>;
@@ -225,7 +245,7 @@ interface McpAuthorizationPolicy {
 
 // /instance/akriApplicationProfiles resource operations
 @armResourceOperations
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 interface AioApplicationProfile {
   get is ArmResourceRead<AioApplicationProfileResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AioApplicationProfileResource>;
@@ -235,7 +255,7 @@ interface AioApplicationProfile {
 
 // /instance/aioApplicationDefinitions resource operations
 @armResourceOperations
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 interface AioApplicationDefinition {
   get is ArmResourceRead<AioApplicationDefinitionResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AioApplicationDefinitionResource>;
@@ -245,7 +265,7 @@ interface AioApplicationDefinition {
 
 // /instance/akriApplicationProfiles/akriConnectorApplicationConfigurations resource operations
 @armResourceOperations
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 interface AioConnectorApplicationConfiguration {
   get is ArmResourceRead<AioConnectorApplicationConfigurationResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AioConnectorApplicationConfigurationResource>;
@@ -255,7 +275,7 @@ interface AioConnectorApplicationConfiguration {
 
 // /instance/aioApplicationDefinitions/aioConnectorConfigurations resource operations
 @armResourceOperations
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 interface AioConnectorConfiguration {
   get is ArmResourceRead<AioConnectorConfigurationResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AioConnectorConfigurationResource>;
@@ -265,7 +285,7 @@ interface AioConnectorConfiguration {
 
 // /instance/akriApplicationProfiles/akriEdgeApplicationConfigurations resource operations
 @armResourceOperations
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 interface AioApplicationConfigurationV1 {
   get is ArmResourceRead<AioApplicationConfigurationV1Resource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AioApplicationConfigurationV1Resource>;
@@ -275,7 +295,7 @@ interface AioApplicationConfigurationV1 {
 
 // /instance/aioApplicationDefinitions/aioApplicationConfigurations resource operations
 @armResourceOperations
-@added(Versions.`2026-11-01-preview`)
+@added(Versions.`2026-12-01-preview`)
 interface AioApplicationConfiguration {
   get is ArmResourceRead<AioApplicationConfigurationResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AioApplicationConfigurationResource>;

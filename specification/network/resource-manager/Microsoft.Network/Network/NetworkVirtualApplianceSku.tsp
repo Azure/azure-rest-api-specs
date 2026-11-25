@@ -1,0 +1,63 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./shared-models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Network;
+/**
+ * Definition of the NetworkVirtualApplianceSkus resource.
+ */
+@featureFile(Features.virtualNetwork)
+@subscriptionResource
+@summary("Available NetworkVirtualApplianceSkus")
+model NetworkVirtualApplianceSku
+  is ResourceInstance<NetworkVirtualApplianceSkuPropertiesFormat> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
+  @visibility(Lifecycle.Read)
+  @path
+  @key("skuName")
+  @segment("networkVirtualApplianceSkus")
+  name: string;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  etag?: string;
+}
+
+@featureFile(Features.virtualNetwork)
+@armResourceOperations(#{ omitTags: true })
+interface NetworkVirtualApplianceSkus {
+  /**
+   * Retrieves a single available sku for network virtual appliance.
+   */
+  @tag("VirtualApplianceSkus")
+  get is ArmResourceRead<
+    NetworkVirtualApplianceSku,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
+  >;
+
+  /**
+   * List all SKUs available for a virtual appliance.
+   */
+  @tag("VirtualApplianceSkus")
+  list is ArmResourceListByParent<
+    NetworkVirtualApplianceSku,
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
+  >;
+}
+
+@@doc(NetworkVirtualApplianceSku.name, "Name of the Sku.");
+@@doc(
+  NetworkVirtualApplianceSku.properties,
+  "NetworkVirtualApplianceSku properties."
+);

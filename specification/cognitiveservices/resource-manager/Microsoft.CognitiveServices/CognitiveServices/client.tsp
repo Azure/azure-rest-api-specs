@@ -1227,8 +1227,20 @@ op regenerateKeyCustom(
   "csharp"
 );
 @@clientName(SshSettings.adminEnabled, "IsAdminEnabled", "csharp");
+@@clientName(AttachedAksClusterListItem.type, "ResourceType", "csharp");
+@@clientName(
+  AttachedAksClusterHealthComponent.lastObservedAtUtc,
+  "LastObservedOn",
+  "csharp"
+);
+@@clientName(
+  AttachedAksClusterHealthStatus.lastObservedAtUtc,
+  "LastObservedOn",
+  "csharp"
+);
 
 // Type changes: use standard ARM types for etag, location, identity
+@@alternateType(AttachedAksClusterListItem.type, armResourceType, "csharp");
 @@alternateType(ArcDeployment.etag, eTag, "csharp");
 @@alternateType(Compute.etag, eTag, "csharp");
 @@alternateType(ComputeProperties.location, azureLocation, "csharp");

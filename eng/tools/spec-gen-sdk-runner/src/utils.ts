@@ -227,11 +227,6 @@ export function findReadmeFiles(directory: string): string[] {
   return findFilesRecursive(directory, "readme.md");
 }
 
-export function getArgumentValue(args: string[], flag: string, defaultValue: string): string {
-  const index = args.indexOf(flag);
-  return index !== -1 && args[index + 1] ? args[index + 1] : defaultValue;
-}
-
 export function isPrivateSpecRepo(specRepoHttpsUrl: string): boolean {
   const normalizedUrl = specRepoHttpsUrl
     .toLowerCase()

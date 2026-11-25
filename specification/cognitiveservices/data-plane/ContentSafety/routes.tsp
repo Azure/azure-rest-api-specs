@@ -168,19 +168,19 @@ interface TextBlocklists {
 
 @added(ContentSafety.Versions.v2026_09_01_preview)
 @route("/provenance")
-@doc("Content Provenance Detection operations that inspect media for Microsoft-issued C2PA and imperceptible watermark signals indicating the content was created or modified using AI.")
+@doc("Content Provenance Detection operations that inspect image, audio, video, and text content for signals indicating the content was created or modified using AI: Microsoft-issued C2PA credentials, imperceptible watermarks in media, and AI declarations in metadata.")
 interface ContentProvenanceOperations {
   @summary("Get Content Provenance Detection Status")
   @doc("Gets the status, result, or error of an asynchronous Content Provenance Detection operation.")
   getOperationStatus is ProvenanceResourceOps.ResourceRead<ProvenanceDetectOperation>;
 
   @summary("Start Content Provenance Detection")
-  @doc("Starts an asynchronous Content Provenance Detection operation that inspects the supplied media for Microsoft-issued C2PA and imperceptible watermark signals indicating the content was created or modified using AI.")
+  @doc("Starts an asynchronous Content Provenance Detection operation that inspects the supplied image, audio, video, or text content for signals indicating the content was created or modified using AI: Microsoft-issued C2PA credentials, imperceptible watermarks in media, and AI declarations in metadata.")
   @route(":detect")
   @pollingOperation(ContentProvenanceOperations.getOperationStatus)
   detect is Azure.Core.LongRunningRpcOperation<
     {
-      @doc("Options describing the media to inspect using Content Provenance Detection.")
+      @doc("Options describing the content to inspect using Content Provenance Detection.")
       @bodyRoot
       options: DetectProvenanceOptions;
     },

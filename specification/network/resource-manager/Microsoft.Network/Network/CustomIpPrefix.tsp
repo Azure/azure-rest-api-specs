@@ -1,0 +1,118 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./shared-models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Network;
+/**
+ * Custom IP prefix resource.
+ */
+@featureFile(Features.virtualNetwork)
+model CustomIpPrefix is ResourceInstance<CustomIpPrefixPropertiesFormat> {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
+  @visibility(Lifecycle.Read)
+  @path
+  @key("customIpPrefixName")
+  @segment("customIpPrefixes")
+  name: string;
+
+  /**
+   * The extended location of the custom IP prefix.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  extendedLocation?: ExtendedLocation;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /** A list of availability zones denoting where the resource needs to come from. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  zones?: string[];
+}
+
+@featureFile(Features.virtualNetwork)
+@armResourceOperations
+interface CustomIpPrefixes {
+  /**
+   * Gets the specified custom IP prefix in a specified resource group.
+   */
+  get is ArmResourceRead<
+    CustomIpPrefix,
+    Parameters = {
+      /**
+       * Expands referenced resources.
+       */
+      @query("$expand")
+      $expand?: string;
+    },
+    Error = CloudError
+  >;
+
+  /**
+   * Creates or updates a custom IP prefix.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    CustomIpPrefix,
+    LroHeaders = ArmLroLocationHeader<FinalResult = CustomIpPrefix> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
+  >;
+
+  /**
+   * Updates custom IP prefix tags.
+   */
+  @patch(#{ implicitOptionality: false })
+  updateTags is ArmCustomPatchSync<
+    CustomIpPrefix,
+    PatchModel = TagsObject,
+    Error = CloudError
+  >;
+
+  /**
+   * Deletes the specified custom IP prefix.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  delete is ArmResourceDeleteWithoutOkAsync<
+    CustomIpPrefix,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
+
+  /**
+   * Gets all custom IP prefixes in a resource group.
+   */
+  list is ArmResourceListByParent<CustomIpPrefix, Error = CloudError>;
+
+  /**
+   * Gets all the custom IP prefixes in a subscription.
+   */
+  listAll is ArmListBySubscriptionWithResourceName<
+    CustomIpPrefix,
+    OverrideResourceName = "CustomIpPrefix",
+    Error = CloudError
+  >;
+}
+
+@@doc(CustomIpPrefix.name, "The name of the custom IP prefix.");
+@@doc(CustomIpPrefix.properties, "Custom IP prefix properties.");
+@@doc(
+  CustomIpPrefixes.createOrUpdate::parameters.resource,
+  "Parameters supplied to the create or update custom IP prefix operation."
+);
+@@doc(
+  CustomIpPrefixes.updateTags::parameters.properties,
+  "Parameters supplied to update custom IP prefix tags."
+);
