@@ -8913,6 +8913,12 @@ model InterconnectBlockProperties {
    */
   @visibility(Lifecycle.Read)
   timeCreated?: utcDateTime;
+
+  /**
+   * Specifies the settings to enable sharing across subscriptions for the Interconnect Block resource. The Interconnect Block can be shared only with subscriptions belonging to the same Microsoft Entra ID tenant. Sharing across tenants is not supported. Removing a subscription from the sharing profile prevents new virtual machines in that subscription from being associated with the Interconnect Block; virtual machines that are already associated remain associated. **Note:** Minimum api-version: 2026-09-01.
+   */
+  @added(Versions.v2026_09_01)
+  sharingProfile?: ResourceSharingProfile;
 }
 
 /**
@@ -8935,7 +8941,7 @@ model InterconnectBlockInstanceView {
 }
 
 /**
- * Specifies information about the Interconnect Block. Only tags and sku.capacity can be updated.
+ * Specifies information about the Interconnect Block. Only tags, sku.capacity and properties.sharingProfile can be updated. **Note:** Minimum api-version for properties.sharingProfile: 2026-09-01.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Consistent with established Compute RP patterns (e.g. DedicatedHost, VirtualMachine, CapacityReservation) for SDK and behavioral consistency."
 @added(Versions.v2026_03_01)
@@ -8944,6 +8950,23 @@ model InterconnectBlockUpdate extends UpdateResource {
    * SKU of the resource for which capacity needs to be pre-allocated. Only `sku.capacity` is mutable; `sku.name` is immutable.
    */
   sku?: Sku;
+
+  /**
+   * The updatable properties of the Interconnect Block.
+   */
+  @added(Versions.v2026_09_01)
+  properties?: InterconnectBlockUpdateProperties;
+}
+
+/**
+ * The updatable properties of the Interconnect Block.
+ */
+@added(Versions.v2026_09_01)
+model InterconnectBlockUpdateProperties {
+  /**
+   * Specifies the settings to enable sharing across subscriptions for the Interconnect Block resource. The Interconnect Block can be shared only with subscriptions belonging to the same Microsoft Entra ID tenant. Sharing across tenants is not supported. Removing a subscription from the sharing profile prevents new virtual machines in that subscription from being associated with the Interconnect Block; virtual machines that are already associated remain associated. **Note:** Minimum api-version: 2026-09-01.
+   */
+  sharingProfile?: ResourceSharingProfile;
 }
 
 /**
@@ -9732,7 +9755,7 @@ model CapacityReservationUtilization {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ResourceSharingProfile {
   /**
-   * Specifies an array of subscription resource IDs that capacity reservation group is shared with. Block Capacity Reservations does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.
+   * Specifies an array of subscription resource IDs that the resource is shared with, in the form '/subscriptions/{subscriptionId}'. Refer to the sharingProfile property of the containing resource for the supported scenarios and the minimum api-version.
    */
   subscriptionIds?: SubResource[];
 }
