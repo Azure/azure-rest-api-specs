@@ -2260,7 +2260,7 @@ model RecoveryProfile {
    * References to explicitly versioned gallery scripts that are
    * pre-staged for execution from Windows Recovery Environment (WinRE).
    * Supports the following gallery script version reference formats:
-   * - Private galleries: `/galleries/{gallery}/scripts/{script}/versions/{version}`.
+   * - Private galleries with role-based access control: `/subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.Compute/galleries/{gallery}/scripts/{script}/versions/{version}`.
    * - Direct-shared galleries: `/sharedGalleries/{galleryUniqueName}/scripts/{script}/versions/{version}`.
    * - Community galleries: `/communityGalleries/{galleryPublicName}/scripts/{script}/versions/{version}`.
    * The Compute control plane validates the references and applicable access
@@ -2268,8 +2268,10 @@ model RecoveryProfile {
    * This property may only be specified when Windows recovery is enabled.
    * Each entry must identify an explicit gallery-script version, and the list
    * cannot contain multiple versions of the same gallery script.
-   * Omitting this property on update preserves the existing remediation set;
-   * specifying an empty array clears it.
+   * When omitted from either a PUT or PATCH request while Windows recovery
+   * remains enabled, the existing remediation set is preserved. To clear the
+   * existing remediation set, specify an empty array. Disabling Windows recovery
+   * also clears the existing remediation set.
    */
   wellKnownGalleryScriptRemediations?: string[];
 }
