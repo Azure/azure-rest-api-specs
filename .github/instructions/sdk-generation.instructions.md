@@ -146,7 +146,7 @@ Follow the steps in [typespec to sdk](../../eng/common/instructions/azsdk-tools/
 
 ## How to pin/unpin api-version for a TypeSpec project
 
-This is optional and is not part of the default SDK generation workflow. SDK emitters generate the latest API version in the TypeSpec project unless `api-version` is set in `tspconfig.yaml`. Pin `api-version` in `tspconfig.yaml` only if the SDK needs to be generated from an API version that is not the latest, for example to regenerate and release an SDK for an older API version after an emitter bug fix.
+This is optional and is not part of the default SDK generation workflow. SDK emitters generate the SDK using the latest API version in the TypeSpec project unless `api-version` is set in `tspconfig.yaml`. Pin `api-version` in `tspconfig.yaml` only if the SDK needs to be generated from an API version that is not the latest, for example to regenerate and release an SDK for an older API version after an emitter bug fix.
 
 ### Pin api-version
 
