@@ -11,9 +11,22 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.DocumentDB;
 
-/** Supplies the global secondary index route for the SQL container creation contract. */
+/** Supplies the source container route without changing the existing SQL container key. */
 @added(Versions.v2026_09_01_preview)
 @parentResource(SqlDatabaseGetResults)
+model SqlGlobalSecondaryIndexSourceRoute
+  is ProxyResource<SqlContainerGetProperties> {
+  ...ResourceNameParameter<
+    Resource = SqlGlobalSecondaryIndexSourceRoute,
+    KeyName = "sourceContainerName",
+    SegmentName = "containers",
+    NamePattern = ""
+  >;
+}
+
+/** Supplies the global secondary index route for the SQL container creation contract. */
+@added(Versions.v2026_09_01_preview)
+@parentResource(SqlGlobalSecondaryIndexSourceRoute)
 model SqlGlobalSecondaryIndexRoute is ProxyResource<SqlContainerGetProperties> {
   ...ResourceNameParameter<
     Resource = SqlGlobalSecondaryIndexRoute,
@@ -28,7 +41,7 @@ model SqlGlobalSecondaryIndexRoute is ProxyResource<SqlContainerGetProperties> {
 @added(Versions.v2026_09_01_preview)
 @armResourceOperations(#{ omitTags: true })
 interface SqlGlobalSecondaryIndexGetResultsOperationGroup {
-  /** Creates an Azure Cosmos DB SQL global secondary index container. Container updates are not supported. Requests without a materialized view definition return 400 Bad Request. */
+  /** Creates an Azure Cosmos DB SQL global secondary index container under a source container. Requires the Microsoft.DocumentDB/databaseAccounts/sqlDatabases/container/globalSecondaryIndexes/write action. Container updates are not supported. Requests without a materialized view definition return 400 Bad Request. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "This endpoint reuses the SQL container PUT contract, including its 200 and 202 responses."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "The resource model supplies only the alternate route; the response intentionally reuses SqlContainerGetResults."
   createSqlGlobalSecondaryIndex is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
@@ -49,6 +62,10 @@ interface SqlGlobalSecondaryIndexGetResultsOperationGroup {
 }
 
 @@doc(SqlGlobalSecondaryIndexRoute.name, "Cosmos DB container name.");
+@@doc(
+  SqlGlobalSecondaryIndexSourceRoute.name,
+  "Cosmos DB source container name."
+);
 @@doc(
   SqlGlobalSecondaryIndexGetResultsOperationGroup.createSqlGlobalSecondaryIndex::parameters.resource,
   "The parameters to provide for the current SQL container."
