@@ -42,6 +42,7 @@ interface NamespaceTopics {
   /**
    * Asynchronously updates a namespace topic with the specified parameters.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Update a namespace topic.")
   @Azure.Core.useFinalStateVia("azure-async-operation")

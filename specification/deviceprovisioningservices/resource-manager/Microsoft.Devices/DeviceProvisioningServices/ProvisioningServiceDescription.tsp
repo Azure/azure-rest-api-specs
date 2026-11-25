@@ -125,6 +125,7 @@ interface ProvisioningServiceDescriptions {
   /**
    * Update an existing provisioning service's tags. to update other fields use the CreateOrUpdate method
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ProvisioningServiceDescription,

@@ -52,6 +52,7 @@ interface DatadogMonitorResources {
   /**
    * Update a monitor resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @summary("Update a monitor resource.")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<

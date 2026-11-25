@@ -42,6 +42,7 @@ interface EmailServices {
   /**
    * Operation to update an existing EmailService.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @summary("Update")
   @tag("EmailServices")
   @patch(#{ implicitOptionality: false })

@@ -75,6 +75,7 @@ interface ServiceResources {
   /**
    * Update a Service Fabric service resource with the specified name.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "servicefabric is brownfield service with existing non-standard 202 response body"
   @summary("Updates a Service Fabric service resource.")
   @tag("Service")

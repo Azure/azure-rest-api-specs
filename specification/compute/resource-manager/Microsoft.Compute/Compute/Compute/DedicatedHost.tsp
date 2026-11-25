@@ -62,6 +62,7 @@ interface DedicatedHosts {
   /**
    * Update a dedicated host .
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @tag("DedicatedHosts")
   @patch(#{ implicitOptionality: false })
   update is ComputeCustomPatchAsync<

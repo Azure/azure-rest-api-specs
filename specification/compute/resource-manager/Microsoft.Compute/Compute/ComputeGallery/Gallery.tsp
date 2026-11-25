@@ -77,6 +77,7 @@ interface Galleries {
   /**
    * Update a Shared Image Gallery.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @tag("Galleries")
   @patch(#{ implicitOptionality: false })
   update is ComputeCustomPatchAsync<

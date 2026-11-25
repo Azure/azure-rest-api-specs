@@ -46,6 +46,7 @@ interface ResourceSyncRules {
   /**
    * Updates a Resource Sync Rule with the specified Resource Sync Rule name in the specified Resource Group, Subscription and Custom Location name.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @summary("Updates a Resource Sync Rule.")
   @tag("resourceSyncRules")
   @patch(#{ implicitOptionality: false })

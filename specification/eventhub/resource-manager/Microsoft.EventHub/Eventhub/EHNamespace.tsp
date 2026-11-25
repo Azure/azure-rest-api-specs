@@ -74,6 +74,7 @@ interface EHNamespaces {
   /**
    * Creates or updates a namespace. Once created, this namespace's resource manifest is immutable. This operation is idempotent.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing long-running operation does not use the standard location header pattern as defined in the original OpenAPI specification."
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<

@@ -46,6 +46,7 @@ interface Pipelines {
   /**
    * Applies partial updates to an existing Pipeline resource. This operation supports patch semantics and returns the updated Pipeline.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Prior OpenAPI2 Json spec provides the resource back in the LRO response."
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<

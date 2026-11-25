@@ -57,6 +57,7 @@ interface KubeEnvironments {
   /**
    * Description for Creates or updates a Kubernetes Environment.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @summary("Creates or updates a Kubernetes Environment.")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
