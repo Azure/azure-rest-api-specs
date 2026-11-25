@@ -2,9 +2,11 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { CheckConclusion, CheckStatus, CommitStatusState } from "../../shared/src/github.ts";
 import { fullGitSha } from "../../shared/test/examples.ts";
 import {
+  getUnverifiedOverrideContexts,
   MONITORED_STATUS_CHECKS,
   selectChecksForEvent,
   setStatusImpl,
+  shouldSyncStatusesForEvent,
   syncMonitoredStatusesImpl,
 } from "../src/set-status.ts";
 import { createMockContext, createMockCore, createMockGithub } from "./mocks.ts";
@@ -551,20 +553,138 @@ describe("syncMonitoredStatusesImpl", () => {
     });
   });
 
-  it("does not request ARM signoff recheck for non-ARM or pending-only status transitions", async () => {
+  it("requests ARM signoff recheck when Avocado transitions to pending or on retry with unchanged status", async () => {
     const core = createMockCore();
     const github = createMockGithub();
+    github.rest.repos.getCombinedStatusForRef.mockResolvedValue({
+      data: {
+        statuses: [
+          {
+            context: "Swagger Avocado",
+            state: CommitStatusState.SUCCESS,
+            description: "Found label 'Approved-Avocado'",
+            target_url: "https://test.com/avocado-run",
+          },
+        ],
+        total_count: 1,
+      },
+    });
+
+    // Removing Approved-Avocado while analyzer hasn't finished moves success -> pending.
+    const revocation = await syncMonitoredStatusesImpl({
+      owner: "test-owner",
+      repo: "test-repo",
+      head_sha: fullGitSha,
+      issue_number: 123,
+      target_url: "https://test.com/current-run",
+      github,
+      core,
+      checks: MONITORED_STATUS_CHECKS.filter((c) => c.requiredStatusName === "Swagger Avocado"),
+    });
+    expect(revocation).toEqual({
+      changedContexts: ["Swagger Avocado"],
+      armSignoffRecheckNeeded: true,
+    });
+
+    // Retrying an Avocado-targeted event after the status was already written still requests recheck.
     github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
       data: [
         {
-          name: "TypeSpec Suppressions - Analyze Code",
+          name: "Swagger Avocado - Analyze Code",
           status: CheckStatus.COMPLETED,
           conclusion: CheckConclusion.SUCCESS,
           updated_at: "2026-01-01",
-          html_url: "https://test.com/suppressions-run",
+          html_url: "https://test.com/avocado-run",
         },
       ],
     });
+    github.rest.repos.getCombinedStatusForRef.mockResolvedValue({
+      data: {
+        statuses: [
+          {
+            context: "Swagger Avocado",
+            state: CommitStatusState.SUCCESS,
+            description: null,
+            target_url: "https://test.com/avocado-run",
+          },
+        ],
+        total_count: 1,
+      },
+    });
+    const retry = await syncMonitoredStatusesImpl({
+      owner: "test-owner",
+      repo: "test-repo",
+      head_sha: fullGitSha,
+      issue_number: 123,
+      target_url: "https://test.com/current-run",
+      github,
+      core,
+      checks: MONITORED_STATUS_CHECKS.filter((c) => c.requiredStatusName === "Swagger Avocado"),
+      eventTargetsArmSignoff: true,
+    });
+    expect(retry).toEqual({
+      changedContexts: [],
+      armSignoffRecheckNeeded: true,
+    });
+  });
+
+  it("fails closed on unverified TypeSpec suppression approval and skips extra API calls for already-recorded failed runs", async () => {
+    const core = createMockCore();
+    const github = createMockGithub();
+    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+      data: [{ name: "typespec-suppressions-approved" }],
+    });
+    github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
+      data: [
+        {
+          id: 777,
+          name: "TypeSpec Suppressions - Analyze Code",
+          status: CheckStatus.COMPLETED,
+          conclusion: CheckConclusion.FAILURE,
+          updated_at: "2026-01-01",
+          html_url: "https://test.com/actions/runs/777",
+        },
+        {
+          id: 888,
+          name: "Swagger ModelValidation - Analyze Code",
+          status: CheckStatus.COMPLETED,
+          conclusion: CheckConclusion.FAILURE,
+          updated_at: "2026-01-01",
+          html_url: "https://test.com/actions/runs/888",
+        },
+      ],
+    });
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: [{ name: "job-summary" }],
+    });
+    github.rest.repos.getCombinedStatusForRef.mockResolvedValue({
+      data: {
+        statuses: [
+          {
+            context: "Swagger ModelValidation",
+            state: CommitStatusState.FAILURE,
+            description: null,
+            target_url: "https://test.com/actions/runs/888/job/999?pr=123",
+          },
+        ],
+        total_count: 1,
+      },
+    });
+
+    const unverified = getUnverifiedOverrideContexts(
+      Object.assign(createMockContext(), {
+        eventName: "workflow_run",
+        payload: {
+          action: "completed",
+          workflow_run: {
+            name: "TypeSpec Suppressions - Analyze Code",
+            conclusion: CheckConclusion.FAILURE,
+          },
+        },
+      }),
+      { suppressionsJobResult: "success", suppressionsApprovalVerified: "false" },
+    );
+    expect([...unverified]).toEqual(["TypeSpec Suppressions"]);
 
     const result = await syncMonitoredStatusesImpl({
       owner: "test-owner",
@@ -575,13 +695,51 @@ describe("syncMonitoredStatusesImpl", () => {
       github,
       core,
       checks: MONITORED_STATUS_CHECKS.filter((c) =>
-        ["Swagger Avocado", "TypeSpec Suppressions"].includes(c.requiredStatusName),
+        ["TypeSpec Suppressions", "Swagger ModelValidation"].includes(c.requiredStatusName),
       ),
+      unverifiedOverrideContexts: unverified,
     });
 
+    // Only TypeSpec Suppressions queried artifacts (ModelValidation reused its existing failed job URL).
+    expect(github.rest.actions.listWorkflowRunArtifacts).toHaveBeenCalledTimes(1);
+    expect(github.rest.repos.createCommitStatus).toHaveBeenCalledExactlyOnceWith({
+      owner: "test-owner",
+      repo: "test-repo",
+      sha: fullGitSha,
+      state: CommitStatusState.FAILURE,
+      context: "TypeSpec Suppressions",
+      target_url: "https://test.com/actions/runs/777",
+    });
     expect(result).toEqual({
-      changedContexts: ["Swagger Avocado", "TypeSpec Suppressions"],
+      changedContexts: ["TypeSpec Suppressions"],
       armSignoffRecheckNeeded: false,
     });
+  });
+
+  it("syncs statuses on open PR and non-skipped workflow_run events, but skips workflow_dispatch", () => {
+    expect(
+      shouldSyncStatusesForEvent(
+        Object.assign(createMockContext(), {
+          eventName: "workflow_dispatch",
+          payload: {},
+        }),
+      ),
+    ).toBe(false);
+    expect(
+      shouldSyncStatusesForEvent(
+        Object.assign(createMockContext(), {
+          eventName: "workflow_run",
+          payload: { workflow_run: { conclusion: CheckConclusion.SUCCESS } },
+        }),
+      ),
+    ).toBe(true);
+    expect(
+      shouldSyncStatusesForEvent(
+        Object.assign(createMockContext(), {
+          eventName: "pull_request_target",
+          payload: { pull_request: { state: "closed" } },
+        }),
+      ),
+    ).toBe(false);
   });
 });

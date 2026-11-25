@@ -74,6 +74,8 @@ jobs:
        (github.event.label.name == 'typespec-suppressions-approved' ||
         github.event.label.name == 'typespec-suppressions-review-required'))
     runs-on: ubuntu-24.04
+    outputs:
+      approval_verified: ${{ steps.post-suppressions.outputs.approval_verified }}
     permissions:
       actions: read
       contents: read
@@ -88,7 +90,8 @@ jobs:
       - name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
 
-      - name: Post TypeSpec suppressions review comment
+      - id: post-suppressions
+        name: Post TypeSpec suppressions review comment
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
@@ -98,6 +101,12 @@ jobs:
 
   run-summarize-checks:
     needs: post-typespec-suppressions-comment
+    # Serialize per PR head SHA so full-sync and analyzer-completion runs cannot race to overwrite
+    # commit statuses or summary comments. Each surviving run reconciles all monitored statuses so
+    # superseded pending runs never drop a status update.
+    concurrency:
+      group: summarize-checks-${{ github.event.pull_request.head.sha || github.event.workflow_run.head_sha || inputs.head_sha || github.run_id }}
+      cancel-in-progress: false
     permissions:
       actions: read
       contents: read
@@ -139,6 +148,9 @@ jobs:
       - id: sync-statuses
         name: Sync Check Statuses
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          SUPPRESSIONS_JOB_RESULT: ${{ needs.post-typespec-suppressions-comment.result }}
+          SUPPRESSIONS_APPROVAL_VERIFIED: ${{ needs.post-typespec-suppressions-comment.outputs.approval_verified }}
         with:
           script: |
             const { syncMonitoredStatuses } =
@@ -195,7 +207,12 @@ jobs:
 
   dispatch-arm-review:
     needs: run-summarize-checks
-    if: needs.run-summarize-checks.outputs.arm_review_ready == 'true'
+    # Explicit status function required because post-typespec-suppressions-comment is an ancestor
+    # job that is skipped on most events (actions/runner#2205).
+    if: >-
+      !cancelled() &&
+      needs.run-summarize-checks.result == 'success' &&
+      needs.run-summarize-checks.outputs.arm_review_ready == 'true'
     runs-on: ubuntu-slim
     permissions:
       actions: write
@@ -225,6 +242,8 @@ jobs:
   dispatch-arm-signoff:
     needs: run-summarize-checks
     if: >-
+      !cancelled() &&
+      needs.run-summarize-checks.result == 'success' &&
       needs.run-summarize-checks.outputs.arm_signoff_recheck_needed == 'true' &&
       needs.run-summarize-checks.outputs.issue_number != '' &&
       needs.run-summarize-checks.outputs.head_sha != ''

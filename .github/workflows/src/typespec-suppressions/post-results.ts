@@ -92,6 +92,7 @@ export default async function postSuppressionsResults({ github, context, core }:
     core.info(
       `TypeSpec suppressions analysis result unavailable for ${owner}/${repo}#${issue_number}; leaving labels and comment untouched.`,
     );
+    core.setOutput("approval_verified", "false");
     return;
   }
 
@@ -132,6 +133,8 @@ export default async function postSuppressionsResults({ github, context, core }:
       );
     }
   }
+
+  core.setOutput("approval_verified", "true");
 
   await syncReviewRequiredLabel(
     github,

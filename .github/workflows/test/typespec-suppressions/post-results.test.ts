@@ -157,6 +157,7 @@ describe("post-results", () => {
     expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
     expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
     expect(commentOrUpdate).not.toHaveBeenCalled();
+    expect(mockCore.setOutput).toHaveBeenLastCalledWith("approval_verified", "false");
   });
 
   it("passes the current PR labels through for approval state", async () => {
@@ -164,6 +165,8 @@ describe("post-results", () => {
     vi.mocked(buildSuppressionsComment).mockResolvedValue(suppressionResult("BODY", true));
 
     await postSuppressionsResults(args(github));
+
+    expect(mockCore.setOutput).toHaveBeenLastCalledWith("approval_verified", "true");
 
     expect(buildSuppressionsComment).toHaveBeenCalledWith(
       github,

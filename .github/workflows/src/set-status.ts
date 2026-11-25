@@ -84,8 +84,11 @@ export const MONITORED_STATUS_CHECKS: readonly MonitoredStatusCheck[] = [
   },
 ];
 
-/** Commit statuses whose terminal transitions require re-evaluating ARM Universal Auto SignOff. */
+/** Commit statuses whose updates require re-evaluating ARM Universal Auto SignOff. */
 const ARM_SIGNOFF_STATUS_CONTEXTS = new Set(["Swagger Avocado", "Swagger LintDiff"]);
+
+const TYPESPEC_SUPPRESSIONS_STATUS_CONTEXT = "TypeSpec Suppressions";
+const TYPESPEC_SUPPRESSIONS_WORKFLOW_NAME = "TypeSpec Suppressions - Analyze Code";
 
 const PR_FULL_SYNC_ACTIONS = new Set(["opened", "synchronize", "reopened"]);
 
@@ -97,8 +100,29 @@ function matchesMonitoredWorkflow(
 }
 
 /**
- * Selects only the monitored checks affected by the incoming GitHub event so unrelated triggers
- * (e.g. other workflows, non-override labels, or `workflow_dispatch`) exit without API calls.
+ * Determines whether the incoming event should reconcile all monitored check statuses.
+ * Because `run-summarize-checks` is serialized per head SHA, reconciling all monitored checks
+ * ensures a surviving run catches updates from any pending run superseded by concurrency.
+ */
+export function shouldSyncStatusesForEvent(
+  context: Pick<Context, "eventName" | "payload">,
+): boolean {
+  if (context.eventName === "workflow_run") {
+    const workflowRun = (context.payload as WebhookEvent<"workflow-run">).workflow_run;
+    return Boolean(workflowRun && workflowRun.conclusion !== CheckConclusion.SKIPPED);
+  }
+
+  if (context.eventName === "pull_request_target") {
+    const payload = context.payload as WebhookEvent<"pull-request">;
+    return payload.pull_request?.state === "open";
+  }
+
+  return false;
+}
+
+/**
+ * Selects the monitored checks directly targeted by the triggering event (used to determine
+ * retry-safe ARM signoff eligibility without creating dispatch cycles).
  */
 export function selectChecksForEvent(
   context: Pick<Context, "eventName" | "payload">,
@@ -135,6 +159,27 @@ export function selectChecksForEvent(
   return [];
 }
 
+/**
+ * Returns status contexts whose override labels must not be honored because the upstream
+ * approval-invalidation step did not verify them for this analysis run.
+ */
+export function getUnverifiedOverrideContexts(
+  context: Pick<Context, "eventName" | "payload">,
+  env: { suppressionsJobResult?: string; suppressionsApprovalVerified?: string },
+): Set<string> {
+  const unverified = new Set<string>();
+  if (context.eventName === "workflow_run") {
+    const workflowRun = (context.payload as WebhookEvent<"workflow-run">).workflow_run;
+    if (
+      matchesMonitoredWorkflow(workflowRun?.name, TYPESPEC_SUPPRESSIONS_WORKFLOW_NAME) &&
+      (env.suppressionsJobResult !== "success" || env.suppressionsApprovalVerified !== "true")
+    ) {
+      unverified.add(TYPESPEC_SUPPRESSIONS_STATUS_CONTEXT);
+    }
+  }
+  return unverified;
+}
+
 /* v8 ignore start */
 
 /**
@@ -146,19 +191,42 @@ export async function syncMonitoredStatuses({
   context,
   core,
 }: GitHubScriptArgs): Promise<void> {
-  const checks = selectChecksForEvent(context);
-  if (checks.length === 0) {
+  if (!shouldSyncStatusesForEvent(context)) {
     core.info(
-      `No monitored check statuses apply to event '${context.eventName}:${context.payload.action ?? ""}'.`,
+      `Skipping monitored check status sync for event '${context.eventName}:${context.payload.action ?? ""}'.`,
     );
     core.setOutput("arm_signoff_recheck_needed", "false");
     return;
   }
 
   const { owner, repo, head_sha, issue_number } = await extractInputs(github, context, core);
+  if (!issue_number || !head_sha) {
+    core.warning(
+      `No PR correlation found for event '${context.eventName}:${context.payload.action ?? ""}' ` +
+        `(issue_number=${issue_number ?? "missing"}, head_sha=${head_sha || "missing"}); ` +
+        `skipping monitored check status sync.`,
+    );
+    core.setOutput("arm_signoff_recheck_needed", "false");
+    return;
+  }
+
   const target_url =
     `https://github.com/${context.repo.owner}/${context.repo.repo}` +
     `/actions/runs/${context.runId}`;
+
+  const unverifiedOverrideContexts = getUnverifiedOverrideContexts(context, {
+    suppressionsJobResult: process.env.SUPPRESSIONS_JOB_RESULT,
+    suppressionsApprovalVerified: process.env.SUPPRESSIONS_APPROVAL_VERIFIED,
+  });
+  if (unverifiedOverrideContexts.size > 0) {
+    core.warning(
+      `Failing closed on unverified override labels for: ${[...unverifiedOverrideContexts].join(", ")}`,
+    );
+  }
+
+  const eventTargetsArmSignoff = selectChecksForEvent(context).some((check) =>
+    ARM_SIGNOFF_STATUS_CONTEXTS.has(check.requiredStatusName),
+  );
 
   const result = await syncMonitoredStatusesImpl({
     owner,
@@ -168,7 +236,9 @@ export async function syncMonitoredStatuses({
     target_url,
     github,
     core,
-    checks,
+    checks: MONITORED_STATUS_CHECKS,
+    eventTargetsArmSignoff,
+    unverifiedOverrideContexts,
   });
 
   core.setOutput("arm_signoff_recheck_needed", String(result.armSignoffRecheckNeeded));
@@ -212,6 +282,22 @@ type DesiredCommitStatus = {
   hasAnalyzerRun: boolean;
 };
 
+function isSameFailedRunTarget(
+  existing: LatestCommitStatus | undefined,
+  runHtmlUrl: string,
+  expectedState: string,
+  expectedDescription: string | undefined,
+): boolean {
+  if (!existing || existing.state !== expectedState) {
+    return false;
+  }
+  if ((existing.description ?? "") !== (expectedDescription ?? "")) {
+    return false;
+  }
+  const url = existing.target_url ?? "";
+  return url === runHtmlUrl || url.startsWith(`${runHtmlUrl}/job/`);
+}
+
 async function resolveDesiredStatus({
   owner,
   repo,
@@ -222,6 +308,9 @@ async function resolveDesiredStatus({
   prLabels,
   workflowRuns,
   check,
+  existing,
+  skipUnchanged,
+  ignoreOverrides,
 }: {
   owner: string;
   repo: string;
@@ -232,6 +321,9 @@ async function resolveDesiredStatus({
   prLabels: readonly string[];
   workflowRuns: WorkflowRuns;
   check: MonitoredStatusCheck;
+  existing?: LatestCommitStatus;
+  skipUnchanged: boolean;
+  ignoreOverrides: boolean;
 }): Promise<DesiredCommitStatus> {
   const { monitoredWorkflowName, overridingLabels } = check;
   let target_url = defaultTargetUrl;
@@ -250,6 +342,20 @@ async function resolveDesiredStatus({
     );
   }
 
+  const foundOverridingLabel = ignoreOverrides
+    ? undefined
+    : overridingLabels.find((label) => prLabels.includes(label));
+  const expectedState = foundOverridingLabel
+    ? CommitStatusState.SUCCESS
+    : run?.status === CheckStatus.COMPLETED
+      ? run.conclusion === CheckConclusion.SUCCESS
+        ? CommitStatusState.SUCCESS
+        : CommitStatusState.FAILURE
+      : CommitStatusState.PENDING;
+  const expectedDescription = foundOverridingLabel
+    ? `Found label '${foundOverridingLabel}'`
+    : undefined;
+
   if (run) {
     /**
      * Update target to the "Analyze Code" run, which contains the meaningful output.
@@ -258,49 +364,52 @@ async function resolveDesiredStatus({
     target_url = run.html_url;
 
     if (run.conclusion === CheckConclusion.FAILURE) {
-      const jobSummaryArtifactName = "job-summary";
+      if (
+        skipUnchanged &&
+        isSameFailedRunTarget(existing, run.html_url, expectedState, expectedDescription)
+      ) {
+        target_url = existing?.target_url ?? run.html_url;
+      } else {
+        const jobSummaryArtifactName = "job-summary";
 
-      // Check if run has a custom job summary
-      core.info(
-        `listWorkflowRunArtifacts(${owner}, ${repo}, ${run.id}, ${jobSummaryArtifactName})`,
-      );
-      const jobSummaryArtifacts = await github.paginate(
-        github.rest.actions.listWorkflowRunArtifacts,
-        {
-          owner: owner,
-          repo: repo,
-          run_id: run.id,
-          name: jobSummaryArtifactName,
-          per_page: PER_PAGE_MAX,
-        },
-      );
+        // Check if run has a custom job summary
+        core.info(
+          `listWorkflowRunArtifacts(${owner}, ${repo}, ${run.id}, ${jobSummaryArtifactName})`,
+        );
+        const jobSummaryArtifacts = await github.paginate(
+          github.rest.actions.listWorkflowRunArtifacts,
+          {
+            owner: owner,
+            repo: repo,
+            run_id: run.id,
+            name: jobSummaryArtifactName,
+            per_page: PER_PAGE_MAX,
+          },
+        );
 
-      const hasJobSummary = jobSummaryArtifacts.length > 0;
-      core.info(`hasJobSummary: ${hasJobSummary}`);
+        const hasJobSummary = jobSummaryArtifacts.length > 0;
+        core.info(`hasJobSummary: ${hasJobSummary}`);
 
-      if (!hasJobSummary) {
-        /**
-         * Update target to point directly to the first failed job
-         * @example https://github.com/Azure/azure-rest-api-specs/actions/runs/14509047569/job/40703679014?pr=18
-         */
-        const jobs = await github.paginate(github.rest.actions.listJobsForWorkflowRun, {
-          owner,
-          repo,
-          run_id: run.id,
-          per_page: PER_PAGE_MAX,
-        });
-        const failedJobs = jobs.filter((job) => job.conclusion === CheckConclusion.FAILURE);
-        const failedJob = failedJobs[0];
-        if (failedJob?.html_url) {
-          target_url = `${failedJob.html_url}?pr=${issue_number}`;
+        if (!hasJobSummary) {
+          /**
+           * Update target to point directly to the first failed job
+           * @example https://github.com/Azure/azure-rest-api-specs/actions/runs/14509047569/job/40703679014?pr=18
+           */
+          const jobs = await github.paginate(github.rest.actions.listJobsForWorkflowRun, {
+            owner,
+            repo,
+            run_id: run.id,
+            per_page: PER_PAGE_MAX,
+          });
+          const failedJobs = jobs.filter((job) => job.conclusion === CheckConclusion.FAILURE);
+          const failedJob = failedJobs[0];
+          if (failedJob?.html_url) {
+            target_url = `${failedJob.html_url}?pr=${issue_number}`;
+          }
         }
       }
     }
   }
-
-  // Check if any overriding label is present after resolving the analyzer run so the successful
-  // status still links to its report.
-  const foundOverridingLabel = overridingLabels.find((label) => prLabels.includes(label));
 
   if (foundOverridingLabel) {
     const description = `Found label '${foundOverridingLabel}'`;
@@ -366,6 +475,8 @@ export async function syncMonitoredStatusesImpl({
   core,
   checks,
   skipUnchanged = true,
+  eventTargetsArmSignoff = false,
+  unverifiedOverrideContexts,
 }: {
   owner: string;
   repo: string;
@@ -376,6 +487,8 @@ export async function syncMonitoredStatusesImpl({
   core: Core;
   checks: readonly MonitoredStatusCheck[];
   skipUnchanged?: boolean;
+  eventTargetsArmSignoff?: boolean;
+  unverifiedOverrideContexts?: ReadonlySet<string>;
 }): Promise<{ changedContexts: string[]; armSignoffRecheckNeeded: boolean }> {
   if (!isFullGitSha(head_sha)) {
     throw new Error(`head_sha is not a valid full git SHA: '${head_sha}'`);
@@ -388,7 +501,7 @@ export async function syncMonitoredStatusesImpl({
   core.setOutput("issue_number", issue_number);
 
   if (checks.length === 0) {
-    return { changedContexts: [], armSignoffRecheckNeeded: false };
+    return { changedContexts: [], armSignoffRecheckNeeded: eventTargetsArmSignoff };
   }
 
   const [labels, workflowRuns, latestStatuses] = await Promise.all([
@@ -418,9 +531,9 @@ export async function syncMonitoredStatusesImpl({
 
   const existingByContext = new Map(latestStatuses.map((status) => [status.context, status]));
   const changedContexts: string[] = [];
-  let armSignoffRecheckNeeded = false;
 
   for (const check of checks) {
+    const existing = existingByContext.get(check.requiredStatusName);
     const desired = await resolveDesiredStatus({
       owner,
       repo,
@@ -431,9 +544,11 @@ export async function syncMonitoredStatusesImpl({
       prLabels,
       workflowRuns,
       check,
+      existing,
+      skipUnchanged,
+      ignoreOverrides: Boolean(unverifiedOverrideContexts?.has(check.requiredStatusName)),
     });
 
-    const existing = existingByContext.get(check.requiredStatusName);
     if (skipUnchanged && isStatusUnchanged(existing, desired)) {
       core.info(
         `Status for '${check.requiredStatusName}' is already '${desired.state}'; skipping redundant write.`,
@@ -453,13 +568,11 @@ export async function syncMonitoredStatusesImpl({
     });
 
     changedContexts.push(check.requiredStatusName);
-    if (
-      ARM_SIGNOFF_STATUS_CONTEXTS.has(check.requiredStatusName) &&
-      desired.state !== CommitStatusState.PENDING
-    ) {
-      armSignoffRecheckNeeded = true;
-    }
   }
+
+  const armSignoffRecheckNeeded =
+    eventTargetsArmSignoff ||
+    changedContexts.some((context) => ARM_SIGNOFF_STATUS_CONTEXTS.has(context));
 
   return { changedContexts, armSignoffRecheckNeeded };
 }
