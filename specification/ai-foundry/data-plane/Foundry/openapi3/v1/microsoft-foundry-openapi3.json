@@ -13265,6 +13265,535 @@
         }
       }
     },
+    "/evaluator_calibration_jobs": {
+      "post": {
+        "operationId": "EvaluatorCalibrationJobs_createCalibrationJob",
+        "summary": "Create an evaluator calibration job",
+        "description": "Starts a calibration job. Reusing an Operation-Id with the same body returns the original job; reusing it with a different body returns 409. No evaluator is saved until a caller separately adopts the proposal.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "Operation-Id",
+            "in": "header",
+            "required": false,
+            "description": "Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Operation-Location": {
+                "required": true,
+                "description": "URL to poll for the job status.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Location": {
+                "required": true,
+                "description": "URL of the created job resource.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluatorCalibrationJob"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluatorCalibrationJob"
+              }
+            }
+          },
+          "description": "Calibration job inputs."
+        },
+        "x-ms-examples": {
+          "CreateCalibrationJob": {
+            "$ref": "../../examples/v1/EvaluatorCalibrationJobs_createCalibrationJob.json"
+          },
+          "TracesAndDataset": {
+            "$ref": "../../examples/v1/EvaluatorCalibrationJobs_createCalibrationJob_TracesAndDataset.json"
+          },
+          "Upload": {
+            "$ref": "../../examples/v1/EvaluatorCalibrationJobs_createCalibrationJob_Upload.json"
+          },
+          "InvalidBooleanOptions": {
+            "$ref": "../../examples/v1/EvaluatorCalibrationJobs_createCalibrationJob_BooleanInvalid.json"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "get": {
+        "operationId": "EvaluatorCalibrationJobs_listCalibrationJobs",
+        "summary": "List evaluator calibration jobs",
+        "description": "Lists calibration jobs for the project, optionally filtered by evaluator name.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "evaluator_name",
+            "in": "query",
+            "required": false,
+            "description": "Filter by evaluator name.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/EvaluatorCalibrationJob"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ],
+        "x-ms-examples": {
+          "ListCalibrationJobs": {
+            "$ref": "../../examples/v1/EvaluatorCalibrationJobs_listCalibrationJobs.json"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      }
+    },
+    "/evaluator_calibration_jobs/{jobId}": {
+      "get": {
+        "operationId": "EvaluatorCalibrationJobs_getCalibrationJob",
+        "summary": "Get an evaluator calibration job",
+        "description": "Gets a job and its proposal after success. Jobs and inline uploaded items expire after 30 days.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The job identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "Retry-After": {
+                "required": false,
+                "description": "Recommended number of seconds to wait before polling again.",
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluatorCalibrationJob"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ],
+        "x-ms-examples": {
+          "GetCalibrationJob": {
+            "$ref": "../../examples/v1/EvaluatorCalibrationJobs_getCalibrationJob.json"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "EvaluatorCalibrationJobs_deleteCalibrationJob",
+        "summary": "Delete an evaluator calibration job",
+        "description": "Deletes a finished job and its proposal. A queued or running job returns 409; a previously saved evaluator version and its calibration evidence are unaffected.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The job identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ],
+        "x-ms-examples": {
+          "DeleteCalibrationJob": {
+            "$ref": "../../examples/v1/EvaluatorCalibrationJobs_deleteCalibrationJob.json"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      }
+    },
+    "/evaluator_calibration_jobs/{jobId}:cancel": {
+      "post": {
+        "operationId": "EvaluatorCalibrationJobs_cancelCalibrationJob",
+        "summary": "Cancel an evaluator calibration job",
+        "description": "Cancels a queued or running job. An already finished job is returned unchanged.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "description": "The job identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluatorCalibrationJob"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ],
+        "x-ms-examples": {
+          "CancelCalibrationJob": {
+            "$ref": "../../examples/v1/EvaluatorCalibrationJobs_cancelCalibrationJob.json"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      }
+    },
     "/evaluator_generation_jobs": {
       "post": {
         "operationId": "EvaluatorGenerationJobs_create",
@@ -14063,6 +14592,33 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "Required when calibration_job_id is supplied; omitted for ordinary version creation.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "calibration_job_id",
+            "in": "query",
+            "required": false,
+            "description": "Successful calibration job whose unchanged proposal is being saved. The service requires the preview header, checks that the job succeeded and belongs to this evaluator, and verifies that the submitted definition matches its proposal before recording provenance. An edited proposal returns 400; omit this parameter to save without evidence.",
+            "schema": {
+              "type": "string"
+            },
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "Evaluations=V1Preview"
+              ]
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -14542,6 +15098,122 @@
             }
           },
           "description": "The pending upload request parameters"
+        }
+      }
+    },
+    "/evaluators/{name}/versions/{version}:check_agreement": {
+      "post": {
+        "operationId": "Evaluators_checkAgreement",
+        "summary": "Check evaluator agreement with reviewers",
+        "description": "Checks an evaluator version against human reviewers on a completed run without tuning or calling a model. The service checks access before consulting a caller-partitioned cache.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Evaluator name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "Evaluator version.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "refresh",
+            "in": "query",
+            "required": false,
+            "description": "Bypass the agreement cache when true.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluatorAgreementCheckResult"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluatorAgreementCheckInputs"
+              }
+            }
+          },
+          "description": "Run and reviewer-label sources to compare."
+        },
+        "x-ms-examples": {
+          "CheckAgreement": {
+            "$ref": "../../examples/v1/Evaluators_checkAgreement.json"
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
         }
       }
     },
@@ -39954,6 +40626,55 @@
         ],
         "description": "Agentic identity credential definition"
       },
+      "AnnotatedTracesLabelSource": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "annotated_traces"
+            ],
+            "description": "Reviewer feedback attached to traces."
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "Optional agent name used to select reviewed traces."
+          },
+          "agent_version": {
+            "type": "string",
+            "description": "Optional agent version used to select reviewed traces."
+          },
+          "start_time": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "Inclusive start of the trace selection window, in Unix seconds."
+          },
+          "end_time": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "Inclusive end of the trace selection window, in Unix seconds."
+          },
+          "trace_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Optional explicit trace IDs."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CalibrationLabelSourceBase"
+          }
+        ],
+        "description": "Human feedback on traces. The trace ID matches the evaluation item ID. Clusters may help select traces for review but are never treated as reviewer labels.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
       "ApiErrorResponse": {
         "type": "object",
         "required": [
@@ -42048,6 +42769,472 @@
         ],
         "description": "A browser automation tool stored in a toolbox."
       },
+      "CalibrationConfidenceInterval": {
+        "type": "object",
+        "required": [
+          "lower",
+          "upper"
+        ],
+        "properties": {
+          "lower": {
+            "type": "number",
+            "format": "double",
+            "minimum": -1,
+            "maximum": 1,
+            "description": "Lower bound."
+          },
+          "upper": {
+            "type": "number",
+            "format": "double",
+            "minimum": -1,
+            "maximum": 1,
+            "description": "Upper bound."
+          }
+        },
+        "description": "A confidence interval for the associated statistic. Bounds use the statistic's scale, and lower is no greater than upper.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "CalibrationDimensionChange": {
+        "type": "object",
+        "required": [
+          "id",
+          "current_description",
+          "pruned"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Stable criterion identifier."
+          },
+          "current_description": {
+            "type": "string",
+            "description": "Current criterion wording."
+          },
+          "proposed_description": {
+            "type": "string",
+            "description": "Proposed wording, omitted when the criterion is removed."
+          },
+          "current_weight": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 10,
+            "description": "Current Likert weight, omitted for Boolean rubrics or implicit equal weights."
+          },
+          "proposed_weight": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 10,
+            "description": "Proposed Likert weight, omitted for Boolean rubrics or a removed criterion."
+          },
+          "pruned": {
+            "type": "boolean",
+            "description": "Whether the criterion is omitted from the proposal."
+          }
+        },
+        "description": "A proposed change to one rubric criterion.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "CalibrationDisagreement": {
+        "type": "object",
+        "required": [
+          "item_id",
+          "human_label",
+          "judge_passed",
+          "deciding_dimensions"
+        ],
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "description": "Evaluation item identifier."
+          },
+          "human_label": {
+            "type": "boolean",
+            "description": "Human reviewer decision."
+          },
+          "judge_passed": {
+            "type": "boolean",
+            "description": "Rubric decision."
+          },
+          "deciding_dimensions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Identifiers of criteria that influenced the rubric decision."
+          }
+        },
+        "description": "An item where the rubric and a reviewer disagreed.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "CalibrationDrift": {
+        "type": "object",
+        "required": [
+          "evaluated"
+        ],
+        "properties": {
+          "evaluated": {
+            "type": "boolean",
+            "description": "Whether drift could be evaluated. Evaluation requires a calibration record and at least 30 unique reviewed items from the same source identities and label mappings, in addition to the agreement minimums."
+          },
+          "detected": {
+            "type": "boolean",
+            "description": "Whether the upper end of the current agreement's 95 percent uncertainty interval is below the recorded agreement. Omitted when drift was not evaluated."
+          },
+          "recorded_agreement_rate": {
+            "type": "number",
+            "format": "double",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Agreement recorded for the calibrated version, when available."
+          },
+          "current_agreement_rate": {
+            "type": "number",
+            "format": "double",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Current agreement rate, when available."
+          },
+          "current_agreement_upper_bound": {
+            "type": "number",
+            "format": "double",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Upper bound of the current agreement's 95 percent uncertainty interval, when available."
+          },
+          "reason": {
+            "type": "string",
+            "description": "Why drift was not evaluated, when applicable."
+          }
+        },
+        "description": "A comparison with the service-recorded agreement at calibration.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "CalibrationLabelSource": {
+        "type": "object",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/AnnotatedTracesLabelSource"
+          },
+          {
+            "$ref": "#/components/schemas/GoldenDatasetLabelSource"
+          },
+          {
+            "$ref": "#/components/schemas/DatasetLabelSource"
+          },
+          {
+            "$ref": "#/components/schemas/UploadLabelSource"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "annotated_traces": "#/components/schemas/AnnotatedTracesLabelSource",
+            "golden_dataset": "#/components/schemas/GoldenDatasetLabelSource",
+            "dataset": "#/components/schemas/DatasetLabelSource",
+            "upload": "#/components/schemas/UploadLabelSource"
+          }
+        },
+        "description": "A source of human reviewer labels. Multiple labels within a source use the majority decision; a tie or disagreements across sources exclude the item. The service never silently selects one reviewer over another.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "CalibrationLabelSourceBase": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/CalibrationLabelSourceType",
+            "description": "The reviewer-label source type."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "golden_dataset": "#/components/schemas/GoldenDatasetLabelSource",
+            "dataset": "#/components/schemas/DatasetLabelSource",
+            "upload": "#/components/schemas/UploadLabelSource",
+            "annotated_traces": "#/components/schemas/AnnotatedTracesLabelSource"
+          }
+        },
+        "description": "The shared discriminator for reviewer-label sources.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "CalibrationLabelSourceType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "annotated_traces",
+              "golden_dataset",
+              "dataset",
+              "upload"
+            ]
+          }
+        ],
+        "description": "A supported source of human reviewer decisions.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "CalibrationLabelValue": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "description": "A value in a reviewer-label column.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "CalibrationPassRateEstimate": {
+        "type": "object",
+        "required": [
+          "estimate",
+          "confidence_interval",
+          "unreviewed_count"
+        ],
+        "properties": {
+          "estimate": {
+            "type": "number",
+            "format": "double",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Estimated pass rate."
+          },
+          "confidence_interval": {
+            "$ref": "#/components/schemas/CalibrationConfidenceInterval",
+            "description": "The 95 percent uncertainty interval for the estimate."
+          },
+          "unreviewed_count": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Number of items without reviewer decisions used in the estimate."
+          }
+        },
+        "description": "A pass-rate estimate combining reviewer decisions and rubric decisions on unreviewed items.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "CalibrationRecommendation": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "adopt",
+              "keep_current"
+            ]
+          }
+        ],
+        "description": "The recommended action after reviewing a proposal.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "CalibrationReviewReason": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "near_passing_bar",
+              "one_check_failed",
+              "one_check_decides_pass"
+            ]
+          }
+        ],
+        "description": "Why an unreviewed item is useful to review.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "CalibrationReviewSuggestion": {
+        "type": "object",
+        "required": [
+          "item_id",
+          "reason_code"
+        ],
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "description": "Evaluation item identifier."
+          },
+          "reason_code": {
+            "$ref": "#/components/schemas/CalibrationReviewReason",
+            "description": "Machine-readable selection reason."
+          }
+        },
+        "description": "One unreviewed item suggested for human review.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "CalibrationSourceOutcome": {
+        "type": "object",
+        "required": [
+          "type",
+          "source_id",
+          "accepted_count",
+          "rejected_count",
+          "unmatched_count",
+          "conflicting_count",
+          "unavailable"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/CalibrationLabelSourceType",
+            "description": "The source type."
+          },
+          "source_id": {
+            "type": "string",
+            "description": "Stable source identity used, together with the label mapping, to determine whether later reviews are comparable for drift."
+          },
+          "source_version": {
+            "type": "string",
+            "description": "Concrete source version when applicable."
+          },
+          "label_column": {
+            "type": "string",
+            "description": "Reviewer-label column when applicable."
+          },
+          "dataset_id_column": {
+            "type": "string",
+            "description": "Dataset item-identifier column used for matching, when applicable."
+          },
+          "join_column": {
+            "type": "string",
+            "description": "Evaluation-result column used for matching, when applicable."
+          },
+          "pass_values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CalibrationLabelValue"
+            },
+            "minItems": 1,
+            "description": "Values interpreted as reviewer passes. When omitted, the service uses its recognized pass values."
+          },
+          "fail_values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CalibrationLabelValue"
+            },
+            "minItems": 1,
+            "description": "Values interpreted as reviewer failures. When omitted, the service uses its recognized fail values. A value cannot be mapped to both outcomes."
+          },
+          "accepted_count": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Number of labels accepted from this source."
+          },
+          "rejected_count": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Number of labels rejected because their values were not recognized."
+          },
+          "unmatched_count": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Number of labels that did not match an evaluation item."
+          },
+          "conflicting_count": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Number of items excluded because reviewer decisions tied or sources disagreed."
+          },
+          "unavailable": {
+            "type": "boolean",
+            "description": "Whether this source could not be read with the caller's access."
+          }
+        },
+        "description": "The service-resolved identity, label mapping, and outcome for a reviewer-label source. No reviewed item content is included.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "CalibrationStrategy": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "keep_current",
+              "threshold_only",
+              "weights_and_threshold",
+              "checks_subset"
+            ]
+          }
+        ],
+        "description": "The kind of rubric change proposed.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
       "CaptureStructuredOutputsTool": {
         "type": "object",
         "required": [
@@ -43897,6 +45084,76 @@
           }
         ],
         "description": "Dataset source for evaluator generation jobs — reference to a dataset."
+      },
+      "DatasetLabelSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "dataset_name",
+          "dataset_version",
+          "label_column",
+          "dataset_id_column"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "dataset"
+            ],
+            "description": "A separate saved dataset containing reviewer labels."
+          },
+          "dataset_name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The dataset name."
+          },
+          "dataset_version": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The concrete dataset version."
+          },
+          "label_column": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The reviewer-label column in the dataset."
+          },
+          "dataset_id_column": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The dataset column containing item identifiers."
+          },
+          "join_column": {
+            "type": "string",
+            "description": "The evaluation-result column matched to dataset_id_column. When omitted, the recorded item ID is used."
+          },
+          "pass_values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CalibrationLabelValue"
+            },
+            "minItems": 1,
+            "description": "Values interpreted as reviewer passes. When omitted, the service uses its recognized pass values."
+          },
+          "fail_values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CalibrationLabelValue"
+            },
+            "minItems": 1,
+            "description": "Values interpreted as reviewer failures. When omitted, the service uses its recognized fail values. A value cannot be mapped to both outcomes."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CalibrationLabelSourceBase"
+          }
+        ],
+        "description": "Reviewer labels in a separate versioned dataset.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "DatasetReference": {
         "type": "object",
@@ -46006,6 +47263,31 @@
           ]
         }
       },
+      "EvaluationRunReference": {
+        "type": "object",
+        "required": [
+          "eval_id",
+          "run_id"
+        ],
+        "properties": {
+          "eval_id": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The evaluation identifier."
+          },
+          "run_id": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The run identifier."
+          }
+        },
+        "description": "An evaluation run in the current project.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
       "EvaluationScheduleTask": {
         "type": "object",
         "required": [
@@ -46260,6 +47542,551 @@
           }
         },
         "description": "Voice configuration used to convert text to speech for evaluation through the Voice Live endpoint."
+      },
+      "EvaluatorAgreementCheckInputs": {
+        "type": "object",
+        "required": [
+          "evaluation_run"
+        ],
+        "properties": {
+          "evaluation_run": {
+            "$ref": "#/components/schemas/EvaluationRunReference",
+            "description": "Completed evaluation run to compare."
+          },
+          "label_sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CalibrationLabelSource"
+            },
+            "minItems": 1,
+            "description": "Optional explicit label sources. Omission checks trace reviews and recognized golden-dataset reviewer columns; an explicitly empty list is invalid."
+          },
+          "review_suggestion_count": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 50,
+            "description": "Maximum number of unreviewed items to suggest, from 0 to 50. Defaults to 10.",
+            "default": 10
+          }
+        },
+        "description": "Inputs for checking an existing rubric against reviewer decisions without changing it or calling a model.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "EvaluatorAgreementCheckResult": {
+        "type": "object",
+        "required": [
+          "status",
+          "labeled_count",
+          "label_sources",
+          "drift",
+          "review_suggestions",
+          "warnings"
+        ],
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/EvaluatorAgreementStatus",
+            "description": "Agreement status. If no source can be read, this is no_reviews and warnings identify unavailable sources."
+          },
+          "labeled_count": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Number of distinct reviewer-labeled items."
+          },
+          "matches": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Number of reviewer decisions matching the rubric, when comparable."
+          },
+          "disagreement_count": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Number of reviewer decisions disagreeing with the rubric, when comparable."
+          },
+          "agreement_rate": {
+            "type": "number",
+            "format": "double",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Agreement rate, when comparable and defined."
+          },
+          "kappa": {
+            "type": "number",
+            "format": "double",
+            "minimum": -1,
+            "maximum": 1,
+            "description": "Cohen's kappa, when comparable and defined."
+          },
+          "label_sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CalibrationSourceOutcome"
+            },
+            "description": "Source identities, mappings, accounting, and availability."
+          },
+          "drift": {
+            "$ref": "#/components/schemas/CalibrationDrift",
+            "description": "Comparison with the calibration record, if possible."
+          },
+          "review_suggestions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CalibrationReviewSuggestion"
+            },
+            "maxItems": 50,
+            "description": "Unreviewed items ranked for human review, limited by review_suggestion_count."
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Non-fatal limitations and unavailable sources."
+          }
+        },
+        "description": "Agreement with human reviewers, source accounting, drift, and suggested items to review.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "EvaluatorAgreementStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "no_reviews",
+              "not_enough_reviews",
+              "not_comparable",
+              "in_sync",
+              "needs_tuning"
+            ]
+          }
+        ],
+        "description": "Agreement status for a rubric and reviewer decisions.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "EvaluatorCalibrationEvidence": {
+        "type": "object",
+        "required": [
+          "job_id",
+          "calibrated_at",
+          "parent_version",
+          "labeled_count",
+          "matches",
+          "previous_matches",
+          "label_sources"
+        ],
+        "properties": {
+          "job_id": {
+            "type": "string",
+            "description": "Identifier of the successful calibration job."
+          },
+          "calibrated_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "Time the proposal was calibrated, in Unix seconds."
+          },
+          "parent_version": {
+            "type": "string",
+            "description": "Evaluator version used as the calibration starting point."
+          },
+          "labeled_count": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Number of reviewed items in the held-out comparison."
+          },
+          "matches": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Held-out reviewer decisions matching the saved proposal."
+          },
+          "previous_matches": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Held-out reviewer decisions matching the starting version."
+          },
+          "kappa": {
+            "type": "number",
+            "format": "double",
+            "minimum": -1,
+            "maximum": 1,
+            "description": "Held-out Cohen's kappa for the saved proposal, when defined."
+          },
+          "pass_rate": {
+            "$ref": "#/components/schemas/CalibrationPassRateEstimate",
+            "description": "Estimated pass rate and uncertainty, when estimable."
+          },
+          "label_sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CalibrationSourceOutcome"
+            },
+            "description": "Service-resolved source identities, versions, mappings, and counts used for this record."
+          }
+        },
+        "description": "Durable, service-owned evidence for a version saved from an unchanged calibration proposal. The record is not an editable tag and survives deletion of the job.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "EvaluatorCalibrationInputs": {
+        "type": "object",
+        "required": [
+          "evaluator_name",
+          "evaluator_version",
+          "label_sources"
+        ],
+        "properties": {
+          "evaluator_name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Name of the saved rubric evaluator."
+          },
+          "evaluator_version": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Version of the saved rubric evaluator."
+          },
+          "evaluation_run": {
+            "$ref": "#/components/schemas/EvaluationRunReference",
+            "description": "Completed evaluation run whose results provide rubric judgments and item identities."
+          },
+          "label_sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CalibrationLabelSource"
+            },
+            "minItems": 1,
+            "description": "Sources of reviewer decisions. At least one source is required. Unreadable sources are reported and skipped if another source is usable; the job fails if none can be read."
+          },
+          "tune_passing_bar": {
+            "type": "boolean",
+            "description": "Allow a proposed normalized passing bar for a Likert rubric. Enabling this for a Boolean rubric returns HTTP 400.",
+            "default": false
+          },
+          "allow_weight_changes": {
+            "type": "boolean",
+            "description": "Allow changes to Likert criterion weights from 1 through 10. Enabling this for a Boolean rubric returns HTTP 400.",
+            "default": false
+          },
+          "allow_pruning": {
+            "type": "boolean",
+            "description": "Allow removal of criteria that do not help agreement. Protected service-owned criteria remain unchanged, the proposal retains at least one criterion, and removed criteria are omitted rather than given a weight of zero.",
+            "default": false
+          },
+          "tune_wording": {
+            "$ref": "#/components/schemas/WordingTuningOptions",
+            "description": "Allow wording suggestions and recheck them with the selected judge. Omit to avoid model calls."
+          },
+          "false_pass_cost": {
+            "type": "number",
+            "format": "double",
+            "minimum": 0.1,
+            "maximum": 10,
+            "description": "Relative cost of passing an item the reviewer failed. Defaults to 1; only its ratio to false_fail_cost matters.",
+            "default": 1
+          },
+          "false_fail_cost": {
+            "type": "number",
+            "format": "double",
+            "minimum": 0.1,
+            "maximum": 10,
+            "description": "Relative cost of failing an item the reviewer passed. Defaults to 1; only its ratio to false_pass_cost matters.",
+            "default": 1
+          }
+        },
+        "description": "Inputs for a quality-rubric calibration job. Supply a completed evaluation run or uploaded items with per-dimension scores. Calibration requires at least 20 reviewed items, including at least 5 passes and 5 failures. Non-rubric and safety evaluators are not supported. Boolean rubrics reject enabled passing-bar or weight tuning with HTTP 400 and continue to pass only when every applicable check passes.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "EvaluatorCalibrationJob": {
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "inputs",
+          "created_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Server-assigned unique identifier.",
+            "readOnly": true
+          },
+          "result": {
+            "$ref": "#/components/schemas/EvaluatorCalibrationResult",
+            "description": "Result produced on success.",
+            "readOnly": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/JobStatus",
+            "description": "Current lifecycle status.",
+            "readOnly": true
+          },
+          "error": {
+            "$ref": "#/components/schemas/OpenAI.Error",
+            "description": "Error details — populated only on failure.",
+            "readOnly": true
+          },
+          "inputs": {
+            "$ref": "#/components/schemas/EvaluatorCalibrationInputs",
+            "description": "The submitted calibration inputs."
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "Job creation time, in Unix seconds.",
+            "readOnly": true
+          },
+          "finished_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "Job completion time, in Unix seconds, when finished.",
+            "readOnly": true
+          }
+        },
+        "description": "A calibration job. A successful job returns a proposal but never publishes an evaluator version.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "EvaluatorCalibrationResult": {
+        "type": "object",
+        "required": [
+          "scoring_mode",
+          "reviewed_count",
+          "labeled_count",
+          "current_matches",
+          "proposed_matches",
+          "current_agreement_rate",
+          "proposed_agreement_rate",
+          "current_agreement_interval",
+          "proposed_agreement_interval",
+          "improvement_interval",
+          "recommendation",
+          "strategy",
+          "wording_changed",
+          "dimensions",
+          "top_disagreements",
+          "label_sources",
+          "warnings",
+          "proposed_evaluator_version"
+        ],
+        "properties": {
+          "scoring_mode": {
+            "$ref": "#/components/schemas/RubricScoringMode",
+            "description": "Scoring mode of the saved rubric."
+          },
+          "reviewed_count": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Number of distinct accepted reviewed items before evaluation."
+          },
+          "labeled_count": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Number of reviewed items in the held-out comparison. This is the denominator for current_matches and proposed_matches."
+          },
+          "current_matches": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Held-out reviewer decisions matching the current rubric."
+          },
+          "proposed_matches": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0,
+            "description": "Held-out reviewer decisions matching the proposed rubric."
+          },
+          "current_agreement_rate": {
+            "type": "number",
+            "format": "double",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Held-out agreement rate for the current rubric."
+          },
+          "proposed_agreement_rate": {
+            "type": "number",
+            "format": "double",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Held-out agreement rate for the proposed rubric."
+          },
+          "current_kappa": {
+            "type": "number",
+            "format": "double",
+            "minimum": -1,
+            "maximum": 1,
+            "description": "Held-out Cohen's kappa for the current rubric, when defined."
+          },
+          "proposed_kappa": {
+            "type": "number",
+            "format": "double",
+            "minimum": -1,
+            "maximum": 1,
+            "description": "Held-out Cohen's kappa for the proposed rubric, when defined."
+          },
+          "current_agreement_interval": {
+            "$ref": "#/components/schemas/CalibrationConfidenceInterval",
+            "description": "The current held-out agreement rate's 95 percent uncertainty interval."
+          },
+          "proposed_agreement_interval": {
+            "$ref": "#/components/schemas/CalibrationConfidenceInterval",
+            "description": "The proposed held-out agreement rate's 95 percent uncertainty interval."
+          },
+          "improvement_interval": {
+            "$ref": "#/components/schemas/CalibrationConfidenceInterval",
+            "description": "The 95 percent uncertainty interval for the change in held-out agreement."
+          },
+          "recommendation": {
+            "$ref": "#/components/schemas/CalibrationRecommendation",
+            "description": "Whether to adopt the proposal or keep the current rubric."
+          },
+          "strategy": {
+            "$ref": "#/components/schemas/CalibrationStrategy",
+            "description": "The proposed change strategy."
+          },
+          "wording_changed": {
+            "type": "boolean",
+            "description": "Whether any criterion wording changed."
+          },
+          "current_threshold": {
+            "type": "number",
+            "format": "double",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Current normalized Likert passing bar. Omitted for Boolean rubrics."
+          },
+          "proposed_threshold": {
+            "type": "number",
+            "format": "double",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Proposed normalized Likert passing bar. Omitted for Boolean rubrics."
+          },
+          "dimensions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CalibrationDimensionChange"
+            },
+            "description": "Criterion-by-criterion changes."
+          },
+          "top_disagreements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CalibrationDisagreement"
+            },
+            "description": "Examples where the current rubric disagreed with a reviewer."
+          },
+          "label_sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CalibrationSourceOutcome"
+            },
+            "description": "Source identities, mappings, and label accounting."
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Non-fatal limitations and source-read warnings."
+          },
+          "pass_rate": {
+            "$ref": "#/components/schemas/CalibrationPassRateEstimate",
+            "description": "Estimated pass rate and uncertainty, when estimable."
+          },
+          "proposed_evaluator_version": {
+            "type": "object",
+            "required": [
+              "evaluator_type",
+              "categories",
+              "definition"
+            ],
+            "properties": {
+              "display_name": {
+                "type": "string",
+                "description": "Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique."
+              },
+              "metadata": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "description": "Metadata about the evaluator"
+              },
+              "evaluator_type": {
+                "$ref": "#/components/schemas/EvaluatorType",
+                "description": "The type of the evaluator"
+              },
+              "categories": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvaluatorCategory"
+                },
+                "description": "The categories of the evaluator"
+              },
+              "supported_evaluation_levels": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/EvaluationLevel"
+                },
+                "description": "Evaluation levels this evaluator supports (e.g., `turn`, `conversation`). When omitted on create, the service defaults to `[\"turn\"]`. On update, omitting this field leaves it unchanged; an empty list is rejected. Custom code-based evaluators support only `turn`; custom prompt-based evaluators support exactly one level (`turn` or `conversation`).",
+                "default": [
+                  "turn"
+                ]
+              },
+              "definition": {
+                "$ref": "#/components/schemas/EvaluatorDefinition",
+                "description": "Definition of the evaluator"
+              },
+              "description": {
+                "type": "string",
+                "description": "The asset description text."
+              },
+              "tags": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "description": "Tag dictionary. Tags can be added, removed, and updated."
+              }
+            },
+            "description": "Complete create-visible evaluator version payload. Save it unchanged with this job's ID to record calibration evidence; no evaluator version is saved by the job."
+          }
+        },
+        "description": "A review-first calibration proposal. Agreement and improvement are evaluated on held-out reviewer decisions, not on the same decisions used to choose the changes.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorCategory": {
         "anyOf": [
@@ -47094,6 +48921,16 @@
           "generation_job_id": {
             "type": "string",
             "description": "Read-only provenance link back to the EvaluatorGenerationJob that produced this version. Present only on evaluator versions created via the generation pipeline; absent for manually-created versions and unaffected by subsequent `PATCH` calls.",
+            "readOnly": true
+          },
+          "calibration": {
+            "$ref": "#/components/schemas/EvaluatorCalibrationEvidence",
+            "description": "Service-owned evidence for a version saved unchanged from a successful calibration proposal. It remains after the job is deleted and is cleared if the evaluator definition changes. Callers cannot set, update, or copy this record.",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "Evaluations=V1Preview"
+              ]
+            },
             "readOnly": true
           },
           "warnings": {
@@ -48195,6 +50032,52 @@
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "Routines=V2Preview"
+          ]
+        }
+      },
+      "GoldenDatasetLabelSource": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "golden_dataset"
+            ],
+            "description": "A label column in the evaluation run's input dataset."
+          },
+          "label_column": {
+            "type": "string",
+            "description": "Reviewer-label column. If omitted, the service considers only human_label, reviewer_label, and <evaluator name>_label, and uses a column only when at least 90 percent of nonempty values are recognized. Generic task columns are never guessed."
+          },
+          "pass_values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CalibrationLabelValue"
+            },
+            "minItems": 1,
+            "description": "Values interpreted as reviewer passes. When omitted, the service uses its recognized pass values."
+          },
+          "fail_values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CalibrationLabelValue"
+            },
+            "minItems": 1,
+            "description": "Values interpreted as reviewer failures. When omitted, the service uses its recognized fail values. A value cannot be mapped to both outcomes."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CalibrationLabelSourceBase"
+          }
+        ],
+        "description": "Reviewer labels in the evaluation run's input dataset.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
           ]
         }
       },
@@ -112693,6 +114576,74 @@
           }
         }
       },
+      "UploadLabelSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "items"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "upload"
+            ],
+            "description": "Inline reviewed examples."
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UploadedCalibrationItem"
+            },
+            "minItems": 1,
+            "description": "The uploaded reviewed items."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CalibrationLabelSourceBase"
+          }
+        ],
+        "description": "Human-reviewed examples supplied inline, including scored items when no evaluation run is provided. Items are retained only with the job and are removed on deletion or expiry.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "UploadedCalibrationItem": {
+        "type": "object",
+        "required": [
+          "item_id",
+          "human_label"
+        ],
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Identifier used to match this review to an evaluation item."
+          },
+          "human_label": {
+            "type": "boolean",
+            "description": "The human reviewer's decision: true for pass, false for fail."
+          },
+          "rubric_result": {
+            "$ref": "#/components/schemas/RubricResultProperties",
+            "description": "Per-dimension rubric judgments, required when the request has no evaluation run."
+          },
+          "inputs": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Evaluated input and response needed when rechecking suggested wording."
+          }
+        },
+        "description": "One inline human-reviewed item. If no evaluation run is supplied, rubric_result must contain the per-dimension scores for the saved rubric. Wording suggestions additionally require the evaluated input needed to rerun the judge.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
       "UserConversationSimulationAudioEffect": {
         "anyOf": [
           {
@@ -120125,6 +122076,31 @@
           }
         ],
         "description": "Weekly recurrence schedule."
+      },
+      "WordingTuningOptions": {
+        "type": "object",
+        "required": [
+          "judge_deployment"
+        ],
+        "properties": {
+          "judge_deployment": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The customer's model deployment used to generate and recheck wording. Model quota and charges apply."
+          },
+          "max_dimensions": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "The maximum number of criteria to consider for wording changes."
+          }
+        },
+        "description": "Options for rechecking suggested criterion wording with a customer-selected judge deployment.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "WorkIQPreviewTool": {
         "type": "object",

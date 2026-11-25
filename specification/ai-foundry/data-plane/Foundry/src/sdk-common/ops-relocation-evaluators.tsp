@@ -35,4 +35,25 @@ namespace Azure.AI.Projects.Beta {
   @@clientLocation(Azure.AI.Projects.Evaluators.listDiagnostics, Evaluators);
   @@clientLocation(Azure.AI.Projects.Evaluators.startPendingUpload, Evaluators);
   @@clientLocation(Azure.AI.Projects.Evaluators.getCredentials, Evaluators);
+  @@clientLocation(Azure.AI.Projects.Evaluators.checkAgreement, Evaluators);
+  @@clientLocation(
+    Azure.AI.Projects.EvaluatorCalibrationJobs.createCalibrationJob,
+    Evaluators
+  );
+  @@clientLocation(
+    Azure.AI.Projects.EvaluatorCalibrationJobs.getCalibrationJob,
+    Evaluators
+  );
+  @@clientLocation(
+    Azure.AI.Projects.EvaluatorCalibrationJobs.listCalibrationJobs,
+    Evaluators
+  );
+  @@clientLocation(
+    Azure.AI.Projects.EvaluatorCalibrationJobs.cancelCalibrationJob,
+    Evaluators
+  );
+  @@clientLocation(
+    Azure.AI.Projects.EvaluatorCalibrationJobs.deleteCalibrationJob,
+    Evaluators
+  );
 }

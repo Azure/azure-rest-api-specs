@@ -1,0 +1,33 @@
+{
+  "title": "Cancel a calibration job",
+  "operationId": "EvaluatorCalibrationJobs_cancelCalibrationJob",
+  "parameters": {
+    "api-version": "v1",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "jobId": "calj_123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "calj_123",
+        "status": "cancelled",
+        "created_at": 1790000000,
+        "finished_at": 1790000030,
+        "inputs": {
+          "evaluator_name": "answer_quality",
+          "evaluator_version": "1",
+          "evaluation_run": {
+            "eval_id": "eval_123",
+            "run_id": "run_456"
+          },
+          "label_sources": [
+            {
+              "type": "golden_dataset",
+              "label_column": "reviewer_label"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "title": "List calibration jobs for an evaluator",
+  "operationId": "EvaluatorCalibrationJobs_listCalibrationJobs",
+  "parameters": {
+    "api-version": "v1",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "evaluator_name": "answer_quality"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "data": [
+          {
+            "id": "calj_123",
+            "status": "queued",
+            "created_at": 1790000000,
+            "inputs": {
+              "evaluator_name": "answer_quality",
+              "evaluator_version": "1",
+              "evaluation_run": {
+                "eval_id": "eval_123",
+                "run_id": "run_456"
+              },
+              "label_sources": [
+                {
+                  "type": "golden_dataset",
+                  "label_column": "reviewer_label"
+                }
+              ]
+            }
+          }
+        ],
+        "first_id": "calj_123",
+        "last_id": "calj_123",
+        "has_more": false
+      }
+    }
+  }
+}

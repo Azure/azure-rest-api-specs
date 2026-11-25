@@ -1,0 +1,105 @@
+{
+  "title": "Save an unchanged calibration proposal as a new evaluator version",
+  "operationId": "Evaluators_createVersion",
+  "parameters": {
+    "api-version": "v1",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "name": "answer_quality",
+    "calibration_job_id": "calj_123",
+    "body": {
+      "display_name": "Answer quality",
+      "description": "Measures the quality of an answer.",
+      "tags": {
+        "team": "quality"
+      },
+      "evaluator_type": "custom",
+      "categories": [
+        "quality"
+      ],
+      "definition": {
+        "type": "rubric",
+        "scoring": {
+          "mode": "likert"
+        },
+        "pass_threshold": 0.6,
+        "dimensions": [
+          {
+            "id": "accuracy",
+            "description": "The answer is accurate.",
+            "weight": 2
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "answer_quality",
+        "version": "2",
+        "display_name": "Answer quality",
+        "description": "Measures the quality of an answer.",
+        "tags": {
+          "team": "quality"
+        },
+        "evaluator_type": "custom",
+        "categories": [
+          "quality"
+        ],
+        "definition": {
+          "type": "rubric",
+          "scoring": {
+            "mode": "likert"
+          },
+          "pass_threshold": 0.6,
+          "dimensions": [
+            {
+              "id": "accuracy",
+              "description": "The answer is accurate.",
+              "weight": 2
+            }
+          ]
+        },
+        "created_by": "example-user",
+        "created_at": "2026-09-21T10:02:00Z",
+        "modified_at": "2026-09-21T10:02:00Z",
+        "calibration": {
+          "job_id": "calj_123",
+          "calibrated_at": 1790000120,
+          "parent_version": "1",
+          "labeled_count": 20,
+          "matches": 15,
+          "previous_matches": 10,
+          "kappa": 0.5,
+          "pass_rate": {
+            "estimate": 0.78,
+            "confidence_interval": {
+              "lower": 0.7,
+              "upper": 0.84
+            },
+            "unreviewed_count": 300
+          },
+          "label_sources": [
+            {
+              "type": "golden_dataset",
+              "source_id": "dataset:answer-golden:1",
+              "source_version": "1",
+              "label_column": "reviewer_label",
+              "pass_values": [
+                "pass"
+              ],
+              "fail_values": [
+                "fail"
+              ],
+              "accepted_count": 100,
+              "rejected_count": 0,
+              "unmatched_count": 0,
+              "conflicting_count": 0,
+              "unavailable": false
+            }
+          ]
+        }
+      }
+    }
+  }
+}

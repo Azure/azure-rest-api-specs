@@ -1,0 +1,68 @@
+{
+  "title": "Create a calibration job from a golden dataset",
+  "operationId": "EvaluatorCalibrationJobs_createCalibrationJob",
+  "parameters": {
+    "api-version": "v1",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "Operation-Id": "calibration-request-1",
+    "job": {
+      "inputs": {
+        "evaluator_name": "answer_quality",
+        "evaluator_version": "1",
+        "evaluation_run": {
+          "eval_id": "eval_123",
+          "run_id": "run_456"
+        },
+        "label_sources": [
+          {
+            "type": "golden_dataset",
+            "label_column": "reviewer_label",
+            "pass_values": [
+              "pass"
+            ],
+            "fail_values": [
+              "fail"
+            ]
+          }
+        ],
+        "tune_passing_bar": true,
+        "allow_weight_changes": true
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Operation-Location": "https://example.services.ai.azure.com/api/projects/example/evaluator_calibration_jobs/calj_123?api-version=v1",
+        "Location": "https://example.services.ai.azure.com/api/projects/example/evaluator_calibration_jobs/calj_123?api-version=v1"
+      },
+      "body": {
+        "id": "calj_123",
+        "status": "queued",
+        "created_at": 1790000000,
+        "inputs": {
+          "evaluator_name": "answer_quality",
+          "evaluator_version": "1",
+          "evaluation_run": {
+            "eval_id": "eval_123",
+            "run_id": "run_456"
+          },
+          "label_sources": [
+            {
+              "type": "golden_dataset",
+              "label_column": "reviewer_label",
+              "pass_values": [
+                "pass"
+              ],
+              "fail_values": [
+                "fail"
+              ]
+            }
+          ],
+          "tune_passing_bar": true,
+          "allow_weight_changes": true
+        }
+      }
+    }
+  }
+}

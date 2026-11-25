@@ -1,0 +1,96 @@
+{
+  "title": "Tune Boolean checks with trace reviews and a saved dataset",
+  "operationId": "EvaluatorCalibrationJobs_createCalibrationJob",
+  "parameters": {
+    "api-version": "v1",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "Operation-Id": "calibration-request-2",
+    "job": {
+      "inputs": {
+        "evaluator_name": "answer_checks",
+        "evaluator_version": "3",
+        "evaluation_run": {
+          "eval_id": "eval_789",
+          "run_id": "run_987"
+        },
+        "label_sources": [
+          {
+            "type": "annotated_traces",
+            "agent_name": "example-agent",
+            "start_time": 1789000000,
+            "end_time": 1790000000
+          },
+          {
+            "type": "dataset",
+            "dataset_name": "expert-reviews",
+            "dataset_version": "2",
+            "label_column": "decision",
+            "dataset_id_column": "trace_id",
+            "join_column": "trace_id",
+            "pass_values": [
+              "pass"
+            ],
+            "fail_values": [
+              "fail"
+            ]
+          }
+        ],
+        "allow_pruning": true,
+        "false_pass_cost": 2.0,
+        "tune_wording": {
+          "judge_deployment": "judge-deployment",
+          "max_dimensions": 3
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Operation-Location": "https://example.services.ai.azure.com/api/projects/example/evaluator_calibration_jobs/calj_456?api-version=v1",
+        "Location": "https://example.services.ai.azure.com/api/projects/example/evaluator_calibration_jobs/calj_456?api-version=v1"
+      },
+      "body": {
+        "id": "calj_456",
+        "status": "queued",
+        "created_at": 1790000000,
+        "inputs": {
+          "evaluator_name": "answer_checks",
+          "evaluator_version": "3",
+          "evaluation_run": {
+            "eval_id": "eval_789",
+            "run_id": "run_987"
+          },
+          "label_sources": [
+            {
+              "type": "annotated_traces",
+              "agent_name": "example-agent",
+              "start_time": 1789000000,
+              "end_time": 1790000000
+            },
+            {
+              "type": "dataset",
+              "dataset_name": "expert-reviews",
+              "dataset_version": "2",
+              "label_column": "decision",
+              "dataset_id_column": "trace_id",
+              "join_column": "trace_id",
+              "pass_values": [
+                "pass"
+              ],
+              "fail_values": [
+                "fail"
+              ]
+            }
+          ],
+          "allow_pruning": true,
+          "false_pass_cost": 2.0,
+          "tune_wording": {
+            "judge_deployment": "judge-deployment",
+            "max_dimensions": 3
+          }
+        }
+      }
+    }
+  }
+}

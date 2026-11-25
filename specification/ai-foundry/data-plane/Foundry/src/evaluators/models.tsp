@@ -602,6 +602,12 @@ model EvaluatorVersion {
   @visibility(Lifecycle.Read)
   generation_job_id?: string;
 
+  @doc("Service-owned evidence for a version saved unchanged from a successful calibration proposal. It remains after the job is deleted and is cleared if the evaluator definition changes. Callers cannot set, update, or copy this record.")
+  @added(Versions.v1)
+  @visibility(Lifecycle.Read)
+  @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+  calibration?: EvaluatorCalibrationEvidence;
+
   @doc("Categories of warnings surfaced on this generated evaluator version. Present only on versions created via an EvaluatorGenerationJob when the paired job produced non-empty warnings. Absent (treat as no warnings) when the version is not from generation, when the paired job was clean, or when a subsequent `PATCH` to `definition` cleared the paired job's advisories. Follow `generation_job_id` to fetch the detailed warning payloads.")
   @visibility(Lifecycle.Read)
   warnings?: GenerationWarningType[];
@@ -619,6 +625,673 @@ model EvaluatorVersion {
   modified_at: string;
 
   ...AssetBase;
+}
+
+// ============================================================================
+// Evaluator calibration
+// ============================================================================
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("An evaluation run in the current project.")
+model EvaluationRunReference {
+  @doc("The evaluation identifier.")
+  @minLength(1)
+  eval_id: string;
+
+  @doc("The run identifier.")
+  @minLength(1)
+  run_id: string;
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Reviewer-label values are heterogeneous JSON scalars, not a model hierarchy."
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("A value in a reviewer-label column.")
+union CalibrationLabelValue {
+  string,
+  boolean,
+  int32,
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("A supported source of human reviewer decisions.")
+union CalibrationLabelSourceType {
+  string,
+
+  @doc("Reviewer feedback attached to traces.")
+  annotated_traces: "annotated_traces",
+
+  @doc("A label column in the evaluation run's input dataset.")
+  golden_dataset: "golden_dataset",
+
+  @doc("A separate saved dataset containing reviewer labels.")
+  dataset: "dataset",
+
+  @doc("Inline reviewed examples.")
+  upload: "upload",
+}
+
+alias CalibrationLabelMappings = {
+  @doc("Values interpreted as reviewer passes. When omitted, the service uses its recognized pass values.")
+  @minItems(1)
+  pass_values?: CalibrationLabelValue[];
+
+  @doc("Values interpreted as reviewer failures. When omitted, the service uses its recognized fail values. A value cannot be mapped to both outcomes.")
+  @minItems(1)
+  fail_values?: CalibrationLabelValue[];
+};
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@discriminator("type")
+@doc("The shared discriminator for reviewer-label sources.")
+model CalibrationLabelSourceBase {
+  @doc("The reviewer-label source type.")
+  type: CalibrationLabelSourceType;
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("Human feedback on traces. The trace ID matches the evaluation item ID. Clusters may help select traces for review but are never treated as reviewer labels.")
+model AnnotatedTracesLabelSource extends CalibrationLabelSourceBase {
+  @doc("Reviewer feedback attached to traces.")
+  type: "annotated_traces";
+
+  @doc("Optional agent name used to select reviewed traces.")
+  agent_name?: string;
+
+  @doc("Optional agent version used to select reviewed traces.")
+  agent_version?: string;
+
+  @doc("Inclusive start of the trace selection window, in Unix seconds.")
+  start_time?: FoundryTimestamp;
+
+  @doc("Inclusive end of the trace selection window, in Unix seconds.")
+  end_time?: FoundryTimestamp;
+
+  @doc("Optional explicit trace IDs.")
+  trace_ids?: string[];
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("Reviewer labels in the evaluation run's input dataset.")
+model GoldenDatasetLabelSource extends CalibrationLabelSourceBase {
+  @doc("A label column in the evaluation run's input dataset.")
+  type: "golden_dataset";
+
+  @doc("Reviewer-label column. If omitted, the service considers only human_label, reviewer_label, and <evaluator name>_label, and uses a column only when at least 90 percent of nonempty values are recognized. Generic task columns are never guessed.")
+  label_column?: string;
+
+  ...CalibrationLabelMappings;
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("Reviewer labels in a separate versioned dataset.")
+model DatasetLabelSource extends CalibrationLabelSourceBase {
+  @doc("A separate saved dataset containing reviewer labels.")
+  type: "dataset";
+
+  @doc("The dataset name.")
+  @minLength(1)
+  dataset_name: string;
+
+  @doc("The concrete dataset version.")
+  @minLength(1)
+  dataset_version: string;
+
+  @doc("The reviewer-label column in the dataset.")
+  @minLength(1)
+  label_column: string;
+
+  @doc("The dataset column containing item identifiers.")
+  @minLength(1)
+  dataset_id_column: string;
+
+  @doc("The evaluation-result column matched to dataset_id_column. When omitted, the recorded item ID is used.")
+  join_column?: string;
+
+  ...CalibrationLabelMappings;
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("One inline human-reviewed item. If no evaluation run is supplied, rubric_result must contain the per-dimension scores for the saved rubric. Wording suggestions additionally require the evaluated input needed to rerun the judge.")
+model UploadedCalibrationItem {
+  @doc("Identifier used to match this review to an evaluation item.")
+  @minLength(1)
+  item_id: string;
+
+  @doc("The human reviewer's decision: true for pass, false for fail.")
+  human_label: boolean;
+
+  @doc("Per-dimension rubric judgments, required when the request has no evaluation run.")
+  rubric_result?: RubricResultProperties;
+
+  @doc("Evaluated input and response needed when rechecking suggested wording.")
+  inputs?: Record<unknown>;
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("Human-reviewed examples supplied inline, including scored items when no evaluation run is provided. Items are retained only with the job and are removed on deletion or expiry.")
+model UploadLabelSource extends CalibrationLabelSourceBase {
+  @doc("Inline reviewed examples.")
+  type: "upload";
+
+  @doc("The uploaded reviewed items.")
+  @minItems(1)
+  items: UploadedCalibrationItem[];
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "The project does not enable experimental union extends; each source model explicitly extends the shared base."
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@discriminated(#{ envelope: "none", discriminatorPropertyName: "type" })
+@doc("A source of human reviewer labels. Multiple labels within a source use the majority decision; a tie or disagreements across sources exclude the item. The service never silently selects one reviewer over another.")
+union CalibrationLabelSource {
+  annotated_traces: AnnotatedTracesLabelSource,
+  golden_dataset: GoldenDatasetLabelSource,
+  dataset: DatasetLabelSource,
+  upload: UploadLabelSource,
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@Azure.ClientGenerator.Core.clientName("WordingTuningConfig", "csharp")
+@doc("Options for rechecking suggested criterion wording with a customer-selected judge deployment.")
+model WordingTuningOptions {
+  @doc("The customer's model deployment used to generate and recheck wording. Model quota and charges apply.")
+  @minLength(1)
+  judge_deployment: string;
+
+  @doc("The maximum number of criteria to consider for wording changes.")
+  @minValue(1)
+  max_dimensions?: int32;
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("Inputs for a quality-rubric calibration job. Supply a completed evaluation run or uploaded items with per-dimension scores. Calibration requires at least 20 reviewed items, including at least 5 passes and 5 failures. Non-rubric and safety evaluators are not supported. Boolean rubrics reject enabled passing-bar or weight tuning with HTTP 400 and continue to pass only when every applicable check passes.")
+model EvaluatorCalibrationInputs {
+  @doc("Name of the saved rubric evaluator.")
+  @minLength(1)
+  evaluator_name: string;
+
+  @doc("Version of the saved rubric evaluator.")
+  @minLength(1)
+  evaluator_version: string;
+
+  @doc("Completed evaluation run whose results provide rubric judgments and item identities.")
+  evaluation_run?: EvaluationRunReference;
+
+  @doc("Sources of reviewer decisions. At least one source is required. Unreadable sources are reported and skipped if another source is usable; the job fails if none can be read.")
+  @minItems(1)
+  label_sources: CalibrationLabelSource[];
+
+  @doc("Allow a proposed normalized passing bar for a Likert rubric. Enabling this for a Boolean rubric returns HTTP 400.")
+  tune_passing_bar?: boolean = false;
+
+  @doc("Allow changes to Likert criterion weights from 1 through 10. Enabling this for a Boolean rubric returns HTTP 400.")
+  allow_weight_changes?: boolean = false;
+
+  @doc("Allow removal of criteria that do not help agreement. Protected service-owned criteria remain unchanged, the proposal retains at least one criterion, and removed criteria are omitted rather than given a weight of zero.")
+  allow_pruning?: boolean = false;
+
+  @doc("Allow wording suggestions and recheck them with the selected judge. Omit to avoid model calls.")
+  tune_wording?: WordingTuningOptions;
+
+  @doc("Relative cost of passing an item the reviewer failed. Defaults to 1; only its ratio to false_fail_cost matters.")
+  @minValue(0.1)
+  @maxValue(10)
+  false_pass_cost?: float64 = 1.0;
+
+  @doc("Relative cost of failing an item the reviewer passed. Defaults to 1; only its ratio to false_pass_cost matters.")
+  @minValue(0.1)
+  @maxValue(10)
+  false_fail_cost?: float64 = 1.0;
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("A confidence interval for the associated statistic. Bounds use the statistic's scale, and lower is no greater than upper.")
+model CalibrationConfidenceInterval {
+  @doc("Lower bound.")
+  @minValue(-1)
+  @maxValue(1)
+  lower: float64;
+
+  @doc("Upper bound.")
+  @minValue(-1)
+  @maxValue(1)
+  upper: float64;
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("A pass-rate estimate combining reviewer decisions and rubric decisions on unreviewed items.")
+model CalibrationPassRateEstimate {
+  @doc("Estimated pass rate.")
+  @minValue(0)
+  @maxValue(1)
+  estimate: float64;
+
+  @doc("The 95 percent uncertainty interval for the estimate.")
+  confidence_interval: CalibrationConfidenceInterval;
+
+  @doc("Number of items without reviewer decisions used in the estimate.")
+  @minValue(0)
+  unreviewed_count: int32;
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("The service-resolved identity, label mapping, and outcome for a reviewer-label source. No reviewed item content is included.")
+model CalibrationSourceOutcome {
+  @doc("The source type.")
+  type: CalibrationLabelSourceType;
+
+  @doc("Stable source identity used, together with the label mapping, to determine whether later reviews are comparable for drift.")
+  source_id: string;
+
+  @doc("Concrete source version when applicable.")
+  source_version?: string;
+
+  @doc("Reviewer-label column when applicable.")
+  label_column?: string;
+
+  @doc("Dataset item-identifier column used for matching, when applicable.")
+  dataset_id_column?: string;
+
+  @doc("Evaluation-result column used for matching, when applicable.")
+  join_column?: string;
+
+  ...CalibrationLabelMappings;
+
+  @doc("Number of labels accepted from this source.")
+  @minValue(0)
+  accepted_count: int32;
+
+  @doc("Number of labels rejected because their values were not recognized.")
+  @minValue(0)
+  rejected_count: int32;
+
+  @doc("Number of labels that did not match an evaluation item.")
+  @minValue(0)
+  unmatched_count: int32;
+
+  @doc("Number of items excluded because reviewer decisions tied or sources disagreed.")
+  @minValue(0)
+  conflicting_count: int32;
+
+  @doc("Whether this source could not be read with the caller's access.")
+  unavailable: boolean;
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("A proposed change to one rubric criterion.")
+model CalibrationDimensionChange {
+  @doc("Stable criterion identifier.")
+  id: string;
+
+  @doc("Current criterion wording.")
+  current_description: string;
+
+  @doc("Proposed wording, omitted when the criterion is removed.")
+  proposed_description?: string;
+
+  @doc("Current Likert weight, omitted for Boolean rubrics or implicit equal weights.")
+  @minValue(1)
+  @maxValue(10)
+  current_weight?: int32;
+
+  @doc("Proposed Likert weight, omitted for Boolean rubrics or a removed criterion.")
+  @minValue(1)
+  @maxValue(10)
+  proposed_weight?: int32;
+
+  @doc("Whether the criterion is omitted from the proposal.")
+  pruned: boolean;
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("An item where the rubric and a reviewer disagreed.")
+model CalibrationDisagreement {
+  @doc("Evaluation item identifier.")
+  item_id: string;
+
+  @doc("Human reviewer decision.")
+  human_label: boolean;
+
+  @doc("Rubric decision.")
+  judge_passed: boolean;
+
+  @doc("Identifiers of criteria that influenced the rubric decision.")
+  deciding_dimensions: string[];
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("The recommended action after reviewing a proposal.")
+union CalibrationRecommendation {
+  string,
+
+  @doc("The held-out evidence supports adopting the proposal after review.")
+  adopt: "adopt",
+
+  @doc("Keep the current rubric because the proposal is not reliably better.")
+  keep_current: "keep_current",
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("The kind of rubric change proposed.")
+union CalibrationStrategy {
+  string,
+
+  @doc("Keep the existing rubric.")
+  keep_current: "keep_current",
+
+  @doc("Change only the Likert passing bar.")
+  threshold_only: "threshold_only",
+
+  @doc("Change Likert weights and the passing bar.")
+  weights_and_threshold: "weights_and_threshold",
+
+  @doc("Keep a subset of the Boolean checks while preserving the all-applicable-checks-pass rule.")
+  checks_subset: "checks_subset",
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("A review-first calibration proposal. Agreement and improvement are evaluated on held-out reviewer decisions, not on the same decisions used to choose the changes.")
+model EvaluatorCalibrationResult {
+  @doc("Scoring mode of the saved rubric.")
+  scoring_mode: RubricScoringMode;
+
+  @doc("Number of distinct accepted reviewed items before evaluation.")
+  @minValue(0)
+  reviewed_count: int32;
+
+  @doc("Number of reviewed items in the held-out comparison. This is the denominator for current_matches and proposed_matches.")
+  @minValue(0)
+  labeled_count: int32;
+
+  @doc("Held-out reviewer decisions matching the current rubric.")
+  @minValue(0)
+  current_matches: int32;
+
+  @doc("Held-out reviewer decisions matching the proposed rubric.")
+  @minValue(0)
+  proposed_matches: int32;
+
+  @doc("Held-out agreement rate for the current rubric.")
+  @minValue(0)
+  @maxValue(1)
+  current_agreement_rate: float64;
+
+  @doc("Held-out agreement rate for the proposed rubric.")
+  @minValue(0)
+  @maxValue(1)
+  proposed_agreement_rate: float64;
+
+  @doc("Held-out Cohen's kappa for the current rubric, when defined.")
+  @minValue(-1)
+  @maxValue(1)
+  current_kappa?: float64;
+
+  @doc("Held-out Cohen's kappa for the proposed rubric, when defined.")
+  @minValue(-1)
+  @maxValue(1)
+  proposed_kappa?: float64;
+
+  @doc("The current held-out agreement rate's 95 percent uncertainty interval.")
+  current_agreement_interval: CalibrationConfidenceInterval;
+
+  @doc("The proposed held-out agreement rate's 95 percent uncertainty interval.")
+  proposed_agreement_interval: CalibrationConfidenceInterval;
+
+  @doc("The 95 percent uncertainty interval for the change in held-out agreement.")
+  improvement_interval: CalibrationConfidenceInterval;
+
+  @doc("Whether to adopt the proposal or keep the current rubric.")
+  recommendation: CalibrationRecommendation;
+
+  @doc("The proposed change strategy.")
+  strategy: CalibrationStrategy;
+
+  @doc("Whether any criterion wording changed.")
+  wording_changed: boolean;
+
+  @doc("Current normalized Likert passing bar. Omitted for Boolean rubrics.")
+  @minValue(0)
+  @maxValue(1)
+  current_threshold?: float64;
+
+  @doc("Proposed normalized Likert passing bar. Omitted for Boolean rubrics.")
+  @minValue(0)
+  @maxValue(1)
+  proposed_threshold?: float64;
+
+  @doc("Criterion-by-criterion changes.")
+  dimensions: CalibrationDimensionChange[];
+
+  @doc("Examples where the current rubric disagreed with a reviewer.")
+  top_disagreements: CalibrationDisagreement[];
+
+  @doc("Source identities, mappings, and label accounting.")
+  label_sources: CalibrationSourceOutcome[];
+
+  @doc("Non-fatal limitations and source-read warnings.")
+  warnings: string[];
+
+  @doc("Estimated pass rate and uncertainty, when estimable.")
+  pass_rate?: CalibrationPassRateEstimate;
+
+  @doc("Complete create-visible evaluator version payload. Save it unchanged with this job's ID to record calibration evidence; no evaluator version is saved by the job.")
+  @Azure.ClientGenerator.Core.alternateType(EvaluatorVersion)
+  proposed_evaluator_version: Create<TypeSpec.Http.PlainData<EvaluatorVersion>>;
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("Durable, service-owned evidence for a version saved from an unchanged calibration proposal. The record is not an editable tag and survives deletion of the job.")
+model EvaluatorCalibrationEvidence {
+  @doc("Identifier of the successful calibration job.")
+  job_id: string;
+
+  @doc("Time the proposal was calibrated, in Unix seconds.")
+  calibrated_at: FoundryTimestamp;
+
+  @doc("Evaluator version used as the calibration starting point.")
+  parent_version: string;
+
+  @doc("Number of reviewed items in the held-out comparison.")
+  @minValue(0)
+  labeled_count: int32;
+
+  @doc("Held-out reviewer decisions matching the saved proposal.")
+  @minValue(0)
+  matches: int32;
+
+  @doc("Held-out reviewer decisions matching the starting version.")
+  @minValue(0)
+  previous_matches: int32;
+
+  @doc("Held-out Cohen's kappa for the saved proposal, when defined.")
+  @minValue(-1)
+  @maxValue(1)
+  kappa?: float64;
+
+  @doc("Estimated pass rate and uncertainty, when estimable.")
+  pass_rate?: CalibrationPassRateEstimate;
+
+  @doc("Service-resolved source identities, versions, mappings, and counts used for this record.")
+  label_sources: CalibrationSourceOutcome[];
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("A calibration job. A successful job returns a proposal but never publishes an evaluator version.")
+model EvaluatorCalibrationJob {
+  ...OmitProperties<
+    JobLike<EvaluatorCalibrationResult, EvaluatorCalibrationInputs>,
+    "inputs"
+  >;
+
+  @doc("The submitted calibration inputs.")
+  inputs: EvaluatorCalibrationInputs;
+
+  @doc("Job creation time, in Unix seconds.")
+  @visibility(Lifecycle.Read)
+  created_at: FoundryTimestamp;
+
+  @doc("Job completion time, in Unix seconds, when finished.")
+  @visibility(Lifecycle.Read)
+  finished_at?: FoundryTimestamp;
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("Inputs for checking an existing rubric against reviewer decisions without changing it or calling a model.")
+model EvaluatorAgreementCheckInputs {
+  @doc("Completed evaluation run to compare.")
+  evaluation_run: EvaluationRunReference;
+
+  @doc("Optional explicit label sources. Omission checks trace reviews and recognized golden-dataset reviewer columns; an explicitly empty list is invalid.")
+  @minItems(1)
+  label_sources?: CalibrationLabelSource[];
+
+  @doc("Maximum number of unreviewed items to suggest, from 0 to 50. Defaults to 10.")
+  @minValue(0)
+  @maxValue(50)
+  review_suggestion_count?: int32 = 10;
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("Agreement status for a rubric and reviewer decisions.")
+union EvaluatorAgreementStatus {
+  string,
+
+  @doc("No readable reviewer decisions were found.")
+  no_reviews: "no_reviews",
+
+  @doc("Fewer than 20 reviewed items, or fewer than 5 passes or 5 failures, were available.")
+  not_enough_reviews: "not_enough_reviews",
+
+  @doc("The run used a rubric version whose criteria differ from the requested version.")
+  not_comparable: "not_comparable",
+
+  @doc("At least 80 percent agreement and Cohen's kappa of at least 0.40.")
+  in_sync: "in_sync",
+
+  @doc("Agreement is below 80 percent or Cohen's kappa is below 0.40.")
+  needs_tuning: "needs_tuning",
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("A comparison with the service-recorded agreement at calibration.")
+model CalibrationDrift {
+  @doc("Whether drift could be evaluated. Evaluation requires a calibration record and at least 30 unique reviewed items from the same source identities and label mappings, in addition to the agreement minimums.")
+  evaluated: boolean;
+
+  @doc("Whether the upper end of the current agreement's 95 percent uncertainty interval is below the recorded agreement. Omitted when drift was not evaluated.")
+  detected?: boolean;
+
+  @doc("Agreement recorded for the calibrated version, when available.")
+  @minValue(0)
+  @maxValue(1)
+  recorded_agreement_rate?: float64;
+
+  @doc("Current agreement rate, when available.")
+  @minValue(0)
+  @maxValue(1)
+  current_agreement_rate?: float64;
+
+  @doc("Upper bound of the current agreement's 95 percent uncertainty interval, when available.")
+  @minValue(0)
+  @maxValue(1)
+  current_agreement_upper_bound?: float64;
+
+  @doc("Why drift was not evaluated, when applicable.")
+  reason?: string;
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("Why an unreviewed item is useful to review.")
+union CalibrationReviewReason {
+  string,
+
+  @doc("A Likert score is close to the passing bar.")
+  near_passing_bar: "near_passing_bar",
+
+  @doc("Exactly one applicable Boolean check failed.")
+  one_check_failed: "one_check_failed",
+
+  @doc("The item passed with exactly one applicable Boolean check.")
+  one_check_decides_pass: "one_check_decides_pass",
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("One unreviewed item suggested for human review.")
+model CalibrationReviewSuggestion {
+  @doc("Evaluation item identifier.")
+  item_id: string;
+
+  @doc("Machine-readable selection reason.")
+  reason_code: CalibrationReviewReason;
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("Agreement with human reviewers, source accounting, drift, and suggested items to review.")
+model EvaluatorAgreementCheckResult {
+  @doc("Agreement status. If no source can be read, this is no_reviews and warnings identify unavailable sources.")
+  status: EvaluatorAgreementStatus;
+
+  @doc("Number of distinct reviewer-labeled items.")
+  @minValue(0)
+  labeled_count: int32;
+
+  @doc("Number of reviewer decisions matching the rubric, when comparable.")
+  @minValue(0)
+  matches?: int32;
+
+  @doc("Number of reviewer decisions disagreeing with the rubric, when comparable.")
+  @minValue(0)
+  disagreement_count?: int32;
+
+  @doc("Agreement rate, when comparable and defined.")
+  @minValue(0)
+  @maxValue(1)
+  agreement_rate?: float64;
+
+  @doc("Cohen's kappa, when comparable and defined.")
+  @minValue(-1)
+  @maxValue(1)
+  kappa?: float64;
+
+  @doc("Source identities, mappings, accounting, and availability.")
+  label_sources: CalibrationSourceOutcome[];
+
+  @doc("Comparison with the calibration record, if possible.")
+  drift: CalibrationDrift;
+
+  @doc("Unreviewed items ranked for human review, limited by review_suggestion_count.")
+  @maxItems(50)
+  review_suggestions: CalibrationReviewSuggestion[];
+
+  @doc("Non-fatal limitations and unavailable sources.")
+  warnings: string[];
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
