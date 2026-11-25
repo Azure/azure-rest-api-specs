@@ -2265,6 +2265,38 @@ model ExternalHealthPolicy {
 }
 
 /**
+ * Specifies the Windows recovery settings.
+ */
+@added(Versions.v2026_09_01)
+model RecoveryProfile {
+  /**
+   * Specifies whether Windows recovery is enabled. When enabled, the platform
+   * installs the recovery components required to support recovery through
+   * Windows Recovery Environment (WinRE).
+   */
+  enableWindowsRecovery?: boolean;
+
+  /**
+   * References to explicitly versioned gallery scripts that are
+   * pre-staged for execution from Windows Recovery Environment (WinRE).
+   * Supports the following gallery script version reference formats:
+   * - Private galleries with role-based access control: `/subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.Compute/galleries/{gallery}/scripts/{script}/versions/{version}`.
+   * - Direct-shared galleries: `/sharedGalleries/{galleryUniqueName}/scripts/{script}/versions/{version}`.
+   * - Community galleries: `/communityGalleries/{galleryPublicName}/scripts/{script}/versions/{version}`.
+   * The Compute control plane validates the references and applicable access
+   * requirements.
+   * This property may only be specified when Windows recovery is enabled.
+   * Each entry must identify an explicit gallery-script version, and the list
+   * cannot contain multiple versions of the same gallery script.
+   * When omitted from either a PUT or PATCH request while Windows recovery
+   * remains enabled, the existing remediation set is preserved. To clear the
+   * existing remediation set, specify an empty array. Disabling Windows recovery
+   * also clears the existing remediation set.
+   */
+  wellKnownGalleryScriptRemediations?: string[];
+}
+
+/**
  * Describes a virtual machine scale set virtual machine profile.
  */
 model VirtualMachineScaleSetVMProfile {
@@ -2292,6 +2324,12 @@ model VirtualMachineScaleSetVMProfile {
    * Specifies the boot diagnostic settings state. Minimum api-version: 2015-06-15.
    */
   diagnosticsProfile?: DiagnosticsProfile;
+
+  /**
+   * Specifies the Windows recovery settings. Minimum API version: 2026-09-01.
+   */
+  @added(Versions.v2026_09_01)
+  recoveryProfile?: RecoveryProfile;
 
   /**
    * Specifies a collection of settings for extensions installed on virtual machines in the scale set.
@@ -4327,6 +4365,12 @@ model VirtualMachineScaleSetUpdateVMProfile {
    * The virtual machine scale set diagnostics profile.
    */
   diagnosticsProfile?: DiagnosticsProfile;
+
+  /**
+   * Specifies the Windows recovery settings. Minimum API version: 2026-09-01.
+   */
+  @added(Versions.v2026_09_01)
+  recoveryProfile?: RecoveryProfile;
 
   /**
    * The virtual machine scale set extension profile.
@@ -7113,6 +7157,12 @@ model VirtualMachineProperties {
    * Specifies the boot diagnostic settings state. Minimum api-version: 2015-06-15.
    */
   diagnosticsProfile?: DiagnosticsProfile;
+
+  /**
+   * Specifies the Windows recovery settings. Minimum API version: 2026-09-01.
+   */
+  @added(Versions.v2026_09_01)
+  recoveryProfile?: RecoveryProfile;
 
   /**
    * Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Availability sets overview](https://docs.microsoft.com/azure/virtual-machines/availability-set-overview). For more information on Azure planned maintenance, see [Maintenance and updates for Virtual Machines in Azure](https://docs.microsoft.com/azure/virtual-machines/maintenance-and-updates). Currently, a VM can only be added to availability set at creation time. The availability set to which the VM is being added should be under the same resource group as the availability set resource. An existing VM cannot be added to an availability set. This property cannot exist along with a non-null properties.virtualMachineScaleSet reference.
@@ -10188,6 +10238,14 @@ model VirtualMachineRunCommandProperties {
    * Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete.
    */
   asyncExecution?: boolean;
+
+  /**
+   * Specifies whether the Run Command is executed in Windows Recovery
+   * Environment (WinRE). Recovery Run Commands use the recovery execution
+   * path instead of the standard VM Run Command execution path.
+   */
+  @added(Versions.v2026_09_01)
+  isRecoveryRunCommand?: boolean;
 
   /**
    * Specifies the user account on the VM when executing the run command.
