@@ -1063,18 +1063,6 @@ model BlobServicePropertiesCsharp {
 
 @@convenientAPI(Storage.Blob.Service.submitBatch, false, "csharp,java");
 @@convenientAPI(Storage.Blob.Container.submitBatch, false, "csharp,java");
-// The Arrow listings return a binary Apache Arrow stream (or XML when the service falls back), which Java parses
-// itself. A convenience method would deserialize that body as an XML string, so Java uses the protocol methods.
-@@convenientAPI(
-  Storage.Blob.Container.listBlobFlatSegmentApacheArrow,
-  false,
-  "java"
-);
-@@convenientAPI(
-  Storage.Blob.Container.listBlobHierarchySegmentApacheArrow,
-  false,
-  "java"
-);
 
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(
@@ -1583,9 +1571,8 @@ model BlobStorageError {
 
 @@alternateType(Storage.Blob.Error, BlobStorageError, "java");
 
-// The required blob items make the Java emitter collect both unwrapped lists in locals, leaving the optional prefix list
-// unset, so any page with a prefix fails. With both lists optional, the emitter appends to field-initialized lists, so
-// the getters never return null, as in the shipped model, and the default XML root stays "Blobs".
+// A page can hold only blob prefixes, or nothing. With both lists optional, the emitter appends to field-initialized
+// lists, so the getters never return null, as in the shipped model, and the default XML root stays "Blobs".
 @TypeSpec.Xml.name("Blobs")
 model BlobHierarchyListSegmentJava {
   /** The blob items. */
