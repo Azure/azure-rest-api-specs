@@ -80,6 +80,7 @@ interface SignUpSettings {
   /**
    * Update Sign-Up settings.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   #deprecated "deprecated"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<

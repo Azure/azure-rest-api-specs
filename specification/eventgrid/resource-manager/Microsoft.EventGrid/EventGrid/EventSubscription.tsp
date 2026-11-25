@@ -134,6 +134,7 @@ interface EventSubscriptions {
   /**
    * Update an existing event subscription for a domain topic.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @summary("Update a nested event subscription for a domain topic.")
   @patch(#{ implicitOptionality: false })
   update is EventSubscriptionOps.CustomPatchAsync<
@@ -300,6 +301,7 @@ interface TopicEventSubscriptions {
   /**
    * Update an existing event subscription for a topic.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @summary("Update an event subscription for a topic.")
   @patch(#{ implicitOptionality: false })
   update is TopicEventSubscriptionOps.CustomPatchAsync<
@@ -419,6 +421,7 @@ interface DomainEventSubscriptions {
   /**
    * Update an existing event subscription for a topic.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @summary("Update an event subscription for a domain.")
   @patch(#{ implicitOptionality: false })
   update is DomainEventSubscriptionOps.CustomPatchAsync<
@@ -545,6 +548,7 @@ interface EventSubscriptionOperationGroup {
   /**
    * Asynchronously updates an existing event subscription.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @summary("Update an event subscription.")
   @patch(#{ implicitOptionality: false })
   update is EventSubscriptionOperationGroupOps.CustomPatchAsync<
@@ -690,6 +694,7 @@ interface SystemTopicEventSubscriptions {
   /**
    * Update an existing event subscription of a system topic.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @summary("Update event subscription of a system topic.")
   @patch(#{ implicitOptionality: false })
   update is SystemTopicEventSubscriptionOps.CustomPatchAsync<
@@ -809,6 +814,7 @@ interface PartnerTopicEventSubscriptions {
   /**
    * Update an existing event subscription of a partner topic.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @summary("Update event subscription of a partner topic.")
   @patch(#{ implicitOptionality: false })
   update is PartnerTopicEventSubscriptionOps.CustomPatchAsync<

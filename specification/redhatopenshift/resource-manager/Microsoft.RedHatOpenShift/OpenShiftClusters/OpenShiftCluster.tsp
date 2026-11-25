@@ -46,6 +46,7 @@ interface OpenShiftClusters {
   /**
    * The operation returns properties of a OpenShift cluster.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @summary("Creates or updates a OpenShift cluster with the specified subscription, resource group and resource name.")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<

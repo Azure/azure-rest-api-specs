@@ -74,6 +74,7 @@ interface VirtualMachineDiagnosticRunCommands {
   /**
    * The operation to update the diagnostic run command.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @added(Versions.v2026_04_01)
   @patch(#{ implicitOptionality: false })
   update is VirtualMachineDiagnosticRunCommandOps.CustomPatchAsync<
@@ -164,6 +165,7 @@ interface VirtualMachineScaleSetVMDiagnosticRunCommands {
   /**
    * The operation to update the VMSS VM diagnostic run command.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@typespec/http/patch-implicit-optional" "non-standard operations"
   @added(Versions.v2026_04_01)

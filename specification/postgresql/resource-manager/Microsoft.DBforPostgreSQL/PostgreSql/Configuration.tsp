@@ -50,6 +50,7 @@ interface Configurations {
   /**
    * Updates the value assigned to a specific modifiable configuration (also known as server parameter) of a server.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @patch(#{ implicitOptionality: false })
   @useFinalStateVia("azure-async-operation")
   update is ArmCustomPatchAsync<

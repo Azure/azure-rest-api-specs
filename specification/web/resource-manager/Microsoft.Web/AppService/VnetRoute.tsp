@@ -90,6 +90,7 @@ interface VnetRoutes {
   /**
    * Description for Create or update a Virtual Network route in an App Service plan.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @summary("Create or update a Virtual Network route in an App Service plan.")
   @patch(#{ implicitOptionality: false })
   updateVnetRoute is ArmCustomPatchSync<

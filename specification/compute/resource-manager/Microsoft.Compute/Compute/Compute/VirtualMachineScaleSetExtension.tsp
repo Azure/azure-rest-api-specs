@@ -77,6 +77,7 @@ interface VirtualMachineScaleSetExtensions {
   /**
    * The operation to update an extension.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @patch(#{ implicitOptionality: false })
   update is ComputeCustomPatchAsync<
     VirtualMachineScaleSetExtension,

@@ -88,6 +88,7 @@ interface CurrentQuotaLimitBases {
    *   • To update the quota value, submit the JSON response to the quota request API to update the quota.
    *   • To update the quota. use the PATCH operation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" ""
   @tag("QuotaInformation")
   @patch(#{ implicitOptionality: false })

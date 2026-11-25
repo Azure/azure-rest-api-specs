@@ -62,6 +62,7 @@ interface Clusters {
   /**
    * Modifies mutable properties on the Event Hubs Cluster. This operation is idempotent.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Cluster,
@@ -115,6 +116,7 @@ interface Clusters {
   /**
    * Replace all specified Event Hubs Cluster settings with those contained in the request body. Leaves the settings not specified in the request body unmodified.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   #suppress "@typespec/http/patch-implicit-optional" "PATCH operation properties are explicitly defined as required/optional matching the original OpenAPI specification."
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing long-running operation does not use the standard location header pattern as defined in the original OpenAPI specification."
   @patch

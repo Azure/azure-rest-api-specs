@@ -28,6 +28,7 @@ interface PrivateClouds {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @Azure.Core.useFinalStateVia("location")
   update is ArmCustomPatchAsync<
     PrivateCloud,

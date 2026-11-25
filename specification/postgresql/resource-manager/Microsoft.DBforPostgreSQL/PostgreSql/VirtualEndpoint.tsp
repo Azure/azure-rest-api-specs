@@ -50,6 +50,7 @@ interface VirtualEndpoints {
   /**
    * Updates a pair of virtual endpoints for a server.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @patch(#{ implicitOptionality: false })
   @useFinalStateVia("azure-async-operation")
   update is ArmCustomPatchAsync<
