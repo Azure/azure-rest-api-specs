@@ -569,6 +569,7 @@ interface Pools {
   >;
 
   @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
+  @removed(Microsoft.DevOpsInfrastructure.Versions.v2026_11_12)
   @action("resources")
   @post
   deleteResources is ArmResourceActionSync<
