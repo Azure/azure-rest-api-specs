@@ -2396,6 +2396,7 @@ model WindowsConfiguration {
 
   /**
    * Indicates whether VMAgent Platform Updates are enabled for the Windows Virtual Machine.
+   * This property is planned for deprecation and is managed by the platform. Customers cannot modify it through the API.
    */
   @visibility(Lifecycle.Read)
   enableVMAgentPlatformUpdates?: boolean;
@@ -2535,6 +2536,7 @@ model LinuxConfiguration {
 
   /**
    * Indicates whether VMAgent Platform Updates is enabled for the Linux virtual machine. Default value is false.
+   * This property is planned for deprecation and is managed by the platform. Customers cannot modify it through the API.
    */
   enableVMAgentPlatformUpdates?: boolean;
 }

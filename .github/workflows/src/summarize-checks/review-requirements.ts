@@ -9,6 +9,7 @@ export type ReviewRequirements = {
   arm: boolean;
   dataPlane: boolean;
   suppressions: boolean;
+  clientCustomization: boolean;
 };
 
 function isReleaseBranch(branchName: string): boolean {
@@ -25,21 +26,30 @@ export function evaluateReviewRequirements(
   context: ReviewContext,
 ): ReviewRequirements {
   const active = specReviewApplies(context);
+  const managementServices = impact.services.filter(
+    (service) => service.plane === "resource-manager",
+  );
+  const arm =
+    active &&
+    managementServices.some(
+      (service) =>
+        service.hasAffectedReadme ||
+        service.changes.some((kind) => kind === "api" || kind === "examples" || kind === "readme"),
+    );
   return {
-    arm:
+    arm,
+    // ARM reviewers cover client customizations in PRs that already need ARM review.
+    clientCustomization:
       active &&
-      impact.services.some(
-        (service) =>
-          service.plane === "resource-manager" &&
-          (service.hasAffectedReadme ||
-            service.changes.some(
-              (kind) => kind === "api" || kind === "examples" || kind === "readme",
-            )),
-      ),
+      !arm &&
+      managementServices.some((service) => service.changes.includes("sdk-configuration")),
     dataPlane:
       active &&
       impact.services.some(
-        (service) => service.plane === "data-plane" && service.newApiVersions.length > 0,
+        (service) =>
+          service.plane === "data-plane" &&
+          // In-flight older artifacts retain their original new-version-only behavior.
+          (service.hasApiDefinitionChanges ?? service.newApiVersions.length > 0),
       ),
     suppressions: impact.services.some(
       (service) => service.plane === "resource-manager" && service.suppressionsChanged,

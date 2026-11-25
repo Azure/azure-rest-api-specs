@@ -15,7 +15,6 @@ import {
   SemanticReviewCompletion,
   SemanticReviewScope,
   SPECIFICATION_OVER_LIMITS_REASON,
-  type CommitStatus,
   type SpecificationTotals,
   type EvaluatedSemanticReview,
 } from "./arm-semantic-review.ts";
@@ -270,10 +269,7 @@ export async function finalizeUnpublishedArmSemanticReview({
 
   const targetUrl = getRunStatusUrl(context, owner, repo);
   core.info(`Checking whether ${targetUrl} left a Pending status on ${headSha}`);
-  const statuses: CommitStatus[] = await github.paginate(
-    github.rest.repos.listCommitStatusesForRef,
-    { owner, repo, ref: headSha, per_page: PER_PAGE_MAX },
-  );
+  const statuses = await getLatestCommitStatuses(github, owner, repo, headSha);
   const latestStatus = getLatestSemanticReviewStatus(statuses);
   core.info(
     `Latest ${ARM_SEMANTIC_REVIEW_STATUS}: ${latestStatus?.state ?? "none"} ` +

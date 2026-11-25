@@ -32,6 +32,18 @@ namespace CognitiveServicesClientCustomizations {
      */
     sku: ArcDeploymentSku;
   }
+
+  /** The scope used to aggregate available managed compute capacity. */
+  @TypeSpec.Versioning.added(Versions.v2026_11_01)
+  union CognitiveServicesManagedComputeCapacityOfferScope {
+    string,
+
+    /** Capacity aggregated globally. */
+    Global: "Global",
+
+    /** Capacity aggregated within a data zone. */
+    DataZone: "DataZone",
+  }
 }
 
 @@clientName(
@@ -170,6 +182,7 @@ op regenerateKeyCustom(
 @@clientLocation(checkDomainAvailability, "ManagementClient", "go");
 @@clientLocation(checkSkuAvailability, "ManagementClient", "go");
 @@clientLocation(calculateModelCapacity, "ManagementClient", "go");
+@@clientName(AttachedAksClusters, "AttachedAKSClusters", "go");
 
 @@alternateType(
   Azure.ResourceManager.CommonTypes.Resource.id,
@@ -1214,8 +1227,20 @@ op regenerateKeyCustom(
   "csharp"
 );
 @@clientName(SshSettings.adminEnabled, "IsAdminEnabled", "csharp");
+@@clientName(AttachedAksClusterListItem.type, "ResourceType", "csharp");
+@@clientName(
+  AttachedAksClusterHealthComponent.lastObservedAtUtc,
+  "LastObservedOn",
+  "csharp"
+);
+@@clientName(
+  AttachedAksClusterHealthStatus.lastObservedAtUtc,
+  "LastObservedOn",
+  "csharp"
+);
 
 // Type changes: use standard ARM types for etag, location, identity
+@@alternateType(AttachedAksClusterListItem.type, armResourceType, "csharp");
 @@alternateType(ArcDeployment.etag, eTag, "csharp");
 @@alternateType(Compute.etag, eTag, "csharp");
 @@alternateType(ComputeProperties.location, azureLocation, "csharp");
@@ -1384,5 +1409,44 @@ op regenerateKeyCustom(
 @@clientName(
   RaiPolicyCustomExternalSafetyProviderReference.blocking,
   "IsBlocking",
+  "csharp"
+);
+
+@@alternateType(
+  ManagedComputeCapacityListParameters.deploymentId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ManagedComputeCapacityListParameters.location,
+  azureLocation,
+  "csharp"
+);
+@@alternateType(
+  DeploymentProperties.contextCacheContainerId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ManagedComputeCapacityProperties.offerScope,
+  CognitiveServicesClientCustomizations.CognitiveServicesManagedComputeCapacityOfferScope,
+  "csharp"
+);
+@@clientName(
+  RaiEgressHeaderValueRef,
+  "RaiEgressHeaderValueReference",
+  "csharp"
+);
+@@clientName(
+  RaiEgressManagedIdentityRef,
+  "RaiEgressManagedIdentityReference",
+  "csharp"
+);
+@@clientName(RaiEgressSecretRef, "RaiEgressSecretReference", "csharp");
+@@clientName(RaiEgressHeaderTransform.valueRef, "ValueReference", "csharp");
+@@clientName(RaiEgressHeaderValueRef.secretRef, "SecretReference", "csharp");
+@@clientName(
+  RaiEgressHeaderValueRef.managedIdentityRef,
+  "ManagedIdentityReference",
   "csharp"
 );

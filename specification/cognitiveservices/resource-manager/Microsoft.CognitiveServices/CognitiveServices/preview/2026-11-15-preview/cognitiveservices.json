@@ -999,32 +999,16 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "offer",
-            "in": "query",
-            "description": "The offer name to query capacity for (required).",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ManagedComputeCapacityListParameters.offer"
           },
           {
-            "name": "acceleratorType",
-            "in": "query",
-            "description": "Optional accelerator type filter to narrow results to a specific accelerator type.",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/ManagedComputeCapacityListParameters.acceleratorType"
           },
           {
-            "name": "deploymentId",
-            "in": "query",
-            "description": "Optional deployment resource ID. When provided, returns capacity for the specific region\nwhere the deployment is hosted rather than the best available region.",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/ManagedComputeCapacityListParameters.deploymentId"
           },
           {
-            "name": "location",
-            "in": "query",
-            "description": "Optional Azure location used to select a DataZone scope. Without a deployment ID,\nomitted or blank location returns Global and both US and EU DataZone capacities.\nA supported location returns Global and the matching DataZone capacities; an\nunsupported location returns Global capacity only. With a deployment ID, a\nnonblank location must match the parent account location, ignoring case and\nsurrounding whitespace, or the request returns HTTP 400. Capacity is still\nreturned for the deployment's backend region.",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/ManagedComputeCapacityListParameters.location"
           }
         ],
         "responses": {
@@ -27755,6 +27739,38 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "ifMatch"
+    },
+    "ManagedComputeCapacityListParameters.acceleratorType": {
+      "name": "acceleratorType",
+      "in": "query",
+      "description": "Optional accelerator type filter to narrow results to a specific accelerator type.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ManagedComputeCapacityListParameters.deploymentId": {
+      "name": "deploymentId",
+      "in": "query",
+      "description": "Optional deployment resource ID. When provided, returns capacity for the specific region\nwhere the deployment is hosted rather than the best available region.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ManagedComputeCapacityListParameters.location": {
+      "name": "location",
+      "in": "query",
+      "description": "Optional Azure location used to select a DataZone scope. Without a deployment ID,\nomitted or blank location returns Global and both US and EU DataZone capacities.\nA supported location returns Global and the matching DataZone capacities; an\nunsupported location returns Global capacity only. With a deployment ID, a\nnonblank location must match the parent account location, ignoring case and\nsurrounding whitespace, or the request returns HTTP 400. Capacity is still\nreturned for the deployment's backend region.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ManagedComputeCapacityListParameters.offer": {
+      "name": "offer",
+      "in": "query",
+      "description": "The offer name to query capacity for (required).",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "RaiBindingListParameters": {
       "name": "$top",

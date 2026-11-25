@@ -5,6 +5,8 @@ export const ServiceImpactSchema = z.object({
   plane: z.enum(["resource-manager", "data-plane", "unknown"]),
   changes: z.array(z.enum(["api", "examples", "sdk-configuration", "readme", "other"])),
   hasAffectedReadme: z.boolean().default(false),
+  // Older artifacts only recorded version additions, not contract-file changes.
+  hasApiDefinitionChanges: z.boolean().optional(),
   typeSpec: z.boolean(),
   newApiVersions: z.array(z.string()),
   suppressionsChanged: z.boolean(),

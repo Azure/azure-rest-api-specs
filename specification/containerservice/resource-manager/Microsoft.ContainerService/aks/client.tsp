@@ -24,6 +24,21 @@ using Microsoft.ContainerService;
 // .NET SDK naming: "Data" suffix is reserved for ResourceData/TrackedResourceData types.
 @@clientName(PoolBootstrapData, "AgentPoolBootstrapInfo", "csharp");
 
+// .NET SDK naming: scope the bootstrap helper types to the agent pool domain so they
+// are not confused with unrelated bootstrapping in IntelliSense.
+@@clientName(BootstrapAzureConfig, "AgentPoolBootstrapAzureConfig", "csharp");
+@@clientName(
+  BootstrapComponentVersions,
+  "AgentPoolBootstrapComponentVersions",
+  "csharp"
+);
+@@clientName(
+  BootstrapNetworkingConfig,
+  "AgentPoolBootstrapNetworkingConfig",
+  "csharp"
+);
+@@clientName(BootstrapNodeConfig, "AgentPoolBootstrapNodeConfig", "csharp");
+
 // .NET SDK naming: add RP/service context prefix for IntelliSense clarity.
 // AllowedSubject belongs to IdentityBinding (referenced only by
 // IdentityBindingProperties.allowedSubjects), so it takes the IdentityBinding
@@ -1396,6 +1411,19 @@ using Microsoft.ContainerService;
   "csharp"
 );
 @@clientName(ServiceAccountImagePullProfile.enabled, "IsEnabled", "csharp");
+// .NET SDK naming: boolean members use the "Is" prefix; the JSON name stays "enabled".
+@@clientName(
+  ManagedClusterStorageProfileDiskCSIDriverQuickAttachDetach.enabled,
+  "IsEnabled",
+  "csharp"
+);
+@@clientName(BastionProfile.enabled, "IsEnabled", "csharp");
+// The documentation identifies this value as an ARM resource ID; the wire format stays a string.
+@@alternateType(
+  ServiceAccountImagePullProfile.defaultManagedIdentityId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(
   TransitEncryptionType.mTLS,
   "ClientCertificateAuthentication",
@@ -1758,6 +1786,27 @@ namespace Azure.ResourceManager.Models {
 @@clientName(
   SafeguardsAvailableVersion,
   "ContainerServiceSafeguardsAvailableVersion",
+  "csharp"
+);
+// Properties/helper models: carry the owning feature's context into the public names.
+@@clientName(
+  MaintenanceWindowResourceProperties,
+  "ContainerServiceManagedMaintenanceWindowProperties",
+  "csharp"
+);
+@@clientName(
+  MaintenanceWindowSource,
+  "UpgradeInsightMaintenanceWindowSource",
+  "csharp"
+);
+@@clientName(
+  GuardrailsAvailableVersionsProperties,
+  "ContainerServiceGuardrailsAvailableVersionsProperties",
+  "csharp"
+);
+@@clientName(
+  SafeguardsAvailableVersionsProperties,
+  "ContainerServiceSafeguardsAvailableVersionsProperties",
   "csharp"
 );
 // Profile models: add a service/resource prefix so they aren't confused with the

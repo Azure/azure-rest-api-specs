@@ -11,6 +11,7 @@ import {
   normalizeSpecification,
   resolveComparison,
 } from "../scripts/git-evidence.ts";
+import { workspaceSparseRoots } from "../scripts/prepare-assessment.ts";
 
 function git(repo: string, ...args: string[]) {
   const result = spawnSync("git", ["-C", repo, ...args], { encoding: "utf8" });
@@ -239,6 +240,106 @@ void test("creates a worktree with multiple sparse roots", () => {
     );
   } finally {
     spawnSync("git", ["-C", repo, "worktree", "remove", "--force", destination]);
+    fs.rmSync(repo, { recursive: true, force: true });
+    fs.rmSync(worktreeRoot, { recursive: true, force: true });
+  }
+});
+
+void test("sparse worktrees resolve revision-local workspace support packages", () => {
+  const repo = fs.mkdtempSync(path.join(os.tmpdir(), "typespec-workspace-source-"));
+  const worktreeRoot = fs.mkdtempSync(path.join(os.tmpdir(), "typespec-workspace-checkouts-"));
+  const baseDestination = path.join(worktreeRoot, "base");
+  const headDestination = path.join(worktreeRoot, "head");
+  try {
+    git(repo, "init", "-q");
+    git(repo, "config", "user.email", "test@example.com");
+    git(repo, "config", "user.name", "Test");
+    fs.mkdirSync(path.join(repo, "specification", "widget"), { recursive: true });
+    fs.mkdirSync(path.join(repo, "specification", "excluded"), { recursive: true });
+    fs.mkdirSync(path.join(repo, "eng", "typespec-rulesets"), { recursive: true });
+    fs.writeFileSync(
+      path.join(repo, "package.json"),
+      JSON.stringify({
+        private: true,
+        type: "module",
+        devDependencies: { "@azure-tools/typespec-azure-rulesets": "workspace:*" },
+      }),
+    );
+    fs.writeFileSync(
+      path.join(repo, "pnpm-workspace.yaml"),
+      'packages:\n  - "eng/typespec-rulesets"\n',
+    );
+    fs.writeFileSync(path.join(repo, "specification", "widget", "main.tsp"), "namespace Widget;\n");
+    fs.writeFileSync(
+      path.join(repo, "specification", "excluded", "main.tsp"),
+      "namespace Excluded;\n",
+    );
+    fs.writeFileSync(
+      path.join(repo, "eng", "typespec-rulesets", "package.json"),
+      JSON.stringify({
+        name: "@azure-tools/typespec-azure-rulesets",
+        version: "0.0.0",
+        type: "module",
+        exports: "./index.js",
+      }),
+    );
+    fs.writeFileSync(
+      path.join(repo, "eng", "typespec-rulesets", "index.js"),
+      'export const revision = "base";\n',
+    );
+    git(repo, "add", ".");
+    git(repo, "commit", "-qm", "base");
+    const baseCommit = git(repo, "rev-parse", "HEAD");
+
+    fs.writeFileSync(
+      path.join(repo, "eng", "typespec-rulesets", "index.js"),
+      'export const revision = "head";\n',
+    );
+    git(repo, "add", ".");
+    git(repo, "commit", "-qm", "head");
+    const headCommit = git(repo, "rev-parse", "HEAD");
+
+    const checkoutRoots = workspaceSparseRoots(["specification/widget"]);
+    createSparseWorktree(repo, baseCommit, checkoutRoots, baseDestination);
+    createSparseWorktree(repo, headCommit, checkoutRoots, headDestination);
+
+    const resolveRevision = (worktree: string) => {
+      const install =
+        process.platform === "win32"
+          ? spawnSync(
+              process.env.ComSpec ?? "cmd.exe",
+              ["/d", "/s", "/c", "pnpm install --ignore-scripts --offline --no-frozen-lockfile"],
+              { cwd: worktree, encoding: "utf8" },
+            )
+          : spawnSync(
+              "pnpm",
+              ["install", "--ignore-scripts", "--offline", "--no-frozen-lockfile"],
+              { cwd: worktree, encoding: "utf8" },
+            );
+      assert.equal(install.status, 0, install.stderr || install.stdout);
+      const run = spawnSync(
+        process.execPath,
+        [
+          "--input-type=module",
+          "--eval",
+          'import { revision } from "@azure-tools/typespec-azure-rulesets"; console.log(revision);',
+        ],
+        { cwd: worktree, encoding: "utf8" },
+      );
+      assert.equal(run.status, 0, run.stderr);
+      return run.stdout.trim();
+    };
+
+    assert.equal(resolveRevision(baseDestination), "base");
+    assert.equal(resolveRevision(headDestination), "head");
+    assert.equal(
+      fs.existsSync(path.join(headDestination, "specification", "excluded", "main.tsp")),
+      false,
+    );
+    assert.deepEqual(checkoutRoots, ["eng/typespec-rulesets", "specification/widget"]);
+  } finally {
+    spawnSync("git", ["-C", repo, "worktree", "remove", "--force", baseDestination]);
+    spawnSync("git", ["-C", repo, "worktree", "remove", "--force", headDestination]);
     fs.rmSync(repo, { recursive: true, force: true });
     fs.rmSync(worktreeRoot, { recursive: true, force: true });
   }
