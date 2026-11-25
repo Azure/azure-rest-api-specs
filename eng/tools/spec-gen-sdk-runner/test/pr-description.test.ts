@@ -616,6 +616,16 @@ describe("API Versions regeneration warning", () => {
     expect(body.endsWith("<!-- azsdk-autopr-description:v1:end -->")).toBe(true);
   });
 
+  test("a new PR with incomplete metadata reports nothing until a later comparison", () => {
+    const { value: body, warnings } = compare([], "", { ApiVersionsComplete: false });
+    expect(warnings).toEqual([]);
+    expect(body).not.toContain("comparison unavailable");
+    expect(body).not.toContain(warningTitle);
+    expect(compare(currentVersions, body).warnings).toContainEqual(
+      expect.stringContaining("API Versions comparison unavailable"),
+    );
+  });
+
   test("shows only changed groups above details, including added and removed namespaces", () => {
     const previous = compare(previousVersions).value;
     const { value: body, warnings } = compare(currentVersions, previous);

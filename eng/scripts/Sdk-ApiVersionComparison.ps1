@@ -108,8 +108,9 @@ function New-ApiVersionComparison($Entries, [bool]$Complete, [string]$PreviousBo
     }
     $warning = $previous.warning
     $diagnostic = ''
-    if ($null -eq $current -or $previous.unresolved -or
-        ($PreviousPullRequestState -ne 'new' -and $null -eq $previous.current -and $null -eq $warning)) {
+    # A new PR has nothing to compare, so incomplete metadata only affects its stored snapshot.
+    if ($PreviousPullRequestState -ne 'new' -and
+        ($null -eq $current -or $previous.unresolved -or ($null -eq $previous.current -and $null -eq $warning))) {
         $diagnostic = 'API Versions comparison unavailable: complete previous and current generated metadata could not be verified. Any earlier API Versions warning remains unresolved.'
     }
     if ($null -ne $current -and -not $previous.unresolved) {
