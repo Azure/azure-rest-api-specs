@@ -34,13 +34,5 @@ using Microsoft.DigitalAssets;
 @@clientName(ZkpRollupProperties.bootNodeP2pPort, "BootNodeP2PPort", "go");
 @@clientName(ZkpRollupProperties.bootNodeRpcPort, "BootNodeRPCPort", "go");
 @@clientName(ZkpRollupPatchProperties.bootNodeIp, "BootNodeIP", "go");
-@@clientName(
-  ZkpRollupPatchProperties.bootNodeP2pPort,
-  "BootNodeP2PPort",
-  "go"
-);
-@@clientName(
-  ZkpRollupPatchProperties.bootNodeRpcPort,
-  "BootNodeRPCPort",
-  "go"
-);
+@@clientName(ZkpRollupPatchProperties.bootNodeP2pPort, "BootNodeP2PPort", "go");
+@@clientName(ZkpRollupPatchProperties.bootNodeRpcPort, "BootNodeRPCPort", "go");
