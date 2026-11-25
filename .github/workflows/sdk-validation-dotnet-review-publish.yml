@@ -1,0 +1,213 @@
+name: Publish Generated .NET SDK Review
+
+on: # zizmor: ignore[dangerous-triggers] Only default-branch workflow code runs and artifacts are revalidated before publication.
+  workflow_run:
+    workflows: ["Generated .NET SDK Review and TypeSpec Remediation (Report-Only)"]
+    types: [completed]
+    branches: [main]
+
+permissions: {}
+
+jobs:
+  resolve:
+    if: >-
+      github.repository == 'Azure/azure-rest-api-specs' &&
+      github.event.workflow_run.repository.id == github.repository_id &&
+      !github.event.workflow_run.repository.fork &&
+      github.event.workflow_run.path == '.github/workflows/sdk-validation-dotnet-review.lock.yml' &&
+      github.event.workflow_run.event == 'workflow_run'
+    runs-on: ubuntu-slim
+    permissions:
+      actions: read
+      contents: read
+    outputs:
+      artifact-name: ${{ steps.find-context.outputs.artifact-name }}
+      pr-number: ${{ steps.resolve-context.outputs.pr-number }}
+      result-artifact-name: ${{ steps.find-context.outputs.result-artifact-name }}
+      trusted-context-artifact-name: ${{ steps.find-context.outputs.trusted-context-artifact-name }}
+      should-publish: ${{ steps.resolve-context.outputs.should-publish || 'false' }}
+      validated-result-available: ${{ steps.find-context.outputs.validated-result-available || 'false' }}
+    steps:
+      - name: Find current-attempt review artifacts
+        id: find-context
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const response = await github.rest.actions.listWorkflowRunArtifacts({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: context.payload.workflow_run.id,
+              per_page: 100,
+            });
+            const runAttempt = context.payload.workflow_run.run_attempt;
+            if (!Number.isSafeInteger(runAttempt) || runAttempt < 1) {
+              throw new Error(`Invalid workflow run attempt: ${JSON.stringify(runAttempt)}`);
+            }
+            const attemptSuffix = `-attempt-${runAttempt}`;
+            const unexpiredArtifacts = response.data.artifacts.filter(
+              (artifact) => !artifact.expired,
+            );
+            const currentAttemptArtifacts = unexpiredArtifacts.filter(
+              (artifact) => artifact.name.endsWith(attemptSuffix),
+            );
+            const workflowRunId = context.payload.workflow_run.id;
+            const contextArtifacts = unexpiredArtifacts
+              .map((artifact) => ({
+                artifact,
+                match: artifact.name.match(
+                  /^sdk-review-publication-context-(\d+)-attempt-(\d+)$/,
+                ),
+              }))
+              .filter(
+                ({ match }) =>
+                  match !== null &&
+                  Number(match[1]) === workflowRunId &&
+                  Number(match[2]) <= runAttempt,
+              )
+              .sort((left, right) => Number(right.match[2]) - Number(left.match[2]));
+            const selectedContextAttempt = contextArtifacts[0]?.match[2];
+            const selectedContextArtifacts = contextArtifacts.filter(
+              ({ match }) => match[2] === selectedContextAttempt,
+            );
+            const resultArtifacts = currentAttemptArtifacts.filter(
+              (artifact) => artifact.name.startsWith("sdk-review-result-workflow-"),
+            );
+            const trustedContextArtifacts = currentAttemptArtifacts.filter(
+              (artifact) => artifact.name.startsWith("sdk-review-trusted-context-"),
+            );
+            if (selectedContextArtifacts.length > 1) {
+              throw new Error(`Expected at most one publication context for attempt ${selectedContextAttempt}, found ${selectedContextArtifacts.length}`);
+            }
+            if (resultArtifacts.length > 1) {
+              throw new Error(`Expected at most one validated result, found ${resultArtifacts.length}`);
+            }
+            if (trustedContextArtifacts.length > 1) {
+              throw new Error(`Expected at most one trusted review context, found ${trustedContextArtifacts.length}`);
+            }
+            core.setOutput("artifact-name", selectedContextArtifacts[0]?.artifact.name ?? "");
+            core.setOutput("result-artifact-name", resultArtifacts[0]?.name ?? "");
+            core.setOutput(
+              "trusted-context-artifact-name",
+              trustedContextArtifacts[0]?.name ?? "",
+            );
+            const validatedResultAvailable =
+              context.payload.workflow_run.conclusion === "success" &&
+              resultArtifacts.length === 1 &&
+              trustedContextArtifacts.length === 1;
+            core.setOutput(
+              "validated-result-available",
+              validatedResultAvailable ? "true" : "false",
+            );
+
+      - name: Checkout trusted publisher
+        if: steps.find-context.outputs.artifact-name != ''
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          sparse-checkout: |
+            .github
+            eng
+          persist-credentials: false
+
+      - name: Install dependencies for github-script actions
+        if: steps.find-context.outputs.artifact-name != ''
+        uses: ./.github/actions/install-deps-github-script
+
+      - name: Download trusted publication context
+        if: steps.find-context.outputs.artifact-name != ''
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: ${{ steps.find-context.outputs.artifact-name }}
+          path: ${{ runner.temp }}/sdk-review-publication-context
+          github-token: ${{ github.token }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Resolve publication identity
+        if: steps.find-context.outputs.artifact-name != ''
+        id: resolve-context
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          PUBLICATION_CONTEXT_PATH: ${{ runner.temp }}/sdk-review-publication-context/sdk-review-publication-context.json
+        with:
+          script: |
+            const { readSdkReviewPublicationContext } = await import(
+              '${{ github.workspace }}/.github/workflows/src/sdk-validation-dotnet-review-publisher.ts'
+            );
+            const publicationContext = await readSdkReviewPublicationContext(
+              process.env.PUBLICATION_CONTEXT_PATH,
+            );
+            core.setOutput("pr-number", publicationContext.source.specPrNumber);
+            core.setOutput("should-publish", "true");
+
+  publish:
+    needs: resolve
+    if: needs.resolve.outputs.should-publish == 'true'
+    concurrency:
+      group: publish-generated-dotnet-sdk-review-${{ needs.resolve.outputs.pr-number }}
+      cancel-in-progress: false
+    runs-on: ubuntu-slim
+    permissions:
+      actions: read
+      contents: read
+      issues: write
+    steps:
+      - name: Checkout trusted publisher
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          sparse-checkout: |
+            .github
+            eng
+          persist-credentials: false
+
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+
+      - name: Download trusted publication context
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: ${{ needs.resolve.outputs.artifact-name }}
+          path: ${{ runner.temp }}/sdk-review-publication-context
+          github-token: ${{ github.token }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Download validated SDK review results
+        if: needs.resolve.outputs.validated-result-available == 'true'
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: ${{ needs.resolve.outputs.result-artifact-name }}
+          path: ${{ runner.temp }}/sdk-review-results
+          github-token: ${{ github.token }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Download trusted SDK review context
+        if: needs.resolve.outputs.validated-result-available == 'true'
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: ${{ needs.resolve.outputs.trusted-context-artifact-name }}
+          path: ${{ runner.temp }}/sdk-review-trusted-context
+          github-token: ${{ github.token }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Publish generated SDK review
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          PUBLICATION_CONTEXT_PATH: ${{ runner.temp }}/sdk-review-publication-context/sdk-review-publication-context.json
+          RESULT_ROOT_PATH: ${{ runner.temp }}/sdk-review-results
+          TRUSTED_CONTEXT_ROOT_PATH: ${{ runner.temp }}/sdk-review-trusted-context
+          REVIEW_WORKFLOW_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          VALIDATED_RESULT_AVAILABLE: ${{ needs.resolve.outputs.validated-result-available }}
+          REVIEW_WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const { publishSdkReviewResult } = await import(
+              '${{ github.workspace }}/.github/workflows/src/sdk-validation-dotnet-review-publisher.ts'
+            );
+            await publishSdkReviewResult({
+              githubScript: { github, context, core },
+              publicationContextPath: process.env.PUBLICATION_CONTEXT_PATH,
+              resultRootPath: process.env.RESULT_ROOT_PATH,
+              trustedContextRootPath: process.env.TRUSTED_CONTEXT_ROOT_PATH,
+              workflowConclusion: process.env.REVIEW_WORKFLOW_CONCLUSION,
+              validatedResultAvailable: process.env.VALIDATED_RESULT_AVAILABLE === 'true',
+              workflowRunUrl: process.env.REVIEW_WORKFLOW_URL,
+            });

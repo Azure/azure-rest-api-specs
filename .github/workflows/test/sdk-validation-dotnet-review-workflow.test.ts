@@ -14,8 +14,27 @@ describe("generated .NET SDK review workflow", () => {
     expect(handoff).toContain(
       "sdk-naming-review-input-build-${{ steps.review-handoff.outputs.build_id }}-attempt-${{ github.run_attempt }}",
     );
+    expect(handoff).toContain(
+      "sdk-review-publication-context-build-${{ steps.review-handoff.outputs.build_id }}-attempt-${{ github.run_attempt }}",
+    );
+    expect(handoff.indexOf("Upload trusted publication context")).toBeLessThan(
+      handoff.indexOf("Upload validated SDK naming review input"),
+    );
     expect(review).toContain("const runAttempt = context.payload.workflow_run.run_attempt;");
     expect(review).toContain("artifact.name.endsWith(attemptSuffix)");
+    expect(review).toContain("Validate trusted review input pair");
+    expect(review.indexOf("Preserve trusted publication context")).toBeLessThan(
+      review.indexOf("jobs:"),
+    );
+    expect(review.indexOf("Preserve trusted publication context")).toBeLessThan(
+      review.indexOf("Download validated SDK review input"),
+    );
+    expect(review).toContain(
+      "sdk-review-publication-context-${{ github.run_id }}-attempt-${{ github.run_attempt }}",
+    );
+    expect(review).not.toContain(
+      "path: /tmp/gh-aw/sdk-review-input/typespec-review-context.json\n      if-no-files-found: error\n      retention-days: 7",
+    );
     expect(review).toContain(
       "sdk-review-trusted-context-${{ github.event.workflow_run.id }}-attempt-${{ github.run_attempt }}",
     );
