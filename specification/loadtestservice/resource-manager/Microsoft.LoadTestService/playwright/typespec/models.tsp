@@ -62,7 +62,7 @@ model PlaywrightWorkspaceProperties {
 
   @added(Versions.v2026_12_01_preview)
   @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
-  @doc("The Azure Resource Manager resource ID of the subnet used for private network connectivity. Before configuring the workspace, ensure the subnet meets the virtual network prerequisites at https://aka.ms/pww/docs/vnet. Format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Network/virtualNetworks/{virtualNetwork}/subnets/{subnet}.")
+  @doc("The Azure Resource Manager resource ID of the subnet used for private network connectivity. Before configuring the workspace, ensure the subnet meets the virtual network prerequisites at https://aka.ms/pww/docs/vnet. Regional affinity must be disabled when a subnet is configured. Format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Network/virtualNetworks/{virtualNetwork}/subnets/{subnet}.")
   subnetId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/virtualNetworks/subnets";
@@ -150,7 +150,7 @@ model PlaywrightWorkspacePatchProperties {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "PATCH uses null to disconnect the workspace from its subnet; omission preserves the existing subnet."
   @added(Versions.v2026_12_01_preview)
   @visibility(Lifecycle.Update)
-  @doc("The Azure Resource Manager resource ID of the subnet used for private network connectivity. Set to null to disconnect the workspace from its subnet. If omitted, the existing subnet configuration is preserved. Before configuring a subnet, ensure it meets the virtual network prerequisites at https://aka.ms/pww/docs/vnet.")
+  @doc("The Azure Resource Manager resource ID of the subnet used for private network connectivity. Set to null to disconnect the workspace from its subnet. If omitted, the existing subnet configuration is preserved. Before configuring a subnet, ensure it meets the virtual network prerequisites at https://aka.ms/pww/docs/vnet. Regional affinity must be disabled when a subnet is configured.")
   subnetId?: PlaywrightWorkspaceProperties.subnetId | null;
 
   @doc("The Web Bot Authentication settings for the workspace.")
