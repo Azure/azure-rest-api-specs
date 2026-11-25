@@ -264,9 +264,12 @@ If no findings remain after applying the canonical skill's confidence gate,
 include an empty `findings` array.
 
 7. Read `/tmp/gh-aw/sdk-review-input/typespec-review-context.json`.
-8. Read the management review remediation skill identified by
+8. For reviews whose package names all start with `Azure.ResourceManager.`,
+   read the management review remediation skill identified by
    `remediationSkill.skillPath`. Use it as guidance for mapping generated .NET
-   findings to the service TypeSpec and C#-scoped `client.tsp`.
+   findings to C#-scoped `client.tsp` or SDK-repository guidance. Do not apply
+   this management-plane guidance to other packages; map every finding in those
+   reviews to `manual-investigation`.
 9. Translate every SDK review finding exactly once. Do not create new findings.
    Prepare the TypeSpec remediation result with this shape:
 
@@ -284,7 +287,7 @@ include an empty `findings` array.
       "reviewIndex": 0,
       "findingIndex": 0,
       "remediation": {
-        "target": "typespec|client.tsp|sdk-repository|duplicate|manual-investigation",
+        "target": "client.tsp|sdk-repository|duplicate|manual-investigation",
         "specSymbol": "Optional TypeSpec symbol",
         "suggestion": "Concrete remediation or investigation guidance",
         "confidence": "high|medium|low",
@@ -300,11 +303,12 @@ include an empty `findings` array.
 
 Only include `sourceLocation` when the exact line was added or modified by this
 PR in a changed TypeSpec file from the context. Otherwise omit it so a later
-publisher cannot create a misleading inline comment. Use `typespec` for language-independent
-contract fixes, `client.tsp` for C#-scoped API surface adjustments,
-`sdk-repository` when a spec author cannot resolve the finding, `duplicate`
-only when the provided evidence proves another signal already reported it, and
-`manual-investigation` when mapping or remediation is uncertain.
+publisher cannot create a misleading inline comment. Use `client.tsp` for
+C#-scoped API surface adjustments, `sdk-repository` when a spec author cannot
+resolve the finding, `duplicate` only when the provided evidence proves another
+signal already reported it, and `manual-investigation` when mapping or
+remediation is uncertain. Do not propose a REST contract change to resolve a C#
+SDK finding; use `manual-investigation` when a contract change would be required.
 
 10. Call `publish_sdk_review` exactly once. Set `result` to the complete SDK
     review result as a JSON string and `remediation_result` to the complete

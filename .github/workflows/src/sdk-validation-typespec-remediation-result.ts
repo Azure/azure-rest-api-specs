@@ -14,7 +14,7 @@ type RawFinding = {
 };
 
 type RawReviewResult = {
-  reviews: Array<{ findings: RawFinding[] }>;
+  reviews: Array<{ packages: string[]; findings: RawFinding[] }>;
 };
 
 type TypeSpecContext = {
@@ -47,14 +47,9 @@ type NormalizedFinding = {
 };
 
 const MAX_COMBINED_SAFE_OUTPUT_BYTES = 64 * 1024;
+const MANAGEMENT_PACKAGE_PREFIX = "Azure.ResourceManager.";
 
-const REMEDIATION_TARGETS = [
-  "typespec",
-  "client.tsp",
-  "sdk-repository",
-  "duplicate",
-  "manual-investigation",
-];
+const REMEDIATION_TARGETS = ["client.tsp", "sdk-repository", "duplicate", "manual-investigation"];
 const CONFIDENCE_LEVELS = ["high", "medium", "low"];
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -211,10 +206,14 @@ export function validateTypeSpecRemediationResult(
     !isRecord(rawReviewResultValue) ||
     !Array.isArray(rawReviewResultValue.reviews) ||
     !rawReviewResultValue.reviews.every(
-      (review) => isRecord(review) && Array.isArray(review.findings),
+      (review) =>
+        isRecord(review) &&
+        Array.isArray(review.packages) &&
+        review.packages.every((packageName) => typeof packageName === "string") &&
+        Array.isArray(review.findings),
     )
   ) {
-    throw new Error("SDK review result is missing findings for remediation");
+    throw new Error("SDK review result is missing packages or findings for remediation");
   }
   if (
     !isRecord(typeSpecContextValue) ||
@@ -314,6 +313,16 @@ export function validateTypeSpecRemediationResult(
     const confidence = String(value.remediation.confidence);
     if (!REMEDIATION_TARGETS.includes(target)) {
       throw new Error(`${findingLabel} has an invalid remediation target`);
+    }
+    const review = rawReviewResult.reviews[reviewIndex];
+    if (!review) {
+      throw new Error(`${findingLabel} has an unknown SDK review reference`);
+    }
+    if (
+      !review.packages.every((packageName) => packageName.startsWith(MANAGEMENT_PACKAGE_PREFIX)) &&
+      target !== "manual-investigation"
+    ) {
+      throw new Error(`${findingLabel} for a data-plane package must use manual-investigation`);
     }
     if (!CONFIDENCE_LEVELS.includes(confidence)) {
       throw new Error(`${findingLabel} has an invalid remediation confidence`);

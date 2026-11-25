@@ -21,6 +21,7 @@ const reviewContext = {
 const rawReviewResult = {
   reviews: [
     {
+      packages: ["Azure.ResourceManager.Widget"],
       findings: [
         {
           severity: "high",
@@ -190,6 +191,40 @@ describe("validateTypeSpecRemediationResult", () => {
     expect(() =>
       validateTypeSpecRemediationResult(reviewContext, rawReviewResult, typeSpecContext, result),
     ).toThrow("classify every SDK review finding");
+  });
+
+  it("rejects contract-level TypeSpec remediation", () => {
+    const result = createResult();
+    result.findings[0].remediation.target = "typespec";
+
+    expect(() =>
+      validateTypeSpecRemediationResult(reviewContext, rawReviewResult, typeSpecContext, result),
+    ).toThrow("invalid remediation target");
+  });
+
+  it("requires manual investigation for data-plane findings", () => {
+    const dataPlaneReviewResult = structuredClone(rawReviewResult);
+    dataPlaneReviewResult.reviews[0].packages = ["Azure.AI.ContentSafety"];
+    const result = createResult();
+
+    expect(() =>
+      validateTypeSpecRemediationResult(
+        reviewContext,
+        dataPlaneReviewResult,
+        typeSpecContext,
+        result,
+      ),
+    ).toThrow("data-plane package must use manual-investigation");
+
+    result.findings[0].remediation.target = "manual-investigation";
+    expect(
+      validateTypeSpecRemediationResult(
+        reviewContext,
+        dataPlaneReviewResult,
+        typeSpecContext,
+        result,
+      ).result.findings[0].remediation.target,
+    ).toBe("manual-investigation");
   });
 
   it("rejects unknown SDK finding references", () => {
