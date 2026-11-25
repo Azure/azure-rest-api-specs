@@ -79,6 +79,15 @@ model EndpointProperties {
   @TypeSpec.Versioning.added(Versions.v2026_10_01_preview)
   virtualNetworkIds?: VirtualNetworkId[];
 
+  @doc("The IP address ranges assigned to this endpoint when using the 'Subnet' traffic routing method. Each item represents either a single IP address, a CIDR range using first and scope, or an address range using first and last. Ranges must not overlap across endpoints in the profile. A profile can have at most one fallback endpoint; an endpoint with no subnet ranges is that fallback.")
+  @TypeSpec.Versioning.added(Versions.v2026_10_01_preview)
+  @identifiers(#[])
+  subnets?: IpAddressRange[];
+
+  @doc("The site ARM resource IDs assigned to this endpoint when using the 'Site' traffic routing method. Sites must belong to the topology map associated with the profile and must not be assigned to more than one endpoint in the profile. A profile can have at most one fallback endpoint; an endpoint with no sites is that fallback.")
+  @TypeSpec.Versioning.added(Versions.v2026_10_01_preview)
+  siteIds?: SiteId[];
+
   @visibility(Lifecycle.Read)
   @doc("Provisioning state of the resource.")
   provisioningState?: ProvisioningState;

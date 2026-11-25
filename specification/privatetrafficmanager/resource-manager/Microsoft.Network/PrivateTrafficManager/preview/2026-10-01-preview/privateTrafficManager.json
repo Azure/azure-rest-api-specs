@@ -336,6 +336,12 @@
           "Profiles_CreateOrUpdate_MaximumSet": {
             "$ref": "./examples/Profiles_CreateOrUpdate_MaximumSet_Gen.json"
           },
+          "Profiles_CreateOrUpdate_SiteAffinity": {
+            "$ref": "./examples/Profiles_CreateOrUpdate_SiteAffinity.json"
+          },
+          "Profiles_CreateOrUpdate_SubnetAffinity": {
+            "$ref": "./examples/Profiles_CreateOrUpdate_SubnetAffinity.json"
+          },
           "Profiles_CreateOrUpdate_VNetAffinity": {
             "$ref": "./examples/Profiles_CreateOrUpdate_VNetAffinity.json"
           }
@@ -1882,6 +1888,9 @@
         "x-ms-examples": {
           "Sites_CreateOrUpdate_MaximumSet": {
             "$ref": "./examples/Sites_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Sites_CreateOrUpdate_SubnetBased": {
+            "$ref": "./examples/Sites_CreateOrUpdate_SubnetBased.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2232,6 +2241,21 @@
             "$ref": "#/definitions/VirtualNetworkId"
           }
         },
+        "subnets": {
+          "type": "array",
+          "description": "The IP address ranges assigned to this endpoint when using the 'Subnet' traffic routing method. Each item represents either a single IP address, a CIDR range using first and scope, or an address range using first and last. Ranges must not overlap across endpoints in the profile. A profile can have at most one fallback endpoint; an endpoint with no subnet ranges is that fallback.",
+          "items": {
+            "$ref": "#/definitions/IpAddressRange"
+          },
+          "x-ms-identifiers": []
+        },
+        "siteIds": {
+          "type": "array",
+          "description": "The site ARM resource IDs assigned to this endpoint when using the 'Site' traffic routing method. Sites must belong to the topology map associated with the profile and must not be assigned to more than one endpoint in the profile. A profile can have at most one fallback endpoint; an endpoint with no sites is that fallback.",
+          "items": {
+            "$ref": "#/definitions/SiteId"
+          }
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
@@ -2295,6 +2319,21 @@
           "description": "The virtual network ARM resource IDs assigned to this endpoint when using the 'VNet' traffic routing method. A virtual network must not be assigned to more than one endpoint in the profile. A profile can have at most one fallback endpoint; an endpoint with no virtual networks is that fallback.",
           "items": {
             "$ref": "#/definitions/VirtualNetworkId"
+          }
+        },
+        "subnets": {
+          "type": "array",
+          "description": "The IP address ranges assigned to this endpoint when using the 'Subnet' traffic routing method. Each item represents either a single IP address, a CIDR range using first and scope, or an address range using first and last. Ranges must not overlap across endpoints in the profile. A profile can have at most one fallback endpoint; an endpoint with no subnet ranges is that fallback.",
+          "items": {
+            "$ref": "#/definitions/IpAddressRange"
+          },
+          "x-ms-identifiers": []
+        },
+        "siteIds": {
+          "type": "array",
+          "description": "The site ARM resource IDs assigned to this endpoint when using the 'Site' traffic routing method. Sites must belong to the topology map associated with the profile and must not be assigned to more than one endpoint in the profile. A profile can have at most one fallback endpoint; an endpoint with no sites is that fallback.",
+          "items": {
+            "$ref": "#/definitions/SiteId"
           }
         }
       }
@@ -2424,6 +2463,27 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
           "readOnly": true
+        }
+      }
+    },
+    "IpAddressRange": {
+      "type": "object",
+      "description": "An IP address or address range used to identify a network. Provide first alone for a single IP, first and scope for a CIDR range, or first and last for an explicit range. Last and scope are mutually exclusive.",
+      "properties": {
+        "first": {
+          "type": "string",
+          "description": "The first IP address in the range."
+        },
+        "last": {
+          "type": "string",
+          "description": "The inclusive last IP address in the range. Specify either last or scope, but not both. When both last and scope are omitted, the range contains only the first IP address."
+        },
+        "scope": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of leading bits in the subnet mask. Specify either scope or last, but not both.",
+          "minimum": 0,
+          "maximum": 4294967295
         }
       }
     },
@@ -2644,6 +2704,21 @@
           "description": "The virtual network ARM resource IDs assigned to this endpoint when using the 'VNet' traffic routing method. A virtual network must not be assigned to more than one endpoint in the profile. A profile can have at most one fallback endpoint; an endpoint with no virtual networks is that fallback.",
           "items": {
             "$ref": "#/definitions/VirtualNetworkId"
+          }
+        },
+        "subnets": {
+          "type": "array",
+          "description": "The IP address ranges assigned to this endpoint when using the 'Subnet' traffic routing method. Each item represents either a single IP address, a CIDR range using first and scope, or an address range using first and last. Ranges must not overlap across endpoints in the profile. A profile can have at most one fallback endpoint; an endpoint with no subnet ranges is that fallback.",
+          "items": {
+            "$ref": "#/definitions/IpAddressRange"
+          },
+          "x-ms-identifiers": []
+        },
+        "siteIds": {
+          "type": "array",
+          "description": "The site ARM resource IDs assigned to this endpoint when using the 'Site' traffic routing method. Sites must belong to the topology map associated with the profile and must not be assigned to more than one endpoint in the profile. A profile can have at most one fallback endpoint; an endpoint with no sites is that fallback.",
+          "items": {
+            "$ref": "#/definitions/SiteId"
           }
         },
         "provisioningState": {
@@ -2926,6 +3001,18 @@
         }
       ]
     },
+    "SiteId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/topologyMaps/sites"
+          }
+        ]
+      }
+    },
     "SiteListResult": {
       "type": "object",
       "description": "The response of a Site list operation.",
@@ -2965,6 +3052,14 @@
             "$ref": "#/definitions/VirtualNetworkId"
           }
         },
+        "subnets": {
+          "type": "array",
+          "description": "The IP address ranges that form the Site. Each item represents either a single IP address, a CIDR range using first and scope, or an address range using first and last. A Site can contain either virtual networks or subnet ranges, but not both.",
+          "items": {
+            "$ref": "#/definitions/IpAddressRange"
+          },
+          "x-ms-identifiers": []
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
@@ -2999,6 +3094,14 @@
           "items": {
             "$ref": "#/definitions/VirtualNetworkId"
           }
+        },
+        "subnets": {
+          "type": "array",
+          "description": "The IP address ranges that form the Site. Each item represents either a single IP address, a CIDR range using first and scope, or an address range using first and last. A Site can contain either virtual networks or subnet ranges, but not both.",
+          "items": {
+            "$ref": "#/definitions/IpAddressRange"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -3125,7 +3228,9 @@
       "enum": [
         "Priority",
         "Weighted",
-        "VNet"
+        "VNet",
+        "Subnet",
+        "Site"
       ],
       "x-ms-enum": {
         "name": "TrafficRoutingMethod",
@@ -3145,6 +3250,16 @@
             "name": "VNet",
             "value": "VNet",
             "description": "Routes traffic to an endpoint by matching the virtual network of the DNS query to the endpoint's configured virtual networks."
+          },
+          {
+            "name": "Subnet",
+            "value": "Subnet",
+            "description": "Routes traffic to an endpoint by matching the source IP address of the DNS query to the endpoint's configured subnet ranges."
+          },
+          {
+            "name": "Site",
+            "value": "Site",
+            "description": "Routes traffic to an endpoint by matching the site resolved for the DNS query to the endpoint's configured sites."
           }
         ]
       }
