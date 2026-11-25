@@ -410,9 +410,12 @@ describe("SDK pull request description", () => {
         if ($RepoOwner -ne 'azure' -or $RepoName -ne 'azure-sdk-for-example' -or $Head -ne 'azure:probe' -or $Base -ne 'main' -or $AuthToken -ne 'not-a-real-token') {
           throw 'Unexpected PR lookup parameters'
         }
+        # Mirror Invoke-RestMethod, which emits a JSON array response as a single object.
+        $pullRequests = @()
         if ($env:PR_LOOKUP -eq 'existing') {
-          @{ body = $env:PREVIOUS_PR_BODY; labels = @(@{ name = 'Mgmt' }) + @(if ($env:EXISTING_LABEL -eq 'true') { @{ name = 'spec-api-versions-changed' } }) }
+          $pullRequests = @(@{ body = $env:PREVIOUS_PR_BODY; labels = @(@{ name = 'Mgmt' }) + @(if ($env:EXISTING_LABEL -eq 'true') { @{ name = 'spec-api-versions-changed' } }) })
         }
+        Write-Output -NoEnumerate $pullRequests
       }
       `,
       );

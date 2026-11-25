@@ -395,7 +395,9 @@ stages:
                     $previousPullRequestState = 'unknown'
                     try {
                       . "$(SdkRepoDirectory)/eng/common/scripts/Invoke-GitHubAPI.ps1"
-                      $previousPullRequests = @(Get-GitHubPullRequests -RepoOwner "azure" -RepoName "$(SdkRepoName)" -Head "$(SdkRepoOwner):$(SdkPullRequestSourceBranch)" -Base "main" -AuthToken $env:SDK_PR_GITHUB_TOKEN)
+                      # Invoke-RestMethod emits a JSON array as one object; pipe it to enumerate PRs.
+                      $pullRequestResponse = Get-GitHubPullRequests -RepoOwner "azure" -RepoName "$(SdkRepoName)" -Head "$(SdkRepoOwner):$(SdkPullRequestSourceBranch)" -Base "main" -AuthToken $env:SDK_PR_GITHUB_TOKEN
+                      $previousPullRequests = @($pullRequestResponse | Where-Object { $null -ne $_ })
                       if ($previousPullRequests.Count -eq 0) {
                         $previousPullRequestState = 'new'
                       } elseif ($previousPullRequests.Count -eq 1) {
