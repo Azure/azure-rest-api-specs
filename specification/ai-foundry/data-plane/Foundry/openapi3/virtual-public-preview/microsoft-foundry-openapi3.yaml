@@ -104283,7 +104283,7 @@ components:
           type: string
           minLength: 1
           maxLength: 256
-          description: 'The header value after any template rendering. Allowed characters are ASCII letters, digits, and `= ; . ! % * _ + ~ - : @ /`; control characters, spaces, `<`, `>`, `?`, and `&` are rejected. A `User-to-User` value follows RFC 7433, for example `48656c6c6f;encoding=hex`.'
+          description: 'The header value after any template rendering. Allowed characters are ASCII letters, digits, and `= ; . ! % * _ + ~ - : @ / |`; control characters, spaces, `<`, `>`, `?`, and `&` are rejected. A `User-to-User` value follows RFC 7433, for example `48656c6c6f;encoding=hex`.'
       description: A custom SIP header carried on a transfer. The service URI-encodes each header into the `sip:` Refer-To target so that the transfer recipient can copy it into the new call. Headers apply only to `sip` destinations; other destination types reject them.
       x-ms-foundry-meta:
         required_previews:
@@ -109854,7 +109854,7 @@ components:
           type: string
           minLength: 1
           maxLength: 256
-          description: A literal or templated value, such as `{{@system.sip_call_id}}`. When omitted, the model supplies the value and `description` is required. The model can't override an author value.
+          description: A literal or templated value, such as `{{@system.sip_call_id}}` or `{{@system.sip_user_to_user}}` (the inbound call's `User-to-User` header). A templated header that renders empty or with characters a SIP URI header can't carry is omitted. When omitted, the model supplies the value and `description` is required. The model can't override an author value.
         description:
           type: string
           minLength: 1

@@ -576,7 +576,7 @@ namespace Azure.AI.Projects {
     @doc("The header name. Names must be unique, ignoring case, within one transfer.")
     name: TelephonyTransferSipHeaderName;
 
-    @doc("The header value after any template rendering. Allowed characters are ASCII letters, digits, and `= ; . ! % * _ + ~ - : @ /`; control characters, spaces, `<`, `>`, `?`, and `&` are rejected. A `User-to-User` value follows RFC 7433, for example `48656c6c6f;encoding=hex`.")
+    @doc("The header value after any template rendering. Allowed characters are ASCII letters, digits, and `= ; . ! % * _ + ~ - : @ / |`; control characters, spaces, `<`, `>`, `?`, and `&` are rejected. A `User-to-User` value follows RFC 7433, for example `48656c6c6f;encoding=hex`.")
     @minLength(1)
     @maxLength(256)
     value: string;

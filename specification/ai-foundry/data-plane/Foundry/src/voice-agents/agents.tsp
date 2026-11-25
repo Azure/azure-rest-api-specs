@@ -825,7 +825,7 @@ model VoiceAgentTransferSipHeader {
   @doc("The header name. Names must be unique, ignoring case, within one target.")
   name: TelephonyTransferSipHeaderName;
 
-  @doc("A literal or templated value, such as `{{@system.sip_call_id}}`. When omitted, the model supplies the value and `description` is required. The model can't override an author value.")
+  @doc("A literal or templated value, such as `{{@system.sip_call_id}}` or `{{@system.sip_user_to_user}}` (the inbound call's `User-to-User` header). A templated header that renders empty or with characters a SIP URI header can't carry is omitted. When omitted, the model supplies the value and `description` is required. The model can't override an author value.")
   @minLength(1)
   @maxLength(256)
   value?: string;
