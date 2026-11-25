@@ -781,6 +781,17 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(DebugInfo, "SearchResultsDebugInfo", "csharp");
 @@clientName(AssetStore, "KnowledgeSourceAssetStore", "csharp");
 @@clientName(FreshnessPolicy, "KnowledgeSourceFreshnessPolicy", "csharp");
+@@clientName(AgentRuntimeGraphParams, "KnowledgeSourceGraphParams", "csharp");
+@@clientName(
+  AgentRuntimeGraphProvenanceParams,
+  "KnowledgeSourceGraphProvenanceParams",
+  "csharp"
+);
+@@clientName(
+  AgentRuntimeGraphHydrateDocumentsParams,
+  "KnowledgeSourceGraphHydrateDocumentsParams",
+  "csharp"
+);
 @@clientName(
   SearchIndexKnowledgeSourceFilterHintAutoConfiguration.cacheTtl,
   "CacheTimeToLiveInSeconds",
