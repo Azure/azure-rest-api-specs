@@ -176,12 +176,11 @@ describe("collectTypeSpecReviewContext", () => {
     });
     expect(github.rest.repos.getContent).toHaveBeenCalledTimes(5);
     expect(
-      github.rest.repos.getContent.mock.calls.some(
-        ([request]) =>
-          [
-            "@azure-tools/typespec-azure-resource-manager",
-            `${PROJECT_ROOT}/decorators.js/main.tsp`,
-          ].includes((request as { path: string }).path),
+      github.rest.repos.getContent.mock.calls.some(([request]) =>
+        [
+          "@azure-tools/typespec-azure-resource-manager",
+          `${PROJECT_ROOT}/decorators.js/main.tsp`,
+        ].includes((request as { path: string }).path),
       ),
     ).toBe(false);
   });

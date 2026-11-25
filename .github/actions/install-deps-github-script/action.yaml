@@ -33,5 +33,6 @@ runs:
       with:
         # actions/github-script@v9.0.0 uses Node 24
         node-version: 24.x
-        install-command: "pnpm install --frozen-lockfile --prod --prefer-offline --config.trust-lockfile=true --filter=azure-rest-api-specs-github... --filter=@azure-tools/typespec-import-parser..."
+        # Install the workspace dependencies and the parser's standalone locked graph.
+        install-command: "bash .github/actions/install-deps-github-script/install-with-typespec-parser.sh"
         cache: "false"
