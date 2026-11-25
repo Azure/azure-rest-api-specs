@@ -58,7 +58,7 @@ namespace Azure.ResourceManager.Models {
 );
 @@clientName(
   NodeTypeProperties.dataDiskMBpsReadWrite,
-  "DataDiskMbpsReadWrite",
+  "DataDiskMBpsReadWrite",
   "csharp"
 );
 @@clientName(
@@ -67,7 +67,7 @@ namespace Azure.ResourceManager.Models {
   "csharp"
 );
 @@clientName(VmssDataDisk.diskIOPSReadWrite, "DiskIopsReadWrite", "csharp");
-@@clientName(VmssDataDisk.diskMBpsReadWrite, "DiskMbpsReadWrite", "csharp");
+@@clientName(VmssDataDisk.diskMBpsReadWrite, "DiskMBpsReadWrite", "csharp");
 @@clientName(
   VmssDataDisk.writeAcceleratorEnabled,
   "IsWriteAcceleratorEnabled",
