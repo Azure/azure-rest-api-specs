@@ -1,0 +1,89 @@
+{
+  "title": "Check a safety rubric against per-metric reviewer decisions",
+  "operationId": "Evaluators_checkAgreement",
+  "parameters": {
+    "api-version": "v1",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "name": "support_safety",
+    "version": "3",
+    "agreement": {
+      "evaluation_run": {
+        "eval_id": "eval_321",
+        "run_id": "run_777"
+      },
+      "label_sources": [
+        {
+          "type": "annotated_traces",
+          "agent_name": "support-agent"
+        }
+      ],
+      "review_suggestion_count": 1
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "not_enough_reviews",
+        "labeled_count": 48,
+        "safety_metrics": [
+          {
+            "metric": "disallowed_behavior_violated",
+            "status": "in_sync",
+            "labeled_count": 48,
+            "reviewer_violation_count": 14,
+            "agreement": {
+              "matches": 44,
+              "missed_violations": 1,
+              "false_alarms": 3,
+              "unclear_count": 0,
+              "agreement_rate": 0.917,
+              "relevant_agreement_rate": 0.913,
+              "kappa": 0.82,
+              "missed_violation_rate": 0.071
+            }
+          },
+          {
+            "metric": "allowed_behavior_violated",
+            "status": "not_enough_reviews",
+            "labeled_count": 48,
+            "reviewer_violation_count": 4,
+            "agreement": {
+              "matches": 45,
+              "missed_violations": 1,
+              "false_alarms": 2,
+              "unclear_count": 0,
+              "agreement_rate": 0.938,
+              "relevant_agreement_rate": 0.909,
+              "kappa": 0.69,
+              "missed_violation_rate": 0.25
+            }
+          }
+        ],
+        "label_sources": [
+          {
+            "type": "annotated_traces",
+            "source_id": "traces:support-agent",
+            "accepted_count": 48,
+            "rejected_count": 0,
+            "unmatched_count": 3,
+            "conflicting_count": 0,
+            "unavailable": false
+          }
+        ],
+        "drift": {
+          "evaluated": false,
+          "reason": "At least 30 comparable reviewed items are required."
+        },
+        "review_suggestions": [
+          {
+            "item_id": "item_402",
+            "reason_code": "unclear_safety_result"
+          }
+        ],
+        "warnings": [
+          "allowed_behavior_violated has 4 reviewer violations; at least 10 are needed to judge agreement."
+        ]
+      }
+    }
+  }
+}

@@ -685,6 +685,77 @@ alias CalibrationLabelMappings = {
 
 @added(Versions.v1)
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("One of the two independent safety-rubric metrics.")
+union SafetyCalibrationMetric {
+  string,
+
+  @doc("A criterion classified as disallowed behavior was present in the response.")
+  disallowed_behavior_violated: "disallowed_behavior_violated",
+
+  @doc("A criterion classified as allowed behavior was not met, for example an unnecessary refusal.")
+  allowed_behavior_violated: "allowed_behavior_violated",
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("A human reviewer's decision for one safety metric.")
+union SafetyReviewDecision {
+  string,
+
+  @doc("The reviewer found a violation for this metric.")
+  violated: "violated",
+
+  @doc("The reviewer found no violation for this metric.")
+  not_violated: "not_violated",
+
+  @doc("The reviewer judged that this metric does not apply to the item. Counted as no violation.")
+  not_relevant: "not_relevant",
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("How reviewer values in one column map to decisions for one safety metric. Unmapped values are rejected and counted.")
+model SafetyMetricLabelMapping {
+  @doc("Reviewer-label column for this metric. Required for golden_dataset and dataset sources; ignored for annotated_traces, where feedback is keyed by metric name.")
+  label_column?: string;
+
+  @doc("Values interpreted as violated. When omitted, the service uses its recognized violated values.")
+  @minItems(1)
+  violated_values?: CalibrationLabelValue[];
+
+  @doc("Values interpreted as not violated. When omitted, the service uses its recognized not-violated values.")
+  @minItems(1)
+  not_violated_values?: CalibrationLabelValue[];
+
+  @doc("Values interpreted as not relevant. A value cannot be mapped to more than one decision.")
+  @minItems(1)
+  not_relevant_values?: CalibrationLabelValue[];
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("Per-metric reviewer-label mappings for a safety rubric. Each metric is read independently; a decision for one metric is never copied to or inferred for the other.")
+model SafetyLabelMappings {
+  @doc("Mapping for disallowed_behavior_violated.")
+  disallowed_behavior_violated?: SafetyMetricLabelMapping;
+
+  @doc("Mapping for allowed_behavior_violated.")
+  allowed_behavior_violated?: SafetyMetricLabelMapping;
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("Inline reviewer decisions for a safety rubric, one per metric.")
+model SafetyItemLabels {
+  @doc("Reviewer decision for disallowed_behavior_violated.")
+  disallowed_behavior_violated?: SafetyReviewDecision;
+
+  @doc("Reviewer decision for allowed_behavior_violated.")
+  allowed_behavior_violated?: SafetyReviewDecision;
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 @discriminator("type")
 @doc("The shared discriminator for reviewer-label sources.")
 model CalibrationLabelSourceBase {
@@ -713,6 +784,9 @@ model AnnotatedTracesLabelSource extends CalibrationLabelSourceBase {
 
   @doc("Optional explicit trace IDs.")
   trace_ids?: string[];
+
+  @doc("Safety rubrics only: per-metric value mappings for trace feedback. Supplying this for a quality rubric returns HTTP 400.")
+  safety_labels?: SafetyLabelMappings;
 }
 
 @added(Versions.v1)
@@ -722,10 +796,13 @@ model GoldenDatasetLabelSource extends CalibrationLabelSourceBase {
   @doc("A label column in the evaluation run's input dataset.")
   type: "golden_dataset";
 
-  @doc("Reviewer-label column. If omitted, the service considers only human_label, reviewer_label, and <evaluator name>_label, and uses a column only when at least 90 percent of nonempty values are recognized. Generic task columns are never guessed.")
+  @doc("Quality rubrics only: reviewer-label column. If omitted, the service considers only human_label, reviewer_label, and <evaluator name>_label, and uses a column only when at least 90 percent of nonempty values are recognized. Generic task columns are never guessed. Supplying this for a safety rubric returns HTTP 400.")
   label_column?: string;
 
   ...CalibrationLabelMappings;
+
+  @doc("Safety rubrics only: per-metric reviewer-label columns and values. Required for safety rubrics; supplying this for a quality rubric returns HTTP 400.")
+  safety_labels?: SafetyLabelMappings;
 }
 
 @added(Versions.v1)
@@ -743,9 +820,9 @@ model DatasetLabelSource extends CalibrationLabelSourceBase {
   @minLength(1)
   dataset_version: string;
 
-  @doc("The reviewer-label column in the dataset.")
+  @doc("The reviewer-label column in the dataset. Required for quality rubrics; supplying it for a safety rubric returns HTTP 400.")
   @minLength(1)
-  label_column: string;
+  label_column?: string;
 
   @doc("The dataset column containing item identifiers.")
   @minLength(1)
@@ -755,6 +832,9 @@ model DatasetLabelSource extends CalibrationLabelSourceBase {
   join_column?: string;
 
   ...CalibrationLabelMappings;
+
+  @doc("Safety rubrics only: per-metric reviewer-label columns and values. Required for safety rubrics; supplying this for a quality rubric returns HTTP 400.")
+  safety_labels?: SafetyLabelMappings;
 }
 
 @added(Versions.v1)
@@ -765,8 +845,14 @@ model UploadedCalibrationItem {
   @minLength(1)
   item_id: string;
 
-  @doc("The human reviewer's decision: true for pass, false for fail.")
-  human_label: boolean;
+  @doc("Quality rubrics: the human reviewer's decision, true for pass and false for fail. Required for quality rubrics; supplying it for a safety rubric returns HTTP 400.")
+  human_label?: boolean;
+
+  @doc("Safety rubrics: reviewer decisions per metric. At least one metric is required for safety rubrics; supplying this for a quality rubric returns HTTP 400.")
+  safety_labels?: SafetyItemLabels;
+
+  @doc("Safety rubrics: optional reviewer decisions per criterion, keyed by criterion identifier. Used only to attribute disagreements, never as metric labels.")
+  criterion_labels?: Record<SafetyReviewDecision>;
 
   @doc("Per-dimension rubric judgments, required when the request has no evaluation run.")
   rubric_result?: RubricResultProperties;
@@ -802,11 +888,11 @@ union CalibrationLabelSource {
 @added(Versions.v1)
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 @Azure.ClientGenerator.Core.clientName("WordingTuningConfig", "csharp")
-@doc("Options for rechecking suggested criterion wording with a customer-selected judge deployment.")
+@doc("Options for rechecking suggested criterion wording. Quality rubrics use a customer-selected judge deployment; safety rubrics always use the service-managed safety judge.")
 model WordingTuningOptions {
-  @doc("The customer's model deployment used to generate and recheck wording. Model quota and charges apply.")
+  @doc("Quality rubrics: the customer's model deployment used to generate and recheck wording, required. Model quota and charges apply. Supplying it for a safety rubric returns HTTP 400.")
   @minLength(1)
-  judge_deployment: string;
+  judge_deployment?: string;
 
   @doc("The maximum number of criteria to consider for wording changes.")
   @minValue(1)
@@ -815,7 +901,7 @@ model WordingTuningOptions {
 
 @added(Versions.v1)
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-@doc("Inputs for a quality-rubric calibration job. Supply a completed evaluation run or uploaded items with per-dimension scores. Calibration requires at least 20 reviewed items, including at least 5 passes and 5 failures. Non-rubric and safety evaluators are not supported. Boolean rubrics reject enabled passing-bar or weight tuning with HTTP 400 and continue to pass only when every applicable check passes.")
+@doc("Inputs for a rubric calibration job. Supply a completed evaluation run or uploaded items with per-dimension scores. Quality calibration requires at least 20 reviewed items, including at least 5 passes and 5 failures. Boolean rubrics reject enabled passing-bar or weight tuning with HTTP 400 and continue to pass only when every applicable check passes. Safety rubrics are wording-only: each metric is labeled independently, criterion classification, always_applicable, the criterion set, and scoring mode never change, and the service-managed safety judge rechecks wording. A safety metric is tuned only when its held-out half has at least 10 reviewer violations and 10 non-violations; otherwise it is report-only. Safety rubrics return HTTP 400 for enabled passing-bar, weight, or pruning tuning, for false_pass_cost or false_fail_cost, for quality label mappings, and for judge_deployment. Non-rubric evaluators are not supported.")
 model EvaluatorCalibrationInputs {
   @doc("Name of the saved rubric evaluator.")
   @minLength(1)
@@ -853,6 +939,16 @@ model EvaluatorCalibrationInputs {
   @minValue(0.1)
   @maxValue(10)
   false_fail_cost?: float64 = 1.0;
+
+  @doc("Safety rubrics only: relative cost of missing a violation the reviewer found. Defaults to 5; only its ratio to false_alarm_cost matters. Supplying it for a quality rubric returns HTTP 400.")
+  @minValue(0.1)
+  @maxValue(100)
+  missed_violation_cost?: float64 = 5.0;
+
+  @doc("Safety rubrics only: relative cost of flagging a violation the reviewer did not find. Defaults to 1. Supplying it for a quality rubric returns HTTP 400.")
+  @minValue(0.1)
+  @maxValue(100)
+  false_alarm_cost?: float64 = 1.0;
 }
 
 @added(Versions.v1)
@@ -956,6 +1052,167 @@ model CalibrationDimensionChange {
 
   @doc("Whether the criterion is omitted from the proposal.")
   pruned: boolean;
+
+  @doc("Safety rubrics: the criterion's allowed classification, echoed unchanged. Calibration never changes it.")
+  @visibility(Lifecycle.Read)
+  allowed?: boolean;
+
+  @doc("Safety rubrics: whether the criterion always applies, echoed unchanged. Calibration never changes it.")
+  @visibility(Lifecycle.Read)
+  always_applicable?: boolean;
+
+  @doc("Safety rubrics: held-out missed violations attributed to this criterion under the current wording.")
+  @minValue(0)
+  missed_violations?: int32;
+
+  @doc("Safety rubrics: held-out false alarms attributed to this criterion under the current wording.")
+  @minValue(0)
+  false_alarms?: int32;
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("How the safety judge classified one metric for one item, following production safety scoring.")
+union SafetyJudgeDecision {
+  string,
+
+  @doc("At least one applicable criterion for the metric failed.")
+  violated: "violated",
+
+  @doc("Every applicable criterion for the metric passed.")
+  not_violated: "not_violated",
+
+  @doc("No criterion for the metric applied. Counted as no violation.")
+  not_applicable: "not_applicable",
+
+  @doc("The judge could not decide, or judging failed. Counted as a missed violation when the reviewer found a violation.")
+  unclear: "unclear",
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("The kind of safety disagreement.")
+union SafetyDisagreementKind {
+  string,
+
+  @doc("The reviewer found a violation and the judge did not report one.")
+  missed_violation: "missed_violation",
+
+  @doc("The judge reported a violation the reviewer did not find.")
+  false_alarm: "false_alarm",
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("Held-out agreement for one safety metric and one rubric version.")
+model SafetyMetricAgreement {
+  @doc("Reviewer decisions matching the judge.")
+  @minValue(0)
+  matches: int32;
+
+  @doc("Reviewer violations the judge did not report, including unclear or failed judgments.")
+  @minValue(0)
+  missed_violations: int32;
+
+  @doc("Judge violations the reviewer did not find.")
+  @minValue(0)
+  false_alarms: int32;
+
+  @doc("Items the judge could not decide.")
+  @minValue(0)
+  unclear_count: int32;
+
+  @doc("Agreement over all labeled items, when defined.")
+  @minValue(0)
+  @maxValue(1)
+  agreement_rate?: float64;
+
+  @doc("Agreement over items the reviewer did not mark not_relevant, when defined.")
+  @minValue(0)
+  @maxValue(1)
+  relevant_agreement_rate?: float64;
+
+  @doc("Cohen's kappa for violated versus not violated, when defined.")
+  @minValue(-1)
+  @maxValue(1)
+  kappa?: float64;
+
+  @doc("Share of reviewer violations the judge missed, when the reviewer found at least one violation.")
+  @minValue(0)
+  @maxValue(1)
+  missed_violation_rate?: float64;
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("Whether wording was tuned for a safety metric.")
+union SafetyMetricTuningStatus {
+  string,
+
+  @doc("The metric had enough held-out reviewer decisions for wording to be tuned.")
+  tuned: "tuned",
+
+  @doc("The metric lacked enough held-out reviewer violations or non-violations; agreement is reported but wording was not tuned for it.")
+  report_only: "report_only",
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("Held-out calibration results for one safety metric.")
+model SafetyMetricCalibration {
+  @doc("The safety metric.")
+  metric: SafetyCalibrationMetric;
+
+  @doc("Whether wording was tuned for this metric.")
+  tuning_status: SafetyMetricTuningStatus;
+
+  @doc("Why the metric is report-only, when applicable.")
+  tuning_note?: string;
+
+  @doc("Held-out items with a reviewer decision for this metric.")
+  @minValue(0)
+  labeled_count: int32;
+
+  @doc("Held-out items the reviewer did not mark not_relevant.")
+  @minValue(0)
+  relevant_count: int32;
+
+  @doc("Held-out reviewer violations.")
+  @minValue(0)
+  reviewer_violation_count: int32;
+
+  @doc("Items excluded from comparison, for example multi-turn items or conflicting reviewer decisions.")
+  @minValue(0)
+  excluded_count: int32;
+
+  @doc("Agreement for the current rubric.")
+  current: SafetyMetricAgreement;
+
+  @doc("Agreement for the proposed rubric.")
+  proposed: SafetyMetricAgreement;
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("An item where the safety judge and a reviewer disagreed on one metric.")
+model SafetyCalibrationDisagreement {
+  @doc("Evaluation item identifier.")
+  item_id: string;
+
+  @doc("The safety metric.")
+  metric: SafetyCalibrationMetric;
+
+  @doc("The kind of disagreement.")
+  kind: SafetyDisagreementKind;
+
+  @doc("The reviewer's decision.")
+  reviewer_decision: SafetyReviewDecision;
+
+  @doc("The judge's metric decision under the current wording.")
+  judge_decision: SafetyJudgeDecision;
+
+  @doc("Criteria the disagreement is attributed to. Empty when a missed violation could not be attributed to a criterion.")
+  dimensions: string[];
 }
 
 @added(Versions.v1)
@@ -1005,6 +1262,22 @@ union CalibrationStrategy {
 
   @doc("Keep a subset of the Boolean checks while preserving the all-applicable-checks-pass rule.")
   checks_subset: "checks_subset",
+
+  @doc("Change only criterion wording. The only strategy for safety rubrics.")
+  wording_only: "wording_only",
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("Whether the reported held-out numbers are independent of the choice of proposal.")
+union CalibrationEstimateKind {
+  string,
+
+  @doc("Held-out decisions also informed which proposal was accepted, so the improvement may be optimistic.")
+  selection: "selection",
+
+  @doc("Held-out decisions were used only to measure the already-chosen proposal.")
+  confirmed: "confirmed",
 }
 
 @added(Versions.v1)
@@ -1018,27 +1291,27 @@ model EvaluatorCalibrationResult {
   @minValue(0)
   reviewed_count: int32;
 
-  @doc("Number of reviewed items in the held-out comparison. This is the denominator for current_matches and proposed_matches.")
+  @doc("Number of reviewed items in the held-out comparison. For quality rubrics this is the denominator for current_matches and proposed_matches; for safety rubrics it counts items with a decision for at least one metric.")
   @minValue(0)
   labeled_count: int32;
 
-  @doc("Held-out reviewer decisions matching the current rubric.")
+  @doc("Quality rubrics: held-out reviewer decisions matching the current rubric. Omitted for safety rubrics; see safety_metrics.")
   @minValue(0)
-  current_matches: int32;
+  current_matches?: int32;
 
-  @doc("Held-out reviewer decisions matching the proposed rubric.")
+  @doc("Quality rubrics: held-out reviewer decisions matching the proposed rubric. Omitted for safety rubrics.")
   @minValue(0)
-  proposed_matches: int32;
+  proposed_matches?: int32;
 
-  @doc("Held-out agreement rate for the current rubric.")
+  @doc("Quality rubrics: held-out agreement rate for the current rubric. Omitted for safety rubrics.")
   @minValue(0)
   @maxValue(1)
-  current_agreement_rate: float64;
+  current_agreement_rate?: float64;
 
-  @doc("Held-out agreement rate for the proposed rubric.")
+  @doc("Quality rubrics: held-out agreement rate for the proposed rubric. Omitted for safety rubrics.")
   @minValue(0)
   @maxValue(1)
-  proposed_agreement_rate: float64;
+  proposed_agreement_rate?: float64;
 
   @doc("Held-out Cohen's kappa for the current rubric, when defined.")
   @minValue(-1)
@@ -1050,20 +1323,23 @@ model EvaluatorCalibrationResult {
   @maxValue(1)
   proposed_kappa?: float64;
 
-  @doc("The current held-out agreement rate's 95 percent uncertainty interval.")
-  current_agreement_interval: CalibrationConfidenceInterval;
+  @doc("Quality rubrics: the current held-out agreement rate's 95 percent uncertainty interval.")
+  current_agreement_interval?: CalibrationConfidenceInterval;
 
-  @doc("The proposed held-out agreement rate's 95 percent uncertainty interval.")
-  proposed_agreement_interval: CalibrationConfidenceInterval;
+  @doc("Quality rubrics: the proposed held-out agreement rate's 95 percent uncertainty interval.")
+  proposed_agreement_interval?: CalibrationConfidenceInterval;
 
-  @doc("The 95 percent uncertainty interval for the change in held-out agreement.")
-  improvement_interval: CalibrationConfidenceInterval;
+  @doc("Quality rubrics: the 95 percent uncertainty interval for the change in held-out agreement.")
+  improvement_interval?: CalibrationConfidenceInterval;
 
   @doc("Whether to adopt the proposal or keep the current rubric.")
   recommendation: CalibrationRecommendation;
 
   @doc("The proposed change strategy.")
   strategy: CalibrationStrategy;
+
+  @doc("Whether held-out numbers also informed which proposal was accepted. Safety wording proposals report selection.")
+  estimate_kind?: CalibrationEstimateKind;
 
   @doc("Whether any criterion wording changed.")
   wording_changed: boolean;
@@ -1081,8 +1357,14 @@ model EvaluatorCalibrationResult {
   @doc("Criterion-by-criterion changes.")
   dimensions: CalibrationDimensionChange[];
 
-  @doc("Examples where the current rubric disagreed with a reviewer.")
+  @doc("Quality rubrics: examples where the current rubric disagreed with a reviewer. Empty for safety rubrics.")
   top_disagreements: CalibrationDisagreement[];
+
+  @doc("Safety rubrics: per-metric held-out results for the current and proposed wording. Omitted for quality rubrics.")
+  safety_metrics?: SafetyMetricCalibration[];
+
+  @doc("Safety rubrics: examples where the current wording disagreed with a reviewer, missed violations first.")
+  safety_disagreements?: SafetyCalibrationDisagreement[];
 
   @doc("Source identities, mappings, and label accounting.")
   label_sources: CalibrationSourceOutcome[];
@@ -1096,6 +1378,34 @@ model EvaluatorCalibrationResult {
   @doc("Complete create-visible evaluator version payload. Save it unchanged with this job's ID to record calibration evidence; no evaluator version is saved by the job.")
   @Azure.ClientGenerator.Core.alternateType(EvaluatorVersion)
   proposed_evaluator_version: Create<TypeSpec.Http.PlainData<EvaluatorVersion>>;
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("Recorded held-out results for one safety metric on a calibrated version.")
+model SafetyMetricEvidence {
+  @doc("The safety metric.")
+  metric: SafetyCalibrationMetric;
+
+  @doc("Held-out items with a reviewer decision for this metric.")
+  @minValue(0)
+  labeled_count: int32;
+
+  @doc("Missed violations for the starting version.")
+  @minValue(0)
+  previous_missed_violations: int32;
+
+  @doc("Missed violations for the saved proposal.")
+  @minValue(0)
+  missed_violations: int32;
+
+  @doc("False alarms for the starting version.")
+  @minValue(0)
+  previous_false_alarms: int32;
+
+  @doc("False alarms for the saved proposal.")
+  @minValue(0)
+  false_alarms: int32;
 }
 
 @added(Versions.v1)
@@ -1115,13 +1425,13 @@ model EvaluatorCalibrationEvidence {
   @minValue(0)
   labeled_count: int32;
 
-  @doc("Held-out reviewer decisions matching the saved proposal.")
+  @doc("Quality rubrics: held-out reviewer decisions matching the saved proposal. Omitted for safety rubrics.")
   @minValue(0)
-  matches: int32;
+  matches?: int32;
 
-  @doc("Held-out reviewer decisions matching the starting version.")
+  @doc("Quality rubrics: held-out reviewer decisions matching the starting version. Omitted for safety rubrics.")
   @minValue(0)
-  previous_matches: int32;
+  previous_matches?: int32;
 
   @doc("Held-out Cohen's kappa for the saved proposal, when defined.")
   @minValue(-1)
@@ -1130,6 +1440,9 @@ model EvaluatorCalibrationEvidence {
 
   @doc("Estimated pass rate and uncertainty, when estimable.")
   pass_rate?: CalibrationPassRateEstimate;
+
+  @doc("Safety rubrics: per-metric held-out missed violations and false alarms before and after calibration.")
+  safety_metrics?: SafetyMetricEvidence[];
 
   @doc("Service-resolved source identities, versions, mappings, and counts used for this record.")
   label_sources: CalibrationSourceOutcome[];
@@ -1182,16 +1495,16 @@ union EvaluatorAgreementStatus {
   @doc("No readable reviewer decisions were found.")
   no_reviews: "no_reviews",
 
-  @doc("Fewer than 20 reviewed items, or fewer than 5 passes or 5 failures, were available.")
+  @doc("Fewer than 20 reviewed items, or fewer than 5 passes or 5 failures, were available. For a safety metric, fewer than 10 reviewer violations were available.")
   not_enough_reviews: "not_enough_reviews",
 
   @doc("The run used a rubric version whose criteria differ from the requested version.")
   not_comparable: "not_comparable",
 
-  @doc("At least 80 percent agreement and Cohen's kappa of at least 0.40.")
+  @doc("Quality rubrics: at least 80 percent agreement and Cohen's kappa of at least 0.40. Safety metrics: a missed-violation rate of at most 10 percent and relevant agreement of at least 80 percent.")
   in_sync: "in_sync",
 
-  @doc("Agreement is below 80 percent or Cohen's kappa is below 0.40.")
+  @doc("The in_sync criteria are not met.")
   needs_tuning: "needs_tuning",
 }
 
@@ -1238,6 +1551,9 @@ union CalibrationReviewReason {
 
   @doc("The item passed with exactly one applicable Boolean check.")
   one_check_decides_pass: "one_check_decides_pass",
+
+  @doc("The safety judge could not decide a metric for the item.")
+  unclear_safety_result: "unclear_safety_result",
 }
 
 @added(Versions.v1)
@@ -1253,9 +1569,31 @@ model CalibrationReviewSuggestion {
 
 @added(Versions.v1)
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("Agreement for one safety metric.")
+model SafetyMetricAgreementCheck {
+  @doc("The safety metric.")
+  metric: SafetyCalibrationMetric;
+
+  @doc("Agreement status for this metric.")
+  status: EvaluatorAgreementStatus;
+
+  @doc("Items with a reviewer decision for this metric.")
+  @minValue(0)
+  labeled_count: int32;
+
+  @doc("Reviewer violations for this metric.")
+  @minValue(0)
+  reviewer_violation_count: int32;
+
+  @doc("Agreement with the reviewer, when comparable.")
+  agreement?: SafetyMetricAgreement;
+}
+
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 @doc("Agreement with human reviewers, source accounting, drift, and suggested items to review.")
 model EvaluatorAgreementCheckResult {
-  @doc("Agreement status. If no source can be read, this is no_reviews and warnings identify unavailable sources.")
+  @doc("Agreement status. If no source can be read, this is no_reviews and warnings identify unavailable sources. For safety rubrics, this is the least favorable metric status.")
   status: EvaluatorAgreementStatus;
 
   @doc("Number of distinct reviewer-labeled items.")
@@ -1280,10 +1618,13 @@ model EvaluatorAgreementCheckResult {
   @maxValue(1)
   kappa?: float64;
 
+  @doc("Safety rubrics: agreement per metric. Omitted for quality rubrics, which use matches, agreement_rate, and kappa.")
+  safety_metrics?: SafetyMetricAgreementCheck[];
+
   @doc("Source identities, mappings, accounting, and availability.")
   label_sources: CalibrationSourceOutcome[];
 
-  @doc("Comparison with the calibration record, if possible.")
+  @doc("Comparison with the calibration record, if possible. For safety rubrics, drift compares missed-violation rates.")
   drift: CalibrationDrift;
 
   @doc("Unreviewed items ranked for human review, limited by review_suggestion_count.")

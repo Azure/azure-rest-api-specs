@@ -169,7 +169,7 @@ interface Evaluators {
     Azure.Core.Foundations.ResourceCreatedResponse<EvaluatorVersion>
   >;
 
-  /** Checks an evaluator version against human reviewers on a completed run without tuning or calling a model. The service checks access before consulting a caller-partitioned cache. */
+  /** Checks an evaluator version against human reviewers on a completed run without tuning or calling a model. Safety rubrics are checked per metric, and the overall status is the least favorable metric status. The service checks access before consulting a caller-partitioned cache. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Agreement is a synchronous evaluator-version action."
   @added(Versions.v1)
   @summary("Check evaluator agreement with reviewers")
@@ -181,6 +181,9 @@ interface Evaluators {
     #{
       CheckAgreement: #{
         $ref: "../../examples/v1/Evaluators_checkAgreement.json",
+      },
+      CheckAgreementSafety: #{
+        $ref: "../../examples/v1/Evaluators_checkAgreement_Safety.json",
       },
     }
   )
@@ -340,7 +343,7 @@ interface EvaluatorGenerationJobs {
 @added(Versions.v1)
 @tag("Evaluators")
 interface EvaluatorCalibrationJobs {
-  /** Starts a calibration job. Reusing an Operation-Id with the same body returns the original job; reusing it with a different body returns 409. No evaluator is saved until a caller separately adopts the proposal. */
+  /** Starts a calibration job. Quality rubrics can tune the passing bar, weights, criteria, and wording as requested. Safety rubrics are wording-only and are rechecked with the service-managed safety judge; criterion classification and applicability never change. Reusing an Operation-Id with the same body returns the original job; reusing it with a different body returns 409. No evaluator is saved until a caller separately adopts the proposal. */
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled via Operation-Location."
   @summary("Create an evaluator calibration job")
   @route("evaluator_calibration_jobs")
@@ -360,6 +363,9 @@ interface EvaluatorCalibrationJobs {
       },
       InvalidBooleanOptions: #{
         $ref: "../../examples/v1/EvaluatorCalibrationJobs_createCalibrationJob_BooleanInvalid.json",
+      },
+      Safety: #{
+        $ref: "../../examples/v1/EvaluatorCalibrationJobs_createCalibrationJob_Safety.json",
       },
     }
   )
@@ -391,6 +397,9 @@ interface EvaluatorCalibrationJobs {
     #{
       GetCalibrationJob: #{
         $ref: "../../examples/v1/EvaluatorCalibrationJobs_getCalibrationJob.json",
+      },
+      GetSafetyCalibrationJob: #{
+        $ref: "../../examples/v1/EvaluatorCalibrationJobs_getCalibrationJob_Safety.json",
       },
     }
   )
