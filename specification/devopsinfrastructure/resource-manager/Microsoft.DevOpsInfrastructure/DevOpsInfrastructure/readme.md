@@ -27,12 +27,31 @@ These are the global settings for the devopsinfrastructure.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-preview-2026-07-03
+tag: package-stable-2026-11-12
 ```
 
 ``` yaml
 modelerfour:
   flatten-models: false
+```
+
+### Suppression
+
+```yaml
+directive:
+  - suppress: PostResponseCodes
+    from: devopsinfrastructure.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevOpsInfrastructure/pools/{poolName}/purge"].post
+    reason: Pools_Purge is a synchronous action that returns 200 with no body, matching the existing Pools_DeleteResources action on the same resource.
+```
+
+### Tag: package-stable-2026-11-12
+
+These settings apply only when `--tag=package-stable-2026-11-12` is specified on the command line.
+
+```yaml $(tag) == 'package-stable-2026-11-12'
+input-file:
+  - stable/2026-11-12/devopsinfrastructure.json
 ```
 
 ### Tag: package-preview-2026-07-03

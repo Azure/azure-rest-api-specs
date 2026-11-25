@@ -39,6 +39,10 @@ enum Versions {
   /** 2026-07-03-preview version */
   @armCommonTypesVersion(CommonTypes.Versions.v6)
   v2026_07_03_preview: "2026-07-03-preview",
+
+  /** 2026-11-12 version */
+  @armCommonTypesVersion(CommonTypes.Versions.v6)
+  v2026_11_12: "2026-11-12",
 }
 
 model Pool is TrackedResource<PoolProperties> {
@@ -572,6 +576,10 @@ interface Pools {
     DeleteResourcesDetails,
     ArmDeletedResponse | ErrorResponse
   >;
+
+  @doc("Purges the specified agents from the pool. Each resource ID must identify an agent in this pool. Their virtual machines are deleted and replaced according to the pool's scaling settings.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_11_12)
+  purge is ArmResourceActionSync<Pool, DeleteResourcesDetails, OkResponse>;
 }
 
 @parentResource(Pool)
