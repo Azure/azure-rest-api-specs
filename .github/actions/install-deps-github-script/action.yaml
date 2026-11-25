@@ -1,11 +1,18 @@
 name: Install dependencies for github-script actions
 description: Installs dependencies for github-script actions
 
+inputs:
+  include-typespec-import-parser:
+    description: Install the TypeSpec import parser and compiler dependencies
+    required: false
+    default: "false"
+
 runs:
   using: composite
 
   steps:
     - uses: ./.github/actions/setup-node-install-deps
+      if: ${{ inputs.include-typespec-import-parser != 'true' }}
       with:
         # actions/github-script@v9.0.0 uses Node 24
         node-version: 24.x
@@ -19,4 +26,12 @@ runs:
         # the store starts empty each run anyway, and the cache restore/save round-trip
         # (plus the "pnpm store path" probe) costs more than just downloading the few
         # packages directly.
+        cache: "false"
+
+    - uses: ./.github/actions/setup-node-install-deps
+      if: ${{ inputs.include-typespec-import-parser == 'true' }}
+      with:
+        # actions/github-script@v9.0.0 uses Node 24
+        node-version: 24.x
+        install-command: "pnpm install --frozen-lockfile --prod --prefer-offline --config.trust-lockfile=true --filter=azure-rest-api-specs-github... --filter=@azure-tools/typespec-import-parser..."
         cache: "false"
