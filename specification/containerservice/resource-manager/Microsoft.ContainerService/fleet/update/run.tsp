@@ -194,7 +194,7 @@ union UpdateState {
   @doc("The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has completed.")
   "Completed",
 
-  @added(Versions.v2027_02_01_preview)
+  @added(Versions.v2027_02_02_preview)
   @doc("The state of an UpdateRun/UpdateStage/UpdateGroup that has partially completed.")
   "PartiallyCompleted",
 }
@@ -443,7 +443,7 @@ model SkipProperties {
 }
 
 @doc("The definition of a single reset request.")
-@added(Versions.v2027_02_01_preview)
+@added(Versions.v2027_02_02_preview)
 union ResetTargetType {
   string,
 
@@ -461,7 +461,7 @@ union ResetTargetType {
 }
 
 @doc("A reset target within the update run identified by the request route.")
-@added(Versions.v2027_02_01_preview)
+@added(Versions.v2027_02_02_preview)
 model ResetTarget {
   @doc("The target type. Only Run, Stage, Group, and Member are supported.")
   type: ResetTargetType;
@@ -472,7 +472,7 @@ model ResetTarget {
 }
 
 @doc("The properties of a reset operation containing multiple reset requests.")
-@added(Versions.v2027_02_01_preview)
+@added(Versions.v2027_02_02_preview)
 model ResetProperties {
   @doc("The targets to reset.")
   @minItems(1)
@@ -540,7 +540,7 @@ interface UpdateRuns {
   >;
 
   @doc("Resets members within the target scope of an UpdateRun.")
-  @added(Versions.v2027_02_01_preview)
+  @added(Versions.v2027_02_02_preview)
   reset is ArmResourceActionSync<
     UpdateRun,
     ResetProperties,

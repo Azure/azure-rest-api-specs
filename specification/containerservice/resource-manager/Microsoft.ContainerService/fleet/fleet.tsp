@@ -82,7 +82,7 @@ model FleetHubProfile {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   agentProfile?: AgentProfile;
 
-  @added(Versions.v2027_02_01_preview)
+  @added(Versions.v2027_02_02_preview)
   @doc("The networking configuration for the Fleet hub.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   networkingProfile?: FleetHubNetworkingProfile;
@@ -101,7 +101,7 @@ model FleetHubProfile {
   portalFqdn?: string;
 }
 
-@added(Versions.v2027_02_01_preview)
+@added(Versions.v2027_02_02_preview)
 @doc("Networking settings for the Fleet hub.")
 model FleetHubNetworkingProfile {
   @doc("The resource IDs of the public IP addresses used for outbound traffic from the Fleet hub. At most one public IP address is supported. If omitted or empty, the service creates managed outbound public IP address.")
