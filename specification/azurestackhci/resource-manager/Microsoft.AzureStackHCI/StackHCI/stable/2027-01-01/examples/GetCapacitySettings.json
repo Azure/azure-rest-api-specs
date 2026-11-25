@@ -20,7 +20,8 @@
             "failureDomainReservationCount": 1,
             "reservedNodes": [
               "machine-2"
-            ]
+            ],
+            "systemReservationRatio": 0.1
           },
           "reportedCapacity": {
             "lastUpdated": "2026-05-10T00:00:00Z",
@@ -28,24 +29,24 @@
               "totalBytes": 4398046511104,
               "consumedBytes": 1099511627776,
               "effectiveAvailableBytes": 3298534883328,
-              "lastUpdated": "2026-05-10T00:00:00Z"
+              "lastUpdated": "2026-05-10T00:00:00Z",
+              "volumes": [
+                {
+                  "id": "volume-1",
+                  "path": "C:\\ClusterStorage\\Volume1",
+                  "sizeInBytes": "2199023255552",
+                  "sizeRemainingInBytes": "1649267441664",
+                  "sizeConsumedInBytes": "549755813888"
+                },
+                {
+                  "id": "volume-2",
+                  "path": "C:\\ClusterStorage\\Volume2",
+                  "sizeInBytes": "2199023255552",
+                  "sizeRemainingInBytes": "1649267441664",
+                  "sizeConsumedInBytes": "549755813888"
+                }
+              ]
             },
-            "volumes": [
-              {
-                "id": "volume-1",
-                "path": "C:\\ClusterStorage\\Volume1",
-                "sizeInBytes": "2199023255552",
-                "sizeRemainingInBytes": "1649267441664",
-                "sizeConsumedInBytes": "549755813888"
-              },
-              {
-                "id": "volume-2",
-                "path": "C:\\ClusterStorage\\Volume2",
-                "sizeInBytes": "2199023255552",
-                "sizeRemainingInBytes": "1649267441664",
-                "sizeConsumedInBytes": "549755813888"
-              }
-            ],
             "cpu": {
               "physicalCoreCount": 96,
               "logicalCoreCount": 192,
@@ -56,14 +57,16 @@
               "workloadAllocatedVirtualCpu": 64,
               "policyReservedVirtualCpu": 48,
               "aggregateAvailableVirtualCpu": 152,
-              "lastUpdated": "2026-05-10T00:00:00Z"
+              "lastUpdated": "2026-05-10T00:00:00Z",
+              "systemReservedVirtualCpu": 24
             },
             "memory": {
               "totalBytes": 824633720832,
               "workloadAllocatedBytes": 137438953472,
               "policyReservedBytes": 274877906944,
               "aggregateAvailableBytes": 412316860416,
-              "lastUpdated": "2026-05-10T00:00:00Z"
+              "lastUpdated": "2026-05-10T00:00:00Z",
+              "systemReservedBytes": 51539607552
             },
             "gpu": {
               "totalGpuCount": 6,
@@ -128,7 +131,20 @@
                   "consumedGpuCount": 0,
                   "totalPartitionCount": 4,
                   "consumedPartitionCount": 1,
-                  "effectiveAvailablePartitionCount": 3
+                  "effectiveAvailablePartitionCount": 3,
+                  "groups": [
+                    {
+                      "type": "NVIDIA A2",
+                      "mode": "GpuP",
+                      "partitionSizeInMB": "4096",
+                      "totalAssignableGpuCount": "2",
+                      "reservedAssignableGpuCount": "0",
+                      "consumedAssignableGpuCount": "0",
+                      "totalPartitionableGpuCount": "4",
+                      "reservedPartitionableGpuCount": "0",
+                      "consumedPartitionableGpuCount": "1"
+                    }
+                  ]
                 }
               },
               {
@@ -161,7 +177,20 @@
                   "consumedGpuCount": 0,
                   "totalPartitionCount": 4,
                   "consumedPartitionCount": 3,
-                  "effectiveAvailablePartitionCount": 1
+                  "effectiveAvailablePartitionCount": 1,
+                  "groups": [
+                    {
+                      "type": "NVIDIA A2",
+                      "mode": "GpuP",
+                      "partitionSizeInMB": "4096",
+                      "totalAssignableGpuCount": "2",
+                      "reservedAssignableGpuCount": "0",
+                      "consumedAssignableGpuCount": "0",
+                      "totalPartitionableGpuCount": "4",
+                      "reservedPartitionableGpuCount": "0",
+                      "consumedPartitionableGpuCount": "3"
+                    }
+                  ]
                 }
               },
               {
@@ -194,7 +223,20 @@
                   "consumedGpuCount": 2,
                   "totalPartitionCount": 4,
                   "consumedPartitionCount": 0,
-                  "effectiveAvailablePartitionCount": 4
+                  "effectiveAvailablePartitionCount": 4,
+                  "groups": [
+                    {
+                      "type": "NVIDIA A2",
+                      "mode": "GpuP",
+                      "partitionSizeInMB": "4096",
+                      "totalAssignableGpuCount": "2",
+                      "reservedAssignableGpuCount": "2",
+                      "consumedAssignableGpuCount": "0",
+                      "totalPartitionableGpuCount": "4",
+                      "reservedPartitionableGpuCount": "4",
+                      "consumedPartitionableGpuCount": "0"
+                    }
+                  ]
                 }
               }
             ],

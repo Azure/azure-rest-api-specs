@@ -11400,6 +11400,12 @@
           "description": "Cluster-wide CPU overcommit ratio used to calculate effective vCPU capacity. Default: 1.0.",
           "minimum": 1
         },
+        "systemReservationRatio": {
+          "type": "number",
+          "format": "float",
+          "description": "Cluster-wide system reservation ratio that holds back a fraction of effective\ncapacity for platform and system overhead. Default: 0.05.",
+          "minimum": 0.05
+        },
         "failureDomainReservationCount": {
           "type": "integer",
           "format": "int32",
@@ -12104,6 +12110,12 @@
           "description": "vCPU withheld by reserved nodes, failure-domain reservation policy, upgrade, or\nmaintenance policy.",
           "readOnly": true
         },
+        "systemReservedVirtualCpu": {
+          "type": "integer",
+          "format": "int64",
+          "description": "vCPU reserved at the machine level for the host OS and Azure Local platform\nservices before workload allocation and policy reservation.",
+          "readOnly": true
+        },
         "aggregateAvailableVirtualCpu": {
           "type": "integer",
           "format": "int32",
@@ -12398,6 +12410,12 @@
           "description": "Memory withheld for host OS, Azure Local platform services, reserved nodes,\nfailure-domain reservation policy, upgrade, or maintenance policy.",
           "readOnly": true
         },
+        "systemReservedBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Memory reserved at the machine level for the host OS and Azure Local platform\nservices before workload allocation as well as policy reservation, in bytes.",
+          "readOnly": true
+        },
         "aggregateAvailableBytes": {
           "type": "integer",
           "format": "int64",
@@ -12569,6 +12587,17 @@
           "format": "int64",
           "description": "Sum of reportedProperties.sizeRemainingInBytes across user volumes.",
           "readOnly": true
+        },
+        "volumes": {
+          "type": "array",
+          "description": "Capacity details for volumes reported by the cluster.",
+          "items": {
+            "$ref": "#/definitions/CapacityVolumeSnapshot"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "lastUpdated": {
           "type": "string",
@@ -14627,6 +14656,37 @@
         }
       ],
       "x-ms-discriminator-value": "DeleteVolume"
+    },
+    "DeploymentCapacityPolicy": {
+      "type": "object",
+      "description": "Day Zero capacity placement policy supplied via Deployment Settings. Mirrors the\npatchable shape of AppliedCapacityPolicy so the values can be plumbed into the\nCapacity Settings singleton at cluster creation time.",
+      "properties": {
+        "cpuOvercommitRatio": {
+          "type": "number",
+          "format": "float",
+          "description": "Cluster-wide CPU overcommit ratio used to calculate effective vCPU capacity.",
+          "minimum": 1
+        },
+        "systemReservationRatio": {
+          "type": "number",
+          "format": "float",
+          "description": "Cluster-wide system reservation ratio that holds back a fraction of effective\ncapacity for platform and system overhead. Default: 0.05.",
+          "minimum": 0.05
+        },
+        "failureDomainReservationCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of failure domains to reserve for n+1/n+2 style placement planning.",
+          "minimum": 0
+        },
+        "reservedNodes": {
+          "type": "array",
+          "description": "Explicit node names held back from placement for upgrade or maintenance.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "DeploymentCluster": {
       "type": "object",
@@ -21968,6 +22028,19 @@
           "format": "int32",
           "description": "GPU-P partitions available for placement on this machine after assignments and\nreservation policy.",
           "readOnly": true
+        },
+        "groups": {
+          "type": "array",
+          "description": "GPU capacity on this machine grouped by type, mode, and partition size.",
+          "items": {
+            "$ref": "#/definitions/CapacityGpuGroup"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "type",
+            "mode",
+            "partitionSizeInMB"
+          ]
         }
       }
     },
@@ -23580,6 +23653,10 @@
         "customLocation": {
           "type": "string",
           "description": "The name of custom location."
+        },
+        "capacityPolicy": {
+          "$ref": "#/definitions/DeploymentCapacityPolicy",
+          "description": "Optional Day Zero capacity policy used to seed the cluster's Capacity Settings\nsingleton during deployment. When omitted, the service uses its own defaults."
         },
         "confidentialVmIntent": {
           "type": "string",
@@ -25515,17 +25592,6 @@
           "$ref": "#/definitions/CapacityStorageSnapshot",
           "description": "Storage capacity aggregated from eligible user Cluster Volume resources.\nInfrastructure volumes are excluded.",
           "readOnly": true
-        },
-        "volumes": {
-          "type": "array",
-          "description": "Capacity details for volumes reported by the cluster.",
-          "items": {
-            "$ref": "#/definitions/CapacityVolumeSnapshot"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "id"
-          ]
         },
         "cpu": {
           "$ref": "#/definitions/CapacityCpuSnapshot",

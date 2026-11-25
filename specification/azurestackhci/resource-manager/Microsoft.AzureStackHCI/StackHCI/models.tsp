@@ -4168,6 +4168,13 @@ model OptionalServices {
   customLocation?: string;
 
   /**
+   * Optional Day Zero capacity policy used to seed the cluster's Capacity Settings
+   * singleton during deployment. When omitted, the service uses its own defaults.
+   */
+  @added(Versions.v2027_01_01)
+  capacityPolicy?: DeploymentCapacityPolicy;
+
+  /**
    * Captures the customer's intent to enable or disable Confidential VM (CVM) support on the AzureStackHCI Cluster.
    */
   @added(Versions.v2027_01_01)
@@ -12579,6 +12586,38 @@ model CapacitySettingProperties {
 }
 
 /**
+ * Day Zero capacity placement policy supplied via Deployment Settings. Mirrors the
+ * patchable shape of AppliedCapacityPolicy so the values can be plumbed into the
+ * Capacity Settings singleton at cluster creation time.
+ */
+@added(Versions.v2027_01_01)
+model DeploymentCapacityPolicy {
+  /**
+   * Cluster-wide CPU overcommit ratio used to calculate effective vCPU capacity.
+   */
+  @minValue(1.0)
+  cpuOvercommitRatio?: float32;
+
+  /**
+   * Cluster-wide system reservation ratio that holds back a fraction of effective
+   * capacity for platform and system overhead. Default: 0.05.
+   */
+  @minValue(0.05)
+  systemReservationRatio?: float32;
+
+  /**
+   * Number of failure domains to reserve for n+1/n+2 style placement planning.
+   */
+  @minValue(0)
+  failureDomainReservationCount?: int32;
+
+  /**
+   * Explicit node names held back from placement for upgrade or maintenance.
+   */
+  reservedNodes?: string[];
+}
+
+/**
  * Cluster-wide placement policy used by capacity calculations. Day Zero values are
  * hydrated from Deployment Settings; missing values are filled in with service defaults.
  * Day N updates use PATCH on the Capacity Settings singleton.
@@ -12590,6 +12629,13 @@ model AppliedCapacityPolicy {
    */
   @minValue(1.0)
   cpuOvercommitRatio?: float32;
+
+  /**
+   * Cluster-wide system reservation ratio that holds back a fraction of effective
+   * capacity for platform and system overhead. Default: 0.05.
+   */
+  @minValue(0.05)
+  systemReservationRatio?: float32;
 
   /**
    * Number of failure domains to reserve for n+1/n+2 style placement planning. Default: 0.
@@ -12622,13 +12668,6 @@ model ReportedCapacitySnapshot {
    */
   @visibility(Lifecycle.Read)
   storage?: CapacityStorageSnapshot;
-
-  /**
-   * Capacity details for volumes reported by the cluster.
-   */
-  @visibility(Lifecycle.Read)
-  @Azure.ResourceManager.identifiers(#["id"])
-  volumes?: CapacityVolumeSnapshot[];
 
   /**
    * CPU capacity summary including P-core, L-core, policy-adjusted vCPU, and consumption.
@@ -12695,6 +12734,13 @@ model CapacityStorageSnapshot {
    */
   @visibility(Lifecycle.Read)
   effectiveAvailableBytes?: int64;
+
+  /**
+   * Capacity details for volumes reported by the cluster.
+   */
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["id"])
+  volumes?: CapacityVolumeSnapshot[];
 
   /**
    * Last storage update time.
@@ -12797,6 +12843,13 @@ model CapacityCpuSnapshot {
   policyReservedVirtualCpu?: int32;
 
   /**
+   * vCPU reserved at the machine level for the host OS and Azure Local platform
+   * services before workload allocation and policy reservation.
+   */
+  @visibility(Lifecycle.Read)
+  systemReservedVirtualCpu?: int64;
+
+  /**
    * Total remaining vCPU across nodes, derived from node-level availability after
    * machine-level system reserve, workload allocation, and policy reservation. This
    * is a summed value and must not be treated as the largest VM that can fit.
@@ -12835,6 +12888,13 @@ model CapacityMemorySnapshot {
    */
   @visibility(Lifecycle.Read)
   policyReservedBytes?: int64;
+
+  /**
+   * Memory reserved at the machine level for the host OS and Azure Local platform
+   * services before workload allocation as well as policy reservation, in bytes.
+   */
+  @visibility(Lifecycle.Read)
+  systemReservedBytes?: int64;
 
   /**
    * Total remaining memory across nodes after workload allocation and
@@ -13287,6 +13347,13 @@ model MachineGpuCapacity {
    */
   @visibility(Lifecycle.Read)
   effectiveAvailablePartitionCount?: int32;
+
+  /**
+   * GPU capacity on this machine grouped by type, mode, and partition size.
+   */
+  @visibility(Lifecycle.Read)
+  @Azure.ResourceManager.identifiers(#["type", "mode", "partitionSizeInMB"])
+  groups?: CapacityGpuGroup[];
 }
 
 /**
