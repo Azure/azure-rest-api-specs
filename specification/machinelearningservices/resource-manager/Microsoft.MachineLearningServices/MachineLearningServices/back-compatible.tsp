@@ -349,10 +349,14 @@ using Microsoft.MachineLearningServices;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Registry.properties);
 
-@@clientName(Workspaces.createOrUpdate::parameters.resource, "body","!go");
-@@clientName(Workspaces.createOrUpdate::parameters.resource, "parameters","go");
-@@clientName(Workspaces.update::parameters.properties, "body","!go");
-@@clientName(Workspaces.update::parameters.properties, "parameters","go");
+@@clientName(Workspaces.createOrUpdate::parameters.resource, "body", "!go");
+@@clientName(
+  Workspaces.createOrUpdate::parameters.resource,
+  "parameters",
+  "go"
+);
+@@clientName(Workspaces.update::parameters.properties, "body", "!go");
+@@clientName(Workspaces.update::parameters.properties, "parameters", "go");
 @@clientLocation(Workspaces.list, "WorkspaceFeatures");
 @@clientLocation(Workspaces.getAllModels, "Connection");
 @@clientLocation(Workspaces.getInWorkspace, EndpointDeployment);
