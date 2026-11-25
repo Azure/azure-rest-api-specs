@@ -122,24 +122,6 @@ interface OrganizationResourceRoleBindingIdOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-interface OrganizationResourceRoleBindingIdOperationGroup
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /**
-         * Organization resource name
-         */
-        @path @segment("organizations") organizationName: string,
-      },
-      {},
-      ResourceProviderDefaultErrorResponse
-    > {}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OrganizationResourceRoleBindingIdActions {
   /**
    * Organization role bindings
@@ -168,8 +150,9 @@ interface OrganizationResources {
    * Create Organization resource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  create is OrganizationResourceRoleBindingIdOperationGroup.CreateOrUpdateAsync<
+  create is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     OrganizationResource,
+    Error = ResourceProviderDefaultErrorResponse,
     OptionalRequestBody = true
   >;
 
@@ -178,9 +161,10 @@ interface OrganizationResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
-  update is OrganizationResourceRoleBindingIdOperationGroup.CustomPatchSync<
+  update is Azure.ResourceManager.Legacy.CustomPatchSync<
     OrganizationResource,
     PatchModel = OrganizationResourceUpdate,
+    Error = ResourceProviderDefaultErrorResponse,
     OptionalRequestBody = true
   >;
 

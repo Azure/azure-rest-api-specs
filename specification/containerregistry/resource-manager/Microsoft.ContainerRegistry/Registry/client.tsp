@@ -28,6 +28,7 @@ using Microsoft.ContainerRegistry;
 );
 
 @@usage(Webhook, Usage.input | Usage.output, "java");
+@@usage(TriggerStatus, Usage.input | Usage.output, "java");
 
 @@clientName(
   MyPrivateLinkResource,
@@ -36,6 +37,23 @@ using Microsoft.ContainerRegistry;
 );
 
 @@clientName(IPRule.value, exact("iPAddressOrRange"), "javascript");
+
+@@clientName(
+  AdditionalAuthenticationType.AwsElasticContainerRegistry,
+  "AWSElasticContainerRegistry",
+  "go"
+);
+@@clientName(EcrAuthenticationProperties, "ECRAuthenticationProperties", "go");
+@@clientName(
+  EcrAuthenticationUpdateProperties,
+  "ECRAuthenticationUpdateProperties",
+  "go"
+);
+@@clientName(
+  GarAuthenticationUpdateProperties,
+  "GARAuthenticationUpdateProperties",
+  "go"
+);
 
 // C# configurations for backward compatibility and naming conventions.
 // These settings restore the public API surface of the previous autorest-based SDK to avoid breaking changes.
@@ -109,6 +127,17 @@ namespace Microsoft.ContainerRegistry {
 @@alternateType(
   CredentialSetUpdateParameters.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+// OptionalProperties propagates these UUID mappings to the partial-update model.
+@@alternateType(
+  EntraFederatedIdentityCredentialAuthenticationProperties.federatedApplicationClientId,
+  uuid,
+  "csharp"
+);
+@@alternateType(
+  EntraFederatedIdentityCredentialAuthenticationProperties.sourceTenantId,
+  uuid,
   "csharp"
 );
 @@alternateType(EventContent.id, uuid, "csharp");
@@ -286,6 +315,26 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(
   GarAuthenticationProperties,
   "GoogleArtifactRegistryCacheAuthentication",
+  "csharp"
+);
+@@clientName(
+  GarAuthenticationUpdateProperties,
+  "GoogleArtifactRegistryCacheAuthenticationUpdateProperties",
+  "csharp"
+);
+@@clientName(
+  EcrAuthenticationProperties,
+  "AwsElasticContainerRegistryCacheAuthentication",
+  "csharp"
+);
+@@clientName(
+  EcrAuthenticationUpdateProperties,
+  "AwsElasticContainerRegistryCacheAuthenticationUpdateProperties",
+  "csharp"
+);
+@@clientName(
+  EntraFederatedIdentityCredentialAuthenticationProperties,
+  "EntraFederatedIdentityCredentialCacheAuthentication",
   "csharp"
 );
 @@clientName(

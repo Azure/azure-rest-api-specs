@@ -202,16 +202,28 @@ function analyzeShapes(
     id: string;
     declarations: Record<string, unknown>[];
   }[],
+  provenance?: {
+    base: Record<string, unknown>;
+    current: Record<string, unknown>;
+  },
 ) {
   const work = fs.mkdtempSync(path.join(process.cwd(), ".downstream-analyzer-test-"));
   context.onTestFinished(() => fs.rmSync(work, { recursive: true, force: true }));
   fs.writeFileSync(path.join(work, "base.yaml"), stringify(base));
   fs.writeFileSync(path.join(work, "current.yaml"), stringify(current));
+  if (provenance) {
+    fs.writeFileSync(path.join(work, "base-provenance.json"), JSON.stringify(provenance.base));
+    fs.writeFileSync(
+      path.join(work, "current-provenance.json"),
+      JSON.stringify(provenance.current),
+    );
+  }
 
-  const artifact = (file: string) => ({
+  const artifact = (file: string, provenanceFile?: string) => ({
     status: "succeeded",
     format: "tcgc-yaml",
     files: [{ path: file }],
+    ...(provenanceFile ? { provenanceFile: { path: provenanceFile } } : {}),
   });
   const sourceChanges = suppliedSources ?? [
     {
@@ -227,8 +239,12 @@ function analyzeShapes(
           id: "project-1",
           sourceChangeIds: sourceChanges.map((item) => item.id),
           artifacts: {
-            base: { tcgc: artifact("base.yaml") },
-            current: { tcgc: artifact("current.yaml") },
+            base: {
+              tcgc: artifact("base.yaml", provenance ? "base-provenance.json" : undefined),
+            },
+            current: {
+              tcgc: artifact("current.yaml", provenance ? "current-provenance.json" : undefined),
+            },
           },
         },
       ],
@@ -239,6 +255,125 @@ function analyzeShapes(
     options as unknown as Parameters<typeof analyzeDownstreamBreaking>[0],
   );
 }
+
+function genericListPackage(removeFirstProperty: boolean) {
+  const item = (name: string) => ({
+    kind: "model",
+    name,
+    crossLanguageDefinitionId: `Contoso.${name}`,
+    access: "public",
+    usage: 3,
+    properties: [],
+  });
+  const firstItem = item("First");
+  const secondItem = item("Second");
+  const page = (name: string, valueType: unknown, removeProperty: boolean) => ({
+    kind: "model",
+    name,
+    crossLanguageDefinitionId: "Contoso.ListResult",
+    access: "public",
+    usage: 3,
+    properties: removeProperty
+      ? []
+      : [
+          {
+            kind: "property",
+            name: "value",
+            optional: false,
+            discriminator: false,
+            type: { kind: "array", valueType },
+          },
+        ],
+  });
+  const firstPage = page("FirstListResult", firstItem, removeFirstProperty);
+  const secondPage = page("SecondListResult", secondItem, false);
+  const method = (name: string, responseType: unknown) => ({
+    kind: "basic",
+    name,
+    access: "public",
+    crossLanguageDefinitionId: `Contoso.Items.${name}`,
+    parameters: [],
+    response: { kind: "method", type: responseType },
+    operation: {
+      kind: "http",
+      path: `/${name}`,
+      uriTemplate: `/${name}`,
+      verb: "get",
+      parameters: [],
+      responses: [{ statusCodes: 200 }],
+      exceptions: [],
+    },
+  });
+  return {
+    crossLanguagePackageId: "Contoso",
+    crossLanguageVersion: "1",
+    metadata: {},
+    clients: [
+      {
+        kind: "client",
+        name: "Items",
+        children: [],
+        methods: [method("first", firstPage), method("second", secondPage)],
+      },
+    ],
+    models: [firstPage, secondPage, firstItem, secondItem],
+    enums: [],
+    unions: [],
+    namespaces: [],
+  };
+}
+
+function genericListProvenance() {
+  return {
+    schemaVersion: 1,
+    models: [
+      {
+        crossLanguageDefinitionId: "Contoso.ListResult",
+        name: "FirstListResult",
+        templateArguments: [{ kind: "Model", namespace: "Contoso", name: "First" }],
+      },
+      {
+        crossLanguageDefinitionId: "Contoso.ListResult",
+        name: "SecondListResult",
+        templateArguments: [{ kind: "Model", namespace: "Contoso", name: "Second" }],
+      },
+    ],
+  };
+}
+
+void test("new projects are complete and non-breaking without baseline artifacts", () => {
+  const result = analyzeDownstreamBreaking({
+    manifest: {
+      projects: [
+        {
+          id: "project-new",
+          classification: "new",
+          sourceChangeIds: ["source-new"],
+          artifacts: {},
+          artifactComparison: {
+            mode: "new-project",
+            baseline: {
+              sourceRevision: "absent",
+              reason: "No pre-existing SDK contract exists.",
+            },
+            target: {
+              sourceRevision: "current",
+              commit: "head",
+              reason: "unversioned",
+            },
+            addedCurrentVersions: [],
+            available: { base: [], current: [] },
+          },
+        },
+      ],
+    },
+    sourceIndex: { sourceChanges: [] },
+  } as unknown as Parameters<typeof analyzeDownstreamBreaking>[0]);
+
+  assert.equal(result.status, "ready");
+  assert.deepEqual(result.candidates, []);
+  assert.deepEqual(result.blockers, []);
+});
 
 void test("detects PR 43308-style kind/response/LRO changes without inventing parameter changes", (context) => {
   const result = analyzeShapes(context, packageShape(false), packageShape(true));
@@ -317,7 +452,7 @@ void test("retains actual LRO behavior changes", (context) => {
   assert.ok(!result.candidates.some((item) => item.rule === "method-parameters-changed"));
 });
 
-void test("reports SDK method identity changes when matching by HTTP route", (context) => {
+void test("does not infer SDK method replacement from an unchanged HTTP route", (context) => {
   const base = packageShape(false);
   const current = packageShape(false);
   const method = current.clients[0].methods[0];
@@ -326,8 +461,211 @@ void test("reports SDK method identity changes when matching by HTTP route", (co
 
   const result = analyzeShapes(context, base, current);
 
-  assert.ok(result.candidates.some((item) => item.rule === "method-identity-changed"));
+  assert.ok(result.candidates.some((item) => item.rule === "method-removed"));
+  assert.ok(!result.candidates.some((item) => item.rule === "method-identity-changed"));
+  assert.equal(
+    result.candidates.find((item) => item.rule === "method-removed")?.evidenceFactIds.length,
+    1,
+  );
+});
+
+void test("uses explicit renamedFrom lineage to pair renamed SDK methods", (context) => {
+  const base = packageShape(false);
+  const current = packageShape(false);
+  const method = current.clients[0].methods[0];
+  method.name = "abort";
+  method.crossLanguageDefinitionId = "Microsoft.Chaos.ScenarioRuns.abort";
+
+  const result = analyzeShapes(context, base, current, [
+    {
+      id: "abort-current",
+      kind: "operation",
+      qualifiedName: "ScenarioRuns.abort",
+      decorators: ['@renamedFrom(Versions.v2, "cancel")'],
+      hunkIds: ["rename-hunk"],
+      source: { revision: "current" },
+    },
+  ]);
+  const candidate = result.candidates.find((item) => item.rule === "method-identity-changed");
+
+  assert.ok(candidate);
+  assert.deepEqual(candidate.identityEvidence, {
+    basis: "typespec-renamed-from",
+    baselineIdentity: "Microsoft.Chaos.ScenarioRuns.cancel",
+    targetIdentity: "Microsoft.Chaos.ScenarioRuns.abort",
+    declarationIds: ["abort-current"],
+  });
   assert.ok(!result.candidates.some((item) => item.rule === "method-removed"));
+  assert.equal(result.blockers.length, 0);
+});
+
+void test("uses stable cross-language identity when generated model names change", (context) => {
+  const base = packageShape(false);
+  const current = packageShape(false);
+  current.models[0].name = "ChaosScenarioRun";
+
+  const result = analyzeShapes(context, base, current);
+  const candidate = result.candidates.find((item) => item.rule === "model-identity-changed");
+
+  assert.ok(candidate);
+  assert.equal(candidate.identityEvidence, undefined);
+  assert.equal(candidate.evidenceFactIds.length, 2);
+  assert.equal(result.blockers.length, 0);
+});
+
+void test("uses explicit renamedFrom lineage to pair renamed SDK models", (context) => {
+  const base = packageShape(false);
+  const current = packageShape(false);
+  current.models[0].name = "ChaosScenarioRun";
+  current.models[0].crossLanguageDefinitionId = "Microsoft.Chaos.ChaosScenarioRun";
+
+  const result = analyzeShapes(context, base, current, [
+    {
+      id: "chaos-run-current",
+      kind: "model",
+      qualifiedName: "ChaosScenarioRun",
+      decorators: ['@renamedFrom(Versions.v2, "ScenarioRun")'],
+      hunkIds: ["rename-hunk"],
+      source: { revision: "current" },
+    },
+  ]);
+  const candidate = result.candidates.find((item) => item.rule === "model-identity-changed");
+
+  assert.ok(candidate);
+  assert.equal(candidate.identityEvidence?.basis, "typespec-renamed-from");
+  assert.ok(!result.candidates.some((item) => item.rule === "public-surface-changed"));
+  assert.equal(result.blockers.length, 0);
+});
+
+void test("keeps the PR 44384 Encryption model when a similar additive model is introduced", (context) => {
+  const base = packageShape(false);
+  const current = packageShape(false);
+  for (const shape of [base, current]) {
+    shape.models[0].name = "Encryption";
+    shape.models[0].crossLanguageDefinitionId = "Microsoft.Chaos.Encryption";
+  }
+  current.models.push({
+    ...structuredClone(current.models[0]),
+    name: "StorageAccountEncryption",
+    crossLanguageDefinitionId: "Microsoft.Chaos.StorageAccountEncryption",
+  });
+
+  const result = analyzeShapes(context, base, current);
+
+  assert.equal(result.candidates.length, 0);
+  assert.equal(result.blockers.length, 0);
+});
+
+void test("keeps similar-shaped model additions independent from removals", (context) => {
+  const base = packageShape(false);
+  const current = packageShape(false);
+  base.models[0].name = "Encryption";
+  base.models[0].crossLanguageDefinitionId = "Microsoft.Chaos.Encryption";
+  current.models[0].name = "StorageAccountEncryption";
+  current.models[0].crossLanguageDefinitionId = "Microsoft.Chaos.StorageAccountEncryption";
+
+  const result = analyzeShapes(context, base, current);
+  const removal = result.candidates.find((item) => item.rule === "public-surface-changed");
+
+  assert.ok(removal);
+  assert.equal(removal.evidenceFactIds.length, 1);
+  assert.ok(!result.candidates.some((item) => item.rule === "model-identity-changed"));
+  assert.equal(result.blockers.length, 0);
+});
+
+void test("blocks model comparison when canonical identity evidence is missing", (context) => {
+  const base = packageShape(false);
+  const current = packageShape(false);
+  delete (base.models[0] as { crossLanguageDefinitionId?: string }).crossLanguageDefinitionId;
+  delete (current.models[0] as { crossLanguageDefinitionId?: string }).crossLanguageDefinitionId;
+
+  const result = analyzeShapes(context, base, current);
+  const blocker = result.blockers.find((item) => item.code === "downstream-identity-unresolved");
+
+  assert.ok(blocker);
+  assert.equal(result.candidates.length, 0);
+  assert.deepEqual(blocker.evidenceFactIds?.map((id) => result.facts[id].comparisonRole).sort(), [
+    "baseline",
+    "target",
+  ]);
+  assert.match(blocker.message, /generated names, shapes, or locations is not identity evidence/);
+});
+
+void test("blocks ambiguous target cross-language identities", (context) => {
+  const base = packageShape(false);
+  const current = packageShape(false);
+  current.models.push(structuredClone(current.models[0]));
+
+  const result = analyzeShapes(context, base, current);
+  const blocker = result.blockers.find((item) =>
+    item.message.includes("multiple target symbols have the same crossLanguageDefinitionId"),
+  );
+
+  assert.ok(blocker);
+  assert.equal(result.candidates.length, 0);
+  assert.deepEqual(blocker.evidenceFactIds?.map((id) => result.facts[id].comparisonRole).sort(), [
+    "baseline",
+    "target",
+    "target",
+  ]);
+});
+
+void test("compares the matching generic instance without blocking sibling instances", (context) => {
+  const provenance = genericListProvenance();
+  const result = analyzeShapes(
+    context,
+    genericListPackage(false),
+    genericListPackage(true),
+    [],
+    undefined,
+    { base: provenance, current: provenance },
+  );
+
+  assert.deepEqual(result.blockers, []);
+  const removals = result.candidates.filter((item) => item.rule === "model-property-removed");
+  assert.equal(removals.length, 1);
+  assert.match(removals[0].actual, /FirstListResult|Contoso\.ListResult/);
+  assert.ok(
+    !result.candidates.some(
+      (item) => item.rule === "public-surface-changed" && item.actual.includes("Second"),
+    ),
+  );
+});
+
+void test("does not pair a single target generic candidate with different template arguments", (context) => {
+  const provenance = genericListProvenance();
+  const base = genericListPackage(false);
+  base.clients[0].methods = [base.clients[0].methods[0]];
+  base.models = base.models.filter(
+    (model) => model.name === "FirstListResult" || model.name === "First",
+  );
+  const current = genericListPackage(false);
+  current.clients[0].methods = [current.clients[0].methods[1]];
+  current.models = current.models.filter(
+    (model) => model.name === "SecondListResult" || model.name === "Second",
+  );
+
+  const result = analyzeShapes(context, base, current, [], undefined, {
+    base: {
+      schemaVersion: 1,
+      models: provenance.models.filter((model) => model.name === "FirstListResult"),
+    },
+    current: {
+      schemaVersion: 1,
+      models: provenance.models.filter((model) => model.name === "SecondListResult"),
+    },
+  });
+
+  assert.deepEqual(result.blockers, []);
+  assert.ok(!result.candidates.some((item) => item.rule === "model-identity-changed"));
+  const removal = result.candidates.find(
+    (item) =>
+      item.rule === "public-surface-changed" &&
+      item.crossLanguageDefinitionId === "Contoso.ListResult",
+  );
+  assert.ok(removal);
+  assert.equal(removal.evidenceFactIds.length, 1);
+  assert.equal(result.facts[removal.evidenceFactIds[0]].name, "FirstListResult");
 });
 
 void test("detects model base and discriminator hierarchy changes", (context) => {
@@ -493,7 +831,22 @@ void test("links nested response type changes to unchanged public methods", (con
   );
   assert.ok(root);
   assert.equal(root.kind, "type-contract-propagation");
-  assert.equal(root.methodFactIds.length, 1);
+  assert.equal(root.methodFactIds.length, 2);
+  assert.deepEqual(root.methodFactIds.map((id) => result.facts[id].comparisonRole).sort(), [
+    "baseline",
+    "target",
+  ]);
+  assert.deepEqual(
+    [
+      ...new Set(
+        root.referenceEvidence.map((edge) => {
+          assert.ok(edge.fromFactId);
+          return result.facts[edge.fromFactId].comparisonRole;
+        }),
+      ),
+    ].sort(),
+    ["baseline", "target"],
+  );
   assert.ok(
     root.referenceEvidence.some(
       (edge) => edge.kind === "response" && edge.location === "response-body",
@@ -514,4 +867,34 @@ void test("links nested response type changes to unchanged public methods", (con
         fact.crossLanguageDefinitionId === "Storage.File.Directory.listFilesAndDirectoriesSegment",
     ),
   );
+});
+
+void test("retains the unchanged baseline method and parent types for a target-only reference path", (context) => {
+  const baseline = nestedResponseShape(false);
+  baseline.models[0].properties = [];
+  const result = analyzeShapes(context, baseline, nestedResponseShape(true));
+  const candidate = result.candidates.find((item) => item.rule === "model-property-removed");
+  assert.ok(candidate);
+  const root = result.rootCauses.find((item) => item.directCandidateIds.includes(candidate.id));
+  assert.ok(root);
+  assert.deepEqual(root.methodFactIds.map((id) => result.facts[id].comparisonRole).sort(), [
+    "baseline",
+    "target",
+  ]);
+  assert.ok(
+    root.referenceEvidence.every(
+      (edge) => edge.fromFactId && result.facts[edge.fromFactId].comparisonRole === "target",
+    ),
+  );
+  assert.ok(
+    root.typeFactIds.some((id) => {
+      const fact = result.facts[id];
+      return (
+        fact.comparisonRole === "baseline" &&
+        fact.identity === "Storage.File.ListFilesAndDirectoriesSegmentResponse" &&
+        fact.properties?.length === 0
+      );
+    }),
+  );
+  assert.ok(!result.candidates.some((item) => item.rule.startsWith("method-")));
 });

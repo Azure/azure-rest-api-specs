@@ -27,6 +27,12 @@ Included:
 All five dimensions are active. Documentation Completeness checks compiler
 documentation presence without judging prose. Overall safety
 continues to cover REST and downstream SDK compatibility only.
+REST and downstream compatibility verdicts are independent from evidence
+coverage. Confirmed findings produce a failed verdict even when unresolved
+evidence leaves coverage partial. A dimension with blockers and no confirmed
+finding has an unknown verdict rather than a compatibility pass. Coverage is
+complete, partial, or blocked according to how much candidate evidence was
+assessed.
 Changed declaration scope uses actual added and removed lines, including an
 immediately attached documentation/decorator prefix. Declarations present only
 as unified-diff context are excluded.
@@ -57,6 +63,13 @@ mode excludes them.
 
 Production behavior lives under `scripts/`. Code under `evals/` and `tests/`
 is not imported or used by the runtime.
+
+Preparation, materialization, and finalization must use the same originating
+assessment runtime. Phase records bind its root and code fingerprint to
+input/output content hashes. Integrity checks do not compare filesystem
+timestamps or inode identity: metadata changes and byte-identical replacements
+are harmless. Changed content, runtime mismatches, and missing successful phase
+records remain errors.
 
 The coordinator bootstraps the skill's workspace-locked dependencies before
 loading the assessment implementation. When the installed `yaml` version is
@@ -322,7 +335,9 @@ Preparation rules:
 2. Capture committed, staged, unstaged, and relevant untracked TypeSpec files.
 3. Discover affected `tspconfig.yaml` project roots.
 4. Create detached service-scoped sparse base/current worktrees for source
-   analysis. Artifact roles may both use the current worktree.
+   analysis, including the revision-local `eng/typespec-rulesets` workspace
+   package as a checkout-only support root. Artifact roles may both use the
+   current worktree.
 5. Apply dirty overlays only to the temporary current worktree.
 6. Detect and prepare the locked npm or pnpm toolchain for each worktree.
 7. Select one source revision and API version for each artifact-comparison
@@ -383,12 +398,20 @@ target   = head source @ 2026-05-01-preview
 Version-aware REST classification:
 
 - In `new-api-version` mode, baseline-to-target wire differences describe
-  version-scoped REST evolution and appear in Semantic operation cards.
-- They do not create REST breaking findings solely because the newly added
-  version differs from the previous version.
-- The baseline projection must be successfully produced from current source;
-  this proves the previous stable/preview version remains representable by the
-  final TypeSpec.
+  cross-version migration compatibility between the selected previous and new
+  API-version projections.
+- Substantive differences remain REST breaking candidates. Do not suppress
+  them merely because the target version is newly published.
+- Exclude only a proven singleton `api-version` selector literal change when
+  its requiredness and serialization are otherwise unchanged.
+- Compare request and response shapes using their emitted visibility:
+  read-only properties do not participate in request compatibility, and
+  create-only properties do not participate in response compatibility.
+- Successful head-source compilation of the previous projection proves only
+  that the projection is representable. It does not prove that the previously
+  published contract was preserved.
+- Preserve unresolved references, ambiguous visibility, and unavailable
+  artifacts as blockers rather than treating missing evidence as compatible.
 - TCGC differences may still be downstream SDK breaking when the generated
   public method/type identity is reused across the version transition.
 - In `existing-api-version` and `unversioned` modes, incompatible
@@ -676,10 +699,17 @@ no directly affected REST operation or the REST contract is unchanged.
 
 ### Semantic intent grouping
 
-Semantic intents are grouped by **coherent TypeSpec change**, not mechanically
-by file, declaration, REST operation, or Git hunk. A coherent change is one
-user-reviewable API behavior goal implemented by one or more related TypeSpec
-hunks.
+The coordinator derives normalized change facts before grouping. Each fact
+records its change type, declaration identity when available, action, facets,
+and exact source-change, hunk, and declaration provenance. Group membership,
+the stable `semantic-<hash>` identity, and the final group boundary are
+coordinator-owned data. Later Agent judgment and report rendering preserve
+them exactly.
+
+Semantic intents are grouped by deterministic evidence, not by Agent
+similarity judgment. A group may represent one coherent TypeSpec behavior
+change, one supporting customization/configuration change, or an explicit
+source-scoped group when stronger evidence is unavailable.
 
 Cross-file grouping is allowed. For example, an LRO helper change, a polling
 response model, and the operations that consume them may form one intent when
@@ -704,10 +734,13 @@ at least one of these relationships:
    directly supports another changed declaration in the same behavior change,
    and symbol/import resolution proves that dependency.
 
-Do not group hunks merely because they are in the same file, project, resource
+Do not group hunks merely because they are in the same project, resource
 family, or pull request. Keep independent changes separate, including SDK
 naming customizations, scalar/type corrections, documentation-only changes,
-and unrelated operations that happen to use the same shared helper.
+and unrelated operations that happen to use the same shared helper. When the
+coordinator cannot establish a stronger relationship, retain an explicit
+source-scoped or standalone group rather than using heuristic similarity to
+force business coherence.
 
 Identical transforms form their own coherent group; they do not merge with
 other behavior groups. For example, all ARM identifier corrections may form
@@ -717,6 +750,14 @@ into the Location-based LRO intent.
 Grouping is deterministic and happens before Agent judgment. The Agent writes
 the title and summary for each supplied group but cannot merge, split, or move
 hunks between groups.
+
+An API-version publication group is pure: all normalized facts must be
+`versioning` facts whose declaration identity is `Versions` or ends in
+`.Versions`. A feature, contract, SDK customization, documentation, or
+configuration fact remains in its normal group even when it shares a file or
+Git hunk with a version declaration. Shared-hunk ownership is resolved
+deterministically while preserving the original file, hunk, declaration,
+operation, and project provenance on the surviving group.
 
 ### Bounded Semantic judgment
 
@@ -742,10 +783,10 @@ not enumerate all operations, declarations, or hunks. Operation count and
 representative examples provide scale and traceability without expanding the
 Agent workload with the size of the affected operation set.
 
-Each non-standalone group records structured `groupingEvidence`. Every evidence
-entry identifies the allowed relationship kind and the exact hunk,
-declaration, and compiled fact IDs supporting that relationship. A group
-containing one standalone hunk uses an empty `groupingEvidence` array.
+Each group records `groupingEvidence` diagnostics and normalized `changeFacts`.
+The report presents the same stable group ID, boundaries, reasons, change
+types, and evidence provenance; it does not reconstruct or regroup the
+coordinator output.
 
 Each meaningful hunk belongs to exactly one semantic intent. Declarations may
 appear in more than one hunk, but each declaration-hunk occurrence belongs to
@@ -1041,6 +1082,7 @@ The downstream analyzer emits these candidate rules:
 | Category       | Rule                            | Detected change                                                             |
 | -------------- | ------------------------------- | --------------------------------------------------------------------------- |
 | Method         | `method-removed`                | An existing SDK method is no longer generated.                              |
+| Method         | `method-identity-changed`       | A deterministically paired method changes generated identity or name.       |
 | Method         | `method-location-changed`       | A method moves to another client or operation group.                        |
 | Method         | `method-kind-changed`           | `basic`, `paging`, `lro`, or `lropaging` changes.                           |
 | Method         | `method-parameters-changed`     | The ordered public parameter contract changes.                              |
@@ -1049,6 +1091,7 @@ The downstream analyzer emits these candidate rules:
 | Method         | `method-paging-changed`         | Language-neutral paging metadata or behavior changes.                       |
 | Method         | `method-lro-changed`            | Language-neutral long-running-operation behavior changes.                   |
 | Model          | `model-property-removed`        | A public model property is removed.                                         |
+| Model          | `model-identity-changed`        | Explicit rename lineage changes generated model identity or name.           |
 | Model          | `model-property-changed`        | Property type, optionality, flattening, or access changes.                  |
 | Model          | `model-property-added-required` | A required property is added.                                               |
 | Enum           | `enum-values-removed`           | An enum value is removed or its SDK-facing identity changes.                |
@@ -1062,6 +1105,30 @@ approves or rejects each candidate according to
 `references/downstream-breaking-cases.md`; only approved candidates become
 findings. Root causes are separate deterministic aggregation records that
 connect related candidates and facts but are not candidate rules.
+
+Method and model comparison requires deterministic identity evidence. An exact,
+unique `crossLanguageDefinitionId` pairs the same symbol across baseline and
+target. TCGC generic instantiations may share a declaration ID, so the existing
+TCGC emit pass also records minimal compiler template-argument provenance before
+the upstream YAML serializer removes raw compiler types. Normalization assigns
+distinct concrete node identities for references, reachability, and graph
+construction, while cross-revision pairing uses the declaration plus canonical
+template arguments. It never uses the complete model shape, collection position,
+or generated friendly name as correspondence evidence. A changed identity may
+be paired only through unique source-owned
+`@renamedFrom` metadata whose old and new qualified declarations resolve to
+unique cross-language definitions. Generated display names, HTTP routes,
+request/response shapes, property overlap, and coincident additions/removals
+never establish identity. Missing or ambiguous evidence emits an
+evidence-backed downstream blocker and preserves the baseline/target facts
+instead of fabricating a replacement. Additions and removals remain independent
+when no canonical relationship exists.
+
+Blockers limit only the evidence they actually make unavailable. Deterministic
+candidates with independently resolved facts remain available for Agent
+judgment, and confirmed findings coexist with blockers as failed verdicts with
+partial coverage. An unrelated identity blocker is not a reason to reject a
+candidate.
 
 For `model-property-added-required` candidates, Agent judgment must use the
 model's effective direction:
@@ -1871,7 +1938,9 @@ File: `assessment.json`
   "confidence": "high|medium|low",
   "safety": {
     "scope": "rest-and-downstream-only",
-    "status": "passed|failed|not-assessed"
+    "status": "passed|failed|not-assessed",
+    "verdict": "passed|failed|unknown",
+    "coverage": "complete|partial|blocked"
   },
   "dimensions": {
     "semantic": {
@@ -1931,12 +2000,16 @@ File: `assessment.json`
     },
     "rest": {
       "status": "passed|failed|not-assessed",
+      "verdict": "passed|failed|unknown",
+      "coverage": "complete|partial|blocked",
       "findings": [],
       "rejectedCandidateCount": 0,
       "blockers": []
     },
     "downstream": {
       "status": "passed|failed|not-assessed",
+      "verdict": "passed|failed|unknown",
+      "coverage": "complete|partial|blocked",
       "findings": [],
       "methodGroups": [
         {

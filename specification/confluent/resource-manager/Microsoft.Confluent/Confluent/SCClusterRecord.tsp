@@ -40,41 +40,6 @@ model SCClusterRecord extends Foundations.ProxyResource {
   properties?: ClusterProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-interface SCClusterRecordsOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /**
-         * Organization resource name
-         */
-        @path
-        @segment("organizations")
-        organizationName: string,
-
-        /**
-         * Confluent environment id
-         */
-        @path
-        @segment("environments")
-        environmentId: string,
-      },
-      {
-        /**
-         * Confluent kafka or schema registry cluster id
-         */
-        @path
-        @segment("clusters")
-        clusterId: string,
-      },
-      ResourceProviderDefaultErrorResponse
-    > {}
-
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface SCClusterRecords {
@@ -91,8 +56,10 @@ interface SCClusterRecords {
    * Create confluent clusters
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  createOrUpdate is SCClusterRecordsOps.CreateOrUpdateSync<
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceSync<
     SCClusterRecord,
+    SCClusterRecord,
+    Error = ResourceProviderDefaultErrorResponse,
     OptionalRequestBody = true
   >;
 

@@ -2,16 +2,15 @@ name: azure-api-review-trigger-eval
 description: Trigger and anti-trigger tests for the azure-api-review skill
 type: capability
 
-environment: azsdk-mcp-mock
+agent_environment: azsdk-mcp-mock
 
 tags:
   area: azure-api-review
   type: ci-gate
 
-config:
+defaults:
   runs: 1
   timeout: "90s"
-  model: gpt-5.4
   executor: copilot-sdk
 
 scoring:
@@ -20,74 +19,74 @@ scoring:
 stimuli:
   - name: trigger-review-arm-spec-naming
     prompt: "What naming and casing rules should I check when reviewing an ARM resource-manager OpenAPI spec?"
-    environment:
+    agent_environment:
       skills:
         - ..
     graders:
       - type: skill-invocation
         config:
-          required: ["azure-api-review"]
+          required: [ "azure-api-review" ]
   - name: trigger-check-provisioning-state-compliance
     prompt: "What are the provisioningState requirements for ARM resources so I can check a TypeSpec model for compliance?"
-    environment:
+    agent_environment:
       skills:
         - ..
     graders:
       - type: skill-invocation
         config:
-          required: ["azure-api-review"]
+          required: [ "azure-api-review" ]
   - name: trigger-secret-detection-rules
     prompt: "What are the Azure API review rules for secret detection in resource properties?"
-    environment:
+    agent_environment:
       skills:
         - ..
     graders:
       - type: skill-invocation
         config:
-          required: ["azure-api-review"]
+          required: [ "azure-api-review" ]
   - name: trigger-property-write-only-violation
     prompt: "What write-only and immutability rules apply to ARM resource properties?"
-    environment:
+    agent_environment:
       skills:
         - ..
     graders:
       - type: skill-invocation
         config:
-          required: ["azure-api-review"]
+          required: [ "azure-api-review" ]
 
   - name: anti-trigger-author-new-typespec-resource
     prompt: "Author a new TypeSpec resource for my service."
-    environment:
+    agent_environment:
       skills:
         - ..
     graders:
       - type: skill-invocation
         config:
-          disallowed: ["azure-api-review"]
+          disallowed: [ "azure-api-review" ]
   - name: anti-trigger-generate-sdk
     prompt: "Generate the Python SDK from this TypeSpec."
-    environment:
+    agent_environment:
       skills:
         - ..
     graders:
       - type: skill-invocation
         config:
-          disallowed: ["azure-api-review"]
+          disallowed: [ "azure-api-review" ]
   - name: anti-trigger-release-sdk-package
     prompt: "Release my SDK package."
-    environment:
+    agent_environment:
       skills:
         - ..
     graders:
       - type: skill-invocation
         config:
-          disallowed: ["azure-api-review"]
+          disallowed: [ "azure-api-review" ]
   - name: anti-trigger-update-openai-typespec-package
     prompt: "Update the OpenAI TypeSpec package we depend on."
-    environment:
+    agent_environment:
       skills:
         - ..
     graders:
       - type: skill-invocation
         config:
-          disallowed: ["azure-api-review"]
+          disallowed: [ "azure-api-review" ]

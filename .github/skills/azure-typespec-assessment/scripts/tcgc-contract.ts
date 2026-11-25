@@ -23,6 +23,10 @@ type TcgcContext = import("./runtime-types.ts").TcgcContext;
 
 type TcgcNode = import("./runtime-types.ts").TcgcNode;
 
+type TcgcModelProvenance = import("./runtime-types.ts").TcgcModelProvenance;
+
+type TcgcProvenanceArtifact = import("./runtime-types.ts").TcgcProvenanceArtifact;
+
 const METHOD_KINDS = new Set(["basic", "paging", "lro", "lropaging"]);
 
 const contractCache: WeakMap<
@@ -176,6 +180,22 @@ function referenceName(raw: unknown) {
   return value.crossLanguageDefinitionId ?? value.name;
 }
 
+function provenanceKey(crossLanguageDefinitionId?: string, name?: string) {
+  return `${crossLanguageDefinitionId ?? ""}\0${name ?? ""}`;
+}
+
+function concreteReferenceName(raw: unknown, context: TcgcContext) {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return referenceName(raw);
+  const concrete = context.concreteIdentities?.get(raw);
+  if (concrete) return concrete;
+  const value = raw as TcgcNode;
+  return (
+    context.namedConcreteIdentities?.get(
+      provenanceKey(value.crossLanguageDefinitionId, value.name),
+    ) ?? referenceName(raw)
+  );
+}
+
 function segmentIdentity(item: unknown, index: number) {
   if (typeof item === "string" || typeof item === "number") return String(item);
   if (!item || typeof item !== "object" || Array.isArray(item)) return `segment-${index}`;
@@ -320,7 +340,8 @@ export function normalizeType(
     return {
       kind: "reference",
       id:
-        referenceName(raw) ?? stableId("tcgc-cycle", { location, kind: raw.kind, name: raw.name }),
+        concreteReferenceName(raw, context) ??
+        stableId("tcgc-cycle", { location, kind: raw.kind, name: raw.name }),
       cycle: true,
     };
   }
@@ -381,7 +402,7 @@ export function normalizeType(
       case "model":
         result = {
           kind: "model",
-          id: identity(raw, `model:${raw.name ?? location}`),
+          id: concreteReferenceName(raw, context) ?? `model:${raw.name ?? location}`,
           name: raw.name,
         };
         break;
@@ -879,17 +900,23 @@ function normalizeProperty(
 
 function normalizeModel(raw: unknown, context: TcgcContext, index: number) {
   assertObject(raw, `models[${index}]`);
-  const modelIdentity = identity(raw, `model:${raw.name ?? index}`);
+  const modelIdentity =
+    concreteReferenceName(raw, context) ?? identity(raw, `model:${raw.name ?? index}`);
+  const provenance = context.modelProvenance?.get(raw);
 
   const model: NormalizedTcgcNamedType = {
     id: stableId("sdk-model", modelIdentity),
     identity: modelIdentity,
     crossLanguageDefinitionId: raw.crossLanguageDefinitionId,
+    genericInstanceIdentity: provenance ? genericInstanceIdentity(provenance) : undefined,
+    templateArguments: provenance?.templateArguments,
     name: raw.name,
     access: raw.access,
     usage: raw.usage,
     properties: [],
-    baseModel: raw.baseModel ? (referenceName(raw.baseModel) ?? raw.baseModel.name) : undefined,
+    baseModel: raw.baseModel
+      ? (concreteReferenceName(raw.baseModel, context) ?? raw.baseModel.name)
+      : undefined,
     additionalProperties: raw.additionalProperties
       ? normalizeType(
           raw.additionalProperties,
@@ -903,7 +930,10 @@ function normalizeModel(raw: unknown, context: TcgcContext, index: number) {
     discriminatorValue: raw.discriminatorValue,
     discriminatedSubtypes: entries(raw.discriminatedSubtypes)
       .sort(([left], [right]) => String(left).localeCompare(String(right)))
-      .map(([name, item]) => ({ name: String(name), type: referenceName(item) ?? item?.name })),
+      .map(([name, item]) => ({
+        name: String(name),
+        type: concreteReferenceName(item, context) ?? item?.name,
+      })),
     serialization: normalizeSerialization(raw, context, `model:${modelIdentity}`),
   };
   model.properties = array(raw.properties, `model:${modelIdentity}.properties`).map(
@@ -1011,6 +1041,76 @@ function uniqueObjects(values: unknown[]): TcgcNode[] {
   return result;
 }
 
+function genericInstanceIdentity(provenance: TcgcModelProvenance) {
+  return stableId("sdk-generic-instance", {
+    definitionIdentity: provenance.crossLanguageDefinitionId,
+    templateArguments: provenance.templateArguments,
+  });
+}
+
+function registerModelIdentities(
+  models: TcgcNode[],
+  context: TcgcContext,
+  provenanceArtifact?: TcgcProvenanceArtifact,
+) {
+  const provenanceByLocator = new Map<string, TcgcModelProvenance[]>();
+  for (const provenance of provenanceArtifact?.models ?? []) {
+    const key = provenanceKey(provenance.crossLanguageDefinitionId, provenance.name);
+    const values = provenanceByLocator.get(key) ?? [];
+    values.push(provenance);
+    provenanceByLocator.set(key, values);
+  }
+  const modelsByDefinition = new Map<string, TcgcNode[]>();
+  for (const model of models) {
+    const definitionIdentity = model.crossLanguageDefinitionId;
+    if (!definitionIdentity) continue;
+    const values = modelsByDefinition.get(definitionIdentity) ?? [];
+    values.push(model);
+    modelsByDefinition.set(definitionIdentity, values);
+  }
+  const concreteIdentities = new WeakMap<object, string>();
+  const modelProvenance = new WeakMap<object, TcgcModelProvenance>();
+  const namedConcreteIdentities = new Map<string, string>();
+  for (const [definitionIdentity, values] of modelsByDefinition) {
+    const concreteCounts = new Map<string, number>();
+    for (const [index, model] of values.entries()) {
+      const locator = provenanceKey(definitionIdentity, model.name);
+      const provenance = provenanceByLocator.get(locator);
+      const matchedProvenance = provenance?.length === 1 ? provenance[0] : undefined;
+      if (matchedProvenance) modelProvenance.set(model, matchedProvenance);
+      const genericIdentity = matchedProvenance
+        ? genericInstanceIdentity(matchedProvenance)
+        : undefined;
+      const baseIdentity =
+        values.length === 1
+          ? definitionIdentity
+          : (genericIdentity ??
+            stableId("sdk-model-local", {
+              definitionIdentity,
+              name: model.name,
+              index,
+            }));
+      const occurrence = concreteCounts.get(baseIdentity) ?? 0;
+      concreteCounts.set(baseIdentity, occurrence + 1);
+      const concreteIdentity =
+        occurrence === 0 ? baseIdentity : `${baseIdentity}#${occurrence + 1}`;
+      concreteIdentities.set(model, concreteIdentity);
+      if (
+        values.filter(
+          (item) =>
+            provenanceKey(item.crossLanguageDefinitionId, item.name) ===
+            provenanceKey(model.crossLanguageDefinitionId, model.name),
+        ).length === 1
+      ) {
+        namedConcreteIdentities.set(locator, concreteIdentity);
+      }
+    }
+  }
+  context.concreteIdentities = concreteIdentities;
+  context.namedConcreteIdentities = namedConcreteIdentities;
+  context.modelProvenance = modelProvenance;
+}
+
 function collectTypeReferences(type: NormalizedTcgcType | undefined, result: Set<string>) {
   if (!type) return;
   if (["model", "enum", "union", "external", "reference"].includes(type.kind) && type.id)
@@ -1074,7 +1174,10 @@ function markReachable(contract: NormalizedTcgcContract) {
   }
 }
 
-export function normalizeTcgcPackage(root: unknown): NormalizedTcgcContract {
+export function normalizeTcgcPackage(
+  root: unknown,
+  provenanceArtifact?: TcgcProvenanceArtifact,
+): NormalizedTcgcContract {
   assertObject(root, "SdkPackage");
   for (const field of ["crossLanguagePackageId", "crossLanguageVersion", "metadata"]) {
     if (root[field] === undefined) throw unsupported(`SdkPackage is missing ${field}`);
@@ -1110,6 +1213,13 @@ export function normalizeTcgcPackage(root: unknown): NormalizedTcgcContract {
       : deprecatedVersions,
   );
   const namespaces = collectNamespaces(root);
+  const modelObjects = uniqueObjects([
+    ...array(root.models, "package.models"),
+    ...namespaces.flatMap(({ namespace, identity: namespaceIdentity }) =>
+      array(namespace.models, `namespace:${namespaceIdentity}.models`),
+    ),
+  ]);
+  registerModelIdentities(modelObjects, context, provenanceArtifact);
   const clientObjects = uniqueObjects([
     ...array(root.clients, "package.clients"),
     ...namespaces.flatMap(({ namespace, identity: namespaceIdentity }) =>
@@ -1153,12 +1263,6 @@ export function normalizeTcgcPackage(root: unknown): NormalizedTcgcContract {
   };
   for (const client of clientObjects) visitClient(client);
 
-  const modelObjects = uniqueObjects([
-    ...array(root.models, "package.models"),
-    ...namespaces.flatMap(({ namespace, identity: namespaceIdentity }) =>
-      array(namespace.models, `namespace:${namespaceIdentity}.models`),
-    ),
-  ]);
   const enumObjects = uniqueObjects([
     ...array(root.enums, "package.enums"),
     ...namespaces.flatMap(({ namespace, identity: namespaceIdentity }) =>
@@ -1220,13 +1324,44 @@ export function normalizeTcgcContract({
   }
   if (!fs.existsSync(files[0])) throw unsupported(`${files[0]} does not exist`);
   const stat = fs.statSync(files[0], { bigint: true });
-  const key = [files[0], stat.size, stat.mtimeNs, stat.ctimeNs, maxAliasCount, maxObjects].join(
-    "\0",
-  );
+  const provenanceFile = artifact.provenanceFile
+    ? path.resolve(workRoot, artifact.provenanceFile.path)
+    : undefined;
+  if (provenanceFile && !fs.existsSync(provenanceFile)) {
+    throw unsupported(`${provenanceFile} does not exist`);
+  }
+  const provenanceStat = provenanceFile ? fs.statSync(provenanceFile, { bigint: true }) : undefined;
+  const key = [
+    files[0],
+    stat.size,
+    stat.mtimeNs,
+    stat.ctimeNs,
+    provenanceFile,
+    provenanceStat?.size,
+    provenanceStat?.mtimeNs,
+    provenanceStat?.ctimeNs,
+    maxAliasCount,
+    maxObjects,
+  ].join("\0");
   const cached = contractCache.get(artifact);
   if (cached?.key === key) return cached.contract;
+  let provenance: TcgcProvenanceArtifact | undefined;
+  if (provenanceFile) {
+    const parsed: unknown = JSON.parse(fs.readFileSync(provenanceFile, "utf8"));
+    if (
+      !parsed ||
+      typeof parsed !== "object" ||
+      Array.isArray(parsed) ||
+      (parsed as { schemaVersion?: unknown }).schemaVersion !== 1 ||
+      !Array.isArray((parsed as { models?: unknown }).models)
+    ) {
+      throw unsupported(`${provenanceFile} has an invalid provenance contract`);
+    }
+    provenance = parsed as TcgcProvenanceArtifact;
+  }
   const contract = normalizeTcgcPackage(
     parseTcgcYaml(fs.readFileSync(files[0], "utf8"), { maxAliasCount, maxObjects }),
+    provenance,
   );
   contractCache.set(artifact, { key, contract });
   return contract;

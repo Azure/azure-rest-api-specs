@@ -279,9 +279,15 @@ export interface AutorestArtifact {
   outputDirectory?: string;
 }
 
+export interface NormalizedRefCacheEntry {
+  schema: NormalizedSchema;
+  visitedRefs: Set<string>;
+}
+
 export interface AutorestContext {
   document: AutorestDocument;
   registry: Map<string, AutorestDocument>;
+  normalizedRefs?: Map<string, NormalizedRefCacheEntry>;
   pointer: string;
   route?: string;
   routeSource?: string;
@@ -403,6 +409,9 @@ export interface TcgcConflict {
 
 export interface TcgcContext {
   conflicts: TcgcConflict[];
+  concreteIdentities?: WeakMap<object, string>;
+  namedConcreteIdentities?: Map<string, string>;
+  modelProvenance?: WeakMap<object, TcgcModelProvenance>;
 }
 
 export interface NormalizedTcgcType {
@@ -425,6 +434,18 @@ export interface NormalizedTcgcType {
 export interface TcgcArtifact {
   format?: string;
   files?: { path: string }[];
+  provenanceFile?: { path: string; contentHash?: string };
+}
+
+export interface TcgcModelProvenance {
+  crossLanguageDefinitionId: string;
+  name?: string;
+  templateArguments: unknown[];
+}
+
+export interface TcgcProvenanceArtifact {
+  schemaVersion: 1;
+  models: TcgcModelProvenance[];
 }
 
 export interface NormalizedTcgcParameter {
@@ -473,6 +494,8 @@ export interface NormalizedTcgcMethod {
 export interface NormalizedTcgcNamedType {
   identity: string;
   crossLanguageDefinitionId?: string;
+  genericInstanceIdentity?: string;
+  templateArguments?: unknown[];
   name?: string;
   access?: string;
   reachable?: boolean;
@@ -532,6 +555,34 @@ export interface SemanticOperationReference {
   [key: string]: unknown;
 }
 
+export type SemanticChangeType =
+  | "versioning"
+  | "operation"
+  | "type"
+  | "sdk-customization"
+  | "documentation"
+  | "generation-configuration";
+
+export interface SemanticChangeFact {
+  id: string;
+  sourceChangeId: string;
+  hunkIds: string[];
+  declarationIds: string[];
+  beforeDeclarationIds: string[];
+  afterDeclarationIds: string[];
+  changeType: SemanticChangeType;
+  declarationKind?: string;
+  qualifiedName?: string;
+  action: "add" | "modify" | "remove";
+  facets: string[];
+  evidenceRef: {
+    artifact: "source/source-index.json";
+    sourceChangeId: string;
+    hunkIds: string[];
+    declarationIds: string[];
+  };
+}
+
 export interface SemanticReviewUnit {
   id: string;
   projectId?: string;
@@ -548,6 +599,9 @@ export interface SemanticReviewUnit {
   action?: string;
   changeKind?: string;
   intentType?: string;
+  classificationVersion?: number;
+  changeFacts?: SemanticChangeFact[];
+  changeTypes?: SemanticChangeType[];
   groupingEvidence?: {
     reasons?: string[];
     edges?: { summary?: string }[];
@@ -942,6 +996,7 @@ export interface PreparationBlocker {
   projectId?: string;
   comparisonRole?: string;
   sourceRevision?: string;
+  evidenceFactIds?: string[];
 }
 
 export interface ArtifactSelection {
@@ -968,6 +1023,7 @@ export interface CompilerArtifactSet {
 export interface PreparationProject {
   id: string;
   path: string;
+  classification?: "existing" | "new";
   sourceChangeIds: string[];
   artifacts: Record<string, CompilerArtifactSet>;
   blockers: PreparationBlocker[];
@@ -998,7 +1054,13 @@ export interface PreparationManifest {
     };
     [key: string]: unknown;
   };
-  sparseCheckout: { mode: string; roots: string[]; verified: boolean };
+  sparseCheckout: {
+    mode: string;
+    roots: string[];
+    supportRoots?: string[];
+    workspaceRoots?: string[];
+    verified: boolean;
+  };
   changedFiles: ChangedFile[];
   projects: PreparationProject[];
   blockers: PreparationBlocker[];
@@ -1098,6 +1160,14 @@ export interface DownstreamCandidate {
   evidenceFactIds: string[];
   reviewRequired: true;
   rootCauseIds?: string[];
+  identityEvidence?: DownstreamIdentityEvidence;
+}
+
+export interface DownstreamIdentityEvidence {
+  basis: "typespec-renamed-from";
+  baselineIdentity: string;
+  targetIdentity: string;
+  declarationIds: string[];
 }
 
 export interface DownstreamRootCause {
@@ -1683,11 +1753,17 @@ export interface AssessmentOutput {
     mode?: string;
     baseline?: ArtifactSelection;
     target?: ArtifactSelection;
+    available?: {
+      base: string[];
+      current: string[];
+    };
   }[];
   confidence: "high" | "medium" | "low";
   safety: {
     scope: "rest-and-downstream-only";
     status: "passed" | "failed" | "not-assessed";
+    verdict?: "passed" | "failed" | "unknown";
+    coverage?: "complete" | "partial" | "blocked";
     [key: string]: unknown;
   };
   dimensions: {
@@ -1699,14 +1775,20 @@ export interface AssessmentOutput {
     };
     rest: {
       status: string;
+      verdict?: "passed" | "failed" | "unknown";
+      coverage?: "complete" | "partial" | "blocked";
       findings: AssessmentFinding[];
       blockers?: unknown[];
+      rejectedCandidateCount?: number;
       legacyFindings?: LegacyAssessmentFinding[];
     };
     downstream: {
       status: string;
+      verdict?: "passed" | "failed" | "unknown";
+      coverage?: "complete" | "partial" | "blocked";
       findings: AssessmentFinding[];
       blockers?: unknown[];
+      rejectedCandidateCount?: number;
       methodGroups?: AssessmentMethodGroup[];
       operationGroups?: AssessmentMethodGroup[];
       typeImpacts?: AssessmentTypeImpact[];

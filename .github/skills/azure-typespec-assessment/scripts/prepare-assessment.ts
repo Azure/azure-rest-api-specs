@@ -1,7 +1,10 @@
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
-import { resolveProjectApiVersions } from "./api-version-selection.ts";
+import {
+  resolveNewProjectApiVersions,
+  resolveProjectApiVersions,
+} from "./api-version-selection.ts";
 import { isMain, parseArgs, runMain, writeJson } from "./cli.ts";
 import { runProjectCompilers } from "./compiler-runner.ts";
 import {
@@ -24,6 +27,12 @@ type PreparationManifest = import("./runtime-types.ts").PreparationManifest;
 type PreparationProject = import("./runtime-types.ts").PreparationProject;
 
 type SourceIndex = import("./runtime-types.ts").SourceIndex;
+
+export const WORKSPACE_SUPPORT_ROOTS = ["eng/typespec-rulesets"] as const;
+
+export function workspaceSparseRoots(analysisRoots: string[]): string[] {
+  return [...new Set([...analysisRoots, ...WORKSPACE_SUPPORT_ROOTS])].sort();
+}
 
 function stableProjectId(project: string) {
   return `project-${crypto.createHash("sha256").update(project).digest("hex").slice(0, 12)}`;
@@ -72,7 +81,9 @@ export function prepareProjectRecords({
   workRoot,
   enabled = true,
   resolveApiVersions = resolveProjectApiVersions,
+  resolveNewApiVersions = resolveNewProjectApiVersions,
   runCompilers = runProjectCompilers,
+  projectClassifications = {},
 }: {
   projects: string[];
   sourceIndex: SourceIndex;
@@ -84,7 +95,9 @@ export function prepareProjectRecords({
   workRoot: string;
   enabled?: boolean;
   resolveApiVersions?: typeof resolveProjectApiVersions;
+  resolveNewApiVersions?: typeof resolveNewProjectApiVersions;
   runCompilers?: typeof runProjectCompilers;
+  projectClassifications?: Record<string, "existing" | "new">;
 }): PreparationProject[] {
   const records: PreparationProject[] = [];
   for (const project of projects) {
@@ -110,19 +123,27 @@ export function prepareProjectRecords({
     const record: PreparationProject = {
       id: projectId,
       path: project,
+      classification: projectClassifications[project] ?? "existing",
       sourceChangeIds: projectSourceIds,
       artifacts: {},
       blockers: projectBlockers,
     };
     if (enabled) {
       try {
-        record.artifactComparison = resolveApiVersions({
-          baseWorktree,
-          currentWorktree,
-          project,
-          baseCommit,
-          headCommit,
-        });
+        record.artifactComparison =
+          record.classification === "new"
+            ? resolveNewApiVersions({
+                currentWorktree,
+                project,
+                headCommit,
+              })
+            : resolveApiVersions({
+                baseWorktree,
+                currentWorktree,
+                project,
+                baseCommit,
+                headCommit,
+              });
         record.apiVersions = {
           base: record.artifactComparison.baseline.apiVersion,
           current: record.artifactComparison.target.apiVersion,
@@ -140,7 +161,9 @@ export function prepareProjectRecords({
       }
     }
     if (enabled && !projectBlockers.length) {
-      for (const comparisonRole of ["baseline", "target"] as const) {
+      const comparisonRoles =
+        record.classification === "new" ? (["target"] as const) : (["baseline", "target"] as const);
+      for (const comparisonRole of comparisonRoles) {
         const selection = record.artifactComparison?.[comparisonRole];
         if (!selection) throw new Error(`Missing ${comparisonRole} artifact selection.`);
         if (!selection.commit) {
@@ -282,6 +305,7 @@ export async function prepareAssessment({
     typeof rawSparseRoots === "string" ? [rawSparseRoots] : rawSparseRoots,
     scope,
   );
+  const checkoutRoots = workspaceSparseRoots(sparseRoots);
   const changeDiscoveryStarted = performance.now();
   const changedFiles = collectChanges(repository, comparison.mergeBaseCommit, sparseRoots, {
     headRef: comparison.headCommit,
@@ -307,7 +331,13 @@ export async function prepareAssessment({
         untracked: changedFiles.some((file) => file.origins.includes("untracked")),
       },
     },
-    sparseCheckout: { mode: "cone", roots: sparseRoots, verified: false },
+    sparseCheckout: {
+      mode: "cone",
+      roots: sparseRoots,
+      supportRoots: [...WORKSPACE_SUPPORT_ROOTS],
+      workspaceRoots: checkoutRoots,
+      verified: false,
+    },
     changedFiles,
     projects: [],
     blockers,
@@ -346,8 +376,8 @@ export async function prepareAssessment({
   const currentWorktree = path.join(work, "worktrees", "current");
   const workspaceStarted = performance.now();
   try {
-    createSparseWorktree(repository, comparison.mergeBaseCommit, sparseRoots, baseWorktree);
-    createSparseWorktree(repository, comparison.headCommit, sparseRoots, currentWorktree);
+    createSparseWorktree(repository, comparison.mergeBaseCommit, checkoutRoots, baseWorktree);
+    createSparseWorktree(repository, comparison.headCommit, checkoutRoots, currentWorktree);
     manifest.sparseCheckout.verified = true;
     if (includeWorkingTree) {
       copyOverlay(repository, currentWorktree, analysisFiles);
@@ -384,6 +414,15 @@ export async function prepareAssessment({
       message: `No affected tspconfig.yaml was found under ${scope}.`,
     });
   }
+  const projectClassifications = Object.fromEntries(
+    projects.map((project) => [
+      project,
+      fs.existsSync(path.join(baseWorktree, project)) ? "existing" : "new",
+    ]),
+  ) as Record<string, "existing" | "new">;
+  const existingProjects = projects.filter(
+    (project) => projectClassifications[project] === "existing",
+  );
   const externalImports = findExternalLocalImports(currentWorktree, projects, sparseRoots);
   if (externalImports.length) {
     blockers.push({
@@ -401,11 +440,15 @@ export async function prepareAssessment({
   try {
     if (!blockers.length) {
       manifest.dependencySetup = {
-        baseline: ensureDependencies({
-          worktree: baseWorktree,
-          work,
-          reuseRoot: repository,
-        }),
+        ...(existingProjects.length
+          ? {
+              baseline: ensureDependencies({
+                worktree: baseWorktree,
+                work,
+                reuseRoot: repository,
+              }),
+            }
+          : {}),
         target: ensureDependencies({
           worktree: currentWorktree,
           work,
@@ -425,6 +468,10 @@ export async function prepareAssessment({
       baseWorktree,
       currentWorktree,
       projects,
+      projectsByRevision: {
+        base: existingProjects,
+        current: projects,
+      },
     });
     writeJson(path.join(work, "source", "source-index.json"), sourceIndex);
   }
@@ -439,6 +486,7 @@ export async function prepareAssessment({
       headCommit: comparison.headCommit,
       workRoot: work,
       enabled: !blockers.length,
+      projectClassifications,
     }),
   );
   manifest.status = blockers.length ? "blocked" : "ready";

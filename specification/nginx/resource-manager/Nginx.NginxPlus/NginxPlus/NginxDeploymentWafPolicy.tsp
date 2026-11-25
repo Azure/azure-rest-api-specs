@@ -38,8 +38,7 @@ interface NginxDeploymentWafPolicies {
    * Create or update the Nginx Waf Policy for given Nginx deployment
    */
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  create is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
-    Extension.ResourceGroup,
+  create is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     NginxDeploymentWafPolicy,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = NginxDeploymentWafPolicy> &
       ArmLroLocationHeader<FinalResult = NginxDeploymentWafPolicy> &

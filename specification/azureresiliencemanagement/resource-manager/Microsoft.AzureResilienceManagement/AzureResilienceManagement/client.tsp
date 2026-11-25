@@ -5,6 +5,12 @@ using Azure.ClientGenerator.Core;
 using Microsoft.AzureResilienceManagement;
 using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
+
+// Go
+@@clientName(WorkloadType.SapAseInAzureVm, "SAPASEInAzureVM", "go");
+@@clientName(WorkloadType.SapHanaInAzureVm, "SAPHANAInAzureVM", "go");
+@@clientName(IsoDuration, "ISODuration", "go");
 
 @@clientName(
   Microsoft.AzureResilienceManagement,
@@ -28,6 +34,11 @@ using Azure.ResourceManager;
   "csharp"
 );
 @@clientName(DrillStartRequest, "DrillStartContent", "csharp");
+@@clientName(
+  FetchRecoveryPointsRequest,
+  "FetchRecoveryPointsContent",
+  "csharp"
+);
 @@clientName(DrillRunAddNotesRequest, "DrillRunAddNotesContent", "csharp");
 @@clientName(RecommendCapacityRequest, "RecommendCapacityContent", "csharp");
 @@clientName(RecoveryActionRequest, "RecoveryActionContent", "csharp");
@@ -232,6 +243,7 @@ using Azure.ResourceManager;
 @@clientName(SupportedVerbsForStage, "DrillRunStageSupportedVerbs", "csharp");
 @@clientName(UserConfirmationItem, "GoalResourceUserConfirmation", "csharp");
 @@clientName(UserConsent, "RecoveryActionUserConsent", "csharp");
+@@clientName(BackupType, "RecoveryPointBackupType", "csharp");
 @@clientName(DrillRunOperationVerbs, "DrillRunOperationVerb", "csharp");
 @@clientName(DrillRunSubtasks, "DrillRunStage", "csharp");
 @@clientName(DrillRunTasks, "DrillRunTask", "csharp");
@@ -310,5 +322,46 @@ model RecoveryPlanUpdate {
 @@alternateType(
   Microsoft.AzureResilienceManagement.RecoveryPlans.update::parameters.properties,
   RecoveryPlanUpdate,
+  "javascript"
+);
+
+// Keep JavaScript request types separate from the required read-only profile response fields.
+@added(Versions.v2026_11_30_preview)
+@doc("The writable properties for creating or replacing a recovery configuration profile.")
+model RecoveryConfigProfileCreateOrUpdateProperties {
+  ...PickProperties<
+    RecoveryConfigProfileProperties,
+    "targetScope" | "workloadConfig" | "recoveryPointPolicy"
+  >;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("The request body for creating or replacing a recovery configuration profile.")
+model RecoveryConfigProfileCreateOrUpdate {
+  @doc("The resource-specific properties.")
+  properties: RecoveryConfigProfileCreateOrUpdateProperties;
+}
+
+@added(Versions.v2026_11_30_preview)
+@doc("The writable recovery configuration profile properties that can be updated.")
+model RecoveryConfigProfileUpdateProperties
+  is OptionalProperties<RecoveryConfigProfileCreateOrUpdateProperties>;
+
+@added(Versions.v2026_11_30_preview)
+@doc("The request body for updating a recovery configuration profile.")
+model RecoveryConfigProfileUpdate {
+  @doc("The resource-specific properties.")
+  properties?: RecoveryConfigProfileUpdateProperties;
+}
+
+@@alternateType(
+  Microsoft.AzureResilienceManagement.RecoveryConfigProfiles.createOrUpdate::parameters.resource,
+  RecoveryConfigProfileCreateOrUpdate,
+  "javascript"
+);
+
+@@alternateType(
+  Microsoft.AzureResilienceManagement.RecoveryConfigProfiles.update::parameters.properties,
+  RecoveryConfigProfileUpdate,
   "javascript"
 );

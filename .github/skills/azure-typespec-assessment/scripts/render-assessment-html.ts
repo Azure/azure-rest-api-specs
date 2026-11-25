@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { extractApiVersions, selectApiVersionPair } from "./api-version-selection.ts";
 import { documentQualitySummary, renderReportSections } from "./assessment-report-ui.ts";
+import { effectiveSchemaProperties } from "./autorest-contract.ts";
 import { isMain, parseArgs, readJsonObject, runMain } from "./cli.ts";
 import { validateAssessment } from "./validate-assessment.ts";
 
@@ -512,7 +513,9 @@ function schemaPath(schema: NormalizedSchema | undefined, pathSegments: string[]
   for (const rawSegment of pathSegments) {
     const isArray = rawSegment.endsWith("[]");
     const name = rawSegment.replace(/\[\]$/, "");
-    const property = (current?.properties ?? []).find((item) => item.name === name);
+    const property = (current ? effectiveSchemaProperties(current) : []).find(
+      (item) => item.name === name,
+    );
     if (!property) return { schema: undefined, identity };
     current = property.schema;
     identity = schemaIdentity(current) ?? identity;
@@ -732,10 +735,10 @@ function schemaContractRows(
     rows.push(...schemaContractRows(before.items, after.items, `${area}[]`));
   }
   const beforeProperties = new Map(
-    (before.properties ?? []).map((property) => [property.name, property]),
+    effectiveSchemaProperties(before).map((property) => [property.name, property]),
   );
   const afterProperties = new Map(
-    (after.properties ?? []).map((property) => [property.name, property]),
+    effectiveSchemaProperties(after).map((property) => [property.name, property]),
   );
   for (const name of [...new Set([...beforeProperties.keys(), ...afterProperties.keys()])].sort()) {
     const previous = beforeProperties.get(name);
@@ -2063,8 +2066,8 @@ ${reportStyles}
 <div class="summary-grid">
 <a class="summary-card" href="#semantic-intents">${summaryHeading("Semantic intents", { icon: "ⓘ", className: "info", label: "Information only" })}<div class="summary-detail">${summary.semanticItems.length} ${summary.semanticItems.length === 1 ? "intent" : "intents"}<br>${summary.operationCount} operations<br>${summary.actionCounts.add} Added, ${summary.actionCounts.modify} Modified, ${summary.actionCounts.remove} Removed</div></a>
 <a class="summary-card" href="#azure-compliance">${summaryHeading("Azure Guidelines", complianceStatus(summary.complianceStatus))}<div class="summary-detail">${complianceStatus(summary.complianceStatus).label === "N/A" ? "Not assessed<br>" : ""}${summary.complianceFindingCount} ${summary.complianceFindingCount === 1 ? "finding" : "findings"}<br>${escapeHtml(summary.complianceCoverageDetail)}</div></a>
-<a class="summary-card" href="#rest-breaking">${summaryHeading("REST breaking changes", restStatus)}<div class="summary-detail">${restStatus.label === "N/A" ? "Not assessed<br>" : ""}${summary.restFindingCount} ${summary.restFindingCount === 1 ? "finding" : "findings"}</div></a>
-<a class="summary-card" href="#downstream-breaking">${summaryHeading("Downstream breaking changes", downstreamStatus)}<div class="summary-detail">${downstreamStatus.label === "N/A" ? "Not assessed<br>" : ""}${summary.downstreamFindingCount} ${summary.downstreamFindingCount === 1 ? "finding" : "findings"}</div></a>
+<a class="summary-card" href="#rest-breaking">${summaryHeading("REST breaking changes", restStatus)}<div class="summary-detail">${restStatus.label === "N/A" ? "Verdict unknown<br>" : ""}${summary.restFindingCount} ${summary.restFindingCount === 1 ? "finding" : "findings"}</div></a>
+<a class="summary-card" href="#downstream-breaking">${summaryHeading("Downstream breaking changes", downstreamStatus)}<div class="summary-detail">${downstreamStatus.label === "N/A" ? "Verdict unknown<br>" : ""}${summary.downstreamFindingCount} ${summary.downstreamFindingCount === 1 ? "finding" : "findings"}</div></a>
 <a class="summary-card" href="#document-quality">${summaryHeading("Documentation Completeness", documentStatus)}<div class="summary-detail">${documentQuality.compactDetail.map(escapeHtml).join("<br>")}</div></a>
 </div></div></header>
 <details class="notice"><summary class="container"><span class="notice-title">Preview Notice</span><span class="notice-summary">The TypeSpec Assessment Assistant is in preview; official validation and review remain the source of truth.</span></summary>
