@@ -752,13 +752,35 @@ describe("API Versions regeneration warning", () => {
     expect(changeSection(updated)).not.toContain("`b`");
   });
 
+  test("folds the comparison diagnostic into the single generation note", () => {
+    const baseline = compare(previousVersions).value;
+    const changed = compare(currentVersions, baseline).value;
+    const { value: body } = compare([], changed, { ApiVersionsComplete: false });
+    expect(body.match(/\[!NOTE\]/g)).toHaveLength(1);
+    const [beforeHeading, afterHeading] = body.split("## SDK Generation Details");
+    expect(beforeHeading).toContain(warningTitle);
+    expect(beforeHeading).not.toContain("comparison unavailable");
+    expect(afterHeading.split("| Detail | Value |")[0]).toBe(
+      [
+        "",
+        "",
+        "> [!NOTE]",
+        "> This pull request was generated automatically.",
+        ">",
+        "> API Versions comparison unavailable: complete previous and current generated metadata could not be verified. Any earlier API Versions warning remains unresolved. The API Versions warning above shows the last verified comparison.",
+        "",
+        "",
+      ].join("\n"),
+    );
+  });
+
   test("unknown current data retains an existing warning without mistaking partial data for removals", () => {
     const baseline = compare(previousVersions).value;
     const changed = compare(currentVersions, baseline).value;
     const { value: unknown, warnings } = compare([], changed, { ApiVersionsComplete: false });
     expect(warnings).toContainEqual(expect.stringContaining("API Versions comparison unavailable"));
     expect(changeSection(unknown)).toBe(changeSection(changed));
-    expect(unknown).toContain("The warning table retains the last verified comparison");
+    expect(unknown).toContain("The API Versions warning above shows the last verified comparison.");
     const stillChanged = compare(currentVersions, unknown).value;
     expect(changeSection(stillChanged)).toBe(changeSection(changed));
     expect(stillChanged).not.toContain("comparison unavailable");

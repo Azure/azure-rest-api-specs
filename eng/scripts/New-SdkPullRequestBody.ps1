@@ -176,6 +176,7 @@ $body = @(
     ''
     '> [!NOTE]'
     '> This pull request was generated automatically.'
+    if ($null -ne $comparison -and $comparison.note) { '>'; "> $($comparison.note)" }
     ''
     '| Detail | Value |'
     '| :--- | :--- |'

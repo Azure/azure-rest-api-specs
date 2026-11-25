@@ -130,7 +130,7 @@ function New-ApiVersionComparison($Entries, [bool]$Complete, [string]$PreviousBo
     }
     if ($diagnostic) {
         if ($warningText) {
-            $diagnostic += ' The warning table retains the last verified comparison; it is not a new comparison for this run.'
+            $diagnostic += ' The API Versions warning above shows the last verified comparison.'
         }
         Write-MetadataWarning $diagnostic
     }
@@ -145,10 +145,7 @@ function New-ApiVersionComparison($Entries, [bool]$Complete, [string]$PreviousBo
     }
     # Base64 keeps arbitrary version/namespace strings out of HTML comment syntax.
     $encoded = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes((ConvertTo-Json -InputObject $state -Compress -Depth 10)))
-    $header = @(
-        if ($warningText) { $warningText; '' }
-        if ($diagnostic) { '> [!NOTE]'; "> $diagnostic"; '' }
-    ) -join "`n"
+    $header = if ($warningText) { "$warningText`n" } else { '' }
     # Only existing PRs can carry the label. Unknown comparisons leave it unchanged.
     $labelAction = 'none'
     if ($PreviousPullRequestState -eq 'existing') {
@@ -160,6 +157,7 @@ function New-ApiVersionComparison($Entries, [bool]$Complete, [string]$PreviousBo
     }
     return @{
         header = $header
+        note = $diagnostic
         metadata = "<!-- azsdk-api-version-comparison:v1:$encoded -->"
         hasChanges = ($null -ne $warning)
         labelAction = $labelAction
