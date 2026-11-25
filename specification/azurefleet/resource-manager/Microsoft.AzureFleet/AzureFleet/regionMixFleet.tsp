@@ -48,7 +48,15 @@ model RegionMixFleetUpdate {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   /** RP-specific updatable properties. */
-  properties?: RegionMixFleetProperties;
+  properties?: RegionMixFleetUpdateProperties;
+}
+
+/** RegionMix Fleet updatable properties. */
+@added(Versions.v2026_12_01_preview)
+model RegionMixFleetUpdateProperties {
+  /** The virtual machine scale sets that are part of the RegionMix Fleet. */
+  @identifiers(#["virtualMachineScaleSet/id"])
+  virtualMachineScaleSets?: RegionMixFleetVirtualMachineScaleSet[];
 }
 
 @added(Versions.v2026_12_01_preview)

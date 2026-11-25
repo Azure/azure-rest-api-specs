@@ -2486,8 +2486,24 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/RegionMixFleetProperties",
+          "$ref": "#/definitions/RegionMixFleetUpdateProperties",
           "description": "RP-specific updatable properties."
+        }
+      }
+    },
+    "RegionMixFleetUpdateProperties": {
+      "type": "object",
+      "description": "RegionMix Fleet updatable properties.",
+      "properties": {
+        "virtualMachineScaleSets": {
+          "type": "array",
+          "description": "The virtual machine scale sets that are part of the RegionMix Fleet.",
+          "items": {
+            "$ref": "#/definitions/RegionMixFleetVirtualMachineScaleSet"
+          },
+          "x-ms-identifiers": [
+            "virtualMachineScaleSet/id"
+          ]
         }
       }
     },
