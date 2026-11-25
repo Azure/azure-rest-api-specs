@@ -581,10 +581,7 @@ model EntityDiagnosisFragment {
 @doc("One page of a bounded entity diagnosis.")
 model EntityDiagnosisResult is Page<EntityDiagnosisFragment>;
 
-@@doc(
-  EntityDiagnosisResult.value,
-  "Diagnosis fragments on this page."
-);
+@@doc(EntityDiagnosisResult.value, "Diagnosis fragments on this page.");
 @@doc(
   EntityDiagnosisResult.nextLink,
   "URI of the next page, preserving entity, api-version, maxDepth and timestamp. Sole indicator of more pages; absent on the last page."
