@@ -35,11 +35,22 @@ export async function dispatchUniversalSignoff({ github, context, core }: GitHub
     core.info("No trusted reviewer correlation; Universal dispatch skipped");
     return;
   }
+  await dispatchUniversalSignoffForPr(
+    { github, context, core },
+    { prNumber: String(issueNumber), headSha },
+  );
+}
+
+/** Re-evaluates Universal ARM signoff after Summarize Checks updates a required status. */
+export async function dispatchUniversalSignoffForPr(
+  { github, context, core }: GitHubScriptArgs,
+  { prNumber, headSha }: { prNumber: string; headSha: string },
+) {
   await dispatchOnDefaultBranch(github, context, "arm-universal-auto-signoff.yaml", {
-    pr_number: String(issueNumber),
+    pr_number: prNumber,
     head_sha: headSha,
   });
-  core.info(`Dispatched Universal signoff for PR #${issueNumber} at ${headSha}`);
+  core.info(`Dispatched Universal signoff for PR #${prNumber} at ${headSha}`);
 }
 
 /** Hands this Universal run's label artifacts to Update Labels. */

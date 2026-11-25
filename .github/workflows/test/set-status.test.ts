@@ -1,8 +1,13 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { CheckConclusion, CheckStatus, CommitStatusState } from "../../shared/src/github.ts";
 import { fullGitSha } from "../../shared/test/examples.ts";
-import { setStatusImpl } from "../src/set-status.ts";
-import { createMockCore, createMockGithub } from "./mocks.ts";
+import {
+  MONITORED_STATUS_CHECKS,
+  selectChecksForEvent,
+  setStatusImpl,
+  syncMonitoredStatusesImpl,
+} from "../src/set-status.ts";
+import { createMockContext, createMockCore, createMockGithub } from "./mocks.ts";
 
 describe("setStatusImpl", () => {
   let core: ReturnType<typeof createMockCore>;
@@ -389,4 +394,194 @@ describe("setStatusImpl", () => {
       });
     },
   );
+});
+
+describe("selectChecksForEvent", () => {
+  it("selects all monitored checks on PR open/synchronize/reopened", () => {
+    for (const action of ["opened", "synchronize", "reopened"]) {
+      const context = Object.assign(createMockContext(), {
+        eventName: "pull_request_target",
+        payload: { action, pull_request: { state: "open" } },
+      });
+      expect(selectChecksForEvent(context)).toHaveLength(MONITORED_STATUS_CHECKS.length);
+    }
+  });
+
+  it("selects only checks matching the changed override label", () => {
+    const breakingChangeContext = Object.assign(createMockContext(), {
+      eventName: "pull_request_target",
+      payload: {
+        action: "labeled",
+        pull_request: { state: "open" },
+        label: { name: "BreakingChange-Approved-Benign" },
+      },
+    });
+    expect(selectChecksForEvent(breakingChangeContext).map((c) => c.requiredStatusName)).toEqual([
+      "Swagger BreakingChange",
+      "Breaking Change(Cross-Version)",
+    ]);
+
+    const unrelatedLabelContext = Object.assign(createMockContext(), {
+      eventName: "pull_request_target",
+      payload: {
+        action: "labeled",
+        pull_request: { state: "open" },
+        label: { name: "Service Attention" },
+      },
+    });
+    expect(selectChecksForEvent(unrelatedLabelContext)).toEqual([]);
+  });
+
+  it("selects only the check matching the completed analyzer workflow (including TEST-IGNORE)", () => {
+    const context = Object.assign(createMockContext(), {
+      eventName: "workflow_run",
+      payload: {
+        action: "completed",
+        workflow_run: {
+          name: "[TEST-IGNORE] Swagger LintDiff - Analyze Code",
+          conclusion: CheckConclusion.SUCCESS,
+        },
+      },
+    });
+    expect(selectChecksForEvent(context).map((c) => c.requiredStatusName)).toEqual([
+      "Swagger LintDiff",
+    ]);
+
+    const skippedContext = Object.assign(createMockContext(), {
+      eventName: "workflow_run",
+      payload: {
+        action: "completed",
+        workflow_run: {
+          name: "Swagger LintDiff - Analyze Code",
+          conclusion: CheckConclusion.SKIPPED,
+        },
+      },
+    });
+    expect(selectChecksForEvent(skippedContext)).toEqual([]);
+
+    const dispatchContext = Object.assign(createMockContext(), {
+      eventName: "workflow_dispatch",
+      payload: {},
+    });
+    expect(selectChecksForEvent(dispatchContext)).toEqual([]);
+  });
+});
+
+describe("syncMonitoredStatusesImpl", () => {
+  it("fetches labels, workflow runs, and statuses once across multiple checks and skips unchanged statuses", async () => {
+    const core = createMockCore();
+    const github = createMockGithub();
+    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+      data: [{ name: "Approved-Avocado" }],
+    });
+    github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
+      data: [
+        {
+          name: "Swagger Avocado - Analyze Code",
+          status: CheckStatus.COMPLETED,
+          conclusion: CheckConclusion.FAILURE,
+          updated_at: "2026-01-01",
+          html_url: "https://test.com/avocado-run",
+        },
+        {
+          name: "Swagger LintDiff - Analyze Code",
+          status: CheckStatus.COMPLETED,
+          conclusion: CheckConclusion.SUCCESS,
+          updated_at: "2026-01-01",
+          html_url: "https://test.com/lintdiff-run",
+        },
+      ],
+    });
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: [{ name: "job-summary" }],
+    });
+    github.rest.repos.getCombinedStatusForRef.mockResolvedValue({
+      data: {
+        statuses: [
+          {
+            context: "Swagger LintDiff",
+            state: CommitStatusState.SUCCESS,
+            description: null,
+            target_url: "https://test.com/lintdiff-run",
+          },
+          {
+            context: "Swagger ModelValidation",
+            state: CommitStatusState.PENDING,
+            description: null,
+            target_url: "https://test.com/previous-run",
+          },
+        ],
+        total_count: 2,
+      },
+    });
+
+    const result = await syncMonitoredStatusesImpl({
+      owner: "test-owner",
+      repo: "test-repo",
+      head_sha: fullGitSha,
+      issue_number: 123,
+      target_url: "https://test.com/current-run",
+      github,
+      core,
+      checks: MONITORED_STATUS_CHECKS.filter((c) =>
+        ["Swagger Avocado", "Swagger LintDiff", "Swagger ModelValidation"].includes(
+          c.requiredStatusName,
+        ),
+      ),
+    });
+
+    expect(github.rest.issues.listLabelsOnIssue).toHaveBeenCalledTimes(1);
+    expect(github.rest.actions.listWorkflowRunsForRepo).toHaveBeenCalledTimes(1);
+    expect(github.rest.repos.getCombinedStatusForRef).toHaveBeenCalledTimes(1);
+
+    // LintDiff (already success) and ModelValidation (already pending fallback) are skipped.
+    expect(github.rest.repos.createCommitStatus).toHaveBeenCalledTimes(1);
+    expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith({
+      owner: "test-owner",
+      repo: "test-repo",
+      sha: fullGitSha,
+      state: CommitStatusState.SUCCESS,
+      context: "Swagger Avocado",
+      description: "Found label 'Approved-Avocado'",
+      target_url: "https://test.com/avocado-run",
+    });
+    expect(result).toEqual({
+      changedContexts: ["Swagger Avocado"],
+      armSignoffRecheckNeeded: true,
+    });
+  });
+
+  it("does not request ARM signoff recheck for non-ARM or pending-only status transitions", async () => {
+    const core = createMockCore();
+    const github = createMockGithub();
+    github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
+      data: [
+        {
+          name: "TypeSpec Suppressions - Analyze Code",
+          status: CheckStatus.COMPLETED,
+          conclusion: CheckConclusion.SUCCESS,
+          updated_at: "2026-01-01",
+          html_url: "https://test.com/suppressions-run",
+        },
+      ],
+    });
+
+    const result = await syncMonitoredStatusesImpl({
+      owner: "test-owner",
+      repo: "test-repo",
+      head_sha: fullGitSha,
+      issue_number: 123,
+      target_url: "https://test.com/current-run",
+      github,
+      core,
+      checks: MONITORED_STATUS_CHECKS.filter((c) =>
+        ["Swagger Avocado", "TypeSpec Suppressions"].includes(c.requiredStatusName),
+      ),
+    });
+
+    expect(result).toEqual({
+      changedContexts: ["Swagger Avocado", "TypeSpec Suppressions"],
+      armSignoffRecheckNeeded: false,
+    });
+  });
 });

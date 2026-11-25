@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   dispatchUniversalSignoff,
+  dispatchUniversalSignoffForPr,
   dispatchUpdateLabels,
   parseSignoffDispatchInputs,
 } from "../../src/arm-auto-signoff/arm-signoff-dispatch.ts";
@@ -68,6 +69,21 @@ describe("reviewer to Universal dispatch", () => {
     github.rest.actions.createWorkflowDispatch.mockRejectedValue(new Error("Dispatch unavailable"));
     await expect(run()).rejects.toThrow("Dispatch unavailable");
     expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+  });
+
+  it("dispatches Universal signoff directly for a PR and head SHA", async () => {
+    const { github, core, context } = fixture();
+    await dispatchUniversalSignoffForPr(
+      { github, context, core },
+      { prNumber: "123", headSha: sha },
+    );
+    expect(github.rest.actions.createWorkflowDispatch).toHaveBeenCalledExactlyOnceWith({
+      owner: "Azure",
+      repo: "azure-rest-api-specs",
+      workflow_id: "arm-universal-auto-signoff.yaml",
+      ref: "main",
+      inputs: { pr_number: "123", head_sha: sha },
+    });
   });
 });
 

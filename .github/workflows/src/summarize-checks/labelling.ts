@@ -1245,7 +1245,7 @@ const rulesPri1Namespace: RequiredLabelRule[] = [
 const rulesPri1TypeSpecSuppressions = [
   // When typespec-suppressions-review-required is present, require typespec-suppressions-approved before
   // merge. Mirrors the package-name-review-required/package-name-approved pattern in
-  // rulesPri1Namespace above: the "TypeSpec Suppressions - Set Status" workflow applies the
+  // rulesPri1Namespace above: the "Summarize Checks" workflow applies the
   // typespec-suppressions-review-required prerequisite label whenever the analyzer (in checked-only
   // mode, via check-rules.json) reports a new or changed suppression requiring review, and removes
   // it once no checked suppressions remain. See .github/workflows/src/typespec-suppressions/.

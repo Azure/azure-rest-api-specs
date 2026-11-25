@@ -16,19 +16,26 @@ on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base
         type: string
   workflow_run:
     workflows:
-      - "Breaking Change(Cross-Version) - Set Status"
+      - "Breaking Change(Cross-Version) - Analyze Code"
+      - "\\[TEST-IGNORE\\] Breaking Change(Cross-Version) - Analyze Code"
       - "Contributor Readiness"
       - "Package Name Approval - Set Status"
       - "Package Name Approval - Validate Labels"
       - "Protected Files"
       - "SDK Validation Status"
       - "Summarize PR Impact"
-      - "Swagger Avocado - Set Status"
-      - "Swagger BreakingChange - Set Status"
-      - "Swagger LintDiff - Set Status"
-      - "Swagger ModelValidation - Set Status"
-      - "Swagger SemanticValidation - Set Status"
-      - "TypeSpec Suppressions - Set Status"
+      - "Swagger Avocado - Analyze Code"
+      - "\\[TEST-IGNORE\\] Swagger Avocado - Analyze Code"
+      - "Swagger BreakingChange - Analyze Code"
+      - "\\[TEST-IGNORE\\] Swagger BreakingChange - Analyze Code"
+      - "Swagger LintDiff - Analyze Code"
+      - "\\[TEST-IGNORE\\] Swagger LintDiff - Analyze Code"
+      - "Swagger ModelValidation - Analyze Code"
+      - "\\[TEST-IGNORE\\] Swagger ModelValidation - Analyze Code"
+      - "Swagger SemanticValidation - Analyze Code"
+      - "\\[TEST-IGNORE\\] Swagger SemanticValidation - Analyze Code"
+      - "TypeSpec Suppressions - Analyze Code"
+      - "\\[TEST-IGNORE\\] TypeSpec Suppressions - Analyze Code"
       - "TypeSpec Validation"
       - "Spec Change Policies"
       - "Update Labels"
@@ -52,7 +59,45 @@ permissions:
   contents: read # for actions/checkout
 
 jobs:
+  post-typespec-suppressions-comment:
+    name: Post TypeSpec Suppressions Comment
+    # Runs before run-summarize-checks on TypeSpec Suppressions updates so stale
+    # typespec-suppressions-approved labels are invalidated before statuses and summary are written.
+    if: >-
+      (github.event_name == 'workflow_run' &&
+       github.event.workflow_run.conclusion != 'skipped' &&
+       (github.event.workflow_run.name == 'TypeSpec Suppressions - Analyze Code' ||
+        github.event.workflow_run.name == '[TEST-IGNORE] TypeSpec Suppressions - Analyze Code')) ||
+      (github.event_name == 'pull_request_target' &&
+       github.event.pull_request.state == 'open' &&
+       (github.event.action == 'labeled' || github.event.action == 'unlabeled') &&
+       (github.event.label.name == 'typespec-suppressions-approved' ||
+        github.event.label.name == 'typespec-suppressions-review-required'))
+    runs-on: ubuntu-24.04
+    permissions:
+      actions: read
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            .github/
+
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+
+      - name: Post TypeSpec suppressions review comment
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const { default: postSuppressionsResults } =
+              await import('${{ github.workspace }}/.github/workflows/src/typespec-suppressions/post-results.ts');
+            await postSuppressionsResults({ github, context, core });
+
   run-summarize-checks:
+    needs: post-typespec-suppressions-comment
     permissions:
       actions: read
       contents: read
@@ -64,10 +109,12 @@ jobs:
       issue_number: ${{ steps.summarize-checks.outputs.issue_number }}
       head_sha: ${{ steps.summarize-checks.outputs.head_sha }}
       arm_review_ready: ${{ steps.summarize-checks.outputs.arm_review_ready }}
+      arm_signoff_recheck_needed: ${{ steps.sync-statuses.outputs.arm_signoff_recheck_needed }}
     if: >-
-      github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'pull_request_target' && github.event.pull_request.state == 'open') ||
-      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion != 'skipped')
+      !cancelled() &&
+      (github.event_name == 'workflow_dispatch' ||
+       (github.event_name == 'pull_request_target' && github.event.pull_request.state == 'open') ||
+       (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion != 'skipped'))
     name: "Summarize Checks"
     runs-on: ubuntu-slim
 
@@ -86,6 +133,17 @@ jobs:
           # or the repo default branch (other triggers).
           sparse-checkout: |
             .github
+
+      # Update bypassable check statuses before installing npm dependencies so PR check badges
+      # refresh immediately and summarize-checks sees the updated statuses in the same run.
+      - id: sync-statuses
+        name: Sync Check Statuses
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const { syncMonitoredStatuses } =
+              await import('${{ github.workspace }}/.github/workflows/src/set-status.ts');
+            await syncMonitoredStatuses({ github, context, core });
 
       - name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
@@ -163,3 +221,33 @@ jobs:
             const { default: dispatchInitialArmReview } =
               await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-review-dispatch.ts');
             await dispatchInitialArmReview({ github, context, core });
+
+  dispatch-arm-signoff:
+    needs: run-summarize-checks
+    if: >-
+      needs.run-summarize-checks.outputs.arm_signoff_recheck_needed == 'true' &&
+      needs.run-summarize-checks.outputs.issue_number != '' &&
+      needs.run-summarize-checks.outputs.head_sha != ''
+    runs-on: ubuntu-slim
+    permissions:
+      actions: write
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            .github
+      - name: Dispatch ARM Universal Auto SignOff after status change
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          PR_NUMBER: ${{ needs.run-summarize-checks.outputs.issue_number }}
+          HEAD_SHA: ${{ needs.run-summarize-checks.outputs.head_sha }}
+        with:
+          script: |
+            const { dispatchUniversalSignoffForPr } =
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-signoff-dispatch.ts');
+            await dispatchUniversalSignoffForPr(
+              { github, context, core },
+              { prNumber: process.env.PR_NUMBER, headSha: process.env.HEAD_SHA },
+            );
