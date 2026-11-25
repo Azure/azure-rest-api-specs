@@ -637,7 +637,7 @@
             "description": "The name of the RegionMixFleet",
             "required": true,
             "type": "string",
-            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+            "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9_.-]{0,78}[A-Za-z0-9_])?$"
           }
         ],
         "responses": {
@@ -682,7 +682,7 @@
             "description": "The name of the RegionMixFleet",
             "required": true,
             "type": "string",
-            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+            "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9_.-]{0,78}[A-Za-z0-9_])?$"
           },
           {
             "name": "resource",
@@ -768,7 +768,7 @@
             "description": "The name of the RegionMixFleet",
             "required": true,
             "type": "string",
-            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+            "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9_.-]{0,78}[A-Za-z0-9_])?$"
           },
           {
             "name": "properties",
@@ -845,7 +845,7 @@
             "description": "The name of the RegionMixFleet",
             "required": true,
             "type": "string",
-            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+            "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9_.-]{0,78}[A-Za-z0-9_])?$"
           }
         ],
         "responses": {
@@ -2446,7 +2446,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [

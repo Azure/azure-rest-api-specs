@@ -19,7 +19,7 @@ model RegionMixFleet is TrackedResource<RegionMixFleetProperties> {
     Resource = RegionMixFleet,
     KeyName = "regionMixFleetName",
     SegmentName = "regionMixFleets",
-    NamePattern = "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+    NamePattern = "^[A-Za-z0-9](?:[A-Za-z0-9_.-]{0,78}[A-Za-z0-9_])?$"
   >;
 }
 
@@ -91,7 +91,26 @@ interface RegionMixFleets {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  listByResourceGroup is ArmResourceListByParent<RegionMixFleet>;
+  listByResourceGroup is ArmResourceListByParent<
+    RegionMixFleet,
+    Response = ArmResponse<RegionMixFleetListResult>
+  >;
 
-  listBySubscription is ArmListBySubscription<RegionMixFleet>;
+  listBySubscription is ArmListBySubscription<
+    RegionMixFleet,
+    Response = ArmResponse<RegionMixFleetListResult>
+  >;
+}
+
+/** The response of a RegionMixFleet list operation. */
+@added(Versions.v2026_12_01_preview)
+model RegionMixFleetListResult {
+  /** The RegionMixFleet items on this page */
+  @pageItems
+  value: RegionMixFleet[];
+
+  /** The link to the next page of items */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: url;
 }
