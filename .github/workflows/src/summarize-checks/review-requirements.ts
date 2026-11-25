@@ -9,7 +9,6 @@ export type ReviewRequirements = {
   arm: boolean;
   dataPlane: boolean;
   suppressions: boolean;
-  clientCustomization: boolean;
 };
 
 function isReleaseBranch(branchName: string): boolean {
@@ -38,11 +37,6 @@ export function evaluateReviewRequirements(
     );
   return {
     arm,
-    // ARM reviewers cover client customizations in PRs that already need ARM review.
-    clientCustomization:
-      active &&
-      !arm &&
-      managementServices.some((service) => service.changes.includes("sdk-configuration")),
     dataPlane:
       active &&
       impact.services.some(
