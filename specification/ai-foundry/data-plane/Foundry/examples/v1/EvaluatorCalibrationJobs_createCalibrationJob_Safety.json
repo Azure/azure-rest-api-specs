@@ -1,0 +1,124 @@
+{
+  "title": "Tune safety rubric wording with per-metric reviewer labels",
+  "operationId": "EvaluatorCalibrationJobs_createCalibrationJob",
+  "parameters": {
+    "api-version": "v1",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "Operation-Id": "calibration-request-safety-1",
+    "job": {
+      "inputs": {
+        "evaluator_name": "support_safety",
+        "evaluator_version": "2",
+        "evaluation_run": {
+          "eval_id": "eval_321",
+          "run_id": "run_654"
+        },
+        "label_sources": [
+          {
+            "type": "golden_dataset",
+            "safety_labels": {
+              "disallowed_behavior_violated": {
+                "label_column": "harm_review",
+                "violated_values": [
+                  "harmful"
+                ],
+                "not_violated_values": [
+                  "safe"
+                ],
+                "not_relevant_values": [
+                  "n/a"
+                ]
+              },
+              "allowed_behavior_violated": {
+                "label_column": "refusal_review",
+                "violated_values": [
+                  "unnecessary_refusal"
+                ],
+                "not_violated_values": [
+                  "helpful"
+                ],
+                "not_relevant_values": [
+                  "n/a"
+                ]
+              }
+            }
+          },
+          {
+            "type": "annotated_traces",
+            "agent_name": "support-agent",
+            "start_time": 1789000000,
+            "end_time": 1790000000
+          }
+        ],
+        "tune_wording": {
+          "max_dimensions": 2
+        },
+        "missed_violation_cost": 5.0,
+        "false_alarm_cost": 1.0
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Operation-Location": "https://example.services.ai.azure.com/api/projects/example/evaluator_calibration_jobs/calj_789?api-version=v1",
+        "Location": "https://example.services.ai.azure.com/api/projects/example/evaluator_calibration_jobs/calj_789?api-version=v1"
+      },
+      "body": {
+        "id": "calj_789",
+        "status": "queued",
+        "created_at": 1790000000,
+        "inputs": {
+          "evaluator_name": "support_safety",
+          "evaluator_version": "2",
+          "evaluation_run": {
+            "eval_id": "eval_321",
+            "run_id": "run_654"
+          },
+          "label_sources": [
+            {
+              "type": "golden_dataset",
+              "safety_labels": {
+                "disallowed_behavior_violated": {
+                  "label_column": "harm_review",
+                  "violated_values": [
+                    "harmful"
+                  ],
+                  "not_violated_values": [
+                    "safe"
+                  ],
+                  "not_relevant_values": [
+                    "n/a"
+                  ]
+                },
+                "allowed_behavior_violated": {
+                  "label_column": "refusal_review",
+                  "violated_values": [
+                    "unnecessary_refusal"
+                  ],
+                  "not_violated_values": [
+                    "helpful"
+                  ],
+                  "not_relevant_values": [
+                    "n/a"
+                  ]
+                }
+              }
+            },
+            {
+              "type": "annotated_traces",
+              "agent_name": "support-agent",
+              "start_time": 1789000000,
+              "end_time": 1790000000
+            }
+          ],
+          "tune_wording": {
+            "max_dimensions": 2
+          },
+          "missed_violation_cost": 5.0,
+          "false_alarm_cost": 1.0
+        }
+      }
+    }
+  }
+}

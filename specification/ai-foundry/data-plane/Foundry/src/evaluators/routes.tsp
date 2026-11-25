@@ -7,6 +7,7 @@ namespace Azure.AI.Projects;
 using Http;
 using OpenAPI;
 using Azure.Core;
+using TypeSpec.Versioning;
 
 alias ListEvaluatorVersionsParameters = {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Auto-suppressed warnings non-applicable rules during import."
@@ -151,10 +152,61 @@ interface Evaluators {
   createVersion is FoundryResourceOperation<
     EvaluatorVersion,
     {
+      @doc("Required when calibration_job_id is supplied; omitted for ordinary version creation.")
+      @added(Versions.v1)
+      @header("Foundry-Features")
+      foundry_features?: FoundryFeaturesOptInKeys.evaluations_v1_preview;
+
+      @doc("Successful calibration job whose unchanged proposal is being saved. The service requires the preview header, checks that the job succeeded and belongs to this evaluator, and verifies that the submitted definition matches its proposal before recording provenance. An edited proposal returns 400; omit this parameter to save without evidence.")
+      @added(Versions.v1)
+      @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+      @query
+      calibration_job_id?: string;
+
       @Http.bodyRoot
       evaluator_version: EvaluatorVersion;
     },
     Azure.Core.Foundations.ResourceCreatedResponse<EvaluatorVersion>
+  >;
+
+  /** Checks an evaluator version against human reviewers on a completed run without tuning or calling a model. Safety rubrics are checked per metric, and the overall status is the least favorable metric status. The service checks access before consulting a caller-partitioned cache. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Agreement is a synchronous evaluator-version action."
+  @added(Versions.v1)
+  @summary("Check evaluator agreement with reviewers")
+  @route("/evaluators/{name}/versions/{version}:check_agreement")
+  @post
+  @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+  @extension(
+    "x-ms-examples",
+    #{
+      CheckAgreement: #{
+        $ref: "../../examples/v1/Evaluators_checkAgreement.json",
+      },
+      CheckAgreementSafety: #{
+        $ref: "../../examples/v1/Evaluators_checkAgreement_Safety.json",
+      },
+    }
+  )
+  checkAgreement is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    {
+      @doc("Evaluator name.")
+      @path
+      name: string;
+
+      @doc("Evaluator version.")
+      @path
+      version: string;
+
+      @doc("Bypass the agreement cache when true.")
+      @query
+      refresh?: boolean = false;
+
+      @doc("Run and reviewer-label sources to compare.")
+      @body
+      agreement: EvaluatorAgreementCheckInputs;
+    },
+    EvaluatorAgreementCheckResult
   >;
 
   // PATCH /evaluators/{evaluatorName}/versions/{version}
@@ -284,4 +336,155 @@ interface EvaluatorGenerationJobs {
   @summary("Delete an evaluator generation job")
   @route("evaluator_generation_jobs/{jobId}")
   delete is deleteJob<EvaluatorGenerationJob>;
+}
+
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Foundry job operations use the project's api-version parameter."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Calibration jobs use the shared Foundry job patterns."
+@added(Versions.v1)
+@tag("Evaluators")
+interface EvaluatorCalibrationJobs {
+  /** Starts a calibration job. Quality rubrics can tune the passing bar, weights, criteria, and wording as requested. Safety rubrics are wording-only and are rechecked with the service-managed safety judge; criterion classification and applicability never change. Reusing an Operation-Id with the same body returns the original job; reusing it with a different body returns 409. No evaluator is saved until a caller separately adopts the proposal. */
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled via Operation-Location."
+  @summary("Create an evaluator calibration job")
+  @route("evaluator_calibration_jobs")
+  @post
+  @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+  @extension(
+    "x-ms-examples",
+    #{
+      CreateCalibrationJob: #{
+        $ref: "../../examples/v1/EvaluatorCalibrationJobs_createCalibrationJob.json",
+      },
+      TracesAndDataset: #{
+        $ref: "../../examples/v1/EvaluatorCalibrationJobs_createCalibrationJob_TracesAndDataset.json",
+      },
+      Upload: #{
+        $ref: "../../examples/v1/EvaluatorCalibrationJobs_createCalibrationJob_Upload.json",
+      },
+      InvalidBooleanOptions: #{
+        $ref: "../../examples/v1/EvaluatorCalibrationJobs_createCalibrationJob_BooleanInvalid.json",
+      },
+      Safety: #{
+        $ref: "../../examples/v1/EvaluatorCalibrationJobs_createCalibrationJob_Safety.json",
+      },
+    }
+  )
+  @pollingOperation(EvaluatorCalibrationJobs.getCalibrationJob)
+  @finalOperation(
+    EvaluatorCalibrationJobs.getCalibrationJob,
+    {
+      jobId: ResponseProperty<"id">,
+    }
+  )
+  createCalibrationJob is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    {
+      ...WithOperationId;
+
+      @doc("Calibration job inputs.")
+      @body
+      job: EvaluatorCalibrationJob;
+    },
+    JobCreatedResponse<EvaluatorCalibrationJob>
+  >;
+
+  /** Gets a job and its proposal after success. Jobs and inline uploaded items expire after 30 days. */
+  @summary("Get an evaluator calibration job")
+  @route("evaluator_calibration_jobs/{jobId}")
+  @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+  @extension(
+    "x-ms-examples",
+    #{
+      GetCalibrationJob: #{
+        $ref: "../../examples/v1/EvaluatorCalibrationJobs_getCalibrationJob.json",
+      },
+      GetSafetyCalibrationJob: #{
+        $ref: "../../examples/v1/EvaluatorCalibrationJobs_getCalibrationJob_Safety.json",
+      },
+    }
+  )
+  getCalibrationJob is queryJobStatusPreview<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    EvaluatorCalibrationJob,
+    {
+      @doc("The job identifier.")
+      @path
+      jobId: string;
+    },
+    JobStatusResponse<EvaluatorCalibrationJob>,
+    WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>
+  >;
+
+  /** Lists calibration jobs for the project, optionally filtered by evaluator name. */
+  @summary("List evaluator calibration jobs")
+  @route("evaluator_calibration_jobs")
+  @get
+  @list
+  @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+  @extension(
+    "x-ms-examples",
+    #{
+      ListCalibrationJobs: #{
+        $ref: "../../examples/v1/EvaluatorCalibrationJobs_listCalibrationJobs.json",
+      },
+    }
+  )
+  listCalibrationJobs is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    {
+      ...CommonPageQueryParameters;
+
+      @doc("Filter by evaluator name.")
+      @query
+      evaluator_name?: string;
+    },
+    AgentsPagedResult<EvaluatorCalibrationJob>
+  >;
+
+  /** Cancels a queued or running job. An already finished job is returned unchanged. */
+  @summary("Cancel an evaluator calibration job")
+  @route("evaluator_calibration_jobs/{jobId}:cancel")
+  @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+  @extension(
+    "x-ms-examples",
+    #{
+      CancelCalibrationJob: #{
+        $ref: "../../examples/v1/EvaluatorCalibrationJobs_cancelCalibrationJob.json",
+      },
+    }
+  )
+  cancelCalibrationJob is cancelJobPreview<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    EvaluatorCalibrationJob,
+    {
+      @doc("The job identifier.")
+      @path
+      jobId: string;
+    },
+    OkResponse & EvaluatorCalibrationJob,
+    WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>
+  >;
+
+  /** Deletes a finished job and its proposal. A queued or running job returns 409; a previously saved evaluator version and its calibration evidence are unaffected. */
+  @summary("Delete an evaluator calibration job")
+  @route("evaluator_calibration_jobs/{jobId}")
+  @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+  @extension(
+    "x-ms-examples",
+    #{
+      DeleteCalibrationJob: #{
+        $ref: "../../examples/v1/EvaluatorCalibrationJobs_deleteCalibrationJob.json",
+      },
+    }
+  )
+  deleteCalibrationJob is deleteJobPreview<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+    {
+      @doc("The job identifier.")
+      @path
+      jobId: string;
+    },
+    NoContentResponse,
+    WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>
+  >;
 }

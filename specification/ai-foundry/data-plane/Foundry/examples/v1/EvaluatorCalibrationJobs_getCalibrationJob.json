@@ -1,0 +1,135 @@
+{
+  "title": "Get a completed calibration proposal",
+  "operationId": "EvaluatorCalibrationJobs_getCalibrationJob",
+  "parameters": {
+    "api-version": "v1",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "jobId": "calj_123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "calj_123",
+        "status": "succeeded",
+        "created_at": 1790000000,
+        "finished_at": 1790000120,
+        "inputs": {
+          "evaluator_name": "answer_quality",
+          "evaluator_version": "1",
+          "evaluation_run": {
+            "eval_id": "eval_123",
+            "run_id": "run_456"
+          },
+          "label_sources": [
+            {
+              "type": "golden_dataset",
+              "label_column": "reviewer_label",
+              "pass_values": [
+                "pass"
+              ],
+              "fail_values": [
+                "fail"
+              ]
+            }
+          ],
+          "tune_passing_bar": true,
+          "allow_weight_changes": true
+        },
+        "result": {
+          "scoring_mode": "likert",
+          "reviewed_count": 100,
+          "labeled_count": 20,
+          "current_matches": 10,
+          "proposed_matches": 15,
+          "current_agreement_rate": 0.5,
+          "proposed_agreement_rate": 0.75,
+          "current_kappa": 0.0,
+          "proposed_kappa": 0.5,
+          "current_agreement_interval": {
+            "lower": 0.3,
+            "upper": 0.7
+          },
+          "proposed_agreement_interval": {
+            "lower": 0.55,
+            "upper": 0.9
+          },
+          "improvement_interval": {
+            "lower": 0.01,
+            "upper": 0.47
+          },
+          "recommendation": "adopt",
+          "strategy": "weights_and_threshold",
+          "wording_changed": false,
+          "current_threshold": 0.5,
+          "proposed_threshold": 0.6,
+          "dimensions": [
+            {
+              "id": "accuracy",
+              "current_description": "The answer is accurate.",
+              "proposed_description": "The answer is accurate.",
+              "current_weight": 1,
+              "proposed_weight": 2,
+              "pruned": false
+            }
+          ],
+          "top_disagreements": [],
+          "label_sources": [
+            {
+              "type": "golden_dataset",
+              "source_id": "dataset:answer-golden:1",
+              "source_version": "1",
+              "label_column": "reviewer_label",
+              "pass_values": [
+                "pass"
+              ],
+              "fail_values": [
+                "fail"
+              ],
+              "accepted_count": 100,
+              "rejected_count": 0,
+              "unmatched_count": 0,
+              "conflicting_count": 0,
+              "unavailable": false
+            }
+          ],
+          "warnings": [
+            "The agreement estimate is based on 20 held-out reviews and may shift as reviews are added."
+          ],
+          "pass_rate": {
+            "estimate": 0.78,
+            "confidence_interval": {
+              "lower": 0.7,
+              "upper": 0.84
+            },
+            "unreviewed_count": 300
+          },
+          "proposed_evaluator_version": {
+            "display_name": "Answer quality",
+            "description": "Measures the quality of an answer.",
+            "tags": {
+              "team": "quality"
+            },
+            "evaluator_type": "custom",
+            "categories": [
+              "quality"
+            ],
+            "definition": {
+              "type": "rubric",
+              "scoring": {
+                "mode": "likert"
+              },
+              "pass_threshold": 0.6,
+              "dimensions": [
+                {
+                  "id": "accuracy",
+                  "description": "The answer is accurate.",
+                  "weight": 2
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

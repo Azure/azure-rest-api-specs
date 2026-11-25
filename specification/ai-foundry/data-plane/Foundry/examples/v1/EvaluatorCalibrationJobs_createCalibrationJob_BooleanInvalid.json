@@ -1,0 +1,35 @@
+{
+  "title": "Reject passing-bar tuning for Boolean checks",
+  "operationId": "EvaluatorCalibrationJobs_createCalibrationJob",
+  "parameters": {
+    "api-version": "v1",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "job": {
+      "inputs": {
+        "evaluator_name": "answer_checks",
+        "evaluator_version": "1",
+        "evaluation_run": {
+          "eval_id": "eval_123",
+          "run_id": "run_456"
+        },
+        "label_sources": [
+          {
+            "type": "annotated_traces",
+            "agent_name": "example-agent"
+          }
+        ],
+        "tune_passing_bar": true
+      }
+    }
+  },
+  "responses": {
+    "400": {
+      "body": {
+        "error": {
+          "code": "InvalidCalibrationOptions",
+          "message": "Pass/fail checks pass only when every applicable check passes, so the passing bar and importance cannot be tuned."
+        }
+      }
+    }
+  }
+}

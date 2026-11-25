@@ -1,0 +1,63 @@
+{
+  "title": "Check a rubric against reviewer decisions",
+  "operationId": "Evaluators_checkAgreement",
+  "parameters": {
+    "api-version": "v1",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "name": "answer_quality",
+    "version": "2",
+    "agreement": {
+      "evaluation_run": {
+        "eval_id": "eval_123",
+        "run_id": "run_789"
+      },
+      "label_sources": [
+        {
+          "type": "golden_dataset",
+          "label_column": "reviewer_label"
+        }
+      ],
+      "review_suggestion_count": 2
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "in_sync",
+        "labeled_count": 20,
+        "matches": 17,
+        "disagreement_count": 3,
+        "agreement_rate": 0.85,
+        "kappa": 0.7,
+        "label_sources": [
+          {
+            "type": "golden_dataset",
+            "source_id": "dataset:answer-golden:1",
+            "source_version": "1",
+            "label_column": "reviewer_label",
+            "accepted_count": 20,
+            "rejected_count": 0,
+            "unmatched_count": 0,
+            "conflicting_count": 0,
+            "unavailable": false
+          }
+        ],
+        "drift": {
+          "evaluated": false,
+          "reason": "At least 30 comparable reviewed items are required."
+        },
+        "review_suggestions": [
+          {
+            "item_id": "item_21",
+            "reason_code": "near_passing_bar"
+          },
+          {
+            "item_id": "item_22",
+            "reason_code": "near_passing_bar"
+          }
+        ],
+        "warnings": []
+      }
+    }
+  }
+}
