@@ -1,0 +1,42 @@
+{
+  "title": "Create an Azure Blob knowledge source",
+  "operationId": "KnowledgeSources_create",
+  "parameters": {
+    "endpoint": "https://foundry.example.com/api/projects/sample-project",
+    "api-version": "v1",
+    "Foundry-Features": "Knowledge=V1Preview",
+    "knowledge_source": {
+      "name": "release-notes",
+      "kind": "azure_blob",
+      "azure_blob_parameters": {
+        "project_connection_id": "release-notes-blob-connection",
+        "container_name": "published-notes",
+        "folder_path": "current/",
+        "ingestion_parameters": {
+          "embedding_model": "notes-embedding-deployment",
+          "embedding_model_name": "text-embedding-3-large",
+          "chat_completion_model": "notes-chat-deployment",
+          "chat_completion_model_name": "gpt-4.1"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "release-notes",
+        "kind": "azure_blob",
+        "azure_blob_parameters": {
+          "container_name": "published-notes",
+          "folder_path": "current/",
+          "ingestion_parameters": {
+            "embedding_model": "notes-embedding-deployment",
+            "embedding_model_name": "text-embedding-3-large",
+            "chat_completion_model": "notes-chat-deployment",
+            "chat_completion_model_name": "gpt-4.1"
+          }
+        }
+      }
+    }
+  }
+}

@@ -15,6 +15,7 @@ import "../evaluators/routes.tsp";
 import "../insights/routes.tsp";
 import "../schedules/routes.tsp";
 import "../routines/routes.tsp";
+import "../knowledge/routes.tsp";
 import "../skills/routes.tsp";
 import "../data_generation_jobs/routes.tsp";
 
@@ -619,6 +620,9 @@ model TimeZoneType {}
 @@alternateType(OneTimeTrigger.timeZone, TimeZoneType, "java");
 @@alternateType(RoutineRunStatus, string, "java");
 @@alternateType(AgentInsightHighlightedTrace.total_tokens, int64, "java");
+
+// Java model references already support null; its emitter cannot generate a nullable response wrapper.
+@@alternateType(KnowledgeSourceStatusResult, KnowledgeSourceStatus, "java");
 
 // --------------------------------------------------------------------------------
 // OpenAI alternate types
