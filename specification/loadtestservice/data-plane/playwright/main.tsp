@@ -74,6 +74,9 @@ enum Versions {
   v2026_11_01_preview: "2026-11-01-preview",
 
   @doc("Preview version 2026-12-01-preview with experimental features.")
-  @Azure.Core.previewVersion
   v2026_12_01_preview: "2026-12-01-preview",
+
+  @doc("Preview version 2026-12-15-preview with experimental features.")
+  @Azure.Core.previewVersion
+  v2026_12_15_preview: "2026-12-15-preview",
 }
