@@ -367,7 +367,7 @@ by other validations in this repo):
 | Check name | Purpose |
 |------------|---------|
 | `TypeSpec Suppressions - Analyze Code` | Computes the impacted TypeSpec folders, runs the analyzer, writes the markdown summary + a JSON report artifact (`typespec-suppressions-report`), and emits inline `::warning` annotations anchored to each suppression on the PR diff. |
-| `TypeSpec Suppressions - Set Status` | Reports the check status; approval is granted by applying the `typespec-suppressions-approved` label. |
+| `Summarize Checks` | Reports the `TypeSpec Suppressions` check status and review comment; approval is granted by applying the `typespec-suppressions-approved` label. |
 | `TypeSpec Suppressions - Test` | Runs the analyzer tool's own test suite. |
 
 ### Where to see the results

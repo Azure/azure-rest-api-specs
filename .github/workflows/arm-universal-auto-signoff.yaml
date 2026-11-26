@@ -27,11 +27,10 @@ on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base
       - labeled
       - unlabeled
   workflow_run:
-    # Re-evaluate as each mandatory status producer completes.
+    # Re-evaluate when the semantic reviewer completes; Summarize Checks dispatches this workflow
+    # directly when Swagger Avocado or Swagger LintDiff transitions to a terminal status.
     workflows:
       - "ARM API Review: Automated Workflow"
-      - "Swagger Avocado - Set Status"
-      - "Swagger LintDiff - Set Status"
     types: [completed]
 
 permissions:
