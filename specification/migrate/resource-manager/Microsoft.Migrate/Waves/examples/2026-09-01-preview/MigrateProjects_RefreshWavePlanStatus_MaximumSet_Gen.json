@@ -1,0 +1,35 @@
+{
+  "title": "MigrateProjects_RefreshWavePlanStatus_MaximumSet",
+  "operationId": "MigrateProjects_RefreshWavePlanStatus",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "F4566D7C-05F8-41DC-A6B4-AFC0600F0AC0",
+    "resourceGroupName": "rgwaves",
+    "projectName": "myProjectName",
+    "body": {
+      "assessmentArmId": "/subscriptions/F4566D7C-05F8-41DC-A6B4-AFC0600F0AC0/resourceGroups/rgwaves/providers/Microsoft.Migrate/assessmentProjects/myProjectName/groups/group1/assessments/assessment1",
+      "migrationPath": "AzureVM"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "wavePlanName": "WavePlan_assessment1_AzureVM",
+        "assessmentArmId": "/subscriptions/F4566D7C-05F8-41DC-A6B4-AFC0600F0AC0/resourceGroups/rgwaves/providers/Microsoft.Migrate/assessmentProjects/myProjectName/groups/group1/assessments/assessment1",
+        "migrationPath": "AzureVM",
+        "isOutdated": true,
+        "outdatedReasons": [
+          "ProposedWorkloadCommited",
+          "CommittedWorkloadUpdated"
+        ],
+        "lastCheckedTime": "2026-09-15T14:30:00.000Z",
+        "outdatedTime": "2026-09-14T09:12:33.000Z"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}
