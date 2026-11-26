@@ -1,0 +1,31 @@
+{
+  "operationId": "SaasSubscriptionLevelGlobal_ValidatePurchaseBySubscription",
+  "title": "Validate a SaaS purchase at subscription scope",
+  "parameters": {
+    "subscriptionId": "1a950b42-75c2-44a6-ab02-fc0f840997aa",
+    "api-version": "2026-04-01",
+    "body": {
+      "location": "global",
+      "properties": {
+        "name": "mySaasResource",
+        "quantity": 1,
+        "autoRenew": true,
+        "storefront": "AzurePortal",
+        "productCode": "0007150b-0000-0160-2654-64a36bcef7ba"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "isValid": false,
+        "details": [
+          {
+            "code": "MarketplacePurchasesDisabled",
+            "message": "Marketplace purchases are disabled for this Azure subscription."
+          }
+        ]
+      }
+    }
+  }
+}

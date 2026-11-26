@@ -7,6 +7,7 @@ import {
 } from "./api-version-selection.ts";
 import { isMain, parseArgs, runMain, writeJson } from "./cli.ts";
 import { runProjectCompilers } from "./compiler-runner.ts";
+import { unavailableHeadBaselineBlocker, usesTargetOnlyArtifacts } from "./comparison-execution.ts";
 import {
   collectChanges,
   createSparseWorktree,
@@ -27,6 +28,12 @@ type PreparationManifest = import("./runtime-types.ts").PreparationManifest;
 type PreparationProject = import("./runtime-types.ts").PreparationProject;
 
 type SourceIndex = import("./runtime-types.ts").SourceIndex;
+
+export const WORKSPACE_SUPPORT_ROOTS = ["eng/typespec-rulesets"] as const;
+
+export function workspaceSparseRoots(analysisRoots: string[]): string[] {
+  return [...new Set([...analysisRoots, ...WORKSPACE_SUPPORT_ROOTS])].sort();
+}
 
 function stableProjectId(project: string) {
   return `project-${crypto.createHash("sha256").update(project).digest("hex").slice(0, 12)}`;
@@ -155,8 +162,11 @@ export function prepareProjectRecords({
       }
     }
     if (enabled && !projectBlockers.length) {
-      const comparisonRoles =
-        record.classification === "new" ? (["target"] as const) : (["baseline", "target"] as const);
+      const baselineBlocker = unavailableHeadBaselineBlocker(record);
+      if (baselineBlocker) addBlocker(baselineBlocker);
+      const comparisonRoles = usesTargetOnlyArtifacts(record)
+        ? (["target"] as const)
+        : (["baseline", "target"] as const);
       for (const comparisonRole of comparisonRoles) {
         const selection = record.artifactComparison?.[comparisonRole];
         if (!selection) throw new Error(`Missing ${comparisonRole} artifact selection.`);
@@ -299,6 +309,7 @@ export async function prepareAssessment({
     typeof rawSparseRoots === "string" ? [rawSparseRoots] : rawSparseRoots,
     scope,
   );
+  const checkoutRoots = workspaceSparseRoots(sparseRoots);
   const changeDiscoveryStarted = performance.now();
   const changedFiles = collectChanges(repository, comparison.mergeBaseCommit, sparseRoots, {
     headRef: comparison.headCommit,
@@ -324,7 +335,13 @@ export async function prepareAssessment({
         untracked: changedFiles.some((file) => file.origins.includes("untracked")),
       },
     },
-    sparseCheckout: { mode: "cone", roots: sparseRoots, verified: false },
+    sparseCheckout: {
+      mode: "cone",
+      roots: sparseRoots,
+      supportRoots: [...WORKSPACE_SUPPORT_ROOTS],
+      workspaceRoots: checkoutRoots,
+      verified: false,
+    },
     changedFiles,
     projects: [],
     blockers,
@@ -363,8 +380,8 @@ export async function prepareAssessment({
   const currentWorktree = path.join(work, "worktrees", "current");
   const workspaceStarted = performance.now();
   try {
-    createSparseWorktree(repository, comparison.mergeBaseCommit, sparseRoots, baseWorktree);
-    createSparseWorktree(repository, comparison.headCommit, sparseRoots, currentWorktree);
+    createSparseWorktree(repository, comparison.mergeBaseCommit, checkoutRoots, baseWorktree);
+    createSparseWorktree(repository, comparison.headCommit, checkoutRoots, currentWorktree);
     manifest.sparseCheckout.verified = true;
     if (includeWorkingTree) {
       copyOverlay(repository, currentWorktree, analysisFiles);

@@ -44,3 +44,9 @@ using Microsoft.Migrate;
   "ContainerAppsSummaryOperations",
   "autorest"
 );
+
+@@clientName(
+  Microsoft.Migrate,
+  "MigrateContainerAppsAssessmentsManagementClient",
+  "javascript"
+);

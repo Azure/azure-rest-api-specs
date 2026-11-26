@@ -303,18 +303,6 @@ try {
             throw "Unable to select subscription '$SubscriptionId'. Verify that you have access to the subscription."
         }
 
-        if ($Environment -eq 'AzureCloud' -and $SubscriptionId -eq '4d042dc6-fe17-4698-a23f-ec6a8d1e98f4' -and (Get-Command az -ErrorAction SilentlyContinue)) {
-            $cliAccountJson = az account show --output json 2>$null
-            if ($LASTEXITCODE -ne 0) {
-                throw "Azure CLI is not logged in to the TME subscription '$SubscriptionId'. Run 'az login --tenant $($wellKnownTMETenants[0])' and 'az account set --subscription $SubscriptionId' before provisioning."
-            }
-
-            $cliAccount = $cliAccountJson | ConvertFrom-Json
-            if ($cliAccount.id -ne $SubscriptionId -or $cliAccount.tenantId -ne $wellKnownTMETenants[0]) {
-                throw "Azure CLI is not set to TME subscription '$SubscriptionId'. Run 'az login --tenant $($wellKnownTMETenants[0])' and 'az account set --subscription $SubscriptionId' before provisioning."
-            }
-        }
-
         # Use cache of well-known team subs without having to be authenticated.
         $wellKnownSubscriptions = @{
             'faa080af-c1d8-40ad-9cce-e1a450ca5b57' = 'Azure SDK Developer Playground'
@@ -332,21 +320,27 @@ try {
         Log "Using subscription '$subscriptionName'"
 
         # Make sure the TenantId is also updated from the current context.
-        # PSBoundParameters is not updated to avoid confusing parameter sets.
         if (!$TenantId) {
             $TenantId = $context.Subscription.TenantId
         }
     }
 
-    # This needs to happen after we set the TenantId but before we use the ResourceGroupName
-    # The SSS3PT prefix avoids flagging use of local auth in TME.
-    # See details at https://eng.ms/docs/products/onecert-certificates-key-vault-and-dsms/key-vault-dsms/certandsecretmngmt/credfreefaqs#how-can-i-disable-s360-reporting-when-testing-customer-facing-3p-features-that-depend-on-use-of-unsafe-local-auth
-    $ResourceGroupName = AddTestResourceGroupPrefix $ResourceGroupName $TenantId $SubscriptionId
+    $PSBoundParameters['TenantId'] = $TenantId
+    $PSBoundParameters['Environment'] = $Environment
 
-    if ($ResourceGroupName.Length -gt 90) {
-        # See limits at https://docs.microsoft.com/azure/architecture/best-practices/resource-naming
-        Write-Warning -Message "Resource group name '$ResourceGroupName' is too long. So pruning it to be the first 90 characters."
-        $ResourceGroupName = $ResourceGroupName.Substring(0, 90)
+    if (!$PSBoundParameters.ContainsKey('ResourceGroupName')) {
+        # The SSS3PT prefix avoids flagging use of local auth in TME.
+        # See details at https://eng.ms/docs/products/onecert-certificates-key-vault-and-dsms/key-vault-dsms/certandsecretmngmt/credfreefaqs#how-can-i-disable-s360-reporting-when-testing-customer-facing-3p-features-that-depend-on-use-of-unsafe-local-auth
+        if (($wellKnownTMETenants.Contains($TenantId) -or $SubscriptionId -eq '4d042dc6-fe17-4698-a23f-ec6a8d1e98f4') -and
+            !$ResourceGroupName.StartsWith("SSS3PT_", [System.StringComparison]::OrdinalIgnoreCase)) {
+            $ResourceGroupName = "SSS3PT_" + $ResourceGroupName
+        }
+
+        if ($ResourceGroupName.Length -gt 90) {
+            # See limits at https://docs.microsoft.com/azure/architecture/best-practices/resource-naming
+            Write-Warning -Message "Resource group name '$ResourceGroupName' is too long. So pruning it to be the first 90 characters."
+            $ResourceGroupName = $ResourceGroupName.Substring(0, 90)
+        }
     }
 
     # If a provisioner service principal was provided log into it to perform the pre- and post-scripts and deployments.
@@ -693,8 +687,7 @@ try {
 
         if ($deployment.ProvisioningState -ne 'Succeeded') {
             HandleDeploymentFailure $deployment
-            # A terminating error propagates through nested script calls, unlike exit 1.
-            throw "Deployment '$($deployment.DeploymentName)' failed with state '$($deployment.ProvisioningState)' and CorrelationId '$($deployment.CorrelationId)'."
+            exit 1
         }
 
         Write-Host "Deployment '$($deployment.DeploymentName)' has CorrelationId '$($deployment.CorrelationId)'"
@@ -919,6 +912,11 @@ Optional name of the cloud environment. The default is the Azure Public Cloud
 
 .PARAMETER AdditionalParameters
 Optional key-value pairs of parameters to pass to the ARM template(s) and pre-post scripts.
+The pre- and post-deployment scripts receive these values as named parameters, along with
+`-ResourceGroupName`, `-SubscriptionId`, `-TenantId`, and `-Environment`. Scripts that invoke
+the Azure CLI must set it to the appropriate tenant and subscription themselves. For TME
+deployments in AzureCloud, use tenant `70a036f6-8e4d-4615-bad6-149c02e7720d` and subscription
+`4d042dc6-fe17-4698-a23f-ec6a8d1e98f4`.
 
 .PARAMETER ArmTemplateParameters
 Optional key-value pairs of parameters to pass to the ARM template(s).

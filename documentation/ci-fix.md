@@ -254,6 +254,8 @@ Please see [readme](https://github.com/Azure/oav/blob/bd04e228b4181c53769ed88e56
 Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
 Refer to [Swagger-Example-Generation](https://github.com/Azure/oav/blob/develop/documentation/example-generation.md) for example automatic generation.
 
+When ModelValidation reports an example/schema mismatch, review the reported example and schema together. A validation error does not by itself establish whether the example or the specification is incorrect; check the actual service behavior and intended API contract before deciding what to change. For `OBJECT_ADDITIONAL_PROPERTIES`, determine whether the reported property is accepted by the service and belongs to the intended API contract. Correct the example or schema as appropriate, then rerun validation.
+
 ## `Swagger PrettierCheck`
 
 First, ensure you have fulfilled `Prerequisites` as explained above.

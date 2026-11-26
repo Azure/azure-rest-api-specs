@@ -1,6 +1,8 @@
 import { assert, test } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
 import { documentQualitySummary } from "../scripts/assessment-report-ui.ts";
+import { selectApiVersionPair } from "../scripts/api-version-selection.ts";
+import { unavailableHeadBaselineBlocker } from "../scripts/comparison-execution.ts";
 import { readComplianceCatalog } from "../scripts/compliance-assessment.ts";
 import {
   assembleDocumentQuality,
@@ -484,6 +486,95 @@ void test("groups REST contract deltas by schema identity and retains affected o
   assert.equal(cards[0].findings[0].contractDelta.after, "removed");
 });
 
+void test("resolves REST contract deltas and semantic contract rows through inherited allOf properties", () => {
+  const operation = (
+    comparisonRole: "baseline" | "target",
+    operationId: string,
+  ): AssessmentFact => ({
+    comparisonRole,
+    operationId,
+    apiVersion: "v1",
+    method: "get",
+    path: "/widgets",
+    parameters: [],
+    responses: [
+      {
+        status: "200",
+        headers: [],
+        schema: {
+          kind: "object",
+          reference: "stable/v1.json#/definitions/Widget",
+          allOf: [
+            {
+              kind: "object",
+              reference: "stable/v1.json#/definitions/BaseWidget",
+              properties:
+                comparisonRole === "baseline"
+                  ? [
+                      {
+                        name: "state",
+                        required: true,
+                        schema: {
+                          kind: "enum",
+                          type: "string",
+                          reference: "stable/v1.json#/definitions/WidgetState",
+                          values: ["Ready", "Deleted"],
+                        },
+                      },
+                    ]
+                  : [],
+            },
+          ],
+          properties: [
+            { name: "name", required: false, schema: { kind: "scalar", type: "string" } },
+          ],
+        },
+      },
+    ],
+  });
+
+  const findings: RestFindingFixture[] = [
+    {
+      id: "rest-inherited-0",
+      rule: "serialized-property-removed",
+      severity: "high",
+      contractChange: {
+        rule: "serialized-property-removed",
+        location: "response 200.state",
+      },
+      operationIds: ["Widgets_Get"],
+      relatedSemanticIntents: ["semantic-1"],
+      sources: [],
+      evidence: [operation("baseline", "Widgets_Get"), operation("target", "Widgets_Get")],
+    },
+  ];
+
+  const cards = fixtureRestContractCards(findings);
+  assert.equal(cards.length, 1);
+  assert.equal(cards[0].identity, "WidgetState");
+  assert.equal(cards[0].findings[0].contractDelta.before, "WidgetState { Ready | Deleted }");
+  assert.equal(cards[0].findings[0].contractDelta.after, "removed");
+
+  const rows = operationContractRows(
+    {
+      operationId: "Widgets_Get",
+      baseline: operation("baseline", "Widgets_Get"),
+      target: operation("target", "Widgets_Get"),
+      changes: ["responses"],
+      sourceChangeIds: [],
+      hunkIds: [],
+      declarationIds: [],
+      matchBasis: "exact",
+    },
+    findings as unknown as AssessmentFinding[],
+    "semantic-1",
+  );
+  const stateRow = rows.find((row) => row.area === "response 200.state");
+  assert.ok(stateRow);
+  assert.match(stateRow.before, /WidgetState \{ Ready \| Deleted \}/);
+  assert.equal(stateRow.after, "removed");
+});
+
 void test("renderer shows fetched Azure Guidelines guidance and expands failures", () => {
   const catalog = readComplianceCatalog();
   const scores = [10, 9, 8, 7];
@@ -769,6 +860,88 @@ void test("renderer shows fetched Azure Guidelines guidance and expands failures
 void test("escapeHtml escapes Agent and source text", () => {
   assert.equal(escapeHtml('<script x="1">&'), "&lt;script x=&quot;1&quot;&gt;&amp;");
 });
+
+void test.each([true, false])(
+  "report metadata preserves head projection provenance and explicit unavailable baselines (retained: %s)",
+  (retained) => {
+    const baseCommit = "a".repeat(40);
+    const headCommit = "b".repeat(40);
+    const pair = selectApiVersionPair({
+      base: { versioned: true, versions: ["2026-05-01-preview"] },
+      current: {
+        versioned: true,
+        versions: [...(retained ? ["2026-05-01-preview"] : []), "2026-08-01-preview"],
+      },
+      baseCommit,
+      headCommit,
+    });
+    const blocker = unavailableHeadBaselineBlocker({ id: "preview", artifactComparison: pair });
+    const blockers = blocker ? [blocker] : [];
+    const html = renderAssessmentHtml({
+      schemaVersion: 1,
+      confidence: "high",
+      safety: {
+        scope: "rest-and-downstream-only",
+        status: retained ? "passed" : "not-assessed",
+        verdict: retained ? "passed" : "unknown",
+        coverage: retained ? "complete" : "blocked",
+      },
+      comparison: { baseCommit, headCommit, workingTree: {} },
+      artifactComparisons: [{ projectId: "preview", ...pair }],
+      projects: [
+        {
+          id: "preview",
+          classification: "existing",
+          path: "specification/preview/Service",
+          artifactComparison: pair,
+          artifacts: {},
+        },
+      ],
+      dimensions: {
+        semantic: { status: "assessed", items: [], blockers: [] },
+        rest: {
+          status: retained ? "passed" : "not-assessed",
+          verdict: retained ? "passed" : "unknown",
+          coverage: retained ? "complete" : "blocked",
+          findings: [],
+          blockers,
+        },
+        downstream: {
+          status: retained ? "passed" : "not-assessed",
+          verdict: retained ? "passed" : "unknown",
+          coverage: retained ? "complete" : "blocked",
+          findings: [],
+          blockers,
+        },
+        compliance: notAssessedCompliance(),
+        documentQuality: {
+          status: "not-assessed",
+          summary: "No compiler evidence in this fixture.",
+        },
+      },
+      blockers,
+    });
+    assert.ok(html.includes(`<code>${headCommit}@2026-05-01-preview</code>`));
+    assert.ok(html.includes(`<code>${headCommit}@2026-08-01-preview</code>`));
+    assert.match(html, /new-api-version/);
+    assert.match(html, /previous-latest-preview/);
+    if (retained) {
+      assert.equal(summaryCardValue(html, "REST breaking changes"), 0);
+      assert.equal(summaryCardValue(html, "Downstream breaking changes"), 0);
+    } else {
+      assert.match(html, /unavailable in head \(not compiled\)/);
+      const message = "Not assessed: the baseline API version is not available in head.";
+      assert.equal(html.split(message).length - 1, 4);
+      for (const id of ["rest-breaking", "downstream-breaking"]) {
+        const start = html.indexOf(`<a class="summary-card" href="#${id}">`);
+        const card = html.slice(start, html.indexOf("</a>", start));
+        assert.ok(card.includes(message));
+        assert.notMatch(card, /0 findings|Verdict unknown|summary-icon pass/);
+        assert.ok(reportSection(html, id).includes(message));
+      }
+    }
+  },
+);
 
 void test("renderer labels active Azure Guidelines and scoped safety", () => {
   const html = renderAssessmentHtml({
