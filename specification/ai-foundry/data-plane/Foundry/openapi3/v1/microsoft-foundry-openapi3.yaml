@@ -4063,6 +4063,8 @@ paths:
       summary: Connect to a GPT Live voice agent
       description: |-
         Opens a Live session. Foundry sends session.start; clients wait for session.started.
+        With transport=webrtc, clients first send rtc.call.sdp.create; Foundry creates the session and returns
+        rtc.call.sdp.created, then session.started.
         Do not negotiate the realtime WebSocket subprotocol on this route.
         session.update changes backend settings, not the Foundry delegation target.
         Foundry translates validated [thinking]/[commentary] sections into session.thinking.append/
@@ -4110,9 +4112,23 @@ paths:
         - name: store
           in: query
           required: false
-          description: Overrides Foundry conversation and audio persistence for this session.
+          description: Overrides Foundry conversation and audio persistence for this session. `transport=webrtc` requires an effective value of `false`.
           schema:
             type: boolean
+          explode: false
+        - name: transport
+          in: query
+          required: false
+          description: |-
+            Selects how audio is exchanged. Omit or send `websocket` to send and receive audio as Live events on this
+            WebSocket. Send `webrtc` to exchange audio as WebRTC media directly with the GPT Live deployment; this
+            WebSocket then carries the SDP exchange and all other Live commands and events. Send exactly one
+            `rtc.call.sdp.create` with an audio-only offer as the first message. Do not create a data channel or send
+            `session.input_audio.append`. WebRTC requires `model_type: self_deployed` and an effective `store` of
+            `false`; otherwise the upgrade fails with `400`. If WebRTC is not available, the upgrade fails with `404`.
+            A failed negotiation sends an `error` with code `webrtc_negotiation_failed` and closes the WebSocket.
+          schema:
+            $ref: '#/components/schemas/VoiceAgentTransport'
           explode: false
         - name: api-version
           in: query
@@ -47539,6 +47555,20 @@ components:
       enum:
         - session.avatar.connect
         - rtc.call.sdp.create
+    Azure.AI.ProjectsInternal.VoiceAgentLiveClientEventTypeExtension:
+      type: string
+      enum:
+        - rtc.call.sdp.create
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    Azure.AI.ProjectsInternal.VoiceAgentLiveServerEventTypeExtension:
+      type: string
+      enum:
+        - rtc.call.sdp.created
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     Azure.AI.ProjectsInternal.VoiceAgentServerEventTypeExtension:
       type: string
       enum:
@@ -72817,6 +72847,7 @@ components:
           response.item.create: '#/components/schemas/OpenAI.LiveClientEventLiveResponseItemCreateParam'
           response.create: '#/components/schemas/OpenAI.LiveClientEventLiveResponseCreateParam'
           session.close: '#/components/schemas/OpenAI.LiveClientEventLiveSessionCloseParam'
+          rtc.call.sdp.create: '#/components/schemas/VoiceAgentLiveClientEventRtcCallSdpCreate'
       description: Client events for Live. Initialize a primary WebSocket with session.start and wait for session.started. WebRTC creation already starts the session. Audio append is primary WebSocket-only. See the [Live prompting guide](https://developers.openai.com/api/docs/guides/live-prompting) before writing frontend instructions and delegation policies.
       x-ms-foundry-meta:
         required_previews:
@@ -73281,6 +73312,7 @@ components:
             - response.item.create
             - response.create
             - session.close
+        - $ref: '#/components/schemas/Azure.AI.ProjectsInternal.VoiceAgentLiveClientEventTypeExtension'
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -75070,6 +75102,7 @@ components:
           transport.ringing: '#/components/schemas/OpenAI.LiveServerEventLiveTransportRinging'
           transport.answered: '#/components/schemas/OpenAI.LiveServerEventLiveTransportAnswered'
           transport.failed: '#/components/schemas/OpenAI.LiveServerEventLiveTransportFailed'
+          rtc.call.sdp.created: '#/components/schemas/VoiceAgentLiveServerEventRtcCallSdpCreated'
       description: An event sent by the Live API on a primary WebSocket or sideband connection.
       x-ms-foundry-meta:
         required_previews:
@@ -76113,6 +76146,7 @@ components:
             - transport.ringing
             - transport.answered
             - transport.failed
+        - $ref: '#/components/schemas/Azure.AI.ProjectsInternal.VoiceAgentLiveServerEventTypeExtension'
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -102077,6 +102111,37 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
+    VoiceAgentLiveClientEventRtcCallSdpCreate:
+      type: object
+      required:
+        - type
+        - sdp_offer
+      properties:
+        type:
+          type: string
+          enum:
+            - rtc.call.sdp.create
+          description: The event type. Always `rtc.call.sdp.create`.
+        event_id:
+          type: string
+          description: An optional client-generated event identifier.
+        sdp_offer:
+          type: string
+          description: The complete SDP offer, sent after ICE gathering. It must contain audio and no data channel or video.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.LiveClientEvent'
+      description: |-
+        The `rtc.call.sdp.create` Live client event. With `transport=webrtc`, send it once, as the first message.
+        Foundry creates the session from the agent definition and uses only this offer.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentLiveClientEventTypeExtensions:
+      $ref: '#/components/schemas/Azure.AI.ProjectsInternal.VoiceAgentLiveClientEventTypeExtension'
+      description: Foundry members added to the native Live client-event discriminator.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     VoiceAgentLiveConversation:
       type: object
       required:
@@ -102164,23 +102229,26 @@ components:
             - live
           description: Selects the Live protocol.
         model_type:
-          type: string
-          enum:
-            - self_deployed
-          description: Uses a Foundry model deployment.
+          $ref: '#/components/schemas/VoiceModelType'
+          description: |-
+            How the GPT Live model is served. `managed` uses a GPT Live model that the voice service hosts. `self_deployed`
+            connects directly to the project's own GPT Live deployment.
         model:
           type: string
           minLength: 1
-          description: The GPT Live deployment name.
+          description: The managed GPT Live model name for `managed`, or the GPT Live deployment name for `self_deployed`.
         greeting:
           $ref: '#/components/schemas/VoiceAgentTemplateGreetingConfig'
           description: Template-only startup greeting, rendered with session structured inputs. Foundry-only; not sent in native Live settings.
         audio:
           $ref: '#/components/schemas/OpenAI.LiveInitialSessionAudioParam'
-          description: Startup audio formats and output voice.
+          description: Startup audio formats and output voice. With `transport=webrtc`, SDP negotiates the media format and `format` is not used.
         delegation:
           $ref: '#/components/schemas/VoiceAgentLiveDelegation'
-          description: Delegation settings. Omit for client mode. responses.model is a backend deployment name in the Live resource, not a model catalog ID.
+          description: |-
+            Delegation settings. Omit for client mode. For `self_deployed`, responses.model is a backend deployment name in the
+            Live resource, not a model catalog ID. For `managed`, responses.model is one of the managed model's Responses
+            delegation models, only function tools are supported, and service_tier must be omitted, `auto`, or `default`.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentBaseDefinition'
       description: |-
@@ -102469,6 +102537,40 @@ components:
     VoiceAgentLiveServerEvent:
       $ref: '#/components/schemas/OpenAI.LiveServerEvent'
       description: A server event received over a GPT Live voice-agent WebSocket.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentLiveServerEventRtcCallSdpCreated:
+      type: object
+      required:
+        - type
+        - event_id
+        - sdp_answer
+        - session_id
+      properties:
+        type:
+          type: string
+          enum:
+            - rtc.call.sdp.created
+          description: The event type. Always `rtc.call.sdp.created`.
+        event_id:
+          type: string
+          description: The server-generated event identifier.
+        sdp_answer:
+          type: string
+          description: The SDP answer. Apply it as the peer connection's remote description.
+        session_id:
+          type: string
+          description: The Live session ID, the same as `session.id` in the following `session.started`.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.LiveServerEvent'
+      description: 'The `rtc.call.sdp.created` Live server event: the SDP answer for a `transport=webrtc` session. `session.started` follows.'
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentLiveServerEventTypeExtensions:
+      $ref: '#/components/schemas/Azure.AI.ProjectsInternal.VoiceAgentLiveServerEventTypeExtension'
+      description: Foundry members added to the native Live server-event discriminator.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview

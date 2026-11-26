@@ -18,6 +18,16 @@ namespace Azure.AI.ProjectsInternal {
     rtc_call_sdp_create: "rtc.call.sdp.create",
   }
 
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  union VoiceAgentLiveClientEventTypeExtension {
+    rtc_call_sdp_create: "rtc.call.sdp.create",
+  }
+
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  union VoiceAgentLiveServerEventTypeExtension {
+    rtc_call_sdp_created: "rtc.call.sdp.created",
+  }
+
   @extension("x-ms-foundry-meta", VoiceAgentConditionalPreview)
   union VoiceAgentServerEventTypeExtension {
     warning: "warning",
@@ -129,7 +139,7 @@ namespace Azure.AI.Projects {
     @doc("Signaling and audio are exchanged as JSON events over the WebSocket. This is the default.")
     websocket: "websocket",
 
-    @doc("WebRTC: the WebSocket carries only SDP signaling; media and the data channel are peer-to-peer.")
+    @doc("WebRTC: audio is WebRTC media and the WebSocket carries the SDP exchange. Each connection operation describes which other events stay on the WebSocket.")
     webrtc: "webrtc",
   }
 
@@ -1135,7 +1145,8 @@ namespace Azure.AI.Projects {
   // ---------------------------------------------------------------------------
 
   /*
-   * Native Live events with Foundry conversation correlation and delegation ownership; no additional event types.
+   * Native Live events with Foundry conversation correlation and delegation ownership. The only additional event
+   * types are the transport=webrtc SDP exchange: rtc.call.sdp.create and rtc.call.sdp.created.
    * For foundry_managed_agent sessions, session delegation reports the pinned Foundry target and delegation
    * targets report foundry_managed_agent; GPT Live itself runs native client delegation.
    * response.event correlates backend output by delegation_id, preserving IDs, sequence numbers and tags.
@@ -1159,6 +1170,73 @@ namespace Azure.AI.Projects {
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   union VoiceAgentLiveServerEvent {
     native: OpenAI.LiveServerEvent,
+  }
+
+  // The WebRTC SDP exchange extends the native Live hierarchies, so the unions above already include it.
+  alias VoiceAgentLiveClientEventTypeExtension = Azure.AI.ProjectsInternal.VoiceAgentLiveClientEventTypeExtension;
+
+  alias VoiceAgentLiveServerEventTypeExtension = Azure.AI.ProjectsInternal.VoiceAgentLiveServerEventTypeExtension;
+
+  @doc("Foundry members added to the native Live client-event discriminator.")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  union VoiceAgentLiveClientEventTypeExtensions {
+    @doc("The Foundry Live client-event kinds.")
+    voice_agent: VoiceAgentLiveClientEventTypeExtension,
+  }
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Registering Foundry-only literals in the imported Live discriminator union preserves a single polymorphic hierarchy."
+  @@copyVariants(
+    OpenAI.LiveClientEventType,
+    VoiceAgentLiveClientEventTypeExtensions
+  );
+
+  @doc("Foundry members added to the native Live server-event discriminator.")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  union VoiceAgentLiveServerEventTypeExtensions {
+    @doc("The Foundry Live server-event kinds.")
+    voice_agent: VoiceAgentLiveServerEventTypeExtension,
+  }
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Registering Foundry-only literals in the imported Live discriminator union preserves a single polymorphic hierarchy."
+  @@copyVariants(
+    OpenAI.LiveServerEventType,
+    VoiceAgentLiveServerEventTypeExtensions
+  );
+
+  @doc("""
+    The `rtc.call.sdp.create` Live client event. With `transport=webrtc`, send it once, as the first message.
+    Foundry creates the session from the agent definition and uses only this offer.
+    """)
+  @usage(VoiceAgentClientEventUsage)
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  model VoiceAgentLiveClientEventRtcCallSdpCreate
+    extends OpenAI.LiveClientEvent {
+    @doc("The event type. Always `rtc.call.sdp.create`.")
+    type: VoiceAgentLiveClientEventTypeExtension.rtc_call_sdp_create;
+
+    @doc("An optional client-generated event identifier.")
+    event_id?: string;
+
+    @doc("The complete SDP offer, sent after ICE gathering. It must contain audio and no data channel or video.")
+    sdp_offer: string;
+  }
+
+  @doc("The `rtc.call.sdp.created` Live server event: the SDP answer for a `transport=webrtc` session. `session.started` follows.")
+  @usage(VoiceAgentServerEventUsage)
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  model VoiceAgentLiveServerEventRtcCallSdpCreated
+    extends OpenAI.LiveServerEvent {
+    @doc("The event type. Always `rtc.call.sdp.created`.")
+    type: VoiceAgentLiveServerEventTypeExtension.rtc_call_sdp_created;
+
+    @doc("The server-generated event identifier.")
+    event_id: string;
+
+    @doc("The SDP answer. Apply it as the peer connection's remote description.")
+    sdp_answer: string;
+
+    @doc("The Live session ID, the same as `session.id` in the following `session.started`.")
+    session_id: string;
   }
 
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Add Foundry persistence correlation to the primary session-started event without replacing native session metadata."

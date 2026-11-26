@@ -124,6 +124,8 @@ model VoiceAgentLiveWebSocketUpgradeResult {
 interface VoiceAgentLiveWebSocket {
   /**
    * Opens a Live session. Foundry sends session.start; clients wait for session.started.
+   * With transport=webrtc, clients first send rtc.call.sdp.create; Foundry creates the session and returns
+   * rtc.call.sdp.created, then session.started.
    * Do not negotiate the realtime WebSocket subprotocol on this route.
    * session.update changes backend settings, not the Foundry delegation target.
    * Foundry translates validated [thinking]/[commentary] sections into session.thinking.append/
@@ -152,8 +154,19 @@ interface VoiceAgentLiveWebSocket {
       /** URL-encoded JSON values for instruction and greeting templates. */
       @query structured_inputs?: string;
 
-      /** Overrides Foundry conversation and audio persistence for this session. */
+      /** Overrides Foundry conversation and audio persistence for this session. `transport=webrtc` requires an effective value of `false`. */
       @query store?: boolean;
+
+      /**
+       * Selects how audio is exchanged. Omit or send `websocket` to send and receive audio as Live events on this
+       * WebSocket. Send `webrtc` to exchange audio as WebRTC media directly with the GPT Live deployment; this
+       * WebSocket then carries the SDP exchange and all other Live commands and events. Send exactly one
+       * `rtc.call.sdp.create` with an audio-only offer as the first message. Do not create a data channel or send
+       * `session.input_audio.append`. WebRTC requires `model_type: self_deployed` and an effective `store` of
+       * `false`; otherwise the upgrade fails with `400`. If WebRTC is not available, the upgrade fails with `404`.
+       * A failed negotiation sends an `error` with code `webrtc_negotiation_failed` and closes the WebSocket.
+       */
+      @query transport?: VoiceAgentTransport;
     },
     VoiceAgentLiveWebSocketUpgradeResult
   >;
