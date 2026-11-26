@@ -7,7 +7,7 @@ import {
   MessageRecordSchema,
   MessageType,
 } from "./message.ts";
-import { parse } from "@azure-tools/github-core/ndjson";
+import { parse } from "./ndjson.ts";
 
 export default async function generateJobSummary({ core }: GitHubScriptArgs): Promise<void> {
   const avocadoOutputFile = process.env.AVOCADO_OUTPUT_FILE;

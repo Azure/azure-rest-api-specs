@@ -20,7 +20,7 @@ import { extractInputs } from "@azure-tools/github-core/context";
 import {
   TYPESPEC_SUPPRESSIONS_APPROVED_LABEL,
   TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL,
-} from "@azure-tools/github-core/label";
+} from "../label.ts";
 import { removeLabelIfPresent } from "../package-name-approval/labels.ts";
 import {
   buildSuppressionsComment,

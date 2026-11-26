@@ -10,7 +10,7 @@ const readFileMock = fs.readFile as import("vitest").Mock;
 
 import generateJobSummaryImpl from "../src/avocado-code.ts";
 import { MessageLevel, MessageType } from "../src/message.ts";
-import { stringify } from "@azure-tools/github-core/ndjson";
+import { stringify } from "../src/ndjson.ts";
 import { createMockCore } from "@azure-tools/github-core/test/mocks";
 
 const core = createMockCore();

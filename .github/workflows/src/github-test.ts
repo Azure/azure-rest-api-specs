@@ -1,4 +1,4 @@
-import type { Core } from "./github.ts";
+import type { Core } from "../../packages/github-core/src/github.ts";
 import { readdir } from "node:fs/promises";
 import { basename, join, normalize, sep } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -7,9 +7,11 @@ import { inspect } from "node:util";
 export default async function importAllModules({
   core,
   directories = ["."],
+  files = [],
 }: {
   core: Core;
   directories?: string[];
+  files?: string[];
 }) {
   const workspace = process.env.GITHUB_WORKSPACE;
   if (!workspace) {
@@ -38,11 +40,14 @@ export default async function importAllModules({
     scriptFiles.push(...found);
   }
 
+  scriptFiles.push(...files.map((file) => normalize(file)));
+  const uniqueFiles = [...new Set(scriptFiles)];
+
   core.info("Script Files:");
-  scriptFiles.map((file) => core.info(file));
+  uniqueFiles.map((file) => core.info(file));
   core.info("");
 
-  for (const file of scriptFiles) {
+  for (const file of uniqueFiles) {
     core.info(`Importing ${file}`);
 
     const fullPath = join(githubDir, file);

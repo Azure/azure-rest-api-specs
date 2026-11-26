@@ -17,7 +17,7 @@ import type { Core, GitHub, WorkflowRuns } from "@azure-tools/github-core/github
 import { execFile } from "../../../shared/src/exec.ts";
 import { PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
-import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "@azure-tools/github-core/label";
+import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
 
 import { createHash } from "node:crypto";
 import fs from "node:fs/promises";

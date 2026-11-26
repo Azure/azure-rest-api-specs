@@ -3,7 +3,7 @@
  * inside the 'Next Steps to Merge' comment.
  **/
 
-import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "@azure-tools/github-core/label";
+import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
 import { labelBadge } from "./label-badge.ts";
 import {
   inlineCode,

@@ -3,7 +3,7 @@ import { isFullGitSha } from "@azure-tools/specs-shared/git";
 import { getSdkLanguage, SdkName } from "@azure-tools/specs-shared/sdk-types";
 import type { GitHubScriptArgs, WebhookEvent } from "@azure-tools/github-core/github";
 import { publishStatus } from "./status.ts";
-import { sdkLabels } from "@azure-tools/github-core/sdk-labels";
+import { sdkLabels } from "../summarize-checks/labelling.ts";
 
 interface PullRequestFile {
   filename: string;

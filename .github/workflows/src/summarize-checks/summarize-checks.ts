@@ -50,7 +50,7 @@ import {
 import { statusBadge, type CommentStatus } from "./comment-status.ts";
 import { buildSdkBreakingChangesSummary, hasSdkBreakingChanges } from "./sdk-breaking-changes.ts";
 import { extractInputs } from "@azure-tools/github-core/context";
-import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "@azure-tools/github-core/label";
+import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
 import {
   ImpactAssessmentSchema,
   brChRevApproval,
