@@ -5,8 +5,6 @@ import "@azure-tools/typespec-azure-core";
 import "../common/servicepatterns.tsp";
 import "../agents/models.tsp";
 import "./protocol.tsp";
-
-using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.ClientGenerator.Core;
 
