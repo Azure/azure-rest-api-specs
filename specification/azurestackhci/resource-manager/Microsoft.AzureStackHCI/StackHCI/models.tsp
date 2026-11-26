@@ -1921,7 +1921,7 @@ union LifecycleOperationStatus {
   Completed: "Completed",
 
   /** Operation was skipped. */
-  @added(Versions.v2027_01_15_preview)
+  @added(Versions.v2027_01_01)
   Skipped: "Skipped",
 
   /** Operation has failed. */
@@ -2353,6 +2353,13 @@ model ClusterProperties {
   @added(Versions.v2027_01_01)
   @visibility(Lifecycle.Read)
   useManagedIdentityForWitness?: boolean;
+
+  /**
+   * Indicates whether to deploy AKS enabled by Azure Arc for the cluster. After an EnableAksArcDeployment job succeeds, this reflects the deployment intent acknowledged by the device, not whether AKS Arc is installed.
+   */
+  @added(Versions.v2027_01_15_preview)
+  @visibility(Lifecycle.Read)
+  deployAksArc?: boolean;
 }
 
 /**
@@ -8237,7 +8244,7 @@ model HardwareProfile {
   /**
    * Number of logical (SMT/hyper-threaded) cores in the machine, synchronized from Arc Machine DetectedProperties.
    */
-  @added(Versions.v2027_01_15_preview)
+  @added(Versions.v2027_01_01)
   @visibility(Lifecycle.Read)
   logicalCoreCount?: int64;
 }
