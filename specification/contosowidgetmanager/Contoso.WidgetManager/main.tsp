@@ -22,6 +22,10 @@ enum Versions {
 
   @doc("The 2022-12-01 version.")
   v2022_12_01: "2022-12-01",
+
+  @doc("The 2026-12-01-preview version.")
+  @previewVersion
+  v2026_12_01_Preview: "2026-12-01-preview",
 }
 
 @doc("A widget.")
@@ -37,6 +41,26 @@ model WidgetSuite {
 
   @doc("The faked shared model.")
   sharedModel?: FakedSharedModel;
+}
+
+@doc("Usage statistics for a widget over the last 30 days.")
+@added(Versions.v2026_12_01_Preview)
+@resource("usage")
+@parentResource(WidgetSuite)
+model WidgetUsage {
+  @key("usageId")
+  @doc("The usage singleton identifier.")
+  @visibility(Lifecycle.Read)
+  id: "current";
+
+  @doc("The number of times the widget was used in the last 30 days.")
+  usageCount: int64;
+
+  @doc("The start of the 30-day usage window.")
+  windowStart: utcDateTime;
+
+  @doc("The end of the 30-day usage window.")
+  windowEnd: utcDateTime;
 }
 
 interface Widgets {
@@ -61,4 +85,8 @@ interface Widgets {
       parameters: StandardListQueryParameters;
     }
   >;
+
+  @doc("Get how many times a Widget was used in the last 30 days.")
+  @added(Versions.v2026_12_01_Preview)
+  getWidgetUsage is ResourceRead<WidgetUsage>;
 }
