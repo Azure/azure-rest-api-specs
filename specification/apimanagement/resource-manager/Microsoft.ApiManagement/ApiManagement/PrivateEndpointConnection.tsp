@@ -15,6 +15,33 @@ namespace Microsoft.ApiManagement;
 model PrivateEndpointConnection is PrivateEndpointConnectionResource;
 alias PrivateEndpointOperations = PrivateEndpoints<PrivateEndpointConnection>;
 
+/** Legacy operations for private endpoint connections under an API Management service. */
+alias PrivateEndpointConnectionLegacyOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The name of the API Management service. */
+    @path
+    @segment("service")
+    @key
+    @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+    @minLength(1)
+    @maxLength(50)
+    serviceName: string;
+  },
+  {
+    /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
+    @path
+    @segment("privateEndpointConnections")
+    @key
+    privateEndpointConnectionName: string;
+  },
+  ResourceName = "ApiManagementServiceResourcePrivateEndpointConnection"
+>;
+
 @armResourceOperations
 interface PrivateEndpointConnections {
   /**
@@ -26,21 +53,13 @@ interface PrivateEndpointConnections {
    * Creates a new Private Endpoint Connection or updates an existing one.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
-    ApiManagementServiceResource,
+  createOrUpdate is PrivateEndpointConnectionLegacyOps.CreateOrUpdateAsync<
+    PrivateEndpointConnection,
     Request = PrivateEndpointConnectionRequest,
     Response =
       | ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection>
       | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
-          Azure.Core.Foundations.RetryAfterHeader>,
-    Parameters = {
-      /**
-       * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
-       */
-      @path
-      @segment("privateEndpointConnections")
-      privateEndpointConnectionName: string;
-    }
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

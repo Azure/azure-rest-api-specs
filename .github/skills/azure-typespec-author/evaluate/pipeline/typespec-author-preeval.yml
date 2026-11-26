@@ -1,0 +1,83 @@
+steps:
+  - script: |
+      set -e
+      BRANCH="${SKILL_BRANCH:-}"
+      if [ "$BRANCH" = '$(SkillBranch)' ]; then
+        BRANCH=""
+      fi
+      if [ -z "$BRANCH" ]; then
+        echo "SkillBranch not set; keep current checked-out skill files."
+        exit 0
+      fi
+
+      BRANCH_REF="$BRANCH"
+      case "$BRANCH_REF" in
+        refs/heads/*)
+          ;;
+        refs/remotes/origin/*)
+          BRANCH_REF="refs/heads/${BRANCH_REF#refs/remotes/origin/}"
+          ;;
+        origin/*)
+          BRANCH_REF="refs/heads/${BRANCH_REF#origin/}"
+          ;;
+        refs/*)
+          ;;
+        *)
+          BRANCH_REF="refs/heads/$BRANCH_REF"
+          ;;
+      esac
+
+      echo "Overlaying authoring and naming skills from: $BRANCH_REF"
+      git fetch origin "$BRANCH_REF"
+      rm -rf .github/skills/azure-typespec-author/SKILL.md \
+             .github/skills/azure-typespec-author/references \
+             .github/skills/azure-typespec-sdk-naming/SKILL.md \
+             .github/skills/azure-typespec-sdk-naming/references
+      git checkout FETCH_HEAD -- \
+        .github/skills/azure-typespec-author/SKILL.md \
+        .github/skills/azure-typespec-author/references
+      if git cat-file -e FETCH_HEAD:.github/skills/azure-typespec-sdk-naming/SKILL.md 2>/dev/null; then
+        git checkout FETCH_HEAD -- \
+          .github/skills/azure-typespec-sdk-naming/SKILL.md \
+          .github/skills/azure-typespec-sdk-naming/references
+      else
+        echo "Selected branch predates the naming skill; candidate naming sources remain removed."
+      fi
+      echo "Skill sources overlaid from $BRANCH_REF"
+    displayName: "Overlay skill source from SkillBranch (if set)"
+    env:
+      SKILL_BRANCH: $(SkillBranch)
+
+  - script: |
+      set -e
+      export NPM_CONFIG_USERCONFIG="$(Build.SourcesDirectory)/.npmrc"
+      node eng/scripts/install-pnpm.mts
+      pnpm install --frozen-lockfile
+      echo "##vso[task.prependpath]$(Build.SourcesDirectory)/node_modules/.bin"
+    displayName: "Install TypeSpec toolchain (pinned)"
+
+  - script: |
+      node --experimental-strip-types .github/skills/azure-typespec-author/evaluate/pipeline/typespec-author-prepare.ts \
+        --prepare \
+        --eval-root "$(Build.SourcesDirectory)/.github/skills/azure-typespec-author/evaluate" \
+        --mode "$BENCHMARK_MODE" \
+        --skill-root "$(Agent.TempDirectory)/typespec-benchmark-$(System.JobId)/skills"
+    displayName: "Prepare benchmark skill inputs and direct MCP startup"
+    env:
+      BENCHMARK_MODE: $(TypeSpecAuthorEvalMode)
+      AZSDK_EVAL_MCP_KIND: $(AZSDK_EVAL_MCP_KIND)
+
+  - script: |
+      set -e
+      echo "tsp version:"
+      tsp --version
+    displayName: "Verify TypeSpec toolchain on PATH"
+
+  - script: |
+      set -e
+      node .github/skills/azure-typespec-author/evaluate/scripts/setup-fixture-files.ts
+      FIXTURE_DIR="$(Build.SourcesDirectory)/.github/skills/azure-typespec-author/evaluate/fixtures/Microsoft.Widget/Widget"
+      export FIXTURE_NODE_MODULES="$(Build.SourcesDirectory)/node_modules"
+      (cd "$FIXTURE_DIR" && node "$(Build.SourcesDirectory)/.github/skills/azure-typespec-author/evaluate/scripts/check-node-dependencies.ts" packages)
+      echo "##vso[task.setvariable variable=FIXTURE_NODE_MODULES]$FIXTURE_NODE_MODULES"
+    displayName: "Prepare fixture files and node_modules"

@@ -2,14 +2,11 @@ import { describe, expect, it } from "vitest";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { fullGitSha } from "../../shared/test/examples.ts";
 import { extractInputs as extractInputsImpl } from "../src/context.ts";
+import type { Context, Core, GitHub } from "../src/github.ts";
 import { createMockCore, createMockGithub } from "./mocks.ts";
 
-function extractInputs(
-  github: import("./mocks.ts").GitHub,
-  context: unknown,
-  core: import("./mocks.ts").Core,
-) {
-  return extractInputsImpl(github, context as import("./mocks.ts").Context, core);
+function extractInputs(github: GitHub, context: unknown, core: Core) {
+  return extractInputsImpl(github, context as Context, core);
 }
 
 describe("extractInputs", () => {
@@ -192,14 +189,52 @@ describe("extractInputs", () => {
     );
   });
 
-  it("workflow_run:completed:pull_request (same repo)", async () => {
+  it.each([{ pullRequests: [{ number: 123 }] }, { pullRequests: [null, { number: 123 }, null] }])(
+    "workflow_run:completed:pull_request (same repo, $pullRequests)",
+    async ({ pullRequests }) => {
+      const context = {
+        eventName: "workflow_run",
+        payload: {
+          action: "completed",
+          workflow_run: {
+            event: "pull_request",
+            head_sha: "abc123",
+            id: 456,
+            repository: {
+              name: "TestRepoName",
+              owner: {
+                login: "TestRepoOwnerLogin",
+              },
+            },
+            pull_requests: pullRequests,
+          },
+        },
+      };
+
+      await expect(extractInputs(createMockGithub(), context, createMockCore())).resolves.toEqual({
+        owner: "TestRepoOwnerLogin",
+        repo: "TestRepoName",
+        head_sha: "abc123",
+        issue_number: 123,
+        run_id: 456,
+      });
+    },
+  );
+
+  it("workflow_run:completed:pull_request_target uses trusted correlation artifacts", async () => {
+    const github = createMockGithub();
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [{ name: `head-sha=${fullGitSha}` }, { name: "issue-number=123" }],
+      },
+    });
     const context = {
       eventName: "workflow_run",
       payload: {
         action: "completed",
         workflow_run: {
-          event: "pull_request",
-          head_sha: "abc123",
+          event: "pull_request_target",
+          head_sha: "payload-sha",
           id: 456,
           repository: {
             name: "TestRepoName",
@@ -212,14 +247,197 @@ describe("extractInputs", () => {
       },
     };
 
-    await expect(extractInputs(createMockGithub(), context, createMockCore())).resolves.toEqual({
+    await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
-      head_sha: "abc123",
+      head_sha: fullGitSha,
+      issue_number: 123,
+      run_id: 456,
+    });
+    expect(github.rest.actions.listWorkflowRunArtifacts).toHaveBeenCalledWith({
+      owner: "TestRepoOwnerLogin",
+      repo: "TestRepoName",
+      run_id: 456,
+      per_page: PER_PAGE_MAX,
+    });
+  });
+
+  it("workflow_run:completed:pull_request_target keeps the payload SHA when artifacts are missing", async () => {
+    const github = createMockGithub();
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: { artifacts: [] },
+    });
+    const context = {
+      eventName: "workflow_run",
+      payload: {
+        action: "completed",
+        workflow_run: {
+          event: "pull_request_target",
+          head_sha: "payload-sha",
+          id: 456,
+          repository: {
+            name: "TestRepoName",
+            owner: {
+              login: "TestRepoOwnerLogin",
+            },
+          },
+          pull_requests: [{ number: 123 }],
+        },
+      },
+    };
+
+    await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
+      owner: "TestRepoOwnerLogin",
+      repo: "TestRepoName",
+      head_sha: "payload-sha",
       issue_number: 123,
       run_id: 456,
     });
   });
+
+  it("workflow_run:completed:workflow_dispatch uses trusted correlation artifacts", async () => {
+    const github = createMockGithub();
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [{ name: `head-sha=${fullGitSha}` }, { name: "issue-number=123" }],
+      },
+    });
+    const context = {
+      eventName: "workflow_run",
+      payload: {
+        action: "completed",
+        workflow_run: {
+          event: "workflow_dispatch",
+          head_sha: "default-branch-sha",
+          id: 456,
+          repository: {
+            name: "TestRepoName",
+            owner: {
+              login: "TestRepoOwnerLogin",
+            },
+          },
+          pull_requests: [],
+        },
+      },
+    };
+
+    await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
+      owner: "TestRepoOwnerLogin",
+      repo: "TestRepoName",
+      head_sha: fullGitSha,
+      issue_number: 123,
+      run_id: 456,
+    });
+  });
+
+  it("workflow_run:completed:workflow_dispatch does not fall back to the payload SHA when artifacts are missing", async () => {
+    const github = createMockGithub();
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: { artifacts: [] },
+    });
+    const context = {
+      eventName: "workflow_run",
+      payload: {
+        action: "completed",
+        workflow_run: {
+          event: "workflow_dispatch",
+          head_sha: "default-branch-sha",
+          id: 456,
+          repository: {
+            name: "TestRepoName",
+            owner: {
+              login: "TestRepoOwnerLogin",
+            },
+          },
+          pull_requests: [],
+        },
+      },
+    };
+
+    await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
+      owner: "TestRepoOwnerLogin",
+      repo: "TestRepoName",
+      head_sha: "",
+      issue_number: NaN,
+      run_id: 456,
+    });
+    expect(github.rest.pulls.get).not.toHaveBeenCalled();
+  });
+
+  it("rejects conflicting workflow correlation artifacts", async () => {
+    const github = createMockGithub();
+    const context = {
+      eventName: "workflow_run",
+      payload: {
+        action: "completed",
+        workflow_run: {
+          event: "workflow_dispatch",
+          head_sha: "default-branch-sha",
+          id: 456,
+          repository: {
+            name: "TestRepoName",
+            owner: {
+              login: "TestRepoOwnerLogin",
+            },
+          },
+          pull_requests: [],
+        },
+      },
+    };
+
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [
+          { name: `head-sha=${fullGitSha}` },
+          { name: "head-sha=abcdefabcdefabcdefabcdefabcdefabcdefabcd" },
+        ],
+      },
+    });
+    await expect(extractInputs(github, context, createMockCore())).rejects.toThrow(
+      "Conflicting head-sha artifacts",
+    );
+
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [{ name: "issue-number=123" }, { name: "issue-number=456" }],
+      },
+    });
+    await expect(extractInputs(github, context, createMockCore())).rejects.toThrow(
+      "Conflicting issue-number artifacts",
+    );
+  });
+
+  it.each(["repository", "head_repository"])(
+    "rejects a workflow run with a null %s owner",
+    async (missingOwner) => {
+      const context = {
+        eventName: "workflow_run",
+        payload: {
+          action: "completed",
+          workflow_run: {
+            event: "pull_request",
+            head_sha: "abc123",
+            id: 456,
+            repository: {
+              name: "TestRepo",
+              owner: missingOwner === "repository" ? null : { login: "Azure" },
+            },
+            head_repository: {
+              name: "TestFork",
+              owner: missingOwner === "head_repository" ? null : { login: "contributor" },
+            },
+            pull_requests: missingOwner === "repository" ? [{ number: 123 }] : [null],
+          },
+        },
+      };
+      const github = createMockGithub();
+
+      await expect(extractInputs(github, context, createMockCore())).rejects.toThrow(
+        "Could not extract repository owner or name from context payload",
+      );
+      expect(github.rest.repos.listPullRequestsAssociatedWithCommit).not.toHaveBeenCalled();
+    },
+  );
 
   it.each([0, 1, 2, 3])(
     "workflow_run:completed:pull_request (fork repo, %s PRs)",
@@ -433,6 +651,57 @@ describe("extractInputs", () => {
       issue_number: NaN,
       run_id: 456,
     });
+  });
+
+  it("workflow_run:completed:workflow_run reads both values from one combined artifact", async () => {
+    const github = createMockGithub();
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [{ name: `head-sha=${fullGitSha};issue-number=123` }, { name: "unrelated=1" }],
+      },
+    });
+
+    const context = {
+      eventName: "workflow_run",
+      payload: {
+        action: "completed",
+        workflow_run: {
+          event: "workflow_run",
+          head_sha: "def456",
+          id: 456,
+          repository: { name: "TestRepoName", owner: { login: "TestRepoOwnerLogin" } },
+        },
+      },
+    };
+
+    await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
+      owner: "TestRepoOwnerLogin",
+      repo: "TestRepoName",
+      head_sha: fullGitSha,
+      issue_number: 123,
+      run_id: 456,
+    });
+
+    // A combined artifact is validated exactly like separate ones.
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: { artifacts: [{ name: "head-sha=not-full-git-sha;issue-number=123" }] },
+    });
+    await expect(extractInputs(github, context, createMockCore())).rejects.toThrow(
+      "head-sha is not a valid full git SHA",
+    );
+
+    // It also conflicts with a separate artifact that disagrees.
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [
+          { name: `head-sha=${fullGitSha};issue-number=123` },
+          { name: "issue-number=456" },
+        ],
+      },
+    });
+    await expect(extractInputs(github, context, createMockCore())).rejects.toThrow(
+      "Conflicting issue-number artifacts",
+    );
   });
 
   it("workflow_run:completed:unsupported", async () => {

@@ -65,6 +65,10 @@ suppressions:
   - from: service.json
     code: AvoidAdditionalProperties
     reason: Getting flagged in new API versions while inheriting old models, these fields exist in ASR from before and are required.
+  - from: service.json
+    code: XMSSecretInResponse
+    where: $.definitions.ExportJobDetails.properties.sasToken
+    reason: ExportJobDetails.sasToken is an existing response property inherited from prior API versions. Secret metadata is introduced in 2026-11-01; changing it in 2026-10-31-preview would create a cross-version schema break.
 ```
 
 ## Configuration
@@ -75,12 +79,39 @@ These are the global settings for the RecoveryServicesSiteRecovery API.
 
 ```yaml
 openapi-type: arm
-tag: package-2026-07-01
+tag: package-2026-11-01
 directive:
   - where:
       - $.paths
     suppress:
       - UniqueResourcePaths
+```
+
+### Tag: package-preview-2026-10-31-preview
+
+These settings apply only when `--tag=package-preview-2026-10-31-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-10-31-preview'
+input-file:
+  - preview/2026-10-31-preview/service.json
+```
+
+### Tag: package-2026-11-01
+
+These settings apply only when `--tag=package-2026-11-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-11-01'
+input-file:
+  - stable/2026-11-01/service.json
+```
+
+### Tag: package-preview-2026-08-31-preview
+
+These settings apply only when `--tag=package-preview-2026-08-31-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-08-31-preview'
+input-file:
+  - preview/2026-08-31-preview/service.json
 ```
 
 ### Tag: package-2026-07-01

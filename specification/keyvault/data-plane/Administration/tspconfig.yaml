@@ -26,13 +26,14 @@ options:
     "package-version": "4.5.0"
     "namespace": "azure.keyvault.administration._generated"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-keyvault-administration"
+    api-version: "2026-04-01"
   "@azure-tools/typespec-java":
-    api-version: "2026-01-01-preview"
     flavor: azure
     emitter-output-dir: "{output-dir}/{service-dir}/azure-security-keyvault-administration"
+    api-version: "2026-04-01"
     namespace: "com.azure.security.keyvault.administration"
     models-subpackage: "implementation.models"
-    custom-types: "KeyVaultDataAction,KeyVaultRoleDefinitionType,KeyVaultRoleScope,KeyVaultRoleType,KeyVaultSettingType"
+    custom-types: "KeyVaultDataAction,KeyVaultRoleDefinitionType,KeyVaultRoleScope,KeyVaultRoleType,KeyVaultSettingType,KeyVaultEkmConnectivityMode,KeyVaultEkmPrivateEndpoint,KeyVaultEkmPrivateEndpointProperties,KeyVaultEkmPrivateEndpointConnectionState,KeyVaultEkmPrivateEndpointConnectionStatus,KeyVaultEkmPrivateEndpointProvisioningState,KeyVaultEkmPrivateEndpointOperationType"
     custom-types-subpackage: "models"
     customization-class: "customizations/src/main/java/AdministrationCustomizations.java"
     use-eclipse-language-server: false
@@ -41,10 +42,12 @@ options:
     include-api-view-properties: false
   "@azure-typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    api-version: "2026-04-01"
     namespace: Azure.Security.KeyVault.Administration
     model-namespace: true
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/keyvault-admin"
+    api-version: "2026-04-01"
     experimental-extensible-enums: true
     package-details:
       name: "@azure/keyvault-admin"

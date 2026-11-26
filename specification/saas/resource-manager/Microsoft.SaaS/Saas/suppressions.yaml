@@ -1,3 +1,12 @@
+# Suppression continuity notes:
+# - The preview tag (package-2018-03-01-beta) has TypeSpecRequirement suppressed
+#   because the preview swagger remains live until client traffic reaches zero.
+# - The stable tag (package-2026-04-01) is authored in TypeSpec, so TypeSpecRequirement
+#   does not apply to stable/2026-04-01.
+
 - tool: TypeSpecRequirement
   path: ./preview/2018-03-01-beta/*.json
-  reason: Brownfield service not ready to migrate
+  reason: >-
+    Legacy preview spec predates TypeSpec adoption. The stable/2026-04-01 version
+    is authored in TypeSpec. The preview remains active until client traffic reaches
+    zero — deprecation is traffic-gated, not forced.

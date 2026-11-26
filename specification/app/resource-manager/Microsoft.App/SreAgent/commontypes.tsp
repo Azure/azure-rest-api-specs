@@ -1,8 +1,10 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
 using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 
@@ -14,12 +16,20 @@ model ResourceTags {
   tags?: Record<string>;
 }
 
-/** Base connector properties shared across Agent and AgentSpace connectors */
+/** Base connector properties */
 model Connector {
   /** Endpoint of the connector */
   endpoint?: url;
 
   /** Data source connection string or endpoint */
+  @removed(Versions.v2026_07_01)
+  @renamedFrom(Versions.v2026_07_01, "dataSource")
+  @secret
+  dataSourceV1?: string;
+
+  /** Data source connection string or endpoint supplied when creating or updating a connector. */
+  @added(Versions.v2026_07_01)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   @secret
   dataSource?: string;
 

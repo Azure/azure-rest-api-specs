@@ -26,6 +26,7 @@ namespace Azure.AI.Projects;
 // Fix the xref.
 // --------------------------------------------------------------------------------
 @@clientNamespace(OpenAI, "Azure.AI.Projects", "csharp");
+@@clientNamespace(Azure.AI.ProjectsInternal, "Azure.AI.Projects", "csharp");
 @@clientNamespace(Azure.Core.Foundations, "Azure.AI.Projects", "csharp");
 
 // --------------------------------------------------------------------------------
@@ -149,9 +150,15 @@ namespace Azure.AI.Projects;
   OpenAI.InputImageContentParamAutoParam,
   "InternalInputImageContentParamAutoParam"
 );
+@@clientName(
+  AzureAIModelTarget.sampling_params,
+  "SamplingParameters",
+  "csharp"
+);
 // --------------------------------------------------------------------------------
 // Evaluators sub‐client
 // --------------------------------------------------------------------------------
+@@access(Evaluators.listDiagnostics, Access.public);
 @@clientName(Evaluators.getCredentials, "GetCredential");
 @@access(Evaluators.getCredentials, Access.internal);
 @@access(Evaluators.startPendingUpload, Access.internal);
@@ -225,6 +232,11 @@ namespace Azure.AI.Projects;
 @@access(DataGenerationJobs.cancel, Access.internal);
 @@access(DataGenerationJobs.delete, Access.internal);
 
+@@access(DataGenerationJobInputs, Access.public);
+@@access(EvaluationDataGenerationJobInputs, Access.public);
+@@access(SupervisedFineTuningDataGenerationJobInputs, Access.public);
+@@access(ReinforcementFineTuningDataGenerationJobInputs, Access.public);
+
 @@clientName(DataGenerationJobType, "DataGenerationJobKind");
 @@clientName(TracesDataGenerationJobSource.end_time, "EndAt");
 @@clientName(TracesDataGenerationJobSource.start_time, "StartAt");
@@ -234,12 +246,6 @@ namespace Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // EvaluatorGenerationJobs sub‐client
 // --------------------------------------------------------------------------------
-// Hide the protocol methods and methods using feature headers
-@@access(EvaluatorGenerationJobs.get, Access.internal);
-@@access(EvaluatorGenerationJobs.create, Access.internal);
-@@access(EvaluatorGenerationJobs.cancel, Access.internal);
-@@access(EvaluatorGenerationJobs.delete, Access.internal);
-
 @@clientName(EvaluatorGenerationArtifacts.dataset, "Reference");
 @@clientName(EvaluatorGenerationArtifacts.kinds, "DatasetRowKinds");
 @@clientName(EvaluatorGenerationInputs.evaluator_description, "Description");
@@ -559,6 +565,16 @@ namespace Azure.AI.Projects;
     identity: "Azure.AI.Extensions.OpenAI.WebIQPreviewTool",
     package: "Azure.AI.Extensions.OpenAI",
     minVersion: "3.0.0-alpha.20260908.3",
+  },
+  "csharp"
+);
+
+@@alternateType(
+  Azure.AI.Projects.ModelSamplingParams,
+  {
+    identity: "Azure.AI.Projects.Agents.ModelSamplingParams",
+    package: "Azure.AI.Projects.Agents",
+    minVersion: "3.0.0-beta.6",
   },
   "csharp"
 );

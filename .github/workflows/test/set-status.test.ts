@@ -85,6 +85,50 @@ describe("setStatusImpl", () => {
     });
   });
 
+  it("links an approved status to the analyzer report", async () => {
+    github.rest.issues.listLabelsOnIssue.mockResolvedValue({
+      data: [{ name: "typespec-suppressions-approved" }],
+    });
+    github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
+      data: [
+        {
+          id: 456,
+          name: "TypeSpec Suppressions - Analyze Code",
+          status: CheckStatus.COMPLETED,
+          conclusion: CheckConclusion.FAILURE,
+          updated_at: "2026-09-29",
+          html_url: "https://test.com/typespec-suppressions-report",
+        },
+      ],
+    });
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: [{ name: "job-summary" }],
+    });
+
+    await setStatusImpl({
+      owner: "test-owner",
+      repo: "test-repo",
+      head_sha: fullGitSha,
+      issue_number: 123,
+      target_url: "https://test.com/set_status_url",
+      github,
+      core,
+      monitoredWorkflowName: "TypeSpec Suppressions - Analyze Code",
+      requiredStatusName: "TypeSpec Suppressions",
+      overridingLabel: "typespec-suppressions-approved",
+    });
+
+    expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith({
+      owner: "test-owner",
+      repo: "test-repo",
+      sha: fullGitSha,
+      state: CommitStatusState.SUCCESS,
+      context: "TypeSpec Suppressions",
+      description: "Found label 'typespec-suppressions-approved'",
+      target_url: "https://test.com/typespec-suppressions-report",
+    });
+  });
+
   it("sets success with multiple comma-separated labels - first label matches", async () => {
     github.rest.issues.listLabelsOnIssue.mockResolvedValue({
       data: [{ name: "test" }, { name: "BreakingChange-Approved-Benign" }],

@@ -161,6 +161,7 @@ op searchServicesListByResourceGroupCustomization(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
+#suppress "@azure-tools/typespec-azure-core/no-request-body" "Back compatibility: Retain the client-only GET signature whose request options carry a header rather than a wire payload."
 @autoRoute
 @get
 @action("searchGetCustomization")
@@ -253,6 +254,7 @@ op searchUpdateCustomization(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-action-verb" "Client-only override: retains existing action verb."
+#suppress "@azure-tools/typespec-azure-core/no-request-body" "Back compatibility: Retain the client-only service DELETE signature whose request options carry a header rather than a wire payload."
 @autoRoute
 @delete
 @action("searchDeleteCustomization")
@@ -311,6 +313,7 @@ op queryKeysCreateCustomization(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
+#suppress "@azure-tools/typespec-azure-core/no-request-body" "Back compatibility: Retain the client-only query-key DELETE signature with its explicit void body placeholder."
 @autoRoute
 @delete
 op queryKeysDeleteCustomization(
@@ -398,6 +401,7 @@ op queryKeysListBySearchServiceCustomization(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
+#suppress "@azure-tools/typespec-azure-core/no-request-body" "Back compatibility: Retain the client-only list signature whose request options carry a header rather than a wire payload."
 @autoRoute
 @get
 @action("privateEndpointConnectionsListByService")
@@ -424,6 +428,7 @@ op privateEndpointConnectionsListByServiceCustomization(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
+#suppress "@azure-tools/typespec-azure-core/no-request-body" "Back compatibility: Retain the client-only GET signature whose request options carry a header rather than a wire payload."
 @autoRoute
 @get
 op privateEndpointConnectionsGetCustomization(
@@ -493,6 +498,8 @@ op privateEndpointConnectionsUpdateCustomization(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
+#suppress "@azure-tools/typespec-azure-core/no-request-body" "Back compatibility: Retain the client-only private endpoint DELETE signature whose request options carry a header rather than a wire payload."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Existing DELETE 200 response body is retained for backward compatibility."
 @autoRoute
 @delete
 op privateEndpointConnectionsDeleteCustomization(
@@ -527,6 +534,7 @@ op privateEndpointConnectionsDeleteCustomization(
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Client-only override, not an ARM resource operation."
+#suppress "@azure-tools/typespec-azure-core/no-request-body" "Back compatibility: Retain the client-only list signature with its explicit void body placeholder."
 @autoRoute
 @get
 @action("privateLinkResourcesCustomization")
@@ -584,6 +592,7 @@ op privateLinkResourcesRegenerateCustomization(
 /**
  * Gets a list of all shared private link resources managed by the given service.
  */
+#suppress "@azure-tools/typespec-azure-core/no-request-body" "Back compatibility: Retain the client-only list signature whose request options carry a header rather than a wire payload."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Client-only override: retains client method name."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
@@ -611,6 +620,7 @@ op SharedPrivateLinkResourcesListByServiceCustomization(
 /**
  * Gets the details of the shared private link resource managed by the search service in the given resource group.
  */
+#suppress "@azure-tools/typespec-azure-core/no-request-body" "Back compatibility: Retain the client-only GET signature whose request options carry a header rather than a wire payload."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Client-only override: retains client method name."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
@@ -691,6 +701,7 @@ op SharedPrivateLinkResourcesCreateOrUpdateCustomization(
 /**
  * Initiates the deletion of the shared private link resource from the search service.
  */
+#suppress "@azure-tools/typespec-azure-core/no-request-body" "Back compatibility: Retain the client-only shared private link DELETE signature whose request options carry a header rather than a wire payload."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Client-only override: retains client method name."
 #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
 #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"

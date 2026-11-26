@@ -1,5 +1,5 @@
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
-import type { Core } from "./github.ts";
+import type { Core, GitHub } from "./github.ts";
 
 export type IssueComment = {
   id: number;
@@ -51,26 +51,32 @@ export function parseExistingComments(
  * @param issue_number - The issue or pull request number.
  * @param body - The markdown content of the comment.
  * @param commentIdentifier - The value that will be stored in an html comment so we can retrieve this comment later
+ * @param commentUser - Optional GitHub author login used to filter existing
+ * comments. When omitted, comments from all authors are considered.
  * @returns Resolves when the comment is created or updated.
  */
 export async function commentOrUpdate(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: GitHub,
   core: Core,
   owner: string,
   repo: string,
   issue_number: number,
   body: string,
   commentIdentifier: string,
+  commentUser?: string,
 ): Promise<void> {
   const computedBody = body + `\n<!-- ${commentIdentifier} -->`;
 
-  const comments: IssueComment[] = await github.paginate(github.rest.issues.listComments, {
+  let comments: IssueComment[] = await github.paginate(github.rest.issues.listComments, {
     owner,
     repo,
     issue_number,
     per_page: PER_PAGE_MAX,
   });
 
+  if (commentUser) {
+    comments = comments.filter((comment) => comment.user?.login === commentUser);
+  }
   const [commentId, commentBody] = parseExistingComments(comments, commentIdentifier);
 
   if (commentId) {

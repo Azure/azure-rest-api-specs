@@ -3,6 +3,8 @@
 // It is imported by the client.tsp file, which is used for emitting the Python and JS clients.
 // See https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/03client/#move-all-operations-to-root-client
 
+import "./ops-relocation-evaluators.tsp";
+
 using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects.Beta;
@@ -16,37 +18,6 @@ interface Models {}
 @@clientLocation(Azure.AI.Projects.Models.createAsync, Models);
 @@clientLocation(Azure.AI.Projects.Models.startPendingUpload, Models);
 @@clientLocation(Azure.AI.Projects.Models.getCredentials, Models);
-
-interface Evaluators {}
-@@clientLocation(Azure.AI.Projects.Evaluators.listVersions, Evaluators);
-@@clientLocation(Azure.AI.Projects.Evaluators.listLatestVersions, Evaluators);
-@@clientLocation(Azure.AI.Projects.Evaluators.getVersion, Evaluators);
-@@clientLocation(Azure.AI.Projects.Evaluators.deleteVersion, Evaluators);
-@@clientLocation(Azure.AI.Projects.Evaluators.createVersion, Evaluators);
-@@clientLocation(Azure.AI.Projects.Evaluators.updateVersion, Evaluators);
-@@clientLocation(Azure.AI.Projects.Evaluators.startPendingUpload, Evaluators);
-@@clientLocation(Azure.AI.Projects.Evaluators.getCredentials, Evaluators);
-
-@@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.create, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.get, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.list, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.cancel, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.delete, Evaluators);
-
-// These were removed from v1:
-// @@clientLocation(Azure.AI.Projects.EvaluationSuites.listVersions, Evaluators);
-// @@clientLocation(Azure.AI.Projects.EvaluationSuites.listLatest, Evaluators);
-// @@clientLocation(Azure.AI.Projects.EvaluationSuites.getVersion, Evaluators);
-// @@clientLocation(Azure.AI.Projects.EvaluationSuites.deleteVersion, Evaluators);
-// @@clientLocation(Azure.AI.Projects.EvaluationSuites.createOrUpdateVersion, Evaluators);
-// @@clientLocation(Azure.AI.Projects.EvaluationSuites.createEvaluationSuiteVersion, Evaluators);
-// @@clientLocation(Azure.AI.Projects.EvaluationSuites.run, Evaluators);
-
-// @@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.create, Evaluators);
-// @@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.get, Evaluators);
-// @@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.list, Evaluators);
-// @@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.cancel, Evaluators);
-// @@clientLocation(Azure.AI.Projects.EvaluationSuiteGenerationJobs.delete, Evaluators);
 
 interface Schedules {}
 @@clientLocation(Azure.AI.Projects.Schedules.delete, Schedules);
@@ -100,13 +71,6 @@ interface Skills {}
 @@clientLocation(Azure.AI.Projects.Skills.getSkillVersion, Skills);
 @@clientLocation(Azure.AI.Projects.Skills.getSkillVersionContent, Skills);
 @@clientLocation(Azure.AI.Projects.Skills.deleteSkillVersion, Skills);
-
-interface Datasets {}
-@@clientLocation(Azure.AI.Projects.DataGenerationJobs.get, Datasets);
-@@clientLocation(Azure.AI.Projects.DataGenerationJobs.list, Datasets);
-@@clientLocation(Azure.AI.Projects.DataGenerationJobs.create, Datasets);
-@@clientLocation(Azure.AI.Projects.DataGenerationJobs.cancel, Datasets);
-@@clientLocation(Azure.AI.Projects.DataGenerationJobs.delete, Datasets);
 
 interface Routines {}
 @@clientLocation(Azure.AI.Projects.Routines.createOrUpdateRoutine, Routines);

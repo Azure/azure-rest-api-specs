@@ -28,6 +28,7 @@ using Microsoft.ContainerRegistry;
 );
 
 @@usage(Webhook, Usage.input | Usage.output, "java");
+@@usage(TriggerStatus, Usage.input | Usage.output, "java");
 
 @@clientName(
   MyPrivateLinkResource,
@@ -35,7 +36,24 @@ using Microsoft.ContainerRegistry;
   "java,javascript,go,python"
 );
 
-@@clientName(IPRule.value, "$DO_NOT_NORMALIZE$iPAddressOrRange", "javascript");
+@@clientName(IPRule.value, exact("iPAddressOrRange"), "javascript");
+
+@@clientName(
+  AdditionalAuthenticationType.AwsElasticContainerRegistry,
+  "AWSElasticContainerRegistry",
+  "go"
+);
+@@clientName(EcrAuthenticationProperties, "ECRAuthenticationProperties", "go");
+@@clientName(
+  EcrAuthenticationUpdateProperties,
+  "ECRAuthenticationUpdateProperties",
+  "go"
+);
+@@clientName(
+  GarAuthenticationUpdateProperties,
+  "GARAuthenticationUpdateProperties",
+  "go"
+);
 
 // C# configurations for backward compatibility and naming conventions.
 // These settings restore the public API surface of the previous autorest-based SDK to avoid breaking changes.
@@ -61,6 +79,7 @@ using Microsoft.ContainerRegistry;
 // which matches the behavior of the previous SDK where the type was represented as a plain string.
 namespace Microsoft.ContainerRegistry {
   /** Extensible union for ContainerRegistryResourceType to accept both known enum values and arbitrary strings. */
+  #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Pre-existing SDK contract; preserve the existing extensible union representation."
   union ContainerRegistryResourceTypeExtensible {
     ContainerRegistryResourceType,
     string,
@@ -108,6 +127,17 @@ namespace Microsoft.ContainerRegistry {
 @@alternateType(
   CredentialSetUpdateParameters.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+// OptionalProperties propagates these UUID mappings to the partial-update model.
+@@alternateType(
+  EntraFederatedIdentityCredentialAuthenticationProperties.federatedApplicationClientId,
+  uuid,
+  "csharp"
+);
+@@alternateType(
+  EntraFederatedIdentityCredentialAuthenticationProperties.sourceTenantId,
+  uuid,
   "csharp"
 );
 @@alternateType(EventContent.id, uuid, "csharp");
@@ -182,6 +212,11 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(
   AdditionalAuthenticationProperties,
   "ContainerRegistryCacheAuthentication",
+  "csharp"
+);
+@@clientName(
+  AdditionalAuthenticationUpdateProperties,
+  "ContainerRegistryCacheAuthenticationUpdateProperties",
   "csharp"
 );
 @@clientName(Archive, "ContainerRegistryArchive", "csharp");
@@ -285,6 +320,31 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(
   GarAuthenticationProperties,
   "GoogleArtifactRegistryCacheAuthentication",
+  "csharp"
+);
+@@clientName(
+  GarAuthenticationUpdateProperties,
+  "GoogleArtifactRegistryCacheAuthenticationUpdateProperties",
+  "csharp"
+);
+@@clientName(
+  EcrAuthenticationProperties,
+  "AwsElasticContainerRegistryCacheAuthentication",
+  "csharp"
+);
+@@clientName(
+  EcrAuthenticationUpdateProperties,
+  "AwsElasticContainerRegistryCacheAuthenticationUpdateProperties",
+  "csharp"
+);
+@@clientName(
+  EntraFederatedIdentityCredentialAuthenticationProperties,
+  "EntraFederatedIdentityCredentialCacheAuthentication",
+  "csharp"
+);
+@@clientName(
+  EntraFederatedIdentityCredentialAuthenticationUpdateProperties,
+  "EntraFederatedIdentityCredentialCacheAuthenticationUpdateProperties",
   "csharp"
 );
 @@clientName(

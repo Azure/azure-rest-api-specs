@@ -18,15 +18,16 @@ jobs:
     name: SDK Breaking Change Labels
     runs-on: ubuntu-slim
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           sparse-checkout: |
             .github
 
       # Only run the login and get token steps when the repository is azure-rest-api-specs-pr
       - if: github.event.repository.name == 'azure-rest-api-specs-pr'
         name: Azure Login with Workload Identity Federation
-        uses: azure/login@v3
+        uses: azure/login@a641126d1b8aa4d1fa005f4f92df94a3a4c4c906 # v3.1.0
         with:
           client-id: "205398f1-715f-40a7-8d52-856097f28281"
           tenant-id: "72f988bf-86f1-41af-91ab-2d7cd011db47"
@@ -44,7 +45,7 @@ jobs:
 
       - name: Get label and action
         id: get-label-and-action
-        uses: actions/github-script@v8
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const { getLabelAndAction } =

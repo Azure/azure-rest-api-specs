@@ -1,0 +1,40 @@
+{
+  "title": "FailoverInstances_ForceFailoverAllowDataLoss",
+  "operationId": "FailoverInstances_ForceFailoverAllowDataLoss",
+  "parameters": {
+    "api-version": "2026-07-01-preview",
+    "subscriptionId": "194D3C1E-462F-4738-9025-092A628C06EB",
+    "resourceGroupName": "rgdurabletask",
+    "schedulerName": "testscheduler"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/194D3C1E-462F-4738-9025-092A628C06EB/providers/Microsoft.DurableTask/locations/westus/operationStatuses/5ab23810-c28e-4993-bc7e-d90ecf68ab3b?api-version=2026-07-01-preview",
+        "Retry-After": 30
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "replicationRole": "Primary",
+          "failoverState": "Succeeded",
+          "partnerSchedulerResourceId": "/subscriptions/194D3C1E-462F-4738-9025-092A628C06EB/resourceGroups/rgdurabletask-secondary/providers/Microsoft.DurableTask/schedulers/testscheduler-secondary",
+          "partnerSchedulerLocation": "westus2"
+        },
+        "id": "/subscriptions/194D3C1E-462F-4738-9025-092A628C06EB/resourceGroups/rgdurabletask/providers/Microsoft.DurableTask/schedulers/testscheduler/failoverInstances/default",
+        "name": "default",
+        "type": "Microsoft.DurableTask/schedulers/failoverInstances",
+        "systemData": {
+          "createdBy": "zshkmc",
+          "createdByType": "User",
+          "createdAt": "2025-03-31T23:34:09.612Z",
+          "lastModifiedBy": "ivqrae",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-07-13T18:35:52Z"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "operationId": "Documents_Get",
+  "title": "SearchIndexGetDocument",
+  "parameters": {
+    "endpoint": "https://typespecstableexampleservice.search.windows.net",
+    "key": "1",
+    "indexName": "stable-test",
+    "api-version": "2026-10-01",
+    "$select": [
+      "id",
+      "description",
+      "name",
+      "category",
+      "ownerId"
+    ],
+    "Accept": "application/json;odata.metadata=none",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "1",
+        "name": "test",
+        "description": "test1 hello",
+        "category": "purple",
+        "ownerId": "sam"
+      }
+    }
+  }
+}

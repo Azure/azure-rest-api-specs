@@ -1,0 +1,27 @@
+{
+  "operationId": "ProfessionalServiceSubscriptionLevel_ValidateUpdate",
+  "title": "Validate an update to an existing Professional Service resource",
+  "parameters": {
+    "subscriptionId": "1a950b42-75c2-44a6-ab02-fc0f840997aa",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "myPsResource",
+    "api-version": "2026-05-01",
+    "body": {
+      "tags": {
+        "environment": "production",
+        "costCenter": "CC-4820"
+      },
+      "properties": {
+        "quantity": 2
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "isValid": true,
+        "details": []
+      }
+    }
+  }
+}

@@ -237,6 +237,8 @@ model UpdateRunStatus {
   @visibility(Lifecycle.Read)
   @doc("Total member upgrade failures across the entire UpdateRun.")
   @added(Versions.v2026_06_02_preview)
+  @removed(Versions.v2026_11_01)
+  @added(Versions.v2026_11_02_preview)
   failureCount?: int32;
 }
 
@@ -270,11 +272,15 @@ model UpdateStageStatus {
   @visibility(Lifecycle.Read)
   @doc("The total member upgrade failures within the stage.")
   @added(Versions.v2026_06_02_preview)
+  @removed(Versions.v2026_11_01)
+  @added(Versions.v2026_11_02_preview)
   failureCount?: int32;
 
   @visibility(Lifecycle.Read)
   @doc("The max number of member upgrade failures allowed within this stage, resolved from the UpdateStrategy.UpdateStage.maxAllowedFailures value.")
   @added(Versions.v2026_06_02_preview)
+  @removed(Versions.v2026_11_01)
+  @added(Versions.v2026_11_02_preview)
   maxAllowedFailures?: int32;
 
   @visibility(Lifecycle.Read)
@@ -317,11 +323,15 @@ model UpdateGroupStatus {
   @visibility(Lifecycle.Read)
   @doc("The total member upgrade failures within the group.")
   @added(Versions.v2026_06_02_preview)
+  @removed(Versions.v2026_11_01)
+  @added(Versions.v2026_11_02_preview)
   failureCount?: int32;
 
   @visibility(Lifecycle.Read)
   @doc("The max number of member upgrade failures allowed within this group, resolved from the UpdateStrategy.UpdateGroup.maxAllowedFailures value.")
   @added(Versions.v2026_06_02_preview)
+  @removed(Versions.v2026_11_01)
+  @added(Versions.v2026_11_02_preview)
   maxAllowedFailures?: int32;
 
   @visibility(Lifecycle.Read)

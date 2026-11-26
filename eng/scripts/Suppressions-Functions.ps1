@@ -23,10 +23,11 @@ function Get-Suppressions {
 
   # -NoEnumerate to prevent single-element arrays from being collapsed to a single object
   # -AsHashtable is closer to raw JSON than PSCustomObject
-  $suppressions = pnpm exec get-suppressions $Tool $Path | ConvertFrom-Json -NoEnumerate -AsHashtable
+  $suppressionsScript = Join-Path $PSScriptRoot "../tools/suppressions/cmd/get-suppressions.js"
+  $suppressions = node $suppressionsScript $Tool $Path | ConvertFrom-Json -NoEnumerate -AsHashtable
 
   if ($LASTEXITCODE -ne 0) {
-    throw "Failure running 'pnpm exec get-suppressions'"
+    throw "Failure running 'node $suppressionsScript'"
   }
 
   return $suppressions;

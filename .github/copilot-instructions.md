@@ -7,6 +7,10 @@
      see copilot-review-instructions.md in this same directory.
      Docs: https://docs.github.com/en/copilot/concepts/agents/code-review -->
 
+# Shared engineering code (`eng/common`)
+
+Do not edit `eng/common` directly in this repository. It is synchronized shared code whose authoritative source is [`eng/common` in Azure/azure-sdk-tools](https://github.com/Azure/azure-sdk-tools/tree/main/eng/common). Author changes there, then let the normal sync process propagate them to this repository and other consuming repositories; local edits here will be overwritten by future syncs. See the [common engineering system documentation](https://github.com/Azure/azure-sdk-tools/blob/main/doc/common/common_engsys.md) for the contribution and sync workflow.
+
 # New TypeSpec projects
 
 Refer to [new-typespec-project.instructions.md](./instructions/typespec-project.instructions.md) for detailed steps on:
@@ -68,6 +72,10 @@ Follow [github-actions.instructions.md](./instructions/github-actions.instructio
 # eng/tools Development
 
 Follow [eng-tools.instructions.md](./instructions/eng-tools.instructions.md) for instructions on developing and testing the engineering tools under `eng/tools`. All tools in that directory follow the same patterns for development and testing.
+
+# Tooling documentation
+
+Keep READMEs focused on current contributor-facing guidance, not tooling history. Do not add documentation for routine dependency upgrades, internal refactors, or implementation changes when contributor commands, prerequisites, and workflows remain unchanged. When those do change, update the existing guidance rather than appending a migration narrative. Put upgrade rationale and implementation details in the PR description.
 
 <!-- LINKS -->
 

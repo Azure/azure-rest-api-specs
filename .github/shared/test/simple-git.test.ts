@@ -1,6 +1,6 @@
-import { mkdtemp, rm } from "fs/promises";
-import os from "os";
-import path from "path";
+import { mkdtemp, rm } from "node:fs/promises";
+import os from "node:os";
+import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { getRootFolder } from "../src/simple-git.ts";
 

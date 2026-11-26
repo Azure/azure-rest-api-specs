@@ -26,7 +26,7 @@ These are the global settings for the HybridCompute API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2026-07-15
+tag: package-2026-09-01
 directive:
   - from: HybridCompute.json
     where: $.definitions.MachineInstallPatchesParameters.properties.maximumDuration
@@ -62,7 +62,6 @@ directive:
       subject: NetworkProfile
     remove: true
 
-
   # internal operations
   - remove-operation: AgentVersion_List
   - remove-operation: AgentVersion_Get
@@ -76,6 +75,44 @@ directive:
   # we don't want enable PATCH for run command
   - remove-operation: MachineRunCommands_Update
 
+```
+
+### Tag: package-2026-09-01
+
+These settings apply only when `--tag=package-2026-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-09-01'
+input-file:
+  - stable/2026-09-01/openapi.json
+directive:
+  - suppress: XmsPageableForListCalls
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/applications/{applicationName}/instanceView"].get
+    reason: This is a point GET action for a single VM application's instance view, following the established Microsoft.Compute instanceView pattern; it is not a list operation.
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/applications/{applicationName}/instanceView"].get.responses["200"].schema.properties
+    reason: This is a point GET action returning a single VM application instance view, not a resource collection.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/applications/{applicationName}"].get.responses["200"].schema
+    reason: VmApplication.properties.provisioningState is emitted with readOnly true, but the validator does not follow the readOnly property through the shared ProvisioningState schema reference.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/applications/{applicationName}"].put.responses["200"].schema
+    reason: VmApplication.properties.provisioningState is emitted with readOnly true, but the validator does not follow the readOnly property through the shared ProvisioningState schema reference.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/applications/{applicationName}"].put.responses["201"].schema
+    reason: VmApplication.properties.provisioningState is emitted with readOnly true, but the validator does not follow the readOnly property through the shared ProvisioningState schema reference.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/applications/{applicationName}/instanceView"].get.responses["200"].schema
+    reason: VmApplication.properties.provisioningState is emitted with readOnly true, but the validator does not follow the readOnly property through the shared ProvisioningState schema reference.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/applications/{applicationName}"].patch.responses["200"].schema
+    reason: VmApplication.properties.provisioningState is emitted with readOnly true, but the validator does not follow the readOnly property through the shared ProvisioningState schema reference.
 ```
 
 ### Tag: package-2026-07-15

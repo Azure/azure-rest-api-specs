@@ -1,0 +1,36 @@
+{
+  "title": "Storages_DisableComplianceLock_MaximumSet - Disable compliance lock on storage (initiates MPA approval; status becomes DisablementPending)",
+  "operationId": "Storages_DisableComplianceLock",
+  "parameters": {
+    "api-version": "2026-07-03-preview",
+    "subscriptionId": "65D4E6D7-7063-4C4B-BAC5-13C45474009E",
+    "resourceGroupName": "rgcommvault",
+    "cloudAccountName": "myCloudAccount",
+    "storageName": "myStorage"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "location": "eastus2",
+          "storageType": "Air_Gap_Protect",
+          "vendor": "Azure_Blob_Storage",
+          "class": "HOT",
+          "provisioningState": "Succeeded",
+          "complianceLockStatus": "DisablementPending"
+        },
+        "id": "/subscriptions/65D4E6D7-7063-4C4B-BAC5-13C45474009E/resourceGroups/rgcommvault/providers/Commvault.ContentStore/cloudAccounts/myCloudAccount/storages/myStorage",
+        "name": "myStorage",
+        "type": "Commvault.ContentStore/cloudAccounts/storages",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-06-15T10:30:00Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-07-10T14:25:00Z"
+        }
+      }
+    }
+  }
+}

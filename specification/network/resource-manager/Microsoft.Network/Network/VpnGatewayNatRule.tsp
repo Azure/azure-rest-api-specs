@@ -1,0 +1,86 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./VpnGateway.tsp";
+import "./shared-models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.Network;
+/**
+ * VpnGatewayNatRule Resource.
+ */
+@featureFile(Features.virtualWAN)
+@parentResource(VpnGateway)
+model VpnGatewayNatRule is SubResourceInstance<VpnGatewayNatRuleProperties> {
+  /**
+   * The name of the resource that is unique within a resource group. This name can be used to access the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
+  @visibility(Lifecycle.Read)
+  @path
+  @key("natRuleName")
+  @segment("natRules")
+  name: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  etag?: string;
+}
+
+@featureFile(Features.virtualWAN)
+@armResourceOperations(#{ omitTags: true })
+interface VpnGatewayNatRules {
+  /**
+   * Retrieves the details of a nat ruleGet.
+   */
+  get is ArmResourceRead<VpnGatewayNatRule, Error = CloudError>;
+
+  /**
+   * Creates a nat rule to a scalable vpn gateway if it doesn't exist else updates the existing nat rules.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    VpnGatewayNatRule,
+    Error = CloudError
+  >;
+
+  /**
+   * Deletes a nat rule.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  delete is ArmResourceDeleteWithoutOkAsync<
+    VpnGatewayNatRule,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
+
+  /**
+   * Retrieves all nat rules for a particular virtual wan vpn gateway.
+   */
+  listByVpnGateway is ArmResourceListByParent<
+    VpnGatewayNatRule,
+    Response = ArmResponse<ListVpnGatewayNatRulesResult>,
+    Error = CloudError
+  >;
+}
+
+@@doc(
+  VpnGatewayNatRule.name,
+  "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+);
+@@doc(VpnGatewayNatRule.properties, "Properties of the VpnGateway NAT rule.");
+@@doc(
+  VpnGatewayNatRules.createOrUpdate::parameters.resource,
+  "Parameters supplied to create or Update a Nat Rule."
+);

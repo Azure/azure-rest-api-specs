@@ -15,7 +15,6 @@ const EvaluatorsRequiredPreviews = #{
 };
 
 @doc("The category of the evaluator")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorCategory {
   string,
 
@@ -30,7 +29,6 @@ union EvaluatorCategory {
 }
 
 @doc("The type of the evaluator")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorType {
   string,
 
@@ -42,7 +40,6 @@ union EvaluatorType {
 }
 
 @doc("The type of evaluator definition")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorDefinitionType {
   string,
 
@@ -71,7 +68,6 @@ union EvaluatorDefinitionType {
 #suppress "@azure-tools/typespec-azure-core/no-unknown"
 @doc("Base evaluator configuration with discriminator")
 @discriminator("type")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorDefinition {
   @doc("The type of evaluator definition")
   type: EvaluatorDefinitionType;
@@ -108,6 +104,7 @@ model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
   @doc("The container image tag to use for evaluator code execution")
   image_tag?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @extension(
     "x-ms-foundry-meta",
     #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
@@ -129,8 +126,104 @@ model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
 // Dimensions + Rubric-based Evaluator Definition
 // ============================================================================
 
-@doc("A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+const RubricScoringRequiredPreviews = #{
+  required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
+};
+
+@doc("The judgment mode selected for an entire rubric. Safety rubrics use Boolean judgments with separately reported allowed and disallowed behavior metrics.")
+@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+union RubricScoringMode {
+  string,
+
+  @doc("Ordinary rubrics require every applicable check to pass. Any failed check fails the rubric. Configured dimension weights are not supported; pass_threshold must be omitted or 1. The aggregate score is 1 for pass or 0 for fail. Safety rubrics instead report allowed and disallowed behavior violations separately, without an overall threshold or aggregate score.")
+  boolean: "boolean",
+
+  @doc("Grade applicable rubric dimensions from 1 through 5, with optional relative weights.")
+  likert: "likert",
+}
+
+@doc("Simple rubric scoring choices. Omission preserves existing legacy scoring.")
+@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+model RubricScoring {
+  @doc("Rubric-level scoring mode. Defaults to Likert when scoring is supplied. Omitting scoring preserves existing legacy behavior.")
+  mode?: RubricScoringMode = RubricScoringMode.likert;
+}
+
+alias RubricDimensionResultProperties = {
+  @doc("The dimension identifier.")
+  id: string;
+
+  @doc("Whether the dimension applies.")
+  applicable: boolean;
+
+  @doc("Brief evidence-based explanation.")
+  reason?: string;
+};
+
+@doc("A Boolean result for one rubric dimension.")
+@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+model BooleanRubricDimensionResult {
+  ...RubricDimensionResultProperties;
+
+  @doc("Boolean verdict. Required when the dimension is applicable; absent for N/A.")
+  passed?: boolean;
+}
+
+@doc("A Likert result for one rubric dimension.")
+@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+model LikertRubricDimensionResult {
+  ...RubricDimensionResultProperties;
+
+  @doc("Explicitly configured Likert weight. Omitted for every dimension when weights are implicit. If configured, every dimension includes a weight.")
+  @minValue(1)
+  @maxValue(10)
+  weight?: int32;
+
+  @doc("Normalized weight among applicable Likert dimensions.")
+  @minValue(0)
+  @maxValue(1)
+  effective_weight?: float64;
+
+  @doc("Contribution to the normalized Likert aggregate: effective_weight * (raw_score - 1) / 4.")
+  @minValue(0)
+  @maxValue(1)
+  contribution?: float64;
+
+  @doc("Applicable Likert grade. Absent for N/A.")
+  @minValue(1)
+  @maxValue(5)
+  raw_score?: int32;
+}
+
+@doc("Flat rubric result properties selected by the existing mode field.")
+@discriminator("mode")
+@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+model RubricResultProperties {
+  @doc("The resolved rubric scoring mode.")
+  mode: RubricScoringMode;
+}
+
+@doc("Flat result properties for explicit Boolean rubric scoring.")
+@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+model BooleanRubricResultProperties extends RubricResultProperties {
+  @doc("The resolved Boolean scoring mode.")
+  mode: RubricScoringMode.boolean;
+
+  @doc("One Boolean judgment for every configured dimension.")
+  dimension_results: BooleanRubricDimensionResult[];
+}
+
+@doc("Flat result properties for explicit Likert rubric scoring.")
+@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+model LikertRubricResultProperties extends RubricResultProperties {
+  @doc("The resolved Likert scoring mode.")
+  mode: RubricScoringMode.likert;
+
+  @doc("One Likert judgment for every configured dimension.")
+  dimension_results: LikertRubricDimensionResult[];
+}
+
+@doc("One measurable criterion within a rubric. Quality criteria may use rating weights; safety criteria classify a behavior as allowed or disallowed.")
 model Dimension {
   @doc("Stable identifier for this dimension (snake_case, e.g., `correct_resolution`). Required. Provided by the user when manually creating a rubric evaluator or during human-in-the-loop review of a generated set; the generation pipeline produces an initial value the user can edit. Editable when saving new versions.")
   id: string;
@@ -138,57 +231,75 @@ model Dimension {
   @doc("What this dimension measures (e.g., 'Correctly identifies the user's reservation intent and pursues the appropriate workflow').")
   description: string;
 
-  @doc("Relative weight of this dimension (1-10). The generation pipeline assigns exactly one dimension weight 8-10; all others use 1-6. User edits are not constrained by this heuristic.")
+  @doc("Safety behavior classification: true means allowed behavior and false means disallowed behavior. Required on every safety criterion instead of weight. This is not an evaluation verdict. Omit for ordinary quality criteria; omission never defaults a safety criterion to false. Preserved through edits and regeneration.")
+  @extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+  allowed?: boolean;
+
+  @doc("Optional configured weight for legacy or Likert scoring. For Likert, omit every weight for equal contribution or supply a weight for every dimension; partially weighted definitions are rejected. Boolean scoring rejects every configured weight, including explicit unit weights. No schema default is emitted.")
   @minValue(1)
   @maxValue(10)
-  weight: int32;
+  weight?: int32;
+
+  @doc("Read-only model-suggested weight (1-10) returned for unweighted Likert dimensions.")
+  @visibility(Lifecycle.Read)
+  @minValue(1)
+  @maxValue(10)
+  generated_weight?: int32;
 
   @doc("When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions. The service defaults to `false` if a value is not specified by the caller.")
   always_applicable?: boolean = false;
 }
 
-@doc("Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("Rubric evaluator definition. Ordinary quality rubrics report one aggregate. Safety rubrics require Boolean scoring and an explicit allowed classification on every dimension, and report disallowed_behavior_violated and allowed_behavior_violated as two independent lower-is-better metrics. Safety rubrics have no weights, threshold, or combined safety score.")
 model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.rubric;
 
-  @doc("The set of dimensions — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual dimension with id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same Dimension structure.")
+  @doc("The rubric criteria. Safety dimensions require allowed and omit weight. Rating generation includes a service residual; Boolean generation does not inject a generic residual. Existing ordinary and legacy definitions retain their behavior.")
   dimensions: Dimension[];
 
-  @doc("Pass/fail threshold for the aggregate rubric score, on the same normalized 0.0-1.0 scale as the emitted `score`. When the runtime weighted average meets or exceeds this value, the result is `pass`. Defaults to 0.5 (equivalent to a raw 1-5 weighted average of 3.0). The 'any dimension scored 1 → fail' rule still applies regardless of this threshold.")
+  @doc("Optional normalized threshold for Likert scoring, interpreted as 0.5 when omitted. Ordinary Boolean scoring requires all applicable checks to pass: omit this field or set it to 1; its effective threshold is 1 and other values are rejected. Safety rubrics omit this field and report two separate metrics without an overall threshold.")
   @minValue(0.0)
   @maxValue(1.0)
-  pass_threshold?: float32 = 0.5;
+  pass_threshold?: float32;
+
+  @doc("Simple scoring choices. Omission preserves existing legacy scoring for existing clients. No policy version is required from the caller.")
+  @extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+  scoring?: RubricScoring;
 }
 
 @doc("Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EndpointBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.endpoint;
 
   @doc("Name of the Project Connection that stores the endpoint URL and credentials. The connection must exist on the project and have a non-empty target URL. Supported auth types: ApiKey (sends `api-key` header) and AAD/Entra ID (acquires a bearer token via the project's Managed Identity).")
   @minLength(1)
   connection_name: string;
+
+  @doc("Version of the contract between the service and the evaluator endpoint. Optional on create; if omitted, the service uses `0.0.1`, so existing clients that do not send this property are unaffected. Stored evaluator versions keep the value they were created with. Registration rejects values the service does not support; the type stays extensible so responses can return newer versions. Version `0.0.2` requires `metrics` to contain exactly one metric, of type `ordinal` or `continuous`.")
+  schema_version?: EndpointEvaluatorSchemaVersion = EndpointEvaluatorSchemaVersion.v0_0_1;
+}
+
+@doc("Contract version for an endpoint-based evaluator.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union EndpointEvaluatorSchemaVersion {
+  string,
+
+  @doc("Contract version 0.0.1.")
+  v0_0_1: "0.0.1",
+
+  @doc("Contract version 0.0.2. Registration requires `metrics` to contain exactly one metric, of type `ordinal` or `continuous`.")
+  v0_0_2: "0.0.2",
 }
 
 // ============================================================================
 // Generation artifacts (provenance for evaluators created via generation jobs)
 // ============================================================================
 
-@doc("Reference to a versioned Foundry Dataset.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model DatasetReference {
-  @doc("Dataset name.")
-  name: string;
-
-  @doc("Dataset version.")
-  version: string;
-}
-
 @doc("Service-managed provenance artifacts produced by an evaluator generation job. Present only on EvaluatorVersion resources created via the generation pipeline. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorGenerationArtifacts {
   @doc("Reference to the single Foundry Dataset (one combined JSONL file, version-aligned to `EvaluatorVersion.version`) holding all artifacts produced by the generation pipeline. Each row in the JSONL carries a `kind` field discriminating its content (e.g. `spec`, `tools`, `context`).")
-  dataset: DatasetReference;
+  dataset: VersionedDatasetReference;
 
   @doc("The kinds of rows present in `dataset`. Always contains `\"spec\"` (the generated evaluation specification, a Markdown document describing what the evaluator measures). May additionally contain `\"tools\"` (when the generation pipeline produced or inferred OpenAI tool schemas) and/or `\"context\"` (when supplementary materials such as file uploads or trace samples were used during generation).")
   kinds: string[];
@@ -202,7 +313,6 @@ model EvaluatorGenerationArtifacts {
 // ============================================================================
 
 @doc("The supported source types for evaluator generation jobs.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorGenerationJobSourceType {
   string,
 
@@ -221,7 +331,6 @@ union EvaluatorGenerationJobSourceType {
 
 @doc("The base source model for evaluator generation jobs. Polymorphic over `type`.")
 @discriminator("type")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorGenerationJobSource {
   @doc("The type of source.")
   type: EvaluatorGenerationJobSourceType;
@@ -232,25 +341,24 @@ model EvaluatorGenerationJobSource {
 // the discriminated base would emit `description` twice in the union.
 
 @doc("Prompt source for evaluator generation jobs — inline text provided by the user.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model PromptEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   ...PromptJobSource;
 }
 
 @doc("Agent source for evaluator generation jobs — references an agent to fetch instructions and metadata from.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model AgentEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   ...AgentJobSource;
 }
 
 @doc("Traces source for evaluator generation jobs — conversation traces from Application Insights.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model TracesEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   ...TracesJobSource;
+
+  @doc("Optional explicit list of trace IDs to include.")
+  trace_ids?: string[];
 }
 
 @doc("Dataset source for evaluator generation jobs — reference to a dataset.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model DatasetEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   ...DatasetJobSource;
 }
@@ -259,14 +367,29 @@ model DatasetEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
 // Evaluator Generation Job (LRO — follows DataGenerationJob pattern)
 // ============================================================================
 
+@doc("The requested evaluator generation category.")
+@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+union EvaluatorGenerationCategory {
+  string,
+
+  @doc("Generate an ordinary quality rubric, preserving existing scoring and regeneration behavior.")
+  quality: "quality",
+
+  @doc("Generate or regenerate a safety rubric with Boolean judgments, explicit allowed/disallowed classifications, and two separate violation metrics.")
+  safety: "safety",
+}
+
 @doc("Caller-supplied inputs for an evaluator generation job.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorGenerationInputs {
-  @doc("Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`.")
+  @doc("Source materials for generation. Safety generation requires a nonempty prompt source for the objective and at least one agent or trace source for application context. An arbitrary dataset cannot replace safety application context. Ordinary generation keeps its existing supported sources.")
   sources: EvaluatorGenerationJobSource[];
 
-  @doc("The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required — users must provide their own model rather than relying on service-owned capacity.")
-  `model`: string;
+  @doc("Generation intent. Omission preserves the existing quality path. Explicitly select safety for safety generation and regeneration. Safety output uses Boolean scoring, allowed classifications, and two named violation metrics.")
+  @extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+  category?: EvaluatorGenerationCategory;
+
+  @doc("The caller's model for quality rubric generation (e.g., 'gpt-4o'). Required by the service when category is quality or omitted. Safety generation and regeneration use centrally managed red teaming simulation capacity, ignore this field when supplied, and do not fall back to caller capacity. Safety rubric scoring separately uses centrally managed red teaming evaluator capacity.")
+  `model`?: string;
 
   @doc("The evaluator name (immutable identifier). 1-256 characters; allowed characters are ASCII letters, digits, underscore (`_`), period (`.`), tilde (`~`), and hyphen (`-`). The prefix `builtin.` is reserved for system-managed evaluators and is rejected by the service. If an evaluator with this name already exists in the project (and is rubric-subtype), the service creates a new version under the same name and uses the prior version's `dimensions` as context for incremental improvement (foundation of the post-//build adaptive loop). Old versions remain queryable via `get_version(name, version)`. If the existing evaluator is not a rubric-subtype evaluator (built-in, prompt-based, code-based), the request is rejected with `400 Bad Request`.")
   @minLength(1)
@@ -279,10 +402,21 @@ model EvaluatorGenerationInputs {
 
   @doc("Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models.")
   evaluator_description?: string;
+
+  @doc("Scoring choices for the generated evaluator. For quality, supplied scoring defaults to Likert; omitted weights on first creation yield equal contribution, and regeneration preserves saved choices. Omitting scoring preserves existing quality generation behavior. Safety generation resolves omitted scoring to Boolean and rejects a conflicting supplied mode; its dimensions use allowed rather than weights and its two metric results are not combined.")
+  @extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+  scoring?: RubricScoring;
+
+  @doc("Optional normalized Likert threshold: omission uses 0.5 for fresh generation and inherits the saved threshold on regeneration. For ordinary Boolean generation, omit this field or set it to 1; other values are rejected and its all-pass threshold is fixed at 1. Safety generation omits this field because its two violation metrics have no overall threshold.")
+  @minValue(0.0)
+  @maxValue(1.0)
+  pass_threshold?: float32;
+
+  @doc("Caller-approved dimensions to preserve while generating other checks. Omission preserves prior approved dimensions on regeneration; an explicit list replaces the fixed set. Safety fixed dimensions require an explicit allowed Boolean, omit weights, and preserve classification as part of their policy meaning.")
+  dimensions?: Dimension[];
 }
 
 @doc("Token consumption summary for an evaluator generation job. Populated when the job reaches a terminal state.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorGenerationTokenUsage {
   @doc("Number of input (prompt) tokens consumed.")
   input_tokens: int64;
@@ -300,7 +434,6 @@ model EvaluatorGenerationTokenUsage {
 // ============================================================================
 
 @doc("Warning source attribution for a rubric-generation input-quality warning. Per-source values (`prompt`, `agent`, `dataset`) match the source category visible to the generation runtime. `aggregate` is a synthetic value used only for warnings computed across successfully resolved sources. `traces` is not exposed because trace sources resolve into dataset content upstream.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union RubricGenerationInputQualityWarningSource {
   string,
 
@@ -318,7 +451,6 @@ union RubricGenerationInputQualityWarningSource {
 }
 
 @doc("Advisory severity for a rubric-generation input-quality warning. Initial value set: `warning`.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union RubricGenerationInputQualityWarningSeverity {
   string,
 
@@ -327,7 +459,6 @@ union RubricGenerationInputQualityWarningSeverity {
 }
 
 @doc("Stable searchable machine-readable warning code for a rubric-generation input-quality warning. Values are `snake_case`; clients must tolerate additional service-defined identifiers.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union RubricGenerationInputQualityWarningCode {
   string,
 
@@ -357,7 +488,6 @@ union RubricGenerationInputQualityWarningCode {
 }
 
 @doc("A non-fatal advisory produced during rubric evaluator generation when resolved inputs are technically valid but likely too weak to produce a high-quality rubric. Read-only; service-generated. Persisted with the terminal EvaluatorGenerationJob.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model RubricGenerationInputQualityWarning {
   @doc("Stable searchable machine-readable warning code.")
   code: RubricGenerationInputQualityWarningCode;
@@ -371,13 +501,12 @@ model RubricGenerationInputQualityWarning {
   @doc("Which source category the warning applies to. `aggregate` is used only for cross-source warnings.")
   source: RubricGenerationInputQualityWarningSource;
 
-  @doc("Zero-based index into `EvaluatorGenerationJob.inputs.sources` when the warning applies to a specific source. Omitted for aggregate warnings and for warnings not tied to one source.")
+  @doc("Zero-based index into `EvaluatorGenerationJob.sources` when the warning applies to a specific source. Omitted for aggregate warnings and for warnings not tied to one source.")
   @minValue(0)
   source_index?: int32;
 }
 
 @doc("Category of a warning surfaced on a generated evaluator version. Extensible so new warning categories (e.g., safety, output quality) can be introduced without a breaking change.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union GenerationWarningType {
   string,
 
@@ -386,11 +515,45 @@ union GenerationWarningType {
 }
 
 @doc("Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model EvaluatorGenerationJob is JobLike<
-  EvaluatorVersion,
-  EvaluatorGenerationInputs
-> {
+model EvaluatorGenerationJob is JobLike<EvaluatorVersion, never> {
+  @doc("Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`.")
+  sources: EvaluatorGenerationJobSource[];
+
+  @doc("Generation intent selected or inherited for this generation attempt. Omitted when no category was supplied.")
+  @visibility(Lifecycle.Read)
+  @extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+  category?: EvaluatorGenerationCategory;
+
+  @doc("The LLM model used for quality rubric generation (e.g., 'gpt-4o'). Empty when safety generation uses centrally managed simulation capacity.")
+  `model`: string;
+
+  @doc("The evaluator name (immutable identifier). 1-256 characters; allowed characters are ASCII letters, digits, underscore (`_`), period (`.`), tilde (`~`), and hyphen (`-`). The prefix `builtin.` is reserved for system-managed evaluators and is rejected by the service. If an evaluator with this name already exists in the project (and is rubric-subtype), the service creates a new version under the same name and uses the prior version's `dimensions` as context for incremental improvement (foundation of the post-//build adaptive loop). Old versions remain queryable via `get_version(name, version)`. If the existing evaluator is not a rubric-subtype evaluator (built-in, prompt-based, code-based), the request is rejected with `400 Bad Request`.")
+  @minLength(1)
+  @maxLength(256)
+  @pattern("^[A-Za-z0-9_.~-]+$")
+  evaluator_name: string;
+
+  @doc("Optional human-friendly display name for the resulting evaluator. Surfaced as `EvaluatorVersion.display_name` on the persisted evaluator. When omitted, the service uses `evaluator_name` as the display name. The `evaluator_` prefix disambiguates this from the immutable `evaluator_name` identifier.")
+  evaluator_display_name?: string;
+
+  @doc("Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models.")
+  evaluator_description?: string;
+
+  @doc("Rubric scoring selected for this generation attempt, including an inherited saved mode. Omitted for legacy generation.")
+  @visibility(Lifecycle.Read)
+  @extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+  scoring?: RubricScoring;
+
+  @doc("Normalized pass threshold supplied or inherited for this generation attempt. Omitted when no threshold was supplied or saved. Boolean scoring always uses an effective threshold of 1.")
+  @visibility(Lifecycle.Read)
+  @minValue(0.0)
+  @maxValue(1.0)
+  pass_threshold?: float32;
+
+  @doc("Caller-approved dimensions fixed for this generation attempt, not the complete generated result. Omission retains normal regeneration ownership handling; an empty list explicitly clears the fixed set.")
+  @visibility(Lifecycle.Read)
+  dimensions?: Dimension[];
+
   @doc("The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).")
   @visibility(Lifecycle.Read)
   created_at: FoundryTimestamp;
@@ -410,7 +573,6 @@ model EvaluatorGenerationJob is JobLike<
 
 @doc("Evaluator Definition")
 @resource("evaluators")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorVersion {
   @doc("Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique.")
   display_name?: string;
@@ -460,18 +622,14 @@ model EvaluatorVersion {
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
-)
 @doc("Request body for getting evaluator credentials")
 model EvaluatorCredentialRequest {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The blob URI for the evaluator storage. Example: `https://account.blob.core.windows.net:443/container`")
   blob_uri: url;
 }
 
 @doc("Evaluator Metric")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorMetric {
   @doc("Type of the metric.")
   type?: EvaluatorMetricType;
@@ -493,7 +651,6 @@ model EvaluatorMetric {
 }
 
 @doc("The type of the evaluator")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorMetricType {
   string,
 
@@ -508,7 +665,6 @@ union EvaluatorMetricType {
 }
 
 @doc("The direction of the metric indicating whether a higher value is better, a lower value is better, or neutral")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorMetricDirection {
   string,
 

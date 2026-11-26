@@ -32,6 +32,8 @@ and followed the instructions by checking all the boxes:
   [REST guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md) (estimated time: 4 hours).  
   I understand this is required before I can proceed to the diagram Step 2, "ARM API changes review", for this PR.
 - [ ] A [release plan](https://aka.ms/azsdkdocs/release-plans) has been created. If not, please create one as it will help guide you through the REST API and SDK creation process. 
+- [ ] **Authors:** I have checked every new or changed TypeSpec suppression (`#suppress`) in this PR. Each one is needed and has a clear justification that explains why the rule doesn't apply. Suppressions that can be fixed have been removed.
+- [ ] **ARM reviewers:** When `typespec-suppressions-review-required` is applied, I have reviewed the TypeSpec suppressions and their justifications before applying `typespec-suppressions-approved` to clear the `TypeSpec Suppressions` check.
 
 ## Additional information
 

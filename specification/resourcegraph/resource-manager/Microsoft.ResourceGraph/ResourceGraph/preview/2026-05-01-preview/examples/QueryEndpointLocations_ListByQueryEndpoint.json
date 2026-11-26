@@ -1,0 +1,34 @@
+{
+  "operationId": "QueryEndpointLocations_ListByQueryEndpoint",
+  "title": "List the Azure regions a query endpoint can be activated in",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "offeringName": "contoso-insights",
+    "queryEndpointName": "topology-explorer"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceGraph/offerings/contoso-insights/queryEndpoints/topology-explorer/locations/westus2",
+            "name": "westus2",
+            "type": "Microsoft.ResourceGraph/offerings/queryEndpoints/locations",
+            "properties": {
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceGraph/offerings/contoso-insights/queryEndpoints/topology-explorer/locations/eastus",
+            "name": "eastus",
+            "type": "Microsoft.ResourceGraph/offerings/queryEndpoints/locations",
+            "properties": {
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
