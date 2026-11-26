@@ -36,3 +36,14 @@ using Microsoft.DigitalAssets;
 @@clientName(ZkpRollupPatchProperties.bootNodeIp, "BootNodeIP", "go");
 @@clientName(ZkpRollupPatchProperties.bootNodeP2pPort, "BootNodeP2PPort", "go");
 @@clientName(ZkpRollupPatchProperties.bootNodeRpcPort, "BootNodeRPCPort", "go");
+
+@@clientName(Partition, "ZkpRollupPartition", "csharp");
+@@clientName(PartitionProperties, "ZkpRollupPartitionProperties", "csharp");
+@@clientName(OperationalStatus, "DigitalAssetsOperationalStatus", "csharp");
+@@clientName(OperationalStatus.validUntil, "ExpiresOn", "csharp");
+@@clientName(ProvisioningState, "DigitalAssetsProvisioningState", "csharp");
+@@alternateType(
+  ZkpRollupUpdate.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
