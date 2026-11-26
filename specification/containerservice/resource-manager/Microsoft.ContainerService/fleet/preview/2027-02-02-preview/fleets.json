@@ -327,6 +327,9 @@
         "x-ms-examples": {
           "Creates a Fleet resource with a long running operation.": {
             "$ref": "./examples/Fleets_CreateOrUpdate.json"
+          },
+          "Creates or updates a Fleet with customer-specified outbound public IP addresses.": {
+            "$ref": "./examples/Fleets_CreateOrUpdate_WithEgressPublicIps.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1895,6 +1898,64 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/listMemberCredentials": {
+      "post": {
+        "operationId": "Fleets_ListMemberCredentials",
+        "tags": [
+          "Fleets"
+        ],
+        "description": "Lists the Kubernetes credentials of the Fleet members.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FleetMemberCredentialRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetMemberCredentialResults"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists credentials for the members of a Fleet.": {
+            "$ref": "./examples/Fleets_ListMemberCredentials.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/managedNamespaces": {
       "get": {
         "operationId": "FleetManagedNamespaces_ListByFleet",
@@ -2279,6 +2340,133 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/managedNamespaces/{managedNamespaceName}/listCredentials": {
+      "post": {
+        "operationId": "FleetManagedNamespaces_ListCredentials",
+        "tags": [
+          "FleetManagedNamespaces"
+        ],
+        "description": "Lists the Fleet hub credentials scoped to the managed namespace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "managedNamespaceName",
+            "in": "path",
+            "description": "The name of the fleet managed namespace resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetManagedNamespaceCredentialResults"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the Fleet hub credentials scoped to a managed namespace.": {
+            "$ref": "./examples/FleetManagedNamespaces_ListCredentials.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/managedNamespaces/{managedNamespaceName}/listMemberCredentials": {
+      "post": {
+        "operationId": "FleetManagedNamespaces_ListMemberCredentials",
+        "tags": [
+          "FleetManagedNamespaces"
+        ],
+        "description": "Lists the Fleet member credentials scoped to the managed namespace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "managedNamespaceName",
+            "in": "path",
+            "description": "The name of the fleet managed namespace resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FleetMemberCredentialRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FleetMemberManagedNamespaceCredentialResults"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists member credentials scoped to a managed namespace.": {
+            "$ref": "./examples/FleetManagedNamespaces_ListMemberCredentials.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/members": {
@@ -2972,6 +3160,82 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateRuns/{updateRunName}/reset": {
+      "post": {
+        "operationId": "UpdateRuns_Reset",
+        "tags": [
+          "UpdateRuns"
+        ],
+        "description": "Resets members within the target scope of an UpdateRun.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "fleetName",
+            "in": "path",
+            "description": "The name of the Fleet resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "updateRunName",
+            "in": "path",
+            "description": "The name of the UpdateRun resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResetProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Resets members within the target scope of an UpdateRun.": {
+            "$ref": "./examples/UpdateRuns_Reset.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/updateRuns/{updateRunName}/skip": {
@@ -4265,6 +4529,33 @@
         }
       }
     },
+    "FleetHubNetworkingProfile": {
+      "type": "object",
+      "description": "Networking settings for the Fleet hub.",
+      "properties": {
+        "egressPublicIpResourceIds": {
+          "type": "array",
+          "description": "The resource IDs of the public IP addresses used for outbound traffic from the Fleet hub. At most one public IP address is supported. If omitted or empty, the service creates managed outbound public IP address.",
+          "maxItems": 1,
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.Network/publicIPAddresses"
+                }
+              ]
+            }
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
     "FleetHubProfile": {
       "type": "object",
       "description": "The FleetHubProfile configures the fleet hub.",
@@ -4291,6 +4582,14 @@
         "agentProfile": {
           "$ref": "#/definitions/AgentProfile",
           "description": "The agent profile for the Fleet hub.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "networkingProfile": {
+          "$ref": "#/definitions/FleetHubNetworkingProfile",
+          "description": "The networking configuration for the Fleet hub.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -4353,6 +4652,41 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
+    },
+    "FleetManagedNamespaceCredentialResult": {
+      "type": "object",
+      "description": "One managed namespace credential result item.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the credential.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "string",
+          "format": "password",
+          "description": "Base64-encoded Kubernetes configuration file.",
+          "readOnly": true,
+          "x-ms-secret": true
+        }
+      }
+    },
+    "FleetManagedNamespaceCredentialResults": {
+      "type": "object",
+      "description": "The managed namespace credential results.",
+      "properties": {
+        "kubeconfigs": {
+          "type": "array",
+          "description": "Array of base64-encoded Kubernetes configuration files.",
+          "items": {
+            "$ref": "#/definitions/FleetManagedNamespaceCredentialResult"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
     },
     "FleetManagedNamespaceListResult": {
       "type": "object",
@@ -4425,6 +4759,14 @@
         "portalFqdn": {
           "type": "string",
           "description": "The Azure Portal FQDN of the Fleet hub.",
+          "readOnly": true
+        },
+        "placedMemberIds": {
+          "type": "array",
+          "description": "The resource IDs of the Fleet members where the current-generation ClusterResourcePlacement status reports the managed namespace as successfully applied. This property is omitted while current-generation placement status is unavailable, including while an update is being scheduled. An empty array indicates that current-generation placement status is available but the managed namespace is not successfully applied to any members.",
+          "items": {
+            "$ref": "#/definitions/FleetMemberResourceId"
+          },
           "readOnly": true
         }
       },
@@ -4541,6 +4883,112 @@
         }
       ]
     },
+    "FleetMemberCredentialRequest": {
+      "type": "object",
+      "description": "The request for Fleet member credentials. Specify memberNames to retrieve credentials for up to 100 explicitly selected members in one response. Omit memberNames to retrieve credentials for all applicable members with continuationToken used for subsequent pages.",
+      "properties": {
+        "memberNames": {
+          "type": "array",
+          "description": "The names of the Fleet members for which credentials are requested. Specify between 1 and 100 unique names. Requests that specify memberNames are not paginated. When omitted from an initial request, all applicable Fleet members are selected using server-side pagination. This property must be omitted when continuationToken is provided.",
+          "minItems": 1,
+          "maxItems": 100,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "continuationToken": {
+          "type": "string",
+          "format": "password",
+          "description": "The opaque continuation token from a previous request that omitted memberNames. When provided, this must be the only field in the request body because it preserves the resource scope and cursor state for the all-members enumeration.",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "FleetMemberCredentialResult": {
+      "type": "object",
+      "description": "The credential request result for a Fleet member.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the Fleet member.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/FleetMemberCredentialStatus",
+          "description": "The status of the credential request.",
+          "readOnly": true
+        },
+        "kubeconfig": {
+          "type": "string",
+          "format": "password",
+          "description": "The base64-encoded Kubernetes configuration file when credential retrieval succeeds.",
+          "readOnly": true,
+          "x-ms-secret": true
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "The error details when credential retrieval fails.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "status"
+      ]
+    },
+    "FleetMemberCredentialResults": {
+      "type": "object",
+      "description": "The Fleet member credential results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Fleet member credential results for this response.",
+          "items": {
+            "$ref": "#/definitions/FleetMemberCredentialResult"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "continuationToken": {
+          "type": "string",
+          "format": "password",
+          "description": "The opaque continuation token to use in a subsequent request when the initial request omitted memberNames. This property is omitted for explicit memberNames requests and when there are no more results.",
+          "readOnly": true,
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FleetMemberCredentialStatus": {
+      "type": "string",
+      "description": "The credential retrieval status for a Fleet member.",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "FleetMemberCredentialStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The credential request succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The credential request failed."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "FleetMemberListResult": {
       "type": "object",
       "description": "The response of a FleetMember list operation.",
@@ -4556,6 +5004,65 @@
           "type": "string",
           "format": "uri",
           "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FleetMemberManagedNamespaceCredentialResult": {
+      "type": "object",
+      "description": "The credential request result for a Fleet member scoped to a managed namespace.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the Fleet member.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/FleetMemberCredentialStatus",
+          "description": "The status of the credential request.",
+          "readOnly": true
+        },
+        "kubeconfig": {
+          "type": "string",
+          "format": "password",
+          "description": "The base64-encoded Kubernetes configuration file when credential retrieval succeeds.",
+          "readOnly": true,
+          "x-ms-secret": true
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "The error details when credential retrieval fails.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "status"
+      ]
+    },
+    "FleetMemberManagedNamespaceCredentialResults": {
+      "type": "object",
+      "description": "The Fleet member credential results scoped to a managed namespace.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Fleet member credential results for this response.",
+          "items": {
+            "$ref": "#/definitions/FleetMemberManagedNamespaceCredentialResult"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "continuationToken": {
+          "type": "string",
+          "format": "password",
+          "description": "The opaque continuation token to use in a subsequent request when the initial request omitted memberNames. This property is omitted for explicit memberNames requests and when there are no more results.",
+          "readOnly": true,
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -4656,6 +5163,18 @@
         ]
       },
       "readOnly": true
+    },
+    "FleetMemberResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ContainerService/fleets/members"
+          }
+        ]
+      }
     },
     "FleetMemberStatus": {
       "type": "object",
@@ -6447,6 +6966,82 @@
         ]
       }
     },
+    "ResetProperties": {
+      "type": "object",
+      "description": "The properties of a reset operation containing multiple reset requests.",
+      "properties": {
+        "targets": {
+          "type": "array",
+          "description": "The targets to reset.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ResetTarget"
+          },
+          "x-ms-identifiers": [
+            "type",
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "targets"
+      ]
+    },
+    "ResetTarget": {
+      "type": "object",
+      "description": "A reset target within the update run identified by the request route.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ResetTargetType",
+          "description": "The target type. Only Run, Stage, Group, and Member are supported."
+        },
+        "name": {
+          "type": "string",
+          "description": "The reset target's name.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "type",
+        "name"
+      ]
+    },
+    "ResetTargetType": {
+      "type": "string",
+      "description": "The definition of a single reset request.",
+      "enum": [
+        "Run",
+        "Stage",
+        "Group",
+        "Member"
+      ],
+      "x-ms-enum": {
+        "name": "ResetTargetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Run",
+            "value": "Run",
+            "description": "Target the entire update run identified by the request route."
+          },
+          {
+            "name": "Stage",
+            "value": "Stage",
+            "description": "Target a stage within the update run."
+          },
+          {
+            "name": "Group",
+            "value": "Group",
+            "description": "Target a group within the update run."
+          },
+          {
+            "name": "Member",
+            "value": "Member",
+            "description": "Target a member's execution entry within the update run."
+          }
+        ]
+      }
+    },
     "ResourceQuota": {
       "type": "object",
       "description": "The resource quota for the managed namespace.",
@@ -7154,7 +7749,8 @@
         "Skipped",
         "Failed",
         "Pending",
-        "Completed"
+        "Completed",
+        "PartiallyCompleted"
       ],
       "x-ms-enum": {
         "name": "UpdateState",
@@ -7199,6 +7795,11 @@
             "name": "Completed",
             "value": "Completed",
             "description": "The state of an UpdateRun/UpdateStage/UpdateGroup/MemberUpdate that has completed."
+          },
+          {
+            "name": "PartiallyCompleted",
+            "value": "PartiallyCompleted",
+            "description": "The state of an UpdateRun/UpdateStage/UpdateGroup that has partially completed."
           }
         ]
       }

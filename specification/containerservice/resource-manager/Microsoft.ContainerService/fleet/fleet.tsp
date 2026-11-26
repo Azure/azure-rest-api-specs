@@ -82,6 +82,11 @@ model FleetHubProfile {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   agentProfile?: AgentProfile;
 
+  @added(Versions.v2027_02_02_preview)
+  @doc("The networking configuration for the Fleet hub.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  networkingProfile?: FleetHubNetworkingProfile;
+
   @visibility(Lifecycle.Read)
   @doc("The FQDN of the Fleet hub.")
   fqdn?: string;
@@ -94,6 +99,19 @@ model FleetHubProfile {
   @visibility(Lifecycle.Read)
   @doc("The Azure Portal FQDN of the Fleet hub.")
   portalFqdn?: string;
+}
+
+@added(Versions.v2027_02_02_preview)
+@doc("Networking settings for the Fleet hub.")
+model FleetHubNetworkingProfile {
+  @doc("The resource IDs of the public IP addresses used for outbound traffic from the Fleet hub. At most one public IP address is supported. If omitted or empty, the service creates managed outbound public IP address.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @maxItems(1)
+  egressPublicIpResourceIds?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/publicIPAddresses";
+    }
+  ]>[];
 }
 
 scalar SubnetResourceId
@@ -186,6 +204,67 @@ model FleetCredentialResults {
   kubeconfigs?: FleetCredentialResult[];
 }
 
+@added(Versions.v2026_11_02_preview)
+@doc("The credential retrieval status for a Fleet member.")
+union FleetMemberCredentialStatus {
+  @doc("The credential request succeeded.")
+  Succeeded: "Succeeded",
+
+  @doc("The credential request failed.")
+  Failed: "Failed",
+
+  string,
+}
+
+@added(Versions.v2026_11_02_preview)
+@doc("The credential request result for a Fleet member.")
+model FleetMemberCredentialResult {
+  @visibility(Lifecycle.Read)
+  @doc("The name of the Fleet member.")
+  name: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The status of the credential request.")
+  status: FleetMemberCredentialStatus;
+
+  @secret
+  @visibility(Lifecycle.Read)
+  @doc("The base64-encoded Kubernetes configuration file when credential retrieval succeeds.")
+  kubeconfig?: bytes;
+
+  @visibility(Lifecycle.Read)
+  @doc("The error details when credential retrieval fails.")
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
+}
+
+@added(Versions.v2026_11_02_preview)
+@doc("The request for Fleet member credentials. Specify memberNames to retrieve credentials for up to 100 explicitly selected members in one response. Omit memberNames to retrieve credentials for all applicable members with continuationToken used for subsequent pages.")
+model FleetMemberCredentialRequest {
+  @minItems(1)
+  @maxItems(100)
+  @uniqueItems
+  @doc("The names of the Fleet members for which credentials are requested. Specify between 1 and 100 unique names. Requests that specify memberNames are not paginated. When omitted from an initial request, all applicable Fleet members are selected using server-side pagination. This property must be omitted when continuationToken is provided.")
+  memberNames?: string[];
+
+  @secret
+  @doc("The opaque continuation token from a previous request that omitted memberNames. When provided, this must be the only field in the request body because it preserves the resource scope and cursor state for the all-members enumeration.")
+  continuationToken?: string;
+}
+
+@added(Versions.v2026_11_02_preview)
+@doc("The Fleet member credential results.")
+model FleetMemberCredentialResults {
+  @identifiers(#["name"])
+  @visibility(Lifecycle.Read)
+  @doc("The Fleet member credential results for this response.")
+  value: FleetMemberCredentialResult[];
+
+  @secret
+  @visibility(Lifecycle.Read)
+  @doc("The opaque continuation token to use in a subsequent request when the initial request omitted memberNames. This property is omitted for explicit memberNames requests and when there are no more results.")
+  continuationToken?: string;
+}
+
 @added(Versions.v2025_03_01)
 @doc("Status information for the fleet.")
 model FleetStatus {
@@ -259,4 +338,13 @@ interface Fleets {
 
   @doc("Lists the user credentials of a Fleet.")
   listCredentials is ArmResourceActionSync<Fleet, void, FleetCredentialResults>;
+
+  @added(Versions.v2026_11_02_preview)
+  @action("listMemberCredentials")
+  @doc("Lists the Kubernetes credentials of the Fleet members.")
+  listMemberCredentials is ArmResourceActionSync<
+    Fleet,
+    FleetMemberCredentialRequest,
+    FleetMemberCredentialResults
+  >;
 }
