@@ -1,0 +1,33 @@
+{
+  "operationId": "Registries_Update",
+  "title": "UpdateRegistry",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-04-01-preview",
+    "registryName": "contoso-prod",
+    "properties": {
+      "tags": {
+        "env": "production"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.PackageRegistry/registries/contoso-prod",
+        "name": "contoso-prod",
+        "type": "Microsoft.PackageRegistry/registries",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "apiEndpoint": "https://contoso-prod.packageregistry.azure.com/api",
+          "contentEndpoint": "https://contoso-prod.packageregistry.azure.com/content"
+        },
+        "tags": {
+          "env": "production"
+        }
+      }
+    }
+  }
+}
