@@ -48,13 +48,21 @@ export function findChangedProjects(context: PrContext): Promise<string[]> {
   return findTypeSpecProjectsInChangedServices(root, files, context.logger);
 }
 
+export async function pathExistsAtCommit(
+  context: PrContext,
+  commitish: string,
+  repositoryPath: string,
+): Promise<boolean> {
+  const git = simpleGit(context.root);
+  const paths = await git.raw(["ls-tree", "-z", "--name-only", commitish, "--", repositoryPath]);
+  return paths.split("\0").includes(repositoryPath);
+}
+
 export async function readFileAtCommit(
   context: PrContext,
   commitish: string,
   repositoryPath: string,
 ): Promise<string | undefined> {
-  const git = simpleGit(context.root);
-  const paths = await git.raw(["ls-tree", "-z", "--name-only", commitish, "--", repositoryPath]);
-  if (!paths.split("\0").includes(repositoryPath)) return undefined;
-  return git.show([`${commitish}:${repositoryPath}`]);
+  if (!(await pathExistsAtCommit(context, commitish, repositoryPath))) return undefined;
+  return simpleGit(context.root).show([`${commitish}:${repositoryPath}`]);
 }

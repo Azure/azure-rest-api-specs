@@ -22,10 +22,10 @@ The checks cover:
 
 - **TypeSpec Requirement:** changed OpenAPI must follow the existing TypeSpec
   usage policy, and generated OpenAPI must have TypeSpec sources in its
-  specification service area. Existing OpenAPI API-version directories are
-  identified against upstream `Azure/azure-rest-api-specs` **main**, independently
-  of the comparison base. This lookup requires network access. Suppressions
-  cannot permit new handwritten versions in a service that has migrated to
+  specification service area. An OpenAPI API version is existing if its directory
+  is present in the comparison base, including private-only versions. Otherwise,
+  the check looks up upstream `Azure/azure-rest-api-specs` **main**, requiring
+  network access. Suppressions cannot permit new handwritten versions in a service that has migrated to
   TypeSpec; qualifying historical relocations retain their exemptions.
 - **MultipleNewApiVersions:** when a project adds multiple TypeSpec API versions,
   its management-plane SDK emitters must target the oldest newly added version.
