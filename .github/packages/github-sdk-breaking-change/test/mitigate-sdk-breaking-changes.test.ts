@@ -10,11 +10,8 @@ const { execFileMock } = vi.hoisted(() => ({
 
 vi.mock("@azure-tools/specs-shared/exec", () => ({ execFile: execFileMock }));
 
-import {
-  AnalysisResultSchema,
-  MitigationResultSchema,
-} from "../../src/sdk-breaking-change/types.ts";
-import { mitigateSdkBreakingChanges } from "../../src/sdk-breaking-change/mitigate-sdk-breaking-changes.ts";
+import { AnalysisResultSchema, MitigationResultSchema } from "../src/types.ts";
+import { mitigateSdkBreakingChanges } from "../src/mitigate-sdk-breaking-changes.ts";
 import { createMockCore } from "@azure-tools/github-core/test/mocks";
 
 let temporaryDirectory: string;

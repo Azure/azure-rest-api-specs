@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   buildMitigationSummary,
   publishMitigationSummary,
-} from "../../src/sdk-breaking-change/publish-mitigation-summary.ts";
+} from "../src/publish-mitigation-summary.ts";
 import { createMockCore } from "@azure-tools/github-core/test/mocks";
 
 const options = {

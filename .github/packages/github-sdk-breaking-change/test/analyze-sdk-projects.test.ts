@@ -15,8 +15,8 @@ vi.mock("@azure-tools/specs-shared/typespec-metadata", () => ({
   generateTypeSpecMetadata: generateTypeSpecMetadataMock,
 }));
 
-import { analyzeSdkProjects } from "../../src/sdk-breaking-change/analyze-sdk-projects.ts";
-import { AnalysisResultSchema } from "../../src/sdk-breaking-change/types.ts";
+import { analyzeSdkProjects } from "../src/analyze-sdk-projects.ts";
+import { AnalysisResultSchema } from "../src/types.ts";
 import { createMockCore } from "@azure-tools/github-core/test/mocks";
 
 let core: ReturnType<typeof createMockCore>;

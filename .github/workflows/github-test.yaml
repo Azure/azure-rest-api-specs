@@ -60,7 +60,6 @@ jobs:
           persist-credentials: false
           sparse-checkout: |
             .github
-            eng/tools/spec-gen-sdk-runner
 
       - if: ${{ github.event_name == 'pull_request' && matrix.os == 'ubuntu' }}
         name: Require compiled agentic workflow locks
@@ -130,3 +129,52 @@ jobs:
             const fullPath = join(process.env.GITHUB_WORKSPACE, ".github", "workflows", "src", "github-test.ts");
             const { default: importAllModules } = await import(pathToFileURL(fullPath).href);
             await importAllModules({ core, directories: ["workflows", "shared"] });
+
+  test-packages:
+    name: test ${{ matrix.package }} (${{ matrix.os }})
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu
+            runner: ubuntu-24.04
+            package: github-sdk-breaking-change
+            filter: "@azure-tools/github-sdk-breaking-change..."
+            extra-checkout: eng/tools/spec-gen-sdk-runner
+          - os: windows
+            runner: windows-2022
+            package: github-sdk-breaking-change
+            filter: "@azure-tools/github-sdk-breaking-change..."
+            extra-checkout: eng/tools/spec-gen-sdk-runner
+
+    runs-on: ${{ matrix.runner }}
+
+    steps:
+      - if: runner.os == 'Windows'
+        run: git config --global core.longpaths true
+
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            .github
+            ${{ matrix.extra-checkout }}
+
+      - name: Install dependencies for ${{ matrix.package }}
+        uses: ./.github/actions/install-deps-github-script
+        with:
+          filter: ${{ matrix.filter }}
+
+      - name: Verify ${{ matrix.package }} modules are importable
+        env:
+          PACKAGE_DIR: packages/${{ matrix.package }}
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const { join } = await import("path");
+            const { pathToFileURL } = await import("url");
+            const fullPath = join(process.env.GITHUB_WORKSPACE, ".github", "workflows", "src", "github-test.ts");
+            const { default: importAllModules } = await import(pathToFileURL(fullPath).href);
+            await importAllModules({ core, directories: [process.env.PACKAGE_DIR] });

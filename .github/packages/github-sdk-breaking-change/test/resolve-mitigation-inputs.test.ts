@@ -3,7 +3,7 @@ import { dirname, join } from "node:path";
 import { zipSync } from "fflate";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { resolveMitigationTrigger } from "../../src/sdk-breaking-change/resolve-mitigation-inputs.ts";
+import { resolveMitigationTrigger } from "../src/resolve-mitigation-inputs.ts";
 import {
   createMockContext,
   createMockCore,
