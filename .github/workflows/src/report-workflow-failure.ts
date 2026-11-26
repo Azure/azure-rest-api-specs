@@ -1,6 +1,6 @@
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { escapeMarkdown } from "../../shared/src/markdown.ts";
-import type { GitHubScriptArgs } from "../../packages/core/src/github.ts";
+import type { GitHubScriptArgs } from "../../packages/github-core/src/github.ts";
 
 interface FailureReport {
   marker: string;

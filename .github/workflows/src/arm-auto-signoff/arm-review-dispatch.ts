@@ -1,6 +1,6 @@
 import { isFullGitSha } from "../../../shared/src/git.ts";
-import { getLatestCommitStatuses } from "../../../packages/core/src/commit-statuses.ts";
-import type { Core, GitHub, GitHubScriptArgs } from "../../../packages/core/src/github.ts";
+import { getLatestCommitStatuses } from "../../../packages/github-core/src/commit-statuses.ts";
+import type { Core, GitHub, GitHubScriptArgs } from "../../../packages/github-core/src/github.ts";
 import {
   ARM_SEMANTIC_REVIEW_STATUS,
   getLatestSemanticReviewStatus,

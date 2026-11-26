@@ -7,8 +7,8 @@ import {
   PER_PAGE_MAX,
 } from "../../shared/src/github.ts";
 import { byDate, invert } from "../../shared/src/sort.ts";
-import { extractInputs } from "../../packages/core/src/context.ts";
-import type { Core, GitHub, GitHubScriptArgs } from "../../packages/core/src/github.ts";
+import { extractInputs } from "../../packages/github-core/src/context.ts";
+import type { Core, GitHub, GitHubScriptArgs } from "../../packages/github-core/src/github.ts";
 
 // TODO: Add tests
 /* v8 ignore start */

@@ -105,7 +105,7 @@ See [the shared package guide](../shared/readme.md) for shared-library developme
 From `package.json` comments:
 
 - **Runtime dependencies**: Must be kept to an absolute minimum for performance
-- **Zero-dependency core**: `.github/packages/core` (`@azure-tools/github-core`) must keep zero runtime dependencies (`"dependencies": {}`), enforced by `github-test.yaml` before any `pnpm install`.
+- **Zero-dependency core**: `.github/packages/github-core` (`@azure-tools/github-core`) must keep zero runtime dependencies (`"dependencies": {}`), enforced by `github-test.yaml` before any `pnpm install`.
 - **Opt-in workflow packages**: Workflows that need heavy or cross-workspace dependencies (such as `@typespec/compiler` or `@azure-tools/spec-gen-sdk-runner`) should live in their own sibling package under `.github/packages/<name>/` and opt into it via `install-deps-github-script` (`filter`, optional `cache: "true"`, and a distinct `cache-name`).
 - **Transitive dependencies**: Ideally zero transitive dependencies for runtime
 - **Relationship**: `.github/package.json` must be a superset of `.github/shared/package.json`

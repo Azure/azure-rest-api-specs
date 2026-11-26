@@ -1,14 +1,14 @@
 import { inspect } from "node:util";
 import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
-import { getLatestCommitStatuses } from "../../../packages/core/src/commit-statuses.ts";
-import { extractInputs } from "../../../packages/core/src/context.ts";
+import { getLatestCommitStatuses } from "../../../packages/github-core/src/commit-statuses.ts";
+import { extractInputs } from "../../../packages/github-core/src/context.ts";
 import type {
   Core,
   GitHub,
   GitHubScriptArgs,
   WebhookEvent,
-} from "../../../packages/core/src/github.ts";
-import { LabelAction } from "../../../packages/core/src/label.ts";
+} from "../../../packages/github-core/src/github.ts";
+import { LabelAction } from "../../../packages/github-core/src/label.ts";
 import { parseSignoffDispatchInputs } from "./arm-signoff-dispatch.ts";
 import {
   ArmAutoSignoffLabel,

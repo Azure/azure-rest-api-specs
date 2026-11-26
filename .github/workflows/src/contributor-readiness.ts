@@ -9,13 +9,13 @@ import {
   table,
   type MarkdownDoc,
 } from "../../shared/src/markdown.ts";
-import { parseExistingComments } from "../../packages/core/src/comment.ts";
+import { parseExistingComments } from "../../packages/github-core/src/comment.ts";
 import type {
   Core,
   GitHub,
   GitHubScriptArgs,
   WebhookEvent,
-} from "../../packages/core/src/github.ts";
+} from "../../packages/github-core/src/github.ts";
 
 export const CONTRIBUTOR_READINESS_COMMAND = "/azsdk check-access";
 export const CONTRIBUTOR_READINESS_CHECK_NAME = "Contributor readiness";

@@ -1,6 +1,10 @@
 import { isFullGitSha } from "../../../shared/src/git.ts";
-import { getWorkflowRunArtifactInputs } from "../../../packages/core/src/context.ts";
-import type { Context, GitHub, GitHubScriptArgs } from "../../../packages/core/src/github.ts";
+import { getWorkflowRunArtifactInputs } from "../../../packages/github-core/src/context.ts";
+import type {
+  Context,
+  GitHub,
+  GitHubScriptArgs,
+} from "../../../packages/github-core/src/github.ts";
 
 /** Dispatches a workflow on the default branch so only trusted base-branch code runs. */
 async function dispatchOnDefaultBranch(

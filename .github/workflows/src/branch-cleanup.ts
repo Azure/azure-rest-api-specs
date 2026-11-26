@@ -1,4 +1,4 @@
-import type { GitHubScriptArgs } from "../../packages/core/src/github.ts";
+import type { GitHubScriptArgs } from "../../packages/github-core/src/github.ts";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 const DEFAULT_RETENTION = { copilotDays: 90, otherDays: 2 * 365 };

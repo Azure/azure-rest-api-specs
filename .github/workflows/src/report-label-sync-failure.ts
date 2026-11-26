@@ -1,4 +1,4 @@
-import type { GitHubScriptArgs } from "../../packages/core/src/github.ts";
+import type { GitHubScriptArgs } from "../../packages/github-core/src/github.ts";
 import { reportWorkflowFailure } from "./report-workflow-failure.ts";
 
 export async function reportLabelSyncFailure(args: GitHubScriptArgs) {
