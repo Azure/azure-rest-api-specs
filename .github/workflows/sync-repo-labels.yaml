@@ -6,14 +6,13 @@ on:
       - .github/labels.yaml
       - .github/labels/**
       - .github/workflows/sync-repo-labels.yaml
-      - .github/packages/workflows/src/label-catalog.ts
-      - .github/packages/workflows/src/label-catalog-loader.ts
-      - .github/packages/workflows/src/sync-repo-labels.ts
-      - .github/packages/core/src/report-label-sync-failure.ts
-      - .github/packages/workflows/cmd/labels.ts
-      - .github/packages/workflows/test/*label*.test.ts
-      - .github/packages/core/package.json
-      - .github/packages/workflows/package.json
+      - .github/workflows/src/label-catalog.ts
+      - .github/workflows/src/label-catalog-loader.ts
+      - .github/workflows/src/sync-repo-labels.ts
+      - .github/workflows/src/report-label-sync-failure.ts
+      - .github/workflows/cmd/labels.ts
+      - .github/workflows/test/*label*.test.ts
+      - .github/package.json
       - pnpm-lock.yaml
       - pnpm-workspace.yaml
   push:
@@ -22,12 +21,11 @@ on:
       - .github/labels.yaml
       - .github/labels/**
       - .github/workflows/sync-repo-labels.yaml
-      - .github/packages/workflows/src/label-catalog.ts
-      - .github/packages/workflows/src/label-catalog-loader.ts
-      - .github/packages/workflows/src/sync-repo-labels.ts
-      - .github/packages/core/src/report-label-sync-failure.ts
-      - .github/packages/core/package.json
-      - .github/packages/workflows/package.json
+      - .github/workflows/src/label-catalog.ts
+      - .github/workflows/src/label-catalog-loader.ts
+      - .github/workflows/src/sync-repo-labels.ts
+      - .github/workflows/src/report-label-sync-failure.ts
+      - .github/package.json
       - pnpm-lock.yaml
       - pnpm-workspace.yaml
   label: {}
@@ -53,7 +51,7 @@ jobs:
           persist-credentials: false
           sparse-checkout: .github
       - uses: ./.github/actions/install-deps-github-script
-      - run: node .github/packages/workflows/cmd/labels.ts
+      - run: node .github/workflows/cmd/labels.ts
 
   sync:
     if: >-
@@ -88,7 +86,7 @@ jobs:
         with:
           script: |
             const { prepareLabelSync } = await import(
-              `${process.env.GITHUB_WORKSPACE}/.github/packages/workflows/src/sync-repo-labels.ts`
+              `${process.env.GITHUB_WORKSPACE}/.github/workflows/src/sync-repo-labels.ts`
             );
             await prepareLabelSync({ github, context, core }, {
               catalogPath: `${process.env.GITHUB_WORKSPACE}/.github/labels.yaml`,
@@ -115,7 +113,7 @@ jobs:
         with:
           script: |
             const { applyLabelSync } = await import(
-              `${process.env.GITHUB_WORKSPACE}/.github/packages/workflows/src/sync-repo-labels.ts`
+              `${process.env.GITHUB_WORKSPACE}/.github/workflows/src/sync-repo-labels.ts`
             );
             await applyLabelSync({ github, context, core }, {
               auditDirectory: `${process.env.RUNNER_TEMP}/label-audit`,
@@ -155,6 +153,6 @@ jobs:
         with:
           script: |
             const { reportLabelSyncFailure } = await import(
-              `${process.env.GITHUB_WORKSPACE}/.github/packages/core/src/report-label-sync-failure.ts`
+              `${process.env.GITHUB_WORKSPACE}/.github/workflows/src/report-label-sync-failure.ts`
             );
             await reportLabelSyncFailure({ github, context, core });

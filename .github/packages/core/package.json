@@ -7,21 +7,16 @@
     "dependencies": "Zero runtime dependencies: zero-dep workflows run without pnpm install and github-test verifies core before installing any packages."
   },
   "exports": {
-    "./arm-auto-signoff/arm-auto-signoff-labels": "./src/arm-auto-signoff/arm-auto-signoff-labels.ts",
-    "./arm-auto-signoff/arm-review-dispatch": "./src/arm-auto-signoff/arm-review-dispatch.ts",
-    "./arm-auto-signoff/arm-signoff-dispatch": "./src/arm-auto-signoff/arm-signoff-dispatch.ts",
     "./artifacts": "./src/artifacts.ts",
     "./comment": "./src/comment.ts",
     "./commit-statuses": "./src/commit-statuses.ts",
     "./context": "./src/context.ts",
-    "./contributor-readiness": "./src/contributor-readiness.ts",
     "./core-logger": "./src/core-logger.ts",
     "./github": "./src/github.ts",
     "./github-test": "./src/github-test.ts",
     "./issues": "./src/issues.ts",
     "./label": "./src/label.ts",
     "./ndjson": "./src/ndjson.ts",
-    "./report-workflow-failure": "./src/report-workflow-failure.ts",
     "./retries": "./src/retries.ts",
     "./sdk-labels": "./src/sdk-labels.ts",
     "./test/mocks": "./test/mocks.ts"
@@ -39,8 +34,7 @@
     "@octokit/rest": "catalog:",
     "@octokit/types": "catalog:",
     "@types/node": "catalog:",
-    "@vitest/utils": "catalog:",
-    "yaml": "catalog:"
+    "@vitest/utils": "catalog:"
   },
   "scripts": {
     "build": "tsc --noEmit",

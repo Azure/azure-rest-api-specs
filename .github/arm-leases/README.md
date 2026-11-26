@@ -105,7 +105,7 @@ If your PR check **"ARM Lease Validation"** is failing, review the error message
 
 ## Automation Scripts
 
-Scripts are located in `.github/packages/workflows/cmd/`. Run from the repository root.
+Scripts are located in `.github/workflows/cmd/`. Run from the repository root.
 
 ### Single Resource Provider
 
@@ -113,20 +113,20 @@ Scripts are located in `.github/packages/workflows/cmd/`. Run from the repositor
 
 ```bash
 # Without service groups
-node .github/packages/workflows/cmd/arm-lease-generate-lease-files.ts --orgName <orgName> --rpNamespace <rpNamespace> --reviewer "@youralias" --startdate <YYYY-MM-DD> --duration <P#D>
+node .github/workflows/cmd/arm-lease-generate-lease-files.ts --orgName <orgName> --rpNamespace <rpNamespace> --reviewer "@youralias" --startdate <YYYY-MM-DD> --duration <P#D>
 
 # With service groups
-node .github/packages/workflows/cmd/arm-lease-generate-lease-files.ts --orgName <orgName> --rpNamespace <rpNamespace> --reviewer "@youralias" --startdate <YYYY-MM-DD> --duration <P#D> --serviceName "<serviceName1>,<serviceName2>"
+node .github/workflows/cmd/arm-lease-generate-lease-files.ts --orgName <orgName> --rpNamespace <rpNamespace> --reviewer "@youralias" --startdate <YYYY-MM-DD> --duration <P#D> --serviceName "<serviceName1>,<serviceName2>"
 ```
 
 **Examples:**
 
 ```bash
 # Without service groups
-node .github/packages/workflows/cmd/arm-lease-generate-lease-files.ts --orgName storage --rpNamespace Microsoft.Storage --reviewer "@johndoe" --startdate 2026-05-01 --duration P90D
+node .github/workflows/cmd/arm-lease-generate-lease-files.ts --orgName storage --rpNamespace Microsoft.Storage --reviewer "@johndoe" --startdate 2026-05-01 --duration P90D
 
 # With service groups
-node .github/packages/workflows/cmd/arm-lease-generate-lease-files.ts --orgName compute --rpNamespace Microsoft.Compute --reviewer "@janesmith" --startdate 2026-05-01 --duration P180D --serviceName "DiskRP,ComputeRP,GalleryRP"
+node .github/workflows/cmd/arm-lease-generate-lease-files.ts --orgName compute --rpNamespace Microsoft.Compute --reviewer "@janesmith" --startdate 2026-05-01 --duration P180D --serviceName "DiskRP,ComputeRP,GalleryRP"
 ```
 
 ### Bulk Generation
@@ -135,23 +135,23 @@ node .github/packages/workflows/cmd/arm-lease-generate-lease-files.ts --orgName 
 
 ```bash
 # Generate resource provider list (without service groups)
-node .github/packages/workflows/cmd/arm-lease-fetch-resource-providers.ts --output <filename>
+node .github/workflows/cmd/arm-lease-fetch-resource-providers.ts --output <filename>
 
 # Generate resource provider list (with service groups)
-node .github/packages/workflows/cmd/arm-lease-fetch-resource-providers.ts --with-service-groups --output <filename>
+node .github/workflows/cmd/arm-lease-fetch-resource-providers.ts --with-service-groups --output <filename>
 
 # Generate lease files from list
-node .github/packages/workflows/cmd/arm-lease-generate-lease-files.ts --input <filename> --reviewer "@youralias" --startdate <YYYY-MM-DD> --duration <P#D>
+node .github/workflows/cmd/arm-lease-generate-lease-files.ts --input <filename> --reviewer "@youralias" --startdate <YYYY-MM-DD> --duration <P#D>
 ```
 
 **Examples:**
 
 ```bash
 # RPs without service groups (e.g., Microsoft.Storage)
-node .github/packages/workflows/cmd/arm-lease-fetch-resource-providers.ts --output rps-simple.txt
-node .github/packages/workflows/cmd/arm-lease-generate-lease-files.ts --input rps-simple.txt --reviewer "@johndoe" --startdate 2026-04-16 --duration P180D
+node .github/workflows/cmd/arm-lease-fetch-resource-providers.ts --output rps-simple.txt
+node .github/workflows/cmd/arm-lease-generate-lease-files.ts --input rps-simple.txt --reviewer "@johndoe" --startdate 2026-04-16 --duration P180D
 
 # RPs with service groups (e.g., Microsoft.Compute with DiskRP, ComputeRP)
-node .github/packages/workflows/cmd/arm-lease-fetch-resource-providers.ts --with-service-groups --output rps-groups.txt
-node .github/packages/workflows/cmd/arm-lease-generate-lease-files.ts --input rps-groups.txt --reviewer "@johndoe" --startdate 2026-04-16 --duration P180D
+node .github/workflows/cmd/arm-lease-fetch-resource-providers.ts --with-service-groups --output rps-groups.txt
+node .github/workflows/cmd/arm-lease-generate-lease-files.ts --input rps-groups.txt --reviewer "@johndoe" --startdate 2026-04-16 --duration P180D
 ```

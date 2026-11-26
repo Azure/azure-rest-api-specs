@@ -112,7 +112,7 @@ safe-outputs:
             script: |
               const { readFile } = await import("node:fs/promises");
               const { applyIssueTriage } = await import(
-                `${process.env.GITHUB_WORKSPACE}/.github/packages/workflows/src/issue-triage.ts`
+                `${process.env.GITHUB_WORKSPACE}/.github/workflows/src/issue-triage.ts`
               );
               const output = JSON.parse(await readFile(process.env.GH_AW_AGENT_OUTPUT, "utf8"));
               await applyIssueTriage({ github, context, core }, output, {

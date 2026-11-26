@@ -96,7 +96,7 @@ jobs:
         with:
           script: |
             const { default: getLabelAction } =
-              await import('${{ github.workspace }}/.github/packages/core/src/arm-auto-signoff/arm-universal-auto-signoff.ts');
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-universal-auto-signoff.ts');
             return await getLabelAction({ github, context, core });
 
       # Update Labels applies these. The action is explicit: 'add' | 'remove' | 'none'.
@@ -170,5 +170,5 @@ jobs:
         with:
           script: |
             const { dispatchUpdateLabels } =
-              await import('${{ github.workspace }}/.github/packages/core/src/arm-auto-signoff/arm-signoff-dispatch.ts');
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-signoff-dispatch.ts');
             await dispatchUpdateLabels({ github, context, core });

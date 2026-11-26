@@ -49,7 +49,7 @@ jobs:
         with:
           script: |
             const { getLabelAndAction } =
-              await import('${{ github.workspace }}/.github/packages/workflows/src/sdk-breaking-change-labels.ts');
+              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change-labels.ts');
             return await getLabelAndAction({ github, context, core });
 
       - if: |

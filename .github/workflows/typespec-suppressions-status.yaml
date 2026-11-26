@@ -76,5 +76,5 @@ jobs:
         with:
           script: |
             const { default: postSuppressionsResults } =
-              await import('${{ github.workspace }}/.github/packages/workflows/src/typespec-suppressions/post-results.ts');
+              await import('${{ github.workspace }}/.github/workflows/src/typespec-suppressions/post-results.ts');
             await postSuppressionsResults({ github, context, core });

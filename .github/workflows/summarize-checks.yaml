@@ -96,7 +96,7 @@ jobs:
         with:
           script: |
             const { default: dumpTriggerMetadata } =
-              await import('${{ github.workspace }}/.github/packages/workflows/src/summarize-checks/dump-trigger-metadata.ts');
+              await import('${{ github.workspace }}/.github/workflows/src/summarize-checks/dump-trigger-metadata.ts');
             return await dumpTriggerMetadata({ context, core });
 
       - id: summarize-checks
@@ -105,7 +105,7 @@ jobs:
         with:
           script: |
             const { default: summarizeChecks } =
-              await import('${{ github.workspace }}/.github/packages/workflows/src/summarize-checks/summarize-checks.ts');
+              await import('${{ github.workspace }}/.github/workflows/src/summarize-checks/summarize-checks.ts');
             return await summarizeChecks({ github, context, core });
 
       # May be used by downstream workflows
@@ -161,5 +161,5 @@ jobs:
         with:
           script: |
             const { default: dispatchInitialArmReview } =
-              await import('${{ github.workspace }}/.github/packages/core/src/arm-auto-signoff/arm-review-dispatch.ts');
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-review-dispatch.ts');
             await dispatchInitialArmReview({ github, context, core });

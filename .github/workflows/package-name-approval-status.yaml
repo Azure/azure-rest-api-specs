@@ -31,7 +31,7 @@ jobs:
         with:
           script: |
             const { default: postResults } =
-              await import('${{ github.workspace }}/.github/packages/workflows/src/package-name-approval/post-results.ts');
+              await import('${{ github.workspace }}/.github/workflows/src/package-name-approval/post-results.ts');
             await postResults({ github, context, core });
 
       - name: Set package name approval status
@@ -39,5 +39,5 @@ jobs:
         with:
           script: |
             const { default: statusCheck } =
-              await import('${{ github.workspace }}/.github/packages/workflows/src/package-name-approval/status-check.ts');
+              await import('${{ github.workspace }}/.github/workflows/src/package-name-approval/status-check.ts');
             await statusCheck({ github, context, core });

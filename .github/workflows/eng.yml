@@ -60,15 +60,15 @@ jobs:
             /pnpm-lock.yaml
             /.github/actions/setup-node-install-deps/
             /.github/shared/
-            /.github/packages/workflows/src/validate-workspace.ts
+            /.github/workflows/src/validate-workspace.ts
 
       - uses: ./.github/actions/setup-node-install-deps
         with:
-          install-command: "pnpm install --frozen-lockfile --prod --prefer-offline --filter=@azure-tools/github-workflows..."
+          install-command: "pnpm install --frozen-lockfile --prod --prefer-offline --filter=azure-rest-api-specs-github..."
           cache-name: workspace-validation
 
       # Avoid pnpm run auto-installing the rest of the workspace.
-      - run: node ./.github/packages/workflows/src/validate-workspace.ts
+      - run: node ./.github/workflows/src/validate-workspace.ts
 
   action-lint:
     name: GitHub Actions lint

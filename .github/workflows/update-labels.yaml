@@ -57,7 +57,7 @@ jobs:
         with:
           script: |
             const { default: updateLabels } =
-              await import('${{ github.workspace }}/.github/packages/core/src/update-labels.ts');
+              await import('${{ github.workspace }}/.github/workflows/src/update-labels.ts');
             await updateLabels({ github, context, core });
 
       - if: ${{ always() && steps.update-labels.outputs.head_sha }}
@@ -102,7 +102,7 @@ jobs:
         with:
           script: |
             const { dispatchSummarizeChecks } =
-              await import('${{ github.workspace }}/.github/packages/core/src/arm-auto-signoff/arm-signoff-dispatch.ts');
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-signoff-dispatch.ts');
             await dispatchSummarizeChecks(
               { github, context, core },
               { prNumber: process.env.PR_NUMBER, headSha: process.env.HEAD_SHA },
