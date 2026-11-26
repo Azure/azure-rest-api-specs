@@ -744,7 +744,7 @@
           }
         },
         "x-ms-examples": {
-          "BrowserSessions_List": {
+          "List browser sessions with their effective Web Bot Auth states": {
             "$ref": "./examples/BrowserSessions_List.json"
           }
         },
@@ -820,7 +820,10 @@
           }
         },
         "x-ms-examples": {
-          "BrowserSessions_Get": {
+          "Get a browser session with Web Bot Auth disabled": {
+            "$ref": "./examples/BrowserSessions_Get_WebBotAuthDisabled.json"
+          },
+          "Get a browser session with Web Bot Auth enabled": {
             "$ref": "./examples/BrowserSessions_Get.json"
           }
         }
@@ -916,8 +919,20 @@
           }
         },
         "x-ms-examples": {
-          "BrowserSessions_CreateOrUpdate": {
+          "Create a non-MCP browser session requesting Web Bot Auth with an effective state of false": {
+            "$ref": "./examples/BrowserSessions_CreateOrUpdate_WebBotAuthIneligible.json"
+          },
+          "Create an MCP browser session with Web Bot Auth explicitly disabled": {
+            "$ref": "./examples/BrowserSessions_CreateOrUpdate_WebBotAuthDisabled.json"
+          },
+          "Create an eligible MCP browser session with service and workspace Web Bot Auth enabled": {
+            "$ref": "./examples/BrowserSessions_CreateOrUpdate_WebBotAuthEnabled.json"
+          },
+          "Create or update a browser session with Web Bot Auth omitted": {
             "$ref": "./examples/BrowserSessions_CreateOrUpdate.json"
+          },
+          "Omit Web Bot Auth to preserve an existing signed session or default a new session to false": {
+            "$ref": "./examples/BrowserSessions_CreateOrUpdate_UpdateExisting.json"
           }
         }
       }
@@ -2332,6 +2347,15 @@
             "update",
             "create"
           ]
+        },
+        "enableWebBotAuth": {
+          "type": "boolean",
+          "description": "Whether to request Web Bot Auth when creating the browser session. Defaults to false when omitted on creation.\nWeb Bot Auth requires service and workspace enablement and an eligible Linux Chromium session from the Model Context Protocol (MCP) server.\nResponses report the effective state accepted by the service, not an echo of the requested value. A request for true can result in false when the session is not eligible.\nThe effective state cannot be changed after creation. This property is ignored in updates to an existing session.",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -3102,6 +3126,15 @@
             "update",
             "create"
           ]
+        },
+        "enableWebBotAuth": {
+          "type": "boolean",
+          "description": "Whether to request Web Bot Auth when creating the browser session. Defaults to false when omitted on creation.\nWeb Bot Auth requires service and workspace enablement and an eligible Linux Chromium session from the Model Context Protocol (MCP) server.\nResponses report the effective state accepted by the service, not an echo of the requested value. A request for true can result in false when the session is not eligible.\nThe effective state cannot be changed after creation. This property is ignored in updates to an existing session.",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -3184,6 +3217,15 @@
           "x-ms-mutability": [
             "read",
             "update",
+            "create"
+          ]
+        },
+        "enableWebBotAuth": {
+          "type": "boolean",
+          "description": "Whether to request Web Bot Auth when creating the browser session. Defaults to false when omitted on creation.\nWeb Bot Auth requires service and workspace enablement and an eligible Linux Chromium session from the Model Context Protocol (MCP) server.\nResponses report the effective state accepted by the service, not an echo of the requested value. A request for true can result in false when the session is not eligible.\nThe effective state cannot be changed after creation. This property is ignored in updates to an existing session.",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
             "create"
           ]
         }

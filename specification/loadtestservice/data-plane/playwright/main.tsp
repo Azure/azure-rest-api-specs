@@ -76,7 +76,7 @@ enum Versions {
   @doc("Preview version 2026-12-01-preview with experimental features.")
   v2026_12_01_preview: "2026-12-01-preview",
 
-  @doc("Preview version 2026-12-15-preview with experimental features.")
+  /** Preview version 2026-12-15-preview with session-level Web Bot Auth support. */
   @Azure.Core.previewVersion
   v2026_12_15_preview: "2026-12-15-preview",
 }

@@ -1,5 +1,5 @@
 {
-  "title": "BrowserSessions_List",
+  "title": "List browser sessions with their effective Web Bot Auth states",
   "operationId": "BrowserSessions_List",
   "parameters": {
     "api-version": "2026-12-15-preview",
@@ -16,7 +16,7 @@
             "creatorName": "string",
             "source": {
               "id": "00000000-0000-0000-0000-000000000000",
-              "type": "PlaywrightWorkspacesTestRun"
+              "type": "Mcp"
             },
             "startTime": "2025-06-06T11:43:28.954Z",
             "endTime": "2025-06-06T11:43:28.954Z",
@@ -25,6 +25,7 @@
             "browserType": "Chromium",
             "operatingSystem": "Linux",
             "protocol": "CDP",
+            "enableWebBotAuth": true,
             "secretStoreId": "b9f8451c-f7a6-42f3-8215-a989a6635310",
             "sessionArtifacts": {
               "enabled": "Enabled",
@@ -37,6 +38,21 @@
                 }
               ]
             }
+          },
+          {
+            "id": "11111111-1111-1111-1111-111111111111",
+            "displayName": "UnsignedBrowserSession",
+            "creatorId": "string",
+            "creatorName": "string",
+            "source": {
+              "id": "00000000-0000-0000-0000-000000000000",
+              "type": "Mcp"
+            },
+            "status": "Created",
+            "browserType": "Chromium",
+            "operatingSystem": "Linux",
+            "protocol": "CDP",
+            "enableWebBotAuth": false
           }
         ],
         "nextLink": null
