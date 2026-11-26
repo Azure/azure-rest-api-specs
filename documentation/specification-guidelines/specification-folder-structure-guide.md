@@ -83,6 +83,10 @@ The `<organization>/resource-manager/<RPNS>` folder corresponds to an ARM **Reso
 
 For a complete list of Resource Providers, see the [Resource Provider list].
 
+For an RP namespace that contains a single service, the service name may repeat the namespace suffix, for example `Microsoft.Foo/Foo`. This naming pattern is not inherently invalid. The service folder should instead be evaluated based on whether it represents a customer-facing service boundary that versions uniformly and has its own API contract, documentation, and SDK package or packages.
+
+When an RP namespace contains multiple services, each service folder represents a separate customer-facing service boundary and versions independently.
+
 > [!NOTE]
 > **Legacy pattern to avoid**: Many Azure teams with a single ARM service historically placed it directly in `specification/<organization>/resource-manager/` instead of following the proper `specification/<organization>/resource-manager/<RPNS>/<service>` structure. This legacy pattern is deprecated and strongly discouraged for new services.
 
