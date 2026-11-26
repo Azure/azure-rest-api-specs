@@ -3,6 +3,7 @@ import { SpecGenSdkArtifactInfoSchema } from "../../shared/src/sdk-types.ts";
 import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.ts";
 import { extractInputs } from "./context.ts";
 import type { CheckRuns, Core, GitHub, GitHubScriptArgs } from "./github.ts";
+import { getSdkMetadataFromChecks } from "./sdk-metadata-check.ts";
 
 export default async function setSpecGenSdkStatus({
   github,
@@ -110,6 +111,7 @@ export async function setSpecGenSdkStatusImpl({
     const result = await processResult({
       checkRuns: specGenSdkChecks,
       core,
+      allChecks: checks,
     });
 
     core.info(`All SDK Validation checks completed. Setting status to ${result.state}.`);
@@ -129,9 +131,12 @@ export async function setSpecGenSdkStatusImpl({
 async function processResult({
   checkRuns,
   core,
+  allChecks,
 }: {
   checkRuns: CheckRuns;
   core: Core;
+  /** All checks on the commit, searched for SDK metadata checks before falling back to Azure DevOps. */
+  allChecks: CheckRuns;
 }): Promise<{ state: CommitStatusState; description: string }> {
   let state: CommitStatusState = CommitStatusState.SUCCESS;
   let specGenSdkFailedRequiredLanguages = "";
@@ -147,28 +152,28 @@ async function processResult({
     if (checkRun.details_url === null) {
       throw new Error(`'details_url' is null in Check Run '${checkRun.name}'`);
     }
-    const buildInfo = getAdoBuildInfoFromUrl(checkRun.details_url);
-    const ado_project_url = buildInfo.projectUrl;
-    const ado_build_id = buildInfo.buildId;
     const artifactName = "spec-gen-sdk-artifact";
-    const artifactFileName = `${artifactName}.json`;
-    const result = await getAzurePipelineArtifact({
-      ado_build_id,
-      ado_project_url,
-      artifactName,
-      artifactFileName,
-      core,
-      fallbackToFailedArtifact: true,
-      token: process.env.ADO_TOKEN,
-    });
+    let artifactData = getSdkMetadataFromChecks(checkRun, allChecks);
+    if (!artifactData) {
+      const buildInfo = getAdoBuildInfoFromUrl(checkRun.details_url);
+      const result = await getAzurePipelineArtifact({
+        ado_build_id: buildInfo.buildId,
+        ado_project_url: buildInfo.projectUrl,
+        artifactName,
+        artifactFileName: `${artifactName}.json`,
+        core,
+        fallbackToFailedArtifact: true,
+      });
+      artifactData = result.artifactData;
+    }
     // Parse the JSON data
-    if (!result.artifactData) {
+    if (!artifactData) {
       throw new Error(
         `Artifact '${artifactName}' not found in the build with details_url:${checkRun.details_url}`,
       );
     }
 
-    const artifactJsonObj = SpecGenSdkArtifactInfoSchema.parse(JSON.parse(result.artifactData));
+    const artifactJsonObj = SpecGenSdkArtifactInfoSchema.parse(JSON.parse(artifactData));
     const language = artifactJsonObj.language;
     const shortLanguageName = language.split("-").pop();
     const executionResult = artifactJsonObj.result;
