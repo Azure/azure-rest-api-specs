@@ -44,16 +44,14 @@ describe("SDK breaking-change summary", () => {
     );
   });
 
-  it.each([
-    "BreakingChange-Go-Sdk",
-    "BreakingChange-Java-Sdk",
-    "BreakingChange-JavaScript-Sdk",
-    "BreakingChange-Python-Sdk",
-  ])("omits approved breaking changes for %s", (label) => {
-    expect(buildSdkBreakingChangesSummary([label, `${label}-Approved`], [], headSha, prUrl)).toBe(
-      "",
-    );
-  });
+  it.each(["BreakingChange-Go-Sdk", "BreakingChange-JavaScript-Sdk", "BreakingChange-Python-Sdk"])(
+    "omits approved breaking changes for %s",
+    (label) => {
+      expect(buildSdkBreakingChangesSummary([label, `${label}-Approved`], [], headSha, prUrl)).toBe(
+        "",
+      );
+    },
+  );
 
   it("renders only languages with unapproved breaking changes", () => {
     const labels = [
@@ -84,7 +82,6 @@ describe("SDK breaking-change summary", () => {
 
   it.each([
     ["BreakingChange-Go-Sdk", "Go"],
-    ["BreakingChange-Java-Sdk", "Java"],
     ["BreakingChange-JavaScript-Sdk", "JavaScript"],
     ["BreakingChange-Python-Sdk", "Python"],
   ])("links reports for %s", (label, language) => {
@@ -99,7 +96,7 @@ describe("SDK breaking-change summary", () => {
     expect(summary).toContain(`[View analysis Results](${prUrl}#issuecomment-1)`);
   });
 
-  it.each(["BreakingChange-.Net-Sdk", "BreakingChange-Rust-Sdk"])(
+  it.each(["BreakingChange-Java-Sdk", "BreakingChange-.Net-Sdk", "BreakingChange-Rust-Sdk"])(
     "omits %s when it is not configured in the workflow SDK labels",
     (label) => {
       expect(hasSdkBreakingChanges([label])).toBe(false);

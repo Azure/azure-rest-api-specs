@@ -1,4 +1,5 @@
 import type { Core } from "@azure-tools/github-core/github";
+import { sdkLabels } from "@azure-tools/specs-shared/sdk-types";
 /*
     This file covers two areas of enforcement:
     1. It calculates what set of label rules has been violated by the current PR, for the purposes of updating next steps to merge.
@@ -308,73 +309,6 @@ export class Label {
 
 // #endregion typedefs
 // #region constants
-export const sdkLabels = {
-  "azure-cli-extensions": {
-    breakingChange: undefined,
-    breakingChangeApproved: undefined,
-    breakingChangeSuppression: undefined,
-    breakingChangeSuppressionApproved: undefined,
-    deprecatedBreakingChange: undefined,
-    deprecatedBreakingChangeApproved: undefined,
-  },
-  "azure-resource-manager-schemas": {
-    breakingChange: undefined,
-    breakingChangeApproved: undefined,
-    breakingChangeSuppression: undefined,
-    breakingChangeSuppressionApproved: undefined,
-    deprecatedBreakingChange: undefined,
-    deprecatedBreakingChangeApproved: undefined,
-  },
-  "azure-sdk-for-go": {
-    breakingChange: "BreakingChange-Go-Sdk",
-    breakingChangeApproved: "BreakingChange-Go-Sdk-Approved",
-    breakingChangeSuppression: "BreakingChange-Go-Sdk-Suppression",
-    breakingChangeSuppressionApproved: "BreakingChange-Go-Sdk-Suppression-Approved",
-    deprecatedBreakingChange: "CI-BreakingChange-Go",
-    deprecatedBreakingChangeApproved: "Approved-SdkBreakingChange-Go",
-  },
-  "azure-sdk-for-java": {
-    breakingChange: "BreakingChange-Java-Sdk",
-    breakingChangeApproved: "BreakingChange-Java-Sdk-Approved",
-    breakingChangeSuppression: "BreakingChange-Java-Sdk-Suppression",
-    breakingChangeSuppressionApproved: "BreakingChange-Java-Sdk-Suppression-Approved",
-    deprecatedBreakingChange: "CI-BreakingChange-Java",
-    deprecatedBreakingChangeApproved: "Approved-SdkBreakingChange-Java",
-  },
-  "azure-sdk-for-js": {
-    breakingChange: "BreakingChange-JavaScript-Sdk",
-    breakingChangeApproved: "BreakingChange-JavaScript-Sdk-Approved",
-    breakingChangeSuppression: "BreakingChange-JavaScript-Sdk-Suppression",
-    breakingChangeSuppressionApproved: "BreakingChange-JavaScript-Sdk-Suppression-Approved",
-    deprecatedBreakingChange: "CI-BreakingChange-JavaScript",
-    deprecatedBreakingChangeApproved: "Approved-SdkBreakingChange-JavaScript",
-  },
-  "azure-sdk-for-net": {
-    breakingChange: undefined,
-    breakingChangeApproved: undefined,
-    breakingChangeSuppression: undefined,
-    breakingChangeSuppressionApproved: undefined,
-    deprecatedBreakingChange: undefined,
-    deprecatedBreakingChangeApproved: undefined,
-  },
-  "azure-sdk-for-python": {
-    breakingChange: "BreakingChange-Python-Sdk",
-    breakingChangeApproved: "BreakingChange-Python-Sdk-Approved",
-    breakingChangeSuppression: "BreakingChange-Python-Sdk-Suppression",
-    breakingChangeSuppressionApproved: "BreakingChange-Python-Sdk-Suppression-Approved",
-    deprecatedBreakingChange: "CI-BreakingChange-Python",
-    deprecatedBreakingChangeApproved: "Approved-SdkBreakingChange-Python",
-  },
-  "azure-sdk-for-trenton": {
-    breakingChange: undefined,
-    breakingChangeApproved: undefined,
-    breakingChangeSuppression: undefined,
-    breakingChangeSuppressionApproved: undefined,
-    deprecatedBreakingChange: undefined,
-    deprecatedBreakingChangeApproved: undefined,
-  },
-};
-
 // todo: pull values from eng/tools/openapi-diff-runner/src/types/breaking-change.ts
 export const breakingChangesCheckType: Record<
   BreakingChangesCheckType,
