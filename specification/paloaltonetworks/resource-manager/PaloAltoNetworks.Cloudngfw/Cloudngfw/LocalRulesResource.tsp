@@ -40,7 +40,7 @@ interface LocalRulesResources {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<LocalRulesResource>;
 
   /**
-   * Delete a LocalRulesResource
+   * Delete a LocalRulesResource object
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
