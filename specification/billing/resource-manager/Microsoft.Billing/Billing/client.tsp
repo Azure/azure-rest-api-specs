@@ -212,6 +212,11 @@ using Microsoft.Billing;
   "csharp"
 );
 @@clientName(
+  BillingAccounts.savingsPlansListByBillingAccount,
+  "GetByBillingAccount",
+  "csharp"
+);
+@@clientName(
   BillingAccounts.resolveByBillingAccount,
   "resolveByBillingAccountBillingRoleAssignment",
   "csharp"
@@ -254,6 +259,7 @@ using Microsoft.Billing;
 );
 @@clientName(BillingRelationshipType.CSPCustomer, "CspCustomer", "csharp");
 @@clientName(BillingRelationshipType.CSPPartner, "CspPartner", "csharp");
+@@clientName(BillingRequest, exact("BillingRequest"), "csharp");
 @@clientName(BillingRequestProperties.type, "RequestType", "csharp");
 @@clientName(
   BillingSubscriptionAliasProperties.beneficiaryTenantId,

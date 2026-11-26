@@ -5,7 +5,7 @@ Protected labels can be added or removed only by their configured approvers.
 ## How it works
 
 1. `.github/protected-labels.yml` maps labels to authorized GitHub users or teams.
-2. The Azure SDK Automation App handles `pull_request.labeled` and `pull_request.unlabeled` events for PRs targeting `main`.
+2. The Azure SDK Automation App handles `pull_request.labeled` and `pull_request.unlabeled` events.
 3. The App reads policy from the PR's immutable base commit.
 4. If an unauthorized user applies a protected label, the App removes it and posts a warning.
 5. If an unauthorized user removes a protected label, the App restores it and updates its warning comment.
@@ -14,6 +14,10 @@ Warning comments mention the unauthorized actor and direct them to the **Next St
 comment and the [review and merge process](https://aka.ms/azsdk/specreview/merge).
 Warnings for unauthorized additions list label approvers in a collapsed **See allowed approvers**
 section without `@mentions`.
+
+The App's event subscriptions and branch filters are managed outside this repository.
+Review routing does not configure the App's enforcement scope; `.github/protected-labels.yml`
+defines who may change each protected label.
 
 ## Configuration
 

@@ -1,6 +1,11 @@
 import path from "node:path";
-import { normalizeAutorestContract, sameAutorestContract } from "./autorest-contract.ts";
+import {
+  effectiveSchemaProperties,
+  normalizeAutorestContract,
+  sameAutorestContract,
+} from "./autorest-contract.ts";
 import { isMain, isRecord, parseArgs, readJsonObject, runMain, writeJson } from "./cli.ts";
+import { hasUnavailableHeadBaseline, usesTargetOnlyArtifacts } from "./comparison-execution.ts";
 import { semanticIntentType } from "./semantic-assessment-scope.ts";
 import { attachSemanticChangeFacts, isVersionGovernanceOnly } from "./semantic-change-facts.ts";
 import { canonicalJson, stableId } from "./stable-id.ts";
@@ -283,8 +288,9 @@ function compactSchema(
     if (schema[key] !== undefined) result[key] = schema[key];
   }
   if (schema.references?.length) result.references = schema.references;
-  if (depth < 2 && schema.properties?.length) {
-    result.properties = schema.properties.map((property) => ({
+  const properties = effectiveSchemaProperties(schema);
+  if (depth < 2 && properties.length) {
+    result.properties = properties.map((property) => ({
       name: property.name,
       required: property.required,
       schema: compactRequiredSchema(property.schema, depth + 1),
@@ -1095,7 +1101,8 @@ function mergeUnitGroup(
     (operation) => operation.matchBasis === "operation-identity",
   );
   const addedOperations = allOperations.filter(
-    (operation) => !operation.beforeFactId && operation.afterFactId,
+    (operation) =>
+      !operation.comparisonUnavailable && !operation.beforeFactId && operation.afterFactId,
   );
   const removedOperations = allOperations.filter(
     (operation) => operation.beforeFactId && !operation.afterFactId,
@@ -1122,7 +1129,7 @@ function mergeUnitGroup(
     ...directChangedOperations,
     ...directRemovedOperations,
   ].sort((left, right) => left.operationId.localeCompare(right.operationId));
-  const operations =
+  const selectedOperations =
     featureAdded && addedOperations.length
       ? additionsWithDirectChanges
       : groupingEvidence.includes("behavior:lro") && directChangedOperations.length
@@ -1134,9 +1141,16 @@ function mergeUnitGroup(
             : directOperations.length
               ? directOperations
               : allOperations;
-  const semanticAction =
-    operations.length &&
-    operations.every((operation) => !operation.beforeFactId && operation.afterFactId)
+  const operations = [
+    ...new Set([
+      ...selectedOperations,
+      ...allOperations.filter((operation) => operation.comparisonUnavailable),
+    ]),
+  ];
+  const semanticAction = operations.some((operation) => operation.comparisonUnavailable)
+    ? action
+    : operations.length &&
+        operations.every((operation) => !operation.beforeFactId && operation.afterFactId)
       ? "add"
       : operations.length &&
           operations.every((operation) => operation.beforeFactId && !operation.afterFactId)
@@ -1364,6 +1378,7 @@ function buildProjectUnits(
     declaration: SourceDeclaration | ReferencedDeclaration,
   ) => Set<NormalizedAutorestOperation>,
 ): InternalSemanticUnit[] {
+  const comparisonUnavailable = hasUnavailableHeadBaseline(project.artifactComparison);
   const projectSources = sourceIndex.sourceChanges.filter((source) =>
     project.sourceChangeIds?.includes(source.id),
   );
@@ -1436,7 +1451,9 @@ function buildProjectUnits(
           operationId: pair.operationId,
           beforeFactId,
           afterFactId,
-          restChanged: restChanged(pair.before, pair.after),
+          ...(comparisonUnavailable
+            ? { comparisonUnavailable: true }
+            : { restChanged: restChanged(pair.before, pair.after) }),
           matchBasis,
           sourceChangeIds: [source.id],
           hunkIds: [hunk.id],
@@ -1462,16 +1479,18 @@ function buildProjectUnits(
         operationIds: unique(operations.map((item) => item.afterFactId ?? item.beforeFactId)),
         beforeFactIds: unique(operations.map((item) => item.beforeFactId)),
         afterFactIds: unique(operations.map((item) => item.afterFactId)),
-        changedAspects: [
-          ...new Set(
-            operations.flatMap((item) =>
-              changedAspects(
-                item.beforeFactId ? facts[item.beforeFactId] : undefined,
-                item.afterFactId ? facts[item.afterFactId] : undefined,
+        changedAspects: comparisonUnavailable
+          ? []
+          : [
+              ...new Set(
+                operations.flatMap((item) =>
+                  changedAspects(
+                    item.beforeFactId ? facts[item.beforeFactId] : undefined,
+                    item.afterFactId ? facts[item.afterFactId] : undefined,
+                  ),
+                ),
               ),
-            ),
-          ),
-        ].sort(),
+            ].sort(),
       };
       const identity = {
         ...unit,
@@ -1530,16 +1549,15 @@ export function analyzeSemanticIntents(options: {
   for (const project of [...(manifest.projects ?? [])].sort((left, right) =>
     left.id.localeCompare(right.id),
   )) {
-    const newProject =
-      project.classification === "new" || project.artifactComparison?.mode === "new-project";
+    const targetOnly = usesTargetOnlyArtifacts(project);
     const baseArtifact = project.artifacts?.baseline?.autorest ?? project.artifacts?.base?.autorest;
     const currentArtifact =
       project.artifacts?.target?.autorest ?? project.artifacts?.current?.autorest;
-    if ((!newProject && !artifactReady(baseArtifact)) || !artifactReady(currentArtifact)) {
+    if ((!targetOnly && !artifactReady(baseArtifact)) || !artifactReady(currentArtifact)) {
       blockers.push({
         code: "autorest-artifacts-unavailable",
         projectId: project.id,
-        message: `${newProject ? "Target" : "Baseline and target"} AutoRest artifacts are required for ${project.id}.`,
+        message: `${targetOnly ? "Target" : "Baseline and target"} AutoRest artifacts are required for ${project.id}.`,
       });
       continue;
     }
@@ -1556,7 +1574,7 @@ export function analyzeSemanticIntents(options: {
             }
           : contract;
       };
-      const base = newProject ? undefined : selectedContract(baseArtifact, "baseline");
+      const base = targetOnly ? undefined : selectedContract(baseArtifact, "baseline");
       const current = selectedContract(currentArtifact, "target");
       const resolveOperation = operationResolver(
         project,
@@ -1576,6 +1594,16 @@ export function analyzeSemanticIntents(options: {
         projectId: project.id,
         message: error instanceof Error ? error.message : String(error),
       });
+      const sourceUnits = buildProjectUnits(
+        project,
+        undefined,
+        { schemaVersion: 1, documents: [], operations: [] },
+        sourceIndex,
+        facts,
+        () => new Set(),
+      );
+      reviewUnits.push(...sourceUnits);
+      if (sourceUnits.length) analyzedProjects += 1;
     }
   }
   for (const unit of reviewUnits) {

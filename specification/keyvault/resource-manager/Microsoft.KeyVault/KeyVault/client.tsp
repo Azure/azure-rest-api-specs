@@ -64,9 +64,49 @@ using Azure.Core;
   "KeyVaultNetworkSecurityPerimeterResourceAssociationAccessMode",
   "csharp"
 );
+@@clientName(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter,
+  "KeyVaultNetworkSecurityPerimeter",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfiguration,
+  "KeyVaultNetworkSecurityPerimeterConfiguration",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProperties,
+  "KeyVaultNetworkSecurityPerimeterConfigurationProperties",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProvisioningState,
+  "KeyVaultNetworkSecurityPerimeterConfigurationProvisioningState",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityProfile,
+  "KeyVaultNetworkSecurityProfile",
+  "csharp"
+);
 @@alternateType(
   Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter.location,
   azureLocation,
+  "csharp"
+);
+@@clientName(
+  NetworkSecurityPerimeterConfigurations.getConfiguration,
+  "GetNetworkSecurityPerimeterConfiguration",
+  "csharp"
+);
+@@clientName(
+  NetworkSecurityPerimeterConfigurations.listConfigurations,
+  "GetNetworkSecurityPerimeterConfigurations",
+  "csharp"
+);
+@@clientName(
+  NetworkSecurityPerimeterConfigurations.reconcileConfiguration,
+  "ReconcileNetworkSecurityPerimeterConfiguration",
   "csharp"
 );
 
@@ -564,4 +604,31 @@ enum NameAvailabilityReason {
   "resource-name-constraint",
   #{ minLength: 1, maxLength: 127, pattern: "^[a-zA-Z0-9-]+$" },
   "csharp"
+);
+
+/**
+ * The type of action.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum PascalKeyRotationPolicyActionType {
+  /**
+   * Trigger Event Grid events.
+   */
+  notify: "Notify",
+
+  /**
+   * Rotate the key based on the key policy.
+   */
+  rotate: "Rotate",
+}
+
+@@alternateType(
+  KeyRotationPolicyActionType,
+  PascalKeyRotationPolicyActionType,
+  "rust"
+);
+@@clientName(
+  PascalKeyRotationPolicyActionType,
+  "KeyRotationPolicyActionType",
+  "rust"
 );

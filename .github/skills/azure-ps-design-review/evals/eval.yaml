@@ -2,16 +2,15 @@ name: azure-ps-design-review-eval
 description: Routing and capability tests for the azure-ps-design-review skill
 type: capability
 
-environment: azsdk-mcp-mock
+agent_environment: azsdk-mcp-mock
 
 tags:
   area: azure-ps-design-review
   type: ci-gate
 
-config:
+defaults:
   runs: 1
   timeout: "120s"
-  model: gpt-5.4
   executor: copilot-sdk
 
 scoring:
@@ -21,7 +20,7 @@ stimuli:
   # --- Triggers: requests that should route to this skill ----------------
   - name: trigger-create-ps-design
     prompt: "Help me create a PowerShell design for my new Compute feature."
-    environment:
+    agent_environment:
       skills:
         - ..
     graders:
@@ -31,7 +30,7 @@ stimuli:
 
   - name: trigger-ps-design-review
     prompt: "I need to submit a PS design review for my new cmdlets."
-    environment:
+    agent_environment:
       skills:
         - ..
     graders:
@@ -41,7 +40,7 @@ stimuli:
 
   - name: trigger-cmdlet-design
     prompt: "Create a cmdlet design spec from my TypeSpec PR https://github.com/Azure/azure-rest-api-specs/pull/12345 and file it for review."
-    environment:
+    agent_environment:
       skills:
         - ..
     graders:
@@ -51,7 +50,7 @@ stimuli:
 
   - name: trigger-powershell-cmdlet-review
     prompt: "Start a PowerShell cmdlet review for the new snapshot operations in Az.Compute."
-    environment:
+    agent_environment:
       skills:
         - ..
     graders:
@@ -64,7 +63,7 @@ stimuli:
   # not fabricate/file a design without ingesting the PR first.
   - name: capability-pr-link-first
     prompt: "Help me create a PowerShell design for my new Compute feature."
-    environment:
+    agent_environment:
       skills:
         - ..
     graders:
@@ -80,7 +79,7 @@ stimuli:
 
   - name: capability-telemetry-and-title
     prompt: "I've already given you my PR and answered your questions. Show me exactly how you'll format the review issue title and the required footer line before you file it. My module is Az.Compute and the feature is ManagedDisk Snapshot."
-    environment:
+    agent_environment:
       skills:
         - ..
     graders:
@@ -94,7 +93,7 @@ stimuli:
   # --- Anti-triggers: requests that must NOT route to this skill ---------
   - name: anti-trigger-sdk-generation
     prompt: "Generate the Python SDK from my TypeSpec project locally."
-    environment:
+    agent_environment:
       skills:
         - ..
     graders:
@@ -104,7 +103,7 @@ stimuli:
 
   - name: anti-trigger-typespec-authoring
     prompt: "Add a new stable API version to my TypeSpec definition."
-    environment:
+    agent_environment:
       skills:
         - ..
     graders:
@@ -114,7 +113,7 @@ stimuli:
 
   - name: anti-trigger-release-package
     prompt: "Release the azure-mgmt-compute Python package to PyPI."
-    environment:
+    agent_environment:
       skills:
         - ..
     graders:
@@ -124,7 +123,7 @@ stimuli:
 
   - name: anti-trigger-api-review
     prompt: "Review my ARM API specification for breaking changes."
-    environment:
+    agent_environment:
       skills:
         - ..
     graders:

@@ -4,6 +4,8 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Migrate;
 
+@@clientName(Linkages.armId, "ARMID", "go");
+
 @@clientName(
   Microsoft.Migrate,
   "MigrateContainerAppsAssessmentsMgmtClient",
@@ -41,4 +43,10 @@ using Microsoft.Migrate;
   ContainerAppsSummaryOperations,
   "ContainerAppsSummaryOperations",
   "autorest"
+);
+
+@@clientName(
+  Microsoft.Migrate,
+  "MigrateContainerAppsAssessmentsManagementClient",
+  "javascript"
 );
