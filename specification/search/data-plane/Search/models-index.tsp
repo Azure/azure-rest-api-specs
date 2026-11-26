@@ -1802,6 +1802,7 @@ model IndexingResult {
   errorMessage?: string;
 
   /** A value indicating whether the indexing operation succeeded for the document identified by the key. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-bool-prefix" "Back compat: Preserve the existing succeeded client-name override and the shipped Azure.Search.Documents.Models.IndexingResult.Succeeded C# property. Adding a verb prefix would rename an existing public SDK member."
   @visibility(Lifecycle.Read)
   status: boolean;
 
