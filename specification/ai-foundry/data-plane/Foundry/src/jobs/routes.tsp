@@ -85,7 +85,7 @@ interface Jobs {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Artifact sub-resource path; cannot be expressed with standard resource operations."
   @doc("Get content access information for one artifact identified by its exact path. Returns a download URI and the byte length when available; this operation does not list a directory or return a page of artifacts. Returns 400 if `path` is omitted, empty, or whitespace-only. Returns 404 if the job is missing or deleted, or no artifact exists at the exact case-sensitive path. Failures use the shared Azure error response.")
-  @route("/training_jobs/{name}/artifacts/contentinfo")
+  @route("/training_jobs/{name}/artifacts/content_info")
   @get
   getArtifactContentInformation(
     ...FoundryDataPlaneApiVersionParameter,
@@ -132,10 +132,10 @@ interface Jobs {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Explicit FTJ resource action preserves the required preview header."
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "FTJ cancellation acknowledges the request with 200 and no response body."
-  @doc("Request cancellation of a job. Returns 200 with no body after the cancellation request is processed, or if the job is already terminal. This acknowledgement does not guarantee that training has stopped or will end as `Canceled`. Use `get` to observe execution state; `Completed` or `Failed` may be observed if execution finishes before cancellation takes effect. A missing or deleted job returns 404, and a job that has not been submitted can return 409. Request failures use the normal API error response, not an asynchronous operation result. No operation monitor or polling URL is returned. This contract retains /training_jobs/{name}/cancel to match the existing Foundry backend action shape and both gateway registrations; :cancel is not an alternate route.")
+  @doc("Request cancellation of a job. Returns 200 with no body after the cancellation request is processed, or if the job is already terminal. This acknowledgement does not guarantee that training has stopped or will end as `Canceled`. Use `get` to observe execution state; `Completed` or `Failed` may be observed if execution finishes before cancellation takes effect. A missing or deleted job returns 404, and a job that has not been submitted can return 409. Request failures use the normal API error response, not an asynchronous operation result. No operation monitor or polling URL is returned.")
   @post
   @Rest.action("cancel")
-  @actionSeparator("/")
+  @actionSeparator(":")
   cancel is Azure.Core.Foundations.ResourceOperation<
     Job,
     {
