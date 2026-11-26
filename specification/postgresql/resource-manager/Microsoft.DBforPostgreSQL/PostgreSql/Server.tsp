@@ -63,7 +63,6 @@ interface Servers {
   /**
    * Updates an existing server. The request body can contain one or multiple of the properties present in the normal server definition.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<

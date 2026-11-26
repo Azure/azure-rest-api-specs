@@ -70,7 +70,6 @@ interface WebApplicationFirewallPolicies {
   /**
    * Patch a specific frontdoor webApplicationFirewall policy for tags update under the specified subscription and resource group.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     WebApplicationFirewallPolicy,

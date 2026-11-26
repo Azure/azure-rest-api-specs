@@ -91,7 +91,6 @@ interface IotHubDescriptions {
   /**
    * Update an existing IoT Hub tags. to update other fields use the CreateOrUpdate method
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "Final-state-via location is retained to match the published LRO behavior of this tags update operation."
   @summary("Update an existing IoT Hubs tags.")
   @tag("PATCH")

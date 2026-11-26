@@ -60,7 +60,6 @@ interface Clusters {
   /**
    * Update the configuration of a Service Fabric cluster resource with the specified name.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "servicefabric is brownfield service with existing non-standard 202 response body"
   @summary("Updates the configuration of a Service Fabric cluster resource.")
   @tag("Cluster")

@@ -45,7 +45,6 @@ interface Licenses {
   /**
    * The operation to update a license.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @tag("licenses")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<

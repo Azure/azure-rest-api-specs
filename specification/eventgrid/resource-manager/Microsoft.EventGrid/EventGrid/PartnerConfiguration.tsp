@@ -54,7 +54,6 @@ interface PartnerConfigurations {
   /**
    * Synchronously updates a partner configuration with the specified parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @summary("Update a partner configuration.")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<

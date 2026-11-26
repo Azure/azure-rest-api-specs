@@ -134,7 +134,6 @@ interface Sites {
   /**
    * Description for Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.")
@@ -1598,7 +1597,6 @@ interface WebApps {
   /**
    * Description for Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.")

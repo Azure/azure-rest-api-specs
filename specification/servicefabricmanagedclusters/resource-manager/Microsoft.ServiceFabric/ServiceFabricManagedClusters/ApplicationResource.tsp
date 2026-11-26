@@ -64,7 +64,6 @@ interface Applications {
   /**
    * Updates an application resource of a given managed cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Day 0 Property"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<

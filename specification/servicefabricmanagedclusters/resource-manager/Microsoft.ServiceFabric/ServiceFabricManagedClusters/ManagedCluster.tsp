@@ -66,7 +66,6 @@ interface ManagedClusters {
   /**
    * Update the tags of of a Service Fabric managed cluster resource with the specified name.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Day 0 Property"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
