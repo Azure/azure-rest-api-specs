@@ -331,10 +331,10 @@ model BotProperties {
   msaAppId: string;
 
   /**
-   * Microsoft App Tenant Id for the bot
+   * The display name of the Microsoft App tenant for the bot.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  msaAppTenantId?: string;
+  msaAppTenantName?: string;
 
   /**
    * Microsoft App Managed Identity Resource Id for the bot
