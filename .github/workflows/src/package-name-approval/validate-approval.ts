@@ -279,28 +279,62 @@ async function handleLabeled({
   }
 }
 
+export type LabelChange = {
+  owner: string;
+  repo: string;
+  prNumber: number;
+  action: "labeled" | "unlabeled";
+  targetLabel: string;
+  /** Login that made the label change. Callers must take this from a trusted source. */
+  actor: string;
+  /** PR labels as of the change. */
+  labels: string[];
+};
+
 /**
  * Validate namespace label changes by authorized approvers.
  * Handles both labeled (approval) and unlabeled (guard against unauthorized removal).
  */
 export default async function validateApproval({ github, context, core }: GitHubScriptArgs) {
-  const packageNamePolicy = await loadPackageNamePolicy();
-  const approversConfig = createApproversConfig(packageNamePolicy);
-
   const { owner, repo, issue_number } = await extractInputs(github, context, core);
 
   const payload = context.payload as WebhookEvent<"pull-request", "labeled" | "unlabeled">;
 
-  const labels: string[] = payload.pull_request.labels.map((label: { name: string }) => label.name);
   const targetLabel = payload.label?.name;
   if (!targetLabel) {
     throw new Error("Pull request label event is missing a label name.");
   }
-  const actor = payload.sender.login;
+
+  return await validateLabelChange({
+    github,
+    context,
+    core,
+    change: {
+      owner,
+      repo,
+      prNumber: issue_number,
+      action: payload.action,
+      targetLabel,
+      actor: payload.sender.login,
+      labels: payload.pull_request.labels.map((label: { name: string }) => label.name),
+    },
+  });
+}
+
+export async function validateLabelChange({
+  github,
+  context,
+  core,
+  change,
+}: GitHubScriptArgs & { change: LabelChange }) {
+  const packageNamePolicy = await loadPackageNamePolicy();
+  const approversConfig = createApproversConfig(packageNamePolicy);
+
+  const { owner, repo, prNumber: issue_number, targetLabel, actor, labels } = change;
   // Plane from resource-manager (self-healing), not the add-only "Mgmt" label (#46785).
   const isMgmt = labels.includes("resource-manager");
 
-  if (payload.action === "unlabeled") {
+  if (change.action === "unlabeled") {
     return await handleUnlabeled({
       github,
       context,
