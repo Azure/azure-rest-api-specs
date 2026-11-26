@@ -5,10 +5,10 @@ import {
   resourceManager,
   swagger,
 } from "../../../shared/src/changed-files.ts";
+import { ArmModelingLabel } from "@azure-tools/specs-shared/labels";
 import { CoreLogger } from "@azure-tools/github-core/core-logger";
 import type { Core } from "@azure-tools/github-core/github";
 import { LabelAction } from "@azure-tools/github-core/label";
-import { ArmLeaseValidationLabel } from "./arm-lease-validation-labels.ts";
 import { checkLease } from "./detect-arm-leases.ts";
 import { detectNewResourceTypes } from "./detect-new-resource-types.ts";
 
@@ -76,25 +76,25 @@ function getLabelActions(
 ): ManagedLabelActions {
   if (outcome === "review-required") {
     return {
-      [ArmLeaseValidationLabel.ArmModelingReviewRequired]: LabelAction.Add,
-      [ArmLeaseValidationLabel.ArmModelingSignedOff]: LabelAction.Remove,
-      [ArmLeaseValidationLabel.ArmModelingAutoSignedOff]: LabelAction.Remove,
+      [ArmModelingLabel.ReviewRequired]: LabelAction.Add,
+      [ArmModelingLabel.SignedOff]: LabelAction.Remove,
+      [ArmModelingLabel.AutoSignedOff]: LabelAction.Remove,
     };
   }
 
   if (outcome === "auto-signed-off") {
     return {
-      [ArmLeaseValidationLabel.ArmModelingReviewRequired]: LabelAction.Remove,
-      [ArmLeaseValidationLabel.ArmModelingSignedOff]: LabelAction.Remove,
-      [ArmLeaseValidationLabel.ArmModelingAutoSignedOff]: LabelAction.Add,
+      [ArmModelingLabel.ReviewRequired]: LabelAction.Remove,
+      [ArmModelingLabel.SignedOff]: LabelAction.Remove,
+      [ArmModelingLabel.AutoSignedOff]: LabelAction.Add,
     };
   }
 
   // outcome === "none"
   return {
-    [ArmLeaseValidationLabel.ArmModelingReviewRequired]: LabelAction.Remove,
-    [ArmLeaseValidationLabel.ArmModelingSignedOff]: LabelAction.Remove,
-    [ArmLeaseValidationLabel.ArmModelingAutoSignedOff]: LabelAction.Remove,
+    [ArmModelingLabel.ReviewRequired]: LabelAction.Remove,
+    [ArmModelingLabel.SignedOff]: LabelAction.Remove,
+    [ArmModelingLabel.AutoSignedOff]: LabelAction.Remove,
   };
 }
 

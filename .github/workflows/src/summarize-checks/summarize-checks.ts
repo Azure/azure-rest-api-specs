@@ -50,7 +50,7 @@ import {
 import { statusBadge, type CommentStatus } from "./comment-status.ts";
 import { buildSdkBreakingChangesSummary, hasSdkBreakingChanges } from "./sdk-breaking-changes.ts";
 import { extractInputs } from "@azure-tools/github-core/context";
-import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
+import { ArmReviewLabel, TypeSpecSuppressionLabel } from "@azure-tools/specs-shared/labels";
 import {
   ImpactAssessmentSchema,
   brChRevApproval,
@@ -163,7 +163,7 @@ const CHECK_METADATA: CheckMetadata[] = [
   {
     precedence: 0,
     name: "TypeSpec Suppressions",
-    suppressionLabels: [TYPESPEC_SUPPRESSIONS_APPROVED_LABEL],
+    suppressionLabels: [TypeSpecSuppressionLabel.Approved],
     troubleshootingGuide: typeSpecSuppressionsTsg,
   },
   {
@@ -530,8 +530,8 @@ export async function summarizeChecksImpl(
     !privateFork &&
       impactAssessment !== undefined &&
       !reviewContext.isDraft &&
-      labelNames.includes("ARMReview") &&
-      labelNames.includes("WaitForARMFeedback"),
+      labelNames.includes(ArmReviewLabel.ArmReview) &&
+      labelNames.includes(ArmReviewLabel.WaitForArmFeedback),
   );
 }
 

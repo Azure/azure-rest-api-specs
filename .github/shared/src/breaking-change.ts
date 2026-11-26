@@ -1,73 +1,85 @@
-/* v8 ignore start */
-
 /**
- * Breaking change configuration and constants for Azure REST API specs
- * This file contains the single source of truth for all breaking change and versioning approval labels.
- *
- * Used across multiple tools in the Azure/azure-rest-api-specs repository.
+ * Breaking change configuration and constants for Azure REST API specs.
+ * Label constants are sourced from `./labels.ts` and re-exported here for compatibility.
  */
 
-// All versioning approval labels in one place
-export const VERSIONING_APPROVALS = {
-  BENIGN: "Versioning-Approved-Benign",
-  BUG_FIX: "Versioning-Approved-BugFix",
-  PRIVATE_PREVIEW: "Versioning-Approved-PrivatePreview",
-  BRANCH_POLICY_EXCEPTION: "Versioning-Approved-BranchPolicyException",
-  PREVIOUSLY: "Versioning-Approved-Previously",
-  RETIRED: "Versioning-Approved-Retired",
+import {
+  APPROVAL_PREFIX_LABELS,
+  BREAKING_CHANGE_APPROVALS,
+  REVIEW_REQUIRED_LABELS,
+  VERSIONING_APPROVALS,
+  type ReviewApprovalPrefixLabel,
+  type ReviewRequiredLabel,
+  type ValidBreakingChangeApproval,
+  type ValidVersioningApproval,
+} from "./labels.ts";
+
+export {
+  APPROVAL_PREFIX_LABELS,
+  BREAKING_CHANGE_APPROVALS,
+  REVIEW_REQUIRED_LABELS,
+  VERSIONING_APPROVALS,
+  type ReviewApprovalPrefixLabel,
+  type ReviewRequiredLabel,
+  type ValidBreakingChangeApproval,
+  type ValidVersioningApproval,
 };
 
-// All breaking change approval labels in one place
-export const BREAKING_CHANGE_APPROVALS = {
-  BENIGN: "BreakingChange-Approved-Benign",
-  BUG_FIX: "BreakingChange-Approved-BugFix",
-  USER_IMPACT: "BreakingChange-Approved-UserImpact",
-  BRANCH_POLICY_EXCEPTION: "BreakingChange-Approved-BranchPolicyException",
-  PREVIOUSLY: "BreakingChange-Approved-Previously",
-  SECURITY: "BreakingChange-Approved-Security",
-};
+export type SpecsBreakingChangesLabel =
+  | ReviewRequiredLabel
+  | ReviewApprovalPrefixLabel
+  | ValidBreakingChangeApproval
+  | ValidVersioningApproval;
 
-// Review required labels
-export const REVIEW_REQUIRED_LABELS = {
-  BREAKING_CHANGE: "BreakingChangeReviewRequired",
-  VERSIONING: "VersioningReviewRequired",
+// Check types
+export const BREAKING_CHANGES_CHECK_TYPES = Object.freeze({
+  SAME_VERSION: "SameVersion",
+  CROSS_VERSION: "CrossVersion",
+});
+export type BreakingChangesCheckType =
+  (typeof BREAKING_CHANGES_CHECK_TYPES)[keyof typeof BREAKING_CHANGES_CHECK_TYPES];
+
+export type BreakingChangesCheckConfig = {
+  readonly reviewRequiredLabel: ReviewRequiredLabel;
+  readonly approvalPrefixLabel: ReviewApprovalPrefixLabel;
+  readonly approvalLabels: readonly (ValidVersioningApproval | ValidBreakingChangeApproval)[];
+  readonly deprecatedReviewRequiredLabel?: string;
 };
 
 // Extract values as arrays for validation and configuration
-export const versioningApprovalValues = Object.values(VERSIONING_APPROVALS);
-export const breakingChangeApprovalValues = Object.values(BREAKING_CHANGE_APPROVALS);
-export const reviewRequiredLabelValues = Object.values(REVIEW_REQUIRED_LABELS);
+export const versioningApprovalValues: readonly ValidVersioningApproval[] =
+  Object.values(VERSIONING_APPROVALS);
+export const breakingChangeApprovalValues: readonly ValidBreakingChangeApproval[] =
+  Object.values(BREAKING_CHANGE_APPROVALS);
+export const reviewRequiredLabelValues: readonly ReviewRequiredLabel[] =
+  Object.values(REVIEW_REQUIRED_LABELS);
 
 // Type guard functions for runtime validation
 
-export function isValidVersioningApproval(value: string) {
-  return versioningApprovalValues.includes(value);
+export function isValidVersioningApproval(value: string): value is ValidVersioningApproval {
+  return (versioningApprovalValues as readonly string[]).includes(value);
 }
 
-export function isValidBreakingChangeApproval(value: string) {
-  return breakingChangeApprovalValues.includes(value);
+export function isValidBreakingChangeApproval(value: string): value is ValidBreakingChangeApproval {
+  return (breakingChangeApprovalValues as readonly string[]).includes(value);
 }
 
-export function isReviewRequiredLabel(value: string) {
-  return reviewRequiredLabelValues.includes(value);
+export function isReviewRequiredLabel(value: string): value is ReviewRequiredLabel {
+  return (reviewRequiredLabelValues as readonly string[]).includes(value);
 }
 
 // Configuration for different check types
-export const breakingChangesCheckType = {
-  SameVersion: {
+export const breakingChangesCheckType: Readonly<
+  Record<BreakingChangesCheckType, BreakingChangesCheckConfig>
+> = Object.freeze({
+  SameVersion: Object.freeze({
     reviewRequiredLabel: REVIEW_REQUIRED_LABELS.VERSIONING,
-    approvalPrefixLabel: "Versioning-Approved-*",
+    approvalPrefixLabel: APPROVAL_PREFIX_LABELS.VERSIONING,
     approvalLabels: versioningApprovalValues,
-  },
-  CrossVersion: {
+  }),
+  CrossVersion: Object.freeze({
     reviewRequiredLabel: REVIEW_REQUIRED_LABELS.BREAKING_CHANGE,
-    approvalPrefixLabel: "BreakingChange-Approved-*",
+    approvalPrefixLabel: APPROVAL_PREFIX_LABELS.BREAKING_CHANGE,
     approvalLabels: breakingChangeApprovalValues,
-  },
-};
-
-// Check types
-export const BREAKING_CHANGES_CHECK_TYPES = {
-  SAME_VERSION: "SameVersion",
-  CROSS_VERSION: "CrossVersion",
-};
+  }),
+});

@@ -1,3 +1,4 @@
+import { SpecPrLabel } from "@azure-tools/specs-shared/labels";
 import {
   generateTypeSpecMetadata,
   type TypeSpecMetadata,
@@ -33,16 +34,16 @@ function getCachedTypeSpecMetadata(
 }
 
 /** Label indicating that a spec PR introduces a new API version. */
-export const NEW_API_VERSION_LABEL = "new-api-version";
+export const NEW_API_VERSION_LABEL = SpecPrLabel.NewApiVersion;
 
 /**
  * Label indicating that a spec PR only migrates/renames folders. Release plan
  * processing must be skipped entirely for PRs carrying this label.
  */
-export const FOLDER_MIGRATION_LABEL = "FolderMigrationV2";
+export const FOLDER_MIGRATION_LABEL = SpecPrLabel.FolderMigrationV2;
 
 /** Label indicating that release plan automation should not process a spec PR. */
-export const SKIP_RELEASE_PLAN_AUTOMATION_LABEL = "skip-releaseplan-automation";
+export const SKIP_RELEASE_PLAN_AUTOMATION_LABEL = SpecPrLabel.SkipReleasePlanAutomation;
 
 async function getTypeSpecProjectInfoFromFiles(
   allFiles: PullRequestChangedFile[],

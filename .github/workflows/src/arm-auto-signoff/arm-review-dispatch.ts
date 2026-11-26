@@ -1,4 +1,5 @@
 import { isFullGitSha } from "../../../shared/src/git.ts";
+import { ArmReviewLabel } from "../../../shared/src/labels.ts";
 import { getLatestCommitStatuses } from "../../../packages/github-core/src/commit-statuses.ts";
 import type { Core, GitHub, GitHubScriptArgs } from "../../../packages/github-core/src/github.ts";
 import {
@@ -8,7 +9,7 @@ import {
 
 const REVIEW_WORKFLOW = "arm-api-review.lock.yml";
 const DISPATCH_FAILED = "Review incomplete: reviewer dispatch failed; retry with /arm-review";
-export const ARM_INITIAL_REVIEW_REQUESTED_LABEL = "ARMInitialReviewRequested";
+export const ARM_INITIAL_REVIEW_REQUESTED_LABEL = ArmReviewLabel.ArmInitialReviewRequested;
 
 export default async function dispatchInitialArmReview({
   github,
@@ -48,14 +49,14 @@ export async function dispatchArmReview(
       candidate.state === "open" &&
       !candidate.draft &&
       candidate.head.sha === headSha &&
-      labels.includes("ARMReview") &&
-      labels.includes("WaitForARMFeedback") &&
+      labels.includes(ArmReviewLabel.ArmReview) &&
+      labels.includes(ArmReviewLabel.WaitForArmFeedback) &&
       ![
-        "NotReadyForARMReview",
-        "ARMChangesRequested",
-        "ARMManualSignoffRequired",
-        "ARMSignedOff",
-        "skip-arm-review",
+        ArmReviewLabel.NotReadyForArmReview,
+        ArmReviewLabel.ArmChangesRequested,
+        ArmReviewLabel.ArmManualSignoffRequired,
+        ArmReviewLabel.ArmSignedOff,
+        ArmReviewLabel.SkipArmReview,
       ].some((label) => labels.includes(label))
     );
   };
