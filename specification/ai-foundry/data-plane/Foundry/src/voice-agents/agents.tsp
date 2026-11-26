@@ -991,7 +991,7 @@ model VoiceAgentVoiceConfig {
   @maxValue(1)
   voice_temperature?: float32;
 
-  @doc("The URL of a custom pronunciation lexicon. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.")
+  @doc("The URL of a custom pronunciation lexicon (PLS). Use an HTTPS URL or a base64 data URL, for example `data:application/pls+xml;base64,<base64-encoded PLS>`. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.")
   custom_lexicon_url?: url;
 
   @doc("The URL of a custom text-normalization configuration. Applies to `azure-standard`, `azure-custom`, `azure-personal`, and `avatar-voice-sync`.")

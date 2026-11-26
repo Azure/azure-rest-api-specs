@@ -45,8 +45,7 @@ interface NginxDeployments {
   /**
    * Create or update the NGINX deployment
    */
-  createOrUpdate is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
-    Extension.ResourceGroup,
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     NginxDeployment,
     OptionalRequestBody = true
   >;

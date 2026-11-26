@@ -380,6 +380,9 @@ export async function summarizeChecksImpl(
     core.info(`Skipping summary for ${head_sha}; PR head is now ${pr.head.sha}.`);
     return;
   }
+  const privateFork = Boolean(
+    pr.base.repo.private && pr.head.repo && pr.head.repo.id !== pr.base.repo.id,
+  );
   const reviewContext: ReviewContext = {
     isDraft: pr.draft ?? false,
     targetBranch: pr.base.ref,
@@ -405,7 +408,7 @@ export async function summarizeChecksImpl(
   } else {
     core.info(
       `No impact assessment found for ${owner}/${repo}#${issue_number}. ` +
-        `No labels will be added or removed in this run, and only "pending" status check will be set.`,
+        `No labels will be added or removed in this run.`,
     );
   }
 
@@ -487,6 +490,7 @@ export async function summarizeChecksImpl(
     impactAssessment !== undefined,
     target_url,
     sdkBreakingChangesSummary,
+    privateFork,
   );
 
   automatedChecksMet.target_url = target_url;
@@ -523,7 +527,8 @@ export async function summarizeChecksImpl(
 
   core.setOutput(
     "arm_review_ready",
-    impactAssessment !== undefined &&
+    !privateFork &&
+      impactAssessment !== undefined &&
       !reviewContext.isDraft &&
       labelNames.includes("ARMReview") &&
       labelNames.includes("WaitForARMFeedback"),
@@ -946,6 +951,7 @@ export function createNextStepsComment(
   assessmentCompleted: boolean,
   target_url: string,
   sdkBreakingChangesSummary: string = "",
+  privateFork: boolean = false,
 ): [string, CheckRunResult] {
   const failingRequiredChecks = requiredRuns.filter((run) => checkRunIsSuccessful(run) === false);
 
@@ -976,6 +982,7 @@ export function createNextStepsComment(
     assessmentCompleted,
     target_url,
     sdkBreakingChangesSummary,
+    privateFork,
   );
 
   return [commentBody, automatedChecksMet];
@@ -995,11 +1002,12 @@ function buildNextStepsToMergeCommentBody(
   assessmentCompleted: boolean,
   target_url: string,
   sdkBreakingChangesSummary: string,
+  privateFork: boolean,
 ): [string, CheckRunResult] {
   const violatedReqLabelsRules = getViolatedRequiredLabelsRules(core, labels, targetBranch);
 
-  // we are "blocked" if we have any violated labelling rules OR if we have any failing required checks
-  const anyBlockerPresent = failingRequiredChecks.length > 0 || violatedReqLabelsRules.length > 0;
+  const anyBlockerPresent =
+    privateFork || failingRequiredChecks.length > 0 || violatedReqLabelsRules.length > 0;
   const anyFyiPresent = failingFyiChecks.length > 0;
   // we consider requirements met if there are:
   // - no blockers (which includes violated labelling rules in its definition) (anyBlockerPresent)
@@ -1022,6 +1030,7 @@ function buildNextStepsToMergeCommentBody(
     completedChecks,
     target_url,
     sdkBreakingChangesSummary,
+    privateFork,
   );
 
   return [renderMarkdownDoc(section("Next Steps to Merge", commentBody), 2), automatedChecksMet];
@@ -1086,6 +1095,7 @@ function getCommentBody(
   completedChecks: CheckRunData[],
   target_url: string,
   sdkBreakingChangesSummary: string,
+  privateFork: boolean,
 ): [MarkdownDoc, CheckRunResult] {
   let status: "pending" | keyof typeof CheckConclusion = "pending";
   let summaryData = "The requirements for merging this PR are still being evaluated. Please wait.";
@@ -1099,7 +1109,8 @@ function getCommentBody(
 
   if (anyBlockerPresent || anyFyiPresent) {
     if (anyBlockerPresent) {
-      const count = failingRequiredChecks.length + violatedRequiredLabelsRules.length;
+      const count =
+        failingRequiredChecks.length + violatedRequiredLabelsRules.length + Number(privateFork);
       headline = `${statusBadge("failed", "**Blocked**")} — ${count} ${count === 1 ? "requirement needs" : "requirements need"} attention.`;
       summaryData =
         "❌ This PR cannot be merged because some requirements are not met. See the details.";
@@ -1134,6 +1145,15 @@ function getCommentBody(
     ...buildFailingCheckSummaries(failingRequiredChecks, "required"),
     ...pendingRequirements,
   ];
+  if (privateFork) {
+    blockingRequirements.unshift({
+      name: "PR source",
+      status: "failed",
+      nextStep: `Open a replacement PR from a branch in this private repository, not a fork. If needed, ${link("set up or renew access", CONTRIBUTOR_ONBOARDING_URL)}.`,
+      guidance:
+        "Organization policy prevents required validation workflows, including TypeSpec Validation, from running on private fork PRs. Link the replacement PR and close the original. Keep private specifications in the private repository; do not move them to the public repository.",
+    });
+  }
   const readinessWarnings: RequirementSummary[] = failingFyiChecks
     .filter((check) => check.name === CONTRIBUTOR_READINESS_CHECK_NAME)
     .map((check) => ({
