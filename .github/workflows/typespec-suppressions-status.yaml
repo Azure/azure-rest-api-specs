@@ -30,6 +30,8 @@ permissions: {}
 jobs:
   typespec-suppressions-status:
     name: Set TypeSpec Suppressions Status
+    needs: post-comment
+    if: ${{ !cancelled() }}
     permissions:
       actions: read
       contents: read
@@ -44,6 +46,9 @@ jobs:
 
   post-comment:
     name: Post TypeSpec Suppressions Comment
+    concurrency:
+      group: typespec-suppression-comment-${{ github.event.pull_request.head.repo.full_name || github.event.workflow_run.head_repository.full_name }}-${{ github.event.pull_request.head.ref || github.event.workflow_run.head_branch }}
+      cancel-in-progress: false
     # Only refresh the dedicated review comment when the analyzer report
     # completes or when the typespec-suppressions-approved label is added/removed.
     # Also re-sync when typespec-suppressions-review-required is changed manually.
