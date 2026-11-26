@@ -230,7 +230,7 @@ model VoiceAgentLiveDefinition extends VoiceAgentBaseDefinition {
   @doc("Template-only startup greeting, rendered with session structured inputs. Foundry-only; not sent in native Live settings.")
   greeting?: VoiceAgentTemplateGreetingConfig;
 
-  @doc("Startup audio formats and output voice, plus input processing for `managed` models.")
+  @doc("Startup audio formats and output voice, plus input processing for `managed` models. With `transport=webrtc`, SDP negotiates the media format and `format` is not used.")
   audio?: VoiceAgentLiveAudioConfig;
 
   @doc("""
