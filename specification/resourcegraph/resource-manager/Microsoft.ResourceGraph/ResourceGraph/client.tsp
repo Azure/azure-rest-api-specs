@@ -111,6 +111,11 @@ namespace Microsoft.ResourceGraph;
 
 // FacetRequest - keep GA name despite ending in "Request"
 @@clientName(ResourceGraphApi.FacetRequest, "FacetRequest", "csharp");
+@@clientName(
+  ResourceHistory.ResourcesHistoryRequest,
+  "ResourcesHistoryContent",
+  "csharp"
+);
 
 // --- Type customizations for backward compatibility ---
 // Restore TrackedResourceData inheritance for GraphQueryResource (matches GA SDK base type)
@@ -125,3 +130,23 @@ namespace Microsoft.ResourceGraph;
 @@alternateType(GraphQueryApi.GraphQueryResource.etag, eTag, "csharp");
 @@alternateType(GraphQueryApi.GraphQueryUpdateParameters.etag, eTag, "csharp");
 @@alternateType(ResourceHistory.ResourcesHistoryResult, unknown);
+@@alternateType(
+  OnboardingApi.DataOnboardingProperties.targetRegions,
+  Azure.Core.azureLocation[],
+  "csharp"
+);
+@@alternateType(
+  OnboardingApi.DataOnboardingProperties.activatedRegions,
+  Azure.Core.azureLocation[],
+  "csharp"
+);
+@@alternateType(
+  OnboardingApi.RegionalActivationProperties.region,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  OnboardingApi.QueryEndpointActivationProperties.region,
+  Azure.Core.azureLocation,
+  "csharp"
+);
