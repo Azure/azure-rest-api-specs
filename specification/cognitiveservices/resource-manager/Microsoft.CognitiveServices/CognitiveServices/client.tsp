@@ -1164,6 +1164,21 @@ op regenerateKeyCustom(
   "CognitiveServicesWorkbenchProperties",
   "csharp"
 );
+@@alternateType(
+  ContainerInstanceComputeProperties.targetClusterId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  WorkbenchProperties.targetClusterId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  WorkbenchUpdateProperties.targetClusterId,
+  armResourceIdentifier,
+  "csharp"
+);
 
 // Model renames: suffix fixes and generic name resolution
 @@clientName(
