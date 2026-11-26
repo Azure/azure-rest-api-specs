@@ -1492,6 +1492,13 @@ model AgentConfiguration {
   guestConfigurationEnabled?: string;
 
   /**
+   * Specifies whether Azure Arc extension downloads are configured to use Delivery Optimization.
+   */
+  @added(Versions.v2026_12_01)
+  @visibility(Lifecycle.Read)
+  deliveryOptimizationEnabled?: string;
+
+  /**
    * Name of configuration mode to use. Modes are pre-defined configurations of security controls, extension allowlists and guest configuration, maintained by Microsoft.
    */
   @visibility(Lifecycle.Read)
