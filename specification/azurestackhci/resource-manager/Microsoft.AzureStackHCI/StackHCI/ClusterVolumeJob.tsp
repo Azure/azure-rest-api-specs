@@ -19,7 +19,7 @@ model ClusterVolumeJob is ProxyResource<ClusterVolumeJobProperties> {
     Resource = ClusterVolumeJob,
     KeyName = "jobName",
     SegmentName = "jobs",
-    NamePattern = "^[a-zA-Z0-9-_]{3,63}$"
+    NamePattern = "^[a-zA-Z0-9_-]{3,63}$"
   >;
 }
 
