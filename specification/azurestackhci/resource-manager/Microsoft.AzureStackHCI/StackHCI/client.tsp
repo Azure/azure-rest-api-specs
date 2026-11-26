@@ -5,6 +5,22 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.AzureStackHCI;
 
+@@clientName(
+  EdgeMachineSshCertificateRequest,
+  "EdgeMachineSshCertificateContent",
+  "csharp"
+);
+@@clientName(
+  EdgeMachineSshCertificateResponse,
+  "IssueSshCertificateResult",
+  "csharp"
+);
+@@clientName(
+  EdgeMachineSshTrustAnchorResponse,
+  "EdgeMachineSshTrustAnchorResult",
+  "csharp"
+);
+
 @@clientName(Microsoft.AzureStackHCI.Update, "HciUpdate", "java");
 @@clientName(
   RemoteSupportProperties.expirationTimeStamp,

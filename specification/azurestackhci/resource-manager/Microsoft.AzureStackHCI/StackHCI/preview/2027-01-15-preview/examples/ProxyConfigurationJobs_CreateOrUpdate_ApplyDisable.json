@@ -1,0 +1,66 @@
+{
+  "title": "ProxyConfigurationJobs_CreateOrUpdate_ApplyDisable",
+  "operationId": "ProxyConfigurationJobs_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2027-01-15-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "edgeMachineName": "machine01",
+    "proxyConfigurationName": "default",
+    "jobName": "disable-proxy-20260412",
+    "resource": {
+      "properties": {
+        "jobType": "Apply",
+        "isEnabled": false
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "jobType": "Apply",
+          "isEnabled": false,
+          "provisioningState": "Succeeded",
+          "jobId": "e5f6a7b8-c9d0-1234-abcd-ef5678901234",
+          "startTimeUtc": "2026-04-12T14:00:00Z",
+          "endTimeUtc": "2026-04-12T14:01:00Z",
+          "status": "DeploymentSuccess"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine01/proxyConfigurations/default/jobs/disable-proxy-20260412",
+        "name": "disable-proxy-20260412",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/proxyConfigurations/jobs",
+        "systemData": {
+          "createdBy": "user1@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-04-12T14:00:00Z",
+          "lastModifiedBy": "user1@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-04-12T14:01:00Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "jobType": "Apply",
+          "isEnabled": false,
+          "provisioningState": "Accepted",
+          "jobId": "e5f6a7b8-c9d0-1234-abcd-ef5678901234",
+          "status": "NotSpecified"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine01/proxyConfigurations/default/jobs/disable-proxy-20260412",
+        "name": "disable-proxy-20260412",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/proxyConfigurations/jobs",
+        "systemData": {
+          "createdBy": "user1@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-04-12T14:00:00Z",
+          "lastModifiedBy": "user1@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-04-12T14:00:00Z"
+        }
+      }
+    }
+  }
+}

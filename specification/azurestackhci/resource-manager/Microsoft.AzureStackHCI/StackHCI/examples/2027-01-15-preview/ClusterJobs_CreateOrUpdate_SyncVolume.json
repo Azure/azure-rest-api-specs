@@ -1,0 +1,65 @@
+{
+  "title": "ClusterJobs_CreateOrUpdate_SyncVolume",
+  "operationId": "ClusterJobs_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2027-01-15-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "clusterName": "myCluster",
+    "jobsName": "syncvolume",
+    "resource": {
+      "properties": {
+        "jobType": "SyncVolume",
+        "deploymentMode": "Deploy"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/jobs/syncvolume",
+        "name": "syncvolume",
+        "type": "Microsoft.AzureStackHCI/clusters/jobs",
+        "properties": {
+          "jobType": "SyncVolume",
+          "deploymentMode": "Deploy",
+          "provisioningState": "Succeeded",
+          "jobId": "00000000-0000-0000-0000-000000000003",
+          "startTimeUtc": "2027-01-15T10:00:00Z",
+          "endTimeUtc": "2027-01-15T10:05:00Z",
+          "status": "Succeeded",
+          "reportedProperties": {
+            "deploymentStatus": {
+              "status": "Success"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/providers/Microsoft.AzureStackHCI/locations/eastus/operationStatuses/00000000-0000-0000-0000-000000000003?api-version=2027-01-15-preview",
+        "Location": "https://management.azure.com/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/jobs/syncvolume?api-version=2027-01-15-preview",
+        "Retry-After": "10"
+      },
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/jobs/syncvolume",
+        "name": "syncvolume",
+        "type": "Microsoft.AzureStackHCI/clusters/jobs",
+        "properties": {
+          "jobType": "SyncVolume",
+          "deploymentMode": "Deploy",
+          "provisioningState": "Creating",
+          "jobId": "00000000-0000-0000-0000-000000000003",
+          "startTimeUtc": "2027-01-15T10:00:00Z",
+          "status": "DeploymentInProgress",
+          "reportedProperties": {
+            "deploymentStatus": {
+              "status": "InProgress"
+            }
+          }
+        }
+      }
+    }
+  }
+}
