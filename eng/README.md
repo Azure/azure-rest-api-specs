@@ -86,6 +86,30 @@ requiredness, as do pipelines with a missing or empty `TypeSpecEmitter`.
 Dedicated provisioning validation pipelines must configure the matching emitter;
 this does not create pipelines or change live pipeline settings.
 
+### GitHub-only SDK status POC
+
+In `azure-rest-api-specs-pr`, **SDK Validation Status** aggregates the latest Azure
+Pipelines check runs on the PR head commit using GitHub, without Azure login or ADO
+artifact access. Required checks are configured in
+[`.github/sdk-validation-status.yaml`](../.github/sdk-validation-status.yaml).
+The workflow reads this policy from its trusted base/default-branch checkout, not
+from the PR head. Check names match exactly after removing a trailing ` - PR`;
+unconfigured SDK Validation checks fail the workflow rather than silently becoming
+optional. Non-required checks are still displayed and awaited.
+
+Required checks pass with `success`, `neutral`, or `skipped`; other completed
+conclusions fail the aggregate. In-progress checks keep it pending. No SDK checks
+means no aggregate status is published. The public repository retains its
+artifact-based behavior.
+
+This POC deliberately requires .NET checks even when no TypeSpec generation ran,
+because GitHub check conclusions do not expose that runtime information. It also
+uses the pipeline's GitHub conclusion rather than the artifact's generation result:
+before production rollout, confirm that generation failures are reported as failed
+GitHub checks, including when a pipeline otherwise succeeds or succeeds with issues.
+The runner's artifact policy remains unchanged; this POC config only controls the
+private repository's GitHub aggregate.
+
 ## Spec Change Policies
 
 [Spec Change Policies](tools/spec-change-policies/README.md) checks TypeSpec usage and

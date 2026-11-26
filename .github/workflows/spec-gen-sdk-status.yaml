@@ -13,7 +13,6 @@ permissions:
   contents: read
   checks: read
   statuses: write
-  id-token: write
 
 jobs:
   sdk-validation-status:
@@ -39,32 +38,12 @@ jobs:
           sparse-checkout: |
             .github
 
-      # Only run the login and get token steps when the repository is azure-rest-api-specs-pr
-      - if: github.event.repository.name == 'azure-rest-api-specs-pr'
-        name: Azure Login with Workload Identity Federation
-        uses: azure/login@a641126d1b8aa4d1fa005f4f92df94a3a4c4c906 # v3.1.0
-        with:
-          client-id: "205398f1-715f-40a7-8d52-856097f28281"
-          tenant-id: "72f988bf-86f1-41af-91ab-2d7cd011db47"
-          allow-no-subscriptions: true
-
-      - if: github.event.repository.name == 'azure-rest-api-specs-pr'
-        name: Get ADO Token via Managed Identity
-        id: ado-token
-        run: |
-          # Get token for Azure DevOps resource
-          ADO_TOKEN=$(az account get-access-token --resource "499b84ac-1321-427f-aa17-267ca6975798" --query "accessToken" -o tsv)
-          echo "::add-mask::$ADO_TOKEN"
-          echo "token=$ADO_TOKEN" >> "$GITHUB_OUTPUT"
-
       - name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
 
       - name: "SDK Validation Set Status"
         id: sdk-validation-status
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
-        env:
-          ADO_TOKEN: ${{ steps.ado-token.outputs.token }}
         with:
           script: |
             const setStatus =
