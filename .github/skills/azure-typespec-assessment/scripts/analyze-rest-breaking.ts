@@ -1,6 +1,7 @@
 import path from "node:path";
 import { normalizeAutorestContract } from "./autorest-contract.ts";
 import { isMain, parseArgs, readJsonObject, runMain, writeJson } from "./cli.ts";
+import { unavailableHeadBaselineBlocker } from "./comparison-execution.ts";
 import { canonicalJson, stableId } from "./stable-id.ts";
 
 type AssessmentFact = import("./runtime-types.ts").AssessmentFact;
@@ -245,8 +246,6 @@ function effectiveObjectContract(schema: NormalizedSchema): ObjectContract | und
     if (current.kind !== "object" && current.kind !== "intersection" && current.kind !== "any") {
       return false;
     }
-    if (current.allOf?.length) return current.allOf.every(visit);
-
     for (const field of WIRE_CONSTRAINT_FIELDS) {
       if (current[field] === undefined) continue;
       const values = constraints.get(field) ?? [];
@@ -273,7 +272,7 @@ function effectiveObjectContract(schema: NormalizedSchema): ObjectContract | und
         });
       }
     }
-    return true;
+    return (current.allOf ?? []).every(visit);
   };
 
   if (!visit(schema)) return undefined;
@@ -689,6 +688,11 @@ export function analyzeRestBreaking(options: {
   for (const project of [...(manifest.projects ?? [])].sort((left, right) =>
     left.id.localeCompare(right.id),
   )) {
+    const baselineBlocker = unavailableHeadBaselineBlocker(project);
+    if (baselineBlocker) {
+      blockers.push(baselineBlocker);
+      continue;
+    }
     if (project.classification === "new" || project.artifactComparison?.mode === "new-project") {
       analyzedProjects += 1;
       continue;

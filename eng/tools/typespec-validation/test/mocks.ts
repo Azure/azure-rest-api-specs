@@ -12,6 +12,7 @@ vi.mock("@azure-tools/specs-shared/glob", () => ({
 
 vi.mock("simple-git", () => ({
   simpleGit: vi.fn().mockReturnValue({
+    env: vi.fn().mockReturnThis(),
     revparse: vi.fn().mockResolvedValue(""),
     status: vi.fn().mockResolvedValue({
       files: [],

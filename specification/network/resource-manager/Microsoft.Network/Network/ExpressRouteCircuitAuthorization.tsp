@@ -1,0 +1,95 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./ExpressRouteCircuit.tsp";
+import "./shared-models.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
+
+namespace Microsoft.Network;
+/**
+ * Authorization in an ExpressRouteCircuit resource.
+ */
+@featureFile(Features.expressRoute)
+@parentResource(ExpressRouteCircuit)
+model ExpressRouteCircuitAuthorization
+  is SubResourceInstance<AuthorizationPropertiesFormat> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The generic resource marker exposes this legacy resource name without a pattern."
+  @visibility(Lifecycle.Read)
+  @path
+  @key("authorizationName")
+  @segment("authorizations")
+  name: string;
+
+  /** A unique read-only string that changes whenever the resource is updated. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  etag?: string;
+}
+
+@featureFile(Features.expressRoute)
+@armResourceOperations
+interface ExpressRouteCircuitAuthorizations {
+  /**
+   * Gets the specified authorization from the specified express route circuit.
+   */
+  get is ArmResourceRead<ExpressRouteCircuitAuthorization, Error = CloudError>;
+
+  /**
+   * Creates or updates an authorization in the specified express route circuit.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ExpressRouteCircuitAuthorization,
+    Error = CloudError
+  >;
+
+  /**
+   * Deletes the specified authorization from the specified express route circuit.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ExpressRouteCircuitAuthorization,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
+    Error = CloudError
+  >;
+
+  /**
+   * Gets all authorizations in an express route circuit.
+   */
+  list is ArmResourceListByParent<
+    ExpressRouteCircuitAuthorization,
+    Response = AuthorizationListResult,
+    Error = CloudError
+  >;
+
+  /**
+   * Gets the authorization key associated with the specified express route circuit authorization.
+   */
+  @added(Versions.v2026_01_01)
+  @action("listKeys")
+  listKeys is ArmResourceActionSync<
+    ExpressRouteCircuitAuthorization,
+    void,
+    ArmResponse<ExpressRouteAuthorizationKey>,
+    Error = CloudError
+  >;
+}
+
+@@doc(ExpressRouteCircuitAuthorization.name, "The name of the authorization.");
+@@doc(
+  ExpressRouteCircuitAuthorization.properties,
+  "Properties of the express route circuit authorization."
+);
+@@doc(
+  ExpressRouteCircuitAuthorizations.createOrUpdate::parameters.resource,
+  "Parameters supplied to the create or update express route circuit authorization operation."
+);

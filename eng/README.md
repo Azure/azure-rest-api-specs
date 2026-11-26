@@ -4,7 +4,59 @@ The `eng` directory contains source code for automated tooling running on this r
 
 For context on this directory, see [Design guidelines for spec repos validation tooling] (Microsoft-internal).
 
+## Skill Eval Dashboard
+
+[Skill eval](pipelines/skill-eval.yml) reuses the common build, shard and summary
+jobs to send complete results from trusted runs to the existing eval dashboard. Its
+Azure Storage network policy is declared only in that entrypoint; the shared
+1ES redirect does not configure storage access for other pipelines. TypeSpec
+authoring benchmarks are not included. Shared publishing changes reach this repo
+through the normal `eng/common` sync.
+
+Before enabling publication, the pipeline owner must authorize the publisher's
+service connection and set `EvalStorageAccountName` with queue-time override
+disabled. Optional refresh notifications use `EvalDashboardRefreshUrl` and
+`EvalDashboardResource`. See the [common publishing guide](common/scripts/eval/README.md)
+for the approved storage/dashboard configuration and permissions.
+
+Set `publishDashboardResults` to `false` for artifact-only runs without added
+storage egress. Trusted manual DevOps runs can publish from feature branches
+using this existing setting; no main branch or separate feature-branch flag is
+required. Automatic non-main runs remain artifact-only. PRs and forks still
+cannot upload. Test results keep their actual branch, commit and build identity.
+Existing service-connection approvals, branch checks and storage permissions
+still apply. The matching shared publishing policy reaches this repo through
+the normal `eng/common` sync from Azure SDK Tools.
+
+Completed failing evals can be published; incomplete results remain blocked.
+Missing permissions and incomplete eval shards must be resolved before claiming
+live dashboard onboarding is complete.
+
+### Eval model variables
+
+Configure these nonsecret variables in the specs skill-eval pipeline's Variables settings:
+
+| Variable         | Use                                                                                                 |
+| ---------------- | --------------------------------------------------------------------------------------------------- |
+| `EvalModel`      | Executor for the local Azure API review, PowerShell design review and OpenAI TypeSpec update suites |
+| `ArmEvalModel`   | Executor for the ARM API Reviewer suite                                                             |
+| `EvalJudgeModel` | Explicit judge model for those local suites                                                         |
+
+The repo-local pre-eval hook applies these values to the selected files in the disposable CI checkout.
+Missing or unresolved variables fail setup before evaluation. Model names are not stored in these
+local eval definitions; changing the pipeline variables does not need another source change.
+Synced common suites, assessment and naming retain their existing model configuration.
+
+For local runs, use Vally's `--model <model>` and `--judge-model <model>` options.
+
 ## SDK generation pipeline variables
+
+Run `pnpm exec spec-gen-sdk-runner --help` from `eng/tools/spec-gen-sdk-runner`
+for the SDK runner's generated CLI help. Options accept `--option value` and
+`--option=value`; repeated options use the last value. Unknown options, positional
+arguments, and options missing a value are rejected. Omitted options retain their
+defaults. SDK command arguments are forwarded as individual arguments, including
+paths containing spaces.
 
 The [spec-gen-sdk pipeline](pipelines/spec-gen-sdk.yml) selects its SDK repository
 using the Azure DevOps pipeline UI variable `SdkRepoUrl`. Provisioning library
@@ -333,11 +385,19 @@ The `archived: ` prefix is reserved and cannot be used in catalog definitions.
 
 Archiving preserves existing assignments and prevents new ones. GitHub records
 the archive date in `archived_at`; subsequent synchronization does not reset it.
-The daily workflow only considers a label for deletion when it is still absent
+The daily workflow only considers an archived label for deletion when it is still absent
 from the catalog, has been archived for at least **14 full days**, and still has
 that exact warning description. Manually archived labels without the warning
 are left alone, even if they are old. Missing or invalid archive timestamps fail
 validation rather than being inferred.
+
+If another actor recreates the original name while its managed archive still
+exists, archive mode deletes that unconfigured active copy immediately on the next
+sync, without another grace period. The original archive keeps its identity,
+timestamp, and assignments until its own grace period expires. The recreated
+copy's assignments are audited before deletion; explicit aliases receive their
+canonical labels first. Dry runs and preserve mode leave both labels unchanged.
+The archived original is revalidated before the copy is deleted.
 
 Adding the original name back to the catalog restores the same label's name,
 description, and color and removes its archived state, including in preserve
@@ -351,8 +411,8 @@ than 40 characters (the prefix would exceed GitHub's 50-character limit),
 unmanaged active labels using the reserved prefix, and occupied archive target
 names. Rename these labels deliberately or resolve the collision; names are never
 silently truncated. Other labels still synchronize, including deletion of expired
-archives. Ambiguous identities, including when both the original and managed
-archived name already exist, still stop synchronization for manual resolution.
+archives. Other ambiguous identities, including active/archive collisions for a
+configured label, still stop synchronization for manual resolution.
 Audit validation, stale-state checks, and API failures also remain blocking.
 Earlier managed archives without the prefix acquire it on the next archive-mode
 run without resetting their timestamp, unless already eligible for deletion.

@@ -1,0 +1,62 @@
+{
+  "title": "Restore selected recovery resources with recovery group and operation policies",
+  "operationId": "RecoveryPlanActions_Restore",
+  "parameters": {
+    "serviceGroupName": "sampleServiceGroupName",
+    "api-version": "2026-12-30-preview",
+    "operation-id": "d02c569b-7362-4815-a215-f92a17865f33",
+    "recoveryPlanName": "samplePlanName",
+    "body": {
+      "resourceFilter": {
+        "filterType": "Include",
+        "recoveryResources": [
+          {
+            "recoveryResourceId": "12345678-9012-3456-7890-123456789012",
+            "recoveryPointId": "recovery-point-001"
+          },
+          {
+            "recoveryResourceId": "23456789-0123-4567-8901-234567890123",
+            "pointInTime": "2026-12-29T08:30:00Z"
+          }
+        ],
+        "workloadTypes": [
+          "AzureVm"
+        ],
+        "recoveryGroups": [
+          {
+            "recoveryGroupId": "82647166-048a-4914-9b48-90514eb8de4e",
+            "recoveryPointPolicy": {
+              "type": "Random",
+              "lookbackDuration": "P7D",
+              "backupType": [
+                "Snapshot"
+              ],
+              "recoveryPointHealthStatus": "HealthyOnly"
+            }
+          }
+        ]
+      },
+      "recoveryPointPolicy": {
+        "type": "Latest",
+        "backupType": [
+          "Snapshot"
+        ],
+        "recoveryPointHealthStatus": "All"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "jobId": "c56888ef-9ced-4001-a6d4-7145a0309bdb"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.AzureResilienceManagement/locations/eastus/operationStatuses/d02c569b-7362-4815-a215-f92a17865f33?api-version=2026-12-30-preview",
+        "Location": "https://management.azure.com/providers/Microsoft.AzureResilienceManagement/locations/eastus/operationStatuses/d02c569b-7362-4815-a215-f92a17865f33?api-version=2026-12-30-preview",
+        "Retry-After": 10
+      }
+    }
+  }
+}

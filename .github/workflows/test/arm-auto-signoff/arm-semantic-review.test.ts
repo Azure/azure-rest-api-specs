@@ -881,7 +881,9 @@ describe("finalizeUnpublishedArmSemanticReview", () => {
   };
 
   async function runFinalizer(statuses: unknown[], github = createPublisherGithub()) {
-    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({ data: statuses });
+    github.rest.repos.getCombinedStatusForRef.mockResolvedValue({
+      data: { statuses, total_count: statuses.length },
+    });
     const previousRunAttempt = process.env.GITHUB_RUN_ATTEMPT;
     process.env.GITHUB_RUN_ATTEMPT = String(runAttempt);
     try {
@@ -904,6 +906,14 @@ describe("finalizeUnpublishedArmSemanticReview", () => {
     const { github, result } = await runFinalizer([ownedPending]);
 
     expect(result).toEqual({ statusPublished: true });
+    expect(github.rest.repos.getCombinedStatusForRef).toHaveBeenCalledExactlyOnceWith({
+      owner,
+      repo,
+      ref: headSha,
+      per_page: PER_PAGE_MAX,
+      page: 1,
+    });
+    expect(github.rest.repos.listCommitStatusesForRef).not.toHaveBeenCalled();
     expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith({
       owner,
       repo,
@@ -913,6 +923,63 @@ describe("finalizeUnpublishedArmSemanticReview", () => {
       description: "Review incomplete: reviewer did not publish a result",
       target_url: `${runUrl}/attempts/${runAttempt}`,
     });
+  });
+
+  it("finds the owned Pending status after the first page of latest contexts", async () => {
+    const github = createPublisherGithub();
+    const otherStatuses = Array.from({ length: PER_PAGE_MAX }, (_, index) => ({
+      ...ownedPending,
+      context: `other-status-${index}`,
+    }));
+    github.rest.repos.getCombinedStatusForRef
+      .mockResolvedValueOnce({
+        data: { statuses: otherStatuses, total_count: PER_PAGE_MAX + 1 },
+      })
+      .mockResolvedValueOnce({
+        data: { statuses: [ownedPending], total_count: PER_PAGE_MAX + 1 },
+      });
+
+    const { result } = await runFinalizer([], github);
+
+    expect(result).toEqual({ statusPublished: true });
+    expect(github.rest.repos.getCombinedStatusForRef).toHaveBeenCalledTimes(2);
+    expect(github.rest.repos.getCombinedStatusForRef).toHaveBeenLastCalledWith({
+      owner,
+      repo,
+      ref: headSha,
+      per_page: PER_PAGE_MAX,
+      page: 2,
+    });
+    expect(github.rest.repos.listCommitStatusesForRef).not.toHaveBeenCalled();
+  });
+
+  it("does not resolve a Pending status belonging to an unrelated context", async () => {
+    const { github, result } = await runFinalizer([
+      { ...ownedPending, context: "Swagger LintDiff" },
+    ]);
+
+    expect(result).toEqual({ statusPublished: false });
+    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+  });
+
+  it("does not publish from an incomplete latest-status response", async () => {
+    const github = createPublisherGithub();
+    github.rest.repos.getCombinedStatusForRef
+      .mockResolvedValueOnce({ data: { statuses: [ownedPending], total_count: 2 } })
+      .mockResolvedValueOnce({ data: { statuses: [], total_count: 2 } });
+
+    await expect(runFinalizer([], github)).rejects.toThrow("Incomplete commit statuses");
+    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+  });
+
+  it("does not publish when the latest-status API read fails", async () => {
+    const github = createPublisherGithub();
+    github.rest.repos.getCombinedStatusForRef.mockRejectedValueOnce(
+      Object.assign(new Error("API rate limit exceeded for installation"), { status: 403 }),
+    );
+
+    await expect(runFinalizer([], github)).rejects.toThrow("API rate limit exceeded");
+    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
   });
 
   it("never publishes a manual-review hold for an unpublished result", async () => {
@@ -936,7 +1003,6 @@ describe("finalizeUnpublishedArmSemanticReview", () => {
           state: CommitStatusState.SUCCESS,
           updated_at: "2026-01-01T00:00:01Z",
         },
-        ownedPending,
       ],
     },
     {
@@ -947,7 +1013,6 @@ describe("finalizeUnpublishedArmSemanticReview", () => {
           target_url: "https://github.com/Azure/azure-rest-api-specs/actions/runs/789/attempts/1",
           updated_at: "2026-01-01T00:00:01Z",
         },
-        ownedPending,
       ],
     },
     {
@@ -958,7 +1023,6 @@ describe("finalizeUnpublishedArmSemanticReview", () => {
           target_url: `${runUrl}/attempts/2`,
           updated_at: "2026-01-01T00:00:01Z",
         },
-        ownedPending,
       ],
     },
   ])("leaves the status unchanged when $name", async ({ statuses }) => {
@@ -975,6 +1039,7 @@ describe("finalizeUnpublishedArmSemanticReview", () => {
     const { result } = await runFinalizer([ownedPending], github);
 
     expect(result).toEqual({ statusPublished: false });
+    expect(github.rest.repos.getCombinedStatusForRef).not.toHaveBeenCalled();
     expect(github.rest.repos.listCommitStatusesForRef).not.toHaveBeenCalled();
     expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
   });

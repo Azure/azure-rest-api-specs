@@ -380,6 +380,71 @@ describe("service-scoped impact labels", () => {
   const service = managementService;
   const context = { isDraft: false, targetBranch: "main" };
 
+  it("requests review for an existing-version contract change without adding new-api-version", () => {
+    const labels = updateLabels(
+      [],
+      impact({ plane: "data-plane", hasApiDefinitionChanges: true }),
+      context,
+    );
+    expect([...labels.toAdd].sort()).toEqual(
+      ["TypeSpec", "data-plane", "data-plane-review-requested"].sort(),
+    );
+    expect([...labels.toRemove]).toEqual([]);
+  });
+
+  it.each([true, false])(
+    "preserves manual intake and signoff when contract changes are present: %s",
+    (hasApiDefinitionChanges) => {
+      const labels = updateLabels(
+        ["TypeSpec", "data-plane", "data-plane-review-requested", "data-plane-review-signoff"],
+        impact({ plane: "data-plane", hasApiDefinitionChanges }),
+        context,
+      );
+      expect([...labels.toAdd]).toEqual([]);
+      expect([...labels.toRemove]).toEqual([]);
+    },
+  );
+
+  it.each([
+    { isDraft: true, targetBranch: "main", required: false },
+    { isDraft: false, targetBranch: "main", required: true },
+    { isDraft: false, targetBranch: "release-example", required: true },
+    { isDraft: false, targetBranch: "RPSaaSMaster", required: true },
+    { isDraft: false, targetBranch: "ARMCoreRPDev", required: true },
+    { isDraft: false, targetBranch: "feature/main", required: false },
+  ])("honors current draft/branch state for contract intake: %o", ({ required, ...current }) => {
+    const labels = updateLabels(
+      [],
+      impact({ plane: "data-plane", hasApiDefinitionChanges: true }),
+      current,
+    );
+    expect(labels.toAdd.has("data-plane-review-requested")).toBe(required);
+    expect(labels.toAdd.has("new-api-version")).toBe(false);
+  });
+
+  it("does not combine an ARM API edit with excluded data-plane changes", () => {
+    const labels = updateLabels(
+      [],
+      {
+        schemaVersion: 2,
+        services: [
+          { ...service, hasApiDefinitionChanges: true },
+          {
+            ...service,
+            path: "specification/another",
+            plane: "data-plane",
+            changes: ["api", "readme"],
+            hasApiDefinitionChanges: false,
+          },
+        ],
+      },
+      context,
+    );
+    expect(labels.toAdd.has("ARMReview")).toBe(true);
+    expect(labels.toAdd.has("data-plane")).toBe(true);
+    expect(labels.toAdd.has("data-plane-review-requested")).toBe(false);
+  });
+
   it("keeps the resource-manager label but removes ARMReview for a configuration-only change", () => {
     const labels = updateLabels(
       ["ARMReview"],

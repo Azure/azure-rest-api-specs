@@ -64,6 +64,13 @@ mode excludes them.
 Production behavior lives under `scripts/`. Code under `evals/` and `tests/`
 is not imported or used by the runtime.
 
+Preparation, materialization, and finalization must use the same originating
+assessment runtime. Phase records bind its root and code fingerprint to
+input/output content hashes. Integrity checks do not compare filesystem
+timestamps or inode identity: metadata changes and byte-identical replacements
+are harmless. Changed content, runtime mismatches, and missing successful phase
+records remain errors.
+
 The coordinator bootstraps the skill's workspace-locked dependencies before
 loading the assessment implementation. When the installed `yaml` version is
 missing or does not match the skill importer in the root `pnpm-lock.yaml`, it
@@ -328,7 +335,9 @@ Preparation rules:
 2. Capture committed, staged, unstaged, and relevant untracked TypeSpec files.
 3. Discover affected `tspconfig.yaml` project roots.
 4. Create detached service-scoped sparse base/current worktrees for source
-   analysis. Artifact roles may both use the current worktree.
+   analysis, including the revision-local `eng/typespec-rulesets` workspace
+   package as a checkout-only support root. Artifact roles may both use the
+   current worktree.
 5. Apply dirty overlays only to the temporary current worktree.
 6. Detect and prepare the locked npm or pnpm toolchain for each worktree.
 7. Select one source revision and API version for each artifact-comparison
@@ -361,7 +370,13 @@ API-version policy:
 2. When current source adds an API version:
    - baseline artifact: current source projected to the previous latest stable
      version;
-   - if no previous stable exists, use the previous latest preview;
+   - if no previous stable exists, use base's latest preview. For a preview-only
+     service, it must strictly precede the target (never the target itself, a
+     later preview, or another version first added by this PR);
+   - project both versions from head. If the selected previous version is not
+     declared in head, record baseline `availability: "unavailable-in-head"`
+     with the planned version and head commit, and compile only the target.
+     Never substitute the comparison-base revision or an older surviving version;
    - target artifact: current source projected to the newest added version.
 3. When an existing API version is modified:
    - baseline artifact: merge-base source projected to the affected version;
@@ -371,6 +386,35 @@ API-version policy:
    - target artifact: current unversioned source.
 5. AutoRest and TCGC always use the same source revision and API version within
    each comparison role.
+6. Existing-preview modifications still compare base and head at the same
+   version. New projects retain an absent baseline and target-only compilation;
+   failed discovery or compilation is a blocker, not evidence of no prior
+   contract and not a trigger for target-only execution.
+7. An existing project's explicitly unavailable head baseline reuses the
+   new-project target-only artifact path without becoming a new project:
+   preserve `classification: existing`, `mode: new-api-version`, discovered
+   versions, and both planned selections. Semantic intents use the real
+   base-to-head source diff and target artifacts; absent before facts do not
+   imply historical absence, additions, or unchanged contracts. Azure Guidelines
+   follows assessed intents, and Documentation Completeness uses independent
+   compiler evidence. Target compiler failures remain genuine scoped blockers.
+8. REST/downstream generate no candidates or inference for an unavailable head
+   baseline. Affected hunks are explicitly blocked, never no-impact. With no
+   comparable project, both dimensions and REST/downstream-only safety are
+   `not-assessed` / `unknown` / `blocked`. Mixed-project findings survive with
+   partial coverage; shared hunks retain available candidates but cannot infer
+   missing compatibility. Other dimensions are not blocked by this absence.
+
+The manifest, normalized AutoRest/TCGC facts, final `artifactComparisons`, and
+report appendix preserve the exact selected version and source commit for each
+role. Preview-only services undergo normal REST/downstream comparison; the lack
+of a stable version is not a compatibility exemption.
+An unavailable head baseline is shown in both compatibility summary cards and
+detailed sections as the muted sentence
+`Not assessed: the baseline API version is not available in head.`
+There is no zero-findings or pass presentation for a wholly unavailable scope.
+Mixed reports retain their real findings and show project-scoped availability
+notes. Other unknown/blocked cases retain the ordinary report layout.
 
 For PR 44988, both artifact roles use the head source:
 
@@ -1099,7 +1143,14 @@ connect related candidates and facts but are not candidate rules.
 
 Method and model comparison requires deterministic identity evidence. An exact,
 unique `crossLanguageDefinitionId` pairs the same symbol across baseline and
-target. A changed identity may be paired only through unique source-owned
+target. TCGC generic instantiations may share a declaration ID, so the existing
+TCGC emit pass also records minimal compiler template-argument provenance before
+the upstream YAML serializer removes raw compiler types. Normalization assigns
+distinct concrete node identities for references, reachability, and graph
+construction, while cross-revision pairing uses the declaration plus canonical
+template arguments. It never uses the complete model shape, collection position,
+or generated friendly name as correspondence evidence. A changed identity may
+be paired only through unique source-owned
 `@renamedFrom` metadata whose old and new qualified declarations resolve to
 unique cross-language definitions. Generated display names, HTTP routes,
 request/response shapes, property overlap, and coincident additions/removals
@@ -1107,6 +1158,12 @@ never establish identity. Missing or ambiguous evidence emits an
 evidence-backed downstream blocker and preserves the baseline/target facts
 instead of fabricating a replacement. Additions and removals remain independent
 when no canonical relationship exists.
+
+Blockers limit only the evidence they actually make unavailable. Deterministic
+candidates with independently resolved facts remain available for Agent
+judgment, and confirmed findings coexist with blockers as failed verdicts with
+partial coverage. An unrelated identity blocker is not a reason to reject a
+candidate.
 
 For `model-property-added-required` candidates, Agent judgment must use the
 model's effective direction:

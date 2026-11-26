@@ -1,4 +1,8 @@
 import { isDeepStrictEqual } from "node:util";
+import {
+  hasUnavailableHeadBaseline,
+  UNAVAILABLE_HEAD_BASELINE_MESSAGE,
+} from "./comparison-execution.ts";
 import { DOCUMENT_QUALITY_CRITERION } from "./document-quality-input.ts";
 import { semanticGroupingPresentation } from "./semantic-assessment-scope.ts";
 
@@ -1726,6 +1730,20 @@ export function renderReportSections(
     (dimensions.rest.legacyFindings?.length ?? 0);
   const downstreamCount =
     downstream.methods.length + downstream.unmapped.length + legacyDownstream.length;
+  const unavailableComparisons = (assessment.artifactComparisons ?? []).filter(
+    hasUnavailableHeadBaseline,
+  );
+  const allBaselinesUnavailable =
+    unavailableComparisons.length > 0 &&
+    unavailableComparisons.length === assessment.artifactComparisons?.length;
+  const unavailableSection = (id: string, title: string) =>
+    `<section id="${id}">${sectionHead(title, UNAVAILABLE_HEAD_BASELINE_MESSAGE, "")}</section>`;
+  const unavailableProjectNotes = unavailableComparisons
+    .map((comparison) => {
+      const project = assessment.projects?.find((item) => item.id === comparison.projectId);
+      return `<p class="report-small"><code>${escape(project?.path ?? comparison.projectId)}</code>: ${UNAVAILABLE_HEAD_BASELINE_MESSAGE}</p>`;
+    })
+    .join("");
   // Semantic intents describe changes, not findings. Stable sorting preserves the header order within each group.
   const sections = [
     {
@@ -1738,11 +1756,15 @@ export function renderReportSections(
     },
     {
       findingCount: restCount,
-      html: `<section id="rest-breaking">${sectionHead("REST breaking changes", "Compatibility verdict and confirmed findings.", status(dimensions.rest.verdict ?? restStatus) + count(`${restCards.length} operations · ${restFindings.length + (dimensions.rest.legacyFindings?.length ?? 0)} findings`))}${restBody || `<div class="report-empty">${restStatus === "not-assessed" ? "No REST compatibility verdict is available for the covered scope." : "No confirmed REST breaking changes."}</div>`}</section>`,
+      html: allBaselinesUnavailable
+        ? unavailableSection("rest-breaking", "REST breaking changes")
+        : `<section id="rest-breaking">${sectionHead("REST breaking changes", "Compatibility verdict and confirmed findings.", status(dimensions.rest.verdict ?? restStatus) + count(`${restCards.length} operations · ${restFindings.length + (dimensions.rest.legacyFindings?.length ?? 0)} findings`))}${unavailableProjectNotes}${restBody || `<div class="report-empty">${restStatus === "not-assessed" ? "No REST compatibility verdict is available for the covered scope." : "No confirmed REST breaking changes."}</div>`}</section>`,
     },
     {
       findingCount: downstreamCount,
-      html: `<section id="downstream-breaking">${sectionHead("Downstream breaking changes", "Compatibility verdict and confirmed findings.", status(dimensions.downstream.verdict ?? downstreamStatus) + count(`${downstream.methods.length} mapped methods · ${downstream.types.length} changed types`))}${downstreamBody || `<div class="report-empty">${downstreamStatus === "not-assessed" ? "No downstream compatibility verdict is available for the covered scope." : "No downstream breaking changes detected."}</div>`}</section>`,
+      html: allBaselinesUnavailable
+        ? unavailableSection("downstream-breaking", "Downstream breaking changes")
+        : `<section id="downstream-breaking">${sectionHead("Downstream breaking changes", "Compatibility verdict and confirmed findings.", status(dimensions.downstream.verdict ?? downstreamStatus) + count(`${downstream.methods.length} mapped methods · ${downstream.types.length} changed types`))}${unavailableProjectNotes}${downstreamBody || `<div class="report-empty">${downstreamStatus === "not-assessed" ? "No downstream compatibility verdict is available for the covered scope." : "No downstream breaking changes detected."}</div>`}</section>`,
     },
     { findingCount: documentQuality.findings?.length ?? 0, html: documentBody.html },
   ];
