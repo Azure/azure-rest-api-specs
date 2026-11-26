@@ -38,6 +38,13 @@ using Microsoft.BillingBenefits;
 );
 
 // csharp
+@@clientName(ApplicableMaccsOperationGroup.list, "GetApplicableMaccs", "csharp");
+@@clientName(SellerResourceOperationGroup.list, "GetMaccs", "csharp");
+@@clientName(CreditsOperationGroup.listApplicable, "GetApplicableCredits", "csharp");
+@@clientName(BenefitOperationGroup.validate,
+  "ValidateBillingBenefitsSavingsPlanPurchase",
+  "csharp"
+);
 @@clientName(Microsoft.BillingBenefits.ManagedServiceIdentity,
   "BillingBenefitsManagedServiceIdentity",
   "csharp"
