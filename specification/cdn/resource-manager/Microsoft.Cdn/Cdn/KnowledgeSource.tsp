@@ -70,7 +70,6 @@ interface KnowledgeSources {
   /**
    * Updates an existing knowledge source with the specified name within a web agent.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<

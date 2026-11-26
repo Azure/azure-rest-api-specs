@@ -58,7 +58,6 @@ interface ProtectionContainerMappings {
   /**
    * The operation to update protection container mapping.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @patch(#{ implicitOptionality: false })
   @summary("Update protection container mapping.")
   update is ArmCustomPatchAsync<

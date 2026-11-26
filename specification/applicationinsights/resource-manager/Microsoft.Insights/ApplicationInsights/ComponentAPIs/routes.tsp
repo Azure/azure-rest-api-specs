@@ -635,7 +635,6 @@ interface WorkItemConfigurationsOperationGroup {
   /**
    * Update a work item configuration for an Application Insights component.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/WorkItemConfigs/{workItemConfigId}")
   @patch(#{ implicitOptionality: true })

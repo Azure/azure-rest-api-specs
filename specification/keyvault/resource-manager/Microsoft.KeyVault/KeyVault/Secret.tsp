@@ -64,7 +64,6 @@ interface Secrets {
   /**
    * Update a secret in the specified subscription.  NOTE: This API is intended for internal use in ARM deployments.  Users should use the data-plane REST service for interaction with vault secrets.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     Secret,

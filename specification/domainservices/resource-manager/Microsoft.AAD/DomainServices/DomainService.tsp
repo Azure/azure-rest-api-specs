@@ -73,7 +73,6 @@ interface DomainServices {
   /**
    * The Update Domain Service operation can be used to update the existing deployment. The update call only supports the properties listed in the PATCH body.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Update Domain Service (PATCH Resource)")
   @patch(#{ implicitOptionality: false })

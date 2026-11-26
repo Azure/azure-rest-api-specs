@@ -69,7 +69,6 @@ interface Profiles {
   /**
    * Updates an NetworkExperimentProfiles
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Updates an NetworkExperimentProfiles by NetworkExperimentProfile name")
   @patch(#{ implicitOptionality: false })

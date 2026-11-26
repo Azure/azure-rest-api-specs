@@ -109,7 +109,6 @@ interface Accounts {
   /**
    * Updates a Cognitive Services account
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "'create' returns no response body, matching existing service endpoint behavior"
   @tag("CognitiveServicesAccounts")
   @patch(#{ implicitOptionality: false })

@@ -998,7 +998,6 @@ interface NetAppAccounts {
   /**
    * Patch the specified NetApp account
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
   @removed(Versions.v2025_12_15_preview)
@@ -1034,7 +1033,6 @@ interface NetAppAccounts {
   /**
    * Patch the specified NetApp account
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   @patch(#{ implicitOptionality: false })
   @added(Versions.v2025_12_15_preview)

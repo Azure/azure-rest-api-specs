@@ -58,7 +58,6 @@ interface WebTests {
   /**
    * Updates the tags associated with an Application Insights web test.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
     WebTest,

@@ -74,7 +74,6 @@ interface ComputeResources {
   /**
    * Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/patch-operation-response-codes-validation" "The existing PATCH response contract is retained for backward compatibility."
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "LRO final state pattern matches existing API behavior"
   @Azure.Core.useFinalStateVia("location")
   @patch(#{ implicitOptionality: false })
