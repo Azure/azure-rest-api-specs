@@ -26,16 +26,8 @@ using Microsoft.SaaS;
   "go"
 );
 @@clientName(SaasTenantResource, "SaaSTenantResource", "go");
-@@clientName(
-  SaasTenantResourceUpdate,
-  "SaaSTenantResourceUpdate",
-  "go"
-);
+@@clientName(SaasTenantResourceUpdate, "SaaSTenantResourceUpdate", "go");
 @@clientName(SaasSubscriptionLevel, "SaaSSubscriptionLevel", "go");
-@@clientName(
-  SaasSubscriptionLevelGlobal,
-  "SaaSSubscriptionLevelGlobal",
-  "go"
-);
+@@clientName(SaasSubscriptionLevelGlobal, "SaaSSubscriptionLevelGlobal", "go");
 @@clientName(SaasTenantLevel, "SaaSTenantLevel", "go");
 @@clientName(SaasOperationStatuses, "SaaSOperationStatuses", "go");
