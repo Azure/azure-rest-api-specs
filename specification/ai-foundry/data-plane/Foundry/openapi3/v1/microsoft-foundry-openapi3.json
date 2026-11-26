@@ -51593,6 +51593,43 @@
         ],
         "description": "Managed Azure AI Search Index Definition"
       },
+      "ManagedInputMessageParam": {
+        "type": "object",
+        "required": [
+          "role",
+          "content",
+          "type"
+        ],
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "user"
+            ],
+            "description": "The role of the message author. Always `user`.",
+            "x-stainless-const": true,
+            "default": "user"
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.InputContentParam"
+            },
+            "minItems": 0,
+            "maxItems": 16384,
+            "description": "The content of the message."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "message"
+            ],
+            "description": "The input-item discriminator.",
+            "default": "message"
+          }
+        },
+        "description": "A user message submitted to a Managed Session."
+      },
       "ManagedMicrosoftCopilotHarness": {
         "type": "object",
         "required": [
@@ -72308,43 +72345,6 @@
         },
         "description": "A list of one or many input items to the model, containing different content\ntypes.",
         "title": "Input item content list"
-      },
-      "OpenAI.InputMessageParam": {
-        "type": "object",
-        "required": [
-          "role",
-          "content"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "message"
-            ],
-            "description": "The type of the input item. Always `message`.",
-            "x-stainless-const": true,
-            "default": "message"
-          },
-          "role": {
-            "type": "string",
-            "enum": [
-              "user"
-            ],
-            "description": "The role of the message author. Always `user`.",
-            "x-stainless-const": true,
-            "default": "user"
-          },
-          "content": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.InputContentParam"
-            },
-            "minItems": 0,
-            "maxItems": 16384,
-            "description": "The content of the message."
-          }
-        },
-        "description": "A user message submitted to a session."
       },
       "OpenAI.InputParam": {
         "oneOf": [
@@ -113508,6 +113508,7 @@
       "SessionInputMessage": {
         "type": "object",
         "required": [
+          "type",
           "role",
           "content"
         ],
@@ -114194,25 +114195,25 @@
       "SessionMessageInputEvent": {
         "type": "object",
         "required": [
-          "input",
-          "type"
+          "type",
+          "input"
         ],
         "properties": {
-          "input": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.InputMessageParam"
-            },
-            "minItems": 0,
-            "maxItems": 16384,
-            "description": "The user messages to add to the session."
-          },
           "type": {
             "type": "string",
             "enum": [
               "agent.session.input.message"
             ],
             "description": "The variant discriminator."
+          },
+          "input": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ManagedInputMessageParam"
+            },
+            "minItems": 0,
+            "maxItems": 16384,
+            "description": "The user messages to add to the session."
           }
         },
         "allOf": [

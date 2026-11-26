@@ -354,7 +354,7 @@ model SessionInputImage extends SessionInputContent {
 /** An initial user message. */
 model SessionInputMessage {
   /** The input-item discriminator. */
-  type?: "message" = "message";
+  type: "message" = "message";
 
   /** The message author. */
   role: "user";

@@ -220,13 +220,29 @@ union SessionClientEvent extends SessionClientEventBase {
   `agent.session.input.mcp_approval_response`: SessionMcpApprovalInputEvent,
 }
 
+/** A user message submitted to a Managed Session. */
+model ManagedInputMessageParam {
+  ...OmitProperties<OpenAI.InputMessageParam, "type">;
+
+  /** The input-item discriminator. */
+  type: "message" = "message";
+}
+
 /** Starts a root turn when idle or steers the active root turn. Admission order does not promise model-consumption order. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "union-extends requires inherited variants; @discriminated on the union supplies the discriminator."
 model SessionMessageInputEvent extends SessionClientEventBase {
-  ...OmitProperties<OpenAI.SessionInputParamAgentSessionInputMessage, "type">;
+  ...OmitProperties<
+    OpenAI.SessionInputParamAgentSessionInputMessage,
+    "type" | "input"
+  >;
 
   /** The variant discriminator. */
   type: "agent.session.input.message";
+
+  /** The user messages to add to the session. */
+  @maxItems(16384)
+  @minItems(0)
+  input: ManagedInputMessageParam[];
 }
 
 /** Cancels the root turn active at acceptance. No caller-selected turn_id is accepted. */
