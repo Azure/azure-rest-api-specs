@@ -97,11 +97,15 @@ files outside `specification/`, except for the CODEOWNERS and skill exemptions b
 This includes root files, documentation, tooling, and files in newly added directories.
 If you are not allowlisted, remove
 the changes listed in the check's errors from your PR, including any deletions or
-renames. If a tooling change is needed, open an issue for the repository maintainers.
+renames, or ask an allowlisted maintainer to review the changes and apply
+`protected-files-approved`.
 
 This restriction also applies to maintenance-only PRs that do not change
-`specification/`. Approvals, labels or reruns by maintainers do not authorize a
-non-allowlisted PR author. The allowlist is maintained in
+`specification/`. A review approval or rerun by a maintainer does not authorize a
+non-allowlisted PR author. The `protected-files-approved` label bypasses this check only
+when its most recent application was by an allowlisted account. Missing or unauthorized
+label history does not bypass the check. Adding or removing the label reruns the check.
+The allowlist is maintained in
 [`ALLOWED_AUTHORS`](../.github/workflows/src/protected-files.ts).
 Dependabot (`dependabot[bot]`) is a trusted automation author and may update protected files.
 Normal CODEOWNERS reviews and other merge requirements still apply, including

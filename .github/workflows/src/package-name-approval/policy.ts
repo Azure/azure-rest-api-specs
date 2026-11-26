@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { parse } from "yaml";
+import { evaluateLabelAuthorization, type LabelAuthorization } from "../label-authorization.ts";
 
 export const ALLOWED_BOT_LOGINS = ["github-actions[bot]", "azure-sdk"];
 export const UNPROTECTED_PLANE = "unprotected";
@@ -24,10 +25,7 @@ export type PackageNamePolicy = {
   };
 };
 
-export type PackageNameAuthorization = {
-  status: "authorized" | "trusted-bot" | "unauthorized" | "unprotected" | "plane-unprotected";
-  authorizedUsers: string[];
-};
+export type PackageNameAuthorization = LabelAuthorization;
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   value !== null && typeof value === "object" && !Array.isArray(value);
@@ -156,26 +154,12 @@ export const evaluatePackageNameAuthorization = ({
   actor: string;
   plane: PackageNamePlane;
 }): PackageNameAuthorization => {
-  if (ALLOWED_BOT_LOGINS.includes(actor)) {
-    return { status: "trusted-bot", authorizedUsers: [] };
-  }
-
   const entry = policy.labels[labelName];
-  if (!entry) {
-    return { status: "unprotected", authorizedUsers: [] };
-  }
-
-  const perLabelUsers = Array.isArray(entry) ? entry : (entry[plane] ?? []);
-  if (perLabelUsers === UNPROTECTED_PLANE) {
-    return { status: "plane-unprotected", authorizedUsers: [] };
-  }
-
-  const authorizedUsers = [...new Set([...perLabelUsers, ...policy.globalApprovers])];
-  const actorLower = actor.toLowerCase();
-  return {
-    status: authorizedUsers.some((user) => user.toLowerCase() === actorLower)
-      ? "authorized"
-      : "unauthorized",
-    authorizedUsers,
-  };
+  return evaluateLabelAuthorization({
+    actor,
+    approvers:
+      entry === undefined ? undefined : Array.isArray(entry) ? entry : (entry[plane] ?? []),
+    globalApprovers: policy.globalApprovers,
+    trustedBots: ALLOWED_BOT_LOGINS,
+  });
 };
