@@ -39,6 +39,7 @@ interface HybridRunbookWorkers {
    * Create a hybrid runbook worker.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing HybridRunbookWorkerCreateParameters PUT request contract for backward compatibility."
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     HybridRunbookWorker,

@@ -35,6 +35,7 @@ interface NginxConfigurationResponses {
   /**
    * Create or update the NGINX configuration for given NGINX deployment
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing NginxConfigurationRequest PUT request contract for backward compatibility."
   createOrUpdate is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
     Extension.ResourceGroup,
     NginxConfigurationResponse,

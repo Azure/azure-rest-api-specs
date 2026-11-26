@@ -47,6 +47,7 @@ interface Clusters {
    * Creates a new HDInsight cluster with the specified parameters.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ClusterCreateParametersExtended PUT request contract for backward compatibility."
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     Cluster,
     Request = ClusterCreateParametersExtended,
@@ -172,6 +173,7 @@ interface Clusters {
   /**
    * The the async operation status.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   getAzureAsyncOperationStatus is ArmResourceRead<
     Cluster,
     Response = ArmResponse<AsyncOperationResult>,

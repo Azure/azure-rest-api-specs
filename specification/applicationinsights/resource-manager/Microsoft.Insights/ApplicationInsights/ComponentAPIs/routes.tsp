@@ -48,6 +48,7 @@ interface AnnotationsOperationGroup {
   /**
    * Create an Annotation of an Application Insights component.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/Annotations")
   @put
   create(
@@ -305,6 +306,7 @@ interface ExportConfigurationsOperationGroup {
   /**
    * Update the Continuous Export configuration for this export id.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/exportconfiguration/{exportId}")
   @put
   update(
@@ -357,6 +359,7 @@ interface ComponentCurrentBillingFeaturesOperationGroup {
   /**
    * Update current billing features for an Application Insights component.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @autoRoute
   @put
   @action("currentbillingfeatures")
@@ -498,6 +501,7 @@ interface ProactiveDetectionConfigurationsOperationGroup {
   /**
    * Update the ProactiveDetection configuration for this configuration id.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/ProactiveDetectionConfigs/{ConfigurationId}")
   @put
   update(

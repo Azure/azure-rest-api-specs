@@ -39,6 +39,7 @@ interface SqlRoleAssignmentGetResultsOperationGroup {
    * Creates or updates an Azure Cosmos DB SQL Role Assignment.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing SqlRoleAssignmentCreateUpdateParameters PUT request contract for backward compatibility."
   createUpdateSqlRoleAssignment is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlRoleAssignmentGetResults,
     Request = SqlRoleAssignmentCreateUpdateParameters,

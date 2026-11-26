@@ -48,6 +48,7 @@ interface TargetDirectoryResults {
    * The operation to initiate Subscription Changed Request
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing TargetDirectoryRequest PUT request contract for backward compatibility."
   putTargetDirectory is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     TargetDirectoryResult,
     Request = TargetDirectoryRequest,

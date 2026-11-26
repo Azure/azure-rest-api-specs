@@ -80,6 +80,7 @@ interface AccessReviewScheduleDefinitions {
    * Create or Update access review schedule definition.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing AccessReviewScheduleDefinitionProperties PUT request contract for backward compatibility."
   @tag("PutAccessReviewScheduleDefinition")
   createOrUpdateById is AccessReviewScheduleDefinitionOps.CreateOrUpdateSync<
     AccessReviewScheduleDefinition,
@@ -165,6 +166,7 @@ interface ScopeAccessReviewScheduleDefinitions {
    * Create or Update access review schedule definition.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing AccessReviewScheduleDefinitionProperties PUT request contract for backward compatibility."
   @tag("PutAccessReviewScheduleDefinition")
   createOrUpdateById is ScopeAccessReviewScheduleDefinitionOps.CreateOrUpdateSync<
     AccessReviewScheduleDefinition,

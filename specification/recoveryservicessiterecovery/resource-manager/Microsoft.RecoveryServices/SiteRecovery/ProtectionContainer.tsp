@@ -86,6 +86,7 @@ interface ProtectionContainers {
    * Operation to create a protection container.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing CreateProtectionContainerInput PUT request contract for backward compatibility."
   @summary("Create a protection container.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ProtectionContainer,

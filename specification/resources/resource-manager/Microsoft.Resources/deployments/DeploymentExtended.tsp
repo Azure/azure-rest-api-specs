@@ -80,6 +80,7 @@ interface Deployments {
   /**
    * You can provide the template and parameters directly in the request or link to JSON files.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing Deployment PUT request contract for backward compatibility."
   @summary("Deploys resources at a given scope.")
   @tag("Deployments")
   createOrUpdateAtScope is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
@@ -259,6 +260,7 @@ interface DeploymentsExtendedTenant {
   /**
    * You can provide the template and parameters directly in the request or link to JSON files.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ScopedDeployment PUT request contract for backward compatibility."
   @summary("Deploys resources at tenant scope.")
   @tag("Deployments")
   createOrUpdateAtTenantScope is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
@@ -457,6 +459,7 @@ interface DeploymentExtendedManagementGroup {
   /**
    * You can provide the template and parameters directly in the request or link to JSON files.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ScopedDeployment PUT request contract for backward compatibility."
   @summary("Deploys resources at management group scope.")
   @tag("Deployments")
   createOrUpdateAtManagementGroupScope is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
@@ -649,6 +652,7 @@ interface DeploymentExtendedSubscriptionGroup {
   /**
    * You can provide the template and parameters directly in the request or link to JSON files.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing Deployment PUT request contract for backward compatibility."
   @summary("Deploys resources at subscription scope.")
   @tag("Deployments")
   createOrUpdateAtSubscriptionScope is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
@@ -841,6 +845,7 @@ interface DeploymentExtendedOperationGroup {
   /**
    * You can provide the template and parameters directly in the request or link to JSON files.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing Deployment PUT request contract for backward compatibility."
   @summary("Deploys resources to a resource group.")
   @tag("Deployments")
   createOrUpdate is DeploymentExtendedResourceGroupOps.CreateOrUpdateAsync<

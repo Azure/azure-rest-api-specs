@@ -87,6 +87,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
    * Update RUs per second of an Azure Cosmos DB SQL database
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ThroughputSettingsUpdateParameters PUT request contract for backward compatibility."
   updateSqlDatabaseThroughput is ThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
@@ -210,6 +211,7 @@ interface SqlResourcesThroughputSettingsGetResultsOperationGroup {
    * Update RUs per second of an Azure Cosmos DB SQL container
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ThroughputSettingsUpdateParameters PUT request contract for backward compatibility."
   updateSqlContainerThroughput is SqlResourcesThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
@@ -324,6 +326,7 @@ interface MongoDBResources {
    * Update RUs per second of the an Azure Cosmos DB MongoDB database
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ThroughputSettingsUpdateParameters PUT request contract for backward compatibility."
   updateMongoDBDatabaseThroughput is MongoDBResourceOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
@@ -452,6 +455,7 @@ interface MongoDBResourcesThroughputSettingsGetResultsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ThroughputSettingsUpdateParameters PUT request contract for backward compatibility."
   updateMongoDBCollectionThroughput is MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
@@ -571,6 +575,7 @@ interface TableResources {
    * Update RUs per second of an Azure Cosmos DB Table
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ThroughputSettingsUpdateParameters PUT request contract for backward compatibility."
   updateTableThroughput is TableResourceOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
@@ -654,6 +659,7 @@ interface CassandraResources {
    * Update RUs per second of an Azure Cosmos DB Cassandra Keyspace
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ThroughputSettingsUpdateParameters PUT request contract for backward compatibility."
   updateCassandraKeyspaceThroughput is CassandraResourceOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
@@ -744,6 +750,7 @@ interface CassandraResourcesThroughputSettingsGetResultsOperationGroup {
    * Update RUs per second of an Azure Cosmos DB Cassandra table
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ThroughputSettingsUpdateParameters PUT request contract for backward compatibility."
   updateCassandraTableThroughput is CassandraResourcesThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
@@ -835,6 +842,7 @@ interface ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup {
    * Update RUs per second of an Azure Cosmos DB Cassandra view
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ThroughputSettingsUpdateParameters PUT request contract for backward compatibility."
   updateCassandraViewThroughput is ViewCassandraResourcesThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
@@ -918,6 +926,7 @@ interface GremlinResources {
    * Update RUs per second of an Azure Cosmos DB Gremlin database
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ThroughputSettingsUpdateParameters PUT request contract for backward compatibility."
   updateGremlinDatabaseThroughput is GremlinResourceOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
@@ -1008,6 +1017,7 @@ interface GremlinResourcesThroughputSettingsGetResultsOperationGroup {
    * Update RUs per second of an Azure Cosmos DB Gremlin graph
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ThroughputSettingsUpdateParameters PUT request contract for backward compatibility."
   updateGremlinGraphThroughput is GremlinResourcesThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,

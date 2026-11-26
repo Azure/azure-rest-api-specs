@@ -238,6 +238,7 @@ interface Sites {
    * Description for Replaces the application settings of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @summary("Replaces the application settings of an app.")
   @put
   @action("config/appsettings")
@@ -264,6 +265,7 @@ interface Sites {
    * Description for Updates the Authentication / Authorization settings associated with web app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @summary("Updates the Authentication / Authorization settings associated with web app.")
   @put
   @action("config/authsettings")
@@ -290,6 +292,7 @@ interface Sites {
    * Description for Updates the Azure storage account configurations of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @summary("Updates the Azure storage account configurations of an app.")
   @put
   @action("config/azurestorageaccounts")
@@ -316,6 +319,7 @@ interface Sites {
    * Description for Updates the backup configuration of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @summary("Updates the backup configuration of an app.")
   @put
   @action("config/backup")
@@ -357,6 +361,7 @@ interface Sites {
    * Description for Replaces the connection strings of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @summary("Replaces the connection strings of an app.")
   @put
   @action("config/connectionstrings")
@@ -383,6 +388,7 @@ interface Sites {
    * Description for Replaces the metadata of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @summary("Replaces the metadata of an app.")
   @put
   @action("config/metadata")
@@ -423,6 +429,7 @@ interface Sites {
    * Description for Updates the Push settings associated with web app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @summary("Updates the Push settings associated with web app.")
   @put
   @action("config/pushsettings")
@@ -516,6 +523,7 @@ interface Sites {
    * Description for Invoke the OneDeploy publish web app extension.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @summary("Invoke the OneDeploy publish web app extension.")
   @put
   @action("extensions/onedeploy")
@@ -578,6 +586,7 @@ interface Sites {
   /**
    * Description for Add or update a host level secret.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @summary("Add or update a host level secret.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/host/default/{keyType}/{keyName}")
   @put
@@ -708,6 +717,7 @@ interface Sites {
    * Description for Restores a web app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @summary("Restores a web app.")
   @put
   @action("migrate")
@@ -1709,6 +1719,7 @@ interface WebApps {
    * Description for Replaces the application settings of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @summary("Replaces the application settings of an app.")
   @put
   @action("config/appsettings")
@@ -1735,6 +1746,7 @@ interface WebApps {
    * Description for Updates the Authentication / Authorization settings associated with web app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @summary("Updates the Authentication / Authorization settings associated with web app.")
   @put
   @action("config/authsettings")
@@ -1761,6 +1773,7 @@ interface WebApps {
    * Description for Updates the Azure storage account configurations of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @summary("Updates the Azure storage account configurations of an app.")
   @put
   @action("config/azurestorageaccounts")
@@ -1787,6 +1800,7 @@ interface WebApps {
    * Description for Updates the backup configuration of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @summary("Updates the backup configuration of an app.")
   @put
   @action("config/backup")
@@ -1828,6 +1842,7 @@ interface WebApps {
    * Description for Replaces the connection strings of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @summary("Replaces the connection strings of an app.")
   @put
   @action("config/connectionstrings")
@@ -1854,6 +1869,7 @@ interface WebApps {
    * Description for Replaces the metadata of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @summary("Replaces the metadata of an app.")
   @put
   @action("config/metadata")
@@ -1902,6 +1918,7 @@ interface WebApps {
    * Description for Updates the Push settings associated with web app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @summary("Updates the Push settings associated with web app.")
   @put
   @action("config/pushsettings")
@@ -2032,6 +2049,7 @@ interface WebApps {
   /**
    * Description for Add or update a host level secret.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @summary("Add or update a host level secret.")
   @put
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/host/default/{keyType}/{keyName}")

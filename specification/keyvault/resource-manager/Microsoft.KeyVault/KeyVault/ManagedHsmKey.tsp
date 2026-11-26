@@ -74,6 +74,7 @@ interface ManagedHsmKeys {
    * Creates the first version of a new key if it does not exist. If it already exists, then the existing key is returned without any write operations being performed. This API does not create subsequent versions, and does not update existing keys.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ManagedHsmKeyCreateParameters PUT request contract for backward compatibility."
   createIfNotExist is ManagedHsmKeyOps.CreateOrUpdateSync<
     ManagedHsmKey,
     Request = ManagedHsmKeyCreateParameters,

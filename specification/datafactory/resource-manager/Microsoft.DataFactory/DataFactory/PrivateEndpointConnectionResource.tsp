@@ -50,6 +50,7 @@ interface PrivateEndpointConnectionResources {
    * Approves or rejects a private endpoint connection
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing PrivateLinkConnectionApprovalRequestResource PUT request contract for backward compatibility."
   @tag("privateEndpointConnections")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     PrivateEndpointConnectionResource,

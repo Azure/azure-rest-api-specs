@@ -266,6 +266,7 @@ interface MicrosoftEntraAdministrators {
   @doc("Gets information about a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
   get is ArmResourceRead<MicrosoftEntraAdministrator>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing MicrosoftEntraAdministratorAdd PUT request contract for backward compatibility."
   @doc("Creates or replaces a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrReplace is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<

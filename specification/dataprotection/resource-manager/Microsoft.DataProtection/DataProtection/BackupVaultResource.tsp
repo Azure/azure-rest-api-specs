@@ -160,6 +160,7 @@ interface BackupVaultResources {
   /**
    * Gets the operation status for an operation over a BackupVault's context.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   @get
   operationStatusBackupVaultContextGet is BackupVaultResourceOps.Read<
     BackupVaultResource,

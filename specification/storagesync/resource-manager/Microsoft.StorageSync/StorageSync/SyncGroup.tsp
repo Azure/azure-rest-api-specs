@@ -47,6 +47,7 @@ interface SyncGroups {
    * Create a new SyncGroup.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing SyncGroupCreateParameters PUT request contract for backward compatibility."
   @put
   create is Legacy.CreateOrReplaceAsync<
     SyncGroup,

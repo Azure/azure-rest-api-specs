@@ -65,6 +65,7 @@ model NetworkSecurityPerimeterConfiguration
 @tag("NetworkSecurityPerimeterConfigurations")
 interface NetworkSecurityPerimeterConfigurations {
   /** Gets the specified network security perimeter configuration for a key vault. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   @added(Versions.v2026_10_01_preview)
   getConfiguration is ArmResourceRead<
     NetworkSecurityPerimeterConfiguration,
@@ -74,6 +75,7 @@ interface NetworkSecurityPerimeterConfigurations {
   >;
 
   /** Lists the network security perimeter configurations associated with a key vault. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   @added(Versions.v2026_10_01_preview)
   listConfigurations is ArmResourceListByParent<
     NetworkSecurityPerimeterConfiguration,

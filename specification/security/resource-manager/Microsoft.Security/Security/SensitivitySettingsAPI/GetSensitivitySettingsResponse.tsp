@@ -44,6 +44,7 @@ interface GetSensitivitySettingsResponses {
    * Create or update data sensitivity settings for sensitive data discovery
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing UpdateSensitivitySettingsRequest PUT request contract for backward compatibility."
   @tag("sensitivitySettings")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     GetSensitivitySettingsResponse,

@@ -66,6 +66,7 @@ interface Modules {
    * Create or Update the module identified by module name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ModuleCreateOrUpdateParameters PUT request contract for backward compatibility."
   @tag("Module")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/moduleoperations")
   createOrUpdate is ModuleOps.CreateOrUpdateSync<
@@ -106,6 +107,7 @@ interface Modules {
    * Retrieve the activity in the module identified by module name and activity name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   @tag("Activity")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/activityoperations")
   @get
@@ -219,6 +221,7 @@ interface Python2Package {
    * Create or Update the python 2 package identified by package name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing PythonPackageCreateParameters PUT request contract for backward compatibility."
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/moduleoperations")
   createOrUpdate is Python2PackageOps.CreateOrUpdateSync<
     Module,
@@ -287,6 +290,7 @@ interface Python3Package {
    * Create or Update the python 3 package identified by package name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing PythonPackageCreateParameters PUT request contract for backward compatibility."
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/moduleoperations")
   createOrUpdate is Python3PackageOps.CreateOrUpdateSync<
     Module,

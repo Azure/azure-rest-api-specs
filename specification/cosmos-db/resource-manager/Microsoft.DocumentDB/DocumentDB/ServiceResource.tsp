@@ -40,6 +40,7 @@ interface ServiceResources {
    * Creates a service.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ServiceResourceCreateUpdateParameters PUT request contract for backward compatibility."
   @tag("DataTransfer")
   @tag("SqlDedicatedGateway")
   @tag("GraphAPICompute")

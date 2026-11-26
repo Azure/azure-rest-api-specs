@@ -37,6 +37,7 @@ interface DomainTopics {
    * Asynchronously creates or updates a new domain topic with the specified parameters.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing bodyless PUT contract for backward compatibility."
   @summary("Create or update a domain topic.")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     DomainTopic,

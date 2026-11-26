@@ -107,6 +107,7 @@ interface TagContracts {
   /**
    * Assign tag to the Operation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing bodyless PUT contract for backward compatibility."
   assignToOperation is TagContractOps.CreateOrUpdateSync<
     TagContract,
     Request = void
@@ -220,6 +221,7 @@ interface Tag {
   /**
    * Assign tag to the Api.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing bodyless PUT contract for backward compatibility."
   assignToApi is TagOps.CreateOrUpdateSync<
     TagContract,
     Request = void,
@@ -347,6 +349,7 @@ interface TagContractOperation {
   /**
    * Assign tag to the Product.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing bodyless PUT contract for backward compatibility."
   assignToProduct is TagContractOperationOps.CreateOrUpdateSync<
     TagContract,
     Request = void
@@ -450,6 +453,7 @@ interface TagContractOperationGroup {
   /**
    * Creates a tag.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing TagCreateUpdateParameters PUT request contract for backward compatibility."
   createOrUpdate is TagContractOperationGroupOps.CreateOrUpdateSync<
     TagContract,
     Request = TagCreateUpdateParameters,
@@ -625,6 +629,7 @@ interface WorkspaceTag {
   /**
    * Creates a tag.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing TagCreateUpdateParameters PUT request contract for backward compatibility."
   createOrUpdate is WorkspaceTagOps.CreateOrUpdateSync<
     TagContract,
     Request = TagCreateUpdateParameters,

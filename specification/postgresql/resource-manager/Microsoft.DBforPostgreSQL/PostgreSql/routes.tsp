@@ -178,6 +178,7 @@ interface DbAgents {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The implemented service contract returns HTTP 202 for every database agent write."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The implemented service contract returns the in-progress database agent resource in the HTTP 202 response body."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "The service contract requires the DBAgent_CreateOrUpdate operation ID."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing DbAgentForUpdate PUT request contract for backward compatibility."
   @doc("Enables or disables the database agent for a flexible server.")
   @operationId("DBAgent_CreateOrUpdate")
   @Azure.Core.useFinalStateVia("azure-async-operation")

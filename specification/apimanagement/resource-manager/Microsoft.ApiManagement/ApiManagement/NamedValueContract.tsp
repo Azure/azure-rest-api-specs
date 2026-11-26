@@ -88,6 +88,7 @@ interface NamedValueContracts {
   /**
    * Creates or updates named value.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing NamedValueCreateContract PUT request contract for backward compatibility."
   createOrUpdate is NamedValueContractOps.CreateOrUpdateAsync<
     NamedValueContract,
     Request = NamedValueCreateContract,
@@ -303,6 +304,7 @@ interface WorkspaceNamedValue {
   /**
    * Creates or updates named value.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing NamedValueCreateContract PUT request contract for backward compatibility."
   createOrUpdate is WorkspaceNamedValueOps.CreateOrUpdateAsync<
     NamedValueContract,
     Request = NamedValueCreateContract,

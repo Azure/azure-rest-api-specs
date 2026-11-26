@@ -30,6 +30,7 @@ interface PrivateLinkResources {
   /**
    * Gets a private link resource for MySQL server.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   get is ArmResourceRead<
     PrivateLinkResource,
     Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateLinkResource>
@@ -39,6 +40,7 @@ interface PrivateLinkResources {
    * Lists the private link resources for MySQL server.
    */
   #suppress "deprecated" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   listByServer is ArmResourceListByParent<
     PrivateLinkResource,
     Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateLinkResourceListResultV5>

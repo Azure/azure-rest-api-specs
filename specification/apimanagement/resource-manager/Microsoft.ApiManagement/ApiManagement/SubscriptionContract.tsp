@@ -88,6 +88,7 @@ interface SubscriptionContracts {
   /**
    * Creates or updates the subscription of specified user to the specified product.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing SubscriptionCreateParameters PUT request contract for backward compatibility."
   createOrUpdate is SubscriptionContractOps.CreateOrUpdateSync<
     SubscriptionContract,
     Request = SubscriptionCreateParameters,
@@ -400,6 +401,7 @@ interface WorkspaceSubscription {
   /**
    * Creates or updates the subscription of specified user to the specified product.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing SubscriptionCreateParameters PUT request contract for backward compatibility."
   createOrUpdate is WorkspaceSubscriptionOps.CreateOrUpdateSync<
     SubscriptionContract,
     Request = SubscriptionCreateParameters,

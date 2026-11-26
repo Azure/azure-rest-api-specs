@@ -47,6 +47,7 @@ interface MigrationItems {
    * The operation to create an ASR migration item (enable migration).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing EnableMigrationInput PUT request contract for backward compatibility."
   @summary("Enables migration.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     MigrationItem,

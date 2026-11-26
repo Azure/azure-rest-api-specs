@@ -37,6 +37,7 @@ interface CustomDomains {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing CustomDomainParameters PUT request contract for backward compatibility."
   @put
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     CustomDomain,

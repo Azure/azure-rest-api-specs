@@ -79,6 +79,7 @@ interface Vaults {
   /**
    * Create or update a key vault in the specified subscription.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing VaultCreateOrUpdateParameters PUT request contract for backward compatibility."
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     Vault,
     Request = VaultCreateOrUpdateParameters,
@@ -141,6 +142,7 @@ interface Vaults {
   /**
    * Update access policies in a key vault in the specified subscription.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @put
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}/accessPolicies/{operationKind}")
   updateAccessPolicy is VaultsOps.ActionSync<

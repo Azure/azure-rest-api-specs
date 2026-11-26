@@ -180,6 +180,7 @@ interface ProtectedItemOperationStatuses {
    * or failed. You can refer to the OperationStatus enum for all the possible states of the operation. Some operations
    * create jobs. This method returns the list of jobs associated with the operation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   get is ProtectedItemOperationStatusOps.Read<
     ProtectedItemResource,
     Response = ArmResponse<OperationStatus>

@@ -66,6 +66,7 @@ interface VnetRoutes {
   /**
    * Description for Get a Virtual Network route in an App Service plan.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   @summary("Get a Virtual Network route in an App Service plan.")
   getRouteForVnet is ArmResourceRead<
     VnetRoute,

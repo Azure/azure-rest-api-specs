@@ -50,6 +50,7 @@ interface CloudEndpoints {
    * Create a new CloudEndpoint.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing CloudEndpointCreateParameters PUT request contract for backward compatibility."
   @put
   @Azure.Core.useFinalStateVia("location")
   create is Legacy.CreateOrReplaceAsync<

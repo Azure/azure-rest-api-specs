@@ -90,6 +90,7 @@ interface AnalyticsItemsOperationGroup {
   /**
    * Adds or Updates a specific Analytics Item within an Application Insights component.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/components/{resourceName}/{scopePath}/item")
   @put
   put(

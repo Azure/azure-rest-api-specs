@@ -48,6 +48,7 @@ interface ServerEndpoints {
    * Create a new ServerEndpoint.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ServerEndpointCreateParameters PUT request contract for backward compatibility."
   @put
   @Azure.Core.useFinalStateVia("location")
   create is Legacy.CreateOrReplaceAsync<

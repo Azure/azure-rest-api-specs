@@ -64,6 +64,7 @@ interface EventHubConsumerGroupInfos {
    * Add a consumer group to an Event Hub-compatible endpoint in an IoT hub.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "This create operation returns only 200 in the published API; response codes are retained to preserve backward compatibility."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing EventHubConsumerGroupBodyDescription PUT request contract for backward compatibility."
   @summary("Add a consumer group to an Event Hub-compatible endpoint in an IoT hub")
   @tag("PUT")
   createEventHubConsumerGroup is Azure.ResourceManager.Legacy.CreateOrUpdateSync<

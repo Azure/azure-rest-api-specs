@@ -160,6 +160,7 @@ interface ClusterResources {
   /**
    * Get details about a specified command that was run asynchronously.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
   @get
@@ -199,6 +200,7 @@ interface ClusterResources {
   /**
    * Get the properties of an individual backup of this cluster that is available to restore.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   @removed(Versions.v2026_07_15)
   @added(Versions.v2026_04_01_preview)
   @get

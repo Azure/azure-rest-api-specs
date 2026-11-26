@@ -83,6 +83,7 @@ interface Fabrics {
    * The operation to create an Azure Site Recovery fabric (for e.g. Hyper-V site).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing FabricCreationInput PUT request contract for backward compatibility."
   @summary("Creates an Azure Site Recovery fabric.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     Fabric,

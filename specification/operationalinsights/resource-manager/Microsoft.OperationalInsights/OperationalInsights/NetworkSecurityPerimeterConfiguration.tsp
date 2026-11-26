@@ -62,6 +62,7 @@ interface NetworkSecurityPerimeterConfigurations {
    * Gets a network security perimeter configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   @tag("NetworkSecurityPerimeterConfigurations")
   getNSP is NSPOps.Read<
     NetworkSecurityPerimeterConfiguration,
@@ -72,6 +73,7 @@ interface NetworkSecurityPerimeterConfigurations {
    * Gets a list of NSP configurations for specified workspace.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   @tag("NetworkSecurityPerimeterConfigurations")
   listNSP is NSPOps.List<
     NetworkSecurityPerimeterConfiguration,

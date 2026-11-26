@@ -33,6 +33,7 @@ interface Webhooks {
   /**
    * Creates a webhook for a container registry with the specified parameters.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing WebhookCreateParameters PUT request contract for backward compatibility."
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     Webhook,
     Request = WebhookCreateParameters

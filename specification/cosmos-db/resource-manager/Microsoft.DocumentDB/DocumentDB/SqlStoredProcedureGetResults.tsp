@@ -52,6 +52,7 @@ interface SqlStoredProcedureGetResultsOperationGroup {
    * Create or update an Azure Cosmos DB SQL storedProcedure
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing SqlStoredProcedureCreateUpdateParameters PUT request contract for backward compatibility."
   createUpdateSqlStoredProcedure is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlStoredProcedureGetResults,
     Request = SqlStoredProcedureCreateUpdateParameters,

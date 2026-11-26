@@ -61,6 +61,7 @@ interface VaultSettings {
    * The operation to configure vault setting.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing VaultSettingCreationInput PUT request contract for backward compatibility."
   @summary("Updates vault setting. A vault setting object is a singleton per vault and it is always present by default.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     VaultSetting,

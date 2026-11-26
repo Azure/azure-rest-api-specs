@@ -55,6 +55,7 @@ interface MongoDBCollectionGetResultsOperationGroup {
    * Create or update an Azure Cosmos DB MongoDB Collection
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing MongoDBCollectionCreateUpdateParameters PUT request contract for backward compatibility."
   createUpdateMongoDBCollection is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     MongoDBCollectionGetResults,
     Request = MongoDBCollectionCreateUpdateParameters,

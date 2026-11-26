@@ -36,6 +36,7 @@ interface RuleSets {
    * Creates a new rule set within the specified profile.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing bodyless PUT contract for backward compatibility."
   @removed(Versions.v2025_12_01)
   @renamedFrom(Versions.v2025_12_01, "create")
   @sharedRoute

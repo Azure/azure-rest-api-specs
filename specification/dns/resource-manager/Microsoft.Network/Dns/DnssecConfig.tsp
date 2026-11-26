@@ -42,6 +42,7 @@ interface DnssecConfigs {
   /**
    * Creates or updates the DNSSEC configuration on a DNS zone.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing bodyless PUT contract for backward compatibility."
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     DnssecConfig,
     Request = void,

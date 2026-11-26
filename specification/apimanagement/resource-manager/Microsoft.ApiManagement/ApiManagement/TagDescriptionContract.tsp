@@ -99,6 +99,7 @@ interface TagDescriptionContracts {
   /**
    * Create/Update tag description in scope of the Api.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing TagDescriptionCreateParameters PUT request contract for backward compatibility."
   createOrUpdate is TagDescriptionContractsOps.CreateOrUpdateSync<
     TagDescriptionContract,
     Request = TagDescriptionCreateParameters,

@@ -53,6 +53,7 @@ interface ReservationOrderResponses {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing PurchaseRequest PUT request contract for backward compatibility."
   @tag("Reservation, Purchase")
   @summary("Purchase `ReservationOrder`")
   purchase is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<

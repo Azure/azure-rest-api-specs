@@ -305,6 +305,7 @@ interface SearchServices {
    * Generates a new query key for the specified search service. You can create up to 50 query keys per service.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   @post
   @externalDocs("https://aka.ms/search-manage")
   @tag("QueryKeys")

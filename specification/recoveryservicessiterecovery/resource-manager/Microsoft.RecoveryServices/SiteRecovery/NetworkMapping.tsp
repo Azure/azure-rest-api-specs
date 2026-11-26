@@ -44,6 +44,7 @@ interface NetworkMappings {
    * The operation to create an ASR network mapping.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing CreateNetworkMappingInput PUT request contract for backward compatibility."
   @summary("Creates network mapping.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     NetworkMapping,

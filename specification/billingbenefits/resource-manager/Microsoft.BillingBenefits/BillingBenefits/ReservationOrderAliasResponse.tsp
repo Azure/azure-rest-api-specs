@@ -50,6 +50,7 @@ interface ReservationOrderAliasResponses {
   /**
    * Create a reservation order alias.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ReservationOrderAliasRequest PUT request contract for backward compatibility."
   @armResourceCreateOrUpdate(ReservationOrderAliasResponse)
   create is Azure.ResourceManager.Foundations.ArmCreateOperation<
     ResourceInstanceParameters<

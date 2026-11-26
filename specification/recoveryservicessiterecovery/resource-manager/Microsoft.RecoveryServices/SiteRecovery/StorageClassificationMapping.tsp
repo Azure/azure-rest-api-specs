@@ -44,6 +44,7 @@ interface StorageClassificationMappings {
    * The operation to create a storage classification mapping.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing StorageClassificationMappingInput PUT request contract for backward compatibility."
   @summary("Create storage classification mapping.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     StorageClassificationMapping,

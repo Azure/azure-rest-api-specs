@@ -73,6 +73,7 @@ interface SiteExtensionInfos {
   /**
    * Description for Install site extension on a web site, or a deployment slot.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing bodyless PUT contract for backward compatibility."
   @summary("Install site extension on a web site, or a deployment slot.")
   installSiteExtension is SiteExtensionInfoOps.CreateOrUpdateAsync<
     SiteExtensionInfo,
@@ -161,6 +162,7 @@ interface SiteExtensionInfoOperationGroup {
    * Description for Install site extension on a web site, or a deployment slot.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing bodyless PUT contract for backward compatibility."
   @summary("Install site extension on a web site, or a deployment slot.")
   installSiteExtensionSlot is SiteExtensionInfoOperationGroupOps.CreateOrUpdateAsync<
     SiteExtensionInfo,

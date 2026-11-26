@@ -46,6 +46,7 @@ interface RecoveryPlans {
    * The operation to create a recovery plan.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing CreateRecoveryPlanInput PUT request contract for backward compatibility."
   @summary("Creates a recovery plan with the given details.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     RecoveryPlan,

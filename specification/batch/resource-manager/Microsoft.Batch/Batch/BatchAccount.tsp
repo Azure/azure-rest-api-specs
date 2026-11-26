@@ -41,6 +41,7 @@ interface BatchAccounts {
    * Creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this API and should instead be updated with the Update Batch Account API.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Legacy behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing BatchAccountCreateParameters PUT request contract for backward compatibility."
   create is Legacy.CreateOrReplaceAsync<
     BatchAccount,
     Request = BatchAccountCreateParameters,

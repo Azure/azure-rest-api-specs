@@ -91,6 +91,7 @@ interface ReplicationProtectedItems {
    * The operation to create an ASR replication protected item (Enable replication).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing EnableProtectionInput PUT request contract for backward compatibility."
   @summary("Enables protection.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ReplicationProtectedItem,

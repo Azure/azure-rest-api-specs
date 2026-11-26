@@ -73,6 +73,7 @@ interface StaticSiteBuildARMResources {
    * Description for Creates or updates the app settings of a static site build.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @summary("Creates or updates the app settings of a static site build.")
   @put
   @action("config/appsettings")
@@ -87,6 +88,7 @@ interface StaticSiteBuildARMResources {
    * Description for Creates or updates the function app settings of a static site build.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @summary("Creates or updates the function app settings of a static site build.")
   @put
   @action("config/functionappsettings")

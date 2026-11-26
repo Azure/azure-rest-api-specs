@@ -196,6 +196,7 @@ interface ProductList {
 @armResourceOperations(ProductSingle)
 interface ProductGet {
   /** Gets a single product by tenant. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   @autoRoute
   @get
   @armResourceRead(ProductSingle)
@@ -237,6 +238,7 @@ interface ProductGet {
   ): ArmResponse<ProductDetails> | DiscoveryErrorPayload;
 
   /** Gets a single product by subscription. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   @autoRoute
   @get
   @armResourceRead(ProductSingle)
@@ -275,6 +277,7 @@ interface ProductGet {
   ): ArmResponse<ProductDetails> | DiscoveryErrorPayload;
 
   /** Gets a single product by billing account. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   @autoRoute
   @get
   @armResourceRead(ProductSingle)
@@ -309,6 +312,7 @@ interface ProductGet {
   ): ArmResponse<ProductDetails> | DiscoveryErrorPayload;
 
   /** Gets a single product by billing profile. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   @autoRoute
   @get
   @armResourceRead(ProductSingle)

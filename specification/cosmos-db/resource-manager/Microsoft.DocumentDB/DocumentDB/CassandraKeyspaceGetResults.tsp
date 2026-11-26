@@ -51,6 +51,7 @@ interface CassandraKeyspaceGetResultsOperationGroup {
    * Create or update an Azure Cosmos DB Cassandra keyspace
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing CassandraKeyspaceCreateUpdateParameters PUT request contract for backward compatibility."
   createUpdateCassandraKeyspace is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     CassandraKeyspaceGetResults,
     Request = CassandraKeyspaceCreateUpdateParameters,

@@ -71,6 +71,7 @@ interface AutomationAccounts {
    * Create or update automation account.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing AutomationAccountCreateOrUpdateParameters PUT request contract for backward compatibility."
   @tag("AutomationAccount")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/automationaccountoperations")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
@@ -117,6 +118,7 @@ interface AutomationAccounts {
    * Retrieve counts for Dsc Nodes.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   @tag("NodeCountInformation")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/nodecounts")
   @get
@@ -341,6 +343,7 @@ interface AutomationAccounts {
    * Get a single software update configuration machine run by Id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   @tag("Software Update Configuration Machine Run")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations")
   @get
@@ -400,6 +403,7 @@ interface AutomationAccounts {
    * Get a single software update configuration Run by Id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   @tag("Software Update Configuration Run")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationrunoperations")
   @get

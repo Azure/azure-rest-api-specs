@@ -384,6 +384,7 @@ interface Workspaces {
   /**
    * Gets status of an ongoing purge operation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   @tag("Workspaces")
   @autoRoute
   getPurgeStatus is PurgeOps.Read<

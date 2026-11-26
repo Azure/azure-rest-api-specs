@@ -34,6 +34,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @armResourceOperations(Sku)
 interface Skus {
   /** Lists SKUs for billing account. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   @list
   listByBillingAccount is ArmListByBillingAccount<
     Sku,
@@ -74,6 +75,7 @@ interface Skus {
   >;
 
   /** Lists SKUs for billing profile. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   @list
   listByBillingProfile is ArmListByBillingProfile<
     Sku,
@@ -121,6 +123,7 @@ interface Skus {
    * must have billing account permissions. Supports both EA (legacy) and Modern (MCA)
    * billing account ID formats.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   @autoRoute
   @get
   @armResourceRead(Sku)
@@ -149,6 +152,7 @@ interface Skus {
    * claims to a specific billing profile. Only meaningful for Modern (MCA) billing
    * accounts; for EA billing accounts the billing profile is ignored.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   @autoRoute
   @get
   @armResourceRead(Sku)

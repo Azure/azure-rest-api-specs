@@ -55,6 +55,7 @@ interface ApiCollections {
   /**
    * Onboard an Azure API Management API to Microsoft Defender for APIs. The system will start monitoring the operations within the Azure Management API for intrusive behaviors and provide alerts for attacks that have been detected.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing bodyless PUT contract for backward compatibility."
   @summary("Onboard an Azure API Management API to Microsoft Defender for APIs")
   @tag("OnboardToD4API")
   @tag("APIMConfig")

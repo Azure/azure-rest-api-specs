@@ -185,6 +185,7 @@ interface GroupContracts {
   /**
    * Creates or Updates a group.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing GroupCreateParameters PUT request contract for backward compatibility."
   createOrUpdate is GroupContractOps.CreateOrUpdateSync<
     GroupContract,
     Request = GroupCreateParameters,
@@ -330,6 +331,7 @@ interface GroupContracts {
   /**
    * Add existing user to existing group
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing bodyless PUT and response contracts for backward compatibility."
   @put
   create is GroupContractOps.CreateOrUpdateSync<
     GroupContract,
@@ -435,6 +437,7 @@ interface WorkspaceGroup {
   /**
    * Creates or Updates a group.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing GroupCreateParameters PUT request contract for backward compatibility."
   createOrUpdate is WorkspaceGroupOps.CreateOrUpdateSync<
     GroupContract,
     Request = GroupCreateParameters,

@@ -66,6 +66,7 @@ interface CurrentQuotaLimitBases {
    *   The Create quota request may be constructed as follows. The PUT operation can be used to update the quota.
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   @tag("QuotaInformation")
   @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -89,6 +90,7 @@ interface CurrentQuotaLimitBases {
    *   • To update the quota. use the PATCH operation.
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing lifecycle/list response contract for backward compatibility."
   @tag("QuotaInformation")
   @patch(#{ implicitOptionality: false })
   @Azure.Core.useFinalStateVia("original-uri")

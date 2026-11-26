@@ -57,6 +57,7 @@ interface GraphResources {
    * Create or update an Azure Cosmos DB Graph.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing GraphResourceCreateUpdateParameters PUT request contract for backward compatibility."
   createUpdateGraph is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     GraphResourceGetResults,
     Request = GraphResourceCreateUpdateParameters,

@@ -57,6 +57,7 @@ interface AccessReviewDefaultSettingsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing AccessReviewScheduleSettings PUT request contract for backward compatibility."
   @tag("PutAccessReviewDefaultSettings")
   @action("accessReviewScheduleSettings/default")
   put is AccessReviewDefaultSettingsOperationGroupOps.CreateOrUpdateSync<
@@ -102,6 +103,7 @@ interface ScopeAccessReviewDefaultSettings {
    * Get access review default settings for the subscription
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing AccessReviewScheduleSettings PUT request contract for backward compatibility."
   @tag("PutAccessReviewDefaultSettings")
   @action("accessReviewScheduleSettings/default")
   put is ScopeAccessReviewDefaultSettingOps.CreateOrUpdateSync<

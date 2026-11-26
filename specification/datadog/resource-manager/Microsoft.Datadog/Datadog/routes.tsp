@@ -31,6 +31,7 @@ interface MarketplaceAgreementsOperationGroup {
   /**
    * Create Datadog marketplace agreement in the subscription.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @summary("Create Datadog marketplace agreement in the subscription.")
   @autoRoute
   @put

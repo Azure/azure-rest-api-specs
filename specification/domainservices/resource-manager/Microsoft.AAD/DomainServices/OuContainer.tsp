@@ -54,6 +54,7 @@ interface OuContainers {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing ContainerAccount PUT request contract for backward compatibility."
   @summary("Create OuContainer")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     OuContainer,

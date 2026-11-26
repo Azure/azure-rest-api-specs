@@ -90,6 +90,7 @@ interface CertificateContracts {
    * Creates or updates the certificate being used for authentication with the backend.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing CertificateCreateOrUpdateParameters PUT request contract for backward compatibility."
   @externalDocs(
     "https://azure.microsoft.com/en-us/documentation/articles/api-management-howto-mutual-certificates/",
     "How to secure back-end services using client certificate authentication in Azure API Management"
@@ -266,6 +267,7 @@ interface WorkspaceCertificate {
    * Creates or updates the certificate being used for authentication with the backend.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing CertificateCreateOrUpdateParameters PUT request contract for backward compatibility."
   @externalDocs(
     "https://azure.microsoft.com/en-us/documentation/articles/api-management-howto-mutual-certificates/",
     "How to secure back-end services using client certificate authentication in Azure API Management"

@@ -32,6 +32,7 @@ interface MarketplaceAgreementsOperationGroup {
    * Create Confluent Marketplace agreement in the subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing non-resource PUT response contract for backward compatibility."
   @summary("Create Confluent Marketplace agreement in the subscription.")
   @autoRoute
   @put

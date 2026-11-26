@@ -81,6 +81,7 @@ interface ArchiveVersions {
   /**
    * Creates a archive version for a container registry with the specified parameters.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing bodyless PUT contract for backward compatibility."
   create is ArchiveVersionOperationOps.CreateOrUpdateAsync<
     ArchiveVersion,
     Request = void

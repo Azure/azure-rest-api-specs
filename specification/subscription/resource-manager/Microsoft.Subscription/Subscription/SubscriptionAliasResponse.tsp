@@ -37,6 +37,7 @@ interface SubscriptionAliasResponses {
   /**
    * Create Alias Subscription.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "Preserve the existing PutAliasRequest PUT request contract for backward compatibility."
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SubscriptionAliasResponse,
     Request = PutAliasRequest,
