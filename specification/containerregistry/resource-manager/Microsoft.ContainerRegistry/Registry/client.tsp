@@ -214,6 +214,11 @@ namespace Microsoft.ContainerRegistry {
   "ContainerRegistryCacheAuthentication",
   "csharp"
 );
+@@clientName(
+  AdditionalAuthenticationUpdateProperties,
+  "ContainerRegistryCacheAuthenticationUpdateProperties",
+  "csharp"
+);
 @@clientName(Archive, "ContainerRegistryArchive", "csharp");
 @@clientName(
   ArchivePackageSourceProperties,
@@ -335,6 +340,11 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(
   EntraFederatedIdentityCredentialAuthenticationProperties,
   "EntraFederatedIdentityCredentialCacheAuthentication",
+  "csharp"
+);
+@@clientName(
+  EntraFederatedIdentityCredentialAuthenticationUpdateProperties,
+  "EntraFederatedIdentityCredentialCacheAuthenticationUpdateProperties",
   "csharp"
 );
 @@clientName(
