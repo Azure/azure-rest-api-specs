@@ -120,6 +120,9 @@ namespace Azure.AI.Projects {
     github_copilot_v1_preview: "GitHubCopilot=V1Preview",
     skills_v1_preview: "Skills=V1Preview",
 
+    /** Managed Agent definitions and endpoint-scoped Sessions preview. */
+    managed_agents_v1_preview: "ManagedAgents=V1Preview",
+
     @removed(Versions.v1)
     hosted_agents_v1_preview: "HostedAgents=V1Preview",
 

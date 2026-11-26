@@ -1,6 +1,7 @@
 import "../openai/responses/models.tsp";
 import "../common/servicepatterns.tsp";
 import "../skills/models.tsp";
+import "./managed-models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -55,6 +56,7 @@ namespace Azure.AI.Projects {
       AgentDefinitionOptInKeys.digital_worker_v1_preview,
       AgentDefinitionOptInKeys.github_copilot_v1_preview,
       AgentDefinitionOptInKeys.skills_v1_preview,
+      AgentDefinitionOptInKeys.managed_agents_v1_preview,
       AgentDefinitionOptInKeys.microsoft_copilot_v1_preview
     ],
   };
@@ -67,9 +69,9 @@ namespace Azure.AI.Projects {
     @maxLength(512)
     description?: string;
 
-    @doc("The agent definition. This can be a prompt, workflow, hosted, external, or voice agent definition.")
+    @doc("The agent definition. Creating the first Managed version also creates the owning Agent and its default identity if the Agent does not exist. An agent-source Managed version contains the full executable definition; a session-source version declares only its kind and definition_source.")
     @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
-    definition: AgentDefinition;
+    definition: AgentVersionDefinition;
 
     @doc("The blueprint reference for the agent.")
     blueprint_reference?: AgentBlueprintReference;
@@ -278,7 +280,8 @@ namespace Azure.AI.Projects {
     @doc("The Unix timestamp (seconds) when the agent was created.")
     created_at: FoundryTimestamp;
 
-    definition: AgentDefinition;
+    @doc("The saved definition, including a Managed version's definition-source choice.")
+    definition: AgentVersionDefinition;
 
     @doc("Whether this agent version is a draft (candidate) rather than a release. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted. Defaults to false.")
     @extension(
@@ -356,6 +359,9 @@ namespace Azure.AI.Projects {
     workflow: "workflow",
     external: "external",
     voice: "voice",
+
+    /** An agent executed by a platform-managed harness. */
+    managed: "managed",
 
     @removed(Versions.v1)
     container_app: "container_app",

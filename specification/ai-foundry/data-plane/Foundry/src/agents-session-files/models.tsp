@@ -11,7 +11,7 @@ alias UploadSessionFileParams = {
   /** The name of the agent. */
   @path agent_name: string;
 
-  /** The session ID. */
+  /** The Hosted session ID or service-generated Managed Session id. This parameter is not a caller label. */
   @path agent_session_id: string;
 
   /** The destination file path within the sandbox, relative to the session home directory. */
@@ -28,7 +28,7 @@ alias DownloadSessionFileParams = {
   /** The name of the agent. */
   @path agent_name: string;
 
-  /** The session ID. */
+  /** The Hosted session ID or service-generated Managed Session id. This parameter is not a caller label. */
   @path agent_session_id: string;
 
   /** The file path to download from the sandbox, relative to the session home directory. */
@@ -40,7 +40,7 @@ alias ListSessionFilesParams = {
   /** The name of the agent. */
   @path agent_name: string;
 
-  /** The session ID. */
+  /** The Hosted session ID or service-generated Managed Session id. This parameter is not a caller label. */
   @path agent_session_id: string;
 
   /** The directory path to list, relative to the session home directory. Defaults to the home directory if not provided. */
@@ -52,7 +52,7 @@ alias DeleteSessionFileParams = {
   /** The name of the agent. */
   @path agent_name: string;
 
-  /** The session ID. */
+  /** The Hosted session ID or service-generated Managed Session id. This parameter is not a caller label. */
   @path agent_session_id: string;
 
   /** The file or directory path to delete, relative to the session home directory. */

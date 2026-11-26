@@ -391,6 +391,37 @@ namespace JavaScriptToolCompatibility {
 // time being we define output item as a generic dictionary.
 @@alternateType(OpenAI.OutputItem, Record<unknown>);
 
+// The shared Session route has no wire discriminator. Give Python a concrete
+// response model without changing either service payload or other SDKs.
+@clientNamespace("azure.ai.projects", "python")
+namespace PythonSessionCompatibility {
+  /**
+   * A Hosted or Managed Session returned by the shared Session operations.
+   * Hosted Sessions expose agent_session_id and version_indicator; Managed
+   * Sessions expose id, agent_reference and agent_definition. Fields absent
+   * from the service response remain unset.
+   */
+  model AgentSessionResult {
+    ...PickProperties<Session, "status" | "created_at" | "last_accessed_at">;
+    ...OptionalProperties<OmitProperties<
+      Session,
+      "status" | "created_at" | "last_accessed_at"
+    >>;
+    ...OptionalProperties<OmitProperties<
+      AgentSessionResource,
+      "status" | "created_at" | "last_accessed_at" | "expires_at"
+    >>;
+  }
+}
+
+@@alternateType(
+  AgentSession,
+  PythonSessionCompatibility.AgentSessionResult,
+  "python"
+);
+@@usage(AgentSessionResource, Usage.output | Usage.json, "python");
+@@access(AgentSessionResource, Access.public, "python");
+
 // Session operations all use "session_id". Session file operations all use "agent_session_id". Consolidate to use "session_id" everywhere.
 @@clientName(UploadSessionFileParams.agent_session_id, "session_id", "python");
 @@clientName(
