@@ -21,7 +21,7 @@ using Microsoft.DevCenter;
 );
 
 @@clientName(
-  Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,
+  Microsoft.DevCenter.KeyEncryptionKeyIdentity,
   "CustomerManagedKeyEncryptionKeyIdentity",
   "java,go"
 );
@@ -234,7 +234,7 @@ using Microsoft.DevCenter;
 @@clientName(CatalogSyncError, "DevCenterCatalogSyncError", "csharp");
 @@clientName(ConfigurationPolicies, "DevCenterConfigurationPolicies", "csharp");
 @@clientName(
-  Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption,
+  Microsoft.DevCenter.CustomerManagedKeyEncryption,
   "DevCenterCustomerManagedKeyEncryption",
   "csharp"
 );
