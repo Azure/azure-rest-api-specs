@@ -110,7 +110,7 @@ allowlisted repository maintainers and trusted automation accounts.
 Contributor guidance is in the [CI Fix Guide](../documentation/ci-fix.md#protected-files).
 
 The author allowlist is `ALLOWED_AUTHORS` in
-[protected-files.ts](../.github/workflows/src/protected-files.ts). Its maintainer
+[protected-files.ts](../.github/packages/workflows/src/protected-files.ts). Its maintainer
 entries are based on the `Azure/azure-rest-api-specs-maintainers` team;
 update them as maintainer access changes. The `azure-sdk` and
 `azure-sdk-automation[bot]` author exemptions remain included. No organization
@@ -216,7 +216,7 @@ gh workflow run branch-cleanup.yaml --repo Azure/azure-rest-api-specs --ref main
 The default branch, protected branches, and sources and targets of open PRs
 (including drafts) are skipped. Long-lived names and prefixes such as `release-`,
 `feature/` and `archive/` are also excluded; the complete list is at the top of the
-[script](../.github/workflows/src/branch-cleanup.ts).
+[script](../.github/packages/core/src/branch-cleanup.ts).
 `dev-`, `dev/`, and `published/` branches are eligible under the same age cutoff as
 other non-Copilot branches.
 Keep a long-lived branch by protecting it or adding it to those exclusions.

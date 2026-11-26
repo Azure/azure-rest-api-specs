@@ -34,7 +34,7 @@ jobs:
         with:
           script: |
             const { resolveReadinessPullRequest } =
-              await import('${{ github.workspace }}/.github/workflows/src/contributor-readiness.ts');
+              await import('${{ github.workspace }}/.github/packages/core/src/contributor-readiness.ts');
             return await resolveReadinessPullRequest({ github, context, core });
 
   report:
@@ -65,7 +65,7 @@ jobs:
         with:
           script: |
             const { checkContributorReadiness } =
-              await import('${{ github.workspace }}/.github/workflows/src/contributor-readiness.ts');
+              await import('${{ github.workspace }}/.github/packages/core/src/contributor-readiness.ts');
             await checkContributorReadiness({ github, context, core }, Number(process.env.PR_NUMBER));
       - if: ${{ always() && steps.readiness.outputs.issue_number }}
         uses: ./.github/actions/add-empty-artifact

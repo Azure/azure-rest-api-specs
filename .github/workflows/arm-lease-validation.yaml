@@ -14,7 +14,7 @@ on:
       - ".github/arm-leases/**"
       # Also trigger on own sources
       - ".github/workflows/arm-lease-validation.yaml"
-      - ".github/workflows/src/arm-lease-validation/**"
+      - ".github/packages/workflows/src/arm-lease-validation/**"
 
 permissions:
   contents: read
@@ -39,5 +39,5 @@ jobs:
         with:
           script: |
             const { default: armLeaseValidation } =
-              await import('${{ github.workspace }}/.github/workflows/src/arm-lease-validation/arm-lease-validation.ts');
+              await import('${{ github.workspace }}/.github/packages/workflows/src/arm-lease-validation/arm-lease-validation.ts');
             return await armLeaseValidation(core);

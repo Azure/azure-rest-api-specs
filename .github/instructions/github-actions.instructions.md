@@ -22,9 +22,10 @@ Read existing code before editing, preserve its conventions, and keep changes su
 The `.github` directory contains all the code and configuration for GitHub Actions that run as PR checks. This includes:
 
 - **Actions**: Reusable composite actions in `.github/actions/`
-- **Workflows**: Workflow files in `.github/workflows/`
+- **Workflows**: Workflow YAML/agentic definitions in `.github/workflows/`
+- **Workflow packages**: Sibling workspace packages in `.github/packages/*` (`core` for zero-dep helpers and zero-dep workflows, `workflows` for lean PR workflows, and opt-in packages such as `sdk-breaking-change` and `sdk-validation-dotnet-review` for workflows with heavier or cross-workspace dependencies)
 - **Shared utilities**: Common TypeScript modules in `.github/shared/src/`
-- **Tests**: Test files in `.github/workflows/test/` and `.github/shared/test/`
+- **Tests**: Test files in `.github/packages/*/test/` and `.github/shared/test/`
 - **Configuration**: Root oxlint, Oxfmt, TypeScript, and Vitest configs
 
 ## Technology Stack
@@ -45,19 +46,18 @@ The `.github` directory contains all the code and configuration for GitHub Actio
 │   ├── setup-node-install-deps/
 │   ├── install-deps-github-script/
 │   └── ...
-├── workflows/                  # Workflow YAML files and their scripts
-│   ├── src/                   # TypeScript modules for workflows
-│   ├── test/                  # Tests for workflow scripts
-│   ├── *.yaml                 # Workflow definitions
-│   └── cmd/                   # CLI scripts
-├── shared/                    # Shared utilities used across workflows
-│   ├── src/                   # Core utility modules
-│   ├── test/                  # Tests for shared utilities
+├── packages/                   # Sibling workspace packages for workflow scripts
+│   ├── core/                   # @azure-tools/github-core (zero runtime dependencies)
+│   ├── workflows/              # @azure-tools/github-workflows (lean runtime dependencies)
+│   ├── sdk-breaking-change/    # Opt-in package with heavier/cross-workspace dependencies
+│   └── sdk-validation-dotnet-review/
+├── shared/                     # @azure-tools/specs-shared utilities used across repo
+│   ├── src/
+│   ├── test/
 │   └── package.json
-├── matchers/                  # Problem matchers for CI output
-├── package.json               # Root dependencies (superset of shared/)
-├── tsconfig.json              # TypeScript config (type-checking only)
-└── vitest.config.ts           # Vitest test configuration
+├── workflows/                  # Workflow YAML and agentic workflow definitions
+├── matchers/                   # Problem matchers for CI output
+└── tsconfig.json               # Fallback TypeScript config for unmanaged .github scripts
 ```
 
 ## Coding Standards
@@ -103,9 +103,10 @@ See [the shared package guide](../shared/readme.md) for shared-library developme
 
 From `package.json` comments:
 
-- **Runtime dependencies**: Must be kept to an absolute minimum for performance
-- **Transitive dependencies**: Ideally zero transitive dependencies for runtime
-- **Relationship**: `.github/package.json` must be a superset of `.github/shared/package.json`
+- **Zero-dependency core**: `.github/packages/core` (`@azure-tools/github-core`) must keep zero runtime dependencies so zero-dep workflows can run without `pnpm install`.
+- **Lean default**: `.github/packages/workflows` (`@azure-tools/github-workflows`) holds fast workflows with minimal runtime dependencies.
+- **Opt-in feature packages**: Workflows that need heavy or cross-workspace dependencies (e.g., `@typespec/compiler`, `@azure-tools/spec-gen-sdk-runner`) live in their own sibling package under `.github/packages/<name>/` and opt into it via `install-deps-github-script` with `filter: "@azure-tools/github-<name>..."` (and optional `cache: "true"` + distinct `cache-name`).
+- **Minimal `.github/package.json`**: `.github/package.json` is NOT a pnpm workspace package and carries no dependencies (`{ "private": true, "type": "module" }`), so `.github/node_modules/` never exists and sibling packages remain isolated during local development, tests, and CI.
 - **Versions**: Reference external dependencies with `catalog:` and define their versions in the root `pnpm-workspace.yaml` catalog. Keep internal links as `workspace:*`.
 
 ### Key Dependencies
@@ -212,13 +213,13 @@ Composite actions are defined in `.github/actions/*/action.yaml`. Key patterns:
 
 ### Workflow TypeScript
 
-Scripts in `.github/workflows/src/` are typically used with `actions/github-script@v9.0.0`:
+Scripts in `.github/packages/*/src/` are typically used with `actions/github-script@v9.0.0`:
 
 ```yaml
 - uses: actions/github-script@v9.0.0
   with:
     script: |
-      const { myFunction } = await import("${{ github.workspace }}/.github/workflows/src/my-script.ts");
+      const { myFunction } = await import("${{ github.workspace }}/.github/packages/workflows/src/my-script.ts");
       await myFunction({ github, context, core });
 ```
 
@@ -288,8 +289,8 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 ### Adding a New Workflow
 
 1. Create workflow YAML in `.github/workflows/my-workflow.yaml`
-2. Create workflow scripts in `.github/workflows/src/my-workflow.ts`
-3. Write tests in `.github/workflows/test/my-workflow.test.ts`
+2. Place zero-dep workflow scripts in `.github/packages/core/src/`, lean workflow scripts in `.github/packages/workflows/src/`, or heavy/specialized workflow scripts in a new sibling package under `.github/packages/<feature>/` (with its own `package.json`, `tsconfig.json`, and `vitest.config.ts`)
+3. Write tests in the matching package's `test/` directory
 4. Keep workflow and action linting in the dedicated `eng.yml` job.
 5. Run the [required checks](#before-committing).
 
@@ -344,8 +345,10 @@ pnpm run test -- path/to/test.test.ts
 
 ### Separation of Concerns
 
-- **`.github/shared/`**: Pure utility functions, no GitHub Actions-specific code
-- **`.github/workflows/src/`**: Workflow orchestration, calls shared utilities
+- **`.github/shared/`**: Pure utility functions shared across workflows and `eng/tools`
+- **`.github/packages/core/`**: Zero-dependency GitHub Actions helpers and zero-dep workflows
+- **`.github/packages/workflows/`**: Lean workflow orchestration scripts
+- **`.github/packages/<feature>/`**: Opt-in workflow packages with heavier or cross-workspace dependencies
 - **`.github/actions/`**: Reusable composite actions (YAML + shell scripts)
 
 ### Data Flow

@@ -575,42 +575,176 @@ importers:
       vitest:
         specifier: 'catalog:'
         version: 5.1.0(@types/node@26.6.6)(@vitest/coverage-v8@5.1.0)(vite@8.3.8(@types/node@26.6.6)(yaml@2.9.1))
-
-  .github:
-    dependencies:
-      '@apidevtools/json-schema-ref-parser':
+      zod:
         specifier: 'catalog:'
-        version: 16.0.8(@types/json-schema@7.0.15)
+        version: 4.6.7
+
+  .github/packages/core:
+    devDependencies:
+      '@actions/core':
+        specifier: 'catalog:'
+        version: 3.0.1
+      '@actions/github':
+        specifier: 'catalog:'
+        version: 9.1.1
+      '@octokit/core':
+        specifier: 'catalog:'
+        version: 7.0.8
+      '@octokit/endpoint':
+        specifier: 'catalog:'
+        version: 11.0.5
+      '@octokit/openapi-webhooks-types':
+        specifier: 'catalog:'
+        version: 12.2.0
+      '@octokit/plugin-paginate-rest':
+        specifier: 'catalog:'
+        version: 16.0.0(@octokit/core@7.0.8)
+      '@octokit/plugin-rest-endpoint-methods':
+        specifier: 'catalog:'
+        version: 18.0.0(@octokit/core@7.0.8)
+      '@octokit/request-error':
+        specifier: 'catalog:'
+        version: 7.1.2
+      '@octokit/rest':
+        specifier: 'catalog:'
+        version: 22.0.1
+      '@octokit/types':
+        specifier: 'catalog:'
+        version: 18.0.0
+      '@types/node':
+        specifier: 'catalog:'
+        version: 26.6.6
+      '@vitest/utils':
+        specifier: 'catalog:'
+        version: 5.1.0
+      yaml:
+        specifier: 'catalog:'
+        version: 2.9.1
+
+  .github/packages/sdk-breaking-change:
+    dependencies:
+      '@azure-tools/github-core':
+        specifier: workspace:*
+        version: link:../core
       '@azure-tools/spec-gen-sdk-runner':
         specifier: workspace:*
-        version: link:../eng/tools/spec-gen-sdk-runner
+        version: link:../../../eng/tools/spec-gen-sdk-runner
       '@azure-tools/specs-shared':
         specifier: workspace:*
-        version: link:shared
-      '@js-temporal/polyfill':
-        specifier: 'catalog:'
-        version: 0.5.1
-      cross-spawn:
-        specifier: 'catalog:'
-        version: 7.0.6
-      debug:
-        specifier: 'catalog:'
-        version: 4.4.3
+        version: link:../../shared
       fflate:
         specifier: 'catalog:'
         version: 0.8.3
+      zod:
+        specifier: 'catalog:'
+        version: 4.6.7
+    devDependencies:
+      '@actions/core':
+        specifier: 'catalog:'
+        version: 3.0.1
+      '@actions/github':
+        specifier: 'catalog:'
+        version: 9.1.1
+      '@octokit/core':
+        specifier: 'catalog:'
+        version: 7.0.8
+      '@octokit/endpoint':
+        specifier: 'catalog:'
+        version: 11.0.5
+      '@octokit/openapi-webhooks-types':
+        specifier: 'catalog:'
+        version: 12.2.0
+      '@octokit/plugin-paginate-rest':
+        specifier: 'catalog:'
+        version: 16.0.0(@octokit/core@7.0.8)
+      '@octokit/plugin-rest-endpoint-methods':
+        specifier: 'catalog:'
+        version: 18.0.0(@octokit/core@7.0.8)
+      '@octokit/request-error':
+        specifier: 'catalog:'
+        version: 7.1.2
+      '@octokit/rest':
+        specifier: 'catalog:'
+        version: 22.0.1
+      '@octokit/types':
+        specifier: 'catalog:'
+        version: 18.0.0
+      '@types/node':
+        specifier: 'catalog:'
+        version: 26.6.6
+      '@vitest/utils':
+        specifier: 'catalog:'
+        version: 5.1.0
       marked:
         specifier: 'catalog:'
         version: 18.2.1
+
+  .github/packages/sdk-validation-dotnet-review:
+    dependencies:
+      '@azure-tools/github-core':
+        specifier: workspace:*
+        version: link:../core
+      '@azure-tools/specs-shared':
+        specifier: workspace:*
+        version: link:../../shared
+      fflate:
+        specifier: 'catalog:'
+        version: 0.8.3
+      zod:
+        specifier: 'catalog:'
+        version: 4.6.7
+    devDependencies:
+      '@actions/core':
+        specifier: 'catalog:'
+        version: 3.0.1
+      '@actions/github':
+        specifier: 'catalog:'
+        version: 9.1.1
+      '@octokit/core':
+        specifier: 'catalog:'
+        version: 7.0.8
+      '@octokit/endpoint':
+        specifier: 'catalog:'
+        version: 11.0.5
+      '@octokit/openapi-webhooks-types':
+        specifier: 'catalog:'
+        version: 12.2.0
+      '@octokit/plugin-paginate-rest':
+        specifier: 'catalog:'
+        version: 16.0.0(@octokit/core@7.0.8)
+      '@octokit/plugin-rest-endpoint-methods':
+        specifier: 'catalog:'
+        version: 18.0.0(@octokit/core@7.0.8)
+      '@octokit/request-error':
+        specifier: 'catalog:'
+        version: 7.1.2
+      '@octokit/rest':
+        specifier: 'catalog:'
+        version: 22.0.1
+      '@octokit/types':
+        specifier: 'catalog:'
+        version: 18.0.0
+      '@types/node':
+        specifier: 'catalog:'
+        version: 26.6.6
+      '@vitest/utils':
+        specifier: 'catalog:'
+        version: 5.1.0
+
+  .github/packages/workflows:
+    dependencies:
+      '@azure-tools/github-core':
+        specifier: workspace:*
+        version: link:../core
+      '@azure-tools/specs-shared':
+        specifier: workspace:*
+        version: link:../../shared
+      '@js-temporal/polyfill':
+        specifier: 'catalog:'
+        version: 0.5.1
       minimatch:
         specifier: 'catalog:'
         version: 11.0.9
-      pathe:
-        specifier: 'catalog:'
-        version: 2.0.3
-      picocolors:
-        specifier: 'catalog:'
-        version: 1.1.1
       simple-git:
         specifier: 'catalog:'
         version: 4.1.0
@@ -651,27 +785,18 @@ importers:
       '@octokit/types':
         specifier: 'catalog:'
         version: 18.0.0
-      '@types/cross-spawn':
-        specifier: 'catalog:'
-        version: 6.0.6
-      '@types/debug':
-        specifier: 'catalog:'
-        version: 4.1.13
       '@types/node':
         specifier: 'catalog:'
         version: 26.6.6
-      '@types/semver':
-        specifier: 'catalog:'
-        version: 7.8.0
       '@vitest/utils':
         specifier: 'catalog:'
         version: 5.1.0
-      semver:
+      fflate:
         specifier: 'catalog:'
-        version: 7.8.6
-      tinybench:
+        version: 0.8.3
+      marked:
         specifier: 'catalog:'
-        version: 6.2.3
+        version: 18.2.1
 
   .github/shared:
     dependencies:

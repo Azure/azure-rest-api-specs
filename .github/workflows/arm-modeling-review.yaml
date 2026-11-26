@@ -62,7 +62,7 @@ jobs:
         with:
           script: |
             const { default: armModelingReview } =
-              await import('${{ github.workspace }}/.github/workflows/src/arm-modeling-review/arm-modeling-review.ts');
+              await import('${{ github.workspace }}/.github/packages/workflows/src/arm-modeling-review/arm-modeling-review.ts');
             return await armModelingReview({ context, core });
 
       - name: Upload artifact for ARMModelingReviewRequired label

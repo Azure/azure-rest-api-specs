@@ -220,7 +220,7 @@ jobs:
           retries: 3
           script: |
             const { finalizeUnpublishedArmSemanticReview } =
-              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-semantic-review-workflow.ts');
+              await import('${{ github.workspace }}/.github/packages/core/src/arm-auto-signoff/arm-semantic-review-workflow.ts');
             return await finalizeUnpublishedArmSemanticReview({ github, context, core });
       - name: Dispatch Universal ARM signoff
         if: always() && github.event_name == 'workflow_dispatch'
@@ -228,7 +228,7 @@ jobs:
         with:
           script: |
             const { dispatchUniversalSignoff } =
-              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-signoff-dispatch.ts');
+              await import('${{ github.workspace }}/.github/packages/core/src/arm-auto-signoff/arm-signoff-dispatch.ts');
             await dispatchUniversalSignoff({ github, context, core });
 # Gate at the trigger level so the expensive agent job never starts for
 # ineligible events. Label / draft / comment gating that used to live in a
@@ -406,7 +406,7 @@ safe-outputs:
             retries: 3
             script: |
               const { default: publishArmSemanticReviewStatus } =
-                await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-semantic-review-workflow.ts');
+                await import('${{ github.workspace }}/.github/packages/core/src/arm-auto-signoff/arm-semantic-review-workflow.ts');
               return await publishArmSemanticReviewStatus({ github, context, core });
       output: "ARM semantic review status published"
   noop:

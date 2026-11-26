@@ -23,7 +23,7 @@ on:
         ref: ${{ github.sha }}
         persist-credentials: false
         sparse-checkout: |
-          .github/workflows/src
+          .github/packages/core/src
           .github/shared/src
     - name: Select oldest eligible issues
       id: select
@@ -35,7 +35,7 @@ on:
       with:
         script: |
           const { selectBacklogIssues, collectBacklogEvidence } = await import(
-            "${{ github.workspace }}/.github/workflows/src/backlog-triage.ts"
+            "${{ github.workspace }}/.github/packages/core/src/backlog-triage.ts"
           );
           const { writeFile } = await import("node:fs/promises");
           const selection = await selectBacklogIssues({ github, context, core }, process.env.REQUESTED_ISSUE);
@@ -163,7 +163,7 @@ safe-outputs:
             ref: ${{ github.sha }}
             persist-credentials: false
             sparse-checkout: |
-              .github/workflows/src
+              .github/packages/core/src
               .github/shared/src
         - name: Download trusted issue selection
           uses: actions/download-artifact@v8
@@ -180,7 +180,7 @@ safe-outputs:
             script: |
               const { readFile } = await import("node:fs/promises");
               const { applyBacklogTriage, parseSelection } = await import(
-                "${{ github.workspace }}/.github/workflows/src/backlog-triage.ts"
+                "${{ github.workspace }}/.github/packages/core/src/backlog-triage.ts"
               );
               const selection = parseSelection(JSON.parse(await readFile(process.env.TRIAGE_SELECTION_PATH, "utf8")));
               const output = JSON.parse(await readFile(process.env.GH_AW_AGENT_OUTPUT, "utf8"));
@@ -193,7 +193,7 @@ safe-outputs:
           with:
             script: |
               const { reportBacklogTriageFailure } = await import(
-                `${process.env.GITHUB_WORKSPACE}/.github/workflows/src/backlog-triage.ts`
+                `${process.env.GITHUB_WORKSPACE}/.github/packages/core/src/backlog-triage.ts`
               );
               await reportBacklogTriageFailure({ github, context, core });
   noop:

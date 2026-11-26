@@ -21,7 +21,7 @@ export default mergeConfig(
   defineConfig({
     test: {
       projects: [
-        ".github/vitest.config.ts",
+        ".github/packages/*/vitest.config.ts",
         ".github/shared/vitest.config.ts",
         "eng/scripts/vitest.config.ts",
         "eng/tools/*/vitest.config.ts",
