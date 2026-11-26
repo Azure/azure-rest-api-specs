@@ -5,7 +5,7 @@ import {
   createMockCore,
   createMockGithub,
   createMockRequestError,
-} from "../mocks.ts";
+} from "@azure-tools/github-core/test/mocks";
 
 describe("publishResultInComment", () => {
   it("records the report commit for the Next Steps to Merge summary", async () => {

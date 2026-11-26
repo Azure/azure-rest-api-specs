@@ -10,7 +10,7 @@ import { inspect } from "node:util";
 export async function getIssueNumber(
   github: GitHub,
   head_sha: string,
-  logger?: import("../../shared/src/logger.ts").ILogger,
+  logger?: import("../../../shared/src/logger.ts").ILogger,
 ): Promise<{ issueNumber: number }> {
   let issueNumber = NaN;
 

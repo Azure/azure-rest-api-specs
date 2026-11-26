@@ -1,4 +1,4 @@
-import type { GitHubScriptArgs } from "../../src/github.ts";
+import type { GitHubScriptArgs } from "@azure-tools/github-core/github";
 import { existsSync } from "node:fs";
 import { writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
@@ -13,7 +13,7 @@ import {
   loadFormatRules,
   validateAllNamespaces,
 } from "../../src/package-name-approval/validate-format.ts";
-import { createMockContext, createMockCore } from "../mocks.ts";
+import { createMockContext, createMockCore } from "@azure-tools/github-core/test/mocks";
 
 vi.mock("node:fs/promises", async (importOriginal) => ({
   ...(await importOriginal<typeof import("node:fs/promises")>()),

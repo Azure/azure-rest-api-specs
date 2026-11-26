@@ -2,7 +2,7 @@ import { Octokit } from "@octokit/rest";
 import { describe, expect, it, vi } from "vitest";
 import { reportLabelSyncFailure } from "../src/report-label-sync-failure.ts";
 import { reportBacklogTriageFailure } from "../src/backlog-triage.ts";
-import { createMockContext, createMockCore } from "./mocks.ts";
+import { createMockContext, createMockCore } from "@azure-tools/github-core/test/mocks";
 
 const repo = { owner: "Azure", repo: "azure-rest-api-specs" };
 const prefix = `/repos/${repo.owner}/${repo.repo}`;

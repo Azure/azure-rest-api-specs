@@ -6,7 +6,7 @@ import {
   table,
 } from "@azure-tools/specs-shared/markdown";
 import { getSdkLanguage, SdkName } from "@azure-tools/specs-shared/sdk-types";
-import type { IssueComment } from "../comment.ts";
+import type { IssueComment } from "@azure-tools/github-core/comment";
 import { sdkLabels } from "./labelling.ts";
 
 export function hasSdkBreakingChanges(labels: string[]): boolean {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { IssueComment } from "../../src/comment.ts";
+import type { IssueComment } from "@azure-tools/github-core/comment";
 import {
   buildSdkBreakingChangesSummary,
   hasSdkBreakingChanges,
@@ -8,7 +8,7 @@ import {
   createNextStepsComment,
   summarizeChecksImpl,
 } from "../../src/summarize-checks/summarize-checks.ts";
-import { createMockCore, createMockGithub } from "../mocks.ts";
+import { createMockCore, createMockGithub } from "@azure-tools/github-core/test/mocks";
 
 const headSha = "a".repeat(40);
 const prUrl = "https://github.com/owner/repo/pull/42";

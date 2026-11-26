@@ -1,6 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { parse } from "yaml";
-import type { Core } from "../github.ts";
+import type { Core } from "@azure-tools/github-core/github";
 
 export type FormatRule = {
   pattern: string;

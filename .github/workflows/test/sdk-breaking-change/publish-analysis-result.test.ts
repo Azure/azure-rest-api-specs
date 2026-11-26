@@ -6,7 +6,11 @@ import {
   buildAnalysisReport,
   publishAnalysisResult,
 } from "../../src/sdk-breaking-change/publish-analysis-result.ts";
-import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
+import {
+  createMockContext,
+  createMockCore,
+  createMockGithub,
+} from "@azure-tools/github-core/test/mocks";
 
 const analyzedSha = "6fb74c85cd16a8e13d4ad1aca058993cd076fa8b";
 const analysisWorkflowUrl = "https://github.com/owner/repo/actions/runs/123";

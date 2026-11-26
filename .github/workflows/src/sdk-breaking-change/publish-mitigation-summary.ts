@@ -1,5 +1,5 @@
 import { escapeMarkdown, inlineCode } from "@azure-tools/specs-shared/markdown";
-import type { Core } from "../github.ts";
+import type { Core } from "@azure-tools/github-core/github";
 
 export function buildMitigationSummary({
   prNumber,

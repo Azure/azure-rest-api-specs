@@ -1,4 +1,4 @@
-import type { Core } from "../github.ts";
+import type { Core } from "@azure-tools/github-core/github";
 /*
     This file covers two areas of enforcement:
     1. It calculates what set of label rules has been violated by the current PR, for the purposes of updating next steps to merge.

@@ -6,7 +6,11 @@ import {
   buildMitigationReport,
   publishMitigationResult,
 } from "../../src/sdk-breaking-change/publish-mitigation-result.ts";
-import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
+import {
+  createMockContext,
+  createMockCore,
+  createMockGithub,
+} from "@azure-tools/github-core/test/mocks";
 
 let resultsPath: string;
 let mitigationResultPath: string;

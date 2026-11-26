@@ -7,7 +7,11 @@ import {
   resolveChangedTypeSpecConfigPathsFromPullRequest,
   validateAnalysisSource,
 } from "../../src/sdk-breaking-change/resolve-analysis-inputs.ts";
-import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
+import {
+  createMockContext,
+  createMockCore,
+  createMockGithub,
+} from "@azure-tools/github-core/test/mocks";
 
 const temporaryDirectories: string[] = [];
 

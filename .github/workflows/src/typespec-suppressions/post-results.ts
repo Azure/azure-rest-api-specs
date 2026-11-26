@@ -1,4 +1,4 @@
-import type { GitHubScriptArgs } from "../github.ts";
+import type { GitHubScriptArgs } from "@azure-tools/github-core/github";
 /*
   Entry point for the dedicated "TypeSpec Suppressions Review" pull request
   comment, mirroring the namespace-approval post-results.js pattern.
@@ -15,8 +15,8 @@ import type { GitHubScriptArgs } from "../github.ts";
 */
 
 import { PER_PAGE_MAX } from "../../../shared/src/github.ts";
-import { commentOrUpdate, parseExistingComments } from "../comment.ts";
-import { extractInputs } from "../context.ts";
+import { commentOrUpdate, parseExistingComments } from "@azure-tools/github-core/comment";
+import { extractInputs } from "@azure-tools/github-core/context";
 import {
   TYPESPEC_SUPPRESSIONS_APPROVED_LABEL,
   TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL,

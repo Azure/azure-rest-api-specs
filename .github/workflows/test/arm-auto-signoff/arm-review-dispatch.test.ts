@@ -6,7 +6,7 @@ import {
   ARM_INITIAL_REVIEW_REQUESTED_LABEL,
   dispatchArmReview,
 } from "../../src/arm-auto-signoff/arm-review-dispatch.ts";
-import { createMockCore, createMockGithub } from "../mocks.ts";
+import { createMockCore, createMockGithub } from "@azure-tools/github-core/test/mocks";
 
 const headSha = "a".repeat(40);
 const sourceUrl = "https://github.com/Azure/azure-rest-api-specs/actions/runs/456";

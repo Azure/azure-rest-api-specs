@@ -1,7 +1,7 @@
 import { detectChangedSpecConfigFromChangedFiles } from "@azure-tools/spec-gen-sdk-runner";
 import { isFullGitSha } from "@azure-tools/specs-shared/git";
 import { getSdkLanguage, SdkName } from "@azure-tools/specs-shared/sdk-types";
-import type { GitHubScriptArgs, WebhookEvent } from "../github.ts";
+import type { GitHubScriptArgs, WebhookEvent } from "@azure-tools/github-core/github";
 import { publishStatus } from "./status.ts";
 import { sdkLabels } from "../summarize-checks/labelling.ts";
 

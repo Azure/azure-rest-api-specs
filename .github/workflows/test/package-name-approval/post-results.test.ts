@@ -12,9 +12,13 @@ import {
   loadApproversConfig,
 } from "../../src/package-name-approval/approvers.ts";
 import { execFile } from "../../../shared/src/exec.ts";
-import { commentOrUpdate } from "../../src/comment.ts";
-import { extractInputs } from "../../src/context.ts";
-import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
+import { commentOrUpdate } from "@azure-tools/github-core/comment";
+import { extractInputs } from "@azure-tools/github-core/context";
+import {
+  createMockContext,
+  createMockCore,
+  createMockGithub,
+} from "@azure-tools/github-core/test/mocks";
 
 vi.mock("node:fs/promises", () => ({
   readFile: vi.fn(),
@@ -30,12 +34,12 @@ vi.mock("../../../shared/src/github.ts", () => ({
   PER_PAGE_MAX: 100,
 }));
 
-vi.mock("../../src/comment.ts", () => ({
+vi.mock("@azure-tools/github-core/comment", () => ({
   commentOrUpdate: vi.fn(),
   parseExistingComments: vi.fn().mockReturnValue([undefined, undefined]),
 }));
 
-vi.mock("../../src/context.ts", () => ({
+vi.mock("@azure-tools/github-core/context", () => ({
   extractInputs: vi.fn(),
 }));
 

@@ -3,7 +3,7 @@ import {
   buildMitigationSummary,
   publishMitigationSummary,
 } from "../../src/sdk-breaking-change/publish-mitigation-summary.ts";
-import { createMockCore } from "../mocks.ts";
+import { createMockCore } from "@azure-tools/github-core/test/mocks";
 
 const options = {
   prNumber: "42",

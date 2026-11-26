@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { PER_PAGE_MAX } from "../../shared/src/github.ts";
-import { fullGitSha } from "../../shared/test/examples.ts";
+import { PER_PAGE_MAX } from "../../../shared/src/github.ts";
+import { fullGitSha } from "../../../shared/test/examples.ts";
 import { extractInputs as extractInputsImpl } from "../src/context.ts";
 import type { Context, Core, GitHub } from "../src/github.ts";
 import { createMockCore, createMockGithub } from "./mocks.ts";

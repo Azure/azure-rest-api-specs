@@ -1,0 +1,45 @@
+{
+  "name": "@azure-tools/github-core",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "_comments": {
+    "dependencies": "Zero runtime dependencies: zero-dep workflows run without pnpm install and github-test verifies core before installing any packages."
+  },
+  "exports": {
+    "./artifacts": "./src/artifacts.ts",
+    "./comment": "./src/comment.ts",
+    "./commit-statuses": "./src/commit-statuses.ts",
+    "./context": "./src/context.ts",
+    "./core-logger": "./src/core-logger.ts",
+    "./github": "./src/github.ts",
+    "./issues": "./src/issues.ts",
+    "./label": "./src/label.ts",
+    "./retries": "./src/retries.ts",
+    "./test/mocks": "./test/mocks.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@actions/core": "catalog:",
+    "@actions/github": "catalog:",
+    "@octokit/core": "catalog:",
+    "@octokit/endpoint": "catalog:",
+    "@octokit/openapi-webhooks-types": "catalog:",
+    "@octokit/plugin-paginate-rest": "catalog:",
+    "@octokit/plugin-rest-endpoint-methods": "catalog:",
+    "@octokit/request-error": "catalog:",
+    "@octokit/types": "catalog:",
+    "@types/node": "catalog:"
+  },
+  "scripts": {
+    "build": "tsc --noEmit",
+    "check": "pnpm test:ci && pnpm lint && pnpm format:check",
+    "lint": "pnpm lint:oxlint && pnpm lint:tsc",
+    "lint:oxlint": "oxlint .",
+    "lint:tsc": "pnpm build",
+    "format": "oxfmt . --write",
+    "format:check": "oxfmt . --check",
+    "test": "vitest",
+    "test:ci": "vitest run --coverage --reporter=verbose"
+  }
+}
