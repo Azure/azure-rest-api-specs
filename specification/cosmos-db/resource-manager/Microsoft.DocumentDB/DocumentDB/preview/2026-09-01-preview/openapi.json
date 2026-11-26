@@ -14428,8 +14428,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{sourceContainerName}/globalSecondaryIndexes/{containerName}": {
       "put": {
-        "operationId": "SqlResources_CreateSqlGlobalSecondaryIndex",
-        "description": "Creates an Azure Cosmos DB SQL global secondary index container under a source container. Requires the Microsoft.DocumentDB/databaseAccounts/sqlDatabases/container/globalSecondaryIndexes/write action. Container updates are not supported. Requests without a materialized view definition return 400 Bad Request.",
+        "operationId": "SqlResources_CreateUpdateSqlGlobalSecondaryIndex",
+        "description": "Creates or updates an Azure Cosmos DB SQL global secondary index container under a source container. Requires the Microsoft.DocumentDB/databaseAccounts/sqlDatabases/container/globalSecondaryIndexes/write action. Requests without a materialized view definition return 400 Bad Request.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -14472,7 +14472,7 @@
             "type": "string"
           },
           {
-            "name": "createSqlGlobalSecondaryIndexParameters",
+            "name": "createUpdateSqlGlobalSecondaryIndexParameters",
             "in": "body",
             "description": "The parameters to provide for the current SQL container.",
             "required": true,
@@ -14526,6 +14526,9 @@
           },
           "CosmosDBSqlGlobalSecondaryIndexCreateBadRequest": {
             "$ref": "./examples/CosmosDBSqlGlobalSecondaryIndexCreateBadRequest.json"
+          },
+          "CosmosDBSqlGlobalSecondaryIndexUpdate": {
+            "$ref": "./examples/CosmosDBSqlGlobalSecondaryIndexUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
