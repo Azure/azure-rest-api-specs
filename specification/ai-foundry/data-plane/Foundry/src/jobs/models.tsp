@@ -372,7 +372,7 @@ union CommandJobStatus {
   Canceled: "Canceled",
 }
 
-@doc("Stored job-level failure diagnostics returned inside a successful job-resource response. This is a direct error object, not the HTTP error-response envelope. The fields follow the existing resource wire contract, including camel-case `innerError` and `referenceCode`; they are distinct from the HTTP error envelope's `innererror`. Some stored diagnostics are incomplete. Missing or null diagnostic fields do not change a Failed execution outcome. Internal debug information is not part of this contract.")
+@doc("Stored job-level failure diagnostics returned inside a successful job-resource response. This is a direct error object, not the HTTP error response (`TrainingJobsErrorResponse`), although both use the same camel-case `innerError` nesting. The fields follow the existing resource wire contract, including `referenceCode`. Some stored diagnostics are incomplete. Missing or null diagnostic fields do not change a Failed execution outcome. Internal debug information is not part of this contract.")
 model CommandJobError {
   @doc("Server-defined failure classification, or null if it was not recorded. Codes are extensible; use recognized codes for programmatic handling, not message text.")
   code: string | null;
@@ -396,13 +396,42 @@ model CommandJobError {
   detailsUri?: url | null;
 }
 
-@doc("Nested diagnostic codes in the job-resource error. The existing JSON spelling is `innerError`, including at each nested level.")
+@doc("Nested diagnostic codes, used by the job resource's stored error and by the HTTP error response. The JSON spelling is `innerError` at each nested level. Each level is more specific than its parent; use the deepest code you recognize.")
 model CommandJobInnerError {
   @doc("A more specific server-defined diagnostic code, when recorded.")
   code?: string | null;
 
   @doc("A further nested diagnostic code, when recorded.")
   innerError?: CommandJobInnerError | null;
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "HTTP error envelope, named like the shared ApiErrorResponse; .NET reports failures through RequestFailedException."
+@doc("The HTTP error response for the training_jobs operations. Errors from the training job service use the Azure Machine Learning error format: `error.code` is a general classification such as `UserError`, and more specific codes are nested in `error.innerError`. Gateway-generated errors can contain only `code` and `message`. Tolerate additional properties.")
+@error
+model TrainingJobsErrorResponse {
+  @doc("The error details.")
+  error: TrainingJobsError;
+}
+
+@doc("Error details for a failed training_jobs request.")
+model TrainingJobsError {
+  @doc("A server-defined error code. For training job service errors this is a general classification such as `UserError`; inspect `innerError` for more specific codes. Codes are extensible.")
+  code: string;
+
+  @doc("A human-readable description of the error, intended for developers. Do not parse it for programmatic handling.")
+  message: string;
+
+  @doc("The target of the error, such as a request property name, when available.")
+  target?: string | null;
+
+  @doc("Related errors, when available.")
+  details?: TrainingJobsError[] | null;
+
+  @doc("More specific nested error codes, when available. Use the deepest code you recognize.")
+  innerError?: CommandJobInnerError | null;
+
+  @doc("A service-defined reference that classifies the failure, when available. Tolerate unrecognized values.")
+  referenceCode?: string | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Use an extensible union instead of a plain string"

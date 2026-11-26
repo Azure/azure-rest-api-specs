@@ -40162,7 +40162,16 @@
         "description": "List job resources using the FTJ-only gateway route. Follow nextLink unchanged for subsequent pages. Artifact page sizing is configured separately by listArtifacts; this operation does not advertise an artifact maxpagesize parameter or legacy Run History page-size behavior.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
           },
           {
             "name": "jobType",
@@ -40205,16 +40214,14 @@
             "explode": false
           },
           {
-            "name": "Foundry-Features",
-            "in": "header",
+            "name": "api-version",
+            "in": "query",
             "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "description": "The API version to use for this operation.",
             "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -40228,21 +40235,22 @@
               }
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
+          "4XX": {
+            "description": "Client error",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/TrainingJobsErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrainingJobsErrorResponse"
                 }
               }
             }
@@ -40259,7 +40267,16 @@
         "description": "Get a job resource by name, including execution state in `properties.status` and stored failure diagnostics in `properties.error` when available. HTTP 200 means the resource was read successfully, not that training succeeded: Failed and Canceled jobs also return 200. This is a resource read, not an operation-status monitor. To observe training or cancellation, repeat this request at a client-selected interval; the service does not specify an execution-polling interval and runtime-dependent stages may be skipped. Only Completed, Failed, and Canceled are terminal execution states; tolerate additional values without assuming completion. On Failed, inspect the structured diagnostic codes/message, then list log artifacts and request content information for the selected exact path before downloading it. Missing diagnostics or logs do not imply success. Cancellation can finish as Completed or Failed rather than Canceled. A missing or soft-deleted job returns 404.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
           },
           {
             "name": "name",
@@ -40271,16 +40288,14 @@
             }
           },
           {
-            "name": "Foundry-Features",
-            "in": "header",
+            "name": "api-version",
+            "in": "query",
             "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "description": "The API version to use for this operation.",
             "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -40294,21 +40309,22 @@
               }
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
+          "4XX": {
+            "description": "Client error",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/TrainingJobsErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrainingJobsErrorResponse"
                 }
               }
             }
@@ -40323,7 +40339,16 @@
         "description": "Create, replay, or update a named job resource without waiting for training to finish. The first request pins the submitted configuration. Retry the same name with the same configuration to reuse the persisted job or resume an incomplete submission, rather than create another execution. Returns 201 for the create/resume path or 200 for an existing tracked job, including a no-op replay. A deleted name cannot be reused (409); use a new name for a new execution. Changing submitted command, environment, compute, code, experiment, bindings, resources, distribution, limits, services, or priority is rejected with 400. While submission is incomplete, retries must reproduce the original submitted configuration; metadata changes must wait until submission is tracked. Once tracked, running and terminal jobs permit changes only to display name, description, tags and user properties, without restarting execution. Omitted metadata stays unchanged; empty text clears display name/description. Supplied tags replace the entire map and an empty map clears it. User properties add new keys only: existing values cannot change and omitted keys are preserved. Concurrent metadata writes can return 409; read the latest job and retry the intended change. No public ETag precondition or conditional-write guarantee is provided, so a read-modify-write sequence is not protected against intervening writes. Use `get` to observe execution state.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
           },
           {
             "name": "name",
@@ -40335,16 +40360,14 @@
             }
           },
           {
-            "name": "Foundry-Features",
-            "in": "header",
+            "name": "api-version",
+            "in": "query",
             "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "description": "The API version to use for this operation.",
             "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -40368,21 +40391,22 @@
               }
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
+          "4XX": {
+            "description": "Client error",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/TrainingJobsErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrainingJobsErrorResponse"
                 }
               }
             }
@@ -40408,7 +40432,16 @@
         "description": "Soft-delete a job resource by name. Returns 204 with no body when the resource is marked deleted, including when it is already deleted or missing. Deleting an active submitted job can return 409; cancel the job and observe a terminal execution state before retrying deletion. The request does not return an operation monitor or wait for physical cleanup. A subsequent `get` returns 404; no delete polling is required.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
           },
           {
             "name": "name",
@@ -40420,37 +40453,36 @@
             }
           },
           {
-            "name": "Foundry-Features",
-            "in": "header",
+            "name": "api-version",
+            "in": "query",
             "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "description": "The API version to use for this operation.",
             "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful."
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
+          "4XX": {
+            "description": "Client error",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/TrainingJobsErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrainingJobsErrorResponse"
                 }
               }
             }
@@ -40464,18 +40496,8 @@
     "/training_jobs/{name}/artifacts": {
       "get": {
         "operationId": "Jobs_listArtifacts",
-        "description": "List artifact descriptors for a job, including its log files, without returning download credentials. Logs are ordinary artifacts under the `azureml-logs/`, `user_logs/` and `system_logs/` directories. Follow `nextLink` unchanged to retrieve subsequent pages. Returns 400 if `maxpagesize` is outside 1 to 500, and 404 if the job is missing or deleted. A directory prefix with no matching artifacts returns 200 with an empty `value` array. Failures use the shared Azure error response.",
+        "description": "List artifact descriptors for a job, including its log files, without returning download credentials. Logs are ordinary artifacts under the `azureml-logs/`, `user_logs/` and `system_logs/` directories. Follow `nextLink` unchanged to retrieve subsequent pages. Returns 400 if `maxpagesize` is outside 1 to 500, and 404 if the job is missing or deleted. A directory prefix with no matching artifacts returns 200 with an empty `value` array. Failures use the training jobs error response.",
         "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
           {
             "name": "Foundry-Features",
             "in": "header",
@@ -40492,7 +40514,7 @@
             "name": "name",
             "in": "path",
             "required": true,
-            "description": "The name of the Job.",
+            "description": "The name of the Job. This is case-sensitive.",
             "schema": {
               "type": "string"
             }
@@ -40529,6 +40551,16 @@
               "maximum": 500
             },
             "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -40542,21 +40574,22 @@
               }
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
+          "4XX": {
+            "description": "Client error",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/TrainingJobsErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrainingJobsErrorResponse"
                 }
               }
             }
@@ -40567,21 +40600,11 @@
         ]
       }
     },
-    "/training_jobs/{name}/artifacts/content_info": {
+    "/training_jobs/{name}/artifacts:get_content_info": {
       "get": {
         "operationId": "Jobs_getArtifactContentInformation",
-        "description": "Get content access information for one artifact identified by its exact path. Returns a download URI and the byte length when available; this operation does not list a directory or return a page of artifacts. Returns 400 if `path` is omitted, empty, or whitespace-only. Returns 404 if the job is missing or deleted, or no artifact exists at the exact case-sensitive path. Failures use the shared Azure error response.",
+        "description": "Get content access information for one artifact identified by its exact path. Returns a download URI and the byte length when available; this operation does not list a directory or return a page of artifacts. Returns 400 if `path` is omitted, empty, or whitespace-only. Returns 404 if the job is missing or deleted, or no artifact exists at the exact case-sensitive path. Failures use the training jobs error response.",
         "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
           {
             "name": "Foundry-Features",
             "in": "header",
@@ -40598,7 +40621,7 @@
             "name": "name",
             "in": "path",
             "required": true,
-            "description": "The name of the Job.",
+            "description": "The name of the Job. This is case-sensitive.",
             "schema": {
               "type": "string"
             }
@@ -40611,6 +40634,16 @@
             "schema": {
               "type": "string",
               "minLength": 1
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
             },
             "explode": false
           }
@@ -40626,21 +40659,22 @@
               }
             }
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
+          "4XX": {
+            "description": "Client error",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/TrainingJobsErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrainingJobsErrorResponse"
                 }
               }
             }
@@ -40657,7 +40691,16 @@
         "description": "Request cancellation of a job. Returns 200 with no body after the cancellation request is processed, or if the job is already terminal. This acknowledgement does not guarantee that training has stopped or will end as `Canceled`. Use `get` to observe execution state; `Completed` or `Failed` may be observed if execution finishes before cancellation takes effect. A missing or deleted job returns 404, and a job that has not been submitted can return 409. Request failures use the normal API error response, not an asynchronous operation result. No operation monitor or polling URL is returned.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
           },
           {
             "name": "name",
@@ -40669,37 +40712,36 @@
             }
           },
           {
-            "name": "Foundry-Features",
-            "in": "header",
+            "name": "api-version",
+            "in": "query",
             "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "description": "The API version to use for this operation.",
             "schema": {
-              "type": "string",
-              "enum": [
-                "Jobs=V1Preview"
-              ]
-            }
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded."
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
+          "4XX": {
+            "description": "Client error",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/TrainingJobsErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrainingJobsErrorResponse"
                 }
               }
             }
@@ -48824,7 +48866,7 @@
             "description": "A URI pointing to additional failure context, when supplied by the runtime. It is not an operation-monitor or artifact-download URI."
           }
         },
-        "description": "Stored job-level failure diagnostics returned inside a successful job-resource response. This is a direct error object, not the HTTP error-response envelope. The fields follow the existing resource wire contract, including camel-case `innerError` and `referenceCode`; they are distinct from the HTTP error envelope's `innererror`. Some stored diagnostics are incomplete. Missing or null diagnostic fields do not change a Failed execution outcome. Internal debug information is not part of this contract."
+        "description": "Stored job-level failure diagnostics returned inside a successful job-resource response. This is a direct error object, not the HTTP error response (`TrainingJobsErrorResponse`), although both use the same camel-case `innerError` nesting. The fields follow the existing resource wire contract, including `referenceCode`. Some stored diagnostics are incomplete. Missing or null diagnostic fields do not change a Failed execution outcome. Internal debug information is not part of this contract."
       },
       "CommandJobInnerError": {
         "type": "object",
@@ -48852,7 +48894,7 @@
             "description": "A further nested diagnostic code, when recorded."
           }
         },
-        "description": "Nested diagnostic codes in the job-resource error. The existing JSON spelling is `innerError`, including at each nested level."
+        "description": "Nested diagnostic codes, used by the job resource's stored error and by the HTTP error response. The JSON spelling is `innerError` at each nested level. Each level is more specific than its parent; use the deepest code you recognize."
       },
       "CommandJobLimits": {
         "type": "object",
@@ -121528,6 +121570,84 @@
             "Evaluations=V1Preview"
           ]
         }
+      },
+      "TrainingJobsError": {
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "A server-defined error code. For training job service errors this is a general classification such as `UserError`; inspect `innerError` for more specific codes. Codes are extensible."
+          },
+          "message": {
+            "type": "string",
+            "description": "A human-readable description of the error, intended for developers. Do not parse it for programmatic handling."
+          },
+          "target": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The target of the error, such as a request property name, when available."
+          },
+          "details": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TrainingJobsError"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Related errors, when available."
+          },
+          "innerError": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CommandJobInnerError"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "More specific nested error codes, when available. Use the deepest code you recognize."
+          },
+          "referenceCode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "A service-defined reference that classifies the failure, when available. Tolerate unrecognized values."
+          }
+        },
+        "description": "Error details for a failed training_jobs request."
+      },
+      "TrainingJobsErrorResponse": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/TrainingJobsError",
+            "description": "The error details."
+          }
+        },
+        "description": "The HTTP error response for the training_jobs operations. Errors from the training job service use the Azure Machine Learning error format: `error.code` is a general classification such as `UserError`, and more specific codes are nested in `error.innerError`. Gateway-generated errors can contain only `code` and `message`. Tolerate additional properties."
       },
       "TreatmentEffectType": {
         "anyOf": [
