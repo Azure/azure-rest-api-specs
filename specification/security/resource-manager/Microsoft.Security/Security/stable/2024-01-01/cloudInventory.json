@@ -1,0 +1,413 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Defender for Cloud",
+    "version": "2024-01-01",
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) CloudInventory RP Lite resource type.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "CloudInventories"
+    }
+  ],
+  "paths": {
+    "/{scope}/providers/Microsoft.Security/cloudInventory": {
+      "get": {
+        "operationId": "CloudInventories_List",
+        "tags": [
+          "CloudInventories"
+        ],
+        "description": "List Cloud Inventory records under a target scope (subscription, resource group, securityConnector, or resource).",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scope",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudInventoryList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Cloud Inventory records under a target scope": {
+            "$ref": "./examples/CloudInventories/CloudInventory_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceId}/providers/Microsoft.Security/cloudInventory/{cloudInventoryName}": {
+      "get": {
+        "operationId": "CloudInventories_Get",
+        "tags": [
+          "CloudInventories"
+        ],
+        "description": "Get the Cloud Inventory record for a given resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "The fully qualified Azure Resource Manager identifier of the extended resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "cloudInventoryName",
+            "in": "path",
+            "description": "The Cloud Inventory resource name (singleton 'default').",
+            "required": true,
+            "type": "string",
+            "pattern": "^default$",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "CloudInventoryName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "The default Cloud Inventory resource name."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudInventory"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the Cloud Inventory record for a given resource": {
+            "$ref": "./examples/CloudInventories/CloudInventory_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "CloudInventory": {
+      "type": "object",
+      "description": "The Cloud Inventory extension resource published to Azure Resource Graph (RP Lite, read-only).",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CloudInventoryProperties",
+          "description": "Cloud Inventory properties describing the discovered multi-cloud or workload entity."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CloudInventoryEnvironment": {
+      "type": "string",
+      "description": "The source cloud or environment of the inventoried resource.",
+      "enum": [
+        "Azure",
+        "AWS",
+        "GCP",
+        "MDE",
+        "MSGraph",
+        "ExternalContainerRegistry",
+        "DockerHub",
+        "JFrog",
+        "GitHub",
+        "GitLab",
+        "Agnostic",
+        "AzureDevOps",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "CloudInventoryEnvironment",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Azure",
+            "value": "Azure",
+            "description": "Microsoft Azure"
+          },
+          {
+            "name": "AWS",
+            "value": "AWS",
+            "description": "Amazon Web Services"
+          },
+          {
+            "name": "GCP",
+            "value": "GCP",
+            "description": "Google Cloud Platform"
+          },
+          {
+            "name": "MDE",
+            "value": "MDE",
+            "description": "Microsoft Defender for Endpoint"
+          },
+          {
+            "name": "MSGraph",
+            "value": "MSGraph",
+            "description": "Microsoft Graph"
+          },
+          {
+            "name": "ExternalContainerRegistry",
+            "value": "ExternalContainerRegistry",
+            "description": "External Container Registry"
+          },
+          {
+            "name": "DockerHub",
+            "value": "DockerHub",
+            "description": "Docker Hub container registry"
+          },
+          {
+            "name": "JFrog",
+            "value": "JFrog",
+            "description": "JFrog Artifactory"
+          },
+          {
+            "name": "GitHub",
+            "value": "GitHub",
+            "description": "GitHub source control platform"
+          },
+          {
+            "name": "GitLab",
+            "value": "GitLab",
+            "description": "GitLab DevSecOps platform"
+          },
+          {
+            "name": "Agnostic",
+            "value": "Agnostic",
+            "description": "Cloud-agnostic environment"
+          },
+          {
+            "name": "AzureDevOps",
+            "value": "AzureDevOps",
+            "description": "Azure DevOps"
+          },
+          {
+            "name": "Other",
+            "value": "Other",
+            "description": "Other environment"
+          }
+        ]
+      }
+    },
+    "CloudInventoryList": {
+      "type": "object",
+      "description": "Page of Cloud Inventory resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CloudInventory items on this page.",
+          "items": {
+            "$ref": "#/definitions/CloudInventory"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items.",
+          "readOnly": true
+        }
+      }
+    },
+    "CloudInventoryProperties": {
+      "type": "object",
+      "description": "Properties of a Microsoft.Security/cloudInventory resource (read-only RP Lite projection from Defender CloudMap / DSag).",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The ARM resource identifier of the inventoried entity.",
+          "readOnly": true
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "The display name of the inventoried entity.",
+          "readOnly": true
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The normalized resource type of the inventoried entity (for example, 'virtualmachines', 'pod', 'container', 'instance').",
+          "readOnly": true
+        },
+        "resourceLabel": {
+          "type": "string",
+          "description": "The classification label of the inventoried entity in the security graph (for example, 'compute, virtual-machine' or 'kubernetes-pod').",
+          "readOnly": true
+        },
+        "environments": {
+          "$ref": "#/definitions/CloudInventoryEnvironment",
+          "description": "The cloud or source environment of the inventoried entity.",
+          "readOnly": true
+        },
+        "resourceGroup": {
+          "type": "string",
+          "description": "The resource group of the inventoried entity, when applicable.",
+          "readOnly": true
+        },
+        "securityConnectorId": {
+          "type": "string",
+          "description": "The Microsoft.Security/securityConnectors ARM resource ID that onboarded the entity, when applicable.",
+          "readOnly": true
+        }
+      }
+    },
+    "Common.CloudError": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Common.CloudErrorBody",
+          "description": "The error object."
+        }
+      },
+      "x-ms-external": true
+    },
+    "Common.CloudErrorBody": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/Common.CloudErrorBody"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "x-ms-external": true
+    }
+  },
+  "parameters": {}
+}
