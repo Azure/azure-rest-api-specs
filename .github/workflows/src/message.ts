@@ -1,6 +1,6 @@
 // Ported from @azure/swagger-validation-common:src/types/message.ts
 
-import { markdownTable } from "markdown-table";
+import { table } from "@azure-tools/specs-shared/markdown";
 import * as z from "zod";
 
 export const MessageLevel = Object.freeze({
@@ -83,7 +83,7 @@ export type MessageRecord = import("zod").infer<typeof MessageRecordSchema>;
 export function generateMarkdownTable(messages: MessageRecord[]) {
   const header = ["Rule", "Message"];
   const rows = messages.map((m) => getMarkdownRow(m));
-  return markdownTable([header, ...rows]);
+  return table([header, ...rows]);
 }
 
 function getMarkdownRow(record: MessageRecord): string[] {

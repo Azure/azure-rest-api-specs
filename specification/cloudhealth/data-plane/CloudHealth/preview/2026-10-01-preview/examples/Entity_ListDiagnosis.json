@@ -1,0 +1,143 @@
+{
+  "operationId": "Entity_ListDiagnosis",
+  "title": "List entity diagnosis",
+  "parameters": {
+    "endpoint": "https://contoso-1f33ba.eastus.data.cloudhealth.azure.com",
+    "api-version": "2026-10-01-preview",
+    "entityName": "frontend-web-app",
+    "maxDepth": 1,
+    "timestamp": "2026-06-05T12:30:00Z"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "entityName": "frontend-web-app",
+            "azureResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Microsoft.Web/sites/frontend-web-app",
+            "tags": {
+              "environment": "production",
+              "team": "frontend"
+            },
+            "nonContributingDependencyNames": [
+              "backend-api"
+            ],
+            "evidence": {
+              "healthState": "Degraded",
+              "lastHealthTransitionAt": "2026-06-05T12:00:00Z",
+              "outcome": "ContributingInputsAndAggregation",
+              "determiningInputCategories": [
+                "SignalGroup",
+                "Dependency"
+              ],
+              "signals": [
+                {
+                  "kind": "Signal",
+                  "signalName": "request-latency-p95",
+                  "healthState": "Degraded",
+                  "history": {
+                    "status": "Available",
+                    "truncated": false,
+                    "value": [
+                      {
+                        "occurredAt": "2026-06-05T12:25:00Z",
+                        "healthState": "Degraded",
+                        "value": 1450.5
+                      },
+                      {
+                        "occurredAt": "2026-06-05T12:20:00Z",
+                        "healthState": "Degraded",
+                        "value": 1320
+                      }
+                    ]
+                  }
+                }
+              ],
+              "dependencies": [
+                {
+                  "entityName": "orders-database",
+                  "contributedHealthState": "Degraded"
+                }
+              ],
+              "dependencyAggregation": {
+                "effectiveAggregation": {
+                  "configuration": {
+                    "aggregationType": "WorstOf",
+                    "ignoreUnknown": false
+                  },
+                  "resolution": "Configured"
+                },
+                "healthState": "Degraded",
+                "inputCounts": {
+                  "total": 2,
+                  "evaluated": 2,
+                  "healthy": 1,
+                  "degraded": 1,
+                  "unhealthy": 0,
+                  "unknown": 0
+                },
+                "calculation": {
+                  "metric": "WorstInputHealthState"
+                }
+              },
+              "signalGroupAggregations": [
+                {
+                  "name": "availability",
+                  "aggregation": {
+                    "effectiveAggregation": {
+                      "configuration": {
+                        "aggregationType": "MinHealthy",
+                        "degradedThreshold": 80,
+                        "unhealthyThreshold": 40,
+                        "unit": "Percentage",
+                        "ignoreUnknown": true
+                      },
+                      "resolution": "Configured"
+                    },
+                    "healthState": "Degraded",
+                    "inputCounts": {
+                      "total": 2,
+                      "evaluated": 2,
+                      "healthy": 1,
+                      "degraded": 1,
+                      "unhealthy": 0,
+                      "unknown": 0
+                    },
+                    "calculation": {
+                      "metric": "HealthyInputs",
+                      "value": 50,
+                      "unit": "Percentage",
+                      "classificationBand": {
+                        "lowerBound": {
+                          "value": 40,
+                          "inclusive": false
+                        },
+                        "upperBound": {
+                          "value": 80,
+                          "inclusive": true
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "nextLink": "https://contoso-1f33ba.eastus.data.cloudhealth.azure.com/api/entities/frontend-web-app/diagnosis?api-version=2026-10-01-preview&maxDepth=1&timestamp=2026-06-05T12%3A30%3A00Z&nextMarker=eyJwYWdlIjoyfQ"
+      }
+    },
+    "default": {
+      "headers": {
+        "Retry-After": "30",
+        "x-ms-error-code": "ServiceUnavailable"
+      },
+      "body": {
+        "error": {
+          "code": "ServiceUnavailable",
+          "message": "The service is temporarily unavailable. Retry after the specified delay."
+        }
+      }
+    }
+  }
+}

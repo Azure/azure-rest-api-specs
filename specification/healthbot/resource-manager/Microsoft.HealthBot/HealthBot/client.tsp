@@ -11,7 +11,7 @@ using Microsoft.HealthBot;
 @@clientName(
   ErrorAdditionalInfo,
   "HealthBotErrorAdditionalInfo",
-  "java,csharp,javascript"
+  "java,csharp"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,

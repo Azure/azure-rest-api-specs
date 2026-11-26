@@ -35,6 +35,48 @@ model ManagedComputeCapacity
   >;
 }
 
+/** Filters used when listing managed compute capacity for a subscription. */
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_09_01)
+@added(Versions.v2026_09_15_preview)
+model ManagedComputeCapacityListParameters {
+  /**
+   * The offer name to query capacity for (required).
+   */
+  @query("offer")
+  offer: string;
+
+  /**
+   * Optional accelerator type filter to narrow results to a specific accelerator type.
+   */
+  @query("acceleratorType")
+  acceleratorType?: string;
+
+  /**
+   * Optional deployment resource ID. When provided, returns capacity for the specific region
+   * where the deployment is hosted rather than the best available region.
+   */
+  @query("deploymentId")
+  deploymentId?: string;
+
+  /**
+   * Optional Azure location used to select a DataZone scope. Without a deployment ID,
+   * omitted or blank location returns Global and both US and EU DataZone capacities.
+   * A supported location returns Global and the matching DataZone capacities; an
+   * unsupported location returns Global capacity only. With a deployment ID, a
+   * nonblank location must match the parent account location, ignoring case and
+   * surrounding whitespace, or the request returns HTTP 400. Capacity is still
+   * returned for the deployment's backend region.
+   */
+  @added(Versions.v2026_11_01)
+  @query("location")
+  location?: string;
+}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "'ManagedComputeCapacities' is a read-only resource type that does not support delete operations"
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
@@ -53,26 +95,7 @@ interface ManagedComputeCapacities {
   list is ArmResourceListByParent<
     ManagedComputeCapacity,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Parameters = {
-      /**
-       * The offer name to query capacity for (required).
-       */
-      @query("offer")
-      offer: string;
-
-      /**
-       * Optional accelerator type filter to narrow results to a specific accelerator type.
-       */
-      @query("acceleratorType")
-      acceleratorType?: string;
-
-      /**
-       * Optional deployment resource ID. When provided, returns capacity for the specific region
-       * where the deployment is hosted rather than the best available region.
-       */
-      @query("deploymentId")
-      deploymentId?: string;
-    },
+    Parameters = ManagedComputeCapacityListParameters,
     Response = ManagedComputeCapacityListResult
   >;
 }
