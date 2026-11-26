@@ -115375,7 +115375,7 @@
           },
           "input": {
             "$ref": "#/components/schemas/VoiceAgentLiveAudioInputConfig",
-            "description": "Input noise reduction and echo cancellation. Requires `model_type: managed`."
+            "description": "Input noise reduction. Requires `model_type: managed`."
           }
         },
         "description": "Live audio settings: the native startup audio format and voice, plus input processing for managed models.",
@@ -115398,17 +115398,6 @@
               }
             ],
             "description": "Input noise reduction. Live supports `azure_deep_noise_suppression`. Set to null to disable."
-          },
-          "echo_cancellation": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/VoiceAgentEchoCancellation"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Optional server-side echo cancellation settings."
           }
         },
         "description": "Input processing for a managed Live voice agent, with the realtime voice-agent field types.",
@@ -115659,7 +115648,7 @@
           },
           "model_type": {
             "$ref": "#/components/schemas/VoiceModelType",
-            "description": "How the GPT Live model is served. `managed` uses a GPT Live model that the voice service hosts, which adds noise\nreduction, echo cancellation, and avatar. `self_deployed` connects directly to the project's own GPT Live deployment."
+            "description": "How the GPT Live model is served. `managed` uses a GPT Live model that the voice service hosts, which adds noise\nreduction. `self_deployed` connects directly to the project's own GPT Live deployment."
           },
           "model": {
             "type": "string",
@@ -115677,10 +115666,6 @@
           "delegation": {
             "$ref": "#/components/schemas/VoiceAgentLiveDelegation",
             "description": "Delegation settings. Omit for client mode. For `self_deployed`, responses.model is a backend deployment name in the\nLive resource, not a model catalog ID. For `managed`, responses.model is one of the managed model's Responses\ndelegation models, only function tools are supported, and service_tier must be omitted, `auto`, or `default`."
-          },
-          "avatar": {
-            "$ref": "#/components/schemas/VoiceAgentAvatarConfig",
-            "description": "Optional avatar. Requires `model_type: managed`; the avatar connects over WebRTC before the session starts."
           }
         },
         "allOf": [

@@ -219,7 +219,7 @@ model VoiceAgentLiveDefinition extends VoiceAgentBaseDefinition {
 
   @doc("""
     How the GPT Live model is served. `managed` uses a GPT Live model that the voice service hosts, which adds noise
-    reduction, echo cancellation, and avatar. `self_deployed` connects directly to the project's own GPT Live deployment.
+    reduction. `self_deployed` connects directly to the project's own GPT Live deployment.
     """)
   model_type: VoiceModelType;
 
@@ -239,9 +239,6 @@ model VoiceAgentLiveDefinition extends VoiceAgentBaseDefinition {
     delegation models, only function tools are supported, and service_tier must be omitted, `auto`, or `default`.
     """)
   delegation?: VoiceAgentLiveDelegation;
-
-  @doc("Optional avatar. Requires `model_type: managed`; the avatar connects over WebRTC before the session starts.")
-  avatar?: VoiceAgentAvatarConfig;
 }
 
 @doc("Live audio settings: the native startup audio format and voice, plus input processing for managed models.")
@@ -249,7 +246,7 @@ model VoiceAgentLiveDefinition extends VoiceAgentBaseDefinition {
 model VoiceAgentLiveAudioConfig {
   ...OpenAI.LiveInitialSessionAudioParam;
 
-  @doc("Input noise reduction and echo cancellation. Requires `model_type: managed`.")
+  @doc("Input noise reduction. Requires `model_type: managed`.")
   input?: VoiceAgentLiveAudioInputConfig;
 }
 
@@ -258,9 +255,6 @@ model VoiceAgentLiveAudioConfig {
 model VoiceAgentLiveAudioInputConfig {
   @doc("Input noise reduction. Live supports `azure_deep_noise_suppression`. Set to null to disable.")
   noise_reduction?: VoiceAgentNoiseReduction | null;
-
-  @doc("Optional server-side echo cancellation settings.")
-  echo_cancellation?: VoiceAgentEchoCancellation | null;
 }
 
 // Generate the concrete models for SDK-specific subtype dispatch.
