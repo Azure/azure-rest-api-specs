@@ -22,6 +22,18 @@ using Microsoft.BillingBenefits;
 @@clientLocation(BenefitOperationGroup.validate, "ResourceProviders", "java");
 
 // csharp
+@@clientName(ApplicableMaccsOperationGroup.list, "GetApplicableMaccs", "csharp");
+@@clientName(SellerResourceOperationGroup.list, "GetMaccs", "csharp");
+@@clientName(
+  CreditsOperationGroup.listApplicable,
+  "GetApplicableCredits",
+  "csharp"
+);
+@@clientName(
+  BenefitOperationGroup.validate,
+  "ValidateBillingBenefitsSavingsPlanPurchase",
+  "csharp"
+);
 @@clientName(
   Microsoft.BillingBenefits.ManagedServiceIdentity,
   "BillingBenefitsManagedServiceIdentity",
