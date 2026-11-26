@@ -636,11 +636,6 @@ using Azure.AI.Projects;
 @@clientName(VoiceAgentAnimationConfig, "VoiceAgentAnimationConfiguration");
 @@clientName(VoiceAgentAudioConfig, "VoiceAgentAudioConfiguration");
 @@clientName(VoiceAgentAudioInputConfig, "VoiceAgentAudioInputConfiguration");
-@@clientName(VoiceAgentLiveAudioConfig, "VoiceAgentLiveAudioConfiguration");
-@@clientName(
-  VoiceAgentLiveAudioInputConfig,
-  "VoiceAgentLiveAudioInputConfiguration"
-);
 @@clientName(VoiceAgentAudioOutputConfig, "VoiceAgentAudioOutputConfiguration");
 @@clientName(VoiceAgentVoiceConfig.prefer_locales, "preferredLocales");
 @@clientName(VoiceAgentAvatarConfig, "VoiceAgentAvatarConfiguration");

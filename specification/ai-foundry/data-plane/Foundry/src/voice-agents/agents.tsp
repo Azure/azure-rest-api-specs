@@ -218,8 +218,8 @@ model VoiceAgentLiveDefinition extends VoiceAgentBaseDefinition {
   sub_protocol: VoiceAgentSubProtocol.live;
 
   @doc("""
-    How the GPT Live model is served. `managed` uses a GPT Live model that the voice service hosts, which adds noise
-    reduction. `self_deployed` connects directly to the project's own GPT Live deployment.
+    How the GPT Live model is served. `managed` uses a GPT Live model that the voice service hosts. `self_deployed`
+    connects directly to the project's own GPT Live deployment.
     """)
   model_type: VoiceModelType;
 
@@ -230,8 +230,8 @@ model VoiceAgentLiveDefinition extends VoiceAgentBaseDefinition {
   @doc("Template-only startup greeting, rendered with session structured inputs. Foundry-only; not sent in native Live settings.")
   greeting?: VoiceAgentTemplateGreetingConfig;
 
-  @doc("Startup audio formats and output voice, plus input processing for `managed` models. With `transport=webrtc`, SDP negotiates the media format and `format` is not used.")
-  audio?: VoiceAgentLiveAudioConfig;
+  @doc("Startup audio formats and output voice. With `transport=webrtc`, SDP negotiates the media format and `format` is not used.")
+  audio?: OpenAI.LiveInitialSessionAudioParam;
 
   @doc("""
     Delegation settings. Omit for client mode. For `self_deployed`, responses.model is a backend deployment name in the
@@ -239,22 +239,6 @@ model VoiceAgentLiveDefinition extends VoiceAgentBaseDefinition {
     delegation models, only function tools are supported, and service_tier must be omitted, `auto`, or `default`.
     """)
   delegation?: VoiceAgentLiveDelegation;
-}
-
-@doc("Live audio settings: the native startup audio format and voice, plus input processing for managed models.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentLiveAudioConfig {
-  ...OpenAI.LiveInitialSessionAudioParam;
-
-  @doc("Input noise reduction. Requires `model_type: managed`.")
-  input?: VoiceAgentLiveAudioInputConfig;
-}
-
-@doc("Input processing for a managed Live voice agent, with the realtime voice-agent field types.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model VoiceAgentLiveAudioInputConfig {
-  @doc("Input noise reduction. Live supports `azure_deep_noise_suppression`. Set to null to disable.")
-  noise_reduction?: VoiceAgentNoiseReduction | null;
 }
 
 // Generate the concrete models for SDK-specific subtype dispatch.
