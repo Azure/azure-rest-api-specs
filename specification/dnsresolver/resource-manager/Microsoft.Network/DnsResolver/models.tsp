@@ -562,6 +562,12 @@ model DnsSecurityRuleProperties {
   dnsSecurityRuleState?: DnsSecurityRuleState;
 
   /**
+   * Indicates whether CNAME chain validation is disabled for the DNS security rule. When set to true, the resolver will not validate the full CNAME chain against domain lists and will match only on the queried domain name.
+   */
+  @added(Versions.v2026_07_01_preview)
+  disableCnameChainValidation?: boolean;
+
+  /**
    * The current provisioning state of the DNS security rule. This is a read-only property and any attempt to set this value will be ignored.
    */
   @visibility(Lifecycle.Read)
@@ -621,6 +627,12 @@ model DnsSecurityRulePatchProperties {
    * The state of DNS security rule.
    */
   dnsSecurityRuleState?: DnsSecurityRuleState;
+
+  /**
+   * Indicates whether CNAME chain validation is disabled for the DNS security rule. When set to true, the resolver will not validate the full CNAME chain against domain lists and will match only on the queried domain name.
+   */
+  @added(Versions.v2026_07_01_preview)
+  disableCnameChainValidation?: boolean;
 
   /**
    * The priority of the DNS security rule.
