@@ -28,16 +28,7 @@ using Http;
 @@clientName(WebPubSubProperties.externalIP, "externalIp", "java");
 @@clientName(WebPubSubProperties.hostName, "hostname", "java");
 @@clientName(WebPubSubProperties.hostNamePrefix, "hostnamePrefix", "java");
-@@clientName(ACLAction, "AclAction", "java");
-@@clientName(NetworkACL, "NetworkAcl", "java");
-@@clientName(IPRule, "IpRule", "java");
 @@clientName(PrivateEndpointACL, "PrivateEndpointAcl", "java");
-@@clientName(Microsoft.SignalRService.WebPubSubResource, "ResourceInfo", "go");
-@@clientName(
-  Microsoft.SignalRService.WebPubSubResourceList,
-  "ResourceInfoList",
-  "go"
-);
 @@clientName(EventHandler, "WebPubSubEventHandler", "csharp");
 @@clientName(WebPubSubRequestType.RESTAPI, "RestApi", "csharp");
 @@clientName(ProvisioningState, "WebPubSubProvisioningState", "csharp");
