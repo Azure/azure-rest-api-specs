@@ -621,7 +621,7 @@ union RemoteSupportProvisioningState {
   /**
    * The last operation succeeded on some nodes but failed on others.
    */
-  @added(Versions.v2027_01_15_preview)
+  @added(Versions.v2027_01_01)
   PartiallySucceeded: "PartiallySucceeded",
 
   /**
@@ -1249,7 +1249,7 @@ union UpdateRunPropertiesState {
 /**
  * Differentiates the purpose of an update run so that clients can represent it correctly.
  */
-@added(Versions.v2027_01_15_preview)
+@added(Versions.v2027_01_01)
 union UpdateRunType {
   string,
 
@@ -1390,13 +1390,13 @@ union State {
   /**
    * The update is scheduled to be installed at a later time.
    */
-  @added(Versions.v2027_01_15_preview)
+  @added(Versions.v2027_01_01)
   ScheduledToInstall: "ScheduledToInstall",
 
   /**
    * The update is currently being installed as part of a scheduled installation.
    */
-  @added(Versions.v2027_01_15_preview)
+  @added(Versions.v2027_01_01)
   InstallingPerSchedule: "InstallingPerSchedule",
 }
 
@@ -4959,7 +4959,7 @@ model UpdateRunProperties {
   /**
    * Differentiates the purpose of an update run so that clients can represent it correctly.
    */
-  @added(Versions.v2027_01_15_preview)
+  @added(Versions.v2027_01_01)
   updateRunType?: UpdateRunType;
 }
 
