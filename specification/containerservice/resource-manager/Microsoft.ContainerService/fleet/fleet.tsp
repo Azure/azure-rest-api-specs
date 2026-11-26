@@ -112,10 +112,6 @@ model FleetHubNetworkingProfile {
       type: "Microsoft.Network/publicIPAddresses";
     }
   ]>[];
-
-  @doc("The actual public IP addresses used for outbound traffic from the Fleet hub.")
-  @visibility(Lifecycle.Read)
-  effectiveEgressPublicIpAddresses?: string[];
 }
 
 scalar SubnetResourceId
