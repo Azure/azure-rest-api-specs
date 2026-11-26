@@ -1,0 +1,40 @@
+# Unprivileged intake for pull request activity. Trusted handlers subscribe with
+# `workflow_run: workflows: ["Pull Request Event"]` and run from the default branch.
+#
+# For pull_request, this file is read from the PR merge commit, so a PR can change it.
+# Handlers must treat everything about this run as untrusted except fields GitHub sets
+# (head_sha, head_repository, repository, created_at), and must re-read PR state and
+# labels through the API. The run-name is only a routing hint for the reviewer dispatcher,
+# which verifies it against the PR's issue events before acting.
+name: "Pull Request Event"
+
+run-name: "PR #${{ github.event.pull_request.number }} ${{ github.event.action }}${{ github.event.label.name && format(' {0}', github.event.label.name) || '' }}"
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - edited
+      - labeled
+      - unlabeled
+      - ready_for_review
+      - converted_to_draft
+
+permissions: {}
+
+jobs:
+  intake:
+    name: Pull Request Event
+    # Handlers ignore skipped upstream runs, which preserves the previous "open PRs only" gates.
+    if: github.event.pull_request.state == 'open'
+    runs-on: ubuntu-slim
+    steps:
+      - name: Record event
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          EVENT_ACTION: ${{ github.event.action }}
+          LABEL_NAME: ${{ github.event.label.name }}
+        run: |
+          echo "PR #${PR_NUMBER} ${EVENT_ACTION} ${LABEL_NAME}"

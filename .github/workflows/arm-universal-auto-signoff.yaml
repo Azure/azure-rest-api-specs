@@ -2,7 +2,7 @@
 # automation-owned; ARMSignedOff without the marker is a human approval and is never changed.
 name: ARM Universal Auto SignOff
 
-on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
+on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only default-branch code runs.
   workflow_dispatch:
     inputs:
       pr_number:
@@ -13,25 +13,16 @@ on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base
         description: "Reviewed PR head SHA"
         required: true
         type: string
-  # Must run on pull_request_target instead of pull_request, since the latter cannot trigger on
-  # labels from bot accounts in fork PRs. pull_request_target is also more similar to the other
-  # trigger "workflow_run" -- they are both privileged and run in the target branch and repo --
-  # which simplifies implementation.
-  pull_request_target:
-    types:
-      # Re-evaluate immediately when the PR head or its policy-relevant labels change.
-      - opened
-      - synchronize
-      - reopened
-      - edited
-      - labeled
-      - unlabeled
   workflow_run:
-    # Re-evaluate as each mandatory status producer completes.
+    # Re-evaluate as each mandatory status producer completes, and on "Pull Request Event"
+    # intake so head changes and policy-relevant label changes are picked up immediately.
+    # Intake carries no trusted label name, so every PR event re-evaluates; the decision reads
+    # current labels and statuses and is idempotent.
     workflows:
       - "ARM API Review: Automated Workflow"
       - "Swagger Avocado - Set Status"
       - "Swagger LintDiff - Set Status"
+      - "Pull Request Event"
     types: [completed]
 
 permissions:
@@ -51,42 +42,24 @@ permissions:
 jobs:
   arm-universal-auto-signoff:
     name: ARM Universal Auto SignOff
-    # Ignore skipped/cancelled parents. For open PRs, only handle changes that affect eligibility.
+    # Ignore skipped/cancelled parents. Intake skips closed PRs, so only open PRs are evaluated.
     if: |
       github.event_name == 'workflow_dispatch' ||
       (github.event_name == 'workflow_run' &&
        github.event.workflow_run.conclusion != 'skipped' &&
-       github.event.workflow_run.conclusion != 'cancelled') ||
-      (github.event_name == 'pull_request_target' &&
-       github.event.pull_request.state == 'open' &&
-       (github.event.action == 'opened' ||
-        github.event.action == 'synchronize' ||
-        github.event.action == 'reopened' ||
-        github.event.action == 'edited' ||
-        ((github.event.action == 'labeled' || github.event.action == 'unlabeled') &&
-         (github.event.label.name == 'Approved-Suppression' ||
-          github.event.label.name == 'ARMAutoSignedOff' ||
-          github.event.label.name == 'ARMManualSignoffRequired' ||
-          github.event.label.name == 'ARMReview' ||
-          github.event.label.name == 'ARMSignedOff' ||
-          github.event.label.name == 'NotReadyForARMReview' ||
-          github.event.label.name == 'SuppressionReviewRequired'))))
+       github.event.workflow_run.conclusion != 'cancelled')
 
     runs-on: ubuntu-slim
 
     steps:
       # *** IMPORTANT ***
-      # For workflows that are triggered by the pull_request_target event, the workflow runs in the
-      # context of the base of the pull request.  You should make sure that you do not check out,
-      # build, or run untrusted code from the head of the pull request.
+      # workflow_run and workflow_dispatch run from the default branch with a privileged token.
+      # Do not check out, build, or run code from the head of the pull request.
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
           # Only needs .github folder for automation, not the files in the PR (analyzed in a
           # separate workflow).
-          #
-          # Uses the .github folder from the PR base branch (pull_request_target trigger),
-          # or the repo default branch (other triggers).
           sparse-checkout: |
             .github
 
@@ -155,15 +128,17 @@ jobs:
           name: "issue-number"
           value: "${{ fromJson(steps.get-label-action.outputs.result).issueNumber }}"
 
-      # Why dispatch explicitly: the reviewer dispatches this run with GITHUB_TOKEN, and GitHub does
-      # not fire workflow_run for runs started that way. Update Labels' workflow_run trigger would
-      # never see this run, so the label artifacts above would not be applied.
-      # Why only workflow_dispatch: pull_request_target and workflow_run runs already trigger
-      # Update Labels through workflow_run. Dispatching for them too would apply labels twice.
+      # Why dispatch explicitly, for every trigger:
+      # - A run dispatched with GITHUB_TOKEN does not fire workflow_run, so Update Labels would
+      #   never see it.
+      # - A status-driven run is already deep in a workflow_run chain
+      #   (Pull Request Event -> Set Status -> this run). GitHub stops chains after three
+      #   workflow_run hops, so Update Labels -> Summarize Checks would be dropped. A dispatch starts
+      #   a new chain, and Update Labels dispatches Summarize Checks for dispatched runs.
+      # Update Labels does not subscribe to this workflow via workflow_run, so labels apply once.
       # Skipped when there are no label changes to apply.
       - name: Dispatch Update Labels
         if: |
-          github.event_name == 'workflow_dispatch' &&
           (contains(toJson(fromJson(steps.get-label-action.outputs.result).labelActions), '"add"') ||
            contains(toJson(fromJson(steps.get-label-action.outputs.result).labelActions), '"remove"'))
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0

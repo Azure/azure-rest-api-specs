@@ -65,6 +65,7 @@ function createMockGithubImpl() {
         createCommitStatus: vi.fn(),
         getContent: vi.fn(),
         getBranchRules: vi.fn().mockResolvedValue({ data: [] }),
+        getCollaboratorPermissionLevel: vi.fn(),
         getCombinedStatusForRef: vi.fn().mockResolvedValue({
           data: { statuses: [], total_count: 0 },
         }),

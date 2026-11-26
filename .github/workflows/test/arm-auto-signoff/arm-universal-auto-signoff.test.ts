@@ -424,21 +424,12 @@ describe("ARM Universal Auto SignOff workflow", () => {
     expect(workflow).not.toContain("ARM Semantic Review - Set Status");
   });
 
-  it("re-evaluates on every policy-relevant label", async () => {
+  it("re-evaluates on every pull request intake event without pull_request_target", async () => {
     const workflow = await readWorkflow("arm-universal-auto-signoff.yaml");
 
-    for (const label of [
-      "Approved-Suppression",
-      "ARMAutoSignedOff",
-      "ARMManualSignoffRequired",
-      "ARMReview",
-      "ARMSignedOff",
-      "NotReadyForARMReview",
-      "SuppressionReviewRequired",
-    ]) {
-      expect(workflow).toContain(`github.event.label.name == '${label}'`);
-    }
-    expect(workflow).not.toContain("ARMAutoSignedOff-Test");
+    expect(workflow).toContain('- "Pull Request Event"');
+    expect(workflow).not.toContain("pull_request_target");
+    expect(workflow).not.toContain("github.event.label.name");
   });
 
   it("does not write labels or statuses, and emits an artifact for every managed label", async () => {
@@ -454,7 +445,7 @@ describe("ARM Universal Auto SignOff workflow", () => {
     }
   });
 
-  it("publishes correlation artifacts before dispatching Update Labels, only from a dispatched run", async () => {
+  it("publishes correlation artifacts before dispatching Update Labels, for every trigger", async () => {
     const workflow = await readWorkflow("arm-universal-auto-signoff.yaml");
     const headArtifact = workflow.indexOf("name: Upload artifact with head SHA");
     const issueArtifact = workflow.indexOf("name: Upload artifact with issue number");
@@ -463,16 +454,16 @@ describe("ARM Universal Auto SignOff workflow", () => {
     expect(headArtifact).toBeGreaterThan(-1);
     expect(issueArtifact).toBeGreaterThan(headArtifact);
     expect(workflow.indexOf("name: Dispatch Update Labels")).toBeGreaterThan(issueArtifact);
-    expect(step.slice(0, step.indexOf("uses:"))).toContain(
-      "github.event_name == 'workflow_dispatch'",
-    );
+    // Status-driven runs are already two workflow_run hops deep; a dispatch keeps
+    // Update Labels -> Summarize Checks within GitHub's chain limit.
+    expect(step.slice(0, step.indexOf("uses:"))).not.toContain("github.event_name");
     expect(workflow).toContain("await dispatchUpdateLabels({ github, context, core });");
   });
 
-  it("is applied by Update Labels, and the legacy workflow is gone", async () => {
+  it("is applied by Update Labels only through dispatch, and the legacy workflow is gone", async () => {
     const updateLabels = await readWorkflow("update-labels.yaml");
 
-    expect(updateLabels).toContain('"ARM Universal Auto SignOff"');
+    expect(updateLabels).not.toContain('"ARM Universal Auto SignOff"');
     expect(updateLabels).not.toContain("ARM Auto SignOff - Set Status");
   });
 

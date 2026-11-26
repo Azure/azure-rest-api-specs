@@ -10,11 +10,11 @@ on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base
   # TODO: If a pull request is manually labeled or unlabeled, get all artifacts associated with PR, and update labels
   # pull_request:
   #   types: [labeled, unlabeled]
-  # If an upstream workflow if completed, get only the artifacts from that workflow, and update labels
+  # If an upstream workflow if completed, get only the artifacts from that workflow, and update labels.
+  # ARM Universal Auto SignOff is not listed: it always hands off through workflow_dispatch above.
   workflow_run:
     workflows:
       [
-        "ARM Universal Auto SignOff",
         "ARM Modeling Review",
         "SDK Breaking Change Labels",
         "SDK Suppressions",

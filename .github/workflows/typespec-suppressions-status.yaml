@@ -1,26 +1,14 @@
 name: "TypeSpec Suppressions - Set Status"
 
-on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
-  # Must run on pull_request_target instead of pull_request, since the latter cannot trigger on
-  # labels from bot accounts in fork PRs. pull_request_target is also more similar to the other
-  # trigger "workflow_run" -- they are both privileged and run in the target branch and repo --
-  # which simplifies implementation.
-  pull_request_target:
-    types:
-      # Run workflow on default types, to update status as quickly as possible.
-      - opened
-      - synchronize
-      - reopened
-      # Depends on labels, so must re-evaluate whenever a relevant label is manually added or removed.
-      - labeled
-      - unlabeled
+on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only default-branch code runs.
+  # "Pull Request Event" is an unprivileged pull_request intake. Re-evaluate on its completion
+  # so opened/synchronize/reopened and manual label changes still update the status.
   workflow_run:
     # Trigger on both old and new names, to handle the rename more gracefully
     workflows:
-      [
-        "TypeSpec Suppressions - Analyze Code",
-        "\\[TEST-IGNORE\\] TypeSpec Suppressions - Analyze Code",
-      ]
+      - "TypeSpec Suppressions - Analyze Code"
+      - "\\[TEST-IGNORE\\] TypeSpec Suppressions - Analyze Code"
+      - "Pull Request Event"
     types: [completed]
 
 # Permissions are scoped per job below (this workflow runs two jobs with
@@ -44,18 +32,12 @@ jobs:
 
   post-comment:
     name: Post TypeSpec Suppressions Comment
-    # Only refresh the dedicated review comment when the analyzer report
-    # completes or when the typespec-suppressions-approved label is added/removed.
-    # Also re-sync when typespec-suppressions-review-required is changed manually.
-    # Skip plain opened/synchronize/reopened events, which fire before a report
-    # artifact exists (the status job still runs on those to update the check).
-    if: >-
-      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion != 'skipped') ||
-      (github.event_name == 'pull_request_target' &&
-       github.event.pull_request.state == 'open' &&
-       (github.event.action == 'labeled' || github.event.action == 'unlabeled') &&
-       (github.event.label.name == 'typespec-suppressions-approved' ||
-        github.event.label.name == 'typespec-suppressions-review-required'))
+    # Refresh the dedicated review comment when the analyzer report completes, and on
+    # "Pull Request Event" intake so manual label changes are reflected. Intake carries no
+    # trusted label name, so it re-syncs on every PR event. Only an Analyze Code completion
+    # counts as a new analysis (see post-results.ts). Events that fire before a report
+    # artifact exists for the head are no-ops.
+    if: github.event_name == 'workflow_run' && github.event.workflow_run.conclusion != 'skipped'
     runs-on: ubuntu-24.04
     permissions:
       actions: read
