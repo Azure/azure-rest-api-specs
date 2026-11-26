@@ -61,8 +61,8 @@ model PlaywrightWorkspaceProperties {
   ]>;
 
   @added(Versions.v2026_12_01_preview)
-  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
-  @doc("The Azure Resource Manager resource ID of the subnet used for private network connectivity. Before configuring the workspace, ensure the subnet meets the virtual network prerequisites at https://aka.ms/pww/docs/vnet. Regional affinity must be disabled when a subnet is configured. Format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Network/virtualNetworks/{virtualNetwork}/subnets/{subnet}.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The Azure Resource Manager resource ID of the subnet used for private network connectivity. Before creating the workspace, ensure the subnet meets the virtual network prerequisites at https://aka.ms/pww/docs/vnet. Regional affinity must be disabled when a subnet is configured. Format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Network/virtualNetworks/{virtualNetwork}/subnets/{subnet}. To change or remove the subnet after workspace creation, use the PATCH operation.")
   subnetId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/virtualNetworks/subnets";
