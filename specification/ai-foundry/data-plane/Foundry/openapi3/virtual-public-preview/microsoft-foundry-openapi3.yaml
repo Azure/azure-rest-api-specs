@@ -5990,7 +5990,7 @@ paths:
     post:
       operationId: AgentTelephony_createTelephonyBinding
       summary: Create an agent telephony binding
-      description: Creates a telephony binding for the voice agent named in the path. Creating a SIP binding requires the `VoiceAgents=V1Preview` opt-in.
+      description: Creates a telephony binding for the voice agent named in the path. Creating a SIP or Infobip binding requires the `VoiceAgents=V1Preview` opt-in.
       parameters:
         - name: Foundry-Features
           in: header
@@ -6228,7 +6228,7 @@ paths:
     patch:
       operationId: AgentTelephony_updateTelephonyBinding
       summary: Update an agent telephony binding
-      description: Updates a telephony binding owned by the voice agent named in the path. Updating a SIP binding requires the `VoiceAgents=V1Preview` opt-in.
+      description: Updates a telephony binding owned by the voice agent named in the path. Updating a SIP or Infobip binding requires the `VoiceAgents=V1Preview` opt-in. Only the label can be changed for an Infobip binding.
       parameters:
         - name: Foundry-Features
           in: header
@@ -58342,6 +58342,51 @@ components:
 
         The estimate is derived from reported token counts and list prices. It excludes evaluator
         and runtime usage and does not account for negotiated pricing, commitments, or discounts.
+    InfobipTelephonyBinding:
+      type: object
+      required:
+        - provider
+        - phone_number
+      properties:
+        provider:
+          type: string
+          enum:
+            - infobip
+          description: The Infobip provider.
+        phone_number:
+          type: string
+          pattern: ^\+[1-9][0-9]{6,14}(?![\s\S])
+          description: The Infobip E.164 phone number assigned to this binding.
+      allOf:
+        - $ref: '#/components/schemas/TelephonyBinding'
+      description: |-
+        An inbound Infobip Calls API binding owned by a voice agent. Requires the `VoiceAgents=V1Preview`
+        opt-in and a validated Infobip connection in the same project. The connection and phone number
+        cannot be changed after creation. Outbound calling and call transfer are not supported.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    InfobipTelephonyBindingListItem:
+      type: object
+      required:
+        - provider
+        - phone_number
+      properties:
+        provider:
+          type: string
+          enum:
+            - infobip
+          description: The Infobip provider.
+        phone_number:
+          type: string
+          pattern: ^\+[1-9][0-9]{6,14}(?![\s\S])
+          description: The Infobip E.164 phone number assigned to this binding.
+      allOf:
+        - $ref: '#/components/schemas/TelephonyBindingListItem'
+      description: An inbound Infobip binding returned in a list, including its current entity tag.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     InlineVoiceSubagent:
       type: object
       required:
@@ -103171,6 +103216,7 @@ components:
         mapping:
           teams_phone_extensibility: '#/components/schemas/TeamsPhoneExtensibilityTelephonyBinding'
           twilio: '#/components/schemas/TwilioTelephonyBinding'
+          infobip: '#/components/schemas/InfobipTelephonyBinding'
           sip: '#/components/schemas/SipTelephonyBinding'
       description: A telephony binding owned by a voice agent.
     TelephonyBindingId:
@@ -103215,6 +103261,7 @@ components:
         mapping:
           teams_phone_extensibility: '#/components/schemas/TeamsPhoneExtensibilityTelephonyBindingListItem'
           twilio: '#/components/schemas/TwilioTelephonyBindingListItem'
+          infobip: '#/components/schemas/InfobipTelephonyBindingListItem'
           sip: '#/components/schemas/SipTelephonyBindingListItem'
       description: A telephony binding returned in a list, including its entity tag.
     TelephonyCallDurationBasis:
@@ -104237,6 +104284,7 @@ components:
           enum:
             - teams_phone_extensibility
             - twilio
+            - infobip
             - sip
       description: A telephony provider supported by an agent binding. Known values are stable; additional values may be added over time.
       x-ms-foundry-meta:
@@ -105310,13 +105358,13 @@ components:
           type: string
           minLength: 1
           maxLength: 256
-          description: Replacement same-project connection for Teams or SIP (SipInbound only); immutable for Twilio. Null/blank names are invalid.
+          description: Replacement same-project connection for Teams or SIP (SipInbound only); immutable for Twilio and Infobip. Null/blank names are invalid.
         phone_number:
           anyOf:
             - type: string
             - type: 'null'
           maxLength: 64
-          description: Teams/SIP display number, not SIP routing. Omit to preserve; null/empty/blank clears. Unsupported for Twilio.
+          description: Teams/SIP display number, not SIP routing. Omit to preserve; null/empty/blank clears. Unsupported for Twilio and Infobip.
         allowed_calling_numbers:
           type: array
           items:

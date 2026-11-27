@@ -574,6 +574,9 @@ namespace Azure.AI.Projects {
     @doc("Twilio Programmable Voice.")
     twilio: "twilio",
 
+    @doc("Infobip Calls API for inbound calls. Infobip is in preview and requires the `VoiceAgents=V1Preview` opt-in.")
+    infobip: "infobip",
+
     @doc("Session Initiation Protocol. SIP is in preview and requires the `VoiceAgents=V1Preview` opt-in.")
     sip: "sip",
   }
@@ -601,12 +604,12 @@ namespace Azure.AI.Projects {
     @maxLength(128)
     label?: string | null;
 
-    @doc("Replacement same-project connection for Teams or SIP (SipInbound only); immutable for Twilio. Null/blank names are invalid.")
+    @doc("Replacement same-project connection for Teams or SIP (SipInbound only); immutable for Twilio and Infobip. Null/blank names are invalid.")
     @minLength(1)
     @maxLength(256)
     connection_name?: string;
 
-    @doc("Teams/SIP display number, not SIP routing. Omit to preserve; null/empty/blank clears. Unsupported for Twilio.")
+    @doc("Teams/SIP display number, not SIP routing. Omit to preserve; null/empty/blank clears. Unsupported for Twilio and Infobip.")
     @maxLength(64)
     phone_number?: string | null;
 
@@ -658,6 +661,21 @@ namespace Azure.AI.Projects {
     provider: TelephonyProvider.twilio;
 
     @doc("The Twilio E.164 phone number.")
+    @pattern("^\\+[1-9][0-9]{6,14}(?![\\s\\S])")
+    phone_number: string;
+  }
+
+  /**
+   * An inbound Infobip Calls API binding owned by a voice agent. Requires the `VoiceAgents=V1Preview`
+   * opt-in and a validated Infobip connection in the same project. The connection and phone number
+   * cannot be changed after creation. Outbound calling and call transfer are not supported.
+   */
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  model InfobipTelephonyBinding extends TelephonyBinding {
+    /** The Infobip provider. */
+    provider: TelephonyProvider.infobip;
+
+    /** The Infobip E.164 phone number assigned to this binding. */
     @pattern("^\\+[1-9][0-9]{6,14}(?![\\s\\S])")
     phone_number: string;
   }
@@ -725,6 +743,12 @@ namespace Azure.AI.Projects {
     @doc("The Twilio E.164 phone number.")
     @pattern("^\\+[1-9][0-9]{6,14}(?![\\s\\S])")
     phone_number: string;
+  }
+
+  /** An inbound Infobip binding returned in a list, including its current entity tag. */
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  model InfobipTelephonyBindingListItem extends TelephonyBindingListItem {
+    ...PickProperties<InfobipTelephonyBinding, "provider" | "phone_number">;
   }
 
   @doc("An inbound SIP binding returned in a list, including its current entity tag.")

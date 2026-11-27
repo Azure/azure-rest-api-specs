@@ -24,6 +24,8 @@ in order to enable preview features on these GA routes.
 | Agents | Update Endpoint | PATCH | `/agents/{agent_name}` | Required only when modifying a hosted agent's A2A passthrough endpoint configuration: `A2AAgents=V1Preview` |
 | Evaluation Rules | CreateOrUpdate | PUT | `/evaluationrules/{id}` | Optional: `Evaluations=V1Preview` |
 | Data Generation Jobs | Create | POST | `/data_generation_jobs` | Required for `type: conversations`, `type: traces` with `generate_test_case_rubric: true`, `scenario: supervised_finetuning_preview`, or `scenario: reinforcement_finetuning_preview`: `DataGenerationJobs=V1Preview`; not required for ordinary evaluation turn samples without rubric generation |
+| Agent Telephony | Create Binding | POST | `/agents/{agent_name}/telephony/bindings` | Required for SIP or Infobip bindings: `VoiceAgents=V1Preview` |
+| Agent Telephony | Update Binding | PATCH | `/agents/{agent_name}/telephony/bindings/{binding_id}` | Required for SIP or Infobip bindings: `VoiceAgents=V1Preview` |
 
 Note that only v1 operations are included in the above table. If an operation (or interface) is decorated with `@removed(Versions.v1)` the are not included here.
 
@@ -45,6 +47,35 @@ getting, listing, deleting, or referencing existing agents do not require it.
 A2A inference is out of scope for this opt-in. The `x-ms-foundry-meta`
 annotations describe this preview contract; they do not implement runtime
 enforcement.
+
+### Infobip telephony bindings
+
+Both the `virtual-public-preview` and `v1` specifications include the preview
+`infobip` provider for inbound calls.
+Creating or updating an Infobip binding requires
+`Foundry-Features: VoiceAgents=V1Preview`. The provider shares the existing
+binding create, get, list, update, and delete operations; existing Teams,
+Twilio, and SIP contracts are unchanged. Getting, listing, or deleting an
+existing Infobip binding does not require the preview header.
+
+An Infobip binding requires a phone number in E.164 format and an Infobip
+connection in the same project. Credentials are stored in that connection,
+not in the binding. Only the label can be updated; changing the connection
+or phone number requires recreating the binding. Get and create responses
+return the entity tag in `ETag`, and list items include `etag` for subsequent
+conditional updates or deletes.
+
+See the [create](../examples/v1/AgentTelephony_CreateInfobipBinding.json),
+[get](../examples/v1/AgentTelephony_GetInfobipBinding.json),
+[list](../examples/v1/AgentTelephony_ListInfobipBindings.json), and
+[update](../examples/v1/AgentTelephony_UpdateInfobipBinding.json) examples.
+The service supplies `incoming_call_url`; clients should use the returned
+URL rather than construct it.
+
+These schemas do not establish deployment readiness. Infobip service
+enablement and validated provider configuration are prerequisites. Connection
+provisioning and provider callback/media protocols are outside this contract
+addition. Outbound calling and call transfer are not supported for Infobip.
 
 ## v1 Preview routes with required "Foundry-Features" HTTP header to enable preview features
 
