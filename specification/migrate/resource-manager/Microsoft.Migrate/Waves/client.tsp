@@ -72,7 +72,12 @@ namespace Microsoft.Migrate {
 @@clientName(TaskSummaryItem.statusCounts, "StatusCountsInternal", "csharp");
 
 // Fix typo in TaskProperties.displayName doc comment.
-@@doc(TaskProperties.displayName, "Task Display Name");
+@@clientDoc(
+  TaskProperties.displayName,
+  "Task Display Name",
+  DocumentationMode.replace,
+  "csharp"
+);
 
 // Rename single-word generic resource trios and associated models to include RP/domain context.
 @@clientName(Wave, "MigrateWave", "csharp");
@@ -215,4 +220,3 @@ namespace Microsoft.Migrate {
 // Use System.Uri for SAS URI properties.
 @@alternateType(FetchSasUriResponse.sasUri, url, "csharp");
 @@alternateType(CreateWavesFromPlanResponse.sasUri, url, "csharp");
-
