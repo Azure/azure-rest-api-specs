@@ -16,8 +16,7 @@ namespace Microsoft.Cdn;
 /**
  * Contains a list of references of UrlSigningKey type secret objects.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
+@added(Versions.preview)
 @parentResource(Profile)
 model KeyGroup is Azure.ResourceManager.ProxyResource<KeyGroupProperties> {
   ...ResourceNameParameter<
@@ -31,20 +30,17 @@ model KeyGroup is Azure.ResourceManager.ProxyResource<KeyGroupProperties> {
 /**
  * Defines a KeyGroup response body for long-running operations.
  */
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
+@added(Versions.preview)
 model KeyGroupAcceptedBody {
   /**
    * Defines a KeyGroup response body
    */
   @bodyRoot
-  @added(Versions.v2025_09_01_preview)
-  @removed(Versions.v2025_12_01)
+  @added(Versions.preview)
   _: KeyGroup;
 }
 
-@added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
+@added(Versions.preview)
 @armResourceOperations
 interface KeyGroups {
   /**

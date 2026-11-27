@@ -21,6 +21,7 @@ import "./Route.tsp";
 import "./RuleSet.tsp";
 import "./Rule.tsp";
 import "./SecurityPolicy.tsp";
+import "./AuthPolicy.tsp";
 import "./Secret.tsp";
 import "./KeyGroup.tsp";
 import "./DeploymentVersion.tsp";
@@ -55,18 +56,12 @@ namespace Microsoft.Cdn;
 // - Do NOT add new preview members. `preview` is the single active preview: to release a new preview, change only
 //   its value. Every `Versions.preview` decorator moves with it.
 // - To release a stable version, add a new member immediately before `preview`.
-// - `v2025_09_01_preview` is kept only as a restore point for preview-only features; it is not an active preview.
+// - Keep all stable versions and only one preview version as the latest version
 enum Versions {
   /**
    * The 2025-06-01 API version.
    */
   v2025_06_01: "2025-06-01",
-
-  /**
-   * The 2025-09-01-preview API version. Not an active preview: kept so that preview-only features
-   * introduced in this version can be restored into `preview` with `@added(Versions.preview)`.
-   */
-  v2025_09_01_preview: "2025-09-01-preview",
 
   /**
    * The 2025-12-01 API version.
@@ -82,6 +77,12 @@ enum Versions {
    * The 2026-10-01 API version.
    */
   v2026_10_01: "2026-10-01",
+
+  /**
+   * The current preview API version. Only the value changes when a new preview is released.
+   */
+  @previewVersion
+  preview: "2026-12-01-preview",
 }
 
 interface Operations
