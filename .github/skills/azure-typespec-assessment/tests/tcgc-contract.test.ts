@@ -407,6 +407,270 @@ void test("keeps generic model instances distinct through references and reachab
   );
 });
 
+void test("keeps generic concrete identity stable across 1 and 2 instantiations and isolates sibling sub-namespaces", () => {
+  const firstItem = {
+    kind: "model",
+    name: "First",
+    namespace: "Contoso",
+    crossLanguageDefinitionId: "Contoso.First",
+    access: "public",
+    usage: 256,
+    properties: [],
+  };
+  const secondItem = {
+    kind: "model",
+    name: "Second",
+    namespace: "Contoso",
+    crossLanguageDefinitionId: "Contoso.Second",
+    access: "public",
+    usage: 256,
+    properties: [],
+  };
+  const makeFirstPage = () => ({
+    kind: "model",
+    name: "FirstListResult",
+    namespace: "Contoso",
+    crossLanguageDefinitionId: "Contoso.ListResult",
+    access: "public",
+    usage: 256,
+    properties: [
+      {
+        kind: "property",
+        name: "value",
+        serializedName: "value",
+        optional: false,
+        discriminator: false,
+        type: { kind: "array", valueType: firstItem },
+      },
+    ],
+  });
+  const makeSecondPage = () => ({
+    kind: "model",
+    name: "SecondListResult",
+    namespace: "Contoso",
+    crossLanguageDefinitionId: "Contoso.ListResult",
+    access: "public",
+    usage: 256,
+    properties: [
+      {
+        kind: "property",
+        name: "value",
+        serializedName: "value",
+        optional: false,
+        discriminator: false,
+        type: { kind: "array", valueType: secondItem },
+      },
+    ],
+  });
+  const firstProvenance = {
+    crossLanguageDefinitionId: "Contoso.ListResult",
+    name: "FirstListResult",
+    namespace: "Contoso",
+    templateArguments: [{ kind: "Model", namespace: "Contoso", name: "First" }],
+  };
+  const secondProvenance = {
+    crossLanguageDefinitionId: "Contoso.ListResult",
+    name: "SecondListResult",
+    namespace: "Contoso",
+    templateArguments: [{ kind: "Model", namespace: "Contoso", name: "Second" }],
+  };
+
+  const singleInstance = normalizeTcgcPackage(
+    {
+      crossLanguagePackageId: "Contoso",
+      crossLanguageVersion: "1",
+      metadata: { apiVersions: ["2026-01-01"] },
+      clients: [
+        {
+          kind: "client",
+          name: "ContosoClient",
+          crossLanguageDefinitionId: "Contoso.ContosoClient",
+          methods: [
+            {
+              kind: "basic",
+              name: "first",
+              crossLanguageDefinitionId: "Contoso.first",
+              access: "public",
+              parameters: [],
+              response: { type: makeFirstPage() },
+              operation: {
+                kind: "http",
+                parameters: [],
+                responses: [{ statusCodes: 200, type: makeFirstPage() }],
+                exceptions: [],
+              },
+            },
+          ],
+          children: [],
+        },
+      ],
+      models: [makeFirstPage(), firstItem],
+      enums: [],
+      unions: [],
+      namespaces: [],
+    },
+    { schemaVersion: 1, models: [firstProvenance] },
+  );
+
+  const dualInstance = normalizeTcgcPackage(
+    {
+      crossLanguagePackageId: "Contoso",
+      crossLanguageVersion: "1",
+      metadata: { apiVersions: ["2026-01-01"] },
+      clients: [
+        {
+          kind: "client",
+          name: "ContosoClient",
+          crossLanguageDefinitionId: "Contoso.ContosoClient",
+          methods: [
+            {
+              kind: "basic",
+              name: "first",
+              crossLanguageDefinitionId: "Contoso.first",
+              access: "public",
+              parameters: [],
+              response: { type: makeFirstPage() },
+              operation: {
+                kind: "http",
+                parameters: [],
+                responses: [{ statusCodes: 200, type: makeFirstPage() }],
+                exceptions: [],
+              },
+            },
+            {
+              kind: "basic",
+              name: "second",
+              crossLanguageDefinitionId: "Contoso.second",
+              access: "public",
+              parameters: [],
+              response: { type: makeSecondPage() },
+              operation: {
+                kind: "http",
+                parameters: [],
+                responses: [{ statusCodes: 200, type: makeSecondPage() }],
+                exceptions: [],
+              },
+            },
+          ],
+          children: [],
+        },
+      ],
+      models: [makeFirstPage(), makeSecondPage(), firstItem, secondItem],
+      enums: [],
+      unions: [],
+      namespaces: [],
+    },
+    { schemaVersion: 1, models: [firstProvenance, secondProvenance] },
+  );
+
+  const singleFirst = required(
+    singleInstance.models.find((item) => item.name === "FirstListResult"),
+  );
+  const dualFirst = required(dualInstance.models.find((item) => item.name === "FirstListResult"));
+  assert.equal(singleFirst.identity, dualFirst.identity);
+  assert.equal(singleFirst.genericInstanceIdentity, dualFirst.genericInstanceIdentity);
+  assert.equal(
+    required(singleInstance.methods.find((item) => item.name === "first")).responseType?.id,
+    required(dualInstance.methods.find((item) => item.name === "first")).responseType?.id,
+  );
+
+  const subAModel = {
+    kind: "model",
+    name: "ItemListResult",
+    namespace: "Contoso.SubA",
+    crossLanguageDefinitionId: "Contoso.ListResult",
+    access: "public",
+    usage: 256,
+    properties: [],
+  };
+  const subBModel = {
+    kind: "model",
+    name: "ItemListResult",
+    namespace: "Contoso.SubB",
+    crossLanguageDefinitionId: "Contoso.ListResult",
+    access: "public",
+    usage: 256,
+    properties: [],
+  };
+  const siblingNamespaceContract = normalizeTcgcPackage(
+    {
+      crossLanguagePackageId: "Contoso",
+      crossLanguageVersion: "1",
+      metadata: { apiVersions: ["2026-01-01"] },
+      clients: [
+        {
+          kind: "client",
+          name: "ContosoClient",
+          crossLanguageDefinitionId: "Contoso.ContosoClient",
+          methods: [
+            {
+              kind: "basic",
+              name: "listA",
+              crossLanguageDefinitionId: "Contoso.SubA.list",
+              access: "public",
+              parameters: [],
+              response: { type: { ...subAModel } },
+              operation: {
+                kind: "http",
+                parameters: [],
+                responses: [{ statusCodes: 200, type: { ...subAModel } }],
+                exceptions: [],
+              },
+            },
+            {
+              kind: "basic",
+              name: "listB",
+              crossLanguageDefinitionId: "Contoso.SubB.list",
+              access: "public",
+              parameters: [],
+              response: { type: { ...subBModel } },
+              operation: {
+                kind: "http",
+                parameters: [],
+                responses: [{ statusCodes: 200, type: { ...subBModel } }],
+                exceptions: [],
+              },
+            },
+          ],
+          children: [],
+        },
+      ],
+      models: [subAModel, subBModel],
+      enums: [],
+      unions: [],
+      namespaces: [],
+    },
+    {
+      schemaVersion: 1,
+      models: [
+        {
+          crossLanguageDefinitionId: "Contoso.ListResult",
+          name: "ItemListResult",
+          namespace: "Contoso.SubA",
+          templateArguments: [{ kind: "Model", namespace: "Contoso.SubA", name: "Item" }],
+        },
+        {
+          crossLanguageDefinitionId: "Contoso.ListResult",
+          name: "ItemListResult",
+          namespace: "Contoso.SubB",
+          templateArguments: [{ kind: "Model", namespace: "Contoso.SubB", name: "Item" }],
+        },
+      ],
+    },
+  );
+
+  const [resolvedA, resolvedB] = siblingNamespaceContract.models;
+  assert.ok(resolvedA.genericInstanceIdentity);
+  assert.ok(resolvedB.genericInstanceIdentity);
+  assert.notEqual(resolvedA.genericInstanceIdentity, resolvedB.genericInstanceIdentity);
+  assert.notEqual(
+    required(siblingNamespaceContract.methods.find((item) => item.name === "listA")).responseType
+      ?.id,
+    required(siblingNamespaceContract.methods.find((item) => item.name === "listB")).responseType
+      ?.id,
+  );
+});
+
 void test("rejects invalid normal response status arrays", () => {
   assert.throws(
     () =>
