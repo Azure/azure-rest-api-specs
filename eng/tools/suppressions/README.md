@@ -103,6 +103,20 @@ const suppressions: Suppression[] = await getSuppressions(
 `getSuppressions(tool, path)` resolves `path`, throws if it does not exist, walks up the directory
 tree collecting `suppressions.yaml` files, and returns the matching `Suppression[]`.
 
+Diagnostic consumers can opt into source locations without changing the default output:
+
+```ts
+const suppressions = await getSuppressions(
+  "TypeSpecValidation",
+  projectPath,
+  {},
+  {
+    includeSource: true,
+  },
+);
+// Each entry's optional source contains its absolute YAML path and one-based line/column.
+```
+
 Use `getSuppressionsForTools(tools, path)` when a check recognizes multiple tool names:
 
 ```ts

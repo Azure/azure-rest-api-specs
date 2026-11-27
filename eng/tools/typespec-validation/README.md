@@ -91,6 +91,40 @@ PR policies, including SDK API-version pin checks, run separately through
 [Spec Change Policies](../spec-change-policies/README.md). TSV validates project
 correctness; it does not enforce policies based on versions added by a PR.
 
+### Experimental unused-suppression audit
+
+Use `--check-unused-suppressions` to fail on supported `suppressions.yaml`
+exemptions that no longer hide a failure in an evaluated project:
+
+```sh
+pnpm tsv specification/<service>/<project> --check --check-unused-suppressions
+pnpm tsv --all --check-unused-suppressions
+pnpm tsv --changed --check-unused-suppressions
+```
+
+Both TSV CI workflows enable this experimental audit so unused suppressions
+surface as failing checks during evaluation of the proof of concept.
+
+The audit evaluates suppressed `FolderStructure`, `EmitAutorest`, `ServiceYaml`,
+and `ClientTspImport` checks without applying fixes. It also evaluates suppressed
+`SdkTspConfigValidation` sub-rules, including wildcard key patterns. An assessed
+check that passes produces a `tsv/unused-suppression` error at its YAML entry's
+line and column and makes validation exit nonzero. Suppressed failures remain
+suppressed. Errors encountered only while auditing are reported as non-failing
+`tsv/suppression-audit-incomplete` warnings.
+
+Findings are project-local, not an instruction to delete an entire entry: another
+path, project, or shard covered by that entry may still need it. SDK sub-rule
+patterns are assessed separately; a wildcard is reported only when all matching
+validations were evaluated and passed.
+
+This proof of concept does not assess whole-tool exemptions, whole-SDK-config
+exemptions, `MustUseV2` or `ExtraSwagger` sub-rules, file-specific
+`DisallowedFileTypes` exemptions, unknown rule/key names, or paths that no longer
+exist. Checks skipped as inapplicable or not reached after an earlier failure
+are not classified as unused. Inactive conditional entries and suppressions owned
+by other tools are also left alone. Dry runs do not evaluate suppressions.
+
 In GitHub Actions, both TSV workflows enable `--verbose` when debug logging is
 enabled. To diagnose a run without changing the normal default, choose
 **Re-run jobs > Enable debug logging**, or run:

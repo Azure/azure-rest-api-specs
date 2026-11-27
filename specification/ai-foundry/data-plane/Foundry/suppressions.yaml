@@ -5,10 +5,17 @@
 - tool: TypeSpecValidation
   reason: >
     Foundry does not emit autorest as OpenAPI 2 yields a very incomplete representation of the spec
-  rules: [EmitAutorest, FolderStructure]
+  rules: [EmitAutorest]
   paths:
     - "."
     - "**"
+
+- tool: TypeSpecValidation
+  reason: >
+    Nested SDK entrypoints do not use the standard service folder structure.
+  rules: [FolderStructure]
+  paths:
+    - "src/**"
 
 - tool: TypeSpecValidation
   reason: >

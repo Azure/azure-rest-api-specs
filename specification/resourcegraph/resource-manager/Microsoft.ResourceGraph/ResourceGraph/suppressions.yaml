@@ -50,7 +50,6 @@
     - options.@azure-tools/typespec-java.*
     - options.@azure-tools/typespec-python.*
     - options.@azure-tools/typespec-ts.*
-    - parameters.service-dir.default
     - options.@azure-typespec/http-client-csharp-mgmt.*
   paths:
     - ResourceChanges/tspconfig.yaml
@@ -58,3 +57,15 @@
     - ResourceHistory/tspconfig.yaml
     - GraphQueryApi/tspconfig.yaml
     - OnboardingApi/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to split as independent services.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - parameters.service-dir.default
+  paths:
+    - ResourceChanges/tspconfig.yaml
+    - ResourceGraphApi/tspconfig.yaml
+    - ResourceHistory/tspconfig.yaml
+    - GraphQueryApi/tspconfig.yaml
