@@ -1648,4 +1648,25 @@ namespace Azure.AI.Projects {
       @header("Retry-After")
       retry_after: FoundryDurationSeconds;
     };
+
+  @doc("""
+    Request to create a voice agent client secret. It has no properties: the secret is bound to the project, the agent
+    and the calling user, and the agent version, transport and session options are chosen when connecting. Any
+    property is rejected with `400`.
+    """)
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  @clientName("CreateVoiceClientSecretContent", "csharp")
+  model CreateVoiceClientSecretRequest {}
+
+  @doc("A single-use client secret for connecting to a voice agent. It contains no access token.")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  model VoiceClientSecret {
+    @doc("The opaque client secret. Present it once when connecting with `connectVoiceAgent`.")
+    @secret
+    value: string;
+
+    @doc("The time after which the client secret can no longer be used to connect, in Unix seconds.")
+    @encode("unixTimestamp", int64)
+    expires_at: utcDateTime;
+  }
 }

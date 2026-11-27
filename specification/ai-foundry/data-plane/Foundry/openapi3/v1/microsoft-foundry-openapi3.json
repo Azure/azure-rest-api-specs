@@ -3494,7 +3494,7 @@
       "get": {
         "operationId": "VoiceAgentWebSocket_connectVoiceAgent",
         "summary": "Connect to a voice agent",
-        "description": "Connects to a voice agent over WebSocket. The client must send an HTTP GET with `Upgrade: websocket`\nheaders. The optional `realtime` subprotocol is the only accepted subprotocol value. The `VoiceAgents=V1Preview`\nopt-in is required only when the agent's definition uses a preview feature, such as Handoff (inline subagents),\nSIP transfer destinations, or post-call delivery. Supply it through either the `Foundry-Features` header or the\n`foundry_features` query parameter.\n\nHandshake failures are evaluated in the following order, independent of the requested `transport`:\n\n1. Agent enablement (any transport): if the target agent is disabled, the handshake fails before the\n`101 Switching Protocols` upgrade with `409 Conflict`, using the shared Foundry `ApiErrorResponse` shape\nwith `error.code = agent_disabled`. This failure is terminal until the caller enables the agent, and it\ntakes precedence over the WebRTC-specific checks below.\n2. WebRTC availability (only when `transport=webrtc`, and only once the agent itself is enabled): the agent\nmust have the WebRTC transport capability configured. If the agent is enabled but WebRTC is not available\nfor it, the handshake fails with `404 Not Found`. This is distinct from the `409 agent_disabled` case\nabove, which concerns the agent itself rather than its WebRTC capability.\n3. WebRTC compatibility (only when `transport=webrtc`): WebRTC does not support bring-your-own-model (BYOM)\nor hosted-agent voice agents; those requests fail with `400 Bad Request`.",
+        "description": "Connects to a voice agent over WebSocket. The client must send an HTTP GET with `Upgrade: websocket`\nheaders. The optional `realtime` subprotocol is the only accepted subprotocol value. The `VoiceAgents=V1Preview`\nopt-in is required only when the agent's definition uses a preview feature, such as Handoff (inline subagents),\nSIP transfer destinations, or post-call delivery. Supply it through either the `Foundry-Features` header or the\n`foundry_features` query parameter.\n\nHandshake failures are evaluated in the following order, independent of the requested `transport`:\n\n1. Agent enablement (any transport): if the target agent is disabled, the handshake fails before the\n`101 Switching Protocols` upgrade with `409 Conflict`, using the shared Foundry `ApiErrorResponse` shape\nwith `error.code = agent_disabled`. This failure is terminal until the caller enables the agent, and it\ntakes precedence over the WebRTC-specific checks below.\n2. WebRTC availability (only when `transport=webrtc`, and only once the agent itself is enabled): the agent\nmust have the WebRTC transport capability configured. If the agent is enabled but WebRTC is not available\nfor it, the handshake fails with `404 Not Found`. This is distinct from the `409 agent_disabled` case\nabove, which concerns the agent itself rather than its WebRTC capability.\n3. WebRTC compatibility (only when `transport=webrtc`): WebRTC does not support bring-your-own-model (BYOM)\nor hosted-agent voice agents; those requests fail with `400 Bad Request`.\n\nAuthentication: send a Microsoft Entra token, or a client secret from `createVoiceClientSecret`. A browser\nthat cannot set headers sends the client secret as the WebSocket subprotocol `authorization.bearer.<value>`\nalongside `realtime`, or, as for a Microsoft Entra token, as the `authorization=Bearer%20<value>` query\nparameter. A client secret is an opaque bearer credential for this agent and the user who created it; it is\nsingle-use and must be presented before its `expires_at`. Everything else about the connection is unchanged:\nthe same query parameters, session options, events and WebRTC signaling as with a Microsoft Entra token.\nClient-secret failures are returned before the `101 Switching Protocols` upgrade: `401` with\n`invalid_voice_credential` when the secret is malformed, expired, already used or issued for another agent;\n`403` with `user_delegation_unavailable` when the user's delegation can no longer be used; `404` with\n`voice_credentials_disabled` when client secrets are not enabled for the region or subscription; and `503`\nwith `voice_credential_unavailable` for a transient failure, in which case the secret is not consumed.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -3574,7 +3574,7 @@
             "name": "Sec-WebSocket-Protocol",
             "in": "header",
             "required": false,
-            "description": "The requested WebSocket subprotocol. Omit this header or request exactly `realtime`.",
+            "description": "The requested WebSocket subprotocol. Omit this header or request `realtime`. A browser that presents a client\nsecret also lists `authorization.bearer.<value>`; that entry carries the credential only and is never\nnegotiated.",
             "schema": {
               "$ref": "#/components/schemas/VoiceAgentWebSocketSubprotocol"
             }
@@ -3629,6 +3629,97 @@
         ],
         "x-ms-foundry-meta": {
           "conditional_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/client_secrets": {
+      "post": {
+        "operationId": "VoiceAgentClientSecrets_createVoiceClientSecret",
+        "summary": "Create a voice agent client secret",
+        "description": "Creates a single-use client secret that a browser or other untrusted client can use to open one connection to\nthis voice agent, without receiving the caller's Microsoft Entra access token. Call it from a trusted backend\nwith a delegated user token: application and managed-identity tokens are rejected with `403` and\n`user_delegation_required`, and a user whose delegation can no longer be used receives `403` with\n`user_delegation_unavailable`. The secret is bound to this project, this agent and the calling user; the agent\nversion, transport and session options are chosen when connecting with `connectVoiceAgent`. Responses carry\n`Cache-Control: no-store`. Returns `404` with `voice_credentials_disabled` when client secrets are not enabled\nfor the region or subscription.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the voice agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceClientSecret"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Voice Agent WebSocket"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateVoiceClientSecretRequest"
+              }
+            }
+          },
+          "description": "The request. It has no properties."
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
             "VoiceAgents=V1Preview"
           ]
         }
@@ -42763,6 +42854,15 @@
         "required": [
           "files"
         ]
+      },
+      "CreateVoiceClientSecretRequest": {
+        "type": "object",
+        "description": "Request to create a voice agent client secret. It has no properties: the secret is bound to the project, the agent\nand the calling user, and the agent version, transport and session options are chosen when connecting. Any\nproperty is rejected with `400`.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "CredentialType": {
         "anyOf": [
@@ -114286,6 +114386,31 @@
           }
         ],
         "description": "A voice-audio participant role. Additional values may be added over time."
+      },
+      "VoiceClientSecret": {
+        "type": "object",
+        "required": [
+          "value",
+          "expires_at"
+        ],
+        "properties": {
+          "value": {
+            "type": "string",
+            "format": "password",
+            "description": "The opaque client secret. Present it once when connecting with `connectVoiceAgent`."
+          },
+          "expires_at": {
+            "type": "integer",
+            "format": "unixtime",
+            "description": "The time after which the client secret can no longer be used to connect, in Unix seconds."
+          }
+        },
+        "description": "A single-use client secret for connecting to a voice agent. It contains no access token.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "VoiceConversation": {
         "type": "object",
