@@ -3,8 +3,7 @@
 # side-checked-out via sparse-checkout.yml. Azure/azure-sdk-tools is public, so the checkout is
 # anonymous (no PAT needed).
 #
-# Sparse-checks out all of /tools (not just /tools/azsdk-cli): Cli.csproj project-references
-# sibling projects (e.g. codeowners-utils), so a narrower checkout fails restore with CS0234/CS0246.
+# The CLI references codeowners-utils, so both directories are needed for the MCP builds.
 
 parameters:
   - name: TestType
@@ -24,7 +23,8 @@ steps:
     parameters:
       SkipCheckoutNone: true
       Paths:
-        - "/tools"
+        - "/tools/azsdk-cli"
+        - "/tools/codeowners-utils"
       Repositories:
         - Name: Azure/azure-sdk-tools
           Commitish: main
