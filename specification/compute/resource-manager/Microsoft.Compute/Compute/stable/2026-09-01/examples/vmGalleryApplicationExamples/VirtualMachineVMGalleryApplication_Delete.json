@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVM",
+    "applicationName": "myGalleryApplication",
+    "api-version": "2026-09-01"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.Compute/locations/westus/operations/{operation-id}?monitor=true&api-version=2026-09-01",
+        "Retry-After": 10
+      }
+    },
+    "204": {}
+  },
+  "operationId": "VirtualMachineVMGalleryApplications_Delete",
+  "title": "Delete a gallery application from a virtual machine."
+}
