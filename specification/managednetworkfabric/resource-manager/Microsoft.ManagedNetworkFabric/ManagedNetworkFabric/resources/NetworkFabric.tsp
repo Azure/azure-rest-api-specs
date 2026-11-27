@@ -2,8 +2,8 @@ import "../models/common.tsp";
 import "../models/NetworkFabric.tsp";
 
 using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
+using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
@@ -210,34 +210,24 @@ interface NetworkFabrics {
   >;
 
   @action("validateConfiguration")
-  @added(Versions.v2025_07_15)
   @removed(Versions.v2026_01_15_preview)
   @renamedFrom(Versions.v2026_01_15_preview, "validateConfiguration")
   @sharedRoute
   @doc("Validates the configuration of the underlying resources in the given Network Fabric instance.")
-  validateConfigurationDeprecatedV2 is ArmResourceActionAsync<
-    NetworkFabric,
-    ValidateConfigurationProperties,
-    ValidateConfigurationResponse
-  >;
-
-  @doc("Validates the configuration of the underlying resources in the given Network Fabric instance.")
-  @added(Versions.v2026_01_15_preview)
-  @sharedRoute
-  validateConfiguration is ArmResourceActionAsync<
-    NetworkFabric,
-    ValidateConfigurationProperties,
-    ValidateConfigurationResponseV2
-  >;
-
-  @doc("Validates the configuration of the underlying resources in the given Network Fabric instance.")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "validateConfiguration")
-  @sharedRoute
   validateConfigurationDeprecated is ArmResourceActionAsync<
     NetworkFabric,
     ValidateConfigurationProperties,
     ValidateConfigurationResponse
+  >;
+
+  @action("validateConfiguration")
+  @added(Versions.v2026_01_15_preview)
+  @sharedRoute
+  @doc("Validates the configuration of the underlying resources in the given Network Fabric instance.")
+  validateConfiguration is ArmResourceActionAsync<
+    NetworkFabric,
+    ValidateConfigurationProperties,
+    ValidateConfigurationResponseV2
   >;
 
   @doc("Gets Topology of the underlying resources in the given Network Fabric instance.")
@@ -439,6 +429,24 @@ interface NetworkFabrics {
     void,
     NetworkFabricResyncCertificatesResponse
   >;
+
+  @doc("Runs validation on the Network Fabric for the specified operation.")
+  @action("runValidation")
+  @added(Versions.v2026_07_15_preview)
+  runValidation is ArmResourceActionAsync<
+    NetworkFabric,
+    NetworkFabricRunValidationRequest,
+    NetworkFabricRunValidationResponse
+  >;
+
+  @doc("Runs diagnostics information collection on the Network Fabric")
+  @action("runDiagnostics")
+  @added(Versions.v2026_07_15_preview)
+  runDiagnostics is ArmResourceActionAsync<
+    NetworkFabric,
+    RunDiagnosticsRequest,
+    RunDiagnosticsResponse
+  >;
 }
 
 @@doc(NetworkFabrics.create::parameters.resource, "Request payload.");
@@ -477,10 +485,6 @@ interface NetworkFabrics {
 );
 @@doc(
   NetworkFabrics.validateConfiguration::parameters.body,
-  "Validate configuration properties."
-);
-@@doc(
-  NetworkFabrics.validateConfigurationDeprecatedV2::parameters.body,
   "Validate configuration properties."
 );
 @@doc(

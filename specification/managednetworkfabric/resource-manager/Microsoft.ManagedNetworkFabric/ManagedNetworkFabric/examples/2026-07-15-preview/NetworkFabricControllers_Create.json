@@ -1,0 +1,265 @@
+{
+  "title": "NetworkFabricControllers_Create_MaximumSet_Gen",
+  "operationId": "NetworkFabricControllers_Create",
+  "parameters": {
+    "api-version": "2026-07-15-preview",
+    "subscriptionId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+    "resourceGroupName": "example-rg",
+    "networkFabricControllerName": "example-networkController",
+    "body": {
+      "properties": {
+        "annotation": "annotation",
+        "infrastructureExpressRouteConnections": [
+          {
+            "expressRouteCircuitId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName",
+            "expressRouteAuthorizationKey": "xxx-xxx-xxx"
+          }
+        ],
+        "workloadExpressRouteConnections": [
+          {
+            "expressRouteCircuitId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName",
+            "expressRouteAuthorizationKey": "xxx-xxx-xxx"
+          }
+        ],
+        "infrastructureServices": {
+          "ipv4AddressSpaces": [
+            "172.253.0.0/19"
+          ],
+          "ipv6AddressSpaces": []
+        },
+        "workloadServices": {
+          "ipv4AddressSpaces": [
+            "172.253.28.0/22"
+          ],
+          "ipv6AddressSpaces": []
+        },
+        "managedResourceGroupConfiguration": {
+          "name": "managedResourceGroupName",
+          "location": "eastus"
+        },
+        "isWorkloadManagementNetworkEnabled": "True",
+        "ipv4AddressSpace": "172.253.0.0/19",
+        "ipv6AddressSpace": "::/60",
+        "nfcSku": "Standard",
+        "vmProfile": {
+          "vmSkuName": "Standard_D4s_v3"
+        },
+        "publicConnectivity": {
+          "infrastructureVpnGatewaySku": "VpnGw2AZ",
+          "tenantVpnGatewaySku": "VpnGw3AZ"
+        }
+      },
+      "identity": {
+        "type": "None",
+        "userAssignedIdentities": {
+          "key4876": {}
+        }
+      },
+      "tags": {
+        "keyId": "KeyValue"
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "annotation": "annotation",
+          "infrastructureExpressRouteConnections": [
+            {
+              "expressRouteCircuitId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName"
+            }
+          ],
+          "workloadExpressRouteConnections": [
+            {
+              "expressRouteCircuitId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName"
+            }
+          ],
+          "infrastructureServices": {
+            "ipv4AddressSpaces": [
+              "172.253.0.0/19"
+            ],
+            "ipv6AddressSpaces": []
+          },
+          "workloadServices": {
+            "ipv4AddressSpaces": [
+              "172.253.28.0/22"
+            ],
+            "ipv6AddressSpaces": []
+          },
+          "managedResourceGroupConfiguration": {
+            "name": "managedResourceGroupName",
+            "location": "eastus"
+          },
+          "networkFabricIds": [
+            "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkFabrics/eaxmple-fabric"
+          ],
+          "isWorkloadManagementNetworkEnabled": "True",
+          "tenantInternetGatewayIds": [
+            "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/internetGateways/example-internetGateway"
+          ],
+          "ipv4AddressSpace": "172.253.0.0/19",
+          "ipv6AddressSpace": "::/60",
+          "nfcSku": "Standard",
+          "provisioningState": "Accepted",
+          "operationalState": "Up",
+          "vmProfile": {
+            "vmSkuName": "Standard_D4s_v3"
+          },
+          "publicConnectivity": {
+            "infrastructureVpnGatewaySku": "VpnGw2AZ",
+            "tenantVpnGatewaySku": "VpnGw3AZ",
+            "infrastructureVpnGateways": [
+              {
+                "vpnGatewayId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.Network/vpnGateways/infra-vpn-gateway",
+                "vpnGatewayType": "Vpn",
+                "vpnGatewayAsn": 65515,
+                "vpnGatewayIpV4Address": "10.248.224.8",
+                "vpnGatewayBgpPrimaryIpV4Address": "169.254.21.1",
+                "vpnGatewayBgpSecondaryIpV4Address": "169.254.21.5"
+              }
+            ],
+            "tenantVpnGateways": [
+              {
+                "vpnGatewayId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.Network/vpnGateways/tenant-vpn-gateway",
+                "vpnGatewayType": "Vpn",
+                "vpnGatewayAsn": 65515,
+                "vpnGatewayIpV4Address": "10.248.225.8",
+                "vpnGatewayBgpPrimaryIpV4Address": "169.254.22.1",
+                "vpnGatewayBgpSecondaryIpV4Address": "169.254.22.5"
+              }
+            ]
+          }
+        },
+        "identity": {
+          "principalId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+          "tenantId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+          "type": "None",
+          "userAssignedIdentities": {
+            "key4876": {
+              "principalId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+              "clientId": "0000ABCD-0A0B-0000-0000-000000ABCDEF"
+            }
+          }
+        },
+        "tags": {
+          "keyId": "KeyValue"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/example-networkController",
+        "name": "example-networkController",
+        "type": "microsoft.managednetworkfabric/networkfabriccontrollers",
+        "systemData": {
+          "createdBy": "email@address.com",
+          "createdByType": "User",
+          "createdAt": "2023-06-09T04:51:41.251Z",
+          "lastModifiedBy": "UserId",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-09T04:51:41.251Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "annotation": "annotation",
+          "infrastructureExpressRouteConnections": [
+            {
+              "expressRouteCircuitId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName"
+            }
+          ],
+          "workloadExpressRouteConnections": [
+            {
+              "expressRouteCircuitId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.Network/expressRouteCircuits/expressRouteCircuitName"
+            }
+          ],
+          "infrastructureServices": {
+            "ipv4AddressSpaces": [
+              "172.253.0.0/19"
+            ],
+            "ipv6AddressSpaces": []
+          },
+          "workloadServices": {
+            "ipv4AddressSpaces": [
+              "172.253.28.0/22"
+            ],
+            "ipv6AddressSpaces": []
+          },
+          "managedResourceGroupConfiguration": {
+            "name": "managedResourceGroupName",
+            "location": "eastus"
+          },
+          "networkFabricIds": [
+            "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/networkFabrics/eaxmple-fabric"
+          ],
+          "isWorkloadManagementNetworkEnabled": "True",
+          "tenantInternetGatewayIds": [
+            "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/internetGateways/example-internetGateway"
+          ],
+          "ipv4AddressSpace": "172.253.0.0/19",
+          "ipv6AddressSpace": "::/60",
+          "nfcSku": "Standard",
+          "provisioningState": "Accepted",
+          "operationalState": "Up",
+          "vmProfile": {
+            "vmSkuName": "Standard_D4s_v3"
+          },
+          "publicConnectivity": {
+            "infrastructureVpnGatewaySku": "VpnGw2AZ",
+            "tenantVpnGatewaySku": "VpnGw3AZ",
+            "infrastructureVpnGateways": [
+              {
+                "vpnGatewayId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.Network/vpnGateways/infra-vpn-gateway",
+                "vpnGatewayType": "Vpn",
+                "vpnGatewayAsn": 65515,
+                "vpnGatewayIpV4Address": "10.248.224.8",
+                "vpnGatewayBgpPrimaryIpV4Address": "169.254.21.1",
+                "vpnGatewayBgpSecondaryIpV4Address": "169.254.21.5"
+              }
+            ],
+            "tenantVpnGateways": [
+              {
+                "vpnGatewayId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.Network/vpnGateways/tenant-vpn-gateway",
+                "vpnGatewayType": "Vpn",
+                "vpnGatewayAsn": 65515,
+                "vpnGatewayIpV4Address": "10.248.225.8",
+                "vpnGatewayBgpPrimaryIpV4Address": "169.254.22.1",
+                "vpnGatewayBgpSecondaryIpV4Address": "169.254.22.5"
+              }
+            ]
+          }
+        },
+        "identity": {
+          "principalId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+          "tenantId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+          "type": "None",
+          "userAssignedIdentities": {
+            "key4876": {
+              "principalId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+              "clientId": "0000ABCD-0A0B-0000-0000-000000ABCDEF"
+            }
+          }
+        },
+        "tags": {
+          "keyId": "KeyValue"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/example-networkController",
+        "name": "example-networkController",
+        "type": "microsoft.managednetworkfabric/networkfabriccontrollers",
+        "systemData": {
+          "createdBy": "email@address.com",
+          "createdByType": "User",
+          "createdAt": "2023-06-09T04:51:41.251Z",
+          "lastModifiedBy": "UserId",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-09T04:51:41.251Z"
+        }
+      }
+    }
+  }
+}

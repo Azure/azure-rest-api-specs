@@ -2,7 +2,6 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.ManagedNetworkFabric;
-using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(AccessControlListPatch.properties);
@@ -229,9 +228,7 @@ using TypeSpec.Versioning;
 // Backward compatibility models for list results
 model InternetGatewayRulesListResult is Azure.Core.Page<InternetGatewayRule>;
 model InternetGatewaysListResult is Azure.Core.Page<InternetGateway>;
-#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model IpCommunitiesListResult is Azure.Core.Page<IpCommunity>;
-#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model IpPrefixesListResult is Azure.Core.Page<IpPrefix>;
 model L2IsolationDomainsListResult is Azure.Core.Page<L2IsolationDomain>;
 model L3IsolationDomainsListResult is Azure.Core.Page<L3IsolationDomain>;
