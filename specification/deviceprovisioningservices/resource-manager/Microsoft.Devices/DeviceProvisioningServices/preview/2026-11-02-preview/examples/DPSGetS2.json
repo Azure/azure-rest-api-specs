@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "provisioningServiceName": "myHighScaleProvisioningService",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "91d12660-3dec-467a-be2a-213b5544ddc0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myHighScaleProvisioningService",
+        "type": "Microsoft.Devices/ProvisioningServices",
+        "id": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups/myResourceGroup/providers/Microsoft.Devices/ProvisioningServices/myHighScaleProvisioningService",
+        "location": "eastus",
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "properties": {
+          "state": "Active",
+          "iotHubs": [
+            {
+              "hostName": "myFirstIoTHub.azure-devices.net",
+              "resourceId": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/myFirstIoTHub",
+              "authenticationType": "SystemAssigned",
+              "location": "eastus"
+            },
+            {
+              "hostName": "mySecondIoTHub.azure-devices.net",
+              "resourceId": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/mySecondIoTHub",
+              "authenticationType": "SystemAssigned",
+              "location": "eastus"
+            }
+          ],
+          "deviceRegistryNamespaces": [
+            {
+              "resourceId": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/myFirstNamespace",
+              "authenticationType": "SystemAssigned",
+              "namespaceUuid": "11111111-1111-4111-8111-111111111111",
+              "location": "eastus",
+              "linkingState": "Succeeded"
+            },
+            {
+              "resourceId": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/mySecondNamespace",
+              "authenticationType": "SystemAssigned",
+              "namespaceUuid": "22222222-2222-4222-8222-222222222222",
+              "location": "eastus",
+              "linkingState": "Succeeded"
+            }
+          ]
+        },
+        "sku": {
+          "name": "S2",
+          "capacity": 1
+        }
+      }
+    }
+  },
+  "operationId": "IotDpsResource_Get",
+  "title": "DPSGetS2"
+}
