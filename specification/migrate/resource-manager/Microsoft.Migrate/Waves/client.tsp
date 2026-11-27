@@ -37,7 +37,7 @@ namespace Microsoft.Migrate {
     @doc("Task Stage")
     stage?: string;
 
-    @doc("Task Dislay Name ")
+    @doc("Task Display Name")
     displayName: string;
 
     @doc("Task Status")
@@ -65,3 +65,154 @@ namespace Microsoft.Migrate {
 }
 
 @@alternateType(Tasks.create::parameters.resource, TaskCreate, "javascript");
+
+// ===== C# client customizations =====
+
+// Resolve CS0102 collision caused by safe-flattening TaskStatusCounts.statusCounts onto TaskSummaryItem.
+@@clientName(TaskSummaryItem.statusCounts, "StatusCountsInternal", "csharp");
+
+// Fix typo in TaskProperties.displayName doc comment.
+@@doc(TaskProperties.displayName, "Task Display Name");
+
+// Rename single-word generic resource trios and associated models to include RP/domain context.
+@@clientName(Wave, "MigrateWave", "csharp");
+@@clientName(WaveProperties, "MigrateWaveProperties", "csharp");
+@@clientName(WavePlanListItem, "MigrateWavePlanListItem", "csharp");
+@@clientName(WavePlanSummary, "MigrateWavePlanSummary", "csharp");
+@@clientName(WaveSelectionItem, "MigrateWaveSelectionItem", "csharp");
+@@clientName(PlanSource, "MigrateWavePlanSource", "csharp");
+@@clientName(ArtifactProperties, "MigrateWavePlanArtifactProperties", "csharp");
+
+@@clientName(Task, "MigrateTask", "csharp");
+@@clientName(TaskProperties, "MigrateTaskProperties", "csharp");
+@@clientName(TaskScope, "MigrateTaskScope", "csharp");
+@@clientName(TaskType, "MigrateTaskType", "csharp");
+@@clientName(TaskSummaryItem, "MigrateTaskSummaryItem", "csharp");
+@@clientName(TaskStatusCountMap, "MigrateTaskStatusCount", "csharp");
+
+@@clientName(ProvisioningState, "MigrateProvisioningState", "csharp");
+@@clientName(Strategy, "MigrationStrategy", "csharp");
+@@clientName(
+  MigrationSpecificPropertiesBase,
+  "MigrationSpecificProperties",
+  "csharp"
+);
+
+// Replace discouraged *Request/*Response suffixes with *Content/*Result and add domain context.
+@@clientName(
+  CreateWavesFromPlanRequest,
+  "CreateWavesFromPlanContent",
+  "csharp"
+);
+@@clientName(
+  CreateWavesFromPlanResponse,
+  "CreateWavesFromPlanResult",
+  "csharp"
+);
+@@clientName(FetchSasUriRequest, "MigrateWavePlanSasUriContent", "csharp");
+@@clientName(FetchSasUriResponse, "MigrateWavePlanSasUriResult", "csharp");
+@@clientName(GenerateWavePlanRequest, "GenerateWavePlanContent", "csharp");
+@@clientName(GenerateWavePlanResponse, "GenerateWavePlanResult", "csharp");
+@@clientName(GetWavePlansRequest, "GetWavePlansContent", "csharp");
+@@clientName(GetWavePlansResponse, "GetWavePlansResult", "csharp");
+@@clientName(ImportWavePlanRequest, "ImportWavePlanContent", "csharp");
+@@clientName(ImportWavePlanResponse, "ImportWavePlanResult", "csharp");
+@@clientName(
+  RefreshEntitiesRequest,
+  "RefreshMigrationEntitiesContent",
+  "csharp"
+);
+@@clientName(
+  RefreshEntitiesResponse,
+  "RefreshMigrationEntitiesResult",
+  "csharp"
+);
+@@clientName(TaskSummaryRequest, "MigrateTaskSummaryContent", "csharp");
+@@clientName(TaskSummaryResponse, "MigrateTaskSummaryResult", "csharp");
+
+// Scope generic ResourceGroupResource extension operations.
+@@clientName(Tasks.getSummary, "getMigrateTaskSummary", "csharp");
+@@clientName(MigrateProjects.fetchSasUri, "getMigrateWavePlanSasUri", "csharp");
+@@clientName(
+  MigrateProjects.refreshEntities,
+  "refreshMigrationEntities",
+  "csharp"
+);
+
+// Use Azure.ETag for resource eTag properties.
+@@alternateType(Wave.eTag, Azure.Core.eTag, "csharp");
+@@alternateType(Task.eTag, Azure.Core.eTag, "csharp");
+@@alternateType(MigrationEntity.eTag, Azure.Core.eTag, "csharp");
+@@alternateType(MigrationEntityGroup.eTag, Azure.Core.eTag, "csharp");
+
+// Use Azure.Core.ResourceIdentifier for ARM resource ID properties.
+@@alternateType(
+  MigrationEntityProperties.partnerResourceArmId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  MigrationEntityProperties.targetAzureResourceArmId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  MigrationEntityProperties.associatedInventoryResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  MigrationEntityProperties.assessedEntityArmId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ArtifactProperties.artifactId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  CreateWavesFromPlanRequest.assessmentArmId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  FetchSasUriRequest.assessmentArmId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  GenerateWavePlanRequest.assessmentArmId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  GenerateWavePlanResponse.assessmentArmId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  GetWavePlansRequest.assessmentArmId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ImportWavePlanRequest.assessmentArmId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ImportWavePlanResponse.assessmentArmId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  WavePlanListItem.assessmentArmId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// Use System.Uri for SAS URI properties.
+@@alternateType(FetchSasUriResponse.sasUri, url, "csharp");
+@@alternateType(CreateWavesFromPlanResponse.sasUri, url, "csharp");
+
