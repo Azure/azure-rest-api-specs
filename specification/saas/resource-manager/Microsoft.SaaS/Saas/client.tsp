@@ -76,11 +76,7 @@ using Microsoft.SaaS;
 
 // Unsubscribe
 @@clientName(UnsubscribeOptions, "SaasUnsubscribeConfig", "csharp");
-@@clientName(
-  UnsubscribeOptions.unsubscribeOnly,
-  "IsUnsubscribeOnly",
-  "csharp"
-);
+@@clientName(UnsubscribeOptions.unsubscribeOnly, "IsUnsubscribeOnly", "csharp");
 
 // Properties
 @@clientName(SaasResourceProperties.autoRenew, "IsAutoRenew", "csharp");
