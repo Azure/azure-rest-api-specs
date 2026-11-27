@@ -66,8 +66,9 @@ return the entity tag in `ETag`, and list items include `etag` for subsequent
 conditional updates or deletes.
 
 See the [create](../examples/v1/AgentTelephony_CreateInfobipBinding.json),
-[get](../examples/v1/AgentTelephony_GetInfobipBinding.json), and
-[list](../examples/v1/AgentTelephony_ListInfobipBindings.json) examples.
+[get](../examples/v1/AgentTelephony_GetInfobipBinding.json),
+[list](../examples/v1/AgentTelephony_ListInfobipBindings.json), and
+[update](../examples/v1/AgentTelephony_UpdateInfobipBinding.json) examples.
 The service supplies `incoming_call_url`; clients should use the returned
 URL rather than construct it.
 
