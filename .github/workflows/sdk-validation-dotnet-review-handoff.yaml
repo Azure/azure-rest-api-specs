@@ -32,6 +32,8 @@ jobs:
 
       - name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
+        with:
+          filter: "@azure-tools/github-sdk-validation-dotnet-review..."
 
       - id: review-handoff
         name: Validate existing SDK generation artifact
@@ -39,7 +41,7 @@ jobs:
         with:
           script: |
             const { default: runSdkValidationDotnetReviewHandoff } =
-              await import('${{ github.workspace }}/.github/workflows/src/sdk-validation-dotnet-review-handoff.ts');
+              await import('${{ github.workspace }}/.github/packages/github-sdk-validation-dotnet-review/src/sdk-validation-dotnet-review-handoff.ts');
             return await runSdkValidationDotnetReviewHandoff({ github, context, core });
 
       - name: Upload validated SDK naming review input

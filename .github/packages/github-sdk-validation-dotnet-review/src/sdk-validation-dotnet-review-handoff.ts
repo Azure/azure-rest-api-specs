@@ -13,7 +13,7 @@ import {
   SdkName,
   SpecGenSdkArtifactInfoSchema,
   type SpecGenSdkArtifactInfo,
-} from "../../shared/src/sdk-types.ts";
+} from "@azure-tools/specs-shared/sdk-types";
 import {
   downloadAzurePipelineArtifactArchive,
   downloadAzurePipelineArtifactFile,
