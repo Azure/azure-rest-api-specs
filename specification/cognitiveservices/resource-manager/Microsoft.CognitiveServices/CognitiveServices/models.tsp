@@ -6968,11 +6968,13 @@ model AdapterDeploymentProperties {
   sourceModelId: string;
 
   /**
-   * The name of the compatible managed compute parent deployment.
-   * The service resolves this name within the adapter's owning account; full
-   * Azure Resource Manager resource IDs and cross-account references are not accepted. It cannot
-   * equal the adapter deployment's resource name. Updating this value
-   * re-targets the adapter while its source model remains unchanged.
+   * The name of the compatible managed compute deployment that serves the adapter.
+   * For PUT requests, this specifies the target deployment. In a re-targeting PUT
+   * response and subsequent GET responses, this remains the currently serving
+   * deployment until atomic cutover, after which it changes to the new target.
+   * The service resolves the name within the adapter's owning account; full
+   * Azure Resource Manager resource IDs and cross-account references are not accepted.
+   * It cannot equal the adapter deployment's resource name.
    */
   targetDeploymentName: string;
 
@@ -6980,8 +6982,20 @@ model AdapterDeploymentProperties {
    * The managed compute deployment currently serving the adapter.
    * During re-targeting this remains the prior deployment until atomic cutover.
    */
+  @removed(Versions.v2026_11_01)
   @visibility(Lifecycle.Read)
   activeTargetDeploymentName?: string;
+
+  /**
+   * The capabilities of the managed compute deployment the adapter runs on,
+   * as key-value pairs. During re-targeting this remains the prior
+   * deployment's value until atomic cutover.
+   * Example: { agentsV2: "true" }.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Read-only projection of the serving managed compute deployment's capabilities map; capability names are dynamic (e.g. agentsV2) and cannot be enumerated as fixed properties. Same pattern as ManagedComputeDeploymentProperties.capabilities."
+  @added(Versions.v2026_11_15_preview)
+  @visibility(Lifecycle.Read)
+  capabilities?: Record<string>;
 
   /**
    * The provisioning state of the adapter deployment.
@@ -6992,6 +7006,7 @@ model AdapterDeploymentProperties {
   /**
    * Information about the most recently requested lifecycle operation.
    */
+  @removed(Versions.v2026_11_01)
   @visibility(Lifecycle.Read)
   lastOperation?: AdapterDeploymentLastOperation;
 }
@@ -7001,7 +7016,6 @@ model AdapterDeploymentProperties {
  */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
-@added(Versions.v2026_11_15_preview)
 union AdapterDeploymentOperationType {
   string,
 
@@ -7020,7 +7034,6 @@ union AdapterDeploymentOperationType {
  */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
-@added(Versions.v2026_11_15_preview)
 union AdapterDeploymentOperationState {
   string,
 
@@ -7042,7 +7055,6 @@ union AdapterDeploymentOperationState {
  */
 @added(Versions.v2026_09_15_preview)
 @removed(Versions.v2026_11_01)
-@added(Versions.v2026_11_15_preview)
 model AdapterDeploymentLastOperation {
   /**
    * The type of lifecycle operation.

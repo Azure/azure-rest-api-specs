@@ -13230,7 +13230,7 @@
         },
         "targetDeploymentName": {
           "type": "string",
-          "description": "The name of the compatible managed compute parent deployment.\nThe service resolves this name within the adapter's owning account; full\nAzure Resource Manager resource IDs and cross-account references are not accepted. It cannot\nequal the adapter deployment's resource name. Updating this value\nre-targets the adapter while its source model remains unchanged."
+          "description": "The name of the compatible managed compute deployment that serves the adapter.\nFor PUT requests, this specifies the target deployment. In a re-targeting PUT\nresponse and subsequent GET responses, this remains the currently serving\ndeployment until atomic cutover, after which it changes to the new target.\nThe service resolves the name within the adapter's owning account; full\nAzure Resource Manager resource IDs and cross-account references are not accepted.\nIt cannot equal the adapter deployment's resource name."
         },
         "activeTargetDeploymentName": {
           "type": "string",
