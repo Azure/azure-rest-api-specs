@@ -22,7 +22,11 @@ using Microsoft.BillingBenefits;
 @@clientLocation(BenefitOperationGroup.validate, "ResourceProviders", "java");
 
 // csharp
-@@clientName(ApplicableMaccsOperationGroup.list, "GetApplicableMaccs", "csharp");
+@@clientName(
+  ApplicableMaccsOperationGroup.list,
+  "GetApplicableMaccs",
+  "csharp"
+);
 @@clientName(SellerResourceOperationGroup.list, "GetMaccs", "csharp");
 @@clientName(
   CreditsOperationGroup.listApplicable,
