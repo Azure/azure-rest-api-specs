@@ -15,6 +15,7 @@ import "../schedules/routes.tsp";
 import "../memory-stores/routes.tsp";
 import "../routines/routes.tsp";
 import "../data_generation_jobs/routes.tsp";
+import "../jobs/routes.tsp";
 import "../toolboxes/models.tsp";
 import "../agents/models.tsp";
 import "../skills/models.tsp";
@@ -118,6 +119,69 @@ namespace Azure.AI.Projects;
 @@clientName(Indexes.getVersion, "getIndex", "csharp");
 @@clientName(Indexes.listLatest, "listIndexes", "csharp");
 @@clientName(Indexes.listVersions, "listIndexVersions", "csharp");
+
+// Foundry training jobs: SDK names only; REST paths, JSON and OpenAPI operation IDs keep the Jobs/Job names.
+// The PUT body parameter's SDK names are set on the parameter in ../jobs/routes.tsp.
+@@clientName(Jobs, "TrainingJobs", "csharp");
+@@clientName(Job, "TrainingJob", "csharp");
+@@clientName(Jobs.get, "getTrainingJob", "csharp");
+@@clientName(Jobs.list, "listTrainingJobs", "csharp");
+
+// Generic training-job model names get a TrainingJob prefix, matching Python and JavaScript.
+@@clientName(Azure.AI.Projects.Input, "TrainingJobInput", "csharp");
+@@clientName(Azure.AI.Projects.Output, "TrainingJobOutput", "csharp");
+@@clientName(
+  Azure.AI.Projects.InputDeliveryMode,
+  "TrainingJobInputDeliveryMode",
+  "csharp"
+);
+@@clientName(
+  Azure.AI.Projects.OutputDeliveryMode,
+  "TrainingJobOutputDeliveryMode",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.JobInputType, "TrainingJobInputType", "csharp");
+@@clientName(
+  Azure.AI.Projects.JobOutputType,
+  "TrainingJobOutputType",
+  "csharp"
+);
+@@clientName(
+  Azure.AI.Projects.JobProperties,
+  "TrainingJobProperties",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.JobType, "TrainingJobType", "csharp");
+@@clientName(Azure.AI.Projects.JobPriority, "TrainingJobPriority", "csharp");
+@@clientName(Azure.AI.Projects.JobService, "TrainingJobService", "csharp");
+@@clientName(
+  Azure.AI.Projects.JobResourceConfiguration,
+  "TrainingJobResourceConfiguration",
+  "csharp"
+);
+@@clientName(
+  Azure.AI.Projects.QueueSettings,
+  "TrainingJobQueueSettings",
+  "csharp"
+);
+@@clientName(
+  Azure.AI.Projects.NodeCollection,
+  "TrainingJobNodeCollection",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.AllNodes, "TrainingJobAllNodes", "csharp");
+@@clientName(Azure.AI.Projects.SystemData, "TrainingJobSystemData", "csharp");
+@@clientName(
+  Azure.AI.Projects.ListViewType,
+  "TrainingJobListViewType",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.Artifact, "TrainingJobArtifact", "csharp");
+@@clientName(
+  Azure.AI.Projects.ArtifactContentInformation,
+  "TrainingJobArtifactContentInformation",
+  "csharp"
+);
 
 // Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
 // input parameter that calls either on these two.

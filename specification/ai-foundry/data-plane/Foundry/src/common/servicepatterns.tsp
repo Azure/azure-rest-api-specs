@@ -24,6 +24,9 @@ namespace Azure.AI.ProjectsInternal {
     model_router_controls_v1_preview: "ModelRouterControls=V1Preview",
     finetuning_sessions_v1_preview: "FineTuningSessions=V1Preview",
 
+    /** The Foundry command training jobs V1 preview feature opt-in. */
+    jobs_v1_preview: "Jobs=V1Preview",
+
     /** Session compute primitives preview (compute, exec, logs, ports and egress policy on hosted agent sessions). */
     @removed(Versions.v1)
     session_compute_v1_preview: "SessionCompute=V1Preview",
