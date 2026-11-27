@@ -494,7 +494,7 @@ union ManagedHsmSkuFamily {
 /**
  * This specifies whether token binding is disabled, enabled or enforced.
  */
-@Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+@Versioning.added(KeyVault.Versions.v2027_01_01_preview)
 union TokenBindingMode {
   string,
 
@@ -508,7 +508,7 @@ union TokenBindingMode {
 /**
  * Must be one of the following values "NoValidation", "Unattested", "AttestedTrustedLaunch", "AttestedConfidential". Strength of the token binding increases with each value in that order.
  */
-@Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+@Versioning.added(KeyVault.Versions.v2027_01_01_preview)
 union TokenBindingStrength {
   string,
 
@@ -1037,7 +1037,7 @@ model ManagedHsmKeyReleasePolicy {
  */
 model VaultCreateOrUpdateParameters {
   /** Managed service identity assigned to the vault. */
-  @Versioning.added(Versions.v2026_10_01_preview)
+  @Versioning.added(Versions.v2027_01_01_preview)
   identity?: CommonTypes.ManagedServiceIdentity;
 
   /**
@@ -1160,19 +1160,19 @@ model VaultProperties {
   /**
    * Property to specify whether the vault will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked. This will override the set firewall rules, meaning that even if the firewall rules are present we will not honor the rules.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "False positive: publicNetworkAccess is a public network-access policy setting, not a secret or credential."
   publicNetworkAccess?: string = "enabled";
 
   /**
    * Configuration for Token Binding for Entra tokens
    */
-  @Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+  @Versioning.added(KeyVault.Versions.v2027_01_01_preview)
   tokenBindingParameters?: TokenBindingParameters;
 
   /**
    * Whether cross-tenant access protection is enabled for this vault. When enabled, the vault tenant ID can only be set or changed to the subscription's home tenant ID. Once enabled, this protection cannot be disabled. If omitted when creating a vault, protection is disabled. If omitted when updating a vault, the existing value is preserved.
    */
-  @Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+  @Versioning.added(KeyVault.Versions.v2026_12_01)
   enableCrossTenantAccessProtection?: boolean;
 
   /**
@@ -1180,14 +1180,14 @@ model VaultProperties {
    * When configured, this property is returned in create, update, get, and list responses.
    * Responses contain the persisted key reference and authentication mechanism, not key material or credentials.
    * It can be supplied when creating a vault or enabling wrapping on an existing vault.
-   * This property is available starting with API version 2026-10-01-preview, when the protection-key wrapping capability is available for the target vault.
+   * This property is available starting with API version 2027-01-01-preview, when the protection-key wrapping capability is available for the target vault.
    * Reapplying an equivalent configuration is supported; replacing or removing it is not.
    * A versionless reference can match the persisted versioned reference; resubmitting it does not rotate the key.
    * After configuration, vault availability depends on the persisted Managed HSM key version remaining usable and accessible to the service.
    * Disabling or deleting that key version, or revoking the service's access, can make the vault unavailable.
    * Omitting this property preserves the existing configuration.
    */
-  @Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+  @Versioning.added(KeyVault.Versions.v2027_01_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   protectionKeysWrappingKey?: WrappingKeyConfiguration;
 }
@@ -1201,7 +1201,7 @@ model VaultProperties {
  * Other protection key wrapping failures result in HTTP 503 with InternalError.
  * Errors use the existing CloudError response.
  */
-@Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+@Versioning.added(KeyVault.Versions.v2027_01_01_preview)
 model WrappingKeyConfiguration {
   /** Identifies the external wrapping key. */
   keyValue: WrappingKeyValue;
@@ -1211,7 +1211,7 @@ model WrappingKeyConfiguration {
 }
 
 /** Reference to an external Managed HSM wrapping key. */
-@Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+@Versioning.added(KeyVault.Versions.v2027_01_01_preview)
 model WrappingKeyValue {
   /**
    * Absolute HTTPS URL of a key on a supported Managed HSM endpoint.
@@ -1226,7 +1226,7 @@ model WrappingKeyValue {
 }
 
 /** Authentication mechanism for accessing the external wrapping key. */
-@Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+@Versioning.added(KeyVault.Versions.v2027_01_01_preview)
 model WrappingKeyAuthenticationData {
   /**
    * Authentication mechanism. Only ServiceIdentity is supported.
@@ -1303,7 +1303,7 @@ model Permissions {
 /**
  * Configuration for Token Binding for Entra tokens
  */
-@Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+@Versioning.added(KeyVault.Versions.v2027_01_01_preview)
 model TokenBindingParameters {
   /**
    * This specifies whether token binding is disabled, enabled or enforced.
@@ -1475,7 +1475,7 @@ model CloudErrorBody {
  */
 model VaultPatchParameters {
   /** Managed service identity assigned to the vault. */
-  @Versioning.added(Versions.v2026_10_01_preview)
+  @Versioning.added(Versions.v2027_01_01_preview)
   identity?: CommonTypes.ManagedServiceIdentity;
 
   /**
@@ -1563,13 +1563,13 @@ model VaultPatchProperties {
   /**
    * Configuration for Token Binding for Entra tokens
    */
-  @Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+  @Versioning.added(KeyVault.Versions.v2027_01_01_preview)
   tokenBindingParameters?: TokenBindingParameters;
 
   /**
    * Whether cross-tenant access protection is enabled for this vault. When enabled, changes to the vault tenant ID must use the subscription's home tenant ID. Once enabled, this protection cannot be disabled. If omitted, the existing value is preserved.
    */
-  @Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+  @Versioning.added(KeyVault.Versions.v2026_12_01)
   enableCrossTenantAccessProtection?: boolean;
 
   /**
@@ -1577,14 +1577,14 @@ model VaultPatchProperties {
    * When configured, this property is returned in create, update, get, and list responses.
    * Responses contain the persisted key reference and authentication mechanism, not key material or credentials.
    * It can be supplied when enabling wrapping on an existing vault.
-   * This property is available starting with API version 2026-10-01-preview, when the protection-key wrapping capability is available for the target vault.
+   * This property is available starting with API version 2027-01-01-preview, when the protection-key wrapping capability is available for the target vault.
    * Reapplying an equivalent configuration is supported; replacing or removing it is not.
    * A versionless reference can match the persisted versioned reference; resubmitting it does not rotate the key.
    * After configuration, vault availability depends on the persisted Managed HSM key version remaining usable and accessible to the service.
    * Disabling or deleting that key version, or revoking the service's access, can make the vault unavailable.
    * Omitting this property preserves the existing configuration.
    */
-  @Versioning.added(KeyVault.Versions.v2026_10_01_preview)
+  @Versioning.added(KeyVault.Versions.v2027_01_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   protectionKeysWrappingKey?: WrappingKeyConfiguration;
 }
@@ -1878,6 +1878,12 @@ model MhsmNetworkRuleSet {
   defaultAction?: NetworkRuleAction;
 
   /**
+   * The public network IP address type for the managed HSM pool. If omitted when creating a pool, the default is IPv4. If omitted when updating a pool, the existing value is preserved. IPv4 accepts only IPv4 rules; requests containing IPv6 rules are rejected. DualStack accepts both IPv4 and IPv6 rules in ipRules.
+   */
+  @Versioning.added(KeyVault.Versions.v2026_12_01)
+  publicNetworkIpAddressType?: MhsmPublicNetworkIpAddressType;
+
+  /**
    * The list of IP address rules.
    */
   @identifiers(#["value"])
@@ -1896,11 +1902,29 @@ model MhsmNetworkRuleSet {
 }
 
 /**
+ * The public network IP address type for a managed HSM pool.
+ */
+@Versioning.added(KeyVault.Versions.v2026_12_01)
+union MhsmPublicNetworkIpAddressType {
+  string,
+
+  /**
+   * Only IPv4 addresses are supported.
+   */
+  IPv4: "IPv4",
+
+  /**
+   * Both IPv4 and IPv6 addresses are supported.
+   */
+  DualStack: "DualStack",
+}
+
+/**
  * A rule governing the accessibility of a managed HSM pool from a specific IP address or IP range.
  */
 model MhsmipRule {
   /**
-   * An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78).
+   * An IP address or address range in CIDR notation. IPv4 examples include '192.0.2.10' and '192.0.2.0/24'. Starting with API version 2026-12-01, IPv6 addresses and ranges, such as '2001:db8::1' and '2001:db8:1234::/64', are also accepted when networkAcls.publicNetworkIpAddressType is DualStack. Earlier API versions and the IPv4 public network IP address type accept only IPv4 rules.
    */
   value: string;
 }
@@ -2370,6 +2394,13 @@ model SecretCreateOrUpdateParameters {
 }
 
 /**
+ * The value of a secret.
+ */
+@Versioning.added(KeyVault.Versions.v2026_12_01)
+@secret
+scalar SecretValue extends string;
+
+/**
  * Properties of the secret
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2377,7 +2408,8 @@ model SecretProperties {
   /**
    * The value of the secret. NOTE: 'value' will never be returned from the service, as APIs using this model are is intended for internal use in ARM deployments. Users should use the data-plane REST service for interaction with vault secrets.
    */
-  value?: string;
+  @Versioning.typeChangedFrom(KeyVault.Versions.v2026_12_01, string)
+  value?: SecretValue;
 
   /**
    * The content type of the secret.
@@ -2472,7 +2504,8 @@ model SecretPatchProperties {
   /**
    * The value of the secret.
    */
-  value?: string;
+  @Versioning.typeChangedFrom(KeyVault.Versions.v2026_12_01, string)
+  value?: SecretValue;
 
   /**
    * The content type of the secret.
