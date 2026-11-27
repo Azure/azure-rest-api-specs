@@ -1164,6 +1164,21 @@ op regenerateKeyCustom(
   "CognitiveServicesWorkbenchProperties",
   "csharp"
 );
+@@alternateType(
+  ContainerInstanceComputeProperties.targetClusterId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  WorkbenchProperties.targetClusterId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  WorkbenchUpdateProperties.targetClusterId,
+  armResourceIdentifier,
+  "csharp"
+);
 
 // Model renames: suffix fixes and generic name resolution
 @@clientName(
@@ -1199,6 +1214,43 @@ op regenerateKeyCustom(
 );
 @@clientName(SshSettings, "CognitiveServicesComputeSshSettings", "csharp");
 @@clientName(SafetyProviderConfig, "RaiSafetyProviderSourceConfig", "csharp");
+@@clientName(
+  AgentHostingConfiguration,
+  "FoundryAgentHostingConfiguration",
+  "csharp"
+);
+@@clientName(
+  ManagedClusterAgentHostingConfiguration,
+  "ManagedClusterFoundryAgentHostingConfiguration",
+  "csharp"
+);
+@@clientName(ToolControls, "CognitiveServicesProjectToolControls", "csharp");
+@@clientName(
+  ToolControlEntry,
+  "CognitiveServicesProjectToolControlEntry",
+  "csharp"
+);
+@@clientName(
+  ToolControlsDefaultAction,
+  "CognitiveServicesProjectToolControlsDefaultAction",
+  "csharp"
+);
+@@clientName(
+  ToolControlType,
+  "CognitiveServicesProjectToolControlType",
+  "csharp"
+);
+@@clientName(
+  WorkbenchUpdateProperties,
+  "CognitiveServicesWorkbenchPatchProperties",
+  "csharp"
+);
+@@clientName(WorkbenchStatus, "CognitiveServicesWorkbenchStatus", "csharp");
+@@clientName(
+  WorkbenchProvisioningState,
+  "CognitiveServicesWorkbenchProvisioningState",
+  "csharp"
+);
 
 // Property renames: boolean prefix and DateTimeOffset suffix conventions
 @@clientName(
@@ -1236,6 +1288,37 @@ op regenerateKeyCustom(
 @@clientName(
   AttachedAksClusterHealthStatus.lastObservedAtUtc,
   "LastObservedOn",
+  "csharp"
+);
+@@clientName(
+  AttachedAksClusterProjectBinding.kubeRayReady,
+  "IsKubeRayReady",
+  "csharp"
+);
+@@clientName(
+  AttachedAksClusterProjectBinding.foundryNativeReady,
+  "IsFoundryNativeReady",
+  "csharp"
+);
+@@clientName(AttachedAksClusterCapabilityStatus.ready, "IsReady", "csharp");
+@@clientName(
+  AttachedAksClusterReadinessStatus.connectorReady,
+  "IsConnectorReady",
+  "csharp"
+);
+@@clientName(
+  AttachedAksClusterHealthStatus.newWorkAdmissionAllowed,
+  "IsNewWorkAdmissionAllowed",
+  "csharp"
+);
+@@clientName(
+  AttachedAksClusterStatus.connectorObservedAtUtc,
+  "ConnectorObservedOn",
+  "csharp"
+);
+@@clientName(
+  AttachedAksClusterStatus.lastUpdatedTimeUtc,
+  "LastUpdatedOn",
   "csharp"
 );
 
