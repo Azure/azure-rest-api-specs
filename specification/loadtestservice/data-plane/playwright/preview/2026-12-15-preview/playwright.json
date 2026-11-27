@@ -744,7 +744,7 @@
           }
         },
         "x-ms-examples": {
-          "List browser sessions with their effective Web Bot Auth states": {
+          "BrowserSessions_List": {
             "$ref": "./examples/BrowserSessions_List.json"
           }
         },
@@ -820,11 +820,11 @@
           }
         },
         "x-ms-examples": {
-          "Get a browser session with Web Bot Auth disabled": {
-            "$ref": "./examples/BrowserSessions_Get_WebBotAuthDisabled.json"
-          },
-          "Get a browser session with Web Bot Auth enabled": {
+          "BrowserSessions_Get": {
             "$ref": "./examples/BrowserSessions_Get.json"
+          },
+          "BrowserSessions_Get_WebBotAuthDisabled": {
+            "$ref": "./examples/BrowserSessions_Get_WebBotAuthDisabled.json"
           }
         }
       },
@@ -919,20 +919,20 @@
           }
         },
         "x-ms-examples": {
-          "Create a non-MCP browser session requesting Web Bot Auth with an effective state of false": {
-            "$ref": "./examples/BrowserSessions_CreateOrUpdate_WebBotAuthIneligible.json"
-          },
-          "Create an MCP browser session with Web Bot Auth explicitly disabled": {
-            "$ref": "./examples/BrowserSessions_CreateOrUpdate_WebBotAuthDisabled.json"
-          },
-          "Create an eligible MCP browser session with service and workspace Web Bot Auth enabled": {
-            "$ref": "./examples/BrowserSessions_CreateOrUpdate_WebBotAuthEnabled.json"
-          },
-          "Create or update a browser session with Web Bot Auth omitted": {
+          "BrowserSessions_CreateOrUpdate": {
             "$ref": "./examples/BrowserSessions_CreateOrUpdate.json"
           },
-          "Omit Web Bot Auth to preserve an existing signed session or default a new session to false": {
+          "BrowserSessions_CreateOrUpdate_UpdateExisting": {
             "$ref": "./examples/BrowserSessions_CreateOrUpdate_UpdateExisting.json"
+          },
+          "BrowserSessions_CreateOrUpdate_WebBotAuthDisabled": {
+            "$ref": "./examples/BrowserSessions_CreateOrUpdate_WebBotAuthDisabled.json"
+          },
+          "BrowserSessions_CreateOrUpdate_WebBotAuthEnabled": {
+            "$ref": "./examples/BrowserSessions_CreateOrUpdate_WebBotAuthEnabled.json"
+          },
+          "BrowserSessions_CreateOrUpdate_WebBotAuthIneligible": {
+            "$ref": "./examples/BrowserSessions_CreateOrUpdate_WebBotAuthIneligible.json"
           }
         }
       }
@@ -2350,7 +2350,7 @@
         },
         "enableWebBotAuth": {
           "type": "boolean",
-          "description": "Whether to request Web Bot Auth when creating the browser session. Defaults to false when omitted on creation.\nWeb Bot Auth requires service and workspace enablement and an eligible Linux Chromium session from the Model Context Protocol (MCP) server.\nResponses report the effective state accepted by the service, not an echo of the requested value. A request for true can result in false when the session is not eligible.\nThe effective state cannot be changed after creation. This property is ignored in updates to an existing session.",
+          "description": "Whether to request Web Bot Auth at session creation. Defaults to false; responses report the effective state based on session eligibility and service and workspace enablement. Ignored on updates.",
           "default": false,
           "x-ms-mutability": [
             "read",
@@ -3129,7 +3129,7 @@
         },
         "enableWebBotAuth": {
           "type": "boolean",
-          "description": "Whether to request Web Bot Auth when creating the browser session. Defaults to false when omitted on creation.\nWeb Bot Auth requires service and workspace enablement and an eligible Linux Chromium session from the Model Context Protocol (MCP) server.\nResponses report the effective state accepted by the service, not an echo of the requested value. A request for true can result in false when the session is not eligible.\nThe effective state cannot be changed after creation. This property is ignored in updates to an existing session.",
+          "description": "Whether to request Web Bot Auth at session creation. Defaults to false; responses report the effective state based on session eligibility and service and workspace enablement. Ignored on updates.",
           "default": false,
           "x-ms-mutability": [
             "read",
@@ -3222,7 +3222,7 @@
         },
         "enableWebBotAuth": {
           "type": "boolean",
-          "description": "Whether to request Web Bot Auth when creating the browser session. Defaults to false when omitted on creation.\nWeb Bot Auth requires service and workspace enablement and an eligible Linux Chromium session from the Model Context Protocol (MCP) server.\nResponses report the effective state accepted by the service, not an echo of the requested value. A request for true can result in false when the session is not eligible.\nThe effective state cannot be changed after creation. This property is ignored in updates to an existing session.",
+          "description": "Whether to request Web Bot Auth at session creation. Defaults to false; responses report the effective state based on session eligibility and service and workspace enablement. Ignored on updates.",
           "default": false,
           "x-ms-mutability": [
             "read",

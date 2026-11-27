@@ -109,12 +109,7 @@ alias BrowserSessionOptionalProperties = {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   browserProfile?: BrowserProfileBrowserSessionConfiguration;
 
-  /**
-   * Whether to request Web Bot Auth when creating the browser session. Defaults to false when omitted on creation.
-   * Web Bot Auth requires service and workspace enablement and an eligible Linux Chromium session from the Model Context Protocol (MCP) server.
-   * Responses report the effective state accepted by the service, not an echo of the requested value. A request for true can result in false when the session is not eligible.
-   * The effective state cannot be changed after creation. This property is ignored in updates to an existing session.
-   */
+  @doc("Whether to request Web Bot Auth at session creation. Defaults to false; responses report the effective state based on session eligibility and service and workspace enablement. Ignored on updates.")
   @added(Versions.v2026_12_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   enableWebBotAuth?: boolean = false;
