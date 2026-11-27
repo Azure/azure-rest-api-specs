@@ -6,7 +6,7 @@ import {
   resolveAnalysisTrigger,
   resolveChangedTypeSpecConfigPathsFromPullRequest,
   validateAnalysisSource,
-} from "../../src/sdk-breaking-change/resolve-analysis-inputs.ts";
+} from "../src/resolve-analysis-inputs.ts";
 import {
   createMockContext,
   createMockCore,

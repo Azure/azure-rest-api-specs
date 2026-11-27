@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { publishResultInComment } from "../../src/sdk-breaking-change/publish-result-in-comment.ts";
+import { publishResultInComment } from "../src/publish-result-in-comment.ts";
 import {
   createMockContext,
   createMockCore,

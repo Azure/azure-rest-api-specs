@@ -288,7 +288,7 @@ The resolver exposes the PR number, head repository and SHA, SDK language and re
 `should-run` as job outputs.
 When eligible, the mitigation job:
 
-1. Identifies succeedfully analyized TypeSpec projects from the analysis results.
+1. Identifies successfully analyzed TypeSpec projects from the analysis results.
 2. For each project, runs breaking change mitigation with customization tool.
 3. Writes the result JSON and a job summary.
 4. upload the result artifact.

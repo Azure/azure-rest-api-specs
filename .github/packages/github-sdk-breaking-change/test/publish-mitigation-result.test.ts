@@ -5,7 +5,7 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import {
   buildMitigationReport,
   publishMitigationResult,
-} from "../../src/sdk-breaking-change/publish-mitigation-result.ts";
+} from "../src/publish-mitigation-result.ts";
 import {
   createMockContext,
   createMockCore,

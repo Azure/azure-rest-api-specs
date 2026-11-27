@@ -1,11 +1,8 @@
 import { mkdir, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import type { AnalysisResult } from "../../src/sdk-breaking-change/types.ts";
-import {
-  buildAnalysisReport,
-  publishAnalysisResult,
-} from "../../src/sdk-breaking-change/publish-analysis-result.ts";
+import type { AnalysisResult } from "../src/types.ts";
+import { buildAnalysisReport, publishAnalysisResult } from "../src/publish-analysis-result.ts";
 import {
   createMockContext,
   createMockCore,

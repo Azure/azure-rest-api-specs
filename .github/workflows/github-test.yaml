@@ -130,3 +130,17 @@ jobs:
             const fullPath = join(process.env.GITHUB_WORKSPACE, ".github", "workflows", "src", "github-test.ts");
             const { default: importAllModules } = await import(pathToFileURL(fullPath).href);
             await importAllModules({ core, directories: ["workflows", "shared"] });
+
+      - name: Install dependencies for workflow packages
+        shell: bash
+        run: pnpm install --frozen-lockfile --prod --prefer-offline --config.trust-lockfile=true --filter="{.github/packages/*}..."
+
+      - name: Verify workflow package modules are importable
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const { join } = await import("path");
+            const { pathToFileURL } = await import("url");
+            const fullPath = join(process.env.GITHUB_WORKSPACE, ".github", "workflows", "src", "github-test.ts");
+            const { default: importAllModules } = await import(pathToFileURL(fullPath).href);
+            await importAllModules({ core, directories: ["packages"] });
