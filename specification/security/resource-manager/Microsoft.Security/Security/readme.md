@@ -842,6 +842,7 @@ input-file:
 - stable/2023-11-15/apiCollections.json
 - stable/2026-07-01/pricings.json
 - stable/2026-07-01/batchPricings.json
+- stable/2024-01-01/cloudInventory.json
 - stable/2024-08-01/security-SecurityStandards.json
 - stable/2026-01-01/privateLinks.json
 - stable/2026-08-01/datascanners.json
