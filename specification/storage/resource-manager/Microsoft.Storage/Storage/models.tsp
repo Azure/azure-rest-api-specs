@@ -3657,6 +3657,18 @@ model RoutingPreference {
  */
 model DualStackEndpointPreference {
   /**
+   * Whether the standard storage endpoints resolve to both IPv4 and IPv6 addresses. The standard endpoint names remain unchanged.
+   */
+  @added(Versions.v2026_12_01)
+  defaultDualStackEndpoints?: boolean;
+
+  /**
+   * Whether to publish separate IPv4-specific storage endpoints using the <account>-ipv4 name.
+   */
+  @added(Versions.v2026_12_01)
+  publishIpv4Endpoint?: boolean;
+
+  /**
    * A boolean flag which indicates whether IPv6 storage endpoints are to be published.
    */
   publishIpv6Endpoint?: boolean;
@@ -4086,6 +4098,13 @@ model Endpoints {
    * Gets the IPv6 storage endpoints.
    */
   ipv6Endpoints?: StorageAccountIpv6Endpoints;
+
+  /**
+   * Gets the IPv4-specific storage endpoints published when publishIpv4Endpoint is true.
+   */
+  @added(Versions.v2026_12_01)
+  @visibility(Lifecycle.Read)
+  ipv4Endpoints?: StorageAccountIpv4Endpoints;
 }
 
 /**
@@ -4210,6 +4229,48 @@ model StorageAccountIpv6Endpoints {
 }
 
 /**
+ * The URIs for retrieving public blob, queue, table, file, web or dfs objects through IPv4-specific endpoints.
+ */
+@added(Versions.v2026_12_01)
+model StorageAccountIpv4Endpoints {
+  /**
+   * Gets the blob endpoint.
+   */
+  @visibility(Lifecycle.Read)
+  blob?: string;
+
+  /**
+   * Gets the queue endpoint.
+   */
+  @visibility(Lifecycle.Read)
+  queue?: string;
+
+  /**
+   * Gets the table endpoint.
+   */
+  @visibility(Lifecycle.Read)
+  table?: string;
+
+  /**
+   * Gets the file endpoint.
+   */
+  @visibility(Lifecycle.Read)
+  file?: string;
+
+  /**
+   * Gets the web endpoint.
+   */
+  @visibility(Lifecycle.Read)
+  web?: string;
+
+  /**
+   * Gets the dfs endpoint.
+   */
+  @visibility(Lifecycle.Read)
+  dfs?: string;
+}
+
+/**
  * Storage account keys creation time.
  */
 model KeyCreationTime {
@@ -4220,6 +4281,34 @@ model KeyCreationTime {
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   key2?: utcDateTime;
+
+  /**
+   * The creation time of the first Kerberos key, in UTC.
+   */
+  @added(Versions.v2026_12_01)
+  @visibility(Lifecycle.Read)
+  kerb1?: utcDateTime;
+
+  /**
+   * The creation time of the second Kerberos key, in UTC.
+   */
+  @added(Versions.v2026_12_01)
+  @visibility(Lifecycle.Read)
+  kerb2?: utcDateTime;
+
+  /**
+   * The creation time of the first AES-256 Kerberos keytab, in UTC.
+   */
+  @added(Versions.v2026_12_01)
+  @visibility(Lifecycle.Read)
+  keytab1?: utcDateTime;
+
+  /**
+   * The creation time of the second AES-256 Kerberos keytab, in UTC.
+   */
+  @added(Versions.v2026_12_01)
+  @visibility(Lifecycle.Read)
+  keytab2?: utcDateTime;
 }
 
 /**
@@ -5535,6 +5624,20 @@ model ObjectReplicationPolicyProperties {
    */
   @added(Versions.v2025_08_01)
   tagsReplication?: ObjectReplicationPolicyPropertiesTagsReplication;
+
+  /**
+   * The status of the object replication policy.
+   */
+  @added(Versions.v2026_12_01)
+  @visibility(Lifecycle.Read)
+  status?: string;
+
+  /**
+   * The error message associated with the object replication policy status.
+   */
+  @added(Versions.v2026_12_01)
+  @visibility(Lifecycle.Read)
+  replicationError?: string;
 }
 
 /**
