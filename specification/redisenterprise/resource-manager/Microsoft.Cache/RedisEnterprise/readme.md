@@ -26,7 +26,28 @@ These are the global settings for the RedisEnterprise API.
 
 ```yaml
 openapi-type: arm
-tag: package-preview-2026-10-01
+tag: package-preview-2026-11-01
+```
+
+### Tag: package-preview-2026-11-01
+
+These settings apply only when `--tag=package-preview-2026-11-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-11-01'
+input-file:
+  - preview/2026-11-01-preview/redisenterprise.json
+
+directive:
+  - suppress: GetResponseCodes
+    from: redisenterprise.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/nodeMaintenanceFaults/{faultName}/operationresults/{operationId}"].get
+    reason: This resource-scoped DELETE Location polling endpoint returns 202 while pending and 204 on successful deletion. Failures use the default ARM error response. It never returns 200, so declaring 200 would misrepresent the service contract.
+  - suppress: PostResponseCodes
+    from: redisenterprise.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/migrations/default/unlinkMigratedEndpoint"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/unlinkMigratedEndpoint"].post
+    reason: These long-running POST actions never return a 204. The service responds with 202 and reports the terminal state through the Azure-AsyncOperation / Location endpoints, so declaring a 204 on the action URL would misrepresent the service contract.
 ```
 
 ### Tag: package-preview-2026-10-01
