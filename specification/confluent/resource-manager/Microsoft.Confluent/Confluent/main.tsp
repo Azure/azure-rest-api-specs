@@ -77,9 +77,15 @@ enum Versions {
    * The 2026-10-21-preview API version adds monitors and rule sets for sending
    * Azure logs to Confluent.
    */
-  @Azure.Core.previewVersion
   @useDependency(LiftrBase.Versions.v3_preview)
   v2026_10_21_preview: "2026-10-21-preview",
+
+  /**
+   * The 2026-11-27-preview API version adds the SaaS resource ID to offer details.
+   */
+  @Azure.Core.previewVersion
+  @useDependency(LiftrBase.Versions.v3_preview)
+  v2026_11_27_preview: "2026-11-27-preview",
 }
 
 interface Operations {

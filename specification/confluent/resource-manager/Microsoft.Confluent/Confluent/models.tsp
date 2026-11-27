@@ -488,6 +488,13 @@ model OfferDetail {
    * SaaS Offer Status
    */
   status?: SaaSOfferStatus;
+
+  /**
+   * ARM SaaS resource id
+   */
+  @added(Microsoft.Confluent.Versions.v2026_11_27_preview)
+  @maxLength(500)
+  saasResourceId?: string;
 }
 
 /**
