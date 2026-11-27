@@ -144,6 +144,44 @@ Step 5: Create Specification Pull Request
 
 Follow the steps in [typespec to sdk](../../eng/common/instructions/azsdk-tools/typespec-to-sdk.instructions.md) to generate the SDK.
 
+## How to pin/unpin api-version for a TypeSpec project
+
+This is optional and is not part of the default SDK generation workflow. SDK emitters generate the SDK using the latest API version in the TypeSpec project unless `api-version` is set in `tspconfig.yaml`. Pin `api-version` in `tspconfig.yaml` only if the SDK needs to be generated from an API version that is not the latest, for example to regenerate and release an SDK for an older API version after an emitter bug fix.
+
+### Pin api-version
+
+1. Prompt the user for the API version to use.
+2. Confirm with the user: "The latest API version in the specs repo is `<latest-version>`. Do you want to generate the SDK using `<api-version>` instead? (yes/no)". Continue only if the user confirms.
+3. Add the `api-version` property to every SDK emitter configured in the project's `tspconfig.yaml`. Pinning only some emitters is not sufficient. Use the emitter names already in the project's `tspconfig.yaml` and keep all other emitter options unchanged. For example:
+
+   ```yaml
+   options:
+     "@azure-tools/typespec-python":
+       api-version: "2024-01-01"
+       # existing options
+     "@azure-tools/typespec-java":
+       api-version: "2024-01-01"
+       # existing options
+     "@azure-tools/typespec-ts":
+       api-version: "2024-01-01"
+       # existing options
+     "@azure-tools/typespec-go":
+       api-version: "2024-01-01"
+       # existing options
+     "@azure-typespec/http-client-csharp-mgmt":
+       api-version: "2024-01-01"
+       # existing options
+   ```
+
+4. Suggest that the user create a pull request in the [azure-rest-api-specs](https://github.com/Azure/azure-rest-api-specs) repo with the change, then generate the SDK from it.
+
+### Unpin api-version
+
+After the SDK for the pinned API version is generated and released, unpin it so later SDKs use the latest API version:
+
+1. Remove the `api-version` property from every SDK emitter in `tspconfig.yaml`.
+2. Suggest that the user create a pull request in the [azure-rest-api-specs](https://github.com/Azure/azure-rest-api-specs) repo with the change.
+
 ## SDK customizations in TypeSpec projects
 
 TypeSpec supports making client-specific customizations to a TypeSpec project to change how an SDK is generated. When making client-specific changes, read the [typespec client customizations reference](../../eng/common/knowledge/customizing-client-tsp.md) to understand the types of customizations supported and how to apply them.
