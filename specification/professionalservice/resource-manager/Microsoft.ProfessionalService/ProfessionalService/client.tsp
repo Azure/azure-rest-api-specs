@@ -90,3 +90,8 @@ using Microsoft.ProfessionalService;
   "CheckProfessionalServiceNameAvailability",
   "csharp"
 );
+// Hide LRO polling operation status endpoint from C# SDK public API
+@@scope(
+  ProfessionalServiceOperationStatuses.getSubscriptionOperationStatus,
+  "!csharp"
+);
