@@ -109,7 +109,7 @@ alias BrowserSessionOptionalProperties = {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   browserProfile?: BrowserProfileBrowserSessionConfiguration;
 
-  @doc("Whether to request Web Bot Auth at session creation. Defaults to false; responses report the effective state based on session eligibility and service and workspace enablement. Ignored on updates.")
+  @doc("Whether to request Web Bot Auth at session creation. Defaults to false; responses report the effective state based on session eligibility and service and workspace enablement.")
   @added(Versions.v2026_12_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   enableWebBotAuth?: boolean = false;
