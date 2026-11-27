@@ -7,8 +7,11 @@ import {
   getLabelActionImpl,
   type ManagedLabelActions,
 } from "../../src/arm-auto-signoff/arm-universal-auto-signoff.ts";
-import { LabelAction } from "../../src/label.ts";
-import { createMockCore, createMockGithub as createMockGithubBase } from "../mocks.ts";
+import { LabelAction } from "@azure-tools/github-core/label";
+import {
+  createMockCore,
+  createMockGithub as createMockGithubBase,
+} from "@azure-tools/github-core/test/mocks";
 
 const core = createMockCore();
 const owner = "TestOwner";

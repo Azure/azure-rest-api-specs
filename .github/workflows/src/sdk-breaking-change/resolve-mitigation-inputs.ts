@@ -3,7 +3,7 @@ import { dirname, isAbsolute, join, relative, sep } from "node:path";
 import { unzipSync } from "fflate";
 import { AnalysisResultSchema } from "./types.ts";
 import { publishStatus } from "./status.ts";
-import type { GitHubScriptArgs } from "../github.ts";
+import type { GitHubScriptArgs } from "@azure-tools/github-core/github";
 import { SdkName } from "@azure-tools/specs-shared/sdk-types";
 
 function toUint8Array(data: unknown): Uint8Array {

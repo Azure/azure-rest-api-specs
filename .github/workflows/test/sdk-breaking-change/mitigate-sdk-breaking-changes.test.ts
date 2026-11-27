@@ -15,7 +15,7 @@ import {
   MitigationResultSchema,
 } from "../../src/sdk-breaking-change/types.ts";
 import { mitigateSdkBreakingChanges } from "../../src/sdk-breaking-change/mitigate-sdk-breaking-changes.ts";
-import { createMockCore } from "../mocks.ts";
+import { createMockCore } from "@azure-tools/github-core/test/mocks";
 
 let temporaryDirectory: string;
 let analysisResultPath: string;

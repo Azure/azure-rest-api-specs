@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { CheckConclusion, CheckStatus, CommitStatusState } from "../../shared/src/github.ts";
 import { fullGitSha } from "../../shared/test/examples.ts";
 import { setStatusImpl } from "../src/set-status.ts";
-import { createMockCore, createMockGithub } from "./mocks.ts";
+import { createMockCore, createMockGithub } from "@azure-tools/github-core/test/mocks";
 
 describe("setStatusImpl", () => {
   let core: ReturnType<typeof createMockCore>;

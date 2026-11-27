@@ -1,4 +1,4 @@
-import type { Core } from "../github.ts";
+import type { Core } from "@azure-tools/github-core/github";
 /**
  * Detect new ARM resource types in PRs by parsing swagger paths.
  *

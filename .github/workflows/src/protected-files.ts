@@ -1,8 +1,8 @@
 import { minimatch } from "minimatch";
 import { getChangedFiles } from "../../shared/src/changed-files.ts";
 import { inlineCode } from "../../shared/src/markdown.ts";
-import { CoreLogger } from "./core-logger.ts";
-import type { GitHubScriptArgs, WebhookEvent } from "./github.ts";
+import { CoreLogger } from "@azure-tools/github-core/core-logger";
+import type { GitHubScriptArgs, WebhookEvent } from "@azure-tools/github-core/github";
 
 // Maintainer entries are based on Azure/azure-rest-api-specs-maintainers; keep access up to date.
 const ALLOWED_AUTHORS = new Set(

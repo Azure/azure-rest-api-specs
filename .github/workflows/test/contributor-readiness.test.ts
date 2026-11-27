@@ -8,13 +8,13 @@ import {
   resolveReadinessPullRequest,
   type ReadinessFinding,
 } from "../src/contributor-readiness.ts";
-import { getWorkflowRunArtifactInputs } from "../src/context.ts";
+import { getWorkflowRunArtifactInputs } from "@azure-tools/github-core/context";
 import {
   createMockContext,
   createMockCore,
   createMockGithub,
   createMockRequestError,
-} from "./mocks.ts";
+} from "@azure-tools/github-core/test/mocks";
 
 const author = { id: 1, login: "author-example", type: "User" };
 const reviewer = { id: 2, login: "reviewer-example", type: "User" };

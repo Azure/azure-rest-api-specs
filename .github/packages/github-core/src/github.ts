@@ -1,9 +1,9 @@
 import type { endpoint as octokitEndpoint } from "@octokit/endpoint";
 import type { operations } from "@octokit/openapi-webhooks-types";
 import type { OctokitResponse, RequestParameters } from "@octokit/types";
-import type { ILogger } from "../../shared/src/logger.ts";
-import { toPercent } from "../../shared/src/math.ts";
-import { Duration, formatDuration, getDuration, subtract } from "../../shared/src/time.ts";
+import type { ILogger } from "../../../shared/src/logger.ts";
+import { toPercent } from "../../../shared/src/math.ts";
+import { Duration, formatDuration, getDuration, subtract } from "../../../shared/src/time.ts";
 
 export type Core = typeof import("@actions/core");
 export type Context = typeof import("@actions/github").context;

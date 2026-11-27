@@ -1,7 +1,7 @@
 import type { EndpointInterface, OctokitResponse } from "@octokit/types";
 import { afterEach } from "node:test";
 import { beforeEach, describe, expect, expectTypeOf, it, vi } from "vitest";
-import { add, Duration } from "../../shared/src/time.ts";
+import { add, Duration } from "../../../shared/src/time.ts";
 import type { Core, GitHubScriptArgs } from "../src/github.ts";
 import { createLogHook, createRateLimitHook } from "../src/github.ts";
 import { createMockContext, createMockCore, createMockGithub, createMockLogger } from "./mocks.ts";

@@ -1,9 +1,13 @@
-import type { GitHubScriptArgs } from "../src/github.ts";
+import type { GitHubScriptArgs } from "@azure-tools/github-core/github";
 import { describe, expect, it } from "vitest";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { fullGitSha } from "../../shared/test/examples.ts";
 import updateLabelsSrc, { updateLabelsImpl } from "../src/update-labels.ts";
-import { createMockCore, createMockGithub, createMockRequestError } from "./mocks.ts";
+import {
+  createMockCore,
+  createMockGithub,
+  createMockRequestError,
+} from "@azure-tools/github-core/test/mocks";
 
 function updateLabels(asyncFunctionArgs: unknown) {
   return updateLabelsSrc(asyncFunctionArgs as GitHubScriptArgs);

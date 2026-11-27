@@ -17,7 +17,7 @@ vi.mock("@azure-tools/specs-shared/typespec-metadata", () => ({
 
 import { analyzeSdkProjects } from "../../src/sdk-breaking-change/analyze-sdk-projects.ts";
 import { AnalysisResultSchema } from "../../src/sdk-breaking-change/types.ts";
-import { createMockCore } from "../mocks.ts";
+import { createMockCore } from "@azure-tools/github-core/test/mocks";
 
 let core: ReturnType<typeof createMockCore>;
 let temporaryDirectory: string;
