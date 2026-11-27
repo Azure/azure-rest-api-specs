@@ -4,14 +4,14 @@ import "@azure-tools/typespec-azure-resource-manager";
 using Azure.ClientGenerator.Core;
 using Microsoft.DevCenter;
 
-// Remove namespace qualification from CommonTypes encryption types for OpenAPI compatibility
+// Preserve encryption type names for OpenAPI compatibility.
 @@clientName(
-  Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption,
+  Microsoft.DevCenter.CustomerManagedKeyEncryption,
   "CustomerManagedKeyEncryption",
   "!csharp,!java,!go"
 );
 @@clientName(
-  Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,
+  Microsoft.DevCenter.KeyEncryptionKeyIdentity,
   "KeyEncryptionKeyIdentity",
   "!csharp,!java,!go"
 );
@@ -201,7 +201,7 @@ using Microsoft.DevCenter;
 );
 
 @@clientName(
-  Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,
+  Microsoft.DevCenter.KeyEncryptionKeyIdentity,
   "CustomerManagedKeyEncryptionKeyIdentity",
   "python,javascript"
 );
