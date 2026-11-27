@@ -865,6 +865,7 @@ model ResourceGroupPatchable {
   /**
    * The name of the resource group.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   name?: string;
 
   /**
@@ -1029,6 +1030,7 @@ model TagsPatchResource {
   /**
    * The operation type for the patch API.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   operation?: TagsPatchOperation;
 
   /**

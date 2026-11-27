@@ -170,6 +170,7 @@ model RwxStorageClassTypeProperties extends StorageClassTypeProperties {
   @doc("RWX StorageClass")
   type: SCType.RWX;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   @doc("The backing storageclass used to create new storageclass")
   backingStorageClassName: string;
 }
@@ -179,9 +180,11 @@ model BlobStorageClassTypeProperties extends StorageClassTypeProperties {
   @doc("Blob StorageClass")
   type: SCType.Blob;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   @doc("Azure Storage Account Name")
   azureStorageAccountName: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   @doc("Azure Storage Account Key")
   @secret
   azureStorageAccountKey: string;
@@ -203,18 +206,23 @@ model NfsStorageClassTypeProperties extends StorageClassTypeProperties {
   @doc("NFS StorageClass")
   type: SCType.NFS;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   @doc("NFS Server")
   server: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   @doc("NFS share")
   share: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   @doc("Sub directory under share. If the sub directory doesn't exist, driver will create it")
   subDir?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   @doc("Mounted folder permissions. Default is 0. If set as non-zero, driver will perform `chmod` after mount")
   mountPermissions?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   @doc("The action to take when a NFS volume is deleted. Default is Delete")
   onDelete?: NfsDirectoryActionOnVolumeDeletion;
 }
@@ -224,19 +232,23 @@ model SmbStorageClassTypeProperties extends StorageClassTypeProperties {
   @doc("SMB StorageClass")
   type: SCType.SMB;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   @doc("SMB Source")
   source: string;
 
   @doc("Sub directory under share. If the sub directory doesn't exist, driver will create it")
   subDir?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   @doc("Server username")
   username?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   @doc("Server password")
   @secret
   password?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   @doc("Server domain")
   domain?: string;
 }

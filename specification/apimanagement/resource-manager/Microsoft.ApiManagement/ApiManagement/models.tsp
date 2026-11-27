@@ -10092,6 +10092,7 @@ model SubscriptionUpdateParameterProperties {
    * Subscription expiration date. The setting is for audit purposes only and the subscription is not automatically expired. The subscription lifecycle can be managed by using the `state` property. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   expirationDate?: utcDateTime;
 
   /**
@@ -10121,6 +10122,7 @@ model SubscriptionUpdateParameterProperties {
   /**
    * Comments describing subscription state change by the administrator when the state is changed to the 'rejected'.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   stateComment?: string;
 
   /**

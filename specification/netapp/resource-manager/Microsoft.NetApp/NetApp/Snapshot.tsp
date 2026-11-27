@@ -112,6 +112,7 @@ interface Snapshots {
   /**
    * Patch a snapshot
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing empty PATCH request contract for backward compatibility."
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<Snapshot, PatchModel = SnapshotPatch>;
 

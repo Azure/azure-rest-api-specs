@@ -84,6 +84,7 @@ model PatchProxyResource {
   /**
    * Metadata pertaining to creation and last modification of the resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   systemData?: Azure.ResourceManager.Foundations.SystemData;
 }
 

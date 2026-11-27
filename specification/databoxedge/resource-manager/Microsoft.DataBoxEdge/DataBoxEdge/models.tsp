@@ -1715,6 +1715,7 @@ model EdgeProfileSubscriptionPatch {
   /**
    * The path ID that uniquely identifies the subscription of the edge profile.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Preserve the existing writable PATCH input contract for backward compatibility."
   id?: string;
 }
 
