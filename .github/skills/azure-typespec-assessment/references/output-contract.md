@@ -46,12 +46,31 @@ invalid unresolved placeholders; it is never a valid output. Read its schema
 from `agent-index.json.requiredOutputs.schemas.agentDecisions` exactly once.
 Resolve that path relative to the skill directory and do not search for it.
 
+The bounded `model-input.json` and source-association input use compact JSON so
+their persisted UTF-8 byte counts match the payloads measured by the input
+budget guards. Compact serialization does not omit evidence or inference requests.
+
 Phase provenance records the originating runtime and input/output content
 hashes. Timestamp-only changes and byte-identical replacements are accepted;
 changed content, missing successful phase records, and runtime mismatches are
 rejected.
 
 ## Compact Agent decisions
+
+New runs use `model-input.json.pipelineVersion: 2`, schema-version-2 judgment
+decisions without source reviews, and sequential post-judgment
+[source association](workflow/compliance-and-materialization.md) in the same AI
+stage (`agent-workspace\source-association-input.json` ->
+`agent-workspace\source-association-decisions.json` -> `source-association.json`).
+Historical single-phase decision artifacts remain readable. Final source
+selections are joined only after both steps validate their frozen hashes.
+The source result records the decision file's content hash (including custom
+decision paths); editing or removing that file requires source rematerialization.
+The judgment schema permits REST/downstream decisions without `sourceReview`
+in pipeline 2; historical single-phase judgments still require it.
+Evidence sets retain declaration counts and canonical artifact references, not
+repeated project-wide declaration ID lists. Shared Semantic owners retain
+per-operation project scope when proposing sources.
 
 Write `agent-workspace\agent-decisions.json` conforming to
 `scripts\agent-decisions.schema.json`. It contains only Agent-authored
@@ -96,6 +115,11 @@ as guidance.
 `model-input.json` contains `deterministicCoverage` for every Semantic review
 unit and one `inferenceRequests` item per `unknown` hunk. Do not create
 `inference.json` when the request array is empty.
+
+After successful contract comparison, declaration- or operation-mapped hunks
+without deterministic candidates are `no-impact`. Unsupported decorators or
+customizations detected by `inferenceGapReason()` remain `unknown` even when
+mapped; otherwise unclassified, completely unmapped hunks also remain `unknown`.
 
 When requests exist, the materializer writes `inference.json` conforming to
 `scripts\inference.schema.json`. Cover every request exactly once with
