@@ -1,0 +1,56 @@
+id: no-push-access-readback-is-verified
+name: no push access permits expected missing metadata on read-back
+tags:
+  - workflow
+  - offline
+inputs:
+  prompt: |
+    Consider an offline verification scenario for the ARM API Reviewer issue
+    skill. No external calls, commands, or mutations are permitted. Treat all
+    supplied operation results as fixtures, not live GitHub evidence.
+  follow_up_prompts:
+    - |
+      Fixture: the creator has no push access. The approved draft disclosed
+      that GitHub may omit requested labels and that no assignee would be set.
+      A single approved creation requested the ARM API Reviewer agent label
+      and returned
+      https://github.com/Azure/azure-rest-api-specs/issues/47396.
+      Read-back confirms the approved public repository, URL, title prefix,
+      and complete body exactly. Both labels and assignees are empty arrays.
+      What is the result and appropriate next action?
+checkpoints:
+  - after_turn: 1
+    graders:
+      - type: skill_invocation
+        name: loads_issue_skill
+        config:
+          required_skills:
+            - arm-api-reviewer-issue
+          mode: any_order
+          allow_extra: true
+graders:
+  - type: text
+    name: verifies_content_and_discloses_expected_label_gap
+    config:
+      contains:
+        - https://github.com/Azure/azure-rest-api-specs/issues/47396
+        - Published and verified
+      regex_match:
+        - "(?i)maintainer.{0,120}label|label.{0,120}maintainer"
+        - "(?i)(no|without|lack|does not have).{0,40}push|push.{0,40}(false|absent|missing|not)"
+      not_contains:
+        - Awaiting your approval
+        - No issue has been created
+        - Creating the issue now
+  - type: text
+    name: no_false_failure_or_silent_metadata_repair
+    config:
+      regex_not_match:
+        - '(?im)^[\s*_>#-]*(verification\s+(failed|incomplete)|created;\s*verification pending|publication blocked)'
+        - '(?i)\b(I|we)\s+(have\s+|just\s+|now\s+)?(added|applied|assigned|recreated)\b'
+  - type: tool_constraint
+    name: reads_workflow_reference
+    config:
+      expect_tools:
+        - tool: view
+          path_pattern: 'references[\\/]workflow\.md$'

@@ -1,0 +1,50 @@
+id: typespec-reviewer-concern-research
+name: TypeSpec reviewer concern uses canonical research sources
+tags:
+  - routing
+  - offline
+  - typespec
+inputs:
+  prompt: |
+    The ARM API Reviewer told me to replace a standard Azure.ResourceManager
+    operation template with hand-written operations in my TypeSpec. I think
+    that recommendation may conflict with the TypeSpec guidance.
+
+    Help prepare an evidence-based reviewer-issue report about a possible
+    false positive, not an implementation change or diff assessment. First
+    investigate the guidance behind that recommendation using available
+    local read-only context. No public example has been supplied yet; treat
+    my diagnosis as unverified. Do not run shell commands, make external
+    calls, edit specifications, or publish anything.
+    Use policy sources only; do not inspect eval definitions or grader expectations.
+graders:
+  - type: skill_invocation
+    name: invokes_issue_submission_for_reviewer_concern
+    config:
+      required_skills:
+        - arm-api-reviewer-issue
+      mode: any_order
+      allow_extra: true
+  - type: tool_constraint
+    name: does_not_read_eval_definitions
+    config:
+      reject_tools:
+        - tool: "(^|[-_/])(view|read)$"
+          path_pattern: '[/\\]evals[/\\]'
+  - type: tool_constraint
+    name: reads_canonical_typespec_sources
+    config:
+      expect_tools:
+        - tool: view
+          path_pattern: 'typespec-review\.instructions\.md$'
+        - tool: view
+          path_pattern: 'typespec-project\.instructions\.md$'
+  - type: text
+    name: does_not_claim_verified_cause_or_publication
+    config:
+      not_contains:
+        - confirmed root cause
+      regex_not_match:
+        - '(?i)\b(I|we)\s+(have\s+|just\s+|now\s+)?(created|filed|opened|published|submitted|posted)\s+(the|this|an|a|your|that)\s+(new\s+)?(GitHub\s+)?issue'
+        - '(?i)\bthe\s+issue\s+(has\s+been|was|is\s+now)\s+(successfully\s+)?(created|filed|opened|published|submitted|posted)'
+        - '(?im)^[\s*_>#-]*published\s+and\s+verified'

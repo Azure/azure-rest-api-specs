@@ -1,0 +1,65 @@
+id: capped-search-unlabeled-duplicate
+name: complete lookup after a capped search finds an unlabeled duplicate
+tags:
+  - mocked
+  - duplicate
+inputs:
+  prompt: |
+    Help report an ARM API Reviewer problem: clean reviews produce redundant
+    summary posts. I want one complete review body without a separate,
+    unconditional summary comment.
+
+    Fixture context: the complete labeled issue list has already been checked
+    and has no exact duplicate. A preliminary title-prefix search returned
+    200 records with no exact match; its configured limit was 200 and it did
+    not provide completeness metadata.
+
+    This is an isolated fixture exercise. No shell or gh executable is
+    available. The read-only issue_fixture listing tool is available. All
+    supplied records are deterministic local fixtures, not live GitHub data.
+    Do not contact GitHub, publish anything, or change an existing issue.
+graders:
+  - type: tool_constraint
+    name: reads_all_open_issue_pages_without_a_label_filter
+    config:
+      expect_tools:
+        - tool: "(^|[-_/])list_issues$"
+          args:
+            owner:
+              equals: Azure
+            repo:
+              equals: azure-rest-api-specs
+            state:
+              equals: open
+            labels:
+              equals: []
+            page:
+              equals: 1
+        - tool: "(^|[-_/])list_issues$"
+          args:
+            owner:
+              equals: Azure
+            repo:
+              equals: azure-rest-api-specs
+            state:
+              equals: open
+            labels:
+              equals: []
+            page:
+              equals: 2
+  - type: text
+    name: returns_the_unlabeled_issue_not_the_pull_request
+    config:
+      contains:
+        - https://github.com/Azure/azure-rest-api-specs/issues/47516
+      regex_match:
+        - "(?i)(already|existing|duplicate|tracked|matching)"
+      not_contains:
+        - "## Summary"
+  - type: text
+    name: no_unverified_success_claim
+    config:
+      regex_not_match:
+        - '(?i)\b(I|we)\s+(have\s+|just\s+|now\s+)?(created|filed|opened|published|submitted|posted)\s+(the|this|an|a|your|that)\s+(new\s+)?(GitHub\s+)?issue'
+        - '(?i)\bthe\s+issue\s+(has\s+been|was|is\s+now)\s+(successfully\s+)?(created|filed|opened|published|submitted|posted)'
+        - '(?im)^[\s*_>#-]*published\s+and\s+verified'

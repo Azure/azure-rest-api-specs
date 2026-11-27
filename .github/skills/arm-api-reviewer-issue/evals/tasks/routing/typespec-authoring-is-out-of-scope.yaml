@@ -1,0 +1,37 @@
+id: typespec-authoring-is-out-of-scope
+name: TypeSpec authoring after ARM feedback is out of scope
+tags:
+  - routing
+  - offline
+  - typespec
+inputs:
+  prompt: |
+    The ARM API Reviewer left comments on my TypeSpec. Help me address that
+    feedback by fixing my .tsp resource definitions and operation templates.
+
+    Offline routing exercise: identify the appropriate workflow only. No
+    specification content is supplied. Do not edit files, contact external
+    services, or publish anything.
+    Use policy sources only; do not inspect eval definitions or grader expectations.
+graders:
+  - type: skill_invocation
+    name: does_not_invoke_issue_submission
+    config:
+      forbidden_skills:
+        - arm-api-reviewer-issue
+      allow_extra: true
+  - type: tool_constraint
+    name: does_not_read_eval_definitions
+    config:
+      reject_tools:
+        - tool: "(^|[-_/])(view|read)$"
+          path_pattern: '[/\\]evals[/\\]'
+  - type: text
+    name: routes_to_typespec_author_without_an_issue_draft
+    config:
+      contains:
+        - azure-typespec-author
+      not_contains:
+        - "ARM API Reviewer agent:"
+        - "## Summary"
+        - Draft ready.
