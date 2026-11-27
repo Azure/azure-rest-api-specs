@@ -1,4 +1,4 @@
-import { PER_PAGE_MAX } from "../../shared/src/github.ts";
+import { PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import type { GitHub, RestEndpointMethodTypes } from "./github.ts";
 
 export type LatestCommitStatus =

@@ -1,6 +1,6 @@
 import { inspect } from "node:util";
-import { isFullGitSha } from "../../shared/src/git.ts";
-import { PER_PAGE_MAX } from "../../shared/src/github.ts";
+import { isFullGitSha } from "../../../shared/src/git.ts";
+import { PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { CoreLogger } from "./core-logger.ts";
 import type { Context, Core, GitHub, WebhookEvent } from "./github.ts";
 import { createLogHook, createRateLimitHook } from "./github.ts";

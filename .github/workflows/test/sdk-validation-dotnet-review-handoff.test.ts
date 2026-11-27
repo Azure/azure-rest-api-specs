@@ -20,7 +20,11 @@ import {
   validateCheckRunEventPayload,
   verifyReviewInputAgainstCheckRun,
 } from "../src/sdk-validation-dotnet-review-handoff.ts";
-import { createMockContext, createMockCore, createMockGithub } from "./mocks.ts";
+import {
+  createMockContext,
+  createMockCore,
+  createMockGithub,
+} from "@azure-tools/github-core/test/mocks";
 
 const mockFetch = vi.fn<typeof fetch>();
 

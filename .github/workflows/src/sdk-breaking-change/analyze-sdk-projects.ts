@@ -15,7 +15,7 @@ import {
 } from "@azure-tools/specs-shared/typespec-metadata";
 
 import { MarkdownHeadingId, type AnalysisResult } from "./types.ts";
-import type { Core } from "../github.ts";
+import type { Core } from "@azure-tools/github-core/github";
 import {
   escapeMarkdown,
   inlineCode,

@@ -150,7 +150,7 @@ export type SdkLabels = Record<SdkName, SdkLabelInfo>;
 /**
  * SDK labels mapping for breaking change and build-failure labels
  */
-export const sdkLabels: SdkLabels = {
+export const sdkLabels = {
   "azure-sdk-for-go": {
     breakingChange: "BreakingChange-Go-Sdk",
     breakingChangeApproved: "BreakingChange-Go-Sdk-Approved",
@@ -193,7 +193,7 @@ export const sdkLabels: SdkLabels = {
     breakingChangeSuppressionApproved: undefined,
     buildFailed: undefined,
   },
-};
+} satisfies SdkLabels;
 
 export function getSdkLanguage(repo: SdkName): string {
   const language = Object.entries(SdkName).find(([, repository]) => repository === repo)?.[0];

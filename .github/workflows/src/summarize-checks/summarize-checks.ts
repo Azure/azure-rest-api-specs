@@ -5,7 +5,7 @@ import type {
   GitHub,
   GitHubScriptArgs,
   WebhookEvent,
-} from "../github.ts";
+} from "@azure-tools/github-core/github";
 /*
   This file is a github script. It will be called directly from a github-script action. This code is a simplified
   amalgamation of logic that previously resided in the `PR Summary` check and various events within the `pipelinebot`.
@@ -41,7 +41,7 @@ import {
 import { intersect } from "../../../shared/src/set.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
 import { parseSignoffDispatchInputs } from "../arm-auto-signoff/arm-signoff-dispatch.ts";
-import { commentOrUpdate } from "../comment.ts";
+import { commentOrUpdate } from "@azure-tools/github-core/comment";
 import {
   CONTRIBUTOR_ONBOARDING_URL,
   CONTRIBUTOR_READINESS_CHECK_NAME,
@@ -49,7 +49,7 @@ import {
 } from "../contributor-readiness.ts";
 import { statusBadge, type CommentStatus } from "./comment-status.ts";
 import { buildSdkBreakingChangesSummary, hasSdkBreakingChanges } from "./sdk-breaking-changes.ts";
-import { extractInputs } from "../context.ts";
+import { extractInputs } from "@azure-tools/github-core/context";
 import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
 import {
   ImpactAssessmentSchema,

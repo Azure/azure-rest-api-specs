@@ -18,9 +18,9 @@ import {
   downloadAzurePipelineArtifactArchive,
   downloadAzurePipelineArtifactFile,
   resolveAzurePipelineArtifactPair,
-} from "./artifacts.ts";
-import type { Context, Core, GitHub, GitHubScriptArgs } from "./github.ts";
-import type { RetryOptions } from "./retries.ts";
+} from "@azure-tools/github-core/artifacts";
+import type { Context, Core, GitHub, GitHubScriptArgs } from "@azure-tools/github-core/github";
+import type { RetryOptions } from "@azure-tools/github-core/retries";
 
 export const EXPECTED_DOTNET_CHECK_NAME = "SDK Validation - .NET" as const;
 export const EXPECTED_AZURE_PIPELINES_APP_NAME = "Azure Pipelines" as const;

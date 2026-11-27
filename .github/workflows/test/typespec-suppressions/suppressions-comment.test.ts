@@ -6,7 +6,7 @@ import {
   getSuppressionApprovalFingerprint,
   renderSuppressionsCommentBody,
 } from "../../src/typespec-suppressions/suppressions-comment.ts";
-import { createMockCore, createMockGithub } from "../mocks.ts";
+import { createMockCore, createMockGithub } from "@azure-tools/github-core/test/mocks";
 
 const mockCore = createMockCore();
 
@@ -20,7 +20,10 @@ function mockArtifactDownload(report: object): { data: Buffer } {
   };
 }
 
-function mockAnalyzeCodeRun(github: import("../mocks.ts").MockGithub, runOverrides: object = {}) {
+function mockAnalyzeCodeRun(
+  github: import("@azure-tools/github-core/test/mocks").MockGithub,
+  runOverrides: object = {},
+) {
   github.rest.actions.listWorkflowRunsForRepo.mockResolvedValue({
     data: {
       workflow_runs: [

@@ -1,8 +1,8 @@
 import { readFile } from "node:fs/promises";
 import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
-import { getWorkflowRunArtifactInputs } from "../context.ts";
-import { getLatestCommitStatuses } from "../commit-statuses.ts";
-import type { GitHubScriptArgs } from "../github.ts";
+import { getWorkflowRunArtifactInputs } from "../../../packages/github-core/src/context.ts";
+import { getLatestCommitStatuses } from "../../../packages/github-core/src/commit-statuses.ts";
+import type { GitHubScriptArgs } from "../../../packages/github-core/src/github.ts";
 import {
   addSpecificationChanges,
   ARM_SEMANTIC_REVIEW_STATUS,

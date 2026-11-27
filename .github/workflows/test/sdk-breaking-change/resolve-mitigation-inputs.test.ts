@@ -4,7 +4,12 @@ import { zipSync } from "fflate";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { resolveMitigationTrigger } from "../../src/sdk-breaking-change/resolve-mitigation-inputs.ts";
-import { createMockContext, createMockCore, createMockGithub, type MockGithub } from "../mocks.ts";
+import {
+  createMockContext,
+  createMockCore,
+  createMockGithub,
+  type MockGithub,
+} from "@azure-tools/github-core/test/mocks";
 
 const temporaryDirectory = join(import.meta.dirname, `results-${crypto.randomUUID()}`);
 const analysisResultPath = join(temporaryDirectory, "sdk-breaking-change-analysis.json");

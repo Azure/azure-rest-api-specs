@@ -1,5 +1,11 @@
-import { extractInputs } from "../context.ts";
-import type { Context, Core, GitHub, GitHubScriptArgs, WebhookEvent } from "../github.ts";
+import { extractInputs } from "@azure-tools/github-core/context";
+import type {
+  Context,
+  Core,
+  GitHub,
+  GitHubScriptArgs,
+  WebhookEvent,
+} from "@azure-tools/github-core/github";
 import {
   ALLOWED_BOT_LOGINS,
   evaluatePackageNameAuthorization,

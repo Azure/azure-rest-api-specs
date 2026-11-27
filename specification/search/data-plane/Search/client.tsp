@@ -755,6 +755,49 @@ namespace KnowledgeBaseRetrievalClient {
 @@convenientAPI(Search.Documents.get, false, "csharp");
 @@protocolAPI(Search.Documents.get, false, "csharp");
 
+@@clientName(
+  McpServerKnowledgeSourceParameters.serverURL,
+  "ServerUri",
+  "csharp"
+);
+@@alternateType(McpServerKnowledgeSourceParameters.serverURL, url, "csharp");
+@@clientName(SearchField.sensitivityLabelId, "IsSensitivityLabelId", "csharp");
+@@clientName(
+  SearchField.sensitivityLabelName,
+  "IsSensitivityLabelName",
+  "csharp"
+);
+@@clientName(SearchField.sourceDocumentId, "IsSourceDocumentId", "csharp");
+@@clientName(
+  KnowledgeSourceFileIngestionOperation,
+  "KnowledgeSourceFileIngestionInfo",
+  "csharp"
+);
+@@clientName(
+  Azure.Core.Foundations.OperationState,
+  "KnowledgeSourceFileIngestionState",
+  "csharp"
+);
+@@clientName(DebugInfo, "SearchResultsDebugInfo", "csharp");
+@@clientName(AssetStore, "KnowledgeSourceAssetStore", "csharp");
+@@clientName(FreshnessPolicy, "KnowledgeSourceFreshnessPolicy", "csharp");
+@@clientName(AgentRuntimeGraphParams, "KnowledgeSourceGraphParams", "csharp");
+@@clientName(
+  AgentRuntimeGraphProvenanceParams,
+  "KnowledgeSourceGraphProvenanceParams",
+  "csharp"
+);
+@@clientName(
+  AgentRuntimeGraphHydrateDocumentsParams,
+  "KnowledgeSourceGraphHydrateDocumentsParams",
+  "csharp"
+);
+@@clientName(
+  SearchIndexKnowledgeSourceFilterHintAutoConfiguration.cacheTtl,
+  "CacheTimeToLiveInSeconds",
+  "csharp"
+);
+
 @@clientName(AIServicesAccountIdentity.subdomainUrl, "SubdomainUri", "csharp");
 @@alternateType(AIServicesAccountIdentity.subdomainUrl, url, "csharp");
 @@access(AnalyzeResult, Access.internal, "csharp");

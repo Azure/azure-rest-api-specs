@@ -1,7 +1,16 @@
 import { isFullGitSha } from "../../shared/src/git.ts";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
-import { extractInputs, getWorkflowRunArtifactInputs } from "../src/context.ts";
-import type { Context, Core, GitHub, GitHubScriptArgs, WebhookEvent } from "./github.ts";
+import {
+  extractInputs,
+  getWorkflowRunArtifactInputs,
+} from "../../packages/github-core/src/context.ts";
+import type {
+  Context,
+  Core,
+  GitHub,
+  GitHubScriptArgs,
+  WebhookEvent,
+} from "../../packages/github-core/src/github.ts";
 import { ArmAutoSignoffLabel } from "./arm-auto-signoff/arm-auto-signoff-labels.ts";
 
 export default async function updateLabels({ github, context, core }: GitHubScriptArgs) {
