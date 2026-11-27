@@ -1,0 +1,30 @@
+{
+  "title": "Contributor SSH action (intended success; issuance currently not implemented)",
+  "operationId": "EdgeMachines_IssueSshCertificateForContributor",
+  "parameters": {
+    "api-version": "2027-01-15-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "ArcInstance-rg",
+    "edgeMachineName": "machine-1",
+    "body": {
+      "userPublicKey": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF+BQ0ryq4n0GX1s36mvNyEy1cJw4HXX9uB46XAfH6DR example-user",
+      "username": "example-user",
+      "durationInHours": 1,
+      "validFrom": "2026-10-23T06:00:00Z",
+      "validTo": "2026-10-23T07:00:00Z"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "username": "example-user",
+        "role": "Contributor",
+        "validFrom": "2026-10-23T06:00:00Z",
+        "validTo": "2026-10-23T07:00:00Z",
+        "userSshJsonWebSignature": [
+          "******"
+        ]
+      }
+    }
+  }
+}

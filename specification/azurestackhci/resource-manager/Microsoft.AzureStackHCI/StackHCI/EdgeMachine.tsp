@@ -71,6 +71,44 @@ interface EdgeMachines {
   >;
 
   /**
+   * Request an SSH authorization proof with the Administrator role selected by the endpoint.
+   * HTTP 200 describes the intended production contract. The current implementation
+   * validates required public-key and duration fields, then returns HTTP 501 without a body.
+   * Certificate issuance and role-specific authorization are not implemented yet.
+   */
+  @added(Versions.v2027_01_15_preview)
+  issueSshCertificateForAdmin is ArmResourceActionSync<
+    EdgeMachine,
+    EdgeMachineSshCertificateRequest,
+    EdgeMachineSshCertificateResponse
+  >;
+
+  /**
+   * Request an SSH authorization proof with the Contributor role selected by the endpoint.
+   * HTTP 200 describes the intended production contract. The current implementation
+   * validates required public-key and duration fields, then returns HTTP 501 without a body.
+   * Certificate issuance and role-specific authorization are not implemented yet.
+   */
+  @added(Versions.v2027_01_15_preview)
+  issueSshCertificateForContributor is ArmResourceActionSync<
+    EdgeMachine,
+    EdgeMachineSshCertificateRequest,
+    EdgeMachineSshCertificateResponse
+  >;
+
+  /**
+   * Retrieve the SSH trust anchor public keys for an edge machine.
+   * HTTP 200 describes the approved eventual success contract. Key retrieval is
+   * not implemented yet; the current implementation returns HTTP 501 without a body.
+   */
+  @added(Versions.v2027_01_15_preview)
+  getSshTrustAnchor is ArmResourceActionSync<
+    EdgeMachine,
+    void,
+    EdgeMachineSshTrustAnchorResponse
+  >;
+
+  /**
    * Trigger an on-demand sync of edge machine security settings from Guest Configuration.
    * Creates the default security settings child resource if it does not already exist.
    */

@@ -1,0 +1,88 @@
+{
+  "title": "ClusterJobs_Get_ConfigureGpuConfidentialComputeModeJob",
+  "operationId": "ClusterJobs_Get",
+  "parameters": {
+    "api-version": "2027-01-15-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "clusterName": "myCluster",
+    "jobsName": "configureGpuConfidentialComputeMode"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "jobType": "ConfigureGpuConfidentialComputeMode",
+          "deploymentMode": "Deploy",
+          "mode": "On",
+          "reportedProperties": {
+            "validationStatus": {
+              "status": "Succeeded",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "Confidential Compute Mode Validation",
+                  "description": "Validate cluster readiness for the requested confidential computing mode.",
+                  "startTimeUtc": "2023-06-09T00:08:19",
+                  "endTimeUtc": "2023-06-09T00:10:47",
+                  "status": "Succeeded",
+                  "steps": [
+                    {
+                      "fullStepIndex": "0.1",
+                      "name": "Hardware Capability Check",
+                      "description": "Check cluster hardware support for confidential computing",
+                      "startTimeUtc": "2023-06-09T00:08:23",
+                      "endTimeUtc": "2023-06-09T00:09:10",
+                      "status": "Succeeded",
+                      "steps": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "deploymentStatus": {
+              "status": "Succeeded",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "Confidential Compute Mode Deployment",
+                  "description": "Configure the confidential computing mode on the cluster's GPUs to On.",
+                  "startTimeUtc": "2023-06-09T00:08:19",
+                  "endTimeUtc": "2023-06-09T00:15:47",
+                  "status": "Succeeded",
+                  "steps": [
+                    {
+                      "fullStepIndex": "0.1",
+                      "name": "Mode Configuration",
+                      "description": "Configure cluster for confidential computing mode On",
+                      "startTimeUtc": "2023-06-09T00:08:23",
+                      "endTimeUtc": "2023-06-09T00:15:10",
+                      "status": "Succeeded",
+                      "steps": []
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "provisioningState": "Succeeded",
+          "status": "Succeeded",
+          "jobId": "job-12345-set-cc-mode",
+          "startTimeUtc": "2023-06-09T00:08:19Z",
+          "endTimeUtc": "2023-06-09T00:15:47Z"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/jobs/configureGpuConfidentialComputeMode",
+        "name": "configureGpuConfidentialComputeMode",
+        "type": "Microsoft.AzureStackHCI/clusters/jobs",
+        "systemData": {
+          "createdBy": "user@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2024-07-01T17:02:21.168Z",
+          "lastModifiedBy": "user@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-07-01T17:02:21.168Z"
+        }
+      }
+    }
+  }
+}

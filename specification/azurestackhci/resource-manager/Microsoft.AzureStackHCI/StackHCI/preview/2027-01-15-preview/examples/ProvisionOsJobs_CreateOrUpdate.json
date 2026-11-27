@@ -1,0 +1,91 @@
+{
+  "title": "ProvisionOsJobOperations_CreateOrUpdate",
+  "operationId": "ProvisionOsJobOperations_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2027-01-15-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "edgeMachineName": "machine1",
+    "provisionOsJobName": "job-update-001",
+    "resource": {
+      "properties": {
+        "startedAt": "2026-08-05T10:00:00Z",
+        "completedAt": "2026-08-05T10:45:00Z",
+        "operationType": "Update",
+        "status": "Completed",
+        "targetOsType": "AzureLinux",
+        "jobProperties": {
+          "jobType": "ProvisionOs",
+          "provisioningRequest": {
+            "target": "AzureLinux",
+            "osProfile": {
+              "osName": "AzureLinux",
+              "osType": "AzureLinux",
+              "osVersion": "3.0",
+              "osImageLocation": "https://aka.ms/aep/azlinux3.0",
+              "vsrVersion": "1.0.0",
+              "imageHash": "sha256:a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456",
+              "operationType": "Update"
+            }
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine1/provisionOsJobs/job-update-001",
+        "name": "job-update-001",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/provisionOsJobs",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "startedAt": "2026-08-05T10:00:00Z",
+          "completedAt": "2026-08-05T10:45:00Z",
+          "operationType": "Update",
+          "status": "Completed",
+          "targetOsType": "AzureLinux",
+          "jobProperties": {
+            "jobType": "ProvisionOs",
+            "provisioningRequest": {
+              "target": "AzureLinux",
+              "osProfile": {
+                "osName": "AzureLinux",
+                "osType": "AzureLinux",
+                "osVersion": "3.0",
+                "osImageLocation": "https://aka.ms/aep/azlinux3.0",
+                "vsrVersion": "1.0.0",
+                "imageHash": "sha256:a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456",
+                "operationType": "Update"
+              }
+            }
+          }
+        },
+        "systemData": {
+          "createdBy": "user1@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-08-05T10:00:00.000Z",
+          "lastModifiedBy": "user1@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-08-05T10:45:00.000Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine1/provisionOsJobs/job-update-001",
+        "name": "job-update-001",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/provisionOsJobs",
+        "properties": {
+          "provisioningState": "Creating",
+          "startedAt": "2026-08-05T10:00:00Z",
+          "operationType": "Update",
+          "targetOsType": "AzureLinux"
+        }
+      }
+    }
+  }
+}
