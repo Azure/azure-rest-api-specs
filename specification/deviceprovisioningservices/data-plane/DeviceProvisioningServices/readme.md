@@ -56,6 +56,17 @@ input-file:
 title: ProvisioningServiceClient
 ```
 
+### Tag: package-preview-2027-01-service
+
+These settings apply only when `--tag=package-preview-2027-01-service` is specified on the command line.
+This service-only preview adds S2 enrollment-group namespace targeting; the default tag and device API are unchanged.
+
+```yaml $(tag) == 'package-preview-2027-01-service'
+input-file:
+  - preview/2027-01-31-preview/service.json
+title: ProvisioningServiceClient
+```
+
 ### Tag: package-2026-11-01-service
 
 These settings apply only when `--tag=package-2026-11-01-service` is specified on the command line.

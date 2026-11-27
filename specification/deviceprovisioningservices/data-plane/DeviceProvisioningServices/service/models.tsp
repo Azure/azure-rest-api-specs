@@ -826,6 +826,21 @@ model EnrollmentGroup {
   enrollmentGroupId: string;
 
   /**
+   * Namespace-scoped allocation and certificate-policy configuration. Supported
+   * only by S2 provisioning services with Azure Device Registry enabled, even
+   * when the map contains a single entry. Each key is the namespaceUuid of an ADR
+   * namespace linked to this provisioning service, not its name or ARM resource ID.
+   * For a new S2 enrollment group, omitting this property targets all linked
+   * namespaces. On S2, changes to the legacy root-level iotHubs and
+   * iotHubHostName properties are rejected through every API version; use this
+   * property to change targeting. Older API versions omit this property and
+   * continue to allow reads through their legacy hub view, which may be
+   * incomplete or semantically invalid and is not a safe targeting round trip.
+   */
+  @added(Versions.v2027_01_31_preview)
+  targetNamespaces?: Record<EnrollmentGroupNamespaceTarget>;
+
+  /**
    * Attestation method used by the device.
    */
   attestation: AttestationMechanism;
@@ -943,6 +958,38 @@ model EnrollmentGroup {
    * This tells DPS which webhook to call when using custom allocation.
    */
   customAllocationDefinition?: CustomAllocationDefinition;
+}
+
+/**
+ * Allocation and optional certificate-policy configuration for one linked ADR
+ * namespace targeted by an S2 enrollment group.
+ */
+@added(Versions.v2027_01_31_preview)
+model EnrollmentGroupNamespaceTarget {
+  /**
+   * IoT Hub hostnames eligible for allocation within this namespace. Each
+   * hostname must belong to this namespace. When omitted, all eligible IoT hubs
+   * in this namespace are considered.
+   */
+  iotHubHostNames?: string[];
+
+  /**
+   * Name of the certificate authority in this namespace that owns the referenced
+   * certificate policy.
+   */
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[0-9a-zA-Z][a-zA-Z0-9-]*$")
+  certificateAuthorityName?: string;
+
+  /**
+   * Name of the certificate policy in this namespace. When supplied,
+   * certificateAuthorityName identifies its owning certificate authority.
+   */
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[0-9a-zA-Z][a-zA-Z0-9-]*$")
+  certificatePolicyName?: string;
 }
 
 /** Query specification for enrollment queries. */
