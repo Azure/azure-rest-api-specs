@@ -1,5 +1,5 @@
 import type { Core } from "./github.ts";
-export type ILogger = import("../../shared/src/logger.ts").ILogger;
+export type ILogger = import("../../../shared/src/logger.ts").ILogger;
 
 export class CoreLogger implements ILogger {
   #core: Core;

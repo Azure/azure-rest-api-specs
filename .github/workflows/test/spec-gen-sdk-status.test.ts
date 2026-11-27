@@ -2,9 +2,9 @@ import fs from "node:fs";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { SdkName } from "../../shared/src/sdk-types.ts";
 import { createMockSpecGenSdkArtifactInfo } from "../../shared/test/sdk-types.ts";
-import * as artifacts from "../src/artifacts.ts";
+import * as artifacts from "@azure-tools/github-core/artifacts";
 import { setSpecGenSdkStatusImpl } from "../src/spec-gen-sdk-status.ts";
-import { createMockCore, createMockGithub } from "./mocks.ts";
+import { createMockCore, createMockGithub } from "@azure-tools/github-core/test/mocks";
 
 describe("spec-gen-sdk-status", () => {
   let mockGithub: ReturnType<typeof createMockGithub>;

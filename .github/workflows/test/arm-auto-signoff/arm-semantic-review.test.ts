@@ -21,8 +21,8 @@ import {
 import publishArmSemanticReviewStatus, {
   finalizeUnpublishedArmSemanticReview,
 } from "../../src/arm-auto-signoff/arm-semantic-review-workflow.ts";
-import type { GitHubScriptArgs } from "../../src/github.ts";
-import { createMockCore, createMockGithub } from "../mocks.ts";
+import type { GitHubScriptArgs } from "@azure-tools/github-core/github";
+import { createMockCore, createMockGithub } from "@azure-tools/github-core/test/mocks";
 
 const owner = "Azure";
 const repo = "azure-rest-api-specs";

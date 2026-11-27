@@ -83,6 +83,13 @@ To start, you just need to browse to the `azure-rest-api-specs` repo, select `<>
 
 Please first review recommended folder structure detailed in the [specification folder structure guide](../specification-guidelines/specification-folder-structure-guide.md).
 
+> [!IMPORTANT]
+> Before creating a directory for a new management-plane or data-plane service, confirm the proposed organization segment and service-folder placement through the applicable review and specs-repository ownership process. For management-plane services, also confirm the resource-provider namespace through the applicable ARM review.
+>
+> Complete this alignment before establishing TypeSpec files, generated OpenAPI paths, publishing configuration, or SDK-generation configuration. Moving or renaming an established service directory later can affect repository automation, generated OpenAPI paths, documentation publishing, CODEOWNERS, and SDK generation.
+>
+> This early confirmation is intended for new services, new resource-provider namespaces, or cases where the correct repository location is unclear. Existing services should continue to use their established location unless a move has been explicitly reviewed. This guidance does not replace any other required ARM, API design, or repository review.
+
 1. Under `[reporoot]\specification`, create service folder directly.
    - Select `(rest-api-spec repo) ARM` or `(rest-api-spec repo) Data-plane` and answer appropriate naming questions.
    - If it's ARM service, the service folder would be `specification/{organization}/resource-manager/<RPNS>/{service}`.

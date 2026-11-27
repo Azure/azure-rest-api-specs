@@ -7,7 +7,11 @@ import {
   resolveChangedTypeSpecConfigPathsFromPullRequest,
   validateAnalysisSource,
 } from "../../src/sdk-breaking-change/resolve-analysis-inputs.ts";
-import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
+import {
+  createMockContext,
+  createMockCore,
+  createMockGithub,
+} from "@azure-tools/github-core/test/mocks";
 
 const temporaryDirectories: string[] = [];
 
@@ -51,7 +55,6 @@ afterEach(async () => {
 describe("resolveAnalysisTrigger", () => {
   it.each([
     ["BreakingChange-Go-Sdk", "Go", "azure-sdk-for-go", "true"],
-    ["BreakingChange-Java-Sdk", "Java", "azure-sdk-for-java", "true"],
     ["BreakingChange-JavaScript-Sdk", "JavaScript", "azure-sdk-for-js", "true"],
     ["BreakingChange-Python-Sdk", "Python", "azure-sdk-for-python", "true"],
     ["BreakingChange-Go-Sdk", "Go", "azure-sdk-for-go", "false"],
@@ -215,7 +218,7 @@ describe("resolveAnalysisTrigger", () => {
       data: {
         artifacts: [
           { name: "label-BreakingChange-Go-Sdk=true" },
-          { name: "label-BreakingChange-Java-Sdk=true" },
+          { name: "label-BreakingChange-Python-Sdk=true" },
         ],
       },
     });

@@ -1,8 +1,8 @@
-import type { GitHubScriptArgs } from "./github.ts";
+import type { GitHubScriptArgs } from "../../packages/github-core/src/github.ts";
 import { REVIEW_REQUIRED_LABELS } from "../../shared/src/breaking-change.ts";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { byDate, invert } from "../../shared/src/sort.ts";
-import { extractInputs } from "./context.ts";
+import { extractInputs } from "../../packages/github-core/src/context.ts";
 
 export const SWAGGER_BREAKING_CHANGE_WORKFLOW_NAME = "Swagger BreakingChange - Analyze Code";
 export const CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME =

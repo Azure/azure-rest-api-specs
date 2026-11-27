@@ -3,7 +3,11 @@ import { join } from "node:path";
 import { parse } from "yaml";
 import { expect, it, vi } from "vitest";
 import { cleanupBranches, isStale } from "../src/branch-cleanup.ts";
-import { createMockContext, createMockCore, createMockGithub } from "./mocks.ts";
+import {
+  createMockContext,
+  createMockCore,
+  createMockGithub,
+} from "@azure-tools/github-core/test/mocks";
 
 const NOW = Date.parse("2026-09-30T00:00:00Z");
 const SHA = "a".repeat(40);

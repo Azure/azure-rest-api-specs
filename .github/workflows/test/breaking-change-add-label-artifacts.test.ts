@@ -1,4 +1,4 @@
-import type { GitHubScriptArgs } from "../src/github.ts";
+import type { GitHubScriptArgs } from "@azure-tools/github-core/github";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { REVIEW_REQUIRED_LABELS } from "../../shared/src/breaking-change.ts";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
@@ -6,10 +6,14 @@ import getLabelActionsImpl, {
   CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME,
   SWAGGER_BREAKING_CHANGE_WORKFLOW_NAME,
 } from "../src/breaking-change-add-label-artifacts.ts";
-import { createMockContext, createMockCore, createMockGithub } from "./mocks.ts";
+import {
+  createMockContext,
+  createMockCore,
+  createMockGithub,
+} from "@azure-tools/github-core/test/mocks";
 
 // Mock dependencies
-vi.mock("../src/context.ts", () => ({
+vi.mock("@azure-tools/github-core/context", () => ({
   extractInputs: vi.fn(),
 }));
 
@@ -57,7 +61,7 @@ describe("breaking-change-add-label-artifacts", () => {
 
   // Shared setup helpers
   const setupMockInputs = async () => {
-    const { extractInputs } = await import("../src/context.ts");
+    const { extractInputs } = await import("@azure-tools/github-core/context");
     (extractInputs as import("vitest").Mock).mockResolvedValue(mockInputs);
   };
 

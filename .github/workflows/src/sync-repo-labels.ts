@@ -3,7 +3,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { z } from "zod";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
-import type { GitHub, GitHubScriptArgs } from "./github.ts";
+import type { GitHub, GitHubScriptArgs } from "@azure-tools/github-core/github";
 import {
   ARCHIVE_DESCRIPTION,
   ARCHIVE_PREFIX,

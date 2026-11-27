@@ -4,7 +4,11 @@ import {
   dispatchUpdateLabels,
   parseSignoffDispatchInputs,
 } from "../../src/arm-auto-signoff/arm-signoff-dispatch.ts";
-import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
+import {
+  createMockContext,
+  createMockCore,
+  createMockGithub,
+} from "@azure-tools/github-core/test/mocks";
 import getLabelAction from "../../src/arm-auto-signoff/arm-universal-auto-signoff.ts";
 import updateLabels from "../../src/update-labels.ts";
 
