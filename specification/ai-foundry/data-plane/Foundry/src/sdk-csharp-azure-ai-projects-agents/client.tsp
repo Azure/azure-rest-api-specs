@@ -443,6 +443,9 @@ namespace Azure.AI.Projects {
   @@clientName(VoiceAgentHandoffCondition.delay_ms, "Delay", "csharp");
   @@clientName(VoiceAgentHandoffEdgeState.delay_ms, "Delay", "csharp");
 
+  // Avoid generation of anonymous AzureFunctionDefinitionFunction
+  @@alternateType(AzureFunctionDefinition.function, unknown);
+
   // Align turn-detection flags with the OpenAI SDK.
   @@clientName(
     OpenAI.RealtimeTurnDetectionServerVad.create_response,

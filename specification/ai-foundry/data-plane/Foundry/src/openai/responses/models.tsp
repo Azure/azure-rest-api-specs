@@ -410,7 +410,9 @@ namespace Azure.AI.Projects {
     conversation_id?: string;
   };
 
+  @doc("Identifies an agent by name and, optionally, a specific version.")
   model AgentReference {
+    @doc("Identifies this object as an agent reference.")
     type: "agent_reference";
 
     @doc("The name of the agent.")

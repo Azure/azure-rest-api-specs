@@ -42,6 +42,7 @@ model AgentOptimizationCandidateOutput {
 @doc("Candidate output produced by an agent-optimization job.")
 model AgentOptimizationAgentCandidateOutput
   extends AgentOptimizationCandidateOutput {
+  @doc("Identifies candidate output produced by agent optimization.")
   type: AgentOptimizationConfigurationType.agent_optimization;
 
   @doc("Typed configuration mutations applied to the baseline. Omitted for the baseline candidate. LIST without `expand=mutations` returns mutation items with only `type`; expanded LIST and candidate GET populate each mutation's `value`.")
@@ -51,6 +52,7 @@ model AgentOptimizationAgentCandidateOutput
 @doc("Candidate output produced by a prompt-optimization job.")
 model AgentOptimizationPromptCandidateOutput
   extends AgentOptimizationCandidateOutput {
+  @doc("Identifies candidate output produced by prompt optimization.")
   type: AgentOptimizationConfigurationType.prompt_optimization;
 
   @doc("Typed configuration mutations applied to the baseline. Omitted for the baseline candidate. LIST without `expand=mutations` returns mutation items with only `type`; expanded LIST and candidate GET populate each mutation's `value`.")
@@ -76,6 +78,7 @@ model AgentOptimizationMutation {
 
 @doc("Instructions mutation.")
 model AgentOptimizationInstructionsMutation extends AgentOptimizationMutation {
+  @doc("Identifies a mutation to the agent's instructions.")
   type: TargetAttribute.instructions;
 
   @doc("Optimized agent instructions. Omitted on LIST unless `expand=mutations` is specified.")
@@ -84,6 +87,7 @@ model AgentOptimizationInstructionsMutation extends AgentOptimizationMutation {
 
 @doc("Model mutation.")
 model AgentOptimizationModelMutation extends AgentOptimizationMutation {
+  @doc("Identifies a mutation to the agent's model selection.")
   type: TargetAttribute.`model`;
 
   @doc("Selected model name or deployment name. Omitted on LIST unless `expand=mutations` is specified.")
@@ -92,6 +96,7 @@ model AgentOptimizationModelMutation extends AgentOptimizationMutation {
 
 @doc("Skill mutations.")
 model AgentOptimizationSkillsMutation extends AgentOptimizationMutation {
+  @doc("Identifies a mutation to the agent's skills.")
   type: TargetAttribute.skills;
 
   @doc("Added or changed skills. Omitted on LIST unless `expand=mutations` is specified.")
@@ -100,6 +105,7 @@ model AgentOptimizationSkillsMutation extends AgentOptimizationMutation {
 
 @doc("Tool mutations.")
 model AgentOptimizationToolsMutation extends AgentOptimizationMutation {
+  @doc("Identifies a mutation to the agent's function tools.")
   type: TargetAttribute.tools;
 
   @doc("Added or changed function tools. Omitted on LIST unless `expand=mutations` is specified.")

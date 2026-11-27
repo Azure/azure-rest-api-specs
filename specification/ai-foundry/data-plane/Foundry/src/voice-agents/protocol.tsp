@@ -185,6 +185,8 @@ namespace Azure.AI.Projects {
     mcp_list_tools_completed: OpenAI.RealtimeServerEventMCPListToolsCompleted,
     mcp_list_tools_failed: OpenAI.RealtimeServerEventMCPListToolsFailed,
     mcp_list_tools_in_progress: OpenAI.RealtimeServerEventMCPListToolsInProgress,
+    output_audio_buffer_started: OpenAI.RealtimeServerEventOutputAudioBufferStarted,
+    output_audio_buffer_stopped: OpenAI.RealtimeServerEventOutputAudioBufferStopped,
     output_audio_buffer_cleared: OpenAI.RealtimeServerEventOutputAudioBufferCleared,
     rate_limits_updated: OpenAI.RealtimeServerEventRateLimitsUpdated,
     response_output_audio_delta: OpenAI.RealtimeServerEventResponseAudioDelta,
@@ -1146,6 +1148,20 @@ namespace Azure.AI.Projects {
   // Keep event models reachable without HTTP frame bodies.
   @@usage(OpenAI.LiveClientEvent, Usage.input | Usage.json);
   @@usage(OpenAI.LiveServerEvent, Usage.output | Usage.json);
+
+  #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Expose the native Live client event union in OpenAPI."
+  @doc("A client event sent over a GPT Live voice-agent WebSocket.")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  union VoiceAgentLiveClientEvent {
+    native: OpenAI.LiveClientEvent,
+  }
+
+  #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Expose the native Live server event union in OpenAPI."
+  @doc("A server event received over a GPT Live voice-agent WebSocket.")
+  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+  union VoiceAgentLiveServerEvent {
+    native: OpenAI.LiveServerEvent,
+  }
 
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Add Foundry persistence correlation to the primary session-started event without replacing native session metadata."
   @@copyProperties(
