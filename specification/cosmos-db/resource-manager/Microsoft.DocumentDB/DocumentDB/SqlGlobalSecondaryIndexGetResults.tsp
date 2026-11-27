@@ -1,0 +1,72 @@
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
+import "@typespec/http";
+import "@typespec/versioning";
+import "./SqlContainerGetResults.tsp";
+
+using Azure.ResourceManager;
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using TypeSpec.Versioning;
+
+namespace Microsoft.DocumentDB;
+
+/** Supplies the source container route without changing the existing SQL container key. */
+@added(Versions.v2026_09_01_preview)
+@parentResource(SqlDatabaseGetResults)
+model SqlGlobalSecondaryIndexSourceRoute
+  is ProxyResource<SqlContainerGetProperties> {
+  ...ResourceNameParameter<
+    Resource = SqlGlobalSecondaryIndexSourceRoute,
+    KeyName = "sourceContainerName",
+    SegmentName = "containers",
+    NamePattern = ""
+  >;
+}
+
+/** Supplies the global secondary index route for the SQL container create-or-update contract. */
+@added(Versions.v2026_09_01_preview)
+@parentResource(SqlGlobalSecondaryIndexSourceRoute)
+model SqlGlobalSecondaryIndexRoute is ProxyResource<SqlContainerGetProperties> {
+  ...ResourceNameParameter<
+    Resource = SqlGlobalSecondaryIndexRoute,
+    KeyName = "containerName",
+    SegmentName = "globalSecondaryIndexes",
+    NamePattern = ""
+  >;
+}
+
+/** Operations for Azure Cosmos DB SQL global secondary index containers. */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "This alternate route supports container PUT writes; no delete operation is exposed."
+@added(Versions.v2026_09_01_preview)
+@armResourceOperations(#{ omitTags: true })
+interface SqlGlobalSecondaryIndexGetResultsOperationGroup {
+  /** Creates or updates an Azure Cosmos DB SQL global secondary index container under a source container. Requires the Microsoft.DocumentDB/databaseAccounts/sqlDatabases/container/globalSecondaryIndexes/write action. Requests without a materialized view definition return 400 Bad Request. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "This endpoint reuses the SQL container PUT contract, including its 200 and 202 responses."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "The resource model supplies only the alternate route; the response intentionally reuses SqlContainerGetResults."
+  createUpdateSqlGlobalSecondaryIndex is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
+    SqlGlobalSecondaryIndexRoute,
+    Request = SqlContainerCreateUpdateParameters,
+    Response =
+      | ArmResourceUpdatedResponse<SqlContainerGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SqlContainerGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | {
+          /** The request does not describe a global secondary index container. */
+          @statusCode statusCode: 400;
+
+          /** The details of the invalid container write request. */
+          @body body: Azure.ResourceManager.CommonTypes.ErrorResponse;
+        }
+  >;
+}
+
+@@doc(SqlGlobalSecondaryIndexRoute.name, "Cosmos DB container name.");
+@@doc(
+  SqlGlobalSecondaryIndexSourceRoute.name,
+  "Cosmos DB source container name."
+);
+@@doc(
+  SqlGlobalSecondaryIndexGetResultsOperationGroup.createUpdateSqlGlobalSecondaryIndex::parameters.resource,
+  "The parameters to provide for the current SQL container."
+);
