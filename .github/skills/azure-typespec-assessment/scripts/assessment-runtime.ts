@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { isRecord, readJsonObject } from "./cli.ts";
 import {
   hashArtifacts,
+  normalizeWorkRelativePath,
   readWorkflowState,
   resolveWorkPath,
   sha256Buffer,
@@ -144,16 +145,24 @@ function isHashMap(value: unknown): value is Record<string, string> {
 function requiredMaterializationInputs(work: string): string[] {
   let decisionsFile = AGENT_DECISIONS_FILE;
   try {
-    const indexFile = resolveWorkPath(work, AGENT_INDEX_FILE);
-    if (fs.existsSync(indexFile)) {
-      const index = readJsonObject(indexFile);
-      const requiredOutputs = isRecord(index.requiredOutputs) ? index.requiredOutputs : undefined;
-      if (
-        typeof requiredOutputs?.agentDecisions === "string" &&
-        requiredOutputs.agentDecisions.trim()
-      ) {
-        const resolved = resolveWorkPath(work, requiredOutputs.agentDecisions);
-        decisionsFile = path.relative(path.resolve(work), resolved).replaceAll("\\", "/");
+    const state = readWorkflowState(work);
+    const stateArtifacts = isRecord(state?.artifacts) ? state.artifacts : undefined;
+    if (
+      typeof stateArtifacts?.agentDecisions === "string" &&
+      stateArtifacts.agentDecisions.trim()
+    ) {
+      decisionsFile = normalizeWorkRelativePath(work, stateArtifacts.agentDecisions);
+    } else {
+      const indexFile = resolveWorkPath(work, AGENT_INDEX_FILE);
+      if (fs.existsSync(indexFile)) {
+        const index = readJsonObject(indexFile);
+        const requiredOutputs = isRecord(index.requiredOutputs) ? index.requiredOutputs : undefined;
+        if (
+          typeof requiredOutputs?.agentDecisions === "string" &&
+          requiredOutputs.agentDecisions.trim()
+        ) {
+          decisionsFile = normalizeWorkRelativePath(work, requiredOutputs.agentDecisions);
+        }
       }
     }
   } catch (error) {
@@ -164,6 +173,28 @@ function requiredMaterializationInputs(work: string): string[] {
   return [AGENT_INDEX_FILE, decisionsFile];
 }
 
+function requiredMaterializationOutputs(work: string): string[] {
+  const outputs = ["assessment-judgment.json", "compliance-search-evidence.json"];
+  try {
+    const indexFile = resolveWorkPath(work, AGENT_INDEX_FILE);
+    if (fs.existsSync(indexFile)) {
+      const index = readJsonObject(indexFile);
+      const requiredOutputs = isRecord(index.requiredOutputs) ? index.requiredOutputs : undefined;
+      const materialized = isRecord(requiredOutputs?.materialized)
+        ? requiredOutputs.materialized
+        : undefined;
+      if (typeof materialized?.inference === "string" && materialized.inference.trim()) {
+        outputs.push(normalizeWorkRelativePath(work, materialized.inference));
+      }
+    }
+  } catch (error) {
+    throw new AssessmentRuntimeError(
+      `Invalid materialization runtime provenance: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+  return [...new Set(outputs)];
+}
+
 export function verifyRuntimePhaseProvenance(
   work: string,
   phase: "preparation" | "materialization",
@@ -172,9 +203,7 @@ export function verifyRuntimePhaseProvenance(
   const value = readWorkflowState(work)?.runtimePhases?.[phase];
   const requiredInputs = phase === "materialization" ? requiredMaterializationInputs(work) : [];
   const requiredOutputs =
-    phase === "preparation"
-      ? [AGENT_INDEX_FILE]
-      : ["assessment-judgment.json", "compliance-search-evidence.json"];
+    phase === "preparation" ? [AGENT_INDEX_FILE] : requiredMaterializationOutputs(work);
   if (
     !value ||
     value.schemaVersion !== 1 ||
