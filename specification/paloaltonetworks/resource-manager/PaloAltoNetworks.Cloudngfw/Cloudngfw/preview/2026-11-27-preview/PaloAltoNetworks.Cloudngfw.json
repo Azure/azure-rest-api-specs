@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PaloAltoNetworks.Cloudngfw",
-    "version": "2026-09-25-preview",
+    "version": "2026-11-27-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -88,6 +88,9 @@
     },
     {
       "name": "LogIngestionSettingsResources"
+    },
+    {
+      "name": "AiGatewayLogSettingsResources"
     },
     {
       "name": "MarketplaceOffers"
@@ -2923,6 +2926,9 @@
           }
         },
         "x-ms-examples": {
+          "Firewalls_Get_AiGateway": {
+            "$ref": "./examples/Firewalls_Get_AiGateway.json"
+          },
           "Firewalls_Get_MaximumSet_Gen": {
             "$ref": "./examples/Firewalls_Get_MaximumSet_Gen.json"
           },
@@ -2997,6 +3003,9 @@
           }
         },
         "x-ms-examples": {
+          "Firewalls_CreateOrUpdate_AiGateway": {
+            "$ref": "./examples/Firewalls_CreateOrUpdate_AiGateway.json"
+          },
           "Firewalls_CreateOrUpdate_MaximumSet_Gen": {
             "$ref": "./examples/Firewalls_CreateOrUpdate_MaximumSet_Gen.json"
           },
@@ -3132,6 +3141,211 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PaloAltoNetworks.Cloudngfw/firewalls/{firewallName}/aiGatewayLogSettings": {
+      "get": {
+        "operationId": "AiGatewayLogSettingsResources_ListByFirewall",
+        "tags": [
+          "AiGatewayLogSettingsResources"
+        ],
+        "description": "List the AI Gateway log settings under a firewall. The resource is a singleton (name is fixed to 'default'), so the response contains at most one entry.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallName",
+            "in": "path",
+            "description": "Firewall resource name",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![-_])(?!.*[-_]{2})(?!.*[-_]$)[a-zA-Z0-9][a-zA-Z0-9-]{0,127}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayLogSettingsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AiGatewayLogSettingsResources_ListByFirewall": {
+            "$ref": "./examples/AiGatewayLogSettingsResources_ListByFirewall.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PaloAltoNetworks.Cloudngfw/firewalls/{firewallName}/aiGatewayLogSettings/default": {
+      "get": {
+        "operationId": "AiGatewayLogSettingsResources_Get",
+        "tags": [
+          "AiGatewayLogSettingsResources"
+        ],
+        "description": "Get the AI Gateway log settings for a firewall. Returns 200 OK with the current settings, or 404 when they have not been configured.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallName",
+            "in": "path",
+            "description": "Firewall resource name",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![-_])(?!.*[-_]{2})(?!.*[-_]$)[a-zA-Z0-9][a-zA-Z0-9-]{0,127}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayLogSettingsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AiGatewayLogSettingsResources_Get": {
+            "$ref": "./examples/AiGatewayLogSettingsResources_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AiGatewayLogSettingsResources_CreateOrUpdate",
+        "tags": [
+          "AiGatewayLogSettingsResources"
+        ],
+        "description": "Create or update the AI Gateway log settings for a firewall. SYNC — forwards to the partner and returns the persisted settings.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallName",
+            "in": "path",
+            "description": "Firewall resource name",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![-_])(?!.*[-_]{2})(?!.*[-_]$)[a-zA-Z0-9][a-zA-Z0-9-]{0,127}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AiGatewayLogSettingsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AiGatewayLogSettingsResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayLogSettingsResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'AiGatewayLogSettingsResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayLogSettingsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AiGatewayLogSettingsResources_CreateOrUpdate_Create": {
+            "$ref": "./examples/AiGatewayLogSettingsResources_CreateOrUpdate_Create.json"
+          },
+          "AiGatewayLogSettingsResources_CreateOrUpdate_Update": {
+            "$ref": "./examples/AiGatewayLogSettingsResources_CreateOrUpdate_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "AiGatewayLogSettingsResources_Delete",
+        "tags": [
+          "AiGatewayLogSettingsResources"
+        ],
+        "description": "Delete the AI Gateway log settings for a firewall. SYNC — returns 200 on success or 204 when nothing is configured.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallName",
+            "in": "path",
+            "description": "Firewall resource name",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![-_])(?!.*[-_]{2})(?!.*[-_]$)[a-zA-Z0-9][a-zA-Z0-9-]{0,127}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AiGatewayLogSettingsResources_Delete": {
+            "$ref": "./examples/AiGatewayLogSettingsResources_Delete.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PaloAltoNetworks.Cloudngfw/firewalls/{firewallName}/customCaptureConfigurations": {
@@ -6357,6 +6571,149 @@
         ]
       }
     },
+    "AiGatewayConfig": {
+      "type": "object",
+      "description": "AI Gateway configuration for an AIRSM firewall.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "AI Gateway name.",
+          "minLength": 2,
+          "maxLength": 64,
+          "pattern": "^(?![-_])(?!.*[-_]{2})(?!.*[-_]$)[a-zA-Z0-9][a-zA-Z0-9-]{1,63}$"
+        },
+        "fqdnPrefix": {
+          "type": "string",
+          "description": "Prefix of the AI Gateway fully qualified domain name.",
+          "minLength": 2,
+          "maxLength": 64,
+          "pattern": "^(?![-_])(?!.*[-_]{2})(?!.*[-_]$)[a-zA-Z0-9][a-zA-Z0-9-]{1,63}$"
+        },
+        "publicIp": {
+          "$ref": "#/definitions/IPAddress",
+          "description": "Public IP address the AI Gateway is exposed on."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port the AI Gateway listens on.",
+          "default": 8787,
+          "minimum": 1,
+          "maximum": 65534
+        }
+      },
+      "required": [
+        "name",
+        "fqdnPrefix",
+        "publicIp",
+        "port"
+      ]
+    },
+    "AiGatewayLogSettingsProperties": {
+      "type": "object",
+      "description": "AI Gateway log settings for an AIRSM firewall.",
+      "properties": {
+        "targetType": {
+          "$ref": "#/definitions/AiGatewayLogTargetType",
+          "description": "Log destination type."
+        },
+        "storageAccount": {
+          "$ref": "#/definitions/AiGatewayLogStorageAccount",
+          "description": "Storage account destination."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Entity tag returned by the partner. Required on update; ignored on create."
+        }
+      },
+      "required": [
+        "targetType",
+        "storageAccount"
+      ]
+    },
+    "AiGatewayLogSettingsResource": {
+      "type": "object",
+      "description": "AI Gateway log settings on an AIRSM firewall (singleton — the name is always 'default'). The firewall must be in AIRSM mode and have a user-assigned managed identity. Sync child resource — PUT/GET/DELETE forward to the partner synchronously.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AiGatewayLogSettingsProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AiGatewayLogSettingsResourceListResult": {
+      "type": "object",
+      "description": "The response of a AiGatewayLogSettingsResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AiGatewayLogSettingsResource items on this page",
+          "items": {
+            "$ref": "#/definitions/AiGatewayLogSettingsResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AiGatewayLogStorageAccount": {
+      "type": "object",
+      "description": "Storage account destination for AI Gateway logs.",
+      "properties": {
+        "armId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Resource ID of the storage account.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          }
+        },
+        "containerName": {
+          "type": "string",
+          "description": "Name of the blob container the logs are written to."
+        }
+      },
+      "required": [
+        "armId",
+        "containerName"
+      ]
+    },
+    "AiGatewayLogTargetType": {
+      "type": "string",
+      "description": "Destination type for AI Gateway logs.",
+      "enum": [
+        "STORAGE_ACCOUNT"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayLogTargetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "StorageAccount",
+            "value": "STORAGE_ACCOUNT",
+            "description": "Logs are written to an Azure Storage account blob container."
+          }
+        ]
+      }
+    },
     "AppSeenData": {
       "type": "object",
       "description": "Data Type for App Seen",
@@ -7269,6 +7626,10 @@
           "description": "The firewall mode this resource provisions, derived by the service from the Marketplace plan.\nThis property is read-only: any caller-supplied value is discarded and replaced with the mode\nderived from the plan. It is absent on firewalls stored before this property was introduced,\nand a reader must treat an absent value as CNGFW.",
           "readOnly": true
         },
+        "aigwConfig": {
+          "$ref": "#/definitions/AiGatewayConfig",
+          "description": "AI Gateway configuration. Required when firewallMode is AIRSM; must be absent for CNGFW firewalls."
+        },
         "associatedRulestack": {
           "$ref": "#/definitions/RulestackDetails",
           "description": "Associated Rulestack"
@@ -7426,6 +7787,10 @@
         "strataCloudManagerConfig": {
           "$ref": "#/definitions/StrataCloudManagerConfig",
           "description": "Strata Cloud Manager Configuration, only applicable if Strata Cloud Manager is selected."
+        },
+        "aigwConfig": {
+          "$ref": "#/definitions/AiGatewayConfig",
+          "description": "AI Gateway configuration. Only applicable to AIRSM firewalls."
         },
         "associatedRulestack": {
           "$ref": "#/definitions/RulestackDetails",

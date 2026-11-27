@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2026-11-27-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "example-rg",
+    "firewallName": "firewall1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/example-rg/providers/PaloAltoNetworks.Cloudngfw/firewalls/firewall1",
+        "name": "firewall1",
+        "type": "PaloAltoNetworks.Cloudngfw/firewalls",
+        "location": "eastus",
+        "properties": {
+          "firewallMode": "AIRSM",
+          "dnsSettings": {},
+          "networkProfile": {
+            "networkType": "VNET",
+            "enableEgressNat": "ENABLED",
+            "publicIps": [
+              {
+                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/example-rg/providers/Microsoft.Network/publicIPAddresses/firewall-ip"
+              }
+            ]
+          },
+          "marketplaceDetails": {
+            "offerId": "example-offer",
+            "publisherId": "example-publisher"
+          },
+          "planData": {
+            "billingCycle": "MONTHLY",
+            "planId": "example-airsm-plan"
+          },
+          "aigwConfig": {
+            "name": "gateway1",
+            "fqdnPrefix": "gateway1",
+            "publicIp": {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/example-rg/providers/Microsoft.Network/publicIPAddresses/gateway-ip"
+            },
+            "port": 8787
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Firewalls_Get",
+  "title": "Firewalls_Get_AiGateway"
+}
