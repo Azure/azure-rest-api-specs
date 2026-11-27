@@ -7,7 +7,7 @@ import {
   SDK_REVIEW_MAX_CHANGED_FILES_PER_PACKAGE,
   SdkName,
   type SpecGenSdkArtifactInfo,
-} from "../../shared/src/sdk-types.ts";
+} from "@azure-tools/specs-shared/sdk-types";
 import {
   EXPECTED_ADO_DEFINITION_ID,
   MAX_SNAPSHOT_FILE_BYTES,
