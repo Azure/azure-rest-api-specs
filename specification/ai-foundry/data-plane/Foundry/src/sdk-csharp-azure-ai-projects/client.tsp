@@ -127,6 +127,62 @@ namespace Azure.AI.Projects;
 @@clientName(Jobs.get, "getTrainingJob", "csharp");
 @@clientName(Jobs.list, "listTrainingJobs", "csharp");
 
+// Generic training-job model names get a TrainingJob prefix, matching Python and JavaScript.
+@@clientName(Azure.AI.Projects.Input, "TrainingJobInput", "csharp");
+@@clientName(Azure.AI.Projects.Output, "TrainingJobOutput", "csharp");
+@@clientName(
+  Azure.AI.Projects.InputDeliveryMode,
+  "TrainingJobInputDeliveryMode",
+  "csharp"
+);
+@@clientName(
+  Azure.AI.Projects.OutputDeliveryMode,
+  "TrainingJobOutputDeliveryMode",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.JobInputType, "TrainingJobInputType", "csharp");
+@@clientName(
+  Azure.AI.Projects.JobOutputType,
+  "TrainingJobOutputType",
+  "csharp"
+);
+@@clientName(
+  Azure.AI.Projects.JobProperties,
+  "TrainingJobProperties",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.JobType, "TrainingJobType", "csharp");
+@@clientName(Azure.AI.Projects.JobPriority, "TrainingJobPriority", "csharp");
+@@clientName(Azure.AI.Projects.JobService, "TrainingJobService", "csharp");
+@@clientName(
+  Azure.AI.Projects.JobResourceConfiguration,
+  "TrainingJobResourceConfiguration",
+  "csharp"
+);
+@@clientName(
+  Azure.AI.Projects.QueueSettings,
+  "TrainingJobQueueSettings",
+  "csharp"
+);
+@@clientName(
+  Azure.AI.Projects.NodeCollection,
+  "TrainingJobNodeCollection",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.AllNodes, "TrainingJobAllNodes", "csharp");
+@@clientName(Azure.AI.Projects.SystemData, "TrainingJobSystemData", "csharp");
+@@clientName(
+  Azure.AI.Projects.ListViewType,
+  "TrainingJobListViewType",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.Artifact, "TrainingJobArtifact", "csharp");
+@@clientName(
+  Azure.AI.Projects.ArtifactContentInformation,
+  "TrainingJobArtifactContentInformation",
+  "csharp"
+);
+
 // Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
 // input parameter that calls either on these two.
 @@access(Connections.get, Access.internal);

@@ -1003,10 +1003,44 @@ namespace Azure.AI.Projects.Beta {
 // The PUT body parameter's SDK names are set on the parameter in ../jobs/routes.tsp.
 @@clientName(Job, "TrainingJob");
 
+// Generic training-job model names get a TrainingJob prefix in the SDKs, so they
+// can't collide with, or be mistaken for, other Foundry features' types.
+@@clientName(Azure.AI.Projects.Input, "TrainingJobInput");
+@@clientName(Azure.AI.Projects.Output, "TrainingJobOutput");
+@@clientName(
+  Azure.AI.Projects.InputDeliveryMode,
+  "TrainingJobInputDeliveryMode"
+);
+@@clientName(
+  Azure.AI.Projects.OutputDeliveryMode,
+  "TrainingJobOutputDeliveryMode"
+);
+@@clientName(Azure.AI.Projects.JobInputType, "TrainingJobInputType");
+@@clientName(Azure.AI.Projects.JobOutputType, "TrainingJobOutputType");
+@@clientName(Azure.AI.Projects.JobProperties, "TrainingJobProperties");
+@@clientName(Azure.AI.Projects.JobType, "TrainingJobType");
+@@clientName(Azure.AI.Projects.JobPriority, "TrainingJobPriority");
+@@clientName(Azure.AI.Projects.JobService, "TrainingJobService");
+@@clientName(
+  Azure.AI.Projects.JobResourceConfiguration,
+  "TrainingJobResourceConfiguration"
+);
+@@clientName(Azure.AI.Projects.QueueSettings, "TrainingJobQueueSettings");
+@@clientName(Azure.AI.Projects.NodeCollection, "TrainingJobNodeCollection");
+@@clientName(Azure.AI.Projects.AllNodes, "TrainingJobAllNodes");
+@@clientName(Azure.AI.Projects.SystemData, "TrainingJobSystemData");
+@@clientName(Azure.AI.Projects.ListViewType, "TrainingJobListViewType");
+@@clientName(Azure.AI.Projects.Artifact, "TrainingJobArtifact");
+@@clientName(
+  Azure.AI.Projects.ArtifactContentInformation,
+  "TrainingJobArtifactContentInformation"
+);
+
 @@clientName(Jobs.get, "get", "python");
 @@clientName(Jobs.list, "list", "python");
 @@clientName(Jobs.createOrUpdate, "create_or_update", "python");
 @@clientName(Jobs.delete, "delete", "python");
+@@clientName(Jobs.delete, "delete", "javascript");
 @@clientName(Jobs.cancel, "cancel", "python");
 
 @@clientName(Jobs.listArtifacts, "list_artifacts", "python");
