@@ -101505,6 +101505,7 @@ components:
         propertyName: type
         mapping:
           hosted_agent: '#/components/schemas/VoiceHostedAgentConversationEngine'
+          external_endpoint: '#/components/schemas/VoiceExternalEndpointConversationEngine'
       description: An engine that owns conversation handling for a voice agent.
     VoiceConversationEngineType:
       anyOf:
@@ -101512,6 +101513,7 @@ components:
         - type: string
           enum:
             - hosted_agent
+            - external_endpoint
       description: The conversation engine types supported by a voice agent.
     VoiceConversationStatus:
       anyOf:
@@ -101527,6 +101529,31 @@ components:
         - `completed`: finalization succeeded after normal or client close, `end_conversation`, a max-duration `1001`
           close, or a client or network disconnect that the service can still finalize.
         - `failed`: a terminal service, bridge, storage, or unrecoverable transport failure prevented finalization.
+    VoiceExternalEndpointConversationEngine:
+      type: object
+      required:
+        - type
+        - project_connection_id
+      properties:
+        type:
+          type: string
+          enum:
+            - external_endpoint
+          description: Selects a customer-hosted external conversation engine.
+        project_connection_id:
+          type: string
+          minLength: 1
+          maxLength: 2048
+          description: |-
+            The Connection name, or its full ARM resource ID in the same project as the voice agent.
+            The service resolves the reference in the authorized project and preserves the supplied reference on readback.
+      unevaluatedProperties:
+        not: {}
+      allOf:
+        - $ref: '#/components/schemas/VoiceConversationEngine'
+      description: |-
+        A customer-hosted conversation engine resolved from an authorized Connection in the voice agent's project.
+        The Connection stores the complete WSS endpoint and its authentication credential; neither is stored in this definition.
     VoiceGeneratedAudioItem:
       type: object
       required:

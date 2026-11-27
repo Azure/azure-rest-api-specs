@@ -590,6 +590,10 @@ union VoiceConversationEngineType {
 
   @doc("Use a hosted Foundry agent to handle the conversation.")
   hosted_agent: "hosted_agent",
+
+  /** Use a customer-hosted conversation engine through a project Connection. */
+  @added(Versions.v1)
+  external_endpoint: "external_endpoint",
 }
 
 @doc("An engine that owns conversation handling for a voice agent.")
@@ -616,6 +620,26 @@ model VoiceHostedAgentConversationEngine extends VoiceConversationEngine {
   @pattern("^(?:[1-9][0-9]{0,18}|draft-[1-9][0-9]{0,18})$")
   @maxLength(25)
   version?: string;
+}
+
+/**
+ * A customer-hosted conversation engine resolved from an authorized Connection in the voice agent's project.
+ * The Connection stores the complete WSS endpoint and its authentication credential; neither is stored in this definition.
+ */
+@added(Versions.v1)
+model VoiceExternalEndpointConversationEngine extends VoiceConversationEngine {
+  ...Record<never>;
+
+  /** Selects a customer-hosted external conversation engine. */
+  type: VoiceConversationEngineType.external_endpoint;
+
+  /**
+   * The Connection name, or its full ARM resource ID in the same project as the voice agent.
+   * The service resolves the reference in the authorized project and preserves the supplied reference on readback.
+   */
+  @minLength(1)
+  @maxLength(2048)
+  project_connection_id: string;
 }
 
 @doc("The tool kinds supported by a voice agent.")
