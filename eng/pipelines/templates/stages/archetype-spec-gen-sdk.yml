@@ -220,6 +220,24 @@ stages:
               version: $(NodeVersion)
             displayName: "Install Node.js"
 
+          - ${{ if and(eq(variables['System.TeamProject'], 'internal'), ne(variables['Build.Reason'], 'PullRequest'), eq(parameters.ConfigType, 'TypeSpec')) }}:
+              - task: AzureCLI@2
+                displayName: Check for conflicting SDK release plans
+                inputs:
+                  azureSubscription: opensource-api-connection
+                  scriptType: bash
+                  scriptLocation: inlineScript
+                  workingDirectory: $(SpecRepoDirectory)
+                  inlineScript: node eng/tools/release-plan/src/release-plan.ts
+                env:
+                  TYPESPEC_CONFIG_PATH: ${{ parameters.ConfigPath }}
+                  SDK_PUSH_REPO: $(SdkRepoOwner)/$(SdkRepoName)
+                  SDK_CHECKOUT_BRANCH: $(CheckoutCommitish)
+                  RELEASE_PLAN_WORK_ITEM_ID: ${{ parameters.ReleasePlanWorkItemId }}
+                  CREATE_SDK_PULL_REQUEST: ${{ iif(parameters.CreatePullRequest, 'true', 'false') }}
+                  ${{ if endsWith(variables['Build.Repository.Name'], '-pr') }}:
+                    GH_TOKEN: $(GH_TOKEN)
+
           - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
             parameters:
               npmrcPath: $(Agent.TempDirectory)/gen-sdk/.npmrc
@@ -460,7 +478,7 @@ stages:
 
                   - task: AzureCLI@2
                     displayName: Link pull request to release plan
-                    condition: not(endsWith(variables['SdkRepoName'], '-pr'))
+                    condition: and(ne(variables['SdkGenerationBlocked'], 'true'), not(endsWith(variables['SdkRepoName'], '-pr')))
                     continueOnError: true
                     inputs:
                       azureSubscription: opensource-api-connection

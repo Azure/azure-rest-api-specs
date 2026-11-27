@@ -51,6 +51,11 @@ For local runs, use Vally's `--model <model>` and `--judge-model <model>` option
 
 ## SDK generation pipeline variables
 
+Internal TypeSpec SDK generation stops if another active plan has an unreleased
+SDK PR for the same project and language. This also applies without a work item
+ID. To update an open SDK PR, pass the plan's work item ID and set `SdkRepoBranch`
+to the PR's source branch. Test plans are checked separately from production plans.
+
 Run `pnpm exec spec-gen-sdk-runner --help` from `eng/tools/spec-gen-sdk-runner`
 for the SDK runner's generated CLI help. Options accept `--option value` and
 `--option=value`; repeated options use the last value. Unknown options, positional

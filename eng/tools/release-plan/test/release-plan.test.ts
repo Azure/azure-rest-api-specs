@@ -1,11 +1,142 @@
-import { describe, expect, it, vi } from "vitest";
+import { execFileSync } from "node:child_process";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import {
+  assertNoConflictingSdkReleasePlan,
   ensureReleasePlan,
   getApiReleaseType,
   getReleasePlanResultById,
   getSdkReleaseType,
 } from "../src/release-plan.ts";
 import type { AzsdkRunner, ReleasePlanDetails } from "../src/types.ts";
+
+vi.mock("node:child_process", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("node:child_process")>()),
+  execFileSync: vi.fn(),
+}));
+
+describe("SDK generation release-plan check", () => {
+  const boardsQuery = vi.mocked(execFileSync);
+  const sdkPushRepo = "azure-sdk/azure-sdk-for-python";
+  const sdkPr = "https://github.com/Azure/azure-sdk-for-python/pull/42";
+  const sdkPrField = "Custom.SDKPullRequestForPython";
+  const prBranch = "sdkauto/contoso-42";
+  const linkedPlan = { id: 101, fields: { [sdkPrField]: sdkPr } };
+  const selectedPlan = { id: 102, fields: {} };
+  const testTags = { "System.Tags": "Release Planner App Test" };
+  const check = (planId = 0, branch = "main", createPr = true) =>
+    assertNoConflictingSdkReleasePlan(
+      "specification/contoso/./Contoso's.Service/tspconfig.yaml",
+      sdkPushRepo,
+      branch,
+      planId,
+      createPr,
+    );
+
+  afterEach(() => {
+    boardsQuery.mockReset();
+    vi.restoreAllMocks();
+  });
+
+  it.each([0, 102])("blocks a conflict with work item ID %s", async (planId) => {
+    boardsQuery.mockReturnValueOnce(JSON.stringify([linkedPlan, selectedPlan]));
+    await expect(check(planId)).rejects.toThrow("work item 101");
+  });
+
+  it("looks up the requested project and SDK language", async () => {
+    boardsQuery.mockReturnValueOnce("");
+    await check();
+
+    const [command, args] = boardsQuery.mock.calls[0];
+    expect(command).toBe("az");
+    const query = args?.[(args?.indexOf("--wiql") ?? -1) + 1];
+    expect(query).toContain(`[${sdkPrField}]`);
+    expect(query).toContain(
+      "[Custom.ApiSpecProjectPath] = 'specification/contoso/Contoso''s.Service'",
+    );
+    expect(query).toContain("[System.State] NOT IN ('Closed','Duplicate','Abandoned','Finished')");
+  });
+
+  it("allows already released SDKs and pull requests for other languages", async () => {
+    boardsQuery.mockReturnValueOnce(
+      JSON.stringify([
+        {
+          ...linkedPlan,
+          fields: { ...linkedPlan.fields, "Custom.ReleaseStatusForPython": "Released" },
+        },
+        { id: 102, fields: { "Custom.SDKPullRequestForJava": sdkPr } },
+      ]),
+    );
+    await expect(check()).resolves.toBeUndefined();
+  });
+
+  it.each([
+    { planId: 0, tags: [testTags, {}], conflict: false },
+    { planId: 102, tags: [{}, testTags], conflict: false },
+    { planId: 102, tags: [testTags, testTags], conflict: true },
+  ])(
+    "compares only plans of the same kind for ID $planId (conflict: $conflict)",
+    async ({ planId, tags, conflict }) => {
+      boardsQuery.mockReturnValueOnce(
+        JSON.stringify([
+          { ...linkedPlan, fields: { ...linkedPlan.fields, ...tags[0] } },
+          { ...selectedPlan, fields: tags[1] },
+        ]),
+      );
+      if (conflict) {
+        await expect(check(planId)).rejects.toThrow("work item 101");
+      } else {
+        await expect(check(planId)).resolves.toBeUndefined();
+      }
+    },
+  );
+
+  it.each([
+    { branch: prBranch, state: "open", hasConflict: true, error: "" },
+    { branch: "main", state: "open", hasConflict: false, error: "Set SdkRepoBranch" },
+    { branch: "main", state: "open", hasConflict: true, error: "Set SdkRepoBranch" },
+    { branch: prBranch, state: "closed", hasConflict: true, error: "work item 102" },
+    { branch: "main", state: "closed", hasConflict: false, error: "" },
+    {
+      branch: prBranch,
+      state: "open",
+      hasConflict: true,
+      headRepo: "another-fork/azure-sdk-for-python",
+      error: "cannot be updated",
+    },
+  ])(
+    "checks the linked PR for reruns: $branch, $state, conflict $hasConflict, expected error '$error'",
+    async ({ branch, state, hasConflict, headRepo = sdkPushRepo, error }) => {
+      const otherPlan = { ...selectedPlan, fields: linkedPlan.fields };
+      boardsQuery.mockReturnValueOnce(
+        JSON.stringify(hasConflict ? [linkedPlan, otherPlan] : [linkedPlan]),
+      );
+      vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
+        Response.json({
+          state,
+          base: { ref: "main" },
+          head: { ref: prBranch, repo: { full_name: headRepo } },
+        }),
+      );
+      if (error) {
+        await expect(check(101, branch)).rejects.toThrow(error);
+      } else {
+        await expect(check(101, branch)).resolves.toBeUndefined();
+      }
+    },
+  );
+
+  it("fails when Azure Boards cannot read release plans", async () => {
+    boardsQuery.mockImplementationOnce(() => {
+      throw new Error("Boards lookup failed");
+    });
+    await expect(check()).rejects.toThrow("Boards lookup failed");
+  });
+
+  it("rejects a work item that was not returned for the project", async () => {
+    boardsQuery.mockReturnValueOnce("null");
+    await expect(check(102)).rejects.toThrow("Could not find release plan work item 102");
+  });
+});
 
 describe("release type helpers", () => {
   it("sets Private Preview for private specs repo", () => {
