@@ -910,4 +910,20 @@ union PiiCategoriesExclude {
   /** Geopolitical Entity */
   @added(Versions.v2026_05_01)
   GPE: "GPE",
+
+  /** Nationality associated with a person. */
+  @added(Versions.v2026_11_15_preview)
+  Nationality: "Nationality",
+
+  /** Ethnicity associated with a person. */
+  @added(Versions.v2026_11_15_preview)
+  Ethnicity: "Ethnicity",
+
+  /** Race associated with a person. */
+  @added(Versions.v2026_11_15_preview)
+  Race: "Race",
+
+  /** Religion associated with a person. */
+  @added(Versions.v2026_11_15_preview)
+  Religion: "Religion",
 }

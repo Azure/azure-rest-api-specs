@@ -162,6 +162,11 @@ namespace Language.ConversationsClientCustomizations;
   "UsSocialSecurityNumber",
   "!autorest"
 );
+@@clientName(
+  ConversationPiiCategoriesExclude.USIndividualTaxpayerIdentification,
+  "UsIndividualTaxpayerIdentification",
+  "!autorest"
+);
 @@clientName(ErrorCode, "ConversationErrorCode", "!autorest");
 
 @@clientName(BaseResolution, "ResolutionBase", "!autorest");
