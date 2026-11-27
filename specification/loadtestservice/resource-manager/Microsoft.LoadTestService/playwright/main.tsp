@@ -45,7 +45,11 @@ enum Versions {
   v2026_11_01_preview: "2026-11-01-preview",
 
   @doc("Preview version 2026-11-10-preview adds support for Web Bot Authentication and Browser Profiles in Playwright workspaces.")
-  @Azure.Core.previewVersion
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2026_11_10_preview: "2026-11-10-preview",
+
+  @doc("Preview version 2026-12-01-preview adds support for updating Playwright workspace subnets.")
+  @Azure.Core.previewVersion
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2026_12_01_preview: "2026-12-01-preview",
 }

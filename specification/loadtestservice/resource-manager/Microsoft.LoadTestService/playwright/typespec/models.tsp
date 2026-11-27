@@ -50,8 +50,19 @@ model PlaywrightWorkspaceProperties {
   storageUri?: url;
 
   @added(Versions.v2026_08_01_preview)
+  @removed(Versions.v2026_12_01_preview)
+  @renamedFrom(Versions.v2026_12_01_preview, "subnetId")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @doc("The Azure Resource Manager resource ID of the subnet used for private network connectivity. Before creating the workspace, ensure the subnet meets the virtual network prerequisites at https://aka.ms/pww/docs/vnet. Format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Network/virtualNetworks/{virtualNetwork}/subnets/{subnet}. This value cannot be changed after workspace creation.")
+  oldSubnetId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
+    }
+  ]>;
+
+  @added(Versions.v2026_12_01_preview)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @doc("The Azure Resource Manager resource ID of the subnet used for private network connectivity. Before creating the workspace, ensure the subnet meets the virtual network prerequisites at https://aka.ms/pww/docs/vnet. Regional affinity must be disabled when a subnet is configured. Format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Network/virtualNetworks/{virtualNetwork}/subnets/{subnet}. To change or remove the subnet after workspace creation, use the PATCH operation.")
   subnetId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Network/virtualNetworks/subnets";
@@ -134,7 +145,13 @@ model WebBotAuthSettingsUpdate {
 @added(Versions.v2026_11_10_preview)
 @doc("The workspace properties that can be updated.")
 model PlaywrightWorkspacePatchProperties {
-  ...OmitProperties<PlaywrightWorkspaceProperties, "webBotAuth">;
+  ...OmitProperties<PlaywrightWorkspaceProperties, "webBotAuth" | "subnetId">;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "PATCH uses null to disconnect the workspace from its subnet; omission preserves the existing subnet."
+  @added(Versions.v2026_12_01_preview)
+  @visibility(Lifecycle.Update)
+  @doc("The Azure Resource Manager resource ID of the subnet used for private network connectivity. Set to null to disconnect the workspace from its subnet. If omitted, the existing subnet configuration is preserved. Before configuring a subnet, ensure it meets the virtual network prerequisites at https://aka.ms/pww/docs/vnet. Regional affinity must be disabled when a subnet is configured.")
+  subnetId?: PlaywrightWorkspaceProperties.subnetId | null;
 
   @doc("The Web Bot Authentication settings for the workspace.")
   webBotAuth?: WebBotAuthSettingsUpdate;
