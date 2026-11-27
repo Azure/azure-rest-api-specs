@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2026-08-01",
+    "billingAccountId": "12345",
+    "filter": "properties/usageDate ge 2026-10-14 and properties/usageDate le 2026-10-18",
+    "grain": "FullTerm"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "66cccc66-6ccc-6c66-666c-66cc6c6c66c6_222d22dd-d2d2-2dd2-222d-2dd2222ddddd_20261015",
+            "type": "Microsoft.CostManagement/benefitUtilizationSummaries",
+            "id": "/providers/Microsoft.Billing/billingAccounts/12345/providers/Microsoft.CostManagement/benefitUtilizationSummaries/66cccc66-6ccc-6c66-666c-66cc6c6c66c6_222d22dd-d2d2-2dd2-222d-2dd2222ddddd_20261015",
+            "kind": "FlexSpendPlan",
+            "properties": {
+              "armSkuName": "Synapse_FCP",
+              "benefitId": "/providers/Microsoft.BillingBenefits/spendPlans/66cccc66-6ccc-6c66-666c-66cc6c6c66c6/terms/222d22dd-d2d2-2dd2-222d-2dd2222ddddd",
+              "benefitOrderId": "/providers/Microsoft.BillingBenefits/spendPlans/66cccc66-6ccc-6c66-666c-66cc6c6c66c6",
+              "benefitType": "FlexSpendPlan",
+              "usageDate": "2026-10-15T00:00:00Z",
+              "utilizedPercentage": 66.66,
+              "usedQuantity": 100
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "BenefitUtilizationSummaries_ListByBillingAccountId",
+  "title": "FlexSpendPlanUtilizationSummaries-BillingAccount"
+}
