@@ -137,63 +137,7 @@ export const SpecGenSdkArtifactInfoSchema = z.object({
 });
 export type SpecGenSdkArtifactInfo = import("zod").infer<typeof SpecGenSdkArtifactInfoSchema>;
 
-export type SdkLabelInfo = {
-  breakingChange: string | undefined;
-  breakingChangeApproved: string | undefined;
-  breakingChangeSuppression: string | undefined;
-  breakingChangeSuppressionApproved: string | undefined;
-  buildFailed: string | undefined;
-};
-
-export type SdkLabels = Record<SdkName, SdkLabelInfo>;
-
-/**
- * SDK labels mapping for breaking change and build-failure labels
- */
-export const sdkLabels = {
-  "azure-sdk-for-go": {
-    breakingChange: "BreakingChange-Go-Sdk",
-    breakingChangeApproved: "BreakingChange-Go-Sdk-Approved",
-    breakingChangeSuppression: "BreakingChange-Go-Sdk-Suppression",
-    breakingChangeSuppressionApproved: "BreakingChange-Go-Sdk-Suppression-Approved",
-    buildFailed: undefined,
-  },
-  "azure-sdk-for-java": {
-    breakingChange: undefined,
-    breakingChangeApproved: undefined,
-    breakingChangeSuppression: undefined,
-    breakingChangeSuppressionApproved: undefined,
-    buildFailed: undefined,
-  },
-  "azure-sdk-for-js": {
-    breakingChange: "BreakingChange-JavaScript-Sdk",
-    breakingChangeApproved: "BreakingChange-JavaScript-Sdk-Approved",
-    breakingChangeSuppression: "BreakingChange-JavaScript-Sdk-Suppression",
-    breakingChangeSuppressionApproved: "BreakingChange-JavaScript-Sdk-Suppression-Approved",
-    buildFailed: undefined,
-  },
-  "azure-sdk-for-net": {
-    breakingChange: undefined,
-    breakingChangeApproved: undefined,
-    breakingChangeSuppression: undefined,
-    breakingChangeSuppressionApproved: undefined,
-    buildFailed: "auto-sdk-build-fix",
-  },
-  "azure-sdk-for-python": {
-    breakingChange: "BreakingChange-Python-Sdk",
-    breakingChangeApproved: "BreakingChange-Python-Sdk-Approved",
-    breakingChangeSuppression: "BreakingChange-Python-Sdk-Suppression",
-    breakingChangeSuppressionApproved: "BreakingChange-Python-Sdk-Suppression-Approved",
-    buildFailed: undefined,
-  },
-  "azure-sdk-for-rust": {
-    breakingChange: undefined,
-    breakingChangeApproved: undefined,
-    breakingChangeSuppression: undefined,
-    breakingChangeSuppressionApproved: undefined,
-    buildFailed: undefined,
-  },
-} satisfies SdkLabels;
+export { sdkLabels, type SdkLabelInfo, type SdkLabels } from "./labels.ts";
 
 export function getSdkLanguage(repo: SdkName): string {
   const language = Object.entries(SdkName).find(([, repository]) => repository === repo)?.[0];

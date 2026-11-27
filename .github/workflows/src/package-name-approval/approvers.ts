@@ -1,3 +1,4 @@
+import { PackageNameLabel } from "@azure-tools/specs-shared/labels";
 import { loadPackageNamePolicy, UNPROTECTED_PLANE, type PackageNamePolicy } from "./policy.ts";
 
 export type ApproversConfig = {
@@ -45,7 +46,7 @@ export function createApproversConfig(config: PackageNamePolicy): ApproversConfi
   for (const [label, entry] of Object.entries(config.labels)) {
     // Match package-name-<lang>-approved or package-name-approved-all
     let lang;
-    if (label === "package-name-approved-all") {
+    if (label === PackageNameLabel.ApprovedAll) {
       lang = "all";
     } else {
       const match = label.match(/^package-name-(\w+)-approved$/);

@@ -1,3 +1,4 @@
+import { PackageNameLabel } from "@azure-tools/specs-shared/labels";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { parse } from "yaml";
@@ -36,7 +37,7 @@ const isNonEmptyStringArray = (value: unknown): value is string[] =>
   Array.isArray(value) && value.every((item) => typeof item === "string" && item.length > 0);
 
 const isPackageNameApprovalLabel = (label: string): boolean =>
-  label === "package-name-approved-all" || /^package-name-\w+-approved$/.test(label);
+  label === PackageNameLabel.ApprovedAll || /^package-name-\w+-approved$/.test(label);
 
 const usesTeamPolicy = (value: unknown): boolean =>
   isRecord(value) &&

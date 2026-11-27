@@ -1,5 +1,5 @@
 import type { GitHubScriptArgs } from "../../packages/github-core/src/github.ts";
-import { REVIEW_REQUIRED_LABELS } from "../../shared/src/breaking-change.ts";
+import { REVIEW_REQUIRED_LABELS } from "../../shared/src/labels.ts";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { byDate, invert } from "../../shared/src/sort.ts";
 import { extractInputs } from "../../packages/github-core/src/context.ts";

@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { CommitStatusState } from "../../../shared/src/github.ts";
-import { ArmAutoSignoffLabel } from "../../src/arm-auto-signoff/arm-auto-signoff-labels.ts";
+import { ArmAutoSignoffLabel } from "@azure-tools/specs-shared/labels";
 import {
   getLabelActionImpl,
   type ManagedLabelActions,

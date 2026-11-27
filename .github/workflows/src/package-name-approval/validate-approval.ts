@@ -1,3 +1,4 @@
+import { PackageNameLabel, SpecPlaneLabel } from "@azure-tools/specs-shared/labels";
 import { extractInputs } from "@azure-tools/github-core/context";
 import type {
   Context,
@@ -54,7 +55,7 @@ async function handleUnlabeled({
 }: ValidateContext) {
   const isNamespacePending =
     targetLabel.startsWith("package-name-") && targetLabel.endsWith("-pending");
-  if (!isNamespacePending && targetLabel !== "package-name-review-required") {
+  if (!isNamespacePending && targetLabel !== PackageNameLabel.ReviewRequired) {
     core.info(`${targetLabel} is not a namespace label, skipping`);
     return;
   }
@@ -105,7 +106,7 @@ async function handleLabeled({
 }: ValidateContext & { labels: string[]; packageNamePolicy: PackageNamePolicy }) {
   let langsToApprove: string[];
 
-  if (targetLabel === "package-name-approved-all") {
+  if (targetLabel === PackageNameLabel.ApprovedAll) {
     // package-name-approved-all is a shortcut for management-plane only.
     // On mgmt PRs, a single label approves all pending languages at once.
     // Authorization is enforced synchronously below.
@@ -121,7 +122,7 @@ async function handleLabeled({
         owner,
         repo,
         issue_number: prNumber,
-        body: `⚠️ \`package-name-approved-all\` is only available on management-plane PRs. Use per-language \`package-name-<lang>-approved\` labels instead.\n\nLabel removed.`,
+        body: `⚠️ \`${PackageNameLabel.ApprovedAll}\` is only available on management-plane PRs. Use per-language \`package-name-<lang>-approved\` labels instead.\n\nLabel removed.`,
       });
       return;
     }
@@ -180,7 +181,7 @@ async function handleLabeled({
 
   for (const lang of langsToApprove) {
     // Add approved label before removing pending to avoid status check timing gap (#4)
-    if (targetLabel === "package-name-approved-all") {
+    if (targetLabel === PackageNameLabel.ApprovedAll) {
       const approvedLabel = `package-name-${lang}-approved`;
       await github.rest.issues.addLabels({
         owner,
@@ -259,12 +260,12 @@ async function handleLabeled({
 
   if (pendingLabels.length === 0) {
     core.info("All namespaces approved!");
-    await removeLabelIfPresent(github, owner, repo, prNumber, "package-name-review-required");
+    await removeLabelIfPresent(github, owner, repo, prNumber, PackageNameLabel.ReviewRequired);
     await github.rest.issues.addLabels({
       owner,
       repo,
       issue_number: prNumber,
-      labels: ["package-name-approved"],
+      labels: [PackageNameLabel.Approved],
     });
 
     // Only post the approval comment if one doesn't already exist (avoids duplicates
@@ -304,7 +305,7 @@ export default async function validateApproval({ github, context, core }: GitHub
   }
   const actor = payload.sender.login;
   // Plane from resource-manager (self-healing), not the add-only "Mgmt" label (#46785).
-  const isMgmt = labels.includes("resource-manager");
+  const isMgmt = labels.includes(SpecPlaneLabel.ResourceManager);
 
   if (payload.action === "unlabeled") {
     return await handleUnlabeled({
@@ -321,7 +322,7 @@ export default async function validateApproval({ github, context, core }: GitHub
     });
   }
 
-  if (!labels.includes("package-name-review-required")) {
+  if (!labels.includes(PackageNameLabel.ReviewRequired)) {
     core.info("No namespace review, skipping");
     return;
   }
@@ -331,7 +332,7 @@ export default async function validateApproval({ github, context, core }: GitHub
   // to data-plane, otherwise a data-plane approver could consume approvals on a PR that is
   // actually management (before resource-manager lands, only the add-only "Mgmt" may exist).
   // Mirrors check-label's tri-state skip (#46785).
-  if (!isMgmt && !labels.includes("data-plane")) {
+  if (!isMgmt && !labels.includes(SpecPlaneLabel.DataPlane)) {
     core.info("Plane not yet reconciled (no resource-manager/data-plane label), skipping");
     return;
   }

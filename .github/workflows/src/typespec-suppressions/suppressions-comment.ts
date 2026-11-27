@@ -14,10 +14,10 @@ import type { Core, GitHub, WorkflowRuns } from "@azure-tools/github-core/github
   required "TypeSpec Suppressions" commit status instead.
 */
 
+import { TypeSpecSuppressionLabel } from "@azure-tools/specs-shared/labels";
 import { execFile } from "../../../shared/src/exec.ts";
 import { PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
-import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
 
 import { createHash } from "node:crypto";
 import fs from "node:fs/promises";
@@ -354,7 +354,7 @@ export function renderSuppressionsCommentBody(
     "",
     `**Status:** ${summaryParts.join(" — ")}`,
     "",
-    `This PR adds or updates the TypeSpec suppressions listed below. <strong>Suppressions are strongly discouraged</strong> — they bypass linter rules that protect API quality and consistency. Authors should avoid adding new suppressions and prefer fixing the underlying issue; reviewers should approve only when there is a clear, compelling justification and no reasonable alternative. Review each linked rule and source location, then apply <code>${TYPESPEC_SUPPRESSIONS_APPROVED_LABEL}</code> only if every justification is acceptable. The <strong>Status</strong> column shows ✅ once the label is applied and ❌ while approval is pending.`,
+    `This PR adds or updates the TypeSpec suppressions listed below. <strong>Suppressions are strongly discouraged</strong> — they bypass linter rules that protect API quality and consistency. Authors should avoid adding new suppressions and prefer fixing the underlying issue; reviewers should approve only when there is a clear, compelling justification and no reasonable alternative. Review each linked rule and source location, then apply <code>${TypeSpecSuppressionLabel.Approved}</code> only if every justification is acceptable. The <strong>Status</strong> column shows ✅ once the label is applied and ❌ while approval is pending.`,
     "",
   ];
 
@@ -458,7 +458,7 @@ export async function buildSuppressionsComment(
     owner,
     repo,
     pullNumber,
-    isApproved: labelNames.includes(TYPESPEC_SUPPRESSIONS_APPROVED_LABEL),
+    isApproved: labelNames.includes(TypeSpecSuppressionLabel.Approved),
     runUrl,
   });
 

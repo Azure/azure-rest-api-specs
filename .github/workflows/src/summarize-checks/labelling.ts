@@ -1,5 +1,26 @@
 import type { Core } from "@azure-tools/github-core/github";
-import { sdkLabels } from "@azure-tools/specs-shared/sdk-types";
+import {
+  breakingChangesCheckType,
+  type BreakingChangesCheckConfig,
+  type BreakingChangesCheckType,
+  type ReviewApprovalPrefixLabel,
+  type ReviewRequiredLabel,
+  type SpecsBreakingChangesLabel,
+  type ValidBreakingChangeApproval,
+  type ValidVersioningApproval,
+} from "@azure-tools/specs-shared/breaking-change";
+import {
+  ArmModelingLabel,
+  ArmReviewLabel,
+  DataPlaneReviewLabel,
+  PackageNameLabel,
+  REVIEW_REQUIRED_LABELS,
+  sdkLabels,
+  SpecPlaneLabel,
+  SpecPrLabel,
+  SwaggerSuppressionLabel,
+  TypeSpecSuppressionLabel,
+} from "@azure-tools/specs-shared/labels";
 /*
     This file covers two areas of enforcement:
     1. It calculates what set of label rules has been violated by the current PR, for the purposes of updating next steps to merge.
@@ -19,10 +40,6 @@ import {
 import { includesEvery, includesNone } from "../../../shared/src/array.ts";
 import { link, paragraph, renderMarkdownDoc, unorderedList } from "../../../shared/src/markdown.ts";
 import { labelBadge } from "./label-badge.ts";
-import {
-  TYPESPEC_SUPPRESSIONS_APPROVED_LABEL,
-  TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL,
-} from "../label.ts";
 import { brchTsg, diagramTsg, notReadyForArmReviewReason, wrapInArmReviewMessage } from "./tsgs.ts";
 
 // #region typedefs
@@ -136,52 +153,15 @@ export type RequiredLabelRule = {
   troubleshootingGuide: string;
 };
 
-/**
- * This file is the single source of truth for types used by the OpenAPI specification breaking change checks
- * in the Azure/azure-rest-api-specs and Azure/azure-rest-api-specs-pr repositories.
- *
- * For additional context, see:
- *
- * - "Deep-dive into breaking changes on spec PRs"
- *   https://aka.ms/azsdk/pr-brch-deep
- *
- * - "[Breaking Change][PR Workflow] Use more granular labels for Breaking Changes approvals"
- *   https://github.com/Azure/azure-sdk-tools/issues/6374
- */
-
-export type SpecsBreakingChangesLabel =
-  | ReviewRequiredLabel
-  | ReviewApprovalPrefixLabel
-  | ValidBreakingChangeApproval
-  | ValidVersioningApproval;
-
-export type ValidBreakingChangeApproval =
-  | "BreakingChange-Approved-Benign"
-  | "BreakingChange-Approved-BugFix"
-  | "BreakingChange-Approved-UserImpact"
-  | "BreakingChange-Approved-BranchPolicyException"
-  | "BreakingChange-Approved-Previously"
-  | "BreakingChange-Approved-Security";
-
-export type ValidVersioningApproval =
-  | "Versioning-Approved-Benign"
-  | "Versioning-Approved-BugFix"
-  | "Versioning-Approved-PrivatePreview"
-  | "Versioning-Approved-BranchPolicyException"
-  | "Versioning-Approved-Previously"
-  | "Versioning-Approved-Retired";
-
-export type ReviewApprovalPrefixLabel = "Versioning-Approved-*" | "BreakingChange-Approved-*";
-
-export type ReviewRequiredLabel = "VersioningReviewRequired" | "BreakingChangeReviewRequired";
-
-export type BreakingChangesCheckType = "SameVersion" | "CrossVersion";
-
-export type BreakingChangesCheckConfig = {
-  reviewRequiredLabel: ReviewRequiredLabel;
-  approvalPrefixLabel: ReviewApprovalPrefixLabel;
-  approvalLabels: (ValidVersioningApproval | ValidBreakingChangeApproval)[];
-  deprecatedReviewRequiredLabel?: string;
+export {
+  breakingChangesCheckType,
+  type BreakingChangesCheckConfig,
+  type BreakingChangesCheckType,
+  type ReviewApprovalPrefixLabel,
+  type ReviewRequiredLabel,
+  type SpecsBreakingChangesLabel,
+  type ValidBreakingChangeApproval,
+  type ValidVersioningApproval,
 };
 
 export type FileTypes = "SwaggerFile" | "TypeSpecFile" | "ExampleFile" | "ReadmeFile";
@@ -308,71 +288,41 @@ export class Label {
 }
 
 // #endregion typedefs
-// #region constants
-// todo: pull values from eng/tools/openapi-diff-runner/src/types/breaking-change.ts
-export const breakingChangesCheckType: Record<
-  BreakingChangesCheckType,
-  BreakingChangesCheckConfig
-> = {
-  SameVersion: {
-    reviewRequiredLabel: "VersioningReviewRequired",
-    approvalPrefixLabel: "Versioning-Approved-*",
-    approvalLabels: [
-      "Versioning-Approved-Benign",
-      "Versioning-Approved-BugFix",
-      "Versioning-Approved-PrivatePreview",
-      "Versioning-Approved-BranchPolicyException",
-      "Versioning-Approved-Previously",
-      "Versioning-Approved-Retired",
-    ],
-  },
-  CrossVersion: {
-    reviewRequiredLabel: "BreakingChangeReviewRequired",
-    approvalPrefixLabel: "BreakingChange-Approved-*",
-    approvalLabels: [
-      "BreakingChange-Approved-Benign",
-      "BreakingChange-Approved-BugFix",
-      "BreakingChange-Approved-UserImpact",
-      "BreakingChange-Approved-BranchPolicyException",
-      "BreakingChange-Approved-Previously",
-      "BreakingChange-Approved-Security",
-    ],
-  },
-};
-
-// #endregion constants
 // #region Required Labels
 
 export function processArmReviewLabels(context: LabelContext, existingLabels: string[]): void {
   // only kick this off if the ARMReview label is present and NotReadyForARMReview is not present
-  if (existingLabels.includes("ARMReview") && !existingLabels.includes("NotReadyForARMReview")) {
+  if (
+    existingLabels.includes(ArmReviewLabel.ArmReview) &&
+    !existingLabels.includes(ArmReviewLabel.NotReadyForArmReview)
+  ) {
     // the important part about how this will work depends how the users use it
     // EG: if they add the "ARMSignedOff" label, we will remove the "ARMChangesRequested" and "WaitForARMFeedback" labels.
     // if they add the "ARMChangesRequested" label, we will remove the "WaitForARMFeedback" label.
     // if they remove the "ARMChangesRequested" label, we will add the "WaitForARMFeedback" label.
     // so if the user or ARM team actually unlabels `ARMChangesRequested`, then we're actually ok
     // if we are signed off, we should remove the "ARMChangesRequested" and "WaitForARMFeedback" labels
-    if (includesEvery(existingLabels, ["ARMSignedOff"])) {
-      if (existingLabels.includes("ARMChangesRequested")) {
-        context.toRemove.add("ARMChangesRequested");
+    if (includesEvery(existingLabels, [ArmReviewLabel.ArmSignedOff])) {
+      if (existingLabels.includes(ArmReviewLabel.ArmChangesRequested)) {
+        context.toRemove.add(ArmReviewLabel.ArmChangesRequested);
       }
-      if (existingLabels.includes("WaitForARMFeedback")) {
-        context.toRemove.add("WaitForARMFeedback");
+      if (existingLabels.includes(ArmReviewLabel.WaitForArmFeedback)) {
+        context.toRemove.add(ArmReviewLabel.WaitForArmFeedback);
       }
     }
     // if there are ARM changes requested, we should remove the "WaitForARMFeedback" label as the presence indicates that ARM has reviewed
     else if (
-      includesEvery(existingLabels, ["ARMChangesRequested"]) &&
-      includesNone(existingLabels, ["ARMSignedOff"])
+      includesEvery(existingLabels, [ArmReviewLabel.ArmChangesRequested]) &&
+      includesNone(existingLabels, [ArmReviewLabel.ArmSignedOff])
     ) {
-      if (existingLabels.includes("WaitForARMFeedback")) {
-        context.toRemove.add("WaitForARMFeedback");
+      if (existingLabels.includes(ArmReviewLabel.WaitForArmFeedback)) {
+        context.toRemove.add(ArmReviewLabel.WaitForArmFeedback);
       }
     }
     // finally, if ARMChangesRequested are not present, and we've gotten here by lac;k of signoff, we should add the "WaitForARMFeedback" label
-    else if (includesNone(existingLabels, ["ARMChangesRequested"])) {
-      if (!existingLabels.includes("WaitForARMFeedback")) {
-        context.toAdd.add("WaitForARMFeedback");
+    else if (includesNone(existingLabels, [ArmReviewLabel.ArmChangesRequested])) {
+      if (!existingLabels.includes(ArmReviewLabel.WaitForArmFeedback)) {
+        context.toAdd.add(ArmReviewLabel.WaitForArmFeedback);
       }
     }
   }
@@ -390,16 +340,16 @@ export function processImpactAssessment(
     (context.targetBranch === "main" || context.targetBranch === "ARMCoreRPDev") &&
     managementServices.some((service) => service.resourceProvider.newNamespaces.length > 0);
 
-  const armReviewLabel = new Label("ARMReview", labelContext.present);
+  const armReviewLabel = new Label(ArmReviewLabel.ArmReview, labelContext.present);
   armReviewLabel.shouldBePresent = reviews.arm;
-  const newApiVersionLabel = new Label("new-api-version", labelContext.present);
+  const newApiVersionLabel = new Label(SpecPrLabel.NewApiVersion, labelContext.present);
   newApiVersionLabel.shouldBePresent =
     specReviewApplies(context) && services.some((service) => service.newApiVersions.length > 0);
 
-  const resourceManagerLabel = new Label("resource-manager", labelContext.present);
+  const resourceManagerLabel = new Label(SpecPlaneLabel.ResourceManager, labelContext.present);
   resourceManagerLabel.shouldBePresent = managementServices.length > 0;
 
-  const dataplaneLabel = new Label("data-plane", labelContext.present);
+  const dataplaneLabel = new Label(SpecPlaneLabel.DataPlane, labelContext.present);
   dataplaneLabel.shouldBePresent = services.some((service) => service.plane === "data-plane");
 
   // Auto-applied intake signal for qualifying data-plane API-definition changes in any version.
@@ -408,7 +358,7 @@ export function processImpactAssessment(
   // azure-sdk-automation GitHub App (it requests the reviewer team with its own identity,
   // which the default Actions token cannot do). See rulesPri0dataPlane below.
   const dataPlaneReviewRequestedLabel = new Label(
-    "data-plane-review-requested",
+    DataPlaneReviewLabel.Requested,
     labelContext.present,
   );
   // Add-only: default to current presence so reconciliation never removes it. A qualifying
@@ -417,25 +367,25 @@ export function processImpactAssessment(
   dataPlaneReviewRequestedLabel.shouldBePresent = dataPlaneReviewRequestedLabel.present ?? false;
   if (reviews.dataPlane) dataPlaneReviewRequestedLabel.shouldBePresent = true;
 
-  const typeSpecLabel = new Label("TypeSpec", labelContext.present);
+  const typeSpecLabel = new Label(SpecPrLabel.TypeSpec, labelContext.present);
   typeSpecLabel.shouldBePresent = services.some((service) => service.typeSpec);
 
   const suppressionReviewRequiredLabel = new Label(
-    "SuppressionReviewRequired",
+    SwaggerSuppressionLabel.ReviewRequired,
     labelContext.present,
   );
   suppressionReviewRequiredLabel.shouldBePresent = reviews.suppressions;
 
-  const rpassReviewRequiredLabel = new Label("RPaaS", labelContext.present);
+  const rpassReviewRequiredLabel = new Label(SpecPrLabel.Rpaas, labelContext.present);
   rpassReviewRequiredLabel.shouldBePresent = services.some(
     (service) => service.resourceProvider.usesRpaas,
   );
 
-  const newRPNamespaceLabel = new Label("new-rp-namespace", labelContext.present);
+  const newRPNamespaceLabel = new Label(SpecPrLabel.NewRpNamespace, labelContext.present);
   newRPNamespaceLabel.shouldBePresent = newResourceProvider;
 
   const ciNewRPNamespaceWithoutRpaaSLabel = new Label(
-    "CI-NewRPNamespaceWithoutRPaaS",
+    SpecPrLabel.CiNewRpNamespaceWithoutRpaas,
     labelContext.present,
   );
   ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent =
@@ -445,10 +395,10 @@ export function processImpactAssessment(
         service.resourceProvider.newNamespaces.length > 0 && !service.resourceProvider.usesRpaas,
     );
 
-  const rpaasExceptionLabelPresent = labelContext.present.has("RPaaSException");
+  const rpaasExceptionLabelPresent = labelContext.present.has(SpecPrLabel.RpaasException);
 
   const ciRpaasRPNotInPrivateRepoLabel = new Label(
-    "CI-RpaaSRPNotInPrivateRepo",
+    SpecPrLabel.CiRpaasRpNotInPrivateRepo,
     labelContext.present,
   );
   ciRpaasRPNotInPrivateRepoLabel.shouldBePresent =
@@ -536,13 +486,22 @@ function processARMReviewWorkflowLabels(
 ) {
   console.log("ENTER definition processARMReviewWorkflowLabels");
 
-  const notReadyForArmReviewLabel = new Label("NotReadyForARMReview", labelContext.present);
+  const notReadyForArmReviewLabel = new Label(
+    ArmReviewLabel.NotReadyForArmReview,
+    labelContext.present,
+  );
 
-  const waitForArmFeedbackLabel = new Label("WaitForARMFeedback", labelContext.present);
+  const waitForArmFeedbackLabel = new Label(
+    ArmReviewLabel.WaitForArmFeedback,
+    labelContext.present,
+  );
 
-  const armChangesRequestedLabel = new Label("ARMChangesRequested", labelContext.present);
+  const armChangesRequestedLabel = new Label(
+    ArmReviewLabel.ArmChangesRequested,
+    labelContext.present,
+  );
 
-  const armSignedOffLabel = new Label("ARMSignedOff", labelContext.present);
+  const armSignedOffLabel = new Label(ArmReviewLabel.ArmSignedOff, labelContext.present);
 
   const blockedOnVersioningPolicy = getBlockedOnVersioningPolicy(labelContext);
 
@@ -553,10 +512,10 @@ function processARMReviewWorkflowLabels(
   );
 
   // Block if ARMModelingReviewRequired is present (new RP namespace or new resource type detected)
-  const armModelingReviewLabel = new Label("ARMModelingReviewRequired", labelContext.present);
+  const armModelingReviewLabel = new Label(ArmModelingLabel.ReviewRequired, labelContext.present);
   // Block if the label is already present or if it's being added by another check (e.g. detect-new-resource-provider)
   const blockedOnArmModeling =
-    armModelingReviewLabel.present || labelContext.toAdd.has("ARMModelingReviewRequired");
+    armModelingReviewLabel.present || labelContext.toAdd.has(ArmModelingLabel.ReviewRequired);
 
   const blocked = blockedOnRpaas || blockedOnVersioningPolicy || blockedOnArmModeling;
 
@@ -622,11 +581,11 @@ function processARMReviewWorkflowLabels(
 
 function getBlockedOnVersioningPolicy(labelContext: LabelContext): boolean {
   const pendingVersioningReview =
-    labelContext.present.has("VersioningReviewRequired") &&
+    labelContext.present.has(REVIEW_REQUIRED_LABELS.VERSIONING) &&
     !anyApprovalLabelPresent("SameVersion", [...labelContext.present]);
 
   const pendingBreakingChangeReview =
-    labelContext.present.has("BreakingChangeReviewRequired") &&
+    labelContext.present.has(REVIEW_REQUIRED_LABELS.BREAKING_CHANGE) &&
     !anyApprovalLabelPresent("CrossVersion", [...labelContext.present]);
 
   const blockedOnVersioningPolicy = pendingVersioningReview || pendingBreakingChangeReview;
@@ -680,11 +639,11 @@ const rulesPri0dataPlane: RequiredLabelRule[] = [
   {
     precedence: 0,
     branches: ["azure-rest-api-specs/main", "azure-rest-api-specs-pr/RPSaaSMaster"],
-    anyPrerequisiteLabels: ["data-plane", "resource-manager"],
-    anyRequiredLabels: ["PublishToCustomers"],
+    anyPrerequisiteLabels: [SpecPlaneLabel.DataPlane, SpecPlaneLabel.ResourceManager],
+    anyRequiredLabels: [SpecPrLabel.PublishToCustomers],
     name: "Publication intent",
     nextStep: paragraph(
-      `Add ${labelBadge("PublishToCustomers")}`,
+      `Add ${labelBadge(SpecPrLabel.PublishToCustomers)}`,
       "if these APIs are ready to ship; otherwise target a feature branch.",
     ),
     troubleshootingGuide: paragraph(
@@ -697,7 +656,7 @@ const rulesPri0dataPlane: RequiredLabelRule[] = [
       `acknowledge that you are following all the best practices documented by ARM at`,
       `${link("aka.ms/armapibestpractices", "https://aka.ms/armapibestpractices")}.** If you`,
       `do intend to release the APIs to your customers by merging this PR, add the`,
-      `${labelBadge("PublishToCustomers")} label to your PR in acknowledgement of the above. Otherwise,`,
+      `${labelBadge(SpecPrLabel.PublishToCustomers)} label to your PR in acknowledgement of the above. Otherwise,`,
       `retarget this PR onto a feature branch, i.e. with prefix \`release-\` (see`,
       `${link("aka.ms/azsdk/api-versions#release--branches", "https://aka.ms/azsdk/api-versions#release--branches")}).`,
     ),
@@ -715,21 +674,21 @@ const rulesPri0dataPlane: RequiredLabelRule[] = [
   // sign-offs are migrated by re-stamping with data-plane-review-signoff (see #45521).
   {
     precedence: 0,
-    anyPrerequisiteLabels: ["data-plane-review-requested"],
-    anyRequiredLabels: ["data-plane-review-signoff"],
+    anyPrerequisiteLabels: [DataPlaneReviewLabel.Requested],
+    anyRequiredLabels: [DataPlaneReviewLabel.Signoff],
     name: "Data-plane API review",
     awaitingReview: true,
     nextStep: paragraph(
       "Request API stewardship review and wait for",
-      `${labelBadge("data-plane-review-signoff")}.`,
+      `${labelBadge(DataPlaneReviewLabel.Signoff)}.`,
     ),
     troubleshootingGuide: paragraph(
       `API stewardship review was requested for your PR`,
-      `(label: ${labelBadge("data-plane-review-requested")}). API-definition changes in new or`,
+      `(label: ${labelBadge(DataPlaneReviewLabel.Requested)}). API-definition changes in new or`,
       `existing data-plane versions request review automatically; review can also be requested`,
       `manually. A data-plane API reviewer is`,
       `assigned from the pool and unblocks merge by applying the protected`,
-      `${labelBadge("data-plane-review-signoff")} label. To request or expedite the`,
+      `${labelBadge(DataPlaneReviewLabel.Signoff)} label. To request or expedite the`,
       `${link("offline REST API review", "https://eng.ms/docs/products/azure-developer-experience/design/api-review#requesting-an-offline-rest-api-review")},`,
       `email ${link("azureapirbcore@microsoft.com", "mailto:azureapirbcore@microsoft.com")}`,
       `with your PR link.`,
@@ -740,14 +699,14 @@ const rulesPri0dataPlane: RequiredLabelRule[] = [
 const rulesPri0NotReadyForArmReview: RequiredLabelRule[] = [
   {
     precedence: 0,
-    anyPrerequisiteLabels: ["ARMModelingReviewRequired"],
+    anyPrerequisiteLabels: [ArmModelingLabel.ReviewRequired],
     anyRequiredLabels: [],
     name: "ARM modeling review",
     nextStep:
       "Discuss the new RP or resource type at [office hours](https://aka.ms/apimodelingreview); bring the RP Agent review package.",
     troubleshootingGuide: wrapInArmReviewMessage([
       paragraph(
-        `This PR has ${labelBadge("ARMModelingReviewRequired")} label. This means it is introducing a new`,
+        `This PR has ${labelBadge(ArmModelingLabel.ReviewRequired)} label. This means it is introducing a new`,
         `Resource Provider namespace or a new resource type. New RPs and new resource types`,
         `require a discussion with the ARM Modeling Review team before merging.`,
       ),
@@ -771,7 +730,7 @@ const rulesPri0NotReadyForArmReview: RequiredLabelRule[] = [
           `${link("API Review Workflow | ARM Wiki", "https://armwiki.azurewebsites.net/rp_onboarding/process/api_review.html#arm-api-modeling-review-office-hours")}`,
         ),
       ]),
-      `**If ${labelBadge("ARMModelingSignedOff")} label was removed by automation:**`,
+      `**If ${labelBadge(ArmModelingLabel.SignedOff)} label was removed by automation:**`,
       paragraph(
         `This happens when the lease file is not found. Please check with the PM you discussed`,
         `your design with to confirm if the lease file PR has been merged. In the public repo,`,
@@ -793,43 +752,49 @@ const rulesPri0NotReadyForArmReview: RequiredLabelRule[] = [
   // it considers itself fulfilled if any one of the fine-grained rules is fulfilled.
   {
     precedence: 0,
-    anyPrerequisiteLabels: ["NotReadyForARMReview"],
-    allPrerequisiteAbsentLabels: [verRevApproval, brChRevApproval, "RPaaSException"],
-    anyRequiredLabels: ["ARMSignedOff"],
+    anyPrerequisiteLabels: [ArmReviewLabel.NotReadyForArmReview],
+    allPrerequisiteAbsentLabels: [verRevApproval, brChRevApproval, SpecPrLabel.RpaasException],
+    anyRequiredLabels: [ArmReviewLabel.ArmSignedOff],
     name: "ARM review readiness",
     nextStep: "Resolve the blocking requirements, then comment `/azp run`.",
     troubleshootingGuide: wrapInArmReviewMessage([
       paragraph(
-        `This PR is not ready for ARM review (label: ${labelBadge("NotReadyForARMReview")}). This PR will`,
+        `This PR is not ready for ARM review (label: ${labelBadge(ArmReviewLabel.NotReadyForArmReview)}). This PR will`,
         `not be reviewed by ARM until relevant problems are fixed. Consult the rest of this`,
         `\`Next Steps to Merge\` comment for details.`,
       ),
       paragraph(
         `Once the blocking problems are addressed, add to the PR a comment with contents`,
         `\`/azp run\`. Automation will re-evaluate this PR and if everything looks good, it`,
-        `will add ${labelBadge("WaitForARMFeedback")} label which will put this PR on the ARM review queue.`,
+        `will add ${labelBadge(ArmReviewLabel.WaitForArmFeedback)} label which will put this PR on the ARM review queue.`,
       ),
     ]),
   },
   {
     precedence: 0,
-    allPrerequisiteLabels: ["NotReadyForARMReview", "CI-NewRPNamespaceWithoutRPaaS"],
-    anyRequiredLabels: ["RPaaSException"],
+    allPrerequisiteLabels: [
+      ArmReviewLabel.NotReadyForArmReview,
+      SpecPrLabel.CiNewRpNamespaceWithoutRpaas,
+    ],
+    anyRequiredLabels: [SpecPrLabel.RpaasException],
     name: "RPaaS prerequisite",
     nextStep: "Onboard the new RP to RPaaS or obtain an approved exception.",
-    troubleshootingGuide: notReadyForArmReviewReason("CI-NewRPNamespaceWithoutRPaaS"),
+    troubleshootingGuide: notReadyForArmReviewReason(SpecPrLabel.CiNewRpNamespaceWithoutRpaas),
   },
   {
     precedence: 0,
-    allPrerequisiteLabels: ["NotReadyForARMReview", "CI-RpaaSRPNotInPrivateRepo"],
-    anyRequiredLabels: ["RPaaSException"],
+    allPrerequisiteLabels: [
+      ArmReviewLabel.NotReadyForArmReview,
+      SpecPrLabel.CiRpaasRpNotInPrivateRepo,
+    ],
+    anyRequiredLabels: [SpecPrLabel.RpaasException],
     name: "Private RP registration prerequisite",
     nextStep: "Merge the new RP into the private `RPSaaSMaster` branch first.",
-    troubleshootingGuide: notReadyForArmReviewReason("CI-RpaaSRPNotInPrivateRepo"),
+    troubleshootingGuide: notReadyForArmReviewReason(SpecPrLabel.CiRpaasRpNotInPrivateRepo),
   },
   {
     precedence: 0,
-    allPrerequisiteLabels: ["NotReadyForARMReview", verRev],
+    allPrerequisiteLabels: [ArmReviewLabel.NotReadyForArmReview, verRev],
     anyRequiredLabels: [verRevApproval],
     name: "Versioning review prerequisite",
     nextStep: "Introduce a new API version or obtain versioning approval.",
@@ -837,7 +802,7 @@ const rulesPri0NotReadyForArmReview: RequiredLabelRule[] = [
   },
   {
     precedence: 0,
-    allPrerequisiteLabels: ["NotReadyForARMReview", brChRev],
+    allPrerequisiteLabels: [ArmReviewLabel.NotReadyForArmReview, brChRev],
     anyRequiredLabels: [brChRevApproval],
     name: "Breaking-change review prerequisite",
     nextStep: "Follow the [breaking-change review process](https://aka.ms/brch).",
@@ -848,14 +813,14 @@ const rulesPri0NotReadyForArmReview: RequiredLabelRule[] = [
 const rulesPri0ArmRpaas: RequiredLabelRule[] = [
   {
     precedence: 0,
-    anyPrerequisiteLabels: ["CI-NewRPNamespaceWithoutRPaaS"],
-    anyRequiredLabels: ["RPaaSException"],
+    anyPrerequisiteLabels: [SpecPrLabel.CiNewRpNamespaceWithoutRpaas],
+    anyRequiredLabels: [SpecPrLabel.RpaasException],
     name: "RPaaS onboarding",
     nextStep:
       "Onboard the new RP to [RPaaS](https://armwiki.azurewebsites.net/rpaas/gettingstarted.html) or obtain an approved exception.",
     troubleshootingGuide: renderMarkdownDoc([
       paragraph(
-        `This PR has ${labelBadge("CI-NewRPNamespaceWithoutRPaaS")} label. This means it is introducing a`,
+        `This PR has ${labelBadge(SpecPrLabel.CiNewRpNamespaceWithoutRpaas)} label. This means it is introducing a`,
         `new RP (Resource Provider) namespace that has not been onboarded with`,
         `${link("RPaaS", "https://armwiki.azurewebsites.net/rpaas/overview.html")}. Merging`,
         `this PR to the \`main\` branch is blocked as RPaaS is required for new RPs.`,
@@ -873,12 +838,12 @@ const rulesPri0ArmRpaas: RequiredLabelRule[] = [
   },
   {
     precedence: 0,
-    anyPrerequisiteLabels: ["CI-RpaaSRPNotInPrivateRepo"],
-    anyRequiredLabels: ["RPaaSException"],
+    anyPrerequisiteLabels: [SpecPrLabel.CiRpaasRpNotInPrivateRepo],
+    anyRequiredLabels: [SpecPrLabel.RpaasException],
     name: "Private RP registration",
     nextStep: "Merge the new RP into the private `RPSaaSMaster` branch first.",
     troubleshootingGuide: paragraph(
-      `This PR has ${labelBadge("CI-RpaaSRPNotInPrivateRepo")} label. This means it is introducing a new`,
+      `This PR has ${labelBadge(SpecPrLabel.CiRpaasRpNotInPrivateRepo)} label. This means it is introducing a new`,
       `RP (Resource Provider) namespace to the \`main\` branch without first merging the new`,
       `RP to the \`RPSaaSMaster\` branch. To resolve, first submit and merge a PR with the`,
       `new RP namespace to the \`RPSaaSMaster\`branch.This PR will remain blocked until`,
@@ -922,13 +887,13 @@ const rulesPri0Changes: RequiredLabelRule[] = [
 const rulesPri0ArmRev: RequiredLabelRule[] = [
   {
     precedence: 0,
-    anyPrerequisiteLabels: ["WaitForARMFeedback"],
-    anyRequiredLabels: ["ARMSignedOff"],
+    anyPrerequisiteLabels: [ArmReviewLabel.WaitForArmFeedback],
+    anyRequiredLabels: [ArmReviewLabel.ArmSignedOff],
     name: "ARM API review",
     awaitingReview: true,
     nextStep: "Wait for ARM reviewer feedback. [Review queue](https://aka.ms/azsdk/pr-arm-review).",
     troubleshootingGuide: wrapInArmReviewMessage([
-      `This PR is awaiting ARM reviewer feedback (label: ${labelBadge("WaitForARMFeedback")}).`,
+      `This PR is awaiting ARM reviewer feedback (label: ${labelBadge(ArmReviewLabel.WaitForArmFeedback)}).`,
       paragraph(
         `To learn when this PR will get reviewed, see ARM review queue at`,
         `${link("aka.ms/azsdk/pr-arm-review", "https://aka.ms/azsdk/pr-arm-review")}`,
@@ -937,20 +902,20 @@ const rulesPri0ArmRev: RequiredLabelRule[] = [
   },
   {
     precedence: 0,
-    anyPrerequisiteLabels: ["ARMChangesRequested"],
-    anyRequiredLabels: ["ARMSignedOff"],
+    anyPrerequisiteLabels: [ArmReviewLabel.ArmChangesRequested],
+    anyRequiredLabels: [ArmReviewLabel.ArmSignedOff],
     name: "ARM review feedback",
-    nextStep: `Address reviewer feedback, then remove ${labelBadge("ARMChangesRequested")}.`,
+    nextStep: `Address reviewer feedback, then remove ${labelBadge(ArmReviewLabel.ArmChangesRequested)}.`,
     troubleshootingGuide: wrapInArmReviewMessage([
       paragraph(
-        `This PR has ${labelBadge("ARMChangesRequested")} label. Please address or respond to feedback from`,
+        `This PR has ${labelBadge(ArmReviewLabel.ArmChangesRequested)} label. Please address or respond to feedback from`,
         `the ARM API reviewer. `,
       ),
       paragraph(
         `When you are ready to continue the ARM API review, please remove the`,
-        `${labelBadge("ARMChangesRequested")} label. `,
+        `${labelBadge(ArmReviewLabel.ArmChangesRequested)} label. `,
       ),
-      `Automation should then add ${labelBadge("WaitForARMFeedback")} label. `,
+      `Automation should then add ${labelBadge(ArmReviewLabel.WaitForArmFeedback)} label. `,
       paragraph(
         `❗If you don't have permissions to remove the label, request \`write access\` per`,
         `${link("aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories", "https://aka.ms/azsdk/access#request-access-to-rest-api-or-sdk-repositories")}.`,
@@ -963,14 +928,14 @@ const rulesPri1ArmRev: RequiredLabelRule[] = [
   // Repair guidance is only needed when the ARM workflow-state label is missing.
   {
     precedence: 1,
-    anyPrerequisiteLabels: ["ARMReview"],
+    anyPrerequisiteLabels: [ArmReviewLabel.ArmReview],
     allPrerequisiteAbsentLabels: [
-      "NotReadyForARMReview",
-      "WaitForARMFeedback",
-      "ARMChangesRequested",
-      "ARMSignedOff",
+      ArmReviewLabel.NotReadyForArmReview,
+      ArmReviewLabel.WaitForArmFeedback,
+      ArmReviewLabel.ArmChangesRequested,
+      ArmReviewLabel.ArmSignedOff,
     ],
-    anyRequiredLabels: ["ARMSignedOff"],
+    anyRequiredLabels: [ArmReviewLabel.ArmSignedOff],
     name: "ARM review workflow",
     nextStep: "Comment `/azp run` to refresh ARM review readiness.",
     troubleshootingGuide: wrapInArmReviewMessage(
@@ -986,11 +951,11 @@ const rulesPri1ArmRev: RequiredLabelRule[] = [
 const rulesPri1Suppressions: RequiredLabelRule[] = [
   {
     precedence: 1,
-    anyPrerequisiteLabels: ["SuppressionReviewRequired"],
-    anyRequiredLabels: ["Approved-Suppression"],
+    anyPrerequisiteLabels: [SwaggerSuppressionLabel.ReviewRequired],
+    anyRequiredLabels: [SwaggerSuppressionLabel.Approved],
     name: "AutoRest suppressions",
     awaitingReview: true,
-    nextStep: `Request suppression review and ${labelBadge("Approved-Suppression")} approval.`,
+    nextStep: `Request suppression review and ${labelBadge(SwaggerSuppressionLabel.Approved)} approval.`,
     troubleshootingGuide: paragraph(
       `The suppressions added to the AutoRest config files (README.mds) require review.`,
       `${diagramTsg(1, true)}, or to step 3, depending on the kind of suppression you did.`,
@@ -1116,15 +1081,15 @@ const rulesPri2LegacySdk: RequiredLabelRule[] = [
 const rulesPri3Blockers: RequiredLabelRule[] = [
   {
     precedence: 3,
-    anyPrerequisiteLabels: ["Approved-OkToMerge"],
+    anyPrerequisiteLabels: [SpecPrLabel.ApprovedOkToMerge],
     anyRequiredLabels: [],
     name: "Private mirror branch",
     nextStep: paragraph(
       "Move this PR to the public repository, or remove an incorrectly applied",
-      `${labelBadge("Approved-OkToMerge")} label.`,
+      `${labelBadge(SpecPrLabel.ApprovedOkToMerge)} label.`,
     ),
     troubleshootingGuide: renderMarkdownDoc([
-      `This PR has been approved with ${labelBadge("Approved-OkToMerge")} label.`,
+      `This PR has been approved with ${labelBadge(SpecPrLabel.ApprovedOkToMerge)} label.`,
       paragraph(
         `This label should be used only to approve PRs targeting private specs repo \`main\``,
         `branch.`,
@@ -1150,9 +1115,9 @@ const rulesPri1Namespace: RequiredLabelRule[] = [
   // See .github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md for details.
   {
     precedence: 1,
-    anyPrerequisiteLabels: ["package-name-review-required"],
-    allPrerequisiteAbsentLabels: ["package-name-approved"],
-    anyRequiredLabels: ["package-name-approved"],
+    anyPrerequisiteLabels: [PackageNameLabel.ReviewRequired],
+    allPrerequisiteAbsentLabels: [PackageNameLabel.Approved],
+    anyRequiredLabels: [PackageNameLabel.Approved],
     name: "SDK package names",
     awaitingReview: true,
     nextStep:
@@ -1168,7 +1133,7 @@ const rulesPri1Namespace: RequiredLabelRule[] = [
       ),
       paragraph(
         `Architects: apply \`package-name-<language>-approved\` labels for each language. For`,
-        `management-plane PRs, ${labelBadge("package-name-approved-all")} can be used to approve all`,
+        `management-plane PRs, ${labelBadge(PackageNameLabel.ApprovedAll)} can be used to approve all`,
         `languages at once.`,
       ),
     ]),
@@ -1185,8 +1150,8 @@ const rulesPri1TypeSpecSuppressions = [
   // it once no checked suppressions remain. See .github/workflows/src/typespec-suppressions/.
   {
     precedence: 1,
-    anyPrerequisiteLabels: [TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL],
-    anyRequiredLabels: [TYPESPEC_SUPPRESSIONS_APPROVED_LABEL],
+    anyPrerequisiteLabels: [TypeSpecSuppressionLabel.ReviewRequired],
+    anyRequiredLabels: [TypeSpecSuppressionLabel.Approved],
     name: "TypeSpec suppressions",
     awaitingReview: true,
     nextStep: "Request approval for the suppressions listed in the TypeSpec review comment.",
@@ -1197,7 +1162,7 @@ const rulesPri1TypeSpecSuppressions = [
         `of suppressions, their justifications, and source locations.`,
       ),
       paragraph(
-        `Reviewers: apply the ${labelBadge(TYPESPEC_SUPPRESSIONS_APPROVED_LABEL)} label after`,
+        `Reviewers: apply the ${labelBadge(TypeSpecSuppressionLabel.Approved)} label after`,
         `confirming every justification is acceptable.`,
       ),
     ]),

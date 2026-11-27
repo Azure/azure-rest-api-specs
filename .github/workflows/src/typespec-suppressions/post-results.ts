@@ -14,13 +14,10 @@ import type { GitHubScriptArgs } from "@azure-tools/github-core/github";
   comment and otherwise does nothing.
 */
 
+import { TypeSpecSuppressionLabel } from "@azure-tools/specs-shared/labels";
 import { PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { commentOrUpdate, parseExistingComments } from "@azure-tools/github-core/comment";
 import { extractInputs } from "@azure-tools/github-core/context";
-import {
-  TYPESPEC_SUPPRESSIONS_APPROVED_LABEL,
-  TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL,
-} from "../label.ts";
 import { removeLabelIfPresent } from "../package-name-approval/labels.ts";
 import {
   buildSuppressionsComment,
@@ -41,27 +38,27 @@ async function syncReviewRequiredLabel(
   labelNames: string[],
   requiresApproval: boolean,
 ) {
-  const hasLabel = labelNames.includes(TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL);
+  const hasLabel = labelNames.includes(TypeSpecSuppressionLabel.ReviewRequired);
   if (requiresApproval && !hasLabel) {
     core.info(
-      `Applying ${TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL} label on ${owner}/${repo}#${issueNumber}.`,
+      `Applying ${TypeSpecSuppressionLabel.ReviewRequired} label on ${owner}/${repo}#${issueNumber}.`,
     );
     await github.rest.issues.addLabels({
       owner,
       repo,
       issue_number: issueNumber,
-      labels: [TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL],
+      labels: [TypeSpecSuppressionLabel.ReviewRequired],
     });
   } else if (!requiresApproval && hasLabel) {
     core.info(
-      `Removing ${TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL} label on ${owner}/${repo}#${issueNumber}.`,
+      `Removing ${TypeSpecSuppressionLabel.ReviewRequired} label on ${owner}/${repo}#${issueNumber}.`,
     );
     await removeLabelIfPresent(
       github,
       owner,
       repo,
       issueNumber,
-      TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL,
+      TypeSpecSuppressionLabel.ReviewRequired,
     );
   }
 }
@@ -98,7 +95,7 @@ export default async function postSuppressionsResults({ github, context, core }:
   let { body } = result;
   const { requiresApproval } = result;
 
-  if (isNewAnalysis && labelNames.includes(TYPESPEC_SUPPRESSIONS_APPROVED_LABEL)) {
+  if (isNewAnalysis && labelNames.includes(TypeSpecSuppressionLabel.Approved)) {
     const invalidateApproval = await shouldInvalidateSuppressionApproval(
       github,
       core,
@@ -110,14 +107,14 @@ export default async function postSuppressionsResults({ github, context, core }:
     );
     if (invalidateApproval) {
       core.info(
-        `Removing ${TYPESPEC_SUPPRESSIONS_APPROVED_LABEL} label because the approval-relevant analysis changed on ${owner}/${repo}#${issue_number}.`,
+        `Removing ${TypeSpecSuppressionLabel.Approved} label because the approval-relevant analysis changed on ${owner}/${repo}#${issue_number}.`,
       );
       await removeLabelIfPresent(
         github,
         owner,
         repo,
         issue_number,
-        TYPESPEC_SUPPRESSIONS_APPROVED_LABEL,
+        TypeSpecSuppressionLabel.Approved,
       );
       body = renderSuppressionsCommentBody(result.report, {
         owner,
@@ -128,7 +125,7 @@ export default async function postSuppressionsResults({ github, context, core }:
       });
     } else {
       core.info(
-        `Preserving ${TYPESPEC_SUPPRESSIONS_APPROVED_LABEL} because the approval-relevant analysis did not change on ${owner}/${repo}#${issue_number}.`,
+        `Preserving ${TypeSpecSuppressionLabel.Approved} because the approval-relevant analysis did not change on ${owner}/${repo}#${issue_number}.`,
       );
     }
   }

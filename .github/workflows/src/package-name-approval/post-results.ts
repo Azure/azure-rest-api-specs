@@ -1,3 +1,4 @@
+import { PackageNameLabel, SpecPlaneLabel } from "@azure-tools/specs-shared/labels";
 import { renderMarkdownDoc } from "@azure-tools/specs-shared/markdown";
 import { unlink, writeFile } from "node:fs/promises";
 import { join } from "node:path";
@@ -143,7 +144,7 @@ export function parseCommentTable(
  * authorization keys off resource-manager, not "Mgmt" (#46785). Mixed PRs (isMgmt) keep it.
  */
 export function shouldRemoveStaleMgmtLabel(isMgmt: boolean, existingLabels: string[]): boolean {
-  return !isMgmt && existingLabels.includes("Mgmt");
+  return !isMgmt && existingLabels.includes(SpecPlaneLabel.Mgmt);
 }
 
 /**
@@ -339,7 +340,7 @@ export default async function postResults({ github, context, core }: GitHubScrip
     });
     const existingLabels = pr.labels.map((label: { name?: string }) => label.name ?? "");
 
-    if (existingLabels.includes("package-name-review-required")) {
+    if (existingLabels.includes(PackageNameLabel.ReviewRequired)) {
       core.info("Cleaning up stale package-name labels (config was reverted)");
       const packageNameLabels = existingLabels.filter((l) => l.startsWith("package-name-"));
       for (const label of packageNameLabels) {
@@ -348,7 +349,7 @@ export default async function postResults({ github, context, core }: GitHubScrip
       // The tspconfig was removed, so this is no longer a package PR. Clear the stale
       // add-only "Mgmt" label here too, since the results-based reconcile below is
       // skipped on the no-artifact path (#46785).
-      await removeLabelIfPresent(github, owner, repo, issue_number, "Mgmt");
+      await removeLabelIfPresent(github, owner, repo, issue_number, SpecPlaneLabel.Mgmt);
 
       // Update status check to success
       await github.rest.repos.createCommitStatus({
@@ -454,7 +455,7 @@ export default async function postResults({ github, context, core }: GitHubScrip
           resetLanguages.push(lang);
         }
       }
-      for (const label of ["package-name-approved-all", "package-name-approved"]) {
+      for (const label of [PackageNameLabel.ApprovedAll, PackageNameLabel.Approved]) {
         if (existingLabels.includes(label)) {
           await removeLabelIfPresent(github, owner, repo, issue_number, label);
           existingLabels.splice(existingLabels.indexOf(label), 1);
@@ -475,12 +476,12 @@ export default async function postResults({ github, context, core }: GitHubScrip
   const extraLanguages = languages.filter((l) => !tier1.includes(l));
   const allLanguages = [...tier1, ...extraLanguages];
 
-  const labelsToAdd = new Set(["package-name-review-required"]);
+  const labelsToAdd = new Set<string>([PackageNameLabel.ReviewRequired]);
   if (results.isMgmt) {
-    labelsToAdd.add("Mgmt");
+    labelsToAdd.add(SpecPlaneLabel.Mgmt);
   }
   if (results.isDataPlane) {
-    labelsToAdd.add("data-plane");
+    labelsToAdd.add(SpecPlaneLabel.DataPlane);
   }
   for (const language of allLanguages) {
     // Skip adding pending label if language is already approved
@@ -497,7 +498,7 @@ export default async function postResults({ github, context, core }: GitHubScrip
     allLanguages.length > 0 &&
     allLanguages.every((lang) => existingLabels.includes(`package-name-${lang}-approved`));
   if (allApproved) {
-    labelsToAdd.delete("package-name-review-required");
+    labelsToAdd.delete(PackageNameLabel.ReviewRequired);
   }
 
   for (const label of labelsToAdd) {
@@ -513,7 +514,7 @@ export default async function postResults({ github, context, core }: GitHubScrip
 
   // Clear the stale add-only "Mgmt" label. See shouldRemoveStaleMgmtLabel (#46785).
   if (shouldRemoveStaleMgmtLabel(results.isMgmt, existingLabels)) {
-    await removeLabelIfPresent(github, owner, repo, issue_number, "Mgmt");
+    await removeLabelIfPresent(github, owner, repo, issue_number, SpecPlaneLabel.Mgmt);
   }
 
   const body = buildCommentBody({

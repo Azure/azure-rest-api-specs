@@ -1,3 +1,4 @@
+import { PackageNameLabel } from "@azure-tools/specs-shared/labels";
 import type { GitHubScriptArgs } from "@azure-tools/github-core/github";
 import { extractInputs } from "@azure-tools/github-core/context";
 
@@ -14,7 +15,7 @@ export default async function statusCheck({ github, context, core }: GitHubScrip
 
   const labels: string[] = pr.labels.map((label: { name?: string }) => label.name ?? "");
 
-  if (!labels.includes("package-name-review-required")) {
+  if (!labels.includes(PackageNameLabel.ReviewRequired)) {
     core.info("No package name review required, passing");
     await github.rest.repos.createCommitStatus({
       owner,
@@ -43,7 +44,7 @@ export default async function statusCheck({ github, context, core }: GitHubScrip
       description: `Pending: ${pending}`,
     });
     core.info(`Package name approval pending for: ${pending}`);
-  } else if (labels.includes("package-name-approved")) {
+  } else if (labels.includes(PackageNameLabel.Approved)) {
     core.info("All package names approved - merge allowed");
     await github.rest.repos.createCommitStatus({
       owner,

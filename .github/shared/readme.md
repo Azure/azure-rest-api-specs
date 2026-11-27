@@ -158,6 +158,22 @@ function main() {
 - `globFiles(pattern, options)` — native glob discovery restricted to files, with optional `cwd`
   and exclusion patterns. Includes file symlinks without traversing directory symlinks.
 
+### `labels` — repository PR label constants (zero-dependency)
+
+Single source of truth for repository pull-request label constants shared across `.github/packages/*`,
+`.github/workflows/*`, and `eng/tools/*`. Has zero runtime dependencies so zero-dependency workflows
+can import it via relative paths before `pnpm install`.
+
+- `VERSIONING_APPROVALS`, `BREAKING_CHANGE_APPROVALS`, `REVIEW_REQUIRED_LABELS`,
+  `APPROVAL_PREFIX_LABELS` — breaking-change and versioning review/approval labels.
+- `sdkLabels` — per-SDK breaking-change, suppression, and build-failure label map (re-exported by
+  `sdk-types`).
+- `TypeSpecSuppressionLabel`, `SwaggerSuppressionLabel` — suppression review and approval labels.
+- `ArmAutoSignoffLabel`, `legacyAutoSignoffMarkers`, `autoSignoffMarkers`, `ArmReviewLabel`,
+  `ArmModelingLabel` — ARM review, auto-signoff, and modeling labels.
+- `SpecPlaneLabel`, `DataPlaneReviewLabel`, `PackageNameLabel`, `SpecPrLabel` — spec plane,
+  data-plane review, package-name review, RPaaS, publication, and release-plan labels.
+
 ### `math` — math helpers
 
 - `toPercent(value, decimals)` — format a `0..1` ratio as a percentage string.

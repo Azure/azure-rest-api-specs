@@ -1,5 +1,12 @@
 import { inspect } from "node:util";
 import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
+import {
+  ArmAutoSignoffLabel,
+  ArmReviewLabel,
+  autoSignoffMarkers,
+  legacyAutoSignoffMarkers,
+  SwaggerSuppressionLabel,
+} from "../../../shared/src/labels.ts";
 import { getLatestCommitStatuses } from "../../../packages/github-core/src/commit-statuses.ts";
 import { extractInputs } from "../../../packages/github-core/src/context.ts";
 import type {
@@ -10,11 +17,6 @@ import type {
 } from "../../../packages/github-core/src/github.ts";
 import { LabelAction } from "../../../packages/github-core/src/label.ts";
 import { parseSignoffDispatchInputs } from "./arm-signoff-dispatch.ts";
-import {
-  ArmAutoSignoffLabel,
-  autoSignoffMarkers,
-  legacyAutoSignoffMarkers,
-} from "./arm-auto-signoff-labels.ts";
 import {
   getLatestSemanticReviewStatus,
   getSemanticReviewOutcome,
@@ -246,8 +248,8 @@ async function evaluateEligibility({
   core: Core;
 }): Promise<{ eligible: boolean; requireManualSignoff: boolean }> {
   const notEligible = { eligible: false, requireManualSignoff: false };
-  const hasArmReview = labelNames.includes("ARMReview");
-  const hasNotReadyForArmReview = labelNames.includes("NotReadyForARMReview");
+  const hasArmReview = labelNames.includes(ArmReviewLabel.ArmReview);
+  const hasNotReadyForArmReview = labelNames.includes(ArmReviewLabel.NotReadyForArmReview);
   const isReadyForArmReview = hasArmReview && !hasNotReadyForArmReview;
   core.info(
     `ARM review readiness: ${JSON.stringify({
@@ -297,12 +299,12 @@ async function evaluateEligibility({
     return notEligible;
   }
 
-  const hasArmChangesRequested = labelNames.includes("ARMChangesRequested");
+  const hasArmChangesRequested = labelNames.includes(ArmReviewLabel.ArmChangesRequested);
   const hasManualSignoffRequired = labelNames.includes(
     ArmAutoSignoffLabel.ArmManualSignoffRequired,
   );
-  const hasSuppressionReviewRequired = labelNames.includes("SuppressionReviewRequired");
-  const hasApprovedSuppression = labelNames.includes("Approved-Suppression");
+  const hasSuppressionReviewRequired = labelNames.includes(SwaggerSuppressionLabel.ReviewRequired);
+  const hasApprovedSuppression = labelNames.includes(SwaggerSuppressionLabel.Approved);
   const labelsAllowSignoff =
     !hasArmChangesRequested &&
     !hasManualSignoffRequired &&
