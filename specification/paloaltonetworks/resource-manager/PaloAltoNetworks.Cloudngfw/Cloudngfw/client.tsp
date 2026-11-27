@@ -45,6 +45,7 @@ using PaloAltoNetworks.Cloudngfw;
   "csharp"
 );
 @@clientName(LogIngestionSettingsResource, "LogIngestionSettings", "csharp");
+@@clientName(AiGatewayLogSettingsResource, "AiGatewayLogSettings", "csharp");
 @@clientName(
   FirewallStatusResource,
   "PaloAltoNetworksFirewallStatus",

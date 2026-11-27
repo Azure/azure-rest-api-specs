@@ -29,6 +29,7 @@ import "./LocalRulesResource.tsp";
 import "./PrefixListResource.tsp";
 import "./CustomCaptureConfigurationsFirewallResource.tsp";
 import "./LogIngestionSettingsResource.tsp";
+import "./AiGatewayLogSettingsResource.tsp";
 import "./routes.tsp";
 import "./client.tsp";
 
@@ -82,8 +83,13 @@ enum Versions {
   /**
    * The 2026-09-25-preview API version.
    */
-  @Azure.Core.previewVersion
   v2026_09_25_preview: "2026-09-25-preview",
+
+  /**
+   * The 2026-11-27-preview API version.
+   */
+  @Azure.Core.previewVersion
+  v2026_11_27_preview: "2026-11-27-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

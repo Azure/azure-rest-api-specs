@@ -1346,6 +1346,12 @@ model FirewallDeploymentProperties {
   firewallMode?: FirewallMode;
 
   /**
+   * AI Gateway configuration. Required when firewallMode is AIRSM; must be absent for CNGFW firewalls.
+   */
+  @added(Versions.v2026_11_27_preview)
+  aigwConfig?: AiGatewayConfig;
+
+  /**
    * Associated Rulestack
    */
   associatedRulestack?: RulestackDetails;
@@ -1914,6 +1920,12 @@ model FirewallResourceUpdateProperties {
    * Strata Cloud Manager Configuration, only applicable if Strata Cloud Manager is selected.
    */
   strataCloudManagerConfig?: StrataCloudManagerConfig;
+
+  /**
+   * AI Gateway configuration. Only applicable to AIRSM firewalls.
+   */
+  @added(Versions.v2026_11_27_preview)
+  aigwConfig?: AiGatewayConfig;
 
   /**
    * Associated Rulestack
@@ -2664,4 +2676,93 @@ model StrataCloudManagerInstance {
    * properties.strataCloudManagerConfig.cloudManagerName on the firewall create payload.
    */
   cloudManagerTenantName: string;
+}
+
+/**
+ * AI Gateway configuration for an AIRSM firewall.
+ */
+@added(Versions.v2026_11_27_preview)
+model AiGatewayConfig {
+  /**
+   * AI Gateway name.
+   */
+  @minLength(2)
+  @maxLength(64)
+  @pattern("^(?![-_])(?!.*[-_]{2})(?!.*[-_]$)[a-zA-Z0-9][a-zA-Z0-9-]{1,63}$")
+  name: string;
+
+  /**
+   * Prefix of the AI Gateway fully qualified domain name.
+   */
+  @minLength(2)
+  @maxLength(64)
+  @pattern("^(?![-_])(?!.*[-_]{2})(?!.*[-_]$)[a-zA-Z0-9][a-zA-Z0-9-]{1,63}$")
+  fqdnPrefix: string;
+
+  /**
+   * Public IP address the AI Gateway is exposed on.
+   */
+  publicIp: IPAddress;
+
+  /**
+   * Port the AI Gateway listens on.
+   */
+  @minValue(1)
+  @maxValue(65534)
+  port: int32 = 8787;
+}
+
+/**
+ * Destination type for AI Gateway logs.
+ */
+@added(Versions.v2026_11_27_preview)
+union AiGatewayLogTargetType {
+  string,
+
+  /**
+   * Logs are written to an Azure Storage account blob container.
+   */
+  StorageAccount: "STORAGE_ACCOUNT",
+}
+
+/**
+ * Storage account destination for AI Gateway logs.
+ */
+@added(Versions.v2026_11_27_preview)
+model AiGatewayLogStorageAccount {
+  /**
+   * Resource ID of the storage account.
+   */
+  armId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts";
+    }
+  ]>;
+
+  /**
+   * Name of the blob container the logs are written to.
+   */
+  containerName: string;
+}
+
+/**
+ * AI Gateway log settings for an AIRSM firewall.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Sync proxy resource: AI Gateway log settings are forwarded to the partner synchronously (no async provisioning), so there is intentionally no provisioningState field — consistent with the firewall's other sync child resources."
+@added(Versions.v2026_11_27_preview)
+model AiGatewayLogSettingsProperties {
+  /**
+   * Log destination type.
+   */
+  targetType: AiGatewayLogTargetType;
+
+  /**
+   * Storage account destination.
+   */
+  storageAccount: AiGatewayLogStorageAccount;
+
+  /**
+   * Entity tag returned by the partner. Required on update; ignored on create.
+   */
+  etag?: string;
 }

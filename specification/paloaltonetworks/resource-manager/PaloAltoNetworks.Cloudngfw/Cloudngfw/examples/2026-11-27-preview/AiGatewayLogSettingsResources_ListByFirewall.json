@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2026-11-27-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "example-rg",
+    "firewallName": "firewall1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/example-rg/providers/PaloAltoNetworks.Cloudngfw/firewalls/firewall1/aiGatewayLogSettings/default",
+            "name": "default",
+            "type": "PaloAltoNetworks.Cloudngfw/firewalls/aiGatewayLogSettings",
+            "properties": {
+              "targetType": "STORAGE_ACCOUNT",
+              "storageAccount": {
+                "armId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/example-rg/providers/Microsoft.Storage/storageAccounts/aigwlogs",
+                "containerName": "gateway-logs"
+              },
+              "etag": "v1"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "AiGatewayLogSettingsResources_ListByFirewall",
+  "title": "AiGatewayLogSettingsResources_ListByFirewall"
+}
