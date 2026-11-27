@@ -1,6 +1,6 @@
-import { commentOrUpdate } from "../comment.ts";
+import { commentOrUpdate } from "@azure-tools/github-core/comment";
 import { isFullGitSha } from "../../../shared/src/git.ts";
-import type { GitHubScriptArgs } from "../github.ts";
+import type { GitHubScriptArgs } from "@azure-tools/github-core/github";
 
 export async function publishResultInComment(
   { github, context, core }: GitHubScriptArgs,

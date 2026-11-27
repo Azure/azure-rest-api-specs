@@ -5,9 +5,8 @@ import {
   section,
   table,
 } from "@azure-tools/specs-shared/markdown";
-import { getSdkLanguage, SdkName } from "@azure-tools/specs-shared/sdk-types";
-import type { IssueComment } from "../comment.ts";
-import { sdkLabels } from "./labelling.ts";
+import { getSdkLanguage, sdkLabels, SdkName } from "@azure-tools/specs-shared/sdk-types";
+import type { IssueComment } from "@azure-tools/github-core/comment";
 
 export function hasSdkBreakingChanges(labels: string[]): boolean {
   const sdkLabelInfos = Object.values(sdkLabels);

@@ -16,7 +16,7 @@ import {
   createMockCore,
   createMockGithub,
   createMockRequestError,
-} from "./mocks.ts";
+} from "@azure-tools/github-core/test/mocks";
 
 const now = new Date("2026-09-30T02:00:00Z");
 const updatedAt = "2026-01-01T00:00:00Z";

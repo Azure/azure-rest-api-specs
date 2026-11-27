@@ -1,4 +1,5 @@
-import type { Core } from "../github.ts";
+import type { Core } from "@azure-tools/github-core/github";
+import { sdkLabels } from "@azure-tools/specs-shared/sdk-types";
 /*
     This file covers two areas of enforcement:
     1. It calculates what set of label rules has been violated by the current PR, for the purposes of updating next steps to merge.
@@ -19,8 +20,6 @@ import { includesEvery, includesNone } from "../../../shared/src/array.ts";
 import { link, paragraph, renderMarkdownDoc, unorderedList } from "../../../shared/src/markdown.ts";
 import { labelBadge } from "./label-badge.ts";
 import {
-  CLIENT_CUSTOMIZATION_APPROVED_LABEL,
-  CLIENT_CUSTOMIZATION_REVIEW_REQUIRED_LABEL,
   TYPESPEC_SUPPRESSIONS_APPROVED_LABEL,
   TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL,
 } from "../label.ts";
@@ -310,73 +309,6 @@ export class Label {
 
 // #endregion typedefs
 // #region constants
-export const sdkLabels = {
-  "azure-cli-extensions": {
-    breakingChange: undefined,
-    breakingChangeApproved: undefined,
-    breakingChangeSuppression: undefined,
-    breakingChangeSuppressionApproved: undefined,
-    deprecatedBreakingChange: undefined,
-    deprecatedBreakingChangeApproved: undefined,
-  },
-  "azure-resource-manager-schemas": {
-    breakingChange: undefined,
-    breakingChangeApproved: undefined,
-    breakingChangeSuppression: undefined,
-    breakingChangeSuppressionApproved: undefined,
-    deprecatedBreakingChange: undefined,
-    deprecatedBreakingChangeApproved: undefined,
-  },
-  "azure-sdk-for-go": {
-    breakingChange: "BreakingChange-Go-Sdk",
-    breakingChangeApproved: "BreakingChange-Go-Sdk-Approved",
-    breakingChangeSuppression: "BreakingChange-Go-Sdk-Suppression",
-    breakingChangeSuppressionApproved: "BreakingChange-Go-Sdk-Suppression-Approved",
-    deprecatedBreakingChange: "CI-BreakingChange-Go",
-    deprecatedBreakingChangeApproved: "Approved-SdkBreakingChange-Go",
-  },
-  "azure-sdk-for-java": {
-    breakingChange: "BreakingChange-Java-Sdk",
-    breakingChangeApproved: "BreakingChange-Java-Sdk-Approved",
-    breakingChangeSuppression: "BreakingChange-Java-Sdk-Suppression",
-    breakingChangeSuppressionApproved: "BreakingChange-Java-Sdk-Suppression-Approved",
-    deprecatedBreakingChange: "CI-BreakingChange-Java",
-    deprecatedBreakingChangeApproved: "Approved-SdkBreakingChange-Java",
-  },
-  "azure-sdk-for-js": {
-    breakingChange: "BreakingChange-JavaScript-Sdk",
-    breakingChangeApproved: "BreakingChange-JavaScript-Sdk-Approved",
-    breakingChangeSuppression: "BreakingChange-JavaScript-Sdk-Suppression",
-    breakingChangeSuppressionApproved: "BreakingChange-JavaScript-Sdk-Suppression-Approved",
-    deprecatedBreakingChange: "CI-BreakingChange-JavaScript",
-    deprecatedBreakingChangeApproved: "Approved-SdkBreakingChange-JavaScript",
-  },
-  "azure-sdk-for-net": {
-    breakingChange: undefined,
-    breakingChangeApproved: undefined,
-    breakingChangeSuppression: undefined,
-    breakingChangeSuppressionApproved: undefined,
-    deprecatedBreakingChange: undefined,
-    deprecatedBreakingChangeApproved: undefined,
-  },
-  "azure-sdk-for-python": {
-    breakingChange: "BreakingChange-Python-Sdk",
-    breakingChangeApproved: "BreakingChange-Python-Sdk-Approved",
-    breakingChangeSuppression: "BreakingChange-Python-Sdk-Suppression",
-    breakingChangeSuppressionApproved: "BreakingChange-Python-Sdk-Suppression-Approved",
-    deprecatedBreakingChange: "CI-BreakingChange-Python",
-    deprecatedBreakingChangeApproved: "Approved-SdkBreakingChange-Python",
-  },
-  "azure-sdk-for-trenton": {
-    breakingChange: undefined,
-    breakingChangeApproved: undefined,
-    breakingChangeSuppression: undefined,
-    breakingChangeSuppressionApproved: undefined,
-    deprecatedBreakingChange: undefined,
-    deprecatedBreakingChangeApproved: undefined,
-  },
-};
-
 // todo: pull values from eng/tools/openapi-diff-runner/src/types/breaking-change.ts
 export const breakingChangesCheckType: Record<
   BreakingChangesCheckType,
@@ -460,12 +392,6 @@ export function processImpactAssessment(
 
   const armReviewLabel = new Label("ARMReview", labelContext.present);
   armReviewLabel.shouldBePresent = reviews.arm;
-  const clientCustomizationLabel = new Label(
-    CLIENT_CUSTOMIZATION_REVIEW_REQUIRED_LABEL,
-    labelContext.present,
-  );
-  clientCustomizationLabel.shouldBePresent = reviews.clientCustomization;
-  clientCustomizationLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   const newApiVersionLabel = new Label("new-api-version", labelContext.present);
   newApiVersionLabel.shouldBePresent =
     specReviewApplies(context) && services.some((service) => service.newApiVersions.length > 0);
@@ -1249,23 +1175,6 @@ const rulesPri1Namespace: RequiredLabelRule[] = [
   },
 ];
 
-const rulesPri1ClientCustomization: RequiredLabelRule[] = [
-  {
-    precedence: 1,
-    anyPrerequisiteLabels: [CLIENT_CUSTOMIZATION_REVIEW_REQUIRED_LABEL],
-    anyRequiredLabels: [CLIENT_CUSTOMIZATION_APPROVED_LABEL],
-    name: "SDK client customizations",
-    awaitingReview: true,
-    nextStep: `Wait for Azure/azure-arm-sdk-reviewers to review and apply ${CLIENT_CUSTOMIZATION_APPROVED_LABEL}.`,
-    troubleshootingGuide: renderMarkdownDoc([
-      paragraph(
-        `This management-plane PR changes only \`client.tsp\` and/or \`tspconfig.yaml\`, so it needs`,
-        `SDK client customization review instead of ARM API review.`,
-      ),
-    ]),
-  },
-];
-
 /** @type {RequiredLabelRule[]} */
 const rulesPri1TypeSpecSuppressions = [
   // When typespec-suppressions-review-required is present, require typespec-suppressions-approved before
@@ -1303,7 +1212,6 @@ export const requiredLabelsRules = rulesPri0dataPlane
   .concat(rulesPri1ArmRev)
   .concat(rulesPri1Suppressions)
   .concat(rulesPri1Namespace)
-  .concat(rulesPri1ClientCustomization)
   .concat(rulesPri1TypeSpecSuppressions)
   .concat(rulesPri2Sdk)
   .concat(rulesPri2LegacySdk)

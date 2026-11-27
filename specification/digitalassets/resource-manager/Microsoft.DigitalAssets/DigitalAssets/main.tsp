@@ -8,6 +8,7 @@ import "./versions.tsp";
 import "./models.tsp";
 import "./rollup.tsp";
 import "./partition.tsp";
+import "./client.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;

@@ -4,7 +4,7 @@ import { parseDocument } from "yaml";
 import { z } from "zod";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { escapeMarkdown } from "../../shared/src/markdown.ts";
-import type { GitHubScriptArgs } from "./github.ts";
+import type { GitHubScriptArgs } from "@azure-tools/github-core/github";
 import { loadLabelCatalog } from "./label-catalog-loader.ts";
 
 const COMMENT_MARKER = "<!-- issue-triage -->";

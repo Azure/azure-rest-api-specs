@@ -17,3 +17,5 @@ namespace ClientCustomizations;
   "GetAnyscaleComputeResource",
   "csharp"
 );
+
+@@clientName(Anyscale.Platform, "AnyscaleManagementClient", "javascript");

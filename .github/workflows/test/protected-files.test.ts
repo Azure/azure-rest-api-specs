@@ -5,7 +5,7 @@ import { simpleGit } from "simple-git";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { getChangedFiles } from "../../shared/src/changed-files.ts";
 import { checkProtectedFiles } from "../src/protected-files.ts";
-import { createMockContext, createMockCore } from "./mocks.ts";
+import { createMockContext, createMockCore } from "@azure-tools/github-core/test/mocks";
 
 vi.mock("../../shared/src/changed-files.ts", () => ({ getChangedFiles: vi.fn() }));
 

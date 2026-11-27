@@ -7,6 +7,7 @@ applyTo:
   - ".github/tsconfig.json"
   - ".github/actions/**/*"
   - ".github/matchers/**/*"
+  - ".github/packages/**/*"
   - ".github/workflows/**/*"
   - ".github/shared/**/*"
 ---
@@ -23,8 +24,9 @@ The `.github` directory contains all the code and configuration for GitHub Actio
 
 - **Actions**: Reusable composite actions in `.github/actions/`
 - **Workflows**: Workflow files in `.github/workflows/`
+- **Workflow packages**: Sibling workspace packages in `.github/packages/*` (starting with `@azure-tools/github-core` for zero-dependency helpers, plus opt-in packages for workflows needing heavier or cross-workspace dependencies)
 - **Shared utilities**: Common TypeScript modules in `.github/shared/src/`
-- **Tests**: Test files in `.github/workflows/test/` and `.github/shared/test/`
+- **Tests**: Test files in `.github/workflows/test/`, `.github/packages/*/test/`, and `.github/shared/test/`
 - **Configuration**: Root oxlint, Oxfmt, TypeScript, and Vitest configs
 
 ## Technology Stack
@@ -83,9 +85,9 @@ The `.github` directory contains all the code and configuration for GitHub Actio
 - TypeScript is configured with `noEmit`, `allowImportingTsExtensions`, `erasableSyntaxOnly`, and `verbatimModuleSyntax`
 - Use `.ts` relative imports and `import type` for type-only dependencies
 - Do not introduce enums, parameter properties, or namespaces; use frozen objects and value-union type aliases instead of enums
-- Type injected `github`, `context`, and `core` values using `GitHubScriptArgs` from `workflows/src/github.ts`; use its `GitHub`, `Context`, and `Core` types for individual values
-- For helpers that take `core` separately, import the shared `Core` type from `workflows/src/github.ts`
-- Type webhook payloads with `WebhookEvent<"pull-request", "labeled">` from `workflows/src/github.ts`, using GitHub OpenAPI event and action names. Omit the action to accept all actions for an event.
+- Type injected `github`, `context`, and `core` values using `GitHubScriptArgs` from `@azure-tools/github-core/github` (or relative `packages/github-core/src/github.ts` in zero-dependency workflows that run without `install-deps-github-script`); use its `GitHub`, `Context`, and `Core` types for individual values
+- For helpers that take `core` separately, import the shared `Core` type from `@azure-tools/github-core/github`
+- Type webhook payloads with `WebhookEvent<"pull-request", "labeled">` from `@azure-tools/github-core/github`, using GitHub OpenAPI event and action names. Omit the action to accept all actions for an event.
 - Inline `actions/github-script` YAML snippets remain JavaScript; they dynamically import the `.ts` modules
 
 See [the shared package guide](../shared/readme.md) for shared-library development conventions.
@@ -104,6 +106,8 @@ See [the shared package guide](../shared/readme.md) for shared-library developme
 From `package.json` comments:
 
 - **Runtime dependencies**: Must be kept to an absolute minimum for performance
+- **Zero-dependency core**: `.github/packages/github-core` (`@azure-tools/github-core`) must keep zero runtime dependencies (`"dependencies": {}`), enforced by `github-test.yaml` before any `pnpm install`.
+- **Opt-in workflow packages**: Workflows that need heavy or cross-workspace dependencies (such as `@typespec/compiler` or `@azure-tools/spec-gen-sdk-runner`) should live in their own sibling package under `.github/packages/<name>/` and opt into it via `install-deps-github-script` (`filter`, optional `cache: "true"`, and a distinct `cache-name`).
 - **Transitive dependencies**: Ideally zero transitive dependencies for runtime
 - **Relationship**: `.github/package.json` must be a superset of `.github/shared/package.json`
 - **Versions**: Reference external dependencies with `catalog:` and define their versions in the root `pnpm-workspace.yaml` catalog. Keep internal links as `workspace:*`.

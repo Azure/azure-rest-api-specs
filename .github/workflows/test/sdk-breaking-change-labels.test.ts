@@ -1,16 +1,20 @@
-import type { GitHubScriptArgs } from "../src/github.ts";
+import type { GitHubScriptArgs } from "@azure-tools/github-core/github";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { sdkLabels } from "../../shared/src/sdk-types.ts";
 import { createMockSpecGenSdkArtifactInfo } from "../../shared/test/sdk-types.ts";
-import { LabelAction } from "../src/label.ts";
+import { LabelAction } from "@azure-tools/github-core/label";
 import {
   getLabelAndActionImpl,
   getLabelAndAction as getLabelAndActionSrc,
 } from "../src/sdk-breaking-change-labels.ts";
-import { createMockContext, createMockCore, createMockGithub } from "./mocks.ts";
+import {
+  createMockContext,
+  createMockCore,
+  createMockGithub,
+} from "@azure-tools/github-core/test/mocks";
 
 // Mock dependencies
-vi.mock("../src/context.ts", () => ({
+vi.mock("@azure-tools/github-core/context", () => ({
   extractInputs: vi.fn(),
 }));
 
@@ -45,7 +49,7 @@ describe("sdk-breaking-change-labels", () => {
       };
 
       // Setup mock implementation for extractInputs
-      const { extractInputs } = await import("../src/context.ts");
+      const { extractInputs } = await import("@azure-tools/github-core/context");
       (extractInputs as import("vitest").Mock).mockResolvedValue(mockInputs);
 
       // Mock fetch responses
@@ -110,7 +114,7 @@ describe("sdk-breaking-change-labels", () => {
         const mockInputs = {
           details_url: "https://dev.azure.com/project/_build/results?buildId=12345",
         };
-        const { extractInputs } = await import("../src/context.ts");
+        const { extractInputs } = await import("@azure-tools/github-core/context");
         (extractInputs as import("vitest").Mock).mockResolvedValue(mockInputs);
         mockGithub.rest.pulls.get.mockResolvedValue({
           data: { base: { ref: targetBranch } },
@@ -148,7 +152,7 @@ describe("sdk-breaking-change-labels", () => {
       const mockInputs = {
         details_url: "https://dev.azure.com/project/_build/results?buildId=12345",
       };
-      const { extractInputs } = await import("../src/context.ts");
+      const { extractInputs } = await import("@azure-tools/github-core/context");
       (extractInputs as import("vitest").Mock).mockResolvedValue(mockInputs);
       mockGithub.rest.pulls.get.mockResolvedValue({
         data: { base: { ref: "release-feature" } },
@@ -189,7 +193,7 @@ describe("sdk-breaking-change-labels", () => {
       };
 
       // Setup mock for extractInputs
-      const { extractInputs } = await import("../src/context.ts");
+      const { extractInputs } = await import("@azure-tools/github-core/context");
       (extractInputs as import("vitest").Mock)(inputs);
 
       // Mock artifact responses with 'remove' action
@@ -247,7 +251,7 @@ describe("sdk-breaking-change-labels", () => {
       };
 
       // Setup mock for extractInputs
-      const { extractInputs } = await import("../src/context.ts");
+      const { extractInputs } = await import("@azure-tools/github-core/context");
       (extractInputs as import("vitest").Mock)(inputs);
 
       // Mock artifact responses with 'remove' action
@@ -306,7 +310,7 @@ describe("sdk-breaking-change-labels", () => {
       };
 
       // Setup mock for extractInputs
-      const { extractInputs } = await import("../src/context.ts");
+      const { extractInputs } = await import("@azure-tools/github-core/context");
       (extractInputs as import("vitest").Mock).mockResolvedValue(inputs);
 
       // Call function and expect it to throw

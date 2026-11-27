@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { createMockCore } from "../mocks.ts";
+import { createMockCore } from "@azure-tools/github-core/test/mocks";
 
 const mockRaw = vi.hoisted(() =>
   vi.fn<(args: string[]) => string | Promise<string>>().mockResolvedValue(""),

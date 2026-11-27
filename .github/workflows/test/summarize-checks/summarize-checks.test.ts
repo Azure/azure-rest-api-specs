@@ -3,7 +3,7 @@ import { strToU8, zipSync } from "fflate";
 import { marked, type Tokens } from "marked";
 import { describe, expect, it } from "vitest";
 import { execFile } from "../../../shared/src/exec.ts";
-import type { GitHub } from "../../src/github.ts";
+import type { GitHub } from "@azure-tools/github-core/github";
 import {
   createNextStepsComment,
   getCheckInfo,
@@ -14,7 +14,7 @@ import {
   updateLabels,
 } from "../../src/summarize-checks/summarize-checks.ts";
 import summarizeChecks from "../../src/summarize-checks/summarize-checks.ts";
-import { createMockCore, createMockGithub } from "../mocks.ts";
+import { createMockCore, createMockGithub } from "@azure-tools/github-core/test/mocks";
 import { fullGitSha } from "../../../shared/test/examples.ts";
 import { ImpactAssessmentSchema } from "../../src/summarize-checks/labelling.ts";
 

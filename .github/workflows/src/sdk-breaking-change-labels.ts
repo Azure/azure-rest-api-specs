@@ -1,8 +1,11 @@
 import { SpecGenSdkArtifactInfoSchema, sdkLabels } from "../../shared/src/sdk-types.ts";
-import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.ts";
-import { extractInputs } from "./context.ts";
-import type { Core, GitHubScriptArgs } from "./github.ts";
-import { LabelAction } from "./label.ts";
+import {
+  getAdoBuildInfoFromUrl,
+  getAzurePipelineArtifact,
+} from "@azure-tools/github-core/artifacts";
+import { extractInputs } from "@azure-tools/github-core/context";
+import type { Core, GitHubScriptArgs } from "@azure-tools/github-core/github";
+import { LabelAction } from "@azure-tools/github-core/label";
 
 const SUPPORTED_TARGET_BRANCHES = new Set(["main", "RPSaaSMaster"]);
 
@@ -56,7 +59,7 @@ export async function getLabelAndActionImpl({
 }: {
   details_url: string;
   core: Core;
-  retryOptions?: import("./retries.ts").RetryOptions;
+  retryOptions?: import("@azure-tools/github-core/retries").RetryOptions;
 }): Promise<{
   labelName: string | undefined;
   labelAction: LabelAction;

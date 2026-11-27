@@ -3,7 +3,7 @@ import { writeFile } from "node:fs/promises";
 import { dirname, join, posix } from "node:path";
 import { getChangedFilesStatuses, tspconfig } from "../../../shared/src/changed-files.ts";
 import { generateTypeSpecMetadata } from "../../../shared/src/typespec-metadata.ts";
-import type { Core, GitHubScriptArgs, WebhookEvent } from "../github.ts";
+import type { Core, GitHubScriptArgs, WebhookEvent } from "@azure-tools/github-core/github";
 import { loadFormatRules, validateAllNamespaces } from "./validate-format.ts";
 
 // ---------------------------------------------------------------------------

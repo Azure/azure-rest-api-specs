@@ -88,6 +88,71 @@ union RoleManagementScopeType {
   "PrivilegedResourceMemberType"
 );
 @@clientName(
+  Microsoft.PrivilegedAccess.ParentResource,
+  "ParentResourceScope",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PrivilegedAccess.ResourceProjection,
+  "PrivilegedResourceProjection",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PrivilegedAccess.RelatedResourceProjection,
+  "RelatedPrivilegedResourceProjection",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PrivilegedAccess.RoleSource,
+  "RoleAssignmentSource",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PrivilegedAccess.DirectRoleSource,
+  "DirectRoleAssignmentSource",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PrivilegedAccess.GroupRoleSource,
+  "GroupRoleAssignmentSource",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PrivilegedAccess.AssignmentStatus,
+  "RoleAssignmentStatus",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PrivilegedAccess.ScheduleInfo,
+  "RoleAssignmentScheduleDetails",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PrivilegedAccess.ScheduleExpiration,
+  "RoleAssignmentScheduleExpiration",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PrivilegedAccess.ScheduleExpirationType,
+  "RoleAssignmentScheduleExpirationType",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PrivilegedAccess.ScopeKind,
+  "ResourceScopeKind",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PrivilegedAccess.AccessScopeFilter,
+  "PrivilegedResourceAccessScopeFilter",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PrivilegedAccess.PrivilegedResources.list,
+  "GetPrivilegedResources",
+  "csharp"
+);
+@@clientName(
   Microsoft.Authorization.UsersOrServicePrincipalSetUserType,
   "UserType",
   "python"
@@ -110,6 +175,16 @@ union RoleManagementScopeType {
 
 // Restore C# GA resource, model, and extensible-enum names.
 @@clientName(
+  RoleAssignmentScheduleRequest,
+  exact("RoleAssignmentScheduleRequest"),
+  "csharp"
+);
+@@clientName(
+  RoleEligibilityScheduleRequest,
+  exact("RoleEligibilityScheduleRequest"),
+  "csharp"
+);
+@@clientName(
   Microsoft.ProviderOperations.ProviderOperationsMetadata,
   "AuthorizationProviderOperationsMetadata",
   "csharp"
@@ -131,6 +206,11 @@ union RoleManagementScopeType {
 );
 
 // Apply reviewed C# names for Access Review and Role Management APIs.
+@@clientName(
+  Microsoft.AttributeNamespaces.ScopeAccessReviewScheduleDefinitions.listForMyApproval,
+  "GetAccessReviewScheduleDefinitionsAssignedForMyApproval",
+  "csharp"
+);
 @@clientName(
   Microsoft.AttributeNamespaces.AccessReviewScheduleSettings.mailNotificationsEnabled,
   "IsMailNotificationsEnabled",

@@ -1,4 +1,4 @@
-import type { Core, GitHub, WorkflowRuns } from "../github.ts";
+import type { Core, GitHub, WorkflowRuns } from "@azure-tools/github-core/github";
 /*
   Rendering for the dedicated "TypeSpec Suppressions Review" pull request comment.
 

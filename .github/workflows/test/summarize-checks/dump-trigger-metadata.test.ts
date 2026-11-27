@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import dumpTriggerMetadata from "../../src/summarize-checks/dump-trigger-metadata.ts";
-import { createMockContext, createMockCore } from "../mocks.ts";
+import { createMockContext, createMockCore } from "@azure-tools/github-core/test/mocks";
 
 describe("dumpTriggerMetadata", () => {
   it.each([
