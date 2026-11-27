@@ -2173,6 +2173,41 @@ union ManagedDatabaseStatus {
 /**
  * Managed database create mode. PointInTimeRestore: Create a database by restoring a point in time backup of an existing database. SourceDatabaseName, SourceManagedInstanceName and PointInTime must be specified. RestoreExternalBackup: Create a database by restoring from external backup files. Collation, StorageContainerUri and StorageContainerSasToken must be specified. Recovery: Creates a database by restoring a geo-replicated backup. RecoverableDatabaseId must be specified as the recoverable database resource ID to restore. RestoreLongTermRetentionBackup: Create a database by restoring from a long term retention backup (longTermRetentionBackupResourceId required).
  */
+@removed(Versions.v2026_11_01_preview)
+@renamedFrom(Versions.v2026_11_01_preview, "ManagedDatabaseCreateMode")
+union LegacyManagedDatabaseCreateMode {
+  string,
+
+  /**
+   * Default
+   */
+  Default: "Default",
+
+  /**
+   * RestoreExternalBackup
+   */
+  RestoreExternalBackup: "RestoreExternalBackup",
+
+  /**
+   * PointInTimeRestore
+   */
+  PointInTimeRestore: "PointInTimeRestore",
+
+  /**
+   * Recovery
+   */
+  Recovery: "Recovery",
+
+  /**
+   * RestoreLongTermRetentionBackup
+   */
+  RestoreLongTermRetentionBackup: "RestoreLongTermRetentionBackup",
+}
+
+/**
+ * Managed database create mode. PointInTimeRestore: Create a database by restoring a point in time backup. Specify sourceDatabaseId for an existing database or restorableDroppedDatabaseId for a dropped database, and specify restorePointInTime. The dropped database can be on an existing or dropped managed instance. RestoreExternalBackup: Create a database by restoring from external backup files. Collation, StorageContainerUri and StorageContainerSasToken must be specified. Recovery: Creates a database by restoring a geo-replicated backup. RecoverableDatabaseId must be specified as the recoverable database resource ID to restore. RestoreLongTermRetentionBackup: Create a database by restoring from a long term retention backup (longTermRetentionBackupResourceId required).
+ */
+@added(Versions.v2026_11_01_preview)
 union ManagedDatabaseCreateMode {
   string,
 
@@ -2312,6 +2347,24 @@ union AdministratorName {
    * ActiveDirectory
    */
   ActiveDirectory: "ActiveDirectory",
+}
+
+/**
+ * The status of the external administrator.
+ */
+@added(Versions.v2026_11_01_preview)
+union ExternalAdminStatus {
+  string,
+
+  /**
+   * The external administrator is enabled.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * The external administrator is disabled.
+   */
+  Disabled: "Disabled",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2687,6 +2740,39 @@ union MetricType {
    * dtu
    */
   dtu: "dtu",
+}
+
+/**
+ * Requested execution type of top queries.
+ */
+@added(Versions.v2026_11_01_preview)
+union ExecutionType {
+  string,
+
+  /**
+   * Any execution type
+   */
+  any: "any",
+
+  /**
+   * Regular execution type
+   */
+  regular: "regular",
+
+  /**
+   * Irregular execution type
+   */
+  irregular: "irregular",
+
+  /**
+   * Aborted execution type
+   */
+  aborted: "aborted",
+
+  /**
+   * Exception execution type
+   */
+  exception: "exception",
 }
 
 /**
@@ -7910,6 +7996,96 @@ model DistributedAvailabilityGroupSetRole {
 }
 
 /**
+ * The properties of a database operation in a distributed availability group.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only operation tracking resource; it has no provisioning lifecycle."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The SQL project splits generated specifications by feature."
+@added(Versions.v2026_11_01_preview)
+@Azure.ResourceManager.Legacy.feature(
+  Microsoft.SqlFeatureRegistration.DistributedAvailabilityGroupDatabaseOperationFeatures.DistributedAvailabilityGroupsDatabaseOperations
+)
+model DistributedAvailabilityGroupDatabaseOperationProperties {
+  /**
+   * The ID of the link operation that started this database operation.
+   */
+  @visibility(Lifecycle.Read)
+  parentOperationId?: Azure.Core.uuid;
+
+  /**
+   * The name of the database the operation is performed on.
+   */
+  @visibility(Lifecycle.Read)
+  databaseName?: string;
+
+  /**
+   * The type of the operation.
+   */
+  @visibility(Lifecycle.Read)
+  operationType?: DatabaseOperationType;
+
+  /**
+   * The operation status.
+   */
+  @visibility(Lifecycle.Read)
+  status?: ManagementOperationState;
+
+  /**
+   * The operation start time (UTC).
+   */
+  @visibility(Lifecycle.Read)
+  startTime?: utcDateTime;
+
+  /**
+   * The time of the last operation status change (UTC).
+   */
+  @visibility(Lifecycle.Read)
+  lastModifiedTime?: utcDateTime;
+
+  /**
+   * The error details. Set only when the operation fails.
+   */
+  @visibility(Lifecycle.Read)
+  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
+}
+
+/**
+ * The type of the operation.
+ */
+@added(Versions.v2026_11_01_preview)
+union DatabaseOperationType {
+  string,
+
+  /**
+   * Create
+   */
+  Create: "Create",
+}
+
+/**
+ * A list of database operations in a distributed availability group.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The SQL project splits generated specifications by feature."
+@added(Versions.v2026_11_01_preview)
+@Azure.ResourceManager.Legacy.feature(
+  Microsoft.SqlFeatureRegistration.DistributedAvailabilityGroupDatabaseOperationFeatures.DistributedAvailabilityGroupsDatabaseOperations
+)
+model DistributedAvailabilityGroupDatabaseOperationListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: DistributedAvailabilityGroupDatabaseOperation[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: url;
+}
+
+/**
  * A elastic pool operation.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -11313,6 +11489,53 @@ model QueryProperties {
 }
 
 /**
+ * Text of a requested database query.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keep this response model in the existing databases OpenAPI feature file."
+@added(Versions.v2026_11_01_preview)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
+model QueryTextDatabase {
+  /**
+   * The type of the query text result: Microsoft.Sql/servers/databases/topQueries/queryText.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The name of the query text result. Always "current".
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The SQL text of the query. Omitted when query text is not included.
+   */
+  @visibility(Lifecycle.Read)
+  queryText?: string;
+}
+
+/**
+ * A list containing the text of the requested database query.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keep this response model in the existing databases OpenAPI feature file."
+@added(Versions.v2026_11_01_preview)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
+model QueryTextResult {
+  /**
+   * The QueryTextDatabase items on this page
+   */
+  @pageItems
+  value: QueryTextDatabase[];
+
+  /**
+   * The link to the next page of items
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: ResourceLocation<QueryTextDatabase>;
+}
+
+/**
  * Execution statistics for one particular query
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -11715,6 +11938,15 @@ model ManagedDatabaseProperties {
   /**
    * Managed database create mode. PointInTimeRestore: Create a database by restoring a point in time backup of an existing database. SourceDatabaseName, SourceManagedInstanceName and PointInTime must be specified. RestoreExternalBackup: Create a database by restoring from external backup files. Collation, StorageContainerUri and StorageContainerSasToken must be specified. Recovery: Creates a database by restoring a geo-replicated backup. RecoverableDatabaseId must be specified as the recoverable database resource ID to restore. RestoreLongTermRetentionBackup: Create a database by restoring from a long term retention backup (longTermRetentionBackupResourceId required).
    */
+  @removed(Versions.v2026_11_01_preview)
+  @renamedFrom(Versions.v2026_11_01_preview, "createMode")
+  @visibility(Lifecycle.Create)
+  legacyCreateMode?: LegacyManagedDatabaseCreateMode;
+
+  /**
+   * Managed database create mode. PointInTimeRestore: Create a database by restoring a point in time backup. Specify sourceDatabaseId for an existing database or restorableDroppedDatabaseId for a dropped database, and specify restorePointInTime. The dropped database can be on an existing or dropped managed instance. RestoreExternalBackup: Create a database by restoring from external backup files. Collation, StorageContainerUri and StorageContainerSasToken must be specified. Recovery: Creates a database by restoring a geo-replicated backup. RecoverableDatabaseId must be specified as the recoverable database resource ID to restore. RestoreLongTermRetentionBackup: Create a database by restoring from a long term retention backup (longTermRetentionBackupResourceId required).
+   */
+  @added(Versions.v2026_11_01_preview)
   @visibility(Lifecycle.Create)
   createMode?: ManagedDatabaseCreateMode;
 
@@ -11739,6 +11971,15 @@ model ManagedDatabaseProperties {
   /**
    * The restorable dropped database resource id to restore when creating this database.
    */
+  @removed(Versions.v2026_11_01_preview)
+  @renamedFrom(Versions.v2026_11_01_preview, "restorableDroppedDatabaseId")
+  @visibility(Lifecycle.Create)
+  legacyRestorableDroppedDatabaseId?: string;
+
+  /**
+   * The restorable dropped database resource id to restore when creating this database. This may identify a database on a dropped managed instance.
+   */
+  @added(Versions.v2026_11_01_preview)
   @visibility(Lifecycle.Create)
   restorableDroppedDatabaseId?: string;
 
@@ -12851,6 +13092,14 @@ model ManagedInstanceProperties {
   /**
    * Whether or not this is a GPv2 variant of General Purpose edition.
    */
+  @removed(Versions.v2026_11_01_preview)
+  @renamedFrom(Versions.v2026_11_01_preview, "isGeneralPurposeV2")
+  isGeneralPurposeV2Before20261101?: boolean;
+
+  /**
+   * Whether or not this is a GPv2 variant of General Purpose edition. Starting with API version 2026-11-01, this property cannot be used to create a GPv1 instance or change an existing instance to GPv1.
+   */
+  @added(Versions.v2026_11_01_preview)
   isGeneralPurposeV2?: boolean;
 
   /**
@@ -13371,6 +13620,252 @@ model TopQueries {
    */
   @identifiers(#[])
   queries?: QueryStatisticsProperties[];
+}
+
+/**
+ * A list of top resource consuming queries on database.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keep this database query collection in databases.json with its operations under legacy feature-file output splitting."
+@added(Versions.v2026_11_01_preview)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
+model TopQueriesDatabaseListResult is Azure.Core.Page<TopQueriesDatabase>;
+
+/**
+ * Top resource consuming queries on database.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI model is emitted into the existing JSON file with the related database QPI surface under legacy feature-file output splitting."
+@added(Versions.v2026_11_01_preview)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
+model TopQueriesDatabase {
+  /**
+   * The Azure resource type reported for the top queries results.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * Requested number of top queries.
+   */
+  @visibility(Lifecycle.Read)
+  numberOfTopQueries?: int32;
+
+  /**
+   * Aggregation function used to calculate query metrics.
+   */
+  @visibility(Lifecycle.Read)
+  aggregationFunction?: AggregationFunctionType;
+
+  /**
+   * Requested execution type of top queries.
+   */
+  @visibility(Lifecycle.Read)
+  executionType?: ExecutionType;
+
+  /**
+   * Metric used to rank queries.
+   */
+  @visibility(Lifecycle.Read)
+  observedMetric?: MetricType;
+
+  /**
+   * Interval type (length).
+   */
+  @visibility(Lifecycle.Read)
+  intervalType?: QueryTimeGrainType;
+
+  /**
+   * The start time for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  observationStartTime?: utcDateTime;
+
+  /**
+   * The end time for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  observationEndTime?: utcDateTime;
+
+  /**
+   * List of top resource consuming queries with appropriate metric data
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  queries?: QueryMetrics[];
+}
+
+/**
+ * Metrics of a query execution.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI model is emitted into the existing JSON file with the related database QPI surface under legacy feature-file output splitting."
+@added(Versions.v2026_11_01_preview)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
+model QueryMetrics {
+  /**
+   * Unique query id
+   */
+  @visibility(Lifecycle.Read)
+  queryId?: int64;
+
+  /**
+   * List of intervals with appropriate metric data
+   */
+  @identifiers(#[])
+  intervals?: QueryMetricIntervalDetails[];
+}
+
+/**
+ * Properties of a query metrics interval.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI model is emitted into the existing JSON file with the related database QPI surface under legacy feature-file output splitting."
+@added(Versions.v2026_11_01_preview)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
+model QueryMetricIntervalDetails {
+  /**
+   * The start time for the metric interval.
+   */
+  @visibility(Lifecycle.Read)
+  intervalStartTime?: utcDateTime;
+
+  /**
+   * Execution count of a query in this interval.
+   */
+  @visibility(Lifecycle.Read)
+  executionCount?: int32;
+
+  /**
+   * List of metric objects for this interval
+   */
+  @identifiers(#[])
+  metrics?: QueryMetric[];
+}
+
+/**
+ * Properties of a topquery metric in one interval.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI model is emitted into the existing JSON file with the related database QPI surface under legacy feature-file output splitting."
+@added(Versions.v2026_11_01_preview)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
+model QueryMetric {
+  /**
+   * The name information for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The UI appropriate name for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  displayName?: string;
+
+  /**
+   * The unit of the metric.
+   */
+  @visibility(Lifecycle.Read)
+  unit?: QueryMetricUnitType;
+
+  /**
+   * The value of the metric.
+   */
+  @visibility(Lifecycle.Read)
+  value?: float64;
+}
+
+/**
+ * A list of query execution statistics for a database.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Keep this database query collection in databases.json with its operations under legacy feature-file output splitting."
+@added(Versions.v2026_11_01_preview)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
+model QueryStatisticsDatabaseListResult
+  is Azure.Core.Page<QueryStatisticsDatabase>;
+
+/**
+ * A query execution statistics.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI model is emitted into the existing JSON file with the related database QPI surface under legacy feature-file output splitting."
+@added(Versions.v2026_11_01_preview)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
+model QueryStatisticsDatabase {
+  /**
+   * Interval type (length).
+   */
+  @visibility(Lifecycle.Read)
+  intervalType?: QueryTimeGrainType;
+
+  /**
+   * The start time for the metric (ISO-8601 format).
+   */
+  @visibility(Lifecycle.Read)
+  intervalStartTime?: utcDateTime;
+
+  /**
+   * Execution count of a query in this interval.
+   */
+  @visibility(Lifecycle.Read)
+  executionCount?: int32;
+
+  /**
+   * List of metric objects for one interval
+   */
+  @identifiers(#[])
+  metrics?: MetricQuery[];
+}
+
+/**
+ * A query metric.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so this QPI model is emitted into the existing JSON file with the related database QPI surface under legacy feature-file output splitting."
+@added(Versions.v2026_11_01_preview)
+@Azure.ResourceManager.Legacy.feature(Features.Databases)
+model MetricQuery {
+  /**
+   * The name information for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The UI appropriate name for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  displayName?: string;
+
+  /**
+   * The unit of the metric.
+   */
+  @visibility(Lifecycle.Read)
+  unit?: QueryMetricUnitType;
+
+  /**
+   * Metric value when min() aggregate function is used over the interval.
+   */
+  @visibility(Lifecycle.Read)
+  min?: float64;
+
+  /**
+   * Metric value when max() aggregate function is used over the interval.
+   */
+  @visibility(Lifecycle.Read)
+  max?: float64;
+
+  /**
+   * Metric value when avg() aggregate function is used over the interval.
+   */
+  @visibility(Lifecycle.Read)
+  avg?: float64;
+
+  /**
+   * Metric value when sum() aggregate function is used over the interval.
+   */
+  @visibility(Lifecycle.Read)
+  sum?: float64;
+
+  /**
+   * Metric value when stdev aggregate function is used over the interval.
+   */
+  @visibility(Lifecycle.Read)
+  stdev?: float64;
 }
 
 /**
@@ -14031,6 +14526,64 @@ model RestorableDroppedDatabaseProperties {
   keys?: Record<DatabaseKey>;
 }
 
+/** Metadata retained for a dropped managed instance. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This read-only recovery resource describes a deleted instance and has no provisioning lifecycle."
+@added(Versions.v2026_11_01_preview)
+model RestorableDroppedManagedInstanceProperties {
+  /** The name of the managed instance. */
+  @visibility(Lifecycle.Read)
+  managedInstanceName?: string;
+
+  /** The creation time of the managed instance (ISO8601 format). */
+  @visibility(Lifecycle.Read)
+  creationTime?: utcDateTime;
+
+  /** The deletion time of the managed instance (ISO8601 format). */
+  @visibility(Lifecycle.Read)
+  deletionTime?: utcDateTime;
+
+  /** The SLO of the managed instance. */
+  @visibility(Lifecycle.Read)
+  serviceLevelObjective?: string;
+
+  /** The reserved storage size of the managed instance in gigabytes. */
+  @encodedName("application/json", "reservedStorageSizeGB")
+  @visibility(Lifecycle.Read)
+  reservedStorageSizeGb?: int32;
+
+  /** The name of the resource group that contained the managed instance. */
+  @visibility(Lifecycle.Read)
+  resourceGroupName?: string;
+
+  /** The edition of the managed instance. */
+  @visibility(Lifecycle.Read)
+  edition?: string;
+
+  /** The number of virtual cores provisioned for the managed instance. */
+  @visibility(Lifecycle.Read)
+  vCores?: int32;
+
+  /** The DNS zone of the managed instance. */
+  @visibility(Lifecycle.Read)
+  dnsZone?: string;
+
+  /** Whether the managed instance used zone redundancy. */
+  @visibility(Lifecycle.Read)
+  zoneRedundant?: boolean;
+
+  /** The backup storage redundancy used by the managed instance. */
+  @visibility(Lifecycle.Read)
+  backupStorageAccountType?: string;
+
+  /** The SQL engine version edition of the managed instance. */
+  @visibility(Lifecycle.Read)
+  versionEdition?: string;
+
+  /** The customer-visible state of the dropped managed instance. */
+  @visibility(Lifecycle.Read)
+  state?: string;
+}
+
 /**
  * The restorable dropped managed database's properties.
  */
@@ -14066,6 +14619,13 @@ model RestorableDroppedManagedDatabaseProperties {
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   earliestRestoreDate?: utcDateTime;
+
+  /**
+   * The name of the resource group that contained the source managed instance.
+   */
+  @added(Versions.v2026_11_01_preview)
+  @visibility(Lifecycle.Read)
+  resourceGroupName?: string;
 }
 
 /**
@@ -14205,6 +14765,13 @@ model AdministratorProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   azureADOnlyAuthentication?: boolean;
+
+  /**
+   * The status of the external administrator.
+   */
+  @added(Versions.v2026_11_01_preview)
+  @visibility(Lifecycle.Read)
+  status?: ExternalAdminStatus;
 }
 
 /**
@@ -14698,6 +15265,13 @@ model ServerExternalAdministrator {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   azureADOnlyAuthentication?: boolean;
+
+  /**
+   * The status of the external administrator.
+   */
+  @added(Versions.v2026_11_01_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  status?: ExternalAdminStatus;
 }
 
 /**
