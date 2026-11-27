@@ -49,6 +49,11 @@ using Microsoft.ProfessionalService;
   "ProfessionalServiceSubscriptionStatusReason",
   "csharp"
 );
+@@clientName(
+  ProfessionalServiceResourceStatus,
+  "ProfessionalServiceSubscriptionStatus",
+  "csharp"
+);
 
 @@clientName(
   Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
