@@ -1,6 +1,5 @@
 import "@typespec/http";
 import "@typespec/openapi";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "../agents/models.tsp";
 import "./agents.tsp";
@@ -9,7 +8,6 @@ import "./openai-preview-models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 using Azure.Core.Experimental;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
@@ -577,7 +575,6 @@ namespace Azure.AI.Projects {
     twilio: "twilio",
 
     @doc("Infobip Calls API for inbound calls. Infobip is in preview and requires the `VoiceAgents=V1Preview` opt-in.")
-    @added(Versions.v1)
     infobip: "infobip",
 
     @doc("Session Initiation Protocol. SIP is in preview and requires the `VoiceAgents=V1Preview` opt-in.")
@@ -673,7 +670,6 @@ namespace Azure.AI.Projects {
    * opt-in and a validated Infobip connection in the same project. The connection and phone number
    * cannot be changed after creation. Outbound calling and call transfer are not supported.
    */
-  @added(Versions.v1)
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   model InfobipTelephonyBinding extends TelephonyBinding {
     /** The Infobip provider. */
@@ -750,7 +746,6 @@ namespace Azure.AI.Projects {
   }
 
   /** An inbound Infobip binding returned in a list, including its current entity tag. */
-  @added(Versions.v1)
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
   model InfobipTelephonyBindingListItem extends TelephonyBindingListItem {
     ...PickProperties<InfobipTelephonyBinding, "provider" | "phone_number">;

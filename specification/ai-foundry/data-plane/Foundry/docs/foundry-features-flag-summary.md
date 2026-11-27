@@ -50,7 +50,8 @@ enforcement.
 
 ### Infobip telephony bindings
 
-The `v1` contract includes the preview `infobip` provider for inbound calls.
+Both the `virtual-public-preview` and `v1` specifications include the preview
+`infobip` provider for inbound calls.
 Creating or updating an Infobip binding requires
 `Foundry-Features: VoiceAgents=V1Preview`. The provider shares the existing
 binding create, get, list, update, and delete operations; existing Teams,
