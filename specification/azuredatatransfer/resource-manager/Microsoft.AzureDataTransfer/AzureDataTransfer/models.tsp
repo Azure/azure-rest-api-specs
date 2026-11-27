@@ -1508,6 +1508,18 @@ model PipelinesPatchProperties {
    * The flow types allowed for this pipeline. FlowTypes has reached end of life support starting version 2025-05-30-preview. Please create and use the FlowProfile property instead.
    */
   flowTypes?: FlowType[];
+
+  /**
+   * Storage account used to download quarantined data.
+   */
+  @added(Versions.v2026_11_04_preview)
+  quarantineDownloadStorageAccount?: string;
+
+  /**
+   * Storage container used to download quarantined data.
+   */
+  @added(Versions.v2026_11_04_preview)
+  quarantineDownloadStorageContainer?: string;
 }
 
 /**

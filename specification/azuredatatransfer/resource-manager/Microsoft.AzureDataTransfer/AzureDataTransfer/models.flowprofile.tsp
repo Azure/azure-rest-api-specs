@@ -142,40 +142,116 @@ model FlowProfileProperties {
 }
 
 /**
- * The allowed set of configurable rulesets for a FlowProfile resource, used during data replication. All rulesets are optional, and any ruleset configured will be applied to every applicable replicating data. Any data that fails a ruleset will be denied replication. If a ruleset is not configured then the ruleset is considered disabled and will not apply towards replicating data.
+ * The allowed set of configurable rulesets for a FlowProfile resource, used during data replication.
  */
 @added(Versions.v2025_05_30_preview)
 model FlowProfileRulesets {
   /**
    * Antivirus scanning rules for replicated data.
    */
-  antivirus?: AntivirusRuleset;
+  @typeChangedFrom(Versions.v2026_11_04_preview, AntivirusRuleset)
+  antivirus?: AntivirusRulesetActions;
 
   /**
    * Rules for handling archive files during replication.
    */
-  archives?: ArchiveRuleset;
+  @typeChangedFrom(Versions.v2026_11_04_preview, ArchiveRuleset)
+  archives?: ArchiveRulesetActions;
 
   /**
    * Rules that enforce minimum and maximum data size limits.
    */
-  dataSize?: DataSizeRuleset;
+  @typeChangedFrom(Versions.v2026_11_04_preview, DataSizeRuleset)
+  dataSize?: DataSizeRulesetActions;
 
   /**
    * Rules for filtering files based on MIME types.
    */
-  mimeFilters?: MimeFilterRuleset;
+  @typeChangedFrom(Versions.v2026_11_04_preview, MimeFilterRuleset)
+  mimeFilters?: MimeFilterRulesetActions;
 
   /**
    * Rules for filtering XML content using XSD schemas.
    */
-  xmlFilters?: XmlFilterRuleset;
+  @typeChangedFrom(Versions.v2026_11_04_preview, XmlFilterRuleset)
+  xmlFilters?: XmlFilterRulesetActions;
 
   /**
    * Rules for detecting and blocking specific text patterns.
    */
-  textMatching?: TextMatchingRuleset;
+  @typeChangedFrom(Versions.v2026_11_04_preview, TextMatchingRuleset)
+  textMatching?: TextMatchingRulesetActions;
 }
+
+/**
+ * Actions specifying how a ruleset failure affects data transfer.
+ * @template Ruleset The rules configured for each action.
+ */
+@added(Versions.v2026_11_04_preview)
+model RulesetActions<Ruleset> {
+  /**
+   * Failures are recorded in an audit log without blocking data transfer.
+   */
+  audit?: Ruleset;
+
+  /**
+   * Failures block data transfer for manual review.
+   */
+  quarantine?: Ruleset;
+
+  /**
+   * Failures block data transfer without further review.
+   */
+  deny?: Ruleset;
+}
+
+/**
+ * Actions applied when antivirus scanning rules fail.
+ */
+@added(Versions.v2026_11_04_preview)
+model AntivirusRulesetActions is RulesetActions<AntivirusRuleset>;
+
+/**
+ * Actions applied when archive processing rules fail.
+ */
+@added(Versions.v2026_11_04_preview)
+model ArchiveRulesetActions is RulesetActions<ArchiveRuleset>;
+
+/**
+ * Actions applied when file size rules fail.
+ */
+@added(Versions.v2026_11_04_preview)
+model DataSizeRulesetActions is RulesetActions<DataSizeRuleset>;
+
+/**
+ * Actions applied when MIME filtering rules fail.
+ */
+@added(Versions.v2026_11_04_preview)
+model MimeFilterRulesetActions is RulesetActions<MimeFilterRuleset>;
+
+/**
+ * Actions applied when XML filtering rules fail.
+ */
+@added(Versions.v2026_11_04_preview)
+model XmlFilterRulesetActions is RulesetActions<XmlFilterRuleset>;
+
+/**
+ * Actions applied when text patterns match replicated content.
+ */
+@added(Versions.v2026_11_04_preview)
+model TextMatchingRulesetActions is RulesetActions<TextMatch[]>;
+@@identifiers(
+  TextMatchingRulesetActions.audit,
+  #["text", "matchType", "caseSensitivity"]
+);
+@@identifiers(
+  TextMatchingRulesetActions.quarantine,
+  #["text", "matchType", "caseSensitivity"]
+);
+@@identifiers(
+  TextMatchingRulesetActions.deny,
+  #["text", "matchType", "caseSensitivity"]
+);
 
 /**
  * Antivirus scanning rules for replicating data. By default, all antivirus scanning solutions are disabled.
@@ -204,6 +280,12 @@ union AntivirusSolutions {
    * Option to use the external ClamAV open-source software as an antivirus scanning solution.
    */
   ClamAv: "ClamAv",
+
+  /**
+   * Option to use Sophos antivirus scanning software as the scanning solution.
+   */
+  @added(Versions.v2026_11_04_preview)
+  SophosAV: "SophosAV",
 }
 
 /**
@@ -218,13 +300,13 @@ model ArchiveRuleset {
   minimumSizeForExpansion?: int64 = 0;
 
   /**
-   * Optional. The combined maximum size (in bytes) of all extracted files that an expanded archive is allowed to reach. Archives exceeding the max limit will be denied for replication.
+   * Optional. The combined maximum size (in bytes) of all extracted files that an expanded archive is allowed to reach. Archives exceeding the limit fail the ruleset.
    */
   @minValue(0)
   maximumExpansionSizeLimit?: int64;
 
   /**
-   * Optional. The maximum depth of nested archives that can be expanded. Limits how many layers of embedded archives will be processed. Archives exceeding the max limit will be denied for replication.
+   * Optional. The maximum depth of nested archives that can be expanded. Limits how many layers of embedded archives will be processed. Archives exceeding the limit fail the ruleset.
    */
   @minValue(0)
   maximumDepthLimit?: int64;
@@ -242,13 +324,13 @@ model ArchiveRuleset {
 @added(Versions.v2025_05_30_preview)
 model DataSizeRuleset {
   /**
-   * Optional. Specifies the maximum allowed size (in bytes) for files to be replicated. Any file size greater than maximum will be denied replication.
+   * Optional. Specifies the maximum allowed size (in bytes) for files to be replicated. Any file size greater than maximum fails the ruleset.
    */
   @minValue(0)
   maximum?: int64;
 
   /**
-   * Optional. Default is 0. Specifies the minimum required size (in bytes) for a file to be eligible for replication. Any file size less than minimum will be denied replication.
+   * Optional. Default is 0. Specifies the minimum required size (in bytes) for a file to be eligible for replication. Any file size less than minimum fails the ruleset.
    */
   @minValue(0)
   minimum?: int64 = 0;
@@ -358,7 +440,7 @@ model TextMatchingRuleset {
 }
 
 /**
- * Configuration options for the text matching ruleset. For example, if the configuration is to deny "hello world" for partial case-insensitive words then "chello worlds" would get detected and the resulting file would be denied.
+ * Configuration options for the text matching ruleset. For example, with partial case-insensitive matching, "hello world" matches "chello worlds". A match fails the ruleset.
  */
 model TextMatch {
   /**
