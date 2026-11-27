@@ -49,6 +49,22 @@ mode**. Mode is determined by execution context, not inferred ad hoc:
 **Default when unsure:** if an Actions/gh-aw context is present, treat
 the run as autonomous; otherwise treat it as interactive.
 
+## Single review-body summary
+
+Every posted ARM review uses exactly one non-empty review body as its public
+header and summary. That body contains the reviewed commit, Critic-verification
+disclosure, scope disclosure when applicable, approval-label inventory, finding
+counts, key themes, and summary telemetry marker. The specific findings follow
+as review comments in the same review; findings that cannot be anchored to the
+PR diff are included in a dedicated subsection of the review body.
+
+Do not post a separate top-level summary comment, including for a clean review.
+When there are no findings, the same review body says `No issues found.` This
+keeps the run visible without publishing a second, redundant summary surface.
+Top-level comments remain available only for content that is not the run
+summary, such as a consolidated contradiction clarification or an actionable
+publication failure diagnostic.
+
 ## Cross-session reconciliation
 
 The reconciliation contract is identical for every review entry point:
@@ -154,16 +170,34 @@ be fetched, reconciliation is incomplete and follows the existing
    - inline examples,
    - file path / line number / JSON path citations,
    - the trailing telemetry marker (including all required fields).
+     If a legitimate finding has no valid anchor in the PR diff, place that
+     same complete canonical body once in the review body's `Findings on
+     unchanged files` subsection. This includes unchanged lines outside the
+     diff hunks of a modified file, not just files absent from the diff. This
+     is a posting-surface exception, not
+     permission to replace the finding with a summary theme or shortened text.
 3. **No re-authoring during payload assembly.** Heredoc rebuilds,
    payload-time JSON-string escaping, multi-finding consolidation, or
    any step that involves "rewriting the body inline" is **forbidden**.
    Generate each comment body once, store it, and reference the stored
-   value when building the payload.
-4. **Exact one-to-one mapping.** Every finding that is posted **MUST**
-   map to exactly one inline comment in the posted review. In
+   value when building the payload. Lossless concatenation of separately
+   delimited canonical bodies in the unchanged-file subsection is allowed;
+   merging their content or rewriting them as one summarized finding is not.
+4. **Exact one-to-one mapping.** Every finding that is posted **MUST** map to
+   exactly one complete canonical entry: an inline review comment when its
+   path and line can be anchored to the PR diff, or a separately delimited
+   entry in the review body's unchanged-file subsection when they cannot.
+   Verify the path, side, and any line range against the diff at the pinned
+   base/head SHAs before queuing an inline entry. A changed filename alone is
+   not proof of a valid anchor. Added lines and unchanged context lines in a
+   hunk may be valid; unchanged lines outside the hunks are not. When a patch
+   is missing or truncated and anchor validity cannot be established, use the
+   full-body subsection rather than guessing or relying on publisher recovery.
+   Never invent an anchor or modify an unrelated file to obtain one. In
    interactive mode the human-approved subset **MUST** map one-to-one to
-   the posted comments; in autonomous mode every net-new finding in the
-   agreed set **MUST** map one-to-one to a posted comment. The consumer
+   these posted entries; in autonomous mode every net-new finding in the
+   agreed set **MUST** map one-to-one to a posted entry. Counts describe
+   findings, not the number of API comment objects. The consumer
    **MUST NOT** see N findings and the PR receive N-1 (something dropped)
    or N+1 (something added). Severity tags (`🔴 Blocking`,
    `🟠 Warning`, `🔵 Suggestion`) and `[NEW]` / `[EXISTING]`
@@ -179,7 +213,13 @@ be fetched, reconciliation is incomplete and follows the existing
      present in the posted body,
    - the telemetry marker containing `posted-by: arm-api-reviewer-agent`
      and the required marker fields is present.
-     Posting-mode handling:
+     For entries in the review body, fetch the published review body as well
+     and compare each separately delimited entry with its stored canonical
+     string. Each entry must be present exactly once and retain all of the
+     content and marker checks above; reviewing only the counts or themes is
+     not verification of those findings.
+
+   Posting-mode handling:
    - **Direct posting:** On any mismatch the agent **MUST** PATCH the affected
      comment(s) (`PATCH /repos/{owner}/{repo}/pulls/comments/{id}`) to restore
      the canonical text and re-verify before reporting completion to the user.

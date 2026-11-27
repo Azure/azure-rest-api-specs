@@ -1605,6 +1605,27 @@ If the plan has zero Scenario E rows, elements 1 and 4 still appear (with a `0`-
 
 After the human chooses, execute the approved subset of the plan:
 
+Prepare one non-empty review body for the human-approved posting plan, as
+required by the shared single-review-body summary contract. Include scope,
+counts, themes, and any canonical findings that cannot be anchored to the diff
+in that body, not in separate top-level summary or finding comments. A clean
+or reconciliation-only review still uses one review body when the human
+approved publishing it; create and submit one pending review even when no
+inline finding is queued. Local/read-only reviews and cancelled plans do not
+publish a review.
+
+Before adding an inline finding, verify its path, side, and any line range
+against the diff for the pinned base/head SHAs. A modified filename alone is
+not enough: added lines and unchanged context lines within a hunk may be valid,
+but an unchanged line outside the hunks has no valid inline anchor. Do not
+reuse a deleted `LEFT` line as a `RIGHT` anchor. If the patch is missing or
+truncated and the anchor cannot be verified, or no valid anchor exists, retain
+the complete canonical finding once in `Findings on unchanged files` in the
+single review body, even when its file was modified. Do not select a nearby
+changed line, shorten the body, or wait for a 422 before choosing this route.
+This changes only the posting surface, not the finding or review-completeness
+requirements.
+
 1. **Wait for explicit confirmation** from the reviewer before any post, reply, or resolution.
 2. **POST-NEW** - create a pending review with `pull_request_review_write(method: "create")`, add one finding at a time with `add_comment_to_pending_review` attached to the specific file and **exact line number** in the plan, then submit **once** with `pull_request_review_write(method: "submit_pending")`, passing the **Review-body preamble** defined below as that call's `body`. **Every inline finding produced by a run goes through this one review.** Do not split findings across multiple reviews, and never submit a review with an empty body -- an empty-body `COMMENTED` review leaves its findings with no visible attribution and is a defect. Format and telemetry rules below apply.
 3. **RESOLVE-AND-REPOST** (Scenario B) - resolve the cited trusted workflow-owned thread first, then post a new comment at the corrected line and include the cross-reference text: "_(Updated from previous comment at <url> - line shifted due to code changes.)_" Format and telemetry rules below apply to the new comment.
@@ -1623,11 +1644,23 @@ After the human chooses, execute the approved subset of the plan:
 ```markdown
 ## ARM API Review
 
-Posting findings from the [ARM API Reviewer agent](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/api-reviewer-agent.md) (<verification-status>, <N> iteration(s), <outcome>) against commit [`<short-sha>`](https://github.com/<owner>/<repo>/pull/<pr-number>/commits/<full-sha>). See inline comments for findings <range-or-list>.<optional sentence describing any findings posted as top-level comments because they concern files outside the PR diff>
+Posting findings from the [ARM API Reviewer agent](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/api-reviewer-agent.md) (<verification-status>, <N> iteration(s), <outcome>) against commit [`<short-sha>`](https://github.com/<owner>/<repo>/pull/<pr-number>/commits/<full-sha>). See inline comments for findings <range-or-list>.
+
+<scope disclosure -- include when the review was scoped or the file list was truncated; omit otherwise>
 
 Approval labels observed: `<exact-label-1>`, `<exact-label-2>`.
 
 <overflow disclosure -- include only when candidates were excluded by the 20-comment limit; omit otherwise>
+
+| Category   | Count |
+| ---------- | ----- |
+| Blocking   | N     |
+| Warning    | N     |
+| Suggestion | N     |
+
+<one-sentence summary of key themes, or "No issues found.">
+
+<Findings on unchanged files -- include complete canonical finding bodies only when they cannot be anchored to the diff; omit otherwise>
 
 <!-- posted-by: arm-api-reviewer-agent | rule: summary | category: summary | severity: <highest-posted-severity-or-suggestion> | classification: <new-if-any-new-finding-else-existing> | critic: pass|warn|unknown | head-sha: <full-40-char-session-sha> -->
 ```
@@ -1646,19 +1679,30 @@ Substitution rules:
 - `<short-sha>`: the **first 7 characters** of the session SHA pinned in Step 1, used as the link's display text.
 - `<full-sha>`: the **full 40-character** session SHA pinned in Step 1, used in the link target. Do not abbreviate the link target -- short SHAs in URLs are acceptable but the full SHA is canonical and matches the `head-sha` field in each comment's telemetry marker, which is what auditors will grep for.
 - `<owner>`, `<repo>`, `<pr-number>`: derived from the PR URL captured in Step 1 (e.g., `Azure`, `azure-rest-api-specs`, `12345`).
-- `<range-or-list>`: the inline-finding numbering used in the chat report (e.g., `1-12`, or `3-12` when findings 1-2 were posted as top-level comments). Use a plain space + number; **never** prefix with `#` (see next bullet).
+- `<range-or-list>`: the numbering of findings actually queued inline from the chat report (e.g., `1-12`, or `3-12` when findings 1-2 are in the review body's unchanged-file subsection). Use a plain space + number; **never** prefix with `#` (see next bullet).
+- Enumerate only findings actually queued inline. When there are no inline
+  findings, replace the "See inline comments" sentence with "No inline findings
+  were posted." Findings without a valid inline anchor retain their full canonical bodies,
+  severity, classification, citations, fix snippets, and markers in the
+  `Findings on unchanged files` subsection and still count in the category
+  table. Do not copy them into standalone top-level comments.
+- For a clean review, replace "Posting findings from" with "Review completed
+  by", use zero counts, and state `No issues found.` in the same body. Retain
+  the Critic-verification disclosure and all applicable scope and approval
+  disclosures; a scoped or unverified review must not imply a full verified
+  review. The clean summary marker uses `severity: suggestion` and
+  `classification: existing`.
 - Approval labels are the exact names captured from PR metadata in Step 1 that
   match the API-review families defined in
   `arm-api-review.instructions.md`. When none matched, replace the line with
   `Approval labels observed: none.` Do not omit the line.
-- The optional trailing sentence is included **only** when one or more findings could not be attached to a line in the PR diff and were therefore posted as top-level review comments instead of inline comments. Omit it otherwise.
 - **Cross-repo URL choice.** The preamble link target always points at the public `Azure/azure-rest-api-specs` copy of `documentation/api-reviewer-agent.md`, even when the review is posted on the private `Azure/azure-rest-api-specs-pr` repo. The public copy is the canonical, durable reference; the private repo does not maintain an independent copy.
 - **Missing-placeholder degradation.** If an individual placeholder above cannot be resolved, still submit a **non-empty** body: substitute `unknown` for that one value and keep every other line intact. Dropping the body is never an acceptable fallback for a missing field.
 
 **Visible-attribution post-condition (MANDATORY -- runs before Step 8 ends).** After the last posting action of the run, re-fetch the PR's review bodies and its top-level comments and confirm that at least one **visible** body contains the literal `## ARM API Review` preamble. The hidden `posted-by: arm-api-reviewer-agent` telemetry marker does **not** satisfy this check: it is an HTML comment, it does not render, and to a reader the findings still appear unattributed.
 
 - If a visible preamble is present, record that in the outcome report and finish.
-- If none is present -- including the case where findings reached the PR only through a Failure Modes fallback (Inline-anchor 422 -> `add_issue_comment`, or the empty-stdout recovery path), which bypasses the review body entirely -- post the preamble template above as a **top-level PR comment** before the run ends, then re-verify.
+- If none is present because review publication failed or an empty-stdout recovery confirmed only standalone findings, post one actionable publication-failure diagnostic containing the complete preamble above as a **top-level PR comment**, then re-verify. This rescue is not an extra routine summary; never duplicate a review body that was successfully published.
 - A run that posted at least one finding and ends with no visible preamble anywhere is a **Step 8 defect**, not an acceptable outcome.
 
 **Posted-comment formatting and telemetry** (applies to every POST-NEW and RESOLVE-AND-REPOST comment):
@@ -1692,7 +1736,12 @@ Substitution rules:
   the protocol):
   - **Validate `override-reason` in Step 7**, not at Step 8 posting time. When the human supplies an override decision during Step 7 item 13, apply the canonical **Override-reason validator** specified in the protocol -- see [`./protocols/arm-api-review-critic.protocol.md` -> Override-reason validator](./protocols/arm-api-review-critic.protocol.md#override-reason-validator) -- **before** folding the override into the report. A bad reason must block plan finalization, not posting. If validation fails, refuse to fold the override and surface the validation error to the human so they can supply a real justification before re-invoking the Critic.
   - The `head-sha` field MUST be the **full 40-character commit SHA**, not the abbreviated 7-char form. Short SHAs are only acceptable in conversational chat text.
-  - Use `rule: summary` on summary comments, accompanied by `severity: suggestion` and `classification: new`. In **this interactive agent** a summary comment is posted only when the human approves one, so `rule: summary` is rare here. The autonomous `arm-api-review` workflow is different: its Step 8 posts a summary comment on **every** run, and that comment carries this same `rule: summary` marker. Do not read "not posted by default" as permission to omit the summary comment, or its marker, when running under that workflow.
+  - Use `rule: summary` on the single review body in both interactive and
+    autonomous modes. Compute its severity and classification from the posted
+    findings as shown in the template; clean reviews use `suggestion` and
+    `existing`. Both modes retain the Critic disclosure and summary marker in
+    that body and do not post a second top-level run summary. Interactive
+    publication still requires the human-approved posting plan.
 
   Example (normal post): `<!-- posted-by: arm-api-reviewer-agent | rule: RPC-Put-V1-11 | category: resource-modeling | severity: blocking | classification: new | critic: pass | head-sha: a1b2c3d4e5f60718293a4b5c6d7e8f9012345678 -->`
 
@@ -1798,7 +1847,7 @@ When a step in the workflow fails, recover deterministically using the table bel
 | **Critic invocation fails** (Step 7)                 | `agent` tool errors, empty response, or the critic returns malformed output.                                                                                                                  | Apply the Step 7 retry protocol (up to 3 total attempts with compact-mode on retries 2-3). After all retries fail, auto-fall to `critic-mode=unavailable` and render the UNAVAILABLE banner. Do **not** self-substitute. Do **not** ask the user for a manual paste.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | **Comment-post failure** (Step 8)                    | `add_comment_to_pending_review` errors on a specific finding, or `pull_request_review_write(method: "submit_pending")` fails.                                                                 | Report which findings were added to the pending review and whether submission failed. Do not retry blindly - a 422 typically means the line/path is invalid (often a stale SHA). Re-verify against the current head SHA before retry. When falling back to `gh api`, send the comment body as JSON via `--input <json-file>`; do not use `-f body=@<file>`, which sends the literal path. After posting, re-fetch each created comment and confirm its body matches the canonical text.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | **Comment-post returned no visible output** (Step 8) | gh api -X POST .../comments (top-level or inline) returns empty stdout or the wrapping terminal tool reports "no output," instead of the expected { "id": ..., "html_url": ... } JSON.        | Do **NOT** retry the POST. Empty output from the wrapping tool is **not** evidence the API call failed -- the comment may have posted successfully and only the stdout was swallowed (encoding, buffering, or tool truncation). Retrying creates duplicates. Instead: re-list recent comments with the MCP tools (`pull_request_read(method: "get_review_comments")` for inline, the issue-comments listing for top-level); if the shell is genuinely unavoidable, use the temp-file `--jq` form from [Shell fallback discipline](#shell-fallback-discipline) and never inline the filter and check whether your post landed in the last few seconds. If it did, record the ID and proceed. If it did not, then retry. If duplicates are detected (multiple comments with the same body within seconds), delete the older ones via gh api -X DELETE repos/<owner>/<repo>/issues/comments/<id> (or pulls/comments/<id>) and keep the newest, then surface the duplicate-and-cleanup event to the human. Findings that reached the PR through this path never passed through a review body, so the **Visible-attribution post-condition** in Step 8 still applies before the run ends. |
-| **Inline-anchor 422** (Step 8)                       | `add_comment_to_pending_review` returns 422 "Line could not be resolved" when posting an inline comment on a line that is unchanged in the PR diff.                                           | The PR Reviews API only accepts inline comments on lines inside the diff hunks. `subjectType: file` is **not** supported by this pending-review flow. For findings on unchanged lines (typically `[EXISTING]` findings flagged because new sibling code makes them salient), fall back to a top-level PR comment via `add_issue_comment`, or `gh api` if that tool is unavailable, and disclose the fallback in the review preamble (e.g., "Both findings concern lines unchanged in this PR's diff and are posted as top-level PR comments rather than inline."). Because a top-level comment bypasses the review body, the **Visible-attribution post-condition** in Step 8 still applies: confirm a visible `## ARM API Review` preamble exists on the PR, and post one as a top-level comment if it does not.                                                                                                                                                                                                                                                                                                                                                                    |
+| **Inline-anchor 422** (Step 8)                       | `add_comment_to_pending_review` returns 422 "Line could not be resolved" when posting an inline comment on a line that is unchanged in the PR diff.                                           | The PR Reviews API only accepts inline comments on lines inside the diff hunks. `subjectType: file` is **not** supported by this pending-review flow. Recheck the session SHA, then place the entire approved canonical finding in the pending review body's `Findings on unchanged files` subsection, preserving its severity, classification, citations, fix snippet, and marker. Include it in the counts, remove it from the inline-number range, and submit the same pending review once. Do not create a standalone top-level finding or second run summary. If review submission itself fails, use the comment-post failure path and visible-attribution post-condition rather than claiming successful publication.                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | **Shell parse error** (any step)                     | A `gh` or terminal call fails with `CommandNotFoundException`, `accepts N arg(s), received M`, `accepts at most N arg(s), received M`, or an unbalanced-quote error.                          | This is a **client-side** quoting failure, not a GitHub failure -- the request never reached GitHub, so the data may well be fine. Do **not** retry quoting or escaping permutations of the same command; that is the loop this row exists to break. Re-issue **at most once**, using the temp-file form from [Shell fallback discipline](#shell-fallback-discipline). On the **second** consecutive shell-syntax failure for the same objective, stop using the shell for that objective and switch to the GitHub MCP tool (`pull_request_read`, `get_file_contents`, `pull_request_review_write`). Cap `gh`-syntax attempts at **2 total** per objective.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | **Partial-success state**                            | Some files reviewed, some failed; some comments posted, some not.                                                                                                                             | Always end with a Summary section that distinguishes "reviewed," "skipped due to fetch failure," "posted," and "failed to post." Never present a partial result as complete.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
