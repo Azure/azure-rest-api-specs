@@ -349,8 +349,14 @@ using Microsoft.MachineLearningServices;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Registry.properties);
 
-@@clientName(Workspaces.createOrUpdate::parameters.resource, "body");
-@@clientName(Workspaces.update::parameters.properties, "body");
+@@clientName(Workspaces.createOrUpdate::parameters.resource, "body", "!go");
+@@clientName(
+  Workspaces.createOrUpdate::parameters.resource,
+  "parameters",
+  "go"
+);
+@@clientName(Workspaces.update::parameters.properties, "body", "!go");
+@@clientName(Workspaces.update::parameters.properties, "parameters", "go");
 @@clientLocation(Workspaces.list, "WorkspaceFeatures");
 @@clientLocation(Workspaces.getAllModels, "Connection");
 @@clientLocation(Workspaces.getInWorkspace, EndpointDeployment);
@@ -365,8 +371,15 @@ using Microsoft.MachineLearningServices;
 
 @@clientName(
   PrivateEndpointConnections.createOrUpdate::parameters.resource,
-  "body"
+  "body",
+  "!go"
 );
+@@clientName(
+  PrivateEndpointConnections.createOrUpdate::parameters.resource,
+  "properties",
+  "go"
+);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   PrivateEndpointConnection.properties
@@ -382,7 +395,13 @@ using Microsoft.MachineLearningServices;
 );
 @@clientName(
   WorkspaceConnectionPropertiesV2BasicResources.create::parameters.resource,
-  "body"
+  "body",
+  "!go"
+);
+@@clientName(
+  WorkspaceConnectionPropertiesV2BasicResources.create::parameters.resource,
+  "parameters",
+  "go"
 );
 @@clientLocation(
   WorkspaceConnectionPropertiesV2BasicResources.update,
@@ -392,6 +411,7 @@ using Microsoft.MachineLearningServices;
   WorkspaceConnectionPropertiesV2BasicResources.update::parameters.properties,
   "body"
 );
+
 @@clientLocation(
   WorkspaceConnectionPropertiesV2BasicResources.delete,
   "WorkspaceConnections"
