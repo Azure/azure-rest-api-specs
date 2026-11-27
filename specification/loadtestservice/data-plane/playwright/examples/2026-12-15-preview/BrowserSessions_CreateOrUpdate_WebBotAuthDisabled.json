@@ -1,0 +1,53 @@
+{
+  "title": "BrowserSessions_CreateOrUpdate_WebBotAuthDisabled",
+  "operationId": "BrowserSessions_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-12-15-preview",
+    "workspaceId": "00000000-0000-0000-0000-000000000000",
+    "sessionId": "11111111-1111-1111-1111-111111111111",
+    "resource": {
+      "displayName": "UnsignedBrowserSession",
+      "browserType": "Chromium",
+      "operatingSystem": "Linux",
+      "protocol": "CDP",
+      "enableWebBotAuth": false
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "11111111-1111-1111-1111-111111111111",
+        "displayName": "UnsignedBrowserSession",
+        "creatorId": "string",
+        "creatorName": "string",
+        "source": {
+          "id": "00000000-0000-0000-0000-000000000000",
+          "type": "Mcp"
+        },
+        "status": "Created",
+        "browserType": "Chromium",
+        "operatingSystem": "Linux",
+        "protocol": "CDP",
+        "enableWebBotAuth": false
+      }
+    },
+    "201": {
+      "body": {
+        "id": "11111111-1111-1111-1111-111111111111",
+        "displayName": "UnsignedBrowserSession",
+        "creatorId": "string",
+        "creatorName": "string",
+        "source": {
+          "id": "00000000-0000-0000-0000-000000000000",
+          "type": "Mcp"
+        },
+        "status": "Created",
+        "browserType": "Chromium",
+        "operatingSystem": "Linux",
+        "protocol": "CDP",
+        "enableWebBotAuth": false,
+        "browserEndpoint": "wss://dummyRegion.browser.playwright.microsoft.com/ws?dummyParam=dummyValue"
+      }
+    }
+  }
+}
