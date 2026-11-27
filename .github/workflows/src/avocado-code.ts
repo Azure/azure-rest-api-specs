@@ -1,4 +1,4 @@
-import type { GitHubScriptArgs } from "./github.ts";
+import type { GitHubScriptArgs } from "@azure-tools/github-core/github";
 import { readFile } from "node:fs/promises";
 import { inspect } from "node:util";
 import {

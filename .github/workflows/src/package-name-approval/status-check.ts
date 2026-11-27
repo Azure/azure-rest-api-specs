@@ -1,5 +1,5 @@
-import type { GitHubScriptArgs } from "../github.ts";
-import { extractInputs } from "../context.ts";
+import type { GitHubScriptArgs } from "@azure-tools/github-core/github";
+import { extractInputs } from "@azure-tools/github-core/context";
 
 /**
  * Verify package name approval status and report as a commit status on the PR.

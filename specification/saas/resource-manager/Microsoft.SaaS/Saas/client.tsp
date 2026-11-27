@@ -8,6 +8,8 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Microsoft.SaaS;
 
+@@clientName(Microsoft.SaaS, "SaaSMgmtClient", "python");
+
 // Name availability
 @@clientName(
   Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
@@ -86,3 +88,7 @@ using Microsoft.SaaS;
 // Resources (remove Resource infix from Data/Collection)
 @@clientName(SaasResource, "Saas", "csharp");
 @@clientName(SaasTenantResource, "SaasTenant", "csharp");
+
+// Hide LRO polling operation status endpoints from C# SDK public API
+@@scope(SaasOperationStatuses.getTenantOperationStatus, "!csharp");
+@@scope(SaasOperationStatuses.getSubscriptionOperationStatus, "!csharp");

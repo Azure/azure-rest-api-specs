@@ -8,7 +8,7 @@ import {
 } from "@azure-tools/specs-shared/markdown";
 import { AnalysisResultSchema, MarkdownHeadingId, type AnalysisResult } from "./types.ts";
 import { publishResultInComment } from "./publish-result-in-comment.ts";
-import type { GitHubScriptArgs } from "../github.ts";
+import type { GitHubScriptArgs } from "@azure-tools/github-core/github";
 
 export async function buildAnalysisReport(resultFilePath: string): Promise<{
   command: string;

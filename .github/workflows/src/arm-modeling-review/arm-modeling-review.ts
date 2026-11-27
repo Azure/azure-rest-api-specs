@@ -5,9 +5,9 @@ import {
   resourceManager,
   swagger,
 } from "../../../shared/src/changed-files.ts";
-import { CoreLogger } from "../core-logger.ts";
-import type { Core } from "../github.ts";
-import { LabelAction } from "../label.ts";
+import { CoreLogger } from "@azure-tools/github-core/core-logger";
+import type { Core } from "@azure-tools/github-core/github";
+import { LabelAction } from "@azure-tools/github-core/label";
 import { ArmLeaseValidationLabel } from "./arm-lease-validation-labels.ts";
 import { checkLease } from "./detect-arm-leases.ts";
 import { detectNewResourceTypes } from "./detect-new-resource-types.ts";

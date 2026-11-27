@@ -13,7 +13,7 @@ import {
   listRepositoryLabels,
   prepareLabelSync,
 } from "../src/sync-repo-labels.ts";
-import { createMockContext, createMockCore } from "./mocks.ts";
+import { createMockContext, createMockCore } from "@azure-tools/github-core/test/mocks";
 
 const repo = { owner: "Azure", repo: "azure-rest-api-specs" };
 const prefix = "/repos/Azure/azure-rest-api-specs";

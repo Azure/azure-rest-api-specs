@@ -1,4 +1,4 @@
-import type { GitHubScriptArgs, WebhookEvent } from "../github.ts";
+import type { GitHubScriptArgs, WebhookEvent } from "@azure-tools/github-core/github";
 
 export default function dumpTriggerMetadata({
   context,

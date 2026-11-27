@@ -1,8 +1,11 @@
 import { CheckStatus, CommitStatusState, PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { SpecGenSdkArtifactInfoSchema } from "../../shared/src/sdk-types.ts";
-import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.ts";
-import { extractInputs } from "./context.ts";
-import type { CheckRuns, Core, GitHub, GitHubScriptArgs } from "./github.ts";
+import {
+  getAdoBuildInfoFromUrl,
+  getAzurePipelineArtifact,
+} from "@azure-tools/github-core/artifacts";
+import { extractInputs } from "@azure-tools/github-core/context";
+import type { CheckRuns, Core, GitHub, GitHubScriptArgs } from "@azure-tools/github-core/github";
 
 export default async function setSpecGenSdkStatus({
   github,

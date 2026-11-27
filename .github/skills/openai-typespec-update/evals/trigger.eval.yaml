@@ -25,7 +25,7 @@ stimuli:
     graders:
       - type: skill-invocation
         config:
-          required: [ "openai-typespec-update" ]
+          required: ["openai-typespec-update"]
   - name: trigger-bump-openai-typespec
     prompt: "Bump openai-typespec to the latest version."
     agent_environment:
@@ -34,7 +34,7 @@ stimuli:
     graders:
       - type: skill-invocation
         config:
-          required: [ "openai-typespec-update" ]
+          required: ["openai-typespec-update"]
   - name: trigger-upgrade-azure-tools-openai-typespec
     prompt: "Upgrade @azure-tools/openai-typespec."
     agent_environment:
@@ -43,7 +43,7 @@ stimuli:
     graders:
       - type: skill-invocation
         config:
-          required: [ "openai-typespec-update" ]
+          required: ["openai-typespec-update"]
   - name: trigger-refresh-openai-typespec-models-views
     prompt: "Refresh the OpenAI TypeSpec models and views."
     agent_environment:
@@ -52,7 +52,7 @@ stimuli:
     graders:
       - type: skill-invocation
         config:
-          required: [ "openai-typespec-update" ]
+          required: ["openai-typespec-update"]
 
   - name: anti-trigger-general-typespec-authoring
     prompt: "Add a new property to my TypeSpec model and update the API version."
@@ -62,7 +62,7 @@ stimuli:
     graders:
       - type: skill-invocation
         config:
-          disallowed: [ "openai-typespec-update" ]
+          disallowed: ["openai-typespec-update"]
   - name: anti-trigger-generate-sdk
     prompt: "Generate the SDK for this package."
     agent_environment:
@@ -71,7 +71,7 @@ stimuli:
     graders:
       - type: skill-invocation
         config:
-          disallowed: [ "openai-typespec-update" ]
+          disallowed: ["openai-typespec-update"]
   - name: anti-trigger-release-sdk-package
     prompt: "Release my SDK package."
     agent_environment:
@@ -80,7 +80,7 @@ stimuli:
     graders:
       - type: skill-invocation
         config:
-          disallowed: [ "openai-typespec-update" ]
+          disallowed: ["openai-typespec-update"]
   - name: anti-trigger-review-openapi-spec-naming
     prompt: "Review this OpenAPI spec for naming conventions."
     agent_environment:
@@ -89,4 +89,4 @@ stimuli:
     graders:
       - type: skill-invocation
         config:
-          disallowed: [ "openai-typespec-update" ]
+          disallowed: ["openai-typespec-update"]

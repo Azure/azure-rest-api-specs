@@ -1,4 +1,4 @@
-import type { GitHubScriptArgs } from "../src/github.ts";
+import type { GitHubScriptArgs } from "@azure-tools/github-core/github";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 // Mock fs/promises before imports
@@ -11,7 +11,7 @@ const readFileMock = fs.readFile as import("vitest").Mock;
 import generateJobSummaryImpl from "../src/avocado-code.ts";
 import { MessageLevel, MessageType } from "../src/message.ts";
 import { stringify } from "../src/ndjson.ts";
-import { createMockCore } from "./mocks.ts";
+import { createMockCore } from "@azure-tools/github-core/test/mocks";
 
 const core = createMockCore();
 const outputFile = "avocado.ndjson";

@@ -1,12 +1,16 @@
-import type { GitHub, GitHubScriptArgs } from "../../src/github.ts";
+import type { GitHub, GitHubScriptArgs } from "@azure-tools/github-core/github";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
+import {
+  createMockContext,
+  createMockCore,
+  createMockGithub,
+} from "@azure-tools/github-core/test/mocks";
 
-vi.mock("../../src/context.ts", () => ({
+vi.mock("@azure-tools/github-core/context", () => ({
   extractInputs: vi.fn(),
 }));
 
-vi.mock("../../src/comment.ts", () => ({
+vi.mock("@azure-tools/github-core/comment", () => ({
   commentOrUpdate: vi.fn(),
   parseExistingComments: vi.fn().mockReturnValue([undefined, undefined]),
 }));
@@ -19,8 +23,8 @@ vi.mock("../../src/typespec-suppressions/suppressions-comment.ts", () => ({
   TYPESPEC_SUPPRESSIONS_SECTION_TITLE: "TypeSpec suppressions requiring review",
 }));
 
-const { extractInputs } = await import("../../src/context.ts");
-const { commentOrUpdate, parseExistingComments } = await import("../../src/comment.ts");
+const { extractInputs } = await import("@azure-tools/github-core/context");
+const { commentOrUpdate, parseExistingComments } = await import("@azure-tools/github-core/comment");
 const { buildSuppressionsComment } =
   await import("../../src/typespec-suppressions/suppressions-comment.ts");
 const { renderSuppressionsCommentBody, shouldInvalidateSuppressionApproval } =

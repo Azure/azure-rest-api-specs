@@ -1,0 +1,81 @@
+{
+  "operationId": "EntityHealthAnalysis_GetHealthAnalysis",
+  "title": "Get entity health analysis",
+  "parameters": {
+    "endpoint": "https://contoso-1f33ba.eastus.data.cloudhealth.azure.com",
+    "api-version": "2026-10-01-preview",
+    "entityName": "frontend-web-app",
+    "endAt": "2026-06-07T00:00:00Z",
+    "lookbacks": [
+      "PT24H",
+      "P7D"
+    ],
+    "timestamp": "2026-06-07T00:00:00Z"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "lookback": "PT24H",
+            "startAt": "2026-06-06T00:00:00Z",
+            "endAt": "2026-06-07T00:00:00Z",
+            "stateDurations": {
+              "healthy": "PT22H30M",
+              "degraded": "PT1H",
+              "unhealthy": "PT30M",
+              "unknown": "PT0S"
+            },
+            "objective": {
+              "timestamp": "2026-06-07T00:00:00Z",
+              "evaluationStatus": "Complete",
+              "healthObjective": 95,
+              "allowedNonHealthyPercent": 5,
+              "actualNonHealthyPercent": 6.25,
+              "exceededNonHealthyPercent": 25,
+              "allowedNonHealthyDuration": "PT1H12M",
+              "actualNonHealthyDuration": "PT1H30M",
+              "exceededNonHealthyDuration": "PT18M",
+              "isMet": false
+            }
+          },
+          {
+            "lookback": "P7D",
+            "startAt": "2026-05-31T00:00:00Z",
+            "endAt": "2026-06-07T00:00:00Z",
+            "stateDurations": {
+              "healthy": "P6DT22H",
+              "degraded": "PT1H30M",
+              "unhealthy": "PT30M",
+              "unknown": "PT0S"
+            },
+            "objective": {
+              "timestamp": "2026-06-07T00:00:00Z",
+              "evaluationStatus": "Complete",
+              "healthObjective": 95,
+              "allowedNonHealthyPercent": 5,
+              "actualNonHealthyPercent": 1.19,
+              "exceededNonHealthyPercent": 0,
+              "allowedNonHealthyDuration": "PT8H24M",
+              "actualNonHealthyDuration": "PT2H",
+              "exceededNonHealthyDuration": "PT0S",
+              "isMet": true
+            }
+          }
+        ]
+      }
+    },
+    "default": {
+      "headers": {
+        "Retry-After": "30",
+        "x-ms-error-code": "ServiceUnavailable"
+      },
+      "body": {
+        "error": {
+          "code": "ServiceUnavailable",
+          "message": "The service is temporarily unavailable. Retry after the specified delay."
+        }
+      }
+    }
+  }
+}

@@ -1,10 +1,14 @@
 import { readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import type { GitHub } from "../src/github.ts";
+import type { GitHub } from "@azure-tools/github-core/github";
 import { applyIssueTriage } from "../src/issue-triage.ts";
 import { loadLabelCatalog } from "../src/label-catalog-loader.ts";
-import { createMockContext, createMockCore, createMockGithub } from "./mocks.ts";
+import {
+  createMockContext,
+  createMockCore,
+  createMockGithub,
+} from "@azure-tools/github-core/test/mocks";
 
 vi.mock("../src/label-catalog-loader.ts", () => ({ loadLabelCatalog: vi.fn() }));
 vi.mock("node:fs/promises", () => ({ readFile: vi.fn() }));

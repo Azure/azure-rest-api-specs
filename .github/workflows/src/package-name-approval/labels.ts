@@ -1,4 +1,4 @@
-import type { GitHub } from "../github.ts";
+import type { GitHub } from "@azure-tools/github-core/github";
 /**
  * Remove a label from an issue/PR, ignoring 404 (label not present).
  */

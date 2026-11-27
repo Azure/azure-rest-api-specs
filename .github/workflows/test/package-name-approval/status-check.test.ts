@@ -1,12 +1,16 @@
-import type { GitHubScriptArgs } from "../../src/github.ts";
+import type { GitHubScriptArgs } from "@azure-tools/github-core/github";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
+import {
+  createMockContext,
+  createMockCore,
+  createMockGithub,
+} from "@azure-tools/github-core/test/mocks";
 
-vi.mock("../../src/context.ts", () => ({
+vi.mock("@azure-tools/github-core/context", () => ({
   extractInputs: vi.fn(),
 }));
 
-import { extractInputs } from "../../src/context.ts";
+import { extractInputs } from "@azure-tools/github-core/context";
 import statusCheck from "../../src/package-name-approval/status-check.ts";
 
 describe("status-check", () => {

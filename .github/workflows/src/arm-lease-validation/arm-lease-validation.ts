@@ -5,8 +5,8 @@ import { resolve } from "node:path";
 import { inspect } from "node:util";
 import * as z from "zod";
 import { getChangedFilesStatuses } from "../../../shared/src/changed-files.ts";
-import { CoreLogger } from "../core-logger.ts";
-import type { Core } from "../github.ts";
+import { CoreLogger } from "@azure-tools/github-core/core-logger";
+import type { Core } from "@azure-tools/github-core/github";
 
 // ============================================
 // Configuration

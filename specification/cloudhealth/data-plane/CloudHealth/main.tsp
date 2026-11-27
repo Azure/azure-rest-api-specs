@@ -1,9 +1,11 @@
 import "@typespec/http";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
@@ -32,9 +34,9 @@ alias EntityReadOperations = Azure.Core.ResourceOperations<
 
 @doc("Service API versions.")
 enum Versions {
-  @doc("The 2026-06-01-preview version.")
+  @doc("The 2026-10-01-preview version.")
   @previewVersion
-  v2026_06_01_preview: "2026-06-01-preview",
+  v2026_10_01_preview: "2026-10-01-preview",
 }
 
 // Regex for proxy-resource name validation, mirroring the control-plane contract:
@@ -269,6 +271,9 @@ model EntityDiagnosticSnapshot {
 
   @doc("Signal-aggregation groups considered in the current health evaluation.")
   signalAggregationGroups: EntityDiagnosticSignalAggregationGroup[];
+
+  @doc("Optional set of labels (key-value pairs)")
+  tags?: Record<string4096>;
 }
 
 @doc("Routing resource that identifies a signal under an entity.")
@@ -280,6 +285,307 @@ model EntitySignalRoute {
   @visibility(Lifecycle.Read)
   signalName: signalName;
 }
+
+@doc("Outcome of evaluating an entity's health evidence.")
+union EntityDiagnosisOutcome {
+  string,
+
+  @doc("The entity health state is derived from contributing signal/dependency inputs and aggregation results.")
+  ContributingInputsAndAggregation: "ContributingInputsAndAggregation",
+
+  @doc("The entity health state is determined by aggregation configuration without active non-healthy contributors.")
+  AggregationOnly: "AggregationOnly",
+
+  @doc("No active degradation exists for the entity at observation time.")
+  NoActiveDegradation: "NoActiveDegradation",
+
+  @doc("The entity health state cannot be determined from available data.")
+  HealthUnknown: "HealthUnknown",
+
+  @doc("Evaluation is pending and has not yet produced final evidence.")
+  EvaluationPending: "EvaluationPending",
+}
+
+@doc("Kind of signal evidence emitted by diagnosis.")
+union EntityDiagnosisSignalKind {
+  string,
+
+  @doc("Evidence from a direct signal on the entity.")
+  Signal: "Signal",
+
+  @doc("Evidence from a nested health model signal projection.")
+  NestedHealthModel: "NestedHealthModel",
+
+  @doc("Configured signal reference that could not be resolved.")
+  UnresolvedSignal: "UnresolvedSignal",
+}
+
+@doc("Availability status of signal history in diagnosis evidence.")
+union EntityDiagnosisSignalHistoryStatus {
+  string,
+
+  @doc("Signal history is available in the response.")
+  Available: "Available",
+
+  @doc("Signal history is unavailable for this signal.")
+  Unavailable: "Unavailable",
+
+  @doc("Signal history was limited due to evaluation budget constraints.")
+  BudgetLimited: "BudgetLimited",
+}
+
+@doc("Boundary classification for dependency traversal in diagnosis evidence.")
+union EntityDiagnosisDependencyBoundary {
+  string,
+
+  @doc("Dependency traversal encountered a cycle.")
+  Cycle: "Cycle",
+
+  @doc("Dependency was shared and traversal stopped to avoid duplication.")
+  Shared: "Shared",
+
+  @doc("Dependency health was unknown at observation time.")
+  HealthUnknown: "HealthUnknown",
+
+  @doc("Dependency evidence is deferred beyond this diagnosis continuation chain. Not used for routine page breaks.")
+  Deferred: "Deferred",
+
+  @doc("Dependency evidence was unavailable.")
+  Unavailable: "Unavailable",
+
+  @doc("Dependency edge was not expanded because the child lies beyond the requested maxDepth.")
+  MaxDepth: "MaxDepth",
+}
+
+@doc("Category of input that determined an aggregation outcome.")
+union EntityDiagnosisDeterminingInputCategory {
+  string,
+
+  @doc("A direct signal input determined the aggregation outcome.")
+  Signal: "Signal",
+
+  @doc("A signal-group aggregation input determined the aggregation outcome.")
+  SignalGroup: "SignalGroup",
+
+  @doc("A dependency input determined the aggregation outcome.")
+  Dependency: "Dependency",
+}
+
+@doc("Metric describing how the aggregation calculation was derived.")
+union EntityDiagnosisAggregationMetric {
+  string,
+
+  @doc("Worst contributed input health state.")
+  WorstInputHealthState: "WorstInputHealthState",
+
+  @doc("Best contributed input health state.")
+  BestInputHealthState: "BestInputHealthState",
+
+  @doc("Count of healthy evaluated inputs.")
+  HealthyInputs: "HealthyInputs",
+
+  @doc("Count of non-healthy evaluated inputs.")
+  NotHealthyInputs: "NotHealthyInputs",
+}
+
+@doc("A single signal history point in diagnosis evidence.")
+model EntityDiagnosisSignalHistoryPoint {
+  @doc("Timestamp when the signal point occurred (UTC).")
+  occurredAt: utcDateTime;
+
+  @doc("Health state of the signal at this point.")
+  healthState: HealthState;
+
+  @doc("Numeric signal value at this point, when available.")
+  value?: float64;
+}
+
+@doc("Signal history attached to diagnosis evidence.")
+model EntityDiagnosisSignalHistory {
+  @doc("Availability status for signal history in the current response.")
+  status: EntityDiagnosisSignalHistoryStatus;
+
+  @doc("True when history has additional points not included in this response.")
+  truncated: boolean;
+
+  @doc("Signal history points included in this response, newest first.")
+  value: EntityDiagnosisSignalHistoryPoint[];
+}
+
+@doc("Signal-level diagnosis evidence.")
+model EntityDiagnosisSignalEvidence {
+  @doc("Signal evidence kind.")
+  kind: EntityDiagnosisSignalKind;
+
+  @doc("Signal name when this evidence maps to a configured signal.")
+  signalName?: signalName;
+
+  @doc("Observed health state of the signal evidence.")
+  healthState: HealthState;
+
+  @doc("Signal history evidence when available.")
+  history?: EntityDiagnosisSignalHistory;
+}
+
+@doc("Dependency-level diagnosis evidence.")
+model EntityDiagnosisDependencyEvidence {
+  @doc("Dependency entity name.")
+  entityName: entityName;
+
+  @doc("Health state contribution propagated from the dependency.")
+  contributedHealthState: HealthState;
+
+  @doc("Boundary classification when dependency evidence is not expanded. Omitted when the child fragment is on a later page.")
+  boundary?: EntityDiagnosisDependencyBoundary;
+
+  @doc("Azure resource ID of the dependency entity when it is configured with a qualifying Azure resource; omitted otherwise. Present for boundary dependencies even when no child fragment is returned.")
+  azureResourceId?: string;
+}
+
+@doc("Input counts used by bounded aggregation evidence.")
+model EntityDiagnosisAggregationInputCounts {
+  @doc("Total configured inputs considered by the aggregation.")
+  @minValue(0)
+  total: int32;
+
+  @doc("Inputs evaluated after Unknown-handling rules were applied.")
+  @minValue(0)
+  evaluated: int32;
+
+  @doc("Inputs in a Healthy state from the complete pre-filter aggregation input population.")
+  @minValue(0)
+  healthy: int32;
+
+  @doc("Inputs in a Degraded state from the complete pre-filter aggregation input population.")
+  @minValue(0)
+  degraded: int32;
+
+  @doc("Inputs in an Unhealthy state from the complete pre-filter aggregation input population.")
+  @minValue(0)
+  unhealthy: int32;
+
+  @doc("Inputs in an Unknown state from the complete pre-filter aggregation input population.")
+  @minValue(0)
+  `unknown`: int32;
+}
+
+@doc("Numeric boundary used by aggregation classification bands.")
+model EntityDiagnosisAggregationBound {
+  @doc("Boundary value.")
+  value: float64;
+
+  @doc("True when the boundary value is inclusive.")
+  inclusive: boolean;
+}
+
+@doc("Optional lower and upper classification boundaries for aggregation values.")
+model EntityDiagnosisAggregationClassificationBand {
+  @doc("Optional lower boundary for the classification.")
+  lowerBound?: EntityDiagnosisAggregationBound;
+
+  @doc("Optional upper boundary for the classification.")
+  upperBound?: EntityDiagnosisAggregationBound;
+}
+
+@doc("Optional aggregation calculation details.")
+model EntityDiagnosisAggregationCalculation {
+  @doc("Metric used for the calculation.")
+  metric: EntityDiagnosisAggregationMetric;
+
+  @doc("Numeric value produced by the calculation, when available.")
+  value?: float64;
+
+  @doc("Unit for threshold-based calculations, when available.")
+  unit?: AggregationUnit;
+
+  @doc("Optional lower/upper classification boundaries.")
+  classificationBand?: EntityDiagnosisAggregationClassificationBand;
+}
+
+@doc("Bounded aggregation evidence explaining a computed diagnosis state.")
+model EntityDiagnosisAggregationEvidence {
+  @doc("Effective aggregation and provenance used for this computation.")
+  effectiveAggregation: EntityDiagnosticEffectiveAggregation;
+
+  @doc("Health state from applying the effective aggregation.")
+  healthState: HealthState;
+
+  @doc("Input counts that explain the aggregation outcome.")
+  inputCounts: EntityDiagnosisAggregationInputCounts;
+
+  @doc("Optional calculation details for the aggregation outcome.")
+  calculation?: EntityDiagnosisAggregationCalculation;
+}
+
+@doc("Causal signal-group aggregation evidence for one contributing group.")
+model EntityDiagnosisSignalGroupAggregationEvidence {
+  @doc("Signal-aggregation group name.")
+  name: string;
+
+  @doc("Bounded aggregation evidence for this signal group.")
+  aggregation: EntityDiagnosisAggregationEvidence;
+}
+
+@doc("Entity-level diagnosis evidence.")
+model EntityDiagnosisEntityEvidence {
+  @doc("Observed health state for the entity.")
+  healthState: HealthState;
+
+  @doc("Timestamp when the current health state became active (UTC), when known.")
+  lastHealthTransitionAt?: utcDateTime;
+
+  @doc("Outcome that explains how this entity health state was derived.")
+  outcome: EntityDiagnosisOutcome;
+
+  @doc("Input categories that determined this entity's diagnosed health state.")
+  @maxItems(3)
+  determiningInputCategories: EntityDiagnosisDeterminingInputCategory[];
+
+  @doc("Signal evidence contributing to the entity diagnosis.")
+  signals: EntityDiagnosisSignalEvidence[];
+
+  @doc("Dependency evidence contributing to the entity diagnosis.")
+  dependencies: EntityDiagnosisDependencyEvidence[];
+
+  @doc("Dependency aggregation evidence explaining how dependency inputs were combined.")
+  dependencyAggregation?: EntityDiagnosisAggregationEvidence;
+
+  @doc("Causal signal-group aggregation evidence for groups that contributed to the entity state.")
+  signalGroupAggregations: EntityDiagnosisSignalGroupAggregationEvidence[];
+}
+
+@doc("A diagnosis fragment in the entity diagnosis response.")
+model EntityDiagnosisFragment {
+  @doc("Entity name represented by this diagnosis fragment.")
+  entityName: entityName;
+
+  @doc("Entity diagnosis evidence for this fragment.")
+  evidence: EntityDiagnosisEntityEvidence;
+
+  @doc("Parent entity name for nested evidence fragments, when applicable.")
+  parentEntityName?: entityName;
+
+  @doc("Health-state contribution from the fragment to its parent, when applicable.")
+  contributedHealthState?: HealthState;
+
+  @doc("Names of this entity's configured dependencies that are not causal contributors to its diagnosed state. Computed over the complete dependency set before any response paging or fragment slicing, so it is complete on every returned fragment; names only, and empty when none qualify.")
+  nonContributingDependencyNames: string[];
+
+  @doc("Azure resource ID of this entity when it is configured with a qualifying Azure resource; omitted otherwise.")
+  azureResourceId?: string;
+
+  @doc("Optional set of labels (key-value pairs)")
+  tags?: Record<string4096>;
+}
+
+@doc("One page of a bounded entity diagnosis.")
+model EntityDiagnosisResult is Page<EntityDiagnosisFragment>;
+
+@@doc(EntityDiagnosisResult.value, "Diagnosis fragments on this page.");
+@@doc(
+  EntityDiagnosisResult.nextLink,
+  "URI of the next page, preserving entity, api-version, maxDepth and timestamp. Sole indicator of more pages; absent on the last page."
+);
 
 @error
 @doc("Returned when a data-plane request fails.")
@@ -332,6 +638,111 @@ model EntityHealthStateHistoryPage is Page<EntityHealthStatePeriod>;
   EntityHealthStateHistoryPage.nextLink,
   "The full URI to fetch the next page of results; absent when there is no next page."
 );
+
+@doc("Whether an objective result is conclusive for its requested window.")
+union EntityHealthObjectiveEvaluationStatus {
+  string,
+
+  @doc("The objective was evaluated over a completely covered window.")
+  Complete: "Complete",
+
+  @doc("The objective is not conclusive because the requested window has incomplete coverage.")
+  InsufficientCoverage: "InsufficientCoverage",
+
+  @doc("No Health Objective was available from the entity configuration effective at `objective.timestamp`.")
+  NotConfigured: "NotConfigured",
+}
+
+@doc("Health-objective calculation for one analysis window.")
+model EntityHealthObjectiveAnalysis {
+  @doc("""
+    Point in time whose entity configuration supplied `healthObjective`: the `timestamp` query parameter
+    when supplied, otherwise the current service time. Only the objective is resolved at this instant.
+    """)
+  timestamp: utcDateTime;
+
+  @doc("Whether the objective result is complete, inconclusive, or not configured.")
+  evaluationStatus: EntityHealthObjectiveEvaluationStatus;
+
+  @doc("Health Objective as a percentage of time the entity should be healthy.")
+  @minValue(0)
+  @maxValue(100)
+  healthObjective?: float32;
+
+  @doc("Percentage of measured time the objective allows the entity to spend Non-Healthy; `100 - healthObjective`.")
+  @minValue(0)
+  @maxValue(100)
+  allowedNonHealthyPercent?: float64;
+
+  @doc("Percentage of measured time — the summed `stateDurations` — spent Non-Healthy (Degraded, Unhealthy, or Unknown).")
+  @minValue(0)
+  @maxValue(100)
+  actualNonHealthyPercent?: float64;
+
+  @doc("""
+    Percentage by which actual Non-Healthy time exceeded the allowance, relative to that allowance:
+    `max((actualNonHealthyPercent - allowedNonHealthyPercent) / allowedNonHealthyPercent * 100, 0)`.
+    Omitted when `allowedNonHealthyPercent` is zero because division by zero is undefined.
+    """)
+  @minValue(0)
+  exceededNonHealthyPercent?: float64;
+
+  @doc("Non-Healthy duration `healthObjective` allows over the measured time; the time equivalent of `allowedNonHealthyPercent`.")
+  allowedNonHealthyDuration?: duration;
+
+  @doc("Duration spent Non-Healthy (Degraded, Unhealthy, or Unknown) within the measured time.")
+  actualNonHealthyDuration: duration;
+
+  @doc("Non-Healthy duration beyond the allowance; zero when the allowance was not exceeded.")
+  exceededNonHealthyDuration?: duration;
+
+  @doc("""
+    Whether the objective was met, judged using the exact values underlying `actualNonHealthyDuration` and
+    `allowedNonHealthyDuration` before response rounding. Omitted when the evaluation is not conclusive.
+    Comparing the rounded percentage fields instead can report a window that overspent its allowance as
+    having met the objective.
+    """)
+  isMet?: boolean;
+}
+
+@doc("Time spent in each health state within an analysis window.")
+model EntityHealthStateDurations {
+  @doc("Duration spent Healthy.")
+  healthy: duration;
+
+  @doc("Duration spent Degraded.")
+  degraded: duration;
+
+  @doc("Duration spent Unhealthy.")
+  unhealthy: duration;
+
+  @doc("Duration spent Unknown.")
+  `unknown`: duration;
+}
+
+@doc("Health-state durations and evaluation of the entity's configured Health Objective for one lookback window.")
+model EntityHealthAnalysisResult {
+  @doc("Requested ISO 8601 lookback duration.")
+  lookback: duration;
+
+  @doc("Inclusive start of the requested analysis window; `endAt - lookback`.")
+  startAt: utcDateTime;
+
+  @doc("Effective exclusive end of the requested analysis window.")
+  endAt: utcDateTime;
+
+  @doc("Health-state durations observed within the window; every state is present, including zero-valued ones.")
+  stateDurations: EntityHealthStateDurations;
+
+  @doc("Health-objective calculation for the requested window.")
+  objective: EntityHealthObjectiveAnalysis;
+}
+
+@doc("Health analysis for an entity over the requested lookback windows.")
+model EntityHealthAnalysisQueryResult {
+  @doc("The analysis results, in the same order as the requested lookbacks.")
+  value: EntityHealthAnalysisResult[];
+}
 
 @doc("A single recorded signal data point.")
 model SignalHistoryDataPoint {
@@ -437,6 +848,11 @@ model HealthReportEvaluationRule {
 model HealthReportPayload {
   @doc("Name of the entity signal to report health for. An unknown name creates an external signal instance.")
   signalName: signalName;
+
+  @doc("Display name of the entity signal to report health for")
+  @minLength(1)
+  @maxLength(260)
+  displayName?: string;
 
   @doc("Authoritative health state reported by the submitter. The service does not recalculate it from the reported value or evaluation rules.")
   healthState: HealthState;
@@ -560,7 +976,44 @@ interface EntityTransitionHistory {
 
 interface Entity {
   @doc("Return the current diagnostic snapshot for an entity.")
-  get is EntityReadOperations.ResourceRead<EntityDiagnosticSnapshot>;
+  get is EntityReadOperations.ResourceRead<
+    EntityDiagnosticSnapshot,
+    Azure.Core.Traits.QueryParametersTrait<
+      {
+        @doc("Timestamp to use for the operation. When specified, the version of the entity at this point in time is retrieved. If not specified, the latest version is used.")
+        @query
+        timestamp?: utcDateTime;
+      },
+      Azure.Core.Traits.TraitContext.Read
+    >
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Paged diagnosis must keep the '/diagnosis' subpath of the entity and pageable diagnosis fragment payload shape; no Azure.Core resource operation template preserves this wire contract."
+  @route("/api/entities/{entityName}/diagnosis")
+  @doc("Return one bounded diagnosis for an entity, paged through nextLink.")
+  @list
+  @get
+  listDiagnosis is Operation<
+    Azure.Core.Foundations.ItemKeysOf<EntityDiagnosticSnapshot> & {
+      @doc("Maximum dependency depth for the whole diagnosis across all pages, from 0 through 10; defaults to 10. The root is depth 0; 0 returns only the root fragment with dependency summaries. Continuation never resets depth or extends scope.")
+      @query
+      @minValue(0)
+      @maxValue(10)
+      maxDepth?: int32 = 10;
+
+      @doc("An opaque string value that identifies the next page of the diagnosis.")
+      @query
+      @continuationToken
+      nextMarker?: string4096;
+
+      @doc("As-of time for the diagnosis. If not specified, the latest time is resolved on the first page and reused by all pages.")
+      @query
+      timestamp?: utcDateTime;
+    },
+    EntityDiagnosisResult,
+    {},
+    EntityDiagnosticDefaultError
+  >;
 }
 
 @route("/api/entities/{entityName}/healthStateHistory")
@@ -591,6 +1044,33 @@ interface EntityHealthStateHistory {
       nextMarker?: string4096;
     },
     EntityHealthStateHistoryPage,
+    {},
+    EntityDiagnosticDefaultError
+  >;
+}
+
+@route("/api/entities/{entityName}/healthAnalysis")
+interface EntityHealthAnalysis {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This operation computes bounded multi-window health-analysis results on the /healthAnalysis subpath rather than reading or listing a resource, and the resource lifecycle templates do not represent its request and response contract."
+  @doc("Calculate health-state durations and evaluate the entity's configured Health Objective over one or more lookback windows.")
+  @get
+  getHealthAnalysis is Operation<
+    Azure.Core.Foundations.ItemKeysOf<EntityDiagnosticSnapshot> & {
+      @doc("End of the requested analysis window (UTC); defaults to now when omitted. Must be no more than 30 days in the past.")
+      @query
+      endAt?: utcDateTime;
+
+      @doc("Lookback periods measured back from `endAt`. Each must be a unique, positive fixed ISO 8601 duration whose window starts within the last 30 days.")
+      @query
+      @minItems(1)
+      @maxItems(10)
+      lookbacks: string[];
+
+      @doc("Timestamp to use for the operation. When specified, the version of the resource at this point in time is retrieved. If not specified, the latest version is used.")
+      @query
+      timestamp?: utcDateTime;
+    },
+    EntityHealthAnalysisQueryResult,
     {},
     EntityDiagnosticDefaultError
   >;
