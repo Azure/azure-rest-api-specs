@@ -17,11 +17,7 @@ using Microsoft.ProfessionalService;
   "ProfessionalServiceUnsubscribeContent",
   "csharp"
 );
-@@clientName(
-  UnsubscribeOptions.unsubscribeOnly,
-  "IsUnsubscribeOnly",
-  "csharp"
-);
+@@clientName(UnsubscribeOptions.unsubscribeOnly, "IsUnsubscribeOnly", "csharp");
 
 @@clientName(
   ProfessionalServicePurchaseValidationRequest,
@@ -39,11 +35,7 @@ using Microsoft.ProfessionalService;
   "csharp"
 );
 
-@@clientName(
-  DeletionSource,
-  "ProfessionalServiceDeletionSource",
-  "csharp"
-);
+@@clientName(DeletionSource, "ProfessionalServiceDeletionSource", "csharp");
 @@clientName(
   SubscriptionStatusReason,
   "ProfessionalServiceSubscriptionStatusReason",
