@@ -82,6 +82,7 @@ describe("getGeneratedSdkApiVersions", () => {
       "GeneratedSDKApiVersionsJson",
       JSON.stringify([{ version: "2024-01-01" }]),
     );
+    expect(setVsoVariable).toHaveBeenCalledWith("GeneratedSDKApiVersionsComplete", "true");
   });
 
   test("reads package info exported into nested directories", async () => {
@@ -189,6 +190,10 @@ describe("getGeneratedSdkApiVersions", () => {
       expect(await getGeneratedSdkApiVersions(report("sdk/package"), commandInput)).toBe("");
       expect(vsoLogIssue).not.toHaveBeenCalled();
       expect(setVsoVariable).toHaveBeenCalledWith("GeneratedSDKApiVersionsJson", "[]");
+      expect(setVsoVariable).toHaveBeenCalledWith(
+        "GeneratedSDKApiVersionsComplete",
+        String("ApiVersions" in packageInfo && Array.isArray(packageInfo.ApiVersions)),
+      );
     },
   );
 
@@ -208,6 +213,7 @@ describe("getGeneratedSdkApiVersions", () => {
       expect.stringContaining("Unable to collect API versions"),
       LogIssueType.Warning,
     );
+    expect(setVsoVariable).toHaveBeenCalledWith("GeneratedSDKApiVersionsComplete", "false");
   });
 
   test("warns on missing output instead of reading stale metadata", async () => {
@@ -254,6 +260,7 @@ describe("getGeneratedSdkApiVersions", () => {
       "GeneratedSDKApiVersionsJson",
       JSON.stringify([{ version: "2024-01-01" }]),
     );
+    expect(setVsoVariable).toHaveBeenCalledWith("GeneratedSDKApiVersionsComplete", "false");
   });
 
   test("warns when a package path is missing and skips packages that were not generated", async () => {
@@ -269,5 +276,22 @@ describe("getGeneratedSdkApiVersions", () => {
     );
     expect(await getGeneratedSdkApiVersions(report(), commandInput)).toBe("");
     expect(runCommandWithOutput).not.toHaveBeenCalled();
+    expect(setVsoVariable).toHaveBeenLastCalledWith("GeneratedSDKApiVersionsComplete", "false");
+  });
+
+  test("does not compare partial metadata when one package omits its API versions", async () => {
+    vi.mocked(runCommandWithOutput)
+      .mockImplementationOnce((_exe, args) => {
+        writePackageInfo(args, { ApiVersions: [{ Version: "2025-01-01", Namespace: "A" }] });
+        return Promise.resolve("");
+      })
+      .mockImplementationOnce((_exe, args) => {
+        writePackageInfo(args, {});
+        return Promise.resolve("");
+      });
+    expect(await getGeneratedSdkApiVersions(report("sdk/a", "sdk/b"), commandInput)).toBe(
+      "API Versions: '2025-01-01' (Namespace: 'A')",
+    );
+    expect(setVsoVariable).toHaveBeenCalledWith("GeneratedSDKApiVersionsComplete", "false");
   });
 });

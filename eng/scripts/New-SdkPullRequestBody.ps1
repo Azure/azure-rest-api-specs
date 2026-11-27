@@ -22,7 +22,13 @@ param(
 
     [string]$SdkReleaseType = '',
     [string]$ApiVersionsJson = '[]',
-    [string]$ReleasePlanJson = '{}'
+    [string]$ReleasePlanJson = '{}',
+    [switch]$CompareApiVersions,
+    [bool]$ApiVersionsComplete = $false,
+    [string]$PreviousBody = '',
+    [ValidateSet('new', 'existing', 'unknown')]
+    [string]$PreviousPullRequestState = 'unknown',
+    [switch]$PassThru
 )
 
 Set-StrictMode -Version 3
@@ -68,6 +74,7 @@ function Write-MetadataWarning([string]$Message) {
 }
 
 $apiVersions = @()
+$parsedVersions = $null
 try {
     $parsedVersions = ConvertFrom-Json -InputObject $ApiVersionsJson -AsHashtable -NoEnumerate
     if ($parsedVersions -is [array]) {
@@ -156,12 +163,20 @@ if ($releasePlanUnavailable) {
     }
 }
 
-@(
+$comparison = $null
+if ($CompareApiVersions) {
+    . (Join-Path $PSScriptRoot 'Sdk-ApiVersionComparison.ps1')
+    $comparison = New-ApiVersionComparison $parsedVersions $ApiVersionsComplete $PreviousBody $PreviousPullRequestState
+}
+
+$body = @(
     '<!-- azsdk-autopr-description:v1:start -->'
+    if ($null -ne $comparison -and $comparison.header) { $comparison.header }
     '## SDK Generation Details'
     ''
     '> [!NOTE]'
     '> This pull request was generated automatically.'
+    if ($null -ne $comparison -and $comparison.note) { '>'; "> $($comparison.note)" }
     ''
     '| Detail | Value |'
     '| :--- | :--- |'
@@ -169,5 +184,16 @@ if ($releasePlanUnavailable) {
     ''
     '> [!IMPORTANT]'
     '> Complete the [SDK release prerequisites](https://eng.ms/docs/products/azure-developer-experience/develop/sdk-release/sdk-release-prerequisites) before release.'
+    if ($null -ne $comparison) { $comparison.metadata }
     '<!-- azsdk-autopr-description:v1:end -->'
 ) -join "`n"
+
+if ($PassThru) {
+    [pscustomobject]@{
+        Body = $body
+        ApiVersionsChanged = ($null -ne $comparison -and $comparison.hasChanges)
+        ApiVersionsLabelAction = $(if ($null -ne $comparison) { $comparison.labelAction } else { 'none' })
+    }
+} else {
+    $body
+}

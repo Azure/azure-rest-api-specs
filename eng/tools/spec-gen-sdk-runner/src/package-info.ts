@@ -11,17 +11,17 @@ interface PackageApiVersion {
   Namespace?: string | null;
 }
 
-function readApiVersions(filePath: string): PackageApiVersion[] {
+function readApiVersions(filePath: string): PackageApiVersion[] | undefined {
   const packageInfo: unknown = JSON.parse(fs.readFileSync(filePath, "utf8"));
   if (!packageInfo || typeof packageInfo !== "object" || Array.isArray(packageInfo)) {
     throw new TypeError(`Invalid package info in ${filePath}`);
   }
   if (!("ApiVersions" in packageInfo)) {
-    return [];
+    return undefined;
   }
   const versions: unknown = packageInfo.ApiVersions;
   if (versions === null || versions === undefined) {
-    return [];
+    return undefined;
   }
   if (
     !Array.isArray(versions) ||
@@ -51,8 +51,10 @@ export async function getGeneratedSdkApiVersions(
   commandInput: SpecGenSdkCmdInput,
 ): Promise<string> {
   const versions = new Map<string, { version: string; namespace?: string }>();
+  let complete = executionReport.packages.length > 0;
   for (const pkg of executionReport.packages) {
     if (!pkg.packageRootPath) {
+      complete = false;
       vsoLogIssue(
         `Cannot collect API versions: no packageRootPath for ${pkg.packageName ?? "unknown package"}`,
         LogIssueType.Warning,
@@ -78,7 +80,12 @@ export async function getGeneratedSdkApiVersions(
         throw new Error("azsdk eng package-info did not produce any package info JSON files");
       }
       for (const file of files.sort()) {
-        for (const entry of readApiVersions(path.join(outputDir, file))) {
+        const apiVersions = readApiVersions(path.join(outputDir, file));
+        if (!apiVersions) {
+          complete = false;
+          continue;
+        }
+        for (const entry of apiVersions) {
           const value = entry.Namespace
             ? `'${entry.Version}' (Namespace: '${entry.Namespace}')`
             : `'${entry.Version}'`;
@@ -89,6 +96,7 @@ export async function getGeneratedSdkApiVersions(
         }
       }
     } catch (error) {
+      complete = false;
       vsoLogIssue(
         `Unable to collect API versions for ${pkg.packageName ?? pkg.packageRootPath}: ${inspect(error)}`,
         LogIssueType.Warning,
@@ -100,5 +108,6 @@ export async function getGeneratedSdkApiVersions(
     }
   }
   setVsoVariable("GeneratedSDKApiVersionsJson", JSON.stringify([...versions.values()]));
+  setVsoVariable("GeneratedSDKApiVersionsComplete", String(complete));
   return versions.size > 0 ? `API Versions: ${[...versions.keys()].join(", ")}` : "";
 }
