@@ -185,6 +185,8 @@ namespace Azure.AI.Projects {
     mcp_list_tools_completed: OpenAI.RealtimeServerEventMCPListToolsCompleted,
     mcp_list_tools_failed: OpenAI.RealtimeServerEventMCPListToolsFailed,
     mcp_list_tools_in_progress: OpenAI.RealtimeServerEventMCPListToolsInProgress,
+    output_audio_buffer_started: OpenAI.RealtimeServerEventOutputAudioBufferStarted,
+    output_audio_buffer_stopped: OpenAI.RealtimeServerEventOutputAudioBufferStopped,
     output_audio_buffer_cleared: OpenAI.RealtimeServerEventOutputAudioBufferCleared,
     rate_limits_updated: OpenAI.RealtimeServerEventRateLimitsUpdated,
     response_output_audio_delta: OpenAI.RealtimeServerEventResponseAudioDelta,

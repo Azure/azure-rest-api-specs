@@ -95593,6 +95593,8 @@
             "mcp_list_tools.completed": "#/components/schemas/OpenAI.RealtimeServerEventMCPListToolsCompleted",
             "mcp_list_tools.failed": "#/components/schemas/OpenAI.RealtimeServerEventMCPListToolsFailed",
             "mcp_list_tools.in_progress": "#/components/schemas/OpenAI.RealtimeServerEventMCPListToolsInProgress",
+            "output_audio_buffer.started": "#/components/schemas/OpenAI.RealtimeServerEventOutputAudioBufferStarted",
+            "output_audio_buffer.stopped": "#/components/schemas/OpenAI.RealtimeServerEventOutputAudioBufferStopped",
             "output_audio_buffer.cleared": "#/components/schemas/OpenAI.RealtimeServerEventOutputAudioBufferCleared",
             "rate_limits.updated": "#/components/schemas/OpenAI.RealtimeServerEventRateLimitsUpdated",
             "response.output_audio.delta": "#/components/schemas/OpenAI.RealtimeServerEventResponseAudioDelta",
@@ -95637,8 +95639,6 @@
             "response.video.delta": "#/components/schemas/VoiceAgentServerEventResponseVideoDelta",
             "conversation.created": "#/components/schemas/OpenAI.RealtimeServerEventConversationCreated",
             "input_audio_buffer.dtmf_event_received": "#/components/schemas/OpenAI.RealtimeServerEventInputAudioBufferDtmfEventReceived",
-            "output_audio_buffer.started": "#/components/schemas/OpenAI.RealtimeServerEventOutputAudioBufferStarted",
-            "output_audio_buffer.stopped": "#/components/schemas/OpenAI.RealtimeServerEventOutputAudioBufferStopped",
             "error": "#/components/schemas/OpenAI.RealtimeServerEventRealtimeServerEventError",
             "session.handoff.started": "#/components/schemas/VoiceAgentServerEventSessionHandoffStarted"
           }
@@ -124291,6 +124291,12 @@
           },
           {
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEventMCPListToolsInProgress"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeServerEventOutputAudioBufferStarted"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.RealtimeServerEventOutputAudioBufferStopped"
           },
           {
             "$ref": "#/components/schemas/OpenAI.RealtimeServerEventOutputAudioBufferCleared"
