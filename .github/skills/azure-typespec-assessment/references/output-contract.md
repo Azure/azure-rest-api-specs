@@ -72,6 +72,15 @@ Evidence sets retain declaration counts and canonical artifact references, not
 repeated project-wide declaration ID lists. Shared Semantic owners retain
 per-operation project scope when proposing sources.
 
+Report model/type cards are scoped by project and API version, not just model
+name. When findings select different declarations or revisions in one file,
+their selected declarations and hunks are merged; same-named declarations in
+different files remain separate complete diffs.
+When a stored declaration excerpt is truncated, show its focused changed hunks
+instead of an incomplete declaration diff. If compact contract labels hide a
+change in requiredness, nullability, or constraints, retain its expected/actual
+contract descriptions in the before/after table.
+
 Write `agent-workspace\agent-decisions.json` conforming to
 `scripts\agent-decisions.schema.json`. It contains only Agent-authored
 summaries, REST/downstream choices, optional inference, four score signals and
@@ -212,13 +221,14 @@ Every confirmed REST finding must contain actual and expected behavior, rational
 Downstream SDK method and SDK type cards must not repeat `Changed TypeSpec`
 source links. Keep that evidence in `assessment.json`, Semantic intents, and
 the appendix; retain only related Semantic intent links in the cards.
-Method cards use direct, mixed, or indirect cause labels. Red impact links
+Method cards represent direct method changes only. Red impact links
 are reserved for confirmed REST/downstream impacts and failed documentation
 findings; guideline links are separate.
 Downstream data and cards must not contain affected REST operations, HTTP
 routes, REST-derived counts, or REST/downstream suppression records. Direct
 method findings are assembled into `methodGroups`; type findings are assembled
-into `typeImpacts` with deterministic TCGC `affectedMethods`.
+directly into `typeImpacts` without consumer-method inventories or reference
+paths.
 
 HTML finding cards must not display `high`, `medium`, or `low` severity labels
 or severity-colored borders. Severity remains available in `assessment.json`
