@@ -31,6 +31,7 @@ export interface ReleasePlanCommandContext {
 }
 
 export interface ReleasePlanData extends Record<string, unknown> {
+  outcome?: "created" | "existing" | "not_found";
   release_plan_link?: string;
   ReleasePlanId?: string | number;
   release_plan_details?: ReleasePlanDetails;
@@ -112,7 +113,6 @@ export interface CommitProjectInfoResult {
   multipleProjectPaths?: string[];
   projectError?: { tspProjectPath: string; message: string };
   prNumber?: number;
-  hasNewApiVersionLabel: boolean;
   skipReleasePlanAutomation?: boolean;
 }
 

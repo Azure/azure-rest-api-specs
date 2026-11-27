@@ -32,9 +32,6 @@ function getCachedTypeSpecMetadata(
   return metadata;
 }
 
-/** Label indicating that a spec PR introduces a new API version. */
-export const NEW_API_VERSION_LABEL = "new-api-version";
-
 /**
  * Label indicating that a spec PR only migrates/renames folders. Release plan
  * processing must be skipped entirely for PRs carrying this label.
@@ -131,12 +128,9 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
         projectInfo: null,
         changedFiles: [],
         prNumber: associatedPrNumber,
-        hasNewApiVersionLabel: false,
         skipReleasePlanAutomation: true,
       };
     }
-
-    const hasNewApiVersionLabel = labels.includes(NEW_API_VERSION_LABEL);
 
     const changedFiles = await getPrChangedFiles({
       prNumber: associatedPrNumber,
@@ -152,7 +146,6 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
       )),
       changedFiles,
       prNumber: associatedPrNumber,
-      hasNewApiVersionLabel,
     };
   }
 
@@ -170,7 +163,6 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
       repo === "azure-rest-api-specs-pr",
     )),
     changedFiles: allFiles,
-    hasNewApiVersionLabel: false,
   };
 }
 
@@ -405,16 +397,14 @@ export async function findTspConfigDir(
 }
 
 /**
- * Extracts the API version from TypeSpec metadata. Private previews can fall back
+ * Extracts API versions and preview status from TypeSpec metadata. Private previews can fall back
  * to any emitter's version without requiring SDK package metadata.
  */
 export function resolveTypeSpecMetadata(
   metadata: TypeSpecMetadata,
   isPrivatePreview = false,
-): {
-  apiVersion: string;
-} {
-  const apiVersions = new Set<string>();
+): Pick<TypeSpecProjectInfo, "apiVersion" | "isPreview"> {
+  const apiVersions = new Map<string, string>();
   let hasPackage = false;
 
   for (const [, langConfigs] of Object.entries(metadata.languages)) {
@@ -423,7 +413,7 @@ export function resolveTypeSpecMetadata(
     }
 
     for (const config of langConfigs) {
-      const apiVersion = config.apiVersion;
+      const apiVersion = config.apiVersion?.trim();
       const packageName = config.packageName;
       hasPackage ||= Boolean(packageName);
 
@@ -435,33 +425,43 @@ export function resolveTypeSpecMetadata(
       }
 
       console.log(`language config: ${JSON.stringify(config)}`);
-      apiVersions.add(apiVersion);
+      const key = apiVersion.toLowerCase();
+      if (!apiVersions.has(key)) {
+        apiVersions.set(key, apiVersion);
+      }
     }
   }
 
   if (isPrivatePreview && apiVersions.size === 0) {
     for (const configs of Object.values(metadata.languages)) {
       for (const config of configs) {
-        if (config.apiVersion) {
-          return { apiVersion: config.apiVersion };
+        const apiVersion = config.apiVersion?.trim();
+        if (apiVersion) {
+          const key = apiVersion.toLowerCase();
+          if (!apiVersions.has(key)) {
+            apiVersions.set(key, apiVersion);
+          }
         }
       }
     }
-    throw new Error(
-      "No API version found in TypeSpec metadata. Configure api-version in tspconfig.yaml emitter options.",
-    );
   }
 
-  if (apiVersions.size === 0 && !hasPackage) {
+  if (!isPrivatePreview && apiVersions.size === 0 && !hasPackage) {
     throw new Error("No valid language configurations found in TypeSpec metadata");
   }
 
-  return { apiVersion: Array.from(apiVersions)[0] ?? "" };
+  return {
+    apiVersion:
+      apiVersions.size > 1 ? "multiple-versions" : (apiVersions.values().next().value ?? ""),
+    isPreview:
+      apiVersions.size > 0 &&
+      [...apiVersions.keys()].every((version) => version.endsWith("-preview")),
+  };
 }
 
 /**
  * Gets TypeSpec project version info using TypeSpec metadata emitter.
- * Runs the metadata emitter and derives preview status from the API version suffix.
+ * Runs the metadata emitter and retains preview status from the original API versions.
  * @param tspProjectAbsPath Absolute path to TypeSpec project
  * @param tspProjectRelPath Relative path to TypeSpec project (for logging)
  * @returns TypeSpecProjectInfo with apiVersion and isPreview, or throws error
@@ -474,8 +474,7 @@ export async function getTypeSpecProjectVersionFromMetadata(
 ): Promise<TypeSpecProjectInfo> {
   try {
     const metadata = await getCachedTypeSpecMetadata(tspProjectAbsPath, metadataCache);
-    const { apiVersion } = resolveTypeSpecMetadata(metadata, isPrivatePreview);
-    const isPreview = apiVersion.endsWith("-preview");
+    const { apiVersion, isPreview } = resolveTypeSpecMetadata(metadata, isPrivatePreview);
 
     console.log(
       `Found TypeSpec project at ${tspProjectRelPath} with API version ${apiVersion} (${isPreview ? "preview" : "stable"})`,

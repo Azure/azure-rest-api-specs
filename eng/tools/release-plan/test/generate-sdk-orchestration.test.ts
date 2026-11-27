@@ -150,6 +150,28 @@ describe("runGenerateSdk orchestration", () => {
     expect(calls.some((c) => c[0] === "release-plan" && c[1] === "update")).toBe(false);
   });
 
+  it.each(["Finished", "finished", " FINISHED "])(
+    "does not regenerate SDKs when the current release plan status is %s",
+    async (status) => {
+      const { deps, calls } = createHarness({
+        artifact: buildArtifact({ Status: "In Progress" }),
+        getResponses: [buildPlan({ Status: status, SDKReleaseType: "", SDKInfo: [] })],
+      });
+
+      await runGenerateSdk(cliArgs, deps);
+
+      expect(calls).toHaveLength(1);
+      expect(calls[0]).toEqual([
+        "release-plan",
+        "get",
+        "--release-plan-id",
+        "12345",
+        "--output",
+        "json",
+      ]);
+    },
+  );
+
   it("does nothing and never calls azsdk when the release plan id is absent", async () => {
     const { deps, runner } = createHarness({
       artifact: JSON.stringify({ outcome: "not_found", releasePlan: null }),
