@@ -11,6 +11,19 @@ metadata:
 
 Assess only the user-selected TypeSpec scope, normally before a PR exists. Never modify the user's assessed source, branch, index, or working tree; isolated temporary sparse worktrees and artifacts are allowed only under the chosen work directory.
 
+## Modes
+
+- **Full** (default): report Semantic intents, REST and downstream SDK
+  compatibility, Azure Guidelines, and Documentation Completeness.
+- **Fast**: pass `--assessment-mode fast`. Preserve the full report layout,
+  including Semantic intents, REST and downstream SDK compatibility, Azure
+  Guidelines, and Documentation Completeness. Skip only Azure Guidelines search
+  and judgment; its existing card and section show `0 findings` and `Skipped`.
+
+Fast reports must identify the selected mode and state that Azure Guidelines
+search and judgment were skipped, never passed. Semantic analysis and summaries
+remain required and are displayed with their related finding links.
+
 ## Before starting a local assessment
 
 Check whether the user explicitly supplied or confirmed the baseline for this
@@ -31,7 +44,7 @@ known. Do not run separate Git status/diff/fetch/worktree, PR metadata,
 dependency, or project-discovery commands first. Diagnose only a concrete
 blocker returned by the coordinator.
 
-Follow the [complete workflow](references/workflow.md). Apply the [classification rules](references/classification.md), including the detailed [downstream cases](references/downstream-breaking-cases.md), perform the [Azure Guidelines search](references/agentic-search.md) against the [official document catalog](references/reference-document-links.md), check [documentation completeness](references/document-quality.md), and produce exactly the [required outputs](references/output-contract.md).
+Follow the [complete workflow](references/workflow.md). Apply the [classification rules](references/classification.md), including the detailed [downstream cases](references/downstream-breaking-cases.md). In full mode with compliance search requests, perform the [Azure Guidelines search](references/agentic-search.md) against the [official document catalog](references/reference-document-links.md); in fast mode, do not read either reference or perform guideline work. Check [documentation completeness](references/document-quality.md) and produce exactly the [required outputs](references/output-contract.md).
 
 ## Required completion
 
@@ -62,6 +75,7 @@ Do not substitute a `file:` URL or only return filesystem paths.
 - In the unified AI stage (`pipelineVersion: 2`), execute two sequential steps in the **same** AI agent context without spawning a second AI subagent:
   - **Step 2a (Judgment & Guidelines):** Summarize each assessed Semantic intent once and judge every deterministic and inferred REST/downstream candidate in `agent-workspace/agent-decisions.json` (schemaVersion 2, without `sourceReviews`). Rank the catalog once across all assessed Semantic intents, fetch four official documents once with ranked fallback, record provenance and extracted guidance once, and assess each included intent against that shared document set using only prefilled intent-scoped qualified `declarationNames`. Run the indexed `materialization.command` (`materialize-assessment-results.ts --work <work-directory>`) to validate and freeze `assessment-judgment.json` (`judgmentHash` + `sourceIndexHash`). Do not invent URLs, operations, symbols, sources, or guidance.
   - **Step 2b (Post-Judgment Source Association in the same AI turn):** Inspect the JSON returned by `materialization.command`. When `sourceAssociationRequired` is `false` (`itemCount: 0`, zero confirmed REST/downstream breakings), `materialize-assessment-results.ts` automatically writes a `not-applicable` `source-association.json` and transitions to `ready-for-finalization` — proceed directly to finalization. When `sourceAssociationRequired` is `true`, stay in the same AI turn: read `agent-workspace/source-association-input.json` once (and `sourceAssociationDecisions` schema if needed), review only the deduplicated confirmed REST/downstream items with `keep` (`rationale` optional), `refine`, `associate`, or `unresolved`, use `materialization.querySourceCommand` (`materialize-assessment-results.ts --work <work-directory> --query-source --item <id> --name <name>` or repeatable `--query <id>=<name>`) only when additional scoped declarations are needed (never scan `source/source-index.json` or `.tsp` files broadly), write `agent-workspace/source-association-decisions.json`, and run `materialization.sourceAssociationCommand` (`materialize-assessment-results.ts --work <work-directory> --source-association`). Never revise frozen verdicts, severities, grouping, or candidate coverage in Step 2b. Historical single-phase (`schemaVersion: 1`) inputs retain their original source-review contract.
+- In fast mode, omit only the Azure Guidelines work in Step 2a: leave guideline scoring, retrieval, search, and judgment arrays empty. Keep compatibility judgment, source association, and Documentation Completeness unchanged.
 - Treat a completed search with no governing guidance as `no-applicable-guidance`; count it as assessed and do not create a blocker. Reserve `not-assessed` for an incomplete or blocked Azure Guidelines assessment.
 - Check documentation deterministically from compiler results only for newly added operation, model, enum, and interface declarations. A declaration is complete when the compiler returns a nonempty effective document, including inherited documentation. Missing or empty documentation creates a finding with the exact TypeSpec declaration. Never compare documentation text with code or send documentation to the Agent.
 - Report Azure Guidelines and Documentation Completeness independently with explicit coverage. Documentation with no eligible newly added declarations is `not-applicable`; unavailable compiler evidence remains `not-assessed`.

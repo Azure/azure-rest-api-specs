@@ -8,7 +8,7 @@ association for confirmed REST and downstream breaking findings).
 ## Step 2a — Guidelines Search and Judgment Materialization
 
 Complete `agent-workspace\agent-decisions.json` and convert it into validated
-frozen judgment artifacts. Follow the
+frozen judgment artifacts. In full mode with compliance search requests, follow the
 [agentic search procedure](../agentic-search.md) and use only the
 [official document catalog](../reference-document-links.md).
 
@@ -23,6 +23,10 @@ specifies.
 When there are no compliance search requests, skip catalog scoring and document
 retrieval. Leave catalog scores, retrieval results, search blockers, and
 compliance judgments empty.
+
+Fast mode intentionally produces no compliance search requests. Do not read
+the guideline search procedure or catalog in this mode. This is a
+completed skipped dimension, not a passing guideline assessment or a blocker.
 
 Do not place declaration IDs on guidance excerpts or reconstruct opaque IDs.
 Declaration linkage uses the prefilled qualified `declarationNames` in the
