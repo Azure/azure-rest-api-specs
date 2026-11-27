@@ -61,8 +61,7 @@ interface GroupQuotaSubscriptionIdsOps
       },
       {
         ...SubscriptionIdParameter,
-      },
-      ResourceName = "ManagementGroupGroupQuotaSubscriptionId"
+      }
     > {}
 
 @armResourceOperations
