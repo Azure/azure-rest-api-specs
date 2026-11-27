@@ -179,6 +179,79 @@ export async function setStatusImpl({
   // status still links to its report.
   const foundOverridingLabel = overridingLabelsArray.find((label) => prLabels.includes(label));
 
+  if (monitoredWorkflowName === "TypeSpec Suppressions - Analyze Code") {
+    let state: CommitStatusState = CommitStatusState.PENDING;
+    let description = "Waiting for suppression analysis";
+
+    if (run?.status === CheckStatus.COMPLETED) {
+      state = CommitStatusState.FAILURE;
+      description = "Suppression analysis did not complete successfully";
+      if (run.conclusion === CheckConclusion.SUCCESS) {
+        let requiresApproval: boolean;
+        try {
+          const { downloadArtifactText, TYPESPEC_SUPPRESSIONS_REPORT_ARTIFACT_NAME } =
+            await import("./typespec-suppressions/suppressions-comment.ts");
+          const reportContent = await downloadArtifactText(
+            github,
+            core,
+            owner,
+            repo,
+            run.id,
+            TYPESPEC_SUPPRESSIONS_REPORT_ARTIFACT_NAME,
+          );
+          const report: unknown = JSON.parse(reportContent);
+          const reported =
+            report && typeof report === "object" && "checkedSuppressions" in report
+              ? report.checkedSuppressions
+              : report;
+          if (
+            !reported ||
+            typeof reported !== "object" ||
+            !("requiresApproval" in reported) ||
+            typeof reported.requiresApproval !== "boolean"
+          ) {
+            throw new Error("Suppression report must contain a boolean requiresApproval.");
+          }
+          requiresApproval = reported.requiresApproval;
+        } catch (error) {
+          core.error(`Unable to read suppression approval report: ${String(error)}`);
+          await github.rest.repos.createCommitStatus({
+            owner,
+            repo,
+            sha: head_sha,
+            state: CommitStatusState.FAILURE,
+            context: requiredStatusName,
+            description: "Unable to read suppression approval report",
+            target_url,
+          });
+          throw error;
+        }
+
+        state =
+          !requiresApproval || foundOverridingLabel
+            ? CommitStatusState.SUCCESS
+            : CommitStatusState.FAILURE;
+        description = requiresApproval
+          ? foundOverridingLabel
+            ? `Found label '${foundOverridingLabel}'`
+            : "Suppression approval required"
+          : "No suppression approval required";
+      }
+    }
+
+    core.info(`Setting status to '${state}' for '${requiredStatusName}': ${description}`);
+    await github.rest.repos.createCommitStatus({
+      owner,
+      repo,
+      sha: head_sha,
+      state,
+      context: requiredStatusName,
+      description,
+      target_url,
+    });
+    return;
+  }
+
   if (foundOverridingLabel) {
     const description = `Found label '${foundOverridingLabel}'`;
     core.info(description);

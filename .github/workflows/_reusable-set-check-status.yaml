@@ -56,6 +56,10 @@ jobs:
           sparse-checkout: |
             .github
 
+      - name: Install dependencies for suppression report parsing
+        if: ${{ inputs.monitored_workflow_name == 'TypeSpec Suppressions - Analyze Code' }}
+        uses: ./.github/actions/install-deps-github-script
+
       - name: "Set Status"
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         id: set-status
