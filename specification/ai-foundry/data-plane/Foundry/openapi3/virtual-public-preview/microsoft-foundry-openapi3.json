@@ -8630,7 +8630,7 @@
       "post": {
         "operationId": "AgentTelephony_createTelephonyBinding",
         "summary": "Create an agent telephony binding",
-        "description": "Creates a telephony binding for the voice agent named in the path. Creating a SIP binding requires the `VoiceAgents=V1Preview` opt-in.",
+        "description": "Creates a telephony binding for the voice agent named in the path. Creating a SIP binding requires the `VoiceAgents=V1Preview` opt-in. In `v1`, creating an Infobip binding also requires this opt-in.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -8978,7 +8978,7 @@
       "patch": {
         "operationId": "AgentTelephony_updateTelephonyBinding",
         "summary": "Update an agent telephony binding",
-        "description": "Updates a telephony binding owned by the voice agent named in the path. Updating a SIP binding requires the `VoiceAgents=V1Preview` opt-in.",
+        "description": "Updates a telephony binding owned by the voice agent named in the path. Updating a SIP binding requires the `VoiceAgents=V1Preview` opt-in. In `v1`, updating an Infobip binding also requires this opt-in; only its label can be changed.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -120085,7 +120085,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 256,
-            "description": "Replacement same-project connection for Teams or SIP (SipInbound only); immutable for Twilio. Null/blank names are invalid."
+            "description": "Replacement same-project connection for Teams or SIP (SipInbound only); immutable for Twilio and Infobip. Null/blank names are invalid."
           },
           "phone_number": {
             "anyOf": [
@@ -120097,7 +120097,7 @@
               }
             ],
             "maxLength": 64,
-            "description": "Teams/SIP display number, not SIP routing. Omit to preserve; null/empty/blank clears. Unsupported for Twilio."
+            "description": "Teams/SIP display number, not SIP routing. Omit to preserve; null/empty/blank clears. Unsupported for Twilio and Infobip."
           },
           "allowed_calling_numbers": {
             "type": "array",

@@ -673,7 +673,7 @@ alias TelephonyCallListTimeQueryParameters = {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This interface combines agent-contained binding and call resources, call actions, and a singleton transfer-target collection, so it does not map to one standard resource operation template."
 @tag("Agent Telephony")
 interface AgentTelephony {
-  /** Creates a telephony binding for the voice agent named in the path. Creating a SIP binding requires the `VoiceAgents=V1Preview` opt-in. */
+  /** Creates a telephony binding for the voice agent named in the path. Creating a SIP binding requires the `VoiceAgents=V1Preview` opt-in. In `v1`, creating an Infobip binding also requires this opt-in. */
   @summary("Create an agent telephony binding")
   @parameterVisibility(Lifecycle.Create)
   @post
@@ -728,7 +728,7 @@ interface AgentTelephony {
     TelephonyBindingResponse
   >;
 
-  /** Updates a telephony binding owned by the voice agent named in the path. Updating a SIP binding requires the `VoiceAgents=V1Preview` opt-in. */
+  /** Updates a telephony binding owned by the voice agent named in the path. Updating a SIP binding requires the `VoiceAgents=V1Preview` opt-in. In `v1`, updating an Infobip binding also requires this opt-in; only its label can be changed. */
   @summary("Update an agent telephony binding")
   @patch
   @route("/agents/{agent_name}/telephony/bindings/{binding_id}")
