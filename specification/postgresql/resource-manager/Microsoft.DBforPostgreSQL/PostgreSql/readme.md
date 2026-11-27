@@ -35,6 +35,50 @@ tag: package-flexibleserver-2026-10-01
 tag: package-2020-01-01
 ```
 
+### Elastic Cluster capabilities in 2027-01-01-preview
+
+The `2027-01-01-preview` API retains the `2026-10-01` contract and adds
+`supportedElasticClustersVersions` to both location and server capability
+responses. Earlier API versions omit this property. The existing
+`supportedServerVersions` list continues to describe standalone servers.
+
+Each Elastic Cluster version entry uses the existing version-capability shape:
+`name`, `supportedFeatures`, and `supportedVersionsToUpgrade`. Deployment
+versions and upgrade targets are evaluated independently.
+
+- Location and standalone-server capabilities return the supported Elastic
+  Cluster deployment versions, or an empty list when provisioning is unavailable.
+- For an existing Elastic Cluster, use its cluster resource name as `serverName`
+  on the server-capabilities endpoint. The response retains its current version
+  and includes higher supported deployment versions when provisioning is
+  available. If provisioning is unavailable, only the current version remains;
+  eligible upgrade targets can still be returned.
+- Location restrictions suppress upgrade targets. For an existing server,
+  server-specific upgrade eligibility can allow upgrade targets despite
+  location restrictions. Deployment versions remain visible when upgrades are
+  unavailable, with empty `supportedVersionsToUpgrade` arrays.
+
+Use `--tag=package-flexibleserver-2027-01-01-preview` to select the new preview.
+The default tag remains the latest stable API.
+
+### Tag: package-flexibleserver-2027-01-01-preview
+
+These settings apply only when `--tag=package-flexibleserver-2027-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-flexibleserver-2027-01-01-preview'
+input-file:
+  - preview/2027-01-01-preview/openapi.json
+suppressions:
+  - code: GuidUsage
+    from: openapi.json
+    where: $.definitions["Azure.Core.uuid"].format
+    reason: >-
+      Used only for Microsoft Entra application clientId properties on
+      DataEncryption (primaryFederatedIdentityClientId,
+      geoBackupFederatedIdentityClientId). Both are RFC 4122 UUIDs per ARM
+      identity guidelines. Approved by Azure API review board pull request 43065.
+```
+
 ### Tag: package-flexibleserver-2026-10-01
 
 These settings apply only when `--tag=package-flexibleserver-2026-10-01` is specified on the command line.

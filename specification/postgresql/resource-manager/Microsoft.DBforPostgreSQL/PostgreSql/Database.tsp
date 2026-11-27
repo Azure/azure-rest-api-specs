@@ -1,8 +1,9 @@
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./models.tsp";
+import "./shared.tsp";
 import "./Server.tsp";
 
 using TypeSpec.Rest;
@@ -11,7 +12,33 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.Core;
 
+using TypeSpec.Versioning;
+
 namespace Microsoft.DBforPostgreSQL;
+
+/**
+ * Properties of a database.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model DatabaseProperties {
+  /**
+   * Character set of the database.
+   */
+  @pattern("^[a-zA-Z]+\\w*$")
+  charset?: string;
+
+  /**
+   * Collation of the database.
+   */
+  @pattern("^[a-zA-Z\\-]+([. ]|\\w)*$")
+  collation?: string;
+}
+
+/**
+ * List of all databases in a server.
+ */
+model DatabaseList is Azure.Core.Page<Database>;
+
 /**
  * Represents a database.
  */

@@ -1,8 +1,9 @@
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./models.tsp";
+import "./shared.tsp";
 import "./Server.tsp";
 
 using TypeSpec.Rest;
@@ -10,7 +11,35 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
+using TypeSpec.Versioning;
+
+using Azure.Core;
+
 namespace Microsoft.DBforPostgreSQL;
+
+/**
+ * Properties of a firewall rule.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model FirewallRuleProperties {
+  /**
+   * IP address defining the start of the range of addresses of a firewall rule. Must be expressed in IPv4 format.
+   */
+  @pattern("^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$")
+  startIpAddress: string;
+
+  /**
+   * IP address defining the end of the range of addresses of a firewall rule. Must be expressed in IPv4 format.
+   */
+  @pattern("^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$")
+  endIpAddress: string;
+}
+
+/**
+ * List of firewall rules.
+ */
+model FirewallRuleList is Azure.Core.Page<FirewallRule>;
+
 /**
  * Firewall rule.
  */
