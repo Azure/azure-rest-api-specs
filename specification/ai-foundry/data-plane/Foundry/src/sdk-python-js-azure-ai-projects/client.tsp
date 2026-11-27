@@ -267,26 +267,26 @@ using Azure.AI.Projects;
 #suppress "@azure-tools/typespec-client-generator-core/use-union-hierarchy" "Preserve the released JavaScript helper aliases for heterogeneous unions without changing their variants."
 namespace JavaScriptToolCompatibility {
   // The JS emitter's literal-name escape preserves the public aliases' leading underscores.
-  @clientName("$DO_NOT_NORMALIZE$_CodeInterpreterToolContainer", "javascript")
+  @clientName(exact("_CodeInterpreterToolContainer"), "javascript")
   union CodeInterpreterToolContainer {
     string,
     OpenAI.AutoCodeInterpreterToolParam,
   }
 
-  @clientName("$DO_NOT_NORMALIZE$_MCPToolAllowedTools", "javascript")
+  @clientName(exact("_MCPToolAllowedTools"), "javascript")
   union MCPToolAllowedTools {
     string[],
     OpenAI.MCPToolFilter,
   }
 
-  @clientName("$DO_NOT_NORMALIZE$_MCPToolRequireApproval", "javascript")
+  @clientName(exact("_MCPToolRequireApproval"), "javascript")
   union MCPToolRequireApproval {
     OpenAI.MCPToolRequireApproval,
     "always",
     "never",
   }
 
-  @clientName("$DO_NOT_NORMALIZE$_FileSearchToolFiltersValue", "javascript")
+  @clientName(exact("_FileSearchToolFiltersValue"), "javascript")
   union FileSearchToolFiltersValueItems {
     string,
     numeric,
@@ -299,7 +299,7 @@ namespace JavaScriptToolCompatibility {
     FileSearchToolFiltersValueItems[],
   }
 
-  @clientName("$DO_NOT_NORMALIZE$_FileSearchToolFiltersFilter", "javascript")
+  @clientName(exact("_FileSearchToolFiltersFilter"), "javascript")
   union FileSearchToolFiltersFilter {
     OpenAI.ComparisonFilter,
     OpenAI.CompoundFilter,
