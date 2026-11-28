@@ -8,7 +8,7 @@ description: |
 # root environment into each stimulus environment, and the path resolves relative to this
 # file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
 # effect when the run passes --skill-dir, which neither the local nor the CI runner does.
-environment:
+agent_environment:
   skills:
     - "../../../azure-api-review"
   files:
@@ -25,8 +25,6 @@ tags:
 defaults:
   runs: 1
   timeout: "120s"
-  model: gpt-5.6-sol?effort=high
-  judge_model: claude-sonnet-4.6
 
 scoring:
   threshold: 0.7
@@ -39,15 +37,14 @@ stimuli:
         - src: "../fixtures/examples/example-bad-resource-id.json"
           dest: "specification/exsvc/resource-manager/Microsoft.ExService/stable/2025-01-01/examples/Widgets_Get.json"
     prompt: >
-      Review the following example JSON file for compliance with Azure REST API
-      example file guidelines. This example is for a GET operation on an ARM
-      resource. Report all findings with rule IDs and fix suggestions.
+      Review the following example JSON file for compliance with Azure REST API example file guidelines. This example is for a GET operation on an ARM resource. Report all findings with rule IDs and fix suggestions.
 
       File: specification/exsvc/resource-manager/Microsoft.ExService/stable/2025-01-01/examples/Widgets_Get.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
         config:
           pattern: "(?i)id|resource.?id"
@@ -63,15 +60,14 @@ stimuli:
         - src: "../fixtures/examples/example-realistic-secret.json"
           dest: "specification/exsvc/resource-manager/Microsoft.ExService/stable/2025-01-01/examples/Widgets_CreateOrUpdate.json"
     prompt: >
-      Review the following example JSON file for compliance with Azure REST API
-      example file guidelines. This example is for a PUT operation on an ARM
-      resource. Report all findings with rule IDs and fix suggestions.
+      Review the following example JSON file for compliance with Azure REST API example file guidelines. This example is for a PUT operation on an ARM resource. Report all findings with rule IDs and fix suggestions.
 
       File: specification/exsvc/resource-manager/Microsoft.ExService/stable/2025-01-01/examples/Widgets_CreateOrUpdate.json
-    constraints:
-      expect_skills:
-        - azure-api-review
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
         config:
           pattern: "(?i)secret|password|credential"
@@ -99,25 +95,20 @@ stimuli:
         - src: "../fixtures/examples/example-ex-payload-path-param.json"
           dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/PathParameter_Get.json"
     prompt: >
-      Read `.github/instructions/openapi-review.instructions.md` section 22.7
-      and `.github/skills/azure-api-review/references/example-quality.md`. Do
-      not edit any file. Return a standard review finding for
-      `ExtensibleOperations_Get`, focused on EX-PAYLOAD severity for the
-      undeclared `Investigate` value when `operationType` is an ordinary
-      response property whose enum has `modelAsString: true`.
+      Read `.github/instructions/openapi-review.instructions.md` section 22.7 and `.github/skills/azure-api-review/references/example-quality.md`. Do not edit any file. Return a standard review finding for `ExtensibleOperations_Get`, focused on EX-PAYLOAD severity for the undeclared `Investigate` value when `operationType` is an ordinary response property whose enum has `modelAsString: true`.
 
-      Spec: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/expayload.json
-      Example: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/ExtensibleEnum_Get.json
-    constraints:
-      expect_skills:
-        - azure-api-review
+      Spec: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/expayload.json Example: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/ExtensibleEnum_Get.json
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "extensible response value is Warning"
+        name: "extensible-response-value-is-warning"
         config:
           pattern: '(?is)(?:🟠\s*Warning|\bWarning\b).{0,500}EX-PAYLOAD|EX-PAYLOAD.{0,500}(?:🟠\s*Warning|\bWarning\b)'
       - type: output-not-matches
-        name: "no Blocking EX-PAYLOAD finding"
+        name: "no-blocking-ex-payload-finding"
         config:
           pattern: '(?is)\*\*\[(?:NEW|EXISTING)\]\s*🔴\s*Blocking.{0,500}EX-PAYLOAD'
       - type: prompt
@@ -143,21 +134,16 @@ stimuli:
         - src: "../fixtures/examples/example-ex-payload-path-param.json"
           dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/PathParameter_Get.json"
     prompt: >
-      Read `.github/instructions/openapi-review.instructions.md` section 22.7
-      and `.github/skills/azure-api-review/references/example-quality.md`. Do
-      not edit any file. Return a standard review finding for
-      `ClosedOperations_Get`, focused on EX-PAYLOAD severity for the undeclared
-      `Investigate` value when `operationType` is an ordinary response property
-      whose enum has `modelAsString: false`.
+      Read `.github/instructions/openapi-review.instructions.md` section 22.7 and `.github/skills/azure-api-review/references/example-quality.md`. Do not edit any file. Return a standard review finding for `ClosedOperations_Get`, focused on EX-PAYLOAD severity for the undeclared `Investigate` value when `operationType` is an ordinary response property whose enum has `modelAsString: false`.
 
-      Spec: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/expayload.json
-      Example: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/ClosedEnum_Get.json
-    constraints:
-      expect_skills:
-        - azure-api-review
+      Spec: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/expayload.json Example: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/ClosedEnum_Get.json
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "closed response value is Blocking"
+        name: "closed-response-value-is-blocking"
         config:
           pattern: '(?is)(?:🔴\s*Blocking|\bBlocking\b).{0,500}EX-PAYLOAD|EX-PAYLOAD.{0,500}(?:🔴\s*Blocking|\bBlocking\b)'
       - type: prompt
@@ -182,21 +168,16 @@ stimuli:
         - src: "../fixtures/examples/example-ex-payload-path-param.json"
           dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/PathParameter_Get.json"
     prompt: >
-      Read `.github/instructions/openapi-review.instructions.md` section 22.7
-      and `.github/skills/azure-api-review/references/example-quality.md`. Do
-      not edit any file. Return a standard review finding for
-      `PolymorphicWidgets_Get`, focused on EX-PAYLOAD severity for the
-      undeclared required discriminator value `UnknownWidget`; the
-      discriminator enum has `modelAsString: true`.
+      Read `.github/instructions/openapi-review.instructions.md` section 22.7 and `.github/skills/azure-api-review/references/example-quality.md`. Do not edit any file. Return a standard review finding for `PolymorphicWidgets_Get`, focused on EX-PAYLOAD severity for the undeclared required discriminator value `UnknownWidget`; the discriminator enum has `modelAsString: true`.
 
-      Spec: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/expayload.json
-      Example: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/Discriminator_Get.json
-    constraints:
-      expect_skills:
-        - azure-api-review
+      Spec: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/expayload.json Example: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/Discriminator_Get.json
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "unknown discriminator is Blocking"
+        name: "unknown-discriminator-is-blocking"
         config:
           pattern: '(?is)(?:🔴\s*Blocking|\bBlocking\b).{0,500}(?:EX-PAYLOAD|discriminator)|(?:EX-PAYLOAD|discriminator).{0,500}(?:🔴\s*Blocking|\bBlocking\b)'
       - type: prompt
@@ -221,20 +202,16 @@ stimuli:
         - src: "../fixtures/examples/example-ex-payload-discriminator.json"
           dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/Discriminator_Get.json"
     prompt: >
-      Read `.github/instructions/openapi-review.instructions.md` section 22.7
-      and `.github/skills/azure-api-review/references/example-quality.md`. Do
-      not edit any file. Return a standard review finding for `WidgetKinds_Get`,
-      focused on EX-PAYLOAD severity for the undeclared path value `Enterprise`;
-      the `widgetKind` enum has `modelAsString: true`.
+      Read `.github/instructions/openapi-review.instructions.md` section 22.7 and `.github/skills/azure-api-review/references/example-quality.md`. Do not edit any file. Return a standard review finding for `WidgetKinds_Get`, focused on EX-PAYLOAD severity for the undeclared path value `Enterprise`; the `widgetKind` enum has `modelAsString: true`.
 
-      Spec: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/expayload.json
-      Example: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/PathParameter_Get.json
-    constraints:
-      expect_skills:
-        - azure-api-review
+      Spec: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/expayload.json Example: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/PathParameter_Get.json
     graders:
+      - type: skill-invocation
+        config:
+          required:
+            - azure-api-review
       - type: output-matches
-        name: "unknown request path value is Blocking"
+        name: "unknown-request-path-value-is-blocking"
         config:
           pattern: '(?is)(?:🔴\s*Blocking|\bBlocking\b).{0,500}(?:EX-PAYLOAD|widgetKind|path)|(?:EX-PAYLOAD|widgetKind|path).{0,500}(?:🔴\s*Blocking|\bBlocking\b)'
       - type: prompt
