@@ -4,11 +4,12 @@ import { writeFileSync } from "node:fs";
 import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, relative, resolve } from "pathe";
-import { PassThrough } from "node:stream";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { formatRuleSummary } from "../src/diagnostics.ts";
 import { runAll } from "../src/run-projects.ts";
+import type { WorkerRequest } from "../src/worker-protocol.ts";
+import { mockProjectWorker, type MockProjectWorker } from "./project-worker-mock.ts";
 
 vi.mock("simple-git", { spy: true });
 vi.mock("node:child_process", async (importOriginal) => ({
@@ -16,37 +17,10 @@ vi.mock("node:child_process", async (importOriginal) => ({
   spawn: vi.fn(),
 }));
 
-function exitingChild(
-  code: number | null = 0,
-  signal: NodeJS.Signals | null = null,
-  output?: string,
-) {
-  const child = new ChildProcess();
-  const stdout = new PassThrough();
-  const stderr = new PassThrough();
-  Object.assign(child, { stdout, stderr });
-  queueMicrotask(() => {
-    if (output) stdout.write(output);
-    child.emit("close", code, signal);
-  });
-  return child;
-}
-
-function segmentedChild(segments: { stream: "stdout" | "stderr"; text: string }[]) {
-  const child = new ChildProcess();
-  const stdout = new PassThrough();
-  const stderr = new PassThrough();
-  Object.assign(child, { stdout, stderr });
-  queueMicrotask(() => {
-    for (const segment of segments) {
-      (segment.stream === "stdout" ? stdout : stderr).write(segment.text);
-    }
-    child.emit("close", 0, null);
-  });
-  return child;
-}
-
 let root: string;
+let workers: MockProjectWorker[];
+const onRequest = vi.fn<(request: WorkerRequest, worker: MockProjectWorker) => void>();
+const requests = () => onRequest.mock.calls.map(([request]) => request);
 
 async function addProject(name: string, config = "tspconfig.yaml") {
   const folder = join(root, name);
@@ -82,9 +56,15 @@ beforeEach(async () => {
   vi.spyOn(console, "log").mockImplementation(() => {});
   vi.spyOn(console, "error").mockImplementation(() => {});
   vi.spyOn(console, "debug").mockImplementation(() => {});
+  workers = [];
+  onRequest.mockReset().mockImplementation((_request, worker) => worker.respond(true));
   vi.mocked(spawn)
     .mockReset()
-    .mockImplementation(() => exitingChild());
+    .mockImplementation(() => {
+      const worker = mockProjectWorker(onRequest);
+      workers.push(worker);
+      return worker.child;
+    });
 });
 
 afterEach(async () => {
@@ -105,17 +85,13 @@ it("discovers sorted, unique project folders, including invalid config extension
 
   await expect(runAll(root)).resolves.toBe(true);
 
-  expect(vi.mocked(spawn).mock.calls.map((call) => call[1]?.[1])).toEqual([
-    first,
-    nested,
-    afterNested,
-    last,
-  ]);
+  expect(requests().map(({ folder }) => folder)).toEqual([first, nested, afterNested, last]);
   expect(spawn).toHaveBeenCalledWith(
     process.execPath,
-    [expect.stringMatching(/[/\\]src[/\\]project-worker\.ts$/), first, '{"checkingAllSpecs":true}'],
-    { stdio: ["ignore", "pipe", "pipe"], env: expect.any(Object) as unknown },
+    [expect.stringMatching(/[/\\]src[/\\]project-worker\.ts$/)],
+    { stdio: ["ignore", "pipe", "pipe", "ipc"], env: expect.any(Object) as unknown },
   );
+  expect(requests().every(({ context }) => context.checkingAllSpecs)).toBe(true);
   expect(console.error).not.toHaveBeenCalled();
 });
 
@@ -124,10 +100,9 @@ it("forwards --verbose to child projects without changing their suppression cont
   await expect(runAll(root, { verbose: true })).resolves.toBe(true);
   expect(vi.mocked(spawn).mock.calls[0][1]).toEqual([
     expect.stringMatching(/[/\\]src[/\\]project-worker\.ts$/),
-    project,
-    '{"checkingAllSpecs":true}',
     "--verbose",
   ]);
+  expect(requests()).toEqual([{ folder: project, context: { checkingAllSpecs: true } }]);
 });
 
 it("forwards batch fix mode separately from suppression context", async () => {
@@ -137,10 +112,9 @@ it("forwards batch fix mode separately from suppression context", async () => {
 
   expect(vi.mocked(spawn).mock.calls[0][1]).toEqual([
     expect.stringMatching(/[/\\]src[/\\]project-worker\.ts$/),
-    project,
-    '{"checkingAllSpecs":true}',
     "--fix",
   ]);
+  expect(requests()).toEqual([{ folder: project, context: { checkingAllSpecs: true } }]);
 });
 
 it("logs repository-relative paths but passes absolute paths to validation", async () => {
@@ -154,7 +128,7 @@ it("logs repository-relative paths but passes absolute paths to validation", asy
   );
   expect(console.log).toHaveBeenCalledWith("\npass specification/service/Project");
   expect(console.log).not.toHaveBeenCalledWith("::endgroup::");
-  expect(vi.mocked(spawn).mock.calls[0][1]?.[1]).toBe(project);
+  expect(requests()[0].folder).toBe(project);
 });
 
 it("uses cwd-relative paths outside a Git repository", async () => {
@@ -176,9 +150,13 @@ it("groups each project in GitHub Actions, including failures and suppressions",
     join(root, "suppressions.yaml"),
     "- tool: TypeSpecValidationAll\n  paths: [specification/b]\n  reason: skipped\n",
   );
-  vi.mocked(spawn)
-    .mockImplementationOnce(() => exitingChild(1, null, "validation failed"))
-    .mockImplementationOnce(() => exitingChild(0, null, "validation passed"));
+  onRequest
+    .mockImplementationOnce((_request, worker) =>
+      worker.respond(false, [{ stream: "stdout", text: "validation failed" }]),
+    )
+    .mockImplementationOnce((_request, worker) =>
+      worker.respond(true, [{ stream: "stdout", text: "validation passed" }]),
+    );
 
   await expect(runAll(join(root, "specification"))).resolves.toBe(false);
   expect(vi.mocked(console.log).mock.calls).toEqual([
@@ -220,8 +198,8 @@ it("keeps stderr warnings inside GitHub groups by writing grouped output to stdo
   vi.stubEnv("NO_COLOR", "1");
   await addProject("specification/a");
   await simpleGit(root).init();
-  vi.mocked(spawn).mockImplementationOnce(() =>
-    segmentedChild([
+  onRequest.mockImplementationOnce((_request, worker) =>
+    worker.respond(true, [
       { stream: "stdout", text: "before warning\n" },
       { stream: "stderr", text: "warning tsv/compile-output: additional output\n" },
       { stream: "stdout", text: "after warning\n" },
@@ -243,8 +221,8 @@ it("keeps stderr warnings inside GitHub groups by writing grouped output to stdo
 
 it("preserves captured stderr for local runs", async () => {
   await addProject("a");
-  vi.mocked(spawn).mockImplementationOnce(() =>
-    segmentedChild([{ stream: "stderr", text: "local warning\n" }]),
+  onRequest.mockImplementationOnce((_request, worker) =>
+    worker.respond(true, [{ stream: "stderr", text: "local warning\n" }]),
   );
 
   await expect(runAll(root)).resolves.toBe(true);
@@ -256,10 +234,10 @@ it("appends all failed projects to the GitHub job summary", async () => {
   await addProject("specification/b");
   await addProject("specification/c");
   await simpleGit(root).init();
-  vi.mocked(spawn)
-    .mockImplementationOnce(() => exitingChild(1))
-    .mockImplementationOnce(() => exitingChild())
-    .mockImplementationOnce(() => exitingChild(1));
+  onRequest
+    .mockImplementationOnce((_request, worker) => worker.respond(false))
+    .mockImplementationOnce((_request, worker) => worker.respond(true))
+    .mockImplementationOnce((_request, worker) => worker.respond(false));
   const summaryFile = join(root, "summary.md");
   await writeFile(summaryFile, "Existing summary\n");
 
@@ -303,7 +281,7 @@ it("escapes percent signs and newlines in GitHub error annotations", async () =>
   vi.stubEnv("GITHUB_ACTIONS", "true");
   await addProject("specification/service%0A/Project");
   await simpleGit(root).init();
-  vi.mocked(spawn).mockImplementationOnce(() => exitingChild(1));
+  onRequest.mockImplementationOnce((_request, worker) => worker.respond(false));
 
   await expect(runAll(join(root, "specification"))).resolves.toBe(false);
   expect(console.log).toHaveBeenCalledWith(
@@ -334,10 +312,10 @@ it.each([
     projects.sort();
     const selected: string[] = [];
     for (let index = 1; index <= count; index++) {
-      vi.mocked(spawn).mockClear();
+      onRequest.mockClear();
       await expect(runAll(root, { shard: `${index}/${count}` })).resolves.toBe(true);
       const expected = projects.slice(selected.length, selected.length + sizes[index - 1]);
-      expect(vi.mocked(spawn).mock.calls.map((call) => call[1]?.[1])).toEqual(expected);
+      expect(requests().map(({ folder }) => folder)).toEqual(expected);
       selected.push(...expected);
     }
     expect(selected).toEqual(projects);
@@ -355,7 +333,7 @@ it("applies suppressions after sharding without moving projects between shards",
   );
 
   await expect(runAll(root, { shard: "1/2" })).resolves.toBe(true);
-  expect(vi.mocked(spawn).mock.calls.map((call) => call[1]?.[1])).toEqual([second]);
+  expect(requests().map(({ folder }) => folder)).toEqual([second]);
   expect(console.log).toHaveBeenCalledWith("Shard 1/2: 2 of 4 TypeSpec projects");
   expect(console.log).toHaveBeenCalledWith("Suppressed: skipped");
 });
@@ -388,23 +366,22 @@ it("rejects more shards than projects before attempting cleanup", async () => {
   expect(spawn).not.toHaveBeenCalled();
 });
 
-it("waits for each child to exit before starting the next project", async () => {
+it("waits for each project to finish before reusing its worker", async () => {
   await addProject("a");
   await addProject("b");
   let active = 0;
   let peak = 0;
-  vi.mocked(spawn).mockImplementation(() => {
-    const child = new ChildProcess();
+  onRequest.mockImplementation((_request, worker) => {
     peak = Math.max(peak, ++active);
     setTimeout(() => {
       active--;
-      child.emit("close", 0, null);
+      worker.respond(true);
     }, 50);
-    return child;
   });
 
   await expect(runAll(root)).resolves.toBe(true);
-  expect(spawn).toHaveBeenCalledTimes(2);
+  expect(spawn).toHaveBeenCalledOnce();
+  expect(requests()).toHaveLength(2);
   expect(peak).toBe(1);
 });
 
@@ -422,19 +399,17 @@ it("bounds concurrent sibling projects and reports failures in discovery order",
   const second = await addProject("specification/service/b");
   const third = await addProject("specification/service/c");
   await simpleGit(root).init();
-  const children = new Map<string, ChildProcess>();
-  vi.mocked(spawn).mockImplementation((_command, args) => {
-    const child = new ChildProcess();
-    children.set(String(args?.[1]), child);
-    return child;
+  const children = new Map<string, MockProjectWorker>();
+  onRequest.mockImplementation((request, worker) => {
+    children.set(request.folder, worker);
   });
   const result = runAll(root, { concurrency: 2 });
   await vi.waitFor(() => expect(children.size).toBe(2));
   expect(children.has(third)).toBe(false);
-  children.get(second)?.emit("close", 1, null);
+  children.get(second)?.respond(false);
   await vi.waitFor(() => expect(children.has(third)).toBe(true));
-  children.get(third)?.emit("close", 0, null);
-  children.get(first)?.emit("close", 1, null);
+  children.get(third)?.respond(true);
+  children.get(first)?.respond(false);
 
   await expect(result).resolves.toBe(false);
 
@@ -449,24 +424,22 @@ it("stops scheduling and waits for active children after a fatal termination", a
   const first = await addProject("a");
   await addProject("b");
   await addProject("c");
-  const children = new Map<string, ChildProcess>();
+  const children = new Map<string, MockProjectWorker>();
   let peerClosed = false;
-  vi.mocked(spawn).mockImplementation((_command, args) => {
-    const child = new ChildProcess();
-    children.set(String(args?.[1]), child);
-    vi.spyOn(child, "kill").mockImplementation(() => {
+  onRequest.mockImplementation((request, worker) => {
+    children.set(request.folder, worker);
+    worker.kill.mockImplementation(() => {
       setTimeout(() => {
         peerClosed = true;
-        child.emit("close", null, "SIGTERM");
+        worker.exit(null, "SIGTERM");
       }, 10);
       return true;
     });
-    return child;
   });
   const result = runAll(root, { concurrency: 2 });
   const failure = expect(result).rejects.toThrow(`${first} terminated by SIGKILL`);
   await vi.waitFor(() => expect(children.size).toBe(2));
-  children.get(first)?.emit("close", null, "SIGKILL");
+  children.get(first)?.exit(null, "SIGKILL");
 
   await failure;
   expect(spawn).toHaveBeenCalledTimes(2);
@@ -495,7 +468,7 @@ it("honors conditional whole-tool suppressions without skipping rule-scoped ones
   );
 
   await expect(runAll(root)).resolves.toBe(true);
-  expect(vi.mocked(spawn).mock.calls.map((call) => call[1]?.[1])).toEqual([rule, subRule]);
+  expect(requests().map(({ folder }) => folder)).toEqual([rule, subRule]);
   expect(console.log).toHaveBeenCalledWith("Suppressed: whole tool");
 });
 
@@ -517,13 +490,13 @@ it("continues after validation failures and reports every failed project", async
   await addProject("b");
   await addProject("c");
   await simpleGit(root).init();
-  vi.mocked(spawn)
-    .mockImplementationOnce(() => exitingChild(1))
-    .mockImplementationOnce(() => exitingChild(0))
-    .mockImplementationOnce(() => exitingChild(2));
+  onRequest
+    .mockImplementationOnce((_request, worker) => worker.respond(false))
+    .mockImplementationOnce((_request, worker) => worker.respond(true))
+    .mockImplementationOnce((_request, worker) => worker.respond(false));
 
   await expect(runAll(root)).resolves.toBe(false);
-  expect(spawn).toHaveBeenCalledTimes(3);
+  expect(requests()).toHaveLength(3);
   expect(vi.mocked(console.error).mock.calls).toEqual([
     [
       d`
@@ -584,6 +557,7 @@ it("surfaces process launch errors instead of treating them as validation failur
   const error = new Error("Cannot start node");
   vi.mocked(spawn).mockImplementationOnce(() => {
     const child = new ChildProcess();
+    Object.assign(child, { send: vi.fn() });
     queueMicrotask(() => {
       child.emit("error", error);
       child.emit("close", null, null);
@@ -604,8 +578,9 @@ it("stops when a child is terminated by a signal, surfacing any output captured 
   const project = await addProject("a");
   await addProject("b");
   const git = await commitFixture();
-  vi.mocked(spawn).mockImplementationOnce(() => {
-    return exitingChild(null, "SIGTERM", "partial diagnostic");
+  onRequest.mockImplementationOnce((_request, worker) => {
+    worker.output([{ stream: "stdout", text: "partial diagnostic" }]);
+    worker.exit(null, "SIGTERM");
   });
 
   await expect(runAll(root, { gitClean: true })).rejects.toThrow(
@@ -626,7 +601,9 @@ it("stops when a child is terminated by a signal, surfacing any output captured 
 it("caps captured output per project so a runaway diagnostic can't grow memory without bound", async () => {
   await addProject("a");
   const bigOutput = "x".repeat(11 * 1024 * 1024); // 11 MiB, exceeds the 10 MiB cap
-  vi.mocked(spawn).mockImplementationOnce(() => exitingChild(0, null, bigOutput));
+  onRequest.mockImplementationOnce((_request, worker) =>
+    worker.respond(true, [{ stream: "stdout", text: bigOutput }]),
+  );
 
   await expect(runAll(root)).resolves.toBe(true);
   const printed = vi
@@ -652,7 +629,7 @@ it("verifies cleanliness once without restoring or cleaning files", async () => 
   expect(status).toHaveBeenCalledExactlyOnceWith(["--untracked-files=all"]);
   expect(raw).not.toHaveBeenCalled();
   expect(clean).not.toHaveBeenCalled();
-  expect(spawn).toHaveBeenCalledTimes(2);
+  expect(requests()).toHaveLength(2);
 });
 
 it("does not clean a dirty checkout during a dry run", async () => {
@@ -668,15 +645,11 @@ it("never discards edits made after the initial cleanliness check", async () => 
   await addProject("specification/a");
   await addProject("specification/b");
   const git = await commitFixture();
-  vi.mocked(spawn)
-    .mockImplementationOnce(() => {
-      writeFileSync(join(root, "tracked.txt"), "changed");
-      writeFileSync(join(root, "generated.txt"), "generated");
-      return exitingChild(1);
-    })
-    .mockImplementationOnce(() => {
-      return exitingChild();
-    });
+  onRequest.mockImplementationOnce((_request, worker) => {
+    writeFileSync(join(root, "tracked.txt"), "changed");
+    writeFileSync(join(root, "generated.txt"), "generated");
+    worker.respond(false);
+  });
 
   await expect(runAll(join(root, "specification"), { gitClean: true })).resolves.toBe(false);
   expect((await git.status()).isClean()).toBe(false);
@@ -704,4 +677,44 @@ it("rejects cleanup outside a Git repository before running validation", async (
   await addProject("a");
   await expect(runAll(root, { gitClean: true })).rejects.toThrow();
   expect(spawn).not.toHaveBeenCalled();
+});
+
+it("recycles workers after 20 projects while preserving results", async () => {
+  const projects: string[] = [];
+  for (let i = 0; i < 21; i++) {
+    projects.push(await addProject(`p${String(i).padStart(2, "0")}${i === 1 ? "-bad" : ""}`));
+  }
+  onRequest.mockImplementation((request, worker) =>
+    worker.respond(!request.folder.endsWith("-bad"), [
+      { stream: "stdout", text: `checked ${request.folder}` },
+    ]),
+  );
+
+  await expect(runAll(root, { concurrency: 1 })).resolves.toBe(false);
+
+  expect(spawn).toHaveBeenCalledTimes(2);
+  expect(workers.map(({ requests }) => requests.map(({ folder }) => folder))).toEqual([
+    projects.slice(0, 20),
+    projects.slice(20),
+  ]);
+  expect(workers.every(({ disconnect }) => disconnect.mock.calls.length === 1)).toBe(true);
+  expect(console.log).toHaveBeenCalledWith(expect.stringContaining(`checked ${projects[20]}`));
+  expect(console.error).toHaveBeenCalledWith(expect.stringContaining("p01-bad"));
+});
+
+it("restarts a worker that exits unexpectedly and continues validating projects", async () => {
+  await addProject("a");
+  const second = await addProject("b");
+  onRequest.mockImplementationOnce((_request, worker) => {
+    worker.output([{ stream: "stderr", text: "worker diagnostic\n" }]);
+    worker.exit(1, null);
+  });
+
+  await expect(runAll(root)).resolves.toBe(false);
+
+  expect(spawn).toHaveBeenCalledTimes(2);
+  expect(requests().map(({ folder }) => folder)).toContain(second);
+  expect(console.error).toHaveBeenCalledWith(
+    "worker diagnostic\nTypeSpec Validation worker exited with code 1",
+  );
 });

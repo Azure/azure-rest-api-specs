@@ -2,7 +2,7 @@ import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import { findTypeSpecProjects } from "@azure-tools/specs-shared/typespec-projects";
 import { getSuppressions } from "@azure-tools/suppressions";
-import { spawn } from "node:child_process";
+import { spawn, type ChildProcess } from "node:child_process";
 import { appendFile, stat } from "node:fs/promises";
 import { relative, resolve } from "pathe";
 import { fileURLToPath } from "node:url";
@@ -10,6 +10,13 @@ import pc from "picocolors";
 import { simpleGit } from "simple-git";
 import { formatRuleSummary, supportsColor, type RuleCounts } from "./diagnostics.ts";
 import { findChangedProjects, type ChangedProjectsOptions } from "./find-projects.ts";
+import {
+  OutputCapture,
+  type OutputSegment,
+  type RunContext,
+  type WorkerMessage,
+  type WorkerRequest,
+} from "./worker-protocol.ts";
 
 interface RunOptions {
   gitClean?: boolean;
@@ -20,19 +27,7 @@ interface RunOptions {
   concurrency?: number;
 }
 
-interface RunContext {
-  checkingAllSpecs: boolean;
-  baseCommitish?: string;
-  headCommitish?: string;
-}
-
 type ProjectStatus = "pass" | "fail" | "skip";
-
-type OutputStream = "stdout" | "stderr";
-interface OutputSegment {
-  stream: OutputStream;
-  text: string;
-}
 
 /** Thrown when a child is terminated by a signal; carries any output captured before termination. */
 class ProjectTerminatedError extends Error {
@@ -44,9 +39,7 @@ class ProjectTerminatedError extends Error {
   }
 }
 
-// Cap captured output per project so a runaway diagnostic (e.g. a huge generated-file diff)
-// can't grow runner memory without bound; excess output is dropped, not buffered.
-const MAX_CAPTURED_OUTPUT_BYTES = 10 * 1024 * 1024;
+const MAX_PROJECTS_PER_WORKER = 20;
 
 export async function runAll(
   folder: string,
@@ -153,17 +146,22 @@ async function runProjects(
   process.on("SIGTERM", onSigterm);
 
   async function worker() {
-    while (!stopped && nextProject < projects.length) {
-      const project = projects[nextProject++];
-      try {
-        await runProject(project);
-      } catch (error) {
-        stop(error);
+    const projectWorker = new ProjectWorker({ ...options, signal: controller.signal });
+    try {
+      while (!stopped && nextProject < projects.length) {
+        const project = projects[nextProject++];
+        try {
+          await runProject(project, projectWorker);
+        } catch (error) {
+          stop(error);
+        }
       }
+    } finally {
+      await projectWorker.close();
     }
   }
 
-  async function runProject(project: string) {
+  async function runProject(project: string, projectWorker: ProjectWorker) {
     const name = displayPath(project);
     if (context.checkingAllSpecs) {
       const suppressions = await getSuppressions("TypeSpecValidationAll", project, {
@@ -185,10 +183,7 @@ async function runProjects(
     if (stopped) return;
 
     try {
-      const { success, segments } = await validateProject(project, context, {
-        ...options,
-        signal: controller.signal,
-      });
+      const { success, segments } = await projectWorker.validate(project, context);
       if (success) {
         counts.PASS++;
         printProjectGroup(githubActions, "pass", name, segments);
@@ -350,88 +345,149 @@ function selectShard(projects: string[], shard: string): string[] {
   return projects.slice(start, end);
 }
 
-/** Run a project's validation as a child process, capturing its output to attribute it to a titled group. */
-function validateProject(
-  folder: string,
-  context: RunContext,
-  {
-    verbose = false,
-    fix = false,
-    signal,
-  }: Pick<RunOptions, "verbose" | "fix"> & {
-    signal?: AbortSignal;
-  } = {},
-): Promise<{ success: boolean; segments: OutputSegment[] }> {
-  return new Promise((resolvePromise, reject) => {
-    const env: NodeJS.ProcessEnv = { ...process.env, GIT_OPTIONAL_LOCKS: "0" };
-    if (supportsColor()) {
-      delete env.NO_COLOR;
-      env.FORCE_COLOR = "1";
-    } else {
-      delete env.FORCE_COLOR;
-      env.NO_COLOR = "1";
-    }
-    // Segments are recorded in capture order (not grouped by stream) so interleaved
-    // stdout/stderr writes from the child can be replayed in their real relative order.
-    const segments: OutputSegment[] = [];
-    let capturedBytes = 0;
-    let truncated = false;
-    const capture = (stream: OutputStream, chunk: Buffer) => {
-      // Keep draining the pipe even once truncated, so a chatty child can't stall on backpressure.
-      if (truncated) return;
-      capturedBytes += chunk.length;
-      if (capturedBytes > MAX_CAPTURED_OUTPUT_BYTES) {
-        truncated = true;
-        segments.push({
-          stream,
-          text: `\n[output truncated: exceeded ${MAX_CAPTURED_OUTPUT_BYTES / (1024 * 1024)} MiB]\n`,
+const workerPath = fileURLToPath(new URL("./project-worker.ts", import.meta.url));
+
+function childEnv(): NodeJS.ProcessEnv {
+  const env: NodeJS.ProcessEnv = { ...process.env, GIT_OPTIONAL_LOCKS: "0" };
+  if (supportsColor()) {
+    delete env.NO_COLOR;
+    env.FORCE_COLOR = "1";
+  } else {
+    delete env.FORCE_COLOR;
+    env.NO_COLOR = "1";
+  }
+  return env;
+}
+
+/**
+ * A worker validates projects one at a time and is recycled to bound cached data and memory.
+ */
+class ProjectWorker {
+  #child: ChildProcess | undefined;
+  #validated = 0;
+  #output = new OutputCapture();
+  readonly #options: Pick<RunOptions, "verbose" | "fix"> & { signal: AbortSignal };
+
+  constructor(options: Pick<RunOptions, "verbose" | "fix"> & { signal: AbortSignal }) {
+    this.#options = options;
+  }
+
+  async validate(
+    folder: string,
+    context: RunContext,
+  ): Promise<{ success: boolean; segments: OutputSegment[] }> {
+    if (this.#validated >= MAX_PROJECTS_PER_WORKER) await this.close();
+    const child = (this.#child ??= this.#start());
+    this.#validated++;
+    return new Promise((resolvePromise, reject) => {
+      let settled = false;
+      const cleanup = () => {
+        child.off("message", onMessage);
+        child.off("exit", onExit);
+        child.off("error", onError);
+      };
+      const finish = () => {
+        if (settled) return false;
+        settled = true;
+        cleanup();
+        return true;
+      };
+      const onMessage = (message: WorkerMessage) => {
+        if (message.kind === "output") {
+          for (const segment of message.segments) this.#output.append(segment.stream, segment.text);
+        } else if (message.kind === "result" && finish()) {
+          resolvePromise({ success: message.success, segments: this.#output.take() });
+        }
+      };
+      const onError = (error: Error) => {
+        if (finish()) reject(error);
+      };
+      const onExit = (code: number | null, signal: NodeJS.Signals | null) => {
+        if (!finish()) return;
+        if (signal) {
+          reject(
+            new ProjectTerminatedError(
+              `TypeSpec Validation for ${folder} terminated by ${signal}`,
+              this.#output.take(),
+            ),
+          );
+        } else {
+          resolvePromise({
+            success: false,
+            segments: [
+              ...this.#output.take(),
+              { stream: "stderr", text: `TypeSpec Validation worker exited with code ${code}` },
+            ],
+          });
+        }
+      };
+      child.on("message", onMessage);
+      child.once("exit", onExit);
+      child.once("error", onError);
+      try {
+        child.send({ folder, context } satisfies WorkerRequest, (error) => {
+          if (error) onError(error);
         });
-        return;
+      } catch (error) {
+        if (finish()) reject(error instanceof Error ? error : new Error(String(error)));
       }
-      segments.push({ stream, text: chunk.toString("utf8") });
-    };
-    // A child process keeps each project's context and exit status independent.
+    });
+  }
+
+  async close(): Promise<void> {
+    const child = this.#child;
+    this.#child = undefined;
+    this.#validated = 0;
+    if (!child || child.exitCode !== null || child.signalCode !== null) return;
+    await new Promise<void>((resolveExit) => {
+      const finish = () => {
+        child.off("exit", finish);
+        child.off("close", finish);
+        child.off("error", onError);
+        resolveExit();
+      };
+      const onError = () => {
+        if (child.pid === undefined) finish();
+      };
+      child.once("exit", finish);
+      child.once("close", finish);
+      child.on("error", onError);
+      if (child.connected) child.disconnect();
+      else if (child.pid === undefined) finish();
+    });
+  }
+
+  #start(): ChildProcess {
+    const { verbose = false, fix = false, signal } = this.#options;
     const child = spawn(
       process.execPath,
-      [
-        fileURLToPath(new URL("./project-worker.ts", import.meta.url)),
-        folder,
-        JSON.stringify(context),
-        ...(verbose ? ["--verbose"] : []),
-        ...(fix ? ["--fix"] : []),
-      ],
-      { stdio: ["ignore", "pipe", "pipe"], env },
+      [workerPath, ...(verbose ? ["--verbose"] : []), ...(fix ? ["--fix"] : [])],
+      { stdio: ["ignore", "pipe", "pipe", "ipc"], env: childEnv() },
     );
-    child.stdout?.on("data", (chunk: Buffer) => capture("stdout", chunk));
-    child.stderr?.on("data", (chunk: Buffer) => capture("stderr", chunk));
-    let launchError: Error | undefined;
+    child.stdout?.on("data", (chunk: Buffer) => this.#output.append("stdout", chunk));
+    child.stderr?.on("data", (chunk: Buffer) => this.#output.append("stderr", chunk));
     let forceKill: NodeJS.Timeout | undefined;
     const abort = () => {
+      if (child.pid === undefined || child.exitCode !== null || child.signalCode !== null) return;
       forceKill = setTimeout(() => child.kill("SIGKILL"), 5_000);
       forceKill.unref();
       child.kill("SIGTERM");
     };
-    signal?.addEventListener("abort", abort, { once: true });
-    if (signal?.aborted) abort();
-    child.once("error", (error) => {
-      launchError = error;
-    });
-    child.once("close", (code, terminationSignal) => {
+    signal.addEventListener("abort", abort, { once: true });
+    if (signal.aborted) abort();
+    const cleanup = () => {
       clearTimeout(forceKill);
-      // Wait for close, not just error, so peers have exited before the batch returns.
-      if (launchError) {
-        reject(launchError);
-      } else if (terminationSignal) {
-        reject(
-          new ProjectTerminatedError(
-            `TypeSpec Validation for ${folder} terminated by ${terminationSignal}`,
-            segments,
-          ),
-        );
-      } else {
-        resolvePromise({ success: code === 0, segments });
+      signal.removeEventListener("abort", abort);
+      if (this.#child === child) {
+        this.#child = undefined;
+        this.#validated = 0;
       }
+    };
+    child.once("exit", cleanup);
+    child.once("close", cleanup);
+    child.on("error", () => {
+      if (child.pid === undefined) cleanup();
     });
-    child.once("close", () => signal?.removeEventListener("abort", abort));
-  });
+    return child;
+  }
 }

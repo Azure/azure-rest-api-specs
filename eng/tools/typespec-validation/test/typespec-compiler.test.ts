@@ -1,9 +1,14 @@
+import { NodeHost } from "@typespec/compiler";
 import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, relative, resolve } from "pathe";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
-import { compileTypeSpec, formatTypeSpec } from "../src/typespec-compiler.ts";
+import {
+  compileTypeSpec,
+  enableCompilerFileCache,
+  formatTypeSpec,
+} from "../src/typespec-compiler.ts";
 import { diagnosticDetails } from "./diagnostics.ts";
 
 let root: string;
@@ -187,4 +192,35 @@ it("refuses emitter removals without deleting files during check-only validation
 
   await expect(compileTypeSpec(root)).rejects.toThrow("Removing files is not supported");
   expect(await readFile(file, "utf8")).toBe("keep");
+});
+
+it("reuses shared compiler reads for checks while fix mode sees later file changes", async () => {
+  const shared = join(root, "shared.tsp");
+  await writeFile(shared, "model Shared {}\n");
+  const projects = [join(root, "first"), join(root, "second")];
+  for (const project of projects) {
+    await mkdir(project);
+    await writeFile(
+      join(project, "main.tsp"),
+      'import "../shared.tsp";\nmodel Example { value: Shared; }\n',
+    );
+    await writeFile(join(project, "tspconfig.yaml"), "kind: project\n");
+  }
+
+  const readFile = vi.spyOn(NodeHost, "readFile");
+  try {
+    enableCompilerFileCache();
+    for (const project of projects) {
+      const result = await compileTypeSpec(project, { noEmit: true });
+      expect(result.success, JSON.stringify(result.diagnostics)).toBe(true);
+    }
+    expect(readFile.mock.calls.filter(([path]) => resolve(path) === shared)).toHaveLength(1);
+
+    await writeFile(shared, "model Shared { value: Missing; }\n");
+    const fixed = await compileTypeSpec(projects[1], { noEmit: true, fix: true });
+    expect(fixed.success).toBe(false);
+    expect(diagnosticDetails(fixed.diagnostics?.[0])).toContain("Missing");
+  } finally {
+    readFile.mockRestore();
+  }
 });
