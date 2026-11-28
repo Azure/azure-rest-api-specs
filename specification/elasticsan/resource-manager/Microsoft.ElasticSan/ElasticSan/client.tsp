@@ -63,6 +63,7 @@ using Azure.Core;
   "csharp"
 );
 @@clientName(`x-ms-force-delete`, "ElasticSanForceDeleteVolume", "csharp");
+@@clientName(`x-ms-delete-clones`, "ElasticSanDeleteClonesOfVolume", "csharp");
 @@clientName(ElasticSanProperties.totalMBps, "totalMbps", "csharp");
 @@clientName(ElasticSanUpdateProperties.totalMBps, "totalMbps", "csharp");
 @@clientName(
