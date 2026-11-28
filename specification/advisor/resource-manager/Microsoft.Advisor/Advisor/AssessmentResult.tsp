@@ -24,6 +24,7 @@ model AssessmentResult
 
 @armResourceOperations
 @removed(Versions.v2026_10_01)
+@added(Versions.v2026_11_01_preview)
 interface AssessmentResults {
   /**
    * Get an existing Azure Advisor assessment.
