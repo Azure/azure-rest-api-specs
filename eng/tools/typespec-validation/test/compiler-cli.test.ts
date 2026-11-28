@@ -88,7 +88,7 @@ async function run(...args: string[]): Promise<{ code: number; stdout: string; s
 it("prints only a final summary by default and compact rule statuses with --verbose", async () => {
   const quiet = await run(project);
   expect(quiet.code, quiet.stderr).toBe(0);
-  expect(quiet.stdout).toBe("9 passed | 1 skipped | 1 suppressed\n");
+  expect(quiet.stdout).toBe("10 passed | 1 skipped | 1 suppressed\n");
   expect(quiet.stderr).toBe("");
   const verbose = await run(project, "--verbose");
   expect(verbose.code).toBe(quiet.code);
@@ -98,7 +98,7 @@ it("prints only a final summary by default and compact rule statuses with --verb
       .trim()
       .split("\n")
       .filter((line) =>
-        /^[\u2714\u00d7!-] (?:FolderStructure|DisallowedFileTypes|NpmPrefix|EmitAutorest|ServiceYaml|FlavorAzure|LinterRuleset|ClientTspImport|Compile|Format|SdkTspConfigValidation)\b/.test(
+        /^[\u2714\u00d7!-] (?:FolderStructure|DisallowedFileTypes|NpmPrefix|EmitAutorest|ServiceYaml|UnifiedExamples|FlavorAzure|LinterRuleset|ClientTspImport|Compile|Format|SdkTspConfigValidation)\b/.test(
           line,
         ),
       ),
@@ -108,6 +108,7 @@ it("prints only a final summary by default and compact rule statuses with --verb
     "\u2714 NpmPrefix",
     "\u2714 EmitAutorest",
     "\u2714 ServiceYaml",
+    "\u2714 UnifiedExamples",
     "\u2714 FlavorAzure",
     "\u2714 LinterRuleset",
     "- ClientTspImport (skipped)",
@@ -116,7 +117,7 @@ it("prints only a final summary by default and compact rule statuses with --verb
     "- SdkTspConfigValidation (suppressed)",
   ]);
   expect(verbose.stdout).toContain(
-    "- SdkTspConfigValidation (suppressed)\n\n9 passed | 1 skipped | 1 suppressed",
+    "- SdkTspConfigValidation (suppressed)\n\n10 passed | 1 skipped | 1 suppressed",
   );
 });
 
@@ -217,12 +218,12 @@ it.each([
     );
     expect(stripVTControlCharacters(result.stdout).includes("\u00d7 Compile")).toBe(verbose);
     expect(stripVTControlCharacters(result.stdout)).toContain(
-      "7 passed | 1 failed | 1 skipped | 2 not run",
+      "8 passed | 1 failed | 1 skipped | 2 not run",
     );
     expect(stripVTControlCharacters(result.stdout)).not.toContain("\u2714 Format");
     if (!verbose) {
       expect(stripVTControlCharacters(result.stdout)).toBe(
-        "\n7 passed | 1 failed | 1 skipped | 2 not run\n",
+        "\n8 passed | 1 failed | 1 skipped | 2 not run\n",
       );
     }
   },
