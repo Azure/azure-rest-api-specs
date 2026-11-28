@@ -1,0 +1,48 @@
+parameters:
+  service-dir:
+    default: "sdk/monitor"
+emit:
+  # Spec compilation emits OpenAPI; SDK pipelines select their emitter with --emit.
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    output-file: "{version-status}/{version}/identityAccess.json"
+    new-line: lf
+    omit-unreachable-types: true
+    use-read-only-status-schema: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Monitor.IdentityAccess"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-monitoridentityaccess"
+    namespace: "azure.mgmt.monitoridentityaccess"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-monitor-identityaccess"
+    namespace: "com.azure.resourcemanager.monitor.identityaccess"
+    service-name: "Monitor Identity Access"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-monitoridentityaccess"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-monitoridentityaccess"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/monitor"
+    emitter-output-dir: "{output-dir}/{service-dir}/armmonitoridentityaccess"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmonitoridentityaccess"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
