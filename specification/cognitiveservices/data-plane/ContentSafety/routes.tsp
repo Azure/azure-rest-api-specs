@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
+import "./agent-hooks.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -85,11 +86,14 @@ interface ImageOperations {
 
 @added(ContentSafety.Versions.v2026_09_01_preview)
 interface UnifiedOperations {
+  @removed(ContentSafety.Versions.v2026_10_15_preview)
+  @renamedFrom(ContentSafety.Versions.v2026_10_15_preview, "unifiedModerate")
   @summary("Unified Moderate")
   @doc("A synchronous API that evaluates input, output, a proposed tool call, or a completed tool result against an applicable Agent Control Specification policy and returns the enforced content and policy verdict.")
   @route("/content:unifiedModerate")
+  @sharedRoute
   @post
-  unifiedModerate is Azure.Core.RpcOperation<
+  unifiedModerateLegacy is Azure.Core.RpcOperation<
     {
       @bodyRoot
       @doc("The unified moderation request.")
@@ -99,6 +103,57 @@ interface UnifiedOperations {
       body: UnifiedModerateOptions;
     },
     UnifiedModerateResult
+  >;
+
+  @added(ContentSafety.Versions.v2026_10_15_preview)
+  @summary("Unified Moderate")
+  @doc("""
+    Evaluate one Agent Hooks 0.1 context. Supply either policyId or a project target and the exact selected Guardrail tuple, never both.
+    Project evaluation includes any administrator policies bound to the target or its ancestors; an administrator binding is not required.
+    HTTP 200 means evaluation completed, not that the action is allowed. The host validates the envelope and the request binding in extensions.aacs.receipt before enforcing verdict.
+    Only the host can apply a transform, obtain approval, or release an action. Identity fields in the context do not grant access.
+    Each request and response is limited to 1,048,576 bytes of decoded UTF-8 JSON and a container depth of 64 including the root. Duplicate object members and over-limit messages are invalid.
+    """)
+  @route("/content:unifiedModerate")
+  @sharedRoute
+  @post
+  unifiedModerate is Azure.Core.RpcOperation<
+    {
+      @query
+      @doc("Resource ID of the governed Foundry project under the authenticated serving account. Supply it with selectedPolicyId, selectedPolicyRevision and selectedPolicySemanticDigest; omit it when using policyId.")
+      @minLength(1)
+      targetResourceId?: string;
+
+      @query
+      @doc("Policy name or full policy resource ID for evaluation against the serving account. Supply it alone, without any project selectors.")
+      @minLength(1)
+      policyId?: string;
+
+      @query
+      @doc("Full resource ID of the Guardrail selected by the Foundry agent version. Required with targetResourceId for the Foundry-project profile. selectedPolicyRevision and selectedPolicySemanticDigest are required. The exact tuple must match the policy admitted for the agent operation; missing, stale, mismatched or deleted revisions fail closed and never follow mutable policy content.")
+      @minLength(1)
+      selectedPolicyId?: string;
+
+      @query
+      @doc("Exact revision of the selected Guardrail. Preserve the revision verbatim, including quoting when it is an ETag. Required with selectedPolicyId.")
+      @minLength(1)
+      selectedPolicyRevision?: string;
+
+      @query
+      @doc("SHA-256 digest of the admitted selected Guardrail semantic closure. Required exactly when selectedPolicyId is present and verified with selectedPolicyRevision before evaluation.")
+      @pattern("^sha256:[0-9a-f]{64}$")
+      selectedPolicySemanticDigest?: string;
+
+      @bodyRoot
+      @doc("Canonical Agent Hooks context with native JSON point payloads. Azure AI Content Safety (AACS) classifier role metadata, when needed by a non-Hooks caller, belongs in extensions.aacs.role.")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
+      body: AgentContext;
+    },
+    AgentEvaluationResult,
+    {},
+    AgentEvaluationError
   >;
 }
 
