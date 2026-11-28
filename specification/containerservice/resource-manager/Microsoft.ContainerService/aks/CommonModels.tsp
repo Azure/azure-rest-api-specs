@@ -1688,11 +1688,73 @@ model KubernetesPatchVersion {
   upgrades?: string[];
 }
 
+/** OData filtering and latest-only or bounded history discovery. */
+@added(Versions.v2026_09_02_preview)
+model NodeImageVersionListConfig {
+  /**
+   * Optional OData filter using eq comparisons joined with and.
+   * Supports image selectors and requiredFeatures eq 'name=value,name=value'.
+   * The feature string uses custom capability matching. Other operators are not supported.
+   */
+  @added(Versions.v2026_09_02_preview)
+  @query("$filter")
+  @minLength(1)
+  filter?: string;
+
+  /** Return the latest standard image per variant and, when requested, all eligible patches for those base images. */
+  @added(Versions.v2026_09_02_preview)
+  @query
+  latestImagesOnly?: boolean;
+
+  /** History window in days. Ignored in latest-only mode. */
+  @added(Versions.v2026_09_02_preview)
+  @query
+  @minValue(1)
+  @maxValue(180)
+  lookback?: int32;
+
+  /** Maximum images per page. Pages may contain fewer items. */
+  @added(Versions.v2026_09_02_preview)
+  @query
+  @minValue(1)
+  @maxValue(1000)
+  pageSize?: int32 = 100;
+}
+
 /**
  * Holds an array NodeImageVersions
  */
 @added(Versions.v2026_09_02_preview)
 model NodeImageVersionsListResult is Azure.Core.Page<NodeImageVersion>;
+
+/** Whether a node image is a standard release or a security-only patch. */
+@added(Versions.v2026_09_02_preview)
+union NodeImageType {
+  /** A base/standard node image release. */
+  Standard: "Standard",
+
+  /** A security-only patch of a base node image. */
+  SecurityPatch: "SecurityPatch",
+
+  /** Allows additional image types in future versions. */
+  string,
+}
+
+/** Global AKS-managed SDP validation progress and outcome for a node image. */
+@added(Versions.v2026_09_02_preview)
+union NodeImageGlobalSdpValidationStatus {
+  /** The corresponding AgentBakerService release is still rolling out; the globally available image has not yet been validated in every region. */
+  InProgress: "InProgress",
+
+  /** The corresponding AgentBakerService rollout completed successfully. */
+  Succeeded: "Succeeded",
+
+  /** The corresponding AgentBakerService rollout failed or was abandoned, and the image was marked failed/defective. */
+  Failed: "Failed",
+
+  /** Allows additional validation states in future versions. */
+  string,
+}
 
 /**
  * node image version profile for given major.minor.patch release.
@@ -1719,6 +1781,21 @@ model NodeImageVersion {
    * The OS + SKU + version of the node image. Example: AKSUbuntu-1804gen2containerd-2024.02.02
    */
   fullName?: string;
+
+  /** Whether this image is a standard release or a security-only patch. */
+  @added(Versions.v2026_09_02_preview)
+  @visibility(Lifecycle.Read)
+  imageType?: NodeImageType;
+
+  /** Eventually consistent global AKS-managed SDP validation status, populated on every returned image. */
+  @added(Versions.v2026_09_02_preview)
+  @visibility(Lifecycle.Read)
+  globalSdpValidationStatus: NodeImageGlobalSdpValidationStatus;
+
+  /** Whether regional AgentBakerService identifies this image as the current AKS default for its distro in the requested location. */
+  @added(Versions.v2026_09_02_preview)
+  @visibility(Lifecycle.Read)
+  currentDefaultInLocation: boolean;
 }
 
 /**
