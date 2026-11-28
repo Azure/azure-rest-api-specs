@@ -605,7 +605,7 @@ read-only `github` toolset. If any check fails, act as directed and stop.
    If the PR carries `skip-arm-review`, call `noop` and stop (opt-out).
    From the same response, capture the exact label names matching
    `BreakingChange-Approved-*`, `Versioning-Approved-*`,
-   `Approved-Suppression`, or `Approved-TypeSpecSuppression`. This is the
+   `Approved-Suppression`, or `typespec-suppressions-approved`. This is the
    approval-label inventory for the review; record `none` when it is empty.
 3. **`specification/` scope** — call `pull_request_read(method: "get_files")` and
    paginate the file list. **Check whether it was truncated before deciding
@@ -862,20 +862,22 @@ workflow runs in **autonomous mode**, so apply the Action column below (the
 reconciliation acts directly, without human confirmation):
 
 Line movement does not make a finding new, but it does select the action. Choose
-exactly one action with this precedence: contradiction, shifted inline anchor,
-other actionable coverage, then no coverage.
+exactly one action with this precedence: contradiction, verified addressed
+approval exception with unchanged scope, active shifted inline anchor, other
+actionable coverage, then no coverage.
 
-| Scenario                                                                | Action token            | Behavior                                                                                                               |
-| ----------------------------------------------------------------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| New guidance contradicts an existing inline thread                      | `CLARIFY-CONFLICT`      | Reply with the prior position, current evidence/guidance, and why it changed; resolve only superseded agent guidance   |
-| New guidance contradicts top-level comment(s) or review body            | `CLARIFY-CONFLICT`      | Post one consolidated top-level clarification linking every contradicted item; do not post separate duplicate findings |
-| Same finding, line shifted, trusted workflow-owned inline thread        | `RESOLVE-AND-REPOST`    | Resolve the stale trusted thread and post one replacement at the current line                                          |
-| Same finding, line shifted, any other inline thread                     | `REPLY-LINE-SHIFT`      | Reply with the current line; do not resolve the thread                                                                 |
-| Same semantic finding, actionable coverage, no shifted inline anchor    | `SKIP-COVERED`          | Do not post; record the existing URL                                                                                   |
-| Violation already fixed, trusted workflow-owned inline thread           | `THANK-AND-RESOLVE`     | Queue the fix reply and thread resolution                                                                              |
-| Violation already fixed, any other inline thread                        | `PROPOSE-HUMAN-RESOLVE` | Never auto-resolve; autonomous mode leaves it untouched                                                                |
-| Candidate excluded by the 20-comment limit                              | `OVERFLOW-NOT-POSTED`   | Do not post; disclose only the aggregate count and themes                                                              |
-| No actionable prior coverage or contradiction on any discussion surface | `POST-NEW`              | Post one new finding                                                                                                   |
+| Scenario                                                                                  | Action token            | Behavior                                                                                                                  |
+| ----------------------------------------------------------------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| New guidance contradicts an existing inline thread                                        | `CLARIFY-CONFLICT`      | Reply with the prior position, current evidence/guidance, and why it changed; resolve only superseded agent guidance      |
+| New guidance contradicts top-level comment(s) or review body                              | `CLARIFY-CONFLICT`      | Post one consolidated top-level clarification linking every contradicted item; do not post separate duplicate findings    |
+| Verified addressed approval exception, unchanged scope, even if its inline anchor shifted | `SKIP-COVERED`          | Keep historical coverage and the resolved thread unchanged; no repost, line-shift reply, or repeated confirmation request |
+| Same active finding, line shifted, trusted workflow-owned inline thread                   | `RESOLVE-AND-REPOST`    | Resolve the stale trusted thread and post one replacement at the current line                                             |
+| Same active finding, line shifted, any other inline thread                                | `REPLY-LINE-SHIFT`      | Reply with the current line; do not resolve the thread                                                                    |
+| Same semantic finding, actionable coverage, no shifted inline anchor                      | `SKIP-COVERED`          | Do not post; record the existing URL                                                                                      |
+| Violation already fixed, trusted workflow-owned inline thread                             | `THANK-AND-RESOLVE`     | Queue the fix reply and thread resolution                                                                                 |
+| Violation already fixed, any other inline thread                                          | `PROPOSE-HUMAN-RESOLVE` | Never auto-resolve; autonomous mode leaves it untouched                                                                   |
+| Candidate excluded by the 20-comment limit                                                | `OVERFLOW-NOT-POSTED`   | Do not post; disclose only the aggregate count and themes                                                                 |
+| No actionable prior coverage or contradiction on any discussion surface                   | `POST-NEW`              | Post one new finding                                                                                                      |
 
 **Resolution rules (autonomous mode):**
 
@@ -902,9 +904,14 @@ other actionable coverage, then no coverage.
   50-inline comment budget in Step 6.
 
 Pass the complete inventory counts, pagination status, semantic match anchors,
-and every `CLARIFY-CONFLICT` entry to the Critic. If any discussion surface
-cannot be fetched completely, call `report_incomplete` and stop; do not default
-all candidates to new findings.
+every `CLARIFY-CONFLICT` entry, and the active-finding evidence required by the
+shared [addressed-exception rules](../skills/azure-api-review/references/reviewer-posted-parity.md#active-findings-and-addressed-approval-exceptions)
+to the Critic. For covered Blocking findings, include author replies and their
+URLs, current approval labels, resolution state, and the reason the finding is
+still active or addressed at this head. `SKIP-COVERED` controls duplicate
+posting, not the active Blocking count. If any discussion surface cannot be
+fetched completely, call `report_incomplete` and stop; do not default all
+candidates to new findings.
 
 ### Step 5.6: Mandatory Critic Review
 
@@ -1134,11 +1141,15 @@ comment. Never prefix a bare finding number with `#`.
 For breaking-change findings, use `BreakingChange-Approved-*` for cross-version
 breaks and `Versioning-Approved-*` for same-version or published-version
 exceptions. For suppression findings, use `Approved-Suppression` for OpenAPI
-suppression flows and `Approved-TypeSpecSuppression` for TypeSpec suppression
+suppression flows and `typespec-suppressions-approved` for TypeSpec suppression
 flows. The `Approval context` paragraph must name an observed matching label or
 state that no matching label was observed. A label does not remove or downgrade
 the finding; it changes the remaining author action when the approval covers
-that specific finding.
+that specific finding. On re-review, an exception meeting the shared
+addressed-exception criteria remains historical coverage at its original
+severity, not an active blocker. Do not repeat a confirmation request that the
+author already answered for this change. Resolution or a broad label alone
+does not establish an addressed exception.
 
 **Severity guidance:**
 
@@ -1257,6 +1268,10 @@ changes based on the verified findings that still apply to the current head:
   is full and complete** → remove
   `ARMChangesRequested` if present; leave `WaitForARMFeedback` and
   `ARMSignedOff` unchanged.
+- Apply the shared addressed-exception criteria before computing this total.
+  Keep historical findings unchanged, but exclude verified addressed exceptions
+  from active blockers. Keep resolved-but-unfixed or unapproved violations
+  active; do not use resolution alone to clear a blocking label.
 - **Critic unavailable** (every dispatch attempt failed) → leave all three
   labels unchanged, **even when Blocking findings were queued**. Those findings
   still publish at their original severity, but nothing independently verified
@@ -1387,7 +1402,7 @@ Call `record_arm_semantic_review` exactly once after queuing the summary:
   `stale-sha`, or `discussion-data-unavailable`;
 - `blocking_count`: the number of verified Blocking findings that remain
   applicable after reconciliation. Include an unresolved finding classified as
-  `SKIP-COVERED`; do not count fixed, resolved, Critic-dropped, or
+  `SKIP-COVERED`; do not count fixed, verified addressed exceptions, Critic-dropped, or
   overflow-only candidates.
 
 Use `blocking_count: "0"` after a clean re-review. Do not claim `full` or

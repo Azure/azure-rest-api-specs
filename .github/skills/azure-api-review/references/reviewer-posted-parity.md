@@ -93,15 +93,65 @@ standalone finding. Line movement does not make the finding new, but it does
 select the reconciliation action. Choose exactly one action in this order:
 
 1. Materially incompatible guidance uses `CLARIFY-CONFLICT`.
-2. A matching inline anchor that shifted uses `RESOLVE-AND-REPOST` when trusted
+2. A verified addressed approval exception with unchanged scope uses
+   `SKIP-COVERED`, even when its inline anchor shifted.
+3. An active finding whose matching inline anchor shifted uses `RESOLVE-AND-REPOST` when trusted
    workflow ownership is proven; otherwise it uses `REPLY-LINE-SHIFT`.
-3. Other actionable coverage uses `SKIP-COVERED`.
-4. Only a finding with no actionable coverage or contradiction uses `POST-NEW`.
+4. Other actionable coverage uses `SKIP-COVERED`.
+5. Only a finding with no actionable coverage or contradiction uses `POST-NEW`.
 
-Therefore `SKIP-COVERED` applies only when no matching inline anchor shifted.
-Top-level comments and review bodies have no inline anchor and can use
-`SKIP-COVERED`. Resolved, outdated, or marker-free items still count as
-coverage and follow the same precedence.
+For active findings, `SKIP-COVERED` applies only when no matching inline anchor
+shifted. Top-level comments and review bodies have no inline anchor and can use
+`SKIP-COVERED`. Resolved, outdated, or marker-free items still count as coverage
+and follow the same precedence; resolution alone never establishes an addressed
+exception.
+
+### Active findings and addressed approval exceptions
+
+Posting action and active finding state are separate decisions. `SKIP-COVERED`
+means that prior discussion covers the finding; it does not mean that the
+finding still blocks the current head. Preserve the original finding body,
+severity, classification, and audit history when an exception is addressed.
+Do not count that historical finding as an active blocker merely because its
+original severity was Blocking.
+
+For each covered finding, record the current thread resolution state, the
+latest finding-specific author reply and its URL, the matching current approval
+labels, and the evidence that the finding remains active or is addressed.
+Evaluate the whole conversation, not only its original finding comment.
+
+An approval exception for a same-version or published-version change,
+cross-version breaking change, or OpenAPI or TypeSpec suppression is addressed
+only when all of the following are verified against the pinned review:
+
+- A current approval label in the applicable family covers this kind of
+  exception: `Versioning-Approved-*` for same-version or published-version
+  changes, `BreakingChange-Approved-*` for cross-version breaking changes,
+  `Approved-Suppression` for OpenAPI suppressions, or
+  `typespec-suppressions-approved` for TypeSpec suppressions. An unrelated
+  approval label is not sufficient.
+- The PR author explicitly confirmed that the approval covers this specific
+  API element and change. A broad label, generic preview rationale, or request
+  to ignore review is not finding-specific confirmation.
+- The corresponding conversation is resolved, and no later change or
+  contradictory evidence invalidates the confirmed scope at the current head.
+
+When these conditions hold, keep the prior finding as historical coverage,
+exclude it from the currently applicable Blocking count, and use `SKIP-COVERED`
+without asking for the same confirmation again. An unchanged-scope exception
+remains addressed when unrelated edits move its inline anchor; do not reopen,
+reply merely to relocate it, or repost it. Author confirmation supplies scope
+evidence for the existing approval; it does not grant approval or authorize an
+unrelated change. The Critic must independently verify each condition from the
+complete discussion inventory and current PR metadata.
+
+Resolution alone is not proof of a fix or approval. A resolved thread whose
+violation remains without an applicable confirmed exception still counts as
+active. If approval is missing, withdrawn, contradicted, or does not cover the
+current change, explain the concrete remaining gap. Apply `CLARIFY-CONFLICT`
+when current guidance contradicts a prior addressed conclusion; do not silently
+revive it as another standalone finding. Preserve the existing rules for
+human-owned threads and incomplete discussion retrieval.
 
 ### Contradiction handling
 

@@ -659,7 +659,7 @@ binds every previous-version fetch.
 
 - From the same PR metadata response, capture the exact label names matching
   `BreakingChange-Approved-*`, `Versioning-Approved-*`,
-  `Approved-Suppression`, or `Approved-TypeSpecSuppression`. Record
+  `Approved-Suppression`, or `typespec-suppressions-approved`. Record
   `Approval labels observed: none` when there are no matches. Do not include
   SDK-language, package-name, or namespace approval labels in this inventory.
 - Every PR-head file fetch (changed files in Step 1, re-fetches inside Step 5, Critic re-fetches in Step 7) MUST pin to the session SHA - never to a branch name, never to `HEAD`, never to a freshly re-resolved `head.sha`. Previous-version files MUST pin to the recorded full base commit SHA, not a branch or the session SHA.
@@ -1081,14 +1081,14 @@ violation, a trusted workflow-owned thread is Scenario E
 (THANK-AND-RESOLVE); every other thread is Scenario F
 (PROPOSE-HUMAN-RESOLVE) and requires explicit per-thread consent.
 
-**3. Per-finding action.** For each finding produced in Steps 4 / 4a (and amended in Step 5), apply the scenarios below. Each finding ends up labelled with **exactly one** action. Line movement does not make a finding new, but it does select the action. Apply this precedence: CLARIFY-CONFLICT for incompatible guidance, Scenario B or C for a shifted inline anchor, Scenario A for other actionable coverage, then POST-NEW:
+**3. Per-finding action.** For each finding produced in Steps 4 / 4a (and amended in Step 5), apply the scenarios below. Each finding ends up labelled with **exactly one** action. Line movement does not make a finding new, but it does select the action. Apply this precedence: CLARIFY-CONFLICT for incompatible guidance, Scenario A for a verified addressed approval exception with unchanged scope even if its anchor shifted, Scenario B or C for a shifted inline anchor, Scenario A for other actionable coverage, then POST-NEW:
 
 - **CLARIFY-CONFLICT.** An actionable existing item on any discussion surface has the same semantic finding identity but gives materially incompatible guidance. Do not plan a new standalone finding. For an inline thread, plan a reply that states the prior position, current evidence at the session SHA, current guidance, and why the conclusion changed. Resolve after clarification only when trusted workflow ownership is proven and the old guidance is no longer valid; otherwise leave the thread unresolved. For top-level comments or review bodies, plan one consolidated top-level clarification that links each contradicted item and states which guidance supersedes which. If the evidence is inconclusive, say so and leave the thread unresolved.
-- **Scenario A -> SKIP-COVERED.** An actionable existing item (any author, entry point, surface, or state) already covers the same semantic finding, and no matching inline anchor shifted. Do not plan a new post. Record the existing item URL as the anchor. A top-level item or review body remains coverage even though it has no inline line anchor.
-- **Scenario B -> RESOLVE-AND-REPOST.** Same finding, line shifted, prior
+- **Scenario A -> SKIP-COVERED.** An actionable existing item (any author, entry point, surface, or state) already covers the same semantic finding, and either no matching inline anchor shifted or the shared addressed-exception criteria are verified with unchanged scope. Do not plan a new post or a line-shift reply for an addressed exception; leave its resolved thread unchanged. Record the existing item URL as the anchor. A top-level item or review body remains coverage even though it has no inline line anchor.
+- **Scenario B -> RESOLVE-AND-REPOST.** Same active finding, line shifted, prior
   comment is trusted workflow-owned. Plan to resolve the stale thread and post a
   replacement at the corrected line.
-- **Scenario C -> REPLY-LINE-SHIFT.** Same finding, line shifted, prior comment is **human-origin**. Do **not** resolve the human's thread - they may be tracking it. Do **not** post a duplicate top-level comment. Plan to add a reply to that thread: "_The code referenced by this comment has moved. The same violation now appears at `<file>` - line <N>. The issue is still unresolved._"
+- **Scenario C -> REPLY-LINE-SHIFT.** Same active finding, line shifted, prior comment is **human-origin**. Do **not** resolve the human's thread - they may be tracking it. Do **not** post a duplicate top-level comment. Plan to add a reply to that thread: "_The code referenced by this comment has moved. The same violation now appears at `<file>` - line <N>. The issue is still unresolved._"
 
   _Example:_ A prior human reviewer commented on `Microsoft.Contoso/stable/2025-07-01/contoso.json` line 142, flagging a missing `provisioningState`. The current review re-detects the same missing `provisioningState` at line 158 (the file grew by 16 lines). Action: **REPLY-LINE-SHIFT** on the prior reviewer's thread; do **not** resolve; do **not** post a new top-level comment.
 

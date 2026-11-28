@@ -117,12 +117,15 @@ rationale records material non-identity differences (for example, shifted line
 number, top-level versus inline surface, human origin, or missing marker) and
 states why they do not make the finding new. Line movement does not make a
 finding new, but it does select the action. Apply this precedence:
-`CLARIFY-CONFLICT` for incompatible guidance, the applicable line-shift action
-for a shifted inline anchor, `SKIP-COVERED` for other actionable coverage, then
-`POST-NEW`. Use these canonical actions:
+`CLARIFY-CONFLICT` for incompatible guidance, `SKIP-COVERED` for a verified
+addressed approval exception with unchanged scope even if its anchor shifted,
+the applicable line-shift action for an active finding at a shifted inline
+anchor, `SKIP-COVERED` for other actionable coverage, then `POST-NEW`. Use these
+canonical actions:
 
 - `SKIP-COVERED`: actionable prior feedback already covers the same finding.
-  No matching inline anchor shifted. Do not post another standalone finding.
+  No matching inline anchor shifted, or the shared addressed-exception
+  criteria are verified with unchanged scope. Do not post another standalone finding.
   Use the literal `SKIP-COVERED` token even for human-authored top-level
   comments, review bodies, resolved threads, or marker-free feedback.
 - `REPLY-LINE-SHIFT`: a human-origin inline finding still applies at a moved
