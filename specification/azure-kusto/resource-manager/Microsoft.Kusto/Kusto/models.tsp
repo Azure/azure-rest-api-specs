@@ -336,6 +336,196 @@ union AzureSkuName {
    * Standard_E16d_v5
    */
   Standard_E16d_v5: "Standard_E16d_v5",
+
+  /**
+   * Selects the L8s v4 configuration for a Kusto cluster.
+   */
+  Standard_L8s_v4: "Standard_L8s_v4",
+
+  /**
+   * Selects the L16s v4 configuration for a Kusto cluster.
+   */
+  Standard_L16s_v4: "Standard_L16s_v4",
+
+  /**
+   * Selects the L32s v4 configuration for a Kusto cluster.
+   */
+  Standard_L32s_v4: "Standard_L32s_v4",
+
+  /**
+   * Selects the L8as v4 configuration for a Kusto cluster.
+   */
+  Standard_L8as_v4: "Standard_L8as_v4",
+
+  /**
+   * Selects the L16as v4 configuration for a Kusto cluster.
+   */
+  Standard_L16as_v4: "Standard_L16as_v4",
+
+  /**
+   * Selects the L32as v4 configuration for a Kusto cluster.
+   */
+  Standard_L32as_v4: "Standard_L32as_v4",
+
+  /**
+   * Selects the E2ads v6 configuration for a Kusto cluster.
+   */
+  Standard_E2ads_v6: "Standard_E2ads_v6",
+
+  /**
+   * Selects the E4ads v6 configuration for a Kusto cluster.
+   */
+  Standard_E4ads_v6: "Standard_E4ads_v6",
+
+  /**
+   * Selects the E8ads v6 configuration for a Kusto cluster.
+   */
+  Standard_E8ads_v6: "Standard_E8ads_v6",
+
+  /**
+   * Selects the E16ads v6 configuration for a Kusto cluster.
+   */
+  Standard_E16ads_v6: "Standard_E16ads_v6",
+
+  /**
+   * Selects the E32ads v6 configuration for a Kusto cluster.
+   */
+  Standard_E32ads_v6: "Standard_E32ads_v6",
+
+  /**
+   * Selects the D2ads v6 configuration for a Kusto cluster.
+   */
+  Standard_D2ads_v6: "Standard_D2ads_v6",
+
+  /**
+   * Selects the D4ads v6 configuration for a Kusto cluster.
+   */
+  Standard_D4ads_v6: "Standard_D4ads_v6",
+
+  /**
+   * Selects the D8ads v6 configuration for a Kusto cluster.
+   */
+  Standard_D8ads_v6: "Standard_D8ads_v6",
+
+  /**
+   * Selects the D16ads v6 configuration for a Kusto cluster.
+   */
+  Standard_D16ads_v6: "Standard_D16ads_v6",
+
+  /**
+   * Selects the D32ads v6 configuration for a Kusto cluster.
+   */
+  Standard_D32ads_v6: "Standard_D32ads_v6",
+
+  /**
+   * Selects the D2ds v6 configuration for a Kusto cluster.
+   */
+  Standard_D2ds_v6: "Standard_D2ds_v6",
+
+  /**
+   * Selects the D4ds v6 configuration for a Kusto cluster.
+   */
+  Standard_D4ds_v6: "Standard_D4ds_v6",
+
+  /**
+   * Selects the D8ds v6 configuration for a Kusto cluster.
+   */
+  Standard_D8ds_v6: "Standard_D8ds_v6",
+
+  /**
+   * Selects the D16ds v6 configuration for a Kusto cluster.
+   */
+  Standard_D16ds_v6: "Standard_D16ds_v6",
+
+  /**
+   * Selects the D32ds v6 configuration for a Kusto cluster.
+   */
+  Standard_D32ds_v6: "Standard_D32ds_v6",
+
+  /**
+   * Selects the E8as v6 configuration with the 1TB_PS storage option for a Kusto cluster.
+   */
+  `Standard_E8as_v6+1TB_PS`: "Standard_E8as_v6+1TB_PS",
+
+  /**
+   * Selects the E8as v6 configuration with the 2TB_PS storage option for a Kusto cluster.
+   */
+  `Standard_E8as_v6+2TB_PS`: "Standard_E8as_v6+2TB_PS",
+
+  /**
+   * Selects the E16as v6 configuration with the 3TB_PS storage option for a Kusto cluster.
+   */
+  `Standard_E16as_v6+3TB_PS`: "Standard_E16as_v6+3TB_PS",
+
+  /**
+   * Selects the E16as v6 configuration with the 4TB_PS storage option for a Kusto cluster.
+   */
+  `Standard_E16as_v6+4TB_PS`: "Standard_E16as_v6+4TB_PS",
+
+  /**
+   * Selects the E8s v6 configuration with the 1TB_PS storage option for a Kusto cluster.
+   */
+  `Standard_E8s_v6+1TB_PS`: "Standard_E8s_v6+1TB_PS",
+
+  /**
+   * Selects the E8s v6 configuration with the 2TB_PS storage option for a Kusto cluster.
+   */
+  `Standard_E8s_v6+2TB_PS`: "Standard_E8s_v6+2TB_PS",
+
+  /**
+   * Selects the E16s v6 configuration with the 3TB_PS storage option for a Kusto cluster.
+   */
+  `Standard_E16s_v6+3TB_PS`: "Standard_E16s_v6+3TB_PS",
+
+  /**
+   * Selects the E16s v6 configuration with the 4TB_PS storage option for a Kusto cluster.
+   */
+  `Standard_E16s_v6+4TB_PS`: "Standard_E16s_v6+4TB_PS",
+
+  /**
+   * Selects the E32a v4 configuration for a Kusto cluster.
+   */
+  Standard_E32a_v4: "Standard_E32a_v4",
+
+  /**
+   * Selects the E32d v4 configuration for a Kusto cluster.
+   */
+  Standard_E32d_v4: "Standard_E32d_v4",
+
+  /**
+   * Selects the E32ads v5 configuration for a Kusto cluster.
+   */
+  Standard_E32ads_v5: "Standard_E32ads_v5",
+
+  /**
+   * Selects the E32s v4 configuration with the 4TB_PS storage option for a Kusto cluster.
+   */
+  `Standard_E32s_v4+4TB_PS`: "Standard_E32s_v4+4TB_PS",
+
+  /**
+   * Selects the E32s v5 configuration with the 4TB_PS storage option for a Kusto cluster.
+   */
+  `Standard_E32s_v5+4TB_PS`: "Standard_E32s_v5+4TB_PS",
+
+  /**
+   * Selects the E32as v4 configuration with the 4TB_PS storage option for a Kusto cluster.
+   */
+  `Standard_E32as_v4+4TB_PS`: "Standard_E32as_v4+4TB_PS",
+
+  /**
+   * Selects the L8as v5 configuration for a Kusto cluster.
+   */
+  Standard_L8as_v5: "Standard_L8as_v5",
+
+  /**
+   * Selects the L16as v5 configuration for a Kusto cluster.
+   */
+  Standard_L16as_v5: "Standard_L16as_v5",
+
+  /**
+   * Selects the L32as v5 configuration for a Kusto cluster.
+   */
+  Standard_L32as_v5: "Standard_L32as_v5",
 }
 
 /**
