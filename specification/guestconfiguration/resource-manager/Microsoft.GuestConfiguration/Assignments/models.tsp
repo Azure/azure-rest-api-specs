@@ -764,7 +764,10 @@ model OperationProperties {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Register the existing non-standard resource without changing its published payload."
 @Azure.ResourceManager.Legacy.customAzureResource
+@Azure.ResourceManager.Private.genericResourceInternal
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model ProxyResource {
   /**
    * ARM resource id of the guest configuration assignment.

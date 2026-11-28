@@ -18,6 +18,7 @@ namespace Microsoft.ContainerInstance;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 @Azure.ResourceManager.Legacy.customAzureResource
+@Azure.ResourceManager.Private.genericResourceInternal
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model ContainerGroup extends Foundations.ProxyResource {
   ...ResourceNameParameter<Resource = ContainerGroup, NamePattern = "">;

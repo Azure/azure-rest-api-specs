@@ -2921,7 +2921,10 @@ model CertificateProperties {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "This is a non-standard resource shape from the published API's Proof-Of-Possession flow; a custom resource is required to faithfully reproduce the existing contract."
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "This custom resource is returned only as the body of the generate-verification-code action and is not directly addressable, so it has no resource key."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy custom-resource support is required to faithfully reproduce the published API's non-standard certificate resource shape."
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Register the existing non-standard resource without changing its published payload."
 @Azure.ResourceManager.Legacy.customAzureResource(#{ isAzureResource: true })
+@Azure.ResourceManager.Private.genericResourceInternal
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 model CertificateWithNonceDescription {
   /**
    * The description of an X509 CA Certificate including the challenge nonce issued for the Proof-Of-Possession flow.
