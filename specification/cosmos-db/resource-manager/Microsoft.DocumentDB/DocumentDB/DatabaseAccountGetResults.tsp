@@ -54,6 +54,7 @@ interface DatabaseAccounts {
   /**
    * Creates or updates an Azure Cosmos DB database account. The "Update" method is preferred when performing updates on an account.
    */
+  @armResourceCreateOrUpdate(DatabaseAccountGetResults)
   @put
   createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
     ResourceInstanceParameters<DatabaseAccountGetResults>,
