@@ -1,0 +1,872 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PolicyInsightsClient",
+    "version": "2025-05-01-preview",
+    "description": "Azure Policy definition verification and authoring reference operations.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "PolicyMcp"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.PolicyInsights/generatePolicyAuthoringGuide": {
+      "post": {
+        "operationId": "PolicyMcp_GeneratePolicyAuthoringGuide",
+        "tags": [
+          "PolicyMcp"
+        ],
+        "description": "Returns authoring syntax, relevant aliases, and policy rule and effect examples for the supplied intent.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GeneratePolicyAuthoringGuideContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PolicyAuthoringGuideResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve authoring guidance for storage account secure transfer": {
+            "$ref": "./examples/GeneratePolicyAuthoringGuide.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.PolicyInsights/verifyPolicy": {
+      "post": {
+        "operationId": "PolicyMcp_VerifyPolicy",
+        "tags": [
+          "PolicyMcp"
+        ],
+        "description": "Validates a policy definition and, if validation succeeds, lints it using the selected rule sets. Validation and lint failures are returned in a successful HTTP response.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VerifyPolicyContent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PolicyVerificationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Return structural validation failures without an HTTP error": {
+            "$ref": "./examples/VerifyPolicyValidationFailure.json"
+          },
+          "Verify a policy requiring HTTPS for storage accounts": {
+            "$ref": "./examples/VerifyPolicy.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.armResourceType": {
+      "type": "string",
+      "description": "Represents an Azure Resource Type."
+    },
+    "GeneratePolicyAuthoringGuideContent": {
+      "type": "object",
+      "description": "Input for retrieving a policy authoring reference.",
+      "properties": {
+        "userQuestion": {
+          "type": "string",
+          "description": "The policy question or authoring intent.",
+          "minLength": 1
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "An optional exact ARM resource type used to filter aliases."
+        },
+        "history": {
+          "type": "array",
+          "description": "Optional conversation history. It is validated but is not used to retrieve the authoring guide.",
+          "items": {
+            "$ref": "#/definitions/PolicyAuthoringHistory"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "userQuestion"
+      ]
+    },
+    "PolicyAuthoringAlias": {
+      "type": "object",
+      "description": "An Azure Policy alias and its available retrieval metadata.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The narrative document identifier."
+        },
+        "aliasName": {
+          "type": "string",
+          "description": "The Azure Policy alias name."
+        },
+        "aliasDescription": {
+          "type": "string",
+          "description": "A description of the alias."
+        },
+        "aliasNarrative": {
+          "type": "string",
+          "description": "An explanation of the alias and its usage."
+        },
+        "narrativeSource": {
+          "type": "string",
+          "description": "The source used to construct the narrative."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The ARM resource type."
+        },
+        "resourceTypes": {
+          "type": "array",
+          "description": "All ARM resource types associated with the alias.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "propertyPath": {
+          "type": "string",
+          "description": "The default ARM property path."
+        },
+        "paths": {
+          "type": "array",
+          "description": "Resource-type, property-path, and API-version mappings.",
+          "items": {},
+          "x-ms-identifiers": []
+        },
+        "valueType": {
+          "type": "string",
+          "description": "The alias value type."
+        },
+        "allowedValues": {
+          "type": "array",
+          "description": "The allowed alias values.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "derivedPathType": {
+          "type": "string",
+          "description": "The derived path classification."
+        },
+        "policyExamples": {
+          "type": "array",
+          "description": "Built-in policy usage examples.",
+          "items": {},
+          "x-ms-identifiers": []
+        },
+        "exampleSource": {
+          "type": "string",
+          "description": "The source of policy examples."
+        },
+        "isStableAlias": {
+          "type": "boolean",
+          "description": "Whether the alias has one stable path across API versions."
+        },
+        "apiVersionsSummary": {
+          "type": "string",
+          "description": "A summary of API-version behavior."
+        },
+        "latestApiVersion": {
+          "type": "string",
+          "description": "The latest API version supporting the alias."
+        },
+        "retrievalScore": {
+          "type": "number",
+          "format": "double",
+          "description": "The application-level relevance score."
+        },
+        "retrievalSource": {
+          "type": "string",
+          "description": "The retrieval technique that found the alias."
+        }
+      },
+      "required": [
+        "aliasName"
+      ]
+    },
+    "PolicyAuthoringEffectExample": {
+      "type": "object",
+      "description": "An example policy effect then-block.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the example."
+        },
+        "thenBlock": {
+          "type": "string",
+          "description": "The then-block encoded as a JSON string."
+        },
+        "parameterExample": {
+          "type": "string",
+          "description": "Parameter definitions encoded as a JSON string, when applicable."
+        }
+      }
+    },
+    "PolicyAuthoringGuideResult": {
+      "type": "object",
+      "description": "Retrieved policy authoring reference material.",
+      "properties": {
+        "syntaxGuides": {
+          "type": "string",
+          "description": "Markdown reference material covering rule, effect, mode, and parameter syntax."
+        },
+        "relevantAliases": {
+          "type": "array",
+          "description": "Aliases relevant to the question, ordered by relevance. Available metadata depends on the retrieval mode.",
+          "items": {
+            "$ref": "#/definitions/PolicyAuthoringAlias"
+          },
+          "x-ms-identifiers": [
+            "aliasName"
+          ]
+        },
+        "relevantRuleExamples": {
+          "type": "array",
+          "description": "Relevant if-condition examples.",
+          "items": {
+            "$ref": "#/definitions/PolicyAuthoringRuleExample"
+          },
+          "x-ms-identifiers": []
+        },
+        "relevantEffectExamples": {
+          "type": "array",
+          "description": "Relevant then-block examples.",
+          "items": {
+            "$ref": "#/definitions/PolicyAuthoringEffectExample"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PolicyAuthoringHistory": {
+      "type": "object",
+      "description": "A previous conversation message. System-role messages are not accepted.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The message text."
+        },
+        "role": {
+          "$ref": "#/definitions/PolicyAuthoringRole",
+          "description": "The message role."
+        },
+        "systemPromptId": {
+          "type": "string",
+          "description": "An optional system prompt identifier associated with the previous message."
+        }
+      },
+      "required": [
+        "content",
+        "role"
+      ]
+    },
+    "PolicyAuthoringRole": {
+      "type": "string",
+      "description": "Accepted roles in caller-supplied history.",
+      "enum": [
+        "User",
+        "Assistant"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyAuthoringRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "A user message."
+          },
+          {
+            "name": "Assistant",
+            "value": "Assistant",
+            "description": "An assistant message."
+          }
+        ]
+      }
+    },
+    "PolicyAuthoringRuleExample": {
+      "type": "object",
+      "description": "An example policy rule if-condition.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the example."
+        },
+        "ifCondition": {
+          "type": "string",
+          "description": "The if-condition encoded as a JSON string."
+        },
+        "parameterExample": {
+          "type": "string",
+          "description": "Parameter definitions encoded as a JSON string, when applicable."
+        }
+      }
+    },
+    "PolicyInsightsCommon.ExternalEvaluationEndpointSettings": {
+      "type": "object",
+      "description": "Settings for an external evaluation endpoint.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The endpoint kind."
+        },
+        "details": {
+          "description": "Endpoint-specific details."
+        }
+      }
+    },
+    "PolicyInsightsCommon.ExternalEvaluationEnforcementSettings": {
+      "type": "object",
+      "description": "The source of external evaluation results required during enforcement.",
+      "properties": {
+        "missingTokenAction": {
+          "type": "string",
+          "description": "The action when an external evaluation token is missing. Supports Audit, Deny, and policy expressions."
+        },
+        "resultLifespan": {
+          "type": "string",
+          "description": "The endpoint result lifespan, as an ISO 8601 duration or policy expression."
+        },
+        "endpointSettings": {
+          "$ref": "#/definitions/PolicyInsightsCommon.ExternalEvaluationEndpointSettings",
+          "description": "Settings for the external evaluation endpoint."
+        },
+        "roleDefinitionIds": {
+          "type": "array",
+          "description": "Role definition IDs required by the assignment's managed identity to invoke the endpoint.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PolicyInsightsCommon.ParameterDefinitionsValueMetadata": {
+      "type": "object",
+      "description": "General metadata for a policy parameter.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name for the parameter."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the parameter."
+        },
+        "strongType": {
+          "type": "string",
+          "description": "A context-aware list of values used when assigning the definition through the portal."
+        },
+        "assignPermissions": {
+          "type": "boolean",
+          "description": "Whether the portal should create role assignments on the parameter's resource ID or scope."
+        }
+      },
+      "additionalProperties": {}
+    },
+    "PolicyInsightsCommon.ParameterType": {
+      "type": "string",
+      "description": "The data type of a policy parameter.",
+      "enum": [
+        "String",
+        "Array",
+        "Object",
+        "Boolean",
+        "Integer",
+        "Float",
+        "DateTime"
+      ],
+      "x-ms-enum": {
+        "name": "ParameterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "String",
+            "value": "String",
+            "description": "A string parameter."
+          },
+          {
+            "name": "Array",
+            "value": "Array",
+            "description": "An array parameter."
+          },
+          {
+            "name": "Object",
+            "value": "Object",
+            "description": "An object parameter."
+          },
+          {
+            "name": "Boolean",
+            "value": "Boolean",
+            "description": "A boolean parameter."
+          },
+          {
+            "name": "Integer",
+            "value": "Integer",
+            "description": "An integer parameter."
+          },
+          {
+            "name": "Float",
+            "value": "Float",
+            "description": "A floating-point parameter."
+          },
+          {
+            "name": "DateTime",
+            "value": "DateTime",
+            "description": "A date-time parameter."
+          }
+        ]
+      }
+    },
+    "PolicyInsightsCommon.PolicyDefinitionContent": {
+      "type": "object",
+      "description": "A policy definition supplied for verification or hypothetical evaluation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "$ref": "#/definitions/Azure.Core.armResourceType",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information."
+        },
+        "properties": {
+          "$ref": "#/definitions/PolicyInsightsCommon.PolicyDefinitionContentProperties",
+          "description": "The definition properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "PolicyInsightsCommon.PolicyDefinitionContentProperties": {
+      "type": "object",
+      "description": "Policy definition properties with the required verification inputs.",
+      "properties": {
+        "policyType": {
+          "$ref": "#/definitions/PolicyInsightsCommon.PolicyType",
+          "description": "The definition type, such as BuiltIn, Custom, or Static."
+        },
+        "mode": {
+          "type": "string",
+          "description": "The policy evaluation mode."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the policy definition."
+        },
+        "description": {
+          "type": "string",
+          "description": "The policy definition description."
+        },
+        "policyRule": {
+          "description": "The policy rule, including its if condition and then effect."
+        },
+        "metadata": {
+          "description": "Open-ended policy definition metadata."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Parameter definitions, indexed by caller-defined parameter names.",
+          "additionalProperties": {
+            "$ref": "#/definitions/PolicyInsightsCommon.PolicyDefinitionParameter"
+          }
+        },
+        "version": {
+          "type": "string",
+          "description": "The policy definition version in #.#.# format."
+        },
+        "versions": {
+          "type": "array",
+          "description": "Available versions of the policy definition.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "externalEvaluationEnforcementSettings": {
+          "$ref": "#/definitions/PolicyInsightsCommon.ExternalEvaluationEnforcementSettings",
+          "description": "The source of external evaluation results required during enforcement."
+        }
+      },
+      "required": [
+        "policyRule"
+      ]
+    },
+    "PolicyInsightsCommon.PolicyDefinitionParameter": {
+      "type": "object",
+      "description": "A policy parameter definition with its required value type.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/PolicyInsightsCommon.ParameterType",
+          "description": "The parameter value type."
+        },
+        "allowedValues": {
+          "type": "array",
+          "description": "The allowed parameter values, which may be any JSON type.",
+          "items": {},
+          "x-ms-identifiers": []
+        },
+        "defaultValue": {
+          "description": "The default parameter value. Every simulation parameter must supply a default."
+        },
+        "schema": {
+          "description": "A JSON schema validating object-type parameter inputs."
+        },
+        "metadata": {
+          "$ref": "#/definitions/PolicyInsightsCommon.ParameterDefinitionsValueMetadata",
+          "description": "General parameter metadata."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "PolicyInsightsCommon.PolicyType": {
+      "type": "string",
+      "description": "The type of policy definition.",
+      "enum": [
+        "NotSpecified",
+        "BuiltIn",
+        "Custom",
+        "Static"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "A definition without a specified type."
+          },
+          {
+            "name": "BuiltIn",
+            "value": "BuiltIn",
+            "description": "A built-in policy definition."
+          },
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "A custom policy definition."
+          },
+          {
+            "name": "Static",
+            "value": "Static",
+            "description": "A static policy definition."
+          }
+        ]
+      }
+    },
+    "PolicyLintCategory": {
+      "type": "string",
+      "description": "Categories of policy lint issues.",
+      "enum": [
+        "Unknown",
+        "Test",
+        "Linter",
+        "LinterRule",
+        "Parsing",
+        "ResourceFields",
+        "BestPractices",
+        "Misc"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyLintCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown category."
+          },
+          {
+            "name": "Test",
+            "value": "Test",
+            "description": "Test-related issue."
+          },
+          {
+            "name": "Linter",
+            "value": "Linter",
+            "description": "Linter-related issue."
+          },
+          {
+            "name": "LinterRule",
+            "value": "LinterRule",
+            "description": "Linter-rule issue."
+          },
+          {
+            "name": "Parsing",
+            "value": "Parsing",
+            "description": "Parsing issue."
+          },
+          {
+            "name": "ResourceFields",
+            "value": "ResourceFields",
+            "description": "Resource-field issue."
+          },
+          {
+            "name": "BestPractices",
+            "value": "BestPractices",
+            "description": "Best-practice issue."
+          },
+          {
+            "name": "Misc",
+            "value": "Misc",
+            "description": "Miscellaneous issue."
+          }
+        ]
+      }
+    },
+    "PolicyLintIssue": {
+      "type": "object",
+      "description": "An issue reported by policy linting.",
+      "properties": {
+        "ruleIdentifier": {
+          "type": "string",
+          "description": "The rule identifier."
+        },
+        "title": {
+          "type": "string",
+          "description": "The issue title."
+        },
+        "category": {
+          "$ref": "#/definitions/PolicyLintCategory",
+          "description": "The issue category."
+        },
+        "severity": {
+          "$ref": "#/definitions/PolicyLintSeverity",
+          "description": "The issue severity."
+        },
+        "lineNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The source line number, when available."
+        },
+        "linePosition": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The source column, when available."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the issue."
+        },
+        "path": {
+          "type": "string",
+          "description": "The policy property path."
+        },
+        "documentationUrl": {
+          "type": "string",
+          "description": "The rule documentation URL."
+        }
+      }
+    },
+    "PolicyLintSeverity": {
+      "type": "string",
+      "description": "Severity of a policy lint issue.",
+      "enum": [
+        "Unknown",
+        "Informational",
+        "Warning",
+        "Error",
+        "Critical"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyLintSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown severity."
+          },
+          {
+            "name": "Informational",
+            "value": "Informational",
+            "description": "Informational issue."
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "A warning-level issue."
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "An error-level issue."
+          },
+          {
+            "name": "Critical",
+            "value": "Critical",
+            "description": "Critical issue."
+          }
+        ]
+      }
+    },
+    "PolicyVerificationOutcome": {
+      "type": "string",
+      "description": "The outcome of policy verification.",
+      "enum": [
+        "AllValid",
+        "FailedValidation",
+        "FailedLinting"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyVerificationOutcome",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AllValid",
+            "value": "AllValid",
+            "description": "Validation and linting succeeded."
+          },
+          {
+            "name": "FailedValidation",
+            "value": "FailedValidation",
+            "description": "Structural validation failed."
+          },
+          {
+            "name": "FailedLinting",
+            "value": "FailedLinting",
+            "description": "Validation succeeded, but linting reported issues."
+          }
+        ]
+      }
+    },
+    "PolicyVerificationResult": {
+      "type": "object",
+      "description": "The result of policy definition validation and linting.",
+      "properties": {
+        "verificationResult": {
+          "$ref": "#/definitions/PolicyVerificationOutcome",
+          "description": "The outcome of verification."
+        },
+        "revisionGuidance": {
+          "type": "string",
+          "description": "Phase-specific guidance for correcting the policy."
+        },
+        "validationErrors": {
+          "type": "array",
+          "description": "Structural validation failures. Linting is skipped when validation fails.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lintIssues": {
+          "type": "array",
+          "description": "Issues reported by the linter after successful validation.",
+          "items": {
+            "$ref": "#/definitions/PolicyLintIssue"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "verificationResult"
+      ]
+    },
+    "VerifyPolicyContent": {
+      "type": "object",
+      "description": "Input for verifying a policy definition.",
+      "properties": {
+        "policyDefinition": {
+          "$ref": "#/definitions/PolicyInsightsCommon.PolicyDefinitionContent",
+          "description": "The policy definition to validate and lint."
+        },
+        "ruleSets": {
+          "type": "array",
+          "description": "Linter rule-set names. Omit to use the service defaults. Unsupported names cause a bad-request response.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "policyDefinition"
+      ]
+    }
+  },
+  "parameters": {}
+}
