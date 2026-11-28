@@ -444,6 +444,8 @@ interface Search {
        *
        * Example: "1 Micro" or "Muir Woods".
        *
+       * The query can contain at most 512 characters and 64 words. Hyphenated parts, such as `12-3`, count as separate words. A longer query returns a 400 Bad Request error.
+       *
        */
       @query("query")
       query: string;
