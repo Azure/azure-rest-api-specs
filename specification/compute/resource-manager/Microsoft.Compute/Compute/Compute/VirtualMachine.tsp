@@ -212,7 +212,7 @@ interface VirtualMachines {
   >;
 
   /**
-   * Attach and detach data disks to/from the virtual machine.
+   * [Preview Feature] Attach and detach data disks to/from the virtual machine.
    */
   attachDetachDataDisks is ComputeResourceActionAsync<
     VirtualMachine,

@@ -273,7 +273,7 @@ interface VirtualMachineScaleSetVMS {
   >;
 
   /**
-   * Attach and detach data disks to/from a virtual machine in a VM scale set.
+   * [Preview Feature] Attach and detach data disks to/from a virtual machine in a VM scale set.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetVMs_AttachDetachDataDisks")
