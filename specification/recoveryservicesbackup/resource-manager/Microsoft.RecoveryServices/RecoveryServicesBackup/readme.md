@@ -305,6 +305,8 @@ input-file:
 These settings apply only when `--tag=package-passivestamp-2023-01-15` is specified on the command line.
 
 ```yaml $(tag) == 'package-passivestamp-2023-01-15'
+require:
+  - $(this-folder)/../RecoveryServicesBackupCrr/readme.md
 input-file:
   - stable/2023-01-15/bms.json
 ```
