@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./ApiManagementServiceResource.tsp";
 
@@ -9,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ApiManagement;
 /**
@@ -181,6 +183,22 @@ interface BackendContracts {
       $skip?: int32;
     },
     Response = ArmResponse<BackendCollection>
+  >;
+
+  /**
+   * Gets the credential and proxy secrets of the specified backend.
+   */
+  @added(Versions.v2025_09_01_preview)
+  listSecrets is BackendContractOps.ActionSync<
+    BackendContract,
+    void,
+    Response = ArmResponse<BackendSecretsResult> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      eTag: string;
+    }
   >;
 
   /**
@@ -360,6 +378,22 @@ interface WorkspaceBackend {
       $skip?: int32;
     },
     Response = ArmResponse<BackendCollection>
+  >;
+
+  /**
+   * Gets the credential and proxy secrets of the specified workspace backend.
+   */
+  @added(Versions.v2025_09_01_preview)
+  listSecrets is WorkspaceBackendOps.ActionSync<
+    BackendContract,
+    void,
+    Response = ArmResponse<BackendSecretsResult> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      eTag: string;
+    }
   >;
 }
 

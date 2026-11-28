@@ -13403,6 +13403,70 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends/{backendId}/listSecrets": {
+      "post": {
+        "operationId": "Backend_ListSecrets",
+        "tags": [
+          "BackendContracts"
+        ],
+        "description": "Gets the credential and proxy secrets of the specified backend.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the API Management service.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "backendId",
+            "in": "path",
+            "description": "Identifier of the Backend entity. Must be unique in the current API Management service instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BackendSecretsResult"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiManagementBackendListSecrets": {
+            "$ref": "./examples/ApiManagementBackendListSecrets.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends/{backendId}/reconnect": {
       "post": {
         "operationId": "Backend_Reconnect",
@@ -41828,6 +41892,80 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/backends/{backendId}/listSecrets": {
+      "post": {
+        "operationId": "WorkspaceBackend_ListSecrets",
+        "tags": [
+          "WorkspaceBackend"
+        ],
+        "description": "Gets the credential and proxy secrets of the specified workspace backend.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the API Management service.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+          },
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "Workspace identifier. Must be unique in the current API Management service instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80,
+            "pattern": "^[^*#&+:<>?]+$"
+          },
+          {
+            "name": "backendId",
+            "in": "path",
+            "description": "Identifier of the Backend entity. Must be unique in the current API Management service instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BackendSecretsResult"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiManagementWorkspaceBackendListSecrets": {
+            "$ref": "./examples/ApiManagementWorkspaceBackendListSecrets.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/certificates": {
       "get": {
         "operationId": "WorkspaceCertificate_ListByWorkspace",
@@ -55333,6 +55471,37 @@
         }
       }
     },
+    "BackendCredentialsSecrets": {
+      "type": "object",
+      "description": "Backend credentials returned by the listSecrets action.",
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Query Parameter description.",
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "header": {
+          "type": "object",
+          "description": "Header Parameter description.",
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "authorization": {
+          "$ref": "#/definitions/BackendAuthorizationHeaderCredentials",
+          "description": "Authorization header authentication"
+        }
+      },
+      "x-ms-secret": true
+    },
     "BackendFailureResponse": {
       "type": "object",
       "description": "The response to be returned when a backend fails to respond",
@@ -55462,6 +55631,18 @@
         "url": "https://msdn.microsoft.com/en-us/library/system.net.webproxy(v=vs.110).aspx"
       }
     },
+    "BackendProxySecrets": {
+      "type": "object",
+      "description": "Backend proxy secrets returned by the listSecrets action.",
+      "properties": {
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "Password used to connect to the backend proxy.",
+          "x-ms-secret": true
+        }
+      }
+    },
     "BackendReconnectContract": {
       "type": "object",
       "description": "Reconnect request parameters.",
@@ -55486,6 +55667,20 @@
           "type": "string",
           "format": "duration",
           "description": "Duration in ISO8601 format after which reconnect will be initiated. Minimum duration of the Reconnect is PT2M."
+        }
+      }
+    },
+    "BackendSecretsResult": {
+      "type": "object",
+      "description": "Secret values associated with a backend.",
+      "properties": {
+        "credentials": {
+          "$ref": "#/definitions/BackendCredentialsSecrets",
+          "description": "Credential secrets used to connect to the backend."
+        },
+        "proxy": {
+          "$ref": "#/definitions/BackendProxySecrets",
+          "description": "Proxy secrets used to connect to the backend."
         }
       }
     },
