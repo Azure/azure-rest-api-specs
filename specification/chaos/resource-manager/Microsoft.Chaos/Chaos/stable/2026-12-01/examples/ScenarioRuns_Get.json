@@ -1,0 +1,199 @@
+{
+  "parameters": {
+    "api-version": "2026-12-01",
+    "workspaceName": "exampleWorkspace",
+    "scenarioName": "vm-safety-check",
+    "runId": "abcd1234-5678-9012-3456-789012345678",
+    "resourceGroupName": "exampleRG",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/vm-safety-check/runs/abcd1234-5678-9012-3456-789012345678",
+        "name": "abcd1234-5678-9012-3456-789012345678",
+        "type": "Microsoft.Chaos/workspaces/scenarios/runs",
+        "properties": {
+          "scenarioConfigurationName": "config-5678-9012-3456-789012345678",
+          "scenarioName": "vm-safety-check",
+          "workspaceName": "exampleWorkspace",
+          "managedIdentityPrincipalId": "d04ab567-2c07-43ef-a7f4-4527626b7f56",
+          "status": "Failed",
+          "resources": [
+            {
+              "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM1"
+            },
+            {
+              "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM2"
+            },
+            {
+              "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM3"
+            },
+            {
+              "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleMissingVm"
+            },
+            {
+              "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachineScaleSets/exampleEmptyVmss"
+            }
+          ],
+          "executionErrors": {
+            "permission": [
+              {
+                "resourceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM2",
+                "missingPermissions": [
+                  "Microsoft.Compute/virtualMachines/restart/action"
+                ],
+                "requiredPermissions": [
+                  "Microsoft.Compute/virtualMachines/restart/action",
+                  "Microsoft.Compute/virtualMachines/read"
+                ],
+                "recommendedRoles": [],
+                "identity": {
+                  "objectId": "d04ab567-2c07-43ef-a7f4-4527626b7f56",
+                  "tenantId": "8c3e2fb2-fe7a-4bf1-b779-d73990782fe6"
+                },
+                "errorMessage": "The identity does not have permission to restart the target virtual machine.",
+                "actionAssociation": {
+                  "status": "Complete",
+                  "actions": [
+                    {
+                      "actionName": "restartSecondaryVm",
+                      "relation": "Executed"
+                    }
+                  ]
+                }
+              },
+              {
+                "resourceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM3",
+                "missingPermissions": [
+                  "Microsoft.Compute/virtualMachines/read"
+                ],
+                "requiredPermissions": [
+                  "Microsoft.Compute/virtualMachines/read"
+                ],
+                "recommendedRoles": [],
+                "errorMessage": "The identity does not have permission to read the target virtual machine.",
+                "actionAssociation": {
+                  "status": "Indeterminate"
+                }
+              }
+            ],
+            "resource": [
+              {
+                "resourceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM1",
+                "errorCode": "TargetStateNotEligible",
+                "errorMessage": "The shutdown action rejected the target's current power state.",
+                "remediationUri": "https://aka.ms/azure-chaos-studio",
+                "actionAssociation": {
+                  "status": "Complete",
+                  "actions": [
+                    {
+                      "actionName": "shutdownPrimaryVm",
+                      "relation": "Executed"
+                    }
+                  ]
+                }
+              },
+              {
+                "resourceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM1",
+                "errorCode": "UnclassifiedResourceError",
+                "errorMessage": "The restart action could not proceed while the target was updating.",
+                "remediationUri": "https://aka.ms/azure-chaos-studio",
+                "actionAssociation": {
+                  "status": "Complete",
+                  "actions": [
+                    {
+                      "actionName": "restartPrimaryVm",
+                      "relation": "Executed"
+                    }
+                  ]
+                }
+              },
+              {
+                "resourceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM3",
+                "errorCode": "UnclassifiedResourceError",
+                "errorMessage": "The target resource failed validation.",
+                "remediationUri": "https://aka.ms/azure-chaos-studio",
+                "actionAssociation": {
+                  "status": "NotRecorded"
+                }
+              },
+              {
+                "resourceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM2",
+                "errorCode": "UnclassifiedResourceError",
+                "errorMessage": "The target resource could not be validated.",
+                "remediationUri": "https://aka.ms/azure-chaos-studio"
+              },
+              {
+                "resourceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleMissingVm",
+                "errorCode": "TargetResourceNotFound",
+                "errorMessage": "The virtual machine targeted by the action no longer exists.",
+                "remediationUri": "https://aka.ms/azure-chaos-studio",
+                "actionAssociation": {
+                  "status": "Complete",
+                  "actions": [
+                    {
+                      "actionName": "shutdownMissingVm",
+                      "relation": "Executed"
+                    }
+                  ]
+                }
+              },
+              {
+                "resourceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachineScaleSets/exampleEmptyVmss",
+                "errorCode": "NoMatchingTargetInstances",
+                "errorMessage": "No instances in the scale set match the action's target selection.",
+                "remediationUri": "https://aka.ms/azure-chaos-studio",
+                "actionAssociation": {
+                  "status": "Complete",
+                  "actions": [
+                    {
+                      "actionName": "shutdownEmptyScaleSet",
+                      "relation": "Executed"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "startTime": "2026-12-01T10:00:00.000Z",
+          "endTime": "2026-12-01T10:02:00.000Z"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/vm-safety-check/runs/abcd1234-5678-9012-3456-789012345678",
+        "name": "abcd1234-5678-9012-3456-789012345678",
+        "type": "Microsoft.Chaos/workspaces/scenarios/runs",
+        "properties": {
+          "scenarioConfigurationName": "config-5678-9012-3456-789012345678",
+          "scenarioName": "vm-safety-check",
+          "workspaceName": "exampleWorkspace",
+          "managedIdentityPrincipalId": "d04ab567-2c07-43ef-a7f4-4527626b7f56",
+          "status": "Running",
+          "resources": [
+            {
+              "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM1"
+            }
+          ],
+          "startTime": "2026-12-01T10:00:00.000Z",
+          "resourceSnapshotId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+        },
+        "systemData": {
+          "createdAt": "2025-01-20T14:30:00.000Z",
+          "createdBy": "admin@contoso.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2025-01-20T14:30:00.000Z",
+          "lastModifiedBy": "system",
+          "lastModifiedByType": "Application"
+        }
+      },
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/scenarios/vm-safety-check/runs/abcd1234-5678-9012-3456-789012345678?api-version=2026-12-01"
+      }
+    }
+  },
+  "operationId": "ScenarioRuns_Get",
+  "title": "Get a scenario run."
+}
