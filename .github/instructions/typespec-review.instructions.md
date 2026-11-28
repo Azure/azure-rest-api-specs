@@ -321,6 +321,8 @@ Flag these issues when found:
 
 ### 6.5 Array Identifiers — `x-ms-identifiers` (TSP-ARRAY-IDENTIFIERS)
 
+**Scope:** This guidance applies to arrays of objects, not primitive arrays such as `string[]`. Do not require `@identifiers(#[])` or raise a missing-identifiers finding for primitive arrays: the linter explicitly skips non-model elements. The empty identifier list is intended for object items with no suitable identifying properties.
+
 The `missing-x-ms-identifiers` linter rule fires on array-typed properties whose item models do not declare which property uniquely identifies an item. **Do not silence this rule with `@extension("x-ms-identifiers", [])`.** `@extension` is forbidden in TypeSpec source for any reason (see Section 5 anti-patterns).
 
 Use one of the following built-in TypeSpec decorators instead:
