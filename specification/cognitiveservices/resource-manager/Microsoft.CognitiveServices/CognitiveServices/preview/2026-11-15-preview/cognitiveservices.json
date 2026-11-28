@@ -20331,6 +20331,10 @@
         "routing": {
           "$ref": "#/definitions/DeploymentRouting",
           "description": "Routing configuration for the model-router deployment. This property is only applicable when the deployed model is 'model-router' version 2025-11-18 or later. Allows you to select the models subset for routing and the routing mode (balanced, quality, cost) for routing across all supported models or the model subset."
+        },
+        "textWatermarking": {
+          "$ref": "#/definitions/TextWatermarkingMode",
+          "description": "The text watermarking behavior for this deployment. A platform-controlled subscription setting takes precedence when one is configured."
         }
       }
     },
@@ -26709,6 +26713,36 @@
           "type": "boolean",
           "description": "Whether SSH admin access is enabled."
         }
+      }
+    },
+    "TextWatermarkingMode": {
+      "type": "string",
+      "description": "Text watermarking behavior for supported inference requests.",
+      "enum": [
+        "Disabled",
+        "RequestControlled",
+        "AlwaysEnabled"
+      ],
+      "x-ms-enum": {
+        "name": "TextWatermarkingMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Text watermarking is disabled."
+          },
+          {
+            "name": "RequestControlled",
+            "value": "RequestControlled",
+            "description": "Each supported request controls whether text watermarking is applied."
+          },
+          {
+            "name": "AlwaysEnabled",
+            "value": "AlwaysEnabled",
+            "description": "Text watermarking is applied to all supported requests."
+          }
+        ]
       }
     },
     "ThrottlingRule": {
