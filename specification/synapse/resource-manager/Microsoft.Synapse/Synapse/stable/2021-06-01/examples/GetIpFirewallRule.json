@@ -1,21 +1,21 @@
 {
   "parameters": {
-    "subscriptionId": "01234567-89ab-4def-0123-456789abcdef",
+    "api-version": "2021-06-01",
     "resourceGroupName": "ExampleResourceGroup",
-    "workspaceName": "ExampleWorkspace",
     "ruleName": "ExampleIpFirewallRule",
-    "api-version": "2021-06-01"
+    "subscriptionId": "01234567-89ab-4def-0123-456789abcdef",
+    "workspaceName": "ExampleWorkspace"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/firewallRules/ExampleIpFirewallRule",
-        "type": "Microsoft.Synapse/workspaces/firewallRules",
         "name": "ExampleIpFirewallRule",
+        "type": "Microsoft.Synapse/workspaces/firewallRules",
+        "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/firewallRules/ExampleIpFirewallRule",
         "properties": {
-          "startIpAddress": "10.0.0.0",
           "endIpAddress": "10.0.0.254",
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "startIpAddress": "10.0.0.0"
         }
       }
     },
@@ -27,5 +27,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "IpFirewallRules_Get",
+  "title": "Get IP firewall rule"
 }
