@@ -3493,6 +3493,11 @@ model AzureStorageInfoValue {
   shareName?: string;
 
   /**
+   * Endpoint of the file share storage mount.
+   */
+  endpoint?: string;
+
+  /**
    * Access key for the storage account.
    */
   @secret
