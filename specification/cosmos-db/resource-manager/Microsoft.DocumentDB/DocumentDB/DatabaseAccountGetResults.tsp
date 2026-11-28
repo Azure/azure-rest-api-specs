@@ -45,6 +45,7 @@ model DatabaseAccountGetResults
 }
 
 @armResourceOperations(#{ omitTags: true })
+@tag("CosmosDB")
 interface DatabaseAccounts {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB database account.

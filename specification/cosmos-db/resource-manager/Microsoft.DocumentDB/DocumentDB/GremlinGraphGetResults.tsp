@@ -45,12 +45,14 @@ interface GremlinGraphGetResultsOperationGroup {
   /**
    * Gets the Gremlin graph under an existing Azure Cosmos DB database account.
    */
+  @tag("CosmosDB")
   getGremlinGraph is ArmResourceRead<GremlinGraphGetResults>;
 
   /**
    * Create or update an Azure Cosmos DB Gremlin graph
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("CosmosDB")
   createUpdateGremlinGraph is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     GremlinGraphGetResults,
     Request = GremlinGraphCreateUpdateParameters,
@@ -63,6 +65,7 @@ interface GremlinGraphGetResultsOperationGroup {
   /**
    * Deletes an existing Azure Cosmos DB Gremlin graph.
    */
+  @tag("CosmosDB")
   deleteGremlinGraph is ArmResourceDeleteWithoutOkAsync<
     GremlinGraphGetResults,
     Response =
@@ -73,6 +76,7 @@ interface GremlinGraphGetResultsOperationGroup {
   /**
    * Lists the Gremlin graph under an existing Azure Cosmos DB database account.
    */
+  @tag("CosmosDB")
   listGremlinGraphs is ArmResourceListByParent<
     GremlinGraphGetResults,
     Response = ArmResponse<GremlinGraphListResult>
@@ -81,6 +85,7 @@ interface GremlinGraphGetResultsOperationGroup {
   /**
    * Retrieves continuous backup information for a gremlin graph.
    */
+  @tag("Restorables")
   retrieveContinuousBackupInformation is ArmResourceActionAsync<
     GremlinGraphGetResults,
     ContinuousBackupRestoreLocation,

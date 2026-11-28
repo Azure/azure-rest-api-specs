@@ -42,6 +42,7 @@ model SqlStoredProcedureGetResults
 }
 
 @armResourceOperations(#{ omitTags: true })
+@tag("CosmosDB")
 interface SqlStoredProcedureGetResultsOperationGroup {
   /**
    * Gets the SQL storedProcedure under an existing Azure Cosmos DB database account.

@@ -24,6 +24,7 @@ model FleetResource
 }
 
 @armResourceOperations(#{ omitTags: true })
+@tag("Fleets")
 interface FleetResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB fleet under a subscription
@@ -53,7 +54,6 @@ interface FleetResources {
   /**
    * Lists all the fleets under the specified subscription and resource group.
    */
-  @tag("Fleets")
   listByResourceGroup is ArmResourceListByParent<
     FleetResource,
     Response = FleetListResult

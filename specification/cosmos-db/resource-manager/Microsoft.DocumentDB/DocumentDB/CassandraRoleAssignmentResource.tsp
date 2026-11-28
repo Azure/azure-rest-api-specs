@@ -28,6 +28,7 @@ model CassandraRoleAssignmentResource
 }
 
 @armResourceOperations(#{ omitTags: true })
+@tag("Rbacs")
 interface CassandraRoleAssignmentResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB Cassandra Role Assignment with the given Id.

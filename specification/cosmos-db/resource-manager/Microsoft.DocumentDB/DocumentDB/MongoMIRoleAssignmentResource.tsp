@@ -30,6 +30,7 @@ model MongoMIRoleAssignmentResource
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@tag("Rbacs")
 interface MongoMIRoleAssignmentResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB MongoMI Role Assignment with the given Id.

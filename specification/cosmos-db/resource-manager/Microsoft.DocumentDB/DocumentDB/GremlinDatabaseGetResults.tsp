@@ -41,6 +41,7 @@ model GremlinDatabaseGetResults
 }
 
 @armResourceOperations(#{ omitTags: true })
+@tag("CosmosDB")
 interface GremlinDatabaseGetResultsOperationGroup {
   /**
    * Gets the Gremlin databases under an existing Azure Cosmos DB database account with the provided name.

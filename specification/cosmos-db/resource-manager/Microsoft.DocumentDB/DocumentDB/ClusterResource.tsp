@@ -50,6 +50,7 @@ alias DeallocateParameters = {
 };
 
 @armResourceOperations(#{ omitTags: true })
+@tag("ManagedCassandras")
 interface ClusterResources {
   /**
    * Get the properties of a managed Cassandra cluster.

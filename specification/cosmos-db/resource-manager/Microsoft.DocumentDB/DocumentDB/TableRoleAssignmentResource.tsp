@@ -28,6 +28,7 @@ model TableRoleAssignmentResource
 }
 
 @armResourceOperations(#{ omitTags: true })
+@tag("Rbacs")
 interface TableRoleAssignmentResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB Table Role Assignment with the given Id.
