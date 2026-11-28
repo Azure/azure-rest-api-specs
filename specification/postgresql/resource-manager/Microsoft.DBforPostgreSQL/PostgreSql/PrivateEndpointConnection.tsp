@@ -1,8 +1,9 @@
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "./models.tsp";
+import "./shared.tsp";
 import "./Server.tsp";
 
 using TypeSpec.Rest;
@@ -11,7 +12,20 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager.Legacy;
 
+using TypeSpec.Versioning;
+
+using Azure.Core;
+
 namespace Microsoft.DBforPostgreSQL;
+
+/**
+ * List of private endpoint connections.
+ */
+model PrivateEndpointConnectionList
+  is Azure.Core.Page<PrivateEndpointConnection>;
+
+@@visibility(PrivateEndpointConnectionList.value, Lifecycle.Read);
+
 /**
  * The private endpoint connection resource.
  */
